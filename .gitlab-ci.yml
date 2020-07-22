@@ -38,5 +38,5 @@ deploy_master:
     - apt-get -y install rsync
   script:
     - ssh -i $PRIVATE_KEY ubuntu@$SERVER_IP
-    - rsync -zvhr -auv -e "ssh -i $PRIVATE_KEY" dist/ ubuntu@$SERVER_IP:/var/www/html/staging
+    - rsync -zvhr -auv -e "ssh -i $PRIVATE_KEY" dist/ ubuntu@$SERVER_IP:/var/www/html/staging/
   only: ['master']
