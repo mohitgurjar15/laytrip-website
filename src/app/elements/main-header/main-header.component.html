@@ -1,0 +1,91 @@
+<!--  Start Header Section-->
+<section class="site_header">
+    <div class="container">
+        <div class="row">
+            <div id="app" class="container">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="#"><img src="assets/images/logo.svg" alt="" /></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse site_menu" id="navbarNav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    About us
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="partial_payment" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Explore
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="partial_payment">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Partial Payments
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="company">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="partners" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Products
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="partners">
+                                    <a class="dropdown-item" href="#">Referral Program</a>
+                                    <a class="dropdown-item" href="#">Influencer Program</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Partners
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav nav_right">
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown">
+                                        <img src="assets/images/icon/flag.svg" alt="" /> USA | USD
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><img src="assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
+                                        <li><a href="#"><img src="assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
+                                        <li><a href="#"><img src="assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
+                                        <li><a href="#"><img src="assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown">
+                                        {{ selectedLanunage.name }}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" >
+                                        <li *ngFor="let langunage of langunages"><a href="#" (click)="changeLangunage(langunage)" >{{ langunage.name }}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Sign In</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!--  Close Header Section-->

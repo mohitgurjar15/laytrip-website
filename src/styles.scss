@@ -1,0 +1,1713 @@
+//import SCSS
+@import "bootstrap/bootstrap-reboot.scss";
+@import "bootstrap/bootstrap.scss";
+@import "_cstm-variable.scss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+.wrapper {
+    position: relative;
+    min-height: calc(100vh - 442px);
+    width: 100%;
+}
+
+
+body {
+    font-family: $primary-font;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    overflow-x: hidden;
+
+    &.open {
+        overflow: hidden;
+    }
+
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+
+    &:hover {
+        text-decoration: none;
+        transition: 0.3s;
+    }
+}
+
+//<!--  Start Header Section-->
+.site_header {
+
+    background: $primary-color;
+
+    .navbar {
+        padding: 0;
+
+        .navbar-brand {
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        .site_menu {
+            padding-left: 45px;
+
+            ul {
+                align-items: center;
+
+                .nav-item {
+                    padding-right: 30px;
+
+                    a {
+                        font-size: 14px;
+                        color: $text-white;
+                        font-weight: 400;
+                        padding: 0;
+
+                        &:hover {
+                            color: $secondary-color;
+                        }
+                    }
+
+                    .dropdown-menu {
+                        padding: 0;
+
+                        a {
+                            padding: 10px;
+                            color: $text-grey;
+
+                            &:hover {
+                                background: $text-grey;
+                                color: $text-white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .nav_right {
+                li {
+                    padding: 0 15px 0 30px;
+
+                    a {
+                        padding: 0;
+                    }
+
+                    &:last-child {
+                        border-left: 1px solid $border-color;
+                        padding: 20px 0 20px 15px;
+
+                        a {
+                            line-height: 30px;
+                            padding: 0 15px;
+                            color: $text-white;
+                            background: $secondary-color;
+                            border-radius: 6px;
+                            font-weight: 400;
+                            position: relative;
+                            z-index: 9;
+                            overflow: hidden;
+
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 0%;
+                                background: $text-grey;
+                                z-index: -1;
+                                transition: 0.8s;
+                                border-radius: 0 0 50% 50%;
+                            }
+
+                            &:hover {
+
+                                &:before {
+                                    height: 190%;
+                                }
+                            }
+                        }
+                    }
+
+                    .dropdown {
+
+                        a {
+                            img {
+                                padding: 0 5px 0 0;
+                            }
+                        }
+
+                        .dropdown-menu {
+                            -webkit-animation: fadeInUp 500ms;
+                            animation: fadeInUp 500ms;
+
+                            li {
+                                padding: 0px;
+                                width: 100%;
+                                display: block;
+
+                                &:last-child {
+                                    padding: 0px;
+                                    border: none;
+                                }
+
+                                a {
+                                    width: 100%;
+                                    display: block;
+                                    font-size: 12px;
+                                    color: $text-grey;
+                                    padding: 10px;
+                                    border-radius: 0;
+                                    line-height: normal;
+
+                                    &:last-child {
+                                        background: transparent;
+                                        border-radius: 0;
+
+                                        &:before {
+                                            display: none;
+                                        }
+                                    }
+
+                                    &:hover {
+                                        background: $text-grey;
+                                        color: $text-white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//<!--  Close Header Section-->
+
+@-webkit-keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 20px, 0);
+        transform: translate3d(0, 20px, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 20px, 0);
+        transform: translate3d(0, 20px, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+//<!--  Start Banner Section-->
+.home_banner {
+    width: 100%;
+    position: relative;
+
+    .banner_im {
+        width: 100%;
+    }
+
+
+
+    .banner_inner {
+        position: absolute;
+        top: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .banner_text {
+            width: auto;
+
+            h2 {
+                font-size: 50px;
+                color: $text-white;
+                font-weight: 400;
+
+                span {
+                    color: $primary-color;
+                    font-weight: 700;
+                }
+            }
+
+            p {
+                font-size: 29px;
+                color: $text-white;
+            }
+        }
+
+        .banner_tab {
+            width: 100%;
+            margin-top: 120px;
+
+            .nav-tabs {
+                border: none;
+                display: inline-flex;
+
+                a {
+                    display: flex;
+                    padding: 20px 60px 20px 30px;
+                    background: $primary-color;
+                    border: none;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #ffffff;
+                    text-decoration: none;
+                    border-radius: 0;
+
+                    img {
+                        margin-right: 15px;
+                    }
+
+                    .default-icon {
+                        display: block;
+                    }
+
+                    .active-icon {
+                        display: none;
+                    }
+
+                    &:first-child {
+                        border-radius: 20px 0 0 0;
+                    }
+
+                    &:last-child {
+                        border-radius: 0 20px 0 0;
+                    }
+
+                    &.active {
+                        background: $background-white;
+                        color: $secondary-color;
+
+                        .active-icon {
+                            display: block;
+                        }
+
+                        .default-icon {
+                            display: none;
+                        }
+                    }
+                }
+
+            }
+
+            .tab-content {
+                width: 100%;
+                padding: 20px 30px 55px;
+                background: $background-white;
+                border-radius: 0 20px 20px 20px;
+                box-shadow: 0px 3px 20px #00000014;
+
+                .flight_tab {
+                    width: 100%;
+
+                    .nav-tabs {
+                        width: 100%;
+                        border: none;
+
+                        li {
+                            display: inline-block;
+                            margin: 0 20px 0 0;
+
+                            a {
+                                display: flex;
+                                align-items: center;
+                                line-height: 32px;
+                                border-radius: 16px;
+                                padding: 0 8px;
+                                border: 1px solid $tab-border-color;
+                                background: $tab-bg;
+                                color: $tab-text-color;
+                                text-decoration: none;
+                                font-size: 14px;
+                                font-weight: 500;
+                                letter-spacing: 0.28px;
+
+
+                                img {
+                                    margin-right: 5px;
+                                    width: 18px;
+                                    height: 18px;
+                                }
+
+                                .active-icon {
+                                    display: none;
+                                }
+
+                                &.active {
+                                    color: $secondary-color;
+                                    background: $tab-active-bg;
+                                    border: 1px solid $tab-active-bg;
+
+                                    .active-icon {
+                                        display: block;
+                                    }
+
+                                    .default-icon {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    .tab-content {
+                        box-shadow: none;
+                        padding: 0;
+
+                        .tab-pane {
+
+                            .flight_search {
+                                position: relative;
+
+                                .flight-grid {
+                                    width: 100%;
+                                    display: flex;
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+
+                                    .grid_box {
+                                        padding: 0 5px;
+
+
+                                        &.first {
+                                            width: 45%;
+                                            padding-left: 0;
+                                            display: flex;
+                                            justify-content: space-between;
+                                            position: relative;
+
+                                            .flight_form {
+                                                width: 49.5%;
+                                                padding: 15px 25px;
+                                                border: 1px solid $box-border-color;
+                                                border-radius: 20px;
+
+                                                label {
+                                                    width: 100%;
+                                                    margin-bottom: 5px;
+                                                    font-size: 10px;
+                                                    color: $text-grey;
+                                                    font-weight: 400;
+                                                    text-transform: uppercase;
+                                                }
+
+                                                input {
+                                                    width: 100%;
+                                                    border: none;
+                                                    height: 35px;
+                                                    margin-bottom: 5px;
+                                                    font-size: 20px;
+                                                    color: $text-black;
+                                                    font-weight: 600;
+
+                                                    &:placeholder {
+                                                        color: $text-black;
+                                                    }
+
+                                                }
+
+                                                span {
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    color: $text-grey;
+                                                }
+                                            }
+
+                                            .flight_to {
+                                                width: 49.5%;
+                                                padding: 15px 25px;
+                                                border: 1px solid $box-border-color;
+                                                border-radius: 20px;
+
+                                                label {
+                                                    width: 100%;
+                                                    margin-bottom: 5px;
+                                                    font-size: 10px;
+                                                    color: $text-grey;
+                                                }
+
+                                                input {
+                                                    width: 100%;
+                                                    border: none;
+                                                    height: 35px;
+                                                    margin-bottom: 5px;
+                                                    font-size: 20px;
+                                                    color: $text-black;
+                                                    font-weight: 600;
+
+                                                    &:placeholder {
+                                                        color: $text-black;
+                                                    }
+
+                                                }
+
+
+                                                span {
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    color: $text-grey;
+                                                }
+                                            }
+
+                                            .switch_btn {
+                                                width: 36px;
+                                                height: 36px;
+                                                background: $background-white;
+                                                border: 1px solid $box-border-color;
+                                                position: absolute;
+                                                top: 50%;
+                                                left: 49.5%;
+                                                transform: translate(-50%, -50%);
+                                                border-radius: 50%;
+
+                                                a {
+                                                    background: transparent;
+                                                    border-radius: 50%;
+
+                                                    img {
+                                                        position: absolute;
+                                                        top: 50%;
+                                                        left: 50%;
+                                                        transform: translate(-50%, -50%);
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        &.secound {
+                                            width: 35%;
+                                            display: flex;
+
+                                            .date_form {
+                                                width: 50%;
+                                                padding: 15px 20px;
+                                                border-radius: 20px 0 0 20px;
+                                                border: 1px solid $box-border-color;
+
+                                                label {
+                                                    width: 100%;
+                                                    margin-bottom: 5px;
+                                                    font-size: 10px;
+                                                    color: $text-grey;
+                                                }
+
+                                                input {
+                                                    width: 100%;
+                                                    border: none;
+                                                    height: 35px;
+                                                    font-size: 20px;
+                                                    color: $text-black;
+                                                    font-weight: 600;
+                                                    position: relative;
+
+                                                    &:after {
+                                                        width: 35px;
+                                                        height: 35px;
+                                                        position: absolute;
+                                                        top: 0;
+                                                        right: 0;
+                                                        background: #e9e9ec;
+                                                        content: '';
+                                                    }
+                                                }
+                                            }
+
+                                            .date_to {
+                                                width: 50%;
+                                                padding: 15px 20px;
+                                                border-radius: 0 20px 20px 0;
+                                                border: 1px solid $box-border-color;
+                                                border-left: none;
+
+                                                label {
+                                                    width: 100%;
+                                                    margin-bottom: 5px;
+                                                    font-size: 10px;
+                                                    color: $text-grey;
+                                                }
+
+                                                input {
+                                                    width: 100%;
+                                                    border: none;
+                                                    height: 35px;
+                                                    font-size: 20px;
+                                                    color: $text-black;
+                                                    font-weight: 600;
+                                                    position: relative;
+
+                                                    &:after {
+                                                        width: 35px;
+                                                        height: 35px;
+                                                        position: absolute;
+                                                        top: 0;
+                                                        right: 0;
+                                                        background: #e9e9ec;
+                                                        content: '';
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        &.third {
+                                            width: 20%;
+                                            padding-right: 0;
+                                            border: 1px solid $box-border-color;
+                                            border-radius: 20px;
+
+                                            .travellers {
+                                                padding: 15px 20px;
+
+                                                label {
+                                                    width: auto;
+                                                    margin-bottom: 5px;
+                                                    font-size: 10px;
+                                                    color: $text-grey;
+                                                    position: relative;
+
+                                                    &:before {
+                                                        content: '';
+                                                        position: absolute;
+                                                        left: 110%;
+                                                        top: 50%;
+                                                        width: 0;
+                                                        height: 0;
+                                                        border-left: 5px solid transparent;
+                                                        border-right: 5px solid transparent;
+                                                        border-top: 5px solid $text-grey;
+                                                        transform: translate(-50%, -50%);
+                                                    }
+                                                }
+
+                                                .travel_info {
+                                                    width: 100%;
+                                                    height: 35px;
+                                                    display: flex;
+                                                    line-height: 35px;
+                                                    font-size: 10px;
+                                                    color: $text-black;
+                                                    position: relative;
+
+                                                    &:before {
+                                                        width: 24px;
+                                                        height: 24px;
+                                                        content: '';
+                                                        position: absolute;
+                                                        right: 0%;
+                                                        top: 50%;
+                                                        transform: translateY(-50%);
+                                                        background: url(./assets/images/icon/travellers-icon.svg) no-repeat;
+                                                    }
+
+                                                    span {
+                                                        font-size: 20px;
+                                                        font-weight: 600;
+                                                        padding-right: 10px;
+                                                        color: $text-black;
+                                                    }
+                                                }
+
+                                                span {
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    color: $text-grey;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .serch_btn {
+                                    width: 100%;
+                                    text-align: right;
+                                    position: absolute;
+                                    bottom: -90px;
+                                    right: 0;
+
+                                    button {
+                                        width: auto;
+                                        padding: 20px 25px;
+                                        background: $secondary-color;
+                                        border-radius: 8px;
+                                        border: 1px solid $secondary-color;
+                                        font-size: 20px;
+                                        color: $text-white;
+                                        transition: 0.3s;
+                                        position: relative;
+                                        z-index: 9;
+                                        overflow: hidden;
+
+                                        img {
+                                            margin-left: 40px;
+                                            height: 20px;
+                                        }
+
+                                        &::before {
+                                            content: "";
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 0%;
+                                            background: $primary-color;
+                                            z-index: -1;
+                                            transition: 0.8s;
+                                            border-radius: 0 0 50% 50%;
+                                        }
+
+                                        &:hover {
+                                            border-color: $primary-color;
+
+                                            &:before {
+                                                height: 190%;
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+//<!--  Close Banner Section-->
+
+//<!-- Start Our Featured List Section-->
+.our_featured_list {
+    width: 100%;
+    padding: 130px 15px 100px;
+
+    .section_title {
+        width: 100%;
+        margin-bottom: 25px;
+        padding: 0 15px;
+
+        h2 {
+            font-size: 24px;
+            color: $text-black;
+            font-weight: 500;
+        }
+    }
+
+    .featured_list {
+        width: 100%;
+        padding: 0 7.5px;
+
+        ul {
+            width: 100%;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+                width: 20%;
+                padding: 0 7.5px;
+
+                .featured_list_block {
+                    width: 100%;
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 8px;
+
+                    a {
+
+                        img {
+                            width: 100%;
+                            transform: scale(1);
+                            transition: 1s;
+                        }
+
+                        .block_overlay {
+                            width: 100%;
+                            height: 50%;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            background: linear-gradient(180deg, $bg-black-gradient 0%, $bg-lightblack-gradient 100%) 0% 0% no-repeat;
+                        }
+
+                        .block_info {
+                            width: 100%;
+                            text-align: center;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            padding: 0 15px 30px;
+
+                            h3 {
+                                font-size: 28px;
+                                color: $text-white;
+                                font-weight: 600;
+                                margin-bottom: 5px;
+                            }
+
+                            span {
+                                font-size: 16px;
+                                color: $text-white;
+                                font-weight: 500;
+                            }
+                        }
+
+                        &:hover {
+                            img {
+                                transform: scale(1.2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//<!-- Close Our Featured List Section-->
+
+//<!-- Start Our Discover Section-->
+.our_discover {
+    width: 100%;
+    padding: 100px 0;
+    background: url(./assets/images/discover_bg.png) no-repeat;
+    background-size: 95% 100%;
+    position: relative;
+
+    &:after {
+        width: 95%;
+        height: 100%;
+        background: transparent linear-gradient(240deg, $secondary-color 0%, $background-black 100%) 0% 0% no-repeat;
+        opacity: 0.75;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+    }
+
+    .flex_row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        .col-lg-3 {
+            padding: 0;
+
+            .discover_text {
+                width: 100%;
+                position: relative;
+                z-index: 9;
+                padding: 0 35px;
+
+                span {
+                    font-size: 20px;
+                    color: $text-white;
+                    font-weight: 600;
+                }
+
+                h2 {
+                    font-size: 52px;
+                    color: $text-white;
+                    line-height: 60px;
+                    margin-bottom: 10px;
+                    font-weight: 700;
+
+                    span {
+                        display: block;
+                        font-size: 52px;
+                    }
+                }
+
+                p {
+                    font-size: 20px;
+                    color: $text-white;
+                    font-weight: 600;
+                    margin-bottom: 20px;
+                }
+
+                a {
+                    display: inline-block;
+                    line-height: 58px;
+                    padding: 0 25px;
+                    font-size: 14px;
+                    color: $text-white;
+                    font-weight: 600;
+                    border-radius: 8px;
+                    background: $secondary-color;
+                    position: relative;
+                    z-index: 9;
+                    overflow: hidden;
+
+                    img {
+                        margin: 0 0 0 80px;
+                        height: 15px;
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0%;
+                        background: $primary-color;
+                        z-index: -1;
+                        transition: 0.8s;
+                        border-radius: 0 0 50% 50%;
+                    }
+
+                    &:hover {
+                        border-color: $primary-color;
+
+                        &:before {
+                            height: 190%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .col-lg-9 {
+            padding: 0;
+
+            .discover_slid {
+                width: 100%;
+                padding: 50px 0;
+                position: relative;
+                z-index: 9;
+
+                &:after {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 100px;
+                    content: '';
+                    background: linear-gradient(90deg, $bg-secondary-gradient 0%, $secondary-color 100%) 0% 0% no-repeat;
+                    z-index: -1;
+                }
+
+                .features-discover {
+                    width: 130%;
+                    margin: 0;
+                    padding: 0;
+
+                    .slick-slide {
+                        padding: 0 10px;
+
+                        .slid_card {
+                            background: $background-white;
+                            padding: 15px;
+                            border-radius: 8px;
+
+                            .slid_im {
+                                width: 100%;
+                                margin-bottom: 20px;
+                                position: relative;
+
+                                img {
+                                    width: 100%;
+                                }
+
+                                a {
+                                    width: 42px;
+                                    height: 42px;
+                                    position: absolute;
+                                    top: 14px;
+                                    right: 13px;
+                                    background: $bg-black-opacity-half;
+                                    border-radius: 50%;
+
+                                    img {
+                                        width: 20px;
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%)
+                                    }
+
+                                    &:hover {
+                                        background: $primary-color;
+                                    }
+                                }
+                            }
+
+                            .slid_cnt {
+                                width: 100%;
+
+                                h3 {
+                                    font-size: 18px;
+                                    color: $text-black;
+                                    font-weight: 500;
+                                    margin: 0 0 5px;
+                                }
+
+                                span {
+                                    font-size: 14px;
+                                    color: $text-grey;
+                                    margin: 0 0 5px;
+                                }
+
+                                .review_part {
+                                    width: 100%;
+                                    margin: 0 0 15px;
+
+                                    ul {
+                                        width: 100%;
+                                        margin: 0;
+                                        padding: 0;
+                                        list-style: none;
+
+                                        li {
+                                            display: inline-block;
+                                            padding: 0 5px 0 0;
+                                            color: $review-color;
+                                            font-size: 12px;
+
+                                            &:last-child {
+                                                color: $text-grey;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                p {
+                                    font-size: 14px;
+                                    color: $text-grey;
+                                    margin: 0;
+                                    font-weight: 300;
+                                }
+
+                                .price_part {
+                                    font-size: 12px;
+                                    color: $text-grey;
+                                    margin: 20px 0;
+                                    font-weight: 300;
+
+                                    span {
+                                        font-size: 20px;
+                                        color: $text-black;
+                                        font-weight: 600;
+                                    }
+                                }
+
+                                .instalment_part {
+                                    width: 100%;
+
+                                    a {
+                                        width: 100%;
+                                        display: inline-block;
+                                        background: $bg-light-orange;
+                                        border: 1px solid $secondary-color;
+                                        padding: 8px 18px;
+                                        border-radius: 5px;
+                                        text-align: center;
+                                        font-size: 12px;
+                                        color: $text-grey;
+                                        position: relative;
+                                        z-index: 9;
+                                        overflow: hidden;
+
+                                        span {
+                                            font-size: 20px;
+                                            color: $secondary-color;
+                                            font-weight: 600;
+                                        }
+
+                                        &::before {
+                                            content: "";
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 0%;
+                                            background: $secondary-color;
+                                            z-index: -1;
+                                            transition: 0.8s;
+                                            border-radius: 0 0 50% 50%;
+                                        }
+
+                                        &:hover {
+                                            color: $text-white;
+
+                                            span {
+                                                color: $text-white;
+                                            }
+
+                                            &:before {
+                                                height: 190%;
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//<!-- Close Our Discover Section-->
+
+//<!-- Start Deals section-->
+.deal_sec {
+    width: 100%;
+    padding: 100px 0;
+
+    .section_title {
+        width: 100%;
+        text-align: center;
+        margin: 0 0 50px;
+
+        h3 {
+            font-size: 24px;
+            color: $text-black;
+            font-weight: 500;
+            margin: 0 0 15px;
+        }
+
+        p {
+            width: 650px;
+            max-width: 96%;
+            display: inline-block;
+            font-size: 14px;
+            color: $text-grey;
+            margin: 0;
+        }
+    }
+
+    .deal_listing {
+        width: 100%;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            width: 33.33%;
+            padding: 0 15px;
+
+            .deal_block {
+                width: 100%;
+                border-radius: 20px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0px 3px 10px $shadow_bg;
+
+                a {
+                    img {
+                        width: 100%;
+                        border-radius: 20px;
+                        transform: scale(1);
+                        transition: 1s;
+                    }
+
+                    .box_overlay {
+                        width: 100%;
+                        height: 60%;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        background: linear-gradient(180deg, $bg-black-gradient 0%, $bg-lightblack-gradient 100%) 0% 0% no-repeat;
+                    }
+
+                    .deal_info {
+                        width: 100%;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        padding: 20px;
+
+                        h3 {
+                            font-size: 28px;
+                            color: $text-white;
+                            font-weight: 600;
+                            margin-bottom: 5px;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: $text-white;
+                            font-weight: 500;
+                            margin: 0;
+                        }
+
+                        .rating_price {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin: 8px 0 20px;
+
+                            .rating {
+                                width: 50%;
+                                margin: 0;
+                                padding: 0;
+                                list-style: none;
+
+                                li {
+                                    width: auto;
+                                    display: inline-block;
+                                    padding: 0 5px 0 0;
+                                    color: $review-color;
+                                }
+                            }
+
+                            .price {
+                                width: 50%;
+                                text-align: right;
+                                font-size: 12px;
+                                color: $text-white;
+
+                                span {
+                                    font-size: 20px;
+                                    font-weight: 600;
+                                    position: relative;
+
+                                    &:before {
+                                        width: 100%;
+                                        height: 4px;
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 0;
+                                        transform: translateY(-50%);
+                                        content: '';
+                                        background: $secondary-color;
+                                    }
+                                }
+                            }
+                        }
+
+                        .block_btm {
+                            width: 100%;
+                            display: flex;
+                            padding: 5px 15px;
+                            background: $background-white;
+                            border: 1px solid $secondary-color;
+                            border-radius: 8px;
+
+                            .offer_price {
+                                width: 50%;
+                                display: flex;
+                                padding: 0 35px 0 0;
+                                align-items: center;
+
+                                .price_label {
+                                    width: auto;
+                                    font-size: 10px;
+                                    color: $text-grey;
+
+                                }
+
+                                .price_day {
+                                    width: auto;
+                                    font-size: 10px;
+                                    color: $text-grey;
+                                    padding: 0 0 0 10px;
+
+                                    span {
+                                        font-size: 20px;
+                                        color: $text-black;
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+
+                            .offer_start {
+                                width: 50%;
+                                display: flex;
+                                align-items: center;
+
+                                .start_label {
+                                    width: auto;
+                                    font-size: 10px;
+                                    color: $text-grey;
+                                }
+
+                                .offer_day {
+                                    width: auto;
+                                    font-size: 10px;
+                                    color: $text-grey;
+                                    padding: 0 0 0 10px;
+
+                                    span {
+                                        font-size: 20px;
+                                        color: $secondary-color;
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        img {
+                            transform: scale(1.2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//<!-- Close Deals section-->
+
+//<!-- Start User Benefits section-->
+.user_benefits {
+    width: 100;
+    padding: 100px 0 160px;
+    background: url(./assets/images/user_benefits_bg.png) no-repeat;
+    background-size: cover;
+
+    position: relative;
+
+    &:before {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.7);
+        content: '';
+    }
+
+    &:after {
+        width: 100%;
+        height: 160px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(0deg, $bg-white-gradient 0%, $bg-whitelight-gradient 100%) 0% 0% no-repeat;
+        content: '';
+    }
+
+    .user_benefits_txt {
+        width: 100%;
+        position: relative;
+        z-index: 9;
+
+        h2 {
+            font-size: 52px;
+            color: $text-white;
+            font-weight: 700;
+            margin: 0 0 10px;
+        }
+
+        p {
+            font-size: 14px;
+            color: $text-white;
+            font-weight: 400;
+            margin: 0;
+        }
+    }
+
+    .user_benefits_block {
+        width: 100%;
+
+        .first_block {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+                padding: 20px 15px;
+                margin: 0 0 30px;
+                position: relative;
+                background: url(./assets/images/box-1.1.png) no-repeat;
+                border-radius: 8px;
+                z-index: 9;
+                overflow: hidden;
+
+                &:before {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: '';
+                    background: linear-gradient(90deg, $bg-lightblue-gradient 0%, $primary-color 100%) 0% 0% no-repeat;
+
+                }
+
+                &:last-child {
+                    background: url(./assets/images/box-2.1.png) no-repeat;
+                    margin: 0;
+
+                    &:before {
+                        background: transparent linear-gradient(90deg, $bg-lightyellow-gradient 0%, $secondary-color 100%) 0% 0% no-repeat;
+
+                    }
+                }
+
+                .box_main {
+                    position: relative;
+                    z-index: 9;
+                    width: 100%;
+                    border-radius: 8px;
+                    display: flex;
+
+                    .box_icon {
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                        background: $background-white;
+                        display: inline-table;
+                        margin: 0 20px 0 0;
+                        position: relative;
+
+                        img {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+
+                    .box_cnt {
+                        h3 {
+                            font-size: 18px;
+                            color: $text-white;
+                            margin: 0 0 5px;
+                            font-weight: 600;
+                            letter-spacing: 0.36px;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: $text-white;
+                            margin: 0;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .last_block {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+                padding: 20px 15px;
+                margin: 0 0 30px;
+                position: relative;
+                background: url(./assets/images/box-2.1.png) no-repeat;
+                border-radius: 8px;
+                z-index: 9;
+                overflow: hidden;
+
+                &:before {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: '';
+                    background: transparent linear-gradient(90deg, $bg-lightyellow-gradient 0%, $secondary-color 100%) 0% 0% no-repeat;
+
+
+                }
+
+                &:last-child {
+                    background: url(./assets/images/box-1.1.png) no-repeat;
+                    margin: 0;
+
+                    &:before {
+                        background: linear-gradient(90deg, $bg-lightblue-gradient 0%, $primary-color 100%) 0% 0% no-repeat;
+                    }
+                }
+
+                .box_main {
+                    position: relative;
+                    z-index: 9;
+                    width: 100%;
+                    border-radius: 8px;
+                    display: flex;
+
+                    .box_icon {
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                        background: $background-white;
+                        display: inline-table;
+                        margin: 0 20px 0 0;
+                        position: relative;
+
+                        img {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+
+                    .box_cnt {
+                        h3 {
+                            font-size: 18px;
+                            color: $text-white;
+                            margin: 0 0 5px;
+                            font-weight: 600;
+                            letter-spacing: 0.36px;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: $text-white;
+                            margin: 0;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+//<!-- Close User Benefits section-->
+
+//<!-- Start Our Mobile App Section-->
+.our_mobile_apps {
+    width: 100%;
+    padding: 100px 0 0;
+    position: relative;
+
+    &:after {
+        width: 250px;
+        height: 500px;
+        background: url(./assets/images/our_mobile_apps_bg.png) no-repeat;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        content: '';
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+
+    .app_intro {
+        width: 100%;
+
+        .app_icon {
+            width: 100%;
+            margin: 0 0 10px;
+
+            img {
+                width: 100px;
+            }
+        }
+
+        h2 {
+            font-size: 52px;
+            line-height: 60px;
+            font-weight: 700;
+            color: $text-black;
+        }
+
+        p {
+            margin: 10px 0 20px;
+            font-size: 14px;
+            color: $text-grey;
+            font-weight: 300;
+
+            span {
+                display: block;
+            }
+        }
+
+        ul {
+            width: 100%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                margin: 0 30px 0 0;
+
+                &:last-child {
+                    margin: 0;
+                }
+            }
+        }
+
+        .our_subscription {
+            width: 100%;
+            margin: 80px 0 0 0;
+
+            p {
+                margin: 0 0 10px;
+                font-size: 14px;
+                color: $text-grey;
+            }
+
+            .subscription {
+                width: 430px;
+                max-width: 100%;
+                display: flex;
+
+                input {
+                    width: 100%;
+                    border: 1px solid $box-border-color;
+                    border-radius: 8px 0 0 8px;
+                    height: 40px;
+                    padding: 0 20px;
+                    font-size: 10px;
+                    color: $text-grey;
+
+                    &::placeholder {
+                        color: $placeholder-text;
+                    }
+                }
+
+                button {
+                    width: auto;
+                    padding: 0 15px;
+                    height: 40px;
+                    background: $secondary-color;
+                    border: 1px solid $secondary-color;
+                    border-radius: 0 8px 8px 0;
+                    font-size: 14px;
+                    color: $text-white;
+                    font-weight: 600;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
+
+//<!-- Close Our Mobile App Section-->
+
+
+.site_footer {
+    width: 100%;
+
+    .footer_top {
+        width: 100%;
+        padding: 60px 0 30px;
+        background: $primary-color;
+        margin: 30px 0 0;
+
+        .ftr_info {
+            width: 100%;
+
+            a {
+                width: auto;
+                display: block;
+                margin-bottom: 15px;
+
+                img {
+                    display: block;
+                }
+            }
+
+            p {
+                width: 100%;
+                font-size: 14px;
+                color: $text-white;
+                margin: 0;
+                font-weight: 300;
+            }
+        }
+
+        .ftr_menu {
+            width: 100%;
+            display: flex;
+
+            .menu_grid {
+                width: 22%;
+                padding: 0 15px;
+
+                &:last-child {
+                    width: 34%;
+                }
+
+                h5 {
+                    width: auto;
+                    font-size: 14px;
+                    color: $text-white;
+                    font-weight: 600;
+                    text-decoration: underline;
+                    margin: 0 0 15px;
+                }
+
+                ul {
+                    width: 100%;
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+
+                    li {
+                        width: 100%;
+                        padding: 0 0 10px;
+
+                        a {
+                            font-size: 14px;
+                            color: $text-white;
+                            font-weight: 300;
+
+                            &:hover {
+                                color: $secondary-color;
+                            }
+                        }
+
+                        &:last-child {
+                            padding: 0;
+                        }
+                    }
+                }
+
+                div:last-child {
+                    margin: 30px 0 0;
+                }
+            }
+        }
+    }
+
+    .footer_btm {
+        width: 100%;
+        padding: 15px 0;
+        background: $bg_dark-blue;
+        text-align: center;
+
+        p {
+            width: 100%;
+            font-size: 14px;
+            color: $text-white;
+            margin: 0;
+            font-weight: 300;
+
+            span {
+                display: block;
+            }
+        }
+    }
+}

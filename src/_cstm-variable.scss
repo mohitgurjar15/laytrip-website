@@ -1,0 +1,50 @@
+//    Font Family
+
+$primary-font: 'Poppins',
+sans-serif;
+
+/*--------------------------- Color variations ----------------------*/
+
+$primary-color : #1943FF;
+$secondary-color : #FC7E66;
+$text-grey : #8188AB;
+$text-black : #000000;
+$text-white : #ffffff;
+$text-blue : #1943FF;
+$background-white : #ffffff;
+$background-grey : #8188AB;
+$background-black : #000000;
+$bg_dark-blue : #0029E0;
+$border-color : #EFEFEF;
+$tab-border-color:#CAD1DE;
+$tab-bg : #F6F6FC;
+$tab-active-bg : #FFF2EF;
+$tab-text-color :#8188AB;
+$box-border-color:#E0E2E5;
+$review-color: #FFAC0F;
+$bg-light-orange: #FC7E660D;
+$bg-black-opacity-half : rgba(0, 0, 0, 0.5);
+$bg-blue-opacity-half : rgba(25, 67, 255, 0.5);
+
+$bg-black-gradient : rgba(0, 0, 0, 0);
+$bg-lightblack-gradient : rgba(0, 0, 0, 0.75);
+$bg-secondary-gradient : rgba(252, 126, 102, 0);
+$bg-white-gradient : rgba(255, 255, 255, 0.97);
+$bg-whitelight-gradient : rgba(255, 255, 255, 0);
+$bg-lightblue-gradient : rgba(0, 174, 239, 0.8);
+$bg-lightyellow-gradient : rgba(255, 221, 15, 0.8);
+$shadow_bg : rgba(0, 0, 0, 0.16);
+$placeholder-text : rgba(129, 136, 171, 0.75);
+
+
+$item-width: 65vw;
+$transition-time: .7s;
+$transition-text-time: $transition-time / 2;
+$offset: 1em;
+$mobile-bkp: 650px;
+
+:root {
+    --z-distance: $item-width / 7.63;
+    --from-left: 1;
+    --mobile-bkp: $mobile-bkp;
+}
