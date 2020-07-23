@@ -4,6 +4,7 @@
 @import "_cstm-variable.scss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
+$s3BucketUrl : 'http://d2q1prebf1m2s9.cloudfront.net/';
 .wrapper {
     position: relative;
     min-height: calc(100vh - 442px);
@@ -613,7 +614,7 @@ a {
                                                         right: 0%;
                                                         top: 50%;
                                                         transform: translateY(-50%);
-                                                        background: url(./assets/images/icon/travellers-icon.svg) no-repeat;
+                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg) no-repeat;
                                                     }
 
                                                     span {
@@ -792,7 +793,7 @@ a {
 .our_discover {
     width: 100%;
     padding: 100px 0;
-    background: url(./assets/images/discover_bg.png) no-repeat;
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/discover_bg.png) no-repeat;
     background-size: 95% 100%;
     position: relative;
 
@@ -1282,7 +1283,7 @@ a {
 .user_benefits {
     width: 100;
     padding: 100px 0 160px;
-    background: url(./assets/images/user_benefits_bg.png) no-repeat;
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.png) no-repeat;
     background-size: cover;
 
     position: relative;
@@ -1340,7 +1341,7 @@ a {
                 padding: 20px 15px;
                 margin: 0 0 30px;
                 position: relative;
-                background: url(./assets/images/box-1.1.png) no-repeat;
+                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/box-1.1.png) no-repeat;
                 border-radius: 8px;
                 z-index: 9;
                 overflow: hidden;
@@ -1357,7 +1358,7 @@ a {
                 }
 
                 &:last-child {
-                    background: url(./assets/images/box-2.1.png) no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/box-2.1.png) no-repeat;
                     margin: 0;
 
                     &:before {
@@ -1420,7 +1421,7 @@ a {
                 padding: 20px 15px;
                 margin: 0 0 30px;
                 position: relative;
-                background: url(./assets/images/box-2.1.png) no-repeat;
+                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/box-2.1.png) no-repeat;
                 border-radius: 8px;
                 z-index: 9;
                 overflow: hidden;
@@ -1438,7 +1439,7 @@ a {
                 }
 
                 &:last-child {
-                    background: url(./assets/images/box-1.1.png) no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/box-1.1.png) no-repeat;
                     margin: 0;
 
                     &:before {
@@ -1503,7 +1504,7 @@ a {
     &:after {
         width: 250px;
         height: 500px;
-        background: url(./assets/images/our_mobile_apps_bg.png) no-repeat;
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/our_mobile_apps_bg.png) no-repeat;
         position: absolute;
         top: 50%;
         right: 0;

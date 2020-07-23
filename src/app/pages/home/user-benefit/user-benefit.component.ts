@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-benefit',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserBenefitComponent implements OnInit {
 
+  s3BucketUrl = environment.s3BucketUrl;
   constructor() { }
 
   ngOnInit() {

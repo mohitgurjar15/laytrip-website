@@ -22,6 +22,14 @@ export class GenericService{
           );
     }
 
+    getCurrencies(){
+      return this.http.get(`${environment.apiUrl}v1/langunage`)
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+          );
+    }
+
     handleError(error) { 
         console.log(error);
         let errorMessage = {};
