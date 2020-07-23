@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 declare var $ : any;
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
