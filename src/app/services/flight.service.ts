@@ -2,31 +2,22 @@ import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { throwError } from "rxjs";
-import {Observable, of} from 'rxjs';
-import {catchError,retry, debounceTime, distinctUntilChanged, map, tap, switchMap, filter} from 'rxjs/operators';
+import {catchError,retry, } from 'rxjs/operators';
 
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class GenericService{
+export class FlightService{
   
     constructor(
         private http:HttpClient
     ){
 
     }
-    getAllLangunage(){
-        return this.http.get(`${environment.apiUrl}v1/language`)
-        .pipe(
-            retry(1),
-            catchError(this.handleError)
-          );
-    }
-
-    getCurrencies(){
-      return this.http.get(`${environment.apiUrl}v1/currency`)
+    searchAirport(searchItem){
+        return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
         .pipe(
             retry(1),
             catchError(this.handleError)

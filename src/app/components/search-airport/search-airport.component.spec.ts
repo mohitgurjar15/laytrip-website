@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopHeaderComponent } from './top-header.component';
+import { SearchAirportComponent } from './search-airport.component';
 
-describe('TopHeaderComponent', () => {
-  let component: TopHeaderComponent;
-  let fixture: ComponentFixture<TopHeaderComponent>;
+describe('SearchAirportComponent', () => {
+  let component: SearchAirportComponent;
+  let fixture: ComponentFixture<SearchAirportComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopHeaderComponent ]
+      declarations: [ SearchAirportComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopHeaderComponent);
+    fixture = TestBed.createComponent(SearchAirportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -12,58 +12,80 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    About us
+                                    Partial Payment
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="partial_payment" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Explore
+                                    Company
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="partial_payment">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#">About us</a>
+                                    <a class="dropdown-item" href="#">Why Laytrip?</a>
+                                    <a class="dropdown-item" href="#">Laytrip points</a>
+                                    <a class="dropdown-item" href="#">Referral program</a>
+                                    <a class="dropdown-item" href="#">Influencer program</a>
+                                    <a class="dropdown-item" href="#">News</a>
+                                    <a class="dropdown-item" href="#">Media</a>
+                                    <a class="dropdown-item" href="#">Blog</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Partial Payments
+                                    Partners
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="company">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#">Our Partners</a>
+                                    <a class="dropdown-item" href="#">Become a partner</a>
+                                    <a class="dropdown-item" href="#">Investor Relations</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="partners" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Products
+                                    Explore menu
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="partners">
-                                    <a class="dropdown-item" href="#">Referral Program</a>
-                                    <a class="dropdown-item" href="#">Influencer Program</a>
+                                    <a class="dropdown-item" href="#">Countries</a>
+                                    <a class="dropdown-item" href="#">Experiences</a>
+                                    <a class="dropdown-item" href="#">Special Deals</a>
+                                    <a class="dropdown-item" href="#">Download our App</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Partners
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="partners" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Support
                                 </a>
+                                <div class="dropdown-menu" aria-labelledby="partners">
+                                    <a class="dropdown-item" href="#">FAQs</a>
+                                    <a class="dropdown-item" href="#">Contact Us</a>
+                                    <a class="dropdown-item" href="#">Booking and Cancellation Policies</a>
+                                </div>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="partners" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Privacy
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="partners">
+                                    <a class="dropdown-item" href="#">Privacy policy</a>
+                                    <a class="dropdown-item" href="#">Cookie Policy</a>
+                                    <a class="dropdown-item" href="#">Terms of Service</a>
+                                </div>
+                            </li>
+                            
                         </ul>
                         <ul class="navbar-nav nav_right">
                             <li class="nav-item">
                                 <div class="dropdown">
                                     <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown">
-                                        <img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> USA | USD
+                                        <img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> {{ selectedCurrency.code }}
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#"><img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
-                                        <li><a href="#"><img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
-                                        <li><a href="#"><img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
-                                        <li><a href="#"><img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> USA | USD</a></li>
+                                        <li *ngFor="let currency of currencies" >
+                                                <a href="#" (click)="changeCurrency(currency)">
+                                                    <img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> {{ currency.code }}
+                                                </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

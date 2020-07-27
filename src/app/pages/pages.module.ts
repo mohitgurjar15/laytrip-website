@@ -7,12 +7,20 @@ import { DiscoverCityComponent } from './home/discover-city/discover-city.compon
 import { DealComponent } from './home/deal/deal.component';
 import { UserBenefitComponent } from './home/user-benefit/user-benefit.component';
 import { MobileAndSubscribeComponent } from './home/mobile-and-subscribe/mobile-and-subscribe.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [HomeComponent, FeaturedCityComponent, DiscoverCityComponent, DealComponent, UserBenefitComponent, MobileAndSubscribeComponent],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    NgbModule,
+    AutocompleteLibModule,
+    TranslateModule,
+    ComponentsModule
   ]
 })
 export class PagesModule { }

@@ -10,4 +10,5 @@ export class Langunage{
     name        : string;
     iso_1Code   : string;
     iso_2Code   : string;
+    active      : boolean;
 }

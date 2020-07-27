@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TopHeaderComponent } from './top-header/top-header.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
 import { SecondaryFooterComponent } from './secondary-footer/secondary-footer.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
 @NgModule({
-  declarations: [TopHeaderComponent, MainHeaderComponent, MainFooterComponent, SecondaryFooterComponent],
+  declarations: [MainHeaderComponent, MainFooterComponent, SecondaryFooterComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    TranslateModule
+  ],
+  exports:[
+    MainFooterComponent,
+    MainHeaderComponent
   ]
 })
 export class ElementsModule { }
