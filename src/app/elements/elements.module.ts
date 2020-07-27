@@ -8,14 +8,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
-  declarations: [MainHeaderComponent, MainFooterComponent, SecondaryFooterComponent],
+  declarations: [SecondaryFooterComponent],
   imports: [
     CommonModule,
     TranslateModule
   ],
   exports:[
-    MainFooterComponent,
-    MainHeaderComponent
   ]
 })
 export class ElementsModule { }

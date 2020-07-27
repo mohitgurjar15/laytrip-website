@@ -11,9 +11,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
+import { PagesComponent } from './pages.component';
+import { MainHeaderComponent } from '../elements/main-header/main-header.component';
+import { MainFooterComponent } from '../elements/main-footer/main-footer.component';
 
 @NgModule({
-  declarations: [HomeComponent, FeaturedCityComponent, DiscoverCityComponent, DealComponent, UserBenefitComponent, MobileAndSubscribeComponent],
+  declarations: [ 
+    PagesComponent,
+    MainHeaderComponent,
+    MainFooterComponent
+  ],
   imports: [
     CommonModule,
     PagesRoutingModule,
