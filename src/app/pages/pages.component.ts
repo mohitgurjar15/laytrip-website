@@ -11,7 +11,7 @@ export class PagesComponent implements OnInit {
 
   ngOnInit() {
     
-    document.getElementById('main_loader').style.display = 'none'; 
+    document.getElementById('page_loader').style.display = 'none'; 
   }
 
 }

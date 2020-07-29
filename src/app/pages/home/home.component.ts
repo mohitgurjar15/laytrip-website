@@ -67,13 +67,50 @@ export class HomeComponent implements OnInit {
   }
 
   loadJquery(){
-    $(".features-discover").slick({
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      dots: false,
-      centerMode: false,
-      focusOnSelect: false,
-      arrows: false
+      $(".features-discover").slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        dots: false,
+        centerMode: false,
+        focusOnSelect: false,
+        arrows: false,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 481,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
     });
   }
 
