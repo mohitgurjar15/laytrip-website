@@ -9,17 +9,17 @@
         <div class="banner_tab">
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-controls="nav-home" aria-selected="true">
+                    <a *ngIf="moduleList.flight && moduleList.flight.status" class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-controls="nav-home" aria-selected="true">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg" alt="" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg" alt="" />
                         <span>Flight</span>
                     </a>
-                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-controls="nav-profile" aria-selected="false">
+                    <a *ngIf="moduleList.hotel && moduleList.hotel.status" class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-controls="nav-profile" aria-selected="false">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg" alt="" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg" alt="" />
                         <span>Hotel</span>
                     </a>
-                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-controls="nav-contact" aria-selected="false">
+                    <a *ngIf="moduleList.accommodation && moduleList.accommodation.status" class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-controls="nav-contact" aria-selected="false">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg" alt="" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg" alt="" />
                         <span>Accommodation</span>
@@ -123,7 +123,6 @@
                                                         [value]="formatter.format(flightOneWayArrivalDate)"
                                                         (input)="flightOneWayArrivalDate = validateInput(flightOneWayArrivalDate, fotDate.value)"
                                                         (click)="flight_one_way_datepicker.toggle()"
-                                                        (select)="flight_one_way_datepicker.close()"
                                                         >
                                             </div>
                                         </li>

@@ -4,6 +4,7 @@ import { LangunageModel, Langunage } from 'src/app/model/langunage.model';
 import { environment } from 'src/environments/environment';
 import { Currency, CurrencyModel } from 'src/app/model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
+import { ModuleModel, Module } from 'src/app/model/module.model';
 
 @Component({
   selector: 'app-main-header',
@@ -63,7 +64,6 @@ export class MainHeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      
       
       this.getLangunages();
       this.getCurrencies();
@@ -129,4 +129,6 @@ export class MainHeaderComponent implements OnInit {
         localStorage.setItem("_curr", JSON.stringify(currency))
       }
     }
+
+    
 }

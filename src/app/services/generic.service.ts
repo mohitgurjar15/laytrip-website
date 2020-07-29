@@ -33,6 +33,14 @@ export class GenericService{
           );
     }
 
+    getModules(){
+      return this.http.get(`${environment.apiUrl}v1/modules`)
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+          );
+    }
+
 
     handleError(error) { 
         console.log("====",error);

@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 declare var $ : any;
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from 'src/app/services/generic.service';
+import { ModuleModel, Module } from 'src/app/model/module.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,33 +17,27 @@ export class HomeComponent implements OnInit {
   flightOneWayDepartureDate: NgbDate | null;
   flightOneWayArrivalDate: NgbDate | null;
   
+  modules:Module[];
+  moduleList:any={};
 
-  isLoading: boolean;
   constructor(
     private calendar: NgbCalendar, public formatter: NgbDateParserFormatter,
     private genericService:GenericService
   ) {
     this.flightOneWayDepartureDate = calendar.getToday();
     this.flightOneWayArrivalDate = calendar.getNext(calendar.getToday(), 'd', 7);
-    console.log(this.flightOneWayDepartureDate)
 
-    this.isLoading = true;
    }
 
 
- 
-
-  ngAfterViewInit() {
-    this.isLoading = false;
-  }
 
   ngOnInit(): void {
     
-     this.loadJquery();
+    this.getModules();
+    this.loadJquery();
   } 
 
   onDateSelection(date: NgbDate) {
-    console.log(date)
     if (!this.flightOneWayDepartureDate && !this.flightOneWayArrivalDate) {
       this.flightOneWayDepartureDate = date;
     } else if (this.flightOneWayDepartureDate && !this.flightOneWayArrivalDate && date && date.after(this.flightOneWayDepartureDate)) {
@@ -51,6 +46,7 @@ export class HomeComponent implements OnInit {
       this.flightOneWayArrivalDate = null;
       this.flightOneWayDepartureDate = date;
     }
+
   }
 
   isHovered(date: NgbDate) {
@@ -66,7 +62,6 @@ export class HomeComponent implements OnInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    console.log(input)
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
@@ -82,5 +77,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+     * Get All module like (hotel, flight & VR)
+     */
+    getModules(){
+      this.genericService.getModules().subscribe(
+        (response:ModuleModel)=>{
+          
+          response.data.forEach(module=>{
+            this.moduleList[module.name] = module; 
+          })
+          console.log(this.moduleList)
+        },
+        (error)=>{
+
+        }
+      )
+    }
   
 }
