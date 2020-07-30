@@ -40,7 +40,7 @@ deploy_master:
     - ssh -i $PRIVATE_KEY ubuntu@$SERVER_IP
     - rsync -zvhr -auv -e "ssh -i $PRIVATE_KEY" dist/ ubuntu@$SERVER_IP:/var/www/html/staging/
   only: ['master']
-
+###################################################################
   # Job One for making build
 build_staging:
   stage: build
