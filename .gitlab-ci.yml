@@ -21,7 +21,7 @@ before_script:
 build_master:
   stage: build
   script:
-  - npm run build --prod
+  - npm run build
   only: ['master']
 
 # Job Two for deploy build to server
