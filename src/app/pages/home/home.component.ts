@@ -12,21 +12,13 @@ import { ModuleModel, Module } from 'src/app/model/module.model';
 export class HomeComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  hoveredDate: NgbDate | null = null;
-
-  flightOneWayDepartureDate: NgbDate | null;
-  flightOneWayArrivalDate: NgbDate | null;
   
   modules:Module[];
   moduleList:any={};
 
   constructor(
-    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter,
     private genericService:GenericService
   ) {
-    this.flightOneWayDepartureDate = calendar.getToday();
-    this.flightOneWayArrivalDate = calendar.getNext(calendar.getToday(), 'd', 7);
-
    }
 
 
@@ -37,36 +29,44 @@ export class HomeComponent implements OnInit {
     this.loadJquery();
   } 
 
-  onDateSelection(date: NgbDate) {
-    if (!this.flightOneWayDepartureDate && !this.flightOneWayArrivalDate) {
-      this.flightOneWayDepartureDate = date;
-    } else if (this.flightOneWayDepartureDate && !this.flightOneWayArrivalDate && date && date.after(this.flightOneWayDepartureDate)) {
-      this.flightOneWayArrivalDate = date;
-    } else {
-      this.flightOneWayArrivalDate = null;
-      this.flightOneWayDepartureDate = date;
-    }
 
-  }
-
-  isHovered(date: NgbDate) {
-    return this.flightOneWayDepartureDate && !this.flightOneWayArrivalDate && this.hoveredDate && date.after(this.flightOneWayDepartureDate) && date.before(this.hoveredDate);
-  }
-
-  isInside(date: NgbDate) {
-    return this.flightOneWayArrivalDate && date.after(this.flightOneWayDepartureDate) && date.before(this.flightOneWayArrivalDate);
-  }
-
-  isRange(date: NgbDate) {
-    return date.equals(this.flightOneWayDepartureDate) || (this.flightOneWayArrivalDate && date.equals(this.flightOneWayArrivalDate)) || this.isInside(date) || this.isHovered(date);
-  }
-
-  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-  }
 
   loadJquery(){
+
+      $('#two-inputs').dateRangePicker({
+      separator: ' to ',
+      singlemonth: false,
+      time: {
+          enabled: false
+      },
+      format: "ddd, MMM D YYYY",
+      autoClose: true,
+      language: 'en',
+      autoUpdateInput: true,
+      startDate: "08/03/2020",
+      getValue: function() {
+          if ($('#from_date').val() && $('#to_date').val())
+              return $('#from_date').val() + ' to ' + $('#to_date').val();
+          else
+              return '';
+      },
+      setValue: function(s, s1, s2) {
+          if (s1 == s2) {
+              s2 = this.addDate(s1);
+          }
+          $('#from_date').val(s1);
+          $('#to_date').val(s2);
+      },
+      showTopbar: true,
+      customOpenAnimation: function(cb) {
+          $(this).fadeIn(0, cb);
+      },
+      customCloseAnimation: function(cb) {
+          $(this).fadeOut(0, cb);
+      },
+      extraClass: 'marg_top'
+    });
+    
       $(".features-discover").slick({
         slidesToShow: 4,
         slidesToScroll: 1,

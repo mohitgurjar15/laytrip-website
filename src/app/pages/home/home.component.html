@@ -81,49 +81,15 @@
                                                 </app-search-airport>
                                             </div>
                                         </li>
-                                        <li class="grid_box secound">
+                                        <li class="grid_box secound" id="two-inputs">
                                             
-                                            <div class="hidden_date hidden">
-                                                <input name="datepicker"
-                                                        class="form-control"
-                                                        ngbDatepicker
-                                                        #flight_one_way_datepicker="ngbDatepicker"
-                                                        [autoClose]="'outside'"
-                                                        (dateSelect)="onDateSelection($event)"
-                                                        [displayMonths]="2"
-                                                        [dayTemplate]="t"
-                                                        outsideDays="hidden"
-                                                        [startDate]="flightOneWayDepartureDate!">
-                                                <ng-template #t let-date let-focused="focused">
-                                                    <span class="custom-day"
-                                                        [class.focused]="focused"
-                                                        [class.range]="isRange(date)"
-                                                        [class.faded]="isHovered(date) || isInside(date)"
-                                                        (mouseenter)="hoveredDate = date"
-                                                        (mouseleave)="hoveredDate = null">
-                                                        {{ date.day }}
-                                                    </span>
-                                                </ng-template>
-                                            </div>
                                             <div class="date_form">
                                                 <label>Departure</label>
-                                                <input #fofDate
-                                                        class="form-control" placeholder="yyyy-mm-dd"
-                                                        name="fofDate"
-                                                        [value]="formatter.format(flightOneWayDepartureDate)"
-                                                        (input)="flightOneWayDepartureDate = validateInput(flightOneWayDepartureDate, fofDate.value)"
-                                                        (click)="flight_one_way_datepicker.toggle()"
-                                                        >
+                                                <input id="from_date" size="20" value="">
                                             </div>
                                             <div class="date_to">
                                                 <label>Return</label>
-                                                <input #fotDate
-                                                        class="form-control" placeholder="yyyy-mm-dd"
-                                                        name="fotDate"
-                                                        [value]="formatter.format(flightOneWayArrivalDate)"
-                                                        (input)="flightOneWayArrivalDate = validateInput(flightOneWayArrivalDate, fotDate.value)"
-                                                        (click)="flight_one_way_datepicker.toggle()"
-                                                        >
+                                                <input id="to_date" size="20" value="">
                                             </div>
                                         </li>
                                         <li class="grid_box third">
