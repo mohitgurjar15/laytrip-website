@@ -67,6 +67,9 @@ export class MainHeaderComponent implements OnInit {
       
       this.getLangunages();
       this.getCurrencies();
+      /* this.genericService.test().subscribe((res:any)=>{
+          console.log(res);
+      }) */
     }
 
     /**

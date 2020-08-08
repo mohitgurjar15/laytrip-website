@@ -17,6 +17,14 @@ export class GenericService{
     ){
 
     }
+
+    test(){
+      return this.http.post(`http://3.127.150.220/Webservice/streetParkingList`,{})
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+          );
+    }
     getAllLangunage(){
         return this.http.get(`${environment.apiUrl}v1/language`)
         .pipe(
