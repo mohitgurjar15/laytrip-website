@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { GenericService } from 'src/app/services/generic.service';
-import { LangunageModel, Langunage } from 'src/app/model/langunage.model';
-import { environment } from 'src/environments/environment';
-import { Currency, CurrencyModel } from 'src/app/model/currency.model';
+import { Component, OnInit, Inject } from '@angular/core';
+import { GenericService } from '../../services/generic.service';
+import { LangunageModel, Langunage } from '../../model/langunage.model';
+import { environment } from '../../../environments/environment';
+import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
-import { ModuleModel, Module } from 'src/app/model/module.model';
 
 @Component({
   selector: 'app-main-header',

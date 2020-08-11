@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { ComponentsModule } from '../../components/components.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DealComponent } from './deal/deal.component';
 import { FeaturedCityComponent } from './featured-city/featured-city.component';

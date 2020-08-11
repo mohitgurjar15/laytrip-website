@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 declare var $ : any;
-import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import { GenericService } from 'src/app/services/generic.service';
-import { ModuleModel, Module } from 'src/app/model/module.model';
+import { GenericService } from '../../services/generic.service';
+import { ModuleModel, Module } from '../../model/module.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

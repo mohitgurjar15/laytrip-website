@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FlightService } from 'src/app/services/flight.service';
+//import { FlightService } from 'src/app/services/flight.service';
+import { FlightService } from '../../services/flight.service';
 
 @Component({
   selector: 'app-search-airport',
