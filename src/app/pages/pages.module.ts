@@ -9,13 +9,15 @@ import { PagesComponent } from './pages.component';
 import { MainHeaderComponent } from '../elements/main-header/main-header.component';
 import { MainFooterComponent } from '../elements/main-footer/main-footer.component';
 import { SigninComponent } from './user/signin/signin.component';
+import { SocialLoginComponent } from './user/social-login/social-login.component';
 
 @NgModule({
   declarations: [ 
     PagesComponent,
     MainHeaderComponent,
     MainFooterComponent,
-    SigninComponent
+    SigninComponent,
+    SocialLoginComponent
   ],
   imports: [
     CommonModule,
