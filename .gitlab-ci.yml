@@ -52,7 +52,7 @@ build_staging:
 deploy_staging:
   stage: deploy
   before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y && npm install pm2 -g)'
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
