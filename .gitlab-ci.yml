@@ -45,7 +45,7 @@ deploy_master:
 build_staging:
   stage: build
   script:
-  - npm run build:dev
+  - npm run build:ssr && npm run serve:ssr
   only: ['staging']
 
 # Job Two for deploy build to server
