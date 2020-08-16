@@ -52,7 +52,7 @@ build_staging:
 deploy_staging:
   stage: deploy
   before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y && npm install pm2 -g)'
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
@@ -63,5 +63,5 @@ deploy_staging:
   script:
     - ssh -i $PRIVATE_KEY ubuntu@$SERVER_IP
     - rsync -zvhr -auv -e "ssh -i $PRIVATE_KEY" dist/ ubuntu@$SERVER_IP:/var/www/html/staging/
-    - pm2 restart /var/www/html/staging/dist/server.js
+    - ssh -i $PRIVATE_KEY ubuntu@$SERVER_IP && pm2 restart /var/www/html/staging/dist/server.js
   only: ['staging']
