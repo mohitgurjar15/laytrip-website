@@ -45,7 +45,7 @@ deploy_master:
 build_staging:
   stage: build
   script:
-  - npm run build:ssr && npm run serve:ssr
+  - npm run build:ssr
   only: ['staging']
 
 # Job Two for deploy build to server
@@ -63,4 +63,5 @@ deploy_staging:
   script:
     - ssh -i $PRIVATE_KEY ubuntu@$SERVER_IP
     - rsync -zvhr -auv -e "ssh -i $PRIVATE_KEY" dist/ ubuntu@$SERVER_IP:/var/www/html/staging/
+    - pm2 restart /var/www/html/staging/dist/server.js
   only: ['staging']
