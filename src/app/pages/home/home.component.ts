@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   loadJquery(){
 
-      $('#two-inputs').dateRangePicker({
+      /* $('#two-inputs').dateRangePicker({
       separator: ' to ',
       singlemonth: false,
       time: {
@@ -64,52 +64,13 @@ export class HomeComponent implements OnInit {
           $(this).fadeOut(0, cb);
       },
       extraClass: 'marg_top'
-    });
+    }); */
     
-      $(".features-discover").slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
+    $(".featured_slid").slick({
         dots: false,
-        centerMode: false,
-        focusOnSelect: false,
-        arrows: false,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 481,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1
     });
   }
 

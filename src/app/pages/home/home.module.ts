@@ -10,6 +10,7 @@ import { FeaturedCityComponent } from './featured-city/featured-city.component';
 import { DiscoverCityComponent } from './discover-city/discover-city.component';
 import { UserBenefitComponent } from './user-benefit/user-benefit.component';
 import { MobileAndSubscribeComponent } from './mobile-and-subscribe/mobile-and-subscribe.component';
+import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { MobileAndSubscribeComponent } from './mobile-and-subscribe/mobile-and-s
     DiscoverCityComponent, 
     DealComponent, 
     UserBenefitComponent, 
-    MobileAndSubscribeComponent, 
+    MobileAndSubscribeComponent, PartialPaymentComponent, 
   ],
   imports: [
     CommonModule,
