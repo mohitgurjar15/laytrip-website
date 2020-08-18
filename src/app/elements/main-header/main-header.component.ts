@@ -20,6 +20,7 @@ export class MainHeaderComponent implements OnInit {
     selectedCurrency:Currency={ id:0, country:'', code:'',symbol:'', status:false }
     isCurrencySet:boolean=false;
 
+    isLoggedIn = false;
 
     s3BucketUrl = environment.s3BucketUrl;
     constructor(
@@ -63,7 +64,7 @@ export class MainHeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      
+      this.checkUser();
       this.getLangunages();
       this.getCurrencies();
       /* this.genericService.test().subscribe((res:any)=>{
@@ -134,5 +135,17 @@ export class MainHeaderComponent implements OnInit {
       }
     }
 
+    checkUser() {
+      let userToken = localStorage.getItem('userToken');
+      
+      if( userToken) {
+        this.isLoggedIn = true;
+      }
+    }
+
+    onLoggedout() {
+      console.log('here');
+      localStorage.removeItem('userToken');
+    }
     
 }

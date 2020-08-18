@@ -83,8 +83,11 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" *ngIf="!isLoggedIn">
                                 <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">Sign In</a>
+                            </li>
+                            <li class="nav-item" *ngIf="isLoggedIn">
+                                <a class="nav-link" href="javascript:void(0)" [routerLink]="['/']" (click)="onLoggedout()">Sign Out</a>
                             </li>
                         </ul>
                     </div>
