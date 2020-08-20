@@ -2726,3 +2726,9 @@ select {
         }
     }
 }
+
+.ng-select.laytrip-input .ng-dropdown-panel{
+    top: 100%;
+    background: red;
+    left: 0;
+}

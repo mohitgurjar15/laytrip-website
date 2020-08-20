@@ -1,0 +1,19 @@
+.flight_form{
+    position: relative;
+}
+.laytrip-input{
+    width: 100%;
+    border: none;
+    height: 35px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #012178;
+    font-weight: 600;
+    padding: 0 15px;
+
+    .ng-select-container{
+        height: 100%;
+    }
+}
+
+

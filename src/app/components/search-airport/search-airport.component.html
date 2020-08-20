@@ -1,24 +1,19 @@
-                                           <!-- <input type="text" placeholder="New York"  /> -->
-<ng-autocomplete 
-    [data]="data"
-    placeHolder="{{placeHolder}}"
-    [searchKeyword]="keyword"
-    (selected)='selectEvent($event)'
-    (inputChanged)='onChangeSearch($event)'
-    (inputFocused)='onFocused($event)'
-    [itemTemplate]="itemTemplate"
-    [notFoundTemplate]="notFoundTemplate"
-    historyIdentifier="countriesReactiveList"
-    [historyHeading]="historyHeading"
-    historyListMaxNumber="5"
-    >                                 
-</ng-autocomplete>
-    
-<ng-template #itemTemplate let-item>
-<a [innerHTML]="item.name"></a>
-</ng-template>
 
-<ng-template #notFoundTemplate let-notFound>
-<div [innerHTML]="notFound"></div>
-</ng-template>
-<span>{{ selectedAirport.name || defaultSelected}}</span>
+    <ng-select [loading]="loading" [selectOnTab]="true" [items]="data" [(ngModel)]="selectedAirport" bindLabel="name"
+    bindValue="name" (keyup)="onChangeSearch($event)"  placeholder="{{placeHolder}}" class="laytrip-input" notFoundText="" >
+        <ng-template ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <ul class="pb-1">
+                <li>
+                    <div class="d-flex">
+                        <div>
+                            <p [ngOptionHighlight]="search">{{item.name}}</p>
+                            <p>{{item.city}},{{item.country}}</p>
+                        </div>
+                        <div><b>{{item.code}}</b> </div>
+                    </div>
+                </li>
+            </ul>
+        </ng-template>
+    </ng-select>
+    <span *ngIf="defaultSelected">{{ defaultSelected }}</span>
+    <span *ngIf="selectedAirport">{{ selectedAirport.city}},{{selectedAirport.country}}</span>
