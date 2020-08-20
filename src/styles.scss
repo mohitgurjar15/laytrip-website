@@ -2732,3 +2732,839 @@ select {
     background: red;
     left: 0;
 }
+//<!-- Close Footer Section css -->
+
+//<!-- Start Back To top Css -->
+#back_to_top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: 1px solid $text-yellow;
+    outline: none;
+    background: $primary-color;
+    color: white;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+    &:hover {
+        background-color: $text-darkblue;
+    }
+
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+.comman_modal {
+    .modal-dialog {
+        max-width: 460px;
+
+        .sign_in_modal {
+            width: 100%;
+
+            .modal-content {
+                border-radius: 20px;
+                padding: 20px;
+
+
+                .modal_top {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 0 0 25px;
+
+                    .modal_title {
+                        h4 {
+                            font-size: 32px;
+                            color: $text-black;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: $text-grey;
+                            font-weight: 400;
+                            margin: 0;
+                        }
+                    }
+                }
+
+
+                .modal_cnt {
+                    width: 100%;
+
+                    form {
+                        width: 100%;
+
+                        .form_row {
+                            width: 100%;
+                            margin: 0 0 20px;
+
+                            label {
+                                width: 100%;
+                                margin: 0 0 5px;
+                                font-size: 14px;
+                                color: $text-grey;
+                                font-weight: 500;
+                                text-transform: uppercase;
+                            }
+
+                            .text_field {
+                                input {
+                                    width: 100%;
+                                    height: 50px;
+                                    border: 1px solid $box-border-color;
+                                    background: transparent;
+                                    outline: none;
+                                    border-radius: 5px;
+                                    font-size: 14px;
+                                    color: $text-black;
+                                    padding: 0 10px;
+
+                                    &:placeholder {
+                                        color: $text-black;
+                                        -webkit-text-fill-color: $text-black;
+                                    }
+
+                                    &:focus {
+                                        border: 1px solid $text-lightblue;
+                                    }
+                                }
+
+                                &.pass_show {
+                                    position: relative;
+
+                                    .ptxt {
+                                        position: absolute;
+                                        top: 50%;
+                                        right: 10px;
+                                        z-index: 1;
+                                        color: $text-grey;
+                                        margin-top: -10px;
+                                        cursor: pointer;
+                                        transition: .3s ease all;
+                                    }
+                                }
+                            }
+
+                            &.last {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin: 0 0 25px;
+
+                                .check {
+                                    input {
+                                        width: 20px;
+                                        height: 20px;
+                                    }
+
+                                    label {
+                                        margin: 0;
+                                        text-transform: none;
+                                        vertical-align: middle;
+
+                                        &:before {
+                                            width: 20px;
+                                            height: 20px;
+                                            top: 0;
+                                            border-radius: 0;
+                                        }
+
+                                        &:after {
+                                            width: 20px;
+                                            height: 20px;
+                                            top: 0;
+                                        }
+
+                                        span {
+                                            margin-left: 10px;
+                                        }
+                                    }
+                                }
+
+                                .forgot_pass {
+                                    a {
+                                        color: $text-lightblue;
+                                    }
+                                }
+                            }
+                        }
+
+                        .form_btn {
+                            width: 100%;
+                            text-align: center;
+
+                            button {
+                                width: auto;
+                                padding: 0 120px;
+                                display: inline-block;
+                                height: 58px;
+                                background: $secondary-color;
+                                border-radius: 8px;
+                                border: 1px solid $secondary-color;
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: $text-white;
+                                transition: 0.3s;
+                                position: relative;
+                                z-index: 9;
+                                overflow: hidden;
+                                white-space: normal;
+
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 0%;
+                                    background: $primary-color;
+                                    z-index: -1;
+                                    transition: 0.8s;
+                                    border-radius: 0 0 50% 50%;
+                                }
+
+                                &:hover {
+                                    border-color: $primary-color;
+
+                                    &:before {
+                                        height: 190%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .modal_btm {
+                    margin: 25px 0 0;
+                    width: 100%;
+                    text-align: center;
+                    overflow: hidden;
+
+                    span {
+                        width: 100%;
+                        font-size: 14px;
+                        color: $text-grey;
+                        text-align: center;
+                        position: relative;
+                        font-weight: 400;
+
+                        &:before {
+                            width: 300%;
+                            border: 1px dashed $text-grey;
+                            position: absolute;
+                            top: 50%;
+                            left: -310%;
+                            content: '';
+                        }
+
+                        &:after {
+                            width: 300%;
+                            border: 1px dashed $text-grey;
+                            position: absolute;
+                            top: 50%;
+                            right: -310%;
+                            content: '';
+                        }
+                    }
+
+                    ul {
+                        width: 100%;
+                        list-style: none;
+                        margin: 15px 0 25px;
+                        padding: 0;
+                        display: flex;
+
+                        li {
+                            width: 33.33%;
+                            padding: 0 5px;
+
+                            a {
+                                line-height: 40px;
+                                display: flex;
+                                align-items: center;
+                                border: 1px solid $box-border-color;
+                                color: $social-text-red;
+                                border-radius: 5px;
+                                padding: 0 10px;
+                                font-size: 12px;
+                                background: $social-bg;
+                                border: 1px solid $social-bg-border;
+
+                                img {
+                                    margin-right: 15px;
+                                }
+                            }
+
+                            &:first-child {
+                                padding-left: 0;
+
+                                a {
+                                    background: $fb-bg;
+                                    border: 1px solid $fb-bg-border;
+                                    color: $social-text-facebook;
+                                }
+                            }
+
+                            &:last-child {
+                                padding-right: 0;
+
+                                a {
+                                    color: $social-text-black;
+                                }
+                            }
+
+                        }
+                    }
+
+                    p {
+                        width: 100%;
+                        text-align: center;
+                        font-size: 14px;
+                        color: $text-grey;
+                        margin: 0;
+                        font-weight: 300;
+
+                        a {
+                            color: $text-lightblue;
+                        }
+                    }
+                }
+            }
+        }
+
+        .forgot_password_modal {
+            width: 100%;
+
+            .modal-content {
+                border-radius: 20px;
+                padding: 30px;
+
+                .modal_top {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    margin: 0 0 30px;
+                }
+
+                .modal_cnt {
+                    width: 100%;
+
+                    .modal_message {
+                        width: 100%;
+                        margin-bottom: 50px;
+
+                        h4 {
+                            width: 100%;
+                            font-size: 32px;
+                            font-weight: 600;
+                            color: $text-black;
+                            margin: 0 0 5px;
+                            text-transform: uppercase;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: $text-grey;
+                            margin: 0;
+                        }
+                    }
+
+                    form {
+                        width: 100%;
+
+                        .form_row {
+                            width: 100%;
+                            margin: 0 0 20px;
+
+                            label {
+                                width: 100%;
+                                margin: 0 0 5px;
+                                font-size: 14px;
+                                color: $text-grey;
+                                font-weight: 500;
+                                text-transform: uppercase;
+                            }
+
+                            .text_field {
+                                input {
+                                    width: 100%;
+                                    height: 50px;
+                                    border: 1px solid $box-border-color;
+                                    background: transparent;
+                                    outline: none;
+                                    border-radius: 5px;
+                                    font-size: 14px;
+                                    color: $text-black;
+                                    padding: 0 10px;
+
+                                    &:placeholder {
+                                        color: $text-black;
+                                        -webkit-text-fill-color: $text-black;
+                                    }
+
+                                    &:focus {
+                                        border: 1px solid $text-lightblue;
+                                    }
+                                }
+                            }
+                        }
+
+                        .form_btn {
+                            width: 100%;
+                            text-align: center;
+                            margin-bottom: 150px;
+
+                            button {
+                                width: auto;
+                                padding: 0 80px;
+                                display: inline-block;
+                                height: 58px;
+                                background: $secondary-color;
+                                border-radius: 8px;
+                                border: 1px solid $secondary-color;
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: $text-white;
+                                transition: 0.3s;
+                                position: relative;
+                                z-index: 9;
+                                overflow: hidden;
+                                white-space: normal;
+
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 0%;
+                                    background: $primary-color;
+                                    z-index: -1;
+                                    transition: 0.8s;
+                                    border-radius: 0 0 50% 50%;
+                                }
+
+                                &:hover {
+                                    border-color: $primary-color;
+
+                                    &:before {
+                                        height: 190%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .sign_up_modal {
+            width: 100%;
+
+            .modal-content {
+                border-radius: 20px;
+                padding: 20px;
+
+
+                .modal_top {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 0 0 25px;
+
+                    .modal_title {
+                        h4 {
+                            font-size: 32px;
+                            color: $text-black;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: $text-grey;
+                            font-weight: 400;
+                            margin: 0;
+                        }
+                    }
+                }
+
+
+                .modal_cnt {
+                    width: 100%;
+
+                    form {
+                        width: 100%;
+
+                        .form_row {
+                            width: 100%;
+                            margin: 0 0 20px;
+                            display: flex;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+
+                            .field_form {
+                                width: 100%;
+
+                                &.left {
+                                    width: 48%;
+
+                                    .field_in {
+                                        margin-bottom: 20px;
+
+                                        &.last {
+                                            margin: 0;
+                                        }
+                                    }
+                                }
+
+                                &.right {
+                                    width: 48%;
+                                }
+
+                                .field_in {
+                                    margin-bottom: 20px;
+
+                                    &.last {
+                                        margin-bottom: 20px;
+                                    }
+                                }
+                            }
+
+                            label {
+                                width: 100%;
+                                margin: 0 0 5px;
+                                font-size: 14px;
+                                color: $text-grey;
+                                font-weight: 500;
+                                text-transform: uppercase;
+                            }
+
+                            .text_field {
+                                width: 100%;
+
+                                input {
+                                    width: 100%;
+                                    height: 50px;
+                                    border: 1px solid $box-border-color;
+                                    background: transparent;
+                                    outline: none;
+                                    border-radius: 5px;
+                                    font-size: 14px;
+                                    color: $text-black;
+                                    padding: 0 10px;
+
+                                    &:placeholder {
+                                        color: $text-black;
+                                        -webkit-text-fill-color: $text-black;
+                                    }
+
+                                    &:focus {
+                                        border: 1px solid $text-lightblue;
+                                    }
+                                }
+
+                                &.pass_show {
+                                    position: relative;
+
+                                    .ptxt {
+                                        position: absolute;
+                                        top: 50%;
+                                        right: 10px;
+                                        z-index: 1;
+                                        color: $text-grey;
+                                        margin-top: -10px;
+                                        cursor: pointer;
+                                        transition: .3s ease all;
+                                    }
+                                }
+                            }
+
+
+                            .select_gender {
+                                margin: 5px 0 0;
+
+                                ul {
+                                    margin: 0;
+                                    padding: 0;
+                                    list-style: none;
+                                    display: flex;
+
+                                    li {
+                                        width: auto;
+                                        margin: 0 20px 0 0;
+                                        text-align: center;
+
+
+                                        a {
+                                            width: 95px;
+                                            text-align: center;
+                                            padding: 10px;
+                                            display: inline-block;
+
+                                            .gender_type {
+                                                display: inline-block;
+                                                width: 45px;
+                                                height: 45px;
+                                                border-radius: 50%;
+                                                background: $box-border-color;
+                                                position: relative;
+
+                                                img {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%);
+
+                                                    &.active-icon {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+
+                                            span {
+                                                display: block;
+                                                margin: 5px 0 0;
+                                                font-size: 12px;
+                                                color: $text-grey;
+                                            }
+
+                                            &.active_gender {
+                                                background: $background-white;
+                                                border-radius: 15px;
+                                                box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.1);
+
+                                                .gender_type {
+                                                    background: $primary-color;
+
+                                                    img {
+                                                        &.active-icon {
+                                                            display: block;
+                                                        }
+
+                                                        &.default-icon {
+                                                            display: none;
+                                                        }
+                                                    }
+                                                }
+
+                                                span {
+                                                    color: $primary-color;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.last {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin: 0 0 25px;
+
+                                .check {
+
+                                    .custom-checkbox {
+                                        display: flex;
+
+                                        input {
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+
+                                        label {
+                                            width: auto;
+                                            margin: 0;
+                                            text-transform: none;
+                                            vertical-align: middle;
+
+                                            &:before {
+                                                width: 20px;
+                                                height: 20px;
+                                                top: 0;
+                                                border-radius: 0;
+                                            }
+
+                                            &:after {
+                                                width: 20px;
+                                                height: 20px;
+                                                top: 0;
+                                            }
+                                        }
+
+                                        span {
+                                            width: auto;
+                                            margin-left: 10px;
+
+                                            a {
+                                                color: $text-lightblue;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .form_btn {
+                            width: 100%;
+                            text-align: center;
+
+                            button {
+                                width: auto;
+                                padding: 0 120px;
+                                display: inline-block;
+                                height: 58px;
+                                background: $secondary-color;
+                                border-radius: 8px;
+                                border: 1px solid $secondary-color;
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: $text-white;
+                                transition: 0.3s;
+                                position: relative;
+                                z-index: 9;
+                                overflow: hidden;
+                                white-space: normal;
+
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 0%;
+                                    background: $primary-color;
+                                    z-index: -1;
+                                    transition: 0.8s;
+                                    border-radius: 0 0 50% 50%;
+                                }
+
+                                &:hover {
+                                    border-color: $primary-color;
+
+                                    &:before {
+                                        height: 190%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .modal_btm {
+                    margin: 25px 0 0;
+                    width: 100%;
+                    text-align: center;
+                    overflow: hidden;
+
+                    span {
+                        width: 100%;
+                        font-size: 14px;
+                        color: $text-grey;
+                        text-align: center;
+                        position: relative;
+                        font-weight: 400;
+
+                        &:before {
+                            width: 300%;
+                            border: 1px dashed $text-grey;
+                            position: absolute;
+                            top: 50%;
+                            left: -310%;
+                            content: '';
+                        }
+
+                        &:after {
+                            width: 300%;
+                            border: 1px dashed $text-grey;
+                            position: absolute;
+                            top: 50%;
+                            right: -310%;
+                            content: '';
+                        }
+                    }
+
+                    ul {
+                        width: 100%;
+                        list-style: none;
+                        margin: 15px 0 25px;
+                        padding: 0;
+                        display: flex;
+
+                        li {
+                            width: 33.33%;
+                            padding: 0 5px;
+
+                            a {
+                                line-height: 40px;
+                                display: flex;
+                                align-items: center;
+                                border: 1px solid $box-border-color;
+                                color: $social-text-red;
+                                border-radius: 5px;
+                                padding: 0 10px;
+                                font-size: 12px;
+                                background: $social-bg;
+                                border: 1px solid $social-bg-border;
+
+                                img {
+                                    margin-right: 15px;
+                                }
+                            }
+
+                            &:first-child {
+                                padding-left: 0;
+
+                                a {
+                                    background: $fb-bg;
+                                    border: 1px solid $fb-bg-border;
+                                    color: $social-text-facebook;
+                                }
+                            }
+
+                            &:last-child {
+                                padding-right: 0;
+
+                                a {
+                                    color: $social-text-black;
+                                }
+                            }
+
+                        }
+                    }
+
+                    p {
+                        width: 100%;
+                        text-align: center;
+                        font-size: 14px;
+                        color: $text-grey;
+                        margin: 0;
+                        font-weight: 300;
+
+                        a {
+                            color: $text-lightblue;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

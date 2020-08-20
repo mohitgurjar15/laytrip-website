@@ -1,2 +1,13 @@
-<button type="button" class="btn btn-primary" #loginRef>Google Login</button>
-<button type="button" class="btn btn-primary" >facebook Login</button>
+<!-- <button type="button" class="btn btn-primary" #loginRef>Google Login</button>
+<button type="button" class="btn btn-primary" (click)="login()">facebook Login</button> -->
+<ul>
+    <li><a href="javascript:void(0);" (click)="login()"><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg"
+                alt="Facebook">
+            Facebook</a></li>
+    <li><a href="javascript:void(0);" #loginRef><img src="{{s3BucketUrl}}assets/images/icon/google.svg"
+                alt="Google">
+            Google</a></li>
+    <li><a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg"
+                alt="Apple"> Apple
+            ID</a></li>
+</ul>

@@ -5,7 +5,7 @@ import { SearchAirportComponent } from './search-airport/search-airport.componen
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [
+  declarations: [ 
     SearchAirportComponent
   ],
   imports: [

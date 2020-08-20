@@ -1,4 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -7,8 +11,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./social-login.component.scss']
 })
 export class SocialLoginComponent implements OnInit {
+  s3BucketUrl = environment.s3BucketUrl;
 
   constructor(
+    private userService: UserService,
+    public router: Router
   ) { }
 
   title = 'angular-social';
@@ -54,8 +61,27 @@ export class SocialLoginComponent implements OnInit {
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail());
+        console.log('Email: ' + profile);
         //YOUR CODE HERE
-
+        let json_data = {
+          "account_type": 1,
+          "name": profile.getName(),
+          "email": profile.getEmail(),
+          "social_account_id": profile.getId(),
+          "device_type": 1,
+          "device_model": "RNE-L22",
+          "device_token": "123abc#$%456",
+          "app_version": "1.0",
+          "os_version": "7.0"
+        };
+        this.userService.googleSocialLogin(json_data).subscribe((data: any) => {
+          if (data.user_details) {
+            localStorage.setItem("_lay_sess", data.user_details.access_token);
+            this.router.navigate(['/']);
+          }
+        }, (error: HttpErrorResponse) => {
+          console.log(error)
+        });
 
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
@@ -67,7 +93,7 @@ export class SocialLoginComponent implements OnInit {
 
     (window as any).fbAsyncInit = function () {
       window['FB'].init({
-        appId: '2814219655344680',
+        appId: '933948490440237',
         cookie: true,
         xfbml: true,
         version: 'v3.1'
@@ -86,7 +112,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   login() {
-
+    console.log('hello')
     window['FB'].login((response) => {
       console.log('login response', response);
       if (response.authResponse) {
@@ -97,7 +123,30 @@ export class SocialLoginComponent implements OnInit {
 
           console.log("user information");
           console.log(userInfo);
+          let json_data = {
+            "account_type": 1,
+            "name": userInfo.first_name + ' ' + userInfo.last_name,
+            "email": userInfo.email,
+            "social_account_id": userInfo.id,
+            "device_type": 1,
+            "device_model": "RNE-L22",
+            "device_token": "123abc#$%456",
+            "app_version": "1.0",
+            "os_version": "7.0"
+          };
+          this.userService.googleSocialLogin(json_data).subscribe((data: any) => {
+            if (data.user_details) {
+              localStorage.setItem("_lay_sess", data.user_details.access_token);
+              this.router.navigate(['/']);
+            }
+          }, (error: HttpErrorResponse) => {
+            console.log(error)
+          });
+
+        }, (error) => {
+          alert(JSON.stringify(error, undefined, 2));
         });
+
 
       } else {
         console.log('User login failed');
@@ -105,6 +154,6 @@ export class SocialLoginComponent implements OnInit {
     }, { scope: 'email' });
   }
 
-   
+
 
 }

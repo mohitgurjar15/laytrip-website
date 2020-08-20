@@ -1,25 +1,59 @@
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<div class="" id="sign_in_modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="sign_in_modal" id="log_in_modal">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-        <app-social-login></app-social-login>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
+            <div class="modal-content">
+                <div class="modal_top">
+                    <div class="modal_title">
+                        <h4>Log In</h4>
+                        <p>Please Sign In to continue</p>
+                    </div>
+                    <div class="modal_logo">
+                        <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+                    </div>
+                </div>
+                <div class="modal_cnt">
+                    <form action="post">
+                        <div class="form_row">
+                            <label>Email</label>
+                            <div class="text_field">
+                                <input type="email" name="email" maxlength="20" tabindex="1" placeholder="Enter Email">
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <label>Password</label>
+                            <div class="text_field pass_show">
+                                <input type="password" name="password" maxlength="20" tabindex="2"
+                                    placeholder="Enter Password">
+                            </div>
+                        </div>
+                        <div class="form_row last">
+                            <div class="check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="Remember-me" name="example1"
+                                        tabindex="3">
+                                    <label class="custom-control-label" for="Remember-me"><span>Remember
+                                            me</span></label>
+                                </div>
+                            </div>
+                            <div class="forgot_pass">
+                                <a href="javascript:void(0);" id="open_forgot_modal"
+                                    (click)="openPage({value: 'forgotPassword'})">Forgot Password?</a>
+                            </div>
+                        </div>
+                        <div class="form_btn">
+                            <button>Sign In</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal_btm">
+                    <span>Or login via</span>
+                    <app-social-login></app-social-login>
+                    <p>Dont't have an account? <a href="javascript:void(0);" id="open_sign_up_modal"
+                            (click)="openPage({value: 'signUp'})">Sign
+                            Up</a></p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
