@@ -2727,11 +2727,54 @@ select {
     }
 }
 
-.ng-select.laytrip-input .ng-dropdown-panel{
-    top: 100%;
-    background: red;
-    left: 0;
+
+.ng-select{
+
+    &.laytrip-input{
+        .ng-dropdown-panel{
+            top: 100%;
+            background: $background-white;
+            border: 1px solid $box-border-color;
+            left: 0;
+        }
+
+        .ng-input{
+            input{
+                padding:0;
+            }
+        }
+
+        .ng-select-container{
+
+            height: 100%;
+            .ng-value-container{
+
+                .ng-placeholder{
+                    padding:0 15px;
+                }
+                
+            }
+            span{
+                &.ng-arrow-wrapper{
+                    span{
+                        &.ng-arrow{
+                            margin:0 !important;
+                            padding:0 !important;
+                            font-size: 16px !important;
+                            color:red !important;
+                        }
+                       
+                    }
+                }
+            }
+        }
+    }
+
+    
 }
+
+
+
 //<!-- Close Footer Section css -->
 
 //<!-- Start Back To top Css -->

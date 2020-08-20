@@ -1,3 +1,5 @@
+@import "./../../../cstm-variable";
+
 .flight_form{
     position: relative;
 }
@@ -9,10 +11,55 @@
     font-size: 20px;
     color: #012178;
     font-weight: 600;
-    padding: 0 15px;
+}
 
-    .ng-select-container{
-        height: 100%;
+.item-list{
+    margin:0;
+    padding:0;
+    list-style: none;
+
+    .item{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:8px 5px;
+        border-bottom: 1px solid $box-border-color;
+
+        .item-left{
+            width:75%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            p{
+                font-size: 14px;
+                margin: 0;
+                color: $text-black;
+                font-weight: 400;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                &:last-child{
+                    font-size: 10px;
+                    color: $text-grey;
+                    margin: 2px 0 0;
+                }
+            }
+        }
+
+        .item-right{
+            p{
+
+                width: 35px;
+                font-size: 14px;
+                color: $text-black;
+                font-weight: 500;
+                text-align: center;
+                margin: 0;
+            }
+
+        }
+
     }
 }
 

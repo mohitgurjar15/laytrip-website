@@ -28,6 +28,7 @@ export class SearchAirportComponent implements OnInit {
   searchAirport(searchItem){
     this.loading=true;
     this.flightService.searchAirport(searchItem).subscribe((response:any)=>{
+      console.log(response);
       this.data = response.map(res=>{
         this.loading=false;
         return {
@@ -48,8 +49,9 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onChangeSearch(event){
-   
-    this.searchAirport(event.target.value)
+    console.log("",event)
+    if(event.term.length>2)
+      this.searchAirport(event.term)
   }
 
   selectEvent(event){

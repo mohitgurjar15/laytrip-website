@@ -1,16 +1,17 @@
 
     <ng-select [loading]="loading" [selectOnTab]="true" [items]="data" [(ngModel)]="selectedAirport" bindLabel="name"
-    bindValue="name" (keyup)="onChangeSearch($event)"  placeholder="{{placeHolder}}" class="laytrip-input" notFoundText="" >
-        <ng-template ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
-            <ul class="pb-1">
-                <li>
-                    <div class="d-flex">
-                        <div>
-                            <p [ngOptionHighlight]="search">{{item.name}}</p>
+    bindValue="name" (search)="onChangeSearch($event)" placeholder="Hello"  class="laytrip-input" notFoundText="" minTermLength="3" (change)="selectEvent($event)" loadingText="">
+        <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <ul class="item-list">
+                <li class="item">
+                        <div class="item-left">
+                            <p >{{item.name}}</p>
                             <p>{{item.city}},{{item.country}}</p>
                         </div>
-                        <div><b>{{item.code}}</b> </div>
-                    </div>
+
+                        <div class="item-right">
+                            <p>{{item.code}}</p> 
+                        </div>
                 </li>
             </ul>
         </ng-template>
