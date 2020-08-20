@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -18,7 +18,6 @@ export class SocialLoginComponent implements OnInit {
     public router: Router
   ) { }
 
-  title = 'angular-social';
   @ViewChild('loginRef') loginElement: ElementRef;
   auth2: any;
 
