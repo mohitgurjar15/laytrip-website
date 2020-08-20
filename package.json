@@ -32,7 +32,7 @@
     "@nguniversal/module-map-ngfactory-loader": "0.0.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
-    "angular-ng-autocomplete": "^2.0.1",
+    "@ng-select/ng-select": "^2.20.5",
     "bootstrap": "^4.5.0",
     "core-js": "^2.5.4",
     "express": "^4.15.2",

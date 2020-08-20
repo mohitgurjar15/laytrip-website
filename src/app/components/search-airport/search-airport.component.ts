@@ -20,14 +20,17 @@ export class SearchAirportComponent implements OnInit {
   selectedAirport:any={};
   keyword = 'name';
   data=[];
+  loading:boolean=false;
 
   ngOnInit() {
   }
 
   searchAirport(searchItem){
+    this.loading=true;
     this.flightService.searchAirport(searchItem).subscribe((response:any)=>{
+      console.log(response);
       this.data = response.map(res=>{
-
+        this.loading=false;
         return {
           id: res.id,
           name: res.name,
@@ -37,24 +40,24 @@ export class SearchAirportComponent implements OnInit {
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`
         }
       });
-      
+
     },
     error=>{
-
+      this.loading=false;
     }
     )
   }
 
   onChangeSearch(event){
-    this.searchAirport(event)
+    console.log("",event)
+    if(event.term.length>2)
+      this.searchAirport(event.term)
   }
 
   selectEvent(event){
+    console.log(event)
+    this.defaultSelected="";
     this.selectedAirport=event;
-  }
-
-  onFocused(event){
-    console.log("focus",event)
   }
 
 }

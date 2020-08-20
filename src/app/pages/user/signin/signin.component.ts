@@ -1,15 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { SignupComponent } from '../signup/signup.component';
-import { ModalContainerBaseClassComponent } from 'src/app/components/modal-container-base-class/modal-container-base-class.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent extends ModalContainerBaseClassComponent implements OnInit {
+export class SigninComponent  implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   signUpModal = false;
@@ -17,8 +14,7 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
 
-  constructor(public modalService: NgbModal) {
-    super(modalService);
+  constructor() {
   }
 
   ngOnInit() {
