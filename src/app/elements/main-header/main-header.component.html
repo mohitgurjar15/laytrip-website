@@ -1,90 +1,47 @@
 <!--  Start Header Section-->
-<section class="site_header">
+<header class="site_header">
     <div class="container">
         <div class="row">
             <div id="app" class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="#"><img src="{{s3BucketUrl}}assets/images/logo.svg" alt="" /></a>
+                    <a class="navbar-brand" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo" /></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    About Us
-                                </a>
-                            </li>
-                           
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="partial_payment" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Explore menu
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="partial_payment">
-                                    <a class="dropdown-item" href="#">Countries</a>
-                                    <a class="dropdown-item" href="#">Experiences</a>
-                                    <a class="dropdown-item" href="#">Special Deals</a>
-                                    <a class="dropdown-item" href="#">Download our App</a>
-                                </div>
-                            </li>
 
-                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Partial payments 
-                                </a>
+                        <ul class="navbar-nav ml-auto nav_right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0);">Partial Payment</a>
                             </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Products
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="company">
-                                    <a class="dropdown-item" href="#">Referral program</a>
-                                    <a class="dropdown-item" href="#"> Influence program</a>
-                                </div>
-                            </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                     Partners
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="company">
-                                    <a class="dropdown-item" href="#">Our Partners</a>
-                                    <a class="dropdown-item" href="#">Become a partner</a>
-                                    <a class="dropdown-item" href="#">Investor Relations</a>
-                                </div>
-                            </li>
-                            
-                        </ul>
-                        <ul class="navbar-nav nav_right">
                             <li class="nav-item">
                                 <div class="dropdown">
-                                    <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown">
-                                        <img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> {{ selectedCurrency.code }}
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="Flag" /> {{ selectedCurrency.code }}
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li *ngFor="let currency of currencies" >
-                                                <a href="#" (click)="changeCurrency(currency)">
-                                                    <img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> {{ currency.code }}
-                                                </a>
-                                        </li>
+                                            <a href="#" (click)="changeCurrency(currency)">
+                                                <img src="{{s3BucketUrl}}assets/images/icon/flag.svg" alt="" /> {{ currency.code }}
+                                            </a>
+                                    </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
                                 <div class="dropdown">
-                                    <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                         {{ selectedLanunage.name }}
                                         <span class="caret"></span>
                                     </a>
-                                    <ul class="dropdown-menu" >
+                                    <ul class="dropdown-menu">
                                         <li *ngFor="let langunage of langunages"><a href="#" (click)="changeLangunage(langunage)" >{{ langunage.name }}</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn">
-                                <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">Sign In</a>
+                                <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal">Sign In</a>
                             </li>
                             <li class="nav-item" *ngIf="isLoggedIn">
                                 <a class="nav-link" href="javascript:void(0)" [routerLink]="['/']" (click)="onLoggedout()">Sign Out</a>
@@ -95,6 +52,6 @@
             </div>
         </div>
     </div>
-</section>
+</header>
 <!--  Close Header Section-->
-<app-signin></app-signin>
+<app-auth></app-auth>

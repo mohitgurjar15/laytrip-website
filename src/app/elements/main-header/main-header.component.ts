@@ -67,9 +67,7 @@ export class MainHeaderComponent implements OnInit {
       this.checkUser();
       this.getLangunages();
       this.getCurrencies();
-      /* this.genericService.test().subscribe((res:any)=>{
-          console.log(res);
-      }) */
+      
     }
 
     /**
@@ -136,7 +134,7 @@ export class MainHeaderComponent implements OnInit {
     }
 
     checkUser() {
-      let userToken = localStorage.getItem('userToken');
+      let userToken = localStorage.getItem('_lay_sess');
       
       if( userToken) {
         this.isLoggedIn = true;
@@ -144,8 +142,7 @@ export class MainHeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-      console.log('here');
-      localStorage.removeItem('userToken');
+      localStorage.removeItem('user_lay_sessToken');
     }
     
 }

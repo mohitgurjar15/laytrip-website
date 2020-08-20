@@ -10,6 +10,9 @@ import { MainHeaderComponent } from '../elements/main-header/main-header.compone
 import { MainFooterComponent } from '../elements/main-footer/main-footer.component';
 import { SigninComponent } from './user/signin/signin.component';
 import { SocialLoginComponent } from './user/social-login/social-login.component';
+import { SignupComponent } from './user/signup/signup.component';
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
+import { AuthComponent } from './user/auth/auth.component';
 
 @NgModule({
   declarations: [ 
@@ -17,7 +20,10 @@ import { SocialLoginComponent } from './user/social-login/social-login.component
     MainHeaderComponent,
     MainFooterComponent,
     SigninComponent,
-    SocialLoginComponent
+    SocialLoginComponent,
+    SignupComponent, 
+    ForgotPasswordComponent,
+    AuthComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,8 @@ import { SocialLoginComponent } from './user/social-login/social-login.component
     AutocompleteLibModule,
     TranslateModule,
     ComponentsModule
-  ]
+  ],
+  entryComponents:[SignupComponent,SigninComponent]
+
 })
 export class PagesModule { }

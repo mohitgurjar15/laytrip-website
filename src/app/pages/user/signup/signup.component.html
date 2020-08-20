@@ -1,0 +1,116 @@
+<div class="" id="sign_up_modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="sign_up_modal" id="sign_up_modal">
+        
+            <div class="modal-content">
+                <div class="modal_top">
+                    <div class="modal_title">
+                        <h4>Register</h4>
+                        <p>Please Sign up to continue</p>
+                    </div>
+                    <div class="modal_logo">
+                        <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+                    </div>
+                </div>
+                <div class="modal_cnt">
+                    <form action="post">
+                        <div class="form_row">
+                            <div class="field_form left">
+                                <label>First Name</label>
+                                <div class="text_field">
+                                    <input type="text" name="fname" maxlength="20" tabindex="1" placeholder="Enter First Name">
+                                </div>
+                            </div>
+                            <div class="field_form right">
+                                <label>Last Name</label>
+                                <div class="text_field">
+                                    <input type="text" name="lname" maxlength="20" tabindex="2" placeholder="Enter Last Name">
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <label>Email</label>
+                            <div class="text_field">
+                                <input type="email" name="email" maxlength="20" tabindex="3" placeholder="Enter Email">
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="field_form">
+                                <div class="field_in">
+                                    <label>Password</label>
+                                    <div class="text_field pass_show">
+                                        <input type="password" name="password" maxlength="20" tabindex="4"
+                                            placeholder="Enter Password">
+                                    </div>
+                                </div>
+                                <div class="field_in last">
+                                    <label>Confirm Password</label>
+                                    <div class="text_field pass_show">
+                                        <input type="password" name="password" maxlength="20" tabindex="5"
+                                            placeholder="Enter Password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field_form">
+                                <label>Select Gender</label>
+                                <div class="select_gender">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <div class="gender_type">
+                                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/male.svg" alt="male Icon">
+                                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/male-active.svg"
+                                                        alt="male Icon">
+                                                </div>
+                                                <span>Male</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="active_gender">
+                                                <div class="gender_type">
+                                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/female.svg" alt="Female Icon">
+                                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/female-active.svg"
+                                                        alt="Female Icon">
+                                                </div>
+                                                <span>Female</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <div class="gender_type">
+                                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/non-binary.svg"
+                                                        alt="Non Binary Icon">
+                                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/non-binary-active.svg"
+                                                        alt="Non Binary Icon">
+                                                </div>
+                                                <span>Non-Binary</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row last">
+                            <div class="check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="accept-condition" name="example2"
+                                        tabindex="3">
+                                    <label class="custom-control-label" for="accept-condition"></label>
+                                    <span>Accept <a href="javascript:void(0);">Terms & Conditions</a> | <a
+                                            href="javascript:void(0);">Privacy Policy</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_btn">
+                            <button>Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal_btm">
+                    <p>Don’t have an account? <a href="javascript:void(0);" id="open_sign_in_modal" (btnValueChange)="openSignInUi({value: true})" (click)="openSignInPage()">Sign
+                            In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
