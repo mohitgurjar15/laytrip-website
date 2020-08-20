@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { SignupComponent } from '../signup/signup.component';
 import { ModalContainerBaseClassComponent } from 'src/app/components/modal-container-base-class/modal-container-base-class.component';
@@ -34,8 +34,6 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
     }
   }
 
-  close() {
-    console.log('here')
-  }
+ 
 
 }
