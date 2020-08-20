@@ -4,7 +4,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     SearchAirportComponent
   ],
   imports: [

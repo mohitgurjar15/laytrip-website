@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FlightService } from 'src/app/services/flight.service';
+//import { FlightService } from 'src/app/services/flight.service';
+import { FlightService } from '../../services/flight.service';
 
 @Component({
   selector: 'app-search-airport',
@@ -25,7 +26,18 @@ export class SearchAirportComponent implements OnInit {
 
   searchAirport(searchItem){
     this.flightService.searchAirport(searchItem).subscribe((response:any)=>{
-      this.data = response;
+      this.data = response.map(res=>{
+
+        return {
+          id: res.id,
+          name: res.name,
+          code: res.code,
+          city: res.city,
+          country: res.country,
+          display_name: `${res.city},${res.country},(${res.code}),${res.name}`
+        }
+      });
+      
     },
     error=>{
 

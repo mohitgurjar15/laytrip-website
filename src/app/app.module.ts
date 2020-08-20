@@ -9,7 +9,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ElementsModule } from './elements/elements.module';
-import { SearchAirportComponent } from './components/search-airport/search-airport.component';
 import { ComponentsModule } from './components/components.module';
 
 @NgModule({
@@ -18,7 +17,7 @@ import { ComponentsModule } from './components/components.module';
     NotFoundComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     ElementsModule,
