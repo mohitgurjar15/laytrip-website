@@ -64,6 +64,11 @@ export class SignupComponent extends ModalContainerBaseClassComponent implements
     this.valueChange.emit({ key: 'signIn', value: this.pageData });
   }
 
+  openOtpPage() {
+    this.pageData = true;
+    this.valueChange.emit({ key: 'otpModal', value: this.pageData });
+  }
+
   ngOnDestroy() {
     
   }
@@ -87,10 +92,9 @@ export class SignupComponent extends ModalContainerBaseClassComponent implements
       this.is_gender = true;
   }
 
-  onSubmit() {    
-    $('#sign_up_modal').modal('hide');
-    const modalRef = this.modalService.open(VerifyOtpComponent);
-    modalRef.componentInstance.name = 'Mohit';
+  onSubmit() {
+    console.log('here')    
+   this.openOtpPage();
 
     this.submitted = true;
     

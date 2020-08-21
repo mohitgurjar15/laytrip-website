@@ -1,3 +1,4 @@
+
 <div class="modal-content model-animated">
     <div class="modal_top">
         <div class="modal_title">
@@ -13,7 +14,8 @@
             <div class="form_row">
                 <label>Email<span class="required-asterisk">*</span></label>
                 <div class="text_field">
-                    <input type="email" formControlName="email" maxlength="30" tabindex="1" placeholder="Enter Email">
+                    <input type="email" formControlName="email" maxlength="30" tabindex="1"
+                        placeholder="Enter Email">
                 </div>
                 <div *ngIf="(loginForm.controls.email.errors)" class="focus-input100 login-error">
                     <div *ngIf="loginForm.controls.email.errors.required && loginForm.controls.email.touched"
@@ -25,8 +27,8 @@
             <div class="form_row">
                 <label>Password<span class="required-asterisk">*</span></label>
                 <div class="text_field pass_show">
-                    <input autocomplete="new-password" type="password" formControlName="password" maxlength="30"
-                        tabindex="2" placeholder="Enter Password">
+                    <input autocomplete="new-password" type="password" formControlName="password"
+                        maxlength="30" tabindex="2" placeholder="Enter Password">
                 </div>
                 <div *ngIf="(loginForm.controls.password.errors)" class="focus-input100 login-error">
                     <div *ngIf="loginForm.controls.password.errors.required && loginForm.controls.password.touched"

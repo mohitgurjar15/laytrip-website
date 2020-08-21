@@ -74,8 +74,8 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
     }
   }
   ngOnDestroy() {
-      this.pageData = true;
-      this.valueChange.emit({ key: 'signUp', value: this.pageData });
+      // this.pageData = true;
+      // this.valueChange.emit({ key: 'signUp', value: this.pageData });
 
       console.log('signinDestroy')    
 
