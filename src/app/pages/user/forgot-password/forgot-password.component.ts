@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+declare var $: any;
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,10 +14,17 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
+  forgotForm: FormGroup;
 
-  constructor(public modalService: NgbModal) { }
+  constructor(
+    public modalService: NgbModal,
+    private formBuilder: FormBuilder
+    ) { }
 
   ngOnInit() {
+    this.forgotForm = this.formBuilder.group({
+      email: ['', Validators.required],
+    });
   }
 
   openPage(event) {
@@ -24,5 +33,6 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    // $('.comman_modal').modal('hide');
   }
 }

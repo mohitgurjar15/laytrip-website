@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SocialLoginComponent } from './social-login.component';
+import { MobileAndSubscribeComponent } from './mobile-and-subscribe.component';
 
-describe('SocialLoginComponent', () => {
-  let component: SocialLoginComponent;
-  let fixture: ComponentFixture<SocialLoginComponent>;
+describe('MobileAndSubscribeComponent', () => {
+  let component: MobileAndSubscribeComponent;
+  let fixture: ComponentFixture<MobileAndSubscribeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SocialLoginComponent ]
+      declarations: [ MobileAndSubscribeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SocialLoginComponent);
+    fixture = TestBed.createComponent(MobileAndSubscribeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

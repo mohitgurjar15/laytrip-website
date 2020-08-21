@@ -1,17 +1,16 @@
-<div class="modal fade comman_modal" id="sign_in_modal" data-backdrop="true">
+<div class="modal fade comman_modal" id="sign_in_modal" data-backdrop="true" >
   <div class="modal-dialog modal-dialog-centered">
 
-    <div class="sign_in_modal" id="log_in_modal" *ngIf="signInModal">
+    <div class="sign_in_modal" id="log_in_modal" *ngIf="signInModal" >
       <app-signin [pageData]="signInModal" (valueChange)="pageChange($event)"></app-signin>
     </div>
 
-    <div class="sign_up_modal" id="sign_up_modal" *ngIf="signUpModal">
+    <div class="sign_up_modal" id="sign_up_modal" *ngIf="signUpModal" >
       <app-signup [pageData]="signUpModal" (valueChange)="pageChange($event)"></app-signup>
     </div>
 
-    <div class="forgot_password_modal" id="forgot_modal" *ngIf="forgotPasswordModal">
+    <div class="forgot_password_modal" id="forgot_modal" *ngIf="forgotPasswordModal" >
       <app-forgot-password [pageData]="forgotPasswordModal" (valueChange)="pageChange($event)"></app-forgot-password>
     </div>
-
   </div>
 </div>

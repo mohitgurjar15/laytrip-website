@@ -3,6 +3,11 @@ import { environment } from '../../../../environments/environment';
 import { SignupComponent } from '../signup/signup.component';
 import { ModalContainerBaseClassComponent } from 'src/app/components/modal-container-base-class/modal-container-base-class.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+declare var $: any;
 
 @Component({
   selector: 'app-signin',
@@ -13,15 +18,50 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
 
   s3BucketUrl = environment.s3BucketUrl;
   signUpModal = false;
+  loginForm: FormGroup;
+  submitted = false;
+
 
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
-
-  constructor(public modalService: NgbModal) {
+  
+  constructor(
+    public modalService: NgbModal,
+    private formBuilder: FormBuilder,
+    private userService : UserService,
+    public router: Router
+    ) {
     super(modalService);
   }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]]
+    });
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {    
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      this.submitted = false;
+      return;
+    } else {
+
+      this.userService.signin(this.loginForm.value).subscribe((data: any) => {
+        if(data.token){
+          console.log(data.token)
+          this.submitted = false;
+          localStorage.setItem("_lay_sess", data.token);
+          this.router.navigate(['/']);      
+        }
+      }, (error: HttpErrorResponse) => {       
+        console.log(error);
+        this.submitted = false;
+      });
+    }
   }
 
   openPage(event) {
@@ -33,9 +73,16 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
       this.valueChange.emit({ key: 'signUp', value: this.pageData });
     }
   }
+  ngOnDestroy() {
+      this.pageData = true;
+      this.valueChange.emit({ key: 'signUp', value: this.pageData });
 
-  close() {
-    console.log('here')
+      console.log('signinDestroy')    
+
+      // $('#sign_in_modal').modal('hide');
+      // this.signUpModal = true;
   }
+  
+
 
 }

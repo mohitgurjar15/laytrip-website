@@ -1,116 +1,149 @@
-<div class="" id="sign_up_modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="sign_up_modal" id="sign_up_modal">
-        
-            <div class="modal-content">
-                <div class="modal_top">
-                    <div class="modal_title">
-                        <h4>Register</h4>
-                        <p>Please Sign up to continue</p>
+<div class="modal-content model-animated">
+    <div class="modal_top">
+        <div class="modal_title">
+            <h4>Register</h4>
+            <p>Please Sign up to continue</p>
+        </div>
+        <div class="modal_logo">
+            <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+        </div>
+    </div>
+    <div class="modal_cnt">
+        <form [formGroup]="signupForm">
+            <div class="form_row">
+                <div class="field_form left">
+                    <label>First Name<span class="required-asterisk">*</span></label>
+                    <div class="text_field">
+                        <input type="text" formControlName="first_name" maxlength="20" tabindex="1" placeholder="Enter First Name">
                     </div>
-                    <div class="modal_logo">
-                        <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+                    <div *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors" class="focus-input100 login-error">
+                        <div
+                            *ngIf="signupForm.controls.first_name.errors.required"
+                            class="text-danger">Please enter your first name.</div>
                     </div>
                 </div>
-                <div class="modal_cnt">
-                    <form action="post">
-                        <div class="form_row">
-                            <div class="field_form left">
-                                <label>First Name</label>
-                                <div class="text_field">
-                                    <input type="text" name="fname" maxlength="20" tabindex="1" placeholder="Enter First Name">
-                                </div>
-                            </div>
-                            <div class="field_form right">
-                                <label>Last Name</label>
-                                <div class="text_field">
-                                    <input type="text" name="lname" maxlength="20" tabindex="2" placeholder="Enter Last Name">
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="form_row">
-                            <label>Email</label>
-                            <div class="text_field">
-                                <input type="email" name="email" maxlength="20" tabindex="3" placeholder="Enter Email">
-                            </div>
-                        </div>
-                        <div class="form_row">
-                            <div class="field_form">
-                                <div class="field_in">
-                                    <label>Password</label>
-                                    <div class="text_field pass_show">
-                                        <input type="password" name="password" maxlength="20" tabindex="4"
-                                            placeholder="Enter Password">
-                                    </div>
-                                </div>
-                                <div class="field_in last">
-                                    <label>Confirm Password</label>
-                                    <div class="text_field pass_show">
-                                        <input type="password" name="password" maxlength="20" tabindex="5"
-                                            placeholder="Enter Password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="field_form">
-                                <label>Select Gender</label>
-                                <div class="select_gender">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <div class="gender_type">
-                                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/male.svg" alt="male Icon">
-                                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/male-active.svg"
-                                                        alt="male Icon">
-                                                </div>
-                                                <span>Male</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="active_gender">
-                                                <div class="gender_type">
-                                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/female.svg" alt="Female Icon">
-                                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/female-active.svg"
-                                                        alt="Female Icon">
-                                                </div>
-                                                <span>Female</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <div class="gender_type">
-                                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/non-binary.svg"
-                                                        alt="Non Binary Icon">
-                                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/non-binary-active.svg"
-                                                        alt="Non Binary Icon">
-                                                </div>
-                                                <span>Non-Binary</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form_row last">
-                            <div class="check">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="accept-condition" name="example2"
-                                        tabindex="3">
-                                    <label class="custom-control-label" for="accept-condition"></label>
-                                    <span>Accept <a href="javascript:void(0);">Terms & Conditions</a> | <a
-                                            href="javascript:void(0);">Privacy Policy</a></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form_btn">
-                            <button>Sign Up</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal_btm">
-                    <p>Don’t have an account? <a href="javascript:void(0);" id="open_sign_in_modal" (btnValueChange)="openSignInUi({value: true})" (click)="openSignInPage()">Sign
-                            In</a></p>
+                <div class="field_form right">
+                    <label>Last Name<span class="required-asterisk">*</span></label>
+                    <div class="text_field">
+                        <input type="text" formControlName="last_name" maxlength="20" tabindex="2" placeholder="Enter Last Name">
+                    </div> 
+                    <div *ngIf="(signupForm.controls.last_name.errors)" class="focus-input100 login-error">
+                        <div
+                            *ngIf="signupForm.controls.last_name.errors.required && signupForm.controls.last_name.touched"
+                            class="text-danger">Please enter your last name.</div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="form_row">
+                <label>Email<span class="required-asterisk">*</span></label>
+                <div class="text_field">
+                    <input type="email" formControlName="email" maxlength="20" tabindex="3" placeholder="Enter Email">
+                </div>
+                <div *ngIf="(signupForm.controls.email.errors)" class="focus-input100 login-error">
+                    <div
+                        *ngIf="signupForm.controls.email.errors.required && signupForm.controls.email.touched"
+                        class="text-danger">Please enter your email address.</div>
+                        <div *ngIf="signupForm.controls.email.errors.pattern && signupForm.controls.email.touched" class="text-danger">Please enter valid email address.</div>
+                </div>
+            </div>
+            <div class="form_row">
+                <div class="field_form">
+                    <div class="field_in">
+                        <label>Password<span class="required-asterisk">*</span></label>
+                        <div class="text_field pass_show">
+                            <input  autocomplete="new-password" type="password" formControlName="password" maxlength="20" tabindex="4"
+                                placeholder="Enter Password">
+                        </div>
+                        <div *ngIf="(signupForm.controls.password.errors)" class="focus-input100 login-error">
+                            <div
+                                *ngIf="signupForm.controls.password.errors.required && signupForm.controls.password.touched"
+                                class="text-danger">Please enter your password.</div>
+                                <div *ngIf="signupForm.controls.password.errors.pattern && signupForm.controls.password.touched" class="text-danger">Your password must
+                                be 8 characters long, should contain at least 1 uppercase, 1 lowercase, 1 numeric or special
+                                character.</div>
+                        </div>
+                    </div>
+                    <div class="field_in last">
+                        <label>Confirm Password<span class="required-asterisk">*</span></label>
+                        <div class="text_field pass_show">
+                            <input type="password" formControlName="confirm_password" maxlength="20" tabindex="5"
+                                placeholder="Enter Confirm Password">
+                        </div>
+                        <div *ngIf="(signupForm.controls.confirm_password.errors)" class="focus-input100 login-error">
+                            <div
+                                *ngIf="signupForm.controls.confirm_password.errors.required && signupForm.controls.confirm_password.touched"
+                                class="text-danger">Please enter your confirm password.</div>
+                                <div *ngIf="signupForm.controls.confirm_password.errors.mustMatch" class="text-danger">Confirm password doesn't match.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field_form">
+                    <label>Select Gender<span class="required-asterisk">*</span></label>
+                    <div class="select_gender">
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);"  (click)="clickGender($event,'M')" [ngClass]="is_gender && is_type == 'M' ? 'active_gender' : ''">
+                                    <div class="gender_type">
+                                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/male.svg" alt="male Icon">
+                                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/male-active.svg"
+                                            alt="male Icon">
+                                    </div>
+                                    <span>Male</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"   (click)="clickGender($event,'F')"  [ngClass]="is_gender && is_type == 'F' ? 'active_gender' : ''" >
+                                    <div class="gender_type">
+                                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/female.svg" alt="Female Icon">
+                                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/female-active.svg"
+                                            alt="Female Icon">
+                                    </div>
+                                    <span>Female</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"  (click)="clickGender($event,'N')"  [ngClass]="is_gender && is_type == 'N' ? 'active_gender' : ''">
+                                    <div class="gender_type">
+                                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/non-binary.svg"
+                                            alt="Non Binary Icon">
+                                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/non-binary-active.svg"
+                                            alt="Non Binary Icon">
+                                    </div>
+                                    <span>Non-Binary</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="(signupForm.controls.gender.errors)" class="focus-input100 login-error">
+                        <div
+                            *ngIf="signupForm.controls.gender.errors.required && !is_gender"
+                            class="text-danger">Please select gender.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_row last">
+                <div class="check">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" formControlName="term_condition" class="custom-control-input" id="accept-condition" 
+                            tabindex="6">
+                        <label class="custom-control-label" for="accept-condition"></label>
+                        <span>Accept <a href="javascript:void(0);">Terms & Conditions</a> | <a
+                                href="javascript:void(0);">Privacy Policy</a></span>
+                    </div>
+                    <div *ngIf="(submitted && signupForm.controls.term_condition.errors)" class="focus-input100 login-error">
+                        <div
+                            *ngIf="signupForm.controls.term_condition.errors.required"
+                            class="text-danger">Please select term condition.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_btn">
+                <button type="submit" (click)="onSubmit()">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal_btm">
+        <p>Don’t have an account? <a href="javascript:void(0);" id="open_sign_in_modal" (btnValueChange)="openSignInUi({value: true})" (click)="openSignInPage()">Sign
+                In</a></p>
     </div>
 </div>

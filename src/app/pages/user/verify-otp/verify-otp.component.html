@@ -1,0 +1,31 @@
+<div class="modal fade comman_modal" id="sign_in_modal" data-backdrop="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="sign_in_modal">
+      <div class="modal-content model-animated">
+        <div class="modal_top">
+          <div class="modal_logo">
+            <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+          </div>
+        </div>
+        <div class="modal_cnt">
+          <div class="modal_message">
+            <h4>Forgot password?</h4>
+            <p>Enter the email address you used to register on laytrip. We’ll send you a link to reset your password.
+            </p>
+          </div>
+          <form [formGroup]="forgotForm">
+            <div class="form_row">
+              <label>Email</label>
+              <div class="text_field">
+                <input type="email" name="email" maxlength="20" tabindex="1" placeholder="Enter Your Email">
+              </div>
+            </div>
+            <div class="form_btn">
+              <button>Reset Password</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
