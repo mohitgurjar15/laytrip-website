@@ -9,28 +9,49 @@ import { FlightService } from '../../services/flight.service';
 })
 export class SearchAirportComponent implements OnInit {
 
-  @Input() label:string;
-  @Input() placeHolder:string;
-  @Input() defaultSelected:string;
+  @Input() label: string;
+  @Input() placeHolder: string;
+  @Input() defaultSelected: string;
   constructor(
-    private flightService:FlightService
+    private flightService: FlightService
   ) { }
-  
+
   historyHeading: string = 'Recently selected';
-  selectedAirport:any={};
+  selectedAirport = [];
   keyword = 'name';
-  data=[];
-  loading:boolean=false;
+  data = [];
+  loading: boolean = false;
+  ngPlaceholder = 'Hello';
+
+  cities = [
+    {
+      id: 1,
+      name: 'abc',
+      avatar: '//www.gravatar.com/avatar/b0d8c6e5ea589e6fc3d3e08afb1873bb?d=retro&r=g&s=30 2x'
+    },
+    { id: 2, name: 'aaa', avatar: '//www.gravatar.com/avatar/ddac2aa63ce82315b513be9dc93336e5?d=retro&r=g&s=15' },
+    {
+      id: 3,
+      name: 'pqr',
+      avatar: '//www.gravatar.com/avatar/6acb7abf486516ab7fb0a6efa372042b?d=retro&r=g&s=15'
+    },
+    {
+      id: 4,
+      name: 'xyz',
+      avatar: '//www.gravatar.com/avatar/b0d8c6e5ea589e6fc3d3e08afb1873bb?d=retro&r=g&s=30 2x'
+    },
+  ];
+  selectedCity = this.cities[1];
 
   ngOnInit() {
   }
 
-  searchAirport(searchItem){
-    this.loading=true;
-    this.flightService.searchAirport(searchItem).subscribe((response:any)=>{
+  searchAirport(searchItem) {
+    this.loading = true;
+    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       console.log(response);
-      this.data = response.map(res=>{
-        this.loading=false;
+      this.data = response.map(res => {
+        this.loading = false;
         return {
           id: res.id,
           name: res.name,
@@ -42,22 +63,26 @@ export class SearchAirportComponent implements OnInit {
       });
 
     },
-    error=>{
-      this.loading=false;
-    }
+      error => {
+        this.loading = false;
+      }
     )
   }
 
-  onChangeSearch(event){
-    console.log("",event)
-    if(event.term.length>2)
+  onChangeSearch(event) {
+    console.log("", event)
+    if (event.term.length > 2)
       this.searchAirport(event.term)
   }
 
-  selectEvent(event){
-    console.log(event)
-    this.defaultSelected="";
-    this.selectedAirport=event;
+  selectEvent(event) {
+    console.log(event);
+    this.ngPlaceholder = '';
+    if (!event) {
+      this.ngPlaceholder = 'Hello';
+    }
+    this.defaultSelected = "";
+    this.selectedAirport = event;
   }
 
 }
