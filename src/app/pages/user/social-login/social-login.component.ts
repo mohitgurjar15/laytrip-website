@@ -3,19 +3,24 @@ import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+declare var $: any;
 
 @Component({
   selector: 'app-social-login',
   templateUrl: './social-login.component.html',
   styleUrls: ['./social-login.component.scss']
 })
+
 export class SocialLoginComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
 
+
   constructor(
     private userService: UserService,
-    public router: Router
+    public router: Router,
+    public modalService: NgbModal
   ) { }
 
   @ViewChild('loginRef') loginElement: ElementRef;
@@ -27,7 +32,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   loadGoogleSdk() {
-
+console.log('here')
     window['googleSDKLoaded'] = () => {
       window['gapi'].load('auth2', () => {
         this.auth2 = window['gapi'].auth2.init({
@@ -48,6 +53,7 @@ export class SocialLoginComponent implements OnInit {
     }(document, 'script', 'google-jssdk'));
 
   }
+
 
   prepareLoginButton() {
 
@@ -76,7 +82,9 @@ export class SocialLoginComponent implements OnInit {
         this.userService.googleSocialLogin(json_data).subscribe((data: any) => {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
-            this.router.navigate(['/']);
+            $('.comman_modal').hide();
+           
+             // this.router.navigate(['/']);            
           }
         }, (error: HttpErrorResponse) => {
           console.log(error)

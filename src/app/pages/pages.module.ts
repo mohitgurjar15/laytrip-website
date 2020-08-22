@@ -12,6 +12,8 @@ import { SocialLoginComponent } from './user/social-login/social-login.component
 import { SignupComponent } from './user/signup/signup.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { AuthComponent } from './user/auth/auth.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
 
 @NgModule({
   declarations: [ 
@@ -22,16 +24,19 @@ import { AuthComponent } from './user/auth/auth.component';
     SocialLoginComponent,
     SignupComponent, 
     ForgotPasswordComponent,
-    AuthComponent
+    VerifyOtpComponent,
+    AuthComponent   
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     NgbModule,
     TranslateModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  entryComponents:[SignupComponent,SigninComponent]
+  entryComponents:[SignupComponent,SigninComponent,VerifyOtpComponent]
 
 })
 export class PagesModule { }

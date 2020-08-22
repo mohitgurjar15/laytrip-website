@@ -1,0 +1,72 @@
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { environment } from '../../../../environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss'],
+})
+export class SigninComponent  implements OnInit {
+
+  s3BucketUrl = environment.s3BucketUrl;
+  signUpModal = false;
+  loginForm: FormGroup;
+  submitted = false;
+
+
+  @Input() pageData;
+  @Output() valueChange = new EventEmitter();
+  
+  constructor(
+    public modalService: NgbModal,
+    private formBuilder: FormBuilder,
+    private userService : UserService,
+    public router: Router
+    ) {
+  }
+
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      password: ['', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]]
+    });
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {    
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      this.submitted = false;
+      return;
+    } else {
+
+      this.userService.signin(this.loginForm.value).subscribe((data: any) => {
+        console.log(data)
+        this.submitted = false;
+        this.router.navigate(['/admin']);      
+      }, (error: HttpErrorResponse) => {       
+        console.log(error);
+        this.submitted = false;
+      });
+    }
+  }
+
+  openPage(event) {
+    if (event && event.value === 'forgotPassword') {
+      this.pageData = true;
+      this.valueChange.emit({ key: 'forgotPassword', value: this.pageData });
+    } else if (event && event.value === 'signUp') {
+      this.pageData = true;
+      this.valueChange.emit({ key: 'signUp', value: this.pageData });
+    }
+  }
+
+  
+
+}

@@ -4,6 +4,8 @@ import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
 import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SigninComponent } from 'laytrip/src/app/pages/user/signin/signin.component';
 
 @Component({
   selector: 'app-main-header',
@@ -25,7 +27,8 @@ export class MainHeaderComponent implements OnInit {
     s3BucketUrl = environment.s3BucketUrl;
     constructor(
       private genericService:GenericService,
-      public translate: TranslateService
+      public translate: TranslateService,
+      public modalService: NgbModal
     ) { 
         let _langunage = localStorage.getItem('_lang');
         let _currency = localStorage.getItem('_curr');
@@ -64,10 +67,12 @@ export class MainHeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.checkUser();
       this.getLangunages();
-      this.getCurrencies();
-      
+      this.getCurrencies();      
+    }
+    
+    ngDoCheck() {
+      this.checkUser();
     }
 
     /**
@@ -142,7 +147,13 @@ export class MainHeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-      localStorage.removeItem('user_lay_sessToken');
+      this.isLoggedIn = false;
+      localStorage.removeItem('_lay_sess');
+    }
+
+    openSignIn(){
+      const modalRef = this.modalService.open(SigninComponent);
+      modalRef.componentInstance.name = 'Mohit';
     }
     
 }

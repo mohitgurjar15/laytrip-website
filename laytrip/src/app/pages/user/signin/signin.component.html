@@ -1,0 +1,77 @@
+<div class="" id="sign_in_modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="sign_in_modal" id="log_in_modal">
+
+            <div class="modal-content">
+                <div class="modal_top">
+                    <div class="modal_title">
+                        <h4>Log In</h4>
+                        <p>Please Sign In to continue</p>
+                    </div>
+                    <div class="modal_logo">
+                        <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+                    </div>
+                </div>
+                <div class="modal_cnt">
+                    <form [formGroup]="loginForm" novalidate>
+                        <div class="form_row">
+                            <label>Email<span class="required-asterisk">*</span></label>
+                            <div class="text_field">
+                                <input type="email" formControlName="email" maxlength="30" tabindex="1" placeholder="Enter Email">
+                            </div>
+                            <div *ngIf="(loginForm.controls.email.errors)" class="focus-input100 login-error">
+                                <div
+                                  *ngIf="loginForm.controls.email.errors.required && loginForm.controls.email.touched"
+                                  class="text-danger">Please enter your email address.</div>
+                                  <div *ngIf="loginForm.controls.email.errors.pattern && loginForm.controls.email.touched" class="text-danger">Please enter valid
+                                    email
+                                    address.</div>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <label>Password</label>
+                            <div class="text_field pass_show">
+                                <input type="password" formControlName="password" maxlength="30" tabindex="2"
+                                    placeholder="Enter Password">
+                            </div>
+                            <div *ngIf="(loginForm.controls.password.errors)" class="focus-input100 login-error">
+                                <div
+                                  *ngIf="loginForm.controls.password.errors.required && loginForm.controls.password.touched"
+                                  class="text-danger">Please enter your password address.</div>
+                                    <div *ngIf="loginForm.controls.password.errors.minlength && loginForm.controls.password.touched"  class="text-danger">Password must be at least 8 characters</div>
+                                    <div *ngIf="loginForm.controls.password.errors.pattern && loginForm.controls.password.touched" class="text-danger">Your password must
+                                        be 8 characters long, should contain at least 1 uppercase, 1 lowercase, 1 numeric or special
+                                        character.</div>
+                                  
+                            </div>
+                        </div>
+                        <div class="form_row last">
+                            <div class="check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="Remember-me" name="example1"
+                                        tabindex="3">
+                                    <label class="custom-control-label" for="Remember-me"><span>Remember
+                                            me</span></label>
+                                </div>
+                            </div>
+                            <div class="forgot_pass">
+                                <a href="javascript:void(0);" id="open_forgot_modal"
+                                    (click)="openPage({value: 'forgotPassword'})">Forgot Password?</a>
+                            </div>
+                        </div>
+                        <div class="form_btn">
+                            <button type="submit" (click)="onSubmit(loginForm.value, loginForm.valid)">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal_btm">
+                    <span>Or login via</span>
+                    <app-social-login></app-social-login>
+                    <p>Dont't have an account? <a href="javascript:void(0);" id="open_sign_up_modal"
+                            (click)="openPage({value: 'signUp'})">Sign
+                            Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
