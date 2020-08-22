@@ -28,43 +28,25 @@ export class HomeComponent implements OnInit {
     this.loadJquery();
   } 
 
-
+  
 
   loadJquery(){
 
-      /* $('#two-inputs').dateRangePicker({
-      separator: ' to ',
-      singlemonth: false,
-      time: {
-          enabled: false
-      },
-      format: "ddd, MMM D YYYY",
+    $('#oneway_date_picker').dateRangePicker({
       autoClose: true,
-      language: 'en',
-      autoUpdateInput: true,
-      startDate: "08/03/2020",
-      getValue: function() {
-          if ($('#from_date').val() && $('#to_date').val())
-              return $('#from_date').val() + ' to ' + $('#to_date').val();
-          else
-              return '';
-      },
-      setValue: function(s, s1, s2) {
-          if (s1 == s2) {
-              s2 = this.addDate(s1);
-          }
-          $('#from_date').val(s1);
-          $('#to_date').val(s2);
-      },
-      showTopbar: true,
-      customOpenAnimation: function(cb) {
-          $(this).fadeIn(0, cb);
-      },
-      customCloseAnimation: function(cb) {
-          $(this).fadeOut(0, cb);
-      },
-      extraClass: 'marg_top'
-    }); */
+      singleDate : true,
+      showShortcuts: false,
+      singleMonth: true,
+      format: "DD MMM'YY dddd",
+      extraClass:'laytrip-datepicker'
+    });
+
+    $('#oneway_date_picker_icon').click(function(evt){
+      evt.stopPropagation();
+      $('#oneway_date_picker').data('dateRangePicker').open();
+    });
+    
+    
     
     $(".featured_slid").slick({
         dots: false,
@@ -82,7 +64,7 @@ export class HomeComponent implements OnInit {
         (response:ModuleModel)=>{
           
           response.data.forEach(module=>{
-            this.moduleList[module.name] = module; 
+            this.moduleList[module.name] = module.status; 
           })
           console.log(this.moduleList)
         },
