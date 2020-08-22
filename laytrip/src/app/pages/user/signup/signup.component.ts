@@ -30,7 +30,7 @@ export class SignupComponent  implements OnInit, OnDestroy {
   openSignInPage() {
     this.pageData = true;
     this.valueChange.emit({ key: 'signIn', value: this.pageData });
-  }
+  } 
 
   ngOnDestroy() {
     
