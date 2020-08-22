@@ -1,37 +1,38 @@
 @import "./../../../cstm-variable";
 
-.flight_form{
+.flight_form {
     position: relative;
 }
-.laytrip-input{
+.laytrip-input {
     width: 100%;
     border: none;
     height: 35px;
     margin-bottom: 5px;
     font-size: 20px;
-    color: #012178;
+    color: #8188ab;
     font-weight: 600;
 }
 
-.item-list{
-    margin:0;
-    padding:0;
+.item-list {
+    margin: 0;
+    padding: 0;
     list-style: none;
 
-    .item{
+    .item {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding:8px 5px;
+        padding: 5px 12px 0px 0px;
         border-bottom: 1px solid $box-border-color;
+        margin-left: 15px;
 
-        .item-left{
-            width:75%;
+        .item-left {
+            width: 75%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            p{
+            p {
                 font-size: 14px;
                 margin: 0;
                 color: $text-black;
@@ -39,17 +40,21 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                &:last-child{
+                &:last-child {
                     font-size: 10px;
                     color: $text-grey;
                     margin: 2px 0 0;
                 }
             }
+            .item-name {
+                font-size: 20px;
+                font-weight: 600;
+                color: #012178;
+            }
         }
 
-        .item-right{
-            p{
-
+        .item-right {
+            p {
                 width: 35px;
                 font-size: 14px;
                 color: $text-black;
@@ -57,13 +62,6 @@
                 text-align: center;
                 margin: 0;
             }
-
         }
-
     }
 }
-
-
-// .ng-select .ng-clear-wrapper {
-//     display: none;
-// }

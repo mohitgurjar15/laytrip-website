@@ -1,12 +1,12 @@
-<!-- <ng-select [loading]="loading" [selectOnTab]="true" [items]="data" [(ngModel)]="selectedAirport"
-    bindLabel="display_name" bindValue="display_name" (search)="onChangeSearch($event)" class="laytrip-input"
-    notFoundText="" minTermLength="3" (change)="selectEvent($event)" loadingText="">
+<ng-select [loading]="loading" [selectOnTab]="true" [items]="data" bindLabel="city" bindValue="display_name"
+    [clearable]="true" minTermLength="3" notFoundText="" (search)="onChangeSearch($event)" loadingText=""
+    (change)="selectEvent($event)" placeholder="" class="laytrip-input" placeholder="{{ placeHolder }}">
     <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
         <ul class="item-list">
             <li class="item">
                 <div class="item-left">
-                    <p>{{item.name}}</p>
-                    <p>{{item.city}},{{item.country}}</p>
+                    <p class="item-name">{{item.name}}</p>
+                    <p class="item-city-country">{{item.city}},{{item.country}}</p>
                 </div>
 
                 <div class="item-right">
@@ -16,26 +16,7 @@
         </ul>
     </ng-template>
 </ng-select>
-<span *ngIf="defaultSelected">{{ defaultSelected }}</span>
-<span *ngIf="selectedAirport">{{ selectedAirport.city}},{{selectedAirport.country}}</span> -->
-
-<ng-select [loading]="loading" [selectOnTab]="true" [items]="data" bindLabel="display_name"
-    bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText="" (search)="onChangeSearch($event)" loadingText=""
-    (change)="selectEvent($event)" placeholder="" class="laytrip-input" placeholder="{{ ngPlaceholder }}">
-    <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
-        <ul class="item-list">
-            <li class="item">
-                <div class="item-left">
-                    <p>{{item.name}}</p>
-                    <p>{{item.city}},{{item.country}}</p>
-                </div>
-
-                <div class="item-right">
-                    <p>{{item.code}}</p>
-                </div>
-            </li>
-        </ul>
-    </ng-template>
-</ng-select>
-<span *ngIf="defaultSelected">{{ defaultSelected }}</span>
-<span *ngIf="selectedAirport">{{ selectedAirport.city}},{{selectedAirport.country}}</span>
+<span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
+<ng-template #selectedAirport>
+    <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
+</ng-template>
