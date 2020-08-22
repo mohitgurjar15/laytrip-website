@@ -68,9 +68,9 @@ export class MainHeaderComponent implements OnInit {
 
     ngOnInit(): void {
       this.getLangunages();
-      this.getCurrencies();
-      
+      this.getCurrencies();      
     }
+    
     ngDoCheck() {
       this.checkUser();
     }
@@ -147,12 +147,11 @@ export class MainHeaderComponent implements OnInit {
     }
 
     onLoggedout() {
+      this.isLoggedIn = false;
       localStorage.removeItem('_lay_sess');
-      window.location.href = '';
     }
 
     openSignIn(){
-      console.log('open sigin')
       const modalRef = this.modalService.open(SigninComponent);
       modalRef.componentInstance.name = 'Mohit';
     }

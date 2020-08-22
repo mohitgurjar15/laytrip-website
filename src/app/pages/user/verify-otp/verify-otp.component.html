@@ -6,19 +6,24 @@
   </div>
   <div class="modal_cnt">
     <div class="modal_message">
-      <h4>Verify Otp</h4>
-      <p>Enter the email address you used to register on laytrip. We’ll send you a link to reset your password.
+      <h4>ENTER OTP</h4>
+      <p>We’ve sent a verification code to faisalkhan.chat@gmail.com. Enter it below to confirm your email address.
       </p>
     </div>
-    <form [formGroup]="forgotForm">
+    <form [formGroup]="otpForm">
       <div class="form_row">
         <label>Email</label>
         <div class="text_field">
-          <input type="email" name="email" maxlength="20" tabindex="1" placeholder="Enter Your Email">
+          <input type="text" formControlName="otp" maxlength="6" tabindex="1" placeholder="Enter one time password"  (keypress)="validateNumber($event)">
         </div>
+        <div *ngIf="(submitted || otpForm.controls.otp.touched) && otpForm.controls.otp.errors" class="focus-input100 login-error">
+          <div
+              *ngIf="otpForm.controls.otp.errors.required"
+              class="text-danger">Please enter otp.</div>
+      </div>
       </div>
       <div class="form_btn">
-        <button>Reset Password</button>
+        <button type="submit" (click)="onSubmit()">Verify Otp</button>
       </div>
     </form>
   </div>

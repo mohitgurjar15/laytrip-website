@@ -74,4 +74,27 @@ export class UserService {
       );
   }
 
+  verifyOtp(formValue) {
+    let data = {
+      "email":formValue.email,
+      "otp":formValue.otp,
+     }; 
+    return this.http.post(this.apiURL + 'v1/auth/verify-otp', data)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+    );
+  }
+
+  forgotPassword(formValue) {
+    let data = {
+      "email":formValue.email,
+     }; 
+    return this.http.post(this.apiURL + 'v1/auth/forget-password', data)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+    );
+  }
+
 }

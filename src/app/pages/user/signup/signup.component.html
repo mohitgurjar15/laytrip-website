@@ -138,12 +138,13 @@
                 </div>
             </div>
             <div class="form_btn">
-                <button type="submit" (click)="onSubmit()">Sign Up</button>
+                <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
+                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Sign Up                    
+                </button>
             </div>
         </form>
     </div>
     <div class="modal_btm">
-        <p>Don’t have an account? <a href="javascript:void(0);" id="open_sign_in_modal" (btnValueChange)="openSignInUi({value: true})" (click)="openSignInPage()">Sign
-                In</a></p>
+        <p>Don’t have an account? <a href="javascript:void(0);" id="open_sign_in_modal" (btnValueChange)="openSignInUi({value: true})" (click)="openSignInPage()">Sign In</a></p>
     </div>
 </div>

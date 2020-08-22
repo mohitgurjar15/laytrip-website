@@ -20,7 +20,7 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
   signUpModal = false;
   loginForm: FormGroup;
   submitted = false;
-
+  public loading: boolean = false;
 
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
@@ -44,22 +44,27 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
   get f() { return this.loginForm.controls; }
 
   onSubmit() {    
+
     this.submitted = true;
+    this.loading = true;
     if (this.loginForm.invalid) {
-      this.submitted = false;
+      this.submitted = true;
+      this.loading = false;
       return;
     } else {
-
+      
       this.userService.signin(this.loginForm.value).subscribe((data: any) => {
         if(data.token){
-          console.log(data.token)
-          this.submitted = false;
           localStorage.setItem("_lay_sess", data.token);
+          $('#sign_in_modal').modal('hide');
+          this.loading = false;
+          this.submitted = false;
           this.router.navigate(['/']);      
         }
       }, (error: HttpErrorResponse) => {       
         console.log(error);
         this.submitted = false;
+        this.loading = false;
       });
     }
   }
@@ -73,11 +78,12 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
       this.valueChange.emit({ key: 'signUp', value: this.pageData });
     }
   }
+
   ngOnDestroy() {
       // this.pageData = true;
       // this.valueChange.emit({ key: 'signUp', value: this.pageData });
 
-      console.log('signinDestroy')    
+      // console.log('signinDestroy')    
 
       // $('#sign_in_modal').modal('hide');
       // this.signUpModal = true;

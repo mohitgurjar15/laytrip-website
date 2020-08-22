@@ -5,9 +5,8 @@ import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { MustMatch } from 'src/app/_helpers/must-match.validators';
-import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 declare var $: any;
 
@@ -23,6 +22,9 @@ export class SignupComponent extends ModalContainerBaseClassComponent implements
   signupForm: FormGroup;
   submitted = false;
   closeResult = '';
+  is_gender: boolean = false;
+  is_type: string = '';
+  email: string = '';
 
   constructor(
     public modalService: NgbModal,
@@ -37,7 +39,7 @@ export class SignupComponent extends ModalContainerBaseClassComponent implements
     this.signupForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       gender: ['', Validators.required],
@@ -46,8 +48,6 @@ export class SignupComponent extends ModalContainerBaseClassComponent implements
       validator: MustMatch('password', 'confirm_password')
     });
   }
-
-  
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -66,15 +66,10 @@ export class SignupComponent extends ModalContainerBaseClassComponent implements
 
   openOtpPage() {
     this.pageData = true;
-    this.valueChange.emit({ key: 'otpModal', value: this.pageData });
+    this.valueChange.emit({ key: 'otpModal', value: this.pageData,email:this.email });
   }
 
-  ngOnDestroy() {
-    
-  }
-
-  is_gender: boolean = false;
-  is_type: string = '';
+  ngOnDestroy() {}
   
   clickGender(event,type){
     this.is_type = '';
@@ -91,33 +86,31 @@ export class SignupComponent extends ModalContainerBaseClassComponent implements
       }
       this.is_gender = true;
   }
+  
+  ngAfterViewInit(){
+    this.email = 'mohit@gmail.com';//this.signupForm.value.email;
 
+  }
+  
   onSubmit() {
-    console.log('here')    
-   this.openOtpPage();
-
+    this.email = 'mohit@gmail.com';//this.signupForm.value.email;
+    this.openOtpPage();
     this.submitted = true;
     
     if(this.signupForm.controls.gender.errors && this.is_gender){
       this.signupForm.controls.gender.setValue(this.is_type);
     }
     if (this.signupForm.invalid) {
-      this.submitted = false;      
+      this.submitted = true;      
       return;
     } else {
-      $('#sign_in_modal').modal('hide');
-      const modalRef = this.modalService.open(VerifyOtpComponent);
-      modalRef.componentInstance.name = 'Mohit';
-  
-      /* this.userService.signup(this.signupForm.value).subscribe((data: any) => {
-        
-        console.log(data)
-        this.submitted = false;
-            
+      this.email = this.signupForm.value.email;
+      this.userService.signup(this.signupForm.value).subscribe((data: any) => {
+        this.submitted = false;    
       }, (error: HttpErrorResponse) => {       
         console.log(error);
         this.submitted = false;
-      }); */
+      });
     }
   }
 }
