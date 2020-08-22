@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-//import { FlightService } from 'src/app/services/flight.service';
+// import { FlightService } from 'src/app/services/flight.service';
 import { FlightService } from '../../services/flight.service';
 
 @Component({
@@ -9,27 +9,27 @@ import { FlightService } from '../../services/flight.service';
 })
 export class SearchAirportComponent implements OnInit {
 
-  @Input() label:string;
-  @Input() placeHolder:string;
-  @Input() defaultSelected:string;
+  @Input() label: string;
+  @Input() placeHolder: string;
+  @Input() defaultSelected: string;
   constructor(
-    private flightService:FlightService
+    private flightService: FlightService
   ) { }
-  
-  historyHeading: string = 'Recently selected';
-  selectedAirport:any={};
+
+  selectedAirport = [];
   keyword = 'name';
-  data=[];
-  loading:boolean=false;
+  data = [];
+  loading = false;
 
   ngOnInit() {
   }
 
-  searchAirport(searchItem){
-    this.loading=true;
-    this.flightService.searchAirport(searchItem).subscribe((response:any)=>{
-      this.data = response.map(res=>{
-        this.loading=false;
+  searchAirport(searchItem) {
+    this.loading = true;
+    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+      console.log(response);
+      this.data = response.map(res => {
+        this.loading = false;
         return {
           id: res.id,
           name: res.name,
@@ -37,25 +37,31 @@ export class SearchAirportComponent implements OnInit {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`
-        }
+        };
       });
 
     },
-    error=>{
-      this.loading=false;
+      error => {
+        this.loading = false;
+      }
+    );
+  }
+
+  onChangeSearch(event) {
+    console.log(event);
+    if (event.term.length > 2) {
+      this.searchAirport(event.term);
     }
-    )
   }
 
-  onChangeSearch(event){
-   
-    this.searchAirport(event.target.value)
-  }
-
-  selectEvent(event){
-    console.log(event)
-    this.defaultSelected="";
-    this.selectedAirport=event;
+  selectEvent(event) {
+    console.log(event);
+    if (!event) {
+      this.placeHolder = this.placeHolder;
+      this.defaultSelected = this.defaultSelected;
+    }
+    this.selectedAirport = event;
+    this.defaultSelected = '';
   }
 
 }

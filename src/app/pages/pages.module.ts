@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
 import { PagesComponent } from './pages.component';
@@ -29,7 +28,6 @@ import { AuthComponent } from './user/auth/auth.component';
     CommonModule,
     PagesRoutingModule,
     NgbModule,
-    AutocompleteLibModule,
     TranslateModule,
     ComponentsModule
   ],
