@@ -1,20 +1,20 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { SignupComponent } from '../signup/signup.component';
-import { ModalContainerBaseClassComponent } from 'src/app/components/modal-container-base-class/modal-container-base-class.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+
 declare var $: any;
 
-@Component({
+@Component({ 
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent extends ModalContainerBaseClassComponent implements OnInit {
+
+export class SigninComponent  implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   signUpModal = false;
@@ -31,8 +31,8 @@ export class SigninComponent extends ModalContainerBaseClassComponent implements
     private userService : UserService,
     public router: Router
     ) {
-    super(modalService);
-  }
+    // super(modalService);
+    }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({

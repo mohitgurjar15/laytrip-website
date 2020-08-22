@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
 import { PagesComponent } from './pages.component';
@@ -32,7 +31,6 @@ import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
     CommonModule,
     PagesRoutingModule,
     NgbModule,
-    AutocompleteLibModule,
     TranslateModule,
     ComponentsModule,
     ReactiveFormsModule,
