@@ -25,6 +25,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   is_gender: boolean = false;
   is_type: string = '';
   email: string = '';
+  loading: boolean = false;
+
 
   constructor(
     public modalService: NgbModal,

@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SigninComponent } from 'laytrip/src/app/pages/user/signin/signin.component';
+import { SigninComponent } from 'src/app/pages/user/signin/signin.component';
 
 @Component({
   selector: 'app-main-header',
