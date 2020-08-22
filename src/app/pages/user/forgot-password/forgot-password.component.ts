@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angu
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 declare var $: any;
 

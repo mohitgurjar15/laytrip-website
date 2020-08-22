@@ -2,9 +2,9 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../../../services/user.service';
 
 declare var $: any;
 
