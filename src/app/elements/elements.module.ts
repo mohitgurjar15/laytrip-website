@@ -4,8 +4,6 @@ import { SecondaryFooterComponent } from './secondary-footer/secondary-footer.co
 import { TranslateModule } from '@ngx-translate/core';
 import { PagesModule } from '../pages/pages.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SigninComponent } from '../pages/user/signin/signin.component';
-import { SocialLoginComponent } from '../pages/user/social-login/social-login.component';
 
 
 

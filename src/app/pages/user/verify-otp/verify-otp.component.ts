@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-verify-otp',

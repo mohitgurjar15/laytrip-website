@@ -3,8 +3,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { MustMatch } from 'src/app/_helpers/must-match.validators';
+import { UserService } from '../../../services/user.service';
+import { MustMatch } from '../../../_helpers/must-match.validators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 declare var $: any;
