@@ -13,7 +13,7 @@
       <app-forgot-password [pageData]="forgotPasswordModal" (valueChange)="pageChange($event)"></app-forgot-password>
     </div>
     <div class="forgot_password_modal" id="otp_modal" *ngIf="otpModal">
-      <app-verify-otp [pageData]="otpModal" (valueChange)="pageChange($event)"></app-verify-otp>
+      <app-verify-otp [emailForVerifyOtp]="emailForVerifyOtp" [pageData]="otpModal" (valueChange)="pageChange($event)"></app-verify-otp>
     </div>
   </div>
 </div>

@@ -18,20 +18,29 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   @Output() valueChange = new EventEmitter();
   forgotForm: FormGroup;
   submitted = false;
-  public loading: boolean = false;
+  forgotModal = false;
+  loading: boolean = false;
+  forgotPasswordSuccess : boolean = false;
+  apiError =  '';
 
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private userService : UserService
+    private userService : UserService  
+      ) { }
 
-    ) { }
 
   ngOnInit() {
     this.forgotForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
     });
   }
+
+  closeModal(){
+      this.valueChange.emit({ key: 'signIn', value: true });
+      $('#sign_in_modal').modal('hide');
+  }
+  
 
   openPage(event) {
     this.pageData = true;
@@ -40,7 +49,10 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
 
-
+  openSignInPage() {
+    this.pageData = true;
+    this.valueChange.emit({ key: 'signIn', value: this.pageData });
+  }
   onSubmit() {
    
     this.submitted = this.loading = true;
@@ -50,12 +62,14 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
       this.loading = false;      
       return;
     } else {
-      this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
+        this.loading = true;     
+        this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
         this.submitted = false;    
-        this.loading = false;      
-
+        this.forgotPasswordSuccess = true;  
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading  = false;
+        this.apiError = error.message;
+
       });
     }
   }

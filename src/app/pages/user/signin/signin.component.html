@@ -1,43 +1,43 @@
 
 <div class="modal-content model-animated" >
     <div class="modal_top">
-        <div class="modal_title">
-            <h4>Log In</h4>
-            <p>Please Sign In to continue</p>
-        </div>
         <div class="modal_logo">
             <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+            <button type="button" class="close"  (click)="closeModal()">
+                <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+            </button>
         </div>
     </div>
     <div class="modal_cnt">
+        <div class="modal_message">
+            <h4>Log In</h4>
+            <p>Please Sign In to continue</p>
+            <p style="color: red;">{{apiError}}</p>
+        </div>
         <form [formGroup]="loginForm" novalidate>
             <div class="form_row">
-                <label>Email<span class="required-asterisk">*</span></label>
+                <label>Email<app-asterisk-mark></app-asterisk-mark></label>
                 <div class="text_field">
-                    <input type="email" formControlName="email" maxlength="30" tabindex="1"
+                    <input type="email" formControlName="email" maxlength="50" tabindex="1"
                         placeholder="Enter Email">
                 </div>
-                <div *ngIf="(loginForm.controls.email.errors)" class="focus-input100 login-error">
-                    <div *ngIf="loginForm.controls.email.errors.required && loginForm.controls.email.touched"
+                <div  *ngIf="(submitted || loginForm.controls.email.touched) && loginForm.controls.email.errors" class="focus-input100 login-error">
+                    <div *ngIf="loginForm.controls.email.errors.required"
                         class="text-danger">Please enter your email address.</div>
-                    <div *ngIf="loginForm.controls.email.errors.pattern && loginForm.controls.email.touched"
+                    <div *ngIf="loginForm.controls.email.errors.pattern"
                         class="text-danger">Please enter valid email address.</div>
                 </div>
             </div>
             <div class="form_row">
-                <label>Password<span class="required-asterisk">*</span></label>
+                <label>Password<app-asterisk-mark></app-asterisk-mark></label>
                 <div class="text_field pass_show">
-                    <input autocomplete="new-password" type="password" formControlName="password"
+                    <input autocomplete="new-password" [type]="fieldTextType ? 'text' : 'password'" formControlName="password"
                         maxlength="30" tabindex="2" placeholder="Enter Password">
+                        <span class="ptxt"><i class="fa fa-eye-slash" aria-hidden="true"  (click)="toggleFieldTextType()"></i></span>
                 </div>
-                <div *ngIf="(loginForm.controls.password.errors)" class="focus-input100 login-error">
-                    <div *ngIf="loginForm.controls.password.errors.required && loginForm.controls.password.touched"
-                        class="text-danger">Please enter your password address.</div>
-                    <div *ngIf="loginForm.controls.password.errors.pattern && loginForm.controls.password.touched"
-                        class="text-danger">Your password must
-                        be contain at least 1 uppercase, 1 lowercase, 1 numeric or special
-                        character.</div>
-
+                <div *ngIf="(submitted || loginForm.controls.password.touched) && loginForm.controls.password.errors" class="focus-input100 login-error">
+                    <div *ngIf="loginForm.controls.password.errors.required"
+                        class="text-danger">Please enter your password.</div>                    
                 </div>
             </div>
             <div class="form_row last">
@@ -56,7 +56,7 @@
             </div>
             <div class="form_btn">          
                 <button type="submit" class="btn  btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
-                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Sign In                    
+                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>  Sign In                    
                 </button>
             </div>
         </form>
@@ -64,7 +64,7 @@
     <div class="modal_btm">
         <span>Or login via</span>
         <app-social-login></app-social-login>
-        <p>Dont't have an account? <a href="javascript:void(0);" id="open_sign_up_modal"
+        <p>Don't have an account? <a href="javascript:void(0);" id="open_sign_up_modal"
                 (click)="openPage({value: 'signUp'})">Sign
                 Up</a></p>
     </div>

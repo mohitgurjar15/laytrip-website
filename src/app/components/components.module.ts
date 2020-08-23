@@ -6,7 +6,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [ 
-    SearchAirportComponent, AsteriskMarkComponent
+    SearchAirportComponent
   ],
   imports: [
     CommonModule,

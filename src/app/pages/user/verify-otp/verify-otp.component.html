@@ -2,17 +2,25 @@
   <div class="modal_top">
     <div class="modal_logo">
       <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
+      <button type="button" class="close"  (click)="closeModal()">
+          <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+      </button>
     </div>
   </div>
   <div class="modal_cnt">
-    <div class="modal_message">
+    <div *ngIf="!otpVerified" class="modal_message">
       <h4>ENTER OTP</h4>
-      <p>We’ve sent a verification code to faisalkhan.chat@gmail.com. Enter it below to confirm your email address.
+      <p>We’ve sent a verification code to <strong>{{emailForVerifyOtp}}</strong> Enter it below to confirm your email address.
       </p>
     </div>
-    <form [formGroup]="otpForm">
+    <div *ngIf="otpVerified" class="modal_message">
+      <h4 style="color: green;">Your OTP is verified successfully.</h4>
+<!--       <p> Your OTP is verified successfully.</p> 
+ -->    </div>
+    <p style="color: red;">{{apiError}}</p>
+    <form [formGroup]="otpForm" *ngIf="!otpVerified">
       <div class="form_row">
-        <label>Email</label>
+        <label>OTP</label>
         <div class="text_field">
           <input type="text" formControlName="otp" maxlength="6" tabindex="1" placeholder="Enter one time password"  (keypress)="validateNumber($event)">
         </div>
@@ -23,8 +31,12 @@
       </div>
       </div>
       <div class="form_btn">
-        <button type="submit" (click)="onSubmit()">Verify Otp</button>
+        <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
+          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Verify Otp                    
+      </button>
       </div>
     </form>
+    <p *ngIf="otpVerified">Back to <a href="javascript:void(0);" class="open_sign_in_modal"  (click)="closeModal()">Home page</a></p>
+
   </div>
 </div>

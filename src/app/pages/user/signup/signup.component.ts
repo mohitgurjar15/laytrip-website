@@ -22,20 +22,20 @@ export class SignupComponent implements OnInit, OnDestroy {
   signupForm: FormGroup;
   submitted = false;
   closeResult = '';
-  is_gender: boolean = false;
-  is_type: string = '';
-  email: string = '';
+  is_gender: boolean = true;
+  is_type: string = 'M';
+  emailForVerifyOtp : string = '';
   loading: boolean = false;
+  fieldTextType :  boolean;
+  apiError =  '';
 
 
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router
-    ) {
-    // super(modalService);
-}
+    public router: Router,
+    ) {}
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -49,17 +49,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     },{
       validator: MustMatch('password', 'confirm_password')
     });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
+  }  
 
   openSignInPage() {
     this.pageData = true;
@@ -68,9 +58,18 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   openOtpPage() {
     this.pageData = true;
-    this.valueChange.emit({ key: 'otpModal', value: this.pageData,email:this.email });
+    this.valueChange.emit({ key: 'otpModal', value: this.pageData,emailForVerifyOtp:this.emailForVerifyOtp });
   }
 
+  closeModal(){
+    this.valueChange.emit({ key: 'signIn', value: true });
+    $('#sign_in_modal').modal('hide');
+  }
+
+  toggleFieldTextType(){
+    console.log(this.fieldTextType)
+    this.fieldTextType = !this.fieldTextType;
+  }
   ngOnDestroy() {}
   
   clickGender(event,type){
@@ -88,30 +87,30 @@ export class SignupComponent implements OnInit, OnDestroy {
       }
       this.is_gender = true;
   }
-  
-  ngAfterViewInit(){
-    this.email = 'mohit@gmail.com';//this.signupForm.value.email;
-
-  }
-  
-  onSubmit() {
-    this.email = 'mohit@gmail.com';//this.signupForm.value.email;
-    this.openOtpPage();
-    this.submitted = true;
     
+  onSubmit() {
+    this.emailForVerifyOtp = "nehagurjar484@gmail.com";
+    // this.openOtpPage();
+    this.submitted = true;
+    this.loading = true;
     if(this.signupForm.controls.gender.errors && this.is_gender){
       this.signupForm.controls.gender.setValue(this.is_type);
     }
     if (this.signupForm.invalid) {
       this.submitted = true;      
+      this.loading = false;
       return;
     } else {
-      this.email = this.signupForm.value.email;
+      
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
-        this.submitted = false;    
+        this.emailForVerifyOtp = this.signupForm.value.email;
+        this.submitted = this.loading = false; 
+        
+        this.openOtpPage();   
       }, (error: HttpErrorResponse) => {       
         console.log(error);
-        this.submitted = false;
+        this.apiError = error.message;
+        this.submitted = this.loading = false;
       });
     }
   }

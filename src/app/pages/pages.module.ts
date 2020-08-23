@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.
 import { AuthComponent } from './user/auth/auth.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
+import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark.component';
 
 @NgModule({
   declarations: [ 
@@ -25,7 +26,8 @@ import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
     SignupComponent, 
     ForgotPasswordComponent,
     VerifyOtpComponent,
-    AuthComponent   
+    AuthComponent,
+    AsteriskMarkComponent   
   ],
   imports: [
     CommonModule,
@@ -34,9 +36,11 @@ import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
     TranslateModule,
     ComponentsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    
+    
   ],
-  entryComponents:[SignupComponent,SigninComponent,VerifyOtpComponent]
+  entryComponents:[SignupComponent,SigninComponent,VerifyOtpComponent,AsteriskMarkComponent]
 
 })
 export class PagesModule { }

@@ -18,8 +18,11 @@ export class SigninComponent  implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   signUpModal = false;
+  signInModal = true;
   loginForm: FormGroup;
-  submitted = false;
+  submitted =  false;
+  fieldTextType :  boolean;
+  apiError :string =  '';
   public loading: boolean = false;
 
   @Input() pageData;
@@ -29,16 +32,20 @@ export class SigninComponent  implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router
-    ) {
-    // super(modalService);
-    }
+    public router: Router,
+    ) { }
+
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]]
+      password: ['', [Validators.required]]
     });
+  }  
+
+  closeModal(){        
+      this.valueChange.emit({ key: 'signIn', value: true });
+      $('#sign_in_modal').modal('hide');    
   }
 
   get f() { return this.loginForm.controls; }
@@ -52,7 +59,6 @@ export class SigninComponent  implements OnInit {
       this.loading = false;
       return;
     } else {
-      
       this.userService.signin(this.loginForm.value).subscribe((data: any) => {
         if(data.token){
           localStorage.setItem("_lay_sess", data.token);
@@ -65,6 +71,7 @@ export class SigninComponent  implements OnInit {
         console.log(error);
         this.submitted = false;
         this.loading = false;
+        this.apiError = error.message;
       });
     }
   }
@@ -80,15 +87,11 @@ export class SigninComponent  implements OnInit {
   }
 
   ngOnDestroy() {
-      // this.pageData = true;
-      // this.valueChange.emit({ key: 'signUp', value: this.pageData });
-
-      // console.log('signinDestroy')    
-
-      // $('#sign_in_modal').modal('hide');
-      // this.signUpModal = true;
+   
   }
   
-
+  toggleFieldTextType(){
+    this.fieldTextType = !this.fieldTextType;
+  }
 
 }

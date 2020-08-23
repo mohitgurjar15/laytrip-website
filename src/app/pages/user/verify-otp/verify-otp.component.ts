@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-verify-otp',
@@ -17,17 +19,29 @@ export class VerifyOtpComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
   otpForm: FormGroup;
   submitted = false;
+  otpVerified = false;
+  loading = false;
+  @Input() emailForVerifyOtp;
+  apiError :string =  '';
 
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private userService : UserService
+    private userService : UserService,
+    public router: Router
     ) { }
 
   ngOnInit() {
+    console.log(this.emailForVerifyOtp)
+
     this.otpForm = this.formBuilder.group({
       otp: ['', Validators.required],
     });
+  }
+
+  closeModal(){
+    this.valueChange.emit({ key: 'signIn', value: true });
+    $('#sign_in_modal').modal('hide');
   }
 
   validateNumber(e: any) {
@@ -38,21 +52,32 @@ export class VerifyOtpComponent implements OnInit {
       e.preventDefault();
     }
   }
+  
+  openSignInPage() {
+    this.pageData = true;
+    this.valueChange.emit({ key: 'signIn', value: this.pageData });
+  }
 
-  onSubmit() {
-   
-    this.submitted = true;
+  onSubmit() {   
+    this.submitted = this.loading = true;
     if (this.otpForm.invalid) {
-      this.submitted = true;      
+      this.submitted = true;     
+      this.loading = false; 
       return;
     } else {
-      console.log(this.otpForm.value)
-      this.userService.verifyOtp(this.otpForm.value).subscribe((data: any) => {
-        console.log(data)
-      this.submitted = false;      
+      let data = {
+        "email":this.emailForVerifyOtp,
+        "otp":this.otpForm.value.otp,
+       }; 
+      this.userService.verifyOtp(data).subscribe((data: any) => {
+      this.otpVerified = true;  
+      this.submitted = this.loading = false;    
+      localStorage.setItem("_lay_sess", data.userDetails.access_token);  
+      this.router.navigate(['/']);      
       }, (error: HttpErrorResponse) => {       
         console.log(error);
-        this.submitted = false;
+        this.apiError = error.message;
+        this.submitted = this.loading = false;        
       }); 
     }
   }

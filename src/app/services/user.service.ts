@@ -74,12 +74,9 @@ export class UserService {
       );
   }
 
-  verifyOtp(formValue) {
-    let data = {
-      "email":formValue.email,
-      "otp":formValue.otp,
-     }; 
-    return this.http.post(this.apiURL + 'v1/auth/verify-otp', data)
+  verifyOtp(data) {
+   
+    return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -90,7 +87,7 @@ export class UserService {
     let data = {
       "email":formValue.email,
      }; 
-    return this.http.post(this.apiURL + 'v1/auth/forget-password', data)
+    return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
       .pipe(
         retry(1),
         catchError(this.handleError)

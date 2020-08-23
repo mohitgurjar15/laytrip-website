@@ -14,6 +14,7 @@ export class AuthComponent implements OnInit {
   signUpModal = false;
   forgotPasswordModal = false;
   otpModal = false;
+  emailForVerifyOtp = '';
 
   constructor(public modalService: NgbModal) { }
 
@@ -39,10 +40,12 @@ export class AuthComponent implements OnInit {
       this.forgotPasswordModal = false;
       this.otpModal = false;
     } else if (event && event.key === 'otpModal' && event.value) {
+      console.log(event)
       this.otpModal = true;
       this.signInModal = false;
       this.signUpModal = false;
       this.forgotPasswordModal = false;
+      this.emailForVerifyOtp = event.emailForVerifyOtp;
     }
   }
 
