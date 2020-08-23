@@ -64,5 +64,5 @@ deploy_staging:
     - ssh -i $PRIVATE_KEY ubuntu@$SERVER_IP
     - rsync -zvhr -auv -e "ssh -i $PRIVATE_KEY" dist/ ubuntu@$SERVER_IP:/var/www/html/staging/dist/
     - npm install pm2 -g
-    - pm2 restart server
+    - pm2 restart /var/www/html/staging/dist/server
   only: ['staging']
