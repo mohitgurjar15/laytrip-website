@@ -7,17 +7,17 @@
                 <div class="banner_tab">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a *ngIf="moduleList.flight && moduleList.flight.status"  class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-selected="true">
+                            <a *ngIf="moduleList.flight"  class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-selected="true">
                                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg" alt="Flight Icon" />
                                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg" alt="Flight Icon" />
                                 <span>Flight</span>
                             </a>
-                            <a *ngIf="moduleList.hotel && moduleList.hotel.status" class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-selected="false">
+                            <a *ngIf="moduleList.hotel" class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-selected="false">
                                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg" alt="Hotel Icon" />
                                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg" alt="Hotel Icon" />
                                 <span>Hotel</span>
                             </a>
-                            <a *ngIf="moduleList.accommodation && moduleList.accommodation.status" class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-selected="false">
+                            <a *ngIf="moduleList.accommodation" class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-selected="false">
                                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/vacation-rental-icon.svg" alt="Accommodation Icon" />
                                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/vacation-rental-icon-active.svg" alt="Accommodation Icon" />
                                 <span>Accommodation</span>
@@ -25,7 +25,7 @@
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div *ngIf="moduleList.flight && moduleList.flight.status"  class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="nav-flight">
+                        <div  class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="nav-flight">
                             <div class="flight_tab">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
@@ -80,16 +80,16 @@
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="grid_box secound">
+                                                    <li class="grid_box secound" >
                                                         <div class="date_form">
                                                             <label>Departure</label>
                                                             <div class="search_area">
-                                                                <input type="text" name="date_checkin" maxlength="10" tabindex="3" placeholder="22 Jul’20 Friday" />
+                                                                <input type="text" name="date_checkin"  tabindex="3" placeholder="22 Jul’20 Friday" id="oneway_date_picker"/>
                                                                 <div class="prev-next">
                                                                     <a href="javascript:void(0);">Prev</a>
                                                                     <a href="javascript:void(0);">Next</a>
                                                                 </div>
-                                                                <div class="date_icon">
+                                                                <div class="date_icon" id="oneway_date_picker_icon">
                                                                     <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
                                                                 </div>
                                                             </div>
@@ -137,10 +137,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="moduleList.hotel && moduleList.hotel.status" class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
+                        <div *ngIf="moduleList.hotel" class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
                             <h2>Hotel</h2>
                         </div>
-                        <div *ngIf="moduleList.accommodation && moduleList.accommodation.status" class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
+                        <div *ngIf="moduleList.accommodation" class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
                             <h2>Accommodation</h2>
                         </div>
                     </div>
