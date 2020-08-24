@@ -15,6 +15,7 @@ declare var $: any;
 
 export class SocialLoginComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
+  apiError :string =  '';
 
 
   constructor(
@@ -32,7 +33,6 @@ export class SocialLoginComponent implements OnInit {
   }
 
   loadGoogleSdk() {
-console.log('here')
     window['googleSDKLoaded'] = () => {
       window['gapi'].load('auth2', () => {
         this.auth2 = window['gapi'].auth2.init({
@@ -40,7 +40,7 @@ console.log('here')
           cookiepolicy: 'single_host_origin',
           scope: 'profile email'
         });
-        this.prepareLoginButton();
+        this.googleLogin();
       });
     }
 
@@ -55,18 +55,13 @@ console.log('here')
   }
 
 
-  prepareLoginButton() {
+  googleLogin() {
 
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
 
         let profile = googleUser.getBasicProfile();
-        console.log('Token || ' + googleUser.getAuthResponse().id_token);
-        console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
-        console.log('Email: ' + profile);
+        
         //YOUR CODE HERE
         let json_data = {
           "account_type": 1,
@@ -79,21 +74,18 @@ console.log('here')
           "app_version": "1.0",
           "os_version": "7.0"
         };
-        this.userService.googleSocialLogin(json_data).subscribe((data: any) => {
+        this.userService.socialLogin(json_data).subscribe((data: any) => {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
-            $('.comman_modal').hide();
-           
-             // this.router.navigate(['/']);            
+            $('#sign_in_modal').modal('hide');
+            this.router.navigate(['/']);      
           }
         }, (error: HttpErrorResponse) => {
           console.log(error)
         });
-
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
       });
-
   }
 
   loadFacebookSdk() {
@@ -118,8 +110,7 @@ console.log('here')
 
   }
 
-  login() {
-    console.log('hello')
+  fbLogin() {
     window['FB'].login((response) => {
       console.log('login response', response);
       if (response.authResponse) {
@@ -128,8 +119,6 @@ console.log('here')
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
 
-          console.log("user information");
-          console.log(userInfo);
           let json_data = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
@@ -141,7 +130,7 @@ console.log('here')
             "app_version": "1.0",
             "os_version": "7.0"
           };
-          this.userService.googleSocialLogin(json_data).subscribe((data: any) => {
+          this.userService.socialLogin(json_data).subscribe((data: any) => {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               this.router.navigate(['/']);
@@ -151,16 +140,12 @@ console.log('here')
           });
 
         }, (error) => {
-          alert(JSON.stringify(error, undefined, 2));
+          console.log(JSON.stringify(error, undefined, 2));
         });
-
-
       } else {
+        this.apiError = 'User login failed';
         console.log('User login failed');
       }
     }, { scope: 'email' });
   }
-
-
-
 }

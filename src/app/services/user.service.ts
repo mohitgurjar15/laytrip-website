@@ -19,10 +19,9 @@ export class UserService {
   }
 
   handleError(error) {
-    console.log("====", error);
     let errorMessage = {};
     if (error.status == 0) {
-      console.log("API Server is not responding")
+      errorMessage = { message: "API Server is not responding"};
     }
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -35,7 +34,7 @@ export class UserService {
   }
 
 
-  googleSocialLogin(data) {
+  socialLogin(data) {
     return this.http.post(this.apiURL + 'v1/auth/social-login', data)
       .pipe(
         retry(1),
@@ -74,9 +73,16 @@ export class UserService {
       );
   }
 
-  verifyOtp(data) {
-   
+  verifyOtp(data) {   
     return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+    );
+  }
+  resendOtp(email) { 
+    let data = {"email":email};  
+    return this.http.patch(this.apiURL + 'v1/auth/resend-otp', data)
       .pipe(
         retry(1),
         catchError(this.handleError)

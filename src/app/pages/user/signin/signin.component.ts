@@ -37,6 +37,7 @@ export class SigninComponent  implements OnInit {
 
 
   ngOnInit() {
+    console.log(this)
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required]]
@@ -44,8 +45,8 @@ export class SigninComponent  implements OnInit {
   }  
 
   closeModal(){        
-      this.valueChange.emit({ key: 'signIn', value: true });
-      $('#sign_in_modal').modal('hide');    
+    this.valueChange.emit({ key: 'signIn', value: true });
+    $('#sign_in_modal').modal('hide');    
   }
 
   get f() { return this.loginForm.controls; }
@@ -63,15 +64,23 @@ export class SigninComponent  implements OnInit {
         if(data.token){
           localStorage.setItem("_lay_sess", data.token);
           $('#sign_in_modal').modal('hide');
-          this.loading = false;
-          this.submitted = false;
+          this.loading = this.submitted = false;
           this.router.navigate(['/']);      
         }
       }, (error: HttpErrorResponse) => {       
-        console.log(error);
-        this.submitted = false;
-        this.loading = false;
-        this.apiError = error.message;
+
+        //resend the otp 
+        if(error.status == 406){
+            this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
+            this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
+          }, (error: HttpErrorResponse) => {       
+            this.submitted = this.loading = false;
+            this.apiError = error.message;
+          });
+        } else {
+          this.submitted = this.loading = false;
+          this.apiError = error.message;
+        }
       });
     }
   }

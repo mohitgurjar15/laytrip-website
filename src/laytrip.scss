@@ -39,3 +39,7 @@ from,
     transform: translate3d(0, 0, 0);
     }
 }
+
+input.ng-invalid.ng-touched {
+	border: 1px solid #f4516c !important;
+}
