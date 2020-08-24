@@ -89,7 +89,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
     
   onSubmit() {
-    this.emailForVerifyOtp = "nehagurjar484@gmail.com";
     // this.openOtpPage();
     this.submitted = true;
     this.loading = true;

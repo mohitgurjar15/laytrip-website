@@ -21,6 +21,7 @@ export class VerifyOtpComponent implements OnInit {
   submitted = false;
   otpVerified = false;
   loading = false;
+  spinner = false;
   @Input() emailForVerifyOtp;
   apiError :string =  '';
 
@@ -56,6 +57,17 @@ export class VerifyOtpComponent implements OnInit {
   openSignInPage() {
     this.pageData = true;
     this.valueChange.emit({ key: 'signIn', value: this.pageData });
+  }
+
+  resendOtp(){
+    this.spinner = true;
+    this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
+      this.spinner = false;
+
+    }, (error: HttpErrorResponse) => {       
+      this.submitted = this.spinner = false;
+      this.apiError = error.message;
+    });
   }
 
   onSubmit() {   

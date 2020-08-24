@@ -28,8 +28,10 @@
           <div
               *ngIf="otpForm.controls.otp.errors.required"
               class="text-danger">Please enter otp.</div>
+       </div>
+       <p *ngIf="!otpVerified" class="text-right">Click here to <a href="javascript:void(0);"  (click)="resendOtp()">Resend OTP  </a><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></p>
       </div>
-      </div>
+
       <div class="form_btn">
         <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
           <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Verify Otp                    
