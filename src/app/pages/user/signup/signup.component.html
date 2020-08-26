@@ -27,7 +27,7 @@
                 <div class="field_form left">
                     <label>First Name<app-asterisk-mark></app-asterisk-mark></label>
                     <div class="text_field">
-                        <input  [ngClass]="{'error': submitted  && !loading}"  type="text" formControlName="first_name" maxlength="50" tabindex="1" placeholder="Enter First Name">
+                        <input   class="border-css"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}"  type="text" formControlName="first_name" maxlength="50" tabindex="1" placeholder="Enter First Name">
                     </div>
                     <div *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors" class="focus-input100 login-error">
                         <div
@@ -38,7 +38,7 @@
                 <div class="field_form right">
                     <label>Last Name<app-asterisk-mark></app-asterisk-mark></label>
                     <div class="text_field">
-                        <input  [ngClass]="{'error': submitted  && !loading}"  type="text" formControlName="last_name" maxlength="50" tabindex="2" placeholder="Enter Last Name">
+                        <input   class="border-css"  [ngClass]="{'error': submitted  && !loading}"  type="text" formControlName="last_name" maxlength="50" tabindex="2" placeholder="Enter Last Name">
                     </div> 
                     <div *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors" class="focus-input100 login-error">
                         <div
@@ -50,7 +50,7 @@
             <div class="form_row">
                 <label>Email<app-asterisk-mark></app-asterisk-mark></label>
                 <div class="text_field">
-                    <input  [ngClass]="{'error': submitted  && !loading}"  type="email" formControlName="email" maxlength="50" tabindex="3" placeholder="Enter Email">
+                    <input   class="border-css"  [ngClass]="{'error': submitted  && !loading}"  type="email" formControlName="email" maxlength="50" tabindex="3" placeholder="Enter Email">
                 </div>
                 <div *ngIf="(submitted || signupForm.controls.email.touched) && signupForm.controls.email.errors" class="focus-input100 login-error">
                     <div
@@ -64,7 +64,7 @@
                     <div class="field_in">
                         <label>Password<app-asterisk-mark></app-asterisk-mark></label>
                         <div class="text_field pass_show">
-                            <input  [ngClass]="{'error': submitted  && !loading}"   autocomplete="new-password" [type]="fieldTextType ? 'text' : 'password'" formControlName="password" maxlength="50" tabindex="4"
+                            <input   class="border-css"  [ngClass]="{'error': submitted  && !loading}"   autocomplete="new-password" [type]="fieldTextType ? 'text' : 'password'" formControlName="password" maxlength="50" tabindex="4"
                                 placeholder="Enter Password">
                             <span class="ptxt"><i class="fa fa-eye-slash" aria-hidden="true"  (click)="toggleFieldTextType()"></i></span>
                         </div>
@@ -80,7 +80,7 @@
                     <div class="field_in last">
                         <label>Confirm Password<app-asterisk-mark></app-asterisk-mark></label>
                         <div class="text_field pass_show">
-                            <input  [ngClass]="{'error': submitted  && !loading}"  type="password" formControlName="confirm_password" maxlength="50" tabindex="5"
+                            <input   class="border-css"  [ngClass]="{'error': submitted  && !loading}"  type="password" formControlName="confirm_password" maxlength="50" tabindex="5"
                                 placeholder="Enter Confirm Password">
                         </div>
                         <div *ngIf="(submitted || signupForm.controls.confirm_password.touched) && signupForm.controls.confirm_password.errors" class="focus-input100 login-error">
@@ -96,7 +96,7 @@
                     <div class="select_gender">
                         <ul>
                             <li>
-                                <a href="javascript:void(0);"  (click)="clickGender($event,'M')" [ngClass]="is_gender && is_type == 'M' ? 'active_gender' : ''">
+                                <a href="javascript:void(0);"  (click)="clickGender($event,'M')"  class="border-css"  [ngClass]="is_gender && is_type == 'M' ? 'active_gender' : ''">
                                     <div class="gender_type">
                                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/male.svg" alt="male Icon">
                                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/male-active.svg"
@@ -106,7 +106,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"   (click)="clickGender($event,'F')"  [ngClass]="is_gender && is_type == 'F' ? 'active_gender' : ''" >
+                                <a href="javascript:void(0);"   (click)="clickGender($event,'F')"   class="border-css"  [ngClass]="is_gender && is_type == 'F' ? 'active_gender' : ''" >
                                     <div class="gender_type">
                                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/female.svg" alt="Female Icon">
                                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/female-active.svg"
@@ -116,7 +116,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"  (click)="clickGender($event,'N')"  [ngClass]="is_gender && is_type == 'N' ? 'active_gender' : ''">
+                                <a href="javascript:void(0);"  (click)="clickGender($event,'N')"   class="border-css"  [ngClass]="is_gender && is_type == 'N' ? 'active_gender' : ''">
                                     <div class="gender_type">
                                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/non-binary.svg"
                                             alt="Non Binary Icon">
@@ -127,14 +127,13 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                    
+                    </div>                    
                 </div>
             </div>
             <div class="form_row last">
                 <div class="check">
                     <div class="custom-control custom-checkbox">
-                        <input  [ngClass]="{'error': submitted  && !loading}"  type="checkbox" formControlName="term_condition" class="custom-control-input" id="accept-condition" 
+                        <input   class="border-css"  [ngClass]="{'error': submitted  && !loading}"  type="checkbox" formControlName="term_condition" class="custom-control-input" id="accept-condition" 
                             tabindex="6">
                         <label class="custom-control-label" for="accept-condition"></label>
                         <span>Accept <a href="javascript:void(0);">Terms & Conditions</a> | <a

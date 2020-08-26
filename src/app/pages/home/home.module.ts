@@ -19,7 +19,8 @@ import { PartialPaymentComponent } from './partial-payment/partial-payment.compo
     DiscoverCityComponent, 
     DealComponent, 
     UserBenefitComponent, 
-    MobileAndSubscribeComponent, PartialPaymentComponent, 
+    MobileAndSubscribeComponent, 
+    PartialPaymentComponent, 
   ],
   imports: [
     CommonModule,

@@ -18,6 +18,22 @@ export class UserService {
 
   }
 
+  private setHeaders(params='') {      
+    const accessToken = localStorage.getItem('_lay_sess');
+    const reqData = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        },
+    };
+    if(params) {
+        let reqParams = {};        
+        Object.keys(params).map(k =>{
+            reqParams[k] = params[k];
+        });
+        reqData['params'] = reqParams;
+    }
+    return reqData;
+  }  
   handleError(error) {
     let errorMessage = {};
     if (error.status == 0) {
@@ -100,4 +116,27 @@ export class UserService {
     );
   }
 
+  getCountry() {
+    return this.http.get(this.apiURL+'v1/generic/country', this.setHeaders());
+  }
+  getState(stateId) {
+    return this.http.get(this.apiURL +'v1/generic/state/'+ stateId, this.setHeaders());
+  }
+  getStates(countryId) {
+    return this.http.get(this.apiURL +'v1/generic/country/'+ countryId+'/state', this.setHeaders());
+  }
+  getLanguages() {
+    return this.http.get(this.apiURL +'v1/language/', this.setHeaders());
+  }
+  getCurrencies() {
+    return this.http.get(this.apiURL +'v1/currency/', this.setHeaders());
+  }
+
+  updateProfile(data) {
+    return this.http.put(this.apiURL+'v1/auth/profile', data, this.setHeaders());
+  }
+  getProfile() {
+    console.log(this.setHeaders())
+    return this.http.get(this.apiURL +'v1/auth/profile/', this.setHeaders());
+  }
 }

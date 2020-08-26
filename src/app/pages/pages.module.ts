@@ -27,7 +27,8 @@ import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark
     ForgotPasswordComponent,
     VerifyOtpComponent,
     AuthComponent,
-    AsteriskMarkComponent   
+    AsteriskMarkComponent,
+       
   ],
   imports: [
     CommonModule,

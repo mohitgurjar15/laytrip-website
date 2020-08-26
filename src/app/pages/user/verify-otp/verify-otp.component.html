@@ -22,7 +22,7 @@
       <div class="form_row">
         <label>OTP</label>
         <div class="text_field">
-          <input type="text" formControlName="otp" maxlength="6" tabindex="1" placeholder="Enter one time password"  (keypress)="validateNumber($event)">
+          <input  class="border-css"  type="text" formControlName="otp" maxlength="6" tabindex="1" placeholder="Enter one time password"  (keypress)="validateNumber($event)">
         </div>
         <div *ngIf="(submitted || otpForm.controls.otp.touched) && otpForm.controls.otp.errors" class="focus-input100 login-error">
           <div
