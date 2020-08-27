@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input,EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -10,12 +11,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AuthComponent implements OnInit {
 
+  s3BucketUrl = environment.s3BucketUrl;
   signInModal = false;
   signUpModal = false;
   forgotPasswordModal = false;
   otpModal = false;
   emailForVerifyOtp = '';
 
+
+  @Input() pageData;
+  @Output() valueChange = new EventEmitter();
+  
   constructor(public modalService: NgbModal) { }
 
   ngOnInit() {
@@ -57,5 +63,14 @@ export class AuthComponent implements OnInit {
       this.forgotPasswordModal = false;
       this.otpModal = false;
     } 
+  }
+
+
+  closeModal(){     
+    this.signInModal = true;
+    this.signUpModal = false;
+    this.forgotPasswordModal = false;
+    this.otpModal = false;   
+    this.valueChange.emit({ key: 'signIn', value: true });
   }
 }

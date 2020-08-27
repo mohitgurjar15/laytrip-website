@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
+import { CommonFunction } from '../../../_helpers/common-function';
 declare var $: any;
 
 @Component({
@@ -21,6 +22,7 @@ export class VerifyOtpComponent implements OnInit {
   submitted = false;
   otpVerified = false;
   loading = false;
+  errorMessage = '';
   spinner = false;
   @Input() emailForVerifyOtp;
   apiError :string =  '';
@@ -29,14 +31,20 @@ export class VerifyOtpComponent implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router
+    public router: Router,
+    public commonFunctoin: CommonFunction
     ) { }
 
   ngOnInit() {
     console.log(this.emailForVerifyOtp)
 
     this.otpForm = this.formBuilder.group({
-      otp: ['', Validators.required],
+      otp1: ['', Validators.required],
+      otp2: ['', Validators.required],
+      otp3: ['', Validators.required],
+      otp4: ['', Validators.required],
+      otp5: ['', Validators.required],
+      otp6: ['', Validators.required],
     });
   }
 
@@ -55,6 +63,8 @@ export class VerifyOtpComponent implements OnInit {
   }
   
   openSignInPage() {
+    $('.modal_container').removeClass('right-panel-active');
+    $('.forgotpassword-container').removeClass('show_forgotpass');
     this.pageData = true;
     this.valueChange.emit({ key: 'signIn', value: this.pageData });
   }
@@ -70,22 +80,43 @@ export class VerifyOtpComponent implements OnInit {
     });
   }
 
-  onSubmit() {   
+  onInputEntry(event, nextInput) {
+    const input = event.target;
+    const length = input.value.length;
+    const maxLength = input.attributes.maxlength.value;
+
+    if (length >= maxLength) {
+      nextInput.focus();
+    }
+  }
+
+  onSubmit() {  
+    let inputDataOtp: string = '';
+
+    Object.keys(this.otpForm.controls).forEach((key) => {
+      inputDataOtp += this.otpForm.get(key).value;
+    }); 
     this.submitted = this.loading = true;
     if (this.otpForm.invalid) {
+      if(inputDataOtp.length != 6){
+        this.errorMessage = "Please enter OTP.";
+      }
       this.submitted = true;     
       this.loading = false; 
       return;
-    } else {
+    } else {    
+
       let data = {
         "email":this.emailForVerifyOtp,
-        "otp":this.otpForm.value.otp,
+        "otp": inputDataOtp,
        }; 
       this.userService.verifyOtp(data).subscribe((data: any) => {
-      this.otpVerified = true;  
-      this.submitted = this.loading = false;    
-      localStorage.setItem("_lay_sess", data.userDetails.access_token);  
-      this.router.navigate(['/']);      
+        this.otpVerified = true;  
+        this.submitted = this.loading = false;    
+        localStorage.setItem("_lay_sess", data.userDetails.access_token);  
+        $('#sign_in_modal').modal('hide');
+        this.valueChange.emit({ key: 'signIn', value: true});
+
       }, (error: HttpErrorResponse) => {       
         console.log(error);
         this.apiError = error.message;

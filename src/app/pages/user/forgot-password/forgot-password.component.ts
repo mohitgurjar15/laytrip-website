@@ -21,7 +21,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   forgotModal = false;
   loading: boolean = false;
   forgotPasswordSuccess : boolean = false;
-  apiError =  '';
+  apiMessage =  '';
 
   constructor(
     public modalService: NgbModal,
@@ -52,6 +52,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   openSignInPage() {
     this.pageData = true;
     this.valueChange.emit({ key: 'signIn', value: this.pageData });
+    $('.modal_container').removeClass('right-panel-active');
+    $('.forgotpassword-container').removeClass('show_forgotpass');  
   }
   onSubmit() {
    
@@ -68,7 +70,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         this.forgotPasswordSuccess = true;  
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading  = false;
-        this.apiError = error.message;
+        this.apiMessage = error.message;
 
       });
     }

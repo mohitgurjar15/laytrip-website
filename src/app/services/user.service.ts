@@ -75,7 +75,7 @@ export class UserService {
       "email":formValue.email,
       "password":formValue.password,
       "confirm_password":formValue.confirm_password,
-      "gender":formValue.gender,
+      "gender":'M',//formValue.gender,
       "device_type":1,
       "device_model":"RNE-L22",
       "device_token":"123abc#$%456",

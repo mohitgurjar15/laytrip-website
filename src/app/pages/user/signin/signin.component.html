@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="modal-content model-animated" >
     <div class="modal_top">
         <div class="modal_logo">
@@ -67,5 +67,66 @@
         <p>Don't have an account? <a href="javascript:void(0);" id="open_sign_up_modal"
                 (click)="openPage({value: 'signUp'})">Sign
                 Up</a></p>
+    </div>
+</div>
+ -->
+ <div class="form-container sign-in-container">
+    <div class="modal_top">
+        <div class="modal_title">
+            <h4>Log In</h4>
+            <p>Please Sign In to continue</p>
+        </div>        
+    </div>
+    <p style="color: red;">{{apiError}}</p>
+    <div class="modal_cnt">
+        <form  [formGroup]="loginForm" novalidate autocomplete="off">
+            <div class="form_row">
+                <label>Email<sup>*</sup></label>
+                <div class="text_field">
+                    <input class="border-css" formControlName="email" [ngClass]="{'error': submitted  && !loading}" type="email"  maxlength="50" tabindex="1" placeholder="Enter Email">
+                    <div  *ngIf="(submitted || loginForm.controls.email.touched) && loginForm.controls.email.errors">
+                        <p *ngIf="loginForm.controls.email.errors.required"
+                            class="error_text">Please enter your email address.</p>
+                        <p *ngIf="loginForm.controls.email.errors.pattern"
+                            class="error_text">Please enter valid email address.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form_row">
+                <label>Password<sup>*</sup></label>
+                <div class="text_field pass_show">
+                    <input class="border-css" [ngClass]="{'error': submitted  && !loading}" type="password" 
+                    autocomplete="new-password" [type]="fieldTextType ? 'text' : 'password'" formControlName="password"
+                     maxlength="100" tabindex="2" placeholder="Enter Password">
+                     <span class="ptxt"><i class="fa fa-eye-slash" aria-hidden="true"  (click)="toggleFieldTextType()"></i></span>
+                    <div  *ngIf="(submitted || loginForm.controls.password.touched) && loginForm.controls.password.errors">
+                        <p *ngIf="loginForm.controls.password.errors.required"
+                            class="error_text">Please enter your password.</p>
+                        <p *ngIf="loginForm.controls.password.errors.pattern"
+                            class="error_text">Please enter valid password.</p>
+                    </div>                </div>
+            </div>
+            <div class="form_row last">
+                <div class="check">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="Remember-me" name="example1" tabindex="3">
+                        <label class="custom-control-label" for="Remember-me"><span>Remember me</span></label>
+                    </div>
+                </div>
+                <div class="forgot_pass">
+                    <a  href="javascript:void(0);" (click)="openPage({value: 'forgotPassword'})" class="forgotPassword">Forgot Password?</a>
+                </div>
+            </div>
+            <div class="form_btn">          
+                <button type="submit" class="btn  btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
+                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>  Sign In                    
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="modal_btm">
+        <span>Or login via</span>
+       <app-social-login></app-social-login>
+        <p>Don't have an account? <a href="javascript:void(0);" (click)="openPage({value: 'signUp'})" class="signUp">Sign Up</a></p>
     </div>
 </div>

@@ -87,9 +87,12 @@ export class SigninComponent  implements OnInit {
 
   openPage(event) {
     if (event && event.value === 'forgotPassword') {
+      $('.modal_container').addClass('right-panel-active');
+      $('.forgotpassword-container').addClass('show_forgotpass');
       this.pageData = true;
       this.valueChange.emit({ key: 'forgotPassword', value: this.pageData });
     } else if (event && event.value === 'signUp') {
+      $('.modal_container').addClass('right-panel-active');
       this.pageData = true;
       this.valueChange.emit({ key: 'signUp', value: this.pageData });
     }
