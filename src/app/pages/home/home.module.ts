@@ -20,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DiscoverCityComponent,
     DealComponent,
     UserBenefitComponent,
-    MobileAndSubscribeComponent, PartialPaymentComponent,
+    MobileAndSubscribeComponent,
+    PartialPaymentComponent,
   ],
   imports: [
     CommonModule,

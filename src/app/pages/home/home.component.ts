@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 

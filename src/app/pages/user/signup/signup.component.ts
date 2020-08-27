@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MustMatch } from '../../../_helpers/must-match.validators';
@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   fieldTextType :  boolean;
   apiError =  '';
+  term_conditionError =  false;
 
 
   constructor(
@@ -43,7 +44,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-      confirm_password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
+      confirm_password: ['', Validators.required],
       gender: ['', Validators.required],
       term_condition: ['', Validators.required],
     },{
@@ -52,6 +53,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   }  
 
   openSignInPage() {
+    $('.modal_container').removeClass('right-panel-active');
+    $('.forgotpassword-container').removeClass('show_forgotpass');
     this.pageData = true;
     this.valueChange.emit({ key: 'signIn', value: this.pageData });
   }
@@ -67,7 +70,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   toggleFieldTextType(){
-    console.log(this.fieldTextType)
     this.fieldTextType = !this.fieldTextType;
   }
   ngOnDestroy() {}
@@ -89,12 +91,13 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
     
   onSubmit() {
-    this.emailForVerifyOtp = "nehagurjar484@gmail.com";
     // this.openOtpPage();
     this.submitted = true;
-    this.loading = true;
+    this.loading = this.term_conditionError = true;
     if(this.signupForm.controls.gender.errors && this.is_gender){
       this.signupForm.controls.gender.setValue(this.is_type);
+    } if(this.signupForm.controls.term_condition.errors){
+      this.term_conditionError = true;
     }
     if (this.signupForm.invalid) {
       this.submitted = true;      
@@ -104,9 +107,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
         this.emailForVerifyOtp = this.signupForm.value.email;
-        this.submitted = this.loading = false; 
-        
+        this.submitted = this.loading = false;         
         this.openOtpPage();   
+
       }, (error: HttpErrorResponse) => {       
         console.log(error);
         this.apiError = error.message;

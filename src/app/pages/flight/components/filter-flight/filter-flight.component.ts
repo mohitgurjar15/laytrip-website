@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
-import { LayTripStateStoreService } from 'src/app/state/layTripState/layTripState-store.service';
+import { LayTripStateStoreService } from '../../../../state/layTripState/layTripState-store.service';
 
 interface SliderDetails {
   value: number;

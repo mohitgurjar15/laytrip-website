@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterContentChecked } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
-import { LayTripStateStoreService } from 'src/app/state/layTripState/layTripState-store.service';
+import { LayTripStateStoreService } from '../../../../state/layTripState/layTripState-store.service';
 
 @Component({
   selector: 'app-flight-item-wrapper',

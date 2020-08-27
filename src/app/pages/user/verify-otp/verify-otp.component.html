@@ -1,4 +1,4 @@
-<div class="modal-content model-animated">
+<!-- <div class="modal-content model-animated">
   <div class="modal_top">
     <div class="modal_logo">
       <img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo">
@@ -15,21 +15,22 @@
     </div>
     <div *ngIf="otpVerified" class="modal_message">
       <h4 style="color: green;">Your OTP is verified successfully.</h4>
-<!--       <p> Your OTP is verified successfully.</p> 
- -->    </div>
+    </div>
     <p style="color: red;">{{apiError}}</p>
     <form [formGroup]="otpForm" *ngIf="!otpVerified">
       <div class="form_row">
         <label>OTP</label>
         <div class="text_field">
-          <input type="text" formControlName="otp" maxlength="6" tabindex="1" placeholder="Enter one time password"  (keypress)="validateNumber($event)">
+          <input  class="border-css"  type="text" formControlName="otp" maxlength="6" tabindex="1" placeholder="Enter one time password"  (keypress)="validateNumber($event)">
         </div>
         <div *ngIf="(submitted || otpForm.controls.otp.touched) && otpForm.controls.otp.errors" class="focus-input100 login-error">
           <div
               *ngIf="otpForm.controls.otp.errors.required"
               class="text-danger">Please enter otp.</div>
+       </div>
+       <p *ngIf="!otpVerified" class="text-right">Click here to <a href="javascript:void(0);"  (click)="resendOtp()">Resend OTP  </a><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></p>
       </div>
-      </div>
+
       <div class="form_btn">
         <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
           <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Verify Otp                    
@@ -38,5 +39,58 @@
     </form>
     <p *ngIf="otpVerified">Back to <a href="javascript:void(0);" class="open_sign_in_modal"  (click)="closeModal()">Home page</a></p>
 
+  </div>
+</div>
+ -->
+ <div class="form-container sign-up-container">
+  <div class="verify_otp_modal">
+    <div class="modal_top">
+        <div class="modal_title">
+            <h4>Have you received the code?</h4>
+            <p>A code was sent to your email address</p>
+        </div>
+    </div>
+    <div class="modal_cnt">
+      <div *ngIf="otpVerified" class="modal_message">
+        <h4 style="color: green;">Your OTP is verified successfully.</h4>
+      </div>
+      <p style="color: red;">{{apiError}}</p>
+        <form  [formGroup]="otpForm" *ngIf="!otpVerified">
+            <ul class="add_otp">
+                <li>
+                    <input type="text" (keypress)="commonFunctoin.validateNumber($event)" #input1 (input)="onInputEntry($event, input2)" formControlName="otp1" maxlength="1" tabindex="1" placeholder="0">
+                </li>
+                <li>
+                    <input type="text" (keypress)="commonFunctoin.validateNumber($event)" #input2 (input)="onInputEntry($event, input3)" formControlName="otp2" maxlength="1" tabindex="2" placeholder="0">
+                </li>
+                <li>
+                    <input type="text" (keypress)="commonFunctoin.validateNumber($event)" #input3 (input)="onInputEntry($event, input4)" formControlName="otp3" maxlength="1" tabindex="3" placeholder="0">
+                </li>
+                <li>
+                    <input type="text" (keypress)="commonFunctoin.validateNumber($event)" #input4 (input)="onInputEntry($event, input5)" formControlName="otp4" maxlength="1" tabindex="4" placeholder="0">
+                </li>
+                <li>
+                    <input type="text" (keypress)="commonFunctoin.validateNumber($event)" #input5 (input)="onInputEntry($event, input6)" formControlName="otp5" maxlength="1" tabindex="5" placeholder="0">
+                </li>
+                <li>
+                    <input type="text" (keypress)="commonFunctoin.validateNumber($event)" #input6 (input)="onInputEntry($event, input7)" formControlName="otp6" maxlength="1" tabindex="6" placeholder="0">
+                </li>
+            </ul>
+            <div *ngIf="(submitted || errorMessage) && otpForm.controls.otp1.errors" class="focus-input100 login-error">
+              <div
+                  *ngIf="otpForm.controls.otp1.errors.required"
+                  class="text-danger">{{errorMessage}}</div>
+           </div>
+            <div class="resend_otp_code">
+               <span></span><a class="text-right"  *ngIf="!otpVerified" href="javascript:void(0);" (click)="resendOtp()">Resend code <i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
+            </div>
+            <div class="form_btn">
+              <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
+                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Verify Otp                    
+            </button>
+            </div>
+        </form>
+        <p>Back to <a href="javascript:void(0);"  id="signIn" (click)="openSignInPage()" >Sign In</a></p>
+    </div>
   </div>
 </div>

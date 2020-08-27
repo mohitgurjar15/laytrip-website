@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 
-
 export class CommonFunction {
 
     closeModal(modelBox) {
@@ -14,4 +13,13 @@ export class CommonFunction {
     parseDateWithFormat(date) {
         console.log(date);
     }
+    validateNumber(e: any) {
+        let input = String.fromCharCode(e.charCode);
+        const reg = /^[0-9]*$/;
+
+        if (!reg.test(input)) {
+            e.preventDefault();
+        }
+    }
 }
+

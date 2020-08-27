@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LayTripStateStoreService } from 'src/app/state/layTripState/layTripState-store.service';
+import { LayTripStateStoreService } from '../../../state/layTripState/layTripState-store.service';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 

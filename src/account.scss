@@ -1,0 +1,657 @@
+@import "_cstm-variable.scss";
+
+//<!-- Start Account Section Css -->
+.account_part {
+    width: 100%;
+    padding: 30px 0;
+
+    .account_saidbar {
+        width: 100%;
+        background: $primary-color;
+        padding: 30px;
+        border-radius: 3px;
+        height: 100%;
+
+        .saidbar_top {
+            width: 100%;
+            padding: 20px 10px;
+            text-align: center;
+            background: $white-bg-light;
+            margin: 0 0 20px;
+            border-radius: 3px;
+
+            span {
+                width: 90px;
+                height: 90px;
+                display: inline-block;
+                border-radius: 50%;
+                background: $box-border-color;
+                position: relative;
+
+                img {
+                    height: 50px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            .member_info {
+                width: 100%;
+                margin-top: 10px;
+
+                h6 {
+                    width: 100%;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: $text-white;
+                    margin: 0 0 3px;
+                }
+
+                p {
+                    width: 100%;
+                    font-size: 10px;
+                    font-weight: 300;
+                    color: $text-white;
+                    margin: 0;
+                }
+            }
+        }
+
+        .saidbar_menu {
+            width: 100%;
+
+            h4 {
+                width: 100%;
+                font-size: 14px;
+                font-weight: 500;
+                color: $text-white;
+                margin-bottom: 20px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid $white-bg-light;
+            }
+
+            ul {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                li {
+                    width: 100%;
+                    margin-bottom: 30px;
+                    padding: 0 10px;
+
+                    &:last-child {
+                        margin: 0;
+                    }
+
+                    a {
+                        width: 100%;
+                        display: flex;
+                        font-size: 14px;
+                        color: $text-white;
+
+                        img {
+                            margin: 0 15px 0 0;
+                        }
+                    }
+
+                    .dropdown {
+                        a {
+
+                            &.dropdown-toggle {
+                                &:after {
+                                    border: none;
+                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_arrow-right.svg) no-repeat;
+                                    width: 10px;
+                                    height: 8px;
+                                    background-size: contain;
+                                    position: absolute;
+                                    top: 57%;
+                                    right: -10px;
+                                    transform: translateY(-50%);
+                                    transition: 0.3s;
+                                }
+                            }
+                        }
+
+                        &.show {
+                            a {
+
+                                &.dropdown-toggle {
+                                    &:after {
+                                        top: 35%;
+                                        transform: rotate(90deg) translateY(-50%);
+                                        transition: 0.3s;
+                                    }
+                                }
+                            }
+                        }
+
+                        .dropdown-menu {
+                            background: transparent;
+                            border: none;
+
+                            li {
+                                margin: 0;
+                                padding: 0 20px;
+
+                                a {
+                                    padding: 5px 10px;
+                                    font-size: 14px;
+                                    font-weight: 300;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .account_cnt_main {
+        width: 100%;
+        border-radius: 5px;
+        background: $background-white;
+        padding: 30px;
+        box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+
+        .update_info {
+            width: 100%;
+            display: flex;
+
+            .update_info_left {
+                width: 16%;
+
+                .update_profile {
+                    text-align: center;
+
+                    span {
+                        width: 120px;
+                        height: 120px;
+                        display: inline-block;
+                        border-radius: 50%;
+                        background: $box-border-color;
+                        position: relative;
+
+                        img {
+                            height: 65px;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+
+                    .update_profile_btn {
+                        width: 100%;
+                        margin: 15px 0 0;
+
+                        button {
+                            height: 32px;
+                            border-radius: 5px;
+                            border: none;
+                            font-size: 14px;
+                            color: $primary-color;
+                            font-weight: 500;
+                            padding: 0 15px;
+                            background: $primary-bg-light;
+
+                            img {
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .update_info_right {
+                width: 84%;
+                padding-left: 50px;
+
+                .form_row {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .form_field {
+                        width: 49%;
+                        margin-bottom: 30px;
+
+                        label {
+                            width: 100%;
+                            margin-bottom: 10px;
+                            font-size: 12px;
+                            color: $text-grey;
+                            font-weight: 400;
+
+                            sup {
+                                color: $error-color;
+                            }
+                        }
+
+                        input {
+                            width: 100%;
+                            background: transparent;
+                            height: 40px;
+                            border-top: none;
+                            border-left: none;
+                            border-right: none;
+                            border-bottom: 1px solid $box-border-color;
+                            font-size: 14px;
+                            color: $text-black;
+                            position: relative;
+
+                            &:focus {
+                                border-bottom: 1px solid $primary-color;
+                            }
+
+                            &.birth_date {
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                background-position: right center;
+                            }
+                        }
+
+                        .phone_no {
+                            width: 100%;
+                            display: flex;
+
+                            .code {
+                                border-bottom: 1px solid $box-border-color;
+                                margin-right: 10px;
+
+                                a {
+                                    line-height: 40px;
+                                    font-size: 14px;
+                                    color: $text-black;
+                                }
+
+                                .dropdown-menu {
+                                    padding: 0;
+
+                                    li {
+                                        padding: 0 10px;
+
+                                        a {
+                                            line-height: 30px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .field_inn {
+                            margin-bottom: 30px;
+
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+
+                            .text_field {
+                                position: relative;
+
+                                &.custom-select {
+                                    height: 40px;
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    border-bottom: 1px solid $box-border-color;
+                                    background: transparent;
+                                    padding: 0;
+
+                                    select {
+                                        display: none;
+                                    }
+
+                                    .select-selected {
+                                        background-color: transparent;
+                                        line-height: 40px;
+                                        font-size: 14px;
+                                        color: $text-black;
+
+                                        &:after {
+                                            position: absolute;
+                                            content: "";
+                                            top: 17px;
+                                            right: 10px;
+                                            width: 0;
+                                            height: 0;
+                                            border: 4px solid transparent;
+                                            border-color: $text-grey transparent transparent transparent;
+                                        }
+
+                                        &.select-arrow-active {
+                                            &:after {
+                                                border-color: transparent transparent $text-grey transparent;
+                                                top: 11px;
+                                            }
+                                        }
+                                    }
+
+                                    .select-items {
+                                        position: absolute;
+                                        background-color: $text-grey;
+                                        top: 100%;
+                                        left: 0;
+                                        right: 0;
+                                        z-index: 99;
+
+                                        div {
+                                            color: #ffffff;
+                                            padding: 8px 16px;
+                                            border: 1px solid transparent;
+                                            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                                            cursor: pointer;
+                                            user-select: none;
+                                            font-size: 14px;
+                                            color: $text-white;
+
+                                            &:hover {
+                                                background-color: rgba(0, 0, 0, 0.1);
+                                            }
+
+                                            &.same-as-selected {
+                                                background-color: rgba(0, 0, 0, 0.1);
+                                            }
+                                        }
+
+                                        &.select-hide {
+                                            display: none;
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
+                        .select_gender {
+                            margin: 0;
+
+                            ul {
+                                margin: 0;
+                                padding: 0;
+                                list-style: none;
+                                display: flex;
+
+                                li {
+                                    width: auto;
+                                    margin: 0 10px 0 0;
+                                    text-align: center;
+
+                                    a {
+                                        width: 90px;
+                                        text-align: center;
+                                        padding: 10px;
+                                        display: inline-block;
+                                        background: $background-white;
+                                        border: 1px solid $box-border-color;
+                                        border-radius: 15px;
+
+                                        .gender_type {
+                                            display: inline-block;
+                                            width: 45px;
+                                            height: 45px;
+                                            border-radius: 50%;
+                                            background: $box-border-color;
+                                            position: relative;
+
+                                            img {
+                                                position: absolute;
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%);
+
+                                                &.active-icon {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+
+                                        span {
+                                            display: block;
+                                            margin: 5px 0 0;
+                                            font-size: 12px;
+                                            color: $text-grey;
+                                        }
+
+                                        &.active_gender {
+                                            border-color: $primary-color;
+                                            border-radius: 15px;
+                                            box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.1);
+
+                                            .gender_type {
+                                                background: $primary-color;
+
+                                                img {
+                                                    &.active-icon {
+                                                        display: block;
+                                                    }
+
+                                                    &.default-icon {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+
+                                            span {
+                                                color: $primary-color;
+                                            }
+                                        }
+                                    }
+
+                                    &:last-child {
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .update_location_detail {
+            width: 100%;
+
+            .section_title {
+                width: 100%;
+                margin-bottom: 30px;
+                padding: 0;
+
+                h4 {
+                    width: 100%;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $text-black;
+                    padding: 15px 30px;
+                    background: $bg-light-grey;
+                    margin: 0;
+                    text-align: left;
+                }
+            }
+
+            .detail_update {
+                width: 100%;
+
+                .form_row {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .field_bolck {
+                        width: 31%;
+
+                        .field_inn {
+                            width: 100%;
+                            margin-bottom: 30px;
+
+                            label {
+                                width: 100%;
+                                margin-bottom: 10px;
+                                font-size: 12px;
+                                color: $text-grey;
+                                font-weight: 400;
+
+                                sup {
+                                    color: $error-color;
+                                }
+                            }
+
+                            .text_field {
+                                width: 100%;
+                                position: relative;
+
+                                input {
+                                    width: 100%;
+                                    background: transparent;
+                                    height: 40px;
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    border-bottom: 1px solid $box-border-color;
+                                    font-size: 14px;
+                                    color: $text-black;
+
+                                    &:placeholder {
+                                        color: $box-border-color;
+                                        -webkit-text-fill-color: $box-border-color;
+                                    }
+
+                                    &:focus {
+                                        border-bottom: 1px solid $primary-color;
+                                    }
+                                }
+
+                                &.custom-select {
+                                    height: 40px;
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    border-bottom: 1px solid $box-border-color;
+                                    background: transparent;
+                                    padding: 0;
+
+                                    select {
+                                        display: none;
+                                    }
+
+                                    .select-selected {
+                                        background-color: transparent;
+                                        line-height: 40px;
+                                        font-size: 14px;
+                                        color: $text-black;
+
+                                        &:after {
+                                            position: absolute;
+                                            content: "";
+                                            top: 17px;
+                                            right: 10px;
+                                            width: 0;
+                                            height: 0;
+                                            border: 4px solid transparent;
+                                            border-color: $text-grey transparent transparent transparent;
+                                        }
+
+                                        &.select-arrow-active {
+                                            &:after {
+                                                border-color: transparent transparent $text-grey transparent;
+                                                top: 11px;
+                                            }
+                                        }
+                                    }
+
+                                    .select-items {
+                                        position: absolute;
+                                        background-color: $text-grey;
+                                        top: 100%;
+                                        left: 0;
+                                        right: 0;
+                                        z-index: 99;
+
+                                        div {
+                                            color: #ffffff;
+                                            padding: 8px 16px;
+                                            border: 1px solid transparent;
+                                            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                                            cursor: pointer;
+                                            user-select: none;
+                                            font-size: 14px;
+                                            color: $text-white;
+
+                                            &:hover {
+                                                background-color: rgba(0, 0, 0, 0.1);
+                                            }
+
+                                            &.same-as-selected {
+                                                background-color: rgba(0, 0, 0, 0.1);
+                                            }
+                                        }
+
+                                        &.select-hide {
+                                            display: none;
+                                        }
+                                    }
+
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .form_update_btn {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px 0 0;
+
+            button {
+                width: auto;
+                padding: 11px 25px;
+                background: $secondary-color;
+                border-radius: 8px;
+                border: 1px solid $secondary-color;
+                font-size: 16px;
+                color: $text-white;
+                transition: 0.3s;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
+                white-space: normal;
+
+                img {
+                    margin-left: 120px;
+                    height: 20px;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 0%;
+                    background: $primary-color;
+                    z-index: -1;
+                    transition: 0.8s;
+                    border-radius: 0 0 50% 50%;
+                }
+
+                &:hover {
+                    border-color: $primary-color;
+
+                    &:before {
+                        height: 190%;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+//<!-- Close Account Section Css -->

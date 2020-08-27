@@ -1,0 +1,53 @@
+<div class="account_saidbar">
+  <div class="saidbar_top">
+      <span>
+          <img src="{{profile_pic ||  defaultImage}}" alt="Profile Image">
+      </span>
+      <div class="member_info">
+          <h6>Ketty Samonial</h6>
+          <p>Member since June 2020</p>
+      </div>
+  </div>
+  <div class="saidbar_menu">
+      <h4>Main Menu</h4>
+      <ul>
+          <li>
+              <a [routerLink]="['/account/bookings']">
+                  <img src="{{s3BucketUrl}}assets/images/icon/ic_booing.svg" alt="Bookings Icon">
+                  My Bookings
+              </a>
+          </li>
+          <li>
+              <a href="javascript:void(0);">
+                  <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon">
+                  Payment History
+              </a>
+          </li>
+          <li>
+              <a href="javascript:void(0);">
+                  <img src="{{s3BucketUrl}}assets/images/icon/ic_favourite.svg" alt="My Favourite Icon">
+                  My Favourite
+              </a>
+          </li>
+          <li>
+              <a href="javascript:void(0);">
+                  <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon">
+                  Credit Cards
+              </a>
+          </li>
+          <li>
+              <div class="dropdown">
+                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                      <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
+                      Settings
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="javascript:void(0);">One</a></li>
+                      <li><a href="javascript:void(0);">Two</a></li>
+                      <li><a href="javascript:void(0);">Three</a></li>
+                  </ul>
+              </div>
+          </li>
+      </ul>
+  </div>
+</div>

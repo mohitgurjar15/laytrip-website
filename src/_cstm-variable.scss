@@ -48,10 +48,12 @@ $gradient-blue : rgba(1, 33, 120, 0.75);
 $gradient-lightblue : rgba(25, 67, 255, 1);
 $gradient-darkblue : rgba(1, 33, 120, 1);
 $bg-lightwhite : rgba(255, 255, 255, 0.08);
+$bg-halfwhite : rgba(255, 255, 255, 0.5);
 $primary-bg-light : rgba(25, 67, 255, 0.08);
 $white-bg-light : rgba(255, 255, 255, 0.1);
 $border-blue-light : rgba(63, 48, 249, 0.2);
 $shadow-color : rgba(202, 209, 222, 0.35);
+$shadow-black : rgba(0, 0, 0, 0.08);
 $bg-summary-one : rgba(252, 126, 102, 1);
 $bg-summary-two : rgba(1, 33, 120, 1);
 
@@ -67,6 +69,8 @@ $bg-tab-detail : #ebf9fe;
 $bg-light-grey : #FAFAFA;
 $bg-title-grey : #F4F4F8;
 $bg-green : #119300;
+$bg-step-count : #E0E0E0;
+$border-step-count : #8090BC;
 
 
 $item-width: 65vw;

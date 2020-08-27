@@ -15,6 +15,10 @@ const routes: Routes = [
             {
                 path: 'flight',
                 loadChildren: './flight/flight.module#FlightModule'
+            },
+            {
+                path: 'account',
+                loadChildren: './user/user.module#UserModule'
             }
         ]
     }

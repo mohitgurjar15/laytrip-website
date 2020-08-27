@@ -18,11 +18,26 @@ export class UserService {
 
   }
 
+  private setHeaders(params='') {      
+    const accessToken = localStorage.getItem('_lay_sess');
+    const reqData = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        },
+    };
+    if(params) {
+        let reqParams = {};        
+        Object.keys(params).map(k =>{
+            reqParams[k] = params[k];
+        });
+        reqData['params'] = reqParams;
+    }
+    return reqData;
+  }  
   handleError(error) {
-    console.log("====", error);
     let errorMessage = {};
     if (error.status == 0) {
-      console.log("API Server is not responding")
+      errorMessage = { message: "API Server is not responding"};
     }
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -35,7 +50,7 @@ export class UserService {
   }
 
 
-  googleSocialLogin(data) {
+  socialLogin(data) {
     return this.http.post(this.apiURL + 'v1/auth/social-login', data)
       .pipe(
         retry(1),
@@ -60,7 +75,7 @@ export class UserService {
       "email":formValue.email,
       "password":formValue.password,
       "confirm_password":formValue.confirm_password,
-      "gender":formValue.gender,
+      "gender":'M',//formValue.gender,
       "device_type":1,
       "device_model":"RNE-L22",
       "device_token":"123abc#$%456",
@@ -74,9 +89,16 @@ export class UserService {
       );
   }
 
-  verifyOtp(data) {
-   
+  verifyOtp(data) {   
     return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+    );
+  }
+  resendOtp(email) { 
+    let data = {"email":email};  
+    return this.http.patch(this.apiURL + 'v1/auth/resend-otp', data)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -94,4 +116,27 @@ export class UserService {
     );
   }
 
+  getCountry() {
+    return this.http.get(this.apiURL+'v1/generic/country', this.setHeaders());
+  }
+  getState(stateId) {
+    return this.http.get(this.apiURL +'v1/generic/state/'+ stateId, this.setHeaders());
+  }
+  getStates(countryId) {
+    return this.http.get(this.apiURL +'v1/generic/country/'+ countryId+'/state', this.setHeaders());
+  }
+  getLanguages() {
+    return this.http.get(this.apiURL +'v1/language/', this.setHeaders());
+  }
+  getCurrencies() {
+    return this.http.get(this.apiURL +'v1/currency/', this.setHeaders());
+  }
+
+  updateProfile(data) {
+    return this.http.put(this.apiURL+'v1/auth/profile', data, this.setHeaders());
+  }
+  getProfile() {
+    console.log(this.setHeaders())
+    return this.http.get(this.apiURL +'v1/auth/profile/', this.setHeaders());
+  }
 }
