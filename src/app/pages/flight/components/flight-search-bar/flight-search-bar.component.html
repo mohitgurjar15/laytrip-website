@@ -1,0 +1,118 @@
+<section class="modify_search flight">
+  <div class="container">
+    <div class="row">
+      <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="nav-flight">
+        <div class="flight_tab">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#Oneway">
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg" alt="Oneway Icon" />
+                <span>Oneway</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#Return">
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg" alt="Return Icon" />
+                <span>Return</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#Multi-city">
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg" alt="Multi City Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon-active.svg" alt="Multi City Icon" />
+                <span>Multi city</span>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="Oneway" class="tab-pane active">
+              <form action="post">
+                <div class="flight_search">
+                  <ul class="flight-grid oneway">
+                    <li class="grid_box first">
+                      <div class="flight_form">
+                        <div class="search_area">
+                          <label>From</label>
+                          <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" />
+                          <span>NY, United States</span>
+                        </div>
+                      </div>
+                      <div class="switch_btn">
+                        <a href="javascript:void(0);">
+                          <img src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg" alt="Switch Image" />
+                        </a>
+                      </div>
+                      <div class="flight_to">
+                        <div class="search_area">
+                          <label>To</label>
+                          <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
+                          <span>CA, United States</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="grid_box secound">
+                      <div class="date_form">
+                        <div class="search_area">
+                          <label>Departure</label>
+                          <input type="text" name="date_checkin" maxlength="10" tabindex="3"
+                            placeholder="22 Jul’20 Friday" />
+                          <div class="prev-next">
+                            <a href="javascript:void(0);">Prev</a>
+                            <a href="javascript:void(0);">Next</a>
+                          </div>
+                          <div class="date_icon">
+                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="date_to">
+                        <div class="search_area">
+                          <label>Return</label>
+                          <input type="text" name="date_checkout" maxlength="10" tabindex="4"
+                            placeholder="22 Jul’20 Friday" />
+                          <div class="prev-next">
+                            <a href="javascript:void(0);">Prev</a>
+                            <a href="javascript:void(0);">Next</a>
+                          </div>
+                          <div class="date_icon">
+                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="grid_box third">
+                      <div class="travellers">
+                        <div class="search_area">
+                          <label>Travellers & class</label>
+                          <div class="travel_info">
+                            <span>01</span> Traveller <div class="drop_aerrow"></div>
+                          </div>
+                          <span>Economy</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="serch_btn">
+                    <button>Modify Search <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div id="Return" class="tab-pane fade"><br>
+              <h3>Menu 1</h3>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat.</p>
+            </div>
+            <div id="Multi-city" class="tab-pane fade"><br>
+              <h3>Menu 2</h3>
+              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                rem aperiam.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

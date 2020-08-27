@@ -1,0 +1,46 @@
+.custom_range_slide .ng5-slider .ng5-slider-bar {
+    background: #d8d8d8;
+    height: 3px;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+    background: #fc7e66;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+    width: 13px;
+    height: 13px;
+    top: auto; /* to remove the default positioning */
+    // bottom: 0;
+    top: -6px;
+    background-color: #fff;
+    border: 1px solid #fc7e66;
+    border-radius: 50%;
+    // border-top-left-radius: 3px;
+    // border-top-right-radius: 3px;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer:after {
+    display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-bubble {
+    bottom: 14px;
+    width: 100%;
+    padding: 0;
+    height: auto;
+    border: none;
+    font-size: 14px;
+    font-weight: 300;
+    color: #8188ab;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-limit {
+    font-weight: bold;
+    color: #fc7e66;
+    display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+    background: #fc7e66;
+}

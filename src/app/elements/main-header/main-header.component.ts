@@ -116,7 +116,6 @@ export class MainHeaderComponent implements OnInit {
         (response:CurrencyModel)=>{
 
           this.currencies = response.data.filter(currency=>currency.status==true);
-          console.log(this.selectedCurrency)
           if(!this.isCurrencySet){
 
             this.isCurrencySet=true;

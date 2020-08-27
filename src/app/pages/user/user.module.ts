@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule    
+    FormsModule,
   ],
-}) 
+})
 export class UserModule { }
- 

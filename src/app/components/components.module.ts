@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { AsteriskMarkComponent } from './asterisk-mark/asterisk-mark.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [ 
     SearchAirportComponent
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     SearchAirportComponent

@@ -7,8 +7,11 @@ import { Injectable } from '@angular/core';
 
 export class CommonFunction {
 
-    closeModal(modelBox){
+    closeModal(modelBox) {
         return modelBox = false;
     }
-    
+
+    parseDateWithFormat(date) {
+        console.log(date);
+    }
 }

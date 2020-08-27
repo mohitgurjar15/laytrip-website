@@ -32,7 +32,6 @@ export class SocialLoginComponent implements OnInit {
   }
 
   loadGoogleSdk() {
-console.log('here')
     window['googleSDKLoaded'] = () => {
       window['gapi'].load('auth2', () => {
         this.auth2 = window['gapi'].auth2.init({

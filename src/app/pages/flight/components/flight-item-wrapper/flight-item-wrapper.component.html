@@ -1,0 +1,289 @@
+<div class="result_listing">
+    <div class="search_block" *ngFor="let item of flightListArray">
+        <div class="listing_block">
+            <div class="row">
+                <div class="col-md-2 px-0">
+                    <div class="block_im">
+                        <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
+                        <p>{{ item?.airline_name }}</p>
+                        <span>6E - 749 | 6E - 103</span>
+                    </div>
+                </div>
+                <div class="col-md-6 px-0">
+                    <div class="block_detail">
+                        <div class="block_detail_top">
+                            <div class="detail_info">
+                                <p>Departure</p>
+                                <h4>{{ item?.departure_time }}</h4>
+                                <span>{{ item?.departure_info.city }}</span>
+                            </div>
+                            <div class="flight_stop_detail">
+                                <p>{{ item?.total_duration }}</p>
+                                <div class="border-dot"></div>
+                                <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Stop</span>
+                            </div>
+                            <div class="detail_info">
+                                <p>Arrival</p>
+                                <h4>{{ item?.arrival_time }}</h4>
+                                <span>{{ item?.arrival_info.city }}</span>
+                            </div>
+                        </div>
+                        <div class="block_detail_btm">
+                            <div class="show_detail">
+                                <a href="javascript:void(0);" class="show_more_detail">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
+                                    Flight Details
+                                </a>
+                            </div>
+                            <div class="info_price_origin">
+                                <div class="refundable">{{ item.is_refundable ? 'Refundable' : 'Non-Refundable' }}</div>
+                                <div class="ogigin_price">
+                                    Total <span>{{ currency?.symbol }} {{ item?.selling_price | number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 px-0">
+                    <div class="block_price">
+                        <p>Starts from</p>
+                        <p><span>{{ currency?.symbol }} {{ item?.start_price | number}}</span> /week</p>
+                        <a class="book_btn" href="javascript:void(0);">Book Now</a>
+                        <span class="partial_payment_info">Learn more about partial payment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail_info_show on_out_said" style="display: none">
+            <ul id="tabs" class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a id="tab-A" href="#flight-info" class="nav-link active" data-toggle="tab" role="tab">Flight
+                        Info</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tab-B" href="#Fare-Detail" class="nav-link" data-toggle="tab" role="tab">Fare Details</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tab-C" href="#Baggage-Rules" class="nav-link" data-toggle="tab" role="tab">Baggage Rules</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tab-d" href="#Cancellation-Rules" class="nav-link" data-toggle="tab" role="tab">Cancellation
+                        Rules</a>
+                </li>
+            </ul>
+            <div id="content" class="tab-content" role="tablist">
+                <div id="flight-info" class="card tab-pane fade show active" role="tabpanel"
+                    aria-labelledby="flight-info">
+                    <div class="card-header" role="tab" id="heading-flight-info">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapse-flight-info" aria-expanded="true"
+                                aria-controls="collapse-flight-info">
+                                Flight Info
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-flight-info" class="collapse show" data-parent="#content" role="tabpanel"
+                        aria-labelledby="heading-flight-info">
+                        <div class="card-body" *ngFor="let flight of item.routes">
+                            <div class="tab_detail flight_info_cnt">
+                                <div class="triangle_right"></div>
+                                <div *ngFor="let flightInfo of flight.stops">
+                                    <div class="flight_layover" *ngIf="flightInfo.is_layover">
+                                        <div class="layover_info">
+                                            Change of Planes <span>| {{ flightInfo?.layover_duration }}</span> Layover
+                                        </div>
+                                    </div>
+                                    <div class="detail_top">
+                                        <div class="detail_left">
+                                            <img src="{{s3BucketUrl}}assets/images/airlines_logo.png"
+                                                alt="Airlines Logo">
+                                            <p>{{ flightInfo?.airline_name }}</p>
+                                            <span>6E - 749</span>
+                                        </div>
+                                        <div class="detail_right">
+                                            <div class="flight_info_detail">
+                                                <h4>{{ flightInfo?.departure_code }}
+                                                    <span>{{ flightInfo?.departure_time }}</span></h4>
+                                                <p>{{ flightInfo?.departure_info?.city }},
+                                                    <span>{{ flightInfo?.departure_info?.country }}</span></p>
+                                            </div>
+                                            <div class="flight_duration">
+                                                <p>{{ flightInfo?.duration }}</p>
+                                                <div class="border-dot"></div>
+                                            </div>
+                                            <div class="flight_info_detail">
+                                                <h4>{{ flightInfo?.arrival_code }}
+                                                    <span>{{ flightInfo?.arrival_time }}</span></h4>
+                                                <p>{{ flightInfo?.arrival_info?.city }},
+                                                    <span>{{ flightInfo?.arrival_info?.country }}</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="flight_layover" *ngIf="flightInfo.is_layover">
+                                        <div class="layover_info">
+                                            Change of Planes <span>| {{ flightInfo?.layover_duration }}</span> Layover
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <!-- <div class="detail_top">
+                                    <div class="detail_left">
+                                        <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
+                                        <p>{{ flightInfo?.airline_name }}</p>
+                                        <span>6E - 749</span>
+                                    </div>
+                                    <div class="detail_right">
+                                        <div class="flight_info_detail">
+                                            <h4>{{ flightInfo?.departure_code }} <span>{{ flightInfo?.departure_time }}</span></h4>
+                                            <p>{{ flightInfo?.departure_info?.city }},
+                                                <span>{{ flightInfo?.departure_info?.country }}</span></p>
+                                        </div>
+                                        <div class="flight_duration">
+                                            <p>1h</p>
+                                            <div class="border-dot"></div>
+                                            <span>Non Stop</span>
+                                        </div>
+                                        <div class="flight_info_detail">
+                                            <h4>{{ flightInfo?.departure_code }} <span>{{ flightInfo?.arrival_time }}</span></h4>
+                                            <p>{{ flightInfo?.arrival_info?.city }},
+                                                <span>{{ flightInfo?.arrival_info?.country }}</span></p>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Fare-Detail" class="card tab-pane fade" role="tabpanel" aria-labelledby="Fare-Detail">
+                    <div class="card-header" role="tab" id="heading-Fare-Detail">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-Fare-Detail"
+                                aria-expanded="false" aria-controls="collapse-Fare-Detail">
+                                Fare Details
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-Fare-Detail" class="collapse" data-parent="#content" role="tabpanel"
+                        aria-labelledby="heading-Fare-Detail">
+                        <div class="card-body">
+                            <div class="tab_detail fare_detail_cnt">
+                                <div class="triangle_right"></div>
+                                <ul>
+                                    <li>Base Fare (1 Adult) <span>{{ currency?.symbol }}113</span></li>
+                                    <li>Taxes and Fees (1 Adult) <span>{{ currency?.symbol }}13</span></li>
+                                    <li>Total Fare (1 Adult) <span>{{ currency?.symbol }}126</span></li>
+                                </ul>
+                                <p><span>Note:</span> It is a long established fact that a reader will be distracted by
+                                    the readable content of a page when looking at its layout. The point of using Lorem
+                                    Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                                    using ‘Content here, content here’, making it look like readable English.</p>
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Baggage-Rules" class="card tab-pane fade" role="tabpanel" aria-labelledby="Baggage-Rules">
+                    <div class="card-header" role="tab" id="heading-Baggage-Rules">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-Baggage-Rules"
+                                aria-expanded="false" aria-controls="collapse-Baggage-Rules">
+                                Baggage Rules
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-Baggage-Rules" class="collapse" role="tabpanel" data-parent="#content"
+                        aria-labelledby="heading-Baggage-Rules">
+                        <div class="card-body">
+                            <div class="tab_detail baggage_rules_cnt">
+                                <div class="triangle_right"></div>
+                                <div class="detail_left">
+                                    <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
+                                    <p>Indigo</p>
+                                    <span>{{ flightInfo?.departure_code }} - DEN</span>
+                                </div>
+                                <div class="detail_right">
+                                    <ul>
+                                        <li class="first">
+                                            <div>Baggage Type</div>
+                                            <div>Adult</div>
+                                            <div>Children</div>
+                                        </li>
+                                        <li>
+                                            <div class="info">
+                                                <div>Baggage Type</div>
+                                                <div>Check In</div>
+                                                <div>Check In</div>
+                                            </div>
+                                            <div class="info">
+                                                <div>Baggage Type</div>
+                                                <div>Check In</div>
+                                                <div>Check In</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <p>The baggage information is just for reference. Please Check with airline before
+                                        check-in.</p>
+                                </div>
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Cancellation-Rules" class="card tab-pane fade" role="tabpanel"
+                    aria-labelledby="Cancellation-Rules">
+                    <div class="card-header" role="tab" id="heading-Cancellation-Rules">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-Cancellation-Rules"
+                                aria-expanded="false" aria-controls="collapse-Cancellation-Rules">
+                                Cancellation Rules
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-Cancellation-Rules" class="collapse" role="tabpanel" data-parent="#content"
+                        aria-labelledby="heading-Cancellation-Rules">
+                        <div class="card-body">
+                            <div class="tab_detail cancellation_rules_cnt">
+                                <div class="triangle_right"></div>
+                                <div class="rules_cnt_top">
+                                    <div class="detail_left">
+                                        <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
+                                        <p>Indigo</p>
+                                        <span>{{ flightInfo?.departure_code }} - DEN</span>
+                                    </div>
+                                    <div class="detail_right">
+                                        <ul>
+                                            <li class="first">
+                                                <div>Laytip Fess</div>
+                                                <div>{{ currency?.symbol }}13e</div>
+                                            </li>
+                                            <li>
+                                                <div>Airline Fees</div>
+                                                <div>Refundable</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="rules_cnt_btm">
+                                    <span>Terms & Conditions</span>
+                                    <ul>
+                                        <li>It is a long established fact that a reader will be distracted by the
+                                            readable content layout.</li>
+                                        <li>It is a long established fact that a reader will be distracted by the
+                                            readable content layout.</li>
+                                        <li>It is a long established fact that a reader will be distracted by the
+                                            readable content layout.</li>
+                                        <li>It is a long established fact that a reader will be distracted by the
+                                            readable content layout.</li>
+                                    </ul>
+                                </div>
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

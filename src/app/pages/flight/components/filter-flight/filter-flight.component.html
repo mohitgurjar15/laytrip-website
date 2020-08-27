@@ -1,0 +1,144 @@
+<div class="filter_saidbar">
+  <div class="filter_by">
+    <h4>Filter by</h4>
+    <div class="fliter_block">
+      <div class="cmn_block price">
+        <h5>Price</h5>
+        <div class="custom_range_slide">
+          <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue" [(highValue)]="priceHighValue" [options]="priceOptions"></ng5-slider>
+        </div>
+      </div>
+      <div class="cmn_block partial_payment_price">
+        <h5>Partial payment Price</h5>
+        <div class="custom_range_slide">
+          <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue" [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions"></ng5-slider>
+        </div>
+      </div>
+      <div class="cmn_block stop">
+        <h5>Stops</h5>
+        <ul>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              Non Stop
+            </label>
+            <span>{{ currency.symbol }} {{ flightStops?.non_stop?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              1 Stop
+            </label>
+            <span>{{ currency.symbol }} {{ flightStops?.one_stop?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              2 & more
+            </label>
+            <span>{{ currency.symbol }} {{ flightStops?.two_and_two_plus_stop?.min_price | number}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="cmn_block arrival_to">
+        <h5>Arrival to {{ arrivalTimeSlotCityName }}</h5>
+        <ul>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              12AM - 6AM
+            </label>
+            <span>{{ currency.symbol }} {{ arrivalTimeSlot?.first_slot?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              6AM - 12PM
+            </label>
+            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.second_slot?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              12PM - 6PM
+            </label>
+            <span>{{ currency.symbol }} {{ arrivalTimeSlot?.third_slot?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              6PM - 12AM
+            </label>
+            <span>{{ currency.symbol }} {{ arrivalTimeSlot?.fourth_slot?.min_price | number}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="cmn_block departure_to">
+        <h5>Departure to {{ departureTimeSlotCityName }}</h5>
+        <ul>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              12AM - 6AM
+            </label>
+            <span>{{ currency.symbol }} {{ depatureTimeSlot?.first_slot?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              6AM - 12PM
+            </label>
+            <span>{{ currency.symbol }} {{ depatureTimeSlot?.second_slot?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              12PM - 6PM
+            </label>
+            <span>{{ currency.symbol }} {{ depatureTimeSlot?.third_slot?.min_price | number}}</span>
+          </li>
+          <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              6PM - 12AM
+            </label>
+            <span>{{ currency.symbol }} {{ depatureTimeSlot?.fourth_slot?.min_price | number}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="cmn_block departure_to">
+        <h5>Airlines</h5>
+        <ul>
+          <!-- <li>
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              All
+            </label>
+            <span>120</span>
+          </li> -->
+          <li *ngFor="let airline of airlineList">
+            <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              {{ airline?.airline_name }}
+            </label>
+            <span>{{ airline?.count }}</span>
+          </li>
+        </ul>
+        <a class="view_more" href="javascript:void(0);">Show All</a>
+      </div>
+    </div>
+  </div>
+</div>
