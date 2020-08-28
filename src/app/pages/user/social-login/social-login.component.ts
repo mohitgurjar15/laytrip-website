@@ -36,7 +36,7 @@ export class SocialLoginComponent implements OnInit {
     window['googleSDKLoaded'] = () => {
       window['gapi'].load('auth2', () => {
         this.auth2 = window['gapi'].auth2.init({
-          client_id: '562377259795-3e19h9as9mqt4rhrreoqqlsf3ae89knh.apps.googleusercontent.com',
+          client_id: '154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com',
           cookiepolicy: 'single_host_origin',
           scope: 'profile email'
         });
@@ -133,6 +133,7 @@ export class SocialLoginComponent implements OnInit {
           this.userService.socialLogin(json_data).subscribe((data: any) => {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
+              $('#sign_in_modal').modal('hide');
               this.router.navigate(['/']);
             }
           }, (error: HttpErrorResponse) => {

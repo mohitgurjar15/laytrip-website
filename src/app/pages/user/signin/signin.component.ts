@@ -53,8 +53,8 @@ export class SigninComponent  implements OnInit {
 
   onSubmit() {    
 
-    this.submitted = true;
-    this.loading = true;
+    this.submitted = false;
+    // this.loading = true;
     if (this.loginForm.invalid) {
       this.submitted = true;
       this.loading = false;

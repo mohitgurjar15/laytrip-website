@@ -43,3 +43,6 @@ from,
 input.border-css.ng-pristine.ng-invalid.ng-touched {
 	border: 1px solid #f4516c !important;
 }
+input.border-css.ng-touched.ng-dirty ng-invalid{
+	border: 1px solid #f4516c !important;
+}
