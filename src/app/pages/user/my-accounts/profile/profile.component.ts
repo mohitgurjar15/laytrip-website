@@ -71,8 +71,8 @@ export class ProfileComponent implements OnInit {
       title: [''],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       country_code: ['', [Validators.required]],
+      email: [''],
       phone_no: ['', [Validators.required]],
       address: ['', [Validators.required]],
       zip_code: ['', [Validators.required]],
@@ -241,7 +241,7 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
-    
+      console.log(this.profileForm.value)
       // formdata.append("title",this.profileForm.value.title);
       formdata.append("title",'mr');
       formdata.append("first_name",this.profileForm.value.first_name);
