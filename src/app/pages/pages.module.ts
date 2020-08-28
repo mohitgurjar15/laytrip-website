@@ -16,19 +16,21 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
 import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark.component';
 
+// NG5 SLIDER
+import { Ng5SliderModule } from 'ng5-slider';
+
 @NgModule({
-  declarations: [ 
+  declarations: [
     PagesComponent,
     MainHeaderComponent,
     MainFooterComponent,
     SigninComponent,
     SocialLoginComponent,
-    SignupComponent, 
+    SignupComponent,
     ForgotPasswordComponent,
     VerifyOtpComponent,
     AuthComponent,
-    AsteriskMarkComponent,
-       
+    AsteriskMarkComponent
   ],
   imports: [
     CommonModule,
@@ -38,10 +40,12 @@ import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark
     ComponentsModule,
     ReactiveFormsModule,
     FormsModule,
-    
-    
+    // NG5 SLIDER
+    Ng5SliderModule,
+
+
   ],
-  entryComponents:[SignupComponent,SigninComponent,VerifyOtpComponent,AsteriskMarkComponent]
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent]
 
 })
 export class PagesModule { }

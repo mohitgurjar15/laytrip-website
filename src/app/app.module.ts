@@ -10,11 +10,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ElementsModule } from './elements/elements.module';
 import { ComponentsModule } from './components/components.module';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
-
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StateModule } from './state/state.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +33,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
           deps: [HttpClient]
       }
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

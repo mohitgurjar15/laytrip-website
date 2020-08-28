@@ -4,13 +4,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    UserRoutingModule    
+    UserRoutingModule
   ],
-}) 
+})
 export class UserModule { }
- 

@@ -11,23 +11,26 @@ import { DiscoverCityComponent } from './discover-city/discover-city.component';
 import { UserBenefitComponent } from './user-benefit/user-benefit.component';
 import { MobileAndSubscribeComponent } from './mobile-and-subscribe/mobile-and-subscribe.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    FeaturedCityComponent, 
-    DiscoverCityComponent, 
-    DealComponent, 
-    UserBenefitComponent, 
-    MobileAndSubscribeComponent, 
-    PartialPaymentComponent, 
+    FeaturedCityComponent,
+    DiscoverCityComponent,
+    DealComponent,
+    UserBenefitComponent,
+    MobileAndSubscribeComponent,
+    PartialPaymentComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     TranslateModule,
     ComponentsModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }

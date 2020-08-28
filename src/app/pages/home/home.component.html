@@ -6,103 +6,144 @@
                 <div class="banner_tab">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a *ngIf="moduleList.flight"  class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-selected="true">
-                                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg" alt="Flight Icon" />
-                                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg" alt="Flight Icon" />
+                            <a *ngIf="moduleList.flight" class="nav-item nav-link active" id="nav-flight"
+                                data-toggle="tab" href="#flight" role="tab" aria-selected="true">
+                                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg"
+                                    alt="Flight Icon" />
+                                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg"
+                                    alt="Flight Icon" />
                                 <span>Flight</span>
                             </a>
-                            <a *ngIf="moduleList.hotel" class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-selected="false">
-                                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg" alt="Hotel Icon" />
-                                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg" alt="Hotel Icon" />
+                            <a *ngIf="moduleList.hotel" class="nav-item nav-link" id="nav-hotel" data-toggle="tab"
+                                href="#hotel" role="tab" aria-selected="false">
+                                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg"
+                                    alt="Hotel Icon" />
+                                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg"
+                                    alt="Hotel Icon" />
                                 <span>Hotel</span>
                             </a>
-                            <a *ngIf="moduleList.accommodation" class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-selected="false">
-                                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/vacation-rental-icon.svg" alt="Accommodation Icon" />
-                                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/vacation-rental-icon-active.svg" alt="Accommodation Icon" />
+                            <a *ngIf="moduleList.accommodation" class="nav-item nav-link" id="nav-accommodation"
+                                data-toggle="tab" href="#accommodation" role="tab" aria-selected="false">
+                                <img class="default-icon"
+                                    src="{{s3BucketUrl}}assets/images/icon/vacation-rental-icon.svg"
+                                    alt="Accommodation Icon" />
+                                <img class="active-icon"
+                                    src="{{s3BucketUrl}}assets/images/icon/vacation-rental-icon-active.svg"
+                                    alt="Accommodation Icon" />
                                 <span>Accommodation</span>
                             </a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div  class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="nav-flight">
+                        <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="nav-flight">
                             <div class="flight_tab">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#Oneway">
-                                            <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
-                                            <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg" alt="Oneway Icon" />
+                                            <img class="default-icon"
+                                                src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg"
+                                                alt="Oneway Icon" />
+                                            <img class="active-icon"
+                                                src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg"
+                                                alt="Oneway Icon" />
                                             <span>Oneway</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#Return">
-                                            <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
-                                            <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg" alt="Return Icon" />
+                                            <img class="default-icon"
+                                                src="{{s3BucketUrl}}assets/images/icon/return-icon.svg"
+                                                alt="Return Icon" />
+                                            <img class="active-icon"
+                                                src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
+                                                alt="Return Icon" />
                                             <span>Return</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#Multi-city">
-                                            <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg" alt="Multi City Icon" />
-                                            <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon-active.svg" alt="Multi City Icon" />
+                                            <img class="default-icon"
+                                                src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg"
+                                                alt="Multi City Icon" />
+                                            <img class="active-icon"
+                                                src="{{s3BucketUrl}}assets/images/icon/multi-city-icon-active.svg"
+                                                alt="Multi City Icon" />
                                             <span>Multi city</span>
                                         </a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
                                     <div id="Oneway" class="tab-pane active">
-                                        <!-- <form action="post"> -->
+                                        <form [formGroup]="flightSearchForm" novalidate autocomplete="off"
+                                            (ngSubmit)="searchFlights()">
                                             <div class="flight_search">
                                                 <ul class="flight-grid oneway">
                                                     <li class="grid_box first">
                                                         <div class="flight_form">
                                                             <label>From Destination</label>
                                                             <div class="search_area">
-                                                                <app-search-airport 
-                                                                    [label]="'From'"
+                                                                <app-search-airport [form]="flightSearchForm"
+                                                                    [controlName]="'fromDestination'"
+                                                                    [id]="'fromSearch'" [label]="'From'"
                                                                     [placeHolder]="'New York'"
                                                                     [defaultSelected]="'NY, United States'"
-                                                                >
+                                                                    (changeValue)="destinationChangedValue($event)"
+                                                                    (getSwapValue)="getSwappedValue($event)"
+                                                                    [swappedData]="swapped">
                                                                 </app-search-airport>
                                                             </div>
                                                         </div>
                                                         <div class="switch_btn">
                                                             <a href="javascript:void(0);">
-                                                                <img src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg" alt="Switch Image" />
+                                                                <!-- (click)="switchDestination()" -->
+                                                                <img src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
+                                                                    alt="Switch Image" />
                                                             </a>
                                                         </div>
                                                         <div class="flight_to">
                                                             <label>To Destination</label>
                                                             <div class="search_area">
-                                                                <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
-                                                                <span>CA, United States</span>
+                                                                <app-search-airport [form]="flightSearchForm"
+                                                                    [controlName]="'toDestination'" [id]="'toSearch'"
+                                                                    [label]="'To'" [placeHolder]="'Los Angeles'"
+                                                                    [defaultSelected]="'CA, United States'"
+                                                                    (changeValue)="destinationChangedValue($event)"
+                                                                    (getSwapValue)="getSwappedValue($event)"
+                                                                    [swappedData]="swapped">
+                                                                </app-search-airport>
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="grid_box secound" >
+                                                    <li class="grid_box secound">
                                                         <div class="date_form">
                                                             <label>Departure</label>
                                                             <div class="search_area">
-                                                                <input type="text" name="date_checkin"  tabindex="3" placeholder="22 Jul’20 Friday" id="oneway_date_picker"/>
+                                                                <input type="text" name="date_checkin" tabindex="3"
+                                                                    placeholder="22 Jul’20 Friday" id="departure_date"
+                                                                    formControlName="departureDate" />
                                                                 <div class="prev-next">
                                                                     <a href="javascript:void(0);">Prev</a>
                                                                     <a href="javascript:void(0);">Next</a>
                                                                 </div>
-                                                                <div class="date_icon" id="oneway_date_picker_icon">
-                                                                    <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+                                                                <div class="date_icon" id="departure_date_icon">
+                                                                    <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg"
+                                                                        alt="Calender Icon">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="date_to">
                                                             <label>Return</label>
                                                             <div class="search_area">
-                                                                <input type="text" name="date_checkout" maxlength="10" tabindex="4" placeholder="22 Jul’20 Friday" />
+                                                                <input type="text" name="date_checkout" maxlength="10"
+                                                                    tabindex="4" placeholder="22 Jul’20 Friday"
+                                                                    id="return_date" />
                                                                 <div class="prev-next">
                                                                     <a href="javascript:void(0);">Prev</a>
                                                                     <a href="javascript:void(0);">Next</a>
                                                                 </div>
-                                                                <div class="date_icon">
-                                                                    <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+                                                                <div class="date_icon" id="return_date_icon">
+                                                                    <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg"
+                                                                        alt="Calender Icon">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -112,7 +153,8 @@
                                                             <label>Travellers & class</label>
                                                             <div class="search_area">
                                                                 <div class="travel_info">
-                                                                    <span>01</span> Traveller <div class="drop_aerrow"></div>
+                                                                    <span>01</span> Traveller <div class="drop_aerrow">
+                                                                    </div>
                                                                 </div>
                                                                 <span>Economy</span>
                                                             </div>
@@ -120,26 +162,32 @@
                                                     </li>
                                                 </ul>
                                                 <div class="serch_btn">
-                                                    <button>Search Flights <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
+                                                    <button type="submit">Search Flights <img
+                                                            src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                                                            alt="Right Arrow" /></button>
                                                 </div>
                                             </div>
-                                        <!-- </form> -->
+                                        </form>
                                     </div>
                                     <div id="Return" class="tab-pane fade"><br>
                                         <h3>Menu 1</h3>
-                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                            aliquip ex ea commodo consequat.</p>
                                     </div>
                                     <div id="Multi-city" class="tab-pane fade"><br>
                                         <h3>Menu 2</h3>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                            doloremque laudantium, totam rem aperiam.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="moduleList.hotel" class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
+                        <div *ngIf="moduleList.hotel" class="tab-pane fade" id="hotel" role="tabpanel"
+                            aria-labelledby="nav-hotel">
                             <h2>Hotel</h2>
                         </div>
-                        <div *ngIf="moduleList.accommodation" class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
+                        <div *ngIf="moduleList.accommodation" class="tab-pane fade" id="accommodation" role="tabpanel"
+                            aria-labelledby="nav-accommodation">
                             <h2>Accommodation</h2>
                         </div>
                     </div>
@@ -152,7 +200,8 @@
                         <p>{{ 'flight_second_title'|translate  }}</p>
                     </div>
                     <div class="bnr_im">
-                        <img class="plane-animation" src="{{s3BucketUrl}}assets/images/flight-bnr-im.svg" alt="Flight Images" />
+                        <img class="plane-animation" src="{{s3BucketUrl}}assets/images/flight-bnr-im.svg"
+                            alt="Flight Images" />
                     </div>
                 </div>
             </div>
