@@ -39,11 +39,11 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "src/assets/js/jquery-ui.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/js/slick.js",
               "src/assets/js/moment.min.js",
-              "src/assets/js/jquery.daterangepicker.js"
+              "src/assets/js/jquery.daterangepicker.js",
+              "src/assets/js/jquery-ui.js"
             ],
             "es5BrowserSupport": true
           },
@@ -125,7 +125,8 @@
               "src/flight.scss",
               "src/account.scss",
               "src/comman-modal.scss",
-              "src/laytrip.scss"
+              "src/laytrip.scss",
+              "src/assets/css/daterangepicker.min.css"
             ],
             "scripts": [],
             "assets": [

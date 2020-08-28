@@ -9,6 +9,8 @@ import { FlightPriceSliderComponent } from './components/flight-price-slider/fli
 import { FlightItemWrapperComponent } from './components/flight-item-wrapper/flight-item-wrapper.component';
 import { FlightSearchBarComponent } from './components/flight-search-bar/flight-search-bar.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
+import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { Ng5SliderModule } from 'ng5-slider';
     FilterFlightComponent,
     FlightPriceSliderComponent,
     FlightItemWrapperComponent,
-    FlightSearchBarComponent
+    FlightSearchBarComponent,
+    FlightLoaderComponent,
+    FlightNotFoundComponent
   ],
   imports: [
     CommonModule,
