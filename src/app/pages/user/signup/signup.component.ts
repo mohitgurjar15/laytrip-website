@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MustMatch } from '../../../_helpers/must-match.validators';
@@ -26,7 +26,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   is_type: string = 'M';
   emailForVerifyOtp : string = '';
   loading: boolean = false;
-  fieldTextType :  boolean;
+  cnfPassFieldTextType :  boolean;
+  passFieldTextType :  boolean;
   apiError =  '';
   term_conditionError =  false;
 
@@ -38,7 +39,8 @@ export class SignupComponent implements OnInit, OnDestroy {
     public router: Router,
     ) {}
 
-  ngOnInit() {
+  ngOnInit() {    
+
     this.signupForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -48,7 +50,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       gender: ['', Validators.required],
       term_condition: ['', Validators.required],
     },{
-      validator: MustMatch('password', 'confirm_password')
+      validator: MustMatch('password', 'confirm_password'),
     });
   }  
 
@@ -69,11 +71,25 @@ export class SignupComponent implements OnInit, OnDestroy {
     $('#sign_in_modal').modal('hide');
   }
 
-  toggleFieldTextType(){
-    this.fieldTextType = !this.fieldTextType;
+  toggleFieldTextType(event){
+    if(event.target.id == 'passEye'){
+      this.passFieldTextType = !this.passFieldTextType;
+      
+    }else if(event.target.id == 'cnfEye'){
+      this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
+
+    }
+  }
+  
+  isChecked(event) {
+    if(!event.target.checked){
+      this.signupForm.controls.term_condition.errors.setValue({});
+      this.signupForm.controls.term_condition.errors.required.setValue(true);
+    }
   }
   ngOnDestroy() {}
-  
+
+ 
   clickGender(event,type){
     this.is_type = '';
     this.is_gender = false;       

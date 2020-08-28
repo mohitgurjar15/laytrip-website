@@ -122,10 +122,10 @@ export class SocialLoginComponent implements OnInit {
           let json_data = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
-            "email": userInfo.email,
+            "email": userInfo.email ? userInfo.email : '',
             "social_account_id": userInfo.id,
             "device_type": 1,
-            "device_model": "RNE-L22",
+            "device_model": "Angular web",
             "device_token": "123abc#$%456",
             "app_version": "1.0",
             "os_version": "7.0"
