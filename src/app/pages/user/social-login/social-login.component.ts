@@ -84,7 +84,7 @@ export class SocialLoginComponent implements OnInit {
           console.log(error)
         });
       }, (error) => {
-        alert(JSON.stringify(error, undefined, 2));
+        console.log(error)
       });
   }
 
