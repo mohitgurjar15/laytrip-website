@@ -21,5 +21,12 @@ export class CommonFunction {
             e.preventDefault();
         }
     }
+    validateNotAllowSpecial(e: any) {
+        let input = String.fromCharCode(e.charCode);
+        var reg = /^[a-zA-Z0-9-]*$/;
+        if (!reg.test(input)) {
+            e.preventDefault();
+        }
+    }
 }
 

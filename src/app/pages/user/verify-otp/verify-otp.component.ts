@@ -70,6 +70,7 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   resendOtp(){
+    this.otpForm.reset();
     this.spinner = true;
     this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
       this.spinner = false;
@@ -116,7 +117,6 @@ export class VerifyOtpComponent implements OnInit {
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         $('#sign_in_modal').modal('hide');
         this.valueChange.emit({ key: 'signIn', value: true});
-
       }, (error: HttpErrorResponse) => {       
         console.log(error);
         this.apiError = error.message;

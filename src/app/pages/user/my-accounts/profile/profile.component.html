@@ -232,7 +232,7 @@
                                       <div class="field_inn">
                                           <label>Zip Code<sup>*</sup></label>
                                           <div class="text_field">
-                                              <input type="text" formControlName="zip_code"  maxlength="6" tabindex="16" placeholder="Enter zip code"  (keypress)="commonFunctoin.validateNumber($event)" >
+                                              <input type="text" formControlName="zip_code"  maxlength="6" tabindex="16" placeholder="Enter zip code"  (keypress)="commonFunctoin.validateNotAllowSpecial($event)" >
                                           </div>
                                           <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors" class="focus-input100 login-error">
                                             <div

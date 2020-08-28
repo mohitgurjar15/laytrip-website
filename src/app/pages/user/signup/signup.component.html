@@ -202,8 +202,9 @@
                         <div class="field_in">
                             <label>Password<sup>*</sup></label>
                             <div class="text_field pass_show">
-                                <input  class="border-css"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}"   autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'" formControlName="password" maxlength="50" tabindex="4" placeholder="Enter Password">
-                                <span class="ptxt"><i id="passEye" class="fa fa-eye-slash" aria-hidden="true"  (click)="toggleFieldTextType($event)"></i></span>
+                                <input  class="border-css"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}"   autocomplete="new-password"
+                                 [type]="passFieldTextType ? 'text' : 'password'" formControlName="password" maxlength="50" tabindex="4" placeholder="Enter Password">
+                                <span class="ptxt"><i id="passEye" [ngClass]="passFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"  aria-hidden="true"  (click)="toggleFieldTextType($event)"></i></span>
                                 <div class="error_text" *ngIf="(submitted || signupForm.controls.password.touched) && signupForm.controls.password.errors">
                                     <p 
                                         *ngIf="signupForm.controls.password.errors.required"
@@ -216,7 +217,7 @@
                             <label>Confirm Password<sup>*</sup></label>
                             <div class="text_field pass_show">
                                 <input  class="border-css"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}"  [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="5" placeholder="Enter Password">
-                                <span class="ptxt"><i id="cnfEye" class="fa fa-eye-slash" aria-hidden="true"  (click)="toggleFieldTextType($event)"></i></span>
+                                <span class="ptxt"><i id="cnfEye"  [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'" aria-hidden="true"  (click)="toggleFieldTextType($event)"></i></span>
                                 
                                 <div class="error_text" *ngIf="(submitted || signupForm.controls.confirm_password.touched) && signupForm.controls.confirm_password.errors">
                                     <p 
@@ -231,17 +232,8 @@
                 
                 <div class="form_row last">
                     <div class="check text_field">
-                        <div class="custom-control custom-checkbox">
-                            <input  (change)="isChecked($event)" class="border-css"  [ngClass]="{'error': submitted  && !loading}"  type="checkbox" formControlName="term_condition" type="checkbox"  class="custom-control-input" id="accept-condition" tabindex="6">
-                            <label class="custom-control-label" for="accept-condition"></label>
-                            <span>Accept <a href="javascript:void(0);">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></span>
-                        </div>
-                        
-                            <p  class="error_text"
-                            *ngIf="checkboxError"
-                                >Please select term and condition.</p>
-                               
-                        </div>
+                        <span>Accept <a href="javascript:void(0);">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></span>                               
+                    </div>
                 </div>
                 <div class="form_btn">
                     <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
