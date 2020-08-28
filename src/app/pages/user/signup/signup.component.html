@@ -236,13 +236,12 @@
                             <label class="custom-control-label" for="accept-condition"></label>
                             <span>Accept <a href="javascript:void(0);">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></span>
                         </div>
-                        <div class="error_text" *ngIf="(submitted) && signupForm.controls.term_condition.errors">
-                            <p 
-                                *ngIf="signupForm.controls.term_condition.errors.required"
+                        
+                            <p  class="error_text"
+                            *ngIf="checkboxError"
                                 >Please select term and condition.</p>
                                
                         </div>
-                    </div>
                 </div>
                 <div class="form_btn">
                     <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()" style="background: #FF473A;">
