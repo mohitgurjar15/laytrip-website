@@ -18,12 +18,14 @@ export class LayTripStateService {
 
   private setHeaders(params = '') {
     const accessToken = localStorage.getItem('_lay_sess');
+    let headers: any = {};
+    headers.language = 'en';
+    headers.currency = 'USD';
+    if (accessToken) {
+      headers.Authorization = `Bearer ${accessToken}`;
+    }
     const reqData = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        language: 'en',
-        currency: 'USD'
-      },
+      headers
     };
     if (params) {
       let reqParams = {};
@@ -38,6 +40,6 @@ export class LayTripStateService {
   getFlightSearchResult(data): Observable<any> {
     const url = environment.apiUrl + `v1/flight/search-oneway-flight`;
     // const url = environment.apiUrl + `v1/flight/search-oneway-flight?language=${data.language}&currency=${data.currency}`;
-    return this.http.post(url, data,  this.setHeaders());
+    return this.http.post(url, data, this.setHeaders());
   }
 }

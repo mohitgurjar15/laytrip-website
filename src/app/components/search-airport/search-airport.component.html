@@ -1,7 +1,7 @@
 <div [formGroup]="form">
     <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
         bindLabel="city" bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
-        (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)" placeholder=""
+        (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"
         class="laytrip-input" placeholder="{{ placeHolder }}">
         <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
             <ul class="item-list">

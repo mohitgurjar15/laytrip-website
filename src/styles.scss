@@ -4,6 +4,7 @@
 @import "_cstm-variable.scss";
 @import "_cstm-components.scss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 .wrapper {
     position: relative;
@@ -1097,6 +1098,7 @@ select {
                                         left: 50%;
                                         transform: translate(-50%, -50%);
                                         border-radius: 50%;
+                                        z-index: 1111;
 
                                         img {
                                             width: 15px;

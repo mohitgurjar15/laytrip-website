@@ -40,6 +40,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked {
       $(this).parents('.listing_block').addClass('add_shadow');
       $(this).parents('.search_block').find('.detail_info_show').slideToggle();
     });
+
+    $(document).on('click', function (event) {
+      if (!$(event.target).closest('.search_block').length) {
+        $('.detail_info_show').each(function () {
+          $(this).slideUp();
+          $('.listing_block').removeClass('add_shadow');
+        });
+      }
+    });
   }
 
   ngAfterContentChecked() {
