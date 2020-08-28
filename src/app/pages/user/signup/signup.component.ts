@@ -27,6 +27,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   emailForVerifyOtp : string = '';
   loading: boolean = false;
   cnfPassFieldTextType :  boolean;
+  checkboxError :  boolean=false;
   passFieldTextType :  boolean;
   apiError =  '';
   term_conditionError =  false;
@@ -82,9 +83,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
   
   isChecked(event) {
-    if(!event.target.checked){
-      this.signupForm.controls.term_condition.errors.setValue({});
-      this.signupForm.controls.term_condition.errors.required.setValue(true);
+    if(event.target.checked){
+      this.checkboxError = false;      
+    } else {
+      this.checkboxError = true;
     }
   }
   ngOnDestroy() {}
@@ -109,11 +111,12 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSubmit() {
     // this.openOtpPage();
     this.submitted = true;
-    this.loading = this.term_conditionError = true;
+    
+    this.loading = this.checkboxError = true;
     if(this.signupForm.controls.gender.errors && this.is_gender){
       this.signupForm.controls.gender.setValue(this.is_type);
     } if(this.signupForm.controls.term_condition.errors){
-      this.term_conditionError = true;
+      this.checkboxError = true;
     }
     if (this.signupForm.invalid) {
       this.submitted = true;      
