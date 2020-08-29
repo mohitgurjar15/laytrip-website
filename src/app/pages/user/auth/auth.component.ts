@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input,EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 
+declare var $: any;
 
 @Component({
   
@@ -71,6 +72,7 @@ export class AuthComponent implements OnInit {
     this.signUpModal = false;
     this.forgotPasswordModal = false;
     this.otpModal = false;   
+    $('.modal_container').removeClass('right-panel-active');
     this.valueChange.emit({ key: 'signIn', value: true });
   }
 }

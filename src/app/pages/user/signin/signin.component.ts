@@ -37,7 +37,6 @@ export class SigninComponent  implements OnInit {
 
 
   ngOnInit() {
-    console.log(this)
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required]]
@@ -54,7 +53,7 @@ export class SigninComponent  implements OnInit {
   onSubmit() {    
 
     this.submitted = false;
-    // this.loading = true;
+    this.loading = true;
     if (this.loginForm.invalid) {
       this.submitted = true;
       this.loading = false;
@@ -72,6 +71,7 @@ export class SigninComponent  implements OnInit {
         //resend the otp 
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
+            $('.modal_container').addClass('right-panel-active');
             this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
           }, (error: HttpErrorResponse) => {       
             this.submitted = this.loading = false;
@@ -98,9 +98,7 @@ export class SigninComponent  implements OnInit {
     }
   }
 
-  ngOnDestroy() {
-   
-  }
+  ngOnDestroy() {} 
   
   toggleFieldTextType(){
     this.fieldTextType = !this.fieldTextType;

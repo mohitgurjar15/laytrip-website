@@ -98,7 +98,7 @@
                     <input class="border-css" [ngClass]="{'error': (submitted  && !loading && loginForm.controls.password.errors) }" type="password" 
                     autocomplete="new-password" [type]="fieldTextType ? 'text' : 'password'" formControlName="password"
                      maxlength="100" tabindex="2" placeholder="Enter Password">
-                     <span class="ptxt"><i class="fa fa-eye-slash" aria-hidden="true"  (click)="toggleFieldTextType()"></i></span>
+                     <span class="ptxt"><i  [ngClass]="fieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'" aria-hidden="true"  (click)="toggleFieldTextType()"></i></span>
                     <div  *ngIf="(submitted || loginForm.controls.password.touched) && loginForm.controls.password.errors">
                         <p *ngIf="loginForm.controls.password.errors.required"
                             class="error_text">Please enter your password.</p>
