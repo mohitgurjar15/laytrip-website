@@ -1,8 +1,11 @@
 <app-flight-search-bar></app-flight-search-bar>
-<section class="search_result flight pb-0" *ngIf="loading">
+<section class="search_result flight pb-0" *ngIf="loading && !isNotFound">
   <app-flight-loader></app-flight-loader>
 </section>
-<section class="search_result flight" *ngIf="!loading">
+<section class="search_result flight pb-0" *ngIf="isNotFound && !loading">
+  <app-flight-not-found></app-flight-not-found>
+</section>
+<section class="search_result flight" *ngIf="!loading && !isNotFound">
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
@@ -15,7 +18,4 @@
       </div>
     </div>
   </div>
-</section>
-<section class="search_result flight pb-0" *ngIf="isNotFound">
-  <app-flight-not-found></app-flight-not-found>
 </section>

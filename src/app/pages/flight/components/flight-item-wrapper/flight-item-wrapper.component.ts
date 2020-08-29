@@ -1,19 +1,22 @@
-import { Component, OnInit, Input, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, Input, AfterContentChecked, OnDestroy } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { LayTripStateStoreService } from '../../../../state/layTripState/layTripState-store.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-flight-item-wrapper',
   templateUrl: './flight-item-wrapper.component.html',
   styleUrls: ['./flight-item-wrapper.component.scss']
 })
-export class FlightItemWrapperComponent implements OnInit, AfterContentChecked {
+export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   flightList;
   s3BucketUrl = environment.s3BucketUrl;
   flightListArray = [];
   currency;
+
+  subscriptions: Subscription[] = [];
 
   constructor(
     private layTripStateStoreService: LayTripStateStoreService
@@ -24,7 +27,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked {
     this.currency = JSON.parse(_currency);
     this.loadJquery();
 
-    this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
+    this.subscriptions.push(this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
       console.log();
       if (res) {
         if (res.items) {
@@ -32,7 +35,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked {
           this.flightList = res.items;
         }
       }
-    });
+    }));
   }
 
   loadJquery() {
@@ -53,6 +56,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked {
 
   ngAfterContentChecked() {
     this.flightListArray = this.flightList;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
 }
