@@ -12,7 +12,7 @@ const routes: Routes = [
                 loadChildren: './home/home.module#HomeModule'
             },
             {
-                path: 'flight',
+                path: 'search',
                 loadChildren: './flight/flight.module#FlightModule'
             },
             {

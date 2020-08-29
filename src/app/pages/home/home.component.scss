@@ -1,6 +1,17 @@
-.flight_form{
-    
-    .autocomplete-container{
+.flight_form {
+    .autocomplete-container {
         box-shadow: none !important;
     }
+}
+
+.disable-div {
+    cursor: not-allowed;
+    background-color: rgb(235, 235, 228) !important;
+    & input {
+        cursor: not-allowed !important;
+    }
+}
+
+.disable-btn {
+    cursor: not-allowed;
 }

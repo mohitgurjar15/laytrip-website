@@ -7,6 +7,7 @@ export function reducer(state = initialState, action: Actions): LayTripState {
         case ActionTypes.LOAD_LAYTRIP_FLIGHT_SEARCH_RESULT: {
             return {
                 ...state,
+                flightSearchResult: null,
                 error: null,
             };
         }

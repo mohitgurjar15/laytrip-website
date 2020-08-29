@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-md-2 px-0">
                     <div class="block_im">
-                        <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
+                        <img src="{{ item?.airline_logo }}" alt="Airlines Logo">
                         <p>{{ item?.airline_name }}</p>
-                        <span>6E - 749 | 6E - 103</span>
+                        <span>{{ item?.airline }} - {{ item?.flight_number }}</span>
                     </div>
                 </div>
                 <div class="col-md-6 px-0">
@@ -46,8 +46,8 @@
                 </div>
                 <div class="col-md-4 px-0">
                     <div class="block_price">
-                        <p>Starts from</p>
-                        <p><span>{{ currency?.symbol }} {{ item?.start_price | number}}</span> /week</p>
+                        <p *ngIf="item.start_price > 0">Starts from</p>
+                        <p *ngIf="item.start_price > 0"><span>{{ currency?.symbol }} {{ item?.start_price | number}}</span> /week</p>
                         <a class="book_btn" href="javascript:void(0);">Book Now</a>
                         <span class="partial_payment_info">Learn more about partial payment</span>
                     </div>
@@ -95,10 +95,9 @@
                                     </div>
                                     <div class="detail_top">
                                         <div class="detail_left">
-                                            <img src="{{s3BucketUrl}}assets/images/airlines_logo.png"
-                                                alt="Airlines Logo">
+                                            <img src="{{flightInfo?.airline_logo}}" alt="Airlines Logo">
                                             <p>{{ flightInfo?.airline_name }}</p>
-                                            <span>6E - 749</span>
+                                            <span>{{ flightInfo?.airline }} - {{ flightInfo?.flight_number }}</span>
                                         </div>
                                         <div class="detail_right">
                                             <div class="flight_info_detail">
