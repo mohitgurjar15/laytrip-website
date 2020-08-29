@@ -6,6 +6,7 @@ import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SigninComponent } from '../../pages/user/signin/signin.component';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-main-header',
@@ -28,8 +29,9 @@ export class MainHeaderComponent implements OnInit {
     constructor(
       private genericService:GenericService,
       public translate: TranslateService,
-      public modalService: NgbModal
-    ) { 
+      public modalService: NgbModal,
+      public nav: NavbarService,
+      ) { 
         let _langunage = localStorage.getItem('_lang');
         let _currency = localStorage.getItem('_curr');
         if(_langunage){
@@ -74,7 +76,9 @@ export class MainHeaderComponent implements OnInit {
     ngDoCheck() {
       this.checkUser();
     }
-
+    ngOnDestroy() {
+      this.nav.show();
+    }
     /**
      * change user lanunage
      * @param langunage 

@@ -96,7 +96,7 @@ export class SocialLoginComponent implements OnInit {
 
     (window as any).fbAsyncInit = function () {
       window['FB'].init({
-        appId: '402941427334423',
+        appId: '933948490440237',
         cookie: true,
         xfbml: true,
         version: 'v3.1',
