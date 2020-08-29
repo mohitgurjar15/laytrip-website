@@ -78,6 +78,7 @@ export class SocialLoginComponent implements OnInit {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
+            console.log('here')
             this.router.navigate(['/']);      
           }
         }, (error: HttpErrorResponse) => {
@@ -87,6 +88,7 @@ export class SocialLoginComponent implements OnInit {
         console.log(error)
       });
   }
+  ngOnDestroy() {} 
 
   loadFacebookSdk() {
 
