@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input,EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 
+declare var $: any;
 
 @Component({
   

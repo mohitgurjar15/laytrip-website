@@ -71,11 +71,7 @@ export class SigninComponent  implements OnInit {
         //resend the otp 
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
-<<<<<<< HEAD
-            
-=======
             $('.modal_container').addClass('right-panel-active');
->>>>>>> 92695a7ca07866b9d1bb2e3c8a3c4dcfbf820228
             this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
           }, (error: HttpErrorResponse) => {       
             this.submitted = this.loading = false;

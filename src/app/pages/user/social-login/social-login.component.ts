@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Location } from '@angular/common';
 
 declare var $: any;
 
@@ -21,7 +22,8 @@ export class SocialLoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     public router: Router,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    public location: Location
   ) { }
 
   @ViewChild('loginRef') loginElement: ElementRef;
@@ -78,8 +80,8 @@ export class SocialLoginComponent implements OnInit {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
-            console.log('here')
-            this.router.navigate(['/']);      
+            // this.router.navigate(['/']);  
+            window.location.href = '';  
           }
         }, (error: HttpErrorResponse) => {
           console.log(error)
@@ -123,7 +125,6 @@ export class SocialLoginComponent implements OnInit {
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
-
           let json_data = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
@@ -135,20 +136,17 @@ export class SocialLoginComponent implements OnInit {
             "app_version": "1.0",
             "os_version": "7.0"
           };
-          console.log(json_data)
 
           this.userService.socialLogin(json_data).subscribe((data: any) => {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
-              this.router.navigate(['/']);
+              window.location.href = '';
             }
           }, (error: HttpErrorResponse) => {
             console.log(error)
           });
 
-        }, (error) => {
-          console.log(JSON.stringify(error, undefined, 2));
         });
       } else {
         this.apiError = 'User login failed';
@@ -156,4 +154,6 @@ export class SocialLoginComponent implements OnInit {
       }
     }, { scope: 'email' });
   }
+
+  ngDoCheck(){ }
 }
