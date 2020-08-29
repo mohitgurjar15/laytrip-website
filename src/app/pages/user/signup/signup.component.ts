@@ -29,7 +29,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   cnfPassFieldTextType :  boolean;
   passFieldTextType :  boolean;
   apiError =  '';
-  term_conditionError =  false;
 
 
   constructor(
@@ -48,7 +47,6 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required],
       gender: ['', Validators.required],
-      term_condition: ['', Validators.required],
     },{
       validator: MustMatch('password', 'confirm_password'),
     });
@@ -80,13 +78,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     }
   }
-  
-  isChecked(event) {
-    if(!event.target.checked){
-      this.signupForm.controls.term_condition.errors.setValue({});
-      this.signupForm.controls.term_condition.errors.required.setValue(true);
-    }
-  }
+ 
   ngOnDestroy() {}
 
  
@@ -108,13 +100,11 @@ export class SignupComponent implements OnInit, OnDestroy {
     
   onSubmit() {
     // this.openOtpPage();
-    this.submitted = true;
-    this.loading = this.term_conditionError = true;
+    this.submitted = this.loading  = true;
+    
     if(this.signupForm.controls.gender.errors && this.is_gender){
       this.signupForm.controls.gender.setValue(this.is_type);
-    } if(this.signupForm.controls.term_condition.errors){
-      this.term_conditionError = true;
-    }
+    } 
     if (this.signupForm.invalid) {
       this.submitted = true;      
       this.loading = false;

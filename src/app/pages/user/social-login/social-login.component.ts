@@ -94,10 +94,12 @@ export class SocialLoginComponent implements OnInit {
 
     (window as any).fbAsyncInit = function () {
       window['FB'].init({
-        appId: '933948490440237',
+        appId: '402941427334423',
         cookie: true,
         xfbml: true,
-        version: 'v3.1'
+        version: 'v3.1',
+        proxy: true,
+        callbackURL: "/auth/facebook/callback"
       });
       window['FB'].AppEvents.logPageView();
     };
@@ -113,8 +115,9 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
-    window['FB'].login((response) => {
-      console.log('login response', response);
+
+    window['FB'].login((response) => {          
+
       if (response.authResponse) {
 
         window['FB'].api('/me', {
@@ -132,6 +135,8 @@ export class SocialLoginComponent implements OnInit {
             "app_version": "1.0",
             "os_version": "7.0"
           };
+          console.log(json_data)
+
           this.userService.socialLogin(json_data).subscribe((data: any) => {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);

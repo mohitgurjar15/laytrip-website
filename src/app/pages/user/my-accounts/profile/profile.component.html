@@ -49,15 +49,9 @@
                                   <div class="form_field">
                                       <label>Email<sup>*</sup></label>
                                       <div class="text_field">
-                                          <input readonly type="email" formControlName="email"  maxlength="20" tabindex="3">
+                                          <input readonly type="email" formControlName="email"  tabindex="3">
                                       </div>
-                                      <div *ngIf="(submitted || profileForm.controls.email.touched) && profileForm.controls.email.errors" class="focus-input100 login-error">
-                                        <div
-                                            *ngIf="profileForm.controls.email.errors.required"
-                                            class="text-danger">Please enter your email.</div>
-                                            <div *ngIf="profileForm.controls.email.errors.pattern && profileForm.controls.email.touched"
-                                            class="text-danger">Please enter valid email address.</div>
-                                    </div>
+                                      
                                   </div>
                                   <div class="form_field">
                                       <label>Phone</label>
@@ -238,7 +232,7 @@
                                       <div class="field_inn">
                                           <label>Zip Code<sup>*</sup></label>
                                           <div class="text_field">
-                                              <input type="text" formControlName="zip_code"  maxlength="6" tabindex="16" placeholder="Enter zip code"  (keypress)="commonFunctoin.validateNumber($event)" >
+                                              <input type="text" formControlName="zip_code"  maxlength="6" tabindex="16" placeholder="Enter zip code"  (keypress)="commonFunctoin.validateNotAllowSpecial($event)" >
                                           </div>
                                           <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors" class="focus-input100 login-error">
                                             <div

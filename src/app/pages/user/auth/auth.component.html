@@ -6,18 +6,21 @@
           <button type="button" class="close" data-dismiss="modal"  (click)="closeModal()">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
           </button>
-          <div class="signInModal" *ngIf="signInModal">
-            <app-signin [pageData]="signInModal" (valueChange)="pageChange($event)"></app-signin>
-          </div>
-          <div *ngIf="signUpModal">
-            <app-signup [pageData]="signUpModal" (valueChange)="pageChange($event)"></app-signup>
-          </div>
-          <div *ngIf="forgotPasswordModal">
-            <app-forgot-password [pageData]="forgotPasswordModal" (valueChange)="pageChange($event)"></app-forgot-password>
-          </div>
-          <div class="forgot_password_modal" id="otp_modal" *ngIf="otpModal">
-            <app-verify-otp [emailForVerifyOtp]="emailForVerifyOtp" [pageData]="otpModal" (valueChange)="pageChange($event)"></app-verify-otp>
-          </div>
+          
+              <div class="signInModal" *ngIf="signInModal">
+                <app-signin [pageData]="signInModal" (valueChange)="pageChange($event)"></app-signin>
+              </div>
+              
+              <div *ngIf="signUpModal">
+                <app-signup [pageData]="signUpModal" (valueChange)="pageChange($event)"></app-signup>
+              </div>
+              <div *ngIf="forgotPasswordModal">
+                <app-forgot-password [pageData]="forgotPasswordModal" (valueChange)="pageChange($event)"></app-forgot-password>
+              </div>
+              <div class="forgot_password_modal" id="otp_modal" *ngIf="otpModal">
+                <app-verify-otp [emailForVerifyOtp]="emailForVerifyOtp" [pageData]="otpModal" (valueChange)="pageChange($event)"></app-verify-otp>
+              </div>
+              
           <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">

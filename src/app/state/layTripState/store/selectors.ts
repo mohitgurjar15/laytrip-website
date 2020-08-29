@@ -20,18 +20,5 @@ export const selectFlightSearchResult: MemoizedSelector<object, any> = createSel
     getFlightSearchResult
 );
 
-// tslint:disable-next-line: no-shadowed-variable
-const getIsLoading = (state: LayTripState): boolean => state.isLoading;
-export const selectLoading: MemoizedSelector<object, any> = createSelector(
-    selectState,
-    getIsLoading
-);
-
-// tslint:disable-next-line: no-shadowed-variable
-const getIsSuccess = (state: LayTripState): boolean => !state.isLoading && state.error == null;
-export const selectIsSuccess: MemoizedSelector<object, any> = createSelector(
-    selectState,
-    getIsSuccess
-);
 
 
