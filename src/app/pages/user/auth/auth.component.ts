@@ -72,6 +72,7 @@ export class AuthComponent implements OnInit {
     this.signUpModal = false;
     this.forgotPasswordModal = false;
     this.otpModal = false;   
+    $('.modal_container').removeClass('right-panel-active');
     this.valueChange.emit({ key: 'signIn', value: true });
   }
 }
