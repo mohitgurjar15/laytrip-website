@@ -4,16 +4,15 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { LayTripState } from './state';
-import { state } from '@angular/animations';
+import { LayTrip } from './state';
 
 export const selectState: MemoizedSelector<
     object,
-    LayTripState
-> = createFeatureSelector<LayTripState>('layTripState');
+    LayTrip
+> = createFeatureSelector<LayTrip>('layTrip');
 
 // tslint:disable-next-line: no-shadowed-variable
-const getFlightSearchResult = (state: LayTripState): any =>
+const getFlightSearchResult = (state: LayTrip): any =>
     state && state.flightSearchResult;
 export const selectFlightSearchResult: MemoizedSelector<object, any> = createSelector(
     selectState,

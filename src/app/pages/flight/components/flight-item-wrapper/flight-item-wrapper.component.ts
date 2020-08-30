@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterContentChecked, OnDestroy } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
-import { LayTripStateStoreService } from '../../../../state/layTripState/layTripState-store.service';
+import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,13 +13,14 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   flightList;
   s3BucketUrl = environment.s3BucketUrl;
+  public defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
   flightListArray = [];
   currency;
 
   subscriptions: Subscription[] = [];
 
   constructor(
-    private layTripStateStoreService: LayTripStateStoreService
+    private layTripStoreService: LayTripStoreService
   ) { }
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.currency = JSON.parse(_currency);
     this.loadJquery();
 
-    this.subscriptions.push(this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
+    this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
       console.log();
       if (res) {
         if (res.items) {

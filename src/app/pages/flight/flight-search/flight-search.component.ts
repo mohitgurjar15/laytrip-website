@@ -1,10 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { LayTripStateStoreService } from '../../../state/layTripState/layTripState-store.service';
+import { LayTripStoreService } from '../../../state/layTrip/layTrip-store.service';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { LayTripService } from '../../../state/layTrip/services/layTrip.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -14,15 +17,16 @@ import { Subscription } from 'rxjs';
 export class FlightSearchComponent implements OnInit, OnDestroy {
 
   s3BucketUrl = environment.s3BucketUrl;
-  loading;
+  loading = true;
   isNotFound = false;
   flightSearchData;
 
   subscriptions: Subscription[] = [];
 
   constructor(
-    private layTripStateStoreService: LayTripStateStoreService,
-    private route: ActivatedRoute
+    private layTripStoreService: LayTripStoreService,
+    private route: ActivatedRoute,
+    private layTripService: LayTripService,
   ) { }
 
   ngOnInit() {
@@ -35,10 +39,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     //   child_count: 0,
     //   infant_count: 0,
     // };
-    this.loading = true;
-    if (this.loading) {
-      this.isNotFound = false;
-    }
     this.route.queryParams.forEach(params => {
       const payload = {
         source_location: params.departure,
@@ -50,14 +50,18 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         infant_count: parseInt(params.infant),
       };
       // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
-      this.layTripStateStoreService.dispatchGetFlightSearchResult(payload);
+      this.layTripStoreService.dispatchGetFlightSearchResult(payload);
       // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
-      this.subscriptions.push(this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
-        // console.log(res);
+      this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
         if (res && res.items) {
           this.loading = false;
           this.isNotFound = false;
+          console.log(this.loading);
+        } else {
+          console.log(this.loading);
         }
+      }, (error: any) => {
+        console.log(error);
       }));
     });
   }

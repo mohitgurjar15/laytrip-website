@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // Rxjs
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 // Environment
 import { environment } from '../../../../environments/environment';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable()
-export class LayTripStateService {
+export class LayTripService {
 
   constructor(
     protected http: HttpClient,
   ) {
   }
-
 
   private setHeaders(params = '') {
     const accessToken = localStorage.getItem('_lay_sess');
