@@ -6,6 +6,7 @@ import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +37,23 @@ export class HomeComponent implements OnInit {
   fromDestinationCode;
   toDestinationCode;
 
+  departureDate;
+  returnDate;
+  totalPerson;
+
+  searchFlightInfo =
+    {
+      trip: 'oneway',
+      departure: '',
+      arrival: '',
+      departure_date: '',
+      // arrival_date: '',
+      class: '',
+      adult: null,
+      child: null,
+      infant: null
+    };
+
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -64,11 +82,14 @@ export class HomeComponent implements OnInit {
       singleDate: true,
       showShortcuts: false,
       singleMonth: true,
+      monthSelect: true,
       format: "DD MMM'YY dddd",
-      extraClass: 'laytrip-datepicker',
+      startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
+      endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+      extraClass: 'laytrip-datepicker'
     }).bind('datepicker-first-date-selected', function (event, obj) {
-      console.log(obj);
-    });
+      this.getDateWithFormat({ departuredate: obj });
+    }.bind(this));
 
     $('#departure_date_icon').click(function (evt) {
       evt.stopPropagation();
@@ -82,10 +103,13 @@ export class HomeComponent implements OnInit {
       showShortcuts: false,
       singleMonth: true,
       format: "DD MMM'YY dddd",
+      startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
+      endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
       extraClass: 'laytrip-datepicker'
     }).bind('datepicker-first-date-selected', function (event, obj) {
-      console.log(obj);
-    });
+      this.returnDate = obj;
+      this.getDateWithFormat({ returndate: obj });
+    }.bind(this));
 
     $('#return_date_icon').click(function (evt) {
       evt.stopPropagation();
@@ -100,7 +124,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
+  tabChange(value) {
+    this.searchFlightInfo.trip = value;
+  }
 
   /**
    * Get All module like (hotel, flight & VR)
@@ -112,7 +138,7 @@ export class HomeComponent implements OnInit {
         response.data.forEach(module => {
           this.moduleList[module.name] = module.status;
         });
-        console.log(this.moduleList);
+        // console.log(this.moduleList);
       },
       (error) => {
 
@@ -121,21 +147,23 @@ export class HomeComponent implements OnInit {
   }
 
   destinationChangedValue(event) {
-    console.log(event.value.code);
-
+    // console.log(event.value.code);
     if (event && event.key && event.key === 'fromSearch') {
       this.fromDestinationCode = event.value.code;
     } else if (event && event.key && event.key === 'toSearch') {
       this.toDestinationCode = event.value.code;
     }
+    this.searchFlightInfo.departure = this.fromDestinationCode;
+    this.searchFlightInfo.arrival = this.toDestinationCode;
   }
 
   dateChange(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   getDateWithFormat(date) {
-    this.commonFunction.parseDateWithFormat(date);
+    this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
+    // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
   }
 
   getSwappedValue(event) {
@@ -147,7 +175,7 @@ export class HomeComponent implements OnInit {
   }
 
   switchDestination() {
-    console.log('swap');
+    // console.log('swap');
     // this.isSwap = true;
     // if (this.tempSwapData.leftSideValue && this.tempSwapData.rightSideValue) {
     //   this.swapped.push(this.tempSwapData.rightSideValue);
@@ -156,9 +184,31 @@ export class HomeComponent implements OnInit {
     // }
   }
 
+  changeTravellerInfo(event) {
+    this.searchFlightInfo.adult = event.adult;
+    this.searchFlightInfo.child = event.child;
+    this.searchFlightInfo.infant = event.infant;
+    this.searchFlightInfo.class = event.class;
+    this.totalPerson = event.totalPerson;
+  }
+
   searchFlights() {
-    let search = 'search?BOM-LAX-01/09/2020_LAX-BOM-06/10/2020&tripType=R&paxType=A-1_C-0_I-0&intl=true&cabinClass=E';
-    this.router.navigate(['flight']);
+    if (this.searchFlightInfo && this.totalPerson && this.searchFlightInfo.departure_date) {
+      this.router.navigate(['search'], {
+        queryParams: {
+          trip: this.searchFlightInfo.trip,
+          departure: this.searchFlightInfo.departure,
+          arrival: this.searchFlightInfo.arrival,
+          departure_date: this.searchFlightInfo.departure_date,
+          class: this.searchFlightInfo.class,
+          adult: this.searchFlightInfo.adult,
+          child: this.searchFlightInfo.child,
+          infant: this.searchFlightInfo.infant
+        },
+        queryParamsHandling: 'merge'
+      });
+    }
+
   }
 
 }

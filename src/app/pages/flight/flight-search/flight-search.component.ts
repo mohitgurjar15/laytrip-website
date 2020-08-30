@@ -1,77 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { LayTripStateStoreService } from '../../../state/layTripState/layTripState-store.service';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.scss']
 })
-export class FlightSearchComponent implements OnInit {
+export class FlightSearchComponent implements OnInit, OnDestroy {
 
   s3BucketUrl = environment.s3BucketUrl;
+  loading;
+  isNotFound = false;
+  flightSearchData;
+
+  subscriptions: Subscription[] = [];
 
   constructor(
-    private layTripStateStoreService: LayTripStateStoreService
+    private layTripStateStoreService: LayTripStateStoreService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.loadJquery();
-    const payload = {
-      source_location: 'JAI',
-      destination_location: 'DEL',
-      departure_date: '2020-12-06',
-      flight_class: 'Economy',
-      adult_count: 1,
-      child_count: 0,
-      infant_count: 0,
-    };
-    // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
-    this.layTripStateStoreService.dispatchGetFlightSearchResult(payload);
-    // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
-    this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
-      // console.log(res);
-    });
-
-  }
-
-  loadJquery() {
-    // Start Flight Price By Day slider js
-    $('.price_day_slider').slick({
-      dots: false,
-      infinite: true,
-      speed: 300,
-      slidesToShow: 7,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: false
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
+    // const payload = {
+    //   source_location: 'JAI',
+    //   destination_location: 'DEL',
+    //   departure_date: '2020-12-06',
+    //   flight_class: 'Economy',
+    //   adult_count: 1,
+    //   child_count: 0,
+    //   infant_count: 0,
+    // };
+    this.loading = true;
+    if (this.loading) {
+      this.isNotFound = false;
+    }
+    this.route.queryParams.forEach(params => {
+      const payload = {
+        source_location: params.departure,
+        destination_location: params.arrival,
+        departure_date: params.departure_date,
+        flight_class: params.class,
+        adult_count: parseInt(params.adult),
+        child_count: parseInt(params.child),
+        infant_count: parseInt(params.infant),
+      };
+      // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
+      this.layTripStateStoreService.dispatchGetFlightSearchResult(payload);
+      // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
+      this.subscriptions.push(this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
+        // console.log(res);
+        if (res && res.items) {
+          this.loading = false;
+          this.isNotFound = false;
         }
-      ]
+      }));
     });
-    // Close Flight Price By Day slider js
   }
 
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { LayTripStateStoreService } from '../../../../state/layTripState/layTripState-store.service';
+import { Subscription } from 'rxjs';
 
 interface SliderDetails {
   value: number;
@@ -15,7 +16,7 @@ interface SliderDetails {
   templateUrl: './filter-flight.component.html',
   styleUrls: ['./filter-flight.component.scss']
 })
-export class FilterFlightComponent implements OnInit {
+export class FilterFlightComponent implements OnInit, OnDestroy {
 
   depatureTimeSlot;
   arrivalTimeSlot;
@@ -41,6 +42,8 @@ export class FilterFlightComponent implements OnInit {
     step: 1
   };
 
+  subscriptions: Subscription[] = [];
+
 
   constructor(
     private layTripStateStoreService: LayTripStateStoreService
@@ -49,7 +52,7 @@ export class FilterFlightComponent implements OnInit {
   ngOnInit() {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
+    this.subscriptions.push(this.layTripStateStoreService.selectFlightSearchResult().subscribe(res => {
       if (res && res.price_range) {
         // FOR FILTER FLIGHT - PRICE & PARTIAL PRICE
         this.priceValue = res.price_range.min_price;
@@ -83,6 +86,10 @@ export class FilterFlightComponent implements OnInit {
           this.arrivalTimeSlotCityName = element.arrival_info.city;
         });
       }
-    });
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

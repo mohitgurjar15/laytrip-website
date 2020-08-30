@@ -1,3 +1,87 @@
+// NG-SELECT SCSS
+
+.ng-select {
+    &.laytrip-input {
+        .ng-dropdown-panel {
+            top: 100%;
+            background: $background-white;
+            left: 0;
+        }
+
+        .ng-input {
+            input {
+                padding: 0;
+            }
+        }
+
+        .ng-select-container {
+            .ng-value-container {
+                .ng-placeholder {
+                    padding: 0 15px;
+                }
+            }
+            span {
+                &.ng-arrow-wrapper {
+                    span {
+                        &.ng-arrow {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            font-size: 16px !important;
+                            color: red !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .ng-select-opened {
+        .ng-select-container {
+            z-index: 0 !important;
+        }
+    }
+
+    .ng-select-container {
+        border: none !important;
+        height: 44px !important;
+        min-height: 0px !important;
+        &:hover {
+            box-shadow: none !important;
+        }
+        .ng-value-container {
+            padding-left: 0px !important;
+            .ng-input {
+                input {
+                    padding-left: 0px !important;
+                }
+            }
+        }
+        .ng-clear-wrapper {
+            padding: 0 0px 0px 5px !important;
+            .ng-clear {
+                font-size: 17px !important;
+                color: red !important;
+            }
+        }
+        .ng-arrow-wrapper {
+            .ng-arrow {
+                display: none !important;
+            }
+        }
+    }
+    .ng-dropdown-panel {
+        border: none !important;
+        box-shadow: none !important;
+        .ng-select-bottom {
+            border-top-color: #fff !important;
+        }
+        .ng-dropdown-panel-items {
+            .ng-option {
+                padding: 0px 0px !important;
+            }
+        }
+    }
+}
+
 .custom_range_slide .ng5-slider .ng5-slider-bar {
     background: #d8d8d8;
     height: 3px;

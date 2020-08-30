@@ -71,8 +71,8 @@ export class ProfileComponent implements OnInit {
       title: [''],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       country_code: ['', [Validators.required]],
+      email: [''],
       phone_no: ['', [Validators.required]],
       address: ['', [Validators.required]],
       zip_code: ['', [Validators.required]],
@@ -223,6 +223,17 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.profileForm.value)
+
+    let formdata = new FormData();
+    let data = '{"id": 10,"name": "Antigua And Barbuda"}';
+    console.log(data)
+    if(this.isJson(data)){        
+      console.log('yes')
+    } else {
+      console.log(this.profileForm.value.country_id)
+      console.log('no')
+    }
     // this.openOtpPage();
     this.submitted = true;
     this.loading = true;
@@ -235,13 +246,11 @@ export class ProfileComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-      let formdata = new FormData();
       let imgfile = '';
       if(this.imageFile){
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
-    
       // formdata.append("title",this.profileForm.value.title);
       formdata.append("title",'mr');
       formdata.append("first_name",this.profileForm.value.first_name);
@@ -288,8 +297,17 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+  }
 
   is_json(text) {
+    console.log(text)
     if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
       replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
       replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {

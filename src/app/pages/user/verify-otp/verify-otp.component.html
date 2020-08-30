@@ -42,7 +42,7 @@
   </div>
 </div>
  -->
- <div class="form-container sign-up-container">
+ <div class="form-container otp-container">
   <div class="verify_otp_modal">
     <div class="modal_top">
         <div class="modal_title">
@@ -50,11 +50,11 @@
             <p>A code was sent to your email address</p>
         </div>
     </div>
+    <p style="color: red;">{{apiError}}</p>
     <div class="modal_cnt">
       <div *ngIf="otpVerified" class="modal_message">
         <h4 style="color: green;">Your OTP is verified successfully.</h4>
       </div>
-      <p style="color: red;">{{apiError}}</p>
         <form  [formGroup]="otpForm" *ngIf="!otpVerified">
             <ul class="add_otp">
                 <li>

@@ -34,7 +34,8 @@
               "src/flight.scss",
               "src/account.scss",
               "src/comman-modal.scss",
-              "src/laytrip.scss"
+              "src/laytrip.scss",
+              "src/assets/css/daterangepicker.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -124,7 +125,8 @@
               "src/flight.scss",
               "src/account.scss",
               "src/comman-modal.scss",
-              "src/laytrip.scss"
+              "src/laytrip.scss",
+              "src/assets/css/daterangepicker.min.css"
             ],
             "scripts": [],
             "assets": [

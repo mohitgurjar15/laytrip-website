@@ -39,7 +39,8 @@
                             <div class="flight_tab">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#Oneway">
+                                        <a class="nav-link active" data-toggle="tab" href="#Oneway"
+                                            (click)="tabChange('oneway')">
                                             <img class="default-icon"
                                                 src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg"
                                                 alt="Oneway Icon" />
@@ -50,7 +51,8 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#Return">
+                                        <a class="nav-link" data-toggle="tab" href="#Return"
+                                            (click)="tabChange('return')">
                                             <img class="default-icon"
                                                 src="{{s3BucketUrl}}assets/images/icon/return-icon.svg"
                                                 alt="Return Icon" />
@@ -61,7 +63,8 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#Multi-city">
+                                        <a class="nav-link" data-toggle="tab" href="#Multi-city"
+                                            (click)="tabChange('multi-city')">
                                             <img class="default-icon"
                                                 src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg"
                                                 alt="Multi City Icon" />
@@ -133,10 +136,12 @@
                                                         </div>
                                                         <div class="date_to">
                                                             <label>Return</label>
-                                                            <div class="search_area">
+                                                            <div class="search_area"
+                                                                [ngClass]="{ 'disable-div' : searchFlightInfo.trip === 'oneway'}">
                                                                 <input type="text" name="date_checkout" maxlength="10"
                                                                     tabindex="4" placeholder="22 Jul’20 Friday"
-                                                                    id="return_date" />
+                                                                    id="return_date"
+                                                                    [disabled]="searchFlightInfo.trip === 'oneway'" />
                                                                 <div class="prev-next">
                                                                     <a href="javascript:void(0);">Prev</a>
                                                                     <a href="javascript:void(0);">Next</a>
@@ -151,18 +156,16 @@
                                                     <li class="grid_box third">
                                                         <div class="travellers">
                                                             <label>Travellers & class</label>
-                                                            <div class="search_area">
-                                                                <div class="travel_info">
-                                                                    <span>01</span> Traveller <div class="drop_aerrow">
-                                                                    </div>
-                                                                </div>
-                                                                <span>Economy</span>
-                                                            </div>
+                                                            <app-traveller-info
+                                                                (changeValue)="changeTravellerInfo($event)">
+                                                            </app-traveller-info>
                                                         </div>
                                                     </li>
                                                 </ul>
                                                 <div class="serch_btn">
-                                                    <button type="submit">Search Flights <img
+                                                    <button type="submit"
+                                                        [disabled]="!totalPerson" [ngClass]="{ 'disable-btn' : !totalPerson }">Search
+                                                        Flights <img
                                                             src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
                                                             alt="Right Arrow" /></button>
                                                 </div>

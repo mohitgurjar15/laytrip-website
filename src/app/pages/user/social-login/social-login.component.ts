@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Location } from '@angular/common';
 
 declare var $: any;
 
@@ -21,7 +22,8 @@ export class SocialLoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     public router: Router,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    public location: Location
   ) { }
 
   @ViewChild('loginRef') loginElement: ElementRef;
@@ -36,7 +38,7 @@ export class SocialLoginComponent implements OnInit {
     window['googleSDKLoaded'] = () => {
       window['gapi'].load('auth2', () => {
         this.auth2 = window['gapi'].auth2.init({
-          client_id: '562377259795-3e19h9as9mqt4rhrreoqqlsf3ae89knh.apps.googleusercontent.com',
+          client_id: '154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com',
           cookiepolicy: 'single_host_origin',
           scope: 'profile email'
         });
@@ -78,15 +80,17 @@ export class SocialLoginComponent implements OnInit {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
-            this.router.navigate(['/']);      
+            // this.router.navigate(['/']);  
+            window.location.href = '';  
           }
         }, (error: HttpErrorResponse) => {
           console.log(error)
         });
       }, (error) => {
-        alert(JSON.stringify(error, undefined, 2));
+        console.log(error)
       });
   }
+  ngOnDestroy() {} 
 
   loadFacebookSdk() {
 
@@ -95,7 +99,9 @@ export class SocialLoginComponent implements OnInit {
         appId: '933948490440237',
         cookie: true,
         xfbml: true,
-        version: 'v3.1'
+        version: 'v3.1',
+        proxy: true,
+        callbackURL: "/auth/facebook/callback"
       });
       window['FB'].AppEvents.logPageView();
     };
@@ -111,36 +117,36 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
-    window['FB'].login((response) => {
-      console.log('login response', response);
+
+    window['FB'].login((response) => {          
+
       if (response.authResponse) {
 
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
-
           let json_data = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
-            "email": userInfo.email,
+            "email": userInfo.email ? userInfo.email : '',
             "social_account_id": userInfo.id,
             "device_type": 1,
-            "device_model": "RNE-L22",
+            "device_model": "Angular web",
             "device_token": "123abc#$%456",
             "app_version": "1.0",
             "os_version": "7.0"
           };
+
           this.userService.socialLogin(json_data).subscribe((data: any) => {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
-              this.router.navigate(['/']);
+              $('#sign_in_modal').modal('hide');
+              window.location.href = '';
             }
           }, (error: HttpErrorResponse) => {
             console.log(error)
           });
 
-        }, (error) => {
-          console.log(JSON.stringify(error, undefined, 2));
         });
       } else {
         this.apiError = 'User login failed';
@@ -148,4 +154,6 @@ export class SocialLoginComponent implements OnInit {
       }
     }, { scope: 'email' });
   }
+
+  ngDoCheck(){ }
 }
