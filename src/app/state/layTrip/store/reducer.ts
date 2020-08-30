@@ -1,12 +1,13 @@
-import { initialState, LayTripState, layTripStateAdapter } from './state';
+import { initialState, LayTrip } from './state';
 import { Actions, ActionTypes } from './actions';
 
-export function reducer(state = initialState, action: Actions): LayTripState {
+export function reducer(state = initialState, action: Actions): LayTrip {
     switch (action.type) {
         // LOAD FLIGHT SEARCH RESULT
         case ActionTypes.LOAD_LAYTRIP_FLIGHT_SEARCH_RESULT: {
             return {
                 ...state,
+                isLoading: true,
                 flightSearchResult: null,
                 error: null,
             };
@@ -15,6 +16,7 @@ export function reducer(state = initialState, action: Actions): LayTripState {
         case ActionTypes.SUCCESS_LAYTRIP_FLIGHT_SEARCH_RESULT: {
             return {
                 ...state,
+                isLoading: false,
                 flightSearchResult: action.payload,
                 error: null,
             };

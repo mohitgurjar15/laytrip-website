@@ -23,7 +23,7 @@
               <span class="checkmark"></span>
               Non Stop
             </label>
-            <span>{{ currency.symbol }} {{ flightStops?.non_stop?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ flightStops?.non_stop?.min_price | number}}</span>
           </li>
           <li>
             <label class="custom_checkbox">
@@ -31,7 +31,7 @@
               <span class="checkmark"></span>
               1 Stop
             </label>
-            <span>{{ currency.symbol }} {{ flightStops?.one_stop?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ flightStops?.one_stop?.min_price | number}}</span>
           </li>
           <li>
             <label class="custom_checkbox">
@@ -39,7 +39,7 @@
               <span class="checkmark"></span>
               2 & more
             </label>
-            <span>{{ currency.symbol }} {{ flightStops?.two_and_two_plus_stop?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ flightStops?.two_and_two_plus_stop?.min_price | number}}</span>
           </li>
         </ul>
       </div>
@@ -52,7 +52,7 @@
               <span class="checkmark"></span>
               12AM - 6AM
             </label>
-            <span>{{ currency.symbol }} {{ arrivalTimeSlot?.first_slot?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.first_slot?.min_price | number}}</span>
           </li>
           <li>
             <label class="custom_checkbox">
@@ -68,7 +68,7 @@
               <span class="checkmark"></span>
               12PM - 6PM
             </label>
-            <span>{{ currency.symbol }} {{ arrivalTimeSlot?.third_slot?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.third_slot?.min_price | number}}</span>
           </li>
           <li>
             <label class="custom_checkbox">
@@ -76,7 +76,7 @@
               <span class="checkmark"></span>
               6PM - 12AM
             </label>
-            <span>{{ currency.symbol }} {{ arrivalTimeSlot?.fourth_slot?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.fourth_slot?.min_price | number}}</span>
           </li>
         </ul>
       </div>
@@ -89,7 +89,7 @@
               <span class="checkmark"></span>
               12AM - 6AM
             </label>
-            <span>{{ currency.symbol }} {{ depatureTimeSlot?.first_slot?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.first_slot?.min_price | number}}</span>
           </li>
           <li>
             <label class="custom_checkbox">
@@ -97,7 +97,7 @@
               <span class="checkmark"></span>
               6AM - 12PM
             </label>
-            <span>{{ currency.symbol }} {{ depatureTimeSlot?.second_slot?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.second_slot?.min_price | number}}</span>
           </li>
           <li>
             <label class="custom_checkbox">
@@ -105,7 +105,7 @@
               <span class="checkmark"></span>
               12PM - 6PM
             </label>
-            <span>{{ currency.symbol }} {{ depatureTimeSlot?.third_slot?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.third_slot?.min_price | number}}</span>
           </li>
           <li>
             <label class="custom_checkbox">
@@ -113,7 +113,7 @@
               <span class="checkmark"></span>
               6PM - 12AM
             </label>
-            <span>{{ currency.symbol }} {{ depatureTimeSlot?.fourth_slot?.min_price | number}}</span>
+            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.fourth_slot?.min_price | number}}</span>
           </li>
         </ul>
       </div>
@@ -134,7 +134,7 @@
               <span class="checkmark"></span>
               {{ airline?.airline_name }}
             </label>
-            <span>{{ airline?.count }}</span>
+            <span>{{ currency?.symbol }} {{ airline?.selling_price }}({{ airline?.count }})</span>
           </li>
         </ul>
         <a class="view_more" href="javascript:void(0);">Show All</a>
