@@ -12,6 +12,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
 import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
+import { ClickOutSideDirective } from 'src/app/_helpers/clickOutSide.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FlightTravelerComponent } from './flight-traveler/flight-traveler.compo
     FlightSearchBarComponent,
     FlightLoaderComponent,
     FlightNotFoundComponent,
-    FlightTravelerComponent
+    FlightTravelerComponent,
+    ClickOutSideDirective
   ],
   imports: [
     CommonModule,
