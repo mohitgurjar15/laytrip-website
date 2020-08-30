@@ -40,6 +40,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   loadJquery() {
+    // $(document).on("click", ".show_detail", function (e) {
+    //   $(this).parents('.listing_block').addClass('add_shadow');
+    //   $(this).parents('.search_block').find('.detail_info_show').slideToggle();
+    // });
+
     $(document).on("click", ".show_detail", function (e) {
       $(this).parents('.listing_block').addClass('add_shadow');
       $(this).parents('.search_block').find('.detail_info_show').slideToggle();
@@ -58,6 +63,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   ngAfterContentChecked() {
     this.flightListArray = this.flightList;
   }
+
+  // showDetails(index) {
+
+  // }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());

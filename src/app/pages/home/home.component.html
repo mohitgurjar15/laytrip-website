@@ -122,9 +122,7 @@
                                                             <label>Departure</label>
                                                             <div class="search_area">
                                                                 <input type="text" name="date_checkin" tabindex="3"
-                                                                    value="{{ defaultDate }}"
-                                                                    placeholder="{{ placeholderDate }}"
-                                                                    id="departure_date"
+                                                                    value="{{ defaultDate }}" id="departure_date"
                                                                     formControlName="departureDate" />
                                                                 <div class="prev-next">
                                                                     <a href="javascript:void(0);">Prev</a>
@@ -142,7 +140,7 @@
                                                                 [ngClass]="{ 'disable-div' : searchFlightInfo.trip === 'oneway'}">
                                                                 <input type="text" name="date_checkout" maxlength="10"
                                                                     value="{{ defaultDate }}" tabindex="4"
-                                                                    placeholder="{{ placeholderDate }}" id="return_date"
+                                                                    id="return_date"
                                                                     [disabled]="searchFlightInfo.trip === 'oneway'" />
                                                                 <div class="prev-next">
                                                                     <a href="javascript:void(0);">Prev</a>
@@ -166,7 +164,7 @@
                                                 </ul>
                                                 <div class="serch_btn">
                                                     <button type="submit"
-                                                        [ngClass]="{ 'disable-btn' : !searchFlightInfo.departure, 'disable-btn' : !searchFlightInfo.arrival }">Search
+                                                        [ngClass]="{ 'disable-btn' : !searchFlightInfo.departure && !searchFlightInfo.arrival }">Search
                                                         Flights <img
                                                             src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
                                                             alt="Right Arrow" /></button>
