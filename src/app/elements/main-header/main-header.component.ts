@@ -6,7 +6,7 @@ import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SigninComponent } from '../../pages/user/signin/signin.component';
-import { NavbarService } from 'src/app/services/navbar.service';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-main-header',
