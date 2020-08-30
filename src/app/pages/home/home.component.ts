@@ -39,17 +39,20 @@ export class HomeComponent implements OnInit {
 
   departureDate;
   returnDate;
-  totalPerson;
+  totalPerson = 1;
+
+  // placeholderDate = moment().add(1, 'months').format("DD MMM'YY dddd");
+  defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
 
   searchFlightInfo =
     {
       trip: 'oneway',
       departure: '',
       arrival: '',
-      departure_date: '',
+      departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
       // arrival_date: '',
       class: '',
-      adult: null,
+      adult: 1,
       child: null,
       infant: null
     };
@@ -84,7 +87,7 @@ export class HomeComponent implements OnInit {
       singleMonth: true,
       monthSelect: true,
       format: "DD MMM'YY dddd",
-      startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
+      startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
       endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
       extraClass: 'laytrip-datepicker'
     }).bind('datepicker-first-date-selected', function (event, obj) {
@@ -193,17 +196,18 @@ export class HomeComponent implements OnInit {
   }
 
   searchFlights() {
-    if (this.searchFlightInfo && this.totalPerson && this.searchFlightInfo.departure_date) {
+    if (this.searchFlightInfo && this.totalPerson &&
+      this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       this.router.navigate(['search'], {
         queryParams: {
           trip: this.searchFlightInfo.trip,
           departure: this.searchFlightInfo.departure,
           arrival: this.searchFlightInfo.arrival,
           departure_date: this.searchFlightInfo.departure_date,
-          class: this.searchFlightInfo.class,
+          class: this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy',
           adult: this.searchFlightInfo.adult,
-          child: this.searchFlightInfo.child,
-          infant: this.searchFlightInfo.infant
+          child: this.searchFlightInfo.child ? this.searchFlightInfo.child : 0,
+          infant: this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0
         },
         queryParamsHandling: 'merge'
       });

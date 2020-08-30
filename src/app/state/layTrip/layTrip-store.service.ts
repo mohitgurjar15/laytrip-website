@@ -7,15 +7,14 @@ import * as selectors from './store/selectors';
 import { State } from '../root-state';
 
 
-@Injectable({ providedIn: 'root' })
-export class LayTripStateStoreService {
+@Injectable()
+export class LayTripStoreService {
 
     constructor(
         private store: Store<State>
     ) { }
 
     // CALL SELECTOR //
-    // Get Campaign count
     selectFlightSearchResult(): Observable<any> {
         return this.store.pipe(select(selectors.selectFlightSearchResult));
     }

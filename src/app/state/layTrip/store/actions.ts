@@ -10,7 +10,7 @@ export enum ActionTypes {
 
 export class LoadLaytripFlightSearchResultAction implements Action {
     readonly type = ActionTypes.LOAD_LAYTRIP_FLIGHT_SEARCH_RESULT;
-    constructor(public payload: any) { }
+    constructor(public payload?: any) { }
 }
 
 export class SuccessLaytripFlightSearchResultAction implements Action {
