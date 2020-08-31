@@ -9,7 +9,7 @@ import {catchError,retry, } from 'rxjs/operators';
     providedIn: 'root'
 })
 
-export class FlightService{
+export class TravelerService{
   
     constructor(
         private http:HttpClient
@@ -17,30 +17,32 @@ export class FlightService{
 
     }
 
-
-    searchAirport(searchItem){
-        return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
-        .pipe(
-            retry(1),
-            catchError(this.handleError)
-          );
-    }
-
-    airRevalidate(routeCode){
-
-        const headers = {
+    setHeaders(params='') {      
+        const accessToken = localStorage.getItem('_lay_sess');
+        const reqData = {
             headers: {
-                language : 'en',
-                currency : 'USD' 
+                Authorization: `Bearer ${accessToken}`
             },
         };
+        if(params) {
+            let reqParams = {};        
+            Object.keys(params).map(k =>{
+                reqParams[k] = params[k];
+            });
+            reqData['params'] = reqParams;
+        }
+        return reqData;
+    }
 
-        return this.http.post(`${environment.apiUrl}v1/flight/air-revalidate/`,routeCode,headers)
+    getTravelers(){
+        
+        return this.http.get(environment.apiUrl+'v1/traveler/list-tavelers',this.setHeaders())
         .pipe(
             retry(1),
             catchError(this.handleError)
           );
     }
+
 
     handleError(error) { 
         console.log("====",error);
