@@ -17,7 +17,7 @@
       <div class="cmn_block stop">
         <h5>Stops</h5>
         <ul>
-          <li *ngIf="flightStops.non_stop.min_price !== 'null'">
+          <li *ngIf="flightStops.non_stop.min_price !== 'null' && flightStops.non_stop.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -25,7 +25,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ flightStops?.non_stop?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="flightStops.one_stop.min_price !== 'null'">
+          <li *ngIf="flightStops.one_stop.min_price !== 'null' && flightStops.one_stop.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -33,7 +33,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ flightStops?.one_stop?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="flightStops.two_and_two_plus_stop.min_price !== 'null'">
+          <li *ngIf="flightStops.two_and_two_plus_stop.min_price !== 'null' && flightStops.two_and_two_plus_stop.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -46,7 +46,7 @@
       <div class="cmn_block arrival_to">
         <h5>Arrival to {{ arrivalTimeSlotCityName }}</h5>
         <ul>
-          <li *ngIf="arrivalTimeSlot.first_slot.min_price !== 'null'">
+          <li *ngIf="arrivalTimeSlot.first_slot.min_price !== 'null' && arrivalTimeSlot.first_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -54,7 +54,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="arrivalTimeSlot.second_slot.min_price !== 'null'">
+          <li *ngIf="arrivalTimeSlot.second_slot.min_price !== 'null' && arrivalTimeSlot.second_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -62,7 +62,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="arrivalTimeSlot.third_slot.min_price !== 'null'">
+          <li *ngIf="arrivalTimeSlot.third_slot.min_price !== 'null' && arrivalTimeSlot.third_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -70,7 +70,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="arrivalTimeSlot.fourth_slot.min_price !== 'null'">
+          <li *ngIf="arrivalTimeSlot.fourth_slot.min_price !== 'null' && arrivalTimeSlot.fourth_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -83,7 +83,7 @@
       <div class="cmn_block departure_to">
         <h5>Departure to {{ departureTimeSlotCityName }}</h5>
         <ul>
-          <li *ngIf="depatureTimeSlot.first_slot.min_price !== 'null'">
+          <li *ngIf="depatureTimeSlot.first_slot.min_price !== 'null' && depatureTimeSlot.first_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -91,7 +91,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ depatureTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="depatureTimeSlot.second_slot.min_price !== 'null'">
+          <li *ngIf="depatureTimeSlot.second_slot.min_price !== 'null' && depatureTimeSlot.second_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -99,7 +99,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ depatureTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="depatureTimeSlot.third_slot.min_price !== 'null'">
+          <li *ngIf="depatureTimeSlot.third_slot.min_price !== 'null' && depatureTimeSlot.third_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -107,7 +107,7 @@
             </label>
             <span>{{ currency?.symbol }} {{ depatureTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="depatureTimeSlot.fourth_slot.min_price !== 'null'">
+          <li *ngIf="depatureTimeSlot.fourth_slot.min_price !== 'null' && depatureTimeSlot.fourth_slot.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>

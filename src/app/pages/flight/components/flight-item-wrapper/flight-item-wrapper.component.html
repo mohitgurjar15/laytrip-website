@@ -1,5 +1,5 @@
-<div class="result_listing">
-    <div class="search_block" *ngFor="let item of flightListArray; let i of index">
+<div class="result_listing" (clickOutside)="clickOutside()">
+    <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
                 <div class="col-md-2 px-0">
@@ -31,8 +31,8 @@
                         </div>
                         <div class="block_detail_btm">
                             <div class="show_detail">
-                                <a href="javascript:void(0);" class="show_more_detail" >
-                                    <!-- (click)="showDetails(i)" -->
+                                <a href="javascript:void(0);" class="show_more_detail"
+                                    (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                     Flight Details
                                 </a>
@@ -57,7 +57,8 @@
                 </div>
             </div>
         </div>
-        <div class="detail_info_show on_out_said" style="display: none">
+        <div class="detail_info_show on_out_said slideInDown" [attr.id]="blockIndex"
+            *ngIf="showFlightDetails === blockIndex">
             <ul id="tabs" class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a id="tab-A" href="#flight-info" class="nav-link active" data-toggle="tab" role="tab">Flight
