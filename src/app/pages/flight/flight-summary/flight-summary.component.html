@@ -23,21 +23,21 @@
                       </div>
                       <div class="flight_middle">
                           <div class="middle_top">
-                              <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
-                              <p>American Airlines <span>Operated by Nacil Air India</span></p>
+                              <img src="{{flightDetail[0].airline_logo}}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                              <p>{{ flightDetail[0].airline_name }} <span>Operated by Nacil Air India</span></p>
                           </div>
                           <div class="middle_btm">
                               <div class="info_left">
-                                  <span>Flight DE-123</span>
+                                  <span>Flight {{ flightDetail[0].routes[0].stops[0].airline }}-{{ flightDetail[0].routes[0].stops[0].flight_number }}</span>
                                   <div class="flight_time_info">
                                       <div class="flight_time_left">
-                                          12:00 AM <span>THU, NOV 29</span>
+                                        {{ flightDetail[0].departure_time }} <span>{{ flightDetail[0].departure_date}}</span>
                                       </div>
                                       <div class="flight_time_separator">
                                           <span></span>
                                       </div>
                                       <div class="flight_time_left">
-                                          02:00 AM <span>THU, NOV 29</span>
+                                        {{ flightDetail[0].arrival_time }} <span>{{ flightDetail[0].arrival_date}}</span>
                                       </div>
                                   </div>
                               </div>
