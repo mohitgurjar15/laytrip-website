@@ -15,6 +15,7 @@ import { FlightTravelerComponent } from './flight-traveler/flight-traveler.compo
 import { FlightSummaryComponent } from './flight-summary/flight-summary.component';
 import { ComponentsModule } from '../../components/components.module';
 import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
     CommonModule,
     FlightRoutingModule,
     Ng5SliderModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule, ReactiveFormsModule
   ]
 })
 export class FlightModule { }

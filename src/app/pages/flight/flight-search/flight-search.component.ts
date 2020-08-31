@@ -20,6 +20,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   loading = true;
   isNotFound = false;
   flightSearchData;
+  flightSearchInfo;
 
   subscriptions: Subscription[] = [];
 
@@ -40,6 +41,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     //   infant_count: 0,
     // };
     this.route.queryParams.forEach(params => {
+      this.flightSearchInfo = params;
       const payload = {
         source_location: params.departure,
         destination_location: params.arrival,
@@ -53,15 +55,17 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       this.layTripStoreService.dispatchGetFlightSearchResult(payload);
       // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
       this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-        if (res && res.items) {
+        if (res) {
+          this.flightSearchData = res.items;
+          // console.log(this.flightSearchData);
           this.loading = false;
           this.isNotFound = false;
-          console.log(this.loading);
+          // console.log(this.loading);
         } else {
-          console.log(this.loading);
+          // console.log(this.loading);
         }
-      }, (error: any) => {
-        console.log(error);
+      }, error => {
+        // console.log(error);
       }));
     });
   }

@@ -1,4 +1,4 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { OnDestroy, Injectable } from '@angular/core';
 import { Subscription, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -16,5 +16,6 @@ export class Interceptor implements HttpInterceptor {
                 return of(error);
             })
         );
+
     }
 }

@@ -57,6 +57,8 @@ export class HomeComponent implements OnInit {
       infant: null
     };
 
+  searchedValue;
+
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -88,7 +90,7 @@ export class HomeComponent implements OnInit {
       monthSelect: true,
       format: "DD MMM'YY dddd",
       startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
-      endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+      // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
       extraClass: 'laytrip-datepicker'
     }).bind('datepicker-first-date-selected', function (event, obj) {
       this.getDateWithFormat({ departuredate: obj });
@@ -107,7 +109,7 @@ export class HomeComponent implements OnInit {
       singleMonth: true,
       format: "DD MMM'YY dddd",
       startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
-      endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+      // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
       extraClass: 'laytrip-datepicker'
     }).bind('datepicker-first-date-selected', function (event, obj) {
       this.returnDate = obj;
@@ -150,6 +152,8 @@ export class HomeComponent implements OnInit {
   }
 
   destinationChangedValue(event) {
+    console.log(event);
+    this.searchedValue = event;
     // console.log(event.value.code);
     if (event && event.key && event.key === 'fromSearch') {
       this.fromDestinationCode = event.value.code;
@@ -198,6 +202,7 @@ export class HomeComponent implements OnInit {
   searchFlights() {
     if (this.searchFlightInfo && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
+      localStorage.setItem('_fligh', this.searchedValue);
       this.router.navigate(['flight/search'], {
         queryParams: {
           trip: this.searchFlightInfo.trip,
