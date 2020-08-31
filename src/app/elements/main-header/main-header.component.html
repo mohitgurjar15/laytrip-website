@@ -40,10 +40,11 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item" *ngIf="nav.visible">
+                            <li class="nav-item" *ngIf="!isLoggedIn">
                                 <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                             </li>
-                            <li class="nav-item" *ngIf="!nav.visible">
+
+                            <li class="nav-item" *ngIf="isLoggedIn">
                                 <a class="nav-link" href="javascript:void(0)" [routerLink]="['/']" (click)="onLoggedout()">Sign Out</a>
                             </li>
                         </ul>
