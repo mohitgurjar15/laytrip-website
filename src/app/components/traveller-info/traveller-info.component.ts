@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -9,6 +9,7 @@ declare var $: any;
 export class TravellerInfoComponent implements OnInit {
 
   @Output() changeValue = new EventEmitter<any>();
+  @Input() label;
 
   adultValue = 1;
   childValue = 0;
@@ -33,7 +34,6 @@ export class TravellerInfoComponent implements OnInit {
   loadJquery() {
     $("body").click(function () {
       $("#add_traveler_open").hide("slow");
-
     });
 
     $("#add_traveler").click(function (e) {

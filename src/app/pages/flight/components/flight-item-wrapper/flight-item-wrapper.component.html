@@ -1,4 +1,4 @@
-<div class="result_listing" (clickOutside)="clickOutside()">
+<div class="result_listing one_way_list" (clickOutside)="clickOutside()">
     <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
@@ -113,7 +113,10 @@
                                             </div>
                                             <div class="flight_duration">
                                                 <p>{{ flightInfo?.duration }}</p>
-                                                <div class="border-dot"></div>
+                                                <div class="border-dot">
+                                                    <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
+                                                </div>
+                                                <p>Flight Duration</p>
                                             </div>
                                             <div class="flight_info_detail">
                                                 <h4>{{ flightInfo?.arrival_code }}
@@ -174,9 +177,18 @@
                             <div class="tab_detail fare_detail_cnt">
                                 <div class="triangle_right"></div>
                                 <ul>
-                                    <li>Base Fare (1 Adult) <span>{{ currency?.symbol }}113</span></li>
-                                    <li>Taxes and Fees (1 Adult) <span>{{ currency?.symbol }}13</span></li>
-                                    <li>Total Fare (1 Adult) <span>{{ currency?.symbol }}126</span></li>
+                                    <li *ngFor="let fareDetails of item.fare_break_dwon">
+                                        <p *ngIf="fareDetails.type !== 'total'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }} {{ fareDetails.type === 'ADT' ? 'Adult' : 'Child' }})
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type === 'total'">
+                                            Total Fare ({{ fareDetails?.quantity }} traveller)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                    </li>
+                                    <!-- <li>Total Fare (1 Adult) <span>{{ currency?.symbol }}126</span></li> -->
                                 </ul>
                                 <p><span>Note:</span> It is a long established fact that a reader will be distracted by
                                     the readable content of a page when looking at its layout. The point of using Lorem
