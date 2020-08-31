@@ -17,6 +17,7 @@ export class FlightSearchBarComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   flightSearchForm: FormGroup;
 
+  
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationDate = '';
   toDestinationDate = '';
