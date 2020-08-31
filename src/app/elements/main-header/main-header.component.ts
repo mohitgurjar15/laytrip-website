@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,DoCheck } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
@@ -7,13 +7,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SigninComponent } from '../../pages/user/signin/signin.component';
 import { NavbarService } from 'src/app/services/navbar.service';
-
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
   styleUrls: ['./main-header.component.scss']
 })
-export class MainHeaderComponent implements OnInit {
+export class MainHeaderComponent implements OnInit ,DoCheck {
 
     langunages:Langunage[]=[];
     selectedLanunage:Langunage={ id : 0, name : '', iso_1Code:'', iso_2Code:'',active:false};
@@ -46,11 +45,9 @@ export class MainHeaderComponent implements OnInit {
           catch(error){
             this.isLanunageSet=false;
             translate.setDefaultLang('en');
-          }
-          
+          }          
         }
         else{
-
           translate.setDefaultLang('en');
         }
 
@@ -72,12 +69,12 @@ export class MainHeaderComponent implements OnInit {
       this.getLangunages();
       this.getCurrencies();      
     }
-    
+   
     ngDoCheck() {
       this.checkUser();
     }
     ngOnDestroy() {
-      this.nav.show();
+      console.log('ngOnDestroy')
     }
     /**
      * change user lanunage

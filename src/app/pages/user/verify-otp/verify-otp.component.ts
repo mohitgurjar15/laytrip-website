@@ -118,7 +118,6 @@ export class VerifyOtpComponent implements OnInit {
         $('#sign_in_modal').modal('hide');
         this.valueChange.emit({ key: 'signIn', value: true});
       }, (error: HttpErrorResponse) => {       
-        console.log(error);
         this.apiError = error.message;
         this.submitted = this.loading = false;        
       }); 

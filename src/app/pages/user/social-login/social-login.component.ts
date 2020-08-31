@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
+import { MainHeaderComponent } from 'src/app/elements/main-header/main-header.component';
 
 declare var $: any;
 
@@ -17,13 +18,15 @@ declare var $: any;
 export class SocialLoginComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   apiError :string =  '';
-
+  test : boolean = false;
 
   constructor(
     private userService: UserService,
     public router: Router,
     public modalService: NgbModal,
-    public location: Location
+    public location: Location,
+    public mainHeaderCmp:MainHeaderComponent
+
   ) { }
 
   @ViewChild('loginRef') loginElement: ElementRef;
@@ -80,8 +83,8 @@ export class SocialLoginComponent implements OnInit {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
-            // this.router.navigate(['/']);  
-            window.location.href = '';  
+            this.router.navigate(['/']);  
+            document.getElementById('navbarNav').click(); 
           }
         }, (error: HttpErrorResponse) => {
           console.log(error)
@@ -96,7 +99,7 @@ export class SocialLoginComponent implements OnInit {
 
     (window as any).fbAsyncInit = function () {
       window['FB'].init({
-        appId: '933948490440237',
+        appId: '402941427334423',
         cookie: true,
         xfbml: true,
         version: 'v3.1',
@@ -138,11 +141,16 @@ export class SocialLoginComponent implements OnInit {
           };
 
           this.userService.socialLogin(json_data).subscribe((data: any) => {
+            
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
-              window.location.href = '';
-            }
+              this.test = true;
+              this.router.navigate(['/']);    
+              document.getElementById('navbarNav').click(); 
+              // window.location.href = '';
+            } 
+           
           }, (error: HttpErrorResponse) => {
             console.log(error)
           });
