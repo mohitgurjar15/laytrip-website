@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
-import { AsteriskMarkComponent } from './asterisk-mark/asterisk-mark.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TravellerInfoComponent } from './traveller-info/traveller-info.component';
+import { CheckoutProgressComponent } from './checkout-progress/checkout-progress.component';
+import { AdultListComponent } from './adult-list/adult-list.component';
+import { ChildListComponent } from './child-list/child-list.component';
+import { InfantListComponent } from './infant-list/infant-list.component';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +21,12 @@ import { TravellerInfoComponent } from './traveller-info/traveller-info.componen
   ],
   exports: [
     SearchAirportComponent,
-    TravellerInfoComponent
+    TravellerInfoComponent,
+    CheckoutProgressComponent,
+    AdultListComponent,
+    ChildListComponent,
+    InfantListComponent
+    
   ]
 })
 export class ComponentsModule { }

@@ -81,6 +81,11 @@
         }
     }
 }
+// NG-SELECT FOCUS REMOVE CSS START
+.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+    box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
+}
+// NG-SELECT FOCUS REMOVE CSS END
 
 .custom_range_slide .ng5-slider .ng5-slider-bar {
     background: #d8d8d8;

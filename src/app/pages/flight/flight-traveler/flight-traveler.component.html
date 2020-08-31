@@ -1,0 +1,93 @@
+<app-checkout-progress></app-checkout-progress>
+
+<section class="detail_info_main add_passenger flight">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="detail_info_left">
+                    <div class="block_passanger_info">
+                        <div class="block_title_section">
+                            <h5>Passenger Info</h5>
+                            <span>(0/4 selected)</span>
+                        </div>
+                        <div class="passanger_detail_main">
+                            <app-adult-list  [travelers]="travelers"></app-adult-list>
+                            <app-child-list></app-child-list>
+                            <app-infant-list></app-infant-list>
+                            <div class="required_wheelchair">
+                                <ul>
+                                    <li>
+                                        <label class="custom_checkbox">
+                                            <input type="checkbox" value="">
+                                            <span class="checkmark"></span>
+                                            Wheelchair Assistance Required
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block_contact_detail">
+                        <div class="block_title_section">
+                            <h5>Contact Details</h5>
+                        </div>
+                        <div class="block_detail">
+                            <div class="form_row">
+                                <div class="form_field">
+                                    <label>First Name<sup>*</sup></label>
+                                    <div class="text_field">
+                                        <input type="text" name="fname" maxlength="20" tabindex="1">
+                                    </div>
+                                </div>
+                                <div class="form_field">
+                                    <label>Last Name<sup>*</sup></label>
+                                    <div class="text_field">
+                                        <input type="text" name="lname" maxlength="20" tabindex="2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_row">
+                                <div class="form_field">
+                                    <label>Email<sup>*</sup></label>
+                                    <div class="text_field">
+                                        <input type="email" name="email" maxlength="20" tabindex="3">
+                                    </div>
+                                </div>
+                                <div class="form_field">
+                                    <label>Phone</label>
+                                    <div class="text_field">
+                                        <div class="phone_no">
+                                            <div class="code">
+                                                <div class="dropdown">
+                                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                                        +00
+                                                        <span class="caret"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="javascript:void(0);">+1</a></li>
+                                                        <li><a href="javascript:void(0);">+91</a></li>
+                                                        <li><a href="javascript:void(0);">+36</a></li>
+                                                        <li><a href="javascript:void(0);">+0000</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="number">
+                                                <input type="text" name="lname" maxlength="20" tabindex="4" value="0000 0000 00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn_payment">
+                        <a href="flight-payment-detail-login-user.html">Continue to payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <app-flight-summary></app-flight-summary>
+            </div>
+        </div>
+    </div>
+<section></section>        

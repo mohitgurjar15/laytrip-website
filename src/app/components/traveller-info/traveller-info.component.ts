@@ -13,11 +13,11 @@ export class TravellerInfoComponent implements OnInit {
   adultValue = 1;
   childValue = 0;
   infantValue = 0;
-  totalPerson = 0;
+  totalPerson = 1;
   class = 'Economy';
 
   travellerInfo = {
-    adult: null,
+    adult: 0,
     child: null,
     infant: null,
     class: 'Economy',
