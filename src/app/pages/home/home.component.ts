@@ -198,7 +198,7 @@ export class HomeComponent implements OnInit {
   searchFlights() {
     if (this.searchFlightInfo && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
-      this.router.navigate(['search'], {
+      this.router.navigate(['flight/search'], {
         queryParams: {
           trip: this.searchFlightInfo.trip,
           departure: this.searchFlightInfo.departure,

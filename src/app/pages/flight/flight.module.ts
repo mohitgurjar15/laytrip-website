@@ -13,7 +13,8 @@ import { FlightLoaderComponent } from './components/flight-loader/flight-loader.
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
 import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
 import { FlightSummaryComponent } from './flight-summary/flight-summary.component';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { ComponentsModule } from '../../components/components.module';
+import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FlightLoaderComponent,
     FlightNotFoundComponent,
     FlightTravelerComponent,
-    FlightSummaryComponent
+    FlightSummaryComponent,
+    ClickOutSideDirective
   ],
   imports: [
     CommonModule,
