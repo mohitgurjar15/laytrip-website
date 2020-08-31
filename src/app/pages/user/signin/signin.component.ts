@@ -32,8 +32,8 @@ export class SigninComponent  implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router
-    ) {}
+    public router: Router,
+    ) { }
 
 
   ngOnInit() {

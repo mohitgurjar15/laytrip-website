@@ -23,6 +23,7 @@ export class FlightTravelerComponent implements OnInit {
 
     this.travelerService.getTravelers().subscribe((res:any)=>{
       this.travelers = res.data;
+      console.log(this.travelers )
     })
   }
 }

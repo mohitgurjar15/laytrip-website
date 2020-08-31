@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   maxDate: any = {};
   public startDate: Date;
   is_gender: boolean = true;
-  is_type: string = 'M';
+  is_type: string = '';
   public imageFile:any  = '';
   public imageFileError = false;
   public imageErrorMsg: string = 'Image is required';
@@ -193,13 +193,14 @@ export class ProfileComponent implements OnInit {
     this.image = res.profilePic;
     this.selectResponse = res;
     let dob_selected = new Date(res.dob)
+    this.is_type = res.gender;
 
-     this.profileForm.patchValue({      
+    this.profileForm.patchValue({      
         first_name: res.firstName,
         last_name: res.lastName,
         email: res.email,
         gender  : res.gender,        
-        zip_code  : res.ziCode,        
+        zip_code  : res.zipCode,        
         title  : res.title,        
         dob: {year:dob_selected.getFullYear(),month:dob_selected.getMonth(),day:dob_selected.getDate()},
         country_code:res.countryCode,        
@@ -213,8 +214,7 @@ export class ProfileComponent implements OnInit {
         profile_pic: res.profilePic  
     });	 
     }, (error: HttpErrorResponse) => {
-      if (error.status === 404) {        console.log('error')
-
+      if (error.status === 404) {
         this.router.navigate(['/']);
       } else {
         console.log('error')
@@ -223,20 +223,8 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.profileForm.value)
-
-    let formdata = new FormData();
-    let data = '{"id": 10,"name": "Antigua And Barbuda"}';
-    console.log(data)
-    if(this.isJson(data)){        
-      console.log('yes')
-    } else {
-      console.log(this.profileForm.value.country_id)
-      console.log('no')
-    }
-    // this.openOtpPage();
-    this.submitted = true;
-    this.loading = true;
+    this.submitted = this.loading = true;
+    console.log(this.is_type)
     if(this.profileForm.controls.gender.errors && this.is_gender){
       this.profileForm.controls.gender.setValue(this.is_type);
     }
@@ -246,74 +234,59 @@ export class ProfileComponent implements OnInit {
       this.loading = false;
       return;
     } else {
+      let formdata = new FormData();
+
       let imgfile = '';
       if(this.imageFile){
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
-      // formdata.append("title",this.profileForm.value.title);
       formdata.append("title",'mr');
+      // formdata.append("title",this.profileForm.value.title);
       formdata.append("first_name",this.profileForm.value.first_name);
       formdata.append("last_name",this.profileForm.value.last_name);
-      formdata.append("email",this.profileForm.value.email);
-      if(this.is_json(this.profileForm.value.country_id)){        
-        formdata.append("country_id", this.profileForm.value.country_id);
-      } else {
-        formdata.append("country_id", this.selectResponse.country.id);
-      }
-      if(this.is_json(this.profileForm.value.state_id)){        
-        formdata.append("state_id", this.profileForm.value.state_id);
-      } else{
-        formdata.append("state_id", this.selectResponse.state.id);
-      }
+      formdata.append("email",this.profileForm.value.email);      
       formdata.append("city_name",this.profileForm.value.city_name);
       formdata.append("zip_code",this.profileForm.value.zip_code);
       formdata.append("address",this.profileForm.value.address);
       formdata.append("address1",this.profileForm.value.address);
-      
-      if(this.is_json(this.profileForm.value.country_code)){        
-        formdata.append("country_code", this.profileForm.value.country_code);
-      } else {
-        formdata.append("country_code",this.profileForm.value.country_code.name);
-      } 
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
       formdata.append("dob", this.dateFormator(this.profileForm.value.dob));
-      if(this.is_json(this.profileForm.value.preferred_language)){        
-        formdata.append("prefer_language", this.profileForm.value.preferred_language);
+      if(typeof(this.profileForm.value.country_id) != 'object'){        
+        formdata.append("country_id", this.selectResponse.country.id);
       } else {
-        formdata.append("prefer_language", this.selectResponse.preferredLanguage.id);
+        formdata.append("country_id", this.profileForm.value.country_id.id);
+      }
+      if(typeof(this.profileForm.value.state_id) != 'object'){        
+        formdata.append("state_id", this.selectResponse.state.id);
+      } else{
+        formdata.append("state_id", this.profileForm.value.state.id);
+      }
+      if(typeof(this.profileForm.value.country_code) != 'object'){        
+        formdata.append("country_code", this.selectResponse.country_code);
+      } else {
+        formdata.append("country_code",this.profileForm.value.country_code.id);
+      } 
+      if(typeof(this.profileForm.value.preferred_language) != 'object'){        
+        formdata.append("prefer_language", this.selectResponse.preferredLanguage);
+      } else {
+        formdata.append("prefer_language", this.profileForm.value.preferred_language.id);
+      }    
+      if(typeof(this.profileForm.value.preferred_language) != 'object'){        
+        formdata.append("currency_id", this.selectResponse.preferredLanguage);
+      } else {
+        formdata.append("currency_id", this.profileForm.value.currency_id.id);
       }    
       formdata.append("passport_expiry",'2020-08-06');
-
+      console.log(this.profileForm.value)
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
         localStorage.setItem("_lay_sess", data.token);
-
         this.router.navigate(['/']);      
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading = false;
       });
-    }
-  }
-
-  isJson(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-  }
-
-  is_json(text) {
-    console.log(text)
-    if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
-      replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-      replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-      return true;
-    } else {
-      return false;
     }
   }
 }

@@ -34,7 +34,9 @@ export class UserService {
     }
     return reqData;
   }  
+  
   handleError(error) {
+    console.log('dfdf')
     let errorMessage = {};
     if (error.status == 0) {
       errorMessage = { message: "API Server is not responding"};
