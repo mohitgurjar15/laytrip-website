@@ -1,0 +1,180 @@
+@import "_cstm-variable.scss";
+
+.modify_search {
+    .flight_tab {
+        .tab-content {
+            .flight_search {
+                .flight-grid {
+                    .grid_box {
+                        &.third {
+                            .travellers {
+                                .search_area {
+                                    .traveller_add_block {
+                                        width: 260px;
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 105%;
+                                        transform: translateY(-50%);
+                                        background: $background-white;
+                                        box-shadow: 0px 3px 15px $shadow-black;
+                                        padding: 15px;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        z-index: 99;
+
+                                        &:before {
+                                            width: 0;
+                                            height: 0;
+                                            border-top: 9px solid transparent;
+                                            border-bottom: 9px solid transparent;
+                                            border-right: 9px solid $background-white;
+                                            position: absolute;
+                                            top: 50%;
+                                            left: -9px;
+                                            transform: translateY(-50%);
+                                            content: "";
+                                            z-index: 2;
+                                        }
+
+                                        &:after {
+                                            width: 0;
+                                            height: 0;
+                                            border-top: 10px solid transparent;
+                                            border-bottom: 10px solid transparent;
+                                            border-right: 10px solid $text-light-grey;
+                                            position: absolute;
+                                            top: 50%;
+                                            left: -10px;
+                                            transform: translateY(-50%);
+                                            content: "";
+                                        }
+
+                                        ul {
+                                            margin: 0;
+                                            padding: 0;
+                                            list-style: none;
+
+                                            li {
+                                                width: 100%;
+                                                display: flex;
+                                                justify-content: space-between;
+                                                align-items: center;
+                                                padding: 0 0 20px;
+
+                                                .left {
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    color: $text-grey;
+
+                                                    span {
+                                                        font-size: 14px;
+                                                        color: $text-darkblue;
+                                                        display: block;
+                                                        padding: 0;
+                                                    }
+                                                }
+
+                                                .right {
+                                                    width: 100px;
+                                                    display: flex;
+                                                    align-items: center;
+
+                                                    .qtyminus {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        background: $background-white;
+                                                        border: 1px solid $secondary-color;
+                                                        border-radius: 5px;
+                                                        color: $secondary-color;
+                                                        padding: 0;
+                                                        font-size: 18px;
+
+                                                        &.un_active {
+                                                            border: 1px solid $text-light-grey;
+                                                            color: $text-light-grey;
+                                                            cursor: not-allowed;
+                                                        }
+
+                                                        &.disable_btn {
+                                                            cursor: not-allowed;
+                                                        }
+                                                    }
+
+                                                    .qty {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        font-size: 20px;
+                                                        font-weight: 400;
+                                                        color: $text-darkblue;
+                                                        border: none;
+                                                        text-align: center;
+                                                    }
+
+                                                    .qtyplus {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        background: $background-white;
+                                                        border: 1px solid $secondary-color;
+                                                        border-radius: 5px;
+                                                        color: $secondary-color;
+                                                        padding: 0;
+                                                        font-size: 18px;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .flight_cat {
+                                            width: 100%;
+
+                                            ul {
+                                                display: flex;
+                                                flex-wrap: wrap;
+                                                align-content: center;
+                                                justify-content: space-between;
+
+                                                li {
+                                                    width: 48%;
+                                                    margin: 0 0 10px;
+                                                    padding: 0;
+
+                                                    &:last-child {
+                                                        width: 100%;
+                                                        margin: 0;
+                                                    }
+
+                                                    a {
+                                                        line-height: 32px;
+                                                        width: 100%;
+                                                        text-align: center;
+                                                        background: $background-white;
+                                                        border: 1px solid $text-light-grey;
+                                                        border-radius: 5px;
+                                                        font-size: 14px;
+                                                        color: $text-light-grey;
+
+                                                        &:hover {
+                                                            background: $secondary-color;
+                                                            border: 1px solid $secondary-color;
+                                                            color: $text-white;
+                                                        }
+
+                                                        &.active_cat {
+                                                            background: $secondary-color;
+                                                            border: 1px solid $secondary-color;
+                                                            color: $text-white;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

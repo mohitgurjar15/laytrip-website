@@ -5,7 +5,7 @@
         <div class="flight_tab">
           <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#Oneway">
+              <a class="nav-link active" data-toggle="tab" href="#Oneway" (click)="tabChange('oneway')">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg"
                   alt="Oneway Icon" />
@@ -13,7 +13,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Return">
+              <a class="nav-link" data-toggle="tab" href="#Return" (click)="tabChange('return')">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
                   alt="Return Icon" />
@@ -21,7 +21,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Multi-city">
+              <a class="nav-link" data-toggle="tab" href="#Multi-city" (click)="tabChange('multi-city')">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg"
                   alt="Multi City Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon-active.svg"
@@ -39,13 +39,31 @@
                       <div class="flight_form">
                         <div class="search_area">
                           <label>From</label>
-                          <!-- <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" />
+                          <!-- <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" (keyup)="" />
                           <span>NY, United States</span> -->
-                          <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
-                            [id]="'fromSearch'" [label]="'From'" [placeHolder]="'New York'"
-                            [defaultSelected]="'NY, United States'" (changeValue)="destinationChangedValue($event)"
-                            (getSwapValue)="getSwappedValue($event)" [swappedData]="swapped">
-                          </app-search-airport>
+                          <ng-select [loading]="loading" [selectOnTab]="true" [items]="data" bindLabel="city"
+                            bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
+                            (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, {key: 'fromSearch'})"
+                            class="laytrip-input" placeholder="{{ placeHolder1 }}">
+                            <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
+                              let-search="searchTerm">
+                              <ul class="item-list">
+                                <li class="item">
+                                  <div class="item-left">
+                                    <p class="item-name">{{item.name}}</p>
+                                    <p class="item-city-country">{{item.city}},{{item.country}}</p>
+                                  </div>
+                                  <div class="item-right">
+                                    <p>{{item.code}}</p>
+                                  </div>
+                                </li>
+                              </ul>
+                            </ng-template>
+                          </ng-select>
+                          <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
+                          <ng-template #selectedAirport>
+                            <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
+                          </ng-template>
                         </div>
                       </div>
                       <div class="switch_btn">
@@ -56,13 +74,31 @@
                       <div class="flight_to">
                         <div class="search_area">
                           <label>To</label>
-                          <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'"
-                            [id]="'toSearch'" [label]="'To'" [placeHolder]="'Los Angeles'"
-                            [defaultSelected]="'CA, United States'" (changeValue)="destinationChangedValue($event)"
-                            (getSwapValue)="getSwappedValue($event)" [swappedData]="swapped">
-                          </app-search-airport>
                           <!-- <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
                           <span>CA, United States</span> -->
+                          <ng-select [loading]="loading" [selectOnTab]="true" [items]="data" bindLabel="city"
+                            bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
+                            (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, {key: 'toSearch'})"
+                            class="laytrip-input" placeholder="{{ placeHolder2 }}">
+                            <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
+                              let-search="searchTerm">
+                              <ul class="item-list">
+                                <li class="item">
+                                  <div class="item-left">
+                                    <p class="item-name">{{item.name}}</p>
+                                    <p class="item-city-country">{{item.city}},{{item.country}}</p>
+                                  </div>
+                                  <div class="item-right">
+                                    <p>{{item.code}}</p>
+                                  </div>
+                                </li>
+                              </ul>
+                            </ng-template>
+                          </ng-select>
+                          <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
+                          <ng-template #selectedAirport>
+                            <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
+                          </ng-template>
                         </div>
                       </div>
                     </li>
@@ -70,27 +106,27 @@
                       <div class="date_form">
                         <div class="search_area">
                           <label>Departure</label>
-                          <input type="text" name="date_checkin" maxlength="10" tabindex="3"
-                            placeholder="22 Jul’20 Friday" />
+                          <input type="text" name="date_checkin" tabindex="3" value="{{ defaultDate }}"
+                            id="departure_date" formControlName="departureDate" />
                           <div class="prev-next">
                             <a href="javascript:void(0);">Prev</a>
                             <a href="javascript:void(0);">Next</a>
                           </div>
-                          <div class="date_icon">
+                          <div class="date_icon" id="departure_date_icon">
                             <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
                           </div>
                         </div>
                       </div>
                       <div class="date_to">
-                        <div class="search_area">
+                        <div class="search_area" [ngClass]="{ 'disable-div' : searchFlightInfo.trip === 'oneway'}">
                           <label>Return</label>
-                          <input type="text" name="date_checkout" maxlength="10" tabindex="4"
-                            placeholder="22 Jul’20 Friday" />
+                          <input type="text" name="date_checkout" maxlength="10" value="{{ defaultDate }}" tabindex="4"
+                            id="return_date" [disabled]="searchFlightInfo.trip === 'oneway'" />
                           <div class="prev-next">
                             <a href="javascript:void(0);">Prev</a>
                             <a href="javascript:void(0);">Next</a>
                           </div>
-                          <div class="date_icon">
+                          <div class="date_icon" id="return_date_icon">
                             <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
                           </div>
                         </div>
@@ -98,12 +134,14 @@
                     </li>
                     <li class="grid_box third">
                       <div class="travellers">
-                        <div class="search_area">
-                          <label>Travellers & class</label>
-                          <div class="travel_info">
+                        <div class="">
+                          <!-- <label>Travellers & class</label> -->
+                          <app-traveller-info [label]="'Travellers & class'" (changeValue)="changeTravellerInfo($event)">
+                          </app-traveller-info>
+                          <!-- <div class="travel_info">
                             <span>01</span> Traveller <div class="drop_aerrow"></div>
                           </div>
-                          <span>Economy</span>
+                          <span>Economy</span> -->
                         </div>
                       </div>
                     </li>
