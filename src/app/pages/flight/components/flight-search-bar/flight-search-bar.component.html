@@ -32,7 +32,7 @@
           </ul>
           <div class="tab-content">
             <div id="Oneway" class="tab-pane active">
-              <form [formGroup]="flightSearchForm" novalidate autocomplete="off" >
+              <form [formGroup]="flightSearchForm" novalidate autocomplete="off" (ngSubmit)="searchFlights()">
                 <div class="flight_search">
                   <ul class="flight-grid oneway">
                     <li class="grid_box first">

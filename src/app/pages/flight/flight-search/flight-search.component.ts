@@ -70,6 +70,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     });
   }
 
+  getSearchItem(event) {
+    console.log(event);
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }

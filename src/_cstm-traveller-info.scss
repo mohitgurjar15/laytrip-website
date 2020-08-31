@@ -178,3 +178,21 @@
         }
     }
 }
+
+app-flight-search-bar {
+    .modify_search
+        .flight_tab
+        .tab-content
+        .flight_search
+        .flight-grid
+        .grid_box.third
+        .travellers
+        .search_area
+        .traveller_add_block
+        ul
+        li
+        .right
+        .qty {
+        width: 50px !important;
+    }
+}

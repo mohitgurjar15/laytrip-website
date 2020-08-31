@@ -63,12 +63,14 @@ export class SigninComponent  implements OnInit {
         if(data.token){
           localStorage.setItem("_lay_sess", data.token);
           $('#sign_in_modal').modal('hide');
+          
           this.loading = this.submitted = false;
           this.router.navigate(['/']);      
         }
       }, (error: HttpErrorResponse) => {       
         console.log('sds')
         //resend the otp 
+        console.log('fgfgfgfgfgfgfgfgfgfgfg');
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
             $('.modal_container').addClass('right-panel-active');

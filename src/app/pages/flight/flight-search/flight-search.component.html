@@ -1,4 +1,4 @@
-<app-flight-search-bar></app-flight-search-bar>
+<app-flight-search-bar (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar>
 <section class="search_result flight pb-0" *ngIf="loading">
   <app-flight-loader></app-flight-loader>
 </section>
