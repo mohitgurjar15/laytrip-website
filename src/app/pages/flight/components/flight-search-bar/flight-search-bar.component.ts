@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,6 +13,7 @@ import { FlightService } from '../../../../services/flight.service';
 })
 export class FlightSearchBarComponent implements OnInit {
 
+  @Output() searchBarInfo = new EventEmitter<any>();
   s3BucketUrl = environment.s3BucketUrl;
   flightSearchForm: FormGroup;
 
@@ -196,6 +197,15 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.infant = event.infant;
     this.searchFlightInfo.class = event.class;
     this.totalPerson = event.totalPerson;
+  }
+
+  searchFlights() {
+    console.log(this.searchFlightInfo);
+    if (this.searchFlightInfo && this.totalPerson &&
+      this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
+      this.searchBarInfo.emit(this.searchFlightInfo);
+    }
+
   }
 
 }
