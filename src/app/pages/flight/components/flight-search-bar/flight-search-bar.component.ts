@@ -3,7 +3,7 @@ declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { FlightService } from 'src/app/services/flight.service';
+import { FlightService } from '../../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-search-bar',
