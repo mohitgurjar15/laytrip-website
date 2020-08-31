@@ -2,7 +2,7 @@
 <section class="search_result flight pb-0" *ngIf="loading">
   <app-flight-loader></app-flight-loader>
 </section>
-<section class="search_result flight pb-0" *ngIf="isNotFound">
+<section class="search_result flight pb-0" *ngIf="!flightSearchData && !loading">
   <app-flight-not-found></app-flight-not-found>
 </section>
 <section class="search_result flight" *ngIf="!loading && !isNotFound">

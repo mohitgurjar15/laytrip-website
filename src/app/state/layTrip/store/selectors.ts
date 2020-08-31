@@ -13,7 +13,7 @@ export const selectState: MemoizedSelector<
 
 // tslint:disable-next-line: no-shadowed-variable
 const getFlightSearchResult = (state: LayTrip): any =>
-    state && state.flightSearchResult;
+    state && state.flightSearchResult ? state.flightSearchResult : null;
 export const selectFlightSearchResult: MemoizedSelector<object, any> = createSelector(
     selectState,
     getFlightSearchResult

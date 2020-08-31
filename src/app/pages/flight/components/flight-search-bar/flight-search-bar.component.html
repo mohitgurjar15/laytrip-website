@@ -7,36 +7,45 @@
             <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#Oneway">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg" alt="Oneway Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg"
+                  alt="Oneway Icon" />
                 <span>Oneway</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#Return">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg" alt="Return Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
+                  alt="Return Icon" />
                 <span>Return</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#Multi-city">
-                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg" alt="Multi City Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon-active.svg" alt="Multi City Icon" />
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg"
+                  alt="Multi City Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/multi-city-icon-active.svg"
+                  alt="Multi City Icon" />
                 <span>Multi city</span>
               </a>
             </li>
           </ul>
           <div class="tab-content">
             <div id="Oneway" class="tab-pane active">
-              <form action="post">
+              <form [formGroup]="flightSearchForm" novalidate autocomplete="off" (ngSubmit)="searchFlights()">
                 <div class="flight_search">
                   <ul class="flight-grid oneway">
                     <li class="grid_box first">
                       <div class="flight_form">
                         <div class="search_area">
                           <label>From</label>
-                          <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" />
-                          <span>NY, United States</span>
+                          <!-- <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" />
+                          <span>NY, United States</span> -->
+                          <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
+                            [id]="'fromSearch'" [label]="'From'" [placeHolder]="'New York'"
+                            [defaultSelected]="'NY, United States'" (changeValue)="destinationChangedValue($event)"
+                            (getSwapValue)="getSwappedValue($event)" [swappedData]="swapped">
+                          </app-search-airport>
                         </div>
                       </div>
                       <div class="switch_btn">
@@ -47,8 +56,13 @@
                       <div class="flight_to">
                         <div class="search_area">
                           <label>To</label>
-                          <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
-                          <span>CA, United States</span>
+                          <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'"
+                            [id]="'toSearch'" [label]="'To'" [placeHolder]="'Los Angeles'"
+                            [defaultSelected]="'CA, United States'" (changeValue)="destinationChangedValue($event)"
+                            (getSwapValue)="getSwappedValue($event)" [swappedData]="swapped">
+                          </app-search-airport>
+                          <!-- <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
+                          <span>CA, United States</span> -->
                         </div>
                       </div>
                     </li>
@@ -95,7 +109,8 @@
                     </li>
                   </ul>
                   <div class="serch_btn">
-                    <button>Modify Search <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
+                    <button>Modify Search <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                        alt="Right Arrow" /></button>
                   </div>
                 </div>
               </form>
