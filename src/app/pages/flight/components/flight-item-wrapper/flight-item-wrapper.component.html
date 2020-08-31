@@ -5,7 +5,7 @@
                 <div class="col-md-2 px-0">
                     <div class="block_im">
                         <img src="{{ item?.airline_logo || defaultImage }}" alt="Airlines Logo"
-                            onerror="this.onerror=null;this.src='https://www.traveladvantage.com/assets/uploads/hotels/thumbs/default_hotel.jpg';">
+                            onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                         <p>{{ item?.airline_name }}</p>
                         <span>{{ item?.airline }} - {{ item?.routes[0].stops[0].flight_number }}</span>
                     </div>
@@ -51,7 +51,10 @@
                         <p *ngIf="item.start_price > 0">Starts from</p>
                         <p *ngIf="item.start_price > 0">
                             <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
-                        <a class="book_btn" href="javascript:void(0);">Book Now</a>
+                        <!-- <a class="book_btn" href="javascript:void(0);"></a> -->
+                        <a class="book_btn" [routerLink]="['/flight/traveler', item.route_code ]">
+                            Book Now
+                          </a>
                         <span class="partial_payment_info">Learn more about partial payment</span>
                     </div>
                 </div>
@@ -100,7 +103,7 @@
                                     <div class="detail_top">
                                         <div class="detail_left">
                                             <img src="{{flightInfo?.airline_logo || defaultImage}}" alt="Airlines Logo"
-                                                onerror="this.onerror=null;this.src='https://www.traveladvantage.com/assets/uploads/hotels/thumbs/default_hotel.jpg';">
+                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                             <p>{{ flightInfo?.airline_name }}</p>
                                             <span>{{ flightInfo?.airline }} - {{ flightInfo?.flight_number }}</span>
                                         </div>

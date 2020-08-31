@@ -3,8 +3,8 @@ declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { FlightService } from 'src/app/services/flight.service';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../../../_helpers/common-function';
+import { FlightService } from '../../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-search-bar',
@@ -112,10 +112,10 @@ export class FlightSearchBarComponent implements OnInit {
       this.getDateWithFormat({ returndate: obj });
     }.bind(this));
 
-    $('#return_date_icon').click(function (evt) {
-      evt.stopPropagation();
-      $('#return_date').data('dateRangePicker').open();
-    });
+    // $('#return_date_icon').click(function (evt) {
+    //   evt.stopPropagation();
+    //   $('#return_date').data('dateRangePicker').open();
+    // });
 
     $(".featured_slid").slick({
       dots: false,

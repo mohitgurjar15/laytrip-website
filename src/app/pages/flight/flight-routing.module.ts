@@ -9,7 +9,7 @@ const routes: Routes = [
     component: FlightSearchComponent,
   },
   {
-    path: 'traveler',
+    path: 'traveler/:rc',
     component: FlightTravelerComponent,
   }
 ];

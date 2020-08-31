@@ -12,9 +12,10 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
 import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
-import { ClickOutSideDirective } from 'src/app/_helpers/clickOutSide.directive';
+import { FlightSummaryComponent } from './flight-summary/flight-summary.component';
+import { ComponentsModule } from '../../components/components.module';
+import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule } from 'src/app/components/components.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FlightLoaderComponent,
     FlightNotFoundComponent,
     FlightTravelerComponent,
+    FlightSummaryComponent,
     ClickOutSideDirective
   ],
   imports: [
