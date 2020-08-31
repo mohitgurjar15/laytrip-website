@@ -3,8 +3,10 @@ input.ng-invalid.ng-touched {
 }
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown{
 	height: 40px;
+	width: 100px;
 	border-bottom: 1px solid #E0E2E5;
 }
-.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select input{
-	height:32px;	
+
+.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select{
+	height:100%;	
 }
