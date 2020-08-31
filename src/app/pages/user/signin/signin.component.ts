@@ -68,9 +68,6 @@ export class SigninComponent  implements OnInit {
           this.router.navigate(['/']);      
         }
       }, (error: HttpErrorResponse) => {       
-        console.log('sds')
-        //resend the otp 
-        console.log('fgfgfgfgfgfgfgfgfgfgfg');
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
             $('.modal_container').addClass('right-panel-active');
