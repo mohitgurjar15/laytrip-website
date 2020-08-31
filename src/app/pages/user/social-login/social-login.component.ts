@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
-import { MainHeaderComponent } from 'src/app/elements/main-header/main-header.component';
 
 declare var $: any;
 
@@ -24,9 +23,7 @@ export class SocialLoginComponent implements OnInit {
     private userService: UserService,
     public router: Router,
     public modalService: NgbModal,
-    public location: Location,
-    public mainHeaderCmp:MainHeaderComponent
-
+    public location: Location
   ) { }
 
   @ViewChild('loginRef') loginElement: ElementRef;
@@ -148,7 +145,6 @@ export class SocialLoginComponent implements OnInit {
               this.test = true;
               this.router.navigate(['/']);    
               document.getElementById('navbarNav').click(); 
-              // window.location.href = '';
             } 
            
           }, (error: HttpErrorResponse) => {

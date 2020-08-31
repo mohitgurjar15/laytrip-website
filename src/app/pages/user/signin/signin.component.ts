@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
-import { NavbarService } from 'src/app/services/navbar.service';
 
 declare var $: any;
 
@@ -33,9 +32,7 @@ export class SigninComponent  implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router,
-    public nav: NavbarService,
-
+    public router: Router
     ) {}
 
 
