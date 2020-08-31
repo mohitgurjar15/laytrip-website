@@ -7,7 +7,7 @@ import * as selectors from './store/selectors';
 import { State } from '../root-state';
 
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LayTripStoreService {
 
     constructor(

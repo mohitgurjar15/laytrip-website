@@ -13,6 +13,8 @@ import { FlightLoaderComponent } from './components/flight-loader/flight-loader.
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
 import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
 import { ClickOutSideDirective } from 'src/app/_helpers/clickOutSide.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ClickOutSideDirective } from 'src/app/_helpers/clickOutSide.directive';
   imports: [
     CommonModule,
     FlightRoutingModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    ComponentsModule,
+    FormsModule, ReactiveFormsModule
   ]
 })
 export class FlightModule { }
