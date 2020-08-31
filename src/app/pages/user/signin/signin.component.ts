@@ -63,6 +63,7 @@ export class SigninComponent  implements OnInit {
         if(data.token){
           localStorage.setItem("_lay_sess", data.token);
           $('#sign_in_modal').modal('hide');
+          
           this.loading = this.submitted = false;
           this.router.navigate(['/']);      
         }
