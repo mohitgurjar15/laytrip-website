@@ -116,10 +116,10 @@ export class HomeComponent implements OnInit {
       this.getDateWithFormat({ returndate: obj });
     }.bind(this));
 
-    $('#return_date_icon').click(function (evt) {
-      evt.stopPropagation();
-      $('#return_date').data('dateRangePicker').open();
-    });
+    // $('#return_date_icon').click(function (evt) {
+    //   evt.stopPropagation();
+    //   $('#return_date').data('dateRangePicker').open();
+    // });
 
     $(".featured_slid").slick({
       dots: false,
@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit {
   }
 
   destinationChangedValue(event) {
-    console.log(event);
+    // console.log(event);
     this.searchedValue = event;
     // console.log(event.value.code);
     if (event && event.key && event.key === 'fromSearch') {
@@ -202,7 +202,7 @@ export class HomeComponent implements OnInit {
   searchFlights() {
     if (this.searchFlightInfo && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
-      localStorage.setItem('_fligh', this.searchedValue);
+      localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.router.navigate(['flight/search'], {
         queryParams: {
           trip: this.searchFlightInfo.trip,
