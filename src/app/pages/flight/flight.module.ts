@@ -12,6 +12,8 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
 import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
+import { FlightSummaryComponent } from './flight-summary/flight-summary.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { FlightTravelerComponent } from './flight-traveler/flight-traveler.compo
     FlightSearchBarComponent,
     FlightLoaderComponent,
     FlightNotFoundComponent,
-    FlightTravelerComponent
+    FlightTravelerComponent,
+    FlightSummaryComponent
   ],
   imports: [
     CommonModule,
     FlightRoutingModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    ComponentsModule
   ]
 })
 export class FlightModule { }
