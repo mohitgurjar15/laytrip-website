@@ -8,10 +8,14 @@ import { CheckoutProgressComponent } from './checkout-progress/checkout-progress
 import { AdultListComponent } from './adult-list/adult-list.component';
 import { ChildListComponent } from './child-list/child-list.component';
 import { InfantListComponent } from './infant-list/infant-list.component';
+import { BookingTimerComponent } from './booking-timer/booking-timer.component';
+import { PaymentModeComponent } from './payment-mode/payment-mode.component';
+import { CardListComponent } from './card-list/card-list.component';
+import { AddCardComponent } from './add-card/add-card.component';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +29,11 @@ import { InfantListComponent } from './infant-list/infant-list.component';
     CheckoutProgressComponent,
     AdultListComponent,
     ChildListComponent,
-    InfantListComponent
+    InfantListComponent,
+    BookingTimerComponent,
+    PaymentModeComponent,
+    CardListComponent,
+    AddCardComponent
     
   ]
 })
