@@ -63,7 +63,7 @@
                                                           +00
                                                           <span class="caret"></span>
                                                       </a> -->
-                                                      <ng-select tabindex="4" selectOnTab="true" [items]="countries_code" bindLabel="name" 
+                                                      <ng-select class="ng-customClass" tabindex="4" selectOnTab="true" [items]="countries_code" bindLabel="name" 
                                                         clearSearchOnAdd="true"
                                                         formControlName="country_code" placeholder="+1">
                                                         </ng-select>
@@ -73,17 +73,12 @@
                                               <div class="number">
                                                   <input type="text" formControlName="phone_no" maxlength="10" (keypress)="commonFunctoin.validateNumber($event)" tabindex="5" value="0000 0000 00">
                                               </div>
-                                              <!-- <div *ngIf="(submitted  || profileForm.controls.phone_no.touched) && profileForm.controls.phone_no.errors"
-                                                    class="focus-input100 login-error">
-                                                    <div *ngIf="profileForm.controls.phone_no.errors.required" class="text-danger">Please enter
-                                                        phone number.</div>
-                                                    </div> -->
                                           </div>
                                           <div *ngIf="(submitted  || profileForm.controls.country_code.touched) && profileForm.controls.country_code.errors"
-                                                    class="focus-input100 login-error">
-                                                    <div *ngIf="profileForm.controls.country_code.errors.required" class="text-danger">Please enter
-                                                    country code.</div>
-                                                    </div>
+                                            class="focus-input100 login-error">
+                                            <div *ngIf="profileForm.controls.country_code.errors.required" class="text-danger">Please enter
+                                            country code.</div>
+                                            </div>
                                       </div>
                                   </div>
                               </div>

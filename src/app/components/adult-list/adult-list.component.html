@@ -5,7 +5,7 @@
       <div class="card_add_pass" *ngFor="let traveler of travelers; let i = index;">
           <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
               <label class="custom_checkbox">
-                  <input type="checkbox" value="">
+                  <input type="checkbox" value="{{i}}">
                   <span class="checkmark"></span>
               </label>
               <a class="card-title">{{traveler.firstName}} {{traveler.lastName}}</a>

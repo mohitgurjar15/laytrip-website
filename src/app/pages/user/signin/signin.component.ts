@@ -32,8 +32,8 @@ export class SigninComponent  implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router
-    ) {}
+    public router: Router,
+    ) { }
 
 
   ngOnInit() {
@@ -68,9 +68,6 @@ export class SigninComponent  implements OnInit {
           this.router.navigate(['/']);      
         }
       }, (error: HttpErrorResponse) => {       
-
-        //resend the otp 
-        console.log('fgfgfgfgfgfgfgfgfgfgfg');
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
             $('.modal_container').addClass('right-panel-active');
