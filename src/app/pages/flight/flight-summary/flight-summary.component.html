@@ -1,94 +1,168 @@
 <div class="detail_info_right">
-  <h5>Booking <span>Summary</span></h5>
-  <div class="block_top">
-      <div class="summary_info">
-          <div class="info_top">
-              <ul>
-                  <li>{{flightDetail[0].departure_code}}</li>
-                  <li class="ic_flight"><img src="{{s3BucketUrl}}assets/images/icon/summary_flight_ic.svg" alt="Flight Icon"></li>
-                  <li>{{flightDetail[0].arrival_code}}</li>
-              </ul>
-              <p>{{flightDetail[0].departure_date}} | 1 Passenger | Economy</p>
-              <div class="btm_aerrow"></div>
-          </div>
-          <div class="info_btm">
-              <div class="info_btm_top">
-                  <div class="info_left">Onwards</div>
-                  <div class="info_right"><span>{{ flightDetail[0].total_duration }},</span> {{ flightDetail[0].stop_count }} Stop</div>
-              </div>
-              <div class="info_btm_btm">
-                  <div class="flight_info">
-                      <div class="flight_cityname">
-                        {{ flightDetail[0].routes[0].stops[0].departure_info.city }} ({{flightDetail[0].routes[0].stops[0].departure_code}}) <span>{{ flightDetail[0].routes[0].stops[0].departure_info.name }}, {{ flightDetail[0].routes[0].stops[0].departure_info.country }}</span>
-                      </div>
-                      <div class="flight_middle">
-                          <div class="middle_top">
-                              <img src="{{flightDetail[0].airline_logo}}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
-                              <p>{{ flightDetail[0].airline_name }} <span>Operated by Nacil Air India</span></p>
-                          </div>
-                          <div class="middle_btm">
-                              <div class="info_left">
-                                  <span>Flight {{ flightDetail[0].routes[0].stops[0].airline }}-{{ flightDetail[0].routes[0].stops[0].flight_number }}</span>
-                                  <div class="flight_time_info">
-                                      <div class="flight_time_left">
-                                        {{ flightDetail[0].departure_time }} <span>{{ flightDetail[0].departure_date}}</span>
-                                      </div>
-                                      <div class="flight_time_separator">
-                                          <span></span>
-                                      </div>
-                                      <div class="flight_time_left">
-                                        {{ flightDetail[0].arrival_time }} <span>{{ flightDetail[0].arrival_date}}</span>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="info_right">
-                                  02h 50m <span>Duration</span>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="flight_cityname">
-                        {{ flightDetail[0].routes[0].stops[flightDetail[0].routes[0].stops.length-1].arrival_info.city }} ({{flightDetail[0].routes[0].stops[flightDetail[0].routes[0].stops.length-1].arrival_code}}) <span>{{ flightDetail[0].routes[0].stops[0].arrival_info.name }}, {{ flightDetail[0].routes[0].stops[flightDetail[0].routes[0].stops.length-1].arrival_info.country }}</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="cmn_block">
-      <div class="block_inner">
-          <h6>Fare Detail</h6>
-          <ul>
-              <li>Price per passenger <span>$153</span></li>
-          </ul>
-      </div>
-      <div class="block_inner last">
-          <h6>Fare Detail</h6>
-          <ul>
-              <li>Amount <span>$153</span></li>
-              <li>Taxes <span>$0</span></li>
-          </ul>
-      </div>
-      <div class="partial_pay_info">
-          <ul>
-              <li>
-                  <p>Partial Payment <img src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon"></p>
-                  <span>$35/week</span>
-              </li>
-          </ul>
-      </div>
-      <div class="total_payment">
-          <ul>
-              <li>Total <span>$350</span></li>
-          </ul>
-      </div>
-  </div>
-  <div class="cmn_block policies">
-      <div class="block_inner">
-          <h6>Check our Policies</h6>
-          <ul>
-              <li><a href="javascript:void(0);">Baggage policy</a></li>
-              <li><a href="javascript:void(0);">Cancellation policy</a></li>
-          </ul>
-      </div>
-  </div>
+    <h5>Booking <span>Summary</span></h5>
+    <div class="block_top" *ngIf="flightDetail[0]">
+        <div class="summary_info">
+            <div class="info_top">
+                <ul>
+                    <li>{{flightDetail[0].departure_code}}</li>
+                    <li class="ic_flight"><img src="{{s3BucketUrl}}assets/images/icon/summary_flight_ic.svg" alt="Flight Icon"></li>
+                    <li>{{flightDetail[0].arrival_code}}</li>
+                </ul>
+                <p>{{flightDetail[0].departure_date}} | {{(flightDetail[0].adult_count-0) + (flightDetail[0]?.child_count-0) + + (flightDetail[0]?.infant_count-0) }} Passenger | Economy</p>
+                <div class="btm_aerrow"></div>
+            </div>
+            <div class="info_btm">
+                <div class="info_btm_top">
+                    <div class="info_left">Onwards</div>
+                    <div class="info_right"><span>23h 50m, </span>{{ flightDetail[0].routes[0].stops.length === 0 ? 'Non -' : flightDetail[0].routes[0].stops.length }} Stop</div>
+                </div>
+                <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[0]">
+                    <div class="flight_info_text">
+                        <h6>{{ flightDetail[0].routes[0].stops[0].departure_code }}  - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[0].stops[0].departure_time }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_time }} | {{ flightDetail[0].routes[0].stops[0].departure_time }}</span></h6>
+                        <a href="javascript:void(0);" id="more_detail_flight" (click)="toggleRouteDetails('onward')">Show Details</a>
+                    </div>
+                    <div class="flight_info" [ngClass]="(flightDetail[0].routes[0].stops.length==0)?'non_stop':''" id="flight_info" *ngIf="outwardDetails">
+                        <div class="flight_cityname">
+                            {{flightDetail[0].routes[0].stops[0].departure_info.city}} ({{flightDetail[0].routes[0].stops[0].departure_info.code}}) <span>{{flightDetail[0].routes[0].stops[0].departure_info.name}}, {{flightDetail[0].routes[0].stops[0].departure_info.country}}</span>
+                        </div>
+                        
+                        <div *ngFor="let stop of flightDetail[0].routes[0].stops">
+                            <div class="block_layover" *ngIf="stop.is_layover">
+                                <div class="layover_name">
+                                    <p>{{ stop.departure_info.city }} ({{stop.departure_info.code}}) <span>{{ stop.departure_info.name }}, {{ stop.departure_info.country }}</span></p>
+                                </div>
+                                <div class="layover_time">
+                                    <p>{{stop.layover_duration}} <span>Layover time</span></p>
+                                </div>
+                            </div>
+    
+                            <div class="flight_middle">
+                                <div class="middle_top">
+                                    <img src="{{ stop.airline_logo }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                    <p>{{stop.airline_name}} <!-- <span>Operated by Nacil Air India</span> --></p>
+                                </div>
+                                <div class="middle_btm">
+                                    <div class="info_left">
+                                        <span>Flight {{stop.airline}}-{{stop.flight_number}}</span>
+                                        <div class="flight_time_info">
+                                            <div class="flight_time_left">
+                                                {{stop.departure_time}} <span>{{ stop.departure_date }}</span>
+                                            </div>
+                                            <div class="flight_time_separator">
+                                                <span></span>
+                                            </div>
+                                            <div class="flight_time_left">
+                                                {{stop.arrival_time}} <span>{{stop.departure_date}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info_right">
+                                        {{stop.duration}} <span>Duration</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="flight_cityname">
+                            {{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.city}} ({{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.code}}) <span>{{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.name}}, {{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.country}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_btm_top inbound_flight" *ngIf="flightDetail[0]?.routes[1]">
+                    <div class="info_left">Inbound</div>
+                    <div class="info_right"><span>23h 50m, </span> {{ flightDetail[0].routes[1].stops.length === 0 ? 'Non -' : flightDetail[0].routes[1].stops.length }} Stop</div>
+                </div>
+                <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[1]">
+                    <div class="flight_info_text">
+                        <h6>{{ flightDetail[0].routes[1].stops[0].departure_code }}  - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[1].stops[0].departure_time }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_time }} | {{ flightDetail[0].routes[1].stops[0].departure_time }}</span></h6>
+                        <a href="javascript:void(0);" id="more_detail_flight_inbound" (click)="toggleRouteDetails('inward')">Show Details</a>
+                    </div>
+                    <div class="flight_info" [ngClass]="(flightDetail[0].routes[1].stops.length==0)?'non_stop':''"  id="flight_info_inbound" *ngIf="inwardDetails">
+                        <div class="flight_cityname">
+                            {{flightDetail[0].routes[1].stops[0].departure_info.city}} ({{flightDetail[0].routes[1].stops[0].departure_info.code}}) <span>{{flightDetail[0].routes[1].stops[0].departure_info.name}}, {{flightDetail[0].routes[1].stops[0].departure_info.country}}</span>
+                        </div>
+                        
+                        <div *ngFor="let stop of flightDetail[0].routes[1].stops">
+                            <div class="block_layover" *ngIf="stop.is_layover">
+                                <div class="layover_name">
+                                    <p>{{ stop.departure_info.city }} ({{stop.departure_info.code}}) <span>{{ stop.departure_info.name }}, {{ stop.departure_info.country }}</span></p>
+                                </div>
+                                <div class="layover_time">
+                                    <p>{{stop.layover_duration}} <span>Layover time</span></p>
+                                </div>
+                            </div>
+    
+                            <div class="flight_middle">
+                                <div class="middle_top">
+                                    <img src="{{ stop.airline_logo }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                    <p>{{stop.airline_name}} <!-- <span>Operated by Nacil Air India</span> --></p>
+                                </div>
+                                <div class="middle_btm">
+                                    <div class="info_left">
+                                        <span>Flight {{stop.airline}}-{{stop.flight_number}}</span>
+                                        <div class="flight_time_info">
+                                            <div class="flight_time_left">
+                                                {{stop.departure_time}} <span>{{ stop.departure_date }}</span>
+                                            </div>
+                                            <div class="flight_time_separator">
+                                                <span></span>
+                                            </div>
+                                            <div class="flight_time_left">
+                                                {{stop.arrival_time}} <span>{{stop.departure_date}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info_right">
+                                        {{stop.duration}} <span>Duration</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flight_cityname">
+                            {{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.city}} ({{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.code}}) <span>{{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.name}}, {{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.country}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cmn_block">
+        <div class="block_inner">
+            <h6>Fare Detail</h6>
+            <ul>
+                <li>Price per passenger <span>$153</span></li>
+            </ul>
+        </div>
+        <div class="block_inner last">
+            <h6>Fare Detail</h6>
+            <ul>
+                <li>Amount <span>$ {{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
+                <!-- <li>Taxes <span>$0</span></li> -->
+            </ul>
+        </div>
+        <div class="partial_pay_info" *ngIf="flightDetail[0].start_price">
+            <ul>
+                <li>
+                    <p>Partial Payment <img src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon"></p>
+                    <span>${{flightDetail[0].start_price | number : '1.2-2'}}/week</span>
+                </li>
+            </ul>
+        </div>
+        <div class="total_payment">
+            <ul>
+                <li>Total <span>${{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="cmn_block policies">
+        <div class="block_inner">
+            <h6>Check our Policies</h6>
+            <ul>
+                <li><a href="javascript:void(0);">Baggage policy</a></li>
+                <li><a href="javascript:void(0);">Cancellation policy</a></li>
+            </ul>
+        </div>
+    </div>
 </div>

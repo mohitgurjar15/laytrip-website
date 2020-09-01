@@ -83,8 +83,8 @@ export class ProfileComponent implements OnInit {
       dob: ['', [Validators.required]],
       profile_pic: [''],      
       address2: [''],      
-      preferred_language: [''],      
-      currency_rate: [''],      
+      language_id: [''],      
+      currency_id: [''],      
     });
   }
 
@@ -209,10 +209,11 @@ export class ProfileComponent implements OnInit {
         state_id: res.state.name,       
         city_name  : res.cityName,        
         address  : res.address,   
-        preferred_language : res.preferredLanguage.name,     
-        currency_rate : res.preferredCurrency.code,     
+        language_id : res.preferredLanguage.name,     
+        currency_id : res.preferredCurrency.code,     
         profile_pic: res.profilePic  
-    });	 
+    });
+
     }, (error: HttpErrorResponse) => {
       if (error.status === 404) {
         this.router.navigate(['/']);
@@ -224,7 +225,6 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = this.loading = true;
-    console.log(this.is_type)
     if(this.profileForm.controls.gender.errors && this.is_gender){
       this.profileForm.controls.gender.setValue(this.is_type);
     }
@@ -253,37 +253,40 @@ export class ProfileComponent implements OnInit {
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
       formdata.append("dob", this.dateFormator(this.profileForm.value.dob));
-      if(typeof(this.profileForm.value.country_id) != 'object'){        
+      if(!Number.isInteger(this.profileForm.value.country_id)){
         formdata.append("country_id", this.selectResponse.country.id);
       } else {
         formdata.append("country_id", this.profileForm.value.country_id.id);
       }
-      if(typeof(this.profileForm.value.state_id) != 'object'){        
+      if(!Number.isInteger(this.profileForm.value.state_id)){
         formdata.append("state_id", this.selectResponse.state.id);
       } else{
-        formdata.append("state_id", this.profileForm.value.state.id);
+        formdata.append("state_id", this.profileForm.value.state_id);
       }
       if(typeof(this.profileForm.value.country_code) != 'object'){        
-        formdata.append("country_code", this.selectResponse.country_code);
+        formdata.append("country_code", this.selectResponse.countryCode);
       } else {
-        formdata.append("country_code",this.profileForm.value.country_code.id);
+        formdata.append("country_code",this.profileForm.value.country_code.name);
       } 
-      if(typeof(this.profileForm.value.preferred_language) != 'object'){        
-        formdata.append("prefer_language", this.selectResponse.preferredLanguage);
+      if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
+        formdata.append("language_id", this.selectResponse.preferredLanguage.id);        
       } else {
-        formdata.append("prefer_language", this.profileForm.value.preferred_language.id);
-      }    
-      if(typeof(this.profileForm.value.preferred_language) != 'object'){        
-        formdata.append("currency_id", this.selectResponse.preferredLanguage);
+        formdata.append("language_id", this.profileForm.value.language_id);
+      }
+      if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
+        formdata.append("currency_id", this.selectResponse.preferredCurrency.id);
       } else {
-        formdata.append("currency_id", this.profileForm.value.currency_id.id);
-      }    
+        console.log('hete')
+        formdata.append("currency_id", this.profileForm.value.currency_id);
+      }         
       formdata.append("passport_expiry",'2020-08-06');
+      
       console.log(this.profileForm.value)
+      console.log(formdata)
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
         localStorage.setItem("_lay_sess", data.token);
-        this.router.navigate(['/']);      
+        // this.router.navigate(['/']);      
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading = false;
       });

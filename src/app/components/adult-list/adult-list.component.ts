@@ -14,7 +14,7 @@ export class AdultListComponent implements OnInit {
   @Input() username:string;
 
   ngOnInit() {
-    //console.log("this.traveler",this.travelers)
+    console.log("this.traveler",this.travelers)
   }
 
   ngOnChanges(changes) {
