@@ -107,148 +107,148 @@ export class FlightSearchBarComponent implements OnInit {
 
   loadJquery(tab) {
     console.log(tab);
-    // if (tab === 'round-trip') {
-    //   // DEPARTURE DATE
-    //   $('#departure_date_round_trip').dateRangePicker({
-    //     autoClose: true,
-    //     singleDate: true,
-    //     showShortcuts: false,
-    //     singleMonth: true,
-    //     monthSelect: true,
-    //     format: "DD MMM'YY dddd",
-    //     startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
-    //     // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
-    //     extraClass: 'laytrip-datepicker'
-    //   }).bind('datepicker-first-date-selected', function (event, obj) {
-    //     this.getDateWithFormat({ departuredate: obj });
-    //   }.bind(this));
+    if (tab === 'round-trip') {
+      // DEPARTURE DATE
+      $('#departure_date_round_trip').dateRangePicker({
+        autoClose: true,
+        singleDate: true,
+        showShortcuts: false,
+        singleMonth: true,
+        monthSelect: true,
+        format: "DD MMM'YY dddd",
+        startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
+        // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+        extraClass: 'laytrip-datepicker'
+      }).bind('datepicker-first-date-selected', function (event, obj) {
+        this.getDateWithFormat({ departuredate: obj });
+      }.bind(this));
 
-    //   $('#departure_date_icon_round_trip').click(function (evt) {
-    //     evt.stopPropagation();
-    //     $('#departure_date_round_trip').data('dateRangePicker').open();
-    //   });
+      $('#departure_date_icon_round_trip').click(function (evt) {
+        evt.stopPropagation();
+        $('#departure_date_round_trip').data('dateRangePicker').open();
+      });
 
-    //   // RETURN DATE
-    //   $('#return_date_round_trip').dateRangePicker({
-    //     autoClose: true,
-    //     singleDate: true,
-    //     showShortcuts: false,
-    //     singleMonth: true,
-    //     format: "DD MMM'YY dddd",
-    //     startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
-    //     // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
-    //     extraClass: 'laytrip-datepicker'
-    //   }).bind('datepicker-first-date-selected', function (event, obj) {
-    //     this.returnDate = obj;
-    //     this.getDateWithFormat({ returndate: obj });
-    //   }.bind(this));
+      // RETURN DATE
+      $('#return_date_round_trip').dateRangePicker({
+        autoClose: true,
+        singleDate: true,
+        showShortcuts: false,
+        singleMonth: true,
+        format: "DD MMM'YY dddd",
+        startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
+        // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+        extraClass: 'laytrip-datepicker'
+      }).bind('datepicker-first-date-selected', function (event, obj) {
+        this.returnDate = obj;
+        this.getDateWithFormat({ returndate: obj });
+      }.bind(this));
 
-    //   $('#return_date_icon_round_trip').click(function (evt) {
-    //     evt.stopPropagation();
-    //     $('#return_date_round_trip').data('dateRangePicker').open();
-    //   });
+      $('#return_date_icon_round_trip').click(function (evt) {
+        evt.stopPropagation();
+        $('#return_date_round_trip').data('dateRangePicker').open();
+      });
 
-    //   $(".featured_slid").slick({
-    //     dots: false,
-    //     infinite: true,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1
-    //   });
-    // } else {
-    //   // DEPARTURE DATE
-    //   $('#departure_date').dateRangePicker({
-    //     autoClose: true,
-    //     singleDate: true,
-    //     showShortcuts: false,
-    //     singleMonth: true,
-    //     monthSelect: true,
-    //     format: "DD MMM'YY dddd",
-    //     startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
-    //     // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
-    //     extraClass: 'laytrip-datepicker'
-    //   }).bind('datepicker-first-date-selected', function (event, obj) {
-    //     this.getDateWithFormat({ departuredate: obj });
-    //   }.bind(this));
+      $(".featured_slid").slick({
+        dots: false,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1
+      });
+    } else {
+      // DEPARTURE DATE
+      $('#departure_date').dateRangePicker({
+        autoClose: true,
+        singleDate: true,
+        showShortcuts: false,
+        singleMonth: true,
+        monthSelect: true,
+        format: "DD MMM'YY dddd",
+        startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
+        // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+        extraClass: 'laytrip-datepicker'
+      }).bind('datepicker-first-date-selected', function (event, obj) {
+        this.getDateWithFormat({ departuredate: obj });
+      }.bind(this));
 
-    //   $('#departure_date_icon').click(function (evt) {
-    //     evt.stopPropagation();
-    //     $('#departure_date').data('dateRangePicker').open();
-    //   });
+      $('#departure_date_icon').click(function (evt) {
+        evt.stopPropagation();
+        $('#departure_date').data('dateRangePicker').open();
+      });
 
-    //   // RETURN DATE
-    //   $('#return_date').dateRangePicker({
-    //     autoClose: true,
-    //     singleDate: true,
-    //     showShortcuts: false,
-    //     singleMonth: true,
-    //     format: "DD MMM'YY dddd",
-    //     startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
-    //     // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
-    //     extraClass: 'laytrip-datepicker'
-    //   }).bind('datepicker-first-date-selected', function (event, obj) {
-    //     this.returnDate = obj;
-    //     this.getDateWithFormat({ returndate: obj });
-    //   }.bind(this));
+      // RETURN DATE
+      $('#return_date').dateRangePicker({
+        autoClose: true,
+        singleDate: true,
+        showShortcuts: false,
+        singleMonth: true,
+        format: "DD MMM'YY dddd",
+        startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
+        // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+        extraClass: 'laytrip-datepicker'
+      }).bind('datepicker-first-date-selected', function (event, obj) {
+        this.returnDate = obj;
+        this.getDateWithFormat({ returndate: obj });
+      }.bind(this));
 
-    //   // $('#return_date_icon').click(function (evt) {
-    //   //   evt.stopPropagation();
-    //   //   $('#return_date').data('dateRangePicker').open();
-    //   // });
+      // $('#return_date_icon').click(function (evt) {
+      //   evt.stopPropagation();
+      //   $('#return_date').data('dateRangePicker').open();
+      // });
 
-    //   $(".featured_slid").slick({
-    //     dots: false,
-    //     infinite: true,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1
-    //   });
-    // }
+      $(".featured_slid").slick({
+        dots: false,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1
+      });
+    }
 
-    // DEPARTURE DATE
-    $('#departure_date').dateRangePicker({
-      autoClose: true,
-      singleDate: true,
-      showShortcuts: false,
-      singleMonth: true,
-      monthSelect: true,
-      format: "DD MMM'YY dddd",
-      startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
-      // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
-      extraClass: 'laytrip-datepicker'
-    }).bind('datepicker-first-date-selected', function (event, obj) {
-      this.getDateWithFormat({ departuredate: obj });
-    }.bind(this));
+    // // DEPARTURE DATE
+    // $('#departure_date').dateRangePicker({
+    //   autoClose: true,
+    //   singleDate: true,
+    //   showShortcuts: false,
+    //   singleMonth: true,
+    //   monthSelect: true,
+    //   format: "DD MMM'YY dddd",
+    //   startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
+    //   // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+    //   extraClass: 'laytrip-datepicker'
+    // }).bind('datepicker-first-date-selected', function (event, obj) {
+    //   this.getDateWithFormat({ departuredate: obj });
+    // }.bind(this));
 
-    $('#departure_date_icon').click(function (evt) {
-      evt.stopPropagation();
-      $('#departure_date').data('dateRangePicker').open();
-    });
-
-    // RETURN DATE
-    $('#return_date').dateRangePicker({
-      autoClose: true,
-      singleDate: true,
-      showShortcuts: false,
-      singleMonth: true,
-      format: "DD MMM'YY dddd",
-      startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
-      // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
-      extraClass: 'laytrip-datepicker'
-    }).bind('datepicker-first-date-selected', function (event, obj) {
-      this.returnDate = obj;
-      this.getDateWithFormat({ returndate: obj });
-    }.bind(this));
-
-    // $('#return_date_icon').click(function (evt) {
+    // $('#departure_date_icon').click(function (evt) {
     //   evt.stopPropagation();
-    //   $('#return_date').data('dateRangePicker').open();
+    //   $('#departure_date').data('dateRangePicker').open();
     // });
 
-    $(".featured_slid").slick({
-      dots: false,
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1
-    });
+    // // RETURN DATE
+    // $('#return_date').dateRangePicker({
+    //   autoClose: true,
+    //   singleDate: true,
+    //   showShortcuts: false,
+    //   singleMonth: true,
+    //   format: "DD MMM'YY dddd",
+    //   startDate: moment().subtract(0, 'months').format("DD MMM'YY dddd"),
+    //   // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
+    //   extraClass: 'laytrip-datepicker'
+    // }).bind('datepicker-first-date-selected', function (event, obj) {
+    //   this.returnDate = obj;
+    //   this.getDateWithFormat({ returndate: obj });
+    // }.bind(this));
+
+    // // $('#return_date_icon').click(function (evt) {
+    // //   evt.stopPropagation();
+    // //   $('#return_date').data('dateRangePicker').open();
+    // // });
+
+    // $(".featured_slid").slick({
+    //   dots: false,
+    //   infinite: true,
+    //   slidesToShow: 3,
+    //   slidesToScroll: 1
+    // });
   }
 
   getDateWithFormat(date) {
