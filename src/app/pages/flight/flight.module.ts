@@ -38,7 +38,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     Ng5SliderModule,
     ComponentsModule,
     FormsModule, ReactiveFormsModule,
-    NgSelectModule
+    NgSelectModule,
   ]
 })
 export class FlightModule { }

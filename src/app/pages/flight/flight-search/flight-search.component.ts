@@ -2,12 +2,13 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { LayTripStoreService } from '../../../state/layTrip/layTrip-store.service';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { LayTripService } from '../../../state/layTrip/services/layTrip.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-flight-search',
@@ -28,6 +29,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     private layTripStoreService: LayTripStoreService,
     private route: ActivatedRoute,
     private layTripService: LayTripService,
+    public router: Router,
+    public location: Location
   ) { }
 
   ngOnInit() {
@@ -51,27 +54,50 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         child_count: parseInt(params.child),
         infant_count: parseInt(params.infant),
       };
-      // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
-      this.layTripStoreService.dispatchGetFlightSearchResult(payload);
-      // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
-      this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-        if (res) {
-          this.flightSearchData = res.items;
-          // console.log(this.flightSearchData);
-          this.loading = false;
-          this.isNotFound = false;
-          // console.log(this.loading);
-        } else {
-          // console.log(this.loading);
-        }
-      }, error => {
-        // console.log(error);
-      }));
+      this.getFlightSearchData(payload);
     });
   }
 
+  getFlightSearchData(payload) {
+    this.loading = true;
+    // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
+    this.layTripStoreService.dispatchGetFlightSearchResult(payload);
+    // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
+    this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
+      if (res) {
+        this.flightSearchData = res.items;
+        // console.log(this.flightSearchData);
+        this.loading = false;
+        this.isNotFound = false;
+        // console.log(this.loading);
+      }
+    }));
+  }
+
   getSearchItem(event) {
-    console.log(event);
+    const payload = {
+      source_location: event.departure,
+      destination_location: event.arrival,
+      departure_date: event.departure_date,
+      flight_class: event.class,
+      adult_count: parseInt(event.adult),
+      child_count: parseInt(event.child),
+      infant_count: parseInt(event.infant),
+    };
+    // this.getFlightSearchData(payload);
+    this.router.navigate(['flight/search'], {
+      skipLocationChange: false, queryParams: {
+        trip: event.trip,
+        departure: event.departure,
+        arrival: event.arrival,
+        departure_date: event.departure_date,
+        class: event.class ? event.class : 'Economy',
+        adult: event.adult,
+        child: event.child ? event.child : 0,
+        infant: event.infant ? event.infant : 0
+      },
+      queryParamsHandling: 'merge'
+    });
   }
 
   ngOnDestroy(): void {

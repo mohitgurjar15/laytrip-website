@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
       infant: null
     };
 
-  searchedValue;
+  searchedValue = [];
 
   constructor(
     private genericService: GenericService,
@@ -152,13 +152,12 @@ export class HomeComponent implements OnInit {
   }
 
   destinationChangedValue(event) {
-    // console.log(event);
-    this.searchedValue = event;
-    // console.log(event.value.code);
     if (event && event.key && event.key === 'fromSearch') {
       this.fromDestinationCode = event.value.code;
+      this.searchedValue.push({key: 'fromSearch', value: event.value});
     } else if (event && event.key && event.key === 'toSearch') {
       this.toDestinationCode = event.value.code;
+      this.searchedValue.push({key: 'toSearch', value: event.value});
     }
     this.searchFlightInfo.departure = this.fromDestinationCode;
     this.searchFlightInfo.arrival = this.toDestinationCode;
