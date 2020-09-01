@@ -98,6 +98,15 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       },
       queryParamsHandling: 'merge'
     });
+
+    // TRIP is round-trip then call this API
+    if (event.trip === 'round-trip') {
+      this.getFlightSearchDataForRoundTrip(payload);
+    }
+  }
+
+  getFlightSearchDataForRoundTrip(payload) {
+
   }
 
   ngOnDestroy(): void {

@@ -13,11 +13,11 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Return" (click)="tabChange('return')">
+              <a class="nav-link" data-toggle="tab" href="#Return" (click)="tabChange('round-trip')">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
                   alt="Return Icon" />
-                <span>Return</span>
+                <span>Round Trip</span>
               </a>
             </li>
             <li class="nav-item">
@@ -31,6 +31,7 @@
             </li>
           </ul>
           <div class="tab-content">
+            <!-- ####################  ONE WAY START ################ -->
             <div id="Oneway" class="tab-pane active">
               <form [formGroup]="flightSearchForm" novalidate autocomplete="off" (ngSubmit)="searchFlights()">
                 <div class="flight_search">
@@ -39,12 +40,11 @@
                       <div class="flight_form">
                         <div class="search_area">
                           <label>From</label>
-                          <!-- <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" (keyup)="" />
-                          <span>NY, United States</span> -->
-                          <ng-select [loading]="loading" [selectOnTab]="true" [items]="data"
-                            bindLabel="city" bindValue="display_name" [clearable]="true" minTermLength="3"
-                            notFoundText="" [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}" (search)="changeSearch($event)"
-                            loadingText="" (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
+                          <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="city"
+                            bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
+                            [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}"
+                            (search)="changeSearchDeparture($event)" loadingText=""
+                            (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder1 }}">
                             <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
                               let-search="searchTerm">
@@ -77,9 +77,10 @@
                           <label>To</label>
                           <!-- <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
                           <span>CA, United States</span> -->
-                          <ng-select [loading]="false" [selectOnTab]="true" [items]="data" bindLabel="city"
-                            bindValue="display_name" [(ngModel)]="airportDefaultArrivalValue" [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText=""
-                            (search)="changeSearch($event)" loadingText=""
+                          <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="city"
+                            bindValue="display_name" [(ngModel)]="airportDefaultArrivalValue"
+                            [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText=""
+                            (search)="changeSearchArrival($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'toSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder2 }}">
                             <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
@@ -109,7 +110,7 @@
                         <div class="search_area">
                           <label>Departure</label>
                           <input type="text" name="date_checkin" tabindex="3" value="{{ defaultDate }}"
-                            id="departure_date" formControlName="departureDate" />
+                            id="departure_date" />
                           <div class="prev-next">
                             <a href="javascript:void(0);">Prev</a>
                             <a href="javascript:void(0);">Next</a>
@@ -141,10 +142,6 @@
                           <app-traveller-info [label]="'Travellers & class'"
                             (changeValue)="changeTravellerInfo($event)">
                           </app-traveller-info>
-                          <!-- <div class="travel_info">
-                            <span>01</span> Traveller <div class="drop_aerrow"></div>
-                          </div>
-                          <span>Economy</span> -->
                         </div>
                       </div>
                     </li>
@@ -156,16 +153,131 @@
                 </div>
               </form>
             </div>
-            <div id="Return" class="tab-pane fade"><br>
-              <h3>Menu 1</h3>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
+            <!-- ####################  ONE WAY END ################ -->
+
+            <!-- ####################  ROUND TRIP START ################ -->
+            <div id="Return" class="tab-pane fade">
+              <h3>Round Trip</h3>
+              <form [formGroup]="flightSearchForm" novalidate autocomplete="off" (ngSubmit)="searchFlights()">
+                <div class="flight_search">
+                  <ul class="flight-grid oneway">
+                    <li class="grid_box first">
+                      <div class="flight_form">
+                        <div class="search_area">
+                          <label>From</label>
+                          <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="city"
+                            bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
+                            [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}"
+                            (search)="changeSearchDeparture($event)" loadingText=""
+                            (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
+                            placeholder="{{ placeHolder1 }}">
+                            <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
+                              let-search="searchTerm">
+                              <ul class="item-list">
+                                <li class="item">
+                                  <div class="item-left">
+                                    <p class="item-name">{{item.city}}</p>
+                                    <p class="item-city-country">{{item.code}},{{item.name}}</p>
+                                  </div>
+                                </li>
+                              </ul>
+                            </ng-template>
+                          </ng-select>
+                          <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
+                          <ng-template #selectedAirport>
+                            <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
+                          </ng-template>
+                        </div>
+                      </div>
+                      <div class="switch_btn">
+                        <a href="javascript:void(0);">
+                          <img src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg" alt="Switch Image" />
+                        </a>
+                      </div>
+                      <div class="flight_to">
+                        <div class="search_area">
+                          <label>To</label>
+                          <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="city"
+                            bindValue="display_name" [(ngModel)]="airportDefaultArrivalValue"
+                            [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText=""
+                            (search)="changeSearchArrival($event)" loadingText=""
+                            (change)="selectEvent($event, {key: 'toSearch'})" class="laytrip-input"
+                            placeholder="{{ placeHolder2 }}">
+                            <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
+                              let-search="searchTerm">
+                              <ul class="item-list">
+                                <li class="item">
+                                  <div class="item-left">
+                                    <p class="item-name">{{item.city}}</p>
+                                    <p class="item-city-country">{{item.code}},{{item.name}}</p>
+                                  </div>
+                                </li>
+                              </ul>
+                            </ng-template>
+                          </ng-select>
+                          <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
+                          <ng-template #selectedAirport>
+                            <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="grid_box secound">
+                      <div class="date_form">
+                        <div class="search_area">
+                          <label>Departure</label>
+                          <input type="text" name="date_checkin" tabindex="3" value="{{ defaultDate }}"
+                            id="departure_date_round_trip" />
+                          <div class="prev-next">
+                            <a href="javascript:void(0);">Prev</a>
+                            <a href="javascript:void(0);">Next</a>
+                          </div>
+                          <div class="date_icon" id="departure_date_icon_round_trip">
+                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="date_to">
+                        <div class="search_area">
+                          <label>Return</label>
+                          <input type="text" name="date_checkout" maxlength="10" value="{{ defaultDate }}" tabindex="4"
+                            id="return_date_round_trip" [disabled]="searchFlightInfo.trip === 'oneway'" />
+                          <div class="prev-next">
+                            <a href="javascript:void(0);">Prev</a>
+                            <a href="javascript:void(0);">Next</a>
+                          </div>
+                          <div class="date_icon" id="return_date_icon_round_trip">
+                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="grid_box third">
+                      <div class="travellers">
+                        <div class="">
+                          <app-traveller-info [label]="'Travellers & class'"
+                            (changeValue)="changeTravellerInfo($event)">
+                          </app-traveller-info>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="serch_btn">
+                    <button>Modify Search <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                        alt="Right Arrow" /></button>
+                  </div>
+                </div>
+              </form>
             </div>
+            <!-- ####################  ROUND TRIP END ################ -->
+
+            <!-- ####################  MULTI CITY START ################ -->
             <div id="Multi-city" class="tab-pane fade"><br>
               <h3>Menu 2</h3>
               <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
                 rem aperiam.</p>
             </div>
+            <!-- ####################  MULTI CITY END ################ -->
           </div>
         </div>
       </div>
