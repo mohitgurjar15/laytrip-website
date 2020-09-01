@@ -28,7 +28,7 @@
         margin-left: 15px;
 
         .item-left {
-            width: 75%;
+            width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -78,7 +78,8 @@
     cursor: not-allowed;
 }
 
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area{
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area {
     padding: 5px 0 !important;
 }
+
 
