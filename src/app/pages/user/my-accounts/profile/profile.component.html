@@ -11,7 +11,7 @@
                           <div class="update_info_left">
                               <div class="update_profile">
                                   <span>
-                                      <img src="{{image || defaultImage}}" alt="Profile Image">
+                                      <img class="img-rounded"  src="{{image || defaultImage}}" alt="Profile Image">
                                   </span>
                                   <div class="update_profile_btn">
                                     <input #hiddenfileinput  style="display: none"  type="file" accept="image/*" (change)="onFileSelect($event)">
@@ -59,11 +59,8 @@
                                           <div class="phone_no">
                                               <div class="code">
                                                   <div class="dropdown">
-                                                      <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                                          +00
-                                                          <span class="caret"></span>
-                                                      </a> -->
-                                                      <ng-select class="ng-customClass" tabindex="4" selectOnTab="true" [items]="countries_code" bindLabel="name" 
+                                                      
+                                                      <ng-select  class="ng-customClass" tabindex="4" selectOnTab="true" [items]="countries_code" bindLabel="name" 
                                                         clearSearchOnAdd="true"
                                                         formControlName="country_code" placeholder="+1">
                                                         </ng-select>
@@ -100,7 +97,7 @@
                                       <div class="field_inn">
                                           <label>Language</label>
                                           <div class="text_field custom-select">
-                                            <ng-select  tabindex="8" selectOnTab="true"  placeholder="Select Preferred Language" formControlName="preferred_language">
+                                            <ng-select class="ng-customClass"  tabindex="8" selectOnTab="true"  placeholder="Select Preferred Language" formControlName="language_id">
                                                 <ng-option *ngFor="let language of languages" value="{{language.id}}">
                                                   {{language.name}}
                                                 </ng-option>
@@ -110,7 +107,7 @@
                                       <div class="field_inn">
                                           <label>Currency</label>
                                           <div class="text_field custom-select">
-                                            <ng-select tabindex="9" selectOnTab="true"  placeholder="Select Preferred Language" formControlName="preferred_language">
+                                            <ng-select class="ng-customClass" tabindex="9" selectOnTab="true"  placeholder="Select Preferred Language" formControlName="currency_id">
                                                 <ng-option *ngFor="let currency of currencies" value="{{currency.id}}">
                                                   {{currency.code}}
                                                 </ng-option>
@@ -189,7 +186,7 @@
                                       <div class="field_inn">
                                             <label>Country<sup>*</sup></label>
                                             <div class="text_field custom-select">
-                                                <ng-select [items]="countries" bindLabel="name" tabindex="11" [selectOnTab]="true"
+                                                <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="11" [selectOnTab]="true"
                                                     formControlName="country_id" selectOnTab="true" placeholder="Select Country" (change)="getStates($event)">
                                                 </ng-select>                                            
                                             </div>
@@ -213,7 +210,7 @@
                                       <div class="field_inn">
                                           <label>State<sup>*</sup></label>
                                           <div class="text_field custom-select">
-                                            <ng-select clearSearchOnAdd="true" selectOnTab="true"tabindex="12" formControlName="state_id" placeholder="Select State" >
+                                            <ng-select class="ng-customClass" clearSearchOnAdd="true" selectOnTab="true"tabindex="12" formControlName="state_id" placeholder="Select State" >
                                                 <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
                                               </ng-select>
                                           </div>
