@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,7 +17,7 @@ export class FlightSearchBarComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   flightSearchForm: FormGroup;
 
-  
+
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationDate = '';
   toDestinationDate = '';
@@ -57,10 +57,17 @@ export class FlightSearchBarComponent implements OnInit {
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
   totalPerson = 1;
 
+  fromDestinationData = [];
+  toDestinationData = [];
+
+  airportDefaultDestValue;
+  airportDefaultArrivalValue;
+
   constructor(
     public fb: FormBuilder,
     private flightService: FlightService,
     public commonFunction: CommonFunction,
+    public cd: ChangeDetectorRef
   ) {
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
@@ -71,9 +78,25 @@ export class FlightSearchBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let selectedItem = localStorage.getItem('_fligh');
-    // let data = JSON.parse(selectedItem);
-    // this.selectedAirport.push(data.value);
+    let selectedItem = localStorage.getItem('_fligh');
+    let info = JSON.parse(selectedItem);
+    info.forEach(res => {
+      if (res && res.key === 'fromSearch') {
+        this.data.push(res.value);
+        this.airportDefaultDestValue = `${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
+        if (this.airportDefaultDestValue) {
+          this.defaultSelected = '';
+        }
+      }
+      if (res && res.key === 'toSearch') {
+        this.data.push(res.value);
+        this.airportDefaultArrivalValue = `${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
+        if (this.airportDefaultArrivalValue) {
+          this.defaultSelected = '';
+        }
+      }
+    });
+
     this.loadJquery();
   }
 
@@ -154,7 +177,7 @@ export class FlightSearchBarComponent implements OnInit {
     );
   }
 
-  onChangeSearch(event) {
+  changeSearch(event) {
     if (event.term.length > 2) {
       this.searchAirport(event.term);
     }
@@ -180,7 +203,6 @@ export class FlightSearchBarComponent implements OnInit {
     }
     this.searchFlightInfo.departure = this.fromDestinationCode;
     this.searchFlightInfo.arrival = this.toDestinationCode;
-    console.log(this.searchFlightInfo);
   }
 
   getSwappedValue(event) {
@@ -192,7 +214,7 @@ export class FlightSearchBarComponent implements OnInit {
   }
 
   changeTravellerInfo(event) {
-    console.log(event);
+    // console.log(event);
     this.searchFlightInfo.adult = event.adult;
     this.searchFlightInfo.child = event.child;
     this.searchFlightInfo.infant = event.infant;
@@ -201,7 +223,10 @@ export class FlightSearchBarComponent implements OnInit {
   }
 
   searchFlights() {
-    console.log(this.searchFlightInfo);
+    // console.log(this.searchFlightInfo);
+    this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
+    this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
+    this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
     if (this.searchFlightInfo && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       this.searchBarInfo.emit(this.searchFlightInfo);

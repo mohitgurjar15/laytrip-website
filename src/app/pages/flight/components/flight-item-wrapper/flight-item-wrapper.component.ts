@@ -35,7 +35,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.loadJquery();
 
     this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-      console.log();
       if (res) {
         if (res.items) {
           // FOR FLIGHT LIST & DETAILS
@@ -73,7 +72,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   clickOutside() {
-    console.log('outside clicked');
+    // console.log('outside clicked');
     this.showFlightDetails = -1;
   }
 
