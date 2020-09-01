@@ -16,6 +16,10 @@ export class MyAccountsNavComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+  
+  ngDoCheck(){  
+    console.log('here')  
     this._login_user_info =  getUserDetails(localStorage.getItem("_lay_sess"));
     this.profile_pic = this._login_user_info.profilePic;
   }

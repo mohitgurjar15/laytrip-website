@@ -194,7 +194,7 @@ export class ProfileComponent implements OnInit {
     this.selectResponse = res;
     let dob_selected = new Date(res.dob)
     this.is_type = res.gender;
-console.log(res)
+
     this.profileForm.patchValue({      
         first_name: res.firstName,
         last_name: res.lastName,
