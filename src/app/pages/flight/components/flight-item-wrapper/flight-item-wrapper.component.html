@@ -54,14 +54,13 @@
                         <!-- <a class="book_btn" href="javascript:void(0);"></a> -->
                         <a class="book_btn" [routerLink]="['/flight/traveler', item.route_code ]">
                             Book Now
-                          </a>
+                        </a>
                         <span class="partial_payment_info">Learn more about partial payment</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="detail_info_show on_out_said slideInDown" [attr.id]="blockIndex"
-            *ngIf="showFlightDetails === blockIndex">
+        <div class="detail_info_show on_out_said" [attr.id]="blockIndex" *ngIf="showFlightDetails === blockIndex">
             <ul id="tabs" class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a id="tab-A" href="#flight-info" class="nav-link active" data-toggle="tab" role="tab">Flight
@@ -71,10 +70,12 @@
                     <a id="tab-B" href="#Fare-Detail" class="nav-link" data-toggle="tab" role="tab">Fare Details</a>
                 </li>
                 <li class="nav-item">
-                    <a id="tab-C" href="#Baggage-Rules" class="nav-link" data-toggle="tab" role="tab">Baggage Rules</a>
+                    <a id="tab-C" href="#Baggage-Rules" class="nav-link" data-toggle="tab" role="tab"
+                        (click)="getBaggageDetails(item.route_code)">Baggage Rules</a>
                 </li>
                 <li class="nav-item">
-                    <a id="tab-d" href="#Cancellation-Rules" class="nav-link" data-toggle="tab" role="tab">Cancellation
+                    <a id="tab-d" href="#Cancellation-Rules" class="nav-link" data-toggle="tab" role="tab"
+                        (click)="getCancellationPolicy(item.route_code)">Cancellation
                         Rules</a>
                 </li>
             </ul>
@@ -93,12 +94,13 @@
                         aria-labelledby="heading-flight-info">
                         <div class="card-body" *ngFor="let flight of item.routes">
                             <div class="tab_detail flight_info_cnt">
-                                <div class="triangle_right"></div>
                                 <div *ngFor="let flightInfo of flight.stops">
                                     <div class="flight_layover" *ngIf="flightInfo.is_layover">
+                                        <div class="triangle_right"></div>
                                         <div class="layover_info">
                                             Change of Planes <span>| {{ flightInfo?.layover_duration }}</span> Layover
                                         </div>
+                                        <div class="triangle_left"></div>
                                     </div>
                                     <div class="detail_top">
                                         <div class="detail_left">
@@ -117,7 +119,8 @@
                                             <div class="flight_duration">
                                                 <p>{{ flightInfo?.duration }}</p>
                                                 <div class="border-dot">
-                                                    <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
+                                                    <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
+                                                        alt="Duration Images">
                                                 </div>
                                                 <p>Flight Duration</p>
                                             </div>
@@ -129,11 +132,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="flight_layover" *ngIf="flightInfo.is_layover">
-                                        <div class="layover_info">
-                                            Change of Planes <span>| {{ flightInfo?.layover_duration }}</span> Layover
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <!-- <div class="detail_top">
                                     <div class="detail_left">
@@ -159,7 +157,7 @@
                                         </div>
                                     </div>
                                 </div> -->
-                                <div class="triangle_left"></div>
+
                             </div>
                         </div>
                     </div>
@@ -183,7 +181,8 @@
                                     <li *ngFor="let fareDetails of item.fare_break_dwon">
                                         <p *ngIf="fareDetails.type !== 'total'">
                                             Base Fare
-                                            ({{ fareDetails?.quantity }} {{ fareDetails.type === 'ADT' ? 'Adult' : 'Child' }})
+                                            ({{ fareDetails?.quantity }}
+                                            {{ fareDetails.type === 'ADT' ? 'Adult' : 'Child' }})
                                             <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </p>
                                         <p *ngIf="fareDetails.type === 'total'">
@@ -193,10 +192,10 @@
                                     </li>
                                     <!-- <li>Total Fare (1 Adult) <span>{{ currency?.symbol }}126</span></li> -->
                                 </ul>
-                                <p><span>Note:</span> It is a long established fact that a reader will be distracted by
+                                <!-- <p><span>Note:</span> It is a long established fact that a reader will be distracted by
                                     the readable content of a page when looking at its layout. The point of using Lorem
                                     Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-                                    using ‘Content here, content here’, making it look like readable English.</p>
+                                    using ‘Content here, content here’, making it look like readable English.</p> -->
                                 <div class="triangle_left"></div>
                             </div>
                         </div>
@@ -223,25 +222,26 @@
                                     <span>{{ flightInfo?.departure_code }} - DEN</span>
                                 </div>
                                 <div class="detail_right">
-                                    <ul>
-                                        <li class="first">
-                                            <div>Baggage Type</div>
-                                            <div>Adult</div>
-                                            <div>Children</div>
-                                        </li>
-                                        <li>
-                                            <div class="info">
-                                                <div>Baggage Type</div>
-                                                <div>Check In</div>
-                                                <div>Check In</div>
-                                            </div>
-                                            <div class="info">
-                                                <div>Baggage Type</div>
-                                                <div>Check In</div>
-                                                <div>Check In</div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <p *ngIf="!baggageDetails">Loading..</p>
+                                    <table *ngIf="baggageDetails">
+                                        <thead>
+                                            <tr>
+                                                <th>Flight</th>
+                                                <th>Depart</th>
+                                                <th>Arrive</th>
+                                                <th>Free Baggage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- <tr *ngIf="!baggageDetails">Loading..</tr> -->
+                                            <tr *ngFor="let baggage of baggageDetails">
+                                                <td data-title="Flight">{{ baggage?.flight_number }}</td>
+                                                <td data-title="Depart">{{ baggage?.departure_airport }}</td>
+                                                <td data-title="Arrive">{{ baggage?.arrival_airport }}</td>
+                                                <td data-title="Free Baggage">{{ baggage?.baggage_capacity }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     <p>The baggage information is just for reference. Please Check with airline before
                                         check-in.</p>
                                 </div>
@@ -287,14 +287,18 @@
                                 <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
                                     <ul>
-                                        <li>It is a long established fact that a reader will be distracted by the
+                                        <li *ngIf="!cancellationPolicy && !errorMessage">Loading..</li>
+                                        <li *ngIf="errorMessage">{{ errorMessage }}</li>
+                                        <li *ngIf="cancellationPolicy">{{ cancellationPolicy?.cancellation_policy }}
+                                        </li>
+                                        <!-- <li>It is a long established fact that a reader will be distracted by the
                                             readable content layout.</li>
                                         <li>It is a long established fact that a reader will be distracted by the
                                             readable content layout.</li>
                                         <li>It is a long established fact that a reader will be distracted by the
                                             readable content layout.</li>
                                         <li>It is a long established fact that a reader will be distracted by the
-                                            readable content layout.</li>
+                                            readable content layout.</li> -->
                                     </ul>
                                 </div>
                                 <div class="triangle_left"></div>
