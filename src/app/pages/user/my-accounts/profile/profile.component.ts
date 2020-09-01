@@ -268,12 +268,12 @@ console.log(res)
       } else {
         formdata.append("country_code",this.profileForm.value.country_code.name);
       } 
-      if(!Number.isInteger(this.profileForm.value.language_id)){
+      if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
         formdata.append("language_id", this.selectResponse.preferredLanguage.id);        
       } else {
         formdata.append("language_id", this.profileForm.value.language_id);
       }
-      if(!Number.isInteger(this.profileForm.value.currency_id)){
+      if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
         formdata.append("currency_id", this.selectResponse.preferredCurrency.id);
       } else {
         console.log('hete')
