@@ -84,6 +84,12 @@
         
 
     }
+    &.ng-customClass{
+        .ng-select-container{
+            height:100%;	
+            border:none !important;
+        }
+    }
 }
 
 // NG-SELECT FOCUS REMOVE CSS START

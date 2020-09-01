@@ -29,7 +29,10 @@
                 position: relative;
 
                 img {
-                    height: 50px;
+                    height: 70px;
+                    width: 70px;
+                    object-fit: cover;
+                    border-radius: 50%;
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -177,7 +180,10 @@
                         position: relative;
 
                         img {
-                            height: 65px;
+                            height: 100px;
+                            width: 100px;
+                            object-fit: cover;
+                            border-radius: 50%;
                             position: absolute;
                             top: 50%;
                             left: 50%;
