@@ -253,38 +253,40 @@ console.log(res)
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
       formdata.append("dob", this.dateFormator(this.profileForm.value.dob));
-      if(typeof(this.profileForm.value.country_id) != 'object'){        
+      if(!Number.isInteger(this.profileForm.value.country_id)){
         formdata.append("country_id", this.selectResponse.country.id);
       } else {
         formdata.append("country_id", this.profileForm.value.country_id.id);
       }
-      if(typeof(this.profileForm.value.state_id) != 'object'){        
+      if(!Number.isInteger(this.profileForm.value.state_id)){
         formdata.append("state_id", this.selectResponse.state.id);
       } else{
-        formdata.append("state_id", this.profileForm.value.state.id);
+        formdata.append("state_id", this.profileForm.value.state_id);
       }
       if(typeof(this.profileForm.value.country_code) != 'object'){        
-        formdata.append("country_code", this.selectResponse.country.id);
+        formdata.append("country_code", this.selectResponse.countryCode);
       } else {
-        formdata.append("country_code",this.profileForm.value.country_code.id);
+        formdata.append("country_code",this.profileForm.value.country_code.name);
       } 
-      if(Number.isInteger(this.profileForm.value.language_id)){
-        formdata.append("language_id", this.profileForm.value.language_id);
-      } else {
+      if(!Number.isInteger(this.profileForm.value.language_id)){
         formdata.append("language_id", this.selectResponse.preferredLanguage.id);        
-      }
-      if(Number.isInteger(this.profileForm.value.currency_id)){
-        formdata.append("currency_id", this.profileForm.value.currency_id);
       } else {
-        formdata.append("currency_id", this.selectResponse.preferredCurrency.id);
+        formdata.append("language_id", this.profileForm.value.language_id);
       }
-         
+      if(!Number.isInteger(this.profileForm.value.currency_id)){
+        formdata.append("currency_id", this.selectResponse.preferredCurrency.id);
+      } else {
+        console.log('hete')
+        formdata.append("currency_id", this.profileForm.value.currency_id);
+      }         
       formdata.append("passport_expiry",'2020-08-06');
+      
       console.log(this.profileForm.value)
+      console.log(formdata)
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
         localStorage.setItem("_lay_sess", data.token);
-        this.router.navigate(['/']);      
+        // this.router.navigate(['/']);      
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading = false;
       });
