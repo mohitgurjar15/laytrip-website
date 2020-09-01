@@ -41,9 +41,9 @@
                           <label>From</label>
                           <!-- <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" (keyup)="" />
                           <span>NY, United States</span> -->
-                          <ng-select [loading]="loading" [selectOnTab]="true" [items]="data"
+                          <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data"
                             bindLabel="city" bindValue="display_name" [clearable]="true" minTermLength="3"
-                            notFoundText="" [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}" (search)="changeSearch($event)"
+                            notFoundText="" [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}" (search)="changeSearchDeparture($event)"
                             loadingText="" (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder1 }}">
                             <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
@@ -77,9 +77,9 @@
                           <label>To</label>
                           <!-- <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
                           <span>CA, United States</span> -->
-                          <ng-select [loading]="false" [selectOnTab]="true" [items]="data" bindLabel="city"
+                          <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="city"
                             bindValue="display_name" [(ngModel)]="airportDefaultArrivalValue" [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText=""
-                            (search)="changeSearch($event)" loadingText=""
+                            (search)="changeSearchArrival($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'toSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder2 }}">
                             <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"

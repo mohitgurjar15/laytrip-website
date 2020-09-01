@@ -48,7 +48,8 @@ export class FlightSearchBarComponent implements OnInit {
   swapError = '';
   selectedAirport = [];
 
-  loading = false;
+  loadingDeparture = false;
+  loadingArrival = false;
   data = [];
   placeHolder1 = 'New York';
   placeHolder2 = 'Los Angeles';
@@ -155,12 +156,12 @@ export class FlightSearchBarComponent implements OnInit {
     // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
   }
 
-  searchAirport(searchItem) {
-    this.loading = true;
+  searchAirportDeparture(searchItem) {
+    this.loadingDeparture = true;
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       // console.log(response);
       this.data = response.map(res => {
-        this.loading = false;
+        this.loadingDeparture = false;
         return {
           id: res.id,
           name: res.name,
@@ -172,14 +173,42 @@ export class FlightSearchBarComponent implements OnInit {
       });
     },
       error => {
-        this.loading = false;
+        this.loadingDeparture = false;
       }
     );
   }
 
-  changeSearch(event) {
+  searchAirportArrival(searchItem) {
+    this.loadingArrival = true;
+    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+      // console.log(response);
+      this.data = response.map(res => {
+        this.loadingArrival = false;
+        return {
+          id: res.id,
+          name: res.name,
+          code: res.code,
+          city: res.city,
+          country: res.country,
+          display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+        };
+      });
+    },
+      error => {
+        this.loadingArrival = false;
+      }
+    );
+  }
+
+  changeSearchDeparture(event) {
     if (event.term.length > 2) {
-      this.searchAirport(event.term);
+      this.searchAirportDeparture(event.term);
+    }
+  }
+
+  changeSearchArrival(event) {
+    if (event.term.length > 2) {
+      this.searchAirportArrival(event.term);
     }
   }
 
