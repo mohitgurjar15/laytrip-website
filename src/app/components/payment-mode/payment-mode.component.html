@@ -1,0 +1,136 @@
+<div class="block_payment_mode">
+  <div class="block_title_section">
+      <h5>Choose Payment Mode</h5>
+  </div>
+  <div class="block_detail">
+      <ul>
+          <li>
+              <label class="custom_radio">Pay with Installment
+                  <input type="radio" name="payment_mode" (click)="triggerPayemntMode('instalment')">
+                  <span class="checkmark"></span>
+              </label>
+          </li>
+          <li>
+              <label class="custom_radio">Full Payment
+                  <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('no-instalment')">
+                  <span class="checkmark"></span>
+              </label>
+          </li>
+      </ul>
+      <div class="block_installment_option" id="installment_option_show" *ngIf="isInstalemtMode">
+          <ul class="nav nav-tabs" id="pay_option" role="tablist">
+              <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#pay-weekly" role="tab" aria-controls="Pay weekly">Pay weekly</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#pay-bi-weekly" role="tab" aria-controls="pay-bi-weekly">Pay bi-weekly</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#pay-monthly" role="tab" aria-controls="pay-monthly">Pay monthly</a>
+              </li>
+          </ul>
+          <div class="tab-content">
+              <div class="tab-pane active" id="pay-weekly" role="tabpanel">
+                  <div class="installment_ingo">
+                      <ul>
+                          <li>
+                              <label class="custom_radio">$30/week
+                                  <input type="radio" name="weekly-installment" onclick="default_amount();">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">$40/week
+                                  <input type="radio" name="weekly-installment" onclick="default_amount();">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">$50/week
+                                  <input type="radio" name="weekly-installment" onclick="default_amount();">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">Random amount
+                                  <input type="radio" name="weekly-installment" onclick="random_amount();">
+                                  <span class="checkmark"></span>
+                              </label>
+                              <div class="custom_amount_block" id="show_custom_amount" style="display: none;">
+                                  <input type="text" name="" tabindex="" placeholder="Example $45/week">
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="tab-pane" id="pay-bi-weekly" role="tabpanel">
+                  <div class="installment_ingo">
+                      <ul>
+                          <li>
+                              <label class="custom_radio">$30/week
+                                  <input type="radio" name="bi-weekly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">$40/week
+                                  <input type="radio" name="bi-weekly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">$50/week
+                                  <input type="radio" name="bi-weekly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">Random amount
+                                  <input type="radio" name="weekly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="tab-pane" id="pay-monthly" role="tabpanel">
+                  <div class="installment_ingo">
+                      <ul>
+                          <li>
+                              <label class="custom_radio">$30/week
+                                  <input type="radio" name="monthly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">$40/week
+                                  <input type="radio" name="monthly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">$50/week
+                                  <input type="radio" name="monthly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                          <li>
+                              <label class="custom_radio">Random amount
+                                  <input type="radio" name="weekly-installment">
+                                  <span class="checkmark"></span>
+                              </label>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="block_laycredit_checkbox">
+          <label class="custom_checkbox">
+              <input type="checkbox" value="">
+              <span class="checkmark"></span>
+              Use Laycredit for this booking. You have <span>23145 Laycredits</span> in your wallet.
+          </label>
+      </div>
+  </div>
+</div>
