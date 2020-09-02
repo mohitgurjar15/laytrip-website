@@ -14,16 +14,20 @@ export class FlightTravelerComponent implements OnInit {
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   travelers:any=[]
-
+  ClickCounter = 0;
+  
   ngOnInit() {
     this.getTravelers();
   }
 
   getTravelers(){
-
     this.travelerService.getTravelers().subscribe((res:any)=>{
       this.travelers = res.data;
       console.log(this.travelers )
     })
+  }
+
+  getAdultCount(count: number) {    
+    this.ClickCounter = count;
   }
 }

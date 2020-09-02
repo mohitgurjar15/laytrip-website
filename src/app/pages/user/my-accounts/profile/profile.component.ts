@@ -229,7 +229,6 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls.gender.setValue(this.is_type);
     }
     if (this.profileForm.invalid) {
-      console.log(this.profileForm.controls)
       this.submitted = true;      
       this.loading = false;
       return;
@@ -276,13 +275,10 @@ export class ProfileComponent implements OnInit {
       if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
         formdata.append("currency_id", this.selectResponse.preferredCurrency.id);
       } else {
-        console.log('hete')
         formdata.append("currency_id", this.profileForm.value.currency_id);
       }         
       formdata.append("passport_expiry",'2020-08-06');
       
-      console.log(this.profileForm.value)
-      console.log(formdata)
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
         localStorage.setItem("_lay_sess", data.token);

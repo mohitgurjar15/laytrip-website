@@ -1,0 +1,93 @@
+<div class="block_add_passenger">
+  <form [formGroup]="adultForm" (ngSubmit)="onSubmit()">
+      <div class="form_row">
+          <div class="form_field">
+              <label>Title</label>
+              <ul>
+                  <li>
+                      <label class="custom_radio">Mr.
+                          <input type="radio" data-title="{{traveler.title}}"  formControlName="title" [checked]="traveler.title === 'mr'" >
+                          <span class="checkmark"></span>
+                      </label>
+                  </li>
+                  <li>
+                      <label class="custom_radio">Ms.
+                          <input type="radio" formControlName="title"  [checked]="traveler.title === 'ms'">
+                          <span class="checkmark"></span>
+                      </label>
+                  </li>
+                  <li>
+                      <label class="custom_radio">Mrs.
+                          <input type="radio" formControlName="title"  [checked]="traveler.title === 'mrs'">
+                          <span class="checkmark"></span>
+                      </label>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="form_row">
+          <div class="form_field">
+              <label>Gender</label>
+              <ul>
+                  <li>
+                      <label class="custom_radio">Male
+                          <input type="radio" checked="checked" formControlName="gender"  value="M" [checked]="traveler.gender === 'M'" >
+                          <span class="checkmark"></span>
+                      </label>
+                  </li>
+                  <li>
+                      <label class="custom_radio">Female
+                          <input type="radio" formControlName="gender" value="F"  [checked]="traveler.gender === 'F'">
+                          <span class="checkmark"></span>
+                      </label>
+                  </li>
+                  <li>
+                      <label class="custom_radio">Non - Binary
+                          <input type="radio" formControlName="gender"  value="N" [checked]="traveler.gender === 'N'">
+                          <span class="checkmark"></span>
+                      </label>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="form_row">
+          <div class="form_field half">
+              <label>First Name<sup>*</sup></label>
+              <div class="text_field">
+                  <input type="text" formControlName="firstName"  maxlength="80"  tabindex="1" placeholder="First Name">
+              </div>
+          </div>
+          <div class="form_field half">
+              <label>Last Name<sup>*</sup></label>
+              <div class="text_field">
+                  <input type="text" formControlName="lastName"   maxlength="20"    tabindex="2" placeholder="last Name">
+              </div>
+          </div>
+      </div>
+      <div class="form_row">
+          
+          <div class="form_field half">
+            <label>DOB</label>
+            <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="11"
+                    ngbDatepicker #d="ngbDatepicker" dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()">	
+        </div>
+          <div class="form_field half">
+              <label>Nationality</label>
+              <div class="text_field custom-select">
+                <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="11" [selectOnTab]="true"
+                formControlName="country_code" selectOnTab="true" placeholder="Select Country">
+                </ng-select> 
+              </div>
+          </div>
+      </div>
+      <div class="form_row">
+          <div class="form_field half">
+              <label>Frequently - flyer no.</label>
+              <div class="text_field"> 
+                  <input type="text" formControlName="frequently_no" maxlength="20" tabindex="5" placeholder="Enter frequently - flyer no.">
+              </div>
+          </div>
+      </div>
+      <button type="submit">  <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>  Update <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
+    </form>
+</div> 
