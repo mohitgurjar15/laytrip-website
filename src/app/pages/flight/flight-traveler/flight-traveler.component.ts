@@ -18,6 +18,7 @@ export class FlightTravelerComponent implements OnInit {
   clickCounter = 0;  
   routeCode:string='';
   loading=true;
+  progressStep={ step1:true, step2:false, step3:false };
   ngOnInit() {
     this.routeCode = this.route.snapshot.paramMap.get('rc')
     this.getTravelers();

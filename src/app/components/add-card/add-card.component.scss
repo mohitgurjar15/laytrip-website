@@ -1,0 +1,13 @@
+@import './../../../cstm-variable';
+
+.card_field{
+    width: 100%;
+    border-bottom: 1px solid $box-border-color;
+    height: 40px;
+    line-height: 40px;
+    padding-top: 10px;
+
+    &:focus{
+        border-bottom: 1px solid $primary-color;
+    }
+}

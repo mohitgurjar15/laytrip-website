@@ -36,5 +36,22 @@ export class CommonFunction {
             e.preventDefault();
         }
     }
+
+    setHeaders(params='') {      
+        const accessToken = localStorage.getItem('_lay_sess');
+        const reqData = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        };
+        if(params) {
+            let reqParams = {};        
+            Object.keys(params).map(k =>{
+                reqParams[k] = params[k];
+            });
+            reqData['params'] = reqParams;
+        }
+        return reqData;
+      }  
 }
 

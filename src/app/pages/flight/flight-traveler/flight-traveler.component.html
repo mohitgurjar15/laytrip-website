@@ -1,9 +1,11 @@
-<app-checkout-progress></app-checkout-progress>
+<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
+
 <section class="detail_info_main add_passenger flight" *ngIf="loading">
     <app-booking-summary-loader></app-booking-summary-loader>
 </section>
+
 <section class="detail_info_main add_passenger flight" *ngIf="!loading">
-    <div class="container">
+ <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="detail_info_left">

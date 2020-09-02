@@ -1,4 +1,4 @@
-<app-checkout-progress></app-checkout-progress>
+<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
 <section class="detail_info_main payment_info flight">
   <div class="container">
       <div class="row">
@@ -25,7 +25,7 @@
                                   <div class="add_card_btn">
                                       <a href="javascript:void(0);" (click)="toggleAddcardForm()" >+ Add New Card</a>
                                   </div>
-                                  <app-add-card showAddCardForm="showAddCardForm"></app-add-card>
+                                  <app-add-card *ngIf="showAddCardForm" ></app-add-card>
                               </div>
                           </div>
                           <div class="block_billing_detail">
@@ -133,7 +133,7 @@
               </div>
           </div>
           <div class="col-lg-4">
-            <app-flight-summary></app-flight-summary>
+            <!-- <app-flight-summary></app-flight-summary> -->
           </div>
       </div>
   </div>
