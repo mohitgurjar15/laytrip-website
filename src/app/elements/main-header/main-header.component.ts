@@ -19,7 +19,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
     isLanunageSet:boolean=false;
 
     currencies:Currency[]=[];
-    selectedCurrency:Currency={ id:0, country:'', code:'',symbol:'', status:false }
+    selectedCurrency:Currency={ id:0, country:'', code:'',symbol:'', status:false, flag:'' }
     isCurrencySet:boolean=false;
 
     isLoggedIn = false;
