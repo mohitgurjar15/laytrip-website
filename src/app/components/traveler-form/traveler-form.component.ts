@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { FlightService } from 'src/app/services/flight.service';
+import { FlightService } from '../../services/flight.service';
 import * as moment from 'moment';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../_helpers/common-function';
 import { DatePipe } from '@angular/common';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
@@ -31,6 +31,8 @@ export class TravelerFormComponent implements OnInit {
   countries_code: any = [];
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
   editMode = false;
+  maxDate: any = {};
+
   searchFlightInfo =
     {
       trip: 'oneway',
