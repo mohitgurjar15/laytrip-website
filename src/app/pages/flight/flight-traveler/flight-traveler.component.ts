@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { TravelerService } from '../../../services/traveler.service';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-flight-traveler',
   templateUrl: './flight-traveler.component.html',
@@ -10,24 +10,28 @@ import { TravelerService } from '../../../services/traveler.service';
 export class FlightTravelerComponent implements OnInit {
 
   constructor(
-    private travelerService:TravelerService
+    private travelerService:TravelerService,
+    private route: ActivatedRoute
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   travelers:any=[]
-  ClickCounter = 0;
-  
+  clickCounter = 0;  
+  routeCode:string='';
+  loading=true;
   ngOnInit() {
+    this.routeCode = this.route.snapshot.paramMap.get('rc')
     this.getTravelers();
   }
 
   getTravelers(){
     this.travelerService.getTravelers().subscribe((res:any)=>{
       this.travelers = res.data;
+      this.loading = false;
       console.log(this.travelers )
     })
   }
 
   getAdultCount(count: number) {    
-    this.ClickCounter = count;
+    this.clickCounter = count;
   }
 }

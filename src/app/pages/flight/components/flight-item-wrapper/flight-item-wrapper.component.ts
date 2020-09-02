@@ -3,6 +3,7 @@ declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
 import { Subscription } from 'rxjs';
+import { FlightService } from '../../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -24,9 +25,14 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   hideDiv = true;
   showFlightDetails = -1;
   showDiv = false;
+  routeCode = [];
+  baggageDetails;
+  cancellationPolicy;
+  errorMessage;
 
   constructor(
-    private layTripStoreService: LayTripStoreService
+    private layTripStoreService: LayTripStoreService,
+    private flightService: FlightService
   ) { }
 
   ngOnInit() {
@@ -42,6 +48,24 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         }
       }
     }));
+  }
+
+  getBaggageDetails(routeCode) {
+    this.flightService.getBaggageDetails(routeCode).subscribe(data => {
+      console.log('baggage:::', data);
+      this.baggageDetails = data;
+    });
+  }
+
+  getCancellationPolicy(routeCode) {
+    this.flightService.getCancellationPolicy(routeCode).subscribe(data => {
+      console.log('cancellation-policy:::', data);
+      this.errorMessage = '';
+      this.cancellationPolicy = data;
+    }, (err) => {
+      console.log(err);
+      this.errorMessage = err.message;
+    });
   }
 
   loadJquery() {

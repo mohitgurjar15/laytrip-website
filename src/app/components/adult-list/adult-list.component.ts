@@ -8,26 +8,32 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./adult-list.component.scss']
 })
 export class AdultListComponent implements OnInit {
-  @Output() checkekCounter = new EventEmitter();
+  @Output() adultsCount = new EventEmitter();
   @Input() travelers:any=[];
   @Input() username:string;
-  
+
+  counter : any = 0;
+  checked : boolean = false;
+  isLoggedIn : boolean = false;
+  showAddAdultForm : boolean = false;
+  count =0;
+  containers = [];
   constructor() { }
 
   ngOnInit() {
-    console.log(this)
+    this.checkUser();
   } 
-  counter : any = 0;
-  checked : boolean = false;
-  
-  checkBox(enent){
+
+
+  checkBox(event){
+   
     this.counter++; // counter is the varible
     if(this.counter%2==1){
       this.checked= true; //checked is the variable
     } else{
       this.checked=false;
     }
-    this.checkekCounter.emit(this.counter);
+    this.adultsCount.emit(this.counter); 
   }
 
 
@@ -36,8 +42,28 @@ export class AdultListComponent implements OnInit {
       console.log("this.traveler",this.travelers)
     }
   }
-
+  
   onSubmit() {
+    
+  }
+  ngDoCheck() {
+    this.containers = this.containers;
+  }
+  
+  addAdultForm() {    
+    this.showAddAdultForm = true;
+  }
 
+  checkUser() {
+    let userToken = localStorage.getItem('_lay_sess');
+    
+    if( userToken) {
+      this.isLoggedIn = true;
+    }
+  }
+
+  pushTraveler(event){
+    this.travelers.push(event);
+    this.showAddAdultForm = false;
   }
 }

@@ -19,7 +19,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
     isLanunageSet:boolean=false;
 
     currencies:Currency[]=[];
-    selectedCurrency:Currency={ id:0, country:'', code:'',symbol:'', status:false }
+    selectedCurrency:Currency={ id:0, country:'', code:'',symbol:'', status:false, flag:'' }
     isCurrencySet:boolean=false;
 
     isLoggedIn = false;
@@ -116,6 +116,10 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
         (response:CurrencyModel)=>{
 
           this.currencies = response.data.filter(currency=>currency.status==true);
+          for(let i=0; i<this.currencies.length; i++){
+            this.currencies[i].flag= `${this.s3BucketUrl}assets/images/icon/${this.currencies[i].code}.svg`;
+          }
+          console.log(this.currencies)
           if(!this.isCurrencySet){
 
             this.isCurrencySet=true;

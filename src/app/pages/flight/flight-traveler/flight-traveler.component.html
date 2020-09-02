@@ -1,6 +1,8 @@
 <app-checkout-progress></app-checkout-progress>
-
-<section class="detail_info_main add_passenger flight">
+<section class="detail_info_main add_passenger flight" *ngIf="loading">
+    <app-booking-summary-loader></app-booking-summary-loader>
+</section>
+<section class="detail_info_main add_passenger flight" *ngIf="!loading">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -8,10 +10,10 @@
                     <div class="block_passanger_info">
                         <div class="block_title_section">
                             <h5>Passenger Info</h5>
-                            <span>({{ClickCounter}}/4 selected)</span>
+                            <span>({{adultsCount}}/4 selected)</span>
                         </div>
                         <div class="passanger_detail_main">
-                            <app-adult-list  [travelers]="travelers" (checkekCounter)="getAdultCount($event)"></app-adult-list>
+                            <app-adult-list  [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
                             <app-child-list></app-child-list>
                             <app-infant-list></app-infant-list>
                             <div class="required_wheelchair">
@@ -29,7 +31,9 @@
                     </div>
                     
                     <div class="btn_payment">
-                        <a href="flight-payment-detail-login-user.html">Continue to payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                        <a  [routerLink]="['/flight/checkout', routeCode ]">
+                            Continue to payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow">
+                          </a>
                     </div>
                 </div>
             </div>

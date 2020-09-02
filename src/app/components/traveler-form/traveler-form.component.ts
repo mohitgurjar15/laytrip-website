@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
@@ -20,11 +20,17 @@ declare var $: any;
 export class TravelerFormComponent implements OnInit {
 
   @Input() traveler:any=[];
+  @Output() valueChange = new EventEmitter();
+
+
   adultForm : FormGroup;
   submitted = false;
   loading = false;
+  isLoggedIn = false;
   countries: any = [];
+  countries_code: any = [];
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
+  editMode = false;
   searchFlightInfo =
     {
       trip: 'oneway',
@@ -57,29 +63,35 @@ export class TravelerFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.adultForm = this.formBuilder.group({
       title: [''],
-      firstName: ['' ],
-      lastName: [''],
-      gender: [''],
-      dob: [''],
-      frequently_no: [''],
-      country_code:['']
+      gender: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email:['', Validators.required],
+      dob: ['', Validators.required],
+      country_code:['', Validators.required],
+      phone_no:['', Validators.required],
+      country_id:['', Validators.required],
+      frequently_no: ['', Validators.required],
     })
+    
     let dob_selected = new Date(this.traveler.dob)
 
     this.adultForm.patchValue({      
       title: this.traveler.title,
       firstName: this.traveler.firstName,
       lastName: this.traveler.lastName,
-      email: this.traveler.email,
-      gender: 'F',//this.traveler.gender,
+      gender: this.traveler.gender,
       dob: {year:dob_selected.getFullYear(),month:dob_selected.getMonth(),day:dob_selected.getDate()},
       frequently_no: this.traveler.frequently_no,
       country_code: this.traveler.country_code,
-    });
+    })
+    
   }
 
+  
   dateFormator(date) {
     let aNewDate = date.year + '-' + date.month + '-' + date.day;
     return this.datePipe.transform(aNewDate, 'yyyy-MM-dd');
@@ -92,9 +104,15 @@ export class TravelerFormComponent implements OnInit {
     }
   }
 
+  checkUser() {
+    let userToken = localStorage.getItem('_lay_sess');
+    
+    if( userToken) {
+      this.isLoggedIn = true;
+    }
+  }
   
   getDateWithFormat(date) {
-    alert('here');
     this.searchFlightInfo.birth_date = this.commonFunction.parseDateWithFormat(date).departuredate;
     console.log(this.searchFlightInfo.birth_date)  
   }
@@ -106,6 +124,12 @@ export class TravelerFormComponent implements OnInit {
               id:country.id,
               name:country.name
           } 
+      }),
+      this.countries_code = data.map(country=>{
+        return {
+            id:country.id,
+            name:country.phonecode+' ('+country.iso2+')'
+        }
       })
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
@@ -115,13 +139,14 @@ export class TravelerFormComponent implements OnInit {
   }
 
   onSubmit(){
+   
     this.submitted = this.loading = true;
-    if (this.adultForm.invalid) {
-      console.log(this.adultForm.controls)
+    if (this.adultForm.invalid) {      
       this.submitted = true;      
       this.loading = false;
       return;
     } else {
+      console.log(this.adultForm.value)
       let jsonData = {
         title : this.adultForm.value.title,
         first_name : this.adultForm.value.firstName,
@@ -130,21 +155,40 @@ export class TravelerFormComponent implements OnInit {
         dob : this.dateFormator(this.adultForm.value.dob),
         gender : this.adultForm.value.gender,
         country_code : this.adultForm.value.country_code.id,
-        "passport_number": "S1234X7896",
-        "passport_expiry": "2030-07-20"
+        country_id : this.adultForm.value.country_id.id,
+        phone_no : this.adultForm.value.phone_no,
+        email : this.adultForm.value.email,
+        passport_number: "S1234X7896",
+        passport_expiry: "2030-07-20"
       };
-
-      this.flightService.updateAdult(jsonData,this.traveler.userId).subscribe((data: any) => {
-        this.submitted = this.loading = false; 
-        console.log(data)
-
-      }, (error: HttpErrorResponse) => {
-        console.log('errror')
-        this.submitted = this.loading = false;
-        if (error.status === 401) {
-          // this.router.navigate(['/']);
-        }
-      });
+      if(this.traveler && this.traveler.length){
+        this.flightService.updateAdult(jsonData,this.traveler.userId).subscribe((data: any) => {
+          this.submitted = this.loading = false; 
+          this.router.navigate(['flight/travele'], {
+            skipLocationChange: false
+          })
+  
+        }, (error: HttpErrorResponse) => {
+          console.log('errror')
+          this.submitted = this.loading = false;
+          if (error.status === 401) {
+            // this.router.navigate(['/']);
+          }
+        });
+      } else {
+        this.flightService.addAdult(jsonData).subscribe((data: any) => {
+          this.adultForm.reset();
+          this.submitted = this.loading = false; 
+          this.valueChange.emit(data);
+  
+        }, (error: HttpErrorResponse) => {
+          console.log('errror')
+          this.submitted = this.loading = false;
+          if (error.status === 401) {
+            // this.router.navigate(['/']);
+          }
+        });
+      }
 
     }
   }

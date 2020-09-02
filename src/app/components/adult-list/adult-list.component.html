@@ -1,19 +1,46 @@
 <div class="block_passenger_detail">
   <h6>Adults <span>(Above 12 years)</span></h6>
-  <div id="accordion" class="accordion" *ngIf="travelers.length">
-
-      <div class="card_add_pass" *ngFor="let traveler of travelers; let i = index;">
-          <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
-              <label class="custom_checkbox">
-                  <input type="checkbox" value="" (change)="checkBox($event);">
-                  <span class="checkmark"></span>
-              </label>
-              <a class="card-title">{{traveler.firstName}} {{traveler.lastName}}</a>
-          </div>
-          <div id="collapseOne" class="card-body add_pass collapse" data-parent="#accordion">            
+    <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
+      <div class="card_add_pass" *ngFor="let traveler of travelers; let i = index;">         
+          <div class="card-header" id="adultOne{{i}}">
+            <h2 class="mb-0">
+                <label class="custom_checkbox">
+                    <input type="checkbox" value="" (change)="checkBox($event);">
+                    <span class="checkmark"></span>
+                </label>
+                <button type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#adultcollapseOne'+ i">
+                    {{traveler.firstName}} {{traveler.lastName}}
+                    <i class="fa fa-angle-down"></i>
+                    <span class="status_incomplete">Incomplete</span>
+                </button>
+            </h2>
+         </div>
+         <div id="adultcollapseOne{{i}}" class="collapse cus_collapse" aria-labelledby="adultOne+i" data-parent="#accordion-Adults">    
+            <div class="card-body">       
                 <app-traveler-form [traveler]="traveler" ></app-traveler-form>  
-          </div>
+            </div>                 
+        </div>                 
       </div>
   </div>
-  <a class="add_passenger_btn" href="javascript:void(0);">+ Add Adult</a>
+  <a class="add_passenger_btn" href="javascript:void(0);" (click)="addAdultForm()">+ Add Adult</a>
+      <div id="accordion-Adults" class="accordion" *ngIf="showAddAdultForm">
+        <div class="card_add_pass">         
+            <div class="card-header" id="adultOne">
+              <h2 class="mb-0">                 
+                  <button type="button" class="btn btn-link">                    
+                      <span class="status_incomplete">Incomplete</span>
+                  </button>
+              </h2>
+           </div>
+           <div id="adultcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne" data-parent="#accordion-Adults">    
+              <div class="card-body">       
+                  <app-traveler-form (valueChange)="pushTraveler($event)"></app-traveler-form>  
+              </div>                 
+          </div>                 
+        </div>
+    </div>
+  <!-- <div *ngFor="let container of containers" id="collapseOne" class="card-body add_pass collapse" data-parent="#accordion">            
+    <app-traveler-form ></app-traveler-form>  
+</div> -->
+
 </div>

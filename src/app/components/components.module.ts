@@ -8,12 +8,16 @@ import { CheckoutProgressComponent } from './checkout-progress/checkout-progress
 import { AdultListComponent } from './adult-list/adult-list.component';
 import { ChildListComponent } from './child-list/child-list.component';
 import { InfantListComponent } from './infant-list/infant-list.component';
+import { BookingTimerComponent } from './booking-timer/booking-timer.component';
+import { PaymentModeComponent } from './payment-mode/payment-mode.component';
+import { CardListComponent } from './card-list/card-list.component';
+import { AddCardComponent } from './add-card/add-card.component';
 import { TravelerFormComponent } from './traveler-form/traveler-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, TravelerFormComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CheckoutProgressComponent,
     AdultListComponent,
     ChildListComponent,
-    InfantListComponent
+    InfantListComponent,
+    BookingTimerComponent,
+    PaymentModeComponent,
+    CardListComponent,
+    AddCardComponent
     
   ],
   providers: [DatePipe],
