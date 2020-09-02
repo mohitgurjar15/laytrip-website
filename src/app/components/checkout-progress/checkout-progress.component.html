@@ -10,15 +10,15 @@
           <div class="col-lg-6">
               <div class="cnt_right">
                   <ul>
-                      <li class="active">
+                      <li [ngClass]="{'active': progressStep.step1==true}" >
                           <div class="border_block"><span>1</span></div>
                           <p>Traveler Details</p>
                       </li>
-                      <li>
+                      <li [ngClass]="{'active': progressStep.step2==true}">
                           <div class="border_block"><span>2</span></div>
                           <p>Payment</p>
                       </li>
-                      <li>
+                      <li [ngClass]="{'active': progressStep.step3==true}">
                           <div class="border_block"><span>3</span></div>
                           <p>Confirmation</p>
                       </li>

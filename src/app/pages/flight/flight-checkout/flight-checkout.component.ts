@@ -11,12 +11,13 @@ export class FlightCheckoutComponent implements OnInit {
   constructor() { }
   s3BucketUrl = environment.s3BucketUrl;
   showAddCardForm:boolean=false;
+  progressStep={ step1:true, step2:true, step3:false };
 
   ngOnInit() {
   }
 
   toggleAddcardForm(){
-    
     this.showAddCardForm=!this.showAddCardForm;
+    console.log(this.showAddCardForm)
   }
 }

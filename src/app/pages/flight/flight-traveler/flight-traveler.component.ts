@@ -16,6 +16,7 @@ export class FlightTravelerComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   travelers:any=[]
   routeCode:string='';
+  progressStep={ step1:true, step2:false, step3:false };
 
   ngOnInit() {
     this.routeCode = this.route.snapshot.paramMap.get('rc')
