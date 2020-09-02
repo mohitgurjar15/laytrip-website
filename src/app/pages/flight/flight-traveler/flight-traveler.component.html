@@ -12,12 +12,14 @@
                     <div class="block_passanger_info">
                          <div class="block_title_section">
                             <h5>Passenger Info</h5>
-                            <span>({{adultsCount}}/4 selected)</span>
+                            <span>({{selectedAdults}}/4 selected)</span>
                         </div>
                         <div class="passanger_detail_main">
-                            <app-adult-list  [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
-                            <app-child-list></app-child-list>
-                            <app-infant-list></app-infant-list>
+                            <app-adult-list type="adult" age="12" [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
+                            <app-adult-list  type="child" age="2-12" [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
+                            <app-adult-list  type="infant" age="0-2" [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
+                          <!--   <app-child-list></app-child-list>
+                            <app-infant-list></app-infant-list> -->
                             <div class="required_wheelchair">
                                 <ul>
                                     <li>

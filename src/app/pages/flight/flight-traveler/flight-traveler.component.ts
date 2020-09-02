@@ -15,7 +15,7 @@ export class FlightTravelerComponent implements OnInit {
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   travelers:any=[]
-  clickCounter = 0;  
+  selectedAdults = 0;  
   routeCode:string='';
   loading=true;
   progressStep={ step1:true, step2:false, step3:false };
@@ -28,11 +28,10 @@ export class FlightTravelerComponent implements OnInit {
     this.travelerService.getTravelers().subscribe((res:any)=>{
       this.travelers = res.data;
       this.loading = false;
-      console.log(this.travelers )
     })
   }
 
-  getAdultCount(count: number) {    
-    this.clickCounter = count;
+  getAdultCount(count: number) {  
+    this.selectedAdults = count;
   }
 }

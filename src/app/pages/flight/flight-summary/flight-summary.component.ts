@@ -44,7 +44,7 @@ export class FlightSummaryComponent implements OnInit {
       },(error)=>{
           console.log("error",error)
           if(error.status==404){
-            this.router.navigate(['/'])
+            //this.router.navigate(['/'])
           }
       })
   }

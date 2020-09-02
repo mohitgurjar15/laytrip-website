@@ -11,8 +11,10 @@ export class AdultListComponent implements OnInit {
   @Output() adultsCount = new EventEmitter();
   @Input() travelers:any=[];
   @Input() username:string;
+  @Input() type:string;
+  @Input() age:string;
 
-  counter : any = 0;
+  counter  = 0;
   checked : boolean = false;
   isLoggedIn : boolean = false;
   showAddAdultForm : boolean = false;
@@ -26,13 +28,12 @@ export class AdultListComponent implements OnInit {
 
 
   checkBox(event){
-   
-    this.counter++; // counter is the varible
-    if(this.counter%2==1){
-      this.checked= true; //checked is the variable
-    } else{
-      this.checked=false;
+    if(event.target.checked){
+      this.counter++;
+    } else {
+      this.counter--;
     }
+    console.log(this.counter)
     this.adultsCount.emit(this.counter); 
   }
 
