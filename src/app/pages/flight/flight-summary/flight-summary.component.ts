@@ -19,6 +19,10 @@ export class FlightSummaryComponent implements OnInit {
   }
   s3BucketUrl = environment.s3BucketUrl;
   flightDetail:any=[];
+  outwardDetails:boolean=false;
+  inwardDetails:boolean=false;
+  outWardStopCount:number=0;
+  inWardStopCount:number=0;
   ngOnInit() {
     this.airRevalidate();
   }
@@ -31,6 +35,18 @@ export class FlightSummaryComponent implements OnInit {
       this.flightService.airRevalidate(routeData).subscribe((response:any)=>{
           console.log(response)
           this.flightDetail=response;
+          this.outWardStopCount=response[0].routes[0].stops.length-1;
+          this.inWardStopCount =typeof response[0].routes[1] ? response[0].routes[1].stops.length-1:0;
       })
+  }
+
+  toggleRouteDetails(type){
+
+    if(type=='onward'){
+      this.outwardDetails=!this.outwardDetails;
+    }
+    if(type=='inward'){
+      this.inwardDetails = !this.inwardDetails;
+    }
   }
 }

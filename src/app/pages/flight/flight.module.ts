@@ -17,6 +17,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FlightNotFoundComponent,
     FlightTravelerComponent,
     FlightSummaryComponent,
-    ClickOutSideDirective
+    ClickOutSideDirective,
+    FlightCheckoutComponent
   ],
   imports: [
     CommonModule,
