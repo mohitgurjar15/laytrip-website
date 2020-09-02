@@ -10,5 +10,6 @@ export class Currency{
     country     : string;
     code        : string;
     symbol      : string;
-    status      : boolean
+    status      : boolean;
+    flag        : string;
 }

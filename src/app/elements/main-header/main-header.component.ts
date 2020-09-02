@@ -116,6 +116,10 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
         (response:CurrencyModel)=>{
 
           this.currencies = response.data.filter(currency=>currency.status==true);
+          for(let i=0; i<this.currencies.length; i++){
+            this.currencies[i].flag= `${this.s3BucketUrl}assets/images/icon/${this.currencies[i].code}.svg`;
+          }
+          console.log(this.currencies)
           if(!this.isCurrencySet){
 
             this.isCurrencySet=true;
