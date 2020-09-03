@@ -60,14 +60,9 @@ deploy_staging:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - apt-get update -y
     - apt-get -y install rsync
-    - npm install pm2 -g
   script:
     - ssh -i $PRIVATE_KEY ubuntu@$SERVER_IP
     - rsync -zvhr -auv -e "ssh -i $PRIVATE_KEY" dist/ ubuntu@$SERVER_IP:/var/www/html/staging/dist/
-    #- npm install forever -g
+    - npm install forever -g
     #- forever restart /var/www/html/staging/dist/server.js
-    - pwd
-    - ls -al dist/
-    - pm2 restart ./dist/server.js
-    - locate server.js
   only: ['staging']
