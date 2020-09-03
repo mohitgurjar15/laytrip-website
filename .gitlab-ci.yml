@@ -67,6 +67,7 @@ deploy_staging:
     #- npm install forever -g
     #- forever restart /var/www/html/staging/dist/server.js
     - pwd
-    - ls -all
-    - pm2 restart dist/server.js
+    - ls -al dist/
+    - pm2 restart ./dist/server.js
+    - locate server.js
   only: ['staging']
