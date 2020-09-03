@@ -64,6 +64,7 @@ export class AdultListComponent implements OnInit {
   }
 
   pushTraveler(event){
+    console.log(event)
     this.travelers.push(event);
     this.showAddAdultForm = false;
   }

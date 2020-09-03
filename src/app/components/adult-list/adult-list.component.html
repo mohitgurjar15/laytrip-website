@@ -24,7 +24,7 @@
               </div>
         </div>        
   </div>
-  <a class="add_passenger_btn" href="javascript:void(0);" (click)="addAdultForm()">+ Add {{type | titlecase}}</a>
+  <a class="add_passenger_btn" href="javascript:void(0);" (click)="addAdultForm()">{{showAddAdultForm ? '-' : '+'}} Add {{type | titlecase}}</a>
       <div id="accordion-Adults" class="accordion" *ngIf="showAddAdultForm">
         <div class="card_add_pass">         
             <div class="card-header" id="adultOne">

@@ -6,8 +6,8 @@
         <ul class="custom_listing">
           <li>
             <label class="custom_radio">Mr.
-              <input type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr"
-              tabindex="0" [checked]="traveler.title === 'mr'">
+              <input type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr" tabindex="0"
+                [checked]="traveler.title === 'mr'">
               <span class="checkmark"></span>
             </label>
           </li>
@@ -19,7 +19,8 @@
           </li>
           <li>
             <label class="custom_radio">Mrs.
-              <input type="radio" formControlName="title" value="mrs"  tabindex="-1" [checked]="traveler.title === 'mrs'">
+              <input type="radio" formControlName="title" value="mrs" tabindex="-1"
+                [checked]="traveler.title === 'mrs'">
               <span class="checkmark"></span>
             </label>
           </li>
@@ -56,48 +57,25 @@
       <div class="form_field half">
         <label>First Name<sup>*</sup></label>
         <div class="text_field">
-          <input type="text" formControlName="firstName" maxlength="80" tabindex="1" placeholder="First Name">
+          <input type="text" formControlName="firstName" maxlength="80" tabindex="1" placeholder="Enter first Name">
         </div>
-        <div *ngIf="(adultForm.controls.firstName.errors)" class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.firstName.errors.required && adultForm.controls.firstName.touched" class="text-danger">Please select your
-            firstName.</div>
+        <div *ngIf="(submitted  || adultForm.controls.firstName.touched) && adultForm.controls.firstName.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.firstName.errors.required" class="text-danger">Please enter
+            first name.
+          </div>
         </div>
       </div>
       <div class="form_field half">
         <label>Last Name<sup>*</sup></label>
         <div class="text_field">
-          <input type="text" formControlName="lastName" maxlength="20" tabindex="2" placeholder="last Name">
+          <input type="text" formControlName="lastName" maxlength="20" tabindex="2" placeholder="Enter last Name">
         </div>
-      </div>
-    </div>
-
-    <div class="form_row">
-
-      <div class="form_field half">
-        <label>DOB</label>
-        <!-- <div class="search_area">
-                <input type="text"  tabindex="3"
-                    value="{{ defaultDate }}" id="dob_date"
-                    formControlName="dob" />
-                <div class="prev-next">
-                    <a href="javascript:void(0);">Prev</a>
-                    <a href="javascript:void(0);">Next</a>
-                </div>
-                <div class="date_icon" id="dob_date_icon">
-                    <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg"
-                        alt="Calender Icon">
-                </div>
-            </div> -->
-        <input  class="form-control" placeholder="yyyy-mm-dd" tabindex="3" ngbDatepicker
-          #d="ngbDatepicker" dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()">
-
-      </div>
-      <div class="form_field half">
-        <label>Nationality</label>
-        <div class="text_field custom-select">
-          <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="4" [selectOnTab]="true"
-            formControlName="country_id" selectOnTab="true" placeholder="Select Country">
-          </ng-select>
+        <div *ngIf="(submitted  || adultForm.controls.lastName.touched) && adultForm.controls.lastName.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.lastName.errors.required" class="text-danger">Please enter
+            last name.
+          </div>
         </div>
       </div>
     </div>
@@ -105,11 +83,22 @@
       <div class="form_field half">
         <label>Email<sup>*</sup></label>
         <div class="text_field">
-          <input type="email" formControlName="email" maxlength="50" tabindex="5" placeholder="Enter your email">
+          <input type="email" [readonly]="traveler.userId" formControlName="email" maxlength="50" tabindex="5"
+            placeholder="Enter your email">
+        </div>
+        <div *ngIf="(submitted  || adultForm.controls.email.touched) && adultForm.controls.email.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.email.errors.required" class="text-danger">Please enter
+            email.
+          </div>
+          <div *ngIf="adultForm.controls.email.errors.pattern" class="text-danger">Please enter valid
+            email
+            address.</div>
         </div>
       </div>
+
       <div class="form_field half">
-        <label>Phone</label>
+        <label>Phone<sup>*</sup></label>
         <div class="text_field">
           <div class="phone_no">
             <div class="code">
@@ -125,13 +114,65 @@
             </div>
           </div>
         </div>
+        <div
+          *ngIf="(submitted  || adultForm.controls.phone_no.touched) && (adultForm.controls.phone_no.errors && adultForm.controls.country_code.errors)"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.country_code.errors.required"
+            class="text-danger">Please enter
+            phone no.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form_row">
+
+      <div class="form_field half">
+        <label>DOB<sup>*</sup></label>
+<!--         <input autocomplete="off" class="birth_date" type="text" formControlName="dob" maxlength="20"  placeholder="MM/YYYY" tabindex="103" id="dobDate">
+ -->
+        <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="3" ngbDatepicker #d="ngbDatepicker"
+          dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()">
+        <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
+            date of birth.
+          </div>
+        </div>
+      </div>
+      <div class="form_field half">
+        <label>Nationality<sup>*</sup></label>
+        <div class="text_field custom-select">
+          <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="4" [selectOnTab]="true"
+            formControlName="country_id" selectOnTab="true" placeholder="Select nationality">
+          </ng-select>
+        </div>
+        <div *ngIf="(submitted  || adultForm.controls.country_id.touched) && adultForm.controls.country_id.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.country_id.errors.required" class="text-danger">Please select
+            nationality.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form_row">
+      <div class="form_field half">
+        <label>Passport Expiry</label>
+        <input class="form-control" placeholder="yyyy-mm-dd" tabindex="8" ngbDatepicker #dd="ngbDatepicker"
+          dateFormat="yyyy-mm-dd" formControlName="passport_expiry" (click)="dd.toggle()">
+      </div>
+      <div class="form_field half">
+        <label>Passport Number</label>
+        <div class="text_field">
+          <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
+            placeholder="Passport Number">
+        </div>
       </div>
     </div>
     <div class="form_row">
       <div class="form_field half">
         <label>Frequently - flyer no.</label>
         <div class="text_field">
-          <input type="text" formControlName="frequently_no" maxlength="20" tabindex="8"
+          <input type="text" formControlName="frequently_no" maxlength="20" tabindex="10"
             placeholder="Enter frequently - flyer no.">
         </div>
       </div>
@@ -139,9 +180,9 @@
 
     <div class="form_row">
       <div class="form_field half">
-        <button  type="submit">
-          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Save
-        </button>       
+        <button type="submit">
+          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{ traveler.userId ? 'Update' : 'Add' }}
+        </button>
       </div>
     </div>
   </form>
