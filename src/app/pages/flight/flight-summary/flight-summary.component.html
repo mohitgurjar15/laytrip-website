@@ -294,15 +294,28 @@
     </div>
     <div class="cmn_block">
         <div class="block_inner">
-            <h6>Fare Detail</h6>
+            <h6>Fare Break Down</h6>
             <ul>
-                <li>Price per passenger <span>$153</span></li>
+                <li *ngFor="let priceInfo of flightDetail[0].fare_break_dwon">
+                    <p *ngIf="priceInfo.type=='ADT'">
+                        Base Fare ({{priceInfo.quantity}} Adult) 
+                        <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
+                    </p>
+                    <p *ngIf="priceInfo.type=='CHD'">
+                        Base Fare ({{priceInfo.quantity}} Child) 
+                        <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
+                    </p>
+                    <p *ngIf="priceInfo.type=='INF'">
+                        Base Fare ({{priceInfo.quantity}} Infant) 
+                        <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
+                    </p>
+                </li>
             </ul>
         </div>
         <div class="block_inner last">
             <h6>Fare Detail</h6>
             <ul>
-                <li>Amount <span>$ {{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
+                <li>Amount <span>{{ currency?.symbol }} {{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
                 <!-- <li>Taxes <span>$0</span></li> -->
             </ul>
         </div>
@@ -310,13 +323,13 @@
             <ul>
                 <li>
                     <p>Partial Payment <img src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon"></p>
-                    <span>${{flightDetail[0].start_price | number : '1.2-2'}}/week</span>
+                    <span>{{ currency?.symbol }}{{flightDetail[0].start_price | number : '1.2-2'}}/week</span>
                 </li>
             </ul>
         </div>
         <div class="total_payment">
             <ul>
-                <li>Total <span>${{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
+                <li>Total <span>{{ currency?.symbol }}{{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
             </ul>
         </div>
     </div>

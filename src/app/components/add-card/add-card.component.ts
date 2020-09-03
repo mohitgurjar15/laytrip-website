@@ -24,50 +24,55 @@ export class AddCardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.loadJquery();
+      this.loadJquery();
 
-    this.cardForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      expiry: ['', Validators.required]
-    });
+      this.cardForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        expiry: ['', Validators.required],
+        payment_method_token:['', Validators.required]
+      });
 
-    Spreedly.init("YNEdZFTwB1tRR4zwvcMIaUxZq3g", {
-      "numberEl": "spreedly-number",
-      "cvvEl": "spreedly-cvv"
-    });
+      Spreedly.init("YNEdZFTwB1tRR4zwvcMIaUxZq3g", {
+        "numberEl": "spreedly-number",
+        "cvvEl": "spreedly-cvv"
+      });
 
-    Spreedly.on("ready", function () {
-      this.disabledSavecardbutton=false;
-      console.log("this.disabledSavecardbutton",this.disabledSavecardbutton)
-    });
-    
-    Spreedly.on('paymentMethod', function(token, pmData) {
-  
-      // Set the token in the hidden form field
-      var tokenField = document.getElementById("payment_method_token");
-      tokenField.setAttribute("value", token);
-      let cardData={
-          card_type: pmData.card_type,
-          card_holder_name: pmData.full_name,
-          card_token: pmData.token,
-          card_last_digit: pmData.last_four_digits
-      }
-      this.saveCard(cardData)
+      Spreedly.on("ready", function () {
+        this.disabledSavecardbutton=false;
+        console.log("this.disabledSavecardbutton",this.disabledSavecardbutton)
+      });
       
-    });
-
-    Spreedly.on('errors', function(errors) {
-      for (let i=0; i < errors.length; i++) {
-        let error = errors[i];
-        console.log(error)
-        if(typeof error.attribute!='undefined' && error.attribute=='number'){
-
-          this.cardError=error.message;
-          console.log(this.cardError)
+      Spreedly.on('paymentMethod', function(token, pmData) {
+    
+        // Set the token in the hidden form field
+        var tokenField = document.getElementById("payment_method_token");
+        tokenField.setAttribute("value", token);
+        this.card_number=token;
+        let cardData={
+            card_type: pmData.card_type,
+            card_holder_name: pmData.full_name,
+            card_token: pmData.token,
+            card_last_digit: pmData.last_four_digits
         }
+
+        var masterForm = document.getElementById('payment-form');
+        //this.car
+        //this.saveCard(cardData)
         
-      };
-    });
+      });
+
+      Spreedly.on('errors', function(errors) {
+        for (let i=0; i < errors.length; i++) {
+          let error = errors[i];
+          console.log(error)
+          if(typeof error.attribute!='undefined' && error.attribute=='number'){
+
+            this.cardError=error.message;
+            console.log(this.cardError)
+          }
+          
+        };
+      });
   }
 
   submitPaymentForm() {
@@ -75,6 +80,7 @@ export class AddCardComponent implements OnInit {
     this.submitted=true;
     var requiredFields = {};
     console.log(this.cardForm.value)
+    console.log(this.card_number)
     // Get required, non-sensitive, values from host page
 
     if (this.cardForm.invalid) {
