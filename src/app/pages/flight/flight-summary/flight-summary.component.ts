@@ -26,7 +26,10 @@ export class FlightSummaryComponent implements OnInit {
   inWardStopCount:number=0;
   flightSummaryLoader:boolean=true;
   totalTraveler:number=1;
+  currency;
   ngOnInit() {
+    let _currency = localStorage.getItem('_curr');
+    this.currency = JSON.parse(_currency);
     this.airRevalidate();
   }
 

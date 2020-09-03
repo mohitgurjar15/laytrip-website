@@ -179,10 +179,22 @@
                                 <div class="triangle_right"></div>
                                 <ul>
                                     <li *ngFor="let fareDetails of item.fare_break_dwon">
-                                        <p *ngIf="fareDetails.type !== 'total'">
+                                        <p *ngIf="fareDetails.type == 'ADT'">
                                             Base Fare
                                             ({{ fareDetails?.quantity }}
-                                            {{ fareDetails.type === 'ADT' ? 'Adult' : 'Child' }})
+                                            Adult)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'CHD'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Child)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'INF'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Infant)
                                             <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </p>
                                         <p *ngIf="fareDetails.type === 'total'">
