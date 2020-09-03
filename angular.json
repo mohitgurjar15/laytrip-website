@@ -88,6 +88,14 @@
                   "with": "src/environments/environment.suresh.ts"
                 }
               ]
+            },
+            "mohit": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mohit.ts"
+                }
+              ]
             }
           }
         },
@@ -105,6 +113,9 @@
             },
             "suresh": {
               "browserTarget": "laytrip-website:build:suresh"
+            },
+            "mohit": {
+              "browserTarget": "laytrip-website:build:mohit"
             }
           }
         },

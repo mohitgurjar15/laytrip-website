@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,16 +12,19 @@ import { BookingTimerComponent } from './booking-timer/booking-timer.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardComponent } from './add-card/add-card.component';
+import { TravelerFormComponent } from './traveler-form/traveler-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent
   ],
   imports: [
     CommonModule,
     NgSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   exports: [
     SearchAirportComponent,
@@ -35,6 +38,8 @@ import { AddCardComponent } from './add-card/add-card.component';
     CardListComponent,
     AddCardComponent
     
-  ]
+  ],
+  providers: [DatePipe],
+
 })
 export class ComponentsModule { }

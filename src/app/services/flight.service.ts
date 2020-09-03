@@ -17,6 +17,22 @@ export class FlightService {
 
     }
 
+    private setHeaders(params='') {      
+        const accessToken = localStorage.getItem('_lay_sess');
+        const reqData = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        };
+        if(params) {
+            let reqParams = {};        
+            Object.keys(params).map(k =>{
+                reqParams[k] = params[k];
+            });
+            reqData['params'] = reqParams;
+        }
+        return reqData;
+    } 
 
     searchAirport(searchItem) {
         return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
@@ -74,5 +90,13 @@ export class FlightService {
             errorMessage = { status: error.status, message: error.error.message };
         }
         return throwError(errorMessage);
+    }
+
+    updateAdult(data,id) {       
+        return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.setHeaders());
+    }
+    
+    addAdult(data) {       
+        return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.setHeaders());
     }
 }

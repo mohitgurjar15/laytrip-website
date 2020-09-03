@@ -15,19 +15,23 @@ export class FlightTravelerComponent implements OnInit {
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   travelers:any=[]
+  selectedAdults = 0;  
   routeCode:string='';
+  loading=true;
   progressStep={ step1:true, step2:false, step3:false };
-
   ngOnInit() {
     this.routeCode = this.route.snapshot.paramMap.get('rc')
     this.getTravelers();
   }
 
   getTravelers(){
-
     this.travelerService.getTravelers().subscribe((res:any)=>{
       this.travelers = res.data;
-      console.log(this.travelers )
+      this.loading = false;
     })
+  }
+
+  getAdultCount(count: number) {  
+    this.selectedAdults = count;
   }
 }
