@@ -178,7 +178,7 @@
             <div class="info_btm">
                 <div class="info_btm_top">
                     <div class="info_left">Onwards</div>
-                    <div class="info_right"><span>23h 50m, </span>{{ flightDetail[0].routes[0].stops.length-1 === 0 ? 'Non-' : flightDetail[0].routes[0].stops.length-1 }} Stop</div>
+                    <div class="info_right"><span>{{flightDetail[0].routes[0].duration}}, </span>{{ flightDetail[0].routes[0].stops.length-1 === 0 ? 'Non-' : flightDetail[0].routes[0].stops.length-1 }} Stop</div>
                 </div>
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[0]">
                     <div class="flight_info_text">
@@ -235,7 +235,7 @@
                 </div>
                 <div class="info_btm_top inbound_flight" *ngIf="flightDetail[0]?.routes[1]">
                     <div class="info_left">Inbound</div>
-                    <div class="info_right"><span>23h 50m, </span> {{ flightDetail[0].routes[1].stops.length-1 === 0 ? 'Non-' : flightDetail[0].routes[1].stops.length-1 }} Stop</div>
+                    <div class="info_right"><span>{{flightDetail[0].routes[1].duration}}, </span> {{ flightDetail[0].routes[1].stops.length-1 === 0 ? 'Non-' : flightDetail[0].routes[1].stops.length-1 }} Stop</div>
                 </div>
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[1]">
                     <div class="flight_info_text">

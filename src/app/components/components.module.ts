@@ -14,6 +14,8 @@ import { CardListComponent } from './card-list/card-list.component';
 import { AddCardComponent } from './add-card/add-card.component';
 import { TravelerFormComponent } from './traveler-form/traveler-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CountdownModule } from 'ngx-countdown';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    CountdownModule
   ],
   exports: [
     SearchAirportComponent,
