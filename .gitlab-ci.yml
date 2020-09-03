@@ -68,5 +68,5 @@ deploy_staging:
     #- forever restart /var/www/html/staging/dist/server.js
     - pwd
     - ls -all
-    - pm2 restart /var/www/html/staging/dist/server.js
+    - pm2 restart dist/server.js
   only: ['staging']
