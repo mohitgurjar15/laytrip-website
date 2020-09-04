@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { DatePipe } from '@angular/common';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../services/generic.service';
 declare var $: any;
 
 @Component({

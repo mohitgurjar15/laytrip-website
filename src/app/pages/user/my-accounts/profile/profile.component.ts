@@ -8,7 +8,7 @@ import { CommonFunction } from '../../../../_helpers/common-function';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { validateImageFile,fileSizeValidator } from '../../../../_helpers/custom.validators';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../../../services/generic.service';
 
 @Component({
   selector: 'app-profile',

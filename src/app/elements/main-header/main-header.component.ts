@@ -144,7 +144,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
     checkUser() {
       let userToken = localStorage.getItem('_lay_sess');
       
-      if( userToken) {
+      if( userToken) { 
         this.isLoggedIn = true;
       }
     }
