@@ -172,7 +172,7 @@
                     <li class="ic_flight"><img src="{{s3BucketUrl}}assets/images/icon/summary_flight_ic.svg" alt="Flight Icon"></li>
                     <li>{{flightDetail[0].arrival_code}}</li>
                 </ul>
-                <p>{{flightDetail[0].departure_date}} | {{totalTraveler}} Passenger | Economy</p>
+                <p>{{ commonFunction.convertDateFormat(flightDetail[0].departure_date,'DD/MM/YYYY')}} | {{totalTraveler}} Passenger | Economy</p>
                 <div class="btm_aerrow"></div>
             </div>
             <div class="info_btm">
@@ -210,13 +210,13 @@
                                         <span>Flight {{stop.airline}}-{{stop.flight_number}}</span>
                                         <div class="flight_time_info">
                                             <div class="flight_time_left">
-                                                {{stop.departure_time}} <span>{{ stop.departure_date }}</span>
+                                                {{stop.departure_time}} <span>{{ commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY') }}</span>
                                             </div>
                                             <div class="flight_time_separator">
                                                 <span></span>
                                             </div>
                                             <div class="flight_time_left">
-                                                {{stop.arrival_time}} <span>{{stop.departure_date}}</span>
+                                                {{stop.arrival_time}} <span>{{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -267,13 +267,13 @@
                                         <span>Flight {{stop.airline}}-{{stop.flight_number}}</span>
                                         <div class="flight_time_info">
                                             <div class="flight_time_left">
-                                                {{stop.departure_time}} <span>{{ stop.departure_date }}</span>
+                                                {{stop.departure_time}} <span>{{ commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY') }}</span>
                                             </div>
                                             <div class="flight_time_separator">
                                                 <span></span>
                                             </div>
                                             <div class="flight_time_left">
-                                                {{stop.arrival_time}} <span>{{stop.departure_date}}</span>
+                                                {{stop.arrival_time}} <span>{{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}</span>
                                             </div>
                                         </div>
                                     </div>
