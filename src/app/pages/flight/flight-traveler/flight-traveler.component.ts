@@ -12,27 +12,48 @@ export class FlightTravelerComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   travelers:any=[]
   selectedAdults = 0;  
+  totalTraveler = 0;  
   routeCode:string='';
   loading=true;
   progressStep={ step1:true, step2:false, step3:false };
-  
+  isLoggedIn : boolean = false;
+
   constructor(
     private travelerService:TravelerService,
     private route: ActivatedRoute
   ) { }
   ngOnInit() {
+   
     this.routeCode = this.route.snapshot.paramMap.get('rc')
     this.getTravelers();
   }
 
   getTravelers(){
-    this.travelerService.getTravelers().subscribe((res:any)=>{
-      this.travelers = res.data;
-      this.loading = false;
-    })
+    let userToken = localStorage.getItem('_lay_sess');
+    if(userToken){
+      this.travelerService.getTravelers().subscribe((res:any)=>{
+        this.travelers = res.data;
+      })
+    }
+    this.loading = false;
   }
 
   getAdultCount(count: number) {  
     this.selectedAdults = count;
+  }
+
+  getTravelerValue(count: number) { 
+    this.totalTraveler = count;
+  }
+
+  checkUser() {
+    let userToken = localStorage.getItem('_lay_sess');
+    
+    if( userToken) {
+      this.isLoggedIn = true;
+    }
+  }
+  ngDoCheck(){
+    this.checkUser();
   }
 }

@@ -96,7 +96,12 @@ export class FlightService {
         return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.setHeaders());
     }
     
-    addAdult(data) {       
-        return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.setHeaders());
+    addAdult(data) {  
+        let userToken = localStorage.getItem('_lay_sess');
+        if(userToken){
+            return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.setHeaders());
+        } else {
+            return this.http.post(`${environment.apiUrl}v1/traveler/`, data);
+        }
     }
 }

@@ -24,6 +24,9 @@ export class AdultListComponent implements OnInit {
 
   ngOnInit() {
     this.checkUser();
+    if(this.type == 'adult' && !this.isLoggedIn){
+      this.showAddAdultForm = true;
+    }
   } 
 
 
@@ -52,7 +55,7 @@ export class AdultListComponent implements OnInit {
   }
   
   addAdultForm() {    
-    this.showAddAdultForm = true;
+    this.showAddAdultForm = !this.showAddAdultForm;
   }
 
   checkUser() {
@@ -64,7 +67,6 @@ export class AdultListComponent implements OnInit {
   }
 
   pushTraveler(event){
-    console.log(event)
     this.travelers.push(event);
     this.showAddAdultForm = false;
   }

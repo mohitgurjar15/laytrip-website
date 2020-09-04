@@ -6,6 +6,7 @@ import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SigninComponent } from '../../pages/user/signin/signin.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-header',
@@ -29,6 +30,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
       private genericService:GenericService,
       public translate: TranslateService,
       public modalService: NgbModal,
+      public router: Router,
       ) { 
         let _langunage = localStorage.getItem('_lang');
         let _currency = localStorage.getItem('_curr');
@@ -152,11 +154,5 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
     onLoggedout() {
       this.isLoggedIn = false;
       localStorage.removeItem('_lay_sess');
-    }
-
-    openSignIn(){
-      const modalRef = this.modalService.open(SigninComponent);
-      modalRef.componentInstance.name = 'Mohit';
-    }
-    
+    }    
 }

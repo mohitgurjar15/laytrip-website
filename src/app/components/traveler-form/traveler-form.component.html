@@ -2,7 +2,7 @@
   <form [formGroup]="adultForm" (ngSubmit)="onSubmit()">
     <div class="form_row">
       <div class="form_field">
-        <label>Title</label>
+        <label>Title<sup>*</sup></label>
         <ul class="custom_listing">
           <li>
             <label class="custom_radio">Mr.
@@ -29,7 +29,7 @@
     </div>
     <div class="form_row">
       <div class="form_field">
-        <label>Gender</label>
+        <label>Gender<sup>*</sup></label>
         <ul class="custom_listing">
           <li>
             <label class="custom_radio">Male
@@ -83,7 +83,7 @@
       <div class="form_field half">
         <label>Email<sup>*</sup></label>
         <div class="text_field">
-          <input type="email" [readonly]="traveler.userId" formControlName="email" maxlength="50" tabindex="5"
+          <input type="email" [readonly]="traveler.userId" formControlName="email" maxlength="50" tabindex="3"
             placeholder="Enter your email">
         </div>
         <div *ngIf="(submitted  || adultForm.controls.email.touched) && adultForm.controls.email.errors"
@@ -103,14 +103,14 @@
           <div class="phone_no">
             <div class="code">
               <div class="dropdown">
-                <ng-select class="ng-customClass" tabindex="6" selectOnTab="true" [items]="countries_code"
+                <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true" [items]="countries_code"
                   bindLabel="name" clearSearchOnAdd="true" formControlName="country_code" placeholder="+1">
                 </ng-select>
               </div>
             </div>
             <div class="number">
               <input type="text" formControlName="phone_no" maxlength="10"
-                (keypress)="commonFunction.validateNumber($event)" tabindex="7" placeholder="0000 0000 00">
+                (keypress)="commonFunction.validateNumber($event)" tabindex="5" placeholder="0000 0000 00">
             </div>
           </div>
         </div>
@@ -128,9 +128,10 @@
 
       <div class="form_field half">
         <label>DOB<sup>*</sup></label>
-<!--         <input autocomplete="off" class="birth_date" type="text" formControlName="dob" maxlength="20"  placeholder="MM/YYYY" tabindex="103" id="dobDate">
+        <!-- <input *ngIf="!traveler.userId" autocomplete="off" class="dob1" type="text" formControlName="dob"  placeholder="MM/YYYY" tabindex="103">
+        <input *ngIf="traveler.userId" autocomplete="off" class="dob2" type="text" formControlName="dob"  placeholder="MM/YYYY" tabindex="103">
  -->
-        <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="3" ngbDatepicker #d="ngbDatepicker"
+        <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="6" ngbDatepicker #d="ngbDatepicker"
           dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()">
         <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
@@ -141,7 +142,7 @@
       <div class="form_field half">
         <label>Nationality<sup>*</sup></label>
         <div class="text_field custom-select">
-          <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="4" [selectOnTab]="true"
+          <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="7" [selectOnTab]="true"
             formControlName="country_id" selectOnTab="true" placeholder="Select nationality">
           </ng-select>
         </div>
@@ -177,13 +178,11 @@
         </div>
       </div>
     </div>
-
-    <div class="form_row">
-      <div class="form_field half">
-        <button type="submit">
-          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{ traveler.userId ? 'Update' : 'Add' }}
-        </button>
-      </div>
+    <div class="form_btn">
+      <button type="submit">
+        <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{ traveler.userId ? 'Update' : 'Add' }}
+      </button>
     </div>
+    
   </form>
 </div>

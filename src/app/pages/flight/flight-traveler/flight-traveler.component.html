@@ -9,10 +9,16 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="detail_info_left">
+                    <div class="block_top" *ngIf="!isLoggedIn">
+                        <div class="block_inner">
+                            <h5>Quickly add travellers from your added list</h5>
+                            <a href="javascript:void(0);"  data-toggle="modal" data-target="#sign_in_modal">Sign In to Continue</a>
+                        </div>
+                    </div>
                     <div class="block_passanger_info">
                          <div class="block_title_section">
                             <h5>Passenger Info</h5>
-                            <span>({{selectedAdults}}/4 selected)</span>
+                            <span>({{selectedAdults}}/{{totalTraveler}} selected)</span>
                         </div>
                         <div class="passanger_detail_main">
                             <app-adult-list type="adult" age="12" [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
@@ -42,7 +48,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <app-flight-summary></app-flight-summary>
+                <app-flight-summary (totalTravelerValue)="getTravelerValue($event)"></app-flight-summary>
             </div>
         </div>
     </div>

@@ -77,4 +77,15 @@ export class GenericService{
         }
         return throwError(errorMessage);
     }
+
+    getCountry() {
+      return this.http.get(environment.apiUrl+'v1/generic/country', this.commonFunction.setHeaders());
+    }
+    
+    getState(stateId) {
+      return this.http.get(environment.apiUrl +'v1/generic/state/'+ stateId, this.commonFunction.setHeaders());
+    }
+    getStates(countryId) {
+      return this.http.get(environment.apiUrl +'v1/generic/country/'+ countryId+'/state', this.commonFunction.setHeaders());
+    }
 }
