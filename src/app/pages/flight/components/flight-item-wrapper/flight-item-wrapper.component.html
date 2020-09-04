@@ -234,8 +234,8 @@
                                     <span>{{ flightInfo?.departure_code }} - DEN</span>
                                 </div>
                                 <div class="detail_right">
-                                    <p *ngIf="!baggageDetails">Loading..</p>
-                                    <table *ngIf="baggageDetails">
+                                    <p *ngIf="loadBaggageDetails">Loading..</p>
+                                    <table  *ngIf="!loadBaggageDetails">
                                         <thead>
                                             <tr>
                                                 <th>Flight</th>
@@ -301,7 +301,7 @@
                                     <ul>
                                         <li *ngIf="!cancellationPolicy && !errorMessage">Loading..</li>
                                         <li *ngIf="errorMessage">{{ errorMessage }}</li>
-                                        <li *ngIf="cancellationPolicy">{{ cancellationPolicy?.cancellation_policy }}
+                                        <li *ngIf="cancellationPolicy" [innerHtml]="cancellationPolicy?.cancellation_policy">
                                         </li>
                                         <!-- <li>It is a long established fact that a reader will be distracted by the
                                             readable content layout.</li>

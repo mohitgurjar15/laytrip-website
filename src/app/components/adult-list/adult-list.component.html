@@ -12,13 +12,13 @@
                         <button type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#adultcollapseOne'+ i">
                             {{traveler.firstName}} {{traveler.lastName}}
                             <i class="fa fa-angle-down"></i>
-                            <span class="status_incomplete">Incomplete</span>
+                            <span [ngClass]="(adultFormStatus)?'status_complete':'status_incomplete'">{{adultFormStatus ? 'Complete' : 'Incomplete'}}</span>
                         </button>
                     </h2>
                  </div>
                  <div id="adultcollapseOne{{i}}" class="collapse cus_collapse" aria-labelledby="adultOne+i" data-parent="#accordion-Adults">    
                     <div class="card-body">       
-                        <app-traveler-form [traveler]="traveler" ></app-traveler-form>  
+                        <app-traveler-form (auditFormStatus)="getFormStatus($event)" [traveler]="traveler" ></app-traveler-form>  
                     </div>                 
                 </div>                 
               </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FlightService } from '../../../services/flight.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 @Component({
   selector: 'app-flight-summary',
@@ -15,7 +16,8 @@ export class FlightSummaryComponent implements OnInit {
   constructor(
     public flightService:FlightService,
     private route: ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private commonFunction:CommonFunction
   ) { 
       
   }
@@ -33,7 +35,8 @@ export class FlightSummaryComponent implements OnInit {
     this.currency = JSON.parse(_currency);
     this.airRevalidate();
   }
-
+  
+  
   airRevalidate(){
 
       let routeData={

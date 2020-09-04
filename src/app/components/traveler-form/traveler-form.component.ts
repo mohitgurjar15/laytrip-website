@@ -22,6 +22,7 @@ export class TravelerFormComponent implements OnInit {
 
   @Input() traveler: any = [];
   @Output() valueChange = new EventEmitter();
+  @Output() auditFormStatus = new EventEmitter();
 
 
   adultForm: FormGroup;
@@ -34,20 +35,7 @@ export class TravelerFormComponent implements OnInit {
   editMode = false;
   minDate: any = {};
   maxDate: any = {};
-
-  searchFlightInfo =
-    {
-      trip: 'oneway',
-      departure: '',
-      arrival: '',
-      birth_date: moment().add(1, 'months').format("YYYY-MM-DD"),
-      // arrival_date: '',
-      class: '',
-      adult: 1,
-      child: null,
-      infant: null
-    };
-
+  formStatus: boolean = false;
   departureDate;
 
 
@@ -78,7 +66,7 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     this.getCountry();
     this.loadJquery();
-    
+
     this.adultForm = this.formBuilder.group({
       title: [''],
       gender: ['', Validators.required],
@@ -90,10 +78,10 @@ export class TravelerFormComponent implements OnInit {
       phone_no: ['', Validators.required],
       country_id: ['', Validators.required],
       frequently_no: [''],
-      passport_expiry: [],
+      passport_expiry: [''],
       passport_number: [''],
     })
-    console.log(this.adultForm.status)
+    
     let dob_selected = new Date(this.traveler.dob)
     let pass_exp__selected = new Date(this.traveler.passportExpiry)
 
@@ -109,8 +97,10 @@ export class TravelerFormComponent implements OnInit {
       phone_no: this.traveler.phoneNo,
       country_id: this.traveler.country.name != 'null' ? this.traveler.country.name : '',
       passport_number: this.traveler.passportNumber,
-      frequently_no:''
+      frequently_no:'f'
     })
+    this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
+    this.auditFormStatus.emit(this.formStatus);
 
   }
 
@@ -185,6 +175,7 @@ export class TravelerFormComponent implements OnInit {
           startDate: moment().add(0, 'days').format("MM/YYYY"),
           // extraClass: 'laytrip-datepicker'
         });
+
       });
     });
   
@@ -248,7 +239,7 @@ export class TravelerFormComponent implements OnInit {
             localStorage.setItem("_lay_sess", data.token);
           }
           console.log(data.data)
-          this.valueChange.emit([...data]);
+          this.valueChange.emit(data.data);
           $('.collapse').collapse('hide');
         }, (error: HttpErrorResponse) => {
           console.log('error')

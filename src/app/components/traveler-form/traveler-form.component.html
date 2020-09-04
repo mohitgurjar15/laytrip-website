@@ -133,10 +133,10 @@
  -->
         <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="6" ngbDatepicker #d="ngbDatepicker"
           dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()">
-        <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
-            date of birth.
-          </div>
+          <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
+            <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
+              date of birth.
+            </div>
         </div>
       </div>
       <div class="form_field half">

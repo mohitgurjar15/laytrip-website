@@ -18,6 +18,7 @@ export class AdultListComponent implements OnInit {
   checked : boolean = false;
   isLoggedIn : boolean = false;
   showAddAdultForm : boolean = false;
+  adultFormStatus : boolean = false;
   count =0;
   containers = [];
   constructor() { }
@@ -69,5 +70,9 @@ export class AdultListComponent implements OnInit {
   pushTraveler(event){
     this.travelers.push(event);
     this.showAddAdultForm = false;
+  }
+
+  getFormStatus(status){  
+    this.adultFormStatus = status;
   }
 }

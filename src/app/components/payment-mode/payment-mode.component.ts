@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: 'app-payment-mode',
@@ -9,6 +10,11 @@ export class PaymentModeComponent implements OnInit {
 
   constructor() { }
   isInstalemtMode:boolean=false;
+  value: number = 100;
+  laycreditOptions: Options = {
+    floor: 0,
+    ceil: 600
+  };
 
   ngOnInit() {
   }
