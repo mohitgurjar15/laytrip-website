@@ -119,7 +119,7 @@ export class AddCardComponent implements OnInit {
   }
   
   loadJquery(){
-    $('#expiry_date').dateRangePicker({
+    $('#dobDate').dateRangePicker({
       autoClose: true,
       singleDate : true,
       showShortcuts: false,

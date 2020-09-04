@@ -9,16 +9,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FlightTravelerComponent implements OnInit {
 
-  constructor(
-    private travelerService:TravelerService,
-    private route: ActivatedRoute
-  ) { }
   s3BucketUrl = environment.s3BucketUrl;
   travelers:any=[]
   selectedAdults = 0;  
   routeCode:string='';
   loading=true;
   progressStep={ step1:true, step2:false, step3:false };
+  
+  constructor(
+    private travelerService:TravelerService,
+    private route: ActivatedRoute
+  ) { }
   ngOnInit() {
     this.routeCode = this.route.snapshot.paramMap.get('rc')
     this.getTravelers();
