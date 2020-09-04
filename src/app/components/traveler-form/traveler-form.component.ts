@@ -75,7 +75,7 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
     
-    // this.loadJquery();
+    this.loadJquery();
     this.adultForm = this.formBuilder.group({
       title: [''],
       gender: ['', Validators.required],
@@ -105,7 +105,7 @@ export class TravelerFormComponent implements OnInit {
       passport_expiry: {year:pass_exp__selected.getFullYear(),month:pass_exp__selected.getMonth(),day:pass_exp__selected.getDate()},
       country_code: this.traveler.countryCode,
       phone_no: this.traveler.phoneNo,
-      country_id: this.traveler.country.name != 'null' ? this.traveler.country.name : '',
+      country_id: '',//this.traveler.country.name != 'null' ? this.traveler.country.name : '',
       passport_number : this.traveler.passportNumber,
     })
     
@@ -157,7 +157,7 @@ export class TravelerFormComponent implements OnInit {
 
   loadJquery(){
     $(document).ready(function(){
-      $('#dob_dates').dateRangePicker({
+      $('.birth_date').dateRangePicker({
         autoClose: true,
         singleDate : true,
         showShortcuts: false,
