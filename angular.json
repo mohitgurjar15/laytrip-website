@@ -41,11 +41,11 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/js/slick.js",
               "src/assets/js/moment.min.js",
+              "src/assets/js/jquery-ui.js",
+              "src/assets/js/slick.js",
               "src/assets/js/jquery.daterangepicker.js",
               "src/assets/js/datepicker.js",
-              "src/assets/js/jquery-ui.js",
               "src/assets/js/iframe-v1.min.js"
             ],
             "es5BrowserSupport": true

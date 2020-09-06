@@ -37,9 +37,9 @@ export class CommonFunction {
         }
     }
 
-    setHeaders(params='') {      
+    setHeaders(params=null) {      
         const accessToken = localStorage.getItem('_lay_sess');
-        const reqData = {
+        let reqData:any = {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             },
@@ -47,9 +47,9 @@ export class CommonFunction {
         if(params) {
             let reqParams = {};        
             Object.keys(params).map(k =>{
-                reqParams[k] = params[k];
+                reqData.headers[k] = params[k];
             });
-            reqData['params'] = reqParams;
+            //reqData.headers = reqParams;
         }
         return reqData;
     }  

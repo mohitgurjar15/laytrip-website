@@ -12,7 +12,7 @@
           </li>
           <li>
               <label class="custom_radio">Full Payment
-                  <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('no-instalment')">
+                  <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('noinstalment')">
                   <span class="checkmark"></span>
               </label>
           </li>
@@ -140,8 +140,7 @@
             </div> -->
             <div class="block_btm">
                 <div class="custom_range_slide">
-                  <ng5-slider [(value)]="value" [options]="laycreditOptions"></ng5-slider>
-
+                  <ng5-slider [(value)]="value" [options]="laycreditOptions" (userChangeEnd)="selectLaycredit($event)"></ng5-slider>
                 </div>
               </div>
         </div>

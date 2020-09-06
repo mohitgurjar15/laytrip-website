@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { throwError } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
+import { CommonFunction } from '../_helpers/common-function';
 
 
 @Injectable({
@@ -12,27 +13,12 @@ import { catchError, retry, } from 'rxjs/operators';
 export class FlightService {
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private commonFunction:CommonFunction
     ) {
 
     }
 
-    private setHeaders(params='') {      
-        const accessToken = localStorage.getItem('_lay_sess');
-        const reqData = {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            },
-        };
-        if(params) {
-            let reqParams = {};        
-            Object.keys(params).map(k =>{
-                reqParams[k] = params[k];
-            });
-            reqData['params'] = reqParams;
-        }
-        return reqData;
-    } 
 
     searchAirport(searchItem) {
         return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
@@ -76,6 +62,18 @@ export class FlightService {
             );
     }
 
+    bookFligt(payload){
+        let headers={
+            currency : 'USD',
+            language : 'en'
+        }
+        return this.http.post(`${environment.apiUrl}v1/flight/book`,payload,this.commonFunction.setHeaders(headers))
+            .pipe(
+                retry(1),
+                catchError(this.handleError)
+            );
+    }
+
     handleError(error) {
         console.log("====", error);
         let errorMessage = {};
@@ -93,10 +91,10 @@ export class FlightService {
     }
 
     updateAdult(data,id) {       
-        return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.setHeaders());
+        return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.commonFunction.setHeaders());
     }
     
     addAdult(data) {       
-        return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.setHeaders());
+        return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.commonFunction.setHeaders());
     }
 }

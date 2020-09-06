@@ -14,14 +14,14 @@
                                   <a href="javascript:void(0);">Send E-ticket</a>
                               </div>
                           </div>
-                          <app-payment-mode></app-payment-mode>
+                          <app-payment-mode (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)"></app-payment-mode>
                           <!-- <app-redeem-laycredit></app-redeem-laycredit> -->
                           <div class="block_card_select">
                               <div class="block_title_section">
                                   <h5>Select Credit Card</h5>
                               </div>
                               <div class="block_detail">
-                                  <app-card-list></app-card-list>
+                                  <app-card-list (selectCreditCard)="selectCreditCard($event)"></app-card-list>
                                   <div class="add_card_btn">
                                       <a href="javascript:void(0);" (click)="toggleAddcardForm()" >+ Add New Card</a>
                                   </div>
@@ -120,15 +120,17 @@
                       <ul>
                           <li>
                               <label class="custom_checkbox">
-                                  <input type="checkbox" value="">
+                                  <input type="checkbox" (click)="acceptTermCondtion()">
                                   <span class="checkmark"></span>
                               </label>
-                              <p>I agree <a href="javascript:void(0);">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
+                              <p>I agree <a href="javascript:void(0);" (click)="acceptTermCondtion()">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
                           </li>
                       </ul>
                   </div>
                   <div class="btn_payment">
-                      <a href="flight_booking_confirmation_login_user.html">Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                      <!-- <a href="javascript:void(0)" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a> -->
+                      <button [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+                      
                   </div>
               </div>
           </div>
