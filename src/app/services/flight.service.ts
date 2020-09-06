@@ -90,6 +90,18 @@ export class FlightService {
         return throwError(errorMessage);
     }
 
+    getBookingDetails(bookingId){
+        let headers={
+            currency : 'USD',
+            language : 'en'
+        }
+        return this.http.get(`${environment.apiUrl}v1/flight/book/${bookingId}`,this.commonFunction.setHeaders(headers))
+            .pipe(
+                retry(1),
+                catchError(this.handleError)
+            );
+    }
+
     updateAdult(data,id) {       
         return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.commonFunction.setHeaders());
     }

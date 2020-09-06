@@ -1,9 +1,9 @@
 <app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
-<section class="detail_info_main payment_info flight">
+<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
   <div class="container">
       <div class="row">
           <div class="col-lg-8">
-              <div class="detail_info_left">
+              <div class="detail_info_left" *ngIf="bookingStatus==0">
                   <div class="block_payment">
                       <app-booking-timer></app-booking-timer>
                       <div class="block_pay_info">
@@ -133,9 +133,10 @@
                       
                   </div>
               </div>
+              <app-flight-confirmation *ngIf="bookingStatus==1"></app-flight-confirmation>
           </div>
           <div class="col-lg-4">
-            <!-- <app-flight-summary></app-flight-summary> -->
+            <app-flight-summary></app-flight-summary>
           </div>
       </div>
   </div>

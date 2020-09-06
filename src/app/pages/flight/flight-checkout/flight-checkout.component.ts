@@ -25,6 +25,7 @@ export class FlightCheckoutComponent implements OnInit {
     travelers:[]=[];
     isDisableBookBtn:boolean=true;
     isTandCaccepeted:boolean=false;
+    bookingStatus:number=0;
 
     ngOnInit() {
       this.routeCode = this.route.snapshot.paramMap.get('rc')
@@ -69,8 +70,19 @@ export class FlightCheckoutComponent implements OnInit {
       }
 
       this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
-        console.log(res);
+        this.bookingStatus=1;
+        this.progressStep = { step1:true, step2:true, step3:true }
+      },(error)=>{
+        this.bookingStatus=2; // Failed 
       });
+    }
+
+    bookingDetails(bookingId){
+      this.flightService.getBookingDetails(bookingId).subscribe((res:any)=>{
+        
+      },(error)=>{
+
+      })
     }
 
     validateBookingButton(){
