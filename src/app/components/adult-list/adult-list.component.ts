@@ -18,12 +18,16 @@ export class AdultListComponent implements OnInit {
   checked : boolean = false;
   isLoggedIn : boolean = false;
   showAddAdultForm : boolean = false;
+  adultFormStatus : boolean = false;
   count =0;
   containers = [];
   constructor() { }
 
   ngOnInit() {
     this.checkUser();
+    if(this.type == 'adult' && !this.isLoggedIn){
+      this.showAddAdultForm = true;
+    }
   } 
 
 
@@ -52,7 +56,7 @@ export class AdultListComponent implements OnInit {
   }
   
   addAdultForm() {    
-    this.showAddAdultForm = true;
+    this.showAddAdultForm = !this.showAddAdultForm;
   }
 
   checkUser() {
@@ -64,8 +68,11 @@ export class AdultListComponent implements OnInit {
   }
 
   pushTraveler(event){
-    console.log(event)
     this.travelers.push(event);
     this.showAddAdultForm = false;
+  }
+
+  getFormStatus(status){  
+    this.adultFormStatus = status;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FlightService } from '../../../services/flight.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
   styleUrls: ['./flight-summary.component.scss']
 })
 export class FlightSummaryComponent implements OnInit {
+  @Output() totalTravelerValue = new EventEmitter();
 
   routeCode:string='';
   constructor(
@@ -47,7 +48,10 @@ export class FlightSummaryComponent implements OnInit {
           this.outWardStopCount=response[0].routes[0].stops.length-1;
           this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
           this.inWardStopCount =typeof response[0].routes[1]!='undefined' ? response[0].routes[1].stops.length-1:0;
-      },(error)=>{
+          this.totalTravelerValue.emit(this.totalTraveler);
+          
+
+        },(error)=>{
           console.log("error",error)
           if(error.status==404){
             //this.router.navigate(['/'])

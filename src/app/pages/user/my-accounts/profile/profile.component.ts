@@ -8,6 +8,7 @@ import { CommonFunction } from '../../../../_helpers/common-function';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { validateImageFile,fileSizeValidator } from '../../../../_helpers/custom.validators';
+import { GenericService } from '../../../../services/generic.service';
 
 @Component({
   selector: 'app-profile',
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService : UserService,
+    private genericService : GenericService,
     public router: Router,  
     public commonFunctoin: CommonFunction,  
     private config: NgbDatepickerConfig, 
@@ -53,7 +55,7 @@ export class ProfileComponent implements OnInit {
       config.minDate = { year: 2000, month: 1, day: 1 };
       config.maxDate = { year: 2099, month: 12, day: 31 };
       let current = new Date();
-      this.minDate = {
+      this.minDate = { 
         year: current.getFullYear(),
         month: current.getMonth() + 1,
         day: current.getDate()
@@ -89,7 +91,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getCountry() {
-    this.userService.getCountry().subscribe((data: any) => {
+    this.genericService.getCountry().subscribe((data: any) => {
       this.countries = data.map(country=>{
           return {
               id:country.id,
@@ -111,7 +113,7 @@ export class ProfileComponent implements OnInit {
 
   getStates(countryId) {
     // this.ngSelectComponent.handleClearClick();
-    this.userService.getStates(countryId.id).subscribe((data: any) => {
+    this.genericService.getStates(countryId.id).subscribe((data: any) => {
       this.stateList = data;
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
@@ -121,7 +123,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getLanguages() {
-    this.userService.getLanguages().subscribe((data: any) => {
+    this.genericService.getAllLangunage().subscribe((data: any) => {
       this.languages = data.data;
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
@@ -130,7 +132,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   getCurrencies() {
-    this.userService.getCurrencies().subscribe((data: any) => {
+    this.genericService.getCurrencies().subscribe((data: any) => {
       this.currencies = data.data;
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {

@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
+import { CommonFunction } from '../_helpers/common-function';
 
 
 @Injectable({
@@ -13,27 +14,13 @@ export class UserService {
   apiURL = environment.apiUrl;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private commonFunction: CommonFunction
+
   ) {
 
   }
 
-  private setHeaders(params='') {      
-    const accessToken = localStorage.getItem('_lay_sess');
-    const reqData = {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        },
-    };
-    if(params) {
-        let reqParams = {};        
-        Object.keys(params).map(k =>{
-            reqParams[k] = params[k];
-        });
-        reqData['params'] = reqParams;
-    }
-    return reqData;
-  }  
   
   handleError(error) {
     console.log('dfdf')
@@ -116,29 +103,12 @@ export class UserService {
         retry(1),
         catchError(this.handleError)
     );
-  }
-
-  getCountry() {
-    return this.http.get(this.apiURL+'v1/generic/country', this.setHeaders());
-  }
-  getState(stateId) {
-    return this.http.get(this.apiURL +'v1/generic/state/'+ stateId, this.setHeaders());
-  }
-  getStates(countryId) {
-    return this.http.get(this.apiURL +'v1/generic/country/'+ countryId+'/state', this.setHeaders());
-  }
-  getLanguages() {
-    return this.http.get(this.apiURL +'v1/language/', this.setHeaders());
-  }
-  getCurrencies() {
-    return this.http.get(this.apiURL +'v1/currency/', this.setHeaders());
-  }
+  }  
 
   updateProfile(data) {
-    return this.http.put(this.apiURL+'v1/auth/profile', data, this.setHeaders());
+    return this.http.put(this.apiURL+'v1/auth/profile', data,  this.commonFunction.setHeaders());
   }
   getProfile() {
-    console.log(this.setHeaders())
-    return this.http.get(this.apiURL +'v1/auth/profile/', this.setHeaders());
+    return this.http.get(this.apiURL +'v1/auth/profile/',  this.commonFunction.setHeaders());
   }
 }

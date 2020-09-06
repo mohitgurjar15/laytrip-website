@@ -30,8 +30,11 @@ export class SocialLoginComponent implements OnInit {
   auth2: any;
 
   ngOnInit() {
-    this.loadGoogleSdk();
-    this.loadFacebookSdk();
+    let userToken = localStorage.getItem('_lay_sess');
+    if(!userToken){
+      this.loadGoogleSdk();
+      this.loadFacebookSdk();
+    }
   }
 
   loadGoogleSdk() {
@@ -80,7 +83,7 @@ export class SocialLoginComponent implements OnInit {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
-            this.router.navigate(['/']);  
+            this.router.url;
             document.getElementById('navbarNav').click(); 
           }
         }, (error: HttpErrorResponse) => {
@@ -117,7 +120,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
-
+   
     window['FB'].login((response) => {          
 
       if (response.authResponse) {
@@ -143,8 +146,8 @@ export class SocialLoginComponent implements OnInit {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
               this.test = true;
-              this.router.navigate(['/']);    
               document.getElementById('navbarNav').click(); 
+              this.router.url;  
             } 
            
           }, (error: HttpErrorResponse) => {
