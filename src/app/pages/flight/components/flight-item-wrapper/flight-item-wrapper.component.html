@@ -179,10 +179,22 @@
                                 <div class="triangle_right"></div>
                                 <ul>
                                     <li *ngFor="let fareDetails of item.fare_break_dwon">
-                                        <p *ngIf="fareDetails.type !== 'total'">
+                                        <p *ngIf="fareDetails.type == 'ADT'">
                                             Base Fare
                                             ({{ fareDetails?.quantity }}
-                                            {{ fareDetails.type === 'ADT' ? 'Adult' : 'Child' }})
+                                            Adult)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'CHD'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Child)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'INF'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Infant)
                                             <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </p>
                                         <p *ngIf="fareDetails.type === 'total'">
@@ -222,8 +234,8 @@
                                     <span>{{ flightInfo?.departure_code }} - DEN</span>
                                 </div>
                                 <div class="detail_right">
-                                    <p *ngIf="!baggageDetails">Loading..</p>
-                                    <table *ngIf="baggageDetails">
+                                    <p *ngIf="loadBaggageDetails">Loading..</p>
+                                    <table  *ngIf="!loadBaggageDetails">
                                         <thead>
                                             <tr>
                                                 <th>Flight</th>
@@ -289,7 +301,7 @@
                                     <ul>
                                         <li *ngIf="!cancellationPolicy && !errorMessage">Loading..</li>
                                         <li *ngIf="errorMessage">{{ errorMessage }}</li>
-                                        <li *ngIf="cancellationPolicy">{{ cancellationPolicy?.cancellation_policy }}
+                                        <li *ngIf="cancellationPolicy" [innerHtml]="cancellationPolicy?.cancellation_policy">
                                         </li>
                                         <!-- <li>It is a long established fact that a reader will be distracted by the
                                             readable content layout.</li>

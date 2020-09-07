@@ -18,6 +18,8 @@ import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
+import { BookingSummaryLoaderComponent } from './components/booking-summary-loader/booking-summary-loader.component';
+import { FlightConfirmationComponent } from './components/flight-confirmation/flight-confirmation.component';
 
 import {MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule} from '@angular/material';
 
@@ -34,14 +36,17 @@ import {MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputMo
     FlightTravelerComponent,
     FlightSummaryComponent,
     ClickOutSideDirective,
-    FlightCheckoutComponent
+    FlightCheckoutComponent,
+    BookingSummaryLoaderComponent,
+    FlightConfirmationComponent
   ],
   imports: [
     CommonModule,
     FlightRoutingModule,
     Ng5SliderModule,
     ComponentsModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule, 
+    ReactiveFormsModule,
     NgSelectModule,
     MatDatepickerModule,
     MatFormFieldModule,

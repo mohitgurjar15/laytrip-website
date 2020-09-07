@@ -29,6 +29,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   baggageDetails;
   cancellationPolicy;
   errorMessage;
+  loadBaggageDetails=true;
 
   subcell = '$100';
 
@@ -69,13 +70,16 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   getBaggageDetails(routeCode) {
+    this.loadBaggageDetails=true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
       console.log('baggage:::', data);
       this.baggageDetails = data;
+      this.loadBaggageDetails=false;
     });
   }
 
   getCancellationPolicy(routeCode) {
+    this.cancellationPolicy="";
     this.flightService.getCancellationPolicy(routeCode).subscribe(data => {
       console.log('cancellation-policy:::', data);
       this.errorMessage = '';
@@ -87,19 +91,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   loadJquery() {
-    // $(document).on("click", ".show_detail", function (e) {
-    //   $(this).parents('.listing_block').addClass('add_shadow');
-    //   $(this).parents('.search_block').find('.detail_info_show').slideToggle();
-    // });
-
-    // $(document).on('click', function (event) {
-    //   if (!$(event.target).closest('.search_block').length) {
-    //     $('.detail_info_show').each(function () {
-    //       $(this).slideUp();
-    //       $('.listing_block').removeClass('add_shadow');
-    //     });
-    //   }
-    // });
   }
 
   ngAfterContentChecked() {
@@ -111,6 +102,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   showDetails(index) {
     this.showFlightDetails = index;
+    
   }
 
   clickOutside() {

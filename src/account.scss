@@ -657,6 +657,150 @@
 
             }
         }
+
+        &.booking_main {
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+
+            .block_booking_list {
+                width: 100%;
+
+                .nav-tabs {
+                    display: none;
+
+                    @media(min-width:768px) {
+                        display: flex;
+                        background-color: transparent;
+                        border: none;
+
+                        li {
+                            a {
+                                width: 200px;
+                                padding: 15px;
+                                text-align: center;
+                                background: $bg-tab-detail;
+                                font-size: 13px;
+                                font-weight: 500;
+                                border: none;
+                                color: $text-grey;
+                                text-transform: uppercase;
+                                border-radius: 0;
+                                position: relative;
+
+                                &:before {
+                                    width: 1px;
+                                    height: 20px;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 0;
+                                    transform: translateY(-50%);
+                                    background: $tab-br-clr;
+                                    content: '';
+                                }
+
+                                &.active {
+                                    border: none;
+                                    background: $text-lightblue;
+                                    color: $text-white;
+                                }
+
+                                &:hover {
+                                    border: none;
+                                    background: $text-lightblue;
+                                    color: $text-white;
+                                }
+                            }
+
+                            &:first-child {
+                                a {
+                                    border-radius: 5px 0 0 0;
+
+                                    &:before {
+                                        display: none;
+                                    }
+                                }
+                            }
+
+                            &:last-child {
+                                a {
+                                    border-radius: 0 5px 0 0;
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                .tab-content {
+                    .card {
+                        @media(min-width:768px) {
+                            border: none;
+
+                            .card-header {
+                                display: none;
+                            }
+
+                            .collapse {
+                                display: block;
+                            }
+                        }
+
+                    }
+
+                    @media(max-width:767px) {
+                        .tab-pane {
+                            display: block;
+                            opacity: 1;
+                            margin: 0 0 15px;
+                            border: 1px solid $box-border-color;
+
+                            .card-header {
+                                border-bottom: 1px solid transparent;
+
+                                h5 {
+                                    font-size: 16px;
+
+                                    a {
+                                        width: 100%;
+                                        display: inline-block;
+                                        color: $text-grey;
+                                    }
+                                }
+                            }
+
+                            &:last-child {
+                                margin: 0;
+                            }
+
+                            &.active {
+                                .card-header {
+                                    background: $bg-tab-detail;
+                                    border-bottom-color: $box-border-color;
+
+                                    h5 {
+                                        a {
+                                            color: $text-blue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .card {
+                        border-radius: 0;
+
+                        .card-body {
+                            padding: 25px 30px;
+                            box-shadow: 3px 4px 10px $shadow-color;
+
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 

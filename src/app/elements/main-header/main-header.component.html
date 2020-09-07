@@ -1,5 +1,5 @@
-<!--  Start Header Section-->
-<header class="site_header">
+ <!--  Start Header Section-->
+ <header class="site_header">
     <div class="container">
         <div class="row">
             <div id="app" class="container">
@@ -9,12 +9,37 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
-
-                        <ul class="navbar-nav ml-auto nav_right">
+                        <ul class="navbar-nav nav_left">
                             <li class="nav-item">
                                 <a class="nav-link" href="javascript:void(0);">Partial Payment</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0);">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
+                                    23145
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto nav_right">
+                            <li class="nav-item cus_pad">
+                                <a class="nav-link" href="javascript:void(0);">
+                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_wishlist.svg" alt="">
+                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_wishlist_active.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="nav-item cus_pad">
+                                <a class="nav-link" href="javascript:void(0);">
+                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Notifications.svg" alt="">
+                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/Ic_Notifications_active.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="nav-item cus_pad">
+                                <a class="nav-link" href="javascript:void(0);">
+                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_message.svg" alt="">
+                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_message_active.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="nav-item separator">
                                 <div class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code }}
@@ -40,12 +65,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item" *ngIf="!isLoggedIn">
-                                <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
-                            </li>
-
-                            <li class="nav-item" *ngIf="isLoggedIn">
-                                <a class="nav-link" href="javascript:void(0)" [routerLink]="['/']" (click)="onLoggedout()">Sign Out</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-dismiss="modal" data-target="#sign_in_modal">Sign In</a>
                             </li>
                         </ul>
                     </div>

@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
 
     validateUserandRole(next) {
 
-        const user = getUserDetails(localStorage.getItem('userToken'))
+        const user = getUserDetails(localStorage.getItem('_lay_sess'))
         // console.log(user,typeof next.data);
         if (user) {
             if (typeof next.data == 'object' && Object.values(next.data).length == 0) {

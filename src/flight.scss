@@ -718,7 +718,7 @@
                             }
 
                             .show_detail {
-                                width: 100%;
+                                width: auto;
 
                                 a {
                                     display: inline;
@@ -734,7 +734,7 @@
                                     &:after {
                                         content: '';
                                         position: absolute;
-                                        left: 107%;
+                                        left: 105%;
                                         top: 50%;
                                         width: 0;
                                         height: 0;
@@ -747,7 +747,7 @@
                             }
 
                             .info_price_origin {
-                                width: 100%;
+                                width: auto;
                                 display: flex;
                                 align-items: center;
 
@@ -764,7 +764,7 @@
                                     font-weight: 500;
                                     background: $box-border-color;
                                     border: 1px solid $box-border-color;
-                                    margin-right: 30px;
+                                    margin-right: 15px;
                                     display: inline-table;
                                     border-radius: 5px;
                                 }
@@ -1126,6 +1126,13 @@
                                                     }
                                                 }
 
+                                                span {
+                                                    font-size: 10px;
+                                                    font-weight: 500;
+                                                    color: $text-black;
+                                                    margin: 0 0 5px;
+                                                }
+
                                                 p {
                                                     font-size: 10px;
                                                     font-weight: 300;
@@ -1134,6 +1141,8 @@
 
                                                     span {
                                                         display: block;
+                                                        color: $text-grey;
+                                                        font-weight: 300;
                                                     }
                                                 }
 
@@ -1851,7 +1860,7 @@
                             }
 
                             .show_detail {
-                                width: 100%;
+                                width: auto;
 
                                 a {
                                     display: inline;
@@ -1867,7 +1876,7 @@
                                     &:after {
                                         content: '';
                                         position: absolute;
-                                        left: 107%;
+                                        left: 105%;
                                         top: 50%;
                                         width: 0;
                                         height: 0;
@@ -1882,7 +1891,7 @@
                             .info_price_origin {
                                 display: flex;
                                 align-items: center;
-                                width: 100%;
+                                width: auto;
 
                                 @media(max-width:767px) {
                                     padding: 10px 0 0;
@@ -1897,7 +1906,7 @@
                                     font-weight: 500;
                                     background: $box-border-color;
                                     border: 1px solid $box-border-color;
-                                    margin-right: 30px;
+                                    margin-right: 15px;
                                     display: inline-table;
                                     border-radius: 5px;
                                 }
@@ -2286,11 +2295,19 @@
                                                             font-size: 20px;
                                                             font-weight: 600;
                                                             color: $text-black;
-                                                            margin: 0 0 10px;
+                                                            margin: 0 0 5px;
 
                                                             span {
                                                                 font-weight: 400;
+                                                                margin: 0;
                                                             }
+                                                        }
+
+                                                        span {
+                                                            font-size: 10px;
+                                                            font-weight: 500;
+                                                            color: $text-black;
+                                                            margin: 0 0 5px;
                                                         }
 
                                                         p {
@@ -2301,6 +2318,8 @@
 
                                                             span {
                                                                 display: block;
+                                                                font-weight: 300;
+                                                                color: $text-grey;
                                                             }
                                                         }
 
@@ -3429,29 +3448,10 @@
                                         }
                                     }
                                 }
-
-
-                                //                                a {
-                                //                                    width: 100%;
-                                //                                    padding: 15px 0;
-                                //                                    font-size: 14px;
-                                //                                    font-weight: 500;
-                                //                                    margin: 0;
-                                //                                    color: $text-black;
-                                //                                    cursor: pointer;
-                                //
-                                //                                    &:before {
-                                //                                        font-family: 'FontAwesome';
-                                //                                        content: "\f078";
-                                //                                        float: right;
-                                //                                        transition: all 0.5s;
-                                //                                        color: $text-grey;
-                                //                                    }
-                                //                                }
                             }
 
                             .card-body {
-                                padding: 15px 15px 5px;
+                                padding: 15px 15px;
 
                                 .block_add_passenger {
                                     margin: 0;
@@ -3463,7 +3463,7 @@
 
                                         .form_field {
                                             width: 100%;
-                                            margin: 0 0 15px;
+                                            margin: 0 0 20px;
 
 
                                             label {
@@ -3688,6 +3688,58 @@
                                                     }
                                                 }
                                             }
+                                        }
+                                    }
+
+                                    .form_btn {
+                                        button {
+                                            width: auto;
+                                            padding: 0 35px;
+                                            height: 38px;
+                                            background: $btn-bg;
+                                            border-radius: 19px;
+                                            border: 1px solid $btn-bg;
+                                            font-size: 20px;
+                                            font-weight: 400;
+                                            color: $text-white;
+                                            transition: 0.3s;
+                                            position: relative;
+                                            z-index: 9;
+                                            overflow: hidden;
+                                            white-space: normal;
+                                            display: flex;
+                                            align-items: center;
+
+                                            img {
+                                                margin-left: 40px;
+                                                height: 20px;
+                                            }
+
+                                            &::before {
+                                                content: "";
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 0%;
+                                                background: $primary-color;
+                                                z-index: -1;
+                                                transition: 0.8s;
+                                                border-radius: 0 0 50% 50%;
+                                            }
+
+                                            &:hover {
+                                                border-color: $primary-color;
+
+                                                &:before {
+                                                    height: 190%;
+                                                }
+                                            }
+
+                                            @media(max-width: 991px) {
+                                                display: inline-flex;
+                                            }
+
                                         }
                                     }
                                 }
@@ -3923,6 +3975,8 @@
 
             .btn_payment {
                 text-align: right;
+                display: flex;
+                justify-content: flex-end;
             }
         }
 
@@ -5516,7 +5570,7 @@
 
                                 .form_field {
                                     width: 49%;
-                                    margin-bottom: 30px;
+                                    margin-bottom: 20px;
 
                                     label {
                                         width: 100%;
@@ -5635,6 +5689,8 @@
                             }
 
                             .block_card_save {
+                                margin: 0 0 20px;
+
                                 .custom_checkbox {
                                     position: relative;
                                     margin-bottom: 0;
@@ -5713,6 +5769,58 @@
                                         color: $secondary-color;
                                         padding: 0 5px;
                                     }
+                                }
+                            }
+
+                            .form_btn {
+                                button {
+                                    width: auto;
+                                    padding: 0 35px;
+                                    height: 38px;
+                                    background: $btn-bg;
+                                    border-radius: 19px;
+                                    border: 1px solid $btn-bg;
+                                    font-size: 20px;
+                                    font-weight: 400;
+                                    color: $text-white;
+                                    transition: 0.3s;
+                                    position: relative;
+                                    z-index: 9;
+                                    overflow: hidden;
+                                    white-space: normal;
+                                    display: flex;
+                                    align-items: center;
+
+                                    img {
+                                        margin-left: 40px;
+                                        height: 20px;
+                                    }
+
+                                    &::before {
+                                        content: "";
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 0%;
+                                        background: $primary-color;
+                                        z-index: -1;
+                                        transition: 0.8s;
+                                        border-radius: 0 0 50% 50%;
+                                    }
+
+                                    &:hover {
+                                        border-color: $primary-color;
+
+                                        &:before {
+                                            height: 190%;
+                                        }
+                                    }
+
+                                    @media(max-width: 991px) {
+                                        display: inline-flex;
+                                    }
+
                                 }
                             }
                         }

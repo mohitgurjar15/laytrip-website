@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { FlightService } from '../../../../services/flight.service';
+import { ActivatedRoute } from '@angular/router';
+import { airports } from '../../airports';
 
 @Component({
   selector: 'app-flight-search-bar',
@@ -63,17 +65,23 @@ export class FlightSearchBarComponent implements OnInit {
 
   airportDefaultDestValue;
   airportDefaultArrivalValue;
-
+  departureDate:string;
   searchedValue = [];
-
+  arrivalCode:string;
   tabchangeValue = 'oneway';
 
   constructor(
     public fb: FormBuilder,
     private flightService: FlightService,
     public commonFunction: CommonFunction,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {
+
+    this.departureDate= this.route.snapshot.queryParams["departure_date"];
+    this.departureDate = this.commonFunction.convertDateFormat(this.departureDate,'YYYY-MM-DD')
+    this.arrivalCode  = this.route.snapshot.queryParams["arrival"];
+    console.log("this.departureDate",this.departureDate)
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
       toDestination: [[Validators.required]],
@@ -85,6 +93,7 @@ export class FlightSearchBarComponent implements OnInit {
   ngOnInit() {
     let selectedItem = localStorage.getItem('_fligh');
     let info = JSON.parse(selectedItem);
+    //info[1].value= airports[this.arrivalCode];
     info.forEach(res => {
       if (res && res.key === 'fromSearch') {
         this.data.push(res.value);
@@ -162,8 +171,8 @@ export class FlightSearchBarComponent implements OnInit {
         showShortcuts: false,
         singleMonth: true,
         monthSelect: true,
-        format: "DD MMM'YY dddd",
-        startDate: moment().add(0, 'months').format("DD MMM'YY dddd"),
+        format: this.commonFunction.dateFormat('en').date,
+        startDate: moment().add(0, 'months').format(this.commonFunction.dateFormat('en').date),
         // endDate: moment().add(1, 'months').format("DD MMM'YY dddd"),
         extraClass: 'laytrip-datepicker'
       }).bind('datepicker-first-date-selected', function (event, obj) {

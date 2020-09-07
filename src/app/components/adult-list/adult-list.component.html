@@ -1,116 +1,40 @@
 <div class="block_passenger_detail">
-  <h6>Adults <span>(Above 12 years)</span></h6>
-  <div id="accordion" class="accordion" *ngIf="travelers.length">
-
-      <div class="card_add_pass" *ngFor="let traveler of travelers; let i = index;">
-          <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
-              <label class="custom_checkbox">
-                  <input type="checkbox" value="">
-                  <span class="checkmark"></span>
-              </label>
-              <a class="card-title">{{traveler.firstName}} {{traveler.lastName}}</a>
-          </div>
-          <div id="collapseOne" class="card-body add_pass collapse" data-parent="#accordion">
-            
-                <div class="block_add_passenger">
-                    <div class="form_row">
-                        <div class="form_field">
-                            <label>Title</label>
-                            <ul>
-                                <li>
-                                    <label class="custom_radio">Mr.
-                                        <input type="radio" data-title="{{traveler.title}}" [checked]="traveler.title === mr" name="adult-title">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="custom_radio">Ms.
-                                        <input type="radio" name="adult-title" [checked]="traveler.title === ms">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="custom_radio">Mrs.
-                                        <input type="radio" name="adult-title" [checked]="traveler.title === mrs">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_field">
-                            <label>Gender</label>
-                            <ul>
-                                <li>
-                                    <label class="custom_radio">Male
-                                        <input type="radio" checked="checked" name="adult-gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="custom_radio">Female
-                                        <input type="radio" name="adult-gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="custom_radio">Non - Binary
-                                        <input type="radio" name="adult-gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_field half">
-                            <label>First Name<sup>*</sup></label>
-                            <div class="text_field">
-                                <input type="text" name="fname" maxlength="80" value="{{traveler.firstName}}" tabindex="1" placeholder="First Name">
-                            </div>
-                        </div>
-                        <div class="form_field half">
-                            <label>Last Name<sup>*</sup></label>
-                            <div class="text_field">
-                                <input type="text" name="lname" maxlength="20"  value="{{traveler.lastName}}"  tabindex="2" placeholder="last Name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_field half">
-                            <label>Date of Birth</label>
-                            <div class="text_field">
-                                <input class="birth_date" type="text" name="dob" value="{{traveler.dob}}"  maxlength="20" tabindex="3" placeholder="Dd/mm/yyyy">
-                            </div>
-                        </div>
-                        <div class="form_field half">
-                            <label>Nationality</label>
-                            <div class="text_field custom-select">
-                                <select>
-                                    <option value="0">Select</option>
-                                    <option value="1">Select</option>
-                                    <option value="2">Select</option>
-                                    <option value="3">Select</option>
-                                    <option value="4">Select</option>
-                                    <option value="5">Select</option>
-                                    <option value="6">Select</option>
-                                    <option value="7">Select</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_field half">
-                            <label>Frequently - flyer no.</label>
-                            <div class="text_field">
-                                <input type="email" name="text" maxlength="20" tabindex="5" placeholder="Enter frequently - flyer no.">
-                            </div>
-                        </div>
-                    </div>
-                </div>   
-          </div>
-      </div>
+  <h6>{{type | titlecase}} <span>(Above {{age}} years)</span></h6>
+    <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
+        <div *ngFor="let traveler of travelers; let i = index;">
+            <div class="card_add_pass" *ngIf="traveler.user_type===type">                     
+                <div class="card-header" id="adultOne{{i}}" >
+                    <h2 class="mb-0">
+                        <label class="custom_checkbox">
+                            <input type="checkbox" value="" (change)="checkBox($event);">
+                            <span class="checkmark"></span>
+                        </label>
+                        <button type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#adultcollapseOne'+ i">
+                            {{traveler.firstName}} {{traveler.lastName}}
+                            <i class="fa fa-angle-down"></i>
+                            <span [ngClass]="(adultFormStatus)?'status_complete':'status_incomplete'">{{adultFormStatus ? 'Complete' : 'Incomplete'}}</span>
+                        </button>
+                    </h2>
+                 </div>
+                 <div id="adultcollapseOne{{i}}" class="collapse cus_collapse" aria-labelledby="adultOne+i" data-parent="#accordion-Adults">    
+                    <div class="card-body">       
+                        <app-traveler-form (auditFormStatus)="getFormStatus($event)" [traveler]="traveler" ></app-traveler-form>  
+                    </div>                 
+                </div>                 
+              </div>
+        </div>        
   </div>
-  <a class="add_passenger_btn" href="javascript:void(0);">+ Add Adult</a>
+  <a class="add_passenger_btn" href="javascript:void(0);" (click)="addAdultForm()">{{showAddAdultForm ? '-' : '+'}} Add {{type | titlecase}}</a>
+      <div id="accordion-Adults" class="accordion" *ngIf="showAddAdultForm">
+        <div class="card_add_pass">         
+            <div class="card-header" id="adultOne">
+             
+           </div>
+           <div id="adultcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne" data-parent="#accordion-Adults">    
+              <div class="card-body">       
+                  <app-traveler-form (valueChange)="pushTraveler($event)"></app-traveler-form>  
+              </div>                 
+          </div>                 
+        </div>
+    </div>
 </div>

@@ -1,0 +1,81 @@
+<!-- Free & Paid user -->
+<div class="detail_info_left" *ngIf="userData.roleId==5 || userData.roleId==6">
+  <div class="block_booking_confirmation">
+      <div class="block_inner">
+          <h5>Congratulations</h5>
+          <p>Thank you! Your official booking is now confirmed</p>
+          <span>Reference no. #124FJK123</span>
+          <div class="book_inform">
+              We will perform your actual booking before 26th November, 2020.
+          </div>
+      </div>
+
+      <div class="block_inner">
+          <h5>Booking Info</h5>
+          <ul>
+              <li>
+                  <span>Payment type :</span>
+                  <p>Partial payment</p>
+              </li>
+              <li>
+                  <span>Partial payment type :</span>
+                  <p>Weekly/biweekly/monthly</p>
+              </li>
+              <li>
+                  <span>Total booking amount :</span>
+                  <p>$100</p>
+              </li>
+              <li>
+                  <span>Partial payment part :</span>
+                  <p>5 EMI</p>
+              </li>
+              <li>
+                  <span>Partial payment Start Date :</span>
+                  <p>22-06-2020</p>
+              </li>
+              <li>
+                  <span>Next Partial payment Date :</span>
+                  <p>28-06-2020</p>
+              </li>
+              <li>
+                  <span>Partial payment amount :</span>
+                  <p>$20</p>
+              </li>
+          </ul>
+      </div>
+
+      <div class="block_inner">
+          <h5>Cancellation Policy</h5>
+          <p>To know more check our <a href="javascript:void(0);">Cancellation policy</a> & <a href="javascript:void(0);">Privacy Policy</a></p>
+      </div>
+
+      <div class="block_inner">
+          <h5>Get Assist</h5>
+          <p>If you want any query or help. Contact us on -</p>
+          <ul class="block_contact">
+              <li>
+                  <a href="javascript:void(0);"><i class="fa fa-envelope" aria-hidden="true"></i> info@test.com</a>
+              </li>
+
+              <li>
+                  <a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i> +00 000 000 0000</a>
+              </li>
+          </ul>
+          <div class="msg_block">
+              We wish you a pleasant stay, your lay trip team.
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Guest user -->
+<div class="detail_info_left" *ngIf="userData.roleId==7">
+  <div class="block_booking_confirmation">
+      <div class="inner_block">
+          <img src="assets/images/booking-confirmation-for-guest-user_im.svg" alt="Confirmation Image">
+          <h5>Congratulations1</h5>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+          <span>Reference no. #124FJK123</span>
+      </div>
+  </div>
+</div>

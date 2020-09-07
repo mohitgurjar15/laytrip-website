@@ -36,5 +36,48 @@ export class CommonFunction {
             e.preventDefault();
         }
     }
+
+    setHeaders(params=null) {      
+        const accessToken = localStorage.getItem('_lay_sess');
+        let reqData:any = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        };
+        if(params) {
+            let reqParams = {};        
+            Object.keys(params).map(k =>{
+                reqData.headers[k] = params[k];
+            });
+            //reqData.headers = reqParams;
+        }
+        return reqData;
+    }  
+
+    convertDateFormat(date,sourceFormat,languageCode=null){
+
+        if(languageCode==null){
+           return moment(date, sourceFormat).format('MM/DD/YYYY')
+        }
+        return date;
+    }
+
+    dateFormat(languageCode=null){
+
+        const dateFormats={
+            en : {
+                date            : 'MM/DD/YYYY',
+                datetime        : 'MM/DD/YYYY hh',
+                minuteseconds   : 'HH:II' 
+            }
+        }
+
+        if(languageCode!=null)
+            return dateFormats[languageCode]
+        else
+            dateFormats.en;
+    }
+
+    
 }
 

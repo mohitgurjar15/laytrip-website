@@ -20,7 +20,7 @@ export class SigninComponent  implements OnInit {
   signUpModal = false;
   signInModal = true;
   loginForm: FormGroup;
-  submitted =  false;
+  submitted =  false;Location
   fieldTextType :  boolean;
   apiError :string =  '';
   public loading: boolean = false;
@@ -32,8 +32,8 @@ export class SigninComponent  implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router,
-    ) { }
+    public router: Router
+    ) { }    
 
 
   ngOnInit() {
@@ -62,10 +62,9 @@ export class SigninComponent  implements OnInit {
       this.userService.signin(this.loginForm.value).subscribe((data: any) => {
         if(data.token){
           localStorage.setItem("_lay_sess", data.token);
-          $('#sign_in_modal').modal('hide');
-          
+          $('#sign_in_modal').modal('hide');          
           this.loading = this.submitted = false;
-          this.router.navigate(['/']);      
+          this.router.url;
         }
       }, (error: HttpErrorResponse) => {       
         if(error.status == 406){

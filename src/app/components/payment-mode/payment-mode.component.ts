@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Options, ChangeContext } from 'ng5-slider';
 
 @Component({
   selector: 'app-payment-mode',
@@ -7,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentModeComponent implements OnInit {
 
+  @Output() applyLaycredit = new EventEmitter();
+  @Output() selectInstalmentMode = new EventEmitter();
   constructor() { }
+
   isInstalemtMode:boolean=false;
+  value: number = 100;
+  laycreditOptions: Options = {
+    floor: 0,
+    ceil: 600
+  };
 
   ngOnInit() {
   }
@@ -20,10 +29,16 @@ export class PaymentModeComponent implements OnInit {
       this.isInstalemtMode = true;
     }
 
-    if(type=='no-instalment'){
+    if(type=='noinstalment'){
 
       this.isInstalemtMode = false;
     }
+    this.selectInstalmentMode.emit(type)
 
+  }
+
+  selectLaycredit(changeContext: ChangeContext): void {
+    
+    this.applyLaycredit.emit(changeContext.value)
   }
 }

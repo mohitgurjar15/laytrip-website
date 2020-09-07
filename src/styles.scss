@@ -13,18 +13,20 @@
     width: 100%;
 }
 
+
 body {
     font-family: $primary-font;
     margin: 0;
     padding: 0;
     font-size: 14px;
     font-weight: 400;
-    background: #f5f5f5;
+    background: #F5F5F5;
     overflow-x: hidden;
 
     &.open {
         overflow: hidden;
     }
+
 }
 
 a {
@@ -59,6 +61,7 @@ select {
     opacity: 0.8;
 
     .loader_mian {
+
         width: 200px;
         height: 200px;
         position: absolute;
@@ -67,8 +70,8 @@ select {
         -webkit-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         margin: auto;
-        -webkit-filter: url("#goo");
-        filter: url("#goo");
+        -webkit-filter: url('#goo');
+        filter: url('#goo');
         -webkit-animation: rotate-move 2s ease-in-out infinite;
 
         .dot {
@@ -107,230 +110,233 @@ select {
 @-webkit-keyframes dot-3-move {
     20% {
         -webkit-transform: scale(1);
-        transform: scale(1);
+        transform: scale(1)
     }
 
     45% {
-        -webkit-transform: translateY(-18px) scale(0.45);
-        transform: translateY(-18px) scale(0.45);
+        -webkit-transform: translateY(-18px) scale(.45);
+        transform: translateY(-18px) scale(.45)
     }
 
     60% {
-        -webkit-transform: translateY(-90px) scale(0.45);
-        transform: translateY(-90px) scale(0.45);
+        -webkit-transform: translateY(-90px) scale(.45);
+        transform: translateY(-90px) scale(.45)
     }
 
     80% {
-        -webkit-transform: translateY(-90px) scale(0.45);
-        transform: translateY(-90px) scale(0.45);
+        -webkit-transform: translateY(-90px) scale(.45);
+        transform: translateY(-90px) scale(.45)
     }
 
     100% {
         -webkit-transform: translateY(0px) scale(1);
-        transform: translateY(0px) scale(1);
+        transform: translateY(0px) scale(1)
     }
 }
 
 @keyframes dot-3-move {
     20% {
         -webkit-transform: scale(1);
-        transform: scale(1);
+        transform: scale(1)
     }
 
     45% {
-        -webkit-transform: translateY(-18px) scale(0.45);
-        transform: translateY(-18px) scale(0.45);
+        -webkit-transform: translateY(-18px) scale(.45);
+        transform: translateY(-18px) scale(.45)
     }
 
     60% {
-        -webkit-transform: translateY(-90px) scale(0.45);
-        transform: translateY(-90px) scale(0.45);
+        -webkit-transform: translateY(-90px) scale(.45);
+        transform: translateY(-90px) scale(.45)
     }
 
     80% {
-        -webkit-transform: translateY(-90px) scale(0.45);
-        transform: translateY(-90px) scale(0.45);
+        -webkit-transform: translateY(-90px) scale(.45);
+        transform: translateY(-90px) scale(.45)
     }
 
     100% {
         -webkit-transform: translateY(0px) scale(1);
-        transform: translateY(0px) scale(1);
+        transform: translateY(0px) scale(1)
     }
 }
 
 @-webkit-keyframes dot-2-move {
     20% {
         -webkit-transform: scale(1);
-        transform: scale(1);
+        transform: scale(1)
     }
 
     45% {
-        -webkit-transform: translate(-16px, 12px) scale(0.45);
-        transform: translate(-16px, 12px) scale(0.45);
+        -webkit-transform: translate(-16px, 12px) scale(.45);
+        transform: translate(-16px, 12px) scale(.45)
     }
 
     60% {
-        -webkit-transform: translate(-80px, 60px) scale(0.45);
-        transform: translate(-80px, 60px) scale(0.45);
+        -webkit-transform: translate(-80px, 60px) scale(.45);
+        transform: translate(-80px, 60px) scale(.45)
     }
 
     80% {
-        -webkit-transform: translate(-80px, 60px) scale(0.45);
-        transform: translate(-80px, 60px) scale(0.45);
+        -webkit-transform: translate(-80px, 60px) scale(.45);
+        transform: translate(-80px, 60px) scale(.45)
     }
 
     100% {
         -webkit-transform: translateY(0px) scale(1);
-        transform: translateY(0px) scale(1);
+        transform: translateY(0px) scale(1)
     }
 }
 
 @keyframes dot-2-move {
     20% {
         -webkit-transform: scale(1);
-        transform: scale(1);
+        transform: scale(1)
     }
 
     45% {
-        -webkit-transform: translate(-16px, 12px) scale(0.45);
-        transform: translate(-16px, 12px) scale(0.45);
+        -webkit-transform: translate(-16px, 12px) scale(.45);
+        transform: translate(-16px, 12px) scale(.45)
     }
 
     60% {
-        -webkit-transform: translate(-80px, 60px) scale(0.45);
-        transform: translate(-80px, 60px) scale(0.45);
+        -webkit-transform: translate(-80px, 60px) scale(.45);
+        transform: translate(-80px, 60px) scale(.45)
     }
 
     80% {
-        -webkit-transform: translate(-80px, 60px) scale(0.45);
-        transform: translate(-80px, 60px) scale(0.45);
+        -webkit-transform: translate(-80px, 60px) scale(.45);
+        transform: translate(-80px, 60px) scale(.45)
     }
 
     100% {
         -webkit-transform: translateY(0px) scale(1);
-        transform: translateY(0px) scale(1);
+        transform: translateY(0px) scale(1)
     }
 }
 
 @-webkit-keyframes dot-1-move {
     20% {
         -webkit-transform: scale(1);
-        transform: scale(1);
+        transform: scale(1)
     }
 
     45% {
-        -webkit-transform: translate(16px, 12px) scale(0.45);
-        transform: translate(16px, 12px) scale(0.45);
+        -webkit-transform: translate(16px, 12px) scale(.45);
+        transform: translate(16px, 12px) scale(.45)
     }
 
     60% {
-        -webkit-transform: translate(80px, 60px) scale(0.45);
-        transform: translate(80px, 60px) scale(0.45);
+        -webkit-transform: translate(80px, 60px) scale(.45);
+        transform: translate(80px, 60px) scale(.45)
     }
 
     80% {
-        -webkit-transform: translate(80px, 60px) scale(0.45);
-        transform: translate(80px, 60px) scale(0.45);
+        -webkit-transform: translate(80px, 60px) scale(.45);
+        transform: translate(80px, 60px) scale(.45)
     }
 
     100% {
         -webkit-transform: translateY(0px) scale(1);
-        transform: translateY(0px) scale(1);
+        transform: translateY(0px) scale(1)
     }
 }
 
 @keyframes dot-1-move {
     20% {
         -webkit-transform: scale(1);
-        transform: scale(1);
+        transform: scale(1)
     }
 
     45% {
-        -webkit-transform: translate(16px, 12px) scale(0.45);
-        transform: translate(16px, 12px) scale(0.45);
+        -webkit-transform: translate(16px, 12px) scale(.45);
+        transform: translate(16px, 12px) scale(.45)
     }
 
     60% {
-        -webkit-transform: translate(80px, 60px) scale(0.45);
-        transform: translate(80px, 60px) scale(0.45);
+        -webkit-transform: translate(80px, 60px) scale(.45);
+        transform: translate(80px, 60px) scale(.45)
     }
 
     80% {
-        -webkit-transform: translate(80px, 60px) scale(0.45);
-        transform: translate(80px, 60px) scale(0.45);
+        -webkit-transform: translate(80px, 60px) scale(.45);
+        transform: translate(80px, 60px) scale(.45)
     }
 
     100% {
         -webkit-transform: translateY(0px) scale(1);
-        transform: translateY(0px) scale(1);
+        transform: translateY(0px) scale(1)
     }
 }
 
 @-webkit-keyframes rotate-move {
     55% {
         -webkit-transform: translate(-50%, -50%) rotate(0deg);
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg)
     }
 
     80% {
         -webkit-transform: translate(-50%, -50%) rotate(360deg);
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg)
     }
 
     100% {
         -webkit-transform: translate(-50%, -50%) rotate(360deg);
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg)
     }
 }
 
 @keyframes rotate-move {
     55% {
         -webkit-transform: translate(-50%, -50%) rotate(0deg);
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg)
     }
 
     80% {
         -webkit-transform: translate(-50%, -50%) rotate(360deg);
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg)
     }
 
     100% {
         -webkit-transform: translate(-50%, -50%) rotate(360deg);
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg)
     }
 }
 
 @-webkit-keyframes index {
+
     0%,
     100% {
-        z-index: 3;
+        z-index: 3
     }
 
     33.3% {
-        z-index: 2;
+        z-index: 2
     }
 
     66.6% {
-        z-index: 1;
+        z-index: 1
     }
 }
 
 @keyframes index {
+
     0%,
     100% {
-        z-index: 3;
+        z-index: 3
     }
 
     33.3% {
-        z-index: 2;
+        z-index: 2
     }
 
     66.6% {
-        z-index: 1;
+        z-index: 1
     }
 }
 
 // <!-- Close Loader css -->
+
 
 //<!-- Start Coming Soon page css -->
 .coming_soon {
@@ -352,11 +358,11 @@ select {
         padding: 50px;
         text-align: center;
 
-        @media (max-width: 1199px) {
+        @media(max-width: 1199px) {
             padding: 40px;
         }
 
-        @media (max-width: 599px) {
+        @media(max-width: 599px) {
             padding: 20px;
         }
 
@@ -364,7 +370,7 @@ select {
             img {
                 height: 54px;
 
-                @media (max-width: 991px) {
+                @media(max-width: 991px) {
                     height: 40px;
                 }
             }
@@ -389,7 +395,7 @@ select {
                         font-weight: 700;
                     }
 
-                    @media (max-width: 1199px) {
+                    @media(max-width: 1199px) {
                         font-size: 30px;
                         line-height: 40px;
 
@@ -398,7 +404,7 @@ select {
                         }
                     }
 
-                    @media (max-width: 599px) {
+                    @media(max-width: 599px) {
                         font-size: 20px;
                         line-height: 30px;
 
@@ -414,22 +420,23 @@ select {
                     line-height: 63px;
                     color: $text-white;
 
-                    @media (max-width: 1199px) {
+
+                    @media(max-width: 1199px) {
                         font-size: 30px;
                         line-height: 40px;
                     }
 
-                    @media (max-width: 599px) {
+                    @media(max-width: 599px) {
                         font-size: 20px;
                         line-height: 30px;
                     }
                 }
 
-                @media (max-width: 1199px) {
+                @media(max-width: 1199px) {
                     padding: 30px 0;
                 }
 
-                @media (max-width: 599px) {
+                @media(max-width: 599px) {
                     padding: 20px 0;
                 }
             }
@@ -444,11 +451,11 @@ select {
                     color: $text-yellow;
                     display: block;
 
-                    @media (max-width: 1199px) {
+                    @media(max-width: 1199px) {
                         font-size: 22px;
                     }
 
-                    @media (max-width: 599px) {
+                    @media(max-width: 599px) {
                         font-size: 17px;
                     }
                 }
@@ -456,6 +463,7 @@ select {
                 .our_subscription {
                     width: 100%;
                     margin: 0;
+
 
                     p {
                         margin: 0 0 10px;
@@ -525,7 +533,7 @@ select {
                                 }
                             }
 
-                            @media (max-width: 599px) {
+                            @media(max-width: 599px) {
                                 flex-wrap: wrap;
                                 justify-content: center;
 
@@ -541,13 +549,13 @@ select {
                         }
                     }
 
-                    @media (max-width: 767px) {
+                    @media(max-width: 767px) {
                         .subscription {
                             width: 100%;
                         }
                     }
 
-                    @media (max-width: 599px) {
+                    @media(max-width: 599px) {
                         .subscription {
                             width: 100%;
                             flex-wrap: wrap;
@@ -587,7 +595,7 @@ select {
     .navbar {
         padding: 0;
 
-        @media (max-width: 991px) {
+        @media(max-width:991px) {
             .navbar-toggler {
                 border-color: transparent;
 
@@ -608,11 +616,11 @@ select {
         .site_menu {
             padding-left: 45px;
 
-            @media (max-width: 1199px) {
+            @media(max-width: 1199px) {
                 padding-left: 25px;
             }
 
-            @media (max-width: 991px) {
+            @media(max-width: 991px) {
                 padding: 0 10px 20px;
                 border-radius: 0 0 20px 20px;
                 position: absolute;
@@ -629,11 +637,11 @@ select {
                 .nav-item {
                     padding-right: 30px;
 
-                    @media (max-width: 1199px) {
+                    @media(max-width: 1199px) {
                         padding-right: 20px;
                     }
 
-                    @media (max-width: 991px) {
+                    @media(max-width: 991px) {
                         width: 100%;
                         padding: 10px 15px;
                     }
@@ -648,7 +656,7 @@ select {
                             color: $secondary-color;
                         }
 
-                        @media (max-width: 1199px) {
+                        @media(max-width: 1199px) {
                             font-size: 12px;
                         }
                     }
@@ -669,21 +677,25 @@ select {
                 }
             }
 
-            .nav_right {
+            .nav_left {
                 li {
                     padding: 0 15px 0 15px;
 
-                    @media (max-width: 991px) {
+                    @media(max-width: 991px) {
                         width: 100%;
                         padding: 10px 15px;
                     }
 
                     a {
                         padding: 0;
+                        color: $text-orange;
+
+                        img {
+                            margin-right: 5px;
+                        }
                     }
 
                     &:first-child {
-                        border-right: 1px solid $border-color;
 
                         a {
                             line-height: 30px;
@@ -710,13 +722,14 @@ select {
                             }
 
                             &:hover {
+
                                 &:before {
                                     height: 190%;
                                 }
                             }
                         }
 
-                        @media (max-width: 991px) {
+                        @media(max-width: 991px) {
                             width: 100%;
                             padding: 10px 15px;
                             border: none;
@@ -724,6 +737,63 @@ select {
                             a {
                                 width: auto;
                                 display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            .nav_right {
+                li {
+                    padding: 0 15px;
+
+                    @media(max-width: 991px) {
+                        width: 100%;
+                        padding: 10px 15px;
+                    }
+
+                    &.cus_pad {
+                        padding: 0 10px;
+                    }
+
+                    &.separator {
+                        border-left: 1px solid $border-color;
+                    }
+
+                    a {
+                        padding: 0;
+
+                        img {
+                            &.active-icon {
+                                display: none;
+                            }
+                        }
+
+                        &:hover {
+
+                            img {
+
+                                &.active-icon {
+                                    display: inline-block;
+                                }
+
+                                &.default-icon {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        &.active {
+                            img {
+
+                                &.active-icon {
+                                    display: inline-block;
+                                }
+
+                                &.default-icon {
+                                    display: none;
+                                }
                             }
                         }
                     }
@@ -757,13 +827,14 @@ select {
                             }
 
                             &:hover {
+
                                 &:before {
                                     height: 190%;
                                 }
                             }
                         }
 
-                        @media (max-width: 991px) {
+                        @media(max-width: 991px) {
                             width: 100%;
                             padding: 10px 15px;
                             border: none;
@@ -776,6 +847,7 @@ select {
                     }
 
                     .dropdown {
+
                         a {
                             img {
                                 padding: 0 5px 0 0;
@@ -859,705 +931,1402 @@ select {
 //<!--  Close Header Section css -->
 
 //<!--  Start Banner Section css -->
+//.home_banner {
+//    width: 100%;
+//    position: relative;
+//    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner_bg.svg) no-repeat;
+//    background-position: right bottom;
+//    background-size: cover;
+//
+//
+//    .banner_tab {
+//        width: 100%;
+//        padding: 80px 25px 100px 15px;
+//        background: linear-gradient(90deg, rgba(249, 250, 252, 1) 0%, rgba(249, 250, 252, 1) 100%) 0% 0% no-repeat;
+//        box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1);
+//        position: relative;
+//        height: 100%;
+//
+//        .nav-tabs {
+//            flex-wrap: nowrap;
+//            border: none;
+//
+//            .nav-item {
+//                display: flex;
+//                padding: 0 0 10px;
+//                border-top: none;
+//                border-right: none;
+//                border-left: none;
+//                border-bottom: 4px solid $box-border-color;
+//                justify-content: center;
+//                color: $text-grey;
+//
+//                img {
+//                    margin-right: 10px;
+//
+//                    &.active-icon {
+//                        display: none;
+//                    }
+//                }
+//
+//                &.active {
+//                    background: transparent;
+//                    color: $text-blue;
+//                    border-bottom-color: $text-blue;
+//
+//                    .active-icon {
+//                        display: block;
+//                    }
+//
+//                    .default-icon {
+//                        display: none;
+//                    }
+//                }
+//
+//                &:hover {
+//                    background: transparent;
+//                    color: $text-blue;
+//                    border-bottom-color: $text-blue;
+//
+//                    .active-icon {
+//                        display: block;
+//                    }
+//
+//                    .default-icon {
+//                        display: none;
+//                    }
+//                }
+//
+//            }
+//        }
+//
+//        .tab-content {
+//            padding: 30px 0 0;
+//
+//            .flight_tab {
+//                .nav-tabs {
+//                    margin: 0 0 30px;
+//
+//                    .nav-item {
+//                        padding: 0;
+//                        border: none;
+//
+//                        a {
+//                            padding: 5px 15px;
+//                            border: 1px solid $tab-border-color;
+//                            border-radius: 15px;
+//                            margin: 0 20px 0 0;
+//                            color: $text-grey;
+//                            font-size: 14px;
+//                            display: flex;
+//
+//                            &.active {
+//                                background: $tab-active-bg;
+//                                color: $secondary-color;
+//                                border-color: transparent;
+//
+//                                .active-icon {
+//                                    display: block
+//                                }
+//
+//                                .default-icon {
+//                                    display: none;
+//                                }
+//                            }
+//
+//                            &:hover {
+//                                background: $tab-active-bg;
+//                                color: $secondary-color;
+//                                border-color: transparent;
+//
+//                                .active-icon {
+//                                    display: block
+//                                }
+//
+//                                .default-icon {
+//                                    display: none;
+//                                }
+//                            }
+//
+//                            .active-icon {
+//                                display: none;
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                .tab-content {
+//                    padding: 0;
+//
+//                    .flight_search {
+//                        .flight-grid {
+//                            padding: 0;
+//                            margin: 0;
+//                            list-style: none;
+//
+//                            .grid_box {
+//                                margin: 0 0 20px;
+//
+//                                &.first {
+//                                    display: flex;
+//                                    justify-content: space-between;
+//                                    position: relative;
+//
+//                                    .flight_form {
+//                                        width: 49%;
+//
+//                                        label {
+//                                            width: 100%;
+//                                            margin-bottom: 5px;
+//                                            font-size: 10px;
+//                                            color: $text-grey;
+//                                            font-weight: 400;
+//                                            padding: 0;
+//                                            text-transform: uppercase;
+//                                        }
+//
+//                                        .search_area {
+//                                            padding: 15px 0;
+//                                            border: 1px solid $box-border-color;
+//                                            border-radius: 8px;
+//                                            background: $background-white;
+//
+//                                            input {
+//                                                width: 100%;
+//                                                border: none;
+//                                                height: 35px;
+//                                                margin-bottom: 5px;
+//                                                font-size: 20px;
+//                                                color: $text-darkblue;
+//                                                font-weight: 600;
+//                                                padding: 0 15px;
+//                                            }
+//
+//                                            span {
+//                                                font-size: 10px;
+//                                                font-weight: 400;
+//                                                color: $text-grey;
+//                                                padding: 0 15px;
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    .flight_to {
+//                                        width: 49%;
+//
+//                                        label {
+//                                            width: 100%;
+//                                            margin-bottom: 5px;
+//                                            font-size: 10px;
+//                                            color: $text-grey;
+//                                            font-weight: 400;
+//                                            padding: 0;
+//                                            text-transform: uppercase;
+//                                        }
+//
+//                                        .search_area {
+//                                            padding: 15px 0;
+//                                            border: 1px solid $box-border-color;
+//                                            border-radius: 8px;
+//                                            background: $background-white;
+//
+//                                            input {
+//                                                width: 100%;
+//                                                border: none;
+//                                                height: 35px;
+//                                                margin-bottom: 5px;
+//                                                font-size: 20px;
+//                                                color: $text-darkblue;
+//                                                font-weight: 600;
+//                                                padding: 0 15px;
+//                                            }
+//
+//                                            span {
+//                                                font-size: 10px;
+//                                                font-weight: 400;
+//                                                color: $text-grey;
+//                                                padding: 0 15px;
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    .switch_btn {
+//                                        width: 30px;
+//                                        height: 30px;
+//                                        background: $background-white;
+//                                        border: 1px solid $box-border-color;
+//                                        position: absolute;
+//                                        top: 60%;
+//                                        left: 50%;
+//                                        transform: translate(-50%, -50%);
+//                                        border-radius: 50%;
+//
+//                                        img {
+//                                            width: 15px;
+//                                            position: absolute;
+//                                            top: 50%;
+//                                            left: 50%;
+//                                            transform: translate(-50%, -50%);
+//                                        }
+//                                    }
+//                                }
+//
+//                                &.secound {
+//                                    display: flex;
+//                                    justify-content: space-between;
+//                                    position: relative;
+//
+//                                    .date_form {
+//                                        width: 50%;
+//
+//                                        label {
+//                                            width: 100%;
+//                                            margin-bottom: 5px;
+//                                            font-size: 10px;
+//                                            color: $text-grey;
+//                                            font-weight: 400;
+//                                            padding: 0;
+//                                            text-transform: uppercase;
+//                                        }
+//
+//                                        .search_area {
+//                                            padding: 15px 0;
+//                                            border: 1px solid $box-border-color;
+//                                            border-radius: 8px 0 0 8px;
+//                                            background: $background-white;
+//                                            position: relative;
+//
+//                                            input {
+//                                                width: 100%;
+//                                                border: none;
+//                                                height: 35px;
+//                                                margin-bottom: 5px;
+//                                                font-size: 18px;
+//                                                color: $text-darkblue;
+//                                                font-weight: 600;
+//                                                padding: 0 15px;
+//                                            }
+//
+//                                            .prev-next {
+//                                                width: 60%;
+//                                                display: flex;
+//                                                padding: 0 0 0 15px;
+//                                                justify-content: space-between;
+//
+//                                                a {
+//                                                    font-size: 10px;
+//                                                    color: $text-grey;
+//                                                }
+//                                            }
+//
+//                                            .date_icon {
+//                                                position: absolute;
+//                                                top: 50%;
+//                                                right: 15px;
+//                                                transform: translateY(-50%);
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    .date_to {
+//                                        width: 50%;
+//
+//                                        label {
+//                                            width: 100%;
+//                                            margin-bottom: 5px;
+//                                            font-size: 10px;
+//                                            color: $text-grey;
+//                                            font-weight: 400;
+//                                            padding: 0;
+//                                            text-transform: uppercase;
+//                                        }
+//
+//                                        .search_area {
+//                                            padding: 15px 0;
+//                                            border: 1px solid $box-border-color;
+//                                            border-radius: 0 8px 8px 0;
+//                                            background: $background-white;
+//                                            border-left: none;
+//                                            position: relative;
+//
+//                                            input {
+//                                                width: 100%;
+//                                                border: none;
+//                                                height: 35px;
+//                                                margin-bottom: 5px;
+//                                                font-size: 18px;
+//                                                color: $text-darkblue;
+//                                                font-weight: 600;
+//                                                padding: 0 15px;
+//                                            }
+//
+//                                            .prev-next {
+//                                                width: 60%;
+//                                                display: flex;
+//                                                padding: 0 0 0 15px;
+//                                                justify-content: space-between;
+//
+//                                                a {
+//                                                    font-size: 10px;
+//                                                    color: $text-grey;
+//                                                }
+//                                            }
+//
+//                                            .date_icon {
+//                                                position: absolute;
+//                                                top: 50%;
+//                                                right: 15px;
+//                                                transform: translateY(-50%);
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//
+//                                &.third {
+//
+//                                    .travellers {
+//                                        width: 50%;
+//
+//                                        label {
+//                                            width: 100%;
+//                                            margin-bottom: 5px;
+//                                            font-size: 10px;
+//                                            color: $text-grey;
+//                                            font-weight: 400;
+//                                            padding: 0;
+//                                            text-transform: uppercase;
+//                                        }
+//
+//                                        .search_area {
+//                                            padding: 15px 0;
+//                                            border: 1px solid $box-border-color;
+//                                            border-radius: 8px;
+//                                            background: $background-white;
+//                                            position: relative;
+//
+//                                            .travel_info {
+//                                                width: 100%;
+//                                                height: 35px;
+//                                                display: flex;
+//                                                line-height: 35px;
+//                                                font-size: 10px;
+//                                                color: $text-darkblue;
+//                                                position: relative;
+//                                                padding: 0 20px;
+//
+//                                                &:before {
+//                                                    width: 24px;
+//                                                    height: 24px;
+//                                                    content: '';
+//                                                    position: absolute;
+//                                                    right: 20px;
+//                                                    top: 50%;
+//                                                    transform: translateY(-50%);
+//                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg) no-repeat;
+//                                                }
+//
+//                                                span {
+//                                                    font-size: 20px;
+//                                                    font-weight: 600;
+//                                                    padding: 0 10px 0 0;
+//                                                    color: $text-darkblue;
+//                                                }
+//
+//                                                .drop_aerrow {
+//                                                    width: auto;
+//                                                    position: relative;
+//                                                    margin-left: 20px;
+//
+//                                                    &:before {
+//                                                        content: '';
+//                                                        position: absolute;
+//                                                        left: 110%;
+//                                                        top: 50%;
+//                                                        width: 0;
+//                                                        height: 0;
+//                                                        border-left: 3px solid transparent;
+//                                                        border-right: 3px solid transparent;
+//                                                        border-top: 3px solid $text-grey;
+//                                                        transform: translate(-50%, -50%);
+//                                                    }
+//                                                }
+//                                            }
+//
+//                                            span {
+//                                                font-size: 10px;
+//                                                font-weight: 400;
+//                                                color: $text-grey;
+//                                                padding: 0 20px;
+//                                            }
+//
+//                                            .traveller_add_block {
+//                                                width: 260px;
+//                                                position: absolute;
+//                                                top: 50%;
+//                                                left: 105%;
+//                                                transform: translateY(-50%);
+//                                                background: $background-white;
+//                                                box-shadow: 0px 3px 15px $shadow-black;
+//                                                padding: 15px;
+//                                                border: 1px solid $text-light-grey;
+//                                                border-radius: 5px;
+//                                                z-index: 99;
+//
+//                                                &:before {
+//                                                    width: 0;
+//                                                    height: 0;
+//                                                    border-top: 9px solid transparent;
+//                                                    border-bottom: 9px solid transparent;
+//                                                    border-right: 9px solid $background-white;
+//                                                    position: absolute;
+//                                                    top: 50%;
+//                                                    left: -9px;
+//                                                    transform: translateY(-50%);
+//                                                    content: '';
+//                                                    z-index: 2;
+//                                                }
+//
+//                                                &:after {
+//                                                    width: 0;
+//                                                    height: 0;
+//                                                    border-top: 10px solid transparent;
+//                                                    border-bottom: 10px solid transparent;
+//                                                    border-right: 10px solid $text-light-grey;
+//                                                    position: absolute;
+//                                                    top: 50%;
+//                                                    left: -10px;
+//                                                    transform: translateY(-50%);
+//                                                    content: '';
+//                                                }
+//
+//                                                ul {
+//                                                    margin: 0;
+//                                                    padding: 0;
+//                                                    list-style: none;
+//
+//                                                    li {
+//                                                        width: 100%;
+//                                                        display: flex;
+//                                                        justify-content: space-between;
+//                                                        align-items: center;
+//                                                        padding: 0 0 20px;
+//
+//                                                        .left {
+//                                                            font-size: 10px;
+//                                                            font-weight: 400;
+//                                                            color: $text-grey;
+//
+//                                                            span {
+//                                                                font-size: 14px;
+//                                                                color: $text-darkblue;
+//                                                                display: block;
+//                                                                padding: 0;
+//                                                            }
+//                                                        }
+//
+//                                                        .right {
+//                                                            width: 100px;
+//                                                            display: flex;
+//                                                            align-items: center;
+//
+//                                                            .qtyminus {
+//                                                                width: 30px;
+//                                                                height: 30px;
+//                                                                background: $background-white;
+//                                                                border: 1px solid $secondary-color;
+//                                                                border-radius: 5px;
+//                                                                color: $secondary-color;
+//                                                                padding: 0;
+//                                                                font-size: 18px;
+//
+//                                                                &.un_active {
+//                                                                    border: 1px solid $text-light-grey;
+//                                                                    color: $text-light-grey;
+//                                                                }
+//                                                            }
+//
+//                                                            .qty {
+//                                                                width: 30px;
+//                                                                height: 30px;
+//                                                                font-size: 20px;
+//                                                                font-weight: 400;
+//                                                                color: $text-darkblue;
+//                                                                border: none;
+//                                                                text-align: center;
+//                                                            }
+//
+//                                                            .qtyplus {
+//                                                                width: 30px;
+//                                                                height: 30px;
+//                                                                background: $background-white;
+//                                                                border: 1px solid $secondary-color;
+//                                                                border-radius: 5px;
+//                                                                color: $secondary-color;
+//                                                                padding: 0;
+//                                                                font-size: 18px;
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                }
+//
+//                                                .flight_cat {
+//                                                    width: 100%;
+//
+//                                                    ul {
+//                                                        display: flex;
+//                                                        flex-wrap: wrap;
+//                                                        align-content: center;
+//                                                        justify-content: space-between;
+//
+//                                                        li {
+//                                                            width: 48%;
+//                                                            margin: 0 0 10px;
+//                                                            padding: 0;
+//
+//                                                            &:last-child {
+//                                                                width: 100%;
+//                                                                margin: 0;
+//                                                            }
+//
+//                                                            a {
+//                                                                line-height: 32px;
+//                                                                width: 100%;
+//                                                                text-align: center;
+//                                                                background: $background-white;
+//                                                                border: 1px solid $text-light-grey;
+//                                                                border-radius: 5px;
+//                                                                font-size: 14px;
+//                                                                color: $text-light-grey;
+//
+//                                                                &:hover {
+//                                                                    background: $secondary-color;
+//                                                                    border: 1px solid $secondary-color;
+//                                                                    color: $text-white;
+//                                                                }
+//
+//                                                                &.active_cat {
+//                                                                    background: $secondary-color;
+//                                                                    border: 1px solid $secondary-color;
+//                                                                    color: $text-white;
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//
+//                        .serch_btn {
+//                            width: 100%;
+//
+//                            button {
+//                                width: auto;
+//                                padding: 10px 25px;
+//                                background: $secondary-color;
+//                                border-radius: 8px;
+//                                border: 1px solid $secondary-color;
+//                                font-size: 20px;
+//                                color: $text-white;
+//                                transition: 0.3s;
+//                                position: relative;
+//                                z-index: 9;
+//                                overflow: hidden;
+//                                white-space: normal;
+//
+//                                img {
+//                                    margin-left: 40px;
+//                                    height: 20px;
+//                                }
+//
+//                                &::before {
+//                                    content: "";
+//                                    position: absolute;
+//                                    top: 0;
+//                                    left: 0;
+//                                    width: 100%;
+//                                    height: 0%;
+//                                    background: $primary-color;
+//                                    z-index: -1;
+//                                    transition: 0.8s;
+//                                    border-radius: 0 0 50% 50%;
+//                                }
+//
+//                                &:hover {
+//                                    border-color: $primary-color;
+//
+//                                    &:before {
+//                                        height: 190%;
+//                                    }
+//                                }
+//
+//                            }
+//
+//                            @media(max-width: 480px) {
+//                                button {
+//                                    padding: 10px 20px;
+//                                    font-size: 16px;
+//
+//                                    img {
+//                                        margin-left: 30px;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    .bnr_right {
+//        width: 100%;
+//        justify-content: flex-end;
+//        display: flex;
+//        flex-wrap: wrap;
+//        align-items: center;
+//        height: 100%;
+//
+//        .bnr_txt {
+//            width: 100%;
+//            text-align: right;
+//
+//            h1 {
+//                font-size: 47px;
+//                color: $text-darkblue;
+//                font-weight: 600;
+//                line-height: 42px;
+//
+//                span {
+//                    color: $primary-color;
+//                }
+//            }
+//
+//            p {
+//                font-size: 28px;
+//                color: $text-darkblue;
+//                font-weight: 500;
+//            }
+//        }
+//
+//        .bnr_im {
+//            position: relative;
+//            top: -90px;
+//            right: 0;
+//
+//            .plane-animation {
+//                -webkit-animation-name: plane-animation;
+//                ! animation-name: plane-animation; 
+//                -webkit-animation-duration: 5s;
+//                animation-duration: 5s;
+//                -webkit-animation-iteration-count: infinite;
+//                animation-iteration-count: infinite;
+//                -webkit-animation-timing-function: linear;
+//                animation-timing-function: linear;
+//            }
+//        }
+//    }
+//}
+
 .home_banner {
     width: 100%;
     position: relative;
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner_bg.svg) no-repeat;
-    background-position: right bottom;
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg) no-repeat;
     background-size: cover;
 
-    .banner_tab {
+    &:before {
         width: 100%;
-        padding: 80px 25px 100px 15px;
-        background: linear-gradient(90deg, rgba(249, 250, 252, 1) 0%, rgba(249, 250, 252, 1) 100%) 0% 0% no-repeat;
-        box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1);
-        position: relative;
-        height: 100%;
-
-        .nav-tabs {
-            flex-wrap: nowrap;
-            border: none;
-
-            .nav-item {
-                display: flex;
-                padding: 0 0 10px;
-                border-top: none;
-                border-right: none;
-                border-left: none;
-                border-bottom: 4px solid $box-border-color;
-                justify-content: center;
-                color: $text-grey;
-
-                img {
-                    margin-right: 10px;
-
-                    &.active-icon {
-                        display: none;
-                    }
-                }
-
-                &.active {
-                    background: transparent;
-                    color: $text-blue;
-                    border-bottom-color: $text-blue;
-
-                    .active-icon {
-                        display: block;
-                    }
-
-                    .default-icon {
-                        display: none;
-                    }
-                }
-
-                &:hover {
-                    background: transparent;
-                    color: $text-blue;
-                    border-bottom-color: $text-blue;
-
-                    .active-icon {
-                        display: block;
-                    }
-
-                    .default-icon {
-                        display: none;
-                    }
-                }
-            }
-        }
-
-        .tab-content {
-            padding: 30px 0 0;
-
-            .flight_tab {
-                .nav-tabs {
-                    margin: 0 0 30px;
-
-                    .nav-item {
-                        padding: 0;
-                        border: none;
-
-                        a {
-                            padding: 5px 15px;
-                            border: 1px solid $tab-border-color;
-                            border-radius: 15px;
-                            margin: 0 20px 0 0;
-                            color: $text-grey;
-                            font-size: 14px;
-                            display: flex;
-
-                            &.active {
-                                background: $tab-active-bg;
-                                color: $secondary-color;
-                                border-color: transparent;
-
-                                .active-icon {
-                                    display: block;
-                                }
-
-                                .default-icon {
-                                    display: none;
-                                }
-                            }
-
-                            &:hover {
-                                background: $tab-active-bg;
-                                color: $secondary-color;
-                                border-color: transparent;
-
-                                .active-icon {
-                                    display: block;
-                                }
-
-                                .default-icon {
-                                    display: none;
-                                }
-                            }
-
-                            .active-icon {
-                                display: none;
-                            }
-                        }
-                    }
-                }
-
-                .tab-content {
-                    padding: 0;
-
-                    .flight_search {
-                        .flight-grid {
-                            padding: 0;
-                            margin: 0;
-                            list-style: none;
-
-                            .grid_box {
-                                margin: 0 0 20px;
-
-                                &.first {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    position: relative;
-
-                                    .flight_form {
-                                        width: 49%;
-
-                                        label {
-                                            width: 100%;
-                                            margin-bottom: 5px;
-                                            font-size: 10px;
-                                            color: $text-grey;
-                                            font-weight: 400;
-                                            padding: 0;
-                                            text-transform: uppercase;
-                                        }
-
-                                        .search_area {
-                                            padding: 15px 0;
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 8px;
-                                            background: $background-white;
-
-                                            input {
-                                                width: 100%;
-                                                border: none;
-                                                height: 35px;
-                                                margin-bottom: 5px;
-                                                font-size: 20px;
-                                                color: $text-darkblue;
-                                                font-weight: 600;
-                                                padding: 0 15px;
-                                            }
-
-                                            span {
-                                                font-size: 10px;
-                                                font-weight: 400;
-                                                color: $text-grey;
-                                                padding: 0 15px;
-                                            }
-                                        }
-                                    }
-
-                                    .flight_to {
-                                        width: 49%;
-
-                                        label {
-                                            width: 100%;
-                                            margin-bottom: 5px;
-                                            font-size: 10px;
-                                            color: $text-grey;
-                                            font-weight: 400;
-                                            padding: 0;
-                                            text-transform: uppercase;
-                                        }
-
-                                        .search_area {
-                                            padding: 15px 0;
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 8px;
-                                            background: $background-white;
-
-                                            input {
-                                                width: 100%;
-                                                border: none;
-                                                height: 35px;
-                                                margin-bottom: 5px;
-                                                font-size: 20px;
-                                                color: $text-darkblue;
-                                                font-weight: 600;
-                                                padding: 0 15px;
-                                            }
-
-                                            span {
-                                                font-size: 10px;
-                                                font-weight: 400;
-                                                color: $text-grey;
-                                                padding: 0 15px;
-                                            }
-                                        }
-                                    }
-
-                                    .switch_btn {
-                                        width: 30px;
-                                        height: 30px;
-                                        background: $background-white;
-                                        border: 1px solid $box-border-color;
-                                        position: absolute;
-                                        top: 60%;
-                                        left: 50%;
-                                        transform: translate(-50%, -50%);
-                                        border-radius: 50%;
-                                        z-index: 1;
-
-                                        img {
-                                            width: 15px;
-                                            position: absolute;
-                                            top: 50%;
-                                            left: 50%;
-                                            transform: translate(-50%, -50%);
-                                        }
-                                    }
-                                }
-
-                                &.secound {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    position: relative;
-
-                                    .date_form {
-                                        width: 50%;
-
-                                        label {
-                                            width: 100%;
-                                            margin-bottom: 5px;
-                                            font-size: 10px;
-                                            color: $text-grey;
-                                            font-weight: 400;
-                                            padding: 0;
-                                            text-transform: uppercase;
-                                        }
-
-                                        .search_area {
-                                            padding: 15px 0;
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 8px 0 0 8px;
-                                            background: $background-white;
-                                            position: relative;
-
-                                            input {
-                                                width: 100%;
-                                                border: none;
-                                                height: 35px;
-                                                margin-bottom: 5px;
-                                                font-size: 18px;
-                                                color: $text-darkblue;
-                                                font-weight: 600;
-                                                padding: 0 15px;
-                                            }
-
-                                            .prev-next {
-                                                width: 60%;
-                                                display: flex;
-                                                padding: 0 0 0 15px;
-                                                justify-content: space-between;
-
-                                                a {
-                                                    font-size: 10px;
-                                                    color: $text-grey;
-                                                }
-                                            }
-
-                                            .date_icon {
-                                                position: absolute;
-                                                top: 50%;
-                                                right: 15px;
-                                                transform: translateY(-50%);
-                                            }
-                                        }
-                                    }
-
-                                    .date_to {
-                                        width: 50%;
-
-                                        label {
-                                            width: 100%;
-                                            margin-bottom: 5px;
-                                            font-size: 10px;
-                                            color: $text-grey;
-                                            font-weight: 400;
-                                            padding: 0;
-                                            text-transform: uppercase;
-                                        }
-
-                                        .search_area {
-                                            padding: 15px 0;
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 0 8px 8px 0;
-                                            background: $background-white;
-                                            border-left: none;
-                                            position: relative;
-
-                                            input {
-                                                width: 100%;
-                                                border: none;
-                                                height: 35px;
-                                                margin-bottom: 5px;
-                                                font-size: 18px;
-                                                color: $text-darkblue;
-                                                font-weight: 600;
-                                                padding: 0 15px;
-                                            }
-
-                                            .prev-next {
-                                                width: 60%;
-                                                display: flex;
-                                                padding: 0 0 0 15px;
-                                                justify-content: space-between;
-
-                                                a {
-                                                    font-size: 10px;
-                                                    color: $text-grey;
-                                                }
-                                            }
-
-                                            .date_icon {
-                                                position: absolute;
-                                                top: 50%;
-                                                right: 15px;
-                                                transform: translateY(-50%);
-                                            }
-                                        }
-                                    }
-                                }
-
-                                &.third {
-                                    .travellers {
-                                        width: 50%;
-
-                                        label {
-                                            width: 100%;
-                                            margin-bottom: 5px;
-                                            font-size: 10px;
-                                            color: $text-grey;
-                                            font-weight: 400;
-                                            padding: 0;
-                                            text-transform: uppercase;
-                                        }
-
-                                        .search_area {
-                                            padding: 15px 0;
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 8px;
-                                            background: $background-white;
-                                            position: relative;
-
-                                            .travel_info {
-                                                width: 100%;
-                                                height: 35px;
-                                                display: flex;
-                                                line-height: 35px;
-                                                font-size: 10px;
-                                                color: $text-darkblue;
-                                                position: relative;
-                                                padding: 0 20px;
-
-                                                &:before {
-                                                    width: 24px;
-                                                    height: 24px;
-                                                    content: "";
-                                                    position: absolute;
-                                                    right: 20px;
-                                                    top: 50%;
-                                                    transform: translateY(-50%);
-                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg)
-                                                        no-repeat;
-                                                }
-
-                                                span {
-                                                    font-size: 20px;
-                                                    font-weight: 600;
-                                                    padding: 0 10px 0 0;
-                                                    color: $text-darkblue;
-                                                }
-
-                                                .drop_aerrow {
-                                                    width: auto;
-                                                    position: relative;
-                                                    margin-left: 20px;
-
-                                                    &:before {
-                                                        content: "";
-                                                        position: absolute;
-                                                        left: 110%;
-                                                        top: 50%;
-                                                        width: 0;
-                                                        height: 0;
-                                                        border-left: 3px solid transparent;
-                                                        border-right: 3px solid transparent;
-                                                        border-top: 3px solid $text-grey;
-                                                        transform: translate(-50%, -50%);
-                                                    }
-                                                }
-                                            }
-
-                                            span {
-                                                font-size: 10px;
-                                                font-weight: 400;
-                                                color: $text-grey;
-                                                padding: 0 20px;
-                                            }
-
-                                            .traveller_add_block {
-                                                width: 260px;
-                                                position: absolute;
-                                                top: 50%;
-                                                left: 105%;
-                                                transform: translateY(-50%);
-                                                background: $background-white;
-                                                box-shadow: 0px 3px 15px $shadow-black;
-                                                padding: 15px;
-                                                border: 1px solid $text-light-grey;
-                                                border-radius: 5px;
-                                                z-index: 99;
-
-                                                &:before {
-                                                    width: 0;
-                                                    height: 0;
-                                                    border-top: 9px solid transparent;
-                                                    border-bottom: 9px solid transparent;
-                                                    border-right: 9px solid $background-white;
-                                                    position: absolute;
-                                                    top: 50%;
-                                                    left: -9px;
-                                                    transform: translateY(-50%);
-                                                    content: "";
-                                                    z-index: 2;
-                                                }
-
-                                                &:after {
-                                                    width: 0;
-                                                    height: 0;
-                                                    border-top: 10px solid transparent;
-                                                    border-bottom: 10px solid transparent;
-                                                    border-right: 10px solid $text-light-grey;
-                                                    position: absolute;
-                                                    top: 50%;
-                                                    left: -10px;
-                                                    transform: translateY(-50%);
-                                                    content: "";
-                                                }
-
-                                                ul {
-                                                    margin: 0;
-                                                    padding: 0;
-                                                    list-style: none;
-
-                                                    li {
-                                                        width: 100%;
-                                                        display: flex;
-                                                        justify-content: space-between;
-                                                        align-items: center;
-                                                        padding: 0 0 20px;
-
-                                                        .left {
-                                                            font-size: 10px;
-                                                            font-weight: 400;
-                                                            color: $text-grey;
-
-                                                            span {
-                                                                font-size: 14px;
-                                                                color: $text-darkblue;
-                                                                display: block;
-                                                                padding: 0;
-                                                            }
-                                                        }
-
-                                                        .right {
-                                                            width: 100px;
-                                                            display: flex;
-                                                            align-items: center;
-
-                                                            .qtyminus {
-                                                                width: 30px;
-                                                                height: 30px;
-                                                                background: $background-white;
-                                                                border: 1px solid $secondary-color;
-                                                                border-radius: 5px;
-                                                                color: $secondary-color;
-                                                                padding: 0;
-                                                                font-size: 18px;
-
-                                                                &.un_active {
-                                                                    border: 1px solid $text-light-grey;
-                                                                    color: $text-light-grey;
-                                                                    cursor: not-allowed;
-                                                                }
-
-                                                                &.disable_btn {
-                                                                    cursor: not-allowed;
-                                                                }
-                                                            }
-
-                                                            .qty {
-                                                                width: 30px;
-                                                                height: 30px;
-                                                                font-size: 20px;
-                                                                font-weight: 400;
-                                                                color: $text-darkblue;
-                                                                border: none;
-                                                                text-align: center;
-                                                            }
-
-                                                            .qtyplus {
-                                                                width: 30px;
-                                                                height: 30px;
-                                                                background: $background-white;
-                                                                border: 1px solid $secondary-color;
-                                                                border-radius: 5px;
-                                                                color: $secondary-color;
-                                                                padding: 0;
-                                                                font-size: 18px;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                .flight_cat {
-                                                    width: 100%;
-
-                                                    ul {
-                                                        display: flex;
-                                                        flex-wrap: wrap;
-                                                        align-content: center;
-                                                        justify-content: space-between;
-
-                                                        li {
-                                                            width: 48%;
-                                                            margin: 0 0 10px;
-                                                            padding: 0;
-
-                                                            &:last-child {
-                                                                width: 100%;
-                                                                margin: 0;
-                                                            }
-
-                                                            a {
-                                                                line-height: 32px;
-                                                                width: 100%;
-                                                                text-align: center;
-                                                                background: $background-white;
-                                                                border: 1px solid $text-light-grey;
-                                                                border-radius: 5px;
-                                                                font-size: 14px;
-                                                                color: $text-light-grey;
-
-                                                                &:hover {
-                                                                    background: $secondary-color;
-                                                                    border: 1px solid $secondary-color;
-                                                                    color: $text-white;
-                                                                }
-
-                                                                &.active_cat {
-                                                                    background: $secondary-color;
-                                                                    border: 1px solid $secondary-color;
-                                                                    color: $text-white;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .serch_btn {
-                            width: 100%;
-
-                            button {
-                                width: auto;
-                                padding: 10px 25px;
-                                background: $secondary-color;
-                                border-radius: 8px;
-                                border: 1px solid $secondary-color;
-                                font-size: 20px;
-                                color: $text-white;
-                                transition: 0.3s;
-                                position: relative;
-                                // z-index: 9;
-                                z-index: 0;
-                                overflow: hidden;
-                                white-space: normal;
-
-                                img {
-                                    margin-left: 40px;
-                                    height: 20px;
-                                }
-
-                                &::before {
-                                    content: "";
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 0%;
-                                    background: $primary-color;
-                                    z-index: -1;
-                                    transition: 0.8s;
-                                    border-radius: 0 0 50% 50%;
-                                }
-
-                                &:hover {
-                                    border-color: $primary-color;
-
-                                    &:before {
-                                        height: 190%;
-                                    }
-                                }
-                            }
-
-                            @media (max-width: 480px) {
-                                button {
-                                    padding: 10px 20px;
-                                    font-size: 16px;
-
-                                    img {
-                                        margin-left: 30px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        height: 180px;
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner_bottom.svg) repeat-x;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        content: '';
     }
 
-    .bnr_right {
-        width: 100%;
-        justify-content: flex-end;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        height: 100%;
 
-        .bnr_txt {
-            width: 100%;
-            text-align: right;
+    .banner_inner {
+        position: relative;
+        top: 90px;
+        left: 0;
+        transform: none;
 
-            h1 {
-                font-size: 47px;
-                color: $text-darkblue;
-                font-weight: 600;
-                line-height: 42px;
+
+
+
+
+        .banner_text {
+            width: auto;
+
+            h2 {
+                font-size: 50px;
+                color: $text-white;
+                font-weight: 400;
 
                 span {
                     color: $primary-color;
+                    font-weight: 700;
+                }
+
+                @media(max-width: 767px) {
+                    font-size: 30px;
                 }
             }
 
             p {
-                font-size: 28px;
-                color: $text-darkblue;
-                font-weight: 500;
+                font-size: 29px;
+                color: $text-white;
+
+                @media(max-width: 767px) {
+                    font-size: 19px;
+                }
+
+                @media(max-width: 599px) {
+                    font-size: 16px;
+                }
             }
         }
 
-        .bnr_im {
-            position: relative;
-            top: -90px;
-            right: 0;
+        .banner_tab {
+            width: 100%;
+            padding: 80px 0 115px;
 
-            .plane-animation {
-                -webkit-animation-name: plane-animation;
-                /*! animation-name: plane-animation; */
-                -webkit-animation-duration: 5s;
-                animation-duration: 5s;
-                -webkit-animation-iteration-count: infinite;
-                animation-iteration-count: infinite;
-                -webkit-animation-timing-function: linear;
-                animation-timing-function: linear;
+            @media(max-width: 1199px) {
+                margin-top: 60px;
+            }
+
+            @media(max-width: 767px) {
+                margin-top: 50px;
+            }
+
+            .nav-tabs {
+                border: none;
+                display: inline-flex;
+                flex-wrap: nowrap;
+
+                @media(max-width: 480px) {
+                    display: inline-flex;
+                }
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    padding: 20px 60px 20px 30px;
+                    background: $primary-color;
+                    border: none;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #ffffff;
+                    text-decoration: none;
+                    border-radius: 0;
+
+
+                    img {
+                        margin-right: 15px;
+                    }
+
+                    .default-icon {
+                        display: block;
+                    }
+
+                    .active-icon {
+                        display: none;
+                    }
+
+                    &:first-child {
+                        border-radius: 20px 0 0 0;
+                    }
+
+                    &:last-child {
+                        border-radius: 0 20px 0 0;
+                    }
+
+                    &.active {
+                        background: $background-white;
+                        color: $active-tab-text;
+
+                        .active-icon {
+                            display: block;
+                        }
+
+                        .default-icon {
+                            display: none;
+                        }
+                    }
+
+                    @media(max-width: 767px) {
+                        padding: 20px;
+                    }
+
+                    @media(max-width: 480px) {
+                        img {
+                            margin-right: 0;
+                        }
+
+                        span {
+                            display: none;
+                        }
+                    }
+                }
+
+            }
+
+            .tab-content {
+                width: 100%;
+                padding: 20px 30px 55px;
+                background: $background-white;
+                border-radius: 0 20px 20px 20px;
+                box-shadow: 0px 50px 50px $shadow-black;
+
+                @media(max-width: 480px) {
+                    padding: 20px 10px 40px;
+                }
+
+                .flight_tab {
+                    width: 100%;
+
+                    .nav-tabs {
+                        width: 100%;
+                        border: none;
+                        margin-bottom: 20px;
+
+                        li {
+                            display: inline-block;
+                            margin: 0 20px 0 0;
+
+                            a {
+                                display: flex;
+                                align-items: center;
+                                line-height: 32px;
+                                border-radius: 16px;
+                                padding: 0 8px;
+                                border: 1px solid $tab-border-color;
+                                background: $tab-bg;
+                                color: $tab-text-color;
+                                text-decoration: none;
+                                font-size: 14px;
+                                font-weight: 500;
+                                letter-spacing: 0.28px;
+
+
+                                img {
+                                    margin-right: 5px;
+                                    width: 18px;
+                                    height: 18px;
+                                }
+
+                                .active-icon {
+                                    display: none;
+                                }
+
+                                &.active {
+                                    color: $secondary-color;
+                                    background: $tab-active-bg;
+                                    border: 1px solid $tab-active-bg;
+
+                                    .active-icon {
+                                        display: block;
+                                    }
+
+                                    .default-icon {
+                                        display: none;
+                                    }
+                                }
+
+                                @media(max-width: 480px) {
+                                    font-size: 10px;
+
+                                    span {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+
+                        @media(max-width: 480px) {
+                            flex-wrap: wrap;
+
+                            li {
+                                margin: 0 5px 5px 0;
+
+                                &:last-child {
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+
+                    .tab-content {
+                        box-shadow: none;
+                        padding: 0;
+
+                        .tab-pane {
+
+                            .flight_search {
+                                position: relative;
+
+                                .flight-grid {
+                                    width: 100%;
+                                    display: flex;
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+
+                                    @media(max-width: 991px) {
+                                        flex-wrap: wrap;
+                                    }
+
+                                    .grid_box {
+                                        padding: 0 5px;
+
+                                        &.first {
+                                            width: 45%;
+                                            display: flex;
+                                            justify-content: space-between;
+                                            position: relative;
+
+                                            label {
+                                                width: 100%;
+                                                margin-bottom: 0px;
+                                                font-size: 10px;
+                                                color: $text-grey;
+                                                font-weight: 400;
+                                                padding: 0 15px;
+                                                text-transform: uppercase;
+                                            }
+
+                                            .search_area {
+                                                padding: 15px 0;
+                                                border: 1px solid $box-border-color;
+                                                border-radius: 8px;
+                                                background: $background-white;
+
+                                                input {
+                                                    width: 100%;
+                                                    border: none;
+                                                    height: 30px;
+                                                    margin-bottom: 0px;
+                                                    font-size: 20px;
+                                                    color: $text-darkblue;
+                                                    font-weight: 600;
+                                                    padding: 0 15px;
+                                                }
+
+                                                span {
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    color: $text-grey;
+                                                    padding: 0 15px;
+                                                }
+                                            }
+
+                                            .flight_form {
+                                                width: 49%;
+                                            }
+
+                                            .flight_to {
+                                                width: 49%;
+                                            }
+
+                                            .switch_btn {
+                                                width: 30px;
+                                                height: 30px;
+                                                background: $background-white;
+                                                border: 1px solid $box-border-color;
+                                                position: absolute;
+                                                top: 60%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%);
+                                                border-radius: 50%;
+
+                                                img {
+                                                    width: 15px;
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%);
+                                                }
+                                            }
+                                        }
+
+                                        &.secound {
+                                            width: 35%;
+                                            display: flex;
+                                            justify-content: space-between;
+                                            position: relative;
+
+                                            label {
+                                                width: 100%;
+                                                margin-bottom: 0px;
+                                                font-size: 10px;
+                                                color: $text-grey;
+                                                font-weight: 400;
+                                                padding: 0 15px;
+                                                text-transform: uppercase;
+                                            }
+
+                                            .search_area {
+                                                padding: 15px 0;
+                                                border: 1px solid $box-border-color;
+                                                border-radius: 8px;
+                                                background: $background-white;
+                                                position: relative;
+
+                                                input {
+                                                    width: 100%;
+                                                    border: none;
+                                                    height: 35px;
+                                                    margin-bottom: 1px;
+                                                    font-size: 18px;
+                                                    color: $text-darkblue;
+                                                    font-weight: 600;
+                                                    padding: 0 15px;
+                                                }
+
+                                                .prev-next {
+                                                    width: 60%;
+                                                    display: flex;
+                                                    padding: 0 0 0 15px;
+                                                    justify-content: space-between;
+
+                                                    a {
+                                                        font-size: 10px;
+                                                        color: $text-grey;
+                                                    }
+                                                }
+
+                                                .date_icon {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    right: 15px;
+                                                    transform: translateY(-50%);
+                                                }
+                                            }
+
+                                            .date_form {
+                                                width: 50%;
+
+                                                .search_area {
+                                                    border-radius: 8px 0 0 8px;
+                                                }
+                                            }
+
+                                            .date_to {
+                                                width: 50%;
+
+                                                .search_area {
+                                                    border-radius: 0 8px 8px 0;
+                                                }
+                                            }
+                                        }
+
+
+                                        &.third {
+                                            width: 20%;
+                                            padding-right: 0;
+
+                                            .travellers {
+                                                width: 100%;
+
+                                                label {
+                                                    width: 100%;
+                                                    margin-bottom: 0px;
+                                                    font-size: 10px;
+                                                    color: $text-grey;
+                                                    font-weight: 400;
+                                                    padding: 0 15px;
+                                                    text-transform: uppercase;
+                                                }
+
+                                                .search_area {
+                                                    padding: 15px 0;
+                                                    border: 1px solid $box-border-color;
+                                                    border-radius: 8px;
+                                                    background: $background-white;
+                                                    position: relative;
+
+                                                    .travel_info {
+                                                        width: 100%;
+                                                        height: 30px;
+                                                        display: flex;
+                                                        line-height: 30px;
+                                                        font-size: 10px;
+                                                        color: $text-darkblue;
+                                                        position: relative;
+                                                        padding: 0 20px;
+
+                                                        &:before {
+                                                            width: 24px;
+                                                            height: 24px;
+                                                            content: '';
+                                                            position: absolute;
+                                                            right: 20px;
+                                                            top: 50%;
+                                                            transform: translateY(-50%);
+                                                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg) no-repeat;
+                                                        }
+
+                                                        span {
+                                                            font-size: 20px;
+                                                            font-weight: 600;
+                                                            padding: 0 10px 0 0;
+                                                            color: $text-darkblue;
+                                                        }
+
+                                                        .drop_aerrow {
+                                                            width: auto;
+                                                            position: relative;
+                                                            margin-left: 20px;
+
+                                                            &:before {
+                                                                content: '';
+                                                                position: absolute;
+                                                                left: 110%;
+                                                                top: 50%;
+                                                                width: 0;
+                                                                height: 0;
+                                                                border-left: 3px solid transparent;
+                                                                border-right: 3px solid transparent;
+                                                                border-top: 3px solid $text-grey;
+                                                                transform: translate(-50%, -50%);
+                                                            }
+                                                        }
+                                                    }
+
+                                                    span {
+                                                        font-size: 10px;
+                                                        font-weight: 400;
+                                                        color: $text-grey;
+                                                        padding: 0 20px;
+                                                    }
+
+                                                    .traveller_add_block {
+                                                        width: 260px;
+                                                        position: absolute;
+                                                        top: 105%;
+                                                        right: 0;
+                                                        background: $background-white;
+                                                        box-shadow: 0px 3px 15px $shadow-black;
+                                                        padding: 15px;
+                                                        border: 1px solid $text-light-grey;
+                                                        border-radius: 5px;
+                                                        z-index: 99;
+
+                                                        &:before {
+                                                            width: 0;
+                                                            height: 0;
+                                                            border-left: 9px solid transparent;
+                                                            border-right: 9px solid transparent;
+                                                            border-bottom: 9px solid $background-white;
+                                                            position: absolute;
+                                                            top: -9px;
+                                                            right: 21px;
+                                                            content: '';
+                                                            z-index: 2;
+                                                        }
+
+                                                        &:after {
+                                                            width: 0;
+                                                            height: 0;
+                                                            border-left: 10px solid transparent;
+                                                            border-right: 10px solid transparent;
+                                                            border-bottom: 10px solid $text-light-grey;
+                                                            position: absolute;
+                                                            top: -10px;
+                                                            right: 20px;
+                                                            content: '';
+                                                        }
+
+                                                        ul {
+                                                            margin: 0;
+                                                            padding: 0;
+                                                            list-style: none;
+
+                                                            li {
+                                                                width: 100%;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center;
+                                                                padding: 0 0 20px;
+
+                                                                .left {
+                                                                    font-size: 10px;
+                                                                    font-weight: 400;
+                                                                    color: $text-grey;
+
+                                                                    span {
+                                                                        font-size: 14px;
+                                                                        color: $text-darkblue;
+                                                                        display: block;
+                                                                        padding: 0;
+                                                                    }
+                                                                }
+
+                                                                .right {
+                                                                    width: 100px;
+                                                                    display: flex;
+                                                                    align-items: center;
+
+                                                                    .qtyminus {
+                                                                        width: 30px;
+                                                                        height: 30px;
+                                                                        background: $background-white;
+                                                                        border: 1px solid $secondary-color;
+                                                                        border-radius: 5px;
+                                                                        color: $secondary-color;
+                                                                        padding: 0;
+                                                                        font-size: 18px;
+
+                                                                        &.un_active {
+                                                                            border: 1px solid $text-light-grey;
+                                                                            color: $text-light-grey;
+                                                                        }
+                                                                    }
+
+                                                                    .qty {
+                                                                        width: 30px;
+                                                                        height: 30px;
+                                                                        font-size: 20px;
+                                                                        font-weight: 400;
+                                                                        color: $text-darkblue;
+                                                                        border: none;
+                                                                        text-align: center;
+                                                                    }
+
+                                                                    .qtyplus {
+                                                                        width: 30px;
+                                                                        height: 30px;
+                                                                        background: $background-white;
+                                                                        border: 1px solid $secondary-color;
+                                                                        border-radius: 5px;
+                                                                        color: $secondary-color;
+                                                                        padding: 0;
+                                                                        font-size: 18px;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                                        .flight_cat {
+                                                            width: 100%;
+
+                                                            ul {
+                                                                display: flex;
+                                                                flex-wrap: wrap;
+                                                                align-content: center;
+                                                                justify-content: space-between;
+
+                                                                li {
+                                                                    width: 48%;
+                                                                    margin: 0 0 10px;
+                                                                    padding: 0;
+
+                                                                    &:last-child {
+                                                                        width: 100%;
+                                                                        margin: 0;
+                                                                    }
+
+                                                                    a {
+                                                                        line-height: 32px;
+                                                                        width: 100%;
+                                                                        text-align: center;
+                                                                        background: $background-white;
+                                                                        border: 1px solid $text-light-grey;
+                                                                        border-radius: 5px;
+                                                                        font-size: 14px;
+                                                                        color: $text-light-grey;
+
+                                                                        &:hover {
+                                                                            background: $secondary-color;
+                                                                            border: 1px solid $secondary-color;
+                                                                            color: $text-white;
+                                                                        }
+
+                                                                        &.active_cat {
+                                                                            background: $secondary-color;
+                                                                            border: 1px solid $secondary-color;
+                                                                            color: $text-white;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .serch_btn {
+                                    width: 100%;
+                                    text-align: right;
+                                    position: absolute;
+                                    bottom: -75px;
+                                    right: 0;
+
+                                    button {
+                                        width: auto;
+                                        padding: 10px 25px;
+                                        background: $primary-color;
+                                        border-radius: 8px;
+                                        border: none;
+                                        font-size: 20px;
+                                        color: $text-white;
+                                        transition: 0.3s;
+                                        position: relative;
+                                        z-index: 9;
+                                        overflow: hidden;
+                                        white-space: normal;
+
+                                        img {
+                                            margin-left: 40px;
+                                            height: 20px;
+                                        }
+
+                                        &::before {
+                                            content: "";
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 0%;
+                                            background: $secondary-color;
+                                            z-index: -1;
+                                            transition: 0.8s;
+                                            border-radius: 0 0 50% 50%;
+                                        }
+
+                                        &:hover {
+
+                                            &:before {
+                                                height: 190%;
+                                            }
+                                        }
+
+                                    }
+
+                                    @media(max-width: 480px) {
+
+                                        bottom: -60px;
+
+                                        button {
+                                            padding: 10px 20px;
+                                            font-size: 16px;
+
+                                            img {
+                                                margin-left: 30px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -1607,13 +2376,13 @@ select {
 
     h2 {
         font-size: 52px;
-        color: $secondary-color;
+        color: $text-darkblue;
         font-weight: 600;
 
-        span {
-            display: inline-block;
-            color: $text-darkblue;
-        }
+        //        span {
+        //            display: inline-block;
+        //            color: $text-darkblue;
+        //        }
     }
 
     p {
@@ -1626,19 +2395,22 @@ select {
     }
 }
 
+
 //<!-- Start Our Featured List Section css -->
 .our_featured_list {
     width: 100%;
     padding: 75px 0px 100px;
     background: $background-white;
 
-    @media (max-width: 1199px) {
+    @media(max-width: 1199px) {
         padding: 200px 15px 100px;
     }
 
-    @media (max-width: 767px) {
+    @media(max-width: 767px) {
         padding: 170px 15px 60px;
     }
+
+
 
     .featured_list {
         width: 100%;
@@ -1681,7 +2453,7 @@ select {
                             position: absolute;
                             top: 25px;
                             left: 25px;
-                            background: $secondary-color;
+                            background: $btn-bg;
                             border-radius: 8px;
                             padding: 0px 12px;
                             display: flex;
@@ -1739,7 +2511,7 @@ select {
                         bottom: -10px;
                         background: $box-border-color;
                         border-radius: 20px;
-                        content: "";
+                        content: '';
                         z-index: -1;
                     }
                 }
@@ -1774,7 +2546,7 @@ select {
                         }
                     }
 
-                    @media (max-width: 992px) {
+                    @media(max-width: 992px) {
                         left: -25px;
                     }
                 }
@@ -1795,7 +2567,7 @@ select {
                         }
                     }
 
-                    @media (max-width: 992px) {
+                    @media(max-width: 992px) {
                         right: -25px;
                     }
                 }
@@ -1806,31 +2578,19 @@ select {
 
 //<!-- Close Our Featured List Section css -->
 
+
 //<!-- Start Partial Payment Section css -->
 .partial_payment {
-    padding: 50px 0;
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/partial_payment_bg.png) no-repeat;
+    padding: 150px 0;
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/partial_payment_bg.jpg) no-repeat;
     background-size: cover;
     position: relative;
 
-    &:before {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(270deg, $gradient-lightblue 0%, $gradient-darkblue 100%) 0% 0% no-repeat;
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        opacity: 0.7;
-    }
 
-    .row {
-        align-items: center;
-    }
 
     .partial_payment_info {
         padding: 50px;
-        background: $bg-lightwhite;
+        background: $bg-lightblue;
         border-radius: 20px;
 
         h6 {
@@ -1855,7 +2615,7 @@ select {
             width: 100%;
             font-size: 15px;
             color: $text-white;
-            font-weight: 300;
+            font-weight: 700;
 
             p {
                 margin: 0 0 15px;
@@ -1868,17 +2628,67 @@ select {
 
         .how_work {
             width: 100%;
-            margin: 35px 0 0;
+            margin: 25px 0 0;
+
+            span {
+                font-size: 20px;
+                color: $text-white;
+                font-weight: 600;
+            }
+
+            p {
+                width: 100%;
+                margin: 15px 0;
+                font-size: 15px;
+                color: $text-white;
+                font-weight: 700;
+
+                span {
+                    font-size: 15px;
+                }
+            }
+
+            ul {
+                margin: 0 0 40px;
+                padding: 0;
+
+                li {
+                    display: inline-block;
+                    padding: 0 40px 0 20px;
+                    font-size: 18px;
+                    color: $text-yellow;
+                    font-weight: 600;
+                    position: relative;
+
+                    &:before {
+                        position: absolute;
+                        top: 0;
+                        left: -7px;
+                        content: "\f00c";
+                        font-family: FontAwesome;
+                        font-weight: normal;
+                    }
+
+                    &:last-child {
+                        padding-right: 0;
+                    }
+
+                    @media(min-width: 991px) {
+                        padding: 0 30px 0 20px;
+                    }
+                }
+            }
 
             .learn_btn {
                 display: inline-block;
                 line-height: 50px;
                 padding: 0 25px;
                 font-size: 20px;
+                letter-spacing: 0.4px;
                 color: $text-white;
-                font-weight: 300;
+                font-weight: 700;
                 border-radius: 8px;
-                background: $secondary-color;
+                background: $text-lightblue;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
@@ -1911,22 +2721,10 @@ select {
             }
         }
     }
-
-    .how_work_partical_payment {
-        h3 {
-            font-size: 52px;
-            color: $text-white;
-            margin: 0 0 30px;
-            font-weight: 600;
-
-            span {
-                color: $text-yellow;
-            }
-        }
-    }
 }
 
 //<!-- Close Partial Payment Section css -->
+
 
 //<!-- Start Deals section css -->
 .deal_sec {
@@ -1934,287 +2732,270 @@ select {
     padding: 100px 0;
     background: $background-white;
 
-    @media (max-width: 767px) {
+    @media(max-width: 767px) {
         padding: 70px 0;
+    }
+
+    .section_title {
+        margin: 0 0 50px;
     }
 
     .deal_listing {
         width: 100%;
-        display: flex;
-        margin: 40px 0 0;
-        padding: 0;
-        list-style: none;
 
-        @media (max-width: 991px) {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
 
-        li {
-            width: 33.33%;
-            padding: 0 15px;
+        .deals_slid {
             position: relative;
 
-            @media (max-width: 991px) {
-                width: 50%;
-                padding: 0 10px;
-                margin-bottom: 20px;
+            .slick-list {
+                padding: 0 0 10px;
             }
 
-            @media (max-width: 767px) {
-                width: 70%;
-                padding: 0 10px;
-                margin-bottom: 20px;
-            }
+            .slick-slide {
+                margin: 0 15px;
 
-            @media (max-width: 480px) {
-                width: 100%;
-            }
+                .deal_block {
+                    width: 100%;
+                    border-radius: 20px;
+                    position: relative;
 
-            .deal_block {
-                width: 100%;
-                border-radius: 20px;
-                position: relative;
-                overflow: hidden;
-
-                a {
-                    img {
+                    a {
+                        overflow: hidden;
+                        position: relative;
+                        z-index: 2;
                         width: 100%;
+                        display: inline-block;
                         border-radius: 20px;
-                        transform: scale(1);
-                        transition: 1s;
-                    }
 
-                    .info_top {
-                        width: auto;
-                        position: absolute;
-                        top: 25px;
-                        left: 25px;
-                        background: $secondary-color;
-                        border-radius: 8px;
-                        padding: 0px 12px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        .start_label {
-                            width: 30px;
-                            font-size: 10px;
-                            color: $text-white;
-                        }
-
-                        .start_price {
-                            width: auto;
-                            font-size: 10px;
-                            color: $text-white;
-                            padding: 0 0 0 10px;
-
-                            span {
-                                font-size: 24px;
-                                color: $text-white;
-                                font-weight: 600;
-                            }
-                        }
-                    }
-
-                    .box_overlay {
-                        width: 100%;
-                        height: 60%;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        background: linear-gradient(180deg, $bg-black-gradient 0%, $bg-lightblack-gradient 100%) 0% 0%
-                            no-repeat;
-                    }
-
-                    .deal_info {
-                        width: 100%;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        padding: 20px;
-
-                        h3 {
-                            font-size: 28px;
-                            color: $text-white;
-                            font-weight: 600;
-                            margin-bottom: 5px;
-                        }
-
-                        p {
-                            font-size: 14px;
-                            color: $text-white;
-                            font-weight: 500;
-                            margin: 0;
-                        }
-
-                        .rating_price {
+                        img {
                             width: 100%;
+                            border-radius: 20px;
+                            transform: scale(1);
+                            transition: 1s;
+                        }
+
+                        .info_top {
+                            width: auto;
+                            position: absolute;
+                            top: 25px;
+                            left: 25px;
+                            background: $btn-bg;
+                            border-radius: 8px;
+                            padding: 0px 12px;
                             display: flex;
-                            justify-content: space-between;
                             align-items: center;
-                            margin: 8px 0 15px;
+                            justify-content: center;
 
-                            .rating {
-                                width: 50%;
-                                margin: 0;
-                                padding: 0;
-                                list-style: none;
+                            .start_label {
+                                width: 30px;
+                                font-size: 10px;
+                                color: $text-white;
+                            }
 
-                                li {
-                                    width: auto;
-                                    display: inline-block;
-                                    padding: 0 5px 0 0;
-                                    color: $review-color;
-                                    margin: 0;
+                            .start_price {
+                                width: auto;
+                                font-size: 10px;
+                                color: $text-white;
+                                padding: 0 0 0 10px;
+
+                                span {
+                                    font-size: 24px;
+                                    color: $text-white;
+                                    font-weight: 600;
                                 }
                             }
                         }
 
-                        .price {
+                        .box_overlay {
                             width: 100%;
-                            text-align: right;
-                            font-size: 12px;
-                            color: $text-white;
-                            display: flex;
-                            justify-content: space-between;
-                            margin: 0 0 15px;
+                            height: 60%;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            background: linear-gradient(180deg, $bg-black-gradient 0%, $bg-lightblack-gradient 100%) 0% 0% no-repeat;
+                            border-radius: 20px;
+                        }
 
-                            .reg_price {
-                                width: 50%;
+                        .deal_info {
+                            width: 100%;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            padding: 20px;
+
+                            h3 {
+                                font-size: 28px;
+                                color: $text-white;
+                                font-weight: 600;
+                                margin-bottom: 5px;
+                            }
+
+                            p {
+                                font-size: 14px;
+                                color: $text-white;
+                                font-weight: 500;
+                                margin: 0;
+                            }
+
+                            .rating_price {
+                                width: 100%;
                                 display: flex;
-                                align-items: baseline;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin: 8px 0 15px;
 
-                                span {
-                                    font-size: 20px;
-                                    font-weight: 600;
-                                    position: relative;
+                                .rating {
+                                    width: 50%;
+                                    margin: 0;
+                                    padding: 0;
+                                    list-style: none;
 
-                                    &:before {
-                                        width: 100%;
-                                        height: 4px;
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 0;
-                                        transform: translateY(-50%);
-                                        content: "";
-                                        background: $secondary-color;
+                                    li {
+                                        width: auto;
+                                        display: inline-block;
+                                        padding: 0 5px 0 0;
+                                        color: $review-color;
+                                        margin: 0;
                                     }
                                 }
                             }
 
-                            .offer_price {
-                                width: 50%;
+                            .price {
+                                width: 100%;
+                                text-align: right;
+                                font-size: 12px;
+                                color: $text-white;
                                 display: flex;
-                                padding: 0 0;
-                                align-items: center;
-                                justify-content: flex-end;
+                                justify-content: space-between;
 
-                                .price_label {
-                                    width: auto;
-                                    font-size: 10px;
-                                    color: $text-white;
-                                }
-
-                                .price_day {
-                                    width: auto;
-                                    font-size: 10px;
-                                    color: $text-white;
-                                    padding: 0 0 0 10px;
+                                .reg_price {
+                                    width: 50%;
+                                    display: flex;
+                                    align-items: baseline;
 
                                     span {
                                         font-size: 20px;
-                                        color: $text-yellow;
                                         font-weight: 600;
+                                        position: relative;
+
+                                        &:before {
+                                            width: 100%;
+                                            height: 3px;
+                                            position: absolute;
+                                            top: 50%;
+                                            left: 0;
+                                            transform: translateY(-50%);
+                                            content: '';
+                                            background: $secondary-color;
+                                        }
+                                    }
+                                }
+
+                                .offer_price {
+                                    width: 50%;
+                                    display: flex;
+                                    padding: 0 0;
+                                    align-items: center;
+                                    justify-content: flex-end;
+
+                                    .price_label {
+                                        width: auto;
+                                        font-size: 10px;
+                                        color: $text-white;
+
+                                    }
+
+                                    .price_day {
+                                        width: auto;
+                                        font-size: 10px;
+                                        color: $text-white;
+                                        padding: 0 0 0 10px;
+
+                                        span {
+                                            font-size: 20px;
+                                            color: $text-yellow;
+                                            font-weight: 600;
+                                        }
                                     }
                                 }
                             }
                         }
 
-                        .block_btm {
-                            width: 100%;
-                            display: flex;
-                            padding: 3px 15px;
-                            background: $background-white;
-                            border: 1px solid $secondary-color;
-                            border-radius: 8px;
-
-                            .offer_start {
-                                width: 100%;
-                                display: flex;
-                                align-items: baseline;
-                                justify-content: center;
-
-                                .start_label {
-                                    width: auto;
-                                    font-size: 12px;
-                                    color: $text-grey;
-                                }
-
-                                .offer_day {
-                                    width: auto;
-                                    font-size: 12px;
-                                    color: $text-grey;
-                                    padding: 0 0 0 10px;
-
-                                    span {
-                                        font-size: 24px;
-                                        color: $secondary-color;
-                                        font-weight: 600;
-                                    }
-                                }
-                            }
-
-                            @media (max-width: 1199px) {
-                                flex-wrap: wrap;
-
-                                .offer_price {
-                                    width: 100%;
-                                    justify-content: center;
-                                    padding: 0;
-                                }
-
-                                .offer_start {
-                                    width: 100%;
-                                    justify-content: center;
-                                }
-                            }
-
-                            @media (max-width: 360px) {
-                                flex-wrap: wrap;
-
-                                .offer_price {
-                                    width: 100%;
-                                    justify-content: center;
-                                    padding: 0;
-                                }
-
-                                .offer_start {
-                                    width: 100%;
-                                    justify-content: center;
-                                }
+                        &:hover {
+                            img {
+                                transform: scale(1.2);
                             }
                         }
                     }
 
-                    &:hover {
-                        img {
-                            transform: scale(1.2);
-                        }
+                    &:after {
+                        width: 90%;
+                        height: 90%;
+                        position: absolute;
+                        left: 5%;
+                        bottom: -5px;
+                        background: $box-border-color;
+                        border-radius: 20px;
+                        content: '';
+                        z-index: -1;
                     }
                 }
             }
 
-            &:after {
-                width: 80%;
-                height: 80%;
+            .slick-arrow {
                 position: absolute;
-                left: 10%;
-                bottom: -10px;
-                background: $box-border-color;
-                border-radius: 20px;
-                content: "";
-                z-index: -1;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 35px;
+                height: 35px;
+                background: $background-white;
+                box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+                font-size: 0;
+                border: none;
+                border-radius: 8px;
+
+                &.slick-prev {
+                    left: -50px;
+                    position: absolute;
+
+                    &:before {
+                        content: "\f104";
+                        font-family: FontAwesome;
+                        font-size: 24px;
+                        color: $text-light-grey;
+                    }
+
+                    &:hover {
+                        &:before {
+                            color: $secondary-color;
+                        }
+                    }
+
+                    @media(max-width: 992px) {
+                        left: -25px;
+                    }
+                }
+
+                &.slick-next {
+                    right: -50px;
+
+                    &:before {
+                        content: "\f105";
+                        font-family: FontAwesome;
+                        font-size: 24px;
+                        color: $text-light-grey;
+                    }
+
+                    &:hover {
+                        &:before {
+                            color: $secondary-color;
+                        }
+                    }
+
+                    @media(max-width: 992px) {
+                        right: -25px;
+                    }
+                }
             }
         }
     }
@@ -2225,13 +3006,13 @@ select {
 //<!-- Start User Benefits section css -->
 .user_benefits {
     width: 100%;
-    padding: 100px 75px 70px;
+    padding: 100px 0;
     background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.png) no-repeat;
     background-size: cover;
     background-attachment: fixed;
     position: relative;
 
-    @media (max-width: 767px) {
+    @media(max-width: 767px) {
         padding: 70px 15px 70px;
     }
 
@@ -2243,23 +3024,21 @@ select {
         left: 0;
         background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/gradient_bg-im.svg) no-repeat;
         background-size: cover;
-        content: "";
+        content: '';
     }
 
+
     .user_benefits_txt {
-        width: 100%;
+        width: 660px;
+        max-width: 100%;
         position: relative;
         z-index: 9;
+        margin: 0 auto 40px;
+        text-align: center;
 
-        @media (max-width: 991px) {
+        @media(max-width: 991px) {
             text-align: center;
             margin-bottom: 30px;
-        }
-
-        span {
-            font-size: 20px;
-            color: $text-white;
-            font-weight: 600;
         }
 
         h2 {
@@ -2268,17 +3047,8 @@ select {
             font-weight: 600;
             margin: 0 0 10px;
 
-            span {
-                font-size: 52px;
-                color: $text-yellow;
-            }
-
-            @media (max-width: 767px) {
+            @media(max-width: 767px) {
                 font-size: 30px;
-
-                span {
-                    font-size: 30px;
-                }
             }
         }
 
@@ -2287,30 +3057,132 @@ select {
             color: $text-white;
             font-weight: 400;
             margin: 0 0 15px;
+        }
+    }
 
-            span {
-                font-size: 28px;
-                color: $text-yellow;
-                font-weight: 700;
+    .col-lg-9 {
+        .row {
+            flex-wrap: wrap;
+        }
+    }
+
+    .benefits_block {
+        width: 100%;
+        background: $background-white;
+        border-radius: 20px;
+
+        position: relative;
+        margin: 0 0 40px;
+
+        @media(max-width: 991px) {
+            margin-bottom: 30px;
+        }
+
+        a {
+            width: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 5;
+            height: 100%;
+            display: flex;
+            flex-flow: column
+        }
+
+        .block_top {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+
+            .block_im {
+                width: 160px;
+                height: 160px;
+                border-radius: 50%;
+                border: 2px solid $secondary-color;
+                display: inline-block;
+                position: relative;
+                transition: 0.3s;
+
+                img {
+                    height: 90px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 2;
+                }
             }
         }
+
+        .block_btm {
+            width: 100%;
+            text-align: center;
+            padding: 0 20px;
+
+            h5 {
+                font-size: 15px;
+                color: $secondary-color;
+                font-weight: 600;
+                margin: 0 0 10px;
+                transition: 0.3s;
+            }
+        }
+
+        &:after {
+            width: 90%;
+            height: 80%;
+            position: absolute;
+            left: 5%;
+            bottom: -10px;
+            background: $background-white;
+            opacity: 0.35;
+            border-radius: 20px;
+            content: '';
+        }
+
+        &:hover {
+            .block_top {
+                .block_im {
+                    border: 2px solid $primary-color;
+                }
+            }
+
+            h5 {
+                color: $primary-color;
+            }
+
+            a {
+
+                border-color: $primary-color;
+
+                &:before {
+                    height: 190%;
+                }
+
+            }
+
+        }
+    }
+
+    .btn_subscribe {
+        width: 100%;
+        text-align: center;
 
         a {
             display: inline-block;
             margin: 15px 0 0;
             line-height: 50px;
             padding: 0 25px;
-            font-size: 19px;
+            font-size: 20px;
             color: $text-white;
-            font-weight: 300;
+            font-weight: 700;
             border-radius: 8px;
-            background: $secondary-color;
+            background: $text-lightblue;
             position: relative;
             z-index: 9;
             overflow: hidden;
 
             img {
-                margin: 0 0 0 30px;
+                margin: 0 0 0 25px;
                 height: 15px;
             }
 
@@ -2336,129 +3208,6 @@ select {
             }
         }
     }
-
-    .col-lg-9 {
-        .row {
-            flex-wrap: wrap;
-        }
-    }
-
-    .benefits_block {
-        width: 100%;
-        background: $background-white;
-        border-radius: 20px;
-        padding: 20px;
-        position: relative;
-        margin: 0 0 40px;
-
-        @media (max-width: 991px) {
-            margin-bottom: 30px;
-        }
-
-        .block_top {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-
-            .block_im {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                border: 2px solid $secondary-color;
-                display: inline-block;
-                position: relative;
-                transition: 0.3s;
-
-                img {
-                    height: 30px;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: 2;
-                }
-            }
-        }
-
-        .block_btm {
-            width: 100%;
-            text-align: center;
-
-            h5 {
-                font-size: 15px;
-                color: $secondary-color;
-                font-weight: 600;
-                margin: 0 0 10px;
-                transition: 0.3s;
-            }
-
-            p {
-                font-size: 15px;
-                color: $text-darkblue;
-                font-weight: 400;
-                margin: 0 0 20px;
-            }
-
-            a {
-                display: inline-block;
-                line-height: 30px;
-                padding: 0 15px;
-                font-size: 15px;
-                color: $text-white;
-                font-weight: 300;
-                border-radius: 6px;
-                background: $secondary-color;
-                position: relative;
-                z-index: 2;
-                overflow: hidden;
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 0%;
-                    background: $primary-color;
-                    z-index: -1;
-                    transition: 0.8s;
-                    border-radius: 0 0 50% 50%;
-                }
-            }
-        }
-
-        &:after {
-            width: 90%;
-            height: 80%;
-            position: absolute;
-            left: 5%;
-            bottom: -10px;
-            background: $background-white;
-            opacity: 0.35;
-            border-radius: 20px;
-            content: "";
-        }
-
-        &:hover {
-            .block_top {
-                .block_im {
-                    border: 2px solid $primary-color;
-                }
-            }
-
-            h5 {
-                color: $primary-color;
-            }
-
-            a {
-                border-color: $primary-color;
-
-                &:before {
-                    height: 190%;
-                }
-            }
-        }
-    }
 }
 
 //<!-- Close User Benefits section css -->
@@ -2470,7 +3219,7 @@ select {
     background: $background-white;
     position: relative;
 
-    @media (max-width: 767px) {
+    @media(max-width: 767px) {
         padding: 70px 0 0;
     }
 
@@ -2481,7 +3230,7 @@ select {
         position: absolute;
         top: 50%;
         right: 0;
-        content: "";
+        content: '';
         transform: translateY(-50%);
         z-index: 1;
     }
@@ -2489,7 +3238,7 @@ select {
     .app_intro {
         width: 100%;
 
-        @media (max-width: 767px) {
+        @media(max-width: 767px) {
             text-align: center;
         }
 
@@ -2506,18 +3255,16 @@ select {
             font-size: 52px;
             line-height: 60px;
             font-weight: 700;
-            color: $secondary-color;
+            color: $text-darkblue;
 
-            span {
-                color: $text-darkblue;
-            }
 
-            @media (max-width: 991px) {
+
+            @media(max-width: 991px) {
                 font-size: 36px;
                 line-height: 40px;
             }
 
-            @media (max-width: 767px) {
+            @media(max-width: 767px) {
                 font-size: 30px;
             }
         }
@@ -2547,13 +3294,13 @@ select {
                     margin: 0;
                 }
 
-                @media (max-width: 991px) {
+                @media(max-width: 991px) {
                     img {
                         width: 150px;
                     }
                 }
 
-                @media (max-width: 480px) {
+                @media(max-width: 480px) {
                     width: 100%;
                     margin: 0 0 20px;
                 }
@@ -2564,13 +3311,16 @@ select {
             width: 100%;
             margin: 80px 0 0 0;
 
+
             p {
                 margin: 0 0 10px;
-                font-size: 14px;
-                color: $text-grey;
+                font-size: 18px;
+                font-weight: 500;
+                color: $text-lightblue;
             }
 
             .subscription {
+
                 form {
                     width: 580px;
                     max-width: 100%;
@@ -2597,7 +3347,7 @@ select {
                         width: auto;
                         padding: 0 25px;
                         height: 48px;
-                        background: $secondary-color;
+                        background: $primary-color;
                         border: none;
                         border-radius: 0 8px 8px 0;
                         font-size: 16px;
@@ -2620,7 +3370,7 @@ select {
                             left: 0;
                             width: 100%;
                             height: 0%;
-                            background: $primary-color;
+                            background: $secondary-color;
                             z-index: -1;
                             transition: 0.8s;
                             border-radius: 0 0 50% 50%;
@@ -2635,7 +3385,7 @@ select {
                         }
                     }
 
-                    @media (max-width: 599px) {
+                    @media(max-width: 599px) {
                         flex-wrap: wrap;
                         justify-content: center;
 
@@ -2651,7 +3401,7 @@ select {
                 }
             }
 
-            @media (max-width: 767px) {
+            @media(max-width: 767px) {
                 margin: 40px 0;
                 text-align: center;
 
@@ -2660,7 +3410,7 @@ select {
                 }
             }
 
-            @media (max-width: 480px) {
+            @media(max-width: 480px) {
                 .subscription {
                     width: 100%;
                     flex-wrap: wrap;
@@ -2685,11 +3435,11 @@ select {
             width: 100%;
         }
 
-        @media (max-width: 767px) {
+        @media(max-width: 767px) {
             text-align: center;
         }
 
-        @media (max-width: 360px) {
+        @media(max-width: 360px) {
             img {
                 width: 100%;
             }
@@ -2712,14 +3462,14 @@ select {
             display: flex;
             width: 100%;
 
-            @media (max-width: 991px) {
+            @media(max-width: 991px) {
                 flex-wrap: wrap;
             }
 
             .ftr_info {
                 width: 100%;
 
-                @media (max-width: 991px) {
+                @media(max-width: 991px) {
                     text-align: center;
                     margin-bottom: 30px;
                 }
@@ -2777,7 +3527,7 @@ select {
 
                                 i {
                                     margin-right: 15px;
-                                    color: $text-yellow;
+                                    color: $text-lightblue;
                                 }
                             }
                         }
@@ -2789,7 +3539,7 @@ select {
                 width: 100%;
                 display: flex;
 
-                @media (max-width: 991px) {
+                @media(max-width: 991px) {
                     flex-wrap: wrap;
                 }
 
@@ -2801,7 +3551,7 @@ select {
                         width: 34%;
                     }
 
-                    @media (max-width: 767px) {
+                    @media(max-width: 767px) {
                         width: 50%;
                         margin-bottom: 30px;
 
@@ -2810,7 +3560,7 @@ select {
                         }
                     }
 
-                    @media (max-width: 480px) {
+                    @media(max-width: 480px) {
                         width: 100%;
                         margin-bottom: 30px;
                         text-align: center;
@@ -2862,12 +3612,14 @@ select {
                 }
             }
         }
+
+
     }
 
     .footer_btm {
         width: 100%;
         padding: 15px 0;
-        background: $background-blue;
+        background: $bg_dark-blue;
         text-align: center;
 
         p {
@@ -2877,7 +3629,7 @@ select {
             margin: 0;
             font-weight: 300;
 
-            @media (max-width: 767px) {
+            @media(max-width: 767px) {
                 padding: 0 20px;
             }
         }

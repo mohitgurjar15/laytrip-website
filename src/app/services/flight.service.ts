@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { throwError } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
+import { CommonFunction } from '../_helpers/common-function';
 
 
 @Injectable({
@@ -12,7 +13,8 @@ import { catchError, retry, } from 'rxjs/operators';
 export class FlightService {
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private commonFunction:CommonFunction
     ) {
 
     }
@@ -60,6 +62,18 @@ export class FlightService {
             );
     }
 
+    bookFligt(payload){
+        let headers={
+            currency : 'USD',
+            language : 'en'
+        }
+        return this.http.post(`${environment.apiUrl}v1/flight/book`,payload,this.commonFunction.setHeaders(headers))
+            .pipe(
+                retry(1),
+                catchError(this.handleError)
+            );
+    }
+
     handleError(error) {
         console.log("====", error);
         let errorMessage = {};
@@ -74,5 +88,30 @@ export class FlightService {
             errorMessage = { status: error.status, message: error.error.message };
         }
         return throwError(errorMessage);
+    }
+
+    getBookingDetails(bookingId){
+        let headers={
+            currency : 'USD',
+            language : 'en'
+        }
+        return this.http.get(`${environment.apiUrl}v1/flight/book/${bookingId}`,this.commonFunction.setHeaders(headers))
+            .pipe(
+                retry(1),
+                catchError(this.handleError)
+            );
+    }
+
+    updateAdult(data,id) {       
+        return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.commonFunction.setHeaders());
+    }
+    
+    addAdult(data) {  
+        let userToken = localStorage.getItem('_lay_sess');
+        if(userToken){
+            return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.commonFunction.setHeaders());
+        } else {
+            return this.http.post(`${environment.apiUrl}v1/traveler/`, data);
+        }
     }
 }

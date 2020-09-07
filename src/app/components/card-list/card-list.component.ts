@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { GenericService } from '../../services/generic.service';
 
 @Component({
   selector: 'app-card-list',
@@ -8,9 +9,30 @@ import { environment } from '../../../environments/environment';
 })
 export class CardListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private genericService:GenericService
+  ) { }
   s3BucketUrl = environment.s3BucketUrl;
+  cardLoader:boolean=true;
+  cards:[]=[]
+  @Output() selectCreditCard=new EventEmitter();
   ngOnInit() {
+    this.getCardlist();
   }
 
+  getCardlist(){
+
+    this.genericService.getCardlist().subscribe((res:any)=>{
+      this.cardLoader=false;
+      this.cards=res;
+      console.log(res)
+    },(error)=>{
+      this.cardLoader=false;
+    })
+  }
+
+  selectCard(cardToken){
+    console.log("cardToken",cardToken)
+    this.selectCreditCard.emit(cardToken)
+  }
 }
