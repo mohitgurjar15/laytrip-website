@@ -73,7 +73,6 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
    
     ngDoCheck() {
       this.checkUser();
-      console.log(this.isLoggedIn)
     }
     ngOnDestroy() {}
 
@@ -146,7 +145,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
     checkUser() {
       let userToken = localStorage.getItem('_lay_sess');
       
-      if( userToken) { 
+      if( userToken && userToken != 'undefined') { 
         this.isLoggedIn = true;
       }
     }

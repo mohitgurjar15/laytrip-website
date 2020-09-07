@@ -16,6 +16,7 @@ import { TravelerFormComponent } from './traveler-form/traveler-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { Ng5SliderModule } from 'ng5-slider';
     NgbModule,
     CountdownModule,
     Ng5SliderModule,
-    
+    NgxDaterangepickerMd.forRoot()
   ],
   exports: [
     SearchAirportComponent,

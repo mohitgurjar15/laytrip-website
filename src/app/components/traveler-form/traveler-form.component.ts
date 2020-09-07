@@ -9,6 +9,8 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { DatePipe } from '@angular/common';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '../../services/generic.service';
+import { environment } from '../../../environments/environment';
+
 declare var $: any;
 
 @Component({
@@ -19,24 +21,29 @@ declare var $: any;
 
 
 export class TravelerFormComponent implements OnInit {
+  s3BucketUrl = environment.s3BucketUrl;
+
   @Input('var') usersType: any = '';
   @Input() traveler: any = [];
   @Output() valueChange = new EventEmitter();
   @Output() auditFormStatus = new EventEmitter();
   @Input() type:string;
+  @Input() countries:[];
+  @Input() countries_code:[];
 
   adultForm: FormGroup;
   submitted = false;
   loading = false;
   isLoggedIn = false;
-  countries: any = [];
-  countries_code: any = [];
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
   editMode = false;
   minDate: any = {};
   maxDate: any = {};
   formStatus: boolean = false;
-  departureDate;
+
+  dobMinDate: moment.Moment = moment(); 
+  dobMaxDate: moment.Moment = moment(); 
+  expiryMinDate: moment.Moment = moment().add(2, 'days'); 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,8 +70,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCountry();
-    this.loadJquery();
+    
     this.adultForm = this.formBuilder.group({
       title: [''],
       gender: ['', Validators.required],
@@ -105,6 +111,11 @@ export class TravelerFormComponent implements OnInit {
 
   }
 
+  ngDoCheck(){
+    this.countries = this.countries;
+    this.countries_code = this.countries_code;
+
+  }
   setUserTypeValidation(){
     const emailControl = this.adultForm.get('email');  
     const phoneControl = this.adultForm.get('phone_no');  
@@ -142,66 +153,6 @@ export class TravelerFormComponent implements OnInit {
     }
   }
 
-
-
-  getCountry() {
-    this.genericService.getCountry().subscribe((data: any) => {
-      this.countries = data.map(country => {
-        return { 
-          id: country.id,
-          name: country.name
-        }
-      }),
-        this.countries_code = data.map(country => {
-          return {
-            id: country.id,
-            name: country.phonecode + ' (' + country.iso2 + ')',
-            code: country.phonecode
-          }
-        })
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
-    });
-  }
-
-  loadJquery() {
-    $(document).ready(function(){ 
-      $('.dob1').each(function(){
-        $(this).dateRangePicker({
-          autoClose: true,
-          singleDate: true,
-          showhortcuts: false,
-          singleMonth: true,
-          format: "MM/YYYY",
-          monthSelect: true,
-          yearSelect: true,
-          startDate: moment().add(0, 'days').format("MM/YYYY"),
-          // extraClass: 'laytrip-datepicker'
-        });
-      });
-      $('.dob2').each(function(){
-        $(this).dateRangePicker({
-          autoClose: true,
-          singleDate: true,
-          showhortcuts: false,
-          singleMonth: true,
-          format: "MM/YYYY",
-          monthSelect: true,
-          yearSelect: true,
-          startDate: moment().add(0, 'days').format("MM/YYYY"),
-          // extraClass: 'laytrip-datepicker'
-        });
-
-      });
-    });
-  
-    $(document).ready(function () {
-     
-    })
-  }
-
   getDateWithFormat(date) {
     console.log("date", date)
     this.adultForm.controls.dob.setValue(moment(date.date1).format("MM/YYYY"));
@@ -218,6 +169,7 @@ export class TravelerFormComponent implements OnInit {
       if (!Number(country_id)) {
         country_id = this.traveler.country.id;
       }
+      console.log(this.adultForm.value)
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
@@ -267,8 +219,15 @@ export class TravelerFormComponent implements OnInit {
           }
         });
       }
-
     }
+  }
+
+  dobDateUpdate(date){
+    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
+  }
+
+  expiryDateUpdate(date){
+    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
   }
 
   

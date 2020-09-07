@@ -129,11 +129,27 @@
 
       <div class="form_field half">
         <label>DOB<sup>*</sup></label>
-        <!-- <input *ngIf="!traveler.userId" autocomplete="off" class="dob1" type="text" formControlName="dob"  placeholder="MM/YYYY" tabindex="103">
-        <input *ngIf="traveler.userId" autocomplete="off" class="dob2" type="text" formControlName="dob"  placeholder="MM/YYYY" tabindex="103">
- -->
-        <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="6" ngbDatepicker #d="ngbDatepicker"
-          dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()">
+        <input type="text" name="daterange" 
+            ngxDaterangepickerMd 
+            formControlName="dob" 
+            class="form-control"
+            [singleDatePicker]="true"
+            (datesUpdated)="dobDateUpdate($event)"
+            [locale]="locale"
+            [autoApply]="true"
+            [minDate]="dobReturnMinDate"
+            [maxDate]="dobMaxDate"
+            />
+            <!-- <div class="prev-next">
+              <a href="javascript:void(0);">Prev</a>
+              <a href="javascript:void(0);">Next</a>
+          </div>
+          <div class="date_icon" id="departure_date_icon">
+              <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+          </div> -->
+
+        <!-- <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="6" ngbDatepicker #d="ngbDatepicker"
+          dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()"> -->
           <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
             <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
               date of birth.
@@ -159,8 +175,18 @@
     <div class="form_row">
       <div class="form_field half">
         <label>Passport Expiry</label>
-        <input class="form-control" placeholder="yyyy-mm-dd" tabindex="8" ngbDatepicker #dd="ngbDatepicker"
-          dateFormat="yyyy-mm-dd" formControlName="passport_expiry" (click)="dd.toggle()">
+        <!-- <input class="form-control" placeholder="yyyy-mm-dd" tabindex="8" ngbDatepicker #dd="ngbDatepicker"
+          dateFormat="yyyy-mm-dd" formControlName="passport_expiry" (click)="dd.toggle()"> -->
+          <input type="text" name="daterange" 
+            ngxDaterangepickerMd 
+            formControlName="passport_expiry" 
+            class="form-control"
+            [singleDatePicker]="true"
+            (datesUpdated)="expiryDateUpdate($event)"
+            [locale]="locale"
+            [autoApply]="true"
+            [minDate]="expiryMinDate"
+          />
       </div>
       <div class="form_field half">
         <label>Passport Number</label>
