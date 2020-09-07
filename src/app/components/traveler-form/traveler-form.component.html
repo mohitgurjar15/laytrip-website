@@ -6,7 +6,7 @@
         <ul class="custom_listing">
           <li>
             <label class="custom_radio">Mr.
-              <input type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr" tabindex="0"
+              <input  type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr" tabindex="0"
                 [checked]="traveler.title === 'mr'">
               <span class="checkmark"></span>
             </label>
@@ -58,6 +58,7 @@
         <label>First Name<sup>*</sup></label>
         <div class="text_field">
           <input type="text" formControlName="firstName" maxlength="80" tabindex="1" placeholder="Enter first Name">
+          <input type="hidden" formControlName="user_type" #var [value]="type">
         </div>
         <div *ngIf="(submitted  || adultForm.controls.firstName.touched) && adultForm.controls.firstName.errors"
           class="focus-input100 login-error">
@@ -81,7 +82,7 @@
     </div>
     <div class="form_row">
       <div class="form_field half">
-        <label>Email<sup>*</sup></label>
+        <label>Email<sup *ngIf="type=='adult'" >*</sup></label>
         <div class="text_field">
           <input type="email" [readonly]="traveler.userId" formControlName="email" maxlength="50" tabindex="3"
             placeholder="Enter your email">
@@ -98,7 +99,7 @@
       </div>
 
       <div class="form_field half">
-        <label>Phone<sup>*</sup></label>
+        <label>Phone<sup  *ngIf="type=='adult'">*</sup></label>
         <div class="text_field">
           <div class="phone_no">
             <div class="code">

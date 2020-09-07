@@ -1,12 +1,12 @@
 <div class="block_passenger_detail">
-  <h6>{{type | titlecase}} <span>(Above {{age}} years)</span></h6>
+    <h6>{{type | titlecase}} <span>(Above {{age}} years)</span></h6>
     <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
         <div *ngFor="let traveler of travelers; let i = index;">
             <div class="card_add_pass" *ngIf="traveler.user_type===type">                     
                 <div class="card-header" id="adultOne{{i}}" >
                     <h2 class="mb-0">
                         <label class="custom_checkbox">
-                            <input type="checkbox" value="" (change)="checkBox($event);">
+                            <input [disabled]="checkBoxDesable" type="checkbox" value="{{traveler.userId}}" (change)="checkBox($event);" >
                             <span class="checkmark"></span>
                         </label>
                         <button type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#adultcollapseOne'+ i">
@@ -32,7 +32,7 @@
            </div>
            <div id="adultcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne" data-parent="#accordion-Adults">    
               <div class="card-body">       
-                  <app-traveler-form (valueChange)="pushTraveler($event)"></app-traveler-form>  
+                  <app-traveler-form [type]="type" (valueChange)="pushTraveler($event)"></app-traveler-form>  
               </div>                 
           </div>                 
         </div>

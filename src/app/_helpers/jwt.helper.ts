@@ -12,6 +12,6 @@ export const getUserDetails=(token)=>{
 }
 
 export const redirectToLogin=()=>{
-    localStorage.setItem('userToken',"");
-    window.location.href='/login';
+    localStorage.setItem('_lay_sess',"");
+    // window.location.href='/login';
 }
