@@ -1,10 +1,10 @@
 <div [formGroup]="form">
     <label>{{label}}</label>
     <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
-        bindLabel="city" bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
+        bindLabel="city" bindValue="city" [clearable]="true" minTermLength="3" notFoundText=""
         (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"
         class="laytrip-input" placeholder="{{ placeHolder }}">
-        <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
+        <ng-template ng-option-tmp  let-item="item" let-index="index" let-search="searchTerm">
             <ul class="item-list">
                 <li class="item">
                     <div class="item-left">
@@ -16,6 +16,10 @@
                     </div> -->
                 </li>
             </ul>
+        </ng-template>
+        <ng-template ng-label-tmp let-item="item">
+            <!-- <img height="15" width="15" [src]="item.avatar"/> -->
+            {{item.city}}<!--  is cool -->
         </ng-template>
     </ng-select>
     <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>

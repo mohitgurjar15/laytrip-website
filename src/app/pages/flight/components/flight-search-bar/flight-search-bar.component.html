@@ -5,7 +5,7 @@
         <div class="flight_tab">
           <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#Oneway" (click)="tabChange('oneway')">
+              <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('onway')" data-toggle="tab" href="#Oneway">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg"
                   alt="Oneway Icon" />
@@ -13,7 +13,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Return" (click)="tabChange('round-trip')">
+              <a class="nav-link"  [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
                   alt="Return Icon" />
@@ -41,12 +41,12 @@
                         <div class="search_area">
                           <label>From</label>
                           <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="city"
-                            bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
+                            bindValue="city" [clearable]="true" minTermLength="3" notFoundText=""
                             [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}"
                             (search)="changeSearchDeparture($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder1 }}">
-                            <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
+                            <ng-template ng-option-tmp let-item="item" let-index="index"
                               let-search="searchTerm">
                               <ul class="item-list">
                                 <li class="item">
@@ -59,6 +59,10 @@
                                   </div> -->
                                 </li>
                               </ul>
+                            </ng-template>
+                            <ng-template ng-label-tmp let-item="item">
+                              <!-- <img height="15" width="15" [src]="item.avatar"/> -->
+                              {{item.city}}<!--  is cool -->
                             </ng-template>
                           </ng-select>
                           <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
@@ -78,12 +82,12 @@
                           <!-- <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
                           <span>CA, United States</span> -->
                           <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="city"
-                            bindValue="display_name" [(ngModel)]="airportDefaultArrivalValue"
+                            bindValue="city" [(ngModel)]="airportDefaultArrivalValue"
                             [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText=""
                             (search)="changeSearchArrival($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'toSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder2 }}">
-                            <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index"
+                            <ng-template ng-option-tmp  let-item="item" let-index="index"
                               let-search="searchTerm">
                               <ul class="item-list">
                                 <li class="item">
@@ -97,6 +101,10 @@
                                 </li>
                               </ul>
                             </ng-template>
+                            <ng-template ng-label-tmp let-item="item">
+                              <!-- <img height="15" width="15" [src]="item.avatar"/> -->
+                              {{item.city}}<!--  is cool -->
+                          </ng-template>
                           </ng-select>
                           <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
                           <ng-template #selectedAirport>
@@ -109,8 +117,16 @@
                       <div class="date_form">
                         <div class="search_area">
                           <label>Departure</label>
-                          <input type="text" name="date_checkin" tabindex="3" value="{{ departureDate }}"
-                            id="departure_date" />
+                          <input type="text" name="daterange" 
+                              ngxDaterangepickerMd 
+                              formControlName="departureDate" 
+                              class="form-control"
+                              [singleDatePicker]="true"
+                              (datesUpdated)="departureDateUpdate($event)"
+                              [locale]="locale"
+                              [autoApply]="true"
+                              [minDate]="flightDepartureMinDate"
+                              />
                           <div class="prev-next">
                             <a href="javascript:void(0);">Prev</a>
                             <a href="javascript:void(0);">Next</a>
@@ -121,18 +137,30 @@
                         </div>
                       </div>
                       <div class="date_to">
-                        <div class="search_area" [ngClass]="{ 'disable-div' : searchFlightInfo.trip === 'oneway'}">
+                        <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
                           <label>Return</label>
-                          <input type="text" name="date_checkout" maxlength="10" value="{{ defaultDate }}" tabindex="4"
-                            id="return_date" [disabled]="searchFlightInfo.trip === 'oneway'" />
-                          <div class="prev-next">
-                            <a href="javascript:void(0);">Prev</a>
-                            <a href="javascript:void(0);">Next</a>
-                          </div>
-                          <div class="date_icon" id="return_date_icon">
-                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
-                          </div>
+                          <p (click)="toggleOnewayRoundTrip('roundtrip')">Tap to add return date</p>
                         </div>
+                        <div class="search_area" *ngIf="isRoundTrip">
+                          <label>Return</label>
+                          <input type="text" name="daterange" 
+                              ngxDaterangepickerMd 
+                              formControlName="returnDate"
+                              class="form-control"
+                              [singleDatePicker]="true"
+                              (datesUpdated)="datesUpdated($event)"
+                              [locale]="locale"
+                              [autoApply]="true"
+                              [minDate]="flightReturnMinDate"
+                              />
+                          <div class="prev-next">
+                              <a href="javascript:void(0);">Prev</a>
+                              <a href="javascript:void(0);">Next</a>
+                          </div>
+                          <div class="date_icon">
+                              <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
+                          </div>
+                      </div>
                       </div>
                     </li>
                     <li class="grid_box third">

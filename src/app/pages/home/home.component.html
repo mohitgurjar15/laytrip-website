@@ -122,7 +122,7 @@
                                                 <div class="date_to">
                                                     <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
                                                         <label>Return</label>
-                                                        <p>Tap to add return date</p>
+                                                        <p (click)="toggleOnewayRoundTrip('roundtrip')">Tap to add return date</p>
                                                     </div>
 
                                                     <div class="search_area" *ngIf="isRoundTrip">

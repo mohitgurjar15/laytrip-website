@@ -7,7 +7,6 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-home',

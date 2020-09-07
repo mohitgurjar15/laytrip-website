@@ -20,6 +20,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
 import { BookingSummaryLoaderComponent } from './components/booking-summary-loader/booking-summary-loader.component';
 import { FlightConfirmationComponent } from './components/flight-confirmation/flight-confirmation.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FlightConfirmationComponent } from './components/flight-confirmation/fl
     FormsModule, 
     ReactiveFormsModule,
     NgSelectModule,
+    NgxDaterangepickerMd.forRoot()
   ]
 })
 export class FlightModule { }
