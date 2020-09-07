@@ -30,6 +30,7 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/slick.css",
+              "src/styles-app-loading.scss",
               "src/styles.scss",
               "src/flight.scss",
               "src/account.scss",
@@ -135,6 +136,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
+              "src/styles-app-loading.scss",
               "src/styles.scss",
               "src/flight.scss",
               "src/account.scss",

@@ -1,30 +1,30 @@
 import * as jwt_decode from "jwt-decode";
 
-export const getUserDetails=(token)=>{
+export const getUserDetails = (token) => {
 
-    try{
+    try {
         return jwt_decode(token);
     }
-    catch(error){
+    catch (error) {
         redirectToLogin();
     }
-    
+
 }
 
-export const redirectToLogin=()=>{
-    localStorage.setItem('_lay_sess',"");
-    window.location.href='/login';
+export const redirectToLogin = () => {
+    localStorage.setItem('_lay_sess', "");
+    window.location.href = '/login';
 }
 
 
-export const getLoginUserInfo=()=>{
+export const getLoginUserInfo = () => {
 
     let token = localStorage.getItem('_lay_sess')
-    try{
+    try {
         return jwt_decode(token);
     }
-    catch(error){
+    catch (error) {
         return {};
     }
-    
+
 }

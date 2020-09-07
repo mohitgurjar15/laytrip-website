@@ -1,6 +1,6 @@
-import { Component, OnInit, Input,  ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 declare var Spreedly: any;
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 declare var $: any;
 import * as moment from 'moment';
 import { GenericService } from '../../services/generic.service';
@@ -12,90 +12,124 @@ import { GenericService } from '../../services/generic.service';
 export class AddCardComponent implements OnInit {
 
   constructor(
-    private genericService:GenericService,
+    private genericService: GenericService,
     private formBuilder: FormBuilder
   ) { }
-  @Input() showAddCardForm:boolean;
-  //@ViewChild('cardAddForm') cardAddFormElement;
-  disabledSavecardbutton:boolean=true;
+  @Input() showAddCardForm: boolean;
+  // @ViewChild('cardAddForm') cardAddFormElement: ElementRef;
+  @ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
+  disabledSavecardbutton: boolean = true;
   cardForm: FormGroup;
-  submitted:boolean=false;
-  token:string;
-  cardError:string="";
+  submitted: boolean = false;
+  token: string;
+  cardError: string = "";
+  cardData;
 
   ngOnInit() {
-      
-      //this.loadJquery();
-      
-      this.cardForm = this.formBuilder.group({
-        name: ['', Validators.required],
-        expiry: ['', Validators.required],
-        payment_method_token:['']
-      });
 
-      Spreedly.init("YNEdZFTwB1tRR4zwvcMIaUxZq3g", {
-        "numberEl": "spreedly-number",
-        "cvvEl": "spreedly-cvv"
-      });
+    // this.loadJquery();
 
-      Spreedly.on("ready", function () {
-        Spreedly.setPlaceholder("number", "Card Number");
-        Spreedly.setPlaceholder("cvv", "CVV");
-        Spreedly.setFieldType("cvv", "text");
-        Spreedly.setFieldType("number", "text");
-        Spreedly.transferFocus("number");
-        //Spreedly.setNumberFormat("maskedFormat");
-        this.disabledSavecardbutton=false;
-        console.log("this.disabledSavecardbutton",this.disabledSavecardbutton)
-      });
-      
-      Spreedly.on('paymentMethod', function(token, pmData) {
-    
-        // Set the token in the hidden form field
-        var tokenField = document.getElementById("payment_method_token");
-        tokenField.setAttribute("value", token);
-        this.token=token;
-        //console.log(this.cardForm.controls.payment_method_token.value);
-        //this.cardForm.controls.payment_method_token.setValue(token);
-        console.log("this.token",token)
-        console.log(pmData)
-        let cardData={
-            card_type: pmData.card_type,
-            card_holder_name: pmData.full_name,
-            card_token: pmData.token,
-            card_last_digit: pmData.last_four_digits
-        }
+    this.cardForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      expiry: ['', Validators.required],
+      payment_method_token: ['']
+    });
 
-        /* var masterForm = document.getElementById('payment-form');
-        console.log(masterForm) */
-        //this.saveCard(cardData)
-        //this.cardAddFormElement.nativeElement.submit();
-        
-      });
-      console.log("this.token outside",this.token)
+    Spreedly.init('YNEdZFTwB1tRR4zwvcMIaUxZq3g', {
+      'numberEl': 'spreedly-number',
+      'cvvEl': 'spreedly-cvv',
+    });
 
-      Spreedly.on('errors', function(errors) {
-        for (let i=0; i < errors.length; i++) {
-          let error = errors[i];
-          console.log(error)
-          if(typeof error.attribute!='undefined' && error.attribute=='number'){
+    Spreedly.on('ready', function () {
+      Spreedly.setPlaceholder("number", "Card Number");
+      Spreedly.setPlaceholder("cvv", "CVV");
+      Spreedly.setFieldType("cvv", "text");
+      Spreedly.setFieldType("number", "text");
+      Spreedly.transferFocus("number");
+      // Spreedly.setNumberFormat("maskedFormat");
+      this.disabledSavecardbutton = false;
+      console.log('this.disabledSavecardbutton', this.disabledSavecardbutton);
+    });
 
-            this.cardError=error.message;
-            console.log(this.cardError)
-          }
-          
-        };
-      });
+    // Spreedly.on('paymentMethod', function (token, pmData) {
+    //   // Set the token in the hidden form field
+    //   var tokenField = document.getElementById('payment_method_token');
+    //   tokenField.setAttribute('value', token);
+    //   this.token = token;
+    //   // console.log(this.cardForm.controls.payment_method_token.value);
+    //   // this.cardForm.controls.payment_method_token.setValue(token);
+    //   console.log("this.token", token);
+    //   // console.log(pmData);
+    //   let cardData = {
+    //     card_type: pmData.card_type,
+    //     card_holder_name: pmData.full_name,
+    //     card_token: pmData.token,
+    //     card_last_digit: pmData.last_four_digits
+    //   };
+    //   console.log(cardData);
+    //   this.submitPaymentForm(cardData);
+    //   var masterForm = document.getElementById('payment-form');
+    //   // console.log(masterForm);
+    //   // masterForm.submit();
+    //   // this.saveCard(cardData);
+    //   // this.cardAddFormElement.nativeElement.submit();
+    // });
+    // console.log('this.token outside', this.token);
+    // Spreedly.on('errors', function (errors) {
+    //   for (let i = 0; i < errors.length; i++) {
+    //     let error = errors[i];
+    //     console.log(error)
+    //     if (typeof error.attribute !== 'undefined' && error.attribute === 'number') {
+
+    //       this.cardError = error.message;
+    //       console.log(this.cardError);
+    //     }
+    //   }
+    // });
   }
 
-  submitPaymentForm() {
+  submitPaymentForm(event) {
+    event.preventDefault();
+    Spreedly.on('paymentMethod', function (token, pmData) {
+      // Set the token in the hidden form field
+      var tokenField = document.getElementById('payment_method_token');
+      tokenField.setAttribute('value', token);
+      this.token = token;
+      // console.log(this.cardForm.controls.payment_method_token.value);
+      // this.cardForm.controls.payment_method_token.setValue(token);
+      console.log("this.token", token);
+      // console.log(pmData);
+      let cardData = {
+        card_type: pmData.card_type,
+        card_holder_name: pmData.full_name,
+        card_token: pmData.token,
+        card_last_digit: pmData.last_four_digits
+      };
+      console.log(cardData);
+      this.cardData = cardData;
+      if (this.cardData) {
+        console.log('fdgdgdgdgd:::');
+        // this.saveCard(this.cardData);
+      }
+      var masterForm = document.getElementById('payment-form') as HTMLFormElement;
+      masterForm.submit();
+      // this.cardAddFormElement.nativeElement.submit();
+    });
+    Spreedly.on('errors', function (errors) {
+      for (let i = 0; i < errors.length; i++) {
+        let error = errors[i];
+        console.log(error)
+        if (typeof error.attribute !== 'undefined' && error.attribute === 'number') {
 
-    this.cardError="";
-    this.submitted=true;
+          this.cardError = error.message;
+          console.log(this.cardError);
+        }
+      }
+    });
+
+    this.cardError = '';
+    this.submitted = true;
     var requiredFields = {};
-    console.log(this.cardForm.value)
-    console.log(this.token)
-    // Get required, non-sensitive, values from host page
 
     if (this.cardForm.invalid) {
       return;
@@ -106,24 +140,27 @@ export class AddCardComponent implements OnInit {
     requiredFields["full_name"] = this.cardForm.value.name;
     requiredFields["month"] = expiryDate[0];
     requiredFields["year"] = expiryDate[1];
-  
+
     Spreedly.tokenizeCreditCard(requiredFields);
+    if (this.cardData) {
+      // this.saveCard(this.cardData);
+    }
   }
 
-  saveCard(cardData){
-    this.genericService.saveCard(cardData).subscribe((res:any)=>{
-
+  saveCard(cardData) {
+    console.log('component:::', cardData);
+    this.genericService.saveCard(cardData).subscribe((res: any) => {
       console.log(res);
-    },(err=>{
+    }, (err => {
 
     })
-    )
+    );
   }
-  
-  loadJquery(){
+
+  loadJquery() {
     $('#dobDate').dateRangePicker({
       autoClose: true,
-      singleDate : true,
+      singleDate: true,
       showShortcuts: false,
       singleMonth: true,
       format: "MM/YYYY",
@@ -135,9 +172,9 @@ export class AddCardComponent implements OnInit {
       this.getDateWithFormat(obj);
     }.bind(this));
   }
-  
-  getDateWithFormat(date){
-    console.log("date",date)
+
+  getDateWithFormat(date) {
+    console.log("date", date);
     this.cardForm.controls.expiry.setValue(moment(date.date1).format("MM/YYYY"));
   }
 }
