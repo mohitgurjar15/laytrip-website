@@ -7,6 +7,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-home',
@@ -37,12 +38,15 @@ export class HomeComponent implements OnInit {
     fromDestinationCode;
     toDestinationCode;
 
-    departureDate;
-    returnDate;
-    totalPerson = 1;
+    locale = {
+      format: 'DD/MM/YYYY',
+      displayFormat: 'DD/MM/YYYY'
+    };
 
-    // placeholderDate = moment().add(1, 'months').format("DD MMM'YY dddd");
-    defaultDate = moment().add(1, 'months').format(this.commonFunction.dateFormat('en').date);
+    flightDepartureMinDate: moment.Moment = moment(); 
+    flightReturnMinDate: moment.Moment = moment().add(7, 'days'); 
+
+    totalPerson = 1;
 
     searchFlightInfo =
       {
@@ -68,8 +72,12 @@ export class HomeComponent implements OnInit {
       this.flightSearchForm = this.fb.group({
         fromDestination: [[Validators.required]],
         toDestination: [[Validators.required]],
-        departureDate: ['', [Validators.required]],
-        returnDate: ['', [Validators.required]]
+        departureDate: [{
+          startDate: moment().add(30, 'days')
+        }, Validators.required],
+        returnDate: [{
+          startDate: moment().add(37, 'days')
+        }, Validators.required]
       });
     }
 
@@ -82,7 +90,7 @@ export class HomeComponent implements OnInit {
     loadJquery() {
 
       // DEPARTURE DATE
-      $('#departure_date').dateRangePicker({
+      /* $('#departure_date').dateRangePicker({
         autoClose: true,
         singleDate: true,
         showShortcuts: false,
@@ -98,10 +106,10 @@ export class HomeComponent implements OnInit {
       $('#departure_date_icon').click(function (evt) {
         evt.stopPropagation();
         $('#departure_date').data('dateRangePicker').open();
-      });
+      }); */
 
       // RETURN DATE
-      $('#return_date').dateRangePicker({
+      /* $('#return_date').dateRangePicker({
         autoClose: true,
         singleDate: true,
         showShortcuts: false,
@@ -112,7 +120,7 @@ export class HomeComponent implements OnInit {
       }).bind('datepicker-first-date-selected', function (event, obj) {
         this.returnDate = obj;
         this.getDateWithFormat({ returndate: obj });
-      }.bind(this));
+      }.bind(this)); */
 
       // $('#return_date_icon').click(function (evt) {
       //   evt.stopPropagation();
@@ -211,13 +219,7 @@ export class HomeComponent implements OnInit {
     }
 
     switchDestination() {
-      // console.log('swap');
-      // this.isSwap = true;
-      // if (this.tempSwapData.leftSideValue && this.tempSwapData.rightSideValue) {
-      //   this.swapped.push(this.tempSwapData.rightSideValue);
-      //   this.swapped.push(this.tempSwapData.leftSideValue);
-      //   console.log(this.swapped);
-      // }
+      
     }
 
     changeTravellerInfo(event) {
@@ -230,14 +232,14 @@ export class HomeComponent implements OnInit {
 
     searchFlights() {
       if (this.searchFlightInfo && this.totalPerson &&
-        this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
+        this.flightSearchForm.value.departureDate.startDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
         localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
         this.router.navigate(['flight/search'], {
           queryParams: {
             trip: this.searchFlightInfo.trip,
             departure: this.searchFlightInfo.departure,
             arrival: this.searchFlightInfo.arrival,
-            departure_date: this.searchFlightInfo.departure_date,
+            departure_date: moment(this.flightSearchForm.value.departureDate.startDate).format('YYYY-MM-DD'),
             class: this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy',
             adult: this.searchFlightInfo.adult,
             child: this.searchFlightInfo.child ? this.searchFlightInfo.child : 0,
@@ -255,5 +257,18 @@ export class HomeComponent implements OnInit {
         this.isRoundTrip=true;
       else
         this.isRoundTrip=false
+    }
+
+    datesUpdated(event){
+      //console.log(this.flightSearchForm.value.departureDate.startDate.format('DD/MM/YYYY'))
+
+      //this.flightSearchForm.controls.departureDate.setValue('1');
+      if(this.isRoundTrip){
+        //this.returnDatePicker.open();
+      }
+    }
+
+    departureDateUpdate(date){
+      this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate)
     }
 }
