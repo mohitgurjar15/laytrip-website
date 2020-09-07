@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { CookieService } from 'ngx-cookie';
 
 
 @Component({
@@ -13,31 +14,59 @@ export class AdultListComponent implements OnInit {
   @Input() username:string;
   @Input() type:string;
   @Input() age:string;
+  @Input() totalTravelerCount:number;
 
   counter  = 0;
+  UserIds  = [];
   checked : boolean = false;
+  checkBoxDesable : boolean = false;
   isLoggedIn : boolean = false;
   showAddAdultForm : boolean = false;
   adultFormStatus : boolean = false;
   count =0;
   containers = [];
-  constructor() { }
+  constructor(
+    private cookieService: CookieService
+      ) { }
 
   ngOnInit() {
+    // this.cookie.set("nameOfCookie",'cookieValue')
+    // console.log("cookie",this.cookie.getAll());
     this.checkUser();
     if(this.type == 'adult' && !this.isLoggedIn){
       this.showAddAdultForm = true;
     }
   } 
 
+  getCookie(){
+   
+    console.log(this.cookieService.getAll());
+  }
 
   checkBox(event){
+   
     if(event.target.checked){
-      this.counter++;
+      this.UserIds.push(event.target.value); 
+      this.cookieService.put("userIds", JSON.stringify(this.UserIds));
+      
+      if(this.counter  < this.totalTravelerCount){
+        console.log(this.counter  , this.totalTravelerCount)
+        this.counter++;
+      } else {
+        
+        // this.checkBoxDesable = true;
+      }
+      
     } else {
       this.counter--;
+      // this.checkBoxDesable = false;
+
+      this.UserIds = this.UserIds.filter(obj => obj !== event.target.value);
+      this.cookieService.remove('userIds');
+      this.cookieService.put("userIds", JSON.stringify(this.UserIds));
+      
     }
-    console.log(this.counter)
+    console.log(this.cookieService.get('userIds'));
     this.adultsCount.emit(this.counter); 
   }
 
@@ -48,11 +77,11 @@ export class AdultListComponent implements OnInit {
     }
   }
   
-  onSubmit() {
-    
-  }
+  
   ngDoCheck() {
+    
     this.containers = this.containers;
+    this.travelers = this.travelers;
   }
   
   addAdultForm() {    
@@ -71,7 +100,10 @@ export class AdultListComponent implements OnInit {
     this.travelers.push(event);
     this.showAddAdultForm = false;
   }
-
+  
+  ngAfterContentChecked(){
+    
+  }
   getFormStatus(status){  
     this.adultFormStatus = status;
   }
