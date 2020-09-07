@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
 import { BookingSummaryLoaderComponent } from './components/booking-summary-loader/booking-summary-loader.component';
+import { FlightConfirmationComponent } from './components/flight-confirmation/flight-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BookingSummaryLoaderComponent } from './components/booking-summary-load
     FlightSummaryComponent,
     ClickOutSideDirective,
     FlightCheckoutComponent,
-    BookingSummaryLoaderComponent
+    BookingSummaryLoaderComponent,
+    FlightConfirmationComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,5 @@
 <div [formGroup]="form">
+    <label>{{label}}</label>
     <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
         bindLabel="city" bindValue="display_name" [clearable]="true" minTermLength="3" notFoundText=""
         (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"

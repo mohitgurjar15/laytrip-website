@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,  ViewChild } from '@angular/core';
 declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 declare var $: any;
@@ -16,6 +16,7 @@ export class AddCardComponent implements OnInit {
     private formBuilder: FormBuilder
   ) { }
   @Input() showAddCardForm:boolean;
+  //@ViewChild('cardAddForm') cardAddFormElement;
   disabledSavecardbutton:boolean=true;
   cardForm: FormGroup;
   submitted:boolean=false;
@@ -24,8 +25,8 @@ export class AddCardComponent implements OnInit {
 
   ngOnInit() {
       
-      this.loadJquery();
-
+      //this.loadJquery();
+      
       this.cardForm = this.formBuilder.group({
         name: ['', Validators.required],
         expiry: ['', Validators.required],
@@ -65,9 +66,10 @@ export class AddCardComponent implements OnInit {
             card_last_digit: pmData.last_four_digits
         }
 
-        var masterForm = document.getElementById('payment-form');
-        console.log(masterForm)
+        /* var masterForm = document.getElementById('payment-form');
+        console.log(masterForm) */
         //this.saveCard(cardData)
+        //this.cardAddFormElement.nativeElement.submit();
         
       });
       console.log("this.token outside",this.token)

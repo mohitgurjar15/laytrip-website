@@ -70,7 +70,7 @@
       <li *ngFor="let card of cards">
           <div class="card_check">
               <label class="custom_checkbox">
-                  <input type="checkbox" value="">
+                  <input type="checkbox" value="" name="card_token" (click)="selectCard(card.cardToken)">
                   <span class="checkmark"></span>
               </label>
           </div>

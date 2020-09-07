@@ -34,13 +34,14 @@ $bg-black-opacity-half : rgba(0, 0, 0, 0.5);
 $bg-blue-opacity-half : rgba(25, 67, 255, 0.5);
 
 $bg-black-gradient : rgba(0, 0, 0, 0);
-$bg-lightblack-gradient : rgba(0, 0, 0, 0.75);
+$bg-lightblack-gradient : rgba(0, 0, 0, 1);
 $bg-secondary-gradient : rgba(252, 126, 102, 0);
 $bg-white-gradient : rgba(255, 255, 255, 0.97);
 $bg-whitelight-gradient : rgba(255, 255, 255, 0);
 $bg-lightblue-gradient : rgba(0, 174, 239, 0.8);
 $bg-lightyellow-gradient : rgba(255, 221, 15, 0.8);
 $shadow_bg : rgba(0, 0, 0, 0.16);
+$shadow_bg_light : rgba(252, 126, 102, 0.15);
 $placeholder-text : rgba(129, 136, 171, 0.75);
 $coming-soon-bg : rgba(0, 43, 234, 0.85);
 $gradient-white : rgba(25, 67, 255, 0);
@@ -48,6 +49,7 @@ $gradient-blue : rgba(1, 33, 120, 0.75);
 $gradient-lightblue : rgba(25, 67, 255, 1);
 $gradient-darkblue : rgba(1, 33, 120, 1);
 $bg-lightwhite : rgba(255, 255, 255, 0.08);
+$bg-lightblue : rgba(1, 33, 120, 0.8);
 $bg-halfwhite : rgba(255, 255, 255, 0.5);
 $primary-bg-light : rgba(25, 67, 255, 0.08);
 $white-bg-light : rgba(255, 255, 255, 0.1);
@@ -75,6 +77,11 @@ $border-step-count : #8090BC;
 $btn-bg : #00BFFD;
 $tab-br-clr : #D8D4FE;
 $bg-layover : rgba(0, 191, 253, 0.08);
+$bg-yellow : #FEDD00;
+$text-lightgreen : #19DD00;
+$bg-crad : #F9FAFC;
+$active-tab-text : #0043FF;
+$text-orange : #FDA33E;
 
 
 $fb-loader-bg : #F6F6F6;

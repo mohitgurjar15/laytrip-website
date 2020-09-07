@@ -1,3 +1,5 @@
+@import '../../../cstm-variable';
+
 .flight_form {
     .autocomplete-container {
         box-shadow: none !important;
@@ -12,6 +14,28 @@
     }
 }
 
+.home_banner{
+    .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first .switch_btn{
+        
+        z-index: 1;
+    }
+}
+
+.disable_return_date{
+
+    height: 100%;
+    p{
+        padding: 0 15px;
+        margin:0;
+        font-size: 14px;
+        color: $text-grey;
+    }
+}
+
 .disable-btn {
     cursor: not-allowed;
+}
+
+a:hover {
+    cursor: pointer;
 }

@@ -13,5 +13,18 @@ export const getUserDetails=(token)=>{
 
 export const redirectToLogin=()=>{
     localStorage.setItem('_lay_sess',"");
-    // window.location.href='/login';
+    window.location.href='/login';
+}
+
+
+export const getLoginUserInfo=()=>{
+
+    let token = localStorage.getItem('_lay_sess')
+    try{
+        return jwt_decode(token);
+    }
+    catch(error){
+        return {};
+    }
+    
 }
