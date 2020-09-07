@@ -12,6 +12,7 @@ import { UserBenefitComponent } from './user-benefit/user-benefit.component';
 import { MobileAndSubscribeComponent } from './mobile-and-subscribe/mobile-and-subscribe.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxDaterangepickerMd.forRoot()
   ]
 })
 export class HomeModule { }

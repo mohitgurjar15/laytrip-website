@@ -121,9 +121,16 @@
                                                 <div class="date_form">
                                                     <div class="search_area">
                                                         <label>Departure</label>
-                                                        <input type="text" name="date_checkin" tabindex="3"
-                                                            value="{{ defaultDate }}" id="departure_date"
-                                                            formControlName="departureDate" />
+                                                        <input type="text" name="daterange" 
+                                                            ngxDaterangepickerMd 
+                                                            formControlName="departureDate" 
+                                                            class="form-control"
+                                                            [singleDatePicker]="true"
+                                                            (datesUpdated)="departureDateUpdate($event)"
+                                                            [locale]="locale"
+                                                            [autoApply]="true"
+                                                            [minDate]="flightDepartureMinDate"
+                                                            />
                                                         <div class="prev-next">
                                                             <a href="javascript:void(0);">Prev</a>
                                                             <a href="javascript:void(0);">Next</a>
@@ -135,23 +142,23 @@
                                                     </div>
                                                 </div>
                                                 <div class="date_to">
-                                                    <div class="search_area" *ngIf="!isRoundTrip">
+                                                    <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
                                                         <label>Return</label>
-                                                        <!-- <input type="text" name="date_checkout" maxlength="10" tabindex="4" placeholder="22 Jul’20 Friday" />
-                                                        <div class="prev-next">
-                                                            <a href="javascript:void(0);">Prev</a>
-                                                            <a href="javascript:void(0);">Next</a>
-                                                        </div>
-                                                        <div class="date_icon">
-                                                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
-                                                        </div> -->
                                                         <p>Tap to add return date</p>
                                                     </div>
 
                                                     <div class="search_area" *ngIf="isRoundTrip">
                                                         <label>Return</label>
-                                                        <input type="text" name="date_checkout" maxlength="10"
-                                                            tabindex="4" placeholder="22 Jul’20 Friday" />
+                                                        <input type="text" name="daterange" 
+                                                            ngxDaterangepickerMd 
+                                                            formControlName="returnDate"
+                                                            class="form-control"
+                                                            [singleDatePicker]="true"
+                                                            (datesUpdated)="datesUpdated($event)"
+                                                            [locale]="locale"
+                                                            [autoApply]="true"
+                                                            [minDate]="flightReturnMinDate"
+                                                            />
                                                         <div class="prev-next">
                                                             <a href="javascript:void(0);">Prev</a>
                                                             <a href="javascript:void(0);">Next</a>
