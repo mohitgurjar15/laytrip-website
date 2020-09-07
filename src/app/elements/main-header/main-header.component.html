@@ -65,15 +65,20 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-dismiss="modal" data-target="#sign_in_modal">Sign In</a>
+                            <li class="nav-item" *ngIf="!isLoggedIn">
+                                <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                             </li>
-                        </ul>
+
+                            <li class="nav-item" *ngIf="isLoggedIn">
+                                <a class="nav-link" href="javascript:void(0)" [routerLink]="['/']" (click)="onLoggedout()">Sign Out</a>
+                            </li>
+
+                        </ul> 
                     </div>
                 </nav>
             </div>
         </div>
     </div>
 </header>
-<!--  Close Header Section-->
+<!--  Close Header Section--> 
 <app-auth></app-auth>

@@ -73,8 +73,10 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
    
     ngDoCheck() {
       this.checkUser();
+      console.log(this.isLoggedIn)
     }
     ngOnDestroy() {}
+
     /**
      * change user lanunage
      * @param langunage 
