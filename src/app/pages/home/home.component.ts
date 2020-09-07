@@ -33,8 +33,6 @@ export class HomeComponent implements OnInit {
     flightSearchForm: FormGroup;
 
     // DATE OF FROM_DESTINATION & TO_DESTINATION
-    fromDestinationDate = '';
-    toDestinationDate = '';
     fromDestinationCode;
     toDestinationCode;
 
@@ -89,43 +87,6 @@ export class HomeComponent implements OnInit {
 
     loadJquery() {
 
-      // DEPARTURE DATE
-      /* $('#departure_date').dateRangePicker({
-        autoClose: true,
-        singleDate: true,
-        showShortcuts: false,
-        singleMonth: true,
-        monthSelect: true,
-        format: this.commonFunction.dateFormat('en').date,
-        startDate: moment().add(0, 'months').format(this.commonFunction.dateFormat('en').date),
-        extraClass: 'laytrip-datepicker'
-      }).bind('datepicker-first-date-selected', function (event, obj) {
-        this.getDateWithFormat({ departuredate: obj });
-      }.bind(this));
-
-      $('#departure_date_icon').click(function (evt) {
-        evt.stopPropagation();
-        $('#departure_date').data('dateRangePicker').open();
-      }); */
-
-      // RETURN DATE
-      /* $('#return_date').dateRangePicker({
-        autoClose: true,
-        singleDate: true,
-        showShortcuts: false,
-        singleMonth: true,
-        format: this.commonFunction.dateFormat('en').date,
-        startDate: moment().subtract(0, 'months').format(this.commonFunction.dateFormat('en').date),
-        extraClass: 'laytrip-datepicker'
-      }).bind('datepicker-first-date-selected', function (event, obj) {
-        this.returnDate = obj;
-        this.getDateWithFormat({ returndate: obj });
-      }.bind(this)); */
-
-      // $('#return_date_icon').click(function (evt) {
-      //   evt.stopPropagation();
-      //   $('#return_date').data('dateRangePicker').open();
-      // });
 
       $(".featured_slid").slick({
         dots: false,
@@ -260,12 +221,7 @@ export class HomeComponent implements OnInit {
     }
 
     datesUpdated(event){
-      //console.log(this.flightSearchForm.value.departureDate.startDate.format('DD/MM/YYYY'))
-
-      //this.flightSearchForm.controls.departureDate.setValue('1');
-      if(this.isRoundTrip){
-        //this.returnDatePicker.open();
-      }
+      
     }
 
     departureDateUpdate(date){
