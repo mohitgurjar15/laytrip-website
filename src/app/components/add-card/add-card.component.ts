@@ -88,7 +88,8 @@ export class AddCardComponent implements OnInit {
     // });
   }
 
-  submitPaymentForm() {
+  submitPaymentForm(event) {
+    event.preventDefault();
     Spreedly.on('paymentMethod', function (token, pmData) {
       // Set the token in the hidden form field
       var tokenField = document.getElementById('payment_method_token');
@@ -106,13 +107,14 @@ export class AddCardComponent implements OnInit {
       };
       console.log(cardData);
       this.cardData = cardData;
-      var masterForm = document.getElementById('payment-form');
-      // console.log(masterForm);
-      // masterForm.submit();
-      // this.saveCard(cardData);
+      if (this.cardData) {
+        console.log('fdgdgdgdgd:::');
+        // this.saveCard(this.cardData);
+      }
+      var masterForm = document.getElementById('payment-form') as HTMLFormElement;
+      masterForm.submit();
       // this.cardAddFormElement.nativeElement.submit();
     });
-    console.log('this.token outside', this.token);
     Spreedly.on('errors', function (errors) {
       for (let i = 0; i < errors.length; i++) {
         let error = errors[i];
@@ -140,10 +142,13 @@ export class AddCardComponent implements OnInit {
     requiredFields["year"] = expiryDate[1];
 
     Spreedly.tokenizeCreditCard(requiredFields);
-    this.saveCard(this.cardData);
+    if (this.cardData) {
+      // this.saveCard(this.cardData);
+    }
   }
 
   saveCard(cardData) {
+    console.log('component:::', cardData);
     this.genericService.saveCard(cardData).subscribe((res: any) => {
       console.log(res);
     }, (err => {
