@@ -17,7 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
 
-
 @NgModule({
   declarations: [
     SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent
@@ -29,7 +28,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     ReactiveFormsModule,
     NgbModule,
     CountdownModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    
   ],
   exports: [
     SearchAirportComponent,

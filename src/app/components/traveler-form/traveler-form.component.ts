@@ -19,11 +19,11 @@ declare var $: any;
 
 
 export class TravelerFormComponent implements OnInit {
-
+  @Input('var') usersType: any = '';
   @Input() traveler: any = [];
   @Output() valueChange = new EventEmitter();
   @Output() auditFormStatus = new EventEmitter();
-
+  @Input() type:string;
 
   adultForm: FormGroup;
   submitted = false;
@@ -37,7 +37,6 @@ export class TravelerFormComponent implements OnInit {
   maxDate: any = {};
   formStatus: boolean = false;
   departureDate;
-
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,13 +65,12 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     this.getCountry();
     this.loadJquery();
-
     this.adultForm = this.formBuilder.group({
       title: [''],
       gender: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      email: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       dob: ['', Validators.required],
       country_code: ['', Validators.required],
       phone_no: ['', Validators.required],
@@ -80,31 +78,51 @@ export class TravelerFormComponent implements OnInit {
       frequently_no: [''],
       passport_expiry: [''],
       passport_number: [''],
+      user_type:['']
     })
-    
+    this.setUserTypeValidation();
+
     let dob_selected = new Date(this.traveler.dob)
     let pass_exp__selected = new Date(this.traveler.passportExpiry)
-
-    this.adultForm.patchValue({
-      title: this.traveler.title,
-      firstName: this.traveler.firstName,
-      lastName: this.traveler.lastName,
-      email: this.traveler.email,
-      gender: this.traveler.gender,
-      dob: {year:dob_selected.getFullYear(),month:dob_selected.getMonth(),day:dob_selected.getDate()},
-      passport_expiry: { year: pass_exp__selected.getFullYear(), month: pass_exp__selected.getMonth(), day: pass_exp__selected.getDate() },
-      country_code: this.traveler.countryCode,
-      phone_no: this.traveler.phoneNo,
-      country_id: this.traveler.country.name != 'null' ? this.traveler.country.name : '',
-      passport_number: this.traveler.passportNumber,
-      frequently_no:'f'
-    })
+    if(this.traveler.userId){
+        this.adultForm.patchValue({
+          title: this.traveler.title,
+          firstName: this.traveler.firstName,
+          lastName: this.traveler.lastName,
+          email: this.traveler.email,
+          gender: this.traveler.gender,
+          dob: {year:dob_selected.getFullYear(),month:dob_selected.getMonth(),day:dob_selected.getDate()},
+          passport_expiry: { year: pass_exp__selected.getFullYear(), month: pass_exp__selected.getMonth(), day: pass_exp__selected.getDate() },
+          country_code: this.traveler.countryCode,
+          phone_no: this.traveler.phoneNo,
+          country_id: this.traveler.country.name != 'null' ? this.traveler.country.name : '',
+          passport_number: this.traveler.passportNumber,
+          frequently_no:'f'
+        })
+    }
     this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
     this.auditFormStatus.emit(this.formStatus);
 
   }
 
+  setUserTypeValidation(){
+    const emailControl = this.adultForm.get('email');  
+    const phoneControl = this.adultForm.get('phone_no');  
+    const countryControl = this.adultForm.get('country_code');   
 
+    if(this.type == 'adult'){
+      emailControl.setValidators([Validators.required])
+      phoneControl.setValidators([Validators.required])
+      countryControl.setValidators([Validators.required])
+    } else {
+      emailControl.setValidators(null)
+      phoneControl.setValidators(null)
+      countryControl.setValidators(null)
+    }
+    emailControl.updateValueAndValidity();   
+  }
+
+  
   dateFormator(date) {
     let aNewDate = date.year + '-' + date.month + '-' + date.day;
     return this.datePipe.transform(aNewDate, 'yyyy-MM-dd');
@@ -252,4 +270,6 @@ export class TravelerFormComponent implements OnInit {
 
     }
   }
+
+  
 }

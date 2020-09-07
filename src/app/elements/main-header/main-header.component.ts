@@ -152,5 +152,6 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
     onLoggedout() {
       this.isLoggedIn = false;
       localStorage.removeItem('_lay_sess');
+      this.router.url;
     }    
 }
