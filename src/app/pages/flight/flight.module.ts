@@ -19,6 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
 
+import {MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule} from '@angular/material';
+
 @NgModule({
   declarations: [
     FlightSearchComponent,
@@ -41,6 +43,10 @@ import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.compo
     ComponentsModule,
     FormsModule, ReactiveFormsModule,
     NgSelectModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule
   ]
 })
 export class FlightModule { }

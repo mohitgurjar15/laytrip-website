@@ -30,6 +30,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   cancellationPolicy;
   errorMessage;
 
+  subcell = '$100';
+
   constructor(
     private layTripStoreService: LayTripStoreService,
     private flightService: FlightService
@@ -48,6 +50,22 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         }
       }
     }));
+
+    setTimeout(() => {
+      const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
+      cells.forEach(c => {
+        c.innerHTML = c.innerHTML + ' ' + this.subcell;
+      });
+    });
+  }
+
+  opened() {
+    // setTimeout(() => {
+    //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
+    //   cells.forEach(c => {
+    //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
+    //   });
+    // });
   }
 
   getBaggageDetails(routeCode) {
