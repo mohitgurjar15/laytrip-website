@@ -1,57 +1,57 @@
 <!-- <form [formGroup]="cardForm" id="payment-form" (ngSubmit)="submitPaymentForm()"> -->
-<form ngNoForm [formGroup]="cardForm" [action]='actionLink' method='POST' #cardAddForm>
+<form [formGroup]="cardForm" [action]='actionLink' method='POST' (ngSubmit)="submitPaymentForm()">
     <div class="add_card_block">
-    <div class="form_row">
-        <input type="hidden"  formControlName="payment_method_token" id="payment_method_token">
-        
-        <div class="form_field">
-            <label>Name on Card<sup>*</sup></label>
-            <div class="text_field">
-                <input type="text" formControlName="name" maxlength="20" tabindex="101" placeholder="Enter Name on Card">
-                <p *ngIf="submitted && cardForm.controls.name.errors" class="error_text">Please enter your card name.</p>
-            </div>
-        </div>
+        <div class="form_row">
+            <input type="hidden" formControlName="payment_method_token" id="payment_method_token">
 
-        <div class="form_field">
-            <label>Card number<sup>*</sup></label>
-            <div class="text_field">
-                <div  id="spreedly-number" class="card_field"  tabindex="102">
-                    <p class="error_text" *ngIf="cardError">{{ cardError }}</p>
+            <div class="form_field">
+                <label>Name on Card<sup>*</sup></label>
+                <div class="text_field">
+                    <input type="text" formControlName="name" maxlength="20" tabindex="101"
+                        placeholder="Enter Name on Card">
+                    <p *ngIf="submitted && cardForm.controls.name.errors" class="error_text">Please enter your card
+                        name.
+                    </p>
+                </div>
+            </div>
+
+            <div class="form_field">
+                <label>Card number<sup>*</sup></label>
+                <div class="text_field">
+                    <div id="spreedly-number" class="card_field" tabindex="102">
+                        <p class="error_text" *ngIf="cardError">{{ cardError }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form_row">
+
+            <div class="form_field">
+                <label>Expiry<sup>*</sup></label>
+                <div class="text_field">
+                    <input autocomplete="off" class="birth_date" type="text" formControlName="expiry" maxlength="20"
+                        placeholder="MM/YYYY" tabindex="103" id="expiry_date">
+                    <p *ngIf="submitted && cardForm.controls.expiry.errors" class="error_text">Please enter expiry date.
+                    </p>
+                </div>
+            </div>
+            <div class="form_field">
+                <label>CVV<sup>*</sup></label>
+                <div class="text_field">
+                    <div id="spreedly-cvv" class="card_field" tabindex="104"></div>
                 </div>
             </div>
         </div>
 
-    </div>
-    <div class="form_row">
-        
-        <div class="form_field">
-            <label>Expiry<sup>*</sup></label>
-            <div class="text_field">
-                <input autocomplete="off" class="birth_date" type="text" formControlName="expiry" maxlength="20"  placeholder="MM/YYYY" tabindex="103" id="expiry_date">
-                <p *ngIf="submitted && cardForm.controls.expiry.errors" class="error_text">Please enter expiry date.</p>
-            </div>
+        <input id="submit-button" type="submit" value="Add card">
+
+        <div class="block_card_save">
+            <label class="custom_checkbox">
+                <input type="checkbox" value="">
+                <span class="checkmark"></span>
+                Save this card for future booking.
+            </label>
         </div>
-        <div class="form_field">
-            <label>CVV<sup>*</sup></label>
-            <div class="text_field">
-                <div id="spreedly-cvv" class="card_field" tabindex="104"></div>
-            </div>
-        </div>
-    </div>
-    
-
-    
-        
-    <input id="submit-button" type="submit" value="Add card" >
-
-
-    <div class="block_card_save">
-        <label class="custom_checkbox">
-            <input type="checkbox" value="">
-            <span class="checkmark"></span>
-            Save this card for future booking.
-        </label>
-    </div>
     </div>
 </form>
-

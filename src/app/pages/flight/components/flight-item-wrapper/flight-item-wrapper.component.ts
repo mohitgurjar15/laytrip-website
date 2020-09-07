@@ -29,7 +29,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   baggageDetails;
   cancellationPolicy;
   errorMessage;
-  loadBaggageDetails=true;
+  loadBaggageDetails = true;
 
   subcell = '$100';
 
@@ -39,6 +39,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   ) { }
 
   ngOnInit() {
+
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.loadJquery();
@@ -52,12 +53,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       }
     }));
 
-    setTimeout(() => {
-      const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
-      cells.forEach(c => {
-        c.innerHTML = c.innerHTML + ' ' + this.subcell;
-      });
-    });
+    // setTimeout(() => {
+    //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
+    //   cells.forEach(c => {
+    //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
+    //   });
+    // });
   }
 
   opened() {
@@ -70,16 +71,16 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   getBaggageDetails(routeCode) {
-    this.loadBaggageDetails=true;
+    this.loadBaggageDetails = true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
       console.log('baggage:::', data);
       this.baggageDetails = data;
-      this.loadBaggageDetails=false;
+      this.loadBaggageDetails = false;
     });
   }
 
   getCancellationPolicy(routeCode) {
-    this.cancellationPolicy="";
+    this.cancellationPolicy = "";
     this.flightService.getCancellationPolicy(routeCode).subscribe(data => {
       console.log('cancellation-policy:::', data);
       this.errorMessage = '';
@@ -102,7 +103,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   showDetails(index) {
     this.showFlightDetails = index;
-    
+
   }
 
   clickOutside() {

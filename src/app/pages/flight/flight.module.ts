@@ -21,8 +21,6 @@ import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.compo
 import { BookingSummaryLoaderComponent } from './components/booking-summary-loader/booking-summary-loader.component';
 import { FlightConfirmationComponent } from './components/flight-confirmation/flight-confirmation.component';
 
-import {MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule} from '@angular/material';
-
 @NgModule({
   declarations: [
     FlightSearchComponent,
@@ -48,10 +46,6 @@ import {MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputMo
     FormsModule, 
     ReactiveFormsModule,
     NgSelectModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatInputModule
   ]
 })
 export class FlightModule { }
