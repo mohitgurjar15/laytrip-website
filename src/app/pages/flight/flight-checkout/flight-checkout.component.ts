@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
-import { FlightService } from 'src/app/services/flight.service';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-checkout',
