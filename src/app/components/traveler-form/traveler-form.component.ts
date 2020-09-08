@@ -36,12 +36,10 @@ export class TravelerFormComponent implements OnInit {
   loading = false;
   isLoggedIn = false;
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
-  editMode = false;
-  minDate: any = {};
-  maxDate: any = {};
+  editMode = false;  
   formStatus: boolean = false;
 
-  dobMinDate: moment.Moment = moment(); 
+  dobMinDate: any; 
   dobMaxDate: moment.Moment = moment(); 
   expiryMinDate: moment.Moment = moment().add(2, 'days'); 
 
@@ -52,25 +50,12 @@ export class TravelerFormComponent implements OnInit {
     private genericService: GenericService,
     public router: Router,
     public commonFunction: CommonFunction,
-    private config: NgbDatepickerConfig,
-    private datePipe: DatePipe
 
   ) {
 
-
-    config.minDate = { year: 2000, month: 1, day: 1 };
-    config.maxDate = { year: 2099, month: 12, day: 31 };
-    let current = new Date();
-    this.minDate = {
-      year: current.getFullYear(),
-      month: current.getMonth() + 1,
-      day: current.getDate()
-    };
-    this.maxDate = this.minDate;
   }
 
   ngOnInit() {
-    
     this.adultForm = this.formBuilder.group({
       title: [''],
       gender: ['', Validators.required],
@@ -116,28 +101,39 @@ export class TravelerFormComponent implements OnInit {
     this.countries_code = this.countries_code;
 
   }
+
   setUserTypeValidation(){
     const emailControl = this.adultForm.get('email');  
     const phoneControl = this.adultForm.get('phone_no');  
     const countryControl = this.adultForm.get('country_code');   
 
     if(this.type == 'adult'){
-      emailControl.setValidators([Validators.required])
-      phoneControl.setValidators([Validators.required])
-      countryControl.setValidators([Validators.required])
-    } else {
+      emailControl.setValidators([Validators.required]);
+      phoneControl.setValidators([Validators.required]);
+      countryControl.setValidators([Validators.required]);
+      this.dobMaxDate =  moment().add(-12, 'year'); 
+      
+    } else if(this.type === 'child') {
+      emailControl.setValidators(null)
+      phoneControl.setValidators(null)
+      countryControl.setValidators(null);
+      this.dobMinDate =  moment().add(-12, 'year'); 
+      this.dobMaxDate =  moment().add(-2, 'year'); 
+    
+    } else if(this.type === 'infant'){
+
+      this.dobMinDate =  moment().add(-2, 'year'); 
+      this.dobMaxDate =  moment(); 
       emailControl.setValidators(null)
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
+
     }
     emailControl.updateValueAndValidity();   
   }
 
   
-  dateFormator(date) {
-    let aNewDate = date.year + '-' + date.month + '-' + date.day;
-    return this.datePipe.transform(aNewDate, 'yyyy-MM-dd');
-  }
+ 
 
 
   ngOnChanges(changes) {
@@ -153,10 +149,7 @@ export class TravelerFormComponent implements OnInit {
     }
   }
 
-  getDateWithFormat(date) {
-    console.log("date", date)
-    this.adultForm.controls.dob.setValue(moment(date.date1).format("MM/YYYY"));
-  }
+ 
 
   onSubmit() {
     this.submitted = this.loading = true;
@@ -169,20 +162,17 @@ export class TravelerFormComponent implements OnInit {
       if (!Number(country_id)) {
         country_id = this.traveler.country.id;
       }
-      console.log(this.adultForm.value)
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
-        dob: this.dateFormator(this.adultForm.value.dob),
+        dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
         country_code: this.adultForm.value.country_code.code,
         country_id: country_id,
         phone_no: this.adultForm.value.phone_no,
-        // email : this.adultForm.value.email,
-        passport_number: this.adultForm.value.passport_number,
-        passport_expiry: this.dateFormator(this.adultForm.value.passport_expiry)
+        passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD'),
       };
 
       if (this.traveler && this.traveler.userId) {
@@ -208,8 +198,7 @@ export class TravelerFormComponent implements OnInit {
           if(!this.isLoggedIn){
             localStorage.setItem("_lay_sess", data.token);
           }
-          console.log(data.data)
-          this.valueChange.emit(data.data);
+          this.valueChange.emit(data);
           $('.collapse').collapse('hide');
         }, (error: HttpErrorResponse) => {
           console.log('error')
@@ -224,10 +213,12 @@ export class TravelerFormComponent implements OnInit {
 
   dobDateUpdate(date){
     this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
+    // console.log(this.expiryMinDate)
   }
 
   expiryDateUpdate(date){
     this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
+
   }
 
   

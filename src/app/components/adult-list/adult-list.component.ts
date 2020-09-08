@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { GenericService } from 'src/app/services/generic.service';
@@ -20,7 +20,7 @@ export class AdultListComponent implements OnInit {
   @Input() totalTravelerCount:number;
 
   counter  = 0;
-  UserIds  = [];
+  travelerArray  = [];
   checked : boolean = false;
   checkBoxDesable : boolean = false;
   isLoggedIn : boolean = false;
@@ -37,6 +37,7 @@ export class AdultListComponent implements OnInit {
     private cookieService: CookieService,
     private genericService: GenericService,
     public router: Router,
+    public cd : ChangeDetectorRef
 
       ) { }
 
@@ -50,11 +51,15 @@ export class AdultListComponent implements OnInit {
 
 
 
-  checkBox(event){
-   
+  checkBox(event,traveler){
     if(event.target.checked){
-      this.UserIds.push(event.target.value); 
-      this.cookieService.put("userIds", JSON.stringify(this.UserIds));
+      this.travelerArray.push({
+        "userId":traveler.userId,
+        "firstName":traveler.firstName,
+        "lastName":traveler.lastName,
+        "email":traveler.email
+      }); 
+      this.cookieService.put("travelerArray", JSON.stringify(this.travelerArray));
       
       if(this.counter  < this.totalTravelerCount){
         console.log(this.counter  , this.totalTravelerCount)
@@ -68,9 +73,9 @@ export class AdultListComponent implements OnInit {
       this.counter--;
       // this.checkBoxDesable = false;
 
-      this.UserIds = this.UserIds.filter(obj => obj !== event.target.value);
-      this.cookieService.remove('userIds');
-      this.cookieService.put("userIds", JSON.stringify(this.UserIds));
+      this.travelerArray = this.travelerArray.filter(obj => obj !== traveler.userId);
+      this.cookieService.remove('travelerArray');
+      this.cookieService.put("travelerArray", JSON.stringify(this.travelerArray));
       
     }
     this.adultsCount.emit(this.counter); 
@@ -84,10 +89,9 @@ export class AdultListComponent implements OnInit {
   }
   
   
-  ngDoCheck() {
-    
+  ngDoCheck() {    
     this.containers = this.containers;
-    this.travelers = this.travelers;
+    this.travelers = this.travelers;    
   }
   
   addForms(type) {

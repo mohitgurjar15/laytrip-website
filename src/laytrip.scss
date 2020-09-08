@@ -1,48 +1,85 @@
 .model-animated {
-    animation-duration: 1s;
-    animation-name: slideRightLeft;
+  animation-duration: 1s;
+  animation-name: slideRightLeft;
 }
+
 @keyframes slideRightLeft {
-from,
-    60%,
-    75%,
-    90%,
-    to {
+
+  from,
+  60%,
+  75%,
+  90%,
+  to {
     -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
+  }
 
-    from {
+  from {
     opacity: 0;
     -webkit-transform: translate3d(3000px, 0, 0);
     transform: translate3d(3000px, 0, 0);
-    }
+  }
 
-    60% {
+  60% {
     opacity: 1;
     -webkit-transform: translate3d(-25px, 0, 0);
     transform: translate3d(-25px, 0, 0);
-    }
+  }
 
-    75% {
+  75% {
     -webkit-transform: translate3d(10px, 0, 0);
     transform: translate3d(10px, 0, 0);
-    }
+  }
 
-    90% {
+  90% {
     -webkit-transform: translate3d(-5px, 0, 0);
     transform: translate3d(-5px, 0, 0);
-    }
+  }
 
-    to {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    }
+  }
 }
 
 input.border-css.ng-pristine.ng-invalid.ng-touched {
-	border: 1px solid #f4516c !important;
+  border: 1px solid #f4516c !important;
 }
-input.border-css.ng-touched.ng-dirty ng-invalid{
-	border: 1px solid #f4516c !important;
+
+input.border-css.ng-touched.ng-dirty ng-invalid {
+  border: 1px solid #f4516c !important;
+}
+
+
+.detail_info_main {
+  &.add_passenger {
+    .detail_info_left {
+      .block_passanger_info {
+        .passanger_detail_main {
+          .block_passenger_detail {
+            .card_add_pass {
+              .card-body {
+                .block_add_passenger {
+                  .form_row {
+                    .form_field {
+                      &.half {
+                        .custom_datpicker {
+                          border: none;
+                          border-bottom: 1px solid #E0E2E5;  
+                          &:focus{
+                              outline: none;
+                              box-shadow: none;
+                          }                        
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

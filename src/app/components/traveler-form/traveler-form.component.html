@@ -132,12 +132,12 @@
         <input type="text" name="daterange" 
             ngxDaterangepickerMd 
             formControlName="dob" 
-            class="form-control"
+            class="form-control custom_datpicker"
             [singleDatePicker]="true"
             (datesUpdated)="dobDateUpdate($event)"
             [locale]="locale"
             [autoApply]="true"
-            [minDate]="dobReturnMinDate"
+            [minDate]="dobMinDate"
             [maxDate]="dobMaxDate"
             />
             <!-- <div class="prev-next">
@@ -180,10 +180,10 @@
           <input type="text" name="daterange" 
             ngxDaterangepickerMd 
             formControlName="passport_expiry" 
-            class="form-control"
+            class="form-control custom_datpicker"
             [singleDatePicker]="true"
             (datesUpdated)="expiryDateUpdate($event)"
-            [locale]="locale"
+            [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
             [autoApply]="true"
             [minDate]="expiryMinDate"
           />
