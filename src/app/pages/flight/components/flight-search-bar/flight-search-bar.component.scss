@@ -83,3 +83,14 @@
 }
 
 
+.disable_return_date{
+
+    height: 100%;
+    p{
+        padding: 0 15px;
+        margin:0;
+        font-size: 14px;
+        color: $text-grey;
+        cursor: pointer;
+    }
+}

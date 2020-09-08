@@ -42,8 +42,6 @@ import { Ng5SliderModule } from 'ng5-slider';
     FormsModule,
     // NG5 SLIDER
     Ng5SliderModule,
-
-
   ],
   entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent]
 
