@@ -135,7 +135,7 @@
             class="form-control custom_datpicker"
             [singleDatePicker]="true"
             (datesUpdated)="dobDateUpdate($event)"
-            [locale]="locale"
+            [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
             [autoApply]="true"
             [minDate]="dobMinDate"
             [maxDate]="dobMaxDate"

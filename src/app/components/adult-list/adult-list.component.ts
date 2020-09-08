@@ -20,7 +20,7 @@ export class AdultListComponent implements OnInit {
   @Input() totalTravelerCount:number;
 
   counter  = 0;
-  travelerArray  = [];
+  _travelers  = [];
   checked : boolean = false;
   checkBoxDesable : boolean = false;
   isLoggedIn : boolean = false;
@@ -41,7 +41,8 @@ export class AdultListComponent implements OnInit {
 
       ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    console.log(this.cookieService.getAll())
     this.checkUser();
     this.getCountry();
     if(this.type == 'adult' && !this.isLoggedIn){
@@ -53,30 +54,27 @@ export class AdultListComponent implements OnInit {
 
   checkBox(event,traveler){
     if(event.target.checked){
-      this.travelerArray.push({
+      let travelerData = {
         "userId":traveler.userId,
         "firstName":traveler.firstName,
         "lastName":traveler.lastName,
         "email":traveler.email
-      }); 
-      this.cookieService.put("travelerArray", JSON.stringify(this.travelerArray));
-      
-      if(this.counter  < this.totalTravelerCount){
-        console.log(this.counter  , this.totalTravelerCount)
+      };
+      this._travelers.push(travelerData); 
+      this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+      let checkCounter = this.counter + 1;
+      if(checkCounter < this.totalTravelerCount){
         this.counter++;
-      } else {
-        
-        // this.checkBoxDesable = true;
-      }
-      
+        this.checkBoxDesable = false;
+      } else {        
+        this.checkBoxDesable = true;
+      }      
     } else {
       this.counter--;
-      // this.checkBoxDesable = false;
-
-      this.travelerArray = this.travelerArray.filter(obj => obj !== traveler.userId);
-      this.cookieService.remove('travelerArray');
-      this.cookieService.put("travelerArray", JSON.stringify(this.travelerArray));
-      
+      this.checkBoxDesable = false;
+      this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
+      this.cookieService.remove('_travelers');
+      this.cookieService.put("_travelers", JSON.stringify(this._travelers));      
     }
     this.adultsCount.emit(this.counter); 
   }
@@ -90,6 +88,7 @@ export class AdultListComponent implements OnInit {
   
   
   ngDoCheck() {    
+    this.checkUser();
     this.containers = this.containers;
     this.travelers = this.travelers;    
   }
