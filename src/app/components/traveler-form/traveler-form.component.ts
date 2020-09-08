@@ -86,9 +86,9 @@ export class TravelerFormComponent implements OnInit {
           passport_expiry: { year: pass_exp__selected.getFullYear(), month: pass_exp__selected.getMonth(), day: pass_exp__selected.getDate() },
           country_code: this.traveler.countryCode,
           phone_no: this.traveler.phoneNo,
-          country_id: this.traveler.country.name != 'null' ? this.traveler.country.name : '',
+          country_id: this.traveler.country != null ? this.traveler.country.name : '',
           passport_number: this.traveler.passportNumber,
-          frequently_no:'f'
+          frequently_no:''
         })
     }
     this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
@@ -108,28 +108,27 @@ export class TravelerFormComponent implements OnInit {
     const countryControl = this.adultForm.get('country_code');   
 
     if(this.type == 'adult'){
-      emailControl.setValidators([Validators.required]);
+      emailControl.setValidators([Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
       this.dobMaxDate =  moment().add(-12, 'year'); 
       
     } else if(this.type === 'child') {
-      emailControl.setValidators(null)
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null);
       this.dobMinDate =  moment().add(-12, 'year'); 
-      this.dobMaxDate =  moment().add(-2, 'year'); 
-    
+      this.dobMaxDate =  moment().add(-2, 'year');     
     } else if(this.type === 'infant'){
-
       this.dobMinDate =  moment().add(-2, 'year'); 
       this.dobMaxDate =  moment(); 
-      emailControl.setValidators(null)
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
-
     }
     emailControl.updateValueAndValidity();   
+    phoneControl.updateValueAndValidity();   
+    countryControl.updateValueAndValidity();   
   }
 
   
@@ -213,7 +212,7 @@ export class TravelerFormComponent implements OnInit {
 
   dobDateUpdate(date){
     this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
-    // console.log(this.expiryMinDate)
+    console.log(this.expiryMinDate)
   }
 
   expiryDateUpdate(date){

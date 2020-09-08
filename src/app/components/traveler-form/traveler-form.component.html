@@ -116,11 +116,10 @@
           </div>
         </div>
         <div
-          *ngIf="(submitted  || adultForm.controls.phone_no.touched) && (adultForm.controls.phone_no.errors && adultForm.controls.country_code.errors)"
+          *ngIf="type=='adult' && ((submitted  || adultForm.controls.phone_no.touched || adultForm.controls.country_code.touched) && (adultForm.controls.phone_no.errors || adultForm.controls.country_code.errors))"
           class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.country_code.errors.required"
-            class="text-danger">Please enter
-            phone no.
+          <div *ngIf="adultForm.controls.phone_no.errors.required || adultForm.controls.country_code.errors.required"
+            class="text-danger">Please enter phone no.
           </div>
         </div>
       </div>
@@ -129,9 +128,12 @@
 
       <div class="form_field half">
         <label>DOB<sup>*</sup></label>
-        <input type="text" name="daterange" 
+        <input type="text" name="daterange"   tabindex="6"
             ngxDaterangepickerMd 
             formControlName="dob" 
+            showDropdowns="true"
+            alwaysShowCalendars="true"
+            placeholder="Select please... " 
             class="form-control custom_datpicker"
             [singleDatePicker]="true"
             (datesUpdated)="dobDateUpdate($event)"
@@ -148,8 +150,6 @@
               <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
           </div> -->
 
-        <!-- <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="6" ngbDatepicker #d="ngbDatepicker"
-          dateFormat="yyyy-mm-dd" formControlName="dob" (click)="d.toggle()"> -->
           <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
             <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
               date of birth.
@@ -175,16 +175,19 @@
     <div class="form_row">
       <div class="form_field half">
         <label>Passport Expiry</label>
-        <!-- <input class="form-control" placeholder="yyyy-mm-dd" tabindex="8" ngbDatepicker #dd="ngbDatepicker"
-          dateFormat="yyyy-mm-dd" formControlName="passport_expiry" (click)="dd.toggle()"> -->
-          <input type="text" name="daterange" 
+        
+          <input type="text" name="daterange"   tabindex="8"
             ngxDaterangepickerMd 
             formControlName="passport_expiry" 
             class="form-control custom_datpicker"
+            showDropdowns="true"
+            alwaysShowCalendars="true"
+            placeholder="Select please... " 
             [singleDatePicker]="true"
             (datesUpdated)="expiryDateUpdate($event)"
             [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
             [autoApply]="true"
+            showDropdowns="true"
             [minDate]="expiryMinDate"
           />
       </div>
