@@ -69,6 +69,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         this.submitted = false;    
         // this.forgotPasswordSuccess = true;
         this.valueChange.emit({ key: 'reset-password', value: true,emailForVerifyOtp:this.forgotForm.value.email,isReset:true });  
+        $('.modal_container').addClass('right-panel-active');
+        $('.resetpass-container').addClass('show_resetpass');
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading  = false;
         this.apiMessage = error.message;

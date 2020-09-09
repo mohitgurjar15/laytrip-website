@@ -19,6 +19,7 @@ var AdultListComponent = /** @class */ (function () {
         this.counter = 0;
         this.totalTravelerCount = 0;
         this._travelers = [];
+        this._selectedId = [];
         this.checked = false;
         this.checkBoxDisable = false;
         this.isLoggedIn = false;
@@ -40,17 +41,9 @@ var AdultListComponent = /** @class */ (function () {
     };
     AdultListComponent.prototype.selectTraveler = function (event, traveler) {
         if (event.target.checked) {
-            traveler.checked = true;
-            var travelerData = {
-                "userId": traveler.userId,
-                "firstName": traveler.firstName,
-                "lastName": traveler.lastName,
-                "email": traveler.email
-            };
-            this._travelers.push(travelerData);
-            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-            var checkCounter = this.counter + 1;
-            if (checkCounter < this.totalTravelerCount) {
+            this._selectedId.push(event.target.id);
+            console.log(this.counter);
+            if (this.counter + 1 < 3) {
                 this.counter++;
                 this.checkBoxDisable = false;
             }
@@ -59,14 +52,37 @@ var AdultListComponent = /** @class */ (function () {
             }
         }
         else {
-            traveler.checked = false;
-            this.counter--;
             this.checkBoxDisable = false;
-            this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
-            this.cookieService.remove('_travelers');
-            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+            this.counter--;
         }
-        this.adultsCount.emit(this.counter);
+        console.log('counter', this.counter);
+        /* if (event.target.checked) {
+          traveler.checked = true;
+          let travelerData = {
+            "userId": traveler.userId,
+            "firstName": traveler.firstName,
+            "lastName": traveler.lastName,
+            "email": traveler.email
+          };
+          this._travelers.push(travelerData);
+          this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+          // let checkCounter = this.counter + 1;
+          
+          if (this.counter + 1 < this.totalTravelerCount) {
+            this.counter++;
+            this.checkBoxDisable = false;
+          } else {
+            this.checkBoxDisable = false;
+          }
+        } else {
+          traveler.checked = false;
+          this.counter--;
+          this.checkBoxDisable = false;
+          this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
+          this.cookieService.remove('_travelers');
+          this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        } */
+        // this.adultsCount.emit(this.counter);
     };
     AdultListComponent.prototype.ngOnChanges = function (changes) {
         if (changes['traveler']) {
@@ -74,6 +90,10 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.ngDoCheck = function () {
+        console.log('check');
+        this._selectedId.forEach(function (id) {
+            $('#' + id).removeAttr("disabled");
+        });
         this.checkUser();
         this.containers = this.containers;
         this.travelers = this.travelers;

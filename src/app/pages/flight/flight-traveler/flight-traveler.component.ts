@@ -33,6 +33,7 @@ export class FlightTravelerComponent implements OnInit {
    
     this.routeCode = this.route.snapshot.paramMap.get('rc')
     this.getTravelers();
+
   }
 
   getTravelers(){

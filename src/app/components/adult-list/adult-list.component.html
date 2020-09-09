@@ -6,15 +6,12 @@
                 <div class="card_add_pass" *ngIf="traveler.user_type==='adult'">
                     <div class="card-header" id="adultOne{{i}}">
                         <h2 class="mb-0">
-                            <label class="custom_checkbox" *ngIf="traveler.checked === false">
-                                <input [disabled]="checkBoxDisable" type="checkbox"
+                            <label class="custom_checkbox" >
+                                <input id="checkbox-{{i}}" [disabled]="checkBoxDisable" type="checkbox"
                                     (change)="selectTraveler($event,traveler);">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="custom_checkbox" *ngIf="traveler.checked">
-                                <input type="checkbox" (change)="selectTraveler($event,traveler);">
-                                <span class="checkmark"></span>
-                            </label>
+                           
                             <button type="button" class="btn btn-link" data-toggle="collapse"
                                 [attr.data-target]="'#adultcollapseOne'+ i">
                                 {{traveler.firstName}} {{traveler.lastName}} {{traveler.checked}}
@@ -65,7 +62,7 @@
                         <div class="card-header" id="adultOne{{i}}">
                             <h2 class="mb-0">
                                 <label class="custom_checkbox">
-                                    <input [disabled]="checkBoxDisable" type="checkbox"
+                                    <input id="checkbox-{{i}}" [disabled]="checkBoxDisable" type="checkbox"
                                         (change)="selectTraveler($event,traveler);">
                                     <span class="checkmark"></span>
                                 </label>
@@ -115,7 +112,7 @@
                         <div class="card-header" id="adultOne{{i}}">
                             <h2 class="mb-0">
                                 <label class="custom_checkbox">
-                                    <input [disabled]="checkBoxDisable" type="checkbox"
+                                    <input id="checkbox-{{i}}" [disabled]="checkBoxDisable" type="checkbox"
                                         (change)="selectTraveler($event,traveler);">
                                     <span class="checkmark"></span>
                                 </label>
