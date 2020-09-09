@@ -128,12 +128,12 @@
 
       <div class="form_field half">
         <label>DOB<sup>*</sup></label>
-        <input type="text" name="daterange"   tabindex="6"
+        <input type="text"    tabindex="6"
             ngxDaterangepickerMd 
             formControlName="dob" 
             showDropdowns="true"
             alwaysShowCalendars="true"
-            placeholder="Select please... " 
+            placeholder="" 
             class="form-control custom_datpicker"
             [singleDatePicker]="true"
             (datesUpdated)="dobDateUpdate($event)"
@@ -176,13 +176,13 @@
       <div class="form_field half">
         <label>Passport Expiry</label>
         
-          <input type="text" name="daterange"   tabindex="8"
+          <input type="text"   tabindex="8"
             ngxDaterangepickerMd 
             formControlName="passport_expiry" 
             class="form-control custom_datpicker"
             showDropdowns="true"
             alwaysShowCalendars="true"
-            placeholder="Select please... " 
+            placeholder="" 
             [singleDatePicker]="true"
             (datesUpdated)="expiryDateUpdate($event)"
             [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
