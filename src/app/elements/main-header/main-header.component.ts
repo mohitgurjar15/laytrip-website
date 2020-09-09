@@ -73,7 +73,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
    
     ngDoCheck() {
       this.checkUser();
-      console.log(this.isLoggedIn)
+      //console.log(this.isLoggedIn)
     }
     ngOnDestroy() {}
 

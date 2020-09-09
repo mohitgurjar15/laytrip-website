@@ -5,7 +5,7 @@
           <div class="col-lg-8">
               <div class="detail_info_left" *ngIf="bookingStatus==0">
                   <div class="block_payment">
-                      <app-booking-timer></app-booking-timer>
+                      <app-booking-timer [config]="bookingTimerConfig"></app-booking-timer>
                       <div class="block_pay_info">
                           <div class="block_travellers">
                               <h6>Travellers</h6>
@@ -17,12 +17,14 @@
                           <app-payment-mode (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)"></app-payment-mode>
                           <!-- <app-redeem-laycredit></app-redeem-laycredit> -->
                           <div class="block_card_select">
-                              <div class="block_title_section">
-                                  <h5>Select Credit Card</h5>
+                              <div class="block_title_section" >
+                                  <h5 *ngIf="userInfo.roleId!=7">Select Credit Card</h5>
+                                  <h5 *ngIf="userInfo.roleId==7">Credit Card Details
+                                </h5>
                               </div>
                               <div class="block_detail">
-                                  <app-card-list (selectCreditCard)="selectCreditCard($event)"></app-card-list>
-                                  <div class="add_card_btn">
+                                  <app-card-list *ngIf="userInfo.roleId!=7" (selectCreditCard)="selectCreditCard($event)"></app-card-list>
+                                  <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
                                       <a href="javascript:void(0);" (click)="toggleAddcardForm()" >+ Add New Card</a>
                                   </div>
                                   <app-add-card *ngIf="showAddCardForm" ></app-add-card>
@@ -133,11 +135,13 @@
                       
                   </div>
               </div>
-              <app-flight-confirmation *ngIf="bookingStatus==1"></app-flight-confirmation>
+              <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
           </div>
           <div class="col-lg-4">
-            <app-flight-summary></app-flight-summary>
+            <!-- <app-flight-summary></app-flight-summary> -->
           </div>
       </div>
   </div>
 </section>
+
+<app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png" title="Flights"></app-full-page-overlay-loader>

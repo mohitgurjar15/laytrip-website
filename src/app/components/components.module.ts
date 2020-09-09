@@ -16,10 +16,11 @@ import { TravelerFormComponent } from './traveler-form/traveler-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
+import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -41,8 +42,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     BookingTimerComponent,
     PaymentModeComponent,
     CardListComponent,
-    AddCardComponent
-    
+    AddCardComponent,
+    FullPageOverlayLoaderComponent
   ],
   providers: [DatePipe],
 

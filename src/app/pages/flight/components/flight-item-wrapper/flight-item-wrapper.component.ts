@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, AfterContentChecked, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
 import { Subscription } from 'rxjs';
 import { FlightService } from '../../../../services/flight.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -35,7 +37,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   constructor(
     private layTripStoreService: LayTripStoreService,
-    private flightService: FlightService
+    private flightService: FlightService,
+    private router:Router,
+    private route:ActivatedRoute,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -115,4 +120,13 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  bookNow(routeCode){
+    let itinerary ={
+      adult   : this.route.snapshot.queryParams["adult"],
+      child   : this.route.snapshot.queryParams["child"],
+      infant  : this.route.snapshot.queryParams["infant"]
+    }
+    this.cookieService.put('_itinerary',JSON.stringify(itinerary));
+    this.router.navigate([`flight/traveler/${routeCode}`])
+  }
 }

@@ -127,9 +127,6 @@ export class HomeComponent implements OnInit {
       // Close Featured List Js
     }
 
-    tabChange(value) {
-      this.searchFlightInfo.trip = value;
-    }
 
     /**
      * Get All module like (hotel, flight & VR)
@@ -196,10 +193,11 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
         this.router.navigate(['flight/search'], {
           queryParams: {
-            trip: this.searchFlightInfo.trip,
+            trip: this.isRoundTrip?'roundtrip':'oneway',
             departure: this.searchFlightInfo.departure,
             arrival: this.searchFlightInfo.arrival,
             departure_date: moment(this.flightSearchForm.value.departureDate.startDate).format('YYYY-MM-DD'),
+            arrival_date: moment(this.flightSearchForm.value.returnDate.startDate).format('YYYY-MM-DD'),
             class: this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy',
             adult: this.searchFlightInfo.adult,
             child: this.searchFlightInfo.child ? this.searchFlightInfo.child : 0,
