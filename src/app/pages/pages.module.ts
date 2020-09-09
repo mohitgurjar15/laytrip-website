@@ -18,6 +18,7 @@ import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark
 
 // NG5 SLIDER
 import { Ng5SliderModule } from 'ng5-slider';
+import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     ForgotPasswordComponent,
     VerifyOtpComponent,
     AuthComponent,
-    AsteriskMarkComponent
+    AsteriskMarkComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
