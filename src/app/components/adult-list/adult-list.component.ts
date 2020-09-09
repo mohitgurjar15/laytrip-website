@@ -17,9 +17,9 @@ export class AdultListComponent implements OnInit {
   @Input() username: string;
   @Input() type: string;
   @Input() age: string;
-  @Input() totalTravelerCount: number;
 
   counter = 0;
+  totalTravelerCount = 0;
   _travelers = [];
   checked: boolean = false;
   checkBoxDisable: boolean = false;
@@ -29,6 +29,7 @@ export class AdultListComponent implements OnInit {
   showAddInfantForm: boolean = false;
   adultFormStatus: boolean = false;
   count = 0;
+  _itinerary :any;
   countries: any = [];
   countries_code: any = [];
   containers = [];

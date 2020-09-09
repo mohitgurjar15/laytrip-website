@@ -1,4 +1,5 @@
 <div class="block_passenger_detail">
+    <div class="block_passenger_info">
     <h6>Adult <span>(Above 12 years)</span></h6>
     <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
         <div *ngFor="let traveler of travelers; let i = index;">
@@ -6,12 +7,12 @@
                 <div class="card-header" id="adultOne{{i}}">
                     <h2 class="mb-0">
                         <label class="custom_checkbox" *ngIf="traveler.checked === false">
-                            <input [disabled]="checkBoxDisable" type="checkbox" value="{{traveler}}"
+                            <input [disabled]="checkBoxDisable" type="checkbox" 
                                 (change)="selectTraveler($event,traveler);">
                             <span class="checkmark"></span>
                         </label>
                         <label class="custom_checkbox" *ngIf="traveler.checked">
-                            <input type="checkbox" value="{{traveler}}"
+                            <input type="checkbox" 
                                 (change)="selectTraveler($event,traveler);">
                             <span class="checkmark"></span>
                         </label>
@@ -37,6 +38,7 @@
     </div>
     <a class="add_passenger_btn" href="javascript:void(0);" (click)="addForms('adult')">{{showAddAdultForm ? '-' : '+'}}
         Add {{'Adult' | titlecase}}</a>
+</div>
     <!-- Without Login -->
     <div id="accordion-Adults" class="accordion" *ngIf="showAddAdultForm">
         <div class="card_add_pass">
@@ -54,7 +56,7 @@
     </div>
 
     <div *ngIf="isLoggedIn" class="child-infant">
-
+        <div class="block_passenger_info">
         <h6>Child <span>(Above 2-12 years)</span></h6>
         <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
             <div *ngFor="let traveler of travelers; let i = index;">
@@ -62,7 +64,7 @@
                     <div class="card-header" id="adultOne{{i}}">
                         <h2 class="mb-0">
                             <label class="custom_checkbox">
-                                <input [disabled]="checkBoxDisable" type="checkbox" value="{{traveler}}"
+                                <input [disabled]="checkBoxDisable" type="checkbox" 
                                     (change)="selectTraveler($event,traveler);">
                                 <span class="checkmark"></span>
                             </label> 
@@ -89,6 +91,7 @@
         <a class="add_passenger_btn" href="javascript:void(0);"
             (click)="addForms('child')">{{showAddChildForm ? '-' : '+'}}
             Add {{'Child' | titlecase}}</a>
+        </div>
         <!-- Without Login -->
         <div id="accordion-Adults" class="accordion" *ngIf="showAddChildForm">
             <div class="card_add_pass">
@@ -103,7 +106,7 @@
                 </div>
             </div>
         </div>
-
+        <div class="block_passenger_info">
         <h6>Infant <span>(Above 2 years)</span></h6>
         <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
             <div *ngFor="let traveler of travelers; let i = index;">
@@ -111,7 +114,7 @@
                     <div class="card-header" id="adultOne{{i}}">
                         <h2 class="mb-0">
                             <label class="custom_checkbox">
-                                <input [disabled]="checkBoxDisable" type="checkbox" value="{{traveler}}"
+                                <input [disabled]="checkBoxDisable" type="checkbox" 
                                     (change)="selectTraveler($event,traveler);">
                                 <span class="checkmark"></span>
                             </label>
@@ -138,7 +141,7 @@
         <a class="add_passenger_btn" href="javascript:void(0);"
             (click)="addForms('infant')">{{showAddInfantForm ? '-' : '+'}}
             Add {{'Infant' | titlecase}}</a>
-
+    </div>
 
         <!-- Without Login -->
         <div id="accordion-Adults" class="accordion" *ngIf="showAddInfantForm">

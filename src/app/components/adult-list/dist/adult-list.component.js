@@ -17,6 +17,7 @@ var AdultListComponent = /** @class */ (function () {
         this.adultsCount = new core_1.EventEmitter();
         this.travelers = [];
         this.counter = 0;
+        this.totalTravelerCount = 0;
         this._travelers = [];
         this.checked = false;
         this.checkBoxDisable = false;
@@ -139,9 +140,6 @@ var AdultListComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], AdultListComponent.prototype, "age");
-    __decorate([
-        core_1.Input()
-    ], AdultListComponent.prototype, "totalTravelerCount");
     AdultListComponent = __decorate([
         core_1.Component({
             selector: 'app-adult-list',

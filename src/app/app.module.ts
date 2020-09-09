@@ -11,7 +11,6 @@ import { ElementsModule } from './elements/elements.module';
 import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StateModule } from './state/state.module';
-import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -34,9 +33,7 @@ import { CookieModule } from 'ngx-cookie';
       }
     }),
     BrowserAnimationsModule,
-    StateModule,
-    CookieModule.forRoot()
-
+    StateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
