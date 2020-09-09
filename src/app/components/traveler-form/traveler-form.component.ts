@@ -76,7 +76,7 @@ export class TravelerFormComponent implements OnInit {
     let dob_selected = new Date(this.traveler.dob)
     let pass_exp__selected = new Date(this.traveler.passportExpiry)
     if(this.traveler.userId){
-        this.adultForm.patchValue({
+      this.adultForm.patchValue({
           title: this.traveler.title,
           firstName: this.traveler.firstName,
           lastName: this.traveler.lastName,
@@ -92,6 +92,7 @@ export class TravelerFormComponent implements OnInit {
         })
     }
     this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
+   
     this.auditFormStatus.emit(this.formStatus);
 
   }

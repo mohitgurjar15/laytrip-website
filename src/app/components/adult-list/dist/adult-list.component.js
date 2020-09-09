@@ -19,7 +19,7 @@ var AdultListComponent = /** @class */ (function () {
         this.counter = 0;
         this._travelers = [];
         this.checked = false;
-        this.checkBoxDesable = false;
+        this.checkBoxDisable = false;
         this.isLoggedIn = false;
         this.showAddAdultForm = false;
         this.showAddChildForm = false;
@@ -37,8 +37,9 @@ var AdultListComponent = /** @class */ (function () {
             this.showAddAdultForm = true;
         }
     };
-    AdultListComponent.prototype.checkBox = function (event, traveler) {
+    AdultListComponent.prototype.selectTraveler = function (event, traveler) {
         if (event.target.checked) {
+            traveler.checked = true;
             var travelerData = {
                 "userId": traveler.userId,
                 "firstName": traveler.firstName,
@@ -50,15 +51,16 @@ var AdultListComponent = /** @class */ (function () {
             var checkCounter = this.counter + 1;
             if (checkCounter < this.totalTravelerCount) {
                 this.counter++;
-                this.checkBoxDesable = false;
+                this.checkBoxDisable = false;
             }
             else {
-                this.checkBoxDesable = true;
+                this.checkBoxDisable = true;
             }
         }
         else {
+            traveler.checked = false;
             this.counter--;
-            this.checkBoxDesable = false;
+            this.checkBoxDisable = false;
             this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
             this.cookieService.remove('_travelers');
             this.cookieService.put("_travelers", JSON.stringify(this._travelers));
