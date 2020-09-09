@@ -34,7 +34,6 @@ export class FlightTravelerComponent implements OnInit {
       this.travelerService.getTravelers().subscribe((res:any)=>{
         this.travelers = res.data;
         this.travelers.forEach(element => {
-          console.log(element.user_type)
         });
       })
     }

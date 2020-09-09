@@ -41,7 +41,7 @@ export class SocialLoginComponent implements OnInit {
     window['googleSDKLoaded'] = () => {
       window['gapi'].load('auth2', () => {
         this.auth2 = window['gapi'].auth2.init({
-          client_id: '154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com',
+          client_id: environment.google_client_id,
           cookiepolicy: 'single_host_origin',
           scope: 'profile email'
         });
@@ -99,7 +99,7 @@ export class SocialLoginComponent implements OnInit {
 
     (window as any).fbAsyncInit = function () {
       window['FB'].init({
-        appId: '402941427334423',
+        appId: environment.fb_api_key,
         cookie: true,
         xfbml: true,
         version: 'v3.1',

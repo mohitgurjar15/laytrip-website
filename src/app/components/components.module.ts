@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-
     NgbModule,
     CountdownModule,
     Ng5SliderModule,
-    
+    NgxDaterangepickerMd.forRoot()
   ],
   exports: [
     SearchAirportComponent,

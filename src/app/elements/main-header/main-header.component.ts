@@ -73,7 +73,6 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
    
     ngDoCheck() {
       this.checkUser();
-      //console.log(this.isLoggedIn)
     }
     ngOnDestroy() {}
 
@@ -121,7 +120,6 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
           for(let i=0; i<this.currencies.length; i++){
             this.currencies[i].flag= `${this.s3BucketUrl}assets/images/icon/${this.currencies[i].code}.svg`;
           }
-          console.log(this.currencies)
           if(!this.isCurrencySet){
 
             this.isCurrencySet=true;
@@ -146,7 +144,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
     checkUser() {
       let userToken = localStorage.getItem('_lay_sess');
       
-      if( userToken) { 
+      if( userToken && userToken != 'undefined') { 
         this.isLoggedIn = true;
       }
     }
