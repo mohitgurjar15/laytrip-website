@@ -16,11 +16,13 @@ import { TravelerFormComponent } from './traveler-form/traveler-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
+import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,9 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     NgbModule,
     CountdownModule,
     Ng5SliderModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    CookieModule.forRoot()
+
   ],
   exports: [
     SearchAirportComponent,
@@ -42,8 +46,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     BookingTimerComponent,
     PaymentModeComponent,
     CardListComponent,
-    AddCardComponent
-    
+    AddCardComponent,
+    FullPageOverlayLoaderComponent
   ],
   providers: [DatePipe],
 

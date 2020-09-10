@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -10,19 +10,21 @@ export class BookingTimerComponent implements OnInit {
 
   constructor() { }
   s3BucketUrl = environment.s3BucketUrl;
-  config={
-    leftTime: 1200, format: 'm:s'
-  }
+  @Input() config;
+  
   //@ViewChild('cd') 
   //private countdown: CountdownComponent;
   ngOnInit() {
     //this.countdown.begin();
+    console.log(this.config)
   }
 
   handleEvent(event){
     console.log(event)
-    if(event.action=="finished")
-      alert("Booking time expired")
+    if(event.action=="finished"){
+
+      //alert("Booking time expired")
+    }
   }
 
 }

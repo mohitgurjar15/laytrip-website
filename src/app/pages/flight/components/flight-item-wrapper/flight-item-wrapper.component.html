@@ -52,7 +52,7 @@
                         <p *ngIf="item.start_price > 0">
                             <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
                         <!-- <a class="book_btn" href="javascript:void(0);"></a> -->
-                        <a class="book_btn" [routerLink]="['/flight/traveler', item.route_code ]">
+                        <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item.route_code)">
                             Book Now
                         </a>
                         <span class="partial_payment_info">Learn more about partial payment</span>
@@ -228,14 +228,21 @@
                         <div class="card-body">
                             <div class="tab_detail baggage_rules_cnt">
                                 <div class="triangle_right"></div>
-                                <div class="detail_left">
+                                <!-- <div class="detail_left">
                                     <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
                                     <p>Indigo</p>
                                     <span>{{ flightInfo?.departure_code }} - DEN</span>
+                                </div> -->
+                                <div class="detail_right" *ngIf="loadBaggageDetails">
+                                    <div class="w-100">
+                                        <p class="fb_animation mb-0 h-auto w-100"></p>
+                                        <p class="fb_animation mb-0 h-auto w-100"></p>
+                                    </div>
+                                    <p class="fb_animation mb-0 h-auto w-100"></p>
                                 </div>
-                                <div class="detail_right">
-                                    <p *ngIf="loadBaggageDetails">Loading..</p>
-                                    <table  *ngIf="!loadBaggageDetails">
+
+                                <div class="detail_right" *ngIf="!loadBaggageDetails">
+                                    <table>
                                         <thead>
                                             <tr>
                                                 <th>Flight</th>
@@ -277,7 +284,7 @@
                         <div class="card-body">
                             <div class="tab_detail cancellation_rules_cnt">
                                 <div class="triangle_right"></div>
-                                <div class="rules_cnt_top">
+                                <!-- <div class="rules_cnt_top">
                                     <div class="detail_left">
                                         <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
                                         <p>Indigo</p>
@@ -295,11 +302,14 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                    <p class="fb_animation mb-0 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
                                     <ul>
-                                        <li *ngIf="!cancellationPolicy && !errorMessage">Loading..</li>
                                         <li *ngIf="errorMessage">{{ errorMessage }}</li>
                                         <li *ngIf="cancellationPolicy" [innerHtml]="cancellationPolicy?.cancellation_policy">
                                         </li>

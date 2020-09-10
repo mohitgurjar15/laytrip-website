@@ -5,7 +5,7 @@
           <div class="col-lg-8">
               <div class="detail_info_left" *ngIf="bookingStatus==0">
                   <div class="block_payment">
-                      <app-booking-timer></app-booking-timer>
+                      <app-booking-timer [config]="bookingTimerConfig"></app-booking-timer>
                       <div class="block_pay_info">
                           <div class="block_travellers">
                               <h6>Travellers</h6>
@@ -14,107 +14,29 @@
                                   <a href="javascript:void(0);">Send E-ticket</a>
                               </div>
                           </div>
-                          <app-payment-mode (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)"></app-payment-mode>
+                        </div>
+                        <div class="block_pay_info">
+
+                            <app-payment-mode (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)"></app-payment-mode>
+                        </div>
                           <!-- <app-redeem-laycredit></app-redeem-laycredit> -->
+                        <div class="block_pay_info">
                           <div class="block_card_select">
-                              <div class="block_title_section">
-                                  <h5>Select Credit Card</h5>
+                              <div class="block_title_section" >
+                                  <h5 *ngIf="userInfo.roleId!=7">Select Credit Card</h5>
+                                  <h5 *ngIf="userInfo.roleId==7">Credit Card Details
+                                </h5>
                               </div>
                               <div class="block_detail">
-                                  <app-card-list (selectCreditCard)="selectCreditCard($event)"></app-card-list>
-                                  <div class="add_card_btn">
+                                  <app-card-list *ngIf="userInfo.roleId!=7" (selectCreditCard)="selectCreditCard($event)"></app-card-list>
+                                  <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
                                       <a href="javascript:void(0);" (click)="toggleAddcardForm()" >+ Add New Card</a>
                                   </div>
                                   <app-add-card *ngIf="showAddCardForm" ></app-add-card>
                               </div>
                           </div>
-                          <div class="block_billing_detail">
-                              <div class="block_title_section">
-                                  <h5>Billing Info</h5>
-                              </div>
-                              <div class="block_detail">
-                                  <div class="form_row">
-                                      <div class="field_bolck">
-                                          <div class="field_inn">
-                                              <label>Address line 1<sup>*</sup></label>
-                                              <div class="text_field">
-                                                  <input type="text" name="Address" maxlength="40" tabindex="5" placeholder="Enter address line 1">
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="field_bolck">
-                                          <div class="field_inn">
-                                              <label>Address line 2</label>
-                                              <div class="text_field">
-                                                  <input type="text" name="Address" maxlength="40" tabindex="6" placeholder="Enter address line 2">
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="field_bolck">
-                                          <div class="field_inn">
-                                              <label>City</label>
-                                              <div class="text_field custom-select">
-                                                  <select>
-                                                      <option value="0">Select</option>
-                                                      <option value="1">City</option>
-                                                      <option value="2">City</option>
-                                                      <option value="3">City</option>
-                                                      <option value="4">City</option>
-                                                      <option value="5">City</option>
-                                                      <option value="6">City</option>
-                                                      <option value="7">City</option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="field_bolck">
-                                          <div class="field_inn">
-                                              <label>Country</label>
-                                              <div class="text_field custom-select">
-                                                  <select>
-                                                      <option value="0">Select</option>
-                                                      <option value="1">Country</option>
-                                                      <option value="2">Country</option>
-                                                      <option value="3">Country</option>
-                                                      <option value="4">Country</option>
-                                                      <option value="5">Country</option>
-                                                      <option value="6">Country</option>
-                                                      <option value="7">Country</option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="field_bolck">
-                                          <div class="field_inn">
-                                              <label>State</label>
-                                              <div class="text_field custom-select">
-                                                  <select>
-                                                      <option value="0">Select</option>
-                                                      <option value="1">State</option>
-                                                      <option value="2">State</option>
-                                                      <option value="3">State</option>
-                                                      <option value="4">State</option>
-                                                      <option value="5">State</option>
-                                                      <option value="6">State</option>
-                                                      <option value="7">State</option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="field_bolck">
-                                          <div class="field_inn">
-                                              <label>Zip Code</label>
-                                              <div class="text_field">
-                                                  <input type="text" name="zipcode" maxlength="10" tabindex="7" placeholder="Enter zip code">
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                        </div>
+                       
                   </div>
                   <div class="block_condition_agree">
                       <ul>
@@ -133,11 +55,13 @@
                       
                   </div>
               </div>
-              <app-flight-confirmation *ngIf="bookingStatus==1"></app-flight-confirmation>
+              <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
           </div>
           <div class="col-lg-4">
-            <app-flight-summary></app-flight-summary>
+            <!-- <app-flight-summary></app-flight-summary> -->
           </div>
       </div>
   </div>
 </section>
+
+<app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png" title="Flights"></app-full-page-overlay-loader>

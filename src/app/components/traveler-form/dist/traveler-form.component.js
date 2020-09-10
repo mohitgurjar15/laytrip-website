@@ -12,11 +12,9 @@ var forms_1 = require("@angular/forms");
 var moment = require("moment");
 var environment_1 = require("../../../environments/environment");
 var TravelerFormComponent = /** @class */ (function () {
-    function TravelerFormComponent(formBuilder, userService, flightService, genericService, router, commonFunction) {
+    function TravelerFormComponent(formBuilder, flightService, router, commonFunction) {
         this.formBuilder = formBuilder;
-        this.userService = userService;
         this.flightService = flightService;
-        this.genericService = genericService;
         this.router = router;
         this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;

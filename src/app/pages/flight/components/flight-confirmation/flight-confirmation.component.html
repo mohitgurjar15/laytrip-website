@@ -1,10 +1,10 @@
 <!-- Free & Paid user -->
 <div class="detail_info_left" *ngIf="userData.roleId==5 || userData.roleId==6">
-  <div class="block_booking_confirmation">
+  <div class="block_booking_confirmation" *ngIf="bookingData">
       <div class="block_inner">
           <h5>Congratulations</h5>
           <p>Thank you! Your official booking is now confirmed</p>
-          <span>Reference no. #124FJK123</span>
+          <span>Reference no. #{{bookingData.laytrip_booking_id}}</span>
           <div class="book_inform">
               We will perform your actual booking before 26th November, 2020.
           </div>
@@ -15,31 +15,32 @@
           <ul>
               <li>
                   <span>Payment type :</span>
-                  <p>Partial payment</p>
+                  <p *ngIf="bookingData.booking_details[0].bookingType==1">Partial payment</p>
+                  <p *ngIf="bookingData.booking_details[0].bookingType==2">Full payment</p>
               </li>
-              <li>
+              <li *ngIf="bookingData.booking_details[0].bookingType==1">
                   <span>Partial payment type :</span>
-                  <p>Weekly/biweekly/monthly</p>
+                  <p>{{bookingData.booking_details[0].bookingInstalments[0].instalmentType}}</p>
               </li>
               <li>
                   <span>Total booking amount :</span>
-                  <p>$100</p>
+                  <p>{{bookingData.booking_details[0].currency2.symbol}}{{bookingData.booking_details[0].totalAmount}}</p>
               </li>
-              <li>
+              <li *ngIf="bookingData.booking_details[0].bookingType==1">
                   <span>Partial payment part :</span>
-                  <p>5 EMI</p>
+                  <p>{{bookingData.booking_details[0].bookingInstalments.length}} EMI</p>
               </li>
-              <li>
+              <li *ngIf="bookingData.booking_details[0].bookingType==1">
                   <span>Partial payment Start Date :</span>
-                  <p>22-06-2020</p>
+                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details[0].bookingInstalments[0].instalmentDate,'YYYY-MM-DD','en')}}</p>
               </li>
-              <li>
+              <li *ngIf="bookingData.booking_details[0].bookingType==1">
                   <span>Next Partial payment Date :</span>
-                  <p>28-06-2020</p>
+                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details[0].bookingInstalments[1].instalmentDate,'YYYY-MM-DD','en')}}</p>
               </li>
-              <li>
+              <li *ngIf="bookingData.booking_details[0].bookingType==1">
                   <span>Partial payment amount :</span>
-                  <p>$20</p>
+                  <p>{{bookingData.booking_details[0].currency2.symbol}}{{bookingData.booking_details[0].bookingInstalments[1].amount}}</p>
               </li>
           </ul>
       </div>
@@ -70,12 +71,12 @@
 
 <!-- Guest user -->
 <div class="detail_info_left" *ngIf="userData.roleId==7">
-  <div class="block_booking_confirmation">
+  <div class="block_booking_confirmation" *ngIf="bookingData">
       <div class="inner_block">
-          <img src="assets/images/booking-confirmation-for-guest-user_im.svg" alt="Confirmation Image">
-          <h5>Congratulations1</h5>
+          <img src="{{s3BucketUrl}}assets/images/booking-confirmation-for-guest-user_im.svg" alt="Confirmation Image">
+          <h5>Congratulations</h5>
           <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-          <span>Reference no. #124FJK123</span>
+          <span>Reference no. #{{bookingData.laytrip_booking_id}}</span>
       </div>
   </div>
 </div>

@@ -88,9 +88,12 @@ export class FlightSearchBarComponent implements OnInit {
 
       this.departureDate= this.route.snapshot.queryParams["departure_date"];
       this.arrivalDate= this.route.snapshot.queryParams["arrival_date"];
-      //this.departureDate = this.commonFunction.convertDateFormat(this.departureDate,'YYYY-MM-DD')
+      this.searchFlightInfo.departure=this.route.snapshot.queryParams["departure"];
+      this.searchFlightInfo.arrival=this.route.snapshot.queryParams["arrival"];
+      if(this.route.snapshot.queryParams["trip"]=='roundtrip'){
+        this.isRoundTrip=true;
+      }
       this.arrivalCode  = this.route.snapshot.queryParams["arrival"];
-      console.log("this.arrivalDate",this.arrivalDate)
       this.flightSearchForm = this.fb.group({
         fromDestination: [[Validators.required]],
         toDestination: [[Validators.required]],
@@ -236,12 +239,13 @@ export class FlightSearchBarComponent implements OnInit {
     }
 
     searchFlights() {
-      // console.log(this.searchFlightInfo);
+      console.log(this.searchFlightInfo);
       this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
       this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
       this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
       if (this.searchFlightInfo && this.totalPerson &&
         this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
+        console.log("I am in")
         localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
         this.searchBarInfo.emit(this.searchFlightInfo);
       }

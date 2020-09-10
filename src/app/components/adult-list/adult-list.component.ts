@@ -4,6 +4,8 @@ import { CookieService } from 'ngx-cookie';
 import { GenericService } from '../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { forEach } from '@angular/router/src/utils/collection';
+declare var $: any;
 
 
 @Component({
@@ -17,10 +19,11 @@ export class AdultListComponent implements OnInit {
   @Input() username: string;
   @Input() type: string;
   @Input() age: string;
-  @Input() totalTravelerCount: number;
 
   counter = 0;
+  totalTravelerCount = 0;
   _travelers = [];
+  _selectedId = [];
   checked: boolean = false;
   checkBoxDisable: boolean = false;
   isLoggedIn: boolean = false;
@@ -29,6 +32,7 @@ export class AdultListComponent implements OnInit {
   showAddInfantForm: boolean = false;
   adultFormStatus: boolean = false;
   count = 0;
+  _itinerary :any;
   countries: any = [];
   countries_code: any = [];
   containers = [];
@@ -53,6 +57,21 @@ export class AdultListComponent implements OnInit {
 
   selectTraveler(event, traveler) {
     if (event.target.checked) {
+      this._selectedId.push(event.target.id);
+      console.log(this.counter)
+      if (this.counter + 1 < 3) {
+        this.counter++;
+        this.checkBoxDisable = false;
+      } else {
+        this.checkBoxDisable = true;
+        
+      }
+    } else {
+      this.checkBoxDisable = false
+      this.counter--;
+    }
+    console.log('counter',this.counter)
+    /* if (event.target.checked) {
       traveler.checked = true;
       let travelerData = {
         "userId": traveler.userId,
@@ -62,13 +81,13 @@ export class AdultListComponent implements OnInit {
       };
       this._travelers.push(travelerData);
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      let checkCounter = this.counter + 1;
+      // let checkCounter = this.counter + 1;
       
-      if (checkCounter < this.totalTravelerCount) {
+      if (this.counter + 1 < this.totalTravelerCount) {
         this.counter++;
         this.checkBoxDisable = false;
       } else {
-        this.checkBoxDisable = true;
+        this.checkBoxDisable = false;
       }
     } else {
       traveler.checked = false;
@@ -77,8 +96,9 @@ export class AdultListComponent implements OnInit {
       this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
       this.cookieService.remove('_travelers');
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-    }
-    this.adultsCount.emit(this.counter);
+    } */
+
+    // this.adultsCount.emit(this.counter);
   }
 
 
@@ -90,6 +110,10 @@ export class AdultListComponent implements OnInit {
 
 
   ngDoCheck() {
+    console.log('check')
+    this._selectedId.forEach(id => {
+      $( '#'+id ).removeAttr( "disabled" );      
+    });
     this.checkUser();
     this.containers = this.containers;
     this.travelers = this.travelers;
