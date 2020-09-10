@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { GenericService } from '../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
 
 
@@ -63,14 +61,15 @@ export class AdultListComponent implements OnInit {
         this.counter++;
         this.checkBoxDisable = false;
       } else {
-        this.checkBoxDisable = true;
-        
+        this.checkBoxDisable = true;        
+        this._selectedId.forEach(element => {
+          $("#checkbox-"+element).removeAttr("disabled");
+        });
       }
     } else {
       this.checkBoxDisable = false
       this.counter--;
     }
-    console.log('counter',this.counter)
     /* if (event.target.checked) {
       traveler.checked = true;
       let travelerData = {
@@ -110,7 +109,6 @@ export class AdultListComponent implements OnInit {
 
 
   ngDoCheck() {
-    console.log('check')
     this._selectedId.forEach(id => {
       $( '#'+id ).removeAttr( "disabled" );      
     });

@@ -78,6 +78,15 @@ export class CommonFunction {
             dateFormats.en;
     }
 
+    onInputEntry(event, nextInput) {
+        const input = event.target;
+        const length = input.value.length;
+        const maxLength = input.attributes.maxlength.value;
+    
+        if (length >= maxLength) {
+          nextInput.focus();
+        }
+      }
     
 }
 

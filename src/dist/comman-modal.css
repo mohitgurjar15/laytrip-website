@@ -978,6 +978,34 @@
 .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form {
   width: 100%;
 }
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form ul {
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form ul li {
+  padding: 0 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form ul li:first-child {
+  padding-left: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form ul li:last-child {
+  padding-right: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form ul li input {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  border: 1px solid #E0E2E5;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #000000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form ul li input:placeholder {
+  color: #D5D7E3;
+  -webkit-text-fill-color: #D5D7E3;
+}
 .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row {
   width: 100%;
   margin: 0 0 20px;

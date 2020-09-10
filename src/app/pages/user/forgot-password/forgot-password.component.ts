@@ -55,6 +55,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     $('.modal_container').removeClass('right-panel-active');
     $('.forgotpassword-container').removeClass('show_forgotpass');  
   }
+
   onSubmit() {
    
     this.submitted = this.loading = true;
@@ -64,18 +65,18 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
       this.loading = false;      
       return;
     } else {
-        this.loading = true;     
-        this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
+        // this.loading = true;     
+      //this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
         this.submitted = false;    
         // this.forgotPasswordSuccess = true;
         this.valueChange.emit({ key: 'reset-password', value: true,emailForVerifyOtp:this.forgotForm.value.email,isReset:true });  
         $('.modal_container').addClass('right-panel-active');
         $('.resetpass-container').addClass('show_resetpass');
-      }, (error: HttpErrorResponse) => {       
+      /* }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading  = false;
         this.apiMessage = error.message;
 
-      });
+      }); */
     }
   }
 }
