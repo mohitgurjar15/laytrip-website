@@ -21,8 +21,10 @@ export class BookingTimerComponent implements OnInit {
 
   handleEvent(event){
     console.log(event)
-    if(event.action=="finished")
-      alert("Booking time expired")
+    if(event.action=="finished"){
+
+      //alert("Booking time expired")
+    }
   }
 
 }
