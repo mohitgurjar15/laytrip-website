@@ -22,7 +22,7 @@ export class AdultListComponent implements OnInit {
   counter = 0;
   _travelers = [];
   checked: boolean = false;
-  checkBoxDesable: boolean = false;
+  checkBoxDisable: boolean = false;
   isLoggedIn: boolean = false;
   showAddAdultForm: boolean = false;
   showAddChildForm: boolean = false;
@@ -51,8 +51,9 @@ export class AdultListComponent implements OnInit {
 
 
 
-  checkBox(event, traveler) {
+  selectTraveler(event, traveler) {
     if (event.target.checked) {
+      traveler.checked = true;
       let travelerData = {
         "userId": traveler.userId,
         "firstName": traveler.firstName,
@@ -65,13 +66,14 @@ export class AdultListComponent implements OnInit {
       
       if (checkCounter < this.totalTravelerCount) {
         this.counter++;
-        this.checkBoxDesable = false;
+        this.checkBoxDisable = false;
       } else {
-        this.checkBoxDesable = true;
+        this.checkBoxDisable = true;
       }
     } else {
+      traveler.checked = false;
       this.counter--;
-      this.checkBoxDesable = false;
+      this.checkBoxDisable = false;
       this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
       this.cookieService.remove('_travelers');
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
