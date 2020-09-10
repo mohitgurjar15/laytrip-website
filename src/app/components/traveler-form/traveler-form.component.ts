@@ -45,9 +45,7 @@ export class TravelerFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
     private flightService: FlightService,
-    private genericService: GenericService,
     public router: Router,
     public commonFunction: CommonFunction,
 

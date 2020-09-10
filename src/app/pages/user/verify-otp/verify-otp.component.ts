@@ -36,7 +36,6 @@ export class VerifyOtpComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    console.log(this.emailForVerifyOtp)
 
     this.otpForm = this.formBuilder.group({
       otp1: ['', Validators.required],
@@ -111,16 +110,18 @@ export class VerifyOtpComponent implements OnInit {
         "email":this.emailForVerifyOtp,
         "otp": inputDataOtp,
        }; 
+      
       this.userService.verifyOtp(data).subscribe((data: any) => {
         this.otpVerified = true;  
         this.submitted = this.loading = false;    
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         $('#sign_in_modal').modal('hide');
-        this.valueChange.emit({ key: 'signIn', value: true});
+        this.valueChange.emit({ key: 'signIn', value: true}); 
       }, (error: HttpErrorResponse) => {       
         this.apiError = error.message;
         this.submitted = this.loading = false;        
-      }); 
+      });                    
+      
     }
   }
 }

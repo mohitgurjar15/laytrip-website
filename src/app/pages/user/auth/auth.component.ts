@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit {
   signInModal = false;
   signUpModal = false;
   forgotPasswordModal = false;
+  resetPasswordModal = false;
   otpModal = false;
   emailForVerifyOtp = '';
 
@@ -30,25 +31,30 @@ export class AuthComponent implements OnInit {
   }
 
   pageChange(event) {
-    console.log(event)
     if (event && event.key === 'signUp' && event.value) {
       this.signUpModal = true;
       this.signInModal = false;
       this.forgotPasswordModal = false;
-      this.otpModal = false;
+      this.otpModal = this.resetPasswordModal = false;
     } else if (event && event.key === 'forgotPassword' && event.value) {
       this.signInModal = false;
       this.signUpModal = false;
-      this.otpModal = false;
+      this.otpModal = this.resetPasswordModal = false;
       this.forgotPasswordModal = true;
     } else if (event && event.key === 'signIn' && event.value) {
       this.signInModal = true;
       this.signUpModal = false;
-      this.forgotPasswordModal = false;
+      this.forgotPasswordModal = this.resetPasswordModal = false;
       this.otpModal = false;
     } else if (event && event.key === 'otpModal' && event.value) {
-      console.log(event)
       this.otpModal = true;
+      this.signInModal = false;
+      this.signUpModal = false;
+      this.forgotPasswordModal = this.resetPasswordModal = false;
+      this.emailForVerifyOtp = event.emailForVerifyOtp;
+    } else if (event && event.key === 'reset-password') {
+      this.resetPasswordModal = true;
+      this.otpModal = false;
       this.signInModal = false;
       this.signUpModal = false;
       this.forgotPasswordModal = false;

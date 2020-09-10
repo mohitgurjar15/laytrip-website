@@ -1,0 +1,1235 @@
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+.comman_modal .modal-dialog {
+  max-width: 1024px;
+  width: 96%;
+}
+.comman_modal .modal-dialog .sign_in_modal {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content {
+  border-radius: 20px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container {
+  position: relative;
+  overflow: hidden;
+  width: 1024px;
+  max-width: 100%;
+  min-height: 730px;
+  border-radius: 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .close {
+  width: 50px;
+  height: 50px;
+  border-radius: 0 0 0 50px;
+  background: #ffffff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: normal;
+  opacity: 1;
+  z-index: 99;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .close img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.5s ease-in-out;
+  padding: 50px;
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container {
+    padding: 15px;
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container {
+    width: 100%;
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal {
+  height: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-flow: column;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 40px;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_top .modal_title h4 {
+  font-size: 32px;
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_top .modal_title p {
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 400;
+  margin: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_top .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: normal;
+  opacity: 1;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row {
+  width: 100%;
+  margin: 0 0 20px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row label {
+  width: 100%;
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #E0E2E5;
+  background: transparent;
+  outline: none;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #000000;
+  padding: 0 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field input:placeholder {
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field input:focus {
+  border: 1px solid #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field input.error {
+  border-color: #FF0000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field .error_text {
+  width: 100%;
+  color: #FF0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field.pass_show {
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field.pass_show .ptxt {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  z-index: 1;
+  color: #8188AB;
+  margin-top: -10px;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 25px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last .check .custom_checkbox {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: middle;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  text-transform: none;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last .check .custom_checkbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark {
+  border-color: #FC7E66;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last .check .custom_checkbox .checkmark {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  display: inline-block;
+  border: 1px solid #8188AB;
+  vertical-align: middle;
+  margin-right: 11px;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last .check .custom_checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  width: 6px;
+  height: 9px;
+  border-radius: 2px;
+  border: solid #FC7E66;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row.last .forgot_pass a {
+  color: #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_btn {
+  width: 100%;
+  text-align: center;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_btn button {
+  width: 290px;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  height: 48px;
+  background: #8188AB;
+  border-radius: 8px;
+  border: 1px solid #8188AB;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #1943FF;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_btn button:hover {
+  border-color: #1943FF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_btn button:hover:before {
+  height: 190%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm span {
+  width: 100%;
+  font-size: 14px;
+  color: #8188AB;
+  text-align: center;
+  position: relative;
+  font-weight: 400;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm span:before {
+  width: 300%;
+  border: 1px dashed #8188AB;
+  position: absolute;
+  top: 50%;
+  left: -310%;
+  content: "";
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm span:after {
+  width: 300%;
+  border: 1px dashed #8188AB;
+  position: absolute;
+  top: 50%;
+  right: -310%;
+  content: "";
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul {
+  width: 100%;
+  list-style: none;
+  margin: 20px 0 50px;
+  padding: 0;
+  display: flex;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul li {
+  width: 33.33%;
+  padding: 0 5px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul li a {
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #E0E2E5;
+  color: #CF2D48;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 12px;
+  background: #FDEFEE;
+  border: 1px solid rgba(24, 84, 207, 0.15);
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul li a img {
+  margin-right: 15px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul li:first-child {
+  padding-left: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul li:first-child a {
+  background: #EEF1F6;
+  border: 1px solid rgba(24, 84, 207, 0.15);
+  color: #3B5999;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul li:last-child {
+  padding-right: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm ul li:last-child a {
+  color: #2A2A2A;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm p {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #8188AB;
+  margin: 0;
+  font-weight: 400;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt .modal_btm p a {
+  color: #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+  background: #ffffff;
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container {
+    width: 100%;
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up {
+  height: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-flow: column;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 25px;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_top .modal_title h4 {
+  font-size: 32px;
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_top .modal_title p {
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 400;
+  margin: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_top .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: normal;
+  opacity: 1;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row {
+  width: 100%;
+  margin: 0 0 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .field_form {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .field_form.left {
+  width: 48%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .field_form.left .field_in {
+  margin-bottom: 20px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .field_form.left .field_in.last {
+  margin: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .field_form.right {
+  width: 48%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .field_form .field_in {
+  margin-bottom: 20px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .field_form .field_in.last {
+  margin-bottom: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row label {
+  width: 100%;
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #E0E2E5;
+  background: transparent;
+  outline: none;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #000000;
+  padding: 0 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field input:placeholder {
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field input:focus {
+  border: 1px solid #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field input.error {
+  border-color: #FF0000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field .error_text {
+  width: 100%;
+  color: #FF0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+  text-align: left;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field.pass_show {
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field.pass_show .ptxt {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  z-index: 1;
+  color: #8188AB;
+  margin-top: -10px;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender {
+  margin: 5px 0 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li {
+  width: auto;
+  margin: 0 20px 0 0;
+  text-align: center;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a {
+  width: 95px;
+  text-align: center;
+  padding: 10px;
+  display: inline-block;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a .gender_type {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #E0E2E5;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a .gender_type img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a .gender_type img.active-icon {
+  display: none;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a span {
+  display: block;
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #8188AB;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a.active_gender {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.1);
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a.active_gender .gender_type {
+  background: #1943FF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a.active_gender .gender_type img.active-icon {
+  display: block;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a.active_gender .gender_type img.default-icon {
+  display: none;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .select_gender ul li a.active_gender span {
+  color: #1943FF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row.last {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 20px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row.last .check .custom_checkbox {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: middle;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  text-transform: none;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row.last .check .custom_checkbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark {
+  border-color: #FC7E66;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row.last .check .custom_checkbox .checkmark {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  display: inline-block;
+  border: 1px solid #8188AB;
+  vertical-align: middle;
+  margin-right: 11px;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row.last .check .custom_checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  width: 6px;
+  height: 9px;
+  border-radius: 2px;
+  border: solid #FC7E66;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_btn {
+  width: 100%;
+  text-align: center;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_btn button {
+  width: auto;
+  padding: 0 120px;
+  display: inline-block;
+  height: 48px;
+  background: #8188AB;
+  border-radius: 8px;
+  border: 1px solid #8188AB;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #1943FF;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_btn button:hover {
+  border-color: #1943FF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_btn button:hover:before {
+  height: 190%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt p {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #8188AB;
+  margin: 0;
+  font-weight: 400;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt p a {
+  color: #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+  background: #ffffff;
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container {
+    width: 100%;
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal {
+  height: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 60px;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_top .modal_title h4 {
+  font-size: 32px;
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_top .modal_title p {
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 400;
+  margin: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt {
+  width: 100%;
+  height: calc(100% - 150px);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row {
+  width: 100%;
+  margin: 0 0 30px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row label {
+  width: 100%;
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row .text_field input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #E0E2E5;
+  background: transparent;
+  outline: none;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #000000;
+  padding: 0 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row .text_field input:placeholder {
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row .text_field input:focus {
+  border: 1px solid #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row .text_field input.error {
+  border-color: #FF0000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_btn {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 150px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_btn button {
+  width: 290px;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  height: 48px;
+  background: #8188AB;
+  border-radius: 8px;
+  border: 1px solid #8188AB;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #1943FF;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_btn button:hover {
+  border-color: #1943FF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_btn button:hover:before {
+  height: 190%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt p {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #8188AB;
+  margin: 0;
+  font-weight: 400;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt p a {
+  color: #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+  background: #ffffff;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_top {
+  width: 100%;
+  margin: 0 0 60px;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_top .modal_title h4 {
+  font-size: 32px;
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_top .modal_title p {
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 400;
+  margin: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form ul li {
+  padding: 0 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form ul li:first-child {
+  padding-left: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form ul li:last-child {
+  padding-right: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form ul li input {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  border: 1px solid #E0E2E5;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #000000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form ul li input:placeholder {
+  color: #D5D7E3;
+  -webkit-text-fill-color: #D5D7E3;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .resend_otp_code {
+  width: 100%;
+  margin: 20px 0 60px;
+  display: flex;
+  justify-content: space-between;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .resend_otp_code p {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 300;
+  text-align: left;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .resend_otp_code a {
+  font-size: 14px;
+  color: #00AEEF;
+  font-weight: 300;
+  white-space: nowrap;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .form_btn {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 150px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .form_btn button {
+  width: 290px;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  height: 48px;
+  background: #8188AB;
+  border-radius: 8px;
+  border: 1px solid #8188AB;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .form_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #1943FF;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .form_btn button:hover {
+  border-color: #1943FF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt form .form_btn button:hover:before {
+  height: 190%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt p {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #8188AB;
+  margin: 0;
+  font-weight: 400;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container .verify_otp_modal .modal_cnt p a {
+  color: #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.otp-container.show_otp {
+  z-index: 6;
+  opacity: 1;
+  transform: translateX(100%);
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+  background: #ffffff;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal {
+  height: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-flow: column;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_top {
+  width: 100%;
+  margin: 0 0 80px;
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_top .modal_title h4 {
+  font-size: 32px;
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_top .modal_title p {
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 400;
+  margin: 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form {
+  width: 100%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row {
+  width: 100%;
+  margin: 0 0 20px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row label {
+  width: 100%;
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #8188AB;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #E0E2E5;
+  background: transparent;
+  outline: none;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #000000;
+  padding: 0 10px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field input:placeholder {
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field input:focus {
+  border: 1px solid #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field input.error {
+  border-color: #FF0000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field .error_text {
+  width: 100%;
+  color: #FF0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field.pass_show {
+  position: relative;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field.pass_show .ptxt {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  z-index: 1;
+  color: #8188AB;
+  margin-top: -10px;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_btn {
+  width: 100%;
+  text-align: center;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_btn button {
+  width: 290px;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  height: 48px;
+  background: #8188AB;
+  border-radius: 8px;
+  border: 1px solid #8188AB;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #1943FF;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_btn button:hover {
+  border-color: #1943FF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_btn button:hover:before {
+  height: 190%;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt p {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #8188AB;
+  margin: 0;
+  font-weight: 400;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt p a {
+  color: #00AEEF;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container.show_resetpass {
+  z-index: 6;
+  opacity: 1;
+  transform: translateX(100%);
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 9;
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container {
+    width: 100%;
+    left: 0;
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay {
+  background: #FF416C;
+  background: linear-gradient(180deg, rgba(25, 67, 255, 0.8) 0%, rgba(13, 34, 128, 0.9) 100%) 0% 0% no-repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #FFFFFF;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay .overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/popup_im.png) no-repeat;
+  background-size: cover;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay .overlay-panel:after {
+  background: linear-gradient(322deg, #012178 0%, #1943ff 51%, #00bffd 100%) 0% 0% no-repeat;
+  opacity: 0.7;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #FFFFFF;
+  position: relative;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  content: "";
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay .overlay-panel .block_center {
+  width: 100%;
+  padding: 0 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay .overlay-panel .block_center img {
+  width: 220px;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay .overlay-panel .block_center p {
+  color: #FEDD00;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 15px 0 0;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay .overlay-panel.overlay-left {
+  transform: translateX(-20%);
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay .overlay-panel.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .overlay-container .overlay {
+    opacity: 0;
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  background: #ffffff;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.9s;
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .sign-up-container {
+    transform: translateX(0%);
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .forgotpassword-container {
+  transform: translateX(100%);
+  opacity: 1;
+  animation: show 0.6s;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .forgotpassword-container.show_forgotpass {
+  z-index: 6;
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .forgotpassword-container {
+    transform: translateX(0%);
+  }
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .otp-container {
+  transform: translateX(0%);
+  background: #ffffff;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .resetpass-container {
+  transform: translateX(0%);
+  background: #ffffff;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+@media (max-width: 767px) {
+  .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container.right-panel-active .overlay-container {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes show {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}

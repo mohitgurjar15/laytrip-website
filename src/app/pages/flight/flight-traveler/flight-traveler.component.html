@@ -40,14 +40,14 @@
                     </div>
                     
                     <div class="btn_payment">
-                        <a  [routerLink]="['/flight/checkout', routeCode ]">
+                        <a class="btn btn_laytrip" [routerLink]="['/flight/checkout', routeCode ]">
                             Continue to payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow">
                           </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <app-flight-summary (totalTravelerValue)="getTravelerValue($event)"></app-flight-summary>
+                <app-flight-summary ></app-flight-summary>
             </div>
         </div>
     </div>

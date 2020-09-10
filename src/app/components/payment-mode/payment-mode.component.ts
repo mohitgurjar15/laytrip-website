@@ -36,12 +36,14 @@ export class PaymentModeComponent implements OnInit {
   durationType:string; // [weekly,biweekly,monthly]
   additionalAmount:number=0;
   remainingAmount:number;
+  remainingInstalment:number;
   firstInstalment:number;
   customAmount:number;
   customInstalment:number;
   defaultInstalment:number;
   defaultInstalmentNo:number;
   customMethod:string;
+  secondInstalment:number;
 
   ngOnInit() {
 
@@ -65,6 +67,9 @@ export class PaymentModeComponent implements OnInit {
         this.customAmount     = this.instalments.instalment_date[0].instalment_amount;
         this.customInstalment = this.instalments.instalment_date.length;
         this.defaultInstalmentNo = this.instalments.instalment_date.length;
+        this.remainingInstalment = this.instalments.instalment_date.length-1;
+        this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
+
       }
     },(err)=>{
 
@@ -114,6 +119,8 @@ export class PaymentModeComponent implements OnInit {
       }
     }
 
+    this.calculateInstalment();
+
   }
 
   /**
@@ -159,6 +166,14 @@ export class PaymentModeComponent implements OnInit {
    * @param type [amount,instalment]
    */
   selectCustomMethod(type){
+
+    /* if(type=='amount'){
+      this.customInstalment = this.defaultInstalmentNo;
+    }
+    else if(type=='instalment'){
+      this.customAmount = this.firstInstalment;
+    }
+    this.calculateInstalment(); */
     this.customMethod=type;
   }
 
@@ -173,18 +188,18 @@ export class PaymentModeComponent implements OnInit {
       this.instalmentRequest.custom_amount=null;
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
+    this.instalmentRequest.additional_amount = this.additionalAmount;
+
     this.instalmentRequest.additional_amount=this.additionalAmount;
 
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
       if(this.instalments.instalment_available==true){
-        /* this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
+        
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
-        this.defaultInstalment  = this.instalments.instalment_date[0].instalment_amount;
-        this.customAmount     = this.instalments.instalment_date[0].instalment_amount;
-        this.customInstalment = this.instalments.instalment_date.length;
-        this.defaultInstalmentNo = this.instalments.instalment_date.length; */
-        console.log(res)
+        this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
+        this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
+        this.remainingInstalment = this.instalments.instalment_date.length-1;
       }
     },(err)=>{
 

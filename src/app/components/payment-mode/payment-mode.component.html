@@ -40,19 +40,19 @@
                 <div class="installment_info">
                     <ul>
                         <li>
-                            <label class="custom_radio">Weekly <p>$30/week</p>
-                                <input type="radio" name="weekly-installment" (click)="changeDuration('weekly')">
+                            <label class="custom_radio">Weekly <!-- <p>$30/week</p> -->
+                                <input type="radio" name="weekly-installment" checked (click)="changeDuration('weekly')">
                                 <span class="checkmark"></span>
                             </label>
                         </li>
                         <li>
-                            <label class="custom_radio">Bi-weekly <p>$40/week</p>
+                            <label class="custom_radio">Bi-weekly <!-- <p>$40/week</p> -->
                                 <input type="radio" name="weekly-installment" (click)="changeDuration('biweekly')">
                                 <span class="checkmark"></span>
                             </label>
                         </li>
                         <li>
-                            <label class="custom_radio">Monthly <p>$50/week</p>
+                            <label class="custom_radio">Monthly <!-- <p>$50/week</p> -->
                                 <input type="radio" name="weekly-installment" (click)="changeDuration('monthly')">
                                 <span class="checkmark"></span>
                             </label>
@@ -97,7 +97,7 @@
                         <li>Remaining Amount to pay <span>${{remainingAmount}}</span></li>
                     </ul>
                     <div class="block_pay_remaining">
-                        You can pay your remaining amount in 4 weeks with $40
+                        You can pay your remaining amount in {{this.remainingInstalment}} weeks with ${{secondInstalment}}
                     </div>
                 </div>
             </div>
@@ -160,8 +160,8 @@
                     <div class="block_pay_info_right">
                         <h6>Installment Calculation</h6>
                         <ul>
-                            <li>1st Installment <span>${{this.firstInstalment}}</span></li>
-                            <li>Default Installment <span>${{instalments.instalment_date[0].instalment_amount}}</span></li>
+                            <li>1st Installment <span>${{instalments.instalment_date[0].instalment_amount}}</span></li>
+                            <li>Default Installment <span>${{defaultInstalment}}</span></li>
                             <li>Additional Amount <span>${{additionalAmount}}</span></li>
                             <li>Laytrip points <span>$20</span></li>
                             <li>Total <span>$150</span></li>
