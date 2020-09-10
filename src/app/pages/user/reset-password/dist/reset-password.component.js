@@ -61,12 +61,13 @@ var ResetPasswordComponent = /** @class */ (function () {
         var _this = this;
         var inputDataOtp = '';
         Object.keys(this.resetForm.controls).forEach(function (key) {
-            console.log(key);
-            inputDataOtp += _this.resetForm.get(key).value;
+            if (key != 'new_password' && key != 'confirm_password') {
+                inputDataOtp += _this.resetForm.get(key).value;
+            }
         });
+        console.log(inputDataOtp);
         this.submitted = this.loading = true;
         if (this.resetForm.invalid) {
-            console.log(inputDataOtp.length);
             if (inputDataOtp.length < 6) {
                 console.log('error');
                 this.errorMessage = "Please enter OTP.";
@@ -84,13 +85,11 @@ var ResetPasswordComponent = /** @class */ (function () {
                 "otp": inputDataOtp
             };
             this.userService.resetPassword(request_param).subscribe(function (data) {
-                console.log(data);
                 _this.submitted = false;
                 _this.resetSuccess = true;
             }, function (error) {
-                console.log(error);
                 _this.resetSuccess = _this.submitted = _this.loading = false;
-                _this.apiMessage = error.message;
+                _this.apiMessage = error.error.message;
             });
         }
     };

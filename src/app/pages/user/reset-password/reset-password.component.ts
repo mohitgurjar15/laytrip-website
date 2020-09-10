@@ -77,13 +77,15 @@ export class ResetPasswordComponent implements OnInit {
     let inputDataOtp: string = '';
 
     Object.keys(this.resetForm.controls).forEach((key) => {
-      console.log(key)
-      inputDataOtp += this.resetForm.get(key).value;
+      if(key != 'new_password' &&  key != 'confirm_password' ){
+        inputDataOtp += this.resetForm.get(key).value;
+      }
     });
+    console.log(inputDataOtp)
     this.submitted = this.loading = true;
     
     if (this.resetForm.invalid) {
-      console.log(inputDataOtp.length)
+      
       if(inputDataOtp.length < 6){
         console.log('error')
         this.errorMessage = "Please enter OTP.";
@@ -98,16 +100,13 @@ export class ResetPasswordComponent implements OnInit {
           "new_password":this.resetForm.value.new_password,
           "confirm_password":this.resetForm.value.confirm_password,
           "otp":inputDataOtp      
-        };    
-      
+        };        
       this.userService.resetPassword(request_param).subscribe((data: any) => {
-        console.log(data)
         this.submitted = false;    
         this.resetSuccess = true;
       }, (error: HttpErrorResponse) => {   
-        console.log(error)    
         this.resetSuccess = this.submitted = this.loading  = false;
-        this.apiMessage = error.message;
+        this.apiMessage = error.error.message;
       });
     }
   }
