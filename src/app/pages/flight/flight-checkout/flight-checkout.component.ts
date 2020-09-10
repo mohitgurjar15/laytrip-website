@@ -34,6 +34,7 @@ export class FlightCheckoutComponent implements OnInit {
     bookingTimerConfig;
     bookingLoader:boolean=false;
     bookingResult:any={};
+    sellingPrice:number;
 
     ngOnInit() {
 

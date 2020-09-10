@@ -61,6 +61,13 @@ export class GenericService {
       );
   }
 
+  getInstalemnts(data){
+    return this.http.post(`${environment.apiUrl}v1/instalment/calculate-instalment`,data)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
 
   handleError(error) {
     console.log("====", error);
