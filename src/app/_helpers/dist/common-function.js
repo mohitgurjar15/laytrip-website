@@ -81,7 +81,7 @@ var CommonFunction = /** @class */ (function () {
         var input = event.target;
         var length = input.value.length;
         var maxLength = input.attributes.maxlength.value;
-        if (length >= maxLength) {
+        if (length >= maxLength && nextInput) {
             nextInput.focus();
         }
     };

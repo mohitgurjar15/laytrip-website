@@ -75,6 +75,9 @@ var UserService = /** @class */ (function () {
         return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
+    UserService.prototype.resetPassword = function (data) {
+        return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
+    };
     UserService.prototype.updateProfile = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
     };

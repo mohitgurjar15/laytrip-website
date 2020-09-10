@@ -10,6 +10,7 @@ exports.ResetPasswordComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
+var must_match_validators_1 = require("../../../_helpers/must-match.validators");
 var ResetPasswordComponent = /** @class */ (function () {
     function ResetPasswordComponent(formBuilder, userService, commonFunctoin) {
         this.formBuilder = formBuilder;
@@ -19,12 +20,14 @@ var ResetPasswordComponent = /** @class */ (function () {
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
         this.loading = false;
+        this.resetSuccess = false;
         this.apiMessage = '';
         this.resetPasswordSuccess = false;
+        this.errorMessage = '';
     }
     ResetPasswordComponent.prototype.ngOnInit = function () {
-        this.forgotForm = this.formBuilder.group({
-            new_password: ['', [forms_1.Validators.required]],
+        this.resetForm = this.formBuilder.group({
+            new_password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
             confirm_password: ['', [forms_1.Validators.required]],
             otp1: ['', forms_1.Validators.required],
             otp2: ['', forms_1.Validators.required],
@@ -32,6 +35,8 @@ var ResetPasswordComponent = /** @class */ (function () {
             otp4: ['', forms_1.Validators.required],
             otp5: ['', forms_1.Validators.required],
             otp6: ['', forms_1.Validators.required]
+        }, {
+            validator: must_match_validators_1.MustMatch('new_password', 'confirm_password')
         });
     };
     ResetPasswordComponent.prototype.openPage = function (event) {
@@ -44,21 +49,47 @@ var ResetPasswordComponent = /** @class */ (function () {
         $('.modal_container').removeClass('right-panel-active');
         $('.forgotpassword-container').removeClass('show_forgotpass');
     };
+    ResetPasswordComponent.prototype.toggleFieldTextType = function (event) {
+        if (event.target.id == 'passEye') {
+            this.passFieldTextType = !this.passFieldTextType;
+        }
+        else if (event.target.id == 'cnfEye') {
+            this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
+        }
+    };
     ResetPasswordComponent.prototype.onSubmit = function () {
         var _this = this;
+        var inputDataOtp = '';
+        Object.keys(this.resetForm.controls).forEach(function (key) {
+            console.log(key);
+            inputDataOtp += _this.resetForm.get(key).value;
+        });
         this.submitted = this.loading = true;
-        if (this.forgotForm.invalid) {
+        if (this.resetForm.invalid) {
+            console.log(inputDataOtp.length);
+            if (inputDataOtp.length < 6) {
+                console.log('error');
+                this.errorMessage = "Please enter OTP.";
+            }
             this.submitted = true;
             this.loading = false;
             return;
         }
         else {
             this.loading = true;
-            this.userService.forgotPassword(this.forgotForm.value).subscribe(function (data) {
+            var request_param = {
+                "email": this.emailForVerifyOtp,
+                "new_password": this.resetForm.value.new_password,
+                "confirm_password": this.resetForm.value.confirm_password,
+                "otp": inputDataOtp
+            };
+            this.userService.resetPassword(request_param).subscribe(function (data) {
+                console.log(data);
                 _this.submitted = false;
-                _this.valueChange.emit({ key: 'signIn', value: true });
+                _this.resetSuccess = true;
             }, function (error) {
-                _this.submitted = _this.loading = false;
+                console.log(error);
+                _this.resetSuccess = _this.submitted = _this.loading = false;
                 _this.apiMessage = error.message;
             });
         }
@@ -66,6 +97,9 @@ var ResetPasswordComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], ResetPasswordComponent.prototype, "pageData");
+    __decorate([
+        core_1.Input()
+    ], ResetPasswordComponent.prototype, "emailForVerifyOtp");
     __decorate([
         core_1.Output()
     ], ResetPasswordComponent.prototype, "valueChange");

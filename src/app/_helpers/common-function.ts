@@ -83,7 +83,7 @@ export class CommonFunction {
         const length = input.value.length;
         const maxLength = input.attributes.maxlength.value;
     
-        if (length >= maxLength) {
+        if (length >= maxLength && nextInput) {
           nextInput.focus();
         }
       }

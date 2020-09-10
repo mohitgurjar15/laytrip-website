@@ -44,6 +44,7 @@ var ForgotPasswordComponent = /** @class */ (function () {
         $('.forgotpassword-container').removeClass('show_forgotpass');
     };
     ForgotPasswordComponent.prototype.onSubmit = function () {
+        var _this = this;
         this.submitted = this.loading = true;
         if (this.forgotForm.invalid) {
             this.submitted = true;
@@ -51,18 +52,17 @@ var ForgotPasswordComponent = /** @class */ (function () {
             return;
         }
         else {
-            // this.loading = true;     
-            //this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
-            this.submitted = false;
-            // this.forgotPasswordSuccess = true;
-            this.valueChange.emit({ key: 'reset-password', value: true, emailForVerifyOtp: this.forgotForm.value.email, isReset: true });
-            $('.modal_container').addClass('right-panel-active');
-            $('.resetpass-container').addClass('show_resetpass');
-            /* }, (error: HttpErrorResponse) => {
-              this.submitted = this.loading  = false;
-              this.apiMessage = error.message;
-      
-            }); */
+            this.loading = true;
+            this.userService.forgotPassword(this.forgotForm.value).subscribe(function (data) {
+                _this.submitted = false;
+                _this.forgotPasswordSuccess = true;
+                _this.valueChange.emit({ key: 'reset-password', value: true, emailForVerifyOtp: _this.forgotForm.value.email, isReset: true });
+                $('.modal_container').addClass('right-panel-active');
+                $('.resetpass-container').addClass('show_resetpass');
+            }, function (error) {
+                _this.submitted = _this.loading = false;
+                _this.apiMessage = error.message;
+            });
         }
     };
     __decorate([
