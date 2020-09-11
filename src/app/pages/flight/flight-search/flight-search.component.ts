@@ -3,12 +3,12 @@ import { LayTripStoreService } from '../../../state/layTrip/layTrip-store.servic
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 import { LayTripService } from '../../../state/layTrip/services/layTrip.service';
 import { Location } from '@angular/common';
+import { Actions, ofType } from '@ngrx/effects';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -23,14 +23,19 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   flightSearchData;
   flightSearchInfo;
 
+  flightDetails;
+  filterFlightDetails;
+
   subscriptions: Subscription[] = [];
 
   constructor(
     private layTripStoreService: LayTripStoreService,
     private route: ActivatedRoute,
     private layTripService: LayTripService,
+    private flightService: FlightService,
     public router: Router,
-    public location: Location
+    public location: Location,
+    private actions$: Actions
   ) { }
 
   ngOnInit() {
@@ -60,18 +65,31 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   getFlightSearchData(payload) {
     this.loading = true;
-    // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
-    this.layTripStoreService.dispatchGetFlightSearchResult(payload);
-    // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
-    this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
+    // // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
+    // this.layTripStoreService.dispatchGetFlightSearchResult(payload);
+    // // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
+    // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
+    //   console.log(res);
+    //   if (res) {
+    //     this.flightSearchData = res.items;
+    //     this.loading = false;
+    //     this.isNotFound = false;
+    //   }
+    // }));
+
+    this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
       if (res) {
-        this.flightSearchData = res.items;
-        // console.log(this.flightSearchData);
         this.loading = false;
         this.isNotFound = false;
-        // console.log(this.loading);
+        this.flightDetails = res.items;
+        this.filterFlightDetails = res;
       }
-    }));
+    }, err => {
+      if (err && err.status === 404) {
+        this.isNotFound = true;
+        this.loading = false;
+      }
+    });
   }
 
   getSearchItem(event) {

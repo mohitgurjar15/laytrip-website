@@ -15,12 +15,12 @@ export class LayTripStoreService {
     ) { }
 
     // CALL SELECTOR //
-    selectFlightSearchResult(): Observable<any> {
-        return this.store.pipe(select(selectors.selectFlightSearchResult));
-    }
+    // selectFlightSearchResult(): Observable<any> {
+    //     return this.store.pipe(select(selectors.selectFlightSearchResult));
+    // }
 
     // CALL DISPATCHER //
-    dispatchGetFlightSearchResult(payload) {
-        this.store.dispatch(new actions.LoadLaytripFlightSearchResultAction(payload));
-    }
+    // dispatchGetFlightSearchResult(payload) {
+    //     this.store.dispatch(new actions.LoadLaytripFlightSearchResultAction(payload));
+    // }
 }

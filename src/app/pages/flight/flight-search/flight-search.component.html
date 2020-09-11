@@ -2,7 +2,7 @@
 <section class="search_result flight pb-0" *ngIf="loading">
   <app-flight-loader></app-flight-loader>
 </section>
-<section class="search_result flight pb-0" *ngIf="!flightSearchData && !loading">
+<section class="search_result flight pb-0" *ngIf="isNotFound">
   <app-flight-not-found></app-flight-not-found>
 </section>
 <section class="search_result flight" *ngIf="!loading && !isNotFound">
@@ -10,11 +10,11 @@
     <div class="row">
       <div class="col-lg-3">
         <app-sort-flight></app-sort-flight>
-        <app-filter-flight></app-filter-flight>
+        <app-filter-flight [filterFlightDetails]="filterFlightDetails"></app-filter-flight>
       </div>
       <div class="col-lg-9">
         <app-flight-price-slider></app-flight-price-slider>
-        <app-flight-item-wrapper></app-flight-item-wrapper>
+        <app-flight-item-wrapper [flightDetails]="flightDetails"></app-flight-item-wrapper>
       </div>
     </div>
   </div>

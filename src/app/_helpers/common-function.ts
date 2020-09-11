@@ -7,6 +7,7 @@ import * as moment from 'moment';
 
 export class CommonFunction {
 
+
     closeModal(modelBox) {
         return modelBox = false;
     }
@@ -37,42 +38,45 @@ export class CommonFunction {
         }
     }
 
-    setHeaders(params=null) {      
+    setHeaders(params = null) {
+        let reqData: any = {headers: {}};
         const accessToken = localStorage.getItem('_lay_sess');
-        let reqData:any = {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            },
-        };
-        if(params) {
-            let reqParams = {};        
-            Object.keys(params).map(k =>{
+        if (accessToken) {
+            reqData = {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                },
+            };
+        }
+        if (params) {
+            let reqParams = {};
+            Object.keys(params).map(k => {
                 reqData.headers[k] = params[k];
             });
             //reqData.headers = reqParams;
         }
         return reqData;
-    }  
+    }
 
-    convertDateFormat(date,sourceFormat,languageCode=null){
+    convertDateFormat(date, sourceFormat, languageCode = null) {
 
-        if(languageCode==null){
-           return moment(date, sourceFormat).format('MM/DD/YYYY')
+        if (languageCode == null) {
+            return moment(date, sourceFormat).format('MM/DD/YYYY')
         }
         return date;
     }
 
-    dateFormat(languageCode=null){
+    dateFormat(languageCode = null) {
 
-        const dateFormats={
-            en : {
-                date            : 'MM/DD/YYYY',
-                datetime        : 'MM/DD/YYYY hh',
-                minuteseconds   : 'HH:II' 
+        const dateFormats = {
+            en: {
+                date: 'MM/DD/YYYY',
+                datetime: 'MM/DD/YYYY hh',
+                minuteseconds: 'HH:II'
             }
         }
 
-        if(languageCode!=null)
+        if (languageCode != null)
             return dateFormats[languageCode]
         else
             dateFormats.en;
@@ -82,11 +86,11 @@ export class CommonFunction {
         const input = event.target;
         const length = input.value.length;
         const maxLength = input.attributes.maxlength.value;
-    
+
         if (length >= maxLength && nextInput) {
-          nextInput.focus();
+            nextInput.focus();
         }
-      }
-    
+    }
+
 }
 
