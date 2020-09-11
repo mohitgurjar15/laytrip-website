@@ -27,7 +27,11 @@ var AdultListComponent = /** @class */ (function () {
         this.showAddChildForm = false;
         this.showAddInfantForm = false;
         this.adultFormStatus = false;
+        this.infantCollapse = false;
+        this.childCollapse = false;
+        this.adultCollapse = false;
         this.count = 0;
+        this.random = 0;
         this.countries = [];
         this.countries_code = [];
         this.containers = [];
@@ -42,22 +46,26 @@ var AdultListComponent = /** @class */ (function () {
     AdultListComponent.prototype.selectTraveler = function (event, traveler) {
         if (event.target.checked) {
             this._selectedId.push(event.target.id);
-            console.log(this.counter);
-            if (this.counter + 1 < 3) {
+            this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+            var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+            if (this.counter + 1 < totalTraveler) {
                 this.counter++;
                 this.checkBoxDisable = false;
             }
             else {
                 this.checkBoxDisable = true;
-                this._selectedId.forEach(function (element) {
-                    $("#checkbox-" + element).removeAttr("disabled");
-                });
+                /* this._selectedId.forEach(element => {
+                  console.log(element)
+                  $("#"+element).removeAttr("disabled");
+                }); */
             }
         }
         else {
+            this._selectedId = this._selectedId.filter(function (obj) { return obj !== event.target.id; });
             this.checkBoxDisable = false;
             this.counter--;
         }
+        // console.log(this.counter ,this._selectedId)
         /* if (event.target.checked) {
           traveler.checked = true;
           let travelerData = {
@@ -84,7 +92,10 @@ var AdultListComponent = /** @class */ (function () {
           this.cookieService.remove('_travelers');
           this.cookieService.put("_travelers", JSON.stringify(this._travelers));
         } */
-        // this.adultsCount.emit(this.counter);
+        this.adultsCount.emit(this.counter);
+    };
+    AdultListComponent.prototype.getRandomNumber = function (i) {
+        var random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
     };
     AdultListComponent.prototype.ngOnChanges = function (changes) {
         if (changes['traveler']) {
@@ -92,9 +103,9 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.ngDoCheck = function () {
-        this._selectedId.forEach(function (id) {
-            $('#' + id).removeAttr("disabled");
-        });
+        /* this._selectedId.forEach(id => {
+          $(  "'#+`id`'"   ).removeAttr( "disabled" );
+        }); */
         this.checkUser();
         this.containers = this.containers;
         this.travelers = this.travelers;
@@ -116,15 +127,22 @@ var AdultListComponent = /** @class */ (function () {
             this.isLoggedIn = true;
         }
     };
-    AdultListComponent.prototype.abc = function (status) {
-        console.log('status', status);
-    };
     AdultListComponent.prototype.pushTraveler = function (event) {
         this.travelers.push(event);
         this.showAddAdultForm = false;
     };
     AdultListComponent.prototype.getFormStatus = function (status) {
         this.adultFormStatus = status;
+    };
+    AdultListComponent.prototype.infantCollapseClick = function () {
+        this.infantCollapse = !this.infantCollapse;
+    };
+    AdultListComponent.prototype.childCollapseClick = function () {
+        this.childCollapse = !this.childCollapse;
+    };
+    AdultListComponent.prototype.adultCollapseClick = function () {
+        this.adultCollapse = !this.adultCollapse;
+        console.log(this.adultCollapse);
     };
     AdultListComponent.prototype.getCountry = function () {
         var _this = this;

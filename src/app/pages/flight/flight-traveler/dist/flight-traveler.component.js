@@ -24,13 +24,14 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.loading = true;
         this.progressStep = { step1: true, step2: false, step3: false };
         this.isLoggedIn = false;
+        this.is_traveller = false;
         this.totalTraveler = 0;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
+        this.getTravelers();
         this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
         this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
         this.routeCode = this.route.snapshot.paramMap.get('rc');
-        this.getTravelers();
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
@@ -60,10 +61,15 @@ var FlightTravelerComponent = /** @class */ (function () {
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken) {
             this.isLoggedIn = true;
+            this.is_traveller = false;
         }
     };
     FlightTravelerComponent.prototype.ngDoCheck = function () {
         this.checkUser();
+        if (this.is_traveller === false && this.travelers.length === 0) {
+            this.is_traveller = true;
+            // this.getTravelers();
+        }
     };
     FlightTravelerComponent = __decorate([
         core_1.Component({
