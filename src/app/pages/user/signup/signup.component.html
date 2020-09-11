@@ -19,8 +19,8 @@
                                 placeholder="Enter First Name">
                             <div
                                 *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors">
-                                <p class="error_text" *ngIf="signupForm.controls.first_name.errors.required">Please
-                                    enter your first name.</p>
+                                <div class="error_text" *ngIf="signupForm.controls.first_name.errors.required">Please
+                                    enter your first name.</div>
                             </div>
                         </div>
                     </div>
@@ -33,8 +33,8 @@
                                 placeholder="Enter Last Name">
                             <div class="error_text"
                                 *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
-                                <p *ngIf="signupForm.controls.last_name.errors.required">Please enter your last name.
-                                </p>
+                                <div *ngIf="signupForm.controls.last_name.errors.required">Please enter your last name.
+                                </div>
                             </div>
                         </div>
 
@@ -49,8 +49,8 @@
                             placeholder="Enter Email">
                         <div class="error_text"
                             *ngIf="(submitted || signupForm.controls.email.touched) && signupForm.controls.email.errors">
-                            <p *ngIf="signupForm.controls.email.errors.required">Please enter your email address.</p>
-                            <p *ngIf="signupForm.controls.email.errors.pattern">Please enter valid email address.</p>
+                            <div *ngIf="signupForm.controls.email.errors.required">Please enter your email address.</div>
+                            <div *ngIf="signupForm.controls.email.errors.pattern">Please enter valid email address.</div>
                         </div>
                     </div>
                 </div>
@@ -69,10 +69,10 @@
                                         aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
                                 <div class="error_text"
                                     *ngIf="(submitted || signupForm.controls.password.touched) && signupForm.controls.password.errors">
-                                    <p *ngIf="signupForm.controls.password.errors.required">Please enter your password.
-                                    </p>
-                                    <p *ngIf="signupForm.controls.password.errors.pattern">Your password must contain 1
-                                        Alpha, 1 numeric , 1 special & 8 character long.</p>
+                                    <div *ngIf="signupForm.controls.password.errors.required">Please enter your password.
+                                    </div>
+                                    <div *ngIf="signupForm.controls.password.errors.pattern">Your password must contain 1
+                                        Alpha, 1 numeric , 1 special & 8 character long.</div>
                                 </div>
                             </div>
                         </div>
@@ -90,10 +90,10 @@
 
                                 <div class="error_text"
                                     *ngIf="(submitted || signupForm.controls.confirm_password.touched) && signupForm.controls.confirm_password.errors">
-                                    <p *ngIf="signupForm.controls.confirm_password.errors.required">Please enter your
-                                        confirm password.</p>
-                                    <p *ngIf="signupForm.controls.confirm_password.errors.mustMatch">Confirm password
-                                        doesn't match.</p>
+                                    <div *ngIf="signupForm.controls.confirm_password.errors.required">Please enter your
+                                        confirm password.</div>
+                                    <div *ngIf="signupForm.controls.confirm_password.errors.mustMatch">Confirm password
+                                        doesn't match.</div>
                                 </div>
                             </div>
                         </div>

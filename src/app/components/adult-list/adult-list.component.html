@@ -1,8 +1,8 @@
 <div class="block_passenger_detail">
     <div class="block_passenger_info">
         <h6>Adult <span>(Above 12 years)</span></h6>
-        <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
-            <div *ngFor="let traveler of travelers; let i = index;">
+        <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && _adults.length">
+            <div *ngFor="let traveler of _adults; let i = index;">
                 <div class="card_add_pass" *ngIf="traveler.user_type==='adult'">
                     <div class="card-header" id="adultOne{{i}}">
                         <h2 class="mb-0">
@@ -10,14 +10,13 @@
                                 <input id="checkbox-{{i}}" [disabled]="checkBoxDisable" type="checkbox"
                                     >
                                 <span class="checkmark"></span>
-                            </label>
-                           
+                            </label>                           
                             <button type="button" class="btn btn-link" data-toggle="collapse"
                                 [attr.data-target]="'#adultcollapseOne'+ i">
                                 {{traveler.firstName}} {{traveler.lastName}} {{traveler.checked}}
                                 <i class="fa fa-angle-down"></i>
-                                <span
-                                    [ngClass]="(adultFormStatus)?'status_complete':'status_incomplete'">{{adultFormStatus ? 'Complete' : 'Incomplete'}}</span>
+                                <span (change)="abc(adultFormStatus)" id="adultFormStatus-{{i}}" 
+                                    [ngClass]="adultFormStatus === true ? 'status_complete':'status_incomplete'">{{adultFormStatus === true ? 'Complete' : 'Incomplete'}}</span>
                             </button>
                         </h2>
                     </div>
@@ -56,8 +55,8 @@
     <div *ngIf="isLoggedIn" class="child-infant">
         <div class="block_passenger_info">
             <h6>Child <span>(Above 2-12 years)</span></h6>
-            <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
-                <div *ngFor="let traveler of travelers; let i = index;">
+            <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && _childs.length">
+                <div *ngFor="let traveler of _childs; let i = index;">
                     <div class="card_add_pass" *ngIf="traveler.user_type==='child'">
                         <div class="card-header" id="adultOne{{i}}">
                             <h2 class="mb-0">
@@ -90,7 +89,7 @@
                 (click)="addForms('child')">{{showAddChildForm ? '-' : '+'}}
                 Add {{'Child' | titlecase}}</a>
         </div>
-        <!-- Without Login -->
+        
         <div id="accordion-Adults" class="accordion" *ngIf="showAddChildForm">
             <div class="card_add_pass add-more">
                 <div class="card-header" id="adultOne">
@@ -106,8 +105,8 @@
         </div>
         <div class="block_passenger_info">
             <h6>Infant <span>(Above 2 years)</span></h6>
-            <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && travelers.length">
-                <div *ngFor="let traveler of travelers; let i = index;">
+            <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && _infants.length">
+                <div *ngFor="let traveler of _infants; let i = index;">
                     <div class="card_add_pass" *ngIf="traveler.user_type==='infant'">
                         <div class="card-header" id="adultOne{{i}}">
                             <h2 class="mb-0">
@@ -141,7 +140,7 @@
                 Add {{'Infant' | titlecase}}</a>
         </div>
 
-        <!-- Without Login -->
+        
         <div id="accordion-Adults" class="accordion" *ngIf="showAddInfantForm">
             <div class="card_add_pass add-more">
                 <div class="card-header" id="adultOne">

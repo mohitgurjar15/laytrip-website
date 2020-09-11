@@ -17,6 +17,9 @@ export class AdultListComponent implements OnInit {
   @Input() username: string;
   @Input() type: string;
   @Input() age: string;
+  @Input() _adults: [];
+  @Input() _childs: [];
+  @Input() _infants: [];
 
   counter = 0;
   totalTravelerCount = 0;
@@ -44,6 +47,7 @@ export class AdultListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+   
     this.checkUser();
     this.getCountry();
     if (this.type == 'adult' && !this.isLoggedIn) {
@@ -133,6 +137,10 @@ export class AdultListComponent implements OnInit {
     if (userToken) {
       this.isLoggedIn = true;
     }
+  }
+  abc(status){
+    console.log('status',status)
+
   }
 
   pushTraveler(event) {

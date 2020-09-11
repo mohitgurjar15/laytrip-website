@@ -65,14 +65,13 @@ var ResetPasswordComponent = /** @class */ (function () {
                 inputDataOtp += _this.resetForm.get(key).value;
             }
         });
-        console.log(inputDataOtp);
         this.submitted = this.loading = true;
         if (this.resetForm.invalid) {
+            console.log(this.resetForm.controls);
             if (inputDataOtp.length < 6) {
                 console.log('error');
                 this.errorMessage = "Please enter OTP.";
             }
-            this.submitted = true;
             this.loading = false;
             return;
         }

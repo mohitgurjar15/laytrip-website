@@ -16,6 +16,9 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
+        this._adults = [];
+        this._childs = [];
+        this._infants = [];
         this.selectedAdults = 0;
         this.routeCode = '';
         this.loading = true;
@@ -35,8 +38,17 @@ var FlightTravelerComponent = /** @class */ (function () {
         if (userToken) {
             this.travelerService.getTravelers().subscribe(function (res) {
                 _this.travelers = res.data;
-                /* this.travelers.forEach(element => {
-                }); */
+                _this.travelers.forEach(function (element) {
+                    if (element.user_type == 'adult') {
+                        _this._adults.push(element);
+                    }
+                    else if (element.user_type == 'child') {
+                        _this._childs.push(element);
+                    }
+                    else if (element.user_type == 'infant') {
+                        _this._infants.push(element);
+                    }
+                });
             });
         }
         this.loading = false;

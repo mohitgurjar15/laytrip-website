@@ -68,6 +68,7 @@ var TravelerFormComponent = /** @class */ (function () {
             });
         }
         this.formStatus = this.adultForm.status === 'VALID' ? true : false;
+        // console.log(this.formStatus)
         setTimeout(function () {
             _this.auditFormStatus.emit(_this.formStatus);
         }, 1000);

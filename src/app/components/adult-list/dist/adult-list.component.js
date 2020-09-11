@@ -116,6 +116,9 @@ var AdultListComponent = /** @class */ (function () {
             this.isLoggedIn = true;
         }
     };
+    AdultListComponent.prototype.abc = function (status) {
+        console.log('status', status);
+    };
     AdultListComponent.prototype.pushTraveler = function (event) {
         this.travelers.push(event);
         this.showAddAdultForm = false;
@@ -161,6 +164,15 @@ var AdultListComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], AdultListComponent.prototype, "age");
+    __decorate([
+        core_1.Input()
+    ], AdultListComponent.prototype, "_adults");
+    __decorate([
+        core_1.Input()
+    ], AdultListComponent.prototype, "_childs");
+    __decorate([
+        core_1.Input()
+    ], AdultListComponent.prototype, "_infants");
     AdultListComponent = __decorate([
         core_1.Component({
             selector: 'app-adult-list',

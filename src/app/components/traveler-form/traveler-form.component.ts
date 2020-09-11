@@ -87,7 +87,7 @@ export class TravelerFormComponent implements OnInit {
     }
 
     this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
-    
+    // console.log(this.formStatus)
     
       setTimeout(() => {
         this.auditFormStatus.emit(this.formStatus);
