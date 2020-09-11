@@ -35,6 +35,11 @@ export class TravelerFormComponent implements OnInit {
   editMode = false;  
   formStatus: boolean = false;
 
+  locale = {
+    format: 'DD/MM/YYYY',
+    displayFormat: 'DD/MM/YYYY'
+  };
+  
   dobMinDate: any; 
   dobMaxDate: moment.Moment = moment(); 
   expiryMinDate: moment.Moment = moment().add(2, 'days'); 
@@ -62,7 +67,7 @@ export class TravelerFormComponent implements OnInit {
       country_id: ['', Validators.required],
       frequently_no: [''],
       passport_expiry: [''],
-      passport_number: [''],
+      passport_number: [''], 
       user_type:['']
     })
     this.setUserTypeValidation();
@@ -88,10 +93,7 @@ export class TravelerFormComponent implements OnInit {
 
     this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
     
-    
-      setTimeout(() => {
-        this.auditFormStatus.emit(this.formStatus);
-      }, 1000);
+    this.auditFormStatus.emit(this.formStatus);
     
   }
 

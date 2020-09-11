@@ -16,18 +16,22 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
+        this._adults = [];
+        this._childs = [];
+        this._infants = [];
         this.selectedAdults = 0;
         this.routeCode = '';
         this.loading = true;
         this.progressStep = { step1: true, step2: false, step3: false };
         this.isLoggedIn = false;
+        this.is_traveller = false;
         this.totalTraveler = 0;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
+        this.getTravelers();
         this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
         this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
         this.routeCode = this.route.snapshot.paramMap.get('rc');
-        this.getTravelers();
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
@@ -35,8 +39,17 @@ var FlightTravelerComponent = /** @class */ (function () {
         if (userToken) {
             this.travelerService.getTravelers().subscribe(function (res) {
                 _this.travelers = res.data;
-                /* this.travelers.forEach(element => {
-                }); */
+                _this.travelers.forEach(function (element) {
+                    if (element.user_type == 'adult') {
+                        _this._adults.push(element);
+                    }
+                    else if (element.user_type == 'child') {
+                        _this._childs.push(element);
+                    }
+                    else if (element.user_type == 'infant') {
+                        _this._infants.push(element);
+                    }
+                });
             });
         }
         this.loading = false;
@@ -48,10 +61,15 @@ var FlightTravelerComponent = /** @class */ (function () {
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken) {
             this.isLoggedIn = true;
+            this.is_traveller = false;
         }
     };
     FlightTravelerComponent.prototype.ngDoCheck = function () {
         this.checkUser();
+        if (this.is_traveller === false && this.travelers.length === 0) {
+            this.is_traveller = true;
+            // this.getTravelers();
+        }
     };
     FlightTravelerComponent = __decorate([
         core_1.Component({

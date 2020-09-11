@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Options, ChangeContext } from 'ng5-slider';
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
-import { CommonFunction } from 'src/app/_helpers/common-function';
 
 @Component({
   selector: 'app-payment-mode',
@@ -14,8 +13,7 @@ export class PaymentModeComponent implements OnInit {
   @Output() applyLaycredit = new EventEmitter();
   @Output() selectInstalmentMode = new EventEmitter();
   constructor(
-    private genericService:GenericService,
-    private commonFunction:CommonFunction
+    private genericService:GenericService
   ) { }
   
   @Input() flightSummary;

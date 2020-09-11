@@ -1,4 +1,4 @@
-<div class="form-container otp-container">
+<div class="form-container otp-container show_otp">
   <div class="verify_otp_modal">
     <div class="modal_top">
       <div class="modal_title">
@@ -35,7 +35,7 @@
           </li>
           <li>
             <input type="text" (keypress)="commonFunctoin.validateNumber($event)" #input6
-              (input)="onInputEntry($event, input7)" formControlName="otp6" maxlength="1" tabindex="6" placeholder="0">
+              (input)="onInputEntry($event, input6)" formControlName="otp6" maxlength="1" tabindex="6" placeholder="0">
           </li>
         </ul>
         <div *ngIf="(submitted || errorMessage) && otpForm.controls.otp1.errors" class="focus-input100 login-error">

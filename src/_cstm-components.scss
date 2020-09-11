@@ -88,6 +88,8 @@
         .ng-select-container{
             height:100%;	
             border:none !important;
+            display: flex;
+            align-items: center;
             &:hover{
                 box-shadow: none;
             }
