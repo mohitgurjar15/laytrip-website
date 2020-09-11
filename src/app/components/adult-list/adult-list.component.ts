@@ -41,6 +41,9 @@ export class AdultListComponent implements OnInit {
   countries: any = [];
   countries_code: any = [];
   containers = [];
+  adultsSelectedCount=0;
+  childsSelectedCount=0;
+  infantsSelectedCount=0;
 
   constructor(
     private cookieService: CookieService,
@@ -62,7 +65,7 @@ export class AdultListComponent implements OnInit {
 
 
   selectTraveler(event, traveler) {
-   
+    
     if (event.target.checked) {
       this._selectedId.push(event.target.id);
       this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
@@ -130,7 +133,7 @@ export class AdultListComponent implements OnInit {
 
   ngDoCheck() {
     /* this._selectedId.forEach(id => {
-      $(  "'#+`id`'"   ).removeAttr( "disabled" );     
+      $(  "#"+id   ).removeAttr( "disabled" );     
     }); */
     this.checkUser();
     this.containers = this.containers;

@@ -35,6 +35,9 @@ var AdultListComponent = /** @class */ (function () {
         this.countries = [];
         this.countries_code = [];
         this.containers = [];
+        this.adultsSelectedCount = 0;
+        this.childsSelectedCount = 0;
+        this.infantsSelectedCount = 0;
     }
     AdultListComponent.prototype.ngOnInit = function () {
         this.checkUser();
@@ -104,7 +107,7 @@ var AdultListComponent = /** @class */ (function () {
     };
     AdultListComponent.prototype.ngDoCheck = function () {
         /* this._selectedId.forEach(id => {
-          $(  "'#+`id`'"   ).removeAttr( "disabled" );
+          $(  "#"+id   ).removeAttr( "disabled" );
         }); */
         this.checkUser();
         this.containers = this.containers;
