@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CookieService } from 'ngx-cookie';
@@ -15,6 +15,7 @@ export class FlightCheckoutComponent implements OnInit {
 
     constructor(
       private route: ActivatedRoute,
+      private router:Router,
       private flightService:FlightService,
       private cookieService: CookieService
     ) { }
@@ -22,7 +23,7 @@ export class FlightCheckoutComponent implements OnInit {
     showAddCardForm:boolean=false;
     progressStep={ step1:true, step2:true, step3:false };
     cardToken:string;
-    instalmentMode:'noinstalment';
+    instalmentMode:'no-instalment';
     laycreditpoints:number;
     additionalAmount:number;
     routeCode:string;
@@ -35,12 +36,15 @@ export class FlightCheckoutComponent implements OnInit {
     bookingLoader:boolean=false;
     bookingResult:any={};
     sellingPrice:number;
+    flightSummary:[]=[];
 
     ngOnInit() {
 
       this.userInfo = getLoginUserInfo();
-      console.log("this.userInfo",this.userInfo)
-
+      if(typeof this.userInfo.roleId=='undefined'){
+        this.router.navigate(['/'])
+      }
+      console.log("this",this.userInfo)
       this.routeCode = this.route.snapshot.paramMap.get('rc')
 
       let timerInfo:any = this.cookieService.get('flight_booking_timer')
@@ -68,16 +72,23 @@ export class FlightCheckoutComponent implements OnInit {
       if(this.userInfo.roleId==7){
         this.showAddCardForm=true;
       }
-      let travelersIds = this.cookieService.get('userIds');
-      travelersIds = JSON.parse(travelersIds)
-      if(travelersIds.length){
-        for(let i=0; i < travelersIds.length; i++){
-          this.travelers.push({
-            "traveler_id" : travelersIds[i]
-          })
+      let travelersIds = this.cookieService.get('_travelers');
+      console.log("travelersIds",travelersIds)
+      try{
+        travelersIds = JSON.parse(travelersIds)
+        if(travelersIds.length){
+          for(let i=0; i < travelersIds.length; i++){
+            this.travelers.push({
+              "traveler_id" : travelersIds[i]
+            })
+          }
         }
+        console.log(this.travelers)
       }
-      console.log(this.travelers)
+      catch(e){
+
+      }
+      
     }
 
     toggleAddcardForm(){
@@ -143,5 +154,10 @@ export class FlightCheckoutComponent implements OnInit {
         this.isDisableBookBtn=true;
       }
       console.log("this.isDisableBookBtn",this.isDisableBookBtn)
+    }
+
+    getFlightSummaryData(data){
+
+      this.flightSummary=data;
     }
 }

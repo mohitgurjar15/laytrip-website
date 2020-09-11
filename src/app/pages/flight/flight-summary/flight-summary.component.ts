@@ -30,6 +30,7 @@ export class FlightSummaryComponent implements OnInit {
   flightSummaryLoader:boolean=true;
   totalTraveler:number=1;
   currency;
+
   @Output() getRouteDetails = new EventEmitter();
 
   ngOnInit() {
@@ -52,7 +53,7 @@ export class FlightSummaryComponent implements OnInit {
           this.inWardStopCount =typeof response[0].routes[1]!='undefined' ? response[0].routes[1].stops.length-1:0;
           this.totalTravelerValue.emit(this.totalTraveler);
           
-          this.getRouteDetails.emit(response)
+          this.getRouteDetails.emit(response);
 
         },(error)=>{
           console.log("error",error)
