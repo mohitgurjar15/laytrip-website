@@ -1,4 +1,4 @@
-<div class="result_listing one_way_list" (clickOutside)="clickOutside()">
+<div class="result_listing one_way_list" (clickOutside)="closeFlightDetail()">
     <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
@@ -60,7 +60,8 @@
                 </div>
             </div>
         </div>
-        <div class="detail_info_show on_out_said" [attr.id]="blockIndex" *ngIf="showFlightDetails === blockIndex">
+        <div class="detail_info_show on_out_said" [attr.id]="blockIndex"
+            *ngIf="showFlightDetails[blockIndex] === true">
             <ul id="tabs" class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a id="tab-A" href="#flight-info" class="nav-link active" data-toggle="tab" role="tab">Flight
@@ -305,13 +306,18 @@
                                 </div> -->
                                 <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
-                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
-                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
-                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
-                                    <p class="fb_animation mb-0 h-auto w-100" *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100"
+                                        *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100"
+                                        *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100"
+                                        *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                    <p class="fb_animation mb-0 h-auto w-100"
+                                        *ngIf="!cancellationPolicy && !errorMessage"></p>
                                     <ul>
                                         <li *ngIf="errorMessage">{{ errorMessage }}</li>
-                                        <li *ngIf="cancellationPolicy" [innerHtml]="cancellationPolicy?.cancellation_policy">
+                                        <li *ngIf="cancellationPolicy"
+                                            [innerHtml]="cancellationPolicy?.cancellation_policy">
                                         </li>
                                         <!-- <li>It is a long established fact that a reader will be distracted by the
                                             readable content layout.</li>
@@ -332,4 +338,3 @@
         </div>
     </div>
 </div>
-
