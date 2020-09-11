@@ -14,7 +14,7 @@ export class FlightService {
 
     constructor(
         private http: HttpClient,
-        private commonFunction:CommonFunction
+        private commonFunction: CommonFunction
     ) {
 
     }
@@ -45,7 +45,7 @@ export class FlightService {
     }
 
     getBaggageDetails(routeCode) {
-        const payload = {route_code: routeCode};
+        const payload = { route_code: routeCode };
         return this.http.post(`${environment.apiUrl}v1/flight/baggage-details`, payload)
             .pipe(
                 retry(1),
@@ -54,7 +54,7 @@ export class FlightService {
     }
 
     getCancellationPolicy(routeCode) {
-        const payload = {route_code: routeCode};
+        const payload = { route_code: routeCode };
         return this.http.post(`${environment.apiUrl}v1/flight/cancellation-policy`, payload)
             .pipe(
                 retry(1),
@@ -62,12 +62,12 @@ export class FlightService {
             );
     }
 
-    bookFligt(payload){
-        let headers={
-            currency : 'USD',
-            language : 'en'
+    bookFligt(payload) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
         }
-        return this.http.post(`${environment.apiUrl}v1/flight/book`,payload,this.commonFunction.setHeaders(headers))
+        return this.http.post(`${environment.apiUrl}v1/flight/book`, payload, this.commonFunction.setHeaders(headers))
             .pipe(
                 retry(1),
                 catchError(this.handleError)
@@ -75,7 +75,6 @@ export class FlightService {
     }
 
     handleError(error) {
-        console.log("====", error);
         let errorMessage = {};
         if (error.status == 0) {
             console.log("API Server is not responding")
@@ -90,28 +89,40 @@ export class FlightService {
         return throwError(errorMessage);
     }
 
-    getBookingDetails(bookingId){
-        let headers={
-            currency : 'USD',
-            language : 'en'
+    getBookingDetails(bookingId) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
         }
-        return this.http.get(`${environment.apiUrl}v1/flight/book/${bookingId}`,this.commonFunction.setHeaders(headers))
+        return this.http.get(`${environment.apiUrl}v1/flight/book/${bookingId}`, this.commonFunction.setHeaders(headers))
             .pipe(
                 retry(1),
                 catchError(this.handleError)
             );
     }
 
-    updateAdult(data,id) {       
+    updateAdult(data, id) {
         return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.commonFunction.setHeaders());
     }
-    
-    addAdult(data) {  
+
+    addAdult(data) {
         let userToken = localStorage.getItem('_lay_sess');
-        if(userToken){
+        if (userToken) {
             return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.commonFunction.setHeaders());
         } else {
             return this.http.post(`${environment.apiUrl}v1/traveler/`, data);
         }
+    }
+
+    getFlightSearchResult(data) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
+        const url = environment.apiUrl + `v1/flight/search-oneway-flight`;
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
     }
 }

@@ -15,213 +15,214 @@ import * as moment from 'moment';
 })
 export class HomeComponent implements OnInit {
 
-    s3BucketUrl = environment.s3BucketUrl;
+  s3BucketUrl = environment.s3BucketUrl;
 
-    modules: Module[];
-    moduleList: any = {};
-    switchBtnValue = false;
-    tempSwapData =
-      {
-        leftSideValue: {},
-        rightSideValue: {}
-      };
-    swapped = [];
-    isSwap = false;
-    swapError = '';
-    isRoundTrip:boolean=false;
-    flightSearchForm: FormGroup;
+  modules: Module[];
+  moduleList: any = {};
+  switchBtnValue = false;
+  tempSwapData =
+    {
+      leftSideValue: {},
+      rightSideValue: {}
+    };
+  swapped = [];
+  isSwap = false;
+  swapError = '';
+  isRoundTrip: boolean = false;
+  flightSearchForm: FormGroup;
 
-    // DATE OF FROM_DESTINATION & TO_DESTINATION
-    fromDestinationCode;
-    toDestinationCode;
+  // DATE OF FROM_DESTINATION & TO_DESTINATION
+  fromDestinationCode;
+  toDestinationCode;
 
-    locale = {
-      format: 'DD/MM/YYYY',
-      displayFormat: 'DD/MM/YYYY'
+  locale = {
+    format: 'DD/MM/YYYY',
+    displayFormat: 'DD/MM/YYYY'
+  };
+
+  flightDepartureMinDate: moment.Moment = moment();
+  flightReturnMinDate: moment.Moment = moment().add(7, 'days');
+
+  totalPerson: number = 1;
+
+  searchFlightInfo =
+    {
+      trip: 'oneway',
+      departure: '',
+      arrival: '',
+      departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
+      // arrival_date: '',
+      class: '',
+      adult: 1,
+      child: null,
+      infant: null
     };
 
-    flightDepartureMinDate: moment.Moment = moment(); 
-    flightReturnMinDate: moment.Moment = moment().add(7, 'days'); 
+  searchedValue = [];
 
-    totalPerson = 1;
+  constructor(
+    private genericService: GenericService,
+    public commonFunction: CommonFunction,
+    public fb: FormBuilder,
+    public router: Router
+  ) {
+    this.flightSearchForm = this.fb.group({
+      fromDestination: [[Validators.required]],
+      toDestination: [[Validators.required]],
+      departureDate: [{
+        startDate: moment().add(30, 'days')
+      }, Validators.required],
+      returnDate: [{
+        startDate: moment().add(37, 'days')
+      }, Validators.required]
+    });
+  }
 
-    searchFlightInfo =
-      {
-        trip: 'oneway',
-        departure: '',
-        arrival: '',
-        departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
-        // arrival_date: '',
-        class: '',
-        adult: 1,
-        child: null,
-        infant: null
-      };
+  ngOnInit(): void {
+    window.scrollTo(0, 0);
+    this.getModules();
+    this.loadJquery();
+  }
 
-    searchedValue = [];
-
-    constructor(
-      private genericService: GenericService,
-      public commonFunction: CommonFunction,
-      public fb: FormBuilder,
-      public router: Router
-    ) {
-      this.flightSearchForm = this.fb.group({
-        fromDestination: [[Validators.required]],
-        toDestination: [[Validators.required]],
-        departureDate: [{
-          startDate: moment().add(30, 'days')
-        }, Validators.required],
-        returnDate: [{
-          startDate: moment().add(37, 'days')
-        }, Validators.required]
-      });
-    }
-
-    ngOnInit(): void {
-
-      this.getModules();
-      this.loadJquery();
-    }
-
-    loadJquery() {
+  loadJquery() {
 
 
-      $(".featured_slid").slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1
-      });
+    $(".featured_slid").slick({
+      dots: false,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1
+    });
 
-      // Start Featured List Js
-      $(".deals_slid").slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-      });
-      // Close Featured List Js
-    }
-
-
-    /**
-     * Get All module like (hotel, flight & VR)
-     */
-    getModules() {
-      this.genericService.getModules().subscribe(
-        (response: ModuleModel) => {
-
-          response.data.forEach(module => {
-            this.moduleList[module.name] = module.status;
-          });
-          // console.log(this.moduleList);
+    // Start Featured List Js
+    $(".deals_slid").slick({
+      dots: false,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
         },
-        (error) => {
-
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
         }
-      );
-    }
+      ]
+    });
+    // Close Featured List Js
+  }
 
-    destinationChangedValue(event) {
-      if (event && event.key && event.key === 'fromSearch') {
-        this.fromDestinationCode = event.value.code;
-        this.searchedValue.push({key: 'fromSearch', value: event.value});
-      } else if (event && event.key && event.key === 'toSearch') {
-        this.toDestinationCode = event.value.code;
-        this.searchedValue.push({key: 'toSearch', value: event.value});
-      }
-      this.searchFlightInfo.departure = this.fromDestinationCode;
-      this.searchFlightInfo.arrival = this.toDestinationCode;
-    }
 
-    dateChange(event) {
-      // console.log(event);
-    }
+  /**
+   * Get All module like (hotel, flight & VR)
+   */
+  getModules() {
+    this.genericService.getModules().subscribe(
+      (response: ModuleModel) => {
 
-    getDateWithFormat(date) {
-      this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
-      // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
-    }
-
-    getSwappedValue(event) {
-      if (event && event.key && event.key === 'fromSearch') {
-        this.tempSwapData.leftSideValue = event.value;
-      } else if (event && event.key && event.key === 'toSearch') {
-        this.tempSwapData.rightSideValue = event.value;
-      }
-    }
-
-    switchDestination() {
-      
-    }
-
-    changeTravellerInfo(event) {
-      this.searchFlightInfo.adult = event.adult;
-      this.searchFlightInfo.child = event.child;
-      this.searchFlightInfo.infant = event.infant;
-      this.searchFlightInfo.class = event.class;
-      this.totalPerson = event.totalPerson;
-    }
-
-    searchFlights() {
-      if (this.searchFlightInfo && this.totalPerson &&
-        this.flightSearchForm.value.departureDate.startDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
-        localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
-        this.router.navigate(['flight/search'], {
-          queryParams: {
-            trip: this.isRoundTrip?'roundtrip':'oneway',
-            departure: this.searchFlightInfo.departure,
-            arrival: this.searchFlightInfo.arrival,
-            departure_date: moment(this.flightSearchForm.value.departureDate.startDate).format('YYYY-MM-DD'),
-            arrival_date: moment(this.flightSearchForm.value.returnDate.startDate).format('YYYY-MM-DD'),
-            class: this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy',
-            adult: this.searchFlightInfo.adult,
-            child: this.searchFlightInfo.child ? this.searchFlightInfo.child : 0,
-            infant: this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0
-          },
-          queryParamsHandling: 'merge'
+        response.data.forEach(module => {
+          this.moduleList[module.name] = module.status;
         });
+        // console.log(this.moduleList);
+      },
+      (error) => {
+
       }
+    );
+  }
 
+  destinationChangedValue(event) {
+    if (event && event.key && event.key === 'fromSearch') {
+      this.fromDestinationCode = event.value.code;
+      this.searchedValue.push({ key: 'fromSearch', value: event.value });
+    } else if (event && event.key && event.key === 'toSearch') {
+      this.toDestinationCode = event.value.code;
+      this.searchedValue.push({ key: 'toSearch', value: event.value });
+    }
+    this.searchFlightInfo.departure = this.fromDestinationCode;
+    this.searchFlightInfo.arrival = this.toDestinationCode;
+  }
+
+  dateChange(event) {
+    // console.log(event);
+  }
+
+  getDateWithFormat(date) {
+    this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
+    // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
+  }
+
+  getSwappedValue(event) {
+    if (event && event.key && event.key === 'fromSearch') {
+      this.tempSwapData.leftSideValue = event.value;
+    } else if (event && event.key && event.key === 'toSearch') {
+      this.tempSwapData.rightSideValue = event.value;
+    }
+  }
+
+  switchDestination() {
+
+  }
+
+  changeTravellerInfo(event) {
+    this.searchFlightInfo.adult = event.adult;
+    this.searchFlightInfo.child = event.child;
+    this.searchFlightInfo.infant = event.infant;
+    this.searchFlightInfo.class = event.class;
+    this.totalPerson = event.totalPerson;
+    this.searchedValue.push({ key: 'travellers', value: event });
+  }
+
+  searchFlights() {
+    if (this.searchFlightInfo && this.totalPerson &&
+      this.flightSearchForm.value.departureDate.startDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
+      localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
+      this.router.navigate(['flight/search'], {
+        queryParams: {
+          trip: this.isRoundTrip ? 'roundtrip' : 'oneway',
+          departure: this.searchFlightInfo.departure,
+          arrival: this.searchFlightInfo.arrival,
+          departure_date: moment(this.flightSearchForm.value.departureDate.startDate).format('YYYY-MM-DD'),
+          arrival_date: moment(this.flightSearchForm.value.returnDate.startDate).format('YYYY-MM-DD'),
+          class: this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy',
+          adult: this.searchFlightInfo.adult,
+          child: this.searchFlightInfo.child ? this.searchFlightInfo.child : 0,
+          infant: this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0
+        },
+        queryParamsHandling: 'merge'
+      });
     }
 
-    toggleOnewayRoundTrip(type){
+  }
 
-      if(type=='roundtrip')
-        this.isRoundTrip=true;
-      else
-        this.isRoundTrip=false
-    }
+  toggleOnewayRoundTrip(type) {
 
-    datesUpdated(event){
-      
-    }
+    if (type == 'roundtrip')
+      this.isRoundTrip = true;
+    else
+      this.isRoundTrip = false
+  }
 
-    departureDateUpdate(date){
-      this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate)
-    }
+  datesUpdated(event) {
+
+  }
+
+  departureDateUpdate(date) {
+    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate)
+  }
 }
