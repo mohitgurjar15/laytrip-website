@@ -1,14 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { FlightService } from '../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
-import { DatePipe } from '@angular/common';
-import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 
 declare var $: any;
@@ -89,10 +85,14 @@ export class TravelerFormComponent implements OnInit {
           frequently_no:''
         })
     }
-    this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
-   
-    this.auditFormStatus.emit(this.formStatus);
 
+    this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
+    
+    
+      setTimeout(() => {
+        this.auditFormStatus.emit(this.formStatus);
+      }, 1000);
+    
   }
 
   ngDoCheck(){

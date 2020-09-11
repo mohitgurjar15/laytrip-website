@@ -103,6 +103,9 @@ export class UserService {
         catchError(this.handleError)
     );
   }  
+  resetPassword(data) {
+    return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
+  }  
 
   updateProfile(data) {
     return this.http.put(this.apiURL+'v1/auth/profile', data,  this.commonFunction.setHeaders());

@@ -19,7 +19,7 @@
             </app-forgot-password>
           </div>
           <div *ngIf="resetPasswordModal">
-            <app-reset-password [pageData]="resetPasswordModal" (valueChange)="pageChange($event)">
+            <app-reset-password [emailForVerifyOtp]="emailForVerifyOtp"  [pageData]="resetPasswordModal" (valueChange)="pageChange($event)">
             </app-reset-password>
           </div>
           <div class="forgot_password_modal" id="otp_modal" *ngIf="otpModal">

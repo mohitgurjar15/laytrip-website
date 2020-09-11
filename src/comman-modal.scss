@@ -1159,6 +1159,40 @@
                                     form {
                                         width: 100%;
 
+                                        ul {
+                                            margin: 0 0 20px;
+                                            padding: 0;
+                                            list-style: none;
+                                            display: flex;
+
+                                            li {
+                                                padding: 0 10px;
+
+                                                &:first-child {
+                                                    padding-left: 0;
+                                                }
+
+                                                &:last-child {
+                                                    padding-right: 0;
+                                                }
+
+                                                input {
+                                                    width: 100%;
+                                                    height: 50px;
+                                                    text-align: center;
+                                                    border: 1px solid $box-border-color;
+                                                    border-radius: 5px;
+                                                    font-size: 18px;
+                                                    color: $text-black;
+
+                                                    &:placeholder {
+                                                        color: $text-light-grey;
+                                                        -webkit-text-fill-color: $text-light-grey;
+                                                    }
+                                                }
+                                            }
+                                        }
+
                                         .form_row {
                                             width: 100%;
                                             margin: 0 0 20px;

@@ -49,13 +49,15 @@ var AdultListComponent = /** @class */ (function () {
             }
             else {
                 this.checkBoxDisable = true;
+                this._selectedId.forEach(function (element) {
+                    $("#checkbox-" + element).removeAttr("disabled");
+                });
             }
         }
         else {
             this.checkBoxDisable = false;
             this.counter--;
         }
-        console.log('counter', this.counter);
         /* if (event.target.checked) {
           traveler.checked = true;
           let travelerData = {
@@ -90,7 +92,6 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.ngDoCheck = function () {
-        console.log('check');
         this._selectedId.forEach(function (id) {
             $('#' + id).removeAttr("disabled");
         });

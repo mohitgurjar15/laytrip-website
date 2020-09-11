@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   imports: [
@@ -11,6 +10,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     FormsModule,
     UserRoutingModule
   ],
-  declarations: [ResetPasswordComponent],
+  declarations: [],
 })
 export class UserModule { }
