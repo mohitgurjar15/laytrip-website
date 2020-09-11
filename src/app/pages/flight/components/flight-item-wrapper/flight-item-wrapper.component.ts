@@ -35,6 +35,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   errorMessage;
   loadBaggageDetails = true;
 
+  isRoundTrip = false;
+
   subcell = '$100';
 
   constructor(
@@ -51,7 +53,14 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.currency = JSON.parse(_currency);
     this.loadJquery();
 
+    // console.log(this.flightDetails);
     this.flightList = this.flightDetails;
+
+    if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
+      this.isRoundTrip = true;
+    } else if (this.route.snapshot.queryParams['trip'] === 'oneway') {
+      this.isRoundTrip = false;
+    }
 
     // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
     //   if (res) {
