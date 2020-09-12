@@ -18,34 +18,30 @@ export class AddCardComponent implements OnInit {
   ) { }
   @Input() showAddCardForm: boolean;
   // @ViewChild('cardAddForm') cardAddFormElement: ElementRef;
-  @ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
+  //@ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
   disabledSavecardbutton: boolean = true;
   cardForm: FormGroup;
   submitted: boolean = false;
   token: string;
   cardError: string = "";
   cardData;
+  locale = {
+    format: 'MM/YYYY',
+    displayFormat: 'MM/YYYY'
+  };
 
   ngOnInit() {
 
-    this.zone.runOutsideAngular(() => {
-      // don't forget to unsubscribe
-      //fromEvent(window, 'scroll').subscribe(...);
-      this.spreedlySdk();
-    });
-    
     this.cardForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      expiry: ['', Validators.required],
-      payment_method_token: ['']
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      card_cvv: ['', Validators.required],
+      card_number: ['', Validators.required],
+      expiry: ['', Validators.required]
     });
 
     
     
-  }
-
-  ngAfterViewInit(){
-    //this.spreedlySdk();
   }
 
   spreedlySdk(){
@@ -91,93 +87,28 @@ export class AddCardComponent implements OnInit {
     });
   }
 
-  submitPaymentForm(event) {
-    event.preventDefault();
-    Spreedly.on('paymentMethod', function (token, pmData) {
-      // Set the token in the hidden form field
-      var tokenField = document.getElementById('payment_method_token');
-      tokenField.setAttribute('value', token);
-      this.token = token;
-      // console.log(this.cardForm.controls.payment_method_token.value);
-      // this.cardForm.controls.payment_method_token.setValue(token);
-      console.log("this.token", token);
-      // console.log(pmData);
-      let cardData = {
-        card_type: pmData.card_type,
-        card_holder_name: pmData.full_name,
-        card_token: pmData.token,
-        card_last_digit: pmData.last_four_digits
-      };
-      console.log(cardData);
-      this.cardData = cardData;
-      if (this.cardData) {
-        console.log('fdgdgdgdgd:::');
-        // this.saveCard(this.cardData);
-      }
-      var masterForm = document.getElementById('payment-form') as HTMLFormElement;
-      masterForm.submit();
-      // this.cardAddFormElement.nativeElement.submit();
-    });
-    Spreedly.on('errors', function (errors) {
-      for (let i = 0; i < errors.length; i++) {
-        let error = errors[i];
-        console.log(error)
-        if (typeof error.attribute !== 'undefined' && error.attribute === 'number') {
-
-          this.cardError = error.message;
-          console.log(this.cardError);
-        }
-      }
-    });
+  submitPaymentForm() {
 
     this.cardError = '';
     this.submitted = true;
-    var requiredFields = {};
 
     if (this.cardForm.invalid) {
       return;
-    }
-    let expiryDate = this.cardForm.value.expiry.split('/')
-
-
-    requiredFields["full_name"] = this.cardForm.value.name;
-    requiredFields["month"] = expiryDate[0];
-    requiredFields["year"] = expiryDate[1];
-
-    Spreedly.tokenizeCreditCard(requiredFields);
-    if (this.cardData) {
-      // this.saveCard(this.cardData);
-    }
+    } 
+    
+    this.saveCard(this.cardForm.value);
   }
 
   saveCard(cardData) {
-    console.log('component:::', cardData);
     this.genericService.saveCard(cardData).subscribe((res: any) => {
       console.log(res);
     }, (err => {
-
+      
     })
     );
   }
 
-  loadJquery() {
-    $('#dobDate').dateRangePicker({
-      autoClose: true,
-      singleDate: true,
-      showShortcuts: false,
-      singleMonth: true,
-      format: "MM/YYYY",
-      monthSelect: true,
-      yearSelect: true,
-      startDate: moment().add(0, 'days').format("MM/YYYY"),
-      extraClass: 'laytrip-datepicker'
-    }).bind('datepicker-first-date-selected', function (event, obj) {
-      this.getDateWithFormat(obj);
-    }.bind(this));
-  }
+  expiryDateUpdate(event){
 
-  getDateWithFormat(date) {
-    console.log("date", date);
-    this.cardForm.controls.expiry.setValue(moment(date.date1).format("MM/YYYY"));
   }
 }

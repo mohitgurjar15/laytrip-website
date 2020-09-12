@@ -8,6 +8,10 @@
     background: $text-darkblue;
     padding: 15px 0;
 
+    .tab-pane {
+        width: 100%;
+    }
+
     .flight_tab {
         padding: 0 15px;
 
@@ -31,7 +35,7 @@
 
                     @media(max-width: 575px) {
                         padding: 5px 8px;
-                        margin: 0 10px 0 0;
+                        margin: 0 5px 0 0;
                         font-size: 12px;
                     }
 
@@ -379,16 +383,24 @@
                         color: $text-white;
                         transition: 0.3s;
                         position: relative;
-                        z-index: 9;
+                        z-index: 2;
                         overflow: hidden;
                         white-space: normal;
                         display: flex;
                         align-items: center;
+                        justify-content: space-between;
                         height: 100%;
 
+                        span {
+                            text-align: left;
+                        }
+
                         img {
-                            margin-left: 40px;
                             height: 20px;
+
+                            @media(max-width: 991px) {
+                                margin-left: 20px;
+                            }
                         }
 
                         &::before {
@@ -414,6 +426,7 @@
 
                         @media(max-width: 991px) {
                             display: inline-flex;
+                            white-space: nowrap;
                         }
 
                     }
@@ -629,6 +642,7 @@
 
                         @media(max-width:767px) {
                             border-right: none;
+                            border-left: none;
                         }
 
 
@@ -3215,27 +3229,27 @@
 
     .cnt_left {
         display: flex;
+        align-items: center;
 
-        @media(max-width: 767px) {
+        @media(max-width: 991px) {
             margin: 0 0 20px;
         }
 
         img {
             width: 50px;
+            height: 50px;
             margin: 0 20px 0 0;
         }
 
-        span {
+        h2 {
             font-size: 14px;
             font-weight: 400;
             color: $text-white;
+            margin: 0;
         }
     }
 
     .cnt_right {
-
-
-
         ul {
             display: flex;
             margin: 0;
@@ -3243,7 +3257,9 @@
             list-style: none;
             justify-content: flex-end;
 
-
+            @media(max-width: 991px) {
+                justify-content: center;
+            }
 
             li {
                 width: 140px;
@@ -3315,7 +3331,7 @@
     padding: 50px 0;
 
     .col-lg-8 {
-        @media(max-width: 767px) {
+        @media(max-width: 991px) {
             order: 2;
         }
     }
@@ -3323,6 +3339,10 @@
     &.add_passenger {
         .detail_info_left {
             width: 100%;
+
+            @media(max-width: 991px) {
+                margin: 30px 0 0;
+            }
 
             .block_top {
                 width: 100%;
@@ -3361,6 +3381,10 @@
                 padding: 30px 30px 20px;
                 margin: 0 0 20px;
 
+                @media(max-width: 480px) {
+                    padding: 20px;
+                }
+
                 .block_title_section {
                     background: $bg-title-grey;
                     padding: 15px 30px;
@@ -3374,12 +3398,21 @@
                         font-weight: 500;
                         color: $text-black;
                         margin: 0;
+
                     }
 
                     span {
                         font-size: 16px;
                         color: $bg-green;
                         font-weight: 500;
+
+                        @media(max-width: 480px) {
+                            margin: 15px 0 0;
+                        }
+                    }
+
+                    @media(max-width: 480px) {
+                        flex-flow: column;
                     }
                 }
 
@@ -3534,6 +3567,10 @@
                                                 &.status_incomplete {
                                                     color: $error-color;
                                                 }
+
+                                                @media(max-width: 480px) {
+                                                    right: 25px;
+                                                }
                                             }
                                         }
                                     }
@@ -3549,6 +3586,10 @@
                                             width: 100%;
                                             display: flex;
                                             justify-content: space-between;
+
+                                            @media(max-width: 767px) {
+                                                flex-wrap: wrap;
+                                            }
 
                                             .form_field {
                                                 width: 100%;
@@ -3573,6 +3614,10 @@
                                                         font-size: 12px;
                                                         color: $text-grey;
                                                     }
+
+                                                    @media(max-width: 767px) {
+                                                        width: 100%;
+                                                    }
                                                 }
 
                                                 .custom_listing {
@@ -3580,6 +3625,10 @@
                                                     margin: 0;
                                                     padding: 0;
                                                     display: flex;
+
+                                                    @media(max-width: 480px) {
+                                                        flex-flow: column;
+                                                    }
 
                                                     li {
                                                         display: flex;
@@ -3645,6 +3694,18 @@
                                                                     background: $secondary-color;
                                                                 }
                                                             }
+                                                        }
+
+                                                        &:last-child {
+                                                            padding: 0;
+                                                        }
+
+                                                        @media(max-width: 767px) {
+                                                            padding: 0 30px 0 0;
+                                                        }
+
+                                                        @media(max-width: 480px) {
+                                                            padding: 0 0 10px 0;
                                                         }
                                                     }
                                                 }
@@ -3775,6 +3836,10 @@
                                                                 }
                                                             }
                                                         }
+
+                                                        .number {
+                                                            width: 100%;
+                                                        }
                                                     }
                                                 }
                                             }
@@ -3832,6 +3897,10 @@
                                             }
                                         }
                                     }
+                                }
+
+                                &.add-more {
+                                    margin-top: 15px;
                                 }
                             }
 
@@ -4111,6 +4180,11 @@
                         height: 190%;
                     }
                 }
+
+                @media(max-width: 480px) {
+                    font-size: 16px;
+                    white-space: nowrap;
+                }
             }
         }
 
@@ -4168,10 +4242,10 @@
                             width: 50%;
                             height: 0;
                             position: absolute;
-                            border-left: 12px solid transparent;
+                            border-left: 14px solid transparent;
                             border-bottom: 12px solid $background-white;
                             content: "";
-                            bottom: 0;
+                            bottom: -1px;
                             right: 0px
                         }
 
@@ -4181,8 +4255,8 @@
                             left: 0px;
                             position: absolute;
                             content: "";
-                            bottom: 0;
-                            border-right: 12px solid transparent;
+                            bottom: -1px;
+                            border-right: 14px solid transparent;
                             border-bottom: 12px solid $background-white;
                         }
                     }
@@ -4266,6 +4340,9 @@
                             justify-content: space-between;
                             align-items: flex-end;
 
+                            @media(max-width: 480px) {
+                                flex-flow: column;
+                            }
 
                             h6 {
                                 font-size: 18px;
@@ -4278,6 +4355,10 @@
                                     font-size: 10px;
                                     font-weight: 500;
                                     color: $text-grey;
+                                }
+
+                                @media(max-width: 480px) {
+                                    width: 100%;
                                 }
                             }
 
@@ -4327,6 +4408,10 @@
                                         border-top: 3px solid $text-lightblue;
                                         transform: translate(-50%, -50%);
                                     }
+                                }
+
+                                @media(max-width: 480px) {
+                                    margin: 10px 0 0;
                                 }
                             }
                         }
@@ -4602,9 +4687,11 @@
                         p {
                             margin: 0;
                             display: flex;
+                            align-items: center;
 
                             img {
                                 margin: 0 0 0 10px;
+                                height: 12px;
                             }
                         }
 
@@ -4675,1368 +4762,122 @@
 
     &.payment_info {
 
-        .block_payment {
-            width: 100%;
+        .detail_info_left {
 
-
-            .block_time {
-                width: 100%;
-                background: $background-grey;
-                padding: 15px;
-                display: flex;
-                justify-content: center;
-                border-radius: 5px 5px 0 0;
-
-                img {
-                    width: 26px;
-                    margin: 0 15px 0 0;
-                }
-
-                p {
-                    font-size: 16px;
-                    font-weight: 500;
-                    color: $text-white;
-                    margin: 0;
-
-                    span {
-                        color: $text-yellow;
-                    }
-                }
+            @media(max-width: 991px) {
+                margin: 30px 0 0;
             }
 
-            .block_pay_info {
-                padding: 20px 30px;
-                border-radius: 5px;
-                background: $background-white;
-                box-shadow: 3px 4px 10px $shadow-color;
-                margin: 0 0 20px;
+            .block_payment {
+                width: 100%;
 
-                &:first-child {
-                    border-radius: 0 0 5px 5px;
-                }
 
-                .block_travellers {
-                    margin: 0;
+                .block_time {
+                    width: 100%;
+                    background: $background-grey;
+                    padding: 15px;
+                    display: flex;
+                    justify-content: center;
+                    border-radius: 5px 5px 0 0;
 
-                    h6 {
+                    img {
+                        width: 26px;
+                        height: 26px;
+                        margin: 0 15px 0 0;
+                    }
+
+                    p {
                         font-size: 16px;
                         font-weight: 500;
-                        color: $text-grey;
-                        margin: 0 0 15px;
-                    }
-
-                    .traveller_detail {
-                        display: flex;
-                        justify-content: space-between;
+                        color: $text-white;
+                        margin: 0;
 
                         span {
-                            font-size: 14px;
-                            font-weight: 500;
-                            color: $text-black;
-                        }
-
-                        a {
-                            font-size: 14px;
-                            font-weight: 400;
-                            color: $text-lightblue;
+                            color: $text-yellow;
                         }
                     }
                 }
 
-                .block_card_detail {
+                .block_pay_info {
+                    padding: 20px 30px;
+                    border-radius: 5px;
+                    background: $background-white;
+                    box-shadow: 3px 4px 10px $shadow-color;
+                    margin: 0 0 20px;
 
-                    .block_title_section {
-                        background: $bg-title-grey;
-                        padding: 15px 30px;
-                        display: flex;
-                        justify-content: space-between;
-                        margin: 0 0 20px;
-
-                        h5 {
-                            font-size: 16px;
-                            font-weight: 500;
-                            color: $text-black;
-                            margin: 0;
-                        }
+                    @media(max-width: 575px) {
+                        padding: 20px 15px;
                     }
 
-                    .block_detail {
-                        width: 100%;
+                    &:first-child {
+                        border-radius: 0 0 5px 5px;
+                    }
 
-                        .form_row {
-                            width: 100%;
+                    .block_travellers {
+                        margin: 0;
+
+                        h6 {
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: $text-grey;
+                            margin: 0 0 15px;
+                        }
+
+                        .traveller_detail {
                             display: flex;
                             justify-content: space-between;
+                            margin: 0 0 30px;
 
-                            .form_field {
-                                width: 49%;
-                                margin-bottom: 30px;
-
-                                label {
-                                    width: 100%;
-                                    margin-bottom: 10px;
-                                    font-size: 12px;
-                                    color: $text-grey;
-                                    font-weight: 400;
-
-                                    sup {
-                                        color: $error-color;
-                                    }
-                                }
-
-                                .text_field {
-                                    input {
-                                        width: 100%;
-                                        background: transparent;
-                                        height: 40px;
-                                        border-top: none;
-                                        border-left: none;
-                                        border-right: none;
-                                        border-bottom: 1px solid $box-border-color;
-                                        font-size: 14px;
-                                        color: $text-black;
-                                        position: relative;
-
-                                        &:focus {
-                                            border-bottom: 1px solid $primary-color;
-                                        }
-
-                                        &.birth_date {
-                                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
-                                            background-position: right center;
-                                        }
-
-                                        &:placeholder {
-                                            color: $box-border-color;
-                                            -webkit-text-fill-color: $box-border-color;
-                                        }
-                                    }
-
-                                    &.custom-select {
-                                        height: 40px;
-                                        border-top: none;
-                                        border-left: none;
-                                        border-right: none;
-                                        border-bottom: 1px solid $box-border-color;
-                                        background: transparent;
-                                        padding: 0;
-                                        position: relative;
-
-                                        select {
-                                            display: none;
-                                        }
-
-                                        .select-selected {
-                                            background-color: transparent;
-                                            line-height: 40px;
-                                            font-size: 14px;
-                                            color: $text-black;
-
-                                            &:after {
-                                                position: absolute;
-                                                content: "";
-                                                top: 17px;
-                                                right: 10px;
-                                                width: 0;
-                                                height: 0;
-                                                border: 4px solid transparent;
-                                                border-color: $text-grey transparent transparent transparent;
-                                            }
-
-                                            &.select-arrow-active {
-                                                &:after {
-                                                    border-color: transparent transparent $text-grey transparent;
-                                                    top: 11px;
-                                                }
-                                            }
-                                        }
-
-                                        .select-items {
-                                            position: absolute;
-                                            background-color: $text-grey;
-                                            top: 100%;
-                                            left: 0;
-                                            right: 0;
-                                            z-index: 99;
-
-                                            div {
-                                                color: #ffffff;
-                                                padding: 8px 16px;
-                                                border: 1px solid transparent;
-                                                border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-                                                cursor: pointer;
-                                                user-select: none;
-                                                font-size: 14px;
-                                                color: $text-white;
-
-                                                &:hover {
-                                                    background-color: rgba(0, 0, 0, 0.1);
-                                                }
-
-                                                &.same-as-selected {
-                                                    background-color: rgba(0, 0, 0, 0.1);
-                                                }
-                                            }
-
-                                            &.select-hide {
-                                                display: none;
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .block_billing_detail {
-                    .block_title_section {
-                        background: $bg-title-grey;
-                        padding: 15px 30px;
-                        display: flex;
-                        justify-content: space-between;
-                        margin: 0 0 20px;
-
-                        h5 {
-                            font-size: 16px;
-                            font-weight: 500;
-                            color: $text-black;
-                            margin: 0;
-                        }
-                    }
-
-                    .block_detail {
-                        .form_row {
-                            width: 100%;
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: space-between;
-
-                            .field_bolck {
-                                width: 31%;
-
-                                .field_inn {
-                                    width: 100%;
-                                    margin-bottom: 30px;
-
-                                    label {
-                                        width: 100%;
-                                        margin-bottom: 10px;
-                                        font-size: 12px;
-                                        color: $text-grey;
-                                        font-weight: 400;
-
-                                        sup {
-                                            color: $error-color;
-                                        }
-                                    }
-
-                                    .text_field {
-                                        width: 100%;
-                                        position: relative;
-
-                                        input {
-                                            width: 100%;
-                                            background: transparent;
-                                            height: 40px;
-                                            border-top: none;
-                                            border-left: none;
-                                            border-right: none;
-                                            border-bottom: 1px solid $box-border-color;
-                                            font-size: 14px;
-                                            color: $text-black;
-
-                                            &:placeholder {
-                                                color: $box-border-color;
-                                                -webkit-text-fill-color: $box-border-color;
-                                            }
-
-                                            &:focus {
-                                                border-bottom: 1px solid $primary-color;
-                                            }
-                                        }
-
-                                        &.custom-select {
-                                            height: 40px;
-                                            border-top: none;
-                                            border-left: none;
-                                            border-right: none;
-                                            border-bottom: 1px solid $box-border-color;
-                                            background: transparent;
-                                            padding: 0;
-
-                                            select {
-                                                display: none;
-                                            }
-
-                                            .select-selected {
-                                                background-color: transparent;
-                                                line-height: 40px;
-                                                font-size: 14px;
-                                                color: $text-black;
-
-                                                &:after {
-                                                    position: absolute;
-                                                    content: "";
-                                                    top: 17px;
-                                                    right: 10px;
-                                                    width: 0;
-                                                    height: 0;
-                                                    border: 4px solid transparent;
-                                                    border-color: $text-grey transparent transparent transparent;
-                                                }
-
-                                                &.select-arrow-active {
-                                                    &:after {
-                                                        border-color: transparent transparent $text-grey transparent;
-                                                        top: 11px;
-                                                    }
-                                                }
-                                            }
-
-                                            .select-items {
-                                                position: absolute;
-                                                background-color: $text-grey;
-                                                top: 100%;
-                                                left: 0;
-                                                right: 0;
-                                                z-index: 99;
-
-                                                div {
-                                                    color: #ffffff;
-                                                    padding: 8px 16px;
-                                                    border: 1px solid transparent;
-                                                    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-                                                    cursor: pointer;
-                                                    user-select: none;
-                                                    font-size: 14px;
-                                                    color: $text-white;
-
-                                                    &:hover {
-                                                        background-color: rgba(0, 0, 0, 0.1);
-                                                    }
-
-                                                    &.same-as-selected {
-                                                        background-color: rgba(0, 0, 0, 0.1);
-                                                    }
-                                                }
-
-                                                &.select-hide {
-                                                    display: none;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-
-                .block_payment_mode {
-                    width: 100%;
-                    margin: 0;
-
-                    .block_title_section {
-                        background: $bg-title-grey;
-                        padding: 15px 30px;
-                        display: flex;
-                        justify-content: space-between;
-                        margin: 0 0 20px;
-
-                        h5 {
-                            font-size: 16px;
-                            font-weight: 500;
-                            color: $text-black;
-                            margin: 0;
-                        }
-                    }
-
-                    .block_detail {
-                        width: 100%;
-
-                        ul {
-                            width: 100%;
-                            margin: 0;
-                            padding: 0;
-                            display: flex;
-
-                            li {
-                                display: flex;
-                                justify-content: space-between;
-                                padding: 0 100px 0 0;
-                                align-items: center;
-                                color: $text-grey;
+                            span {
                                 font-size: 14px;
-                                font-weight: 400;
-
-                                .custom_radio {
-                                    width: 100%;
-                                    display: block;
-                                    position: relative;
-                                    padding-left: 25px;
-                                    margin: 0;
-                                    cursor: pointer;
-                                    font-size: 14px;
-                                    -webkit-user-select: none;
-                                    -moz-user-select: none;
-                                    -ms-user-select: none;
-                                    user-select: none;
-                                    color: $text-grey;
-
-                                    input {
-                                        position: absolute;
-                                        opacity: 0;
-                                        cursor: pointer;
-
-                                        &:checked {
-                                            ~ {
-                                                .checkmark {
-                                                    border: 1px solid $secondary-color;
-
-                                                    &:after {
-                                                        display: block;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .checkmark {
-                                        position: absolute;
-                                        top: 4px;
-                                        left: 0;
-                                        height: 14px;
-                                        width: 14px;
-                                        background-color: transparent;
-                                        border: 1px solid $text-grey;
-                                        border-radius: 50%;
-
-                                        &:after {
-                                            content: "";
-                                            position: absolute;
-                                            display: none;
-                                            top: 2px;
-                                            left: 2px;
-                                            width: 8px;
-                                            height: 8px;
-                                            border-radius: 50%;
-                                            background: $secondary-color;
-                                        }
-                                    }
-                                }
-
-                                &:last-child {
-                                    padding: 0;
-                                }
-                            }
-                        }
-
-                        .block_laycredit_checkbox {
-                            width: 100%;
-                            background: $bg-light-green;
-                            padding: 15px 20px;
-                            margin: 20px 0;
-                            display: flex;
-                            justify-content: space-between;
-
-                            @media(max-width: 767px) {
-                                flex-wrap: wrap;
-                            }
-
-                            .custom_checkbox {
-                                width: 50%;
-                                position: relative;
-                                margin-bottom: 0;
-                                vertical-align: middle;
-                                line-height: normal;
-                                display: inline-block;
-                                align-items: center;
-                                font-size: 14px;
+                                font-weight: 500;
                                 color: $text-black;
-                                padding: 0 0 0 30px;
-
-                                @media(max-width: 767px) {
-                                    width: 100%;
-                                }
-
-                                input {
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    opacity: 0;
-
-                                    &:checked {
-                                        ~ {
-                                            .checkmark {
-                                                border-color: $secondary-color;
-
-                                                &:after {
-                                                    opacity: 1;
-
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .checkmark {
-                                    width: 14px;
-                                    min-width: 14px;
-                                    height: 14px;
-                                    display: inline-block;
-                                    border: 1px solid $text-grey;
-                                    vertical-align: middle;
-                                    margin-right: 11px;
-                                    position: absolute;
-                                    top: 4px;
-                                    left: 0;
-                                    background: $background-white;
-
-                                    &:after {
-                                        content: '';
-                                        position: absolute;
-                                        top: 1px;
-                                        -webkit-transform: translate(0, -50%);
-                                        -moz-transform: translate(0, -50%);
-                                        -ms-transform: translate(0, -50%);
-                                        -o-transform: translate(0, -50%);
-                                        transform: translate(0, -50%);
-                                        width: 6px;
-                                        height: 9px;
-                                        border-radius: 2px;
-                                        border: solid $secondary-color;
-                                        border-top-width: medium;
-                                        border-right-width: medium;
-                                        border-bottom-width: medium;
-                                        border-left-width: medium;
-                                        border-width: 0 2px 2px 0;
-                                        transform: rotate(45deg);
-                                        -webkit-transform: rotate(45deg);
-                                        -ms-transform: rotate(45deg);
-                                        border-radius: 0px;
-                                        left: 0;
-                                        right: 0;
-                                        margin: 0 auto;
-                                        transition: all 0.2s;
-                                        opacity: 0;
-                                    }
-                                }
-
-                                span {
-                                    color: $secondary-color;
-                                    padding: 0 5px;
-                                }
                             }
-
-                            .block_apply_laycredits {
-                                width: 40%;
-                                padding: 0 0 0 40px;
-                                border-left: 1px solid $box-border-color;
-
-                                @media(max-width: 767px) {
-                                    width: 100%;
-                                    padding: 0;
-                                    border: none;
-                                    margin: 20px 0 0;
-                                }
-
-                                .block_top {
-                                    width: 100%;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    margin: 0 0 15px;
-
-                                    label {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: $text-black;
-                                        margin: 0;
-                                    }
-
-                                    span {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: $secondary-color;
-                                    }
-                                }
-
-                                .block_btm {
-                                    width: 100%;
-
-                                    #Laycredits {
-                                        width: 100%;
-
-                                        &.ui-widget-content {
-                                            background: $text-grey;
-
-                                            .ui-widget-header {
-                                                background: $secondary-color;
-                                            }
-
-                                            .ui-slider-handle {
-                                                width: 13px;
-                                                height: 13px;
-                                                top: -6px;
-                                                border-color: $secondary-color;
-                                                background: $background-white;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        &.get_assist {
-                            p {
-                                font-size: 14px;
-                                font-weight: 400;
-                                color: $text-grey;
-                                margin: 0;
-                            }
-
-                            .block_contact {
-                                display: flex;
-                                margin: 10px 0 30px;
-
-                                li {
-                                    width: auto;
-                                    padding: 0 50px 0 0;
-
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 000;
-                                        color: $text-black;
-
-                                        i {
-                                            margin: 0 10px 0 0;
-                                            color: $text_blue;
-                                            font-size: 16px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .block_installment_option {
-                            flex-flow: column;
-
-                            .block_installment {
-                                padding: 20px 25px 20px;
-                                width: 100%;
-                                border-bottom: 2px dashed $border-blue-light;
-
-                                &:last-child {
-                                    border-bottom: none;
-                                    padding-bottom: 0;
-                                }
-
-                                .installment_info {
-                                    width: 100%;
-
-                                    ul {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: space-between;
-
-                                        li {
-                                            padding: 0 20px 0 0;
-                                            font-weight: 400;
-
-                                            .custom_radio {
-                                                width: 100%;
-                                                display: flex;
-
-                                                p {
-                                                    color: $text-black;
-                                                    margin: 0;
-                                                    padding: 0 0 0 10px;
-                                                }
-                                            }
-
-                                            &:last-child {
-                                                padding: 0;
-                                            }
-                                        }
-                                    }
-
-                                }
-
-                                .block_one {
-                                    width: 100%;
-
-                                    &.clr_bg {
-                                        padding: 20px;
-                                        border-radius: 5px;
-                                        background: $text_blue;
-                                        margin: 20px 0 10px;
-                                        display: flex;
-                                        justify-content: space-between;
-
-                                        .block_clr_bg_left {
-                                            display: flex;
-                                            flex-flow: column;
-
-                                            p {
-                                                font-size: 14px;
-                                                font-weight: 400;
-                                                color: $text-white;
-                                                margin: 0 0 10px;
-                                                line-height: normal;
-                                            }
-
-                                            span {
-                                                font-size: 14px;
-                                                font-weight: 600;
-                                                color: $text-white;
-                                                margin: 0 0 5px;
-                                                line-height: normal;
-
-                                                &:last-child {
-                                                    margin: 0;
-                                                }
-                                            }
-                                        }
-
-                                        .block_clr_bg_right {
-                                            display: flex;
-                                            flex-flow: column;
-                                            padding: 0 20px 0 40px;
-                                            border-left: 1px solid $btn-bg;
-
-                                            p {
-                                                font-size: 14px;
-                                                font-weight: 400;
-                                                color: $text-white;
-                                                margin: 0 0 15px;
-                                                line-height: normal;
-                                            }
-
-                                            .block_pay_instalment {
-                                                width: 100%;
-                                                display: flex;
-                                                align-items: center;
-                                                justify-content: center;
-
-                                                .block_amount {
-                                                    padding: 0 25px;
-                                                    font-size: 20px;
-                                                    font-weight: 600;
-                                                    color: $text-white;
-                                                }
-
-                                                .pay_block {
-                                                    width: 25px;
-                                                    height: 25px;
-                                                    font-size: 16px;
-                                                    position: relative;
-
-                                                    a {
-                                                        width: 25px;
-                                                        height: 25px;
-                                                        display: inline-block;
-                                                        border-radius: 50%;
-                                                        position: absolute;
-                                                        top: 0;
-                                                        left: 0;
-                                                        background: $background-white;
-                                                        color: $secondary-color;
-                                                        line-height: 27px;
-                                                        text-align: center;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .block_two {
-                                    width: 100%;
-                                    border: 1px solid $box-border-color;
-                                    border-radius: 5px;
-
-                                    ul {
-                                        flex-flow: column;
-
-                                        li {
-                                            width: 100%;
-                                            padding: 10px 20px;
-                                            border-bottom: 1px solid $box-border-color;
-                                            font-size: 14px;
-                                            font-weight: 400;
-                                            color: $text-grey;
-
-                                            span {
-                                                font-size: 14px;
-                                                font-weight: 500;
-                                                color: $text-black;
-                                            }
-
-                                            &:last-child {
-                                                border: none;
-                                            }
-                                        }
-                                    }
-
-                                    .block_pay_remaining {
-                                        width: auto;
-                                        border-radius: 5px;
-                                        background: $btn-bg;
-                                        padding: 12px;
-                                        text-align: center;
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: $text-white;
-                                        margin: 0 20px 12px;
-                                    }
-                                }
-
-                                .block_pay_info_main {
-                                    width: 100%;
-                                    display: flex;
-                                    justify-content: space-between;
-
-                                    .block_pay_info_left {
-                                        width: 49%;
-                                        padding: 20px;
-                                        border-radius: 5px;
-                                        border: 1px solid $box-border-color;
-                                        display: flex;
-                                        flex-flow: column;
-                                        justify-content: space-between;
-
-                                        &.clr_bg {
-                                            background: $text_blue;
-                                        }
-
-                                        .block_pay_info_inner {
-                                            display: flex;
-                                            flex-flow: column;
-                                            width: 100%;
-
-                                            p {
-                                                font-size: 14px;
-                                                font-weight: 400;
-                                                color: $text-white;
-                                                margin: 0 0 10px;
-                                            }
-
-                                            span {
-                                                font-size: 14px;
-                                                font-weight: 600;
-                                                color: $text-white;
-                                                margin: 0 0 10px;
-                                            }
-
-                                            ul {
-                                                width: 100%;
-                                                border-top: 1px solid $btn-bg;
-                                                border-bottom: 1px solid $btn-bg;
-                                                margin: 0 0 10px;
-                                                padding: 0;
-                                                flex-flow: column;
-
-                                                li {
-                                                    width: 100%;
-                                                    padding: 10px 0;
-                                                    display: flex;
-                                                    justify-content: space-between;
-                                                    align-items: center;
-
-                                                    .custom_radio {
-                                                        color: $text-white;
-
-                                                        .checkmark {
-                                                            border-color: $background-white;
-                                                        }
-                                                    }
-
-                                                    .block_pay_instalment {
-                                                        width: 100%;
-                                                        display: flex;
-                                                        align-items: center;
-                                                        justify-content: center;
-
-                                                        .block_amount {
-                                                            width: 80px;
-                                                            padding: 0 20px;
-                                                            font-size: 18px;
-                                                            font-weight: 600;
-                                                            color: $text-white;
-                                                            text-align: center;
-                                                        }
-
-                                                        .pay_block {
-                                                            width: 25px;
-                                                            height: 25px;
-                                                            font-size: 16px;
-                                                            position: relative;
-
-                                                            a {
-                                                                width: 25px;
-                                                                height: 25px;
-                                                                display: inline-block;
-                                                                border-radius: 50%;
-                                                                position: absolute;
-                                                                top: 0;
-                                                                left: 0;
-                                                                background: $background-white;
-                                                                color: $secondary-color;
-                                                                line-height: 27px;
-                                                                text-align: center;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                        }
-
-
-                                        .btn_calculate {
-                                            width: 100%;
-                                            display: flex;
-                                            justify-content: center;
-
-                                            a {
-                                                display: inline-block;
-                                                line-height: 38px;
-                                                padding: 0 35px;
-                                                font-size: 14px;
-                                                color: $text-white;
-                                                border-radius: 20px;
-                                                background: $btn-bg;
-                                                position: relative;
-                                                z-index: 9;
-                                                overflow: hidden;
-                                                font-weight: 400;
-
-                                                &::before {
-                                                    content: "";
-                                                    position: absolute;
-                                                    top: 0;
-                                                    left: 0;
-                                                    width: 100%;
-                                                    height: 0%;
-                                                    background: $secondary-color;
-                                                    z-index: -1;
-                                                    transition: 0.8s;
-                                                    border-radius: 0 0 50% 50%;
-                                                }
-
-                                                &:hover {
-                                                    border-color: $secondary-color;
-
-                                                    &:before {
-                                                        height: 190%;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .block_pay_info_right {
-                                        width: 49%;
-                                        border: 1px solid $box-border-color;
-                                        border-radius: 5px;
-
-                                        h6 {
-                                            font-size: 16px;
-                                            font-weight: 600;
-                                            color: $text-black;
-                                            background: $bg-light-grey;
-                                            border-radius: 5px 5px 0 0;
-                                            padding: 15px 20px;
-                                            margin: 0;
-                                        }
-
-                                        ul {
-                                            width: 100%;
-                                            flex-flow: column;
-
-                                            li {
-                                                width: 100%;
-                                                padding: 15px 20px;
-                                                display: flex;
-                                                justify-content: space-between;
-                                                font-size: 14px;
-                                                font-weight: 500;
-                                                color: $text-grey;
-                                                border-bottom: 1px solid $box-border-color;
-
-                                                span {
-                                                    color: $text-black;
-                                                }
-
-                                                &:last-child {
-                                                    border-bottom: none;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-
-
-                                .block_installment_pay_table {
-                                    width: 100%;
-                                    margin: 10px 0 20px;
-
-                                    table {
-                                        border: 1px solid $box-border-color;
-                                        border-radius: 5px;
-                                        width: 100%;
-
-                                        thead {
-                                            tr {
-                                                border-radius: 5px 5px 0 0;
-
-                                                th {
-                                                    padding: 10px;
-                                                    font-size: 14px;
-                                                    font-weight: 500;
-                                                    color: $text-grey;
-                                                    background: $bg-light-grey;
-                                                    text-align: center;
-
-                                                    &:first-child {
-                                                        text-align: left;
-                                                        border-radius: 5px 0 0 0;
-                                                    }
-
-                                                    &:last-child {
-                                                        text-align: right;
-                                                        border-radius: 0 5px 0 0;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        tbody {
-                                            tr {
-                                                td {
-                                                    padding: 10px;
-                                                    border-bottom: 1px solid $box-border-color;
-                                                    font-size: 14px;
-                                                    font-weight: 500;
-                                                    color: $text-black;
-                                                    vertical-align: top;
-                                                    text-align: center;
-
-                                                    &:first-child {
-                                                        text-align: left;
-                                                    }
-
-                                                    &:last-child {
-                                                        text-align: right;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        @media only screen and (max-width: 800px) {
-                                            display: block;
-
-                                            thead {
-                                                display: block;
-
-                                                tr {
-                                                    display: none;
-                                                }
-                                            }
-
-                                            tbody {
-                                                display: block;
-
-                                                tr {
-                                                    display: block;
-
-                                                    td {
-                                                        display: block;
-                                                        border: none;
-                                                        border-bottom: 1px solid $box-border-color;
-                                                        position: relative;
-                                                        padding-top: 35px;
-                                                        white-space: normal;
-                                                        text-align: left;
-
-                                                        &:before {
-                                                            position: absolute;
-                                                            top: 10px;
-                                                            left: 10px;
-                                                            width: 100%;
-                                                            padding-right: 10px;
-                                                            white-space: nowrap;
-                                                            text-align: left;
-                                                            font-weight: bold;
-                                                            content: attr(data-title);
-                                                            color: $text-grey;
-                                                            font-weight: 400;
-                                                            font-size: 14px;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .block_pay_info_date {
-                                    width: 100%;
-                                    background: $bg-light-green;
-                                    padding: 15px 20px;
-
-                                    border-radius: 5px;
-
-                                    p {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: $text-black;
-                                        margin: 0;
-                                    }
-                                }
-
-                            }
-                        }
-
-
-                    }
-                }
-
-                .block_card_select {
-
-                    .block_title_section {
-                        background: $bg-title-grey;
-                        padding: 15px 30px;
-                        display: flex;
-                        justify-content: space-between;
-                        margin: 0 0 20px;
-
-                        h5 {
-                            font-size: 16px;
-                            font-weight: 500;
-                            color: $text-black;
-                            margin: 0;
-                        }
-                    }
-
-                    .block_detail {
-                        width: 100%;
-
-                        .card_list {
-                            margin: 0 0 15px;
-
-                            ul {
-                                width: 100%;
-                                margin: 0;
-                                padding: 0;
-                                list-style: none;
-                                display: flex;
-                                flex-wrap: wrap;
-                                justify-content: space-between;
-
-                                @media(max-width: 767px) {
-                                    flex-wrap: wrap;
-                                }
-
-                                li {
-                                    width: 49%;
-                                    display: flex;
-                                    align-items: flex-start;
-                                    margin: 0 0 15px;
-
-                                    @media(max-width: 767px) {
-                                        width: 100%;
-                                    }
-
-                                    .card_check {
-                                        margin: 0 5px 0 0;
-
-                                        .custom_checkbox {
-                                            position: relative;
-                                            margin-bottom: 0;
-                                            vertical-align: middle;
-                                            line-height: normal;
-                                            display: flex;
-                                            align-items: center;
-                                            font-size: 14px;
-                                            color: $text-grey;
-                                            font-weight: 300;
-                                            left: 1px;
-                                            height: 100%;
-
-                                            input {
-                                                position: absolute;
-                                                top: 0;
-                                                left: 0;
-                                                width: 100%;
-                                                height: 100%;
-                                                opacity: 0;
-
-                                                &:checked {
-                                                    ~ {
-                                                        .checkmark {
-                                                            border-color: $secondary-color;
-
-                                                            &:after {
-                                                                opacity: 1;
-
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            .checkmark {
-                                                width: 15px;
-                                                min-width: 16px;
-                                                height: 15px;
-                                                display: inline-block;
-                                                vertical-align: middle;
-                                                margin-right: 11px;
-                                                position: relative;
-                                                top: 3px;
-                                                background: $background-white;
-
-                                                &:before {
-                                                    width: 15px;
-                                                    height: 15px;
-                                                    position: absolute;
-                                                    top: 0;
-                                                    left: 0;
-                                                    content: '';
-                                                    border: 1px solid $text-grey;
-                                                }
-
-                                                &:after {
-                                                    content: '';
-                                                    position: absolute;
-                                                    top: 1px;
-                                                    -webkit-transform: translate(0, -50%);
-                                                    -moz-transform: translate(0, -50%);
-                                                    -ms-transform: translate(0, -50%);
-                                                    -o-transform: translate(0, -50%);
-                                                    transform: translate(0, -50%);
-                                                    width: 6px;
-                                                    height: 9px;
-                                                    border-radius: 2px;
-                                                    border: solid $secondary-color;
-                                                    border-top-width: medium;
-                                                    border-right-width: medium;
-                                                    border-bottom-width: medium;
-                                                    border-left-width: medium;
-                                                    border-width: 0 2px 2px 0;
-                                                    transform: rotate(45deg);
-                                                    -webkit-transform: rotate(45deg);
-                                                    -ms-transform: rotate(45deg);
-                                                    border-radius: 0px;
-                                                    left: 0;
-                                                    right: 0;
-                                                    margin: 0 auto;
-                                                    transition: all 0.2s;
-                                                    opacity: 0;
-                                                }
-                                            }
-
-                                            span {
-                                                color: $secondary-color;
-                                                padding: 0 5px;
-                                            }
-                                        }
-                                    }
-
-                                    .card_detail {
-                                        width: 100%;
-                                        padding: 0 30px 0 0;
-                                        position: relative;
-
-                                        h6 {
-                                            margin: 0 0 5px;
-                                            font-size: 14px;
-                                            font-weight: 400;
-                                            color: $text-black;
-                                        }
-
-                                        span {
-                                            margin: 0 0 5px;
-                                            font-size: 14px;
-                                            font-weight: 400;
-                                            color: $text-grey;
-                                            display: block;
-                                        }
-
-                                        .block_card_cvv {
-                                            width: auto;
-                                            display: block;
-                                            margin: 5px 0 0;
-
-                                            input {
-                                                width: 130px;
-                                                background: transparent;
-                                                height: 40px;
-                                                border-top: none;
-                                                border-left: none;
-                                                border-right: none;
-                                                border-bottom: 1px solid $box-border-color;
-                                                font-size: 14px;
-                                                color: $text-black;
-                                                position: relative;
-
-                                                &:focus {
-                                                    border-bottom: 1px solid $primary-color;
-                                                }
-
-                                                &:placeholder {
-                                                    color: $box-border-color;
-                                                    -webkit-text-fill-color: $box-border-color;
-                                                }
-                                            }
-                                        }
-
-                                        .card_type {
-                                            position: absolute;
-                                            top: 0;
-                                            right: 0;
-                                            width: 20px;
-
-                                            img {
-                                                width: 20px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .add_card_btn {
-                            width: 100%;
-                            margin: 0 0 15px;
 
                             a {
-                                font-size: 16px;
-                                font-weight: 600;
+                                font-size: 14px;
+                                font-weight: 400;
                                 color: $text-lightblue;
                             }
                         }
+                    }
 
-                        .add_card_block {
-                            padding: 20px;
-                            border: 1px solid $box-border-color;
-                            border-radius: 5px;
-                            margin: 0 0 30px;
+                    .block_card_detail {
+
+                        .block_title_section {
+                            background: $bg-title-grey;
+                            padding: 15px 30px;
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 0 0 20px;
+
+                            h5 {
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: $text-black;
+                                margin: 0;
+                            }
+                        }
+
+                        .block_detail {
+                            width: 100%;
 
                             .form_row {
                                 width: 100%;
                                 display: flex;
                                 justify-content: space-between;
 
+                                @media(max-width: 575px) {
+                                    flex-wrap: wrap;
+                                }
+
                                 .form_field {
                                     width: 49%;
-                                    margin-bottom: 20px;
+                                    margin-bottom: 30px;
+
+                                    @media(max-width: 575px) {
+                                        width: 100%;
+                                    }
 
                                     label {
                                         width: 100%;
@@ -6153,20 +4994,296 @@
                                     }
                                 }
                             }
+                        }
+                    }
 
-                            .block_card_save {
-                                margin: 0 0 20px;
+                    .block_billing_detail {
+                        .block_title_section {
+                            background: $bg-title-grey;
+                            padding: 15px 30px;
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 0 0 20px;
+
+                            h5 {
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: $text-black;
+                                margin: 0;
+                            }
+                        }
+
+                        .block_detail {
+                            .form_row {
+                                width: 100%;
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: space-between;
+
+                                .field_bolck {
+                                    width: 31%;
+
+                                    @media(max-width: 767px) {
+                                        width: 48%
+                                    }
+
+                                    @media(max-width: 575px) {
+                                        width: 100%;
+                                    }
+
+                                    .field_inn {
+                                        width: 100%;
+                                        margin-bottom: 30px;
+
+                                        label {
+                                            width: 100%;
+                                            margin-bottom: 10px;
+                                            font-size: 12px;
+                                            color: $text-grey;
+                                            font-weight: 400;
+
+                                            sup {
+                                                color: $error-color;
+                                            }
+                                        }
+
+                                        .text_field {
+                                            width: 100%;
+                                            position: relative;
+
+                                            input {
+                                                width: 100%;
+                                                background: transparent;
+                                                height: 40px;
+                                                border-top: none;
+                                                border-left: none;
+                                                border-right: none;
+                                                border-bottom: 1px solid $box-border-color;
+                                                font-size: 14px;
+                                                color: $text-black;
+
+                                                &:placeholder {
+                                                    color: $box-border-color;
+                                                    -webkit-text-fill-color: $box-border-color;
+                                                }
+
+                                                &:focus {
+                                                    border-bottom: 1px solid $primary-color;
+                                                }
+                                            }
+
+                                            &.custom-select {
+                                                height: 40px;
+                                                border-top: none;
+                                                border-left: none;
+                                                border-right: none;
+                                                border-bottom: 1px solid $box-border-color;
+                                                background: transparent;
+                                                padding: 0;
+
+                                                select {
+                                                    display: none;
+                                                }
+
+                                                .select-selected {
+                                                    background-color: transparent;
+                                                    line-height: 40px;
+                                                    font-size: 14px;
+                                                    color: $text-black;
+
+                                                    &:after {
+                                                        position: absolute;
+                                                        content: "";
+                                                        top: 17px;
+                                                        right: 10px;
+                                                        width: 0;
+                                                        height: 0;
+                                                        border: 4px solid transparent;
+                                                        border-color: $text-grey transparent transparent transparent;
+                                                    }
+
+                                                    &.select-arrow-active {
+                                                        &:after {
+                                                            border-color: transparent transparent $text-grey transparent;
+                                                            top: 11px;
+                                                        }
+                                                    }
+                                                }
+
+                                                .select-items {
+                                                    position: absolute;
+                                                    background-color: $text-grey;
+                                                    top: 100%;
+                                                    left: 0;
+                                                    right: 0;
+                                                    z-index: 99;
+
+                                                    div {
+                                                        color: #ffffff;
+                                                        padding: 8px 16px;
+                                                        border: 1px solid transparent;
+                                                        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                                                        cursor: pointer;
+                                                        user-select: none;
+                                                        font-size: 14px;
+                                                        color: $text-white;
+
+                                                        &:hover {
+                                                            background-color: rgba(0, 0, 0, 0.1);
+                                                        }
+
+                                                        &.same-as-selected {
+                                                            background-color: rgba(0, 0, 0, 0.1);
+                                                        }
+                                                    }
+
+                                                    &.select-hide {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+                    .block_payment_mode {
+                        width: 100%;
+                        margin: 0;
+
+                        .block_title_section {
+                            background: $bg-title-grey;
+                            padding: 15px 30px;
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 0 0 20px;
+
+                            h5 {
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: $text-black;
+                                margin: 0;
+                            }
+                        }
+
+                        .block_detail {
+                            width: 100%;
+
+                            ul {
+                                width: 100%;
+                                margin: 0;
+                                padding: 0;
+                                display: flex;
+
+                                @media(max-width: 480px) {
+                                    flex-flow: column;
+                                }
+
+                                li {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    padding: 0 100px 0 0;
+                                    align-items: center;
+                                    color: $text-grey;
+                                    font-size: 14px;
+                                    font-weight: 400;
+
+                                    @media(max-width: 480px) {
+                                        padding: 0 0 10px 0;
+                                    }
+
+                                    .custom_radio {
+                                        width: 100%;
+                                        display: block;
+                                        position: relative;
+                                        padding-left: 25px;
+                                        margin: 0;
+                                        cursor: pointer;
+                                        font-size: 14px;
+                                        -webkit-user-select: none;
+                                        -moz-user-select: none;
+                                        -ms-user-select: none;
+                                        user-select: none;
+                                        color: $text-grey;
+
+                                        input {
+                                            position: absolute;
+                                            opacity: 0;
+                                            cursor: pointer;
+
+                                            &:checked {
+                                                ~ {
+                                                    .checkmark {
+                                                        border: 1px solid $secondary-color;
+
+                                                        &:after {
+                                                            display: block;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .checkmark {
+                                            position: absolute;
+                                            top: 4px;
+                                            left: 0;
+                                            height: 14px;
+                                            width: 14px;
+                                            background-color: transparent;
+                                            border: 1px solid $text-grey;
+                                            border-radius: 50%;
+
+                                            &:after {
+                                                content: "";
+                                                position: absolute;
+                                                display: none;
+                                                top: 2px;
+                                                left: 2px;
+                                                width: 8px;
+                                                height: 8px;
+                                                border-radius: 50%;
+                                                background: $secondary-color;
+                                            }
+                                        }
+                                    }
+
+                                    &:last-child {
+                                        padding: 0;
+                                    }
+                                }
+                            }
+
+                            .block_laycredit_checkbox {
+                                width: 100%;
+                                background: $bg-light-green;
+                                padding: 15px 20px;
+                                margin: 20px 0;
+                                display: flex;
+                                justify-content: space-between;
+
+                                @media(max-width: 767px) {
+                                    flex-wrap: wrap;
+                                }
 
                                 .custom_checkbox {
+                                    width: 50%;
                                     position: relative;
                                     margin-bottom: 0;
                                     vertical-align: middle;
                                     line-height: normal;
-                                    display: flex;
+                                    display: inline-block;
                                     align-items: center;
                                     font-size: 14px;
-                                    color: $text-grey;
-                                    font-weight: 300;
+                                    color: $text-black;
+                                    padding: 0 0 0 30px;
+
+                                    @media(max-width: 767px) {
+                                        width: 100%;
+                                    }
 
                                     input {
                                         position: absolute;
@@ -6198,7 +5315,9 @@
                                         border: 1px solid $text-grey;
                                         vertical-align: middle;
                                         margin-right: 11px;
-                                        position: relative;
+                                        position: absolute;
+                                        top: 4px;
+                                        left: 0;
                                         background: $background-white;
 
                                         &:after {
@@ -6236,156 +5355,1399 @@
                                         padding: 0 5px;
                                     }
                                 }
-                            }
 
-                            .form_btn {
-                                button {
-                                    width: auto;
-                                    padding: 0 35px;
-                                    height: 38px;
-                                    background: $btn-bg;
-                                    border-radius: 19px;
-                                    border: 1px solid $btn-bg;
-                                    font-size: 20px;
-                                    font-weight: 400;
-                                    color: $text-white;
-                                    transition: 0.3s;
-                                    position: relative;
-                                    z-index: 9;
-                                    overflow: hidden;
-                                    white-space: normal;
-                                    display: flex;
-                                    align-items: center;
+                                .block_apply_laycredits {
+                                    width: 40%;
+                                    padding: 0 0 0 40px;
+                                    border-left: 1px solid $box-border-color;
 
-                                    img {
-                                        margin-left: 40px;
-                                        height: 20px;
-                                    }
-
-                                    &::before {
-                                        content: "";
-                                        position: absolute;
-                                        top: 0;
-                                        left: 0;
+                                    @media(max-width: 767px) {
                                         width: 100%;
-                                        height: 0%;
-                                        background: $primary-color;
-                                        z-index: -1;
-                                        transition: 0.8s;
-                                        border-radius: 0 0 50% 50%;
+                                        padding: 0;
+                                        border: none;
+                                        margin: 20px 0 0;
                                     }
 
-                                    &:hover {
-                                        border-color: $primary-color;
+                                    .block_top {
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        margin: 0 0 15px;
 
-                                        &:before {
-                                            height: 190%;
+                                        label {
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                            color: $text-black;
+                                            margin: 0;
+                                        }
+
+                                        span {
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                            color: $secondary-color;
                                         }
                                     }
 
-                                    @media(max-width: 991px) {
-                                        display: inline-flex;
+                                    .block_btm {
+                                        width: 100%;
+
+                                        #Laycredits {
+                                            width: 100%;
+
+                                            &.ui-widget-content {
+                                                background: $text-grey;
+
+                                                .ui-widget-header {
+                                                    background: $secondary-color;
+                                                }
+
+                                                .ui-slider-handle {
+                                                    width: 13px;
+                                                    height: 13px;
+                                                    top: -6px;
+                                                    border-color: $secondary-color;
+                                                    background: $background-white;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.get_assist {
+                                p {
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+                                    margin: 0;
+                                }
+
+                                .block_contact {
+                                    display: flex;
+                                    margin: 10px 0 30px;
+
+                                    li {
+                                        width: auto;
+                                        padding: 0 50px 0 0;
+
+                                        a {
+                                            font-size: 14px;
+                                            font-weight: 000;
+                                            color: $text-black;
+
+                                            i {
+                                                margin: 0 10px 0 0;
+                                                color: $text_blue;
+                                                font-size: 16px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .block_installment_option {
+                                flex-flow: column;
+
+                                .block_installment {
+                                    padding: 20px 25px 20px;
+                                    width: 100%;
+                                    border-bottom: 2px dashed $border-blue-light;
+
+                                    &:last-child {
+                                        border-bottom: none;
+                                        padding-bottom: 0;
                                     }
 
+                                    .installment_info {
+                                        width: 100%;
+
+                                        ul {
+                                            width: 100%;
+                                            display: flex;
+                                            justify-content: space-between;
+
+                                            li {
+                                                padding: 0 20px 0 0;
+                                                font-weight: 400;
+
+                                                .custom_radio {
+                                                    width: 100%;
+                                                    display: flex;
+
+                                                    span {
+                                                        color: $text-black;
+                                                        margin: 0;
+                                                        padding: 0 0 0 10px;
+                                                    }
+                                                }
+
+                                                &:last-child {
+                                                    padding: 0;
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                    .block_one {
+                                        width: 100%;
+
+                                        &.clr_bg {
+                                            padding: 20px;
+                                            border-radius: 5px;
+                                            background: $text_blue;
+                                            margin: 20px 0 10px;
+                                            display: flex;
+                                            justify-content: space-between;
+
+                                            .block_clr_bg_left {
+                                                display: flex;
+                                                flex-flow: column;
+
+                                                p {
+                                                    font-size: 14px;
+                                                    font-weight: 400;
+                                                    color: $text-white;
+                                                    margin: 0 0 10px;
+                                                    line-height: normal;
+                                                }
+
+                                                span {
+                                                    font-size: 14px;
+                                                    font-weight: 600;
+                                                    color: $text-white;
+                                                    margin: 0 0 5px;
+                                                    line-height: normal;
+
+                                                    &:last-child {
+                                                        margin: 0;
+                                                    }
+                                                }
+                                            }
+
+                                            .block_clr_bg_right {
+                                                display: flex;
+                                                flex-flow: column;
+                                                padding: 0 20px 0 40px;
+                                                border-left: 1px solid $btn-bg;
+
+                                                p {
+                                                    font-size: 14px;
+                                                    font-weight: 400;
+                                                    color: $text-white;
+                                                    margin: 0 0 15px;
+                                                    line-height: normal;
+                                                }
+
+                                                .block_pay_instalment {
+                                                    width: 100%;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    justify-content: center;
+
+                                                    .block_amount {
+                                                        padding: 0 25px;
+                                                        font-size: 20px;
+                                                        font-weight: 600;
+                                                        color: $text-white;
+                                                    }
+
+                                                    .pay_block {
+                                                        width: 25px;
+                                                        height: 25px;
+                                                        font-size: 16px;
+                                                        position: relative;
+
+                                                        a {
+                                                            width: 25px;
+                                                            height: 25px;
+                                                            display: inline-block;
+                                                            border-radius: 50%;
+                                                            position: absolute;
+                                                            top: 0;
+                                                            left: 0;
+                                                            background: $background-white;
+                                                            color: $secondary-color;
+                                                            line-height: 27px;
+                                                            text-align: center;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .block_two {
+                                        width: 100%;
+                                        border: 1px solid $box-border-color;
+                                        border-radius: 5px;
+
+                                        ul {
+                                            flex-flow: column;
+
+                                            li {
+                                                width: 100%;
+                                                padding: 10px 20px;
+                                                border-bottom: 1px solid $box-border-color;
+                                                font-size: 14px;
+                                                font-weight: 400;
+                                                color: $text-grey;
+
+                                                span {
+                                                    font-size: 14px;
+                                                    font-weight: 500;
+                                                    color: $text-black;
+                                                }
+
+                                                &:last-child {
+                                                    border: none;
+                                                }
+                                            }
+                                        }
+
+                                        .block_pay_remaining {
+                                            width: auto;
+                                            border-radius: 5px;
+                                            background: $btn-bg;
+                                            padding: 12px;
+                                            text-align: center;
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                            color: $text-white;
+                                            margin: 0 20px 12px;
+                                        }
+                                    }
+
+                                    .block_pay_info_main {
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: space-between;
+
+                                        .block_pay_info_left {
+                                            width: 49%;
+                                            padding: 20px;
+                                            border-radius: 5px;
+                                            border: 1px solid $box-border-color;
+                                            display: flex;
+                                            flex-flow: column;
+                                            justify-content: space-between;
+
+                                            &.clr_bg {
+                                                background: $text_blue;
+                                            }
+
+                                            .block_pay_info_inner {
+                                                display: flex;
+                                                flex-flow: column;
+                                                width: 100%;
+
+                                                p {
+                                                    font-size: 14px;
+                                                    font-weight: 400;
+                                                    color: $text-white;
+                                                    margin: 0 0 10px;
+                                                }
+
+                                                span {
+                                                    font-size: 14px;
+                                                    font-weight: 600;
+                                                    color: $text-white;
+                                                    margin: 0 0 10px;
+                                                }
+
+                                                ul {
+                                                    width: 100%;
+                                                    border-top: 1px solid $btn-bg;
+                                                    border-bottom: 1px solid $btn-bg;
+                                                    margin: 0 0 10px;
+                                                    padding: 0;
+                                                    flex-flow: column;
+
+                                                    li {
+                                                        width: 100%;
+                                                        padding: 10px 0;
+                                                        display: flex;
+                                                        justify-content: space-between;
+                                                        align-items: center;
+
+                                                        .custom_radio {
+                                                            color: $text-white;
+
+                                                            .checkmark {
+                                                                border-color: $background-white;
+                                                            }
+                                                        }
+
+                                                        .block_pay_instalment {
+                                                            width: 100%;
+                                                            display: flex;
+                                                            align-items: center;
+                                                            justify-content: center;
+
+                                                            .block_amount {
+                                                                width: 80px;
+                                                                padding: 0 20px;
+                                                                font-size: 18px;
+                                                                font-weight: 600;
+                                                                color: $text-white;
+                                                                text-align: center;
+                                                            }
+
+                                                            .pay_block {
+                                                                width: 25px;
+                                                                height: 25px;
+                                                                font-size: 16px;
+                                                                position: relative;
+
+                                                                a {
+                                                                    width: 25px;
+                                                                    height: 25px;
+                                                                    display: inline-block;
+                                                                    border-radius: 50%;
+                                                                    position: absolute;
+                                                                    top: 0;
+                                                                    left: 0;
+                                                                    background: $background-white;
+                                                                    color: $secondary-color;
+                                                                    line-height: 27px;
+                                                                    text-align: center;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                            }
+
+
+                                            .btn_calculate {
+                                                width: 100%;
+                                                display: flex;
+                                                justify-content: center;
+
+                                                a {
+                                                    display: inline-block;
+                                                    line-height: 38px;
+                                                    padding: 0 35px;
+                                                    font-size: 14px;
+                                                    color: $text-white;
+                                                    border-radius: 20px;
+                                                    background: $btn-bg;
+                                                    position: relative;
+                                                    z-index: 9;
+                                                    overflow: hidden;
+                                                    font-weight: 400;
+
+                                                    &::before {
+                                                        content: "";
+                                                        position: absolute;
+                                                        top: 0;
+                                                        left: 0;
+                                                        width: 100%;
+                                                        height: 0%;
+                                                        background: $secondary-color;
+                                                        z-index: -1;
+                                                        transition: 0.8s;
+                                                        border-radius: 0 0 50% 50%;
+                                                    }
+
+                                                    &:hover {
+                                                        border-color: $secondary-color;
+
+                                                        &:before {
+                                                            height: 190%;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .block_pay_info_right {
+                                            width: 49%;
+                                            border: 1px solid $box-border-color;
+                                            border-radius: 5px;
+
+                                            h6 {
+                                                font-size: 16px;
+                                                font-weight: 600;
+                                                color: $text-black;
+                                                background: $bg-light-grey;
+                                                border-radius: 5px 5px 0 0;
+                                                padding: 15px 20px;
+                                                margin: 0;
+                                            }
+
+                                            ul {
+                                                width: 100%;
+                                                flex-flow: column;
+
+                                                li {
+                                                    width: 100%;
+                                                    padding: 15px 20px;
+                                                    display: flex;
+                                                    justify-content: space-between;
+                                                    font-size: 14px;
+                                                    font-weight: 500;
+                                                    color: $text-grey;
+                                                    border-bottom: 1px solid $box-border-color;
+
+                                                    span {
+                                                        color: $text-black;
+                                                    }
+
+                                                    &:last-child {
+                                                        border-bottom: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+
+
+                                    .block_installment_pay_table {
+                                        width: 100%;
+                                        margin: 10px 0 20px;
+
+                                        table {
+                                            border: 1px solid $box-border-color;
+                                            border-radius: 5px;
+                                            width: 100%;
+
+                                            thead {
+                                                tr {
+                                                    border-radius: 5px 5px 0 0;
+
+                                                    th {
+                                                        padding: 10px;
+                                                        font-size: 14px;
+                                                        font-weight: 500;
+                                                        color: $text-grey;
+                                                        background: $bg-light-grey;
+                                                        text-align: center;
+
+                                                        &:first-child {
+                                                            text-align: left;
+                                                            border-radius: 5px 0 0 0;
+                                                        }
+
+                                                        &:last-child {
+                                                            text-align: right;
+                                                            border-radius: 0 5px 0 0;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            tbody {
+                                                tr {
+                                                    td {
+                                                        padding: 10px;
+                                                        border-bottom: 1px solid $box-border-color;
+                                                        font-size: 14px;
+                                                        font-weight: 500;
+                                                        color: $text-black;
+                                                        vertical-align: top;
+                                                        text-align: center;
+
+                                                        &:first-child {
+                                                            text-align: left;
+                                                        }
+
+                                                        &:last-child {
+                                                            text-align: right;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            @media only screen and (max-width: 800px) {
+                                                display: block;
+
+                                                thead {
+                                                    display: block;
+
+                                                    tr {
+                                                        display: none;
+                                                    }
+                                                }
+
+                                                tbody {
+                                                    display: block;
+
+                                                    tr {
+                                                        display: block;
+
+                                                        td {
+                                                            display: block;
+                                                            border: none;
+                                                            border-bottom: 1px solid $box-border-color;
+                                                            position: relative;
+                                                            padding-top: 35px;
+                                                            white-space: normal;
+                                                            text-align: left;
+
+                                                            &:before {
+                                                                position: absolute;
+                                                                top: 10px;
+                                                                left: 10px;
+                                                                width: 100%;
+                                                                padding-right: 10px;
+                                                                white-space: nowrap;
+                                                                text-align: left;
+                                                                font-weight: bold;
+                                                                content: attr(data-title);
+                                                                color: $text-grey;
+                                                                font-weight: 400;
+                                                                font-size: 14px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .block_pay_info_date {
+                                        width: 100%;
+                                        background: $bg-light-green;
+                                        padding: 15px 20px;
+
+                                        border-radius: 5px;
+
+                                        p {
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                            color: $text-black;
+                                            margin: 0;
+                                        }
+                                    }
+
+                                }
+                            }
+
+
+                        }
+                    }
+
+                    .block_card_select {
+
+                        .block_title_section {
+                            background: $bg-title-grey;
+                            padding: 15px 30px;
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 0 0 20px;
+
+                            h5 {
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: $text-black;
+                                margin: 0;
+                            }
+                        }
+
+                        .block_detail {
+                            width: 100%;
+
+                            .card_list {
+                                margin: 0 0 15px;
+
+                                ul {
+                                    width: 100%;
+                                    margin: 0;
+                                    padding: 0;
+                                    list-style: none;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    justify-content: space-between;
+
+                                    @media(max-width: 767px) {
+                                        flex-wrap: wrap;
+                                    }
+
+                                    li {
+                                        width: 49%;
+                                        display: flex;
+                                        align-items: flex-start;
+                                        margin: 0 0 15px;
+
+                                        @media(max-width: 767px) {
+                                            width: 100%;
+                                        }
+
+                                        .card_check {
+                                            margin: 0 5px 0 0;
+
+                                            .custom_checkbox {
+                                                position: relative;
+                                                margin-bottom: 0;
+                                                vertical-align: middle;
+                                                line-height: normal;
+                                                display: flex;
+                                                align-items: center;
+                                                font-size: 14px;
+                                                color: $text-grey;
+                                                font-weight: 300;
+                                                left: 1px;
+                                                height: 100%;
+
+                                                input {
+                                                    position: absolute;
+                                                    top: 0;
+                                                    left: 0;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    opacity: 0;
+
+                                                    &:checked {
+                                                        ~ {
+                                                            .checkmark {
+                                                                border-color: $secondary-color;
+
+                                                                &:after {
+                                                                    opacity: 1;
+
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .checkmark {
+                                                    width: 15px;
+                                                    min-width: 16px;
+                                                    height: 15px;
+                                                    display: inline-block;
+                                                    vertical-align: middle;
+                                                    margin-right: 11px;
+                                                    position: relative;
+                                                    top: 3px;
+                                                    background: $background-white;
+
+                                                    &:before {
+                                                        width: 15px;
+                                                        height: 15px;
+                                                        position: absolute;
+                                                        top: 0;
+                                                        left: 0;
+                                                        content: '';
+                                                        border: 1px solid $text-grey;
+                                                    }
+
+                                                    &:after {
+                                                        content: '';
+                                                        position: absolute;
+                                                        top: 1px;
+                                                        -webkit-transform: translate(0, -50%);
+                                                        -moz-transform: translate(0, -50%);
+                                                        -ms-transform: translate(0, -50%);
+                                                        -o-transform: translate(0, -50%);
+                                                        transform: translate(0, -50%);
+                                                        width: 6px;
+                                                        height: 9px;
+                                                        border-radius: 2px;
+                                                        border: solid $secondary-color;
+                                                        border-top-width: medium;
+                                                        border-right-width: medium;
+                                                        border-bottom-width: medium;
+                                                        border-left-width: medium;
+                                                        border-width: 0 2px 2px 0;
+                                                        transform: rotate(45deg);
+                                                        -webkit-transform: rotate(45deg);
+                                                        -ms-transform: rotate(45deg);
+                                                        border-radius: 0px;
+                                                        left: 0;
+                                                        right: 0;
+                                                        margin: 0 auto;
+                                                        transition: all 0.2s;
+                                                        opacity: 0;
+                                                    }
+                                                }
+
+                                                span {
+                                                    color: $secondary-color;
+                                                    padding: 0 5px;
+                                                }
+                                            }
+                                        }
+
+                                        .card_detail {
+                                            width: 100%;
+                                            padding: 0 30px 0 0;
+                                            position: relative;
+
+                                            h6 {
+                                                margin: 0 0 5px;
+                                                font-size: 14px;
+                                                font-weight: 400;
+                                                color: $text-black;
+                                            }
+
+                                            span {
+                                                margin: 0 0 5px;
+                                                font-size: 14px;
+                                                font-weight: 400;
+                                                color: $text-grey;
+                                                display: block;
+                                            }
+
+                                            .block_card_cvv {
+                                                width: auto;
+                                                display: block;
+                                                margin: 5px 0 0;
+
+                                                input {
+                                                    width: 130px;
+                                                    background: transparent;
+                                                    height: 40px;
+                                                    border-top: none;
+                                                    border-left: none;
+                                                    border-right: none;
+                                                    border-bottom: 1px solid $box-border-color;
+                                                    font-size: 14px;
+                                                    color: $text-black;
+                                                    position: relative;
+
+                                                    &:focus {
+                                                        border-bottom: 1px solid $primary-color;
+                                                    }
+
+                                                    &:placeholder {
+                                                        color: $box-border-color;
+                                                        -webkit-text-fill-color: $box-border-color;
+                                                    }
+                                                }
+                                            }
+
+                                            .card_type {
+                                                position: absolute;
+                                                top: 0;
+                                                right: 0;
+                                                width: 20px;
+
+                                                img {
+                                                    width: 20px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .add_card_btn {
+                                width: 100%;
+                                margin: 0 0 15px;
+
+                                a {
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    color: $text-lightblue;
+                                }
+                            }
+
+                            .add_card_block {
+                                padding: 20px;
+                                border: 1px solid $box-border-color;
+                                border-radius: 5px;
+                                margin: 0 0 30px;
+
+                                .form_row {
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+
+                                    @media(max-width: 480px) {
+                                        flex-wrap: wrap;
+                                    }
+
+                                    .form_field {
+                                        width: 49%;
+                                        margin-bottom: 20px;
+
+                                        @media(max-width: 480px) {
+                                            width: 100%;
+                                        }
+
+                                        label {
+                                            width: 100%;
+                                            margin-bottom: 10px;
+                                            font-size: 12px;
+                                            color: $text-grey;
+                                            font-weight: 400;
+
+                                            sup {
+                                                color: $error-color;
+                                            }
+                                        }
+
+                                        .text_field {
+                                            input {
+                                                width: 100%;
+                                                background: transparent;
+                                                height: 40px;
+                                                border-top: none;
+                                                border-left: none;
+                                                border-right: none;
+                                                border-bottom: 1px solid $box-border-color;
+                                                font-size: 14px;
+                                                color: $text-black;
+                                                position: relative;
+
+                                                &:focus {
+                                                    border-bottom: 1px solid $primary-color;
+                                                }
+
+                                                &.birth_date {
+                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                                    background-position: right center;
+                                                }
+
+                                                &:placeholder {
+                                                    color: $box-border-color;
+                                                    -webkit-text-fill-color: $box-border-color;
+                                                }
+                                            }
+
+                                            &.custom-select {
+                                                height: 40px;
+                                                border-top: none;
+                                                border-left: none;
+                                                border-right: none;
+                                                border-bottom: 1px solid $box-border-color;
+                                                background: transparent;
+                                                padding: 0;
+                                                position: relative;
+
+                                                select {
+                                                    display: none;
+                                                }
+
+                                                .select-selected {
+                                                    background-color: transparent;
+                                                    line-height: 40px;
+                                                    font-size: 14px;
+                                                    color: $text-black;
+
+                                                    &:after {
+                                                        position: absolute;
+                                                        content: "";
+                                                        top: 17px;
+                                                        right: 10px;
+                                                        width: 0;
+                                                        height: 0;
+                                                        border: 4px solid transparent;
+                                                        border-color: $text-grey transparent transparent transparent;
+                                                    }
+
+                                                    &.select-arrow-active {
+                                                        &:after {
+                                                            border-color: transparent transparent $text-grey transparent;
+                                                            top: 11px;
+                                                        }
+                                                    }
+                                                }
+
+                                                .select-items {
+                                                    position: absolute;
+                                                    background-color: $text-grey;
+                                                    top: 100%;
+                                                    left: 0;
+                                                    right: 0;
+                                                    z-index: 99;
+
+                                                    div {
+                                                        color: #ffffff;
+                                                        padding: 8px 16px;
+                                                        border: 1px solid transparent;
+                                                        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                                                        cursor: pointer;
+                                                        user-select: none;
+                                                        font-size: 14px;
+                                                        color: $text-white;
+
+                                                        &:hover {
+                                                            background-color: rgba(0, 0, 0, 0.1);
+                                                        }
+
+                                                        &.same-as-selected {
+                                                            background-color: rgba(0, 0, 0, 0.1);
+                                                        }
+                                                    }
+
+                                                    &.select-hide {
+                                                        display: none;
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .block_card_save {
+                                    margin: 0 0 20px;
+
+                                    .custom_checkbox {
+                                        position: relative;
+                                        margin-bottom: 0;
+                                        vertical-align: middle;
+                                        line-height: normal;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 14px;
+                                        color: $text-grey;
+                                        font-weight: 300;
+
+                                        input {
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 100%;
+                                            opacity: 0;
+
+                                            &:checked {
+                                                ~ {
+                                                    .checkmark {
+                                                        border-color: $secondary-color;
+
+                                                        &:after {
+                                                            opacity: 1;
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .checkmark {
+                                            width: 14px;
+                                            min-width: 14px;
+                                            height: 14px;
+                                            display: inline-block;
+                                            border: 1px solid $text-grey;
+                                            vertical-align: middle;
+                                            margin-right: 11px;
+                                            position: relative;
+                                            background: $background-white;
+
+                                            &:after {
+                                                content: '';
+                                                position: absolute;
+                                                top: 1px;
+                                                -webkit-transform: translate(0, -50%);
+                                                -moz-transform: translate(0, -50%);
+                                                -ms-transform: translate(0, -50%);
+                                                -o-transform: translate(0, -50%);
+                                                transform: translate(0, -50%);
+                                                width: 6px;
+                                                height: 9px;
+                                                border-radius: 2px;
+                                                border: solid $secondary-color;
+                                                border-top-width: medium;
+                                                border-right-width: medium;
+                                                border-bottom-width: medium;
+                                                border-left-width: medium;
+                                                border-width: 0 2px 2px 0;
+                                                transform: rotate(45deg);
+                                                -webkit-transform: rotate(45deg);
+                                                -ms-transform: rotate(45deg);
+                                                border-radius: 0px;
+                                                left: 0;
+                                                right: 0;
+                                                margin: 0 auto;
+                                                transition: all 0.2s;
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        span {
+                                            color: $secondary-color;
+                                            padding: 0 5px;
+                                        }
+                                    }
+                                }
+
+                                .form_btn {
+                                    button {
+                                        width: auto;
+                                        padding: 0 35px;
+                                        height: 38px;
+                                        background: $btn-bg;
+                                        border-radius: 19px;
+                                        border: 1px solid $btn-bg;
+                                        font-size: 20px;
+                                        font-weight: 400;
+                                        color: $text-white;
+                                        transition: 0.3s;
+                                        position: relative;
+                                        z-index: 9;
+                                        overflow: hidden;
+                                        white-space: normal;
+                                        display: flex;
+                                        align-items: center;
+
+                                        img {
+                                            margin-left: 40px;
+                                            height: 20px;
+                                        }
+
+                                        &::before {
+                                            content: "";
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 0%;
+                                            background: $primary-color;
+                                            z-index: -1;
+                                            transition: 0.8s;
+                                            border-radius: 0 0 50% 50%;
+                                        }
+
+                                        &:hover {
+                                            border-color: $primary-color;
+
+                                            &:before {
+                                                height: 190%;
+                                            }
+                                        }
+
+                                        @media(max-width: 991px) {
+                                            display: inline-flex;
+                                        }
+
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
 
-        .block_condition_agree {
-            margin: 0 0 20px;
+            .block_condition_agree {
+                margin: 0 0 20px;
 
-            ul {
-                width: 100%;
-                margin: 0;
-                padding: 0;
+                ul {
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
 
-                li {
-                    display: flex;
-                    padding-bottom: 10px;
-                    align-items: center;
-                    color: $text-grey;
-                    font-size: 14px;
-                    font-weight: 300;
-
-                    .custom_checkbox {
-                        position: relative;
-                        margin-bottom: 0;
-                        vertical-align: middle;
-                        line-height: normal;
+                    li {
                         display: flex;
+                        padding-bottom: 10px;
                         align-items: center;
+                        color: $text-grey;
+                        font-size: 14px;
+                        font-weight: 300;
 
-                        input {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            opacity: 0;
+                        .custom_checkbox {
+                            position: relative;
+                            margin-bottom: 0;
+                            vertical-align: middle;
+                            line-height: normal;
+                            display: flex;
+                            align-items: center;
 
-                            &:checked {
-                                ~ {
-                                    .checkmark {
-                                        border-color: $secondary-color;
+                            input {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                opacity: 0;
 
-                                        &:after {
-                                            opacity: 1;
+                                &:checked {
+                                    ~ {
+                                        .checkmark {
+                                            border-color: $secondary-color;
 
+                                            &:after {
+                                                opacity: 1;
+
+                                            }
                                         }
                                     }
                                 }
                             }
+
+                            .checkmark {
+                                width: 14px;
+                                min-width: 14px;
+                                height: 14px;
+                                display: inline-block;
+                                border: 1px solid $text-grey;
+                                vertical-align: middle;
+                                margin-right: 11px;
+                                position: relative;
+
+                                &:after {
+                                    content: '';
+                                    position: absolute;
+                                    top: 1px;
+                                    -webkit-transform: translate(0, -50%);
+                                    -moz-transform: translate(0, -50%);
+                                    -ms-transform: translate(0, -50%);
+                                    -o-transform: translate(0, -50%);
+                                    transform: translate(0, -50%);
+                                    width: 6px;
+                                    height: 9px;
+                                    border-radius: 2px;
+                                    border: solid $secondary-color;
+                                    border-top-width: medium;
+                                    border-right-width: medium;
+                                    border-bottom-width: medium;
+                                    border-left-width: medium;
+                                    border-width: 0 2px 2px 0;
+                                    transform: rotate(45deg);
+                                    -webkit-transform: rotate(45deg);
+                                    -ms-transform: rotate(45deg);
+                                    border-radius: 0px;
+                                    left: 0;
+                                    right: 0;
+                                    margin: 0 auto;
+                                    transition: all 0.2s;
+                                    opacity: 0;
+                                }
+                            }
                         }
 
-                        .checkmark {
-                            width: 14px;
-                            min-width: 14px;
-                            height: 14px;
-                            display: inline-block;
-                            border: 1px solid $text-grey;
-                            vertical-align: middle;
-                            margin-right: 11px;
-                            position: relative;
+                        p {
+                            color: $text-grey;
+                            font-size: 14px;
+                            font-weight: 400;
+                            margin: 0;
 
-                            &:after {
-                                content: '';
-                                position: absolute;
-                                top: 1px;
-                                -webkit-transform: translate(0, -50%);
-                                -moz-transform: translate(0, -50%);
-                                -ms-transform: translate(0, -50%);
-                                -o-transform: translate(0, -50%);
-                                transform: translate(0, -50%);
-                                width: 6px;
-                                height: 9px;
-                                border-radius: 2px;
-                                border: solid $secondary-color;
-                                border-top-width: medium;
-                                border-right-width: medium;
-                                border-bottom-width: medium;
-                                border-left-width: medium;
-                                border-width: 0 2px 2px 0;
-                                transform: rotate(45deg);
-                                -webkit-transform: rotate(45deg);
-                                -ms-transform: rotate(45deg);
-                                border-radius: 0px;
-                                left: 0;
-                                right: 0;
-                                margin: 0 auto;
-                                transition: all 0.2s;
-                                opacity: 0;
+                            a {
+                                color: $text-lightblue;
+                            }
+
+                            @media(max-width: 480px) {
+                                font-size: 12px;
+                            }
+                        }
+
+                        &:last-child {
+                            padding-bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            .btn_payment {
+                width: 100%;
+                margin: 10px 0 0;
+
+                .btn_laytrip {
+                    display: inline-block;
+                    line-height: 50px;
+                    padding: 0 25px;
+                    font-size: 20px;
+                    color: $text-white;
+                    font-weight: 300;
+                    border-radius: 8px;
+                    background: $secondary-color;
+                    position: relative;
+                    z-index: 9;
+                    overflow: hidden;
+                    font-weight: 400;
+
+                    img {
+                        margin: 0 0 0 20px;
+                        height: 15px;
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0%;
+                        background: $primary-color;
+                        z-index: -1;
+                        transition: 0.8s;
+                        border-radius: 0 0 50% 50%;
+                    }
+
+                    &:hover {
+                        border-color: $primary-color;
+
+                        &:before {
+                            height: 190%;
+                        }
+                    }
+
+                    @media(max-width: 480px) {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    &.book_confirm_login {
+
+        .detail_info_left {
+
+            @media(max-width: 991px) {
+                margin: 30px 0 0;
+            }
+
+            .block_booking_confirmation {
+                width: 100%;
+                background: $background-white;
+                border-radius: 5px;
+                box-shadow: 3px 4px 10px $shadow-color;
+                padding: 30px;
+                position: relative;
+                z-index: 9;
+
+                @media(max-width: 575px) {
+                    padding: 20px;
+                }
+
+                &:after {
+                    width: 190px;
+                    height: 110px;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    content: '';
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/booking-confirmation-for-guest-login-im.svg) no-repeat;
+
+                    @media(max-width: 767px) {
+                        display: none;
+                    }
+                }
+
+                .block_inner {
+                    width: 100%;
+                    border-bottom: 2px dashed $border-blue-light;
+                    padding: 0 0 25px;
+                    margin: 0 0 25px;
+                    position: relative;
+                    z-index: 9;
+
+                    h5 {
+                        font-size: 24px;
+                        font-weight: 600;
+                        color: $text-black;
+                        margin: 0 0 15px;
+                    }
+
+                    p {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: $text-grey;
+                        margin: 0 0 10px;
+                        display: block;
+                    }
+
+                    span {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: $text-blue;
+                        margin: 0 0 20px;
+                        display: block;
+                    }
+
+                    .book_inform {
+                        width: 100%;
+                        padding: 15px 20px;
+                        background: $bg-light-green;
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: $text-black;
+                    }
+
+                    ul {
+                        width: 100%;
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+
+                        li {
+                            width: 100%;
+                            padding: 0 0 15px;
+                            display: flex;
+
+                            @media(max-width: 575px) {
+                                flex-flow: column;
+                            }
+
+                            span {
+                                min-width: 225px;
+                                font-size: 14px;
+                                font-weight: 500;
+                                color: $text-black;
+                                margin: 0;
+                                display: inline-block;
+
+                                @media(max-width: 575px) {
+                                    padding: 0 0 5px;
+                                }
+                            }
+
+                            p {
+                                font-size: 14px;
+                                font-weight: 400;
+                                color: $text-grey;
+                                margin: 0;
+
+                                a {
+                                    color: $text-lightblue;
+                                }
+                            }
+
+                            &:last-child {
+                                padding: 0;
+                            }
+                        }
+
+                        &.block_contact {
+                            display: flex;
+                            margin: 10px 0 50px;
+
+                            @media(max-width: 575px) {
+                                flex-flow: column;
+                                margin: 10px 0 20px;
+                            }
+
+                            li {
+                                width: auto;
+                                padding: 0 50px 0 0;
+
+                                a {
+                                    font-size: 20px;
+                                    font-weight: 500;
+                                    color: $text-lightblue;
+
+                                    i {
+                                        margin: 0 10px 0 0;
+                                        color: $text-grey;
+                                        font-size: 16px;
+                                    }
+
+                                    @media(max-width: 767px) {
+                                        font-size: 14px;
+                                    }
+                                }
+
+                                @media(max-width: 575px) {
+                                    padding: 0 0 10px;
+                                }
                             }
                         }
                     }
 
                     p {
-                        color: $text-grey;
                         font-size: 14px;
                         font-weight: 400;
+                        color: $text-grey;
                         margin: 0;
 
                         a {
@@ -6393,292 +6755,125 @@
                         }
                     }
 
-                    &:last-child {
-                        padding-bottom: 0;
-                    }
-                }
-            }
-        }
-
-        .btn_payment {
-            width: 100%;
-            margin: 10px 0 0;
-
-            .btn_laytrip {
-                display: inline-block;
-                line-height: 50px;
-                padding: 0 25px;
-                font-size: 20px;
-                color: $text-white;
-                font-weight: 300;
-                border-radius: 8px;
-                background: $secondary-color;
-                position: relative;
-                z-index: 9;
-                overflow: hidden;
-                font-weight: 400;
-
-                img {
-                    margin: 0 0 0 20px;
-                    height: 15px;
-                }
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 0%;
-                    background: $primary-color;
-                    z-index: -1;
-                    transition: 0.8s;
-                    border-radius: 0 0 50% 50%;
-                }
-
-                &:hover {
-                    border-color: $primary-color;
-
-                    &:before {
-                        height: 190%;
-                    }
-                }
-            }
-        }
-
-    }
-
-    &.book_confirm_login {
-        .block_booking_confirmation {
-            width: 100%;
-            background: $background-white;
-            border-radius: 5px;
-            box-shadow: 3px 4px 10px $shadow-color;
-            padding: 30px;
-            position: relative;
-            z-index: 9;
-
-            &:after {
-                width: 190px;
-                height: 110px;
-                position: absolute;
-                top: 0;
-                right: 0;
-                content: '';
-                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/booking-confirmation-for-guest-login-im.svg) no-repeat;
-            }
-
-            .block_inner {
-                width: 100%;
-                border-bottom: 2px dashed $border-blue-light;
-                padding: 0 0 25px;
-                margin: 0 0 25px;
-                position: relative;
-                z-index: 9;
-
-                h5 {
-                    font-size: 24px;
-                    font-weight: 600;
-                    color: $text-black;
-                    margin: 0 0 15px;
-                }
-
-                p {
-                    font-size: 14px;
-                    font-weight: 400;
-                    color: $text-grey;
-                    margin: 0 0 10px;
-                    display: block;
-                }
-
-                span {
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: $text-blue;
-                    margin: 0 0 20px;
-                    display: block;
-                }
-
-                .book_inform {
-                    width: 100%;
-                    padding: 15px 20px;
-                    background: $bg-light-green;
-                    font-size: 14px;
-                    font-weight: 400;
-                    color: $text-black;
-                }
-
-                ul {
-                    width: 100%;
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-
-                    li {
+                    .msg_block {
                         width: 100%;
-                        padding: 0 0 15px;
-                        display: flex;
-
-                        span {
-                            min-width: 225px;
-                            font-size: 14px;
-                            font-weight: 500;
-                            color: $text-black;
-                            margin: 0;
-                            display: inline-block;
-                        }
-
-                        p {
-                            font-size: 14px;
-                            font-weight: 400;
-                            color: $text-grey;
-                            margin: 0;
-
-                            a {
-                                color: $text-lightblue;
-                            }
-                        }
-
-                        &:last-child {
-                            padding: 0;
-                        }
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: $text-blue;
                     }
 
-                    &.block_contact {
-                        display: flex;
-                        margin: 10px 0 50px;
-
-                        li {
-                            width: auto;
-                            padding: 0 50px 0 0;
-
-                            a {
-                                font-size: 20px;
-                                font-weight: 500;
-                                color: $text-lightblue;
-
-                                i {
-                                    margin: 0 10px 0 0;
-                                    color: $text-grey;
-                                    font-size: 16px;
-                                }
-                            }
-                        }
+                    &:last-child {
+                        border: none;
+                        margin: 0;
+                        padding: 0;
                     }
-                }
-
-                p {
-                    font-size: 14px;
-                    font-weight: 400;
-                    color: $text-grey;
-                    margin: 0;
-
-                    a {
-                        color: $text-lightblue;
-                    }
-                }
-
-                .msg_block {
-                    width: 100%;
-                    font-size: 14px;
-                    font-weight: 500;
-                    color: $text-blue;
-                }
-
-                &:last-child {
-                    border: none;
-                    margin: 0;
-                    padding: 0;
                 }
             }
-        }
 
-        .btn_backhome {
-            width: 100%;
-            margin: 30px 0 0;
+            .btn_backhome {
+                width: 100%;
+                margin: 30px 0 0;
+                display: flex;
 
-            a {
-                display: inline-block;
-                line-height: 50px;
-                padding: 0 25px;
-                font-size: 20px;
-                color: $text-white;
-                font-weight: 300;
-                border-radius: 8px;
-                background: $secondary-color;
-                position: relative;
-                z-index: 9;
-                overflow: hidden;
-                font-weight: 400;
+                a {
+                    display: flex;
+                    align-items: center;
+                    line-height: 50px;
+                    padding: 0 25px;
+                    font-size: 20px;
+                    color: $text-white;
+                    font-weight: 300;
+                    border-radius: 8px;
+                    background: $secondary-color;
+                    position: relative;
+                    z-index: 9;
+                    overflow: hidden;
+                    font-weight: 400;
+                    white-space: nowrap;
 
-                img {
-                    margin: 0 0 0 30px;
-                    height: 15px;
-                }
+                    img {
+                        margin: 0 0 0 30px;
+                        height: 15px;
+                    }
 
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 0%;
-                    background: $primary-color;
-                    z-index: -1;
-                    transition: 0.8s;
-                    border-radius: 0 0 50% 50%;
-                }
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0%;
+                        background: $primary-color;
+                        z-index: -1;
+                        transition: 0.8s;
+                        border-radius: 0 0 50% 50%;
+                    }
 
-                &:hover {
-                    border-color: $primary-color;
+                    &:hover {
+                        border-color: $primary-color;
 
-                    &:before {
-                        height: 190%;
+                        &:before {
+                            height: 190%;
+                        }
+                    }
+
+                    @media(max-width: 575px) {
+                        font-size: 16px;
                     }
                 }
+
             }
         }
     }
 
     &.book_confirm_guest {
-        .block_booking_confirmation {
-            width: 100%;
-            background: $background-white;
-            border-radius: 5px;
-            box-shadow: 3px 4px 10px $shadow-color;
-            padding: 30px;
+        .detail_info_left {
 
-            .inner_block {
+            @media(max-width: 991px) {
+                margin: 30px 0 0;
+            }
+
+            .block_booking_confirmation {
                 width: 100%;
-                text-align: center;
+                background: $background-white;
+                border-radius: 5px;
+                box-shadow: 3px 4px 10px $shadow-color;
+                padding: 30px;
 
-                img {
-                    margin-bottom: 20px;
-                }
+                .inner_block {
+                    width: 100%;
+                    text-align: center;
 
-                h5 {
-                    font-size: 20px;
-                    font-weight: 600;
-                    color: $text-black;
-                    margin: 0 0 15px;
-                }
+                    img {
+                        margin-bottom: 20px;
+                        max-width: 100%;
+                    }
 
-                p {
-                    width: 500px;
-                    max-width: 100%;
-                    font-size: 14px;
-                    font-weight: 400;
-                    color: $text-grey;
-                    margin: 0 auto 20px;
-                }
+                    h5 {
+                        font-size: 20px;
+                        font-weight: 600;
+                        color: $text-black;
+                        margin: 0 0 15px;
+                    }
 
-                span {
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: $text-blue;
+                    p {
+                        width: 500px;
+                        max-width: 100%;
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: $text-grey;
+                        margin: 0 auto 20px;
+                    }
+
+                    span {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: $text-blue;
+                    }
                 }
             }
         }
+
     }
 }
 
@@ -6956,7 +7151,7 @@
     background: $bg-black-opacity-half;
     top: 0;
     left: 0;
-    z-index: 9;
+    z-index: 999;
 
     .page_load_inner {
         width: 600px;
@@ -7052,3 +7247,101 @@
 }
 
 //<!-- Close No Result Found page css -->
+
+
+//<!-- Start Responsive Filter css -->
+.filter_responsive {
+    width: 100%;
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+
+    .btn_filter {
+        width: 100%;
+        text-align: center;
+
+        a {
+            width: 100%;
+            display: inline-block;
+            padding: 10px;
+            background: $secondary-color;
+            color: $text-white;
+            font-size: 14px;
+            text-decoration: none;
+        }
+    }
+}
+
+.responsive_filter_show {
+    background: $bg-light-grey;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+    display: none;
+
+    .filter_popup {
+        width: 100%;
+
+        .filter_head_popup {
+            width: 100%;
+            padding: 10px 20px;
+            background: $text-darkblue;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            .filter_clear {
+                width: auto;
+                line-height: 26px;
+                position: absolute;
+                top: 50%;
+                left: 15px;
+                transform: translateY(-50%);
+
+                a {
+                    color: $text-white;
+                }
+            }
+
+            h3 {
+                display: inline-block;
+                color: $text-white;
+                font-size: 16px;
+                margin: 0;
+            }
+
+            .filter_close {
+                width: auto;
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+
+        .filter_cnt {
+            width: 100%;
+            padding: 15px;
+            overflow-y: scroll;
+            height: calc(100vh - 30px);
+
+            .filter_by {
+                margin: 0 0 30px;
+            }
+        }
+    }
+}
+
+//<!-- Close Responsive Filter css -->
