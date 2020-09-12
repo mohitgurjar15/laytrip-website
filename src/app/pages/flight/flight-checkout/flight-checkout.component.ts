@@ -160,4 +160,10 @@ export class FlightCheckoutComponent implements OnInit {
 
       this.flightSummary=data;
     }
+
+    getInstalmentData(data){
+
+      //this.additionalAmount = additionalAmount;
+      console.log(data)
+    }
 }

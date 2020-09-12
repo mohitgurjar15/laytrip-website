@@ -16,7 +16,7 @@
                           </div>
                         </div>
                         <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
-                            <app-payment-mode *ngIf="flightSummary.length" [flightSummary]="flightSummary" (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)"></app-payment-mode>
+                            <app-payment-mode *ngIf="flightSummary.length" [flightSummary]="flightSummary" (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)" (getInstalmentData)="getInstalmentData($event)" ></app-payment-mode>
                         </div>
                         <div class="block_pay_info">
                             <app-booking-enquiry-info></app-booking-enquiry-info>

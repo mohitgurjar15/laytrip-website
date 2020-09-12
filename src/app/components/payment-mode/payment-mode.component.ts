@@ -12,6 +12,7 @@ export class PaymentModeComponent implements OnInit {
 
   @Output() applyLaycredit = new EventEmitter();
   @Output() selectInstalmentMode = new EventEmitter();
+  @Output() getInstalmentData = new EventEmitter<{additionalAmount:number,instalmentType:string}>(); 
   constructor(
     private genericService:GenericService
   ) { }
@@ -34,7 +35,7 @@ export class PaymentModeComponent implements OnInit {
     custom_amount: null
   }
   instalments;
-  durationType:string; // [weekly,biweekly,monthly]
+  durationType:string='weekly'; // [weekly,biweekly,monthly]
   additionalAmount:number=0;
   remainingAmount:number;
   remainingInstalment:number;
@@ -85,6 +86,7 @@ export class PaymentModeComponent implements OnInit {
     this.additionalAmount=0;
     this.instalmentRequest.custom_amount=null;
     this.instalmentRequest.custom_instalment_no=null;
+    this.getInstalmentData.emit({ additionalAmount:this.additionalAmount , instalmentType:this.durationType})
     this.getInstalemnts(this.durationType);
 
   }
@@ -127,7 +129,7 @@ export class PaymentModeComponent implements OnInit {
         this.firstInstalment-=1;
       }
     }
-
+    this.getInstalmentData.emit({ additionalAmount:this.additionalAmount , instalmentType:this.durationType})
     this.calculateInstalment();
 
   }
