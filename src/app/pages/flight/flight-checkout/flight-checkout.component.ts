@@ -28,6 +28,7 @@ export class FlightCheckoutComponent implements OnInit {
     additionalAmount:number;
     routeCode:string;
     travelers=[];
+    travelerList;
     isDisableBookBtn:boolean=true;
     isTandCaccepeted:boolean=false;
     bookingStatus:number=0;
@@ -76,14 +77,17 @@ export class FlightCheckoutComponent implements OnInit {
         this.showAddCardForm=true;
       }
       let travelersIds = this.cookieService.get('_travelers');
-      console.log("travelersIds",travelersIds)
       try{
-        travelersIds = JSON.parse(travelersIds)
+        travelersIds = JSON.parse(travelersIds);
+
+        this.travelerList=travelersIds;
+
         if(travelersIds.length){
           for(let i=0; i < travelersIds.length; i++){
             this.travelers.push({
-              "traveler_id" : travelersIds[i]
+              "traveler_id" : travelersIds[i]['userId']
             })
+            
           }
         }
         console.log(this.travelers)
