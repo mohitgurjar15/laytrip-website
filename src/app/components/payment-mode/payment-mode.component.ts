@@ -12,7 +12,12 @@ export class PaymentModeComponent implements OnInit {
 
   @Output() applyLaycredit = new EventEmitter();
   @Output() selectInstalmentMode = new EventEmitter();
-  @Output() getInstalmentData = new EventEmitter<{additionalAmount:number,instalmentType:string}>(); 
+  @Output() getInstalmentData = new EventEmitter<{
+    additionalAmount:number,
+    instalmentType:string,
+    customAmount:number,
+    customInstalment:number
+  }>(); 
   constructor(
     private genericService:GenericService
   ) { }
@@ -86,7 +91,12 @@ export class PaymentModeComponent implements OnInit {
     this.additionalAmount=0;
     this.instalmentRequest.custom_amount=null;
     this.instalmentRequest.custom_instalment_no=null;
-    this.getInstalmentData.emit({ additionalAmount:this.additionalAmount , instalmentType:this.durationType})
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no
+    })
     this.getInstalemnts(this.durationType);
 
   }
@@ -129,7 +139,12 @@ export class PaymentModeComponent implements OnInit {
         this.firstInstalment-=1;
       }
     }
-    this.getInstalmentData.emit({ additionalAmount:this.additionalAmount , instalmentType:this.durationType})
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no
+    })
     this.calculateInstalment();
 
   }
@@ -152,6 +167,12 @@ export class PaymentModeComponent implements OnInit {
           this.customAmount-=1;
         }
       }
+      this.getInstalmentData.emit({ 
+        additionalAmount:this.additionalAmount , 
+        instalmentType:this.durationType, 
+        customAmount: this.customAmount,
+        customInstalment : null
+      })
     }
   }
 
@@ -174,6 +195,12 @@ export class PaymentModeComponent implements OnInit {
          }
       }
     }
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: null,
+      customInstalment : this.customInstalment
+    })
   }
 
   /**
@@ -190,6 +217,12 @@ export class PaymentModeComponent implements OnInit {
       this.instalmentRequest.custom_amount=null;
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no
+    })
     this.customAmount = this.defaultInstalment;
     this.customInstalment = this.defaultInstalmentNo;
     this.customMethod=event.target.checked?event.target.value:'';

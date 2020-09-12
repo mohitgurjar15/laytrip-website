@@ -58,6 +58,7 @@
                   </div>
               </div>
               <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
+              <app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
           </div>
           <div class="col-lg-4">
             <app-flight-summary (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
