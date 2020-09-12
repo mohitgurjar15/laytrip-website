@@ -340,8 +340,8 @@
 
 
 <!-- DATA OF ROUNDTRIP START -->
-<div class="result_listing roundtrip_list" *ngIf="isRoundTrip">
-    <div class="search_block">
+<div class="result_listing roundtrip_list" *ngIf="isRoundTrip" (clickOutside)="closeFlightDetail()">
+    <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
                 <div class="col-md-9">
@@ -352,10 +352,13 @@
                                     <div class="block_im">
                                         <div class="flight_wards">Outwards</div>
                                         <div class="flight_wards_info">
-                                            <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
+                                            <img src="{{ item?.routes[0].stops[0].airline_logo || defaultImage }}"
+                                                alt="Airlines Logo"
+                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                             <div class="info_flight_name">
-                                                <p>Indigo</p>
-                                                <span>6E - 749 | 6E - 103</span>
+                                                <p>{{ item.routes[0].stops[0].airline_name }}</p>
+                                                <span>{{ item?.routes[0].stops[0].airline }} -
+                                                    {{ item?.routes[0].stops[0].flight_number }}</span>
                                             </div>
 
                                         </div>
@@ -366,18 +369,20 @@
                                         <div class="block_detail_top">
                                             <div class="detail_info">
                                                 <p>Departure</p>
-                                                <h4>02:30 <span>pm</span></h4>
-                                                <span>New York</span>
+                                                <h4>{{ item?.routes[0].stops[0].departure_time }}</h4>
+                                                <span>{{ item?.routes[0].stops[0].departure_info.city }}</span>
                                             </div>
                                             <div class="flight_stop_detail">
-                                                <p>1h</p>
+                                                <p>{{ item?.routes[0].duration }}</p>
                                                 <div class="border-dot"></div>
-                                                <span>Non Stop</span>
+                                                <span>{{ item?.routes.length-1 === 0 ? 'Non -' : item.stop_count }}
+                                                    Stop</span>
                                             </div>
                                             <div class="detail_info">
                                                 <p>Arrival</p>
-                                                <h4>02:30 <span>pm</span></h4>
-                                                <span>Los Angeles</span>
+                                                <h4>{{ item?.routes[0].stops[item?.routes[0].stops.length-1].arrival_time }}
+                                                </h4>
+                                                <span>{{ item?.routes[0].stops[item?.routes[0].stops.length-1].arrival_info.city }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -389,10 +394,13 @@
                                     <div class="block_im">
                                         <div class="flight_wards">Inwards</div>
                                         <div class="flight_wards_info">
-                                            <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
+                                            <img src="{{ item?.routes[1].stops[0].airline_logo || defaultImage }}"
+                                                alt="Airlines Logo"
+                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                             <div class="info_flight_name">
-                                                <p>Indigo</p>
-                                                <span>6E - 749 | 6E - 103</span>
+                                                <p>{{ item.routes[1].stops[0].airline_name }}</p>
+                                                <span>{{ item?.routes[1].stops[0].airline }} -
+                                                    {{ item?.routes[1].stops[0].flight_number }}</span>
                                             </div>
 
                                         </div>
@@ -403,18 +411,20 @@
                                         <div class="block_detail_top">
                                             <div class="detail_info">
                                                 <p>Departure</p>
-                                                <h4>02:30 <span>pm</span></h4>
-                                                <span>New York</span>
+                                                <h4>{{ item?.routes[1].stops[0].departure_time }}</h4>
+                                                <span>{{ item?.routes[1].stops[0].departure_info.city }}</span>
                                             </div>
                                             <div class="flight_stop_detail">
-                                                <p>1h</p>
+                                                <p>{{ item?.routes[1].duration }}</p>
                                                 <div class="border-dot"></div>
-                                                <span>Non Stop</span>
+                                                <span>{{ item?.routes.length-1 === 0 ? 'Non -' : item.stop_count }}
+                                                    Stop</span>
                                             </div>
                                             <div class="detail_info">
                                                 <p>Arrival</p>
-                                                <h4>02:30 <span>pm</span></h4>
-                                                <span>Los Angeles</span>
+                                                <h4>{{ item?.routes[1].stops[item?.routes[1].stops.length-1]?.arrival_time }}
+                                                </h4>
+                                                <span>{{ item?.routes[1].stops[item?.routes[1].stops.length-1].arrival_info?.city }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -423,14 +433,16 @@
                         </div>
                         <div class="block_detail_btm">
                             <div class="show_detail">
-                                <a href="javascript:void(0);" class="show_more_detail">
-                                    <img src="assets/images/icon/ic_info.svg" alt="Information Icon"> Flight Details
+                                <a href="javascript:void(0);" class="show_more_detail"
+                                    (click)="showDetails(blockIndex)">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
+                                    Flight Details
                                 </a>
                             </div>
                             <div class="info_price_origin">
-                                <div class="refundable">Refundable</div>
+                                <div class="refundable">{{ item.is_refundable ? 'Refundable' : 'Non-Refundable' }}</div>
                                 <div class="ogigin_price">
-                                    Total <span>$350</span>
+                                    Total <span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span>
                                 </div>
                             </div>
                         </div>
@@ -439,15 +451,16 @@
 
                 <div class="col-md-3 px-0">
                     <div class="block_price">
-                        <p>Starts from</p>
-                        <p><span>$113</span> /week</p>
-                        <a class="book_btn" href="flight-add-passenger.html">Book Now</a>
+                        <p *ngIf="item.start_price > 0">Starts from</p>
+                        <p *ngIf="item.start_price > 0">
+                            <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
+                        <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item.route_code)">Book Now</a>
                         <span class="partial_payment_info">Learn more about partial payment</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="detail_info_show" style="display: none">
+        <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showFlightDetails[blockIndex] === true">
             <ul id="tabs" class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a href="#flight-info" class="nav-link active" data-toggle="tab" role="tab">Flight Info</a>
@@ -456,10 +469,12 @@
                     <a href="#Fare-Detail" class="nav-link" data-toggle="tab" role="tab">Fare Details</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Baggage-Rules" class="nav-link" data-toggle="tab" role="tab">Baggage Rules</a>
+                    <a href="#Baggage-Rules" class="nav-link" data-toggle="tab" role="tab"
+                        (click)="getBaggageDetails(item.route_code)">Baggage Rules</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Cancellation-Rules" class="nav-link" data-toggle="tab" role="tab">Cancellation Rules</a>
+                    <a href="#Cancellation-Rules" class="nav-link" data-toggle="tab" role="tab"
+                        (click)="getCancellationPolicy(item.route_code)">Cancellation Rules</a>
                 </li>
             </ul>
             <div id="content" class="tab-content" role="tablist">
@@ -478,186 +493,100 @@
                         <div class="card-body">
                             <div class="block_flight_info">
                                 <div class="tab_detail flight_info_cnt">
-
-                                    <div class="detail_top">
-                                        <div class="detail_inn_left">
-                                            <div class="detail_left">
-                                                <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                                <p>Indigo</p>
-                                                <span>6E - 749</span>
+                                    <div *ngFor="let flightInfo of item.routes[0].stops; let i = index">
+                                        <div class="flight_layover" *ngIf="flightInfo.is_layover">
+                                            <div class="triangle_right"></div>
+                                            <div class="layover_info">
+                                                Change of Planes <span>| {{ flightInfo?.layover_duration }}</span>
+                                                Layover
                                             </div>
-                                            <div class="detail_right">
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
+                                            <div class="triangle_left"></div>
+                                        </div>
+                                        <div class="detail_top">
+                                            <div class="detail_inn_left">
+                                                <div class="detail_left">
+                                                    <img src="{{flightInfo?.airline_logo || defaultImage}}"
+                                                        alt="Airlines Logo"
+                                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                                    <p>{{ flightInfo?.airline_name }}</p>
+                                                    <span>{{ flightInfo?.airline }} -
+                                                        {{ flightInfo?.flight_number }}</span>
                                                 </div>
-                                                <div class="flight_duration">
-                                                    <p>1h</p>
-                                                    <div class="border-dot">
-                                                        <img src="assets/images/icon/flight-duration_im.svg"
-                                                            alt="Duration Images">
+                                                <div class="detail_right">
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.departure_code }}
+                                                            <span>{{ flightInfo?.departure_time }}</span></h4>
+                                                        <p>{{ flightInfo?.departure_info?.city }},
+                                                            <span>{{ flightInfo?.departure_info?.country }}</span>
+                                                        </p>
                                                     </div>
-                                                    <span>Non Stop</span>
-                                                </div>
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flight_going">Outwards</div>
-                                    </div>
-                                    <div class="flight_layover">
-                                        <div class="triangle_right"></div>
-                                        <div class="layover_info">
-                                            Change of Planes <span>| 6h 25m</span> Layover
-                                        </div>
-                                        <div class="triangle_left"></div>
-                                    </div>
-                                    <div class="detail_top">
-                                        <div class="detail_inn_left">
-                                            <div class="detail_left">
-                                                <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                                <p>Indigo</p>
-                                                <span>6E - 749</span>
-                                            </div>
-                                            <div class="detail_right">
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
-                                                </div>
-                                                <div class="flight_duration">
-                                                    <p>1h</p>
-                                                    <div class="border-dot">
-                                                        <img src="assets/images/icon/flight-duration_im.svg"
-                                                            alt="Duration Images">
+                                                    <div class="flight_duration">
+                                                        <p>{{ flightInfo?.duration }}</p>
+                                                        <div class="border-dot">
+                                                            <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
+                                                                alt="Duration Images">
+                                                        </div>
+                                                        <span>Flight Duration</span>
                                                     </div>
-                                                    <span>Non Stop</span>
-                                                </div>
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flight_layover">
-                                        <div class="triangle_right"></div>
-                                        <div class="layover_info">
-                                            Change of Planes <span>| 6h 25m</span> Layover
-                                        </div>
-                                        <div class="triangle_left"></div>
-                                    </div>
-                                    <div class="detail_top">
-                                        <div class="detail_inn_left">
-                                            <div class="detail_left">
-                                                <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                                <p>Indigo</p>
-                                                <span>6E - 749</span>
-                                            </div>
-                                            <div class="detail_right">
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
-                                                </div>
-                                                <div class="flight_duration">
-                                                    <p>1h</p>
-                                                    <div class="border-dot">
-                                                        <img src="assets/images/icon/flight-duration_im.svg"
-                                                            alt="Duration Images">
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.arrival_code }}
+                                                            <span>{{ flightInfo?.arrival_time }}</span></h4>
+                                                        <p>{{ flightInfo?.arrival_info?.city }},
+                                                            <span>{{ flightInfo?.arrival_info?.country }}</span>
+                                                        </p>
                                                     </div>
-                                                    <span>Non Stop</span>
-                                                </div>
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
                                                 </div>
                                             </div>
+                                            <div class="flight_going" *ngIf="i === 0">Outwards</div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="tab_detail flight_info_cnt">
-                                    <div class="detail_top">
-                                        <div class="detail_inn_left">
-                                            <div class="detail_left">
-                                                <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                                <p>Indigo</p>
-                                                <span>6E - 749</span>
+                                    <div *ngFor="let flightInfo of item.routes[1].stops; let i = index">
+                                        <div class="flight_layover" *ngIf="flightInfo.is_layover">
+                                            <div class="triangle_right"></div>
+                                            <div class="layover_info">
+                                                Change of Planes <span>| {{ flightInfo?.layover_duration }}</span>
+                                                Layover
                                             </div>
-                                            <div class="detail_right">
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
-                                                </div>
-                                                <div class="flight_duration">
-                                                    <p>1h</p>
-                                                    <div class="border-dot">
-                                                        <img src="assets/images/icon/flight-duration_im.svg"
-                                                            alt="Duration Images">
-                                                    </div>
-                                                    <span>Non Stop</span>
-                                                </div>
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            <div class="triangle_left"></div>
                                         </div>
-                                        <div class="flight_going">Inwards</div>
-                                    </div>
-                                    <div class="flight_layover">
-                                        <div class="triangle_right"></div>
-                                        <div class="layover_info">
-                                            Change of Planes <span>| 6h 25m</span> Layover
-                                        </div>
-                                        <div class="triangle_left"></div>
-                                    </div>
-                                    <div class="detail_top">
-                                        <div class="detail_inn_left">
-                                            <div class="detail_left">
-                                                <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                                <p>Indigo</p>
-                                                <span>6E - 749</span>
-                                            </div>
-                                            <div class="detail_right">
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
+                                        <div class="detail_top">
+                                            <div class="detail_inn_left">
+                                                <div class="detail_left">
+                                                    <img src="{{flightInfo?.airline_logo || defaultImage}}"
+                                                        alt="Airlines Logo"
+                                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                                    <p>{{ flightInfo?.airline_name }}</p>
+                                                    <span>{{ flightInfo?.airline }} -
+                                                        {{ flightInfo?.flight_number }}</span>
                                                 </div>
-                                                <div class="flight_duration">
-                                                    <p>1h</p>
-                                                    <div class="border-dot">
-                                                        <img src="assets/images/icon/flight-duration_im.svg"
-                                                            alt="Duration Images">
+                                                <div class="detail_right">
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.departure_code }}
+                                                            <span>{{ flightInfo?.departure_time }}</span></h4>
+                                                        <p>{{ flightInfo?.departure_info?.city }},
+                                                            <span>{{ flightInfo?.departure_info?.country }}</span>
+                                                        </p>
                                                     </div>
-                                                    <span>Non Stop</span>
-                                                </div>
-                                                <div class="flight_info_detail">
-                                                    <h4>EWR <span>20:30</span></h4>
-                                                    <span>Mon, 06 Oct 2020</span>
-                                                    <p>Newark Liberty International Airport, <span>United States</span>
-                                                    </p>
+                                                    <div class="flight_duration">
+                                                        <p>{{ flightInfo?.duration }}</p>
+                                                        <div class="border-dot">
+                                                            <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
+                                                                alt="Duration Images">
+                                                        </div>
+                                                        <span>Flight Duration</span>
+                                                    </div>
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.arrival_code }}
+                                                            <span>{{ flightInfo?.arrival_time }}</span></h4>
+                                                        <p>{{ flightInfo?.arrival_info?.city }},
+                                                            <span>{{ flightInfo?.arrival_info?.country }}</span>
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="flight_going" *ngIf="i === 0">Inwards</div>
                                         </div>
                                     </div>
                                 </div>
@@ -682,15 +611,38 @@
                                 <div class="tab_detail fare_detail_cnt">
                                     <div class="triangle_right"></div>
                                     <ul>
-                                        <li>Base Fare (1 Adult) <span>$113</span></li>
-                                        <li>Taxes and Fees (1 Adult) <span>$13</span></li>
-                                        <li>Total Fare (1 Adult) <span>$126</span></li>
+                                        <li *ngFor="let fareDetails of item.fare_break_dwon">
+                                            <p *ngIf="fareDetails.type == 'ADT'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Adult)
+                                                <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            </p>
+                                            <p *ngIf="fareDetails.type == 'CHD'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Child)
+                                                <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            </p>
+                                            <p *ngIf="fareDetails.type == 'INF'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Infant)
+                                                <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            </p>
+                                            <p *ngIf="fareDetails.type === 'total'">
+                                                Total Fare ({{ fareDetails?.quantity }} traveller)
+                                                <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            </p>
+                                        </li>
                                     </ul>
-                                    <p><span>Note:</span> It is a long established fact that a reader will be distracted
+                                    <!-- <p>
+                                        <span>Note:</span> 
+                                        It is a long established fact that a reader will be distracted
                                         by the readable content of a page when looking at its layout. The point of using
                                         Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
                                         opposed to using ‘Content here, content here’, making it look like readable
-                                        English.</p>
+                                        English.</p> -->
                                     <div class="triangle_left"></div>
                                 </div>
                             </div>
@@ -714,13 +666,25 @@
                                 <div class="tab_detail baggage_rules_cnt">
                                     <div class="triangle_right"></div>
                                     <div class="block_baggage">
-                                        <div class="detail_left">
+                                        <!-- <div class="detail_left">
                                             <div class="flight_ward">Outwards</div>
-                                            <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                            <p>Indigo</p>
-                                            <span>EWR - DEN</span>
+                                            <img src="{{ item?.routes[0].stops[0].airline_logo || defaultImage }}"
+                                                alt="Airlines Logo"
+                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                            <p>{{ item.routes[0].stops[0].airline_name }}</p>
+                                            <span>{{ item?.routes[0].stops[0].airline }} -
+                                                {{ item?.routes[0].stops[0].flight_number }}</span>
+                                        </div> -->
+
+                                        <div class="detail_right" *ngIf="loadBaggageDetails">
+                                            <div class="w-100">
+                                                <p class="fb_animation mb-0 h-auto w-100"></p>
+                                                <p class="fb_animation mb-0 h-auto w-100"></p>
+                                            </div>
+                                            <p class="fb_animation mb-0 h-auto w-100"></p>
                                         </div>
-                                        <div class="detail_right">
+
+                                        <div class="detail_right" *ngIf="!loadBaggageDetails">
                                             <table>
                                                 <thead>
                                                     <tr>
@@ -731,21 +695,12 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td data-title="Flight">6E-749</td>
-                                                        <td data-title="Depart">Newark Liberty International Airport,
-                                                            United States</td>
-                                                        <td data-title="Arrive">Denver International Airport, United
-                                                            States</td>
-                                                        <td data-title="Free Baggage">15 KG/person</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td data-title="Flight">6E-103</td>
-                                                        <td data-title="Depart">Newark Liberty International Airport,
-                                                            United States</td>
-                                                        <td data-title="Arrive">Denver International Airport, United
-                                                            States</td>
-                                                        <td data-title="Free Baggage">15 KG/person</td>
+                                                    <tr *ngFor="let baggage of baggageDetails">
+                                                        <td data-title="Flight">{{ baggage?.flight_number }}</td>
+                                                        <td data-title="Depart">{{ baggage?.departure_airport }}</td>
+                                                        <td data-title="Arrive">{{ baggage?.arrival_airport }}</td>
+                                                        <td data-title="Free Baggage">{{ baggage?.baggage_capacity }}
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -753,12 +708,15 @@
                                     </div>
                                     <div class="block_baggage last">
                                         <div class="detail_left">
-                                            <div class="flight_ward">Inwards</div>
-                                            <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                            <p>Indigo</p>
-                                            <span>EWR - DEN</span>
+                                            <!-- <div class="flight_ward">Inwards</div> -->
+                                            <!-- <img src="{{ item?.routes[0].stops[1].airline_logo || defaultImage }}"
+                                                alt="Airlines Logo"
+                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                            <p>{{ item.routes[0].stops[1].airline_name }}</p>
+                                            <span>{{ item?.routes[0].stops[1].airline }} -
+                                                {{ item?.routes[0].stops[1].flight_number }}</span> -->
                                         </div>
-                                        <div class="detail_right">
+                                        <!-- <div class="detail_right">
                                             <table>
                                                 <thead>
                                                     <tr>
@@ -781,7 +739,7 @@
                                             </table>
                                             <p>The baggage information is just for reference. Please Check with airline
                                                 before check-in.</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="triangle_left"></div>
                                 </div>
@@ -805,11 +763,14 @@
                             <div class="block_flight_info">
                                 <div class="tab_detail cancellation_rules_cnt">
                                     <div class="triangle_right"></div>
-                                    <div class="rules_cnt_top">
+                                    <!-- <div class="rules_cnt_top">
                                         <div class="detail_left">
-                                            <img src="assets/images/airlines_logo.png" alt="Airlines Logo">
-                                            <p>Indigo</p>
-                                            <span>EWR - DEN</span>
+                                            <img src="{{ item?.routes[0].stops[0].airline_logo || defaultImage }}"
+                                                alt="Airlines Logo"
+                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                            <p>{{ item.routes[0].stops[0].airline_name }}</p>
+                                            <span>{{ item?.routes[0].stops[0].airline }} -
+                                                {{ item?.routes[0].stops[0].flight_number }}</span>
                                         </div>
                                         <div class="detail_right">
                                             <ul>
@@ -823,18 +784,30 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="rules_cnt_btm">
                                         <span>Terms & Conditions</span>
+                                        <p class="fb_animation mb-2 h-auto w-100"
+                                            *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                        <p class="fb_animation mb-2 h-auto w-100"
+                                            *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                        <p class="fb_animation mb-2 h-auto w-100"
+                                            *ngIf="!cancellationPolicy && !errorMessage"></p>
+                                        <p class="fb_animation mb-0 h-auto w-100"
+                                            *ngIf="!cancellationPolicy && !errorMessage"></p>
                                         <ul>
-                                            <li>It is a long established fact that a reader will be distracted by the
-                                                readable content layout.</li>
-                                            <li>It is a long established fact that a reader will be distracted by the
-                                                readable content layout.</li>
-                                            <li>It is a long established fact that a reader will be distracted by the
-                                                readable content layout.</li>
-                                            <li>It is a long established fact that a reader will be distracted by the
-                                                readable content layout.</li>
+                                            <li *ngIf="errorMessage">{{ errorMessage }}</li>
+                                            <li *ngIf="cancellationPolicy"
+                                                [innerHtml]="cancellationPolicy?.cancellation_policy">
+                                            </li>
+                                            <!-- <li>It is a long established fact that a reader will be distracted by the
+                                                    readable content layout.</li>
+                                                <li>It is a long established fact that a reader will be distracted by the
+                                                    readable content layout.</li>
+                                                <li>It is a long established fact that a reader will be distracted by the
+                                                    readable content layout.</li>
+                                                <li>It is a long established fact that a reader will be distracted by the
+                                                    readable content layout.</li> -->
                                         </ul>
                                     </div>
                                     <div class="triangle_left"></div>
@@ -847,7 +820,7 @@
         </div>
     </div>
 
-    <div class="search_block">
+    <!-- <div class="search_block">
         <div class="listing_block">
             <div class="row">
                 <div class="col-md-9">
@@ -1275,7 +1248,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 <!-- DATA OF ROUNFTRIP END -->

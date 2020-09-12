@@ -9,6 +9,7 @@ import { LayTripService } from '../../../state/layTrip/services/layTrip.service'
 import { Location } from '@angular/common';
 import { Actions, ofType } from '@ngrx/effects';
 import { FlightService } from '../../../services/flight.service';
+// import { data } from '../../flight/components/flight-item-wrapper/data';
 
 @Component({
   selector: 'app-flight-search',
@@ -48,22 +49,36 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     //   child_count: 0,
     //   infant_count: 0,
     // };
+    let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
-      const payload = {
-        source_location: params.departure,
-        destination_location: params.arrival,
-        departure_date: params.departure_date,
-        flight_class: params.class,
-        adult_count: parseInt(params.adult),
-        child_count: parseInt(params.child),
-        infant_count: parseInt(params.infant),
-      };
-      this.getFlightSearchData(payload);
+      if (params && params.trip === 'roundtrip') {
+        payload = {
+          source_location: params.departure,
+          destination_location: params.arrival,
+          departure_date: params.departure_date,
+          arrival_date: params.arrival_date,
+          flight_class: params.class,
+          adult_count: parseInt(params.adult),
+          child_count: parseInt(params.child),
+          infant_count: parseInt(params.infant),
+        };
+      } else {
+        payload = {
+          source_location: params.departure,
+          destination_location: params.arrival,
+          departure_date: params.departure_date,
+          flight_class: params.class,
+          adult_count: parseInt(params.adult),
+          child_count: parseInt(params.child),
+          infant_count: parseInt(params.infant),
+        };
+      }
+      this.getFlightSearchData(payload, params.trip);
     });
   }
 
-  getFlightSearchData(payload) {
+  getFlightSearchData(payload, tripType) {
     this.loading = true;
     // // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
     // this.layTripStoreService.dispatchGetFlightSearchResult(payload);
@@ -77,19 +92,52 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     //   }
     // }));
 
-    this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
-      if (res) {
-        this.loading = false;
-        this.isNotFound = false;
-        this.flightDetails = res.items;
-        this.filterFlightDetails = res;
-      }
-    }, err => {
-      if (err && err.status === 404) {
-        this.isNotFound = true;
-        this.loading = false;
-      }
-    });
+    if (payload && tripType === 'roundtrip') {
+      // this.flightDetails = data.items;
+      // this.filterFlightDetails = data;
+      // this.loading = false;
+      this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
+        if (res) {
+          this.loading = false;
+          this.isNotFound = false;
+          this.flightDetails = res.items;
+          this.filterFlightDetails = res;
+        }
+      }, err => {
+        if (err && err.status === 404) {
+          this.isNotFound = true;
+          this.loading = false;
+        }
+      });
+    } else {
+      this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
+        if (res) {
+          this.loading = false;
+          this.isNotFound = false;
+          this.flightDetails = res.items;
+          this.filterFlightDetails = res;
+        }
+      }, err => {
+        if (err && err.status === 404) {
+          this.isNotFound = true;
+          this.loading = false;
+        }
+      });
+    }
+
+    // this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
+    //   if (res) {
+    //     this.loading = false;
+    //     this.isNotFound = false;
+    //     this.flightDetails = res.items;
+    //     this.filterFlightDetails = res;
+    //   }
+    // }, err => {
+    //   if (err && err.status === 404) {
+    //     this.isNotFound = true;
+    //     this.loading = false;
+    //   }
+    // });
   }
 
   getSearchItem(event) {
