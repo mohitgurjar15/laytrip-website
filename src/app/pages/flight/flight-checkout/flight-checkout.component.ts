@@ -140,7 +140,6 @@ export class FlightCheckoutComponent implements OnInit {
 
         console.log("error",error)
         if(error.status==404){
-
           this.bookingStatus=2; // Failed 
         }
         this.bookingLoader=false;
