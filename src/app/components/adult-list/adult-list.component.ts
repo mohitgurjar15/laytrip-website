@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie';
 import { GenericService } from '../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 
@@ -13,6 +14,7 @@ declare var $: any;
 })
 export class AdultListComponent implements OnInit {
   @Output() adultsCount = new EventEmitter();
+  @Output() _itinerarySelectionArray = new EventEmitter();
   @Input() travelers: any = [];
   @Input() username: string;
   @Input() type: string;
@@ -41,15 +43,19 @@ export class AdultListComponent implements OnInit {
   countries: any = [];
   countries_code: any = [];
   containers = [];
-  adultsSelectedCount=0;
-  childsSelectedCount=0;
-  infantsSelectedCount=0;
+  _itinerarySelection:any = {
+    adult:[],
+    child:[],
+    infant:[]
+  };
 
   constructor(
     private cookieService: CookieService,
     private genericService: GenericService,
     public router: Router,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private toastr: ToastrService
+
 
   ) { }
 
@@ -66,7 +72,25 @@ export class AdultListComponent implements OnInit {
 
   selectTraveler(event, traveler) {
     
-    if (event.target.checked) {
+    if(event.target.checked){
+      if(traveler.user_type == 'adult'){
+        this._itinerarySelection.adult.push(traveler.userId);
+      } else if(traveler.user_type == 'child'){
+        this._itinerarySelection.child.push(traveler.userId);
+      } else {
+        this._itinerarySelection.infant.push(traveler.userId);
+      }
+    } else {
+      if(traveler.user_type == 'adult'){
+        this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
+      } else if(traveler.user_type == 'child'){
+        this._itinerarySelection.child = this._itinerarySelection.child.filter(obj => obj !== traveler.userId);
+      } else {
+        this._itinerarySelection.infant = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
+      }
+    }
+    this._itinerarySelectionArray.emit(this._itinerarySelection)
+   /*  if (event.target.checked) {
       this._selectedId.push(event.target.id);
       this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
       let totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
@@ -76,17 +100,14 @@ export class AdultListComponent implements OnInit {
         this.checkBoxDisable = false;
       } else {
         this.checkBoxDisable = true;        
-        /* this._selectedId.forEach(element => {
-          console.log(element)
-          $("#"+element).removeAttr("disabled");
-        }); */
+        
       }
     } else {
       this._selectedId = this._selectedId.filter(obj => obj !== event.target.id);
 
       this.checkBoxDisable = false
       this.counter--;
-    }
+    } */
     // console.log(this.counter ,this._selectedId)
 
     /* if (event.target.checked) {
@@ -116,7 +137,7 @@ export class AdultListComponent implements OnInit {
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
     } */
 
-    this.adultsCount.emit(this.counter);
+    // this.adultsCount.emit(this.counter);
   }
 
   getRandomNumber(i: number) {
