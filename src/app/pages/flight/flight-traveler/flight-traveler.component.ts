@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { TravelerService } from '../../../services/traveler.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -24,13 +24,15 @@ export class FlightTravelerComponent implements OnInit {
   public is_traveller : boolean = false;
   totalTraveler = 0;
   _itinerary :any;
-  _travellersCountInvalid :boolean = false;
+  _travellersCountValid :boolean = false;
 
   constructor(
     private travelerService:TravelerService,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router:Router
+
 
   ) { }
 
@@ -68,20 +70,23 @@ export class FlightTravelerComponent implements OnInit {
     this.selectedAdults = count;
   }
   getItinerarySelectionArray(itinerarys){  
-    
+    this._travellersCountValid = false;
     if(itinerarys.adult.length === Number(this._itinerary.adult)
-      && itinerarys.child.length === Number(this._itinerary.child) 
-      && itinerarys.infant.length === Number(this._itinerary.infant)
+    && itinerarys.child.length === Number(this._itinerary.child) 
+    && itinerarys.infant.length === Number(this._itinerary.infant)
     ){
-      this._travellersCountInvalid = true;
+      this._travellersCountValid = true;
     }
   }
 
   checkTravelesValid() {
-    if(this._travellersCountInvalid ){
-      // let errorMessage = "You have to select adult : "+ Number(this._itinerary.adult)
-      // +" Child: "+Number(this._itinerary.child)+" Infant: "+Number(this._itinerary.infant);
-      this.toastr.error("You have selected wrong criteria", 'Error');
+    console.log('_travellersCountValid',this._travellersCountValid)
+    if(this._travellersCountValid ){
+      this.router.navigate(['/flight/checkout',this.routeCode]);
+    } else {
+      let errorMessage = "You have to select "+ Number(this._itinerary.adult)+" Adult, "
+      + Number(this._itinerary.child)+" Child "+Number(this._itinerary.infant)+" Infant";
+      this.toastr.error(errorMessage, 'Invalid Criteria');
     }
   }
   checkUser(){

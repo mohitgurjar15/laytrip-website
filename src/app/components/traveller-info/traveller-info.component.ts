@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -11,21 +12,29 @@ export class TravellerInfoComponent implements OnInit {
   @Output() changeValue = new EventEmitter<any>();
   @Input() label;
 
-  adultValue = 1;
-  childValue = 0;
-  infantValue = 0;
-  totalPerson = 1;
+  adultValue: number = 1;
+  childValue: number = 0;
+  infantValue: number = 0;
+  totalPerson: number = 1;
   class = 'Economy';
 
   travellerInfo = {
     adult: 0,
-    child: null,
-    infant: null,
+    child: 0,
+    infant: 0,
     class: 'Economy',
-    totalPerson: null
+    totalPerson: 0,
   };
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
+    this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
+    this.infantValue = parseInt(this.route.snapshot.queryParams['infant']) ? parseInt(this.route.snapshot.queryParams['infant']) : 0;
+    this.totalPerson = this.adultValue + this.childValue + this.infantValue;
+    this.class = this.route.snapshot.queryParams['class'] ? this.route.snapshot.queryParams['class'] : 'Economy';
+  }
 
   ngOnInit() {
     this.loadJquery();

@@ -10,7 +10,7 @@ export class PagesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // document.getElementById('page_loader').style.display = 'none';
+    document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
   }
 
 }

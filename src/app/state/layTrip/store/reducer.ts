@@ -1,5 +1,5 @@
 import { initialState, LayTrip } from './state';
-import { Actions, ActionTypes } from './actions';
+import { Actions, ActionTypes, FailureAction } from './actions';
 
 export function reducer(state = initialState, action: Actions): LayTrip {
     switch (action.type) {

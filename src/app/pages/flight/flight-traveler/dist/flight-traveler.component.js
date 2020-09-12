@@ -10,11 +10,12 @@ exports.FlightTravelerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var FlightTravelerComponent = /** @class */ (function () {
-    function FlightTravelerComponent(travelerService, route, cookieService, toastr) {
+    function FlightTravelerComponent(travelerService, route, cookieService, toastr, router) {
         this.travelerService = travelerService;
         this.route = route;
         this.cookieService = cookieService;
         this.toastr = toastr;
+        this.router = router;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this._adults = [];
@@ -27,7 +28,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.isLoggedIn = false;
         this.is_traveller = false;
         this.totalTraveler = 0;
-        this._travellersCountInvalid = false;
+        this._travellersCountValid = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         this.getTravelers();
@@ -60,17 +61,22 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.selectedAdults = count;
     };
     FlightTravelerComponent.prototype.getItinerarySelectionArray = function (itinerarys) {
+        this._travellersCountValid = false;
         if (itinerarys.adult.length === Number(this._itinerary.adult)
             && itinerarys.child.length === Number(this._itinerary.child)
             && itinerarys.infant.length === Number(this._itinerary.infant)) {
-            this._travellersCountInvalid = true;
+            this._travellersCountValid = true;
         }
     };
     FlightTravelerComponent.prototype.checkTravelesValid = function () {
-        if (this._travellersCountInvalid) {
-            // let errorMessage = "You have to select adult : "+ Number(this._itinerary.adult)
-            // +" Child: "+Number(this._itinerary.child)+" Infant: "+Number(this._itinerary.infant);
-            this.toastr.error("You have selected wrong criteria", 'Error');
+        console.log('_travellersCountValid', this._travellersCountValid);
+        if (this._travellersCountValid) {
+            this.router.navigate(['/flight/checkout', this.routeCode]);
+        }
+        else {
+            var errorMessage = "You have to select " + Number(this._itinerary.adult) + " Adult, "
+                + Number(this._itinerary.child) + " Child " + Number(this._itinerary.infant) + " Infant";
+            this.toastr.error(errorMessage, 'Invalid Criteria');
         }
     };
     FlightTravelerComponent.prototype.checkUser = function () {

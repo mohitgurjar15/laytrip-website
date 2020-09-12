@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
@@ -14,6 +14,8 @@ import { CookieService } from 'ngx-cookie';
 })
 export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
+  @Input() flightDetails;
+
   animationState = 'out';
   flightList;
   s3BucketUrl = environment.s3BucketUrl;
@@ -25,7 +27,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   flightDetailIdArray = [];
 
   hideDiv = true;
-  showFlightDetails = -1;
+  showFlightDetails = [];
   showDiv = false;
   routeCode = [];
   baggageDetails;
@@ -33,13 +35,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   errorMessage;
   loadBaggageDetails = true;
 
+  isRoundTrip = false;
+
   subcell = '$100';
 
   constructor(
     private layTripStoreService: LayTripStoreService,
     private flightService: FlightService,
-    private router:Router,
-    private route:ActivatedRoute,
+    private router: Router,
+    private route: ActivatedRoute,
     private cookieService: CookieService
   ) { }
 
@@ -49,14 +53,23 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.currency = JSON.parse(_currency);
     this.loadJquery();
 
-    this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-      if (res) {
-        if (res.items) {
-          // FOR FLIGHT LIST & DETAILS
-          this.flightList = res.items;
-        }
-      }
-    }));
+    // console.log(this.flightDetails);
+    this.flightList = this.flightDetails;
+
+    if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
+      this.isRoundTrip = true;
+    } else if (this.route.snapshot.queryParams['trip'] === 'oneway') {
+      this.isRoundTrip = false;
+    }
+
+    // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
+    //   if (res) {
+    //     if (res.items) {
+    //       // FOR FLIGHT LIST & DETAILS
+    //       this.flightList = res.items;
+    //     }
+    //   }
+    // }));
 
     // setTimeout(() => {
     //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
@@ -85,7 +98,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   getCancellationPolicy(routeCode) {
-    this.cancellationPolicy = "";
+    this.cancellationPolicy = '';
     this.flightService.getCancellationPolicy(routeCode).subscribe(data => {
       console.log('cancellation-policy:::', data);
       this.errorMessage = '';
@@ -107,26 +120,35 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   showDetails(index) {
-    this.showFlightDetails = index;
 
+    if (typeof this.showFlightDetails[index] === 'undefined') {
+      this.showFlightDetails[index] = true;
+    } else {
+      this.showFlightDetails[index] = !this.showFlightDetails[index];
+    }
+
+    this.showFlightDetails = this.showFlightDetails.map((item, i) => {
+      return ((index === i) && this.showFlightDetails[index] === true) ? true : false;
+    });
   }
 
-  clickOutside() {
-    // console.log('outside clicked');
-    this.showFlightDetails = -1;
+  closeFlightDetail() {
+    this.showFlightDetails = this.showFlightDetails.map(item => {
+      return false;
+    });
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  bookNow(routeCode){
-    let itinerary ={
-      adult   : this.route.snapshot.queryParams["adult"],
-      child   : this.route.snapshot.queryParams["child"],
-      infant  : this.route.snapshot.queryParams["infant"]
-    }
-    this.cookieService.put('_itinerary',JSON.stringify(itinerary));
-    this.router.navigate([`flight/traveler/${routeCode}`])
+  bookNow(routeCode) {
+    const itinerary = {
+      adult: this.route.snapshot.queryParams["adult"],
+      child: this.route.snapshot.queryParams["child"],
+      infant: this.route.snapshot.queryParams["infant"]
+    };
+    this.cookieService.put('_itinerary', JSON.stringify(itinerary));
+    this.router.navigate([`flight/traveler/${routeCode}`]);
   }
 }

@@ -19,10 +19,11 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
+import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enquiry-info.component';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent, BookingEnquiryInfoComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +48,8 @@ import { CookieModule } from 'ngx-cookie';
     PaymentModeComponent,
     CardListComponent,
     AddCardComponent,
-    FullPageOverlayLoaderComponent
+    FullPageOverlayLoaderComponent,
+    BookingEnquiryInfoComponent
   ],
   providers: [DatePipe],
 
