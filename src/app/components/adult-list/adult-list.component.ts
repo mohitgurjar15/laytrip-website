@@ -116,54 +116,6 @@ export class AdultListComponent implements OnInit {
     // console.log(this.counter)
 
 
-   /*  if (event.target.checked) {
-      this._selectedId.push(event.target.id);
-      this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-      let totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
-      
-      if (this.counter + 1 < totalTraveler) {
-        this.counter++;
-        this.checkBoxDisable = false;
-      } else {
-        this.checkBoxDisable = true;        
-        
-      }
-    } else {
-      this._selectedId = this._selectedId.filter(obj => obj !== event.target.id);
-
-      this.checkBoxDisable = false
-      this.counter--;
-    } */
-    // console.log(this.counter ,this._selectedId)
-
-    /* if (event.target.checked) {
-      traveler.checked = true;
-      let travelerData = {
-        "userId": traveler.userId,
-        "firstName": traveler.firstName,
-        "lastName": traveler.lastName,
-        "email": traveler.email
-      };
-      this._travelers.push(travelerData);
-      this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      // let checkCounter = this.counter + 1;
-      
-      if (this.counter + 1 < this.totalTravelerCount) {
-        this.counter++;
-        this.checkBoxDisable = false;
-      } else {
-        this.checkBoxDisable = false;
-      }
-    } else {
-      traveler.checked = false;
-      this.counter--;
-      this.checkBoxDisable = false;
-      this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
-      this.cookieService.remove('_travelers');
-      this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-    } */
-
-    // this.adultsCount.emit(this.counter);
   }
 
   getRandomNumber(i: number) {
