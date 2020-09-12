@@ -37,7 +37,8 @@
               "src/comman-modal.scss",
               "src/laytrip.scss",
               "src/assets/css/daterangepicker.min.css",
-              "src/assets/css/datepicker.css"
+              "src/assets/css/datepicker.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -142,7 +143,8 @@
               "src/account.scss",
               "src/comman-modal.scss",
               "src/laytrip.scss",
-              "src/assets/css/daterangepicker.min.css"
+              "src/assets/css/daterangepicker.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "assets": [

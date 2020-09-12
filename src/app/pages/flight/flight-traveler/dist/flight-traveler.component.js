@@ -10,10 +10,11 @@ exports.FlightTravelerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var FlightTravelerComponent = /** @class */ (function () {
-    function FlightTravelerComponent(travelerService, route, cookieService) {
+    function FlightTravelerComponent(travelerService, route, cookieService, toastr) {
         this.travelerService = travelerService;
         this.route = route;
         this.cookieService = cookieService;
+        this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this._adults = [];
@@ -26,6 +27,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.isLoggedIn = false;
         this.is_traveller = false;
         this.totalTraveler = 0;
+        this._travellersCountInvalid = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         this.getTravelers();
@@ -56,6 +58,20 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.getAdultCount = function (count) {
         this.selectedAdults = count;
+    };
+    FlightTravelerComponent.prototype.getItinerarySelectionArray = function (itinerarys) {
+        if (itinerarys.adult.length === Number(this._itinerary.adult)
+            && itinerarys.child.length === Number(this._itinerary.child)
+            && itinerarys.infant.length === Number(this._itinerary.infant)) {
+            this._travellersCountInvalid = true;
+        }
+    };
+    FlightTravelerComponent.prototype.checkTravelesValid = function () {
+        if (this._travellersCountInvalid) {
+            // let errorMessage = "You have to select adult : "+ Number(this._itinerary.adult)
+            // +" Child: "+Number(this._itinerary.child)+" Infant: "+Number(this._itinerary.infant);
+            this.toastr.error("You have selected wrong criteria", 'Error');
+        }
     };
     FlightTravelerComponent.prototype.checkUser = function () {
         var userToken = localStorage.getItem('_lay_sess');

@@ -49,7 +49,8 @@ import { CookieModule } from 'ngx-cookie';
     ReactiveFormsModule,
     NgSelectModule,
     NgxDaterangepickerMd.forRoot(),
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    
   ]
 })
 export class FlightModule { }

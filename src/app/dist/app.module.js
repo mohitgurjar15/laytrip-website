@@ -20,6 +20,7 @@ var elements_module_1 = require("./elements/elements.module");
 var components_module_1 = require("./components/components.module");
 var animations_1 = require("@angular/platform-browser/animations");
 var state_module_1 = require("./state/state.module");
+var ngx_toastr_1 = require("ngx-toastr");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -45,7 +46,8 @@ var AppModule = /** @class */ (function () {
                     }
                 }),
                 animations_1.BrowserAnimationsModule,
-                state_module_1.StateModule
+                state_module_1.StateModule,
+                ngx_toastr_1.ToastrModule.forRoot()
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]

@@ -3,6 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { TravelerService } from '../../../services/traveler.service';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-flight-traveler',
   templateUrl: './flight-traveler.component.html',
@@ -23,18 +24,23 @@ export class FlightTravelerComponent implements OnInit {
   public is_traveller : boolean = false;
   totalTraveler = 0;
   _itinerary :any;
+  _travellersCountInvalid :boolean = false;
 
   constructor(
     private travelerService:TravelerService,
     private route: ActivatedRoute,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private toastr: ToastrService
+
   ) { }
 
   ngOnInit() {
+
     this.getTravelers();
     this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
     this.totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
     this.routeCode = this.route.snapshot.paramMap.get('rc')
+
   }
   
   
@@ -61,7 +67,23 @@ export class FlightTravelerComponent implements OnInit {
   getAdultCount(count: number){  
     this.selectedAdults = count;
   }
+  getItinerarySelectionArray(itinerarys){  
+    
+    if(itinerarys.adult.length === Number(this._itinerary.adult)
+      && itinerarys.child.length === Number(this._itinerary.child) 
+      && itinerarys.infant.length === Number(this._itinerary.infant)
+    ){
+      this._travellersCountInvalid = true;
+    }
+  }
 
+  checkTravelesValid() {
+    if(this._travellersCountInvalid ){
+      // let errorMessage = "You have to select adult : "+ Number(this._itinerary.adult)
+      // +" Child: "+Number(this._itinerary.child)+" Infant: "+Number(this._itinerary.infant);
+      this.toastr.error("You have selected wrong criteria", 'Error');
+    }
+  }
   checkUser(){
     let userToken = localStorage.getItem('_lay_sess');
     
