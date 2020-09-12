@@ -78,8 +78,36 @@
     cursor: not-allowed;
 }
 
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area {
-    padding: 5px 0 !important;
+.modify_search {
+    .flight_tab {
+        .tab-content {
+            .flight_search {
+                .flight-grid {
+                    .grid_box{
+                        &.first{
+                            .search_area{
+
+                                padding: 5px 0 !important;
+                            }
+                        }
+                        &.secound{
+                            .date_to{
+
+                                height: 100%;
+                                overflow: hidden;
+                            }
+                            .search_area{
+                                height: 100%;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+    }
+    
 }
 
 
@@ -94,3 +122,4 @@
         cursor: pointer;
     }
 }
+

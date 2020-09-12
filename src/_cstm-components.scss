@@ -50,9 +50,13 @@
             .ng-value-container {
                 padding-left: 0px !important;
                 .ng-input {
+                    padding: 0 15px;
                     input {
                         padding-left: 0px !important;
                     }
+                }
+                .ng-value{
+                    padding: 0 15px;
                 }
             }
             .ng-clear-wrapper {

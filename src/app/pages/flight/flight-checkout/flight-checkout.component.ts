@@ -23,7 +23,7 @@ export class FlightCheckoutComponent implements OnInit {
     showAddCardForm:boolean=false;
     progressStep={ step1:true, step2:true, step3:false };
     cardToken:string;
-    instalmentMode:'no-instalment';
+    instalmentMode='no-instalment';
     laycreditpoints:number;
     additionalAmount:number;
     routeCode:string;
@@ -37,9 +37,12 @@ export class FlightCheckoutComponent implements OnInit {
     bookingResult:any={};
     sellingPrice:number;
     flightSummary:[]=[];
+    instalmentType:string;
+    customAmount:number | null;
+    customInstalment:number | null;
+
 
     ngOnInit() {
-
       this.userInfo = getLoginUserInfo();
       if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
@@ -117,11 +120,15 @@ export class FlightCheckoutComponent implements OnInit {
     bookFlight(){
       this.bookingLoader=true;
       let bookingData={
-        payment_type      : this.instalmentMode,
-        laycredit_points  : this.laycreditpoints,
-        instalment_type   : 'weekly',
-        route_code        : this.routeCode,
-        travelers         : this.travelers
+        payment_type            : this.instalmentMode,
+        laycredit_points        : this.laycreditpoints,
+        instalment_type         : this.instalmentType,
+        route_code              : this.routeCode,
+        travelers               : this.travelers,
+        additional_amount       : this.additionalAmount,
+        card_token              : this.cardToken,
+        custom_instalment_amount: this.customAmount,
+        custom_instalment_no    : this.customInstalment
       }
 
       this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
@@ -130,7 +137,12 @@ export class FlightCheckoutComponent implements OnInit {
         this.progressStep = { step1:true, step2:true, step3:true }
         this.bookingResult=res;
       },(error)=>{
-        this.bookingStatus=2; // Failed 
+
+        console.log("error",error)
+        if(error.status==404){
+
+          this.bookingStatus=2; // Failed 
+        }
         this.bookingLoader=false;
       });
     }
@@ -159,5 +171,15 @@ export class FlightCheckoutComponent implements OnInit {
     getFlightSummaryData(data){
 
       this.flightSummary=data;
+    }
+
+    getInstalmentData(data){
+
+      this.additionalAmount = data.additionalAmount;
+      this.instalmentType = data.instalmentType;
+      this.customAmount = data.customAmount;
+      this.customInstalment = data.customInstalment;
+      console.log(data)
+
     }
 }

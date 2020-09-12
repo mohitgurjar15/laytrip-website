@@ -22,6 +22,7 @@ import { BookingSummaryLoaderComponent } from './components/booking-summary-load
 import { FlightConfirmationComponent } from './components/flight-confirmation/flight-confirmation.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
+import { FlightBookingFailedComponent } from './components/flight-booking-failed/flight-booking-failed.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CookieModule } from 'ngx-cookie';
     ClickOutSideDirective,
     FlightCheckoutComponent,
     BookingSummaryLoaderComponent,
-    FlightConfirmationComponent
+    FlightConfirmationComponent,
+    FlightBookingFailedComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { CookieModule } from 'ngx-cookie';
     ReactiveFormsModule,
     NgSelectModule,
     NgxDaterangepickerMd.forRoot(),
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    
   ]
 })
 export class FlightModule { }
