@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject,DoCheck } from '@angular/core';
+import { Component, OnInit, Inject,DoCheck, OnChanges } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
@@ -68,13 +68,13 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
 
     ngOnInit(): void {
       this.getLangunages();
-      this.getCurrencies();      
-    }
-   
-    ngDoCheck() {
+      this.getCurrencies();  
       this.checkUser();
     }
-    ngOnDestroy() {}
+   
+    ngDoCheck() {      
+      this.checkUser();
+    }
 
     /**
      * change user lanunage

@@ -48,6 +48,12 @@
                   </ul>
               </div>
           </li>
+          <li>
+            <a  [routerLink]="['/']" (click)="onLoggedout()">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_booing.svg" alt="Bookings Icon">
+                Logout
+            </a>
+          </li>
       </ul>
   </div>
 </div>
