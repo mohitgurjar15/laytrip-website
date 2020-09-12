@@ -139,6 +139,8 @@ export class FlightSearchBarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
+    this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
     // const selectedItem = localStorage.getItem('_fligh');
     // if (selectedItem) {
     //   const info = JSON.parse(selectedItem);
@@ -243,14 +245,15 @@ export class FlightSearchBarComponent implements OnInit {
     this.selectedAirport = event;
     this.defaultSelected = '';
     if (event && event.code && item.key === 'fromSearch') {
-      this.fromDestinationCode = event.code;
+      this.searchFlightInfo.departure = event.code;
       this.searchedValue.push({ key: 'fromSearch', value: event });
     } else if (event && event.code && item.key === 'toSearch') {
-      this.toDestinationCode = event.code;
+      this.searchFlightInfo.arrival = event.code;
       this.searchedValue.push({ key: 'toSearch', value: event });
     }
-    this.searchFlightInfo.departure = this.fromDestinationCode;
-    this.searchFlightInfo.arrival = this.toDestinationCode;
+    // this.searchFlightInfo.departure = this.fromDestinationCode;
+    // this.searchFlightInfo.arrival = this.toDestinationCode;
+    console.log(this.searchFlightInfo.departure, this.searchFlightInfo.arrival);
   }
 
   getSwappedValue(event) {
@@ -273,8 +276,12 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
-    if (this.searchFlightInfo && this.totalPerson &&
-      this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.trip === 'oneway') {
+
+    console.log(this.totalPerson, this.searchFlightInfo.departure_date, this.searchFlightInfo.departure, this.searchFlightInfo.trip);
+
+    if (this.totalPerson &&
+      this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
+      && this.searchFlightInfo.trip === 'oneway') {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.searchBarInfo.emit(this.searchFlightInfo);
     }
@@ -294,6 +301,7 @@ export class FlightSearchBarComponent implements OnInit {
 
   departureDateUpdate(date) {
     this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate);
+    this.searchFlightInfo.departure_date = moment(this.flightSearchForm.value.departureDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
   }
 
 }
