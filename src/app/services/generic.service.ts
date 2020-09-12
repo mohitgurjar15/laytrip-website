@@ -45,7 +45,7 @@ export class GenericService {
   }
 
   saveCard(cardData) {
-    return this.http.post(`${environment.apiUrl}v1/payment`, cardData, this.commonFunction.setHeaders())
+    return this.http.post(`${environment.apiUrl}v1/payment/add-card`, cardData, this.commonFunction.setHeaders())
       .pipe(
         retry(1),
         catchError(this.handleError)
