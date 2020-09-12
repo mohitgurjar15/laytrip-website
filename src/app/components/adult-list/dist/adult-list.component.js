@@ -18,7 +18,7 @@ var AdultListComponent = /** @class */ (function () {
         this.adultsCount = new core_1.EventEmitter();
         this._itinerarySelectionArray = new core_1.EventEmitter();
         this.travelers = [];
-        this.counter = 0;
+        this.counter = 1;
         this.totalTravelerCount = 0;
         this._travelers = [];
         this._selectedId = [];
@@ -52,6 +52,24 @@ var AdultListComponent = /** @class */ (function () {
     };
     AdultListComponent.prototype.selectTraveler = function (event, traveler) {
         if (event.target.checked) {
+            this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+            var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+            var travelerData = {
+                "userId": traveler.userId,
+                "firstName": traveler.firstName,
+                "lastName": traveler.lastName,
+                "email": traveler.email
+            };
+            this._travelers.push(travelerData);
+            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+            console.log(this.counter, totalTraveler);
+            if (this.counter < totalTraveler) {
+                // this.checkBoxDisable = false;
+                this.counter++;
+            }
+            else {
+                // this.checkBoxDisable = true;                
+            }
             if (traveler.user_type == 'adult') {
                 this._itinerarySelection.adult.push(traveler.userId);
             }
@@ -63,6 +81,11 @@ var AdultListComponent = /** @class */ (function () {
             }
         }
         else {
+            this.counter--;
+            // this.checkBoxDisable = false;
+            this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
+            this.cookieService.remove('_travelers');
+            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
             if (traveler.user_type == 'adult') {
                 this._itinerarySelection.adult = this._itinerarySelection.adult.filter(function (obj) { return obj !== traveler.userId; });
             }
@@ -73,7 +96,9 @@ var AdultListComponent = /** @class */ (function () {
                 this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
             }
         }
+        this.adultsCount.emit(this.counter);
         this._itinerarySelectionArray.emit(this._itinerarySelection);
+        console.log(this.counter);
         /*  if (event.target.checked) {
            this._selectedId.push(event.target.id);
            this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
@@ -169,7 +194,6 @@ var AdultListComponent = /** @class */ (function () {
     };
     AdultListComponent.prototype.adultCollapseClick = function () {
         this.adultCollapse = !this.adultCollapse;
-        console.log(this.adultCollapse);
     };
     AdultListComponent.prototype.getCountry = function () {
         var _this = this;

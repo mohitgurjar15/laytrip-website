@@ -31,6 +31,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this._travellersCountValid = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
+        this.loading = true;
         this.getTravelers();
         this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
         this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
@@ -55,7 +56,9 @@ var FlightTravelerComponent = /** @class */ (function () {
                 });
             });
         }
-        this.loading = false;
+        setTimeout(function () {
+            _this.loading = false;
+        }, 1000);
     };
     FlightTravelerComponent.prototype.getAdultCount = function (count) {
         this.selectedAdults = count;
@@ -69,7 +72,6 @@ var FlightTravelerComponent = /** @class */ (function () {
         }
     };
     FlightTravelerComponent.prototype.checkTravelesValid = function () {
-        console.log('_travellersCountValid', this._travellersCountValid);
         if (this._travellersCountValid) {
             this.router.navigate(['/flight/checkout', this.routeCode]);
         }

@@ -4,6 +4,7 @@ import { TravelerService } from '../../../services/traveler.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-flight-traveler',
   templateUrl: './flight-traveler.component.html',
@@ -38,16 +39,17 @@ export class FlightTravelerComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loading = true;
     this.getTravelers();
     this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
     this.totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
     this.routeCode = this.route.snapshot.paramMap.get('rc')
-
   }
   
   
   getTravelers(){
     let userToken = localStorage.getItem('_lay_sess');
+    
     if(userToken){
       
       this.travelerService.getTravelers().subscribe((res:any)=>{
@@ -63,7 +65,10 @@ export class FlightTravelerComponent implements OnInit {
         });
       })
     }
-    this.loading = false;
+    
+    setTimeout(() => {
+      this.loading = false;      
+    }, 1000);
   }
 
   getAdultCount(count: number){  
@@ -80,7 +85,6 @@ export class FlightTravelerComponent implements OnInit {
   }
 
   checkTravelesValid() {
-    console.log('_travellersCountValid',this._travellersCountValid)
     if(this._travellersCountValid ){
       this.router.navigate(['/flight/checkout',this.routeCode]);
     } else {
@@ -89,9 +93,9 @@ export class FlightTravelerComponent implements OnInit {
       this.toastr.error(errorMessage, 'Invalid Criteria');
     }
   }
+
   checkUser(){
-    let userToken = localStorage.getItem('_lay_sess');
-    
+    let userToken = localStorage.getItem('_lay_sess');    
     if( userToken) {
       this.isLoggedIn = true;
       this.is_traveller = false;
