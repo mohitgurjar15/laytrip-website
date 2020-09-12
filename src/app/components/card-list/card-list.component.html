@@ -70,7 +70,7 @@
       <li *ngFor="let card of cards">
           <div class="card_check">
               <label class="custom_checkbox">
-                  <input type="checkbox" value="" name="card_token" (click)="selectCard(card.cardToken)">
+                  <input type="radio" value="{{card.cardToken}}" name="card_token" (click)="selectCard(card.cardToken)">
                   <span class="checkmark"></span>
               </label>
           </div>
@@ -86,37 +86,6 @@
               </div> -->
           </div>
       </li>
-      <!-- <li>
-          <div class="card_check">
-              <label class="custom_checkbox">
-                  <input type="checkbox" value="">
-                  <span class="checkmark"></span>
-              </label>
-          </div>
-          <div class="card_detail">
-              <div class="card_type">
-                  <img src="{{s3BucketUrl}}assets/images/visa.svg" alt="Visa Card">
-              </div>
-              <h6>Kotak Mahindra Bank Debit Card ****0000</h6>
-              <span>Ketty simonial</span>
-              <span>Enpires 07/2025</span>
-          </div>
-      </li>
-      <li>
-          <div class="card_check">
-              <label class="custom_checkbox">
-                  <input type="checkbox" value="">
-                  <span class="checkmark"></span>
-              </label>
-          </div>
-          <div class="card_detail">
-              <div class="card_type">
-                  <img src="{{s3BucketUrl}}assets/images/visa.svg" alt="Visa Card">
-              </div>
-              <h6>Kotak Mahindra Bank Debit Card ****0000</h6>
-              <span>Ketty simonial</span>
-              <span>Enpires 07/2025</span>
-          </div>
-      </li> -->
+      
   </ul>
 </div>

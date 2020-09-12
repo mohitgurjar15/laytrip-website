@@ -50,6 +50,7 @@
     "ngx-cookie": "^5.0.0",
     "ngx-countdown": "^3.1.0",
     "ngx-daterangepicker-material": "2.1.10",
+    "ngx-toastr": "^10.1.0",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.6.2",
     "tslib": "^1.9.0",

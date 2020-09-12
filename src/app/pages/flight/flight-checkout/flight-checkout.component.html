@@ -9,15 +9,17 @@
                       <div class="block_pay_info">
                           <div class="block_travellers">
                               <h6>Travellers</h6>
-                              <div class="traveller_detail">
-                                  <span>Ketty Simonial</span>
+                              <div class="traveller_detail" *ngFor="let traveler of travelerList">
+                                  <span>{{traveler.firstName}} {{traveler.firstName}}</span>
                                   <a href="javascript:void(0);">Send E-ticket</a>
                               </div>
                           </div>
                         </div>
+                        <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
+                            <app-payment-mode *ngIf="flightSummary.length" [flightSummary]="flightSummary" (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)" (getInstalmentData)="getInstalmentData($event)" ></app-payment-mode>
+                        </div>
                         <div class="block_pay_info">
-
-                            <app-payment-mode (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)"></app-payment-mode>
+                            <app-booking-enquiry-info></app-booking-enquiry-info>
                         </div>
                           <!-- <app-redeem-laycredit></app-redeem-laycredit> -->
                         <div class="block_pay_info">
@@ -51,14 +53,15 @@
                   </div>
                   <div class="btn_payment">
                       <!-- <a href="javascript:void(0)" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a> -->
-                      <button [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+                      <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                       
                   </div>
               </div>
               <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
+              <app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
           </div>
           <div class="col-lg-4">
-            <!-- <app-flight-summary></app-flight-summary> -->
+            <app-flight-summary (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
           </div>
       </div>
   </div>

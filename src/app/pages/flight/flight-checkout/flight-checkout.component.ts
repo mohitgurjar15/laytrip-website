@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CookieService } from 'ngx-cookie';
@@ -15,6 +15,7 @@ export class FlightCheckoutComponent implements OnInit {
 
     constructor(
       private route: ActivatedRoute,
+      private router:Router,
       private flightService:FlightService,
       private cookieService: CookieService
     ) { }
@@ -22,11 +23,12 @@ export class FlightCheckoutComponent implements OnInit {
     showAddCardForm:boolean=false;
     progressStep={ step1:true, step2:true, step3:false };
     cardToken:string;
-    instalmentMode:'noinstalment';
+    instalmentMode='no-instalment';
     laycreditpoints:number;
     additionalAmount:number;
     routeCode:string;
     travelers=[];
+    travelerList;
     isDisableBookBtn:boolean=true;
     isTandCaccepeted:boolean=false;
     bookingStatus:number=0;
@@ -35,12 +37,18 @@ export class FlightCheckoutComponent implements OnInit {
     bookingLoader:boolean=false;
     bookingResult:any={};
     sellingPrice:number;
+    flightSummary:[]=[];
+    instalmentType:string;
+    customAmount:number | null;
+    customInstalment:number | null;
+
 
     ngOnInit() {
-
       this.userInfo = getLoginUserInfo();
-      console.log("this.userInfo",this.userInfo)
-
+      if(typeof this.userInfo.roleId=='undefined'){
+        this.router.navigate(['/'])
+      }
+      console.log("this",this.userInfo)
       this.routeCode = this.route.snapshot.paramMap.get('rc')
 
       let timerInfo:any = this.cookieService.get('flight_booking_timer')
@@ -68,16 +76,26 @@ export class FlightCheckoutComponent implements OnInit {
       if(this.userInfo.roleId==7){
         this.showAddCardForm=true;
       }
-      let travelersIds = this.cookieService.get('userIds');
-      travelersIds = JSON.parse(travelersIds)
-      if(travelersIds.length){
-        for(let i=0; i < travelersIds.length; i++){
-          this.travelers.push({
-            "traveler_id" : travelersIds[i]
-          })
+      let travelersIds = this.cookieService.get('_travelers');
+      try{
+        travelersIds = JSON.parse(travelersIds);
+
+        this.travelerList=travelersIds;
+
+        if(travelersIds.length){
+          for(let i=0; i < travelersIds.length; i++){
+            this.travelers.push({
+              "traveler_id" : travelersIds[i]['userId']
+            })
+            
+          }
         }
+        console.log(this.travelers)
       }
-      console.log(this.travelers)
+      catch(e){
+
+      }
+      
     }
 
     toggleAddcardForm(){
@@ -106,11 +124,15 @@ export class FlightCheckoutComponent implements OnInit {
     bookFlight(){
       this.bookingLoader=true;
       let bookingData={
-        payment_type      : this.instalmentMode,
-        laycredit_points  : this.laycreditpoints,
-        instalment_type   : 'weekly',
-        route_code        : this.routeCode,
-        travelers         : this.travelers
+        payment_type            : this.instalmentMode,
+        laycredit_points        : this.laycreditpoints,
+        instalment_type         : this.instalmentType,
+        route_code              : this.routeCode,
+        travelers               : this.travelers,
+        additional_amount       : this.additionalAmount,
+        card_token              : this.cardToken,
+        custom_instalment_amount: this.customAmount,
+        custom_instalment_no    : this.customInstalment
       }
 
       this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
@@ -119,7 +141,11 @@ export class FlightCheckoutComponent implements OnInit {
         this.progressStep = { step1:true, step2:true, step3:true }
         this.bookingResult=res;
       },(error)=>{
-        this.bookingStatus=2; // Failed 
+
+        console.log("error",error)
+        if(error.status==404){
+          this.bookingStatus=2; // Failed 
+        }
         this.bookingLoader=false;
       });
     }
@@ -143,5 +169,20 @@ export class FlightCheckoutComponent implements OnInit {
         this.isDisableBookBtn=true;
       }
       console.log("this.isDisableBookBtn",this.isDisableBookBtn)
+    }
+
+    getFlightSummaryData(data){
+
+      this.flightSummary=data;
+    }
+
+    getInstalmentData(data){
+
+      this.additionalAmount = data.additionalAmount;
+      this.instalmentType = data.instalmentType;
+      this.customAmount = data.customAmount;
+      this.customInstalment = data.customInstalment;
+      console.log(data)
+
     }
 }

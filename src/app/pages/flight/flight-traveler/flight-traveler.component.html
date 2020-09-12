@@ -21,7 +21,8 @@
                             <span>({{selectedAdults}}/{{totalTraveler}} selected)</span>
                         </div>
                         <div class="passanger_detail_main">
-                            <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler" [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
+                            <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler"  [_adults]="_adults" [_childs]="_childs" [_infants]="_infants" [travelers]="travelers" (adultsCount)="getAdultCount($event)"
+                            (_itinerarySelectionArray)="getItinerarySelectionArray($event)"></app-adult-list>
                             <!-- <app-adult-list  type="child" age="2-12" totalTravelerCount="2"  [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
                             <app-adult-list  type="infant" age="0-2" totalTravelerCount="2"  [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
                            -->
@@ -40,7 +41,7 @@
                     </div>
                     
                     <div class="btn_payment">
-                        <a class="btn btn_laytrip" [routerLink]="['/flight/checkout', routeCode ]">
+                        <a class="btn btn_laytrip" (click)="checkTravelesValid()" >
                             Continue to payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow">
                           </a>
                     </div>

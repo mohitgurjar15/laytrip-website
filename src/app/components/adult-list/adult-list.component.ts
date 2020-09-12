@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie';
 import { GenericService } from '../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 
@@ -13,12 +14,16 @@ declare var $: any;
 })
 export class AdultListComponent implements OnInit {
   @Output() adultsCount = new EventEmitter();
+  @Output() _itinerarySelectionArray = new EventEmitter();
   @Input() travelers: any = [];
   @Input() username: string;
   @Input() type: string;
   @Input() age: string;
+  @Input() _adults: [];
+  @Input() _childs: [];
+  @Input() _infants: [];
 
-  counter = 0;
+  counter = 1;
   totalTravelerCount = 0;
   _travelers = [];
   _selectedId = [];
@@ -29,21 +34,33 @@ export class AdultListComponent implements OnInit {
   showAddChildForm: boolean = false;
   showAddInfantForm: boolean = false;
   adultFormStatus: boolean = false;
+  infantCollapse : boolean = false;
+  childCollapse : boolean = false;
+  adultCollapse : boolean = false;
   count = 0;
+  random = 0;
   _itinerary :any;
   countries: any = [];
   countries_code: any = [];
   containers = [];
+  _itinerarySelection:any = {
+    adult:[],
+    child:[],
+    infant:[]
+  };
 
   constructor(
     private cookieService: CookieService,
     private genericService: GenericService,
     public router: Router,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private toastr: ToastrService
+
 
   ) { }
 
   ngOnInit() {
+   
     this.checkUser();
     this.getCountry();
     if (this.type == 'adult' && !this.isLoggedIn) {
@@ -54,24 +71,10 @@ export class AdultListComponent implements OnInit {
 
 
   selectTraveler(event, traveler) {
-    if (event.target.checked) {
-      this._selectedId.push(event.target.id);
-      console.log(this.counter)
-      if (this.counter + 1 < 3) {
-        this.counter++;
-        this.checkBoxDisable = false;
-      } else {
-        this.checkBoxDisable = true;        
-        this._selectedId.forEach(element => {
-          $("#checkbox-"+element).removeAttr("disabled");
-        });
-      }
-    } else {
-      this.checkBoxDisable = false
-      this.counter--;
-    }
-    /* if (event.target.checked) {
-      traveler.checked = true;
+    
+    if(event.target.checked){
+      this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+      let totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
       let travelerData = {
         "userId": traveler.userId,
         "firstName": traveler.firstName,
@@ -80,24 +83,43 @@ export class AdultListComponent implements OnInit {
       };
       this._travelers.push(travelerData);
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      // let checkCounter = this.counter + 1;
-      
-      if (this.counter + 1 < this.totalTravelerCount) {
+      if (this.counter  < totalTraveler) {
+        // this.checkBoxDisable = false;
         this.counter++;
-        this.checkBoxDisable = false;
       } else {
-        this.checkBoxDisable = false;
+        // this.checkBoxDisable = true;                
+      }
+      if(traveler.user_type == 'adult'){
+        this._itinerarySelection.adult.push(traveler.userId);
+      } else if(traveler.user_type == 'child'){
+        this._itinerarySelection.child.push(traveler.userId);
+      } else {
+        this._itinerarySelection.infant.push(traveler.userId);
       }
     } else {
-      traveler.checked = false;
       this.counter--;
-      this.checkBoxDisable = false;
+      // this.checkBoxDisable = false;
       this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
       this.cookieService.remove('_travelers');
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-    } */
+      if(traveler.user_type == 'adult'){
+        this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
+      } else if(traveler.user_type == 'child'){
+        this._itinerarySelection.child = this._itinerarySelection.child.filter(obj => obj !== traveler.userId);
+      } else {
+        this._itinerarySelection.infant = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
+      }
+    }
 
-    // this.adultsCount.emit(this.counter);
+    this.adultsCount.emit(this.counter);
+    this._itinerarySelectionArray.emit(this._itinerarySelection);
+    // console.log(this.counter)
+
+
+  }
+
+  getRandomNumber(i: number) {
+    let random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
   }
 
 
@@ -109,14 +131,15 @@ export class AdultListComponent implements OnInit {
 
 
   ngDoCheck() {
-    this._selectedId.forEach(id => {
-      $( '#'+id ).removeAttr( "disabled" );      
-    });
+    /* this._selectedId.forEach(id => {
+      $(  "#"+id   ).removeAttr( "disabled" );     
+    }); */
     this.checkUser();
     this.containers = this.containers;
     this.travelers = this.travelers;
   }
 
+  
   addForms(type) {
     if (type == 'adult') {
       this.showAddAdultForm = !this.showAddAdultForm;
@@ -125,7 +148,7 @@ export class AdultListComponent implements OnInit {
     } else if (type == 'infant') {
       this.showAddInfantForm = !this.showAddInfantForm;
     }
-  }
+  } 
 
   checkUser() {
     let userToken = localStorage.getItem('_lay_sess');
@@ -134,6 +157,7 @@ export class AdultListComponent implements OnInit {
       this.isLoggedIn = true;
     }
   }
+  
 
   pushTraveler(event) {
     this.travelers.push(event);
@@ -142,6 +166,18 @@ export class AdultListComponent implements OnInit {
 
   getFormStatus(status) {
     this.adultFormStatus = status;
+  }
+
+  infantCollapseClick() {
+    this.infantCollapse = !this.infantCollapse;
+  }
+
+  childCollapseClick() {
+    this.childCollapse = !this.childCollapse;
+  }
+
+  adultCollapseClick() {
+    this.adultCollapse = !this.adultCollapse;
   }
 
   getCountry() {

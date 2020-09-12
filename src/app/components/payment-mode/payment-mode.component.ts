@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Options, ChangeContext } from 'ng5-slider';
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
@@ -12,10 +12,17 @@ export class PaymentModeComponent implements OnInit {
 
   @Output() applyLaycredit = new EventEmitter();
   @Output() selectInstalmentMode = new EventEmitter();
+  @Output() getInstalmentData = new EventEmitter<{
+    additionalAmount:number,
+    instalmentType:string,
+    customAmount:number,
+    customInstalment:number
+  }>(); 
   constructor(
     private genericService:GenericService
   ) { }
   
+  @Input() flightSummary;
   sellingPrice:number;
   isInstalemtMode:boolean=false;
   value: number = 100;
@@ -25,15 +32,15 @@ export class PaymentModeComponent implements OnInit {
   };
   instalmentRequest={
     instalment_type: "weekly",
-    checkin_date: "2020-10-25",
+    checkin_date: '',
     booking_date: moment().format("YYYY-MM-DD"),
-    amount: 150,
+    amount: 0,
     additional_amount: null,
     custom_instalment_no: null,
     custom_amount: null
   }
   instalments;
-  durationType:string; // [weekly,biweekly,monthly]
+  durationType:string='weekly'; // [weekly,biweekly,monthly]
   additionalAmount:number=0;
   remainingAmount:number;
   remainingInstalment:number;
@@ -47,6 +54,8 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnInit() {
 
+    this.instalmentRequest.amount= this.flightSummary[0].selling_price;
+    this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemnts('weekly');
   }
 
@@ -78,6 +87,18 @@ export class PaymentModeComponent implements OnInit {
 
   changeDuration(type){
     this.durationType=type;
+    this.customMethod='';
+    this.additionalAmount=0;
+    this.instalmentRequest.custom_amount=null;
+    this.instalmentRequest.custom_instalment_no=null;
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no
+    })
+    this.getInstalemnts(this.durationType);
+
   }
 
   triggerPayemntMode(type){
@@ -87,7 +108,7 @@ export class PaymentModeComponent implements OnInit {
       this.isInstalemtMode = true;
     }
 
-    if(type=='noinstalment'){
+    if(type=='no-instalment'){
 
       this.isInstalemtMode = false;
     }
@@ -118,7 +139,12 @@ export class PaymentModeComponent implements OnInit {
         this.firstInstalment-=1;
       }
     }
-
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no
+    })
     this.calculateInstalment();
 
   }
@@ -129,15 +155,24 @@ export class PaymentModeComponent implements OnInit {
    */
   setCustomAmount(type){
 
-    if(type=='increase'){
-      this.customAmount+=1;
-    }
-    else{
+    if(this.customMethod=='amount'){
 
-      if(this.defaultInstalment<this.customAmount){
-
-        this.customAmount-=1;
+      if(type=='increase'){
+        this.customAmount+=1;
       }
+      else{
+
+        if(this.defaultInstalment<this.customAmount){
+
+          this.customAmount-=1;
+        }
+      }
+      this.getInstalmentData.emit({ 
+        additionalAmount:this.additionalAmount , 
+        instalmentType:this.durationType, 
+        customAmount: this.customAmount,
+        customInstalment : null
+      })
     }
   }
 
@@ -146,37 +181,54 @@ export class PaymentModeComponent implements OnInit {
    * @param type [increase,decrease]
    */
   setCustomInstalmentNo(type){
-    if(type=='increase'){
+    if(this.customMethod=='instalment'){
+      if(type=='increase'){
 
-      if(this.defaultInstalmentNo>this.customInstalment){
-
-        this.customInstalment+=1;
+        if(this.defaultInstalmentNo>this.customInstalment){
+  
+          this.customInstalment+=1;
+        }
       }
-      
+      else{
+         if(this.customInstalment>2){
+           this.customInstalment-=1;
+         }
+      }
     }
-    else{
-       if(this.customInstalment>2){
-         this.customInstalment-=1;
-       }
-    }
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: null,
+      customInstalment : this.customInstalment
+    })
   }
 
   /**
    * 
    * @param type [amount,instalment]
    */
-  selectCustomMethod(type){
-
-    /* if(type=='amount'){
-      this.customInstalment = this.defaultInstalmentNo;
+  selectCustomMethod(event){
+    
+    if(event.target.value=='amount'){
+      this.instalmentRequest.custom_amount=this.customAmount;
+      this.instalmentRequest.custom_instalment_no=null;
     }
-    else if(type=='instalment'){
-      this.customAmount = this.firstInstalment;
+    else if(event.target.value=='instalment'){
+      this.instalmentRequest.custom_amount=null;
+      this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
-    this.calculateInstalment(); */
-    this.customMethod=type;
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no
+    })
+    this.customAmount = this.defaultInstalment;
+    this.customInstalment = this.defaultInstalmentNo;
+    this.customMethod=event.target.checked?event.target.value:'';
+    //this.calculateInstalment();
   }
-
+  
   calculateInstalment(){
 
     if(this.customMethod=='amount'){

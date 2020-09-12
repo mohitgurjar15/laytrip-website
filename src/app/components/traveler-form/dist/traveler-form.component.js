@@ -28,11 +28,14 @@ var TravelerFormComponent = /** @class */ (function () {
         this.defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
         this.editMode = false;
         this.formStatus = false;
+        this.locale = {
+            format: 'DD/MM/YYYY',
+            displayFormat: 'DD/MM/YYYY'
+        };
         this.dobMaxDate = moment();
         this.expiryMinDate = moment().add(2, 'days');
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.adultForm = this.formBuilder.group({
             title: [''],
             gender: ['', forms_1.Validators.required],
@@ -68,9 +71,7 @@ var TravelerFormComponent = /** @class */ (function () {
             });
         }
         this.formStatus = this.adultForm.status === 'VALID' ? true : false;
-        setTimeout(function () {
-            _this.auditFormStatus.emit(_this.formStatus);
-        }, 1000);
+        this.auditFormStatus.emit(this.formStatus);
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
         this.countries = this.countries;

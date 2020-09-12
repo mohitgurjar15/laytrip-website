@@ -9,14 +9,16 @@ exports.__esModule = true;
 exports.AdultListComponent = void 0;
 var core_1 = require("@angular/core");
 var AdultListComponent = /** @class */ (function () {
-    function AdultListComponent(cookieService, genericService, router, cd) {
+    function AdultListComponent(cookieService, genericService, router, cd, toastr) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.router = router;
         this.cd = cd;
+        this.toastr = toastr;
         this.adultsCount = new core_1.EventEmitter();
+        this._itinerarySelectionArray = new core_1.EventEmitter();
         this.travelers = [];
-        this.counter = 0;
+        this.counter = 1;
         this.totalTravelerCount = 0;
         this._travelers = [];
         this._selectedId = [];
@@ -27,10 +29,19 @@ var AdultListComponent = /** @class */ (function () {
         this.showAddChildForm = false;
         this.showAddInfantForm = false;
         this.adultFormStatus = false;
+        this.infantCollapse = false;
+        this.childCollapse = false;
+        this.adultCollapse = false;
         this.count = 0;
+        this.random = 0;
         this.countries = [];
         this.countries_code = [];
         this.containers = [];
+        this._itinerarySelection = {
+            adult: [],
+            child: [],
+            infant: []
+        };
     }
     AdultListComponent.prototype.ngOnInit = function () {
         this.checkUser();
@@ -41,23 +52,71 @@ var AdultListComponent = /** @class */ (function () {
     };
     AdultListComponent.prototype.selectTraveler = function (event, traveler) {
         if (event.target.checked) {
-            this._selectedId.push(event.target.id);
-            console.log(this.counter);
-            if (this.counter + 1 < 3) {
+            this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+            var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+            var travelerData = {
+                "userId": traveler.userId,
+                "firstName": traveler.firstName,
+                "lastName": traveler.lastName,
+                "email": traveler.email
+            };
+            this._travelers.push(travelerData);
+            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+            if (this.counter < totalTraveler) {
+                // this.checkBoxDisable = false;
                 this.counter++;
-                this.checkBoxDisable = false;
             }
             else {
-                this.checkBoxDisable = true;
-                this._selectedId.forEach(function (element) {
-                    $("#checkbox-" + element).removeAttr("disabled");
-                });
+                // this.checkBoxDisable = true;                
+            }
+            if (traveler.user_type == 'adult') {
+                this._itinerarySelection.adult.push(traveler.userId);
+            }
+            else if (traveler.user_type == 'child') {
+                this._itinerarySelection.child.push(traveler.userId);
+            }
+            else {
+                this._itinerarySelection.infant.push(traveler.userId);
             }
         }
         else {
-            this.checkBoxDisable = false;
             this.counter--;
+            // this.checkBoxDisable = false;
+            this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
+            this.cookieService.remove('_travelers');
+            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+            if (traveler.user_type == 'adult') {
+                this._itinerarySelection.adult = this._itinerarySelection.adult.filter(function (obj) { return obj !== traveler.userId; });
+            }
+            else if (traveler.user_type == 'child') {
+                this._itinerarySelection.child = this._itinerarySelection.child.filter(function (obj) { return obj !== traveler.userId; });
+            }
+            else {
+                this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
+            }
         }
+        this.adultsCount.emit(this.counter);
+        this._itinerarySelectionArray.emit(this._itinerarySelection);
+        // console.log(this.counter)
+        /*  if (event.target.checked) {
+           this._selectedId.push(event.target.id);
+           this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+           let totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+           
+           if (this.counter + 1 < totalTraveler) {
+             this.counter++;
+             this.checkBoxDisable = false;
+           } else {
+             this.checkBoxDisable = true;
+             
+           }
+         } else {
+           this._selectedId = this._selectedId.filter(obj => obj !== event.target.id);
+     
+           this.checkBoxDisable = false
+           this.counter--;
+         } */
+        // console.log(this.counter ,this._selectedId)
         /* if (event.target.checked) {
           traveler.checked = true;
           let travelerData = {
@@ -86,15 +145,18 @@ var AdultListComponent = /** @class */ (function () {
         } */
         // this.adultsCount.emit(this.counter);
     };
+    AdultListComponent.prototype.getRandomNumber = function (i) {
+        var random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+    };
     AdultListComponent.prototype.ngOnChanges = function (changes) {
         if (changes['traveler']) {
             // console.log("this.traveler",this.travelers)
         }
     };
     AdultListComponent.prototype.ngDoCheck = function () {
-        this._selectedId.forEach(function (id) {
-            $('#' + id).removeAttr("disabled");
-        });
+        /* this._selectedId.forEach(id => {
+          $(  "#"+id   ).removeAttr( "disabled" );
+        }); */
         this.checkUser();
         this.containers = this.containers;
         this.travelers = this.travelers;
@@ -123,6 +185,15 @@ var AdultListComponent = /** @class */ (function () {
     AdultListComponent.prototype.getFormStatus = function (status) {
         this.adultFormStatus = status;
     };
+    AdultListComponent.prototype.infantCollapseClick = function () {
+        this.infantCollapse = !this.infantCollapse;
+    };
+    AdultListComponent.prototype.childCollapseClick = function () {
+        this.childCollapse = !this.childCollapse;
+    };
+    AdultListComponent.prototype.adultCollapseClick = function () {
+        this.adultCollapse = !this.adultCollapse;
+    };
     AdultListComponent.prototype.getCountry = function () {
         var _this = this;
         this.genericService.getCountry().subscribe(function (data) {
@@ -150,6 +221,9 @@ var AdultListComponent = /** @class */ (function () {
         core_1.Output()
     ], AdultListComponent.prototype, "adultsCount");
     __decorate([
+        core_1.Output()
+    ], AdultListComponent.prototype, "_itinerarySelectionArray");
+    __decorate([
         core_1.Input()
     ], AdultListComponent.prototype, "travelers");
     __decorate([
@@ -161,6 +235,15 @@ var AdultListComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], AdultListComponent.prototype, "age");
+    __decorate([
+        core_1.Input()
+    ], AdultListComponent.prototype, "_adults");
+    __decorate([
+        core_1.Input()
+    ], AdultListComponent.prototype, "_childs");
+    __decorate([
+        core_1.Input()
+    ], AdultListComponent.prototype, "_infants");
     AdultListComponent = __decorate([
         core_1.Component({
             selector: 'app-adult-list',

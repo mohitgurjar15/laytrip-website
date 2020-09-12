@@ -15,7 +15,7 @@
                 </div>
                 <div class="block_btm">
                     <div class="custom_range_slide">
-                      <ng5-slider [(value)]="value" [options]="laycreditOptions" (userChangeEnd)="selectLaycredit($event)"></ng5-slider>
+                      <ng5-slider class="custom-class" [(value)]="value" [options]="laycreditOptions" (userChangeEnd)="selectLaycredit($event)"></ng5-slider>
                     </div>
                   </div>
             </div>
@@ -23,14 +23,14 @@
 
         <ul>
             <li>
-                <label class="custom_radio">Pay with Installment
+                <label class="custom_radio">Pay with Instalment
                     <input type="radio" name="payment_mode" (click)="triggerPayemntMode('instalment')">
                     <span class="checkmark"></span>
                 </label>
             </li>
             <li>
                 <label class="custom_radio">Full Payment
-                    <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('noinstalment')">
+                    <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('no-instalment')">
                     <span class="checkmark"></span>
                 </label>
             </li>
@@ -63,8 +63,8 @@
                 <div class="block_one clr_bg">
                     <div class="block_clr_bg_left">
                         <p>You can Modify amount for first instalment</p>
-                        <span>Total: $150</span>
-                        <span>1st Instalment: ${{instalments.instalment_date[0].instalment_amount}}/week</span>
+                        <span>Total: ${{instalmentRequest.amount | number : '1.2-2'}}</span>
+                        <span>1st Instalment: ${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}/week</span>
                     </div>
                     <div class="block_clr_bg_right">
                         <p>Pay extra for 1st instalment</p>
@@ -92,12 +92,12 @@
 
                 <div class="block_two">
                     <ul>
-                        <li>Your total payment <span>$150</span></li>
-                        <li>Your first installment amount after modification <span>${{firstInstalment}}</span></li>
-                        <li>Remaining Amount to pay <span>${{remainingAmount}}</span></li>
+                        <li>Your total payment <span>${{instalmentRequest.amount | number : '1.2-2'}}</span></li>
+                        <li>Your first Instalment amount after modification <span>${{firstInstalment | number : '1.2-2'}}</span></li>
+                        <li>Remaining Amount to pay <span>${{remainingAmount | number : '1.2-2'}}</span></li>
                     </ul>
                     <div class="block_pay_remaining">
-                        You can pay your remaining amount in {{this.remainingInstalment}} weeks with ${{secondInstalment}}
+                        You can pay your remaining amount in {{this.remainingInstalment}} instalments with ${{secondInstalment | number : '1.2-2'}}
                     </div>
                 </div>
             </div>
@@ -105,13 +105,13 @@
                 <div class="block_pay_info_main">
                     <div class="block_pay_info_left clr_bg">
                         <div class="block_pay_info_inner">
-                            <p>You can modify your installment amount / weeks to pay</p>
-                            <span>Total: $150</span>
-                            <span>1st Instalment: ${{firstInstalment}}/week</span>
+                            <p>You can modify your Instalment amount / weeks to pay</p>
+                            <span>Total: ${{instalmentRequest.amount | number : '1.2-2'}}</span>
+                            <span>1st Instalment: ${{firstInstalment | number : '1.2-2'}}/week</span>
                             <ul>
                                 <li>
                                     <label class="custom_radio">Amount
-                                        <input type="radio" name="weekly-installment" (click)="selectCustomMethod('amount');">
+                                        <input type="checkbox" name="weekly-installment" [checked]='instalmentRequest.custom_amount!=null' value="amount" (change)="selectCustomMethod($event);">
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="block_pay_instalment">
@@ -121,7 +121,7 @@
                                             </a>
                                         </div>
                                         <div class="block_amount">
-                                            ${{customAmount}}
+                                            ${{customAmount | number : '1.2-2'}}
                                         </div>
                                         <div class="block_plus  pay_block">
                                             <a href="javascript:void(0);" (click)="setCustomAmount('increase')">
@@ -131,8 +131,8 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <label class="custom_radio">Week
-                                        <input type="radio" name="weekly-installment" (click)="selectCustomMethod('instalment');">
+                                    <label class="custom_radio">Installment
+                                        <input type="checkbox" name="weekly-installment" [checked]='instalmentRequest.custom_instalment_no!=null' value='instalment' (change)="selectCustomMethod($event);">
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="block_pay_instalment">
@@ -158,13 +158,13 @@
                         </div>
                     </div>
                     <div class="block_pay_info_right">
-                        <h6>Installment Calculation</h6>
+                        <h6>Instalment Calculation</h6>
                         <ul>
-                            <li>1st Installment <span>${{instalments.instalment_date[0].instalment_amount}}</span></li>
-                            <li>Default Installment <span>${{defaultInstalment}}</span></li>
+                            <li>1st Instalment <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span></li>
+                            <li>Default Instalment <span>${{defaultInstalment | number : '1.2-2' }}</span></li>
                             <li>Additional Amount <span>${{additionalAmount}}</span></li>
                             <li>Laytrip points <span>$20</span></li>
-                            <li>Total <span>$150</span></li>
+                            <li>Total <span>${{instalmentRequest.amount | number : '1.2-2'}}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                             <tr *ngFor="let instalment of instalments.instalment_date; index as i">
                                 <td data-title="Instalment">{{i+1}}</td>
                                 <td data-title="Date">{{instalment.instalment_date}}</td>
-                                <td data-title="Amount">${{instalment.instalment_amount}}</td>
+                                <td data-title="Amount">${{instalment.instalment_amount | number : '1.2-2'}}</td>
                             </tr>
                         </tbody>
                     </table>

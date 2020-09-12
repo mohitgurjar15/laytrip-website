@@ -50,9 +50,13 @@
             .ng-value-container {
                 padding-left: 0px !important;
                 .ng-input {
+                    padding: 0 15px;
                     input {
                         padding-left: 0px !important;
                     }
+                }
+                .ng-value{
+                    padding: 0 15px;
                 }
             }
             .ng-clear-wrapper {
@@ -88,6 +92,8 @@
         .ng-select-container{
             height:100%;	
             border:none !important;
+            display: flex;
+            align-items: center;
             &:hover{
                 box-shadow: none;
             }
