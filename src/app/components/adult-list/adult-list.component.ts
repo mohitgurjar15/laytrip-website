@@ -83,7 +83,6 @@ export class AdultListComponent implements OnInit {
       };
       this._travelers.push(travelerData);
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      console.log(this.counter , totalTraveler)
       if (this.counter  < totalTraveler) {
         // this.checkBoxDisable = false;
         this.counter++;
@@ -114,7 +113,7 @@ export class AdultListComponent implements OnInit {
 
     this.adultsCount.emit(this.counter);
     this._itinerarySelectionArray.emit(this._itinerarySelection);
-    console.log(this.counter)
+    // console.log(this.counter)
 
 
    /*  if (event.target.checked) {
