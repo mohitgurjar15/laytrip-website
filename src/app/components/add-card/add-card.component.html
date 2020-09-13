@@ -40,9 +40,9 @@
             <div class="form_field">
                 <label>Card Number<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="card_cvv" maxlength="20" tabindex="101"
+                    <input type="text" formControlName="card_number" maxlength="20" tabindex="101"
                         placeholder="Enter Name on Card">
-                    <p *ngIf="submitted && cardForm.controls.card_cvv.errors" class="error_text">Please enter your card
+                    <p *ngIf="submitted && cardForm.controls.card_number.errors" class="error_text">Please enter your card
                         number.
                     </p>
                 </div>
@@ -77,9 +77,9 @@
             <div class="form_field">
                 <label>Cvv<sup>*</sup></label>
                 <div class="text_field">
-                    <input autocomplete="off"  type="text" formControlName="cvv" maxlength="20"
+                    <input autocomplete="off"  type="text" formControlName="card_cvv" maxlength="20"
                         placeholder="123" tabindex="103" >
-                    <p *ngIf="submitted && cardForm.controls.cvv.errors" class="error_text">Please enter cvv number.
+                    <p *ngIf="submitted && cardForm.controls.card_cvv.errors" class="error_text">Please enter cvv number.
                     </p>
                 </div>
             </div>
@@ -94,7 +94,7 @@
         </div>
         <div class="form_btn">
             <!-- <button>Save</button> -->
-            <input id="submit-button" type="submit" value="Add card">
+            <button type="submit">Add card</button>
         </div>
     </div>
 </form>

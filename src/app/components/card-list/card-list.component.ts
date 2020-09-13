@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 
@@ -16,7 +16,9 @@ export class CardListComponent implements OnInit {
   cardLoader:boolean=true;
   cards:[]=[]
   @Output() selectCreditCard=new EventEmitter();
+  @Input() newCard;
   ngOnInit() {
+    console.log("this.newCard",this.newCard)
     this.getCardlist();
   }
 
