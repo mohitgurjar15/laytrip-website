@@ -189,21 +189,23 @@ export class HomeComponent implements OnInit {
   }
 
   searchFlights() {
+    let queryParams: any = {};
+    queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
+    queryParams.departure = this.searchFlightInfo.departure;
+    queryParams.arrival = this.searchFlightInfo.arrival;
+    queryParams.departure_date = moment(this.flightSearchForm.value.departureDate.startDate).format('YYYY-MM-DD');
+    if (this.isRoundTrip === true) {
+      queryParams.arrival_date = moment(this.flightSearchForm.value.returnDate.startDate).format('YYYY-MM-DD');
+    }
+    queryParams.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
+    queryParams.adult = this.searchFlightInfo.adult;
+    queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
+    queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     if (this.searchFlightInfo && this.totalPerson &&
       this.flightSearchForm.value.departureDate.startDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.router.navigate(['flight/search'], {
-        queryParams: {
-          trip: this.isRoundTrip ? 'roundtrip' : 'oneway',
-          departure: this.searchFlightInfo.departure,
-          arrival: this.searchFlightInfo.arrival,
-          departure_date: moment(this.flightSearchForm.value.departureDate.startDate).format('YYYY-MM-DD'),
-          arrival_date: moment(this.flightSearchForm.value.returnDate.startDate).format('YYYY-MM-DD'),
-          class: this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy',
-          adult: this.searchFlightInfo.adult,
-          child: this.searchFlightInfo.child ? this.searchFlightInfo.child : 0,
-          infant: this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0
-        },
+        queryParams: queryParams,
         queryParamsHandling: 'merge'
       });
     }

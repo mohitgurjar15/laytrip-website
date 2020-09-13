@@ -41,7 +41,7 @@ export class FlightCheckoutComponent implements OnInit {
     instalmentType:string;
     customAmount:number | null;
     customInstalment:number | null;
-
+    newCard;
 
     ngOnInit() {
       this.userInfo = getLoginUserInfo();
@@ -144,7 +144,10 @@ export class FlightCheckoutComponent implements OnInit {
 
         console.log("error",error)
         if(error.status==404){
-          this.bookingStatus=2; // Failed 
+          this.bookingStatus=2; // Flight Not available  
+        }
+        if(error.status==424){
+          this.bookingStatus=2; // Booking failed from supplier side
         }
         this.bookingLoader=false;
       });
@@ -184,5 +187,10 @@ export class FlightCheckoutComponent implements OnInit {
       this.customInstalment = data.customInstalment;
       console.log(data)
 
+    }
+
+    emitNewCard(event){
+      console.log("event",event)
+      this.newCard =event;
     }
 }
