@@ -5,13 +5,16 @@
       <div class="cmn_block price">
         <h5>Price</h5>
         <div class="custom_range_slide">
-          <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue" [(highValue)]="priceHighValue" [options]="priceOptions"></ng5-slider>
+          <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
+            [(highValue)]="priceHighValue" [options]="priceOptions"></ng5-slider>
         </div>
       </div>
       <div class="cmn_block partial_payment_price">
         <h5>Partial payment price</h5>
         <div class="custom_range_slide">
-          <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue" [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions"></ng5-slider>
+          <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
+            [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions">
+          </ng5-slider>
         </div>
       </div>
       <div class="cmn_block stop">
@@ -33,7 +36,8 @@
             </label>
             <span>{{ currency?.symbol }} {{ flightStops?.one_stop?.min_price | number : '1.2-2'}}</span>
           </li>
-          <li *ngIf="flightStops.two_and_two_plus_stop.min_price !== null && flightStops.two_and_two_plus_stop.min_price !== 0">
+          <li
+            *ngIf="flightStops.two_and_two_plus_stop.min_price !== null && flightStops.two_and_two_plus_stop.min_price !== 0">
             <label class="custom_checkbox">
               <input type="checkbox" value="">
               <span class="checkmark"></span>
@@ -43,79 +47,289 @@
           </li>
         </ul>
       </div>
-      <div class="cmn_block arrival_to">
-        <h5>Arrival to {{ arrivalTimeSlotCityName }}</h5>
-        <ul>
-          <li *ngIf="arrivalTimeSlot.first_slot.min_price !== null && arrivalTimeSlot.first_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              12AM - 6AM
-            </label>
-            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-          <li *ngIf="arrivalTimeSlot.second_slot.min_price !== null && arrivalTimeSlot.second_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              6AM - 12PM
-            </label>
-            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-          <li *ngIf="arrivalTimeSlot.third_slot.min_price !== null && arrivalTimeSlot.third_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              12PM - 6PM
-            </label>
-            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-          <li *ngIf="arrivalTimeSlot.fourth_slot.min_price !== null && arrivalTimeSlot.fourth_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              6PM - 12AM
-            </label>
-            <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-        </ul>
+      <div class="cmn_block pad_no">
+        <div class="accordion block_shortby" id="accordion-outbound">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-outbound"
+                href="#collapseOutbound">
+                Outbound
+              </a>
+            </div>
+            <div id="collapseOutbound" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <div class="block_cmn stop">
+                  <h5>Stops</h5>
+                  <ul>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        Non Stop
+                      </label>
+                      <span>$ 120</span>
+                    </li>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        1 Stop
+                      </label>
+                      <span>$ 100</span>
+                    </li>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        1 Stop
+                      </label>
+                      <span>$ 80</span>
+                    </li>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        1 Stop
+                      </label>
+                      <span>$ 120</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="block_cmn arrival_to">
+                  <h5>Arrival to {{ arrivalTimeSlotCityName }}</h5>
+                  <ul>
+                    <li
+                      *ngIf="arrivalTimeSlot.first_slot.min_price !== null && arrivalTimeSlot.first_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12AM - 6AM
+                      </label>
+                      <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="arrivalTimeSlot.second_slot.min_price !== null && arrivalTimeSlot.second_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6AM - 12PM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ arrivalTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="arrivalTimeSlot.third_slot.min_price !== null && arrivalTimeSlot.third_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12PM - 6PM
+                      </label>
+                      <span>{{ currency?.symbol }} {{ arrivalTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="arrivalTimeSlot.fourth_slot.min_price !== null && arrivalTimeSlot.fourth_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6PM - 12AM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ arrivalTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="block_cmn departure_to">
+                  <h5>Departure to {{ departureTimeSlotCityName }}</h5>
+                  <ul>
+                    <li
+                      *ngIf="depatureTimeSlot.first_slot.min_price !== null && depatureTimeSlot.first_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12AM - 6AM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ depatureTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="depatureTimeSlot.second_slot.min_price !== null && depatureTimeSlot.second_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6AM - 12PM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ depatureTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="depatureTimeSlot.third_slot.min_price !== null && depatureTimeSlot.third_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12PM - 6PM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ depatureTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="depatureTimeSlot.fourth_slot.min_price !== null && depatureTimeSlot.fourth_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6PM - 12AM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ depatureTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="cmn_block departure_to">
-        <h5>Departure to {{ departureTimeSlotCityName }}</h5>
-        <ul>
-          <li *ngIf="depatureTimeSlot.first_slot.min_price !== null && depatureTimeSlot.first_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              12AM - 6AM
-            </label>
-            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-          <li *ngIf="depatureTimeSlot.second_slot.min_price !== null && depatureTimeSlot.second_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              6AM - 12PM
-            </label>
-            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-          <li *ngIf="depatureTimeSlot.third_slot.min_price !== null && depatureTimeSlot.third_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              12PM - 6PM
-            </label>
-            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-          <li *ngIf="depatureTimeSlot.fourth_slot.min_price !== null && depatureTimeSlot.fourth_slot.min_price !== 0">
-            <label class="custom_checkbox">
-              <input type="checkbox" value="">
-              <span class="checkmark"></span>
-              6PM - 12AM
-            </label>
-            <span>{{ currency?.symbol }} {{ depatureTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
-          </li>
-        </ul>
+      <div class="cmn_block pad_no">
+        <div class="accordion block_shortby" id="accordion-inbound">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-inbound"
+                href="#collapseInbound">
+                Inbound
+              </a>
+            </div>
+            <div id="collapseInbound" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <div class="block_cmn stop">
+                  <h5>Stops</h5>
+                  <ul>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        Non Stop
+                      </label>
+                      <span>$ 120</span>
+                    </li>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        1 Stop
+                      </label>
+                      <span>$ 100</span>
+                    </li>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        1 Stop
+                      </label>
+                      <span>$ 80</span>
+                    </li>
+                    <li>
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        1 Stop
+                      </label>
+                      <span>$ 120</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="block_cmn arrival_to">
+                  <h5>Arrival to {{  departureTimeSlotCityName}}</h5>
+                  <ul>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12AM - 6AM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_arrival_time_slot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_arrival_time_slot.second_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.second_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6AM - 12PM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_arrival_time_slot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_arrival_time_slot.third_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.third_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12PM - 6PM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_arrival_time_slot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_arrival_time_slot.fourth_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.fourth_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6PM - 12AM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_arrival_time_slot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="block_cmn departure_to">
+                  <h5>Departure to {{ arrivalTimeSlotCityName }}</h5>
+                  <ul>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12AM - 6AM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_depature_time_slot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_depature_time_slot.second_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.second_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6AM - 12PM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_depature_time_slot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_depature_time_slot.third_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.third_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        12PM - 6PM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_depature_time_slot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                    <li
+                      *ngIf="filterFlightDetails.inbound_depature_time_slot.fourth_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.fourth_slot.min_price !== 0">
+                      <label class="custom_checkbox">
+                        <input type="checkbox" value="">
+                        <span class="checkmark"></span>
+                        6PM - 12AM
+                      </label>
+                      <span>{{ currency?.symbol }}
+                        {{ filterFlightDetails.inbound_depature_time_slot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="cmn_block departure_to">
         <h5>Airlines</h5>

@@ -125,4 +125,16 @@ export class FlightService {
             catchError(this.handleError)
         );
     }
+
+    getRoundTripFlightSearchResult(data) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
+        const url = environment.apiUrl + `v1/flight/search-roundtrip-flight`;
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+    }
 }
