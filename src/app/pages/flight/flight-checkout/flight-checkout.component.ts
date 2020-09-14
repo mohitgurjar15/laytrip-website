@@ -190,7 +190,6 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     emitNewCard(event){
-      console.log("event",event)
       this.newCard =event;
     }
 }

@@ -112,8 +112,6 @@
 
                     .grid_box {
                         border-radius: 8px;
-                        //                        background: $background-white;
-                        //                        border: 1px solid $box-border-color;
                         margin: 0;
 
                         .search_area {
@@ -137,13 +135,6 @@
                                 font-size: 16px;
                                 color: $text-darkblue;
                                 font-weight: 600;
-                                padding: 0 15px;
-                            }
-
-                            span {
-                                font-size: 10px;
-                                font-weight: 400;
-                                color: $text-grey;
                                 padding: 0 15px;
                             }
                         }
@@ -174,6 +165,13 @@
                                 border: 1px solid $box-border-color;
                                 border-radius: 8px;
                                 background: $background-white;
+
+                                span {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+                                    padding: 0 15px;
+                                }
                             }
 
                             .switch_btn {
@@ -218,7 +216,6 @@
                                 border: 1px solid $box-border-color;
                                 border-radius: 8px;
                                 background: $background-white;
-                                position: relative;
 
                                 input {
                                     height: 35px;

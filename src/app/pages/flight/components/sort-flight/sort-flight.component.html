@@ -15,13 +15,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Lowest to highest
-                    <input type="radio" checked="checked" name="price_radio">
+                    <input type="radio" checked="checked" name="price_sort" (click)="sortFlightData('selling_price','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
                   <label class="custom_radio">highest to lowest
-                    <input type="radio" name="price_radio">
+                    <input type="radio" name="price_sort" (click)="sortFlightData('selling_price','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
@@ -32,13 +32,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Shortest
-                    <input type="radio" name="duration_radio">
+                    <input type="radio" name="duration_sort" (click)="sortFlightData('total_duration','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
                   <label class="custom_radio">Longest
-                    <input type="radio" name="duration_radio">
+                    <input type="radio" name="duration_sort" (click)="sortFlightData('total_duration','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
