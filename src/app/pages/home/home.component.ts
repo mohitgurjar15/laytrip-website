@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
@@ -7,6 +7,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import * as moment from 'moment';
 })
 export class HomeComponent implements OnInit {
 
+  // @ViewChild(DaterangepickerDirective, { static: true }) pickerDirective: DaterangepickerDirective;
   s3BucketUrl = environment.s3BucketUrl;
 
   modules: Module[];
@@ -158,8 +160,8 @@ export class HomeComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toDestinationCode;
   }
 
-  dateChange(event) {
-    // console.log(event);
+  openDatePicker(event) {
+    // this.pickerDirective.open(event);
   }
 
   getDateWithFormat(date) {

@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
-import { data } from './data';
 
 @Component({
   selector: 'app-flight-item-wrapper',
