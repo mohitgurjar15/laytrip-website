@@ -27,7 +27,6 @@ export class TravelerFormComponent implements OnInit {
   @Input() countries:[];
   @Input() countries_code:[];
   
-
   adultForm: FormGroup;
   submitted = false;
   loading = false;
@@ -161,7 +160,7 @@ export class TravelerFormComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
-      console.log(this.adultForm.controls)
+      // console.log(this.adultForm.controls)
       this.submitted = true;
       this.loading = false;
       return;
@@ -194,7 +193,6 @@ export class TravelerFormComponent implements OnInit {
           this.submitted = this.loading = false;
           this.valueChange.emit(data);
           $('.collapse').collapse('hide');
-
         }, (error: HttpErrorResponse) => {
           console.log('error')
           this.submitted = this.loading = false;
@@ -215,6 +213,7 @@ export class TravelerFormComponent implements OnInit {
             localStorage.setItem("_lay_sess", data.token);
           }
           this.valueChange.emit(data);
+
           $('.collapse').collapse('hide');
         }, (error: HttpErrorResponse) => {
           console.log('error')

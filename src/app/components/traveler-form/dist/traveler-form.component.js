@@ -123,7 +123,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.adultForm.invalid) {
-            console.log(this.adultForm.controls);
+            // console.log(this.adultForm.controls)
             this.submitted = true;
             this.loading = false;
             return;

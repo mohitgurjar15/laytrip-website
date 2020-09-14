@@ -18,7 +18,7 @@ var AdultListComponent = /** @class */ (function () {
         this.adultsCount = new core_1.EventEmitter();
         this._itinerarySelectionArray = new core_1.EventEmitter();
         this.travelers = [];
-        this.counter = 1;
+        this.counter = 0;
         this.totalTravelerCount = 0;
         this._travelers = [];
         this._selectedId = [];
@@ -64,7 +64,7 @@ var AdultListComponent = /** @class */ (function () {
             };
             this._travelers.push(travelerData);
             this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-            if (this.counter < totalTraveler) {
+            if (this.counter + 1 < totalTraveler) {
                 // this.checkBoxDisable = false;
                 this.counter++;
             }
@@ -116,10 +116,10 @@ var AdultListComponent = /** @class */ (function () {
         this.checkUser();
         this.containers = this.containers;
         this.travelers = this.travelers;
+        // console.log('all travelers',this.travelers)
         if (this.travelers.length >= 0) {
             this.loader = false;
         }
-        console.log(this.travelers.length, this.loader);
     };
     AdultListComponent.prototype.addForms = function (type) {
         if (type == 'adult') {
@@ -139,6 +139,7 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.pushTraveler = function (event) {
+        console.log('afterupdate', this.travelers);
         this.travelers.push(event);
         this.showAddAdultForm = false;
     };

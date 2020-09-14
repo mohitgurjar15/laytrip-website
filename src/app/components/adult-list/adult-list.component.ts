@@ -23,7 +23,7 @@ export class AdultListComponent implements OnInit {
   @Input() _childs: [];
   @Input() _infants: [];
 
-  counter = 1;
+  counter = 0;
   totalTravelerCount = 0;
   _travelers = [];
   _selectedId = [];
@@ -85,7 +85,7 @@ export class AdultListComponent implements OnInit {
       };
       this._travelers.push(travelerData);
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      if (this.counter  < totalTraveler) {
+      if (this.counter + 1 < totalTraveler) {
         // this.checkBoxDisable = false;
         this.counter++;
       } else {
@@ -139,11 +139,10 @@ export class AdultListComponent implements OnInit {
     this.checkUser();
     this.containers = this.containers;
     this.travelers = this.travelers;
-    
+    // console.log('all travelers',this.travelers)
     if(this.travelers.length >= 0){
       this.loader = false;
     }
-    console.log( this.travelers.length,this.loader)
   }
 
   
@@ -168,8 +167,11 @@ export class AdultListComponent implements OnInit {
   
 
   pushTraveler(event) {
+   
+    console.log('afterupdate',this.travelers)
     this.travelers.push(event);
     this.showAddAdultForm = false;
+
   }
 
   getFormStatus(status) {
