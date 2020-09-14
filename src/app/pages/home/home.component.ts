@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
@@ -16,7 +16,6 @@ import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 })
 export class HomeComponent implements OnInit {
 
-  // @ViewChild(DaterangepickerDirective, { static: true }) pickerDirective: DaterangepickerDirective;
   s3BucketUrl = environment.s3BucketUrl;
 
   modules: Module[];
@@ -53,7 +52,7 @@ export class HomeComponent implements OnInit {
       departure: '',
       arrival: '',
       departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
-      // arrival_date: '',
+      arrival_date: '',
       class: '',
       adult: 1,
       child: null,
@@ -66,7 +65,8 @@ export class HomeComponent implements OnInit {
     private genericService: GenericService,
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
-    public router: Router
+    public router: Router,
+    public cd: ChangeDetectorRef
   ) {
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
@@ -160,10 +160,6 @@ export class HomeComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toDestinationCode;
   }
 
-  openDatePicker(event) {
-    // this.pickerDirective.open(event);
-  }
-
   getDateWithFormat(date) {
     this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
     // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
@@ -216,17 +212,29 @@ export class HomeComponent implements OnInit {
 
   toggleOnewayRoundTrip(type) {
 
-    if (type == 'roundtrip')
+    if (type === 'roundtrip') {
       this.isRoundTrip = true;
-    else
-      this.isRoundTrip = false
+    } else {
+      this.isRoundTrip = false;
+    }
   }
 
   datesUpdated(event) {
-
+    // console.log(event);
   }
 
   departureDateUpdate(date) {
-    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate)
+    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+    // console.log(this.flightReturnMinDate);
+    this.cd.detectChanges();
+
+  }
+
+  dateChange(type, date) {
+    // console.log(moment(date));
+    if (type === 'previous') {
+      // this.flightSearchForm.controls.departureDate.setValue(moment(date).subtract(1, 'days'));
+      this.flightDepartureMinDate = moment(date).subtract(1, 'days');
+    }
   }
 }
