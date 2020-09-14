@@ -36,8 +36,6 @@
               "src/account.scss",
               "src/comman-modal.scss",
               "src/laytrip.scss",
-              "src/assets/css/daterangepicker.min.css",
-              "src/assets/css/datepicker.css",
               "node_modules/ngx-toastr/toastr.css"
            ],
             "scripts": [

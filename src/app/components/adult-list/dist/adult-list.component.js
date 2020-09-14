@@ -22,7 +22,9 @@ var AdultListComponent = /** @class */ (function () {
         this.totalTravelerCount = 0;
         this._travelers = [];
         this._selectedId = [];
+        this.loader = true;
         this.checked = false;
+        this.loading = true;
         this.checkBoxDisable = false;
         this.isLoggedIn = false;
         this.showAddAdultForm = false;
@@ -98,52 +100,6 @@ var AdultListComponent = /** @class */ (function () {
         this.adultsCount.emit(this.counter);
         this._itinerarySelectionArray.emit(this._itinerarySelection);
         // console.log(this.counter)
-        /*  if (event.target.checked) {
-           this._selectedId.push(event.target.id);
-           this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-           let totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
-           
-           if (this.counter + 1 < totalTraveler) {
-             this.counter++;
-             this.checkBoxDisable = false;
-           } else {
-             this.checkBoxDisable = true;
-             
-           }
-         } else {
-           this._selectedId = this._selectedId.filter(obj => obj !== event.target.id);
-     
-           this.checkBoxDisable = false
-           this.counter--;
-         } */
-        // console.log(this.counter ,this._selectedId)
-        /* if (event.target.checked) {
-          traveler.checked = true;
-          let travelerData = {
-            "userId": traveler.userId,
-            "firstName": traveler.firstName,
-            "lastName": traveler.lastName,
-            "email": traveler.email
-          };
-          this._travelers.push(travelerData);
-          this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-          // let checkCounter = this.counter + 1;
-          
-          if (this.counter + 1 < this.totalTravelerCount) {
-            this.counter++;
-            this.checkBoxDisable = false;
-          } else {
-            this.checkBoxDisable = false;
-          }
-        } else {
-          traveler.checked = false;
-          this.counter--;
-          this.checkBoxDisable = false;
-          this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
-          this.cookieService.remove('_travelers');
-          this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-        } */
-        // this.adultsCount.emit(this.counter);
     };
     AdultListComponent.prototype.getRandomNumber = function (i) {
         var random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
@@ -160,6 +116,10 @@ var AdultListComponent = /** @class */ (function () {
         this.checkUser();
         this.containers = this.containers;
         this.travelers = this.travelers;
+        if (this.travelers.length >= 0) {
+            this.loader = false;
+        }
+        console.log(this.travelers.length, this.loader);
     };
     AdultListComponent.prototype.addForms = function (type) {
         if (type == 'adult') {

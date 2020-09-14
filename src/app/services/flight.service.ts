@@ -23,23 +23,19 @@ export class FlightService {
     searchAirport(searchItem) {
         return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
             .pipe(
-                retry(1),
                 catchError(this.handleError)
             );
     }
 
     airRevalidate(routeCode) {
 
-        const headers = {
-            headers: {
-                language: 'en',
-                currency: 'USD'
-            },
-        };
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
 
-        return this.http.post(`${environment.apiUrl}v1/flight/air-revalidate/`, routeCode, headers)
+        return this.http.post(`${environment.apiUrl}v1/flight/air-revalidate/`, routeCode, this.commonFunction.setHeaders(headers))
             .pipe(
-                retry(1),
                 catchError(this.handleError)
             );
     }
@@ -48,7 +44,6 @@ export class FlightService {
         const payload = { route_code: routeCode };
         return this.http.post(`${environment.apiUrl}v1/flight/baggage-details`, payload)
             .pipe(
-                retry(1),
                 catchError(this.handleError)
             );
     }
@@ -57,7 +52,6 @@ export class FlightService {
         const payload = { route_code: routeCode };
         return this.http.post(`${environment.apiUrl}v1/flight/cancellation-policy`, payload)
             .pipe(
-                retry(1),
                 catchError(this.handleError)
             );
     }
@@ -69,7 +63,6 @@ export class FlightService {
         }
         return this.http.post(`${environment.apiUrl}v1/flight/book`, payload, this.commonFunction.setHeaders(headers))
             .pipe(
-                retry(1),
                 catchError(this.handleError)
             );
     }
@@ -96,7 +89,6 @@ export class FlightService {
         }
         return this.http.get(`${environment.apiUrl}v1/flight/book/${bookingId}`, this.commonFunction.setHeaders(headers))
             .pipe(
-                retry(1),
                 catchError(this.handleError)
             );
     }
@@ -121,7 +113,6 @@ export class FlightService {
         }
         const url = environment.apiUrl + `v1/flight/search-oneway-flight`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
-            retry(1),
             catchError(this.handleError)
         );
     }
@@ -133,7 +124,6 @@ export class FlightService {
         }
         const url = environment.apiUrl + `v1/flight/search-roundtrip-flight`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
-            retry(1),
             catchError(this.handleError)
         );
     }

@@ -40,7 +40,8 @@ var FlightTravelerComponent = /** @class */ (function () {
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
         var userToken = localStorage.getItem('_lay_sess');
-        if (userToken) {
+        if (userToken && userToken != 'undefined') {
+            this.is_traveller = true;
             this.travelerService.getTravelers().subscribe(function (res) {
                 _this.travelers = res.data;
                 _this.travelers.forEach(function (element) {
@@ -54,11 +55,15 @@ var FlightTravelerComponent = /** @class */ (function () {
                         _this._infants.push(element);
                     }
                 });
+                _this.loading = false;
             });
+        }
+        else {
+            this.loading = false;
         }
         setTimeout(function () {
             _this.loading = false;
-        }, 1000);
+        }, 2000);
     };
     FlightTravelerComponent.prototype.getAdultCount = function (count) {
         this.selectedAdults = count;
@@ -83,16 +88,15 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.checkUser = function () {
         var userToken = localStorage.getItem('_lay_sess');
-        if (userToken) {
+        if (userToken && userToken != 'undefined') {
             this.isLoggedIn = true;
-            this.is_traveller = false;
         }
     };
     FlightTravelerComponent.prototype.ngDoCheck = function () {
         this.checkUser();
-        if (this.is_traveller === false && this.travelers.length === 0) {
-            this.is_traveller = true;
-            // this.getTravelers();
+        if (this.is_traveller === false) {
+            this.loading = true;
+            this.getTravelers();
         }
     };
     FlightTravelerComponent = __decorate([
