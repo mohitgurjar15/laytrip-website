@@ -7,7 +7,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
+import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-home',
@@ -225,16 +225,16 @@ export class HomeComponent implements OnInit {
 
   departureDateUpdate(date) {
     this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
-    this.flightSearchForm.controls.returnDate.setValue('11/11/2020');
-    // console.log(this.flightReturnMinDate);
-    this.cd.detectChanges();
+    this.flightSearchForm.value.returnDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
   }
 
-  dateChange(type, date) {
-    // console.log(moment(date));
+  dateChange(type) {
     if (type === 'previous') {
-      // this.flightSearchForm.controls.departureDate.setValue(moment(date).subtract(1, 'days'));
-      this.flightDepartureMinDate = moment(date).subtract(1, 'days');
+      this.flightDepartureMinDate = moment(this.flightSearchForm.value.departureDate.startDate).subtract(1, 'days');
+      this.flightSearchForm.value.departureDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).subtract(1, 'days');
+    } else if (type === 'next') {
+      this.flightDepartureMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(1, 'days');
+      this.flightSearchForm.value.departureDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(1, 'days');
     }
   }
 }
