@@ -225,9 +225,9 @@ export class HomeComponent implements OnInit {
 
   departureDateUpdate(date) {
     this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+    this.flightSearchForm.controls.returnDate.setValue('11/11/2020');
     // console.log(this.flightReturnMinDate);
     this.cd.detectChanges();
-
   }
 
   dateChange(type, date) {

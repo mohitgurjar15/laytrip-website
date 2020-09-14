@@ -122,8 +122,8 @@
                                                     <div class="search_area">
                                                         <label>Departure</label>
                                                         <input type="text" name="daterange" ngxDaterangepickerMd
-                                                            formControlName="departureDate" class="form-control"
-                                                            [singleDatePicker]="true"
+                                                            formControlName="departureDate"
+                                                            class="form-control date_icon" [singleDatePicker]="true"
                                                             (datesUpdated)="departureDateUpdate($event)"
                                                             [locale]="locale" [autoApply]="true"
                                                             [minDate]="flightDepartureMinDate" />
@@ -133,10 +133,10 @@
                                                             <a href="javascript:void(0);"
                                                                 (click)="dateChange('next', $event)">Next</a>
                                                         </div>
-                                                        <div class="date_icon" id="departure_date_icon">
+                                                        <!-- <div class="date_icon" id="departure_date_icon">
                                                             <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg"
                                                                 alt="Calender Icon">
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                                 <div class="date_to">
@@ -149,7 +149,7 @@
                                                     <div class="search_area" *ngIf="isRoundTrip">
                                                         <label>Return</label>
                                                         <input type="text" name="daterange" ngxDaterangepickerMd
-                                                            formControlName="returnDate" class="form-control"
+                                                            formControlName="returnDate" class="form-control date_icon"
                                                             [singleDatePicker]="true"
                                                             (datesUpdated)="datesUpdated($event)" [locale]="locale"
                                                             [autoApply]="true" [minDate]="flightReturnMinDate" />
@@ -157,10 +157,10 @@
                                                             <a href="javascript:void(0);">Prev</a>
                                                             <a href="javascript:void(0);">Next</a>
                                                         </div>
-                                                        <div class="date_icon">
+                                                        <!-- <div class="">
                                                             <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg"
                                                                 alt="Calender Icon">
-                                                        </div>
+                                                        </div> -->
                                                     </div>
 
                                                 </div>

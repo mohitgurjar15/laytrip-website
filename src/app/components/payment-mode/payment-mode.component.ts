@@ -236,11 +236,11 @@ export class PaymentModeComponent implements OnInit {
       this.instalmentRequest.custom_amount=this.customAmount;
       this.instalmentRequest.custom_instalment_no=null;
     }
-    else{
+    else if(this.customMethod=='instalment'){
       this.instalmentRequest.custom_amount=null;
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
-    this.instalmentRequest.additional_amount = this.additionalAmount;
+    //this.instalmentRequest.additional_amount = this.additionalAmount;
 
     this.instalmentRequest.additional_amount=this.additionalAmount;
 

@@ -40,7 +40,7 @@
                       <div class="flight_form">
                         <div class="search_area">
                           <label>From</label>
-                          <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="city"
+                          <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="display_name"
                             bindValue="city" [clearable]="true" minTermLength="3" notFoundText=""
                             [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}"
                             (search)="changeSearchDeparture($event)" loadingText=""
@@ -81,7 +81,7 @@
                           <label>To</label>
                           <!-- <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
                           <span>CA, United States</span> -->
-                          <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="city"
+                          <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="display_name"
                             bindValue="city" [(ngModel)]="airportDefaultArrivalValue"
                             [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText=""
                             (search)="changeSearchArrival($event)" loadingText=""
@@ -120,7 +120,7 @@
                           <input type="text" name="daterange" 
                               ngxDaterangepickerMd 
                               formControlName="departureDate" 
-                              class="form-control"
+                              class="form-control date_icon"
                               [singleDatePicker]="true" 
                               (datesUpdated)="departureDateUpdate($event)"
                               [locale]="locale"
@@ -131,9 +131,9 @@
                             <a href="javascript:void(0);">Prev</a>
                             <a href="javascript:void(0);">Next</a>
                           </div>
-                          <div class="date_icon" id="departure_date_icon">
+                          <!-- <div class="date_icon" id="departure_date_icon">
                             <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                       <div class="date_to">
@@ -146,7 +146,7 @@
                           <input type="text" name="daterange" 
                               ngxDaterangepickerMd 
                               formControlName="returnDate"
-                              class="form-control"
+                              class="form-control date_icon"
                               [singleDatePicker]="true"
                               (datesUpdated)="datesUpdated($event)"
                               [locale]="locale"
@@ -157,9 +157,9 @@
                               <a href="javascript:void(0);">Prev</a>
                               <a href="javascript:void(0);">Next</a>
                           </div>
-                          <div class="date_icon">
+                          <!-- <div class="date_icon">
                               <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
-                          </div>
+                          </div> -->
                       </div>
                       </div>
                     </li>
@@ -175,7 +175,7 @@
                     </li>
                   </ul>
                   <div class="serch_btn">
-                    <button>Modify Search <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                    <button><span>Modify Search</span> <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
                         alt="Right Arrow" /></button>
                   </div>
                 </div>

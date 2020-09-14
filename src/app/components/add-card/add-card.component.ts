@@ -28,6 +28,7 @@ export class AddCardComponent implements OnInit {
     format: 'MM/YYYY',
     displayFormat: 'MM/YYYY'
   };
+  saveCardLoader:boolean=false;
 
   ngOnInit() {
 
@@ -38,9 +39,6 @@ export class AddCardComponent implements OnInit {
       card_number: ['', Validators.required],
       expiry: ['', Validators.required]
     });
-
-    
-    
   }
 
   spreedlySdk(){
@@ -90,9 +88,6 @@ export class AddCardComponent implements OnInit {
 
     this.cardError = '';
     this.submitted = true;
-    let data={"id":"5e10afbf-537a-4f25-b5e1-c8fbb618cd5f","paymentGatewayId":3,"userId":"b6103e59-b12a-4830-9318-36479dc81d8c","cardHolderName":"Suresh Suthar","cardDigits":"4444","cardToken":"DLphr2MZZOJltru1ifhy3EFBi9I","cardType":"master","createdDate":"2020-09-13T09:51:08.958Z","cardMetaData":null,"status":true,"isDeleted":false};
-    this.emitNewCard.emit(data);
-    console.log("yes")
     if (this.cardForm.invalid) {
       return;
     } 
@@ -104,15 +99,17 @@ export class AddCardComponent implements OnInit {
       card_number: this.cardForm.controls.card_number.value,
       expiry : moment(this.cardForm.controls.expiry.value.startDate).format('MM/YYYY')
     }
-    //this.saveCard(cardData);
+    this.saveCard(cardData);
   }
 
   saveCard(cardData) {
+    this.saveCardLoader=true;
     this.genericService.saveCard(cardData).subscribe((res: any) => {
       console.log(res);
       this.emitNewCard.emit(res);
+      this.saveCardLoader=false;
     }, (err => {
-      
+      this.saveCardLoader=false;
     })
     );
   }

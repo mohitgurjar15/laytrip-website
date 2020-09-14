@@ -40,3 +40,48 @@
 a:hover {
     cursor: pointer;
 }
+
+.home_banner {
+    .banner_inner {
+        .banner_tab {
+            .tab-content {
+                .flight_tab {
+                    .tab-content {
+                        .tab-pane {
+                            .flight_search {
+                                .flight-grid {
+                                    .grid_box{
+                                        &.secound {
+                                            .search_area{
+                                                height: 100%;
+                                                display: flex;
+                                                flex-flow: column;
+                                                justify-content: space-between;
+                                                input{
+                                                    width: 100%;
+                                                    left: 0;
+                                                    position: relative;
+                                                    &.date_icon{
+                                                        position: absolute;
+                                                        top: 50%;
+                                                        right: 0;
+                                                        transform: translateY(-50%);
+                                                        background: url(http://localhost/laytrip_ui/assets/images/icon/calender-icon.svg) no-repeat;
+                                                        background-position: center right 15px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+   
+}
+
