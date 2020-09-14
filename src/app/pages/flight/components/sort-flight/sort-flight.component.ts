@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var $: any;
 export class SortFlightComponent implements OnInit {
 
   constructor() { }
-
+  @Output() sortFlight = new EventEmitter<{ key:string, order:string }>();
   ngOnInit() {
     this.loadJquery();
   }
@@ -28,4 +28,7 @@ export class SortFlightComponent implements OnInit {
     // Close filter Shortby js
   }
 
+  sortFlightData(key,order){
+    this.sortFlight.emit({ key , order })
+  }
 }
