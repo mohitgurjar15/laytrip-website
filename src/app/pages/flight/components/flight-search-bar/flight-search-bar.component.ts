@@ -32,7 +32,7 @@ export class FlightSearchBarComponent implements OnInit {
       departure: '',
       arrival: '',
       departure_date: moment().add(1, 'months').format('YYYY-MM-DD'),
-      // arrival_date: '',
+      arrival_date: null,
       class: '',
       adult: 1,
       child: null,
@@ -279,12 +279,24 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
+    if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
+      this.searchFlightInfo.trip = 'roundtrip';
+      if (this.route.snapshot.queryParams['arrival_date']) {
+        this.searchFlightInfo.arrival_date = this.arrivalDate;
+      }
+    }
 
-    console.log(this.totalPerson, this.searchFlightInfo.departure_date, this.searchFlightInfo.departure, this.searchFlightInfo.trip);
+    console.log(this.searchFlightInfo);
 
     if (this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
       && this.searchFlightInfo.trip === 'oneway') {
+      localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
+      this.searchBarInfo.emit(this.searchFlightInfo);
+    } else if (this.totalPerson &&
+      this.searchFlightInfo.departure_date && this.searchFlightInfo.arrival_date
+      && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
+      && this.searchFlightInfo.trip === 'roundtrip') {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.searchBarInfo.emit(this.searchFlightInfo);
     }
