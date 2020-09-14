@@ -17,7 +17,7 @@
               <span class="checkmark"></span>
             </label>
           </li>
-          <li>
+          <li *ngIf="type=='adult'">
             <label class="custom_radio">Mrs.
               <input type="radio" formControlName="title" value="mrs" tabindex="-1"
                 [checked]="traveler.title === 'mrs'">
@@ -44,7 +44,7 @@
               <span class="checkmark"></span>
             </label>
           </li>
-          <li>
+          <li >
             <label class="custom_radio">Non - Binary
               <input type="radio" formControlName="gender" value="N" [checked]="traveler.gender === 'N'">
               <span class="checkmark"></span>
@@ -80,9 +80,9 @@
         </div>
       </div>
     </div>
-    <div class="form_row">
+    <div class="form_row" *ngIf="type=='adult'">
       <div class="form_field half">
-        <label>Email<sup *ngIf="type=='adult'" >*</sup></label>
+        <label>Email<sup  >*</sup></label>
         <div class="text_field">
           <input type="email" [readonly]="traveler.userId" formControlName="email" maxlength="50" tabindex="3"
             placeholder="Enter your email">
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <div class="form_field half">
+      <div class="form_field half" *ngIf="type=='adult'">
         <label>Phone<sup  *ngIf="type=='adult'">*</sup></label>
         <div class="text_field">
           <div class="phone_no">

@@ -22,7 +22,9 @@ var AdultListComponent = /** @class */ (function () {
         this.totalTravelerCount = 0;
         this._travelers = [];
         this._selectedId = [];
+        this.loader = true;
         this.checked = false;
+        this.loading = true;
         this.checkBoxDisable = false;
         this.isLoggedIn = false;
         this.showAddAdultForm = false;
@@ -114,6 +116,9 @@ var AdultListComponent = /** @class */ (function () {
         this.checkUser();
         this.containers = this.containers;
         this.travelers = this.travelers;
+        if (this.travelers.length > 0) {
+            this.loader = false;
+        }
     };
     AdultListComponent.prototype.addForms = function (type) {
         if (type == 'adult') {

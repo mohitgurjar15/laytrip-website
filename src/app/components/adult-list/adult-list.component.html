@@ -1,6 +1,93 @@
-<div class="block_passenger_detail">
+<div class="block_passanger_info" *ngIf="loader">
+    <div class="block_title_section">
+        <h5 class="fb_animation w-25 mb-0"></h5>
+        <span class="fb_animation w-25 mb-0"></span>
+    </div>
+    <div class="passanger_detail_main">
+        <div class="block_passenger_detail">
+            <h6 class="fb_animation w-25"></h6>
+            <div id="accordion-Adults" class="accordion">
+                <div class="card_add_pass">
+                    <div class="card-header" id="adultOne">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#adultcollapseOne">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </button>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="card_add_pass">
+                    <div class="card-header" id="adultTwo">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#adultcollapseTwo">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </button>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <a class="add_passenger_btn" href="javascript:void(0);">
+                <p class="fb_animation w-25 mb-0"></p>
+            </a>
+        </div>
+        <div class="block_passenger_detail">
+            <h6 class="fb_animation w-25"></h6>
+            <div id="accordion-Childs" class="accordion">
+                <div class="card_add_pass">
+                    <div class="card-header" id="childOne">
+                        <h2 class="mb-0">
+                            <label class="custom_checkbox">
+                                <input type="checkbox" value="">
+                                <span class="checkmark"></span>
+                            </label>
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#childcollapseOne">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </button>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="card_add_pass">
+                    <div class="card-header" id="childTwo">
+                        <h2 class="mb-0">
+                            <label class="custom_checkbox">
+                                <input type="checkbox" value="">
+                                <span class="checkmark"></span>
+                            </label>
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#childcollapseTwo">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </button>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <a class="add_passenger_btn" href="javascript:void(0);">
+                <p class="fb_animation w-25 mb-0"></p>
+            </a>
+        </div>
+        <div class="block_passenger_detail">
+            <h6 class="fb_animation w-25"></h6>
+            <div class="block_no_add_passenger">
+                <p class="fb_animation w-100 mb-0"></p>
+            </div>
+            <a class="add_passenger_btn" href="javascript:void(0);">
+                <p class="fb_animation w-25 mb-0"></p>
+            </a>
+        </div>
+        <div class="required_wheelchair">
+            <ul>
+                <li>
+                    <p class="fb_animation w-50 mb-0"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="block_passenger_detail" *ngIf="!loader">
     <div class="block_passenger_info">
         <h6>Adult <span>(Above 12 years)</span></h6>
+        
         <div id="accordion-Adults" class="accordion" *ngIf="isLoggedIn && _adults.length">
             <div *ngFor="let traveler of _adults; let i = index;">
                 <div class="card_add_pass" *ngIf="traveler.user_type==='adult'">

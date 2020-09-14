@@ -42,12 +42,18 @@ var TravelerFormComponent = /** @class */ (function () {
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            dob: ['', forms_1.Validators.required],
+            dob: [{
+                    startDate: typeof this.traveler.dob !== 'undefined' ?
+                        moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
+                }, forms_1.Validators.required],
             country_code: ['', forms_1.Validators.required],
             phone_no: ['', forms_1.Validators.required],
             country_id: ['', forms_1.Validators.required],
             frequently_no: [''],
-            passport_expiry: [''],
+            passport_expiry: [{
+                    startDate: typeof this.traveler.passport_expiry !== 'undefined' ?
+                        moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
+                },],
             passport_number: [''],
             user_type: ['']
         });
@@ -61,12 +67,10 @@ var TravelerFormComponent = /** @class */ (function () {
                 lastName: this.traveler.lastName,
                 email: this.traveler.email,
                 gender: this.traveler.gender,
-                dob: { year: dob_selected.getFullYear(), month: dob_selected.getMonth(), day: dob_selected.getDate() },
-                passport_expiry: { year: pass_exp__selected.getFullYear(), month: pass_exp__selected.getMonth(), day: pass_exp__selected.getDate() },
                 country_code: this.traveler.countryCode,
                 phone_no: this.traveler.phoneNo,
                 country_id: this.traveler.country != null ? this.traveler.country.name : '',
-                passport_number: this.traveler.passportNumber,
+                passport_numdobDateUpdateber: this.traveler.passportNumber,
                 frequently_no: ''
             });
         }
@@ -119,6 +123,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.adultForm.invalid) {
+            console.log(this.adultForm.controls);
             this.submitted = true;
             this.loading = false;
             return;
@@ -135,11 +140,15 @@ var TravelerFormComponent = /** @class */ (function () {
                 frequently_no: this.adultForm.value.frequently_no,
                 dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),
                 gender: this.adultForm.value.gender,
-                country_code: this.adultForm.value.country_code.code,
-                country_id: country_id,
+                country_code: this.adultForm.value.country_code.code ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
+                country_id: country_id ? country_id : '',
                 phone_no: this.adultForm.value.phone_no,
                 passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD')
             };
+            if (this.type != 'adult') {
+                delete jsonData.country_code;
+                delete jsonData.phone_no;
+            }
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
@@ -149,13 +158,16 @@ var TravelerFormComponent = /** @class */ (function () {
                     console.log('error');
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
-                        // this.router.navigate(['/']);
+                        _this.router.navigate(['/']);
                     }
                 });
             }
             else {
-                var emailObj = { email: this.adultForm.value.email };
-                var addJsons = Object.assign(jsonData, emailObj);
+                var addJsons = {};
+                if (this.type === 'adult') {
+                    var emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
+                    addJsons = Object.assign(jsonData, emailObj);
+                }
                 this.flightService.addAdult(addJsons).subscribe(function (data) {
                     _this.adultForm.reset();
                     _this.submitted = _this.loading = false;
@@ -168,7 +180,7 @@ var TravelerFormComponent = /** @class */ (function () {
                     console.log('error');
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
-                        // this.router.navigate(['/']);
+                        _this.router.navigate(['/']);
                     }
                 });
             }
@@ -176,7 +188,7 @@ var TravelerFormComponent = /** @class */ (function () {
     };
     TravelerFormComponent.prototype.dobDateUpdate = function (date) {
         this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate);
-        console.log(this.expiryMinDate);
+        console.log('heree', this.expiryMinDate);
     };
     TravelerFormComponent.prototype.expiryDateUpdate = function (date) {
         this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate);

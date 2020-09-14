@@ -33,12 +33,9 @@ export class FlightTravelerComponent implements OnInit {
     private cookieService: CookieService,
     private toastr: ToastrService,
     private router:Router
-
-
   ) { }
 
   ngOnInit() {
-
     this.loading = true;
     this.getTravelers();
     this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
@@ -55,7 +52,7 @@ export class FlightTravelerComponent implements OnInit {
      
       this.travelerService.getTravelers().subscribe((res:any)=>{
         this.travelers = res.data;
-         
+        
         this.travelers.forEach(element => {
           if(element.user_type == 'adult'){
             this._adults.push(element);
@@ -65,12 +62,13 @@ export class FlightTravelerComponent implements OnInit {
             this._infants.push(element);          
           }
         });
+        this.loading = false;
       })
     }
     
     setTimeout(() => {
       this.loading = false;      
-    }, 1000);
+    }, 2000);
   }
 
   getAdultCount(count: number){  
@@ -107,6 +105,7 @@ export class FlightTravelerComponent implements OnInit {
   ngDoCheck(){
     this.checkUser();  
     if(this.is_traveller === false){
+      this.loading = true;
       this.getTravelers();
     }
   }

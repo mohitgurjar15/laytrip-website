@@ -27,7 +27,9 @@ export class AdultListComponent implements OnInit {
   totalTravelerCount = 0;
   _travelers = [];
   _selectedId = [];
+  loader: boolean = true;
   checked: boolean = false;
+  loading: boolean = true;
   checkBoxDisable: boolean = false;
   isLoggedIn: boolean = false;
   showAddAdultForm: boolean = false;
@@ -137,6 +139,10 @@ export class AdultListComponent implements OnInit {
     this.checkUser();
     this.containers = this.containers;
     this.travelers = this.travelers;
+    if(this.travelers.length > 0){
+      this.loader = false;
+    }
+    
   }
 
   

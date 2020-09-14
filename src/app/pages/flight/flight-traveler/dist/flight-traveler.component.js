@@ -55,11 +55,12 @@ var FlightTravelerComponent = /** @class */ (function () {
                         _this._infants.push(element);
                     }
                 });
+                _this.loading = false;
             });
         }
         setTimeout(function () {
             _this.loading = false;
-        }, 1000);
+        }, 2000);
     };
     FlightTravelerComponent.prototype.getAdultCount = function (count) {
         this.selectedAdults = count;
@@ -91,6 +92,7 @@ var FlightTravelerComponent = /** @class */ (function () {
     FlightTravelerComponent.prototype.ngDoCheck = function () {
         this.checkUser();
         if (this.is_traveller === false) {
+            this.loading = true;
             this.getTravelers();
         }
     };

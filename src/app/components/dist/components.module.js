@@ -28,13 +28,14 @@ var ng5_slider_1 = require("ng5-slider");
 var full_page_overlay_loader_component_1 = require("./full-page-overlay-loader/full-page-overlay-loader.component");
 var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var ngx_cookie_1 = require("ngx-cookie");
+var booking_enquiry_info_component_1 = require("./booking-enquiry-info/booking-enquiry-info.component");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
     ComponentsModule = __decorate([
         core_1.NgModule({
             declarations: [
-                search_airport_component_1.SearchAirportComponent, traveller_info_component_1.TravellerInfoComponent, checkout_progress_component_1.CheckoutProgressComponent, adult_list_component_1.AdultListComponent, child_list_component_1.ChildListComponent, infant_list_component_1.InfantListComponent, booking_timer_component_1.BookingTimerComponent, payment_mode_component_1.PaymentModeComponent, card_list_component_1.CardListComponent, add_card_component_1.AddCardComponent, traveler_form_component_1.TravelerFormComponent, full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent
+                search_airport_component_1.SearchAirportComponent, traveller_info_component_1.TravellerInfoComponent, checkout_progress_component_1.CheckoutProgressComponent, adult_list_component_1.AdultListComponent, child_list_component_1.ChildListComponent, infant_list_component_1.InfantListComponent, booking_timer_component_1.BookingTimerComponent, payment_mode_component_1.PaymentModeComponent, card_list_component_1.CardListComponent, add_card_component_1.AddCardComponent, traveler_form_component_1.TravelerFormComponent, full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent, booking_enquiry_info_component_1.BookingEnquiryInfoComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -58,7 +59,8 @@ var ComponentsModule = /** @class */ (function () {
                 payment_mode_component_1.PaymentModeComponent,
                 card_list_component_1.CardListComponent,
                 add_card_component_1.AddCardComponent,
-                full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent
+                full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent,
+                booking_enquiry_info_component_1.BookingEnquiryInfoComponent
             ],
             providers: [common_1.DatePipe]
         })
