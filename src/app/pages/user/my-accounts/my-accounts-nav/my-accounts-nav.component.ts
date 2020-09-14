@@ -36,7 +36,7 @@ export class MyAccountsNavComponent implements OnInit {
   }
   
   ngOnDestroy() {}
-
+  
   onLoggedout() {
     this.isLoggedIn = false;
     localStorage.removeItem('_lay_sess');

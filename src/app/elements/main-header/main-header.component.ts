@@ -143,10 +143,10 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
 
     checkUser() {
       let userToken = localStorage.getItem('_lay_sess');
-      
-      if( userToken && userToken != 'undefined') { 
+      this.isLoggedIn = false;
+      if( userToken && userToken != 'undefined' && userToken != 'null') { 
         this.isLoggedIn = true;
-      }
+      } 
     }
 
     onLoggedout() {

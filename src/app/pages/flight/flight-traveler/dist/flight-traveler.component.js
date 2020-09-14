@@ -58,6 +58,9 @@ var FlightTravelerComponent = /** @class */ (function () {
                 _this.loading = false;
             });
         }
+        else {
+            this.loading = false;
+        }
         setTimeout(function () {
             _this.loading = false;
         }, 2000);

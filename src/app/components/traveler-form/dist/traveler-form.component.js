@@ -149,6 +149,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 delete jsonData.country_code;
                 delete jsonData.phone_no;
             }
+            console.log(jsonData, this.adultForm.value, this.adultForm.controls);
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
@@ -163,12 +164,11 @@ var TravelerFormComponent = /** @class */ (function () {
                 });
             }
             else {
-                var addJsons = {};
                 if (this.type === 'adult') {
                     var emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
-                    addJsons = Object.assign(jsonData, emailObj);
+                    jsonData = Object.assign(jsonData, emailObj);
                 }
-                this.flightService.addAdult(addJsons).subscribe(function (data) {
+                this.flightService.addAdult(jsonData).subscribe(function (data) {
                     _this.adultForm.reset();
                     _this.submitted = _this.loading = false;
                     if (!_this.isLoggedIn) {

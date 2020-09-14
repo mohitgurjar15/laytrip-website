@@ -116,9 +116,10 @@ var AdultListComponent = /** @class */ (function () {
         this.checkUser();
         this.containers = this.containers;
         this.travelers = this.travelers;
-        if (this.travelers.length > 0) {
+        if (this.travelers.length >= 0) {
             this.loader = false;
         }
+        console.log(this.travelers.length, this.loader);
     };
     AdultListComponent.prototype.addForms = function (type) {
         if (type == 'adult') {
