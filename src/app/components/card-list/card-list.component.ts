@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 
@@ -14,11 +14,11 @@ export class CardListComponent implements OnInit {
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   cardLoader:boolean=true;
-  cards:[]=[]
+  cards:any=[]
   @Output() selectCreditCard=new EventEmitter();
   @Input() newCard;
   ngOnInit() {
-    console.log("this.newCard",this.newCard)
+    
     this.getCardlist();
   }
 
@@ -36,5 +36,11 @@ export class CardListComponent implements OnInit {
   selectCard(cardToken){
     console.log("cardToken",cardToken)
     this.selectCreditCard.emit(cardToken)
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['newCard']) {
+      this.cards.push(this.newCard)
+    }
   }
 }

@@ -178,4 +178,29 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
+  sortFlight(event){
+    console.log(event)
+    let { key , order } = event;
+    this.flightDetails = this.sortJSON(this.flightDetails,key,order)
+    console.log(this.flightDetails)
+
+  }
+
+  sortJSON(data, key, way) {
+    if (typeof data == "undefined") {
+        return data;
+    } else {
+        return data.sort(function (a, b) {
+            var x = a[key];
+            var y = b[key];
+            if (way === 'ASC') {
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            }
+            if (way === 'DESC') {
+                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            }
+        });
+    }
+  }
 }
