@@ -117,6 +117,7 @@ export class FlightSearchBarComponent implements OnInit {
     const selectedItem = localStorage.getItem('_fligh');
     if (selectedItem) {
       const info = JSON.parse(selectedItem);
+      console.log("info",info)
       info[1].value = airports[this.arrivalCode];
       info.forEach(res => {
         if (res && res.key === 'fromSearch') {
@@ -127,6 +128,7 @@ export class FlightSearchBarComponent implements OnInit {
           }
         }
         if (res && res.key === 'toSearch') {
+          res.value.display_name=`${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
           this.data.push(res.value);
           this.airportDefaultArrivalValue = `${res.value.city}`;
           if (this.airportDefaultArrivalValue) {
@@ -136,6 +138,7 @@ export class FlightSearchBarComponent implements OnInit {
       });
 
     }
+    console.log(this.data)
   }
 
   ngOnInit() {

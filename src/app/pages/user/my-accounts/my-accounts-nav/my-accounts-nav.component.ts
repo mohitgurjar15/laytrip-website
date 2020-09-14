@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MainHeaderComponent } from 'src/app/elements/main-header/main-header.component';
 import { environment } from '../../../../../environments/environment';
 import { getUserDetails } from '../../../../_helpers/jwt.helper';
 
