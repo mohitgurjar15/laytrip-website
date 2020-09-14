@@ -188,6 +188,7 @@ export class TravelerFormComponent implements OnInit {
         delete jsonData.country_code;
         delete jsonData.phone_no;
       } 
+      console.log(jsonData,this.adultForm.value,this.adultForm.controls)
      if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
@@ -202,13 +203,12 @@ export class TravelerFormComponent implements OnInit {
           }
         });
       } else {
-        let addJsons = {};
         if(this.type === 'adult') {
           let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
-          addJsons = Object.assign(jsonData, emailObj);
+          jsonData = Object.assign(jsonData, emailObj);
         } 
         
-        this.flightService.addAdult(addJsons).subscribe((data: any) => {
+        this.flightService.addAdult(jsonData).subscribe((data: any) => {
           this.adultForm.reset();
           this.submitted = this.loading = false;
           if(!this.isLoggedIn){

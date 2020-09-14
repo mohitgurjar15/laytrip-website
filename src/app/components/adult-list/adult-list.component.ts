@@ -139,10 +139,11 @@ export class AdultListComponent implements OnInit {
     this.checkUser();
     this.containers = this.containers;
     this.travelers = this.travelers;
-    if(this.travelers.length > 0){
+    
+    if(this.travelers.length >= 0){
       this.loader = false;
     }
-    
+    console.log( this.travelers.length,this.loader)
   }
 
   
@@ -157,6 +158,7 @@ export class AdultListComponent implements OnInit {
   } 
 
   checkUser() {
+    
     let userToken = localStorage.getItem('_lay_sess');
 
     if (userToken) {

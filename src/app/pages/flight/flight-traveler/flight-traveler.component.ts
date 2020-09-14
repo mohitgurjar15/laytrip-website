@@ -64,6 +64,8 @@ export class FlightTravelerComponent implements OnInit {
         });
         this.loading = false;
       })
+    } else {
+      this.loading = false;
     }
     
     setTimeout(() => {
@@ -103,7 +105,7 @@ export class FlightTravelerComponent implements OnInit {
   }
   
   ngDoCheck(){
-    this.checkUser();  
+    this.checkUser(); 
     if(this.is_traveller === false){
       this.loading = true;
       this.getTravelers();
