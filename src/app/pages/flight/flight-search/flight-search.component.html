@@ -10,11 +10,11 @@
     <div class="row">
       <div class="col-lg-3">
         <app-sort-flight (sortFlight)="sortFlight($event)"></app-sort-flight>
-        <app-filter-flight [filterFlightDetails]="filterFlightDetails"></app-filter-flight>
+        <app-filter-flight [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"></app-filter-flight>
       </div>
       <div class="col-lg-9">
         <app-flight-price-slider></app-flight-price-slider>
-        <app-flight-item-wrapper [flightDetails]="flightDetails"></app-flight-item-wrapper>
+        <app-flight-item-wrapper  [flightDetails]="flightDetails"></app-flight-item-wrapper>
       </div>
     </div>
   </div>
