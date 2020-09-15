@@ -143,7 +143,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),
                 gender: this.adultForm.value.gender,
                 country_id: country_id ? country_id : '',
-                passport_expiry: typeof this.adultForm.value.dob.passport_expiry === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD')
+                passport_expiry: typeof this.adultForm.value.passport_expiry.startDate === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD')
             };
             if (this.type === 'adult') {
                 var adultObj = {
@@ -158,7 +158,7 @@ var TravelerFormComponent = /** @class */ (function () {
                     _this.submitted = _this.loading = false;
                     // this.travelerFormChange.observers.push(data);
                     _this.travelerFormChange.emit(data);
-                    console.log(_this.travelerFormChange);
+                    // console.log(this.travelerFormChange)
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                 }, function (error) {
@@ -177,12 +177,10 @@ var TravelerFormComponent = /** @class */ (function () {
                 this.subscriptions.push(this.flightService.addAdult(jsonData).subscribe(function (data) {
                     _this.adultForm.reset();
                     _this.submitted = _this.loading = false;
-                    console.log(_this.isLoggedIn);
                     if (!_this.isLoggedIn) {
                         localStorage.setItem("_lay_sess", data.token);
                     }
                     _this.travelerFormChange.emit(data);
-                    console.log(_this.travelerFormChange);
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                     _this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });

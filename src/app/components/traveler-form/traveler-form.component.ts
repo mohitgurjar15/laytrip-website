@@ -155,7 +155,7 @@ export class TravelerFormComponent implements OnInit {
       if (!Number(country_id)) {
         country_id = this.traveler.country.id;
       }
-
+     
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
@@ -165,7 +165,7 @@ export class TravelerFormComponent implements OnInit {
         dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
         country_id: country_id ? country_id : '',
-        passport_expiry: typeof this.adultForm.value.dob.passport_expiry === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD'),
+        passport_expiry: typeof this.adultForm.value.passport_expiry.startDate === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD'),
       };
 
       if (this.type === 'adult') {
@@ -182,7 +182,7 @@ export class TravelerFormComponent implements OnInit {
           this.submitted = this.loading = false;
           // this.travelerFormChange.observers.push(data);
           this.travelerFormChange.emit(data);
-          console.log(this.travelerFormChange)
+          // console.log(this.travelerFormChange)
           $('.collapse').collapse('hide');
           $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
@@ -201,12 +201,10 @@ export class TravelerFormComponent implements OnInit {
           this.flightService.addAdult(jsonData).subscribe((data: any) => {
             this.adultForm.reset();
             this.submitted = this.loading = false;
-            console.log(this.isLoggedIn)
             if (!this.isLoggedIn) {
               localStorage.setItem("_lay_sess", data.token);
             }
             this.travelerFormChange.emit(data);
-            console.log(this.travelerFormChange);
 
             $('.collapse').collapse('hide');
             $('#accordion-' + this.type).hide();
