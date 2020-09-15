@@ -28,6 +28,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   arrivalTimeSlotCityName;
   departureTimeSlotCityName;
   currency;
+  showMinAirline:number=4;
 
   /* Varibale for filter */
   minPrice:number;
@@ -35,9 +36,13 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   airLines=[];
   minPartialPaymentPrice:number;
   maxPartialPaymentPrice:number;
-  timeRangeSlots=[];
-  journeyType:string;
-  type:string;
+  outBoundDepartureTimeRangeSlots=[];
+  outBoundArrivalTimeRangeSlots=[];
+  inBoundDepartureTimeRangeSlots=[];
+  inBoundArrivalTimeRangeSlots=[];
+  outBoundStops=[];
+  inBoundStops=[];
+  /* End of filter variable */
 
   // tslint:disable-next-line: variable-name
   _currency = localStorage.getItem('_curr');
@@ -146,6 +151,11 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  toggleAirlines(type){
+    this.showMinAirline = (type==='more')?500:4;
+  }
+  
+  
   /**
    * Filter by price range
    * @param event 
@@ -180,7 +190,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     this.filterFlights();
   }
 
-  filterByTimeSlot(event,journey,type,slot){
+  filterByOutBoundDepartureTimeSlot(event,journey,type,slot){
     
     let slotValue:any={
       value : slot,
@@ -189,18 +199,109 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     }
     if(event.target.checked){
 
-      this.timeRangeSlots.push(slotValue);
+      this.outBoundDepartureTimeRangeSlots.push(slotValue);
     }
     else{
 
-      this.timeRangeSlots = this.timeRangeSlots.filter(slot=>{
-          //console.log(JSON.stringify(slot),slotValue)
+      this.outBoundDepartureTimeRangeSlots = this.outBoundDepartureTimeRangeSlots.filter(slot=>{
           return JSON.stringify(slot)!==JSON.stringify(slotValue);
       })
     }
-    console.log(this.timeRangeSlots)
+    console.log(this.outBoundDepartureTimeRangeSlots)
     this.filterFlights();
   }
+
+  filterByOutBoundArrivalTimeSlot(event,journey,type,slot){
+    
+    let slotValue:any={
+      value : slot,
+      journey : journey,
+      type : type
+    }
+    if(event.target.checked){
+
+      this.outBoundArrivalTimeRangeSlots.push(slotValue);
+    }
+    else{
+
+      this.outBoundArrivalTimeRangeSlots = this.outBoundArrivalTimeRangeSlots.filter(slot=>{
+          return JSON.stringify(slot)!==JSON.stringify(slotValue);
+      })
+    }
+    console.log(this.outBoundArrivalTimeRangeSlots)
+    this.filterFlights();
+  }
+
+  filterByInBoundDepartureTimeSlot(event,journey,type,slot){
+    
+    let slotValue:any={
+      value : slot,
+      journey : journey,
+      type : type
+    }
+    if(event.target.checked){
+
+      this.inBoundDepartureTimeRangeSlots.push(slotValue);
+    }
+    else{
+
+      this.inBoundDepartureTimeRangeSlots = this.inBoundDepartureTimeRangeSlots.filter(slot=>{
+          return JSON.stringify(slot)!==JSON.stringify(slotValue);
+      })
+    }
+
+    this.filterFlights();
+  }
+
+  filterByInBoundArrivalTimeSlot(event,journey,type,slot){
+    
+    let slotValue:any={
+      value : slot,
+      journey : journey,
+      type : type
+    }
+    if(event.target.checked){
+
+      this.inBoundArrivalTimeRangeSlots.push(slotValue);
+    }
+    else{
+
+      this.inBoundArrivalTimeRangeSlots = this.inBoundArrivalTimeRangeSlots.filter(slot=>{
+          return JSON.stringify(slot)!==JSON.stringify(slotValue);
+      })
+    }
+
+    this.filterFlights();
+  }
+  
+  filterByDepartureStop(event,stopCount){
+
+    if(event.target.checked===true){
+      this.outBoundStops.push(stopCount)
+    }
+    else{
+      this.outBoundStops=this.outBoundStops.filter(stop=>{
+          return stop!=stopCount
+      })
+    }
+    console.log("this.outBoundStops",this.outBoundStops)
+    this.filterFlights();
+  }
+  
+  filterByArrivalStop(event,stopCount){
+
+    if(event.target.checked===true){
+      this.inBoundStops.push(stopCount)
+    }
+    else{
+      this.inBoundStops=this.inBoundStops.filter(stop=>{
+          return stop!=stopCount
+      })
+    }
+
+    this.filterFlights();
+  }
+  
 
   /**
    * Comman function to process filtration of flight
@@ -235,13 +336,14 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       })
     }
 
-    if(this.timeRangeSlots.length){
+    /* Filter based on outbound departure time slot */
+    if(this.outBoundDepartureTimeRangeSlots.length){
       filterdFlights=filterdFlights.filter(item=>{
-          console.log(JSON.stringify(this.timeRangeSlots))
+          console.log(JSON.stringify(this.outBoundDepartureTimeRangeSlots))
           let journeyIndex;
           let typeIndex;
           let timeValue;
-          for(let slot of this.timeRangeSlots){
+          for(let slot of this.outBoundDepartureTimeRangeSlots){
 
               journeyIndex = slot.journey=='outbound'?0:1;
               typeIndex =slot.type=='departure'?0:item.routes[journeyIndex].stops.length-1;
@@ -259,7 +361,93 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       })
     }
 
-    console.log("filterdFlights",filterdFlights)
+    /* Filter based on outbound arrival time slot */
+    if(this.outBoundArrivalTimeRangeSlots.length){
+      filterdFlights=filterdFlights.filter(item=>{
+          let journeyIndex;
+          let typeIndex;
+          let timeValue;
+          for(let slot of this.outBoundArrivalTimeRangeSlots){
+
+              journeyIndex = slot.journey=='outbound'?0:1;
+              typeIndex =slot.type=='departure'?0:item.routes[journeyIndex].stops.length-1;
+              timeValue =slot.type=='departure'?'departure_time':'arrival_time';
+
+              if(
+                moment(item.routes[journeyIndex].stops[typeIndex][timeValue],'hh:mm A').
+                  isBetween(
+                    moment(slot.value.from_time,'hh:mm a'),
+                    moment(slot.value.to_time,'hh:mm a'))
+              ){
+                  return true;
+              }
+          }
+      })
+    }
+
+    /* Filter based on inbound departure time slot */
+    if(this.inBoundDepartureTimeRangeSlots.length){
+      filterdFlights=filterdFlights.filter(item=>{
+          let journeyIndex;
+          let typeIndex;
+          let timeValue;
+          for(let slot of this.inBoundDepartureTimeRangeSlots){
+
+              journeyIndex = slot.journey=='outbound'?0:1;
+              typeIndex =slot.type=='departure'?0:item.routes[journeyIndex].stops.length-1;
+              timeValue =slot.type=='departure'?'departure_time':'arrival_time';
+
+              if(
+                moment(item.routes[journeyIndex].stops[typeIndex][timeValue],'hh:mm A').
+                  isBetween(
+                    moment(slot.value.from_time,'hh:mm a'),
+                    moment(slot.value.to_time,'hh:mm a'))
+              ){
+                  return true;
+              }
+          }
+      })
+    }
+
+    /* Filter based on inbound arrival time slot */
+    if(this.inBoundArrivalTimeRangeSlots.length){
+      filterdFlights=filterdFlights.filter(item=>{
+          let journeyIndex;
+          let typeIndex;
+          let timeValue;
+          for(let slot of this.inBoundArrivalTimeRangeSlots){
+
+              journeyIndex = slot.journey=='outbound'?0:1;
+              typeIndex =slot.type=='departure'?0:item.routes[journeyIndex].stops.length-1;
+              timeValue =slot.type=='departure'?'departure_time':'arrival_time';
+
+              if(
+                moment(item.routes[journeyIndex].stops[typeIndex][timeValue],'hh:mm A').
+                  isBetween(
+                    moment(slot.value.from_time,'hh:mm a'),
+                    moment(slot.value.to_time,'hh:mm a'))
+              ){
+                  return true;
+              }
+          }
+      })
+    }
+
+    if(this.outBoundStops.length){
+      filterdFlights=filterdFlights.filter(item=>{
+
+          return this.outBoundStops.includes(item.stop_count);
+
+      })
+    }
+
+    if(this.inBoundStops.length){
+      filterdFlights=filterdFlights.filter(item=>{
+
+          return this.inBoundStops.includes(item.inbound_stop_count);
+
+      })
+    }
     this.filterFlight.emit(filterdFlights); 
   }
 }
