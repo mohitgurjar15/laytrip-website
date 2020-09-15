@@ -9,11 +9,16 @@ exports.__esModule = true;
 exports.UserRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var co_accounts_component_1 = require("./co-accounts/co-accounts.component");
 var routes = [
     {
         path: '',
         loadChildren: './my-accounts/my-accounts.module#MyAccountsModule'
-    }
+    },
+    {
+        path: 'co-accounts',
+        component: co_accounts_component_1.CoAccountsComponent
+    },
 ];
 var UserRoutingModule = /** @class */ (function () {
     function UserRoutingModule() {

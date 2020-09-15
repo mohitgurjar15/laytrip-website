@@ -118,7 +118,7 @@
         <div
           *ngIf="type === 'adult' && ((submitted || adultForm.controls.phone_no.touched || adultForm.controls.country_code.touched) && (adultForm.controls.phone_no.errors || adultForm.controls.country_code.errors))"
           class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.country_code.errors.required"
+          <div *ngIf="(adultForm.controls.phone_no.errors && adultForm.controls.phone_no.errors.required && adultForm.controls.country_code.errors.required)"
             class="text-danger">Please enter phone no.</div>
         </div>
       </div>

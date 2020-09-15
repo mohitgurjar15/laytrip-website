@@ -70,13 +70,13 @@ export class TravelerFormComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      country_code: ['', [Validators.required]],
+      phone_no: ['', [Validators.required]],
+      country_id: ['', Validators.required],
       dob: [{
         startDate:typeof this.traveler.dob !== 'undefined' ?
         moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate          
       }, Validators.required],
-      country_code: ['', Validators.required],
-      phone_no: ['', Validators.required],
-      country_id: ['', Validators.required],
       passport_expiry: [{
         startDate:typeof this.traveler.passport_expiry !== 'undefined' ?
         moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate          
@@ -85,12 +85,10 @@ export class TravelerFormComponent implements OnInit {
       frequently_no: [''],
       user_type:['']
     });
-
-    this.setUserTypeValidation();
-
-    let dob_selected = new Date(this.traveler.dob)
-
-    let pass_exp__selected = new Date(this.traveler.passportExpiry)
+    if(this.type != 'adult'){
+      console.log('ss');
+      this.setUserTypeValidation();
+    }
 
     if(this.traveler.userId){
       this.adultForm.patchValue({
@@ -105,11 +103,12 @@ export class TravelerFormComponent implements OnInit {
           passport_numdobDateUpdateber: this.traveler.passportNumber,
           frequently_no:''
         })
+        this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
+        
+        this.auditFormStatus.emit(this.formStatus);
     }
+    console.log(this.adultForm)
 
-    this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
-    
-    this.auditFormStatus.emit(this.formStatus);
     
   }
 
@@ -123,12 +122,12 @@ export class TravelerFormComponent implements OnInit {
     const emailControl = this.adultForm.get('email');  
     const phoneControl = this.adultForm.get('phone_no');  
     const countryControl = this.adultForm.get('country_code');   
-        
-    if(this.type === 'adult'){
+    if(this.type === 'adult' && emailControl.value != null){
       emailControl.setValidators([Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
       this.dobMaxDate =  moment().add(-12, 'year');       
+
     } else if(this.type === 'child') {
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)

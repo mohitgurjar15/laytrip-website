@@ -45,13 +45,13 @@ var TravelerFormComponent = /** @class */ (function () {
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+            country_code: ['', [forms_1.Validators.required]],
+            phone_no: ['', [forms_1.Validators.required]],
+            country_id: ['', forms_1.Validators.required],
             dob: [{
                     startDate: typeof this.traveler.dob !== 'undefined' ?
                         moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
                 }, forms_1.Validators.required],
-            country_code: ['', forms_1.Validators.required],
-            phone_no: ['', forms_1.Validators.required],
-            country_id: ['', forms_1.Validators.required],
             passport_expiry: [{
                     startDate: typeof this.traveler.passport_expiry !== 'undefined' ?
                         moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
@@ -60,9 +60,10 @@ var TravelerFormComponent = /** @class */ (function () {
             frequently_no: [''],
             user_type: ['']
         });
-        this.setUserTypeValidation();
-        var dob_selected = new Date(this.traveler.dob);
-        var pass_exp__selected = new Date(this.traveler.passportExpiry);
+        if (this.type != 'adult') {
+            console.log('ss');
+            this.setUserTypeValidation();
+        }
         if (this.traveler.userId) {
             this.adultForm.patchValue({
                 title: this.traveler.title,
@@ -76,9 +77,10 @@ var TravelerFormComponent = /** @class */ (function () {
                 passport_numdobDateUpdateber: this.traveler.passportNumber,
                 frequently_no: ''
             });
+            this.formStatus = this.adultForm.status === 'VALID' ? true : false;
+            this.auditFormStatus.emit(this.formStatus);
         }
-        this.formStatus = this.adultForm.status === 'VALID' ? true : false;
-        this.auditFormStatus.emit(this.formStatus);
+        console.log(this.adultForm);
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
         this.checkUser();
@@ -89,7 +91,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var emailControl = this.adultForm.get('email');
         var phoneControl = this.adultForm.get('phone_no');
         var countryControl = this.adultForm.get('country_code');
-        if (this.type === 'adult') {
+        if (this.type === 'adult' && emailControl.value != null) {
             emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
             phoneControl.setValidators([forms_1.Validators.required]);
             countryControl.setValidators([forms_1.Validators.required]);
