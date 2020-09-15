@@ -20,6 +20,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.usersType = '';
         this.traveler = [];
+        // @Output() valueChange = new EventEmitter();
         this.valueChange = new core_1.EventEmitter();
         this.auditFormStatus = new core_1.EventEmitter();
         this.submitted = false;
@@ -34,6 +35,7 @@ var TravelerFormComponent = /** @class */ (function () {
         };
         this.dobMaxDate = moment();
         this.expiryMinDate = moment().add(2, 'days');
+        this.subscriptions = [];
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
         this.adultForm = this.formBuilder.group({
@@ -49,12 +51,12 @@ var TravelerFormComponent = /** @class */ (function () {
             country_code: ['', forms_1.Validators.required],
             phone_no: ['', forms_1.Validators.required],
             country_id: ['', forms_1.Validators.required],
-            frequently_no: [''],
             passport_expiry: [{
                     startDate: typeof this.traveler.passport_expiry !== 'undefined' ?
                         moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
                 },],
             passport_number: [''],
+            frequently_no: [''],
             user_type: ['']
         });
         this.setUserTypeValidation();
@@ -78,6 +80,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.auditFormStatus.emit(this.formStatus);
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
+        this.checkUser();
         this.countries = this.countries;
         this.countries_code = this.countries_code;
     };
@@ -85,7 +88,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var emailControl = this.adultForm.get('email');
         var phoneControl = this.adultForm.get('phone_no');
         var countryControl = this.adultForm.get('country_code');
-        if (this.type == 'adult') {
+        if (this.type === 'adult') {
             emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
             phoneControl.setValidators([forms_1.Validators.required]);
             countryControl.setValidators([forms_1.Validators.required]);
@@ -115,7 +118,8 @@ var TravelerFormComponent = /** @class */ (function () {
     };
     TravelerFormComponent.prototype.checkUser = function () {
         var userToken = localStorage.getItem('_lay_sess');
-        if (userToken) {
+        this.isLoggedIn = false;
+        if (userToken && userToken != 'undefined' && userToken != 'null') {
             this.isLoggedIn = true;
         }
     };
@@ -133,6 +137,7 @@ var TravelerFormComponent = /** @class */ (function () {
             if (!Number(country_id)) {
                 country_id = this.traveler.country.id;
             }
+            console.log(this.adultForm.value.dob.startDate);
             var jsonData = {
                 title: this.adultForm.value.title,
                 first_name: this.adultForm.value.firstName,
@@ -140,20 +145,23 @@ var TravelerFormComponent = /** @class */ (function () {
                 frequently_no: this.adultForm.value.frequently_no,
                 dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),
                 gender: this.adultForm.value.gender,
-                country_code: this.adultForm.value.country_code.code ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
                 country_id: country_id ? country_id : '',
-                phone_no: this.adultForm.value.phone_no,
                 passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD')
             };
-            if (this.type != 'adult') {
-                delete jsonData.country_code;
-                delete jsonData.phone_no;
+            if (this.type === 'adult') {
+                var adultObj = {
+                    country_code: this.adultForm.value.country_code.code && this.adultForm.value.country_code != 'null' ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
+                    phone_no: this.adultForm.value.phone_no
+                };
+                jsonData = Object.assign(jsonData, adultObj);
             }
-            console.log(jsonData, this.adultForm.value, this.adultForm.controls);
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
-                    _this.valueChange.emit(data);
+                    if (data) {
+                        _this.valueChange.emit(data);
+                        console.log(_this.valueChange);
+                    }
                     $('.collapse').collapse('hide');
                 }, function (error) {
                     console.log('error');
@@ -164,25 +172,33 @@ var TravelerFormComponent = /** @class */ (function () {
                 });
             }
             else {
-                if (this.type === 'adult') {
-                    var emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
-                    jsonData = Object.assign(jsonData, emailObj);
+                /* if(this.type === 'adult') {
+                  let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
+                  jsonData = Object.assign(jsonData, emailObj);
                 }
-                this.flightService.addAdult(jsonData).subscribe(function (data) {
-                    _this.adultForm.reset();
-                    _this.submitted = _this.loading = false;
-                    if (!_this.isLoggedIn) {
-                        localStorage.setItem("_lay_sess", data.token);
+                this.subscriptions.push(
+                  this.flightService.addAdult(jsonData).subscribe((data: any) => {
+                    this.adultForm.reset();
+                    this.submitted = this.loading = false;
+                    console.log(this.isLoggedIn)
+                    if(!this.isLoggedIn){
+                      localStorage.setItem("_lay_sess", data.token);
                     }
-                    _this.valueChange.emit(data);
+                    this.valueChange.emit(data);
+          
                     $('.collapse').collapse('hide');
-                }, function (error) {
-                    console.log('error');
-                    _this.submitted = _this.loading = false;
+                    $('#accordion-'+this.type).hide();
+                    this.subscriptions.forEach(sub => sub.unsubscribe());
+                  }, (error: HttpErrorResponse) => {
+                    console.log('error')
+                    this.submitted = this.loading = false;
                     if (error.status === 401) {
-                        _this.router.navigate(['/']);
+                      this.router.navigate(['/']);
                     }
-                });
+                    this.subscriptions.forEach(sub => sub.unsubscribe());
+                  })
+                 
+                );  */
             }
         }
     };

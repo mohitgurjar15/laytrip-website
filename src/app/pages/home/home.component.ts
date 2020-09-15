@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
@@ -7,6 +7,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
       departure: '',
       arrival: '',
       departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
-      // arrival_date: '',
+      arrival_date: '',
       class: '',
       adult: 1,
       child: null,
@@ -64,7 +65,8 @@ export class HomeComponent implements OnInit {
     private genericService: GenericService,
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
-    public router: Router
+    public router: Router,
+    public cd: ChangeDetectorRef
   ) {
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
@@ -158,10 +160,6 @@ export class HomeComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toDestinationCode;
   }
 
-  dateChange(event) {
-    // console.log(event);
-  }
-
   getDateWithFormat(date) {
     this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
     // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
@@ -214,17 +212,29 @@ export class HomeComponent implements OnInit {
 
   toggleOnewayRoundTrip(type) {
 
-    if (type == 'roundtrip')
+    if (type === 'roundtrip') {
       this.isRoundTrip = true;
-    else
-      this.isRoundTrip = false
+    } else {
+      this.isRoundTrip = false;
+    }
   }
 
   datesUpdated(event) {
-
+    // console.log(event);
   }
 
   departureDateUpdate(date) {
-    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate)
+    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+    this.flightSearchForm.value.returnDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+  }
+
+  dateChange(type) {
+    if (type === 'previous') {
+      this.flightDepartureMinDate = moment(this.flightSearchForm.value.departureDate.startDate).subtract(1, 'days');
+      this.flightSearchForm.value.departureDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).subtract(1, 'days');
+    } else if (type === 'next') {
+      this.flightDepartureMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(1, 'days');
+      this.flightSearchForm.value.departureDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(1, 'days');
+    }
   }
 }

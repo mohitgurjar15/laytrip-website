@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -16,18 +17,22 @@ declare var $: any;
 })
 
 
+
+
+
 export class TravelerFormComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-
   @Input('var') usersType: any = '';
   @Input() traveler: any = [];
-  @Output() valueChange = new EventEmitter();
+  // @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter<any>();
+
+
   @Output() auditFormStatus = new EventEmitter();
   @Input() type:string;
   @Input() countries:[];
   @Input() countries_code:[];
   
-
   adultForm: FormGroup;
   submitted = false;
   loading = false;
@@ -44,7 +49,10 @@ export class TravelerFormComponent implements OnInit {
   dobMinDate: any; 
   dobMaxDate: moment.Moment = moment(); 
   expiryMinDate: moment.Moment = moment().add(2, 'days'); 
+  subscriptions: Subscription[] = [];
 
+
+  
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
@@ -69,14 +77,15 @@ export class TravelerFormComponent implements OnInit {
       country_code: ['', Validators.required],
       phone_no: ['', Validators.required],
       country_id: ['', Validators.required],
-      frequently_no: [''],
       passport_expiry: [{
         startDate:typeof this.traveler.passport_expiry !== 'undefined' ?
         moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate          
       }, ],
       passport_number: [''], 
+      frequently_no: [''],
       user_type:['']
-    })
+    });
+
     this.setUserTypeValidation();
 
     let dob_selected = new Date(this.traveler.dob)
@@ -105,22 +114,21 @@ export class TravelerFormComponent implements OnInit {
   }
 
   ngDoCheck(){
+    this.checkUser();
     this.countries = this.countries;
     this.countries_code = this.countries_code;
-
   }
 
   setUserTypeValidation(){
     const emailControl = this.adultForm.get('email');  
     const phoneControl = this.adultForm.get('phone_no');  
     const countryControl = this.adultForm.get('country_code');   
-
-    if(this.type == 'adult'){
+        
+    if(this.type === 'adult'){
       emailControl.setValidators([Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
-      this.dobMaxDate =  moment().add(-12, 'year'); 
-      
+      this.dobMaxDate =  moment().add(-12, 'year');       
     } else if(this.type === 'child') {
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
@@ -150,8 +158,8 @@ export class TravelerFormComponent implements OnInit {
 
   checkUser() {
     let userToken = localStorage.getItem('_lay_sess');
-
-    if (userToken) {
+    this.isLoggedIn = false;
+    if( userToken && userToken != 'undefined' && userToken != 'null') { 
       this.isLoggedIn = true;
     }
   }
@@ -159,6 +167,7 @@ export class TravelerFormComponent implements OnInit {
  
 
   onSubmit() {
+   
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
       console.log(this.adultForm.controls)
@@ -166,35 +175,43 @@ export class TravelerFormComponent implements OnInit {
       this.loading = false;
       return;
     } else {
+      
       let country_id = this.adultForm.value.country_id.id;
       if (!Number(country_id)) {
         country_id = this.traveler.country.id;
       }
+      
+      console.log(this.adultForm.value.dob.startDate)
 
+      
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
-        dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),
+        dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),//typeof this.adultForm.value.dob.startDate == 'object'? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'):'',
         gender: this.adultForm.value.gender,
-        country_code: this.adultForm.value.country_code.code? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
         country_id: country_id ? country_id : '',
-        phone_no: this.adultForm.value.phone_no,
         passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD'),
       };
 
-      if(this.type != 'adult') {
-        delete jsonData.country_code;
-        delete jsonData.phone_no;
+      if(this.type === 'adult') {
+        let adultObj = { 
+          country_code: this.adultForm.value.country_code.code && this.adultForm.value.country_code != 'null' ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
+          phone_no: this.adultForm.value.phone_no,
+        };
+        jsonData = Object.assign(jsonData, adultObj);
       } 
-      console.log(jsonData,this.adultForm.value,this.adultForm.controls)
+      
      if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
-          this.valueChange.emit(data);
-          $('.collapse').collapse('hide');
+          if(data){
+            this.valueChange.emit(data);
+            console.log(this.valueChange)
 
+          }         
+          $('.collapse').collapse('hide');
         }, (error: HttpErrorResponse) => {
           console.log('error')
           this.submitted = this.loading = false;
@@ -203,29 +220,38 @@ export class TravelerFormComponent implements OnInit {
           }
         });
       } else {
-        if(this.type === 'adult') {
+        /* if(this.type === 'adult') {
           let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
           jsonData = Object.assign(jsonData, emailObj);
         } 
-        
-        this.flightService.addAdult(jsonData).subscribe((data: any) => {
-          this.adultForm.reset();
-          this.submitted = this.loading = false;
-          if(!this.isLoggedIn){
-            localStorage.setItem("_lay_sess", data.token);
-          }
-          this.valueChange.emit(data);
-          $('.collapse').collapse('hide');
-        }, (error: HttpErrorResponse) => {
-          console.log('error')
-          this.submitted = this.loading = false;
-          if (error.status === 401) {
-            this.router.navigate(['/']);
-          }
-        });
+        this.subscriptions.push(
+          this.flightService.addAdult(jsonData).subscribe((data: any) => {
+            this.adultForm.reset();
+            this.submitted = this.loading = false;
+            console.log(this.isLoggedIn)
+            if(!this.isLoggedIn){
+              localStorage.setItem("_lay_sess", data.token);
+            }
+            this.valueChange.emit(data);
+  
+            $('.collapse').collapse('hide');
+            $('#accordion-'+this.type).hide();
+            this.subscriptions.forEach(sub => sub.unsubscribe());
+          }, (error: HttpErrorResponse) => {
+            console.log('error')
+            this.submitted = this.loading = false;
+            if (error.status === 401) {
+              this.router.navigate(['/']);
+            }
+            this.subscriptions.forEach(sub => sub.unsubscribe());
+          })
+         
+        );  */             
       }
     }
   }
+
+
 
   dobDateUpdate(date){
     this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
@@ -234,7 +260,6 @@ export class TravelerFormComponent implements OnInit {
 
   expiryDateUpdate(date){
     this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
-
   }
 
   

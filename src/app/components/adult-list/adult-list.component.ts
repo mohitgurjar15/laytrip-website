@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { GenericService } from '../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -19,11 +19,11 @@ export class AdultListComponent implements OnInit {
   @Input() username: string;
   @Input() type: string;
   @Input() age: string;
-  @Input() _adults: [];
-  @Input() _childs: [];
-  @Input() _infants: [];
+  @Input() _adults :any = [];
+  @Input() _childs = [];
+  @Input() _infants  :any = [];
 
-  counter = 1;
+  counter = 0;
   totalTravelerCount = 0;
   _travelers = [];
   _selectedId = [];
@@ -62,7 +62,7 @@ export class AdultListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   
+
     this.checkUser();
     this.getCountry();
     if (this.type == 'adult' && !this.isLoggedIn) {
@@ -85,7 +85,7 @@ export class AdultListComponent implements OnInit {
       };
       this._travelers.push(travelerData);
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      if (this.counter  < totalTraveler) {
+      if (this.counter + 1 < totalTraveler) {
         // this.checkBoxDisable = false;
         this.counter++;
       } else {
@@ -125,25 +125,24 @@ export class AdultListComponent implements OnInit {
   }
 
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes:SimpleChanges) {
     if (changes['traveler']) {
-      // console.log("this.traveler",this.travelers)
+      this.travelers = this.travelers;
     }
   }
 
 
   ngDoCheck() {
+    // console.log("whole",this)
     /* this._selectedId.forEach(id => {
       $(  "#"+id   ).removeAttr( "disabled" );     
     }); */
     this.checkUser();
     this.containers = this.containers;
-    this.travelers = this.travelers;
     
     if(this.travelers.length >= 0){
       this.loader = false;
     }
-    console.log( this.travelers.length,this.loader)
   }
 
   
@@ -168,7 +167,24 @@ export class AdultListComponent implements OnInit {
   
 
   pushTraveler(event) {
-    this.travelers.push(event);
+    console.log(event)
+   if(event.user_type == 'adult'){
+     console.log("before",this._adults)
+     this._adults.push(event);
+     console.log("after",this._adults)
+     
+    } else if(event.user_type == 'child'){
+      console.log("before child",this._childs)
+
+      this._childs.push(event);
+
+      console.log("after child",this._childs)
+    } else {
+      console.log("before",this._infants)
+      this._infants.push(event);
+      console.log("after",this._infants)
+   }
+   
     this.showAddAdultForm = false;
   }
 
