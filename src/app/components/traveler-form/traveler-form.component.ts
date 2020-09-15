@@ -24,7 +24,7 @@ export class TravelerFormComponent implements OnInit {
   @Input() countries: [];
   @Input() countries_code: [];
   @Output() travelerFormChange = new EventEmitter();
-  @Output() auditFormStatus = new EventEmitter();
+  // @Output() auditFormStatus = new EventEmitter();
 
   adultForm: FormGroup;
   submitted = false;
@@ -102,7 +102,7 @@ export class TravelerFormComponent implements OnInit {
 
     this.formStatus = this.adultForm.status === 'VALID' ? true : false;
 
-    this.auditFormStatus.emit(this.formStatus);
+    // this.auditFormStatus.emit(this.formStatus);
 
   }
 
