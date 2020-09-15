@@ -167,19 +167,19 @@ export class AdultListComponent implements OnInit {
 
 
   pushTraveler(event) {
-    console.log('updated',event);
+    //console.log('updated',event);
     if (event.user_type === 'adult') {
-      console.log('before', this._adults);
+      //console.log('before', this._adults);
       this._adults.push(event);
-      console.log('after', this._adults);
+      //console.log('after', this._adults);
     } else if (event.user_type === 'child') {
-      console.log('before child', this._childs);
+      //console.log('before child', this._childs);
       this._childs.push(event);
-      console.log('after child', this._childs);
+      //console.log('after child', this._childs);
     } else {
-      console.log('before', this._infants);
+      //console.log('before', this._infants);
       this._infants.push(event);
-      console.log('after', this._infants);
+      //console.log('after', this._infants);
     }
 
     this.showAddAdultForm = false;
