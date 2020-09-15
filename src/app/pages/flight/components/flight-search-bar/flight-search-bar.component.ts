@@ -117,7 +117,6 @@ export class FlightSearchBarComponent implements OnInit {
     const selectedItem = localStorage.getItem('_fligh');
     if (selectedItem) {
       const info = JSON.parse(selectedItem);
-      console.log("info",info)
       info[1].value = airports[this.arrivalCode];
       info.forEach(res => {
         if (res && res.key === 'fromSearch') {
@@ -138,7 +137,6 @@ export class FlightSearchBarComponent implements OnInit {
       });
 
     }
-    console.log(this.data)
   }
 
   ngOnInit() {
@@ -293,7 +291,7 @@ export class FlightSearchBarComponent implements OnInit {
       && this.searchFlightInfo.trip === 'oneway') {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.searchBarInfo.emit(this.searchFlightInfo);
-    } else if (this.totalPerson &&
+    } else if (this.isRoundTrip && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.arrival_date
       && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
       && this.searchFlightInfo.trip === 'roundtrip') {
@@ -305,6 +303,7 @@ export class FlightSearchBarComponent implements OnInit {
   toggleOnewayRoundTrip(type) {
     if (type === 'roundtrip') {
       this.isRoundTrip = true;
+      this.searchFlightInfo.trip = 'roundtrip';
     } else {
       this.isRoundTrip = false;
     }

@@ -154,10 +154,9 @@ export class TravelerFormComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
-      // console.log(this.adultForm.controls);
+      console.log(this.adultForm.controls);
       this.submitted = true;
       this.loading = false;
       return;
@@ -176,7 +175,7 @@ export class TravelerFormComponent implements OnInit {
         first_name: this.adultForm.value.firstName,
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
-        dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),//typeof this.adultForm.value.dob.startDate == 'object'? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'):'',
+        dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),// typeof this.adultForm.value.dob.startDate == 'object'? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'):'',
         gender: this.adultForm.value.gender,
         country_id: country_id ? country_id : '',
         passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD'),
@@ -194,16 +193,10 @@ export class TravelerFormComponent implements OnInit {
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
-          console.log('outside:::', data);
-          this.travelerFormChange.emit(data);
-          console.log('sdfsfd', this.travelerFormChange);
-          // if (data) {
-          //   this.travelerFormChange.emit(data);
-          //   if (this.travelerFormChange) {
-          //     console.log('sdfsfd', this.travelerFormChange);
-          //     $('.collapse').collapse('hide');
-          //   }
-          // }
+          // this.travelerFormChange.emit(data);
+          this.travelerFormChange.observers.push(data);
+          $('.collapse').collapse('hide');
+          $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
           console.log('error');
           this.submitted = this.loading = false;
@@ -212,22 +205,23 @@ export class TravelerFormComponent implements OnInit {
           }
         });
       } else {
-        /* if(this.type === 'adult') {
+        if (this.type === 'adult') {
           let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
           jsonData = Object.assign(jsonData, emailObj);
-        } 
+        }
         this.subscriptions.push(
           this.flightService.addAdult(jsonData).subscribe((data: any) => {
             this.adultForm.reset();
             this.submitted = this.loading = false;
             console.log(this.isLoggedIn)
-            if(!this.isLoggedIn){
+            if (!this.isLoggedIn) {
               localStorage.setItem("_lay_sess", data.token);
             }
-            this.valueChange.emit(data);
-  
+            this.travelerFormChange.emit(data);
+            console.log(this.travelerFormChange);
+
             $('.collapse').collapse('hide');
-            $('#accordion-'+this.type).hide();
+            $('#accordion-' + this.type).hide();
             this.subscriptions.forEach(sub => sub.unsubscribe());
           }, (error: HttpErrorResponse) => {
             console.log('error')
@@ -237,8 +231,8 @@ export class TravelerFormComponent implements OnInit {
             }
             this.subscriptions.forEach(sub => sub.unsubscribe());
           })
-         
-        );  */
+
+        );
       }
     }
   }
