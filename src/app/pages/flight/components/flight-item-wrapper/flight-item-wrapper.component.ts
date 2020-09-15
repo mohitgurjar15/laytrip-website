@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
@@ -6,15 +6,34 @@ import { Subscription } from 'rxjs';
 import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-flight-item-wrapper',
   templateUrl: './flight-item-wrapper.component.html',
   styleUrls: ['./flight-item-wrapper.component.scss'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        query(':leave', [
+          stagger(50, [
+            animate('0.5s', style({ opacity: 0 }))
+          ])
+        ], { optional: true }),
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(200, [
+            animate('0.5s', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ],
 })
 export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   @Input() flightDetails;
+  @Input() filter;
 
   animationState = 'out';
   flightList;
@@ -138,10 +157,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     });
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
   bookNow(routeCode) {
     const itinerary = {
       adult: this.route.snapshot.queryParams["adult"],
@@ -150,5 +165,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     };
     this.cookieService.put('_itinerary', JSON.stringify(itinerary));
     this.router.navigate([`flight/traveler/${routeCode}`]);
+  }
+
+
+  ngOnChanges(changes:SimpleChanges){
+    
+    this.flightList=changes.flightDetails.currentValue;
+  }
+
+  logAnimation(event) {
+    console.log(event);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }
