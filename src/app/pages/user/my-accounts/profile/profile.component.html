@@ -21,7 +21,7 @@
                           </div>
                           <div class="update_info_right">
                               <div class="form_row">
-                                  <div class="form_field">
+                                  <div class="form_field half">
                                       <label>First Name<sup>*</sup></label>
                                       <div class="text_field">
                                           <input type="text" formControlName="first_name"   maxlength="20" tabindex="1">
@@ -32,7 +32,7 @@
                                             class="text-danger">Please enter your first name.</div>
                                     </div>
                                   </div>
-                                  <div class="form_field">
+                                  <div class="form_field half">
                                       <label>Last Name<sup>*</sup></label>
                                       <div class="text_field">
                                           <input type="text" formControlName="last_name"  maxlength="20" tabindex="2">
@@ -46,14 +46,14 @@
                               </div>
 
                               <div class="form_row">
-                                  <div class="form_field">
+                                  <div class="form_field half">
                                       <label>Email<sup>*</sup></label>
                                       <div class="text_field">
                                           <input readonly type="email" formControlName="email"  tabindex="3">
                                       </div>
                                       
                                   </div>
-                                  <div class="form_field">
+                                  <div class="form_field half">
                                       <label>Phone</label>
                                       <div class="text_field">
                                           <div class="phone_no">
@@ -81,11 +81,11 @@
                               </div>
 
                               <div class="form_row">
-                                  <div class="form_field">
+                                  <div class="form_field half">
                                       <div class="field_inn">
                                           <label>Date of Birth<sup>*</sup></label>
                                           <div class="text_field">
-                                            <input [maxDate]="maxDate" class="form-control" placeholder="yyyy-mm-dd" tabindex="6"
+                                            <input [maxDate]="maxDate" class="form-control birth_date" placeholder="yyyy-mm-dd" tabindex="6"
                                             ngbDatepicker #d="ngbDatepicker" dateFormat="yyyy-mm-dd" [readonly]="true" formControlName="dob" (click)="d.toggle()">  
                                             </div>
                                             <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors"
@@ -115,7 +115,7 @@
                                           </div>
                                       </div>
                                   </div>
-                                  <div class="form_field">
+                                  <div class="form_field half">
                                       <label>Select Gender<sup>*</sup></label>
                                       <div class="select_gender">
                                         <ul>

@@ -6,7 +6,7 @@
         <ul class="custom_listing">
           <li>
             <label class="custom_radio">Mr.
-              <input  type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr" tabindex="0"
+              <input type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr" tabindex="0"
                 [checked]="traveler.title === 'mr'">
               <span class="checkmark"></span>
             </label>
@@ -44,7 +44,7 @@
               <span class="checkmark"></span>
             </label>
           </li>
-          <li >
+          <li>
             <label class="custom_radio">Non - Binary
               <input type="radio" formControlName="gender" value="N" [checked]="traveler.gender === 'N'">
               <span class="checkmark"></span>
@@ -82,7 +82,7 @@
     </div>
     <div class="form_row" *ngIf="type=='adult'">
       <div class="form_field half">
-        <label>Email<sup  >*</sup></label>
+        <label>Email<sup>*</sup></label>
         <div class="text_field">
           <input type="email" [readonly]="traveler.userId" formControlName="email" maxlength="50" tabindex="3"
             placeholder="Enter your email">
@@ -99,7 +99,7 @@
       </div>
 
       <div class="form_field half" *ngIf="type=='adult'">
-        <label>Phone<sup  *ngIf="type=='adult'">*</sup></label>
+        <label>Phone<sup *ngIf="type=='adult'">*</sup></label>
         <div class="text_field">
           <div class="phone_no">
             <div class="code">
@@ -110,15 +110,21 @@
               </div>
             </div>
             <div class="number">
-              <input type="text" formControlName="phone_no" maxlength="10"
+              <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
                 (keypress)="commonFunction.validateNumber($event)" tabindex="5" placeholder="0000 0000 00">
             </div>
           </div>
         </div>
         <div
-          *ngIf="type === 'adult' && ((submitted || adultForm.controls.phone_no.touched || adultForm.controls.country_code.touched) && (adultForm.controls.phone_no.errors || adultForm.controls.country_code.errors))"
+          *ngIf="type === 'adult' && adultForm.controls.country_code.errors"
           class="focus-input100 login-error">
-          <div *ngIf="(adultForm.controls.phone_no.errors && adultForm.controls.phone_no.errors.required && adultForm.controls.country_code.errors.required)"
+          <div *ngIf="adultForm.controls.country_code.errors.required && adultForm.controls.country_code.touched"
+            class="text-danger">Please enter country code</div>
+        </div>
+        <div
+          *ngIf="type === 'adult' && adultForm.controls.phone_no.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.phone_no.touched"
             class="text-danger">Please enter phone no.</div>
         </div>
       </div>
@@ -127,21 +133,11 @@
     <div class="form_row">
       <div class="form_field half">
         <label>DOB<sup>*</sup></label>
-        <input type="text"  tabindex="6"
-            ngxDaterangepickerMd 
-            formControlName="dob" 
-            showDropdowns="true"
-            alwaysShowCalendars="true"
-            placeholder="" 
-            class="form-control custom_datpicker"
-            [singleDatePicker]="true"
-            (datesUpdated)="dobDateUpdate($event)"
-            [locale]="locale"
-            [autoApply]="true"
-            [minDate]="dobMinDate"
-            [maxDate]="dobMaxDate"
-            />
-            <!-- <div class="prev-next">
+        <input type="text" tabindex="6" ngxDaterangepickerMd formControlName="dob" showDropdowns="true"
+          alwaysShowCalendars="true" placeholder="" class="form-control custom_datpicker" [singleDatePicker]="true"
+          (datesUpdated)="dobDateUpdate($event)" [locale]="locale" [autoApply]="true" [minDate]="dobMinDate"
+          [maxDate]="dobMaxDate" />
+        <!-- <div class="prev-next">
               <a href="javascript:void(0);">Prev</a>
               <a href="javascript:void(0);">Next</a>
           </div>
@@ -149,10 +145,10 @@
               <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
           </div> -->
 
-          <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
-            <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
-              date of birth.
-            </div>
+        <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
+            date of birth.
+          </div>
         </div>
       </div>
       <div class="form_field half">
@@ -174,21 +170,11 @@
     <div class="form_row">
       <div class="form_field half">
         <label>Passport Expiry</label>
-        
-          <input type="text"   tabindex="8"
-            ngxDaterangepickerMd 
-            formControlName="passport_expiry" 
-            class="form-control custom_datpicker"
-            showDropdowns="true"
-            alwaysShowCalendars="true"
-            placeholder="" 
-            [singleDatePicker]="true"
-            (datesUpdated)="expiryDateUpdate($event)"
-            [locale]="locale"
-            [autoApply]="true"
-            showDropdowns="true"
-            [minDate]="expiryMinDate"
-          />
+
+        <input type="text" tabindex="8" ngxDaterangepickerMd formControlName="passport_expiry"
+          class="form-control custom_datpicker" showDropdowns="true" alwaysShowCalendars="true" placeholder=""
+          [singleDatePicker]="true" (datesUpdated)="expiryDateUpdate($event)" [locale]="locale" [autoApply]="true"
+          showDropdowns="true" [minDate]="expiryMinDate" />
       </div>
       <div class="form_field half">
         <label>Passport Number</label>
@@ -212,6 +198,6 @@
         <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{ traveler.userId ? 'Update' : 'Add' }}
       </button>
     </div>
-    
+
   </form>
 </div>

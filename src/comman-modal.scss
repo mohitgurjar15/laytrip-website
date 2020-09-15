@@ -4,7 +4,7 @@
 .comman_modal {
     .modal-dialog {
         max-width: 1024px;
-        width: 96%;
+        width: 97%;
 
         .sign_in_modal {
             width: 100%;
@@ -17,7 +17,7 @@
                     overflow: hidden;
                     width: 1024px;
                     max-width: 100%;
-                    min-height: 730px;
+                    min-height: 620px;
                     border-radius: 10px;
 
                     .close {
@@ -44,7 +44,7 @@
                         top: 0;
                         height: 100%;
                         transition: all 0.5s ease-in-out;
-                        padding: 50px;
+                        padding: 40px;
 
                         @media(max-width: 767px) {
                             padding: 15px;
@@ -69,7 +69,7 @@
                                     width: 100%;
                                     display: flex;
                                     justify-content: space-between;
-                                    margin: 0 0 40px;
+                                    margin: 0 0 25px;
                                     position: relative;
 
                                     .modal_title {
@@ -78,6 +78,7 @@
                                             color: $text-black;
                                             font-weight: 600;
                                             text-transform: uppercase;
+                                            margin: 0;
                                         }
 
                                         p {
@@ -117,7 +118,7 @@
                                                 margin: 0 0 5px;
                                                 font-size: 14px;
                                                 color: $text-grey;
-                                                font-weight: 500;
+                                                font-weight: 400;
                                                 text-transform: uppercase;
                                             }
 
@@ -304,6 +305,10 @@
                                                         height: 190%;
                                                     }
                                                 }
+
+                                                @media(max-width: 767px) {
+                                                    width: 270px;
+                                                }
                                             }
                                         }
                                     }
@@ -344,7 +349,7 @@
                                         ul {
                                             width: 100%;
                                             list-style: none;
-                                            margin: 20px 0 50px;
+                                            margin: 20px 0;
                                             padding: 0;
                                             display: flex;
 
@@ -366,6 +371,15 @@
 
                                                     img {
                                                         margin-right: 15px;
+                                                    }
+
+                                                    @media(max-width: 991px) {
+                                                        font-size: 0;
+                                                        justify-content: center;
+
+                                                        img {
+                                                            margin: 0;
+                                                        }
                                                     }
                                                 }
 
@@ -440,6 +454,7 @@
                                             color: $text-black;
                                             font-weight: 600;
                                             text-transform: uppercase;
+                                            margin: 0;
                                         }
 
                                         p {
@@ -509,7 +524,7 @@
                                                 margin: 0 0 5px;
                                                 font-size: 14px;
                                                 color: $text-grey;
-                                                font-weight: 500;
+                                                font-weight: 400;
                                                 text-transform: uppercase;
                                             }
 
@@ -734,8 +749,8 @@
                                             text-align: center;
 
                                             button {
-                                                width: auto;
-                                                padding: 0 120px;
+                                                width: 290px;
+                                                padding: 0;
                                                 display: inline-block;
                                                 height: 48px;
                                                 background: $background-grey;
@@ -769,6 +784,10 @@
                                                     &:before {
                                                         height: 190%;
                                                     }
+                                                }
+
+                                                @media(max-width: 767px) {
+                                                    width: 270px;
                                                 }
                                             }
                                         }
@@ -803,12 +822,15 @@
 
                             .forgot_modal {
                                 height: 100%;
+                                display: flex;
+                                flex-flow: column;
+                                justify-content: space-between;
 
                                 .modal_top {
                                     width: 100%;
                                     display: flex;
                                     justify-content: space-between;
-                                    margin: 0 0 60px;
+                                    margin: 0;
                                     position: relative;
 
                                     .modal_title {
@@ -817,6 +839,7 @@
                                             color: $text-black;
                                             font-weight: 600;
                                             text-transform: uppercase;
+                                            margin: 0;
                                         }
 
                                         p {
@@ -831,7 +854,6 @@
 
                                 .modal_cnt {
                                     width: 100%;
-                                    height: calc(100% - 150px);
                                     display: flex;
                                     flex-flow: column;
                                     justify-content: space-between;
@@ -848,7 +870,7 @@
                                                 margin: 0 0 5px;
                                                 font-size: 14px;
                                                 color: $text-grey;
-                                                font-weight: 500;
+                                                font-weight: 400;
                                                 text-transform: uppercase;
                                             }
 
@@ -883,7 +905,6 @@
                                         .form_btn {
                                             width: 100%;
                                             text-align: center;
-                                            margin-bottom: 150px;
 
                                             button {
                                                 width: 290px;
@@ -923,9 +944,19 @@
                                                         height: 190%;
                                                     }
                                                 }
+
+                                                @media(max-width: 767px) {
+                                                    width: 270px;
+                                                }
                                             }
                                         }
                                     }
+
+                                }
+
+                                .modal_change_link {
+                                    width: 100%;
+                                    display: flex;
 
                                     p {
                                         width: 100%;
@@ -952,6 +983,11 @@
                             z-index: 1;
                             background: $background-white;
 
+                            @media(max-width: 767px) {
+                                width: 100%;
+                                left: -100%;
+                            }
+
                             .verify_otp_modal {
                                 height: 100%;
                                 display: flex;
@@ -960,7 +996,7 @@
 
                                 .modal_top {
                                     width: 100%;
-                                    margin: 0 0 60px;
+                                    margin: 0;
                                     position: relative;
 
                                     .modal_title {
@@ -969,6 +1005,7 @@
                                             color: $text-black;
                                             font-weight: 600;
                                             text-transform: uppercase;
+                                            margin: 0;
                                         }
 
                                         p {
@@ -982,7 +1019,6 @@
 
                                 .modal_cnt {
                                     width: 100%;
-                                    height: 100%;
                                     display: flex;
                                     flex-flow: column;
                                     justify-content: space-between;
@@ -998,6 +1034,10 @@
 
                                             li {
                                                 padding: 0 10px;
+
+                                                @media(max-width: 767px) {
+                                                    padding: 0 5px;
+                                                }
 
                                                 &:first-child {
                                                     padding-left: 0;
@@ -1026,7 +1066,7 @@
 
                                         .resend_otp_code {
                                             width: 100%;
-                                            margin: 20px 0 60px;
+                                            margin: 20px 0;
                                             display: flex;
                                             justify-content: space-between;
 
@@ -1048,7 +1088,7 @@
                                         .form_btn {
                                             width: 100%;
                                             text-align: center;
-                                            margin-bottom: 150px;
+                                            margin-bottom: 0;
 
                                             button {
                                                 width: 290px;
@@ -1088,9 +1128,19 @@
                                                         height: 190%;
                                                     }
                                                 }
+
+                                                @media(max-width: 767px) {
+                                                    width: 270px;
+                                                }
                                             }
                                         }
                                     }
+
+                                }
+
+                                .modal_change_link {
+                                    width: 100%;
+                                    display: flex;
 
                                     p {
                                         width: 100%;
@@ -1121,6 +1171,10 @@
                             z-index: 1;
                             background: $background-white;
 
+                            @media(max-width: 767px) {
+                                width: 100%;
+                            }
+
                             .resetpass_modal {
                                 height: 100%;
                                 justify-content: space-between;
@@ -1129,7 +1183,7 @@
 
                                 .modal_top {
                                     width: 100%;
-                                    margin: 0 0 80px;
+                                    margin: 0;
                                     position: relative;
 
                                     .modal_title {
@@ -1138,6 +1192,7 @@
                                             color: $text-black;
                                             font-weight: 600;
                                             text-transform: uppercase;
+                                            margin: 0;
                                         }
 
                                         p {
@@ -1151,7 +1206,6 @@
 
                                 .modal_cnt {
                                     width: 100%;
-                                    height: 100%;
                                     display: flex;
                                     flex-flow: column;
                                     justify-content: space-between;
@@ -1167,6 +1221,10 @@
 
                                             li {
                                                 padding: 0 10px;
+
+                                                @media(max-width: 767px) {
+                                                    padding: 0 5px;
+                                                }
 
                                                 &:first-child {
                                                     padding-left: 0;
@@ -1202,7 +1260,7 @@
                                                 margin: 0 0 5px;
                                                 font-size: 14px;
                                                 color: $text-grey;
-                                                font-weight: 500;
+                                                font-weight: 400;
                                                 text-transform: uppercase;
                                             }
 
@@ -1299,9 +1357,19 @@
                                                         height: 190%;
                                                     }
                                                 }
+
+                                                @media(max-width: 767px) {
+                                                    width: 270px;
+                                                }
                                             }
                                         }
                                     }
+
+                                }
+
+                                .modal_change_link {
+                                    width: 100%;
+                                    display: flex;
 
                                     p {
                                         width: 100%;
@@ -1323,6 +1391,10 @@
                                 z-index: 6;
                                 opacity: 1;
                                 transform: translateX(100%);
+
+                                @media(max-width: 767px) {
+                                    transform: translateX(0%);
+                                }
                             }
                         }
                     }
@@ -1340,6 +1412,7 @@
                         @media(max-width: 767px) {
                             width: 100%;
                             left: 0;
+                            display: none;
                         }
 
                         .overlay {
@@ -1460,6 +1533,10 @@
                         .otp-container {
                             transform: translateX(0%);
                             background: $background-white;
+
+                            @media(max-width: 767px) {
+                                transform: translateX(-0%);
+                            }
                         }
 
                         .resetpass-container {

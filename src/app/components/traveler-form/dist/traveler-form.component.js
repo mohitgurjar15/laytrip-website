@@ -20,8 +20,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.usersType = '';
         this.traveler = [];
-        // @Output() valueChange = new EventEmitter();
-        this.valueChange = new core_1.EventEmitter();
+        this.travelerFormChange = new core_1.EventEmitter();
         this.auditFormStatus = new core_1.EventEmitter();
         this.submitted = false;
         this.loading = false;
@@ -130,7 +129,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.adultForm.invalid) {
-            console.log(this.adultForm.controls);
+            // console.log(this.adultForm.controls);
             this.submitted = true;
             this.loading = false;
             return;
@@ -155,7 +154,8 @@ var TravelerFormComponent = /** @class */ (function () {
             };
             if (this.type === 'adult') {
                 var adultObj = {
-                    country_code: this.adultForm.value.country_code.code && this.adultForm.value.country_code != 'null' ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
+                    country_code: this.adultForm.value.country_code.code &&
+                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
                     phone_no: this.adultForm.value.phone_no
                 };
                 jsonData = Object.assign(jsonData, adultObj);
@@ -163,8 +163,16 @@ var TravelerFormComponent = /** @class */ (function () {
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
-                    _this.valueChange.emit(data);
-                    $('.collapse').collapse('hide');
+                    console.log('outside:::', data);
+                    _this.travelerFormChange.emit(data);
+                    console.log('sdfsfd', _this.travelerFormChange);
+                    // if (data) {
+                    //   this.travelerFormChange.emit(data);
+                    //   if (this.travelerFormChange) {
+                    //     console.log('sdfsfd', this.travelerFormChange);
+                    //     $('.collapse').collapse('hide');
+                    //   }
+                    // }
                 }, function (error) {
                     console.log('error');
                     _this.submitted = _this.loading = false;
@@ -185,7 +193,7 @@ var TravelerFormComponent = /** @class */ (function () {
                     if (!_this.isLoggedIn) {
                         localStorage.setItem("_lay_sess", data.token);
                     }
-                    _this.valueChange.emit(data);
+                    _this.travelerFormChange.emit(data);
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                     _this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });
@@ -217,12 +225,6 @@ var TravelerFormComponent = /** @class */ (function () {
         core_1.Input()
     ], TravelerFormComponent.prototype, "traveler");
     __decorate([
-        core_1.Output()
-    ], TravelerFormComponent.prototype, "valueChange");
-    __decorate([
-        core_1.Output()
-    ], TravelerFormComponent.prototype, "auditFormStatus");
-    __decorate([
         core_1.Input()
     ], TravelerFormComponent.prototype, "type");
     __decorate([
@@ -231,6 +233,12 @@ var TravelerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TravelerFormComponent.prototype, "countries_code");
+    __decorate([
+        core_1.Output()
+    ], TravelerFormComponent.prototype, "travelerFormChange");
+    __decorate([
+        core_1.Output()
+    ], TravelerFormComponent.prototype, "auditFormStatus");
     TravelerFormComponent = __decorate([
         core_1.Component({
             selector: 'app-traveler-form',

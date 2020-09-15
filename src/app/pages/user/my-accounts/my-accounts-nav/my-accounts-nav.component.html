@@ -1,43 +1,51 @@
 <div class="account_saidbar">
-  <div class="saidbar_top">
-      <span>
-          <img src="{{_login_user_info.profilePic ||  defaultImage}}" alt="Profile Image">
-      </span>
-      <div class="member_info">
-          <h6>{{_login_user_info.username}}</h6>
-          <p>Member since June 2020</p>
-      </div>
+    <div class="saidbar_top">
+        <div class="block_inner">
+            <span>
+                <img src="{{_login_user_info.profilePic ||  defaultImage}}" alt="Profile Image">
+            </span>
+            <div class="member_info">
+                <h6>{{_login_user_info.username}}</h6>
+                <p>Member since June 2020</p>
+            </div>
+        </div>
   </div>
   <div class="saidbar_menu">
       <h4>Main Menu</h4>
       <ul>
           <li>
-              <a [routerLink]="['/account/bookings']">
+              <a [routerLink]="['/account/bookings']" [routerLinkActive]="['active_link']">
                   <img src="{{s3BucketUrl}}assets/images/icon/ic_booing.svg" alt="Bookings Icon">
                   My Bookings
               </a>
           </li>
           <li>
-              <a href="javascript:void(0);">
+              <a href="javascript:void(0);" [routerLinkActive]="['active_link']">
                   <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon">
                   Payment History
               </a>
           </li>
           <li>
-              <a href="javascript:void(0);">
+              <a href="javascript:void(0);" [routerLinkActive]="['active_link']">
                   <img src="{{s3BucketUrl}}assets/images/icon/ic_favourite.svg" alt="My Favourite Icon">
                   My Favourite
               </a>
           </li>
           <li>
-              <a href="javascript:void(0);">
+              <a href="javascript:void(0);" [routerLinkActive]="['active_link']">
                   <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon">
                   Credit Cards
               </a>
           </li>
           <li>
+            <a [routerLink]="['/account/co-accounts']" [routerLinkActive]="['active_link']">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
+                Co - Travellers
+            </a>
+          </li>
+          <li>
               <div class="dropdown">
-                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                  <a href="javascript:void(0);" class="dropdown-toggle" [routerLinkActive]="['active_link']" data-toggle="dropdown">
                       <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
                       Settings
                   </a>
@@ -48,12 +56,7 @@
                   </ul>
               </div>
           </li>
-          <li>
-            <a  href="javascript:void(0);">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
-                Co - Travellers
-            </a>
-          </li>
+        
           <li>
             <a  href="javascript:void(0);" (click)="onLoggedout()">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_logout.svg" alt="Logout Icon">
