@@ -49,13 +49,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Earliest
-                    <input type="radio" name="arrival_radio">
+                    <input type="radio" name="arrival_radio" (click)="sortFlightData('arrival','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
                   <label class="custom_radio">Shortest
-                    <input type="radio" name="arrival_radio">
+                    <input type="radio" name="arrival_radio" (click)="sortFlightData('arrival','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
@@ -66,13 +66,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Earliest
-                    <input type="radio" name="departure_radio">
+                    <input type="radio" name="departure_radio" (click)="sortFlightData('departure','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
                   <label class="custom_radio">Shortest
-                    <input type="radio" name="departure_radio">
+                    <input type="radio" name="departure_radio" (click)="sortFlightData('departure','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
