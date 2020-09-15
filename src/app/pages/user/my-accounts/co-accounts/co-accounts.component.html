@@ -1,0 +1,55 @@
+<section class="account_part">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <app-my-accounts-nav></app-my-accounts-nav>
+      </div>
+      <div class="col-lg-9">
+        <div class="account_cnt_main co_traveller">
+          <div class="block_co_traveller_main">
+            <div class="block_traveller_top">
+              <label class="custom_checkbox">
+                <input type="checkbox" value="">
+                <span class="checkmark"></span>Select all
+              </label>
+              <a href="javascript:void(0);" data-toggle="modal" data-target="#add_traveller_modal">+ Add New Co -
+                Traveller</a>
+            </div>
+            <div class="block_traveller_btm">
+              <ul *ngFor="let traveler of travelers; let i = index">                
+                <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value="">
+                    <span class="checkmark"></span>
+                  </label>
+                  <div class="traveller_list">
+                    <div class="list_block">
+                      <div class="traveller_name">{{traveler.firstName | titlecase}} {{traveler.lastName | titlecase}} <span>({{traveler.user_type | titlecase}})</span></div>
+                      <div class="traveller_age">{{calculateAge(traveler.dob)}}yrs, {{getGender(traveler.gender)}}</div>
+                    </div>
+                    <div class="list_action">
+                      <ul>
+                        <li>
+                          <a href="javascript:void(0);" data-toggle="modal" data-target="#add_traveller_modal">
+                            <img src="{{s3BucketUrl}}assets/images/icon/ic_edit.svg" alt="Edit Icon">
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <img src="{{s3BucketUrl}}assets/images/icon/ic_trash.svg" alt="Delete Icon">
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-crud-co-account></app-crud-co-account>

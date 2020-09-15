@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
@@ -16,7 +16,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
     trigger('listAnimation', [
       transition('* => *', [ // each time the binding value changes
         query(':leave', [
-          stagger(200, [
+          stagger(50, [
             animate('0.5s', style({ opacity: 0 }))
           ])
         ], { optional: true }),
@@ -33,6 +33,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   @Input() flightDetails;
+  @Input() filter;
 
   animationState = 'out';
   flightList;
@@ -164,6 +165,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     };
     this.cookieService.put('_itinerary', JSON.stringify(itinerary));
     this.router.navigate([`flight/traveler/${routeCode}`]);
+  }
+
+
+  ngOnChanges(changes:SimpleChanges){
+    
+    this.flightList=changes.flightDetails.currentValue;
   }
 
   logAnimation(event) {

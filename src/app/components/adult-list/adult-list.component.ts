@@ -167,7 +167,7 @@ export class AdultListComponent implements OnInit {
 
 
   pushTraveler(event) {
-    console.log(event);
+    console.log('updated',event);
     if (event.user_type === 'adult') {
       console.log('before', this._adults);
       this._adults.push(event);

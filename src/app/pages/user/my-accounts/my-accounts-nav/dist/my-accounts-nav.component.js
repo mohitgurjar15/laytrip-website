@@ -23,6 +23,7 @@ var MyAccountsNavComponent = /** @class */ (function () {
     };
     MyAccountsNavComponent.prototype.ngDoCheck = function () {
         this._login_user_info = jwt_helper_1.getUserDetails(localStorage.getItem("_lay_sess"));
+        console.log(this._login_user_info);
         this.profile_pic = this._login_user_info.profilePic;
         this.checkUser();
     };

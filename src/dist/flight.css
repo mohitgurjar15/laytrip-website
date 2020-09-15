@@ -37,8 +37,14 @@
 .ng-select.laytrip-input .ng-select-container .ng-value-container {
   padding-left: 0px !important;
 }
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input {
+  padding: 0 15px;
+}
 .ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input input {
   padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-value {
+  padding: 0 15px;
 }
 .ng-select.laytrip-input .ng-select-container .ng-clear-wrapper {
   padding: 0 0px 0px 5px !important;
@@ -63,6 +69,11 @@
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
   border: none !important;
+  display: flex;
+  align-items: center;
+}
+.ng-select.ng-customClass .ng-select-container:hover {
+  box-shadow: none;
 }
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
@@ -119,6 +130,9 @@
   background: #012178;
   padding: 15px 0;
 }
+.modify_search .tab-pane {
+  width: 100%;
+}
 .modify_search .flight_tab {
   padding: 0 15px;
 }
@@ -143,7 +157,7 @@
 @media (max-width: 575px) {
   .modify_search .flight_tab .nav-tabs .nav-item a {
     padding: 5px 8px;
-    margin: 0 10px 0 0;
+    margin: 0 5px 0 0;
     font-size: 12px;
   }
 }
@@ -232,12 +246,6 @@
   font-weight: 600;
   padding: 0 15px;
 }
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box .search_area span {
-  font-size: 10px;
-  font-weight: 400;
-  color: #8188AB;
-  padding: 0 15px;
-}
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first {
   display: flex;
   justify-content: space-between;
@@ -263,6 +271,12 @@
   border: 1px solid #E0E2E5;
   border-radius: 8px;
   background: #ffffff;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area span {
+  font-size: 10px;
+  font-weight: 400;
+  color: #8188AB;
+  padding: 0 15px;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .switch_btn {
   width: 30px;
@@ -305,7 +319,6 @@
   border: 1px solid #E0E2E5;
   border-radius: 8px;
   background: #ffffff;
-  position: relative;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
   height: 35px;
@@ -324,6 +337,7 @@
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .date_form {
   width: 50%;
+  position: relative;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .date_form .search_area {
   border-radius: 8px 0 0 8px;
@@ -446,16 +460,24 @@
   color: #ffffff;
   transition: 0.3s;
   position: relative;
-  z-index: 9;
+  z-index: 2;
   overflow: hidden;
   white-space: normal;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 100%;
 }
+.modify_search .flight_tab .tab-content .flight_search .serch_btn button span {
+  text-align: left;
+}
 .modify_search .flight_tab .tab-content .flight_search .serch_btn button img {
-  margin-left: 40px;
   height: 20px;
+}
+@media (max-width: 991px) {
+  .modify_search .flight_tab .tab-content .flight_search .serch_btn button img {
+    margin-left: 20px;
+  }
 }
 .modify_search .flight_tab .tab-content .flight_search .serch_btn button::before {
   content: "";
@@ -478,6 +500,7 @@
 @media (max-width: 991px) {
   .modify_search .flight_tab .tab-content .flight_search .serch_btn button {
     display: inline-flex;
+    white-space: nowrap;
   }
 }
 @media (max-width: 480px) {
@@ -647,13 +670,14 @@
   flex-flow: column;
   justify-content: space-between;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 15px;
   border-right: 2px dashed rgba(63, 48, 249, 0.2);
   border-left: 2px dashed rgba(63, 48, 249, 0.2);
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .listing_block .block_detail {
     border-right: none;
+    border-left: none;
   }
 }
 @media (max-width: 767px) {
@@ -739,7 +763,8 @@
   width: auto;
 }
 .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .show_detail a {
-  display: inline;
+  display: flex;
+  align-items: center;
   font-size: 14px;
   font-weight: 500;
   color: #00AEEF;
@@ -751,7 +776,7 @@
 .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .show_detail a:after {
   content: "";
   position: absolute;
-  left: 105%;
+  left: 103%;
   top: 50%;
   width: 0;
   height: 0;
@@ -934,7 +959,7 @@
     border-bottom-color: #E0E2E5;
   }
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .tab-pane.active .card-header h5 a {
-    color: #1943FF;
+    color: #0045FF;
   }
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body {
@@ -1025,7 +1050,7 @@
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt {
-    padding: 15px;
+    padding: 15px 0;
   }
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top {
@@ -1169,6 +1194,7 @@
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .flight_layover .layover_info {
+    width: 80%;
     padding: 5px 10px;
     font-size: 12px;
     font-weight: 400;
@@ -1618,7 +1644,7 @@
 .search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_top .block_inner .block_im .flight_wards {
   font-size: 10px;
   font-weight: 500;
-  color: #1943FF;
+  color: #0045FF;
   margin: 0 0 5px;
 }
 .search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_top .block_inner .block_im .flight_wards_info {
@@ -1935,7 +1961,7 @@
     border-bottom-color: #E0E2E5;
   }
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .tab-pane.active .card-header h5 a {
-    color: #1943FF;
+    color: #0045FF;
   }
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body {
@@ -2312,7 +2338,7 @@
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.baggage_rules_cnt .block_baggage .detail_left .flight_ward {
   font-size: 10px;
   font-weight: 500;
-  color: #1943FF;
+  color: #0045FF;
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.baggage_rules_cnt .block_baggage .detail_left img {
   object-fit: cover;
@@ -2878,20 +2904,23 @@
 }
 .banner_detail .cnt_left {
   display: flex;
+  align-items: center;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .banner_detail .cnt_left {
     margin: 0 0 20px;
   }
 }
 .banner_detail .cnt_left img {
   width: 50px;
+  height: 50px;
   margin: 0 20px 0 0;
 }
-.banner_detail .cnt_left span {
+.banner_detail .cnt_left h2 {
   font-size: 14px;
   font-weight: 400;
   color: #ffffff;
+  margin: 0;
 }
 .banner_detail .cnt_right ul {
   display: flex;
@@ -2899,6 +2928,11 @@
   padding: 0;
   list-style: none;
   justify-content: flex-end;
+}
+@media (max-width: 991px) {
+  .banner_detail .cnt_right ul {
+    justify-content: center;
+  }
 }
 .banner_detail .cnt_right ul li {
   width: 140px;
@@ -2949,13 +2983,18 @@
   width: 100%;
   padding: 50px 0;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .detail_info_main .col-lg-8 {
     order: 2;
   }
 }
 .detail_info_main.add_passenger .detail_info_left {
   width: 100%;
+}
+@media (max-width: 991px) {
+  .detail_info_main.add_passenger .detail_info_left {
+    margin: 30px 0 0;
+  }
 }
 .detail_info_main.add_passenger .detail_info_left .block_top {
   width: 100%;
@@ -2990,6 +3029,11 @@
   padding: 30px 30px 20px;
   margin: 0 0 20px;
 }
+@media (max-width: 480px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info {
+    padding: 20px;
+  }
+}
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .block_title_section {
   background: #F4F4F8;
   padding: 15px 30px;
@@ -3008,6 +3052,16 @@
   font-size: 16px;
   color: #119300;
   font-weight: 500;
+}
+@media (max-width: 480px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .block_title_section span {
+    margin: 15px 0 0;
+  }
+}
+@media (max-width: 480px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .block_title_section {
+    flex-flow: column;
+  }
 }
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info {
   border-bottom: 2px dashed rgba(63, 48, 249, 0.2);
@@ -3138,6 +3192,11 @@
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-header h2 .btn-link span.status_incomplete {
   color: #FF0000;
 }
+@media (max-width: 480px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-header h2 .btn-link span {
+    right: 25px;
+  }
+}
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body {
   padding: 15px 15px;
 }
@@ -3148,6 +3207,11 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row {
+    flex-wrap: wrap;
+  }
 }
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field {
   width: 100%;
@@ -3169,11 +3233,21 @@
   font-size: 12px;
   color: #8188AB;
 }
+@media (max-width: 767px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field.half {
+    width: 100%;
+  }
+}
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .custom_listing {
   width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
+}
+@media (max-width: 480px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .custom_listing {
+    flex-flow: column;
+  }
 }
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .custom_listing li {
   display: flex;
@@ -3230,6 +3304,19 @@
   height: 8px;
   border-radius: 50%;
   background: #FC7E66;
+}
+.detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .custom_listing li:last-child {
+  padding: 0;
+}
+@media (max-width: 767px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .custom_listing li {
+    padding: 0 30px 0 0;
+  }
+}
+@media (max-width: 480px) {
+  .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .custom_listing li {
+    padding: 0 0 10px 0;
+  }
 }
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .text_field input {
   width: 100%;
@@ -3336,6 +3423,9 @@
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .text_field .phone_no .code .dropdown-menu li a {
   line-height: 30px;
 }
+.detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .text_field .phone_no .number {
+  width: 100%;
+}
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_btn button {
   width: auto;
   padding: 0 35px;
@@ -3380,6 +3470,9 @@
   .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_btn button {
     display: inline-flex;
   }
+}
+.detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass.add-more {
+  margin-top: 15px;
 }
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .block_no_add_passenger {
   width: 100%;
@@ -3611,6 +3704,12 @@
 .detail_info_main.add_passenger .btn_payment .btn_laytrip:hover:before {
   height: 190%;
 }
+@media (max-width: 480px) {
+  .detail_info_main.add_passenger .btn_payment .btn_laytrip {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+}
 .detail_info_main .detail_info_right {
   width: 100%;
 }
@@ -3658,10 +3757,10 @@
   width: 50%;
   height: 0;
   position: absolute;
-  border-left: 12px solid transparent;
+  border-left: 14px solid transparent;
   border-bottom: 12px solid #ffffff;
   content: "";
-  bottom: 0;
+  bottom: -1px;
   right: 0px;
 }
 .detail_info_main .detail_info_right .block_top .summary_info .info_top .btm_aerrow:after {
@@ -3670,8 +3769,8 @@
   left: 0px;
   position: absolute;
   content: "";
-  bottom: 0;
-  border-right: 12px solid transparent;
+  bottom: -1px;
+  border-right: 14px solid transparent;
   border-bottom: 12px solid #ffffff;
 }
 .detail_info_main .detail_info_right .block_top .summary_info .info_top ul {
@@ -3742,6 +3841,11 @@
   justify-content: space-between;
   align-items: flex-end;
 }
+@media (max-width: 480px) {
+  .detail_info_main .detail_info_right .block_top .summary_info .info_btm .info_btm_btm .flight_info_text {
+    flex-flow: column;
+  }
+}
 .detail_info_main .detail_info_right .block_top .summary_info .info_btm .info_btm_btm .flight_info_text h6 {
   font-size: 18px;
   font-weight: 600;
@@ -3753,6 +3857,11 @@
   font-size: 10px;
   font-weight: 500;
   color: #8188AB;
+}
+@media (max-width: 480px) {
+  .detail_info_main .detail_info_right .block_top .summary_info .info_btm .info_btm_btm .flight_info_text h6 {
+    width: 100%;
+  }
 }
 .detail_info_main .detail_info_right .block_top .summary_info .info_btm .info_btm_btm .flight_info_text a {
   font-size: 14px;
@@ -3795,6 +3904,11 @@
   border-right: 3px solid transparent;
   border-top: 3px solid #00AEEF;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 480px) {
+  .detail_info_main .detail_info_right .block_top .summary_info .info_btm .info_btm_btm .flight_info_text a {
+    margin: 10px 0 0;
+  }
 }
 .detail_info_main .detail_info_right .block_top .summary_info .info_btm .info_btm_btm .flight_info {
   margin: 15px 0 0;
@@ -4019,9 +4133,11 @@
 .detail_info_main .detail_info_right .cmn_block .partial_pay_info ul li p {
   margin: 0;
   display: flex;
+  align-items: center;
 }
 .detail_info_main .detail_info_right .cmn_block .partial_pay_info ul li p img {
   margin: 0 0 0 10px;
+  height: 12px;
 }
 .detail_info_main .detail_info_right .cmn_block .partial_pay_info ul li span {
   font-weight: 500;
@@ -4069,10 +4185,15 @@
   font-weight: 400;
   color: #00AEEF;
 }
-.detail_info_main.payment_info .block_payment {
+@media (max-width: 991px) {
+  .detail_info_main.payment_info .detail_info_left {
+    margin: 30px 0 0;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_time {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_time {
   width: 100%;
   background: #8188AB;
   padding: 15px;
@@ -4080,88 +4201,105 @@
   justify-content: center;
   border-radius: 5px 5px 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_time img {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_time img {
   width: 26px;
+  height: 26px;
   margin: 0 15px 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_time p {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_time p {
   font-size: 16px;
   font-weight: 500;
   color: #ffffff;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_time p span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_time p span {
   color: #FFDD0F;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info {
   padding: 20px 30px;
   border-radius: 5px;
   background: #ffffff;
   box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
   margin: 0 0 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info:first-child {
+@media (max-width: 575px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info {
+    padding: 20px 15px;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info:first-child {
   border-radius: 0 0 5px 5px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_travellers {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_travellers {
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_travellers h6 {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_travellers h6 {
   font-size: 16px;
   font-weight: 500;
   color: #8188AB;
   margin: 0 0 15px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_travellers .traveller_detail {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_travellers .traveller_detail {
   display: flex;
   justify-content: space-between;
+  margin: 0 0 30px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_travellers .traveller_detail span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_travellers .traveller_detail span {
   font-size: 14px;
   font-weight: 500;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_travellers .traveller_detail a {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_travellers .traveller_detail a {
   font-size: 14px;
   font-weight: 400;
   color: #00AEEF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_title_section {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_title_section {
   background: #F4F4F8;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   margin: 0 0 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_title_section h5 {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_title_section h5 {
   font-size: 16px;
   font-weight: 500;
   color: #000000;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field {
+@media (max-width: 575px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row {
+    flex-wrap: wrap;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field {
   width: 49%;
   margin-bottom: 30px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field label {
+@media (max-width: 575px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field {
+    width: 100%;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field label {
   width: 100%;
   margin-bottom: 10px;
   font-size: 12px;
   color: #8188AB;
   font-weight: 400;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field label sup {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field label sup {
   color: #FF0000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input {
   width: 100%;
   background: transparent;
   height: 40px;
@@ -4173,18 +4311,18 @@
   color: #000000;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input:focus {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input:focus {
   border-bottom: 1px solid #1943FF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input.birth_date {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input.birth_date {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input:placeholder {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input:placeholder {
   color: #E0E2E5;
   -webkit-text-fill-color: #E0E2E5;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select {
   height: 40px;
   border-top: none;
   border-left: none;
@@ -4194,16 +4332,16 @@
   padding: 0;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select select {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select select {
   display: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-selected {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-selected {
   background-color: transparent;
   line-height: 40px;
   font-size: 14px;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-selected:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-selected:after {
   position: absolute;
   content: "";
   top: 17px;
@@ -4213,11 +4351,11 @@
   border: 4px solid transparent;
   border-color: #8188AB transparent transparent transparent;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-selected.select-arrow-active:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-selected.select-arrow-active:after {
   border-color: transparent transparent #8188AB transparent;
   top: 11px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items {
   position: absolute;
   background-color: #8188AB;
   top: 100%;
@@ -4225,7 +4363,7 @@
   right: 0;
   z-index: 99;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items div {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items div {
   color: #ffffff;
   padding: 8px 16px;
   border: 1px solid transparent;
@@ -4235,56 +4373,66 @@
   font-size: 14px;
   color: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items div:hover {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items div:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items div.same-as-selected {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items div.same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items.select-hide {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field.custom-select .select-items.select-hide {
   display: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_title_section {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_title_section {
   background: #F4F4F8;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   margin: 0 0 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_title_section h5 {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_title_section h5 {
   font-size: 16px;
   font-weight: 500;
   color: #000000;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck {
   width: 31%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn {
+@media (max-width: 767px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck {
+    width: 48%;
+  }
+}
+@media (max-width: 575px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck {
+    width: 100%;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn {
   width: 100%;
   margin-bottom: 30px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn label {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn label {
   width: 100%;
   margin-bottom: 10px;
   font-size: 12px;
   color: #8188AB;
   font-weight: 400;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn label sup {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn label sup {
   color: #FF0000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field {
   width: 100%;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field input {
   width: 100%;
   background: transparent;
   height: 40px;
@@ -4295,14 +4443,14 @@
   font-size: 14px;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field input:placeholder {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field input:placeholder {
   color: #E0E2E5;
   -webkit-text-fill-color: #E0E2E5;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field input:focus {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field input:focus {
   border-bottom: 1px solid #1943FF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select {
   height: 40px;
   border-top: none;
   border-left: none;
@@ -4311,16 +4459,16 @@
   background: transparent;
   padding: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select select {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select select {
   display: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-selected {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-selected {
   background-color: transparent;
   line-height: 40px;
   font-size: 14px;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-selected:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-selected:after {
   position: absolute;
   content: "";
   top: 17px;
@@ -4330,11 +4478,11 @@
   border: 4px solid transparent;
   border-color: #8188AB transparent transparent transparent;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-selected.select-arrow-active:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-selected.select-arrow-active:after {
   border-color: transparent transparent #8188AB transparent;
   top: 11px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items {
   position: absolute;
   background-color: #8188AB;
   top: 100%;
@@ -4342,7 +4490,7 @@
   right: 0;
   z-index: 99;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items div {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items div {
   color: #ffffff;
   padding: 8px 16px;
   border: 1px solid transparent;
@@ -4352,42 +4500,47 @@
   font-size: 14px;
   color: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items div:hover {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items div:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items div.same-as-selected {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items div.same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items.select-hide {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_billing_detail .block_detail .form_row .field_bolck .field_inn .text_field.custom-select .select-items.select-hide {
   display: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode {
   width: 100%;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_title_section {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_title_section {
   background: #F4F4F8;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   margin: 0 0 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_title_section h5 {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_title_section h5 {
   font-size: 16px;
   font-weight: 500;
   color: #000000;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul {
   width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li {
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul {
+    flex-flow: column;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li {
   display: flex;
   justify-content: space-between;
   padding: 0 100px 0 0;
@@ -4396,7 +4549,12 @@
   font-size: 14px;
   font-weight: 400;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio {
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li {
+    padding: 0 0 10px 0;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio {
   width: 100%;
   display: block;
   position: relative;
@@ -4410,18 +4568,18 @@
   user-select: none;
   color: #8188AB;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio input:checked ~ .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio input:checked ~ .checkmark {
   border: 1px solid #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio input:checked ~ .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio input:checked ~ .checkmark:after {
   display: block;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio .checkmark {
   position: absolute;
   top: 4px;
   left: 0;
@@ -4431,7 +4589,7 @@
   border: 1px solid #8188AB;
   border-radius: 50%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li .custom_radio .checkmark:after {
   content: "";
   position: absolute;
   display: none;
@@ -4442,10 +4600,10 @@
   border-radius: 50%;
   background: #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail ul li:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail ul li:last-child {
   padding: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox {
   width: 100%;
   background: rgba(25, 221, 0, 0.1);
   padding: 15px 20px;
@@ -4454,11 +4612,11 @@
   justify-content: space-between;
 }
 @media (max-width: 767px) {
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox {
     flex-wrap: wrap;
   }
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox {
   width: 50%;
   position: relative;
   margin-bottom: 0;
@@ -4471,11 +4629,11 @@
   padding: 0 0 0 30px;
 }
 @media (max-width: 767px) {
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox {
     width: 100%;
   }
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox input {
   position: absolute;
   top: 0;
   left: 0;
@@ -4483,13 +4641,13 @@
   height: 100%;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox input:checked ~ .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox input:checked ~ .checkmark {
   border-color: #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox input:checked ~ .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox input:checked ~ .checkmark:after {
   opacity: 1;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox .checkmark {
   width: 14px;
   min-width: 14px;
   height: 14px;
@@ -4502,7 +4660,7 @@
   left: 0;
   background: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox .checkmark:after {
   content: "";
   position: absolute;
   top: 1px;
@@ -4530,183 +4688,183 @@
   transition: all 0.2s;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .custom_checkbox span {
   color: #FC7E66;
   padding: 0 5px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits {
   width: 40%;
   padding: 0 0 0 40px;
   border-left: 1px solid #E0E2E5;
 }
 @media (max-width: 767px) {
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits {
     width: 100%;
     padding: 0;
     border: none;
     margin: 20px 0 0;
   }
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_top {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_top {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin: 0 0 15px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_top label {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_top label {
   font-size: 14px;
   font-weight: 500;
   color: #000000;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_top span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_top span {
   font-size: 14px;
   font-weight: 500;
   color: #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits.ui-widget-content {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits.ui-widget-content {
   background: #8188AB;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits.ui-widget-content .ui-widget-header {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits.ui-widget-content .ui-widget-header {
   background: #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits.ui-widget-content .ui-slider-handle {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox .block_apply_laycredits .block_btm #Laycredits.ui-widget-content .ui-slider-handle {
   width: 13px;
   height: 13px;
   top: -6px;
   border-color: #FC7E66;
   background: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist p {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist p {
   font-size: 14px;
   font-weight: 400;
   color: #8188AB;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact {
   display: flex;
   margin: 10px 0 30px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact li {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact li {
   width: auto;
   padding: 0 50px 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact li a {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact li a {
   font-size: 14px;
   font-weight: 0;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact li a i {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail.get_assist .block_contact li a i {
   margin: 0 10px 0 0;
-  color: #1943FF;
+  color: #0045FF;
   font-size: 16px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option {
   flex-flow: column;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment {
   padding: 20px 25px 20px;
   width: 100%;
   border-bottom: 2px dashed rgba(63, 48, 249, 0.2);
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li {
   padding: 0 20px 0 0;
   font-weight: 400;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li .custom_radio {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li .custom_radio {
   width: 100%;
   display: flex;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li .custom_radio p {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li .custom_radio span {
   color: #000000;
   margin: 0;
   padding: 0 0 0 10px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .installment_info ul li:last-child {
   padding: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg {
   padding: 20px;
   border-radius: 5px;
-  background: #1943FF;
+  background: #0045FF;
   margin: 20px 0 10px;
   display: flex;
   justify-content: space-between;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left {
   display: flex;
   flex-flow: column;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left p {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left p {
   font-size: 14px;
   font-weight: 400;
   color: #ffffff;
   margin: 0 0 10px;
   line-height: normal;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left span {
   font-size: 14px;
   font-weight: 600;
   color: #ffffff;
   margin: 0 0 5px;
   line-height: normal;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left span:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_left span:last-child {
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right {
   display: flex;
   flex-flow: column;
   padding: 0 20px 0 40px;
   border-left: 1px solid #00BFFD;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right p {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right p {
   font-size: 14px;
   font-weight: 400;
   color: #ffffff;
   margin: 0 0 15px;
   line-height: normal;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment .block_amount {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment .block_amount {
   padding: 0 25px;
   font-size: 20px;
   font-weight: 600;
   color: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment .pay_block {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment .pay_block {
   width: 25px;
   height: 25px;
   font-size: 16px;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment .pay_block a {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_one.clr_bg .block_clr_bg_right .block_pay_instalment .pay_block a {
   width: 25px;
   height: 25px;
   display: inline-block;
@@ -4719,15 +4877,15 @@
   line-height: 27px;
   text-align: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two {
   width: 100%;
   border: 1px solid #E0E2E5;
   border-radius: 5px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul {
   flex-flow: column;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul li {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul li {
   width: 100%;
   padding: 10px 20px;
   border-bottom: 1px solid #E0E2E5;
@@ -4735,15 +4893,15 @@
   font-weight: 400;
   color: #8188AB;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul li span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul li span {
   font-size: 14px;
   font-weight: 500;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul li:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two ul li:last-child {
   border: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two .block_pay_remaining {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_two .block_pay_remaining {
   width: auto;
   border-radius: 5px;
   background: #00BFFD;
@@ -4754,12 +4912,12 @@
   color: #ffffff;
   margin: 0 20px 12px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left {
   width: 49%;
   padding: 20px;
   border-radius: 5px;
@@ -4768,27 +4926,27 @@
   flex-flow: column;
   justify-content: space-between;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left.clr_bg {
-  background: #1943FF;
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left.clr_bg {
+  background: #0045FF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner {
   display: flex;
   flex-flow: column;
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner p {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner p {
   font-size: 14px;
   font-weight: 400;
   color: #ffffff;
   margin: 0 0 10px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner span {
   font-size: 14px;
   font-weight: 600;
   color: #ffffff;
   margin: 0 0 10px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul {
   width: 100%;
   border-top: 1px solid #00BFFD;
   border-bottom: 1px solid #00BFFD;
@@ -4796,26 +4954,26 @@
   padding: 0;
   flex-flow: column;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li {
   width: 100%;
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .custom_radio {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .custom_radio {
   color: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .custom_radio .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .custom_radio .checkmark {
   border-color: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment .block_amount {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment .block_amount {
   width: 80px;
   padding: 0 20px;
   font-size: 18px;
@@ -4823,13 +4981,13 @@
   color: #ffffff;
   text-align: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment .pay_block {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment .pay_block {
   width: 25px;
   height: 25px;
   font-size: 16px;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment .pay_block a {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .block_pay_info_inner ul li .block_pay_instalment .pay_block a {
   width: 25px;
   height: 25px;
   display: inline-block;
@@ -4842,12 +5000,12 @@
   line-height: 27px;
   text-align: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a {
   display: inline-block;
   line-height: 38px;
   padding: 0 35px;
@@ -4860,7 +5018,7 @@
   overflow: hidden;
   font-weight: 400;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a::before {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a::before {
   content: "";
   position: absolute;
   top: 0;
@@ -4872,18 +5030,18 @@
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a:hover {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a:hover {
   border-color: #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a:hover:before {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_left .btn_calculate a:hover:before {
   height: 190%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right {
   width: 49%;
   border: 1px solid #E0E2E5;
   border-radius: 5px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right h6 {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right h6 {
   font-size: 16px;
   font-weight: 600;
   color: #000000;
@@ -4892,11 +5050,11 @@
   padding: 15px 20px;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul {
   width: 100%;
   flex-flow: column;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul li {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul li {
   width: 100%;
   padding: 15px 20px;
   display: flex;
@@ -4906,25 +5064,25 @@
   color: #8188AB;
   border-bottom: 1px solid #E0E2E5;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul li span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul li span {
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul li:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_main .block_pay_info_right ul li:last-child {
   border-bottom: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table {
   width: 100%;
   margin: 10px 0 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table {
   border: 1px solid #E0E2E5;
   border-radius: 5px;
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr {
   border-radius: 5px 5px 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr th {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr th {
   padding: 10px;
   font-size: 14px;
   font-weight: 500;
@@ -4932,15 +5090,15 @@
   background: #FAFAFA;
   text-align: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr th:first-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr th:first-child {
   text-align: left;
   border-radius: 5px 0 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr th:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr th:last-child {
   text-align: right;
   border-radius: 0 5px 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td {
   padding: 10px;
   border-bottom: 1px solid #E0E2E5;
   font-size: 14px;
@@ -4949,29 +5107,29 @@
   vertical-align: top;
   text-align: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td:first-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td:first-child {
   text-align: left;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td:last-child {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td:last-child {
   text-align: right;
 }
 @media only screen and (max-width: 800px) {
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table {
     display: block;
   }
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead {
     display: block;
   }
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table thead tr {
     display: none;
   }
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody {
     display: block;
   }
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr {
     display: block;
   }
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td {
     display: block;
     border: none;
     border-bottom: 1px solid #E0E2E5;
@@ -4980,7 +5138,7 @@
     white-space: normal;
     text-align: left;
   }
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td:before {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_installment_pay_table table tbody tr td:before {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -4995,38 +5153,38 @@
     font-size: 14px;
   }
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_date {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_date {
   width: 100%;
   background: rgba(25, 221, 0, 0.1);
   padding: 15px 20px;
   border-radius: 5px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_date p {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_installment_option .block_installment .block_pay_info_date p {
   font-size: 14px;
   font-weight: 500;
   color: #000000;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_title_section {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_title_section {
   background: #F4F4F8;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   margin: 0 0 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_title_section h5 {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_title_section h5 {
   font-size: 16px;
   font-weight: 500;
   color: #000000;
   margin: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail {
   width: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list {
   margin: 0 0 15px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -5036,25 +5194,25 @@
   justify-content: space-between;
 }
 @media (max-width: 767px) {
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul {
     flex-wrap: wrap;
   }
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li {
   width: 49%;
   display: flex;
   align-items: flex-start;
   margin: 0 0 15px;
 }
 @media (max-width: 767px) {
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li {
     width: 100%;
   }
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check {
   margin: 0 5px 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox {
   position: relative;
   margin-bottom: 0;
   vertical-align: middle;
@@ -5067,7 +5225,7 @@
   left: 1px;
   height: 100%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox input {
   position: absolute;
   top: 0;
   left: 0;
@@ -5075,13 +5233,13 @@
   height: 100%;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox input:checked ~ .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox input:checked ~ .checkmark {
   border-color: #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox input:checked ~ .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox input:checked ~ .checkmark:after {
   opacity: 1;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox .checkmark {
   width: 15px;
   min-width: 16px;
   height: 15px;
@@ -5092,7 +5250,7 @@
   top: 3px;
   background: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox .checkmark:before {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox .checkmark:before {
   width: 15px;
   height: 15px;
   position: absolute;
@@ -5101,7 +5259,7 @@
   content: "";
   border: 1px solid #8188AB;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox .checkmark:after {
   content: "";
   position: absolute;
   top: 1px;
@@ -5129,34 +5287,34 @@
   transition: all 0.2s;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_check .custom_checkbox span {
   color: #FC7E66;
   padding: 0 5px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail {
   width: 100%;
   padding: 0 30px 0 0;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail h6 {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail h6 {
   margin: 0 0 5px;
   font-size: 14px;
   font-weight: 400;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail span {
   margin: 0 0 5px;
   font-size: 14px;
   font-weight: 400;
   color: #8188AB;
   display: block;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv {
   width: auto;
   display: block;
   margin: 5px 0 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv input {
   width: 130px;
   background: transparent;
   height: 40px;
@@ -5168,57 +5326,67 @@
   color: #000000;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv input:focus {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv input:focus {
   border-bottom: 1px solid #1943FF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv input:placeholder {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .block_card_cvv input:placeholder {
   color: #E0E2E5;
   -webkit-text-fill-color: #E0E2E5;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .card_type {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .card_type {
   position: absolute;
   top: 0;
   right: 0;
   width: 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .card_type img {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .card_list ul li .card_detail .card_type img {
   width: 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_btn {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_btn {
   width: 100%;
   margin: 0 0 15px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_btn a {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_btn a {
   font-size: 16px;
   font-weight: 600;
   color: #00AEEF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block {
   padding: 20px;
   border: 1px solid #E0E2E5;
   border-radius: 5px;
   margin: 0 0 30px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field {
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row {
+    flex-wrap: wrap;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field {
   width: 49%;
   margin-bottom: 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field label {
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field {
+    width: 100%;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field label {
   width: 100%;
   margin-bottom: 10px;
   font-size: 12px;
   color: #8188AB;
   font-weight: 400;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field label sup {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field label sup {
   color: #FF0000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input {
   width: 100%;
   background: transparent;
   height: 40px;
@@ -5230,18 +5398,18 @@
   color: #000000;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input:focus {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input:focus {
   border-bottom: 1px solid #1943FF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input.birth_date {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input.birth_date {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input:placeholder {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input:placeholder {
   color: #E0E2E5;
   -webkit-text-fill-color: #E0E2E5;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select {
   height: 40px;
   border-top: none;
   border-left: none;
@@ -5251,16 +5419,16 @@
   padding: 0;
   position: relative;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select select {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select select {
   display: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-selected {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-selected {
   background-color: transparent;
   line-height: 40px;
   font-size: 14px;
   color: #000000;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-selected:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-selected:after {
   position: absolute;
   content: "";
   top: 17px;
@@ -5270,11 +5438,11 @@
   border: 4px solid transparent;
   border-color: #8188AB transparent transparent transparent;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-selected.select-arrow-active:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-selected.select-arrow-active:after {
   border-color: transparent transparent #8188AB transparent;
   top: 11px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items {
   position: absolute;
   background-color: #8188AB;
   top: 100%;
@@ -5282,7 +5450,7 @@
   right: 0;
   z-index: 99;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items div {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items div {
   color: #ffffff;
   padding: 8px 16px;
   border: 1px solid transparent;
@@ -5292,19 +5460,19 @@
   font-size: 14px;
   color: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items div:hover {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items div:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items div.same-as-selected {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items div.same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items.select-hide {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field.custom-select .select-items.select-hide {
   display: none;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save {
   margin: 0 0 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox {
   position: relative;
   margin-bottom: 0;
   vertical-align: middle;
@@ -5315,7 +5483,7 @@
   color: #8188AB;
   font-weight: 300;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox input {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox input {
   position: absolute;
   top: 0;
   left: 0;
@@ -5323,13 +5491,13 @@
   height: 100%;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox input:checked ~ .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox input:checked ~ .checkmark {
   border-color: #FC7E66;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox input:checked ~ .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox input:checked ~ .checkmark:after {
   opacity: 1;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox .checkmark {
   width: 14px;
   min-width: 14px;
   height: 14px;
@@ -5340,7 +5508,7 @@
   position: relative;
   background: #ffffff;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox .checkmark:after {
   content: "";
   position: absolute;
   top: 1px;
@@ -5368,11 +5536,11 @@
   transition: all 0.2s;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox span {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .block_card_save .custom_checkbox span {
   color: #FC7E66;
   padding: 0 5px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button {
   width: auto;
   padding: 0 35px;
   height: 38px;
@@ -5390,11 +5558,11 @@
   display: flex;
   align-items: center;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button img {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button img {
   margin-left: 40px;
   height: 20px;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button::before {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -5406,26 +5574,26 @@
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button:hover {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button:hover {
   border-color: #1943FF;
 }
-.detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button:hover:before {
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button:hover:before {
   height: 190%;
 }
 @media (max-width: 991px) {
-  .detail_info_main.payment_info .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn button {
     display: inline-flex;
   }
 }
-.detail_info_main.payment_info .block_condition_agree {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree {
   margin: 0 0 20px;
 }
-.detail_info_main.payment_info .block_condition_agree ul {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul {
   width: 100%;
   margin: 0;
   padding: 0;
 }
-.detail_info_main.payment_info .block_condition_agree ul li {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li {
   display: flex;
   padding-bottom: 10px;
   align-items: center;
@@ -5433,7 +5601,7 @@
   font-size: 14px;
   font-weight: 300;
 }
-.detail_info_main.payment_info .block_condition_agree ul li .custom_checkbox {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li .custom_checkbox {
   position: relative;
   margin-bottom: 0;
   vertical-align: middle;
@@ -5441,7 +5609,7 @@
   display: flex;
   align-items: center;
 }
-.detail_info_main.payment_info .block_condition_agree ul li .custom_checkbox input {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li .custom_checkbox input {
   position: absolute;
   top: 0;
   left: 0;
@@ -5449,13 +5617,13 @@
   height: 100%;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_condition_agree ul li .custom_checkbox input:checked ~ .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li .custom_checkbox input:checked ~ .checkmark {
   border-color: #FC7E66;
 }
-.detail_info_main.payment_info .block_condition_agree ul li .custom_checkbox input:checked ~ .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li .custom_checkbox input:checked ~ .checkmark:after {
   opacity: 1;
 }
-.detail_info_main.payment_info .block_condition_agree ul li .custom_checkbox .checkmark {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li .custom_checkbox .checkmark {
   width: 14px;
   min-width: 14px;
   height: 14px;
@@ -5465,7 +5633,7 @@
   margin-right: 11px;
   position: relative;
 }
-.detail_info_main.payment_info .block_condition_agree ul li .custom_checkbox .checkmark:after {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li .custom_checkbox .checkmark:after {
   content: "";
   position: absolute;
   top: 1px;
@@ -5493,23 +5661,28 @@
   transition: all 0.2s;
   opacity: 0;
 }
-.detail_info_main.payment_info .block_condition_agree ul li p {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li p {
   color: #8188AB;
   font-size: 14px;
   font-weight: 400;
   margin: 0;
 }
-.detail_info_main.payment_info .block_condition_agree ul li p a {
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li p a {
   color: #00AEEF;
 }
-.detail_info_main.payment_info .block_condition_agree ul li:last-child {
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .block_condition_agree ul li p {
+    font-size: 12px;
+  }
+}
+.detail_info_main.payment_info .detail_info_left .block_condition_agree ul li:last-child {
   padding-bottom: 0;
 }
-.detail_info_main.payment_info .btn_payment {
+.detail_info_main.payment_info .detail_info_left .btn_payment {
   width: 100%;
   margin: 10px 0 0;
 }
-.detail_info_main.payment_info .btn_payment .btn_laytrip {
+.detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip {
   display: inline-block;
   line-height: 50px;
   padding: 0 25px;
@@ -5523,11 +5696,11 @@
   overflow: hidden;
   font-weight: 400;
 }
-.detail_info_main.payment_info .btn_payment .btn_laytrip img {
+.detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip img {
   margin: 0 0 0 20px;
   height: 15px;
 }
-.detail_info_main.payment_info .btn_payment .btn_laytrip::before {
+.detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip::before {
   content: "";
   position: absolute;
   top: 0;
@@ -5539,13 +5712,23 @@
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
 }
-.detail_info_main.payment_info .btn_payment .btn_laytrip:hover {
+.detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip:hover {
   border-color: #1943FF;
 }
-.detail_info_main.payment_info .btn_payment .btn_laytrip:hover:before {
+.detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip:hover:before {
   height: 190%;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation {
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip {
+    font-size: 14px;
+  }
+}
+@media (max-width: 991px) {
+  .detail_info_main.book_confirm_login .detail_info_left {
+    margin: 30px 0 0;
+  }
+}
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation {
   width: 100%;
   background: #ffffff;
   border-radius: 5px;
@@ -5554,7 +5737,12 @@
   position: relative;
   z-index: 9;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation:after {
+@media (max-width: 575px) {
+  .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation {
+    padding: 20px;
+  }
+}
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation:after {
   width: 190px;
   height: 110px;
   position: absolute;
@@ -5563,7 +5751,12 @@
   content: "";
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/booking-confirmation-for-guest-login-im.svg) no-repeat;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner {
+@media (max-width: 767px) {
+  .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation:after {
+    display: none;
+  }
+}
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner {
   width: 100%;
   border-bottom: 2px dashed rgba(63, 48, 249, 0.2);
   padding: 0 0 25px;
@@ -5571,27 +5764,27 @@
   position: relative;
   z-index: 9;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner h5 {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner h5 {
   font-size: 24px;
   font-weight: 600;
   color: #000000;
   margin: 0 0 15px;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner p {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner p {
   font-size: 14px;
   font-weight: 400;
   color: #8188AB;
   margin: 0 0 10px;
   display: block;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner span {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner span {
   font-size: 16px;
   font-weight: 600;
-  color: #1943FF;
+  color: #0045FF;
   margin: 0 0 20px;
   display: block;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner .book_inform {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner .book_inform {
   width: 100%;
   padding: 15px 20px;
   background: rgba(25, 221, 0, 0.1);
@@ -5599,18 +5792,23 @@
   font-weight: 400;
   color: #000000;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul {
   width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul li {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul li {
   width: 100%;
   padding: 0 0 15px;
   display: flex;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul li span {
+@media (max-width: 575px) {
+  .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul li {
+    flex-flow: column;
+  }
+}
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul li span {
   min-width: 225px;
   font-size: 14px;
   font-weight: 500;
@@ -5618,62 +5816,85 @@
   margin: 0;
   display: inline-block;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul li p {
+@media (max-width: 575px) {
+  .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul li span {
+    padding: 0 0 5px;
+  }
+}
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul li p {
   font-size: 14px;
   font-weight: 400;
   color: #8188AB;
   margin: 0;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul li p a {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul li p a {
   color: #00AEEF;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul li:last-child {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul li:last-child {
   padding: 0;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul.block_contact {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul.block_contact {
   display: flex;
   margin: 10px 0 50px;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul.block_contact li {
+@media (max-width: 575px) {
+  .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul.block_contact {
+    flex-flow: column;
+    margin: 10px 0 20px;
+  }
+}
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul.block_contact li {
   width: auto;
   padding: 0 50px 0 0;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul.block_contact li a {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul.block_contact li a {
   font-size: 20px;
   font-weight: 500;
   color: #00AEEF;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner ul.block_contact li a i {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul.block_contact li a i {
   margin: 0 10px 0 0;
   color: #8188AB;
   font-size: 16px;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner p {
+@media (max-width: 767px) {
+  .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul.block_contact li a {
+    font-size: 14px;
+  }
+}
+@media (max-width: 575px) {
+  .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner ul.block_contact li {
+    padding: 0 0 10px;
+  }
+}
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner p {
   font-size: 14px;
   font-weight: 400;
   color: #8188AB;
   margin: 0;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner p a {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner p a {
   color: #00AEEF;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner .msg_block {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner .msg_block {
   width: 100%;
   font-size: 14px;
   font-weight: 500;
-  color: #1943FF;
+  color: #0045FF;
 }
-.detail_info_main.book_confirm_login .block_booking_confirmation .block_inner:last-child {
+.detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation .block_inner:last-child {
   border: none;
   margin: 0;
   padding: 0;
 }
-.detail_info_main.book_confirm_login .btn_backhome {
+.detail_info_main.book_confirm_login .detail_info_left .btn_backhome {
   width: 100%;
   margin: 30px 0 0;
+  display: flex;
 }
-.detail_info_main.book_confirm_login .btn_backhome a {
-  display: inline-block;
+.detail_info_main.book_confirm_login .detail_info_left .btn_backhome a {
+  display: flex;
+  align-items: center;
   line-height: 50px;
   padding: 0 25px;
   font-size: 20px;
@@ -5685,12 +5906,13 @@
   z-index: 9;
   overflow: hidden;
   font-weight: 400;
+  white-space: nowrap;
 }
-.detail_info_main.book_confirm_login .btn_backhome a img {
+.detail_info_main.book_confirm_login .detail_info_left .btn_backhome a img {
   margin: 0 0 0 30px;
   height: 15px;
 }
-.detail_info_main.book_confirm_login .btn_backhome a::before {
+.detail_info_main.book_confirm_login .detail_info_left .btn_backhome a::before {
   content: "";
   position: absolute;
   top: 0;
@@ -5702,33 +5924,44 @@
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
 }
-.detail_info_main.book_confirm_login .btn_backhome a:hover {
+.detail_info_main.book_confirm_login .detail_info_left .btn_backhome a:hover {
   border-color: #1943FF;
 }
-.detail_info_main.book_confirm_login .btn_backhome a:hover:before {
+.detail_info_main.book_confirm_login .detail_info_left .btn_backhome a:hover:before {
   height: 190%;
 }
-.detail_info_main.book_confirm_guest .block_booking_confirmation {
+@media (max-width: 575px) {
+  .detail_info_main.book_confirm_login .detail_info_left .btn_backhome a {
+    font-size: 16px;
+  }
+}
+@media (max-width: 991px) {
+  .detail_info_main.book_confirm_guest .detail_info_left {
+    margin: 30px 0 0;
+  }
+}
+.detail_info_main.book_confirm_guest .detail_info_left .block_booking_confirmation {
   width: 100%;
   background: #ffffff;
   border-radius: 5px;
   box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
   padding: 30px;
 }
-.detail_info_main.book_confirm_guest .block_booking_confirmation .inner_block {
+.detail_info_main.book_confirm_guest .detail_info_left .block_booking_confirmation .inner_block {
   width: 100%;
   text-align: center;
 }
-.detail_info_main.book_confirm_guest .block_booking_confirmation .inner_block img {
+.detail_info_main.book_confirm_guest .detail_info_left .block_booking_confirmation .inner_block img {
   margin-bottom: 20px;
+  max-width: 100%;
 }
-.detail_info_main.book_confirm_guest .block_booking_confirmation .inner_block h5 {
+.detail_info_main.book_confirm_guest .detail_info_left .block_booking_confirmation .inner_block h5 {
   font-size: 20px;
   font-weight: 600;
   color: #000000;
   margin: 0 0 15px;
 }
-.detail_info_main.book_confirm_guest .block_booking_confirmation .inner_block p {
+.detail_info_main.book_confirm_guest .detail_info_left .block_booking_confirmation .inner_block p {
   width: 500px;
   max-width: 100%;
   font-size: 14px;
@@ -5736,10 +5969,10 @@
   color: #8188AB;
   margin: 0 auto 20px;
 }
-.detail_info_main.book_confirm_guest .block_booking_confirmation .inner_block span {
+.detail_info_main.book_confirm_guest .detail_info_left .block_booking_confirmation .inner_block span {
   font-size: 16px;
   font-weight: 600;
-  color: #1943FF;
+  color: #0045FF;
 }
 
 .payment_info_modal .modal-dialog {
@@ -5803,7 +6036,7 @@
 .payment_info_modal .modal-dialog .modal-content .pay_modal_cnt .pay_modal_btm .block_inner span {
   font-size: 16px;
   font-weight: 600;
-  color: #1943FF;
+  color: #0045FF;
   margin: 0 0 20px;
   display: block;
 }
@@ -5964,7 +6197,7 @@
   background: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 999;
 }
 .page_load .page_load_inner {
   width: 600px;
@@ -6041,4 +6274,87 @@
   font-weight: 400;
   color: #8188AB;
   margin: 0;
+}
+
+.filter_responsive {
+  width: 100%;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+.filter_responsive .btn_filter {
+  width: 100%;
+  text-align: center;
+}
+.filter_responsive .btn_filter a {
+  width: 100%;
+  display: inline-block;
+  padding: 10px;
+  background: #FC7E66;
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.responsive_filter_show {
+  background: #FAFAFA;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+  display: none;
+}
+.responsive_filter_show .filter_popup {
+  width: 100%;
+}
+.responsive_filter_show .filter_popup .filter_head_popup {
+  width: 100%;
+  padding: 10px 20px;
+  background: #012178;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.responsive_filter_show .filter_popup .filter_head_popup .filter_clear {
+  width: auto;
+  line-height: 26px;
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+.responsive_filter_show .filter_popup .filter_head_popup .filter_clear a {
+  color: #ffffff;
+}
+.responsive_filter_show .filter_popup .filter_head_popup h3 {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0;
+}
+.responsive_filter_show .filter_popup .filter_head_popup .filter_close {
+  width: auto;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+}
+.responsive_filter_show .filter_popup .filter_head_popup .filter_close img {
+  width: 20px;
+  height: 20px;
+}
+.responsive_filter_show .filter_popup .filter_cnt {
+  width: 100%;
+  padding: 15px;
+  overflow-y: scroll;
+  height: calc(100vh - 30px);
+}
+.responsive_filter_show .filter_popup .filter_cnt .filter_by {
+  margin: 0 0 30px;
 }

@@ -1,12 +1,12 @@
-import { Component, OnInit, Inject,DoCheck, OnChanges } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
 import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SigninComponent } from '../../pages/user/signin/signin.component';
 import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-main-header',
@@ -70,6 +70,7 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
       this.getLangunages();
       this.getCurrencies();  
       this.checkUser();
+      this.loadJquery();
     }
    
     ngDoCheck() {      
@@ -154,4 +155,26 @@ export class MainHeaderComponent implements OnInit ,DoCheck {
       localStorage.removeItem('_lay_sess');
       this.router.url;
     }    
+
+    loadJquery(){
+      // Start sticky header js
+      $(document).ready(function () {
+        if ($(window).width() > 992) {
+
+            var navbar_height = $('.site_header').outerHeight();
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 30) {
+                    $('.site_header').css('height', navbar_height + 'px');
+                    $('.site_header').addClass("fixed-top");
+
+                } else {
+                    $('.site_header').removeClass("fixed-top");
+                    $('.site_header').css('height', 'auto');
+                }
+            });
+        }
+      });
+      // Close sticky header js
+    }
 }
