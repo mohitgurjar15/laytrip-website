@@ -24,7 +24,7 @@ export class TravelerFormComponent implements OnInit {
   @Input() countries: [];
   @Input() countries_code: [];
   @Output() travelerFormChange = new EventEmitter();
-  @Output() auditFormStatus = new EventEmitter();
+  // @Output() auditFormStatus = new EventEmitter();
 
   adultForm: FormGroup;
   submitted = false;
@@ -44,17 +44,12 @@ export class TravelerFormComponent implements OnInit {
   expiryMinDate: moment.Moment = moment().add(2, 'days');
   subscriptions: Subscription[] = [];
 
-
-
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
     public router: Router,
-    public commonFunction: CommonFunction,
-
-  ) {
-
-  }
+    public commonFunction: CommonFunction
+  ) { }
 
   ngOnInit() {
     this.adultForm = this.formBuilder.group({
@@ -63,16 +58,16 @@ export class TravelerFormComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      country_code: ['', [Validators.required]],
+      phone_no: ['', [Validators.required]],
+      country_id: ['', Validators.required],
       dob: [{
         startDate: typeof this.traveler.dob !== 'undefined' ?
           moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
       }, Validators.required],
-      country_code: ['', Validators.required],
-      phone_no: ['', Validators.required],
-      country_id: ['', Validators.required],
       passport_expiry: [{
-        startDate: typeof this.traveler.passport_expiry !== 'undefined' ?
-          moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
+        startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
+          moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
       },],
       passport_number: [''],
       frequently_no: [''],
@@ -80,10 +75,6 @@ export class TravelerFormComponent implements OnInit {
     });
 
     this.setUserTypeValidation();
-
-    let dob_selected = new Date(this.traveler.dob)
-
-    let pass_exp__selected = new Date(this.traveler.passportExpiry)
 
     if (this.traveler.userId) {
       this.adultForm.patchValue({
@@ -95,15 +86,12 @@ export class TravelerFormComponent implements OnInit {
         country_code: this.traveler.countryCode,
         phone_no: this.traveler.phoneNo,
         country_id: this.traveler.country != null ? this.traveler.country.name : '',
-        passport_numdobDateUpdateber: this.traveler.passportNumber,
+        passport_number: this.traveler.passportNumber,
         frequently_no: ''
       })
+      this.formStatus = this.adultForm.status === 'VALID' ? true : false;
+      // this.auditFormStatus.emit(this.formStatus);
     }
-
-    this.formStatus = this.adultForm.status === 'VALID' ? true : false;
-
-    this.auditFormStatus.emit(this.formStatus);
-
   }
 
   ngDoCheck() {
@@ -116,13 +104,13 @@ export class TravelerFormComponent implements OnInit {
     const emailControl = this.adultForm.get('email');
     const phoneControl = this.adultForm.get('phone_no');
     const countryControl = this.adultForm.get('country_code');
-
     if (this.type === 'adult') {
       emailControl.setValidators([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
       this.dobMaxDate = moment().add(-12, 'year');
     } else if (this.type === 'child') {
+
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null);
@@ -152,12 +140,12 @@ export class TravelerFormComponent implements OnInit {
       this.isLoggedIn = true;
     }
   }
+  dobDate: any = '';
 
   onSubmit() {
-
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
-      // console.log(this.adultForm.controls);
+      console.log(this.adultForm.controls);
       this.submitted = true;
       this.loading = false;
       return;
@@ -168,18 +156,16 @@ export class TravelerFormComponent implements OnInit {
         country_id = this.traveler.country.id;
       }
 
-      // console.log(this.adultForm.value.dob.startDate)
-
-
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
-        dob: moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'),//typeof this.adultForm.value.dob.startDate == 'object'? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD'):'',
+        passport_number: this.adultForm.value.passport_number,
+        dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
         country_id: country_id ? country_id : '',
-        passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD'),
+        passport_expiry: typeof this.adultForm.value.dob.passport_expiry === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD'),
       };
 
       if (this.type === 'adult') {
@@ -194,16 +180,11 @@ export class TravelerFormComponent implements OnInit {
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
-          console.log('outside:::', data);
+          // this.travelerFormChange.observers.push(data);
           this.travelerFormChange.emit(data);
-          console.log('sdfsfd', this.travelerFormChange);
-          // if (data) {
-          //   this.travelerFormChange.emit(data);
-          //   if (this.travelerFormChange) {
-          //     console.log('sdfsfd', this.travelerFormChange);
-          //     $('.collapse').collapse('hide');
-          //   }
-          // }
+          console.log(this.travelerFormChange)
+          $('.collapse').collapse('hide');
+          $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
           console.log('error');
           this.submitted = this.loading = false;
@@ -212,22 +193,23 @@ export class TravelerFormComponent implements OnInit {
           }
         });
       } else {
-        /* if(this.type === 'adult') {
+        if (this.type === 'adult') {
           let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
           jsonData = Object.assign(jsonData, emailObj);
-        } 
+        }
         this.subscriptions.push(
           this.flightService.addAdult(jsonData).subscribe((data: any) => {
             this.adultForm.reset();
             this.submitted = this.loading = false;
             console.log(this.isLoggedIn)
-            if(!this.isLoggedIn){
+            if (!this.isLoggedIn) {
               localStorage.setItem("_lay_sess", data.token);
             }
-            this.valueChange.emit(data);
-  
+            this.travelerFormChange.emit(data);
+            console.log(this.travelerFormChange);
+
             $('.collapse').collapse('hide');
-            $('#accordion-'+this.type).hide();
+            $('#accordion-' + this.type).hide();
             this.subscriptions.forEach(sub => sub.unsubscribe());
           }, (error: HttpErrorResponse) => {
             console.log('error')
@@ -237,16 +219,20 @@ export class TravelerFormComponent implements OnInit {
             }
             this.subscriptions.forEach(sub => sub.unsubscribe());
           })
-         
-        );  */
+
+        );
       }
     }
   }
 
-
+  stringToDate(string, saprator) {
+    let dateArray = string.split(saprator);
+    return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
+  }
 
   dobDateUpdate(date) {
-    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate);
+    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
+
   }
 
   expiryDateUpdate(date) {

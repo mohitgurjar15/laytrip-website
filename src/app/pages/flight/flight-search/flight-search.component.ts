@@ -166,33 +166,56 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     });
 
     // TRIP is round-trip then call this API
-    if (event.trip === 'round-trip') {
-      this.getFlightSearchDataForRoundTrip(payload);
+    if (event.trip === 'roundtrip') {
+      this.getFlightSearchDataForRoundTrip(event);
     }
   }
 
-  getFlightSearchDataForRoundTrip(payload) {
-
+  getFlightSearchDataForRoundTrip(event) {
+    const payload = {
+      source_location: event.departure,
+      destination_location: event.arrival,
+      departure_date: event.departure_date,
+      arrival_date: event.arrival_date,
+      flight_class: event.class,
+      adult_count: parseInt(event.adult),
+      child_count: parseInt(event.child),
+      infant_count: parseInt(event.infant),
+    };
+    this.router.navigate(['flight/search'], {
+      skipLocationChange: false, queryParams: {
+        trip: event.trip,
+        departure: event.departure,
+        arrival: event.arrival,
+        departure_date: event.departure_date,
+        arrival_date: event.arrival_date,
+        class: event.class ? event.class : 'Economy',
+        adult: event.adult,
+        child: event.child ? event.child : 0,
+        infant: event.infant ? event.infant : 0
+      },
+      queryParamsHandling: 'merge'
+    });
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  sortFlight(event){
-    let { key , order } = event;
-    if(key=='total_duration'){
-      this.flightDetails = this.sortByDuration(this.flightDetails,key,order)
+  sortFlight(event) {
+    let { key, order } = event;
+    if (key == 'total_duration') {
+      this.flightDetails = this.sortByDuration(this.flightDetails, key, order)
     }
-    else if(key=='arrival'){
-      this.flightDetails = this.sortByArrival(this.flightDetails,key,order)
+    else if (key == 'arrival') {
+      this.flightDetails = this.sortByArrival(this.flightDetails, key, order)
     }
-    else if(key=='departure'){
-      
-      this.flightDetails = this.sortByDeparture(this.flightDetails,key,order)
+    else if (key == 'departure') {
+
+      this.flightDetails = this.sortByDeparture(this.flightDetails, key, order)
     }
-    else{
-      this.flightDetails = this.sortJSON(this.flightDetails,key,order)
+    else {
+      this.flightDetails = this.sortJSON(this.flightDetails, key, order)
     }
     console.log(this.flightDetails)
 
@@ -200,82 +223,82 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   sortJSON(data, key, way) {
     if (typeof data == "undefined") {
-        return data;
+      return data;
     } else {
-        return data.sort(function (a, b) {
-            var x = a[key];
-            var y = b[key];
-            if (way === 'ASC') {
-                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-            }
-            if (way === 'DESC') {
-                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-            }
-        });
-    }
-  }
-
-  sortByDuration(data, key, way){
-    if (typeof data == "undefined") {
-      return data;
-    } 
-    else {
-        return data.sort(function (a, b) {
-            
-            let x= moment(`${a.arrival_date} ${a.arrival_time}`,'DD/MM/YYYY hh:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`,'DD/MM/YYYY hh:mm A'),'seconds')
-            let y= moment(`${b.arrival_date} ${b.arrival_time}`,'DD/MM/YYYY hh:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`,'DD/MM/YYYY hh:mm A'),'seconds')
-            console.log(`${a.arrival_date} ${a.arrival_time}`,`${a.departure_date} ${a.departure_time}`,x,y,way)
-            if (way === 'ASC') {
-                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-            }
-            if (way === 'DESC') {
-                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-            }
-        });
-      }
-  }
-
-  sortByArrival(data,key,way){
-    if (typeof data == "undefined") {
-      return data;
-    } 
-    else {
       return data.sort(function (a, b) {
-
-          let x= moment(`${a.arrival_date} ${a.arrival_time}`,'DD/MM/YYYY hh:mm A').format("X")
-          let y= moment(`${b.arrival_date} ${b.arrival_time}`,'DD/MM/YYYY hh:mm A').format("X")
-          console.log(x,y,way)
-          if (way === 'ASC') {
-              return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-          }
-          if (way === 'DESC') {
-              return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-          }
+        var x = a[key];
+        var y = b[key];
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
       });
     }
   }
 
-  sortByDeparture(data,key,way){
+  sortByDuration(data, key, way) {
     if (typeof data == "undefined") {
       return data;
-    } 
+    }
     else {
       return data.sort(function (a, b) {
 
-          let x= moment(`${a.departure_date} ${a.departure_time}`,'DD/MM/YYYY hh:mm A').format("X")
-          let y= moment(`${b.departure_date} ${b.departure_time}`,'DD/MM/YYYY hh:mm A').format("X")
-          console.log(x,y,way)
-          if (way === 'ASC') {
-              return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-          }
-          if (way === 'DESC') {
-              return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-          }
+        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+        console.log(`${a.arrival_date} ${a.arrival_time}`, `${a.departure_date} ${a.departure_time}`, x, y, way)
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
       });
     }
   }
 
-  filterFlight(event){
-    this.flightDetails=event;
+  sortByArrival(data, key, way) {
+    if (typeof data == "undefined") {
+      return data;
+    }
+    else {
+      return data.sort(function (a, b) {
+
+        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X")
+        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X")
+        console.log(x, y, way)
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  sortByDeparture(data, key, way) {
+    if (typeof data == "undefined") {
+      return data;
+    }
+    else {
+      return data.sort(function (a, b) {
+
+        let x = moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X")
+        let y = moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X")
+        console.log(x, y, way)
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  filterFlight(event) {
+    this.flightDetails = event;
   }
 }

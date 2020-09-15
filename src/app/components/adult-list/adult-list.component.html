@@ -113,7 +113,7 @@
                     <div *ngIf="adultCollapse" id="adultcollapseOne{{i}}" class="collapse cus_collapse"
                         aria-labelledby="adultOne+i" data-parent="#accordion-Adults">
                         <div class="card-body">
-                            <app-traveler-form [type]="'adult'" (auditFormStatus)="getFormStatus($event)"
+                            <app-traveler-form [type]="'adult'" 
                                 [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                             </app-traveler-form>
                         </div>
@@ -133,7 +133,7 @@
                 <div id="adultcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne"
                     data-parent="#accordion-Adult">
                     <div class="card-body">
-                        <app-traveler-form [type]="'adult'" (valueChange)="pushTraveler($event)" [countries]="countries"
+                        <app-traveler-form [type]="'adult'" (travelerFormChange)="pushTraveler($event)" [countries]="countries"
                             [countries_code]="countries_code"></app-traveler-form>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                         <div *ngIf="childCollapse" id="childcollapseOne{{i}}" class="collapse cus_collapse"
                             aria-labelledby="adultOne+i" data-parent="#accordion-childs">
                             <div class="card-body">
-                                <app-traveler-form [type]="'child'" (auditFormStatus)="getFormStatus($event)"
+                                <app-traveler-form [type]="'child'" 
                                     [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                                 </app-traveler-form>
                             </div>
@@ -217,7 +217,7 @@
                         <div *ngIf="infantCollapse" id="infantcollapseOne{{i}}" class="collapse cus_collapse"
                             aria-labelledby="adultOne+i" data-parent="#accordion-infants">
                             <div class="card-body">
-                                <app-traveler-form [type]="'infant'" (auditFormStatus)="getFormStatus($event)"
+                                <app-traveler-form [type]="'infant'" 
                                     [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                                 </app-traveler-form>
                             </div>
@@ -236,7 +236,7 @@
                     <div id="infantcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne"
                         data-parent="#accordion-infant">
                         <div class="card-body">
-                            <app-traveler-form [type]="'infant'" (valueChange)="pushTraveler($event)"
+                            <app-traveler-form [type]="'infant'" (travelerFormChange)="pushTraveler($event)"
                                 [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
                         </div>
                     </div>

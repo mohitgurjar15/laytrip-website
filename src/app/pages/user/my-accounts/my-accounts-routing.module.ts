@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
+import { CoAccountsComponent } from './co-accounts/co-accounts.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,12 @@ const routes: Routes = [
   {
     path:'bookings',
     component:MyBookingsComponent
-  }
+  },
+  {
+    path: 'co-accounts',
+    component: CoAccountsComponent,
+  },
+ 
 ];
 
 @NgModule({

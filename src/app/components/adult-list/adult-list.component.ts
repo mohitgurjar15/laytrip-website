@@ -19,9 +19,9 @@ export class AdultListComponent implements OnInit {
   @Input() username: string;
   @Input() type: string;
   @Input() age: string;
-  @Input() _adults :any = [];
+  @Input() _adults: any = [];
   @Input() _childs = [];
-  @Input() _infants  :any = [];
+  @Input() _infants: any = [];
 
   counter = 0;
   totalTravelerCount = 0;
@@ -36,19 +36,19 @@ export class AdultListComponent implements OnInit {
   showAddChildForm: boolean = false;
   showAddInfantForm: boolean = false;
   adultFormStatus: boolean = false;
-  infantCollapse : boolean = false;
-  childCollapse : boolean = false;
-  adultCollapse : boolean = false;
+  infantCollapse: boolean = false;
+  childCollapse: boolean = false;
+  adultCollapse: boolean = false;
   count = 0;
   random = 0;
-  _itinerary :any;
+  _itinerary: any;
   countries: any = [];
   countries_code: any = [];
   containers = [];
-  _itinerarySelection:any = {
-    adult:[],
-    child:[],
-    infant:[]
+  _itinerarySelection: any = {
+    adult: [],
+    child: [],
+    infant: []
   };
 
   constructor(
@@ -73,10 +73,10 @@ export class AdultListComponent implements OnInit {
 
 
   selectTraveler(event, traveler) {
-    
-    if(event.target.checked){
+
+    if (event.target.checked) {
       this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-      let totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
+      let totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
       let travelerData = {
         "userId": traveler.userId,
         "firstName": traveler.firstName,
@@ -91,9 +91,9 @@ export class AdultListComponent implements OnInit {
       } else {
         // this.checkBoxDisable = true;                
       }
-      if(traveler.user_type == 'adult'){
+      if (traveler.user_type == 'adult') {
         this._itinerarySelection.adult.push(traveler.userId);
-      } else if(traveler.user_type == 'child'){
+      } else if (traveler.user_type == 'child') {
         this._itinerarySelection.child.push(traveler.userId);
       } else {
         this._itinerarySelection.infant.push(traveler.userId);
@@ -104,9 +104,9 @@ export class AdultListComponent implements OnInit {
       this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
       this.cookieService.remove('_travelers');
       this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      if(traveler.user_type == 'adult'){
+      if (traveler.user_type == 'adult') {
         this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
-      } else if(traveler.user_type == 'child'){
+      } else if (traveler.user_type == 'child') {
         this._itinerarySelection.child = this._itinerarySelection.child.filter(obj => obj !== traveler.userId);
       } else {
         this._itinerarySelection.infant = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
@@ -125,7 +125,7 @@ export class AdultListComponent implements OnInit {
   }
 
 
-  ngOnChanges(changes:SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes['traveler']) {
       this.travelers = this.travelers;
     }
@@ -135,17 +135,17 @@ export class AdultListComponent implements OnInit {
   ngDoCheck() {
     // console.log("whole",this)
     /* this._selectedId.forEach(id => {
-      $(  "#"+id   ).removeAttr( "disabled" );     
+      $(  "#"+id   ).removeAttr( "disabled" );
     }); */
     this.checkUser();
     this.containers = this.containers;
-    
-    if(this.travelers.length >= 0){
+
+    if (this.travelers.length >= 0) {
       this.loader = false;
     }
   }
 
-  
+
   addForms(type) {
     if (type == 'adult') {
       this.showAddAdultForm = !this.showAddAdultForm;
@@ -154,37 +154,34 @@ export class AdultListComponent implements OnInit {
     } else if (type == 'infant') {
       this.showAddInfantForm = !this.showAddInfantForm;
     }
-  } 
+  }
 
   checkUser() {
-    
+
     let userToken = localStorage.getItem('_lay_sess');
 
     if (userToken) {
       this.isLoggedIn = true;
     }
   }
-  
+
 
   pushTraveler(event) {
-    console.log(event)
-   if(event.user_type == 'adult'){
-     console.log("before",this._adults)
-     this._adults.push(event);
-     console.log("after",this._adults)
-     
-    } else if(event.user_type == 'child'){
-      console.log("before child",this._childs)
-
+    console.log('updated',event);
+    if (event.user_type === 'adult') {
+      console.log('before', this._adults);
+      this._adults.push(event);
+      console.log('after', this._adults);
+    } else if (event.user_type === 'child') {
+      console.log('before child', this._childs);
       this._childs.push(event);
-
-      console.log("after child",this._childs)
+      console.log('after child', this._childs);
     } else {
-      console.log("before",this._infants)
+      console.log('before', this._infants);
       this._infants.push(event);
-      console.log("after",this._infants)
-   }
-   
+      console.log('after', this._infants);
+    }
+
     this.showAddAdultForm = false;
   }
 

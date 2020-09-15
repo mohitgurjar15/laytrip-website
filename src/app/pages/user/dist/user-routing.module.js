@@ -13,7 +13,7 @@ var routes = [
     {
         path: '',
         loadChildren: './my-accounts/my-accounts.module#MyAccountsModule'
-    }
+    },
 ];
 var UserRoutingModule = /** @class */ (function () {
     function UserRoutingModule() {

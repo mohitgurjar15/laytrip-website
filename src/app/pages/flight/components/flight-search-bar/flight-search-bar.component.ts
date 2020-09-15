@@ -117,7 +117,6 @@ export class FlightSearchBarComponent implements OnInit {
     const selectedItem = localStorage.getItem('_fligh');
     if (selectedItem) {
       const info = JSON.parse(selectedItem);
-      console.log("info",info)
       info[1].value = airports[this.arrivalCode];
       info.forEach(res => {
         if (res && res.key === 'fromSearch') {
@@ -128,7 +127,7 @@ export class FlightSearchBarComponent implements OnInit {
           }
         }
         if (res && res.key === 'toSearch') {
-          res.value.display_name=`${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
+          res.value.display_name = `${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
           this.data.push(res.value);
           this.airportDefaultArrivalValue = `${res.value.city}`;
           if (this.airportDefaultArrivalValue) {
@@ -138,7 +137,6 @@ export class FlightSearchBarComponent implements OnInit {
       });
 
     }
-    console.log(this.data)
   }
 
   ngOnInit() {
@@ -256,7 +254,6 @@ export class FlightSearchBarComponent implements OnInit {
     }
     // this.searchFlightInfo.departure = this.fromDestinationCode;
     // this.searchFlightInfo.arrival = this.toDestinationCode;
-    console.log(this.searchFlightInfo.departure, this.searchFlightInfo.arrival);
   }
 
   getSwappedValue(event) {
@@ -279,24 +276,26 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
-    if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
+    if (this.isRoundTrip === true) {
+      console.log(this.flightReturnMinDate);
       this.searchFlightInfo.trip = 'roundtrip';
-      if (this.route.snapshot.queryParams['arrival_date']) {
-        this.searchFlightInfo.arrival_date = this.arrivalDate;
-      }
+      this.searchFlightInfo.arrival_date =
+        moment(this.flightSearchForm.value.returnDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+          ? moment(this.flightSearchForm.value.returnDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD') : this.flightReturnMinDate;
     }
 
-    console.log(this.searchFlightInfo);
+    // console.log(this.searchFlightInfo);
 
-    if (this.totalPerson &&
+    if (!this.isRoundTrip && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
       && this.searchFlightInfo.trip === 'oneway') {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.searchBarInfo.emit(this.searchFlightInfo);
-    } else if (this.totalPerson &&
+    } else if (this.isRoundTrip === true && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.arrival_date
       && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
       && this.searchFlightInfo.trip === 'roundtrip') {
+      console.log(this.searchFlightInfo);
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.searchBarInfo.emit(this.searchFlightInfo);
     }
@@ -305,13 +304,16 @@ export class FlightSearchBarComponent implements OnInit {
   toggleOnewayRoundTrip(type) {
     if (type === 'roundtrip') {
       this.isRoundTrip = true;
+      this.searchFlightInfo.trip = 'roundtrip';
     } else {
       this.isRoundTrip = false;
+      this.searchFlightInfo.trip = 'oneway';
     }
   }
 
-  datesUpdated(event) {
-
+  returnDatesUpdated(event) {
+    // moment(this.flightSearchForm.value.departureDate.startDate);
+    this.searchFlightInfo.arrival_date = moment(this.flightSearchForm.value.returnDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
   }
 
   departureDateUpdate(date) {
