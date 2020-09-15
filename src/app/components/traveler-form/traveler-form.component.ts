@@ -24,7 +24,7 @@ export class TravelerFormComponent implements OnInit {
   @Input() countries: [];
   @Input() countries_code: [];
   @Output() travelerFormChange = new EventEmitter();
-  @Output() auditFormStatus = new EventEmitter();
+  // @Output() auditFormStatus = new EventEmitter();
 
   adultForm: FormGroup;
   submitted = false;
@@ -90,7 +90,7 @@ export class TravelerFormComponent implements OnInit {
           frequently_no:''
         })
         this.formStatus = this.adultForm.status === 'VALID' ?  true : false;        
-        this.auditFormStatus.emit(this.formStatus);
+        // this.auditFormStatus.emit(this.formStatus);
     }    
   }
 
@@ -155,9 +155,6 @@ export class TravelerFormComponent implements OnInit {
       if (!Number(country_id)) {
         country_id = this.traveler.country.id;
       }
-      if(typeof this.adultForm.value.dob.startDate === 'string'){
-        this.dobDate = this.stringToDate(this.adultForm.value.dob.startDate,'/');
-      }
 
       let jsonData = {
         title: this.adultForm.value.title,
@@ -165,10 +162,10 @@ export class TravelerFormComponent implements OnInit {
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
         passport_number: this.adultForm.value.passport_number,
-        dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.dobDate).format('YYYY-MM-DD'),
+        dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate,'/')).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
         country_id: country_id ? country_id : '',
-        passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD'),
+        passport_expiry: typeof this.adultForm.value.dob.passport_expiry === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate,'/')).format('YYYY-MM-DD'),
       };
 
       if (this.type === 'adult') {
@@ -183,7 +180,9 @@ export class TravelerFormComponent implements OnInit {
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
-          this.travelerFormChange.observers.push(data);
+          // this.travelerFormChange.observers.push(data);
+          this.travelerFormChange.emit(data);
+          console.log( this.travelerFormChange)
           $('.collapse').collapse('hide');
           $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {

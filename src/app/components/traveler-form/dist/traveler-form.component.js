@@ -21,7 +21,6 @@ var TravelerFormComponent = /** @class */ (function () {
         this.usersType = '';
         this.traveler = [];
         this.travelerFormChange = new core_1.EventEmitter();
-        this.auditFormStatus = new core_1.EventEmitter();
         this.submitted = false;
         this.loading = false;
         this.isLoggedIn = false;
@@ -74,7 +73,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 frequently_no: ''
             });
             this.formStatus = this.adultForm.status === 'VALID' ? true : false;
-            this.auditFormStatus.emit(this.formStatus);
+            // this.auditFormStatus.emit(this.formStatus);
         }
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
@@ -135,19 +134,16 @@ var TravelerFormComponent = /** @class */ (function () {
             if (!Number(country_id)) {
                 country_id = this.traveler.country.id;
             }
-            if (typeof this.adultForm.value.dob.startDate === 'string') {
-                this.dobDate = this.stringToDate(this.adultForm.value.dob.startDate, '/');
-            }
             var jsonData = {
                 title: this.adultForm.value.title,
                 first_name: this.adultForm.value.firstName,
                 last_name: this.adultForm.value.lastName,
                 frequently_no: this.adultForm.value.frequently_no,
                 passport_number: this.adultForm.value.passport_number,
-                dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.dobDate).format('YYYY-MM-DD'),
+                dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),
                 gender: this.adultForm.value.gender,
                 country_id: country_id ? country_id : '',
-                passport_expiry: moment(this.adultForm.value.passport_expiry.startDate).format('YYYY-MM-DD')
+                passport_expiry: typeof this.adultForm.value.dob.passport_expiry === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD')
             };
             if (this.type === 'adult') {
                 var adultObj = {
@@ -160,7 +156,9 @@ var TravelerFormComponent = /** @class */ (function () {
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
-                    _this.travelerFormChange.observers.push(data);
+                    // this.travelerFormChange.observers.push(data);
+                    _this.travelerFormChange.emit(data);
+                    console.log(_this.travelerFormChange);
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                 }, function (error) {
@@ -227,9 +225,6 @@ var TravelerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], TravelerFormComponent.prototype, "travelerFormChange");
-    __decorate([
-        core_1.Output()
-    ], TravelerFormComponent.prototype, "auditFormStatus");
     TravelerFormComponent = __decorate([
         core_1.Component({
             selector: 'app-traveler-form',
