@@ -167,12 +167,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
     // TRIP is round-trip then call this API
     if (event.trip === 'roundtrip') {
-      this.getFlightSearchDataForRoundTrip(payload);
+      this.getFlightSearchDataForRoundTrip(event);
     }
   }
 
   getFlightSearchDataForRoundTrip(event) {
-    console.log(event);
     const payload = {
       source_location: event.departure,
       destination_location: event.arrival,
@@ -203,10 +202,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  sortFlight(event){
-    let { key , order } = event;
-    if(key=='total_duration'){
-      this.flightDetails = this.sortByDuration(this.flightDetails,key,order)
+  sortFlight(event) {
+    let { key, order } = event;
+    if (key == 'total_duration') {
+      this.flightDetails = this.sortByDuration(this.flightDetails, key, order)
     }
     else if (key == 'arrival') {
       this.flightDetails = this.sortByArrival(this.flightDetails, key, order)
@@ -299,7 +298,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterFlight(event){
-    this.flightDetails=event;
+  filterFlight(event) {
+    this.flightDetails = event;
   }
 }
