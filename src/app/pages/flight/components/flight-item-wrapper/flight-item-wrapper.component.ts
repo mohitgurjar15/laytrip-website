@@ -7,6 +7,7 @@ import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -63,7 +64,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private flightService: FlightService,
     private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private commonFunction:CommonFunction
   ) { }
 
   ngOnInit() {
