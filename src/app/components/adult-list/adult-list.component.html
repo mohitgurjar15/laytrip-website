@@ -185,7 +185,7 @@
                     <div id="childcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne"
                         data-parent="#accordion-child">
                         <div class="card-body">
-                            <app-traveler-form [type]="'child'" (valueChange)="pushTraveler($event)"
+                            <app-traveler-form [type]="'child'" (travelerFormChange)="pushTraveler($event)"
                                 [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
                         </div>
                     </div>
