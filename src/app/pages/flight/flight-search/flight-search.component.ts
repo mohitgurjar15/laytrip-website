@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { Actions, ofType } from '@ngrx/effects';
 import { FlightService } from '../../../services/flight.service';
 // import { data } from '../../flight/components/flight-item-wrapper/data';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-flight-search',
@@ -182,7 +183,19 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   sortFlight(event){
     console.log(event)
     let { key , order } = event;
-    this.flightDetails = this.sortJSON(this.flightDetails,key,order)
+    if(key=='total_duration'){
+      this.flightDetails = this.sortByDuration(this.flightDetails,key,order)
+    }
+    else if(key=='arrival'){
+      this.flightDetails = this.sortByArrival(this.flightDetails,key,order)
+    }
+    else if(key=='departure'){
+      
+      this.flightDetails = this.sortByDeparture(this.flightDetails,key,order)
+    }
+    else{
+      this.flightDetails = this.sortJSON(this.flightDetails,key,order)
+    }
     console.log(this.flightDetails)
 
   }
@@ -201,6 +214,66 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
                 return ((x > y) ? -1 : ((x < y) ? 1 : 0));
             }
         });
+    }
+  }
+
+  sortByDuration(data, key, way){
+    if (typeof data == "undefined") {
+      return data;
+    } 
+    else {
+        return data.sort(function (a, b) {
+            
+            let x= moment(`${a.arrival_date} ${a.arrival_time}`,'DD/MM/YYYY hh:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`,'DD/MM/YYYY hh:mm A'),'seconds')
+            let y= moment(`${b.arrival_date} ${b.arrival_time}`,'DD/MM/YYYY hh:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`,'DD/MM/YYYY hh:mm A'),'seconds')
+            console.log(`${a.arrival_date} ${a.arrival_time}`,`${a.departure_date} ${a.departure_time}`,x,y,way)
+            if (way === 'ASC') {
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            }
+            if (way === 'DESC') {
+                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            }
+        });
+      }
+  }
+
+  sortByArrival(data,key,way){
+    if (typeof data == "undefined") {
+      return data;
+    } 
+    else {
+      return data.sort(function (a, b) {
+
+          let x= moment(`${a.arrival_date} ${a.arrival_time}`,'DD/MM/YYYY hh:mm A').format("X")
+          let y= moment(`${b.arrival_date} ${b.arrival_time}`,'DD/MM/YYYY hh:mm A').format("X")
+          console.log(x,y,way)
+          if (way === 'ASC') {
+              return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+          }
+          if (way === 'DESC') {
+              return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+          }
+      });
+    }
+  }
+
+  sortByDeparture(data,key,way){
+    if (typeof data == "undefined") {
+      return data;
+    } 
+    else {
+      return data.sort(function (a, b) {
+
+          let x= moment(`${a.departure_date} ${a.departure_time}`,'DD/MM/YYYY hh:mm A').format("X")
+          let y= moment(`${b.departure_date} ${b.departure_time}`,'DD/MM/YYYY hh:mm A').format("X")
+          console.log(x,y,way)
+          if (way === 'ASC') {
+              return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+          }
+          if (way === 'DESC') {
+              return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+          }
+      });
     }
   }
 }
