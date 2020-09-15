@@ -61,7 +61,7 @@ export class FlightTravelerComponent implements OnInit {
           }else if(element.user_type == 'infant'){
             this._infants.push(element);          
           }
-        });
+        });       
         this.loading = false;
       })
     } else {
