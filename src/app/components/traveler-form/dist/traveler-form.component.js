@@ -52,17 +52,14 @@ var TravelerFormComponent = /** @class */ (function () {
                         moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
                 }, forms_1.Validators.required],
             passport_expiry: [{
-                    startDate: typeof this.traveler.passport_expiry !== 'undefined' ?
-                        moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
+                    startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
+                        moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
                 },],
             passport_number: [''],
             frequently_no: [''],
             user_type: ['']
         });
-        if (this.type != 'adult') {
-            console.log('ss');
-            this.setUserTypeValidation();
-        }
+        this.setUserTypeValidation();
         if (this.traveler.userId) {
             this.adultForm.patchValue({
                 title: this.traveler.title,
@@ -73,13 +70,12 @@ var TravelerFormComponent = /** @class */ (function () {
                 country_code: this.traveler.countryCode,
                 phone_no: this.traveler.phoneNo,
                 country_id: this.traveler.country != null ? this.traveler.country.name : '',
-                passport_numdobDateUpdateber: this.traveler.passportNumber,
+                passport_number: this.traveler.passportNumber,
                 frequently_no: ''
             });
             this.formStatus = this.adultForm.status === 'VALID' ? true : false;
             this.auditFormStatus.emit(this.formStatus);
         }
-        console.log(this.adultForm);
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
         this.checkUser();
@@ -90,7 +86,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var emailControl = this.adultForm.get('email');
         var phoneControl = this.adultForm.get('phone_no');
         var countryControl = this.adultForm.get('country_code');
-        if (this.type === 'adult' && emailControl.value != null) {
+        if (this.type === 'adult') {
             emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
             phoneControl.setValidators([forms_1.Validators.required]);
             countryControl.setValidators([forms_1.Validators.required]);
@@ -129,7 +125,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.adultForm.invalid) {
-            // console.log(this.adultForm.controls);
+            console.log(this.adultForm.controls);
             this.submitted = true;
             this.loading = false;
             return;
@@ -147,6 +143,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 first_name: this.adultForm.value.firstName,
                 last_name: this.adultForm.value.lastName,
                 frequently_no: this.adultForm.value.frequently_no,
+                passport_number: this.adultForm.value.passport_number,
                 dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.dobDate).format('YYYY-MM-DD'),
                 gender: this.adultForm.value.gender,
                 country_id: country_id ? country_id : '',
@@ -163,16 +160,9 @@ var TravelerFormComponent = /** @class */ (function () {
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
-                    console.log('outside:::', data);
-                    _this.travelerFormChange.emit(data);
-                    console.log('sdfsfd', _this.travelerFormChange);
-                    // if (data) {
-                    //   this.travelerFormChange.emit(data);
-                    //   if (this.travelerFormChange) {
-                    //     console.log('sdfsfd', this.travelerFormChange);
-                    //     $('.collapse').collapse('hide');
-                    //   }
-                    // }
+                    _this.travelerFormChange.observers.push(data);
+                    $('.collapse').collapse('hide');
+                    $('#accordion-' + _this.type).hide();
                 }, function (error) {
                     console.log('error');
                     _this.submitted = _this.loading = false;
@@ -194,6 +184,7 @@ var TravelerFormComponent = /** @class */ (function () {
                         localStorage.setItem("_lay_sess", data.token);
                     }
                     _this.travelerFormChange.emit(data);
+                    console.log(_this.travelerFormChange);
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                     _this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });

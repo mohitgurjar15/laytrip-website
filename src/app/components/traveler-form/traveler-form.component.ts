@@ -44,17 +44,12 @@ export class TravelerFormComponent implements OnInit {
   expiryMinDate: moment.Moment = moment().add(2, 'days');
   subscriptions: Subscription[] = [];
 
-
-
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
     public router: Router,
-    public commonFunction: CommonFunction,
-
-  ) {
-
-  }
+    public commonFunction: CommonFunction
+  ) {}
 
   ngOnInit() {
     this.adultForm = this.formBuilder.group({
@@ -71,18 +66,16 @@ export class TravelerFormComponent implements OnInit {
           moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
       }, Validators.required],
       passport_expiry: [{
-        startDate: typeof this.traveler.passport_expiry !== 'undefined' ?
-          moment(this.traveler.passport_expiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
+        startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
+          moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
       },],
       passport_number: [''],
       frequently_no: [''],
       user_type: ['']
     });
-    if(this.type != 'adult'){
-      console.log('ss');
-      this.setUserTypeValidation();
-    }
-
+    
+    this.setUserTypeValidation();
+    
     if (this.traveler.userId) {
       this.adultForm.patchValue({
           title: this.traveler.title,
@@ -93,17 +86,12 @@ export class TravelerFormComponent implements OnInit {
           country_code: this.traveler.countryCode,
           phone_no: this.traveler.phoneNo,
           country_id: this.traveler.country != null ? this.traveler.country.name : '',
-          passport_numdobDateUpdateber: this.traveler.passportNumber,
+          passport_number: this.traveler.passportNumber,
           frequently_no:''
         })
-        this.formStatus = this.adultForm.status === 'VALID' ?  true : false;
-        
+        this.formStatus = this.adultForm.status === 'VALID' ?  true : false;        
         this.auditFormStatus.emit(this.formStatus);
-
-    }
-    console.log(this.adultForm)
-
-    
+    }    
   }
 
   ngDoCheck() {
@@ -116,12 +104,11 @@ export class TravelerFormComponent implements OnInit {
     const emailControl = this.adultForm.get('email');  
     const phoneControl = this.adultForm.get('phone_no');  
     const countryControl = this.adultForm.get('country_code');   
-    if(this.type === 'adult' && emailControl.value != null){
+    if(this.type === 'adult' ){
       emailControl.setValidators([Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
       this.dobMaxDate =  moment().add(-12, 'year');       
-
     } else if(this.type === 'child') {
 
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
@@ -156,10 +143,9 @@ export class TravelerFormComponent implements OnInit {
   dobDate : any= '';
 
   onSubmit() {
-
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
-      // console.log(this.adultForm.controls);
+      console.log(this.adultForm.controls);
       this.submitted = true;
       this.loading = false;
       return;
@@ -178,6 +164,7 @@ export class TravelerFormComponent implements OnInit {
         first_name: this.adultForm.value.firstName,
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
+        passport_number: this.adultForm.value.passport_number,
         dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.dobDate).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
         country_id: country_id ? country_id : '',
@@ -196,17 +183,9 @@ export class TravelerFormComponent implements OnInit {
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
-
-          console.log('outside:::', data);
-          this.travelerFormChange.emit(data);
-          console.log('sdfsfd', this.travelerFormChange);
-          // if (data) {
-          //   this.travelerFormChange.emit(data);
-          //   if (this.travelerFormChange) {
-          //     console.log('sdfsfd', this.travelerFormChange);
-          //     $('.collapse').collapse('hide');
-          //   }
-          // }
+          this.travelerFormChange.observers.push(data);
+          $('.collapse').collapse('hide');
+          $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
           console.log('error');
           this.submitted = this.loading = false;
@@ -215,21 +194,23 @@ export class TravelerFormComponent implements OnInit {
           }
         });
       } else {
-        if(this.type === 'adult') {
+        if (this.type === 'adult') {
           let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
           jsonData = Object.assign(jsonData, emailObj);
-        } 
+        }
         this.subscriptions.push(
           this.flightService.addAdult(jsonData).subscribe((data: any) => {
             this.adultForm.reset();
             this.submitted = this.loading = false;
             console.log(this.isLoggedIn)
-            if(!this.isLoggedIn){
+            if (!this.isLoggedIn) {
               localStorage.setItem("_lay_sess", data.token);
             }
             this.travelerFormChange.emit(data);
+            console.log(this.travelerFormChange);
+
             $('.collapse').collapse('hide');
-            $('#accordion-'+this.type).hide();
+            $('#accordion-' + this.type).hide();
             this.subscriptions.forEach(sub => sub.unsubscribe());
           }, (error: HttpErrorResponse) => {
             console.log('error')
@@ -238,9 +219,9 @@ export class TravelerFormComponent implements OnInit {
               this.router.navigate(['/']);
             }
             this.subscriptions.forEach(sub => sub.unsubscribe());
-          })         
-        );              
+          })
 
+        );
       }
     }
   }
