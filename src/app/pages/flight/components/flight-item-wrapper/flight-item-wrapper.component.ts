@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie';
 export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   @Input() flightDetails;
+  @Input() filter;
 
   animationState = 'out';
   flightList;
@@ -150,5 +151,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     };
     this.cookieService.put('_itinerary', JSON.stringify(itinerary));
     this.router.navigate([`flight/traveler/${routeCode}`]);
+  }
+
+  ngOnChanges(changes:SimpleChanges){
+    
+    this.flightList=changes.flightDetails.currentValue;
   }
 }

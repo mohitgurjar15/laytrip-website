@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LayTripStoreService } from '../../../state/layTrip/layTrip-store.service';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
@@ -24,7 +24,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   isNotFound = false;
   flightSearchData;
   flightSearchInfo;
-
   flightDetails;
   filterFlightDetails;
 
@@ -181,7 +180,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   sortFlight(event){
-    console.log(event)
     let { key , order } = event;
     if(key=='total_duration'){
       this.flightDetails = this.sortByDuration(this.flightDetails,key,order)
@@ -275,5 +273,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           }
       });
     }
+  }
+
+  filterFlight(event){
+    this.flightDetails=event;
   }
 }

@@ -6,14 +6,14 @@
         <h5>Price</h5>
         <div class="custom_range_slide">
           <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
-            [(highValue)]="priceHighValue" [options]="priceOptions"></ng5-slider>
+            [(highValue)]="priceHighValue" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
         </div>
       </div>
       <div class="cmn_block partial_payment_price">
         <h5>Partial payment price</h5>
         <div class="custom_range_slide">
           <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
-            [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions">
+            [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)">
           </ng5-slider>
         </div>
       </div>
@@ -101,7 +101,7 @@
                     <li
                       *ngIf="arrivalTimeSlot.first_slot.min_price !== null && arrivalTimeSlot.first_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox" (change)="filterByTimeSlot($event,'outbound','arrival',depatureTimeSlot.first_slot)">
                         <span class="checkmark"></span>
                         12AM - 6AM
                       </label>
@@ -110,7 +110,7 @@
                     <li
                       *ngIf="arrivalTimeSlot.second_slot.min_price !== null && arrivalTimeSlot.second_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox" (change)="filterByTimeSlot($event,'outbound','arrival',depatureTimeSlot.second_slot)">
                         <span class="checkmark"></span>
                         6AM - 12PM
                       </label>
@@ -120,7 +120,7 @@
                     <li
                       *ngIf="arrivalTimeSlot.third_slot.min_price !== null && arrivalTimeSlot.third_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox" (change)="filterByTimeSlot($event,'outbound','arrival',depatureTimeSlot.third_slot)">
                         <span class="checkmark"></span>
                         12PM - 6PM
                       </label>
@@ -129,7 +129,7 @@
                     <li
                       *ngIf="arrivalTimeSlot.fourth_slot.min_price !== null && arrivalTimeSlot.fourth_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox" (change)="filterByTimeSlot($event,'outbound','arrival',depatureTimeSlot.fourth_slot)">
                         <span class="checkmark"></span>
                         6PM - 12AM
                       </label>
@@ -144,7 +144,7 @@
                     <li
                       *ngIf="depatureTimeSlot.first_slot.min_price !== null && depatureTimeSlot.first_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox"  (change)="filterByTimeSlot($event,'outbound','departure',depatureTimeSlot.first_slot)">
                         <span class="checkmark"></span>
                         12AM - 6AM
                       </label>
@@ -154,7 +154,7 @@
                     <li
                       *ngIf="depatureTimeSlot.second_slot.min_price !== null && depatureTimeSlot.second_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox" (change)="filterByTimeSlot($event,'outbound','departure',depatureTimeSlot.second_slot)">
                         <span class="checkmark"></span>
                         6AM - 12PM
                       </label>
@@ -164,7 +164,7 @@
                     <li
                       *ngIf="depatureTimeSlot.third_slot.min_price !== null && depatureTimeSlot.third_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox"  (change)="filterByTimeSlot($event,'outbound','departure',depatureTimeSlot.third_slot)">
                         <span class="checkmark"></span>
                         12PM - 6PM
                       </label>
@@ -174,7 +174,7 @@
                     <li
                       *ngIf="depatureTimeSlot.fourth_slot.min_price !== null && depatureTimeSlot.fourth_slot.min_price !== 0">
                       <label class="custom_checkbox">
-                        <input type="checkbox" value="">
+                        <input type="checkbox"  (change)="filterByTimeSlot($event,'outbound','departure',depatureTimeSlot.fourth_slot)">
                         <span class="checkmark"></span>
                         6PM - 12AM
                       </label>
@@ -344,7 +344,7 @@
           </li> -->
           <li *ngFor="let airline of airlineList">
             <label class="custom_checkbox">
-              <input type="checkbox" value="">
+              <input type="checkbox" value="{{ airline?.airline_code }}" (change)="filterByAirline($event)">
               <span class="checkmark"></span>
               {{ airline?.airline_name }}
             </label>
