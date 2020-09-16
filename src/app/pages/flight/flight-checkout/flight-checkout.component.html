@@ -16,7 +16,13 @@
                           </div>
                         </div>
                         <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
-                            <app-payment-mode *ngIf="flightSummary.length" [flightSummary]="flightSummary" (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)" (getInstalmentData)="getInstalmentData($event)" ></app-payment-mode>
+                            <app-payment-mode 
+                                *ngIf="flightSummary.length" 
+                                [flightSummary]="flightSummary" 
+                                (selectInstalmentMode)="selectInstalmentMode($event)" 
+                                (applyLaycredit)="applyLaycredit($event)" 
+                                (getInstalmentData)="getInstalmentData($event)">
+                            </app-payment-mode>
                         </div>
                         <div class="block_pay_info">
                             <app-booking-enquiry-info></app-booking-enquiry-info>
@@ -52,7 +58,6 @@
                       </ul>
                   </div>
                   <div class="btn_payment">
-                      <!-- <a href="javascript:void(0)" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a> -->
                       <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                       
                   </div>
@@ -61,7 +66,7 @@
               <app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
           </div>
           <div class="col-lg-4">
-            <app-flight-summary (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
+            <app-flight-summary showPartialPayemntOption="instalmentMode" (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
           </div>
       </div>
   </div>

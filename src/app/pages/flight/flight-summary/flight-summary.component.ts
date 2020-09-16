@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FlightService } from '../../../services/flight.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 })
 export class FlightSummaryComponent implements OnInit {
   @Output() totalTravelerValue = new EventEmitter();
+  @Input() showPartialPayemntOption;
 
   routeCode:string='';
   constructor(
