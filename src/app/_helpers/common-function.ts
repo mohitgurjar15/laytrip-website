@@ -92,5 +92,16 @@ export class CommonFunction {
         }
     }
 
+    /** 
+     * @by Mohit Gurjar
+     * String to convert in date forrmat {YYYY-MM-DD}
+     * @param string in date [04/12/2020]
+     * @param saprator [/]
+     */
+    stringToDate(string, saprator) {
+        let dateArray = string.split(saprator);
+        return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
+    }
+
 }
 

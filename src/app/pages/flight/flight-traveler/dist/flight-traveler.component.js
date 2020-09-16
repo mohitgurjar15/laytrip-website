@@ -44,6 +44,7 @@ var FlightTravelerComponent = /** @class */ (function () {
             this.is_traveller = true;
             this.travelerService.getTravelers().subscribe(function (res) {
                 _this.travelers = res.data;
+                _this._adults = _this._childs = _this._infants = [];
                 _this.travelers.forEach(function (element) {
                     if (element.user_type == 'adult') {
                         _this._adults.push(element);

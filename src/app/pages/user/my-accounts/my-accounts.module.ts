@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 import { CoAccountsComponent } from './co-accounts/co-accounts.component';
 import { CrudCoAccountComponent } from './co-accounts/crud-co-account/crud-co-account.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [ProfileComponent,MyAccountsNavComponent, MyBookingsComponent, CoAccountsComponent, CrudCoAccountComponent],
@@ -17,7 +18,8 @@ import { CrudCoAccountComponent } from './co-accounts/crud-co-account/crud-co-ac
     MyAccountsRoutingModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    NgxDaterangepickerMd.forRoot(),
   ],
   providers:[DatePipe]
 })

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { TravelerService } from '../../../../services/traveler.service';
 import * as moment from 'moment';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 
 @Component({
   selector: 'app-co-accounts',
@@ -15,8 +16,9 @@ export class CoAccountsComponent implements OnInit {
   travelers = [];
   constructor(
     public travelerService:TravelerService,
-    public router: Router  
-    ) { }
+    public router: Router   
+  ) { }
+
 
   ngOnInit() {
     this.getTravelers();

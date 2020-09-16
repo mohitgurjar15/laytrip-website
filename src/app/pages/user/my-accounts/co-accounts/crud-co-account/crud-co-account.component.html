@@ -1,138 +1,181 @@
 <div class="modal fade cmn_add_edit_modal add_traveller_modal" id="add_traveller_modal">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="card_modal_cnt">
-              <div class="modal_top">
-                  <button type="button" class="close" data-dismiss="modal">
-                      <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-                  </button>
-              </div>
-              <div class="modal_btm">
-                  <div class="block_title">
-                      <h5>Add/Edit Co - Travellers</h5>
-                  </div>
-                  <div class="add_card_form">
-                      <form   [formGroup]="coAccountForm" >
-                          <div class="form_row">
-                              <div class="form_field">
-                                  <label>Title</label>
-                                  <ul class="custom_listing">
-                                      <li>
-                                          <label class="custom_radio">Mr.
-                                              <input type="radio" checked="checked" name="adult-title">
-                                              <span class="checkmark"></span>
-                                          </label>
-                                      </li>
-                                      <li>
-                                          <label class="custom_radio">Ms.
-                                              <input type="radio" name="adult-title">
-                                              <span class="checkmark"></span>
-                                          </label>
-                                      </li>
-                                      <li>
-                                          <label class="custom_radio">Mrs.
-                                              <input type="radio" name="adult-title">
-                                              <span class="checkmark"></span>
-                                          </label>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                          <div class="form_row">
-                              <div class="form_field">
-                                  <label>Gender</label>
-                                  <ul class="custom_listing">
-                                      <li>
-                                          <label class="custom_radio">Male
-                                              <input type="radio" checked="checked" name="adult-gender">
-                                              <span class="checkmark"></span>
-                                          </label>
-                                      </li>
-                                      <li>
-                                          <label class="custom_radio">Female
-                                              <input type="radio" name="adult-gender">
-                                              <span class="checkmark"></span>
-                                          </label>
-                                      </li>
-                                      <li>
-                                          <label class="custom_radio">Non - Binary
-                                              <input type="radio" name="adult-gender">
-                                              <span class="checkmark"></span>
-                                          </label>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                          <div class="form_row">
-                              <div class="form_field half">
-                                  <label>First Name<sup>*</sup></label>
-                                  <div class="text_field">
-                                      <input type="text" name="fname" maxlength="20" tabindex="1" placeholder="First Name">
-                                  </div>
-                              </div>
-                              <div class="form_field half">
-                                  <label>Last Name<sup>*</sup></label>
-                                  <div class="text_field">
-                                      <input type="text" name="lname" maxlength="20" tabindex="2" placeholder="last Name">
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form_row">
-                              <div class="form_field half">
-                                  <label>Date of Birth</label>
-                                  <div class="text_field">
-                                      <input class="birth_date" type="text" name="email" maxlength="20" tabindex="3" placeholder="Dd/mm/yyyy">
-                                  </div>
-                              </div>
-                              <div class="form_field half">
-                                  <label>Nationality</label>
-                                  <div class="text_field custom-select">
-                                      <select>
-                                          <option value="0">Select</option>
-                                          <option value="1">Select</option>
-                                          <option value="2">Select</option>
-                                          <option value="3">Select</option>
-                                          <option value="4">Select</option>
-                                          <option value="5">Select</option>
-                                          <option value="6">Select</option>
-                                          <option value="7">Select</option>
-                                      </select>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form_row">
-                              <div class="form_field half">
-                                  <label>Email<sup>*</sup></label>
-                                  <div class="text_field">
-                                      <input type="email" name="email" maxlength="20" tabindex="4" placeholder="Enter your email">
-                                  </div>
-                              </div>
-                              <div class="form_field half">
-                                  <label>Phone</label>
-                                  <div class="text_field">
-                                      <div class="phone_no">
-                                          <div class="code">
-                                              <div class="dropdown">
-                                                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                                      +00
-                                                      <span class="caret"></span>
-                                                  </a>
-                                                  <ul class="dropdown-menu">
-                                                      <li><a href="javascript:void(0);">+1</a></li>
-                                                      <li><a href="javascript:void(0);">+91</a></li>
-                                                      <li><a href="javascript:void(0);">+36</a></li>
-                                                      <li><a href="javascript:void(0);">+0000</a></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                          <div class="number">
-                                              <input type="text" name="lname" maxlength="20" tabindex="5" placeholder="0000 0000 00">
-                                          </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="card_modal_cnt">
+                <div class="modal_top">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                    </button>
+                </div>
+                <div class="modal_btm">
+                    <div class="block_title">
+                        <h5>Add Co - Travellers</h5>
+                    </div>
+                    <div class="add_card_form">
+                        <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
+                            <div class="form_row">
+                                <div class="form_field">
+                                    <label>Title</label>
+                                    <ul class="custom_listing">
+                                        <li>
+                                            <label class="custom_radio">Mr.
+                                                <input type="radio" checked="checked" formControlName="title"
+                                                    value="mr" tabindex="0">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom_radio">Ms.
+                                                <input type="radio" formControlName="title" value="ms" tabindex="-1">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom_radio">Mrs.
+                                                <input type="radio" formControlName="title" value="mrs" tabindex="-1">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form_row">
+                                <div class="form_field">
+                                    <label>Gender</label>
+                                    <ul class="custom_listing">
+                                        <li>
+                                            <label class="custom_radio">Male
+                                                <input type="radio" checked="checked" formControlName="gender"
+                                                     value="M" tabindex="0"> 
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom_radio">Female
+                                                <input type="radio" formControlName="gender"
+                                                     value="F" tabindex="-1"> 
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom_radio">Non - Binary
+                                                <input type="radio" formControlName="gender"
+                                                     value="N" tabindex="-1"> 
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form_row">
+                                <div class="form_field half">
+                                    <label>First Name<sup>*</sup></label>
+                                    <div class="text_field">
+                                        <input type="text" formControlName="firstName" maxlength="20" tabindex="1"
+                                            placeholder="First Name">
+                                    </div>
+                                    <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
+                                        class="focus-input100 login-error">
+                                        <div *ngIf="coAccountForm.controls.firstName.errors.required"
+                                            class="text-danger">Please enter
+                                            first name.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_field half">
+                                    <label>Last Name<sup>*</sup></label>
+                                    <div class="text_field">
+                                        <input type="text" formControlName="lastName" maxlength="20" tabindex="2"
+                                            placeholder="last Name">
+                                    </div>
+                                    <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
+                                        class="focus-input100 login-error">
+                                        <div *ngIf="coAccountForm.controls.lastName.errors.required"
+                                            class="text-danger">Please enter
+                                            last name.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                            <div class="form_row">
+                                <div class="form_field half">
+                                    <label>Email<sup>*</sup></label>
+                                    <div class="text_field">
+                                        <input type="email" formControlName="dob" maxlength="20" tabindex="4"
+                                            placeholder="Enter your email">
+                                    </div>
+                                    <div *ngIf="(submitted  || coAccountForm.controls.email.touched) && coAccountForm.controls.email.errors"
+                                    class="focus-input100 login-error">
+                                    <div *ngIf="coAccountForm.controls.email.errors.required" class="text-danger">Please enter
+                                        email.
+                                    </div>
+                                    <div *ngIf="coAccountForm.controls.email.errors.pattern" class="text-danger">Please enter valid
+                                        email
+                                        address.</div>
+                                    </div>
+                                </div>
+                                <div class="form_field half">
+                                    <label>Phone</label>
+                                    <div class="text_field">
+                                        <div class="phone_no">
+                                            <div class="code">
+                                                <div class="dropdown">
+                                                    <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true" [items]="countries_code"
+                                                        bindLabel="name" clearSearchOnAdd="true" formControlName="country_code" placeholder="+1">
+                                                        </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="number">
+                                                <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
+                                                (keypress)="commonFunction.validateNumber($event)" tabindex="5" placeholder="0000 0000 00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="coAccountForm.controls.country_code.errors"
+                                        class="focus-input100 login-error">
+                                        <div *ngIf="coAccountForm.controls.country_code.errors.required && coAccountForm.controls.country_code.touched"
+                                            class="text-danger">Please enter country code</div>
+                                        </div>
+                                        <div
+                                        *ngIf="coAccountForm.controls.phone_no.errors"
+                                        class="focus-input100 login-error">
+                                        <div *ngIf="coAccountForm.controls.phone_no.errors.required && coAccountForm.controls.phone_no.touched"
+                                            class="text-danger">Please enter phone no.</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="form_row">
+                                <div class="form_field half">
+                                    <label>Date of Birth</label>
+                                    <div class="text_field">
+                                        <input type="text" tabindex="6" ngxDaterangepickerMd formControlName="dob" showDropdowns="true"
+                                        alwaysShowCalendars="true" placeholder="" class="form-control custom_datpicker birth_date" [singleDatePicker]="true"
+                                         [locale]="locale" [autoApply]="true" [minDate]="dobMinDate"
+                                        [maxDate]="dobMaxDate" />                                     
+                                    </div>
+                                    <div *ngIf="(submitted && coAccountForm.controls.dob.errors)" class="focus-input100 login-error">
+                                        <div *ngIf="coAccountForm.controls.dob.errors.required" class="text-danger">Please select
+                                          date of birth.
+                                        </div>
                                       </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form_row">
+                                </div>
+                                <div class="form_field half">
+                                    <label>Nationality</label>
+                                    <div class="text_field custom-select">
+                                        <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="7" [selectOnTab]="true"
+                                            formControlName="country_id" selectOnTab="true" placeholder="Select nationality">
+                                        </ng-select>
+                                    </div>
+                                    <div *ngIf="(submitted  || coAccountForm.controls.country_id.touched) && coAccountForm.controls.country_id.errors"
+                                    class="focus-input100 login-error">
+                                    <div *ngIf="coAccountForm.controls.country_id.errors.required" class="text-danger">Please select
+                                        nationality.
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  <div class="form_row">
                               <div class="form_field half">
                                   <label>Document<sup>*</sup></label>
                                   <div class="text_field">
@@ -145,28 +188,32 @@
                                       <input type="text" name="lname" maxlength="20" tabindex="7" placeholder="Enter frequently - flyer no.">
                                   </div>
                               </div>
-                          </div>
-                          <div class="form_row">
-                              <div class="form_field half">
-                                  <label>Passport Expiration Date</label>
-                                  <div class="text_field">
-                                      <input class="birth_date" type="text" name="email" maxlength="20" tabindex="8" placeholder="Dd/mm/yyyy">
-                                  </div>
-                              </div>
-                              <div class="form_field half">
-                                  <label>Frequently - flyer no.</label>
-                                  <div class="text_field">
-                                      <input type="email" name="text" maxlength="20" tabindex="9" placeholder="Enter frequently - flyer no.">
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form_btn">
-                              <button>Save/Update</button>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                          </div> -->
+                            <div class="form_row">
+                                <div class="form_field half">
+                                    <label>Passport Expiration Date</label>
+                                    <div class="text_field">
+                                        <input type="text" tabindex="8" ngxDaterangepickerMd formControlName="passport_expiry"
+                                        class="form-control custom_datpicker birth_date" showDropdowns="true" alwaysShowCalendars="true" placeholder=""
+                                        [singleDatePicker]="true" [locale]="locale" [autoApply]="true"
+                                        showDropdowns="true" [minDate]="expiryMinDate" />
+                                    </div>
+                                </div>
+                                <div class="form_field half">
+                                    <label>Passport Number</label>
+                                    <div class="text_field">
+                                        <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
+                                            placeholder="Passport Number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_btn">
+                                <button>Save/Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

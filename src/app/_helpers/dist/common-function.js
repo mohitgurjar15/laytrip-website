@@ -41,12 +41,15 @@ var CommonFunction = /** @class */ (function () {
     };
     CommonFunction.prototype.setHeaders = function (params) {
         if (params === void 0) { params = null; }
+        var reqData = { headers: {} };
         var accessToken = localStorage.getItem('_lay_sess');
-        var reqData = {
-            headers: {
-                Authorization: "Bearer " + accessToken
-            }
-        };
+        if (accessToken) {
+            reqData = {
+                headers: {
+                    Authorization: "Bearer " + accessToken
+                }
+            };
+        }
         if (params) {
             var reqParams = {};
             Object.keys(params).map(function (k) {
@@ -84,6 +87,16 @@ var CommonFunction = /** @class */ (function () {
         if (length >= maxLength && nextInput) {
             nextInput.focus();
         }
+    };
+    /**
+     * @by Mohit Gurjar
+     * String to convert in date forrmat {YYYY-MM-DD}
+     * @param string in date [04/12/2020]
+     * @param saprator [/]
+     */
+    CommonFunction.prototype.stringToDate = function (string, saprator) {
+        var dateArray = string.split(saprator);
+        return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
     CommonFunction = __decorate([
         core_1.Injectable({

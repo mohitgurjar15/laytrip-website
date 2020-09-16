@@ -52,7 +52,7 @@ export class FlightTravelerComponent implements OnInit {
      
       this.travelerService.getTravelers().subscribe((res:any)=>{
         this.travelers = res.data;
-        
+        this._adults = this._childs = this._infants = [];
         this.travelers.forEach(element => {
           if(element.user_type == 'adult'){
             this._adults.push(element);
