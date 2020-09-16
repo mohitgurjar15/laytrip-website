@@ -126,6 +126,7 @@
           class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.phone_no.touched"
             class="text-danger">Please enter phone no.</div>
+          <div *ngIf="adultForm.controls.phone_no.errors.minlength"  class="text-danger">Phone number should be minimum at least 10 digit</div>
         </div>
       </div>
     </div>
@@ -136,15 +137,7 @@
         <input type="text" tabindex="6" ngxDaterangepickerMd formControlName="dob" showDropdowns="true"
           alwaysShowCalendars="true" placeholder="" class="form-control custom_datpicker" [singleDatePicker]="true"
           (datesUpdated)="dobDateUpdate($event)" [locale]="locale" [autoApply]="true" [minDate]="dobMinDate"
-          [maxDate]="dobMaxDate" />
-        <!-- <div class="prev-next">
-              <a href="javascript:void(0);">Prev</a>
-              <a href="javascript:void(0);">Next</a>
-          </div>
-          <div class="date_icon" id="departure_date_icon">
-              <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg" alt="Calender Icon">
-          </div> -->
-
+          [maxDate]="dobMaxDate" />      
         <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
             date of birth.
@@ -166,11 +159,9 @@
         </div>
       </div>
     </div>
-
     <div class="form_row">
       <div class="form_field half">
         <label>Passport Expiry</label>
-
         <input type="text" tabindex="8" ngxDaterangepickerMd formControlName="passport_expiry"
           class="form-control custom_datpicker" showDropdowns="true" alwaysShowCalendars="true" placeholder=""
           [singleDatePicker]="true" (datesUpdated)="expiryDateUpdate($event)" [locale]="locale" [autoApply]="true"
@@ -198,6 +189,5 @@
         <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{ traveler.userId ? 'Update' : 'Add' }}
       </button>
     </div>
-
   </form>
 </div>

@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 
-import { Subscription } from 'rxjs';
+
 declare var $: any;
 
 @Component({
@@ -42,8 +42,8 @@ export class TravelerFormComponent implements OnInit {
   dobMinDate: any;
   dobMaxDate: moment.Moment = moment();
   expiryMinDate: moment.Moment = moment().add(2, 'days');
-  subscriptions: Subscription[] = [];
 
+  
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
@@ -140,12 +140,10 @@ export class TravelerFormComponent implements OnInit {
       this.isLoggedIn = true;
     }
   }
-  dobDate: any = '';
 
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
-      console.log(this.adultForm.controls);
       this.submitted = true;
       this.loading = false;
       return;
@@ -197,28 +195,25 @@ export class TravelerFormComponent implements OnInit {
           let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
           jsonData = Object.assign(jsonData, emailObj);
         }
-        this.subscriptions.push(
+        
           this.flightService.addAdult(jsonData).subscribe((data: any) => {
             this.adultForm.reset();
             this.submitted = this.loading = false;
             if (!this.isLoggedIn) {
               localStorage.setItem("_lay_sess", data.token);
             }
+            console.log("data",data)
             this.travelerFormChange.emit(data);
 
             $('.collapse').collapse('hide');
             $('#accordion-' + this.type).hide();
-            this.subscriptions.forEach(sub => sub.unsubscribe());
           }, (error: HttpErrorResponse) => {
             console.log('error')
             this.submitted = this.loading = false;
             if (error.status === 401) {
               this.router.navigate(['/']);
             }
-            this.subscriptions.forEach(sub => sub.unsubscribe());
-          })
-
-        );
+          })        
       }
     }
   }
@@ -230,7 +225,6 @@ export class TravelerFormComponent implements OnInit {
 
   dobDateUpdate(date) {
     this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
-
   }
 
   expiryDateUpdate(date) {

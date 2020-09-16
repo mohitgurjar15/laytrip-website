@@ -5,6 +5,9 @@
   --mobile-bkp: $mobile-bkp;
 }
 
+.comman_modal {
+  z-index: 99999;
+}
 .comman_modal .modal-dialog {
   max-width: 1024px;
   width: 97%;

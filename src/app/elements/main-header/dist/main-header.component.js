@@ -15,6 +15,7 @@ var MainHeaderComponent = /** @class */ (function () {
         this.translate = translate;
         this.modalService = modalService;
         this.router = router;
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.langunages = [];
         this.selectedLanunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
         this.isLanunageSet = false;
@@ -22,7 +23,6 @@ var MainHeaderComponent = /** @class */ (function () {
         this.selectedCurrency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' };
         this.isCurrencySet = false;
         this.isLoggedIn = false;
-        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         var _langunage = localStorage.getItem('_lang');
         var _currency = localStorage.getItem('_curr');
         if (_langunage) {
@@ -52,9 +52,10 @@ var MainHeaderComponent = /** @class */ (function () {
         }
     }
     MainHeaderComponent.prototype.ngOnInit = function () {
+        this.checkUser();
         this.getLangunages();
         this.getCurrencies();
-        this.checkUser();
+        this.loadJquery();
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
@@ -120,6 +121,25 @@ var MainHeaderComponent = /** @class */ (function () {
         this.isLoggedIn = false;
         localStorage.removeItem('_lay_sess');
         this.router.url;
+    };
+    MainHeaderComponent.prototype.loadJquery = function () {
+        // Start sticky header js
+        $(document).ready(function () {
+            if ($(window).width() > 992) {
+                var navbar_height = $('.site_header').outerHeight();
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 30) {
+                        $('.site_header').css('height', navbar_height + 'px');
+                        $('.site_header').addClass("fixed-top");
+                    }
+                    else {
+                        $('.site_header').removeClass("fixed-top");
+                        $('.site_header').css('height', 'auto');
+                    }
+                });
+            }
+        });
+        // Close sticky header js
     };
     MainHeaderComponent = __decorate([
         core_1.Component({
