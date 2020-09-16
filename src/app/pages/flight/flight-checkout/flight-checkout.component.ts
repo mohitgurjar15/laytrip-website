@@ -192,4 +192,6 @@ export class FlightCheckoutComponent implements OnInit {
     emitNewCard(event){
       this.newCard =event;
     }
+
+    
 }
