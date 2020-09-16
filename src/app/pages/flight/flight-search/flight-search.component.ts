@@ -104,10 +104,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-        if (err && err.status === 404) {
+        /* if (err && err.status === 404) { */
           this.isNotFound = true;
           this.loading = false;
-        }
+        /* } */
       });
     } else {
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
@@ -118,10 +118,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-        if (err && err.status === 404) {
+        /* if (err && err.status === 404) { */
           this.isNotFound = true;
           this.loading = false;
-        }
+        /* } */
       });
     }
 
