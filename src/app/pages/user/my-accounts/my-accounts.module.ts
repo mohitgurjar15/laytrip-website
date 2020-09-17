@@ -7,17 +7,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
-import { CoAccountsComponent } from './co-accounts/co-accounts.component';
-import { CrudCoAccountComponent } from './co-accounts/crud-co-account/crud-co-account.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { ListTravellerComponent } from './travellers/list-traveller.component';
+import { CrudComponent } from './travellers/crud/crud.component';
+
 
 @NgModule({
-  declarations: [ProfileComponent,MyAccountsNavComponent, MyBookingsComponent, CoAccountsComponent, CrudCoAccountComponent],
+  declarations: [ProfileComponent,MyAccountsNavComponent, MyBookingsComponent, ListTravellerComponent, CrudComponent],
   imports: [
     CommonModule,
     MyAccountsRoutingModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    NgxDaterangepickerMd.forRoot(),
   ],
   providers:[DatePipe]
 })

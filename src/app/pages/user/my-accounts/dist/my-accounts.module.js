@@ -16,19 +16,22 @@ var forms_1 = require("@angular/forms");
 var ng_select_1 = require("@ng-select/ng-select");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var my_bookings_component_1 = require("./my-bookings/my-bookings.component");
-var co_accounts_component_1 = require("./co-accounts/co-accounts.component");
+var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
+var list_traveller_component_1 = require("./travellers/list-traveller.component");
+var crud_component_1 = require("./travellers/crud/crud.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
     MyAccountsModule = __decorate([
         core_1.NgModule({
-            declarations: [profile_component_1.ProfileComponent, my_accounts_nav_component_1.MyAccountsNavComponent, my_bookings_component_1.MyBookingsComponent, co_accounts_component_1.CoAccountsComponent],
+            declarations: [profile_component_1.ProfileComponent, my_accounts_nav_component_1.MyAccountsNavComponent, my_bookings_component_1.MyBookingsComponent, list_traveller_component_1.ListTravellerComponent, crud_component_1.CrudComponent],
             imports: [
                 common_1.CommonModule,
                 my_accounts_routing_module_1.MyAccountsRoutingModule,
                 forms_1.ReactiveFormsModule,
                 ng_select_1.NgSelectModule,
-                ng_bootstrap_1.NgbModule
+                ng_bootstrap_1.NgbModule,
+                ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
             ],
             providers: [common_1.DatePipe]
         })

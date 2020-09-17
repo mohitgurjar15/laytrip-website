@@ -36,6 +36,7 @@ export class FlightTravelerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('hhhu')
     this.loading = true;
     this.getTravelers();
     this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
@@ -52,7 +53,7 @@ export class FlightTravelerComponent implements OnInit {
      
       this.travelerService.getTravelers().subscribe((res:any)=>{
         this.travelers = res.data;
-        
+        this._adults = this._childs = this._infants = [];
         this.travelers.forEach(element => {
           if(element.user_type == 'adult'){
             this._adults.push(element);
@@ -61,7 +62,9 @@ export class FlightTravelerComponent implements OnInit {
           }else if(element.user_type == 'infant'){
             this._infants.push(element);          
           }
-        });       
+        });  
+        console.log(this._adults )
+
         this.loading = false;
       })
     } else {
@@ -108,7 +111,7 @@ export class FlightTravelerComponent implements OnInit {
     this.checkUser(); 
     if(this.is_traveller === false){
       this.loading = true;
-      this.getTravelers();
+      // this.getTravelers();
     }
   }
 }

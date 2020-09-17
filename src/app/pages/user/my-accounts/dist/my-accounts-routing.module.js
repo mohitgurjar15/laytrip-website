@@ -11,7 +11,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var profile_component_1 = require("./profile/profile.component");
 var my_bookings_component_1 = require("./my-bookings/my-bookings.component");
-var co_accounts_component_1 = require("./co-accounts/co-accounts.component");
+var list_traveller_component_1 = require("./travellers/list-traveller.component");
 var routes = [
     {
         path: '',
@@ -26,8 +26,8 @@ var routes = [
         component: my_bookings_component_1.MyBookingsComponent
     },
     {
-        path: 'co-accounts',
-        component: co_accounts_component_1.CoAccountsComponent
+        path: 'travellers',
+        component: list_traveller_component_1.ListTravellerComponent
     },
 ];
 var MyAccountsRoutingModule = /** @class */ (function () {

@@ -33,8 +33,6 @@ var TravelerFormComponent = /** @class */ (function () {
         };
         this.dobMaxDate = moment();
         this.expiryMinDate = moment().add(2, 'days');
-        this.subscriptions = [];
-        this.dobDate = '';
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
         this.adultForm = this.formBuilder.group({
@@ -52,12 +50,13 @@ var TravelerFormComponent = /** @class */ (function () {
                 }, forms_1.Validators.required],
             passport_expiry: [{
                     startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-                        moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
+                        moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
                 },],
             passport_number: [''],
             frequently_no: [''],
             user_type: ['']
         });
+        console.log(this.adultForm.value);
         this.setUserTypeValidation();
         if (this.traveler.userId) {
             this.adultForm.patchValue({
@@ -124,7 +123,6 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.adultForm.invalid) {
-            console.log(this.adultForm.controls);
             this.submitted = true;
             this.loading = false;
             return;
@@ -174,7 +172,7 @@ var TravelerFormComponent = /** @class */ (function () {
                     var emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
                     jsonData = Object.assign(jsonData, emailObj);
                 }
-                this.subscriptions.push(this.flightService.addAdult(jsonData).subscribe(function (data) {
+                this.flightService.addAdult(jsonData).subscribe(function (data) {
                     _this.adultForm.reset();
                     _this.submitted = _this.loading = false;
                     if (!_this.isLoggedIn) {
@@ -183,15 +181,13 @@ var TravelerFormComponent = /** @class */ (function () {
                     _this.travelerFormChange.emit(data);
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
-                    _this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });
                 }, function (error) {
                     console.log('error');
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
-                    _this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });
-                }));
+                });
             }
         }
     };

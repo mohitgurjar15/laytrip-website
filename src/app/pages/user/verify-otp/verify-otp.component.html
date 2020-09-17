@@ -4,9 +4,10 @@
       <div class="modal_title">
         <h4>Have you received the code?</h4>
         <p>A code was sent to your email address</p>
+        <p style="color: red;">{{apiError}}</p>
       </div>
     </div>
-    <p style="color: red;">{{apiError}}</p>
+   
     <div class="modal_cnt">
       <div *ngIf="otpVerified" class="modal_message">
         <h4 style="color: green;">Your OTP is verified successfully.</h4>
@@ -52,6 +53,8 @@
           </button>
         </div>
       </form>
+    </div>
+    <div class="modal_change_link">
       <p>Back to <a href="javascript:void(0);" id="signIn" (click)="openSignInPage()">Sign In</a></p>
     </div>
   </div>

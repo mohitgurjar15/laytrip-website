@@ -9,12 +9,11 @@ exports.__esModule = true;
 exports.AdultListComponent = void 0;
 var core_1 = require("@angular/core");
 var AdultListComponent = /** @class */ (function () {
-    function AdultListComponent(cookieService, genericService, router, cd, toastr) {
+    function AdultListComponent(cookieService, genericService, router, cd) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.router = router;
         this.cd = cd;
-        this.toastr = toastr;
         this.adultsCount = new core_1.EventEmitter();
         this._itinerarySelectionArray = new core_1.EventEmitter();
         this.travelers = [];
@@ -100,9 +99,9 @@ var AdultListComponent = /** @class */ (function () {
                 this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
             }
         }
+        console.log(this.counter);
         this.adultsCount.emit(this.counter);
         this._itinerarySelectionArray.emit(this._itinerarySelection);
-        // console.log(this.counter)
     };
     AdultListComponent.prototype.getRandomNumber = function (i) {
         var random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
@@ -113,10 +112,6 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.ngDoCheck = function () {
-        // console.log("whole",this)
-        /* this._selectedId.forEach(id => {
-          $(  "#"+id   ).removeAttr( "disabled" );
-        }); */
         this.checkUser();
         this.containers = this.containers;
         if (this.travelers.length >= 0) {
@@ -141,21 +136,14 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.pushTraveler = function (event) {
-        //console.log('updated',event);
         if (event.user_type === 'adult') {
-            //console.log('before', this._adults);
             this._adults.push(event);
-            //console.log('after', this._adults);
         }
         else if (event.user_type === 'child') {
-            //console.log('before child', this._childs);
             this._childs.push(event);
-            //console.log('after child', this._childs);
         }
         else {
-            //console.log('before', this._infants);
             this._infants.push(event);
-            //console.log('after', this._infants);
         }
         this.showAddAdultForm = false;
     };

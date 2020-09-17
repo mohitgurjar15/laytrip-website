@@ -40,7 +40,8 @@
                                   <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
                                       <a href="javascript:void(0);" (click)="toggleAddcardForm()" >+ Add New Card</a>
                                   </div>
-                                  <app-add-card *ngIf="showAddCardForm" (emitNewCard)="emitNewCard($event)"></app-add-card>
+                                  <app-add-card *ngIf="userInfo.roleId!=7 && showAddCardForm" (emitNewCard)="emitNewCard($event)"></app-add-card>
+                                  <app-add-guest-card *ngIf="userInfo.roleId==7 && showAddCardForm" (emitGuestCardDetails)="emitGuestCardDetails($event)" [validateCardDetails]="validateCardDetails"></app-add-guest-card>
                               </div>
                           </div>
                         </div>
