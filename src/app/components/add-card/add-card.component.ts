@@ -105,7 +105,7 @@ export class AddCardComponent implements OnInit {
   saveCard(cardData) {
     this.saveCardLoader=true;
     this.genericService.saveCard(cardData).subscribe((res: any) => {
-      console.log(res);
+      //this.cardForm.reset();
       this.emitNewCard.emit(res);
       this.saveCardLoader=false;
     }, (err => {
