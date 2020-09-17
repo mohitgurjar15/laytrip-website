@@ -5,7 +5,7 @@ import { FlightService } from '../../../services/flight.service';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CookieService } from 'ngx-cookie';
 import * as moment from 'moment';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../../services/generic.service';
 import { Subject } from 'rxjs';
 
 @Component({
