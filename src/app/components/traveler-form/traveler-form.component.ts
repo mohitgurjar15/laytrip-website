@@ -67,12 +67,13 @@ export class TravelerFormComponent implements OnInit {
       }, Validators.required],
       passport_expiry: [{
         startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-          moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
+          moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
       },],
       passport_number: [''],
       frequently_no: [''],
       user_type: ['']
     });
+    console.log(this.adultForm.value)
 
     this.setUserTypeValidation();
 
@@ -202,7 +203,7 @@ export class TravelerFormComponent implements OnInit {
             if (!this.isLoggedIn) {
               localStorage.setItem("_lay_sess", data.token);
             }
-            console.log("data",data)
+            
             this.travelerFormChange.emit(data);
 
             $('.collapse').collapse('hide');

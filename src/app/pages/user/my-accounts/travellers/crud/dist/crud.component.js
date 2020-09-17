@@ -6,17 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.CrudCoAccountComponent = void 0;
+exports.CrudComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
-var CrudCoAccountComponent = /** @class */ (function () {
-    function CrudCoAccountComponent(formBuilder, genericService, router, commonFunction) {
+var CrudComponent = /** @class */ (function () {
+    function CrudComponent(formBuilder, genericService, router, commonFunction, flightService) {
         this.formBuilder = formBuilder;
         this.genericService = genericService;
         this.router = router;
         this.commonFunction = commonFunction;
+        this.flightService = flightService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.countries = [];
         this.countries_code = [];
@@ -32,7 +33,7 @@ var CrudCoAccountComponent = /** @class */ (function () {
             displayFormat: 'DD/MM/YYYY'
         };
     }
-    CrudCoAccountComponent.prototype.ngOnInit = function () {
+    CrudComponent.prototype.ngOnInit = function () {
         this.checkUser();
         this.getCountry();
         this.coAccountForm = this.formBuilder.group({
@@ -44,28 +45,22 @@ var CrudCoAccountComponent = /** @class */ (function () {
             country_code: ['', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required]],
             country_id: ['', forms_1.Validators.required],
-            dob: ['', forms_1.Validators.required],
             passport_expiry: ['', forms_1.Validators.required],
-            /*  dob: [{
-               startDate: typeof this.traveler.dob !== 'undefined' ?
-                 moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
-             }, Validators.required],
-             passport_expiry: [{
-               startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-                 moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
-             },], */
+            dob: [{
+                    startDate: this.dobMaxDate
+                }, forms_1.Validators.required],
             passport_number: [''],
             frequently_no: [''],
             user_type: ['']
         });
     };
-    CrudCoAccountComponent.prototype.checkUser = function () {
+    CrudComponent.prototype.checkUser = function () {
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken) {
             this.isLoggedIn = true;
         }
     };
-    CrudCoAccountComponent.prototype.getCountry = function () {
+    CrudComponent.prototype.getCountry = function () {
         var _this = this;
         this.genericService.getCountry().subscribe(function (data) {
             _this.countries = data.map(function (country) {
@@ -88,9 +83,11 @@ var CrudCoAccountComponent = /** @class */ (function () {
             }
         });
     };
-    CrudCoAccountComponent.prototype.onSubmit = function () {
+    CrudComponent.prototype.onSubmit = function () {
+        var _this = this;
         this.submitted = this.loading = true;
         if (this.coAccountForm.invalid) {
+            console.log(this.coAccountForm.value);
             this.submitted = true;
             this.loading = false;
             return;
@@ -100,7 +97,7 @@ var CrudCoAccountComponent = /** @class */ (function () {
             if (!Number(country_id)) {
                 country_id = this.coAccountForm.value.country.id;
             }
-            var jsonData = {
+            var jsonData_1 = {
                 title: this.coAccountForm.value.title,
                 first_name: this.coAccountForm.value.firstName,
                 last_name: this.coAccountForm.value.lastName,
@@ -111,21 +108,32 @@ var CrudCoAccountComponent = /** @class */ (function () {
                 country_id: country_id ? country_id : '',
                 passport_expiry: typeof this.coAccountForm.value.passport_expiry.startDate === 'object' ? moment(this.coAccountForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.commonFunction.stringToDate(this.coAccountForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD')
             };
-            console.log(jsonData);
             if (this.travellerId) {
             }
             else {
-                console.log(jsonData);
+                this.flightService.addAdult(jsonData_1).subscribe(function (data) {
+                    console.log(jsonData_1);
+                    $('.cmn_add_edit_modal').modal('hide');
+                }, function (error) {
+                    console.log('error');
+                    _this.submitted = _this.loading = false;
+                    if (error.status === 401) {
+                        _this.router.navigate(['/']);
+                    }
+                });
             }
         }
     };
-    CrudCoAccountComponent = __decorate([
+    CrudComponent.prototype.ngOnChanges = function (changes) {
+        console.log('sdadddd', changes);
+    };
+    CrudComponent = __decorate([
         core_1.Component({
-            selector: 'app-crud-co-account',
-            templateUrl: './crud-co-account.component.html',
-            styleUrls: ['./crud-co-account.component.scss']
+            selector: 'app-crud',
+            templateUrl: './crud.component.html',
+            styleUrls: ['./crud.component.scss']
         })
-    ], CrudCoAccountComponent);
-    return CrudCoAccountComponent;
+    ], CrudComponent);
+    return CrudComponent;
 }());
-exports.CrudCoAccountComponent = CrudCoAccountComponent;
+exports.CrudComponent = CrudComponent;

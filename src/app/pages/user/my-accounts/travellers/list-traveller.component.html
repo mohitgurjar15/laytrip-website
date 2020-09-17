@@ -12,7 +12,7 @@
                 <input type="checkbox" value="">
                 <span class="checkmark"></span>Select all
               </label>
-              <a href="javascript:void(0);" data-toggle="modal" data-target="#add_traveller_modal">+ Add New Co -
+              <a href="javascript:void(0);" (click)="open(content,1)" >+ Add New Co -
                 Traveller</a>
             </div>
             <div class="block_traveller_btm">
@@ -30,7 +30,7 @@
                     <div class="list_action">
                       <ul>
                         <li>
-                          <a href="javascript:void(0);" data-toggle="modal" data-target="#add_traveller_modal">
+                          <a href="javascript:void(0);" (click)="open(content,traveler.userId)" >
                             <img src="{{s3BucketUrl}}assets/images/icon/ic_edit.svg" alt="Edit Icon">
                           </a>
                         </li>
@@ -52,4 +52,7 @@
     </div>
   </div>
 </section>
-<app-crud-co-account></app-crud-co-account>
+
+<ng-template #content let-modal>
+  
+</ng-template>

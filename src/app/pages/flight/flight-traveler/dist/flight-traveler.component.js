@@ -31,6 +31,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this._travellersCountValid = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
+        console.log('hhhu');
         this.loading = true;
         this.getTravelers();
         this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
@@ -56,6 +57,7 @@ var FlightTravelerComponent = /** @class */ (function () {
                         _this._infants.push(element);
                     }
                 });
+                console.log(_this._adults);
                 _this.loading = false;
             });
         }
@@ -97,7 +99,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.checkUser();
         if (this.is_traveller === false) {
             this.loading = true;
-            this.getTravelers();
+            // this.getTravelers();
         }
     };
     FlightTravelerComponent = __decorate([

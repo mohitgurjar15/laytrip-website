@@ -6,21 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.CoAccountsComponent = void 0;
+exports.ListTravellerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var moment = require("moment");
-var CoAccountsComponent = /** @class */ (function () {
-    function CoAccountsComponent(travelerService, router) {
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var ListTravellerComponent = /** @class */ (function () {
+    function ListTravellerComponent(travelerService, router, modalService) {
         this.travelerService = travelerService;
         this.router = router;
+        this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
+        this.closeResult = '';
     }
-    CoAccountsComponent.prototype.ngOnInit = function () {
+    ListTravellerComponent.prototype.ngOnInit = function () {
         this.getTravelers();
     };
-    CoAccountsComponent.prototype.getTravelers = function () {
+    ListTravellerComponent.prototype.getTravelers = function () {
         var _this = this;
         this.travelerService.getTravelers().subscribe(function (data) {
             _this.travelers = data.data;
@@ -30,10 +33,10 @@ var CoAccountsComponent = /** @class */ (function () {
             }
         });
     };
-    CoAccountsComponent.prototype.calculateAge = function (birthdate) {
+    ListTravellerComponent.prototype.calculateAge = function (birthdate) {
         return moment().diff(birthdate, 'years');
     };
-    CoAccountsComponent.prototype.getGender = function (type) {
+    ListTravellerComponent.prototype.getGender = function (type) {
         if (type == 'M')
             return 'Male';
         if (type == 'F')
@@ -41,13 +44,35 @@ var CoAccountsComponent = /** @class */ (function () {
         if (type == 'N')
             return 'Non Binary';
     };
-    CoAccountsComponent = __decorate([
+    ListTravellerComponent.prototype.ngDoCheck = function () {
+        // this.getTravelers();
+    };
+    ListTravellerComponent.prototype.ngOnChanges = function (changes) {
+        console.log('sds', changes);
+    };
+    ListTravellerComponent.prototype.open = function (content, userId) {
+        console.log(content);
+        var modalRef = this.modalService.open(content);
+        // modalRef.componentInstance.name = 'World';
+    };
+    ListTravellerComponent.prototype.getDismissReason = function (reason) {
+        if (reason === ng_bootstrap_1.ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === ng_bootstrap_1.ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
+    };
+    ListTravellerComponent = __decorate([
         core_1.Component({
             selector: 'app-co-accounts',
             templateUrl: './co-accounts.component.html',
             styleUrls: ['./co-accounts.component.scss']
         })
-    ], CoAccountsComponent);
-    return CoAccountsComponent;
+    ], ListTravellerComponent);
+    return ListTravellerComponent;
 }());
-exports.CoAccountsComponent = CoAccountsComponent;
+exports.ListTravellerComponent = ListTravellerComponent;
