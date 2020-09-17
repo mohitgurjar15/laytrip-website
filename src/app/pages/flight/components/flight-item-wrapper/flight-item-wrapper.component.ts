@@ -7,7 +7,7 @@ import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-flight-item-wrapper',

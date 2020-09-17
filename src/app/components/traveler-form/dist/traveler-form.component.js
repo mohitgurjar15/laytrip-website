@@ -50,12 +50,13 @@ var TravelerFormComponent = /** @class */ (function () {
                 }, forms_1.Validators.required],
             passport_expiry: [{
                     startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-                        moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
+                        moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
                 },],
             passport_number: [''],
             frequently_no: [''],
             user_type: ['']
         });
+        console.log(this.adultForm.value);
         this.setUserTypeValidation();
         if (this.traveler.userId) {
             this.adultForm.patchValue({
@@ -177,7 +178,6 @@ var TravelerFormComponent = /** @class */ (function () {
                     if (!_this.isLoggedIn) {
                         localStorage.setItem("_lay_sess", data.token);
                     }
-                    console.log("data", data);
                     _this.travelerFormChange.emit(data);
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();

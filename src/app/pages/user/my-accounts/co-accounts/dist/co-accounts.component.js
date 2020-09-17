@@ -10,12 +10,15 @@ exports.CoAccountsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var moment = require("moment");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var CoAccountsComponent = /** @class */ (function () {
-    function CoAccountsComponent(travelerService, router) {
+    function CoAccountsComponent(travelerService, router, modalService) {
         this.travelerService = travelerService;
         this.router = router;
+        this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
+        this.closeResult = '';
     }
     CoAccountsComponent.prototype.ngOnInit = function () {
         this.getTravelers();
@@ -40,6 +43,28 @@ var CoAccountsComponent = /** @class */ (function () {
             return 'Female';
         if (type == 'N')
             return 'Non Binary';
+    };
+    CoAccountsComponent.prototype.ngDoCheck = function () {
+        // this.getTravelers();
+    };
+    CoAccountsComponent.prototype.ngOnChanges = function (changes) {
+        console.log('sds', changes);
+    };
+    CoAccountsComponent.prototype.open = function (content, userId) {
+        console.log(content);
+        var modalRef = this.modalService.open(content);
+        // modalRef.componentInstance.name = 'World';
+    };
+    CoAccountsComponent.prototype.getDismissReason = function (reason) {
+        if (reason === ng_bootstrap_1.ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === ng_bootstrap_1.ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
     };
     CoAccountsComponent = __decorate([
         core_1.Component({

@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { TravelerService } from '../../../../services/traveler.service';
 import * as moment from 'moment';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+declare var $: any;
 
 @Component({
   selector: 'app-co-accounts',
@@ -14,9 +15,15 @@ import { CommonFunction } from 'src/app/_helpers/common-function';
 export class CoAccountsComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   travelers = [];
+  closeResult = '';
+  userId: string;
+
+
   constructor(
     public travelerService:TravelerService,
-    public router: Router   
+    public router: Router,
+    private modalService: NgbModal,
+   
   ) { }
 
 
@@ -47,4 +54,28 @@ export class CoAccountsComponent implements OnInit {
       return 'Non Binary';
   }
 
+  ngDoCheck(){
+    // this.getTravelers();
+  }  
+
+  ngOnChanges(changes: SimpleChanges)  {
+    console.log('sds',changes)
+  }
+
+  modalReference: any;
+  open(content, userId) {
+    console.log(content)
+    const modalRef = this.modalService.open(content);
+    // modalRef.componentInstance.name = 'World';
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 }

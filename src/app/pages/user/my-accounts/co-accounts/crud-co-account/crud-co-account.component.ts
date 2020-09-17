@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../../../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../../../../_helpers/common-function';
+import { FlightService } from '../../../../../services/flight.service';
+declare var $: any;
 
 @Component({
   selector: 'app-crud-co-account',
@@ -36,7 +38,8 @@ export class CrudCoAccountComponent implements OnInit {
       private formBuilder: FormBuilder,
       private genericService: GenericService,
       public router: Router,
-      public commonFunction: CommonFunction  
+      public commonFunction: CommonFunction,
+      private flightService: FlightService  
   ) { }
 
   ngOnInit() {
@@ -52,16 +55,10 @@ export class CrudCoAccountComponent implements OnInit {
       country_code: ['', [Validators.required]],
       phone_no: ['', [Validators.required]],
       country_id: ['', Validators.required],
-      dob:['', Validators.required],
       passport_expiry:['', Validators.required],
-     /*  dob: [{
-        startDate: typeof this.traveler.dob !== 'undefined' ?
-          moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
+      dob: [{
+        startDate: this.dobMaxDate
       }, Validators.required],
-      passport_expiry: [{
-        startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-          moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
-      },], */
       passport_number: [''],
       frequently_no: [''],
       user_type: ['']
@@ -100,6 +97,7 @@ export class CrudCoAccountComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.coAccountForm.invalid) {
+      console.log(this.coAccountForm.value)
       this.submitted = true;
       this.loading = false;
       return;
@@ -119,14 +117,27 @@ export class CrudCoAccountComponent implements OnInit {
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.coAccountForm.value.passport_expiry.startDate === 'object' ? moment(this.coAccountForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.commonFunction.stringToDate(this.coAccountForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD'),
       };
-      console.log(jsonData);
 
       if (this.travellerId) {
 
       } else {
-        console.log(jsonData);
+        this.flightService.addAdult(jsonData).subscribe((data: any) => {
+          console.log(jsonData);
+
+          $('.cmn_add_edit_modal').modal('hide');
+        }, (error: HttpErrorResponse) => {
+            console.log('error')
+            this.submitted = this.loading = false;
+            if (error.status === 401) {
+              this.router.navigate(['/']);
+            }
+          });  
 
       }
     }
   }
+  ngOnChanges(changes: SimpleChanges)  {
+    console.log('sdadddd',changes)
+  }
+
 }
