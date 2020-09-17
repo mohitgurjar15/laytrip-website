@@ -5,6 +5,8 @@ import { FlightService } from '../../../services/flight.service';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CookieService } from 'ngx-cookie';
 import * as moment from 'moment';
+import { GenericService } from 'src/app/services/generic.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-flight-checkout',
@@ -17,9 +19,11 @@ export class FlightCheckoutComponent implements OnInit {
       private route: ActivatedRoute,
       private router:Router,
       private flightService:FlightService,
-      private cookieService: CookieService
+      private cookieService: CookieService,
+      private genericService:GenericService
     ) { }
     s3BucketUrl = environment.s3BucketUrl;
+    validateCardDetails:Subject<any> = new Subject();
     showAddCardForm:boolean=false;
     progressStep={ step1:true, step2:true, step3:false };
     cardToken:string;
@@ -42,6 +46,7 @@ export class FlightCheckoutComponent implements OnInit {
     customAmount:number | null;
     customInstalment:number | null;
     newCard;
+    guestCardDetails;
 
     ngOnInit() {
       this.userInfo = getLoginUserInfo();
@@ -90,7 +95,6 @@ export class FlightCheckoutComponent implements OnInit {
             
           }
         }
-        console.log(this.travelers)
       }
       catch(e){
 
@@ -121,8 +125,38 @@ export class FlightCheckoutComponent implements OnInit {
       this.validateBookingButton();
     }
 
-    bookFlight(){
-      this.bookingLoader=true;
+    async bookFlight(){
+      
+      /* Guest user */
+      if(this.userInfo.roleId==7){
+        let isValid = this.validateCard(this.guestCardDetails);
+        if(isValid===false){
+          return;
+        }
+        this.bookingLoader=true;
+        this.genericService.saveCard(this.guestCardDetails).subscribe((res:any)=>{
+          if(res.cardToken){
+            this.cardToken = res.cardToken;
+            this.bookFlightApi()
+          }
+        },(error=>{
+
+        }))
+      }
+      /* Login user */
+      else{
+
+        this.bookingLoader=true;
+        this.bookFlightApi();
+      }
+
+
+      
+
+      //this.bookFlightApi(bookingData);
+    }
+
+    bookFlightApi(){
       let bookingData={
         payment_type            : this.instalmentMode,
         laycredit_points        : this.laycreditpoints,
@@ -174,6 +208,23 @@ export class FlightCheckoutComponent implements OnInit {
       console.log("this.isDisableBookBtn",this.isDisableBookBtn)
     }
 
+    validateCard(guestCardDetails){
+      this.validateCardDetails.next(guestCardDetails);
+      if(typeof guestCardDetails.first_name=='undefined' || guestCardDetails.first_name=='')
+        return false;
+      if(typeof guestCardDetails.last_name=='undefined' || guestCardDetails.last_name=='')
+        return false;
+      if(typeof guestCardDetails.card_number=='undefined' || guestCardDetails.card_number=='')
+        return false;
+      if(typeof guestCardDetails.expiry=='undefined' || guestCardDetails.expiry=='')
+        return false;
+      if(typeof guestCardDetails.card_cvv=='undefined' || guestCardDetails.card_cvv=='')
+        return false;
+      
+      
+      
+    }
+
     getFlightSummaryData(data){
 
       this.flightSummary=data;
@@ -193,5 +244,17 @@ export class FlightCheckoutComponent implements OnInit {
       this.newCard =event;
     }
 
-    
+    emitGuestCardDetails(event){
+      console.log(event)
+      this.guestCardDetails=event;
+    }
+
+    async saveCard(cardData) {
+      try{
+        return await this.genericService.saveCard(cardData);
+      }
+      catch(error){
+        return error.message;
+      }
+    }
 }
