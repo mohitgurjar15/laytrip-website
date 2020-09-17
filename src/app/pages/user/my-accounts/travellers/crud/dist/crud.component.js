@@ -6,13 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.CrudCoAccountComponent = void 0;
+exports.CrudComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
-var CrudCoAccountComponent = /** @class */ (function () {
-    function CrudCoAccountComponent(formBuilder, genericService, router, commonFunction, flightService) {
+var CrudComponent = /** @class */ (function () {
+    function CrudComponent(formBuilder, genericService, router, commonFunction, flightService) {
         this.formBuilder = formBuilder;
         this.genericService = genericService;
         this.router = router;
@@ -33,7 +33,7 @@ var CrudCoAccountComponent = /** @class */ (function () {
             displayFormat: 'DD/MM/YYYY'
         };
     }
-    CrudCoAccountComponent.prototype.ngOnInit = function () {
+    CrudComponent.prototype.ngOnInit = function () {
         this.checkUser();
         this.getCountry();
         this.coAccountForm = this.formBuilder.group({
@@ -54,13 +54,13 @@ var CrudCoAccountComponent = /** @class */ (function () {
             user_type: ['']
         });
     };
-    CrudCoAccountComponent.prototype.checkUser = function () {
+    CrudComponent.prototype.checkUser = function () {
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken) {
             this.isLoggedIn = true;
         }
     };
-    CrudCoAccountComponent.prototype.getCountry = function () {
+    CrudComponent.prototype.getCountry = function () {
         var _this = this;
         this.genericService.getCountry().subscribe(function (data) {
             _this.countries = data.map(function (country) {
@@ -83,7 +83,7 @@ var CrudCoAccountComponent = /** @class */ (function () {
             }
         });
     };
-    CrudCoAccountComponent.prototype.onSubmit = function () {
+    CrudComponent.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.coAccountForm.invalid) {
@@ -124,16 +124,16 @@ var CrudCoAccountComponent = /** @class */ (function () {
             }
         }
     };
-    CrudCoAccountComponent.prototype.ngOnChanges = function (changes) {
+    CrudComponent.prototype.ngOnChanges = function (changes) {
         console.log('sdadddd', changes);
     };
-    CrudCoAccountComponent = __decorate([
+    CrudComponent = __decorate([
         core_1.Component({
-            selector: 'app-crud-co-account',
-            templateUrl: './crud-co-account.component.html',
-            styleUrls: ['./crud-co-account.component.scss']
+            selector: 'app-crud',
+            templateUrl: './crud.component.html',
+            styleUrls: ['./crud.component.scss']
         })
-    ], CrudCoAccountComponent);
-    return CrudCoAccountComponent;
+    ], CrudComponent);
+    return CrudComponent;
 }());
-exports.CrudCoAccountComponent = CrudCoAccountComponent;
+exports.CrudComponent = CrudComponent;

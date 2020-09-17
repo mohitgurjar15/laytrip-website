@@ -8,11 +8,11 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 
 @Component({
-  selector: 'app-co-accounts',
-  templateUrl: './co-accounts.component.html',
-  styleUrls: ['./co-accounts.component.scss']
+  selector: 'app-list-traveller',
+  templateUrl: './list-traveller.component.html',
+  styleUrls: ['./list-traveller.component.scss']
 })
-export class CoAccountsComponent implements OnInit {
+export class ListTravellerComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   travelers = [];
   closeResult = '';
