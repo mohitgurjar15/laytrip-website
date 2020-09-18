@@ -28,6 +28,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
         this.editMode = false;
         this.formStatus = false;
+        this.is_passport_required = false;
         this.locale = {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
@@ -107,8 +108,7 @@ var TravelerFormComponent = /** @class */ (function () {
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
         }
-        this._itinerary.is_passport_required = true;
-        if ((this.type === 'adult' || this.type === 'child') && this._itinerary.is_passport_required) {
+        if ((this.type === 'adult' || this.type === 'child') && this.is_passport_required) {
             passport_numberControl.setValidators([forms_1.Validators.required]);
             passport_expiryControl.setValidators([forms_1.Validators.required]);
         }

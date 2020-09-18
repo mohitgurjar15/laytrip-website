@@ -156,7 +156,7 @@
         </div>
       </div>
     </div>
-    <div class="form_row">
+    <div *ngIf="is_passport_required && type!='infant'" class="form_row">
       <div class="form_field half">
         <label>Passport Expiry</label>
         <input type="text" tabindex="8" ngxDaterangepickerMd formControlName="passport_expiry"

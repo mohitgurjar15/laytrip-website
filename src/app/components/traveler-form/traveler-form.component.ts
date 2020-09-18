@@ -34,6 +34,7 @@ export class TravelerFormComponent implements OnInit {
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
   editMode = false;
   formStatus: boolean = false;
+  is_passport_required: boolean = false;
   _itinerary:any;
 
   locale = {
@@ -130,8 +131,7 @@ export class TravelerFormComponent implements OnInit {
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
     } 
-    this._itinerary.is_passport_required = true;
-    if((this.type === 'adult' || this.type === 'child') && this._itinerary.is_passport_required){
+    if((this.type === 'adult' || this.type === 'child') && this.is_passport_required){
       passport_numberControl.setValidators([Validators.required]);
       passport_expiryControl.setValidators([Validators.required]);
     }
