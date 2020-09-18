@@ -22,14 +22,21 @@ var list_bookings_component_1 = require("./bookings/list-bookings.component");
 var flights_component_1 = require("./bookings/flights/flights.component");
 var hotels_component_1 = require("./bookings/hotels/hotels.component");
 var accommodations_component_1 = require("./bookings/accommodations/accommodations.component");
-var flight_loader_component_1 = require("../../flight/components/flight-loader/flight-loader.component");
-var flight_not_found_component_1 = require("../../flight/components/flight-not-found/flight-not-found.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
     MyAccountsModule = __decorate([
         core_1.NgModule({
-            declarations: [profile_component_1.ProfileComponent, my_accounts_nav_component_1.MyAccountsNavComponent, list_bookings_component_1.ListBookingsComponent, list_traveller_component_1.ListTravellerComponent, crud_component_1.CrudComponent, flights_component_1.FlightsComponent, hotels_component_1.HotelsComponent, accommodations_component_1.AccommodationsComponent, flight_loader_component_1.FlightLoaderComponent, flight_not_found_component_1.FlightNotFoundComponent],
+            declarations: [
+                profile_component_1.ProfileComponent,
+                my_accounts_nav_component_1.MyAccountsNavComponent,
+                list_bookings_component_1.ListBookingsComponent,
+                list_traveller_component_1.ListTravellerComponent,
+                crud_component_1.CrudComponent,
+                flights_component_1.FlightsComponent,
+                hotels_component_1.HotelsComponent,
+                accommodations_component_1.AccommodationsComponent,
+            ],
             imports: [
                 common_1.CommonModule,
                 my_accounts_routing_module_1.MyAccountsRoutingModule,
@@ -38,7 +45,8 @@ var MyAccountsModule = /** @class */ (function () {
                 ng_bootstrap_1.NgbModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
             ],
-            providers: [common_1.DatePipe]
+            providers: [common_1.DatePipe],
+            schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
         })
     ], MyAccountsModule);
     return MyAccountsModule;

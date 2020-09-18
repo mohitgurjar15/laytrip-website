@@ -114,11 +114,12 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             return false;
         });
     };
-    FlightItemWrapperComponent.prototype.bookNow = function (routeCode) {
+    FlightItemWrapperComponent.prototype.bookNow = function (routeCode, is_passport) {
         var itinerary = {
             adult: this.route.snapshot.queryParams["adult"],
             child: this.route.snapshot.queryParams["child"],
-            infant: this.route.snapshot.queryParams["infant"]
+            infant: this.route.snapshot.queryParams["infant"],
+            is_passport_required: is_passport
         };
         this.cookieService.put('_itinerary', JSON.stringify(itinerary));
         this.router.navigate(["flight/traveler/" + routeCode]);

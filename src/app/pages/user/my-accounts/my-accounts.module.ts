@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MyAccountsRoutingModule } from './my-accounts-routing.module';
 import { ProfileComponent } from './profile/profile.component';
@@ -18,7 +18,18 @@ import { FlightNotFoundComponent } from '../../flight/components/flight-not-foun
 
 
 @NgModule({
-  declarations: [ProfileComponent,MyAccountsNavComponent, ListBookingsComponent, ListTravellerComponent, CrudComponent, FlightsComponent, HotelsComponent, AccommodationsComponent,FlightLoaderComponent,FlightNotFoundComponent],
+  declarations: [
+    ProfileComponent,
+    MyAccountsNavComponent,
+    ListBookingsComponent,
+    ListTravellerComponent,
+    CrudComponent,
+    FlightsComponent,
+    HotelsComponent,
+    AccommodationsComponent,
+    // FlightLoaderComponent,
+    // FlightNotFoundComponent
+  ],
   imports: [
     CommonModule,
     MyAccountsRoutingModule,
@@ -27,7 +38,7 @@ import { FlightNotFoundComponent } from '../../flight/components/flight-not-foun
     NgbModule,
     NgxDaterangepickerMd.forRoot(),
   ],
-  providers:[DatePipe]
+  providers: [DatePipe],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MyAccountsModule { }
- 

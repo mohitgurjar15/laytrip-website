@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { UserService } from '../../../../services/user.service';
+import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
 
 @Component({

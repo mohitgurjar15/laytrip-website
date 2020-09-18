@@ -6,6 +6,7 @@ import { FlightService } from '../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
+import { CookieService } from 'ngx-cookie';
 
 
 declare var $: any;
@@ -33,6 +34,7 @@ export class TravelerFormComponent implements OnInit {
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
   editMode = false;
   formStatus: boolean = false;
+  _itinerary:any;
 
   locale = {
     format: 'DD/MM/YYYY',
@@ -48,7 +50,9 @@ export class TravelerFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private flightService: FlightService,
     public router: Router,
-    public commonFunction: CommonFunction
+    public commonFunction: CommonFunction,
+    private cookieService: CookieService,
+
   ) { }
 
   ngOnInit() {
@@ -73,7 +77,6 @@ export class TravelerFormComponent implements OnInit {
       frequently_no: [''],
       user_type: ['']
     });
-    console.log(this.adultForm.value)
 
     this.setUserTypeValidation();
 
@@ -102,16 +105,19 @@ export class TravelerFormComponent implements OnInit {
   }
 
   setUserTypeValidation() {
+    this._itinerary =  JSON.parse(this.cookieService.get('_itinerary'));
+    
     const emailControl = this.adultForm.get('email');
     const phoneControl = this.adultForm.get('phone_no');
     const countryControl = this.adultForm.get('country_code');
+    const passport_numberControl = this.adultForm.get('passport_number');
+    const passport_expiryControl = this.adultForm.get('passport_expiry');
     if (this.type === 'adult') {
       emailControl.setValidators([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
       this.dobMaxDate = moment().add(-12, 'year');
     } else if (this.type === 'child') {
-
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null);
@@ -123,10 +129,17 @@ export class TravelerFormComponent implements OnInit {
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
+    } 
+    this._itinerary.is_passport_required = true;
+    if((this.type === 'adult' || this.type === 'child') && this._itinerary.is_passport_required){
+      passport_numberControl.setValidators([Validators.required]);
+      passport_expiryControl.setValidators([Validators.required]);
     }
     emailControl.updateValueAndValidity();
     phoneControl.updateValueAndValidity();
     countryControl.updateValueAndValidity();
+    passport_numberControl.updateValueAndValidity();
+    passport_expiryControl.updateValueAndValidity();
   }
 
   ngOnChanges(changes) {
