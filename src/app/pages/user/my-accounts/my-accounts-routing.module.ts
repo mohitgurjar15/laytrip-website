@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ListBookingsComponent } from './bookings/list-bookings.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path:'bookings',
-    component:MyBookingsComponent
+    component:ListBookingsComponent
   },
   {
     path: 'travellers',

@@ -51,7 +51,6 @@ var ListTravellerComponent = /** @class */ (function () {
         console.log('sds', changes);
     };
     ListTravellerComponent.prototype.open = function (content, userId) {
-        console.log(content);
         var modalRef = this.modalService.open(content);
         // modalRef.componentInstance.name = 'World';
     };

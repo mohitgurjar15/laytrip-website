@@ -15,16 +15,21 @@ var my_accounts_nav_component_1 = require("./my-accounts-nav/my-accounts-nav.com
 var forms_1 = require("@angular/forms");
 var ng_select_1 = require("@ng-select/ng-select");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-var my_bookings_component_1 = require("./my-bookings/my-bookings.component");
 var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var list_traveller_component_1 = require("./travellers/list-traveller.component");
 var crud_component_1 = require("./travellers/crud/crud.component");
+var list_bookings_component_1 = require("./bookings/list-bookings.component");
+var flights_component_1 = require("./bookings/flights/flights.component");
+var hotels_component_1 = require("./bookings/hotels/hotels.component");
+var accommodations_component_1 = require("./bookings/accommodations/accommodations.component");
+var flight_loader_component_1 = require("../../flight/components/flight-loader/flight-loader.component");
+var flight_not_found_component_1 = require("../../flight/components/flight-not-found/flight-not-found.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
     MyAccountsModule = __decorate([
         core_1.NgModule({
-            declarations: [profile_component_1.ProfileComponent, my_accounts_nav_component_1.MyAccountsNavComponent, my_bookings_component_1.MyBookingsComponent, list_traveller_component_1.ListTravellerComponent, crud_component_1.CrudComponent],
+            declarations: [profile_component_1.ProfileComponent, my_accounts_nav_component_1.MyAccountsNavComponent, list_bookings_component_1.ListBookingsComponent, list_traveller_component_1.ListTravellerComponent, crud_component_1.CrudComponent, flights_component_1.FlightsComponent, hotels_component_1.HotelsComponent, accommodations_component_1.AccommodationsComponent, flight_loader_component_1.FlightLoaderComponent, flight_not_found_component_1.FlightNotFoundComponent],
             imports: [
                 common_1.CommonModule,
                 my_accounts_routing_module_1.MyAccountsRoutingModule,

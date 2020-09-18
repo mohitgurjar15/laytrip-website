@@ -113,4 +113,8 @@ export class UserService {
   getProfile() {
     return this.http.get(this.apiURL +'v1/auth/profile/',  this.commonFunction.setHeaders());
   }
+
+  getBookings(pageNumber,limit) {
+    return this.http.get(`${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  }
 }

@@ -64,7 +64,7 @@ export class ListTravellerComponent implements OnInit {
 
   modalReference: any;
   open(content, userId) {
-    console.log(content)
+   
     const modalRef = this.modalService.open(content);
     // modalRef.componentInstance.name = 'World';
   }

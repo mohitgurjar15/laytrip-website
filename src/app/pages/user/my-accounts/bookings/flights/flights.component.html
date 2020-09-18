@@ -1,0 +1,60 @@
+<div class="block_list" *ngFor="let item of flightBookings; let i = index;">
+  <div class="booking_list_top">
+    <ul>
+      <li>Trip ID <span>{{item.tripId}}</span></li>
+      <li>Booked on <span>{{ item.bookingDate}}</span></li>
+    </ul>
+  </div>
+  <div class="booking_list_btm">
+    <div class="row">
+      <div class="col-md-2 px-0">
+        <div class="block_im">
+          <img src="{{item.airline_logo}}" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';"  alt="{{item.airline_name}} Logo">
+          <p>{{item.airline_name}}</p>
+          <span>{{ item.airline }} - {{ item.flight_number }}</span>
+        </div>
+      </div>
+      <div class="col-md-7 px-0">
+        <div class="block_detail">
+          <div class="block_detail_top">
+            <div class="detail_info">
+              <p>Departure</p>
+              <h4>{{item.departure_time}} <span></span></h4>
+              <span>{{item.departure_city}}</span>
+            </div>
+            <div class="flight_stop_detail">
+              <p>{{item.duration}}</p>
+              <div class="border-dot"></div>
+              <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Stop</span>
+            </div>
+            <div class="detail_info">
+              <p>Arrival</p>
+              <h4>{{item.arrival_time}} <span>pm</span></h4>
+              <span>{{item.arrival_city}}</span>
+            </div>
+          </div>
+          <div class="block_detail_btm">
+            <div class="show_detail">
+              <a href="javascript:void(0);" class="show_more_detail">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon"> Flight Details
+              </a>
+            </div>
+            <div class="info_price_origin">
+              <div class="refundable">{{ item.is_refundable ? 'Refundable' : 'Non-Refundable' }}</div>
+              <div class="ogigin_price">
+                Total <span>${{item.selling_price | number : '1.2-2'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 px-0">
+        <div class="block_price">
+          <p>Starts from</p>
+          <p><span>${{item.instalment_amount | number : '1.2-2'}}</span> /week</p>
+          <span class="partial_payment_info">Learn more about partial payment</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
