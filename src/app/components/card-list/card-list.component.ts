@@ -14,7 +14,7 @@ export class CardListComponent implements OnInit {
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   cardLoader:boolean=true;
-  cards:any=[]
+  cards=[]
   @Output() selectCreditCard=new EventEmitter();
   @Input() newCard;
   ngOnInit() {
@@ -39,8 +39,16 @@ export class CardListComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['newCard']) {
-      this.cards.push(this.newCard)
+    console.log("changes",changes)
+    if (changes['newCard'].currentValue!='undefined') {
+      if(this.newCard!='undefined'){
+        this.cards.push(this.newCard)
+      }
     }
+
+    this.cards= this.cards.filter(card=>{
+      return typeof card!='undefined'
+    })
+    console.log(this.cards)
   }
 }

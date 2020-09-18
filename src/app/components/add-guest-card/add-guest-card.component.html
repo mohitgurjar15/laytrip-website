@@ -1,0 +1,86 @@
+<div class="add_card_block ">
+    <div class="form_row">
+        <!-- <input type="hidden" formControlName="payment_method_token" id="payment_method_token"> -->
+
+        <div class="form_field">
+            <label>First Name {{cardDetails.first_name | json}}<sup>*</sup></label>
+            <div class="text_field">
+                <input type="text" maxlength="20" tabindex="101" name="first_name"
+                    placeholder="Enter first name" (change)="handleCardDetails($event)">
+                <p *ngIf="!isValidFirstName" class="text-danger">Please enter your first name.
+                </p>
+            </div>
+        </div>
+
+        <div class="form_field">
+            <label>Last Name<sup>*</sup></label>
+            <div class="text_field">
+                <input type="text"  maxlength="20" tabindex="101" name="last_name"
+                    placeholder="Enter last name" (change)="handleCardDetails($event)">
+                <p *ngIf="!isValidLastName" class="text-danger">Please enter your last
+                    name.
+                </p>
+            </div>
+        </div>
+
+        <!-- <div class="form_field">
+            <label>Card number<sup>*</sup></label>
+            <div class="text_field">
+                <div id="spreedly-number" class="card_field" tabindex="102">
+                    <p class="text-danger" *ngIf="cardError">{{ cardError }}</p>
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+    <div class="form_row">
+
+        <div class="form_field">
+            <label>Card Number<sup>*</sup></label>
+            <div class="text_field">
+                <input type="text"  maxlength="20" tabindex="101" name="card_number"
+                    placeholder="Enter card number" (change)="handleCardDetails($event)">
+                <p *ngIf="!isValidCardNumber" class="text-danger">Please enter your card
+                    number.
+                </p>
+            </div>
+        </div>
+        
+        <div class="form_field">
+            <label>Expiry<sup>*</sup></label>
+            <div class="text_field">
+                <!-- <input autocomplete="off" class="birth_date" type="text" formControlName="expiry" maxlength="20"
+                    placeholder="MM/YYYY" tabindex="103" id="expiry_date"> -->
+                <input autocomplete="off" type="text" 
+                    ngxDaterangepickerMd 
+                    [(ngModel)]="expiryDate"
+                    class="form-control"
+                    [singleDatePicker]="true"
+                    (datesUpdated)="expiryDateUpdate($event)"
+                    [locale]="locale"
+                    [autoApply]="true"
+                    tabindex="102"
+                    />
+                <p *ngIf="!isValidExpiry" class="text-danger">Please enter expiry date.
+                </p>
+            </div>
+        </div>
+        <!-- <div class="form_field">
+            <label>CVV<sup>*</sup></label>
+            <div class="text_field">
+                <div id="spreedly-cvv" class="card_field" tabindex="104"></div>
+            </div>
+        </div> -->
+    </div>
+    <div class="form_row">
+        <div class="form_field">
+            <label>Cvv<sup>*</sup></label>
+            <div class="text_field">
+                <input autocomplete="off"  type="text"  maxlength="20" name="card_cvv"
+                    placeholder="123" tabindex="103" (change)="handleCardDetails($event)" >
+                <p *ngIf="!isValidCvv" class="text-danger">Please enter cvv number.
+                </p>
+            </div>
+        </div>
+    </div>
+  </div>
