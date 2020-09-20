@@ -61,6 +61,7 @@
                         (datesUpdated)="expiryDateUpdate($event)"
                         [locale]="locale"
                         [autoApply]="true"
+                        tabindex="102"
                         />
                     <p *ngIf="submitted && cardForm.controls.expiry.errors" class="text-danger">Please enter expiry date.
                     </p>

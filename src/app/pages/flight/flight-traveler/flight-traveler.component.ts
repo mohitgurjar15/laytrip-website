@@ -96,7 +96,7 @@ export class FlightTravelerComponent implements OnInit {
     } else {
       let errorMessage = "You have to select "+ Number(this._itinerary.adult)+" Adult, "
       + Number(this._itinerary.child)+" Child "+Number(this._itinerary.infant)+" Infant";
-      this.toastr.error(errorMessage, 'Invalid Criteria');
+      this.toastr.error(errorMessage, 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
     }
   }
 

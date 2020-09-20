@@ -4,7 +4,7 @@ declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterangepicker-material';
@@ -16,8 +16,9 @@ import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterang
 })
 export class HomeComponent implements OnInit {
 
-  s3BucketUrl = environment.s3BucketUrl;
+  @ViewChild(DaterangepickerDirective) returnDatePicker: DaterangepickerDirective;
 
+  s3BucketUrl = environment.s3BucketUrl;
   modules: Module[];
   moduleList: any = {};
   switchBtnValue = false;
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
   };
 
   flightDepartureMinDate: moment.Moment = moment();
-  flightReturnMinDate: moment.Moment = moment().add(7, 'days');
+  flightReturnMinDate: moment.Moment = moment();
 
   totalPerson: number = 1;
 
@@ -78,6 +79,7 @@ export class HomeComponent implements OnInit {
         startDate: moment().add(37, 'days')
       }, Validators.required]
     });
+    this.flightReturnMinDate = moment().add(30, 'days');
   }
 
   ngOnInit(): void {
@@ -224,8 +226,14 @@ export class HomeComponent implements OnInit {
   }
 
   departureDateUpdate(date) {
-    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
-    this.flightSearchForm.value.returnDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+    console.log("this.returnDatePicker",this.returnDatePicker)
+    //this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate);
+    //this.flightSearchForm.value.returnDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+    console.log("this.flightReturnMinDate",this.flightReturnMinDate)
+    //this.returnDatePicker.value(moment(this.flightSearchForm.value.departureDate.startDate);)
+    //this.flightSearchForm.controls.returnDate.setValue('31/11/2020')
+    console.log(this.flightSearchForm.controls.returnDate.value)
   }
 
   dateChange(type) {
