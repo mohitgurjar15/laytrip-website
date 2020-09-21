@@ -65,6 +65,7 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
       console.log("res",res)
       this.totalLaycreditPoints=res.total_available_points;
+      this.laycreditOptions.ceil=res.total_available_points;
     },(error=>{
 
     }))
