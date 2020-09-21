@@ -7,7 +7,6 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +14,6 @@ import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterang
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  @ViewChild(DaterangepickerDirective) returnDatePicker: DaterangepickerDirective;
 
   s3BucketUrl = environment.s3BucketUrl;
   modules: Module[];
@@ -37,10 +34,6 @@ export class HomeComponent implements OnInit {
   fromDestinationCode;
   toDestinationCode;
 
-  locale = {
-    format: 'DD/MM/YYYY',
-    displayFormat: 'DD/MM/YYYY'
-  };
 
   flightDepartureMinDate;
   flightReturnMinDate;
@@ -82,7 +75,6 @@ export class HomeComponent implements OnInit {
 
     this.flightDepartureMinDate =new Date();
     this.flightReturnMinDate =this.departureDate;
-    console.log(this.flightDepartureMinDate,this.flightReturnMinDate)
   }
 
   ngOnInit(): void {
@@ -224,9 +216,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  datesUpdated(event) {
-    // console.log(event);
-  }
 
   departureDateUpdate(date) {
     this.returnDate = new Date(date)

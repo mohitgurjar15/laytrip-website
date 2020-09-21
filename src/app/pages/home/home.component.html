@@ -114,7 +114,7 @@
                                             <li class="grid_box secound">
                                                 <div class="date_form">
                                                     <div class="search_area">
-                                                        <label>Departure</label>
+                                                        <label>Departure </label>
                                                         <p-calendar 
                                                             inputId="basic" 
                                                             [(ngModel)]="departureDate" 
@@ -122,7 +122,8 @@
                                                             flightDepartureMinDate
                                                             [minDate]="flightDepartureMinDate" 
                                                             (onSelect)=departureDateUpdate($event)
-                                                            [readonlyInput]="true" >
+                                                            [readonlyInput]="true" 
+                                                            inputStyleClass="form-control date_icon"  >
                                                         </p-calendar>
                                                         <div class="prev-next">
                                                             <a href="javascript:void(0);"
@@ -130,6 +131,7 @@
                                                             <a href="javascript:void(0);"
                                                                 (click)="dateChange('departure','next')">Next</a>
                                                         </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="date_to">
