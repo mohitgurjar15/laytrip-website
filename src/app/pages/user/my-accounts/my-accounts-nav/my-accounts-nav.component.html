@@ -6,7 +6,7 @@
             </span>
             <div class="member_info">
                 <h6>{{_login_user_info.username}}</h6>
-                <p>Member since June 2020</p>
+                <p>Member since {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD')  }}</p>
             </div>
         </div>
   </div>
@@ -38,10 +38,14 @@
               </a>
           </li>
           <li>
-            <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
+            <a href="javascript:void(0);"  [routerLinkActive]="['active_link']">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
                 Co - Travellers
             </a>
+           <!--  <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
+                Co - Travellers
+            </a> -->
           </li>
           <li>
               <div class="dropdown">

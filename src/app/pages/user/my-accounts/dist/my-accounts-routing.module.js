@@ -9,8 +9,8 @@ exports.__esModule = true;
 exports.MyAccountsRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var list_bookings_component_1 = require("./bookings/list-bookings.component");
 var profile_component_1 = require("./profile/profile.component");
-var my_bookings_component_1 = require("./my-bookings/my-bookings.component");
 var list_traveller_component_1 = require("./travellers/list-traveller.component");
 var routes = [
     {
@@ -23,7 +23,7 @@ var routes = [
     },
     {
         path: 'bookings',
-        component: my_bookings_component_1.MyBookingsComponent
+        component: list_bookings_component_1.ListBookingsComponent
     },
     {
         path: 'travellers',

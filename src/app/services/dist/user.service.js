@@ -84,6 +84,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getProfile = function () {
         return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
     };
+    UserService.prototype.getBookings = function (pageNumber, limit) {
+        return this.http.get(this.apiURL + "v1/booking/user-booking-list?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
+    };
     UserService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

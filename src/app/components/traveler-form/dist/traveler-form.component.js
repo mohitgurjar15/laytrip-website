@@ -12,11 +12,12 @@ var forms_1 = require("@angular/forms");
 var moment = require("moment");
 var environment_1 = require("../../../environments/environment");
 var TravelerFormComponent = /** @class */ (function () {
-    function TravelerFormComponent(formBuilder, flightService, router, commonFunction) {
+    function TravelerFormComponent(formBuilder, flightService, router, commonFunction, cookieService) {
         this.formBuilder = formBuilder;
         this.flightService = flightService;
         this.router = router;
         this.commonFunction = commonFunction;
+        this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.usersType = '';
         this.traveler = [];
@@ -56,7 +57,6 @@ var TravelerFormComponent = /** @class */ (function () {
             frequently_no: [''],
             user_type: ['']
         });
-        console.log(this.adultForm.value);
         this.setUserTypeValidation();
         if (this.traveler.userId) {
             this.adultForm.patchValue({
@@ -81,9 +81,12 @@ var TravelerFormComponent = /** @class */ (function () {
         this.countries_code = this.countries_code;
     };
     TravelerFormComponent.prototype.setUserTypeValidation = function () {
+        this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
         var emailControl = this.adultForm.get('email');
         var phoneControl = this.adultForm.get('phone_no');
         var countryControl = this.adultForm.get('country_code');
+        var passport_numberControl = this.adultForm.get('passport_number');
+        var passport_expiryControl = this.adultForm.get('passport_expiry');
         if (this.type === 'adult') {
             emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
             phoneControl.setValidators([forms_1.Validators.required]);
@@ -104,9 +107,16 @@ var TravelerFormComponent = /** @class */ (function () {
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
         }
+        this._itinerary.is_passport_required = true;
+        if ((this.type === 'adult' || this.type === 'child') && this._itinerary.is_passport_required) {
+            passport_numberControl.setValidators([forms_1.Validators.required]);
+            passport_expiryControl.setValidators([forms_1.Validators.required]);
+        }
         emailControl.updateValueAndValidity();
         phoneControl.updateValueAndValidity();
         countryControl.updateValueAndValidity();
+        passport_numberControl.updateValueAndValidity();
+        passport_expiryControl.updateValueAndValidity();
     };
     TravelerFormComponent.prototype.ngOnChanges = function (changes) {
         if (changes['traveler']) {

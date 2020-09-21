@@ -9,7 +9,6 @@ import { FlightPriceSliderComponent } from './components/flight-price-slider/fli
 import { FlightItemWrapperComponent } from './components/flight-item-wrapper/flight-item-wrapper.component';
 import { FlightSearchBarComponent } from './components/flight-search-bar/flight-search-bar.component';
 import { Ng5SliderModule } from 'ng5-slider';
-import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
 import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
 import { FlightSummaryComponent } from './flight-summary/flight-summary.component';
@@ -24,6 +23,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
 import { FlightBookingFailedComponent } from './components/flight-booking-failed/flight-booking-failed.component';
 import { CalendarModule } from 'primeng/calendar';
+import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import { CalendarModule } from 'primeng/calendar';
     FlightPriceSliderComponent,
     FlightItemWrapperComponent,
     FlightSearchBarComponent,
-    FlightLoaderComponent,
     FlightNotFoundComponent,
     FlightTravelerComponent,
     FlightSummaryComponent,
@@ -41,7 +40,8 @@ import { CalendarModule } from 'primeng/calendar';
     FlightCheckoutComponent,
     BookingSummaryLoaderComponent,
     FlightConfirmationComponent,
-    FlightBookingFailedComponent
+    FlightBookingFailedComponent,
+    FlightLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +54,7 @@ import { CalendarModule } from 'primeng/calendar';
     NgxDaterangepickerMd.forRoot(),
     CookieModule.forRoot(),
     CalendarModule
-    
-  ]
+  ],
+  exports:[FlightLoaderComponent,FlightNotFoundComponent]
 })
 export class FlightModule { }

@@ -11,8 +11,9 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var MyAccountsNavComponent = /** @class */ (function () {
-    function MyAccountsNavComponent(router) {
+    function MyAccountsNavComponent(router, commonFunction) {
         this.router = router;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.profile_pic = '';
         this._login_user_info = [];

@@ -159,11 +159,13 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     });
   }
 
-  bookNow(routeCode) {
+  bookNow(routeCode,is_passport) {
     const itinerary = {
       adult: this.route.snapshot.queryParams["adult"],
       child: this.route.snapshot.queryParams["child"],
-      infant: this.route.snapshot.queryParams["infant"]
+      infant: this.route.snapshot.queryParams["infant"],
+      is_passport_required : is_passport
+
     };
     this.cookieService.put('_itinerary', JSON.stringify(itinerary));
     this.router.navigate([`flight/traveler/${routeCode}`]);

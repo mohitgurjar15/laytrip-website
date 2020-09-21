@@ -115,18 +115,15 @@
             </div>
           </div>
         </div>
-        <div
-          *ngIf="type === 'adult' && adultForm.controls.country_code.errors"
-          class="focus-input100 login-error">
+        <div *ngIf="type === 'adult' && adultForm.controls.country_code.errors" class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.country_code.errors.required && adultForm.controls.country_code.touched"
             class="text-danger">Please enter country code</div>
         </div>
-        <div
-          *ngIf="type === 'adult' && adultForm.controls.phone_no.errors"
-          class="focus-input100 login-error">
+        <div *ngIf="type === 'adult' && adultForm.controls.phone_no.errors" class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.phone_no.touched"
             class="text-danger">Please enter phone no.</div>
-          <div *ngIf="adultForm.controls.phone_no.errors.minlength"  class="text-danger">Phone number should be minimum at least 10 digit</div>
+          <div *ngIf="adultForm.controls.phone_no.errors.minlength" class="text-danger">Phone number should be minimum
+            at least 10 digit</div>
         </div>
       </div>
     </div>
@@ -137,7 +134,7 @@
         <input type="text" tabindex="6" ngxDaterangepickerMd formControlName="dob" showDropdowns="true"
           alwaysShowCalendars="true" placeholder="" class="form-control custom_datpicker" [singleDatePicker]="true"
           (datesUpdated)="dobDateUpdate($event)" [locale]="locale" [autoApply]="true" [minDate]="dobMinDate"
-          [maxDate]="dobMaxDate" />      
+          [maxDate]="dobMaxDate" />
         <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
             date of birth.
@@ -166,6 +163,13 @@
           class="form-control custom_datpicker" showDropdowns="true" alwaysShowCalendars="true" placeholder=""
           [singleDatePicker]="true" (datesUpdated)="expiryDateUpdate($event)" [locale]="locale" [autoApply]="true"
           showDropdowns="true" [minDate]="expiryMinDate" />
+          <div
+          *ngIf="(submitted  || adultForm.controls.passport_expiry.touched) && adultForm.controls.passport_expiry.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.passport_expiry.errors.required" class="text-danger">Please select 
+            passport export date.
+          </div>
+        </div>
       </div>
       <div class="form_field half">
         <label>Passport Number</label>
@@ -173,16 +177,15 @@
           <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
             placeholder="Passport Number">
         </div>
-      </div>
-    </div>
-    <div class="form_row">
-      <div class="form_field half">
-        <label>Frequently - flyer no.</label>
-        <div class="text_field">
-          <input type="text" formControlName="frequently_no" maxlength="20" tabindex="10"
-            placeholder="Enter frequently - flyer no.">
+        <div
+          *ngIf="(submitted  || adultForm.controls.passport_number.touched) && adultForm.controls.passport_number.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="adultForm.controls.passport_number.errors.required" class="text-danger">Please enter
+            passport number.
+          </div>
         </div>
       </div>
+
     </div>
     <div class="form_btn">
       <button type="submit">

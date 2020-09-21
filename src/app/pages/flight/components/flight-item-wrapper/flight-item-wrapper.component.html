@@ -56,7 +56,7 @@
                             <p *ngIf="item.start_price > 0">
                                 <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
                             <!-- <a class="book_btn" href="javascript:void(0);"></a> -->
-                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item.route_code)">
+                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item.route_code,item.is_passport_required)">
                                 Book Now
                             </a>
                             <span class="partial_payment_info">Learn more about partial payment</span>
@@ -443,7 +443,7 @@
                             <p *ngIf="item.start_price > 0">Starts from</p>
                             <p *ngIf="item.start_price > 0">
                                 <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
-                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item.route_code)">Book Now</a>
+                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item.route_code,item.is_passport_required)">Book Now</a>
                             <span class="partial_payment_info">Learn more about partial payment</span>
                         </div>
                     </div>
