@@ -180,7 +180,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   totalLaycredit(){
-    console.log("totalLaycredit")
     this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
       console.log("res",res)
       this.totalLayCredit=res.total_available_points;
