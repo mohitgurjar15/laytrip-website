@@ -22,6 +22,7 @@ import { FlightConfirmationComponent } from './components/flight-confirmation/fl
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
 import { FlightBookingFailedComponent } from './components/flight-booking-failed/flight-booking-failed.component';
+import { CalendarModule } from 'primeng/calendar';
 import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
 
 @NgModule({
@@ -52,7 +53,7 @@ import { FlightLoaderComponent } from './components/flight-loader/flight-loader.
     NgSelectModule,
     NgxDaterangepickerMd.forRoot(),
     CookieModule.forRoot(),
-        
+    CalendarModule
   ],
   exports:[FlightLoaderComponent,FlightNotFoundComponent]
 })

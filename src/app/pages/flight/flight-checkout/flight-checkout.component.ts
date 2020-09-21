@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie';
 import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flight-checkout',
@@ -20,7 +21,8 @@ export class FlightCheckoutComponent implements OnInit {
       private router:Router,
       private flightService:FlightService,
       private cookieService: CookieService,
-      private genericService:GenericService
+      private genericService:GenericService,
+      private toastr: ToastrService
     ) { }
     s3BucketUrl = environment.s3BucketUrl;
     validateCardDetails:Subject<any> = new Subject();
@@ -140,7 +142,7 @@ export class FlightCheckoutComponent implements OnInit {
             this.bookFlightApi()
           }
         },(error=>{
-
+          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
         }))
       }
       /* Login user */
@@ -177,6 +179,9 @@ export class FlightCheckoutComponent implements OnInit {
       },(error)=>{
 
         console.log("error",error)
+        if(error.status==422){
+          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
+        }
         if(error.status==404){
           this.bookingStatus=2; // Flight Not available  
         }

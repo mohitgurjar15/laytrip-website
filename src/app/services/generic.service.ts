@@ -23,7 +23,6 @@ export class GenericService {
   getAllLangunage() {
     return this.http.get(`${environment.apiUrl}v1/language`)
       .pipe(
-        retry(1),
         catchError(this.handleError)
       );
   }
@@ -31,7 +30,6 @@ export class GenericService {
   getCurrencies() {
     return this.http.get(`${environment.apiUrl}v1/currency`)
       .pipe(
-        retry(1),
         catchError(this.handleError)
       );
   }
@@ -39,7 +37,6 @@ export class GenericService {
   getModules() {
     return this.http.get(`${environment.apiUrl}v1/modules`)
       .pipe(
-        retry(1),
         catchError(this.handleError)
       );
   }
@@ -47,7 +44,6 @@ export class GenericService {
   saveCard(cardData) {
     return this.http.post(`${environment.apiUrl}v1/payment/add-card`, cardData, this.commonFunction.setHeaders())
       .pipe(
-        retry(1),
         catchError(this.handleError)
       );
   }
@@ -56,7 +52,6 @@ export class GenericService {
 
     return this.http.get(`${environment.apiUrl}v1/payment`, this.commonFunction.setHeaders())
       .pipe(
-        retry(1),
         catchError(this.handleError)
       );
   }
@@ -64,13 +59,12 @@ export class GenericService {
   getInstalemnts(data){
     return this.http.post(`${environment.apiUrl}v1/instalment/calculate-instalment`,data)
       .pipe(
-        retry(1),
         catchError(this.handleError)
       );
   }
 
   handleError(error) {
-    console.log("====", error);
+    
     let errorMessage = {};
     if (error.status == 0) {
       console.log("API Server is not responding")
@@ -94,5 +88,9 @@ export class GenericService {
   }
   getStates(countryId) {
     return this.http.get(environment.apiUrl + 'v1/generic/country/' + countryId + '/state', this.commonFunction.setHeaders());
+  }
+
+  getAvailableLaycredit(){
+    return this.http.get(environment.apiUrl + 'v1/laytrip-point/total-available-points/',this.commonFunction.setHeaders());
   }
 }

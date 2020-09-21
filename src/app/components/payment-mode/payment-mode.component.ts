@@ -51,12 +51,24 @@ export class PaymentModeComponent implements OnInit {
   defaultInstalmentNo:number;
   customMethod:string;
   secondInstalment:number;
+  totalLaycreditPoints=0;
 
   ngOnInit() {
 
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemnts('weekly');
+    this.totalLaycredit();
+  }
+
+  totalLaycredit(){
+    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+      console.log("res",res)
+      this.totalLaycreditPoints=res.total_available_points;
+      this.laycreditOptions.ceil=res.total_available_points;
+    },(error=>{
+
+    }))
   }
 
   /**
