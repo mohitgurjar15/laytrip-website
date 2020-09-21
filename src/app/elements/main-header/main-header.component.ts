@@ -24,6 +24,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
   isCurrencySet: boolean = false;
   isLoggedIn = false;
+  totalLayCredit=0;
 
   constructor(
     private genericService: GenericService,
@@ -66,12 +67,17 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getLangunages();
     this.getCurrencies();
     this.loadJquery();
+    this.totalLaycredit();
   }
 
   ngDoCheck() {
     this.checkUser();
+    //this.totalLaycredit();
   }
 
+  ngOnChanges(){
+    //this.totalLaycredit();
+  }
   /**
    * change user lanunage
    * @param langunage 
@@ -171,5 +177,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     });
     // Close sticky header js
+  }
+
+  totalLaycredit(){
+    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+      console.log("res",res)
+      this.totalLayCredit=res.total_available_points;
+    },(error=>{
+
+    }))
   }
 }

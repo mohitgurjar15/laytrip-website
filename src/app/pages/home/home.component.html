@@ -82,9 +82,6 @@
                                             <li class="grid_box first">
                                                 <div class="flight_form">
                                                     <div class="search_area">
-                                                        <!-- <label>From Destination</label>
-                                                        <input type="text" name="form" maxlength="20" tabindex="1" placeholder="New York" />
-                                                        <span>NY, United States</span> -->
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
                                                             [label]="'From Destination'" [placeHolder]="'New York'"
@@ -103,9 +100,6 @@
                                                 </div>
                                                 <div class="flight_to">
                                                     <div class="search_area">
-                                                        <!-- <label>To Destination</label>
-                                                        <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
-                                                        <span>CA, United States</span> -->
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
                                                             [label]="'TO DESTINATION'" [placeHolder]="'Los Angeles'"
@@ -120,23 +114,23 @@
                                             <li class="grid_box secound">
                                                 <div class="date_form">
                                                     <div class="search_area">
-                                                        <label>Departure</label>
-                                                        <input type="text" name="daterange" ngxDaterangepickerMd
-                                                            formControlName="departureDate"
-                                                            class="form-control date_icon" [singleDatePicker]="true"
-                                                            (datesUpdated)="departureDateUpdate($event)"
-                                                            [locale]="locale" [autoApply]="true"
-                                                            [minDate]="flightDepartureMinDate" />
+                                                        <label>Departure </label>
+                                                        <p-calendar 
+                                                            inputId="basic" 
+                                                            [(ngModel)]="departureDate" 
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            flightDepartureMinDate
+                                                            [minDate]="flightDepartureMinDate" 
+                                                            (onSelect)=departureDateUpdate($event)
+                                                            [readonlyInput]="true"   >
+                                                        </p-calendar>
                                                         <div class="prev-next">
                                                             <a href="javascript:void(0);"
-                                                                (click)="dateChange('previous')">Prev</a>
+                                                                (click)="dateChange('departure','previous')">Prev</a>
                                                             <a href="javascript:void(0);"
-                                                                (click)="dateChange('next')">Next</a>
+                                                                (click)="dateChange('departure','next')">Next</a>
                                                         </div>
-                                                        <!-- <div class="date_icon" id="departure_date_icon">
-                                                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg"
-                                                                alt="Calender Icon">
-                                                        </div> -->
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="date_to">
@@ -148,19 +142,19 @@
 
                                                     <div class="search_area" *ngIf="isRoundTrip">
                                                         <label>Return</label>
-                                                        <input type="text" name="daterange" ngxDaterangepickerMd
-                                                            formControlName="returnDate" class="form-control date_icon"
-                                                            [singleDatePicker]="true"
-                                                            (datesUpdated)="datesUpdated($event)" [locale]="locale"
-                                                            [autoApply]="true" [minDate]="flightReturnMinDate" />
+                                                        <p-calendar 
+                                                            inputId="basic" 
+                                                            [(ngModel)]="returnDate" 
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            flightReturnMinDate
+                                                            [minDate]="flightReturnMinDate"
+                                                            [readonlyInput]="true"
+                                                            >
+                                                        </p-calendar>
                                                         <div class="prev-next">
-                                                            <a href="javascript:void(0);">Prev</a>
-                                                            <a href="javascript:void(0);">Next</a>
+                                                            <a href="javascript:void(0);" (click)="dateChange('arrival','previous')">Prev</a>
+                                                            <a href="javascript:void(0);" (click)="dateChange('arrival','next')">Next</a>
                                                         </div>
-                                                        <!-- <div class="">
-                                                            <img src="{{s3BucketUrl}}assets/images/icon/calender-icon.svg"
-                                                                alt="Calender Icon">
-                                                        </div> -->
                                                     </div>
 
                                                 </div>

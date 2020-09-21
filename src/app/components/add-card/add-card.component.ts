@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { GenericService } from '../../services/generic.service';
 @Component({
   selector: 'app-add-card',
@@ -12,7 +13,8 @@ export class AddCardComponent implements OnInit {
 
   constructor(
     private genericService: GenericService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) { }
   @Input() showAddCardForm: boolean;
   @Output() emitNewCard = new EventEmitter()
@@ -108,8 +110,9 @@ export class AddCardComponent implements OnInit {
       //this.cardForm.reset();
       this.emitNewCard.emit(res);
       this.saveCardLoader=false;
-    }, (err => {
+    }, (error => {
       this.saveCardLoader=false;
+      this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
     })
     );
   }

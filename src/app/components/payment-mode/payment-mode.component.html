@@ -3,11 +3,11 @@
         <h5>Choose Payment Mode</h5>
     </div>
     <div class="block_detail">
-        <div class="block_laycredit_checkbox">
+        <div class="block_laycredit_checkbox" *ngIf="totalLaycreditPoints">
             <label class="custom_checkbox">
                 <input type="checkbox" value="">
                 <span class="checkmark"></span>
-                Use Laycredit for this booking. You have <span>23145 Laycredits</span> in your wallet.
+                Use Laycredit for this booking. You have <span>{{totalLaycreditPoints}} Laycredits</span> in your wallet.
             </label>
             <div class="block_apply_laycredits" id="Laycredits_apply">
                 <div class="block_top">
