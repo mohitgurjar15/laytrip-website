@@ -78,9 +78,14 @@ export class FlightSearchBarComponent implements OnInit {
   searchedValue = [];
   arrivalCode: string;
 
+  // locale = {
+  //   format: 'DD/MM/YYYY',
+  //   displayFormat: 'DD/MM/YYYY'
+  // };
+
   locale = {
-    format: 'DD/MM/YYYY',
-    displayFormat: 'DD/MM/YYYY'
+    format: 'MM/DD/YYYY',
+    displayFormat: 'MM/DD/YYYY'
   };
 
   flightDepartureMinDate: moment.Moment = moment();
@@ -106,11 +111,11 @@ export class FlightSearchBarComponent implements OnInit {
       fromDestination: [[Validators.required]],
       toDestination: [[Validators.required]],
       departureDate: [{
-        startDate: moment(this.departureDate, 'YYYY-MM-DD').format('DD/MM/YYYY')
+        startDate: moment(this.departureDate, 'YYYY-MM-DD').format('MM/DD/YYYY')
       }, Validators.required],
       returnDate: [{
         startDate: typeof this.arrivalDate !== 'undefined' ?
-          moment(this.arrivalDate, 'YYYY-MM-DD').format('DD/MM/YYYY') : moment(this.departureDate).add(7, 'days')
+          moment(this.arrivalDate, 'YYYY-MM-DD').format('MM/DD/YYYY') : moment(this.departureDate).add(7, 'days')
       }, Validators.required]
     });
 
@@ -277,11 +282,10 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
     if (this.isRoundTrip === true) {
-      console.log(this.flightReturnMinDate);
       this.searchFlightInfo.trip = 'roundtrip';
       this.searchFlightInfo.arrival_date =
-        moment(this.flightSearchForm.value.returnDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
-          ? moment(this.flightSearchForm.value.returnDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD') : this.flightReturnMinDate;
+        moment(this.flightSearchForm.value.returnDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
+          ? moment(this.flightSearchForm.value.returnDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD') : this.flightReturnMinDate;
     }
 
     // console.log(this.searchFlightInfo);
@@ -295,7 +299,6 @@ export class FlightSearchBarComponent implements OnInit {
       this.searchFlightInfo.departure_date && this.searchFlightInfo.arrival_date
       && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
       && this.searchFlightInfo.trip === 'roundtrip') {
-      console.log(this.searchFlightInfo);
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.searchBarInfo.emit(this.searchFlightInfo);
     }
@@ -308,17 +311,18 @@ export class FlightSearchBarComponent implements OnInit {
     } else {
       this.isRoundTrip = false;
       this.searchFlightInfo.trip = 'oneway';
+      delete this.searchFlightInfo.arrival_date;
     }
   }
 
   returnDatesUpdated(event) {
     // moment(this.flightSearchForm.value.departureDate.startDate);
-    this.searchFlightInfo.arrival_date = moment(this.flightSearchForm.value.returnDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    this.searchFlightInfo.arrival_date = moment(this.flightSearchForm.value.returnDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
   }
 
   departureDateUpdate(date) {
     this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate);
-    this.searchFlightInfo.departure_date = moment(this.flightSearchForm.value.departureDate.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    this.searchFlightInfo.departure_date = moment(this.flightSearchForm.value.departureDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
   }
 
 }

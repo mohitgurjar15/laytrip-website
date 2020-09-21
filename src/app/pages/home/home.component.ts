@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit {
   toDestinationCode;
 
   locale = {
-    format: 'DD/MM/YYYY',
-    displayFormat: 'DD/MM/YYYY'
+    format: 'MM/DD/YYYY',
+    displayFormat: 'MM/DD/YYYY'
   };
 
   flightDepartureMinDate: moment.Moment = moment();

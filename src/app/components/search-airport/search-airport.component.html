@@ -2,24 +2,20 @@
     <label>{{label}}</label>
     <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
         bindLabel="display_name" bindValue="city" [clearable]="true" minTermLength="3" notFoundText=""
-        (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"
-        class="laytrip-input" placeholder="{{ placeHolder }}">
-        <ng-template ng-option-tmp  let-item="item" let-index="index" let-search="searchTerm">
+        (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)" class="laytrip-input"
+        placeholder="{{ placeHolder }}">
+        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
             <ul class="item-list">
                 <li class="item">
                     <div class="item-left">
                         <p class="item-name">{{item.city}}</p>
                         <p class="item-city-country">{{item.code}},{{item.name}}</p>
                     </div>
-                    <!-- <div class="item-right">
-                        <p>{{item.code}}</p>
-                    </div> -->
                 </li>
             </ul>
         </ng-template>
         <ng-template ng-label-tmp let-item="item">
-            <!-- <img height="15" width="15" [src]="item.avatar"/> -->
-            {{item.city}}<!--  is cool -->
+            {{item.city}}
         </ng-template>
     </ng-select>
     <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>

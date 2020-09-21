@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 // import { FlightService } from 'src/app/services/flight.service';
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
+// import { data } from './airport';
 
 @Component({
   selector: 'app-search-airport',
@@ -32,7 +33,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   loading = false;
 
   ngOnInit() {
-   
+
   }
 
   ngDocheck() {
