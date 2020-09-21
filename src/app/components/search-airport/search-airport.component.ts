@@ -60,17 +60,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
     this.loading = true;
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       // console.log(response);
-      this.data = response.map(res => {
-        this.loading = false;
-        return {
-          id: res.id,
-          name: res.name,
-          code: res.code,
-          city: res.city,
-          country: res.country,
-          display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-        };
-      });
+      this.loading = false;
+      this.data = response;
     },
       error => {
         this.loading = false;

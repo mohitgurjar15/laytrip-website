@@ -1,19 +1,37 @@
 <div [formGroup]="form">
     <label>{{label}}</label>
-    <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
-        bindLabel="display_name" bindValue="city" [clearable]="true" minTermLength="3" notFoundText=""
-        (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)" class="laytrip-input"
-        placeholder="{{ placeHolder }}">
-        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-            <ul class="item-list">
-                <li class="item">
-                    <div class="item-left">
-                        <p class="item-name">{{item.city}}</p>
-                        <p class="item-city-country">{{item.code}},{{item.name}}</p>
-                    </div>
-                </li>
-            </ul>
+    <ng-select [formControlName]="controlName" groupBy="sub_airport" [loading]="loading" id="{{id}}"
+        [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="display_name" [clearable]="true"
+        notFoundText="" loadingText="" (change)="selectEvent($event, id)" (search)="onChangeSearch($event)"
+        class="laytrip-input" placeholder="{{ placeHolder }}" [selectableGroup]="true">
+
+        <!-- <ng-template ng-optgroup-tmp let-item="item">
+            {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
         </ng-template>
+        <ng-template ng-option-tmp let-item="item">
+            {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
+        </ng-template> -->
+
+        <ng-container>
+            <ng-template>
+                <div *ngIf="data.sub_airport">
+                    <ng-template ng-optgroup-tmp let-item="item">
+                        {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <div *ngFor="let i of item.sub_airport">
+                            {{i.code}} {{i.city}},{{i.country}}-{{i.name}}
+                        </div>
+                    </ng-template>
+                </div>
+            </ng-template>
+            <ng-template ng-optgroup-tmp let-item="item">
+                <div *ngIf="!data.sub_airport">
+                    {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
+                </div>
+            </ng-template>
+        </ng-container>
+
         <ng-template ng-label-tmp let-item="item">
             {{item.city}}
         </ng-template>

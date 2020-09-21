@@ -6,6 +6,7 @@
             top: 100%;
             background: $background-white;
             left: 0;
+            width:500px;
         }
 
         .ng-input {
@@ -79,8 +80,14 @@
                 border-top-color: #fff !important;
             }
             .ng-dropdown-panel-items {
+                .ng-optgroup{
+                    font-size: 14px;
+                    font-weight: normal;
+                }
                 .ng-option {
-                    padding: 0px 0px !important;
+                    font-size: 13px;
+                    font-weight: normal;
+                    //padding: 0px 0px !important;
                 }
             }
         }
@@ -119,7 +126,7 @@
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
     width: 13px;
     height: 13px;
-    top: auto; /* to remove the default positioning */
+    top: auto;
     // bottom: 0;
     top: -6px;
     background-color: #fff;
