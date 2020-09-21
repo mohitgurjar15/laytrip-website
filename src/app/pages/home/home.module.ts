@@ -13,7 +13,7 @@ import { MobileAndSubscribeComponent } from './mobile-and-subscribe/mobile-and-s
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
-
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -32,7 +32,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    CalendarModule
   ]
 })
 export class HomeModule { }

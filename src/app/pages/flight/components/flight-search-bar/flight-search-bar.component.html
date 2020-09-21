@@ -117,16 +117,15 @@
                       <div class="date_form">
                         <div class="search_area">
                           <label>Departure</label>
-                          <input type="text" name="daterange" 
-                              ngxDaterangepickerMd 
-                              formControlName="departureDate" 
-                              class="form-control date_icon"
-                              [singleDatePicker]="true" 
-                              (datesUpdated)="departureDateUpdate($event)"
-                              [locale]="locale"
-                              [autoApply]="true"
-                              [minDate]="flightDepartureMinDate"
-                              />
+                          <p-calendar 
+                              inputId="basic" 
+                              [(ngModel)]="departureDate" 
+                              [ngModelOptions]="{standalone: true}"
+                              flightDepartureMinDate
+                              [minDate]="flightDepartureMinDate" 
+                              (onSelect)=departureDateUpdate($event)
+                              [readonlyInput]="true" >
+                          </p-calendar>
                           <div class="prev-next">
                             <a href="javascript:void(0);">Prev</a>
                             <a href="javascript:void(0);">Next</a>
