@@ -35,7 +35,8 @@ import { AddGuestCardComponent } from './add-guest-card/add-guest-card.component
     CountdownModule,
     Ng5SliderModule,
     NgxDaterangepickerMd.forRoot(),
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    
 
   ],
   exports: [

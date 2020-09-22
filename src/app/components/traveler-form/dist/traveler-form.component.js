@@ -98,11 +98,11 @@ var TravelerFormComponent = /** @class */ (function () {
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
-            this.dobMinDate = moment().add(-12, 'year');
+            this.dobMinDate = new Date(); //moment().add(-12, 'year');
             this.dobMaxDate = moment().add(-2, 'year');
         }
         else if (this.type === 'infant') {
-            this.dobMinDate = moment().add(-2, 'year');
+            this.dobMinDate = new Date(); //moment().add(-2, 'year');
             this.dobMaxDate = moment();
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
