@@ -1,5 +1,6 @@
 import { Component, EventEmitter,  Input,  OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-guest-card',
@@ -22,6 +23,7 @@ export class AddGuestCardComponent implements OnInit {
   isValidCardNumber:boolean=true;
   isValidCvv:boolean=true;
   isValidExpiry:boolean=true;
+  expiryMinDate=new Date();
 
   ngOnInit() {
     this.validateCardDetails.subscribe(event => {
@@ -37,7 +39,7 @@ export class AddGuestCardComponent implements OnInit {
 
   expiryDateUpdate(event){
     //console.log("event",this.expiryDate)
-    this.cardDetails.expiry='10/2021';
+    this.cardDetails.expiry=moment(this.expiryDate).format('MM/YYYY');
     this.emitGuestCardDetails.emit(this.cardDetails);
   }
   validateCard(event){
