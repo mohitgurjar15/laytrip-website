@@ -21,6 +21,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
 import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enquiry-info.component';
 import { AddGuestCardComponent } from './add-guest-card/add-guest-card.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -36,8 +37,7 @@ import { AddGuestCardComponent } from './add-guest-card/add-guest-card.component
     Ng5SliderModule,
     NgxDaterangepickerMd.forRoot(),
     CookieModule.forRoot(),
-    
-
+    CalendarModule
   ],
   exports: [
     SearchAirportComponent,

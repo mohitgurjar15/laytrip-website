@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
   selectResponse: any = {};
   seletedDob :any;
 
-  dobMinDate: any;
+  dobMinDate= new Date();
   dobMaxDate: moment.Moment = moment();
   locale = {
     format: 'DD/MM/YYYY',
@@ -83,9 +83,7 @@ export class ProfileComponent implements OnInit {
       state_id: ['', [Validators.required]],
       city_name: ['', [Validators.required]],
       gender: [''],
-      dob: [{
-        startDate: this.dobMaxDate
-      }, Validators.required],
+      dob: ['', Validators.required],
       profile_pic: [''],      
       address2: [''],      
       language_id: [''],      
@@ -144,10 +142,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  dobDateUpdate(date) {
+  /* dobDateUpdate(date) {
     this.dobMinDate = moment(this.profileForm.value.dob.startDate)
   }
-
+ */
   clickGender(event,type){
     this.is_type = '';
     this.is_gender = false;       
@@ -209,9 +207,7 @@ export class ProfileComponent implements OnInit {
         state_id: res.state.name,       
         city_name  : res.cityName,        
         address  : res.address,  
-        dob: [{
-          startDate:  this.seletedDob
-        }],  
+        dob: '',  
         language_id : res.preferredLanguage.name,     
         currency_id : res.preferredCurrency.code,     
         profile_pic: res.profilePic  
@@ -243,7 +239,7 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
-      console.log(this.profileForm.value)
+
       formdata.append("title",this.profileForm.value.title);
       formdata.append("first_name",this.profileForm.value.first_name);
       formdata.append("last_name",this.profileForm.value.last_name);
@@ -254,7 +250,7 @@ export class ProfileComponent implements OnInit {
       formdata.append("address1",this.profileForm.value.address);
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
-      formdata.append("dob", typeof this.profileForm.value.dob.startDate === 'object' ? moment(this.profileForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.commonFunctoin.stringToDate(this.profileForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),);
+      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : '');
 
       if(!Number.isInteger(this.profileForm.value.country_id)){
         formdata.append("country_id", this.selectResponse.country.id);

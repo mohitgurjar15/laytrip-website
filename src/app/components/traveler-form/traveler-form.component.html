@@ -131,18 +131,18 @@
     <div class="form_row">
       <div class="form_field half">
         <label>DOB<sup>*</sup></label>
-        <!-- <input type="text" tabindex="6" ngxDaterangepickerMd formControlName="dob" showDropdowns="true"
+        <input type="text" tabindex="6" ngxDaterangepickerMd formControlName="dob" showDropdowns="true"
           alwaysShowCalendars="true" placeholder="" class="form-control custom_datpicker" [singleDatePicker]="true"
           (datesUpdated)="dobDateUpdate($event)" [locale]="locale" [autoApply]="true" [minDate]="dobMinDate"
-          [maxDate]="dobMaxDate" /> -->
-          <p-calendar 
+          [maxDate]="dobMaxDate" />
+         <!--  <p-calendar 
               inputId="basic" 
-              [(ngModel)]="dob"              
-              dobMinDate
-              [minDate]="dobMinDate" 
-              (onSelect)=departureDateUpdate($event)
+              class="custom_datpicker"
+              formControlName="dob" 
+              [minDate]="dobMinDate"
+              [maxDate]="dobMaxDate"
               [readonlyInput]="true"   >
-          </p-calendar>
+          </p-calendar> -->
         <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
             date of birth.

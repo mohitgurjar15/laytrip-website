@@ -40,12 +40,12 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
+        this._adults = this._childs = this._infants = [];
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {
             this.is_traveller = true;
             this.travelerService.getTravelers().subscribe(function (res) {
                 _this.travelers = res.data;
-                _this._adults = _this._childs = _this._infants = [];
                 _this.travelers.forEach(function (element) {
                     if (element.user_type == 'adult') {
                         _this._adults.push(element);
@@ -57,7 +57,6 @@ var FlightTravelerComponent = /** @class */ (function () {
                         _this._infants.push(element);
                     }
                 });
-                console.log(_this._adults);
                 _this.loading = false;
             });
         }
@@ -86,7 +85,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         else {
             var errorMessage = "You have to select " + Number(this._itinerary.adult) + " Adult, "
                 + Number(this._itinerary.child) + " Child " + Number(this._itinerary.infant) + " Infant";
-            this.toastr.error(errorMessage, 'Invalid Criteria');
+            this.toastr.error(errorMessage, 'Invalid Criteria', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
     };
     FlightTravelerComponent.prototype.checkUser = function () {
@@ -97,10 +96,10 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.ngDoCheck = function () {
         this.checkUser();
-        if (this.is_traveller === false) {
-            this.loading = true;
-            // this.getTravelers();
-        }
+        /*  if(this.is_traveller === false){
+           // this.loading = true;
+           // this.getTravelers();
+         } */
     };
     FlightTravelerComponent = __decorate([
         core_1.Component({

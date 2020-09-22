@@ -30,6 +30,7 @@ var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var ngx_cookie_1 = require("ngx-cookie");
 var booking_enquiry_info_component_1 = require("./booking-enquiry-info/booking-enquiry-info.component");
 var add_guest_card_component_1 = require("./add-guest-card/add-guest-card.component");
+var calendar_1 = require("primeng/calendar");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
@@ -48,6 +49,7 @@ var ComponentsModule = /** @class */ (function () {
                 ng5_slider_1.Ng5SliderModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
                 ngx_cookie_1.CookieModule.forRoot(),
+                calendar_1.CalendarModule
             ],
             exports: [
                 search_airport_component_1.SearchAirportComponent,

@@ -15,6 +15,7 @@ import { HotelsComponent } from './bookings/hotels/hotels.component';
 import { AccommodationsComponent } from './bookings/accommodations/accommodations.component';
 import { FlightLoaderComponent } from '../../flight/components/flight-loader/flight-loader.component';
 import { FlightNotFoundComponent } from '../../flight/components/flight-not-found/flight-not-found.component';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { FlightNotFoundComponent } from '../../flight/components/flight-not-foun
     NgSelectModule,
     NgbModule,
     NgxDaterangepickerMd.forRoot(),
+    CalendarModule
   ],
   providers: [DatePipe],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

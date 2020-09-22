@@ -22,6 +22,7 @@ var list_bookings_component_1 = require("./bookings/list-bookings.component");
 var flights_component_1 = require("./bookings/flights/flights.component");
 var hotels_component_1 = require("./bookings/hotels/hotels.component");
 var accommodations_component_1 = require("./bookings/accommodations/accommodations.component");
+var calendar_1 = require("primeng/calendar");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -44,6 +45,7 @@ var MyAccountsModule = /** @class */ (function () {
                 ng_select_1.NgSelectModule,
                 ng_bootstrap_1.NgbModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
+                calendar_1.CalendarModule
             ],
             providers: [common_1.DatePipe],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]

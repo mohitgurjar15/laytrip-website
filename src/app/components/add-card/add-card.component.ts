@@ -31,6 +31,7 @@ export class AddCardComponent implements OnInit {
     displayFormat: 'MM/YYYY'
   };
   saveCardLoader:boolean=false;
+  expiryMinDate=new Date();
 
   ngOnInit() {
 
@@ -93,13 +94,12 @@ export class AddCardComponent implements OnInit {
     if (this.cardForm.invalid) {
       return;
     } 
-    console.log(moment(this.cardForm.controls.expiry.value.startDate).format('MM/YYYY'))
     let cardData={
       first_name: this.cardForm.controls.first_name.value,
       last_name: this.cardForm.controls.last_name.value,
       card_cvv: this.cardForm.controls.card_cvv.value,
       card_number: this.cardForm.controls.card_number.value,
-      expiry : moment(this.cardForm.controls.expiry.value.startDate).format('MM/YYYY')
+      expiry : moment(this.cardForm.controls.expiry.value).format('MM/YYYY')
     }
     this.saveCard(cardData);
   }
