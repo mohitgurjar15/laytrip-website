@@ -49,6 +49,8 @@ export class FlightCheckoutComponent implements OnInit {
     customInstalment:number | null;
     newCard;
     guestCardDetails;
+    isFlightNotAvailable:boolean=false;
+    isSessionTimeOut:boolean=false;
 
     ngOnInit() {
       this.userInfo = getLoginUserInfo();
@@ -62,14 +64,14 @@ export class FlightCheckoutComponent implements OnInit {
       timerInfo = timerInfo ? JSON.parse(timerInfo) : {};
       if(timerInfo.route_code==this.routeCode){
         this.bookingTimerConfig={
-          leftTime : 1200 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
+          leftTime : 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
           format: 'm:s'
         }
       }
       else{
         
         this.bookingTimerConfig={
-          leftTime: 1200, format: 'm:s'
+          leftTime: 600, format: 'm:s'
         };
 
         let bookingTimer={
@@ -233,6 +235,7 @@ export class FlightCheckoutComponent implements OnInit {
     getFlightSummaryData(data){
 
       this.flightSummary=data;
+      this.sellingPrice = data[0].selling_price;
     }
 
     getInstalmentData(data){
@@ -261,5 +264,14 @@ export class FlightCheckoutComponent implements OnInit {
       catch(error){
         return error.message;
       }
+    }
+
+    flightAvailable(event){
+      this.isFlightNotAvailable=event;
+    }
+
+    sessionTimeout(event){
+      console.log("this.isSessionTimeOut",event)
+      this.isSessionTimeOut=event;
     }
 }

@@ -24,6 +24,8 @@ import { CookieModule } from 'ngx-cookie';
 import { FlightBookingFailedComponent } from './components/flight-booking-failed/flight-booking-failed.component';
 import { CalendarModule } from 'primeng/calendar';
 import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
+import { FlightNotAvailableComponent } from './components/flight-not-available/flight-not-available.component';
+import { FlightSessionTimeOutComponent } from './components/flight-session-time-out/flight-session-time-out.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { FlightLoaderComponent } from './components/flight-loader/flight-loader.
     BookingSummaryLoaderComponent,
     FlightConfirmationComponent,
     FlightBookingFailedComponent,
-    FlightLoaderComponent
+    FlightLoaderComponent,
+    FlightNotAvailableComponent,
+    FlightSessionTimeOutComponent
   ],
   imports: [
     CommonModule,

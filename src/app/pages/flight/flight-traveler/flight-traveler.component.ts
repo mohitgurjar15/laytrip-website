@@ -26,6 +26,7 @@ export class FlightTravelerComponent implements OnInit {
   totalTraveler = 0;
   _itinerary :any;
   _travellersCountValid :boolean = false;
+  isFlightNotAvailable:boolean=false;
 
   constructor(
     private travelerService:TravelerService,
@@ -111,5 +112,9 @@ export class FlightTravelerComponent implements OnInit {
       // this.loading = true;
       // this.getTravelers();
     } */
+  }
+
+  flightAvailable(event){
+    this.isFlightNotAvailable=event;
   }
 }

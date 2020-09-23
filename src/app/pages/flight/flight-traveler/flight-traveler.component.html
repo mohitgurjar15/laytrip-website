@@ -48,8 +48,9 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <app-flight-summary ></app-flight-summary>
+                <app-flight-summary (flightAvailable)="flightAvailable($event)"></app-flight-summary>
             </div>
         </div>
     </div>
-<section></section>        
+</section>       
+<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 

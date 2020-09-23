@@ -6,6 +6,7 @@ import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { getLoginUserInfo } from '../../_helpers/jwt.helper';
 declare var $: any;
 
 @Component({
@@ -24,7 +25,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
   isCurrencySet: boolean = false;
   isLoggedIn = false;
-  totalLayCredit=0;
+  totalLayCredit;
+  userDetails;
 
   constructor(
     private genericService: GenericService,
@@ -68,6 +70,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getCurrencies();
     this.loadJquery();
     this.totalLaycredit();
+    this.userDetails = getLoginUserInfo();
+    console.log(this.userDetails);
   }
 
   ngDoCheck() {
