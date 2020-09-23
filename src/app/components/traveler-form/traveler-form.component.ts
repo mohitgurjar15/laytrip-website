@@ -58,8 +58,8 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
     this.adultForm = this.formBuilder.group({
-      title: [''],
-      gender: ['', Validators.required],
+      title: ['mr'],
+      gender: ['M', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],

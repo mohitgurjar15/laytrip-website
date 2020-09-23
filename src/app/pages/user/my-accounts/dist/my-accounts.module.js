@@ -24,6 +24,9 @@ var hotels_component_1 = require("./bookings/hotels/hotels.component");
 var accommodations_component_1 = require("./bookings/accommodations/accommodations.component");
 var calendar_1 = require("primeng/calendar");
 var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
+var history_list_component_1 = require("./payment-history/history-list/history-list.component");
+var view_history_component_1 = require("./payment-history/view-history/view-history.component");
+var flight_module_1 = require("../../flight/flight.module");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -39,6 +42,8 @@ var MyAccountsModule = /** @class */ (function () {
                 hotels_component_1.HotelsComponent,
                 accommodations_component_1.AccommodationsComponent,
                 list_payment_history_component_1.ListPaymentHistoryComponent,
+                history_list_component_1.HistoryListComponent,
+                view_history_component_1.ViewHistoryComponent,
             ],
             imports: [
                 common_1.CommonModule,
@@ -47,7 +52,8 @@ var MyAccountsModule = /** @class */ (function () {
                 ng_select_1.NgSelectModule,
                 ng_bootstrap_1.NgbModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
-                calendar_1.CalendarModule
+                calendar_1.CalendarModule,
+                flight_module_1.FlightModule
             ],
             providers: [common_1.DatePipe],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]

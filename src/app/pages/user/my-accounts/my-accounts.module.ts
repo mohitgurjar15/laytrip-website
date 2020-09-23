@@ -19,6 +19,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { HistoryListComponent } from './payment-history/history-list/history-list.component';
 import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
+import { FlightModule } from '../../flight/flight.module';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ViewHistoryComponent } from './payment-history/view-history/view-histor
     NgSelectModule,
     NgbModule,
     NgxDaterangepickerMd.forRoot(),
-    CalendarModule
+    CalendarModule,
+    FlightModule  
   ],
   providers: [DatePipe],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

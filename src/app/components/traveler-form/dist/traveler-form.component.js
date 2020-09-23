@@ -39,8 +39,8 @@ var TravelerFormComponent = /** @class */ (function () {
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
         this.adultForm = this.formBuilder.group({
-            title: [''],
-            gender: ['', forms_1.Validators.required],
+            title: ['mr'],
+            gender: ['M', forms_1.Validators.required],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
