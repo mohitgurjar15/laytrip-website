@@ -12,14 +12,14 @@
               <div class="list_top">
                   <div class="list_left">
                       <ul>
-                          <li>Total Paid: <span>$ {{item.paidAmount || 0}}</span></li>
+                          <li>Total Paid: <span>$ {{item.paidAmount | number : '1.2-2' || 0}}</span></li>
                           <li>
                               <div class="progress">
                                   <div class="progress-bar" style="width: 25%;"></div>
                                   <div class="progress_dot" style="left:23%;"></div>
                               </div>
                           </li>
-                          <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount) }}</span></li>
+                          <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
                       </ul>
                   </div>
                   <div class="list_right">
@@ -33,13 +33,13 @@
                   <div class="grid_block">
                       <ul>
                           <li class="fb_medium">Order ID: <span>{{item.id || '--'}}</span></li>
-                          <li>Order Type: <span>{{item.module.name || '--'}}</span></li>
+                          <li>Order Type: <span>{{ item.module.name | titlecase  }}</span></li>
                       </ul>
                   </div>
                   <div class="grid_block">
                       <ul>
                           <li class="fb_medium">Total Amount: <span>$360</span></li>
-                          <li>Instalment: <span>${{item.totalAmount || 0}} / Weekly</span></li>
+                          <li>Instalment: <span>${{item.totalAmount | number : '1.2-2' || 0}} / Weekly</span></li>
                       </ul>
                   </div>
                   <div class="grid_block">

@@ -10,20 +10,21 @@
         </div>
           <div class="col-lg-9">
               <div class="account_cnt_main booking_main">
-                
-                  <div class="block_filter_payment">
-                      <div class="filter_form">
-                          <div class="form_row">
-                              <div class="form_field">
-                                  <label>Order ID</label>
-                                  <div class="text_field">
-                                      <input type="text" name="fname" maxlength="20" tabindex="1" placeholder="First Name">
-                                  </div>
+                <form [formGroup]="filterForm" >
+            
+                    <div class="block_filter_payment">
+                        <div class="filter_form">
+                            <div class="form_row">
+                                <div class="form_field">
+                                    <label>Order ID</label>
+                                    <div class="text_field">
+                                      <input type="text" formControlName="bookingId" maxlength="30" tabindex="1" placeholder="Order Id">
+                                    </div>                                    
                               </div>
                               <div class="form_field">
                                   <label>Booking Type</label>
                                   <div class="text_field custom-select">
-                                      <select>
+                                      <select formControlName="module">
                                           <option value="0">Flight</option>
                                           <option value="1">Hotel</option>
                                           <option value="2">Accommodations</option>
@@ -35,22 +36,22 @@
                               <div class="form_field">
                                   <label>Payment Start Date</label>
                                   <div class="text_field">
-                                      <input class="birth_date" type="text" name="email" maxlength="20" tabindex="3" placeholder="Dd/mm/yyyy">
+                                      <input class="birth_date" type="text" formControlName="start_date"  tabindex="3" placeholder="Dd/mm/yyyy">
                                   </div>
                               </div>
                               <div class="form_field">
                                   <label>Payment End Date</label>
                                   <div class="text_field">
-                                      <input class="birth_date" type="text" name="email" maxlength="20" tabindex="3" placeholder="Dd/mm/yyyy">
+                                      <input class="birth_date" type="text" formControlName="end_date"  tabindex="4" placeholder="Dd/mm/yyyy">
                                   </div>
                               </div>
                           </div>
                       </div>
                       <div class="filter_btn">
-                          <button>Filter</button>
+                          <button (click)="onSubmit()">Filter</button>
                       </div>
-                  </div>
-              
+                    </div>
+                </form>
                   <div class="block_booking_list block_payment_list">
                       <ul id="payment_tabs" class="nav nav-tabs" role="tablist">
                           <li class="nav-item">

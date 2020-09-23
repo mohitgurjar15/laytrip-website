@@ -14,15 +14,14 @@ export class HistoryListComponent implements OnInit {
 
   ngOnInit() {
   }
+
   ngOnChanges(changes:SimpleChanges){
     this.list = changes.historyResult.currentValue;
     if(this.list &&  this.list != 'undefined' ){
-
     }
   }
-  /* ngAfterContentChecked() {
-    this.historys = this.historyResult;
-  } */
+  
+  
 
   
 }

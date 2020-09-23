@@ -9,9 +9,10 @@ exports.__esModule = true;
 exports.ListPaymentHistoryComponent = void 0;
 var core_1 = require("@angular/core");
 var ListPaymentHistoryComponent = /** @class */ (function () {
-    function ListPaymentHistoryComponent(userService, commonFunction) {
+    function ListPaymentHistoryComponent(userService, commonFunction, formBuilder) {
         this.userService = userService;
         this.commonFunction = commonFunction;
+        this.formBuilder = formBuilder;
         this.loading = true;
         this.isNotFound = false;
         this.perPageLimitConfig = [10, 25, 50, 100];
@@ -21,12 +22,17 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
         this.getPaymentHistory();
+        this.filterForm = this.formBuilder.group({
+            bookingId: [''],
+            start_date: [''],
+            end_date: [''],
+            module: ['']
+        });
     };
     ListPaymentHistoryComponent.prototype.getPaymentHistory = function () {
         var _this = this;
         this.userService.getPaymentHistory(this.pageNumber, this.limit).subscribe(function (res) {
             _this.historyResult = res.data;
-            console.log(_this.historyResult);
             _this.isNotFound = false;
             _this.loading = false;
         }, function (err) {
@@ -35,6 +41,15 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
                 _this.loading = false;
             }
         });
+    };
+    ListPaymentHistoryComponent.prototype.onSubmit = function () {
+        if (this.filterForm.invalid) {
+            this.loading = false;
+            return;
+        }
+        else {
+            console.log(this.filterForm.value);
+        }
     };
     ListPaymentHistoryComponent = __decorate([
         core_1.Component({

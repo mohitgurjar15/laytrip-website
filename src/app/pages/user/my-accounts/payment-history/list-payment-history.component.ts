@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 
@@ -14,10 +15,12 @@ export class ListPaymentHistoryComponent implements OnInit {
   pageNumber:number;
   limit:number;
   historyResult:any;
+  filterForm: FormGroup;
 
   constructor(
     private userService: UserService,
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -25,13 +28,18 @@ export class ListPaymentHistoryComponent implements OnInit {
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
     this.getPaymentHistory();
+
+    this.filterForm = this.formBuilder.group({
+      bookingId: [''],
+      start_date: [''],
+      end_date: [''],
+      module: [''],
+    });
   }
 
   getPaymentHistory(){
     this.userService.getPaymentHistory(this.pageNumber, this.limit).subscribe((res: any) => {
         this.historyResult = res.data;
-        console.log(this.historyResult)
-
         this.isNotFound = false;
         this.loading = false;
       
@@ -40,8 +48,16 @@ export class ListPaymentHistoryComponent implements OnInit {
       if (err && err.status === 404) {
         this.loading = false;
       }
-    });
-    
+    });   
+  }
+
+  onSubmit(){
+    if (this.filterForm.invalid) {         
+      this.loading = false;      
+      return;
+    } else {
+      console.log(this.filterForm.value)
+    }
   }
 }
  
