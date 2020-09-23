@@ -22,10 +22,11 @@ import { CookieModule } from 'ngx-cookie';
 import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enquiry-info.component';
 import { AddGuestCardComponent } from './add-guest-card/add-guest-card.component';
 import { CalendarModule } from 'primeng/calendar';
+import { RedeemLaycreditComponent } from './redeem-laycredit/redeem-laycredit.component';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent, BookingEnquiryInfoComponent, AddGuestCardComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent, BookingEnquiryInfoComponent, AddGuestCardComponent, RedeemLaycreditComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +53,8 @@ import { CalendarModule } from 'primeng/calendar';
     AddCardComponent,
     FullPageOverlayLoaderComponent,
     BookingEnquiryInfoComponent,
-    AddGuestCardComponent
+    AddGuestCardComponent,
+    RedeemLaycreditComponent
   ],
   providers: [DatePipe],
 

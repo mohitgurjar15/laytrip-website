@@ -11,6 +11,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 })
 export class FlightSummaryComponent implements OnInit {
   @Output() totalTravelerValue = new EventEmitter();
+  @Output() flightAvailable= new EventEmitter();
   @Input() showPartialPayemntOption;
 
   routeCode:string='';
@@ -61,6 +62,8 @@ export class FlightSummaryComponent implements OnInit {
           if(error.status==404){
             //this.router.navigate(['/'])
           }
+
+          this.flightAvailable.emit(true)
       })
   }
 

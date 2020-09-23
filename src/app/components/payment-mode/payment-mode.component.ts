@@ -10,7 +10,7 @@ import * as moment from 'moment';
 })
 export class PaymentModeComponent implements OnInit {
 
-  @Output() applyLaycredit = new EventEmitter();
+  
   @Output() selectInstalmentMode = new EventEmitter();
   @Output() getInstalmentData = new EventEmitter<{
     additionalAmount:number,
@@ -25,11 +25,7 @@ export class PaymentModeComponent implements OnInit {
   @Input() flightSummary;
   sellingPrice:number;
   isInstalemtMode:boolean=false;
-  value: number = 100;
-  laycreditOptions: Options = {
-    floor: 0,
-    ceil: 600
-  };
+  
   instalmentRequest={
     instalment_type: "weekly",
     checkin_date: '',
@@ -58,18 +54,9 @@ export class PaymentModeComponent implements OnInit {
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemnts('weekly');
-    this.totalLaycredit();
   }
 
-  totalLaycredit(){
-    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
-      console.log("res",res)
-      this.totalLaycreditPoints=res.total_available_points;
-      this.laycreditOptions.ceil=res.total_available_points;
-    },(error=>{
-
-    }))
-  }
+  
 
   /**
    * 
@@ -128,10 +115,7 @@ export class PaymentModeComponent implements OnInit {
 
   }
 
-  selectLaycredit(changeContext: ChangeContext): void {
-    
-    this.applyLaycredit.emit(changeContext.value)
-  }
+  
 
   /**
    * 

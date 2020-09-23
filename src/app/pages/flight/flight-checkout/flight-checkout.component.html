@@ -1,11 +1,11 @@
-<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
+<app-checkout-progress  [progressStep]="progressStep"></app-checkout-progress>
 <section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
   <div class="container">
       <div class="row">
           <div class="col-lg-8">
               <div class="detail_info_left" *ngIf="bookingStatus==0">
                   <div class="block_payment">
-                      <app-booking-timer [config]="bookingTimerConfig"></app-booking-timer>
+                      <app-booking-timer (sessionTimeout)="sessionTimeout($event)" [config]="bookingTimerConfig"></app-booking-timer>
                       <div class="block_pay_info">
                           <div class="block_travellers">
                               <h6>Travellers</h6>
@@ -16,13 +16,20 @@
                           </div>
                         </div>
                         <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
-                            <app-payment-mode 
-                                *ngIf="flightSummary.length" 
-                                [flightSummary]="flightSummary" 
-                                (selectInstalmentMode)="selectInstalmentMode($event)" 
-                                (applyLaycredit)="applyLaycredit($event)" 
-                                (getInstalmentData)="getInstalmentData($event)">
-                            </app-payment-mode>
+                            <div class="block_payment_mode">
+                                <div class="block_title_section">
+                                    <h5>Choose Payment Mode</h5>
+                                </div>
+                                <div class="block_detail">
+                                    <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                    <app-payment-mode 
+                                        *ngIf="flightSummary.length" 
+                                        [flightSummary]="flightSummary" 
+                                        (selectInstalmentMode)="selectInstalmentMode($event)" 
+                                        (getInstalmentData)="getInstalmentData($event)">
+                                    </app-payment-mode>
+                                </div>
+                            </div>
                         </div>
                         <div class="block_pay_info">
                             <app-booking-enquiry-info></app-booking-enquiry-info>
@@ -67,10 +74,12 @@
               <app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
           </div>
           <div class="col-lg-4">
-            <app-flight-summary showPartialPayemntOption="instalmentMode" (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
+            <app-flight-summary (flightAvailable)="flightAvailable($event)" showPartialPayemntOption="instalmentMode" (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
           </div>
       </div>
   </div>
 </section>
 
 <app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png" title="Flights"></app-full-page-overlay-loader>
+<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
+<app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>
