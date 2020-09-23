@@ -1,14 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked, HostListener } from '@angular/core';
 // import { FlightService } from 'src/app/services/flight.service';
 import { FlightService } from '../../services/flight.service';
-import { FormControl, FormGroup } from '@angular/forms';
-// import { data } from './airport';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { sampleData } from './airport';
+import { KeyCode } from './custom-select-types';
 
 @Component({
   selector: 'app-search-airport',
   templateUrl: './search-airport.component.html',
   styleUrls: ['./search-airport.component.scss']
 })
+
 export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   @Input() label: string;
@@ -18,13 +20,21 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Input() swappedData;
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
+  @Input() clearable;
   @Output() changeValue = new EventEmitter<any>();
   @Output() getSwapValue = new EventEmitter<any>();
 
+  // @HostListener('window:keyup', ['$event'])
+  // keyEvent(event: KeyboardEvent) {
+  //   console.log(event);
+  // }
+
   constructor(
     private flightService: FlightService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private fb: FormBuilder,
   ) {
+
   }
 
   selectedAirport = [];
@@ -32,8 +42,39 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   data = [];
   loading = false;
 
-  ngOnInit() {
+  showDropDown = false;
 
+  ngOnInit() {
+  }
+
+  openDropDown() {
+    if (this.data && this.data.length) {
+      this.showDropDown = true;
+    } else {
+      this.showDropDown = false;
+    }
+  }
+  removeInput(event) {
+    if (event.keyCode === 8 && this.form.controls[`${this.controlName}`].value === '') {
+      this.showDropDown = false;
+    }
+  }
+  selectValue(value, index) {
+    this.showDropDown = false;
+    const selectedValue = value.city + '(' + value.code + ')';
+    this.form.controls[`${this.controlName}`].setValue(selectedValue);
+    const selectedEvent = {
+      id: value.id,
+      name: value.name,
+      code: value.code,
+      city: value.city,
+      country: value.country,
+      display_name: value.display_name
+    };
+    this.selectEvent(selectedEvent, index);
+  }
+  closeDropDown() {
+    this.showDropDown = false;
   }
 
   ngDocheck() {
@@ -62,6 +103,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
       // console.log(response);
       this.loading = false;
       this.data = response;
+      this.showDropDown = true;
     },
       error => {
         this.loading = false;
@@ -70,9 +112,12 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   }
 
   onChangeSearch(event) {
-    if (event.term.length > 2) {
-      this.searchAirport(event.term);
+    if (event.target.value.length > 2) {
+      this.searchAirport(event.target.value);
     }
+    // if (event.term.length > 2) {
+    //   this.searchAirport(event.term);
+    // }
   }
 
   selectEvent(event, index) {
@@ -92,5 +137,11 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
     // } else if (event && index && index === 'toSearch') {
     //   this.getSwapValue.emit({ key: 'toSearch', value: event });
     // }
+  }
+
+  clearSearchedAirport() {
+    this.form.controls[`${this.controlName}`].setValue('');
+    this.selectedAirport = [];
+    this.defaultSelected = this.defaultSelected;
   }
 }

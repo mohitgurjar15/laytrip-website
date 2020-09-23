@@ -67,3 +67,36 @@
     }
 }
 
+.search-bar {
+    padding-right: 0px !important;
+}
+
+.search-drop-down {
+    position: absolute;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 10;
+    background-color: #f6f6f6;
+    font-family: sans-serif;
+    opacity: 0.98;
+}
+
+.search-results {
+    padding: 10px;
+}
+
+.search-results {
+    li:hover {
+        background: #707070;
+    }
+}
+
+.custom-remove {
+    font-size: 15px !important;
+    line-height: 1.7;
+    padding-left: 0px !important;
+    .remove-icon {
+        cursor: pointer;
+    }
+}

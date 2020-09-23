@@ -1,4 +1,4 @@
-export const data = [
+export const sampleData = [
   {
     id: 51,
     name: 'Atkamba',

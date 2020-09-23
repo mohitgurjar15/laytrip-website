@@ -1,16 +1,9 @@
-<div [formGroup]="form">
+<!-- <div [formGroup]="form">
     <label>{{label}}</label>
     <ng-select [formControlName]="controlName" groupBy="sub_airport" [loading]="loading" id="{{id}}"
         [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="display_name" [clearable]="true"
         notFoundText="" loadingText="" (change)="selectEvent($event, id)" (search)="onChangeSearch($event)"
         class="laytrip-input" placeholder="{{ placeHolder }}" [selectableGroup]="true">
-
-        <!-- <ng-template ng-optgroup-tmp let-item="item">
-            {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
-        </ng-template>
-        <ng-template ng-option-tmp let-item="item">
-            {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
-        </ng-template> -->
 
         <ng-container>
             <ng-template>
@@ -40,4 +33,37 @@
     <ng-template #selectedAirport>
         <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
     </ng-template>
+</div> -->
+
+<div [formGroup]="form" (clickOutsideOfDropdown)="closeDropDown()">
+    <label>{{label}}</label>
+    <div class="d-flex">
+        <input [formControlName]="controlName" placeholder="{{ placeHolder }}" id="{{id}}" (input)="onChangeSearch($event)"
+            (click)="openDropDown()" (keydown)="removeInput($event)" class="input-underline search-bar" type="text">
+        <span *ngIf="clearable && selectedAirport && selectedAirport.code" class="custom-remove" title="Clear all" (click)="clearSearchedAirport()"><span class="remove-icon fa fa-remove text-danger"></span></span>
+    </div>
+</div>
+<div>
+    <div *ngIf="showDropDown" class="search-drop-down">
+        <div (click)="selectValue(airport, id)" class="search-results" *ngFor="let airport of data">
+
+            <div>
+                <ul *ngIf="airport && airport.sub_airport && !airport.sub_airport.length">
+                    <li>{{airport.code}} {{airport.city}} - {{airport.name}}</li>
+                </ul>
+                <ul *ngIf="airport && airport.sub_airport && airport.sub_airport.length">
+                    <li>{{airport.code}} {{airport.city}} - {{airport.name}}</li>
+                    <li *ngFor="let subAirport of airport.sub_airport">
+                        {{subAirport.code}} {{subAirport.city}} - {{subAirport.name}}
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <span *ngIf="defaultSelected">{{ defaultSelected }}</span>
+    <span *ngIf="selectedAirport">{{ selectedAirport.code}} {{selectedAirport.country}}</span>
+    <!-- <div *ngIf="selectedAirport">
+        <span *ngIf="selectedAirport">{{ selectedAirport.code}} {{selectedAirport.country}}</span>
+    </div> -->
 </div>

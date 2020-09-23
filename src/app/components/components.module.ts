@@ -20,10 +20,24 @@ import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
 import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enquiry-info.component';
+import { ClickOutsideOfDropdownDirective } from './search-airport/dropdown.directive';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent, BookingEnquiryInfoComponent
+    SearchAirportComponent,
+    TravellerInfoComponent,
+    CheckoutProgressComponent,
+    AdultListComponent,
+    ChildListComponent,
+    InfantListComponent,
+    BookingTimerComponent,
+    PaymentModeComponent,
+    CardListComponent,
+    AddCardComponent,
+    TravelerFormComponent,
+    FullPageOverlayLoaderComponent,
+    BookingEnquiryInfoComponent,
+    ClickOutsideOfDropdownDirective
   ],
   imports: [
     CommonModule,
@@ -34,8 +48,7 @@ import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enqu
     CountdownModule,
     Ng5SliderModule,
     NgxDaterangepickerMd.forRoot(),
-    CookieModule.forRoot()
-
+    CookieModule.forRoot(),
   ],
   exports: [
     SearchAirportComponent,
@@ -49,9 +62,10 @@ import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enqu
     CardListComponent,
     AddCardComponent,
     FullPageOverlayLoaderComponent,
-    BookingEnquiryInfoComponent
+    BookingEnquiryInfoComponent,
+    ClickOutsideOfDropdownDirective
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, ClickOutsideOfDropdownDirective],
 
 })
 export class ComponentsModule { }

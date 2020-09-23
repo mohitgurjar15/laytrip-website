@@ -69,8 +69,8 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef
   ) {
     this.flightSearchForm = this.fb.group({
-      fromDestination: [[Validators.required]],
-      toDestination: [[Validators.required]],
+      fromDestination: ['', [Validators.required]],
+      toDestination: ['', [Validators.required]],
       departureDate: [{
         startDate: moment().add(30, 'days')
       }, Validators.required],
