@@ -15,7 +15,8 @@ export class RedeemLaycreditComponent implements OnInit {
   value: number = 100;
   laycreditOptions: Options = {
     floor: 0,
-    ceil: 0
+    ceil: 0,
+    step: 0.1
   };
   constructor(
     private genericService:GenericService
