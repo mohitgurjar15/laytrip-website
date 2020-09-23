@@ -103,5 +103,26 @@ export class CommonFunction {
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     }
 
+    decodeUrl(url){
+        let prevUrl=[];
+        let queryParams={}
+        if(url){
+            prevUrl = url.split('?')
+            let params = prevUrl[1].split('&');
+            for(let i in params){
+              let param = params[i].split("=");
+              queryParams[param[0]]=param[1];
+            }
+
+            return {
+                url : prevUrl[0],
+                params : queryParams
+            }
+        }
+        return {
+            url : '/',
+            params : {}
+        };
+    }
 }
 
