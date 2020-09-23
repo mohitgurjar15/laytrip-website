@@ -223,11 +223,11 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
-    this.searchFlightInfo.departure_date =moment(this.departureDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+    this.searchFlightInfo.departure_date =moment(this.departureDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
 
     if (this.isRoundTrip === true) {
       this.searchFlightInfo.trip = 'roundtrip';
-      this.searchFlightInfo.arrival_date =moment(this.returnDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+      this.searchFlightInfo.arrival_date =moment(this.returnDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
     }
 
 
