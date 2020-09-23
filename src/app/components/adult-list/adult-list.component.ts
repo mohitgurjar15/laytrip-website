@@ -63,8 +63,6 @@ export class AdultListComponent implements OnInit {
     }
   }
 
-
-
   selectTraveler(event, traveler) {
     this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
     if (this._itinerary) {
@@ -128,12 +126,11 @@ export class AdultListComponent implements OnInit {
 
 
   ngDoCheck() {
-
     this.checkUser();
     this.containers = this.containers;
-
     if (this.travelers.length >= 0) {
       this.loader = false;
+      
     }
   }
 

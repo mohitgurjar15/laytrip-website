@@ -95,8 +95,6 @@ export class SigninComponent  implements OnInit {
       this.valueChange.emit({ key: 'signUp', value: this.pageData });
     }
   }
-
-  ngOnDestroy() {} 
   
   toggleFieldTextType(){
     this.fieldTextType = !this.fieldTextType;

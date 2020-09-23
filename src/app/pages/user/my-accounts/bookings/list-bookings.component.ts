@@ -23,6 +23,7 @@ export class ListBookingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
     this.getBookings();

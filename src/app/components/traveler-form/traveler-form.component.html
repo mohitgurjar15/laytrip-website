@@ -6,8 +6,10 @@
         <ul class="custom_listing">
           <li>
             <label class="custom_radio">Mr.
-              <input type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr" tabindex="0"
+              <input  *ngIf="traveler.gender" type="radio" data-title="{{traveler.title}}" formControlName="title" value="mr" tabindex="0"
                 [checked]="traveler.title === 'mr'">
+              <input type="radio" class="sss" formControlName="title" value="mr" tabindex="0"
+                checked="true">
               <span class="checkmark"></span>
             </label>
           </li>
@@ -33,8 +35,8 @@
         <ul class="custom_listing">
           <li>
             <label class="custom_radio">Male
-              <input type="radio" checked="checked" formControlName="gender" value="M"
-                [checked]="traveler.gender === 'M'">
+              <input *ngIf="traveler" type="radio" [checked]="traveler.gender === 'M'" formControlName="gender" value="M">
+              <input checked="true"  type="radio"  formControlName="gender" value="M">
               <span class="checkmark"></span>
             </label>
           </li>
@@ -135,15 +137,14 @@
           alwaysShowCalendars="true" placeholder="" class="form-control custom_datpicker" [singleDatePicker]="true"
           (datesUpdated)="dobDateUpdate($event)" [locale]="locale" [autoApply]="true" [minDate]="dobMinDate"
           [maxDate]="dobMaxDate" />
-         <!--  <p-calendar 
+<!--           <p-calendar 
               inputId="basic" 
-              class="custom_datpicker"
               formControlName="dob" 
-              [minDate]="dobMinDate"
-              [maxDate]="dobMaxDate"
-              [readonlyInput]="true"   >
-          </p-calendar> -->
-        <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
+              [minDate]="dobMinDate"             
+              [readonlyInput]="true"
+              >
+          </p-calendar>
+ -->        <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
             date of birth.
           </div>

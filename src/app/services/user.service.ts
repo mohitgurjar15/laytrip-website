@@ -117,4 +117,8 @@ export class UserService {
   getBookings(pageNumber,limit) {
     return this.http.get(`${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
   }
+
+  getPaymentHistory(pageNumber,limit) {
+    return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  }
 }

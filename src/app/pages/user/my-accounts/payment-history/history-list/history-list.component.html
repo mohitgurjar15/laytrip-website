@@ -1,0 +1,59 @@
+<div class="card-header" role="tab" id="heading-Active-pay">
+  <h5 class="mb-0">
+      <a data-toggle="collapse" href="#collapse-Active-pay" aria-expanded="true" aria-controls="collapse-Active-pay">
+          Active Payment
+      </a>
+  </h5>
+</div>
+<div id="collapse-Active-pay" class="collapse show" data-parent="#payment_content" role="tabpanel" aria-labelledby="heading-Active-pay">
+  <div class="card-body">
+      <div class="block_pay_list_inner">
+          <div class="pay_listing"  *ngFor="let item of list; let i = index;">
+              <div class="list_top">
+                  <div class="list_left">
+                      <ul>
+                          <li>Total Paid: <span>$ {{item.paidAmount || 0}}</span></li>
+                          <li>
+                              <div class="progress">
+                                  <div class="progress-bar" style="width: 25%;"></div>
+                                  <div class="progress_dot" style="left:23%;"></div>
+                              </div>
+                          </li>
+                          <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount) }}</span></li>
+                      </ul>
+                  </div>
+                  <div class="list_right">
+                      <p>Payment Due in <span>6 days</span></p>
+                      <div class="pay_status">
+                          Pay Early
+                      </div>
+                  </div>
+              </div>
+              <div class="list_btm">
+                  <div class="grid_block">
+                      <ul>
+                          <li class="fb_medium">Order ID: <span>{{item.id || '--'}}</span></li>
+                          <li>Order Type: <span>{{item.module.name || '--'}}</span></li>
+                      </ul>
+                  </div>
+                  <div class="grid_block">
+                      <ul>
+                          <li class="fb_medium">Total Amount: <span>$360</span></li>
+                          <li>Instalment: <span>${{item.totalAmount || 0}} / Weekly</span></li>
+                      </ul>
+                  </div>
+                  <div class="grid_block">
+                      <ul>
+                          <li>Payment Start: <span>27/01/2020</span></li>
+                          <li>Payment End: <span>27/01/2020</span></li>
+                      </ul>
+                  </div>
+                  <div class="grid_block">
+                      <span>Pending</span>
+                      <a href="javascript:void(0);" data-toggle="modal" data-target="#payment_view_modal">View Details</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

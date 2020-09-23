@@ -29,6 +29,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.editMode = false;
         this.formStatus = false;
         this.is_passport_required = false;
+        this._date = new Date();
         this.locale = {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
@@ -38,8 +39,8 @@ var TravelerFormComponent = /** @class */ (function () {
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
         this.adultForm = this.formBuilder.group({
-            title: [''],
-            gender: ['', forms_1.Validators.required],
+            title: ['mr'],
+            gender: ['M', forms_1.Validators.required],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
@@ -50,6 +51,8 @@ var TravelerFormComponent = /** @class */ (function () {
                     startDate: typeof this.traveler.dob !== 'undefined' ?
                         moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
                 }, forms_1.Validators.required],
+            // dob : ['', Validators.required],
+            // passport_expiry : [''],
             passport_expiry: [{
                     startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
                         moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
@@ -82,7 +85,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.countries_code = this.countries_code;
     };
     TravelerFormComponent.prototype.setUserTypeValidation = function () {
-        this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+        this._itinerary = this.cookieService.get('_itinerary') ? JSON.parse(this.cookieService.get('_itinerary')) : [];
         var emailControl = this.adultForm.get('email');
         var phoneControl = this.adultForm.get('phone_no');
         var countryControl = this.adultForm.get('country_code');
@@ -92,17 +95,20 @@ var TravelerFormComponent = /** @class */ (function () {
             emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
             phoneControl.setValidators([forms_1.Validators.required]);
             countryControl.setValidators([forms_1.Validators.required]);
+            // this.dobMinDate = '';
             this.dobMaxDate = moment().add(-12, 'year');
+            console.log('min dates', this.dobMinDate);
+            console.log('max dates', this.dobMaxDate);
         }
         else if (this.type === 'child') {
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
-            this.dobMinDate = new Date(); //moment().add(-12, 'year');
+            this.dobMinDate = moment().add(-12, 'year');
             this.dobMaxDate = moment().add(-2, 'year');
         }
         else if (this.type === 'infant') {
-            this.dobMinDate = new Date(); //moment().add(-2, 'year');
+            this.dobMinDate = moment().add(-2, 'year');
             this.dobMaxDate = moment();
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
