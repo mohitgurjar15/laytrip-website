@@ -69,9 +69,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getLangunages();
     this.getCurrencies();
     this.loadJquery();
-    this.totalLaycredit();
     this.userDetails = getLoginUserInfo();
-    console.log(this.userDetails);
+    if(Object.keys(this.userDetails).length>0){
+      if(this.userDetails.roleId!=7){
+        this.totalLaycredit();
+      }
+    }
   }
 
   ngDoCheck() {

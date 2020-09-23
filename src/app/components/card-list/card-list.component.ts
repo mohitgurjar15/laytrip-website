@@ -39,7 +39,6 @@ export class CardListComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes",changes)
     if (changes['newCard'].currentValue!='undefined') {
       if(this.newCard!='undefined'){
         this.cards.push(this.newCard)
@@ -49,6 +48,5 @@ export class CardListComponent implements OnInit {
     this.cards= this.cards.filter(card=>{
       return typeof card!='undefined'
     })
-    console.log(this.cards)
   }
 }
