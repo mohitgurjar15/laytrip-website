@@ -40,15 +40,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // const payload = {
-    //   source_location: 'JAI',
-    //   destination_location: 'DEL',
-    //   departure_date: '2020-12-06',
-    //   flight_class: 'Economy',
-    //   adult_count: 1,
-    //   child_count: 0,
-    //   infant_count: 0,
-    // };
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -78,6 +69,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     });
   }
 
+  
+
   getFlightSearchData(payload, tripType) {
     this.loading = true;
     // // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
@@ -91,7 +84,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     //     this.isNotFound = false;
     //   }
     // }));
-
+    
     if (payload && tripType === 'roundtrip') {
       // this.flightDetails = data.items;
       // this.filterFlightDetails = data;
