@@ -82,7 +82,7 @@ export class FlightSearchBarComponent implements OnInit {
   ) {
 
     this.departureDate = this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['departure_date'],'YYYY-MM-DD')
-    this.returnDate = this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['arrival_date'],'YYYY-MM-DD');
+    this.returnDate =this.route.snapshot.queryParams['arrival_date'] ? this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['arrival_date'],'YYYY-MM-DD'):this.commonFunction.convertDateFormat(moment(this.route.snapshot.queryParams['departure_date']).add(1,"days"),'YYYY-MM-DD') ;
     this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
     this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
