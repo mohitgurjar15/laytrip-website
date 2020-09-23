@@ -4,6 +4,7 @@ import { Options } from 'ng5-slider';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
+import { environment } from '../../../../../environments/environment';
 
 interface SliderDetails {
   value: number;
@@ -29,6 +30,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   departureTimeSlotCityName;
   currency;
   showMinAirline:number=4;
+  s3BucketUrl = environment.s3BucketUrl;
 
   /* Varibale for filter */
   minPrice:number;
@@ -145,6 +147,46 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         this.arrivalTimeSlotCityName = element.arrival_info.city;
       });
     }
+
+    this.loadJquery();
+  }
+
+  loadJquery(){
+    //Start REsponsive Fliter js
+    $(window).on("scroll", function () {
+      if ($(window).width() < 1200) {
+          if ($(this).scrollTop() < 10) {
+              $('#responsive_filter').slideUp("slow");
+          }
+
+          if ($(this).scrollTop() > 10) {
+              $('#responsive_filter').slideDown("slow");
+          }
+
+          var scrollHeight = $(document).height();
+          var scrollPosition = $(window).height() + $(window).scrollTop();
+          if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+              $('#responsive_filter').slideUp("slow");
+          }
+      } else {
+          $('#responsive_filter').hide("slow");
+      }
+    });
+    var sheight = $(window).scrollTop();
+    var swidth= $(window).width();
+    if (sheight > 10 && swidth<991) {
+      $('#responsive_filter').slideDown("slow");
+    }
+    $(".responsive_filter_btn").click(function () {
+      $("#responsive_filter_show").slideDown("slow");
+      $("body").addClass('overflow-hidden');
+    });
+
+    $(".filter_close > a").click(function () {
+      $("#responsive_filter_show").slideUp("slow");
+      $("body").removeClass('overflow-hidden');
+    });
+    //Close REsponsive Fliter js
   }
 
   ngOnDestroy(): void {

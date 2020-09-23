@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -8,8 +9,16 @@ declare var $: any;
 })
 export class SortFlightComponent implements OnInit {
 
-  constructor() { }
+  departureCode:string='';
+  arrivalCode:string='';
+  constructor(
+    private route :ActivatedRoute
+  ) {
+     this.departureCode = this.route.snapshot.queryParams['departure'];
+     this.arrivalCode = this.route.snapshot.queryParams['arrival'];
+   }
   @Output() sortFlight = new EventEmitter<{ key:string, order:string }>();
+  @Input() flightDetails;
   ngOnInit() {
     this.loadJquery();
   }
@@ -17,18 +26,23 @@ export class SortFlightComponent implements OnInit {
   loadJquery() {
     // Start filter Shortby js
     $(document).on('show', '#accordion', function (e) {
-      //$('.accordion-heading i').toggleClass(' ');
       $(e.target).prev('.accordion-heading').addClass('accordion-opened');
     });
 
     $(document).on('hide', '#accordion', function (e) {
       $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
-      //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
     });
-    // Close filter Shortby js
   }
 
   sortFlightData(key,order){
     this.sortFlight.emit({ key , order })
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['flightDetails'].currentValue!='undefined') {
+      if(this.flightDetails!='undefined'){
+        this.flightDetails=changes['flightDetails'].currentValue;
+      }
+    }
   }
 }

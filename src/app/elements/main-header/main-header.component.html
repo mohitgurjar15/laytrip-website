@@ -15,7 +15,8 @@
                             </li>
                             <li class="nav-item" *ngIf="userDetails.roleId==5 || userDetails.roleId==6">
                                 <a class="nav-link" href="javascript:void(0);">
-                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
+                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
+                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
                                     {{totalLayCredit}}
                                 </a>
                             </li>
@@ -66,16 +67,27 @@
                                 </div>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn">
-                                <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
+                                <a class="nav-link login_btn" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                             </li>
 
                             <li class="nav-item" *ngIf="isLoggedIn">
-                                <a class="nav-link" href="javascript:void(0)" [routerLink]="['/account']" >My Profile</a>
+                                <!-- <a class="nav-link" href="javascript:void(0)" [routerLink]="['/account']" >My Profile</a> -->
+                                <a class="nav-link" [routerLink]="['/account']">
+                                    <img src="{{s3BucketUrl}}assets/images/user_im.svg" alt="Profile Image">
+                                    <span>{{userDetails.firstName}}</span>
+                                </a>
                             </li>
 
                         </ul> 
                     </div>
                 </nav>
+            </div>
+            <div class="show_resposive">
+                <a *ngIf="!isLoggedIn" class="nav-link login_btn" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
+                <a *ngIf="isLoggedIn" class="nav-link" [routerLink]="['/account']">
+                    <img src="{{s3BucketUrl}}assets/images/user_im.svg" alt="Profile Image">
+                    <span>{{userDetails.firstName}}</span>
+                </a>
             </div>
         </div>
     </div>

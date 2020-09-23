@@ -1,6 +1,5 @@
 @import "_cstm-variable.scss";
 @import "_cstm-components.scss";
-
 //<!-- Start Search Modify section -->
 .modify_search {
     width: 100%;
@@ -306,9 +305,10 @@
                                         display: flex;
                                         line-height: 30px;
                                         font-size: 10px;
-                                        color: $text-darkblue;
+                                        color: $text-black;
                                         position: relative;
                                         padding: 0 15px;
+                                        text-transform: uppercase;
 
                                         &:before {
                                             width: 20px;
@@ -326,7 +326,7 @@
                                             font-size: 20px;
                                             font-weight: 600;
                                             padding: 0 10px 0 0;
-                                            color: $text-darkblue;
+                                            color: $text-black;
                                         }
 
                                         .drop_aerrow {
@@ -459,6 +459,13 @@
     .price_by_date {
         width: 100%;
         margin: 0 0 30px;
+
+        label {
+            font-size: 16px;
+            font-weight: 500;
+            color: $text-grey;
+            margin: 0 0 5px;
+        }
 
         .price_day_slider {
             width: 100%;
@@ -2887,6 +2894,55 @@
 .filter_saidbar {
     width: 100%;
 
+    .block_result_found {
+        padding: 20px;
+        background: $background-white;
+        border: 1px solid $box-border-color;
+        margin: 0 0 20px;
+        text-align: center;
+        position: relative;
+
+        &:after {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid $box-border-color;
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            content: '';
+        }
+
+        &:before {
+            width: 0;
+            height: 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 9px solid $background-white;
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            content: '';
+            z-index: 2;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 500;
+            color: $text-grey;
+            margin: 0 0 5px;
+        }
+
+        span {
+            font-size: 20px;
+            font-weight: 600;
+            color: $text-black;
+        }
+    }
+
     .short_by {
         width: 100%;
 
@@ -3050,6 +3106,83 @@
 
                 &:last-child {
                     border-bottom: none;
+                }
+
+                .block_price_radio {
+                    width: 100%;
+                    margin: 0 0 20px;
+                    padding: 0;
+                    display: flex;
+
+                    li {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 0 40px 0 0;
+                        align-items: center;
+                        color: $text-grey;
+                        font-size: 14px;
+                        font-weight: 300;
+
+                        .custom_radio {
+                            width: 100%;
+                            display: block;
+                            position: relative;
+                            padding-left: 25px;
+                            margin: 0;
+                            cursor: pointer;
+                            font-size: 14px;
+                            -webkit-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            user-select: none;
+                            color: $text-grey;
+
+                            input {
+                                position: absolute;
+                                opacity: 0;
+                                cursor: pointer;
+
+                                &:checked {
+                                    ~ {
+                                        .checkmark {
+                                            border: 1px solid $secondary-color;
+
+                                            &:after {
+                                                display: block;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .checkmark {
+                                position: absolute;
+                                top: 4px;
+                                left: 0;
+                                height: 14px;
+                                width: 14px;
+                                background-color: transparent;
+                                border: 1px solid $text-grey;
+                                border-radius: 50%;
+
+                                &:after {
+                                    content: "";
+                                    position: absolute;
+                                    display: none;
+                                    top: 2px;
+                                    left: 2px;
+                                    width: 8px;
+                                    height: 8px;
+                                    border-radius: 50%;
+                                    background: $secondary-color;
+                                }
+                            }
+                        }
+
+                        &:last-child {
+                            padding-bottom: 0;
+                        }
+                    }
                 }
 
                 .range_slid {
@@ -3443,7 +3576,7 @@
                     a {
                         font-size: 16px;
                         font-weight: 500;
-                        color: $secondary-color;
+                        color: $text-lightblue;
                     }
                 }
             }
