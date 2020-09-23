@@ -105,11 +105,23 @@ export class PaymentModeComponent implements OnInit {
     if(type=='instalment'){
 
       this.isInstalemtMode = true;
+      this.getInstalmentData.emit({ 
+        additionalAmount:this.additionalAmount , 
+        instalmentType:this.durationType, 
+        customAmount: this.customAmount,
+        customInstalment : null
+      })
     }
 
     if(type=='no-instalment'){
 
       this.isInstalemtMode = false;
+      this.getInstalmentData.emit({ 
+        additionalAmount:this.additionalAmount , 
+        instalmentType:'', 
+        customAmount: null,
+        customInstalment : null
+      })
     }
     this.selectInstalmentMode.emit(type)
 
