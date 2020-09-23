@@ -16,6 +16,9 @@ import { AccommodationsComponent } from './bookings/accommodations/accommodation
 import { FlightLoaderComponent } from '../../flight/components/flight-loader/flight-loader.component';
 import { FlightNotFoundComponent } from '../../flight/components/flight-not-found/flight-not-found.component';
 import { CalendarModule } from 'primeng/calendar';
+import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
+import { HistoryListComponent } from './payment-history/history-list/history-list.component';
+import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
 
 
 @NgModule({
@@ -28,6 +31,9 @@ import { CalendarModule } from 'primeng/calendar';
     FlightsComponent,
     HotelsComponent,
     AccommodationsComponent,
+    ListPaymentHistoryComponent,
+    HistoryListComponent,
+    ViewHistoryComponent,
     // FlightLoaderComponent,
     // FlightNotFoundComponent
   ],

@@ -1,0 +1,251 @@
+<section class="account_part">
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <app-my-accounts-nav></app-my-accounts-nav>
+        </div>
+          <div class="col-lg-9">
+              <div class="account_cnt_main booking_main">
+                
+                  <div class="block_filter_payment">
+                      <div class="filter_form">
+                          <div class="form_row">
+                              <div class="form_field">
+                                  <label>Order ID</label>
+                                  <div class="text_field">
+                                      <input type="text" name="fname" maxlength="20" tabindex="1" placeholder="First Name">
+                                  </div>
+                              </div>
+                              <div class="form_field">
+                                  <label>Booking Type</label>
+                                  <div class="text_field custom-select">
+                                      <select>
+                                          <option value="0">Flight</option>
+                                          <option value="1">Hotel</option>
+                                          <option value="2">Accommodations</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form_row">
+                              <div class="form_field">
+                                  <label>Payment Start Date</label>
+                                  <div class="text_field">
+                                      <input class="birth_date" type="text" name="email" maxlength="20" tabindex="3" placeholder="Dd/mm/yyyy">
+                                  </div>
+                              </div>
+                              <div class="form_field">
+                                  <label>Payment End Date</label>
+                                  <div class="text_field">
+                                      <input class="birth_date" type="text" name="email" maxlength="20" tabindex="3" placeholder="Dd/mm/yyyy">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="filter_btn">
+                          <button>Filter</button>
+                      </div>
+                  </div>
+              
+                  <div class="block_booking_list block_payment_list">
+                      <ul id="payment_tabs" class="nav nav-tabs" role="tablist">
+                          <li class="nav-item">
+                              <a href="#Active-pay" class="nav-link active" data-toggle="tab" role="tab">Active Payment</a>
+                          </li>
+                          <!-- <li class="nav-item">
+                              <a href="#Pending-pay" class="nav-link" data-toggle="tab" role="tab">Pending Payment</a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="#Failed-pay" class="nav-link" data-toggle="tab" role="tab">Failed Payment</a>
+                          </li> -->
+                      </ul>
+                      <div id="payment_content" class="tab-content" role="tablist">
+                          <div id="Active-pay" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="Active-pay">
+                              <app-history-list [historyResult]="historyResult"></app-history-list>
+                          </div>
+
+                          <div id="Pending-pay" style="display: none;" class="card tab-pane fade" role="tabpanel" aria-labelledby="Pending-pay">
+                              <div class="card-header" role="tab" id="heading-Pending-pay">
+                                  <h5 class="mb-0">
+                                      <a class="collapsed" data-toggle="collapse" href="#collapse-Pending-pay" aria-expanded="false" aria-controls="collapse-Pending-pay">
+                                          Pending Payment
+                                      </a>
+                                  </h5>
+                              </div>
+                              <div id="collapse-Pending-pay" class="collapse" data-parent="#payment_content" role="tabpanel" aria-labelledby="heading-Pending-pay">
+                                  <div class="card-body">
+                                      <div class="block_pay_list_inner">
+                                          <div class="block_search">
+                                              
+                                          </div>
+                                          <div class="pay_listing">
+                                              <div class="list_top">
+                                                  <div class="list_left">
+                                                      <ul>
+                                                          <li>Total Paid: <span>$35</span></li>
+                                                          <li>
+                                                              <div class="progress">
+                                                                  <div class="progress-bar" style="width: 25%;"></div>
+                                                                  <div class="progress_dot" style="left:23%;"></div>
+                                                              </div>
+                                                          </li>
+                                                          <li>Total Remaining: <span>$325</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="list_right">
+                                                      <p>Payment Due in <span>6 days</span></p>
+                                                      <div class="pay_status">
+                                                          Pay Early
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="list_btm">
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li class="fb_medium">Order ID: <span>120313254654</span></li>
+                                                          <li>Order Type: <span>Flight</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li class="fb_medium">Total Amount: <span>$360</span></li>
+                                                          <li>Instalment: <span>$35 / Weekly</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li>Payment Start: <span>27/01/2020</span></li>
+                                                          <li>Payment End: <span>27/01/2020</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <span>Pending</span>
+                                                      <a href="javascript:void(0);" data-toggle="modal" data-target="#payment_view_modal">View Details</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="pay_listing">
+                                              <div class="list_top">
+                                                  <div class="list_left">
+                                                      <ul>
+                                                          <li>Total Paid: <span>$35</span></li>
+                                                          <li>
+                                                              <div class="progress">
+                                                                  <div class="progress-bar" style="width: 25%;"></div>
+                                                                  <div class="progress_dot" style="left:23%;"></div>
+                                                              </div>
+                                                          </li>
+                                                          <li>Total Remaining: <span>$325</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="list_right">
+                                                      <p>Payment Due in <span>6 days</span></p>
+                                                      <div class="pay_status">
+                                                          Pay Early
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="list_btm">
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li class="fb_medium">Order ID: <span>120313254654</span></li>
+                                                          <li>Order Type: <span>Flight</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li class="fb_medium">Total Amount: <span>$360</span></li>
+                                                          <li>Instalment: <span>$35 / Weekly</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li>Payment Start: <span>27/01/2020</span></li>
+                                                          <li>Payment End: <span>27/01/2020</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <span>Pending</span>
+                                                      <a href="javascript:void(0);" data-toggle="modal" data-target="#payment_view_modal">View Details</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div id="Failed-pay" style="display: none;"  class="card tab-pane fade" role="tabpanel" aria-labelledby="Failed-pay">
+                              <div class="card-header" role="tab" id="heading-Failed-pay">
+                                  <h5 class="mb-0">
+                                      <a class="collapsed" data-toggle="collapse" href="#collapse-Failed-pay" aria-expanded="false" aria-controls="collapse-Failed-pay">
+                                          Failed Payment
+                                      </a>
+                                  </h5>
+                              </div>
+                              <div id="collapse-Failed-pay" class="collapse" role="tabpanel" data-parent="#payment_content" aria-labelledby="heading-Failed-pay">
+                                  <div class="card-body">
+                                      <div class="block_pay_list_inner">
+                                          <div class="block_search">
+                                              
+                                          </div>
+                                          <div class="pay_listing">
+                                              <div class="list_top">
+                                                  <div class="list_left">
+                                                      <ul>
+                                                          <li>Total Paid: <span>$35</span></li>
+                                                          <li>
+                                                              <div class="progress">
+                                                                  <div class="progress-bar" style="width: 25%;"></div>
+                                                                  <div class="progress_dot" style="left:23%;"></div>
+                                                              </div>
+                                                          </li>
+                                                          <li>Total Remaining: <span>$325</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="list_right">
+                                                      <p>Payment Due in <span>6 days</span></p>
+                                                      <div class="pay_status">
+                                                          Pay Early
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="list_btm">
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li class="fb_medium">Order ID: <span>120313254654</span></li>
+                                                          <li>Order Type: <span>Flight</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li class="fb_medium">Total Amount: <span>$360</span></li>
+                                                          <li>Instalment: <span>$35 / Weekly</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <ul>
+                                                          <li>Payment Start: <span>27/01/2020</span></li>
+                                                          <li>Payment End: <span>27/01/2020</span></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="grid_block">
+                                                      <span>Pending</span>
+                                                      <a href="javascript:void(0);" data-toggle="modal" data-target="#payment_view_modal">View Details</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<app-view-history></app-view-history>
+

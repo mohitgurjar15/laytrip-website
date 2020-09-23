@@ -20,6 +20,7 @@ var ListBookingsComponent = /** @class */ (function () {
         this.perPageLimitConfig = [10, 25, 50, 100];
     }
     ListBookingsComponent.prototype.ngOnInit = function () {
+        this.loading = true;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
         this.getBookings();

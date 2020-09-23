@@ -23,6 +23,7 @@ var flights_component_1 = require("./bookings/flights/flights.component");
 var hotels_component_1 = require("./bookings/hotels/hotels.component");
 var accommodations_component_1 = require("./bookings/accommodations/accommodations.component");
 var calendar_1 = require("primeng/calendar");
+var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -37,6 +38,7 @@ var MyAccountsModule = /** @class */ (function () {
                 flights_component_1.FlightsComponent,
                 hotels_component_1.HotelsComponent,
                 accommodations_component_1.AccommodationsComponent,
+                list_payment_history_component_1.ListPaymentHistoryComponent,
             ],
             imports: [
                 common_1.CommonModule,

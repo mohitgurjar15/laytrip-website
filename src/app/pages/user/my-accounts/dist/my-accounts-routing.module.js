@@ -10,6 +10,7 @@ exports.MyAccountsRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var list_bookings_component_1 = require("./bookings/list-bookings.component");
+var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
 var profile_component_1 = require("./profile/profile.component");
 var list_traveller_component_1 = require("./travellers/list-traveller.component");
 var routes = [
@@ -28,6 +29,10 @@ var routes = [
     {
         path: 'travellers',
         component: list_traveller_component_1.ListTravellerComponent
+    },
+    {
+        path: 'history',
+        component: list_payment_history_component_1.ListPaymentHistoryComponent
     },
 ];
 var MyAccountsRoutingModule = /** @class */ (function () {

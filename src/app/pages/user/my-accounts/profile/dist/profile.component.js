@@ -55,7 +55,6 @@ var ProfileComponent = /** @class */ (function () {
         this.getLanguages();
         this.getCurrencies();
         this.getProfileInfo();
-        console.log(this);
         this.profileForm = this.formBuilder.group({
             title: [''],
             first_name: ['', [forms_1.Validators.required]],
@@ -127,10 +126,6 @@ var ProfileComponent = /** @class */ (function () {
             }
         });
     };
-    /* dobDateUpdate(date) {
-      this.dobMinDate = moment(this.profileForm.value.dob.startDate)
-    }
-   */
     ProfileComponent.prototype.clickGender = function (event, type) {
         this.is_type = '';
         this.is_gender = false;
@@ -179,7 +174,6 @@ var ProfileComponent = /** @class */ (function () {
             _this.selectResponse = res;
             _this.is_type = res.gender;
             _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
-            console.log('date', moment(res.dob).format("DD/MM/YYYY"));
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -187,13 +181,13 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender,
                 zip_code: res.zipCode,
                 title: res.title,
+                dob: moment(res.dob).format('MM/DD/YYYY'),
                 country_code: res.countryCode,
                 phone_no: res.phoneNo,
                 country_id: res.country.name,
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
-                dob: '',
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
                 profile_pic: res.profilePic

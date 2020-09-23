@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListBookingsComponent } from './bookings/list-bookings.component';
+import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'travellers',
     component: ListTravellerComponent,
+  },
+  {
+    path: 'history',
+    component: ListPaymentHistoryComponent,
   },
  
 ];

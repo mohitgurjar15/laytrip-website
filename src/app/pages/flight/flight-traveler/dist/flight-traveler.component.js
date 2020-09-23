@@ -31,11 +31,12 @@ var FlightTravelerComponent = /** @class */ (function () {
         this._travellersCountValid = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
-        console.log('hhhu');
         this.loading = true;
         this.getTravelers();
-        this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-        this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+        if (this.cookieService.get('_itinerary')) {
+            this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+            this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+        }
         this.routeCode = this.route.snapshot.paramMap.get('rc');
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
@@ -96,10 +97,10 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.ngDoCheck = function () {
         this.checkUser();
-        /*  if(this.is_traveller === false){
-           // this.loading = true;
-           // this.getTravelers();
-         } */
+        if (this.is_traveller === false) {
+            this.loading = true;
+            this.getTravelers();
+        }
     };
     FlightTravelerComponent = __decorate([
         core_1.Component({
