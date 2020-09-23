@@ -29,13 +29,15 @@ var full_page_overlay_loader_component_1 = require("./full-page-overlay-loader/f
 var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var ngx_cookie_1 = require("ngx-cookie");
 var booking_enquiry_info_component_1 = require("./booking-enquiry-info/booking-enquiry-info.component");
+var add_guest_card_component_1 = require("./add-guest-card/add-guest-card.component");
+var calendar_1 = require("primeng/calendar");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
     ComponentsModule = __decorate([
         core_1.NgModule({
             declarations: [
-                search_airport_component_1.SearchAirportComponent, traveller_info_component_1.TravellerInfoComponent, checkout_progress_component_1.CheckoutProgressComponent, adult_list_component_1.AdultListComponent, child_list_component_1.ChildListComponent, infant_list_component_1.InfantListComponent, booking_timer_component_1.BookingTimerComponent, payment_mode_component_1.PaymentModeComponent, card_list_component_1.CardListComponent, add_card_component_1.AddCardComponent, traveler_form_component_1.TravelerFormComponent, full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent, booking_enquiry_info_component_1.BookingEnquiryInfoComponent
+                search_airport_component_1.SearchAirportComponent, traveller_info_component_1.TravellerInfoComponent, checkout_progress_component_1.CheckoutProgressComponent, adult_list_component_1.AdultListComponent, child_list_component_1.ChildListComponent, infant_list_component_1.InfantListComponent, booking_timer_component_1.BookingTimerComponent, payment_mode_component_1.PaymentModeComponent, card_list_component_1.CardListComponent, add_card_component_1.AddCardComponent, traveler_form_component_1.TravelerFormComponent, full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent, booking_enquiry_info_component_1.BookingEnquiryInfoComponent, add_guest_card_component_1.AddGuestCardComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -46,7 +48,8 @@ var ComponentsModule = /** @class */ (function () {
                 ngx_countdown_1.CountdownModule,
                 ng5_slider_1.Ng5SliderModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
-                ngx_cookie_1.CookieModule.forRoot()
+                ngx_cookie_1.CookieModule.forRoot(),
+                calendar_1.CalendarModule
             ],
             exports: [
                 search_airport_component_1.SearchAirportComponent,
@@ -60,7 +63,8 @@ var ComponentsModule = /** @class */ (function () {
                 card_list_component_1.CardListComponent,
                 add_card_component_1.AddCardComponent,
                 full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent,
-                booking_enquiry_info_component_1.BookingEnquiryInfoComponent
+                booking_enquiry_info_component_1.BookingEnquiryInfoComponent,
+                add_guest_card_component_1.AddGuestCardComponent
             ],
             providers: [common_1.DatePipe]
         })

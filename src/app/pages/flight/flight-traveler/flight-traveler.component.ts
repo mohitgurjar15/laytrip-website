@@ -48,13 +48,13 @@ export class FlightTravelerComponent implements OnInit {
   
   getTravelers() {
 
+    this._adults = this._childs = this._infants = [];
     let userToken = localStorage.getItem('_lay_sess');
     if(userToken && userToken != 'undefined'){
       this.is_traveller = true;
      
       this.travelerService.getTravelers().subscribe((res:any)=>{
         this.travelers = res.data;
-        this._adults = this._childs = this._infants = [];
         this.travelers.forEach(element => {
           if(element.user_type == 'adult'){
             this._adults.push(element);
@@ -64,8 +64,6 @@ export class FlightTravelerComponent implements OnInit {
             this._infants.push(element);          
           }
         });  
-        console.log(this._adults )
-
         this.loading = false;
       })
     } else {
@@ -110,10 +108,10 @@ export class FlightTravelerComponent implements OnInit {
   
   ngDoCheck(){
     this.checkUser(); 
-    if(this.is_traveller === false){
-      this.loading = true;
+   /*  if(this.is_traveller === false){
+      // this.loading = true;
       // this.getTravelers();
-    }
+    } */
   }
 
   flightAvailable(event){

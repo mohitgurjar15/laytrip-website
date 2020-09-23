@@ -28,6 +28,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
         this.editMode = false;
         this.formStatus = false;
+        this.is_passport_required = false;
         this.locale = {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
@@ -97,18 +98,17 @@ var TravelerFormComponent = /** @class */ (function () {
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
-            this.dobMinDate = moment().add(-12, 'year');
+            this.dobMinDate = new Date(); //moment().add(-12, 'year');
             this.dobMaxDate = moment().add(-2, 'year');
         }
         else if (this.type === 'infant') {
-            this.dobMinDate = moment().add(-2, 'year');
+            this.dobMinDate = new Date(); //moment().add(-2, 'year');
             this.dobMaxDate = moment();
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
         }
-        this._itinerary.is_passport_required = true;
-        if ((this.type === 'adult' || this.type === 'child') && this._itinerary.is_passport_required) {
+        if ((this.type === 'adult' || this.type === 'child') && this.is_passport_required) {
             passport_numberControl.setValidators([forms_1.Validators.required]);
             passport_expiryControl.setValidators([forms_1.Validators.required]);
         }

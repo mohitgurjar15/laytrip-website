@@ -66,43 +66,47 @@ export class AdultListComponent implements OnInit {
 
 
   selectTraveler(event, traveler) {
-
-    if (event.target.checked) {
-      this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-      let totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
-      let travelerData = {
-        "userId": traveler.userId,
-        "firstName": traveler.firstName,
-        "lastName": traveler.lastName,
-        "email": traveler.email
-      };
-      this._travelers.push(travelerData);
-      this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      if (this.counter + 1 < totalTraveler) {
+    this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+    if (this._itinerary) {
+      if (event.target.checked) {
+        let totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+        let travelerData = {
+          "userId": traveler.userId,
+          "firstName": traveler.firstName,
+          "lastName": traveler.lastName,
+          "email": traveler.email
+        };
+        this._travelers.push(travelerData);
+        this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        if (this.counter + 1 < totalTraveler) {
+          // this.checkBoxDisable = false;
+          this.counter++;
+        } else {
+          if(this.counter + 1 == totalTraveler){
+            this.counter++;
+          }
+          // this.checkBoxDisable = true;                
+        }
+        if (traveler.user_type == 'adult') {
+          this._itinerarySelection.adult.push(traveler.userId);
+        } else if (traveler.user_type == 'child') {
+          this._itinerarySelection.child.push(traveler.userId);
+        } else {
+          this._itinerarySelection.infant.push(traveler.userId);
+        }
+      } else {
+        this.counter--;
         // this.checkBoxDisable = false;
-        this.counter++;
-      } else {
-        // this.checkBoxDisable = true;                
-      }
-      if (traveler.user_type == 'adult') {
-        this._itinerarySelection.adult.push(traveler.userId);
-      } else if (traveler.user_type == 'child') {
-        this._itinerarySelection.child.push(traveler.userId);
-      } else {
-        this._itinerarySelection.infant.push(traveler.userId);
-      }
-    } else {
-      this.counter--;
-      // this.checkBoxDisable = false;
-      this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
-      this.cookieService.remove('_travelers');
-      this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-      if (traveler.user_type == 'adult') {
-        this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
-      } else if (traveler.user_type == 'child') {
-        this._itinerarySelection.child = this._itinerarySelection.child.filter(obj => obj !== traveler.userId);
-      } else {
-        this._itinerarySelection.infant = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
+        this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
+        this.cookieService.remove('_travelers');
+        this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        if (traveler.user_type == 'adult') {
+          this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
+        } else if (traveler.user_type == 'child') {
+          this._itinerarySelection.child = this._itinerarySelection.child.filter(obj => obj !== traveler.userId);
+        } else {
+          this._itinerarySelection.infant = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
+        }
       }
     }
     console.log(this.counter)
@@ -124,7 +128,7 @@ export class AdultListComponent implements OnInit {
 
 
   ngDoCheck() {
-  
+
     this.checkUser();
     this.containers = this.containers;
 

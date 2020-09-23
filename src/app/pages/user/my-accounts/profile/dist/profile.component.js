@@ -43,6 +43,7 @@ var ProfileComponent = /** @class */ (function () {
         this.fileError = false;
         this.fileErrorMsg = 'File is required';
         this.selectResponse = {};
+        this.dobMinDate = new Date();
         this.dobMaxDate = moment();
         this.locale = {
             format: 'DD/MM/YYYY',
@@ -68,9 +69,7 @@ var ProfileComponent = /** @class */ (function () {
             state_id: ['', [forms_1.Validators.required]],
             city_name: ['', [forms_1.Validators.required]],
             gender: [''],
-            dob: [{
-                    startDate: this.dobMaxDate
-                }, forms_1.Validators.required],
+            dob: ['', forms_1.Validators.required],
             profile_pic: [''],
             address2: [''],
             language_id: [''],
@@ -128,9 +127,10 @@ var ProfileComponent = /** @class */ (function () {
             }
         });
     };
-    ProfileComponent.prototype.dobDateUpdate = function (date) {
-        this.dobMinDate = moment(this.profileForm.value.dob.startDate);
-    };
+    /* dobDateUpdate(date) {
+      this.dobMinDate = moment(this.profileForm.value.dob.startDate)
+    }
+   */
     ProfileComponent.prototype.clickGender = function (event, type) {
         this.is_type = '';
         this.is_gender = false;
@@ -193,9 +193,7 @@ var ProfileComponent = /** @class */ (function () {
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
-                dob: [{
-                        startDate: _this.seletedDob
-                    }],
+                dob: '',
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
                 profile_pic: res.profilePic
@@ -227,7 +225,6 @@ var ProfileComponent = /** @class */ (function () {
                 imgfile = this.imageFile;
                 formdata.append("profile_pic", imgfile);
             }
-            console.log(this.profileForm.value);
             formdata.append("title", this.profileForm.value.title);
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
@@ -238,7 +235,7 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("address1", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
-            formdata.append("dob", typeof this.profileForm.value.dob.startDate === 'object' ? moment(this.profileForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.commonFunctoin.stringToDate(this.profileForm.value.dob.startDate, '/')).format('YYYY-MM-DD'));
+            formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : '');
             if (!Number.isInteger(this.profileForm.value.country_id)) {
                 formdata.append("country_id", this.selectResponse.country.id);
             }
