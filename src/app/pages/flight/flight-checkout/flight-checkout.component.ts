@@ -64,14 +64,14 @@ export class FlightCheckoutComponent implements OnInit {
       timerInfo = timerInfo ? JSON.parse(timerInfo) : {};
       if(timerInfo.route_code==this.routeCode){
         this.bookingTimerConfig={
-          leftTime : 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
+          leftTime : 30 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
           format: 'm:s'
         }
       }
       else{
         
         this.bookingTimerConfig={
-          leftTime: 600, format: 'm:s'
+          leftTime: 30, format: 'm:s'
         };
 
         let bookingTimer={
