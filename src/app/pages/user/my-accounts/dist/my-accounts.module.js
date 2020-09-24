@@ -48,6 +48,7 @@ var MyAccountsModule = /** @class */ (function () {
             imports: [
                 common_1.CommonModule,
                 my_accounts_routing_module_1.MyAccountsRoutingModule,
+                forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
                 ng_select_1.NgSelectModule,
                 ng_bootstrap_1.NgbModule,

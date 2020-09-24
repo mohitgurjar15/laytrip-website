@@ -75,7 +75,7 @@
 
                                 <div class="dropdown account_ddown">
                                     <a class="nav-link" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                        <img src="{{s3BucketUrl}}assets/images/user_im.svg" alt="Profile Image">
+                                        <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -93,7 +93,7 @@
                 <a *ngIf="!isLoggedIn" class="nav-link login_btn" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                 <div class="dropdown account_ddown" *ngIf="isLoggedIn">
                     <a class="nav-link" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{s3BucketUrl}}assets/images/user_im.svg" alt="Profile Image">
+                        <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                         <span>{{userDetails.firstName}}</span>
                     </a>
                     <ul class="dropdown-menu">

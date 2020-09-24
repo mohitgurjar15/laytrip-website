@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 
@@ -14,34 +15,60 @@ export class ListPaymentHistoryComponent implements OnInit {
   pageNumber:number;
   limit:number;
   historyResult:any;
+  filterForm: FormGroup;
+  itemDetail:any;
+  startMinDate= new Date();
 
   constructor(
     private userService: UserService,
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.loading = true;
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
+    this.getModule();
+    
+    this.filterForm = this.formBuilder.group({
+      bookingId: [''],
+      start_date: [''],
+      end_date: [''],
+      module: [''],
+    });
     this.getPaymentHistory();
   }
 
-  getPaymentHistory(){
-    this.userService.getPaymentHistory(this.pageNumber, this.limit).subscribe((res: any) => {
-        this.historyResult = res.data;
-        console.log(this.historyResult)
+  getPaymentHistory() {
+    console.log(this.filterForm.value)
 
+    this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
+        this.historyResult = res.data;
         this.isNotFound = false;
         this.loading = false;
-      
+
     }, err => {
       this.isNotFound = true;
       if (err && err.status === 404) {
         this.loading = false;
       }
-    });
-    
+    });   
   }
+  
+  getBookingHistory(event) {
+    this.itemDetail = event
+  }
+
+  getModule(){
+    this.userService.getModules(this.pageNumber, this.limit).subscribe((res: any) => {
+     console.log(res)
+
+   }, err => {
+    
+   }); 
+  }
+  
+  ngDoCheck(){}
 }
  

@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.MainHeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
+var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var MainHeaderComponent = /** @class */ (function () {
     function MainHeaderComponent(genericService, translate, modalService, router) {
         this.genericService = genericService;
@@ -19,6 +20,7 @@ var MainHeaderComponent = /** @class */ (function () {
         this.langunages = [];
         this.selectedLanunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
         this.isLanunageSet = false;
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
         this.currencies = [];
         this.selectedCurrency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' };
         this.isCurrencySet = false;
@@ -56,9 +58,20 @@ var MainHeaderComponent = /** @class */ (function () {
         this.getLangunages();
         this.getCurrencies();
         this.loadJquery();
+        this.userDetails = jwt_helper_1.getLoginUserInfo();
+        console.log(this.userDetails);
+        if (Object.keys(this.userDetails).length > 0) {
+            if (this.userDetails.roleId != 7) {
+                this.totalLaycredit();
+            }
+        }
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
+        //this.totalLaycredit();
+    };
+    MainHeaderComponent.prototype.ngOnChanges = function () {
+        //this.totalLaycredit();
     };
     /**
      * change user lanunage
@@ -140,6 +153,14 @@ var MainHeaderComponent = /** @class */ (function () {
             }
         });
         // Close sticky header js
+    };
+    MainHeaderComponent.prototype.totalLaycredit = function () {
+        var _this = this;
+        this.genericService.getAvailableLaycredit().subscribe(function (res) {
+            console.log("res", res);
+            _this.totalLayCredit = res.total_available_points;
+        }, (function (error) {
+        }));
     };
     MainHeaderComponent = __decorate([
         core_1.Component({

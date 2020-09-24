@@ -118,7 +118,25 @@ export class UserService {
     return this.http.get(`${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
   }
 
-  getPaymentHistory(pageNumber,limit) {
-    return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  getPaymentHistory(pageNumber,limit,filterForm) {
+    let queryString = "";
+    if(filterForm.bookingId){
+      queryString += (filterForm.bookingId) ? '&booking_id='+filterForm.bookingId : '';
+    }
+    if(filterForm.booking_type){
+      queryString += (filterForm.booking_type) ? '&booking_type='+filterForm.booking_type : '';
+    }
+    if(filterForm.payment_start_date){
+      queryString += (filterForm.payment_start_date) ? '&payment_start_date='+filterForm.payment_start_date : '';
+    }
+    if(filterForm.payment_end_date){
+      queryString += (filterForm.payment_end_date) ? '&payment_end_date='+filterForm.payment_end_date : '';
+    }
+    console.log(queryString)
+    return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders())
+  }
+
+  getModules(pageNumber, limit) {
+    return this.http.get(`${this.apiURL}modules?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
   }
 }

@@ -17,7 +17,7 @@ export class AddCardComponent implements OnInit {
     private toastr: ToastrService
   ) { }
   @Input() showAddCardForm: boolean;
-  @Output() emitNewCard = new EventEmitter()
+  @Output() emitNewCard = new EventEmitter();
   // @ViewChild('cardAddForm') cardAddFormElement: ElementRef;
   //@ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
   disabledSavecardbutton: boolean = true;
