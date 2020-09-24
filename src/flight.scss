@@ -1,5 +1,6 @@
 @import "_cstm-variable.scss";
 @import "_cstm-components.scss";
+
 //<!-- Start Search Modify section -->
 .modify_search {
     width: 100%;
@@ -34,7 +35,7 @@
                     @media(max-width: 575px) {
                         padding: 5px 8px;
                         margin: 0 5px 0 0;
-                        font-size: 12px;
+                        font-size: 11px;
                     }
 
                     img {
@@ -7419,7 +7420,7 @@
 
 
     .block_not_available {
-        width: 1024px;
+        width: 600px;
         max-width: 96%;
         float: left;
         position: absolute;
@@ -7433,8 +7434,6 @@
         box-shadow: 0px 3px 20px $shadow-black-light;
 
         @media(max-width:767px) {
-            height: 60vh;
-            overflow: auto;
             padding: 20px;
         }
 
@@ -7459,7 +7458,7 @@
             }
 
             p {
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: 500;
                 color: $text_grey_dark;
                 margin: 0 0 15px;
@@ -7476,6 +7475,7 @@
 
                 img {
                     max-width: 100%;
+                    height: 230px;
                 }
             }
 
@@ -7528,7 +7528,7 @@
     }
 
     .block_session-timeout {
-        width: 1024px;
+        width: 600px;
         max-width: 96%;
         float: left;
         position: absolute;
@@ -7547,11 +7547,6 @@
 
         .block_session-timeout_inner {
             width: 100%;
-
-            @media(max-width:767px) {
-                height: 70vh;
-                overflow: auto;
-            }
 
             h6 {
                 margin: 0 0 30px;
@@ -7583,6 +7578,7 @@
 
                 img {
                     max-width: 100%;
+                    height: 230px;
                 }
             }
 
@@ -7635,7 +7631,7 @@
     }
 
     .block_feedback {
-        width: 1024px;
+        width: 600px;
         max-width: 96%;
         float: left;
         position: absolute;
@@ -7675,7 +7671,7 @@
             }
 
             p {
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: 500;
                 color: $text_grey_dark;
                 margin: 0 0 35px;
@@ -7716,7 +7712,7 @@
                             line-height: normal;
 
                             img {
-                                height: 100px;
+                                height: 80px;
                                 margin: 0 0 20px;
 
                                 @media(max-width:767px) {
@@ -8212,6 +8208,7 @@
         .modal-content {
             padding: 30px;
             border-radius: 20px;
+            height: 52vh;
 
             @media(max-width:767px) {
                 padding: 15px;
@@ -8254,10 +8251,9 @@
                 width: 100%;
                 display: flex;
                 align-items: center;
+                overflow-y: auto;
 
                 @media(max-width:767px) {
-                    height: 70vh;
-                    overflow-y: auto;
                     flex-flow: column;
                 }
 

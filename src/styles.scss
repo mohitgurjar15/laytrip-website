@@ -566,7 +566,6 @@ select {
                         border-left: 1px solid $border-color;
                         padding: 0px 0 0px 15px;
 
-
                         a {
                             font-size: 14px;
                             color: $text-grey;
@@ -611,6 +610,76 @@ select {
                                 }
                             }
                         }
+
+                        .dropdown {
+                            &.account_ddown {
+                                .dropdown-menu {
+                                    left: auto;
+                                    right: 0;
+                                    top: 120%;
+                                    border: 1px solid $box-border-color;
+                                    border-radius: 5px;
+
+                                    &:before {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 9px solid transparent;
+                                        border-right: 9px solid transparent;
+                                        border-bottom: 9px solid $background-white;
+                                        position: absolute;
+                                        top: -9px;
+                                        right: 20px;
+                                        content: '';
+                                        z-index: 2;
+                                    }
+
+                                    &:after {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 10px solid transparent;
+                                        border-right: 10px solid transparent;
+                                        border-bottom: 10px solid $box-border-color;
+                                        position: absolute;
+                                        top: -10px;
+                                        right: 19px;
+                                        content: '';
+                                    }
+
+                                    li {
+                                        border-bottom: 1px solid $box-border-color;
+
+                                        a {
+                                            color: $text-darkblue;
+
+                                            &:hover {
+                                                color: $text-white;
+                                            }
+                                        }
+
+                                        &:first-child {
+                                            border-radius: 5px 5px 0 0;
+
+                                            a {
+                                                border-radius: 5px 5px 0 0;
+                                            }
+                                        }
+
+                                        &:last-child {
+                                            border-radius: 0 0 5px 5px;
+                                            border-bottom: none;
+
+                                            a {
+                                                border-radius: 0 0 5px 5px;
+                                            }
+                                        }
+
+
+                                    }
+                                }
+                            }
+
+                        }
+
 
                         @media(max-width: 991px) {
                             width: 100%;
@@ -732,6 +801,79 @@ select {
                     }
                 }
             }
+        }
+
+        .dropdown {
+            &.account_ddown {
+                .dropdown-menu {
+                    left: auto !important;
+                    right: 0;
+                    top: 120%;
+                    border: 1px solid $box-border-color;
+                    border-radius: 5px;
+                    padding: 0;
+
+                    &:before {
+                        width: 0;
+                        height: 0;
+                        border-left: 9px solid transparent;
+                        border-right: 9px solid transparent;
+                        border-bottom: 9px solid $background-white;
+                        position: absolute;
+                        top: -9px;
+                        right: 20px;
+                        content: '';
+                        z-index: 2;
+                    }
+
+                    &:after {
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        border-bottom: 10px solid $box-border-color;
+                        position: absolute;
+                        top: -10px;
+                        right: 19px;
+                        content: '';
+                    }
+
+                    li {
+                        border-bottom: 1px solid $box-border-color;
+
+                        a {
+                            color: $text-darkblue;
+                            display: block;
+                            padding: 10px;
+
+                            &:hover {
+                                color: $text-white;
+                                background: $background-grey;
+                            }
+                        }
+
+                        &:first-child {
+                            border-radius: 5px 5px 0 0;
+
+                            a {
+                                border-radius: 5px 5px 0 0;
+                            }
+                        }
+
+                        &:last-child {
+                            border-radius: 0 0 5px 5px;
+                            border-bottom: none;
+
+                            a {
+                                border-radius: 0 0 5px 5px;
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
         }
     }
 }
