@@ -72,10 +72,17 @@
 
                             <li class="nav-item" *ngIf="isLoggedIn">
                                 <!-- <a class="nav-link" href="javascript:void(0)" [routerLink]="['/account']" >My Profile</a> -->
-                                <a class="nav-link" [routerLink]="['/account']">
-                                    <img src="{{s3BucketUrl}}assets/images/user_im.svg" alt="Profile Image">
-                                    <span>{{userDetails.firstName}}</span>
-                                </a>
+
+                                <div class="dropdown account_ddown">
+                                    <a class="nav-link" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
+                                        <span>{{userDetails.firstName}}</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a  [routerLink]="['/account']">My Account</a></li>
+                                        <li><a href="javascript:void(0);">Logout</a></li>
+                                    </ul>
+                                </div>
                             </li>
 
                         </ul> 
@@ -84,10 +91,16 @@
             </div>
             <div class="show_resposive">
                 <a *ngIf="!isLoggedIn" class="nav-link login_btn" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
-                <a *ngIf="isLoggedIn" class="nav-link" [routerLink]="['/account']">
-                    <img src="{{s3BucketUrl}}assets/images/user_im.svg" alt="Profile Image">
-                    <span>{{userDetails.firstName}}</span>
-                </a>
+                <div class="dropdown account_ddown" *ngIf="isLoggedIn">
+                    <a class="nav-link" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
+                        <span>{{userDetails.firstName}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a [routerLink]="['/account']">My Account</a></li>
+                        <li><a href="javascript:void(0);">Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

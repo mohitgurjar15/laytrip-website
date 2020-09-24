@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { CommonFunction } from '../../../../../_helpers/common-function';
+import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
 import { environment } from '../../../../../../environments/environment';
 
 @Component({
@@ -8,10 +10,21 @@ import { environment } from '../../../../../../environments/environment';
 })
 export class ViewHistoryComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
+  @Input() item;
+  list:any;
+  constructor(    
+    private commonFunction:CommonFunction,
+    private flightCommonFunction :FlightCommonFunction
 
-  constructor() { }
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnChanges(changes:SimpleChanges){
+    this.list = changes.item.currentValue;
+    if(this.list &&  this.list != 'undefined' ){
+    }
   }
 
+  
 }

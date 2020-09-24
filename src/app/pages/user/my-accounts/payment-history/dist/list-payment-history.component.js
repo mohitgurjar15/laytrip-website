@@ -9,24 +9,33 @@ exports.__esModule = true;
 exports.ListPaymentHistoryComponent = void 0;
 var core_1 = require("@angular/core");
 var ListPaymentHistoryComponent = /** @class */ (function () {
-    function ListPaymentHistoryComponent(userService, commonFunction) {
+    function ListPaymentHistoryComponent(userService, commonFunction, formBuilder) {
         this.userService = userService;
         this.commonFunction = commonFunction;
+        this.formBuilder = formBuilder;
         this.loading = true;
         this.isNotFound = false;
         this.perPageLimitConfig = [10, 25, 50, 100];
+        this.startMinDate = new Date();
     }
     ListPaymentHistoryComponent.prototype.ngOnInit = function () {
         this.loading = true;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
+        this.getModule();
+        this.filterForm = this.formBuilder.group({
+            bookingId: [''],
+            start_date: [''],
+            end_date: [''],
+            module: ['']
+        });
         this.getPaymentHistory();
     };
     ListPaymentHistoryComponent.prototype.getPaymentHistory = function () {
         var _this = this;
-        this.userService.getPaymentHistory(this.pageNumber, this.limit).subscribe(function (res) {
+        console.log(this.filterForm.value);
+        this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
             _this.historyResult = res.data;
-            console.log(_this.historyResult);
             _this.isNotFound = false;
             _this.loading = false;
         }, function (err) {
@@ -36,6 +45,16 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
             }
         });
     };
+    ListPaymentHistoryComponent.prototype.getBookingHistory = function (event) {
+        this.itemDetail = event;
+    };
+    ListPaymentHistoryComponent.prototype.getModule = function () {
+        this.userService.getModules(this.pageNumber, this.limit).subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+        });
+    };
+    ListPaymentHistoryComponent.prototype.ngDoCheck = function () { };
     ListPaymentHistoryComponent = __decorate([
         core_1.Component({
             selector: 'app-list-payment-history',

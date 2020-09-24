@@ -103,6 +103,23 @@ export class CommonFunction {
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     }
 
+    /** 
+     * @by Mohit Gurjar
+     * Difference between two dates / current date in Days
+     * @param string in date [24/10/2020]
+     * @param date
+     */
+    getPaymentDueDay(dateSent) {
+        let currentDate = new Date();
+        dateSent = new Date(dateSent);
+        const days = Math.floor((Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
+        if (days > 0) {
+          return days;
+        } else {
+          return 0;
+        }
+      }
+
     decodeUrl(url){
         let prevUrl=[];
         let queryParams={}

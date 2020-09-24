@@ -57,7 +57,6 @@ export class FlightCheckoutComponent implements OnInit {
       if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
       }
-      console.log("this",this.userInfo)
       this.routeCode = this.route.snapshot.paramMap.get('rc')
 
       let timerInfo:any = this.cookieService.get('flight_booking_timer')
@@ -78,7 +77,6 @@ export class FlightCheckoutComponent implements OnInit {
           'route_code':this.routeCode,
           'time': moment().format('YYYY-MM-DD h:mm:ss')
         }
-        console.log(bookingTimer)
         this.cookieService.put("flight_booking_timer", JSON.stringify(bookingTimer));
       }
 
@@ -103,6 +101,8 @@ export class FlightCheckoutComponent implements OnInit {
       catch(e){
 
       }
+
+      this.validateBookingButton();
       
     }
 
@@ -180,7 +180,6 @@ export class FlightCheckoutComponent implements OnInit {
         this.bookingResult=res;
       },(error)=>{
 
-        console.log("error",error)
         if(error.status==422){
           this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
         }
@@ -203,14 +202,22 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     validateBookingButton(){
-
+      console.log("this.cardToken",this.cardToken)
+      this.isDisableBookBtn=true;
       if(
-        this.isTandCaccepeted==true
+        this.userInfo.roleId!=7 &&
+        this.isTandCaccepeted==true &&
+        typeof this.cardToken!='undefined'
       ){
+        console.log("yes")
         this.isDisableBookBtn=false;
       }
-      else{
-        this.isDisableBookBtn=true;
+      else if(
+        this.userInfo.roleId==7 &&
+        this.isTandCaccepeted==true
+      ){
+        console.log("yes1")
+        this.isDisableBookBtn=false;
       }
       console.log("this.isDisableBookBtn",this.isDisableBookBtn)
     }
@@ -228,8 +235,6 @@ export class FlightCheckoutComponent implements OnInit {
       if(typeof guestCardDetails.card_cvv=='undefined' || guestCardDetails.card_cvv=='')
         return false;
       
-      
-      
     }
 
     getFlightSummaryData(data){
@@ -244,7 +249,6 @@ export class FlightCheckoutComponent implements OnInit {
       this.instalmentType = data.instalmentType;
       this.customAmount = data.customAmount;
       this.customInstalment = data.customInstalment;
-      console.log(data)
 
     }
 
@@ -253,25 +257,15 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     emitGuestCardDetails(event){
-      console.log(event)
       this.guestCardDetails=event;
     }
 
-    async saveCard(cardData) {
-      try{
-        return await this.genericService.saveCard(cardData);
-      }
-      catch(error){
-        return error.message;
-      }
-    }
 
     flightAvailable(event){
       this.isFlightNotAvailable=event;
     }
 
     sessionTimeout(event){
-      console.log("this.isSessionTimeOut",event)
       this.isSessionTimeOut=event;
     }
 }

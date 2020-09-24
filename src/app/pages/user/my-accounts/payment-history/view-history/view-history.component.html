@@ -1,14 +1,14 @@
 <div class="modal fade payment_view_modal" id="payment_view_modal">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-          <div class="pay_modal_cnt">
+          <div class="pay_modal_cnt" *ngIf="list">
               <div class="pay_modal_top">
                   <button type="button" class="close" data-dismiss="modal">
                       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                   </button>
-                  <p>Order ID: <span>120313254654</span></p>
+                  <p>Order ID: <span>{{list.id || '--'}}</span></p>
               </div>
-              <div class="pay_modal_btm">
+              <div class="pay_modal_btm" >
                   <div class="block_inner">
                       <div class="block_title">
                           <h5>Payment Details</h5>
@@ -17,42 +17,39 @@
                           <div class="detail_info_left">
                               <ul>
                                   <li>
-                                      <span>Payment type :</span>
-                                      <p>Partial Payment</p>
-                                  </li>
-                                  <li>
                                       <span>Partial Payment type :</span>
-                                      <p>Weekly/biweekly/monthly</p>
+                                      <p>{{list.bookingInstalments[0].instalmentType || '--' | titlecase }}</p>
                                   </li>
                                   <li>
                                       <span>Total booking amount :</span>
-                                      <p>$100</p>
+                                      <p>${{list.totalAmount | number : '1.2-2'}}</p>
                                   </li>
                                   <li>
                                       <span>Partial payment part :</span>
-                                      <p>5 EMI</p>
+                                      <p>{{list.totalInstallments}} EMI</p>
                                   </li>
+
                                   <li>
                                       <span>Partial payment Start Date :</span>
-                                      <p>22-06-2020</p>
+                                      <p>{{ flightCommonFunction.getPaymentStartDate(list.bookingInstalments) }}</p>
                                   </li>
                                   <li>
                                       <span>Next Partial payment Date :</span>
-                                      <p>28-06-2020</p>
+                                      <p>{{this.commonFunction.convertDateFormat(list.nextInstalmentDate,'YYYY-MM-DD', 'en')}}</p>
                                   </li>
                                   <li>
                                       <span>Partial payment amount :</span>
-                                      <p>$20</p>
+                                      <p>${{list.bookingInstalments[0].amount | number : '1.2-2'}}</p>
                                   </li>
                                   <li>
                                       <span>Paid amount :</span>
-                                      <p>$80 / $100</p>
+                                      <p>{{list.paidAmount | number : '1.2-2'}}</p>
                                   </li>
                               </ul>
                           </div>
                           <div class="detail_info_right">
                               <div class="list_right">
-                                  <p>Payment Due in <span>6 days</span></p>
+                                  <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(list.nextInstalmentDate)  }} days</span></p>
                                   <div class="pay_status">
                                       Pay Early
                                   </div>
@@ -74,19 +71,13 @@
                                       <th>Status</th>
                                   </tr>
                               </thead>
-                              <tbody>
-                                  <tr>
-                                      <td data-title="ID">01</td>
-                                      <td data-title="Amount">$20</td>
-                                      <td data-title="Date">22-06-2020</td>
-                                      <td data-title="Status"><span class="status_paid">Paid</span></td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="ID">02</td>
-                                      <td data-title="Amount">$10</td>
-                                      <td data-title="Date">22-06-2020</td>
-                                      <td data-title="Status"><span class="status_pending">Pending</span></td>
-                                  </tr>
+                              <tbody >
+                                  <tr *ngFor="let instalment of list.bookingInstalments; let i=index;">
+                                      <td data-title="ID">{{i +1 }}</td>
+                                      <td data-title="Amount">${{ instalment.amount | number : '1.2-2' }}</td>
+                                      <td data-title="Date">{{ instalment.instalmentDate }}</td>
+                                      <td data-title="Status"><span [ngClass]="{'status_paid': instalment.instalmentStatus === true,'status_pending': instalment.instalmentStatus != true}">{{instalment.instalmentStatus ? 'Paid':'Pending'}}</span></td>
+                                  </tr>                                 
                               </tbody>
                           </table>
                       </div>

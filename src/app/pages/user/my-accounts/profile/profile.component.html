@@ -196,7 +196,7 @@
                                                         <span>Female</span>
                                                     </a>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <a href="javascript:void(0);" (click)="clickGender($event,'N')"
                                                         [ngClass]="is_gender && is_type == 'N' ? 'active_gender' : ''">
                                                         <div class="gender_type">
@@ -209,7 +209,7 @@
                                                         </div>
                                                         <span>Non-Binary</span>
                                                     </a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
@@ -225,16 +225,16 @@
                                 <div class="form_row">
                                     <div class="field_bolck">
                                         <div class="field_inn">
-                                            <label>Address line 1<sup>*</sup></label>
+                                            <label>Address line 1</label>
                                             <div class="text_field">
                                                 <input type="text" formControlName="address" maxlength="250"
                                                     tabindex="10" placeholder="Enter address line 1">
                                             </div>
-                                            <div *ngIf="(submitted  || profileForm.controls.address.touched) && profileForm.controls.address.errors"
+                                            <!-- <div *ngIf="(submitted  || profileForm.controls.address.touched) && profileForm.controls.address.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.address.errors.required"
                                                     class="text-danger">Please enter your address.</div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="field_inn">
                                             <label>Address line 2</label>
@@ -247,7 +247,7 @@
 
                                     <div class="field_bolck">
                                         <div class="field_inn">
-                                            <label>Country<sup>*</sup></label>
+                                            <label>Country</label>
                                             <div class="text_field custom-select">
                                                 <ng-select class="ng-customClass" [items]="countries" bindLabel="name"
                                                     tabindex="11" [selectOnTab]="true" formControlName="country_id"
@@ -255,15 +255,15 @@
                                                     (change)="getStates($event)">
                                                 </ng-select>
                                             </div>
-                                            <div *ngIf="(submitted  || profileForm.controls.country_id.touched) && profileForm.controls.country_id.errors "
+                                            <!-- <div *ngIf="(submitted  || profileForm.controls.country_id.touched) && profileForm.controls.country_id.errors "
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.country_id.errors.required"
                                                     class="text-danger">Please seletct
                                                     country.</div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="field_inn">
-                                            <label>City<sup>*</sup></label>
+                                            <label>City</label>
                                             <div class="text_field custom-select">
                                                 <input type="text" formControlName="city_name" maxlength="250"
                                                     tabindex="14" placeholder="Enter address line 2">
@@ -274,7 +274,7 @@
 
                                     <div class="field_bolck">
                                         <div class="field_inn">
-                                            <label>State<sup>*</sup></label>
+                                            <label>State</label>
                                             <div class="text_field custom-select">
                                                 <ng-select class="ng-customClass" clearSearchOnAdd="true"
                                                     selectOnTab="true" tabindex="12" formControlName="state_id"
@@ -283,25 +283,25 @@
                                                         {{state.name}}</ng-option>
                                                 </ng-select>
                                             </div>
-                                            <div *ngIf="(submitted  || profileForm.controls.state_id.touched) && profileForm.controls.state_id.errors "
+                                            <!-- <div *ngIf="(submitted  || profileForm.controls.state_id.touched) && profileForm.controls.state_id.errors "
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.state_id.errors.required"
                                                     class="text-danger">Please seletct
                                                     state.</div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="field_inn">
-                                            <label>Zip Code<sup>*</sup></label>
+                                            <label>Zip Code</label>
                                             <div class="text_field">
                                                 <input type="text" formControlName="zip_code" maxlength="6"
                                                     tabindex="16" placeholder="Enter zip code"
                                                     (keypress)="commonFunctoin.validateNotAllowSpecial($event)">
                                             </div>
-                                            <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors"
+                                           <!--  <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.zip_code.errors.required"
                                                     class="text-danger">Please enter your zip code.</div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>

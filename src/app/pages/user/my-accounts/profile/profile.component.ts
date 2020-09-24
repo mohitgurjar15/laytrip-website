@@ -72,15 +72,15 @@ export class ProfileComponent implements OnInit {
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
       country_code: ['', [Validators.required]],
-      email: [''],
-      phone_no: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      zip_code: ['', [Validators.required]],
-      country_id: ['', [Validators.required]],
-      state_id: ['', [Validators.required]],
-      city_name: ['', [Validators.required]],
-      gender: [''],
       dob: ['', Validators.required],
+      phone_no: ['', [Validators.required]],
+      address: [''],
+      email: [''],
+      zip_code: [''],
+      country_id: [''],
+      state_id: [''],
+      city_name: [''],
+      gender: [''],
       profile_pic: [''],      
       address2: [''],      
       language_id: [''],      
@@ -232,7 +232,6 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
-
       formdata.append("title",this.profileForm.value.title);
       formdata.append("first_name",this.profileForm.value.first_name);
       formdata.append("last_name",this.profileForm.value.last_name);
@@ -243,18 +242,19 @@ export class ProfileComponent implements OnInit {
       formdata.append("address1",this.profileForm.value.address);
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
-      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : '');
-
-      if(!Number.isInteger(this.profileForm.value.country_id)){
+      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+      if(typeof this.profileForm.value.country_id === 'string'){
         formdata.append("country_id", this.selectResponse.country.id);
       } else {
         formdata.append("country_id", this.profileForm.value.country_id.id);
       }
-      if(!Number.isInteger(this.profileForm.value.state_id)){
+
+      if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
         formdata.append("state_id", this.selectResponse.state.id);
       } else{
         formdata.append("state_id", this.profileForm.value.state_id);
       }
+
       if(typeof(this.profileForm.value.country_code) != 'object'){        
         formdata.append("country_code", this.selectResponse.countryCode);
       } else {

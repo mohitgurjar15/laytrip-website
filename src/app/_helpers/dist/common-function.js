@@ -98,6 +98,43 @@ var CommonFunction = /** @class */ (function () {
         var dateArray = string.split(saprator);
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
+    /**
+     * @by Mohit Gurjar
+     * Difference between two dates / current date in Days
+     * @param string in date [24/10/2020]
+     * @param date
+     */
+    CommonFunction.prototype.getPaymentDueDay = function (dateSent) {
+        var currentDate = new Date();
+        dateSent = new Date(dateSent);
+        var days = Math.floor((Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
+        if (days > 0) {
+            return days;
+        }
+        else {
+            return 0;
+        }
+    };
+    CommonFunction.prototype.decodeUrl = function (url) {
+        var prevUrl = [];
+        var queryParams = {};
+        if (url) {
+            prevUrl = url.split('?');
+            var params = prevUrl[1].split('&');
+            for (var i in params) {
+                var param = params[i].split("=");
+                queryParams[param[0]] = param[1];
+            }
+            return {
+                url: prevUrl[0],
+                params: queryParams
+            };
+        }
+        return {
+            url: '/',
+            params: {}
+        };
+    };
     CommonFunction = __decorate([
         core_1.Injectable({
             providedIn: 'root'

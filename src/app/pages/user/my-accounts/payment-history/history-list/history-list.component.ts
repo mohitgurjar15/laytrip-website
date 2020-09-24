@@ -1,4 +1,7 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
+import { CommonFunction } from '../../../../../_helpers/common-function';
+import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
+
 
 @Component({
   selector: 'app-history-list',
@@ -6,23 +9,32 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./history-list.component.scss']
 })
 export class HistoryListComponent implements OnInit {
+  @Output() bookingData = new EventEmitter();
   @Input() historyResult;
   @Input() list;
-  historys:[];
-  
-  constructor() { }
+  historys: [];
+  item: any;
+
+  constructor(
+    private commonFunction:CommonFunction,
+    private flightCommonFunction :FlightCommonFunction
+  ) { }
 
   ngOnInit() {
-  }
-  ngOnChanges(changes:SimpleChanges){
-    this.list = changes.historyResult.currentValue;
-    if(this.list &&  this.list != 'undefined' ){
 
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.list = changes.historyResult.currentValue;
+
+    if(this.list && this.list != 'undefined'){
     }
   }
-  /* ngAfterContentChecked() {
-    this.historys = this.historyResult;
-  } */
 
+  viewDetailClick(item) {
+    this.item = item;
+  }
   
+
+
 }
