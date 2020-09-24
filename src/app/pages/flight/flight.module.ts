@@ -26,6 +26,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { FlightLoaderComponent } from './components/flight-loader/flight-loader.component';
 import { FlightNotAvailableComponent } from './components/flight-not-available/flight-not-available.component';
 import { FlightSessionTimeOutComponent } from './components/flight-session-time-out/flight-session-time-out.component';
+import { BaggagePolicyPopupComponent } from './components/baggage-policy-popup/baggage-policy-popup.component';
+import { CancellationPolicyPopupComponent } from './components/cancellation-policy-popup/cancellation-policy-popup.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { FlightSessionTimeOutComponent } from './components/flight-session-time-
     FlightBookingFailedComponent,
     FlightLoaderComponent,
     FlightNotAvailableComponent,
-    FlightSessionTimeOutComponent
+    FlightSessionTimeOutComponent,
+    BaggagePolicyPopupComponent,
+    CancellationPolicyPopupComponent
   ],
   imports: [
     CommonModule,
