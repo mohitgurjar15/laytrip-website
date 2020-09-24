@@ -115,6 +115,26 @@ var CommonFunction = /** @class */ (function () {
             return 0;
         }
     };
+    CommonFunction.prototype.decodeUrl = function (url) {
+        var prevUrl = [];
+        var queryParams = {};
+        if (url) {
+            prevUrl = url.split('?');
+            var params = prevUrl[1].split('&');
+            for (var i in params) {
+                var param = params[i].split("=");
+                queryParams[param[0]] = param[1];
+            }
+            return {
+                url: prevUrl[0],
+                params: queryParams
+            };
+        }
+        return {
+            url: '/',
+            params: {}
+        };
+    };
     CommonFunction = __decorate([
         core_1.Injectable({
             providedIn: 'root'

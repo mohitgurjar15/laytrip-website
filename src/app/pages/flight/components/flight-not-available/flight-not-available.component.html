@@ -5,7 +5,7 @@
           <!-- <p>How would you Love this booking Experience ?</p> -->
           <div class="block_im">
               <img src="{{s3BucketUrl}}assets/images/Flight-not-available-im.svg" alt="Flight not available Images"></div>
-          <a [routerLink]="['/']">
+          <a [routerLink]=[url] [queryParams]="queryParams">
               <img src="{{s3BucketUrl}}assets/images/icon/leftt-arrow.svg" alt="Left Arrow">
               Go back to previous page
           </a>

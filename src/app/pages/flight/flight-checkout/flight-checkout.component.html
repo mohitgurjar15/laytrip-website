@@ -1,5 +1,5 @@
 <app-checkout-progress  [progressStep]="progressStep"></app-checkout-progress>
-<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
+<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
   <div class="container">
       <div class="row">
           <div class="col-lg-8">
@@ -71,7 +71,7 @@
                   </div>
               </div>
               <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
-              <app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
+              
           </div>
           <div class="col-lg-4">
             <app-flight-summary (flightAvailable)="flightAvailable($event)" showPartialPayemntOption="instalmentMode" (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
@@ -80,6 +80,7 @@
   </div>
 </section>
 
+<app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
 <app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png" title="Flights"></app-full-page-overlay-loader>
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
 <app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>

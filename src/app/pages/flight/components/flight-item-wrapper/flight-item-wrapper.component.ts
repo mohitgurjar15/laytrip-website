@@ -66,7 +66,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private route: ActivatedRoute,
     private cookieService: CookieService,
     private commonFunction:CommonFunction
-  ) { }
+  ) {
+   }
 
   ngOnInit() {
 
@@ -83,36 +84,14 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.isRoundTrip = false;
     }
 
-    // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-    //   if (res) {
-    //     if (res.items) {
-    //       // FOR FLIGHT LIST & DETAILS
-    //       this.flightList = res.items;
-    //     }
-    //   }
-    // }));
-
-    // setTimeout(() => {
-    //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
-    //   cells.forEach(c => {
-    //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
-    //   });
-    // });
   }
 
   opened() {
-    // setTimeout(() => {
-    //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
-    //   cells.forEach(c => {
-    //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
-    //   });
-    // });
   }
 
   getBaggageDetails(routeCode) {
     this.loadBaggageDetails = true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
-      console.log('baggage:::', data);
       this.baggageDetails = data;
       this.loadBaggageDetails = false;
     });
@@ -121,7 +100,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   getCancellationPolicy(routeCode) {
     this.cancellationPolicy = '';
     this.flightService.getCancellationPolicy(routeCode).subscribe(data => {
-      console.log('cancellation-policy:::', data);
       this.errorMessage = '';
       this.cancellationPolicy = data;
     }, (err) => {
@@ -165,9 +143,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       child: this.route.snapshot.queryParams["child"],
       infant: this.route.snapshot.queryParams["infant"],
       is_passport_required : is_passport
-
     };
+    let lastSearchUrl=this.router.url;
     this.cookieService.put('_itinerary', JSON.stringify(itinerary));
+    this.cookieService.put('_prev_search', lastSearchUrl);
     this.router.navigate([`flight/traveler/${routeCode}`]);
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie';
+import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
@@ -8,8 +10,18 @@ import { environment } from '../../../../../environments/environment';
 })
 export class FlightNotAvailableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private cookieService:CookieService,
+    private commanFunction:CommonFunction
+  ) { }
   s3BucketUrl = environment.s3BucketUrl;
+  url:string;
+  queryParams={};
+
   ngOnInit() {
+    let url = this.cookieService.get('_prev_search');
+    let result =  this.commanFunction.decodeUrl(url)
+    this.url = result.url;
+    this.queryParams = result.params;
   }
 }
