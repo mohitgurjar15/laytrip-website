@@ -20,6 +20,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   langunages: Langunage[] = [];
   selectedLanunage: Langunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
   isLanunageSet: boolean = false;
+  defaultImage = this.s3BucketUrl+'assets/images/profile_im.svg';
 
   currencies: Currency[] = [];
   selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
@@ -70,6 +71,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getCurrencies();
     this.loadJquery();
     this.userDetails = getLoginUserInfo();
+    console.log(this.userDetails)
     if(Object.keys(this.userDetails).length>0){
       if(this.userDetails.roleId!=7){
         this.totalLaycredit();

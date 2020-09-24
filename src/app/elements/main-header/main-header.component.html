@@ -73,7 +73,7 @@
                             <li class="nav-item" *ngIf="isLoggedIn">
                                 <!-- <a class="nav-link" href="javascript:void(0)" [routerLink]="['/account']" >My Profile</a> -->
                                 <a class="nav-link" [routerLink]="['/account']">
-                                    <img src="{{s3BucketUrl}}assets/images/user_im.svg" alt="Profile Image">
+                                    <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                                     <span>{{userDetails.firstName}}</span>
                                 </a>
                             </li>

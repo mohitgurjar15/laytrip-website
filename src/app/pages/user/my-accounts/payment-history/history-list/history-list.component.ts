@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
-import { retry } from 'rxjs/operators';
-import { CommonFunction } from 'src/app/_helpers/common-function';
-import { FlightCommonFunction } from 'src/app/_helpers/flight-common-function';
+import { CommonFunction } from '../../../../../_helpers/common-function';
+import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
 
 
 @Component({

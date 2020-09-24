@@ -60,15 +60,15 @@ var ProfileComponent = /** @class */ (function () {
             first_name: ['', [forms_1.Validators.required]],
             last_name: ['', [forms_1.Validators.required]],
             country_code: ['', [forms_1.Validators.required]],
-            email: [''],
-            phone_no: ['', [forms_1.Validators.required]],
-            address: ['', [forms_1.Validators.required]],
-            zip_code: ['', [forms_1.Validators.required]],
-            country_id: ['', [forms_1.Validators.required]],
-            state_id: ['', [forms_1.Validators.required]],
-            city_name: ['', [forms_1.Validators.required]],
-            gender: [''],
             dob: ['', forms_1.Validators.required],
+            phone_no: ['', [forms_1.Validators.required]],
+            address: [''],
+            email: [''],
+            zip_code: [''],
+            country_id: [''],
+            state_id: [''],
+            city_name: [''],
+            gender: [''],
             profile_pic: [''],
             address2: [''],
             language_id: [''],
@@ -229,14 +229,14 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("address1", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
-            formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : '');
-            if (!Number.isInteger(this.profileForm.value.country_id)) {
+            formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+            if (typeof this.profileForm.value.country_id === 'string') {
                 formdata.append("country_id", this.selectResponse.country.id);
             }
             else {
                 formdata.append("country_id", this.profileForm.value.country_id.id);
             }
-            if (!Number.isInteger(this.profileForm.value.state_id)) {
+            if (typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
                 formdata.append("state_id", this.selectResponse.state.id);
             }
             else {
