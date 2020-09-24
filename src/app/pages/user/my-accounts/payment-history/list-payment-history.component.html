@@ -36,13 +36,23 @@
                               <div class="form_field">
                                   <label>Payment Start Date</label>
                                   <div class="text_field">
-                                      <input class="birth_date" type="text" formControlName="start_date"  tabindex="3" placeholder="Dd/mm/yyyy">
+                                    <p-calendar 
+                                    inputId="basic" 
+                                    formControlName="start_date" 
+                                    [minDate]="startMinDate"
+                                    [readonlyInput]="true"   >
+                                </p-calendar>
                                   </div>
                               </div>
                               <div class="form_field">
                                   <label>Payment End Date</label>
                                   <div class="text_field">
-                                      <input class="birth_date" type="text" formControlName="end_date"  tabindex="4" placeholder="Dd/mm/yyyy">
+                                    <p-calendar 
+                                    inputId="basic" 
+                                    formControlName="end_date" 
+                                    [minDate]="startMinDate"
+                                    [readonlyInput]="true"   >
+                                </p-calendar>
                                   </div>
                               </div>
                           </div>

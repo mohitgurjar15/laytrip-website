@@ -16,11 +16,13 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.loading = true;
         this.isNotFound = false;
         this.perPageLimitConfig = [10, 25, 50, 100];
+        this.startMinDate = new Date();
     }
     ListPaymentHistoryComponent.prototype.ngOnInit = function () {
         this.loading = true;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
+        this.getModule();
         this.filterForm = this.formBuilder.group({
             bookingId: [''],
             start_date: [''],
@@ -43,11 +45,14 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
             }
         });
     };
-    ListPaymentHistoryComponent.prototype.onSubmit = function () {
-        console.log(this.filterForm.value);
-    };
     ListPaymentHistoryComponent.prototype.getBookingHistory = function (event) {
         this.itemDetail = event;
+    };
+    ListPaymentHistoryComponent.prototype.getModule = function () {
+        this.userService.getModules(this.pageNumber, this.limit).subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+        });
     };
     ListPaymentHistoryComponent.prototype.ngDoCheck = function () { };
     ListPaymentHistoryComponent = __decorate([

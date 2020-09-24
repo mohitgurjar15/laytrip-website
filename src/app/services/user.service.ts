@@ -135,4 +135,8 @@ export class UserService {
     console.log(queryString)
     return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders())
   }
+
+  getModules(pageNumber, limit) {
+    return this.http.get(`${this.apiURL}modules?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  }
 }

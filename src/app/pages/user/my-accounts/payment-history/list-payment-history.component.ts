@@ -17,6 +17,7 @@ export class ListPaymentHistoryComponent implements OnInit {
   historyResult:any;
   filterForm: FormGroup;
   itemDetail:any;
+  startMinDate= new Date();
 
   constructor(
     private userService: UserService,
@@ -28,7 +29,7 @@ export class ListPaymentHistoryComponent implements OnInit {
     this.loading = true;
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
-    
+    this.getModule();
     
     this.filterForm = this.formBuilder.group({
       bookingId: [''],
@@ -54,15 +55,18 @@ export class ListPaymentHistoryComponent implements OnInit {
       }
     });   
   }
-
-  onSubmit(){
-   
-      console.log(this.filterForm.value)
-
-  }
   
   getBookingHistory(event) {
     this.itemDetail = event
+  }
+
+  getModule(){
+    this.userService.getModules(this.pageNumber, this.limit).subscribe((res: any) => {
+     console.log(res)
+
+   }, err => {
+    
+   }); 
   }
   
   ngDoCheck(){}

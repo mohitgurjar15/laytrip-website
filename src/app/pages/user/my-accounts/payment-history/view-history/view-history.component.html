@@ -17,10 +17,6 @@
                           <div class="detail_info_left">
                               <ul>
                                   <li>
-                                      <span>Payment type :</span>
-                                      <p>Partial Payment</p>
-                                  </li>
-                                  <li>
                                       <span>Partial Payment type :</span>
                                       <p>{{list.bookingInstalments[0].instalmentType || '--' | titlecase }}</p>
                                   </li>
@@ -43,7 +39,7 @@
                                   </li>
                                   <li>
                                       <span>Partial payment amount :</span>
-                                      <p>$20</p>
+                                      <p>${{list.bookingInstalments[0].amount | number : '1.2-2'}}</p>
                                   </li>
                                   <li>
                                       <span>Paid amount :</span>
