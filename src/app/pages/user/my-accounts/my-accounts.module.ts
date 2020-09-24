@@ -3,7 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { MyAccountsRoutingModule } from './my-accounts-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { MyAccountsNavComponent } from './my-accounts-nav/my-accounts-nav.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
@@ -35,12 +35,11 @@ import { FlightModule } from '../../flight/flight.module';
     ListPaymentHistoryComponent,
     HistoryListComponent,
     ViewHistoryComponent,
-    // FlightLoaderComponent,
-    // FlightNotFoundComponent
   ],
   imports: [
     CommonModule,
     MyAccountsRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
     NgbModule,

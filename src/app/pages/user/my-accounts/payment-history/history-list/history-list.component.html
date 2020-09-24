@@ -23,7 +23,7 @@
                       </ul>
                   </div>
                   <div class="list_right">
-                      <p>Payment Due in <span>6 days</span></p>
+                      <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(item.nextInstalmentDate)  }} days</span></p>
                       <div class="pay_status">
                           Pay Early
                       </div>
@@ -38,22 +38,23 @@
                   </div>
                   <div class="grid_block">
                       <ul>
-                          <li class="fb_medium">Total Amount: <span>$360</span></li>
-                          <li>Instalment: <span>${{item.totalAmount | number : '1.2-2' || 0}} / Weekly</span></li>
+                          <li class="fb_medium">Total Amount: <span>${{item.totalAmount | number : '1.2-2' || 0}}</span></li>
+                          <li>Instalment: <span>${{item.bookingInstalments[0].amount | number : '1.2-2' || 0}} / Weekly</span></li>
                       </ul>
                   </div>
                   <div class="grid_block">
                       <ul>
-                          <li>Payment Start: <span>27/01/2020</span></li>
-                          <li>Payment End: <span>27/01/2020</span></li>
+                          <li>Payment Start: <span>{{ flightCommonFunction.getPaymentStartDate(item.bookingInstalments) }}</span></li>
+                          <li>Payment End: <span>{{ flightCommonFunction.getPaymentEndDate(item.bookingInstalments) }}</span></li>
                       </ul>
                   </div>
                   <div class="grid_block">
-                      <span>Pending</span>
-                      <a href="javascript:void(0);" data-toggle="modal" data-target="#payment_view_modal">View Details</a>
+                      <span style="display: none;">Pending</span>
+                      <a href="javascript:void(0);" data-toggle="modal" data-target="#payment_view_modal" (click)="viewDetailClick(item)">View Details</a>
                   </div>
               </div>
           </div>
       </div>
   </div>
 </div>
+<app-view-history [item]="item"></app-view-history>

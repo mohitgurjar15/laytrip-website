@@ -21,17 +21,18 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.loading = true;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
-        this.getPaymentHistory();
         this.filterForm = this.formBuilder.group({
             bookingId: [''],
             start_date: [''],
             end_date: [''],
             module: ['']
         });
+        this.getPaymentHistory();
     };
     ListPaymentHistoryComponent.prototype.getPaymentHistory = function () {
         var _this = this;
-        this.userService.getPaymentHistory(this.pageNumber, this.limit).subscribe(function (res) {
+        console.log(this.filterForm.value);
+        this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
             _this.historyResult = res.data;
             _this.isNotFound = false;
             _this.loading = false;
@@ -43,14 +44,12 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         });
     };
     ListPaymentHistoryComponent.prototype.onSubmit = function () {
-        if (this.filterForm.invalid) {
-            this.loading = false;
-            return;
-        }
-        else {
-            console.log(this.filterForm.value);
-        }
+        console.log(this.filterForm.value);
     };
+    ListPaymentHistoryComponent.prototype.getBookingHistory = function (event) {
+        this.itemDetail = event;
+    };
+    ListPaymentHistoryComponent.prototype.ngDoCheck = function () { };
     ListPaymentHistoryComponent = __decorate([
         core_1.Component({
             selector: 'app-list-payment-history',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
@@ -16,6 +16,7 @@ export class ListPaymentHistoryComponent implements OnInit {
   limit:number;
   historyResult:any;
   filterForm: FormGroup;
+  itemDetail:any;
 
   constructor(
     private userService: UserService,
@@ -27,22 +28,25 @@ export class ListPaymentHistoryComponent implements OnInit {
     this.loading = true;
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
-    this.getPaymentHistory();
-
+    
+    
     this.filterForm = this.formBuilder.group({
       bookingId: [''],
       start_date: [''],
       end_date: [''],
       module: [''],
     });
+    this.getPaymentHistory();
   }
 
-  getPaymentHistory(){
-    this.userService.getPaymentHistory(this.pageNumber, this.limit).subscribe((res: any) => {
+  getPaymentHistory() {
+    console.log(this.filterForm.value)
+
+    this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
         this.historyResult = res.data;
         this.isNotFound = false;
         this.loading = false;
-      
+
     }, err => {
       this.isNotFound = true;
       if (err && err.status === 404) {
@@ -52,12 +56,15 @@ export class ListPaymentHistoryComponent implements OnInit {
   }
 
   onSubmit(){
-    if (this.filterForm.invalid) {         
-      this.loading = false;      
-      return;
-    } else {
+   
       console.log(this.filterForm.value)
-    }
+
   }
+  
+  getBookingHistory(event) {
+    this.itemDetail = event
+  }
+  
+  ngDoCheck(){}
 }
  

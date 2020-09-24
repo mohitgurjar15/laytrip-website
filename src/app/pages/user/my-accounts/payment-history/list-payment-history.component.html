@@ -18,7 +18,7 @@
                                 <div class="form_field">
                                     <label>Order ID</label>
                                     <div class="text_field">
-                                      <input type="text" formControlName="bookingId" maxlength="30" tabindex="1" placeholder="Order Id">
+                                      <input type="text" formControlName="bookingId" maxlength="50" tabindex="1" placeholder="Order Id">
                                     </div>                                    
                               </div>
                               <div class="form_field">
@@ -48,7 +48,7 @@
                           </div>
                       </div>
                       <div class="filter_btn">
-                          <button (click)="onSubmit()">Filter</button>
+                          <button (click)="getPaymentHistory()">Filter</button>
                       </div>
                     </div>
                 </form>
@@ -252,5 +252,4 @@
   </div>
 </section>
 
-<app-view-history></app-view-history>
 

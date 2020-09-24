@@ -9,7 +9,10 @@ exports.__esModule = true;
 exports.HistoryListComponent = void 0;
 var core_1 = require("@angular/core");
 var HistoryListComponent = /** @class */ (function () {
-    function HistoryListComponent() {
+    function HistoryListComponent(commonFunction, flightCommonFunction) {
+        this.commonFunction = commonFunction;
+        this.flightCommonFunction = flightCommonFunction;
+        this.bookingData = new core_1.EventEmitter();
     }
     HistoryListComponent.prototype.ngOnInit = function () {
     };
@@ -18,6 +21,12 @@ var HistoryListComponent = /** @class */ (function () {
         if (this.list && this.list != 'undefined') {
         }
     };
+    HistoryListComponent.prototype.viewDetailClick = function (item) {
+        this.item = item;
+    };
+    __decorate([
+        core_1.Output()
+    ], HistoryListComponent.prototype, "bookingData");
     __decorate([
         core_1.Input()
     ], HistoryListComponent.prototype, "historyResult");
