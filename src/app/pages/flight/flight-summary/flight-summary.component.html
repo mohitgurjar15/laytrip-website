@@ -337,9 +337,12 @@
         <div class="block_inner">
             <h6>Check our Policies</h6>
             <ul>
-                <li><a href="javascript:void(0);">Baggage policy</a></li>
-                <li><a href="javascript:void(0);">Cancellation policy</a></li>
+                <li><a href="javascript:void(0);" (click)="toggleBaggagePolicy()" data-toggle="modal" data-target="#baggage_policy_modal">Baggage policy</a></li>
+                <li><a href="javascript:void(0);" (click)="toggleCancellationPolicy()" data-toggle="modal" data-target="#cancellation_policy_modal">Cancellation policy</a></li>
             </ul>
         </div>
     </div>
 </div>
+
+<app-baggage-policy-popup *ngIf="showBaggePolicy"></app-baggage-policy-popup>
+<app-cancellation-policy-popup *ngIf="showCancellationPolicy"></app-cancellation-policy-popup>
