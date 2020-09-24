@@ -32,6 +32,8 @@ export class FlightSummaryComponent implements OnInit {
   flightSummaryLoader:boolean=true;
   totalTraveler:number=1;
   currency;
+  showBaggePolicy:boolean=false;
+  showCancellationPolicy:boolean=false;
 
   @Output() getRouteDetails = new EventEmitter();
 
@@ -75,5 +77,12 @@ export class FlightSummaryComponent implements OnInit {
     if(type=='inward'){
       this.inwardDetails = !this.inwardDetails;
     }
+  }
+
+  toggleBaggagePolicy(){
+    this.showBaggePolicy=true;
+  }
+  toggleCancellationPolicy(){
+    this.showCancellationPolicy=true;
   }
 }
