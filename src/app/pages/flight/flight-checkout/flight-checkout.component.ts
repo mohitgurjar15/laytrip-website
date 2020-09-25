@@ -28,9 +28,9 @@ export class FlightCheckoutComponent implements OnInit {
     validateCardDetails:Subject<any> = new Subject();
     showAddCardForm:boolean=false;
     progressStep={ step1:true, step2:true, step3:false };
-    cardToken:string;
+    cardToken:string='';
     instalmentMode='no-instalment';
-    laycreditpoints:number;
+    laycreditpoints:number=0;
     additionalAmount:number;
     routeCode:string;
     travelers=[];
@@ -51,6 +51,8 @@ export class FlightCheckoutComponent implements OnInit {
     guestCardDetails;
     isFlightNotAvailable:boolean=false;
     isSessionTimeOut:boolean=false;
+    isShowCardOption:boolean=true;
+    isShowPaymentOption:boolean=true;
 
     ngOnInit() {
       this.userInfo = getLoginUserInfo();
@@ -111,7 +113,14 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     applyLaycredit(laycreditpoints){
+      this.isShowCardOption=true;
       this.laycreditpoints=laycreditpoints;
+      this.isShowPaymentOption=true;
+      if(this.laycreditpoints>=this.sellingPrice){
+        this.isShowCardOption=false;
+        this.isShowPaymentOption=false;
+        this.cardToken='';
+      }
       this.validateBookingButton();
     }
 
@@ -129,7 +138,7 @@ export class FlightCheckoutComponent implements OnInit {
       this.validateBookingButton();
     }
 
-    async bookFlight(){
+    bookFlight(){
       
       /* Guest user */
       if(this.userInfo.roleId==7){
@@ -153,10 +162,6 @@ export class FlightCheckoutComponent implements OnInit {
         this.bookingLoader=true;
         this.bookFlightApi();
       }
-
-
-      
-
       //this.bookFlightApi(bookingData);
     }
 
@@ -207,7 +212,7 @@ export class FlightCheckoutComponent implements OnInit {
       if(
         this.userInfo.roleId!=7 &&
         this.isTandCaccepeted==true &&
-        typeof this.cardToken!='undefined'
+        (this.cardToken!='' || this.laycreditpoints>=this.sellingPrice)
       ){
         this.isDisableBookBtn=false;
       }

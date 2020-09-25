@@ -49,10 +49,10 @@ export class RedeemLaycreditComponent implements OnInit {
         
         const laycreditOptions: Options = Object.assign({}, this.laycreditOptions);
         if(this.totalLaycreditPoints > this.sellingPrice){
-          laycreditOptions.ceil = Math.floor(this.sellingPrice);
+          laycreditOptions.ceil = this.sellingPrice;
         }
         else{
-          laycreditOptions.ceil = Math.floor(this.totalLaycreditPoints);
+          laycreditOptions.ceil = this.totalLaycreditPoints;
         }
         this.laycreditOptions = laycreditOptions;
       }
