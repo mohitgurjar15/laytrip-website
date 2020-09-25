@@ -52,8 +52,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   routeCode = [];
   baggageDetails;
   cancellationPolicy;
+  cancellationPolicyArray=[];
+  loadMoreCancellationPolicy:boolean=false;
   errorMessage;
-  loadBaggageDetails = true;
+  loadBaggageDetails:boolean = true;
+  loadCancellationPolicy:boolean=false;
 
   isRoundTrip = false;
 
@@ -73,8 +76,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    this.loadJquery();
-
     // console.log(this.flightDetails);
     this.flightList = this.flightDetails;
 
@@ -98,17 +99,23 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   getCancellationPolicy(routeCode) {
-    this.cancellationPolicy = '';
-    this.flightService.getCancellationPolicy(routeCode).subscribe(data => {
-      this.errorMessage = '';
+
+    this.loadCancellationPolicy=true;
+    this.loadMoreCancellationPolicy=false;
+    this.errorMessage='';
+    this.flightService.getCancellationPolicy(routeCode).subscribe((data:any) => {
+      this.cancellationPolicyArray = data.cancellation_policy.split('--')
+      this.loadCancellationPolicy=false;
       this.cancellationPolicy = data;
     }, (err) => {
-      console.log(err);
+      this.loadCancellationPolicy=false;
       this.errorMessage = err.message;
     });
   }
 
-  loadJquery() {
+  toggleCancellationContent(){
+    this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
+    console.log("this.loadMoreCancellationPolicy",this.loadMoreCancellationPolicy)
   }
 
   ngAfterContentChecked() {
