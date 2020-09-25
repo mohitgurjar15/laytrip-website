@@ -36,6 +36,7 @@ export class ListBookingsComponent implements OnInit {
           if(flight.moduleId == 1){
             return {
               tripId : flight.id,
+              journey_type : flight.locationInfo.journey_type,
               bookingDate : this.commonFunction.convertDateFormat(flight.bookingDate,'YYYY-MM-DD'),
               departure_time : flight.moduleInfo[0].routes[0].stops[0].departure_time,
               arrival_time : flight.moduleInfo[0].routes[0].stops[0].arrival_time,

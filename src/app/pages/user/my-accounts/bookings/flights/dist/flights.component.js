@@ -15,14 +15,26 @@ var FlightsComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.flightList = [];
         this.flightBookings = [];
+        this.pageSize = 12;
+        this.perPageLimitConfig = [12, 25, 50, 100];
+        this.showPaginationBar = false;
     }
     FlightsComponent.prototype.ngOnInit = function () {
+        this.page = 1;
+        this.limit = this.perPageLimitConfig[0];
     };
     FlightsComponent.prototype.ngOnChanges = function (changes) {
         this.flightList = changes.flightLists.currentValue;
+        this.showPaginationBar = true;
     };
     FlightsComponent.prototype.ngAfterContentChecked = function () {
         this.flightBookings = this.flightList;
+        this.totalItems = this.flightBookings.length;
+        this.showPaginationBar = true;
+    };
+    FlightsComponent.prototype.pageChange = function (event) {
+        this.showPaginationBar = false;
+        this.page = event;
     };
     __decorate([
         core_1.Input()

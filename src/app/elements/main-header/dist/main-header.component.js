@@ -59,7 +59,6 @@ var MainHeaderComponent = /** @class */ (function () {
         this.getCurrencies();
         this.loadJquery();
         this.userDetails = jwt_helper_1.getLoginUserInfo();
-        console.log(this.userDetails);
         if (Object.keys(this.userDetails).length > 0) {
             if (this.userDetails.roleId != 7) {
                 this.totalLaycredit();
@@ -133,7 +132,7 @@ var MainHeaderComponent = /** @class */ (function () {
     MainHeaderComponent.prototype.onLoggedout = function () {
         this.isLoggedIn = false;
         localStorage.removeItem('_lay_sess');
-        this.router.url;
+        this.router.navigate(['/']);
     };
     MainHeaderComponent.prototype.loadJquery = function () {
         // Start sticky header js

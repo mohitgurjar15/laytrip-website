@@ -456,6 +456,11 @@
   list-style: none;
   display: flex;
 }
+@media (max-width: 1199px) {
+  .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half .select_gender ul {
+    flex-wrap: wrap;
+  }
+}
 @media (max-width: 575px) {
   .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half .select_gender ul {
     flex-wrap: wrap;
@@ -466,7 +471,7 @@
   margin: 0 10px 0 0;
   text-align: center;
 }
-@media (max-width: 575px) {
+@media (max-width: 1199px) {
   .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half .select_gender ul li {
     margin: 0 10px 10px 0;
   }
@@ -615,6 +620,10 @@
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input:focus {
   border-bottom: 1px solid #1943FF;
 }
+.account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input.birth_date {
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background-position: right center;
+}
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select {
   height: 40px;
   border-top: none;
@@ -673,6 +682,9 @@
 }
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-items.select-hide {
   display: none;
+}
+.account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck.half {
+  width: 49%;
 }
 .account_part .account_cnt_main .form_update_btn {
   width: 100%;
@@ -833,297 +845,109 @@
     padding: 20px;
   }
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list {
-  padding: 15px;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result {
+  padding: 0;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing {
+  width: 100%;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block {
   border: 1px solid #E0E2E5;
   border-radius: 5px;
   box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
   margin: 0 0 15px;
 }
-@media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list {
-    padding: 10px;
-  }
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list:last-child {
-  margin: 0;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_top {
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info {
   width: 100%;
   margin: 0 0 15px;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_top ul {
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul {
   width: 100%;
   display: flex;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_top ul li {
+@media (max-width: 767px) {
+  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul {
+    flex-flow: column;
+  }
+}
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li {
   padding: 0 40px 0 0;
   font-size: 14px;
   font-weight: 600;
   color: #8188AB;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_top ul li:last-child {
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li:last-child {
   padding: 0;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_top ul li span {
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li span {
   color: #000000;
   padding: 0 0 0 5px;
 }
 @media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_top ul li {
-    padding: 0 20px 0 0;
+  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li {
+    padding: 0 0 10px 0;
   }
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_top ul li span {
+  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li span {
+    font-size: 12px;
     display: block;
     padding: 0;
+    word-break: break-word;
   }
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm {
-  width: 100%;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_detail.noborder {
+  border: none;
+  padding: 0;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .row {
-  align-items: center;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_main {
+  padding-left: 0;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_im {
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  text-align: center;
-  height: 100%;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_main .block_top .block_inner .block_im {
+  padding-left: 0;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_im img {
-  object-fit: cover;
-  height: auto;
-  width: 100%;
-  margin: 0 auto;
-  padding-bottom: 4px;
-  position: inherit;
-  max-width: 70px;
-  max-height: 70px;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_im p {
-  font-size: 12px;
-  font-weight: 400;
-  color: #000000;
-  margin: 0 0 2px;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_im span {
-  font-size: 10px;
-  font-weight: 300;
-  color: #8188AB;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 0 20px;
-  border-right: 2px dashed rgba(63, 48, 249, 0.2);
-  border-left: 2px dashed rgba(63, 48, 249, 0.2);
-}
-@media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail {
-    border-left: none;
-    border-right: none;
-  }
-}
-@media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail {
-    padding: 0 15px;
-  }
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .detail_info {
-  font-size: 12px;
-  color: #8188AB;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .detail_info p {
-  margin: 0 0 5px;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .detail_info h4 {
-  font-size: 20px;
-  color: #000000;
-  font-weight: 600;
-  margin: 0;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .detail_info h4 span {
-  font-size: 12px;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block:last-child {
   margin: 0;
 }
 @media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .detail_info h4 {
-    font-size: 16px;
-  }
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .detail_info h4 span {
-    font-size: 10px;
+  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block:last-child {
+    margin: 0 0 15px;
   }
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .detail_info span {
-  margin: 5px 0 0;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .detail_info_show .nav-tabs li a:before {
+  display: none;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .flight_stop_detail {
-  text-align: center;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .detail_info_show .tab-content .card-body {
+  box-shadow: none;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .flight_stop_detail p {
-  font-size: 12px;
-  color: #8188AB;
-  margin: 0;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .detail_info_show .tab-content .card-body.noborder {
+  border: none;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .flight_stop_detail .border-dot {
-  width: 80px;
-  border: 1px dashed #CAD1DE;
-  margin: 5px 0;
-}
-@media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .flight_stop_detail .border-dot {
-    width: 50px;
-  }
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_top .flight_stop_detail span {
-  font-size: 12px;
-  color: #8188AB;
-  margin: 0;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid #E0E2E5;
-  padding-top: 10px;
-}
-@media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #E0E2E5;
-    margin: 0 0 10px;
-  }
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .show_detail {
-  width: auto;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .show_detail a {
-  display: inline;
-  font-size: 14px;
-  font-weight: 500;
-  color: #00AEEF;
-  position: relative;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .show_detail a img {
-  margin-right: 5px;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .show_detail a:after {
-  content: "";
-  position: absolute;
-  left: 105%;
-  top: 50%;
-  width: 0;
-  height: 0;
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  border-left: 3px solid #00AEEF;
-  transform: translate(-50%, -50%);
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .info_price_origin {
-  width: auto;
-  display: flex;
-  align-items: center;
-}
-@media (max-width: 767px) {
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .info_price_origin {
-    padding: 10px 0 0;
-    width: 100%;
-    justify-content: center;
-  }
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .info_price_origin .refundable {
-  padding: 4px 10px;
-  font-size: 10px;
-  color: #000000;
-  font-weight: 500;
-  background: #E0E2E5;
-  border: 1px solid #E0E2E5;
-  margin-right: 15px;
-  display: inline-table;
-  border-radius: 5px;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .info_price_origin .ogigin_price {
-  font-size: 12px;
-  font-weight: 600;
-  color: #8188AB;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_detail .block_detail_btm .info_price_origin .ogigin_price span {
-  font-size: 20px;
-  color: #000000;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price {
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available {
   width: 100%;
   text-align: center;
-  padding: 0 15px;
+  padding: 30px;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price p {
-  width: 100%;
-  margin: 0 0 10px;
-  font-size: 12px;
-  font-weight: 300;
-  color: #8188AB;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available img {
+  width: 250px;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price p:first-child {
-  margin: 0 0 5px;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price p span {
-  font-size: 28px;
-  color: #1943FF;
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available h5 {
+  font-size: 40px;
+  color: #FC7E66;
   font-weight: 600;
+  margin: 30px 0 0;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price .book_btn {
-  display: inline-block;
-  line-height: 38px;
-  padding: 0 25px;
-  font-size: 16px;
-  color: #ffffff;
-  font-weight: 500;
-  border-radius: 20px;
-  background: #00BFFD;
-  position: relative;
-  z-index: 9;
-  overflow: hidden;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price .book_btn:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: #1943FF;
-  z-index: -1;
-  transition: 0.8s;
-  border-radius: 0 0 50% 50%;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price .book_btn:hover {
-  border-color: #1943FF;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price .book_btn:hover:before {
-  height: 190%;
-}
-.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_list .booking_list_btm .block_price .partial_payment_info {
-  display: block;
-  margin: 10px 0 0;
-  font-size: 12px;
-  font-weight: 500;
-  color: #00AEEF;
+@media (max-width: 767px) {
+  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available {
+    padding: 20px;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available img {
+    width: 150px;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available h5 {
+    font-size: 20px;
+  }
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content {
   position: relative;
@@ -2421,6 +2245,118 @@
 .account_part .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list:last-child {
   margin: 0;
 }
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points {
+  width: 100%;
+  padding: 30px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  margin: 0 0 30px;
+  background: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li {
+  width: 200px;
+  height: 88px;
+  padding: 22px 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_blue.svg) no-repeat;
+  background-size: cover;
+  margin: 0 30px 0 0;
+  position: relative;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  transform: translateY(-50%) rotate(-90deg);
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li .block_point {
+  padding: 0 0 0 30px;
+  font-size: 10px;
+  color: #ffffff;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li .block_point p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li:last-child {
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_orange.svg) no-repeat;
+  background-size: cover;
+  margin: 0;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li:last-child span {
+  left: 7px;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a {
+  border: 1px solid #E0E2E5;
+  border-radius: 15px;
+  padding: 10px 15px;
+  display: inline-block;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a .add_point_im {
+  text-align: center;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a .add_point_im span {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #E0E2E5;
+  position: relative;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a .add_point_im span img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8188AB;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list {
+  padding: 25px 15px;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul {
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li.text_clr_orange {
+  color: #FC7E66;
+  font-weight: 600;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li.text_clr_orange img {
+  margin: 0 5px 0 0;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li.text_clr_grey {
+  color: #8188AB;
+}
 
 .payment_view_modal .modal-dialog {
   max-width: 1024px;
@@ -2968,4 +2904,72 @@
   .cmn_add_edit_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm .add_card_form .form_btn button {
     display: inline-flex;
   }
+}
+
+.cmn_delete_modal {
+  padding: 0 !important;
+}
+.cmn_delete_modal .modal-dialog {
+  max-width: 450px;
+  width: 96%;
+}
+.cmn_delete_modal .modal-dialog .modal-content {
+  padding: 30px;
+  border-radius: 20px;
+}
+@media (max-width: 575px) {
+  .cmn_delete_modal .modal-dialog .modal-content {
+    padding: 15px;
+  }
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_top {
+  width: 100%;
+  position: relative;
+  margin: 0 0 20px;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_top .close {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-weight: normal;
+  opacity: 1;
+  z-index: 99;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm {
+  text-align: center;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: #8188AB;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm p {
+  font-size: 16px;
+  color: #000000;
+  margin: 0 0 15px;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm ul li {
+  padding: 0 5px;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm ul li a {
+  width: 100px;
+  display: inline-block;
+  line-height: 40px;
+  font-size: 14px;
+  color: #ffffff;
+  background: #1943FF;
+  border-radius: 5px;
+  padding: 0 15px;
+}
+.cmn_delete_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm ul li:last-child a {
+  background: #FC7E66;
 }

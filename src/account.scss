@@ -531,6 +531,10 @@
                                     list-style: none;
                                     display: flex;
 
+                                    @media(max-width: 1199px) {
+                                        flex-wrap: wrap;
+                                    }
+
                                     @media(max-width: 575px) {
                                         flex-wrap: wrap;
                                     }
@@ -540,7 +544,7 @@
                                         margin: 0 10px 0 0;
                                         text-align: center;
 
-                                        @media(max-width: 575px) {
+                                        @media(max-width: 1199px) {
                                             margin: 0 10px 10px 0;
                                         }
 
@@ -709,6 +713,11 @@
                                     &:focus {
                                         border-bottom: 1px solid $primary-color;
                                     }
+
+                                    &.birth_date {
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                        background-position: right center;
+                                    }
                                 }
 
                                 &.custom-select {
@@ -784,6 +793,10 @@
                                 }
 
                             }
+                        }
+
+                        &.half {
+                            width: 49%;
                         }
                     }
                 }
@@ -992,340 +1005,155 @@
                             }
 
                             .block_booking_list_inner {
-                                .block_list {
-                                    padding: 15px;
-                                    border: 1px solid $box-border-color;
-                                    border-radius: 5px;
-                                    box-shadow: 3px 4px 10px $shadow-color;
-                                    margin: 0 0 15px;
 
-                                    @media(max-width:767px) {
-                                        padding: 10px;
-                                    }
+                                .search_result {
+                                    padding: 0;
 
-                                    &:last-child {
-                                        margin: 0;
-                                    }
-
-                                    .booking_list_top {
-                                        width: 100%;
-                                        margin: 0 0 15px;
-
-                                        ul {
-                                            width: 100%;
-                                            display: flex;
-                                            margin: 0;
-                                            padding: 0;
-                                            list-style: none;
-
-
-                                            li {
-                                                padding: 0 40px 0 0;
-                                                font-size: 14px;
-                                                font-weight: 600;
-                                                color: $text-grey;
-
-                                                &:last-child {
-                                                    padding: 0;
-                                                }
-
-                                                span {
-                                                    color: $text-black;
-                                                    padding: 0 0 0 5px;
-                                                }
-
-                                                @media(max-width:767px) {
-                                                    padding: 0 20px 0 0;
-
-                                                    span {
-                                                        display: block;
-                                                        padding: 0;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .booking_list_btm {
-
-                                        .row {
-                                            align-items: center;
-                                        }
-
+                                    .result_listing {
                                         width: 100%;
 
-                                        .block_im {
-                                            width: 100%;
-                                            display: flex;
-                                            flex-flow: column;
-                                            justify-content: center;
-                                            text-align: center;
-                                            height: 100%;
+                                        &.one_way_list {
+                                            &.roundtrip_list {
+                                                .search_block {
+                                                    border: 1px solid $box-border-color;
+                                                    border-radius: 5px;
+                                                    box-shadow: 3px 4px 10px $shadow-color;
+                                                    margin: 0 0 15px;
+
+                                                    .listing_block {
+                                                        .block_booking_info {
+                                                            width: 100%;
+                                                            margin: 0 0 15px;
+
+                                                            ul {
+                                                                width: 100%;
+                                                                display: flex;
+                                                                margin: 0;
+                                                                padding: 0;
+                                                                list-style: none;
+
+                                                                @media(max-width:767px) {
+                                                                    flex-flow: column;
+                                                                }
 
 
-                                            img {
-                                                object-fit: cover;
-                                                height: auto;
-                                                width: 100%;
-                                                margin: 0 auto;
-                                                padding-bottom: 4px;
-                                                position: inherit;
-                                                max-width: 70px;
-                                                max-height: 70px;
-                                            }
+                                                                li {
+                                                                    padding: 0 40px 0 0;
+                                                                    font-size: 14px;
+                                                                    font-weight: 600;
+                                                                    color: $text-grey;
 
-                                            p {
-                                                font-size: 12px;
-                                                font-weight: 400;
-                                                color: $text-black;
-                                                margin: 0 0 2px;
-                                            }
+                                                                    &:last-child {
+                                                                        padding: 0;
+                                                                    }
 
-                                            span {
-                                                font-size: 10px;
-                                                font-weight: 300;
-                                                color: $text-grey;
-                                            }
-                                        }
+                                                                    span {
+                                                                        color: $text-black;
+                                                                        padding: 0 0 0 5px;
+                                                                    }
 
-                                        .block_detail {
-                                            display: flex;
-                                            flex-flow: column;
-                                            justify-content: space-between;
-                                            height: 100%;
-                                            padding: 0 20px;
-                                            border-right: 2px dashed rgba(63, 48, 249, 0.2);
-                                            border-left: 2px dashed rgba(63, 48, 249, 0.2);
+                                                                    @media(max-width:767px) {
+                                                                        padding: 0 0 10px 0;
 
-                                            @media(max-width:767px) {
-                                                border-left: none;
-                                                border-right: none;
-                                            }
-
-
-                                            @media(max-width:767px) {
-                                                padding: 0 15px;
-                                            }
-
-                                            .block_detail_top {
-                                                display: flex;
-                                                flex-wrap: wrap;
-                                                justify-content: space-between;
-                                                align-items: center;
-                                                padding: 20px 0;
-
-                                                .detail_info {
-                                                    font-size: 12px;
-                                                    color: $text-grey;
-
-                                                    p {
-                                                        margin: 0 0 5px;
-                                                    }
-
-                                                    h4 {
-                                                        font-size: 20px;
-                                                        color: $text-black;
-                                                        font-weight: 600;
-                                                        margin: 0;
-
-                                                        span {
-                                                            font-size: 12px;
-                                                            margin: 0;
+                                                                        span {
+                                                                            font-size: 12px;
+                                                                            display: block;
+                                                                            padding: 0;
+                                                                            word-break: break-word;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
                                                         }
 
-                                                        @media(max-width:767px) {
-                                                            font-size: 16px;
+                                                        .block_detail {
+                                                            &.noborder {
+                                                                border: none;
+                                                                padding: 0;
+                                                            }
+                                                        }
 
-                                                            span {
-                                                                font-size: 10px;
+                                                        .block_main {
+                                                            padding-left: 0;
+
+                                                            .block_top {
+                                                                .block_inner {
+                                                                    .block_im {
+                                                                        padding-left: 0;
+                                                                    }
+                                                                }
+
                                                             }
                                                         }
                                                     }
 
-                                                    span {
-                                                        margin: 5px 0 0;
-                                                    }
-                                                }
-
-                                                .flight_stop_detail {
-                                                    text-align: center;
-
-                                                    p {
-                                                        font-size: 12px;
-                                                        color: $text-grey;
+                                                    &:last-child {
                                                         margin: 0;
-                                                    }
-
-                                                    .border-dot {
-                                                        width: 80px;
-                                                        border: 1px dashed $tab-border-color;
-                                                        margin: 5px 0;
 
                                                         @media(max-width:767px) {
-                                                            width: 50px;
+                                                            margin: 0 0 15px;
                                                         }
                                                     }
 
-                                                    span {
-                                                        font-size: 12px;
-                                                        color: $text-grey;
-                                                        margin: 0;
-                                                    }
-                                                }
-                                            }
-
-                                            .block_detail_btm {
-                                                display: flex;
-                                                align-items: center;
-                                                justify-content: space-between;
-                                                border-top: 1px solid $box-border-color;
-                                                padding-top: 10px;
-
-                                                @media(max-width:767px) {
-                                                    flex-wrap: wrap;
-                                                    justify-content: center;
-                                                    padding-bottom: 10px;
-                                                    border-bottom: 1px solid $box-border-color;
-                                                    margin: 0 0 10px;
-                                                }
-
-                                                .show_detail {
-                                                    width: auto;
-
-                                                    a {
-                                                        display: inline;
-                                                        font-size: 14px;
-                                                        font-weight: 500;
-                                                        color: $text-lightblue;
-                                                        position: relative;
-
-                                                        img {
-                                                            margin-right: 5px;
-                                                        }
-
-                                                        &:after {
-                                                            content: '';
-                                                            position: absolute;
-                                                            left: 105%;
-                                                            top: 50%;
-                                                            width: 0;
-                                                            height: 0;
-                                                            border-top: 3px solid transparent;
-                                                            border-bottom: 3px solid transparent;
-                                                            border-left: 3px solid $text-lightblue;
-                                                            transform: translate(-50%, -50%);
+                                                    .detail_info_show {
+                                                        .nav-tabs {
+                                                            li {
+                                                                a {
+                                                                    &:before {
+                                                                        display: none;
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
 
-                                                .info_price_origin {
-                                                    width: auto;
-                                                    display: flex;
-                                                    align-items: center;
+                                                .detail_info_show {
+                                                    .tab-content {
+                                                        .card-body {
+                                                            box-shadow: none;
 
-                                                    @media(max-width:767px) {
-                                                        padding: 10px 0 0;
-                                                        width: 100%;
-                                                        justify-content: center;
-                                                    }
-
-                                                    .refundable {
-                                                        padding: 4px 10px;
-                                                        font-size: 10px;
-                                                        color: $text-black;
-                                                        font-weight: 500;
-                                                        background: $box-border-color;
-                                                        border: 1px solid $box-border-color;
-                                                        margin-right: 15px;
-                                                        display: inline-table;
-                                                        border-radius: 5px;
-                                                    }
-
-                                                    .ogigin_price {
-                                                        font-size: 12px;
-                                                        font-weight: 600;
-                                                        color: $text-grey;
-
-                                                        span {
-                                                            font-size: 20px;
-                                                            color: $text-black;
+                                                            &.noborder {
+                                                                border: none;
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }
 
-                                        .block_price {
-                                            width: 100%;
-                                            text-align: center;
-                                            padding: 0 15px;
+                                    }
+                                }
 
-                                            p {
-                                                width: 100%;
-                                                margin: 0 0 10px;
-                                                font-size: 12px;
-                                                font-weight: 300;
-                                                color: $text-grey;
+                                .block_nobooking_available {
+                                    width: 100%;
+                                    text-align: center;
+                                    padding: 30px;
 
-                                                &:first-child {
-                                                    margin: 0 0 5px;
-                                                }
+                                    img {
+                                        width: 250px;
+                                    }
 
-                                                span {
-                                                    font-size: 28px;
-                                                    color: $primary-color;
-                                                    font-weight: 600;
-                                                }
+                                    h5 {
+                                        font-size: 40px;
+                                        color: $secondary-color;
+                                        font-weight: 600;
+                                        margin: 30px 0 0;
+                                    }
 
-                                            }
+                                    @media(max-width:767px) {
+                                        padding: 20px;
 
-                                            .book_btn {
-                                                display: inline-block;
-                                                line-height: 38px;
-                                                padding: 0 25px;
-                                                font-size: 16px;
-                                                color: $text-white;
-                                                font-weight: 500;
-                                                border-radius: 20px;
-                                                background: $btn-bg;
-                                                position: relative;
-                                                z-index: 9;
-                                                overflow: hidden;
+                                        img {
+                                            width: 150px;
+                                        }
 
-                                                &:before {
-                                                    content: "";
-                                                    position: absolute;
-                                                    top: 0;
-                                                    left: 0;
-                                                    width: 100%;
-                                                    height: 0%;
-                                                    background: $primary-color;
-                                                    z-index: -1;
-                                                    transition: 0.8s;
-                                                    border-radius: 0 0 50% 50%;
-                                                }
-
-                                                &:hover {
-                                                    border-color: $primary-color;
-
-                                                    &:before {
-                                                        height: 190%;
-                                                    }
-                                                }
-                                            }
-
-                                            .partial_payment_info {
-                                                display: block;
-                                                margin: 10px 0 0;
-                                                font-size: 12px;
-                                                font-weight: 500;
-                                                color: $text-lightblue;
-                                            }
+                                        h5 {
+                                            font-size: 20px;
                                         }
                                     }
                                 }
                             }
-
                         }
                     }
                 }
@@ -2833,6 +2661,157 @@
                     }
                 }
             }
+
+            &.ac_mywallet {
+                .block_laycredit_points {
+                    width: 100%;
+                    padding: 30px;
+                    box-shadow: 3px 4px 10px $shadow-color;
+                    margin: 0 0 30px;
+                    background: $background-white;
+                    border-radius: 5px;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .block_points_info {
+                        ul {
+                            width: 100%;
+                            display: flex;
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+
+                            li {
+                                width: 200px;
+                                height: 88px;
+                                padding: 22px 15px;
+                                border-radius: 5px;
+                                display: flex;
+                                align-items: center;
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_blue.svg) no-repeat;
+                                background-size: cover;
+                                margin: 0 30px 0 0;
+                                position: relative;
+
+                                span {
+                                    font-size: 12px;
+                                    font-weight: 400;
+                                    color: #fff;
+                                    transform: translateY(-50%) rotate(-90deg);
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 0;
+                                }
+
+                                .block_point {
+                                    padding: 0 0 0 30px;
+                                    font-size: 10px;
+                                    color: $text-white;
+
+                                    p {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: $text-white;
+                                        margin: 0;
+                                    }
+                                }
+
+                                &:last-child {
+                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_orange.svg) no-repeat;
+                                    background-size: cover;
+                                    margin: 0;
+
+                                    span {
+                                        left: 7px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .block_points_add {
+
+
+
+                        a {
+                            border: 1px solid $box-border-color;
+                            border-radius: 15px;
+                            padding: 10px 15px;
+                            display: inline-block;
+
+                            .add_point_im {
+                                text-align: center;
+
+                                span {
+                                    width: 40px;
+                                    height: 40px;
+                                    display: inline-block;
+                                    border-radius: 50%;
+                                    background: $box-border-color;
+                                    position: relative;
+
+                                    img {
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                    }
+                                }
+                            }
+
+                            span {
+                                font-size: 12px;
+                                font-weight: 500;
+                                color: $text-grey;
+                            }
+                        }
+
+                    }
+                }
+
+                .block_notification_main {
+                    .tab-content {
+                        .card {
+                            .card-body {
+                                .block_notification {
+                                    .block_list {
+                                        padding: 25px 15px;
+
+                                        ul {
+                                            width: 100%;
+                                            display: flex;
+                                            align-content: center;
+                                            justify-content: space-between;
+                                            list-style: none;
+                                            margin: 0;
+                                            padding: 0;
+
+                                            li {
+                                                font-size: 16px;
+                                                font-weight: 500;
+                                                color: $text-black;
+
+                                                &.text_clr_orange {
+                                                    color: $secondary-color;
+                                                    font-weight: 600;
+
+                                                    img {
+                                                        margin: 0 5px 0 0;
+                                                    }
+                                                }
+
+                                                &.text_clr_grey {
+                                                    color: $text-grey;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -3129,7 +3108,6 @@
 }
 
 //<!-- Close Payment view Modal css -->
-
 
 //<!-- Start Add Card Modal css -->
 .cmn_add_edit_modal {
@@ -3508,3 +3486,85 @@
 }
 
 //<!-- Close Add Card Modal css -->
+
+.cmn_delete_modal {
+    padding: 0 !important;
+
+    .modal-dialog {
+        max-width: 450px;
+        width: 96%;
+
+        .modal-content {
+            padding: 30px;
+            border-radius: 20px;
+
+            @media(max-width:575px) {
+                padding: 15px;
+            }
+
+            .card_modal_cnt {
+                .modal_top {
+                    width: 100%;
+                    position: relative;
+                    margin: 0 0 20px;
+
+                    .close {
+                        position: absolute;
+                        top: -5px;
+                        right: -5px;
+                        font-weight: normal;
+                        opacity: 1;
+                        z-index: 99;
+                    }
+                }
+
+                .modal_btm {
+                    text-align: center;
+
+                    h4 {
+                        font-size: 20px;
+                        font-weight: 600;
+                        margin: 0 0 20px;
+                        color: $text-grey;
+                    }
+
+                    p {
+                        font-size: 16px;
+                        color: $text-black;
+                        margin: 0 0 15px;
+                    }
+
+                    ul {
+                        width: 100%;
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        display: flex;
+                        justify-content: center;
+
+                        li {
+                            padding: 0 5px;
+
+                            a {
+                                width: 100px;
+                                display: inline-block;
+                                line-height: 40px;
+                                font-size: 14px;
+                                color: $text-white;
+                                background: $primary-color;
+                                border-radius: 5px;
+                                padding: 0 15px;
+                            }
+
+                            &:last-child {
+                                a {
+                                    background: $secondary-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

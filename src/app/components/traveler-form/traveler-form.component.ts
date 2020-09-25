@@ -42,8 +42,10 @@ export class TravelerFormComponent implements OnInit {
     displayFormat: 'DD/MM/YYYY'
   };
 
-  dobMinDate: any;
-  dobMaxDate: moment.Moment = moment(); 
+  dobMinDate;
+  dobMaxDate; 
+  minyear;
+  maxyear;
   expiryMinDate: moment.Moment = moment().add(2, 'days');
 
   
@@ -65,25 +67,16 @@ export class TravelerFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       country_code: ['', [Validators.required]],
       phone_no: ['', [Validators.required]],
-      country_id: ['', Validators.required],
-      dob: [{
-        startDate: typeof this.traveler.dob !== 'undefined' ?
-          moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
-      }, Validators.required], 
-      // dob : ['', Validators.required],
-      // passport_expiry : [''],
-       passport_expiry: [{
-        startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-          moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
-      },],
-      passport_number: [''],
+      country_id: ['', Validators.required],      
+      dob : ['', Validators.required],
+      passport_expiry : [''],
       frequently_no: [''],
       user_type: ['']
     });
 
     this.setUserTypeValidation();
-
     if (this.traveler.userId) {
+
       this.adultForm.patchValue({
         title: this.traveler.title,
         firstName: this.traveler.firstName,
@@ -94,8 +87,11 @@ export class TravelerFormComponent implements OnInit {
         phone_no: this.traveler.phoneNo,
         country_id: this.traveler.country != null ? this.traveler.country.name : '',
         passport_number: this.traveler.passportNumber,
+        dob: new Date(this.traveler.dob),
+        passport_expiry: new Date(this.traveler.passport_expiry),
         frequently_no: ''
-      })
+      });
+
       this.formStatus = this.adultForm.status === 'VALID' ? true : false;
       // this.auditFormStatus.emit(this.formStatus);
     }
@@ -119,19 +115,23 @@ export class TravelerFormComponent implements OnInit {
       emailControl.setValidators([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
-      // this.dobMinDate = '';
-      this.dobMaxDate = moment().add(-12, 'year');
-      console.log('min dates',this.dobMinDate)
-      console.log('max dates',this.dobMaxDate)
+
+      this.dobMinDate = new Date(moment().subtract(50,'years').format("MM/DD/YYYY") );
+      this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
+      this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
     } else if (this.type === 'child') {
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null);
-      this.dobMinDate = moment().add(-12, 'year');
-      this.dobMaxDate = moment().add(-2, 'year');
+      this.dobMinDate =  new Date(moment().subtract(12,'years').format("MM/DD/YYYY") );
+      this.dobMaxDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
+      this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
+ 
     } else if (this.type === 'infant') {
-      this.dobMinDate = moment().add(-2, 'year');
-      this.dobMaxDate = moment();
+      this.dobMinDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
+      this.dobMaxDate = new Date();
+      this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
+ 
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
@@ -139,11 +139,11 @@ export class TravelerFormComponent implements OnInit {
     if((this.type === 'adult' || this.type === 'child') && this.is_passport_required){
       passport_numberControl.setValidators([Validators.required]);
       passport_expiryControl.setValidators([Validators.required]);
+      passport_numberControl.updateValueAndValidity();
     }
     emailControl.updateValueAndValidity();
     phoneControl.updateValueAndValidity();
     countryControl.updateValueAndValidity();
-    passport_numberControl.updateValueAndValidity();
     passport_expiryControl.updateValueAndValidity();
   }
 
@@ -167,7 +167,6 @@ export class TravelerFormComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-
       let country_id = this.adultForm.value.country_id.id;
       if (!Number(country_id)) {
         country_id = this.traveler.country.id;
@@ -179,11 +178,14 @@ export class TravelerFormComponent implements OnInit {
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
         passport_number: this.adultForm.value.passport_number,
-        dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),
+        dob: typeof this.adultForm.value.dob === 'object' ? moment(this.adultForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob, '/')).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
-        country_id: country_id ? country_id : '',
-        passport_expiry: typeof this.adultForm.value.passport_expiry.startDate === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD'),
+        country_id: country_id ? country_id : ''      
       };
+      if((this.type === 'adult' || this.type === 'child') && this.is_passport_required){
+        let passport_expiry_json = { passport_expiry: typeof this.adultForm.value.passport_expiry === 'object' ? moment(this.adultForm.value.passport_expiry).format('YYYY-MM-DD') : ''};
+        jsonData = Object.assign(jsonData, passport_expiry_json);
+      }
 
       if (this.type === 'adult') {
         let adultObj = {
@@ -193,13 +195,12 @@ export class TravelerFormComponent implements OnInit {
         };
         jsonData = Object.assign(jsonData, adultObj);
       }
-      
+      console.log(jsonData)
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
           // this.travelerFormChange.observers.push(data);
           this.travelerFormChange.emit(data);
-          // console.log(this.travelerFormChange)
           $('.collapse').collapse('hide');
           $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
@@ -215,24 +216,24 @@ export class TravelerFormComponent implements OnInit {
           jsonData = Object.assign(jsonData, emailObj);
         }
         
-          this.flightService.addAdult(jsonData).subscribe((data: any) => {
-            this.adultForm.reset();
-            this.submitted = this.loading = false;
-            if (!this.isLoggedIn) {
-              localStorage.setItem("_lay_sess", data.token);
-            }
-            
-            this.travelerFormChange.emit(data);
+        this.flightService.addAdult(jsonData).subscribe((data: any) => {
+          this.adultForm.reset();
+          this.submitted = this.loading = false;
+          if (!this.isLoggedIn) {
+            localStorage.setItem("_lay_sess", data.token);
+          }
+          
+          this.travelerFormChange.emit(data);
 
-            $('.collapse').collapse('hide');
-            $('#accordion-' + this.type).hide();
-          }, (error: HttpErrorResponse) => {
-            console.log('error')
-            this.submitted = this.loading = false;
-            if (error.status === 401) {
-              this.router.navigate(['/']);
-            }
-          })        
+          $('.collapse').collapse('hide');
+          $('#accordion-' + this.type).hide();
+        }, (error: HttpErrorResponse) => {
+          console.log('error')
+          this.submitted = this.loading = false;
+          if (error.status === 401) {
+            this.router.navigate(['/']);
+          }
+        })        
       }
     }
   }
