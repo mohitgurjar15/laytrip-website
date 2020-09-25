@@ -202,24 +202,21 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     validateBookingButton(){
-      console.log("this.cardToken",this.cardToken)
+      
       this.isDisableBookBtn=true;
       if(
         this.userInfo.roleId!=7 &&
         this.isTandCaccepeted==true &&
         typeof this.cardToken!='undefined'
       ){
-        console.log("yes")
         this.isDisableBookBtn=false;
       }
       else if(
         this.userInfo.roleId==7 &&
         this.isTandCaccepeted==true
       ){
-        console.log("yes1")
         this.isDisableBookBtn=false;
       }
-      console.log("this.isDisableBookBtn",this.isDisableBookBtn)
     }
 
     validateCard(guestCardDetails){
