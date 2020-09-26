@@ -34,7 +34,6 @@ var TravelerFormComponent = /** @class */ (function () {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
-        this.dobMaxDate = moment();
         this.expiryMinDate = moment().add(2, 'days');
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
@@ -47,17 +46,8 @@ var TravelerFormComponent = /** @class */ (function () {
             country_code: ['', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required]],
             country_id: ['', forms_1.Validators.required],
-            dob: [{
-                    startDate: typeof this.traveler.dob !== 'undefined' ?
-                        moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
-                }, forms_1.Validators.required],
-            // dob : ['', Validators.required],
-            // passport_expiry : [''],
-            passport_expiry: [{
-                    startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-                        moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
-                },],
-            passport_number: [''],
+            dob: ['', forms_1.Validators.required],
+            passport_expiry: [''],
             frequently_no: [''],
             user_type: ['']
         });
@@ -73,6 +63,8 @@ var TravelerFormComponent = /** @class */ (function () {
                 phone_no: this.traveler.phoneNo,
                 country_id: this.traveler.country != null ? this.traveler.country.name : '',
                 passport_number: this.traveler.passportNumber,
+                dob: new Date(this.traveler.dob),
+                passport_expiry: new Date(this.traveler.passport_expiry),
                 frequently_no: ''
             });
             this.formStatus = this.adultForm.status === 'VALID' ? true : false;
@@ -95,21 +87,22 @@ var TravelerFormComponent = /** @class */ (function () {
             emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
             phoneControl.setValidators([forms_1.Validators.required]);
             countryControl.setValidators([forms_1.Validators.required]);
-            // this.dobMinDate = '';
-            this.dobMaxDate = moment().add(-12, 'year');
-            console.log('min dates', this.dobMinDate);
-            console.log('max dates', this.dobMaxDate);
+            this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
+            this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
+            this.minyear = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
         }
         else if (this.type === 'child') {
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
-            this.dobMinDate = moment().add(-12, 'year');
-            this.dobMaxDate = moment().add(-2, 'year');
+            this.dobMinDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
+            this.dobMaxDate = new Date(moment().subtract(2, 'years').format("MM/DD/YYYY"));
+            this.minyear = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
         }
         else if (this.type === 'infant') {
-            this.dobMinDate = moment().add(-2, 'year');
-            this.dobMaxDate = moment();
+            this.dobMinDate = new Date(moment().subtract(2, 'years').format("MM/DD/YYYY"));
+            this.dobMaxDate = new Date();
+            this.minyear = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators(null);
             countryControl.setValidators(null);
@@ -117,11 +110,11 @@ var TravelerFormComponent = /** @class */ (function () {
         if ((this.type === 'adult' || this.type === 'child') && this.is_passport_required) {
             passport_numberControl.setValidators([forms_1.Validators.required]);
             passport_expiryControl.setValidators([forms_1.Validators.required]);
+            passport_numberControl.updateValueAndValidity();
         }
         emailControl.updateValueAndValidity();
         phoneControl.updateValueAndValidity();
         countryControl.updateValueAndValidity();
-        passport_numberControl.updateValueAndValidity();
         passport_expiryControl.updateValueAndValidity();
     };
     TravelerFormComponent.prototype.ngOnChanges = function (changes) {
@@ -154,11 +147,14 @@ var TravelerFormComponent = /** @class */ (function () {
                 last_name: this.adultForm.value.lastName,
                 frequently_no: this.adultForm.value.frequently_no,
                 passport_number: this.adultForm.value.passport_number,
-                dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),
+                dob: typeof this.adultForm.value.dob === 'object' ? moment(this.adultForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob, '/')).format('YYYY-MM-DD'),
                 gender: this.adultForm.value.gender,
-                country_id: country_id ? country_id : '',
-                passport_expiry: typeof this.adultForm.value.passport_expiry.startDate === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD')
+                country_id: country_id ? country_id : ''
             };
+            if ((this.type === 'adult' || this.type === 'child') && this.is_passport_required) {
+                var passport_expiry_json = { passport_expiry: typeof this.adultForm.value.passport_expiry === 'object' ? moment(this.adultForm.value.passport_expiry).format('YYYY-MM-DD') : '' };
+                jsonData = Object.assign(jsonData, passport_expiry_json);
+            }
             if (this.type === 'adult') {
                 var adultObj = {
                     country_code: this.adultForm.value.country_code.code &&
@@ -167,12 +163,12 @@ var TravelerFormComponent = /** @class */ (function () {
                 };
                 jsonData = Object.assign(jsonData, adultObj);
             }
+            console.log(jsonData);
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
                     // this.travelerFormChange.observers.push(data);
                     _this.travelerFormChange.emit(data);
-                    // console.log(this.travelerFormChange)
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                 }, function (error) {

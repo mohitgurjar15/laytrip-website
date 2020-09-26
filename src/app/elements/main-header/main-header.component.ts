@@ -71,7 +71,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getCurrencies();
     this.loadJquery();
     this.userDetails = getLoginUserInfo();
-    console.log(this.userDetails)
+
     if(Object.keys(this.userDetails).length>0){
       if(this.userDetails.roleId!=7){
         this.totalLaycredit();
@@ -163,7 +163,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   onLoggedout() {
     this.isLoggedIn = false;
     localStorage.removeItem('_lay_sess');
-    this.router.url;
+    this.router.navigate(['/'])
   }
 
   loadJquery() {
