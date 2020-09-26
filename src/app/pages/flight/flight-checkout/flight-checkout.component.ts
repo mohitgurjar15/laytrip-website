@@ -29,7 +29,7 @@ export class FlightCheckoutComponent implements OnInit {
     showAddCardForm:boolean=false;
     progressStep={ step1:true, step2:true, step3:false };
     cardToken:string='';
-    instalmentMode='no-instalment';
+    instalmentMode='instalment';
     laycreditpoints:number=0;
     additionalAmount:number;
     routeCode:string;
@@ -83,6 +83,7 @@ export class FlightCheckoutComponent implements OnInit {
       }
 
       if(this.userInfo.roleId==7){
+        this.instalmentMode='no-instalment';
         this.showAddCardForm=true;
       }
       let travelersIds = this.cookieService.get('_travelers');
@@ -103,9 +104,7 @@ export class FlightCheckoutComponent implements OnInit {
       catch(e){
 
       }
-
       this.validateBookingButton();
-      
     }
 
     toggleAddcardForm(){
@@ -113,6 +112,7 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     applyLaycredit(laycreditpoints){
+      console.log("laycreditpoints",laycreditpoints)
       this.isShowCardOption=true;
       this.laycreditpoints=laycreditpoints;
       this.isShowPaymentOption=true;
@@ -153,6 +153,7 @@ export class FlightCheckoutComponent implements OnInit {
             this.bookFlightApi()
           }
         },(error=>{
+          this.bookingLoader=false;
           this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
         }))
       }
@@ -184,7 +185,6 @@ export class FlightCheckoutComponent implements OnInit {
         this.progressStep = { step1:true, step2:true, step3:true }
         this.bookingResult=res;
       },(error)=>{
-
         if(error.status==422){
           this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
         }

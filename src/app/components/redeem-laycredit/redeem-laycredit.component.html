@@ -1,6 +1,6 @@
 <div class="block_laycredit_checkbox" *ngIf="totalLaycreditPoints">
   <label class="custom_checkbox">
-      <input type="checkbox" value="">
+      <input type="checkbox" (change)="toggleLayCredit($event)">
       <span class="checkmark"></span>
       Use Laycredit for this booking. You have <span>{{totalLaycreditPoints}} Laycredits</span> in your wallet.
   </label>

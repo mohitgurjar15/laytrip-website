@@ -2,13 +2,13 @@
 <ul>
     <li>
         <label class="custom_radio">Pay with Instalment
-            <input type="radio" name="payment_mode" (click)="triggerPayemntMode('instalment')">
+            <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
     </li>
     <li>
         <label class="custom_radio">Full Payment
-            <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('no-instalment')">
+            <input type="radio" name="payment_mode"  (click)="triggerPayemntMode('no-instalment')">
             <span class="checkmark"></span>
         </label>
     </li>
