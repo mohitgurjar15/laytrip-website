@@ -31,7 +31,7 @@ var routes = [
         component: list_traveller_component_1.ListTravellerComponent
     },
     {
-        path: 'history',
+        path: 'payment',
         component: list_payment_history_component_1.ListPaymentHistoryComponent
     },
 ];

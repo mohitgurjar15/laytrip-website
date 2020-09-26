@@ -33,7 +33,7 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
     };
     ListPaymentHistoryComponent.prototype.getPaymentHistory = function () {
         var _this = this;
-        console.log(this.filterForm.value);
+        this.loading = true;
         this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
             _this.historyResult = res.data;
             _this.isNotFound = false;
@@ -49,12 +49,22 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.itemDetail = event;
     };
     ListPaymentHistoryComponent.prototype.getModule = function () {
+        var _this = this;
         this.userService.getModules(this.pageNumber, this.limit).subscribe(function (res) {
-            console.log(res);
+            _this.modules = res.data.map(function (module) {
+                if (module.status) {
+                    return {
+                        id: module.id,
+                        name: module.name.toUpperCase()
+                    };
+                }
+            });
         }, function (err) {
         });
     };
-    ListPaymentHistoryComponent.prototype.ngDoCheck = function () { };
+    ListPaymentHistoryComponent.prototype.startDateUpdate = function (date) {
+        this.endDate = new Date(date);
+    };
     ListPaymentHistoryComponent = __decorate([
         core_1.Component({
             selector: 'app-list-payment-history',

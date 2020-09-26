@@ -10,14 +10,18 @@ exports.FlightsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
 var FlightsComponent = /** @class */ (function () {
-    function FlightsComponent(commonFunction) {
+    function FlightsComponent(commonFunction, flightService) {
         this.commonFunction = commonFunction;
+        this.flightService = flightService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.flightList = [];
         this.flightBookings = [];
         this.pageSize = 12;
         this.perPageLimitConfig = [12, 25, 50, 100];
         this.showPaginationBar = false;
+        this.showFlightDetails = [];
+        this.loadBaggageDetails = true;
+        this.loadCancellationPolicy = false;
     }
     FlightsComponent.prototype.ngOnInit = function () {
         this.page = 1;
@@ -35,6 +39,32 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.pageChange = function (event) {
         this.showPaginationBar = false;
         this.page = event;
+    };
+    FlightsComponent.prototype.showDetails = function (index) {
+        var _this = this;
+        if (typeof this.showFlightDetails[index] === 'undefined') {
+            this.showFlightDetails[index] = true;
+        }
+        else {
+            this.showFlightDetails[index] = !this.showFlightDetails[index];
+        }
+        this.showFlightDetails = this.showFlightDetails.map(function (item, i) {
+            return ((index === i) && _this.showFlightDetails[index] === true) ? true : false;
+        });
+    };
+    FlightsComponent.prototype.closeFlightDetail = function () {
+        this.showFlightDetails = this.showFlightDetails.map(function (item) {
+            return false;
+        });
+    };
+    FlightsComponent.prototype.getBaggageDetails = function (routeCode) {
+        var _this = this;
+        this.loadBaggageDetails = true;
+        this.flightService.getBaggageDetails(routeCode).subscribe(function (data) {
+            _this.baggageDetails = data;
+            console.log(_this.baggageDetails);
+            _this.loadBaggageDetails = false;
+        });
     };
     __decorate([
         core_1.Input()

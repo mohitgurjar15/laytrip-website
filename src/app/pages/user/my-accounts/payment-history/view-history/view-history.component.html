@@ -76,7 +76,7 @@
                                       <td data-title="ID">{{i +1 }}</td>
                                       <td data-title="Amount">${{ instalment.amount | number : '1.2-2' }}</td>
                                       <td data-title="Date">{{ instalment.instalmentDate }}</td>
-                                      <td data-title="Status"><span [ngClass]="{'status_paid': instalment.instalmentStatus === true,'status_pending': instalment.instalmentStatus != true}">{{instalment.instalmentStatus ? 'Paid':'Pending'}}</span></td>
+                                      <td data-title="Status"><span [ngClass]="{'status_paid': instalment.instalmentStatus,'status_pending': instalment.instalmentStatus != true}">{{instalment.instalmentStatus ? 'Paid':'Pending'}}</span></td>
                                   </tr>                                 
                               </tbody>
                           </table>

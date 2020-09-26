@@ -26,6 +26,7 @@ export class HistoryListComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.list = changes.historyResult.currentValue;
+    console.log("length",this.list.length)
 
     if(this.list && this.list != 'undefined'){
     }
@@ -33,8 +34,7 @@ export class HistoryListComponent implements OnInit {
 
   viewDetailClick(item) {
     this.item = item;
-  }
-  
+  } 
 
 
 }

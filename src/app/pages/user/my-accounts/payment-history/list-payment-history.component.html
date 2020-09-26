@@ -1,6 +1,6 @@
 <section class="search_result flight pb-0" *ngIf="loading">
     <app-flight-loader></app-flight-loader>
-  </section>
+</section>
   
 <section class="account_part">
   <div class="container">
@@ -24,11 +24,9 @@
                               <div class="form_field">
                                   <label>Booking Type</label>
                                   <div class="text_field custom-select">
-                                      <select formControlName="module">
-                                          <option value="0">Flight</option>
-                                          <option value="1">Hotel</option>
-                                          <option value="2">Accommodations</option>
-                                      </select>
+                                    <ng-select  class="ng-customClass" [items]="modules" bindLabel="name" tabindex="7" [selectOnTab]="true"
+                                    formControlName="module" selectOnTab="true" placeholder="Select booking type">
+                                    </ng-select>
                                   </div>
                               </div>
                           </div>
@@ -38,9 +36,15 @@
                                   <div class="text_field">
                                     <p-calendar 
                                     inputId="basic" 
+                                    inputStyleClass="custom_datpicker birth_date"
                                     formControlName="start_date" 
-                                    [minDate]="startMinDate"
-                                    [readonlyInput]="true"   >
+                                    [readonlyInput]="true"
+                                    [yearNavigator]="true"
+                                    [monthNavigator]="true"
+                                    yearRange="2020:2025"
+                                    [defaultDate]="startMinDate"
+                                    (onSelect)=startDateUpdate($event)
+                                        >
                                 </p-calendar>
                                   </div>
                               </div>
@@ -48,10 +52,17 @@
                                   <label>Payment End Date</label>
                                   <div class="text_field">
                                     <p-calendar 
+                                    inputStyleClass="custom_datpicker birth_date"
                                     inputId="basic" 
                                     formControlName="end_date" 
-                                    [minDate]="startMinDate"
-                                    [readonlyInput]="true"   >
+                                    [minDate]="endDate"
+                                    [readonlyInput]="true"
+                                    [yearNavigator]="true"
+                                    [monthNavigator]="true"
+                                    yearRange="2020:2025"
+                                    [defaultDate]="endDate"
+                                    endDate
+                                    >
                                 </p-calendar>
                                   </div>
                               </div>

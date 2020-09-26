@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
+import * as moment from 'moment';
 
 
 @Injectable({
@@ -119,24 +120,26 @@ export class UserService {
   }
 
   getPaymentHistory(pageNumber,limit,filterForm) {
+    console.log(filterForm)
+
     let queryString = "";
     if(filterForm.bookingId){
       queryString += (filterForm.bookingId) ? '&booking_id='+filterForm.bookingId : '';
     }
-    if(filterForm.booking_type){
-      queryString += (filterForm.booking_type) ? '&booking_type='+filterForm.booking_type : '';
+    if(filterForm.module){
+      queryString += (filterForm.module.id) ? '&booking_type='+filterForm.module.id : '';
     }
-    if(filterForm.payment_start_date){
-      queryString += (filterForm.payment_start_date) ? '&payment_start_date='+filterForm.payment_start_date : '';
+    if(filterForm.start_date){
+      queryString += (filterForm.start_date) ? '&payment_start_date='+moment(filterForm.start_date).format("YYYY-MM-DD") : '';
     }
-    if(filterForm.payment_end_date){
-      queryString += (filterForm.payment_end_date) ? '&payment_end_date='+filterForm.payment_end_date : '';
+    if(filterForm.end_date){
+      queryString += (filterForm.end_date) ? '&payment_end_date='+moment(filterForm.end_date).format("YYYY-MM-DD") : '';
     }
     console.log(queryString)
     return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders())
   }
 
   getModules(pageNumber, limit) {
-    return this.http.get(`${this.apiURL}modules?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+    return this.http.get(`${this.apiURL}v1/modules?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
   }
 }

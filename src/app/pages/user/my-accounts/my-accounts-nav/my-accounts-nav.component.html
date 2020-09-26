@@ -20,7 +20,7 @@
               </a>
           </li>
           <li>
-              <a  [routerLink]="['/account/history']" [routerLinkActive]="['active_link']">
+              <a  [routerLink]="['/account/payment']" [routerLinkActive]="['active_link']">
                   <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon">
                   Payment History
               </a>
@@ -59,13 +59,6 @@
                       <li><a href="javascript:void(0);">Three</a></li>
                   </ul>
               </div>
-          </li>
-        
-          <li>
-            <a  href="javascript:void(0);" (click)="onLoggedout()">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_logout.svg" alt="Logout Icon">
-                Logout
-            </a>
           </li>
       </ul>
   </div>

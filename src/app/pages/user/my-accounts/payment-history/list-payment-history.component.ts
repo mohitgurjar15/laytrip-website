@@ -18,6 +18,8 @@ export class ListPaymentHistoryComponent implements OnInit {
   filterForm: FormGroup;
   itemDetail:any;
   startMinDate= new Date();
+  modules:[];
+  endDate;
 
   constructor(
     private userService: UserService,
@@ -41,13 +43,11 @@ export class ListPaymentHistoryComponent implements OnInit {
   }
 
   getPaymentHistory() {
-    console.log(this.filterForm.value)
-
+    this.loading = true;
     this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
         this.historyResult = res.data;
         this.isNotFound = false;
         this.loading = false;
-
     }, err => {
       this.isNotFound = true;
       if (err && err.status === 404) {
@@ -62,13 +62,21 @@ export class ListPaymentHistoryComponent implements OnInit {
 
   getModule(){
     this.userService.getModules(this.pageNumber, this.limit).subscribe((res: any) => {
-     console.log(res)
-
+      this.modules  = res.data.map(function (module) {
+        if(module.status){
+          return {
+            id:module.id,
+            name:module.name.toUpperCase()
+          } 
+        }
+      });
    }, err => {
     
    }); 
   }
   
-  ngDoCheck(){}
+  startDateUpdate(date) {
+    this.endDate = new Date(date)
+  }
 }
  

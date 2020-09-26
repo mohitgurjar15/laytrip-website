@@ -13,7 +13,7 @@ var FlightCommonFunction = /** @class */ (function () {
         this.commonFunction = commonFunction;
     }
     FlightCommonFunction.prototype.getPaymentStartDate = function (bookingInstalments) {
-        if (bookingInstalments[1].instalmentDate) {
+        if (bookingInstalments[1]) {
             return this.commonFunction.convertDateFormat(bookingInstalments[1].instalmentDate, 'YYYY-MM-DD', 'en');
         }
         else {

@@ -7,6 +7,10 @@
 </div>
 <div id="collapse-Active-pay" class="collapse show" data-parent="#payment_content" role="tabpanel" aria-labelledby="heading-Active-pay">
   <div class="card-body">
+    <div class="block_nobooking_available">
+        <img src="assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
+        <h5>No Flight Booking Available</h5>
+    </div>
       <div class="block_pay_list_inner">
           <div class="pay_listing"  *ngFor="let item of list; let i = index;">
               <div class="list_top">
@@ -39,14 +43,14 @@
                   <div class="grid_block">
                       <ul>
                           <li class="fb_medium">Total Amount: <span>${{item.totalAmount | number : '1.2-2' || 0}}</span></li>
-                          <li>Instalment: <span>${{item.bookingInstalments[0].amount | number : '1.2-2' || 0}} / Weekly</span></li>
-                      </ul>
+                           <li>Instalment: <span>${{item.bookingInstalments[0].amount | number : '1.2-2' || 0}} / Weekly</span></li>
+                       </ul>
                   </div>
                   <div class="grid_block">
-                      <ul>
-                          <li>Payment Start: <span>{{ flightCommonFunction.getPaymentStartDate(item.bookingInstalments) }}</span></li>
-                          <li>Payment End: <span>{{ flightCommonFunction.getPaymentEndDate(item.bookingInstalments) }}</span></li>
-                      </ul>
+                        <ul>
+                            <li>Payment Start: <span>{{ flightCommonFunction.getPaymentStartDate(item.bookingInstalments) }}</span></li> 
+                            <li>Payment End: <span>{{ flightCommonFunction.getPaymentEndDate(item.bookingInstalments) }}</span></li>
+                        </ul>
                   </div>
                   <div class="grid_block">
                       <span style="display: none;">Pending</span>

@@ -23,7 +23,7 @@ const routes: Routes = [
     component: ListTravellerComponent,
   },
   {
-    path: 'history',
+    path: 'payment',
     component: ListPaymentHistoryComponent,
   },
  

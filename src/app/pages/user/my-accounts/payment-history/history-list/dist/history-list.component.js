@@ -18,6 +18,7 @@ var HistoryListComponent = /** @class */ (function () {
     };
     HistoryListComponent.prototype.ngOnChanges = function (changes) {
         this.list = changes.historyResult.currentValue;
+        console.log("length", this.list.length);
         if (this.list && this.list != 'undefined') {
         }
     };
