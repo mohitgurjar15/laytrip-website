@@ -44,7 +44,7 @@ export class FlightCheckoutComponent implements OnInit {
     bookingResult:any={};
     sellingPrice:number;
     flightSummary:[]=[];
-    instalmentType:string;
+    instalmentType:string='weekly';
     customAmount:number | null;
     customInstalment:number | null;
     newCard;
@@ -84,6 +84,7 @@ export class FlightCheckoutComponent implements OnInit {
 
       if(this.userInfo.roleId==7){
         this.instalmentMode='no-instalment';
+        this.instalmentType='';
         this.showAddCardForm=true;
       }
       let travelersIds = this.cookieService.get('_travelers');
