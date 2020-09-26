@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
 
+import { environment } from '../../../../../../environments/environment';
+
 
 @Component({
   selector: 'app-history-list',
@@ -10,11 +12,12 @@ import { FlightCommonFunction } from '../../../../../_helpers/flight-common-func
 })
 export class HistoryListComponent implements OnInit {
   @Output() bookingData = new EventEmitter();
+  s3BucketUrl = environment.s3BucketUrl;
   @Input() historyResult;
   @Input() list;
   historys: [];
   item: any;
-
+  listLength=0;
   constructor(
     private commonFunction:CommonFunction,
     private flightCommonFunction :FlightCommonFunction
@@ -26,9 +29,8 @@ export class HistoryListComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.list = changes.historyResult.currentValue;
-    console.log("length",this.list.length)
-
     if(this.list && this.list != 'undefined'){
+      this.listLength = this.list.length; 
     }
   }
 

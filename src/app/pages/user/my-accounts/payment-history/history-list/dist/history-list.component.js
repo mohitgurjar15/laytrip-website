@@ -8,18 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.HistoryListComponent = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("../../../../../../environments/environment");
 var HistoryListComponent = /** @class */ (function () {
     function HistoryListComponent(commonFunction, flightCommonFunction) {
         this.commonFunction = commonFunction;
         this.flightCommonFunction = flightCommonFunction;
         this.bookingData = new core_1.EventEmitter();
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.listLength = 0;
     }
     HistoryListComponent.prototype.ngOnInit = function () {
     };
     HistoryListComponent.prototype.ngOnChanges = function (changes) {
         this.list = changes.historyResult.currentValue;
-        console.log("length", this.list.length);
         if (this.list && this.list != 'undefined') {
+            this.listLength = this.list.length;
         }
     };
     HistoryListComponent.prototype.viewDetailClick = function (item) {

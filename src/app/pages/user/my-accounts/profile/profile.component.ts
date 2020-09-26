@@ -85,6 +85,8 @@ export class ProfileComponent implements OnInit {
       address2: [''],      
       language_id: [''],      
       currency_id: [''],      
+      passport_expiry: [''],      
+      passport_number: [''],      
     });
   }
 
@@ -203,7 +205,9 @@ export class ProfileComponent implements OnInit {
         address  : res.address,  
         language_id : res.preferredLanguage.name,     
         currency_id : res.preferredCurrency.code,     
-        profile_pic: res.profilePic  
+        profile_pic: res.profilePic, 
+        passport_expiry:  moment(res.passportExpiry).format('MM/DD/YYYY'), 
+        passport_number: res.passportNumber  
     });
 
     }, (error: HttpErrorResponse) => {
@@ -242,7 +246,9 @@ export class ProfileComponent implements OnInit {
       formdata.append("address1",this.profileForm.value.address);
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
+      formdata.append("passportNumber",this.profileForm.value.passport_number);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+      formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
       if(typeof this.profileForm.value.country_id === 'string'){
         formdata.append("country_id", this.selectResponse.country.id);
       } else {
@@ -270,7 +276,6 @@ export class ProfileComponent implements OnInit {
       } else {
         formdata.append("currency_id", this.profileForm.value.currency_id);
       }         
-      formdata.append("passport_expiry",'2020-08-06');
       
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
