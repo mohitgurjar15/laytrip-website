@@ -55,6 +55,7 @@ export class FlightCheckoutComponent implements OnInit {
     isShowPaymentOption:boolean=true;
 
     ngOnInit() {
+      window.scroll(0,0);
       this.userInfo = getLoginUserInfo();
       if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
