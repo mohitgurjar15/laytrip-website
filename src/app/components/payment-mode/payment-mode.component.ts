@@ -24,7 +24,7 @@ export class PaymentModeComponent implements OnInit {
   
   @Input() flightSummary;
   sellingPrice:number;
-  isInstalemtMode:boolean=false;
+  isInstalemtMode:boolean=true;
   
   instalmentRequest={
     instalment_type: "weekly",
