@@ -37,6 +37,7 @@ export class FlightTravelerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.loading = true;
     this.getTravelers();
     if(this.cookieService.get('_itinerary')){
@@ -117,5 +118,9 @@ export class FlightTravelerComponent implements OnInit {
 
   flightAvailable(event){
     this.isFlightNotAvailable=event;
+  }
+
+  onActivate(event){
+    window.scroll(0,0);
   }
 }
