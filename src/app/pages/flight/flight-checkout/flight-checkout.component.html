@@ -23,7 +23,7 @@
                                 <div class="block_detail">
                                     <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
                                     <app-payment-mode 
-                                        *ngIf="flightSummary.length" 
+                                        *ngIf="flightSummary.length && isShowPaymentOption" 
                                         [flightSummary]="flightSummary" 
                                         (selectInstalmentMode)="selectInstalmentMode($event)" 
                                         (getInstalmentData)="getInstalmentData($event)">
@@ -35,7 +35,7 @@
                             <app-booking-enquiry-info></app-booking-enquiry-info>
                         </div>
                           <!-- <app-redeem-laycredit></app-redeem-laycredit> -->
-                        <div class="block_pay_info">
+                        <div class="block_pay_info" *ngIf="isShowCardOption">
                           <div class="block_card_select">
                               <div class="block_title_section" >
                                   <h5 *ngIf="userInfo.roleId!=7">Select Credit Card</h5>

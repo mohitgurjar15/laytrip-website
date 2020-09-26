@@ -13,10 +13,12 @@ export class RedeemLaycreditComponent implements OnInit {
   @Input() sellingPrice:number;
   totalLaycreditPoints=0;
   value: number = 100;
+  selectedLayCredit=0;
   laycreditOptions: Options = {
     floor: 0,
     ceil: 0,
-    step: 0.1
+    step: 0.1,
+    disabled:true
   };
   constructor(
     private genericService:GenericService
@@ -37,7 +39,22 @@ export class RedeemLaycreditComponent implements OnInit {
 
   selectLaycredit(changeContext: ChangeContext): void {
     
-    this.applyLaycredit.emit(changeContext.value)
+    this.selectedLayCredit=changeContext.value;
+    this.applyLaycredit.emit(this.selectedLayCredit)
+  }
+
+  toggleLayCredit(event){
+    if(event.target.checked){
+      this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: false});
+      this.applyLaycredit.emit(this.selectedLayCredit)
+    }
+    else{
+      /* const newOptions: Options = Object.assign({}, this.laycreditOptions);
+      newOptions.floor = 0;
+      this.laycreditOptions = newOptions; */
+      this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: true});
+      this.applyLaycredit.emit(0)
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -49,10 +66,10 @@ export class RedeemLaycreditComponent implements OnInit {
         
         const laycreditOptions: Options = Object.assign({}, this.laycreditOptions);
         if(this.totalLaycreditPoints > this.sellingPrice){
-          laycreditOptions.ceil = Math.floor(this.sellingPrice);
+          laycreditOptions.ceil = this.sellingPrice;
         }
         else{
-          laycreditOptions.ceil = Math.floor(this.totalLaycreditPoints);
+          laycreditOptions.ceil = this.totalLaycreditPoints;
         }
         this.laycreditOptions = laycreditOptions;
       }

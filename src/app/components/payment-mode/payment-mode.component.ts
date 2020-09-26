@@ -24,7 +24,7 @@ export class PaymentModeComponent implements OnInit {
   
   @Input() flightSummary;
   sellingPrice:number;
-  isInstalemtMode:boolean=false;
+  isInstalemtMode:boolean=true;
   
   instalmentRequest={
     instalment_type: "weekly",
@@ -48,6 +48,7 @@ export class PaymentModeComponent implements OnInit {
   customMethod:string;
   secondInstalment:number;
   totalLaycreditPoints=0;
+  instalmentAvavible:boolean=false;
 
   ngOnInit() {
 
@@ -69,6 +70,7 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
       if(this.instalments.instalment_available==true){
+        this.instalmentAvavible=true;
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
         this.defaultInstalment  = this.instalments.instalment_date[0].instalment_amount;
@@ -77,7 +79,11 @@ export class PaymentModeComponent implements OnInit {
         this.defaultInstalmentNo = this.instalments.instalment_date.length;
         this.remainingInstalment = this.instalments.instalment_date.length-1;
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
-
+      }
+      else{
+        this.instalmentAvavible=false;
+        this.selectInstalmentMode.emit('no-instalment');
+        
       }
     },(err)=>{
 
