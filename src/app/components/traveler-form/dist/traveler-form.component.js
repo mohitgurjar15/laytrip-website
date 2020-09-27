@@ -38,7 +38,7 @@ var TravelerFormComponent = /** @class */ (function () {
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
         this.adultForm = this.formBuilder.group({
-            title: ['mr'],
+            title: ['mr', forms_1.Validators.required],
             gender: ['M', forms_1.Validators.required],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
@@ -67,7 +67,8 @@ var TravelerFormComponent = /** @class */ (function () {
                 passport_expiry: new Date(this.traveler.passport_expiry),
                 frequently_no: ''
             });
-            this.formStatus = this.adultForm.status === 'VALID' ? true : false;
+            this.traveler.isComplete = this.adultForm.status === 'VALID' ? true : false;
+            console.log("this.traveler", this.traveler);
             // this.auditFormStatus.emit(this.formStatus);
         }
     };
@@ -149,7 +150,8 @@ var TravelerFormComponent = /** @class */ (function () {
                 passport_number: this.adultForm.value.passport_number,
                 dob: typeof this.adultForm.value.dob === 'object' ? moment(this.adultForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob, '/')).format('YYYY-MM-DD'),
                 gender: this.adultForm.value.gender,
-                country_id: country_id ? country_id : ''
+                country_id: country_id ? country_id : '',
+                passport_expiry: '2020-04-12'
             };
             if ((this.type === 'adult' || this.type === 'child') && this.is_passport_required) {
                 var passport_expiry_json = { passport_expiry: typeof this.adultForm.value.passport_expiry === 'object' ? moment(this.adultForm.value.passport_expiry).format('YYYY-MM-DD') : '' };

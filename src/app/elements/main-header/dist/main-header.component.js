@@ -156,7 +156,6 @@ var MainHeaderComponent = /** @class */ (function () {
     MainHeaderComponent.prototype.totalLaycredit = function () {
         var _this = this;
         this.genericService.getAvailableLaycredit().subscribe(function (res) {
-            console.log("res", res);
             _this.totalLayCredit = res.total_available_points;
         }, (function (error) {
         }));

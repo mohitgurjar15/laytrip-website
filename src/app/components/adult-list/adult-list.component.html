@@ -113,7 +113,7 @@
                     <div *ngIf="adultCollapse" id="adultcollapseOne{{i}}" class="collapse cus_collapse"
                         aria-labelledby="adultOne+i" data-parent="#accordion-Adults">
                         <div class="card-body">
-                            <app-traveler-form [type]="'adult'" 
+                            <app-traveler-form  (travelerFormChange)="pushTraveler($event)" [type]="'adult'" 
                                 [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                             </app-traveler-form>
                         </div>
@@ -164,7 +164,7 @@
                         <div *ngIf="childCollapse" id="childcollapseOne{{i}}" class="collapse cus_collapse"
                             aria-labelledby="adultOne+i" data-parent="#accordion-childs">
                             <div class="card-body">
-                                <app-traveler-form [type]="'child'" 
+                                <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'child'" 
                                     [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                                 </app-traveler-form>
                             </div>
@@ -214,7 +214,7 @@
                         <div *ngIf="infantCollapse" id="infantcollapseOne{{i}}" class="collapse cus_collapse"
                             aria-labelledby="adultOne+i" data-parent="#accordion-infants">
                             <div class="card-body">
-                                <app-traveler-form [type]="'infant'" 
+                                <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'infant'" 
                                     [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                                 </app-traveler-form>
                             </div>
