@@ -1,9 +1,9 @@
 import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FlightService } from '../../../services/flight.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 import { CommonFunction } from '../../../_helpers/common-function';
-
 @Component({
   selector: 'app-flight-summary',
   templateUrl: './flight-summary.component.html',
@@ -13,12 +13,13 @@ export class FlightSummaryComponent implements OnInit {
   @Output() totalTravelerValue = new EventEmitter();
   @Output() flightAvailable= new EventEmitter();
   @Input() showPartialPayemntOption;
+  @Input() checkAvailability:string;
 
   routeCode:string='';
   constructor(
     public flightService:FlightService,
     private route: ActivatedRoute,
-    private router:Router,
+    private cookieService: CookieService,
     private commonFunction:CommonFunction
   ) { 
       
@@ -40,7 +41,16 @@ export class FlightSummaryComponent implements OnInit {
   ngOnInit() {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    this.airRevalidate();
+    this.routeCode=this.route.snapshot.paramMap.get('rc');
+
+    if(this.checkAvailability=='local'){
+
+      this.getFlightSummary()
+    }
+    else{
+      
+      this.airRevalidate();
+    }
   }
   
   
@@ -60,13 +70,29 @@ export class FlightSummaryComponent implements OnInit {
           this.getRouteDetails.emit(response);
 
         },(error)=>{
-          console.log("error",error)
-          if(error.status==404){
-            //this.router.navigate(['/'])
-          }
-
+          
           this.flightAvailable.emit(true)
       })
+  }
+
+  getFlightSummary(){
+
+    let __route = sessionStorage.getItem('__route');
+    try{
+      let response  = JSON.parse(__route);
+      response[0]=response;
+      this.flightDetail=response;
+      this.flightSummaryLoader=false;
+      this.outWardStopCount=response[0].routes[0].stops.length-1;
+      this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
+      this.inWardStopCount =typeof response[0].routes[1]!='undefined' ? response[0].routes[1].stops.length-1:0;
+      this.totalTravelerValue.emit(this.totalTraveler);
+      this.getRouteDetails.emit(response);
+    }
+    catch(error){
+
+      this.flightAvailable.emit(true)
+    }
   }
 
   toggleRouteDetails(type){
