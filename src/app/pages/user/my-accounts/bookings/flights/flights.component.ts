@@ -71,6 +71,7 @@ export class FlightsComponent implements OnInit {
     });
   }
   getBaggageDetails(routeCode) {
+
     this.loadBaggageDetails = true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
       this.baggageDetails = data;

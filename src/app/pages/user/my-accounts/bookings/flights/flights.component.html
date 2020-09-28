@@ -155,7 +155,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
-                        (click)="getBaggageDetails(item.route_code)">Baggage Rules</a>
+                        (click)="getBaggageDetails(item.moduleInfo.route_code)">Baggage Rules</a>
                 </li>
                 <li class="nav-item">
                     <a href="#Cancellation-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
@@ -240,9 +240,30 @@
                             <div class="tab_detail fare_detail_cnt">
                                 <div class="triangle_right"></div>
                                 <ul >
-                                    <li >Base Fare (1 Adult) <span>$113</span></li>
-                                    <li>Taxes and Fees (1 Adult) <span>$13</span></li>
-                                    <li>Total Fare (1 Adult) <span>$126</span></li>
+                                    <li *ngFor="let fareDetails of item.fare_break_dwon">
+                                        <p *ngIf="fareDetails.type == 'ADT'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Adult)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'CHD'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Child)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'INF'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Infant)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type === 'total'">
+                                            Total Fare ({{ fareDetails?.quantity }} traveller)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                    </li>
                                 </ul>
                                 <p><span>Note:</span> It is a long established fact that a reader will be distracted by
                                     the readable content of a page when looking at its layout. The point of using Lorem
@@ -285,12 +306,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td data-title="Flight">6E-749</td>
-                                                <td data-title="Depart">Newark Liberty International Airport, United
-                                                    States</td>
-                                                <td data-title="Arrive">Denver International Airport, United States</td>
-                                                <td data-title="Free Baggage">15 KG/person</td>
+                                            <tr *ngFor="let baggage of baggageDetails">
+                                                <td data-title="Flight">{{ baggage?.flight_number }}</td>
+                                                <td data-title="Depart">{{ baggage?.departure_airport }}</td>
+                                                <td data-title="Arrive">{{ baggage?.arrival_airport }}</td>
+                                                <td data-title="Free Baggage">{{ baggage?.baggage_capacity }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

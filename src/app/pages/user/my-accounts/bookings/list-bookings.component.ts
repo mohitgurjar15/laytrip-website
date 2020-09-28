@@ -51,7 +51,8 @@ export class ListBookingsComponent implements OnInit {
               selling_price : flight.moduleInfo[0].selling_price,
               stop_count : flight.moduleInfo[0].instalment_details.stop_count,
               is_refundable : flight.moduleInfo[0].instalment_details.is_refundable,
-              routes : flight.moduleInfo[0].routes
+              routes : flight.moduleInfo[0].routes,
+              moduleInfo:flight.moduleInfo[0]
             }
           }
         });

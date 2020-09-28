@@ -181,7 +181,6 @@ export class TravelerFormComponent implements OnInit {
         dob: typeof this.adultForm.value.dob === 'object' ? moment(this.adultForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob, '/')).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
         country_id: country_id ? country_id : '',
-        passport_expiry: '2020-04-12'     
       };
       if((this.type === 'adult' || this.type === 'child') && this.is_passport_required){
         let passport_expiry_json = { passport_expiry: typeof this.adultForm.value.passport_expiry === 'object' ? moment(this.adultForm.value.passport_expiry).format('YYYY-MM-DD') : ''};
