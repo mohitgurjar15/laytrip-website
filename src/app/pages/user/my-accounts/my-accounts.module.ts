@@ -6,15 +6,12 @@ import { MyAccountsNavComponent } from './my-accounts-nav/my-accounts-nav.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
 import { CrudComponent } from './travellers/crud/crud.component';
 import { ListBookingsComponent } from './bookings/list-bookings.component';
 import { FlightsComponent } from './bookings/flights/flights.component';
 import { HotelsComponent } from './bookings/hotels/hotels.component';
 import { AccommodationsComponent } from './bookings/accommodations/accommodations.component';
-import { FlightLoaderComponent } from '../../flight/components/flight-loader/flight-loader.component';
-import { FlightNotFoundComponent } from '../../flight/components/flight-not-found/flight-not-found.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { HistoryListComponent } from './payment-history/history-list/history-list.component';
@@ -43,7 +40,6 @@ import { FlightModule } from '../../flight/flight.module';
     ReactiveFormsModule,
     NgSelectModule,
     NgbModule,
-    NgxDaterangepickerMd.forRoot(),
     CalendarModule,
     FlightModule  
   ],
