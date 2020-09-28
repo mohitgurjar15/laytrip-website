@@ -17,7 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
 import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enquiry-info.component';
 import { AddGuestCardComponent } from './add-guest-card/add-guest-card.component';
@@ -36,7 +35,6 @@ import { RedeemLaycreditComponent } from './redeem-laycredit/redeem-laycredit.co
     NgbModule,
     CountdownModule,
     Ng5SliderModule,
-    NgxDaterangepickerMd.forRoot(),
     CookieModule.forRoot(),
     CalendarModule
   ],

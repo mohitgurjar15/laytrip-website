@@ -144,17 +144,22 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     });
   }
 
-  bookNow(routeCode,is_passport) {
+  bookNow(route) {
+ 
     const itinerary = {
       adult: this.route.snapshot.queryParams["adult"],
       child: this.route.snapshot.queryParams["child"],
       infant: this.route.snapshot.queryParams["infant"],
-      is_passport_required : is_passport
+      is_passport_required : route.is_passport_required
     };
     let lastSearchUrl=this.router.url;
     this.cookieService.put('_itinerary', JSON.stringify(itinerary));
     this.cookieService.put('_prev_search', lastSearchUrl);
-    this.router.navigate([`flight/traveler/${routeCode}`]);
+    const dateNow = new Date();
+    dateNow.setMinutes(dateNow.getMinutes() + 10);
+    
+    sessionStorage.setItem('__route',JSON.stringify(route))
+    this.router.navigate([`flight/traveler/${route.route_code}`]);
   }
 
 

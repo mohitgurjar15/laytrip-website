@@ -19,7 +19,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
 import { BookingSummaryLoaderComponent } from './components/booking-summary-loader/booking-summary-loader.component';
 import { FlightConfirmationComponent } from './components/flight-confirmation/flight-confirmation.component';
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CookieModule } from 'ngx-cookie';
 import { FlightBookingFailedComponent } from './components/flight-booking-failed/flight-booking-failed.component';
 import { CalendarModule } from 'primeng/calendar';
@@ -59,7 +58,6 @@ import { CancellationPolicyPopupComponent } from './components/cancellation-poli
     FormsModule, 
     ReactiveFormsModule,
     NgSelectModule,
-    NgxDaterangepickerMd.forRoot(),
     CookieModule.forRoot(),
     CalendarModule
   ],
