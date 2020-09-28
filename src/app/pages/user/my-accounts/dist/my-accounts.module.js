@@ -15,9 +15,7 @@ var my_accounts_nav_component_1 = require("./my-accounts-nav/my-accounts-nav.com
 var forms_1 = require("@angular/forms");
 var ng_select_1 = require("@ng-select/ng-select");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var list_traveller_component_1 = require("./travellers/list-traveller.component");
-var crud_component_1 = require("./travellers/crud/crud.component");
 var list_bookings_component_1 = require("./bookings/list-bookings.component");
 var flights_component_1 = require("./bookings/flights/flights.component");
 var hotels_component_1 = require("./bookings/hotels/hotels.component");
@@ -27,6 +25,7 @@ var list_payment_history_component_1 = require("./payment-history/list-payment-h
 var history_list_component_1 = require("./payment-history/history-list/history-list.component");
 var view_history_component_1 = require("./payment-history/view-history/view-history.component");
 var flight_module_1 = require("../../flight/flight.module");
+var travellers_crud_component_1 = require("./travellers/travellers-crud/travellers-crud.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -37,7 +36,7 @@ var MyAccountsModule = /** @class */ (function () {
                 my_accounts_nav_component_1.MyAccountsNavComponent,
                 list_bookings_component_1.ListBookingsComponent,
                 list_traveller_component_1.ListTravellerComponent,
-                crud_component_1.CrudComponent,
+                travellers_crud_component_1.TravellersCrudComponent,
                 flights_component_1.FlightsComponent,
                 hotels_component_1.HotelsComponent,
                 accommodations_component_1.AccommodationsComponent,
@@ -52,7 +51,6 @@ var MyAccountsModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 ng_select_1.NgSelectModule,
                 ng_bootstrap_1.NgbModule,
-                ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
                 calendar_1.CalendarModule,
                 flight_module_1.FlightModule
             ],

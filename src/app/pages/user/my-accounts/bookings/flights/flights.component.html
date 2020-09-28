@@ -358,15 +358,22 @@
                                 </div>
                                 <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
+                                    <p class="fb_animation mb-2 h-auto w-100"
+                                    *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100"
+                                        *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100"
+                                        *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-0 h-auto w-100"
+                                        *ngIf="loadCancellationPolicy"></p>
                                     <ul>
-                                        <li>It is a long established fact that a reader will be distracted by the
-                                            readable content layout.</li>
-                                        <li>It is a long established fact that a reader will be distracted by the
-                                            readable content layout.</li>
-                                        <li>It is a long established fact that a reader will be distracted by the
-                                            readable content layout.</li>
-                                        <li>It is a long established fact that a reader will be distracted by the
-                                            readable content layout.</li>
+                                        <li *ngIf="!loadCancellationPolicy && errorMessage!=''">{{ errorMessage }}</li>
+                                        <li *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
+                                            [innerHtml]="cancellationPolicyArray[0]">
+                                        </li>
+                                        <li *ngIf="!loadCancellationPolicy && cancellationPolicy && loadMoreCancellationPolicy"
+                                            [innerHtml]="cancellationPolicy.cancellation_policy">
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="triangle_left"></div>
@@ -378,8 +385,7 @@
         </div>
     </div>
 </div>
-<!-- <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
-            [(page)]="pageNumber" [pageSize]="limit"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+<ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
+            [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
             (pageChange)="pageChange($event)">
 </ngb-pagination>
- -->

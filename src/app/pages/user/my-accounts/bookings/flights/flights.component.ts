@@ -13,9 +13,9 @@ export class FlightsComponent implements OnInit {
   @Input() flightLists;
   flightList = [];
   flightBookings = [];
-  page :number;
-  pageSize = 12;
-  perPageLimitConfig = [12, 25, 50, 100];
+  page :1;
+  pageSize =10;
+  perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
   showPaginationBar: boolean = false;
   totalItems;
@@ -23,7 +23,10 @@ export class FlightsComponent implements OnInit {
   loadBaggageDetails:boolean = true;
   loadCancellationPolicy:boolean=false;
   baggageDetails;
-
+  loadMoreCancellationPolicy:boolean=false;
+  cancellationPolicy;
+  cancellationPolicyArray=[];
+  errorMessage;
 
   constructor(   
      private commonFunction: CommonFunction,
@@ -37,8 +40,8 @@ export class FlightsComponent implements OnInit {
   }
  
   ngOnChanges(changes:SimpleChanges){    
-    this.flightList = changes.flightLists.currentValue;
     this.showPaginationBar = true;
+    this.flightList = changes.flightLists.currentValue;
   }
 
   ngAfterContentChecked() {
@@ -78,5 +81,26 @@ export class FlightsComponent implements OnInit {
       console.log(this.baggageDetails)
       this.loadBaggageDetails = false;
     });
+  }
+
+  getCancellationPolicy(routeCode) {
+
+    this.loadCancellationPolicy=true;
+    this.loadMoreCancellationPolicy=false;
+    this.errorMessage='';
+    this.flightService.getCancellationPolicy(routeCode).subscribe((data:any) => {
+      this.cancellationPolicyArray = data.cancellation_policy.split('--')
+      this.loadCancellationPolicy=false;
+      this.cancellationPolicy = data;
+      console.log(data)
+    }, (err) => {
+      this.loadCancellationPolicy=false;
+      this.errorMessage = err.message;
+    });
+  }
+
+  toggleCancellationContent(){
+    this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
+    console.log("this.loadMoreCancellationPolicy",this.loadMoreCancellationPolicy)
   }
 }

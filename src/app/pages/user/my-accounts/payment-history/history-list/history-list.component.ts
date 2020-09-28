@@ -18,22 +18,36 @@ export class HistoryListComponent implements OnInit {
   historys: [];
   item: any;
   listLength=0;
+  pageSize =10;
+  page :1;
+  perPageLimitConfig = [10, 25, 50, 100];
+  limit: number;
+  showPaginationBar: boolean = false;
+
+
   constructor(
     private commonFunction:CommonFunction,
     private flightCommonFunction :FlightCommonFunction
   ) { }
 
   ngOnInit() {
-
+    this.page = 1;
+    this.limit = this.perPageLimitConfig[0];
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.showPaginationBar = true;
     this.list = changes.historyResult.currentValue;
+
     if(this.list && this.list != 'undefined'){
       this.listLength = this.list.length; 
+      
     }
   }
-
+  pageChange(event) {
+    // this.showPaginationBar = false;
+    this.page = event;    
+  }
   viewDetailClick(item) {
     this.item = item;
   } 

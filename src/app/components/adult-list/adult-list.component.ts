@@ -156,27 +156,18 @@ export class AdultListComponent implements OnInit {
   pushTraveler(event) {
     if (event.user_type === 'adult') {
       const index = this._adults.indexOf(event.userId, 0);
-      if (index > -1) {
-        this._adults.splice(index, 1);
-      }
+      this._adults = this._adults.filter(item => item.userId != event.userId );    
       this._adults.push(event);
     } else if (event.user_type === 'child') {
-      const index = this._childs.indexOf(event.userId, 0);
-      if (index > -1) {
-        this._childs.splice(index, 1);
-      }
+      this._childs = this._childs.filter(item => item.userId != event.userId );
       this._childs.push(event);
     } else {
-      const index = this._infants.indexOf(event.userId, 0);
-      if (index > -1) {
-        this._infants.splice(index, 1);
-      }
+      this._infants = this._infants.filter(item => item.userId != event.userId );
       this._infants.push(event);
     }
     this.showAddAdultForm = false;
   }
 
- 
 
   getFormStatus(status) {
     this.adultFormStatus = status;

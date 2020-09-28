@@ -34,7 +34,7 @@ var TravelerFormComponent = /** @class */ (function () {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
-        this.expiryMinDate = moment().add(2, 'days');
+        this.expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
         this.adultForm = this.formBuilder.group({
@@ -68,7 +68,6 @@ var TravelerFormComponent = /** @class */ (function () {
                 frequently_no: ''
             });
             this.traveler.isComplete = this.adultForm.status === 'VALID' ? true : false;
-            console.log("this.traveler", this.traveler);
             // this.auditFormStatus.emit(this.formStatus);
         }
     };
@@ -164,7 +163,6 @@ var TravelerFormComponent = /** @class */ (function () {
                 };
                 jsonData = Object.assign(jsonData, adultObj);
             }
-            console.log(jsonData);
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
@@ -207,12 +205,6 @@ var TravelerFormComponent = /** @class */ (function () {
     TravelerFormComponent.prototype.stringToDate = function (string, saprator) {
         var dateArray = string.split(saprator);
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
-    };
-    TravelerFormComponent.prototype.dobDateUpdate = function (date) {
-        this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate);
-    };
-    TravelerFormComponent.prototype.expiryDateUpdate = function (date) {
-        this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate);
     };
     __decorate([
         core_1.Input('var')

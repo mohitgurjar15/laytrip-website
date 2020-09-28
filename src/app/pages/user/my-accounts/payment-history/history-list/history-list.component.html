@@ -14,7 +14,7 @@
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
                 <h5>No Payment Available</h5>
             </div>
-            <div class="pay_listing"  *ngFor="let item of list; let i = index;">
+            <div class="pay_listing"  *ngFor="let item of list | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index;">
                 <div class="list_top">
                     <div class="list_left">
                         <ul>
@@ -60,6 +60,11 @@
                     </div>
                 </div>
             </div>
+            <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="listLength"
+            [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+            (pageChange)="pageChange($event)">
+            </ngb-pagination>
+
         </div>
     </div>
   </div>

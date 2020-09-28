@@ -169,6 +169,7 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     bookFlightApi(){
+      window.scroll(0,0);
       let bookingData={
         payment_type            : this.instalmentMode,
         laycredit_points        : this.laycreditpoints,

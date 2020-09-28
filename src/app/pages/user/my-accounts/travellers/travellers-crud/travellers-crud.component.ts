@@ -11,11 +11,11 @@ import { FlightService } from '../../../../../services/flight.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-crud',
-  templateUrl: './crud.component.html',
-  styleUrls: ['./crud.component.scss']
+  selector: 'app-travellers-crud',
+  templateUrl: './travellers-crud.component.html',
+  styleUrls: ['./travellers-crud.component.scss']
 })
-export class CrudComponent implements OnInit {
+export class TravellersCrudComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   coAccountForm: FormGroup;
   countries: any = [];

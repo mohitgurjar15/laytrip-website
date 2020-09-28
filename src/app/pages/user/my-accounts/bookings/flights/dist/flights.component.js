@@ -16,20 +16,22 @@ var FlightsComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.flightList = [];
         this.flightBookings = [];
-        this.pageSize = 12;
-        this.perPageLimitConfig = [12, 25, 50, 100];
+        this.pageSize = 10;
+        this.perPageLimitConfig = [10, 25, 50, 100];
         this.showPaginationBar = false;
         this.showFlightDetails = [];
         this.loadBaggageDetails = true;
         this.loadCancellationPolicy = false;
+        this.loadMoreCancellationPolicy = false;
+        this.cancellationPolicyArray = [];
     }
     FlightsComponent.prototype.ngOnInit = function () {
         this.page = 1;
         this.limit = this.perPageLimitConfig[0];
     };
     FlightsComponent.prototype.ngOnChanges = function (changes) {
-        this.flightList = changes.flightLists.currentValue;
         this.showPaginationBar = true;
+        this.flightList = changes.flightLists.currentValue;
     };
     FlightsComponent.prototype.ngAfterContentChecked = function () {
         this.flightBookings = this.flightList;
@@ -65,6 +67,25 @@ var FlightsComponent = /** @class */ (function () {
             console.log(_this.baggageDetails);
             _this.loadBaggageDetails = false;
         });
+    };
+    FlightsComponent.prototype.getCancellationPolicy = function (routeCode) {
+        var _this = this;
+        this.loadCancellationPolicy = true;
+        this.loadMoreCancellationPolicy = false;
+        this.errorMessage = '';
+        this.flightService.getCancellationPolicy(routeCode).subscribe(function (data) {
+            _this.cancellationPolicyArray = data.cancellation_policy.split('--');
+            _this.loadCancellationPolicy = false;
+            _this.cancellationPolicy = data;
+            console.log(data);
+        }, function (err) {
+            _this.loadCancellationPolicy = false;
+            _this.errorMessage = err.message;
+        });
+    };
+    FlightsComponent.prototype.toggleCancellationContent = function () {
+        this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
+        console.log("this.loadMoreCancellationPolicy", this.loadMoreCancellationPolicy);
     };
     __decorate([
         core_1.Input()

@@ -46,7 +46,7 @@ export class TravelerFormComponent implements OnInit {
   dobMaxDate; 
   minyear;
   maxyear;
-  expiryMinDate: moment.Moment = moment().add(2, 'days');
+  expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
 
   
   constructor(
@@ -92,7 +92,6 @@ export class TravelerFormComponent implements OnInit {
         frequently_no: ''
       });
       this.traveler.isComplete =  this.adultForm.status === 'VALID' ? true : false;
-      console.log("this.traveler",this.traveler)
       // this.auditFormStatus.emit(this.formStatus);
     }
   }
@@ -195,7 +194,6 @@ export class TravelerFormComponent implements OnInit {
         };
         jsonData = Object.assign(jsonData, adultObj);
       }
-      console.log(jsonData)
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
@@ -243,13 +241,7 @@ export class TravelerFormComponent implements OnInit {
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 
-  dobDateUpdate(date) {
-    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
-  }
-
-  expiryDateUpdate(date) {
-    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate);
-  }
+ 
 
 
 }

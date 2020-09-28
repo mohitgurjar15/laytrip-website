@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
-import { CrudComponent } from './travellers/crud/crud.component';
 import { ListBookingsComponent } from './bookings/list-bookings.component';
 import { FlightsComponent } from './bookings/flights/flights.component';
 import { HotelsComponent } from './bookings/hotels/hotels.component';
@@ -17,6 +16,7 @@ import { ListPaymentHistoryComponent } from './payment-history/list-payment-hist
 import { HistoryListComponent } from './payment-history/history-list/history-list.component';
 import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
 import { FlightModule } from '../../flight/flight.module';
+import { TravellersCrudComponent } from './travellers/travellers-crud/travellers-crud.component';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { FlightModule } from '../../flight/flight.module';
     MyAccountsNavComponent,
     ListBookingsComponent,
     ListTravellerComponent,
-    CrudComponent,
+    TravellersCrudComponent,
     FlightsComponent,
     HotelsComponent,
     AccommodationsComponent,
