@@ -83,6 +83,7 @@ export class FlightTravelerComponent implements OnInit {
   }
 
   getItinerarySelectionArray(itinerarys){  
+    console.log(itinerarys)
     this._travellersCountValid = false;
     if(itinerarys.adult.length === Number(this._itinerary.adult)
     && itinerarys.child.length === Number(this._itinerary.child) 
@@ -93,6 +94,8 @@ export class FlightTravelerComponent implements OnInit {
   }
 
   checkTravelesValid() {
+    console.log(this._travellersCountValid)
+
     if(this._travellersCountValid ){
       this.router.navigate(['/flight/checkout',this.routeCode]);
     } else {

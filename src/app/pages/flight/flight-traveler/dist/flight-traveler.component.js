@@ -74,6 +74,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.selectedAdults = count;
     };
     FlightTravelerComponent.prototype.getItinerarySelectionArray = function (itinerarys) {
+        console.log(itinerarys);
         this._travellersCountValid = false;
         if (itinerarys.adult.length === Number(this._itinerary.adult)
             && itinerarys.child.length === Number(this._itinerary.child)
@@ -82,6 +83,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         }
     };
     FlightTravelerComponent.prototype.checkTravelesValid = function () {
+        console.log(this._travellersCountValid);
         if (this._travellersCountValid) {
             this.router.navigate(['/flight/checkout', this.routeCode]);
         }
