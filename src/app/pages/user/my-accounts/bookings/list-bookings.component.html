@@ -9,11 +9,9 @@
         <app-my-accounts-nav></app-my-accounts-nav>
       </div>
       <div class="col-lg-9" >
-        <div class="account_cnt_main booking_main"  *ngIf="isNotFound">
-          <app-flight-not-found ></app-flight-not-found>
-        </div>
+       
 
-        <div class="account_cnt_main booking_main" *ngIf="!isNotFound">
+        <div class="account_cnt_main booking_main">
           <div class="block_booking_list">
             <ul id="booking_tabs" class="nav nav-tabs" role="tablist">
               <li class="nav-item">
@@ -41,6 +39,7 @@
                   aria-labelledby="heading-booking-flight">
                   <div class="card-body">
                     <div class="block_booking_list_inner">
+                      
                       <div class="search_result flight">
                         <app-flights [flightLists]="flightLists"></app-flights>
                       </div>
@@ -62,7 +61,7 @@
                   aria-labelledby="heading-booking-hotel">
                   <div class="card-body">
                     <div class="block_booking_list_inner">
-                     <app-hotels></app-hotels>
+                      <app-hotels></app-hotels>
                     </div>
                   </div>
                 </div>
@@ -81,8 +80,8 @@
                 <div id="collapse-booking-accommodation" class="collapse" role="tabpanel" data-parent="#booking_content"
                   aria-labelledby="heading-booking-accommodation">
                   <div class="card-body">
-                    <div class="block_booking_list_inner">
-                     <app-accommodations></app-accommodations>
+                    <div class="block_booking_list_inner">                    
+                      <app-accommodations></app-accommodations>
                     </div>
                   </div>
                 </div>

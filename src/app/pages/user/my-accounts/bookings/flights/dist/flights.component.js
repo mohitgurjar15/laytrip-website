@@ -19,14 +19,17 @@ var FlightsComponent = /** @class */ (function () {
         this.pageSize = 10;
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.showPaginationBar = false;
+        this.totalItems = 0;
         this.showFlightDetails = [];
         this.loadBaggageDetails = true;
         this.loadCancellationPolicy = false;
         this.loadMoreCancellationPolicy = false;
         this.cancellationPolicyArray = [];
+        this.isNotFound = false;
     }
     FlightsComponent.prototype.ngOnInit = function () {
         this.page = 1;
+        this.isNotFound = false;
         this.limit = this.perPageLimitConfig[0];
     };
     FlightsComponent.prototype.ngOnChanges = function (changes) {
@@ -37,6 +40,12 @@ var FlightsComponent = /** @class */ (function () {
         this.flightBookings = this.flightList;
         this.totalItems = this.flightBookings.length;
         this.showPaginationBar = true;
+        console.log(this.totalItems);
+        this.isNotFound = false;
+        if (this.totalItems === 0) {
+            this.isNotFound = true;
+            this.showPaginationBar = false;
+        }
     };
     FlightsComponent.prototype.pageChange = function (event) {
         this.showPaginationBar = false;
@@ -64,7 +73,6 @@ var FlightsComponent = /** @class */ (function () {
         this.loadBaggageDetails = true;
         this.flightService.getBaggageDetails(routeCode).subscribe(function (data) {
             _this.baggageDetails = data;
-            console.log(_this.baggageDetails);
             _this.loadBaggageDetails = false;
         });
     };
@@ -77,7 +85,6 @@ var FlightsComponent = /** @class */ (function () {
             _this.cancellationPolicyArray = data.cancellation_policy.split('--');
             _this.loadCancellationPolicy = false;
             _this.cancellationPolicy = data;
-            console.log(data);
         }, function (err) {
             _this.loadCancellationPolicy = false;
             _this.errorMessage = err.message;
@@ -85,7 +92,6 @@ var FlightsComponent = /** @class */ (function () {
     };
     FlightsComponent.prototype.toggleCancellationContent = function () {
         this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
-        console.log("this.loadMoreCancellationPolicy", this.loadMoreCancellationPolicy);
     };
     __decorate([
         core_1.Input()

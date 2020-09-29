@@ -1,6 +1,12 @@
+<div class="account_cnt_main booking_main"  *ngIf="isNotFound">
+    <div class="block_nobooking_available">
+      <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
+      <h5>No Booking Found</h5>
+    </div>
+</div>
 <div class="result_listing one_way_list roundtrip_list">
     <div class="search_block"
-        *ngFor="let item of flightBookings | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let blockIndex = index;">
+        *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
             <div class="block_booking_info">
                 <ul>
@@ -385,6 +391,7 @@
         </div>
     </div>
 </div>
+<br>
 <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
             [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
             (pageChange)="pageChange($event)">

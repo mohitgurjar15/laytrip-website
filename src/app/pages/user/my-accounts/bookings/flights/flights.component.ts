@@ -18,7 +18,7 @@ export class FlightsComponent implements OnInit {
   perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
   showPaginationBar: boolean = false;
-  totalItems;
+  totalItems =0;
   showFlightDetails = [];
   loadBaggageDetails:boolean = true;
   loadCancellationPolicy:boolean=false;
@@ -27,6 +27,7 @@ export class FlightsComponent implements OnInit {
   cancellationPolicy;
   cancellationPolicyArray=[];
   errorMessage;
+  isNotFound:boolean= false;
 
   constructor(   
      private commonFunction: CommonFunction,
@@ -36,6 +37,7 @@ export class FlightsComponent implements OnInit {
 
   ngOnInit() {
     this.page = 1;
+    this.isNotFound = false;
     this.limit = this.perPageLimitConfig[0];
   }
  
@@ -48,6 +50,12 @@ export class FlightsComponent implements OnInit {
     this.flightBookings = this.flightList;
     this.totalItems = this.flightBookings.length;
     this.showPaginationBar = true;
+    console.log(this.totalItems)
+    this.isNotFound = false;
+    if(this.totalItems === 0) {
+      this.isNotFound = true;
+      this.showPaginationBar = false;
+    }
   }
 
   pageChange(event) {
@@ -73,12 +81,11 @@ export class FlightsComponent implements OnInit {
       return false;
     });
   }
-  getBaggageDetails(routeCode) {
 
+  getBaggageDetails(routeCode) {
     this.loadBaggageDetails = true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
       this.baggageDetails = data;
-      console.log(this.baggageDetails)
       this.loadBaggageDetails = false;
     });
   }
@@ -92,7 +99,6 @@ export class FlightsComponent implements OnInit {
       this.cancellationPolicyArray = data.cancellation_policy.split('--')
       this.loadCancellationPolicy=false;
       this.cancellationPolicy = data;
-      console.log(data)
     }, (err) => {
       this.loadCancellationPolicy=false;
       this.errorMessage = err.message;
@@ -101,6 +107,5 @@ export class FlightsComponent implements OnInit {
 
   toggleCancellationContent(){
     this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
-    console.log("this.loadMoreCancellationPolicy",this.loadMoreCancellationPolicy)
   }
 }

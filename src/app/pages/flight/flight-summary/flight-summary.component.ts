@@ -55,7 +55,7 @@ export class FlightSummaryComponent implements OnInit {
   
   
   airRevalidate(){
-
+      console.log('here')
       let routeData={
         route_code: this.route.snapshot.paramMap.get('rc')
       }
@@ -108,6 +108,7 @@ export class FlightSummaryComponent implements OnInit {
   toggleBaggagePolicy(){
     this.showBaggePolicy=true;
   }
+
   toggleCancellationPolicy(){
     this.showCancellationPolicy=true;
   }
