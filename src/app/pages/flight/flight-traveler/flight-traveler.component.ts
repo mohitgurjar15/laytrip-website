@@ -4,7 +4,7 @@ import { TravelerService } from '../../../services/traveler.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
-import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
+import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-flight-traveler',

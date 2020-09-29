@@ -9,7 +9,7 @@ exports.__esModule = true;
 exports.FlightTravelerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
-var jwt_helper_1 = require("src/app/_helpers/jwt.helper");
+var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var FlightTravelerComponent = /** @class */ (function () {
     function FlightTravelerComponent(travelerService, route, cookieService, toastr, router) {
         this.travelerService = travelerService;
