@@ -49,15 +49,27 @@ export class PaymentModeComponent implements OnInit {
   secondInstalment:number;
   totalLaycreditPoints=0;
   instalmentAvavible:boolean=false;
+  showFirstAccrodian:boolean=false;
+  weeklyDefaultInstalmentNo:number=0;
+  weeklyDefaultInstalment:number=0;
+  biWeeklyDefaultInstalmentNo:number=0;
+  biWeeklyDefaultInstalment:number=0;
+  monthlyDefaultInstalmentNo:number=0;
+  monthlyDefaultInstalment:number=0;
+
 
   ngOnInit() {
 
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemnts('weekly');
+    this.getInstalemnts('biweekly');
+    this.getInstalemnts('monthly');
   }
 
-  
+  toggleaccordin(){
+    this.showFirstAccrodian = !this.showFirstAccrodian;
+  }
 
   /**
    * 
@@ -70,6 +82,22 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
       if(this.instalments.instalment_available==true){
+
+        if(type=='weekly'){
+          this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
+          this.weeklyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+        }
+
+        if(type=='biweekly'){
+          this.biWeeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
+          this.biWeeklyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+        }
+
+        if(type=='monthly'){
+          this.monthlyDefaultInstalmentNo = this.instalments.instalment_date.length;
+          this.monthlyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+        }
+
         this.instalmentAvavible=true;
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;

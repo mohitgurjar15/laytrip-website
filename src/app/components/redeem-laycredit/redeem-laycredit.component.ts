@@ -49,9 +49,6 @@ export class RedeemLaycreditComponent implements OnInit {
       this.applyLaycredit.emit(this.selectedLayCredit)
     }
     else{
-      /* const newOptions: Options = Object.assign({}, this.laycreditOptions);
-      newOptions.floor = 0;
-      this.laycreditOptions = newOptions; */
       this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: true});
       this.applyLaycredit.emit(0)
     }
@@ -67,6 +64,7 @@ export class RedeemLaycreditComponent implements OnInit {
         const laycreditOptions: Options = Object.assign({}, this.laycreditOptions);
         if(this.totalLaycreditPoints > this.sellingPrice){
           laycreditOptions.ceil = this.sellingPrice;
+          
         }
         else{
           laycreditOptions.ceil = this.totalLaycreditPoints;

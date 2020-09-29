@@ -114,7 +114,6 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     applyLaycredit(laycreditpoints){
-      console.log("laycreditpoints",laycreditpoints)
       this.isShowCardOption=true;
       this.laycreditpoints=laycreditpoints;
       this.isShowPaymentOption=true;

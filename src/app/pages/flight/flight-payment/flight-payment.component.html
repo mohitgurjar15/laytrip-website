@@ -1,0 +1,39 @@
+<app-checkout-progress  [progressStep]="progressStep"></app-checkout-progress>
+<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8">
+              <div class="detail_info_left">
+                  <div class="block_payment">
+                        <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
+                            <div class="block_payment_mode">
+                                <div class="block_title_section">
+                                    <h5>Choose Payment Mode</h5>
+                                </div>
+                                <div class="block_detail">
+                                    <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                    <app-payment-mode 
+                                        *ngIf="isShowPaymentOption" 
+                                        [flightSummary]="flightSummary" 
+                                        (selectInstalmentMode)="selectInstalmentMode($event)" 
+                                        (getInstalmentData)="getInstalmentData($event)">
+                                    </app-payment-mode>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block_pay_info">
+                            <app-booking-enquiry-info></app-booking-enquiry-info>
+                        </div>
+                  </div>
+              </div>
+              <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
+              
+          </div>
+          <div class="col-lg-4">
+            <app-flight-summary checkAvailability="local" (flightAvailable)="flightAvailable($event)"></app-flight-summary>
+          </div>
+      </div>
+  </div>
+</section>
+
+<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 

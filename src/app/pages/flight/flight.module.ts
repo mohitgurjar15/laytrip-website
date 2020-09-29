@@ -27,6 +27,7 @@ import { FlightNotAvailableComponent } from './components/flight-not-available/f
 import { FlightSessionTimeOutComponent } from './components/flight-session-time-out/flight-session-time-out.component';
 import { BaggagePolicyPopupComponent } from './components/baggage-policy-popup/baggage-policy-popup.component';
 import { CancellationPolicyPopupComponent } from './components/cancellation-policy-popup/cancellation-policy-popup.component';
+import { FlightPaymentComponent } from './flight-payment/flight-payment.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CancellationPolicyPopupComponent } from './components/cancellation-poli
     FlightNotAvailableComponent,
     FlightSessionTimeOutComponent,
     BaggagePolicyPopupComponent,
-    CancellationPolicyPopupComponent
+    CancellationPolicyPopupComponent,
+    FlightPaymentComponent
   ],
   imports: [
     CommonModule,
