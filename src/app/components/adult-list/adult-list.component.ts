@@ -64,7 +64,7 @@ export class AdultListComponent implements OnInit {
   }
 
   selectTraveler(event, traveler) {
-    this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+    this._itinerary = this.cookieService.get('_itinerary') ? JSON.parse(this.cookieService.get('_itinerary')) : '';
     if (this._itinerary) {
       if (event.target.checked) {
         let totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
@@ -107,7 +107,6 @@ export class AdultListComponent implements OnInit {
         }
       }
     }
-    console.log(this.counter)
 
     this.adultsCount.emit(this.counter);
     this._itinerarySelectionArray.emit(this._itinerarySelection);

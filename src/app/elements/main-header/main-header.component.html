@@ -13,11 +13,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="javascript:void(0);">Partial Payment</a>
                             </li>
-                            <li class="nav-item" *ngIf="userDetails.roleId==5 || userDetails.roleId==6">
+                            <li class="nav-item" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6)">
                                 <a class="nav-link" href="javascript:void(0);">
                                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
                                     <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
-                                    {{totalLayCredit}}
+                                    {{showTotalLayCredit}}
                                 </a>
                             </li>
                         </ul>

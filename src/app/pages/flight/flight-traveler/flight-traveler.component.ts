@@ -40,8 +40,9 @@ export class FlightTravelerComponent implements OnInit {
     window.scroll(0,0);
     this.loading = true;
     this.getTravelers();
-    if(this.cookieService.get('_itinerary')){
-      this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+
+    if(sessionStorage.getItem('_itinerary')){
+      this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
       this.totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
     }
     this.routeCode = this.route.snapshot.paramMap.get('rc')

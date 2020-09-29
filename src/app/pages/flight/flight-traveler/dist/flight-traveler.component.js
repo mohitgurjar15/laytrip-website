@@ -29,12 +29,14 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.is_traveller = false;
         this.totalTraveler = 0;
         this._travellersCountValid = false;
+        this.isFlightNotAvailable = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
+        window.scroll(0, 0);
         this.loading = true;
         this.getTravelers();
-        if (this.cookieService.get('_itinerary')) {
-            this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
+        if (sessionStorage.getItem('_itinerary')) {
+            this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
             this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
         }
         this.routeCode = this.route.snapshot.paramMap.get('rc');
@@ -101,6 +103,12 @@ var FlightTravelerComponent = /** @class */ (function () {
             this.loading = true;
             this.getTravelers();
         }
+    };
+    FlightTravelerComponent.prototype.flightAvailable = function (event) {
+        this.isFlightNotAvailable = event;
+    };
+    FlightTravelerComponent.prototype.onActivate = function (event) {
+        window.scroll(0, 0);
     };
     FlightTravelerComponent = __decorate([
         core_1.Component({

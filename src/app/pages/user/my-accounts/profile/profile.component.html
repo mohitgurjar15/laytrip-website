@@ -127,14 +127,7 @@
                                                 yearRange="1970:2020"
                                                 [defaultDate]="dobMinDate" 
                                             >
-                                            </p-calendar>
-                                               <!--  <input type="text" tabindex="6" ngxDaterangepickerMd
-                                                    formControlName="dob" showDropdowns="true"
-                                                    alwaysShowCalendars="true" placeholder=""
-                                                    class="form-control custom_datpicker birth_date"
-                                                    [singleDatePicker]="true" [locale]="locale" [autoApply]="true"
-                                                    [maxDate]="dobMaxDate" [minDate]="dobMinDate" (datesUpdated)="dobDateUpdate($event)"/> -->
-
+                                            </p-calendar>                                             
                                                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors"
                                                     class="focus-input100 login-error">
                                                     <div *ngIf="profileForm.controls.dob.errors.required"

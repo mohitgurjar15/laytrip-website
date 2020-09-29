@@ -28,14 +28,16 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         this.showFlightDetails = [];
         this.showDiv = false;
         this.routeCode = [];
+        this.cancellationPolicyArray = [];
+        this.loadMoreCancellationPolicy = false;
         this.loadBaggageDetails = true;
+        this.loadCancellationPolicy = false;
         this.isRoundTrip = false;
         this.subcell = '$100';
     }
     FlightItemWrapperComponent.prototype.ngOnInit = function () {
         var _currency = localStorage.getItem('_curr');
         this.currency = JSON.parse(_currency);
-        this.loadJquery();
         // console.log(this.flightDetails);
         this.flightList = this.flightDetails;
         if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
@@ -44,51 +46,34 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         else if (this.route.snapshot.queryParams['trip'] === 'oneway') {
             this.isRoundTrip = false;
         }
-        // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-        //   if (res) {
-        //     if (res.items) {
-        //       // FOR FLIGHT LIST & DETAILS
-        //       this.flightList = res.items;
-        //     }
-        //   }
-        // }));
-        // setTimeout(() => {
-        //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
-        //   cells.forEach(c => {
-        //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
-        //   });
-        // });
     };
     FlightItemWrapperComponent.prototype.opened = function () {
-        // setTimeout(() => {
-        //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
-        //   cells.forEach(c => {
-        //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
-        //   });
-        // });
     };
     FlightItemWrapperComponent.prototype.getBaggageDetails = function (routeCode) {
         var _this = this;
         this.loadBaggageDetails = true;
         this.flightService.getBaggageDetails(routeCode).subscribe(function (data) {
-            console.log('baggage:::', data);
             _this.baggageDetails = data;
             _this.loadBaggageDetails = false;
         });
     };
     FlightItemWrapperComponent.prototype.getCancellationPolicy = function (routeCode) {
         var _this = this;
-        this.cancellationPolicy = '';
+        this.loadCancellationPolicy = true;
+        this.loadMoreCancellationPolicy = false;
+        this.errorMessage = '';
         this.flightService.getCancellationPolicy(routeCode).subscribe(function (data) {
-            console.log('cancellation-policy:::', data);
-            _this.errorMessage = '';
+            _this.cancellationPolicyArray = data.cancellation_policy.split('--');
+            _this.loadCancellationPolicy = false;
             _this.cancellationPolicy = data;
         }, function (err) {
-            console.log(err);
+            _this.loadCancellationPolicy = false;
             _this.errorMessage = err.message;
         });
     };
-    FlightItemWrapperComponent.prototype.loadJquery = function () {
+    FlightItemWrapperComponent.prototype.toggleCancellationContent = function () {
+        this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
+        console.log("this.loadMoreCancellationPolicy", this.loadMoreCancellationPolicy);
     };
     FlightItemWrapperComponent.prototype.ngAfterContentChecked = function () {
         var _this = this;
@@ -114,15 +99,20 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             return false;
         });
     };
-    FlightItemWrapperComponent.prototype.bookNow = function (routeCode, is_passport) {
+    FlightItemWrapperComponent.prototype.bookNow = function (route) {
         var itinerary = {
             adult: this.route.snapshot.queryParams["adult"],
             child: this.route.snapshot.queryParams["child"],
             infant: this.route.snapshot.queryParams["infant"],
-            is_passport_required: is_passport
+            is_passport_required: route.is_passport_required
         };
-        this.cookieService.put('_itinerary', JSON.stringify(itinerary));
-        this.router.navigate(["flight/traveler/" + routeCode]);
+        var lastSearchUrl = this.router.url;
+        this.cookieService.put('_prev_search', lastSearchUrl);
+        var dateNow = new Date();
+        dateNow.setMinutes(dateNow.getMinutes() + 10);
+        sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
+        sessionStorage.setItem('__route', JSON.stringify(route));
+        this.router.navigate(["flight/traveler/" + route.route_code]);
     };
     FlightItemWrapperComponent.prototype.ngOnChanges = function (changes) {
         this.flightList = changes.flightDetails.currentValue;

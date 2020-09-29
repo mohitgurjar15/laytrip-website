@@ -26,7 +26,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
   isCurrencySet: boolean = false;
   isLoggedIn = false;
-  totalLayCredit;
+  totalLayCredit = 0;
+  showTotalLayCredit = 0;
   userDetails;
 
   constructor(
@@ -71,7 +72,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getCurrencies();
     this.loadJquery();
     this.userDetails = getLoginUserInfo();
-
     if(Object.keys(this.userDetails).length>0){
       if(this.userDetails.roleId!=7){
         this.totalLaycredit();
@@ -81,6 +81,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.checkUser();
+    this.showTotalLayCredit = this.totalLayCredit;
     //this.totalLaycredit();
   }
 
@@ -162,8 +163,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   onLoggedout() {
     this.isLoggedIn = false;
+    this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 
   loadJquery() {

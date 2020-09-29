@@ -25,6 +25,8 @@ var MainHeaderComponent = /** @class */ (function () {
         this.selectedCurrency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' };
         this.isCurrencySet = false;
         this.isLoggedIn = false;
+        this.totalLayCredit = 0;
+        this.showTotalLayCredit = 0;
         var _langunage = localStorage.getItem('_lang');
         var _currency = localStorage.getItem('_curr');
         if (_langunage) {
@@ -67,6 +69,7 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
+        this.showTotalLayCredit = this.totalLayCredit;
         //this.totalLaycredit();
     };
     MainHeaderComponent.prototype.ngOnChanges = function () {
@@ -131,6 +134,7 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.onLoggedout = function () {
         this.isLoggedIn = false;
+        this.showTotalLayCredit = 0;
         localStorage.removeItem('_lay_sess');
         this.router.navigate(['/']);
     };
