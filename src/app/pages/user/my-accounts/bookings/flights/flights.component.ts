@@ -50,7 +50,6 @@ export class FlightsComponent implements OnInit {
     this.flightBookings = this.flightList;
     this.totalItems = this.flightBookings.length;
     this.showPaginationBar = true;
-    console.log(this.totalItems)
     this.isNotFound = false;
     if(this.totalItems === 0) {
       this.isNotFound = true;

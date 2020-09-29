@@ -4,6 +4,7 @@ import { TravelerService } from '../../../services/traveler.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
+import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 
 @Component({
   selector: 'app-flight-traveler',
@@ -27,7 +28,10 @@ export class FlightTravelerComponent implements OnInit {
   _itinerary :any;
   _travellersCountValid :boolean = false;
   isFlightNotAvailable:boolean=false;
+  is_updateToken = false;
+  userDetails;
 
+  
   constructor(
     private travelerService:TravelerService,
     private route: ActivatedRoute,
@@ -104,6 +108,14 @@ export class FlightTravelerComponent implements OnInit {
   }
 
   checkUser(){
+   
+
+    this.userDetails = getLoginUserInfo();
+
+    if(this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken){
+      this.is_updateToken = true;
+      this.getTravelers();
+    } 
     let userToken = localStorage.getItem('_lay_sess');    
     if(userToken && userToken != 'undefined'){
       this.isLoggedIn = true;
@@ -111,6 +123,7 @@ export class FlightTravelerComponent implements OnInit {
   }
   
   ngDoCheck(){
+
     this.checkUser(); 
     if(this.is_traveller === false){
       this.loading = true;

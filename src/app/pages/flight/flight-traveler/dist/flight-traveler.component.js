@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.FlightTravelerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
+var jwt_helper_1 = require("src/app/_helpers/jwt.helper");
 var FlightTravelerComponent = /** @class */ (function () {
     function FlightTravelerComponent(travelerService, route, cookieService, toastr, router) {
         this.travelerService = travelerService;
@@ -30,6 +31,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.totalTraveler = 0;
         this._travellersCountValid = false;
         this.isFlightNotAvailable = false;
+        this.is_updateToken = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -92,6 +94,11 @@ var FlightTravelerComponent = /** @class */ (function () {
         }
     };
     FlightTravelerComponent.prototype.checkUser = function () {
+        this.userDetails = jwt_helper_1.getLoginUserInfo();
+        if (this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken) {
+            this.is_updateToken = true;
+            this.getTravelers();
+        }
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {
             this.isLoggedIn = true;
