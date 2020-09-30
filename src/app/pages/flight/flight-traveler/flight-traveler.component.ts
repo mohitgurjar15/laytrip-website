@@ -113,7 +113,7 @@ export class FlightTravelerComponent implements OnInit {
     this.userDetails = getLoginUserInfo();
 
     if(this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken){
-      this.is_updateToken = true;
+      this.is_updateToken = this.is_traveller = true ;
       this.getTravelers();
     } 
     let userToken = localStorage.getItem('_lay_sess');    

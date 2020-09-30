@@ -96,7 +96,7 @@ var FlightTravelerComponent = /** @class */ (function () {
     FlightTravelerComponent.prototype.checkUser = function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
         if (this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken) {
-            this.is_updateToken = true;
+            this.is_updateToken = this.is_traveller = true;
             this.getTravelers();
         }
         var userToken = localStorage.getItem('_lay_sess');

@@ -10,9 +10,10 @@ exports.FlightsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
 var FlightsComponent = /** @class */ (function () {
-    function FlightsComponent(commonFunction, flightService) {
+    function FlightsComponent(commonFunction, flightService, userService) {
         this.commonFunction = commonFunction;
         this.flightService = flightService;
+        this.userService = userService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.flightList = [];
         this.flightBookings = [];
@@ -26,19 +27,22 @@ var FlightsComponent = /** @class */ (function () {
         this.loadMoreCancellationPolicy = false;
         this.cancellationPolicyArray = [];
         this.isNotFound = false;
+        this.loading = true;
     }
     FlightsComponent.prototype.ngOnInit = function () {
+        console.log(this.isNotFound);
         this.page = 1;
         this.isNotFound = false;
         this.limit = this.perPageLimitConfig[0];
+        this.getBookings();
     };
     FlightsComponent.prototype.ngOnChanges = function (changes) {
         this.showPaginationBar = true;
         this.flightList = changes.flightLists.currentValue;
     };
     FlightsComponent.prototype.ngAfterContentChecked = function () {
-        this.flightBookings = this.flightList;
-        this.totalItems = this.flightBookings.length;
+        // this.flightBookings = this.flightList;
+        // this.totalItems = this.flightBookings.length;
         this.showPaginationBar = true;
         this.isNotFound = false;
         if (this.totalItems === 0) {
@@ -60,6 +64,45 @@ var FlightsComponent = /** @class */ (function () {
         }
         this.showFlightDetails = this.showFlightDetails.map(function (item, i) {
             return ((index === i) && _this.showFlightDetails[index] === true) ? true : false;
+        });
+    };
+    FlightsComponent.prototype.getBookings = function () {
+        var _this = this;
+        this.userService.getBookings(this.page, this.limit).subscribe(function (res) {
+            if (res) {
+                _this.flightBookings = res.data.map(function (flight) {
+                    if (flight.moduleId == 1) {
+                        return {
+                            tripId: flight.id,
+                            journey_type: flight.locationInfo.journey_type,
+                            bookingDate: _this.commonFunction.convertDateFormat(flight.bookingDate, 'YYYY-MM-DD'),
+                            departure_time: flight.moduleInfo[0].routes[0].stops[0].departure_time,
+                            arrival_time: flight.moduleInfo[0].routes[0].stops[0].arrival_time,
+                            departure_city: flight.moduleInfo[0].routes[0].stops[0].departure_info.city,
+                            arrival_city: flight.moduleInfo[0].routes[0].stops[0].arrival_info.city,
+                            duration: flight.moduleInfo[0].total_duration,
+                            airline_logo: flight.moduleInfo[0].routes[0].stops[0].airline_logo,
+                            airline_name: flight.moduleInfo[0].routes[0].stops[0].airline_name,
+                            airline: flight.moduleInfo[0].routes[0].stops[0].airline,
+                            flight_number: flight.moduleInfo[0].routes[0].stops[0].flight_number,
+                            instalment_amount: flight.moduleInfo[0].start_price,
+                            selling_price: flight.moduleInfo[0].selling_price,
+                            stop_count: flight.moduleInfo[0].instalment_details.stop_count,
+                            is_refundable: flight.moduleInfo[0].instalment_details.is_refundable,
+                            routes: flight.moduleInfo[0].routes,
+                            moduleInfo: flight.moduleInfo[0]
+                        };
+                    }
+                });
+                _this.totalItems = res.total_count;
+                _this.isNotFound = false;
+                _this.loading = false;
+            }
+        }, function (err) {
+            _this.isNotFound = true;
+            if (err && err.status === 404) {
+                _this.loading = false;
+            }
         });
     };
     FlightsComponent.prototype.closeFlightDetail = function () {
