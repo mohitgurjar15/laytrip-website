@@ -1,6 +1,7 @@
+
 <ul class="block_installment_radio" *ngIf="instalmentAvavible">
     <li>
-        <label class="custom_radio">Pay with Installment <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
+        <label class="custom_radio">Pay with Instalment <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
             <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
@@ -63,7 +64,7 @@
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle custom_aerrow" href="javascript:void(0);">
-                                        <div class="left_block">Your first instalment amount</div>
+                                        <div class="left_block">Pay extra for 1st instalment</div>
                                         <div class="right_block">
                                             <div class="block_pay_instalment" onclick="foo(event);">
                                                 <div class="block_mins pay_block">
@@ -72,7 +73,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="block_amount">
-                                                    <input type="text" [(ngModel)]="additionalAmount" tabindex="1">
+                                                    <input type="number" [(ngModel)]="additionalAmount" (change)="changeAdditionalAmount($event)" tabindex="1">
                                                 </div>
                                                 <div class="block_plus  pay_block">
                                                     <button (click)="setAdditionalAmount('add')">
@@ -127,41 +128,41 @@
                                             <ul>
                                                 <li>
                                                     <label class="custom_radio">Amount
-                                                        <input type="radio" name="payment_mode">
+                                                        <input type="checkbox" name="weekly-installment" [checked]='instalmentRequest.custom_amount!=null' value="amount" (change)="selectCustomMethod($event);">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                     <div class="block_pay_instalment">
                                                         <div class="block_mins pay_block">
-                                                            <a href="javascript:void(0);">
+                                                            <a href="javascript:void(0);" (click)="setCustomAmount('decrease')">
                                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                                             </a>
                                                         </div>
                                                         <div class="block_amount">
-                                                            <input type="text" value="$40" tabindex="2">
+                                                            <input type="text" [(ngModel)]="customAmount" (change)="changeCustomInstalmentAmount($event)" tabindex="2">
                                                         </div>
                                                         <div class="block_plus  pay_block">
-                                                            <a href="javascript:void(0);">
+                                                            <a href="javascript:void(0);"  (click)="setCustomAmount('increase')">
                                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <label class="custom_radio">Weekly
-                                                        <input type="radio" name="payment_mode">
+                                                    <label class="custom_radio">Instalment
+                                                        <input type="radio" name="weekly-installment" [checked]='instalmentRequest.custom_instalment_no!=null' value='instalment' (change)="selectCustomMethod($event);">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                     <div class="block_pay_instalment">
                                                         <div class="block_mins pay_block">
-                                                            <a href="javascript:void(0);">
+                                                            <a href="javascript:void(0);"  (click)="setCustomInstalmentNo('decrease')">
                                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                                             </a>
                                                         </div>
                                                         <div class="block_amount">
-                                                            <input type="text" value="$40" tabindex="3">
+                                                            <input type="number" [(ngModel)]="customInstalment"  tabindex="3">
                                                         </div>
                                                         <div class="block_plus  pay_block">
-                                                            <a href="javascript:void(0);">
+                                                            <a href="javascript:void(0);" (click)="setCustomInstalmentNo('increase')">
                                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                                             </a>
                                                         </div>
@@ -186,7 +187,7 @@
                                         <div class="block_inn">
                                             <ul>
                                                 <li>
-                                                    1st Installment
+                                                    1st Instalment
                                                     <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
                                                 </li>
                                                 <li>

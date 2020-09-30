@@ -62,13 +62,44 @@ export class PaymentModeComponent implements OnInit {
 
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
-    this.getInstalemnts('weekly');
     this.getInstalemnts('biweekly');
     this.getInstalemnts('monthly');
+    this.getInstalemnts('weekly');
   }
 
   toggleaccordin(){
     this.showFirstAccrodian = !this.showFirstAccrodian;
+  }
+
+  changeAdditionalAmount(event){
+
+    console.log("event",event,event.target.value)
+    this.additionalAmount = Number(event.target.value);
+
+    this.remainingAmount=this.remainingAmount-this.additionalAmount;
+    this.firstInstalment+=this.additionalAmount;
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no
+    })
+    this.calculateInstalment();
+  }
+
+  changeCustomInstalmentAmount(event){
+    if(this.customMethod=='amount'){
+
+      this.customAmount = Number(event.target.value);
+    }
+    console.log("innn",this.customAmount)
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.customAmount,
+      customInstalment : null
+    })
+    this.calculateInstalment();
   }
 
   /**

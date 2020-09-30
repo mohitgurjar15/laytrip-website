@@ -5,20 +5,19 @@
           <div class="col-lg-8">
               <div class="detail_info_left">
                   <div class="block_payment">
-                        <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
+                        <div class="block_pay_info no_pad" *ngIf="userInfo.roleId!=7">
                             <div class="block_payment_mode">
                                 <div class="block_title_section">
                                     <h5>Choose Payment Mode</h5>
                                 </div>
-                                <div class="block_detail">
-                                    <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
-                                    <app-payment-mode 
-                                        *ngIf="isShowPaymentOption" 
-                                        [flightSummary]="flightSummary" 
-                                        (selectInstalmentMode)="selectInstalmentMode($event)" 
-                                        (getInstalmentData)="getInstalmentData($event)">
-                                    </app-payment-mode>
-                                </div>
+                                
+                                <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                <app-payment-mode 
+                                    *ngIf="isShowPaymentOption" 
+                                    [flightSummary]="flightSummary" 
+                                    (selectInstalmentMode)="selectInstalmentMode($event)" 
+                                    (getInstalmentData)="getInstalmentData($event)">
+                                </app-payment-mode>
                             </div>
                         </div>
                         <div class="block_pay_info">

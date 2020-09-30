@@ -5366,6 +5366,10 @@
                         padding: 20px 30px;
                         box-shadow: 3px 4px 10px $shadow-color;
 
+                        &.no_shadow {
+                            box-shadow: none;
+                        }
+
                         .block_title_section {
                             background: $bg-title-grey;
                             padding: 15px 30px;
@@ -5400,95 +5404,7 @@
                                 list-style: none;
                             }
 
-                            .block_installment_radio {
-                                width: 100%;
-                                margin: 0;
-                                padding: 0;
-                                display: flex;
 
-                                @media(max-width: 480px) {
-                                    flex-flow: column;
-                                }
-
-                                li {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    padding: 0 100px 0 0;
-                                    align-items: center;
-                                    color: $text-grey;
-                                    font-size: 14px;
-                                    font-weight: 400;
-
-                                    @media(max-width: 480px) {
-                                        padding: 0 0 10px 0;
-                                    }
-
-                                    .custom_radio {
-                                        width: 100%;
-                                        display: block;
-                                        position: relative;
-                                        padding-left: 25px;
-                                        margin: 0;
-                                        cursor: pointer;
-                                        font-size: 14px;
-                                        -webkit-user-select: none;
-                                        -moz-user-select: none;
-                                        -ms-user-select: none;
-                                        user-select: none;
-                                        color: $text-black;
-
-                                        span {
-                                            display: block;
-                                            color: $text-grey;
-                                        }
-
-                                        input {
-                                            position: absolute;
-                                            opacity: 0;
-                                            cursor: pointer;
-
-                                            &:checked {
-                                                ~ {
-                                                    .checkmark {
-                                                        border: 1px solid $secondary-color;
-
-                                                        &:after {
-                                                            display: block;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        .checkmark {
-                                            position: absolute;
-                                            top: 4px;
-                                            left: 0;
-                                            height: 14px;
-                                            width: 14px;
-                                            background-color: transparent;
-                                            border: 1px solid $text-grey;
-                                            border-radius: 50%;
-
-                                            &:after {
-                                                content: "";
-                                                position: absolute;
-                                                display: none;
-                                                top: 2px;
-                                                left: 2px;
-                                                width: 8px;
-                                                height: 8px;
-                                                border-radius: 50%;
-                                                background: $secondary-color;
-                                            }
-                                        }
-                                    }
-
-                                    &:last-child {
-                                        padding: 0;
-                                    }
-                                }
-                            }
 
                             .block_laycredit_checkbox {
                                 width: 100%;
@@ -5730,6 +5646,96 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+
+                        .block_installment_radio {
+                            width: 100%;
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+
+                            @media(max-width: 480px) {
+                                flex-flow: column;
+                            }
+
+                            li {
+                                display: flex;
+                                justify-content: space-between;
+                                padding: 0 100px 0 0;
+                                align-items: center;
+                                color: $text-grey;
+                                font-size: 14px;
+                                font-weight: 400;
+
+                                @media(max-width: 480px) {
+                                    padding: 0 0 10px 0;
+                                }
+
+                                .custom_radio {
+                                    width: 100%;
+                                    display: block;
+                                    position: relative;
+                                    padding-left: 25px;
+                                    margin: 0;
+                                    cursor: pointer;
+                                    font-size: 14px;
+                                    -webkit-user-select: none;
+                                    -moz-user-select: none;
+                                    -ms-user-select: none;
+                                    user-select: none;
+                                    color: $text-black;
+
+                                    span {
+                                        display: block;
+                                        color: $text-grey;
+                                    }
+
+                                    input {
+                                        position: absolute;
+                                        opacity: 0;
+                                        cursor: pointer;
+
+                                        &:checked {
+                                            ~ {
+                                                .checkmark {
+                                                    border: 1px solid $secondary-color;
+
+                                                    &:after {
+                                                        display: block;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .checkmark {
+                                        position: absolute;
+                                        top: 4px;
+                                        left: 0;
+                                        height: 14px;
+                                        width: 14px;
+                                        background-color: transparent;
+                                        border: 1px solid $text-grey;
+                                        border-radius: 50%;
+
+                                        &:after {
+                                            content: "";
+                                            position: absolute;
+                                            display: none;
+                                            top: 2px;
+                                            left: 2px;
+                                            width: 8px;
+                                            height: 8px;
+                                            border-radius: 50%;
+                                            background: $secondary-color;
+                                        }
+                                    }
+                                }
+
+                                &:last-child {
+                                    padding: 0;
                                 }
                             }
                         }
