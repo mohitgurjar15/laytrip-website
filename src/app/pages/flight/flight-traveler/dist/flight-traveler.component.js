@@ -9,7 +9,7 @@ exports.__esModule = true;
 exports.FlightTravelerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
-var jwt_helper_1 = require("src/app/_helpers/jwt.helper");
+var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var FlightTravelerComponent = /** @class */ (function () {
     function FlightTravelerComponent(travelerService, route, cookieService, toastr, router) {
         this.travelerService = travelerService;
@@ -96,7 +96,7 @@ var FlightTravelerComponent = /** @class */ (function () {
     FlightTravelerComponent.prototype.checkUser = function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
         if (this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken) {
-            this.is_updateToken = true;
+            this.is_updateToken = this.is_traveller = true;
             this.getTravelers();
         }
         var userToken = localStorage.getItem('_lay_sess');
