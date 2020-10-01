@@ -14,7 +14,6 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.formBuilder = formBuilder;
         this.loading = true;
-        this.isNotFound = false;
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.startMinDate = new Date();
     }
@@ -36,10 +35,8 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.loading = true;
         this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
             _this.historyResult = res.data;
-            _this.isNotFound = false;
             _this.loading = false;
         }, function (err) {
-            _this.isNotFound = true;
             if (err && err.status === 404) {
                 _this.loading = false;
             }

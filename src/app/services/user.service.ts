@@ -107,7 +107,9 @@ export class UserService {
   resetPassword(data) {
     return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
   }  
-
+  changePassword(data) {
+    return this.http.put(this.apiURL + 'v1/auth/change-password', data,  this.commonFunction.setHeaders());
+  }  
   updateProfile(data) {
     return this.http.put(this.apiURL+'v1/auth/profile', data,  this.commonFunction.setHeaders());
   }
@@ -120,7 +122,6 @@ export class UserService {
   }
 
   getPaymentHistory(pageNumber,limit,filterForm) {
-    console.log(filterForm)
 
     let queryString = "";
     if(filterForm.bookingId){
@@ -135,11 +136,14 @@ export class UserService {
     if(filterForm.end_date){
       queryString += (filterForm.end_date) ? '&payment_end_date='+moment(filterForm.end_date).format("YYYY-MM-DD") : '';
     }
-    console.log(queryString)
     return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders())
   }
 
   getModules(pageNumber, limit) {
     return this.http.get(`${this.apiURL}v1/modules?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  }
+  
+  getTraveller(travelerId) {
+    return this.http.get(`${environment.apiUrl}v1/traveler/get-traveler​/${travelerId}`, this.commonFunction.setHeaders())
   }
 }

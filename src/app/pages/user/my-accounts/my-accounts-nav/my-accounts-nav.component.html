@@ -38,14 +38,14 @@
               </a>
           </li>
           <li>
-            <a href="javascript:void(0);"  [routerLinkActive]="['active_link']">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
-                Co - Travellers
-            </a>
-           <!--  <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
+            <!-- <a href="javascript:void(0);"  [routerLinkActive]="['active_link']">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
                 Co - Travellers
             </a> -->
+             <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
+                Co - Travellers
+            </a> 
           </li>
           <li>
               <div class="dropdown">
@@ -53,10 +53,8 @@
                       <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
                       Settings
                   </a>
-                  <ul class="dropdown-menu">
-                      <li><a href="javascript:void(0);">One</a></li>
-                      <li><a href="javascript:void(0);">Two</a></li>
-                      <li><a href="javascript:void(0);">Three</a></li>
+                  <ul class="dropdown-menu" >
+                      <li><a [routerLink]="['/account/settings/change-password']"  [routerLinkActive]="['active_link']">Change Password</a></li>                     
                   </ul>
               </div>
           </li>

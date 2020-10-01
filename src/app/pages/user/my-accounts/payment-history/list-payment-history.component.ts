@@ -9,8 +9,7 @@ import { CommonFunction } from '../../../../_helpers/common-function';
   styleUrls: ['./list-payment-history.component.scss']
 })
 export class ListPaymentHistoryComponent implements OnInit {
-  loading = true;
-  isNotFound = false
+  loading = true;  
   perPageLimitConfig=[10,25,50,100];
   pageNumber:number;
   limit:number;
@@ -46,10 +45,8 @@ export class ListPaymentHistoryComponent implements OnInit {
     this.loading = true;
     this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
         this.historyResult = res.data;
-        this.isNotFound = false;
         this.loading = false;
     }, err => {
-      this.isNotFound = true;
       if (err && err.status === 404) {
         this.loading = false;
       }

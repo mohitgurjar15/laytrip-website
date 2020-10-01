@@ -5,6 +5,8 @@ import { environment } from '../../../../../environments/environment';
 import { TravelerService } from '../../../../services/traveler.service';
 import * as moment from 'moment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { TravellerFormComponent } from './traveller-form/traveller-form.component';
 declare var $: any;
 
 @Component({
@@ -17,24 +19,50 @@ export class ListTravellerComponent implements OnInit {
   travelers = [];
   closeResult = '';
   userId: string;
-
+  loading = true;
+  loops = [0, 1, 2, 3, 4, 5];
+  dataPassToChild: any = null;
+  modalReference: any;
+  notFound = false;
+  perPageLimitConfig=[10,25,50,100];
+  pageNumber:1;
+  limit:number;
+  pageSize=10;
+  showPaginationBar: boolean = false;
 
   constructor(
-    public travelerService:TravelerService,
+    public travelerService: TravelerService,
     public router: Router,
-    private modalService: NgbModal,
-   
+    public modalService: NgbModal,
+    private toastr: ToastrService
+
   ) { }
 
 
   ngOnInit() {
+    this.pageNumber=1;
+    this.limit=this.perPageLimitConfig[0];
+  
+    this.loading = true;
     this.getTravelers();
   }
-
-  getTravelers(){
+  pageChange(event) {
+    this.loading = false;
+    this.pageNumber = event;    
+  }
+  getTravelers() {
     this.travelerService.getTravelers().subscribe((data: any) => {
-          this.travelers = data.data; 
+      this.travelers = data.data;
+      console.log( this.travelers.length)
+      this.loading = false;
+      this.showPaginationBar =true;
+      if(this.travelers.length === 0){
+        this.notFound = true;
+      }
     }, (error: HttpErrorResponse) => {
+
+      this.loading  = this.showPaginationBar =false;
+      this.notFound = true;
       if (error.status === 401) {
         this.router.navigate(['/']);
       }
@@ -46,27 +74,38 @@ export class ListTravellerComponent implements OnInit {
   }
 
   getGender(type) {
-    if(type == 'M')
+    if (type == 'M')
       return 'Male';
-      if(type == 'F')
+    if (type == 'F')
       return 'Female';
-      if(type == 'N')      
+    if (type == 'N')
       return 'Non Binary';
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
     // this.getTravelers();
-  }  
-
-  ngOnChanges(changes: SimpleChanges)  {
-    console.log('sds',changes)
   }
 
-  modalReference: any;
-  open(content, userId) {
-   
-    const modalRef = this.modalService.open(content);
-    // modalRef.componentInstance.name = 'World';
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('sds', changes)
+  }
+
+
+  openTravellerModal(content, userId = '') {
+    this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal' });
+    (<TravellerFormComponent>this.modalReference.componentInstance).travellerId = userId;
+  }
+
+  deleteTravellerModal(content, userId = '') {
+    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal' });
+    this.userId = userId;
+    this.modalReference.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.getTravelers();
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult)
+    });
   }
 
   private getDismissReason(reason: any): string {
@@ -78,4 +117,30 @@ export class ListTravellerComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+  pushTraveler(event) {
+    console.log("event", event)
+  }
+
+  deleteTraveller() {
+
+    this.travelerService.delete(this.userId).subscribe((data: any) => {
+      this.getTravelers();
+      if (data.message) {
+        this.toastr.success('Traveler deleted successfully.', 'Success');
+      } else {
+        this.toastr.error(data.message, 'Failure');
+      }
+    }, (error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        this.toastr.error(error.error.errorMsg, 'Error');
+        this.router.navigate(['/']);
+      } else {
+        this.getTravelers();
+        this.toastr.error(error.error.errorMsg, 'Error');
+      }
+    });
+    this.modalReference.close();
+  }
+
 }

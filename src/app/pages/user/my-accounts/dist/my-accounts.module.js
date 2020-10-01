@@ -25,7 +25,8 @@ var list_payment_history_component_1 = require("./payment-history/list-payment-h
 var history_list_component_1 = require("./payment-history/history-list/history-list.component");
 var view_history_component_1 = require("./payment-history/view-history/view-history.component");
 var flight_module_1 = require("../../flight/flight.module");
-var travellers_crud_component_1 = require("./travellers/travellers-crud/travellers-crud.component");
+var change_password_component_1 = require("./change-password/change-password.component");
+var traveller_form_component_1 = require("./travellers/traveller-form/traveller-form.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -36,13 +37,14 @@ var MyAccountsModule = /** @class */ (function () {
                 my_accounts_nav_component_1.MyAccountsNavComponent,
                 list_bookings_component_1.ListBookingsComponent,
                 list_traveller_component_1.ListTravellerComponent,
-                travellers_crud_component_1.TravellersCrudComponent,
+                traveller_form_component_1.TravellerFormComponent,
                 flights_component_1.FlightsComponent,
                 hotels_component_1.HotelsComponent,
                 accommodations_component_1.AccommodationsComponent,
                 list_payment_history_component_1.ListPaymentHistoryComponent,
                 history_list_component_1.HistoryListComponent,
                 view_history_component_1.ViewHistoryComponent,
+                change_password_component_1.ChangePasswordComponent,
             ],
             imports: [
                 common_1.CommonModule,
@@ -52,10 +54,11 @@ var MyAccountsModule = /** @class */ (function () {
                 ng_select_1.NgSelectModule,
                 ng_bootstrap_1.NgbModule,
                 calendar_1.CalendarModule,
-                flight_module_1.FlightModule
+                flight_module_1.FlightModule,
             ],
-            providers: [common_1.DatePipe],
-            schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
+            providers: [common_1.DatePipe, ng_bootstrap_1.NgbActiveModal],
+            schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA],
+            entryComponents: [traveller_form_component_1.TravellerFormComponent]
         })
     ], MyAccountsModule);
     return MyAccountsModule;

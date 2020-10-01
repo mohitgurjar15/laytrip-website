@@ -1,16 +1,15 @@
 <section class="search_result flight pb-0" *ngIf="loading">
     <app-flight-loader></app-flight-loader>
-  </section>
-  
-<div class="account_cnt_main booking_main"  *ngIf="isNotFound">
+</section>
+
+<div class="account_cnt_main booking_main" *ngIf="isNotFound">
     <div class="block_nobooking_available">
-      <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
-      <h5>No Flight Booking Found</h5>
+        <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
+        <h5>No Flight Booking Found</h5>
     </div>
 </div>
 <div class="result_listing one_way_list roundtrip_list">
-    <div class="search_block"
-        *ngFor="let item of flightBookings; let blockIndex = index;">
+    <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
             <div class="block_booking_info">
                 <ul>
@@ -185,49 +184,56 @@
                     </div>
                     <div id="collapse-flight-info-oneway" class="collapse show" data-parent="#content" role="tabpanel"
                         aria-labelledby="heading-flight-info-oneway">
-                        <div class="card-body" *ngFor="let flight of item.routes; let i = index">
-                            <div class="tab_detail flight_info_cnt">
-                                <div *ngFor="let flightInfo of flight.stops">
-                                    <div class="flight_layover" *ngIf="flightInfo.is_layover">
-                                        <div class="triangle_right"></div>
-                                        <div class="layover_info">
-                                            Change of Planes <span>| {{ flightInfo?.layover_duration }}</span> Layover
+                        <div class="card-body noborder" *ngFor="let flight of item.routes; let i = index">
+                            <div class="block_flight_info">
+                                <div class="tab_detail flight_info_cnt">
+                                    <div *ngFor="let flightInfo of flight.stops">
+                                        <div class="flight_layover" *ngIf="flightInfo.is_layover">
+                                            <div class="triangle_right"></div>
+                                            <div class="layover_info">
+                                                Change of Planes <span>| {{ flightInfo?.layover_duration }}</span>
+                                                Layover
+                                            </div>
+                                            <div class="triangle_left"></div>
                                         </div>
-                                        <div class="triangle_left"></div>
-                                    </div>
-                                    <div class="detail_top">
-                                            <div class="detail_left">
-                                                <img src="{{flightInfo?.airline_logo || defaultImage}}" alt="Airlines Logo"
-                                                    onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
-                                                <p>{{ flightInfo?.airline_name }}</p>
-                                                <span>{{ flightInfo?.airline }} - {{ flightInfo?.flight_number }}</span>
-                                            </div>
-                                            <div class="detail_right">
-                                                <div class="flight_info_detail">
-                                                    <h4>{{ flightInfo?.departure_code }}
-                                                        <span>{{ flightInfo?.departure_time }}</span></h4>
-                                                    <span>{{ commonFunction.convertDateFormat(flightInfo?.departure_date,'DD/MM/YYYY') }}</span>
-                                                    <p>{{ flightInfo?.departure_info?.city }},
-                                                        <span>{{ flightInfo?.departure_info?.country }}</span></p>
+                                        <div class="detail_top">
+                                            <div class="detail_inn_left">
+                                                <div class="detail_left">
+                                                    <img src="{{flightInfo?.airline_logo || defaultImage}}"
+                                                        alt="Airlines Logo"
+                                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                                    <p>{{ flightInfo?.airline_name }}</p>
+                                                    <span>{{ flightInfo?.airline }} - {{ flightInfo?.flight_number }}</span>
                                                 </div>
-                                                <div class="flight_duration">
-                                                    <p>{{ flightInfo?.duration }}</p>
-                                                    <div class="border-dot">
-                                                        <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
-                                                            alt="Duration Images">
+                                                <div class="detail_right">
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.departure_code }}
+                                                            <span>{{ flightInfo?.departure_time }}</span></h4>
+                                                        <span>{{ commonFunction.convertDateFormat(flightInfo?.departure_date,'DD/MM/YYYY') }}</span>
+                                                        <p>{{ flightInfo?.departure_info?.city }},
+                                                            <span>{{ flightInfo?.departure_info?.country }}</span></p>
                                                     </div>
-                                                    <p>Flight Duration</p>
+                                                    <div class="flight_duration">
+                                                        <p>{{ flightInfo?.duration }}</p>
+                                                        <div class="border-dot">
+                                                            <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
+                                                                alt="Duration Images">
+                                                        </div>
+                                                        <p>Flight Duration</p>
+                                                    </div>
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.arrival_code }}
+                                                            <span>{{ flightInfo?.arrival_time }}</span></h4>
+                                                        <span>{{ commonFunction.convertDateFormat(flightInfo?.arrival_date,'DD/MM/YYYY') }}</span>
+                                                        <p>{{ flightInfo?.arrival_info?.city }},
+                                                            <span>{{ flightInfo?.arrival_info?.country }}</span></p>
+                                                    </div>
                                                 </div>
-                                                <div class="flight_info_detail">
-                                                    <h4>{{ flightInfo?.arrival_code }}
-                                                        <span>{{ flightInfo?.arrival_time }}</span></h4>
-                                                    <span>{{ commonFunction.convertDateFormat(flightInfo?.arrival_date,'DD/MM/YYYY') }}</span>
-                                                    <p>{{ flightInfo?.arrival_info?.city }},
-                                                        <span>{{ flightInfo?.arrival_info?.country }}</span></p>
-                                                </div>
-                                            </div>
-                                    </div>
+                                             </div>
+                                             <div class="flight_going" *ngIf="i === 0">Outwards</div>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +255,7 @@
                         <div class="card-body">
                             <div class="tab_detail fare_detail_cnt">
                                 <div class="triangle_right"></div>
-                                <ul >
+                                <ul>
                                     <li *ngFor="let fareDetails of item.fare_break_dwon">
                                         <p *ngIf="fareDetails.type == 'ADT'">
                                             Base Fare
@@ -368,14 +374,10 @@
                                 </div>
                                 <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
-                                    <p class="fb_animation mb-2 h-auto w-100"
-                                    *ngIf="loadCancellationPolicy"></p>
-                                    <p class="fb_animation mb-2 h-auto w-100"
-                                        *ngIf="loadCancellationPolicy"></p>
-                                    <p class="fb_animation mb-2 h-auto w-100"
-                                        *ngIf="loadCancellationPolicy"></p>
-                                    <p class="fb_animation mb-0 h-auto w-100"
-                                        *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-0 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
                                     <ul>
                                         <li *ngIf="!loadCancellationPolicy && errorMessage!=''">{{ errorMessage }}</li>
                                         <li *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
@@ -397,6 +399,6 @@
 </div>
 <br>
 <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
-            [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
-            (pageChange)="pageChange($event)">
+    [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true"
+    (pageChange)="pageChange($event)">
 </ngb-pagination>

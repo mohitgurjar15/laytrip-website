@@ -3,6 +3,7 @@ import { CommonFunction } from '../../../../../_helpers/common-function';
 import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
 
 import { environment } from '../../../../../../environments/environment';
+import { timeout } from 'rxjs/operators';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class HistoryListComponent implements OnInit {
   perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
   showPaginationBar: boolean = false;
-
+  loading:boolean=true;
+  notFound:boolean=false;
 
   constructor(
     private commonFunction:CommonFunction,
@@ -31,30 +33,60 @@ export class HistoryListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('ngOnInit')
     this.page = 1;
+    this.loading = true;
+    this.notFound = false;
     this.limit = this.perPageLimitConfig[0];
+    setTimeout(function () {
+        if(!this.list || this.list === 'undefined'){
+          this.loading = this.showPaginationBar =false;
+        }    
+    },1000);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.showPaginationBar = true;
+  ngOnChanges(changes: SimpleChanges) { 
+   this.showPaginationBar = false
 
     this.list = changes.historyResult.currentValue;
 
     if(this.list && this.list != 'undefined'){
-      this.listLength = this.list.length;      
+      this.listLength = this.list.length;         
+    } 
+    if(this.listLength === 0) {
+      this.notFound = true;
+      this.showPaginationBar = this.loading = false;
+    } else {
+      this.loading = false;  
     }
-    if(this.listLength === 0){
-      this.showPaginationBar = false;
-    }
+    
   }
+
+
+  ngAfterContentChecked() { }
+
   pageChange(event) {
-    // this.showPaginationBar = false;
+    this.loading = true;
     this.page = event;    
   }
 
   viewDetailClick(item) {
     this.item = item;
   } 
+  ngDoCheck(){
+    setTimeout(function () {
+    if(this.listLength === 'undefined' || this.listLength < 0) {
+      this.notFound = true;
+      this.showPaginationBar = false;
+    } else {
+      this.loading = false;  
+    }
+    if(this.listLength > 0){
+      this.notFound = false;  
+    }
+    },1000);
+    console.log(this.loading,this.listLength )
+  }
 
 
 }

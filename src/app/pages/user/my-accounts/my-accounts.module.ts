@@ -5,7 +5,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { MyAccountsNavComponent } from './my-accounts-nav/my-accounts-nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
 import { ListBookingsComponent } from './bookings/list-bookings.component';
 import { FlightsComponent } from './bookings/flights/flights.component';
@@ -16,7 +16,8 @@ import { ListPaymentHistoryComponent } from './payment-history/list-payment-hist
 import { HistoryListComponent } from './payment-history/history-list/history-list.component';
 import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
 import { FlightModule } from '../../flight/flight.module';
-import { TravellersCrudComponent } from './travellers/travellers-crud/travellers-crud.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { TravellerFormComponent } from './travellers/traveller-form/traveller-form.component';
 
 
 @NgModule({
@@ -25,13 +26,14 @@ import { TravellersCrudComponent } from './travellers/travellers-crud/travellers
     MyAccountsNavComponent,
     ListBookingsComponent,
     ListTravellerComponent,
-    TravellersCrudComponent,
+    TravellerFormComponent,
     FlightsComponent,
     HotelsComponent,
     AccommodationsComponent,
     ListPaymentHistoryComponent,
     HistoryListComponent,
     ViewHistoryComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -41,9 +43,11 @@ import { TravellersCrudComponent } from './travellers/travellers-crud/travellers
     NgSelectModule,
     NgbModule,
     CalendarModule,
-    FlightModule  
+    FlightModule,
+    
   ],
-  providers: [DatePipe],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  providers: [DatePipe,NgbActiveModal],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents:[TravellerFormComponent]
 })
 export class MyAccountsModule { }

@@ -19,27 +19,57 @@ var HistoryListComponent = /** @class */ (function () {
         this.pageSize = 10;
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.showPaginationBar = false;
+        this.loading = true;
+        this.notFound = false;
     }
     HistoryListComponent.prototype.ngOnInit = function () {
+        console.log('ngOnInit');
         this.page = 1;
+        this.loading = true;
+        this.notFound = false;
         this.limit = this.perPageLimitConfig[0];
+        setTimeout(function () {
+            if (!this.list || this.list === 'undefined') {
+                this.loading = this.showPaginationBar = false;
+            }
+        }, 1000);
     };
     HistoryListComponent.prototype.ngOnChanges = function (changes) {
-        this.showPaginationBar = true;
+        this.showPaginationBar = false;
         this.list = changes.historyResult.currentValue;
         if (this.list && this.list != 'undefined') {
             this.listLength = this.list.length;
         }
         if (this.listLength === 0) {
-            this.showPaginationBar = false;
+            this.notFound = true;
+            this.showPaginationBar = this.loading = false;
+        }
+        else {
+            this.loading = false;
         }
     };
+    HistoryListComponent.prototype.ngAfterContentChecked = function () { };
     HistoryListComponent.prototype.pageChange = function (event) {
-        // this.showPaginationBar = false;
+        this.loading = true;
         this.page = event;
     };
     HistoryListComponent.prototype.viewDetailClick = function (item) {
         this.item = item;
+    };
+    HistoryListComponent.prototype.ngDoCheck = function () {
+        setTimeout(function () {
+            if (this.listLength === 'undefined' || this.listLength < 0) {
+                this.notFound = true;
+                this.showPaginationBar = false;
+            }
+            else {
+                this.loading = false;
+            }
+            if (this.listLength > 0) {
+                this.notFound = false;
+            }
+        }, 1000);
+        console.log(this.loading, this.listLength);
     };
     __decorate([
         core_1.Output()
