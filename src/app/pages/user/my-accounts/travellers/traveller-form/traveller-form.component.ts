@@ -10,7 +10,7 @@ import { CommonFunction } from '../../../../../_helpers/common-function';
 import { FlightService } from '../../../../../services/flight.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../../../services/user.service';
 declare var $: any;
 
 @Component({
