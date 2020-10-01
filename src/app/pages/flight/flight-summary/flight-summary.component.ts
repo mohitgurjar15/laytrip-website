@@ -55,7 +55,7 @@ export class FlightSummaryComponent implements OnInit {
   
   
   airRevalidate(){
-
+      console.log('here')
       let routeData={
         route_code: this.route.snapshot.paramMap.get('rc')
       }
@@ -78,13 +78,16 @@ export class FlightSummaryComponent implements OnInit {
   getFlightSummary(){
 
     let __route = sessionStorage.getItem('__route');
+    let _itinerary = sessionStorage.getItem('_itinerary');
     try{
       let response  = JSON.parse(__route);
+      let response_itinerary  = JSON.parse(_itinerary);
       response[0]=response;
       this.flightDetail=response;
       this.flightSummaryLoader=false;
       this.outWardStopCount=response[0].routes[0].stops.length-1;
-      this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
+      // this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
+      this.totalTraveler = parseInt(response_itinerary.adult) + (parseInt(response_itinerary.child) || 0) + ( parseInt(response_itinerary.infant) || 0)  
       this.inWardStopCount =typeof response[0].routes[1]!='undefined' ? response[0].routes[1].stops.length-1:0;
       this.totalTravelerValue.emit(this.totalTraveler);
       this.getRouteDetails.emit(response);
@@ -108,6 +111,7 @@ export class FlightSummaryComponent implements OnInit {
   toggleBaggagePolicy(){
     this.showBaggePolicy=true;
   }
+
   toggleCancellationPolicy(){
     this.showCancellationPolicy=true;
   }

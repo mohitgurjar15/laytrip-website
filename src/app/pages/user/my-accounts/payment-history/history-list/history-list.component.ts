@@ -37,17 +37,21 @@ export class HistoryListComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.showPaginationBar = true;
+
     this.list = changes.historyResult.currentValue;
 
     if(this.list && this.list != 'undefined'){
-      this.listLength = this.list.length; 
-      
+      this.listLength = this.list.length;      
+    }
+    if(this.listLength === 0){
+      this.showPaginationBar = false;
     }
   }
   pageChange(event) {
     // this.showPaginationBar = false;
     this.page = event;    
   }
+
   viewDetailClick(item) {
     this.item = item;
   } 

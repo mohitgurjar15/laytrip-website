@@ -29,6 +29,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   totalLayCredit = 0;
   showTotalLayCredit = 0;
   userDetails;
+  username;
+  _isLayCredit =false;
 
   constructor(
     private genericService: GenericService,
@@ -71,17 +73,16 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getLangunages();
     this.getCurrencies();
     this.loadJquery();
-    this.userDetails = getLoginUserInfo();
-    if(Object.keys(this.userDetails).length>0){
-      if(this.userDetails.roleId!=7){
+    if(this.isLoggedIn){
+      /* if(this.userDetails.roleId!=7){
         this.totalLaycredit();
-      }
+      } */
     }
   }
 
   ngDoCheck() {
     this.checkUser();
-    this.showTotalLayCredit = this.totalLayCredit;
+    // this.userDetails = getLoginUserInfo();
     //this.totalLaycredit();
   }
 
@@ -155,14 +156,20 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   checkUser() {
     let userToken = localStorage.getItem('_lay_sess');
+  
     this.isLoggedIn = false;
     if (userToken && userToken != 'undefined' && userToken != 'null') {
       this.isLoggedIn = true;
+      this.userDetails = getLoginUserInfo();
+      if(this.userDetails.roleId!=7 && !this._isLayCredit){
+        this.totalLaycredit();
+      }
+      this.showTotalLayCredit = this.totalLayCredit;
     }
   }
 
   onLoggedout() {
-    this.isLoggedIn = false;
+    this.isLoggedIn = this._isLayCredit = false;
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
     this.router.navigate(['/']);
@@ -191,6 +198,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   totalLaycredit(){
+    this._isLayCredit = true;
     this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
       this.totalLayCredit=res.total_available_points;
     },(error=>{

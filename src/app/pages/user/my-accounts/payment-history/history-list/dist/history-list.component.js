@@ -30,6 +30,9 @@ var HistoryListComponent = /** @class */ (function () {
         if (this.list && this.list != 'undefined') {
             this.listLength = this.list.length;
         }
+        if (this.listLength === 0) {
+            this.showPaginationBar = false;
+        }
     };
     HistoryListComponent.prototype.pageChange = function (event) {
         // this.showPaginationBar = false;

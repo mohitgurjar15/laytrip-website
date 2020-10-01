@@ -27,6 +27,7 @@ var MainHeaderComponent = /** @class */ (function () {
         this.isLoggedIn = false;
         this.totalLayCredit = 0;
         this.showTotalLayCredit = 0;
+        this._isLayCredit = false;
         var _langunage = localStorage.getItem('_lang');
         var _currency = localStorage.getItem('_curr');
         if (_langunage) {
@@ -60,16 +61,15 @@ var MainHeaderComponent = /** @class */ (function () {
         this.getLangunages();
         this.getCurrencies();
         this.loadJquery();
-        this.userDetails = jwt_helper_1.getLoginUserInfo();
-        if (Object.keys(this.userDetails).length > 0) {
-            if (this.userDetails.roleId != 7) {
-                this.totalLaycredit();
-            }
+        if (this.isLoggedIn) {
+            /* if(this.userDetails.roleId!=7){
+              this.totalLaycredit();
+            } */
         }
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
-        this.showTotalLayCredit = this.totalLayCredit;
+        // this.userDetails = getLoginUserInfo();
         //this.totalLaycredit();
     };
     MainHeaderComponent.prototype.ngOnChanges = function () {
@@ -130,10 +130,15 @@ var MainHeaderComponent = /** @class */ (function () {
         this.isLoggedIn = false;
         if (userToken && userToken != 'undefined' && userToken != 'null') {
             this.isLoggedIn = true;
+            this.userDetails = jwt_helper_1.getLoginUserInfo();
+            if (this.userDetails.roleId != 7 && !this._isLayCredit) {
+                this.totalLaycredit();
+            }
+            this.showTotalLayCredit = this.totalLayCredit;
         }
     };
     MainHeaderComponent.prototype.onLoggedout = function () {
-        this.isLoggedIn = false;
+        this.isLoggedIn = this._isLayCredit = false;
         this.showTotalLayCredit = 0;
         localStorage.removeItem('_lay_sess');
         this.router.navigate(['/']);
@@ -159,6 +164,7 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.totalLaycredit = function () {
         var _this = this;
+        this._isLayCredit = true;
         this.genericService.getAvailableLaycredit().subscribe(function (res) {
             _this.totalLayCredit = res.total_available_points;
         }, (function (error) {
