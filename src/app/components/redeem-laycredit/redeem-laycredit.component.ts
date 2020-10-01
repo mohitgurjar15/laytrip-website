@@ -12,7 +12,7 @@ export class RedeemLaycreditComponent implements OnInit {
   @Output() applyLaycredit = new EventEmitter();
   @Input() sellingPrice:number;
   totalLaycreditPoints=0;
-  value: number = 100;
+  value: number = 0;
   selectedLayCredit=0;
   laycreditOptions: Options = {
     floor: 0,
@@ -26,12 +26,21 @@ export class RedeemLaycreditComponent implements OnInit {
 
   ngOnInit() {
     this.totalLaycredit();
+    console.log("Im in",this.sellingPrice)
+    
   }
 
   totalLaycredit(){
     this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
       this.totalLaycreditPoints=res.total_available_points;
-      //this.laycreditOptions.ceil=res.total_available_points;
+      if(this.totalLaycreditPoints){
+        if(this.totalLaycreditPoints > Number(this.sellingPrice)){
+          this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.sellingPrice});    
+        }
+        else{
+          this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.totalLaycreditPoints});
+        }
+      }
     },(error=>{
 
     }))
@@ -44,7 +53,9 @@ export class RedeemLaycreditComponent implements OnInit {
   }
 
   toggleLayCredit(event){
+    console.log("Innn")
     if(event.target.checked){
+      console.log(this.laycreditOptions)
       this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: false});
       this.applyLaycredit.emit(this.selectedLayCredit)
     }
@@ -55,22 +66,20 @@ export class RedeemLaycreditComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    
+    console.log("yupp",changes)
     if (changes['sellingPrice'].currentValue!='undefined') {
-      if(this.sellingPrice){
+      
         this.sellingPrice = changes['sellingPrice'].currentValue;
-        this.laycreditOptions.ceil=Math.floor(this.sellingPrice)
-        
-        const laycreditOptions: Options = Object.assign({}, this.laycreditOptions);
-        if(this.totalLaycreditPoints > this.sellingPrice){
-          laycreditOptions.ceil = this.sellingPrice;
-          
+        console.log("sp",this.sellingPrice)
+        if(this.totalLaycreditPoints > Number(this.sellingPrice)){
+          this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.sellingPrice});    
         }
         else{
-          laycreditOptions.ceil = this.totalLaycreditPoints;
+          this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.totalLaycreditPoints});
         }
-        this.laycreditOptions = laycreditOptions;
-      }
+
+        console.log("===",this.laycreditOptions)
+            
     }
   }
 }

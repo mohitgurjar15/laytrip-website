@@ -66,7 +66,7 @@
                                     <a class="accordion-toggle custom_aerrow" href="javascript:void(0);">
                                         <div class="left_block">Pay extra for 1st instalment</div>
                                         <div class="right_block">
-                                            <div class="block_pay_instalment" onclick="foo(event);">
+                                            <div class="block_pay_instalment">
                                                 <div class="block_mins pay_block">
                                                     <button (click)="setAdditionalAmount('minus')">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
@@ -98,7 +98,7 @@
                                                 </li>
                                                 <li>
                                                     Laytrip point use
-                                                    <span class="point_use">-$140</span>
+                                                    <span class="point_use">-${{laycreditpoints}}</span>
                                                 </li>
                                                 <li>
                                                     First instalment amount
@@ -158,9 +158,10 @@
                                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                                             </a>
                                                         </div>
-                                                        <div class="block_amount">
+                                                        <!-- <div class="block_amount">
                                                             <input type="number" [(ngModel)]="customInstalment"  tabindex="3">
-                                                        </div>
+                                                        </div> -->
+                                                        {{customInstalment}}
                                                         <div class="block_plus  pay_block">
                                                             <a href="javascript:void(0);" (click)="setCustomInstalmentNo('increase')">
                                                                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -200,7 +201,7 @@
                                                 </li>
                                                 <li>
                                                     Laytrip points
-                                                    <span class="point_use">-$40</span>
+                                                    <span class="point_use">-${{laycreditpoints}}</span>
                                                 </li>
                                                 <li class="last">
                                                     Total you will pay

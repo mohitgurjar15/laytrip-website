@@ -5006,7 +5006,7 @@
                 }
 
                 .block_pay_info {
-                    padding: 20px 30px;
+                    padding: 20px 0px;
                     border-radius: 5px;
                     background: $background-white;
                     box-shadow: 3px 4px 10px $shadow-color;
@@ -5026,6 +5026,7 @@
 
                     .block_travellers {
                         margin: 0;
+                        padding: 0 30px;
 
                         h6 {
                             font-size: 16px;
@@ -5037,7 +5038,11 @@
                         .traveller_detail {
                             display: flex;
                             justify-content: space-between;
-                            margin: 0 0 30px;
+                            margin: 0;
+
+                            &.mr30 {
+                                margin-bottom: 30px;
+                            }
 
                             span {
                                 font-size: 14px;
@@ -5364,10 +5369,18 @@
                         width: 100%;
                         margin: 0;
                         padding: 20px 30px;
-                        box-shadow: 3px 4px 10px $shadow-color;
+                        //                        box-shadow: 3px 4px 10px $shadow-color;
 
                         &.no_shadow {
                             box-shadow: none;
+                        }
+
+                        &.no_pad {
+                            padding: 0 30px;
+                        }
+
+                        @media(max-width: 575px) {
+                            padding: 20px;
                         }
 
                         .block_title_section {
@@ -5376,6 +5389,10 @@
                             display: flex;
                             justify-content: space-between;
                             margin: 0 0 20px;
+
+                            @media(max-width: 575px) {
+                                padding: 15px;
+                            }
 
                             h5 {
                                 font-size: 16px;
@@ -5570,6 +5587,11 @@
                                 justify-content: space-between;
                                 align-items: flex-start;
 
+
+                                @media(max-width: 575px) {
+                                    flex-flow: column;
+                                }
+
                                 .block_detail_left {
                                     width: 100%;
 
@@ -5589,12 +5611,20 @@
                                             span {
                                                 color: $text-black;
                                                 font-weight: 500;
+
+                                                @media(max-width: 575px) {
+                                                    padding: 0 0 0 20px;
+                                                }
                                             }
 
                                             &:last-child {
                                                 padding: 0;
                                             }
                                         }
+                                    }
+
+                                    @media(max-width: 575px) {
+                                        order: 2;
                                     }
                                 }
 
@@ -5608,6 +5638,13 @@
                                     justify-content: flex-end;
                                     flex-flow: column;
                                     text-align: right;
+
+                                    @media(max-width: 575px) {
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 0 0 10px 0;
+                                        text-align: center;
+                                    }
 
                                     span {
                                         font-size: 16px;
@@ -5630,6 +5667,10 @@
                                     display: flex;
                                     margin: 10px 0 0;
 
+                                    @media(max-width: 480px) {
+                                        flex-flow: column;
+                                    }
+
                                     li {
                                         width: auto;
                                         padding: 0 50px 0 0;
@@ -5645,98 +5686,103 @@
                                                 font-size: 16px;
                                             }
                                         }
+
+                                        @media(max-width: 480px) {
+                                            padding: 5px 0;
+                                        }
                                     }
                                 }
                             }
                         }
 
-                        .block_installment_radio {
-                            width: 100%;
-                            margin: 0;
-                            padding: 0;
+                    }
+
+                    .block_installment_radio {
+                        width: 100%;
+                        margin: 0;
+                        padding: 0 30px;
+                        display: flex;
+
+                        @media(max-width: 480px) {
+                            flex-flow: column;
+                        }
+
+                        li {
                             display: flex;
+                            justify-content: space-between;
+                            padding: 0 100px 0 0;
+                            align-items: center;
+                            color: $text-grey;
+                            font-size: 14px;
+                            font-weight: 400;
 
                             @media(max-width: 480px) {
-                                flex-flow: column;
+                                padding: 0 0 10px 0;
                             }
 
-                            li {
-                                display: flex;
-                                justify-content: space-between;
-                                padding: 0 100px 0 0;
-                                align-items: center;
-                                color: $text-grey;
+                            .custom_radio {
+                                width: 100%;
+                                display: block;
+                                position: relative;
+                                padding-left: 25px;
+                                margin: 0;
+                                cursor: pointer;
                                 font-size: 14px;
-                                font-weight: 400;
+                                -webkit-user-select: none;
+                                -moz-user-select: none;
+                                -ms-user-select: none;
+                                user-select: none;
+                                color: $text-black;
 
-                                @media(max-width: 480px) {
-                                    padding: 0 0 10px 0;
+                                span {
+                                    display: block;
+                                    color: $text-grey;
                                 }
 
-                                .custom_radio {
-                                    width: 100%;
-                                    display: block;
-                                    position: relative;
-                                    padding-left: 25px;
-                                    margin: 0;
+                                input {
+                                    position: absolute;
+                                    opacity: 0;
                                     cursor: pointer;
-                                    font-size: 14px;
-                                    -webkit-user-select: none;
-                                    -moz-user-select: none;
-                                    -ms-user-select: none;
-                                    user-select: none;
-                                    color: $text-black;
 
-                                    span {
-                                        display: block;
-                                        color: $text-grey;
-                                    }
+                                    &:checked {
+                                        ~ {
+                                            .checkmark {
+                                                border: 1px solid $secondary-color;
 
-                                    input {
-                                        position: absolute;
-                                        opacity: 0;
-                                        cursor: pointer;
-
-                                        &:checked {
-                                            ~ {
-                                                .checkmark {
-                                                    border: 1px solid $secondary-color;
-
-                                                    &:after {
-                                                        display: block;
-                                                    }
+                                                &:after {
+                                                    display: block;
                                                 }
                                             }
                                         }
                                     }
+                                }
 
-                                    .checkmark {
+                                .checkmark {
+                                    position: absolute;
+                                    top: 4px;
+                                    left: 0;
+                                    height: 14px;
+                                    width: 14px;
+                                    background-color: transparent;
+                                    border: 1px solid $text-grey;
+                                    border-radius: 50%;
+
+                                    &:after {
+                                        content: "";
                                         position: absolute;
-                                        top: 4px;
-                                        left: 0;
-                                        height: 14px;
-                                        width: 14px;
-                                        background-color: transparent;
-                                        border: 1px solid $text-grey;
+                                        display: none;
+                                        top: 2px;
+                                        left: 2px;
+                                        width: 8px;
+                                        height: 8px;
                                         border-radius: 50%;
-
-                                        &:after {
-                                            content: "";
-                                            position: absolute;
-                                            display: none;
-                                            top: 2px;
-                                            left: 2px;
-                                            width: 8px;
-                                            height: 8px;
-                                            border-radius: 50%;
-                                            background: $secondary-color;
-                                        }
+                                        background: $secondary-color;
                                     }
                                 }
+                            }
 
-                                &:last-child {
-                                    padding: 0;
-                                }
+                            &:last-child {
+                                padding: 0;
                             }
                         }
                     }
@@ -6240,9 +6286,14 @@
                         position: relative;
                         flex-flow: column;
                         background: $background-white;
-                        margin-top: 15px;
-                        padding: 0 30px 20px;
+                        margin-top: 20px;
+                        padding: 20px 30px 0;
+                        box-shadow: 3px -4px 10px $shadow-color;
                         border-radius: 0 0 5px 5px;
+
+                        @media(max-width: 480px) {
+                            padding: 15px;
+                        }
 
                         .installment_top {
                             display: flex;
@@ -6250,6 +6301,10 @@
                             border: 1px solid $bg-body;
                             background: $bg-body;
                             border-radius: 10px;
+
+                            @media(max-width: 767px) {
+                                flex-flow: column;
+                            }
 
                             .custom_tab {
                                 width: 320px;
@@ -6262,10 +6317,20 @@
                                 border-radius: 10px 0 0 10px;
                                 list-style: none;
 
+                                @media(max-width: 767px) {
+                                    width: 100%;
+                                }
+
                                 li {
                                     padding: 15px;
                                     width: 100%;
                                     position: relative;
+
+                                    @media(max-width: 767px) {
+                                        &:first-child {
+                                            border-radius: 10px 10px 0 0;
+                                        }
+                                    }
 
 
                                     &.active_tab {
@@ -6283,7 +6348,12 @@
                                             content: '';
                                             z-index: 2;
                                             transform: translateY(-50%);
+
+                                            @media(max-width: 767px) {
+                                                display: none;
+                                            }
                                         }
+
                                     }
 
                                     .custom_radio {
@@ -6376,6 +6446,10 @@
                                 border: none;
                                 padding: 20px;
 
+                                @media(max-width: 480px) {
+                                    padding: 10px;
+                                }
+
                                 .active {
                                     display: block;
                                 }
@@ -6405,6 +6479,10 @@
                                                     justify-content: space-between;
                                                     position: relative;
                                                     padding-right: 30px;
+
+                                                    @media(max-width: 575px) {
+                                                        flex-flow: column;
+                                                    }
 
                                                     .icon {
                                                         position: absolute;
@@ -6454,6 +6532,10 @@
                                                             font-size: 14px;
                                                             font-weight: 500;
                                                         }
+
+                                                        @media(max-width: 575px) {
+                                                            margin: 10px 0 0;
+                                                        }
                                                     }
 
                                                     .block_pay_instalment {
@@ -6461,6 +6543,10 @@
                                                         display: flex;
                                                         align-items: center;
                                                         justify-content: center;
+
+                                                        @media(max-width: 575px) {
+                                                            justify-content: flex-start;
+                                                        }
 
                                                         .block_amount {
                                                             width: 80px;
@@ -7926,6 +8012,157 @@
 
                             img {
                                 width: 40%;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    .block_price_changes {
+        width: 600px;
+        max-width: 96%;
+        float: left;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0px 3px 20px $shadow-black-light;
+
+        @media(max-width:767px) {
+            padding: 20px;
+        }
+
+        .block_price_changes_inner {
+            width: 100%;
+
+            @media(max-width:767px) {
+                height: 100%;
+                overflow: auto;
+            }
+
+            h6 {
+                margin: 0 0 30px;
+                font-size: 40px;
+                font-weight: 700;
+                color: $text-black;
+                text-transform: uppercase;
+
+                @media(max-width:767px) {
+                    font-size: 30px;
+                }
+            }
+
+            p {
+                font-size: 16px;
+                font-weight: 400;
+                color: $text-black;
+                margin: 0 0 15px;
+
+                span {
+                    font-size: 20px;
+                }
+
+                @media(max-width:767px) {
+                    font-size: 18px;
+                }
+            }
+
+            .block_im {
+                width: 100%;
+                text-align: center;
+                margin: 0 0 10px;
+
+                img {
+                    max-width: 100%;
+                    height: 230px;
+                }
+            }
+
+            .popup_btn {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                justify-content: center;
+
+                li {
+                    padding: 0 15px;
+
+                    a {
+                        display: inline-block;
+                        line-height: 50px;
+                        padding: 0 30px;
+                        font-size: 20px;
+                        color: $text-white;
+                        font-weight: 400;
+                        border-radius: 8px;
+                        background: $secondary-color;
+                        border: 1px solid $secondary-color;
+                        position: relative;
+                        z-index: 9;
+                        overflow: hidden;
+
+                        &:before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 0%;
+                            background: $primary-color;
+                            z-index: -1;
+                            transition: 0.8s;
+                            border-radius: 0 0 50% 50%;
+                        }
+
+                        &:hover {
+                            border-color: $primary-color;
+
+                            &:before {
+                                height: 190%;
+                            }
+                        }
+
+                        @media(max-width:575px) {
+                            font-size: 14px;
+                            line-height: 40px;
+                            padding: 0 15px;
+                        }
+                    }
+
+                    &:last-child {
+                        a {
+                            background: transparent;
+                            border: 1px solid $secondary-color;
+                            color: $secondary-color;
+
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 0%;
+                                background: $secondary-color;
+                                z-index: -1;
+                                transition: 0.8s;
+                                border-radius: 0 0 50% 50%;
+                            }
+
+                            &:hover {
+                                color: $text-white;
+
+                                &:before {
+                                    height: 190%;
+                                }
                             }
                         }
                     }
