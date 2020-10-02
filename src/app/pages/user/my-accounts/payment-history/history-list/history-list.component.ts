@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
-
 import { environment } from '../../../../../../environments/environment';
-import { timeout } from 'rxjs/operators';
 
 
 @Component({
@@ -11,11 +9,12 @@ import { timeout } from 'rxjs/operators';
   templateUrl: './history-list.component.html',
   styleUrls: ['./history-list.component.scss']
 })
+
 export class HistoryListComponent implements OnInit {
   @Output() bookingData = new EventEmitter();
   s3BucketUrl = environment.s3BucketUrl;
   @Input() historyResult;
-  @Input() list;
+  @Input() list : any = [];
   historys: [];
   item: any;
   listLength=0;
@@ -35,35 +34,33 @@ export class HistoryListComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit')
     this.page = 1;
-    this.loading = true;
-    this.notFound = false;
+    this.loading = true;    
     this.limit = this.perPageLimitConfig[0];
-    setTimeout(function () {
-        if(!this.list || this.list === 'undefined'){
-          this.loading = this.showPaginationBar =false;
-        }    
-    },1000);
   }
 
   ngOnChanges(changes: SimpleChanges) { 
-   this.showPaginationBar = false
-
+    this.loading = true;
     this.list = changes.historyResult.currentValue;
-
-    if(this.list && this.list != 'undefined'){
-      this.listLength = this.list.length;         
-    } 
-    if(this.listLength === 0) {
-      this.notFound = true;
-      this.showPaginationBar = this.loading = false;
+    if(this.list){
+      this.listLength = this.list.length; 
+      if(this.listLength > 0 ){
+        this.notFound = this.loading = false;
+        this.showPaginationBar = true; 
+      }      
     } else {
-      this.loading = false;  
-    }
     
+      if(this.list && this.list === 'undefined'){
+        this.loading = true;
+      } else {
+        this.notFound = true;
+        this.showPaginationBar = this.loading  = false;
+      }
+    }      
   }
 
+  ngAfterContentChecked() {
 
-  ngAfterContentChecked() { }
+  }
 
   pageChange(event) {
     this.loading = true;
@@ -73,20 +70,14 @@ export class HistoryListComponent implements OnInit {
   viewDetailClick(item) {
     this.item = item;
   } 
+
   ngDoCheck(){
-    setTimeout(function () {
-    if(this.listLength === 'undefined' || this.listLength < 0) {
-      this.notFound = true;
-      this.showPaginationBar = false;
-    } else {
-      this.loading = false;  
-    }
-    if(this.listLength > 0){
-      this.notFound = false;  
-    }
-    },1000);
-    console.log(this.loading,this.listLength )
+    setTimeout(function(){
+      if(this.list === 'undefined'){
+        this.loading = false;
+        this.notFound = true;
+
+      }
+    },5000)
   }
-
-
 }

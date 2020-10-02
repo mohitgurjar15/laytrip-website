@@ -144,6 +144,6 @@ export class UserService {
   }
   
   getTraveller(travelerId) {
-    return this.http.get(`${environment.apiUrl}v1/traveler/get-traveler​/${travelerId}`, this.commonFunction.setHeaders())
+    return this.http.get(`${environment.apiUrl}v1/traveler/get-traveler/${travelerId}`, this.commonFunction.setHeaders())
   }
 }

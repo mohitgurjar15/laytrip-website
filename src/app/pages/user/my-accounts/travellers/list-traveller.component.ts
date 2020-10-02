@@ -50,6 +50,7 @@ export class ListTravellerComponent implements OnInit {
     this.loading = false;
     this.pageNumber = event;    
   }
+
   getTravelers() {
     this.travelerService.getTravelers().subscribe((data: any) => {
       this.travelers = data.data;
@@ -94,6 +95,13 @@ export class ListTravellerComponent implements OnInit {
   openTravellerModal(content, userId = '') {
     this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal' });
     (<TravellerFormComponent>this.modalReference.componentInstance).travellerId = userId;
+    this.modalReference.componentInstance.travelersChanges.subscribe(($e) => {
+      const index = this.travelers.indexOf($e.userId, 0);
+      if(index){
+        this.travelers = this.travelers.filter(item => item.userId != $e.userId );            
+      }
+      this.travelers.push($e);
+    })
   }
 
   deleteTravellerModal(content, userId = '') {

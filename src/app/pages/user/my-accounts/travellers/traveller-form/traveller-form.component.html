@@ -98,7 +98,7 @@
                         <div class="form_field half">
                             <label>Email<sup>*</sup></label>
                             <div class="text_field">
-                                <input type="email"  [readonly]="travellerId"  formControlName="email" maxlength="20" tabindex="4"
+                                <input type="email"  [readonly]="travellerId"  formControlName="email" maxlength="40" tabindex="4"
                                     placeholder="Enter your email">
                             </div>
                             <div *ngIf="(submitted  || coAccountForm.controls.email.touched) && coAccountForm.controls.email.errors"

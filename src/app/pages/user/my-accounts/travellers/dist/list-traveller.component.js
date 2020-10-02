@@ -75,9 +75,17 @@ var ListTravellerComponent = /** @class */ (function () {
         console.log('sds', changes);
     };
     ListTravellerComponent.prototype.openTravellerModal = function (content, userId) {
+        var _this = this;
         if (userId === void 0) { userId = ''; }
         this.modalReference = this.modalService.open(traveller_form_component_1.TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal' });
         this.modalReference.componentInstance.travellerId = userId;
+        this.modalReference.componentInstance.travelersChanges.subscribe(function ($e) {
+            var index = _this.travelers.indexOf($e.userId, 0);
+            if (index) {
+                _this.travelers = _this.travelers.filter(function (item) { return item.userId != $e.userId; });
+            }
+            _this.travelers.push($e);
+        });
     };
     ListTravellerComponent.prototype.deleteTravellerModal = function (content, userId) {
         var _this = this;

@@ -111,7 +111,7 @@ var UserService = /** @class */ (function () {
         return this.http.get(this.apiURL + "v1/modules?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
     };
     UserService.prototype.getTraveller = function (travelerId) {
-        return this.http.get(environment_1.environment.apiUrl + "v1/traveler/get-traveler\u200B/" + travelerId, this.commonFunction.setHeaders());
+        return this.http.get(environment_1.environment.apiUrl + "v1/traveler/get-traveler/" + travelerId, this.commonFunction.setHeaders());
     };
     UserService = __decorate([
         core_1.Injectable({

@@ -10,11 +10,11 @@
    
     <div class="block_pay_list_inner">
         <div class="block_booking_list_inner">
-            <div class="block_nobooking_available" *ngIf="notFound">
+            <div class="block_nobooking_available" *ngIf="notFound && !loading">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
                 <h5>No Payment Available</h5>
             </div>
-            <!-- <div class="pay_listing" *ngIf="loading">
+            <div class="pay_listing" *ngIf="loading">
                 <div class="list_top">
                     <div class="list_left w-100">
                         <ul class="w-100">
@@ -66,7 +66,7 @@
                         <p class="fb_animation w-100 mb-0"></p>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="pay_listing"  *ngFor="let item of list | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index;">
                 <div class="list_top">
                     <div class="list_left">

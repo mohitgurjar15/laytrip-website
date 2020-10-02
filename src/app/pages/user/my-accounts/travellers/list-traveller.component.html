@@ -8,7 +8,7 @@
         <div class="account_cnt_main co_traveller">
           <div class="block_co_traveller_main">
             <div class="block_traveller_top">
-              <label class="custom_checkbox">
+              <label class="custom_checkbox" *ngIf="!loading || !notFound">
                 <input type="checkbox" value="">
                 <span class="checkmark"></span>Select all
               </label>
@@ -85,7 +85,7 @@
 </section>
 
 <ng-template #content let-modal>
-  <app-traveller-form [modalReference]="modalReference" (travelersChanges)="pushTraveler($event)">
+  <app-traveller-form [modalReference]="modalReference">
   </app-traveller-form>
 </ng-template>
 

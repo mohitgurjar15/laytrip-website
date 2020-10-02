@@ -15,6 +15,7 @@ var HistoryListComponent = /** @class */ (function () {
         this.flightCommonFunction = flightCommonFunction;
         this.bookingData = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.list = [];
         this.listLength = 0;
         this.pageSize = 10;
         this.perPageLimitConfig = [10, 25, 50, 100];
@@ -26,29 +27,30 @@ var HistoryListComponent = /** @class */ (function () {
         console.log('ngOnInit');
         this.page = 1;
         this.loading = true;
-        this.notFound = false;
         this.limit = this.perPageLimitConfig[0];
-        setTimeout(function () {
-            if (!this.list || this.list === 'undefined') {
-                this.loading = this.showPaginationBar = false;
-            }
-        }, 1000);
     };
     HistoryListComponent.prototype.ngOnChanges = function (changes) {
-        this.showPaginationBar = false;
+        this.loading = true;
         this.list = changes.historyResult.currentValue;
-        if (this.list && this.list != 'undefined') {
+        if (this.list) {
             this.listLength = this.list.length;
-        }
-        if (this.listLength === 0) {
-            this.notFound = true;
-            this.showPaginationBar = this.loading = false;
+            if (this.listLength > 0) {
+                this.notFound = this.loading = false;
+                this.showPaginationBar = true;
+            }
         }
         else {
-            this.loading = false;
+            if (this.list && this.list === 'undefined') {
+                this.loading = true;
+            }
+            else {
+                this.notFound = true;
+                this.showPaginationBar = this.loading = false;
+            }
         }
     };
-    HistoryListComponent.prototype.ngAfterContentChecked = function () { };
+    HistoryListComponent.prototype.ngAfterContentChecked = function () {
+    };
     HistoryListComponent.prototype.pageChange = function (event) {
         this.loading = true;
         this.page = event;
@@ -58,18 +60,11 @@ var HistoryListComponent = /** @class */ (function () {
     };
     HistoryListComponent.prototype.ngDoCheck = function () {
         setTimeout(function () {
-            if (this.listLength === 'undefined' || this.listLength < 0) {
-                this.notFound = true;
-                this.showPaginationBar = false;
-            }
-            else {
+            if (this.list === 'undefined') {
                 this.loading = false;
+                this.notFound = true;
             }
-            if (this.listLength > 0) {
-                this.notFound = false;
-            }
-        }, 1000);
-        console.log(this.loading, this.listLength);
+        }, 5000);
     };
     __decorate([
         core_1.Output()

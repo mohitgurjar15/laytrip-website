@@ -62,6 +62,5 @@ export class TravelerService{
 
     delete(id){
         return this.http.delete(environment.apiUrl +'v1/traveler/'+ id, this.setHeaders());
-
     }
 }
