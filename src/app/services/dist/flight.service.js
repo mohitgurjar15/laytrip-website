@@ -97,6 +97,10 @@ var FlightService = /** @class */ (function () {
         var url = environment_1.environment.apiUrl + "v1/flight/search-roundtrip-flight";
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(operators_1.catchError(this.handleError));
     };
+    FlightService.prototype.addFeedback = function (payload) {
+        return this.http.post(environment_1.environment.apiUrl + "v1/booking-feedback", payload, this.commonFunction.setHeaders())
+            .pipe(operators_1.catchError(this.handleError));
+    };
     FlightService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

@@ -39,7 +39,7 @@ var FlightCheckoutComponent = /** @class */ (function () {
         this.isSessionTimeOut = false;
         this.isShowCardOption = true;
         this.isShowPaymentOption = true;
-        this.isShowFeedbackPopup = false;
+        this.isShowFeedbackPopup = true;
     }
     FlightCheckoutComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);

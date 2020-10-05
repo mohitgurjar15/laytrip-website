@@ -3,37 +3,44 @@
     <div class="block_feedback_inner">
       <h6>Feedback</h6>
       <p>How would you Love this booking Experience ?</p>
-      <div class="block_feedback_add">
-        <ul>
-          <li>
-            <a href="javascript:void(0);">
-              <img src="{{s3BucketUrl}}assets/images/feedback-bad.svg" alt="Feedback Image">
-              <span>Bad</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0);">
-              <img src="{{s3BucketUrl}}assets/images/feedback-good.svg" alt="Feedback Image">
-              <span>Good</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0);">
-              <img src="{{s3BucketUrl}}assets/images/feedback-Excllent.svg" alt="Feedback Image">
-              <span>Excllent</span>
-            </a>
-          </li>
-        </ul>
-        <div class="feedback_comment">
-          <label>Comment*</label>
-          <textarea name="" id="" placeholder="Enter your Comment here"></textarea>
+      <form  [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <div class="block_feedback_add">
+          <ul>
+            <li>
+              <a href="javascript:void(0);" (click)="selectRating($event,'B')">
+                <img src="{{s3BucketUrl}}assets/images/feedback-bad.svg" alt="Feedback Image">
+                <span>Bad</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="selectRating($event,'G')">
+                <img src="{{s3BucketUrl}}assets/images/feedback-good.svg" alt="Feedback Image">
+                <span>Good</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="selectRating($event,'E')">
+                <img src="{{s3BucketUrl}}assets/images/feedback-Excllent.svg" alt="Feedback Image">
+                <span>Excllent</span>
+              </a>
+            </li>
+          </ul>
+          <div class="feedback_comment">
+            <label>Comment*</label>
+            <textarea formControlName="comment" id="" placeholder="Enter your Comment here"></textarea>
+            <div *ngIf="(submitted  || feedbackForm.controls.comment.touched) && feedbackForm.controls.comment.errors"
+          class="focus-input100 login-error">
+          <div *ngIf="feedbackForm.controls.comment.errors.required" class="text-danger">Please enter
+            your comment.
+          </div>
         </div>
-        <div class="feedback_btn">
-          <button>Submit <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
-          <button>Nothanks</button>
-
+          </div>
+          <div class="feedback_btn">
+            <button>Nothanks</button>
+            <button>Submit <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

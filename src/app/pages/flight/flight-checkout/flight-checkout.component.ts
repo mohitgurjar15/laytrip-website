@@ -53,9 +53,10 @@ export class FlightCheckoutComponent implements OnInit {
     isSessionTimeOut:boolean=false;
     isShowCardOption:boolean=true;
     isShowPaymentOption:boolean=true;
-    isShowFeedbackPopup:boolean=false;
+    isShowFeedbackPopup:boolean=true;
 
     ngOnInit() {
+      
       window.scroll(0,0);
       this.userInfo = getLoginUserInfo();
       if(typeof this.userInfo.roleId=='undefined'){
