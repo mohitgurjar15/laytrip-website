@@ -30,7 +30,6 @@ var FlightsComponent = /** @class */ (function () {
         this.loading = true;
     }
     FlightsComponent.prototype.ngOnInit = function () {
-        console.log(this.isNotFound);
         this.page = 1;
         this.isNotFound = false;
         this.limit = this.perPageLimitConfig[0];
@@ -43,10 +42,8 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.ngAfterContentChecked = function () {
         // this.flightBookings = this.flightList;
         // this.totalItems = this.flightBookings.length;
-        this.showPaginationBar = true;
-        this.isNotFound = false;
         if (this.totalItems === 0) {
-            this.isNotFound = true;
+            // this.isNotFound = true;
             this.showPaginationBar = false;
         }
     };
@@ -80,7 +77,7 @@ var FlightsComponent = /** @class */ (function () {
                             arrival_time: flight.moduleInfo[0].routes[0].stops[0].arrival_time,
                             departure_city: flight.moduleInfo[0].routes[0].stops[0].departure_info.city,
                             arrival_city: flight.moduleInfo[0].routes[0].stops[0].arrival_info.city,
-                            duration: flight.moduleInfo[0].total_duration,
+                            duration: flight.moduleInfo[0].routes[0].duration,
                             airline_logo: flight.moduleInfo[0].routes[0].stops[0].airline_logo,
                             airline_name: flight.moduleInfo[0].routes[0].stops[0].airline_name,
                             airline: flight.moduleInfo[0].routes[0].stops[0].airline,
@@ -97,9 +94,11 @@ var FlightsComponent = /** @class */ (function () {
                 _this.totalItems = res.total_count;
                 _this.isNotFound = false;
                 _this.loading = false;
+                _this.showPaginationBar = true;
             }
         }, function (err) {
             _this.isNotFound = true;
+            _this.showPaginationBar = false;
             if (err && err.status === 404) {
                 _this.loading = false;
             }

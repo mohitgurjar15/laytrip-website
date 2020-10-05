@@ -42,7 +42,6 @@ export class FlightsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.isNotFound)
     this.page = 1;
     this.isNotFound = false;
     this.limit = this.perPageLimitConfig[0];
@@ -57,10 +56,9 @@ export class FlightsComponent implements OnInit {
   ngAfterContentChecked() {
     // this.flightBookings = this.flightList;
     // this.totalItems = this.flightBookings.length;
-    this.showPaginationBar = true;
-    this.isNotFound = false;
+
     if(this.totalItems === 0) {
-      this.isNotFound = true;
+      // this.isNotFound = true;
       this.showPaginationBar = false;
     }
   }
@@ -86,7 +84,7 @@ export class FlightsComponent implements OnInit {
   getBookings(){
     this.userService.getBookings(this.page, this.limit).subscribe((res: any) => {
       if (res) {
-        this.flightBookings = res.data.map(flight=>{
+        this.flightBookings = res.data.map(flight => {
           if(flight.moduleId == 1){
             return {
               tripId : flight.id,
@@ -96,7 +94,7 @@ export class FlightsComponent implements OnInit {
               arrival_time : flight.moduleInfo[0].routes[0].stops[0].arrival_time,
               departure_city : flight.moduleInfo[0].routes[0].stops[0].departure_info.city,
               arrival_city : flight.moduleInfo[0].routes[0].stops[0].arrival_info.city,
-              duration : flight.moduleInfo[0].total_duration,
+              duration : flight.moduleInfo[0].routes[0].duration,
               airline_logo : flight.moduleInfo[0].routes[0].stops[0].airline_logo,
               airline_name : flight.moduleInfo[0].routes[0].stops[0].airline_name,
               airline : flight.moduleInfo[0].routes[0].stops[0].airline,
@@ -112,10 +110,11 @@ export class FlightsComponent implements OnInit {
         });
         this.totalItems = res.total_count;
         this.isNotFound = false;
-        this.loading = false;
+        this.loading = false;this.showPaginationBar = true;
       }
     }, err => {
       this.isNotFound = true;
+      this.showPaginationBar = false;
       if (err && err.status === 404) {
         this.loading = false;
       }

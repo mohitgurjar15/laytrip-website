@@ -1,7 +1,6 @@
 <section class="search_result flight pb-0" *ngIf="loading">
     <app-flight-loader></app-flight-loader>
 </section>
-
 <div class="account_cnt_main booking_main" *ngIf="isNotFound">
     <div class="block_nobooking_available">
         <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
@@ -42,7 +41,7 @@
                             </div>
                             <div class="detail_info">
                                 <p>Arrival</p>
-                                <h4>{{item.arrival_time}} <span>pm</span></h4>
+                                <h4>{{item.arrival_time}}</h4>
                                 <span>{{item.arrival_city}}</span>
                             </div>
                         </div>

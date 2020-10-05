@@ -10,7 +10,6 @@
         background: $primary-color;
         padding: 30px 0;
         border-radius: 3px;
-        height: 100%;
 
         .saidbar_top {
             width: auto;
@@ -152,7 +151,7 @@
                             border: none;
                             position: relative !important;
                             transform: none !important;
-                            margin: 0 0 30px;
+                            margin: 0;
                             transition: 0.3s;
 
                             li {
@@ -163,6 +162,17 @@
                                     padding: 10px 30px 10px 60px;
                                     font-size: 14px;
                                     font-weight: 300;
+                                    position: relative;
+                                    display: flex;
+                                    align-items: center;
+
+                                    .notifiy_simbol {
+                                        width: 6px;
+                                        height: 6px;
+                                        border-radius: 50%;
+                                        background: $secondary-color;
+                                        margin: 0 0 0 5px;
+                                    }
                                 }
                             }
                         }
@@ -176,9 +186,8 @@
         width: 100%;
         border-radius: 5px;
         background: $background-white;
-        padding: 30px;
+        padding: 30px 30px 0;
         box-shadow: 3px 4px 10px $shadow-color;
-        height: 100%;
 
         @media(max-width: 991px) {
             margin: 20px 0;
@@ -803,61 +812,7 @@
             }
         }
 
-        .form_update_btn {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            margin: 10px 0 0;
 
-            button {
-                width: auto;
-                padding: 11px 25px;
-                background: $secondary-color;
-                border-radius: 8px;
-                border: 1px solid $secondary-color;
-                font-size: 16px;
-                color: $text-white;
-                transition: 0.3s;
-                position: relative;
-                z-index: 9;
-                overflow: hidden;
-                white-space: nowrap;
-
-                img {
-                    margin-left: 120px;
-                    height: 20px;
-                }
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 0%;
-                    background: $primary-color;
-                    z-index: -1;
-                    transition: 0.8s;
-                    border-radius: 0 0 50% 50%;
-                }
-
-                &:hover {
-                    border-color: $primary-color;
-
-                    &:before {
-                        height: 190%;
-                    }
-                }
-
-                @media(max-width: 575px) {
-
-                    img {
-                        margin-left: 60px;
-                    }
-                }
-            }
-
-        }
 
         &.booking_main {
             background: transparent;
@@ -1490,7 +1445,7 @@
                 }
 
                 .filter_form {
-                    width: auto;
+                    width: 100%;
 
                     @media(max-width:991px) {
                         width: 100%;
@@ -1732,7 +1687,7 @@
                 }
 
                 .filter_btn {
-                    width: 200px;
+                    width: 300px;
                     margin: 0 0 20px 50px;
 
                     @media(max-width:991px) {
@@ -1743,9 +1698,9 @@
                     button {
                         width: 100%;
                         padding: 11px 25px;
-                        background: $secondary-color;
+                        background: $primary-color;
                         border-radius: 8px;
-                        border: 1px solid $secondary-color;
+                        border: 1px solid $primary-color;
                         font-size: 16px;
                         font-weight: 600;
                         color: $text-white;
@@ -1762,14 +1717,14 @@
                             left: 0;
                             width: 100%;
                             height: 0%;
-                            background: $primary-color;
+                            background: $secondary-color;
                             z-index: -1;
                             transition: 0.8s;
                             border-radius: 0 0 50% 50%;
                         }
 
                         &:hover {
-                            border-color: $primary-color;
+                            border-color: $secondary-color;
 
                             &:before {
                                 height: 190%;
@@ -1789,6 +1744,36 @@
             padding: 20px 0;
             display: flex;
             flex-wrap: wrap;
+
+            .block_no_card_available {
+                width: 100%;
+                text-align: center;
+                padding: 30px;
+
+                img {
+                    width: 250px;
+                }
+
+                h5 {
+                    font-size: 40px;
+                    color: $secondary-color;
+                    font-weight: 600;
+                    margin: 30px 0 0;
+                }
+
+                @media(max-width:767px) {
+                    padding: 20px;
+
+                    img {
+                        width: 150px;
+                    }
+
+                    h5 {
+                        font-size: 20px;
+                    }
+                }
+            }
+
 
             .block_card_list {
                 width: 320px;
@@ -2022,6 +2007,35 @@
 
                     @media(max-width:575px) {
                         padding: 20px;
+                    }
+
+                    .block_no_traveller {
+                        width: 100%;
+                        text-align: center;
+                        padding: 30px;
+
+                        img {
+                            width: 150px;
+                        }
+
+                        h5 {
+                            font-size: 40px;
+                            color: $secondary-color;
+                            font-weight: 600;
+                            margin: 30px 0 0;
+                        }
+
+                        @media(max-width:767px) {
+                            padding: 20px;
+
+                            img {
+                                width: 150px;
+                            }
+
+                            h5 {
+                                font-size: 20px;
+                            }
+                        }
                     }
 
                     ul {
@@ -2382,9 +2396,9 @@
                     width: auto;
                     padding: 0 30px;
                     height: 48px;
-                    background: $secondary-color;
+                    background: $primary-color;
                     border-radius: 8px;
-                    border: 1px solid $secondary-color;
+                    border: 1px solid $primary-color;
                     font-size: 16px;
                     font-weight: 600;
                     color: $text-white;
@@ -2408,14 +2422,14 @@
                         left: 0;
                         width: 100%;
                         height: 0%;
-                        background: $primary-color;
+                        background: $secondary-color;
                         z-index: -1;
                         transition: 0.8s;
                         border-radius: 0 0 50% 50%;
                     }
 
                     &:hover {
-                        border-color: $primary-color;
+                        border-color: $secondary-color;
 
                         &:before {
                             height: 190%;
@@ -2578,6 +2592,10 @@
                             padding: 25px 30px;
                             box-shadow: 3px 4px 10px $shadow-color;
 
+                            @media(max-width:480px) {
+                                padding: 20px 15px;
+                            }
+
                             .block_notification {
                                 .block_list {
                                     width: 100%;
@@ -2673,6 +2691,10 @@
                     display: flex;
                     justify-content: space-between;
 
+                    @media(max-width:767px) {
+                        flex-flow: column;
+                    }
+
                     .block_points_info {
                         ul {
                             width: 100%;
@@ -2680,6 +2702,10 @@
                             margin: 0;
                             padding: 0;
                             list-style: none;
+
+                            @media(max-width:480px) {
+                                flex-wrap: wrap;
+                            }
 
                             li {
                                 width: 200px;
@@ -2692,6 +2718,12 @@
                                 background-size: cover;
                                 margin: 0 30px 0 0;
                                 position: relative;
+
+                                @media(max-width:480px) {
+                                    width: 300px;
+                                    margin: 0 0 20px 0;
+                                    background-position: bottom center;
+                                }
 
                                 span {
                                     font-size: 12px;
@@ -2724,6 +2756,10 @@
                                     span {
                                         left: 7px;
                                     }
+
+                                    @media(max-width:480px) {
+                                        background-position: bottom center;
+                                    }
                                 }
                             }
                         }
@@ -2731,7 +2767,11 @@
 
                     .block_points_add {
 
-
+                        @media(max-width:767px) {
+                            margin: 20px 0 0;
+                            display: flex;
+                            justify-content: flex-end;
+                        }
 
                         a {
                             border: 1px solid $box-border-color;
@@ -2786,10 +2826,22 @@
                                             margin: 0;
                                             padding: 0;
 
+                                            @media(max-width:767px) {
+                                                flex-flow: column;
+                                            }
+
                                             li {
                                                 font-size: 16px;
                                                 font-weight: 500;
                                                 color: $text-black;
+
+                                                @media(max-width:767px) {
+                                                    padding: 0 0 10px;
+
+                                                    &:last-child {
+                                                        padding: 0;
+                                                    }
+                                                }
 
                                                 &.text_clr_orange {
                                                     color: $secondary-color;
@@ -2813,6 +2865,400 @@
                 }
             }
         }
+
+        &.subscription_plan {
+            .block_subscription_plan {
+                border-radius: 5px;
+                background: $background-white;
+                padding: 30px;
+                box-shadow: 3px 4px 10px $shadow-color;
+                margin: 0 0 30px;
+
+                @media(max-width: 480px) {
+                    padding: 20px;
+                }
+
+                .block_title {
+                    width: 100%;
+                    padding: 15px 30px;
+                    background: $bg-light-grey;
+                    margin: 0 0 30px;
+
+                    h5 {
+                        margin: 0;
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+                }
+
+                .subscription_block_main {
+                    width: 100%;
+                    margin: 10px 0 30px;
+                    display: flex;
+                    justify-content: center;
+
+                    .subscription_block {
+                        width: 50%;
+                        border-radius: 15px;
+                        box-shadow: 0px 3px 6px $shadow_grey_light;
+
+                        @media(max-width: 767px) {
+                            width: 70%;
+                        }
+
+                        @media(max-width: 480px) {
+                            width: 100%;
+                        }
+
+                        .block_top {
+                            width: 100%;
+                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg) no-repeat;
+                            background-size: 100%;
+                            padding: 55px 0 85px;
+                            color: $text-white;
+                            font-size: 36px;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                            text-align: center;
+                            border-radius: 15px 15px 0 0;
+
+                            @media(max-width: 991px) {
+                                padding: 45px 0 75px;
+                                font-size: 26px;
+                            }
+
+                            @media(max-width: 767px) {
+                                padding: 55px 0 70px;
+                                font-size: 26px;
+                            }
+
+                            @media(max-width: 575px) {
+                                padding: 45px 0 55px;
+                                font-size: 26px;
+                                background-size: cover;
+                                background-position: bottom center;
+                            }
+                        }
+
+                        .block_btm {
+                            width: 100%;
+                            padding: 20px 0 0;
+
+                            h6 {
+                                text-align: center;
+                                font-size: 39px;
+                                font-weight: 400;
+                                padding: 0 0 10px;
+                                margin: 0 15px 25px;
+                                color: $background-blue;
+                                border-bottom: 2px solid $lightblue_bdr;
+
+                                span {
+                                    font-size: 23px;
+                                }
+
+                                @media(max-width: 575px) {
+                                    font-size: 30px;
+
+                                    span {
+                                        font-size: 16px;
+                                    }
+                                }
+                            }
+
+                            ul {
+                                width: 100%;
+                                margin: 0;
+                                padding: 0 15px;
+                                list-style: none;
+
+                                li {
+                                    width: 100%;
+                                    margin-bottom: 15px;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    color: $text-black;
+                                    padding: 0 0 0 30px;
+                                    position: relative;
+
+                                    &:before {
+                                        font-family: 'FontAwesome';
+                                        content: "\f00c";
+                                        float: right;
+                                        color: $bg-green;
+                                        font-weight: normal;
+                                        position: absolute;
+                                        top: -2px;
+                                        left: 0;
+                                        font-size: 18px;
+                                    }
+                                }
+                            }
+
+                            .btn_subscription {
+                                width: 100%;
+                                border-radius: 0 0 15px 15px;
+                                height: 62px;
+
+                                a {
+                                    width: 100%;
+                                    display: inline-block;
+                                    text-align: center;
+                                    line-height: 62px;
+                                    padding: 0 25px;
+                                    font-size: 20px;
+                                    color: $text-white;
+                                    font-weight: 400;
+                                    border-radius: 0 0 15px 15px;
+                                    background: $secondary-color;
+                                    position: relative;
+                                    z-index: 9;
+                                    overflow: hidden;
+
+                                    &:before {
+                                        content: "";
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 0%;
+                                        background: $primary-color;
+                                        z-index: -1;
+                                        transition: 0.8s;
+                                        border-radius: 0 0 50% 50%;
+                                    }
+
+                                    &:hover {
+                                        border-color: $primary-color;
+
+                                        &:before {
+                                            height: 190%;
+                                        }
+                                    }
+
+                                    @media(max-width:575px) {
+                                        font-size: 14px;
+                                        line-height: 50px;
+                                        padding: 0 15px;
+                                    }
+                                }
+
+                                @media(max-width:575px) {
+                                    height: 50px;
+                                }
+                            }
+                        }
+                    }
+
+                    .subscription_im {
+                        margin: 0 0 0 -30px;
+
+                        img {
+                            height: 100%;
+                        }
+
+                        @media(max-width: 767px) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.search_trip {
+            .block_search_trip {
+                border-radius: 5px;
+                background: $background-white;
+
+                .block_title {
+                    width: 100%;
+                    padding: 15px 30px;
+                    background: $bg-light-grey;
+                    margin: 0 0 30px;
+
+                    h5 {
+                        margin: 0;
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+                }
+
+                .search_block {
+                    width: 100%;
+
+                    form {
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+
+                        @media(max-width: 575px) {
+                            flex-flow: column;
+                        }
+
+                        .search_field {
+                            width: 50%;
+
+                            @media(max-width: 991px) {
+                                width: 100%;
+                            }
+
+                            @media(max-width: 575px) {
+                                width: 100%;
+                            }
+
+                            label {
+                                font-size: 12px;
+                                font-weight: 500;
+                                color: $text-grey;
+                            }
+
+                            input {
+                                width: 100%;
+                                background: transparent;
+                                height: 40px;
+                                border-top: none;
+                                border-left: none;
+                                border-right: none;
+                                border-bottom: 1px solid $box-border-color;
+                                font-size: 14px;
+                                color: $text-black;
+                                position: relative;
+
+                                &:focus {
+                                    border-bottom: 1px solid $primary-color;
+                                }
+
+                                &:placeholder {
+                                    color: $box-border-color;
+                                    -webkit-text-fill-color: $box-border-color;
+                                }
+
+                                &.error {
+                                    border-color: $error-color;
+                                }
+                            }
+                        }
+
+                        .search_btn {
+                            margin-left: 30px;
+
+                            @media(max-width: 575px) {
+                                width: 100%;
+                                margin: 20px 0 0;
+                                display: flex;
+                                justify-content: flex-end;
+                            }
+
+                            button {
+                                width: auto;
+                                padding: 0 30px;
+                                height: 48px;
+                                background: $secondary-color;
+                                border-radius: 8px;
+                                border: 1px solid $secondary-color;
+                                font-size: 16px;
+                                font-weight: 600;
+                                color: $text-white;
+                                transition: 0.3s;
+                                position: relative;
+                                z-index: 9;
+                                overflow: hidden;
+                                white-space: normal;
+                                display: flex;
+                                align-items: center;
+
+                                img {
+                                    margin-left: 40px;
+                                    height: 20px;
+                                }
+
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 0%;
+                                    background: $primary-color;
+                                    z-index: -1;
+                                    transition: 0.8s;
+                                    border-radius: 0 0 50% 50%;
+                                }
+
+                                &:hover {
+                                    border-color: $primary-color;
+
+                                    &:before {
+                                        height: 190%;
+                                    }
+                                }
+
+                                @media(max-width: 991px) {
+                                    display: inline-flex;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .form_update_btn {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin: 30px 0 0;
+
+        button {
+            width: auto;
+            padding: 11px 25px;
+            background: $primary-color;
+            border-radius: 8px;
+            border: 1px solid $primary-color;
+            font-size: 16px;
+            color: $text-white;
+            transition: 0.3s;
+            position: relative;
+            z-index: 9;
+            overflow: hidden;
+            white-space: nowrap;
+
+            img {
+                margin-left: 120px;
+                height: 20px;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 0%;
+                background: $secondary-color;
+                z-index: -1;
+                transition: 0.8s;
+                border-radius: 0 0 50% 50%;
+            }
+
+            &:hover {
+                border-color: $secondary-color;
+
+                &:before {
+                    height: 190%;
+                }
+            }
+
+            @media(max-width: 575px) {
+
+                img {
+                    margin-left: 60px;
+                }
+            }
+        }
+
     }
 }
 
@@ -3123,361 +3569,372 @@
                 padding: 15px;
             }
 
-            .card_modal_cnt {
-                .modal_top {
-                    width: 100%;
-                    position: relative;
-                    margin: 0 0 30px;
+            .modal-header {
+                padding: 0;
+                border: none;
+                margin: 60px 0 0;
 
-                    .close {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        font-weight: normal;
-                        opacity: 1;
-                        z-index: 99;
-                    }
+                .close {
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    font-weight: normal;
+                    opacity: 1;
+                    z-index: 99;
                 }
 
-                .modal_btm {
-                    margin: 60px 0 0;
+                .block_title {
+                    width: 100%;
+                    padding: 15px 30px;
+                    background: $bg-light-grey;
+                    margin: 0 0 30px;
 
-                    .block_title {
-                        width: 100%;
-                        padding: 15px 30px;
-                        background: $bg-light-grey;
-                        margin: 0 0 30px;
-
-                        h5 {
-                            margin: 0;
-                            font-size: 16px;
-                            font-weight: 500;
-                        }
+                    h5 {
+                        margin: 0;
+                        font-size: 16px;
+                        font-weight: 500;
                     }
+                }
+            }
 
-                    .add_card_form {
+            .modal-body {
+                padding: 0;
+
+                .add_card_form {
+
+                    width: 100%;
+
+                    .form_row {
                         width: 100%;
+                        display: flex;
+                        justify-content: space-between;
 
-                        .form_row {
+                        @media(max-width: 575px) {
+                            flex-wrap: wrap;
+                        }
+
+                        .form_field {
                             width: 100%;
-                            display: flex;
-                            justify-content: space-between;
+                            margin-bottom: 20px;
 
-                            @media(max-width: 575px) {
-                                flex-wrap: wrap;
+                            label {
+                                width: 100%;
+                                margin-bottom: 10px;
+                                font-size: 12px;
+                                color: $text-grey;
+                                font-weight: 400;
+
+                                sup {
+                                    color: $error-color;
+                                }
                             }
 
-                            .form_field {
+                            .custom_listing {
                                 width: 100%;
-                                margin-bottom: 20px;
+                                margin: 0;
+                                padding: 0;
+                                display: flex;
 
-                                label {
-                                    width: 100%;
-                                    margin-bottom: 10px;
-                                    font-size: 12px;
-                                    color: $text-grey;
-                                    font-weight: 400;
-
-                                    sup {
-                                        color: $error-color;
-                                    }
+                                @media(max-width: 480px) {
+                                    flex-wrap: wrap;
                                 }
 
-                                .custom_listing {
-                                    width: 100%;
-                                    margin: 0;
-                                    padding: 0;
+                                li {
                                     display: flex;
+                                    justify-content: space-between;
+                                    padding: 0 80px 0 0;
+                                    align-items: center;
+                                    color: $text-grey;
+                                    font-size: 14px;
+                                    font-weight: 300;
 
-                                    @media(max-width: 480px) {
-                                        flex-wrap: wrap;
+                                    @media(max-width:575px) {
+                                        padding: 0 30px 0 0;
+
+                                        &:last-child {
+                                            padding-right: 0;
+                                        }
                                     }
 
-                                    li {
-                                        display: flex;
-                                        justify-content: space-between;
-                                        padding: 0 80px 0 0;
-                                        align-items: center;
-                                        color: $text-grey;
+                                    @media(max-width:480px) {
+                                        padding: 0 30px 10px 0;
+                                        width: 100%;
+
+                                        &:last-child {
+                                            padding: 0;
+                                        }
+                                    }
+
+                                    .custom_radio {
+                                        width: 100%;
+                                        display: block;
+                                        position: relative;
+                                        padding-left: 25px;
+                                        margin: 0;
+                                        cursor: pointer;
                                         font-size: 14px;
+                                        -webkit-user-select: none;
+                                        -moz-user-select: none;
+                                        -ms-user-select: none;
+                                        user-select: none;
+                                        color: $text-grey;
                                         font-weight: 300;
 
-                                        @media(max-width:575px) {
-                                            padding: 0 30px 0 0;
-
-                                            &:last-child {
-                                                padding-right: 0;
-                                            }
-                                        }
-
-                                        @media(max-width:480px) {
-                                            padding: 0 30px 10px 0;
-                                            width: 100%;
-
-                                            &:last-child {
-                                                padding: 0;
-                                            }
-                                        }
-
-                                        .custom_radio {
-                                            width: 100%;
-                                            display: block;
-                                            position: relative;
-                                            padding-left: 25px;
-                                            margin: 0;
+                                        input {
+                                            position: absolute;
+                                            opacity: 0;
                                             cursor: pointer;
-                                            font-size: 14px;
-                                            -webkit-user-select: none;
-                                            -moz-user-select: none;
-                                            -ms-user-select: none;
-                                            user-select: none;
-                                            color: $text-grey;
-                                            font-weight: 300;
 
-                                            input {
-                                                position: absolute;
-                                                opacity: 0;
-                                                cursor: pointer;
+                                            &:checked {
+                                                ~ {
+                                                    .checkmark {
+                                                        border: 1px solid $secondary-color;
 
-                                                &:checked {
-                                                    ~ {
-                                                        .checkmark {
-                                                            border: 1px solid $secondary-color;
-
-                                                            &:after {
-                                                                display: block;
-                                                            }
+                                                        &:after {
+                                                            display: block;
                                                         }
                                                     }
                                                 }
                                             }
+                                        }
 
-                                            .checkmark {
+                                        .checkmark {
+                                            position: absolute;
+                                            top: 4px;
+                                            left: 0;
+                                            height: 14px;
+                                            width: 14px;
+                                            background-color: transparent;
+                                            border: 1px solid $text-grey;
+                                            border-radius: 50%;
+
+                                            &:after {
+                                                content: "";
                                                 position: absolute;
-                                                top: 4px;
-                                                left: 0;
-                                                height: 14px;
-                                                width: 14px;
-                                                background-color: transparent;
-                                                border: 1px solid $text-grey;
+                                                display: none;
+                                                top: 2px;
+                                                left: 2px;
+                                                width: 8px;
+                                                height: 8px;
                                                 border-radius: 50%;
-
-                                                &:after {
-                                                    content: "";
-                                                    position: absolute;
-                                                    display: none;
-                                                    top: 2px;
-                                                    left: 2px;
-                                                    width: 8px;
-                                                    height: 8px;
-                                                    border-radius: 50%;
-                                                    background: $secondary-color;
-                                                }
+                                                background: $secondary-color;
                                             }
                                         }
                                     }
                                 }
+                            }
 
-                                &.half {
-                                    width: 49%;
+                            &.half {
+                                width: 49%;
 
-                                    @media(max-width: 575px) {
+                                @media(max-width: 575px) {
+                                    width: 100%;
+                                }
+
+                                .text_field {
+                                    input {
                                         width: 100%;
+                                        background: transparent;
+                                        height: 40px;
+                                        border-top: none;
+                                        border-left: none;
+                                        border-right: none;
+                                        border-bottom: 1px solid $box-border-color;
+                                        font-size: 14px;
+                                        color: $text-black;
+                                        position: relative;
+
+                                        &:focus {
+                                            border-bottom: 1px solid $primary-color;
+                                        }
+
+                                        &.birth_date {
+                                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                            background-position: right center;
+                                        }
+
+                                        &:placeholder {
+                                            color: $box-border-color;
+                                            -webkit-text-fill-color: $box-border-color;
+                                        }
                                     }
 
-                                    .text_field {
-                                        input {
-                                            width: 100%;
-                                            background: transparent;
-                                            height: 40px;
-                                            border-top: none;
-                                            border-left: none;
-                                            border-right: none;
-                                            border-bottom: 1px solid $box-border-color;
+                                    &.custom-select {
+                                        height: 40px;
+                                        border-top: none;
+                                        border-left: none;
+                                        border-right: none;
+                                        border-bottom: 1px solid $box-border-color;
+                                        background: transparent;
+                                        padding: 0;
+                                        position: relative;
+
+                                        select {
+                                            display: none;
+                                        }
+
+                                        .select-selected {
+                                            background-color: transparent;
+                                            line-height: 40px;
                                             font-size: 14px;
                                             color: $text-black;
-                                            position: relative;
 
-                                            &:focus {
-                                                border-bottom: 1px solid $primary-color;
+                                            &:after {
+                                                position: absolute;
+                                                content: "";
+                                                top: 17px;
+                                                right: 10px;
+                                                width: 0;
+                                                height: 0;
+                                                border: 4px solid transparent;
+                                                border-color: $text-grey transparent transparent transparent;
                                             }
 
-                                            &.birth_date {
-                                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
-                                                background-position: right center;
-                                            }
-
-                                            &:placeholder {
-                                                color: $box-border-color;
-                                                -webkit-text-fill-color: $box-border-color;
+                                            &.select-arrow-active {
+                                                &:after {
+                                                    border-color: transparent transparent $text-grey transparent;
+                                                    top: 11px;
+                                                }
                                             }
                                         }
 
-                                        &.custom-select {
-                                            height: 40px;
-                                            border-top: none;
-                                            border-left: none;
-                                            border-right: none;
-                                            border-bottom: 1px solid $box-border-color;
-                                            background: transparent;
-                                            padding: 0;
-                                            position: relative;
+                                        .select-items {
+                                            position: absolute;
+                                            background-color: $text-grey;
+                                            top: 100%;
+                                            left: 0;
+                                            right: 0;
+                                            z-index: 99;
 
-                                            select {
-                                                display: none;
+                                            div {
+                                                color: #ffffff;
+                                                padding: 8px 16px;
+                                                border: 1px solid transparent;
+                                                border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                                                cursor: pointer;
+                                                user-select: none;
+                                                font-size: 14px;
+                                                color: $text-white;
+
+                                                &:hover {
+                                                    background-color: rgba(0, 0, 0, 0.1);
+                                                }
+
+                                                &.same-as-selected {
+                                                    background-color: rgba(0, 0, 0, 0.1);
+                                                }
                                             }
 
-                                            .select-selected {
-                                                background-color: transparent;
+                                            &.select-hide {
+                                                display: none;
+                                            }
+                                        }
+
+                                    }
+
+                                    .phone_no {
+                                        width: 100%;
+                                        display: flex;
+
+                                        .code {
+                                            border-bottom: 1px solid $box-border-color;
+                                            margin-right: 10px;
+
+                                            a {
                                                 line-height: 40px;
                                                 font-size: 14px;
                                                 color: $text-black;
+                                            }
 
-                                                &:after {
-                                                    position: absolute;
-                                                    content: "";
-                                                    top: 17px;
-                                                    right: 10px;
-                                                    width: 0;
-                                                    height: 0;
-                                                    border: 4px solid transparent;
-                                                    border-color: $text-grey transparent transparent transparent;
-                                                }
+                                            .dropdown-menu {
+                                                padding: 0;
 
-                                                &.select-arrow-active {
-                                                    &:after {
-                                                        border-color: transparent transparent $text-grey transparent;
-                                                        top: 11px;
+                                                li {
+                                                    padding: 0 10px;
+
+                                                    a {
+                                                        line-height: 30px;
                                                     }
                                                 }
                                             }
-
-                                            .select-items {
-                                                position: absolute;
-                                                background-color: $text-grey;
-                                                top: 100%;
-                                                left: 0;
-                                                right: 0;
-                                                z-index: 99;
-
-                                                div {
-                                                    color: #ffffff;
-                                                    padding: 8px 16px;
-                                                    border: 1px solid transparent;
-                                                    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-                                                    cursor: pointer;
-                                                    user-select: none;
-                                                    font-size: 14px;
-                                                    color: $text-white;
-
-                                                    &:hover {
-                                                        background-color: rgba(0, 0, 0, 0.1);
-                                                    }
-
-                                                    &.same-as-selected {
-                                                        background-color: rgba(0, 0, 0, 0.1);
-                                                    }
-                                                }
-
-                                                &.select-hide {
-                                                    display: none;
-                                                }
-                                            }
-
                                         }
 
-                                        .phone_no {
+                                        .number {
                                             width: 100%;
-                                            display: flex;
-
-                                            .code {
-                                                border-bottom: 1px solid $box-border-color;
-                                                margin-right: 10px;
-
-                                                a {
-                                                    line-height: 40px;
-                                                    font-size: 14px;
-                                                    color: $text-black;
-                                                }
-
-                                                .dropdown-menu {
-                                                    padding: 0;
-
-                                                    li {
-                                                        padding: 0 10px;
-
-                                                        a {
-                                                            line-height: 30px;
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            .number {
-                                                width: 100%;
-                                            }
                                         }
                                     }
                                 }
+                            }
 
 
+                        }
+                    }
+                }
+            }
+
+            .modal-footer {
+                padding: 0;
+                border: none;
+
+                .form_btn {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    button {
+                        width: auto;
+                        padding: 0 45px;
+                        height: 48px;
+                        background: $primary-color;
+                        border-radius: 8px;
+                        border: 1px solid $primary-color;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: $text-white;
+                        transition: 0.3s;
+                        position: relative;
+                        z-index: 9;
+                        overflow: hidden;
+                        white-space: normal;
+                        display: flex;
+                        align-items: center;
+                        margin: 0 0 0 15px;
+
+                        img {
+                            margin-left: 40px;
+                            height: 20px;
+                        }
+
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 0%;
+                            background: $secondary-color;
+                            z-index: -1;
+                            transition: 0.8s;
+                            border-radius: 0 0 50% 50%;
+                        }
+
+                        &:hover {
+                            border-color: $secondary-color;
+
+                            &:before {
+                                height: 190%;
                             }
                         }
 
-                        .form_btn {
-                            display: flex;
-                            justify-content: flex-end;
-
-                            button {
-                                width: auto;
-                                padding: 0 45px;
-                                height: 48px;
-                                background: $secondary-color;
-                                border-radius: 8px;
-                                border: 1px solid $secondary-color;
-                                font-size: 16px;
-                                font-weight: 600;
-                                color: $text-white;
-                                transition: 0.3s;
-                                position: relative;
-                                z-index: 9;
-                                overflow: hidden;
-                                white-space: normal;
-                                display: flex;
-                                align-items: center;
-
-                                img {
-                                    margin-left: 40px;
-                                    height: 20px;
-                                }
-
-                                &::before {
-                                    content: "";
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 0%;
-                                    background: $primary-color;
-                                    z-index: -1;
-                                    transition: 0.8s;
-                                    border-radius: 0 0 50% 50%;
-                                }
-
-                                &:hover {
-                                    border-color: $primary-color;
-
-                                    &:before {
-                                        height: 190%;
-                                    }
-                                }
-
-                                @media(max-width: 991px) {
-                                    display: inline-flex;
-                                }
-
-                            }
+                        @media(max-width: 991px) {
+                            display: inline-flex;
                         }
+
+                        @media(max-width: 480px) {
+                            height: 40px;
+                            font-size: 14px;
+                            padding: 0 25px;
+                        }
+
                     }
                 }
             }
@@ -3493,6 +3950,7 @@
     .modal-dialog {
         max-width: 450px;
         width: 96%;
+        margin: 0 auto;
 
         .modal-content {
             padding: 30px;
@@ -3502,69 +3960,186 @@
                 padding: 15px;
             }
 
-            .card_modal_cnt {
-                .modal_top {
-                    width: 100%;
-                    position: relative;
-                    margin: 0 0 20px;
+            .modal-header {
+                padding: 0;
+                border: none;
+                margin: 30px 0 0;
 
-                    .close {
-                        position: absolute;
-                        top: -5px;
-                        right: -5px;
-                        font-weight: normal;
-                        opacity: 1;
-                        z-index: 99;
+                .close {
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    font-weight: normal;
+                    opacity: 1;
+                    z-index: 99;
+                }
+
+                .block_title {
+                    width: 100%;
+                    padding: 15px 30px;
+                    background: $bg-light-grey;
+                    margin: 0;
+
+                    h4 {
+                        margin: 0;
+                        font-size: 16px;
+                        font-weight: 500;
                     }
                 }
+            }
+
+            .modal-body {
+                padding: 20px 0;
 
                 .modal_btm {
                     text-align: center;
 
-                    h4 {
-                        font-size: 20px;
-                        font-weight: 600;
-                        margin: 0 0 20px;
-                        color: $text-grey;
-                    }
-
                     p {
                         font-size: 16px;
                         color: $text-black;
-                        margin: 0 0 15px;
-                    }
-
-                    ul {
-                        width: 100%;
                         margin: 0;
-                        padding: 0;
-                        list-style: none;
-                        display: flex;
-                        justify-content: center;
-
-                        li {
-                            padding: 0 5px;
-
-                            a {
-                                width: 100px;
-                                display: inline-block;
-                                line-height: 40px;
-                                font-size: 14px;
-                                color: $text-white;
-                                background: $primary-color;
-                                border-radius: 5px;
-                                padding: 0 15px;
-                            }
-
-                            &:last-child {
-                                a {
-                                    background: $secondary-color;
-                                }
-                            }
-                        }
                     }
                 }
             }
+
+            .modal-footer {
+                padding: 0;
+                border: none;
+                justify-content: center;
+
+                .form_btn {
+                    display: flex;
+                    justify-content: center;
+
+                    button {
+                        width: auto;
+                        padding: 0 45px;
+                        height: 48px;
+                        background: $primary-color;
+                        border-radius: 8px;
+                        border: 1px solid $primary-color;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: $text-white;
+                        transition: 0.3s;
+                        position: relative;
+                        z-index: 9;
+                        overflow: hidden;
+                        white-space: normal;
+                        display: flex;
+                        align-items: center;
+                        margin: 0 10px;
+
+                        img {
+                            margin-left: 40px;
+                            height: 20px;
+                        }
+
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 0%;
+                            background: $secondary-color;
+                            z-index: -1;
+                            transition: 0.8s;
+                            border-radius: 0 0 50% 50%;
+                        }
+
+                        &:hover {
+                            border-color: $secondary-color;
+
+                            &:before {
+                                height: 190%;
+                            }
+                        }
+
+                        @media(max-width: 991px) {
+                            display: inline-flex;
+                        }
+
+                        &.btn_no {
+                            background: $secondary-color;
+                            border: 1px solid $secondary-color;
+
+                            &::before {
+                                background: $primary-color;
+                            }
+
+                            &:hover {
+                                border-color: $primary-color;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            //            .card_modal_cnt {
+            //                .modal_top {
+            //                    width: 100%;
+            //                    position: relative;
+            //                    margin: 0 0 20px;
+            //
+            //                    .close {
+            //                        position: absolute;
+            //                        top: -5px;
+            //                        right: -5px;
+            //                        font-weight: normal;
+            //                        opacity: 1;
+            //                        z-index: 99;
+            //                    }
+            //                }
+            //
+            //                .modal_btm {
+            //                    text-align: center;
+            //
+            //                    h4 {
+            //                        font-size: 20px;
+            //                        font-weight: 600;
+            //                        margin: 0 0 20px;
+            //                        color: $text-grey;
+            //                    }
+            //
+            //                    p {
+            //                        font-size: 16px;
+            //                        color: $text-black;
+            //                        margin: 0 0 15px;
+            //                    }
+            //
+            //                    ul {
+            //                        width: 100%;
+            //                        margin: 0;
+            //                        padding: 0;
+            //                        list-style: none;
+            //                        display: flex;
+            //                        justify-content: center;
+            //
+            //                        li {
+            //                            padding: 0 5px;
+            //
+            //                            a {
+            //                                width: 100px;
+            //                                display: inline-block;
+            //                                line-height: 40px;
+            //                                font-size: 14px;
+            //                                color: $text-white;
+            //                                background: $primary-color;
+            //                                border-radius: 5px;
+            //                                padding: 0 15px;
+            //                            }
+            //
+            //                            &:last-child {
+            //                                a {
+            //                                    background: $secondary-color;
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
         }
     }
 }

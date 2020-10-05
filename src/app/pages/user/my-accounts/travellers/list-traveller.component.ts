@@ -93,7 +93,7 @@ export class ListTravellerComponent implements OnInit {
 
 
   openTravellerModal(content, userId = '') {
-    this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal' });
+    this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal',centered: true });
     (<TravellerFormComponent>this.modalReference.componentInstance).travellerId = userId;
     this.modalReference.componentInstance.travelersChanges.subscribe(($e) => {
       const index = this.travelers.indexOf($e.userId, 0);
@@ -105,7 +105,7 @@ export class ListTravellerComponent implements OnInit {
   }
 
   deleteTravellerModal(content, userId = '') {
-    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal' });
+    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal',centered: true });
     this.userId = userId;
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

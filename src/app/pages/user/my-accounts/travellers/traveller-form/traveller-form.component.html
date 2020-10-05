@@ -1,221 +1,201 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{ travellerId ? 'Edit Co - Travellers' : 'Add Co - Travellers'}}</h4>
+    <div class="block_title">
+        <h5>{{ travellerId ? 'Edit Co - Travellers' : 'Add Co - Travellers'}}</h5>
+    </div>
     <button type="button" class="close" (click)="close()">
         <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
     </button>
-  </div>
-  <div class="modal-body">
-    <div class="card_modal_cnt">
-        <div class="modal_top">
-          <!--   <button type="button" class="close" data-dismiss="modal">
-                <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-            </button> -->
-        </div>
-        <div class="modal_btm">
-            <!-- <div class="block_title">
-                <h5>Add Co - Travellers</h5>
-            </div> -->
-            <div class="add_card_form">
-                <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
-                    <div class="form_row">
-                        <div class="form_field">
-                            <label>Title<sup>*</sup></label>
-                            <ul class="custom_listing">
-                                <li>
-                                    <label class="custom_radio">Mr.
-                                        <input type="radio" checked="checked" formControlName="title"
-                                            value="mr" tabindex="0">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="custom_radio">Ms.
-                                        <input type="radio" formControlName="title" value="ms" tabindex="-1">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="custom_radio">Mrs.
-                                        <input type="radio" formControlName="title" value="mrs" tabindex="-1">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_field">
-                            <label>Gender<sup>*</sup></label>
-                            <ul class="custom_listing">
-                                <li>
-                                    <label class="custom_radio">Male
-                                        <input type="radio" checked="checked" formControlName="gender"
-                                             value="M" tabindex="0"> 
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="custom_radio">Female
-                                        <input type="radio" formControlName="gender"
-                                             value="F" tabindex="-1"> 
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_field half">
-                            <label>First Name<sup>*</sup></label>
-                            <div class="text_field">
-                                <input type="text" formControlName="firstName" maxlength="20" tabindex="1"
-                                    placeholder="First Name">
-                            </div>
-                            <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
-                                class="focus-input100 login-error">
-                                <div *ngIf="coAccountForm.controls.firstName.errors.required"
-                                    class="text-danger">Please enter
-                                    first name.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form_field half">
-                            <label>Last Name<sup>*</sup></label>
-                            <div class="text_field">
-                                <input type="text" formControlName="lastName" maxlength="20" tabindex="2"
-                                    placeholder="last Name">
-                            </div>
-                            <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
-                                class="focus-input100 login-error">
-                                <div *ngIf="coAccountForm.controls.lastName.errors.required"
-                                    class="text-danger">Please enter
-                                    last name.
-                                </div>
-                            </div>
-                        </div>
-                    </div>                            
-                    <div class="form_row">
-                        <div class="form_field half">
-                            <label>Email<sup>*</sup></label>
-                            <div class="text_field">
-                                <input type="email"  [readonly]="travellerId"  formControlName="email" maxlength="40" tabindex="4"
-                                    placeholder="Enter your email">
-                            </div>
-                            <div *ngIf="(submitted  || coAccountForm.controls.email.touched) && coAccountForm.controls.email.errors"
-                            class="focus-input100 login-error">
-                            <div *ngIf="coAccountForm.controls.email.errors.required" class="text-danger">Please enter
-                                email.
-                            </div>
-                            <div *ngIf="coAccountForm.controls.email.errors.pattern" class="text-danger">Please enter valid
-                                email
-                                address.</div>
-                            </div>
-                        </div>
-                        <div class="form_field half">
-                            <label>Phone<sup>*</sup></label>
-                            <div class="text_field">
-                                <div class="phone_no">
-                                    <div class="code">
-                                        <div class="dropdown">
-                                            <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true" [items]="countries_code"
-                                                bindLabel="name" clearSearchOnAdd="true" formControlName="country_code" placeholder="+1">
-                                                </ng-select>
-                                        </div>
-                                    </div>
-                                    <div class="number">
-                                        <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
-                                        (keypress)="commonFunction.validateNumber($event)" tabindex="5" placeholder="0000 0000 00">
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                *ngIf="coAccountForm.controls.country_code.errors"
-                                class="focus-input100 login-error">
-                                <div *ngIf="coAccountForm.controls.country_code.errors.required && coAccountForm.controls.country_code.touched"
-                                    class="text-danger">Please enter country code</div>
-                                </div>
-                                <div
-                                *ngIf="submitted && coAccountForm.controls.phone_no.errors"
-                                class="focus-input100 login-error">
-                                <div *ngIf="coAccountForm.controls.phone_no.errors.required"
-                                    class="text-danger">Please enter phone no.</div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_field half">
-                            <label>Date of Birth<sup>*</sup></label>
-                            <div class="text_field">
-                                <p-calendar 
-                                    tabindex="6"
-                                    inputStyleClass="custom_datpicker birth_date"
-                                    inputId="basic" 
-                                    formControlName="dob" 
-                                    [maxDate]="dobMaxDate"
-                                    [yearNavigator]="true"
-                                    [monthNavigator]="true"
-                                    yearRange="1970:2020"
-                                    [defaultDate]="dobMaxDate"
-                                    >
-                                </p-calendar>
-                                                          
-                            </div>
-                            <div *ngIf="(submitted && coAccountForm.controls.dob.errors)" class="focus-input100 login-error">
-                                <div *ngIf="coAccountForm.controls.dob.errors.required" class="text-danger">Please select
-                                  date of birth.
-                                </div>
-                              </div>
-                        </div>
-                        <div class="form_field half">
-                            <label>Nationality<sup>*</sup></label>
-                            <div class="text_field custom-select">
-                                <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="7" [selectOnTab]="true"
-                                    formControlName="country_id" selectOnTab="true" placeholder="Select nationality">
-                                </ng-select>
-                            </div>
-                            <div *ngIf="(submitted  || coAccountForm.controls.country_id.touched) && coAccountForm.controls.country_id.errors"
-                            class="focus-input100 login-error">
-                            <div *ngIf="coAccountForm.controls.country_id.errors.required" class="text-danger">Please select
-                                nationality.
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="form_row">
-                        <div class="form_field half">
-                            <label>Passport Expiration Date</label>
-                            <div class="text_field">
-                                <p-calendar 
-                                    tabindex="6"
-                                    inputStyleClass="custom_datpicker birth_date"
-                                    inputId="basic" 
-                                    formControlName="passport_expiry" 
-                                    [minDate]="expiryMinDate"             
-                                    [yearNavigator]="true"
-                                    [monthNavigator]="true"
-                                    yearRange="2020:2030"
-                                    [defaultDate]="dobMaxDate"
-                                    >
-                                </p-calendar>
-                            </div>
-                        </div>
-                        <div class="form_field half">
-                            <label>Passport Number</label>
-                            <div class="text_field">
-                                <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
-                                    placeholder="Passport Number">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form_btn">
-                        <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{ travellerId ? 'Update Traveller' : 'Add Traveller' }} <img
-                            src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
-                            alt="Right Arrow" /></button>
-                    </div>
-                </form>
+</div>
+<form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+
+        <div class="add_card_form">
+
+            <div class="form_row">
+                <div class="form_field">
+                    <label>Title<sup>*</sup></label>
+                    <ul class="custom_listing">
+                        <li>
+                            <label class="custom_radio">Mr.
+                                <input type="radio" checked="checked" formControlName="title" value="mr" tabindex="0">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom_radio">Ms.
+                                <input type="radio" formControlName="title" value="ms" tabindex="-1">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom_radio">Mrs.
+                                <input type="radio" formControlName="title" value="mrs" tabindex="-1">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <div class="form_row">
+                <div class="form_field">
+                    <label>Gender<sup>*</sup></label>
+                    <ul class="custom_listing">
+                        <li>
+                            <label class="custom_radio">Male
+                                <input type="radio" checked="checked" formControlName="gender" value="M" tabindex="0">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom_radio">Female
+                                <input type="radio" formControlName="gender" value="F" tabindex="-1">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form_row">
+                <div class="form_field half">
+                    <label>First Name<sup>*</sup></label>
+                    <div class="text_field">
+                        <input type="text" formControlName="firstName" maxlength="20" tabindex="1"
+                            placeholder="First Name">
+                    </div>
+                    <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
+                        class="focus-input100 login-error">
+                        <div *ngIf="coAccountForm.controls.firstName.errors.required" class="text-danger">Please
+                            enter
+                            first name.
+                        </div>
+                    </div>
+                </div>
+                <div class="form_field half">
+                    <label>Last Name<sup>*</sup></label>
+                    <div class="text_field">
+                        <input type="text" formControlName="lastName" maxlength="20" tabindex="2"
+                            placeholder="last Name">
+                    </div>
+                    <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
+                        class="focus-input100 login-error">
+                        <div *ngIf="coAccountForm.controls.lastName.errors.required" class="text-danger">Please
+                            enter
+                            last name.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_row">
+                <div class="form_field half">
+                    <label>Email<sup>*</sup></label>
+                    <div class="text_field">
+                        <input type="email" [readonly]="travellerId" formControlName="email" maxlength="40" tabindex="4"
+                            placeholder="Enter your email">
+                    </div>
+                    <div *ngIf="(submitted  || coAccountForm.controls.email.touched) && coAccountForm.controls.email.errors"
+                        class="focus-input100 login-error">
+                        <div *ngIf="coAccountForm.controls.email.errors.required" class="text-danger">Please
+                            enter
+                            email.
+                        </div>
+                        <div *ngIf="coAccountForm.controls.email.errors.pattern" class="text-danger">Please
+                            enter valid
+                            email
+                            address.</div>
+                    </div>
+                </div>
+                <div class="form_field half">
+                    <label>Phone<sup>*</sup></label>
+                    <div class="text_field">
+                        <div class="phone_no">
+                            <div class="code">
+                                <div class="dropdown">
+                                    <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true"
+                                        [items]="countries_code" bindLabel="name" clearSearchOnAdd="true"
+                                        formControlName="country_code" placeholder="+1">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="number">
+                                <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
+                                    (keypress)="commonFunction.validateNumber($event)" tabindex="5"
+                                    placeholder="0000 0000 00">
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="coAccountForm.controls.country_code.errors" class="focus-input100 login-error">
+                        <div *ngIf="coAccountForm.controls.country_code.errors.required && coAccountForm.controls.country_code.touched"
+                            class="text-danger">Please enter country code</div>
+                    </div>
+                    <div *ngIf="submitted && coAccountForm.controls.phone_no.errors" class="focus-input100 login-error">
+                        <div *ngIf="coAccountForm.controls.phone_no.errors.required" class="text-danger">Please
+                            enter phone no.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_row">
+                <div class="form_field half">
+                    <label>Date of Birth<sup>*</sup></label>
+                    <div class="text_field">
+                        <p-calendar tabindex="6" inputStyleClass="custom_datpicker birth_date" inputId="basic"
+                            formControlName="dob" [maxDate]="dobMaxDate" [yearNavigator]="true" [monthNavigator]="true"
+                            yearRange="1970:2020" [defaultDate]="dobMaxDate">
+                        </p-calendar>
+
+                    </div>
+                    <div *ngIf="(submitted && coAccountForm.controls.dob.errors)" class="focus-input100 login-error">
+                        <div *ngIf="coAccountForm.controls.dob.errors.required" class="text-danger">Please
+                            select
+                            date of birth.
+                        </div>
+                    </div>
+                </div>
+                <div class="form_field half">
+                    <label>Nationality<sup>*</sup></label>
+                    <div class="text_field custom-select">
+                        <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="7"
+                            [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
+                            placeholder="Select nationality">
+                        </ng-select>
+                    </div>
+                    <div *ngIf="(submitted  || coAccountForm.controls.country_id.touched) && coAccountForm.controls.country_id.errors"
+                        class="focus-input100 login-error">
+                        <div *ngIf="coAccountForm.controls.country_id.errors.required" class="text-danger">
+                            Please select
+                            nationality.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field half">
+                    <label>Passport Expiration Date</label>
+                    <div class="text_field">
+                        <p-calendar tabindex="6" inputStyleClass="custom_datpicker birth_date" inputId="basic"
+                            formControlName="passport_expiry" [minDate]="expiryMinDate" [yearNavigator]="true"
+                            [monthNavigator]="true" yearRange="2020:2030" [defaultDate]="dobMaxDate">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="form_field half">
+                    <label>Passport Number</label>
+                    <div class="text_field">
+                        <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
+                            placeholder="Passport Number">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="form_btn">
+            <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                {{ travellerId ? 'Update Traveller' : 'Add Traveller' }} <img
+                    src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
         </div>
     </div>
-  </div>
-  
+</form>

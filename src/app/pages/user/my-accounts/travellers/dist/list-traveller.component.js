@@ -77,7 +77,7 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.openTravellerModal = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
-        this.modalReference = this.modalService.open(traveller_form_component_1.TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal' });
+        this.modalReference = this.modalService.open(traveller_form_component_1.TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal', centered: true });
         this.modalReference.componentInstance.travellerId = userId;
         this.modalReference.componentInstance.travelersChanges.subscribe(function ($e) {
             var index = _this.travelers.indexOf($e.userId, 0);
@@ -90,7 +90,7 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.deleteTravellerModal = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
-        this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal' });
+        this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
         this.userId = userId;
         this.modalReference.result.then(function (result) {
             _this.closeResult = "Closed with: " + result;

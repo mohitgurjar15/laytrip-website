@@ -26,18 +26,19 @@ var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var ngx_countdown_1 = require("ngx-countdown");
 var ng5_slider_1 = require("ng5-slider");
 var full_page_overlay_loader_component_1 = require("./full-page-overlay-loader/full-page-overlay-loader.component");
-var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var ngx_cookie_1 = require("ngx-cookie");
 var booking_enquiry_info_component_1 = require("./booking-enquiry-info/booking-enquiry-info.component");
 var add_guest_card_component_1 = require("./add-guest-card/add-guest-card.component");
 var calendar_1 = require("primeng/calendar");
+var redeem_laycredit_component_1 = require("./redeem-laycredit/redeem-laycredit.component");
+var booking_feedback_component_1 = require("./booking-feedback/booking-feedback.component");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
     ComponentsModule = __decorate([
         core_1.NgModule({
             declarations: [
-                search_airport_component_1.SearchAirportComponent, traveller_info_component_1.TravellerInfoComponent, checkout_progress_component_1.CheckoutProgressComponent, adult_list_component_1.AdultListComponent, child_list_component_1.ChildListComponent, infant_list_component_1.InfantListComponent, booking_timer_component_1.BookingTimerComponent, payment_mode_component_1.PaymentModeComponent, card_list_component_1.CardListComponent, add_card_component_1.AddCardComponent, traveler_form_component_1.TravelerFormComponent, full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent, booking_enquiry_info_component_1.BookingEnquiryInfoComponent, add_guest_card_component_1.AddGuestCardComponent
+                search_airport_component_1.SearchAirportComponent, traveller_info_component_1.TravellerInfoComponent, checkout_progress_component_1.CheckoutProgressComponent, adult_list_component_1.AdultListComponent, child_list_component_1.ChildListComponent, infant_list_component_1.InfantListComponent, booking_timer_component_1.BookingTimerComponent, payment_mode_component_1.PaymentModeComponent, card_list_component_1.CardListComponent, add_card_component_1.AddCardComponent, traveler_form_component_1.TravelerFormComponent, full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent, booking_enquiry_info_component_1.BookingEnquiryInfoComponent, add_guest_card_component_1.AddGuestCardComponent, redeem_laycredit_component_1.RedeemLaycreditComponent, booking_feedback_component_1.BookingFeedbackComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -47,7 +48,6 @@ var ComponentsModule = /** @class */ (function () {
                 ng_bootstrap_1.NgbModule,
                 ngx_countdown_1.CountdownModule,
                 ng5_slider_1.Ng5SliderModule,
-                ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
                 ngx_cookie_1.CookieModule.forRoot(),
                 calendar_1.CalendarModule
             ],
@@ -64,7 +64,9 @@ var ComponentsModule = /** @class */ (function () {
                 add_card_component_1.AddCardComponent,
                 full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent,
                 booking_enquiry_info_component_1.BookingEnquiryInfoComponent,
-                add_guest_card_component_1.AddGuestCardComponent
+                add_guest_card_component_1.AddGuestCardComponent,
+                redeem_laycredit_component_1.RedeemLaycreditComponent,
+                booking_feedback_component_1.BookingFeedbackComponent
             ],
             providers: [common_1.DatePipe]
         })

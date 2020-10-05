@@ -53,6 +53,7 @@ export class FlightCheckoutComponent implements OnInit {
     isSessionTimeOut:boolean=false;
     isShowCardOption:boolean=true;
     isShowPaymentOption:boolean=true;
+    isShowFeedbackPopup:boolean=false;
 
     ngOnInit() {
       window.scroll(0,0);
@@ -187,6 +188,7 @@ export class FlightCheckoutComponent implements OnInit {
         this.bookingLoader=false;
         this.progressStep = { step1:true, step2:true, step3:true }
         this.bookingResult=res;
+        this.isShowFeedbackPopup = true; 
       },(error)=>{
         if(error.status==422){
           this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
