@@ -38,13 +38,15 @@
               </a>
           </li>
           <li>
-            <!-- <a href="javascript:void(0);"  [routerLinkActive]="['active_link']">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
-                Co - Travellers
-            </a> -->
              <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
                 Co - Travellers
+            </a> 
+          </li>
+          <li>
+             <a [routerLink]="['/account/my-wallet']" [routerLinkActive]="['active_link']">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_my_wallet.svg" alt="My Wallet Icon">
+                My Wallet
             </a> 
           </li>
           <li>
@@ -58,6 +60,12 @@
                   </ul>
               </div>
           </li>
+          <li>
+            <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
+               <img src="{{s3BucketUrl}}assets/images/icon/ic_subscription.svg" alt="Subscription Icon">
+               Subscription
+           </a> 
+         </li>
       </ul>
   </div>
 </div>

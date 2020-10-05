@@ -37,6 +37,10 @@ var FlightSummaryComponent = /** @class */ (function () {
         if (this.checkAvailability == 'local') {
             this.getFlightSummary();
         }
+        else if (this.checkAvailability == 'trip-details') {
+            this.flightDetail = this.flightSummary;
+            this.flightSummaryLoader = false;
+        }
         else {
             this.airRevalidate();
         }
@@ -105,6 +109,9 @@ var FlightSummaryComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], FlightSummaryComponent.prototype, "checkAvailability");
+    __decorate([
+        core_1.Input()
+    ], FlightSummaryComponent.prototype, "flightSummary");
     __decorate([
         core_1.Output()
     ], FlightSummaryComponent.prototype, "getRouteDetails");

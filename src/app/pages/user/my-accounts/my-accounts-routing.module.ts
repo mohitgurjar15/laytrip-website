@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListBookingsComponent } from './bookings/list-bookings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
 import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SearchTripComponent } from './search-trip/search-trip.component';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
 
 const routes: Routes = [
@@ -30,6 +32,14 @@ const routes: Routes = [
   {
     path: 'settings/change-password',
     component: ChangePasswordComponent,
+  },
+  {
+    path: 'search-booking',
+    component: SearchTripComponent,
+  },
+  {
+    path: 'trip/:id',
+    component: FlightTripDetailComponent,
   },
  
 ];

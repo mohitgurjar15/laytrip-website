@@ -18,6 +18,10 @@ import { ViewHistoryComponent } from './payment-history/view-history/view-histor
 import { FlightModule } from '../../flight/flight.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { TravellerFormComponent } from './travellers/traveller-form/traveller-form.component';
+import { MyWalletComponent } from './my-wallet/my-wallet.component';
+import { SearchTripComponent } from './search-trip/search-trip.component';
+import { SearchTripWithIdComponent } from './search-trip/search-trip-with-id/search-trip-with-id.component';
+import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
 
 
 @NgModule({
@@ -34,6 +38,10 @@ import { TravellerFormComponent } from './travellers/traveller-form/traveller-fo
     HistoryListComponent,
     ViewHistoryComponent,
     ChangePasswordComponent,
+    MyWalletComponent,
+    SearchTripComponent,
+    SearchTripWithIdComponent,
+    FlightTripDetailComponent,
   ],
   imports: [
     CommonModule,

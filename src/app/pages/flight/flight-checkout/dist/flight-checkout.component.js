@@ -39,7 +39,7 @@ var FlightCheckoutComponent = /** @class */ (function () {
         this.isSessionTimeOut = false;
         this.isShowCardOption = true;
         this.isShowPaymentOption = true;
-        this.isShowFeedbackPopup = true;
+        this.isShowFeedbackPopup = false;
     }
     FlightCheckoutComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -155,6 +155,7 @@ var FlightCheckoutComponent = /** @class */ (function () {
         };
         this.flightService.bookFligt(bookingData).subscribe(function (res) {
             _this.bookingStatus = 1;
+            _this.bookingId = res.laytrip_booking_id;
             _this.bookingLoader = false;
             _this.progressStep = { step1: true, step2: true, step3: true };
             _this.bookingResult = res;
@@ -223,6 +224,11 @@ var FlightCheckoutComponent = /** @class */ (function () {
     };
     FlightCheckoutComponent.prototype.sessionTimeout = function (event) {
         this.isSessionTimeOut = event;
+    };
+    FlightCheckoutComponent.prototype.feedbackToggle = function (event) {
+        if (event) {
+            this.isShowFeedbackPopup = false;
+        }
     };
     FlightCheckoutComponent = __decorate([
         core_1.Component({
