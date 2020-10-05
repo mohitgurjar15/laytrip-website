@@ -47,3 +47,18 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   outline: none;
   box-shadow: none;
 }
+
+.detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .text_field .ui-calendar {
+  width: 100%;
+}
+
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .ui-calendar {
+  width: 100%;
+}
+
+.cmn_add_edit_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm .add_card_form .form_row .form_field .ui-calendar {
+  width: 100%;
+}
+.cmn_add_edit_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm .add_card_form .form_row .form_field .text_field .phone_no .code {
+  width: 150px;
+}

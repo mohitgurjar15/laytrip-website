@@ -36,7 +36,7 @@ export class TravelerService{
 
     getTravelers(){
         
-        return this.http.get(environment.apiUrl+'v1/traveler/list-tavelers',this.setHeaders())
+        return this.http.get(environment.apiUrl+'v1/traveler/list-traveler',this.setHeaders())
         .pipe(
             retry(1),
             catchError(this.handleError)
@@ -58,5 +58,9 @@ export class TravelerService{
           errorMessage = {status:error.status,message:error.error.message};
         }
         return throwError(errorMessage);
+    }
+
+    delete(id){
+        return this.http.delete(environment.apiUrl +'v1/traveler/'+ id, this.setHeaders());
     }
 }

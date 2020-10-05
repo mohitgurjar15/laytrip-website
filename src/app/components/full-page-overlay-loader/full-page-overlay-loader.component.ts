@@ -9,7 +9,8 @@ export class FullPageOverlayLoaderComponent implements OnInit {
 
   constructor() { }
   @Input() image:string;
-  @Input() title:string;
+  @Input() module:string;
+  @Input() type:string;
 
   ngOnInit() {
   }

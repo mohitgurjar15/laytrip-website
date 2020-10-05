@@ -11,8 +11,9 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var MyAccountsNavComponent = /** @class */ (function () {
-    function MyAccountsNavComponent(router) {
+    function MyAccountsNavComponent(router, commonFunction) {
         this.router = router;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.profile_pic = '';
         this._login_user_info = [];
@@ -23,7 +24,6 @@ var MyAccountsNavComponent = /** @class */ (function () {
     };
     MyAccountsNavComponent.prototype.ngDoCheck = function () {
         this._login_user_info = jwt_helper_1.getUserDetails(localStorage.getItem("_lay_sess"));
-        console.log(this._login_user_info);
         this.profile_pic = this._login_user_info.profilePic;
         this.checkUser();
     };

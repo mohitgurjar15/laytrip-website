@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
 import { getUserDetails } from '../../../../_helpers/jwt.helper';
 
@@ -16,15 +17,15 @@ export class MyAccountsNavComponent implements OnInit {
 
   public defaultImage = this.s3BucketUrl+'assets/images/profile_im.svg';
 
-  constructor( public router: Router ) { }
+  constructor( public router: Router,
+    public commonFunction: CommonFunction,
+    ) { }
 
   ngOnInit() {
   }
   
   ngDoCheck(){  
     this._login_user_info =  getUserDetails(localStorage.getItem("_lay_sess"));
-    console.log(this._login_user_info)
-
     this.profile_pic = this._login_user_info.profilePic;
     this.checkUser();
   }

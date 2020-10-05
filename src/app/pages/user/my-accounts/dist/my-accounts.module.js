@@ -15,22 +15,50 @@ var my_accounts_nav_component_1 = require("./my-accounts-nav/my-accounts-nav.com
 var forms_1 = require("@angular/forms");
 var ng_select_1 = require("@ng-select/ng-select");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-var my_bookings_component_1 = require("./my-bookings/my-bookings.component");
-var co_accounts_component_1 = require("./co-accounts/co-accounts.component");
+var list_traveller_component_1 = require("./travellers/list-traveller.component");
+var list_bookings_component_1 = require("./bookings/list-bookings.component");
+var flights_component_1 = require("./bookings/flights/flights.component");
+var hotels_component_1 = require("./bookings/hotels/hotels.component");
+var accommodations_component_1 = require("./bookings/accommodations/accommodations.component");
+var calendar_1 = require("primeng/calendar");
+var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
+var history_list_component_1 = require("./payment-history/history-list/history-list.component");
+var view_history_component_1 = require("./payment-history/view-history/view-history.component");
+var flight_module_1 = require("../../flight/flight.module");
+var change_password_component_1 = require("./change-password/change-password.component");
+var traveller_form_component_1 = require("./travellers/traveller-form/traveller-form.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
     MyAccountsModule = __decorate([
         core_1.NgModule({
-            declarations: [profile_component_1.ProfileComponent, my_accounts_nav_component_1.MyAccountsNavComponent, my_bookings_component_1.MyBookingsComponent, co_accounts_component_1.CoAccountsComponent],
+            declarations: [
+                profile_component_1.ProfileComponent,
+                my_accounts_nav_component_1.MyAccountsNavComponent,
+                list_bookings_component_1.ListBookingsComponent,
+                list_traveller_component_1.ListTravellerComponent,
+                traveller_form_component_1.TravellerFormComponent,
+                flights_component_1.FlightsComponent,
+                hotels_component_1.HotelsComponent,
+                accommodations_component_1.AccommodationsComponent,
+                list_payment_history_component_1.ListPaymentHistoryComponent,
+                history_list_component_1.HistoryListComponent,
+                view_history_component_1.ViewHistoryComponent,
+                change_password_component_1.ChangePasswordComponent,
+            ],
             imports: [
                 common_1.CommonModule,
                 my_accounts_routing_module_1.MyAccountsRoutingModule,
+                forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
                 ng_select_1.NgSelectModule,
-                ng_bootstrap_1.NgbModule
+                ng_bootstrap_1.NgbModule,
+                calendar_1.CalendarModule,
+                flight_module_1.FlightModule,
             ],
-            providers: [common_1.DatePipe]
+            providers: [common_1.DatePipe, ng_bootstrap_1.NgbActiveModal],
+            schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA],
+            entryComponents: [traveller_form_component_1.TravellerFormComponent]
         })
     ], MyAccountsModule);
     return MyAccountsModule;

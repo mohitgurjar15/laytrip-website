@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { GenericService } from '../../services/generic.service';
 @Component({
   selector: 'app-add-card',
@@ -12,10 +13,11 @@ export class AddCardComponent implements OnInit {
 
   constructor(
     private genericService: GenericService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) { }
   @Input() showAddCardForm: boolean;
-  @Output() emitNewCard = new EventEmitter()
+  @Output() emitNewCard = new EventEmitter();
   // @ViewChild('cardAddForm') cardAddFormElement: ElementRef;
   //@ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
   disabledSavecardbutton: boolean = true;
@@ -29,6 +31,7 @@ export class AddCardComponent implements OnInit {
     displayFormat: 'MM/YYYY'
   };
   saveCardLoader:boolean=false;
+  expiryMinDate=new Date();
 
   ngOnInit() {
 
@@ -91,13 +94,12 @@ export class AddCardComponent implements OnInit {
     if (this.cardForm.invalid) {
       return;
     } 
-    console.log(moment(this.cardForm.controls.expiry.value.startDate).format('MM/YYYY'))
     let cardData={
       first_name: this.cardForm.controls.first_name.value,
       last_name: this.cardForm.controls.last_name.value,
       card_cvv: this.cardForm.controls.card_cvv.value,
       card_number: this.cardForm.controls.card_number.value,
-      expiry : moment(this.cardForm.controls.expiry.value.startDate).format('MM/YYYY')
+      expiry : moment(this.cardForm.controls.expiry.value).format('MM/YYYY')
     }
     this.saveCard(cardData);
   }
@@ -105,11 +107,12 @@ export class AddCardComponent implements OnInit {
   saveCard(cardData) {
     this.saveCardLoader=true;
     this.genericService.saveCard(cardData).subscribe((res: any) => {
-      console.log(res);
+      //this.cardForm.reset();
       this.emitNewCard.emit(res);
       this.saveCardLoader=false;
-    }, (err => {
+    }, (error => {
       this.saveCardLoader=false;
+      this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
     })
     );
   }

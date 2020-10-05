@@ -127,4 +127,13 @@ export class FlightService {
             catchError(this.handleError)
         );
     }
+
+    addFeedback(payload){
+        return this.http.post(`${environment.apiUrl}v1/booking-feedback`, payload, this.commonFunction.setHeaders())
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    
 }

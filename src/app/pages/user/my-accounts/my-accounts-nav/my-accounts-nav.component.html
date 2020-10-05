@@ -6,7 +6,7 @@
             </span>
             <div class="member_info">
                 <h6>{{_login_user_info.username}}</h6>
-                <p>Member since June 2020</p>
+                <p>Member since {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD')  }}</p>
             </div>
         </div>
   </div>
@@ -20,7 +20,7 @@
               </a>
           </li>
           <li>
-              <a href="javascript:void(0);" [routerLinkActive]="['active_link']">
+              <a  [routerLink]="['/account/payment']" [routerLinkActive]="['active_link']">
                   <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon">
                   Payment History
               </a>
@@ -38,10 +38,14 @@
               </a>
           </li>
           <li>
-            <a [routerLink]="['/account/co-accounts']" [routerLinkActive]="['active_link']">
+            <!-- <a href="javascript:void(0);"  [routerLinkActive]="['active_link']">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
                 Co - Travellers
-            </a>
+            </a> -->
+             <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
+                Co - Travellers
+            </a> 
           </li>
           <li>
               <div class="dropdown">
@@ -49,19 +53,10 @@
                       <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
                       Settings
                   </a>
-                  <ul class="dropdown-menu">
-                      <li><a href="javascript:void(0);">One</a></li>
-                      <li><a href="javascript:void(0);">Two</a></li>
-                      <li><a href="javascript:void(0);">Three</a></li>
+                  <ul class="dropdown-menu" >
+                      <li><a [routerLink]="['/account/settings/change-password']"  [routerLinkActive]="['active_link']">Change Password</a></li>                     
                   </ul>
               </div>
-          </li>
-        
-          <li>
-            <a  href="javascript:void(0);" (click)="onLoggedout()">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_logout.svg" alt="Logout Icon">
-                Logout
-            </a>
           </li>
       </ul>
   </div>

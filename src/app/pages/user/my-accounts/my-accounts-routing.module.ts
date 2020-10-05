@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ListBookingsComponent } from './bookings/list-bookings.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MyBookingsComponent } from './my-bookings/my-bookings.component';
-import { CoAccountsComponent } from './co-accounts/co-accounts.component';
+import { ListTravellerComponent } from './travellers/list-traveller.component';
 
 const routes: Routes = [
   {
@@ -15,11 +17,19 @@ const routes: Routes = [
   },
   {
     path:'bookings',
-    component:MyBookingsComponent
+    component:ListBookingsComponent
   },
   {
-    path: 'co-accounts',
-    component: CoAccountsComponent,
+    path: 'travellers',
+    component: ListTravellerComponent,
+  },
+  {
+    path: 'payment',
+    component: ListPaymentHistoryComponent,
+  },
+  {
+    path: 'settings/change-password',
+    component: ChangePasswordComponent,
   },
  
 ];

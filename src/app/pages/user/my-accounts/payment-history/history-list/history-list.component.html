@@ -1,0 +1,125 @@
+<div class="card-header" role="tab" id="heading-Active-pay">
+  <h5 class="mb-0">
+      <a data-toggle="collapse" href="#collapse-Active-pay" aria-expanded="true" aria-controls="collapse-Active-pay">
+          Active Payment
+      </a>
+  </h5>
+</div>
+<div id="collapse-Active-pay" class="collapse show" data-parent="#payment_content" role="tabpanel" aria-labelledby="heading-Active-pay">
+  <div class="card-body">
+   
+    <div class="block_pay_list_inner">
+        <div class="block_booking_list_inner">
+            <div class="block_nobooking_available" *ngIf="notFound && !loading">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
+                <h5>No Payment Available</h5>
+            </div>
+            <div class="pay_listing" *ngIf="loading">
+                <div class="list_top">
+                    <div class="list_left w-100">
+                        <ul class="w-100">
+                            <li class="w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list_right" style="flex-flow: column;">
+                        <p class="fb_animation w-100 mb-0"></p>
+                        <p class="fb_animation w-100 mb-0"></p>
+                    </div>
+                </div>
+                <div class="list_btm">
+                    <div class="grid_block w-100">
+                        <ul>
+                            <li class="fb_medium w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                            <li class="w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_block w-100">
+                        <ul>
+                            <li class="fb_medium w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                            <li class="w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_block w-100">
+                        <ul>
+                            <li class="fb_medium w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                            <li class="w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_block w-100">
+                        <span>
+                            <p class="fb_animation w-100 mb-0"></p>
+                        </span>
+                        <p class="fb_animation w-100 mb-0"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="pay_listing"  *ngFor="let item of list | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index;">
+                <div class="list_top">
+                    <div class="list_left">
+                        <ul>
+                            <li>Total Paid: <span>$ {{item.paidAmount | number : '1.2-2' || 0}}</span></li>
+                            <li>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 25%;"></div>
+                                    <div class="progress_dot" style="left:23%;"></div>
+                                </div>
+                            </li>
+                            <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
+                        </ul>
+                    </div>
+                    <div class="list_right">
+                        <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(item.nextInstalmentDate)  }} days</span></p>
+                        <div class="pay_status">
+                            Pay Early
+                        </div>
+                    </div>
+                </div>
+                <div class="list_btm">
+                    <div class="grid_block">
+                        <ul>
+                            <li class="fb_medium">Order ID: <span>{{item.id || '--'}}</span></li>
+                            <li>Order Type: <span>{{ item.module.name | titlecase  }}</span></li>
+                        </ul>
+                    </div>
+                    <div class="grid_block">
+                        <ul>
+                            <li class="fb_medium">Total Amount: <span>${{item.totalAmount | number : '1.2-2' || 0}}</span></li>
+                            <li>Instalment: <span>${{item.bookingInstalments[0].amount | number : '1.2-2' || 0}} / Weekly</span></li>
+                        </ul>
+                    </div>
+                    <div class="grid_block">
+                            <ul>
+                                <li>Payment Start: <span>{{ flightCommonFunction.getPaymentStartDate(item.bookingInstalments) }}</span></li> 
+                                <li>Payment End: <span>{{ flightCommonFunction.getPaymentEndDate(item.bookingInstalments) }}</span></li>
+                            </ul>
+                    </div>
+                    <div class="grid_block">
+                        <span style="display: none;">Pending</span>
+                        <a href="javascript:void(0);" data-toggle="modal" data-target="#payment_view_modal" (click)="viewDetailClick(item)">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="listLength"
+            [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+            (pageChange)="pageChange($event)">
+            </ngb-pagination>
+
+        </div>
+    </div>
+  </div>
+</div>
+<app-view-history [item]="item"></app-view-history>

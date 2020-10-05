@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../environments/environment");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
+var moment = require("moment");
 var UserService = /** @class */ (function () {
     function UserService(http, commonFunction) {
         this.http = http;
@@ -78,11 +79,39 @@ var UserService = /** @class */ (function () {
     UserService.prototype.resetPassword = function (data) {
         return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
     };
+    UserService.prototype.changePassword = function (data) {
+        return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
+    };
     UserService.prototype.updateProfile = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
     };
     UserService.prototype.getProfile = function () {
         return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getBookings = function (pageNumber, limit) {
+        return this.http.get(this.apiURL + "v1/booking/user-booking-list?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getPaymentHistory = function (pageNumber, limit, filterForm) {
+        var queryString = "";
+        if (filterForm.bookingId) {
+            queryString += (filterForm.bookingId) ? '&booking_id=' + filterForm.bookingId : '';
+        }
+        if (filterForm.module) {
+            queryString += (filterForm.module.id) ? '&booking_type=' + filterForm.module.id : '';
+        }
+        if (filterForm.start_date) {
+            queryString += (filterForm.start_date) ? '&payment_start_date=' + moment(filterForm.start_date).format("YYYY-MM-DD") : '';
+        }
+        if (filterForm.end_date) {
+            queryString += (filterForm.end_date) ? '&payment_end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
+        }
+        return this.http.get(this.apiURL + "v1/booking/payment?limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getModules = function (pageNumber, limit) {
+        return this.http.get(this.apiURL + "v1/modules?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getTraveller = function (travelerId) {
+        return this.http.get(environment_1.environment.apiUrl + "v1/traveler/get-traveler/" + travelerId, this.commonFunction.setHeaders());
     };
     UserService = __decorate([
         core_1.Injectable({

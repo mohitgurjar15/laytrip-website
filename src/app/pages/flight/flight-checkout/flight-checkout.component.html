@@ -1,28 +1,41 @@
-<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
-<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
+<app-checkout-progress  [progressStep]="progressStep"></app-checkout-progress>
+<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
   <div class="container">
       <div class="row">
           <div class="col-lg-8">
               <div class="detail_info_left" *ngIf="bookingStatus==0">
                   <div class="block_payment">
-                      <app-booking-timer [config]="bookingTimerConfig"></app-booking-timer>
+                      <app-booking-timer (sessionTimeout)="sessionTimeout($event)" [config]="bookingTimerConfig"></app-booking-timer>
                       <div class="block_pay_info">
                           <div class="block_travellers">
                               <h6>Travellers</h6>
                               <div class="traveller_detail" *ngFor="let traveler of travelerList">
-                                  <span>{{traveler.firstName}} {{traveler.firstName}}</span>
+                                  <span>{{traveler.firstName}} {{traveler.lastName}}</span>
                                   <a href="javascript:void(0);">Send E-ticket</a>
                               </div>
                           </div>
                         </div>
                         <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
-                            <app-payment-mode *ngIf="flightSummary.length" [flightSummary]="flightSummary" (selectInstalmentMode)="selectInstalmentMode($event)" (applyLaycredit)="applyLaycredit($event)" (getInstalmentData)="getInstalmentData($event)" ></app-payment-mode>
+                            <div class="block_payment_mode">
+                                <div class="block_title_section">
+                                    <h5>Choose Payment Mode</h5>
+                                </div>
+                                <div class="block_detail">
+                                    <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                    <app-payment-mode 
+                                        *ngIf="flightSummary.length && isShowPaymentOption" 
+                                        [flightSummary]="flightSummary" 
+                                        (selectInstalmentMode)="selectInstalmentMode($event)" 
+                                        (getInstalmentData)="getInstalmentData($event)">
+                                    </app-payment-mode>
+                                </div>
+                            </div>
                         </div>
                         <div class="block_pay_info">
                             <app-booking-enquiry-info></app-booking-enquiry-info>
                         </div>
                           <!-- <app-redeem-laycredit></app-redeem-laycredit> -->
-                        <div class="block_pay_info">
+                        <div class="block_pay_info" *ngIf="isShowCardOption">
                           <div class="block_card_select">
                               <div class="block_title_section" >
                                   <h5 *ngIf="userInfo.roleId!=7">Select Credit Card</h5>
@@ -34,7 +47,8 @@
                                   <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
                                       <a href="javascript:void(0);" (click)="toggleAddcardForm()" >+ Add New Card</a>
                                   </div>
-                                  <app-add-card *ngIf="showAddCardForm" (emitNewCard)="emitNewCard($event)"></app-add-card>
+                                  <app-add-card *ngIf="userInfo.roleId!=7 && showAddCardForm" (emitNewCard)="emitNewCard($event)"></app-add-card>
+                                  <app-add-guest-card *ngIf="userInfo.roleId==7 && showAddCardForm" (emitGuestCardDetails)="emitGuestCardDetails($event)" [validateCardDetails]="validateCardDetails"></app-add-guest-card>
                               </div>
                           </div>
                         </div>
@@ -52,19 +66,22 @@
                       </ul>
                   </div>
                   <div class="btn_payment">
-                      <!-- <a href="javascript:void(0)" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a> -->
                       <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                       
                   </div>
               </div>
               <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
-              <app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
+              
           </div>
           <div class="col-lg-4">
-            <app-flight-summary (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
+            <app-flight-summary (flightAvailable)="flightAvailable($event)" showPartialPayemntOption="instalmentMode" (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
           </div>
       </div>
   </div>
 </section>
 
-<app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png" title="Flights"></app-full-page-overlay-loader>
+<app-flight-booking-failed *ngIf="bookingStatus==2"  ></app-flight-booking-failed>
+<app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png"  module="Flight" type="Booking"></app-full-page-overlay-loader>
+<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
+<app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>
+<app-booking-feedback *ngIf="isShowFeedbackPopup"></app-booking-feedback>

@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.FlightTravelerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
+var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var FlightTravelerComponent = /** @class */ (function () {
     function FlightTravelerComponent(travelerService, route, cookieService, toastr, router) {
         this.travelerService = travelerService;
@@ -29,16 +30,22 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.is_traveller = false;
         this.totalTraveler = 0;
         this._travellersCountValid = false;
+        this.isFlightNotAvailable = false;
+        this.is_updateToken = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
+        window.scroll(0, 0);
         this.loading = true;
         this.getTravelers();
-        this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-        this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+        if (sessionStorage.getItem('_itinerary')) {
+            this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
+            this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+        }
         this.routeCode = this.route.snapshot.paramMap.get('rc');
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
+        this._adults = this._childs = this._infants = [];
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {
             this.is_traveller = true;
@@ -83,10 +90,15 @@ var FlightTravelerComponent = /** @class */ (function () {
         else {
             var errorMessage = "You have to select " + Number(this._itinerary.adult) + " Adult, "
                 + Number(this._itinerary.child) + " Child " + Number(this._itinerary.infant) + " Infant";
-            this.toastr.error(errorMessage, 'Invalid Criteria');
+            this.toastr.error(errorMessage, 'Invalid Criteria', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
     };
     FlightTravelerComponent.prototype.checkUser = function () {
+        this.userDetails = jwt_helper_1.getLoginUserInfo();
+        if (this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken) {
+            this.is_updateToken = this.is_traveller = true;
+            this.getTravelers();
+        }
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {
             this.isLoggedIn = true;
@@ -98,6 +110,12 @@ var FlightTravelerComponent = /** @class */ (function () {
             this.loading = true;
             this.getTravelers();
         }
+    };
+    FlightTravelerComponent.prototype.flightAvailable = function (event) {
+        this.isFlightNotAvailable = event;
+    };
+    FlightTravelerComponent.prototype.onActivate = function (event) {
+        window.scroll(0, 0);
     };
     FlightTravelerComponent = __decorate([
         core_1.Component({

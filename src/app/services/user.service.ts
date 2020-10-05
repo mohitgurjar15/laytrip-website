@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
+import * as moment from 'moment';
 
 
 @Injectable({
@@ -106,11 +107,43 @@ export class UserService {
   resetPassword(data) {
     return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
   }  
-
+  changePassword(data) {
+    return this.http.put(this.apiURL + 'v1/auth/change-password', data,  this.commonFunction.setHeaders());
+  }  
   updateProfile(data) {
     return this.http.put(this.apiURL+'v1/auth/profile', data,  this.commonFunction.setHeaders());
   }
   getProfile() {
     return this.http.get(this.apiURL +'v1/auth/profile/',  this.commonFunction.setHeaders());
+  }
+
+  getBookings(pageNumber,limit) {
+    return this.http.get(`${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  }
+
+  getPaymentHistory(pageNumber,limit,filterForm) {
+
+    let queryString = "";
+    if(filterForm.bookingId){
+      queryString += (filterForm.bookingId) ? '&booking_id='+filterForm.bookingId : '';
+    }
+    if(filterForm.module){
+      queryString += (filterForm.module.id) ? '&booking_type='+filterForm.module.id : '';
+    }
+    if(filterForm.start_date){
+      queryString += (filterForm.start_date) ? '&payment_start_date='+moment(filterForm.start_date).format("YYYY-MM-DD") : '';
+    }
+    if(filterForm.end_date){
+      queryString += (filterForm.end_date) ? '&payment_end_date='+moment(filterForm.end_date).format("YYYY-MM-DD") : '';
+    }
+    return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders())
+  }
+
+  getModules(pageNumber, limit) {
+    return this.http.get(`${this.apiURL}v1/modules?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  }
+  
+  getTraveller(travelerId) {
+    return this.http.get(`${environment.apiUrl}v1/traveler/get-traveler/${travelerId}`, this.commonFunction.setHeaders())
   }
 }

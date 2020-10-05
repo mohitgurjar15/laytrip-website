@@ -350,7 +350,7 @@ select {
             }
 
             @media(max-width: 991px) {
-                padding: 0 10px 20px;
+                padding: 10px 10px 20px;
                 border-radius: 0 0 20px 20px;
                 position: absolute;
                 top: 100%;
@@ -383,7 +383,7 @@ select {
                         padding: 0;
 
                         &:hover {
-                            color: $secondary-color;
+                            color: $text-orange;
                         }
 
                         @media(max-width: 1199px) {
@@ -419,10 +419,39 @@ select {
 
                     a {
                         padding: 0;
-                        color: $text-orange;
+                        color: $text-grey;
 
                         img {
                             margin-right: 5px;
+
+                            &.active-icon {
+                                display: none;
+                            }
+                        }
+
+                        &:hover {
+
+                            img {
+                                &.active-icon {
+                                    display: inline-block;
+                                }
+
+                                &.default-icon {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        &.active {
+                            img {
+                                &.active-icon {
+                                    display: inline-block;
+                                }
+
+                                &.default-icon {
+                                    display: none;
+                                }
+                            }
                         }
                     }
 
@@ -537,38 +566,120 @@ select {
                         border-left: 1px solid $border-color;
                         padding: 0px 0 0px 15px;
 
-
                         a {
-                            line-height: 30px;
-                            padding: 0 15px;
-                            color: $text-white;
-                            background: $secondary-color;
-                            border-radius: 6px;
+                            font-size: 14px;
+                            color: $text-grey;
                             font-weight: 400;
-                            position: relative;
-                            z-index: 9;
-                            overflow: hidden;
 
-                            &::before {
-                                content: "";
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 0%;
-                                background: $text-grey;
-                                z-index: -1;
-                                transition: 0.8s;
-                                border-radius: 0 0 50% 50%;
+                            img {
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 50%;
+                                margin: 0 5px 0 0;
                             }
 
-                            &:hover {
+                            &.login_btn {
+                                line-height: 30px;
+                                padding: 0 15px;
+                                color: $text-white;
+                                background: $secondary-color;
+                                border-radius: 6px;
+                                font-weight: 400;
+                                position: relative;
+                                z-index: 9;
+                                overflow: hidden;
 
-                                &:before {
-                                    height: 190%;
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 0%;
+                                    background: $text-grey;
+                                    z-index: -1;
+                                    transition: 0.8s;
+                                    border-radius: 0 0 50% 50%;
+                                }
+
+                                &:hover {
+
+                                    &:before {
+                                        height: 190%;
+                                    }
                                 }
                             }
                         }
+
+                        .dropdown {
+                            &.account_ddown {
+                                .dropdown-menu {
+                                    left: auto;
+                                    right: 0;
+                                    top: 120%;
+                                    border: 1px solid $box-border-color;
+                                    border-radius: 5px;
+
+                                    &:before {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 9px solid transparent;
+                                        border-right: 9px solid transparent;
+                                        border-bottom: 9px solid $background-white;
+                                        position: absolute;
+                                        top: -9px;
+                                        right: 20px;
+                                        content: '';
+                                        z-index: 2;
+                                    }
+
+                                    &:after {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 10px solid transparent;
+                                        border-right: 10px solid transparent;
+                                        border-bottom: 10px solid $box-border-color;
+                                        position: absolute;
+                                        top: -10px;
+                                        right: 19px;
+                                        content: '';
+                                    }
+
+                                    li {
+                                        border-bottom: 1px solid $box-border-color;
+
+                                        a {
+                                            color: $text-darkblue;
+
+                                            &:hover {
+                                                color: $text-white;
+                                            }
+                                        }
+
+                                        &:first-child {
+                                            border-radius: 5px 5px 0 0;
+
+                                            a {
+                                                border-radius: 5px 5px 0 0;
+                                            }
+                                        }
+
+                                        &:last-child {
+                                            border-radius: 0 0 5px 5px;
+                                            border-bottom: none;
+
+                                            a {
+                                                border-radius: 0 0 5px 5px;
+                                            }
+                                        }
+
+
+                                    }
+                                }
+                            }
+
+                        }
+
 
                         @media(max-width: 991px) {
                             width: 100%;
@@ -648,35 +759,121 @@ select {
         }
 
         a {
-            line-height: 30px;
-            padding: 0 10px;
-            color: $text-white;
-            background: $secondary-color;
-            border-radius: 6px;
+            font-size: 14px;
+            color: $text-grey;
             font-weight: 400;
-            position: relative;
-            z-index: 9;
-            overflow: hidden;
 
-            &::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 0%;
-                background: $text-grey;
-                z-index: -1;
-                transition: 0.8s;
-                border-radius: 0 0 50% 50%;
+            img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin: 0 5px 0 0;
             }
 
-            &:hover {
+            &.login_btn {
+                line-height: 30px;
+                padding: 0 10px;
+                color: $text-white;
+                background: $secondary-color;
+                border-radius: 6px;
+                font-weight: 400;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
 
-                &:before {
-                    height: 190%;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 0%;
+                    background: $text-grey;
+                    z-index: -1;
+                    transition: 0.8s;
+                    border-radius: 0 0 50% 50%;
+                }
+
+                &:hover {
+
+                    &:before {
+                        height: 190%;
+                    }
                 }
             }
+        }
+
+        .dropdown {
+            &.account_ddown {
+                .dropdown-menu {
+                    left: auto !important;
+                    right: 0;
+                    top: 120%;
+                    border: 1px solid $box-border-color;
+                    border-radius: 5px;
+                    padding: 0;
+
+                    &:before {
+                        width: 0;
+                        height: 0;
+                        border-left: 9px solid transparent;
+                        border-right: 9px solid transparent;
+                        border-bottom: 9px solid $background-white;
+                        position: absolute;
+                        top: -9px;
+                        right: 20px;
+                        content: '';
+                        z-index: 2;
+                    }
+
+                    &:after {
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        border-bottom: 10px solid $box-border-color;
+                        position: absolute;
+                        top: -10px;
+                        right: 19px;
+                        content: '';
+                    }
+
+                    li {
+                        border-bottom: 1px solid $box-border-color;
+
+                        a {
+                            color: $text-darkblue;
+                            display: block;
+                            padding: 10px;
+
+                            &:hover {
+                                color: $text-white;
+                                background: $background-grey;
+                            }
+                        }
+
+                        &:first-child {
+                            border-radius: 5px 5px 0 0;
+
+                            a {
+                                border-radius: 5px 5px 0 0;
+                            }
+                        }
+
+                        &:last-child {
+                            border-radius: 0 0 5px 5px;
+                            border-bottom: none;
+
+                            a {
+                                border-radius: 0 0 5px 5px;
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
         }
     }
 }
@@ -989,7 +1186,7 @@ select {
                                                     height: 30px;
                                                     margin-bottom: 0px;
                                                     font-size: 20px;
-                                                    color: $text-darkblue;
+                                                    color: $text-black;
                                                     font-weight: 600;
                                                     padding: 0 15px;
                                                 }
@@ -1004,10 +1201,14 @@ select {
 
                                             .flight_form {
                                                 width: 49%;
+                                                position: relative;
+                                                z-index: 1;
                                             }
 
                                             .flight_to {
                                                 width: 49%;
+                                                position: relative;
+                                                z-index: 1;
                                             }
 
                                             .switch_btn {
@@ -1016,10 +1217,11 @@ select {
                                                 background: $background-white;
                                                 border: 1px solid $box-border-color;
                                                 position: absolute;
-                                                top: 60%;
+                                                top: 50%;
                                                 left: 50%;
                                                 transform: translate(-50%, -50%);
                                                 border-radius: 50%;
+                                                z-index: 9;
 
                                                 img {
                                                     width: 15px;
@@ -1064,8 +1266,8 @@ select {
                                                     border: none;
                                                     height: 35px;
                                                     margin-bottom: 1px;
-                                                    font-size: 18px;
-                                                    color: $text-darkblue;
+                                                    font-size: 20px;
+                                                    color: $text-black;
                                                     font-weight: 600;
                                                     padding: 0 15px;
                                                 }
@@ -1147,7 +1349,7 @@ select {
                                                         display: flex;
                                                         line-height: 30px;
                                                         font-size: 10px;
-                                                        color: $text-darkblue;
+                                                        color: $text-black;
                                                         position: relative;
                                                         padding: 0 20px;
                                                         cursor: pointer;
@@ -1167,7 +1369,7 @@ select {
                                                             font-size: 20px;
                                                             font-weight: 600;
                                                             padding: 0 10px 0 0;
-                                                            color: $text-darkblue;
+                                                            color: $text-black;
                                                         }
 
                                                         .drop_aerrow {
@@ -1268,15 +1470,15 @@ select {
                                                                         width: 30px;
                                                                         height: 30px;
                                                                         background: $background-white;
-                                                                        border: 1px solid $secondary-color;
+                                                                        border: 1px solid $text-light-grey;
                                                                         border-radius: 5px;
-                                                                        color: $secondary-color;
+                                                                        color: $text-light-grey;
                                                                         padding: 0;
                                                                         font-size: 18px;
 
-                                                                        &.un_active {
-                                                                            border: 1px solid $text-light-grey;
-                                                                            color: $text-light-grey;
+                                                                        &:hover {
+                                                                            border: 1px solid $secondary-color;
+                                                                            color: $secondary-color;
                                                                         }
                                                                     }
 
@@ -1294,11 +1496,16 @@ select {
                                                                         width: 30px;
                                                                         height: 30px;
                                                                         background: $background-white;
-                                                                        border: 1px solid $secondary-color;
+                                                                        border: 1px solid $text-light-grey;
                                                                         border-radius: 5px;
-                                                                        color: $secondary-color;
+                                                                        color: $text-light-grey;
                                                                         padding: 0;
                                                                         font-size: 18px;
+
+                                                                        &:hover {
+                                                                            border: 1px solid $secondary-color;
+                                                                            color: $secondary-color;
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -1487,7 +1694,7 @@ select {
         display: inline-block;
         font-size: 15px;
         color: $text-grey;
-        font-weight: 300;
+        font-weight: 400;
         margin: 0;
     }
 }
@@ -1584,7 +1791,7 @@ select {
                                 font-size: 24px;
                                 font-weight: 700;
                                 color: $text-white;
-                                margin: 0 0 5px;
+                                margin: 0 0 10px;
                             }
 
                             span {
@@ -1751,7 +1958,7 @@ select {
             margin: 25px 0 0;
 
             span {
-                font-size: 20px;
+                font-size: 24px;
                 color: $text-white;
                 font-weight: 600;
 
@@ -2031,7 +2238,7 @@ select {
 
                                     span {
                                         font-size: 20px;
-                                        font-weight: 600;
+                                        font-weight: 500;
                                         position: relative;
 
                                         &:before {
@@ -2068,9 +2275,9 @@ select {
                                         padding: 0 0 0 10px;
 
                                         span {
-                                            font-size: 20px;
+                                            font-size: 24px;
                                             color: $text-yellow;
-                                            font-weight: 600;
+                                            font-weight: 500;
                                         }
                                     }
                                 }
@@ -2218,7 +2425,7 @@ select {
         }
 
         p {
-            font-size: 15px;
+            font-size: 14px;
             color: $text-white;
             font-weight: 400;
             margin: 0 0 15px;
@@ -2397,17 +2604,17 @@ select {
         padding: 70px 0 0;
     }
 
-    &:after {
-        width: 250px;
-        height: 500px;
-        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/our_mobile_apps_bg.png) no-repeat;
-        position: absolute;
-        top: 50%;
-        right: 0;
-        content: '';
-        transform: translateY(-50%);
-        z-index: 1;
-    }
+    //    &:after {
+    //        width: 250px;
+    //        height: 500px;
+    //        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/our_mobile_apps_bg.png) no-repeat;
+    //        position: absolute;
+    //        top: 50%;
+    //        right: 0;
+    //        content: '';
+    //        transform: translateY(-50%);
+    //        z-index: 1;
+    //    }
 
     .app_intro {
         width: 100%;
@@ -2430,7 +2637,7 @@ select {
         h2 {
             font-size: 52px;
             line-height: 60px;
-            font-weight: 700;
+            font-weight: 600;
             color: $text-darkblue;
 
 
@@ -2449,7 +2656,7 @@ select {
             margin: 10px 0 20px;
             font-size: 14px;
             color: $text-grey;
-            font-weight: 300;
+            font-weight: 400;
 
             span {
                 display: block;
@@ -2521,7 +2728,7 @@ select {
 
                     button {
                         width: auto;
-                        padding: 0 25px;
+                        padding: 0 35px 0 25px;
                         height: 48px;
                         background: $primary-color;
                         border: none;
@@ -2535,7 +2742,7 @@ select {
                         overflow: hidden;
 
                         img {
-                            margin: 0 0 0 30px;
+                            margin: 0 0 0 15px;
                             height: 15px;
                         }
 
@@ -2634,6 +2841,34 @@ select {
             }
         }
     }
+
+    @media(max-width: 991px) {
+
+
+        .app_intro {
+            text-align: center;
+            margin: 0 0 40px;
+
+            .our_subscription {
+                margin: 40px 0 0;
+
+                .subscription {
+                    form {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+
+        .app_im {
+            text-align: center;
+
+            img {
+                width: 50%;
+            }
+        }
+    }
 }
 
 //<!-- Close Our Mobile App Section css -->
@@ -2678,7 +2913,7 @@ select {
                     font-size: 14px;
                     color: $box-border-color;
                     margin: 0;
-                    font-weight: 300;
+                    font-weight: 400;
                     opacity: 0.7;
                 }
 
@@ -2713,6 +2948,7 @@ select {
                                 color: $box-border-color;
                                 margin: 0;
                                 opacity: 0.7;
+                                font-weight: 500;
 
                                 i {
                                     margin-right: 15px;
@@ -2780,7 +3016,7 @@ select {
                             a {
                                 font-size: 14px;
                                 color: $box-border-color;
-                                font-weight: 300;
+                                font-weight: 400;
                                 opacity: 0.7;
 
                                 &:hover {

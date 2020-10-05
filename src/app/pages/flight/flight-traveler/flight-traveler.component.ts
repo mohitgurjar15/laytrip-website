@@ -4,6 +4,7 @@ import { TravelerService } from '../../../services/traveler.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
+import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-flight-traveler',
@@ -26,7 +27,11 @@ export class FlightTravelerComponent implements OnInit {
   totalTraveler = 0;
   _itinerary :any;
   _travellersCountValid :boolean = false;
+  isFlightNotAvailable:boolean=false;
+  is_updateToken = false;
+  userDetails;
 
+  
   constructor(
     private travelerService:TravelerService,
     private route: ActivatedRoute,
@@ -36,23 +41,27 @@ export class FlightTravelerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.loading = true;
     this.getTravelers();
-    this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-    this.totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
+
+    if(sessionStorage.getItem('_itinerary')){
+      this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
+      this.totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
+    }
     this.routeCode = this.route.snapshot.paramMap.get('rc')
   }
   
   
   getTravelers() {
 
+    this._adults = this._childs = this._infants = [];
     let userToken = localStorage.getItem('_lay_sess');
     if(userToken && userToken != 'undefined'){
       this.is_traveller = true;
      
       this.travelerService.getTravelers().subscribe((res:any)=>{
         this.travelers = res.data;
-        
         this.travelers.forEach(element => {
           if(element.user_type == 'adult'){
             this._adults.push(element);
@@ -61,7 +70,7 @@ export class FlightTravelerComponent implements OnInit {
           }else if(element.user_type == 'infant'){
             this._infants.push(element);          
           }
-        });       
+        });  
         this.loading = false;
       })
     } else {
@@ -88,16 +97,25 @@ export class FlightTravelerComponent implements OnInit {
   }
 
   checkTravelesValid() {
+
     if(this._travellersCountValid ){
       this.router.navigate(['/flight/checkout',this.routeCode]);
     } else {
       let errorMessage = "You have to select "+ Number(this._itinerary.adult)+" Adult, "
       + Number(this._itinerary.child)+" Child "+Number(this._itinerary.infant)+" Infant";
-      this.toastr.error(errorMessage, 'Invalid Criteria');
+      this.toastr.error(errorMessage, 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
     }
   }
 
   checkUser(){
+   
+
+    this.userDetails = getLoginUserInfo();
+
+    if(this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken){
+      this.is_updateToken = this.is_traveller = true ;
+      this.getTravelers();
+    } 
     let userToken = localStorage.getItem('_lay_sess');    
     if(userToken && userToken != 'undefined'){
       this.isLoggedIn = true;
@@ -105,10 +123,19 @@ export class FlightTravelerComponent implements OnInit {
   }
   
   ngDoCheck(){
+
     this.checkUser(); 
     if(this.is_traveller === false){
       this.loading = true;
       this.getTravelers();
-    }
+    } 
+  }
+
+  flightAvailable(event){
+    this.isFlightNotAvailable=event;
+  }
+
+  onActivate(event){
+    window.scroll(0,0);
   }
 }

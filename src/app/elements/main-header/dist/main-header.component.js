@@ -9,20 +9,25 @@ exports.__esModule = true;
 exports.MainHeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
+var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var MainHeaderComponent = /** @class */ (function () {
     function MainHeaderComponent(genericService, translate, modalService, router) {
         this.genericService = genericService;
         this.translate = translate;
         this.modalService = modalService;
         this.router = router;
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.langunages = [];
         this.selectedLanunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
         this.isLanunageSet = false;
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
         this.currencies = [];
         this.selectedCurrency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' };
         this.isCurrencySet = false;
         this.isLoggedIn = false;
-        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.totalLayCredit = 0;
+        this.showTotalLayCredit = 0;
+        this._isLayCredit = false;
         var _langunage = localStorage.getItem('_lang');
         var _currency = localStorage.getItem('_curr');
         if (_langunage) {
@@ -52,12 +57,23 @@ var MainHeaderComponent = /** @class */ (function () {
         }
     }
     MainHeaderComponent.prototype.ngOnInit = function () {
+        this.checkUser();
         this.getLangunages();
         this.getCurrencies();
-        this.checkUser();
+        this.loadJquery();
+        if (this.isLoggedIn) {
+            /* if(this.userDetails.roleId!=7){
+              this.totalLaycredit();
+            } */
+        }
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
+        // this.userDetails = getLoginUserInfo();
+        //this.totalLaycredit();
+    };
+    MainHeaderComponent.prototype.ngOnChanges = function () {
+        //this.totalLaycredit();
     };
     /**
      * change user lanunage
@@ -114,12 +130,45 @@ var MainHeaderComponent = /** @class */ (function () {
         this.isLoggedIn = false;
         if (userToken && userToken != 'undefined' && userToken != 'null') {
             this.isLoggedIn = true;
+            this.userDetails = jwt_helper_1.getLoginUserInfo();
+            if (this.userDetails.roleId != 7 && !this._isLayCredit) {
+                this.totalLaycredit();
+            }
+            this.showTotalLayCredit = this.totalLayCredit;
         }
     };
     MainHeaderComponent.prototype.onLoggedout = function () {
-        this.isLoggedIn = false;
+        this.isLoggedIn = this._isLayCredit = false;
+        this.showTotalLayCredit = 0;
         localStorage.removeItem('_lay_sess');
-        this.router.url;
+        this.router.navigate(['/']);
+    };
+    MainHeaderComponent.prototype.loadJquery = function () {
+        // Start sticky header js
+        $(document).ready(function () {
+            if ($(window).width() > 992) {
+                var navbar_height = $('.site_header').outerHeight();
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 30) {
+                        $('.site_header').css('height', navbar_height + 'px');
+                        $('.site_header').addClass("fixed-top");
+                    }
+                    else {
+                        $('.site_header').removeClass("fixed-top");
+                        $('.site_header').css('height', 'auto');
+                    }
+                });
+            }
+        });
+        // Close sticky header js
+    };
+    MainHeaderComponent.prototype.totalLaycredit = function () {
+        var _this = this;
+        this._isLayCredit = true;
+        this.genericService.getAvailableLaycredit().subscribe(function (res) {
+            _this.totalLayCredit = res.total_available_points;
+        }, (function (error) {
+        }));
     };
     MainHeaderComponent = __decorate([
         core_1.Component({

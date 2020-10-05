@@ -5,6 +5,9 @@ import { FlightService } from '../../../services/flight.service';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CookieService } from 'ngx-cookie';
 import * as moment from 'moment';
+import { GenericService } from '../../../services/generic.service';
+import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flight-checkout',
@@ -17,14 +20,17 @@ export class FlightCheckoutComponent implements OnInit {
       private route: ActivatedRoute,
       private router:Router,
       private flightService:FlightService,
-      private cookieService: CookieService
+      private cookieService: CookieService,
+      private genericService:GenericService,
+      private toastr: ToastrService
     ) { }
     s3BucketUrl = environment.s3BucketUrl;
+    validateCardDetails:Subject<any> = new Subject();
     showAddCardForm:boolean=false;
     progressStep={ step1:true, step2:true, step3:false };
-    cardToken:string;
-    instalmentMode='no-instalment';
-    laycreditpoints:number;
+    cardToken:string='';
+    instalmentMode='instalment';
+    laycreditpoints:number=0;
     additionalAmount:number;
     routeCode:string;
     travelers=[];
@@ -38,42 +44,50 @@ export class FlightCheckoutComponent implements OnInit {
     bookingResult:any={};
     sellingPrice:number;
     flightSummary:[]=[];
-    instalmentType:string;
+    instalmentType:string='weekly';
     customAmount:number | null;
     customInstalment:number | null;
     newCard;
+    guestCardDetails;
+    isFlightNotAvailable:boolean=false;
+    isSessionTimeOut:boolean=false;
+    isShowCardOption:boolean=true;
+    isShowPaymentOption:boolean=true;
+    isShowFeedbackPopup:boolean=true;
 
     ngOnInit() {
+      
+      window.scroll(0,0);
       this.userInfo = getLoginUserInfo();
       if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
       }
-      console.log("this",this.userInfo)
       this.routeCode = this.route.snapshot.paramMap.get('rc')
 
       let timerInfo:any = this.cookieService.get('flight_booking_timer')
       timerInfo = timerInfo ? JSON.parse(timerInfo) : {};
       if(timerInfo.route_code==this.routeCode){
         this.bookingTimerConfig={
-          leftTime : 1200 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
+          leftTime : 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
           format: 'm:s'
         }
       }
       else{
         
         this.bookingTimerConfig={
-          leftTime: 1200, format: 'm:s'
+          leftTime: 600, format: 'm:s'
         };
 
         let bookingTimer={
           'route_code':this.routeCode,
           'time': moment().format('YYYY-MM-DD h:mm:ss')
         }
-        console.log(bookingTimer)
         this.cookieService.put("flight_booking_timer", JSON.stringify(bookingTimer));
       }
 
       if(this.userInfo.roleId==7){
+        this.instalmentMode='no-instalment';
+        this.instalmentType='';
         this.showAddCardForm=true;
       }
       let travelersIds = this.cookieService.get('_travelers');
@@ -90,12 +104,11 @@ export class FlightCheckoutComponent implements OnInit {
             
           }
         }
-        console.log(this.travelers)
       }
       catch(e){
 
       }
-      
+      this.validateBookingButton();
     }
 
     toggleAddcardForm(){
@@ -103,7 +116,15 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     applyLaycredit(laycreditpoints){
+      console.log("laycreditpoints",laycreditpoints)
+      this.isShowCardOption=true;
       this.laycreditpoints=laycreditpoints;
+      this.isShowPaymentOption=true;
+      if(this.laycreditpoints>=this.sellingPrice){
+        this.isShowCardOption=false;
+        this.isShowPaymentOption=false;
+        this.cardToken='';
+      }
       this.validateBookingButton();
     }
 
@@ -122,7 +143,35 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     bookFlight(){
-      this.bookingLoader=true;
+      
+      /* Guest user */
+      if(this.userInfo.roleId==7){
+        let isValid = this.validateCard(this.guestCardDetails);
+        if(isValid===false){
+          return;
+        }
+        this.bookingLoader=true;
+        this.genericService.saveCard(this.guestCardDetails).subscribe((res:any)=>{
+          if(res.cardToken){
+            this.cardToken = res.cardToken;
+            this.bookFlightApi()
+          }
+        },(error=>{
+          this.bookingLoader=false;
+          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
+        }))
+      }
+      /* Login user */
+      else{
+
+        this.bookingLoader=true;
+        this.bookFlightApi();
+      }
+      //this.bookFlightApi(bookingData);
+    }
+
+    bookFlightApi(){
+      window.scroll(0,0);
       let bookingData={
         payment_type            : this.instalmentMode,
         laycredit_points        : this.laycreditpoints,
@@ -140,9 +189,11 @@ export class FlightCheckoutComponent implements OnInit {
         this.bookingLoader=false;
         this.progressStep = { step1:true, step2:true, step3:true }
         this.bookingResult=res;
+        this.isShowFeedbackPopup = true; 
       },(error)=>{
-
-        console.log("error",error)
+        if(error.status==422){
+          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
+        }
         if(error.status==404){
           this.bookingStatus=2; // Flight Not available  
         }
@@ -162,21 +213,42 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     validateBookingButton(){
-
+      
+      this.isDisableBookBtn=true;
       if(
+        this.userInfo.roleId!=7 &&
+        this.isTandCaccepeted==true &&
+        (this.cardToken!='' || this.laycreditpoints>=this.sellingPrice)
+      ){
+        this.isDisableBookBtn=false;
+      }
+      else if(
+        this.userInfo.roleId==7 &&
         this.isTandCaccepeted==true
       ){
         this.isDisableBookBtn=false;
       }
-      else{
-        this.isDisableBookBtn=true;
-      }
-      console.log("this.isDisableBookBtn",this.isDisableBookBtn)
+    }
+
+    validateCard(guestCardDetails){
+      this.validateCardDetails.next(guestCardDetails);
+      if(typeof guestCardDetails.first_name=='undefined' || guestCardDetails.first_name=='')
+        return false;
+      if(typeof guestCardDetails.last_name=='undefined' || guestCardDetails.last_name=='')
+        return false;
+      if(typeof guestCardDetails.card_number=='undefined' || guestCardDetails.card_number=='')
+        return false;
+      if(typeof guestCardDetails.expiry=='undefined' || guestCardDetails.expiry=='')
+        return false;
+      if(typeof guestCardDetails.card_cvv=='undefined' || guestCardDetails.card_cvv=='')
+        return false;
+      
     }
 
     getFlightSummaryData(data){
 
       this.flightSummary=data;
+      this.sellingPrice = data[0].selling_price;
     }
 
     getInstalmentData(data){
@@ -185,11 +257,23 @@ export class FlightCheckoutComponent implements OnInit {
       this.instalmentType = data.instalmentType;
       this.customAmount = data.customAmount;
       this.customInstalment = data.customInstalment;
-      console.log(data)
 
     }
 
     emitNewCard(event){
       this.newCard =event;
+    }
+
+    emitGuestCardDetails(event){
+      this.guestCardDetails=event;
+    }
+
+
+    flightAvailable(event){
+      this.isFlightNotAvailable=event;
+    }
+
+    sessionTimeout(event){
+      this.isSessionTimeOut=event;
     }
 }

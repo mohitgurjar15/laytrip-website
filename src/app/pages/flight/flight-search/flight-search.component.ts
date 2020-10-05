@@ -39,6 +39,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -80,6 +81,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     });
   }
 
+
+
   getFlightSearchData(payload, tripType) {
     this.loading = true;
     // // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
@@ -106,10 +109,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-        if (err && err.status === 404) {
-          this.isNotFound = true;
-          this.loading = false;
-        }
+        /* if (err && err.status === 404) { */
+        this.isNotFound = true;
+        this.loading = false;
+        /* } */
       });
     } else {
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
@@ -120,10 +123,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-        if (err && err.status === 404) {
-          this.isNotFound = true;
-          this.loading = false;
-        }
+        /* if (err && err.status === 404) { */
+        this.isNotFound = true;
+        this.loading = false;
+        /* } */
       });
     }
 

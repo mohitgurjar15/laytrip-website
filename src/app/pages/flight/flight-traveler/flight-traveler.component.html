@@ -26,7 +26,7 @@
                             <!-- <app-adult-list  type="child" age="2-12" totalTravelerCount="2"  [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
                             <app-adult-list  type="infant" age="0-2" totalTravelerCount="2"  [travelers]="travelers" (adultsCount)="getAdultCount($event)"></app-adult-list>
                            -->
-                            <div class="required_wheelchair">
+                            <!-- <div class="required_wheelchair">
                                 <ul>
                                     <li>
                                         <label class="custom_checkbox">
@@ -36,7 +36,7 @@
                                         </label>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     
@@ -48,8 +48,9 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <app-flight-summary ></app-flight-summary>
+                <app-flight-summary checkAvailability="local" (flightAvailable)="flightAvailable($event)"></app-flight-summary>
             </div>
         </div>
     </div>
-<section></section>        
+</section>       
+<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 

@@ -5,10 +5,10 @@ import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common';
 import { validateImageFile,fileSizeValidator } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
+import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -42,6 +42,15 @@ export class ProfileComponent implements OnInit {
   public fileError      = false;
   public fileErrorMsg: string = 'File is required';
   selectResponse: any = {};
+  seletedDob :any;
+
+  dobMinDate= new Date();
+  dobMaxDate: moment.Moment = moment();
+  locale = {
+    format: 'DD/MM/YYYY',
+    displayFormat: 'DD/MM/YYYY'
+  };
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,19 +58,8 @@ export class ProfileComponent implements OnInit {
     private genericService : GenericService,
     public router: Router,  
     public commonFunctoin: CommonFunction,  
-    private config: NgbDatepickerConfig, 
-    private datePipe: DatePipe
-    ) { 
-      config.minDate = { year: 2000, month: 1, day: 1 };
-      config.maxDate = { year: 2099, month: 12, day: 31 };
-      let current = new Date();
-      this.minDate = { 
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate()
-      };
-      this.maxDate = this.minDate;
-    }
+    private toastr: ToastrService
+    ) {}
  
   ngOnInit() {
     this.getCountry();
@@ -74,19 +72,21 @@ export class ProfileComponent implements OnInit {
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
       country_code: ['', [Validators.required]],
-      email: [''],
+      dob: ['', Validators.required],
       phone_no: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      zip_code: ['', [Validators.required]],
-      country_id: ['', [Validators.required]],
-      state_id: ['', [Validators.required]],
-      city_name: ['', [Validators.required]],
+      address: [''],
+      email: [''],
+      zip_code: [''],
+      country_id: [''],
+      state_id: [''],
+      city_name: [''],
       gender: [''],
-      dob: ['', [Validators.required]],
       profile_pic: [''],      
       address2: [''],      
       language_id: [''],      
       currency_id: [''],      
+      passport_expiry: [''],      
+      passport_number: [''],      
     });
   }
 
@@ -112,7 +112,6 @@ export class ProfileComponent implements OnInit {
   }
 
   getStates(countryId) {
-    // this.ngSelectComponent.handleClearClick();
     this.genericService.getStates(countryId.id).subscribe((data: any) => {
       this.stateList = data;
     }, (error: HttpErrorResponse) => {
@@ -131,6 +130,7 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+
   getCurrencies() {
     this.genericService.getCurrencies().subscribe((data: any) => {
       this.currencies = data.data;
@@ -139,12 +139,6 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
-  }
-
-  dateFormator(date) {
-    console.log(date)
-    let aNewDate = date.year + '-' + date.month + '-' + date.day;
-    return this.datePipe.transform(aNewDate, 'yyyy-MM-dd');
   }
 
   clickGender(event,type){
@@ -166,7 +160,6 @@ export class ProfileComponent implements OnInit {
 
   onFileSelect(event) {    
     this.imageFile = event.target.files[0];
-
     //file type validation check
     if (!validateImageFile(this.imageFile.name)) {
         this.imageFileError = true;
@@ -189,13 +182,12 @@ export class ProfileComponent implements OnInit {
     this.imageFileError = false;
   }
 
-
   getProfileInfo() {
     this.userService.getProfile().subscribe((res:any)=> {   
     this.image = res.profilePic;
     this.selectResponse = res;
-    let dob_selected = new Date(res.dob)
     this.is_type = res.gender;
+    this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
 
     this.profileForm.patchValue({      
         first_name: res.firstName,
@@ -204,16 +196,18 @@ export class ProfileComponent implements OnInit {
         gender  : res.gender,        
         zip_code  : res.zipCode,        
         title  : res.title,        
-        dob: {year:dob_selected.getFullYear(),month:dob_selected.getMonth(),day:dob_selected.getDate()},
+        dob  : moment(res.dob).format('MM/DD/YYYY'),        
         country_code:res.countryCode,        
         phone_no  : res.phoneNo,        
         country_id: res.country.name,
         state_id: res.state.name,       
         city_name  : res.cityName,        
-        address  : res.address,   
+        address  : res.address,  
         language_id : res.preferredLanguage.name,     
         currency_id : res.preferredCurrency.code,     
-        profile_pic: res.profilePic  
+        profile_pic: res.profilePic, 
+        passport_expiry:  moment(res.passportExpiry).format('MM/DD/YYYY'), 
+        passport_number: res.passportNumber  
     });
 
     }, (error: HttpErrorResponse) => {
@@ -242,8 +236,7 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
-      formdata.append("title",'mr');
-      // formdata.append("title",this.profileForm.value.title);
+      formdata.append("title",this.profileForm.value.title);
       formdata.append("first_name",this.profileForm.value.first_name);
       formdata.append("last_name",this.profileForm.value.last_name);
       formdata.append("email",this.profileForm.value.email);      
@@ -253,17 +246,21 @@ export class ProfileComponent implements OnInit {
       formdata.append("address1",this.profileForm.value.address);
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
-      formdata.append("dob", this.dateFormator(this.profileForm.value.dob));
-      if(!Number.isInteger(this.profileForm.value.country_id)){
+      formdata.append("passportNumber",this.profileForm.value.passport_number);
+      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+      formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
+      if(typeof this.profileForm.value.country_id === 'string'){
         formdata.append("country_id", this.selectResponse.country.id);
       } else {
         formdata.append("country_id", this.profileForm.value.country_id.id);
       }
-      if(!Number.isInteger(this.profileForm.value.state_id)){
+
+      if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
         formdata.append("state_id", this.selectResponse.state.id);
       } else{
         formdata.append("state_id", this.profileForm.value.state_id);
       }
+
       if(typeof(this.profileForm.value.country_code) != 'object'){        
         formdata.append("country_code", this.selectResponse.countryCode);
       } else {
@@ -279,14 +276,16 @@ export class ProfileComponent implements OnInit {
       } else {
         formdata.append("currency_id", this.profileForm.value.currency_id);
       }         
-      formdata.append("passport_expiry",'2020-08-06');
       
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
         localStorage.setItem("_lay_sess", data.token);
+        this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
         // this.router.navigate(['/']);      
-      }, (error: HttpErrorResponse) => {       
+      }, (error: HttpErrorResponse) => {
+        console.log(error)       
         this.submitted = this.loading = false;
+        this.toastr.error(error.error.message, 'Profile Error');
       });
     }
   }

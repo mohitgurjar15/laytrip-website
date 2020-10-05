@@ -1,0 +1,403 @@
+<section class="search_result flight pb-0" *ngIf="loading">
+    <app-flight-loader></app-flight-loader>
+</section>
+<div class="account_cnt_main booking_main" *ngIf="isNotFound">
+    <div class="block_nobooking_available">
+        <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
+        <h5>No Flight Booking Found</h5>
+    </div>
+</div>
+<div class="result_listing one_way_list roundtrip_list">
+    <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
+        <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
+            <div class="block_booking_info">
+                <ul>
+                    <li>Trip ID <span>{{item.tripId}}</span></li>
+                    <li>Booked on <span>{{ item.bookingDate}}</span></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-2 px-0">
+                    <div class="block_im">
+                        <img src="{{item.airline_logo}}"
+                            onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';"
+                            alt="Airlines Logo">
+                        <p>{{item.airline_name}}</p>
+                        <span>{{ item.airline }} - {{ item.flight_number }}</span>
+                    </div>
+                </div>
+                <div class="col-md-7 px-0">
+                    <div class="block_detail">
+                        <div class="block_detail_top">
+                            <div class="detail_info">
+                                <p>Departure</p>
+                                <h4>{{item.departure_time}} <span></span></h4>
+                                <span>{{item.departure_city}}</span>
+                            </div>
+                            <div class="flight_stop_detail">
+                                <p>{{item.duration}}</p>
+                                <div class="border-dot"></div>
+                                <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Stop</span>
+                            </div>
+                            <div class="detail_info">
+                                <p>Arrival</p>
+                                <h4>{{item.arrival_time}}</h4>
+                                <span>{{item.arrival_city}}</span>
+                            </div>
+                        </div>
+                        <div class="block_detail_btm">
+                            <div class="show_detail">
+                                <a href="javascript:void(0);" class="show_more_detail"
+                                    (click)="showDetails(blockIndex)">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
+                                    Flight Details
+                                </a>
+                            </div>
+                            <div class="info_price_origin">
+                                <div class="refundable">Refundable</div>
+                                <div class="ogigin_price">
+                                    Total <span>${{item.selling_price | number : '1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 px-0">
+                    <div class="block_price">
+                        <p>Starts from</p>
+                        <p><span>${{item.instalment_amount | number : '1.2-2'}}</span> /week</p>
+                        <span class="partial_payment_info">Learn more about partial payment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="listing_block" *ngIf="item.journey_type === 'round-trip'">
+            <div class="block_booking_info">
+                <ul>
+                    <li>Trip ID <span>{{item.tripId}}</span></li>
+                    <li>Booked on <span>{{ item.bookingDate}}</span></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="block_main">
+                        <div class="block_top">
+
+                            <div class="block_inner" *ngFor="let trip of item.routes">
+                                <div class="col-md-4 col-lg-5 px-0">
+                                    <div class="block_im">
+                                        <div class="flight_wards">Outwards</div>
+                                        <div class="flight_wards_info">
+                                            <img src="{{trip.stops[0].airline_logo}}"
+                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';"
+                                                alt="{{item.airline_name}} Logo">
+                                            <div class="info_flight_name">
+                                                <p>{{trip.stops[0].airline_name}}</p>
+                                                <span>{{ trip.stops[0].airline }} -
+                                                    {{ trip.stops[0].flight_number }}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-7 px-0">
+                                    <div class="block_detail noborder">
+                                        <div class="block_detail_top">
+                                            <div class="detail_info">
+                                                <p>Departure</p>
+                                                <h4>{{trip.stops[0].departure_time}} <span></span></h4>
+                                                <span>{{trip.stops[0].departure_info.city}}</span>
+                                            </div>
+                                            <div class="flight_stop_detail">
+                                                <p>2h</p>
+                                                <div class="border-dot"></div>
+                                                <span>{{ trip.stops[0].stop_count === 0 ? 'Non -' : trip.stops[0].stop_count }}
+                                                    Stop</span>
+                                            </div>
+                                            <div class="detail_info">
+                                                <p>Arrival</p>
+                                                <h4>{{trip.stops[0].arrival_time}} <span></span></h4>
+                                                <span>{{trip.stops[0].arrival_info.city}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="block_detail_btm">
+                            <div class="show_detail">
+                                <a href="javascript:void(0);" class="show_more_detail"
+                                    (click)="showDetails(blockIndex)">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
+                                    Flight Details
+                                </a>
+                            </div>
+                            <div class="info_price_origin">
+                                <div class="refundable">Refundable</div>
+                                <div class="ogigin_price">
+                                    Total <span>${{item.selling_price | number : '1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 px-0">
+                    <div class="block_price">
+                        <p>Starts from</p>
+                        <p><span>${{item.instalment_amount | number : '1.2-2'}}</span> /week</p>
+                        <span class="partial_payment_info">Learn more about partial payment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail_info_show on_out_said" [attr.id]="blockIndex" *ngIf="showFlightDetails[blockIndex] === true">
+            <ul id="tabs" class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a href="#flight-info-oneway" class="nav-link active" data-toggle="tab" role="tab">Flight Info</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Fare-Detail-oneway" class="nav-link" data-toggle="tab" role="tab">Fare Details</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
+                        (click)="getBaggageDetails(item.moduleInfo.route_code)">Baggage Rules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Cancellation-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
+                        (click)="getCancellationPolicy(item.route_code)">Cancellation Rules</a>
+                </li>
+            </ul>
+            <div id="content" class="tab-content" role="tablist">
+                <div id="flight-info-oneway" class="card tab-pane fade show active" role="tabpanel"
+                    aria-labelledby="flight-info-oneway">
+                    <div class="card-header" role="tab" id="heading-flight-info-oneway">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapse-flight-info-oneway" aria-expanded="true"
+                                aria-controls="collapse-flight-info">
+                                Flight Info
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-flight-info-oneway" class="collapse show" data-parent="#content" role="tabpanel"
+                        aria-labelledby="heading-flight-info-oneway">
+                        <div class="card-body noborder" *ngFor="let flight of item.routes; let i = index">
+                            <div class="block_flight_info">
+                                <div class="tab_detail flight_info_cnt">
+                                    <div *ngFor="let flightInfo of flight.stops">
+                                        <div class="flight_layover" *ngIf="flightInfo.is_layover">
+                                            <div class="triangle_right"></div>
+                                            <div class="layover_info">
+                                                Change of Planes <span>| {{ flightInfo?.layover_duration }}</span>
+                                                Layover
+                                            </div>
+                                            <div class="triangle_left"></div>
+                                        </div>
+                                        <div class="detail_top">
+                                            <div class="detail_inn_left">
+                                                <div class="detail_left">
+                                                    <img src="{{flightInfo?.airline_logo || defaultImage}}"
+                                                        alt="Airlines Logo"
+                                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                                    <p>{{ flightInfo?.airline_name }}</p>
+                                                    <span>{{ flightInfo?.airline }} - {{ flightInfo?.flight_number }}</span>
+                                                </div>
+                                                <div class="detail_right">
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.departure_code }}
+                                                            <span>{{ flightInfo?.departure_time }}</span></h4>
+                                                        <span>{{ commonFunction.convertDateFormat(flightInfo?.departure_date,'DD/MM/YYYY') }}</span>
+                                                        <p>{{ flightInfo?.departure_info?.city }},
+                                                            <span>{{ flightInfo?.departure_info?.country }}</span></p>
+                                                    </div>
+                                                    <div class="flight_duration">
+                                                        <p>{{ flightInfo?.duration }}</p>
+                                                        <div class="border-dot">
+                                                            <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
+                                                                alt="Duration Images">
+                                                        </div>
+                                                        <p>Flight Duration</p>
+                                                    </div>
+                                                    <div class="flight_info_detail">
+                                                        <h4>{{ flightInfo?.arrival_code }}
+                                                            <span>{{ flightInfo?.arrival_time }}</span></h4>
+                                                        <span>{{ commonFunction.convertDateFormat(flightInfo?.arrival_date,'DD/MM/YYYY') }}</span>
+                                                        <p>{{ flightInfo?.arrival_info?.city }},
+                                                            <span>{{ flightInfo?.arrival_info?.country }}</span></p>
+                                                    </div>
+                                                </div>
+                                             </div>
+                                             <div class="flight_going" *ngIf="i === 0">Outwards</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Fare-Detail-oneway" class="card tab-pane fade" role="tabpanel"
+                    aria-labelledby="Fare-Detail-oneway">
+                    <div class="card-header" role="tab" id="heading-Fare-Detail-oneway">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-Fare-Detail-oneway"
+                                aria-expanded="false" aria-controls="collapse-Fare-Detail">
+                                Fare Details
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-Fare-Detail-oneway" class="collapse" data-parent="#content" role="tabpanel"
+                        aria-labelledby="heading-Fare-Detail-oneway">
+                        <div class="card-body">
+                            <div class="tab_detail fare_detail_cnt">
+                                <div class="triangle_right"></div>
+                                <ul>
+                                    <li *ngFor="let fareDetails of item.fare_break_dwon">
+                                        <p *ngIf="fareDetails.type == 'ADT'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Adult)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'CHD'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Child)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'INF'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Infant)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type === 'total'">
+                                            Total Fare ({{ fareDetails?.quantity }} traveller)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                                <p><span>Note:</span> It is a long established fact that a reader will be distracted by
+                                    the readable content of a page when looking at its layout. The point of using Lorem
+                                    Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                                    using ‘Content here, content here’, making it look like readable English.</p>
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Baggage-Rules-oneway" class="card tab-pane fade" role="tabpanel"
+                    aria-labelledby="Baggage-Rules-oneway">
+                    <div class="card-header" role="tab" id="heading-Baggage-Rules-oneway">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-Baggage-Rules-oneway"
+                                aria-expanded="false" aria-controls="collapse-Baggage-Rules">
+                                Baggage Rules
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-Baggage-Rules-oneway" class="collapse" role="tabpanel" data-parent="#content"
+                        aria-labelledby="heading-Baggage-Rules-oneway">
+                        <div class="card-body">
+                            <div class="tab_detail baggage_rules_cnt">
+                                <div class="triangle_right"></div>
+                                <div class="detail_left">
+                                    <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
+                                    <p>Indigo</p>
+                                    <span>EWR - DEN</span>
+                                </div>
+                                <div class="detail_right">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Flight</th>
+                                                <th>Depart</th>
+                                                <th>Arrive</th>
+                                                <th>Free Baggage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let baggage of baggageDetails">
+                                                <td data-title="Flight">{{ baggage?.flight_number }}</td>
+                                                <td data-title="Depart">{{ baggage?.departure_airport }}</td>
+                                                <td data-title="Arrive">{{ baggage?.arrival_airport }}</td>
+                                                <td data-title="Free Baggage">{{ baggage?.baggage_capacity }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>The baggage information is just for reference. Please Check with airline before
+                                        check-in.</p>
+                                </div>
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Cancellation-Rules-oneway" class="card tab-pane fade" role="tabpanel"
+                    aria-labelledby="Cancellation-Rules-oneway">
+                    <div class="card-header" role="tab" id="heading-Cancellation-Rules-oneway">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-Cancellation-Rules"
+                                aria-expanded="false" aria-controls="collapse-Cancellation-Rules-oneway">
+                                Cancellation Rules
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-Cancellation-Rules-oneway" class="collapse" role="tabpanel" data-parent="#content"
+                        aria-labelledby="heading-Cancellation-Rules-oneway">
+                        <div class="card-body">
+                            <div class="tab_detail cancellation_rules_cnt">
+                                <div class="triangle_right"></div>
+                                <div class="rules_cnt_top">
+                                    <div class="detail_left">
+                                        <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
+                                        <p>Indigo</p>
+                                        <span>EWR - DEN</span>
+                                    </div>
+                                    <div class="detail_right">
+                                        <ul>
+                                            <li class="first">
+                                                <div>Laytip Fess</div>
+                                                <div>$13e</div>
+                                            </li>
+                                            <li>
+                                                <div>Airline Fees</div>
+                                                <div>Refundable</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="rules_cnt_btm">
+                                    <span>Terms & Conditions</span>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
+                                    <p class="fb_animation mb-0 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
+                                    <ul>
+                                        <li *ngIf="!loadCancellationPolicy && errorMessage!=''">{{ errorMessage }}</li>
+                                        <li *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
+                                            [innerHtml]="cancellationPolicyArray[0]">
+                                        </li>
+                                        <li *ngIf="!loadCancellationPolicy && cancellationPolicy && loadMoreCancellationPolicy"
+                                            [innerHtml]="cancellationPolicy.cancellation_policy">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
+    [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true"
+    (pageChange)="pageChange($event)">
+</ngb-pagination>

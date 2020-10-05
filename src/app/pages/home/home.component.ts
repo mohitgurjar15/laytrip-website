@@ -4,10 +4,9 @@ declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,6 @@ import { DaterangepickerComponent, DaterangepickerDirective } from 'ngx-daterang
 export class HomeComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-
   modules: Module[];
   moduleList: any = {};
   switchBtnValue = false;
@@ -41,8 +39,11 @@ export class HomeComponent implements OnInit {
     displayFormat: 'MM/DD/YYYY'
   };
 
-  flightDepartureMinDate: moment.Moment = moment();
-  flightReturnMinDate: moment.Moment = moment().add(7, 'days');
+  flightDepartureMinDate;
+  flightReturnMinDate;
+
+  departureDate = new Date(moment().add(30, 'days').format("MM/DD/YYYY"));
+  returnDate = new Date(moment().add(37, 'days').format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
 
@@ -71,13 +72,13 @@ export class HomeComponent implements OnInit {
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
       toDestination: [[Validators.required]],
-      departureDate: [{
-        startDate: moment().add(30, 'days')
-      }, Validators.required],
-      returnDate: [{
-        startDate: moment().add(37, 'days')
-      }, Validators.required]
+      departureDate: [[Validators.required]],
+      returnDate: [[Validators.required]]
     });
+    //this.flightReturnMinDate = moment().add(30, 'days');
+
+    this.flightDepartureMinDate = new Date();
+    this.flightReturnMinDate = this.departureDate;
   }
 
   ngOnInit(): void {
@@ -93,7 +94,30 @@ export class HomeComponent implements OnInit {
       dots: false,
       infinite: true,
       slidesToShow: 3,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     });
 
     // Start Featured List Js
@@ -191,16 +215,16 @@ export class HomeComponent implements OnInit {
     queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
     queryParams.departure = this.searchFlightInfo.departure;
     queryParams.arrival = this.searchFlightInfo.arrival;
-    queryParams.departure_date = moment(this.flightSearchForm.value.departureDate.startDate).format('YYYY-MM-DD');
+    queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
     if (this.isRoundTrip === true) {
-      queryParams.arrival_date = moment(this.flightSearchForm.value.returnDate.startDate).format('YYYY-MM-DD');
+      queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
     }
     queryParams.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
     queryParams.adult = this.searchFlightInfo.adult;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     if (this.searchFlightInfo && this.totalPerson &&
-      this.flightSearchForm.value.departureDate.startDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
+      this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
       this.router.navigate(['flight/search'], {
         queryParams: queryParams,
@@ -219,22 +243,40 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  datesUpdated(event) {
-    // console.log(event);
-  }
 
   departureDateUpdate(date) {
-    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
-    this.flightSearchForm.value.returnDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(7, 'days');
+    this.returnDate = new Date(date)
+    this.flightReturnMinDate = new Date(date)
   }
 
-  dateChange(type) {
-    if (type === 'previous') {
-      this.flightDepartureMinDate = moment(this.flightSearchForm.value.departureDate.startDate).subtract(1, 'days');
-      this.flightSearchForm.value.departureDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).subtract(1, 'days');
-    } else if (type === 'next') {
-      this.flightDepartureMinDate = moment(this.flightSearchForm.value.departureDate.startDate).add(1, 'days');
-      this.flightSearchForm.value.departureDate.startDate = moment(this.flightSearchForm.value.departureDate.startDate).add(1, 'days');
+  dateChange(type, direction) {
+
+    if (type == 'departure') {
+      if (direction === 'previous') {
+        if (moment(this.departureDate).isAfter(moment(new Date()))) {
+          this.departureDate = new Date(moment(this.departureDate).subtract(1, 'days').format('MM/DD/YYYY'))
+        }
+      }
+
+      else {
+        this.departureDate = new Date(moment(this.departureDate).add(1, 'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isAfter(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
+        }
+      }
+      this.flightReturnMinDate = new Date(this.departureDate)
+    }
+
+    if (type == 'arrival') {
+
+      if (direction === 'previous') {
+        if (moment(this.departureDate).isBefore(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).subtract(1, 'days').format('MM/DD/YYYY'))
+        }
+      }
+      else {
+        this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
+      }
     }
   }
 }

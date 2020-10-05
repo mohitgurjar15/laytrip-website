@@ -65,11 +65,12 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
                       &.half {
                         .custom_datpicker {
                           border: none;
-                          border-bottom: 1px solid #E0E2E5;  
-                          &:focus{
-                              outline: none;
-                              box-shadow: none;
-                          }                        
+                          border-bottom: 1px solid #E0E2E5;
+
+                          &:focus {
+                            outline: none;
+                            box-shadow: none;
+                          }
                         }
                       }
                     }
@@ -84,3 +85,86 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   }
 }
 
+
+//Traveller Page dob  
+.detail_info_main {
+  &.add_passenger {
+    .detail_info_left {
+      .block_passanger_info {
+        .passanger_detail_main {
+          .block_passenger_detail {
+            .block_passenger_info {
+              .card_add_pass {
+                .card-body {
+                  .block_add_passenger {
+                    .form_row {
+                      .form_field {
+                        .text_field {
+
+                          .ui-calendar {
+                            width: 100%;
+                          }
+
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//Payment history list page datepicker
+.account_part {
+  .account_cnt_main {
+    &.booking_main {
+      .block_filter_payment {
+        .filter_form {
+          .form_row {
+            .form_field {
+              .ui-calendar {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//Traveller Edit .ui-calendar
+
+
+.cmn_add_edit_modal {
+  .modal-dialog {
+    .modal-content {
+      .card_modal_cnt {
+        .modal_btm {
+          .add_card_form {
+            .form_row {
+              .form_field {
+                .ui-calendar {
+                  width: 100%;
+                }
+
+                .text_field {
+                  .phone_no {
+                    .code {
+                      width: 150px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

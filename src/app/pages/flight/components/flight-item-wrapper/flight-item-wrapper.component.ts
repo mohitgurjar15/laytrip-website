@@ -7,6 +7,7 @@ import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -51,8 +52,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   routeCode = [];
   baggageDetails;
   cancellationPolicy;
+  cancellationPolicyArray=[];
+  loadMoreCancellationPolicy:boolean=false;
   errorMessage;
-  loadBaggageDetails = true;
+  loadBaggageDetails:boolean = true;
+  loadCancellationPolicy:boolean=false;
 
   isRoundTrip = false;
 
@@ -63,15 +67,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private flightService: FlightService,
     private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService
-  ) { }
+    private cookieService: CookieService,
+    private commonFunction:CommonFunction
+  ) {
+   }
 
   ngOnInit() {
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    this.loadJquery();
-
     // console.log(this.flightDetails);
     this.flightList = this.flightDetails;
 
@@ -81,54 +85,37 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.isRoundTrip = false;
     }
 
-    // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-    //   if (res) {
-    //     if (res.items) {
-    //       // FOR FLIGHT LIST & DETAILS
-    //       this.flightList = res.items;
-    //     }
-    //   }
-    // }));
-
-    // setTimeout(() => {
-    //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
-    //   cells.forEach(c => {
-    //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
-    //   });
-    // });
   }
 
   opened() {
-    // setTimeout(() => {
-    //   const cells = Array.from(document.querySelectorAll<HTMLDivElement>('.mat-calendar .mat-calendar-body-cell-content'));
-    //   cells.forEach(c => {
-    //     c.innerHTML = c.innerHTML + ' ' + this.subcell;
-    //   });
-    // });
   }
 
   getBaggageDetails(routeCode) {
     this.loadBaggageDetails = true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
-      console.log('baggage:::', data);
       this.baggageDetails = data;
       this.loadBaggageDetails = false;
     });
   }
 
   getCancellationPolicy(routeCode) {
-    this.cancellationPolicy = '';
-    this.flightService.getCancellationPolicy(routeCode).subscribe(data => {
-      console.log('cancellation-policy:::', data);
-      this.errorMessage = '';
+
+    this.loadCancellationPolicy=true;
+    this.loadMoreCancellationPolicy=false;
+    this.errorMessage='';
+    this.flightService.getCancellationPolicy(routeCode).subscribe((data:any) => {
+      this.cancellationPolicyArray = data.cancellation_policy.split('--')
+      this.loadCancellationPolicy=false;
       this.cancellationPolicy = data;
     }, (err) => {
-      console.log(err);
+      this.loadCancellationPolicy=false;
       this.errorMessage = err.message;
     });
   }
 
-  loadJquery() {
+  toggleCancellationContent(){
+    this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
+    console.log("this.loadMoreCancellationPolicy",this.loadMoreCancellationPolicy)
   }
 
   ngAfterContentChecked() {
@@ -157,14 +144,22 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     });
   }
 
-  bookNow(routeCode) {
+  bookNow(route) {
+ 
     const itinerary = {
       adult: this.route.snapshot.queryParams["adult"],
       child: this.route.snapshot.queryParams["child"],
-      infant: this.route.snapshot.queryParams["infant"]
+      infant: this.route.snapshot.queryParams["infant"],
+      is_passport_required : route.is_passport_required
     };
-    this.cookieService.put('_itinerary', JSON.stringify(itinerary));
-    this.router.navigate([`flight/traveler/${routeCode}`]);
+    let lastSearchUrl=this.router.url;
+    this.cookieService.put('_prev_search', lastSearchUrl);
+    const dateNow = new Date();
+    dateNow.setMinutes(dateNow.getMinutes() + 10);
+    
+    sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
+    sessionStorage.setItem('__route',JSON.stringify(route))
+    this.router.navigate([`flight/traveler/${route.route_code}`]);
   }
 
 

@@ -15,7 +15,6 @@ import { AuthComponent } from './user/auth/auth.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
 import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark.component';
-
 // NG5 SLIDER
 import { Ng5SliderModule } from 'ng5-slider';
 import { ResetPasswordComponent } from './user/reset-password/reset-password.component';

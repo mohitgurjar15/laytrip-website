@@ -9,9 +9,11 @@ exports.__esModule = true;
 exports.MyAccountsRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var list_bookings_component_1 = require("./bookings/list-bookings.component");
+var change_password_component_1 = require("./change-password/change-password.component");
+var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
 var profile_component_1 = require("./profile/profile.component");
-var my_bookings_component_1 = require("./my-bookings/my-bookings.component");
-var co_accounts_component_1 = require("./co-accounts/co-accounts.component");
+var list_traveller_component_1 = require("./travellers/list-traveller.component");
 var routes = [
     {
         path: '',
@@ -23,11 +25,19 @@ var routes = [
     },
     {
         path: 'bookings',
-        component: my_bookings_component_1.MyBookingsComponent
+        component: list_bookings_component_1.ListBookingsComponent
     },
     {
-        path: 'co-accounts',
-        component: co_accounts_component_1.CoAccountsComponent
+        path: 'travellers',
+        component: list_traveller_component_1.ListTravellerComponent
+    },
+    {
+        path: 'payment',
+        component: list_payment_history_component_1.ListPaymentHistoryComponent
+    },
+    {
+        path: 'settings/change-password',
+        component: change_password_component_1.ChangePasswordComponent
     },
 ];
 var MyAccountsRoutingModule = /** @class */ (function () {

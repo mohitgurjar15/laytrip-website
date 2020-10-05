@@ -10,7 +10,7 @@ import * as moment from 'moment';
 })
 export class PaymentModeComponent implements OnInit {
 
-  @Output() applyLaycredit = new EventEmitter();
+  
   @Output() selectInstalmentMode = new EventEmitter();
   @Output() getInstalmentData = new EventEmitter<{
     additionalAmount:number,
@@ -24,12 +24,8 @@ export class PaymentModeComponent implements OnInit {
   
   @Input() flightSummary;
   sellingPrice:number;
-  isInstalemtMode:boolean=false;
-  value: number = 100;
-  laycreditOptions: Options = {
-    floor: 0,
-    ceil: 600
-  };
+  isInstalemtMode:boolean=true;
+  
   instalmentRequest={
     instalment_type: "weekly",
     checkin_date: '',
@@ -51,6 +47,8 @@ export class PaymentModeComponent implements OnInit {
   defaultInstalmentNo:number;
   customMethod:string;
   secondInstalment:number;
+  totalLaycreditPoints=0;
+  instalmentAvavible:boolean=false;
 
   ngOnInit() {
 
@@ -58,6 +56,8 @@ export class PaymentModeComponent implements OnInit {
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemnts('weekly');
   }
+
+  
 
   /**
    * 
@@ -70,6 +70,7 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
       if(this.instalments.instalment_available==true){
+        this.instalmentAvavible=true;
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
         this.defaultInstalment  = this.instalments.instalment_date[0].instalment_amount;
@@ -78,7 +79,11 @@ export class PaymentModeComponent implements OnInit {
         this.defaultInstalmentNo = this.instalments.instalment_date.length;
         this.remainingInstalment = this.instalments.instalment_date.length-1;
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
-
+      }
+      else{
+        this.instalmentAvavible=false;
+        this.selectInstalmentMode.emit('no-instalment');
+        
       }
     },(err)=>{
 
@@ -106,20 +111,29 @@ export class PaymentModeComponent implements OnInit {
     if(type=='instalment'){
 
       this.isInstalemtMode = true;
+      this.getInstalmentData.emit({ 
+        additionalAmount:this.additionalAmount , 
+        instalmentType:this.durationType, 
+        customAmount: this.customAmount,
+        customInstalment : null
+      })
     }
 
     if(type=='no-instalment'){
 
       this.isInstalemtMode = false;
+      this.getInstalmentData.emit({ 
+        additionalAmount:this.additionalAmount , 
+        instalmentType:'', 
+        customAmount: null,
+        customInstalment : null
+      })
     }
     this.selectInstalmentMode.emit(type)
 
   }
 
-  selectLaycredit(changeContext: ChangeContext): void {
-    
-    this.applyLaycredit.emit(changeContext.value)
-  }
+  
 
   /**
    * 

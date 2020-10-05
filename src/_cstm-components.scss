@@ -84,18 +84,28 @@
                 }
             }
         }
-
-        
-
     }
     &.ng-customClass{
-        .ng-select-container{
+        .ng-select-container{            
             height:100%;	
             border:none !important;
             display: flex;
             align-items: center;
             &:hover{
                 box-shadow: none;
+            }
+            .ng-value-container{
+                height: auto;    
+                .ng-value{
+                    height: auto;
+                }
+                .ng-input{
+                    height: auto;
+                    input{
+                        height: auto !important;
+                        border: none !important;
+                    }
+                }
             }
         }
     }
@@ -133,6 +143,11 @@
     display: none;
 }
 
+.redeem_laypoint .ng5-slider .ng5-slider-bubble {
+    display: none;
+}
+
+
 .custom_range_slide .ng5-slider .ng5-slider-bubble {
     bottom: 14px;
     width: 100%;
@@ -152,4 +167,12 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
     background: #fc7e66;
+}
+
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input{
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input{
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
 }

@@ -2,6 +2,8 @@
 
 //<!-- Start Login Signup & Forgot Password popup Css -->
 .comman_modal {
+    z-index: 99999;
+
     .modal-dialog {
         max-width: 1024px;
         width: 97%;

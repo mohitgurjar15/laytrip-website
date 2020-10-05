@@ -17,7 +17,6 @@ var flight_price_slider_component_1 = require("./components/flight-price-slider/
 var flight_item_wrapper_component_1 = require("./components/flight-item-wrapper/flight-item-wrapper.component");
 var flight_search_bar_component_1 = require("./components/flight-search-bar/flight-search-bar.component");
 var ng5_slider_1 = require("ng5-slider");
-var flight_loader_component_1 = require("./components/flight-loader/flight-loader.component");
 var flight_not_found_component_1 = require("./components/flight-not-found/flight-not-found.component");
 var flight_traveler_component_1 = require("./flight-traveler/flight-traveler.component");
 var flight_summary_component_1 = require("./flight-summary/flight-summary.component");
@@ -30,6 +29,8 @@ var booking_summary_loader_component_1 = require("./components/booking-summary-l
 var flight_confirmation_component_1 = require("./components/flight-confirmation/flight-confirmation.component");
 var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var ngx_cookie_1 = require("ngx-cookie");
+var flight_booking_failed_component_1 = require("./components/flight-booking-failed/flight-booking-failed.component");
+var flight_loader_component_1 = require("./components/flight-loader/flight-loader.component");
 var FlightModule = /** @class */ (function () {
     function FlightModule() {
     }
@@ -42,14 +43,15 @@ var FlightModule = /** @class */ (function () {
                 flight_price_slider_component_1.FlightPriceSliderComponent,
                 flight_item_wrapper_component_1.FlightItemWrapperComponent,
                 flight_search_bar_component_1.FlightSearchBarComponent,
-                flight_loader_component_1.FlightLoaderComponent,
                 flight_not_found_component_1.FlightNotFoundComponent,
                 flight_traveler_component_1.FlightTravelerComponent,
                 flight_summary_component_1.FlightSummaryComponent,
                 clickOutSide_directive_1.ClickOutSideDirective,
                 flight_checkout_component_1.FlightCheckoutComponent,
                 booking_summary_loader_component_1.BookingSummaryLoaderComponent,
-                flight_confirmation_component_1.FlightConfirmationComponent
+                flight_confirmation_component_1.FlightConfirmationComponent,
+                flight_booking_failed_component_1.FlightBookingFailedComponent,
+                flight_loader_component_1.FlightLoaderComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -61,7 +63,8 @@ var FlightModule = /** @class */ (function () {
                 ng_select_1.NgSelectModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
                 ngx_cookie_1.CookieModule.forRoot(),
-            ]
+            ],
+            exports: [flight_loader_component_1.FlightLoaderComponent, flight_not_found_component_1.FlightNotFoundComponent]
         })
     ], FlightModule);
     return FlightModule;

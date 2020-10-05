@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { FlightService } from '../../../../services/flight.service';
 import { ActivatedRoute } from '@angular/router';
-import { airports } from '../../airports';
 
 @Component({
   selector: 'app-flight-search-bar',
@@ -21,17 +20,13 @@ export class FlightSearchBarComponent implements OnInit {
 
 
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationDate = '';
-  toDestinationDate = '';
-  fromDestinationCode;
-  toDestinationCode;
   isRoundTrip = false;
   searchFlightInfo =
     {
       trip: 'oneway',
       departure: '',
       arrival: '',
-      departure_date: moment().add(1, 'months').format('YYYY-MM-DD'),
+      departure_date: null,
       arrival_date: null,
       class: '',
       adult: 1,
@@ -58,11 +53,7 @@ export class FlightSearchBarComponent implements OnInit {
   defaultSelected = 'NY, United States';
 
   // tslint:disable-next-line: quotemark
-  defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
   totalPerson: number = 1;
-
-  fromDestinationData = [];
-  toDestinationData = [];
 
   airportDefaultDestValue;
   airportDefaultArrivalValue;
@@ -73,23 +64,14 @@ export class FlightSearchBarComponent implements OnInit {
     totalPerson: 1,
     class: 'Economy',
   };
-  departureDate: string;
-  arrivalDate: string;
   searchedValue = [];
   arrivalCode: string;
 
-  // locale = {
-  //   format: 'DD/MM/YYYY',
-  //   displayFormat: 'DD/MM/YYYY'
-  // };
 
-  locale = {
-    format: 'MM/DD/YYYY',
-    displayFormat: 'MM/DD/YYYY'
-  };
-
-  flightDepartureMinDate: moment.Moment = moment();
-  flightReturnMinDate: moment.Moment = moment().add(7, 'days');
+  flightDepartureMinDate;
+  flightReturnMinDate;
+  departureDate;
+  returnDate;
 
   constructor(
     public fb: FormBuilder,
@@ -99,8 +81,8 @@ export class FlightSearchBarComponent implements OnInit {
     private route: ActivatedRoute
   ) {
 
-    this.departureDate = this.route.snapshot.queryParams['departure_date'];
-    this.arrivalDate = this.route.snapshot.queryParams['arrival_date'];
+    this.departureDate = this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['departure_date'], 'YYYY-MM-DD')
+    this.returnDate = this.route.snapshot.queryParams['arrival_date'] ? this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['arrival_date'], 'YYYY-MM-DD') : this.commonFunction.convertDateFormat(moment(this.route.snapshot.queryParams['departure_date']).add(1, "days"), 'YYYY-MM-DD');
     this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
     this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
@@ -109,20 +91,13 @@ export class FlightSearchBarComponent implements OnInit {
     this.arrivalCode = this.route.snapshot.queryParams['arrival'];
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
-      toDestination: [[Validators.required]],
-      departureDate: [{
-        startDate: moment(this.departureDate, 'YYYY-MM-DD').format('MM/DD/YYYY')
-      }, Validators.required],
-      returnDate: [{
-        startDate: typeof this.arrivalDate !== 'undefined' ?
-          moment(this.arrivalDate, 'YYYY-MM-DD').format('MM/DD/YYYY') : moment(this.departureDate).add(7, 'days')
-      }, Validators.required]
+      toDestination: [[Validators.required]]
     });
 
     const selectedItem = localStorage.getItem('_fligh');
     if (selectedItem) {
       const info = JSON.parse(selectedItem);
-      info[1].value = airports[this.arrivalCode];
+      //info[1].value = airports[this.arrivalCode];
       info.forEach(res => {
         if (res && res.key === 'fromSearch') {
           this.data.push(res.value);
@@ -142,46 +117,15 @@ export class FlightSearchBarComponent implements OnInit {
       });
 
     }
+
+    this.flightDepartureMinDate = new Date();
+    this.flightReturnMinDate = new Date(this.departureDate);
   }
 
   ngOnInit() {
     this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
     this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
-    // const selectedItem = localStorage.getItem('_fligh');
-    // if (selectedItem) {
-    //   const info = JSON.parse(selectedItem);
-    //   info[1].value = airports[this.arrivalCode];
-    //   info.forEach(res => {
-    //     if (res && res.key === 'fromSearch') {
-    //       this.data.push(res.value);
-    //       this.airportDefaultDestValue = `${res.value.city}`;
-    //       if (this.airportDefaultDestValue) {
-    //         this.defaultSelected = '';
-    //       }
-    //     }
-    //     if (res && res.key === 'toSearch') {
-    //       this.data.push(res.value);
-    //       this.airportDefaultArrivalValue = `${res.value.city}`;
-    //       if (this.airportDefaultArrivalValue) {
-    //         this.defaultSelected = '';
-    //       }
-    //     }
-    //   });
-    // }
-
-    this.loadJquery();
   }
-
-  loadJquery() {
-
-    /* $(".featured_slid").slick({
-      dots: false,
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1
-    }); */
-  }
-
 
   searchAirportDeparture(searchItem) {
     this.loadingDeparture = true;
@@ -257,8 +201,6 @@ export class FlightSearchBarComponent implements OnInit {
       this.searchFlightInfo.arrival = event.code;
       this.searchedValue.push({ key: 'toSearch', value: event });
     }
-    // this.searchFlightInfo.departure = this.fromDestinationCode;
-    // this.searchFlightInfo.arrival = this.toDestinationCode;
   }
 
   getSwappedValue(event) {
@@ -281,14 +223,13 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
+    this.searchFlightInfo.departure_date = moment(this.departureDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
+
     if (this.isRoundTrip === true) {
       this.searchFlightInfo.trip = 'roundtrip';
-      this.searchFlightInfo.arrival_date =
-        moment(this.flightSearchForm.value.returnDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
-          ? moment(this.flightSearchForm.value.returnDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD') : this.flightReturnMinDate;
+      this.searchFlightInfo.arrival_date = moment(this.returnDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
     }
 
-    // console.log(this.searchFlightInfo);
 
     if (!this.isRoundTrip && this.totalPerson &&
       this.searchFlightInfo.departure_date && this.searchFlightInfo.departure && this.searchFlightInfo.arrival
@@ -315,14 +256,40 @@ export class FlightSearchBarComponent implements OnInit {
     }
   }
 
-  returnDatesUpdated(event) {
-    // moment(this.flightSearchForm.value.departureDate.startDate);
-    this.searchFlightInfo.arrival_date = moment(this.flightSearchForm.value.returnDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
+  departureDateUpdate(date) {
+    this.returnDate = new Date(date)
+    this.flightReturnMinDate = new Date(date)
   }
 
-  departureDateUpdate(date) {
-    this.flightReturnMinDate = moment(this.flightSearchForm.value.departureDate.startDate);
-    this.searchFlightInfo.departure_date = moment(this.flightSearchForm.value.departureDate.startDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
+  dateChange(type, direction) {
+
+    if (type == 'departure') {
+      if (direction === 'previous') {
+        if (moment(this.departureDate).isAfter(moment(new Date()))) {
+          this.departureDate = new Date(moment(this.departureDate).subtract(1, 'days').format('MM/DD/YYYY'))
+        }
+      }
+
+      else {
+        this.departureDate = new Date(moment(this.departureDate).add(1, 'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isAfter(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
+        }
+      }
+      this.flightReturnMinDate = new Date(this.departureDate)
+    }
+
+    if (type == 'arrival') {
+
+      if (direction === 'previous') {
+        if (moment(this.departureDate).isBefore(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).subtract(1, 'days').format('MM/DD/YYYY'))
+        }
+      }
+      else {
+        this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
+      }
+    }
   }
 
 }

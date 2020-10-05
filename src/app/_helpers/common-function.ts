@@ -92,5 +92,54 @@ export class CommonFunction {
         }
     }
 
+    /** 
+     * @by Mohit Gurjar
+     * String to convert in date forrmat {YYYY-MM-DD}
+     * @param string in date [04/12/2020]
+     * @param saprator [/]
+     */
+    stringToDate(string, saprator) {
+        let dateArray = string.split(saprator);
+        return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
+    }
+
+    /** 
+     * @by Mohit Gurjar
+     * Difference between two dates / current date in Days
+     * @param string in date [24/10/2020]
+     * @param date
+     */
+    getPaymentDueDay(dateSent) {
+        let currentDate = new Date();
+        dateSent = new Date(dateSent);
+        const days = Math.floor((Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
+        if (days > 0) {
+          return days;
+        } else {
+          return 0;
+        }
+      }
+
+    decodeUrl(url){
+        let prevUrl=[];
+        let queryParams={}
+        if(url){
+            prevUrl = url.split('?')
+            let params = prevUrl[1].split('&');
+            for(let i in params){
+              let param = params[i].split("=");
+              queryParams[param[0]]=param[1];
+            }
+
+            return {
+                url : prevUrl[0],
+                params : queryParams
+            }
+        }
+        return {
+            url : '/',
+            params : {}
+        };
+    }
 }
 

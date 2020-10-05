@@ -9,12 +9,11 @@ exports.__esModule = true;
 exports.AdultListComponent = void 0;
 var core_1 = require("@angular/core");
 var AdultListComponent = /** @class */ (function () {
-    function AdultListComponent(cookieService, genericService, router, cd, toastr) {
+    function AdultListComponent(cookieService, genericService, router, cd) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.router = router;
         this.cd = cd;
-        this.toastr = toastr;
         this.adultsCount = new core_1.EventEmitter();
         this._itinerarySelectionArray = new core_1.EventEmitter();
         this.travelers = [];
@@ -56,53 +55,57 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.selectTraveler = function (event, traveler) {
-        if (event.target.checked) {
-            this._itinerary = JSON.parse(this.cookieService.get('_itinerary'));
-            var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
-            var travelerData = {
-                "userId": traveler.userId,
-                "firstName": traveler.firstName,
-                "lastName": traveler.lastName,
-                "email": traveler.email
-            };
-            this._travelers.push(travelerData);
-            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-            if (this.counter + 1 < totalTraveler) {
+        this._itinerary = sessionStorage.getItem('_itinerary') ? JSON.parse(sessionStorage.getItem('_itinerary')) : '';
+        if (this._itinerary) {
+            if (event.target.checked) {
+                var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+                var travelerData = {
+                    "userId": traveler.userId,
+                    "firstName": traveler.firstName,
+                    "lastName": traveler.lastName,
+                    "email": traveler.email
+                };
+                this._travelers.push(travelerData);
+                this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+                if (this.counter + 1 < totalTraveler) {
+                    // this.checkBoxDisable = false;
+                    this.counter++;
+                }
+                else {
+                    if (this.counter + 1 == totalTraveler) {
+                        this.counter++;
+                    }
+                    // this.checkBoxDisable = true;                
+                }
+                if (traveler.user_type == 'adult') {
+                    this._itinerarySelection.adult.push(traveler.userId);
+                }
+                else if (traveler.user_type == 'child') {
+                    this._itinerarySelection.child.push(traveler.userId);
+                }
+                else {
+                    this._itinerarySelection.infant.push(traveler.userId);
+                }
+            }
+            else {
+                this.counter--;
                 // this.checkBoxDisable = false;
-                this.counter++;
-            }
-            else {
-                // this.checkBoxDisable = true;                
-            }
-            if (traveler.user_type == 'adult') {
-                this._itinerarySelection.adult.push(traveler.userId);
-            }
-            else if (traveler.user_type == 'child') {
-                this._itinerarySelection.child.push(traveler.userId);
-            }
-            else {
-                this._itinerarySelection.infant.push(traveler.userId);
-            }
-        }
-        else {
-            this.counter--;
-            // this.checkBoxDisable = false;
-            this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
-            this.cookieService.remove('_travelers');
-            this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-            if (traveler.user_type == 'adult') {
-                this._itinerarySelection.adult = this._itinerarySelection.adult.filter(function (obj) { return obj !== traveler.userId; });
-            }
-            else if (traveler.user_type == 'child') {
-                this._itinerarySelection.child = this._itinerarySelection.child.filter(function (obj) { return obj !== traveler.userId; });
-            }
-            else {
-                this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
+                this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
+                this.cookieService.remove('_travelers');
+                this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+                if (traveler.user_type == 'adult') {
+                    this._itinerarySelection.adult = this._itinerarySelection.adult.filter(function (obj) { return obj !== traveler.userId; });
+                }
+                else if (traveler.user_type == 'child') {
+                    this._itinerarySelection.child = this._itinerarySelection.child.filter(function (obj) { return obj !== traveler.userId; });
+                }
+                else {
+                    this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
+                }
             }
         }
         this.adultsCount.emit(this.counter);
         this._itinerarySelectionArray.emit(this._itinerarySelection);
-        // console.log(this.counter)
     };
     AdultListComponent.prototype.getRandomNumber = function (i) {
         var random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
@@ -113,10 +116,6 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.ngDoCheck = function () {
-        // console.log("whole",this)
-        /* this._selectedId.forEach(id => {
-          $(  "#"+id   ).removeAttr( "disabled" );
-        }); */
         this.checkUser();
         this.containers = this.containers;
         if (this.travelers.length >= 0) {
@@ -141,21 +140,18 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.pushTraveler = function (event) {
-        console.log('updated', event);
         if (event.user_type === 'adult') {
-            console.log('before', this._adults);
+            var index = this._adults.indexOf(event.userId, 0);
+            this._adults = this._adults.filter(function (item) { return item.userId != event.userId; });
             this._adults.push(event);
-            console.log('after', this._adults);
         }
         else if (event.user_type === 'child') {
-            console.log('before child', this._childs);
+            this._childs = this._childs.filter(function (item) { return item.userId != event.userId; });
             this._childs.push(event);
-            console.log('after child', this._childs);
         }
         else {
-            console.log('before', this._infants);
+            this._infants = this._infants.filter(function (item) { return item.userId != event.userId; });
             this._infants.push(event);
-            console.log('after', this._infants);
         }
         this.showAddAdultForm = false;
     };

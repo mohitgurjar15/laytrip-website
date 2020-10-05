@@ -6,8 +6,9 @@ import { FlightService } from '../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
+import { CookieService } from 'ngx-cookie';
 
-import { Subscription } from 'rxjs';
+
 declare var $: any;
 
 @Component({
@@ -33,50 +34,49 @@ export class TravelerFormComponent implements OnInit {
   defaultDate = moment().add(1, 'months').format("DD MMM'YY dddd");
   editMode = false;
   formStatus: boolean = false;
-
+  is_passport_required: boolean = false;
+  _itinerary:any;
+  _date = new Date();
   locale = {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
   };
 
-  dobMinDate: any;
-  dobMaxDate: moment.Moment = moment();
-  expiryMinDate: moment.Moment = moment().add(2, 'days');
-  subscriptions: Subscription[] = [];
+  dobMinDate;
+  dobMaxDate; 
+  minyear;
+  maxyear;
+  expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
 
+  
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
     public router: Router,
-    public commonFunction: CommonFunction
+    public commonFunction: CommonFunction,
+    private cookieService: CookieService,
+
   ) { }
 
   ngOnInit() {
     this.adultForm = this.formBuilder.group({
-      title: [''],
-      gender: ['', Validators.required],
+      title: ['mr',Validators.required],
+      gender: ['M', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       country_code: ['', [Validators.required]],
       phone_no: ['', [Validators.required]],
-      country_id: ['', Validators.required],
-      dob: [{
-        startDate: typeof this.traveler.dob !== 'undefined' ?
-          moment(this.traveler.dob, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.dobMaxDate
-      }, Validators.required],
-      passport_expiry: [{
-        startDate: typeof this.traveler.passportExpiry !== 'undefined' ?
-          moment(this.traveler.passportExpiry, 'YYYY-MM-DD').format('DD/MM/YYYY') : this.expiryMinDate
-      },],
-      passport_number: [''],
+      country_id: ['', Validators.required],      
+      dob : ['', Validators.required],
+      passport_expiry : [''],
       frequently_no: [''],
       user_type: ['']
     });
 
     this.setUserTypeValidation();
-
     if (this.traveler.userId) {
+
       this.adultForm.patchValue({
         title: this.traveler.title,
         firstName: this.traveler.firstName,
@@ -87,9 +87,11 @@ export class TravelerFormComponent implements OnInit {
         phone_no: this.traveler.phoneNo,
         country_id: this.traveler.country != null ? this.traveler.country.name : '',
         passport_number: this.traveler.passportNumber,
+        dob: new Date(this.traveler.dob),
+        passport_expiry: new Date(this.traveler.passport_expiry),
         frequently_no: ''
-      })
-      this.formStatus = this.adultForm.status === 'VALID' ? true : false;
+      });
+      this.traveler.isComplete =  this.adultForm.status === 'VALID' ? true : false;
       // this.auditFormStatus.emit(this.formStatus);
     }
   }
@@ -101,31 +103,47 @@ export class TravelerFormComponent implements OnInit {
   }
 
   setUserTypeValidation() {
+    this._itinerary =  this.cookieService.get('_itinerary') ? JSON.parse(this.cookieService.get('_itinerary')) : [];
+    
     const emailControl = this.adultForm.get('email');
     const phoneControl = this.adultForm.get('phone_no');
     const countryControl = this.adultForm.get('country_code');
+    const passport_numberControl = this.adultForm.get('passport_number');
+    const passport_expiryControl = this.adultForm.get('passport_expiry');
     if (this.type === 'adult') {
       emailControl.setValidators([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required]);
       countryControl.setValidators([Validators.required]);
-      this.dobMaxDate = moment().add(-12, 'year');
-    } else if (this.type === 'child') {
 
+      this.dobMinDate = new Date(moment().subtract(50,'years').format("MM/DD/YYYY") );
+      this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
+      this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
+    } else if (this.type === 'child') {
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null);
-      this.dobMinDate = moment().add(-12, 'year');
-      this.dobMaxDate = moment().add(-2, 'year');
+      this.dobMinDate =  new Date(moment().subtract(12,'years').format("MM/DD/YYYY") );
+      this.dobMaxDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
+      this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
+ 
     } else if (this.type === 'infant') {
-      this.dobMinDate = moment().add(-2, 'year');
-      this.dobMaxDate = moment();
+      this.dobMinDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
+      this.dobMaxDate = new Date();
+      this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
+ 
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
+    } 
+    if((this.type === 'adult' || this.type === 'child') && this.is_passport_required){
+      passport_numberControl.setValidators([Validators.required]);
+      passport_expiryControl.setValidators([Validators.required]);
+      passport_numberControl.updateValueAndValidity();
     }
     emailControl.updateValueAndValidity();
     phoneControl.updateValueAndValidity();
     countryControl.updateValueAndValidity();
+    passport_expiryControl.updateValueAndValidity();
   }
 
   ngOnChanges(changes) {
@@ -140,33 +158,33 @@ export class TravelerFormComponent implements OnInit {
       this.isLoggedIn = true;
     }
   }
-  dobDate: any = '';
 
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
-      console.log(this.adultForm.controls);
       this.submitted = true;
       this.loading = false;
       return;
     } else {
-
       let country_id = this.adultForm.value.country_id.id;
       if (!Number(country_id)) {
         country_id = this.traveler.country.id;
       }
-
+     
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,
         passport_number: this.adultForm.value.passport_number,
-        dob: typeof this.adultForm.value.dob.startDate === 'object' ? moment(this.adultForm.value.dob.startDate).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob.startDate, '/')).format('YYYY-MM-DD'),
+        dob: typeof this.adultForm.value.dob === 'object' ? moment(this.adultForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.dob, '/')).format('YYYY-MM-DD'),
         gender: this.adultForm.value.gender,
         country_id: country_id ? country_id : '',
-        passport_expiry: typeof this.adultForm.value.dob.passport_expiry === 'object' ? moment(this.adultForm.value.dob.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.adultForm.value.passport_expiry.startDate, '/')).format('YYYY-MM-DD'),
       };
+      if((this.type === 'adult' || this.type === 'child') && this.is_passport_required){
+        let passport_expiry_json = { passport_expiry: typeof this.adultForm.value.passport_expiry === 'object' ? moment(this.adultForm.value.passport_expiry).format('YYYY-MM-DD') : ''};
+        jsonData = Object.assign(jsonData, passport_expiry_json);
+      }
 
       if (this.type === 'adult') {
         let adultObj = {
@@ -176,13 +194,11 @@ export class TravelerFormComponent implements OnInit {
         };
         jsonData = Object.assign(jsonData, adultObj);
       }
-
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
           // this.travelerFormChange.observers.push(data);
           this.travelerFormChange.emit(data);
-          console.log(this.travelerFormChange)
           $('.collapse').collapse('hide');
           $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
@@ -197,30 +213,25 @@ export class TravelerFormComponent implements OnInit {
           let emailObj = { email: this.adultForm.value.email ? this.adultForm.value.email : '' };
           jsonData = Object.assign(jsonData, emailObj);
         }
-        this.subscriptions.push(
-          this.flightService.addAdult(jsonData).subscribe((data: any) => {
-            this.adultForm.reset();
-            this.submitted = this.loading = false;
-            console.log(this.isLoggedIn)
-            if (!this.isLoggedIn) {
-              localStorage.setItem("_lay_sess", data.token);
-            }
-            this.travelerFormChange.emit(data);
-            console.log(this.travelerFormChange);
+        
+        this.flightService.addAdult(jsonData).subscribe((data: any) => {
+          this.adultForm.reset();
+          this.submitted = this.loading = false;
+          if (!this.isLoggedIn) {
+            localStorage.setItem("_lay_sess", data.token);
+          }
+          
+          this.travelerFormChange.emit(data);
 
-            $('.collapse').collapse('hide');
-            $('#accordion-' + this.type).hide();
-            this.subscriptions.forEach(sub => sub.unsubscribe());
-          }, (error: HttpErrorResponse) => {
-            console.log('error')
-            this.submitted = this.loading = false;
-            if (error.status === 401) {
-              this.router.navigate(['/']);
-            }
-            this.subscriptions.forEach(sub => sub.unsubscribe());
-          })
-
-        );
+          $('.collapse').collapse('hide');
+          $('#accordion-' + this.type).hide();
+        }, (error: HttpErrorResponse) => {
+          console.log('error')
+          this.submitted = this.loading = false;
+          if (error.status === 401) {
+            this.router.navigate(['/']);
+          }
+        })        
       }
     }
   }
@@ -230,14 +241,7 @@ export class TravelerFormComponent implements OnInit {
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 
-  dobDateUpdate(date) {
-    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate)
-
-  }
-
-  expiryDateUpdate(date) {
-    this.expiryMinDate = moment(this.adultForm.value.passport_expiry.startDate);
-  }
+ 
 
 
 }
