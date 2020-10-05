@@ -1,14 +1,20 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked, ElementRef } from '@angular/core';
 // import { FlightService } from 'src/app/services/flight.service';
 import { FlightService } from '../../services/flight.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { sampleData } from './airport';
-import { KeyCode } from './custom-select-types';
+import { KeyCode, CustomSelectOption } from './custom-select-types';
+declare var $: any;
+import { Overlay, BlockScrollStrategy } from '@angular/cdk/overlay';
+
+export function scrollFactory(overlay: Overlay): () => BlockScrollStrategy {
+  return () => overlay.scrollStrategies.block();
+}
 
 @Component({
   selector: 'app-search-airport',
   templateUrl: './search-airport.component.html',
-  styleUrls: ['./search-airport.component.scss']
+  styleUrls: ['./search-airport.component.scss'],
 })
 
 export class SearchAirportComponent implements OnInit, AfterViewChecked {
@@ -24,28 +30,81 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Output() changeValue = new EventEmitter<any>();
   @Output() getSwapValue = new EventEmitter<any>();
 
-  // @HostListener('window:keyup', ['$event'])
-  // keyEvent(event: KeyboardEvent) {
-  //   console.log(event);
+  selectedIndex = 0;
+  selectedAirport = [];
+  keyword = 'name';
+  data = [];
+  loading = false;
+  showDropDown = false;
+  itemNo = -1;
+
+  // setIndex(data, index) {
+  //   console.log('hkgkhghhjghj');
+  //   this.selectedIndex = index;
+  // }
+
+  // resetIndex() {
+  //   this.selectedIndex = -1;
   // }
 
   constructor(
     private flightService: FlightService,
     public cd: ChangeDetectorRef,
     private fb: FormBuilder,
+    private elementRef: ElementRef
   ) {
 
   }
 
-  selectedAirport = [];
-  keyword = 'name';
-  data = [];
-  loading = false;
-
-  showDropDown = false;
-
   ngOnInit() {
+
   }
+
+  trackByOption = (index: number, item: any) => {
+    // this.selectedIndex = item.item_no;
+    return item.item_no;
+  }
+
+  getValueByTab(event, index) {
+    if (this.showDropDown && event.keyCode === KeyCode.Tab) {
+      event.preventDefault();
+      this.selectEvent(this.data[this.selectedIndex], index);
+    }
+  }
+
+
+  // onKeyPress(event, dropDownId) {
+  //   let element = document.querySelectorAll('.list-item');
+  //   if (event.keyCode === KeyCode.ArrowDown) {
+  //     // this.selectedIndex = (this.selectedIndex + 1);
+  //     if (this.data.length >= 0) {
+  //       element[this.selectedIndex].scrollIntoView(
+  //         { block: 'nearest', inline: 'end' }
+  //       );
+  //     }
+  //   } else if (event.keyCode === KeyCode.ArrowUp) {
+  //     if (this.selectedIndex <= 0) {
+  //       this.selectedIndex = this.data.length;
+  //     }
+  //     this.selectedIndex = (this.selectedIndex - 1);
+  //     if (this.data.length > 0) {
+  //       element[this.selectedIndex].scrollIntoView(
+  //         { block: 'nearest', inline: 'end' }
+  //       );
+  //     }
+  //   } else if (event.keyCode === KeyCode.Enter) {
+  //     event.preventDefault();
+  //     this.selectEvent(this.data[this.selectedIndex], dropDownId);
+  //   }
+  // }
+
+  // cumulativeLength(index) {
+  //   let acc = 0;
+  //   for (let i = 0; i < index; i++) {
+  //     acc = this.data[i].sub_airport.length + 2;
+  //   }
+  //   return acc;
+  // }
 
   openDropDown() {
     if (this.data && this.data.length) {
@@ -61,8 +120,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   }
   selectValue(value, index) {
     this.showDropDown = false;
-    const selectedValue = value.city + '(' + value.code + ')';
-    this.form.controls[`${this.controlName}`].setValue(selectedValue);
+    this.form.controls[`${this.controlName}`].setValue(value.city);
     const selectedEvent = {
       id: value.id,
       name: value.name,
@@ -99,11 +157,21 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   searchAirport(searchItem) {
     this.loading = true;
+    // this.data = sampleData;
+    // this.showDropDown = true;
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
-      // console.log(response);
       this.loading = false;
-      this.data = response;
+      // this.data = sampleData;
       this.showDropDown = true;
+      // this.itemNo++;
+      // response.forEach(list => {
+      //   list.item_no = this.itemNo++;
+      //   list.sub_airport.forEach(element => {
+      //     element.item_no = this.itemNo++;
+      //   });
+      // });
+      this.data = response;
+      console.log(this.data);
     },
       error => {
         this.loading = false;
@@ -112,12 +180,12 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   }
 
   onChangeSearch(event) {
-    if (event.target.value.length > 2) {
-      this.searchAirport(event.target.value);
-    }
-    // if (event.term.length > 2) {
-    //   this.searchAirport(event.term);
+    // if (event.target.value.length > 2) {
+    //   this.searchAirport(event.target.value);
     // }
+    if (event.term.length > 2) {
+      this.searchAirport(event.term);
+    }
   }
 
   selectEvent(event, index) {
@@ -132,6 +200,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
     } else if (event && index && index === 'toSearch') {
       this.changeValue.emit({ key: 'toSearch', value: event });
     }
+    this.form.controls[`${this.controlName}`].setValue(event.city);
+
     // if (event && index && index === 'fromSearch') {
     //   this.getSwapValue.emit({ key: 'fromSearch', value: event });
     // } else if (event && index && index === 'toSearch') {

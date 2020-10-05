@@ -78,8 +78,23 @@
     overflow-y: auto;
     z-index: 10;
     background-color: #f6f6f6;
-    font-family: sans-serif;
     opacity: 0.98;
+}
+
+.dropdown-list {
+    list-style: none;
+    .list-item {
+        padding: 10px;
+    }
+    .item-head {
+        font-weight: bold;
+    }
+    .item-body {
+        padding-left: 33px;
+        // background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/oneway-icon.svg);
+        // background-position: 8px 11px;
+        // background-repeat: no-repeat;
+    }
 }
 
 .search-results {
@@ -88,7 +103,12 @@
 
 .search-results {
     li:hover {
-        background: #707070;
+        background: #ebf5ff;
+        color: #000;
+        cursor: pointer;
+        // background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/oneway-icon.svg);
+        // background-position: 8px 11px;
+        // background-repeat: no-repeat;
     }
 }
 
@@ -99,4 +119,10 @@
     .remove-icon {
         cursor: pointer;
     }
+}
+
+.highlight-row {
+    background-color: #fc7e66;
+    border-color: #46b8da;
+    color: #ffffff;
 }

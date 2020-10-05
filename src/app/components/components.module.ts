@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -37,7 +37,7 @@ import { ClickOutsideOfDropdownDirective } from './search-airport/dropdown.direc
     TravelerFormComponent,
     FullPageOverlayLoaderComponent,
     BookingEnquiryInfoComponent,
-    ClickOutsideOfDropdownDirective
+    ClickOutsideOfDropdownDirective,
   ],
   imports: [
     CommonModule,
@@ -63,9 +63,9 @@ import { ClickOutsideOfDropdownDirective } from './search-airport/dropdown.direc
     AddCardComponent,
     FullPageOverlayLoaderComponent,
     BookingEnquiryInfoComponent,
-    ClickOutsideOfDropdownDirective
+    ClickOutsideOfDropdownDirective,
   ],
   providers: [DatePipe, ClickOutsideOfDropdownDirective],
-
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ComponentsModule { }

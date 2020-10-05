@@ -35,35 +35,61 @@
     </ng-template>
 </div> -->
 
+
 <div [formGroup]="form" (clickOutsideOfDropdown)="closeDropDown()">
     <label>{{label}}</label>
     <div class="d-flex">
-        <input [formControlName]="controlName" placeholder="{{ placeHolder }}" id="{{id}}" (input)="onChangeSearch($event)"
-            (click)="openDropDown()" (keydown)="removeInput($event)" class="input-underline search-bar" type="text">
-        <span *ngIf="clearable && selectedAirport && selectedAirport.code" class="custom-remove" title="Clear all" (click)="clearSearchedAirport()"><span class="remove-icon fa fa-remove text-danger"></span></span>
+        <input (keyup)="onKeyPress($event, id)" [formControlName]="controlName" placeholder="{{ placeHolder }}"
+            id="{{id}}" (input)="onChangeSearch($event)" (click)="openDropDown()"
+            (keydown)="removeInput($event);getValueByTab($event, id)" class="input-underline search-bar" type="text">
+        <div *ngIf="loading">
+            <!-- <img src="/assets/images/loader.gif" *ngIf="loading" height="25" width="25"> -->
+            <span>Loading..</span>
+        </div>
+        <span *ngIf="clearable && selectedAirport && selectedAirport.code" class="custom-remove" title="Clear all"
+            (click)="clearSearchedAirport()"><span class="remove-icon fa fa-remove text-danger"></span></span>
     </div>
 </div>
 <div>
-    <div *ngIf="showDropDown" class="search-drop-down">
-        <div (click)="selectValue(airport, id)" class="search-results" *ngFor="let airport of data">
+    <div *ngIf="showDropDown" id="search-drop-down" class="search-drop-down">
+        <div class="search-results" *ngFor="let airport of data;let idx=index;trackBy:trackByOption">
+            <div class="inner_div">
+                <div id="dropdown-list" class="dropdown-list">
+                    <div [ngClass]="{'highlight-row' :  airport.item_no === selectedIndex && selectedAirport }"
+                        (click)="selectValue(airport, id)" class="list-item item-head">
+                        {{airport.code}} {{airport.city}} - {{airport.name}}---{{airport.item_no}}
+                    </div>
+                    <ng-template [ngIf]="airport.sub_airport.length" let-item="item">
+                        <ng-template ngFor [ngForOf]="airport.sub_airport" let-subAirport let-subidx="index">
+                            <div class="list-item item-body"
+                                [ngClass]="{'highlight-row' :  subAirport.item_no === itemNo && selectedAirport }"
+                                (click)="selectValue(subAirport, id)">
+                                {{subAirport.code}} {{subAirport.city}} - {{subAirport.name}}---{{subAirport.item_no}}
+                            </div>
+                        </ng-template>
+                    </ng-template>
+                </div>
 
-            <div>
-                <ul *ngIf="airport && airport.sub_airport && !airport.sub_airport.length">
-                    <li>{{airport.code}} {{airport.city}} - {{airport.name}}</li>
-                </ul>
-                <ul *ngIf="airport && airport.sub_airport && airport.sub_airport.length">
-                    <li>{{airport.code}} {{airport.city}} - {{airport.name}}</li>
-                    <li *ngFor="let subAirport of airport.sub_airport">
-                        {{subAirport.code}} {{subAirport.city}} - {{subAirport.name}}
-                    </li>
-                </ul>
+                <!-- <ul id="dropdown-list" class="dropdown-list">
+                    <li (click)="selectValue(airport, id)" class="list-item item-head"
+                        *ngIf="!airport.sub_airport.length"
+                        [ngClass]="{'highlight-row' :  idx === selectedIndex && selectedAirport }">
+                        {{airport.code}} {{airport.city}} - {{airport.name}}</li>
+                    <ng-container *ngIf="airport.sub_airport.length">
+                        <li (click)="selectValue(airport, id)" class="list-item item-head"
+                            [ngClass]="{'highlight-row' :  idx === selectedIndex && selectedAirport }">{{airport.code}}
+                            {{airport.city}} - {{airport.name}}</li>
+                        <li (click)="selectValue(subAirport, id)" class="list-item item-body"
+                            *ngFor="let subAirport of airport.sub_airport;let subidx=index"
+                            [ngClass]="{'highlight-row' :  idx === selectedIndex && selectedAirport }">
+                            {{subAirport.code}} {{subAirport.city}} - {{subAirport.name}}</li>
+                    </ng-container>
+                </ul> -->
+                <!-- cumulativeLength(idx) + subidx -->
             </div>
 
         </div>
     </div>
     <span *ngIf="defaultSelected">{{ defaultSelected }}</span>
     <span *ngIf="selectedAirport">{{ selectedAirport.code}} {{selectedAirport.country}}</span>
-    <!-- <div *ngIf="selectedAirport">
-        <span *ngIf="selectedAirport">{{ selectedAirport.code}} {{selectedAirport.country}}</span>
-    </div> -->
 </div>

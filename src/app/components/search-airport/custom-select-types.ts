@@ -7,3 +7,14 @@ export enum KeyCode {
     ArrowDown = 40,
     Backspace = 8
 }
+
+export interface CustomSelectOption {
+    [name: string]: any;
+    index?: number;
+    htmlId?: string;
+    selected?: boolean;
+    disabled?: boolean;
+    marked?: boolean;
+    label?: string;
+    value?: string | Object;
+}
