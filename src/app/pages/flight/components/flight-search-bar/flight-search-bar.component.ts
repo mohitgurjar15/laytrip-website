@@ -43,7 +43,7 @@ export class FlightSearchBarComponent implements OnInit {
   swapped = [];
   isSwap = false;
   swapError = '';
-  selectedAirport = [];
+  selectedAirport = {};
 
   loadingDeparture = false;
   loadingArrival = false;
@@ -72,6 +72,9 @@ export class FlightSearchBarComponent implements OnInit {
   flightReturnMinDate;
   departureDate;
   returnDate;
+
+  departureAirport:any={};
+  arrivalAirport :any={}
 
   constructor(
     public fb: FormBuilder,
@@ -105,6 +108,7 @@ export class FlightSearchBarComponent implements OnInit {
           if (this.airportDefaultDestValue) {
             this.defaultSelected = '';
           }
+          this.departureAirport=res.value;
         }
         if (res && res.key === 'toSearch') {
           res.value.display_name = `${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
@@ -113,6 +117,7 @@ export class FlightSearchBarComponent implements OnInit {
           if (this.airportDefaultArrivalValue) {
             this.defaultSelected = '';
           }
+          this.arrivalAirport=res.value;
         }
       });
 
@@ -139,6 +144,7 @@ export class FlightSearchBarComponent implements OnInit {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+          parentId:res.parentId
         };
       });
     },
@@ -160,6 +166,7 @@ export class FlightSearchBarComponent implements OnInit {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+          parentId:res.parentId
         };
       });
     },
@@ -196,10 +203,20 @@ export class FlightSearchBarComponent implements OnInit {
     this.defaultSelected = '';
     if (event && event.code && item.key === 'fromSearch') {
       this.searchFlightInfo.departure = event.code;
+      this.departureAirport=event;
       this.searchedValue.push({ key: 'fromSearch', value: event });
     } else if (event && event.code && item.key === 'toSearch') {
       this.searchFlightInfo.arrival = event.code;
       this.searchedValue.push({ key: 'toSearch', value: event });
+      this.arrivalAirport=event;
+    }
+  }
+
+  onRemove(event,item){
+    if (item.key === 'fromSearch') {
+      this.departureAirport=Object.create(null);
+    } else if (item.key === 'toSearch') {
+      this.arrivalAirport=Object.create(null);
     }
   }
 

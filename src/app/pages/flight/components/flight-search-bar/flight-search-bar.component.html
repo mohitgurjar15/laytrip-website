@@ -42,33 +42,24 @@
                           <label>From</label>
                           <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="display_name"
                             bindValue="city" [clearable]="true" minTermLength="3" notFoundText=""
-                            [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}" (clear)="onRemove($event,{key: 'fromSearch'})"
                             (search)="changeSearchDeparture($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder1 }}">
                             <ng-template ng-option-tmp let-item="item" let-index="index"
                               let-search="searchTerm">
-                              <ul class="item-list">
-                                <li class="item">
-                                  <div class="item-left">
-                                    <p class="item-name">{{item.city}}</p>
-                                    <p class="item-city-country">{{item.code}},{{item.name}}</p>
-                                  </div>
-                                  <!-- <div class="item-right">
-                                    <p>{{item.code}}</p>
-                                  </div> -->
-                                </li>
-                              </ul>
+                              <div  [ngClass]="(item.parentId==0)?'parent':'child'">
+                                  {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
+                              </div>
                             </ng-template>
                             <ng-template ng-label-tmp let-item="item">
-                              <!-- <img height="15" width="15" [src]="item.avatar"/> -->
-                              {{item.city}}<!--  is cool -->
+                              
+                              {{item.city}}
                             </ng-template>
                           </ng-select>
-                          <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
-                          <ng-template #selectedAirport>
-                            <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
-                          </ng-template>
+                          <span *ngIf="departureAirport?.code">{{ departureAirport?.code }}, {{ departureAirport?.country }}</span>
+                          <span *ngIf="!departureAirport?.code"></span>
+                          
                         </div>
                       </div>
                       <div class="switch_btn">
@@ -79,37 +70,25 @@
                       <div class="flight_to">
                         <div class="search_area">
                           <label>To</label>
-                          <!-- <input type="text" name="to" maxlength="20" tabindex="2" placeholder="Los Angeles" />
-                          <span>CA, United States</span> -->
+                          
                           <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="display_name"
                             bindValue="city" [(ngModel)]="airportDefaultArrivalValue"
-                            [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText=""
+                            [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText="" (clear)="onRemove($event,{key: 'toSearch'})"
                             (search)="changeSearchArrival($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'toSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder2 }}">
                             <ng-template ng-option-tmp  let-item="item" let-index="index"
                               let-search="searchTerm">
-                              <ul class="item-list">
-                                <li class="item">
-                                  <div class="item-left">
-                                    <p class="item-name">{{item.city}}</p>
-                                    <p class="item-city-country">{{item.code}},{{item.name}}</p>
-                                  </div>
-                                  <!-- <div class="item-right">
-                                    <p>{{item.code}}</p>
-                                  </div> -->
-                                </li>
-                              </ul>
+                               <div  [ngClass]="(item.parentId==0)?'parent':'child'">
+                                  {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
+                              </div>
                             </ng-template>
                             <ng-template ng-label-tmp let-item="item">
-                              <!-- <img height="15" width="15" [src]="item.avatar"/> -->
-                              {{item.city}}<!--  is cool -->
+                              {{item.city}}
                           </ng-template>
                           </ng-select>
-                          <span *ngIf="defaultSelected;else selectedAirport">{{ defaultSelected }}</span>
-                          <ng-template #selectedAirport>
-                            <span *ngIf="selectedAirport">{{ selectedAirport.code}}{{selectedAirport.country}}</span>
-                          </ng-template>
+                          <span *ngIf="arrivalAirport?.code">{{ arrivalAirport?.code }}, {{ arrivalAirport?.country }}</span>
+                          <span *ngIf="!arrivalAirport?.code"></span>
                         </div>
                       </div>
                     </li>
@@ -170,8 +149,7 @@
                     </li>
                   </ul>
                   <div class="serch_btn">
-                    <button><span>Modify Search</span> <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
-                        alt="Right Arrow" /></button>
+                    <button><span>Modify Search</span></button>
                   </div>
                 </div>
               </form>
