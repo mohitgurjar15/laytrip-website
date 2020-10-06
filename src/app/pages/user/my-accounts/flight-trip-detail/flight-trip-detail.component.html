@@ -1,5 +1,23 @@
-<!-- <app-full-page-overlay-loader  image="{{s3BucketUrl}}assets/images/flight-load_im.png"  module="Flight" type="Booking"></app-full-page-overlay-loader>
- -->
+<app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png"  module="Flight" type="Booking"></app-full-page-overlay-loader>
+<!-- Start page loader modal-->
+<div class="page_load" *ngIf="bookingLoader">
+  <div class="page_load_inner">
+      <div class="page_laoding">
+          <img src="{{s3BucketUrl}}assets/images/flight-load_im.png" alt="Loading Images">
+          <h6> Trip <span>Searching</span></h6>
+          <!-- <div id="Loader_progressbar">
+              <div class="progress-label">Loading...</div>
+          </div> -->
+          <div class="progress Loader_progressbar progress_loader" >
+            <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:100%"></div>
+          </div>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+      </div>
+  </div>
+</div>
+<!-- Close page loader modal-->
+<app-trip-not-found  *ngIf="isTripNotFound"></app-trip-not-found> 
+
 <section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
   <div class="container">
       <div class="row">
@@ -12,5 +30,3 @@
       </div>
   </div>
 </section>
-
-<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 

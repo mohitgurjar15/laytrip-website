@@ -14,6 +14,7 @@ var SearchTripComponent = /** @class */ (function () {
         this.formBuilder = formBuilder;
         this.router = router;
         this.submitted = false;
+        this.isTripNotFound = false;
     }
     SearchTripComponent.prototype.ngOnInit = function () {
         this.SearchTripForm = this.formBuilder.group({

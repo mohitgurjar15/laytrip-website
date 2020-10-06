@@ -17,6 +17,8 @@ var FlightTripDetailComponent = /** @class */ (function () {
         this.bookingResult = {};
         this.isFlightNotAvailable = false;
         this.isTripDetailloading = false;
+        this.isTripNotFound = false;
+        this.bookingLoader = true;
     }
     FlightTripDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -28,9 +30,10 @@ var FlightTripDetailComponent = /** @class */ (function () {
         this.flightService.getFlightBookingDetails(this.bookingId).subscribe(function (res) {
             _this.bookingResult.booking_details = res;
             _this.isTripDetailloading = true;
+            _this.isTripNotFound = _this.bookingLoader = false;
         }, function (error) {
-            _this.isTripDetailloading = false;
-            _this.isFlightNotAvailable = true;
+            _this.isTripDetailloading = _this.bookingLoader = false;
+            _this.isFlightNotAvailable = _this.isTripNotFound = true;
             if (error.status === 404) {
             }
         });

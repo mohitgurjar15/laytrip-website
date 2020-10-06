@@ -20,8 +20,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { TravellerFormComponent } from './travellers/traveller-form/traveller-form.component';
 import { MyWalletComponent } from './my-wallet/my-wallet.component';
 import { SearchTripComponent } from './search-trip/search-trip.component';
-import { SearchTripWithIdComponent } from './search-trip/search-trip-with-id/search-trip-with-id.component';
 import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
+import { TripNotFoundComponent } from './trip-not-found/trip-not-found.component';
 
 
 @NgModule({
@@ -40,8 +40,8 @@ import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-deta
     ChangePasswordComponent,
     MyWalletComponent,
     SearchTripComponent,
-    SearchTripWithIdComponent,
     FlightTripDetailComponent,
+    TripNotFoundComponent,
   ],
   imports: [
     CommonModule,

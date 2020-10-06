@@ -29,8 +29,8 @@ var change_password_component_1 = require("./change-password/change-password.com
 var traveller_form_component_1 = require("./travellers/traveller-form/traveller-form.component");
 var my_wallet_component_1 = require("./my-wallet/my-wallet.component");
 var search_trip_component_1 = require("./search-trip/search-trip.component");
-var search_trip_with_id_component_1 = require("./search-trip/search-trip-with-id/search-trip-with-id.component");
 var flight_trip_detail_component_1 = require("./flight-trip-detail/flight-trip-detail.component");
+var trip_not_found_component_1 = require("./trip-not-found/trip-not-found.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -51,8 +51,8 @@ var MyAccountsModule = /** @class */ (function () {
                 change_password_component_1.ChangePasswordComponent,
                 my_wallet_component_1.MyWalletComponent,
                 search_trip_component_1.SearchTripComponent,
-                search_trip_with_id_component_1.SearchTripWithIdComponent,
                 flight_trip_detail_component_1.FlightTripDetailComponent,
+                trip_not_found_component_1.TripNotFoundComponent,
             ],
             imports: [
                 common_1.CommonModule,

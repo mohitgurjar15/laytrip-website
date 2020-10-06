@@ -16,7 +16,8 @@ export class FlightTripDetailComponent implements OnInit {
   bookingResult: any = {};
   isFlightNotAvailable = false;
   isTripDetailloading = false;
-
+  isTripNotFound : boolean =  false;
+  bookingLoader : boolean =  true;
   constructor(
     private route: ActivatedRoute,
     public flightService: FlightService
@@ -31,9 +32,11 @@ export class FlightTripDetailComponent implements OnInit {
     this.flightService.getFlightBookingDetails(this.bookingId).subscribe((res: any) => {
       this.bookingResult.booking_details = res;
       this.isTripDetailloading = true;
+      this.isTripNotFound = this.bookingLoader = false;
+
     }, (error: HttpErrorResponse) => {
-      this.isTripDetailloading =  false;
-      this.isFlightNotAvailable =  true;
+      this.isTripDetailloading = this.bookingLoader= false;
+      this.isFlightNotAvailable =  this.isTripNotFound  = true;
       if (error.status === 404) {
       }
     });

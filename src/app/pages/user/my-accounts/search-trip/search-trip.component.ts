@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class SearchTripComponent implements OnInit {
   SearchTripForm : FormGroup;
   submitted : boolean =  false;
-
+  isTripNotFound = false;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -27,6 +27,7 @@ export class SearchTripComponent implements OnInit {
       this.submitted = true;
       return;
     } else {
+      
       this.router.navigate(['/account/trip/'+ this.SearchTripForm.value.tripId]);
     }
   }
