@@ -135,5 +135,12 @@ export class FlightService {
             );
     }
 
+    getFlightBookingDetails(bookingId) {
+        return this.http.get(`${environment.apiUrl}v1/booking/booking-details/${bookingId}`, this.commonFunction.setHeaders())
+            .pipe(
+                catchError(this.handleError)
+        );
+    }
+
     
 }

@@ -101,6 +101,10 @@ var FlightService = /** @class */ (function () {
         return this.http.post(environment_1.environment.apiUrl + "v1/booking-feedback", payload, this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
     };
+    FlightService.prototype.getFlightBookingDetails = function (bookingId) {
+        return this.http.get(environment_1.environment.apiUrl + "v1/booking/booking-details/" + bookingId, this.commonFunction.setHeaders())
+            .pipe(operators_1.catchError(this.handleError));
+    };
     FlightService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

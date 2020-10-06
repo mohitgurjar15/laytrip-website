@@ -27,10 +27,14 @@ var ng_select_1 = require("@ng-select/ng-select");
 var flight_checkout_component_1 = require("./flight-checkout/flight-checkout.component");
 var booking_summary_loader_component_1 = require("./components/booking-summary-loader/booking-summary-loader.component");
 var flight_confirmation_component_1 = require("./components/flight-confirmation/flight-confirmation.component");
-var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var ngx_cookie_1 = require("ngx-cookie");
 var flight_booking_failed_component_1 = require("./components/flight-booking-failed/flight-booking-failed.component");
+var calendar_1 = require("primeng/calendar");
 var flight_loader_component_1 = require("./components/flight-loader/flight-loader.component");
+var flight_not_available_component_1 = require("./components/flight-not-available/flight-not-available.component");
+var flight_session_time_out_component_1 = require("./components/flight-session-time-out/flight-session-time-out.component");
+var baggage_policy_popup_component_1 = require("./components/baggage-policy-popup/baggage-policy-popup.component");
+var cancellation_policy_popup_component_1 = require("./components/cancellation-policy-popup/cancellation-policy-popup.component");
 var FlightModule = /** @class */ (function () {
     function FlightModule() {
     }
@@ -51,7 +55,11 @@ var FlightModule = /** @class */ (function () {
                 booking_summary_loader_component_1.BookingSummaryLoaderComponent,
                 flight_confirmation_component_1.FlightConfirmationComponent,
                 flight_booking_failed_component_1.FlightBookingFailedComponent,
-                flight_loader_component_1.FlightLoaderComponent
+                flight_loader_component_1.FlightLoaderComponent,
+                flight_not_available_component_1.FlightNotAvailableComponent,
+                flight_session_time_out_component_1.FlightSessionTimeOutComponent,
+                baggage_policy_popup_component_1.BaggagePolicyPopupComponent,
+                cancellation_policy_popup_component_1.CancellationPolicyPopupComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -61,10 +69,10 @@ var FlightModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
                 ng_select_1.NgSelectModule,
-                ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
                 ngx_cookie_1.CookieModule.forRoot(),
+                calendar_1.CalendarModule
             ],
-            exports: [flight_loader_component_1.FlightLoaderComponent, flight_not_found_component_1.FlightNotFoundComponent]
+            exports: [flight_loader_component_1.FlightLoaderComponent, flight_not_found_component_1.FlightNotFoundComponent, flight_confirmation_component_1.FlightConfirmationComponent, flight_summary_component_1.FlightSummaryComponent]
         })
     ], FlightModule);
     return FlightModule;

@@ -18,7 +18,6 @@ export class FlightConfirmationComponent implements OnInit {
   @Input() bookingData;
 
   ngOnInit() {
-
     this.userData = getLoginUserInfo();
   }
 
