@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { TravelerService } from 'src/app/services/traveler.service';
+import { TravelerService } from '../../../../services/traveler.service';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
