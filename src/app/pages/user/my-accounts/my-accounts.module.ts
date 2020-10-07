@@ -21,7 +21,10 @@ import { TravellerFormComponent } from './travellers/traveller-form/traveller-fo
 import { SubscriptionPlanComponent } from './subscription/subscription-plan.component';
 import { AccountCardListComponent } from './account-card-list/account-card-list.component';
 import { CardActionFormComponent } from './account-card-list/card-action-form/card-action-form.component';
-
+import { MyWalletComponent } from './my-wallet/my-wallet.component';
+import { SearchTripComponent } from './search-trip/search-trip.component';
+import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
+import { TripNotFoundComponent } from './trip-not-found/trip-not-found.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
 
@@ -42,7 +45,11 @@ import { ConfirmationModalComponent } from 'src/app/components/confirmation-moda
     SubscriptionPlanComponent,
     AccountCardListComponent,
     CardActionFormComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    MyWalletComponent,
+    SearchTripComponent,
+    FlightTripDetailComponent,
+    TripNotFoundComponent,
   ],
   imports: [
     CommonModule,

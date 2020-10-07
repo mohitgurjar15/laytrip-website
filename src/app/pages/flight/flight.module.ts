@@ -61,6 +61,6 @@ import { CancellationPolicyPopupComponent } from './components/cancellation-poli
     CookieModule.forRoot(),
     CalendarModule
   ],
-  exports:[FlightLoaderComponent,FlightNotFoundComponent]
+  exports:[FlightLoaderComponent,FlightNotFoundComponent,FlightConfirmationComponent,FlightSummaryComponent]
 })
 export class FlightModule { }

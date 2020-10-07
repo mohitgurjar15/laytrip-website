@@ -41,7 +41,7 @@ a:hover {
     cursor: pointer;
 }
 
-/* .home_banner {
+.home_banner {
     .banner_inner {
         .banner_tab {
             .tab-content {
@@ -50,30 +50,10 @@ a:hover {
                         .tab-pane {
                             .flight_search {
                                 .flight-grid {
-                                    .grid_box{
-                                        &.secound {
-                                            .search_area{
-                                                position: relative;
-                                                height: 100%;
-                                                display: flex;
-                                                flex-flow: column;
-                                                justify-content: space-between;
-                                                input{
-                                                    
-                                                    width: 100%;
-                                                    left: 0;
-                                                    //background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) no-repeat;
-                                                    //position: relative;
-                                                    &#basic{
-                                                        position: absolute;
-                                                        top: 50%;
-                                                        right: 0;
-                                                        transform: translateY(-50%);
-                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) no-repeat;
-                                                        background-position: center right 15px;
-                                                    }
-                                                }
-                                            }
+                                    .grid_box.first {
+                                        z-index: 2;
+                                        .flight_to {
+                                            z-index: 0;
                                         }
                                     }
                                 }
@@ -84,9 +64,9 @@ a:hover {
             }
         }
     }
-    
-   
-} */
+}
+
+
 
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input{
     background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;

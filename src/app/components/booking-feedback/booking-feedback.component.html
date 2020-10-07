@@ -3,7 +3,7 @@
     <div class="block_feedback_inner">
       <h6>Feedback</h6>
       <p>How would you Love this booking Experience ?</p>
-      <form  [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
         <div class="block_feedback_add">
           <ul>
             <li>
@@ -29,14 +29,14 @@
             <label>Comment*</label>
             <textarea formControlName="comment" id="" placeholder="Enter your Comment here"></textarea>
             <div *ngIf="(submitted  || feedbackForm.controls.comment.touched) && feedbackForm.controls.comment.errors"
-          class="focus-input100 login-error">
-          <div *ngIf="feedbackForm.controls.comment.errors.required" class="text-danger">Please enter
-            your comment.
-          </div>
-        </div>
+              class="focus-input100 login-error">
+              <div *ngIf="feedbackForm.controls.comment.errors.required" class="text-danger">Please enter
+                your comment.
+              </div>
+            </div>
           </div>
           <div class="feedback_btn">
-            <button>Nothanks</button>
+            <button (click)="close()" >Nothanks</button>
             <button>Submit <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
           </div>
         </div>

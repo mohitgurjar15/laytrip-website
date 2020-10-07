@@ -11,13 +11,15 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
 var BookingFeedbackComponent = /** @class */ (function () {
-    function BookingFeedbackComponent(formBuilder, flightService) {
+    function BookingFeedbackComponent(formBuilder, flightService, toastr) {
         this.formBuilder = formBuilder;
         this.flightService = flightService;
+        this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
         this.is_rating = false;
         this._rating = '';
+        this.feedbackValueChange = new core_1.EventEmitter();
     }
     BookingFeedbackComponent.prototype.ngOnInit = function () {
         this.feedbackForm = this.formBuilder.group({
@@ -26,18 +28,21 @@ var BookingFeedbackComponent = /** @class */ (function () {
         });
     };
     BookingFeedbackComponent.prototype.onSubmit = function () {
+        var _this = this;
         if (this.feedbackForm.invalid) {
             this.submitted = true;
             return;
         }
         else {
             var jsonData = {
-                booking_id: 22323,
+                booking_id: this.bookingId,
                 rating: 5,
                 message: this.feedbackForm.value.comment
             };
             this.flightService.addFeedback(jsonData).subscribe(function (data) {
+                _this.feedbackValueChange.emit(true);
             }, function (error) {
+                _this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             });
         }
     };
@@ -59,6 +64,15 @@ var BookingFeedbackComponent = /** @class */ (function () {
         }
         this.is_rating = true;
     };
+    BookingFeedbackComponent.prototype.close = function () {
+        this.feedbackValueChange.emit(true);
+    };
+    __decorate([
+        core_1.Input()
+    ], BookingFeedbackComponent.prototype, "bookingId");
+    __decorate([
+        core_1.Output()
+    ], BookingFeedbackComponent.prototype, "feedbackValueChange");
     BookingFeedbackComponent = __decorate([
         core_1.Component({
             selector: 'app-booking-feedback',

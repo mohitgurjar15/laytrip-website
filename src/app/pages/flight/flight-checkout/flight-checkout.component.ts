@@ -15,15 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./flight-checkout.component.scss']
 })
 export class FlightCheckoutComponent implements OnInit {
-
-    constructor(
-      private route: ActivatedRoute,
-      private router:Router,
-      private flightService:FlightService,
-      private cookieService: CookieService,
-      private genericService:GenericService,
-      private toastr: ToastrService
-    ) { }
+   
     s3BucketUrl = environment.s3BucketUrl;
     validateCardDetails:Subject<any> = new Subject();
     showAddCardForm:boolean=false;
@@ -53,8 +45,18 @@ export class FlightCheckoutComponent implements OnInit {
     isSessionTimeOut:boolean=false;
     isShowCardOption:boolean=true;
     isShowPaymentOption:boolean=true;
-    isShowFeedbackPopup:boolean=true;
+    isShowFeedbackPopup:boolean=false;
+    bookingId;  
 
+    constructor(
+      private route: ActivatedRoute,
+      private router:Router,
+      private flightService:FlightService,
+      private cookieService: CookieService,
+      private genericService:GenericService,
+      private toastr: ToastrService
+    ) { }
+    
     ngOnInit() {
       
       window.scroll(0,0);
@@ -186,6 +188,7 @@ export class FlightCheckoutComponent implements OnInit {
 
       this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
         this.bookingStatus=1;
+        this.bookingId = res.laytrip_booking_id;
         this.bookingLoader=false;
         this.progressStep = { step1:true, step2:true, step3:true }
         this.bookingResult=res;
@@ -275,5 +278,11 @@ export class FlightCheckoutComponent implements OnInit {
 
     sessionTimeout(event){
       this.isSessionTimeOut=event;
+    }
+    
+    feedbackToggle(event){
+      if(event){
+        this.isShowFeedbackPopup=false;
+      }
     }
 }

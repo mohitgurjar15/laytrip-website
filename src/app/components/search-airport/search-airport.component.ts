@@ -3,6 +3,7 @@ import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 // import { data } from './airport';
 
+
 @Component({
   selector: 'app-search-airport',
   templateUrl: './search-airport.component.html',
@@ -19,6 +20,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
   @Output() getSwapValue = new EventEmitter<any>();
+  defaultSelectedTemp;
 
   constructor(
     private flightService: FlightService,
@@ -26,13 +28,13 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   ) {
   }
 
-  selectedAirport = [];
+  selectedAirport = {};
   keyword = 'name';
   data = [];
   loading = false;
 
   ngOnInit() {
-
+    this.defaultSelectedTemp = this.defaultSelected;
   }
 
   ngDocheck() {
@@ -40,18 +42,6 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     if (this.swappedData) {
-      // console.log(this.swappedData);
-      // this.data = this.swappedData.map(res => {
-      //   // console.log(res);
-      //   return {
-      //     id: res.id,
-      //     name: res.name,
-      //     code: res.code,
-      //     city: res.city,
-      //     country: res.country,
-      //     display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-      //   };
-      // });
     }
   }
 
@@ -68,6 +58,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+          parentId: res.parentId
         };
       });
     },
@@ -95,10 +86,10 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
     } else if (event && index && index === 'toSearch') {
       this.changeValue.emit({ key: 'toSearch', value: event });
     }
-    // if (event && index && index === 'fromSearch') {
-    //   this.getSwapValue.emit({ key: 'fromSearch', value: event });
-    // } else if (event && index && index === 'toSearch') {
-    //   this.getSwapValue.emit({ key: 'toSearch', value: event });
-    // }
+  }
+
+  onRemove(event) {
+    this.selectedAirport = {};
+    this.defaultSelected = this.defaultSelectedTemp;
   }
 }

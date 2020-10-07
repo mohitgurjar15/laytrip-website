@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlightService } from '../../services/flight.service';
 import { environment } from '../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-booking-feedback',
@@ -11,13 +12,17 @@ import { environment } from '../../../environments/environment';
 })
 export class BookingFeedbackComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
+  @Input() bookingId:number;
   feedbackForm: FormGroup;
   submitted : boolean = false;
   is_rating = false;
   _rating = '';
+  @Output() feedbackValueChange = new EventEmitter();
+
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
+    private toastr: ToastrService
 
   ) { }
 
@@ -34,14 +39,14 @@ export class BookingFeedbackComponent implements OnInit {
       return;
     } else {
       let jsonData = {
-        booking_id: 22323,
+        booking_id: this.bookingId,
         rating: 5,
         message: this.feedbackForm.value.comment,
       };
       this.flightService.addFeedback(jsonData).subscribe((data: any) => {
-        
+        this.feedbackValueChange.emit(true);
       }, (error: HttpErrorResponse) => {
-
+        this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
       });
     }
   }
@@ -60,5 +65,9 @@ export class BookingFeedbackComponent implements OnInit {
       this._rating = '';
     }
     this.is_rating = true;
+  }
+
+  close() {
+    this.feedbackValueChange.emit(true);
   }
 }

@@ -14,6 +14,7 @@ export class FlightSummaryComponent implements OnInit {
   @Output() flightAvailable= new EventEmitter();
   @Input() showPartialPayemntOption;
   @Input() checkAvailability:string;
+  @Input() flightSummary:string;
 
   routeCode:string='';
   constructor(
@@ -46,11 +47,13 @@ export class FlightSummaryComponent implements OnInit {
     if(this.checkAvailability=='local'){
 
       this.getFlightSummary()
-    }
-    else{
-      
+    } else if(this.checkAvailability=='trip-details') {
+      this.flightDetail = this.flightSummary;
+      this.flightSummaryLoader = false;
+    }else{      
       this.airRevalidate();
     }
+    
   }
   
   

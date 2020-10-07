@@ -27,14 +27,12 @@ export class CardListComponent implements OnInit {
     this.genericService.getCardlist().subscribe((res:any)=>{
       this.cardLoader=false;
       this.cards=res;
-      console.log(res)
     },(error)=>{
       this.cardLoader=false;
     })
   }
 
   selectCard(cardToken){
-    console.log("cardToken",cardToken)
     this.selectCreditCard.emit(cardToken)
   }
   
