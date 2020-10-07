@@ -12,6 +12,7 @@ var router_1 = require("@angular/router");
 var list_bookings_component_1 = require("./bookings/list-bookings.component");
 var change_password_component_1 = require("./change-password/change-password.component");
 var flight_trip_detail_component_1 = require("./flight-trip-detail/flight-trip-detail.component");
+var my_wallet_component_1 = require("./my-wallet/my-wallet.component");
 var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
 var profile_component_1 = require("./profile/profile.component");
 var search_trip_component_1 = require("./search-trip/search-trip.component");
@@ -48,6 +49,10 @@ var routes = [
     {
         path: 'trip/:id',
         component: flight_trip_detail_component_1.FlightTripDetailComponent
+    },
+    {
+        path: 'my-wallet',
+        component: my_wallet_component_1.MyWalletComponent
     },
 ];
 var MyAccountsRoutingModule = /** @class */ (function () {

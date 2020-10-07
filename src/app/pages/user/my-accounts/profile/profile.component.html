@@ -5,8 +5,8 @@
                 <app-my-accounts-nav></app-my-accounts-nav>
             </div>
             <div class="col-lg-9">
-                <div class="account_cnt_main">
-                    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+                <form [formGroup]="profileForm"  novalidate autocomplete="off">
+                    <div class="account_cnt_main">
                         <div class="update_info">
                             <div class="update_info_left">
                                 <div class="update_profile">
@@ -343,13 +343,13 @@
                             </div>
                         </div>
 
-                        <div class="form_update_btn">
-                            <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Update <img
-                                    src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
-                                    alt="Right Arrow" /></button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form_update_btn">
+                        <button (click)="onSubmit()" > <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Update <img
+                                src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                                alt="Right Arrow" /></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

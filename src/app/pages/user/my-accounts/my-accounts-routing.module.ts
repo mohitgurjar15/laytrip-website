@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListBookingsComponent } from './bookings/list-bookings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
+import { MyWalletComponent } from './my-wallet/my-wallet.component';
 import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchTripComponent } from './search-trip/search-trip.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'trip/:id',
     component: FlightTripDetailComponent,
+  },
+  {
+    path: 'my-wallet',
+    component: MyWalletComponent,
   },
  
 ];
