@@ -22,11 +22,11 @@ export class UserService {
 
   }
 
-  
+
   handleError(error) {
     let errorMessage = {};
     if (error.status == 0) {
-      errorMessage = { message: "API Server is not responding"};
+      errorMessage = { message: "API Server is not responding" };
     }
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -48,29 +48,29 @@ export class UserService {
   }
 
   signin(jsonData) {
-    let json = {"email":jsonData.email,"password":jsonData.password}; 
+    let json = { "email": jsonData.email, "password": jsonData.password };
     return this.http.post(this.apiURL + 'v1/auth/signin', json)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
-  
+
   signup(formValue) {
     let data = {
-      "signup_via":"web",
-      "first_name":formValue.first_name,
-      "last_name":formValue.last_name,
-      "email":formValue.email,
-      "password":formValue.password,
-      "confirm_password":formValue.confirm_password,
-      "gender":'M',//formValue.gender,
-      "device_type":1,
-      "device_model":"RNE-L22",
-      "device_token":"123abc#$%456",
-      "app_version":"1.0",
-      "os_version":"7.0",
-     }; 
+      "signup_via": "web",
+      "first_name": formValue.first_name,
+      "last_name": formValue.last_name,
+      "email": formValue.email,
+      "password": formValue.password,
+      "confirm_password": formValue.confirm_password,
+      "gender": 'M',//formValue.gender,
+      "device_type": 1,
+      "device_model": "RNE-L22",
+      "device_token": "123abc#$%456",
+      "app_version": "1.0",
+      "os_version": "7.0",
+    };
     return this.http.post(this.apiURL + 'v1/auth/signup', data)
       .pipe(
         retry(1),
@@ -78,72 +78,86 @@ export class UserService {
       );
   }
 
-  verifyOtp(data) {   
+  verifyOtp(data) {
     return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data)
       .pipe(
         retry(1),
         catchError(this.handleError)
-    );
+      );
   }
-  resendOtp(email) { 
-    let data = {"email":email};  
+  resendOtp(email) {
+    let data = { "email": email };
     return this.http.patch(this.apiURL + 'v1/auth/resend-otp', data)
       .pipe(
         retry(1),
         catchError(this.handleError)
-    );
+      );
   }
 
   forgotPassword(formValue) {
     let data = {
-      "email":formValue.email,
-     }; 
+      "email": formValue.email,
+    };
     return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
       .pipe(
         retry(1),
         catchError(this.handleError)
-    );
-  }  
+      );
+  }
   resetPassword(data) {
     return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
-  }  
+  }
   changePassword(data) {
-    return this.http.put(this.apiURL + 'v1/auth/change-password', data,  this.commonFunction.setHeaders());
-  }  
+    return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
+  }
   updateProfile(data) {
-    return this.http.put(this.apiURL+'v1/auth/profile', data,  this.commonFunction.setHeaders());
+    return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
   }
   getProfile() {
-    return this.http.get(this.apiURL +'v1/auth/profile/',  this.commonFunction.setHeaders());
+    return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
   }
 
-  getBookings(pageNumber,limit) {
-    return this.http.get(`${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
+  getBookings(pageNumber, limit) {
+    return this.http.get(
+      `${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders());
   }
 
-  getPaymentHistory(pageNumber,limit,filterForm) {
+  getPaymentHistory(pageNumber, limit, filterForm) {
 
     let queryString = "";
-    if(filterForm.bookingId){
-      queryString += (filterForm.bookingId) ? '&booking_id='+filterForm.bookingId : '';
+    if (filterForm.bookingId) {
+      queryString += (filterForm.bookingId) ? '&booking_id=' + filterForm.bookingId : '';
     }
-    if(filterForm.module){
-      queryString += (filterForm.module.id) ? '&booking_type='+filterForm.module.id : '';
+    if (filterForm.module) {
+      queryString += (filterForm.module.id) ? '&booking_type=' + filterForm.module.id : '';
     }
-    if(filterForm.start_date){
-      queryString += (filterForm.start_date) ? '&payment_start_date='+moment(filterForm.start_date).format("YYYY-MM-DD") : '';
+    if (filterForm.start_date) {
+      queryString += (filterForm.start_date) ? '&payment_start_date=' + moment(filterForm.start_date).format("YYYY-MM-DD") : '';
     }
-    if(filterForm.end_date){
-      queryString += (filterForm.end_date) ? '&payment_end_date='+moment(filterForm.end_date).format("YYYY-MM-DD") : '';
+    if (filterForm.end_date) {
+      queryString += (filterForm.end_date) ? '&payment_end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
     }
-    return this.http.get(`${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders())
+    return this.http.get(
+      `${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders());
   }
 
   getModules(pageNumber, limit) {
     return this.http.get(`${this.apiURL}v1/modules?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders())
   }
-  
+
   getTraveller(travelerId) {
     return this.http.get(`${environment.apiUrl}v1/traveler/get-traveler/${travelerId}`, this.commonFunction.setHeaders())
+  }
+
+  getSubscriptionList() {
+    return this.http.get(this.apiURL + 'v1/subscription/', this.commonFunction.setHeaders());
+  }
+
+  getCardList() {
+    return this.http.get(this.apiURL + 'v1/payment', this.commonFunction.setHeaders());
+  }
+
+  deleteCard() {
+    return this.http.get(this.apiURL + 'v1/payment', this.commonFunction.setHeaders());
   }
 }

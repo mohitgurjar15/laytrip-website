@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MyAccountsRoutingModule } from './my-accounts-routing.module';
 import { ProfileComponent } from './profile/profile.component';
@@ -18,7 +18,12 @@ import { ViewHistoryComponent } from './payment-history/view-history/view-histor
 import { FlightModule } from '../../flight/flight.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { TravellerFormComponent } from './travellers/traveller-form/traveller-form.component';
+import { SubscriptionPlanComponent } from './subscription/subscription-plan.component';
+import { AccountCardListComponent } from './account-card-list/account-card-list.component';
+import { CardActionFormComponent } from './account-card-list/card-action-form/card-action-form.component';
 
+import { TextMaskModule } from 'angular2-text-mask';
+import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,10 @@ import { TravellerFormComponent } from './travellers/traveller-form/traveller-fo
     HistoryListComponent,
     ViewHistoryComponent,
     ChangePasswordComponent,
+    SubscriptionPlanComponent,
+    AccountCardListComponent,
+    CardActionFormComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     CommonModule,
@@ -44,10 +53,10 @@ import { TravellerFormComponent } from './travellers/traveller-form/traveller-fo
     NgbModule,
     CalendarModule,
     FlightModule,
-    
+    TextMaskModule
   ],
-  providers: [DatePipe,NgbActiveModal],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents:[TravellerFormComponent]
+  providers: [DatePipe, NgbActiveModal],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [TravellerFormComponent, CardActionFormComponent, ConfirmationModalComponent]
 })
 export class MyAccountsModule { }

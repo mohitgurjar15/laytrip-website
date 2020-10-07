@@ -9,55 +9,63 @@
                 <p>Member since {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD')  }}</p>
             </div>
         </div>
-  </div>
-  <div class="saidbar_menu">
-      <h4>Main Menu</h4>
-      <ul>
-          <li>
-              <a [routerLink]="['/account/bookings']" [routerLinkActive]="['active_link']">
-                  <img src="{{s3BucketUrl}}assets/images/icon/ic_booing.svg" alt="Bookings Icon">
-                  My Bookings
-              </a>
-          </li>
-          <li>
-              <a  [routerLink]="['/account/payment']" [routerLinkActive]="['active_link']">
-                  <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon">
-                  Payment History
-              </a>
-          </li>
-          <li>
-              <a href="javascript:void(0);" [routerLinkActive]="['active_link']">
-                  <img src="{{s3BucketUrl}}assets/images/icon/ic_favourite.svg" alt="My Favourite Icon">
-                  My Favourite
-              </a>
-          </li>
-          <li>
-              <a href="javascript:void(0);" [routerLinkActive]="['active_link']">
-                  <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon">
-                  Credit Cards
-              </a>
-          </li>
-          <li>
-            <!-- <a href="javascript:void(0);"  [routerLinkActive]="['active_link']">
+    </div>
+    <div class="saidbar_menu">
+        <h4>Main Menu</h4>
+        <ul>
+            <li>
+                <a [routerLink]="['/account/bookings']" [routerLinkActive]="['active_link']">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_booing.svg" alt="Bookings Icon">
+                    My Bookings
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/account/payment']" [routerLinkActive]="['active_link']">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon">
+                    Payment History
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" [routerLinkActive]="['active_link']">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_favourite.svg" alt="My Favourite Icon">
+                    My Favourite
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/account/account-card-list']" [routerLinkActive]="['active_link']">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon">
+                    Credit Cards
+                </a>
+            </li>
+            <li>
+                <!-- <a href="javascript:void(0);"  [routerLinkActive]="['active_link']">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
                 Co - Travellers
             </a> -->
-             <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
-                Co - Travellers
-            </a> 
-          </li>
-          <li>
-              <div class="dropdown">
-                  <a href="javascript:void(0);" class="dropdown-toggle" [routerLinkActive]="['active_link']" data-toggle="dropdown">
-                      <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
-                      Settings
-                  </a>
-                  <ul class="dropdown-menu" >
-                      <li><a [routerLink]="['/account/settings/change-password']"  [routerLinkActive]="['active_link']">Change Password</a></li>                     
-                  </ul>
-              </div>
-          </li>
-      </ul>
-  </div>
+                <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
+                    Co - Travellers
+                </a>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" [routerLinkActive]="['active_link']"
+                        data-toggle="dropdown">
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
+                        Settings
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a [routerLink]="['/account/settings/change-password']"
+                                [routerLinkActive]="['active_link']">Change Password</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a [routerLink]="['/account/subscription']" [routerLinkActive]="['active_link']">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_subscription.svg" alt="Subscription Icon">
+                    Subscription
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>

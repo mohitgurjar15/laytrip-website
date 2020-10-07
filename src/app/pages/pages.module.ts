@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ComponentsModule } from '../components/components.module';
 import { PagesComponent } from './pages.component';
 import { MainHeaderComponent } from '../elements/main-header/main-header.component';
@@ -18,6 +19,9 @@ import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark
 // NG5 SLIDER
 import { Ng5SliderModule } from 'ng5-slider';
 import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +35,16 @@ import { ResetPasswordComponent } from './user/reset-password/reset-password.com
     VerifyOtpComponent,
     AuthComponent,
     AsteriskMarkComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ContactUsComponent,
+    CancellationPolicyComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     NgbModule,
+    NgSelectModule,
     TranslateModule,
     ComponentsModule,
     ReactiveFormsModule,
@@ -44,7 +52,7 @@ import { ResetPasswordComponent } from './user/reset-password/reset-password.com
     // NG5 SLIDER
     Ng5SliderModule,
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent]
-
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }
