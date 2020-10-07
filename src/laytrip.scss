@@ -139,8 +139,6 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 }
 
 //Traveller Edit .ui-calendar
-
-
 .cmn_add_edit_modal {
   .modal-dialog {
     .modal-content {
@@ -168,7 +166,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
     }
   }
 }
-
+//Profile page date picker 
 .account_part {
   .account_cnt_main {
     .update_info {
@@ -188,3 +186,21 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
     }
   }
 }
+.account_part {
+	.account_cnt_main {
+		.update_location_detail {
+			.detail_update {
+				.form_row {
+					.field_bolck {
+						.field_inn {
+              .ui-calendar {
+                width: 100%;
+              }
+            }            
+					}
+				}
+			}
+		}
+	}
+}
+

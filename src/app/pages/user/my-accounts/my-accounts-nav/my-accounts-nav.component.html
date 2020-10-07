@@ -1,9 +1,9 @@
 <div class="account_saidbar">
     <div class="saidbar_top">
         <div class="block_inner">
-            <span>
+            <a [routerLink]="['/account/']"><span>
                 <img src="{{_login_user_info.profilePic ||  defaultImage}}" alt="Profile Image">
-            </span>
+            </span></a>
             <div class="member_info">
                 <h6>{{_login_user_info.username}}</h6>
                 <p>Member since {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD')  }}</p>

@@ -66,3 +66,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half .field_inn .text_field .ui-calendar {
   width: 100%;
 }
+
+.account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .ui-calendar {
+  width: 100%;
+}

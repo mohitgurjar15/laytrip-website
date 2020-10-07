@@ -10,10 +10,44 @@ exports.MyWalletComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var MyWalletComponent = /** @class */ (function () {
-    function MyWalletComponent() {
+    function MyWalletComponent(travelerService) {
+        this.travelerService = travelerService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.pageSize = 10;
+        this.perPageLimitConfig = [10, 25, 50, 100];
+        this.showPaginationBar = false;
+        this.isNotFound = false;
+        this.loading = true;
+        this.totalItems = 0;
     }
     MyWalletComponent.prototype.ngOnInit = function () {
+        this.page = 1;
+        this.isNotFound = false;
+        this.loading = true;
+        this.limit = this.perPageLimitConfig[0];
+        this.getEarnedPoint();
+        // this.getRedeemedPoint();
+    };
+    MyWalletComponent.prototype.getEarnedPoint = function () {
+        var _this = this;
+        this.loading = true;
+        this.travelerService.getEarnedPoint(this.page, this.limit).subscribe(function (result) {
+            _this.loading = false;
+            _this.earnedPoints = result.data;
+        }, function (error) {
+            _this.loading = false;
+            // this.apiError = error.message;
+        });
+    };
+    MyWalletComponent.prototype.pageChange = function (event) {
+        this.page = event;
+        this.showPaginationBar = false;
+    };
+    MyWalletComponent.prototype.getRedeemedPoint = function () {
+        this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe(function (data) {
+        }, function (error) {
+            // this.apiError = error.message;
+        });
     };
     MyWalletComponent = __decorate([
         core_1.Component({

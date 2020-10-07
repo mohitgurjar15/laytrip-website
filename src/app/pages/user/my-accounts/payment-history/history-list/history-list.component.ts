@@ -23,8 +23,6 @@ export class HistoryListComponent implements OnInit {
   perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
   showPaginationBar: boolean = false;
-  loading:boolean=true;
-  notFound:boolean=false;
 
   constructor(
     private commonFunction:CommonFunction,
@@ -32,38 +30,25 @@ export class HistoryListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('ngOnInit')
-    this.page = 1;
-    this.loading = true;    
+    this.page = 1;        
     this.limit = this.perPageLimitConfig[0];
   }
 
-  ngOnChanges(changes: SimpleChanges) { 
-    this.loading = true;
+  
+  ngOnChanges(changes: SimpleChanges) {     
     this.list = changes.historyResult.currentValue;
-    if(this.list){
-      this.listLength = this.list.length; 
-      if(this.listLength > 0 ){
-        this.notFound = this.loading = false;
-        this.showPaginationBar = true; 
-      }      
-    } else {
-    
-      if(this.list && this.list === 'undefined'){
-        this.loading = true;
-      } else {
-        this.notFound = true;
-        this.showPaginationBar = this.loading  = false;
-      }
-    }      
   }
 
   ngAfterContentChecked() {
-
+    if(this.list && this.list.length ){
+      this.listLength = this.list.length; 
+      if(this.listLength > 0 ){
+        this.showPaginationBar = true; 
+      }    
+    }  
   }
 
   pageChange(event) {
-    this.loading = true;
     this.page = event;    
   }
 
@@ -71,13 +56,4 @@ export class HistoryListComponent implements OnInit {
     this.item = item;
   } 
 
-  ngDoCheck(){
-    setTimeout(function(){
-      if(this.list === 'undefined'){
-        this.loading = false;
-        this.notFound = true;
-
-      }
-    },5000)
-  }
 }

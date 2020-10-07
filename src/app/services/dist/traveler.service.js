@@ -55,6 +55,14 @@ var TravelerService = /** @class */ (function () {
     TravelerService.prototype["delete"] = function (id) {
         return this.http["delete"](environment_1.environment.apiUrl + 'v1/traveler/' + id, this.setHeaders());
     };
+    TravelerService.prototype.getEarnedPoint = function (pageNumber, limit) {
+        return this.http.get(environment_1.environment.apiUrl + ("v1/laytrip-point/earned?limit=" + limit + "&page_no=" + pageNumber), this.setHeaders())
+            .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
+    };
+    TravelerService.prototype.getRedeemedPoint = function (pageNumber, limit) {
+        return this.http.get(environment_1.environment.apiUrl + ("v1/laytrip-point/redeemed?limit=" + limit + "&page_no=" + pageNumber), this.setHeaders())
+            .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
+    };
     TravelerService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

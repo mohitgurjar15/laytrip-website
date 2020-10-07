@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-list-payment-history',
@@ -9,6 +10,7 @@ import { CommonFunction } from '../../../../_helpers/common-function';
   styleUrls: ['./list-payment-history.component.scss']
 })
 export class ListPaymentHistoryComponent implements OnInit {
+  s3BucketUrl = environment.s3BucketUrl;
   loading = true;  
   perPageLimitConfig=[10,25,50,100];
   pageNumber:number;
@@ -19,6 +21,7 @@ export class ListPaymentHistoryComponent implements OnInit {
   startMinDate= new Date();
   modules:[];
   endDate;
+  notFound=false;
 
   constructor(
     private userService: UserService,
@@ -45,10 +48,11 @@ export class ListPaymentHistoryComponent implements OnInit {
     this.loading = true;
     this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
         this.historyResult = res.data;
-        this.loading = false;
+        this.loading = this.notFound  = false;
     }, err => {
       if (err && err.status === 404) {
         this.loading = false;
+        this.notFound = true;
       }
     });   
   }
