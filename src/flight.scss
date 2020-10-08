@@ -101,7 +101,7 @@
                     list-style: none;
                     display: flex;
                     justify-content: space-between;
-                    width: 83%;
+                    width: 84%;
 
                     @media(max-width: 991px) {
                         flex-wrap: wrap;
@@ -183,7 +183,7 @@
                                 left: 50%;
                                 transform: translate(-50%, -50%);
                                 border-radius: 50%;
-                                z-index: 1;
+                                z-index: 9999;
 
                                 img {
                                     width: 15px;
@@ -363,7 +363,7 @@
                 }
 
                 .serch_btn {
-                    width: 16%;
+                    width: 15%;
 
                     @media(max-width: 991px) {
                         width: 100%;
@@ -831,7 +831,7 @@
                             font-size: 16px;
                             color: $text-white;
                             font-weight: 500;
-                            border-radius: 20px;
+                            border-radius: 8px;
                             background: $btn-bg;
                             position: relative;
                             z-index: 9;
@@ -1981,8 +1981,8 @@
                             font-size: 16px;
                             color: $text-white;
                             font-weight: 500;
-                            border-radius: 20px;
-                            background: $secondary-color;
+                            border-radius: 8px;
+                            background: $btn-bg;
                             position: relative;
                             z-index: 9;
                             overflow: hidden;
@@ -2946,12 +2946,27 @@
     .short_by {
         width: 100%;
 
-        h4 {
-            font-size: 16px;
-            font-weight: 500;
-            color: $text-grey;
-            margin: 0 0 5px;
+        .block_inn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h4 {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-grey;
+                margin: 0 0 5px;
+            }
+
+            a {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-lightblue;
+            }
         }
+
+
 
         .block_shortby {
             margin-bottom: 20px;
@@ -3087,11 +3102,24 @@
     .filter_by {
         width: 100%;
 
-        h4 {
-            font-size: 16px;
-            font-weight: 500;
-            color: $text-grey;
-            margin: 0 0 5px;
+        .block_inn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h4 {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-grey;
+                margin: 0 0 5px;
+            }
+
+            a {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-lightblue;
+            }
         }
 
         .fliter_block {
@@ -3612,7 +3640,7 @@
 
                     span {
                         font-size: 16px;
-                        color: $bg-green;
+                        color: $text-lightblue;
                         font-weight: 500;
 
                         @media(max-width: 480px) {
@@ -3772,7 +3800,7 @@
                                                 }
 
                                                 &.status_incomplete {
-                                                    color: $error-color;
+                                                    color: $secondary-color;
                                                 }
 
                                                 @media(max-width: 480px) {
@@ -4053,12 +4081,15 @@
                                         }
 
                                         .form_btn {
+                                            display: flex;
+                                            justify-content: flex-end;
+
                                             button {
                                                 width: auto;
                                                 padding: 0 35px;
                                                 height: 38px;
                                                 background: $btn-bg;
-                                                border-radius: 19px;
+                                                border-radius: 8px;
                                                 border: 1px solid $btn-bg;
                                                 font-size: 20px;
                                                 font-weight: 400;
@@ -4357,7 +4388,7 @@
                 color: $text-white;
                 font-weight: 300;
                 border-radius: 8px;
-                background: $secondary-color;
+                background: $primary-color;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
@@ -4374,14 +4405,14 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $primary-color;
+                    background: $secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
                 }
 
                 &:hover {
-                    border-color: $primary-color;
+                    border-color: $secondary-color;
 
                     &:before {
                         height: 190%;
@@ -4407,7 +4438,7 @@
             margin: 0 0 15px;
 
             span {
-                color: $secondary-color;
+                color: $text-darkblue;
             }
         }
 
@@ -4915,7 +4946,7 @@
 
             .total_payment {
                 padding: 15px;
-                background: $bg-green;
+                background: $primary-color;
                 border-radius: 0 0 4px 4px;
 
                 ul {
@@ -5006,7 +5037,7 @@
                 }
 
                 .block_pay_info {
-                    padding: 20px 0px;
+                    padding: 20px 0;
                     border-radius: 5px;
                     background: $background-white;
                     box-shadow: 3px 4px 10px $shadow-color;
@@ -5026,7 +5057,7 @@
 
                     .block_travellers {
                         margin: 0;
-                        padding: 0 30px;
+                        padding: 20px 30px 0;
 
                         h6 {
                             font-size: 16px;
@@ -5059,6 +5090,7 @@
                     }
 
                     .block_card_detail {
+                        padding: 0 30px 0;
 
                         .block_title_section {
                             background: $bg-title-grey;
@@ -5214,6 +5246,8 @@
                     }
 
                     .block_billing_detail {
+                        padding: 0 30px 0;
+
                         .block_title_section {
                             background: $bg-title-grey;
                             padding: 15px 30px;
@@ -5788,6 +5822,7 @@
                     }
 
                     .block_card_select {
+                        padding: 0 30px;
 
                         .block_title_section {
                             background: $bg-title-grey;
@@ -5808,7 +5843,7 @@
                             width: 100%;
 
                             .card_list {
-                                margin: 0 0 15px;
+                                margin: 0;
 
                                 ul {
                                     width: 100%;
@@ -5994,7 +6029,7 @@
 
                             .add_card_btn {
                                 width: 100%;
-                                margin: 0 0 15px;
+                                margin: 0;
 
                                 a {
                                     font-size: 16px;
@@ -6007,7 +6042,7 @@
                                 padding: 20px;
                                 border: 1px solid $box-border-color;
                                 border-radius: 5px;
-                                margin: 0 0 30px;
+                                margin: 20px 0 30px;
 
                                 .form_row {
                                     width: 100%;
@@ -6226,12 +6261,15 @@
                                 }
 
                                 .form_btn {
+                                    display: flex;
+                                    justify-content: flex-end;
+
                                     button {
                                         width: auto;
                                         padding: 0 35px;
                                         height: 38px;
                                         background: $btn-bg;
-                                        border-radius: 19px;
+                                        border-radius: 8px;
                                         border: 1px solid $btn-bg;
                                         font-size: 20px;
                                         font-weight: 400;
@@ -6635,7 +6673,7 @@
                                                             }
 
                                                             &.last {
-                                                                background: $bg-green;
+                                                                background: $primary-color;
                                                                 color: $text-white;
 
                                                                 span {
@@ -6926,7 +6964,7 @@
 
             .btn_payment {
                 width: 100%;
-                margin: 10px 0 0;
+                margin: 30px 0 0;
 
                 .btn_laytrip {
                     display: inline-block;
@@ -6936,14 +6974,14 @@
                     color: $text-white;
                     font-weight: 300;
                     border-radius: 8px;
-                    background: $secondary-color;
+                    background: $primary-color;
                     position: relative;
                     z-index: 9;
                     overflow: hidden;
                     font-weight: 400;
 
                     img {
-                        margin: 0 0 0 20px;
+                        margin: 0 0 0 80px;
                         height: 15px;
                     }
 
@@ -6954,14 +6992,14 @@
                         left: 0;
                         width: 100%;
                         height: 0%;
-                        background: $primary-color;
+                        background: $secondary-color;
                         z-index: -1;
                         transition: 0.8s;
                         border-radius: 0 0 50% 50%;
                     }
 
                     &:hover {
-                        border-color: $primary-color;
+                        border-color: $secondary-color;
 
                         &:before {
                             height: 190%;
@@ -7556,6 +7594,11 @@
         .page_laoding {
             width: 100%;
 
+            .animation_player {
+                height: 200px;
+                margin: 0 0 30px;
+            }
+
             img {
                 margin: 0 0 30px;
             }
@@ -7663,7 +7706,7 @@
                 color: $text-white;
                 font-weight: 400;
                 border-radius: 8px;
-                background: $secondary-color;
+                background: $primary-color;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
@@ -7675,7 +7718,7 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $primary-color;
+                    background: $secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
@@ -7687,7 +7730,7 @@
                 }
 
                 &:hover {
-                    border-color: $primary-color;
+                    border-color: $secondary-color;
 
                     &:before {
                         height: 190%;
@@ -7766,7 +7809,7 @@
                 color: $text-white;
                 font-weight: 400;
                 border-radius: 8px;
-                background: $secondary-color;
+                background: $primary-color;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
@@ -7778,7 +7821,7 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $primary-color;
+                    background: $secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
@@ -7790,7 +7833,7 @@
                 }
 
                 &:hover {
-                    border-color: $primary-color;
+                    border-color: $secondary-color;
 
                     &:before {
                         height: 190%;
@@ -7807,7 +7850,7 @@
     }
 
     .block_feedback {
-        width: 600px;
+        width: 450px;
         max-width: 96%;
         float: left;
         position: absolute;
@@ -7831,14 +7874,14 @@
 
 
             h6 {
-                margin: 0 0 30px;
-                font-size: 40px;
+                margin: 0 0 20px;
+                font-size: 34px;
                 font-weight: 700;
                 color: $text-black;
                 text-transform: uppercase;
 
                 @media(max-width:767px) {
-                    font-size: 30px;
+                    font-size: 24px;
                 }
 
                 @media(max-width:575px) {
@@ -7847,10 +7890,10 @@
             }
 
             p {
-                font-size: 20px;
+                font-size: 16px;
                 font-weight: 500;
                 color: $text_grey_dark;
-                margin: 0 0 35px;
+                margin: 0 0 25px;
 
                 @media(max-width:767px) {
                     font-size: 16px;
@@ -7865,7 +7908,7 @@
                     width: 100%;
                     display: flex;
                     justify-content: space-between;
-                    margin: 0 0 30px;
+                    margin: 0 0 20px;
                     padding: 0 25px;
                     list-style: none;
 
@@ -7887,8 +7930,8 @@
                             line-height: normal;
 
                             img {
-                                height: 80px;
-                                margin: 0 0 20px;
+                                height: 50px;
+                                margin: 0 0 10px;
 
                                 @media(max-width:767px) {
                                     margin: 0 0 10px;
@@ -7897,7 +7940,7 @@
                             }
 
                             span {
-                                font-size: 20px;
+                                font-size: 14px;
                                 font-weight: 500;
                                 color: $text_grey_dark;
 
@@ -7923,8 +7966,8 @@
 
                     label {
                         width: 100%;
-                        font-size: 16px;
-                        font-weight: 500;
+                        font-size: 12px;
+                        font-weight: 400;
                         color: $text-grey;
                         text-align: left;
                     }
@@ -7934,8 +7977,8 @@
                         height: 50px;
                         border: none;
                         border-bottom: 1px solid $box-border-color;
-                        font-size: 20px;
-                        font-weight: 500;
+                        font-size: 16px;
+                        font-weight: 400;
                         color: $text-grey;
                         resize: none;
 
@@ -7947,16 +7990,18 @@
 
                 .feedback_btn {
                     width: 100%;
+                    display: flex;
+                    justify-content: space-between;
 
                     button {
                         display: inline-block;
-                        height: 50px;
+                        height: 40px;
                         padding: 0 25px;
-                        font-size: 20px;
+                        font-size: 16px;
                         color: $text-white;
                         font-weight: 400;
                         border-radius: 8px;
-                        background: $secondary-color;
+                        background: $primary-color;
                         position: relative;
                         z-index: 9;
                         overflow: hidden;
@@ -7969,7 +8014,7 @@
                             left: 0;
                             width: 100%;
                             height: 0%;
-                            background: $primary-color;
+                            background: $secondary-color;
                             z-index: -1;
                             transition: 0.8s;
                             border-radius: 0 0 50% 50%;
@@ -7981,7 +8026,7 @@
                         }
 
                         &:hover {
-                            border-color: $primary-color;
+                            border-color: $secondary-color;
 
                             &:before {
                                 height: 190%;
@@ -8104,8 +8149,8 @@
                         color: $text-white;
                         font-weight: 400;
                         border-radius: 8px;
-                        background: $secondary-color;
-                        border: 1px solid $secondary-color;
+                        background: $primary-color;
+                        border: 1px solid $primary-color;
                         position: relative;
                         z-index: 9;
                         overflow: hidden;
@@ -8117,14 +8162,14 @@
                             left: 0;
                             width: 100%;
                             height: 0%;
-                            background: $primary-color;
+                            background: $secondary-color;
                             z-index: -1;
                             transition: 0.8s;
                             border-radius: 0 0 50% 50%;
                         }
 
                         &:hover {
-                            border-color: $primary-color;
+                            border-color: $secondary-color;
 
                             &:before {
                                 height: 190%;
@@ -8141,8 +8186,8 @@
                     &:last-child {
                         a {
                             background: transparent;
-                            border: 1px solid $secondary-color;
-                            color: $secondary-color;
+                            border: 1px solid $background-grey;
+                            color: $background-grey;
 
                             &:before {
                                 content: "";
@@ -8151,7 +8196,7 @@
                                 left: 0;
                                 width: 100%;
                                 height: 0%;
-                                background: $secondary-color;
+                                background: $background-grey;
                                 z-index: -1;
                                 transition: 0.8s;
                                 border-radius: 0 0 50% 50%;
@@ -8738,6 +8783,172 @@
 
 //<!-- Close Cancellation policy Modal css -->
 
+
+//<!-- Start Send Ticket Modal css -->
+.send_ticket_modal {
+    .modal-dialog {
+        max-width: 1024px;
+        width: 96%;
+
+        .modal-content {
+            padding: 40px 30px;
+            border-radius: 20px;
+
+            @media(max-width:767px) {
+                padding: 15px;
+
+            }
+
+            .modal_top {
+                width: 100%;
+                position: relative;
+
+                .close {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-weight: normal;
+                    opacity: 1;
+                    z-index: 99;
+                }
+            }
+
+            .block_modal_main {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                @media(max-width:767px) {
+                    flex-flow: column;
+                }
+
+                .block_modal_left {
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .block_modal_right {
+                    width: 100%;
+                    display: flex;
+                    flex-flow: column;
+
+                    @media(max-width:767px) {
+                        margin: 20px 0 0;
+                    }
+
+                    h2 {
+                        text-transform: uppercase;
+                        font-size: 40px;
+                        font-weight: 700;
+                        margin: 0 0 20px;
+                        text-align: center;
+
+                        @media(max-width:767px) {
+                            font-size: 30px;
+                        }
+
+                        @media(max-width:575px) {
+                            font-size: 20px;
+                        }
+                    }
+
+                    p {
+                        width: 100%;
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: $text-black;
+                        text-align: center;
+                        margin: 0 0 30px;
+
+                        span {
+                            color: $bg-green;
+                        }
+                    }
+
+                    .block_ticket {
+                        width: 100%;
+
+                        .block_title {
+                            padding: 15px;
+                            background: $popup_title_bg;
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: $text-white;
+                        }
+
+                        .block_ticket_list {
+                            width: 100%;
+
+                            ul {
+                                width: 100%;
+                                margin: 0;
+                                padding: 0;
+                                list-style: none;
+
+                                li {
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    padding: 10px 30px;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    color: $text-black;
+
+                                    @media(max-width:575px) {
+                                        padding: 10px 15px;
+                                    }
+
+                                    span {
+                                        a {
+                                            color: $text-lightblue;
+
+                                            img {
+                                                margin-right: 10px;
+                                                height: 15px;
+
+                                                &.active-icon {
+                                                    display: none;
+                                                }
+                                            }
+
+                                            &:hover {
+                                                color: $secondary-color;
+
+                                                img {
+                                                    &.default-icon {
+                                                        display: none;
+                                                    }
+
+                                                    &.active-icon {
+                                                        display: inline-block;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &:nth-child(odd) {
+                                        background: $background-white;
+                                    }
+
+                                    &:nth-child(even) {
+                                        background: $bg-title-grey;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//<!-- Close Send Ticket Modal css -->
+
 //<!-- Start No Result Found page css -->
 .block_booking_failed {
     width: 100%;
@@ -8795,9 +9006,9 @@
             padding: 0 25px;
             font-size: 20px;
             color: $text-white;
-            font-weight: 500;
+            font-weight: 400;
             border-radius: 8px;
-            background: $secondary-color;
+            background: $primary-color;
             position: relative;
             z-index: 9;
             overflow: hidden;
@@ -8809,7 +9020,7 @@
                 left: 0;
                 width: 100%;
                 height: 0%;
-                background: $primary-color;
+                background: $secondary-color;
                 z-index: -1;
                 transition: 0.8s;
                 border-radius: 0 0 50% 50%;
@@ -8821,7 +9032,7 @@
             }
 
             &:hover {
-                border-color: $primary-color;
+                border-color: $secondary-color;
 
                 &:before {
                     height: 190%;

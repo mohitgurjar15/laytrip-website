@@ -13,7 +13,10 @@
         <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails"></app-sort-flight>
         <div class="filter_saidbar">
           <div class="filter_by d-none d-lg-block">
-            <h4>Filter by</h4>
+            <div class="block_inn">
+              <h4>Filter by</h4>
+              <a href="javascript:void(0);">Reset</a>
+            </div>
             <app-filter-flight [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"></app-filter-flight>
           </div>
         </div>

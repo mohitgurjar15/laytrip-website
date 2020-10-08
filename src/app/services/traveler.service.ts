@@ -64,14 +64,14 @@ export class TravelerService{
         return this.http.delete(environment.apiUrl +'v1/traveler/'+ id, this.setHeaders());
     }
 
-    getEarnedPoint(pageNumber,limit){
-        
+    getEarnedPoint(pageNumber,limit){        
         return this.http.get(environment.apiUrl+`v1/laytrip-point/earned?limit=${limit}&page_no=${pageNumber}`,this.setHeaders())
         .pipe(
             retry(1),
             catchError(this.handleError)
           );
     }
+    
     getRedeemedPoint(pageNumber,limit){
         
         return this.http.get(environment.apiUrl+ `v1/laytrip-point/redeemed?limit=${limit}&page_no=${pageNumber}`,this.setHeaders())
@@ -80,4 +80,14 @@ export class TravelerService{
             catchError(this.handleError)
           );
     }
+    
+    getTotalAvailablePoints(pageNumber,limit){
+        
+        return this.http.get(environment.apiUrl+`v1/laytrip-point/total-available-points`,this.setHeaders())
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+          );
+    }
+    
 }

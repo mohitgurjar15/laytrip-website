@@ -63,6 +63,10 @@ var TravelerService = /** @class */ (function () {
         return this.http.get(environment_1.environment.apiUrl + ("v1/laytrip-point/redeemed?limit=" + limit + "&page_no=" + pageNumber), this.setHeaders())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
+    TravelerService.prototype.getTotalAvailablePoints = function (pageNumber, limit) {
+        return this.http.get(environment_1.environment.apiUrl + "v1/laytrip-point/total-available-points", this.setHeaders())
+            .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
+    };
     TravelerService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

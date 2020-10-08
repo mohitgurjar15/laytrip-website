@@ -1,0 +1,101 @@
+<section class="block_contact_us_main">
+  <div class="container">
+    <div class="block_contact_inner">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="block_contact_im">
+            <img src="{{s3BucketUrl}}assets/images/contact-us-im.svg" alt="Contact Us Image">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="block_contact_form">
+            <h6>Contact US</h6>
+            <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
+              <div class="block_form">
+                <div class="form_row">
+                  <div class="form_field half">
+                    <label>Full Name<sup>*</sup></label>
+                    <div class="text_field">
+                      <input type="text" formControlName="name" maxlength="20" tabindex="1"
+                        placeholder="Enter Full Name">
+                      <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched"
+                        class="focus-input100 login-error">
+                        <div *ngIf="contactUsForm.controls.name.errors.required" class="text-danger">Please
+                          enter
+                          full name.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form_field half">
+                    <label>Email<sup>*</sup></label>
+                    <div class="text_field">
+                      <input type="email" formControlName="email" maxlength="50" tabindex="2"
+                        placeholder="Enter your email">
+                      <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.touched">
+                        <div *ngIf="contactUsForm.controls.email.errors.required" class="text-danger">Please
+                          enter
+                          email.
+                        </div>
+                        <div *ngIf="contactUsForm.controls.email.errors.pattern" class="text-danger">Please
+                          enter valid
+                          email
+                          address.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form_row">
+                  <div class="form_field half">
+                    <label>Country Code</label>
+                    <div class="text_field">
+                      <div class="phone_no">
+                        <div class="code">
+                          <div class="dropdown">
+                            <ng-select class="ng-customClass country_code" tabindex="3" selectOnTab="true"
+                              [items]="countries_code" bindLabel="name" clearSearchOnAdd="true"
+                              formControlName="country_code" placeholder="select">
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form_field half">
+                    <label>Phone</label>
+                    <div class="number">
+                      <input type="text" formControlName="phone_no" maxlength="10" minlength="10" tabindex="4"
+                        placeholder="Enter your phone no.">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form_row">
+                  <div class="form_field half col-md-12 p-0">
+                    <label>Message<sup>*</sup></label>
+                    <div class="text_field">
+                      <input type="textarea" formControlName="message" maxlength="20" tabindex="5"
+                        placeholder="Enter your Message">
+                      <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
+                        <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">Please
+                          enter
+                          message.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form_btn">
+                  <button type="submit">
+                    <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

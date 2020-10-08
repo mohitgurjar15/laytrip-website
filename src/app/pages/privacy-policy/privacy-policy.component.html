@@ -1,0 +1,30 @@
+<section class="block_cms_page_main">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="block_cmspage_comman">
+          <div class="block_top">
+            <h6>{{cmsData?.title}}</h6>
+            <img src="{{s3BucketUrl}}assets/images/privacy-policy-im.svg" alt="Privacy Policy Image">
+          </div>
+          <div class="block_btm">
+            <div class="block_in_btm">
+              <div class="w-100" *ngIf="loading">
+                <p class="fb_animation mb-1 h-auto w-100"></p>
+                <p class="fb_animation mb-0 h-auto w-100"></p>
+              </div>
+              <div class="privacy_policy">
+                <p *ngIf="cmsData" [innerHtml]="cmsData.enContent"></p>
+              </div>
+              <!-- <ul class="privacy_policy" >
+                <li *ngIf="cmsData"[innerHtml]="cmsData.enContent">
+                  <span><img src="{{s3BucketUrl}}assets/images/icon/ic_right_long.svg" alt="Right Icon"></span>
+                </li>
+              </ul> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

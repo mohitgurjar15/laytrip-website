@@ -166,6 +166,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
     }
   }
 }
+
 //Profile page date picker 
 .account_part {
   .account_cnt_main {
@@ -186,21 +187,54 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
     }
   }
 }
+
 .account_part {
-	.account_cnt_main {
-		.update_location_detail {
-			.detail_update {
-				.form_row {
-					.field_bolck {
-						.field_inn {
+  .account_cnt_main {
+    .update_location_detail {
+      .detail_update {
+        .form_row {
+          .field_bolck {
+            .field_inn {
               .ui-calendar {
                 width: 100%;
               }
-            }            
-					}
-				}
-			}
-		}
-	}
+            }
+          }
+        }
+      }
+    }
+  }
 }
-
+//Check Out page number dropdown issue
+.detail_info_main.payment_info {
+  .detail_info_left {
+    .block_payment {
+      .installment_main {
+        .block_installment_option {
+          .installment_top {
+            .tab-content {
+              .installment_ingo {
+                .accordion {
+                  .accordion-group {
+                    .accordion-heading {
+                      .accordion-toggle {
+                        .block_pay_instalment {
+                          .block_amount {
+                            input {
+                              -moz-appearance: textfield !important;
+                              -webkit-appearance: none;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

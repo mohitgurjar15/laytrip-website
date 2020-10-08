@@ -1024,7 +1024,7 @@
   font-weight: 600;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li .progress {
-  width: 230px;
+  width: 140px;
   height: 8px;
   background: #E0E2E5;
   position: relative;
@@ -1127,6 +1127,7 @@
   }
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child {
+  width: 20%;
   padding-left: 30px;
   text-align: center;
   border-left: none;
@@ -1182,6 +1183,7 @@
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li span {
   color: #000000;
+  display: block;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li:last-child {
   padding: 0;

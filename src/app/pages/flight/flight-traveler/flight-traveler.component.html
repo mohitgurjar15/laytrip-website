@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="block_passanger_info">
-                         <div class="block_title_section">
+                         <div class="block_title_section" *ngIf="travelers.length">
                             <h5>Passenger Info</h5>
                             <span>({{selectedAdults}}/{{totalTraveler}} selected)</span>
                         </div>

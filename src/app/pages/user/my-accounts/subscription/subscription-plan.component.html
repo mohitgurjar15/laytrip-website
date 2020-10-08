@@ -1,0 +1,45 @@
+<section class="account_part">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <app-my-accounts-nav></app-my-accounts-nav>
+      </div>
+      <div class="col-lg-9">
+        <div class="account_cnt_main change_password subscription_plan">
+          <div class="block_subscription_plan">
+            <div class="block_title">
+              <h5>Subscription Plan</h5>
+            </div>
+            <div class="subscription_block_main">
+              <div class="subscription_block" *ngFor="let subscription of subscriptionList">
+                <div class="block_top">
+                  {{ subscription.name }}
+                </div>
+                <div class="block_btm">
+                  <h6>{{currency?.symbol}} {{subscription.amount | number}}<span>/month</span></h6>
+                  <ul>
+                    <li>
+                      {{subscription.description}}
+                    </li>
+                    <!-- <li>
+                      Payout plan finishes before you travel so you don’t worry about debt after you come home
+                    </li>
+                    <li>
+                      No worries if prices for your booking are increasing, we guarantee your committed price
+                    </li> -->
+                  </ul>
+                  <div class="btn_subscription">
+                    <a href="javascript:void(0);" (click)="subscribeNow()">Subscribe Now</a>
+                  </div>
+                </div>
+              </div>
+              <div class="subscription_im">
+                <img src="{{s3BucketUrl}}assets/images/subscription_im_people.svg" alt="people image">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

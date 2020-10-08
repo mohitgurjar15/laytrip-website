@@ -812,8 +812,6 @@
             }
         }
 
-
-
         &.booking_main {
             background: transparent;
             box-shadow: none;
@@ -1235,7 +1233,7 @@
                                                         }
 
                                                         .progress {
-                                                            width: 230px;
+                                                            width: 140px;
                                                             height: 8px;
                                                             background: $box-border-color;
                                                             position: relative;
@@ -1344,6 +1342,7 @@
                                                 }
 
                                                 &:last-child {
+                                                    width: 20%;
                                                     padding-left: 30px;
                                                     text-align: center;
                                                     border-left: none;
@@ -1398,6 +1397,7 @@
 
                                                         span {
                                                             color: $text-black;
+                                                            display: block;
                                                         }
 
                                                         &:last-child {
