@@ -8,14 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ListPaymentHistoryComponent = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("../../../../../environments/environment");
 var ListPaymentHistoryComponent = /** @class */ (function () {
     function ListPaymentHistoryComponent(userService, commonFunction, formBuilder) {
         this.userService = userService;
         this.commonFunction = commonFunction;
         this.formBuilder = formBuilder;
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = true;
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.startMinDate = new Date();
+        this.notFound = false;
     }
     ListPaymentHistoryComponent.prototype.ngOnInit = function () {
         this.loading = true;
@@ -35,10 +38,11 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.loading = true;
         this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
             _this.historyResult = res.data;
-            _this.loading = false;
+            _this.loading = _this.notFound = false;
         }, function (err) {
             if (err && err.status === 404) {
                 _this.loading = false;
+                _this.notFound = true;
             }
         });
     };

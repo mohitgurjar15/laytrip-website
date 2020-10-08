@@ -26,7 +26,7 @@ import { SearchTripComponent } from './search-trip/search-trip.component';
 import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
 import { TripNotFoundComponent } from './trip-not-found/trip-not-found.component';
 import { TextMaskModule } from 'angular2-text-mask';
-import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from '../../../components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [

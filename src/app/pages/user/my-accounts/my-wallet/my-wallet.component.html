@@ -1,3 +1,163 @@
-<p>
-  my-wallet works!
-</p>
+<section class="account_part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <app-my-accounts-nav></app-my-accounts-nav>
+            </div>
+            <div class="col-lg-9">
+                <div class="account_cnt_main ac_notifications ac_mywallet">
+                    <div class="block_laycredit_points">
+                        <div class="block_points_info">
+                            <ul>
+                                <li>
+                                    <span>Current</span>
+                                    <div class="block_point">
+                                        Laycredit points
+                                        <p>12685</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Total</span>
+                                    <div class="block_point">
+                                        Earning Laycredit points
+                                        <p>12685</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block_points_add">
+                            <a href="javascript:void(0);">
+                                <div class="add_point_im">
+                                    <span>
+                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_points_grey.svg"
+                                            alt="Credit Icon">
+                                    </span>
+                                </div>
+                                <span>+Add More Points</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="block_notification_main">
+                        <ul id="my_wallet_tabs" class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a href="#Earnings" class="nav-link active" data-toggle="tab" role="tab">
+                                    Earnings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#Redeemed" class="nav-link" data-toggle="tab" role="tab">
+                                    Redeemed
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="notification_content" class="tab-content" role="tablist">
+                            <div id="Earnings" class="card tab-pane fade show active" role="tabpanel"
+                                aria-labelledby="Earnings">
+                                <div class="card-header" role="tab" id="heading-Earnings">
+                                    <h5 class="mb-0">
+                                        <a data-toggle="collapse" href="#collapse-Earnings" aria-expanded="true"
+                                            aria-controls="collapse-Earnings">
+                                            Earnings
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapse-Earnings" class="collapse show" data-parent="#notification_content"
+                                    role="tabpanel" aria-labelledby="heading-Earnings">
+                                    <div class="card-body">
+                                        <div class="block_notification">
+                                            <div *ngIf="loading">
+                                                <ul *ngFor="let loop of loops;">
+                                                    <li>
+                                                        <label class="custom_checkbox">
+                                                            <input type="checkbox" value="">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <div class="traveller_list">
+                                                            <div class="list_block w-100">
+                                                                <div class="traveller_name">
+                                                                    <p class="fb_animation w-100 mb-2"></p>
+                                                                </div>
+                                                                <div class="traveller_age">
+                                                                    <p class="fb_animation w-25 mb-0"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="block_list" *ngFor="let item of earnedPoints">
+                                                <ul>
+                                                    <li class="text_clr_orange">
+                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
+                                                            alt="">
+                                                        {{item.points}} Points
+                                                    </li>
+                                                    <li>{{item.earnDate}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="Redeemed" class="card tab-pane fade" role="tabpanel" aria-labelledby="Redeemed">
+                                <div class="card-header" role="tab" id="heading-Redeemed">
+                                    <h5 class="mb-0">
+                                        <a class="collapsed" data-toggle="collapse" href="#collapse-Redeemed"
+                                            aria-expanded="false" aria-controls="collapse-Redeemed">
+                                            Redeemed
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapse-Redeemed" class="collapse" data-parent="#notification_content"
+                                    role="tabpanel" aria-labelledby="heading-Redeemed">
+                                    <div class="card-body">
+                                        <div class="block_notification">
+                                            <div class="block_list">
+                                                <ul>
+                                                    <li class="text_clr_orange">
+                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
+                                                            alt="">
+                                                        10 Points
+                                                    </li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li>20/12/2020 | 30/12/2020</li>
+                                                </ul>
+                                            </div>
+                                            <div class="block_list">
+                                                <ul>
+                                                    <li class="text_clr_orange">
+                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
+                                                            alt="">
+                                                        10 Points
+                                                    </li>
+                                                    <li>Flight Number</li>
+                                                    <li class="text_clr_grey">Flight Name</li>
+                                                    <li>20/12/2020 | 30/12/2020</li>
+                                                </ul>
+                                            </div>
+                                            <div class="block_list">
+                                                <ul>
+                                                    <li class="text_clr_orange">
+                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
+                                                            alt="">
+                                                        10 Points
+                                                    </li>
+                                                    <li>Flight Number</li>
+                                                    <li class="text_clr_grey">Flight Name</li>
+                                                    <li>20/12/2020 | 30/12/2020</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
