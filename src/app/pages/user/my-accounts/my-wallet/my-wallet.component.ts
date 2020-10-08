@@ -66,7 +66,6 @@ export class MyWalletComponent implements OnInit {
       this.loading = false;
     }, (error: HttpErrorResponse) => {  
       this.loading = false;
-
       // this.apiError = error.message;
     });
   }
