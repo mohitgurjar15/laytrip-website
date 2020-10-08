@@ -172,7 +172,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
     sessionStorage.setItem('__route',JSON.stringify(route));
     console.log("this.isInstalmentAvailable",this.isInstalmentAvailable)
-    if(this.isInstalmentAvailable && this.totalLaycreditPoints>0){
+    if(this.isInstalmentAvailable){
       this.router.navigate([`flight/payment/${route.route_code}`]);
     } else{
       this.router.navigate([`flight/traveler/${route.route_code}`]);
@@ -185,7 +185,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       booking_date: moment().format("YYYY-MM-DD")
     }
     this.genericService.getInstalemntsAvailability(instalmentRequest).subscribe((res:any)=>{
-      if(typeof this.userInfo.roleId!='undefined' && this.userInfo.roleId!=7 && res.instalment_availability){
+      if(res.instalment_availability){
         this.isInstalmentAvailable = res.instalment_availability;
       }
     })

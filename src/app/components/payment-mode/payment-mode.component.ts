@@ -20,13 +20,15 @@ export class PaymentModeComponent implements OnInit {
     layCreditPoints:number
   }>(); 
   @Input() laycreditpoints;
-  @Input() showFullPartialPayOption:boolean=true;
   @Input() customInstalmentData:any={};
   constructor(
     private genericService:GenericService
   ) { }
   
   @Input() flightSummary;
+  @Input() isShowSummary:boolean;
+  @Input() showFullPartialPayOption:boolean=true;
+  @Input() isShowPartialPaymentDetails:boolean=true;
   sellingPrice:number;
   isInstalemtMode:boolean=true;
   
@@ -69,6 +71,7 @@ export class PaymentModeComponent implements OnInit {
     this.getInstalemnts('biweekly');
     this.getInstalemnts('monthly');
     this.getInstalemnts('weekly');
+    console.log("Hellllo",this.sellingPrice)
     if(Object.keys(this.customInstalmentData).length){
       this.additionalAmount = this.customInstalmentData.additionalAmount;
       this.durationType = this.customInstalmentData.instalmentType;
@@ -350,6 +353,11 @@ export class PaymentModeComponent implements OnInit {
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
         this.remainingInstalment = this.instalments.instalment_date.length-1;
+          console.log("1223innnnn",this.firstInstalment,this.flightSummary[0].selling_price);
+        if(this.firstInstalment>=this.flightSummary[0].selling_price){
+          this.isInstalemtMode = false;
+          this.selectInstalmentMode.emit('no-instalment')
+        }
       }
     },(err)=>{
 

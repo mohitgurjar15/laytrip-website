@@ -1,0 +1,27 @@
+<div class="page_load">
+  <div class="block_not_available">
+      <div class="block_not_available_inner">
+          <h6> Book Your Flight</h6>
+          
+        <label class="custom_radio">Want to book as guest user  
+            <input type="radio" name="booking_as" (click)="bookingAs('guest')">
+            <span class="checkmark"></span>
+        </label>
+   
+        <label class="custom_radio">Signup with the system to avail the instalemnt boking
+            <input type="radio" name="booking_as" checked (click)="bookingAs('login')">
+            <span class="checkmark"></span>
+        </label>
+			   
+          <a *ngIf="userType=='login'" >
+              <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Left Arrow">
+              Continue
+          </a>
+
+          <a *ngIf="userType=='guest'" >
+              <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Left Arrow">
+              Continue
+          </a>
+      </div>
+  </div>
+</div>
