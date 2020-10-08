@@ -20,6 +20,7 @@ export class MyWalletComponent implements OnInit {
   isNotFound: boolean = false;
   public loading: boolean = true;
   totalItems = 0;
+  travellerPoints;
 
   constructor(
     public travelerService : TravelerService 
@@ -31,7 +32,8 @@ export class MyWalletComponent implements OnInit {
     this.loading = true;
     this.limit = this.perPageLimitConfig[0];
     this.getEarnedPoint();
-    // this.getRedeemedPoint();
+    this.getTotalAvailabePoints();
+    this.getRedeemedPoint();
   }
 
   getEarnedPoint(){
@@ -44,14 +46,27 @@ export class MyWalletComponent implements OnInit {
       // this.apiError = error.message;
     });
   }
+
+  getTotalAvailabePoints(){
+    this.travelerService.getTotalAvailablePoints(this.page, this.limit).subscribe((result: any) => {
+      this.loading = false;   
+      this.travellerPoints = result;
+    }, (error: HttpErrorResponse) => {   
+      this.loading = false;    
+      // this.apiError = error.message;
+    });
+  }
   pageChange(event) {
     this.page = event;    
     this.showPaginationBar = false;
   }
   getRedeemedPoint(){
-    this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe((data: any) => {
+    this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe((result: any) => {
+      this.redeemedPoints = result.data;
+      this.loading = false;
+    }, (error: HttpErrorResponse) => {  
+      this.loading = false;
 
-    }, (error: HttpErrorResponse) => {       
       // this.apiError = error.message;
     });
   }

@@ -26,7 +26,8 @@ var MyWalletComponent = /** @class */ (function () {
         this.loading = true;
         this.limit = this.perPageLimitConfig[0];
         this.getEarnedPoint();
-        // this.getRedeemedPoint();
+        this.getTotalAvailabePoints();
+        this.getRedeemedPoint();
     };
     MyWalletComponent.prototype.getEarnedPoint = function () {
         var _this = this;
@@ -39,13 +40,27 @@ var MyWalletComponent = /** @class */ (function () {
             // this.apiError = error.message;
         });
     };
+    MyWalletComponent.prototype.getTotalAvailabePoints = function () {
+        var _this = this;
+        this.travelerService.getTotalAvailablePoints(this.page, this.limit).subscribe(function (result) {
+            _this.loading = false;
+            _this.travellerPoints = result;
+        }, function (error) {
+            _this.loading = false;
+            // this.apiError = error.message;
+        });
+    };
     MyWalletComponent.prototype.pageChange = function (event) {
         this.page = event;
         this.showPaginationBar = false;
     };
     MyWalletComponent.prototype.getRedeemedPoint = function () {
-        this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe(function (data) {
+        var _this = this;
+        this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe(function (result) {
+            _this.redeemedPoints = result.data;
+            _this.loading = false;
         }, function (error) {
+            _this.loading = false;
             // this.apiError = error.message;
         });
     };
