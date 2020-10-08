@@ -82,8 +82,9 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="block_list" *ngFor="let item of earnedPoints">
+                                            <div class="block_list" *ngFor="let item of earnedPoints; let i = index;">
                                                 <ul>
+                                                    <li>{{i+1}}</li>
                                                     <li class="text_clr_orange">
                                                         <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
                                                             alt="">
@@ -126,8 +127,9 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="block_list" *ngFor="let item of redeemedPoints">
+                                            <div class="block_list" *ngFor="let item of redeemedPoints; let i = index;">
                                                 <ul>
+                                                    <li>{{i+1}}</li>
                                                     <li class="text_clr_orange">
                                                         <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
                                                             alt="">
