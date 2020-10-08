@@ -63,6 +63,13 @@ export class GenericService {
       );
   }
 
+  getInstalemntsAvailability(data){
+    return this.http.post(`${environment.apiUrl}v1/instalment/instalment-availability`,data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   handleError(error) {
     
     let errorMessage = {};
