@@ -20,6 +20,8 @@ export class PaymentModeComponent implements OnInit {
     layCreditPoints:number
   }>(); 
   @Input() laycreditpoints;
+  @Input() showFullPartialPayOption:boolean=true;
+  @Input() customInstalmentData:any={};
   constructor(
     private genericService:GenericService
   ) { }
@@ -60,21 +62,21 @@ export class PaymentModeComponent implements OnInit {
   monthlyDefaultInstalment:number=0;
 
 
+
   ngOnInit() {
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemnts('biweekly');
     this.getInstalemnts('monthly');
     this.getInstalemnts('weekly');
-
-    this.loadJquery();
-  }
-
-  loadJquery(){
-      $('.custom_tab li').click(function () {
-          $('.custom_tab li.active_tab').removeClass('active_tab');
-          $(this).addClass('active_tab');
-      });
+    if(Object.keys(this.customInstalmentData).length){
+      this.additionalAmount = this.customInstalmentData.additionalAmount;
+      this.durationType = this.customInstalmentData.instalmentType;
+      this.customAmount = this.customInstalmentData.customAmount;
+      this.customInstalment = this.customInstalmentData.customInstalment;
+      this.laycreditpoints = this.customInstalmentData.layCreditPoints;
+      this.calculateInstalment();
+    }
   }
 
   toggleaccordin(){
@@ -338,10 +340,6 @@ export class PaymentModeComponent implements OnInit {
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
 
-    /* console.log("Before",this.instalmentRequest.additional_amount)
-    this.instalmentRequest.additional_amount = 5;
-    console.log("After",this.instalmentRequest) */
-
     this.instalmentRequest.additional_amount=this.additionalAmount + Number(this.laycreditpoints);
 
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
@@ -370,7 +368,5 @@ export class PaymentModeComponent implements OnInit {
       })
       this.calculateInstalment();
     }
-
-    console.log("---",this.laycreditpoints)
   }
 }

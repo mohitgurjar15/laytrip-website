@@ -27,7 +27,7 @@ export class FlightCheckoutComponent implements OnInit {
     s3BucketUrl = environment.s3BucketUrl;
     validateCardDetails:Subject<any> = new Subject();
     showAddCardForm:boolean=false;
-    progressStep={ step1:true, step2:true, step3:false };
+    progressStep={ step1:true, step2:true, step3:true,step4:false };
     cardToken:string='';
     instalmentMode='instalment';
     laycreditpoints:number=0;
@@ -53,6 +53,7 @@ export class FlightCheckoutComponent implements OnInit {
     isSessionTimeOut:boolean=false;
     isShowCardOption:boolean=true;
     isShowPaymentOption:boolean=true;
+    customInstalmentData:any;
 
     ngOnInit() {
       window.scroll(0,0);
@@ -62,26 +63,8 @@ export class FlightCheckoutComponent implements OnInit {
       }
       this.routeCode = this.route.snapshot.paramMap.get('rc')
 
-      let timerInfo:any = this.cookieService.get('flight_booking_timer')
-      timerInfo = timerInfo ? JSON.parse(timerInfo) : {};
-      if(timerInfo.route_code==this.routeCode){
-        this.bookingTimerConfig={
-          leftTime : 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
-          format: 'm:s'
-        }
-      }
-      else{
-        
-        this.bookingTimerConfig={
-          leftTime: 600, format: 'm:s'
-        };
-
-        let bookingTimer={
-          'route_code':this.routeCode,
-          'time': moment().format('YYYY-MM-DD h:mm:ss')
-        }
-        this.cookieService.put("flight_booking_timer", JSON.stringify(bookingTimer));
-      }
+      this.bookingTimerConfiguration();
+      this.setInstalmentInfo();
 
       if(this.userInfo.roleId==7){
         this.instalmentMode='no-instalment';
@@ -107,6 +90,39 @@ export class FlightCheckoutComponent implements OnInit {
 
       }
       this.validateBookingButton();
+    }
+
+    bookingTimerConfiguration(){
+      let timerInfo:any = this.cookieService.get('flight_booking_timer')
+      timerInfo = timerInfo ? JSON.parse(timerInfo) : {};
+      if(timerInfo.route_code==this.routeCode){
+        this.bookingTimerConfig={
+          leftTime : 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time ,'seconds'),
+          format: 'm:s'
+        }
+      }
+      else{
+        
+        this.bookingTimerConfig={
+          leftTime: 600, format: 'm:s'
+        };
+
+        let bookingTimer={
+          'route_code':this.routeCode,
+          'time': moment().format('YYYY-MM-DD h:mm:ss')
+        }
+        this.cookieService.put("flight_booking_timer", JSON.stringify(bookingTimer));
+      }
+    }
+
+    setInstalmentInfo(){
+      try{
+        let customInstalmentData=atob(sessionStorage.getItem('__islt'))
+        this.customInstalmentData = JSON.parse(customInstalmentData);
+      }
+      catch(error){
+
+      }
     }
 
     toggleAddcardForm(){
@@ -184,7 +200,7 @@ export class FlightCheckoutComponent implements OnInit {
       this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
         this.bookingStatus=1;
         this.bookingLoader=false;
-        this.progressStep = { step1:true, step2:true, step3:true }
+        this.progressStep = { step1:true, step2:true, step3:true, step4:true }
         this.bookingResult=res;
       },(error)=>{
         if(error.status==422){

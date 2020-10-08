@@ -18,15 +18,33 @@
                         <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
                             <div class="block_payment_mode">
                                 <div class="block_title_section">
-                                    <h5>Choose Payment Mode</h5>
+                                    <h5>Partial Payment Detail</h5>
+                                    <a href="javascript:void(0);">Change</a>
                                 </div>
                                 <div class="block_detail">
-                                    <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                    <div class="pay_deatil_info">
+                                        <div class="block_detail_left">
+                                            <ul>
+                                                <li>1st Installment <span>$40</span></li>
+                                                <li>Default Instalment (for 2 weeks) <span>$70</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="block_detail_right">
+                                            Booking available on <span>26th Nov, 2020</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block_detail">
+                                    <!-- <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit> -->
                                     <app-payment-mode 
                                         *ngIf="flightSummary.length && isShowPaymentOption" 
                                         [flightSummary]="flightSummary" 
                                         (selectInstalmentMode)="selectInstalmentMode($event)" 
-                                        (getInstalmentData)="getInstalmentData($event)">
+                                        (getInstalmentData)="getInstalmentData($event)"
+                                        [showFullPartialPayOption]=false
+                                        [customInstalmentData]="customInstalmentData"
+                                        >
                                     </app-payment-mode>
                                 </div>
                             </div>

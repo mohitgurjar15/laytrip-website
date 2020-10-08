@@ -1,7 +1,7 @@
 
-<ul class="block_installment_radio" *ngIf="instalmentAvavible">
+<ul class="block_installment_radio" *ngIf="instalmentAvavible && showFullPartialPayOption">
     <li>
-        <label class="custom_radio">Pay with Instalment <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
+        <label class="custom_radio">Pay with Instalment  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
             <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
@@ -19,9 +19,9 @@
         <div class="installment_top">
 
             <ul class="custom_tab">
-                <li class="active_tab">
+                <li [ngClass]="{'active_tab': durationType === 'weekly'}" >
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" checked (click)="changeDuration('weekly')">
+                        <input type="radio" name="weekly-installment" [checked]="durationType=='weekly'" (click)="changeDuration('weekly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Weekly <span>({{weeklyDefaultInstalmentNo}} payments)</span>
@@ -31,9 +31,9 @@
                         </div>
                     </label>
                 </li>
-                <li>
+                <li [ngClass]="{'active_tab': durationType === 'biweekly'}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" (click)="changeDuration('biweekly')">
+                        <input type="radio" name="weekly-installment" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Bi-weekly <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
@@ -43,9 +43,9 @@
                         </div>
                     </label>
                 </li>
-                <li>
+                <li [ngClass]="{'active_tab': durationType === 'monthly'}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" (click)="changeDuration('monthly')">
+                        <input type="radio" name="weekly-installment" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Monthly <span>({{monthlyDefaultInstalmentNo}} payments)</span>
