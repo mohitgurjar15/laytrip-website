@@ -101,7 +101,7 @@
                     list-style: none;
                     display: flex;
                     justify-content: space-between;
-                    width: 83%;
+                    width: 84%;
 
                     @media(max-width: 991px) {
                         flex-wrap: wrap;
@@ -183,7 +183,7 @@
                                 left: 50%;
                                 transform: translate(-50%, -50%);
                                 border-radius: 50%;
-                                z-index: 1;
+                                z-index: 9999;
 
                                 img {
                                     width: 15px;
@@ -363,7 +363,7 @@
                 }
 
                 .serch_btn {
-                    width: 16%;
+                    width: 15%;
 
                     @media(max-width: 991px) {
                         width: 100%;
@@ -447,16 +447,12 @@
 
 //<!-- Close Search Modify section -->
 
-
 //<!-- Start Search Result section -->
 .search_result {
     width: 100%;
     padding: 50px 0 40px;
 
-
-
     //<!-- Start Result listing section -->
-
     .price_by_date {
         width: 100%;
         margin: 0 0 30px;
@@ -835,7 +831,7 @@
                             font-size: 16px;
                             color: $text-white;
                             font-weight: 500;
-                            border-radius: 20px;
+                            border-radius: 8px;
                             background: $btn-bg;
                             position: relative;
                             z-index: 9;
@@ -1985,8 +1981,8 @@
                             font-size: 16px;
                             color: $text-white;
                             font-weight: 500;
-                            border-radius: 20px;
-                            background: $secondary-color;
+                            border-radius: 8px;
+                            background: $btn-bg;
                             position: relative;
                             z-index: 9;
                             overflow: hidden;
@@ -2822,11 +2818,12 @@
         }
     }
 
-
-
     //<!-- Close Result listing section -->
 }
 
+//<!-- Close Search Result section -->
+
+//<!-- Start Pagination section -->
 .pagination_main {
     width: 100%;
     display: flex;
@@ -2891,6 +2888,8 @@
     }
 }
 
+//<!-- Close Pagination section -->
+
 //<!-- Start filter saidbar section -->
 .filter_saidbar {
     width: 100%;
@@ -2947,12 +2946,27 @@
     .short_by {
         width: 100%;
 
-        h4 {
-            font-size: 16px;
-            font-weight: 500;
-            color: $text-grey;
-            margin: 0 0 5px;
+        .block_inn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h4 {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-grey;
+                margin: 0 0 5px;
+            }
+
+            a {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-lightblue;
+            }
         }
+
+
 
         .block_shortby {
             margin-bottom: 20px;
@@ -3088,11 +3102,24 @@
     .filter_by {
         width: 100%;
 
-        h4 {
-            font-size: 16px;
-            font-weight: 500;
-            color: $text-grey;
-            margin: 0 0 5px;
+        .block_inn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h4 {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-grey;
+                margin: 0 0 5px;
+            }
+
+            a {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-lightblue;
+            }
         }
 
         .fliter_block {
@@ -3420,6 +3447,7 @@
     }
 }
 
+//<!-- Close filter saidbar section -->
 
 //<!-- start Detail page banner section css -->
 .banner_detail {
@@ -3612,7 +3640,7 @@
 
                     span {
                         font-size: 16px;
-                        color: $bg-green;
+                        color: $text-lightblue;
                         font-weight: 500;
 
                         @media(max-width: 480px) {
@@ -3628,8 +3656,6 @@
                 .passanger_detail_main {
 
                     .block_passenger_detail {
-
-
                         .block_passenger_info {
                             border-bottom: 2px dashed $border-blue-light;
                             margin: 0 0 20px;
@@ -3774,7 +3800,7 @@
                                                 }
 
                                                 &.status_incomplete {
-                                                    color: $error-color;
+                                                    color: $secondary-color;
                                                 }
 
                                                 @media(max-width: 480px) {
@@ -4055,6 +4081,9 @@
                                         }
 
                                         .form_btn {
+                                            display: flex;
+                                            justify-content: flex-end;
+
                                             button {
                                                 width: auto;
                                                 padding: 0 35px;
@@ -4359,7 +4388,7 @@
                 color: $text-white;
                 font-weight: 300;
                 border-radius: 8px;
-                background: $secondary-color;
+                background: $primary-color;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
@@ -4376,14 +4405,14 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $primary-color;
+                    background: $secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
                 }
 
                 &:hover {
-                    border-color: $primary-color;
+                    border-color: $secondary-color;
 
                     &:before {
                         height: 190%;
@@ -4409,7 +4438,7 @@
             margin: 0 0 15px;
 
             span {
-                color: $secondary-color;
+                color: $text-darkblue;
             }
         }
 
@@ -4917,7 +4946,7 @@
 
             .total_payment {
                 padding: 15px;
-                background: $bg-green;
+                background: $primary-color;
                 border-radius: 0 0 4px 4px;
 
                 ul {
@@ -5008,22 +5037,27 @@
                 }
 
                 .block_pay_info {
-                    padding: 20px 30px;
+                    padding: 20px 0;
                     border-radius: 5px;
                     background: $background-white;
                     box-shadow: 3px 4px 10px $shadow-color;
                     margin: 0 0 20px;
 
+                    &.no_pad {
+                        padding: 0;
+                    }
+
                     @media(max-width: 575px) {
                         padding: 20px 15px;
                     }
 
-                    &:first-child {
-                        border-radius: 0 0 5px 5px;
-                    }
+                    //                    &:first-child {
+                    //                        border-radius: 0 0 5px 5px;
+                    //                    }
 
                     .block_travellers {
                         margin: 0;
+                        padding: 20px 30px 0;
 
                         h6 {
                             font-size: 16px;
@@ -5035,7 +5069,11 @@
                         .traveller_detail {
                             display: flex;
                             justify-content: space-between;
-                            margin: 0 0 30px;
+                            margin: 0;
+
+                            &.mr30 {
+                                margin-bottom: 30px;
+                            }
 
                             span {
                                 font-size: 14px;
@@ -5052,6 +5090,7 @@
                     }
 
                     .block_card_detail {
+                        padding: 0 30px 0;
 
                         .block_title_section {
                             background: $bg-title-grey;
@@ -5207,6 +5246,8 @@
                     }
 
                     .block_billing_detail {
+                        padding: 0 30px 0;
+
                         .block_title_section {
                             background: $bg-title-grey;
                             padding: 15px 30px;
@@ -5358,10 +5399,23 @@
                         }
                     }
 
-
                     .block_payment_mode {
                         width: 100%;
                         margin: 0;
+                        padding: 20px 30px;
+                        //                        box-shadow: 3px 4px 10px $shadow-color;
+
+                        &.no_shadow {
+                            box-shadow: none;
+                        }
+
+                        &.no_pad {
+                            padding: 0 30px;
+                        }
+
+                        @media(max-width: 575px) {
+                            padding: 20px;
+                        }
 
                         .block_title_section {
                             background: $bg-title-grey;
@@ -5370,101 +5424,38 @@
                             justify-content: space-between;
                             margin: 0 0 20px;
 
+                            @media(max-width: 575px) {
+                                padding: 15px;
+                            }
+
                             h5 {
                                 font-size: 16px;
                                 font-weight: 500;
                                 color: $text-black;
                                 margin: 0;
                             }
+
+                            a {
+                                font-size: 14px;
+                                font-weight: 400;
+                                color: $text-lightblue;
+                            }
                         }
 
                         .block_detail {
                             width: 100%;
 
+                            &.get_assist {
+                                padding: 0;
+                            }
+
                             ul {
-                                width: 100%;
                                 margin: 0;
                                 padding: 0;
-                                display: flex;
-
-                                @media(max-width: 480px) {
-                                    flex-flow: column;
-                                }
-
-                                li {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    padding: 0 100px 0 0;
-                                    align-items: center;
-                                    color: $text-grey;
-                                    font-size: 14px;
-                                    font-weight: 400;
-
-                                    @media(max-width: 480px) {
-                                        padding: 0 0 10px 0;
-                                    }
-
-                                    .custom_radio {
-                                        width: 100%;
-                                        display: block;
-                                        position: relative;
-                                        padding-left: 25px;
-                                        margin: 0;
-                                        cursor: pointer;
-                                        font-size: 14px;
-                                        -webkit-user-select: none;
-                                        -moz-user-select: none;
-                                        -ms-user-select: none;
-                                        user-select: none;
-                                        color: $text-grey;
-
-                                        input {
-                                            position: absolute;
-                                            opacity: 0;
-                                            cursor: pointer;
-
-                                            &:checked {
-                                                ~ {
-                                                    .checkmark {
-                                                        border: 1px solid $secondary-color;
-
-                                                        &:after {
-                                                            display: block;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        .checkmark {
-                                            position: absolute;
-                                            top: 4px;
-                                            left: 0;
-                                            height: 14px;
-                                            width: 14px;
-                                            background-color: transparent;
-                                            border: 1px solid $text-grey;
-                                            border-radius: 50%;
-
-                                            &:after {
-                                                content: "";
-                                                position: absolute;
-                                                display: none;
-                                                top: 2px;
-                                                left: 2px;
-                                                width: 8px;
-                                                height: 8px;
-                                                border-radius: 50%;
-                                                background: $secondary-color;
-                                            }
-                                        }
-                                    }
-
-                                    &:last-child {
-                                        padding: 0;
-                                    }
-                                }
+                                list-style: none;
                             }
+
+
 
                             .block_laycredit_checkbox {
                                 width: 100%;
@@ -5623,6 +5614,81 @@
                                 }
                             }
 
+
+                            .pay_deatil_info {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: flex-start;
+
+
+                                @media(max-width: 575px) {
+                                    flex-flow: column;
+                                }
+
+                                .block_detail_left {
+                                    width: 100%;
+
+                                    ul {
+                                        width: 100%;
+                                        display: flex;
+                                        flex-flow: column;
+
+                                        li {
+                                            font-size: 14px;
+                                            font-weight: 400;
+                                            color: $text-grey;
+                                            padding: 0 0 15px;
+                                            display: flex;
+                                            justify-content: space-between;
+
+                                            span {
+                                                color: $text-black;
+                                                font-weight: 500;
+
+                                                @media(max-width: 575px) {
+                                                    padding: 0 0 0 20px;
+                                                }
+                                            }
+
+                                            &:last-child {
+                                                padding: 0;
+                                            }
+                                        }
+                                    }
+
+                                    @media(max-width: 575px) {
+                                        order: 2;
+                                    }
+                                }
+
+                                .block_detail_right {
+                                    width: 300px;
+                                    padding: 0;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    flex-flow: column;
+                                    text-align: right;
+
+                                    @media(max-width: 575px) {
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 0 0 10px 0;
+                                        text-align: center;
+                                    }
+
+                                    span {
+                                        font-size: 16px;
+                                        color: $secondary-color;
+                                        display: block;
+                                    }
+                                }
+                            }
+
+
                             &.get_assist {
                                 p {
                                     font-size: 14px;
@@ -5633,7 +5699,11 @@
 
                                 .block_contact {
                                     display: flex;
-                                    margin: 10px 0 30px;
+                                    margin: 10px 0 0;
+
+                                    @media(max-width: 480px) {
+                                        flex-flow: column;
+                                    }
 
                                     li {
                                         width: auto;
@@ -5650,496 +5720,109 @@
                                                 font-size: 16px;
                                             }
                                         }
+
+                                        @media(max-width: 480px) {
+                                            padding: 5px 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    .block_installment_radio {
+                        width: 100%;
+                        margin: 0;
+                        padding: 0 30px;
+                        display: flex;
+
+                        @media(max-width: 480px) {
+                            flex-flow: column;
+                        }
+
+                        li {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 0 100px 0 0;
+                            align-items: center;
+                            color: $text-grey;
+                            font-size: 14px;
+                            font-weight: 400;
+
+                            @media(max-width: 480px) {
+                                padding: 0 0 10px 0;
+                            }
+
+                            .custom_radio {
+                                width: 100%;
+                                display: block;
+                                position: relative;
+                                padding-left: 25px;
+                                margin: 0;
+                                cursor: pointer;
+                                font-size: 14px;
+                                -webkit-user-select: none;
+                                -moz-user-select: none;
+                                -ms-user-select: none;
+                                user-select: none;
+                                color: $text-black;
+
+                                span {
+                                    display: block;
+                                    color: $text-grey;
+                                }
+
+                                input {
+                                    position: absolute;
+                                    opacity: 0;
+                                    cursor: pointer;
+
+                                    &:checked {
+                                        ~ {
+                                            .checkmark {
+                                                border: 1px solid $secondary-color;
+
+                                                &:after {
+                                                    display: block;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .checkmark {
+                                    position: absolute;
+                                    top: 4px;
+                                    left: 0;
+                                    height: 14px;
+                                    width: 14px;
+                                    background-color: transparent;
+                                    border: 1px solid $text-grey;
+                                    border-radius: 50%;
+
+                                    &:after {
+                                        content: "";
+                                        position: absolute;
+                                        display: none;
+                                        top: 2px;
+                                        left: 2px;
+                                        width: 8px;
+                                        height: 8px;
+                                        border-radius: 50%;
+                                        background: $secondary-color;
                                     }
                                 }
                             }
 
-                            .block_installment_option {
-                                flex-flow: column;
-
-                                .block_installment {
-                                    padding: 20px 25px 20px;
-                                    width: 100%;
-                                    border-bottom: 2px dashed $border-blue-light;
-
-                                    &:last-child {
-                                        border-bottom: none;
-                                        padding-bottom: 0;
-                                    }
-
-                                    .installment_info {
-                                        width: 100%;
-
-                                        ul {
-                                            width: 100%;
-                                            display: flex;
-                                            justify-content: space-between;
-
-                                            li {
-                                                padding: 0 20px 0 0;
-                                                font-weight: 400;
-
-                                                .custom_radio {
-                                                    width: 100%;
-                                                    display: flex;
-
-                                                    span {
-                                                        color: $text-black;
-                                                        margin: 0;
-                                                        padding: 0 0 0 10px;
-                                                    }
-                                                }
-
-                                                &:last-child {
-                                                    padding: 0;
-                                                }
-                                            }
-                                        }
-
-                                    }
-
-                                    .block_one {
-                                        width: 100%;
-
-                                        &.clr_bg {
-                                            padding: 20px;
-                                            border-radius: 5px;
-                                            background: $text_blue;
-                                            margin: 20px 0 10px;
-                                            display: flex;
-                                            justify-content: space-between;
-
-                                            .block_clr_bg_left {
-                                                display: flex;
-                                                flex-flow: column;
-
-                                                p {
-                                                    font-size: 14px;
-                                                    font-weight: 400;
-                                                    color: $text-white;
-                                                    margin: 0 0 10px;
-                                                    line-height: normal;
-                                                }
-
-                                                span {
-                                                    font-size: 14px;
-                                                    font-weight: 600;
-                                                    color: $text-white;
-                                                    margin: 0 0 5px;
-                                                    line-height: normal;
-
-                                                    &:last-child {
-                                                        margin: 0;
-                                                    }
-                                                }
-                                            }
-
-                                            .block_clr_bg_right {
-                                                display: flex;
-                                                flex-flow: column;
-                                                padding: 0 20px 0 40px;
-                                                border-left: 1px solid $btn-bg;
-
-                                                p {
-                                                    font-size: 14px;
-                                                    font-weight: 400;
-                                                    color: $text-white;
-                                                    margin: 0 0 15px;
-                                                    line-height: normal;
-                                                }
-
-                                                .block_pay_instalment {
-                                                    width: 100%;
-                                                    display: flex;
-                                                    align-items: center;
-                                                    justify-content: center;
-
-                                                    .block_amount {
-                                                        padding: 0 25px;
-                                                        font-size: 20px;
-                                                        font-weight: 600;
-                                                        color: $text-white;
-                                                    }
-
-                                                    .pay_block {
-                                                        width: 25px;
-                                                        height: 25px;
-                                                        font-size: 16px;
-                                                        position: relative;
-
-                                                        a {
-                                                            width: 25px;
-                                                            height: 25px;
-                                                            display: inline-block;
-                                                            border-radius: 50%;
-                                                            position: absolute;
-                                                            top: 0;
-                                                            left: 0;
-                                                            background: $background-white;
-                                                            color: $secondary-color;
-                                                            line-height: 27px;
-                                                            text-align: center;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .block_two {
-                                        width: 100%;
-                                        border: 1px solid $box-border-color;
-                                        border-radius: 5px;
-
-                                        ul {
-                                            flex-flow: column;
-
-                                            li {
-                                                width: 100%;
-                                                padding: 10px 20px;
-                                                border-bottom: 1px solid $box-border-color;
-                                                font-size: 14px;
-                                                font-weight: 400;
-                                                color: $text-grey;
-
-                                                span {
-                                                    font-size: 14px;
-                                                    font-weight: 500;
-                                                    color: $text-black;
-                                                }
-
-                                                &:last-child {
-                                                    border: none;
-                                                }
-                                            }
-                                        }
-
-                                        .block_pay_remaining {
-                                            width: auto;
-                                            border-radius: 5px;
-                                            background: $btn-bg;
-                                            padding: 12px;
-                                            text-align: center;
-                                            font-size: 14px;
-                                            font-weight: 500;
-                                            color: $text-white;
-                                            margin: 0 20px 12px;
-                                        }
-                                    }
-
-                                    .block_pay_info_main {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: space-between;
-
-                                        .block_pay_info_left {
-                                            width: 49%;
-                                            padding: 20px;
-                                            border-radius: 5px;
-                                            border: 1px solid $box-border-color;
-                                            display: flex;
-                                            flex-flow: column;
-                                            justify-content: space-between;
-
-                                            &.clr_bg {
-                                                background: $text_blue;
-                                            }
-
-                                            .block_pay_info_inner {
-                                                display: flex;
-                                                flex-flow: column;
-                                                width: 100%;
-
-                                                p {
-                                                    font-size: 14px;
-                                                    font-weight: 400;
-                                                    color: $text-white;
-                                                    margin: 0 0 10px;
-                                                }
-
-                                                span {
-                                                    font-size: 14px;
-                                                    font-weight: 600;
-                                                    color: $text-white;
-                                                    margin: 0 0 10px;
-                                                }
-
-                                                ul {
-                                                    width: 100%;
-                                                    border-top: 1px solid $btn-bg;
-                                                    border-bottom: 1px solid $btn-bg;
-                                                    margin: 0 0 10px;
-                                                    padding: 0;
-                                                    flex-flow: column;
-
-                                                    li {
-                                                        width: 100%;
-                                                        padding: 10px 0;
-                                                        display: flex;
-                                                        justify-content: space-between;
-                                                        align-items: center;
-
-                                                        .custom_radio {
-                                                            color: $text-white;
-
-                                                            .checkmark {
-                                                                border-color: $background-white;
-                                                            }
-                                                        }
-
-                                                        .block_pay_instalment {
-                                                            width: 100%;
-                                                            display: flex;
-                                                            align-items: center;
-                                                            justify-content: center;
-
-                                                            .block_amount {
-                                                                width: 80px;
-                                                                padding: 0 20px;
-                                                                font-size: 18px;
-                                                                font-weight: 600;
-                                                                color: $text-white;
-                                                                text-align: center;
-                                                            }
-
-                                                            .pay_block {
-                                                                width: 25px;
-                                                                height: 25px;
-                                                                font-size: 16px;
-                                                                position: relative;
-
-                                                                a {
-                                                                    width: 25px;
-                                                                    height: 25px;
-                                                                    display: inline-block;
-                                                                    border-radius: 50%;
-                                                                    position: absolute;
-                                                                    top: 0;
-                                                                    left: 0;
-                                                                    background: $background-white;
-                                                                    color: $secondary-color;
-                                                                    line-height: 27px;
-                                                                    text-align: center;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                            }
-
-
-                                            .btn_calculate {
-                                                width: 100%;
-                                                display: flex;
-                                                justify-content: center;
-
-                                                a {
-                                                    display: inline-block;
-                                                    line-height: 38px;
-                                                    padding: 0 35px;
-                                                    font-size: 14px;
-                                                    color: $text-white;
-                                                    border-radius: 20px;
-                                                    background: $btn-bg;
-                                                    position: relative;
-                                                    z-index: 9;
-                                                    overflow: hidden;
-                                                    font-weight: 400;
-
-                                                    &::before {
-                                                        content: "";
-                                                        position: absolute;
-                                                        top: 0;
-                                                        left: 0;
-                                                        width: 100%;
-                                                        height: 0%;
-                                                        background: $secondary-color;
-                                                        z-index: -1;
-                                                        transition: 0.8s;
-                                                        border-radius: 0 0 50% 50%;
-                                                    }
-
-                                                    &:hover {
-                                                        border-color: $secondary-color;
-
-                                                        &:before {
-                                                            height: 190%;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        .block_pay_info_right {
-                                            width: 49%;
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 5px;
-
-                                            h6 {
-                                                font-size: 16px;
-                                                font-weight: 600;
-                                                color: $text-black;
-                                                background: $bg-light-grey;
-                                                border-radius: 5px 5px 0 0;
-                                                padding: 15px 20px;
-                                                margin: 0;
-                                            }
-
-                                            ul {
-                                                width: 100%;
-                                                flex-flow: column;
-
-                                                li {
-                                                    width: 100%;
-                                                    padding: 15px 20px;
-                                                    display: flex;
-                                                    justify-content: space-between;
-                                                    font-size: 14px;
-                                                    font-weight: 500;
-                                                    color: $text-grey;
-                                                    border-bottom: 1px solid $box-border-color;
-
-                                                    span {
-                                                        color: $text-black;
-                                                    }
-
-                                                    &:last-child {
-                                                        border-bottom: none;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-
-
-                                    .block_installment_pay_table {
-                                        width: 100%;
-                                        margin: 10px 0 20px;
-
-                                        table {
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 5px;
-                                            width: 100%;
-
-                                            thead {
-                                                tr {
-                                                    border-radius: 5px 5px 0 0;
-
-                                                    th {
-                                                        padding: 10px;
-                                                        font-size: 14px;
-                                                        font-weight: 500;
-                                                        color: $text-grey;
-                                                        background: $bg-light-grey;
-                                                        text-align: center;
-
-                                                        &:first-child {
-                                                            text-align: left;
-                                                            border-radius: 5px 0 0 0;
-                                                        }
-
-                                                        &:last-child {
-                                                            text-align: right;
-                                                            border-radius: 0 5px 0 0;
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            tbody {
-                                                tr {
-                                                    td {
-                                                        padding: 10px;
-                                                        border-bottom: 1px solid $box-border-color;
-                                                        font-size: 14px;
-                                                        font-weight: 500;
-                                                        color: $text-black;
-                                                        vertical-align: top;
-                                                        text-align: center;
-
-                                                        &:first-child {
-                                                            text-align: left;
-                                                        }
-
-                                                        &:last-child {
-                                                            text-align: right;
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            @media only screen and (max-width: 800px) {
-                                                display: block;
-
-                                                thead {
-                                                    display: block;
-
-                                                    tr {
-                                                        display: none;
-                                                    }
-                                                }
-
-                                                tbody {
-                                                    display: block;
-
-                                                    tr {
-                                                        display: block;
-
-                                                        td {
-                                                            display: block;
-                                                            border: none;
-                                                            border-bottom: 1px solid $box-border-color;
-                                                            position: relative;
-                                                            padding-top: 35px;
-                                                            white-space: normal;
-                                                            text-align: left;
-
-                                                            &:before {
-                                                                position: absolute;
-                                                                top: 10px;
-                                                                left: 10px;
-                                                                width: 100%;
-                                                                padding-right: 10px;
-                                                                white-space: nowrap;
-                                                                text-align: left;
-                                                                font-weight: bold;
-                                                                content: attr(data-title);
-                                                                color: $text-grey;
-                                                                font-weight: 400;
-                                                                font-size: 14px;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .block_pay_info_date {
-                                        width: 100%;
-                                        background: $bg-light-green;
-                                        padding: 15px 20px;
-
-                                        border-radius: 5px;
-
-                                        p {
-                                            font-size: 14px;
-                                            font-weight: 500;
-                                            color: $text-black;
-                                            margin: 0;
-                                        }
-                                    }
-
-                                }
+                            &:last-child {
+                                padding: 0;
                             }
-
-
                         }
                     }
 
                     .block_card_select {
+                        padding: 0 30px;
 
                         .block_title_section {
                             background: $bg-title-grey;
@@ -6160,7 +5843,7 @@
                             width: 100%;
 
                             .card_list {
-                                margin: 0 0 15px;
+                                margin: 0;
 
                                 ul {
                                     width: 100%;
@@ -6346,7 +6029,7 @@
 
                             .add_card_btn {
                                 width: 100%;
-                                margin: 0 0 15px;
+                                margin: 0;
 
                                 a {
                                     font-size: 16px;
@@ -6359,7 +6042,7 @@
                                 padding: 20px;
                                 border: 1px solid $box-border-color;
                                 border-radius: 5px;
-                                margin: 0 0 30px;
+                                margin: 20px 0 30px;
 
                                 .form_row {
                                     width: 100%;
@@ -6488,7 +6171,6 @@
                                                         display: none;
                                                     }
                                                 }
-
                                             }
                                         }
                                     }
@@ -6579,12 +6261,15 @@
                                 }
 
                                 .form_btn {
+                                    display: flex;
+                                    justify-content: flex-end;
+
                                     button {
                                         width: auto;
                                         padding: 0 35px;
                                         height: 38px;
                                         background: $btn-bg;
-                                        border-radius: 19px;
+                                        border-radius: 8px;
                                         border: 1px solid $btn-bg;
                                         font-size: 20px;
                                         font-weight: 400;
@@ -6626,8 +6311,541 @@
                                         @media(max-width: 991px) {
                                             display: inline-flex;
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .installment_main {
+                    .block_installment_option {
+                        display: flex;
+                        position: relative;
+                        flex-flow: column;
+                        background: $background-white;
+                        margin-top: 20px;
+                        padding: 20px 30px 0;
+                        box-shadow: 3px -4px 10px $shadow-color;
+                        border-radius: 0 0 5px 5px;
+
+                        @media(max-width: 480px) {
+                            padding: 15px;
+                        }
+
+                        .installment_top {
+                            display: flex;
+                            position: relative;
+                            border: 1px solid $bg-body;
+                            background: $bg-body;
+                            border-radius: 10px;
+
+                            @media(max-width: 767px) {
+                                flex-flow: column;
+                            }
+
+                            .custom_tab {
+                                width: 320px;
+                                display: flex;
+                                flex-flow: column;
+                                margin: 0px;
+                                padding: 0;
+                                border-bottom: 0;
+                                background: $background-white;
+                                border-radius: 10px 0 0 10px;
+                                list-style: none;
+
+                                @media(max-width: 767px) {
+                                    width: 100%;
+                                }
+
+                                li {
+                                    padding: 15px;
+                                    width: 100%;
+                                    position: relative;
+
+                                    @media(max-width: 767px) {
+                                        &:first-child {
+                                            border-radius: 10px 10px 0 0;
+                                        }
+                                    }
+
+
+                                    &.active_tab {
+                                        box-shadow: 0px 3px 10px $shadow-black;
+
+                                        &:before {
+                                            width: 0;
+                                            height: 0;
+                                            border-top: 9px solid transparent;
+                                            border-bottom: 9px solid transparent;
+                                            border-left: 9px solid $background-white;
+                                            position: absolute;
+                                            top: 50%;
+                                            left: 100%;
+                                            content: '';
+                                            z-index: 2;
+                                            transform: translateY(-50%);
+
+                                            @media(max-width: 767px) {
+                                                display: none;
+                                            }
+                                        }
 
                                     }
+
+                                    .custom_radio {
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        position: relative;
+                                        padding-left: 25px;
+                                        margin: 0;
+                                        cursor: pointer;
+                                        font-size: 14px;
+                                        -webkit-user-select: none;
+                                        -moz-user-select: none;
+                                        -ms-user-select: none;
+                                        user-select: none;
+                                        color: $text-black;
+
+                                        input {
+                                            position: absolute;
+                                            opacity: 0;
+                                            cursor: pointer;
+
+                                            &:checked {
+                                                ~ {
+                                                    .checkmark {
+                                                        border: 1px solid $secondary-color;
+
+                                                        &:after {
+                                                            display: block;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .checkmark {
+                                            position: absolute;
+                                            top: 4px;
+                                            left: 0;
+                                            height: 14px;
+                                            width: 14px;
+                                            background-color: transparent;
+                                            border: 1px solid $text-grey;
+                                            border-radius: 50%;
+
+                                            &:after {
+                                                content: "";
+                                                position: absolute;
+                                                display: none;
+                                                top: 2px;
+                                                left: 2px;
+                                                width: 8px;
+                                                height: 8px;
+                                                border-radius: 50%;
+                                                background: $secondary-color;
+                                            }
+                                        }
+
+                                        .left {
+                                            font-size: 14px;
+                                            font-weight: 400;
+                                            color: $text-black;
+
+                                            span {
+                                                display: block;
+                                                font-size: 12px;
+                                                color: $text-grey;
+                                            }
+                                        }
+
+                                        .right {
+                                            text-align: center;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            color: $secondary-color;
+
+                                            span {
+                                                display: block;
+                                                font-size: 12px;
+                                                font-weight: 400;
+                                                color: $text-grey;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .tab-content {
+                                width: 100%;
+                                border: none;
+                                padding: 20px;
+
+                                @media(max-width: 480px) {
+                                    padding: 10px;
+                                }
+
+                                .active {
+                                    display: block;
+                                }
+
+                                .installment_ingo {
+                                    width: 100%;
+
+                                    .accordion {
+
+                                        .accordion-group {
+                                            width: 100%;
+                                            margin: 0 0 15px;
+
+                                            border: 1px solid $box-border-color;
+                                            border-radius: 5px;
+                                            background: $background-white;
+
+                                            .accordion-heading {
+                                                padding: 15px;
+
+                                                .accordion-toggle {
+                                                    font-size: 14px;
+                                                    color: $text-black;
+                                                    font-weight: 500;
+                                                    width: 100%;
+                                                    display: flex;
+                                                    justify-content: space-between;
+                                                    position: relative;
+                                                    padding-right: 30px;
+
+                                                    @media(max-width: 575px) {
+                                                        flex-flow: column;
+                                                    }
+
+                                                    .icon {
+                                                        position: absolute;
+                                                        top: 50%;
+                                                        right: 0;
+                                                        transform: translateY(-50%);
+
+                                                        i {
+                                                            color: $text-grey;
+                                                        }
+                                                    }
+
+                                                    &:after {
+                                                        font-family: 'FontAwesome';
+                                                        content: "\f054";
+                                                        float: right;
+                                                        color: $text-grey;
+                                                        font-weight: normal;
+                                                        position: absolute;
+                                                        top: 50%;
+                                                        right: 0;
+                                                        transform: translateY(-50%);
+                                                    }
+
+                                                    &.custom_aerrow {
+                                                        &:after {
+                                                            display: none;
+                                                        }
+                                                    }
+
+                                                    .left_block {
+                                                        span {
+                                                            display: block;
+                                                            color: $text-grey;
+                                                            font-size: 12px;
+                                                            font-weight: 400;
+                                                        }
+                                                    }
+
+                                                    .right_block {
+                                                        font-size: 12px;
+                                                        font-weight: 400;
+                                                        color: $text-grey;
+
+                                                        span {
+                                                            color: $text-black;
+                                                            font-size: 14px;
+                                                            font-weight: 500;
+                                                        }
+
+                                                        @media(max-width: 575px) {
+                                                            margin: 10px 0 0;
+                                                        }
+                                                    }
+
+                                                    .block_pay_instalment {
+                                                        width: 100%;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: center;
+
+                                                        @media(max-width: 575px) {
+                                                            justify-content: flex-start;
+                                                        }
+
+                                                        .block_amount {
+                                                            width: 80px;
+                                                            padding: 0 5px;
+                                                            text-align: center;
+
+                                                            input {
+                                                                width: 100%;
+                                                                font-size: 16px;
+                                                                font-weight: 600;
+                                                                color: $text-blue;
+                                                                border: none;
+                                                                text-align: center;
+                                                            }
+                                                        }
+
+                                                        .pay_block {
+                                                            width: 25px;
+                                                            height: 25px;
+                                                            font-size: 16px;
+                                                            position: relative;
+
+                                                            button {
+                                                                width: 25px;
+                                                                height: 25px;
+                                                                display: inline-block;
+                                                                border-radius: 50%;
+                                                                position: absolute;
+                                                                top: 0;
+                                                                left: 0;
+                                                                background: $bg-body;
+                                                                color: $text-grey;
+                                                                line-height: 27px;
+                                                                text-align: center;
+                                                                border: none;
+
+                                                                i {
+                                                                    font-size: 12px;
+                                                                    position: absolute;
+                                                                    top: 50%;
+                                                                    left: 50%;
+                                                                    transform: translate(-55%, -50%);
+                                                                }
+
+                                                                &:hover {
+                                                                    background: $btn-bg;
+                                                                    color: $text-white;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .accordion-body {
+                                                .block_inn {
+                                                    width: 100%;
+
+                                                    ul {
+                                                        width: 100%;
+                                                        flex-flow: column;
+                                                        padding: 0;
+                                                        margin: 0;
+
+                                                        li {
+                                                            width: 100%;
+                                                            padding: 10px 15px;
+                                                            display: flex;
+                                                            justify-content: space-between;
+                                                            font-size: 14px;
+                                                            font-weight: 400;
+                                                            color: $text-grey;
+                                                            border-top: 1px solid $box-border-color;
+
+                                                            span {
+                                                                font-weight: 500;
+                                                                color: $text-black;
+
+                                                                &.point_use {
+                                                                    color: $error-color;
+                                                                }
+                                                            }
+
+                                                            &:last-child {
+                                                                border-radius: 0 0 5px 5px;
+                                                            }
+
+                                                            &.last {
+                                                                background: $primary-color;
+                                                                color: $text-white;
+
+                                                                span {
+                                                                    color: $text-white;
+                                                                }
+                                                            }
+
+                                                            .custom_radio {
+                                                                width: 100%;
+                                                                display: block;
+                                                                position: relative;
+                                                                padding-left: 25px;
+                                                                margin: 0;
+                                                                cursor: pointer;
+                                                                font-size: 14px;
+                                                                -webkit-user-select: none;
+                                                                -moz-user-select: none;
+                                                                -ms-user-select: none;
+                                                                user-select: none;
+                                                                color: $text-grey;
+
+                                                                input {
+                                                                    position: absolute;
+                                                                    opacity: 0;
+                                                                    cursor: pointer;
+
+                                                                    &:checked {
+                                                                        ~ {
+                                                                            .checkmark {
+                                                                                border: 1px solid $secondary-color;
+
+                                                                                &:after {
+                                                                                    display: block;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                                .checkmark {
+                                                                    position: absolute;
+                                                                    top: 4px;
+                                                                    left: 0;
+                                                                    height: 14px;
+                                                                    width: 14px;
+                                                                    background-color: transparent;
+                                                                    border: 1px solid $text-grey;
+                                                                    border-radius: 50%;
+
+                                                                    &:after {
+                                                                        content: "";
+                                                                        position: absolute;
+                                                                        display: none;
+                                                                        top: 2px;
+                                                                        left: 2px;
+                                                                        width: 8px;
+                                                                        height: 8px;
+                                                                        border-radius: 50%;
+                                                                        background: $secondary-color;
+                                                                    }
+                                                                }
+                                                            }
+
+
+
+                                                            .block_pay_instalment {
+                                                                width: 100%;
+                                                                display: flex;
+                                                                align-items: center;
+                                                                justify-content: center;
+
+                                                                .block_amount {
+                                                                    width: 80px;
+                                                                    padding: 0 5px;
+                                                                    text-align: center;
+
+                                                                    input {
+                                                                        width: 100%;
+                                                                        font-size: 16px;
+                                                                        font-weight: 600;
+                                                                        color: $text-blue;
+                                                                        border: none;
+                                                                        text-align: center;
+                                                                    }
+                                                                }
+
+                                                                .pay_block {
+                                                                    width: 25px;
+                                                                    height: 25px;
+                                                                    font-size: 16px;
+                                                                    position: relative;
+
+                                                                    a {
+                                                                        width: 25px;
+                                                                        height: 25px;
+                                                                        display: inline-block;
+                                                                        border-radius: 50%;
+                                                                        position: absolute;
+                                                                        top: 0;
+                                                                        left: 0;
+                                                                        background: $bg-body;
+                                                                        color: $text-grey;
+                                                                        line-height: 27px;
+                                                                        text-align: center;
+
+                                                                        i {
+                                                                            font-size: 12px;
+                                                                            position: absolute;
+                                                                            top: 50%;
+                                                                            left: 50%;
+                                                                            transform: translate(-55%, -50%);
+                                                                        }
+
+                                                                        &:hover {
+                                                                            background: $btn-bg;
+                                                                            color: $text-white;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                                        &.instalment_detail {
+
+                                                            li {
+                                                                align-items: flex-start;
+
+                                                                div {
+                                                                    font-size: 14px;
+                                                                    font-weight: 400;
+                                                                    color: $text-black;
+
+                                                                    p {
+                                                                        margin: 0;
+                                                                        font-size: 12px;
+                                                                        color: $text-grey;
+
+                                                                        span {
+                                                                            color: $secondary-color;
+                                                                            padding-left: 40px;
+                                                                            font-size: 12px;
+                                                                            font-weight: 400;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .block_installment_date {
+                            margin: 15px 0 0;
+                            padding: 15px;
+                            background: $bg-tab-detail;
+                            border-radius: 10px;
+                            text-align: center;
+
+                            p {
+                                font-size: 14px;
+                                font-weight: 400;
+                                color: $text-black;
+                                margin: 0;
+
+                                span {
+                                    font-weight: 500;
+                                    color: $secondary-color;
                                 }
                             }
                         }
@@ -6746,7 +6964,7 @@
 
             .btn_payment {
                 width: 100%;
-                margin: 10px 0 0;
+                margin: 30px 0 0;
 
                 .btn_laytrip {
                     display: inline-block;
@@ -6756,14 +6974,14 @@
                     color: $text-white;
                     font-weight: 300;
                     border-radius: 8px;
-                    background: $secondary-color;
+                    background: $primary-color;
                     position: relative;
                     z-index: 9;
                     overflow: hidden;
                     font-weight: 400;
 
                     img {
-                        margin: 0 0 0 20px;
+                        margin: 0 0 0 80px;
                         height: 15px;
                     }
 
@@ -6774,14 +6992,14 @@
                         left: 0;
                         width: 100%;
                         height: 0%;
-                        background: $primary-color;
+                        background: $secondary-color;
                         z-index: -1;
                         transition: 0.8s;
                         border-radius: 0 0 50% 50%;
                     }
 
                     &:hover {
-                        border-color: $primary-color;
+                        border-color: $secondary-color;
 
                         &:before {
                             height: 190%;
@@ -6794,8 +7012,6 @@
                 }
             }
         }
-
-
     }
 
     &.book_confirm_login {
@@ -7082,10 +7298,8 @@
                 }
             }
         }
-
     }
 }
-
 
 //<!-- Close Add Passenger info page css -->
 
@@ -7352,6 +7566,7 @@
 }
 
 //<!-- Close Facebook Loader css -->
+
 //<!-- Start page loder popup css -->
 .page_load {
     width: 100%;
@@ -7378,6 +7593,11 @@
 
         .page_laoding {
             width: 100%;
+
+            .animation_player {
+                height: 200px;
+                margin: 0 0 30px;
+            }
 
             img {
                 margin: 0 0 30px;
@@ -7417,7 +7637,6 @@
             }
         }
     }
-
 
     .block_not_available {
         width: 600px;
@@ -7487,7 +7706,7 @@
                 color: $text-white;
                 font-weight: 400;
                 border-radius: 8px;
-                background: $secondary-color;
+                background: $primary-color;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
@@ -7499,7 +7718,7 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $primary-color;
+                    background: $secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
@@ -7511,7 +7730,7 @@
                 }
 
                 &:hover {
-                    border-color: $primary-color;
+                    border-color: $secondary-color;
 
                     &:before {
                         height: 190%;
@@ -7590,7 +7809,7 @@
                 color: $text-white;
                 font-weight: 400;
                 border-radius: 8px;
-                background: $secondary-color;
+                background: $primary-color;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
@@ -7602,7 +7821,7 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $primary-color;
+                    background: $secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
@@ -7614,7 +7833,7 @@
                 }
 
                 &:hover {
-                    border-color: $primary-color;
+                    border-color: $secondary-color;
 
                     &:before {
                         height: 190%;
@@ -7631,7 +7850,7 @@
     }
 
     .block_feedback {
-        width: 600px;
+        width: 450px;
         max-width: 96%;
         float: left;
         position: absolute;
@@ -7655,14 +7874,14 @@
 
 
             h6 {
-                margin: 0 0 30px;
-                font-size: 40px;
+                margin: 0 0 20px;
+                font-size: 34px;
                 font-weight: 700;
                 color: $text-black;
                 text-transform: uppercase;
 
                 @media(max-width:767px) {
-                    font-size: 30px;
+                    font-size: 24px;
                 }
 
                 @media(max-width:575px) {
@@ -7671,10 +7890,10 @@
             }
 
             p {
-                font-size: 20px;
+                font-size: 16px;
                 font-weight: 500;
                 color: $text_grey_dark;
-                margin: 0 0 35px;
+                margin: 0 0 25px;
 
                 @media(max-width:767px) {
                     font-size: 16px;
@@ -7685,12 +7904,11 @@
                 width: 100%;
                 text-align: center;
 
-
                 ul {
                     width: 100%;
                     display: flex;
                     justify-content: space-between;
-                    margin: 0 0 30px;
+                    margin: 0 0 20px;
                     padding: 0 25px;
                     list-style: none;
 
@@ -7712,8 +7930,8 @@
                             line-height: normal;
 
                             img {
-                                height: 80px;
-                                margin: 0 0 20px;
+                                height: 50px;
+                                margin: 0 0 10px;
 
                                 @media(max-width:767px) {
                                     margin: 0 0 10px;
@@ -7722,7 +7940,7 @@
                             }
 
                             span {
-                                font-size: 20px;
+                                font-size: 14px;
                                 font-weight: 500;
                                 color: $text_grey_dark;
 
@@ -7748,8 +7966,8 @@
 
                     label {
                         width: 100%;
-                        font-size: 16px;
-                        font-weight: 500;
+                        font-size: 12px;
+                        font-weight: 400;
                         color: $text-grey;
                         text-align: left;
                     }
@@ -7759,8 +7977,8 @@
                         height: 50px;
                         border: none;
                         border-bottom: 1px solid $box-border-color;
-                        font-size: 20px;
-                        font-weight: 500;
+                        font-size: 16px;
+                        font-weight: 400;
                         color: $text-grey;
                         resize: none;
 
@@ -7772,16 +7990,18 @@
 
                 .feedback_btn {
                     width: 100%;
+                    display: flex;
+                    justify-content: space-between;
 
                     button {
                         display: inline-block;
-                        height: 50px;
+                        height: 40px;
                         padding: 0 25px;
-                        font-size: 20px;
+                        font-size: 16px;
                         color: $text-white;
                         font-weight: 400;
                         border-radius: 8px;
-                        background: $secondary-color;
+                        background: $primary-color;
                         position: relative;
                         z-index: 9;
                         overflow: hidden;
@@ -7794,7 +8014,7 @@
                             left: 0;
                             width: 100%;
                             height: 0%;
-                            background: $primary-color;
+                            background: $secondary-color;
                             z-index: -1;
                             transition: 0.8s;
                             border-radius: 0 0 50% 50%;
@@ -7806,7 +8026,7 @@
                         }
 
                         &:hover {
-                            border-color: $primary-color;
+                            border-color: $secondary-color;
 
                             &:before {
                                 height: 190%;
@@ -7837,6 +8057,157 @@
 
                             img {
                                 width: 40%;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    .block_price_changes {
+        width: 600px;
+        max-width: 96%;
+        float: left;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0px 3px 20px $shadow-black-light;
+
+        @media(max-width:767px) {
+            padding: 20px;
+        }
+
+        .block_price_changes_inner {
+            width: 100%;
+
+            @media(max-width:767px) {
+                height: 100%;
+                overflow: auto;
+            }
+
+            h6 {
+                margin: 0 0 30px;
+                font-size: 40px;
+                font-weight: 700;
+                color: $text-black;
+                text-transform: uppercase;
+
+                @media(max-width:767px) {
+                    font-size: 30px;
+                }
+            }
+
+            p {
+                font-size: 16px;
+                font-weight: 400;
+                color: $text-black;
+                margin: 0 0 15px;
+
+                span {
+                    font-size: 20px;
+                }
+
+                @media(max-width:767px) {
+                    font-size: 18px;
+                }
+            }
+
+            .block_im {
+                width: 100%;
+                text-align: center;
+                margin: 0 0 10px;
+
+                img {
+                    max-width: 100%;
+                    height: 230px;
+                }
+            }
+
+            .popup_btn {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                justify-content: center;
+
+                li {
+                    padding: 0 15px;
+
+                    a {
+                        display: inline-block;
+                        line-height: 50px;
+                        padding: 0 30px;
+                        font-size: 20px;
+                        color: $text-white;
+                        font-weight: 400;
+                        border-radius: 8px;
+                        background: $primary-color;
+                        border: 1px solid $primary-color;
+                        position: relative;
+                        z-index: 9;
+                        overflow: hidden;
+
+                        &:before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 0%;
+                            background: $secondary-color;
+                            z-index: -1;
+                            transition: 0.8s;
+                            border-radius: 0 0 50% 50%;
+                        }
+
+                        &:hover {
+                            border-color: $secondary-color;
+
+                            &:before {
+                                height: 190%;
+                            }
+                        }
+
+                        @media(max-width:575px) {
+                            font-size: 14px;
+                            line-height: 40px;
+                            padding: 0 15px;
+                        }
+                    }
+
+                    &:last-child {
+                        a {
+                            background: transparent;
+                            border: 1px solid $background-grey;
+                            color: $background-grey;
+
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 0%;
+                                background: $background-grey;
+                                z-index: -1;
+                                transition: 0.8s;
+                                border-radius: 0 0 50% 50%;
+                            }
+
+                            &:hover {
+                                color: $text-white;
+
+                                &:before {
+                                    height: 190%;
+                                }
                             }
                         }
                     }
@@ -7982,7 +8353,6 @@
 }
 
 //<!-- Close Responsive Filter css -->
-
 
 //<!-- Start Baggage policy Modal css -->
 .baggage_policy_modal {
@@ -8413,6 +8783,172 @@
 
 //<!-- Close Cancellation policy Modal css -->
 
+
+//<!-- Start Send Ticket Modal css -->
+.send_ticket_modal {
+    .modal-dialog {
+        max-width: 1024px;
+        width: 96%;
+
+        .modal-content {
+            padding: 40px 30px;
+            border-radius: 20px;
+
+            @media(max-width:767px) {
+                padding: 15px;
+
+            }
+
+            .modal_top {
+                width: 100%;
+                position: relative;
+
+                .close {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-weight: normal;
+                    opacity: 1;
+                    z-index: 99;
+                }
+            }
+
+            .block_modal_main {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                @media(max-width:767px) {
+                    flex-flow: column;
+                }
+
+                .block_modal_left {
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .block_modal_right {
+                    width: 100%;
+                    display: flex;
+                    flex-flow: column;
+
+                    @media(max-width:767px) {
+                        margin: 20px 0 0;
+                    }
+
+                    h2 {
+                        text-transform: uppercase;
+                        font-size: 40px;
+                        font-weight: 700;
+                        margin: 0 0 20px;
+                        text-align: center;
+
+                        @media(max-width:767px) {
+                            font-size: 30px;
+                        }
+
+                        @media(max-width:575px) {
+                            font-size: 20px;
+                        }
+                    }
+
+                    p {
+                        width: 100%;
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: $text-black;
+                        text-align: center;
+                        margin: 0 0 30px;
+
+                        span {
+                            color: $bg-green;
+                        }
+                    }
+
+                    .block_ticket {
+                        width: 100%;
+
+                        .block_title {
+                            padding: 15px;
+                            background: $popup_title_bg;
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: $text-white;
+                        }
+
+                        .block_ticket_list {
+                            width: 100%;
+
+                            ul {
+                                width: 100%;
+                                margin: 0;
+                                padding: 0;
+                                list-style: none;
+
+                                li {
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    padding: 10px 30px;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    color: $text-black;
+
+                                    @media(max-width:575px) {
+                                        padding: 10px 15px;
+                                    }
+
+                                    span {
+                                        a {
+                                            color: $text-lightblue;
+
+                                            img {
+                                                margin-right: 10px;
+                                                height: 15px;
+
+                                                &.active-icon {
+                                                    display: none;
+                                                }
+                                            }
+
+                                            &:hover {
+                                                color: $secondary-color;
+
+                                                img {
+                                                    &.default-icon {
+                                                        display: none;
+                                                    }
+
+                                                    &.active-icon {
+                                                        display: inline-block;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &:nth-child(odd) {
+                                        background: $background-white;
+                                    }
+
+                                    &:nth-child(even) {
+                                        background: $bg-title-grey;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//<!-- Close Send Ticket Modal css -->
+
 //<!-- Start No Result Found page css -->
 .block_booking_failed {
     width: 100%;
@@ -8470,9 +9006,9 @@
             padding: 0 25px;
             font-size: 20px;
             color: $text-white;
-            font-weight: 500;
+            font-weight: 400;
             border-radius: 8px;
-            background: $secondary-color;
+            background: $primary-color;
             position: relative;
             z-index: 9;
             overflow: hidden;
@@ -8484,7 +9020,7 @@
                 left: 0;
                 width: 100%;
                 height: 0%;
-                background: $primary-color;
+                background: $secondary-color;
                 z-index: -1;
                 transition: 0.8s;
                 border-radius: 0 0 50% 50%;
@@ -8496,7 +9032,7 @@
             }
 
             &:hover {
-                border-color: $primary-color;
+                border-color: $secondary-color;
 
                 &:before {
                     height: 190%;

@@ -1286,7 +1286,7 @@
                                                 padding: 6px 15px;
                                                 display: flex;
                                                 align-items: center;
-                                                background: $primary-color;
+                                                background: $secondary-color;
                                                 border-radius: 8px;
                                                 margin: 0 0 0 50px;
 
@@ -1349,14 +1349,12 @@
                                                     border-left: none;
 
                                                     span {
-                                                        padding: 3px 20px;
+                                                        padding: 4px 20px;
                                                         border: 1px solid $box-border-color;
                                                         border-radius: 5px;
                                                         background: $bg-yellow;
                                                         display: block;
                                                         margin: 0 0 5px;
-                                                        font-size: 10px;
-                                                        color: $text-white;
 
                                                         @media(max-width:991px) {
                                                             display: inline-block;
@@ -3068,8 +3066,6 @@
         }
 
         &.search_trip {
-            padding: 30px;
-
             .block_search_trip {
                 border-radius: 5px;
                 background: $background-white;
@@ -3157,9 +3153,9 @@
                                 width: auto;
                                 padding: 0 30px;
                                 height: 48px;
-                                background: $primary-color;
+                                background: $secondary-color;
                                 border-radius: 8px;
-                                border: 1px solid $primary-color;
+                                border: 1px solid $secondary-color;
                                 font-size: 16px;
                                 font-weight: 600;
                                 color: $text-white;
@@ -3183,14 +3179,14 @@
                                     left: 0;
                                     width: 100%;
                                     height: 0%;
-                                    background: $secondary-color;
+                                    background: $primary-color;
                                     z-index: -1;
                                     transition: 0.8s;
                                     border-radius: 0 0 50% 50%;
                                 }
 
                                 &:hover {
-                                    border-color: $secondary-color;
+                                    border-color: $primary-color;
 
                                     &:before {
                                         height: 190%;
@@ -3214,7 +3210,6 @@
         display: flex;
         justify-content: flex-end;
         margin: 30px 0 0;
-        padding: 0 30px 0 0;
 
         button {
             width: auto;
@@ -3264,45 +3259,6 @@
             }
         }
 
-    }
-}
-
-
-.btn_delete {
-    display: inline-block;
-    line-height: 38px;
-    padding: 0 25px;
-    font-size: 16px;
-    color: $text-white;
-    font-weight: 500;
-    border-radius: 8px;
-    background: $primary-color;
-    position: absolute;
-    z-index: 9;
-    overflow: hidden;
-    bottom: 50px;
-    right: 20px;
-
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 0%;
-        background: $secondary-color;
-        z-index: -1;
-        transition: 0.8s;
-        border-radius: 0 0 50% 50%;
-    }
-
-    &:hover {
-        border-color: $secondary-color;
-        color: $text-white;
-
-        &:before {
-            height: 190%;
-        }
     }
 }
 
@@ -3446,7 +3402,7 @@
                                     padding: 6px 15px;
                                     display: flex;
                                     align-items: center;
-                                    background: $primary-color;
+                                    background: $secondary-color;
                                     border-radius: 8px;
                                     margin: 0 0 0 50px;
 
