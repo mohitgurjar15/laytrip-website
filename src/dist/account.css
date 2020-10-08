@@ -1024,7 +1024,7 @@
   font-weight: 600;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li .progress {
-  width: 230px;
+  width: 140px;
   height: 8px;
   background: #E0E2E5;
   position: relative;
@@ -1073,7 +1073,7 @@
   padding: 6px 15px;
   display: flex;
   align-items: center;
-  background: #FC7E66;
+  background: #1943FF;
   border-radius: 8px;
   margin: 0 0 0 50px;
 }
@@ -1127,17 +1127,20 @@
   }
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child {
+  width: 20%;
   padding-left: 30px;
   text-align: center;
   border-left: none;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child span {
-  padding: 4px 20px;
+  padding: 3px 20px;
   border: 1px solid #E0E2E5;
   border-radius: 5px;
   background: #FEDD00;
   display: block;
   margin: 0 0 5px;
+  font-size: 10px;
+  color: #ffffff;
 }
 @media (max-width: 991px) {
   .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child span {
@@ -1180,6 +1183,7 @@
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li span {
   color: #000000;
+  display: block;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li:last-child {
   padding: 0;
@@ -2603,6 +2607,9 @@
     display: none;
   }
 }
+.account_part .account_cnt_main.search_trip {
+  padding: 30px;
+}
 .account_part .account_cnt_main.search_trip .block_search_trip {
   border-radius: 5px;
   background: #ffffff;
@@ -2686,9 +2693,9 @@
   width: auto;
   padding: 0 30px;
   height: 48px;
-  background: #FC7E66;
+  background: #1943FF;
   border-radius: 8px;
-  border: 1px solid #FC7E66;
+  border: 1px solid #1943FF;
   font-size: 16px;
   font-weight: 600;
   color: #ffffff;
@@ -2711,13 +2718,13 @@
   left: 0;
   width: 100%;
   height: 0%;
-  background: #1943FF;
+  background: #FC7E66;
   z-index: -1;
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
 }
 .account_part .account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button:hover {
-  border-color: #1943FF;
+  border-color: #FC7E66;
 }
 .account_part .account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button:hover:before {
   height: 190%;
@@ -2732,6 +2739,7 @@
   display: flex;
   justify-content: flex-end;
   margin: 30px 0 0;
+  padding: 0 30px 0 0;
 }
 .account_part .form_update_btn button {
   width: auto;
@@ -2773,6 +2781,41 @@
   .account_part .form_update_btn button img {
     margin-left: 60px;
   }
+}
+
+.btn_delete {
+  display: inline-block;
+  line-height: 38px;
+  padding: 0 25px;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 8px;
+  background: #1943FF;
+  position: absolute;
+  z-index: 9;
+  overflow: hidden;
+  bottom: 50px;
+  right: 20px;
+}
+.btn_delete:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #FC7E66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.btn_delete:hover {
+  border-color: #FC7E66;
+  color: #ffffff;
+}
+.btn_delete:hover:before {
+  height: 190%;
 }
 
 .payment_view_modal .modal-dialog {
@@ -2890,7 +2933,7 @@
   padding: 6px 15px;
   display: flex;
   align-items: center;
-  background: #FC7E66;
+  background: #1943FF;
   border-radius: 8px;
   margin: 0 0 0 50px;
 }

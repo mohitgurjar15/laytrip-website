@@ -21,7 +21,7 @@ export class FlightTravelerComponent implements OnInit {
   selectedAdults = 0;  
   routeCode:string='';
   loading=true;
-  progressStep={ step1:true, step2:false, step3:false };
+  progressStep={ step1:true, step2:true, step3:false, step4:false };
   isLoggedIn : boolean = false;
   public is_traveller : boolean = false;
   totalTraveler = 0;

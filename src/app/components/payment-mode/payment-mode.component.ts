@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Options, ChangeContext } from 'ng5-slider';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
+declare var $: any; 
 
 @Component({
   selector: 'app-payment-mode',
@@ -16,8 +16,12 @@ export class PaymentModeComponent implements OnInit {
     additionalAmount:number,
     instalmentType:string,
     customAmount:number,
-    customInstalment:number
+    customInstalment:number,
+    layCreditPoints:number
   }>(); 
+  @Input() laycreditpoints;
+  @Input() showFullPartialPayOption:boolean=true;
+  @Input() customInstalmentData:any={};
   constructor(
     private genericService:GenericService
   ) { }
@@ -49,15 +53,67 @@ export class PaymentModeComponent implements OnInit {
   secondInstalment:number;
   totalLaycreditPoints=0;
   instalmentAvavible:boolean=false;
+  showFirstAccrodian:boolean=false;
+  weeklyDefaultInstalmentNo:number=0;
+  weeklyDefaultInstalment:number=0;
+  biWeeklyDefaultInstalmentNo:number=0;
+  biWeeklyDefaultInstalment:number=0;
+  monthlyDefaultInstalmentNo:number=0;
+  monthlyDefaultInstalment:number=0;
+
+
 
   ngOnInit() {
-
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+    this.getInstalemnts('biweekly');
+    this.getInstalemnts('monthly');
     this.getInstalemnts('weekly');
+    if(Object.keys(this.customInstalmentData).length){
+      this.additionalAmount = this.customInstalmentData.additionalAmount;
+      this.durationType = this.customInstalmentData.instalmentType;
+      this.customAmount = this.customInstalmentData.customAmount;
+      this.customInstalment = this.customInstalmentData.customInstalment;
+      this.laycreditpoints = this.customInstalmentData.layCreditPoints;
+      this.calculateInstalment();
+    }
   }
 
-  
+  toggleaccordin(){
+    this.showFirstAccrodian = !this.showFirstAccrodian;
+  }
+
+  changeAdditionalAmount(event){
+
+    this.additionalAmount = Number(event.target.value);
+
+    this.remainingAmount=this.remainingAmount-this.additionalAmount;
+    this.firstInstalment+=this.additionalAmount;
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no,
+      layCreditPoints : this.laycreditpoints
+    })
+    this.calculateInstalment();
+  }
+
+  changeCustomInstalmentAmount(event){
+    if(this.customMethod=='amount'){
+
+      this.customAmount = Number(event.target.value);
+    }
+
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount , 
+      instalmentType:this.durationType, 
+      customAmount: this.customAmount,
+      customInstalment : null,
+      layCreditPoints : this.laycreditpoints
+    })
+    this.calculateInstalment();
+  }
 
   /**
    * 
@@ -70,6 +126,22 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
       if(this.instalments.instalment_available==true){
+
+        if(type=='weekly'){
+          this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
+          this.weeklyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+        }
+
+        if(type=='biweekly'){
+          this.biWeeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
+          this.biWeeklyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+        }
+
+        if(type=='monthly'){
+          this.monthlyDefaultInstalmentNo = this.instalments.instalment_date.length;
+          this.monthlyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+        }
+
         this.instalmentAvavible=true;
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
@@ -94,13 +166,16 @@ export class PaymentModeComponent implements OnInit {
     this.durationType=type;
     this.customMethod='';
     this.additionalAmount=0;
+    this.laycreditpoints=0;
     this.instalmentRequest.custom_amount=null;
     this.instalmentRequest.custom_instalment_no=null;
+    this.instalmentRequest.additional_amount=0;
     this.getInstalmentData.emit({ 
       additionalAmount:this.additionalAmount , 
       instalmentType:this.durationType, 
       customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no
+      customInstalment : this.instalmentRequest.custom_instalment_no,
+      layCreditPoints : this.laycreditpoints
     })
     this.getInstalemnts(this.durationType);
 
@@ -115,7 +190,8 @@ export class PaymentModeComponent implements OnInit {
         additionalAmount:this.additionalAmount , 
         instalmentType:this.durationType, 
         customAmount: this.customAmount,
-        customInstalment : null
+        customInstalment : null,
+        layCreditPoints :this.laycreditpoints
       })
     }
 
@@ -126,7 +202,8 @@ export class PaymentModeComponent implements OnInit {
         additionalAmount:this.additionalAmount , 
         instalmentType:'', 
         customAmount: null,
-        customInstalment : null
+        customInstalment : null,
+        layCreditPoints :this.laycreditpoints
       })
     }
     this.selectInstalmentMode.emit(type)
@@ -157,7 +234,8 @@ export class PaymentModeComponent implements OnInit {
       additionalAmount:this.additionalAmount , 
       instalmentType:this.durationType, 
       customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no
+      customInstalment : this.instalmentRequest.custom_instalment_no,
+      layCreditPoints : this.laycreditpoints
     })
     this.calculateInstalment();
 
@@ -173,19 +251,22 @@ export class PaymentModeComponent implements OnInit {
 
       if(type=='increase'){
         this.customAmount+=1;
+        this.calculateInstalment();
       }
       else{
 
         if(this.defaultInstalment<this.customAmount){
 
           this.customAmount-=1;
+          this.calculateInstalment();
         }
       }
       this.getInstalmentData.emit({ 
         additionalAmount:this.additionalAmount , 
         instalmentType:this.durationType, 
         customAmount: this.customAmount,
-        customInstalment : null
+        customInstalment : null,
+        layCreditPoints : this.laycreditpoints
       })
     }
   }
@@ -201,11 +282,13 @@ export class PaymentModeComponent implements OnInit {
         if(this.defaultInstalmentNo>this.customInstalment){
   
           this.customInstalment+=1;
+          this.calculateInstalment();
         }
       }
       else{
          if(this.customInstalment>2){
            this.customInstalment-=1;
+           this.calculateInstalment();
          }
       }
     }
@@ -213,7 +296,8 @@ export class PaymentModeComponent implements OnInit {
       additionalAmount:this.additionalAmount , 
       instalmentType:this.durationType, 
       customAmount: null,
-      customInstalment : this.customInstalment
+      customInstalment : this.customInstalment,
+      layCreditPoints : this.laycreditpoints
     })
   }
 
@@ -235,12 +319,13 @@ export class PaymentModeComponent implements OnInit {
       additionalAmount:this.additionalAmount , 
       instalmentType:this.durationType, 
       customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no
+      customInstalment : this.instalmentRequest.custom_instalment_no,
+      layCreditPoints : this.laycreditpoints
     })
     this.customAmount = this.defaultInstalment;
     this.customInstalment = this.defaultInstalmentNo;
     this.customMethod=event.target.checked?event.target.value:'';
-    //this.calculateInstalment();
+    this.calculateInstalment();
   }
   
   calculateInstalment(){
@@ -254,9 +339,8 @@ export class PaymentModeComponent implements OnInit {
       this.instalmentRequest.custom_amount=null;
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
-    //this.instalmentRequest.additional_amount = this.additionalAmount;
 
-    this.instalmentRequest.additional_amount=this.additionalAmount;
+    this.instalmentRequest.additional_amount=this.additionalAmount + Number(this.laycreditpoints);
 
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
@@ -270,5 +354,19 @@ export class PaymentModeComponent implements OnInit {
     },(err)=>{
 
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['laycreditpoints']) {
+      this.laycreditpoints = changes['laycreditpoints'].currentValue;
+      this.getInstalmentData.emit({ 
+        additionalAmount:this.additionalAmount , 
+        instalmentType:this.durationType, 
+        customAmount: this.instalmentRequest.custom_amount,
+        customInstalment : this.instalmentRequest.custom_instalment_no,
+        layCreditPoints : this.laycreditpoints
+      })
+      this.calculateInstalment();
+    }
   }
 }

@@ -1,0 +1,57 @@
+<app-checkout-progress  [progressStep]="progressStep"></app-checkout-progress>
+<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8">
+              <div class="detail_info_left">
+                  <div class="block_payment">
+                        <div class="block_pay_info" *ngIf="userInfo.roleId!=7">
+                            <div class="block_payment_mode no_pad">
+                                <div class="block_title_section">
+                                    <h5>Choose Payment Mode</h5>
+                                </div>
+                                
+                                <div class="block_detail">
+                                    <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                </div>
+
+                            </div>
+                                <app-payment-mode 
+                                    *ngIf="isShowPaymentOption" 
+                                    [flightSummary]="flightSummary" 
+                                    laycreditpoints="{{laycreditpoints}}"
+                                    (selectInstalmentMode)="selectInstalmentMode($event)" 
+                                    (getInstalmentData)="getInstalmentData($event)">
+                                </app-payment-mode>
+                        </div>
+                        <div class="block_pay_info">
+                            <app-booking-enquiry-info></app-booking-enquiry-info>
+                        </div>
+                  </div>
+                  <!-- <div class="block_condition_agree">
+                    <ul>
+                        <li>
+                            <label class="custom_checkbox">
+                                <input type="checkbox" value="">
+                                <span class="checkmark"></span>
+                            </label>
+                            <p>I agree <a href="javascript:void(0);">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
+                        </li>
+                    </ul>
+                   </div> -->
+
+                <div class="btn_payment">
+                    <a class="btn btn_laytrip" [routerLink]="['/flight/traveler',routeCode]">Continue to guest detail<img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                </div>
+              </div>
+              
+              
+          </div>
+          <div class="col-lg-4">
+            <app-flight-summary checkAvailability="local" (flightAvailable)="flightAvailable($event)"></app-flight-summary>
+          </div>
+      </div>
+  </div>
+</section>
+
+<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 

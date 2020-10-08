@@ -8,6 +8,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { CommonFunction } from '../../../../_helpers/common-function';
+import { GenericService } from '../../../../../app/services/generic.service';
+import * as moment from 'moment'
+import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -57,6 +60,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   errorMessage;
   loadBaggageDetails:boolean = true;
   loadCancellationPolicy:boolean=false;
+  isInstalmentAvailable=false;
+  userInfo;
+  totalLaycreditPoints:number=0;
 
   isRoundTrip = false;
 
@@ -68,7 +74,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private commonFunction:CommonFunction
+    private commonFunction:CommonFunction,
+    private genericService:GenericService
   ) {
    }
 
@@ -78,12 +85,16 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.currency = JSON.parse(_currency);
     // console.log(this.flightDetails);
     this.flightList = this.flightDetails;
+    this.userInfo = getLoginUserInfo();
 
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
       this.isRoundTrip = true;
     } else if (this.route.snapshot.queryParams['trip'] === 'oneway') {
       this.isRoundTrip = false;
     }
+
+    this.totalLaycredit();
+    this.checkInstalmentAvalability();
 
   }
 
@@ -139,6 +150,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   closeFlightDetail() {
+      
     this.showFlightDetails = this.showFlightDetails.map(item => {
       return false;
     });
@@ -158,8 +170,33 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     dateNow.setMinutes(dateNow.getMinutes() + 10);
     
     sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
-    sessionStorage.setItem('__route',JSON.stringify(route))
-    this.router.navigate([`flight/traveler/${route.route_code}`]);
+    sessionStorage.setItem('__route',JSON.stringify(route));
+    console.log("this.isInstalmentAvailable",this.isInstalmentAvailable)
+    if(this.isInstalmentAvailable && this.totalLaycreditPoints>0){
+      this.router.navigate([`flight/payment/${route.route_code}`]);
+    } else{
+      this.router.navigate([`flight/traveler/${route.route_code}`]);
+    }   
+  }
+
+  checkInstalmentAvalability(){
+    let instalmentRequest={
+      checkin_date: this.route.snapshot.queryParams['departure_date'],
+      booking_date: moment().format("YYYY-MM-DD")
+    }
+    this.genericService.getInstalemntsAvailability(instalmentRequest).subscribe((res:any)=>{
+      if(typeof this.userInfo.roleId!='undefined' && this.userInfo.roleId!=7 && res.instalment_availability){
+        this.isInstalmentAvailable = res.instalment_availability;
+      }
+    })
+  }
+
+  totalLaycredit(){
+    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+      this.totalLaycreditPoints=res.total_available_points;
+    },(error=>{
+
+    }))
   }
 
 
