@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router} from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 
@@ -24,9 +24,11 @@ export class FlightPaymentComponent implements OnInit {
   additionalAmount:number;
   routeCode:string='';
   isFlightNotAvailable:boolean=false;
+  isShowGuestPopup:boolean=false;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -70,5 +72,16 @@ export class FlightPaymentComponent implements OnInit {
 
   flightAvailable(event){
     this.isFlightNotAvailable=event;
+  }
+
+  checkUserAndRedirect(){
+
+    if(typeof this.userInfo.roleId!='undefined' && this.userInfo.roleId!=7){
+      this.router.navigate(['/flight/traveler',this.routeCode]);
+
+    }
+    else{
+      this.isShowGuestPopup=true;
+    }
   }
 }

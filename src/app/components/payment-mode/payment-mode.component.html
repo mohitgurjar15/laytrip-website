@@ -1,20 +1,34 @@
 
+<div class="block_detail" *ngIf="isShowSummary">
+    <div class="pay_deatil_info">
+        <div class="block_detail_left">
+            <ul>
+                <li>1st Installment <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span></li>
+                <li>Default Instalment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
+            </ul>
+        </div>
+        <div class="block_detail_right">
+            Booking available on <span>26th Nov, 2020</span>
+        </div>
+    </div>
+</div>
+
 <ul class="block_installment_radio" *ngIf="instalmentAvavible && showFullPartialPayOption">
     <li>
         <label class="custom_radio">Pay with Instalment  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
-            <input type="radio" name="payment_mode" checked (click)="triggerPayemntMode('instalment')">
+            <input type="radio" name="payment_mode" [checked]="isInstalemtMode==true" (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
     </li>
     <li>
         <label class="custom_radio">Full Payment <span>Total ${{instalmentRequest.amount | number : '1.2-2'}}</span>
-            <input type="radio" name="payment_mode" (click)="triggerPayemntMode('no-instalment')">
+            <input type="radio" name="payment_mode" [checked]="isInstalemtMode==false" (click)="triggerPayemntMode('no-instalment')">
             <span class="checkmark"></span>
         </label>
     </li>
 </ul>
 
-<div class="installment_main" *ngIf="isInstalemtMode && instalmentAvavible">
+<div class="installment_main" *ngIf="isInstalemtMode && instalmentAvavible && isShowPartialPaymentDetails">
     <div class="block_installment_option">
         <div class="installment_top">
 
@@ -102,7 +116,7 @@
                                                 </li>
                                                 <li>
                                                     First instalment amount
-                                                    <span>$40</span>
+                                                    <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -176,7 +190,7 @@
                                 </div>
                             </div>
 
-                            <div class="accordion-group">
+                            <!-- <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                                         <div class="left_block">Instalment calculation</div>
@@ -192,7 +206,7 @@
                                                     <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
                                                 </li>
                                                 <li>
-                                                    Default Instalment (for 2 weeks)
+                                                    Default Instalment (for {{this.remainingInstalment}} weeks)
                                                     <span>${{defaultInstalment | number : '1.2-2' }}</span>
                                                 </li>
                                                 <li>
@@ -211,7 +225,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="accordion-group">
                                 <div class="accordion-heading">

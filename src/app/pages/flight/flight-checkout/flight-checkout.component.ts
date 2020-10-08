@@ -46,6 +46,7 @@ export class FlightCheckoutComponent implements OnInit {
     isShowCardOption:boolean=true;
     isShowPaymentOption:boolean=true;
     isShowFeedbackPopup:boolean=false;
+    isShowPartialPaymentDetails:boolean=false;
     bookingId;  
     customInstalmentData:any;
 
@@ -299,5 +300,9 @@ export class FlightCheckoutComponent implements OnInit {
       if(event){
         this.isShowFeedbackPopup=false;
       }
+    }
+
+    toggleInstalmentMode(){
+      this.isShowPartialPaymentDetails=!this.isShowPartialPaymentDetails;
     }
 }

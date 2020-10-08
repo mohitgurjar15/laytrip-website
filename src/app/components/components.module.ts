@@ -23,10 +23,11 @@ import { AddGuestCardComponent } from './add-guest-card/add-guest-card.component
 import { CalendarModule } from 'primeng/calendar';
 import { RedeemLaycreditComponent } from './redeem-laycredit/redeem-laycredit.component';
 import { BookingFeedbackComponent } from './booking-feedback/booking-feedback.component';
+import { BookingAsLoginOrGuestPopupComponent } from './booking-as-login-or-guest-popup/booking-as-login-or-guest-popup.component';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent, BookingEnquiryInfoComponent, AddGuestCardComponent, RedeemLaycreditComponent, BookingFeedbackComponent
+    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent, BookingEnquiryInfoComponent, AddGuestCardComponent, RedeemLaycreditComponent, BookingFeedbackComponent, BookingAsLoginOrGuestPopupComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +55,8 @@ import { BookingFeedbackComponent } from './booking-feedback/booking-feedback.co
     BookingEnquiryInfoComponent,
     AddGuestCardComponent,
     RedeemLaycreditComponent,
-    BookingFeedbackComponent
+    BookingFeedbackComponent,
+    BookingAsLoginOrGuestPopupComponent
   ],
   providers: [DatePipe],
 
