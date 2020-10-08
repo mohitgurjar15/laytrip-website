@@ -1,4 +1,4 @@
-import { Component, OnInit,  Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -26,7 +26,7 @@ export class FlightSearchBarComponent implements OnInit {
       trip: 'oneway',
       departure: '',
       arrival: '',
-      departure_date:null,
+      departure_date: null,
       arrival_date: null,
       class: '',
       adult: 1,
@@ -66,8 +66,8 @@ export class FlightSearchBarComponent implements OnInit {
   };
   searchedValue = [];
   arrivalCode: string;
-  
-  
+
+
   flightDepartureMinDate;
   flightReturnMinDate;
   departureDate;
@@ -84,8 +84,8 @@ export class FlightSearchBarComponent implements OnInit {
     private route: ActivatedRoute
   ) {
 
-    this.departureDate = this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['departure_date'],'YYYY-MM-DD')
-    this.returnDate =this.route.snapshot.queryParams['arrival_date'] ? this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['arrival_date'],'YYYY-MM-DD'):this.commonFunction.convertDateFormat(moment(this.route.snapshot.queryParams['departure_date']).add(1,"days"),'YYYY-MM-DD') ;
+    this.departureDate = this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['departure_date'], 'YYYY-MM-DD')
+    this.returnDate = this.route.snapshot.queryParams['arrival_date'] ? this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['arrival_date'], 'YYYY-MM-DD') : this.commonFunction.convertDateFormat(moment(this.route.snapshot.queryParams['departure_date']).add(1, "days"), 'YYYY-MM-DD');
     this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
     this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
@@ -123,8 +123,8 @@ export class FlightSearchBarComponent implements OnInit {
 
     }
 
-    this.flightDepartureMinDate =new Date();
-    this.flightReturnMinDate =new Date(this.departureDate);
+    this.flightDepartureMinDate = new Date();
+    this.flightReturnMinDate = new Date(this.departureDate);
   }
 
   ngOnInit() {
@@ -240,11 +240,11 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
-    this.searchFlightInfo.departure_date =moment(this.departureDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
+    this.searchFlightInfo.departure_date = moment(this.departureDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
 
     if (this.isRoundTrip === true) {
       this.searchFlightInfo.trip = 'roundtrip';
-      this.searchFlightInfo.arrival_date =moment(this.returnDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
+      this.searchFlightInfo.arrival_date = moment(this.returnDate, 'MM/DD/YYYY').format('YYYY-MM-DD')
     }
 
 
@@ -269,41 +269,42 @@ export class FlightSearchBarComponent implements OnInit {
     } else {
       this.isRoundTrip = false;
       this.searchFlightInfo.trip = 'oneway';
+      delete this.searchFlightInfo.arrival_date;
     }
   }
 
   departureDateUpdate(date) {
     this.returnDate = new Date(date)
-    this.flightReturnMinDate=new Date(date)
+    this.flightReturnMinDate = new Date(date)
   }
 
-  dateChange(type,direction) {
+  dateChange(type, direction) {
 
-    if(type=='departure'){
+    if (type == 'departure') {
       if (direction === 'previous') {
-        if(moment(this.departureDate).isAfter(moment(new Date()))){
-          this.departureDate = new Date(moment(this.departureDate).subtract(1,'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isAfter(moment(new Date()))) {
+          this.departureDate = new Date(moment(this.departureDate).subtract(1, 'days').format('MM/DD/YYYY'))
         }
       }
 
-      else{
-        this.departureDate = new Date(moment(this.departureDate).add(1,'days').format('MM/DD/YYYY'))
-        if(moment(this.departureDate).isAfter(this.returnDate)){
-          this.returnDate = new Date(moment(this.returnDate).add(1,'days').format('MM/DD/YYYY'))
+      else {
+        this.departureDate = new Date(moment(this.departureDate).add(1, 'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isAfter(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
         }
       }
       this.flightReturnMinDate = new Date(this.departureDate)
     }
-    
-    if(type=='arrival'){
+
+    if (type == 'arrival') {
 
       if (direction === 'previous') {
-        if(moment(this.departureDate).isBefore(this.returnDate)){
-          this.returnDate = new Date(moment(this.returnDate).subtract(1,'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isBefore(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).subtract(1, 'days').format('MM/DD/YYYY'))
         }
       }
-      else{
-        this.returnDate = new Date(moment(this.returnDate).add(1,'days').format('MM/DD/YYYY'))
+      else {
+        this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
       }
     }
   }

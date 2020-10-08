@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
+// import { data } from './airport';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Output() changeValue = new EventEmitter<any>();
   @Output() getSwapValue = new EventEmitter<any>();
   defaultSelectedTemp;
- 
+
   constructor(
     private flightService: FlightService,
     public cd: ChangeDetectorRef
@@ -33,7 +34,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   loading = false;
 
   ngOnInit() {
-    this.defaultSelectedTemp=this.defaultSelected;
+    this.defaultSelectedTemp = this.defaultSelected;
   }
 
   ngDocheck() {
@@ -57,7 +58,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-          parentId:res.parentId
+          parentId: res.parentId
         };
       });
     },
@@ -87,8 +88,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  onRemove(event){
-    this.selectedAirport={};
+  onRemove(event) {
+    this.selectedAirport = {};
     this.defaultSelected = this.defaultSelectedTemp;
   }
 }

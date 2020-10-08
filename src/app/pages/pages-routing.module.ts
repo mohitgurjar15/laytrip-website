@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PagesComponent } from './pages.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
     {
@@ -18,6 +21,18 @@ const routes: Routes = [
             {
                 path: 'account',
                 loadChildren: './user/user.module#UserModule'
+            },
+            {
+                path: 'contact-us',
+                component: ContactUsComponent
+            },
+            {
+                path: 'cancellation-policy',
+                component: CancellationPolicyComponent
+            },
+            {
+                path: 'privacy-policy',
+                component: PrivacyPolicyComponent
             }
         ]
     }

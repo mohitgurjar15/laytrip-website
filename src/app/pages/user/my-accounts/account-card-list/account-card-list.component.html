@@ -1,0 +1,97 @@
+<section class="account_part">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <app-my-accounts-nav></app-my-accounts-nav>
+      </div>
+      <div class="col-lg-9">
+        <div class="account_cnt_main">
+
+          <div class="block_card_list_main">
+            <div class="block_no_card_available" *ngIf="isNotFound">
+              <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg" alt="Credit Card Icon">
+              <h5>No Credit Card Available</h5>
+            </div>
+
+            <div class="block_card_list" *ngIf="loading">
+              <div class="block_card_top">
+                <div class="block_card_bank w-50">
+                  <div class="w-100">
+                    <p class="fb_animation w-50 mb-2"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+                <div class="block_card_action w-25">
+                  <div class="w-100 h-100">
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="block_card_number">
+                <div class="w-100">
+                  <p class="fb_animation w-100 mb-0"></p>
+                  <p class="fb_animation w-100 mb-0"></p>
+                </div>
+              </div>
+              <div class="block_card_btm">
+                <div class="block_name w-50">
+                  <div class="w-75">
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+                <div class="block_expiry w-25">
+                  <div class="w-100">
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="block_card_list" *ngFor="let card of cardList">
+              <div class="block_card_top">
+                <div class="block_card_bank">
+                  <!-- <img src="{{s3BucketUrl}}assets/images/visa.svg" alt="Visa Card"> -->
+                  <span>{{card.cardType}}</span>
+                </div>
+                <div class="block_card_action">
+                  <ul>
+                    <!-- <li>
+                      <a href="javascript:void(0);" data-toggle="modal" data-target="#add_card_modal">
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_edit.svg" alt="Edit Icon">
+                      </a>
+                    </li> -->
+                    <!-- <li>
+                      <a href="javascript:void(0);" (click)="deleteCard(card)">
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_trash.svg" alt="Delete Icon">
+                      </a>
+                    </li> -->
+                  </ul>
+                </div>
+              </div>
+              <div class="block_card_number">
+                <ul>
+                  <li>XXXX</li>
+                  <li>XXXX</li>
+                  <li>XXXX</li>
+                  <li>{{card.cardDigits}}</li>
+                </ul>
+              </div>
+              <div class="block_card_btm">
+                <div class="block_name">
+                  Name on card <span>{{card.cardHolderName}}</span>
+                </div>
+                <!-- <div class="block_expiry">
+                  Expiry <span>07/2024</span>
+                </div> -->
+              </div>
+            </div>
+            <div class="block_add_card">
+              <a href="javascript:void(0);" (click)="openCardModal()">+ Add New Card</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

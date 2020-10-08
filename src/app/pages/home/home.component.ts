@@ -34,12 +34,16 @@ export class HomeComponent implements OnInit {
   fromDestinationCode;
   toDestinationCode;
 
+  locale = {
+    format: 'MM/DD/YYYY',
+    displayFormat: 'MM/DD/YYYY'
+  };
 
   flightDepartureMinDate;
   flightReturnMinDate;
 
-  departureDate=new Date(moment().add(30, 'days').format("MM/DD/YYYY"));
-  returnDate=new Date(moment().add(37, 'days').format("MM/DD/YYYY"))
+  departureDate = new Date(moment().add(30, 'days').format("MM/DD/YYYY"));
+  returnDate = new Date(moment().add(37, 'days').format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
 
@@ -69,12 +73,12 @@ export class HomeComponent implements OnInit {
       fromDestination: [[Validators.required]],
       toDestination: [[Validators.required]],
       departureDate: [[Validators.required]],
-      returnDate:  [[Validators.required]]
+      returnDate: [[Validators.required]]
     });
     //this.flightReturnMinDate = moment().add(30, 'days');
 
-    this.flightDepartureMinDate =new Date();
-    this.flightReturnMinDate =this.departureDate;
+    this.flightDepartureMinDate = new Date();
+    this.flightReturnMinDate = this.departureDate;
   }
 
   ngOnInit(): void {
@@ -91,30 +95,30 @@ export class HomeComponent implements OnInit {
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-          responsive: [
-              {
-                  breakpoint: 1200,
-                  settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 1
-                  }
-              },
-              {
-                  breakpoint: 992,
-                  settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 1
-                  }
-              },
-              {
-                  breakpoint: 600,
-                  settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1
-                  }
-              }
-          ]
-      });
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
 
     // Start Featured List Js
     $(".deals_slid").slick({
@@ -242,36 +246,36 @@ export class HomeComponent implements OnInit {
 
   departureDateUpdate(date) {
     this.returnDate = new Date(date)
-    this.flightReturnMinDate=new Date(date)
+    this.flightReturnMinDate = new Date(date)
   }
 
-  dateChange(type,direction) {
+  dateChange(type, direction) {
 
-    if(type=='departure'){
+    if (type == 'departure') {
       if (direction === 'previous') {
-        if(moment(this.departureDate).isAfter(moment(new Date()))){
-          this.departureDate = new Date(moment(this.departureDate).subtract(1,'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isAfter(moment(new Date()))) {
+          this.departureDate = new Date(moment(this.departureDate).subtract(1, 'days').format('MM/DD/YYYY'))
         }
       }
 
-      else{
-        this.departureDate = new Date(moment(this.departureDate).add(1,'days').format('MM/DD/YYYY'))
-        if(moment(this.departureDate).isAfter(this.returnDate)){
-          this.returnDate = new Date(moment(this.returnDate).add(1,'days').format('MM/DD/YYYY'))
+      else {
+        this.departureDate = new Date(moment(this.departureDate).add(1, 'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isAfter(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
         }
       }
       this.flightReturnMinDate = new Date(this.departureDate)
     }
-    
-    if(type=='arrival'){
+
+    if (type == 'arrival') {
 
       if (direction === 'previous') {
-        if(moment(this.departureDate).isBefore(this.returnDate)){
-          this.returnDate = new Date(moment(this.returnDate).subtract(1,'days').format('MM/DD/YYYY'))
+        if (moment(this.departureDate).isBefore(this.returnDate)) {
+          this.returnDate = new Date(moment(this.returnDate).subtract(1, 'days').format('MM/DD/YYYY'))
         }
       }
-      else{
-        this.returnDate = new Date(moment(this.returnDate).add(1,'days').format('MM/DD/YYYY'))
+      else {
+        this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
       }
     }
   }

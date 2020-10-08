@@ -9,7 +9,6 @@ import { LayTripService } from '../../../state/layTrip/services/layTrip.service'
 import { Location } from '@angular/common';
 import { Actions, ofType } from '@ngrx/effects';
 import { FlightService } from '../../../services/flight.service';
-// import { data } from '../../flight/components/flight-item-wrapper/data';
 import * as moment from 'moment';
 
 @Component({
@@ -40,7 +39,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -56,6 +55,18 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           infant_count: parseInt(params.infant),
         };
       } else {
+        // if (params && params.trip === 'oneway') {
+        //   if (typeof params.arrival_date !== 'undefined') {
+        //     console.log(params);
+        //     delete params['arrival_date'];
+        //   }
+        // }
+        // if (params.trip === 'oneway' && this.route.snapshot.queryParams['arrival_date']) {
+        //   let snapshot = this.route.snapshot;
+        //   const removingParams = { ...snapshot.queryParams };
+        //   delete removingParams.arrival_date;
+        //   params = removingParams;
+        // }
         payload = {
           source_location: params.departure,
           destination_location: params.arrival,
@@ -70,7 +81,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  
+
 
   getFlightSearchData(payload, tripType) {
     this.loading = true;
@@ -85,7 +96,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     //     this.isNotFound = false;
     //   }
     // }));
-    
+
     if (payload && tripType === 'roundtrip') {
       // this.flightDetails = data.items;
       // this.filterFlightDetails = data;
@@ -99,8 +110,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
       }, err => {
         /* if (err && err.status === 404) { */
-          this.isNotFound = true;
-          this.loading = false;
+        this.isNotFound = true;
+        this.loading = false;
         /* } */
       });
     } else {
@@ -113,8 +124,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
       }, err => {
         /* if (err && err.status === 404) { */
-          this.isNotFound = true;
-          this.loading = false;
+        this.isNotFound = true;
+        this.loading = false;
         /* } */
       });
     }
@@ -135,16 +146,15 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   getSearchItem(event) {
-    const payload = {
-      source_location: event.departure,
-      destination_location: event.arrival,
-      departure_date: event.departure_date,
-      flight_class: event.class,
-      adult_count: parseInt(event.adult),
-      child_count: parseInt(event.child),
-      infant_count: parseInt(event.infant),
-    };
-    // this.getFlightSearchData(payload);
+    // TRIP is round-trip then call this API
+    if (event.trip === 'roundtrip') {
+      this.getFlightSearchDataForRoundTrip(event);
+    } else if (event.trip === 'oneway') {
+      this.getFlightSearchDataForOneway(event);
+    }
+  }
+
+  getFlightSearchDataForOneway(event) {
     this.router.navigate(['flight/search'], {
       skipLocationChange: false, queryParams: {
         trip: event.trip,
@@ -158,24 +168,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       },
       queryParamsHandling: 'merge'
     });
-
-    // TRIP is round-trip then call this API
-    if (event.trip === 'roundtrip') {
-      this.getFlightSearchDataForRoundTrip(event);
-    }
   }
 
   getFlightSearchDataForRoundTrip(event) {
-    const payload = {
-      source_location: event.departure,
-      destination_location: event.arrival,
-      departure_date: event.departure_date,
-      arrival_date: event.arrival_date,
-      flight_class: event.class,
-      adult_count: parseInt(event.adult),
-      child_count: parseInt(event.child),
-      infant_count: parseInt(event.infant),
-    };
     this.router.navigate(['flight/search'], {
       skipLocationChange: false, queryParams: {
         trip: event.trip,
@@ -198,25 +193,25 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   sortFlight(event) {
     let { key, order } = event;
-    if (key == 'total_duration') {
-      this.flightDetails = this.sortByDuration(this.flightDetails, key, order)
+    if (key === 'total_duration') {
+      this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
     }
-    else if (key == 'arrival') {
-      this.flightDetails = this.sortByArrival(this.flightDetails, key, order)
+    else if (key === 'arrival') {
+      this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
     }
-    else if (key == 'departure') {
+    else if (key === 'departure') {
 
-      this.flightDetails = this.sortByDeparture(this.flightDetails, key, order)
+      this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
     }
     else {
-      this.flightDetails = this.sortJSON(this.flightDetails, key, order)
+      this.flightDetails = this.sortJSON(this.flightDetails, key, order);
     }
-    console.log(this.flightDetails)
+    console.log(this.flightDetails);
 
   }
 
   sortJSON(data, key, way) {
-    if (typeof data == "undefined") {
+    if (typeof data === "undefined") {
       return data;
     } else {
       return data.sort(function (a, b) {
@@ -233,12 +228,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   sortByDuration(data, key, way) {
-    if (typeof data == "undefined") {
+    if (typeof data === "undefined") {
       return data;
     }
     else {
       return data.sort(function (a, b) {
-
         let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
         let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
         console.log(`${a.arrival_date} ${a.arrival_time}`, `${a.departure_date} ${a.departure_time}`, x, y, way)
@@ -253,15 +247,13 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   sortByArrival(data, key, way) {
-    if (typeof data == "undefined") {
+    if (typeof data === "undefined") {
       return data;
     }
     else {
       return data.sort(function (a, b) {
-
-        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X")
-        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X")
-        console.log(x, y, way)
+        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X");
+        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X");
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
@@ -273,15 +265,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   sortByDeparture(data, key, way) {
-    if (typeof data == "undefined") {
+    if (typeof data === "undefined") {
       return data;
     }
     else {
       return data.sort(function (a, b) {
 
-        let x = moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X")
-        let y = moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X")
-        console.log(x, y, way)
+        let x = moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X");
+        let y = moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X");
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }

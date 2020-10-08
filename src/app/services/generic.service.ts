@@ -56,8 +56,8 @@ export class GenericService {
       );
   }
 
-  getInstalemnts(data){
-    return this.http.post(`${environment.apiUrl}v1/instalment/calculate-instalment`,data)
+  getInstalemnts(data) {
+    return this.http.post(`${environment.apiUrl}v1/instalment/calculate-instalment`, data)
       .pipe(
         catchError(this.handleError)
       );
@@ -71,7 +71,7 @@ export class GenericService {
   }
 
   handleError(error) {
-    
+
     let errorMessage = {};
     if (error.status == 0) {
       console.log("API Server is not responding")
@@ -97,7 +97,19 @@ export class GenericService {
     return this.http.get(environment.apiUrl + 'v1/generic/country/' + countryId + '/state', this.commonFunction.setHeaders());
   }
 
-  getAvailableLaycredit(){
-    return this.http.get(environment.apiUrl + 'v1/laytrip-point/total-available-points/',this.commonFunction.setHeaders());
+  getAvailableLaycredit() {
+    return this.http.get(environment.apiUrl + 'v1/laytrip-point/total-available-points/', this.commonFunction.setHeaders());
+  }
+
+  createEnquiry(data) {
+    return this.http.post(`${environment.apiUrl}v1/enqiry`, data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getCmsByPageType(type) {
+    const payload = {page_type: type};
+    return this.http.get(environment.apiUrl + 'v1/cms/' + payload.page_type, this.commonFunction.setHeaders());
   }
 }
