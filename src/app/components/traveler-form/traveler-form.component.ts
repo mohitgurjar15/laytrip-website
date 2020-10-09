@@ -87,8 +87,8 @@ export class TravelerFormComponent implements OnInit {
         phone_no: this.traveler.phoneNo,
         country_id: this.traveler.country != null ? this.traveler.country.name : '',
         passport_number: this.traveler.passportNumber,
-        dob: new Date(this.traveler.dob),
-        passport_expiry: new Date(this.traveler.passport_expiry),
+        dob: this.traveler.dob ? new Date(this.traveler.dob) : '',
+        passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
         frequently_no: ''
       });
       this.traveler.isComplete =  this.adultForm.status === 'VALID' ? true : false;
