@@ -11,15 +11,13 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var moment = require("moment");
-var auth_component_1 = require("../user/auth/auth.component");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(genericService, commonFunction, fb, router, cd, modalService) {
+    function HomeComponent(genericService, commonFunction, fb, router, cd) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
         this.cd = cd;
-        this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.switchBtnValue = false;
@@ -50,7 +48,6 @@ var HomeComponent = /** @class */ (function () {
             infant: null
         };
         this.searchedValue = [];
-        this.valueChange = new core_1.EventEmitter();
         this.flightSearchForm = this.fb.group({
             fromDestination: [[forms_1.Validators.required]],
             toDestination: [[forms_1.Validators.required]],
@@ -235,16 +232,6 @@ var HomeComponent = /** @class */ (function () {
             }
         }
     };
-    HomeComponent.prototype.openModal = function () {
-        this.modalReference = this.modalService.open(auth_component_1.AuthComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal', centered: true });
-        this.modalReference.componentInstance.signUpModal = true;
-        this.modalReference.componentInstance.signInModal = false;
-        /*   this.pageData = true;
-          this.valueChange.emit({ key: 'sign', value: this.pageData }); */
-    };
-    __decorate([
-        core_1.Output()
-    ], HomeComponent.prototype, "valueChange");
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'app-home',

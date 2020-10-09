@@ -35,6 +35,7 @@ var flight_not_available_component_1 = require("./components/flight-not-availabl
 var flight_session_time_out_component_1 = require("./components/flight-session-time-out/flight-session-time-out.component");
 var baggage_policy_popup_component_1 = require("./components/baggage-policy-popup/baggage-policy-popup.component");
 var cancellation_policy_popup_component_1 = require("./components/cancellation-policy-popup/cancellation-policy-popup.component");
+var flight_payment_component_1 = require("./flight-payment/flight-payment.component");
 var FlightModule = /** @class */ (function () {
     function FlightModule() {
     }
@@ -59,7 +60,8 @@ var FlightModule = /** @class */ (function () {
                 flight_not_available_component_1.FlightNotAvailableComponent,
                 flight_session_time_out_component_1.FlightSessionTimeOutComponent,
                 baggage_policy_popup_component_1.BaggagePolicyPopupComponent,
-                cancellation_policy_popup_component_1.CancellationPolicyPopupComponent
+                cancellation_policy_popup_component_1.CancellationPolicyPopupComponent,
+                flight_payment_component_1.FlightPaymentComponent
             ],
             imports: [
                 common_1.CommonModule,

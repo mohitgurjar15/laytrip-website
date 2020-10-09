@@ -19,31 +19,36 @@ export class AuthComponent implements OnInit {
   resetPasswordModal = false;
   otpModal = false;
   emailForVerifyOtp = '';
-
-
+  @Input() is_signUpModal: boolean = false;
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
   
   constructor(public modalService: NgbModal) { }
 
   ngOnInit() {
-    if(!this.signUpModal){
-      this.signInModal = true;
+     
+    this.signInModal = true;
+
+  }
+
+ /*  ngAfterContentChecked(){
+    if(this.is_signUpModal){
+      this.openSignUp();
     } else {
-      this.openSignUpModal();
+      this.signInModal = false; 
     }
-  }
+  } */
 
-  openSignUpModal(){
-    this.signInModal = false;
-    this.signUpModal = true;
-    this.forgotPasswordModal = false;
-    this.otpModal = this.resetPasswordModal = false;
-    $('.modal_container').addClass('right-panel-active');
-    $('#sign_in_modal').modal('show');
-    console.log(this)
-  }
+  openSignUp(){
+   
+      this.signInModal = false;
+      this.signUpModal = true;
+      // $('#sign_in_modal').modal('show');
+      // $('.modal_container').addClass('right-panel-active');
+    
+    console.log("sds",this)
 
+  }
   pageChange(event) {
     if (event && event.key === 'signUp' && event.value) {
       this.signUpModal = true;
@@ -95,5 +100,4 @@ export class AuthComponent implements OnInit {
     $('.modal_container').removeClass('right-panel-active');
     this.valueChange.emit({ key: 'signIn', value: true });
   }
-
 }
