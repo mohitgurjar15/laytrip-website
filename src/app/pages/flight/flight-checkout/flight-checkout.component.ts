@@ -94,6 +94,9 @@ export class FlightCheckoutComponent implements OnInit {
       catch(e){
 
       }
+
+      let instalmentMode=atob(sessionStorage.getItem('__insMode'))
+      this.instalmentMode= instalmentMode || 'no-instalment';
       this.validateBookingButton();
     }
 
@@ -190,6 +193,7 @@ export class FlightCheckoutComponent implements OnInit {
 
     bookFlightApi(){
       window.scroll(0,0);
+      console.log("this",this.instalmentMode)
       let bookingData={
         payment_type            : this.instalmentMode,
         laycredit_points        : this.laycreditpoints,

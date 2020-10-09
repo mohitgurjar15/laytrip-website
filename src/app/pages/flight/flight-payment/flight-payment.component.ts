@@ -58,6 +58,7 @@ export class FlightPaymentComponent implements OnInit {
 
   selectInstalmentMode(instalmentMode){
     this.instalmentMode=instalmentMode;
+    sessionStorage.setItem('__insMode',btoa(this.instalmentMode))
   }
 
   getInstalmentData(data){

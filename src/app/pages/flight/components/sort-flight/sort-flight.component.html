@@ -22,13 +22,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Lowest to highest
-                    <input type="radio" checked="checked" name="price_sort" (click)="sortFlightData('selling_price','ASC')">
+                    <input type="radio" checked="checked" name="sorting" (click)="sortFlightData('selling_price','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
                   <label class="custom_radio">highest to lowest
-                    <input type="radio" name="price_sort" (click)="sortFlightData('selling_price','DESC')">
+                    <input type="radio" name="sorting" (click)="sortFlightData('selling_price','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
@@ -39,13 +39,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Shortest
-                    <input type="radio" name="duration_sort" (click)="sortFlightData('total_duration','ASC')">
+                    <input type="radio" name="sorting" (click)="sortFlightData('total_duration','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
                   <label class="custom_radio">Longest
-                    <input type="radio" name="duration_sort" (click)="sortFlightData('total_duration','DESC')">
+                    <input type="radio" name="sorting" (click)="sortFlightData('total_duration','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
@@ -56,13 +56,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Earliest
-                    <input type="radio" name="arrival_radio" (click)="sortFlightData('arrival','ASC')">
+                    <input type="radio" name="sorting" (click)="sortFlightData('arrival','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
-                  <label class="custom_radio">Shortest
-                    <input type="radio" name="arrival_radio" (click)="sortFlightData('arrival','DESC')">
+                  <label class="custom_radio">Latest
+                    <input type="radio" name="sorting" (click)="sortFlightData('arrival','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
@@ -73,13 +73,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Earliest
-                    <input type="radio" name="departure_radio" (click)="sortFlightData('departure','ASC')">
+                    <input type="radio" name="sorting" (click)="sortFlightData('departure','ASC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
-                  <label class="custom_radio">Shortest
-                    <input type="radio" name="departure_radio" (click)="sortFlightData('departure','DESC')">
+                  <label class="custom_radio">Latest
+                    <input type="radio" name="sorting" (click)="sortFlightData('departure','DESC')">
                     <span class="checkmark"></span>
                   </label>
                 </li>
