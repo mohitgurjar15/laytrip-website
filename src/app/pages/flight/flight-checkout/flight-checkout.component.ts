@@ -94,6 +94,10 @@ export class FlightCheckoutComponent implements OnInit {
       catch(e){
 
       }
+
+      let instalmentMode=atob(sessionStorage.getItem('__insMode'))
+      this.instalmentMode= instalmentMode || 'no-instalment';
+      console.log("this.instalmentMode",this.instalmentMode)
       this.validateBookingButton();
     }
 
@@ -124,6 +128,13 @@ export class FlightCheckoutComponent implements OnInit {
       try{
         let customInstalmentData=atob(sessionStorage.getItem('__islt'))
         this.customInstalmentData = JSON.parse(customInstalmentData);
+        console.log("this.customInstalmentData",this.customInstalmentData)
+        this.laycreditpoints = Number(this.customInstalmentData.layCreditPoints);
+        this.additionalAmount = this.customInstalmentData.additionalAmount;
+        this.customAmount = this.customInstalmentData.customAmount;
+        this.customInstalment = this.customInstalmentData.customInstalment;
+        this.instalmentType = this.customInstalmentData.instalmentType;
+
       }
       catch(error){
 
@@ -218,6 +229,10 @@ export class FlightCheckoutComponent implements OnInit {
         }
         if(error.status==424){
           this.bookingStatus=2; // Booking failed from supplier side
+        }
+
+        if(error.status==500){
+          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
         }
         this.bookingLoader=false;
       });

@@ -114,6 +114,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           this.selectedLanunage = this.langunages[0];
           localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
         }
+        else{
+          let find= this.langunages.find(langunage=> langunage.id == this.selectedLanunage.id)
+          if(!find){
+            this.isLanunageSet = true;
+          this.selectedLanunage = this.langunages[0];
+          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+          }
+        }
       },
       (error) => {
 
@@ -139,6 +147,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           this.selectedCurrency = this.currencies[0];
 
           localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
+        }
+        else{
+          let find= this.currencies.find(currency=> currency.id == this.selectedCurrency.id)
+          if(!find){
+            this.isCurrencySet = true;
+            this.selectedCurrency = this.currencies[0];
+            localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
+          }
         }
       },
       (error) => {

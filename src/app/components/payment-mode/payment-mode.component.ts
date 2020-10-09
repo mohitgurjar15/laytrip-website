@@ -63,21 +63,22 @@ export class PaymentModeComponent implements OnInit {
   monthlyDefaultInstalmentNo:number=0;
   monthlyDefaultInstalment:number=0;
 
-
-
   ngOnInit() {
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemnts('biweekly');
     this.getInstalemnts('monthly');
     this.getInstalemnts('weekly');
-    console.log("Hellllo",this.sellingPrice)
     if(Object.keys(this.customInstalmentData).length){
       this.additionalAmount = this.customInstalmentData.additionalAmount;
       this.durationType = this.customInstalmentData.instalmentType;
       this.customAmount = this.customInstalmentData.customAmount;
       this.customInstalment = this.customInstalmentData.customInstalment;
       this.laycreditpoints = this.customInstalmentData.layCreditPoints;
+
+      this.instalmentRequest.custom_instalment_no=this.customInstalment;
+      this.instalmentRequest.custom_amount = this.customAmount;
+      console.log("this.customInstalmentDatathis.customInstalmentData",this.customInstalmentData)
       this.calculateInstalment();
     }
   }
@@ -156,6 +157,7 @@ export class PaymentModeComponent implements OnInit {
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
       }
       else{
+        console.log("this.instalmentAvavible",this.instalmentAvavible)
         this.instalmentAvavible=false;
         this.selectInstalmentMode.emit('no-instalment');
         
@@ -213,7 +215,6 @@ export class PaymentModeComponent implements OnInit {
 
   }
 
-  
 
   /**
    * 
@@ -353,10 +354,27 @@ export class PaymentModeComponent implements OnInit {
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
         this.remainingInstalment = this.instalments.instalment_date.length-1;
-          console.log("1223innnnn",this.firstInstalment,this.flightSummary[0].selling_price);
         if(this.firstInstalment>=this.flightSummary[0].selling_price){
           this.isInstalemtMode = false;
           this.selectInstalmentMode.emit('no-instalment')
+
+          this.getInstalmentData.emit({ 
+            additionalAmount:0, 
+            instalmentType:'', 
+            customAmount: null,
+            customInstalment : null,
+            layCreditPoints : this.laycreditpoints
+          });
+
+          this.additionalAmount=0;
+          //this.customAmount=0;
+          //this.customInstalment=null;
+          this.customAmount = this.defaultInstalment;
+          this.customInstalment = this.defaultInstalmentNo;
+          this.instalmentRequest.custom_amount=null;
+          this.instalmentRequest.custom_instalment_no=null;
+          this.instalmentRequest.additional_amount=0;
+          this.calculateInstalment();
         }
       }
     },(err)=>{

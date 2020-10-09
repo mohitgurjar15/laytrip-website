@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-full-page-overlay-loader',
@@ -11,6 +12,7 @@ export class FullPageOverlayLoaderComponent implements OnInit {
   @Input() image:string;
   @Input() module:string;
   @Input() type:string;
+  s3BucketUrl = environment.s3BucketUrl;
 
   ngOnInit() {
   }
