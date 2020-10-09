@@ -27,7 +27,21 @@ export class AuthComponent implements OnInit {
   constructor(public modalService: NgbModal) { }
 
   ngOnInit() {
-    this.signInModal = true;
+    if(!this.signUpModal){
+      this.signInModal = true;
+    } else {
+      this.openSignUpModal();
+    }
+  }
+
+  openSignUpModal(){
+    this.signInModal = false;
+    this.signUpModal = true;
+    this.forgotPasswordModal = false;
+    this.otpModal = this.resetPasswordModal = false;
+    $('.modal_container').addClass('right-panel-active');
+    $('#sign_in_modal').modal('show');
+    console.log(this)
   }
 
   pageChange(event) {
@@ -81,4 +95,5 @@ export class AuthComponent implements OnInit {
     $('.modal_container').removeClass('right-panel-active');
     this.valueChange.emit({ key: 'signIn', value: true });
   }
+
 }

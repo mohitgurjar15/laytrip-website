@@ -22,7 +22,21 @@ var AuthComponent = /** @class */ (function () {
         this.valueChange = new core_1.EventEmitter();
     }
     AuthComponent.prototype.ngOnInit = function () {
-        this.signInModal = true;
+        if (!this.signUpModal) {
+            this.signInModal = true;
+        }
+        else {
+            this.openSignUpModal();
+        }
+    };
+    AuthComponent.prototype.openSignUpModal = function () {
+        this.signInModal = false;
+        this.signUpModal = true;
+        this.forgotPasswordModal = false;
+        this.otpModal = this.resetPasswordModal = false;
+        $('.modal_container').addClass('right-panel-active');
+        $('#sign_in_modal').modal('show');
+        console.log(this);
     };
     AuthComponent.prototype.pageChange = function (event) {
         if (event && event.key === 'signUp' && event.value) {

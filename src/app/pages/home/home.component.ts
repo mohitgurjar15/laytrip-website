@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Output, ViewChild,EventEmitter } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
@@ -7,6 +7,8 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { AuthComponent } from '../user/auth/auth.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -67,7 +69,9 @@ export class HomeComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public modalService: NgbModal,
+
   ) {
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
@@ -278,5 +282,17 @@ export class HomeComponent implements OnInit {
         this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
       }
     }
+  }
+  modalReference:any;
+  pageData:any;
+  @Output() valueChange = new EventEmitter();
+
+  openModal(){
+    this.modalReference = this.modalService.open(AuthComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal',centered: true });
+    this.modalReference.componentInstance.signUpModal = true;
+    this.modalReference.componentInstance.signInModal = false;
+   
+  /*   this.pageData = true;
+    this.valueChange.emit({ key: 'sign', value: this.pageData }); */
   }
 }

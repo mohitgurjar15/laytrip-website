@@ -52,7 +52,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     // NG5 SLIDER
     Ng5SliderModule,
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent,AuthComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }

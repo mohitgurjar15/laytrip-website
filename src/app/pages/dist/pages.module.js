@@ -12,6 +12,7 @@ var common_1 = require("@angular/common");
 var pages_routing_module_1 = require("./pages-routing.module");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var core_2 = require("@ngx-translate/core");
+var ng_select_1 = require("@ng-select/ng-select");
 var components_module_1 = require("../components/components.module");
 var pages_component_1 = require("./pages.component");
 var main_header_component_1 = require("../elements/main-header/main-header.component");
@@ -27,6 +28,9 @@ var asterisk_mark_component_1 = require("../components/asterisk-mark/asterisk-ma
 // NG5 SLIDER
 var ng5_slider_1 = require("ng5-slider");
 var reset_password_component_1 = require("./user/reset-password/reset-password.component");
+var contact_us_component_1 = require("./contact-us/contact-us.component");
+var cancellation_policy_component_1 = require("./cancellation-policy/cancellation-policy.component");
+var privacy_policy_component_1 = require("./privacy-policy/privacy-policy.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -43,12 +47,16 @@ var PagesModule = /** @class */ (function () {
                 verify_otp_component_1.VerifyOtpComponent,
                 auth_component_1.AuthComponent,
                 asterisk_mark_component_1.AsteriskMarkComponent,
-                reset_password_component_1.ResetPasswordComponent
+                reset_password_component_1.ResetPasswordComponent,
+                contact_us_component_1.ContactUsComponent,
+                cancellation_policy_component_1.CancellationPolicyComponent,
+                privacy_policy_component_1.PrivacyPolicyComponent
             ],
             imports: [
                 common_1.CommonModule,
                 pages_routing_module_1.PagesRoutingModule,
                 ng_bootstrap_1.NgbModule,
+                ng_select_1.NgSelectModule,
                 core_2.TranslateModule,
                 components_module_1.ComponentsModule,
                 forms_1.ReactiveFormsModule,
@@ -56,7 +64,8 @@ var PagesModule = /** @class */ (function () {
                 // NG5 SLIDER
                 ng5_slider_1.Ng5SliderModule,
             ],
-            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent]
+            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent],
+            schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
         })
     ], PagesModule);
     return PagesModule;
