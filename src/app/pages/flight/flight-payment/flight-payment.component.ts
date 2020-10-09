@@ -46,6 +46,8 @@ export class FlightPaymentComponent implements OnInit {
     catch(e){
 
     }
+
+    sessionStorage.setItem('__insMode',btoa(this.instalmentMode))
   }
 
   applyLaycredit(laycreditpoints){
