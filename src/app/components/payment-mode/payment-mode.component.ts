@@ -75,6 +75,10 @@ export class PaymentModeComponent implements OnInit {
       this.customAmount = this.customInstalmentData.customAmount;
       this.customInstalment = this.customInstalmentData.customInstalment;
       this.laycreditpoints = this.customInstalmentData.layCreditPoints;
+
+      this.instalmentRequest.custom_instalment_no=this.customInstalment;
+      this.instalmentRequest.custom_amount = this.customAmount;
+      console.log("this.customInstalmentDatathis.customInstalmentData",this.customInstalmentData)
       this.calculateInstalment();
     }
   }

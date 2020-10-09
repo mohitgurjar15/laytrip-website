@@ -128,10 +128,12 @@ export class FlightCheckoutComponent implements OnInit {
       try{
         let customInstalmentData=atob(sessionStorage.getItem('__islt'))
         this.customInstalmentData = JSON.parse(customInstalmentData);
+        console.log("this.customInstalmentData",this.customInstalmentData)
         this.laycreditpoints = Number(this.customInstalmentData.layCreditPoints);
         this.additionalAmount = this.customInstalmentData.additionalAmount;
         this.customAmount = this.customInstalmentData.customAmount;
         this.customInstalment = this.customInstalmentData.customInstalment;
+        this.instalmentType = this.customInstalmentData.instalmentType;
 
       }
       catch(error){

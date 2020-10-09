@@ -142,7 +142,7 @@
                                             <ul>
                                                 <li>
                                                     <label class="custom_radio">Amount
-                                                        <input type="checkbox" name="weekly-installment" [checked]='instalmentRequest.custom_amount!=null' value="amount" (change)="selectCustomMethod($event);">
+                                                        <input type="checkbox" name="custom_method" [checked]='instalmentRequest.custom_amount!=null' value="amount" (change)="selectCustomMethod($event);">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                     <div class="block_pay_instalment">
@@ -163,7 +163,7 @@
                                                 </li>
                                                 <li>
                                                     <label class="custom_radio">Instalment
-                                                        <input type="radio" name="weekly-installment" [checked]='instalmentRequest.custom_instalment_no!=null' value='instalment' (change)="selectCustomMethod($event);">
+                                                        <input type="radio" name="custom_method" [checked]='instalmentRequest.custom_instalment_no!=null' value='instalment' (change)="selectCustomMethod($event);">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                     <div class="block_pay_instalment">
