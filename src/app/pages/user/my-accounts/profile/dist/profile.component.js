@@ -183,7 +183,7 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender,
                 zip_code: res.zipCode,
                 title: res.title,
-                dob: moment(res.dob).format('MM/DD/YYYY'),
+                dob: res.dob ? moment(res.dob).format('MM/DD/YYYY') : '',
                 country_code: res.countryCode,
                 phone_no: res.phoneNo,
                 country_id: res.country.name,
@@ -193,7 +193,7 @@ var ProfileComponent = /** @class */ (function () {
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
                 profile_pic: res.profilePic,
-                passport_expiry: moment(res.passportExpiry).format('MM/DD/YYYY'),
+                passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '',
                 passport_number: res.passportNumber
             });
         }, function (error) {
@@ -258,13 +258,13 @@ var ProfileComponent = /** @class */ (function () {
                 formdata.append("language_id", this.selectResponse.preferredLanguage.id);
             }
             else {
-                formdata.append("language_id", this.profileForm.value.language_id);
+                formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : 1);
             }
             if (!Number.isInteger(Number(this.profileForm.value.currency_id))) {
                 formdata.append("currency_id", this.selectResponse.preferredCurrency.id);
             }
             else {
-                formdata.append("currency_id", this.profileForm.value.currency_id);
+                formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : 1);
             }
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 _this.submitted = _this.loading = false;
