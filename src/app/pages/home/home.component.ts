@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
   ) {
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
@@ -279,4 +279,5 @@ export class HomeComponent implements OnInit {
       }
     }
   }
+ 
 }

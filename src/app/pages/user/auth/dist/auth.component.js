@@ -19,10 +19,25 @@ var AuthComponent = /** @class */ (function () {
         this.resetPasswordModal = false;
         this.otpModal = false;
         this.emailForVerifyOtp = '';
+        this.is_signUpModal = false;
         this.valueChange = new core_1.EventEmitter();
     }
     AuthComponent.prototype.ngOnInit = function () {
         this.signInModal = true;
+    };
+    /*  ngAfterContentChecked(){
+       if(this.is_signUpModal){
+         this.openSignUp();
+       } else {
+         this.signInModal = false;
+       }
+     } */
+    AuthComponent.prototype.openSignUp = function () {
+        this.signInModal = false;
+        this.signUpModal = true;
+        // $('#sign_in_modal').modal('show');
+        // $('.modal_container').addClass('right-panel-active');
+        console.log("sds", this);
     };
     AuthComponent.prototype.pageChange = function (event) {
         if (event && event.key === 'signUp' && event.value) {
@@ -75,6 +90,9 @@ var AuthComponent = /** @class */ (function () {
         $('.modal_container').removeClass('right-panel-active');
         this.valueChange.emit({ key: 'signIn', value: true });
     };
+    __decorate([
+        core_1.Input()
+    ], AuthComponent.prototype, "is_signUpModal");
     __decorate([
         core_1.Input()
     ], AuthComponent.prototype, "pageData");

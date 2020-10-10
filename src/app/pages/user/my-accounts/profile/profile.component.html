@@ -119,6 +119,7 @@
                                             <p-calendar 
                                                 inputStyleClass="custom_datpicker birth_date"
                                                 inputId="basic" 
+                                                tabindex ="6"
                                                 formControlName="dob" 
                                                 [maxDate]="dobMinDate"
                                                 [readonlyInput]="true" 
@@ -131,7 +132,7 @@
                                                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors"
                                                     class="focus-input100 login-error">
                                                     <div *ngIf="profileForm.controls.dob.errors.required"
-                                                        class="text-danger">Please chouse
+                                                        class="text-danger">Please choose
                                                         your date of birth.</div>
                                                 </div>
                                             </div>
@@ -139,7 +140,7 @@
                                         <div class="field_inn">
                                             <label>Language</label>
                                             <div class="text_field custom-select">
-                                                <ng-select class="ng-customClass" tabindex="8" selectOnTab="true"
+                                                <ng-select class="ng-customClass" tabindex="7" selectOnTab="true"
                                                     placeholder="Select Preferred Language"
                                                     formControlName="language_id">
                                                     <ng-option *ngFor="let language of languages"
@@ -152,7 +153,7 @@
                                         <div class="field_inn">
                                             <label>Currency</label>
                                             <div class="text_field custom-select">
-                                                <ng-select class="ng-customClass" tabindex="9" selectOnTab="true"
+                                                <ng-select class="ng-customClass" tabindex="8" selectOnTab="true"
                                                     placeholder="Select Preferred Language"
                                                     formControlName="currency_id">
                                                     <ng-option *ngFor="let currency of currencies"
@@ -227,7 +228,7 @@
                                             <label>Address line 1</label>
                                             <div class="text_field">
                                                 <input type="text" formControlName="address" maxlength="250"
-                                                    tabindex="10" placeholder="Enter address line 1">
+                                                    tabindex="9" placeholder="Enter address line 1">
                                             </div>
                                             <!-- <div *ngIf="(submitted  || profileForm.controls.address.touched) && profileForm.controls.address.errors"
                                                 class="focus-input100 login-error">
@@ -239,7 +240,7 @@
                                             <label>Address line 2</label>
                                             <div class="text_field">
                                                 <input type="text" formControlName="address2" maxlength="250"
-                                                    tabindex="13" placeholder="Enter address line 2">
+                                                    tabindex="12" placeholder="Enter address line 2">
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +250,7 @@
                                             <label>Country</label>
                                             <div class="text_field custom-select">
                                                 <ng-select class="ng-customClass" [items]="countries" bindLabel="name"
-                                                    tabindex="11" [selectOnTab]="true" formControlName="country_id"
+                                                    tabindex="10" [selectOnTab]="true" formControlName="country_id"
                                                     selectOnTab="true" placeholder="Select Country"
                                                     (change)="getStates($event)">
                                                 </ng-select>
@@ -265,7 +266,7 @@
                                             <label>City</label>
                                             <div class="text_field custom-select">
                                                 <input type="text" formControlName="city_name" maxlength="250"
-                                                    tabindex="14" placeholder="Enter address line 2">
+                                                    tabindex="13" placeholder="Enter address line 2">
 
                                             </div>
                                         </div>
@@ -276,7 +277,7 @@
                                             <label>State</label>
                                             <div class="text_field custom-select">
                                                 <ng-select class="ng-customClass" clearSearchOnAdd="true"
-                                                    selectOnTab="true" tabindex="12" formControlName="state_id"
+                                                    selectOnTab="true" tabindex="11" formControlName="state_id"
                                                     placeholder="Select State">
                                                     <ng-option *ngFor="let state of stateList" value="{{state.id}}">
                                                         {{state.name}}</ng-option>
@@ -293,7 +294,7 @@
                                             <label>Zip Code</label>
                                             <div class="text_field">
                                                 <input type="text" formControlName="zip_code" maxlength="6"
-                                                    tabindex="16" placeholder="Enter zip code"
+                                                    tabindex="14" placeholder="Enter zip code"
                                                     (keypress)="commonFunctoin.validateNotAllowSpecial($event)">
                                             </div>
                                            <!--  <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors"
@@ -316,7 +317,7 @@
                                         <div class="field_inn">
                                             <label>Passport Number</label>
                                             <div class="text_field">
-                                                <input type="text" formControlName="passport_number" maxlength="40" tabindex="9" placeholder="Enter Passport Number">
+                                                <input type="text" formControlName="passport_number" maxlength="40" tabindex="15" placeholder="Enter Passport Number">
                                             </div>
                                         </div>
                                     </div>
@@ -335,8 +336,10 @@
                                                 [monthNavigator]="true"
                                                 yearRange="2020:2030"
                                                 [defaultDate]="dobMinDate" 
+                                                tabindex="16"
                                             >
-                                            </p-calendar>                                            </div>
+                                            </p-calendar>                  
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
