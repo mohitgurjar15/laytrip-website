@@ -108,6 +108,7 @@ var SocialLoginComponent = /** @class */ (function () {
     SocialLoginComponent.prototype.fbLogin = function () {
         var _this = this;
         window['FB'].login(function (response) {
+            console.log("response", response);
             if (response.authResponse) {
                 window['FB'].api('/me', {
                     fields: 'last_name, first_name, email'

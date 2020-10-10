@@ -9,7 +9,7 @@
           <div class="block_co_traveller_main">
             <div class="block_traveller_top">
               <label class="custom_checkbox" *ngIf="!loading || !notFound">
-                <input type="checkbox" (change)="checkUncheckAll()"   value="">
+                <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"   value="">
                 <span class="checkmark"></span>Select all
               </label>
               <a href="javascript:void(0);" (click)="openTravellerModal(content)">+ Add New Co -

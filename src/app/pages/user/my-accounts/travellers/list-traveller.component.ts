@@ -40,11 +40,13 @@ export class ListTravellerComponent implements OnInit {
     public modalService: NgbModal,
     private toastr: ToastrService
 
-  ) { }
+  ) {
+    this.isMasterSel = false;
+
+   }
 
 
   ngOnInit() {
-    this.isMasterSel = false;
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
   
@@ -159,9 +161,6 @@ export class ListTravellerComponent implements OnInit {
   selectedAll: any;
   selectedAllSecondname: any;
   name: any;
-
-  
-  
 
   checkUncheckAll() {
     var checkboxes = document.getElementsByClassName('travelerCheckbox');

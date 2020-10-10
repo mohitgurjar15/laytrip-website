@@ -28,9 +28,9 @@ var ListTravellerComponent = /** @class */ (function () {
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.pageSize = 10;
         this.showPaginationBar = false;
+        this.isMasterSel = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
-        this.isMasterSel = false;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
         this.loading = true;

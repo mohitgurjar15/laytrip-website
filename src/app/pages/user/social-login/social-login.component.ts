@@ -124,7 +124,7 @@ export class SocialLoginComponent implements OnInit {
   fbLogin() {
    
     window['FB'].login((response) => {          
-
+      console.log("response",response)
       if (response.authResponse) {
 
         window['FB'].api('/me', {
