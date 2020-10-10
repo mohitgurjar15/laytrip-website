@@ -71,7 +71,7 @@
                                 </a>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-                                <a class="nav-link login_btn" href="javascript:void(0)" (click)="openSignModal()" >Sign In</a>
+                                <a class="nav-link login_btn" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                             </li>
 
                             <li class="nav-item" *ngIf="isLoggedIn && userDetails.roleId != 7">

@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo } from '../../_helpers/jwt.helper';
-import { AuthComponent } from 'src/app/pages/user/auth/auth.component';
+import { AuthComponent } from '../../pages/user/auth/auth.component';
 declare var $: any;
 
 @Component({

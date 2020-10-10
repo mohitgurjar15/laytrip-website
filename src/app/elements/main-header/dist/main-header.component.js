@@ -10,7 +10,7 @@ exports.MainHeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
-var auth_component_1 = require("src/app/pages/user/auth/auth.component");
+var auth_component_1 = require("../../pages/user/auth/auth.component");
 var MainHeaderComponent = /** @class */ (function () {
     function MainHeaderComponent(genericService, translate, modalService, router) {
         this.genericService = genericService;

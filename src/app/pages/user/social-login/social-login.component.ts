@@ -124,7 +124,6 @@ export class SocialLoginComponent implements OnInit {
   fbLogin() {
    
     window['FB'].login((response) => {          
-      console.log("response",response)
       if (response.authResponse) {
 
         window['FB'].api('/me', {
@@ -132,7 +131,7 @@ export class SocialLoginComponent implements OnInit {
         }, (userInfo) => {
           let json_data = {
             "account_type": 1,
-            "name": userInfo.first_name + ' ' + userInfo.last_name,
+            "name": userInfo.response + ' ' + userInfo.last_name,
             "email": userInfo.email ? userInfo.email : '',
             "social_account_id": userInfo.id,
             "device_type": 1,
