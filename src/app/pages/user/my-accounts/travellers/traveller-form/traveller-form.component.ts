@@ -22,6 +22,8 @@ export class TravellerFormComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Output() travelersChanges = new EventEmitter();
+  @Input() travellerId: any;
+  @Input() travelerInfo: any;
 
   coAccountForm: FormGroup;
   countries: any = [];
@@ -36,7 +38,6 @@ export class TravellerFormComponent implements OnInit {
   maxyear;
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
   subscriptions: Subscription[] = [];
-  @Input() travellerId: any;
   locale = {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
@@ -74,33 +75,25 @@ export class TravellerFormComponent implements OnInit {
     this.setUserTypeValidation();
 
     if (this.travellerId) {
+      
       this.setTravelerForm();
     }
   }
 
   setTravelerForm() {
-    this.userService.getTraveller(this.travellerId).subscribe((res: any) => {
-      this.traveller = res;
+      this.traveller = this.travelerInfo;
       this.coAccountForm.patchValue({
-        title: res.title,
-        firstName: res.firstName,
-        lastName: res.lastName,
-        email: res.email,
-        gender: res.gender,
-        phone_no: res.phoneNo,
-        country_code: res.countryCode,
-        country_id: res.country.name,
-        dob: new Date(res.dob),
-        passport_number: res.passportNumber,
-        passport_expiry: new Date(res.passportExpiry),
-      });
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 404) {
-        // this.router.navigate(['/']);
-        this.toastr.error(error.error.message, 'Error');
-      } else {
-        this.toastr.error(error.error.message, 'Error');
-      }
+        title: this.travelerInfo.title,
+        firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
+        lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
+        email: this.travelerInfo.email ? this.travelerInfo.email : '',
+        gender: this.travelerInfo.gender ? this.travelerInfo.gender : '',
+        phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
+        country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
+        country_id: this.travelerInfo.country.name ? this.travelerInfo.country.name : '',
+        dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
+        passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
+        passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : '',   
     });
   }
 

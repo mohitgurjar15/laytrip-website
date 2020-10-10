@@ -14,7 +14,11 @@ export class MyAccountsNavComponent implements OnInit {
   profile_pic : string = '';
   _login_user_info : any =[];
   isLoggedIn = false;
+  expanded: boolean;
+  expandedSecond: boolean;
+  expandedThird: boolean;
 
+  
   public defaultImage = this.s3BucketUrl+'assets/images/profile_im.svg';
 
   constructor( public router: Router,
@@ -45,5 +49,13 @@ export class MyAccountsNavComponent implements OnInit {
     localStorage.removeItem('_lay_sess');
     this.router.navigate(['/']);
   } 
-                                                                                                                                                
+          
+  onToggleSubMenu(event) {
+    this.expanded = !this.expanded;
+    if (this.expanded) {
+      this.expandedSecond = false;
+      this.expandedThird = false;
+    }
+  }
+
 }

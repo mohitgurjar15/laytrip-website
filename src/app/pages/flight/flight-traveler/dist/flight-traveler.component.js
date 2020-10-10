@@ -25,7 +25,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.selectedAdults = 0;
         this.routeCode = '';
         this.loading = true;
-        this.progressStep = { step1: true, step2: false, step3: false };
+        this.progressStep = { step1: true, step2: true, step3: false, step4: false };
         this.isLoggedIn = false;
         this.is_traveller = false;
         this.totalTraveler = 0;
@@ -45,7 +45,7 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
-        this._adults = this._childs = this._infants = [];
+        this._adults = this._childs = this._infants = this.travelers = [];
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {
             this.is_traveller = true;
@@ -97,7 +97,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
         if (this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken) {
             this.is_updateToken = this.is_traveller = true;
-            this.getTravelers();
+            // this.getTravelers();
         }
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {

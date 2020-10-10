@@ -10,19 +10,23 @@ exports.MyWalletComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var MyWalletComponent = /** @class */ (function () {
-    function MyWalletComponent(travelerService) {
+    function MyWalletComponent(travelerService, commonFunction) {
         this.travelerService = travelerService;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.pageSize = 10;
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.showPaginationBar = false;
-        this.isNotFound = false;
+        this.isEarningPointNotFound = false;
+        this.isRedeedemPointNotFound = false;
         this.loading = true;
+        this.pointsLoading = true;
         this.totalItems = 0;
     }
     MyWalletComponent.prototype.ngOnInit = function () {
         this.page = 1;
-        this.isNotFound = false;
+        this.isEarningPointNotFound = false;
+        this.isRedeedemPointNotFound = false;
         this.loading = true;
         this.limit = this.perPageLimitConfig[0];
         this.getEarnedPoint();
@@ -34,19 +38,26 @@ var MyWalletComponent = /** @class */ (function () {
         this.loading = true;
         this.travelerService.getEarnedPoint(this.page, this.limit).subscribe(function (result) {
             _this.loading = false;
+            _this.isEarningPointNotFound = false;
+            console.log(result);
             _this.earnedPoints = result.data;
         }, function (error) {
+            _this.isEarningPointNotFound = true;
             _this.loading = false;
             // this.apiError = error.message;
         });
     };
+    MyWalletComponent.prototype.getDateFormat = function (date) {
+        return this.commonFunction.convertDateFormat(new Date(date), 'DD/MM/YYYY');
+    };
     MyWalletComponent.prototype.getTotalAvailabePoints = function () {
         var _this = this;
+        this.pointsLoading = true;
         this.travelerService.getTotalAvailablePoints(this.page, this.limit).subscribe(function (result) {
-            _this.loading = false;
+            _this.pointsLoading = false;
             _this.travellerPoints = result;
         }, function (error) {
-            _this.loading = false;
+            _this.pointsLoading = false;
             // this.apiError = error.message;
         });
     };
@@ -59,9 +70,10 @@ var MyWalletComponent = /** @class */ (function () {
         this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe(function (result) {
             _this.redeemedPoints = result.data;
             _this.loading = false;
+            _this.isRedeedemPointNotFound = false;
         }, function (error) {
             _this.loading = false;
-            // this.apiError = error.message;
+            _this.isRedeedemPointNotFound = true;
         });
     };
     MyWalletComponent = __decorate([

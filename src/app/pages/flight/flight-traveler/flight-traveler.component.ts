@@ -54,14 +54,17 @@ export class FlightTravelerComponent implements OnInit {
   
   
   getTravelers() {
+    this._adults = this._childs = this._infants = this.travelers= [];
+    
 
-    this._adults = this._childs = this._infants = [];
     let userToken = localStorage.getItem('_lay_sess');
     if(userToken && userToken != 'undefined'){
       this.is_traveller = true;
      
       this.travelerService.getTravelers().subscribe((res:any)=>{
         this.travelers = res.data;
+        
+
         this.travelers.forEach(element => {
           if(element.user_type == 'adult'){
             this._adults.push(element);
@@ -112,9 +115,10 @@ export class FlightTravelerComponent implements OnInit {
 
     this.userDetails = getLoginUserInfo();
 
+
     if(this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken){
       this.is_updateToken = this.is_traveller = true ;
-      this.getTravelers();
+      // this.getTravelers();
     } 
     let userToken = localStorage.getItem('_lay_sess');    
     if(userToken && userToken != 'undefined'){

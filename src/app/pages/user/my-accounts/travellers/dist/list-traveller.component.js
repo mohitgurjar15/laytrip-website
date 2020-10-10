@@ -30,10 +30,12 @@ var ListTravellerComponent = /** @class */ (function () {
         this.showPaginationBar = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
+        this.isMasterSel = false;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
         this.loading = true;
         this.getTravelers();
+        this.getCheckedItemList();
     };
     ListTravellerComponent.prototype.pageChange = function (event) {
         this.loading = false;
@@ -43,7 +45,6 @@ var ListTravellerComponent = /** @class */ (function () {
         var _this = this;
         this.travelerService.getTravelers().subscribe(function (data) {
             _this.travelers = data.data;
-            console.log(_this.travelers.length);
             _this.loading = false;
             _this.showPaginationBar = true;
             if (_this.travelers.length === 0) {
@@ -74,11 +75,13 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.ngOnChanges = function (changes) {
         console.log('sds', changes);
     };
-    ListTravellerComponent.prototype.openTravellerModal = function (content, userId) {
+    ListTravellerComponent.prototype.openTravellerModal = function (content, userId, traveler) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
+        if (traveler === void 0) { traveler = ''; }
         this.modalReference = this.modalService.open(traveller_form_component_1.TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal', centered: true });
         this.modalReference.componentInstance.travellerId = userId;
+        this.modalReference.componentInstance.travelerInfo = traveler;
         this.modalReference.componentInstance.travelersChanges.subscribe(function ($e) {
             var index = _this.travelers.indexOf($e.userId, 0);
             if (index) {
@@ -135,6 +138,28 @@ var ListTravellerComponent = /** @class */ (function () {
             }
         });
         this.modalReference.close();
+    };
+    ListTravellerComponent.prototype.checkUncheckAll = function () {
+        var checkboxes = document.getElementsByClassName('travelerCheckbox');
+        for (var i = 0; i < checkboxes.length; i++) {
+            this.travelers[i].isSelected = this.isMasterSel;
+        }
+        console.log(this.travelers);
+        this.getCheckedItemList();
+    };
+    ListTravellerComponent.prototype.isAllSelected = function () {
+        this.isMasterSel = this.travelers.every(function (item) {
+            return item.isSelected == true;
+        });
+        this.getCheckedItemList();
+    };
+    ListTravellerComponent.prototype.getCheckedItemList = function () {
+        this.checkedCategoryList = [];
+        for (var i = 0; i < this.travelers.length; i++) {
+            if (this.travelers[i].isSelected)
+                this.checkedCategoryList.push(this.travelers[i]);
+        }
+        this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
     };
     ListTravellerComponent = __decorate([
         core_1.Component({

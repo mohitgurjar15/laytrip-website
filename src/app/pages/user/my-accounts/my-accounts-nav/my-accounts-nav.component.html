@@ -51,14 +51,15 @@
             </li>
             <li>
                 <div class="dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle" [routerLinkActive]="['active_link']"
+                    <a (click)="onToggleSubMenu($event)"  href="javascript:void(0);" class="dropdown-toggle" [routerLinkActive]="['active_link']"
                         data-toggle="dropdown">
                         <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
                         Settings
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu"  [routerLinkActive]="['show']">
                         <li><a [routerLink]="['/account/settings/change-password']"
-                                [routerLinkActive]="['active_link']">Change Password</a></li>
+                                [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
+                                Change Password</a></li>
                     </ul>
                 </div>
             </li>

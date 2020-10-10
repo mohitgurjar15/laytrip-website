@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
     this.getProfileInfo();
 
     this.profileForm = this.formBuilder.group({
-      title: [''],
+      title: ['mr'],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
       country_code: ['', [Validators.required]],
@@ -80,7 +80,7 @@ export class ProfileComponent implements OnInit {
       country_id: [''],
       state_id: [''],
       city_name: [''],
-      gender: [''],
+      gender: ['M'],
       profile_pic: [''],      
       address2: [''],      
       language_id: [''],      

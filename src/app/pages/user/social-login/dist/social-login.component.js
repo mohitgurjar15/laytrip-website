@@ -21,7 +21,9 @@ var SocialLoginComponent = /** @class */ (function () {
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
         var userToken = localStorage.getItem('_lay_sess');
+        console.log('social', userToken);
         if (!userToken) {
+            console.log('done');
             this.loadGoogleSdk();
             this.loadFacebookSdk();
         }

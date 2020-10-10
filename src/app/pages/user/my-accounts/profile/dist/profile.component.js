@@ -56,7 +56,7 @@ var ProfileComponent = /** @class */ (function () {
         this.getCurrencies();
         this.getProfileInfo();
         this.profileForm = this.formBuilder.group({
-            title: [''],
+            title: ['mr'],
             first_name: ['', [forms_1.Validators.required]],
             last_name: ['', [forms_1.Validators.required]],
             country_code: ['', [forms_1.Validators.required]],
@@ -68,7 +68,7 @@ var ProfileComponent = /** @class */ (function () {
             country_id: [''],
             state_id: [''],
             city_name: [''],
-            gender: [''],
+            gender: ['M'],
             profile_pic: [''],
             address2: [''],
             language_id: [''],

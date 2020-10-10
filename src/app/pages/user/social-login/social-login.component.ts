@@ -31,7 +31,9 @@ export class SocialLoginComponent implements OnInit {
 
   ngOnInit() {
     let userToken = localStorage.getItem('_lay_sess');
-    if(!userToken){
+    console.log('social',userToken)
+    if(!userToken){      
+      console.log('done')
       this.loadGoogleSdk();
       this.loadFacebookSdk();
     }

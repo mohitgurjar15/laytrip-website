@@ -98,6 +98,14 @@ var MainHeaderComponent = /** @class */ (function () {
                 _this.selectedLanunage = _this.langunages[0];
                 localStorage.setItem("_lang", JSON.stringify(_this.langunages[0]));
             }
+            else {
+                var find = _this.langunages.find(function (langunage) { return langunage.id == _this.selectedLanunage.id; });
+                if (!find) {
+                    _this.isLanunageSet = true;
+                    _this.selectedLanunage = _this.langunages[0];
+                    localStorage.setItem("_lang", JSON.stringify(_this.langunages[0]));
+                }
+            }
         }, function (error) {
         });
     };
@@ -115,6 +123,14 @@ var MainHeaderComponent = /** @class */ (function () {
                 _this.isCurrencySet = true;
                 _this.selectedCurrency = _this.currencies[0];
                 localStorage.setItem("_curr", JSON.stringify(_this.currencies[0]));
+            }
+            else {
+                var find = _this.currencies.find(function (currency) { return currency.id == _this.selectedCurrency.id; });
+                if (!find) {
+                    _this.isCurrencySet = true;
+                    _this.selectedCurrency = _this.currencies[0];
+                    localStorage.setItem("_curr", JSON.stringify(_this.currencies[0]));
+                }
             }
         }, function (error) {
         });
@@ -169,6 +185,11 @@ var MainHeaderComponent = /** @class */ (function () {
             _this.totalLayCredit = res.total_available_points;
         }, (function (error) {
         }));
+    };
+    MainHeaderComponent.prototype.openSignModal = function () {
+        console.log('sd');
+        $('#sign_in_modal').modal('show');
+        // const modalRef = this.modalService.open(AuthComponent);
     };
     MainHeaderComponent = __decorate([
         core_1.Component({

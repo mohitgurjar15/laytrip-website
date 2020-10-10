@@ -221,4 +221,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
     }))
   }
+
+  openSignModal() {
+    console.log('sd')
+    $('#sign_in_modal').modal('show');
+    // const modalRef = this.modalService.open(AuthComponent);
+  }
 }

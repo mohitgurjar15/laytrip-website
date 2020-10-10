@@ -59,30 +59,19 @@ var TravellerFormComponent = /** @class */ (function () {
         }
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
-        var _this = this;
-        this.userService.getTraveller(this.travellerId).subscribe(function (res) {
-            _this.traveller = res;
-            _this.coAccountForm.patchValue({
-                title: res.title,
-                firstName: res.firstName,
-                lastName: res.lastName,
-                email: res.email,
-                gender: res.gender,
-                phone_no: res.phoneNo,
-                country_code: res.countryCode,
-                country_id: res.country.name,
-                dob: new Date(res.dob),
-                passport_number: res.passportNumber,
-                passport_expiry: new Date(res.passportExpiry)
-            });
-        }, function (error) {
-            if (error.status === 404) {
-                // this.router.navigate(['/']);
-                _this.toastr.error(error.error.message, 'Error');
-            }
-            else {
-                _this.toastr.error(error.error.message, 'Error');
-            }
+        this.traveller = this.travelerInfo;
+        this.coAccountForm.patchValue({
+            title: this.travelerInfo.title,
+            firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
+            lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
+            email: this.travelerInfo.email ? this.travelerInfo.email : '',
+            gender: this.travelerInfo.gender ? this.travelerInfo.gender : '',
+            phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
+            country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
+            country_id: this.travelerInfo.country.name ? this.travelerInfo.country.name : '',
+            dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
+            passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
+            passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : ''
         });
     };
     TravellerFormComponent.prototype.close = function () {
@@ -198,6 +187,9 @@ var TravellerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travellerId");
+    __decorate([
+        core_1.Input()
+    ], TravellerFormComponent.prototype, "travelerInfo");
     TravellerFormComponent = __decorate([
         core_1.Component({
             selector: 'app-traveller-form',

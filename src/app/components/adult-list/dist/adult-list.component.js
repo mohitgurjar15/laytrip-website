@@ -180,6 +180,7 @@ var AdultListComponent = /** @class */ (function () {
                 _this.countries_code = data.map(function (country) {
                     return {
                         id: country.id,
+                        nasme: country.name,
                         name: country.phonecode + ' (' + country.iso2 + ')',
                         code: country.phonecode
                     };

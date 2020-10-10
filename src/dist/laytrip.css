@@ -71,6 +71,10 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   width: 100%;
 }
 
+.cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field .ui-calendar {
+  width: 100%;
+}
+
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount input {
   -moz-appearance: textfield !important;
   -webkit-appearance: none;

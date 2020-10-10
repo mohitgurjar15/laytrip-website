@@ -205,6 +205,27 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
     }
   }
 }
+
+.cmn_add_edit_modal {
+	.modal-dialog {
+		.modal-content {
+			.modal-body {
+				.add_card_form {
+					.form_row {
+						.form_field.half {
+							.text_field {
+                .ui-calendar {
+                  width: 100%;
+                }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 //Check Out page number dropdown issue
 .detail_info_main.payment_info {
   .detail_info_left {

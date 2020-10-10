@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { TravelerService } from '../../../../services/traveler.service';
 import { environment } from '../../../../../environments/environment';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-my-wallet',
@@ -17,18 +18,22 @@ export class MyWalletComponent implements OnInit {
   perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
   showPaginationBar: boolean = false;
-  isNotFound: boolean = false;
+  isEarningPointNotFound: boolean = false;
+  isRedeedemPointNotFound: boolean = false;
   public loading: boolean = true;
+  public pointsLoading: boolean = true;
   totalItems = 0;
   travellerPoints;
-
+  
   constructor(
-    public travelerService : TravelerService 
+    public travelerService : TravelerService,
+    private commonFunction:CommonFunction,
   ) { }
 
   ngOnInit() {
     this.page = 1;
-    this.isNotFound = false;
+    this.isEarningPointNotFound = false;
+    this.isRedeedemPointNotFound = false;
     this.loading = true;
     this.limit = this.perPageLimitConfig[0];
     this.getEarnedPoint();
@@ -40,19 +45,28 @@ export class MyWalletComponent implements OnInit {
     this.loading = true;
     this.travelerService.getEarnedPoint(this.page, this.limit).subscribe((result: any) => {
       this.loading = false;
+      this.isEarningPointNotFound = false;  
+      console.log(result)
+ 
       this.earnedPoints = result.data;
-    }, (error: HttpErrorResponse) => {   
+    }, (error: HttpErrorResponse) => {
+      this.isEarningPointNotFound = true;   
       this.loading = false;    
       // this.apiError = error.message;
     });
   }
 
+  getDateFormat(date){
+    return this.commonFunction.convertDateFormat( new Date(date) ,'DD/MM/YYYY');
+  }
+
   getTotalAvailabePoints(){
+    this.pointsLoading = true;
     this.travelerService.getTotalAvailablePoints(this.page, this.limit).subscribe((result: any) => {
-      this.loading = false;   
+      this.pointsLoading = false;   
       this.travellerPoints = result;
     }, (error: HttpErrorResponse) => {   
-      this.loading = false;    
+      this.pointsLoading = false;    
       // this.apiError = error.message;
     });
   }
@@ -64,9 +78,10 @@ export class MyWalletComponent implements OnInit {
     this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe((result: any) => {
       this.redeemedPoints = result.data;
       this.loading = false;
+      this.isRedeedemPointNotFound = false;
     }, (error: HttpErrorResponse) => {  
       this.loading = false;
-      // this.apiError = error.message;
+      this.isRedeedemPointNotFound = true;
     });
   }
 }
