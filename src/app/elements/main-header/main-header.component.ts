@@ -78,7 +78,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       /* if(this.userDetails.roleId!=7){
         this.totalLaycredit();
       } */
-    }
+    }    
   }
 
   ngDoCheck() {

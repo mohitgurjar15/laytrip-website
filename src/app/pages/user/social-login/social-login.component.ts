@@ -30,13 +30,8 @@ export class SocialLoginComponent implements OnInit {
   auth2: any;
 
   ngOnInit() {
-    let userToken = localStorage.getItem('_lay_sess');
-    console.log('social',userToken)
-    if(!userToken){      
-      console.log('done')
-      this.loadGoogleSdk();
-      this.loadFacebookSdk();
-    }
+    this.loadGoogleSdk();
+    this.loadFacebookSdk();
   }
 
   loadGoogleSdk() {
@@ -129,9 +124,10 @@ export class SocialLoginComponent implements OnInit {
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
+          console.log(userInfo)
           let json_data = {
             "account_type": 1,
-            "name": userInfo.response + ' ' + userInfo.last_name,
+            "name": userInfo.first_name + ' ' + userInfo.last_name,
             "email": userInfo.email ? userInfo.email : '',
             "social_account_id": userInfo.id,
             "device_type": 1,

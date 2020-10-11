@@ -20,13 +20,8 @@ var SocialLoginComponent = /** @class */ (function () {
         this.test = false;
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
-        var userToken = localStorage.getItem('_lay_sess');
-        console.log('social', userToken);
-        if (!userToken) {
-            console.log('done');
-            this.loadGoogleSdk();
-            this.loadFacebookSdk();
-        }
+        this.loadGoogleSdk();
+        this.loadFacebookSdk();
     };
     SocialLoginComponent.prototype.loadGoogleSdk = function () {
         var _this = this;
@@ -112,9 +107,10 @@ var SocialLoginComponent = /** @class */ (function () {
                 window['FB'].api('/me', {
                     fields: 'last_name, first_name, email'
                 }, function (userInfo) {
+                    console.log(userInfo);
                     var json_data = {
                         "account_type": 1,
-                        "name": userInfo.response + ' ' + userInfo.last_name,
+                        "name": userInfo.first_name + ' ' + userInfo.last_name,
                         "email": userInfo.email ? userInfo.email : '',
                         "social_account_id": userInfo.id,
                         "device_type": 1,
