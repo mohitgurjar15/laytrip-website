@@ -45,16 +45,20 @@ export class ListPaymentHistoryComponent implements OnInit {
   }
 
   getPaymentHistory() {
-    this.loading = true;
-    this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
-        this.historyResult = res.data;
-        this.loading = this.notFound  = false;
-    }, err => {
-      if (err && err.status === 404) {
-        this.loading = false;
-        this.notFound = true;
-      }
-    });   
+   // let theOne = Object.keys(this.filterForm.controls).find(key=> this.filterForm.controls[key].value!=='');
+    /* if(theOne == 'undefined'){
+      return;
+    } */
+      this.loading = true;
+      this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
+          this.historyResult = res.data;
+          this.loading = this.notFound  = false;
+      }, err => {
+        if (err && err.status === 404) {
+          this.loading = false;
+          this.notFound = true;
+        }
+      });               
   }
   
   getBookingHistory(event) {

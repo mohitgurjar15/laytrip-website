@@ -32,6 +32,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this._travellersCountValid = false;
         this.isFlightNotAvailable = false;
         this.is_updateToken = false;
+        this.isComplete = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -53,12 +54,15 @@ var FlightTravelerComponent = /** @class */ (function () {
                 _this.travelers = res.data;
                 _this.travelers.forEach(function (element) {
                     if (element.user_type == 'adult') {
+                        element.isComplete = _this.checkTravellerComplete(element, 'adult');
                         _this._adults.push(element);
                     }
                     else if (element.user_type == 'child') {
+                        element.isComplete = _this.checkTravellerComplete(element, 'child');
                         _this._childs.push(element);
                     }
                     else if (element.user_type == 'infant') {
+                        element.isComplete = _this.checkTravellerComplete(element, 'infant');
                         _this._infants.push(element);
                     }
                 });
@@ -71,6 +75,33 @@ var FlightTravelerComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.loading = false;
         }, 2000);
+    };
+    FlightTravelerComponent.prototype.checkTravellerComplete = function (object, type) {
+        var isEmpty = false;
+        if (type == 'adult') {
+            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "phoneNo", "title"];
+            isEmpty = this.checkObj(object, travellerKeys);
+        }
+        else if (type == 'child') {
+            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
+            isEmpty = this.checkObj(object, travellerKeys);
+        }
+        else if (type == 'infant') {
+            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
+            isEmpty = this.checkObj(object, travellerKeys);
+        }
+        return isEmpty;
+    };
+    FlightTravelerComponent.prototype.checkObj = function (obj, travellerKeys) {
+        var isComplete = true;
+        // obj.firstName = '';
+        var userStr = JSON.stringify(obj);
+        JSON.parse(userStr, function (key, value) {
+            if (!value && travellerKeys.indexOf(key) !== -1) {
+                return isComplete = false;
+            }
+        });
+        return isComplete;
     };
     FlightTravelerComponent.prototype.getAdultCount = function (count) {
         this.selectedAdults = count;

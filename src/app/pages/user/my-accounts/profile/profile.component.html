@@ -77,7 +77,7 @@
                                     <div class="form_field half">
                                         <label>Email<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input readonly type="email" formControlName="email" tabindex="3">
+                                            <input [readonly]="selectResponse.email != '' && selectResponse.email !='undefined' " type="email" formControlName="email" tabindex="3">
                                         </div>
 
                                     </div>

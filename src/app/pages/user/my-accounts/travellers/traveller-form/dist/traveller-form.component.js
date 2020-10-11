@@ -61,11 +61,11 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.setTravelerForm = function () {
         this.traveller = this.travelerInfo;
         this.coAccountForm.patchValue({
-            title: this.travelerInfo.title,
+            title: this.travelerInfo.title ? this.travelerInfo.title : 'mr',
             firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
             lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
             email: this.travelerInfo.email ? this.travelerInfo.email : '',
-            gender: this.travelerInfo.gender ? this.travelerInfo.gender : '',
+            gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
             phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
             country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
             country_id: this.travelerInfo.country.name ? this.travelerInfo.country.name : '',

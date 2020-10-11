@@ -35,6 +35,10 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
     };
     ListPaymentHistoryComponent.prototype.getPaymentHistory = function () {
         var _this = this;
+        // let theOne = Object.keys(this.filterForm.controls).find(key=> this.filterForm.controls[key].value!=='');
+        /* if(theOne == 'undefined'){
+          return;
+        } */
         this.loading = true;
         this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
             _this.historyResult = res.data;

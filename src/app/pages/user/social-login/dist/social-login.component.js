@@ -107,7 +107,6 @@ var SocialLoginComponent = /** @class */ (function () {
                 window['FB'].api('/me', {
                     fields: 'last_name, first_name, email'
                 }, function (userInfo) {
-                    console.log(userInfo);
                     var json_data = {
                         "account_type": 1,
                         "name": userInfo.first_name + ' ' + userInfo.last_name,

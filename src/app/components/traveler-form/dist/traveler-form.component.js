@@ -22,6 +22,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.usersType = '';
         this.traveler = [];
         this.travelerFormChange = new core_1.EventEmitter();
+        this.auditFormStatus = new core_1.EventEmitter();
         this.submitted = false;
         this.loading = false;
         this.isLoggedIn = false;
@@ -54,11 +55,11 @@ var TravelerFormComponent = /** @class */ (function () {
         this.setUserTypeValidation();
         if (this.traveler.userId) {
             this.adultForm.patchValue({
-                title: this.traveler.title,
+                title: this.traveler.title ? this.traveler.title : 'mr',
                 firstName: this.traveler.firstName,
                 lastName: this.traveler.lastName,
                 email: this.traveler.email,
-                gender: this.traveler.gender,
+                gender: this.traveler.gender ? this.traveler.gender : 'M',
                 country_code: this.traveler.countryCode,
                 phone_no: this.traveler.phoneNo,
                 country_id: this.traveler.country != null ? this.traveler.country.name : '',
@@ -67,8 +68,8 @@ var TravelerFormComponent = /** @class */ (function () {
                 passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
                 frequently_no: ''
             });
-            this.traveler.isComplete = this.adultForm.status === 'VALID' ? true : false;
-            // this.auditFormStatus.emit(this.formStatus);
+            // this.traveler.isComplete =  this.adultForm.status == 'VALID' ? true : false;
+            // this.auditFormStatus.emit(this.traveler);
         }
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
@@ -224,6 +225,9 @@ var TravelerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], TravelerFormComponent.prototype, "travelerFormChange");
+    __decorate([
+        core_1.Output()
+    ], TravelerFormComponent.prototype, "auditFormStatus");
     TravelerFormComponent = __decorate([
         core_1.Component({
             selector: 'app-traveler-form',
