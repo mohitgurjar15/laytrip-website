@@ -25,6 +25,7 @@ var FlightPaymentComponent = /** @class */ (function () {
         this.isFlightNotAvailable = false;
         this.isShowGuestPopup = false;
         this.isLoggedIn = false;
+        this.showPartialPayemntOption = true;
     }
     FlightPaymentComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -50,6 +51,7 @@ var FlightPaymentComponent = /** @class */ (function () {
     };
     FlightPaymentComponent.prototype.selectInstalmentMode = function (instalmentMode) {
         this.instalmentMode = instalmentMode;
+        this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false;
         sessionStorage.setItem('__insMode', btoa(this.instalmentMode));
     };
     FlightPaymentComponent.prototype.getInstalmentData = function (data) {
@@ -58,6 +60,8 @@ var FlightPaymentComponent = /** @class */ (function () {
         this.customAmount = data.customAmount;
         this.customInstalment = data.customInstalment;
         this.laycreditpoints = data.layCreditPoints;
+        this.partialPaymentAmount = data.partialPaymentAmount;
+        console.log("data", data);
         sessionStorage.setItem('__islt', btoa(JSON.stringify(data)));
     };
     FlightPaymentComponent.prototype.flightAvailable = function (event) {

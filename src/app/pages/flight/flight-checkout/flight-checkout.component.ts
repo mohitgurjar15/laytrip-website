@@ -35,7 +35,7 @@ export class FlightCheckoutComponent implements OnInit {
     bookingLoader:boolean=false;
     bookingResult:any={};
     sellingPrice:number;
-    flightSummary:[]=[];
+    flightSummary:any=[];
     instalmentType:string='weekly';
     customAmount:number | null;
     customInstalment:number | null;
@@ -49,6 +49,8 @@ export class FlightCheckoutComponent implements OnInit {
     isShowPartialPaymentDetails:boolean=false;
     bookingId;  
     customInstalmentData:any;
+    showPartialPayemntOption:boolean=false;
+    partialPaymentAmount:number=0;
 
     constructor(
       private route: ActivatedRoute,
@@ -97,6 +99,7 @@ export class FlightCheckoutComponent implements OnInit {
 
       let instalmentMode=atob(sessionStorage.getItem('__insMode'))
       this.instalmentMode= instalmentMode || 'no-instalment';
+      this.showPartialPayemntOption = instalmentMode=='instalment'?true:false;
       console.log("this.instalmentMode",this.instalmentMode)
       this.validateBookingButton();
     }
@@ -128,7 +131,6 @@ export class FlightCheckoutComponent implements OnInit {
       try{
         let customInstalmentData=atob(sessionStorage.getItem('__islt'))
         this.customInstalmentData = JSON.parse(customInstalmentData);
-        console.log("this.customInstalmentData",this.customInstalmentData)
         this.laycreditpoints = Number(this.customInstalmentData.layCreditPoints);
         this.additionalAmount = this.customInstalmentData.additionalAmount;
         this.customAmount = this.customInstalmentData.customAmount;
@@ -291,7 +293,23 @@ export class FlightCheckoutComponent implements OnInit {
       this.instalmentType = data.instalmentType;
       this.customAmount = data.customAmount;
       this.customInstalment = data.customInstalment;
-
+      let instalmentRequest={
+        instalment_type: data.instalmentType,
+        checkin_date: moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"),
+        booking_date: moment().format("YYYY-MM-DD"),
+        amount: this.sellingPrice,
+        additional_amount: data.additionalAmount,
+        custom_instalment_no: data.customInstalment,
+        custom_amount: data.customAmount
+      }
+      this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
+        if(res.instalment_available==true){
+          
+          this.partialPaymentAmount=res.instalment_date[1].instalment_amount;
+        }
+      },(err)=>{
+  
+      })
     }
 
     emitNewCard(event){

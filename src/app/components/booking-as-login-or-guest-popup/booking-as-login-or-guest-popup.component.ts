@@ -18,7 +18,6 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router:Router
-
   ) { }
   ngOnInit() {
   	this.routeCode = this.route.snapshot.paramMap.get('rc');
@@ -42,5 +41,4 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
       this.router.navigate(['/flight/traveler',this.routeCode]);      
     }
   }
-
 }
