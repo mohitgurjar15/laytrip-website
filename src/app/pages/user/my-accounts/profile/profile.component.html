@@ -88,9 +88,18 @@
                                                 <div class="code">
                                                     <div class="dropdown">
                                                         <ng-select class="ng-customClass" tabindex="4"
-                                                            selectOnTab="true" [items]="countries_code" bindLabel="name"
+                                                            selectOnTab="true" [items]="countries_code" bindValue="login" bindLabel="country_name"
                                                             clearSearchOnAdd="true" formControlName="country_code"
+                                                            style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Afghanistan.svg);"
                                                             placeholder="+1">
+                                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                                <span class="ng-value-label"><img [src]="item.avatar_url" width="20px" height="20px"> {{item.country_name}}</span>
+                                                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                            </ng-template>
+                                                        
+                                                            <ng-template ng-option-tmp let-item="item">
+                                                                <img [src]="item.avatar_url" width="20px" height="20px"> {{item.country_name}}
+                                                            </ng-template>
                                                         </ng-select>
                                                     </div>
 

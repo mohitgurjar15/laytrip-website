@@ -54,4 +54,4 @@
 </section>
 
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
-<app-booking-as-login-or-guest-popup *ngIf="isShowGuestPopup"></app-booking-as-login-or-guest-popup>
+<app-booking-as-login-or-guest-popup (isShowGuestPopupValueChange)="changePopupValue($event)" *ngIf="isShowGuestPopup"></app-booking-as-login-or-guest-popup>

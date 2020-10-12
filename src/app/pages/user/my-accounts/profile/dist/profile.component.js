@@ -89,9 +89,12 @@ var ProfileComponent = /** @class */ (function () {
                 _this.countries_code = data.map(function (country) {
                     return {
                         id: country.id,
-                        name: country.phonecode + ' (' + country.iso2 + ')'
+                        name: country.phonecode + ' (' + country.iso2 + ')',
+                        country_name: country.name + ' ' + country.phonecode,
+                        avatar_url: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                     };
                 });
+            console.log(_this.countries_code);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);

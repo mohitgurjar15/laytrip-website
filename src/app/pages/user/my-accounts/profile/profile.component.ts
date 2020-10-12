@@ -101,9 +101,12 @@ export class ProfileComponent implements OnInit {
       this.countries_code = data.map(country=>{
         return {
             id:country.id,
-            name:country.phonecode+' ('+country.iso2+')'
+            name:country.phonecode+' ('+country.iso2+')',
+            country_name:country.name+ ' ' +country.phonecode,
+            avatar_url: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
         }
       })
+      console.log( this.countries_code )
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);
