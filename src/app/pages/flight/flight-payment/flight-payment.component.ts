@@ -25,6 +25,8 @@ export class FlightPaymentComponent implements OnInit {
   routeCode:string='';
   isFlightNotAvailable:boolean=false;
   isShowGuestPopup:boolean=false;
+  showPartialPayemntOption:boolean=true;
+  partialPaymentAmount:number;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,6 +62,7 @@ export class FlightPaymentComponent implements OnInit {
 
   selectInstalmentMode(instalmentMode){
     this.instalmentMode=instalmentMode;
+    this.showPartialPayemntOption = (this.instalmentMode=='instalment')?true:false
     sessionStorage.setItem('__insMode',btoa(this.instalmentMode))
   }
 
@@ -70,6 +73,8 @@ export class FlightPaymentComponent implements OnInit {
     this.customAmount = data.customAmount;
     this.customInstalment = data.customInstalment;
     this.laycreditpoints = data.layCreditPoints;
+    this.partialPaymentAmount=data.partialPaymentAmount;
+    console.log("data",data)
     sessionStorage.setItem('__islt',btoa(JSON.stringify(data)))
   }
 

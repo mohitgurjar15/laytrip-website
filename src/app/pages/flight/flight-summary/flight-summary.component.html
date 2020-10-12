@@ -319,11 +319,11 @@
                 <!-- <li>Taxes <span>$0</span></li> -->
             </ul>
         </div>
-        <div class="partial_pay_info" *ngIf="flightDetail[0].start_price">
+        <div class="partial_pay_info" *ngIf="flightDetail[0].start_price && showPartialPayemntOption">
             <ul>
                 <li>
                     <p>Partial Payment <img src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon"></p>
-                    <span>{{ currency?.symbol }}{{flightDetail[0].start_price | number : '1.2-2'}}/week</span>
+                    <span>{{ currency?.symbol }}{{partialPaymentAmount | number : '1.2-2'}}/instalment</span>
                 </li>
             </ul>
         </div>

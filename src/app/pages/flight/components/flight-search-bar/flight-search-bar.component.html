@@ -41,7 +41,7 @@
                         <div class="search_area">
                           <label>From</label>
                           <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="display_name"
-                            bindValue="city" [clearable]="true" minTermLength="3" notFoundText=""
+                            bindValue="city" [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true"
                             [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}" (clear)="onRemove($event,{key: 'fromSearch'})"
                             (search)="changeSearchDeparture($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
@@ -73,7 +73,7 @@
                           
                           <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="display_name"
                             bindValue="city" [(ngModel)]="airportDefaultArrivalValue"
-                            [ngModelOptions]="{standalone: true}" [clearable]="true" minTermLength="3" notFoundText="" (clear)="onRemove($event,{key: 'toSearch'})"
+                            [ngModelOptions]="{standalone: true}" [clearable]="false" minTermLength="3" notFoundText="" (clear)="onRemove($event,{key: 'toSearch'})" [virtualScroll]="true"
                             (search)="changeSearchArrival($event)" loadingText=""
                             (change)="selectEvent($event, {key: 'toSearch'})" class="laytrip-input"
                             placeholder="{{ placeHolder2 }}">
