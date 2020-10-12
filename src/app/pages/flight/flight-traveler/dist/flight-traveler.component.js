@@ -25,13 +25,14 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.selectedAdults = 0;
         this.routeCode = '';
         this.loading = true;
-        this.progressStep = { step1: true, step2: false, step3: false };
+        this.progressStep = { step1: true, step2: true, step3: false, step4: false };
         this.isLoggedIn = false;
         this.is_traveller = false;
         this.totalTraveler = 0;
         this._travellersCountValid = false;
         this.isFlightNotAvailable = false;
         this.is_updateToken = false;
+        this.isComplete = false;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -45,7 +46,7 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
-        this._adults = this._childs = this._infants = [];
+        this._adults = this._childs = this._infants = this.travelers = [];
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {
             this.is_traveller = true;
@@ -53,12 +54,15 @@ var FlightTravelerComponent = /** @class */ (function () {
                 _this.travelers = res.data;
                 _this.travelers.forEach(function (element) {
                     if (element.user_type == 'adult') {
+                        element.isComplete = _this.checkTravellerComplete(element, 'adult');
                         _this._adults.push(element);
                     }
                     else if (element.user_type == 'child') {
+                        element.isComplete = _this.checkTravellerComplete(element, 'child');
                         _this._childs.push(element);
                     }
                     else if (element.user_type == 'infant') {
+                        element.isComplete = _this.checkTravellerComplete(element, 'infant');
                         _this._infants.push(element);
                     }
                 });
@@ -71,6 +75,33 @@ var FlightTravelerComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.loading = false;
         }, 2000);
+    };
+    FlightTravelerComponent.prototype.checkTravellerComplete = function (object, type) {
+        var isEmpty = false;
+        if (type == 'adult') {
+            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "phoneNo", "title"];
+            isEmpty = this.checkObj(object, travellerKeys);
+        }
+        else if (type == 'child') {
+            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
+            isEmpty = this.checkObj(object, travellerKeys);
+        }
+        else if (type == 'infant') {
+            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
+            isEmpty = this.checkObj(object, travellerKeys);
+        }
+        return isEmpty;
+    };
+    FlightTravelerComponent.prototype.checkObj = function (obj, travellerKeys) {
+        var isComplete = true;
+        // obj.firstName = '';
+        var userStr = JSON.stringify(obj);
+        JSON.parse(userStr, function (key, value) {
+            if (!value && travellerKeys.indexOf(key) !== -1) {
+                return isComplete = false;
+            }
+        });
+        return isComplete;
     };
     FlightTravelerComponent.prototype.getAdultCount = function (count) {
         this.selectedAdults = count;
@@ -97,7 +128,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
         if (this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken) {
             this.is_updateToken = this.is_traveller = true;
-            this.getTravelers();
+            // this.getTravelers();
         }
         var userToken = localStorage.getItem('_lay_sess');
         if (userToken && userToken != 'undefined') {

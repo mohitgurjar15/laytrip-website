@@ -10,6 +10,7 @@ exports.MainHeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
+var auth_component_1 = require("../../pages/user/auth/auth.component");
 var MainHeaderComponent = /** @class */ (function () {
     function MainHeaderComponent(genericService, translate, modalService, router) {
         this.genericService = genericService;
@@ -98,6 +99,14 @@ var MainHeaderComponent = /** @class */ (function () {
                 _this.selectedLanunage = _this.langunages[0];
                 localStorage.setItem("_lang", JSON.stringify(_this.langunages[0]));
             }
+            else {
+                var find = _this.langunages.find(function (langunage) { return langunage.id == _this.selectedLanunage.id; });
+                if (!find) {
+                    _this.isLanunageSet = true;
+                    _this.selectedLanunage = _this.langunages[0];
+                    localStorage.setItem("_lang", JSON.stringify(_this.langunages[0]));
+                }
+            }
         }, function (error) {
         });
     };
@@ -115,6 +124,14 @@ var MainHeaderComponent = /** @class */ (function () {
                 _this.isCurrencySet = true;
                 _this.selectedCurrency = _this.currencies[0];
                 localStorage.setItem("_curr", JSON.stringify(_this.currencies[0]));
+            }
+            else {
+                var find = _this.currencies.find(function (currency) { return currency.id == _this.selectedCurrency.id; });
+                if (!find) {
+                    _this.isCurrencySet = true;
+                    _this.selectedCurrency = _this.currencies[0];
+                    localStorage.setItem("_curr", JSON.stringify(_this.currencies[0]));
+                }
             }
         }, function (error) {
         });
@@ -169,6 +186,11 @@ var MainHeaderComponent = /** @class */ (function () {
             _this.totalLayCredit = res.total_available_points;
         }, (function (error) {
         }));
+    };
+    MainHeaderComponent.prototype.openSignModal = function () {
+        console.log('sd');
+        var modalRef = this.modalService.open(auth_component_1.AuthComponent);
+        $('#sign_in_modal').modal('show');
     };
     MainHeaderComponent = __decorate([
         core_1.Component({

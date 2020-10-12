@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-flight-traveler',
@@ -32,6 +33,8 @@ export class FlightTravelerComponent implements OnInit {
   userDetails;
   partialPaymentAmount:number=0;
   showPartialPayemntOption:boolean=false;
+  isComplete : boolean = false;
+
   
   constructor(
     private travelerService:TravelerService,
@@ -64,23 +67,29 @@ export class FlightTravelerComponent implements OnInit {
   
   
   getTravelers() {
+    this._adults = this._childs = this._infants = this.travelers= [];
+    
 
-    this._adults = this._childs = this._infants = [];
     let userToken = localStorage.getItem('_lay_sess');
     if(userToken && userToken != 'undefined'){
-      this.is_traveller = true;
-     
+      this.is_traveller = true;     
       this.travelerService.getTravelers().subscribe((res:any)=>{
-        this.travelers = res.data;
-        this.travelers.forEach(element => {
-          if(element.user_type == 'adult'){
-            this._adults.push(element);
-          } else if(element.user_type == 'child'){
-            this._childs.push(element);          
-          }else if(element.user_type == 'infant'){
-            this._infants.push(element);          
-          }
-        });  
+      this.travelers = res.data;        
+
+      this.travelers.forEach(element => {
+        
+        if(element.user_type == 'adult') {                              
+          element.isComplete  = this.checkTravellerComplete(element,'adult');            
+          this._adults.push(element);
+
+        } else if(element.user_type == 'child'){
+          element.isComplete  = this.checkTravellerComplete(element,'child');            
+          this._childs.push(element);          
+        }else if(element.user_type == 'infant'){
+          element.isComplete  = this.checkTravellerComplete(element,'infant');            
+          this._infants.push(element);          
+        }
+      });  
         this.loading = false;
       })
     } else {
@@ -90,6 +99,41 @@ export class FlightTravelerComponent implements OnInit {
     setTimeout(() => {
       this.loading = false;      
     }, 2000);
+  }
+
+  checkTravellerComplete(object,type){
+    let isEmpty = false;
+    if(type == 'adult'){
+      let travellerKeys = ["firstName","lastName","email","dob","gender","phoneNo","title"];
+      isEmpty = this.checkObj(object,travellerKeys);     
+
+    } else if(type == 'child'){
+      let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
+      isEmpty = this.checkObj(object,travellerKeys);
+
+    } else if(type == 'infant'){
+      let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
+      isEmpty = this.checkObj(object,travellerKeys);
+
+    }
+    return isEmpty;
+    
+
+  }
+  
+  
+  checkObj(obj,travellerKeys){ 
+    let isComplete = true;
+    // obj.firstName = '';
+  
+    const userStr = JSON.stringify(obj);
+    
+    JSON.parse(userStr, (key, value) => {
+      if(!value &&  travellerKeys.indexOf(key) !== -1){
+        return isComplete = false;                
+      }          
+    });
+    return isComplete;
   }
 
   getAdultCount(count: number){  
@@ -118,13 +162,11 @@ export class FlightTravelerComponent implements OnInit {
   }
 
   checkUser(){
-   
-
+  
     this.userDetails = getLoginUserInfo();
-
     if(this.isLoggedIn && this.userDetails.roleId != 7 && !this.is_updateToken){
       this.is_updateToken = this.is_traveller = true ;
-      this.getTravelers();
+      // this.getTravelers();
     } 
     let userToken = localStorage.getItem('_lay_sess');    
     if(userToken && userToken != 'undefined'){

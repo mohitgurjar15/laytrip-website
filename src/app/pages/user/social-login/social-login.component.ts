@@ -30,11 +30,8 @@ export class SocialLoginComponent implements OnInit {
   auth2: any;
 
   ngOnInit() {
-    let userToken = localStorage.getItem('_lay_sess');
-    if(!userToken){
-      this.loadGoogleSdk();
-      this.loadFacebookSdk();
-    }
+    this.loadGoogleSdk();
+    this.loadFacebookSdk();
   }
 
   loadGoogleSdk() {
@@ -122,7 +119,6 @@ export class SocialLoginComponent implements OnInit {
   fbLogin() {
    
     window['FB'].login((response) => {          
-
       if (response.authResponse) {
 
         window['FB'].api('/me', {

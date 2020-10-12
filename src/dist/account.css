@@ -1472,6 +1472,256 @@
     width: 200px;
   }
 }
+.account_part .account_cnt_main.booking_main .pay_modal_cnt {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top {
+  position: relative;
+  margin: 0 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #8188AB;
+  margin: 0;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top p span {
+  color: #000000;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a {
+  line-height: 22px;
+  background: #00AEEF;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0 20px;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #FC7E66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a:hover {
+  border-color: #FC7E66;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a:hover:before {
+  height: 190%;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner {
+  width: 100%;
+  padding: 0 0 30px;
+  position: relative;
+  z-index: 9;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .block_title {
+  width: 100%;
+  padding: 15px 30px;
+  background: #FAFAFA;
+  margin: 0 0 20px;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .block_title h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li {
+  width: 100%;
+  padding: 0 0 15px;
+  display: flex;
+}
+@media (max-width: 575px) {
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li {
+    flex-flow: column;
+  }
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li span {
+  min-width: 225px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+  display: inline-block;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188AB;
+  margin: 0;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li p a {
+  color: #00AEEF;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li:last-child {
+  padding: 0;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact {
+  display: flex;
+  margin: 10px 0 30px;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact li {
+  width: auto;
+  padding: 0 50px 0 0;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact li a {
+  font-size: 20px;
+  font-weight: 500;
+  color: #00AEEF;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact li a i {
+  margin: 0 10px 0 0;
+  color: #8188AB;
+  font-size: 16px;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right {
+  width: 210px;
+  padding: 6px 15px;
+  display: flex;
+  align-items: center;
+  background: #1943FF;
+  border-radius: 8px;
+  margin: 0 0 0 50px;
+}
+@media (max-width: 767px) {
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right {
+    margin: 30px 0 0;
+  }
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right p {
+  font-size: 10px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right p span {
+  font-size: 14px;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right .pay_status {
+  width: auto;
+  background: #ffffff;
+  padding: 2px 7px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00BFFD;
+  white-space: nowrap;
+  border-radius: 5px;
+  margin: 0 0 0 25px;
+}
+@media (max-width: 767px) {
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info {
+    flex-flow: column;
+  }
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table {
+  width: 100%;
+  border: 1px solid #E0E2E5;
+  border-radius: 3px;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr th {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188AB;
+  text-align: center;
+  border: 1px solid #E0E2E5;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr th:first-child {
+  width: 100px;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr th:last-child {
+  width: 200px;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td {
+  padding: 10px;
+  border: 1px solid #E0E2E5;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  text-align: center;
+  vertical-align: top;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td span.status_paid {
+  color: #19DD00;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td span.status_pending {
+  color: #FEDD00;
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td:last-child {
+  width: 400px;
+  max-width: 100%;
+}
+@media only screen and (max-width: 800px) {
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr {
+    display: none;
+  }
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td {
+    display: block;
+    border: none;
+    border-bottom: 1px solid #E0E2E5;
+    position: relative;
+    padding-top: 35px;
+    white-space: normal;
+    text-align: left;
+  }
+  .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td:before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    content: attr(data-title);
+    color: #8188AB;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+.account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner:last-child {
+  padding: 0;
+}
 .account_part .account_cnt_main .block_card_list_main {
   padding: 20px 0;
   display: flex;
@@ -2379,6 +2629,31 @@
   font-size: 12px;
   font-weight: 500;
   color: #8188AB;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available img {
+  width: 250px;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available h5 {
+  font-size: 40px;
+  color: #FC7E66;
+  font-weight: 600;
+  margin: 30px 0 0;
+}
+@media (max-width: 767px) {
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available {
+    padding: 20px;
+  }
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available img {
+    width: 150px;
+  }
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available h5 {
+    font-size: 20px;
+  }
 }
 .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list {
   padding: 25px 15px;

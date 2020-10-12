@@ -20,11 +20,8 @@ var SocialLoginComponent = /** @class */ (function () {
         this.test = false;
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
-        var userToken = localStorage.getItem('_lay_sess');
-        if (!userToken) {
-            this.loadGoogleSdk();
-            this.loadFacebookSdk();
-        }
+        this.loadGoogleSdk();
+        this.loadFacebookSdk();
     };
     SocialLoginComponent.prototype.loadGoogleSdk = function () {
         var _this = this;

@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo } from '../../_helpers/jwt.helper';
+import { AuthComponent } from '../../pages/user/auth/auth.component';
 declare var $: any;
 
 @Component({
@@ -77,7 +78,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       /* if(this.userDetails.roleId!=7){
         this.totalLaycredit();
       } */
-    }
+    }    
   }
 
   ngDoCheck() {
@@ -220,5 +221,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     },(error=>{
 
     }))
+  }
+
+  openSignModal() {
+    console.log('sd')
+    const modalRef = this.modalService.open(AuthComponent);
+    $('#sign_in_modal').modal('show');
   }
 }

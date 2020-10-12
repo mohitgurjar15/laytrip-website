@@ -56,6 +56,7 @@ export class AdultListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this._adults)
     this.checkUser();
     this.getCountry();
     if (this.type == 'adult' && !this.isLoggedIn) {

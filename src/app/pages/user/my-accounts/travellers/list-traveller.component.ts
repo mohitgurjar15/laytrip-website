@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { TravellerFormComponent } from './traveller-form/traveller-form.component';
+import { ThrowStmt } from '@angular/compiler';
 declare var $: any;
 
 @Component({
@@ -29,6 +30,9 @@ export class ListTravellerComponent implements OnInit {
   limit:number;
   pageSize=10;
   showPaginationBar: boolean = false;
+  isMasterSel:boolean;
+  categoryList:any;
+  checkedCategoryList:any;
 
   constructor(
     public travelerService: TravelerService,
@@ -36,7 +40,10 @@ export class ListTravellerComponent implements OnInit {
     public modalService: NgbModal,
     private toastr: ToastrService
 
-  ) { }
+  ) {
+    this.isMasterSel = false;
+
+   }
 
 
   ngOnInit() {
@@ -45,6 +52,7 @@ export class ListTravellerComponent implements OnInit {
   
     this.loading = true;
     this.getTravelers();
+    this.getCheckedItemList();
   }
   pageChange(event) {
     this.loading = false;
@@ -54,7 +62,6 @@ export class ListTravellerComponent implements OnInit {
   getTravelers() {
     this.travelerService.getTravelers().subscribe((data: any) => {
       this.travelers = data.data;
-      console.log( this.travelers.length)
       this.loading = false;
       this.showPaginationBar =true;
       if(this.travelers.length === 0){
@@ -92,9 +99,10 @@ export class ListTravellerComponent implements OnInit {
   }
 
 
-  openTravellerModal(content, userId = '') {
+  openTravellerModal(content, userId = '',traveler='') {
     this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal',centered: true });
     (<TravellerFormComponent>this.modalReference.componentInstance).travellerId = userId;
+    (<TravellerFormComponent>this.modalReference.componentInstance).travelerInfo = traveler;
     this.modalReference.componentInstance.travelersChanges.subscribe(($e) => {
       const index = this.travelers.indexOf($e.userId, 0);
       if(index){
@@ -150,5 +158,33 @@ export class ListTravellerComponent implements OnInit {
     });
     this.modalReference.close();
   }
+  selectedAll: any;
+  selectedAllSecondname: any;
+  name: any;
 
+  checkUncheckAll() {
+    var checkboxes = document.getElementsByClassName('travelerCheckbox');
+    for (var i = 0; i < checkboxes.length; i++) {
+      this.travelers[i].isSelected = this.isMasterSel;      
+    }
+    console.log( this.travelers)
+    this.getCheckedItemList();
+  }
+  
+  isAllSelected() {
+    this.isMasterSel = this.travelers.every(function(item:any) {
+      return item.isSelected == true;
+    });
+    this.getCheckedItemList();
+  }
+
+  getCheckedItemList(){
+    this.checkedCategoryList = [];
+    for (var i = 0; i < this.travelers.length; i++) {
+      if(this.travelers[i].isSelected)
+      this.checkedCategoryList.push(this.travelers[i]);
+    }
+    this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
+  }
+  
 }

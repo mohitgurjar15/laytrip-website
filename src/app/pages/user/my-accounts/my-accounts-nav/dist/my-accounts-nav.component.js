@@ -39,6 +39,13 @@ var MyAccountsNavComponent = /** @class */ (function () {
         localStorage.removeItem('_lay_sess');
         this.router.navigate(['/']);
     };
+    MyAccountsNavComponent.prototype.onToggleSubMenu = function (event) {
+        this.expanded = !this.expanded;
+        if (this.expanded) {
+            this.expandedSecond = false;
+            this.expandedThird = false;
+        }
+    };
     MyAccountsNavComponent = __decorate([
         core_1.Component({
             selector: 'app-my-accounts-nav',

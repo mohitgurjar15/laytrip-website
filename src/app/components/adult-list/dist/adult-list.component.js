@@ -48,6 +48,7 @@ var AdultListComponent = /** @class */ (function () {
         };
     }
     AdultListComponent.prototype.ngOnInit = function () {
+        console.log(this._adults);
         this.checkUser();
         this.getCountry();
         if (this.type == 'adult' && !this.isLoggedIn) {

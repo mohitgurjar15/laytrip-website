@@ -8,6 +8,8 @@
                 <div class="account_cnt_main ac_notifications ac_mywallet">
                     <div class="block_laycredit_points">
                         <div class="block_points_info">
+                            <ul *ngIf="pointsLoading"><li><p class="fb_animation w-100 mb-0"></p></li>
+                                <li><p class="fb_animation w-100 mb-0"></p></li></ul>
                             <ul *ngIf="travellerPoints">
                                 <li>
                                     <span>Current</span>
@@ -65,23 +67,49 @@
                                 <div id="collapse-Earnings" class="collapse show" data-parent="#notification_content"
                                     role="tabpanel" aria-labelledby="heading-Earnings">
                                     <div class="card-body">
+                                        <div class="block_nocard_available" *ngIf="isEarningPointNotFound">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg" alt="Card Icon">
+                                            <h5>No Card Available</h5>
+                                        </div>
                                         <div class="block_notification">
                                             <div *ngIf="loading">
-                                                <ul>
-                                                    <li>
-                                                        <div class="traveller_list">
-                                                            <div class="list_block w-100">
-                                                                <div class="traveller_name">
-                                                                    <p class="fb_animation w-100 mb-2"></p>
-                                                                </div>
-                                                                <div class="traveller_age">
-                                                                    <p class="fb_animation w-25 mb-0"></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
+
                                             <div class="block_list" *ngFor="let item of earnedPoints; let i = index;">
                                                 <ul>
                                                     <li>{{i+1}}</li>
@@ -90,7 +118,7 @@
                                                             alt="">
                                                         {{item.points}} Points
                                                     </li>
-                                                    <li>{{item.earnDate}}</li>
+                                                    <li>{{ getDateFormat(item.earnDate) }}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -110,6 +138,10 @@
                                 <div id="collapse-Redeemed" class="collapse" data-parent="#notification_content"
                                     role="tabpanel" aria-labelledby="heading-Redeemed">
                                     <div class="card-body">
+                                        <div class="block_nocard_available" *ngIf="isRedeedemPointNotFound">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg" alt="Card Icon">
+                                            <h5>No Card Available</h5>
+                                        </div>
                                         <div class="block_notification">
                                             <div *ngIf="loading">
                                                 <ul>
@@ -135,7 +167,7 @@
                                                             alt="">
                                                         {{item.points}} Points
                                                     </li>
-                                                    <li>{{item.redeemDate}}</li>
+                                                    <li>{{ getDateFormat(item.redeemDate) }}</li>
                                                 </ul>
                                             </div>                                           
                                         </div>

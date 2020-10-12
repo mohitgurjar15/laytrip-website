@@ -25,7 +25,7 @@ export class TravelerFormComponent implements OnInit {
   @Input() countries: [];
   @Input() countries_code: [];
   @Output() travelerFormChange = new EventEmitter();
-  // @Output() auditFormStatus = new EventEmitter();
+  @Output() auditFormStatus = new EventEmitter();
 
   adultForm: FormGroup;
   submitted = false;
@@ -76,13 +76,12 @@ export class TravelerFormComponent implements OnInit {
 
     this.setUserTypeValidation();
     if (this.traveler.userId) {
-
       this.adultForm.patchValue({
-        title: this.traveler.title,
+        title: this.traveler.title ? this.traveler.title : 'mr',
         firstName: this.traveler.firstName,
         lastName: this.traveler.lastName,
         email: this.traveler.email,
-        gender: this.traveler.gender,
+        gender: this.traveler.gender ? this.traveler.gender : 'M',
         country_code: this.traveler.countryCode,
         phone_no: this.traveler.phoneNo,
         country_id: this.traveler.country != null ? this.traveler.country.name : '',
@@ -91,8 +90,8 @@ export class TravelerFormComponent implements OnInit {
         passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
         frequently_no: ''
       });
-      this.traveler.isComplete =  this.adultForm.status === 'VALID' ? true : false;
-      // this.auditFormStatus.emit(this.formStatus);
+      // this.traveler.isComplete =  this.adultForm.status == 'VALID' ? true : false;
+      // this.auditFormStatus.emit(this.traveler);
     }
   }
 

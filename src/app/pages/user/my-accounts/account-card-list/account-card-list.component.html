@@ -48,6 +48,41 @@
                 </div>
               </div>
             </div>
+            <div class="block_card_list" *ngIf="loading">
+              <div class="block_card_top">
+                <div class="block_card_bank w-50">
+                  <div class="w-100">
+                    <p class="fb_animation w-50 mb-2"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+                <div class="block_card_action w-25">
+                  <div class="w-100 h-100">
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="block_card_number">
+                <div class="w-100">
+                  <p class="fb_animation w-100 mb-0"></p>
+                  <p class="fb_animation w-100 mb-0"></p>
+                </div>
+              </div>
+              <div class="block_card_btm">
+                <div class="block_name w-50">
+                  <div class="w-75">
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+                <div class="block_expiry w-25">
+                  <div class="w-100">
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="block_card_list" *ngFor="let card of cardList">
               <div class="block_card_top">
                 <div class="block_card_bank">

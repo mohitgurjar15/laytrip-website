@@ -56,7 +56,7 @@ var ProfileComponent = /** @class */ (function () {
         this.getCurrencies();
         this.getProfileInfo();
         this.profileForm = this.formBuilder.group({
-            title: [''],
+            title: ['mr'],
             first_name: ['', [forms_1.Validators.required]],
             last_name: ['', [forms_1.Validators.required]],
             country_code: ['', [forms_1.Validators.required]],
@@ -68,7 +68,7 @@ var ProfileComponent = /** @class */ (function () {
             country_id: [''],
             state_id: [''],
             city_name: [''],
-            gender: [''],
+            gender: ['M'],
             profile_pic: [''],
             address2: [''],
             language_id: [''],
@@ -180,9 +180,9 @@ var ProfileComponent = /** @class */ (function () {
                 first_name: res.firstName,
                 last_name: res.lastName,
                 email: res.email,
-                gender: res.gender,
+                gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
-                title: res.title,
+                title: res.title ? res.title : 'mr',
                 dob: res.dob ? moment(res.dob).format('MM/DD/YYYY') : '',
                 country_code: res.countryCode,
                 phone_no: res.phoneNo,
@@ -214,6 +214,16 @@ var ProfileComponent = /** @class */ (function () {
         if (this.profileForm.invalid) {
             this.submitted = true;
             this.loading = false;
+            //scroll top if any error 
+            var scrollToTop_1 = window.setInterval(function () {
+                var pos = window.pageYOffset;
+                if (pos > 0) {
+                    window.scrollTo(0, pos - 20); // how far to scroll on each step
+                }
+                else {
+                    window.clearInterval(scrollToTop_1);
+                }
+            }, 16);
             return;
         }
         else {
@@ -236,11 +246,12 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("passportNumber", this.profileForm.value.passport_number);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
             formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
+            console.log(typeof this.profileForm.value.country_id);
             if (typeof this.profileForm.value.country_id === 'string') {
                 formdata.append("country_id", this.selectResponse.country.id);
             }
             else {
-                formdata.append("country_id", this.profileForm.value.country_id.id);
+                formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
             }
             if (typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
                 formdata.append("state_id", this.selectResponse.state.id);
@@ -252,7 +263,7 @@ var ProfileComponent = /** @class */ (function () {
                 formdata.append("country_code", this.selectResponse.countryCode);
             }
             else {
-                formdata.append("country_code", this.profileForm.value.country_code.name);
+                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.name : '');
             }
             if (!Number.isInteger(Number(this.profileForm.value.language_id))) {
                 formdata.append("language_id", this.selectResponse.preferredLanguage.id);
@@ -261,7 +272,7 @@ var ProfileComponent = /** @class */ (function () {
                 formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : 1);
             }
             if (!Number.isInteger(Number(this.profileForm.value.currency_id))) {
-                formdata.append("currency_id", this.selectResponse.preferredCurrency.id);
+                formdata.append("currency_id", this.selectResponse.preferredCurrency.id ? this.selectResponse.preferredCurrency.id : '');
             }
             else {
                 formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : 1);
