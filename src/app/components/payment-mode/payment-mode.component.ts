@@ -17,7 +17,8 @@ export class PaymentModeComponent implements OnInit {
     instalmentType:string,
     customAmount:number,
     customInstalment:number,
-    layCreditPoints:number
+    layCreditPoints:number,
+    partialPaymentAmount:number
   }>(); 
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
@@ -62,13 +63,15 @@ export class PaymentModeComponent implements OnInit {
   biWeeklyDefaultInstalment:number=0;
   monthlyDefaultInstalmentNo:number=0;
   monthlyDefaultInstalment:number=0;
+  upFrontPayment:number=0;
 
-  ngOnInit() {
+  async ngOnInit() {
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
-    this.getInstalemnts('biweekly');
-    this.getInstalemnts('monthly');
-    this.getInstalemnts('weekly');
+    await this.getInstalemnts('biweekly');
+    await this.getInstalemnts('monthly');
+    await this.getInstalemnts('weekly');
+    console.log("this.customInstalmentData",this.customInstalmentData)
     if(Object.keys(this.customInstalmentData).length){
       this.additionalAmount = this.customInstalmentData.additionalAmount;
       this.durationType = this.customInstalmentData.instalmentType;
@@ -76,9 +79,9 @@ export class PaymentModeComponent implements OnInit {
       this.customInstalment = this.customInstalmentData.customInstalment;
       this.laycreditpoints = this.customInstalmentData.layCreditPoints;
 
+      this.instalmentRequest.instalment_type = this.durationType;
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
       this.instalmentRequest.custom_amount = this.customAmount;
-      console.log("this.customInstalmentDatathis.customInstalmentData",this.customInstalmentData)
       this.calculateInstalment();
     }
   }
@@ -87,7 +90,7 @@ export class PaymentModeComponent implements OnInit {
     this.showFirstAccrodian = !this.showFirstAccrodian;
   }
 
-  changeAdditionalAmount(event){
+  /* changeAdditionalAmount(event){
 
     this.additionalAmount = Number(event.target.value);
 
@@ -98,8 +101,32 @@ export class PaymentModeComponent implements OnInit {
       instalmentType:this.durationType, 
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
     })
+    this.calculateInstalment();
+  } */
+  changeAdditionalAmount(event){
+
+    this.upFrontPayment = Number(event.target.value);
+    if(this.upFrontPayment<this.defaultInstalment){
+      this.upFrontPayment=this.defaultInstalment;
+    }
+
+    this.remainingAmount=this.remainingAmount-this.upFrontPayment;
+    this.firstInstalment=this.upFrontPayment;
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.upFrontPayment-this.defaultInstalment, 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no,
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
+    })
+
+    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
+      this.toggleFullPayment();
+    }
     this.calculateInstalment();
   }
 
@@ -114,7 +141,8 @@ export class PaymentModeComponent implements OnInit {
       instalmentType:this.durationType, 
       customAmount: this.customAmount,
       customInstalment : null,
-      layCreditPoints : this.laycreditpoints
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
     })
     this.calculateInstalment();
   }
@@ -133,34 +161,43 @@ export class PaymentModeComponent implements OnInit {
 
         if(type=='weekly'){
           this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
-          this.weeklyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+          this.weeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
         }
 
         if(type=='biweekly'){
           this.biWeeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
-          this.biWeeklyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+          this.biWeeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
         }
 
         if(type=='monthly'){
           this.monthlyDefaultInstalmentNo = this.instalments.instalment_date.length;
-          this.monthlyDefaultInstalment = this.instalments.instalment_date[0].instalment_amount;
+          this.monthlyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
         }
 
         this.instalmentAvavible=true;
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
         this.defaultInstalment  = this.instalments.instalment_date[0].instalment_amount;
+        this.upFrontPayment  = this.instalments.instalment_date[0].instalment_amount;
         this.customAmount     = this.instalments.instalment_date[0].instalment_amount;
         this.customInstalment = this.instalments.instalment_date.length;
         this.defaultInstalmentNo = this.instalments.instalment_date.length;
         this.remainingInstalment = this.instalments.instalment_date.length-1;
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
+
+        this.getInstalmentData.emit({ 
+          additionalAmount:this.upFrontPayment-this.defaultInstalment, 
+          instalmentType:this.durationType, 
+          customAmount: this.instalmentRequest.custom_amount,
+          customInstalment : this.instalmentRequest.custom_instalment_no,
+          layCreditPoints : this.laycreditpoints,
+          partialPaymentAmount : this.secondInstalment
+        })
+        
       }
       else{
-        console.log("this.instalmentAvavible",this.instalmentAvavible)
         this.instalmentAvavible=false;
         this.selectInstalmentMode.emit('no-instalment');
-        
       }
     },(err)=>{
 
@@ -175,43 +212,53 @@ export class PaymentModeComponent implements OnInit {
     this.instalmentRequest.custom_amount=null;
     this.instalmentRequest.custom_instalment_no=null;
     this.instalmentRequest.additional_amount=0;
+    
+    this.getInstalemnts(this.durationType);
     this.getInstalmentData.emit({ 
       additionalAmount:this.additionalAmount , 
       instalmentType:this.durationType, 
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
     })
-    this.getInstalemnts(this.durationType);
+
+    console.log("this.sec",this.secondInstalment)
 
   }
 
   triggerPayemntMode(type){
+    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))<=this.flightSummary[0].selling_price){
+      if( type=='instalment'){
 
-    if(type=='instalment'){
+        this.isInstalemtMode = true;
+        this.getInstalmentData.emit({ 
+          additionalAmount:this.additionalAmount , 
+          instalmentType:this.durationType, 
+          customAmount: this.customAmount,
+          customInstalment : null,
+          layCreditPoints :this.laycreditpoints,
+          partialPaymentAmount : this.secondInstalment
+        })
+      }
 
-      this.isInstalemtMode = true;
-      this.getInstalmentData.emit({ 
-        additionalAmount:this.additionalAmount , 
-        instalmentType:this.durationType, 
-        customAmount: this.customAmount,
-        customInstalment : null,
-        layCreditPoints :this.laycreditpoints
-      })
-    }
+      if(type=='no-instalment'){
 
-    if(type=='no-instalment'){
-
+        this.isInstalemtMode = false;
+        this.getInstalmentData.emit({ 
+          additionalAmount:this.additionalAmount , 
+          instalmentType:'', 
+          customAmount: null,
+          customInstalment : null,
+          layCreditPoints :this.laycreditpoints,
+          partialPaymentAmount : this.instalments.instalment_date[1].instalment_amount
+        })
+      }
+      this.selectInstalmentMode.emit(type)
+    } 
+    else{
       this.isInstalemtMode = false;
-      this.getInstalmentData.emit({ 
-        additionalAmount:this.additionalAmount , 
-        instalmentType:'', 
-        customAmount: null,
-        customInstalment : null,
-        layCreditPoints :this.laycreditpoints
-      })
     }
-    this.selectInstalmentMode.emit(type)
 
   }
 
@@ -239,7 +286,8 @@ export class PaymentModeComponent implements OnInit {
       instalmentType:this.durationType, 
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
     })
     this.calculateInstalment();
 
@@ -270,7 +318,8 @@ export class PaymentModeComponent implements OnInit {
         instalmentType:this.durationType, 
         customAmount: this.customAmount,
         customInstalment : null,
-        layCreditPoints : this.laycreditpoints
+        layCreditPoints : this.laycreditpoints,
+        partialPaymentAmount : this.secondInstalment
       })
     }
   }
@@ -301,7 +350,8 @@ export class PaymentModeComponent implements OnInit {
       instalmentType:this.durationType, 
       customAmount: null,
       customInstalment : this.customInstalment,
-      layCreditPoints : this.laycreditpoints
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
     })
   }
 
@@ -324,7 +374,8 @@ export class PaymentModeComponent implements OnInit {
       instalmentType:this.durationType, 
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
     })
     this.customAmount = this.defaultInstalment;
     this.customInstalment = this.defaultInstalmentNo;
@@ -344,7 +395,7 @@ export class PaymentModeComponent implements OnInit {
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
 
-    this.instalmentRequest.additional_amount=this.additionalAmount + Number(this.laycreditpoints);
+    this.instalmentRequest.additional_amount=(this.upFrontPayment-this.defaultInstalment) + Number(this.laycreditpoints);
 
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
@@ -354,28 +405,7 @@ export class PaymentModeComponent implements OnInit {
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
         this.remainingInstalment = this.instalments.instalment_date.length-1;
-        if(this.firstInstalment>=this.flightSummary[0].selling_price){
-          this.isInstalemtMode = false;
-          this.selectInstalmentMode.emit('no-instalment')
-
-          this.getInstalmentData.emit({ 
-            additionalAmount:0, 
-            instalmentType:'', 
-            customAmount: null,
-            customInstalment : null,
-            layCreditPoints : this.laycreditpoints
-          });
-
-          this.additionalAmount=0;
-          //this.customAmount=0;
-          //this.customInstalment=null;
-          this.customAmount = this.defaultInstalment;
-          this.customInstalment = this.defaultInstalmentNo;
-          this.instalmentRequest.custom_amount=null;
-          this.instalmentRequest.custom_instalment_no=null;
-          this.instalmentRequest.additional_amount=0;
-          this.calculateInstalment();
-        }
+        
       }
     },(err)=>{
 
@@ -390,9 +420,38 @@ export class PaymentModeComponent implements OnInit {
         instalmentType:this.durationType, 
         customAmount: this.instalmentRequest.custom_amount,
         customInstalment : this.instalmentRequest.custom_instalment_no,
-        layCreditPoints : this.laycreditpoints
+        layCreditPoints : this.laycreditpoints,
+        partialPaymentAmount : this.secondInstalment
       })
+      
+      if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
+        this.toggleFullPayment();
+      }
       this.calculateInstalment();
     }
+  }
+
+  toggleFullPayment(){
+    this.isInstalemtMode = false;
+    this.selectInstalmentMode.emit('no-instalment');
+    this.firstInstalment = this.defaultInstalment;
+    this.getInstalmentData.emit({ 
+      additionalAmount:0, 
+      instalmentType:'', 
+      customAmount: null,
+      customInstalment : null,
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment
+    });
+
+    this.upFrontPayment = this.defaultInstalment;
+    this.firstInstalment = this.defaultInstalment;
+    this.additionalAmount=0;
+    this.customAmount = this.defaultInstalment;
+    this.customInstalment = this.defaultInstalmentNo;
+    this.instalmentRequest.custom_amount=null;
+    this.instalmentRequest.custom_instalment_no=null;
+    this.instalmentRequest.additional_amount=0;
+    this.calculateInstalment();
   }
 }

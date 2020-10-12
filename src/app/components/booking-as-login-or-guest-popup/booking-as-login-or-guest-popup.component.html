@@ -18,10 +18,12 @@
               Continue
           </a>
 
-          <a *ngIf="userType=='guest'" >
+
+          <a  *ngIf="userType=='guest'" (click)="redirectToTraveler()" >
               <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Left Arrow">
               Continue
           </a>
       </div>
   </div>
 </div>
+

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-as-login-or-guest-popup',
@@ -14,7 +14,8 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
   routeCode:string;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router :Router
   ) { }
   ngOnInit() {
   	this.routeCode = this.route.snapshot.paramMap.get('rc');
@@ -27,4 +28,7 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
   	}
   }
 
+  redirectToTraveler(){
+    this.router.navigate([`flight/traveler/${this.routeCode}`]);
+  }
 }
