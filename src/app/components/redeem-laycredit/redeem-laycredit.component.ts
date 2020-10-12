@@ -26,8 +26,6 @@ export class RedeemLaycreditComponent implements OnInit {
 
   ngOnInit() {
     this.totalLaycredit();
-    console.log("Im in",this.sellingPrice)
-    
   }
 
   totalLaycredit(){
@@ -66,7 +64,6 @@ export class RedeemLaycreditComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("yupp",changes)
     if (changes['sellingPrice'].currentValue!='undefined') {
       
         this.sellingPrice = changes['sellingPrice'].currentValue;

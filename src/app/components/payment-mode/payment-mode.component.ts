@@ -18,7 +18,8 @@ export class PaymentModeComponent implements OnInit {
     customAmount:number,
     customInstalment:number,
     layCreditPoints:number,
-    partialPaymentAmount:number
+    partialPaymentAmount:number,
+    payNowAmount:number
   }>(); 
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
@@ -64,6 +65,7 @@ export class PaymentModeComponent implements OnInit {
   monthlyDefaultInstalmentNo:number=0;
   monthlyDefaultInstalment:number=0;
   upFrontPayment:number=0;
+  payNowPrice:number=0;
 
   async ngOnInit() {
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
@@ -121,7 +123,8 @@ export class PaymentModeComponent implements OnInit {
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount()
     })
 
     if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
@@ -142,7 +145,8 @@ export class PaymentModeComponent implements OnInit {
       customAmount: this.customAmount,
       customInstalment : null,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount()
     })
     this.calculateInstalment();
   }
@@ -191,7 +195,8 @@ export class PaymentModeComponent implements OnInit {
           customAmount: this.instalmentRequest.custom_amount,
           customInstalment : this.instalmentRequest.custom_instalment_no,
           layCreditPoints : this.laycreditpoints,
-          partialPaymentAmount : this.secondInstalment
+          partialPaymentAmount : this.secondInstalment,
+          payNowAmount:this.getPayNowAmount()
         })
         
       }
@@ -220,7 +225,8 @@ export class PaymentModeComponent implements OnInit {
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount()
     })
 
     console.log("this.sec",this.secondInstalment)
@@ -238,20 +244,23 @@ export class PaymentModeComponent implements OnInit {
           customAmount: this.customAmount,
           customInstalment : null,
           layCreditPoints :this.laycreditpoints,
-          partialPaymentAmount : this.secondInstalment
+          partialPaymentAmount : this.secondInstalment,
+          payNowAmount:this.getPayNowAmount()
         })
       }
 
       if(type=='no-instalment'){
 
         this.isInstalemtMode = false;
+       
         this.getInstalmentData.emit({ 
           additionalAmount:this.additionalAmount , 
           instalmentType:'', 
           customAmount: null,
           customInstalment : null,
           layCreditPoints :this.laycreditpoints,
-          partialPaymentAmount : this.instalments.instalment_date[1].instalment_amount
+          partialPaymentAmount : this.instalments.instalment_date[1].instalment_amount,
+          payNowAmount:this.getPayNowAmount()
         })
       }
       this.selectInstalmentMode.emit(type)
@@ -287,7 +296,8 @@ export class PaymentModeComponent implements OnInit {
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount()
     })
     this.calculateInstalment();
 
@@ -319,7 +329,8 @@ export class PaymentModeComponent implements OnInit {
         customAmount: this.customAmount,
         customInstalment : null,
         layCreditPoints : this.laycreditpoints,
-        partialPaymentAmount : this.secondInstalment
+        partialPaymentAmount : this.secondInstalment,
+        payNowAmount:this.getPayNowAmount()
       })
     }
   }
@@ -351,7 +362,8 @@ export class PaymentModeComponent implements OnInit {
       customAmount: null,
       customInstalment : this.customInstalment,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount()
     })
   }
 
@@ -375,7 +387,8 @@ export class PaymentModeComponent implements OnInit {
       customAmount: this.instalmentRequest.custom_amount,
       customInstalment : this.instalmentRequest.custom_instalment_no,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount()
     })
     this.customAmount = this.defaultInstalment;
     this.customInstalment = this.defaultInstalmentNo;
@@ -421,7 +434,8 @@ export class PaymentModeComponent implements OnInit {
         customAmount: this.instalmentRequest.custom_amount,
         customInstalment : this.instalmentRequest.custom_instalment_no,
         layCreditPoints : this.laycreditpoints,
-        partialPaymentAmount : this.secondInstalment
+        partialPaymentAmount : this.secondInstalment,
+        payNowAmount:this.getPayNowAmount()
       })
       
       if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
@@ -441,7 +455,8 @@ export class PaymentModeComponent implements OnInit {
       customAmount: null,
       customInstalment : null,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount()
     });
 
     this.upFrontPayment = this.defaultInstalment;
@@ -453,5 +468,18 @@ export class PaymentModeComponent implements OnInit {
     this.instalmentRequest.custom_instalment_no=null;
     this.instalmentRequest.additional_amount=0;
     this.calculateInstalment();
+  }
+
+  getPayNowAmount(){
+    if(this.isInstalemtMode){
+
+      this.payNowPrice= this.upFrontPayment;
+    }
+    else{
+
+      this.payNowPrice = Number(this.flightSummary[0].selling_price) -Number(this.laycreditpoints);
+    }
+
+    return this.payNowPrice;
   }
 }

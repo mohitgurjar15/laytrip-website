@@ -27,17 +27,6 @@
                             <app-booking-enquiry-info></app-booking-enquiry-info>
                         </div>
                   </div>
-                  <!-- <div class="block_condition_agree">
-                    <ul>
-                        <li>
-                            <label class="custom_checkbox">
-                                <input type="checkbox" value="">
-                                <span class="checkmark"></span>
-                            </label>
-                            <p>I agree <a href="javascript:void(0);">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
-                        </li>
-                    </ul>
-                   </div> -->
 
                 <div class="btn_payment">
                     <a class="btn btn_laytrip" (click)="checkUserAndRedirect()">Continue to guest detail<img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
@@ -47,7 +36,14 @@
               
           </div>
           <div class="col-lg-4">
-            <app-flight-summary checkAvailability="local" (flightAvailable)="flightAvailable($event)" [showPartialPayemntOption]="showPartialPayemntOption" partialPaymentAmount={{partialPaymentAmount}}></app-flight-summary>
+            <app-flight-summary 
+                checkAvailability="local" 
+                (flightAvailable)="flightAvailable($event)" 
+                [showPartialPayemntOption]="showPartialPayemntOption" 
+                partialPaymentAmount={{partialPaymentAmount}}
+                payNowAmount={{payNowAmount}}
+                >
+            </app-flight-summary>
           </div>
       </div>
   </div>
