@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterContentChecked, ViewChild } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
@@ -17,11 +17,13 @@ declare var $: any;
 })
 export class MainHeaderComponent implements OnInit, DoCheck {
 
+  @ViewChild(MainHeaderComponent) headerComponent: MainHeaderComponent;
+
   s3BucketUrl = environment.s3BucketUrl;
   langunages: Langunage[] = [];
   selectedLanunage: Langunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
   isLanunageSet: boolean = false;
-  defaultImage = this.s3BucketUrl+'assets/images/profile_im.svg';
+  defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
 
   currencies: Currency[] = [];
   selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
@@ -31,13 +33,13 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   showTotalLayCredit = 0;
   userDetails;
   username;
-  _isLayCredit =false;
+  _isLayCredit = false;
 
   constructor(
     private genericService: GenericService,
     public translate: TranslateService,
     public modalService: NgbModal,
-    public router: Router
+    public router: Router,
   ) {
     let _langunage = localStorage.getItem('_lang');
     let _currency = localStorage.getItem('_curr');
@@ -74,21 +76,25 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getLangunages();
     this.getCurrencies();
     this.loadJquery();
-    if(this.isLoggedIn){
-      /* if(this.userDetails.roleId!=7){
+    if (this.isLoggedIn) {
+      if (this.userDetails.roleId != 7) {
         this.totalLaycredit();
-      } */
-    }    
+      }
+    }
+  }
+
+  ngAfterContentChecked() {
+   
   }
 
   ngDoCheck() {
     this.checkUser();
     // this.userDetails = getLoginUserInfo();
-    //this.totalLaycredit();
+    // this.totalLaycredit();
   }
 
-  ngOnChanges(){
-    //this.totalLaycredit();
+  ngOnChanges() {
+    // this.totalLaycredit();
   }
   /**
    * change user lanunage
@@ -115,12 +121,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           this.selectedLanunage = this.langunages[0];
           localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
         }
-        else{
-          let find= this.langunages.find(langunage=> langunage.id == this.selectedLanunage.id)
-          if(!find){
+        else {
+          let find = this.langunages.find(langunage => langunage.id == this.selectedLanunage.id)
+          if (!find) {
             this.isLanunageSet = true;
-          this.selectedLanunage = this.langunages[0];
-          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+            this.selectedLanunage = this.langunages[0];
+            localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
           }
         }
       },
@@ -149,9 +155,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
           localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
         }
-        else{
-          let find= this.currencies.find(currency=> currency.id == this.selectedCurrency.id)
-          if(!find){
+        else {
+          let find = this.currencies.find(currency => currency.id == this.selectedCurrency.id)
+          if (!find) {
             this.isCurrencySet = true;
             this.selectedCurrency = this.currencies[0];
             localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
@@ -173,15 +179,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   checkUser() {
     let userToken = localStorage.getItem('_lay_sess');
-  
+
     this.isLoggedIn = false;
     if (userToken && userToken != 'undefined' && userToken != 'null') {
       this.isLoggedIn = true;
       this.userDetails = getLoginUserInfo();
-      if(this.userDetails.roleId!=7 && !this._isLayCredit){
-        this.totalLaycredit();
-      }
-      this.showTotalLayCredit = this.totalLayCredit;
+      // if (this.userDetails.roleId != 7 && !this._isLayCredit ) {
+      //   this.totalLaycredit();
+      // }
     }
   }
 
@@ -214,17 +219,16 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     // Close sticky header js
   }
 
-  totalLaycredit(){
+  totalLaycredit() {
     this._isLayCredit = true;
-    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
-      this.totalLayCredit=res.total_available_points;
-    },(error=>{
+    this.genericService.getAvailableLaycredit().subscribe((res: any) => {
+      this.totalLayCredit = res.total_available_points;
+    }, (error => {
 
     }))
   }
 
   openSignModal() {
-    console.log('sd')
     const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
   }
