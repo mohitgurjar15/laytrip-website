@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
@@ -21,6 +21,7 @@ interface SliderDetails {
 export class FilterFlightComponent implements OnInit, OnDestroy {
 
   @Input() filterFlightDetails: any;
+  @Input() isResetFilter:string;
   @Output() filterFlight=new EventEmitter();
   depatureTimeSlot;
   arrivalTimeSlot;
@@ -81,6 +82,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log("this.",this.filterFlightDetails)
     // let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(this._currency);
     // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
@@ -491,5 +493,25 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       })
     }
     this.filterFlight.emit(filterdFlights); 
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("innn",changes)
+    if (changes['isResetFilter']) {
+      this.isResetFilter = changes['isResetFilter'].currentValue;
+      this.minPrice=this.filterFlightDetails.min_price;
+      this.maxPrice=this.filterFlightDetails.max_price;
+      //this.priceOptions = Object.assign({}, this.priceOptions, {ceil : this.maxPrice, floor:this.minPrice});    
+      this.airLines=[];
+      this.minPartialPaymentPrice=0;
+      this.maxPartialPaymentPrice=0;
+      this.outBoundDepartureTimeRangeSlots=[];
+      this.outBoundArrivalTimeRangeSlots=[];
+      this.inBoundDepartureTimeRangeSlots=[];
+      this.inBoundArrivalTimeRangeSlots=[];
+      this.outBoundStops=[];
+      this.inBoundStops=[];
+      this.filterFlights();
+    }
   }
 }

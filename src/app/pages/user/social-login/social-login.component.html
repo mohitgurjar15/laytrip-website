@@ -5,7 +5,7 @@
     <li><a href="javascript:void(0);"class="g-signin2" #loginRef  #closeAddExpenseModal><img src="{{s3BucketUrl}}assets/images/icon/google.svg"
                 alt="Google">
             Google</a></li>
-    <li><a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg"
+    <li><a href="javascript:void(0);" (click)="loginWithApple()"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg"
                 alt="Apple"> Apple
             ID</a></li>
 </ul>

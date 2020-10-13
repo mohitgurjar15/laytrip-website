@@ -31,13 +31,6 @@ var FullPageOverlayLoaderComponent = /** @class */ (function () {
     FullPageOverlayLoaderComponent.prototype.play = function () {
         this.anim.play();
     };
-    FullPageOverlayLoaderComponent.prototype.pause = function () {
-        this.anim.pause();
-    };
-    FullPageOverlayLoaderComponent.prototype.setSpeed = function (speed) {
-        this.animationSpeed = speed;
-        this.anim.setSpeed(speed);
-    };
     __decorate([
         core_1.Input()
     ], FullPageOverlayLoaderComponent.prototype, "image");

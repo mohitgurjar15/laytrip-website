@@ -19,6 +19,8 @@ export class SortFlightComponent implements OnInit {
    }
   @Output() sortFlight = new EventEmitter<{ key:string, order:string }>();
   @Input() flightDetails;
+  sortType:string='lh_price';
+
   ngOnInit() {
     this.loadJquery();
   }
@@ -34,7 +36,14 @@ export class SortFlightComponent implements OnInit {
     });
   }
 
-  sortFlightData(key,order){
+  sortFlightData(key,order,name){
+
+    this.sortType=name;
+    this.sortFlight.emit({ key , order })
+  }
+
+  resetFilter(key,order){
+    this.sortType='lh_price';
     this.sortFlight.emit({ key , order })
   }
 

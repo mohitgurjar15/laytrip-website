@@ -8,7 +8,7 @@ import { UserRoutingModule } from './user-routing.module';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    UserRoutingModule
+    UserRoutingModule,
   ],
   declarations: [],
 })

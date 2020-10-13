@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
-
+import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
+import { getUserDetails } from '../../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-social-login',
@@ -16,14 +18,15 @@ declare var $: any;
 
 export class SocialLoginComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  apiError :string =  '';
-  test : boolean = false;
+  apiError: string = '';
+  test: boolean = false;
 
   constructor(
     private userService: UserService,
     public router: Router,
     public modalService: NgbModal,
-    public location: Location
+    public location: Location,
+    private authService: SocialAuthService
   ) { }
 
   @ViewChild('loginRef') loginElement: ElementRef;
@@ -32,6 +35,28 @@ export class SocialLoginComponent implements OnInit {
   ngOnInit() {
     this.loadGoogleSdk();
     this.loadFacebookSdk();
+    this.authService.authState.subscribe((userInfo: any) => {
+      if (userInfo) {
+        console.log('USER:::::', userInfo);
+        console.log('USER:::::authorization::', userInfo.authorization);
+        let objApple =  getUserDetails(userInfo.authorization.id_token);
+        console.log('apple::::', objApple);
+        let json_data = {
+          "account_type": 1,
+          "name": '',
+          "email": objApple.email,
+          "social_account_id": userInfo.authorization.code,
+          "device_type": 1,
+          "device_model": "RNE-L22",
+          "device_token": "123abc#$%456",
+          "app_version": "1.0",
+          "os_version": "7.0"
+        };
+        // this.userService.socialLogin(json_data).subscribe((data: any) => {
+        //   console.log(data);
+        // });
+      }
+    });
   }
 
   loadGoogleSdk() {
@@ -63,7 +88,7 @@ export class SocialLoginComponent implements OnInit {
       (googleUser) => {
 
         let profile = googleUser.getBasicProfile();
-        
+
         //YOUR CODE HERE
         let json_data = {
           "account_type": 1,
@@ -81,7 +106,7 @@ export class SocialLoginComponent implements OnInit {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
             this.router.url;
-            document.getElementById('navbarNav').click(); 
+            document.getElementById('navbarNav').click();
           }
         }, (error: HttpErrorResponse) => {
           console.log(error)
@@ -90,7 +115,7 @@ export class SocialLoginComponent implements OnInit {
         console.log(error)
       });
   }
-  ngOnDestroy() {} 
+  ngOnDestroy() { }
 
   loadFacebookSdk() {
 
@@ -117,8 +142,8 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
-   
-    window['FB'].login((response) => {          
+
+    window['FB'].login((response) => {
       if (response.authResponse) {
 
         window['FB'].api('/me', {
@@ -137,15 +162,15 @@ export class SocialLoginComponent implements OnInit {
           };
 
           this.userService.socialLogin(json_data).subscribe((data: any) => {
-            
+
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
               this.test = true;
-              document.getElementById('navbarNav').click(); 
-              this.router.url;  
-            } 
-           
+              document.getElementById('navbarNav').click();
+              this.router.url;
+            }
+
           }, (error: HttpErrorResponse) => {
             console.log(error)
           });
@@ -158,5 +183,9 @@ export class SocialLoginComponent implements OnInit {
     }, { scope: 'email' });
   }
 
-  ngDoCheck(){ }
+  loginWithApple(): void {
+    this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
+  }
+
+  ngDoCheck() { }
 }

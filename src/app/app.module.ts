@@ -13,6 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StateModule } from './state/state.module';
 import { ToastrModule } from 'ngx-toastr';
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,9 +38,25 @@ import { ToastrModule } from 'ngx-toastr';
     }),
     BrowserAnimationsModule,
     StateModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: AppleLoginProvider.PROVIDER_ID,
+            provider: new AppleLoginProvider(
+              'com.laytrip.laytrips'
+            ),
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

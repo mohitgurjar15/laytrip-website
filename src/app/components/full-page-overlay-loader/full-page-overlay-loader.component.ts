@@ -11,6 +11,7 @@ export class FullPageOverlayLoaderComponent implements OnInit {
   @Input() image:string;
   @Input() module:string;
   @Input() type:string;
+  
   s3BucketUrl = environment.s3BucketUrl;
   
   public lottieConfig: Object;
@@ -38,14 +39,5 @@ export class FullPageOverlayLoaderComponent implements OnInit {
 
   play() {
       this.anim.play();
-  }
-
-  pause() {
-      this.anim.pause();
-  }
-
-  setSpeed(speed: number) {
-      this.animationSpeed = speed;
-      this.anim.setSpeed(speed);
   }
 }

@@ -16,6 +16,7 @@ export class FlightSummaryComponent implements OnInit {
   @Input() checkAvailability:string;
   @Input() flightSummary:string;
   @Input() partialPaymentAmount:number=0;
+  @Input() payNowAmount:number=0;
 
   routeCode:string='';
   constructor(
@@ -59,7 +60,6 @@ export class FlightSummaryComponent implements OnInit {
   
   
   airRevalidate(){
-      console.log('here')
       let routeData={
         route_code: this.route.snapshot.paramMap.get('rc')
       }

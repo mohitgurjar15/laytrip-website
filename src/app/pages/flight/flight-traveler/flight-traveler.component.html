@@ -48,7 +48,14 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <app-flight-summary checkAvailability="local" (flightAvailable)="flightAvailable($event)" [showPartialPayemntOption]="showPartialPayemntOption" partialPaymentAmount={{partialPaymentAmount}}></app-flight-summary>
+                <app-flight-summary 
+                    checkAvailability="local" 
+                    (flightAvailable)="flightAvailable($event)" 
+                    [showPartialPayemntOption]="showPartialPayemntOption" 
+                    partialPaymentAmount={{partialPaymentAmount}}
+                    payNowAmount={{payNowAmount}}>
+
+                </app-flight-summary>
             </div>
         </div>
     </div>

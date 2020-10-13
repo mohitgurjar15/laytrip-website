@@ -3,7 +3,7 @@
     <div class="pay_deatil_info">
         <div class="block_detail_left">
             <ul>
-                <li>1st Installment <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span></li>
+                <li>1st Installment <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
                 <li>Default Instalment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
             </ul>
         </div>

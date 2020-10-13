@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { HttpClient } from "@angular/common/http";
-import { throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError, retry } from 'rxjs/operators';
 import { CommonFunction } from './../_helpers/common-function'
-
 
 @Injectable({
   providedIn: 'root'
@@ -63,8 +62,8 @@ export class GenericService {
       );
   }
 
-  getInstalemntsAvailability(data){
-    return this.http.post(`${environment.apiUrl}v1/instalment/instalment-availability`,data)
+  getInstalemntsAvailability(data) {
+    return this.http.post(`${environment.apiUrl}v1/instalment/instalment-availability`, data)
       .pipe(
         catchError(this.handleError)
       );
@@ -109,7 +108,7 @@ export class GenericService {
   }
 
   getCmsByPageType(type) {
-    const payload = {page_type: type};
+    const payload = { page_type: type };
     return this.http.get(environment.apiUrl + 'v1/cms/' + payload.page_type, this.commonFunction.setHeaders());
   }
 }
