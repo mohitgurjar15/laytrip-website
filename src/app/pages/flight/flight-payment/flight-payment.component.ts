@@ -25,6 +25,10 @@ export class FlightPaymentComponent implements OnInit {
   routeCode:string='';
   isFlightNotAvailable:boolean=false;
   isShowGuestPopup:boolean=false;
+  isLoggedIn: boolean = false;
+  showPartialPayemntOption:boolean=true;
+  partialPaymentAmount:number;
+  payNowAmount:number=0;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,15 +37,15 @@ export class FlightPaymentComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0,0);
-    this.routeCode = this.route.snapshot.paramMap.get('rc');
+    this.routeCode = this.route.snapshot.paramMap.get('rc');  
     this.userInfo = getLoginUserInfo();
+
     let __route = sessionStorage.getItem('__route');
     try{
       let response  = JSON.parse(__route);
       response[0]=response;
       this.flightSummary=response;
       this.sellingPrice = response[0].selling_price;
-      console.log("this.sellingPrice",this.sellingPrice);
     }
     catch(e){
 
@@ -57,9 +61,11 @@ export class FlightPaymentComponent implements OnInit {
       this.isShowPaymentOption=false;
     }
   }
+  
 
   selectInstalmentMode(instalmentMode){
     this.instalmentMode=instalmentMode;
+    this.showPartialPayemntOption = (this.instalmentMode=='instalment')?true:false
     sessionStorage.setItem('__insMode',btoa(this.instalmentMode))
   }
 
@@ -70,6 +76,8 @@ export class FlightPaymentComponent implements OnInit {
     this.customAmount = data.customAmount;
     this.customInstalment = data.customInstalment;
     this.laycreditpoints = data.layCreditPoints;
+    this.partialPaymentAmount=data.partialPaymentAmount;
+    this.payNowAmount = data.payNowAmount;
     sessionStorage.setItem('__islt',btoa(JSON.stringify(data)))
   }
 
@@ -78,13 +86,24 @@ export class FlightPaymentComponent implements OnInit {
   }
 
   checkUserAndRedirect(){
-
+    console.log(this.userInfo)
     if(typeof this.userInfo.roleId!='undefined' && this.userInfo.roleId!=7){
-      this.router.navigate(['/flight/traveler',this.routeCode]);
-
-    }
-    else{
+      this.router.navigate(['/flight/traveler',this.routeCode]);      
+    } else {
       this.isShowGuestPopup=true;
+    }
+  }
+
+  changePopupValue(event){
+    this.isShowGuestPopup = event; 
+  }
+
+  ngDoCheck() {
+    let userToken = localStorage.getItem('_lay_sess');
+    this.userInfo = getLoginUserInfo();
+
+    if (userToken) {
+      this.isLoggedIn = true;
     }
   }
 }

@@ -134,9 +134,10 @@ export class TravellerFormComponent implements OnInit {
       }),
         this.countries_code = data.map(country => {
           return {
-            id: country.id,
-            name: country.phonecode + ' (' + country.iso2 + ')',
-            code: country.phonecode
+            id:country.id,
+            name:country.phonecode+' ('+country.iso2+')',
+            country_name:country.name+ ' ' +country.phonecode,
+            avatar_url: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
           }
         })
     }, (error: HttpErrorResponse) => {

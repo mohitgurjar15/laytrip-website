@@ -94,7 +94,13 @@
               
           </div>
           <div class="col-lg-4">
-            <app-flight-summary (flightAvailable)="flightAvailable($event)" showPartialPayemntOption="instalmentMode" (getRouteDetails)="getFlightSummaryData($event)"></app-flight-summary>
+            <app-flight-summary 
+                (flightAvailable)="flightAvailable($event)" 
+                [showPartialPayemntOption]="showPartialPayemntOption" 
+                (getRouteDetails)="getFlightSummaryData($event)" 
+                partialPaymentAmount={{partialPaymentAmount}}
+                payNowAmount={{payNowAmount}}>
+            </app-flight-summary>
           </div>
       </div>
   </div>

@@ -13,15 +13,11 @@
             <span class="checkmark"></span>
         </label>
 			   
-          <a *ngIf="userType=='login'" >
-              <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Left Arrow">
-              Continue
-          </a>
-
-          <a *ngIf="userType=='guest'" >
+          <a  (click)="btnContinue(userType)" >
               <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Left Arrow">
               Continue
           </a>
       </div>
   </div>
 </div>
+

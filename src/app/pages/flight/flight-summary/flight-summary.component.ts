@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FlightService } from '../../../services/flight.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,9 +12,11 @@ import { CommonFunction } from '../../../_helpers/common-function';
 export class FlightSummaryComponent implements OnInit {
   @Output() totalTravelerValue = new EventEmitter();
   @Output() flightAvailable= new EventEmitter();
-  @Input() showPartialPayemntOption;
+  @Input() showPartialPayemntOption:boolean=false;
   @Input() checkAvailability:string;
   @Input() flightSummary:string;
+  @Input() partialPaymentAmount:number=0;
+  @Input() payNowAmount:number=0;
 
   routeCode:string='';
   constructor(
@@ -40,12 +42,12 @@ export class FlightSummaryComponent implements OnInit {
   @Output() getRouteDetails = new EventEmitter();
 
   ngOnInit() {
+
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.routeCode=this.route.snapshot.paramMap.get('rc');
 
     if(this.checkAvailability=='local'){
-
       this.getFlightSummary()
     } else if(this.checkAvailability=='trip-details') {
       this.flightDetail = this.flightSummary;
@@ -58,7 +60,6 @@ export class FlightSummaryComponent implements OnInit {
   
   
   airRevalidate(){
-      console.log('here')
       let routeData={
         route_code: this.route.snapshot.paramMap.get('rc')
       }
@@ -117,5 +118,11 @@ export class FlightSummaryComponent implements OnInit {
 
   toggleCancellationPolicy(){
     this.showCancellationPolicy=true;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['partialPaymentAmount']) {
+      this.partialPaymentAmount = changes['partialPaymentAmount'].currentValue;
+    }
   }
 }

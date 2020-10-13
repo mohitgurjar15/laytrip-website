@@ -31,7 +31,10 @@ export class FlightTravelerComponent implements OnInit {
   isFlightNotAvailable:boolean=false;
   is_updateToken = false;
   userDetails;
+  partialPaymentAmount:number=0;
+  showPartialPayemntOption:boolean=false;
   isComplete : boolean = false;
+  payNowAmount:number=0;
 
   
   constructor(
@@ -51,7 +54,16 @@ export class FlightTravelerComponent implements OnInit {
       this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
       this.totalTraveler =  (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));   
     }
-    this.routeCode = this.route.snapshot.paramMap.get('rc')
+    this.routeCode = this.route.snapshot.paramMap.get('rc');
+
+    let customInstalmentData:any=atob(sessionStorage.getItem('__islt'))
+    customInstalmentData = JSON.parse(customInstalmentData);
+    console.log("customInstalmentData",customInstalmentData)
+    
+    this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
+    this.payNowAmount = customInstalmentData.payNowAmount;
+    let instalmentMode=atob(sessionStorage.getItem('__insMode'))
+    this.showPartialPayemntOption= instalmentMode=='instalment'?true:false;
   }
   
   
