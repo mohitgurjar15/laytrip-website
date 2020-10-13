@@ -35,23 +35,22 @@ export class SocialLoginComponent implements OnInit {
   ngOnInit() {
     this.loadGoogleSdk();
     this.loadFacebookSdk();
-    this.authService.authState.subscribe((userInfo: any) => {
+    this.authService.authState.subscribe((userInfo: SocialUser) => {
       if (userInfo) {
         console.log('USER:::::', userInfo);
-        console.log('USER:::::authorization', userInfo.authorization);
-        let objApple =  getUserDetails(userInfo.authorization.id_token);
-        console.log('apple::::', objApple);
-        let json_data = {
-          "account_type": 1,
-          "name": '',
-          "email": objApple.email,
-          "social_account_id": userInfo.authorization.code,
-          "device_type": 1,
-          "device_model": "RNE-L22",
-          "device_token": "123abc#$%456",
-          "app_version": "1.0",
-          "os_version": "7.0"
-        };
+        // let objApple =  getUserDetails(userInfo.authorization.id_token);
+        // console.log('apple::::', objApple);
+        // let json_data = {
+        //   "account_type": 1,
+        //   "name": '',
+        //   "email": objApple.email,
+        //   "social_account_id": userInfo.authorization.code,
+        //   "device_type": 1,
+        //   "device_model": "RNE-L22",
+        //   "device_token": "123abc#$%456",
+        //   "app_version": "1.0",
+        //   "os_version": "7.0"
+        // };
         // this.userService.socialLogin(json_data).subscribe((data: any) => {
         //   console.log(data);
         // });
