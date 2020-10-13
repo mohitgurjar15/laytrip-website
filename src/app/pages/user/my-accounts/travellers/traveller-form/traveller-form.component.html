@@ -114,12 +114,11 @@
                                         [items]="countries_code" bindLabel="country_name" clearSearchOnAdd="true"
                                         formControlName="country_code" placeholder="+1">
                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                            <span class="ng-value-label mohit"><img [src]="item.avatar_url ? item.avatar_url : 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Afghanistan.svg'" width="20px" height="20px"> {{item.country_name}}</span>
+                                            <span class="ng-value-label mohit"><img [src]="item.flag ? item.flag : 'http://localhost/laytrip_ui/assets/images/icon/team-flag.svg'" width="20px" height="20px">  {{item.country_name}}</span>
                                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                                        </ng-template>
-                                    
+                                        </ng-template>                                                        
                                         <ng-template ng-option-tmp let-item="item">
-                                            <img [src]="item.avatar_url" class="sdsd" width="20px" height="20px"> {{item.country_name}}
+                                            <img [src]="item.flag" width="20px" height="20px"> {{item.country_name}}
                                         </ng-template>
                                     </ng-select>
                                 </div>
