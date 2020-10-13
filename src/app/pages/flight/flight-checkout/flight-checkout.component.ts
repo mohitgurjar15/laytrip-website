@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
@@ -8,7 +8,6 @@ import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { MainHeaderComponent } from '../../../elements/main-header/main-header.component';
 
 @Component({
   selector: 'app-flight-checkout',
@@ -16,64 +15,6 @@ import { MainHeaderComponent } from '../../../elements/main-header/main-header.c
   styleUrls: ['./flight-checkout.component.scss']
 })
 export class FlightCheckoutComponent implements OnInit {
-<<<<<<< HEAD
-=======
-   
-    s3BucketUrl = environment.s3BucketUrl;
-    validateCardDetails:Subject<any> = new Subject();
-    showAddCardForm:boolean=false;
-    progressStep={ step1:true, step2:true, step3:true,step4:false };
-    cardToken:string='';
-    instalmentMode='instalment';
-    laycreditpoints:number=0;
-    additionalAmount:number;
-    routeCode:string;
-    travelers=[];
-    travelerList;
-    isDisableBookBtn:boolean=true;
-    isTandCaccepeted:boolean=false;
-    bookingStatus:number=0;
-    userInfo;
-    bookingTimerConfig;
-    bookingLoader:boolean=false;
-    bookingResult:any={};
-    sellingPrice:number;
-    flightSummary:any=[];
-    instalmentType:string='weekly';
-    customAmount:number | null;
-    customInstalment:number | null;
-    newCard;
-    guestCardDetails;
-    isFlightNotAvailable:boolean=false;
-    isSessionTimeOut:boolean=false;
-    isShowCardOption:boolean=true;
-    isShowPaymentOption:boolean=true;
-    isShowFeedbackPopup:boolean=false;
-    isShowPartialPaymentDetails:boolean=false;
-    bookingId;  
-    customInstalmentData:any;
-    showPartialPayemntOption:boolean=false;
-    partialPaymentAmount:number=0;
-    payNowAmount:number=0;
-
-    constructor(
-      private route: ActivatedRoute,
-      private router:Router,
-      private flightService:FlightService,
-      private cookieService: CookieService,
-      private genericService:GenericService,
-      private toastr: ToastrService
-    ) { }
-    
-    ngOnInit() {
-      
-      window.scroll(0,0);
-      this.userInfo = getLoginUserInfo();
-      if(typeof this.userInfo.roleId=='undefined'){
-        this.router.navigate(['/'])
-      }
-      this.routeCode = this.route.snapshot.paramMap.get('rc')
->>>>>>> 880c159b9a4f2f9d9cafba56fcbfd62b8748d204
 
   s3BucketUrl = environment.s3BucketUrl;
   validateCardDetails: Subject<any> = new Subject();
@@ -130,19 +71,10 @@ export class FlightCheckoutComponent implements OnInit {
     this.bookingTimerConfiguration();
     this.setInstalmentInfo();
 
-<<<<<<< HEAD
     if (this.userInfo.roleId == 7) {
       this.instalmentMode = 'no-instalment';
       this.instalmentType = '';
       this.showAddCardForm = true;
-=======
-      }
-
-      let instalmentMode=atob(sessionStorage.getItem('__insMode'))
-      this.instalmentMode= instalmentMode || 'no-instalment';
-      this.showPartialPayemntOption = instalmentMode=='instalment'?true:false;
-      this.validateBookingButton();
->>>>>>> 880c159b9a4f2f9d9cafba56fcbfd62b8748d204
     }
     let travelersIds = this.cookieService.get('_travelers');
     try {
@@ -161,22 +93,7 @@ export class FlightCheckoutComponent implements OnInit {
     }
     catch (e) {
 
-<<<<<<< HEAD
     }
-=======
-    setInstalmentInfo(){
-      try{
-        let customInstalmentData=atob(sessionStorage.getItem('__islt'))
-        this.customInstalmentData = JSON.parse(customInstalmentData);
-        this.laycreditpoints = Number(this.customInstalmentData.layCreditPoints);
-        this.additionalAmount = this.customInstalmentData.additionalAmount;
-        this.customAmount = this.customInstalmentData.customAmount;
-        this.customInstalment = this.customInstalmentData.customInstalment;
-        this.instalmentType = this.customInstalmentData.instalmentType;
-        
-      }
-      catch(error){
->>>>>>> 880c159b9a4f2f9d9cafba56fcbfd62b8748d204
 
     let instalmentMode = atob(sessionStorage.getItem('__insMode'))
     this.instalmentMode = instalmentMode || 'no-instalment';
@@ -321,36 +238,8 @@ export class FlightCheckoutComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
   bookingDetails(bookingId) {
     this.flightService.getBookingDetails(bookingId).subscribe((res: any) => {
-=======
-      this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
-        this.bookingStatus=1;
-        this.bookingId = res.laytrip_booking_id;
-        this.bookingLoader=false;
-        this.progressStep = { step1:true, step2:true, step3:true, step4:true }
-        this.bookingResult=res;
-        this.isShowFeedbackPopup = true; 
-        if(this.laycreditpoints>0){
-          this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
-            document.getElementById("layPoints").innerHTML=res.total_available_points
-            
-          },(error=>{
-      
-          }))
-        }
-      },(error)=>{
-        if(error.status==422){
-          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
-        }
-        if(error.status==404){
-          this.bookingStatus=2; // Flight Not available  
-        }
-        if(error.status==424){
-          this.bookingStatus=2; // Booking failed from supplier side
-        }
->>>>>>> 880c159b9a4f2f9d9cafba56fcbfd62b8748d204
 
     }, (error) => {
 
@@ -388,65 +277,15 @@ export class FlightCheckoutComponent implements OnInit {
     if (typeof guestCardDetails.card_cvv == 'undefined' || guestCardDetails.card_cvv == '')
       return false;
 
-<<<<<<< HEAD
   }
-=======
-      this.flightSummary=data;
-      this.sellingPrice = data[0].selling_price;
-      if(this.instalmentMode=='no-instalment'){
-        this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
-        console.log("this.payNowAmount4",this.payNowAmount)
-      }
-    }
->>>>>>> 880c159b9a4f2f9d9cafba56fcbfd62b8748d204
 
   getFlightSummaryData(data) {
 
-<<<<<<< HEAD
     this.flightSummary = data;
     this.sellingPrice = data[0].selling_price;
   }
 
   getInstalmentData(data) {
-=======
-      this.additionalAmount = data.additionalAmount;
-      this.instalmentType = data.instalmentType;
-      this.customAmount = data.customAmount;
-      this.customInstalment = data.customInstalment;
-      let instalmentRequest={
-        instalment_type: data.instalmentType,
-        checkin_date: moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"),
-        booking_date: moment().format("YYYY-MM-DD"),
-        amount: this.sellingPrice,
-        additional_amount: Number(data.additionalAmount)+Number(data.layCreditPoints),
-        custom_instalment_no: data.customInstalment,
-        custom_amount: data.customAmount
-      }
-
-      console.log("++++",data)
-      this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
-        if(res.instalment_available==true){
-          
-          this.partialPaymentAmount=res.instalment_date[1].instalment_amount;
-          
-          if(this.instalmentMode=='instalment'){
-            this.payNowAmount=Number(res.instalment_date[0].instalment_amount) - Number(this.laycreditpoints)
-            console.log("this.payNowAmount1",this.payNowAmount)
-          }
-          else{
-            this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
-            console.log("this.payNowAmount2",this.payNowAmount)
-          }
-        }
-        else{
-          this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
-          console.log("this.payNowAmount3",this.payNowAmount)
-        }
-      },(err)=>{
-  
-      })
-    }
->>>>>>> 880c159b9a4f2f9d9cafba56fcbfd62b8748d204
 
     this.additionalAmount = data.additionalAmount;
     this.instalmentType = data.instalmentType;
