@@ -24,6 +24,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { RedeemLaycreditComponent } from './redeem-laycredit/redeem-laycredit.component';
 import { BookingFeedbackComponent } from './booking-feedback/booking-feedback.component';
 import { BookingAsLoginOrGuestPopupComponent } from './booking-as-login-or-guest-popup/booking-as-login-or-guest-popup.component';
+import { LottieAnimationViewModule } from 'ng-lottie';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BookingAsLoginOrGuestPopupComponent } from './booking-as-login-or-guest
     CountdownModule,
     Ng5SliderModule,
     CookieModule.forRoot(),
-    CalendarModule
+    CalendarModule,
+    LottieAnimationViewModule.forRoot()
   ],
   exports: [
     SearchAirportComponent,
