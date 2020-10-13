@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
-import * as jwt_decode from 'jwt-decode';
+import { getUserDetails } from '../../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-social-login',
@@ -38,7 +38,7 @@ export class SocialLoginComponent implements OnInit {
     this.authService.authState.subscribe((userInfo: any) => {
       if (userInfo) {
         console.log('USER:::::', userInfo);
-        let objApple = jwt_decode(userInfo.authorization.id_token);
+        let objApple =  getUserDetails(userInfo.authorization.id_token);
         console.log('apple::::', objApple);
         let json_data = {
           "account_type": 1,
