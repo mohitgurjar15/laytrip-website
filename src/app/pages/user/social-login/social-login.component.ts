@@ -37,7 +37,8 @@ export class SocialLoginComponent implements OnInit {
     this.loadFacebookSdk();
     this.authService.authState.subscribe((userInfo: any) => {
       if (userInfo) {
-        console.log('USER:::::', userInfo, userInfo.authorization);
+        console.log('USER:::::', userInfo);
+        console.log('USER:::::authorization', userInfo.authorization);
         let objApple =  getUserDetails(userInfo.authorization.id_token);
         console.log('apple::::', objApple);
         let json_data = {
