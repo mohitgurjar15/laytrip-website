@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-social-login',
@@ -20,7 +20,6 @@ export class SocialLoginComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   apiError: string = '';
   test: boolean = false;
-  userInfo: SocialUser;
 
   constructor(
     private userService: UserService,
@@ -36,16 +35,16 @@ export class SocialLoginComponent implements OnInit {
   ngOnInit() {
     this.loadGoogleSdk();
     this.loadFacebookSdk();
-    this.authService.authState.subscribe((user) => {
-      if (user) {
-        console.log('USER:::::', user);
-        let objApple = jwt_decode(user.idToken);
-        console.log(objApple);
+    this.authService.authState.subscribe((userInfo: any) => {
+      if (userInfo) {
+        console.log('USER:::::', userInfo);
+        let objApple = jwt_decode(userInfo.authorization.id_token);
+        console.log('apple::::', objApple);
         let json_data = {
           "account_type": 1,
           "name": '',
           "email": objApple.email,
-          "social_account_id": user.authorizationCode,
+          "social_account_id": userInfo.authorization.code,
           "device_type": 1,
           "device_model": "RNE-L22",
           "device_token": "123abc#$%456",
