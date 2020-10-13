@@ -67,15 +67,12 @@ export class RedeemLaycreditComponent implements OnInit {
     if (changes['sellingPrice'].currentValue!='undefined') {
       
         this.sellingPrice = changes['sellingPrice'].currentValue;
-        console.log("sp",this.sellingPrice)
         if(this.totalLaycreditPoints > Number(this.sellingPrice)){
           this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.sellingPrice});    
         }
         else{
           this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.totalLaycreditPoints});
         }
-
-        console.log("===",this.laycreditOptions)
             
     }
   }

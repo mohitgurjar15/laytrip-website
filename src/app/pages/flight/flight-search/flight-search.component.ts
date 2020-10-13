@@ -25,7 +25,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   flightSearchInfo;
   flightDetails;
   filterFlightDetails;
-
+  isResetFilter:string='no';
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -285,5 +285,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   filterFlight(event) {
     this.flightDetails = event;
+  }
+
+  resetFilter(){
+    //this.isResetFilter=(new Date()).toString();
   }
 }
