@@ -332,6 +332,12 @@
                 <li>Total <span>{{ currency?.symbol }}{{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
             </ul>
         </div>
+        <hr>
+        <div class="total_payment" *ngIf="payNowAmount">
+            <ul>
+                <li>Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
+            </ul>
+        </div>
     </div>
     <div class="cmn_block policies">
         <div class="block_inner">

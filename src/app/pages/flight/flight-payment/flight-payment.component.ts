@@ -28,6 +28,7 @@ export class FlightPaymentComponent implements OnInit {
   isLoggedIn: boolean = false;
   showPartialPayemntOption:boolean=true;
   partialPaymentAmount:number;
+  payNowAmount:number=0;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,7 +77,7 @@ export class FlightPaymentComponent implements OnInit {
     this.customInstalment = data.customInstalment;
     this.laycreditpoints = data.layCreditPoints;
     this.partialPaymentAmount=data.partialPaymentAmount;
-    console.log("data",data)
+    this.payNowAmount = data.payNowAmount;
     sessionStorage.setItem('__islt',btoa(JSON.stringify(data)))
   }
 

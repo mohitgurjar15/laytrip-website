@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { FlightService } from '../../../../services/flight.service';
 import { ActivatedRoute } from '@angular/router';
+import { airports } from '../../airports';
 
 @Component({
   selector: 'app-flight-search-bar',
@@ -97,31 +98,36 @@ export class FlightSearchBarComponent implements OnInit {
       toDestination: [[Validators.required]]
     });
 
-    const selectedItem = localStorage.getItem('_fligh');
-    if (selectedItem) {
-      const info = JSON.parse(selectedItem);
-      //info[1].value = airports[this.arrivalCode];
-      info.forEach(res => {
-        if (res && res.key === 'fromSearch') {
-          this.data.push(res.value);
-          this.airportDefaultDestValue = `${res.value.city}`;
-          if (this.airportDefaultDestValue) {
-            this.defaultSelected = '';
-          }
-          this.departureAirport=res.value;
+    const info = []
+    info.push(
+      {
+        key : 'fromSearch',
+        value : airports[this.route.snapshot.queryParams['departure']]
+      },
+      {
+        key : 'toSearch',
+        value : airports[this.route.snapshot.queryParams['arrival']]
+      }
+    );
+    info.forEach(res => {
+      if (res && res.key === 'fromSearch') {
+        this.data.push(res.value);
+        this.airportDefaultDestValue = `${res.value.city}`;
+        if (this.airportDefaultDestValue) {
+          this.defaultSelected = '';
         }
-        if (res && res.key === 'toSearch') {
-          res.value.display_name = `${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
-          this.data.push(res.value);
-          this.airportDefaultArrivalValue = `${res.value.city}`;
-          if (this.airportDefaultArrivalValue) {
-            this.defaultSelected = '';
-          }
-          this.arrivalAirport=res.value;
+        this.departureAirport=res.value;
+      }
+      if (res && res.key === 'toSearch') {
+        res.value.display_name = `${res.value.city},${res.value.country},(${res.value.code}),${res.value.name}`;
+        this.data.push(res.value);
+        this.airportDefaultArrivalValue = `${res.value.city}`;
+        if (this.airportDefaultArrivalValue) {
+          this.defaultSelected = '';
         }
-      });
-
-    }
+        this.arrivalAirport=res.value;
+      }
+    });
 
     this.flightDepartureMinDate = new Date();
     this.flightReturnMinDate = new Date(this.departureDate);

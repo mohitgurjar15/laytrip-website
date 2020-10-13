@@ -51,6 +51,7 @@ export class FlightCheckoutComponent implements OnInit {
     customInstalmentData:any;
     showPartialPayemntOption:boolean=false;
     partialPaymentAmount:number=0;
+    payNowAmount:number=0;
 
     constructor(
       private route: ActivatedRoute,
@@ -100,7 +101,6 @@ export class FlightCheckoutComponent implements OnInit {
       let instalmentMode=atob(sessionStorage.getItem('__insMode'))
       this.instalmentMode= instalmentMode || 'no-instalment';
       this.showPartialPayemntOption = instalmentMode=='instalment'?true:false;
-      console.log("this.instalmentMode",this.instalmentMode)
       this.validateBookingButton();
     }
 
@@ -136,7 +136,7 @@ export class FlightCheckoutComponent implements OnInit {
         this.customAmount = this.customInstalmentData.customAmount;
         this.customInstalment = this.customInstalmentData.customInstalment;
         this.instalmentType = this.customInstalmentData.instalmentType;
-
+        
       }
       catch(error){
 
@@ -222,6 +222,14 @@ export class FlightCheckoutComponent implements OnInit {
         this.progressStep = { step1:true, step2:true, step3:true, step4:true }
         this.bookingResult=res;
         this.isShowFeedbackPopup = true; 
+        if(this.laycreditpoints>0){
+          this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+            document.getElementById("layPoints").innerHTML=res.total_available_points
+            
+          },(error=>{
+      
+          }))
+        }
       },(error)=>{
         if(error.status==422){
           this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
@@ -285,6 +293,10 @@ export class FlightCheckoutComponent implements OnInit {
 
       this.flightSummary=data;
       this.sellingPrice = data[0].selling_price;
+      if(this.instalmentMode=='no-instalment'){
+        this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
+        console.log("this.payNowAmount4",this.payNowAmount)
+      }
     }
 
     getInstalmentData(data){
@@ -298,14 +310,29 @@ export class FlightCheckoutComponent implements OnInit {
         checkin_date: moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"),
         booking_date: moment().format("YYYY-MM-DD"),
         amount: this.sellingPrice,
-        additional_amount: data.additionalAmount,
+        additional_amount: Number(data.additionalAmount)+Number(data.layCreditPoints),
         custom_instalment_no: data.customInstalment,
         custom_amount: data.customAmount
       }
+
+      console.log("++++",data)
       this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
         if(res.instalment_available==true){
           
           this.partialPaymentAmount=res.instalment_date[1].instalment_amount;
+          
+          if(this.instalmentMode=='instalment'){
+            this.payNowAmount=Number(res.instalment_date[0].instalment_amount) - Number(this.laycreditpoints)
+            console.log("this.payNowAmount1",this.payNowAmount)
+          }
+          else{
+            this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
+            console.log("this.payNowAmount2",this.payNowAmount)
+          }
+        }
+        else{
+          this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
+          console.log("this.payNowAmount3",this.payNowAmount)
         }
       },(err)=>{
   
