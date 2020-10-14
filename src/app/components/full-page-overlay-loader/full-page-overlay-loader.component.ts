@@ -23,7 +23,6 @@ export class FullPageOverlayLoaderComponent implements OnInit {
   ngOnInit() {
     this.lottieConfig = {
       path: 'https://assets3.lottiefiles.com/packages/lf20_vTKQNW.json',
-      renderer: 'canvas',
       autoplay: true,
       loop: true
     };

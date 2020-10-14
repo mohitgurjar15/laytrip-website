@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
+import { take } from 'rxjs/operators';
 declare var $: any; 
 
 @Component({
@@ -67,13 +68,13 @@ export class PaymentModeComponent implements OnInit {
   upFrontPayment:number=0;
   payNowPrice:number=0;
 
-  async ngOnInit() {
+  ngOnInit(){
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
-    await this.getInstalemnts('biweekly');
-    await this.getInstalemnts('monthly');
-    await this.getInstalemnts('weekly');
-    console.log("this.customInstalmentData",this.customInstalmentData)
+    this.getInstalemntsBiweekly('biweekly');
+    this.getInstalemntsMonthly('monthly');
+    this.getInstalemntsWeekly('weekly');
+    this.getInstalemnts('weekly');
     if(Object.keys(this.customInstalmentData).length){
       this.additionalAmount = this.customInstalmentData.additionalAmount;
       this.durationType = this.customInstalmentData.instalmentType;
@@ -148,8 +149,19 @@ export class PaymentModeComponent implements OnInit {
 
   changeCustomInstalmentAmount(event){
     if(this.customMethod=='amount'){
-
       this.customAmount = Number(event.target.value);
+      if(this.customAmount<this.secondInstalment){
+        if(this.durationType=='weekly'){
+          this.customAmount = this.weeklyDefaultInstalment;
+        }
+        else if(this.durationType=='biweekly'){
+          
+          this.customAmount = this.biWeeklyDefaultInstalment;
+        }
+        else{
+          this.customAmount = this.monthlyDefaultInstalment;
+        }
+      }
     }
 
     this.getInstalmentData.emit({ 
@@ -158,7 +170,7 @@ export class PaymentModeComponent implements OnInit {
       customAmount: this.customAmount,
       customInstalment : null,
       layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment,
+      partialPaymentAmount : this.customAmount,
       payNowAmount:this.getPayNowAmount()
     })
     this.calculateInstalment();
@@ -176,7 +188,7 @@ export class PaymentModeComponent implements OnInit {
       this.instalments=res;
       if(this.instalments.instalment_available==true){
 
-        if(type=='weekly'){
+        /* if(type=='weekly'){
           this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
           this.weeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
         }
@@ -189,14 +201,14 @@ export class PaymentModeComponent implements OnInit {
         if(type=='monthly'){
           this.monthlyDefaultInstalmentNo = this.instalments.instalment_date.length;
           this.monthlyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
-        }
+        } */
 
         this.instalmentAvavible=true;
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
         this.defaultInstalment  = this.instalments.instalment_date[0].instalment_amount;
         this.upFrontPayment  = this.instalments.instalment_date[0].instalment_amount-this.laycreditpoints;
-        this.customAmount     = this.instalments.instalment_date[0].instalment_amount;
+        this.customAmount     = this.instalments.instalment_date[1].instalment_amount;
         this.customInstalment = this.instalments.instalment_date.length;
         this.defaultInstalmentNo = this.instalments.instalment_date.length;
         this.remainingInstalment = this.instalments.instalment_date.length-1;
@@ -212,6 +224,62 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount()
         })
         
+      }
+      else{
+        this.instalmentAvavible=false;
+        this.selectInstalmentMode.emit('no-instalment');
+      }
+    },(err)=>{
+
+    })
+  }
+
+  getInstalemntsBiweekly(type){
+
+    this.instalmentRequest.instalment_type=type;
+
+    this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
+      this.instalments=res;
+      if(this.instalments.instalment_available==true){
+        this.biWeeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
+        this.biWeeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
+      }
+      else{
+        this.instalmentAvavible=false;
+        this.selectInstalmentMode.emit('no-instalment');
+      }
+    },(err)=>{
+
+    })
+  }
+
+  getInstalemntsMonthly(type){
+
+    this.instalmentRequest.instalment_type=type;
+
+    this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
+      this.instalments=res;
+      if(this.instalments.instalment_available==true){
+        this.monthlyDefaultInstalmentNo = this.instalments.instalment_date.length;
+        this.monthlyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
+      }
+      else{
+        this.instalmentAvavible=false;
+        this.selectInstalmentMode.emit('no-instalment');
+      }
+    },(err)=>{
+
+    })
+  }
+  getInstalemntsWeekly(type){
+
+    this.instalmentRequest.instalment_type=type;
+
+    this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
+      this.instalments=res;
+      if(this.instalments.instalment_available==true){
+        this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
+        this.weeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
       }
       else{
         this.instalmentAvavible=false;
@@ -320,7 +388,7 @@ export class PaymentModeComponent implements OnInit {
    * 
    * @param type [increase,decrease]
    */
-  setCustomAmount(type){
+  /* setCustomAmount(type){
 
     if(this.customMethod=='amount'){
 
@@ -346,7 +414,7 @@ export class PaymentModeComponent implements OnInit {
         payNowAmount:this.getPayNowAmount()
       })
     }
-  }
+  } */
 
   /**
    * 
@@ -403,7 +471,15 @@ export class PaymentModeComponent implements OnInit {
       partialPaymentAmount : this.secondInstalment,
       payNowAmount:this.getPayNowAmount()
     })
-    this.customAmount = this.defaultInstalment;
+    if(this.durationType=='weekly'){
+      this.customAmount = this.weeklyDefaultInstalment;
+    }
+    else if(this.durationType=='biweekly'){
+      this.customAmount = this.biWeeklyDefaultInstalment;
+    }
+    else{
+      this.customAmount = this.monthlyDefaultInstalment;
+    }
     this.customInstalment = this.defaultInstalmentNo;
     this.customMethod=event.target.checked?event.target.value:'';
     this.calculateInstalment();

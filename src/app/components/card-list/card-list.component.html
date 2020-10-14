@@ -70,7 +70,7 @@
       <li *ngFor="let card of cards">
           <div class="card_check">
               <label class="custom_checkbox">
-                  <input type="radio" value="{{card.cardToken}}" name="card_token" (click)="selectCard(card.cardToken)">
+                  <input type="radio" value="{{card.cardToken}}" [checked]="card.cardToken==cardToken" name="card_token" (click)="selectCard(card.cardToken)">
                   <span class="checkmark"></span>
               </label>
           </div>
@@ -88,7 +88,7 @@
       </li>
       
   </ul>
-  <ul *ngIf="!cards.length">
+  <!-- <ul *ngIf="!cards.length">
     <li>No card founds!</li>
-  </ul>
+  </ul> -->
 </div>

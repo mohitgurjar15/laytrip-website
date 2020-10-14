@@ -6,9 +6,49 @@
       </div>
       <div class="col-lg-9">
         <div class="account_cnt_main change_password subscription_plan">
+
           <div class="block_subscription_plan">
-            <div class="block_title">
+            <div class="block_title"> 
               <h5>Subscription Plan</h5>
+            </div>
+            <div class="subscription_block_main" *ngIf="loading">
+              <div class="subscription_block">
+                <div class="block_top">
+                  <div class="m-auto w-50">
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+                <div class="block_btm">
+                  <h6>
+                    <div class="m-auto w-50">
+                      <p class="fb_animation w-100 mb-0"></p>
+                      <p class="fb_animation w-100 mb-0"></p>
+                    </div>
+                  </h6>
+                  <ul>
+                    <li>
+                      <p class="fb_animation w-100 mb-0"></p>
+                    </li>
+                    <li>
+                      <p class="fb_animation w-100 mb-0"></p>
+                    </li>
+                    <li>
+                      <p class="fb_animation w-100 mb-0"></p>
+                    </li>
+                    <li>
+                      <p class="fb_animation w-100 mb-0"></p>
+                    </li>
+                  </ul>
+                  <div class="btn_subscription">
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="subscription_im">
+                <img src="{{s3BucketUrl}}assets/images/subscription_im_people.svg" alt="people image">
+              </div>
             </div>
             <div class="subscription_block_main">
               <div class="subscription_block" *ngFor="let subscription of subscriptionList">
@@ -21,19 +61,13 @@
                     <li>
                       {{subscription.description}}
                     </li>
-                    <!-- <li>
-                      Payout plan finishes before you travel so you don’t worry about debt after you come home
-                    </li>
-                    <li>
-                      No worries if prices for your booking are increasing, we guarantee your committed price
-                    </li> -->
                   </ul>
                   <div class="btn_subscription">
                     <a href="javascript:void(0);" (click)="subscribeNow()">Subscribe Now</a>
                   </div>
                 </div>
               </div>
-              <div class="subscription_im">
+              <div class="subscription_im" *ngIf="subscriptionList">
                 <img src="{{s3BucketUrl}}assets/images/subscription_im_people.svg" alt="people image">
               </div>
             </div>
