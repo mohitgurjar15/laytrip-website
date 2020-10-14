@@ -50,7 +50,6 @@ var AdultListComponent = /** @class */ (function () {
         };
     }
     AdultListComponent.prototype.ngOnInit = function () {
-        console.log(this._adults);
         this.checkUser();
         this.getCountry();
         if (this.type == 'adult' && !this.isLoggedIn) {
@@ -106,6 +105,7 @@ var AdultListComponent = /** @class */ (function () {
                     this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
                 }
             }
+            console.log(this.counter);
         }
         this.adultsCount.emit(this.counter);
         this._itinerarySelectionArray.emit(this._itinerarySelection);
@@ -143,20 +143,36 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.pushTraveler = function (event) {
+        console.log("event", event);
+        var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
         if (event.user_type === 'adult') {
             var index = this._adults.indexOf(event.userId, 0);
             this._adults = this._adults.filter(function (item) { return item.userId != event.userId; });
+            var adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "phoneNo", "title"];
+            event.isComplete = this.checkObj(event, adultTravellerKeys);
             this._adults.push(event);
         }
         else if (event.user_type === 'child') {
             this._childs = this._childs.filter(function (item) { return item.userId != event.userId; });
+            event.isComplete = this.checkObj(event, travellerKeys);
             this._childs.push(event);
         }
         else {
             this._infants = this._infants.filter(function (item) { return item.userId != event.userId; });
+            event.isComplete = this.checkObj(event, travellerKeys);
             this._infants.push(event);
         }
         this.showAddAdultForm = false;
+    };
+    AdultListComponent.prototype.checkObj = function (obj, travellerKeys) {
+        var isComplete = true;
+        var userStr = JSON.stringify(obj);
+        JSON.parse(userStr, function (key, value) {
+            if (!value && travellerKeys.indexOf(key) !== -1) {
+                return isComplete = false;
+            }
+        });
+        return isComplete;
     };
     AdultListComponent.prototype.getFormStatus = function (status) {
         this.adultFormStatus = status;
@@ -184,6 +200,7 @@ var AdultListComponent = /** @class */ (function () {
                     return {
                         id: country.id,
                         name: country.phonecode + ' (' + country.iso2 + ')',
+                        code: country.phonecode,
                         country_name: country.name + ' ' + country.phonecode,
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                     };

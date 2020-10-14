@@ -22,11 +22,6 @@ var BookingAsLoginOrGuestPopupComponent = /** @class */ (function () {
     };
     BookingAsLoginOrGuestPopupComponent.prototype.bookingAs = function (type) {
         this.userType = type;
-        console.log(this.userType);
-        if (type == 'guest') {
-        }
-        if (type == 'login') {
-        }
     };
     BookingAsLoginOrGuestPopupComponent.prototype.btnContinue = function (type) {
         if (type == 'login') {

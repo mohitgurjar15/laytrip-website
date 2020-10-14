@@ -98,7 +98,7 @@
                     <div class="card-header" id="adultOne{{i}}">
                         <h2 class="mb-0">
                             <label class="custom_checkbox">
-                                <input [disabled]="checkBoxDisable" id="checkbox-{{i}}-{{traveler.userId}}"
+                                <input [disabled]="!traveler.isComplete" id="checkbox-{{i}}-{{traveler.userId}}"
                                     (click)="selectTraveler($event,traveler)" type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
@@ -106,7 +106,7 @@
                                 data-toggle="collapse" [attr.data-target]="'#adultcollapseOne'+ i">
                                 {{traveler.firstName}} {{traveler.lastName}}
                                 <i class="fa fa-angle-down"></i>
-                                <span id="adultFormStatus-{{i}}" [ngClass]="{'status_complete': traveler.isComplete, 'status_incomplete':!traveler.isComplete }">{{traveler.isComplete ? 'Complete':'InComplete' }}</span>
+                                <span id="adultFormStatus-{{i}}" [ngClass]="{'status_complete': traveler.isComplete, 'status_incomplete':!traveler.isComplete }">{{traveler.isComplete ? 'Complete':'In Complete' }}</span>
                             </button>
                         </h2>
                     </div>

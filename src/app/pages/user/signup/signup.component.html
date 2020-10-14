@@ -83,7 +83,7 @@
                                     [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}"
                                     [type]="cnfPassFieldTextType ? 'text' : 'password'"
                                     formControlName="confirm_password" maxlength="50" tabindex="105"
-                                    placeholder="Enter Password">
+                                    placeholder="Enter Confirm Password">
                                 <span class="ptxt"><i id="cnfEye"
                                         [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                         aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -114,7 +114,7 @@
                 </div>
             </form>
             <div class="modal_btm">
-                <p>Don’t have an account? <a href="javascript:void(0);" (click)="openSignInPage()" class="signIn">Sign
+                <p>Already have an account? <a href="javascript:void(0);" (click)="openSignInPage()" class="signIn">Sign
                         In</a></p>
             </div>
         </div>

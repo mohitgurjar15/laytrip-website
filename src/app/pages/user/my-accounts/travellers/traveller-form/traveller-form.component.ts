@@ -134,8 +134,9 @@ export class TravellerFormComponent implements OnInit {
       }),
         this.countries_code = data.map(country => {
           return {
-            id:country.id,
-            name:country.phonecode+' ('+country.iso2+')',
+            id: country.id,
+            name: country.phonecode+' ('+country.iso2+')',
+            code:country.phonecode,
             country_name:country.name+ ' ' +country.phonecode,
             flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
           }
@@ -154,9 +155,7 @@ export class TravellerFormComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-      console.log(this.coAccountForm.value)
-      console.log(this.traveller)
-
+     
       let country_id = this.coAccountForm.value.country_id.id;
       if (!Number(country_id)) {
         country_id = this.traveller.country.id;
@@ -171,8 +170,8 @@ export class TravellerFormComponent implements OnInit {
         // passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
         passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
         passport_number: this.coAccountForm.value.passport_number,
-        country_code: this.coAccountForm.value.country_code.code &&
-          this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.code : this.coAccountForm.value.country_code,
+        country_code: this.coAccountForm.value.country_code.name &&
+          this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.name : this.coAccountForm.value.country_code,
         phone_no: this.coAccountForm.value.phone_no,
       };
 
@@ -205,7 +204,6 @@ export class TravellerFormComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('sdadddd', changes)
   }
 
   stringToDate(string, saprator) {

@@ -32,7 +32,10 @@ var FlightTravelerComponent = /** @class */ (function () {
         this._travellersCountValid = false;
         this.isFlightNotAvailable = false;
         this.is_updateToken = false;
+        this.partialPaymentAmount = 0;
+        this.showPartialPayemntOption = false;
         this.isComplete = false;
+        this.payNowAmount = 0;
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -43,6 +46,13 @@ var FlightTravelerComponent = /** @class */ (function () {
             this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
         }
         this.routeCode = this.route.snapshot.paramMap.get('rc');
+        var customInstalmentData = atob(sessionStorage.getItem('__islt'));
+        customInstalmentData = JSON.parse(customInstalmentData);
+        console.log("customInstalmentData", customInstalmentData);
+        this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
+        this.payNowAmount = customInstalmentData.payNowAmount;
+        var instalmentMode = atob(sessionStorage.getItem('__insMode'));
+        this.showPartialPayemntOption = instalmentMode == 'instalment' ? true : false;
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
@@ -78,23 +88,18 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.checkTravellerComplete = function (object, type) {
         var isEmpty = false;
+        var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
         if (type == 'adult') {
-            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "phoneNo", "title"];
-            isEmpty = this.checkObj(object, travellerKeys);
+            var adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo", "title"];
+            isEmpty = this.checkObj(object, adultTravellerKeys);
         }
-        else if (type == 'child') {
-            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
-            isEmpty = this.checkObj(object, travellerKeys);
-        }
-        else if (type == 'infant') {
-            var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
+        else if (type == 'child' || type == 'infant') {
             isEmpty = this.checkObj(object, travellerKeys);
         }
         return isEmpty;
     };
     FlightTravelerComponent.prototype.checkObj = function (obj, travellerKeys) {
         var isComplete = true;
-        // obj.firstName = '';
         var userStr = JSON.stringify(obj);
         JSON.parse(userStr, function (key, value) {
             if (!value && travellerKeys.indexOf(key) !== -1) {
@@ -119,8 +124,17 @@ var FlightTravelerComponent = /** @class */ (function () {
             this.router.navigate(['/flight/checkout', this.routeCode]);
         }
         else {
-            var errorMessage = "You have to select " + Number(this._itinerary.adult) + " Adult, "
-                + Number(this._itinerary.child) + " Child " + Number(this._itinerary.infant) + " Infant";
+            var errorMessage = "You have to select ";
+            if (Number(this._itinerary.adult)) {
+                errorMessage += Number(this._itinerary.adult) + " Adult, ";
+            }
+            if (Number(this._itinerary.child)) {
+                errorMessage += Number(this._itinerary.child) + " Child, ";
+            }
+            if (Number(this._itinerary.infant)) {
+                errorMessage += Number(this._itinerary.infant) + " Infant";
+            }
+            errorMessage = errorMessage.replace(/,\s*$/, "");
             this.toastr.error(errorMessage, 'Invalid Criteria', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
     };

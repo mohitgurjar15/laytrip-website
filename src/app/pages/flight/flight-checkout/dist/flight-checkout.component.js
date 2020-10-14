@@ -23,7 +23,7 @@ var FlightCheckoutComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.validateCardDetails = new rxjs_1.Subject();
         this.showAddCardForm = false;
-        this.progressStep = { step1: true, step2: true, step3: false };
+        this.progressStep = { step1: true, step2: true, step3: true, step4: false };
         this.cardToken = '';
         this.instalmentMode = 'instalment';
         this.laycreditpoints = 0;
@@ -40,6 +40,7 @@ var FlightCheckoutComponent = /** @class */ (function () {
         this.isShowCardOption = true;
         this.isShowPaymentOption = true;
         this.isShowFeedbackPopup = false;
+        this.isShowPartialPaymentDetails = false;
     }
     FlightCheckoutComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -48,24 +49,8 @@ var FlightCheckoutComponent = /** @class */ (function () {
             this.router.navigate(['/']);
         }
         this.routeCode = this.route.snapshot.paramMap.get('rc');
-        var timerInfo = this.cookieService.get('flight_booking_timer');
-        timerInfo = timerInfo ? JSON.parse(timerInfo) : {};
-        if (timerInfo.route_code == this.routeCode) {
-            this.bookingTimerConfig = {
-                leftTime: 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time, 'seconds'),
-                format: 'm:s'
-            };
-        }
-        else {
-            this.bookingTimerConfig = {
-                leftTime: 600, format: 'm:s'
-            };
-            var bookingTimer = {
-                'route_code': this.routeCode,
-                'time': moment().format('YYYY-MM-DD h:mm:ss')
-            };
-            this.cookieService.put("flight_booking_timer", JSON.stringify(bookingTimer));
-        }
+        this.bookingTimerConfiguration();
+        this.setInstalmentInfo();
         if (this.userInfo.roleId == 7) {
             this.instalmentMode = 'no-instalment';
             this.instalmentType = '';
@@ -85,13 +70,49 @@ var FlightCheckoutComponent = /** @class */ (function () {
         }
         catch (e) {
         }
+        var instalmentMode = atob(sessionStorage.getItem('__insMode'));
+        this.instalmentMode = instalmentMode || 'no-instalment';
+        console.log("this.instalmentMode", this.instalmentMode);
         this.validateBookingButton();
+    };
+    FlightCheckoutComponent.prototype.bookingTimerConfiguration = function () {
+        var timerInfo = this.cookieService.get('flight_booking_timer');
+        timerInfo = timerInfo ? JSON.parse(timerInfo) : {};
+        if (timerInfo.route_code == this.routeCode) {
+            this.bookingTimerConfig = {
+                leftTime: 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(timerInfo.time, 'seconds'),
+                format: 'm:s'
+            };
+        }
+        else {
+            this.bookingTimerConfig = {
+                leftTime: 600, format: 'm:s'
+            };
+            var bookingTimer = {
+                'route_code': this.routeCode,
+                'time': moment().format('YYYY-MM-DD h:mm:ss')
+            };
+            this.cookieService.put("flight_booking_timer", JSON.stringify(bookingTimer));
+        }
+    };
+    FlightCheckoutComponent.prototype.setInstalmentInfo = function () {
+        try {
+            var customInstalmentData = atob(sessionStorage.getItem('__islt'));
+            this.customInstalmentData = JSON.parse(customInstalmentData);
+            console.log("this.customInstalmentData", this.customInstalmentData);
+            this.laycreditpoints = Number(this.customInstalmentData.layCreditPoints);
+            this.additionalAmount = this.customInstalmentData.additionalAmount;
+            this.customAmount = this.customInstalmentData.customAmount;
+            this.customInstalment = this.customInstalmentData.customInstalment;
+            this.instalmentType = this.customInstalmentData.instalmentType;
+        }
+        catch (error) {
+        }
     };
     FlightCheckoutComponent.prototype.toggleAddcardForm = function () {
         this.showAddCardForm = !this.showAddCardForm;
     };
     FlightCheckoutComponent.prototype.applyLaycredit = function (laycreditpoints) {
-        console.log("laycreditpoints", laycreditpoints);
         this.isShowCardOption = true;
         this.laycreditpoints = laycreditpoints;
         this.isShowPaymentOption = true;
@@ -157,7 +178,7 @@ var FlightCheckoutComponent = /** @class */ (function () {
             _this.bookingStatus = 1;
             _this.bookingId = res.laytrip_booking_id;
             _this.bookingLoader = false;
-            _this.progressStep = { step1: true, step2: true, step3: true };
+            _this.progressStep = { step1: true, step2: true, step3: true, step4: true };
             _this.bookingResult = res;
             _this.isShowFeedbackPopup = true;
         }, function (error) {
@@ -169,6 +190,9 @@ var FlightCheckoutComponent = /** @class */ (function () {
             }
             if (error.status == 424) {
                 _this.bookingStatus = 2; // Booking failed from supplier side
+            }
+            if (error.status == 500) {
+                _this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             }
             _this.bookingLoader = false;
         });
@@ -229,6 +253,9 @@ var FlightCheckoutComponent = /** @class */ (function () {
         if (event) {
             this.isShowFeedbackPopup = false;
         }
+    };
+    FlightCheckoutComponent.prototype.toggleInstalmentMode = function () {
+        this.isShowPartialPaymentDetails = !this.isShowPartialPaymentDetails;
     };
     FlightCheckoutComponent = __decorate([
         core_1.Component({

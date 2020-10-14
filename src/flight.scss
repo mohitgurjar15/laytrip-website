@@ -775,12 +775,20 @@
                                 }
 
                                 .refundable {
-                                    padding: 4px 10px;
+                                    padding: 0px;
                                     font-size: 10px;
-                                    color: $text-black;
+                                    color: $bg-green;
                                     font-weight: 500;
-                                    background: $box-border-color;
-                                    border: 1px solid $box-border-color;
+                                    margin-right: 15px;
+                                    display: inline-table;
+                                    border-radius: 5px;
+                                }
+
+                                .no_refundable {
+                                    padding: 0px;
+                                    font-size: 10px;
+                                    color: $error-color;
+                                    font-weight: 500;
                                     margin-right: 15px;
                                     display: inline-table;
                                     border-radius: 5px;
@@ -1078,6 +1086,7 @@
                                     .detail_top {
                                         display: flex;
                                         padding: 0 20px;
+                                        width: 100%;
 
                                         @media(max-width:767px) {
                                             display: flex;
@@ -1086,6 +1095,7 @@
                                         }
 
                                         .detail_left {
+                                            width: 10%;
 
                                             img {
                                                 object-fit: cover;
@@ -1112,9 +1122,10 @@
                                         }
 
                                         .detail_right {
-                                            padding: 0 0 0 75px;
+                                            padding: 0 35px;
                                             display: flex;
-                                            justify-content: flex-start;
+                                            justify-content: center;
+                                            width: 90%;
 
                                             @media(max-width:767px) {
                                                 width: 100%;
@@ -1127,9 +1138,11 @@
 
                                             .flight_info_detail {
                                                 text-align: right;
+                                                width: 40%;
 
                                                 @media(max-width:767px) {
                                                     text-align: center;
+                                                    width: 100%;
                                                 }
 
                                                 h4 {
@@ -1173,13 +1186,14 @@
                                             }
 
                                             .flight_duration {
-                                                width: 140px;
+                                                width: 20%;
                                                 padding: 0 20px;
                                                 text-align: center;
 
                                                 @media(max-width:767px) {
                                                     padding: 15px 10px;
                                                     margin: 0 auto;
+                                                    width: auto;
                                                 }
 
                                                 p {
@@ -1918,12 +1932,20 @@
                                 }
 
                                 .refundable {
-                                    padding: 4px 10px;
+                                    padding: 0;
                                     font-size: 10px;
-                                    color: $text-black;
+                                    color: $bg-green;
+                                    font-weight: 400;
+                                    margin-right: 15px;
+                                    display: inline-table;
+                                    border-radius: 5px;
+                                }
+
+                                .no_refundable {
+                                    padding: 0px;
+                                    font-size: 10px;
+                                    color: $error-color;
                                     font-weight: 500;
-                                    background: $box-border-color;
-                                    border: 1px solid $box-border-color;
                                     margin-right: 15px;
                                     display: inline-table;
                                     border-radius: 5px;
@@ -2221,6 +2243,7 @@
                                         padding: 20px 0;
                                         border: 1px solid $box-border-color;
                                         border-radius: 10px;
+                                        margin: 0 0 20px;
 
                                         @media(max-width:767px) {
                                             padding: 15px;
@@ -2230,6 +2253,7 @@
                                             display: flex;
                                             padding: 0 20px;
                                             justify-content: space-between;
+                                            position: relative;
 
                                             @media(max-width:767px) {
                                                 display: flex;
@@ -2241,6 +2265,9 @@
                                                 font-size: 10px;
                                                 font-weight: 500;
                                                 color: $primary-color;
+                                                position: absolute;
+                                                top: 0;
+                                                right: 20px;
 
                                                 @media(max-width:767px) {
                                                     position: absolute;
@@ -2252,12 +2279,15 @@
                                             .detail_inn_left {
                                                 display: flex;
                                                 padding: 0;
+                                                width: 100%;
 
                                                 @media(max-width:767px) {
                                                     flex-wrap: wrap;
                                                 }
 
                                                 .detail_left {
+                                                    width: 10%;
+
                                                     @media(max-width:767px) {
                                                         width: 100%;
                                                         text-align: center;
@@ -2288,9 +2318,10 @@
                                                 }
 
                                                 .detail_right {
-                                                    padding: 0 0 0 75px;
+                                                    padding: 0 35px;
                                                     display: flex;
                                                     justify-content: flex-start;
+                                                    width: 90%;
 
 
                                                     @media(max-width:767px) {
@@ -2304,9 +2335,11 @@
 
                                                     .flight_info_detail {
                                                         text-align: right;
+                                                        width: 40%;
 
                                                         @media(max-width:767px) {
                                                             text-align: center;
+                                                            width: 100%;
                                                         }
 
                                                         h4 {
@@ -2351,13 +2384,14 @@
                                                     }
 
                                                     .flight_duration {
-                                                        width: 140px;
+                                                        width: 20%;
                                                         padding: 0 20px;
                                                         text-align: center;
 
                                                         @media(max-width:767px) {
                                                             padding: 15px 10px;
                                                             margin: 0 auto;
+                                                            width: auto;
                                                         }
 
                                                         p {
@@ -2432,6 +2466,18 @@
 
                                         &:last-child {
                                             margin: 10px 0 0;
+                                            position: relative;
+
+                                            &:before {
+                                                width: 100%;
+                                                height: 1px;
+                                                background: $primary-color;
+                                                position: absolute;
+                                                top: -10px;
+                                                left: 0;
+                                                content: '';
+                                            }
+
                                         }
                                     }
 
@@ -2909,7 +2955,7 @@
             border-right: 10px solid transparent;
             border-top: 10px solid $box-border-color;
             position: absolute;
-            bottom: -14px;
+            bottom: -15px;
             left: 50%;
             transform: translate(-50%, -50%);
             content: '';
@@ -3335,13 +3381,25 @@
                 }
 
 
-
-                h5 {
+                .block_top_in {
                     width: 100%;
+                    display: flex;
+                    align-content: center;
+                    justify-content: space-between;
                     margin: 0 0 15px;
-                    font-size: 16px;
-                    font-weight: 500;
-                    color: $text-black;
+
+                    h5 {
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: $text-black;
+                    }
+
+                    .view_more {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: $secondary-color;
+                        display: block;
+                    }
                 }
 
                 ul {
@@ -3435,13 +3493,7 @@
                     }
                 }
 
-                .view_more {
-                    margin: 10px 0 0;
-                    font-size: 14px;
-                    font-weight: 400;
-                    color: $secondary-color;
-                    display: block;
-                }
+
             }
         }
     }
@@ -7325,8 +7377,6 @@
                         font-weight: normal;
                         opacity: 1;
                         z-index: 99;
-
-                        img {}
                     }
 
                     p {
@@ -7575,7 +7625,7 @@
     background: $bg-black-opacity-half;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 99999;
 
     .page_load_inner {
         width: 600px;
@@ -7850,7 +7900,7 @@
     }
 
     .block_feedback {
-        width: 450px;
+        width: 1024px;
         max-width: 96%;
         float: left;
         position: absolute;
@@ -7858,7 +7908,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background: #fff;
-        padding: 40px;
+        padding: 40px 80px;
         border-radius: 10px;
         text-align: center;
         box-shadow: 0px 3px 20px $shadow-black-light;
@@ -7867,8 +7917,16 @@
             padding: 20px;
         }
 
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-weight: normal;
+            opacity: 1;
+            z-index: 99;
+        }
+
         .block_feedback_inner {
-            width: 670px;
             max-width: 100%;
             margin: 0 auto;
 
@@ -7893,10 +7951,11 @@
                 font-size: 16px;
                 font-weight: 500;
                 color: $text_grey_dark;
-                margin: 0 0 25px;
+                margin: 0 0 65px;
 
                 @media(max-width:767px) {
                     font-size: 16px;
+                    margin: 0 0 35px;
                 }
             }
 
@@ -7908,19 +7967,76 @@
                     width: 100%;
                     display: flex;
                     justify-content: space-between;
-                    margin: 0 0 20px;
-                    padding: 0 25px;
+                    margin: 0 0 70px;
+                    padding: 0;
                     list-style: none;
 
-                    @media(max-width:575px) {
-                        padding: 0 35px;
-                    }
-
-                    @media(max-width:480px) {
-                        padding: 0;
+                    @media(max-width:767px) {
+                        margin: 0 0 20px;
                     }
 
                     li {
+                        position: relative;
+                        z-index: 2;
+                        margin: 0;
+
+                        &:before {
+                            width: 100%;
+                            height: 3px;
+                            background: $border-color;
+                            position: absolute;
+                            top: 31%;
+                            left: 100%;
+                            content: '';
+                            z-index: -1;
+                        }
+
+                        &:last-child {
+                            &:before {
+                                display: none;
+                            }
+                        }
+
+                        @media(max-width:991px) {
+                            &:before {
+                                width: 300%;
+                                top: 29%;
+                                left: 0;
+                            }
+                        }
+
+                        @media(max-width:767px) {
+                            &:before {
+                                width: 320%;
+                                top: 29%;
+                                left: 0;
+                            }
+                        }
+
+                        @media(max-width:575px) {
+                            &:before {
+                                width: 280%;
+                                top: 27%;
+                                left: 0%;
+                            }
+                        }
+
+                        @media(max-width:480px) {
+                            &:before {
+                                width: 320%;
+                                top: 27%;
+                                left: 0%;
+                            }
+                        }
+
+                        @media(max-width:360px) {
+                            &:before {
+                                width: 290%;
+                                top: 27%;
+                                left: 0%;
+                            }
+                        }
+
                         a {
                             background: transparent;
                             padding: 0;
@@ -7928,135 +8044,220 @@
                             flex-flow: column;
                             justify-content: center;
                             line-height: normal;
+                            transition: 0.25s ease-out;
 
                             img {
-                                height: 50px;
-                                margin: 0 0 10px;
+                                height: 100px;
+                                position: relative;
+                                transform: scale(1);
+                                transition: 0.25s ease-out;
 
-                                @media(max-width:767px) {
-                                    margin: 0 0 10px;
-                                    height: 50px;
+                                &.normal {
+                                    opacity: 1;
+                                }
+
+                                &.on_hover {
+                                    opacity: 0;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                }
+
+                                @media(max-width:991px) {
+                                    margin: 0;
+                                    width: 50px;
+                                    height: auto;
+                                }
+
+                                @media(max-width:480px) {
+                                    margin: 0;
+                                    width: 30px;
+                                    height: auto;
                                 }
                             }
 
                             span {
-                                font-size: 14px;
+                                font-size: 20px;
                                 font-weight: 500;
-                                color: $text_grey_dark;
+                                margin: 20px 0 0px;
+                                color: $feedback_text-clr;
+                                transition: 0.25s ease-out;
 
-                                @media(max-width:575px) {
-                                    font-size: 16px;
+                                @media(max-width:991px) {
+                                    margin: 20px 0 0;
+                                    font-size: 14px;
+                                }
+
+                                @media(max-width:480px) {
+                                    margin: 10px 0 0;
+                                    font-size: 8px;
                                 }
                             }
 
                             &:before {
                                 display: none;
                             }
-                        }
 
-                        @media(max-width:575px) {
-                            margin: 0 0 15px;
+                            &.active {
+                                img {
+                                    transform: scale(1.4);
+
+                                    &.normal {
+                                        opacity: 0;
+                                    }
+
+                                    &.on_hover {
+                                        opacity: 1;
+                                    }
+                                }
+
+                                span {
+                                    color: $text_grey_dark;
+                                    margin: 30px 0 0;
+
+                                    @media(max-width:991px) {
+                                        margin: 20px 0 0;
+                                    }
+
+                                    @media(max-width:480px) {
+                                        margin: 10px 0 0;
+                                    }
+                                }
+                            }
+
+                            &:hover {
+                                img {
+                                    transform: scale(1.4);
+
+                                    &.normal {
+                                        opacity: 0;
+                                    }
+
+                                    &.on_hover {
+                                        opacity: 1;
+                                    }
+                                }
+
+                                span {
+                                    color: $text_grey_dark;
+                                    margin: 30px 0 0;
+
+                                    @media(max-width:991px) {
+                                        margin: 20px 0 0;
+                                    }
+
+                                    @media(max-width:480px) {
+                                        margin: 10px 0 0;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
 
-                .feedback_comment {
-                    width: 100%;
-                    margin: 0 0 30px;
-
-                    label {
-                        width: 100%;
-                        font-size: 12px;
-                        font-weight: 400;
-                        color: $text-grey;
-                        text-align: left;
-                    }
-
-                    textarea {
-                        width: 100%;
-                        height: 50px;
-                        border: none;
-                        border-bottom: 1px solid $box-border-color;
-                        font-size: 16px;
-                        font-weight: 400;
-                        color: $text-grey;
-                        resize: none;
-
-                        @media(max-width:767px) {
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                .feedback_btn {
+                .block_feedback_form {
                     width: 100%;
                     display: flex;
+                    align-items: center;
                     justify-content: space-between;
 
-                    button {
-                        display: inline-block;
-                        height: 40px;
-                        padding: 0 25px;
-                        font-size: 16px;
-                        color: $text-white;
-                        font-weight: 400;
-                        border-radius: 8px;
-                        background: $primary-color;
-                        position: relative;
-                        z-index: 9;
-                        overflow: hidden;
-                        border: none;
+                    .feedback_comment {
+                        width: 50%;
 
-                        &:before {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            left: 0;
+                        label {
                             width: 100%;
-                            height: 0%;
-                            background: $secondary-color;
-                            z-index: -1;
-                            transition: 0.8s;
-                            border-radius: 0 0 50% 50%;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: $text-grey;
+                            text-align: left;
                         }
 
-                        img {
-                            margin: 0 0 0 15px;
-                            height: 15px;
-                        }
+                        textarea {
+                            width: 100%;
+                            height: 50px;
+                            border: none;
+                            border-bottom: 1px solid $box-border-color;
+                            font-size: 16px;
+                            font-weight: 400;
+                            color: $text-grey;
+                            resize: none;
 
-                        &:hover {
-                            border-color: $secondary-color;
-
-                            &:before {
-                                height: 190%;
+                            @media(max-width:767px) {
+                                font-size: 14px;
                             }
-                        }
-
-                        @media(max-width:575px) {
-                            font-size: 14px;
-                            height: 40px;
-                            padding: 0 10px;
                         }
                     }
 
-                    a {
-                        margin: 40px 0 0;
-                        display: block;
+                    .feedback_btn {
+                        width: 50%;
+                        display: flex;
+                        justify-content: flex-end;
 
-                        @media(max-width:767px) {
-                            margin: 20px 0 0;
+                        button {
+                            display: inline-block;
+                            height: 50px;
+                            padding: 0 25px;
+                            font-size: 16px;
+                            color: $text-white;
+                            font-weight: 400;
+                            border-radius: 8px;
+                            background: $primary-color;
+                            position: relative;
+                            z-index: 9;
+                            overflow: hidden;
+                            border: none;
+
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 0%;
+                                background: $secondary-color;
+                                z-index: -1;
+                                transition: 0.8s;
+                                border-radius: 0 0 50% 50%;
+                            }
 
                             img {
-                                width: 30%;
+                                margin: 0 0 0 15px;
+                                height: 15px;
+                            }
+
+                            &:hover {
+                                border-color: $secondary-color;
+
+                                &:before {
+                                    height: 190%;
+                                }
+                            }
+
+                            @media(max-width:575px) {
+                                font-size: 14px;
+                                height: 40px;
+                                padding: 0 10px;
                             }
                         }
 
-                        @media(max-width:575px) {
-                            margin: 20px 0 0;
+                        a {
+                            margin: 40px 0 0;
+                            display: block;
 
-                            img {
-                                width: 40%;
+                            @media(max-width:767px) {
+                                margin: 20px 0 0;
+
+                                img {
+                                    width: 30%;
+                                }
+                            }
+
+                            @media(max-width:575px) {
+                                margin: 20px 0 0;
+
+                                img {
+                                    width: 40%;
+                                }
                             }
                         }
                     }
