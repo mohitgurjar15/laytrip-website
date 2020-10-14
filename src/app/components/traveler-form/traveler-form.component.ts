@@ -75,7 +75,9 @@ export class TravelerFormComponent implements OnInit {
     });
 
     this.setUserTypeValidation();
+
     if (this.traveler.userId) {
+
       this.adultForm.patchValue({
         title: this.traveler.title ? this.traveler.title : 'mr',
         firstName: this.traveler.firstName,
@@ -90,8 +92,6 @@ export class TravelerFormComponent implements OnInit {
         passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
         frequently_no: ''
       });
-      // this.traveler.isComplete =  this.adultForm.status == 'VALID' ? true : false;
-      // this.auditFormStatus.emit(this.traveler);
     }
   }
 
@@ -187,12 +187,13 @@ export class TravelerFormComponent implements OnInit {
 
       if (this.type === 'adult') {
         let adultObj = {
-          country_code: this.adultForm.value.country_code.code &&
-            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
+          country_code: this.adultForm.value.country_code.name &&
+            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.name : this.adultForm.value.country_code,
           phone_no: this.adultForm.value.phone_no,
         };
         jsonData = Object.assign(jsonData, adultObj);
       }
+      // console.log(this.adultForm.value.country_code,jsonData)
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;

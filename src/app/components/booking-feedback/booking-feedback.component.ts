@@ -15,8 +15,9 @@ export class BookingFeedbackComponent implements OnInit {
   @Input() bookingId:number;
   feedbackForm: FormGroup;
   submitted : boolean = false;
-  is_rating = false;
-  _rating = '';
+  is_rating = true;
+  ratingValue = 1;
+  _rating = 'Terrible';
   @Output() feedbackValueChange = new EventEmitter();
 
   constructor(
@@ -40,7 +41,7 @@ export class BookingFeedbackComponent implements OnInit {
     } else {
       let jsonData = {
         booking_id: this.bookingId,
-        rating: 5,
+        rating: this.ratingValue,
         message: this.feedbackForm.value.comment,
       };
       this.flightService.addFeedback(jsonData).subscribe((data: any) => {
@@ -52,19 +53,23 @@ export class BookingFeedbackComponent implements OnInit {
   }
 
   selectRating(event, rating) {
-    this._rating = '';
-    this.is_rating = false;
-    if (rating == 'B') {
-      this._rating = 'B';
-    } else if (rating == 'G') {
-      this._rating = 'G';
-    } else if (rating == 'E') {
-      this._rating = 'E';
-    } else {
-      this.is_rating = false;
-      this._rating = '';
-    }
-    this.is_rating = true;
+   
+    if (rating == 'Terrible') {
+      this._rating = 'Terrible';
+      this.ratingValue = 1;
+    } else if (rating == 'Bad') {
+      this._rating = 'Bad';
+      this.ratingValue = 2;
+    } else if (rating == 'Okay') {
+      this._rating = 'Okay';
+      this.ratingValue = 3;
+    }  else if (rating == 'Good') {
+      this._rating = 'Good';
+      this.ratingValue = 4;
+    } else if (rating == 'Excllent') {
+      this.ratingValue = 5;
+      this._rating = 'Excllent';
+    } 
   }
 
   close() {

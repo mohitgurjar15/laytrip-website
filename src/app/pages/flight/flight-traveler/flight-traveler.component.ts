@@ -104,31 +104,25 @@ export class FlightTravelerComponent implements OnInit {
 
   checkTravellerComplete(object,type){
     let isEmpty = false;
+    let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
+
     if(type == 'adult'){
-      let travellerKeys = ["firstName","lastName","email","dob","gender","phoneNo","title"];
-      isEmpty = this.checkObj(object,travellerKeys);     
+      let adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo","title"];
+      isEmpty = this.checkObj(object,adultTravellerKeys);     
 
-    } else if(type == 'child'){
-      let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
+    } else if(type == 'child' || type == 'infant'){
       isEmpty = this.checkObj(object,travellerKeys);
-
-    } else if(type == 'infant'){
-      let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
-      isEmpty = this.checkObj(object,travellerKeys);
-
-    }
+    } 
     return isEmpty;
     
 
   }
   
   
-  checkObj(obj,travellerKeys){ 
+  checkObj(obj,travellerKeys) { 
     let isComplete = true;
-    // obj.firstName = '';
-  
     const userStr = JSON.stringify(obj);
-    
+
     JSON.parse(userStr, (key, value) => {
       if(!value &&  travellerKeys.indexOf(key) !== -1){
         return isComplete = false;                
@@ -156,8 +150,18 @@ export class FlightTravelerComponent implements OnInit {
     if(this._travellersCountValid ){
       this.router.navigate(['/flight/checkout',this.routeCode]);
     } else {
-      let errorMessage = "You have to select "+ Number(this._itinerary.adult)+" Adult, "
-      + Number(this._itinerary.child)+" Child "+Number(this._itinerary.infant)+" Infant";
+      let errorMessage = "You have to select ";
+      if(Number(this._itinerary.adult)){
+        errorMessage +=  Number(this._itinerary.adult)+" Adult, ";
+      } 
+      if(Number(this._itinerary.child)){
+        errorMessage +=  Number(this._itinerary.child)+" Child, ";
+      } 
+      if(Number(this._itinerary.infant)){
+        errorMessage +=  Number(this._itinerary.infant)+" Infant";
+      } 
+      errorMessage = errorMessage.replace(/,\s*$/, "");
+      
       this.toastr.error(errorMessage, 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
     }
   }

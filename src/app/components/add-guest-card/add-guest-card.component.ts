@@ -25,6 +25,17 @@ export class AddGuestCardComponent implements OnInit {
   isValidExpiry:boolean=true;
   expiryMinDate=new Date();
 
+  mask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/]
+  };
+
   ngOnInit() {
     this.validateCardDetails.subscribe(event => {
       this.validateCard(event);

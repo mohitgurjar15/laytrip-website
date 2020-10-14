@@ -20,11 +20,16 @@ export class CardActionFormComponent implements OnInit {
   cardError = '';
   saveCardLoader = false;
 
-  // mask = {
-  //   guide: true,
-  //   showMask: true,
-  //   mask: [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]
-  // };
+  mask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/]
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +44,7 @@ export class CardActionFormComponent implements OnInit {
       last_name: ['', Validators.required],
       card_type: [''],
       card_name: ['', Validators.required],
-      card_number: ['', Validators.required],
+      card_number: ['', [Validators.required, Validators.maxLength(20)]],
       card_expiry: [''],
       card_cvv: [''],
     });
@@ -93,6 +98,8 @@ export class CardActionFormComponent implements OnInit {
   }
 
   onSubmit(formValue) {
+    this.cardActionForm.controls.card_number.setValue(this.cardActionForm.controls.card_number.value.replace(/\s/g, ""));
+    console.log(this.cardActionForm);
     this.cardError = '';
     if (this.cardActionForm.invalid) {
       return;
@@ -101,10 +108,11 @@ export class CardActionFormComponent implements OnInit {
       first_name: formValue.first_name,
       last_name: formValue.last_name,
       card_cvv: formValue.card_cvv,
-      card_number: formValue.card_number,
+      card_number: formValue.card_number.replace(/\s/g, ""),
       expiry: moment(formValue.card_expiry).format('MM/YYYY')
     };
     this.saveCard(cardData);
+    console.log(cardData);
   }
 
   saveCard(cardData) {
@@ -120,5 +128,4 @@ export class CardActionFormComponent implements OnInit {
     })
     );
   }
-
 }

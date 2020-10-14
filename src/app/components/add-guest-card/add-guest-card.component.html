@@ -38,7 +38,7 @@
         <div class="form_field">
             <label>Card Number<sup>*</sup></label>
             <div class="text_field">
-                <input type="text"  maxlength="20" tabindex="101" name="card_number"
+                <input type="text"  maxlength="20" tabindex="101" name="card_number" [textMask]="mask"
                     placeholder="Enter card number" (change)="handleCardDetails($event)">
                 <p *ngIf="!isValidCardNumber" class="text-danger">Please enter your card
                     number.

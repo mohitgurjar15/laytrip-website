@@ -100,10 +100,11 @@ export class ProfileComponent implements OnInit {
       }),
       this.countries_code = data.map(country=>{
         return {
-            id:country.id,
-            name:country.phonecode+' ('+country.iso2+')',
-            country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+          id: country.id,
+          name: country.phonecode+' ('+country.iso2+')',
+          code:country.phonecode,
+          country_name:country.name+ ' ' +country.phonecode,
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
         }
       })
       console.log( this.countries_code )
@@ -262,7 +263,7 @@ export class ProfileComponent implements OnInit {
       formdata.append("passportNumber",this.profileForm.value.passport_number);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
       formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
-      console.log(typeof this.profileForm.value.country_id )
+      // console.log(typeof this.profileForm.value.country_id )
       if(typeof this.profileForm.value.country_id === 'string'){
         formdata.append("country_id", this.selectResponse.country.id);
       } else {

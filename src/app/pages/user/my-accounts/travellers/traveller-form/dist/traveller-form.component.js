@@ -109,6 +109,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     return {
                         id: country.id,
                         name: country.phonecode + ' (' + country.iso2 + ')',
+                        code: country.phonecode,
                         country_name: country.name + ' ' + country.phonecode,
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                     };
@@ -128,8 +129,6 @@ var TravellerFormComponent = /** @class */ (function () {
             return;
         }
         else {
-            console.log(this.coAccountForm.value);
-            console.log(this.traveller);
             var country_id = this.coAccountForm.value.country_id.id;
             if (!Number(country_id)) {
                 country_id = this.traveller.country.id;
@@ -144,8 +143,8 @@ var TravellerFormComponent = /** @class */ (function () {
                 // passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
                 passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
                 passport_number: this.coAccountForm.value.passport_number,
-                country_code: this.coAccountForm.value.country_code.code &&
-                    this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.code : this.coAccountForm.value.country_code,
+                country_code: this.coAccountForm.value.country_code.name &&
+                    this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.name : this.coAccountForm.value.country_code,
                 phone_no: this.coAccountForm.value.phone_no
             };
             if (this.travellerId) {
@@ -176,7 +175,6 @@ var TravellerFormComponent = /** @class */ (function () {
         }
     };
     TravellerFormComponent.prototype.ngOnChanges = function (changes) {
-        console.log('sdadddd', changes);
     };
     TravellerFormComponent.prototype.stringToDate = function (string, saprator) {
         var dateArray = string.split(saprator);

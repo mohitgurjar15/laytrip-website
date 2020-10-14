@@ -48,8 +48,8 @@
         <div class="form_field half">
           <label>Card number<sup>*</sup></label>
           <div class="text_field">
-            <input type="text" maxlength="20" tabindex="4" placeholder="0000 0000 0000 0000"
-              formControlName="card_number">
+            <input type="text" tabindex="4" placeholder="0000 0000 0000 0000 0000"
+              formControlName="card_number" [textMask]="mask">
               <!-- [textMask]="mask" -->
             <div *ngIf="cardActionForm.controls.card_number.errors && cardActionForm.controls.card_number.touched">
               <p *ngIf="cardActionForm.controls.card_number.errors.required" class="text-danger">Please enter Card

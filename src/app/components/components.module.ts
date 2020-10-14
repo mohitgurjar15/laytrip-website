@@ -25,6 +25,7 @@ import { RedeemLaycreditComponent } from './redeem-laycredit/redeem-laycredit.co
 import { BookingFeedbackComponent } from './booking-feedback/booking-feedback.component';
 import { BookingAsLoginOrGuestPopupComponent } from './booking-as-login-or-guest-popup/booking-as-login-or-guest-popup.component';
 import { LottieAnimationViewModule } from 'ng-lottie';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LottieAnimationViewModule } from 'ng-lottie';
     Ng5SliderModule,
     CookieModule.forRoot(),
     CalendarModule,
-    LottieAnimationViewModule.forRoot()
+    LottieAnimationViewModule.forRoot(),
+    TextMaskModule
   ],
   exports: [
     SearchAirportComponent,

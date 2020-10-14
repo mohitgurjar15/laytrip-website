@@ -24,13 +24,7 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
   }
 
   bookingAs(type){
-
-    this.userType=type;
-    console.log(this.userType)
-  	if(type=='guest'){
-  	}
-  	if(type=='login'){
-  	}
+    this.userType=type;  	
   }
 
   btnContinue(type){

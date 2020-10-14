@@ -68,8 +68,6 @@ var TravelerFormComponent = /** @class */ (function () {
                 passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
                 frequently_no: ''
             });
-            // this.traveler.isComplete =  this.adultForm.status == 'VALID' ? true : false;
-            // this.auditFormStatus.emit(this.traveler);
         }
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
@@ -158,12 +156,13 @@ var TravelerFormComponent = /** @class */ (function () {
             }
             if (this.type === 'adult') {
                 var adultObj = {
-                    country_code: this.adultForm.value.country_code.code &&
-                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.code : this.adultForm.value.country_code,
+                    country_code: this.adultForm.value.country_code.name &&
+                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.name : this.adultForm.value.country_code,
                     phone_no: this.adultForm.value.phone_no
                 };
                 jsonData = Object.assign(jsonData, adultObj);
             }
+            // console.log(this.adultForm.value.country_code,jsonData)
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;

@@ -17,8 +17,9 @@ var BookingFeedbackComponent = /** @class */ (function () {
         this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
-        this.is_rating = false;
-        this._rating = '';
+        this.is_rating = true;
+        this.ratingValue = 1;
+        this._rating = 'Terrible';
         this.feedbackValueChange = new core_1.EventEmitter();
     }
     BookingFeedbackComponent.prototype.ngOnInit = function () {
@@ -36,7 +37,7 @@ var BookingFeedbackComponent = /** @class */ (function () {
         else {
             var jsonData = {
                 booking_id: this.bookingId,
-                rating: 5,
+                rating: this.ratingValue,
                 message: this.feedbackForm.value.comment
             };
             this.flightService.addFeedback(jsonData).subscribe(function (data) {
@@ -47,22 +48,26 @@ var BookingFeedbackComponent = /** @class */ (function () {
         }
     };
     BookingFeedbackComponent.prototype.selectRating = function (event, rating) {
-        this._rating = '';
-        this.is_rating = false;
-        if (rating == 'B') {
-            this._rating = 'B';
+        if (rating == 'Terrible') {
+            this._rating = 'Terrible';
+            this.ratingValue = 1;
         }
-        else if (rating == 'G') {
-            this._rating = 'G';
+        else if (rating == 'Bad') {
+            this._rating = 'Bad';
+            this.ratingValue = 2;
         }
-        else if (rating == 'E') {
-            this._rating = 'E';
+        else if (rating == 'Okay') {
+            this._rating = 'Okay';
+            this.ratingValue = 3;
         }
-        else {
-            this.is_rating = false;
-            this._rating = '';
+        else if (rating == 'Good') {
+            this._rating = 'Good';
+            this.ratingValue = 4;
         }
-        this.is_rating = true;
+        else if (rating == 'Excllent') {
+            this.ratingValue = 5;
+            this._rating = 'Excllent';
+        }
     };
     BookingFeedbackComponent.prototype.close = function () {
         this.feedbackValueChange.emit(true);

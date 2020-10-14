@@ -30,8 +30,19 @@ export class AddCardComponent implements OnInit {
     format: 'MM/YYYY',
     displayFormat: 'MM/YYYY'
   };
-  saveCardLoader:boolean=false;
-  expiryMinDate=new Date();
+  saveCardLoader: boolean = false;
+  expiryMinDate = new Date();
+
+  mask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/, ' ',
+      /\d/, /\d/, /\d/, /\d/]
+  };
 
   ngOnInit() {
 
@@ -39,12 +50,12 @@ export class AddCardComponent implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       card_cvv: ['', Validators.required],
-      card_number: ['', Validators.required],
+      card_number: ['', [Validators.required, Validators.maxLength(20)]],
       expiry: ['', Validators.required]
     });
   }
 
-  spreedlySdk(){
+  spreedlySdk() {
     Spreedly.init('YNEdZFTwB1tRR4zwvcMIaUxZq3g', {
       'numberEl': 'spreedly-number',
       'cvvEl': 'spreedly-cvv',
@@ -88,36 +99,36 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
-
+    this.cardForm.controls.card_number.setValue(this.cardForm.controls.card_number.value.replace(/\s/g, ""));
     this.cardError = '';
     this.submitted = true;
     if (this.cardForm.invalid) {
       return;
-    } 
-    let cardData={
+    }
+    let cardData = {
       first_name: this.cardForm.controls.first_name.value,
       last_name: this.cardForm.controls.last_name.value,
       card_cvv: this.cardForm.controls.card_cvv.value,
-      card_number: this.cardForm.controls.card_number.value,
-      expiry : moment(this.cardForm.controls.expiry.value).format('MM/YYYY')
+      card_number: this.cardForm.controls.card_number.value.replace(/\s/g, ""),
+      expiry: moment(this.cardForm.controls.expiry.value).format('MM/YYYY')
     }
     this.saveCard(cardData);
   }
 
   saveCard(cardData) {
-    this.saveCardLoader=true;
+    this.saveCardLoader = true;
     this.genericService.saveCard(cardData).subscribe((res: any) => {
       //this.cardForm.reset();
       this.emitNewCard.emit(res);
-      this.saveCardLoader=false;
+      this.saveCardLoader = false;
     }, (error => {
-      this.saveCardLoader=false;
-      this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
+      this.saveCardLoader = false;
+      this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
   }
 
-  expiryDateUpdate(event){
+  expiryDateUpdate(event) {
 
   }
 }

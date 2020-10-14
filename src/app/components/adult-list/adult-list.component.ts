@@ -59,7 +59,6 @@ export class AdultListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this._adults)
     this.checkUser();
     this.getCountry();
     if (this.type == 'adult' && !this.isLoggedIn) {
@@ -110,6 +109,7 @@ export class AdultListComponent implements OnInit {
           this._itinerarySelection.infant = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
         }
       }
+      console.log(this.counter)
     }
 
     this.adultsCount.emit(this.counter);
@@ -157,18 +157,43 @@ export class AdultListComponent implements OnInit {
 
 
   pushTraveler(event) {
+    console.log("event",event)
+    let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
+
     if (event.user_type === 'adult') {
       const index = this._adults.indexOf(event.userId, 0);
-      this._adults = this._adults.filter(item => item.userId != event.userId );    
+      this._adults = this._adults.filter(item => item.userId != event.userId );  
+
+      let adultTravellerKeys = ["firstName","lastName","email","dob","gender","phoneNo","title"];      
+      event.isComplete = this.checkObj(event,adultTravellerKeys);     
+      
       this._adults.push(event);
     } else if (event.user_type === 'child') {
       this._childs = this._childs.filter(item => item.userId != event.userId );
+
+      event.isComplete = this.checkObj(event,travellerKeys);     
+
       this._childs.push(event);
     } else {
       this._infants = this._infants.filter(item => item.userId != event.userId );
+
+      event.isComplete = this.checkObj(event,travellerKeys);     
+
       this._infants.push(event);
     }
     this.showAddAdultForm = false;
+  }
+
+  checkObj(obj,travellerKeys) { 
+    let isComplete = true;
+    const userStr = JSON.stringify(obj);
+
+    JSON.parse(userStr, (key, value) => {
+      if(!value &&  travellerKeys.indexOf(key) !== -1){
+        return isComplete = false;                
+      }          
+    });
+    return isComplete;
   }
 
 
@@ -201,6 +226,7 @@ export class AdultListComponent implements OnInit {
           return {
             id: country.id,
             name:country.phonecode+' ('+country.iso2+')',
+            code:country.phonecode,
             country_name:country.name+ ' ' +country.phonecode,
             flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
           }
