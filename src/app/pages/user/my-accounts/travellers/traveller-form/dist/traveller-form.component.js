@@ -110,7 +110,7 @@ var TravellerFormComponent = /** @class */ (function () {
                         id: country.id,
                         name: country.phonecode + ' (' + country.iso2 + ')',
                         country_name: country.name + ' ' + country.phonecode,
-                        avatar_url: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
+                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                     };
                 });
         }, function (error) {

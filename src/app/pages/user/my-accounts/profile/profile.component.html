@@ -90,15 +90,13 @@
                                                         <ng-select class="ng-customClass" tabindex="4"
                                                             selectOnTab="true" [items]="countries_code" bindValue="login" bindLabel="country_name"
                                                             clearSearchOnAdd="true" formControlName="country_code"
-                                                            style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Afghanistan.svg);"
                                                             placeholder="+1">
                                                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                                                <span class="ng-value-label"><img [src]="item.avatar_url" width="20px" height="20px"> {{item.country_name}}</span>
+                                                                <span class="ng-value-label mohit"><img [src]="item.flag ? item.flag : 'http://localhost/laytrip_ui/assets/images/icon/team-flag.svg'" width="20px" height="20px">  {{item.country_name}}</span>
                                                                 <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                                                            </ng-template>
-                                                        
+                                                            </ng-template>                                                        
                                                             <ng-template ng-option-tmp let-item="item">
-                                                                <img [src]="item.avatar_url" width="20px" height="20px"> {{item.country_name}}
+                                                                <img [src]="item.flag" width="20px" height="20px"> {{item.country_name}}
                                                             </ng-template>
                                                         </ng-select>
                                                     </div>
@@ -336,7 +334,7 @@
                                             <label>Passport Expiration Date</label>
                                             <div class="text_field">
                                                 <p-calendar 
-                                                inputStyleClass="custom_datpicker birth_date"
+                                                inputStyleClass="custom_datpicker passport_expiry_cal birth_date"
                                                 inputId="basic" 
                                                 formControlName="passport_expiry" 
                                                 [minDate]="dobMinDate"

@@ -59,7 +59,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 .cmn_add_edit_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm .add_card_form .form_row .form_field .ui-calendar {
   width: 100%;
 }
-.cmn_add_edit_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm .add_card_form .form_row .form_field .text_field .phone_no .code {
+.cmn_add_edit_modal .modal-dialog .modal-content .card_modal_cnt .modal_btm .add_card_form .form_row .form_field .text_field .phone_no .code .dropdown {
   width: 150px;
 }
 
@@ -70,12 +70,22 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .ui-calendar {
   width: 100%;
 }
+.account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .passport_expiry_cal .ui-calendar .ui-datepicker {
+  min-width: auto;
+}
 
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field .ui-calendar {
   width: 100%;
+}
+.cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field .phone_no .code {
+  width: 150px;
 }
 
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount input {
   -moz-appearance: textfield !important;
   -webkit-appearance: none;
+}
+
+.account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field .passport_expiry_cal .ui-calendar .ui-datepicker {
+  width: 200px !important;
 }

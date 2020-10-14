@@ -184,9 +184,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (userToken && userToken != 'undefined' && userToken != 'null') {
       this.isLoggedIn = true;
       this.userDetails = getLoginUserInfo();
-      // if (this.userDetails.roleId != 7 && !this._isLayCredit ) {
-      //   this.totalLaycredit();
-      // }
+      if (this.userDetails.roleId != 7 && !this._isLayCredit ) {
+        this.totalLaycredit();
+      }
+      this.showTotalLayCredit = this.totalLayCredit;
     }
   }
 

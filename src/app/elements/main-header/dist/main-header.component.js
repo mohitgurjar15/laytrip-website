@@ -57,24 +57,27 @@ var MainHeaderComponent = /** @class */ (function () {
             }
         }
     }
+    MainHeaderComponent_1 = MainHeaderComponent;
     MainHeaderComponent.prototype.ngOnInit = function () {
         this.checkUser();
         this.getLangunages();
         this.getCurrencies();
         this.loadJquery();
         if (this.isLoggedIn) {
-            /* if(this.userDetails.roleId!=7){
-              this.totalLaycredit();
-            } */
+            if (this.userDetails.roleId != 7) {
+                this.totalLaycredit();
+            }
         }
+    };
+    MainHeaderComponent.prototype.ngAfterContentChecked = function () {
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
         // this.userDetails = getLoginUserInfo();
-        //this.totalLaycredit();
+        // this.totalLaycredit();
     };
     MainHeaderComponent.prototype.ngOnChanges = function () {
-        //this.totalLaycredit();
+        // this.totalLaycredit();
     };
     /**
      * change user lanunage
@@ -188,11 +191,14 @@ var MainHeaderComponent = /** @class */ (function () {
         }));
     };
     MainHeaderComponent.prototype.openSignModal = function () {
-        console.log('sd');
         var modalRef = this.modalService.open(auth_component_1.AuthComponent);
         $('#sign_in_modal').modal('show');
     };
-    MainHeaderComponent = __decorate([
+    var MainHeaderComponent_1;
+    __decorate([
+        core_1.ViewChild(MainHeaderComponent_1)
+    ], MainHeaderComponent.prototype, "headerComponent");
+    MainHeaderComponent = MainHeaderComponent_1 = __decorate([
         core_1.Component({
             selector: 'app-main-header',
             templateUrl: './main-header.component.html',

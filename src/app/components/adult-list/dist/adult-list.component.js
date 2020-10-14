@@ -8,12 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.AdultListComponent = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("../../../environments/environment");
 var AdultListComponent = /** @class */ (function () {
     function AdultListComponent(cookieService, genericService, router, cd) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.router = router;
         this.cd = cd;
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.adultsCount = new core_1.EventEmitter();
         this._itinerarySelectionArray = new core_1.EventEmitter();
         this.travelers = [];
@@ -182,7 +184,8 @@ var AdultListComponent = /** @class */ (function () {
                     return {
                         id: country.id,
                         name: country.phonecode + ' (' + country.iso2 + ')',
-                        code: country.phonecode
+                        country_name: country.name + ' ' + country.phonecode,
+                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                     };
                 });
         }, function (error) {
