@@ -16,7 +16,7 @@
                             alt="Flight Icon" />
                         <span>Flight</span>
                     </a>
-                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
+                    <a class="nav-item nav-link" id="nav-hotel" style="cursor:no-drop"  role="tab"
                         aria-selected="false">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg"
                             alt="Hotel Icon" />
@@ -24,7 +24,7 @@
                             alt="Hotel Icon" />
                         <span>Hotel</span>
                     </a>
-                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation"
+                    <a class="nav-item nav-link" id="nav-accommodation" style="cursor:no-drop" 
                         role="tab" aria-selected="false">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg"
                             alt="Accommodation Icon" />
@@ -84,7 +84,7 @@
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
-                                                            [label]="'From Destination'" [placeHolder]="'New York'"
+                                                            [label]="'From'" [placeHolder]="'New York'"
                                                             [defaultSelected]="'NY, United States'"
                                                             (changeValue)="destinationChangedValue($event)"
                                                             (getSwapValue)="getSwappedValue($event)"
@@ -102,7 +102,7 @@
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
-                                                            [label]="'TO DESTINATION'" [placeHolder]="'Los Angeles'"
+                                                            [label]="'TO'" [placeHolder]="'Los Angeles'"
                                                             [defaultSelected]="'CA, United States'"
                                                             (changeValue)="destinationChangedValue($event)"
                                                             (getSwapValue)="getSwappedValue($event)"

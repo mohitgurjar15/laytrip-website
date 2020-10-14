@@ -1,14 +1,18 @@
 
 <div class="fliter_block">
   <div class="cmn_block price">
-    <h5>Price</h5>
+    <div class="block_top_in">
+      <h5>Price</h5>
+    </div>
     <div class="custom_range_slide">
       <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
         [(highValue)]="priceHighValue" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
     </div>
   </div>
   <div class="cmn_block partial_payment_price">
-    <h5>Partial payment price</h5>
+    <div class="block_top_in">
+      <h5>Partial payment price</h5>
+    </div>
     <div class="custom_range_slide">
       <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
         [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)">
@@ -57,7 +61,9 @@
         <div id="collapseOutbound" class="accordion-body collapse">
           <div class="accordion-inner">
             <div class="block_cmn stop">
-              <h5>Stops</h5>
+              <div class="block_top_in">
+                <h5>Stops</h5>
+              </div>
               <ul>
                 <li *ngIf="flightStops.non_stop.min_price !== null && flightStops.non_stop.min_price !== 0">
                   <label class="custom_checkbox">
@@ -87,7 +93,9 @@
               </ul>
             </div>
             <div class="block_cmn arrival_to">
-              <h5>Arrival to {{ arrivalTimeSlotCityName }}</h5>
+              <div class="block_top_in">
+                <h5>Arrival to {{ arrivalTimeSlotCityName }}</h5>
+              </div>
               <ul>
                 <li
                   *ngIf="arrivalTimeSlot.first_slot.min_price !== null && arrivalTimeSlot.first_slot.min_price !== 0">
@@ -130,7 +138,9 @@
               </ul>
             </div>
             <div class="block_cmn departure_to">
-              <h5>Departure to {{ departureTimeSlotCityName }}</h5>
+              <div class="block_top_in">
+                <h5>Departure to {{ departureTimeSlotCityName }}</h5>
+              </div>
               <ul>
                 <li
                   *ngIf="depatureTimeSlot.first_slot.min_price !== null && depatureTimeSlot.first_slot.min_price !== 0">
@@ -191,7 +201,9 @@
         <div id="collapseInbound" class="accordion-body collapse">
           <div class="accordion-inner">
             <div class="block_cmn stop">
-              <h5>Stops</h5>
+              <div class="block_top_in">
+                <h5>Stops</h5>
+              </div>
               <ul>
                 <li *ngIf="filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== 0">
                   <label class="custom_checkbox">
@@ -221,7 +233,9 @@
               </ul>
             </div>
             <div class="block_cmn arrival_to">
-              <h5>Arrival to {{  departureTimeSlotCityName}}</h5>
+              <div class="block_top_in">
+                <h5>Arrival to {{  departureTimeSlotCityName}}</h5>
+              </div>
               <ul>
                 <li
                   *ngIf="filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== 0">
@@ -266,7 +280,9 @@
               </ul>
             </div>
             <div class="block_cmn departure_to">
-              <h5>Departure to {{ arrivalTimeSlotCityName }}</h5>
+              <div class="block_top_in">
+                <h5>Departure to {{ arrivalTimeSlotCityName }}</h5>
+              </div>
               <ul>
                 <li
                   *ngIf="filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== 0">
@@ -316,7 +332,12 @@
     </div>
   </div>
   <div class="cmn_block departure_to">
-    <h5>Airlines</h5>
+    
+    <div class="block_top_in">
+      <h5>Airlines</h5>
+      <a *ngIf="showMinAirline==4" class="view_more" href="javascript:void(0);" (click)="toggleAirlines('more')">Show All</a>
+      <a *ngIf="showMinAirline!=4" class="view_more" href="javascript:void(0);" (click)="toggleAirlines('less')">Show Less</a>
+    </div>
     <ul>
       <ng-container *ngFor="let airline of airlineList; index as i" >
       <li *ngIf="i < showMinAirline">
@@ -329,7 +350,6 @@
       </li>
     </ng-container>
     </ul>
-    <a *ngIf="showMinAirline==4" class="view_more" href="javascript:void(0);" (click)="toggleAirlines('more')">Show All</a>
-    <a *ngIf="showMinAirline!=4" class="view_more" href="javascript:void(0);" (click)="toggleAirlines('less')">Show Less</a>
+    
   </div>
 </div>
