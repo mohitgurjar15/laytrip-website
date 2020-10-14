@@ -23,7 +23,9 @@
                                 <div class="flight_stop_detail">
                                     <p>{{ item?.total_duration }}</p>
                                     <div class="border-dot"></div>
-                                    <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Stop</span>
+                                    <span *ngIf="item.stop_count===0">Non-Stop</span>
+                                    <span *ngIf="item.stop_count === 1">1 Stop</span>
+                                    <span *ngIf="item.stop_count > 1">{{item.stop_count}} Stops</span>
                                 </div>
                                 <div class="detail_info">
                                     <p>Arrival</p>
@@ -40,8 +42,9 @@
                                     </a>
                                 </div>
                                 <div class="info_price_origin">
-                                    <div class="refundable">{{ item.is_refundable ? 'Refundable' : 'Non-Refundable' }}
-                                    </div>
+                                    <div class="refundable" *ngIf="item.is_refundable">Refundable </div>
+                                    <div class="no_refundable" *ngIf="!item.is_refundable">Non-Refundable </div>
+                                   
                                     <div class="ogigin_price">
                                         Total
                                         <span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span>
@@ -103,8 +106,8 @@
                                         <div class="flight_layover" *ngIf="flightInfo.is_layover">
                                             <div class="triangle_right"></div>
                                             <div class="layover_info">
-                                                Change of Planes <span>| {{ flightInfo?.layover_duration }}</span>
-                                                Layover
+                                                Layover of <span>{{ flightInfo?.layover_duration }}</span>
+                                                at {{flightInfo.departure_info.name}}
                                             </div>
                                             <div class="triangle_left"></div>
                                         </div>
@@ -335,7 +338,7 @@
                                 <div class="block_inner">
                                     <div class="col-md-4 col-lg-4 px-0">
                                         <div class="block_im">
-                                            <div class="flight_wards">Outwards</div>
+                                            <div class="flight_wards">Outbound</div>
                                             <div class="flight_wards_info">
                                                 <img src="{{ item?.routes[0].stops[0].airline_logo || defaultImage }}"
                                                     alt="Airlines Logo"
@@ -360,8 +363,10 @@
                                                 <div class="flight_stop_detail">
                                                     <p>{{ item?.routes[0].duration }}</p>
                                                     <div class="border-dot"></div>
-                                                    <span>{{ item?.routes.length-1 === 0 ? 'Non -' : item.stop_count }}
-                                                        Stop</span>
+                                                    
+                                                    <span *ngIf="item.stop_count===0">Non-Stop</span>
+                                                    <span *ngIf="item.stop_count === 1">1 Stop</span>
+                                                    <span *ngIf="item.stop_count > 1">{{item.stop_count}} Stops</span>
                                                 </div>
                                                 <div class="detail_info">
                                                     <p>Arrival</p>
@@ -377,7 +382,7 @@
                                 <div class="block_inner">
                                     <div class="col-md-4 col-lg-4 px-0">
                                         <div class="block_im">
-                                            <div class="flight_wards">Inwards</div>
+                                            <div class="flight_wards">Inbound</div>
                                             <div class="flight_wards_info">
                                                 <img src="{{ item?.routes[1].stops[0].airline_logo || defaultImage }}"
                                                     alt="Airlines Logo"
@@ -402,8 +407,10 @@
                                                 <div class="flight_stop_detail">
                                                     <p>{{ item?.routes[1].duration }}</p>
                                                     <div class="border-dot"></div>
-                                                    <span>{{ item?.routes.length-1 === 0 ? 'Non -' : item.stop_count }}
-                                                        Stop</span>
+                                                    
+                                                    <span *ngIf="item.inbound_stop_count===0">Non-Stop</span>
+                                                    <span *ngIf="item.inbound_stop_count === 1">1 Stop</span>
+                                                    <span *ngIf="item.inbound_stop_count > 1">{{item.inbound_stop_count}} Stops</span>
                                                 </div>
                                                 <div class="detail_info">
                                                     <p>Arrival</p>
@@ -425,7 +432,8 @@
                                     </a>
                                 </div>
                                 <div class="info_price_origin">
-                                    <div class="refundable">{{ item.is_refundable ? 'Refundable' : 'Non-Refundable' }}</div>
+                                    <div class="refundable" *ngIf="item.is_refundable">Refundable </div>
+                                    <div class="no_refundable" *ngIf="!item.is_refundable">Non-Refundable </div>
                                     <div class="ogigin_price">
                                         Total <span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span>
                                     </div>
@@ -482,8 +490,8 @@
                                             <div class="flight_layover" *ngIf="flightInfo.is_layover">
                                                 <div class="triangle_right"></div>
                                                 <div class="layover_info">
-                                                    Change of Planes <span>| {{ flightInfo?.layover_duration }}</span>
-                                                    Layover
+                                                    Layover of <span>{{ flightInfo?.layover_duration }}</span>
+                                                    at {{ flightInfo.departure_info.name }}
                                                 </div>
                                                 <div class="triangle_left"></div>
                                             </div>
@@ -524,7 +532,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="flight_going" *ngIf="i === 0">Outwards</div>
+                                                <div class="flight_going" *ngIf="i === 0">Outbound</div>
                                             </div>
                                         </div>
                                     </div>
@@ -533,8 +541,8 @@
                                             <div class="flight_layover" *ngIf="flightInfo.is_layover">
                                                 <div class="triangle_right"></div>
                                                 <div class="layover_info">
-                                                    Change of Planes <span>| {{ flightInfo?.layover_duration }}</span>
-                                                    Layover
+                                                    Layover of <span>{{ flightInfo?.layover_duration }}</span>
+                                                    at {{flightInfo.departure_info.name}}
                                                 </div>
                                                 <div class="triangle_left"></div>
                                             </div>
@@ -575,7 +583,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="flight_going" *ngIf="i === 0">Inwards</div>
+                                                <div class="flight_going" *ngIf="i === 0">Inbound</div>
                                             </div>
                                         </div>
                                     </div>
