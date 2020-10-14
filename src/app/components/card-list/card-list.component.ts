@@ -16,7 +16,9 @@ export class CardListComponent implements OnInit {
   cardLoader:boolean=true;
   cards=[]
   @Output() selectCreditCard=new EventEmitter();
+  @Output() totalNumberOfcard=new EventEmitter();
   @Input() newCard;
+  cardToken:string;
   ngOnInit() {
     
     this.getCardlist();
@@ -27,12 +29,15 @@ export class CardListComponent implements OnInit {
     this.genericService.getCardlist().subscribe((res:any)=>{
       this.cardLoader=false;
       this.cards=res;
+      this.totalNumberOfcard.emit(res.length)
     },(error)=>{
       this.cardLoader=false;
+      this.totalNumberOfcard.emit(0)
     })
   }
 
   selectCard(cardToken){
+    this.cardToken=cardToken;
     this.selectCreditCard.emit(cardToken)
   }
   
@@ -40,6 +45,9 @@ export class CardListComponent implements OnInit {
     if (changes['newCard'].currentValue!='undefined') {
       if(this.newCard!='undefined'){
         this.cards.push(this.newCard)
+        //console.log(this.newCard.cardToken)
+        this.cardToken=this.newCard.cardToken
+        this.selectCreditCard.emit(this.newCard.cardToken)
       }
     }
 
