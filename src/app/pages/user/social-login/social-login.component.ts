@@ -40,7 +40,7 @@ export class SocialLoginComponent implements OnInit {
       if (userInfo) {
         let objApple = getUserDetails(userInfo.authorization.id_token);
         let json_data = {
-          "account_type": 1,
+          "account_type": 1, 
           "name": '',
           "email": objApple.email,
           "social_account_id": userInfo.authorization.code,
