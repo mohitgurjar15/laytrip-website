@@ -40,7 +40,7 @@
             <div class="form_field">
                 <label>Card Number<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="card_number" maxlength="16" tabindex="101"
+                    <input type="text" formControlName="card_number" tabindex="101" [textMask]="mask"
                         placeholder="Enter card number">
                     <p *ngIf="submitted && cardForm.controls.card_number.errors" class="text-danger">Please enter your card
                         number.
