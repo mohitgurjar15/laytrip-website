@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie';
 import { GenericService } from '../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-adult-list',
@@ -10,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./adult-list.component.scss']
 })
 export class AdultListComponent implements OnInit {
+
+  s3BucketUrl = environment.s3BucketUrl;
   @Output() adultsCount = new EventEmitter();
   @Output() _itinerarySelectionArray = new EventEmitter();
   @Input() travelers: any = [];
@@ -197,8 +200,9 @@ export class AdultListComponent implements OnInit {
         this.countries_code = data.map(country => {
           return {
             id: country.id,
-            name: country.phonecode + ' (' + country.iso2 + ')',
-            code: country.phonecode
+            name:country.phonecode+' ('+country.iso2+')',
+            country_name:country.name+ ' ' +country.phonecode,
+            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
           }
         })
     }, (error: HttpErrorResponse) => {

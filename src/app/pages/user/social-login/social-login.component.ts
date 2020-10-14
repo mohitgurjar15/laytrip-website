@@ -35,14 +35,12 @@ export class SocialLoginComponent implements OnInit {
   ngOnInit() {
     this.loadGoogleSdk();
     this.loadFacebookSdk();
+    // APPLE LOGIN RESPONSE
     this.authService.authState.subscribe((userInfo: any) => {
       if (userInfo) {
-        console.log('USER:::::', userInfo);
-        console.log('USER:::::authorization::', userInfo.authorization);
-        let objApple =  getUserDetails(userInfo.authorization.id_token);
-        console.log('apple::::', objApple);
+        let objApple = getUserDetails(userInfo.authorization.id_token);
         let json_data = {
-          "account_type": 1,
+          "account_type": 1, 
           "name": '',
           "email": objApple.email,
           "social_account_id": userInfo.authorization.code,
@@ -52,9 +50,17 @@ export class SocialLoginComponent implements OnInit {
           "app_version": "1.0",
           "os_version": "7.0"
         };
-        // this.userService.socialLogin(json_data).subscribe((data: any) => {
-        //   console.log(data);
-        // });
+        this.userService.socialLogin(json_data).subscribe((data: any) => {
+          console.log(data);
+          if (data.user_details) {
+            localStorage.setItem("_lay_sess", data.user_details.access_token);
+            $('#sign_in_modal').modal('hide');
+            document.getElementById('navbarNav').click();
+            this.router.url;
+          }
+        }, (error: HttpErrorResponse) => {
+          console.log(error);
+        });
       }
     });
   }
@@ -89,7 +95,7 @@ export class SocialLoginComponent implements OnInit {
 
         let profile = googleUser.getBasicProfile();
 
-        //YOUR CODE HERE
+        // YOUR CODE HERE
         let json_data = {
           "account_type": 1,
           "name": profile.getName(),

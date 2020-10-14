@@ -1,9 +1,30 @@
 input.ng-invalid.ng-touched {
 	border-bottom: 1px solid #f4516c !important;
 }
-.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown{
-	height: 40px;
-	width: 100px;
+.account_part {
+	.account_cnt_main {
+		.update_info {
+			.update_info_right {
+				.form_row {
+					.form_field {
+						.phone_no {
+							.code {
+								.dropdown {
+									height: 40px;
+									width: 150px;
+									.ng-customClass{
+										.ng-select-container{
+											border-radius: 0;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select.ng-customClass .ng-select-container{

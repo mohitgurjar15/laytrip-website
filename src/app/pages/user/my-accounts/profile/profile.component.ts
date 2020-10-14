@@ -103,7 +103,7 @@ export class ProfileComponent implements OnInit {
             id:country.id,
             name:country.phonecode+' ('+country.iso2+')',
             country_name:country.name+ ' ' +country.phonecode,
-            avatar_url: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
         }
       })
       console.log( this.countries_code )
