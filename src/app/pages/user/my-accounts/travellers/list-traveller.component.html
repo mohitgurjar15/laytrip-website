@@ -16,9 +16,9 @@
                 Traveller</a>
             </div>
             <div class="block_traveller_btm">
-              <div class="block_nobooking_available" *ngIf="notFound">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
-                <h5>No Payment Available</h5>
+              <div class="block_no_traveller" *ngIf="notFound">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_traveller.svg" alt="Traveller Icon">
+                <h5>No Traveller Available</h5>
               </div>
               <div *ngIf="loading">
 
@@ -109,7 +109,7 @@
   </div>
   <div class="modal-body">
     <div class="modal_btm">
-      <p>Are you sure you want to delete traveler?</p>
+      <p>Are you sure you want to delete traveller?</p>
     </div>
   </div>
   <div class="modal-footer">
