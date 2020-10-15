@@ -150,17 +150,25 @@ export class PaymentModeComponent implements OnInit {
   changeCustomInstalmentAmount(event){
     if(this.customMethod=='amount'){
       this.customAmount = Number(event.target.value);
+      console.log(this.customAmount,this.weeklyDefaultInstalment,"-----")
       if(this.customAmount<this.secondInstalment){
-        if(this.durationType=='weekly'){
-          this.customAmount = this.weeklyDefaultInstalment;
-        }
-        else if(this.durationType=='biweekly'){
-          
-          this.customAmount = this.biWeeklyDefaultInstalment;
-        }
-        else{
-          this.customAmount = this.monthlyDefaultInstalment;
-        }
+        
+      }
+
+      if(this.durationType=='weekly' && this.customAmount<this.weeklyDefaultInstalment){
+        this.customAmount = this.weeklyDefaultInstalment;
+      }
+      else if(this.durationType=='biweekly' && this.customAmount<this.biWeeklyDefaultInstalment){
+        
+        this.customAmount = this.biWeeklyDefaultInstalment;
+      }
+      else if(this.durationType=='monthly' && this.customAmount<this.monthlyDefaultInstalment){
+        this.customAmount = this.monthlyDefaultInstalment;
+      }
+
+      console.log(this.firstInstalment)
+      if(Number(this.firstInstalment)+this.customAmount > this.flightSummary[0].selling_price){
+        this.customAmount = this.flightSummary[0].selling_price - this.firstInstalment;
       }
     }
 
