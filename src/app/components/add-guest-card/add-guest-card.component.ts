@@ -44,7 +44,7 @@ export class AddGuestCardComponent implements OnInit {
 
 
   handleCardDetails(event){
-    this.cardDetails[event.target.name]=event.target.value;
+    this.cardDetails[event.target.name]= event.target.value.replace(/\s/g, "");
     this.emitGuestCardDetails.emit(this.cardDetails);
   }
 
