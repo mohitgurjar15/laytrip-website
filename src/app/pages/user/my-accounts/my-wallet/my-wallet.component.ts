@@ -17,7 +17,7 @@ export class MyWalletComponent implements OnInit {
   pageSize =10;
   perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
-  showPaginationBar: boolean = false;
+  showPaginationBar: boolean = true;
   isEarningPointNotFound: boolean = false;
   isRedeedemPointNotFound: boolean = false;
   public loading: boolean = true;
@@ -70,17 +70,23 @@ export class MyWalletComponent implements OnInit {
       // this.apiError = error.message;
     });
   }
+
   pageChange(event) {
-    this.page = event;    
     this.showPaginationBar = false;
+    this.page = event;   
+    this.getRedeemedPoint(); 
   }
+
   getRedeemedPoint(){
     this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe((result: any) => {
       this.redeemedPoints = result.data;
+      this.totalItems = result.TotalResult;
       this.loading = false;
+      this.showPaginationBar = true;
       this.isRedeedemPointNotFound = false;
     }, (error: HttpErrorResponse) => {  
       this.loading = false;
+      this.showPaginationBar = false;
       this.isRedeedemPointNotFound = true;
     });
   }

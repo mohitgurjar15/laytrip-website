@@ -190,7 +190,7 @@ export class TravelerFormComponent implements OnInit {
       if (this.type === 'adult') {
         let adultObj = {
           country_code: this.adultForm.value.country_code.country_name &&
-            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.country_name : this.adultForm.value.country_code,
+            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code : this.adultForm.value.country_code,
           phone_no: this.adultForm.value.phone_no,
         };
         jsonData = Object.assign(jsonData, adultObj);
@@ -221,8 +221,7 @@ export class TravelerFormComponent implements OnInit {
           this.submitted = this.loading = false;
           if (!this.isLoggedIn) {
             localStorage.setItem("_lay_sess", data.token);
-          }
-          
+          }          
           this.travelerFormChange.emit(data);
 
           $('.collapse').collapse('hide');

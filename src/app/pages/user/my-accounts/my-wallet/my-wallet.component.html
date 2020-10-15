@@ -170,6 +170,17 @@
                                                     <li>{{ getDateFormat(item.redeemDate) }}</li>
                                                 </ul>
                                             </div>                                           
+                                                    <div class="pagination_main">  
+                                                        <div class="pagination_result">
+                                                          <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
+                                                        </div>        
+                                                        <div class="pagination_list">
+                                                            <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
+                                                            [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+                                                            (pageChange)="pageChange($event)">
+                                                            </ngb-pagination>
+                                                        </div>
+                                                    </div>
                                         </div>
                                     </div>
                                 </div>

@@ -202,7 +202,7 @@ export class ProfileComponent implements OnInit {
         zip_code  : res.zipCode,        
         title  : res.title ? res.title : 'mr',        
         dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
-        country_code:res.countryCode,        
+        country_code : res.countryCode,        
         phone_no  : res.phoneNo,        
         country_id: res.country.name,
         state_id: res.state.name,       
@@ -276,10 +276,12 @@ export class ProfileComponent implements OnInit {
         formdata.append("state_id", this.profileForm.value.state_id);
       }
 
-      if(typeof(this.profileForm.value.country_code) != 'object'){        
-        formdata.append("country_code", this.selectResponse.countryCode);
+      console.log(typeof(this.profileForm.value.country_code))
+
+      if(typeof(this.profileForm.value.country_code) === 'string'){     
+        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code : '' );
       } else {
-        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.country_name : '' );
+        formdata.append("country_code", this.selectResponse.countryCode);
       } 
       if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
         formdata.append("language_id", this.selectResponse.preferredLanguage.id);        
@@ -291,7 +293,6 @@ export class ProfileComponent implements OnInit {
       } else {
         formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : 1);
       }         
-      
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
         localStorage.setItem("_lay_sess", data.token);
