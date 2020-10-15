@@ -41,6 +41,9 @@ var FlightCheckoutComponent = /** @class */ (function () {
         this.isShowPaymentOption = true;
         this.isShowFeedbackPopup = false;
         this.isShowPartialPaymentDetails = false;
+        this.showPartialPayemntOption = false;
+        this.partialPaymentAmount = 0;
+        this.payNowAmount = 0;
     }
     FlightCheckoutComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -72,7 +75,7 @@ var FlightCheckoutComponent = /** @class */ (function () {
         }
         var instalmentMode = atob(sessionStorage.getItem('__insMode'));
         this.instalmentMode = instalmentMode || 'no-instalment';
-        console.log("this.instalmentMode", this.instalmentMode);
+        this.showPartialPayemntOption = instalmentMode == 'instalment' ? true : false;
         this.validateBookingButton();
     };
     FlightCheckoutComponent.prototype.bookingTimerConfiguration = function () {
@@ -99,7 +102,6 @@ var FlightCheckoutComponent = /** @class */ (function () {
         try {
             var customInstalmentData = atob(sessionStorage.getItem('__islt'));
             this.customInstalmentData = JSON.parse(customInstalmentData);
-            console.log("this.customInstalmentData", this.customInstalmentData);
             this.laycreditpoints = Number(this.customInstalmentData.layCreditPoints);
             this.additionalAmount = this.customInstalmentData.additionalAmount;
             this.customAmount = this.customInstalmentData.customAmount;
@@ -181,17 +183,20 @@ var FlightCheckoutComponent = /** @class */ (function () {
             _this.progressStep = { step1: true, step2: true, step3: true, step4: true };
             _this.bookingResult = res;
             _this.isShowFeedbackPopup = true;
-        }, function (error) {
-            if (error.status == 422) {
-                _this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
+            if (_this.laycreditpoints > 0) {
+                _this.genericService.getAvailableLaycredit().subscribe(function (res) {
+                    document.getElementById("layPoints").innerHTML = res.total_available_points;
+                }, (function (error) {
+                }));
             }
+        }, function (error) {
             if (error.status == 404) {
                 _this.bookingStatus = 2; // Flight Not available  
             }
             if (error.status == 424) {
                 _this.bookingStatus = 2; // Booking failed from supplier side
             }
-            if (error.status == 500) {
+            else {
                 _this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             }
             _this.bookingLoader = false;
@@ -230,12 +235,41 @@ var FlightCheckoutComponent = /** @class */ (function () {
     FlightCheckoutComponent.prototype.getFlightSummaryData = function (data) {
         this.flightSummary = data;
         this.sellingPrice = data[0].selling_price;
+        if (this.instalmentMode == 'no-instalment') {
+            this.payNowAmount = Number(this.sellingPrice) - Number(this.laycreditpoints);
+        }
     };
     FlightCheckoutComponent.prototype.getInstalmentData = function (data) {
+        var _this = this;
         this.additionalAmount = data.additionalAmount;
         this.instalmentType = data.instalmentType;
         this.customAmount = data.customAmount;
         this.customInstalment = data.customInstalment;
+        var instalmentRequest = {
+            instalment_type: data.instalmentType,
+            checkin_date: moment(this.flightSummary[0].departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"),
+            booking_date: moment().format("YYYY-MM-DD"),
+            amount: this.sellingPrice,
+            additional_amount: Number(data.additionalAmount) + Number(data.layCreditPoints),
+            custom_instalment_no: data.customInstalment,
+            custom_amount: data.customAmount
+        };
+        this.genericService.getInstalemnts(instalmentRequest).subscribe(function (res) {
+            if (res.instalment_available == true) {
+                _this.partialPaymentAmount = res.instalment_date[1].instalment_amount;
+                if (_this.instalmentMode == 'instalment') {
+                    console.log("res.instalment_date", res.instalment_date);
+                    _this.payNowAmount = Number(res.instalment_date[0].instalment_amount) - Number(_this.laycreditpoints);
+                }
+                else {
+                    _this.payNowAmount = Number(_this.sellingPrice) - Number(_this.laycreditpoints);
+                }
+            }
+            else {
+                _this.payNowAmount = Number(_this.sellingPrice) - Number(_this.laycreditpoints);
+            }
+        }, function (err) {
+        });
     };
     FlightCheckoutComponent.prototype.emitNewCard = function (event) {
         this.newCard = event;
@@ -256,6 +290,11 @@ var FlightCheckoutComponent = /** @class */ (function () {
     };
     FlightCheckoutComponent.prototype.toggleInstalmentMode = function () {
         this.isShowPartialPaymentDetails = !this.isShowPartialPaymentDetails;
+    };
+    FlightCheckoutComponent.prototype.totalNumberOfcard = function (count) {
+        if (count == 0) {
+            this.showAddCardForm = true;
+        }
     };
     FlightCheckoutComponent = __decorate([
         core_1.Component({

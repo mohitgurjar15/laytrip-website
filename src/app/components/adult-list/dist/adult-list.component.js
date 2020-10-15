@@ -58,9 +58,9 @@ var AdultListComponent = /** @class */ (function () {
     };
     AdultListComponent.prototype.selectTraveler = function (event, traveler) {
         this._itinerary = sessionStorage.getItem('_itinerary') ? JSON.parse(sessionStorage.getItem('_itinerary')) : '';
+        var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
         if (this._itinerary) {
             if (event.target.checked) {
-                var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
                 var travelerData = {
                     "userId": traveler.userId,
                     "firstName": traveler.firstName,
@@ -90,7 +90,10 @@ var AdultListComponent = /** @class */ (function () {
                 }
             }
             else {
-                this.counter--;
+                console.log(this.counter, totalTraveler);
+                if (this.counter >= totalTraveler || this.counter <= totalTraveler) {
+                    this.counter--;
+                }
                 // this.checkBoxDisable = false;
                 this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
                 this.cookieService.remove('_travelers');
@@ -107,7 +110,7 @@ var AdultListComponent = /** @class */ (function () {
             }
             console.log(this.counter);
         }
-        this.adultsCount.emit(this.counter);
+        this.adultsCount.emit((this.counter));
         this._itinerarySelectionArray.emit(this._itinerarySelection);
     };
     AdultListComponent.prototype.getRandomNumber = function (i) {

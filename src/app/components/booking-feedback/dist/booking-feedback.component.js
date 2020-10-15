@@ -18,6 +18,7 @@ var BookingFeedbackComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
         this.is_rating = true;
+        this.loading = false;
         this.ratingValue = 1;
         this._rating = 'Terrible';
         this.feedbackValueChange = new core_1.EventEmitter();
@@ -30,8 +31,10 @@ var BookingFeedbackComponent = /** @class */ (function () {
     };
     BookingFeedbackComponent.prototype.onSubmit = function () {
         var _this = this;
+        this.loading = true;
         if (this.feedbackForm.invalid) {
             this.submitted = true;
+            this.loading = false;
             return;
         }
         else {
@@ -42,7 +45,9 @@ var BookingFeedbackComponent = /** @class */ (function () {
             };
             this.flightService.addFeedback(jsonData).subscribe(function (data) {
                 _this.feedbackValueChange.emit(true);
+                _this.loading = false;
             }, function (error) {
+                _this.loading = false;
                 _this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             });
         }

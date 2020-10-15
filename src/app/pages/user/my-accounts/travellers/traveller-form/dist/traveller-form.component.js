@@ -143,8 +143,8 @@ var TravellerFormComponent = /** @class */ (function () {
                 // passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
                 passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
                 passport_number: this.coAccountForm.value.passport_number,
-                country_code: this.coAccountForm.value.country_code.name &&
-                    this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.name : this.coAccountForm.value.country_code,
+                country_code: this.coAccountForm.value.country_code.country_name &&
+                    this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.country_name : this.coAccountForm.value.country_code,
                 phone_no: this.coAccountForm.value.phone_no
             };
             if (this.travellerId) {

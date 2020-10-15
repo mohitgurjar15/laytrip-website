@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
+import { ToastrService } from 'ngx-toastr';
 
 
 declare var $: any;
@@ -55,6 +56,7 @@ export class TravelerFormComponent implements OnInit {
     public router: Router,
     public commonFunction: CommonFunction,
     private cookieService: CookieService,
+    private toastr: ToastrService,
 
   ) { }
 
@@ -187,8 +189,8 @@ export class TravelerFormComponent implements OnInit {
 
       if (this.type === 'adult') {
         let adultObj = {
-          country_code: this.adultForm.value.country_code.name &&
-            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.name : this.adultForm.value.country_code,
+          country_code: this.adultForm.value.country_code.country_name &&
+            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.country_name : this.adultForm.value.country_code,
           phone_no: this.adultForm.value.phone_no,
         };
         jsonData = Object.assign(jsonData, adultObj);
@@ -226,10 +228,11 @@ export class TravelerFormComponent implements OnInit {
           $('.collapse').collapse('hide');
           $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
-          console.log('error')
           this.submitted = this.loading = false;
           if (error.status === 401) {
             this.router.navigate(['/']);
+          } else {
+            this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
           }
         })        
       }
@@ -240,8 +243,4 @@ export class TravelerFormComponent implements OnInit {
     let dateArray = string.split(saprator);
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
-
- 
-
-
 }
