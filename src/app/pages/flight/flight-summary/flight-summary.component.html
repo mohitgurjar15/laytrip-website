@@ -329,15 +329,15 @@
         </div>
         <div class="total_payment">
             <ul>
-                <li>Total <span>{{ currency?.symbol }}{{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
+                <li>Total <span [ngClass]="{'text_line': payNowAmount > 0 && flightDetail[0].selling_price!=payNowAmount}">{{ currency?.symbol }}{{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
+                <li *ngIf="payNowAmount && flightDetail[0].selling_price!=payNowAmount">Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
             </ul>
         </div>
-        <hr>
-        <div class="total_payment" *ngIf="payNowAmount">
+        <!-- <div class="total_payment" *ngIf="payNowAmount">
             <ul>
                 <li>Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
             </ul>
-        </div>
+        </div> -->
     </div>
     <div class="cmn_block policies">
         <div class="block_inner">

@@ -1,6 +1,6 @@
 @import "_cstm-variable.scss";
 @import "_cstm-components.scss";
-//<!-- Start Search Modify section -->
+
 //<!-- Start Search Modify section -->
 .modify_search {
 	width: 100%;
@@ -5804,11 +5804,15 @@
 						li {
 							display: flex;
 							justify-content: space-between;
-							padding: 0 100px 0 0;
+							padding: 15px 20px;
 							align-items: center;
 							color: $text-grey;
 							font-size: 14px;
 							font-weight: 400;
+							margin-right: 20px;
+							background: $orange_light;
+							min-width: 240px;
+							border-radius: 8px;
 
 							@media(max-width: 480px) {
 								padding: 0 0 10px 0;
@@ -5826,7 +5830,7 @@
 								-moz-user-select: none;
 								-ms-user-select: none;
 								user-select: none;
-								color: $text-black;
+								color: $text-grey;
 
 								span {
 									display: block;
@@ -5876,7 +5880,8 @@
 							}
 
 							&:last-child {
-								padding: 0;
+								margin: 0;
+								background: $grey_light;
 							}
 						}
 					}
@@ -6818,6 +6823,7 @@
 																		color: $text-blue;
 																		border: none;
 																		text-align: center;
+																		border-bottom: 1px solid $box-border-color;
 																	}
 																}
 

@@ -517,7 +517,6 @@ export class PaymentModeComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['laycreditpoints']) {
       this.laycreditpoints = changes['laycreditpoints'].currentValue;
-      console.log("this.additionalAmount",this.additionalAmount)
       this.getInstalmentData.emit({ 
         additionalAmount:this.additionalAmount, 
         instalmentType:this.durationType, 
