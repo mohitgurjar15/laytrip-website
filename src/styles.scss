@@ -8,6 +8,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~ngx-toastr/toastr.css';
 
+
 .wrapper {
     position: relative;
     min-height: calc(100vh - 50px);
@@ -309,7 +310,7 @@ select {
 
     &.fixed-top {
         position: fixed;
-        z-index: 99;
+        z-index: 99999;
         height: auto !important;
     }
 
@@ -3905,4 +3906,4 @@ select {
 
         }
     }
-} 
+}
