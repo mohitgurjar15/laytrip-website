@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 
 export function validateImageFile(name: String) {
 
@@ -23,3 +24,12 @@ export function fileSizeValidator(file) {
       }
   }
   
+  export function phoneCodeAndPhoneValidation() {
+    return (form: FormGroup): {[key: string]: any} => {
+      console.log(form.value.country_code)
+      return (form.value.phone_no ) ||
+             (!form.value.phone_no) 
+                ? { phoneCodeAndPhoneError : true } 
+                : { phoneCodeAndPhoneError : false } ;
+    };
+  } 

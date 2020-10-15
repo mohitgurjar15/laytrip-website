@@ -68,9 +68,9 @@ export class AdultListComponent implements OnInit {
 
   selectTraveler(event, traveler) {
     this._itinerary = sessionStorage.getItem('_itinerary') ? JSON.parse(sessionStorage.getItem('_itinerary')) : '';
+    let totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
     if (this._itinerary) {
       if (event.target.checked) {
-        let totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
         let travelerData = {
           "userId": traveler.userId,
           "firstName": traveler.firstName,
@@ -79,7 +79,7 @@ export class AdultListComponent implements OnInit {
         };
         this._travelers.push(travelerData);
         this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-        if (this.counter + 1 < totalTraveler) {
+        if (this.counter + 1 < totalTraveler ) {
           // this.checkBoxDisable = false;
           this.counter++;
         } else {
@@ -96,7 +96,10 @@ export class AdultListComponent implements OnInit {
           this._itinerarySelection.infant.push(traveler.userId);
         }
       } else {
-        this.counter--;
+        console.log(this.counter,totalTraveler)
+        if(this.counter >= totalTraveler || this.counter <= totalTraveler){
+          this.counter--;
+        }
         // this.checkBoxDisable = false;
         this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
         this.cookieService.remove('_travelers');
@@ -112,7 +115,7 @@ export class AdultListComponent implements OnInit {
       console.log(this.counter)
     }
 
-    this.adultsCount.emit(this.counter);
+    this.adultsCount.emit((this.counter));
     this._itinerarySelectionArray.emit(this._itinerarySelection);
   }
 

@@ -279,7 +279,7 @@ export class ProfileComponent implements OnInit {
       if(typeof(this.profileForm.value.country_code) != 'object'){        
         formdata.append("country_code", this.selectResponse.countryCode);
       } else {
-        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.name : '' );
+        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.country_name : '' );
       } 
       if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
         formdata.append("language_id", this.selectResponse.preferredLanguage.id);        

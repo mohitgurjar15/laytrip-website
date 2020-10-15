@@ -16,6 +16,7 @@ export class BookingFeedbackComponent implements OnInit {
   feedbackForm: FormGroup;
   submitted : boolean = false;
   is_rating = true;
+  loading = false;
   ratingValue = 1;
   _rating = 'Terrible';
   @Output() feedbackValueChange = new EventEmitter();
@@ -35,8 +36,10 @@ export class BookingFeedbackComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     if (this.feedbackForm.invalid) {
       this.submitted = true;
+      this.loading = false;
       return;
     } else {
       let jsonData = {
@@ -46,7 +49,9 @@ export class BookingFeedbackComponent implements OnInit {
       };
       this.flightService.addFeedback(jsonData).subscribe((data: any) => {
         this.feedbackValueChange.emit(true);
+        this.loading = false;
       }, (error: HttpErrorResponse) => {
+        this.loading = false;
         this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
       });
     }

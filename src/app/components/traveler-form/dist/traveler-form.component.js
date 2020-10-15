@@ -12,12 +12,13 @@ var forms_1 = require("@angular/forms");
 var moment = require("moment");
 var environment_1 = require("../../../environments/environment");
 var TravelerFormComponent = /** @class */ (function () {
-    function TravelerFormComponent(formBuilder, flightService, router, commonFunction, cookieService) {
+    function TravelerFormComponent(formBuilder, flightService, router, commonFunction, cookieService, toastr) {
         this.formBuilder = formBuilder;
         this.flightService = flightService;
         this.router = router;
         this.commonFunction = commonFunction;
         this.cookieService = cookieService;
+        this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.usersType = '';
         this.traveler = [];
@@ -156,8 +157,8 @@ var TravelerFormComponent = /** @class */ (function () {
             }
             if (this.type === 'adult') {
                 var adultObj = {
-                    country_code: this.adultForm.value.country_code.name &&
-                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.name : this.adultForm.value.country_code,
+                    country_code: this.adultForm.value.country_code.country_name &&
+                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.country_name : this.adultForm.value.country_code,
                     phone_no: this.adultForm.value.phone_no
                 };
                 jsonData = Object.assign(jsonData, adultObj);
@@ -193,10 +194,12 @@ var TravelerFormComponent = /** @class */ (function () {
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                 }, function (error) {
-                    console.log('error');
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
+                    }
+                    else {
+                        _this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
                     }
                 });
             }

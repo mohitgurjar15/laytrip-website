@@ -6,7 +6,7 @@
                 </span></a>
             <div class="member_info">
                 <h6>{{_login_user_info.username}}</h6>
-                <p>Member since {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD')  }}</p>
+                <p *ngIf="_login_user_info.createdDate">Member since {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD')  }}</p>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                     </a>
                     <ul class="dropdown-menu"  [routerLinkActive]="['show']">
                         <li><a [routerLink]="['/account/settings/change-password']"
-                                [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
+                                [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_change_pass.svg" alt="Settings Icon">
                                 Change Password</a></li>
                     </ul>
                 </div>
