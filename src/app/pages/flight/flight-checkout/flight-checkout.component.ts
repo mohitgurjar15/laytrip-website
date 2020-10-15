@@ -74,11 +74,7 @@ export class FlightCheckoutComponent implements OnInit {
       this.bookingTimerConfiguration();
       this.setInstalmentInfo();
 
-      if(this.userInfo.roleId==7){
-        this.instalmentMode='no-instalment';
-        this.instalmentType='';
-        this.showAddCardForm=true;
-      }
+      
       let travelersIds = this.cookieService.get('_travelers');
       try{
         travelersIds = JSON.parse(travelersIds);
@@ -100,6 +96,11 @@ export class FlightCheckoutComponent implements OnInit {
 
       let instalmentMode=atob(sessionStorage.getItem('__insMode'))
       this.instalmentMode= instalmentMode || 'no-instalment';
+      if(this.userInfo.roleId==7){
+        this.instalmentMode='no-instalment';
+        this.instalmentType='';
+        this.showAddCardForm=true;
+      }
       this.showPartialPayemntOption = instalmentMode=='instalment'?true:false;
       this.validateBookingButton();
     }
