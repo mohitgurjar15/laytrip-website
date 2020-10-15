@@ -18,7 +18,7 @@ export class CardListComponent implements OnInit {
   @Output() selectCreditCard=new EventEmitter();
   @Output() totalNumberOfcard=new EventEmitter();
   @Input() newCard;
-  cardToken:string;
+  cardToken:string='';
   ngOnInit() {
     
     this.getCardlist();
@@ -42,11 +42,12 @@ export class CardListComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['newCard'].currentValue!='undefined') {
-      if(this.newCard!='undefined'){
+    console.log(changes['newCard'].currentValue,"-----")
+    if (typeof changes['newCard'].currentValue!=='undefined') {
+      if(typeof this.newCard!=='undefined'){
         this.cards.push(this.newCard)
-        //console.log(this.newCard.cardToken)
-        this.cardToken=this.newCard.cardToken
+        console.log("+++++",this.newCard)
+        this.cardToken=this.newCard.cardToken;
         this.selectCreditCard.emit(this.newCard.cardToken)
       }
     }
