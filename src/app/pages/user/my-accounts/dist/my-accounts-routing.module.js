@@ -9,12 +9,14 @@ exports.__esModule = true;
 exports.MyAccountsRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var account_card_list_component_1 = require("./account-card-list/account-card-list.component");
 var list_bookings_component_1 = require("./bookings/list-bookings.component");
 var change_password_component_1 = require("./change-password/change-password.component");
 var flight_trip_detail_component_1 = require("./flight-trip-detail/flight-trip-detail.component");
 var my_wallet_component_1 = require("./my-wallet/my-wallet.component");
 var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
 var profile_component_1 = require("./profile/profile.component");
+var subscription_plan_component_1 = require("./subscription/subscription-plan.component");
 var search_trip_component_1 = require("./search-trip/search-trip.component");
 var list_traveller_component_1 = require("./travellers/list-traveller.component");
 var routes = [
@@ -43,7 +45,15 @@ var routes = [
         component: change_password_component_1.ChangePasswordComponent
     },
     {
-        path: 'search-booking',
+        path: 'subscription',
+        component: subscription_plan_component_1.SubscriptionPlanComponent
+    },
+    {
+        path: 'account-card-list',
+        component: account_card_list_component_1.AccountCardListComponent
+    },
+    {
+        path: 'search-trip',
         component: search_trip_component_1.SearchTripComponent
     },
     {

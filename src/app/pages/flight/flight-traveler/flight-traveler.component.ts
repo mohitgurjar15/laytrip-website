@@ -150,7 +150,7 @@ export class FlightTravelerComponent implements OnInit {
     if(this._travellersCountValid ){
       this.router.navigate(['/flight/checkout',this.routeCode]);
     } else {
-      let errorMessage = "You have to select ";
+      let errorMessage = "You can only select ";
       if(Number(this._itinerary.adult)){
         errorMessage +=  Number(this._itinerary.adult)+" Adult, ";
       } 

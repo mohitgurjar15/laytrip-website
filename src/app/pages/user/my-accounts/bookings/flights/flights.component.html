@@ -167,7 +167,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#Cancellation-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
-                        (click)="getCancellationPolicy(item.route_code)">Cancellation Rules</a>
+                        (click)="getCancellationPolicy(item.moduleInfo.route_code)">Cancellation Rules</a>
                 </li>
             </ul>
             <div id="content" class="tab-content" role="tablist">
@@ -255,7 +255,7 @@
                             <div class="tab_detail fare_detail_cnt">
                                 <div class="triangle_right"></div>
                                 <ul>
-                                    <li *ngFor="let fareDetails of item.fare_break_dwon">
+                                    <li *ngFor="let fareDetails of item.moduleInfo.fare_break_dwon">
                                         <p *ngIf="fareDetails.type == 'ADT'">
                                             Base Fare
                                             ({{ fareDetails?.quantity }}
@@ -310,7 +310,14 @@
                                     <p>Indigo</p>
                                     <span>EWR - DEN</span>
                                 </div>
-                                <div class="detail_right">
+                                <div class="detail_right" *ngIf="loadBaggageDetails">
+                                    <div class="w-100">
+                                        <p class="fb_animation mb-0 h-auto w-100"></p>
+                                        <p class="fb_animation mb-0 h-auto w-100"></p>
+                                    </div>
+                                    <p class="fb_animation mb-0 h-auto w-100"></p>
+                                </div>
+                                <div class="detail_right" *ngIf="!loadBaggageDetails">
                                     <table>
                                         <thead>
                                             <tr>
@@ -329,6 +336,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    
                                     <p>The baggage information is just for reference. Please Check with airline before
                                         check-in.</p>
                                 </div>

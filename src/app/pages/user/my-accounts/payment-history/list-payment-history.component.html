@@ -142,7 +142,7 @@
                                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
                                                     <h5>No Payment Available</h5>
                                                 </div>
-                                                <app-history-list *ngIf="!loading" [historyResult]="historyResult"></app-history-list>
+                                                <app-history-list *ngIf="!loading && !notFound" [historyResult]="historyResult"></app-history-list>
                                             </div>
                                         </div>
                                     </div>
@@ -270,7 +270,7 @@
 
                             <div id="Failed-pay" style="display: none;" class="card tab-pane fade" role="tabpanel"
                                 aria-labelledby="Failed-pay">
-                                <div class="card-header" role="tab" id="heading-Failed-pay">
+                                <div class="card-header" role="tab" id="headingdiv-Failed-pay">
                                     <h5 class="mb-0">
                                         <a class="collapsed" data-toggle="collapse" href="#collapse-Failed-pay"
                                             aria-expanded="false" aria-controls="collapse-Failed-pay">

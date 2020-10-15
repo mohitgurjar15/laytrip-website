@@ -8,9 +8,9 @@
         <div class="account_cnt_main co_traveller">
           <div class="block_co_traveller_main">
             <div class="block_traveller_top">
-              <label class="custom_checkbox" *ngIf="!loading || !notFound">
-                <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"   value="">
-                <span class="checkmark"></span>Select all
+              <label class="custom_checkbox">
+                <!-- <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"   value="">
+                <span class="checkmark"></span>Select all -->
               </label>
               <a href="javascript:void(0);" (click)="openTravellerModal(content)">+ Add New Co -
                 Traveller</a>
@@ -24,10 +24,10 @@
 
                 <ul *ngFor="let loop of loops;">
                   <li>
-                    <label class="custom_checkbox">
+                    <!-- <label class="custom_checkbox">
                       <input type="checkbox" value="">
                       <span class="checkmark"></span>
-                    </label>
+                    </label> -->
                     <div class="traveller_list">
                       <div class="list_block w-100">
                         <div class="traveller_name">
@@ -44,10 +44,10 @@
               
               <ul *ngFor="let traveler of travelers | slice: (pageNumber-1) * pageSize : (pageNumber-1) * pageSize + pageSize; let i = index">
                 <li>
-                  <label class="custom_checkbox">
+                 <!--  <label class="custom_checkbox">
                     <input type="checkbox" [(ngModel)]="traveler.isSelected" (change)="isAllSelected()" class="travelerCheckbox" value="">
                     <span class="checkmark"></span>
-                  </label>
+                  </label> -->
                   <div class="traveller_list">
                     <div class="list_block">
                       <div class="traveller_name">{{traveler.firstName | titlecase}} {{traveler.lastName | titlecase}}

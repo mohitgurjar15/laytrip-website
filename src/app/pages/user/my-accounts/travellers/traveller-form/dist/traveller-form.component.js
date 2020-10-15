@@ -102,7 +102,8 @@ var TravellerFormComponent = /** @class */ (function () {
                 return {
                     id: country.id,
                     name: country.name,
-                    code: country.phonecode
+                    code: country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {
@@ -157,6 +158,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
+                    _this.toastr.error(error.error.message, 'Traveller Update Error');
                 });
             }
             else {
@@ -169,6 +171,10 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
+                    }
+                    else {
+                        _this.submitted = _this.loading = false;
+                        _this.toastr.error(error.error.message, 'Traveller Update Error');
                     }
                 });
             }

@@ -203,6 +203,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
                 .ui-calendar{
                   .ui-datepicker{
                     min-width: auto;
+                    width: 200px !important;
                   }
                 }
               }
@@ -274,7 +275,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   }
 }
 
-
+/* 
 .account_part {
 	.account_cnt_main {
 		.update_location_detail {
@@ -287,6 +288,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
                   .ui-calendar{
                     .ui-datepicker{
                       width: 200px !important;
+                      min-width: auto !important;
                     }
                   }
                 }
@@ -297,4 +299,4 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 			}
 		}
 	}
-}
+} */

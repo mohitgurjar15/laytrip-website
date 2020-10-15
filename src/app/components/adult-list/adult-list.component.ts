@@ -222,7 +222,8 @@ export class AdultListComponent implements OnInit {
         return {
           id: country.id,
           name: country.name,
-          code: country.phonecode
+          code: country.phonecode,
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
         }
       }),
         this.countries_code = data.map(country => {

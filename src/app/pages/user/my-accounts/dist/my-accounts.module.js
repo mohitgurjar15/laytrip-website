@@ -19,7 +19,6 @@ var list_traveller_component_1 = require("./travellers/list-traveller.component"
 var list_bookings_component_1 = require("./bookings/list-bookings.component");
 var flights_component_1 = require("./bookings/flights/flights.component");
 var hotels_component_1 = require("./bookings/hotels/hotels.component");
-var accommodations_component_1 = require("./bookings/accommodations/accommodations.component");
 var calendar_1 = require("primeng/calendar");
 var list_payment_history_component_1 = require("./payment-history/list-payment-history.component");
 var history_list_component_1 = require("./payment-history/history-list/history-list.component");
@@ -27,10 +26,16 @@ var view_history_component_1 = require("./payment-history/view-history/view-hist
 var flight_module_1 = require("../../flight/flight.module");
 var change_password_component_1 = require("./change-password/change-password.component");
 var traveller_form_component_1 = require("./travellers/traveller-form/traveller-form.component");
+var subscription_plan_component_1 = require("./subscription/subscription-plan.component");
+var account_card_list_component_1 = require("./account-card-list/account-card-list.component");
+var card_action_form_component_1 = require("./account-card-list/card-action-form/card-action-form.component");
 var my_wallet_component_1 = require("./my-wallet/my-wallet.component");
 var search_trip_component_1 = require("./search-trip/search-trip.component");
 var flight_trip_detail_component_1 = require("./flight-trip-detail/flight-trip-detail.component");
 var trip_not_found_component_1 = require("./trip-not-found/trip-not-found.component");
+var angular2_text_mask_1 = require("angular2-text-mask");
+var confirmation_modal_component_1 = require("../../../components/confirmation-modal/confirmation-modal.component");
+var home_rentals_component_1 = require("./bookings/home-rentals/home-rentals.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -44,11 +49,15 @@ var MyAccountsModule = /** @class */ (function () {
                 traveller_form_component_1.TravellerFormComponent,
                 flights_component_1.FlightsComponent,
                 hotels_component_1.HotelsComponent,
-                accommodations_component_1.AccommodationsComponent,
+                home_rentals_component_1.HomeRentalsComponent,
                 list_payment_history_component_1.ListPaymentHistoryComponent,
                 history_list_component_1.HistoryListComponent,
                 view_history_component_1.ViewHistoryComponent,
                 change_password_component_1.ChangePasswordComponent,
+                subscription_plan_component_1.SubscriptionPlanComponent,
+                account_card_list_component_1.AccountCardListComponent,
+                card_action_form_component_1.CardActionFormComponent,
+                confirmation_modal_component_1.ConfirmationModalComponent,
                 my_wallet_component_1.MyWalletComponent,
                 search_trip_component_1.SearchTripComponent,
                 flight_trip_detail_component_1.FlightTripDetailComponent,
@@ -63,10 +72,11 @@ var MyAccountsModule = /** @class */ (function () {
                 ng_bootstrap_1.NgbModule,
                 calendar_1.CalendarModule,
                 flight_module_1.FlightModule,
+                angular2_text_mask_1.TextMaskModule
             ],
             providers: [common_1.DatePipe, ng_bootstrap_1.NgbActiveModal],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA],
-            entryComponents: [traveller_form_component_1.TravellerFormComponent]
+            entryComponents: [traveller_form_component_1.TravellerFormComponent, card_action_form_component_1.CardActionFormComponent, confirmation_modal_component_1.ConfirmationModalComponent]
         })
     ], MyAccountsModule);
     return MyAccountsModule;
