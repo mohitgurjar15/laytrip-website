@@ -83,7 +83,8 @@ var ProfileComponent = /** @class */ (function () {
             _this.countries = data.map(function (country) {
                 return {
                     id: country.id,
-                    name: country.name
+                    name: country.name,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {

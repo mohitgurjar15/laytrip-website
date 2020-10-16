@@ -17,32 +17,32 @@
                           <div class="detail_info_left">
                               <ul>
                                   <li>
-                                      <span>Partial Payment type :</span>
+                                      <span>Partial Payment Type :</span>
                                       <p>{{list.bookingInstalments[0].instalmentType || '--' | titlecase }}</p>
                                   </li>
                                   <li>
-                                      <span>Total booking amount :</span>
+                                      <span>Total Booking Amount :</span>
                                       <p>${{list.totalAmount | number : '1.2-2'}}</p>
                                   </li>
                                   <li>
-                                      <span>Partial payment part :</span>
-                                      <p>{{list.totalInstallments}} EMI</p>
+                                      <span>Partial Payment Part :</span>
+                                      <p>{{list.totalInstallments}} Installment</p>
                                   </li>
 
                                   <li>
-                                      <span>Partial payment Start Date :</span>
+                                      <span>Partial Payment Start Date :</span>
                                       <p>{{ flightCommonFunction.getPaymentStartDate(list.bookingInstalments) }}</p>
                                   </li>
                                   <li>
                                       <span>Next Partial payment Date :</span>
-                                      <p>{{this.commonFunction.convertDateFormat(list.nextInstalmentDate,'YYYY-MM-DD', 'en')}}</p>
+                                      <p>{{dateConvert(list.nextInstalmentDate)}}</p>
                                   </li>
                                   <li>
-                                      <span>Partial payment amount :</span>
+                                      <span>Partial Payment Amount :</span>
                                       <p>${{list.bookingInstalments[0].amount | number : '1.2-2'}}</p>
                                   </li>
                                   <li>
-                                      <span>Paid amount :</span>
+                                      <span>Paid Amount :</span>
                                       <p>{{list.paidAmount | number : '1.2-2'}}</p>
                                   </li>
                               </ul>
@@ -75,7 +75,7 @@
                                   <tr *ngFor="let instalment of list.bookingInstalments; let i=index;">
                                       <td data-title="ID">{{i +1 }}</td>
                                       <td data-title="Amount">${{ instalment.amount | number : '1.2-2' }}</td>
-                                      <td data-title="Date">{{ instalment.instalmentDate }}</td>
+                                      <td data-title="Date">{{ dateConvert(instalment.instalmentDate) }}</td>
                                       <td data-title="Status"><span [ngClass]="{'status_paid': instalment.instalmentStatus,'status_pending': instalment.instalmentStatus != true}">{{instalment.instalmentStatus ? 'Paid':'Pending'}}</span></td>
                                   </tr>                                 
                               </tbody>

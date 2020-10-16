@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common-function';
+import * as moment from 'moment';
 
 @Injectable({
     providedIn: 'root',
@@ -12,15 +13,19 @@ export class FlightCommonFunction {
       ) { }
     
     getPaymentStartDate(bookingInstalments) {
+        // console.log(moment(date).format('MM/DD/YYYY'))
+        
         if (bookingInstalments[1]) {
-            return this.commonFunction.convertDateFormat(bookingInstalments[1].instalmentDate, 'YYYY-MM-DD', 'en');
+            const date = new Date(bookingInstalments[0].instalmentDate);
+            return this.commonFunction.convertDateFormat(date, 'MM/DD/YYYY');
         } else {
-            return this.commonFunction.convertDateFormat(bookingInstalments[0].instalmentDate, 'YYYY-MM-DD', 'en');
+            const date = new Date(bookingInstalments[0].instalmentDate);
+            return this.commonFunction.convertDateFormat(date, 'MM/DD/YYYY');
         }
     }
 
     getPaymentEndDate(bookingInstalments) {
-        return this.commonFunction.convertDateFormat(bookingInstalments[bookingInstalments.length - 1].instalmentDate, 'YYYY-MM-DD', 'en');
+        return this.commonFunction.convertDateFormat(new Date(bookingInstalments[bookingInstalments.length - 1].instalmentDate), 'MM/DD/YYYY');
     }
 
 }

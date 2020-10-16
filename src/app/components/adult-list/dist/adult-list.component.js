@@ -196,7 +196,8 @@ var AdultListComponent = /** @class */ (function () {
                 return {
                     id: country.id,
                     name: country.name,
-                    code: country.phonecode
+                    code: country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {

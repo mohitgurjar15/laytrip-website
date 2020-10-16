@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../../environments/environment';
 
 @Component({
-  selector: 'app-accommodations',
-  templateUrl: './accommodations.component.html',
-  styleUrls: ['./accommodations.component.scss']
+  selector: 'app-home-rentals',
+  templateUrl: './home-rentals.component.html',
+  styleUrls: ['./home-rentals.component.scss']
 })
-export class AccommodationsComponent implements OnInit {
+export class HomeRentalsComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
 
   isNotFound:boolean= true;

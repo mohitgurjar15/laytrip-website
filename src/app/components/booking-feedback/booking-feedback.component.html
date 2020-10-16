@@ -48,7 +48,7 @@
           <div class="block_feedback_form">
             <div class="feedback_comment">
               <label>Comment*</label>
-              <textarea formControlName="comment" placeholder="Enter your Comment here"></textarea>
+              <textarea formControlName="comment" placeholder="Enter your comment here"></textarea>
               <div *ngIf="(submitted  || feedbackForm.controls.comment.touched) && feedbackForm.controls.comment.errors"
                 class="focus-input100 login-error" style="text-align: left;">
                 <div *ngIf="feedbackForm.controls.comment.errors.required" class="text-danger">Please enter

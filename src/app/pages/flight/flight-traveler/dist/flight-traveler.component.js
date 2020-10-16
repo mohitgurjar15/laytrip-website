@@ -124,7 +124,7 @@ var FlightTravelerComponent = /** @class */ (function () {
             this.router.navigate(['/flight/checkout', this.routeCode]);
         }
         else {
-            var errorMessage = "You have to select ";
+            var errorMessage = "You can only select ";
             if (Number(this._itinerary.adult)) {
                 errorMessage += Number(this._itinerary.adult) + " Adult, ";
             }

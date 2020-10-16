@@ -129,7 +129,9 @@ export class TravellerFormComponent implements OnInit {
         return {
           id: country.id,
           name: country.name,
-          code: country.phonecode
+          code: country.phonecode,
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+
         }
       }),
         this.countries_code = data.map(country => {
@@ -186,6 +188,7 @@ export class TravellerFormComponent implements OnInit {
             if (error.status === 401) {
               this.router.navigate(['/']);
             }
+            this.toastr.error(error.error.message, 'Traveller Update Error');
         }); 
       } else {
         jsonData = Object.assign(jsonData, emailObj);
@@ -198,6 +201,9 @@ export class TravellerFormComponent implements OnInit {
           this.submitted = this.loading = false;
           if (error.status === 401) {
             this.router.navigate(['/']);
+          } else {
+            this.submitted = this.loading = false;
+            this.toastr.error(error.error.message, 'Traveller Update Error');
           }
         });
 

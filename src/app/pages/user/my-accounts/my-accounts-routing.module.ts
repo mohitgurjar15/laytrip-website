@@ -45,7 +45,7 @@ const routes: Routes = [
     component: AccountCardListComponent
   },
   {
-    path: 'search-booking',
+    path: 'search-trip',
     component: SearchTripComponent,
   },
   {

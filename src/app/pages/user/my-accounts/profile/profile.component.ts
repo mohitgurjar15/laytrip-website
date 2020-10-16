@@ -95,7 +95,8 @@ export class ProfileComponent implements OnInit {
       this.countries = data.map(country=>{
           return {
               id:country.id,
-              name:country.name
+              name:country.name,
+              flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
           } 
       }),
       this.countries_code = data.map(country=>{

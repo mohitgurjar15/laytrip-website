@@ -43,10 +43,11 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
             _this.historyResult = res.data;
             _this.loading = _this.notFound = false;
+            console.log('here');
         }, function (err) {
+            _this.notFound = true;
+            _this.loading = false;
             if (err && err.status === 404) {
-                _this.loading = false;
-                _this.notFound = true;
             }
         });
     };

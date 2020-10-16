@@ -83,12 +83,13 @@
                               </label>
                               <p>I agree <a href="javascript:void(0);" (click)="acceptTermCondtion()">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
                           </li>
+                          
                       </ul>
+                      <div class="btn_payment">
+                        <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+                      </div>
                   </div>
-                  <div class="btn_payment">
-                      <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
-                      
-                  </div>
+                  
               </div>
               <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult" ></app-flight-confirmation>
               

@@ -25,6 +25,9 @@ export class ViewHistoryComponent implements OnInit {
     if(this.list &&  this.list != 'undefined' ){
     }
   }
-
+  
+  dateConvert(date){
+    return this.commonFunction.convertDateFormat(new Date(date),"MM/DD/YYYY")
+  }
   
 }
