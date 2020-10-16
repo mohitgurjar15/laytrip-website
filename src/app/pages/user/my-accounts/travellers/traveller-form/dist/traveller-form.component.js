@@ -102,7 +102,8 @@ var TravellerFormComponent = /** @class */ (function () {
                 return {
                     id: country.id,
                     name: country.name,
-                    code: country.phonecode
+                    code: country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {
@@ -140,14 +141,15 @@ var TravellerFormComponent = /** @class */ (function () {
                 dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),
                 gender: this.coAccountForm.value.gender,
                 country_id: country_id ? country_id : '',
-                // passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
                 passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
                 passport_number: this.coAccountForm.value.passport_number,
-                country_code: this.coAccountForm.value.country_code.country_name &&
-                    this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.country_name : this.coAccountForm.value.country_code,
+                country_code: this.coAccountForm.value.country_code &&
+                    this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code : this.coAccountForm.value.country_code,
                 phone_no: this.coAccountForm.value.phone_no
             };
+            var emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
             if (this.travellerId) {
+                // jsonData = Object.assign(jsonData, emailObj);
                 this.flightService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
                     _this.travelersChanges.emit(data);
                     _this.activeModal.close();
@@ -156,10 +158,10 @@ var TravellerFormComponent = /** @class */ (function () {
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
+                    _this.toastr.error(error.error.message, 'Traveller Update Error');
                 });
             }
             else {
-                var emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
                 jsonData = Object.assign(jsonData, emailObj);
                 this.flightService.addAdult(jsonData).subscribe(function (data) {
                     _this.travelersChanges.emit(data);
@@ -169,6 +171,10 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
+                    }
+                    else {
+                        _this.submitted = _this.loading = false;
+                        _this.toastr.error(error.error.message, 'Traveller Update Error');
                     }
                 });
             }

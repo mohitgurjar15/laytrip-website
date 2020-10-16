@@ -69,7 +69,7 @@
                                     <div class="card-body">
                                         <div class="block_nocard_available" *ngIf="isEarningPointNotFound">
                                             <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg" alt="Card Icon">
-                                            <h5>No Card Available</h5>
+                                            <h5>No Wallet Available</h5>
                                         </div>
                                         <div class="block_notification">
                                             <div *ngIf="loading">
@@ -170,6 +170,17 @@
                                                     <li>{{ getDateFormat(item.redeemDate) }}</li>
                                                 </ul>
                                             </div>                                           
+                                                    <div class="pagination_main">  
+                                                        <div class="pagination_result">
+                                                          <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
+                                                        </div>        
+                                                        <div class="pagination_list">
+                                                            <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
+                                                            [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+                                                            (pageChange)="pageChange($event)">
+                                                            </ngb-pagination>
+                                                        </div>
+                                                    </div>
                                         </div>
                                     </div>
                                 </div>

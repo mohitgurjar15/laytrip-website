@@ -83,7 +83,8 @@ var ProfileComponent = /** @class */ (function () {
             _this.countries = data.map(function (country) {
                 return {
                     id: country.id,
-                    name: country.name
+                    name: country.name,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {
@@ -263,11 +264,12 @@ var ProfileComponent = /** @class */ (function () {
             else {
                 formdata.append("state_id", this.profileForm.value.state_id);
             }
-            if (typeof (this.profileForm.value.country_code) != 'object') {
-                formdata.append("country_code", this.selectResponse.countryCode);
+            console.log(typeof (this.profileForm.value.country_code));
+            if (typeof (this.profileForm.value.country_code) === 'string') {
+                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
             }
             else {
-                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.country_name : '');
+                formdata.append("country_code", this.selectResponse.countryCode);
             }
             if (!Number.isInteger(Number(this.profileForm.value.language_id))) {
                 formdata.append("language_id", this.selectResponse.preferredLanguage.id);

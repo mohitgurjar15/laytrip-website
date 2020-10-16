@@ -129,7 +129,9 @@ export class TravellerFormComponent implements OnInit {
         return {
           id: country.id,
           name: country.name,
-          code: country.phonecode
+          code: country.phonecode,
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+
         }
       }),
         this.countries_code = data.map(country => {
@@ -167,15 +169,17 @@ export class TravellerFormComponent implements OnInit {
         dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),
         gender: this.coAccountForm.value.gender,
         country_id: country_id ? country_id : '',
-        // passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
         passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
         passport_number: this.coAccountForm.value.passport_number,
-        country_code: this.coAccountForm.value.country_code.country_name &&
-          this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code.country_name : this.coAccountForm.value.country_code,
+        country_code: this.coAccountForm.value.country_code &&
+          this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code : this.coAccountForm.value.country_code,
         phone_no: this.coAccountForm.value.phone_no,
       };
+      let emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
 
       if (this.travellerId) {
+        // jsonData = Object.assign(jsonData, emailObj);
+
         this.flightService.updateAdult(jsonData,this.travellerId).subscribe((data: any) => {
           this.travelersChanges.emit(data);          
           this.activeModal.close();
@@ -184,9 +188,9 @@ export class TravellerFormComponent implements OnInit {
             if (error.status === 401) {
               this.router.navigate(['/']);
             }
+            this.toastr.error(error.error.message, 'Traveller Update Error');
         }); 
       } else {
-        let emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
         jsonData = Object.assign(jsonData, emailObj);
         
         this.flightService.addAdult(jsonData).subscribe((data: any) => {
@@ -197,6 +201,9 @@ export class TravellerFormComponent implements OnInit {
           this.submitted = this.loading = false;
           if (error.status === 401) {
             this.router.navigate(['/']);
+          } else {
+            this.submitted = this.loading = false;
+            this.toastr.error(error.error.message, 'Traveller Update Error');
           }
         });
 

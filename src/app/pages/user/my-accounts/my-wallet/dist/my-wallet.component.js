@@ -16,7 +16,7 @@ var MyWalletComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.pageSize = 10;
         this.perPageLimitConfig = [10, 25, 50, 100];
-        this.showPaginationBar = false;
+        this.showPaginationBar = true;
         this.isEarningPointNotFound = false;
         this.isRedeedemPointNotFound = false;
         this.loading = true;
@@ -62,17 +62,21 @@ var MyWalletComponent = /** @class */ (function () {
         });
     };
     MyWalletComponent.prototype.pageChange = function (event) {
-        this.page = event;
         this.showPaginationBar = false;
+        this.page = event;
+        this.getRedeemedPoint();
     };
     MyWalletComponent.prototype.getRedeemedPoint = function () {
         var _this = this;
         this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe(function (result) {
             _this.redeemedPoints = result.data;
+            _this.totalItems = result.TotalResult;
             _this.loading = false;
+            _this.showPaginationBar = true;
             _this.isRedeedemPointNotFound = false;
         }, function (error) {
             _this.loading = false;
+            _this.showPaginationBar = false;
             _this.isRedeedemPointNotFound = true;
         });
     };

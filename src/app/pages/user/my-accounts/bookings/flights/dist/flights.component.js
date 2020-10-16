@@ -35,18 +35,21 @@ var FlightsComponent = /** @class */ (function () {
         this.limit = this.perPageLimitConfig[0];
         this.getBookings();
     };
-    FlightsComponent.prototype.ngOnChanges = function (changes) {
-        this.showPaginationBar = true;
-        this.flightList = changes.flightLists.currentValue;
-    };
-    FlightsComponent.prototype.ngAfterContentChecked = function () {
-        // this.flightBookings = this.flightList;
-        // this.totalItems = this.flightBookings.length;
-        if (this.totalItems === 0) {
-            // this.isNotFound = true;
-            this.showPaginationBar = false;
-        }
-    };
+    /* ngOnChanges(changes:SimpleChanges){
+      this.showPaginationBar = true;
+      this.flightList = changes.flightLists.currentValue;
+      console.log()
+    }
+  
+    ngAfterContentChecked() {
+      // this.flightBookings = this.flightList;
+      // this.totalItems = this.flightBookings.length;
+  
+      if(this.totalItems === 0) {
+        // this.isNotFound = true;
+        this.showPaginationBar = false;
+      }
+    } */
     FlightsComponent.prototype.pageChange = function (event) {
         this.showPaginationBar = false;
         this.page = event;
@@ -91,6 +94,7 @@ var FlightsComponent = /** @class */ (function () {
                         };
                     }
                 });
+                console.log(_this.flightBookings);
                 _this.totalItems = res.total_count;
                 _this.isNotFound = false;
                 _this.loading = false;
@@ -115,10 +119,14 @@ var FlightsComponent = /** @class */ (function () {
         this.flightService.getBaggageDetails(routeCode).subscribe(function (data) {
             _this.baggageDetails = data;
             _this.loadBaggageDetails = false;
+        }, function (err) {
+            _this.loadBaggageDetails = false;
+            _this.errorMessage = err.message;
         });
     };
     FlightsComponent.prototype.getCancellationPolicy = function (routeCode) {
         var _this = this;
+        console.log(routeCode);
         this.loadCancellationPolicy = true;
         this.loadMoreCancellationPolicy = false;
         this.errorMessage = '';

@@ -13,15 +13,18 @@ var FlightCommonFunction = /** @class */ (function () {
         this.commonFunction = commonFunction;
     }
     FlightCommonFunction.prototype.getPaymentStartDate = function (bookingInstalments) {
+        // console.log(moment(date).format('MM/DD/YYYY'))
         if (bookingInstalments[1]) {
-            return this.commonFunction.convertDateFormat(bookingInstalments[1].instalmentDate, 'YYYY-MM-DD', 'en');
+            var date = new Date(bookingInstalments[0].instalmentDate);
+            return this.commonFunction.convertDateFormat(date, 'MM/DD/YYYY');
         }
         else {
-            return this.commonFunction.convertDateFormat(bookingInstalments[0].instalmentDate, 'YYYY-MM-DD', 'en');
+            var date = new Date(bookingInstalments[0].instalmentDate);
+            return this.commonFunction.convertDateFormat(date, 'MM/DD/YYYY');
         }
     };
     FlightCommonFunction.prototype.getPaymentEndDate = function (bookingInstalments) {
-        return this.commonFunction.convertDateFormat(bookingInstalments[bookingInstalments.length - 1].instalmentDate, 'YYYY-MM-DD', 'en');
+        return this.commonFunction.convertDateFormat(new Date(bookingInstalments[bookingInstalments.length - 1].instalmentDate), 'MM/DD/YYYY');
     };
     FlightCommonFunction = __decorate([
         core_1.Injectable({

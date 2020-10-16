@@ -53,12 +53,14 @@ export class ListPaymentHistoryComponent implements OnInit {
       this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
           this.historyResult = res.data;
           this.loading = this.notFound  = false;
+          console.log('here')
       }, err => {
+        this.notFound = true;
+        this.loading = false;
+
         if (err && err.status === 404) {
-          this.loading = false;
-          this.notFound = true;
         }
-      });               
+      });   
   }
   
   getBookingHistory(event) {

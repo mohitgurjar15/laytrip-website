@@ -48,9 +48,10 @@ export class FlightsComponent implements OnInit {
     this.getBookings();
   }
  
-  ngOnChanges(changes:SimpleChanges){    
+  /* ngOnChanges(changes:SimpleChanges){    
     this.showPaginationBar = true;
     this.flightList = changes.flightLists.currentValue;
+    console.log()
   }
 
   ngAfterContentChecked() {
@@ -61,7 +62,7 @@ export class FlightsComponent implements OnInit {
       // this.isNotFound = true;
       this.showPaginationBar = false;
     }
-  }
+  } */
 
   pageChange(event) {
     this.showPaginationBar = false;
@@ -108,6 +109,7 @@ export class FlightsComponent implements OnInit {
             }
           }
         });
+        console.log(this.flightBookings)
         this.totalItems = res.total_count;
         this.isNotFound = false;
         this.loading = false;this.showPaginationBar = true;
@@ -132,11 +134,14 @@ export class FlightsComponent implements OnInit {
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
       this.baggageDetails = data;
       this.loadBaggageDetails = false;
+    }, (err) => {
+      this.loadBaggageDetails=false;
+      this.errorMessage = err.message;
     });
   }
 
   getCancellationPolicy(routeCode) {
-
+    console.log(routeCode)
     this.loadCancellationPolicy=true;
     this.loadMoreCancellationPolicy=false;
     this.errorMessage='';

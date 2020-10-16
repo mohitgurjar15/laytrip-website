@@ -21,6 +21,9 @@ var ViewHistoryComponent = /** @class */ (function () {
         if (this.list && this.list != 'undefined') {
         }
     };
+    ViewHistoryComponent.prototype.dateConvert = function (date) {
+        return this.commonFunction.convertDateFormat(new Date(date), "MM/DD/YYYY");
+    };
     __decorate([
         core_1.Input()
     ], ViewHistoryComponent.prototype, "item");

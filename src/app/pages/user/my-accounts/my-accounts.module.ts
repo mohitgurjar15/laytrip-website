@@ -10,7 +10,6 @@ import { ListTravellerComponent } from './travellers/list-traveller.component';
 import { ListBookingsComponent } from './bookings/list-bookings.component';
 import { FlightsComponent } from './bookings/flights/flights.component';
 import { HotelsComponent } from './bookings/hotels/hotels.component';
-import { AccommodationsComponent } from './bookings/accommodations/accommodations.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { HistoryListComponent } from './payment-history/history-list/history-list.component';
@@ -27,6 +26,7 @@ import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-deta
 import { TripNotFoundComponent } from './trip-not-found/trip-not-found.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ConfirmationModalComponent } from '../../../components/confirmation-modal/confirmation-modal.component';
+import { HomeRentalsComponent } from './bookings/home-rentals/home-rentals.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { ConfirmationModalComponent } from '../../../components/confirmation-mod
     TravellerFormComponent,
     FlightsComponent,
     HotelsComponent,
-    AccommodationsComponent,
+    HomeRentalsComponent,
     ListPaymentHistoryComponent,
     HistoryListComponent,
     ViewHistoryComponent,

@@ -72,6 +72,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 }
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .passport_expiry_cal .ui-calendar .ui-datepicker {
   min-width: auto;
+  width: 200px !important;
 }
 
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field .ui-calendar {
@@ -86,6 +87,28 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   -webkit-appearance: none;
 }
 
-.account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field .passport_expiry_cal .ui-calendar .ui-datepicker {
-  width: 200px !important;
-}
+/* 
+.account_part {
+	.account_cnt_main {
+		.update_location_detail {
+			.detail_update {
+				.form_row {
+					.field_bolck {
+						.field_inn {
+							.text_field {
+                .passport_expiry_cal{
+                  .ui-calendar{
+                    .ui-datepicker{
+                      width: 200px !important;
+                      min-width: auto !important;
+                    }
+                  }
+                }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+} */

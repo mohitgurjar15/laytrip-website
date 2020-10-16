@@ -88,7 +88,7 @@
                                                 <div class="code">
                                                     <div class="dropdown">
                                                         <ng-select class="ng-customClass" tabindex="4"
-                                                            selectOnTab="true" [items]="countries_code" bindLabel="country_name"
+                                                            selectOnTab="true" [items]="countries_code" bindValue="code" bindLabel="country_name"
                                                             clearSearchOnAdd="true" formControlName="country_code"
                                                             placeholder="Select country code">
                                                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
@@ -260,6 +260,13 @@
                                                     tabindex="10" [selectOnTab]="true" formControlName="country_id"
                                                     selectOnTab="true" placeholder="Select Country"
                                                     (change)="getStates($event)">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label"><img [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select country' }} </span>
+                                                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                    </ng-template>                                                        
+                                                    <ng-template ng-option-tmp let-item="item">
+                                                        <img [src]="item.flag" width="20px" height="20px"> {{item.name}}
+                                                    </ng-template>
                                                 </ng-select>
                                             </div>
                                             <!-- <div *ngIf="(submitted  || profileForm.controls.country_id.touched) && profileForm.controls.country_id.errors "

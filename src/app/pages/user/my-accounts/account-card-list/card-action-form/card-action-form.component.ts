@@ -31,6 +31,13 @@ export class CardActionFormComponent implements OnInit {
       /\d/, /\d/, /\d/, /\d/]
   };
 
+  cvvNoMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, /\d/, /\d/]
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -43,10 +50,10 @@ export class CardActionFormComponent implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       card_type: [''],
-      card_name: ['', Validators.required],
+      // card_name: ['', Validators.required],
       card_number: ['', [Validators.required, Validators.maxLength(20)]],
-      card_expiry: [''],
-      card_cvv: [''],
+      card_expiry: ['', Validators.required],
+      card_cvv: ['', [Validators.required, Validators.maxLength(4)]],
     });
   }
 
@@ -99,9 +106,10 @@ export class CardActionFormComponent implements OnInit {
 
   onSubmit(formValue) {
     this.cardActionForm.controls.card_number.setValue(this.cardActionForm.controls.card_number.value.replace(/\s/g, ""));
-    console.log(this.cardActionForm);
     this.cardError = '';
     if (this.cardActionForm.invalid) {
+      const controls = this.cardActionForm.controls;
+      Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
       return;
     }
     const cardData = {
@@ -112,7 +120,6 @@ export class CardActionFormComponent implements OnInit {
       expiry: moment(formValue.card_expiry).format('MM/YYYY')
     };
     this.saveCard(cardData);
-    console.log(cardData);
   }
 
   saveCard(cardData) {

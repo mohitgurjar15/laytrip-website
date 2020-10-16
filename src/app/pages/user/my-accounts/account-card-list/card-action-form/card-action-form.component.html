@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="form_row">
-        <div class="form_field half">
+        <!-- <div class="form_field half">
           <label>Name on Card<sup>*</sup></label>
           <div class="text_field">
             <input type="text" maxlength="20" tabindex="3" placeholder="Enter Name on Card" formControlName="card_name">
@@ -44,13 +44,13 @@
               </p>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="form_field half">
           <label>Card number<sup>*</sup></label>
           <div class="text_field">
-            <input type="text" tabindex="4" placeholder="0000 0000 0000 0000 0000"
-              formControlName="card_number" [textMask]="mask">
-              <!-- [textMask]="mask" -->
+            <input type="text" tabindex="4" placeholder="0000 0000 0000 0000 0000" formControlName="card_number"
+              [textMask]="mask">
+            <!-- [textMask]="mask" -->
             <div *ngIf="cardActionForm.controls.card_number.errors && cardActionForm.controls.card_number.touched">
               <p *ngIf="cardActionForm.controls.card_number.errors.required" class="text-danger">Please enter Card
                 number.
@@ -59,20 +59,31 @@
           </div>
         </div>
 
-      </div>
-      <div class="form_row">
         <div class="form_field half">
           <label>CVV</label>
           <div class="text_field">
-            <input type="text" maxlength="20" tabindex="5" placeholder="Enter CVV no." formControlName="card_cvv">
+            <input type="text" tabindex="5" placeholder="Enter CVV no." formControlName="card_cvv" [textMask]="cvvNoMask">
+            <div *ngIf="cardActionForm.controls.card_cvv.errors && cardActionForm.controls.card_cvv.touched">
+              <p *ngIf="cardActionForm.controls.card_cvv.errors.required" class="text-danger">Please enter Card CVV
+                number.
+              </p>
+            </div>
           </div>
         </div>
+
+      </div>
+      <div class="form_row">
+
         <div class="form_field half">
           <label>Expiry</label>
           <div class="text_field">
             <p-calendar inputId="basic" formControlName="card_expiry" [minDate]="expiryMinDate" dateFormat="mm/yy"
               view="month" tabindex="6" [readonlyInput]="true">
             </p-calendar>
+            <div *ngIf="cardActionForm.controls.card_expiry.errors && cardActionForm.controls.card_expiry.touched">
+              <p *ngIf="cardActionForm.controls.card_expiry.errors.required" class="text-danger">Please enter Card Expiry date.
+              </p>
+            </div>
             <!-- <input class="birth_date" type="text" maxlength="20" tabindex="4" placeholder="Dd/mm/yyyy"
               formControlName="card_expiry"> -->
           </div>
@@ -84,7 +95,7 @@
     <div class="form_btn">
       <button type="button" (click)="close()">Close</button>
       <button type="submit">
-        <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin" ></i> Save</button>
+        <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin"></i> Save</button>
     </div>
   </div>
 </form>

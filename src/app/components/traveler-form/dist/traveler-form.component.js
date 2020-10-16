@@ -158,7 +158,7 @@ var TravelerFormComponent = /** @class */ (function () {
             if (this.type === 'adult') {
                 var adultObj = {
                     country_code: this.adultForm.value.country_code.country_name &&
-                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code.country_name : this.adultForm.value.country_code,
+                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code : this.adultForm.value.country_code,
                     phone_no: this.adultForm.value.phone_no
                 };
                 jsonData = Object.assign(jsonData, adultObj);
