@@ -702,9 +702,11 @@
 								}
 
 								.border-dot {
-									width: 80px;
-									border: 1px dashed $tab-border-color;
-									margin: 5px 0;
+									width: 90px;
+
+									img {
+										width: 100%;
+									}
 
 									@media(max-width:767px) {
 										width: 50px;
@@ -1126,6 +1128,7 @@
 											padding: 0 35px;
 											display: flex;
 											justify-content: center;
+											align-items: center;
 											width: 90%;
 
 											@media(max-width:767px) {
@@ -1849,8 +1852,10 @@
 
 										.border-dot {
 											width: 80px;
-											border: 1px dashed $tab-border-color;
-											margin: 5px 0;
+
+											img {
+												width: 100%;
+											}
 
 											@media(max-width:767px) {
 												width: 50px;
@@ -2322,6 +2327,7 @@
 													padding: 0 35px;
 													display: flex;
 													justify-content: flex-start;
+													align-items: center;
 													width: 90%;
 
 

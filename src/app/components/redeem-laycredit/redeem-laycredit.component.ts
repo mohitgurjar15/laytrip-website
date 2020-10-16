@@ -20,6 +20,7 @@ export class RedeemLaycreditComponent implements OnInit {
     step: 0.1,
     disabled:true
   };
+  isLoading:boolean=false;
   constructor(
     private genericService:GenericService
   ) { }
@@ -29,7 +30,9 @@ export class RedeemLaycreditComponent implements OnInit {
   }
 
   totalLaycredit(){
+    this.isLoading=true;
     this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+      this.isLoading=false;
       this.totalLaycreditPoints=res.total_available_points;
       if(this.totalLaycreditPoints){
         if(this.totalLaycreditPoints > Number(this.sellingPrice)){
@@ -40,7 +43,7 @@ export class RedeemLaycreditComponent implements OnInit {
         }
       }
     },(error=>{
-
+      this.isLoading=false;
     }))
   }
 

@@ -21,19 +21,27 @@
                                     <h5>Partial Payment Detail</h5>
                                     <a (click)="toggleInstalmentMode()">Change</a>
                                 </div>
-                                <!-- <div class="block_detail">
+
+                                <div class="block_detail" *ngIf="!flightSummary.length">
                                     <div class="pay_deatil_info">
                                         <div class="block_detail_left">
                                             <ul>
-                                                <li>1st Installment <span>$40</span></li>
-                                                <li>Default Instalment (for 2 weeks) <span>$70</span></li>
+                                                <li>
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </li>
+                                                <li>
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </li>
                                             </ul>
                                         </div>
-                                        <div class="block_detail_right">
-                                            Booking available on <span>26th Nov, 2020</span>
+                                        <div class="block_detail_right ml-5">
+                                            <p class="fb_animation w-100 mb-0"></p> <span>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </span>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
+                                
 
                                 <div class="block_detail">
                                     <!-- <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit> -->

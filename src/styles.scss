@@ -1010,6 +1010,10 @@ select {
 						display: none;
 					}
 
+					.disabled-icon {
+						display: none;
+					}
+
 					&:first-child {
 						border-radius: 20px 0 0 0;
 					}
@@ -1023,6 +1027,27 @@ select {
 						color: $active-tab-text;
 
 						.active-icon {
+							display: block;
+						}
+
+						.disabled-icon {
+							display: none;
+						}
+
+						.default-icon {
+							display: none;
+						}
+					}
+
+					&.disabled {
+						background: $text_grey_dark;
+						color: $disabled-text;
+
+						.active-icon {
+							display: none;
+						}
+
+						.disabled-icon {
 							display: block;
 						}
 

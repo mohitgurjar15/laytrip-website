@@ -302,7 +302,16 @@ export class FlightCheckoutComponent implements OnInit {
       this.instalmentType = data.instalmentType;
       this.customAmount = data.customAmount;
       this.customInstalment = data.customInstalment;
-      let instalmentRequest={
+      this.partialPaymentAmount = data.partialPaymentAmount;
+      if(this.instalmentMode=='instalment'){
+        
+        this.payNowAmount=Number(data.firstInstalment)-Number(this.laycreditpoints);
+      }
+      else{
+        this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
+      }
+
+      /* let instalmentRequest={
         instalment_type: data.instalmentType,
         checkin_date: moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"),
         booking_date: moment().format("YYYY-MM-DD"),
@@ -310,8 +319,9 @@ export class FlightCheckoutComponent implements OnInit {
         additional_amount: Number(data.additionalAmount)+Number(data.layCreditPoints),
         custom_instalment_no: data.customInstalment,
         custom_amount: data.customAmount
-      }
-      this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
+      } */
+      console.log(data,"---")
+      /* this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
         if(res.instalment_available==true){
           
           this.partialPaymentAmount=res.instalment_date[1].instalment_amount;
@@ -329,7 +339,7 @@ export class FlightCheckoutComponent implements OnInit {
         }
       },(err)=>{
   
-      })
+      }) */
     }
 
     emitNewCard(event){
