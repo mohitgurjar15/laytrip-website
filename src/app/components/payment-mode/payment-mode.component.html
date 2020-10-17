@@ -3,7 +3,7 @@
     <div class="pay_deatil_info">
         <div class="block_detail_left">
             <ul>
-                <li>1st Installment <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
+                <li>1st Instalment <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
                 <li>Default Instalment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
             </ul>
         </div>
@@ -266,3 +266,87 @@
         </div>
     </div>
 </div>
+
+
+<!-- Face Book Loader Start -->
+<ul class="block_installment_radio" *ngIf="!instalmentAvavible">
+    <li style="flex-flow: column">
+        <p class="fb_animation w-100 mb-0"></p>
+        <p class="fb_animation w-100 mb-0"></p>
+    </li>
+    <li style="flex-flow: column">
+        <p class="fb_animation w-100 mb-0"></p>
+        <p class="fb_animation w-100 mb-0"></p>
+    </li>
+</ul>
+<div class="installment_main" *ngIf="!instalmentAvavible">
+    <div class="block_installment_option" id="installment_option_show">
+        <div class="installment_top">
+
+            <ul class="custom_tab">
+                <li class="active_tab">
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                </li>
+                <li>
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                </li>
+                <li>
+                    <p class="fb_animation w-100 mb-0"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="" id="pay-weekly">
+                    <div class="installment_ingo">
+                        <div class="accordion" id="accordion">
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle custom_aerrow" href="javascript:void(0);">
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                        <div class="icon" onclick="toggleaccordin();">
+                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsetwo">
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="block_installment_date">
+            <p class="fb_animation w-100 mb-2"></p>
+            <p class="fb_animation w-100 mb-0"></p>
+        </div>
+    </div>
+</div>
+<!-- Face Book End -->

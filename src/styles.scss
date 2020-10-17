@@ -988,7 +988,7 @@ select {
 				a {
 					display: flex;
 					align-items: center;
-					padding: 20px 60px 20px 30px;
+					padding: 20px 30px 20px 30px;
 					background: $primary-color;
 					border: none;
 					font-size: 14px;
@@ -1010,6 +1010,10 @@ select {
 						display: none;
 					}
 
+					.disabled-icon {
+						display: none;
+					}
+
 					&:first-child {
 						border-radius: 20px 0 0 0;
 					}
@@ -1023,6 +1027,27 @@ select {
 						color: $active-tab-text;
 
 						.active-icon {
+							display: block;
+						}
+
+						.disabled-icon {
+							display: none;
+						}
+
+						.default-icon {
+							display: none;
+						}
+					}
+
+					&.disabled {
+						background: $text_grey_dark;
+						color: $disabled-text;
+
+						.active-icon {
+							display: none;
+						}
+
+						.disabled-icon {
 							display: block;
 						}
 
@@ -1739,6 +1764,7 @@ select {
 					position: relative;
 					height: 300px;
 
+
 					img {
 						width: 100%;
 						border-radius: 20px;
@@ -1823,17 +1849,17 @@ select {
 						}
 					}
 
-					&:after {
-						width: 90%;
-						height: 80%;
-						position: absolute;
-						left: 5%;
-						bottom: -10px;
-						background: $box-border-color;
-						border-radius: 20px;
-						content: '';
-						z-index: -1;
-					}
+					//					&:after {
+					//						width: 90%;
+					//						height: 80%;
+					//						position: absolute;
+					//						left: 5%;
+					//						bottom: -10px;
+					//						background: $box-border-color;
+					//						border-radius: 20px;
+					//						content: '';
+					//						z-index: -1;
+					//					}
 				}
 			}
 
@@ -3140,7 +3166,7 @@ select {
 		width: 96%;
 
 		.modal-content {
-			padding: 40px 20px;
+			padding: 40px 80px;
 			border-radius: 15px;
 
 			@media(max-width:767px) {
@@ -3171,7 +3197,7 @@ select {
 					}
 
 					@media(max-width:575px) {
-						font-size: 24px;
+						font-size: 20px;
 						padding: 0 20px
 					}
 				}
@@ -3189,7 +3215,8 @@ select {
 					}
 
 					.block_cnt_left {
-						width: 25%;
+						width: 50%;
+						text-align: center;
 
 						img {
 							max-width: 100%;
@@ -3202,16 +3229,21 @@ select {
 					}
 
 					.block_cnt_right {
-						width: 73%;
+						width: 50%;
+						display: flex;
+						flex-flow: column;
+						justify-content: center;
 
 						@media(max-width:767px) {
 							width: 100%;
-							margin: 30px 0 0;
+							margin: 0 0 30px;
 						}
 
 						ul {
 							width: 100%;
 							display: flex;
+							flex-wrap: wrap;
+							justify-content: center;
 							margin: 0;
 							padding: 0;
 							list-style: none;
@@ -3222,14 +3254,14 @@ select {
 							}
 
 							li {
-								margin: 0 15px;
+								margin: 0 15px 30px;
 
-								@media(max-width:767px) {
-									margin: 10px;
+								@media(max-width:991px) {
+									margin: 0 11px 25px;
 								}
 
-								@media(max-width:575px) {
-									margin: 5px;
+								@media(max-width:767px) {
+									margin: 0 10px 20px;
 								}
 
 								a {
@@ -3272,7 +3304,7 @@ select {
 
 						.block_download_app {
 							width: 100%;
-							margin: 40px 0 0;
+							margin: 0;
 
 							ul {
 								width: 100%;
@@ -3850,11 +3882,13 @@ select {
 				}
 
 				.form_btn {
-					margin: 10px 0 0;
+					margin: 0;
+					display: flex;
+					justify-content: flex-end;
 
 					button {
 						width: auto;
-						padding: 0 45px;
+						padding: 0 30px;
 						height: 48px;
 						background: $primary-color;
 						border-radius: 8px;

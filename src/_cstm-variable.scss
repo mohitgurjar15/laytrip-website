@@ -93,6 +93,7 @@ $popup_title_bg : #9A9FBB;
 $feedback_text-clr : #D9D9D9;
 $orange_light : #FFECEC;
 $grey_light : #F5F4FA;
+$disabled-text : #323233;
 
 
 $fb-loader-bg : #F6F6F6;
@@ -107,7 +108,7 @@ $offset: 1em;
 $mobile-bkp: 650px;
 
 :root {
-    --z-distance: $item-width / 7.63;
-    --from-left: 1;
-    --mobile-bkp: $mobile-bkp;
+	--z-distance: $item-width / 7.63;
+	--from-left: 1;
+	--mobile-bkp: $mobile-bkp;
 }

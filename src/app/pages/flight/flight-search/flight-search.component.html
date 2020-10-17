@@ -1,11 +1,11 @@
 <app-flight-search-bar (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar>
-<section class="search_result flight pb-0" *ngIf="loading">
-  <app-flight-loader></app-flight-loader>
-  <app-full-page-overlay-loader image="{{s3BucketUrl}}assets/images/flight-load_im.png" module="Flights" type="Searching"  ></app-full-page-overlay-loader>
-</section>
-<section class="search_result flight pb-0" *ngIf="isNotFound">
-  <app-flight-not-found></app-flight-not-found>
-</section>
+
+<app-flight-loader *ngIf="loading" ></app-flight-loader>
+<app-full-page-overlay-loader *ngIf="loading" image="{{s3BucketUrl}}assets/images/flight-load_im.png" module="Flights" type="Searching"  ></app-full-page-overlay-loader>
+
+
+<app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
+
 <section class="search_result flight" *ngIf="!loading && !isNotFound">
   <div class="container">
     <div class="row">
