@@ -526,7 +526,8 @@ export class PaymentModeComponent implements OnInit {
             customInstalment : this.instalmentRequest.custom_instalment_no,
             layCreditPoints : this.laycreditpoints,
             partialPaymentAmount : this.secondInstalment,
-            payNowAmount:this.getPayNowAmount()
+            payNowAmount:this.getPayNowAmount(),
+            firstInstalment:this.firstInstalment
           })
           
         }
@@ -545,7 +546,8 @@ export class PaymentModeComponent implements OnInit {
         customInstalment : this.instalmentRequest.custom_instalment_no,
         layCreditPoints : this.laycreditpoints,
         partialPaymentAmount : this.secondInstalment,
-        payNowAmount:this.getPayNowAmount()
+        payNowAmount:this.getPayNowAmount(),
+        firstInstalment:this.firstInstalment
       })
       
       if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
