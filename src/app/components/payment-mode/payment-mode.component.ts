@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
-import { take } from 'rxjs/operators';
+import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any; 
 
 @Component({
@@ -26,7 +26,8 @@ export class PaymentModeComponent implements OnInit {
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
   constructor(
-    private genericService:GenericService
+    private genericService:GenericService,
+    private commonFunction:CommonFunction
   ) { }
   
   @Input() flightSummary;

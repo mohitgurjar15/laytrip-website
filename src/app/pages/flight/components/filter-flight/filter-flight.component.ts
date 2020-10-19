@@ -6,12 +6,6 @@ import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
 
-interface SliderDetails {
-  value: number;
-  highValue: number;
-  floor: number;
-  ceil: number;
-}
 
 @Component({
   selector: 'app-filter-flight',
@@ -58,7 +52,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     step: 1,
     translate: (value: number): any => {
       const currency = JSON.parse(this._currency);
-      return `${currency.symbol} ${value}`;
+      return `${currency.symbol}${value}`;
     }
   };
 
@@ -70,7 +64,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     step: 1,
     translate: (value: number): any => {
       const currency = JSON.parse(this._currency);
-      return `${currency.symbol} ${value}`;
+      return `${currency.symbol}${value}`;
     }
   };
 

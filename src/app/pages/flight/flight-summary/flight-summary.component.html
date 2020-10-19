@@ -293,7 +293,7 @@
         </div>
     </div>
     <div class="cmn_block">
-        <div class="block_inner">
+        <div class="block_inner ">
             <h6>Fare Break Down</h6>
             <ul>
                 <li *ngFor="let priceInfo of flightDetail[0].fare_break_dwon">
@@ -312,13 +312,12 @@
                 </li>
             </ul>
         </div>
-        <div class="block_inner last">
+        <!-- <div class="block_inner last">
             <h6>Fare Detail</h6>
             <ul>
                 <li>Amount <span>{{ currency?.symbol }} {{flightDetail[0].selling_price | number : '1.2-2'}}</span></li>
-                <!-- <li>Taxes <span>$0</span></li> -->
             </ul>
-        </div>
+        </div> -->
         <div class="partial_pay_info" *ngIf="flightDetail[0].start_price && showPartialPayemntOption">
             <ul>
                 <li>
