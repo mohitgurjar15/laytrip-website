@@ -22,7 +22,7 @@ var ProfileComponent = /** @class */ (function () {
         this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
-        this.loading = false;
+        this.loading = true;
         this.countries = [];
         this.languages = [];
         this.currencies = [];
@@ -96,7 +96,6 @@ var ProfileComponent = /** @class */ (function () {
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
                     };
                 });
-            console.log(_this.countries_code);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);
@@ -105,6 +104,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.getStates = function (countryId) {
         var _this = this;
+        this.profileForm.controls.state_id.setValue([]);
         this.genericService.getStates(countryId.id).subscribe(function (data) {
             _this.stateList = data;
         }, function (error) {
@@ -177,6 +177,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
+            _this.loading = false;
             _this.image = res.profilePic;
             _this.selectResponse = res;
             _this.is_type = res.gender;
@@ -202,6 +203,7 @@ var ProfileComponent = /** @class */ (function () {
                 passport_number: res.passportNumber
             });
         }, function (error) {
+            _this.loading = false;
             if (error.status === 404) {
                 _this.router.navigate(['/']);
             }
@@ -264,7 +266,6 @@ var ProfileComponent = /** @class */ (function () {
             else {
                 formdata.append("state_id", this.profileForm.value.state_id);
             }
-            console.log(typeof (this.profileForm.value.country_code));
             if (typeof (this.profileForm.value.country_code) === 'string') {
                 formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
             }
@@ -289,7 +290,6 @@ var ProfileComponent = /** @class */ (function () {
                 _this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
                 // this.router.navigate(['/']);      
             }, function (error) {
-                console.log(error);
                 _this.submitted = _this.loading = false;
                 _this.toastr.error(error.error.message, 'Profile Error');
             });

@@ -160,31 +160,30 @@ export class AdultListComponent implements OnInit {
 
 
   pushTraveler(event) {
-    console.log("event",event)
     let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
 
     if (event.user_type === 'adult') {
+
       const index = this._adults.indexOf(event.userId, 0);
       this._adults = this._adults.filter(item => item.userId != event.userId );  
-
+      this.showAddAdultForm = false;
       let adultTravellerKeys = ["firstName","lastName","email","dob","gender","phoneNo","title"];      
-      event.isComplete = this.checkObj(event,adultTravellerKeys);     
-      
+      event.isComplete = this.checkObj(event,adultTravellerKeys);           
       this._adults.push(event);
+
     } else if (event.user_type === 'child') {
+
       this._childs = this._childs.filter(item => item.userId != event.userId );
-
       event.isComplete = this.checkObj(event,travellerKeys);     
-
       this._childs.push(event);
+      this.showAddChildForm = false;
+
     } else {
       this._infants = this._infants.filter(item => item.userId != event.userId );
-
       event.isComplete = this.checkObj(event,travellerKeys);     
-
       this._infants.push(event);
+      this.showAddInfantForm = false;
     }
-    this.showAddAdultForm = false;
   }
 
   checkObj(obj,travellerKeys) { 
