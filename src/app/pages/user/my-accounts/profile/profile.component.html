@@ -5,7 +5,266 @@
                 <app-my-accounts-nav></app-my-accounts-nav>
             </div>
             <div class="col-lg-9">
-                <form [formGroup]="profileForm"  novalidate autocomplete="off">
+                <div class="loader" *ngIf="loading">
+                    <div class="account_cnt_main">
+                        <div class="update_info">
+                            <div class="update_info_left">
+                                <div class="update_profile">
+                                    <span style="overflow: hidden;">
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                    </span>
+                                    <div class="update_profile_btn">
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="update_info_right">
+                                <div class="form_row">
+                                    <div class="form_field w-100">
+                                        <label>
+                                            <p class="fb_animation w-25 mb-0"></p>
+                                        </label>
+                                        <ul class="custom_listing">
+                                            <li class="w-25 pr-3">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li class="w-25 pr-3">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li class="w-25 pr-0">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="form_field half">
+                                        <label>
+                                            <p class="fb_animation w-25 mb-0"></p>
+                                        </label>
+                                        <div class="text_field">
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form_field half">
+                                        <label>
+                                            <p class="fb_animation w-25 mb-0"></p>
+                                        </label>
+                                        <div class="text_field">
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_row">
+                                    <div class="form_field half">
+                                        <label>
+                                            <p class="fb_animation w-25 mb-0"></p>
+                                        </label>
+                                        <div class="text_field">
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form_field half">
+                                        <label>
+                                            <p class="fb_animation w-25 mb-0"></p>
+                                        </label>
+                                        <div class="text_field">
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                            <p class="fb_animation w-100 mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_row">
+                                    <div class="form_field half">
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_field half">
+                                        <label>
+                                            <p class="fb_animation w-25 mb-0"></p>
+                                        </label>
+                                        <div class="select_gender">
+                                            <ul>
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" class="active_gender">
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="update_location_detail">
+                            <div class="section_title">
+                                <h4>
+                                    <p class="fb_animation w-25 mb-0"></p>
+                                </h4>
+                            </div>
+                            <div class="detail_update">
+                                <div class="form_row">
+                                    <div class="field_bolck">
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field_bolck">
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field_bolck">
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="update_location_detail">
+                            <div class="section_title">
+                                <h4>
+                                    <p class="fb_animation w-25 mb-0"></p>
+                                </h4>
+                            </div>
+                            <div class="detail_update">
+                                <div class="form_row">
+                                    <div class="field_bolck half">
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field_bolck half">
+                                        <div class="field_inn">
+                                            <label>
+                                                <p class="fb_animation w-25 mb-0"></p>
+                                            </label>
+                                            <div class="text_field">
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_update_btn">
+                        <div class="w-25 h-100 p-2" style="background:#1943FF; border-radius: 8px;">
+                            <p class="fb_animation w-100 mb-0"></p>
+                            <p class="fb_animation w-100 mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <form  *ngIf="!loading" [formGroup]="profileForm" novalidate autocomplete="off">
                     <div class="account_cnt_main">
                         <div class="update_info">
                             <div class="update_info_left">
@@ -29,7 +288,8 @@
                                         <ul class="custom_listing">
                                             <li>
                                                 <label class="custom_radio">Mr.
-                                                    <input type="radio"  checked="checked"  value="mr" formControlName="title">
+                                                    <input type="radio" checked="checked" value="mr"
+                                                        formControlName="title">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </li>
@@ -77,7 +337,9 @@
                                     <div class="form_field half">
                                         <label>Email<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input [readonly]="selectResponse.email != '' && selectResponse.email !='undefined' " type="email" formControlName="email" tabindex="3">
+                                            <input
+                                                [readonly]="selectResponse.email != '' && selectResponse.email !='undefined' "
+                                                type="email" formControlName="email" tabindex="3">
                                         </div>
 
                                     </div>
@@ -88,15 +350,22 @@
                                                 <div class="code">
                                                     <div class="dropdown">
                                                         <ng-select class="ng-customClass" tabindex="4"
-                                                            selectOnTab="true" [items]="countries_code" bindValue="code" bindLabel="country_name"
-                                                            clearSearchOnAdd="true" formControlName="country_code"
+                                                            selectOnTab="true" [items]="countries_code" bindValue="code"
+                                                            bindLabel="country_name" clearSearchOnAdd="true"
+                                                            formControlName="country_code"
                                                             placeholder="Select country code">
                                                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                                                <span class="ng-value-label"><img [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
-                                                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                                                            </ng-template>                                                        
+                                                                <span class="ng-value-label"><img
+                                                                        [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'"
+                                                                        width="20px" height="20px">
+                                                                    {{ item.country_name ? item.country_name :  'Select country code' }}
+                                                                </span>
+                                                                <span class="ng-value-icon right" (click)="clear(item)"
+                                                                    aria-hidden="true">×</span>
+                                                            </ng-template>
                                                             <ng-template ng-option-tmp let-item="item">
-                                                                <img [src]="item.flag" width="20px" height="20px"> {{item.country_name}}
+                                                                <img [src]="item.flag" width="20px" height="20px">
+                                                                {{item.country_name}}
                                                             </ng-template>
                                                         </ng-select>
                                                     </div>
@@ -123,19 +392,12 @@
                                         <div class="field_inn">
                                             <label>Date of Birth<sup>*</sup></label>
                                             <div class="text_field">
-                                            <p-calendar 
-                                                inputStyleClass="custom_datpicker birth_date"
-                                                inputId="basic" 
-                                                tabindex ="6"
-                                                formControlName="dob" 
-                                                [maxDate]="dobMinDate"
-                                                [readonlyInput]="true" 
-                                                [yearNavigator]="true"
-                                                [monthNavigator]="true"
-                                                yearRange="1970:2020"
-                                                [defaultDate]="dobMinDate" 
-                                            >
-                                            </p-calendar>                                             
+                                                <p-calendar inputStyleClass="custom_datpicker birth_date"
+                                                    inputId="basic" tabindex="6" formControlName="dob"
+                                                    [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true"
+                                                    [monthNavigator]="true" yearRange="1970:2020"
+                                                    [defaultDate]="dobMinDate">
+                                                </p-calendar>
                                                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors"
                                                     class="focus-input100 login-error">
                                                     <div *ngIf="profileForm.controls.dob.errors.required"
@@ -261,9 +523,13 @@
                                                     selectOnTab="true" placeholder="Select Country"
                                                     (change)="getStates($event)">
                                                     <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                                        <span class="ng-value-label"><img [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select country' }} </span>
-                                                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                                                    </ng-template>                                                        
+                                                        <span class="ng-value-label"><img
+                                                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'"
+                                                                width="20px" height="20px">
+                                                            {{ item.name ? item.name :  'Select country' }} </span>
+                                                        <span class="ng-value-icon right" (click)="clear(item)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
                                                     <ng-template ng-option-tmp let-item="item">
                                                         <img [src]="item.flag" width="20px" height="20px"> {{item.name}}
                                                     </ng-template>
@@ -311,7 +577,7 @@
                                                     tabindex="14" placeholder="Enter zip code"
                                                     (keypress)="commonFunctoin.validateNotAllowSpecial($event)">
                                             </div>
-                                           <!--  <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors"
+                                            <!--  <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.zip_code.errors.required"
                                                     class="text-danger">Please enter your zip code.</div>
@@ -331,7 +597,8 @@
                                         <div class="field_inn">
                                             <label>Passport Number</label>
                                             <div class="text_field">
-                                                <input type="text" formControlName="passport_number" maxlength="40" tabindex="15" placeholder="Enter Passport Number">
+                                                <input type="text" formControlName="passport_number" maxlength="40"
+                                                    tabindex="15" placeholder="Enter Passport Number">
                                             </div>
                                         </div>
                                     </div>
@@ -340,20 +607,14 @@
                                         <div class="field_inn">
                                             <label>Passport Expiration Date</label>
                                             <div class="text_field">
-                                                <p-calendar 
-                                                inputStyleClass="custom_datpicker passport_expiry_cal birth_date"
-                                                inputId="basic" 
-                                                formControlName="passport_expiry" 
-                                                [minDate]="dobMinDate"
-                                                [readonlyInput]="true" 
-                                                [yearNavigator]="true"
-                                                [monthNavigator]="true"
-                                                yearRange="2020:2030"
-                                                [defaultDate]="dobMinDate" 
-                                                tabindex="16"
-                                            >
-                                            </p-calendar>                  
-                                        </div>
+                                                <p-calendar
+                                                    inputStyleClass="custom_datpicker passport_expiry_cal birth_date"
+                                                    inputId="basic" formControlName="passport_expiry"
+                                                    [minDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true"
+                                                    [monthNavigator]="true" yearRange="2020:2030"
+                                                    [defaultDate]="dobMinDate" tabindex="16">
+                                                </p-calendar>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -362,9 +623,8 @@
 
                     </div>
                     <div class="form_update_btn">
-                        <button (click)="onSubmit()" > <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Update <img
-                                src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
-                                alt="Right Arrow" /></button>
+                        <button (click)="onSubmit()"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Update <img
+                                src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
                     </div>
                 </form>
             </div>

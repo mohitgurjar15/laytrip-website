@@ -17,29 +17,34 @@ var MyWalletComponent = /** @class */ (function () {
         this.pageSize = 10;
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.showPaginationBar = true;
+        this.showReedemPaginationBar = true;
         this.isEarningPointNotFound = false;
         this.isRedeedemPointNotFound = false;
         this.loading = true;
+        this.reedemloading = true;
         this.pointsLoading = true;
         this.totalItems = 0;
+        this.totalReedemItems = 0;
     }
     MyWalletComponent.prototype.ngOnInit = function () {
         this.page = 1;
+        this.page2 = 1;
         this.isEarningPointNotFound = false;
         this.isRedeedemPointNotFound = false;
         this.loading = true;
+        this.reedemloading = true;
         this.limit = this.perPageLimitConfig[0];
         this.getEarnedPoint();
-        this.getTotalAvailabePoints();
         this.getRedeemedPoint();
+        this.getTotalAvailabePoints();
     };
     MyWalletComponent.prototype.getEarnedPoint = function () {
         var _this = this;
         this.loading = true;
         this.travelerService.getEarnedPoint(this.page, this.limit).subscribe(function (result) {
             _this.loading = false;
+            _this.totalItems = result.TotalResult;
             _this.isEarningPointNotFound = false;
-            console.log(result);
             _this.earnedPoints = result.data;
         }, function (error) {
             _this.isEarningPointNotFound = true;
@@ -62,22 +67,28 @@ var MyWalletComponent = /** @class */ (function () {
         });
     };
     MyWalletComponent.prototype.pageChange = function (event) {
-        this.showPaginationBar = false;
         this.page = event;
+        this.loading = true;
+        this.showPaginationBar = true;
+        this.getEarnedPoint();
+    };
+    MyWalletComponent.prototype.reedemPageChange = function (event) {
+        console.log('reedem');
+        this.reedemloading = true;
+        this.showReedemPaginationBar = true;
         this.getRedeemedPoint();
     };
     MyWalletComponent.prototype.getRedeemedPoint = function () {
         var _this = this;
-        this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe(function (result) {
+        console.log(this.page, this.limit);
+        this.travelerService.getRedeemedPoint(this.page2, this.limit).subscribe(function (result) {
+            _this.showReedemPaginationBar = true;
             _this.redeemedPoints = result.data;
-            _this.totalItems = result.TotalResult;
-            _this.loading = false;
-            _this.showPaginationBar = true;
-            _this.isRedeedemPointNotFound = false;
+            _this.totalReedemItems = result.TotalResult;
+            _this.reedemloading = _this.isRedeedemPointNotFound = false;
         }, function (error) {
-            _this.loading = false;
-            _this.showPaginationBar = false;
             _this.isRedeedemPointNotFound = true;
+            _this.reedemloading = _this.showReedemPaginationBar = false;
         });
     };
     MyWalletComponent = __decorate([

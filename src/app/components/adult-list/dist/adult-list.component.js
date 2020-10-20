@@ -146,11 +146,11 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.pushTraveler = function (event) {
-        console.log("event", event);
         var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
         if (event.user_type === 'adult') {
             var index = this._adults.indexOf(event.userId, 0);
             this._adults = this._adults.filter(function (item) { return item.userId != event.userId; });
+            this.showAddAdultForm = false;
             var adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "phoneNo", "title"];
             event.isComplete = this.checkObj(event, adultTravellerKeys);
             this._adults.push(event);
@@ -159,13 +159,14 @@ var AdultListComponent = /** @class */ (function () {
             this._childs = this._childs.filter(function (item) { return item.userId != event.userId; });
             event.isComplete = this.checkObj(event, travellerKeys);
             this._childs.push(event);
+            this.showAddChildForm = false;
         }
         else {
             this._infants = this._infants.filter(function (item) { return item.userId != event.userId; });
             event.isComplete = this.checkObj(event, travellerKeys);
             this._infants.push(event);
+            this.showAddInfantForm = false;
         }
-        this.showAddAdultForm = false;
     };
     AdultListComponent.prototype.checkObj = function (obj, travellerKeys) {
         var isComplete = true;
