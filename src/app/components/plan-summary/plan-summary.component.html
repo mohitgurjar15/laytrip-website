@@ -1,0 +1,37 @@
+<div class="detail_info_right subscribe_payment_detail">
+  <h5>Plan <span>Summary</span></h5>
+  <div class="block_top">
+    <div class="summary_info">
+      <div class="info_top">
+        <ul>
+          <li>{{planSummaryData?.name}}</li>
+        </ul>
+        <!-- <p>7 Aug 2020 to 6 Sep 2020</p> -->
+        <p>{{ validityDaysRange }}</p>
+        <div class="btm_aerrow"></div>
+      </div>
+    </div>
+  </div>
+  <div class="cmn_block">
+    <div class="block_inner">
+      <h6>Subscription Detail</h6>
+      <ul>
+        <li>Monthly<span>{{ currency?.symbol }}{{planSummaryData?.payble_amount}}</span></li>
+      </ul>
+    </div>
+    <div class="total_payment">
+      <ul>
+        <li>Total <span>{{ currency?.symbol }}{{planSummaryData?.payble_amount}}</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cmn_block policies">
+    <div class="block_inner">
+      <h6>Check our Policies</h6>
+      <ul>
+        <li><a href="javascript:void(0);" (click)="toggleCancellationPolicy()">Cancellation
+            policy</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

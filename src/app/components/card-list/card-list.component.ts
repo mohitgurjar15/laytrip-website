@@ -20,7 +20,6 @@ export class CardListComponent implements OnInit {
   @Input() newCard;
   cardToken:string='';
   ngOnInit() {
-    
     this.getCardlist();
   }
 
@@ -42,11 +41,9 @@ export class CardListComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes['newCard'].currentValue,"-----")
     if (typeof changes['newCard'].currentValue!=='undefined') {
       if(typeof this.newCard!=='undefined'){
         this.cards.push(this.newCard)
-        console.log("+++++",this.newCard)
         this.cardToken=this.newCard.cardToken;
         this.selectCreditCard.emit(this.newCard.cardToken)
       }

@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SubscriptionPlanComponent } from './subscription/subscription-plan.component';
 import { SearchTripComponent } from './search-trip/search-trip.component';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
+import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'subscription',
     component: SubscriptionPlanComponent
+  },
+  {
+    path: 'subscription/:id',
+    component: PlanSubscriptionComponent
   },
   {
     path: 'account-card-list',
