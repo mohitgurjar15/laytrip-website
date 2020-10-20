@@ -111,4 +111,8 @@ export class GenericService {
     const payload = { page_type: type };
     return this.http.get(environment.apiUrl + 'v1/cms/' + payload.page_type, this.commonFunction.setHeaders());
   }
+
+  getUserLocationInfo(){
+    return this.http.get(environment.apiUrl + 'v1/generic/location/');
+  }
 }
