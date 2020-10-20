@@ -149,6 +149,7 @@ var MainHeaderComponent = /** @class */ (function () {
         var userToken = localStorage.getItem('_lay_sess');
         this.isLoggedIn = false;
         if (userToken && userToken != 'undefined' && userToken != 'null') {
+            localStorage.removeItem("_isSubscribeNow");
             this.isLoggedIn = true;
             this.userDetails = jwt_helper_1.getLoginUserInfo();
             if (this.userDetails.roleId != 7 && !this._isLayCredit) {

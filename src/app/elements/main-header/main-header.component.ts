@@ -182,6 +182,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
     this.isLoggedIn = false;
     if (userToken && userToken != 'undefined' && userToken != 'null') {
+      localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
       this.userDetails = getLoginUserInfo();
       if (this.userDetails.roleId != 7 && !this._isLayCredit ) {
