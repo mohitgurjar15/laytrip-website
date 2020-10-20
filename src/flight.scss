@@ -132,7 +132,7 @@
 								height: 30px;
 								margin-bottom: 0;
 								font-size: 16px;
-								color: $text-darkblue;
+								color: $text-black;
 								font-weight: 600;
 								padding: 0 15px;
 							}
@@ -216,9 +216,9 @@
 								border-radius: 8px;
 								background: $background-white;
 
-								input {
-									height: 35px;
-								}
+								//								input {
+								//									height: 35px;
+								//								}
 
 								.date_icon {
 									width: 20px;
@@ -638,7 +638,7 @@
 						flex-flow: column;
 						justify-content: space-between;
 						height: 100%;
-						padding: 0 15px;
+						padding: 0 20px;
 						border-right: 2px dashed rgba(63, 48, 249, 0.2);
 						border-left: 2px dashed rgba(63, 48, 249, 0.2);
 
@@ -2089,6 +2089,13 @@
 										border-radius: 15px;
 
 									}
+
+									&:hover {
+										background: $text-lightblue;
+										color: $text-white;
+										border-radius: 15px;
+
+									}
 								}
 
 							}
@@ -2986,7 +2993,7 @@
 			font-size: 16px;
 			font-weight: 500;
 			color: $text-grey;
-			margin: 0 0 5px;
+			margin: 0 0 2px;
 		}
 
 		span {
@@ -5162,9 +5169,7 @@
 						padding: 0;
 					}
 
-					@media(max-width: 575px) {
-						padding: 20px 15px;
-					}
+					@media(max-width: 575px) {}
 
 					//                    &:first-child {
 					//                        border-radius: 0 0 5px 5px;
@@ -5526,6 +5531,10 @@
 
 						&.no_pad {
 							padding: 0 30px;
+
+							@media(max-width: 767px) {
+								padding: 0 20px;
+							}
 						}
 
 						@media(max-width: 575px) {
@@ -5852,7 +5861,7 @@
 						padding: 0 30px;
 						display: flex;
 
-						@media(max-width: 480px) {
+						@media(max-width: 575px) {
 							flex-flow: column;
 						}
 
@@ -5869,8 +5878,13 @@
 							min-width: 240px;
 							border-radius: 8px;
 
-							@media(max-width: 480px) {
-								padding: 0 0 10px 0;
+							@media(max-width: 767px) {
+								min-width: auto;
+							}
+
+							@media(max-width: 575px) {
+								min-width: 100%;
+								margin-bottom: 15px;
 							}
 
 							.custom_radio {
@@ -6864,6 +6878,11 @@
 																align-items: center;
 																justify-content: center;
 
+																@media(max-width: 480px) {
+																	margin-top: 15px;
+																	justify-content: flex-start;
+																}
+
 																.block_amount {
 																	width: 80px;
 																	padding: 0 5px;
@@ -6913,6 +6932,10 @@
 																		}
 																	}
 																}
+															}
+
+															@media(max-width: 480px) {
+																flex-flow: column;
 															}
 														}
 
@@ -6978,6 +7001,10 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
+
+				@media(max-width: 1199px) {
+					flex-flow: column;
+				}
 
 				ul {
 					width: 100%;
@@ -7088,6 +7115,12 @@
 			.btn_payment {
 				width: auto;
 				margin: 00px 0 0;
+
+				@media(max-width: 1199px) {
+					width: 100%;
+					margin-top: 20px;
+					text-align: right;
+				}
 
 				.btn_laytrip {
 					display: inline-block;

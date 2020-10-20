@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 export function validateImageFile(name: String) {
 
@@ -33,3 +33,5 @@ export function fileSizeValidator(file) {
                 : { phoneCodeAndPhoneError : false } ;
     };
   } 
+
+  

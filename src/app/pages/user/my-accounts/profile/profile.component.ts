@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   profileForm: FormGroup;
   submitted = false;
-  loading = false;
+  loading = true;
   countries: any = [];
   languages: any = [];
   currencies: any = [];
@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
     this.getLanguages();
     this.getCurrencies();
     this.getProfileInfo();
-
+    
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
       first_name: ['', [Validators.required]],
@@ -108,7 +108,6 @@ export class ProfileComponent implements OnInit {
           flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
         }
       })
-      console.log( this.countries_code )
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);
@@ -117,6 +116,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getStates(countryId) {
+    this.profileForm.controls.state_id.setValue([]);
     this.genericService.getStates(countryId.id).subscribe((data: any) => {
       this.stateList = data;
     }, (error: HttpErrorResponse) => {
@@ -188,7 +188,8 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfileInfo() {
-    this.userService.getProfile().subscribe((res:any)=> {   
+    this.userService.getProfile().subscribe((res:any)=> {
+    this.loading = false;   
     this.image = res.profilePic;
     this.selectResponse = res;
 
@@ -217,6 +218,7 @@ export class ProfileComponent implements OnInit {
     });
 
     }, (error: HttpErrorResponse) => {
+      this.loading = false;   
       if (error.status === 404) {
         this.router.navigate(['/']);
       } else {
@@ -276,9 +278,6 @@ export class ProfileComponent implements OnInit {
       } else{
         formdata.append("state_id", this.profileForm.value.state_id);
       }
-
-      console.log(typeof(this.profileForm.value.country_code))
-
       if(typeof(this.profileForm.value.country_code) === 'string'){     
         formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code : '' );
       } else {
@@ -300,7 +299,6 @@ export class ProfileComponent implements OnInit {
         this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
         // this.router.navigate(['/']);      
       }, (error: HttpErrorResponse) => {
-        console.log(error)       
         this.submitted = this.loading = false;
         this.toastr.error(error.error.message, 'Profile Error');
       });

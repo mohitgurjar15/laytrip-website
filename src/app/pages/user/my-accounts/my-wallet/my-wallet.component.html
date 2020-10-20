@@ -121,6 +121,17 @@
                                                     <li>{{ getDateFormat(item.earnDate) }}</li>
                                                 </ul>
                                             </div>
+                                            <div class="pagination_main">  
+                                                <div class="pagination_result">
+                                                    <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
+                                                </div>        
+                                                <div class="pagination_list">
+                                                    <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
+                                                    [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+                                                    (pageChange)="pageChange($event)">
+                                                    </ngb-pagination>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -140,47 +151,70 @@
                                     <div class="card-body">
                                         <div class="block_nocard_available" *ngIf="isRedeedemPointNotFound">
                                             <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg" alt="Card Icon">
-                                            <h5>No Card Available</h5>
+                                            <h5>No Reedem Available</h5>
                                         </div>
                                         <div class="block_notification">
-                                            <div *ngIf="loading">
-                                                <ul>
-                                                    <li>
-                                                        <div class="traveller_list">
-                                                            <div class="list_block w-100">
-                                                                <div class="traveller_name">
-                                                                    <p class="fb_animation w-100 mb-2"></p>
-                                                                </div>
-                                                                <div class="traveller_age">
-                                                                    <p class="fb_animation w-25 mb-0"></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                            <div *ngIf="reedemloading">
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="block_list">
+                                                    <ul>
+                                                        <li class="text_clr_orange w-100">
+                                                            <p class="fb_animation w-100 mb-0"></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="block_list" *ngFor="let item of redeemedPoints; let i = index;">
-                                                <ul>
-                                                    <li>{{i+1}}</li>
-                                                    <li class="text_clr_orange">
-                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
-                                                            alt="">
-                                                        {{item.points}} Points
-                                                    </li>
-                                                    <li>{{ getDateFormat(item.redeemDate) }}</li>
-                                                </ul>
-                                            </div>                                           
-                                                    <div class="pagination_main">  
-                                                        <div class="pagination_result">
-                                                          <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
-                                                        </div>        
-                                                        <div class="pagination_list">
-                                                            <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
-                                                            [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
-                                                            (pageChange)="pageChange($event)">
-                                                            </ngb-pagination>
-                                                        </div>
-                                                    </div>
+                                            <div *ngIf="!reedemloading">
+                                                <div class="block_list" *ngFor="let item of redeemedPoints; let i = index;">
+                                                    <ul>
+                                                        <li>{{i+1}}</li>
+                                                        <li class="text_clr_orange">
+                                                            <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
+                                                                alt="">
+                                                            {{item.points}} Points
+                                                        </li>
+                                                        <li>{{ getDateFormat(item.redeemDate) }}</li>
+                                                    </ul>
+                                                </div>   
+                                            </div>                                        
+                                            <div class="pagination_main">  
+                                                <div class="pagination_result">
+                                                    <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
+                                                </div>        
+                                                <div class="pagination_list">
+                                                    <ngb-pagination *ngIf="showReedemPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalReedemItems"
+                                                    [(page)]="page2" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+                                                    (pageChange)="reedemPageChange($event)">
+                                                    </ngb-pagination>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

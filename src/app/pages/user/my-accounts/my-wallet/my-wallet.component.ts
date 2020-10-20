@@ -14,15 +14,19 @@ export class MyWalletComponent implements OnInit {
   earnedPoints:any;
   redeemedPoints:any;
   page :1;
+  page2 :1;
   pageSize =10;
   perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
   showPaginationBar: boolean = true;
+  showReedemPaginationBar: boolean = true;
   isEarningPointNotFound: boolean = false;
   isRedeedemPointNotFound: boolean = false;
   public loading: boolean = true;
+  public reedemloading: boolean = true;
   public pointsLoading: boolean = true;
   totalItems = 0;
+  totalReedemItems = 0;
   travellerPoints;
   
   constructor(
@@ -32,21 +36,23 @@ export class MyWalletComponent implements OnInit {
 
   ngOnInit() {
     this.page = 1;
+    this.page2 = 1;
     this.isEarningPointNotFound = false;
     this.isRedeedemPointNotFound = false;
     this.loading = true;
+    this.reedemloading = true;
     this.limit = this.perPageLimitConfig[0];
     this.getEarnedPoint();
-    this.getTotalAvailabePoints();
     this.getRedeemedPoint();
+    this.getTotalAvailabePoints();
   }
 
   getEarnedPoint(){
     this.loading = true;
     this.travelerService.getEarnedPoint(this.page, this.limit).subscribe((result: any) => {
       this.loading = false;
+      this.totalItems = result.TotalResult;
       this.isEarningPointNotFound = false;  
-      console.log(result)
  
       this.earnedPoints = result.data;
     }, (error: HttpErrorResponse) => {
@@ -72,22 +78,34 @@ export class MyWalletComponent implements OnInit {
   }
 
   pageChange(event) {
-    this.showPaginationBar = false;
     this.page = event;   
-    this.getRedeemedPoint(); 
+    this.loading = true;
+    this.showPaginationBar = true;   
+    this.getEarnedPoint();       
+  }
+  
+  reedemPageChange(event) {
+   
+      console.log('reedem')
+      this.reedemloading = true;
+      this.showReedemPaginationBar = true;      
+      this.getRedeemedPoint(); 
+   
   }
 
+  
+
   getRedeemedPoint(){
-    this.travelerService.getRedeemedPoint(this.page, this.limit).subscribe((result: any) => {
+    console.log(this.page, this.limit)
+    this.travelerService.getRedeemedPoint(this.page2, this.limit).subscribe((result: any) => {
+      this.showReedemPaginationBar = true;
       this.redeemedPoints = result.data;
-      this.totalItems = result.TotalResult;
-      this.loading = false;
-      this.showPaginationBar = true;
-      this.isRedeedemPointNotFound = false;
+      this.totalReedemItems = result.TotalResult;
+      this.reedemloading =  this.isRedeedemPointNotFound =false;
+      
     }, (error: HttpErrorResponse) => {  
-      this.loading = false;
-      this.showPaginationBar = false;
       this.isRedeedemPointNotFound = true;
+      this.reedemloading = this.showReedemPaginationBar =false;
     });
   }
 }
