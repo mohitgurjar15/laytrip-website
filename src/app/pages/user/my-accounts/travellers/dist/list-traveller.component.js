@@ -59,7 +59,7 @@ var ListTravellerComponent = /** @class */ (function () {
         });
     };
     ListTravellerComponent.prototype.calculateAge = function (birthdate) {
-        return moment().diff(birthdate, 'years');
+        return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years') + "yrs, " : "";
     };
     ListTravellerComponent.prototype.getGender = function (type) {
         if (type == 'M')
