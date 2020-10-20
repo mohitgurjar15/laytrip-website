@@ -288,6 +288,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   resetFilter(){
-    //this.isResetFilter=(new Date()).toString();
+    this.isResetFilter=(new Date()).toString();
   }
 }

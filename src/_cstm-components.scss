@@ -7,7 +7,12 @@
             background: $background-white;
             left: 0;
             width:500px;
+
+            /* @media(max-width: 575px) {
+                width: 100%;
+            } */
         }
+        
 
         .ng-input {
             input {
@@ -169,15 +174,27 @@
 }
 
 
-.custom_range_slide .ng5-slider .ng5-slider-bubble {
-    bottom: 14px;
-    width: 100%;
-    padding: 0;
-    height: auto;
-    border: none;
-    font-size: 14px;
-    font-weight: 300;
-    color: #8188ab;
+.custom_range_slide {
+    p{
+        margin: 0;
+        font-size: 14px;
+        font-weight: 300;
+        color: #8188ab;
+    }
+    .ng5-slider {
+        margin: 15px 0;
+        .ng5-slider-bubble {
+            bottom: 14px;
+            width: 100%;
+            padding: 0;
+            height: auto;
+            border: none;
+            font-size: 14px;
+            font-weight: 300;
+            color: #8188ab;
+            display: none
+        }
+    }
 }
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
@@ -197,3 +214,10 @@
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input{
     background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
 }
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info{
+    height:22px !important;
+    margin-top:-3px !important;
+    margin-bottom:2px !important;
+}
+

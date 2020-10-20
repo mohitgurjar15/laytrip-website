@@ -4,20 +4,26 @@
     <div class="block_top_in">
       <h5>Price</h5>
     </div>
-    <div class="custom_range_slide">
-      <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
-        [(highValue)]="priceHighValue" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
-    </div>
+    <form [formGroup]="priceSlider">
+      <div class="custom_range_slide">
+        <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+        <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
+          [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
+      </div>
+    </form>
   </div>
   <div class="cmn_block partial_payment_price">
     <div class="block_top_in">
       <h5>Partial payment price</h5>
     </div>
-    <div class="custom_range_slide">
-      <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
-        [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)">
+    <form [formGroup]="partialPriceSlider">
+      <div class="custom_range_slide">
+        <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}</p>
+        <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
+        [(value)]="partialPaymentValue" formControlName="partial_price" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)">
       </ng5-slider>
-    </div>
+      </div>
+    </form>
   </div>
  
   <div class="cmn_block pad_no">
@@ -299,11 +305,11 @@
       <ng-container *ngFor="let airline of airlineList; index as i" >
       <li *ngIf="i < showMinAirline">
         <label class="custom_checkbox">
-          <input type="checkbox" value="{{ airline?.airline_code }}" (change)="filterByAirline($event)">
+          <input type="checkbox" [checked]="airline.isChecked==true" value="{{ airline?.airline_code }}" (change)="filterByAirline($event,i)">
           <span class="checkmark"></span>
           {{ airline?.airline_name }}
         </label>
-        <span>{{ currency?.symbol }}{{ airline?.selling_price | number : '1.2-2' }}({{ airline?.count }})</span>
+        <span>{{ currency?.symbol }}{{ airline?.selling_price | number : '1.2-2' }} ({{ airline?.count }})</span>
       </li>
     </ng-container>
     </ul>

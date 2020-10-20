@@ -1,6 +1,6 @@
-<div class="result_listing one_way_list" *ngIf="!isRoundTrip" (clickOutside)="closeFlightDetail()">
+<div class="" *ngIf="!isRoundTrip" (clickOutside)="closeFlightDetail()">
     <div [@listAnimation]="flightListArray.length" (@listAnimation.start)="logAnimation($event)"
-        (@listAnimation.done)="logAnimation($event)" class="w-100">
+        (@listAnimation.done)="logAnimation($event)" class="w-100 result_listing one_way_list">
         <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
             <div class="listing_block">
                 <div class="row">
@@ -329,9 +329,9 @@
 </div>
 
 <!-- DATA OF ROUNDTRIP START -->
-<div class="result_listing roundtrip_list" *ngIf="isRoundTrip" (clickOutside)="closeFlightDetail()">
+<div class="" *ngIf="isRoundTrip" (clickOutside)="closeFlightDetail()">
     <div [@listAnimation]="flightListArray.length" (@listAnimation.start)="logAnimation($event)"
-        (@listAnimation.done)="logAnimation($event)" class="w-100">
+        (@listAnimation.done)="logAnimation($event)" class="w-100 result_listing roundtrip_list">
         <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
             <div class="listing_block">
                 <div class="row">
