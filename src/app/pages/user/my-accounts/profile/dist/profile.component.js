@@ -63,6 +63,7 @@ var ProfileComponent = /** @class */ (function () {
             first_name: ['', [forms_1.Validators.required]],
             last_name: ['', [forms_1.Validators.required]],
             country_code: [location.country.phonecode ? location.country.phonecode : '', [forms_1.Validators.required]],
+            country_id: [location.country.name ? location.country.name : ''],
             dob: ['', forms_1.Validators.required],
             phone_no: ['', [forms_1.Validators.required]],
             address: [''],
@@ -74,7 +75,6 @@ var ProfileComponent = /** @class */ (function () {
             profile_pic: [''],
             address2: [''],
             language_id: [''],
-            country_id: [location.country.name ? location.country.name : ''],
             passport_expiry: [''],
             passport_number: ['']
         });

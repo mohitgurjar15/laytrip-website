@@ -78,6 +78,7 @@ export class ProfileComponent implements OnInit {
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
       country_code: [location.country.phonecode ? location.country.phonecode : '', [Validators.required]],
+      country_id: [location.country.name ? location.country.name : ''],
       dob: ['', Validators.required],
       phone_no: ['', [Validators.required]],
       address: [''],
@@ -89,7 +90,6 @@ export class ProfileComponent implements OnInit {
       profile_pic: [''],      
       address2: [''],      
       language_id: [''],      
-      country_id: [location.country.name ? location.country.name : ''],
       passport_expiry: [''],      
       passport_number: [''],      
     });

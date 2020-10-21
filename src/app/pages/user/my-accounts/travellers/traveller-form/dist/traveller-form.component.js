@@ -42,7 +42,6 @@ var TravellerFormComponent = /** @class */ (function () {
         this.getCountry();
         var location = this.cookieService.get('__loc');
         location = JSON.parse(location);
-        console.log(location.country);
         this.coAccountForm = this.formBuilder.group({
             title: ['mr'],
             gender: ['M'],
