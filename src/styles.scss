@@ -298,7 +298,7 @@ select {
 	background: $background-white;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
 	position: relative;
-	z-index: 9;
+	z-index: 99;
 
 	.container {
 		position: relative;
@@ -3383,14 +3383,15 @@ select {
 
 		.block_top {
 			width: 100%;
-			text-align: center;
+			text-align: left;
 
 			h6 {
 				text-transform: uppercase;
 				font-size: 40px;
 				font-weight: 700;
-				margin: 0;
+				margin: 0 0 30px;
 				color: $text-black;
+
 
 				@media(max-width:767px) {
 					font-size: 32px;
@@ -3410,24 +3411,43 @@ select {
 		.block_btm {
 			width: 100%;
 
+			.cms_im {
+				float: right;
+				margin: 0 100px 30px;
+				max-width: 100%;
+
+				@media(max-width:991px) {
+					margin: 0 auto 30px;
+					float: none;
+					display: inherit;
+				}
+
+				&.privacy_policy {
+					margin: 0 0 30px 50px;
+				}
+			}
+
 			.block_in_top {
-
-
+				margin: 0 0 30px;
 				display: flex;
+				flex-flow: column;
 
-				@media(max-width:767px) {
+				@media(max-width:991px) {
 					flex-wrap: wrap;
-					margin: 20px 0 0;
+					margin: 0 0 20px 0;
+					width: 100%;
 				}
 
 				.detail_left {
-					width: 11%;
+					width: auto;
+					display: flex;
+					align-items: center;
 
-					@media(max-width:767px) {
-						width: 100%;
-						margin: 0 0 10px;
-						text-align: center;
-					}
+					//					@media(max-width:767px) {
+					//						width: 100%;
+					//						margin: 0 0 10px;
+					//						text-align: center;
+					//					}
 
 					img {
 						object-fit: cover;
@@ -3439,23 +3459,28 @@ select {
 						max-height: 40px;
 					}
 
-					p {
-						font-size: 14px;
-						font-weight: 400;
-						color: $text-black;
-						margin: 0 0 2px;
-					}
+					div {
+						margin-left: 15px;
 
-					span {
-						font-size: 12px;
-						font-weight: 300;
-						color: $text-grey;
+						p {
+							font-size: 14px;
+							font-weight: 400;
+							color: $text-black;
+							margin: 0 0 2px;
+						}
+
+						span {
+							font-size: 12px;
+							font-weight: 300;
+							color: $text-grey;
+						}
 					}
 				}
 
 				.detail_right {
-					width: 90%;
-					padding: 0 0 0 15px;
+					width: 100%;
+					padding: 0;
+					margin: 15px 0 0;
 
 					@media(max-width:767px) {
 						width: 100%;
@@ -3480,7 +3505,7 @@ select {
 							justify-content: space-between;
 							border-bottom: 1px solid $box-border-color;
 
-							@media(max-width:767px) {
+							@media(max-width:480px) {
 								flex-flow: column;
 							}
 
@@ -3503,7 +3528,7 @@ select {
 									font-weight: 400;
 									color: $text-grey;
 
-									@media(max-width:767px) {
+									@media(max-width:480px) {
 										border-right: none;
 										border-bottom: 1px solid $box-border-color;
 										width: 100%;
@@ -3523,58 +3548,29 @@ select {
 
 			}
 
-			.block_in_btm {
+			.cancle_policy {
 				width: 100%;
-				margin: 20px 0 0;
+				margin: 0;
+				padding: 0;
+				list-style-position: inside;
 
-				span {
+				li {
+					margin-bottom: 5px;
 					font-size: 14px;
 					font-weight: 400;
-					color: $text-black;
-					margin: 0 0 10px;
-					display: block;
-				}
+					color: $text-grey;
 
-				.cancle_policy {
-					width: 100%;
-					margin: 0;
-					padding: 0;
-					list-style-position: inside;
-
-					li {
-						margin-bottom: 5px;
-						font-size: 14px;
-						font-weight: 400;
-						color: $text-grey;
-
-						&:last-child {
-							margin: 0;
-						}
+					&:last-child {
+						margin: 0;
 					}
 				}
+			}
 
-				.privacy_policy {
-					width: 100%;
-					margin: 0;
-					padding: 0;
-
-					li {
-						margin-bottom: 30px;
-						font-size: 14px;
-						font-weight: 400;
-						color: $text-grey;
-						display: flex;
-
-						span {
-							margin: 0 5px 0 0;
-						}
-
-						&:last-child {
-							margin: 0;
-						}
-					}
-				}
-
+			p {
+				font-size: 14px;
+				font-weight: 400;
+				color: $text-grey;
+				text-align: justify;
 			}
 		}
 	}

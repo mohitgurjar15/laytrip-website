@@ -14,3 +14,7 @@ input.ng-invalid.ng-touched {
   height: 100%;
   border: none;
 }
+
+.img_country_code {
+  border-radius: 3px;
+}

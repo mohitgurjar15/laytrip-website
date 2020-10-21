@@ -5,13 +5,8 @@ import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.ser
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
+import { FormControl, FormGroup } from '@angular/forms';
 
-interface SliderDetails {
-  value: number;
-  highValue: number;
-  floor: number;
-  ceil: number;
-}
 
 @Component({
   selector: 'app-filter-flight',
@@ -32,6 +27,13 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   currency;
   showMinAirline:number=4;
   s3BucketUrl = environment.s3BucketUrl;
+  form: FormGroup;
+  priceSlider: FormGroup = new FormGroup({
+    price: new FormControl([20, 80])
+  });
+  partialPriceSlider: FormGroup = new FormGroup({
+    partial_price: new FormControl([20, 80])
+  });
 
   /* Varibale for filter */
   minPrice:number;
@@ -58,7 +60,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     step: 1,
     translate: (value: number): any => {
       const currency = JSON.parse(this._currency);
-      return `${currency.symbol} ${value}`;
+      return `${currency.symbol}${value}`;
     }
   };
 
@@ -70,7 +72,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     step: 1,
     translate: (value: number): any => {
       const currency = JSON.parse(this._currency);
-      return `${currency.symbol} ${value}`;
+      return `${currency.symbol}${value}`;
     }
   };
 
@@ -83,30 +85,23 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log("this.",this.filterFlightDetails)
-    // let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(this._currency);
-    // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-
-    // }));
+    
     if (this.filterFlightDetails && this.filterFlightDetails.price_range) {
       // FOR FILTER FLIGHT - PRICE & PARTIAL PRICE
       this.priceValue = this.filterFlightDetails.price_range.min_price ? this.filterFlightDetails.price_range.min_price : 0;
       this.priceHighValue = this.filterFlightDetails.price_range.max_price ? this.filterFlightDetails.price_range.max_price : 0;
-
+      this.priceSlider.controls.price.setValue([this.priceValue,this.priceHighValue])
+      
       this.minPrice = this.priceValue;
       this.maxPrice = this.priceHighValue ;
-      // tslint:disable-next-line: radix
       this.priceOptions.floor =
-        // tslint:disable-next-line: radix
         parseInt(this.filterFlightDetails.price_range.min_price) ?
-          // tslint:disable-next-line: radix
           parseInt(this.filterFlightDetails.price_range.min_price) : 0;
-      // tslint:disable-next-line: radix
       this.priceOptions.ceil =
-        // tslint:disable-next-line: radix
         parseInt(this.filterFlightDetails.price_range.max_price) ?
-          // tslint:disable-next-line: radix
           parseInt(this.filterFlightDetails.price_range.max_price) : 0;
+        
     }
     if (this.filterFlightDetails && this.filterFlightDetails.partial_payment_price_range) {
       this.partialPaymentValue =
@@ -115,18 +110,16 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
       this.partialPaymentHighValue =
         this.filterFlightDetails.partial_payment_price_range.max_price ? this.filterFlightDetails.partial_payment_price_range.max_price : 0;
-
+      
       this.maxPartialPaymentPrice =this.partialPaymentHighValue;
       this.partialPaymentOptions.floor =
-        // tslint:disable-next-line: radix
         parseInt(this.filterFlightDetails.partial_payment_price_range.min_price) ?
-          // tslint:disable-next-line: radix
           parseInt(this.filterFlightDetails.partial_payment_price_range.min_price) : 0;
       this.partialPaymentOptions.ceil =
-        // tslint:disable-next-line: radix
         parseInt(this.filterFlightDetails.partial_payment_price_range.max_price) ?
-          // tslint:disable-next-line: radix
           parseInt(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
+
+      this.partialPriceSlider.controls.partial_price.setValue([this.partialPaymentValue,this.partialPaymentHighValue])
     }
     if (this.filterFlightDetails && this.filterFlightDetails.arrival_time_slot || this.filterFlightDetails
       && this.filterFlightDetails.depature_time_slot) {
@@ -137,12 +130,17 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     if (this.filterFlightDetails && this.filterFlightDetails.stop_data) {
       // FOR FLIGHT STOPS
       this.flightStops = this.filterFlightDetails.stop_data;
+
+      console.log(this.flightStops)
     }
     if (this.filterFlightDetails && this.filterFlightDetails.airline_list) {
       // FOR FLIGHT AIRLINE - AIRLINE
       this.airlineList = this.filterFlightDetails.airline_list;
+      this.airlineList.forEach(element => {
+        return element.isChecked =false;  
+      });
     }
-    // console.log(this.filterFlightDetails.items);
+
     if (this.filterFlightDetails && this.filterFlightDetails.items) {
       this.filterFlightDetails.items.forEach(element => {
         this.departureTimeSlotCityName = element.departure_info.city;
@@ -214,10 +212,11 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
    * Filetr by airlines
    * @param event 
    */
-  filterByAirline(event){
+  filterByAirline(event,index){
 
     if(event.target.checked===true){
       this.airLines.push(event.target.value)
+      
     }
     else{
       this.airLines = this.airLines.filter(airline=>{
@@ -225,6 +224,9 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         return airline!=event.target.value;
       })
     }
+
+    this.airlineList[index].isChecked=!this.airlineList[index].isChecked;
+    console.log(this.airlineList)
     this.filterFlights();
   }
 
@@ -496,12 +498,10 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("innn",changes)
     if (changes['isResetFilter']) {
       this.isResetFilter = changes['isResetFilter'].currentValue;
-      this.minPrice=this.filterFlightDetails.min_price;
-      this.maxPrice=this.filterFlightDetails.max_price;
-      //this.priceOptions = Object.assign({}, this.priceOptions, {ceil : this.maxPrice, floor:this.minPrice});    
+      this.minPrice=this.filterFlightDetails.price_range.min_price;
+      this.maxPrice=this.filterFlightDetails.price_range.max_price;
       this.airLines=[];
       this.minPartialPaymentPrice=0;
       this.maxPartialPaymentPrice=0;
@@ -511,6 +511,19 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.inBoundArrivalTimeRangeSlots=[];
       this.outBoundStops=[];
       this.inBoundStops=[];
+
+      //Reset Price
+      this.priceSlider.reset({price: [this.filterFlightDetails.price_range.min_price,this.filterFlightDetails.price_range.max_price]});
+
+      //Reset partial payment
+      this.partialPriceSlider.reset({price: [this.filterFlightDetails.partial_payment_price_range.min_price,this.filterFlightDetails.partial_payment_price_range.max_price]});
+
+      //Reset airlines
+      this.airlineList.forEach(element => {
+        return element.isChecked=false;
+      });
+
+      $("input:checkbox").prop('checked', false);
       this.filterFlights();
     }
   }

@@ -1,3 +1,7 @@
 .ng-customClass.country_code {
   width: 150px;
 }
+
+.img_country_code {
+  border-radius: 3px;
+}

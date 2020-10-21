@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CookieService } from 'ngx-cookie';
 // import { data } from './airport';
 
 
@@ -21,10 +22,13 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Output() changeValue = new EventEmitter<any>();
   @Output() getSwapValue = new EventEmitter<any>();
   defaultSelectedTemp;
+  airportDefaultDestValue;
+  departureAirport;
 
   constructor(
     private flightService: FlightService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public cookieService:CookieService
   ) {
   }
 
@@ -35,6 +39,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.defaultSelectedTemp = this.defaultSelected;
+    this.setDefaultAirport();
   }
 
   ngDocheck() {
@@ -91,5 +96,23 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   onRemove(event) {
     this.selectedAirport = {};
     this.defaultSelected = this.defaultSelectedTemp;
+  }
+
+  setDefaultAirport(){
+    console.log("Innnn")
+    try{
+      let location:any = this.cookieService.get('__loc');
+      location = JSON.parse(location);
+      if(typeof location.airport!=='undefined'){
+        /* location.airport.display_name = `${location.city},${location.country},(${location.code}),${location.name}`,
+        this.data[0] = location.airport;
+        this.airportDefaultDestValue = this.data[0].city;
+        this.defaultSelected='';
+        this.selectedAirport = this.data[0]; */
+      }
+    }
+    catch(error){
+
+    }
   }
 }

@@ -130,7 +130,7 @@ export class TravellerFormComponent implements OnInit {
           id: country.id,
           name: country.name,
           code: country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
 
         }
       }),
@@ -140,7 +140,7 @@ export class TravellerFormComponent implements OnInit {
             name: country.phonecode+' ('+country.iso2+')',
             code:country.phonecode,
             country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
           }
         })
     }, (error: HttpErrorResponse) => {

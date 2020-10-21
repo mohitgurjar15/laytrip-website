@@ -96,7 +96,7 @@ export class ProfileComponent implements OnInit {
           return {
               id:country.id,
               name:country.name,
-              flag: this.s3BucketUrl+'assets/images/icon/flag2/'+ country.iso3.toLowerCase()+'.jpg'
+              flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
           } 
       }),
       this.countries_code = data.map(country=>{
@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
           name: country.phonecode+' ('+country.iso2+')',
           code:country.phonecode,
           country_name:country.name+ ' ' +country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag2/'+ country.iso3.toLowerCase()+'.jpg'
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
         }
       })
     }, (error: HttpErrorResponse) => {

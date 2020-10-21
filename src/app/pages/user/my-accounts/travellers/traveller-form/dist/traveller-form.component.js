@@ -103,7 +103,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     id: country.id,
                     name: country.name,
                     code: country.phonecode,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {
@@ -112,7 +112,7 @@ var TravellerFormComponent = /** @class */ (function () {
                         name: country.phonecode + ' (' + country.iso2 + ')',
                         code: country.phonecode,
                         country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
+                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
         }, function (error) {
