@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
+import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { environment } from '../../../../environments/environment';
 declare var $ : any;
 
