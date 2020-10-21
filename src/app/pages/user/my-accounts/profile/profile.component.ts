@@ -9,6 +9,7 @@ import { validateImageFile,fileSizeValidator } from '../../../../_helpers/custom
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-profile',
@@ -58,7 +59,9 @@ export class ProfileComponent implements OnInit {
     private genericService : GenericService,
     public router: Router,  
     public commonFunctoin: CommonFunction,  
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cookieService: CookieService,
+
     ) {}
  
   ngOnInit() {
@@ -67,24 +70,26 @@ export class ProfileComponent implements OnInit {
     this.getCurrencies();
     this.getProfileInfo();
     
+    let location:any = this.cookieService.get('__loc');
+    location = JSON.parse(location);
+    
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      country_code: ['', [Validators.required]],
+      country_code: [location.country.phonecode ? location.country.phonecode : '', [Validators.required]],
       dob: ['', Validators.required],
       phone_no: ['', [Validators.required]],
       address: [''],
       email: [''],
       zip_code: [''],
-      country_id: [''],
       state_id: [''],
       city_name: [''],
       gender: ['M'],
       profile_pic: [''],      
       address2: [''],      
       language_id: [''],      
-      currency_id: [''],      
+      country_id: [location.country.name ? location.country.name : ''],
       passport_expiry: [''],      
       passport_number: [''],      
     });
