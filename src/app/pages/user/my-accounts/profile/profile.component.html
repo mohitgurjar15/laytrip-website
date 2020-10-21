@@ -276,7 +276,7 @@
                                         <input #hiddenfileinput style="display: none" type="file" accept="image/*"
                                             (change)="onFileSelect($event)">
                                         <button #upload (click)="hiddenfileinput.click()"><img
-                                                src="{{s3BucketUrl}}assets/images/icon/camera-icon.svg"
+                                                src="{{s3BucketUrl}}assets/images/icon/camera-icon.jpg"
                                                 alt="camera Icon"> Change</button>
                                     </div>
                                 </div>
@@ -355,7 +355,7 @@
                                                             formControlName="country_code"
                                                             placeholder="Select country code">
                                                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                                                <span class="ng-value-label"><img
+                                                                <span class="ng-value-label"><img class="img_country_code"
                                                                         [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'"
                                                                         width="20px" height="20px">
                                                                     {{ item.country_name ? item.country_name :  'Select country code' }}
@@ -364,7 +364,7 @@
                                                                     aria-hidden="true">×</span>
                                                             </ng-template>
                                                             <ng-template ng-option-tmp let-item="item">
-                                                                <img [src]="item.flag" width="20px" height="20px">
+                                                                <img [src]="item.flag"  class="img_country_code" width="20px" height="20px">
                                                                 {{item.country_name}}
                                                             </ng-template>
                                                         </ng-select>
@@ -523,15 +523,15 @@
                                                     selectOnTab="true" placeholder="Select Country"
                                                     (change)="getStates($event)">
                                                     <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                                        <span class="ng-value-label"><img
-                                                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'"
+                                                        <span class="ng-value-label"><img class="img_country_code"
+                                                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
                                                                 width="20px" height="20px">
                                                             {{ item.name ? item.name :  'Select country' }} </span>
                                                         <span class="ng-value-icon right" (click)="clear(item)"
                                                             aria-hidden="true">×</span>
                                                     </ng-template>
                                                     <ng-template ng-option-tmp let-item="item">
-                                                        <img [src]="item.flag" width="20px" height="20px"> {{item.name}}
+                                                        <img class="img_country_code" [src]="item.flag" width="20px" height="20px"> {{item.name}}
                                                     </ng-template>
                                                 </ng-select>
                                             </div>
@@ -623,8 +623,7 @@
 
                     </div>
                     <div class="form_update_btn">
-                        <button (click)="onSubmit()"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Update <img
-                                src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
+                        <button (click)="onSubmit()"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Update</button>
                     </div>
                 </form>
             </div>

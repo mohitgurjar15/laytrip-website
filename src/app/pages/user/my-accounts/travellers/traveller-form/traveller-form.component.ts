@@ -11,6 +11,7 @@ import { FlightService } from '../../../../../services/flight.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-traveller-form',
@@ -51,21 +52,25 @@ export class TravellerFormComponent implements OnInit {
     private userService: UserService,
     public activeModal: NgbActiveModal,
     private toastr: ToastrService,
+    private cookieService: CookieService,
 
   ) { }
 
   ngOnInit() {
     this.checkUser();
     this.getCountry();
+    let location:any = this.cookieService.get('__loc');
+    location = JSON.parse(location);
+
     this.coAccountForm = this.formBuilder.group({
       title: ['mr'],
       gender: ['M'],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: ['', [Validators.required]],
+      country_code: [location.country.phonecode ? location.country.phonecode : '', [Validators.required]],
       phone_no: ['', [Validators.required]],
-      country_id: ['', Validators.required],
+      country_id: [location.country.name ? location.country.name : '', Validators.required],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
@@ -80,6 +85,7 @@ export class TravellerFormComponent implements OnInit {
   }
 
   setTravelerForm() {
+    
       this.traveller = this.travelerInfo;
       this.coAccountForm.patchValue({
         title: this.travelerInfo.title?this.travelerInfo.title:'mr',
@@ -130,7 +136,7 @@ export class TravellerFormComponent implements OnInit {
           id: country.id,
           name: country.name,
           code: country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
 
         }
       }),
@@ -140,7 +146,7 @@ export class TravellerFormComponent implements OnInit {
             name: country.phonecode+' ('+country.iso2+')',
             code:country.phonecode,
             country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.svg'
+            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
           }
         })
     }, (error: HttpErrorResponse) => {

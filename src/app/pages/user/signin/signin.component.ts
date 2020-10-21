@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
+import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 declare var $: any;
 
@@ -32,7 +34,9 @@ export class SigninComponent  implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public router: Router
+    public router: Router,
+    public commonFunction:CommonFunction,
+
     ) { }    
 
 
@@ -61,16 +65,29 @@ export class SigninComponent  implements OnInit {
     } else {
       this.userService.signin(this.loginForm.value).subscribe((data: any) => {
         if(data.token){
+
           localStorage.setItem("_lay_sess", data.token);
+          const userDetails = getLoginUserInfo();    
+          
           $('#sign_in_modal').modal('hide');          
           this.loading = this.submitted = false;
-          this.router.url;
+          const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
+         
+          if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
+            this.router.navigate(['account/subscription']);
+          } else {
+            let urlData = this.commonFunction.decodeUrl(this.router.url)
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+            });
+          } 
         }
       }, (error: HttpErrorResponse) => {       
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
             $('.modal_container').addClass('right-panel-active');
             this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
+            
           }, (error: HttpErrorResponse) => {       
             this.submitted = this.loading = false;
             this.apiError = error.message;

@@ -39,15 +39,17 @@ var TravelerFormComponent = /** @class */ (function () {
         this.expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
+        var location = this.cookieService.get('__loc');
+        location = JSON.parse(location);
         this.adultForm = this.formBuilder.group({
             title: ['mr', forms_1.Validators.required],
             gender: ['M', forms_1.Validators.required],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            country_code: ['', [forms_1.Validators.required]],
+            country_code: [location.country.phonecode ? location.country.phonecode : '', [forms_1.Validators.required]],
+            country_id: [location.country.name ? location.country.name : ''],
             phone_no: ['', [forms_1.Validators.required]],
-            country_id: ['', forms_1.Validators.required],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             frequently_no: [''],

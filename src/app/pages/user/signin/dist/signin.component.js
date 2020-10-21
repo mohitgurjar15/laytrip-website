@@ -10,12 +10,14 @@ exports.SigninComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
+var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var SigninComponent = /** @class */ (function () {
-    function SigninComponent(modalService, formBuilder, userService, router) {
+    function SigninComponent(modalService, formBuilder, userService, router, commonFunction) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.signUpModal = false;
         this.signInModal = true;
@@ -52,9 +54,19 @@ var SigninComponent = /** @class */ (function () {
             this.userService.signin(this.loginForm.value).subscribe(function (data) {
                 if (data.token) {
                     localStorage.setItem("_lay_sess", data.token);
+                    var userDetails = jwt_helper_1.getLoginUserInfo();
                     $('#sign_in_modal').modal('hide');
                     _this.loading = _this.submitted = false;
-                    _this.router.url;
+                    var _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
+                    if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
+                        _this.router.navigate(['account/subscription']);
+                    }
+                    else {
+                        var urlData_1 = _this.commonFunction.decodeUrl(_this.router.url);
+                        _this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                            _this.router.navigate(["" + urlData_1.url], { queryParams: urlData_1.params });
+                        });
+                    }
                 }
             }, function (error) {
                 if (error.status == 406) {

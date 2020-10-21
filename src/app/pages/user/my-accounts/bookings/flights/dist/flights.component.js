@@ -94,7 +94,6 @@ var FlightsComponent = /** @class */ (function () {
                         };
                     }
                 });
-                console.log(_this.flightBookings);
                 _this.totalItems = res.total_count;
                 _this.isNotFound = false;
                 _this.loading = false;
@@ -102,10 +101,7 @@ var FlightsComponent = /** @class */ (function () {
             }
         }, function (err) {
             _this.isNotFound = true;
-            _this.showPaginationBar = false;
-            if (err && err.status === 404) {
-                _this.loading = false;
-            }
+            _this.showPaginationBar = _this.loading = false;
         });
     };
     FlightsComponent.prototype.closeFlightDetail = function () {
