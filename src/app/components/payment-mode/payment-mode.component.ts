@@ -69,8 +69,11 @@ export class PaymentModeComponent implements OnInit {
   monthlyDefaultInstalment:number=0;
   upFrontPayment:number=0;
   payNowPrice:number=0;
+  discountedPrice:number;
 
   ngOnInit(){
+    console.log("====",this.flightSummary)
+    this.discountedPrice = this.flightSummary[0].secondary_selling_price
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemntsBiweekly('biweekly');
@@ -591,7 +594,11 @@ export class PaymentModeComponent implements OnInit {
     }
     else{
 
-      this.payNowPrice = Number(this.flightSummary[0].selling_price) -Number(this.laycreditpoints);
+      let totalPrice=this.flightSummary[0].selling_price;
+      if(this.flightSummary[0].secondary_selling_price){
+        totalPrice = this.flightSummary[0].secondary_selling_price;
+      }
+      this.payNowPrice = Number(totalPrice) -Number(this.laycreditpoints);
     }
 
     return this.payNowPrice;

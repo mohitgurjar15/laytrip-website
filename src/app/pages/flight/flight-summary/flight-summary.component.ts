@@ -17,6 +17,7 @@ export class FlightSummaryComponent implements OnInit {
   @Input() flightSummary:string;
   @Input() partialPaymentAmount:number=0;
   @Input() payNowAmount:number=0;
+  @Input() instalmentMode:string;
 
   routeCode:string='';
   constructor(
@@ -38,11 +39,13 @@ export class FlightSummaryComponent implements OnInit {
   currency;
   showBaggePolicy:boolean=false;
   showCancellationPolicy:boolean=false;
+  totalPrice:number;
 
   @Output() getRouteDetails = new EventEmitter();
 
   ngOnInit() {
 
+    
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.routeCode=this.route.snapshot.paramMap.get('rc');
@@ -65,6 +68,7 @@ export class FlightSummaryComponent implements OnInit {
       }
       this.flightService.airRevalidate(routeData).subscribe((response:any)=>{
           this.flightDetail=response;
+          this.totalPrice = this.flightDetail[0].selling_price;
           this.flightSummaryLoader=false;
           this.outWardStopCount=response[0].routes[0].stops.length-1;
           this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
@@ -88,6 +92,7 @@ export class FlightSummaryComponent implements OnInit {
       let response_itinerary  = JSON.parse(_itinerary);
       response[0]=response;
       this.flightDetail=response;
+      this.totalPrice = this.flightDetail[0].selling_price;
       this.flightSummaryLoader=false;
       this.outWardStopCount=response[0].routes[0].stops.length-1;
       // this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
@@ -123,6 +128,24 @@ export class FlightSummaryComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['partialPaymentAmount']) {
       this.partialPaymentAmount = changes['partialPaymentAmount'].currentValue;
+    }
+
+    if (changes['instalmentMode']) {
+      this.instalmentMode = changes['instalmentMode'].currentValue;
+      if(this.instalmentMode=='instalment'){
+        this.totalPrice = this.flightDetail[0].selling_price;
+      }
+      else{
+        
+        if(this.flightDetail[0].secondary_selling_price){
+
+          this.totalPrice = this.flightDetail[0].secondary_selling_price;
+        }
+        else{
+          
+          this.totalPrice = this.flightDetail[0].selling_price;
+        }
+      }
     }
   }
 }
