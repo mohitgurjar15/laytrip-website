@@ -32,6 +32,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ​flexibleLoading:boolean=false;
   ​flexibleNotFound:boolean=false;
   dates:[]=[];
+  calenderPrices:[]=[]
 
   constructor(
     private layTripStoreService: LayTripStoreService,
@@ -121,8 +122,34 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.​flexibleNotFound = true;
         this.flexibleLoading = false;
       });
-      
+
+      this.getCalenderPrice(payload)
     }
+  }
+
+
+  getCalenderPrice(payload){
+
+    let departureDate = this.route.snapshot.queryParams['departure_date'];
+    let departureDates = departureDate.split("-");
+    let startDate:any = moment([departureDates[0],departureDates[1]-1]);
+    let endDate:any =  moment(startDate).endOf('month');
+    
+    startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
+    endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+    if(!moment().isBefore(startDate)){
+      startDate = moment().format("YYYY-MM-DD")
+    }
+
+    payload.start_date = startDate; 
+    payload.end_date=endDate;
+    this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
+      if (res) {
+        this.calenderPrices = res;
+      }
+    }, err => {
+      
+    });
   }
 
   getSearchItem(event) {
@@ -186,9 +213,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     else {
       this.flightDetails = this.sortJSON(this.flightDetails, key, order);
     }
-    console.log(this.flightDetails);
 
   }
+
 
   sortJSON(data, key, way) {
     if (typeof data === "undefined") {
