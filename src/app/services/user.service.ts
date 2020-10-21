@@ -165,4 +165,8 @@ export class UserService {
   getSubscriptionPlanDetail(data) {
     return this.http.get(this.apiURL + 'v1/subscription/get-plan/' + data.id + '/' + data.currency, this.commonFunction.setHeaders());
   }
+
+  payNowSubscription(data) {
+    return this.http.post(this.apiURL + 'v1/subscription', data, this.commonFunction.setHeaders());
+  }
 }
