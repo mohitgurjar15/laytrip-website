@@ -44,12 +44,18 @@ export class AddCardComponent implements OnInit {
       /\d/, /\d/, /\d/, /\d/]
   };
 
-  ngOnInit() {
+  cvvNoMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, /\d/, /\d/]
+  };
 
+  ngOnInit() {
     this.cardForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      card_cvv: ['', Validators.required],
+      card_cvv: ['', [Validators.required, Validators.maxLength(4)]],
       card_number: ['', [Validators.required, Validators.maxLength(20)]],
       expiry: ['', Validators.required]
     });
@@ -103,6 +109,8 @@ export class AddCardComponent implements OnInit {
     this.cardError = '';
     this.submitted = true;
     if (this.cardForm.invalid) {
+      const controls = this.cardForm.controls;
+      Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
       return;
     }
     let cardData = {

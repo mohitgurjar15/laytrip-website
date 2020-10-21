@@ -103,7 +103,13 @@
                               flightDepartureMinDate
                               [minDate]="flightDepartureMinDate" 
                               (onSelect)=departureDateUpdate($event)
-                              [readonlyInput]="true" >
+                              [readonlyInput]="true" 
+                              (onMonthChange)="changeMonth($event)">
+
+                              <ng-template pTemplate="date" let-date>
+                                <span>{{date.day}}</span>
+                                <br><span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
+                              </ng-template>
                           </p-calendar>
                           <div class="prev-next">
                             <a href="javascript:void(0);"

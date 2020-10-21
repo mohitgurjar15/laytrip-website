@@ -26,10 +26,28 @@ import { BookingFeedbackComponent } from './booking-feedback/booking-feedback.co
 import { BookingAsLoginOrGuestPopupComponent } from './booking-as-login-or-guest-popup/booking-as-login-or-guest-popup.component';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { TextMaskModule } from 'angular2-text-mask';
+import { PlanSummaryComponent } from './plan-summary/plan-summary.component';
 
 @NgModule({
   declarations: [
-    SearchAirportComponent, TravellerInfoComponent, CheckoutProgressComponent, AdultListComponent, ChildListComponent, InfantListComponent, BookingTimerComponent, PaymentModeComponent, CardListComponent, AddCardComponent,TravelerFormComponent, FullPageOverlayLoaderComponent, BookingEnquiryInfoComponent, AddGuestCardComponent, RedeemLaycreditComponent, BookingFeedbackComponent, BookingAsLoginOrGuestPopupComponent
+    SearchAirportComponent,
+    TravellerInfoComponent,
+    CheckoutProgressComponent,
+    AdultListComponent,
+    ChildListComponent,
+    InfantListComponent,
+    BookingTimerComponent,
+    PaymentModeComponent,
+    CardListComponent,
+    AddCardComponent,
+    TravelerFormComponent,
+    FullPageOverlayLoaderComponent,
+    BookingEnquiryInfoComponent,
+    AddGuestCardComponent,
+    RedeemLaycreditComponent,
+    BookingFeedbackComponent,
+    BookingAsLoginOrGuestPopupComponent,
+    PlanSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +60,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     CookieModule.forRoot(),
     CalendarModule,
     LottieAnimationViewModule.forRoot(),
-    TextMaskModule
+    TextMaskModule,
   ],
   exports: [
     SearchAirportComponent,
@@ -60,7 +78,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     AddGuestCardComponent,
     RedeemLaycreditComponent,
     BookingFeedbackComponent,
-    BookingAsLoginOrGuestPopupComponent
+    BookingAsLoginOrGuestPopupComponent,
+    PlanSummaryComponent
   ],
   providers: [DatePipe],
 

@@ -21,7 +21,8 @@
         </label>
     </li>
     <li>
-        <label class="custom_radio">Full Payment <span>Total ${{instalmentRequest.amount | number : '1.2-2'}}</span>
+        <label class="custom_radio">Full Payment <span [ngClass]="{'text-line': discountedPrice >0 }">Total ${{instalmentRequest.amount | number : '1.2-2'}}</span>
+            <span *ngIf="discountedPrice>0">Discounted Price ${{discountedPrice | number : '1.2-2'}}</span>
             <input type="radio" name="payment_mode" [checked]="isInstalemtMode==false" (click)="triggerPayemntMode('no-instalment')">
             <span class="checkmark"></span>
         </label>

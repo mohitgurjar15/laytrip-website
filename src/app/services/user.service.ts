@@ -5,6 +5,7 @@ import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 import * as moment from 'moment';
+import { data } from '../components/search-airport/airport';
 
 
 @Injectable({
@@ -159,5 +160,9 @@ export class UserService {
 
   deleteCard() {
     return this.http.get(this.apiURL + 'v1/payment', this.commonFunction.setHeaders());
+  }
+
+  getSubscriptionPlanDetail(data) {
+    return this.http.get(this.apiURL + 'v1/subscription/get-plan/' + data.id + '/' + data.currency, this.commonFunction.setHeaders());
   }
 }

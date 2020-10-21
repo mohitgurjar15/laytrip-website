@@ -10,6 +10,7 @@ exports.VerifyOtpComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
+var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var VerifyOtpComponent = /** @class */ (function () {
     function VerifyOtpComponent(modalService, formBuilder, userService, router, commonFunctoin) {
         this.modalService = modalService;
@@ -95,9 +96,17 @@ var VerifyOtpComponent = /** @class */ (function () {
             this.userService.verifyOtp(data).subscribe(function (data) {
                 _this.otpVerified = true;
                 _this.submitted = _this.loading = false;
-                localStorage.setItem("_lay_sess", data.userDetails.access_token);
                 $('#sign_in_modal').modal('hide');
-                _this.valueChange.emit({ key: 'signIn', value: true });
+                localStorage.setItem("_lay_sess", data.userDetails.access_token);
+                var userDetails = jwt_helper_1.getLoginUserInfo();
+                var _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
+                console.log(_isSubscribeNow, userDetails.roleId);
+                if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
+                    _this.router.navigate(['account/subscription']);
+                }
+                else {
+                    _this.valueChange.emit({ key: 'signIn', value: true });
+                }
             }, function (error) {
                 _this.apiError = error.message;
                 _this.submitted = _this.loading = false;

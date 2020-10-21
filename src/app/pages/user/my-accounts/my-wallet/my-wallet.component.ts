@@ -47,21 +47,7 @@ export class MyWalletComponent implements OnInit {
     this.getTotalAvailabePoints();
   }
 
-  getEarnedPoint(){
-    this.loading = true;
-    this.travelerService.getEarnedPoint(this.page, this.limit).subscribe((result: any) => {
-      this.loading = false;
-      this.totalItems = result.TotalResult;
-      this.isEarningPointNotFound = false;  
- 
-      this.earnedPoints = result.data;
-    }, (error: HttpErrorResponse) => {
-      this.isEarningPointNotFound = true;   
-      this.loading = false;    
-      // this.apiError = error.message;
-    });
-  }
-
+  
   getDateFormat(date){
     return this.commonFunction.convertDateFormat( new Date(date) ,'DD/MM/YYYY');
   }
@@ -84,19 +70,30 @@ export class MyWalletComponent implements OnInit {
     this.getEarnedPoint();       
   }
   
-  reedemPageChange(event) {
-   
-      console.log('reedem')
-      this.reedemloading = true;
-      this.showReedemPaginationBar = true;      
-      this.getRedeemedPoint(); 
-   
+  reedemPageChange(event) {   
+    this.page2 = event;   
+    this.reedemloading = true;
+    this.showReedemPaginationBar = true;      
+    this.getRedeemedPoint();   
   }
 
   
+  getEarnedPoint(){
+    this.loading = true;
+    this.travelerService.getEarnedPoint(this.page, this.limit).subscribe((result: any) => {
+      this.loading = false;
+      this.totalItems = result.TotalResult;
+      this.isEarningPointNotFound = false;  
+ 
+      this.earnedPoints = result.data;
+    }, (error: HttpErrorResponse) => {
+      this.isEarningPointNotFound = true;   
+      this.loading = this.showPaginationBar = false;    
+      // this.apiError = error.message;
+    });
+  }
 
   getRedeemedPoint(){
-    console.log(this.page, this.limit)
     this.travelerService.getRedeemedPoint(this.page2, this.limit).subscribe((result: any) => {
       this.showReedemPaginationBar = true;
       this.redeemedPoints = result.data;

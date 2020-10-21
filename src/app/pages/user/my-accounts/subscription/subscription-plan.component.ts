@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { environment } from '../../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subscription-plan',
@@ -16,6 +17,7 @@ export class SubscriptionPlanComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -31,8 +33,8 @@ export class SubscriptionPlanComponent implements OnInit {
     });
   }
 
-  subscribeNow() {
-    console.log('SUBSCRIBE NOW:::');
+  subscribeNow(planId) {
+    this.router.navigate(['/account/subscription', planId]);
   }
 
 }

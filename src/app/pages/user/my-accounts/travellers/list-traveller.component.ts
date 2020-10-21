@@ -77,8 +77,8 @@ export class ListTravellerComponent implements OnInit {
     });
   }
 
-  calculateAge(birthdate: any): number {
-    return moment().diff(birthdate, 'years');
+  calculateAge(birthdate: any) {
+    return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years')+"yrs, ":"";
   }
 
   getGender(type) {

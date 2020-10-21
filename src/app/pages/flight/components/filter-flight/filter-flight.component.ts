@@ -84,7 +84,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log("this.",this.filterFlightDetails)
     this.currency = JSON.parse(this._currency);
     
     if (this.filterFlightDetails && this.filterFlightDetails.price_range) {
@@ -131,7 +130,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       // FOR FLIGHT STOPS
       this.flightStops = this.filterFlightDetails.stop_data;
 
-      console.log(this.flightStops)
     }
     if (this.filterFlightDetails && this.filterFlightDetails.airline_list) {
       // FOR FLIGHT AIRLINE - AIRLINE
@@ -226,7 +224,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     }
 
     this.airlineList[index].isChecked=!this.airlineList[index].isChecked;
-    console.log(this.airlineList)
     this.filterFlights();
   }
 
@@ -253,7 +250,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
           return JSON.stringify(slot)!==JSON.stringify(slotValue);
       })
     }
-    console.log(this.outBoundDepartureTimeRangeSlots)
     this.filterFlights();
   }
 
@@ -274,7 +270,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
           return JSON.stringify(slot)!==JSON.stringify(slotValue);
       })
     }
-    console.log(this.outBoundArrivalTimeRangeSlots)
     this.filterFlights();
   }
 
@@ -330,7 +325,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
           return stop!=stopCount
       })
     }
-    console.log("this.outBoundStops",this.outBoundStops)
     this.filterFlights();
   }
   
@@ -385,7 +379,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     /* Filter based on outbound departure time slot */
     if(this.outBoundDepartureTimeRangeSlots.length){
       filterdFlights=filterdFlights.filter(item=>{
-          console.log(JSON.stringify(this.outBoundDepartureTimeRangeSlots))
           let journeyIndex;
           let typeIndex;
           let timeValue;

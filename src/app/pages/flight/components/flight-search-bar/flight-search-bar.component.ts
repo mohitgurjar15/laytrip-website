@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -16,9 +16,10 @@ import { airports } from '../../airports';
 export class FlightSearchBarComponent implements OnInit {
 
   @Output() searchBarInfo = new EventEmitter<any>();
+  @Input() calenderPrices:any=[];
   s3BucketUrl = environment.s3BucketUrl;
   flightSearchForm: FormGroup;
-
+  monthYearArr=[];
 
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   isRoundTrip = false;
@@ -313,6 +314,61 @@ export class FlightSearchBarComponent implements OnInit {
         this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
       }
     }
+  }
+
+  getPrice(d,m,y){
+    let month:any=parseInt(m)+1;
+    let day  = d.toString().length==1 ? '0'+d : d;
+    month    = month.toString().length==1 ? '0'+month : month;
+    let date = `${day}/${month}/${y}`;
+    let price:any = this.calenderPrices.find((d:any)=> d.date == date);
+    if(price){
+      return `$${price.price.toFixed(2)}`;
+    }
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    
+    let departureDate =  this.route.snapshot.queryParams['departure_date'];
+    let departureDates = departureDate.split("-");
+    this.monthYearArr.push(departureDates[1],'-',departureDates[0]);
+  }
+
+  changeMonth(event){
+    
+    let monthYearName = event.month-event.year;
+
+    if(!this.monthYearArr.includes(monthYearName)){
+
+      this.monthYearArr.push(monthYearName)
+      let startDate:any = moment([event.year,event.month-1]);
+      let endDate:any =  moment(startDate).endOf('month');
+      
+      startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
+      endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+      if(!moment().isBefore(startDate)){
+        startDate = moment().format("YYYY-MM-DD")
+      }
+
+      let payload={
+        source_location: this.route.snapshot.queryParams['departure'],
+        destination_location: this.route.snapshot.queryParams['arrival'],
+        flight_class: this.route.snapshot.queryParams['class'],
+        adult_count: this.route.snapshot.queryParams['adult'],
+        child_count: this.route.snapshot.queryParams['child'],
+        infant_count: this.route.snapshot.queryParams['infant'],
+        start_date :startDate,
+        end_date :endDate
+      }
+      
+      this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+        if (res) {
+          this.calenderPrices = [...this.calenderPrices,...res];
+        }
+      }, err => {
+        
+      });
+    }
+    
   }
 
 }

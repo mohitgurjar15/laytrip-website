@@ -7,7 +7,7 @@ import { ConfirmationModalComponent, MODAL_TYPE } from '../../../../components/c
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-card-list',
+  selector: 'app-account-card-list',
   templateUrl: './account-card-list.component.html',
   styleUrls: ['./account-card-list.component.scss']
 })

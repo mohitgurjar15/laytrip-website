@@ -109,17 +109,13 @@ export class FlightsComponent implements OnInit {
             }
           }
         });
-        console.log(this.flightBookings)
         this.totalItems = res.total_count;
         this.isNotFound = false;
         this.loading = false;this.showPaginationBar = true;
       }
     }, err => {
       this.isNotFound = true;
-      this.showPaginationBar = false;
-      if (err && err.status === 404) {
-        this.loading = false;
-      }
+      this.showPaginationBar = this.loading = false;    
     });
   }
 

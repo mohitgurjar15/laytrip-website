@@ -27,6 +27,8 @@ import { TripNotFoundComponent } from './trip-not-found/trip-not-found.component
 import { TextMaskModule } from 'angular2-text-mask';
 import { ConfirmationModalComponent } from '../../../components/confirmation-modal/confirmation-modal.component';
 import { HomeRentalsComponent } from './bookings/home-rentals/home-rentals.component';
+import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
+import { ComponentsModule } from '../../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { HomeRentalsComponent } from './bookings/home-rentals/home-rentals.compo
     SearchTripComponent,
     FlightTripDetailComponent,
     TripNotFoundComponent,
+    PlanSubscriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +63,8 @@ import { HomeRentalsComponent } from './bookings/home-rentals/home-rentals.compo
     NgbModule,
     CalendarModule,
     FlightModule,
-    TextMaskModule
+    TextMaskModule,
+    ComponentsModule
   ],
   providers: [DatePipe, NgbActiveModal],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
