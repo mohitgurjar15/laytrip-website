@@ -14,10 +14,17 @@ var ViewHistoryComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.flightCommonFunction = flightCommonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.currencySymbol = '';
     }
-    ViewHistoryComponent.prototype.ngOnInit = function () { };
+    ViewHistoryComponent.prototype.ngOnInit = function () {
+        console.log("this.list", this.item);
+    };
     ViewHistoryComponent.prototype.ngOnChanges = function (changes) {
         this.list = changes.item.currentValue;
+        if (this.list) {
+            this.currencySymbol = this.list.currency2.symbol ? this.list.currency2.symbol : '$';
+        }
+        console.log("this.list", this.list);
         if (this.list && this.list != 'undefined') {
         }
     };

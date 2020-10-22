@@ -11,6 +11,7 @@ import { SubscriptionPlanComponent } from './subscription/subscription-plan.comp
 import { SearchTripComponent } from './search-trip/search-trip.component';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
 import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
+import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'payment',
     component: ListPaymentHistoryComponent,
+  },
+  {
+    path: 'payment/detail',
+    component: ViewHistoryComponent,
   },
   {
     path: 'settings/change-password',

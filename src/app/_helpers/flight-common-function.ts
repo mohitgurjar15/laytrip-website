@@ -25,7 +25,6 @@ export class FlightCommonFunction {
     }
 
     getPaymentEndDate(bookingInstalments) {
-        console.log("bookingInstalments",bookingInstalments)
         return this.commonFunction.convertDateFormat(new Date(bookingInstalments[bookingInstalments.length - 1].instalmentDate), 'MM/DD/YYYY');
     }
 

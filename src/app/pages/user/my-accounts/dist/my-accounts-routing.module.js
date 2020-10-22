@@ -19,6 +19,8 @@ var profile_component_1 = require("./profile/profile.component");
 var subscription_plan_component_1 = require("./subscription/subscription-plan.component");
 var search_trip_component_1 = require("./search-trip/search-trip.component");
 var list_traveller_component_1 = require("./travellers/list-traveller.component");
+var plan_subscription_component_1 = require("./plan-subscription/plan-subscription.component");
+var view_history_component_1 = require("./payment-history/view-history/view-history.component");
 var routes = [
     {
         path: '',
@@ -41,12 +43,20 @@ var routes = [
         component: list_payment_history_component_1.ListPaymentHistoryComponent
     },
     {
+        path: 'payment/detail',
+        component: view_history_component_1.ViewHistoryComponent
+    },
+    {
         path: 'settings/change-password',
         component: change_password_component_1.ChangePasswordComponent
     },
     {
         path: 'subscription',
         component: subscription_plan_component_1.SubscriptionPlanComponent
+    },
+    {
+        path: 'subscription/:id',
+        component: plan_subscription_component_1.PlanSubscriptionComponent
     },
     {
         path: 'account-card-list',
