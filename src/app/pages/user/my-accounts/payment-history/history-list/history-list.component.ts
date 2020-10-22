@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
 import { environment } from '../../../../../../environments/environment';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../../../services/user.service';
 import { Router } from '@angular/router';
 
 
