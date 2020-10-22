@@ -76,10 +76,10 @@ export class SigninComponent  implements OnInit {
           if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
             this.router.navigate(['account/subscription']);
           } else {
-            let urlData = this.commonFunction.decodeUrl(this.router.url)
+              let urlData = this.commonFunction.decodeUrl(this.router.url)
               this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
-            });
+                this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+              });
           } 
         }
       }, (error: HttpErrorResponse) => {       

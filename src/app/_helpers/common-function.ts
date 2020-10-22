@@ -130,10 +130,13 @@ export class CommonFunction {
         let queryParams={}
         if(url){
             prevUrl = url.split('?')
-            let params = prevUrl[1].split('&');
-            for(let i in params){
-              let param = params[i].split("=");
-              queryParams[param[0]]=param[1];
+            if(typeof prevUrl[1]!='undefined'){
+
+                let params = prevUrl[1].split('&');
+                for(let i in params){
+                    let param = params[i].split("=");
+                    queryParams[param[0]]=param[1];
+                }
             }
 
             return {

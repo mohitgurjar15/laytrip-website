@@ -72,7 +72,6 @@ export class PaymentModeComponent implements OnInit {
   discountedPrice:number;
 
   ngOnInit(){
-    console.log("====",this.flightSummary)
     this.discountedPrice = this.flightSummary[0].secondary_selling_price
     this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
@@ -513,7 +512,6 @@ export class PaymentModeComponent implements OnInit {
     }
 
     this.instalmentRequest.additional_amount=(this.upFrontPayment-this.defaultInstalment) + Number(this.laycreditpoints);
-    console.log(this.upFrontPayment,this.defaultInstalment,this.laycreditpoints,this.instalmentRequest.additional_amount,"U","D","L","T")
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){

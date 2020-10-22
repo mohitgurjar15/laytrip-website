@@ -35,6 +35,7 @@ export class FlightTravelerComponent implements OnInit {
   showPartialPayemntOption:boolean=false;
   isComplete : boolean = false;
   payNowAmount:number=0;
+  instalmentMode:string='';
 
   
   constructor(
@@ -62,8 +63,8 @@ export class FlightTravelerComponent implements OnInit {
     
     this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
     this.payNowAmount = customInstalmentData.payNowAmount;
-    let instalmentMode=atob(sessionStorage.getItem('__insMode'))
-    this.showPartialPayemntOption= instalmentMode=='instalment'?true:false;
+    this.instalmentMode=atob(sessionStorage.getItem('__insMode'))
+    this.showPartialPayemntOption= this.instalmentMode=='instalment'?true:false;
   }
   
   

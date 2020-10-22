@@ -141,3 +141,12 @@
         cursor: pointer;
     }
 }
+
+::ng-deep .calender-price-view{
+    //width: 340px;
+    min-width: 340px !important;
+    .ui-state-active {
+        background-color: #012178 !important;
+        color: #fff !important;
+    }
+}

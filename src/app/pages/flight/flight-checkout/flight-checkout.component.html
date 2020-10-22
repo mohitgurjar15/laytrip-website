@@ -108,7 +108,8 @@
                 [showPartialPayemntOption]="showPartialPayemntOption" 
                 (getRouteDetails)="getFlightSummaryData($event)" 
                 partialPaymentAmount={{partialPaymentAmount}}
-                payNowAmount={{payNowAmount}}>
+                payNowAmount={{payNowAmount}}
+                [instalmentMode]="instalmentMode">
             </app-flight-summary>
           </div>
       </div>
