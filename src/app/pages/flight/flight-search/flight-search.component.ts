@@ -27,6 +27,12 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   filterFlightDetails;
   isResetFilter:string='no';
   subscriptions: Subscription[] = [];
+  tripType:string='';
+
+  ​flexibleLoading:boolean=false;
+  ​flexibleNotFound:boolean=false;
+  dates:[]=[];
+  calenderPrices:[]=[]
 
   constructor(
     private layTripStoreService: LayTripStoreService,
@@ -40,6 +46,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scroll(0, 0);
+    
+    console.log("tripType:",this.tripType)
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -55,18 +63,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           infant_count: parseInt(params.infant),
         };
       } else {
-        // if (params && params.trip === 'oneway') {
-        //   if (typeof params.arrival_date !== 'undefined') {
-        //     console.log(params);
-        //     delete params['arrival_date'];
-        //   }
-        // }
-        // if (params.trip === 'oneway' && this.route.snapshot.queryParams['arrival_date']) {
-        //   let snapshot = this.route.snapshot;
-        //   const removingParams = { ...snapshot.queryParams };
-        //   delete removingParams.arrival_date;
-        //   params = removingParams;
-        // }
         payload = {
           source_location: params.departure,
           destination_location: params.arrival,
@@ -85,22 +81,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   getFlightSearchData(payload, tripType) {
     this.loading = true;
-    // // DISPATCH CALL FOR GET FLIGHT SEARCH RESULT
-    // this.layTripStoreService.dispatchGetFlightSearchResult(payload);
-    // // SELECTOR CALL FOR GET FLIGHT SEARCH RESULT
-    // this.subscriptions.push(this.layTripStoreService.selectFlightSearchResult().subscribe(res => {
-    //   console.log(res);
-    //   if (res) {
-    //     this.flightSearchData = res.items;
-    //     this.loading = false;
-    //     this.isNotFound = false;
-    //   }
-    // }));
+    this.tripType = tripType;
 
     if (payload && tripType === 'roundtrip') {
-      // this.flightDetails = data.items;
-      // this.filterFlightDetails = data;
-      // this.loading = false;
+      
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
           this.loading = false;
@@ -123,26 +107,49 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-        /* if (err && err.status === 404) { */
         this.isNotFound = true;
         this.loading = false;
-        /* } */
       });
+
+      
+      this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
+        if (res) {
+          this.flexibleLoading = false;
+          this.​flexibleNotFound = false;
+          this.dates = res;
+        }
+      }, err => {
+        this.​flexibleNotFound = true;
+        this.flexibleLoading = false;
+      });
+
+      this.getCalenderPrice(payload)
+    }
+  }
+
+
+  getCalenderPrice(payload){
+
+    let departureDate = this.route.snapshot.queryParams['departure_date'];
+    let departureDates = departureDate.split("-");
+    let startDate:any = moment([departureDates[0],departureDates[1]-1]);
+    let endDate:any =  moment(startDate).endOf('month');
+    
+    startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
+    endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+    if(!moment().isBefore(startDate)){
+      startDate = moment().format("YYYY-MM-DD")
     }
 
-    // this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
-    //   if (res) {
-    //     this.loading = false;
-    //     this.isNotFound = false;
-    //     this.flightDetails = res.items;
-    //     this.filterFlightDetails = res;
-    //   }
-    // }, err => {
-    //   if (err && err.status === 404) {
-    //     this.isNotFound = true;
-    //     this.loading = false;
-    //   }
-    // });
+    payload.start_date = startDate; 
+    payload.end_date=endDate;
+    this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
+      if (res) {
+        this.calenderPrices = res;
+      }
+    }, err => {
+      
+    });
   }
 
   getSearchItem(event) {
@@ -206,9 +213,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     else {
       this.flightDetails = this.sortJSON(this.flightDetails, key, order);
     }
-    console.log(this.flightDetails);
 
   }
+
 
   sortJSON(data, key, way) {
     if (typeof data === "undefined") {

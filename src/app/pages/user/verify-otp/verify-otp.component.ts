@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 declare var $: any;
 
 @Component({
@@ -114,9 +115,18 @@ export class VerifyOtpComponent implements OnInit {
       this.userService.verifyOtp(data).subscribe((data: any) => {
         this.otpVerified = true;  
         this.submitted = this.loading = false;    
-        localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         $('#sign_in_modal').modal('hide');
-        this.valueChange.emit({ key: 'signIn', value: true}); 
+        localStorage.setItem("_lay_sess", data.userDetails.access_token);  
+        const userDetails = getLoginUserInfo();    
+
+        const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
+        console.log(_isSubscribeNow,userDetails.roleId)
+        if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
+          this.router.navigate(['account/subscription']);
+        } else {
+          this.valueChange.emit({ key: 'signIn', value: true}); 
+        }
+
       }, (error: HttpErrorResponse) => {       
         this.apiError = error.message;
         this.submitted = this.loading = false;        

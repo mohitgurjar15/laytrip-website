@@ -97,9 +97,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" *ngIf="this.userDetails.roleId != 5">
                 <div class="btn_subscribe">
-                    <a href="javascript:void(0);">Join us as subscribe user now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                    <a href="javascript:void(0);" (click)="subscribeNow()"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i>Join us as subscribe user now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
                 </div>
             </div>
         </div>

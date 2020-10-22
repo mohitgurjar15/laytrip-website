@@ -115,4 +115,8 @@ export class GenericService {
   getUserLocationInfo(){
     return this.http.get(environment.apiUrl + 'v1/generic/location/');
   }
+
+  getFaqData() {
+    return this.http.get(environment.apiUrl + 'v1/faq');
+  }
 }

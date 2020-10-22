@@ -3,7 +3,7 @@
         <h5>{{ travellerId ? 'Edit Co-Travellers' : 'Add Co-Travellers'}}</h5>
     </div>
     <button type="button" class="close" (click)="close()">
-        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.jpg" alt="Close Icon">
     </button>
 </div>
 <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
@@ -114,11 +114,11 @@
                                         [items]="countries_code" bindValue="code" bindLabel="country_name" clearSearchOnAdd="true"
                                         formControlName="country_code" placeholder="Select country code">
                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                            <span class="ng-value-label"><img [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
+                                            <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
                                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                                         </ng-template>                                                        
                                         <ng-template ng-option-tmp let-item="item">
-                                            <img [src]="item.flag" width="20px" height="20px"> {{item.country_name}}
+                                            <img class="img_country_code" [src]="item.flag" width="20px" height="20px"> {{item.country_name}}
                                         </ng-template>
                                     </ng-select>
                                 </div>
@@ -164,11 +164,11 @@
                             [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
                             placeholder="Select nationality">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                <span class="ng-value-label"><img [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select nationality' }} </span>
+                                <span class="ng-value-label"><img  class="img_country_code"  [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select nationality' }} </span>
                                 <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                             </ng-template>                                                        
                             <ng-template ng-option-tmp let-item="item">
-                                <img [src]="item.flag" width="20px" height="20px"> {{item.name}}
+                                <img  class="img_country_code"  [src]="item.flag" width="20px" height="20px"> {{item.name}}
                             </ng-template>
                         </ng-select>
                     </div>
@@ -209,7 +209,7 @@
         <div class="form_btn">
             <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                 {{ travellerId ? 'Update Traveller' : 'Add Traveller' }} <img
-                    src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
+                    src="{{s3BucketUrl}}assets/images/icon/right-arrow.jpg" alt="Right Arrow" /></button>
         </div>
     </div>
 </form>

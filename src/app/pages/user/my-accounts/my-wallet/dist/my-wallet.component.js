@@ -38,20 +38,6 @@ var MyWalletComponent = /** @class */ (function () {
         this.getRedeemedPoint();
         this.getTotalAvailabePoints();
     };
-    MyWalletComponent.prototype.getEarnedPoint = function () {
-        var _this = this;
-        this.loading = true;
-        this.travelerService.getEarnedPoint(this.page, this.limit).subscribe(function (result) {
-            _this.loading = false;
-            _this.totalItems = result.TotalResult;
-            _this.isEarningPointNotFound = false;
-            _this.earnedPoints = result.data;
-        }, function (error) {
-            _this.isEarningPointNotFound = true;
-            _this.loading = false;
-            // this.apiError = error.message;
-        });
-    };
     MyWalletComponent.prototype.getDateFormat = function (date) {
         return this.commonFunction.convertDateFormat(new Date(date), 'DD/MM/YYYY');
     };
@@ -73,14 +59,27 @@ var MyWalletComponent = /** @class */ (function () {
         this.getEarnedPoint();
     };
     MyWalletComponent.prototype.reedemPageChange = function (event) {
-        console.log('reedem');
+        this.page2 = event;
         this.reedemloading = true;
         this.showReedemPaginationBar = true;
         this.getRedeemedPoint();
     };
+    MyWalletComponent.prototype.getEarnedPoint = function () {
+        var _this = this;
+        this.loading = true;
+        this.travelerService.getEarnedPoint(this.page, this.limit).subscribe(function (result) {
+            _this.loading = false;
+            _this.totalItems = result.TotalResult;
+            _this.isEarningPointNotFound = false;
+            _this.earnedPoints = result.data;
+        }, function (error) {
+            _this.isEarningPointNotFound = true;
+            _this.loading = _this.showPaginationBar = false;
+            // this.apiError = error.message;
+        });
+    };
     MyWalletComponent.prototype.getRedeemedPoint = function () {
         var _this = this;
-        console.log(this.page, this.limit);
         this.travelerService.getRedeemedPoint(this.page2, this.limit).subscribe(function (result) {
             _this.showReedemPaginationBar = true;
             _this.redeemedPoints = result.data;

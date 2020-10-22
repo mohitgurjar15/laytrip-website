@@ -1,3 +1,7 @@
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field .phone_no .code .dropdown {
   width: 150px;
 }
+
+.img_country_code {
+  border-radius: 3px;
+}

@@ -13,13 +13,14 @@ var forms_1 = require("@angular/forms");
 var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr) {
+    function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService) {
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.genericService = genericService;
         this.router = router;
         this.commonFunctoin = commonFunctoin;
         this.toastr = toastr;
+        this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
         this.loading = true;
@@ -55,24 +56,25 @@ var ProfileComponent = /** @class */ (function () {
         this.getLanguages();
         this.getCurrencies();
         this.getProfileInfo();
+        var location = this.cookieService.get('__loc');
+        location = JSON.parse(location);
         this.profileForm = this.formBuilder.group({
             title: ['mr'],
             first_name: ['', [forms_1.Validators.required]],
             last_name: ['', [forms_1.Validators.required]],
-            country_code: ['', [forms_1.Validators.required]],
+            country_code: [location.country.phonecode ? location.country.phonecode : '', [forms_1.Validators.required]],
+            country_id: [location.country.name ? location.country.name : ''],
             dob: ['', forms_1.Validators.required],
             phone_no: ['', [forms_1.Validators.required]],
             address: [''],
             email: [''],
             zip_code: [''],
-            country_id: [''],
             state_id: [''],
             city_name: [''],
             gender: ['M'],
             profile_pic: [''],
             address2: [''],
             language_id: [''],
-            currency_id: [''],
             passport_expiry: [''],
             passport_number: ['']
         });
@@ -84,7 +86,7 @@ var ProfileComponent = /** @class */ (function () {
                 return {
                     id: country.id,
                     name: country.name,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {
@@ -93,7 +95,7 @@ var ProfileComponent = /** @class */ (function () {
                         name: country.phonecode + ' (' + country.iso2 + ')',
                         code: country.phonecode,
                         country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
+                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
         }, function (error) {

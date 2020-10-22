@@ -12,7 +12,7 @@ var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
 var TravellerFormComponent = /** @class */ (function () {
-    function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, activeModal, toastr) {
+    function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, activeModal, toastr, cookieService) {
         this.formBuilder = formBuilder;
         this.genericService = genericService;
         this.router = router;
@@ -21,6 +21,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.userService = userService;
         this.activeModal = activeModal;
         this.toastr = toastr;
+        this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelersChanges = new core_1.EventEmitter();
         this.countries = [];
@@ -39,15 +40,17 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.ngOnInit = function () {
         this.checkUser();
         this.getCountry();
+        var location = this.cookieService.get('__loc');
+        location = JSON.parse(location);
         this.coAccountForm = this.formBuilder.group({
             title: ['mr'],
             gender: ['M'],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            country_code: ['', [forms_1.Validators.required]],
+            country_code: [location.country.phonecode ? location.country.phonecode : '', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required]],
-            country_id: ['', forms_1.Validators.required],
+            country_id: [location.country.name ? location.country.name : '', forms_1.Validators.required],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: [''],
@@ -103,7 +106,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     id: country.id,
                     name: country.name,
                     code: country.phonecode,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
             }),
                 _this.countries_code = data.map(function (country) {
@@ -112,7 +115,7 @@ var TravellerFormComponent = /** @class */ (function () {
                         name: country.phonecode + ' (' + country.iso2 + ')',
                         code: country.phonecode,
                         country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.svg'
+                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
         }, function (error) {

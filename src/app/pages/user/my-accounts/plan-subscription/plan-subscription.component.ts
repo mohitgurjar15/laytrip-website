@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
+import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-plan-subscription',

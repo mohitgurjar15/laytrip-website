@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { FaqComponent } from './faq/faq.component';
 import { PagesComponent } from './pages.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
@@ -33,6 +34,10 @@ const routes: Routes = [
             {
                 path: 'privacy-policy',
                 component: PrivacyPolicyComponent
+            },
+            {
+                path: 'faq',
+                component: FaqComponent
             }
         ]
     }

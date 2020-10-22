@@ -51,7 +51,7 @@
                     <div class="list_block">
                       <div class="traveller_name">{{traveler.firstName | titlecase}} {{traveler.lastName | titlecase}}
                         <span>({{traveler.user_type | titlecase}})</span></div>
-                      <div class="traveller_age" *ngIf="traveler.dob && traveler.dob !='null' ">{{calculateAge(traveler.dob)}}yrs, {{getGender(traveler.gender)}}</div>
+                      <div class="traveller_age" *ngIf="traveler.dob && traveler.dob !='null' ">{{calculateAge(traveler.dob)}} {{getGender(traveler.gender)}}</div>
                     </div>
                     <div class="list_action">
                       <ul>

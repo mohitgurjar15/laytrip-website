@@ -1,4 +1,4 @@
-<app-flight-search-bar (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar>
+<app-flight-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar>
 
 <app-flight-loader *ngIf="loading" ></app-flight-loader>
 <app-full-page-overlay-loader *ngIf="loading" image="{{s3BucketUrl}}assets/images/flight-load_im.png" module="Flights" type="Searching"  ></app-full-page-overlay-loader>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="col-lg-9">
-        <app-flight-price-slider></app-flight-price-slider>
+        <app-flight-price-slider *ngIf="tripType=='oneway'" [dates]="dates"></app-flight-price-slider>
         <app-flight-item-wrapper  [flightDetails]="flightDetails"></app-flight-item-wrapper>
       </div>
     </div>
