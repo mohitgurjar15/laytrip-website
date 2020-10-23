@@ -22,6 +22,7 @@ import { ResetPasswordComponent } from './user/reset-password/reset-password.com
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     ResetPasswordComponent,
     ContactUsComponent,
     CancellationPolicyComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    FaqComponent
   ],
   imports: [
     CommonModule,

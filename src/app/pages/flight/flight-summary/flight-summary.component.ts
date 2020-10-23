@@ -64,11 +64,11 @@ export class FlightSummaryComponent implements OnInit {
   
   airRevalidate(){
       let routeData={
-        route_code: this.route.snapshot.paramMap.get('rc')
+        route_code: decodeURIComponent(this.route.snapshot.paramMap.get('rc'))
       }
       this.flightService.airRevalidate(routeData).subscribe((response:any)=>{
           this.flightDetail=response;
-          this.totalPrice = this.flightDetail[0].selling_price;
+          this.setTotalPrice();
           this.flightSummaryLoader=false;
           this.outWardStopCount=response[0].routes[0].stops.length-1;
           this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
@@ -76,6 +76,7 @@ export class FlightSummaryComponent implements OnInit {
           this.totalTravelerValue.emit(this.totalTraveler);
           
           this.getRouteDetails.emit(response);
+          //sessionStorage.setItem('__route',JSON.stringify(response));
 
         },(error)=>{
           
@@ -92,14 +93,14 @@ export class FlightSummaryComponent implements OnInit {
       let response_itinerary  = JSON.parse(_itinerary);
       response[0]=response;
       this.flightDetail=response;
-      this.totalPrice = this.flightDetail[0].selling_price;
+      this.setTotalPrice();
       this.flightSummaryLoader=false;
       this.outWardStopCount=response[0].routes[0].stops.length-1;
-      // this.totalTraveler = parseInt(response[0].adult_count) + (parseInt(response[0].child_count) || 0) + ( parseInt(response[0].infant_count) || 0)  
       this.totalTraveler = parseInt(response_itinerary.adult) + (parseInt(response_itinerary.child) || 0) + ( parseInt(response_itinerary.infant) || 0)  
       this.inWardStopCount =typeof response[0].routes[1]!='undefined' ? response[0].routes[1].stops.length-1:0;
       this.totalTravelerValue.emit(this.totalTraveler);
       this.getRouteDetails.emit(response);
+      //this.airRevalidate();
     }
     catch(error){
 
@@ -128,24 +129,30 @@ export class FlightSummaryComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['partialPaymentAmount']) {
       this.partialPaymentAmount = changes['partialPaymentAmount'].currentValue;
+      
     }
 
     if (changes['instalmentMode']) {
       this.instalmentMode = changes['instalmentMode'].currentValue;
-      if(this.instalmentMode=='instalment'){
-        this.totalPrice = this.flightDetail[0].selling_price;
+      //this.setTotalPrice();
+    }
+  }
+
+  setTotalPrice(){
+
+    if(this.instalmentMode=='instalment'){
+      this.totalPrice = this.flightDetail[0].selling_price;
+    }
+    else{
+      if(typeof this.flightDetail[0].secondary_selling_price!=='undefined' && this.flightDetail[0].secondary_selling_price){
+
+        this.totalPrice = this.flightDetail[0].secondary_selling_price;
       }
       else{
         
-        if(this.flightDetail[0].secondary_selling_price){
-
-          this.totalPrice = this.flightDetail[0].secondary_selling_price;
-        }
-        else{
-          
-          this.totalPrice = this.flightDetail[0].selling_price;
-        }
+        this.totalPrice = this.flightDetail[0].selling_price;
       }
     }
+
   }
 }

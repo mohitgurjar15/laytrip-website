@@ -31,25 +31,20 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
             end_date: [''],
             module: ['']
         });
-        this.getPaymentHistory();
     };
     ListPaymentHistoryComponent.prototype.getPaymentHistory = function () {
-        var _this = this;
-        // let theOne = Object.keys(this.filterForm.controls).find(key=> this.filterForm.controls[key].value!=='');
-        /* if(theOne == 'undefined'){
-          return;
-        } */
-        this.loading = true;
-        this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value).subscribe(function (res) {
-            _this.historyResult = res.data;
-            _this.loading = _this.notFound = false;
-            console.log('here');
-        }, function (err) {
-            _this.notFound = true;
-            _this.loading = false;
+        this.historyResult = this.filterForm.value;
+        /*  this.loading = true;
+          this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
+              this.historyResult = res.data;
+              this.loading = this.notFound  = false;
+          }, err => {
+            this.notFound = true;
+            this.loading = false;
+    
             if (err && err.status === 404) {
             }
-        });
+          });   */
     };
     ListPaymentHistoryComponent.prototype.getBookingHistory = function (event) {
         this.itemDetail = event;

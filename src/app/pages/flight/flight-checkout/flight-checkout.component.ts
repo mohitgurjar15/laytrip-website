@@ -290,7 +290,19 @@ export class FlightCheckoutComponent implements OnInit {
     getFlightSummaryData(data){
 
       this.flightSummary=data;
-      this.sellingPrice = data[0].selling_price;
+      if(this.instalmentMode=='instalment'){
+        this.sellingPrice = data[0].selling_price;
+      }
+      else{
+        
+        if(typeof data[0].secondary_selling_price!='undefined' && data[0].secondary_selling_price>0){
+          this.sellingPrice = data[0].secondary_selling_price;
+        }
+        else{
+          
+          this.sellingPrice = data[0].selling_price;
+        }
+      }
       if(this.instalmentMode=='no-instalment'){
         this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
       }
@@ -320,7 +332,6 @@ export class FlightCheckoutComponent implements OnInit {
         custom_instalment_no: data.customInstalment,
         custom_amount: data.customAmount
       } */
-      console.log(data,"---")
       /* this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
         if(res.instalment_available==true){
           

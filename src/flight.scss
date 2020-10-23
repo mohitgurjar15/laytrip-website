@@ -151,12 +151,24 @@
 								margin-bottom: 15px;
 							}
 
+							@media(max-width: 480px) {
+								flex-flow: column;
+							}
+
 							.flight_form {
 								width: 49%;
+
+								@media(max-width: 480px) {
+									width: 100%;
+								}
 							}
 
 							.flight_to {
 								width: 49%;
+
+								@media(max-width: 480px) {
+									width: 100%;
+								}
 							}
 
 							.search_area {
@@ -164,6 +176,8 @@
 								border: 1px solid $box-border-color;
 								border-radius: 8px;
 								background: $background-white;
+								z-index: 2;
+								position: inherit;
 
 								span {
 									font-size: 10px;
@@ -183,7 +197,7 @@
 								left: 50%;
 								transform: translate(-50%, -50%);
 								border-radius: 50%;
-								z-index: 9999;
+								z-index: 8;
 
 								img {
 									width: 15px;
@@ -191,6 +205,10 @@
 									top: 50%;
 									left: 50%;
 									transform: translate(-50%, -50%);
+								}
+
+								@media(max-width: 480px) {
+									left: 90%;
 								}
 							}
 						}

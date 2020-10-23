@@ -10,37 +10,62 @@ exports.HistoryListComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
 var HistoryListComponent = /** @class */ (function () {
-    function HistoryListComponent(commonFunction, flightCommonFunction) {
+    function HistoryListComponent(commonFunction, flightCommonFunction, userService, router) {
         this.commonFunction = commonFunction;
         this.flightCommonFunction = flightCommonFunction;
+        this.userService = userService;
+        this.router = router;
         this.bookingData = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.list = [];
+        this.filterData = {};
+        this.filterInfo = {};
         this.listLength = 0;
         this.pageSize = 10;
+        this.loading = true;
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.showPaginationBar = false;
+        this.notFound = false;
     }
     HistoryListComponent.prototype.ngOnInit = function () {
         this.page = 1;
         this.limit = this.perPageLimitConfig[0];
+        this.getPaymentHistory();
     };
     HistoryListComponent.prototype.ngOnChanges = function (changes) {
-        this.list = changes.historyResult.currentValue;
-    };
-    HistoryListComponent.prototype.ngAfterContentChecked = function () {
-        if (this.list && this.list.length) {
-            this.listLength = this.list.length;
-            if (this.listLength > 0) {
-                this.showPaginationBar = true;
-            }
+        this.filterData = changes.historyResult.currentValue;
+        if (this.filterData) {
+            this.showPaginationBar = false;
+            this.getPaymentHistory();
         }
     };
+    HistoryListComponent.prototype.getPaymentHistory = function () {
+        var _this = this;
+        this.loading = true;
+        this.filterInfo = null;
+        if (this.filterData != 'undefined') {
+            this.filterInfo = this.filterData;
+        }
+        this.userService.getPaymentHistory(this.page, this.limit, this.filterInfo).subscribe(function (res) {
+            _this.list = res.data;
+            _this.showPaginationBar = true;
+            _this.listLength = res.total_result;
+            _this.loading = _this.notFound = false;
+        }, function (err) {
+            _this.notFound = true;
+            _this.loading = _this.showPaginationBar = false;
+        });
+    };
     HistoryListComponent.prototype.pageChange = function (event) {
+        window.scroll(0, 0);
+        this.showPaginationBar = false;
         this.page = event;
+        this.getPaymentHistory();
     };
     HistoryListComponent.prototype.viewDetailClick = function (item) {
         this.item = item;
+        console.log(this.item);
+        // this.router.navigate(['/account/payment/detail']);
     };
     __decorate([
         core_1.Output()

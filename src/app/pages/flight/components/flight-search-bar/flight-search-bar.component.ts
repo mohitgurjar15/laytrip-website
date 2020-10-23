@@ -330,15 +330,15 @@ export class FlightSearchBarComponent implements OnInit {
     
     let departureDate =  this.route.snapshot.queryParams['departure_date'];
     let departureDates = departureDate.split("-");
-    this.monthYearArr.push(departureDates[1],'-',departureDates[0]);
+    this.monthYearArr.push(`${departureDates[1]}-${departureDates[0]}`);
   }
 
   changeMonth(event){
     
-    let monthYearName = event.month-event.year;
-
+    let month=event.month;
+    month = month.toString().length==1?'0'+month:month;
+    let monthYearName = `${month}-${event.year}`;
     if(!this.monthYearArr.includes(monthYearName)){
-
       this.monthYearArr.push(monthYearName)
       let startDate:any = moment([event.year,event.month-1]);
       let endDate:any =  moment(startDate).endOf('month');

@@ -41,26 +41,21 @@ export class ListPaymentHistoryComponent implements OnInit {
       end_date: [''],
       module: [''],
     });
-    this.getPaymentHistory();
   }
 
   getPaymentHistory() {
-   // let theOne = Object.keys(this.filterForm.controls).find(key=> this.filterForm.controls[key].value!=='');
-    /* if(theOne == 'undefined'){
-      return;
-    } */
-      this.loading = true;
+    this.historyResult = this.filterForm.value;
+    /*  this.loading = true;
       this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
           this.historyResult = res.data;
           this.loading = this.notFound  = false;
-          console.log('here')
       }, err => {
         this.notFound = true;
         this.loading = false;
 
         if (err && err.status === 404) {
         }
-      });   
+      });   */ 
   }
   
   getBookingHistory(event) {

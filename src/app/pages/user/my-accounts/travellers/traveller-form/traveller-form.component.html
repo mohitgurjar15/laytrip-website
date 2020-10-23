@@ -3,7 +3,7 @@
         <h5>{{ travellerId ? 'Edit Co-Travellers' : 'Add Co-Travellers'}}</h5>
     </div>
     <button type="button" class="close" (click)="close()">
-        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.jpg" alt="Close Icon">
+        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
     </button>
 </div>
 <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
