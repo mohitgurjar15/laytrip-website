@@ -14,9 +14,9 @@
 </div>
 
 <ul class="block_installment_radio" *ngIf="instalmentAvavible && showFullPartialPayOption">
-    <li>
+    <li [ngClass]="{'disable_payment_option': disablePartialPayment === true}" >
         <label class="custom_radio">Pay with Instalment  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
-            <input type="radio" name="payment_mode" [checked]="isInstalemtMode==true" (click)="triggerPayemntMode('instalment')">
+            <input type="radio" name="payment_mode" [disabled]="disablePartialPayment" [checked]="isInstalemtMode==true" (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
     </li>
@@ -34,7 +34,7 @@
         <div class="installment_top">
 
             <ul class="custom_tab">
-                <li [ngClass]="{'active_tab': durationType === 'weekly'}" >
+                <li [ngClass]="{'active_tab': durationType === 'weekly'}"  >
                     <label class="custom_radio">
                         <input type="radio" name="weekly-installment" [checked]="durationType=='weekly'" (click)="changeDuration('weekly')">
                         <span class="checkmark"></span>
@@ -46,7 +46,7 @@
                         </div>
                     </label>
                 </li>
-                <li [ngClass]="{'active_tab': durationType === 'biweekly'}">
+                <li [ngClass]="{'active_tab': durationType === 'biweekly'}" [ngClass]="{'disable_payment_option': biWeeklyFirstInstalment+laycreditpoints > sellingPrice}">
                     <label class="custom_radio">
                         <input type="radio" name="weekly-installment" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
                         <span class="checkmark"></span>

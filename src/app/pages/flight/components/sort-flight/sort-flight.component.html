@@ -6,7 +6,7 @@
   <div class="short_by">
     <div class="block_inn">
       <h4>Sort by</h4>
-      <a href="javascript:void(0);" (click)="resetFilter('selling_price','ASC')"> Reset</a>
+      <a  (click)="resetFilter('selling_price','ASC')"> Reset</a>
     </div>
     <div class="accordion block_shortby" id="accordion">
       <div class="accordion-group">
@@ -21,7 +21,7 @@
               <h5>Price</h5>
               <ul>
                 <li>
-                  <label class="custom_radio">Lowest to highest {{sortType=='lh_price'}}
+                  <label class="custom_radio">Lowest to highest
                     <input type="radio" [checked]="sortType=='lh_price'"  (click)="sortFlightData('selling_price','ASC','lh_price')">
                     <span class="checkmark"></span>
                   </label>

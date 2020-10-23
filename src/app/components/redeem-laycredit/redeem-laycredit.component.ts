@@ -11,6 +11,7 @@ export class RedeemLaycreditComponent implements OnInit {
 
   @Output() applyLaycredit = new EventEmitter();
   @Input() sellingPrice:number;
+  @Input() redeemableLayPoints:number;
   totalLaycreditPoints=0;
   value: number = 0;
   selectedLayCredit=0;
@@ -54,7 +55,6 @@ export class RedeemLaycreditComponent implements OnInit {
   }
 
   toggleLayCredit(event){
-    console.log("Innn")
     if(event.target.checked){
       console.log(this.laycreditOptions)
       this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: false});
@@ -67,7 +67,8 @@ export class RedeemLaycreditComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['sellingPrice'].currentValue!='undefined') {
+    console.log("changes",changes)
+    if (typeof changes['sellingPrice']!='undefined') {
       
         this.sellingPrice = changes['sellingPrice'].currentValue;
         if(this.totalLaycreditPoints > Number(this.sellingPrice)){
@@ -78,5 +79,11 @@ export class RedeemLaycreditComponent implements OnInit {
         }
             
     }
+    if (typeof changes['redeemableLayPoints']!='undefined') {
+      console.log("changes['redeemableLayPoints'].currentValue",changes['redeemableLayPoints'].currentValue)
+      this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : changes['redeemableLayPoints'].currentValue});          
+    }
+
+    
   }
 }

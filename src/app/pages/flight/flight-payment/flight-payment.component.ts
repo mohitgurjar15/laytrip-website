@@ -29,6 +29,7 @@ export class FlightPaymentComponent implements OnInit {
   showPartialPayemntOption:boolean=true;
   partialPaymentAmount:number;
   payNowAmount:number=0;
+  redeemableLayPoints:number;
 
   constructor(
     private route: ActivatedRoute,
@@ -105,5 +106,9 @@ export class FlightPaymentComponent implements OnInit {
     if (userToken) {
       this.isLoggedIn = true;
     }
+  }
+
+  redeemableLayCredit(event){
+    this.redeemableLayPoints=event;
   }
 }

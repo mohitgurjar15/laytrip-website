@@ -512,9 +512,12 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.partialPriceSlider.reset({price: [this.filterFlightDetails.partial_payment_price_range.min_price,this.filterFlightDetails.partial_payment_price_range.max_price]});
 
       //Reset airlines
-      this.airlineList.forEach(element => {
-        return element.isChecked=false;
-      });
+      if(typeof this.airlineList!='undefined' && this.airlineList.length){
+
+        this.airlineList.forEach(element => {
+          return element.isChecked=false;
+        });
+      }
 
       $("input:checkbox").prop('checked', false);
       this.filterFlights();
