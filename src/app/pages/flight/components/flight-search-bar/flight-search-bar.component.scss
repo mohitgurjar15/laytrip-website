@@ -147,6 +147,8 @@
     min-width: 340px !important;
     .ui-state-active {
         background-color: #012178 !important;
-        color: #fff !important;
+        .calender_price{
+            color: #fff !important;
+        }
     }
 }
