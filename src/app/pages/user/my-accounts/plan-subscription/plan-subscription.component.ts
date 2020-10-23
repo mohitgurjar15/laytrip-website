@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../services/user.service';
 
 @Component({
@@ -31,22 +33,25 @@ export class PlanSubscriptionComponent implements OnInit {
   customAmount: number | null;
   customInstalment: number | null;
   planSummaryData;
+  public loading: boolean = false;
+  planId;
 
   constructor(
     private router: Router,
     public route: ActivatedRoute,
     private userService: UserService,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    const planId = this.route.snapshot.paramMap.get('id');
+    this.planId = this.route.snapshot.paramMap.get('id');
     this.userInfo = getLoginUserInfo();
     if (typeof this.userInfo.roleId == 'undefined') {
       this.router.navigate(['/']);
     }
-    const payload = { id: planId, currency: this.currency.id };
+    const payload = { id: this.planId, currency: this.currency.id };
     this.userService.getSubscriptionPlanDetail(payload).subscribe((res: any) => {
       if (res) {
         this.planSummaryData = res;
@@ -70,6 +75,20 @@ export class PlanSubscriptionComponent implements OnInit {
     if (count == 0) {
       this.showAddCardForm = true;
     }
+  }
+
+  onPayNow() {
+    this.loading = true;
+    const data = { plan_id: this.planId, currency_id: this.currency.id, card_token: this.cardToken };
+    console.log(this.planId, this.currency.id, this.cardToken);
+    this.userService.payNowSubscription(data).subscribe((res: any) => {
+      this.loading = true;
+      this.toastr.success(res.message, 'Plan Subscription');
+      this.router.navigate(['/']);
+    }, (error: HttpErrorResponse) => {
+      this.loading = false;
+      this.toastr.error(error.error.message);
+    });
   }
 
 }
