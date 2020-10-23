@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./faq.component.scss'],
 })
 export class FaqComponent implements OnInit {
-
+ 
   s3BucketUrl = environment.s3BucketUrl;
   loading = false;
   faqDetail;
