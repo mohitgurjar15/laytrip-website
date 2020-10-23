@@ -12,16 +12,24 @@ export class ViewHistoryComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() item;
   list:any;
+  currencySymbol='';
   constructor(    
     private commonFunction:CommonFunction,
     private flightCommonFunction :FlightCommonFunction
 
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("this.list",this.item)
+  }
 
   ngOnChanges(changes:SimpleChanges){
     this.list = changes.item.currentValue;
+    if(this.list){
+      this.currencySymbol =  this.list.currency2.symbol ? this.list.currency2.symbol : '$';
+    }
+
+    console.log("this.list",this.list)
     if(this.list &&  this.list != 'undefined' ){
     }
   }

@@ -85,64 +85,8 @@
                                     <div class="card-body">
                                         <div class="block_pay_list_inner">
                                             <div class="block_booking_list_inner">
-                                                <div class="pay_listing" *ngIf="loading">
-                                                    <div class="list_top">
-                                                        <div class="list_left w-100">
-                                                            <ul class="w-100">
-                                                                <li class="w-100">
-                                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="list_right" style="flex-flow: column;">
-                                                            <p class="fb_animation w-100 mb-0"></p>
-                                                            <p class="fb_animation w-100 mb-0"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="list_btm">
-                                                        <div class="grid_block w-100">
-                                                            <ul>
-                                                                <li class="fb_medium w-100">
-                                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                                </li>
-                                                                <li class="w-100">
-                                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="grid_block w-100">
-                                                            <ul>
-                                                                <li class="fb_medium w-100">
-                                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                                </li>
-                                                                <li class="w-100">
-                                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="grid_block w-100">
-                                                            <ul>
-                                                                <li class="fb_medium w-100">
-                                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                                </li>
-                                                                <li class="w-100">
-                                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="grid_block w-100">
-                                                            <span>
-                                                                <p class="fb_animation w-100 mb-0"></p>
-                                                            </span>
-                                                            <p class="fb_animation w-100 mb-0"></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="block_nobooking_available" *ngIf="notFound && !loading">
-                                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
-                                                    <h5>No Payment Available</h5>
-                                                </div>
-                                                <app-history-list *ngIf="!loading && !notFound" [historyResult]="historyResult"></app-history-list>
+                                                
+                                                <app-history-list [historyResult]="historyResult"></app-history-list>
                                             </div>
                                         </div>
                                     </div>

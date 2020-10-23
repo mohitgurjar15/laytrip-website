@@ -93,25 +93,39 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.getPaymentHistory = function (pageNumber, limit, filterForm) {
         var queryString = "";
-        if (filterForm.bookingId) {
-            queryString += (filterForm.bookingId) ? '&booking_id=' + filterForm.bookingId : '';
+        if (filterForm && filterForm != 'undefined') {
+            if (filterForm.bookingId) {
+                queryString += (filterForm.bookingId) ? '&booking_id=' + filterForm.bookingId : '';
+            }
+            if (filterForm.module) {
+                queryString += (filterForm.module.id) ? '&booking_type=' + filterForm.module.id : '';
+            }
+            if (filterForm.start_date) {
+                queryString += (filterForm.start_date) ? '&payment_start_date=' + moment(filterForm.start_date).format("YYYY-MM-DD") : '';
+            }
+            if (filterForm.end_date) {
+                queryString += (filterForm.end_date) ? '&payment_end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
+            }
         }
-        if (filterForm.module) {
-            queryString += (filterForm.module.id) ? '&booking_type=' + filterForm.module.id : '';
-        }
-        if (filterForm.start_date) {
-            queryString += (filterForm.start_date) ? '&payment_start_date=' + moment(filterForm.start_date).format("YYYY-MM-DD") : '';
-        }
-        if (filterForm.end_date) {
-            queryString += (filterForm.end_date) ? '&payment_end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
-        }
-        return this.http.get(this.apiURL + "v1/booking/payment?limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
+        return this.http.get(this.apiURL + "v1/booking/payment?payment_type=1&limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
     };
     UserService.prototype.getModules = function (pageNumber, limit) {
         return this.http.get(this.apiURL + "v1/modules?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
     };
     UserService.prototype.getTraveller = function (travelerId) {
         return this.http.get(environment_1.environment.apiUrl + "v1/traveler/get-traveler/" + travelerId, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getSubscriptionList = function () {
+        return this.http.get(this.apiURL + 'v1/subscription/', this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getCardList = function () {
+        return this.http.get(this.apiURL + 'v1/payment', this.commonFunction.setHeaders());
+    };
+    UserService.prototype.deleteCard = function () {
+        return this.http.get(this.apiURL + 'v1/payment', this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getSubscriptionPlanDetail = function (data) {
+        return this.http.get(this.apiURL + 'v1/subscription/get-plan/' + data.id + '/' + data.currency, this.commonFunction.setHeaders());
     };
     UserService = __decorate([
         core_1.Injectable({
