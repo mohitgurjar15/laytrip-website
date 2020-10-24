@@ -131,7 +131,13 @@ export class FlightSearchBarComponent implements OnInit {
     });
 
     this.flightDepartureMinDate = new Date();
-    this.flightReturnMinDate = new Date(this.departureDate);
+    console.log("this.departureDate",this.departureDate)
+    if(moment(this.departureDate).isBefore(moment().format('MM/DD/YYYY'))){
+      this.flightReturnMinDate = new Date();
+    }
+    else{
+      this.flightReturnMinDate = new Date(this.departureDate);
+    }
   }
 
   ngOnInit() {

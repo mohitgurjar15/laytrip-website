@@ -32,11 +32,11 @@
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Partial Payment Start Date :</span>
-                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[0].instalmentDate,'MM/DD/YYYY','en')}}</p>
+                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[0].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Next Partial Payment Date :</span>
-                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[1].instalmentDate,'MM/DD/YYYY','en')}}</p>
+                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[1].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Partial Payment Amount :</span>
