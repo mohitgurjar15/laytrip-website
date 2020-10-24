@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit() {
     document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
