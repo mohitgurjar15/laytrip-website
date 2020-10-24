@@ -34,6 +34,8 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   partialPriceSlider: FormGroup = new FormGroup({
     partial_price: new FormControl([20, 80])
   });
+  isShowoutbound:boolean=false;
+  isShowinbound:boolean=false;
 
   /* Varibale for filter */
   minPrice:number;
@@ -147,6 +149,14 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     }
 
     this.loadJquery();
+  }
+
+  toggleOutbound(){
+    this.isShowoutbound= !this.isShowoutbound;
+  }
+
+  toggleInbound(){
+    this.isShowinbound = !this.isShowinbound;
   }
 
   loadJquery(){

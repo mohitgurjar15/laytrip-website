@@ -14,13 +14,13 @@
 </div>
 
 <ul class="block_installment_radio" *ngIf="instalmentAvavible && showFullPartialPayOption">
-    <li [ngClass]="{'disable_payment_option': disablePartialPayment === true}" >
+    <li [ngClass]="{'disable_payment_option': disablePartialPayment === true, 'select': isInstalemtMode===true}" >
         <label class="custom_radio">Pay with Instalment  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
             <input type="radio" name="payment_mode" [disabled]="disablePartialPayment" [checked]="isInstalemtMode==true" (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
     </li>
-    <li>
+    <li [ngClass]="{'select': isInstalemtMode==false}">
         <label class="custom_radio">Full Payment <span [ngClass]="{'text-line': discountedPrice >0 }">Total ${{instalmentRequest.amount | number : '1.2-2'}}</span>
             <span *ngIf="discountedPrice>0">Discounted Price ${{discountedPrice | number : '1.2-2'}}</span>
             <input type="radio" name="payment_mode" [checked]="isInstalemtMode==false" (click)="triggerPayemntMode('no-instalment')">

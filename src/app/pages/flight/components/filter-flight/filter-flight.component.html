@@ -28,8 +28,8 @@
  
   <div class="cmn_block pad_no">
     <div class="accordion block_shortby" id="accordion-outbound">
-      <div class="accordion-group">
-        <div class="accordion-heading">
+      <div class="accordion-group" [ngClass]="{'active':isShowoutbound==true}">
+        <div class="accordion-heading" (click)="toggleOutbound()">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-outbound"
             href="#collapseOutbound">
             Outbound
@@ -162,8 +162,8 @@
   </div>
   <div class="cmn_block pad_no" *ngIf="filterFlightDetails.inbound_arrival_time_slot">
     <div class="accordion block_shortby" id="accordion-inbound">
-      <div class="accordion-group">
-        <div class="accordion-heading">
+      <div class="accordion-group" [ngClass]="{'active':isShowinbound==true}">
+        <div class="accordion-heading" (click)="toggleInbound()">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-inbound"
             href="#collapseInbound">
             Inbound
@@ -298,16 +298,16 @@
     
     <div class="block_top_in">
       <h5>Airlines</h5>
-      <a *ngIf="showMinAirline==4" class="view_more" href="javascript:void(0);" (click)="toggleAirlines('more')">Show All</a>
-      <a *ngIf="showMinAirline!=4" class="view_more" href="javascript:void(0);" (click)="toggleAirlines('less')">Show Less</a>
+      <a *ngIf="showMinAirline==4" class="view_more"  (click)="toggleAirlines('more')">Show All</a>
+      <a *ngIf="showMinAirline!=4" class="view_more"  (click)="toggleAirlines('less')">Show Less</a>
     </div>
     <ul>
       <ng-container *ngFor="let airline of airlineList; index as i" >
-      <li *ngIf="i < showMinAirline">
+      <li *ngIf="i < showMinAirline" title="{{ airline?.airline_name }}">
         <label class="custom_checkbox">
           <input type="checkbox" [checked]="airline.isChecked==true" value="{{ airline?.airline_code }}" (change)="filterByAirline($event,i)">
           <span class="checkmark"></span>
-          {{ airline?.airline_name }}
+          <p>{{ airline?.airline_name }}</p>
         </label>
         <span>{{ currency?.symbol }}{{ airline?.selling_price | number : '1.2-2' }} ({{ airline?.count }})</span>
       </li>

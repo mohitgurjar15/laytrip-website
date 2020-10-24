@@ -1943,6 +1943,8 @@
 								margin: 0 0 10px;
 							}
 
+
+
 							.show_detail {
 								width: auto;
 
@@ -1968,6 +1970,20 @@
 										border-bottom: 3px solid transparent;
 										border-left: 3px solid $text-lightblue;
 										transform: translate(-50%, -50%);
+									}
+								}
+
+								&.open_detail {
+									a {
+										&:after {
+											width: 0;
+											height: 0;
+											border-left: 3px solid transparent;
+											border-right: 3px solid transparent;
+											border-top: 3px solid $text-lightblue;
+											left: 105%;
+											top: 54%;
+										}
 									}
 								}
 							}
@@ -3552,6 +3568,13 @@
 									transition: all 0.2s;
 									opacity: 0;
 								}
+							}
+
+							p {
+								margin: 0;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+								overflow: hidden;
 							}
 						}
 
