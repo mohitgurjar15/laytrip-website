@@ -51,7 +51,6 @@ export class SocialLoginComponent implements OnInit {
           "os_version": "7.0"
         };
         this.userService.socialLogin(json_data).subscribe((data: any) => {
-          console.log(data);
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');

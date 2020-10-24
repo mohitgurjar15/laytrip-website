@@ -28,7 +28,6 @@
               "src/.htaccess"
             ],
             "styles": [
-              "src/assets/css/poppins.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/slick.css",
               "src/styles-app-loading.scss",
@@ -48,7 +47,8 @@
               "src/assets/js/moment.min.js",
               "src/assets/js/jquery-ui.js",
               "src/assets/js/slick.js",
-              "src/assets/js/iframe-v1.min.js"
+              "src/assets/js/iframe-v1.min.js",
+              "src/assets/js/apple-auth.js"
             ],
             "es5BrowserSupport": true
           },
