@@ -12,13 +12,25 @@
           <div class="block_booking_list">
             <ul id="booking_tabs" class="nav nav-tabs" role="tablist">
               <li class="nav-item">
-                <a href="#booking-flight" class="nav-link active" data-toggle="tab" role="tab">Flights</a>
+                <a href="#booking-flight" class="nav-link active" data-toggle="tab" role="tab">
+                  <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg" alt="Flight Icon">
+                  <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg" alt="Flight Icon">
+                  <span>Flight</span>
+                </a>
+              </li>            
+              <li class="nav-item">
+                <a href="#booking-hotel" class="nav-link" data-toggle="tab" role="tab">
+                  <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg" alt="Hotel Icon">
+                  <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg" alt="Hotel Icon">
+                  <span>Hotel</span>
+                </a>
               </li>
               <li class="nav-item">
-                <a href="#booking-hotel" class="nav-link" data-toggle="tab" role="tab">Hotel</a>
-              </li>
-              <li class="nav-item">
-                <a href="#booking-accommodation" class="nav-link" data-toggle="tab" role="tab">Home Rentals</a>
+                <a href="#booking-accommodation" class="nav-link" data-toggle="tab" role="tab">
+                  <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg" alt="Accommodation Icon">
+                  <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg" alt="Accommodation Icon">
+                  <span>Home Rental</span>
+                </a>
               </li>
             </ul>
             <div id="booking_content" class="tab-content" role="tablist">

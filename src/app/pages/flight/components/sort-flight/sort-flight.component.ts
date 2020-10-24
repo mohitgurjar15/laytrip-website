@@ -9,17 +9,19 @@ declare var $: any;
 })
 export class SortFlightComponent implements OnInit {
 
+  @Output() sortFlight = new EventEmitter<{ key:string, order:string }>();
+  @Input() flightDetails;
+  sortType:string='lh_price';
   departureCode:string='';
   arrivalCode:string='';
+  lowToHighToggle : boolean = false;
+
   constructor(
     private route :ActivatedRoute
   ) {
      this.departureCode = this.route.snapshot.queryParams['departure'];
      this.arrivalCode = this.route.snapshot.queryParams['arrival'];
    }
-  @Output() sortFlight = new EventEmitter<{ key:string, order:string }>();
-  @Input() flightDetails;
-  sortType:string='lh_price';
 
   ngOnInit() {
     this.loadJquery();
@@ -53,5 +55,9 @@ export class SortFlightComponent implements OnInit {
         this.flightDetails=changes['flightDetails'].currentValue;
       }
     }
+  }
+
+  toggleLowToHigh(){
+    this.lowToHighToggle = !this.lowToHighToggle;
   }
 }

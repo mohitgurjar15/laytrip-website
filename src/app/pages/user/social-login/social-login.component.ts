@@ -9,6 +9,7 @@ import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
 import { getUserDetails } from '../../../_helpers/jwt.helper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-social-login',
@@ -26,7 +27,9 @@ export class SocialLoginComponent implements OnInit {
     public router: Router,
     public modalService: NgbModal,
     public location: Location,
-    private authService: SocialAuthService
+    private authService: SocialAuthService,
+    private toastr: ToastrService
+
   ) { }
 
   @ViewChild('loginRef') loginElement: ElementRef;
@@ -114,13 +117,12 @@ export class SocialLoginComponent implements OnInit {
             document.getElementById('navbarNav').click();
           }
         }, (error: HttpErrorResponse) => {
-          console.log(error)
+          this.toastr.error(error.message, 'SignIn Error');
         });
       }, (error) => {
-        console.log(error)
+        // this.toastr.error("Something went wrong!", 'SignIn Error');
       });
   }
-  ngOnDestroy() { }
 
   loadFacebookSdk() {
 
@@ -175,15 +177,14 @@ export class SocialLoginComponent implements OnInit {
               document.getElementById('navbarNav').click();
               this.router.url;
             }
-
           }, (error: HttpErrorResponse) => {
-            console.log(error)
+            this.toastr.error(error.message, 'SignIn Error');
           });
 
         });
       } else {
         this.apiError = 'User login failed';
-        console.log('User login failed');
+        // this.toastr.error("Something went wrong!", 'SignIn Error');
       }
     }, { scope: 'email' });
   }

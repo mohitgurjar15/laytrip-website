@@ -781,7 +781,7 @@
 									&:after {
 										content: '';
 										position: absolute;
-										left: 103%;
+										left: 105%;
 										top: 50%;
 										width: 0;
 										height: 0;
@@ -789,6 +789,20 @@
 										border-bottom: 3px solid transparent;
 										border-left: 3px solid $text-lightblue;
 										transform: translate(-50%, -50%);
+									}
+								}
+
+								&.open_detail {
+									a {
+										&:after {
+											width: 0;
+											height: 0;
+											border-left: 3px solid transparent;
+											border-right: 3px solid transparent;
+											border-top: 3px solid $text-lightblue;
+											left: 105%;
+											top: 54%;
+										}
 									}
 								}
 							}
@@ -3084,10 +3098,13 @@
 							float: right;
 							color: $text-grey;
 							font-weight: normal;
+							transition: 0.3s;
 						}
 					}
+				}
 
-					&.accordion-opened {
+				&.active {
+					.accordion-heading {
 						.accordion-toggle {
 							&:after {
 								content: "\f078";
@@ -3372,8 +3389,10 @@
 									font-weight: normal;
 								}
 							}
+						}
 
-							&.accordion-opened {
+						&.active {
+							.accordion-heading {
 								.accordion-toggle {
 									&:after {
 										content: "\f078";

@@ -48,7 +48,7 @@ export class TravelerFormComponent implements OnInit {
   minyear;
   maxyear;
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
-
+  location;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -62,7 +62,7 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
     let location:any = this.cookieService.get('__loc');
-    location = JSON.parse(location);
+    this.location = JSON.parse(location);
    
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
@@ -70,8 +70,8 @@ export class TravelerFormComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [location.country.phonecode ? location.country.phonecode : '', [Validators.required]],
-      country_id: [location.country.name ? location.country.name : ''],
+      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
+      country_id: [this.location.country.name ? this.location.country.name : ''],
       phone_no: ['', [Validators.required]],
       dob : ['', Validators.required],
       passport_expiry : [''],
@@ -170,11 +170,18 @@ export class TravelerFormComponent implements OnInit {
       this.loading = false;
       return;
     } else {
+      console.log("s",this.adultForm.value)
       let country_id = this.adultForm.value.country_id.id;
       if (!Number(country_id)) {
-        country_id = this.traveler.country.id;
+        console.log(this.traveler.country)
+        if(this.traveler.country){
+          country_id = ( this.traveler.country.id ) ? this.traveler.country.id : '';
+        } else {
+          country_id = this.location.country.id;
+        }
       }
-     
+      console.log(country_id)
+    
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,

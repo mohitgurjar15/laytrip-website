@@ -17,8 +17,8 @@ export class BookingFeedbackComponent implements OnInit {
   submitted : boolean = false;
   is_rating = true;
   loading = false;
-  ratingValue = 1;
-  _rating = 'Terrible';
+  ratingValue = 5;
+  _rating = 'Excllent';
   @Output() feedbackValueChange = new EventEmitter();
 
   constructor(

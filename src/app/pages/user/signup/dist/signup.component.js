@@ -29,14 +29,11 @@ var SignupComponent = /** @class */ (function () {
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signupForm = this.formBuilder.group({
-            first_name: ['', forms_1.Validators.required],
-            last_name: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-            confirm_password: ['', forms_1.Validators.required],
-            gender: ['', forms_1.Validators.required]
+            confirm_password: ['', forms_1.Validators.required]
         }, {
-            validator: must_match_validators_1.MustMatch('password', 'confirm_password')
+            valiabedator: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
     };
     SignupComponent.prototype.openSignInPage = function () {
