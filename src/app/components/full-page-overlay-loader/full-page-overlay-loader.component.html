@@ -13,7 +13,7 @@
           <div class="progress Loader_progressbar progress_loader" >
             <div class="progress-bar bg-custom progress-bar-striped progress-bar-animated" style="width:100%"></div>
           </div>
-          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+          <p *ngIf="description!=''">{{description}}</p>
       </div>
   </div>
 </div>
