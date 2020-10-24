@@ -3542,6 +3542,7 @@
 
 						span {
 							margin-left: 10px;
+							white-space: nowrap;
 						}
 					}
 				}
@@ -3569,7 +3570,7 @@
 
 		img {
 			width: 50px;
-			height: 50px;
+			height: auto;
 			margin: 0 20px 0 0;
 		}
 
@@ -3578,6 +3579,7 @@
 			font-weight: 400;
 			color: $text-white;
 			margin: 0;
+			line-height: 22px;
 		}
 	}
 
@@ -5039,7 +5041,7 @@
 						justify-content: space-between;
 						align-items: center;
 						font-size: 14px;
-						font-weight: 400;
+						font-weight: 500;
 						color: $text-black;
 
 						p {
@@ -6011,6 +6013,12 @@
 								margin: 0;
 								background: $grey_light;
 							}
+
+							&.select {
+								.custom_radio {
+									color: $text-black;
+								}
+							}
 						}
 					}
 
@@ -6585,6 +6593,13 @@
 											}
 										}
 
+										.custom_radio {
+											color: $text-black;
+
+											.left {
+												color: $text-black;
+											}
+										}
 									}
 
 									.custom_radio {
@@ -6600,7 +6615,7 @@
 										-moz-user-select: none;
 										-ms-user-select: none;
 										user-select: none;
-										color: $text-black;
+										color: $text-grey;
 
 										input {
 											position: absolute;
@@ -6646,7 +6661,7 @@
 										.left {
 											font-size: 14px;
 											font-weight: 400;
-											color: $text-black;
+											color: $text-grey;
 
 											span {
 												display: block;
@@ -7047,7 +7062,7 @@
 
 								span {
 									font-weight: 500;
-									color: $secondary-color;
+									color: $text-blue;
 								}
 							}
 						}
