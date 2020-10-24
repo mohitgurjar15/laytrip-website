@@ -19,8 +19,8 @@ var BookingFeedbackComponent = /** @class */ (function () {
         this.submitted = false;
         this.is_rating = true;
         this.loading = false;
-        this.ratingValue = 1;
-        this._rating = 'Terrible';
+        this.ratingValue = 5;
+        this._rating = 'Excllent';
         this.feedbackValueChange = new core_1.EventEmitter();
     }
     BookingFeedbackComponent.prototype.ngOnInit = function () {

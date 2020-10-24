@@ -9,9 +9,9 @@
       <a  (click)="resetFilter('selling_price','ASC')"> Reset</a>
     </div>
     <div class="accordion block_shortby" id="accordion">
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+      <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
+        <div class="accordion-heading" (click)="toggleLowToHigh()">
+          <a  class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
             Lowest to highest
           </a>
         </div>

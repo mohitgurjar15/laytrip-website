@@ -10,7 +10,17 @@
   top: 100%;
   background: #ffffff;
   left: 0;
-  width: 500px;
+  width: 480px;
+}
+@media (max-width: 767px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 410px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 100%;
+  }
 }
 .ng-select.laytrip-input .ng-input input {
   padding: 0;
@@ -40,6 +50,7 @@
 }
 .ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input {
   padding: 0 15px;
+  top: 0;
 }
 .ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input input {
   padding-left: 0px !important;
@@ -64,6 +75,9 @@
 .ng-select.laytrip-input .ng-dropdown-panel .ng-select-bottom {
   border-top-color: #fff !important;
 }
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 255px;
+}
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
   padding: 3px 3px 3px 10px !important;
   font-size: 14px;
@@ -86,6 +100,7 @@
   border: none !important;
   display: flex;
   align-items: center;
+  border-radius: 0;
 }
 .ng-select.ng-customClass .ng-select-container:hover {
   box-shadow: none;
@@ -126,6 +141,7 @@
   background-color: #fff;
   border: 1px solid #fc7e66;
   border-radius: 50%;
+  outline: none;
 }
 
 .custom_range_slide .ng5-slider .ng5-slider-pointer:after {
@@ -136,6 +152,15 @@
   display: none;
 }
 
+.custom_range_slide p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+}
+.custom_range_slide .ng5-slider {
+  margin: 15px 0;
+}
 .custom_range_slide .ng5-slider .ng5-slider-bubble {
   bottom: 14px;
   width: 100%;
@@ -145,6 +170,7 @@
   font-size: 14px;
   font-weight: 300;
   color: #8188ab;
+  display: none;
 }
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
@@ -163,6 +189,17 @@
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
+  height: 22px !important;
+  margin-top: -3px !important;
+  margin-bottom: 2px !important;
+}
+
+.calender_price {
+  font-size: 9px;
+  color: #012178;
 }
 
 .modify_search {
@@ -279,10 +316,10 @@
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box .search_area input {
   width: 100%;
   border: none;
-  height: 30px;
+  height: 25px;
   margin-bottom: 0;
   font-size: 16px;
-  color: #012178;
+  color: #000000;
   font-weight: 600;
   padding: 0 15px;
 }
@@ -300,23 +337,46 @@
     margin-bottom: 15px;
   }
 }
+@media (max-width: 480px) {
+  .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first {
+    flex-flow: column;
+  }
+}
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .flight_form {
   width: 49%;
 }
+@media (max-width: 480px) {
+  .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .flight_form {
+    width: 100%;
+    z-index: auto;
+  }
+}
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .flight_to {
   width: 49%;
+}
+@media (max-width: 480px) {
+  .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .flight_to {
+    width: 100%;
+  }
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area {
   padding: 10px 0;
   border: 1px solid #E0E2E5;
   border-radius: 8px;
   background: #ffffff;
+  z-index: 2;
+  position: inherit;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area span {
   font-size: 10px;
   font-weight: 400;
   color: #8188AB;
   padding: 0 15px;
+}
+@media (max-width: 480px) {
+  .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area {
+    z-index: auto;
+  }
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .switch_btn {
   width: 30px;
@@ -328,7 +388,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  z-index: 9999;
+  z-index: 8;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .switch_btn img {
   width: 15px;
@@ -336,6 +396,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 480px) {
+  .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .switch_btn {
+    left: 90%;
+  }
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound {
   display: flex;
@@ -359,15 +424,16 @@
   border: 1px solid #E0E2E5;
   border-radius: 8px;
   background: #ffffff;
-}
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  height: 35px;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area .date_icon {
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 50%;
+  top: 47%;
   right: 15px;
   transform: translateY(-50%);
 }
@@ -433,7 +499,7 @@
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
   width: 100%;
-  height: 30px;
+  height: 25px;
   display: flex;
   line-height: 30px;
   font-size: 10px;
@@ -599,6 +665,7 @@
   margin: 0;
   font-size: 10px;
   color: #8188AB;
+  text-transform: uppercase;
 }
 .search_result .price_by_date .price_day_slider .inner .slid_block a .block_btm {
   padding: 10px;
@@ -717,7 +784,7 @@
   flex-flow: column;
   justify-content: space-between;
   height: 100%;
-  padding: 0 15px;
+  padding: 0 20px;
   border-right: 2px dashed rgba(63, 48, 249, 0.2);
   border-left: 2px dashed rgba(63, 48, 249, 0.2);
 }
@@ -776,9 +843,10 @@
   margin: 0;
 }
 .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_top .flight_stop_detail .border-dot {
-  width: 80px;
-  border: 1px dashed #CAD1DE;
-  margin: 5px 0;
+  width: 90px;
+}
+.search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_top .flight_stop_detail .border-dot img {
+  width: 100%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_top .flight_stop_detail .border-dot {
@@ -823,7 +891,7 @@
 .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .show_detail a:after {
   content: "";
   position: absolute;
-  left: 103%;
+  left: 105%;
   top: 50%;
   width: 0;
   height: 0;
@@ -831,6 +899,15 @@
   border-bottom: 3px solid transparent;
   border-left: 3px solid #00AEEF;
   transform: translate(-50%, -50%);
+}
+.search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .show_detail.open_detail a:after {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid #00AEEF;
+  left: 105%;
+  top: 54%;
 }
 .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .info_price_origin {
   width: auto;
@@ -845,12 +922,19 @@
   }
 }
 .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .info_price_origin .refundable {
-  padding: 4px 10px;
+  padding: 0px;
   font-size: 10px;
-  color: #000000;
+  color: #119300;
   font-weight: 500;
-  background: #E0E2E5;
-  border: 1px solid #E0E2E5;
+  margin-right: 15px;
+  display: inline-table;
+  border-radius: 5px;
+}
+.search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .info_price_origin .no_refundable {
+  padding: 0px;
+  font-size: 10px;
+  color: #FF0000;
+  font-weight: 500;
   margin-right: 15px;
   display: inline-table;
   border-radius: 5px;
@@ -862,7 +946,7 @@
 }
 .search_result .result_listing.one_way_list .search_block .listing_block .block_detail .block_detail_btm .info_price_origin .ogigin_price span {
   font-size: 20px;
-  color: #000000;
+  color: #FC7E66;
 }
 .search_result .result_listing.one_way_list .search_block .listing_block .block_price {
   width: 100%;
@@ -1001,13 +1085,6 @@
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .tab-pane:last-child {
     margin: 0;
   }
-  .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .tab-pane.active .card-header {
-    background: #ebf9fe;
-    border-bottom-color: #E0E2E5;
-  }
-  .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .tab-pane.active .card-header h5 a {
-    color: #0045FF;
-  }
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body {
   margin: 15px 0 0;
@@ -1103,12 +1180,22 @@
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top {
   display: flex;
   padding: 0 20px;
+  width: 100%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+  }
+}
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_left {
+  width: 10%;
+}
+@media (max-width: 767px) {
+  .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_left {
+    width: 100%;
+    text-align: center;
   }
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_left img {
@@ -1132,9 +1219,11 @@
   color: #8188AB;
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right {
-  padding: 0 0 0 75px;
+  padding: 0 35px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right {
@@ -1148,10 +1237,12 @@
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right .flight_info_detail {
   text-align: right;
+  width: 40%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right .flight_info_detail {
     text-align: center;
+    width: 100%;
   }
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right .flight_info_detail h4 {
@@ -1189,7 +1280,7 @@
   }
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right .flight_duration {
-  width: 140px;
+  width: 20%;
   padding: 0 20px;
   text-align: center;
 }
@@ -1197,6 +1288,7 @@
   .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right .flight_duration {
     padding: 15px 10px;
     margin: 0 auto;
+    width: auto;
   }
 }
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt .detail_top .detail_right .flight_duration p {
@@ -1772,8 +1864,9 @@
 }
 .search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_top .block_inner .block_detail_top .flight_stop_detail .border-dot {
   width: 80px;
-  border: 1px dashed #CAD1DE;
-  margin: 5px 0;
+}
+.search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_top .block_inner .block_detail_top .flight_stop_detail .border-dot img {
+  width: 100%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_top .block_inner .block_detail_top .flight_stop_detail .border-dot {
@@ -1847,12 +1940,19 @@
   }
 }
 .search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_detail_btm .info_price_origin .refundable {
-  padding: 4px 10px;
+  padding: 0;
   font-size: 10px;
-  color: #000000;
+  color: #119300;
+  font-weight: 400;
+  margin-right: 15px;
+  display: inline-table;
+  border-radius: 5px;
+}
+.search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_detail_btm .info_price_origin .no_refundable {
+  padding: 0px;
+  font-size: 10px;
+  color: #FF0000;
   font-weight: 500;
-  background: #E0E2E5;
-  border: 1px solid #E0E2E5;
   margin-right: 15px;
   display: inline-table;
   border-radius: 5px;
@@ -1864,7 +1964,7 @@
 }
 .search_result .result_listing.roundtrip_list .search_block .listing_block .block_main .block_detail_btm .info_price_origin .ogigin_price span {
   font-size: 20px;
-  color: #000000;
+  color: #FC7E66;
 }
 .search_result .result_listing.roundtrip_list .search_block .listing_block .block_price {
   width: 100%;
@@ -1970,6 +2070,11 @@
     color: #ffffff;
     border-radius: 15px;
   }
+  .search_result .result_listing.roundtrip_list .search_block .detail_info_show .nav-tabs li a:hover {
+    background: #00AEEF;
+    color: #ffffff;
+    border-radius: 15px;
+  }
 }
 @media (min-width: 768px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card {
@@ -2002,13 +2107,6 @@
   }
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .tab-pane:last-child {
     margin: 0;
-  }
-  .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .tab-pane.active .card-header {
-    background: #ebf9fe;
-    border-bottom-color: #E0E2E5;
-  }
-  .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .tab-pane.active .card-header h5 a {
-    color: #0045FF;
   }
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body {
@@ -2101,6 +2199,7 @@
   padding: 20px 0;
   border: 1px solid #E0E2E5;
   border-radius: 10px;
+  margin: 0 0 20px;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt {
@@ -2111,6 +2210,7 @@
   display: flex;
   padding: 0 20px;
   justify-content: space-between;
+  position: relative;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top {
@@ -2123,6 +2223,9 @@
   font-size: 10px;
   font-weight: 500;
   color: #1943FF;
+  position: absolute;
+  top: 0;
+  right: 20px;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .flight_going {
@@ -2134,11 +2237,15 @@
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left {
   display: flex;
   padding: 0;
+  width: 100%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left {
     flex-wrap: wrap;
   }
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_left {
+  width: 10%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_left {
@@ -2167,9 +2274,11 @@
   color: #8188AB;
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right {
-  padding: 0 0 0 75px;
+  padding: 0 35px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  width: 90%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right {
@@ -2183,10 +2292,12 @@
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right .flight_info_detail {
   text-align: right;
+  width: 40%;
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right .flight_info_detail {
     text-align: center;
+    width: 100%;
   }
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right .flight_info_detail h4 {
@@ -2225,7 +2336,7 @@
   }
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right .flight_duration {
-  width: 140px;
+  width: 20%;
   padding: 0 20px;
   text-align: center;
 }
@@ -2233,6 +2344,7 @@
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right .flight_duration {
     padding: 15px 10px;
     margin: 0 auto;
+    width: auto;
   }
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt .detail_top .detail_inn_left .detail_right .flight_duration p {
@@ -2294,6 +2406,16 @@
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt:last-child {
   margin: 10px 0 0;
+  position: relative;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.flight_info_cnt:last-child:before {
+  width: 100%;
+  height: 1px;
+  background: #1943FF;
+  position: absolute;
+  top: -10px;
+  left: 0;
+  content: "";
 }
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .block_flight_info .tab_detail.fare_detail_cnt {
   padding: 30px 30px 20px;
@@ -2694,7 +2816,7 @@
   border-right: 10px solid transparent;
   border-top: 10px solid #E0E2E5;
   position: absolute;
-  bottom: -14px;
+  bottom: -15px;
   left: 50%;
   transform: translate(-50%, -50%);
   content: "";
@@ -2716,7 +2838,7 @@
   font-size: 16px;
   font-weight: 500;
   color: #8188AB;
-  margin: 0 0 5px;
+  margin: 0 0 2px;
 }
 .filter_saidbar .block_result_found span {
   font-size: 20px;
@@ -2767,8 +2889,9 @@
   float: right;
   color: #8188AB;
   font-weight: normal;
+  transition: 0.3s;
 }
-.filter_saidbar .short_by .block_shortby .accordion-group .accordion-heading.accordion-opened .accordion-toggle:after {
+.filter_saidbar .short_by .block_shortby .accordion-group.active .accordion-heading .accordion-toggle:after {
   content: "";
 }
 .filter_saidbar .short_by .block_shortby .accordion-group .accordion-body .block_cmn {
@@ -3000,7 +3123,7 @@
   color: #8188AB;
   font-weight: normal;
 }
-.filter_saidbar .filter_by .fliter_block .cmn_block.pad_no .accordion-group .accordion-heading.accordion-opened .accordion-toggle:after {
+.filter_saidbar .filter_by .fliter_block .cmn_block.pad_no .accordion-group.active .accordion-heading .accordion-toggle:after {
   content: "";
 }
 .filter_saidbar .filter_by .fliter_block .cmn_block.pad_no .accordion-group .accordion-body .block_cmn {
@@ -3035,12 +3158,23 @@
 .filter_saidbar .filter_by .fliter_block .cmn_block.pad_no .accordion-group .accordion-body .block_cmn ul li:last-child {
   padding-bottom: 0;
 }
-.filter_saidbar .filter_by .fliter_block .cmn_block h5 {
+.filter_saidbar .filter_by .fliter_block .cmn_block .block_top_in {
   width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
   margin: 0 0 15px;
+}
+.filter_saidbar .filter_by .fliter_block .cmn_block .block_top_in h5 {
   font-size: 16px;
   font-weight: 500;
   color: #000000;
+}
+.filter_saidbar .filter_by .fliter_block .cmn_block .block_top_in .view_more {
+  font-size: 14px;
+  font-weight: 400;
+  color: #FC7E66;
+  display: block;
 }
 .filter_saidbar .filter_by .fliter_block .cmn_block ul {
   width: 100%;
@@ -3063,6 +3197,9 @@
   line-height: normal;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .filter_saidbar .filter_by .fliter_block .cmn_block ul li .custom_checkbox input {
   position: absolute;
@@ -3119,12 +3256,9 @@
 .filter_saidbar .filter_by .fliter_block .cmn_block ul li:last-child {
   padding-bottom: 0;
 }
-.filter_saidbar .filter_by .fliter_block .cmn_block .view_more {
-  margin: 10px 0 0;
-  font-size: 14px;
-  font-weight: 400;
-  color: #FC7E66;
-  display: block;
+.filter_saidbar .filter_by .fliter_block .cmn_block ul li span {
+  margin-left: 10px;
+  white-space: nowrap;
 }
 
 .banner_detail {
@@ -3142,7 +3276,7 @@
 }
 .banner_detail .cnt_left img {
   width: 50px;
-  height: 50px;
+  height: auto;
   margin: 0 20px 0 0;
 }
 .banner_detail .cnt_left h2 {
@@ -3150,6 +3284,7 @@
   font-weight: 400;
   color: #ffffff;
   margin: 0;
+  line-height: 22px;
 }
 .banner_detail .cnt_right ul {
   display: flex;
@@ -3206,6 +3341,20 @@
   background: #FFDD0F;
   border: 1px solid #FFDD0F;
   color: #012178;
+}
+@media (max-width: 767px) {
+  .banner_detail .cnt_right ul li p {
+    font-size: 13px;
+  }
+}
+@media (max-width: 480px) {
+  .banner_detail .cnt_right ul li {
+    width: 25%;
+  }
+  .banner_detail .cnt_right ul li p {
+    font-size: 11px;
+    margin-right: 10px;
+  }
 }
 
 .detail_info_main {
@@ -4372,13 +4521,15 @@
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   color: #000000;
 }
 .detail_info_main .detail_info_right .cmn_block .partial_pay_info ul li p {
   margin: 0;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  margin-right: 10px;
 }
 .detail_info_main .detail_info_right .cmn_block .partial_pay_info ul li p img {
   margin: 0 0 0 10px;
@@ -4386,12 +4537,15 @@
 }
 .detail_info_main .detail_info_right .cmn_block .partial_pay_info ul li span {
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .detail_info_main .detail_info_right .cmn_block .partial_pay_info ul li img {
   display: inline-flex;
 }
 .detail_info_main .detail_info_right .cmn_block .total_payment {
-  padding: 15px;
+  padding: 10px 15px;
   background: #1943FF;
   border-radius: 0 0 4px 4px;
 }
@@ -4409,6 +4563,12 @@
 }
 .detail_info_main .detail_info_right .cmn_block .total_payment ul li span {
   font-weight: 700;
+}
+.detail_info_main .detail_info_right .cmn_block .total_payment ul li span.text_line {
+  text-decoration: line-through;
+}
+.detail_info_main .detail_info_right .cmn_block .total_payment ul li:last-child {
+  font-size: 20px;
 }
 .detail_info_main .detail_info_right .cmn_block.policies .block_inner {
   padding: 15px;
@@ -4430,6 +4590,27 @@
   font-weight: 400;
   color: #00AEEF;
 }
+.detail_info_main .detail_info_right.subscribe_payment_detail .block_top .summary_info .info_top ul li {
+  text-transform: none;
+}
+.detail_info_main .detail_info_right.subscribe_payment_detail .block_top .summary_info .info_top .btm_aerrow:after {
+  border-bottom: 12px solid #F5F5F5;
+}
+.detail_info_main .detail_info_right.subscribe_payment_detail .block_top .summary_info .info_top .btm_aerrow:before {
+  border-bottom: 12px solid #F5F5F5;
+}
+.detail_info_main .detail_info_right.subscribe_payment_detail .cmn_block .block_inner ul {
+  padding: 0 15px;
+}
+.detail_info_main .detail_info_right.subscribe_payment_detail .cmn_block .block_inner ul li {
+  padding-bottom: 15px;
+}
+.detail_info_main .detail_info_right.subscribe_payment_detail .cmn_block.policies .block_inner ul {
+  padding: 0;
+}
+.detail_info_main .detail_info_right.subscribe_payment_detail .cmn_block.policies .block_inner ul li {
+  padding-bottom: 0;
+}
 @media (max-width: 991px) {
   .detail_info_main.payment_info .detail_info_left {
     margin: 30px 0 0;
@@ -4440,7 +4621,7 @@
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_time {
   width: 100%;
-  background: #8188AB;
+  background: #1943FF;
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -4469,11 +4650,6 @@
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info.no_pad {
   padding: 0;
-}
-@media (max-width: 575px) {
-  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info {
-    padding: 20px 15px;
-  }
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_travellers {
   margin: 0;
@@ -4775,6 +4951,11 @@
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode.no_pad {
   padding: 0 30px;
 }
+@media (max-width: 767px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode.no_pad {
+    padding: 0 20px;
+  }
+}
 @media (max-width: 575px) {
   .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode {
     padding: 20px;
@@ -4816,7 +4997,7 @@
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_payment_mode .block_detail .block_laycredit_checkbox {
   width: 100%;
-  background: rgba(25, 221, 0, 0.1);
+  background: #ebf9fe;
   padding: 15px 20px;
   margin: 20px 0;
   display: flex;
@@ -5060,7 +5241,7 @@
   padding: 0 30px;
   display: flex;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
   .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio {
     flex-flow: column;
   }
@@ -5068,15 +5249,25 @@
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li {
   display: flex;
   justify-content: space-between;
-  padding: 0 100px 0 0;
+  padding: 15px 20px;
   align-items: center;
   color: #8188AB;
   font-size: 14px;
   font-weight: 400;
+  margin-right: 20px;
+  background: #FFECEC;
+  min-width: 240px;
+  border-radius: 8px;
 }
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li {
-    padding: 0 0 10px 0;
+    min-width: auto;
+  }
+}
+@media (max-width: 575px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li {
+    min-width: 100%;
+    margin-bottom: 15px;
   }
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li .custom_radio {
@@ -5091,7 +5282,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #000000;
+  color: #8188AB;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li .custom_radio span {
   display: block;
@@ -5130,7 +5321,11 @@
   background: #FC7E66;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li:last-child {
-  padding: 0;
+  margin: 0;
+  background: #F5F4FA;
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li.select .custom_radio {
+  color: #000000;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select {
   padding: 0 30px;
@@ -5633,6 +5828,12 @@
     display: none;
   }
 }
+.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li.active_tab .custom_radio {
+  color: #000000;
+}
+.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li.active_tab .custom_radio .left {
+  color: #000000;
+}
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li .custom_radio {
   width: 100%;
   display: flex;
@@ -5646,7 +5847,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #000000;
+  color: #8188AB;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li .custom_radio input {
   position: absolute;
@@ -5683,11 +5884,11 @@
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li .custom_radio .left {
   font-size: 14px;
   font-weight: 400;
-  color: #000000;
+  color: #8188AB;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li .custom_radio .left span {
   display: block;
-  font-size: 12px;
+  font-size: 10px;
   color: #8188AB;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li .custom_radio .right {
@@ -5698,7 +5899,7 @@
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .custom_tab li .custom_radio .right span {
   display: block;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
   color: #8188AB;
 }
@@ -5801,7 +6002,7 @@
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount {
   width: 80px;
   padding: 0 5px;
-  text-align: center;
+  text-align: right;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount input {
   width: 100%;
@@ -5810,6 +6011,7 @@
   color: #0045FF;
   border: none;
   text-align: center;
+  border-bottom: 1px solid #E0E2E5;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .pay_block {
   width: 25px;
@@ -5930,6 +6132,12 @@
   align-items: center;
   justify-content: center;
 }
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-body .block_inn ul li .block_pay_instalment {
+    margin-top: 15px;
+    justify-content: flex-start;
+  }
+}
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-body .block_inn ul li .block_pay_instalment .block_amount {
   width: 80px;
   padding: 0 5px;
@@ -5942,6 +6150,7 @@
   color: #0045FF;
   border: none;
   text-align: center;
+  border-bottom: 1px solid #E0E2E5;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-body .block_inn ul li .block_pay_instalment .pay_block {
   width: 25px;
@@ -5972,6 +6181,11 @@
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-body .block_inn ul li .block_pay_instalment .pay_block a:hover {
   background: #00BFFD;
   color: #ffffff;
+}
+@media (max-width: 480px) {
+  .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-body .block_inn ul li {
+    flex-flow: column;
+  }
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-body .block_inn ul.instalment_detail li {
   align-items: flex-start;
@@ -6007,10 +6221,18 @@
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .block_installment_date p span {
   font-weight: 500;
-  color: #FC7E66;
+  color: #0045FF;
 }
 .detail_info_main.payment_info .detail_info_left .block_condition_agree {
-  margin: 0 0 20px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 1199px) {
+  .detail_info_main.payment_info .detail_info_left .block_condition_agree {
+    flex-flow: column;
+  }
 }
 .detail_info_main.payment_info .detail_info_left .block_condition_agree ul {
   width: 100%;
@@ -6103,13 +6325,20 @@
   padding-bottom: 0;
 }
 .detail_info_main.payment_info .detail_info_left .btn_payment {
-  width: 100%;
-  margin: 30px 0 0;
+  width: auto;
+  margin: 0px 0 0;
+}
+@media (max-width: 1199px) {
+  .detail_info_main.payment_info .detail_info_left .btn_payment {
+    width: 100%;
+    margin-top: 20px;
+    text-align: right;
+  }
 }
 .detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip {
   display: inline-block;
   line-height: 50px;
-  padding: 0 25px;
+  padding: 0 20px;
   font-size: 20px;
   color: #ffffff;
   font-weight: 300;
@@ -6119,9 +6348,10 @@
   z-index: 9;
   overflow: hidden;
   font-weight: 400;
+  white-space: nowrap;
 }
 .detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip img {
-  margin: 0 0 0 80px;
+  margin: 0 0 0 50px;
   height: 15px;
 }
 .detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip::before {
@@ -6146,6 +6376,20 @@
   .detail_info_main.payment_info .detail_info_left .btn_payment .btn_laytrip {
     font-size: 14px;
   }
+}
+.detail_info_main.payment_info.subscribe_payment .detail_info_left .block_condition_agree {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+.detail_info_main.payment_info.subscribe_payment .detail_info_left .btn_payment {
+  margin: 0;
+}
+.detail_info_main.payment_info.subscribe_payment .detail_info_left .btn_payment .btn_laytrip {
+  padding: 0 20px;
+}
+.detail_info_main.payment_info.subscribe_payment .detail_info_left .btn_payment .btn_laytrip img {
+  margin: 0 0 0 50px;
 }
 @media (max-width: 991px) {
   .detail_info_main.book_confirm_login .detail_info_left {
@@ -6315,6 +6559,7 @@
   width: 100%;
   margin: 30px 0 0;
   display: flex;
+  justify-content: flex-end;
 }
 .detail_info_main.book_confirm_login .detail_info_left .btn_backhome a {
   display: flex;
@@ -6325,7 +6570,7 @@
   color: #ffffff;
   font-weight: 300;
   border-radius: 8px;
-  background: #FC7E66;
+  background: #1943FF;
   position: relative;
   z-index: 9;
   overflow: hidden;
@@ -6343,13 +6588,13 @@
   left: 0;
   width: 100%;
   height: 0%;
-  background: #1943FF;
+  background: #FC7E66;
   z-index: -1;
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
 }
 .detail_info_main.book_confirm_login .detail_info_left .btn_backhome a:hover {
-  border-color: #1943FF;
+  border-color: #FC7E66;
 }
 .detail_info_main.book_confirm_login .detail_info_left .btn_backhome a:hover:before {
   height: 190%;
@@ -6621,7 +6866,7 @@
   background: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 99999;
 }
 .page_load .page_load_inner {
   width: 600px;
@@ -6737,7 +6982,7 @@
 .page_load .block_not_available .block_not_available_inner a {
   display: inline-block;
   line-height: 50px;
-  padding: 0 25px;
+  padding: 0 40px;
   font-size: 20px;
   color: #ffffff;
   font-weight: 400;
@@ -6833,7 +7078,7 @@
 .page_load .block_session-timeout .block_session-timeout_inner a {
   display: inline-block;
   line-height: 50px;
-  padding: 0 25px;
+  padding: 0 40px;
   font-size: 20px;
   color: #ffffff;
   font-weight: 400;
@@ -6873,7 +7118,7 @@
   }
 }
 .page_load .block_feedback {
-  width: 450px;
+  width: 1024px;
   max-width: 96%;
   float: left;
   position: absolute;
@@ -6881,7 +7126,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
-  padding: 40px;
+  padding: 40px 80px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
@@ -6891,8 +7136,15 @@
     padding: 20px;
   }
 }
+.page_load .block_feedback .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-weight: normal;
+  opacity: 1;
+  z-index: 99;
+}
 .page_load .block_feedback .block_feedback_inner {
-  width: 670px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -6917,11 +7169,12 @@
   font-size: 16px;
   font-weight: 500;
   color: #707070;
-  margin: 0 0 25px;
+  margin: 0 0 65px;
 }
 @media (max-width: 767px) {
   .page_load .block_feedback .block_feedback_inner p {
     font-size: 16px;
+    margin: 0 0 35px;
   }
 }
 .page_load .block_feedback .block_feedback_inner .block_feedback_add {
@@ -6932,18 +7185,66 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 0 0 20px;
-  padding: 0 25px;
+  margin: 0 0 70px;
+  padding: 0;
   list-style: none;
 }
-@media (max-width: 575px) {
+@media (max-width: 767px) {
   .page_load .block_feedback .block_feedback_inner .block_feedback_add ul {
-    padding: 0 35px;
+    margin: 0 0 20px;
+  }
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li:before {
+  width: 100%;
+  height: 3px;
+  background: #EFEFEF;
+  position: absolute;
+  top: 31%;
+  left: 100%;
+  content: "";
+  z-index: -1;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li:last-child:before {
+  display: none;
+}
+@media (max-width: 991px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li:before {
+    width: 300%;
+    top: 29%;
+    left: 0;
+  }
+}
+@media (max-width: 767px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li:before {
+    width: 320%;
+    top: 29%;
+    left: 0;
+  }
+}
+@media (max-width: 575px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li:before {
+    width: 280%;
+    top: 27%;
+    left: 0%;
   }
 }
 @media (max-width: 480px) {
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul {
-    padding: 0;
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li:before {
+    width: 320%;
+    top: 27%;
+    left: 0%;
+  }
+}
+@media (max-width: 360px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li:before {
+    width: 290%;
+    top: 27%;
+    left: 0%;
   }
 }
 .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a {
@@ -6953,47 +7254,122 @@
   flex-flow: column;
   justify-content: center;
   line-height: normal;
+  transition: 0.25s ease-out;
 }
 .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a img {
-  height: 50px;
-  margin: 0 0 10px;
+  height: 100px;
+  position: relative;
+  transform: scale(1);
+  transition: 0.25s ease-out;
 }
-@media (max-width: 767px) {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a img.normal {
+  opacity: 1;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a img.on_hover {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+@media (max-width: 991px) {
   .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a img {
-    margin: 0 0 10px;
-    height: 50px;
+    margin: 0;
+    width: 50px;
+    height: auto;
+  }
+}
+@media (max-width: 480px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a img {
+    margin: 0;
+    width: 30px;
+    height: auto;
   }
 }
 .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a span {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
-  color: #707070;
+  margin: 20px 0 0px;
+  color: #D9D9D9;
+  transition: 0.25s ease-out;
 }
-@media (max-width: 575px) {
+@media (max-width: 991px) {
   .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a span {
-    font-size: 16px;
+    margin: 20px 0 0;
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a span {
+    margin: 10px 0 0;
+    font-size: 8px;
   }
 }
 .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a:before {
   display: none;
 }
-@media (max-width: 575px) {
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li {
-    margin: 0 0 15px;
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a.active img {
+  transform: scale(1.4);
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a.active img.normal {
+  opacity: 0;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a.active img.on_hover {
+  opacity: 1;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a.active span {
+  color: #707070;
+  margin: 30px 0 0;
+}
+@media (max-width: 991px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a.active span {
+    margin: 20px 0 0;
   }
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_comment {
-  width: 100%;
-  margin: 0 0 30px;
+@media (max-width: 480px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a.active span {
+    margin: 10px 0 0;
+  }
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_comment label {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a:hover img {
+  transform: scale(1.4);
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a:hover img.normal {
+  opacity: 0;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a:hover img.on_hover {
+  opacity: 1;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a:hover span {
+  color: #707070;
+  margin: 30px 0 0;
+}
+@media (max-width: 991px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a:hover span {
+    margin: 20px 0 0;
+  }
+}
+@media (max-width: 480px) {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add ul li a:hover span {
+    margin: 10px 0 0;
+  }
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_comment {
+  width: 50%;
+}
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_comment label {
   width: 100%;
   font-size: 12px;
   font-weight: 400;
   color: #8188AB;
   text-align: left;
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_comment textarea {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_comment textarea {
   width: 100%;
   height: 50px;
   border: none;
@@ -7004,18 +7380,18 @@
   resize: none;
 }
 @media (max-width: 767px) {
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_comment textarea {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_comment textarea {
     font-size: 14px;
   }
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn {
-  width: 100%;
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn {
+  width: 50%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn button {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn button {
   display: inline-block;
-  height: 40px;
+  height: 50px;
   padding: 0 25px;
   font-size: 16px;
   color: #ffffff;
@@ -7027,7 +7403,7 @@
   overflow: hidden;
   border: none;
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn button:before {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn button:before {
   content: "";
   position: absolute;
   top: 0;
@@ -7039,40 +7415,40 @@
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn button img {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn button img {
   margin: 0 0 0 15px;
   height: 15px;
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn button:hover {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn button:hover {
   border-color: #FC7E66;
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn button:hover:before {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn button:hover:before {
   height: 190%;
 }
 @media (max-width: 575px) {
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn button {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn button {
     font-size: 14px;
     height: 40px;
     padding: 0 10px;
   }
 }
-.page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn a {
+.page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn a {
   margin: 40px 0 0;
   display: block;
 }
 @media (max-width: 767px) {
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn a {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn a {
     margin: 20px 0 0;
   }
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn a img {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn a img {
     width: 30%;
   }
 }
 @media (max-width: 575px) {
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn a {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn a {
     margin: 20px 0 0;
   }
-  .page_load .block_feedback .block_feedback_inner .block_feedback_add .feedback_btn a img {
+  .page_load .block_feedback .block_feedback_inner .block_feedback_add .block_feedback_form .feedback_btn a img {
     width: 40%;
   }
 }
@@ -7133,7 +7509,7 @@
 .page_load .block_price_changes .block_price_changes_inner .block_im {
   width: 100%;
   text-align: center;
-  margin: 0 0 10px;
+  margin: 0 0 20px;
 }
 .page_load .block_price_changes .block_price_changes_inner .block_im img {
   max-width: 100%;
@@ -7390,6 +7766,7 @@
 .baggage_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right {
   width: 100%;
   display: flex;
+  flex-flow: column;
 }
 @media (max-width: 767px) {
   .baggage_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right {
@@ -7399,7 +7776,10 @@
   }
 }
 .baggage_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .detail_left {
-  width: 12%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 @media (max-width: 767px) {
   .baggage_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .detail_left {
@@ -7412,20 +7792,20 @@
   object-fit: cover;
   height: auto;
   width: auto;
-  padding-bottom: 4px;
+  padding-right: 15px;
   position: inherit;
-  max-width: 40px;
-  max-height: 40px;
+  max-width: 50px;
+  max-height: 50px;
 }
 .baggage_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .detail_left p {
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
   color: #000000;
   margin: 0 0 2px;
 }
 .baggage_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .detail_left span {
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 400;
   color: #8188AB;
 }
 .baggage_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .detail_right {
@@ -7509,7 +7889,7 @@
   font-weight: 300;
   color: #8188AB;
   margin: 10px 0 0;
-  text-align: center;
+  text-align: left;
 }
 
 .cancellation_policy_modal .modal-dialog {
@@ -7519,7 +7899,6 @@
 .cancellation_policy_modal .modal-dialog .modal-content {
   padding: 30px;
   border-radius: 20px;
-  height: 52vh;
 }
 @media (max-width: 767px) {
   .cancellation_policy_modal .modal-dialog .modal-content {
@@ -7561,7 +7940,6 @@
   width: 100%;
   display: flex;
   align-items: center;
-  overflow-y: auto;
 }
 @media (max-width: 767px) {
   .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main {
@@ -7581,6 +7959,7 @@
 }
 .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .rules_cnt_top {
   display: flex;
+  flex-flow: column;
 }
 @media (max-width: 767px) {
   .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .rules_cnt_top {
@@ -7589,7 +7968,10 @@
   }
 }
 .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .rules_cnt_top .detail_left {
-  width: 11%;
+  width: auto;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
 }
 @media (max-width: 767px) {
   .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .rules_cnt_top .detail_left {
@@ -7602,10 +7984,10 @@
   object-fit: cover;
   height: auto;
   width: auto;
-  padding-bottom: 4px;
+  padding-right: 15px;
   position: inherit;
-  max-width: 40px;
-  max-height: 40px;
+  max-width: 50px;
+  max-height: 50px;
 }
 .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .rules_cnt_top .detail_left p {
   font-size: 14px;
@@ -7620,7 +8002,7 @@
 }
 .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .rules_cnt_top .detail_right {
   width: 90%;
-  padding: 0 0 0 15px;
+  padding: 0;
 }
 @media (max-width: 767px) {
   .cancellation_policy_modal .modal-dialog .modal-content .block_modal_main .block_modal_right .rules_cnt_top .detail_right {
@@ -7895,7 +8277,7 @@
 .block_booking_failed .block_booking_failed_inner a {
   display: inline-block;
   line-height: 50px;
-  padding: 0 25px;
+  padding: 0 40px;
   font-size: 20px;
   color: #ffffff;
   font-weight: 400;

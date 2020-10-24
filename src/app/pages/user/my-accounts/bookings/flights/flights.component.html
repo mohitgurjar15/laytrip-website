@@ -36,8 +36,10 @@
                             </div>
                             <div class="flight_stop_detail">
                                 <p>{{item.duration}}</p>
-                                <div class="border-dot"></div>
-                                <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Stop</span>
+                                <div class="border-dot">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
+                                </div>
+                                <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Non-Stop</span>
                             </div>
                             <div class="detail_info">
                                 <p>Arrival</p>
@@ -46,7 +48,7 @@
                             </div>
                         </div>
                         <div class="block_detail_btm">
-                            <div class="show_detail">
+                            <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
                                 <a href="javascript:void(0);" class="show_more_detail"
                                     (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
@@ -110,9 +112,12 @@
                                             </div>
                                             <div class="flight_stop_detail">
                                                 <p>2h</p>
-                                                <div class="border-dot"></div>
+                                                <div class="border-dot">
+                                                    <img src="{{s3BucketUrl}}assets/images/icon/flight-duration_im.svg"
+                                                        alt="Duration Images">
+                                                </div>
                                                 <span>{{ trip.stops[0].stop_count === 0 ? 'Non -' : trip.stops[0].stop_count }}
-                                                    Stop</span>
+                                                    Non Stop</span>
                                             </div>
                                             <div class="detail_info">
                                                 <p>Arrival</p>
@@ -202,7 +207,8 @@
                                                         alt="Airlines Logo"
                                                         onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                                     <p>{{ flightInfo?.airline_name }}</p>
-                                                    <span>{{ flightInfo?.airline }} - {{ flightInfo?.flight_number }}</span>
+                                                    <span>{{ flightInfo?.airline }} -
+                                                        {{ flightInfo?.flight_number }}</span>
                                                 </div>
                                                 <div class="detail_right">
                                                     <div class="flight_info_detail">
@@ -228,8 +234,8 @@
                                                             <span>{{ flightInfo?.arrival_info?.country }}</span></p>
                                                     </div>
                                                 </div>
-                                             </div>
-                                             <div class="flight_going" *ngIf="i === 0">Outwards</div>
+                                            </div>
+                                            <div class="flight_going" *ngIf="i === 0">Outwards</div>
                                         </div>
 
                                     </div>
@@ -336,7 +342,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    
+
                                     <p>The baggage information is just for reference. Please Check with airline before
                                         check-in.</p>
                                 </div>
@@ -360,7 +366,7 @@
                         <div class="card-body">
                             <div class="tab_detail cancellation_rules_cnt">
                                 <div class="triangle_right"></div>
-                                <div class="rules_cnt_top">
+                               <!--  <div class="rules_cnt_top">
                                     <div class="detail_left">
                                         <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
                                         <p>Indigo</p>
@@ -378,7 +384,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>

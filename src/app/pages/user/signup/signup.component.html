@@ -9,37 +9,7 @@
         </div>
         <div class="modal_cnt">
             <form [formGroup]="signupForm">
-                <div class="form_row">
-                    <div class="field_form left">
-                        <label>First Name<sup>*</sup></label>
-                        <div class="text_field">
-                            <input class="border-css"
-                                [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}"
-                                type="text" formControlName="first_name" maxlength="50" tabindex="101"
-                                placeholder="Enter First Name">
-                            <div
-                                *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors">
-                                <div class="error_text" *ngIf="signupForm.controls.first_name.errors.required">Please
-                                    enter your first name.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field_form right">
-                        <label>Last Name<sup>*</sup></label>
-                        <div class="text_field">
-                            <input class="border-css"
-                                [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}"
-                                type="text" formControlName="last_name" maxlength="50" tabindex="102"
-                                placeholder="Enter Last Name">
-                            <div class="error_text"
-                                *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
-                                <div *ngIf="signupForm.controls.last_name.errors.required">Please enter your last name.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+              
                 <div class="form_row">
                     <label>Email<sup>*</sup></label>
                     <div class="text_field">
