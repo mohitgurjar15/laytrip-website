@@ -78,7 +78,7 @@ var ProfileComponent = /** @class */ (function () {
             language_id: [''],
             passport_expiry: [''],
             passport_number: ['']
-        });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
     };
     ProfileComponent.prototype.getCountry = function () {
         var _this = this;

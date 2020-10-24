@@ -34,4 +34,20 @@ export function fileSizeValidator(file) {
     };
   } 
 
-  
+  export function optValidation() {
+   
+    return (form: FormGroup): {[key: string]: any} => {
+      return (!form.value.otp1 || !form.value.otp2 || !form.value.otp3 || !form.value.otp4 || !form.value.otp5 || !form.value.otp6) 
+                ? { otpsError : true } 
+                : null;
+    };
+  }
+
+  export function phoneAndPhoneCodeValidation() {
+   
+    return (form: FormGroup): {[key: string]: any} => {
+      return (!form.value.phone_no || !form.value.country_code) 
+                ? { phoneAndPhoneCodeError : true } 
+                : null;
+    };
+  }
