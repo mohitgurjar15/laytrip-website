@@ -275,28 +275,48 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   }
 }
 
-/* 
-.account_part {
-	.account_cnt_main {
-		.update_location_detail {
-			.detail_update {
-				.form_row {
-					.field_bolck {
-						.field_inn {
-							.text_field {
-                .passport_expiry_cal{
-                  .ui-calendar{
-                    .ui-datepicker{
-                      width: 200px !important;
-                      min-width: auto !important;
+::ng-deep{
+  .account_part {
+    .account_cnt_main {
+      .update_location_detail {
+        .detail_update {
+          .form_row {
+            .field_bolck {
+              .field_inn {
+                .text_field {
+                  .passport_expiry_cal{                  
+                    .ui-calendar {                    
+                        .ui-datepicker {
+                          width: 200px !important;
+                          min-width: auto !important;
+                        }                        
                     }
                   }
                 }
-							}
-						}
-					}
-				}
+              }
+            }
+          }
+        }
+      }
+    }
+  } 
+} 
+::ng-deep{
+  .ui-calendar {
+    .ui-datepicker{
+      width: 200px !important;
+      min-width: 200px !important;
+    }
+  }
+}
+
+
+.ng-select.ng-select-single {
+	.ng-select-container {
+		.ng-value-container {
+			.ng-placeholder{
+				font-size: 14px;
 			}
 		}
 	}
-} */
+}

@@ -170,17 +170,14 @@ export class TravelerFormComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-      console.log("s",this.adultForm.value)
       let country_id = this.adultForm.value.country_id.id;
       if (!Number(country_id)) {
-        console.log(this.traveler.country)
         if(this.traveler.country){
           country_id = ( this.traveler.country.id ) ? this.traveler.country.id : '';
         } else {
           country_id = this.location.country.id;
         }
       }
-      console.log(country_id)
     
       let jsonData = {
         title: this.adultForm.value.title,
@@ -205,19 +202,19 @@ export class TravelerFormComponent implements OnInit {
         };
         jsonData = Object.assign(jsonData, adultObj);
       }
-      // console.log(this.adultForm.value.country_code,jsonData)
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
-          // this.travelerFormChange.observers.push(data);
           this.travelerFormChange.emit(data);
           $('.collapse').collapse('hide');
           $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
-          console.log('error');
           this.submitted = this.loading = false;
           if (error.status === 401) {
+            this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             this.router.navigate(['/']);
+          } else {
+            this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
           }
         });
       } else {
@@ -239,6 +236,7 @@ export class TravelerFormComponent implements OnInit {
         }, (error: HttpErrorResponse) => {
           this.submitted = this.loading = false;
           if (error.status === 401) {
+            this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             this.router.navigate(['/']);
           } else {
             this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });

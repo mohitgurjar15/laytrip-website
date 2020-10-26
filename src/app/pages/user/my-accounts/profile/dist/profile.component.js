@@ -61,8 +61,8 @@ var ProfileComponent = /** @class */ (function () {
         this.location = JSON.parse(location);
         this.profileForm = this.formBuilder.group({
             title: ['mr'],
-            first_name: ['', [forms_1.Validators.required]],
-            last_name: ['', [forms_1.Validators.required]],
+            first_name: ['', [forms_1.Validators.required, custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
+            last_name: ['', [forms_1.Validators.required, custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
             country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [forms_1.Validators.required]],
             country_id: [this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
@@ -74,6 +74,7 @@ var ProfileComponent = /** @class */ (function () {
             city_name: [''],
             gender: ['M'],
             profile_pic: [''],
+            currency_id: [''],
             address2: [''],
             language_id: [''],
             passport_expiry: [''],
@@ -185,6 +186,7 @@ var ProfileComponent = /** @class */ (function () {
             _this.selectResponse = res;
             _this.is_type = res.gender;
             _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
+            _this.getStates(res.country);
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -256,7 +258,6 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("passportNumber", this.profileForm.value.passport_number);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
             formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
-            // console.log(typeof this.profileForm.value.country_id )
             if (typeof this.profileForm.value.country_id === 'string') {
                 if (this.selectResponse.country.id) {
                     formdata.append("country_id", this.selectResponse.country.id);

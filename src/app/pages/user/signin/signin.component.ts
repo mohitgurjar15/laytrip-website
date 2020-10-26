@@ -117,4 +117,8 @@ export class SigninComponent  implements OnInit {
     this.fieldTextType = !this.fieldTextType;
   }
 
+  socialError(error){
+    console.log(error)
+    this.apiError = error;
+  } 
 }

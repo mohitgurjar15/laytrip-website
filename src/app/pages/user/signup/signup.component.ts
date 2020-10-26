@@ -22,7 +22,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   signupForm: FormGroup;
   submitted = false;
   closeResult = '';
-  is_gender: boolean = true;
   is_type: string = 'M';
   emailForVerifyOtp : string = '';
   loading: boolean = false;
@@ -79,29 +78,12 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
  
-  clickGender(event,type){
-    this.is_type = '';
-    this.is_gender = false;       
-      if(type =='M'){
-        this.is_type = 'M';
-      } else if(type =='F'){
-        this.is_type = 'F';        
-      } else if(type =='N') {
-        this.is_type = 'N';
-      } else {
-        this.is_gender = false;
-        this.is_type = '';
-      }
-      this.is_gender = true;
-  }
+ 
     
   onSubmit() {
     // this.openOtpPage();
     this.submitted = this.loading  = true;
-    
-    if(this.signupForm.controls.gender.errors && this.is_gender){
-      this.signupForm.controls.gender.setValue(this.is_type);
-    } 
+   
     if (this.signupForm.invalid) {
       this.submitted = true;      
       this.loading = false;
