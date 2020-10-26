@@ -11,6 +11,7 @@ export class NotFoundComponent implements OnInit {
   constructor() { }
   s3BucketUrl = environment.s3BucketUrl;
   ngOnInit(): void {
+    window.scroll(0,0);
     document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
   }
 

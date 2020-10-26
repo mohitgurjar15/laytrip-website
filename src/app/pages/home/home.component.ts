@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   swapError = '';
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
+  flightSearchFormSubmitted:boolean=false;
 
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationCode;
@@ -70,8 +71,8 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
   ) {
     this.flightSearchForm = this.fb.group({
-      fromDestination: [[Validators.required]],
-      toDestination: [[Validators.required]],
+      fromDestination: ['',[Validators.required]],
+      toDestination: ['',[Validators.required]],
       departureDate: [[Validators.required]],
       returnDate: [[Validators.required]]
     });
@@ -211,6 +212,7 @@ export class HomeComponent implements OnInit {
   }
 
   searchFlights() {
+    this.flightSearchFormSubmitted=true;
     let queryParams: any = {};
     queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
     queryParams.departure = this.searchFlightInfo.departure;
@@ -223,6 +225,11 @@ export class HomeComponent implements OnInit {
     queryParams.adult = this.searchFlightInfo.adult;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
+
+    if(this.flightSearchForm){
+      console.log(this.flightSearchForm.controls)
+    }
+
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));

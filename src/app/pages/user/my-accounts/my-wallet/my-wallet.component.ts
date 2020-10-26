@@ -35,6 +35,7 @@ export class MyWalletComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.page = 1;
     this.page2 = 1;
     this.isEarningPointNotFound = false;

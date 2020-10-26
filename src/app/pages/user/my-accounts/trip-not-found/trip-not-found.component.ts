@@ -13,6 +13,7 @@ export class TripNotFoundComponent implements OnInit {
   constructor(private _location: Location) { }
 
   ngOnInit() {
+    window.scroll(0,0);
   }
   backClicked() {
     this._location.back();

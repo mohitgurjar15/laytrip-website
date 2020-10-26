@@ -19,6 +19,7 @@ export class FaqComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.loadJquery();
     this.loading = true;
     this.genericService.getFaqData().subscribe((res: any) => {

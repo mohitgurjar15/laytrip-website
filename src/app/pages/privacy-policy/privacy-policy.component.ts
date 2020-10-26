@@ -18,6 +18,7 @@ export class PrivacyPolicyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     const pageType = 'privacy-policy';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {

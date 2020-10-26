@@ -25,6 +25,7 @@ export class ContactUsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.contactUsForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       country_code: ['Select'],

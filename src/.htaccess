@@ -44,4 +44,9 @@
   BrowserMatch ^Mozilla/4\.0[678] no-gzip
   BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
   Header append Vary User-Agent
+
+
+  <filesMatch ".(jpg|jpeg|png|gif|ico|webp|svg)$">
+  Header set Cache-Control "max-age=2628000, public"
+  </filesMatch>
 </IfModule>

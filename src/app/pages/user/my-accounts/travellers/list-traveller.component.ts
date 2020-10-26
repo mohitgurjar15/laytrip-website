@@ -47,6 +47,7 @@ export class ListTravellerComponent implements OnInit {
 
 
   ngOnInit() {
+    window.scroll(0,0);
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
   
