@@ -101,6 +101,10 @@ var SigninComponent = /** @class */ (function () {
     SigninComponent.prototype.toggleFieldTextType = function () {
         this.fieldTextType = !this.fieldTextType;
     };
+    SigninComponent.prototype.socialError = function (error) {
+        console.log(error);
+        this.apiError = error;
+    };
     __decorate([
         core_1.Input()
     ], SigninComponent.prototype, "pageData");

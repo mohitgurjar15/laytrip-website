@@ -310,6 +310,9 @@
                                             class="focus-input100 login-error">
                                             <div *ngIf="profileForm.controls.first_name.errors.required"
                                                 class="text-danger">Please enter your first name.</div>
+                                                <div *ngIf="(profileForm.controls.first_name.errors.cannotContainSpace)">
+                                                    <p class="text-danger">Please enter valid first name </p>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="form_field half">
@@ -321,6 +324,9 @@
                                             class="focus-input100 login-error">
                                             <div *ngIf="profileForm.controls.last_name.errors.required"
                                                 class="text-danger">Please enter your last name.</div>
+                                            <div *ngIf="(profileForm.controls.last_name.errors.cannotContainSpace)">
+                                                <p class="text-danger">Please enter valid last name </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -89,6 +89,7 @@ export class TravellerFormComponent implements OnInit {
   setTravelerForm() {
     
       this.traveller = this.travelerInfo;
+      
       this.coAccountForm.patchValue({
         title: this.travelerInfo.title?this.travelerInfo.title:'mr',
         firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',

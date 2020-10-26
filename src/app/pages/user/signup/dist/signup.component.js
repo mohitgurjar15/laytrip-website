@@ -21,7 +21,6 @@ var SignupComponent = /** @class */ (function () {
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
         this.closeResult = '';
-        this.is_gender = true;
         this.is_type = 'M';
         this.emailForVerifyOtp = '';
         this.loading = false;
@@ -59,31 +58,10 @@ var SignupComponent = /** @class */ (function () {
         }
     };
     SignupComponent.prototype.ngOnDestroy = function () { };
-    SignupComponent.prototype.clickGender = function (event, type) {
-        this.is_type = '';
-        this.is_gender = false;
-        if (type == 'M') {
-            this.is_type = 'M';
-        }
-        else if (type == 'F') {
-            this.is_type = 'F';
-        }
-        else if (type == 'N') {
-            this.is_type = 'N';
-        }
-        else {
-            this.is_gender = false;
-            this.is_type = '';
-        }
-        this.is_gender = true;
-    };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
         // this.openOtpPage();
         this.submitted = this.loading = true;
-        if (this.signupForm.controls.gender.errors && this.is_gender) {
-            this.signupForm.controls.gender.setValue(this.is_type);
-        }
         if (this.signupForm.invalid) {
             this.submitted = true;
             this.loading = false;

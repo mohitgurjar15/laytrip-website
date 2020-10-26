@@ -45,12 +45,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.signup = function (formValue) {
         var data = {
             "signup_via": "web",
-            "first_name": formValue.first_name,
-            "last_name": formValue.last_name,
             "email": formValue.email,
             "password": formValue.password,
             "confirm_password": formValue.confirm_password,
-            "gender": 'M',
             "device_type": 1,
             "device_model": "RNE-L22",
             "device_token": "123abc#$%456",
@@ -126,6 +123,9 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.getSubscriptionPlanDetail = function (data) {
         return this.http.get(this.apiURL + 'v1/subscription/get-plan/' + data.id + '/' + data.currency, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.payNowSubscription = function (data) {
+        return this.http.post(this.apiURL + 'v1/subscription', data, this.commonFunction.setHeaders());
     };
     UserService = __decorate([
         core_1.Injectable({

@@ -139,10 +139,8 @@ var TravelerFormComponent = /** @class */ (function () {
             return;
         }
         else {
-            console.log("s", this.adultForm.value);
             var country_id = this.adultForm.value.country_id.id;
             if (!Number(country_id)) {
-                console.log(this.traveler.country);
                 if (this.traveler.country) {
                     country_id = (this.traveler.country.id) ? this.traveler.country.id : '';
                 }
@@ -150,7 +148,6 @@ var TravelerFormComponent = /** @class */ (function () {
                     country_id = this.location.country.id;
                 }
             }
-            console.log(country_id);
             var jsonData = {
                 title: this.adultForm.value.title,
                 first_name: this.adultForm.value.firstName,
@@ -173,19 +170,20 @@ var TravelerFormComponent = /** @class */ (function () {
                 };
                 jsonData = Object.assign(jsonData, adultObj);
             }
-            // console.log(this.adultForm.value.country_code,jsonData)
             if (this.traveler && this.traveler.userId) {
                 this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe(function (data) {
                     _this.submitted = _this.loading = false;
-                    // this.travelerFormChange.observers.push(data);
                     _this.travelerFormChange.emit(data);
                     $('.collapse').collapse('hide');
                     $('#accordion-' + _this.type).hide();
                 }, function (error) {
-                    console.log('error');
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
+                        _this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
                         _this.router.navigate(['/']);
+                    }
+                    else {
+                        _this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
                     }
                 });
             }
@@ -206,6 +204,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 }, function (error) {
                     _this.submitted = _this.loading = false;
                     if (error.status === 401) {
+                        _this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
                         _this.router.navigate(['/']);
                     }
                     else {

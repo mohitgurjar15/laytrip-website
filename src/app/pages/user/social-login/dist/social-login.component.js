@@ -20,6 +20,7 @@ var SocialLoginComponent = /** @class */ (function () {
         this.authService = authService;
         this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.socialError = new core_1.EventEmitter();
         this.apiError = '';
         this.test = false;
     }
@@ -43,7 +44,6 @@ var SocialLoginComponent = /** @class */ (function () {
                     "os_version": "7.0"
                 };
                 _this.userService.socialLogin(json_data).subscribe(function (data) {
-                    console.log(data);
                     if (data.user_details) {
                         localStorage.setItem("_lay_sess", data.user_details.access_token);
                         $('#sign_in_modal').modal('hide');
@@ -51,7 +51,8 @@ var SocialLoginComponent = /** @class */ (function () {
                         _this.router.url;
                     }
                 }, function (error) {
-                    console.log(error);
+                    _this.socialError.emit(error.message);
+                    _this.toastr.error(error.message, 'SignIn Error');
                 });
             }
         });
@@ -103,9 +104,10 @@ var SocialLoginComponent = /** @class */ (function () {
                     document.getElementById('navbarNav').click();
                 }
             }, function (error) {
-                _this.toastr.error(error.message, 'SignIn Error');
+                _this.socialError.emit(error.message);
             });
         }, function (error) {
+            _this.socialError.emit('Authentication failed.');
             // this.toastr.error("Something went wrong!", 'SignIn Error');
         });
     };
@@ -159,12 +161,13 @@ var SocialLoginComponent = /** @class */ (function () {
                             _this.router.url;
                         }
                     }, function (error) {
+                        _this.socialError.emit(error.message);
                         _this.toastr.error(error.message, 'SignIn Error');
                     });
                 });
             }
             else {
-                _this.apiError = 'User login failed';
+                _this.socialError.emit('Authentication failed.');
                 // this.toastr.error("Something went wrong!", 'SignIn Error');
             }
         }, { scope: 'email' });
@@ -173,6 +176,9 @@ var SocialLoginComponent = /** @class */ (function () {
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
     };
     SocialLoginComponent.prototype.ngDoCheck = function () { };
+    __decorate([
+        core_1.Output()
+    ], SocialLoginComponent.prototype, "socialError");
     __decorate([
         core_1.ViewChild('loginRef')
     ], SocialLoginComponent.prototype, "loginElement");

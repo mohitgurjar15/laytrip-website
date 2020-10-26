@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.phoneAndPhoneCodeValidation = exports.optValidation = exports.phoneCodeAndPhoneValidation = exports.fileSizeValidator = exports.validateImageFile = void 0;
+exports.WhiteSpaceValidator = exports.phoneAndPhoneCodeValidation = exports.optValidation = exports.phoneCodeAndPhoneValidation = exports.fileSizeValidator = exports.validateImageFile = void 0;
 function validateImageFile(name) {
     var allowed_extensions = ['jpg', 'jpeg', 'png'];
     var ext = name.substring(name.lastIndexOf('.') + 1);
@@ -48,3 +48,15 @@ function phoneAndPhoneCodeValidation() {
     };
 }
 exports.phoneAndPhoneCodeValidation = phoneAndPhoneCodeValidation;
+var WhiteSpaceValidator = /** @class */ (function () {
+    function WhiteSpaceValidator() {
+    }
+    WhiteSpaceValidator.cannotContainSpace = function (control) {
+        if (control.value.indexOf(' ') >= 0) {
+            return { cannotContainSpace: true };
+        }
+        return null;
+    };
+    return WhiteSpaceValidator;
+}());
+exports.WhiteSpaceValidator = WhiteSpaceValidator;

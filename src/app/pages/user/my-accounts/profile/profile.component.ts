@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation } from '../../../../_helpers/custom.validators';
+import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation,WhiteSpaceValidator } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -47,12 +47,12 @@ export class ProfileComponent implements OnInit {
   seletedDob :any;
 
   dobMinDate= new Date();
+  location;
   dobMaxDate: moment.Moment = moment();
   locale = {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
   };
-  location;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -76,8 +76,8 @@ export class ProfileComponent implements OnInit {
     
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
-      first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
+      first_name: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
+      last_name: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
       country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
       country_id: [this.location.country.name ? this.location.country.name : ''],
       dob: ['', Validators.required],
@@ -89,12 +89,16 @@ export class ProfileComponent implements OnInit {
       city_name: [''],
       gender: ['M'],
       profile_pic: [''],      
+      currency_id: [''],      
       address2: [''],      
       language_id: [''],      
       passport_expiry: [''],      
       passport_number: [''],      
     }, { validator: phoneAndPhoneCodeValidation() });
+    
   }
+
+
 
   getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
@@ -201,6 +205,7 @@ export class ProfileComponent implements OnInit {
 
       this.is_type = res.gender;
       this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
+      this.getStates(res.country);
 
       this.profileForm.patchValue({      
           first_name: res.firstName,
@@ -222,7 +227,6 @@ export class ProfileComponent implements OnInit {
           passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '', 
           passport_number: res.passportNumber  
       });
-
     }, (error: HttpErrorResponse) => {
       this.loading = false;   
       if (error.status === 401) {
@@ -272,7 +276,6 @@ export class ProfileComponent implements OnInit {
       formdata.append("passportNumber",this.profileForm.value.passport_number);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
       formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
-      // console.log(typeof this.profileForm.value.country_id )
       if(typeof this.profileForm.value.country_id === 'string'){
         if(this.selectResponse.country.id){
           formdata.append("country_id", this.selectResponse.country.id);

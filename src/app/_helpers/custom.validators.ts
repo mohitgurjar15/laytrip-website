@@ -2,52 +2,66 @@ import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 export function validateImageFile(name: String) {
 
-    let allowed_extensions = ['jpg','jpeg','png'];
-    var ext = name.substring(name.lastIndexOf('.') + 1);
-    if (allowed_extensions.lastIndexOf(ext.toLowerCase()) !== -1)
-    {
-      return true;
-    }
-    else {
-        return false;
-    }
+  let allowed_extensions = ['jpg', 'jpeg', 'png'];
+  var ext = name.substring(name.lastIndexOf('.') + 1);
+  if (allowed_extensions.lastIndexOf(ext.toLowerCase()) !== -1) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 export function fileSizeValidator(file) {
 
-    var size = Math.floor(file.size/1000);
-      if(size <= 2000){
-        return true;
-      }
-      else{
-        return false;
-      }
+  var size = Math.floor(file.size / 1000);
+  if (size <= 2000) {
+    return true;
   }
-  
-  export function phoneCodeAndPhoneValidation() {
-    return (form: FormGroup): {[key: string]: any} => {
-      console.log(form.value.country_code)
-      return (form.value.phone_no ) ||
-             (!form.value.phone_no) 
-                ? { phoneCodeAndPhoneError : true } 
-                : { phoneCodeAndPhoneError : false } ;
-    };
-  } 
+  else {
+    return false;
+  }
+}
 
-  export function optValidation() {
-   
-    return (form: FormGroup): {[key: string]: any} => {
-      return (!form.value.otp1 || !form.value.otp2 || !form.value.otp3 || !form.value.otp4 || !form.value.otp5 || !form.value.otp6) 
-                ? { otpsError : true } 
-                : null;
-    };
+export function phoneCodeAndPhoneValidation() {
+  return (form: FormGroup): { [key: string]: any } => {
+    console.log(form.value.country_code)
+    return (form.value.phone_no) ||
+      (!form.value.phone_no)
+      ? { phoneCodeAndPhoneError: true }
+      : { phoneCodeAndPhoneError: false };
+  };
+}
+
+export function optValidation() {
+
+  return (form: FormGroup): { [key: string]: any } => {
+    return (!form.value.otp1 || !form.value.otp2 || !form.value.otp3 || !form.value.otp4 || !form.value.otp5 || !form.value.otp6)
+      ? { otpsError: true }
+      : null;
+  };
+}
+
+export function phoneAndPhoneCodeValidation() {
+
+  return (form: FormGroup): { [key: string]: any } => {
+    return (!form.value.phone_no || !form.value.country_code)
+      ? { phoneAndPhoneCodeError: true }
+      : null;
+  };
+}
+
+export class WhiteSpaceValidator {
+
+  static cannotContainSpace(control: AbstractControl) : ValidationErrors | null {
+
+      if((control.value as string).indexOf(' ') >= 0){
+
+          return {cannotContainSpace: true}
+
+      }
+      return null;
+
   }
 
-  export function phoneAndPhoneCodeValidation() {
-   
-    return (form: FormGroup): {[key: string]: any} => {
-      return (!form.value.phone_no || !form.value.country_code) 
-                ? { phoneAndPhoneCodeError : true } 
-                : null;
-    };
-  }
+} 

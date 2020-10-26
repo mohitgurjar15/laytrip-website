@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class SocialLoginComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
+  @Output() socialError = new EventEmitter<string>();
   apiError: string = '';
   test: boolean = false;
 
@@ -54,7 +55,6 @@ export class SocialLoginComponent implements OnInit {
           "os_version": "7.0"
         };
         this.userService.socialLogin(json_data).subscribe((data: any) => {
-          console.log(data);
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
@@ -62,7 +62,9 @@ export class SocialLoginComponent implements OnInit {
             this.router.url;
           }
         }, (error: HttpErrorResponse) => {
-          console.log(error);
+         
+          this.socialError.emit(error.message);
+          this.toastr.error(error.message, 'SignIn Error');
         });
       }
     });
@@ -118,9 +120,10 @@ export class SocialLoginComponent implements OnInit {
             document.getElementById('navbarNav').click();
           }
         }, (error: HttpErrorResponse) => {
-          this.toastr.error(error.message, 'SignIn Error');
+          this.socialError.emit(error.message);
         });
       }, (error) => {
+        this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       });
   }
@@ -179,12 +182,12 @@ export class SocialLoginComponent implements OnInit {
               this.router.url;
             }
           }, (error: HttpErrorResponse) => {
+            this.socialError.emit(error.message);
             this.toastr.error(error.message, 'SignIn Error');
           });
-
         });
       } else {
-        this.apiError = 'User login failed';
+        this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       }
     }, { scope: 'email' });
