@@ -42,20 +42,22 @@ export function optValidation() {
   };
 }
 
-export function phoneAndPhoneCodeValidation() {
+export function phoneAndPhoneCodeValidation(type='') {
   return (form: FormGroup): { [key: string]: any } => {
-    if(!form.value.phone_no){
-      return {phoneAndPhoneCodeError: true};
-    } if(!form.value.phone_no){      
-      return {phoneAndPhoneCodeError: true};
-    } else if(!form.value.phone_no || !form.value.country_code){
-      return {phoneAndPhoneCodeError: true};      
+    if(type == 'adult'){
+      if(!form.value.phone_no){
+        return {phoneAndPhoneCodeError: true};
+      } if(!form.value.phone_no){      
+        return {phoneAndPhoneCodeError: true};
+      } else if(!form.value.phone_no || !form.value.country_code){
+        return {phoneAndPhoneCodeError: true};      
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
-    /* return (!form.value.phone_no || !form.value.country_code)
-      ? { phoneAndPhoneCodeError: true }
-      : null; */
+   
   };
 }
 

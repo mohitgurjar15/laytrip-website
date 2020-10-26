@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit {
       language_id: [''],      
       passport_expiry: [''],      
       passport_number: [''],      
-    }, { validator: phoneAndPhoneCodeValidation() });
+    }, { validator: phoneAndPhoneCodeValidation('adult') });
 
     this.getProfileInfo();
   }
@@ -201,7 +201,6 @@ export class ProfileComponent implements OnInit {
       this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
       
       const country = res.country.id ? res.country : this.location.country;
-      console.log(country)
       this.getStates(country);
 
       this.profileForm.patchValue({      

@@ -64,7 +64,7 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     let location:any = this.cookieService.get('__loc');
     this.location = JSON.parse(location);
-   
+    
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
       gender: ['M', Validators.required],
@@ -78,7 +78,7 @@ export class TravelerFormComponent implements OnInit {
       passport_expiry : [''],
       frequently_no: [''],
       user_type: ['']
-    }, { validator: phoneAndPhoneCodeValidation() });
+    }, { validator: phoneAndPhoneCodeValidation(this.type) });
 
     this.setUserTypeValidation();
 
@@ -124,18 +124,16 @@ export class TravelerFormComponent implements OnInit {
       this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
     } else if (this.type === 'child') {
-      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
-      phoneControl.setValidators(null)
-      countryControl.setValidators(null);
       this.dobMinDate =  new Date(moment().subtract(12,'years').format("MM/DD/YYYY") );
       this.dobMaxDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
- 
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
+      phoneControl.setValidators(null)
+      countryControl.setValidators(null);
     } else if (this.type === 'infant') {
       this.dobMinDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
       this.dobMaxDate = new Date();
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
- 
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
@@ -167,6 +165,7 @@ export class TravelerFormComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
+      console.log(this.adultForm)
       this.submitted = true;
       this.loading = false;
       return;

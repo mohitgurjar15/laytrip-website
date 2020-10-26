@@ -79,7 +79,7 @@ var ProfileComponent = /** @class */ (function () {
             language_id: [''],
             passport_expiry: [''],
             passport_number: ['']
-        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
         this.getProfileInfo();
     };
     ProfileComponent.prototype.getCountry = function () {
@@ -177,7 +177,6 @@ var ProfileComponent = /** @class */ (function () {
             _this.is_type = res.gender ? res.gender : 'M';
             _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
             var country = res.country.id ? res.country : _this.location.country;
-            console.log(country);
             _this.getStates(country);
             _this.profileForm.patchValue({
                 first_name: res.firstName,
