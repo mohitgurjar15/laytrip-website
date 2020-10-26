@@ -79,3 +79,12 @@ a:hover {
 .home_banner .banner_inner .banner_tab .nav-tabs a.disable_module{
     cursor:no-drop;
 }
+
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .date_to .search_area{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    p{
+        font-size: 16px;
+    }
+}

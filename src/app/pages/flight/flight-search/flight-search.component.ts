@@ -111,12 +111,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
 
-      
+      this.dates=[];
+      console.log("this.dates",this.dates)
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
           this.flexibleLoading = false;
           this.​flexibleNotFound = false;
           this.dates = res;
+          console.log("this.dates1",this.dates)
         }
       }, err => {
         this.​flexibleNotFound = true;
