@@ -33,7 +33,7 @@ var ProfileComponent = /** @class */ (function () {
         this.minDate = {};
         this.maxDate = {};
         this.is_gender = true;
-        this.is_type = '';
+        this.is_type = 'M';
         this.imageFile = '';
         this.imageFileError = false;
         this.imageErrorMsg = 'Image is required';
@@ -53,10 +53,10 @@ var ProfileComponent = /** @class */ (function () {
         };
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        window.scroll(0, 0);
         this.getCountry();
         this.getLanguages();
         this.getCurrencies();
-        this.getProfileInfo();
         var location = this.cookieService.get('__loc');
         this.location = JSON.parse(location);
         this.profileForm = this.formBuilder.group({
@@ -80,6 +80,7 @@ var ProfileComponent = /** @class */ (function () {
             passport_expiry: [''],
             passport_number: ['']
         }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
+        this.getProfileInfo();
     };
     ProfileComponent.prototype.getCountry = function () {
         var _this = this;
@@ -138,22 +139,13 @@ var ProfileComponent = /** @class */ (function () {
         });
     };
     ProfileComponent.prototype.clickGender = function (event, type) {
-        this.is_type = '';
-        this.is_gender = false;
+        this.is_gender = true;
         if (type == 'M') {
             this.is_type = 'M';
         }
-        else if (type == 'F') {
+        else {
             this.is_type = 'F';
         }
-        else if (type == 'N') {
-            this.is_type = 'N';
-        }
-        else {
-            this.is_gender = false;
-            this.is_type = '';
-        }
-        this.is_gender = true;
     };
     ProfileComponent.prototype.onFileSelect = function (event) {
         var _this = this;
@@ -186,7 +178,7 @@ var ProfileComponent = /** @class */ (function () {
             _this.selectResponse = res;
             _this.is_type = res.gender;
             _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
-            _this.getStates(res.country);
+            res.country.id ? _this.getStates(res.country) : '';
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -224,6 +216,7 @@ var ProfileComponent = /** @class */ (function () {
             this.profileForm.controls.gender.setValue(this.is_type);
         }
         if (this.profileForm.invalid) {
+            console.log(this.profileForm);
             this.submitted = true;
             this.loading = false;
             //scroll top if any error 

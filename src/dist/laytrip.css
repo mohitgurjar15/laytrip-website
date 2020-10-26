@@ -97,6 +97,6 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   min-width: 200px !important;
 }
 
-.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-placeholder {
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-placeholder {
   font-size: 14px;
 }

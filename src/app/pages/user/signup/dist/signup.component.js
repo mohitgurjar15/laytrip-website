@@ -32,7 +32,7 @@ var SignupComponent = /** @class */ (function () {
             password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
             confirm_password: ['', forms_1.Validators.required]
         }, {
-            valiabedator: must_match_validators_1.MustMatch('password', 'confirm_password')
+            validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
     };
     SignupComponent.prototype.openSignInPage = function () {
@@ -60,8 +60,8 @@ var SignupComponent = /** @class */ (function () {
     SignupComponent.prototype.ngOnDestroy = function () { };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
-        // this.openOtpPage();
         this.submitted = this.loading = true;
+        console.log(this.signupForm);
         if (this.signupForm.invalid) {
             this.submitted = true;
             this.loading = false;

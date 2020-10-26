@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   maxDate: any = {};
   public startDate: Date;
   is_gender: boolean = true;
-  is_type: string = '';
+  is_type: string = 'M';
   public imageFile:any  = '';
   public imageFileError = false;
   public imageErrorMsg: string = 'Image is required';
@@ -70,7 +70,6 @@ export class ProfileComponent implements OnInit {
     this.getCountry();
     this.getLanguages();
     this.getCurrencies();
-    this.getProfileInfo();
     
     let location:any = this.cookieService.get('__loc');
     this.location = JSON.parse(location);
@@ -96,7 +95,9 @@ export class ProfileComponent implements OnInit {
       passport_expiry: [''],      
       passport_number: [''],      
     }, { validator: phoneAndPhoneCodeValidation() });
-    
+
+    this.getProfileInfo();
+
   }
 
 
@@ -158,19 +159,12 @@ export class ProfileComponent implements OnInit {
   }
 
   clickGender(event,type){
-    this.is_type = '';
-    this.is_gender = false;       
+    this.is_gender = true;       
       if(type =='M'){
         this.is_type = 'M';
-      } else if(type =='F'){
-        this.is_type = 'F';        
-      } else if(type =='N') {
-        this.is_type = 'N';
       } else {
-        this.is_gender = false;
-        this.is_type = '';
-      }
-      this.is_gender = true;
+        this.is_type = 'F';        
+      } 
   }
 
 
@@ -206,7 +200,8 @@ export class ProfileComponent implements OnInit {
 
       this.is_type = res.gender;
       this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
-      this.getStates(res.country);
+      
+      res.country.id ? this.getStates(res.country) : '';
 
       this.profileForm.patchValue({      
           first_name: res.firstName,
@@ -244,6 +239,7 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls.gender.setValue(this.is_type);
     }
     if (this.profileForm.invalid) {
+      console.log(this.profileForm)
       this.submitted = true;      
       this.loading = false;
       //scroll top if any error 

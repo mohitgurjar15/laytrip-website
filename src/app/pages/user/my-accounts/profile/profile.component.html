@@ -342,7 +342,7 @@
 
                                     </div>
                                     <div class="form_field half">
-                                        <label>Phone</label>
+                                        <label>Phone<sup>*</sup></label>
                                         <div class="text_field">
                                             <div class="phone_no">
                                                 <div class="code">
@@ -440,7 +440,8 @@
                                             <ul>
                                                 <li>
                                                     <a href="javascript:void(0);" (click)="clickGender($event,'M')"
-                                                        [ngClass]="is_gender && is_type == 'M' ? 'active_gender' : 'M'">
+                                                    [ngClass]="{'active_gender': is_type === 'M'}"
+                                                        >
                                                         <div class="gender_type">
                                                             <img class="default-icon"
                                                                 src="{{s3BucketUrl}}assets/images/icon/male.svg"

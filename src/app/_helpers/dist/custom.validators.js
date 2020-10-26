@@ -42,6 +42,7 @@ function optValidation() {
 exports.optValidation = optValidation;
 function phoneAndPhoneCodeValidation() {
     return function (form) {
+        console.log(form.value.phone_no, form.value.country_code);
         return (!form.value.phone_no || !form.value.country_code)
             ? { phoneAndPhoneCodeError: true }
             : null;
