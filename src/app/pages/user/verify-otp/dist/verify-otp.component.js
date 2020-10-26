@@ -97,11 +97,11 @@ var VerifyOtpComponent = /** @class */ (function () {
             this.userService.verifyOtp(data).subscribe(function (data) {
                 _this.otpVerified = true;
                 _this.submitted = _this.loading = false;
+                $('.modal_container').removeClass('right-panel-active');
                 $('#sign_in_modal').modal('hide');
                 localStorage.setItem("_lay_sess", data.userDetails.access_token);
                 var userDetails = jwt_helper_1.getLoginUserInfo();
                 var _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
-                console.log(_isSubscribeNow, userDetails.roleId);
                 if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
                     _this.router.navigate(['account/subscription']);
                 }

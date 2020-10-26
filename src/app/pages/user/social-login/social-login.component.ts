@@ -22,6 +22,7 @@ export class SocialLoginComponent implements OnInit {
   @Output() socialError = new EventEmitter<string>();
   apiError: string = '';
   test: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -153,7 +154,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
-
+    this.loading = true;
     window['FB'].login((response) => {
       if (response.authResponse) {
 
@@ -178,10 +179,12 @@ export class SocialLoginComponent implements OnInit {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
               this.test = true;
+               this.loading = false;
               document.getElementById('navbarNav').click();
               this.router.url;
             }
           }, (error: HttpErrorResponse) => {
+            this.loading = true;
             this.socialError.emit(error.message);
             this.toastr.error(error.message, 'SignIn Error');
           });

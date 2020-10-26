@@ -72,16 +72,17 @@ export class ProfileComponent implements OnInit {
     this.getCurrencies();
     
     let location:any = this.cookieService.get('__loc');
+
     this.location = JSON.parse(location);
     
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
-      first_name: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
-      last_name: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
+      first_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
+      last_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
       country_id: [this.location.country.name ? this.location.country.name : ''],
       dob: ['', Validators.required],
-      phone_no: ['', [Validators.required]],
+      country_code: [this.location.country.phonecode ? this.location.country.phonecode : ''],
+      phone_no: [''],
       address: [''],
       email: [''],
       zip_code: [''],
@@ -97,7 +98,6 @@ export class ProfileComponent implements OnInit {
     }, { validator: phoneAndPhoneCodeValidation() });
 
     this.getProfileInfo();
-
   }
 
 
@@ -159,12 +159,11 @@ export class ProfileComponent implements OnInit {
   }
 
   clickGender(event,type){
-    this.is_gender = true;       
-      if(type =='M'){
-        this.is_type = 'M';
-      } else {
-        this.is_type = 'F';        
-      } 
+    this.is_gender = true; 
+    this.is_type = 'M';      
+    if(type =='F'){
+      this.is_type = 'F';        
+    } 
   }
 
 
@@ -198,10 +197,12 @@ export class ProfileComponent implements OnInit {
       this.image = res.profilePic;
       this.selectResponse = res;
 
-      this.is_type = res.gender;
+      this.is_type = res.gender ? res.gender :'M';
       this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
       
-      res.country.id ? this.getStates(res.country) : '';
+      const country = res.country.id ? res.country : this.location.country;
+      console.log(country)
+      this.getStates(country);
 
       this.profileForm.patchValue({      
           first_name: res.firstName,
@@ -211,9 +212,9 @@ export class ProfileComponent implements OnInit {
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
           dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
-          country_code : res.countryCode,        
+          country_code : res.countryCode ? res.countryCode : this.location.country.phonecode,        
           phone_no  : res.phoneNo,        
-          country_id: res.country.name,
+          country_id: res.country.name ? res.country.name : this.location.country.name,
           state_id: res.state.name,       
           city_name  : res.cityName,        
           address  : res.address,  
@@ -223,6 +224,7 @@ export class ProfileComponent implements OnInit {
           passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '', 
           passport_number: res.passportNumber  
       });
+
     }, (error: HttpErrorResponse) => {
       this.loading = false;   
       if (error.status === 401) {
@@ -272,7 +274,7 @@ export class ProfileComponent implements OnInit {
       formdata.append("gender",this.is_type);
       formdata.append("passportNumber",this.profileForm.value.passport_number);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-      formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
+      formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
       if(typeof this.profileForm.value.country_id === 'string'){
         if(this.selectResponse.country.id){
           formdata.append("country_id", this.selectResponse.country.id);
@@ -284,9 +286,9 @@ export class ProfileComponent implements OnInit {
       }
 
       if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.selectResponse.state.id);
+        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : null);
       } else{
-        formdata.append("state_id", this.profileForm.value.state_id);
+        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : null);
       }
       if(typeof(this.profileForm.value.country_code) === 'string'){     
         formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code : '' );
@@ -294,14 +296,14 @@ export class ProfileComponent implements OnInit {
         formdata.append("country_code", this.selectResponse.countryCode);
       } 
       if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
-        formdata.append("language_id", this.selectResponse.preferredLanguage.id);        
+        formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id : null);        
       } else {
-        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : 1);
+        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : null);
       }
       if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
-        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id : '');
+        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id : null);
       } else {
-        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : 1);
+        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : null);
       }         
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 

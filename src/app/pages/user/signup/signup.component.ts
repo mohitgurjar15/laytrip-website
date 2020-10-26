@@ -15,7 +15,7 @@ declare var $: any;
   styleUrls: ['./signup.component.scss']
 })
 
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
@@ -73,11 +73,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
 
     }
-  }
- 
-  ngOnDestroy() {}
-
- 
+  } 
  
     
   onSubmit() {

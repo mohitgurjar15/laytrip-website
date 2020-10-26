@@ -23,6 +23,7 @@ var SocialLoginComponent = /** @class */ (function () {
         this.socialError = new core_1.EventEmitter();
         this.apiError = '';
         this.test = false;
+        this.loading = false;
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -136,6 +137,7 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.fbLogin = function () {
         var _this = this;
+        this.loading = true;
         window['FB'].login(function (response) {
             if (response.authResponse) {
                 window['FB'].api('/me', {
@@ -157,10 +159,12 @@ var SocialLoginComponent = /** @class */ (function () {
                             localStorage.setItem("_lay_sess", data.user_details.access_token);
                             $('#sign_in_modal').modal('hide');
                             _this.test = true;
+                            _this.loading = false;
                             document.getElementById('navbarNav').click();
                             _this.router.url;
                         }
                     }, function (error) {
+                        _this.loading = true;
                         _this.socialError.emit(error.message);
                         _this.toastr.error(error.message, 'SignIn Error');
                     });

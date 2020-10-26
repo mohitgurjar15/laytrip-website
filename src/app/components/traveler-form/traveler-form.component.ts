@@ -8,6 +8,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
+import { phoneAndPhoneCodeValidation } from '../../_helpers/custom.validators';
 
 
 declare var $: any;
@@ -77,7 +78,7 @@ export class TravelerFormComponent implements OnInit {
       passport_expiry : [''],
       frequently_no: [''],
       user_type: ['']
-    });
+    }, { validator: phoneAndPhoneCodeValidation() });
 
     this.setUserTypeValidation();
 
@@ -89,9 +90,9 @@ export class TravelerFormComponent implements OnInit {
         lastName: this.traveler.lastName,
         email: this.traveler.email,
         gender: this.traveler.gender ? this.traveler.gender : 'M',
-        country_code: this.traveler.countryCode,
+        country_code: this.traveler.countryCode ? this.traveler.countryCode : this.location.country.phonecode,
         phone_no: this.traveler.phoneNo,
-        country_id: this.traveler.country != null ? this.traveler.country.name : '',
+        country_id: this.traveler.country != null ? this.traveler.country.name : this.location.country.name,
         passport_number: this.traveler.passportNumber,
         dob: this.traveler.dob ? new Date(this.traveler.dob) : '',
         passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',

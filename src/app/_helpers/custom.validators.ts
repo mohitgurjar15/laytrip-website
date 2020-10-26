@@ -44,10 +44,18 @@ export function optValidation() {
 
 export function phoneAndPhoneCodeValidation() {
   return (form: FormGroup): { [key: string]: any } => {
-    console.log(form.value.phone_no,form.value.country_code)
-    return (!form.value.phone_no || !form.value.country_code)
+    if(!form.value.phone_no){
+      return {phoneAndPhoneCodeError: true};
+    } if(!form.value.phone_no){      
+      return {phoneAndPhoneCodeError: true};
+    } else if(!form.value.phone_no || !form.value.country_code){
+      return {phoneAndPhoneCodeError: true};      
+    } else {
+      return null;
+    }
+    /* return (!form.value.phone_no || !form.value.country_code)
       ? { phoneAndPhoneCodeError: true }
-      : null;
+      : null; */
   };
 }
 

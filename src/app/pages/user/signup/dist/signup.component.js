@@ -57,7 +57,6 @@ var SignupComponent = /** @class */ (function () {
             this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
         }
     };
-    SignupComponent.prototype.ngOnDestroy = function () { };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = this.loading = true;

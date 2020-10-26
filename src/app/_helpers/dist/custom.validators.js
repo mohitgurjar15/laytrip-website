@@ -42,10 +42,21 @@ function optValidation() {
 exports.optValidation = optValidation;
 function phoneAndPhoneCodeValidation() {
     return function (form) {
-        console.log(form.value.phone_no, form.value.country_code);
-        return (!form.value.phone_no || !form.value.country_code)
-            ? { phoneAndPhoneCodeError: true }
-            : null;
+        if (!form.value.phone_no) {
+            return { phoneAndPhoneCodeError: true };
+        }
+        if (!form.value.phone_no) {
+            return { phoneAndPhoneCodeError: true };
+        }
+        else if (!form.value.phone_no || !form.value.country_code) {
+            return { phoneAndPhoneCodeError: true };
+        }
+        else {
+            return null;
+        }
+        /* return (!form.value.phone_no || !form.value.country_code)
+          ? { phoneAndPhoneCodeError: true }
+          : null; */
     };
 }
 exports.phoneAndPhoneCodeValidation = phoneAndPhoneCodeValidation;

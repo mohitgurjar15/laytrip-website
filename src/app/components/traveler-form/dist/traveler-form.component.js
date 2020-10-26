@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var moment = require("moment");
 var environment_1 = require("../../../environments/environment");
+var custom_validators_1 = require("../../_helpers/custom.validators");
 var TravelerFormComponent = /** @class */ (function () {
     function TravelerFormComponent(formBuilder, flightService, router, commonFunction, cookieService, toastr) {
         this.formBuilder = formBuilder;
@@ -54,7 +55,7 @@ var TravelerFormComponent = /** @class */ (function () {
             passport_expiry: [''],
             frequently_no: [''],
             user_type: ['']
-        });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
         this.setUserTypeValidation();
         if (this.traveler.userId) {
             this.adultForm.patchValue({
@@ -63,9 +64,9 @@ var TravelerFormComponent = /** @class */ (function () {
                 lastName: this.traveler.lastName,
                 email: this.traveler.email,
                 gender: this.traveler.gender ? this.traveler.gender : 'M',
-                country_code: this.traveler.countryCode,
+                country_code: this.traveler.countryCode ? this.traveler.countryCode : this.location.country.phonecode,
                 phone_no: this.traveler.phoneNo,
-                country_id: this.traveler.country != null ? this.traveler.country.name : '',
+                country_id: this.traveler.country != null ? this.traveler.country.name : this.location.country.name,
                 passport_number: this.traveler.passportNumber,
                 dob: this.traveler.dob ? new Date(this.traveler.dob) : '',
                 passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
