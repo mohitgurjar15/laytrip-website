@@ -130,13 +130,16 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="coAccountForm.controls.country_code.errors" class="focus-input100 login-error">
+                    <!-- <div *ngIf="coAccountForm.controls.country_code.errors" class="focus-input100 login-error">
                         <div *ngIf="coAccountForm.controls.country_code.errors.required && coAccountForm.controls.country_code.touched"
                             class="text-danger">Please enter country code</div>
                     </div>
                     <div *ngIf="submitted && coAccountForm.controls.phone_no.errors" class="focus-input100 login-error">
                         <div *ngIf="coAccountForm.controls.phone_no.errors.required" class="text-danger">Please
                             enter phone no.</div>
+                    </div> -->
+                    <div *ngIf="(coAccountForm.hasError('phoneAndPhoneCodeError') && (coAccountForm.controls.country_code.touched || coAccountForm.controls.phone_no.touched)) || submitted">
+                        <p class="text-danger">Please enter phone number</p>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
+var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
     function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, activeModal, toastr, cookieService) {
         this.formBuilder = formBuilder;
@@ -55,7 +56,7 @@ var TravellerFormComponent = /** @class */ (function () {
             passport_expiry: [''],
             passport_number: [''],
             user_type: ['']
-        });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
         this.setUserTypeValidation();
         if (this.travellerId) {
             this.setTravelerForm();

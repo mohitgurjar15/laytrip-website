@@ -131,15 +131,7 @@
                                                         <p class="fb_animation w-100 mb-0"></p>
                                                         <p class="fb_animation w-100 mb-0"></p>
                                                     </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">
-                                                        <p class="fb_animation w-100 mb-0"></p>
-                                                        <p class="fb_animation w-100 mb-0"></p>
-                                                        <p class="fb_animation w-100 mb-0"></p>
-                                                        <p class="fb_animation w-100 mb-0"></p>
-                                                    </a>
-                                                </li>
+                                                </li>                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -377,11 +369,14 @@
                                                         value="0000 0000 00">
                                                 </div>
                                             </div>
-                                            <div *ngIf="(submitted  || profileForm.controls.country_code.touched) && profileForm.controls.country_code.errors"
+                                            <!-- <div *ngIf="(submitted  || profileForm.controls.country_code.touched) && profileForm.controls.country_code.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.country_code.errors.required"
                                                     class="text-danger">Please enter
                                                     country code.</div>
+                                            </div> -->
+                                            <div *ngIf="(profileForm.hasError('phoneAndPhoneCodeError') && (profileForm.controls.country_code.touched && profileForm.controls.phone_no.touched)) || submitted">
+                                                <p class="text-danger">Please enter phone number</p>
                                             </div>
                                         </div>
                                     </div>

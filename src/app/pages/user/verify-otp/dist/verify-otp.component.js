@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
+var custom_validators_1 = require("../../../_helpers/custom.validators");
 var VerifyOtpComponent = /** @class */ (function () {
     function VerifyOtpComponent(modalService, formBuilder, userService, router, commonFunctoin) {
         this.modalService = modalService;
@@ -35,7 +36,7 @@ var VerifyOtpComponent = /** @class */ (function () {
             otp4: ['', forms_1.Validators.required],
             otp5: ['', forms_1.Validators.required],
             otp6: ['', forms_1.Validators.required]
-        });
+        }, { validator: custom_validators_1.optValidation() });
     };
     VerifyOtpComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });
@@ -111,6 +112,12 @@ var VerifyOtpComponent = /** @class */ (function () {
                 _this.apiError = error.message;
                 _this.submitted = _this.loading = false;
             });
+        }
+    };
+    VerifyOtpComponent.prototype.onKeydown = function (event) {
+        var tabIndex = event.target.tabIndex ? '.tab' + (event.target.tabIndex - 1) : 1;
+        if (event.key == 'Backspace') {
+            $(tabIndex).focus();
         }
     };
     __decorate([

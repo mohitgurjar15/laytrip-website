@@ -5,7 +5,7 @@ import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { validateImageFile,fileSizeValidator } from '../../../../_helpers/custom.validators';
+import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -93,7 +93,7 @@ export class ProfileComponent implements OnInit {
       language_id: [''],      
       passport_expiry: [''],      
       passport_number: [''],      
-    });
+    }, { validator: phoneAndPhoneCodeValidation() });
   }
 
   getCountry() {

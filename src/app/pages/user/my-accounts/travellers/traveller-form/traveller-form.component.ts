@@ -12,6 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
+import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
 
 @Component({
   selector: 'app-traveller-form',
@@ -76,7 +77,7 @@ export class TravellerFormComponent implements OnInit {
       passport_expiry: [''],
       passport_number: [''],
       user_type: ['']
-    });
+    }, { validator: phoneAndPhoneCodeValidation() });
     this.setUserTypeValidation();
 
     if (this.travellerId) {
