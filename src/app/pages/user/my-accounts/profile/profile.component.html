@@ -117,7 +117,7 @@
                                         <div class="select_gender">
                                             <ul>
                                                 <li>
-                                                    <a href="javascript:void(0);">
+                                                    <a href="javascript:void(0);" class="active_gender">
                                                         <p class="fb_animation w-100 mb-0"></p>
                                                         <p class="fb_animation w-100 mb-0"></p>
                                                         <p class="fb_animation w-100 mb-0"></p>
@@ -125,7 +125,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0);" class="active_gender">
+                                                    <a href="javascript:void(0);" >
                                                         <p class="fb_animation w-100 mb-0"></p>
                                                         <p class="fb_animation w-100 mb-0"></p>
                                                         <p class="fb_animation w-100 mb-0"></p>
@@ -304,7 +304,7 @@
                                     <div class="form_field half">
                                         <label>First Name<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" formControlName="first_name" maxlength="20" tabindex="1">
+                                            <input type="text" formControlName="first_name"  maxlength="20" tabindex="1">
                                         </div>
                                         <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors"
                                             class="focus-input100 login-error">
@@ -313,12 +313,15 @@
                                                 <div *ngIf="(profileForm.controls.first_name.errors.cannotContainSpace)">
                                                     <p class="text-danger">Please enter valid first name </p>
                                                 </div>
+                                                <div *ngIf="(profileForm.controls.first_name.errors.minlength)">
+                                                    <p class="text-danger">First name must be longer than or equal to 3 characters </p>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="form_field half">
                                         <label>Last Name<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" formControlName="last_name" maxlength="20" tabindex="2">
+                                            <input type="text" formControlName="last_name"  minlength="3" maxlength="20" tabindex="2">
                                         </div>
                                         <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
                                             class="focus-input100 login-error">
@@ -327,6 +330,10 @@
                                             <div *ngIf="(profileForm.controls.last_name.errors.cannotContainSpace)">
                                                 <p class="text-danger">Please enter valid last name </p>
                                             </div>
+                                            <div *ngIf="(profileForm.controls.last_name.errors.minlength)">
+                                                <p class="text-danger">Last name must be longer than or equal to 3 characters </p>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -342,7 +349,7 @@
 
                                     </div>
                                     <div class="form_field half">
-                                        <label>Phone</label>
+                                        <label>Phone<sup>*</sup></label>
                                         <div class="text_field">
                                             <div class="phone_no">
                                                 <div class="code">
@@ -381,7 +388,8 @@
                                                     class="text-danger">Please enter
                                                     country code.</div>
                                             </div> -->
-                                            <div *ngIf="(profileForm.hasError('phoneAndPhoneCodeError') && (profileForm.controls.country_code.touched && profileForm.controls.phone_no.touched)) || submitted">
+                                            <div *ngIf="(submitted || profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) 
+                                             && profileForm.hasError('phoneAndPhoneCodeError')">
                                                 <p class="text-danger">Please enter phone number</p>
                                             </div>
                                         </div>
@@ -440,7 +448,8 @@
                                             <ul>
                                                 <li>
                                                     <a href="javascript:void(0);" (click)="clickGender($event,'M')"
-                                                        [ngClass]="is_gender && is_type == 'M' ? 'active_gender' : 'M'">
+                                                    [ngClass]="{'active_gender': is_type == 'M'}"
+                                                        >
                                                         <div class="gender_type">
                                                             <img class="default-icon"
                                                                 src="{{s3BucketUrl}}assets/images/icon/male.svg"
@@ -613,7 +622,8 @@
                                                     inputId="basic" formControlName="passport_expiry"
                                                     [minDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true"
                                                     [monthNavigator]="true" yearRange="2020:2030"
-                                                    [defaultDate]="dobMinDate" tabindex="16">
+                                                    [defaultDate]="dobMinDate" tabindex="16"
+                                                    panelStyleClass="calender-passport-expiry">
                                                 </p-calendar>
                                             </div>
                                         </div>

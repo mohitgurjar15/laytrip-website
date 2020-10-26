@@ -8,6 +8,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
+import { phoneAndPhoneCodeValidation } from '../../_helpers/custom.validators';
 
 
 declare var $: any;
@@ -63,7 +64,7 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     let location:any = this.cookieService.get('__loc');
     this.location = JSON.parse(location);
-   
+    
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
       gender: ['M', Validators.required],
@@ -77,7 +78,7 @@ export class TravelerFormComponent implements OnInit {
       passport_expiry : [''],
       frequently_no: [''],
       user_type: ['']
-    });
+    }, { validator: phoneAndPhoneCodeValidation(this.type) });
 
     this.setUserTypeValidation();
 
@@ -89,9 +90,9 @@ export class TravelerFormComponent implements OnInit {
         lastName: this.traveler.lastName,
         email: this.traveler.email,
         gender: this.traveler.gender ? this.traveler.gender : 'M',
-        country_code: this.traveler.countryCode,
+        country_code: this.traveler.countryCode ? this.traveler.countryCode : this.location.country.phonecode,
         phone_no: this.traveler.phoneNo,
-        country_id: this.traveler.country != null ? this.traveler.country.name : '',
+        country_id: this.traveler.country != null ? this.traveler.country.name : this.location.country.name,
         passport_number: this.traveler.passportNumber,
         dob: this.traveler.dob ? new Date(this.traveler.dob) : '',
         passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
@@ -123,18 +124,16 @@ export class TravelerFormComponent implements OnInit {
       this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
     } else if (this.type === 'child') {
-      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
-      phoneControl.setValidators(null)
-      countryControl.setValidators(null);
       this.dobMinDate =  new Date(moment().subtract(12,'years').format("MM/DD/YYYY") );
       this.dobMaxDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
- 
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
+      phoneControl.setValidators(null)
+      countryControl.setValidators(null);
     } else if (this.type === 'infant') {
       this.dobMinDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
       this.dobMaxDate = new Date();
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
- 
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
@@ -166,6 +165,7 @@ export class TravelerFormComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
+      console.log(this.adultForm)
       this.submitted = true;
       this.loading = false;
       return;

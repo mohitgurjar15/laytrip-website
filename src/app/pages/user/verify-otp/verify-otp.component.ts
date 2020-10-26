@@ -118,12 +118,11 @@ export class VerifyOtpComponent implements OnInit {
       this.userService.verifyOtp(data).subscribe((data: any) => {
         this.otpVerified = true;  
         this.submitted = this.loading = false;    
+        $('.modal_container').removeClass('right-panel-active');
         $('#sign_in_modal').modal('hide');
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         const userDetails = getLoginUserInfo();    
-
         const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
-        console.log(_isSubscribeNow,userDetails.roleId)
         if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
           this.router.navigate(['account/subscription']);
         } else {
@@ -139,9 +138,11 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onKeydown(event){
+    console.log(event.target.tabIndex)
     const tabIndex = event.target.tabIndex ? '.tab'+(event.target.tabIndex-1): 1;
     if(event.key == 'Backspace'){
       $(tabIndex).focus();
+      $('.tab'+event.target.tabIndex).val('');
     }
   }
 

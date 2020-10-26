@@ -15,7 +15,7 @@ declare var $: any;
   styleUrls: ['./signup.component.scss']
 })
 
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required]      
     },{
-      valiabedator: MustMatch('password', 'confirm_password'),
+      validators: MustMatch('password', 'confirm_password'),
     });
   }  
 
@@ -73,17 +73,13 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
 
     }
-  }
- 
-  ngOnDestroy() {}
-
- 
+  } 
  
     
   onSubmit() {
-    // this.openOtpPage();
     this.submitted = this.loading  = true;
    
+    console.log(this.signupForm)
     if (this.signupForm.invalid) {
       this.submitted = true;      
       this.loading = false;

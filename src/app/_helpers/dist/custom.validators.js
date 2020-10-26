@@ -40,11 +40,26 @@ function optValidation() {
     };
 }
 exports.optValidation = optValidation;
-function phoneAndPhoneCodeValidation() {
+function phoneAndPhoneCodeValidation(type) {
+    if (type === void 0) { type = ''; }
     return function (form) {
-        return (!form.value.phone_no || !form.value.country_code)
-            ? { phoneAndPhoneCodeError: true }
-            : null;
+        if (type == 'adult') {
+            if (!form.value.phone_no) {
+                return { phoneAndPhoneCodeError: true };
+            }
+            if (!form.value.phone_no) {
+                return { phoneAndPhoneCodeError: true };
+            }
+            else if (!form.value.phone_no || !form.value.country_code) {
+                return { phoneAndPhoneCodeError: true };
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
     };
 }
 exports.phoneAndPhoneCodeValidation = phoneAndPhoneCodeValidation;

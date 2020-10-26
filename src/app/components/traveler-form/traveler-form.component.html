@@ -125,15 +125,9 @@
             </div>
           </div>
         </div>
-        <div *ngIf="type === 'adult' && adultForm.controls.country_code.errors" class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.country_code.errors.required && adultForm.controls.country_code.touched"
-            class="text-danger">Please enter country code</div>
-        </div>
-        <div *ngIf="type === 'adult' && adultForm.controls.phone_no.errors" class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.phone_no.touched"
-            class="text-danger">Please enter phone no.</div>
-          <div *ngIf="adultForm.controls.phone_no.errors.minlength" class="text-danger">Phone number should be minimum
-            at least 10 digit</div>
+        <div *ngIf="(submitted || adultForm.controls.country_code.touched || adultForm.controls.phone_no.touched) 
+          && adultForm.hasError('phoneAndPhoneCodeError')">
+            <p class="text-danger">Please enter phone number</p>
         </div>
       </div>
     </div>
@@ -207,6 +201,7 @@
               [monthNavigator]="true"
               yearRange="2020:2030"
               [defaultDate]="dobMaxDate"
+              panelStyleClass="calender-passport-expiry"
               >
           </p-calendar>
           <div
