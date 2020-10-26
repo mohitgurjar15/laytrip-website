@@ -41,14 +41,11 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnInit() {    
 
     this.signupForm = this.formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-      confirm_password: ['', Validators.required],
-      gender: ['', Validators.required],
+      confirm_password: ['', Validators.required]      
     },{
-      validator: MustMatch('password', 'confirm_password'),
+      valiabedator: MustMatch('password', 'confirm_password'),
     });
   }  
 

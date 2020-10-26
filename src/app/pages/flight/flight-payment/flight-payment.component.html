@@ -12,7 +12,7 @@
                                 </div>
                                 
                                 <div class="block_detail">
-                                    <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}" sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
                                 </div>
 
                             </div>
@@ -20,7 +20,9 @@
                                     [flightSummary]="flightSummary" 
                                     laycreditpoints="{{laycreditpoints}}"
                                     (selectInstalmentMode)="selectInstalmentMode($event)" 
-                                    (getInstalmentData)="getInstalmentData($event)">
+                                    (getInstalmentData)="getInstalmentData($event)"
+                                    (redeemableLayCredit)="redeemableLayCredit($event)"
+                                    >
                                 </app-payment-mode>
                         </div>
                         <div class="block_pay_info">

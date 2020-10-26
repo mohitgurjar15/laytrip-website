@@ -6,11 +6,14 @@
             top: 100%;
             background: $background-white;
             left: 0;
-            width:500px;
+            width:480px;
+            @media(max-width: 767px) {
+                width: 410px;
+            }
 
-            /* @media(max-width: 575px) {
+            @media(max-width: 480px) {
                 width: 100%;
-            } */
+            }
         }
         
 
@@ -161,6 +164,7 @@
     background-color: #fff;
     border: 1px solid #fc7e66;
     border-radius: 50%;
+    outline:none;
     // border-top-left-radius: 3px;
     // border-top-right-radius: 3px;
 }

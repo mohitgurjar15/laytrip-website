@@ -1,7 +1,7 @@
 <app-flight-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar>
 
 <app-flight-loader *ngIf="loading" ></app-flight-loader>
-<app-full-page-overlay-loader *ngIf="loading" image="{{s3BucketUrl}}assets/images/flight-load_im.png" module="Flights" type="Searching"  ></app-full-page-overlay-loader>
+<app-full-page-overlay-loader *ngIf="loading" image="{{s3BucketUrl}}assets/images/flight-load_im.png" module="Flights" type="Searching" description="Finding you the best available flight options..." ></app-full-page-overlay-loader>
 
 
 <app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
@@ -15,7 +15,7 @@
           <div class="filter_by d-none d-lg-block">
             <div class="block_inn">
               <h4>Filter by</h4>
-              <a href="javascript:void(0);" (click)="resetFilter()" >Reset</a>
+              <a class="anchor_link" (click)="resetFilter()" >Reset</a>
             </div>
             <app-filter-flight  [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}></app-filter-flight>
           </div>
@@ -40,7 +40,7 @@
   <div class="filter_popup">
       <div class="filter_head_popup">
           <div class="filter_clear">
-              <a href="#">Clear</a>
+            <a class="anchor_link" (click)="resetFilter()" >Reset</a>
           </div>
           <h3>Filter</h3>
           <div class="filter_close">

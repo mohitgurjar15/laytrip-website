@@ -13,6 +13,7 @@ export class PaymentModeComponent implements OnInit {
 
   
   @Output() selectInstalmentMode = new EventEmitter();
+  @Output() redeemableLayCredit = new EventEmitter();
   @Output() getInstalmentData = new EventEmitter<{
     additionalAmount:number,
     instalmentType:string,
@@ -36,6 +37,7 @@ export class PaymentModeComponent implements OnInit {
   @Input() isShowPartialPaymentDetails:boolean=true;
   sellingPrice:number;
   isInstalemtMode:boolean=true;
+  disablePartialPayment:boolean=false;
   
   instalmentRequest={
     instalment_type: "weekly",
@@ -63,13 +65,17 @@ export class PaymentModeComponent implements OnInit {
   showFirstAccrodian:boolean=false;
   weeklyDefaultInstalmentNo:number=0;
   weeklyDefaultInstalment:number=0;
+  weeklyFirsttInstalment:number=0;
   biWeeklyDefaultInstalmentNo:number=0;
   biWeeklyDefaultInstalment:number=0;
+  biWeeklyFirstInstalment:number=0;
   monthlyDefaultInstalmentNo:number=0;
   monthlyDefaultInstalment:number=0;
+  monthlyFirstInstalment:number=0;
   upFrontPayment:number=0;
   payNowPrice:number=0;
   discountedPrice:number;
+  totalPrice;
 
   ngOnInit(){
     this.discountedPrice = this.flightSummary[0].secondary_selling_price
@@ -103,8 +109,11 @@ export class PaymentModeComponent implements OnInit {
       
     }
     else{
+      
       this.getInstalemnts('weekly');
+      this.triggerPayemntMode('instalment');
     }
+    
   }
 
   toggleaccordin(){
@@ -220,7 +229,7 @@ export class PaymentModeComponent implements OnInit {
         if(this.customInstalment){
           this.defaultInstalmentNo = this.defaultInstalmentNo - this.customInstalment;
         } */
-        console.log("++++",this.defaultInstalmentNo)
+        
         this.getInstalmentData.emit({ 
           additionalAmount:this.additionalAmount, 
           instalmentType:this.durationType, 
@@ -231,6 +240,7 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
         })
+        //this.redeemableLayCredit.emit(this.flightSummary[0].selling_price-this.defaultInstalment)
         
       }
       else{
@@ -251,6 +261,7 @@ export class PaymentModeComponent implements OnInit {
       if(this.instalments.instalment_available==true){
         this.biWeeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
         this.biWeeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
+        this.biWeeklyFirstInstalment = this.instalments.instalment_date[0].instalment_amount;
       }
       else{
         this.instalmentAvavible=false;
@@ -288,6 +299,8 @@ export class PaymentModeComponent implements OnInit {
       if(this.instalments.instalment_available==true){
         this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
         this.weeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
+        this.weeklyFirsttInstalment = this.instalments.instalment_date[0].instalment_amount;
+        this.monthlyFirstInstalment = this.instalments.instalment_date[1].instalment_amount;
       }
       else{
         this.instalmentAvavible=false;
@@ -318,9 +331,6 @@ export class PaymentModeComponent implements OnInit {
       payNowAmount:this.getPayNowAmount(),
       firstInstalment:this.firstInstalment
     })
-
-    console.log("this.sec",this.secondInstalment)
-
   }
 
   triggerPayemntMode(type){
@@ -337,7 +347,9 @@ export class PaymentModeComponent implements OnInit {
           partialPaymentAmount : this.secondInstalment,
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
-        })
+        });
+        //console.log("One",this.flightSummary[0].selling_price,this.defaultInstalment)
+        this.redeemableLayCredit.emit(this.flightSummary[0].selling_price-this.defaultInstalment)
       }
 
       if(type=='no-instalment'){
@@ -354,6 +366,8 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
         })
+        console.log("two")
+        this.redeemableLayCredit.emit(this.getTotalPrice())
       }
       this.selectInstalmentMode.emit(type)
     } 
@@ -554,6 +568,10 @@ export class PaymentModeComponent implements OnInit {
       
       if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
         this.toggleFullPayment();
+        this.disablePartialPayment=true;   
+      }
+      else{
+        this.disablePartialPayment=false;   
       }
       this.calculateInstalment();
     }
@@ -573,6 +591,8 @@ export class PaymentModeComponent implements OnInit {
       payNowAmount:this.getPayNowAmount(),
       firstInstalment:this.firstInstalment
     });
+    console.log("three")
+    this.redeemableLayCredit.emit(this.getTotalPrice())
 
     this.upFrontPayment = this.defaultInstalment;
     this.firstInstalment = this.defaultInstalment;
@@ -591,14 +611,18 @@ export class PaymentModeComponent implements OnInit {
       this.payNowPrice= this.upFrontPayment;
     }
     else{
-
-      let totalPrice=this.flightSummary[0].selling_price;
-      if(this.flightSummary[0].secondary_selling_price){
-        totalPrice = this.flightSummary[0].secondary_selling_price;
-      }
-      this.payNowPrice = Number(totalPrice) -Number(this.laycreditpoints);
+      this.sellingPrice = this.getTotalPrice();    
+      this.payNowPrice = Number(this.sellingPrice) -Number(this.laycreditpoints);
     }
 
     return this.payNowPrice;
+  }
+
+  getTotalPrice(){
+      this.sellingPrice=this.flightSummary[0].selling_price;
+      if(this.flightSummary[0].secondary_selling_price){
+        this.sellingPrice = this.flightSummary[0].secondary_selling_price;
+      }
+      return this.sellingPrice;
   }
 }

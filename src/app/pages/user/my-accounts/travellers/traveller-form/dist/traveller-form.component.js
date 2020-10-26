@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
+var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
     function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, activeModal, toastr, cookieService) {
         this.formBuilder = formBuilder;
@@ -41,21 +42,21 @@ var TravellerFormComponent = /** @class */ (function () {
         this.checkUser();
         this.getCountry();
         var location = this.cookieService.get('__loc');
-        location = JSON.parse(location);
+        this.location = JSON.parse(location);
         this.coAccountForm = this.formBuilder.group({
             title: ['mr'],
             gender: ['M'],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            country_code: [location.country.phonecode ? location.country.phonecode : '', [forms_1.Validators.required]],
+            country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required]],
-            country_id: [location.country.name ? location.country.name : '', forms_1.Validators.required],
+            country_id: [this.location.country.name ? this.location.country.name : '', forms_1.Validators.required],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: [''],
             user_type: ['']
-        });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
         this.setUserTypeValidation();
         if (this.travellerId) {
             this.setTravelerForm();
@@ -135,8 +136,14 @@ var TravellerFormComponent = /** @class */ (function () {
         else {
             var country_id = this.coAccountForm.value.country_id.id;
             if (!Number(country_id)) {
-                country_id = this.traveller.country.id;
+                if (this.traveller.country) {
+                    country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
+                }
+                else {
+                    country_id = this.location.country.id;
+                }
             }
+            console.log(typeof this.coAccountForm.value.passport_expiry);
             var jsonData = {
                 title: this.coAccountForm.value.title,
                 first_name: this.coAccountForm.value.firstName,
@@ -144,7 +151,7 @@ var TravellerFormComponent = /** @class */ (function () {
                 dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),
                 gender: this.coAccountForm.value.gender,
                 country_id: country_id ? country_id : '',
-                passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
+                passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : null,
                 passport_number: this.coAccountForm.value.passport_number,
                 country_code: this.coAccountForm.value.country_code &&
                     this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code : this.coAccountForm.value.country_code,

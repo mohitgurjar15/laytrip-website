@@ -12,3 +12,18 @@ input[type=number] {
 .text-line{
   text-decoration:line-through;
 }
+
+/* .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li{
+  &.
+} */
+
+.disable_payment_option{
+  background: rgba(129, 136, 171,0.7) !important;
+  label{
+    color:#e3e1ed !important;
+    span{
+      color:#e3e1ed !important;
+    }
+  }
+  
+}

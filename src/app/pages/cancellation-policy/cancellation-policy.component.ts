@@ -18,6 +18,7 @@ export class CancellationPolicyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     const pageType = 'cancellation-policy';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {

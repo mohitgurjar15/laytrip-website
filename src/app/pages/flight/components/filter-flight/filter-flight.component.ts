@@ -34,6 +34,8 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   partialPriceSlider: FormGroup = new FormGroup({
     partial_price: new FormControl([20, 80])
   });
+  isShowoutbound:boolean=false;
+  isShowinbound:boolean=false;
 
   /* Varibale for filter */
   minPrice:number;
@@ -147,6 +149,14 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     }
 
     this.loadJquery();
+  }
+
+  toggleOutbound(){
+    this.isShowoutbound= !this.isShowoutbound;
+  }
+
+  toggleInbound(){
+    this.isShowinbound = !this.isShowinbound;
   }
 
   loadJquery(){
@@ -512,9 +522,12 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.partialPriceSlider.reset({price: [this.filterFlightDetails.partial_payment_price_range.min_price,this.filterFlightDetails.partial_payment_price_range.max_price]});
 
       //Reset airlines
-      this.airlineList.forEach(element => {
-        return element.isChecked=false;
-      });
+      if(typeof this.airlineList!='undefined' && this.airlineList.length){
+
+        this.airlineList.forEach(element => {
+          return element.isChecked=false;
+        });
+      }
 
       $("input:checkbox").prop('checked', false);
       this.filterFlights();

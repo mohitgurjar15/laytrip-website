@@ -5,11 +5,12 @@ import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { validateImageFile,fileSizeValidator } from '../../../../_helpers/custom.validators';
+import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie';
+import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-profile',
@@ -51,7 +52,7 @@ export class ProfileComponent implements OnInit {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
   };
-
+  location;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,20 +66,21 @@ export class ProfileComponent implements OnInit {
     ) {}
  
   ngOnInit() {
+    window.scroll(0,0);
     this.getCountry();
     this.getLanguages();
     this.getCurrencies();
     this.getProfileInfo();
     
     let location:any = this.cookieService.get('__loc');
-    location = JSON.parse(location);
+    this.location = JSON.parse(location);
     
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      country_code: [location.country.phonecode ? location.country.phonecode : '', [Validators.required]],
-      country_id: [location.country.name ? location.country.name : ''],
+      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
+      country_id: [this.location.country.name ? this.location.country.name : ''],
       dob: ['', Validators.required],
       phone_no: ['', [Validators.required]],
       address: [''],
@@ -92,7 +94,7 @@ export class ProfileComponent implements OnInit {
       language_id: [''],      
       passport_expiry: [''],      
       passport_number: [''],      
-    });
+    }, { validator: phoneAndPhoneCodeValidation() });
   }
 
   getCountry() {
@@ -194,40 +196,40 @@ export class ProfileComponent implements OnInit {
 
   getProfileInfo() {
     this.userService.getProfile().subscribe((res:any)=> {
-    this.loading = false;   
-    this.image = res.profilePic;
-    this.selectResponse = res;
+      this.loading = false;   
+      this.image = res.profilePic;
+      this.selectResponse = res;
 
-    this.is_type = res.gender;
-    this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
+      this.is_type = res.gender;
+      this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
 
-    this.profileForm.patchValue({      
-        first_name: res.firstName,
-        last_name: res.lastName,
-        email: res.email,
-        gender  : res.gender ? res.gender : 'M',        
-        zip_code  : res.zipCode,        
-        title  : res.title ? res.title : 'mr',        
-        dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
-        country_code : res.countryCode,        
-        phone_no  : res.phoneNo,        
-        country_id: res.country.name,
-        state_id: res.state.name,       
-        city_name  : res.cityName,        
-        address  : res.address,  
-        language_id : res.preferredLanguage.name,     
-        currency_id : res.preferredCurrency.code,     
-        profile_pic: res.profilePic, 
-        passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '', 
-        passport_number: res.passportNumber  
-    });
+      this.profileForm.patchValue({      
+          first_name: res.firstName,
+          last_name: res.lastName,
+          email: res.email,
+          gender  : res.gender ? res.gender : 'M',        
+          zip_code  : res.zipCode,        
+          title  : res.title ? res.title : 'mr',        
+          dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
+          country_code : res.countryCode,        
+          phone_no  : res.phoneNo,        
+          country_id: res.country.name,
+          state_id: res.state.name,       
+          city_name  : res.cityName,        
+          address  : res.address,  
+          language_id : res.preferredLanguage.name,     
+          currency_id : res.preferredCurrency.code,     
+          profile_pic: res.profilePic, 
+          passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '', 
+          passport_number: res.passportNumber  
+      });
 
     }, (error: HttpErrorResponse) => {
       this.loading = false;   
-      if (error.status === 404) {
-        this.router.navigate(['/']);
+      if (error.status === 401) {
+         redirectToLogin();
       } else {
-        console.log('error')
+        this.toastr.error(error.message, 'Profile Error');
       }
     });
   }
@@ -273,7 +275,11 @@ export class ProfileComponent implements OnInit {
       formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
       // console.log(typeof this.profileForm.value.country_id )
       if(typeof this.profileForm.value.country_id === 'string'){
-        formdata.append("country_id", this.selectResponse.country.id);
+        if(this.selectResponse.country.id){
+          formdata.append("country_id", this.selectResponse.country.id);
+        } else {
+          formdata.append("country_id", this.location.country.id);
+        }
       } else {
         formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
       }

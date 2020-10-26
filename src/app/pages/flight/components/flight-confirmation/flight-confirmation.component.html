@@ -3,10 +3,10 @@
   <div class="block_booking_confirmation" *ngIf="bookingData">
       <div class="block_inner">
           <h5>Congratulations</h5>
-          <p>Thank you! Your official booking is now confirmed</p>
+          <p>Your official pre-booking has been made with us.</p>
           <span>Reference no. #{{ bookingData.booking_details.id}}</span>
           <div class="book_inform">
-              We will perform your actual booking before 26th November, 2020.
+              We will perform your actual booking before 26th November, 2020 and send you a confirmation email. <a>Learn more</a> about why we make a payment at a later date. 
           </div>
       </div>
 
@@ -32,11 +32,11 @@
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Partial Payment Start Date :</span>
-                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[0].instalmentDate,'MM/DD/YYYY','en')}}</p>
+                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[0].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Next Partial Payment Date :</span>
-                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[1].instalmentDate,'MM/DD/YYYY','en')}}</p>
+                  <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[1].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Partial Payment Amount :</span>
@@ -67,6 +67,9 @@
           </div>
       </div>
   </div>
+    <div class="btn_backhome">
+        <a class="btn btn_laytrip" (click)="backToHome()">Back to Home <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+    </div>
 </div>
 
 <!-- Guest user -->
@@ -75,7 +78,7 @@
       <div class="inner_block">
           <img src="{{s3BucketUrl}}assets/images/booking-confirmation-for-guest-user_im.svg" alt="Confirmation Image">
           <h5>Congratulations</h5>
-          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+          <p>You have successfully booked your flight with Laytrip. We will send your booking confirmation to your email.</p>
           <span>Reference no. #{{bookingData.laytrip_booking_id}}</span>
       </div>
   </div>

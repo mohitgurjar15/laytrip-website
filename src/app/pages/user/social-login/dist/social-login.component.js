@@ -9,19 +9,52 @@ exports.__esModule = true;
 exports.SocialLoginComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
+var apple_provider_1 = require("./apple.provider");
+var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var SocialLoginComponent = /** @class */ (function () {
-    function SocialLoginComponent(userService, router, modalService, location) {
+    function SocialLoginComponent(userService, router, modalService, location, authService, toastr) {
         this.userService = userService;
         this.router = router;
         this.modalService = modalService;
         this.location = location;
+        this.authService = authService;
+        this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.apiError = '';
         this.test = false;
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.loadGoogleSdk();
         this.loadFacebookSdk();
+        // APPLE LOGIN RESPONSE
+        this.authService.authState.subscribe(function (userInfo) {
+            if (userInfo) {
+                var objApple = jwt_helper_1.getUserDetails(userInfo.authorization.id_token);
+                var json_data = {
+                    "account_type": 1,
+                    "name": '',
+                    "email": objApple.email,
+                    "social_account_id": userInfo.authorization.code,
+                    "device_type": 1,
+                    "device_model": "RNE-L22",
+                    "device_token": "123abc#$%456",
+                    "app_version": "1.0",
+                    "os_version": "7.0"
+                };
+                _this.userService.socialLogin(json_data).subscribe(function (data) {
+                    console.log(data);
+                    if (data.user_details) {
+                        localStorage.setItem("_lay_sess", data.user_details.access_token);
+                        $('#sign_in_modal').modal('hide');
+                        document.getElementById('navbarNav').click();
+                        _this.router.url;
+                    }
+                }, function (error) {
+                    console.log(error);
+                });
+            }
+        });
     };
     SocialLoginComponent.prototype.loadGoogleSdk = function () {
         var _this = this;
@@ -50,7 +83,7 @@ var SocialLoginComponent = /** @class */ (function () {
         var _this = this;
         this.auth2.attachClickHandler(this.loginElement.nativeElement, {}, function (googleUser) {
             var profile = googleUser.getBasicProfile();
-            //YOUR CODE HERE
+            // YOUR CODE HERE
             var json_data = {
                 "account_type": 1,
                 "name": profile.getName(),
@@ -70,13 +103,12 @@ var SocialLoginComponent = /** @class */ (function () {
                     document.getElementById('navbarNav').click();
                 }
             }, function (error) {
-                console.log(error);
+                _this.toastr.error(error.message, 'SignIn Error');
             });
         }, function (error) {
-            console.log(error);
+            // this.toastr.error("Something went wrong!", 'SignIn Error');
         });
     };
-    SocialLoginComponent.prototype.ngOnDestroy = function () { };
     SocialLoginComponent.prototype.loadFacebookSdk = function () {
         window.fbAsyncInit = function () {
             window['FB'].init({
@@ -127,15 +159,18 @@ var SocialLoginComponent = /** @class */ (function () {
                             _this.router.url;
                         }
                     }, function (error) {
-                        console.log(error);
+                        _this.toastr.error(error.message, 'SignIn Error');
                     });
                 });
             }
             else {
                 _this.apiError = 'User login failed';
-                console.log('User login failed');
+                // this.toastr.error("Something went wrong!", 'SignIn Error');
             }
         }, { scope: 'email' });
+    };
+    SocialLoginComponent.prototype.loginWithApple = function () {
+        this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
     };
     SocialLoginComponent.prototype.ngDoCheck = function () { };
     __decorate([

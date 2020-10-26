@@ -12,6 +12,7 @@ var environment_1 = require("../../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
+var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService) {
         this.formBuilder = formBuilder;
@@ -57,13 +58,13 @@ var ProfileComponent = /** @class */ (function () {
         this.getCurrencies();
         this.getProfileInfo();
         var location = this.cookieService.get('__loc');
-        location = JSON.parse(location);
+        this.location = JSON.parse(location);
         this.profileForm = this.formBuilder.group({
             title: ['mr'],
             first_name: ['', [forms_1.Validators.required]],
             last_name: ['', [forms_1.Validators.required]],
-            country_code: [location.country.phonecode ? location.country.phonecode : '', [forms_1.Validators.required]],
-            country_id: [location.country.name ? location.country.name : ''],
+            country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [forms_1.Validators.required]],
+            country_id: [this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
             phone_no: ['', [forms_1.Validators.required]],
             address: [''],
@@ -77,7 +78,7 @@ var ProfileComponent = /** @class */ (function () {
             language_id: [''],
             passport_expiry: [''],
             passport_number: ['']
-        });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
     };
     ProfileComponent.prototype.getCountry = function () {
         var _this = this;
@@ -206,11 +207,11 @@ var ProfileComponent = /** @class */ (function () {
             });
         }, function (error) {
             _this.loading = false;
-            if (error.status === 404) {
-                _this.router.navigate(['/']);
+            if (error.status === 401) {
+                jwt_helper_1.redirectToLogin();
             }
             else {
-                console.log('error');
+                _this.toastr.error(error.message, 'Profile Error');
             }
         });
     };
@@ -257,7 +258,12 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
             // console.log(typeof this.profileForm.value.country_id )
             if (typeof this.profileForm.value.country_id === 'string') {
-                formdata.append("country_id", this.selectResponse.country.id);
+                if (this.selectResponse.country.id) {
+                    formdata.append("country_id", this.selectResponse.country.id);
+                }
+                else {
+                    formdata.append("country_id", this.location.country.id);
+                }
             }
             else {
                 formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');

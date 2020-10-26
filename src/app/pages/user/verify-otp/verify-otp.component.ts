@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input,EventEmitter, ElementRef } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
+import { optValidation } from '../../../_helpers/custom.validators';
 declare var $: any;
 
 @Component({
@@ -45,7 +46,9 @@ export class VerifyOtpComponent implements OnInit {
       otp4: ['', Validators.required],
       otp5: ['', Validators.required],
       otp6: ['', Validators.required],
-    });
+    }, { validator: optValidation() });
+
+   
   }
 
   closeModal(){
@@ -134,4 +137,12 @@ export class VerifyOtpComponent implements OnInit {
       
     }
   }
+
+  onKeydown(event){
+    const tabIndex = event.target.tabIndex ? '.tab'+(event.target.tabIndex-1): 1;
+    if(event.key == 'Backspace'){
+      $(tabIndex).focus();
+    }
+  }
+
 }

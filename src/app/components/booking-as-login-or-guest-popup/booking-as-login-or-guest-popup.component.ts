@@ -32,7 +32,7 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
       this.isShowGuestPopupValueChange.emit(false);
       $("#sign_in_modal").modal('show');
     } if (type == 'guest'){      
-      this.router.navigate(['/flight/traveler',this.routeCode]);      
+      this.router.navigate(['/flight/travelers',this.routeCode]);      
     }
   }
 }

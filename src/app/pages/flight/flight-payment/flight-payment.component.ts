@@ -29,6 +29,7 @@ export class FlightPaymentComponent implements OnInit {
   showPartialPayemntOption:boolean=true;
   partialPaymentAmount:number;
   payNowAmount:number=0;
+  redeemableLayPoints:number;
 
   constructor(
     private route: ActivatedRoute,
@@ -88,7 +89,7 @@ export class FlightPaymentComponent implements OnInit {
   checkUserAndRedirect(){
     console.log(this.userInfo)
     if(typeof this.userInfo.roleId!='undefined' && this.userInfo.roleId!=7){
-      this.router.navigate(['/flight/traveler',this.routeCode]);      
+      this.router.navigate(['/flight/travelers',this.routeCode]);      
     } else {
       this.isShowGuestPopup=true;
     }
@@ -105,5 +106,9 @@ export class FlightPaymentComponent implements OnInit {
     if (userToken) {
       this.isLoggedIn = true;
     }
+  }
+
+  redeemableLayCredit(event){
+    this.redeemableLayPoints=event;
   }
 }

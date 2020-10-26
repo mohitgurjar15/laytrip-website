@@ -11,12 +11,16 @@ var core_1 = require("@angular/core");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var environment_1 = require("../../../../../environments/environment");
 var FlightConfirmationComponent = /** @class */ (function () {
-    function FlightConfirmationComponent(commonFunction) {
+    function FlightConfirmationComponent(commonFunction, router) {
         this.commonFunction = commonFunction;
+        this.router = router;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
     }
     FlightConfirmationComponent.prototype.ngOnInit = function () {
         this.userData = jwt_helper_1.getLoginUserInfo();
+    };
+    FlightConfirmationComponent.prototype.backToHome = function () {
+        this.router.navigate(['']);
     };
     __decorate([
         core_1.Input()

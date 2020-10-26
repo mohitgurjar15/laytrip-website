@@ -82,7 +82,7 @@
                                     <div class="flight_search">
                                         <ul class="flight-grid oneway">
                                             <li class="grid_box first">
-                                                <div class="flight_form">
+                                                <div class="flight_form" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
@@ -100,7 +100,7 @@
                                                             alt="Switch Image" />
                                                     </a>
                                                 </div>
-                                                <div class="flight_to">
+                                                <div class="flight_to" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
@@ -116,7 +116,7 @@
                                             <li class="grid_box secound">
                                                 <div class="date_form">
                                                     <div class="search_area">
-                                                        <label>Departure </label>
+                                                        <label>Departure</label>
                                                         <p-calendar 
                                                             inputId="basic" 
                                                             [(ngModel)]="departureDate" 

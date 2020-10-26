@@ -12,6 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
+import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
 
 @Component({
   selector: 'app-traveller-form',
@@ -42,6 +43,7 @@ export class TravellerFormComponent implements OnInit {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
   };
+  location;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,7 +62,7 @@ export class TravellerFormComponent implements OnInit {
     this.checkUser();
     this.getCountry();
     let location:any = this.cookieService.get('__loc');
-    location = JSON.parse(location);
+    this.location = JSON.parse(location);
 
     this.coAccountForm = this.formBuilder.group({
       title: ['mr'],
@@ -68,14 +70,14 @@ export class TravellerFormComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [location.country.phonecode ? location.country.phonecode : '', [Validators.required]],
+      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
       phone_no: ['', [Validators.required]],
-      country_id: [location.country.name ? location.country.name : '', Validators.required],
+      country_id: [this.location.country.name ? this.location.country.name : '', Validators.required],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
       user_type: ['']
-    });
+    }, { validator: phoneAndPhoneCodeValidation() });
     this.setUserTypeValidation();
 
     if (this.travellerId) {
@@ -166,8 +168,13 @@ export class TravellerFormComponent implements OnInit {
      
       let country_id = this.coAccountForm.value.country_id.id;
       if (!Number(country_id)) {
-        country_id = this.traveller.country.id;
+        if(this.traveller.country){
+          country_id = ( this.traveller.country.id ) ? this.traveller.country.id : '';
+        } else {
+          country_id = this.location.country.id;
+        }
       }
+      console.log(typeof this.coAccountForm.value.passport_expiry )
       let jsonData = {
         title: this.coAccountForm.value.title,
         first_name: this.coAccountForm.value.firstName,
@@ -175,7 +182,7 @@ export class TravellerFormComponent implements OnInit {
         dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),
         gender: this.coAccountForm.value.gender,
         country_id: country_id ? country_id : '',
-        passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.passport_expiry, '/')).format('YYYY-MM-DD'),
+        passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : null,
         passport_number: this.coAccountForm.value.passport_number,
         country_code: this.coAccountForm.value.country_code &&
           this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code : this.coAccountForm.value.country_code,

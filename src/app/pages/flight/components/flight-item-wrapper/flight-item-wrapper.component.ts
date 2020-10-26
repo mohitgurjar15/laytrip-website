@@ -137,13 +137,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   showDetails(index) {
-
     if (typeof this.showFlightDetails[index] === 'undefined') {
       this.showFlightDetails[index] = true;
     } else {
       this.showFlightDetails[index] = !this.showFlightDetails[index];
     }
-
     this.showFlightDetails = this.showFlightDetails.map((item, i) => {
       return ((index === i) && this.showFlightDetails[index] === true) ? true : false;
     });
@@ -175,7 +173,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     if(this.isInstalmentAvailable){
       this.router.navigate([`flight/payment/${route.route_code}`]);
     } else{
-      this.router.navigate([`flight/traveler/${route.route_code}`]);
+      this.router.navigate([`flight/travelers/${route.route_code}`]);
     }   
   }
 
