@@ -89,7 +89,7 @@ export class FlightPaymentComponent implements OnInit {
   checkUserAndRedirect(){
     console.log(this.userInfo)
     if(typeof this.userInfo.roleId!='undefined' && this.userInfo.roleId!=7){
-      this.router.navigate(['/flight/traveler',this.routeCode]);      
+      this.router.navigate(['/flight/travelers',this.routeCode]);      
     } else {
       this.isShowGuestPopup=true;
     }

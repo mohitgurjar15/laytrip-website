@@ -17,6 +17,7 @@ export class TravellerInfoComponent implements OnInit {
   infantValue: number = 0;
   totalPerson: number = 1;
   class = 'Economy';
+  errorMessage:string='';
 
   travellerInfo = {
     adult: 0,
@@ -56,64 +57,71 @@ export class TravellerInfoComponent implements OnInit {
       }
     );
 
-    // $(document).ready(function () {
-    //   // This button will increment the value
-    //   $('.qtyplus').click(function (e) {
-    //     // Stop acting like a button
-    //     e.preventDefault();
-    //     // Get the field name
-    //     var fieldName = $(this).attr('field');
-    //     // Get its current value
-    //     var currentVal = parseInt($('input[name=' + fieldName + ']').val());
-    //     // If is not undefined
-    //     if (!isNaN(currentVal)) {
-    //       // Increment
-    //       $('input[name=' + fieldName + ']').val(currentVal + 1);
-    //     } else {
-    //       // Otherwise put a 0 there
-    //       $('input[name=' + fieldName + ']').val(0);
-    //     }
-    //   });
-    //   // This button will decrement the value till 0
-    //   $(".qtyminus").click(function (e) {
-    //     // Stop acting like a button
-    //     e.preventDefault();
-    //     // Get the field name
-    //     var fieldName = $(this).attr('field');
-    //     // Get its current value
-    //     var currentVal = parseInt($('input[name=' + fieldName + ']').val());
-    //     // If it isn't undefined or its greater than 0
-    //     if (!isNaN(currentVal) && currentVal > 0) {
-    //       // Decrement one
-    //       $('input[name=' + fieldName + ']').val(currentVal - 1);
-    //     } else {
-    //       // Otherwise put a 0 there
-    //       $('input[name=' + fieldName + ']').val(0);
-    //     }
-    //   });
-    // });
   }
 
   btnClickForChange(item) {
     // FOR ADULT
     if (item && item.type === 'minus' && item.label === 'adult') {
+
+      if(this.adultValue-1 < this.infantValue){
+        this.errorMessage="Infant count should be less than Adults.";
+        return false;
+      }
+      else{
+        this.errorMessage='';
+      }
       this.adultValue = this.adultValue - 1;
     } else if (item && item.type === 'plus' && item.label === 'adult') {
+      if(this.adultValue+1 + this.childValue  > 9){
+        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
+        return ;
+      }
+      else{
+        this.errorMessage='';
+      }
       this.adultValue = this.adultValue + 1;
+
     }
     // FOR CHILD
     if (item && item.type === 'minus' && item.label === 'child') {
+      if(this.adultValue + this.childValue-1  < 9){
+        this.errorMessage='';
+      }
+      else{
+        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
+        return ;
+      }
       this.childValue = this.childValue - 1;
     } else if (item && item.type === 'plus' && item.label === 'child') {
+      if(this.adultValue + this.childValue+1  > 9){
+        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
+        return ;
+      }
+      else{
+        this.errorMessage='';
+      }
       this.childValue = this.childValue + 1;
     }
     // FOR INFANT
     if (item && item.type === 'minus' && item.label === 'infant') {
+      
       this.infantValue = this.infantValue - 1;
+      if(this.infantValue < this.adultValue){
+        this.errorMessage='';
+      }
     } else if (item && item.type === 'plus' && item.label === 'infant') {
+
+      if(this.infantValue+1 > this.adultValue){
+        this.errorMessage="Infant count should be less than Adults.";
+        return false;
+      }
+      else{
+        this.errorMessage='';
+      }
       this.infantValue = this.infantValue + 1;
     }
 
+    
     this.totalPerson = this.adultValue + this.childValue + this.infantValue;
 
     if (item && item.type === 'class' && item.value) {

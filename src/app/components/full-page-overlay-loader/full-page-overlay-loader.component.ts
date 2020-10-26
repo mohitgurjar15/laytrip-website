@@ -11,6 +11,7 @@ export class FullPageOverlayLoaderComponent implements OnInit {
   @Input() image:string;
   @Input() module:string;
   @Input() type:string;
+  @Input() description:string='';
   
   s3BucketUrl = environment.s3BucketUrl;
   

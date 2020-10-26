@@ -21,6 +21,7 @@ export class SubscriptionPlanComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.loading = true;
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);

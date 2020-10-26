@@ -172,18 +172,18 @@
                     <li class="ic_flight"><img src="{{s3BucketUrl}}assets/images/icon/summary_flight_ic.svg" alt="Flight Icon"></li>
                     <li>{{flightDetail[0].arrival_code}}</li>
                 </ul>
-                <p>{{ commonFunction.convertDateFormat(flightDetail[0].departure_date,'DD/MM/YYYY')}} | {{totalTraveler}} Passenger | Economy</p>
+                <p>{{ commonFunction.convertDateFormat(flightDetail[0].departure_date,'DD/MM/YYYY')}} | {{totalTraveler}} Passenger | {{flightDetail[0].routes[0].stops[0].cabin_class}}</p>
                 <div class="btm_aerrow"></div>
             </div>
             <div class="info_btm">
                 <div class="info_btm_top">
-                    <div class="info_left">Onwards</div>
+                    <div class="info_left">Outbound</div>
                     <div class="info_right"><span>{{flightDetail[0].routes[0].duration}}, </span>{{ flightDetail[0].routes[0].stops.length-1 === 0 ? 'Non-' : flightDetail[0].routes[0].stops.length-1 }} Stop</div>
                 </div>
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[0]">
                     <div class="flight_info_text">
-                        <h6>{{ flightDetail[0].routes[0].stops[0].departure_code }}  - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[0].stops[0].departure_time }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_time }} | {{ flightDetail[0].routes[0].stops[0].departure_time }}</span></h6>
-                        <a href="javascript:void(0);" id="more_detail_flight" (click)="toggleRouteDetails('onward')">Show Details</a>
+                        <h6>{{ flightDetail[0].routes[0].stops[0].departure_code }}  - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[0].stops[0].departure_time }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_time }}</span></h6>
+                        <a [ngClass]="{'detail_open': outwardDetails === true}" id="more_detail_flight" (click)="toggleRouteDetails('onward')">{{ outwardDetails==false?'Show Details':'Hide Details' }} </a>
                     </div>
                     <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[0].stops.length-1==0}" id="flight_info" *ngIf="outwardDetails">
                         <div class="flight_cityname">
@@ -203,7 +203,7 @@
                             <div class="flight_middle">
                                 <div class="middle_top">
                                     <img src="{{ stop.airline_logo }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
-                                    <p>{{stop.airline_name}} <!-- <span>Operated by Nacil Air India</span> --></p>
+                                    <p>{{stop.airline_name}} </p>
                                 </div>
                                 <div class="middle_btm">
                                     <div class="info_left">
@@ -216,7 +216,7 @@
                                                 <span></span>
                                             </div>
                                             <div class="flight_time_left">
-                                                {{stop.arrival_time}} <span>{{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}</span>
+                                                {{stop.arrival_time}} <span>{{commonFunction.convertDateFormat(stop.arrival_date,'DD/MM/YYYY')}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +240,7 @@
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[1]">
                     <div class="flight_info_text">
                         <h6>{{ flightDetail[0].routes[1].stops[0].departure_code }}  - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[1].stops[0].departure_time }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_time }} | {{ flightDetail[0].routes[1].stops[0].departure_time }}</span></h6>
-                        <a href="javascript:void(0);" id="more_detail_flight_inbound" (click)="toggleRouteDetails('inward')">Show Details</a>
+                        <a [ngClass]="{'detail_open': inwardDetails === true}" id="more_detail_flight_inbound" (click)="toggleRouteDetails('inward')">{{ inwardDetails==false?'Show Details':'Hide Details' }}</a>
                     </div>
                     <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[1].stops.length-1==0}"   id="flight_info_inbound" *ngIf="inwardDetails">
                         <div class="flight_cityname">

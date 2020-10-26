@@ -17,6 +17,7 @@ export class SearchTripComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.SearchTripForm = this.formBuilder.group({
       tripId: ['',Validators.required],
     });

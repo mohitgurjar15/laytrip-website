@@ -44,6 +44,7 @@ export class PlanSubscriptionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.planId = this.route.snapshot.paramMap.get('id');

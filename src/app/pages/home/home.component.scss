@@ -1,5 +1,9 @@
 @import '../../../cstm-variable';
 
+.flight-error{
+    border: 1px solid red;
+    border-radius:8px;
+}
 .flight_form {
     .autocomplete-container {
         box-shadow: none !important;

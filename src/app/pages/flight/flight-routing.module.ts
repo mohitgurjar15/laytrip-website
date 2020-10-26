@@ -11,7 +11,7 @@ const routes: Routes = [
     component: FlightSearchComponent,
   },
   {
-    path: 'traveler/:rc',
+    path: 'travelers/:rc',
     component: FlightTravelerComponent,
   },
   {

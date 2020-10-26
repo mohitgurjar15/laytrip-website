@@ -20,6 +20,7 @@ export class FlightSearchBarComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   flightSearchForm: FormGroup;
   monthYearArr=[];
+  isCalenderPriceLoading:boolean=true;
 
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   isRoundTrip = false;
@@ -131,7 +132,12 @@ export class FlightSearchBarComponent implements OnInit {
     });
 
     this.flightDepartureMinDate = new Date();
-    this.flightReturnMinDate = new Date(this.departureDate);
+    if(moment(this.departureDate).isBefore(moment().format('MM/DD/YYYY'))){
+      this.flightReturnMinDate = new Date();
+    }
+    else{
+      this.flightReturnMinDate = new Date(this.departureDate);
+    }
   }
 
   ngOnInit() {
@@ -331,6 +337,7 @@ export class FlightSearchBarComponent implements OnInit {
     let departureDate =  this.route.snapshot.queryParams['departure_date'];
     let departureDates = departureDate.split("-");
     this.monthYearArr.push(`${departureDates[1]}-${departureDates[0]}`);
+    this.isCalenderPriceLoading=false;
   }
 
   changeMonth(event){
@@ -360,12 +367,14 @@ export class FlightSearchBarComponent implements OnInit {
         end_date :endDate
       }
       
+      this.isCalenderPriceLoading=true;
       this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
-        if (res) {
-          this.calenderPrices = [...this.calenderPrices,...res];
-        }
-      }, err => {
         
+          this.isCalenderPriceLoading=false;
+          this.calenderPrices = [...this.calenderPrices,...res];
+        
+      }, err => {
+        this.isCalenderPriceLoading=false;
       });
     }
     

@@ -6,7 +6,7 @@
   <div class="short_by">
     <div class="block_inn">
       <h4>Sort by</h4>
-      <a  (click)="resetFilter('selling_price','ASC')"> Reset</a>
+      <a class="anchor_link"  (click)="resetFilter('selling_price','ASC')"> Reset</a>
     </div>
     <div class="accordion block_shortby" id="accordion">
       <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">

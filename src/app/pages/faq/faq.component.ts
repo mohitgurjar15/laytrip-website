@@ -6,10 +6,10 @@ declare var $: any;
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss']
+  styleUrls: ['./faq.component.scss'],
 })
 export class FaqComponent implements OnInit {
-
+ 
   s3BucketUrl = environment.s3BucketUrl;
   loading = false;
   faqDetail;
@@ -19,6 +19,7 @@ export class FaqComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.loadJquery();
     this.loading = true;
     this.genericService.getFaqData().subscribe((res: any) => {
