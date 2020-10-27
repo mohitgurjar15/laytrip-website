@@ -42,21 +42,25 @@ var TravellerFormComponent = /** @class */ (function () {
         this.checkUser();
         this.getCountry();
         var location = this.cookieService.get('__loc');
-        this.location = JSON.parse(location);
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) {
+        }
         this.coAccountForm = this.formBuilder.group({
             title: ['mr'],
             gender: ['M'],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required]],
-            country_id: [this.location.country.name ? this.location.country.name : '', forms_1.Validators.required],
+            country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
+            country_code: [typeof this.location != 'undefined' ? this.location.country.phonecode : '', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: [''],
             user_type: ['']
-        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
         this.setUserTypeValidation();
         if (this.travellerId) {
             this.setTravelerForm();
@@ -129,6 +133,7 @@ var TravellerFormComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.coAccountForm.invalid) {
+            console.log(this.coAccountForm);
             this.submitted = true;
             this.loading = false;
             return;

@@ -58,14 +58,18 @@ var ProfileComponent = /** @class */ (function () {
         this.getLanguages();
         this.getCurrencies();
         var location = this.cookieService.get('__loc');
-        this.location = JSON.parse(location);
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) {
+        }
         this.profileForm = this.formBuilder.group({
             title: ['mr'],
             first_name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3), custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3), custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
-            country_id: [this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
-            country_code: [this.location.country.phonecode ? this.location.country.phonecode : ''],
+            country_code: [typeof this.location != 'undefined' ? this.location.country.phonecode : ''],
+            country_id: [typeof this.location != 'undefined' ? this.location.country.name : ''],
             phone_no: [''],
             address: [''],
             email: [''],
