@@ -287,9 +287,7 @@ export class ProfileComponent implements OnInit {
         formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
       }
 
-      if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : null);
-      } else{
+      if(this.profileForm.value.state_id) {        
         formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : null);
       }
       if(typeof(this.profileForm.value.country_code) === 'string'){     
