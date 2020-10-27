@@ -100,3 +100,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 .ng-select.ng-customClass .ng-select-container .ng-value-container .ng-placeholder {
   font-size: 14px;
 }
+
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .nav-tabs li {
+  width: 33% !important;
+}

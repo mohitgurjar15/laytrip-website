@@ -41,15 +41,19 @@ var TravelerFormComponent = /** @class */ (function () {
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
         var location = this.cookieService.get('__loc');
-        this.location = JSON.parse(location);
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) {
+        }
         this.adultForm = this.formBuilder.group({
             title: ['mr', forms_1.Validators.required],
-            gender: ['M', forms_1.Validators.required],
             firstName: ['', forms_1.Validators.required],
             lastName: ['', forms_1.Validators.required],
+            gender: ['M', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [forms_1.Validators.required]],
-            country_id: [this.location.country.name ? this.location.country.name : ''],
+            country_code: [typeof this.location != 'undefined' ? this.location.country.phonecode : '', [forms_1.Validators.required]],
+            country_id: [typeof this.location != 'undefined' ? this.location.country.name : ''],
             phone_no: ['', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
@@ -60,8 +64,8 @@ var TravelerFormComponent = /** @class */ (function () {
         if (this.traveler.userId) {
             this.adultForm.patchValue({
                 title: this.traveler.title ? this.traveler.title : 'mr',
-                firstName: this.traveler.firstName,
-                lastName: this.traveler.lastName,
+                firstName: this.traveler.firstName ? this.traveler.firstName : '',
+                lastName: this.traveler.lastName ? this.traveler.lastName : '',
                 email: this.traveler.email,
                 gender: this.traveler.gender ? this.traveler.gender : 'M',
                 country_code: this.traveler.countryCode ? this.traveler.countryCode : this.location.country.phonecode,

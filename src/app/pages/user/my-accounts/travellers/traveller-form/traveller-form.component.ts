@@ -62,7 +62,12 @@ export class TravellerFormComponent implements OnInit {
     this.checkUser();
     this.getCountry();
     let location:any = this.cookieService.get('__loc');
-    this.location = JSON.parse(location);
+    try{
+      this.location = JSON.parse(location);
+    }
+    catch(e){
+
+    }
 
     this.coAccountForm = this.formBuilder.group({
       title: ['mr'],
@@ -70,14 +75,14 @@ export class TravellerFormComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
       phone_no: ['', [Validators.required]],
-      country_id: [this.location.country.name ? this.location.country.name : '', Validators.required],
+      country_id: [typeof this.location!='undefined' ? this.location.country.name : '',[ Validators.required]],
+      country_code: [typeof this.location!='undefined' ? this.location.country.phonecode : '', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
       user_type: ['']
-    }, { validator: phoneAndPhoneCodeValidation() });
+    }, { validator: phoneAndPhoneCodeValidation('adult') });
     this.setUserTypeValidation();
 
     if (this.travellerId) {
@@ -162,6 +167,7 @@ export class TravellerFormComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.coAccountForm.invalid) {
+      console.log(this.coAccountForm)
       this.submitted = true;
       this.loading = false;
       return;

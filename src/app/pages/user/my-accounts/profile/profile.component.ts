@@ -72,16 +72,19 @@ export class ProfileComponent implements OnInit {
     this.getCurrencies();
     
     let location:any = this.cookieService.get('__loc');
+    try{
+      this.location = JSON.parse(location);
+    }
+    catch(e){
 
-    this.location = JSON.parse(location);
-    
+    }
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
       first_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
       last_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
-      country_id: [this.location.country.name ? this.location.country.name : ''],
       dob: ['', Validators.required],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : ''],
+      country_code: [typeof this.location!='undefined' ? this.location.country.phonecode : ''],
+      country_id: [typeof this.location!='undefined' ? this.location.country.name : ''],
       phone_no: [''],
       address: [''],
       email: [''],
