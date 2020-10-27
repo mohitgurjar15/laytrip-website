@@ -62,9 +62,14 @@ export class FlightTravelerComponent implements OnInit {
     console.log("customInstalmentData",customInstalmentData)
     
     this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
-    this.payNowAmount = customInstalmentData.payNowAmount;
     this.instalmentMode=atob(sessionStorage.getItem('__insMode'))
     this.showPartialPayemntOption= this.instalmentMode=='instalment'?true:false;
+    if(this.instalmentMode=='no-instalment'){
+      
+    }
+    else{
+      this.payNowAmount = customInstalmentData.payNowAmount;
+    }
   }
   
   

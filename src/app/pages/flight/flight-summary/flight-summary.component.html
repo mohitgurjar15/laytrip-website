@@ -329,7 +329,7 @@
         <div class="total_payment">
             <ul>
                 <li>Total <span [ngClass]="{'text_line': payNowAmount > 0 && totalPrice!=payNowAmount}">{{ currency?.symbol }}{{totalPrice | number : '1.2-2'}}</span></li>
-                <li *ngIf="payNowAmount && totalPrice!=payNowAmount">Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
+                <li *ngIf="payNowAmount >0 && totalPrice!=payNowAmount">Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
             </ul>
         </div>
         

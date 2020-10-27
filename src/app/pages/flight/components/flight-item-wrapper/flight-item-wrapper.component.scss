@@ -1,3 +1,4 @@
+
 .search_result
     .result_listing.one_way_list
     .search_block
@@ -11,26 +12,9 @@
     width: 100%;
 }
 
-.search_result {
-	.result_listing.one_way_list {
-		.search_block {
-			.detail_info_show {
-				.tab-content {
-					.card-body {
-						.tab_detail.baggage_rules_cnt {
-							.detail_right {
-								table {
-									width: 100%;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
+
 
 .view_more{
 	cursor: pointer;
 }
+
