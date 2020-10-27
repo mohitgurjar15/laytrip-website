@@ -64,9 +64,13 @@
                     </div>
                     <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
                         class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.firstName.errors.required" class="text-danger">Please
-                            enter
-                            first name.
+                        <div *ngIf="coAccountForm.controls.firstName.errors.required" class="text-danger">Please enter first name.
+                        </div>
+                        <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.minlength)">
+                            <p class="text-danger">First name must be longer than or equal to 3 characters. </p>
+                        </div> -->
+                        <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
+                            <p class="text-danger">Please enter valid first name </p>
                         </div>
                     </div>
                 </div>
@@ -78,9 +82,13 @@
                     </div>
                     <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
                         class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.lastName.errors.required" class="text-danger">Please
-                            enter
-                            last name.
+                        <div *ngIf="coAccountForm.controls.lastName.errors.required" class="text-danger">Please enter last name.
+                        </div>
+                        <!-- <div *ngIf="(coAccountForm.controls.lastName.errors.minlength)">
+                            <p class="text-danger">First name must be longer than or equal to 3 characters. </p>
+                        </div> -->
+                        <div *ngIf="(coAccountForm.controls.lastName.errors.cannotContainSpace)">
+                            <p class="text-danger">Please enter valid last name </p>
                         </div>
                     </div>
                 </div>

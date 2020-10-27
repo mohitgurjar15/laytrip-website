@@ -50,8 +50,8 @@ var TravellerFormComponent = /** @class */ (function () {
         this.coAccountForm = this.formBuilder.group({
             title: ['mr'],
             gender: ['M'],
-            firstName: ['', forms_1.Validators.required],
-            lastName: ['', forms_1.Validators.required],
+            firstName: ['', [forms_1.Validators.required, custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
+            lastName: ['', [forms_1.Validators.required, custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],

@@ -12,7 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
-import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
+import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../../../../_helpers/custom.validators';
 
 @Component({
   selector: 'app-traveller-form',
@@ -72,8 +72,8 @@ export class TravellerFormComponent implements OnInit {
     this.coAccountForm = this.formBuilder.group({
       title: ['mr'],
       gender: ['M'],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required,WhiteSpaceValidator.cannotContainSpace]],
+      lastName: ['', [Validators.required,WhiteSpaceValidator.cannotContainSpace]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required]],
       country_id: [typeof this.location!='undefined' ? this.location.country.name : '',[ Validators.required]],
