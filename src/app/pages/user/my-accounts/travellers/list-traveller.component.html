@@ -49,7 +49,8 @@
                   </label> -->
                   <div class="traveller_list">
                     <div class="list_block">
-                      <div class="traveller_name">{{traveler.firstName | titlecase}} {{traveler.lastName | titlecase}}
+
+                      <div class="traveller_name">{{traveler.firstName || 'N/A' | titlecase }} {{traveler.lastName | titlecase}}
                         <span>({{traveler.user_type | titlecase}})</span></div>
                       <div class="traveller_age" *ngIf="traveler.dob && traveler.dob !='null' ">{{calculateAge(traveler.dob)}} {{getGender(traveler.gender)}}</div>
                     </div>
@@ -60,7 +61,7 @@
                             <img src="{{s3BucketUrl}}assets/images/icon/ic_edit.svg" alt="Edit Icon">
                           </a>
                         </li>
-                        <li>
+                        <li *ngIf="traveler.roleId != 6">
                           <a href="javascript:void(0);" (click)="deleteTravellerModal(deleteContent,traveler.userId)">
                             <img src="{{s3BucketUrl}}assets/images/icon/ic_trash.svg" alt="Delete Icon">
                           </a>

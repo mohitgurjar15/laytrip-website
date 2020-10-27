@@ -119,7 +119,7 @@ export class ListTravellerComponent implements OnInit {
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.getTravelers();
+      // this.getTravelers();
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(this.closeResult)
     });

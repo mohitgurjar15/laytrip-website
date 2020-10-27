@@ -31,6 +31,7 @@ var ListTravellerComponent = /** @class */ (function () {
         this.isMasterSel = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
+        window.scroll(0, 0);
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
         this.loading = true;
@@ -98,7 +99,7 @@ var ListTravellerComponent = /** @class */ (function () {
         this.modalReference.result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
         }, function (reason) {
-            _this.getTravelers();
+            // this.getTravelers();
             _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
             console.log(_this.closeResult);
         });
