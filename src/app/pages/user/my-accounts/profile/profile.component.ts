@@ -294,15 +294,11 @@ export class ProfileComponent implements OnInit {
       } else {
         formdata.append("country_code", this.selectResponse.countryCode);
       } 
-      if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
-        formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id : null);        
-      } else {
+      if(this.profileForm.value.language_id) {        
         formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : null);
       }
-      if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
-        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id : null);
-      } else {
-        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : null);
+      if(this.profileForm.value.currency_id){        
+        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : '');
       }         
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
