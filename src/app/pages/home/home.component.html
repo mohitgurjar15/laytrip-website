@@ -16,22 +16,22 @@
                             alt="Flight Icon" />
                         <span>Flight</span>
                     </a>
-                    <a class="nav-item nav-link disabled" id="nav-hotel"   role="tab"
-                        aria-selected="false">
+                    <a class="nav-item nav-link disabled" id="nav-hotel" role="tab" aria-selected="false">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg"
                             alt="Hotel Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg"
                             alt="Hotel Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-disabled.svg" alt="Flight Icon">
+                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-disabled.svg"
+                            alt="Flight Icon">
                         <span>Hotel</span>
                     </a>
-                    <a class="nav-item nav-link disabled" id="nav-accommodation"  
-                        role="tab" aria-selected="false">
+                    <a class="nav-item nav-link disabled" id="nav-accommodation" role="tab" aria-selected="false">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg"
                             alt="Accommodation Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg"
                             alt="Accommodation Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-disabled.svg" alt="Flight Icon">
+                        <img class="disabled-icon"
+                            src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-disabled.svg" alt="Flight Icon">
                         <span>Home Rentals</span>
                     </a>
                 </div>
@@ -82,15 +82,14 @@
                                     <div class="flight_search">
                                         <ul class="flight-grid oneway">
                                             <li class="grid_box first">
-                                                <div class="flight_form" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
+                                                <div class="flight_form"
+                                                    [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
                                                             [label]="'From'" [placeHolder]="'New York'"
                                                             [defaultSelected]="'NY, United States'"
-                                                            (changeValue)="destinationChangedValue($event)"
-                                                            (getSwapValue)="getSwappedValue($event)"
-                                                            [swappedData]="swapped">
+                                                            (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
                                                 </div>
@@ -100,15 +99,14 @@
                                                             alt="Switch Image" />
                                                     </a>
                                                 </div>
-                                                <div class="flight_to" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
+                                                <div class="flight_to"
+                                                    [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
                                                             [label]="'TO'" [placeHolder]="'Los Angeles'"
                                                             [defaultSelected]="'CA, United States'"
-                                                            (changeValue)="destinationChangedValue($event)"
-                                                            (getSwapValue)="getSwappedValue($event)"
-                                                            [swappedData]="swapped">
+                                                            (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
                                                 </div>
@@ -117,14 +115,11 @@
                                                 <div class="date_form">
                                                     <div class="search_area">
                                                         <label>Departure</label>
-                                                        <p-calendar 
-                                                            inputId="basic" 
-                                                            [(ngModel)]="departureDate" 
-                                                            [ngModelOptions]="{standalone: true}"
-                                                            flightDepartureMinDate
-                                                            [minDate]="flightDepartureMinDate" 
+                                                        <p-calendar inputId="basic" [(ngModel)]="departureDate"
+                                                            [ngModelOptions]="{standalone: true}" flightDepartureMinDate
+                                                            [minDate]="flightDepartureMinDate"
                                                             (onSelect)=departureDateUpdate($event)
-                                                            [readonlyInput]="true"   >
+                                                            [readonlyInput]="true">
                                                         </p-calendar>
                                                         <div class="prev-next">
                                                             <a href="javascript:void(0);"
@@ -132,7 +127,7 @@
                                                             <a href="javascript:void(0);"
                                                                 (click)="dateChange('departure','next')">Next</a>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                                 <div class="date_to">
@@ -144,18 +139,15 @@
 
                                                     <div class="search_area" *ngIf="isRoundTrip">
                                                         <label>Return</label>
-                                                        <p-calendar 
-                                                            inputId="basic" 
-                                                            [(ngModel)]="returnDate" 
-                                                            [ngModelOptions]="{standalone: true}"
-                                                            flightReturnMinDate
-                                                            [minDate]="flightReturnMinDate"
-                                                            [readonlyInput]="true"
-                                                            >
+                                                        <p-calendar inputId="basic" [(ngModel)]="returnDate"
+                                                            [ngModelOptions]="{standalone: true}" flightReturnMinDate
+                                                            [minDate]="flightReturnMinDate" [readonlyInput]="true">
                                                         </p-calendar>
                                                         <div class="prev-next">
-                                                            <a href="javascript:void(0);" (click)="dateChange('arrival','previous')">Prev</a>
-                                                            <a href="javascript:void(0);" (click)="dateChange('arrival','next')">Next</a>
+                                                            <a href="javascript:void(0);"
+                                                                (click)="dateChange('arrival','previous')">Prev</a>
+                                                            <a href="javascript:void(0);"
+                                                                (click)="dateChange('arrival','next')">Next</a>
                                                         </div>
                                                     </div>
 

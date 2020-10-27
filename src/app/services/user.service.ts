@@ -5,8 +5,6 @@ import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 import * as moment from 'moment';
-import { data } from '../components/search-airport/airport';
-
 
 @Injectable({
   providedIn: 'root'

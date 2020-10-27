@@ -7,9 +7,9 @@ import { Subscription } from 'rxjs';
 
 import { LayTripService } from '../../../state/layTrip/services/layTrip.service';
 import { Location } from '@angular/common';
-import { Actions, ofType } from '@ngrx/effects';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 @Component({
   selector: 'app-flight-search',
@@ -25,14 +25,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   flightSearchInfo;
   flightDetails;
   filterFlightDetails;
-  isResetFilter:string='no';
+  isResetFilter: string = 'no';
   subscriptions: Subscription[] = [];
-  tripType:string='';
+  tripType: string = '';
 
-  ​flexibleLoading:boolean=false;
-  ​flexibleNotFound:boolean=false;
-  dates:[]=[];
-  calenderPrices:[]=[]
+  flexibleLoading: boolean = false;
+  flexibleNotFound: boolean = false;
+  dates: [] = [];
+  calenderPrices: [] = []
 
   constructor(
     private layTripStoreService: LayTripStoreService,
@@ -41,13 +41,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     private flightService: FlightService,
     public router: Router,
     public location: Location,
-    private actions$: Actions
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
     window.scroll(0, 0);
-    
-    console.log("tripType:",this.tripType)
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -84,7 +82,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.tripType = tripType;
 
     if (payload && tripType === 'roundtrip') {
-      
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
           this.loading = false;
@@ -111,15 +108,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
 
-      
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
           this.flexibleLoading = false;
-          this.​flexibleNotFound = false;
+          this.flexibleNotFound = false;
           this.dates = res;
         }
       }, err => {
-        this.​flexibleNotFound = true;
+        this.flexibleNotFound = true;
         this.flexibleLoading = false;
       });
 
@@ -128,27 +124,27 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
 
-  getCalenderPrice(payload){
+  getCalenderPrice(payload) {
 
     let departureDate = this.route.snapshot.queryParams['departure_date'];
     let departureDates = departureDate.split("-");
-    let startDate:any = moment([departureDates[0],departureDates[1]-1]);
-    let endDate:any =  moment(startDate).endOf('month');
-    
+    let startDate: any = moment([departureDates[0], departureDates[1] - 1]);
+    let endDate: any = moment(startDate).endOf('month');
+
     startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
     endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
-    if(!moment().isBefore(startDate)){
+    if (!moment().isBefore(startDate)) {
       startDate = moment().format("YYYY-MM-DD")
     }
 
-    payload.start_date = startDate; 
-    payload.end_date=endDate;
+    payload.start_date = startDate;
+    payload.end_date = endDate;
     this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
       if (res) {
         this.calenderPrices = res;
       }
     }, err => {
-      
+
     });
   }
 
@@ -162,35 +158,37 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   getFlightSearchDataForOneway(event) {
-    this.router.navigate(['flight/search'], {
-      skipLocationChange: false, queryParams: {
-        trip: event.trip,
-        departure: event.departure,
-        arrival: event.arrival,
-        departure_date: event.departure_date,
-        class: event.class ? event.class : 'Economy',
-        adult: event.adult,
-        child: event.child ? event.child : 0,
-        infant: event.infant ? event.infant : 0
-      },
-      queryParamsHandling: 'merge'
+    let urlData = this.commonFunction.decodeUrl(this.router.url);
+    const queryParams = {
+      trip: event.trip,
+      departure: event.departure,
+      arrival: event.arrival,
+      departure_date: event.departure_date,
+      class: event.class ? event.class : 'Economy',
+      adult: event.adult,
+      child: event.child ? event.child : 0,
+      infant: event.infant ? event.infant : 0
+    };
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });
   }
 
   getFlightSearchDataForRoundTrip(event) {
-    this.router.navigate(['flight/search'], {
-      skipLocationChange: false, queryParams: {
-        trip: event.trip,
-        departure: event.departure,
-        arrival: event.arrival,
-        departure_date: event.departure_date,
-        arrival_date: event.arrival_date,
-        class: event.class ? event.class : 'Economy',
-        adult: event.adult,
-        child: event.child ? event.child : 0,
-        infant: event.infant ? event.infant : 0
-      },
-      queryParamsHandling: 'merge'
+    let urlData = this.commonFunction.decodeUrl(this.router.url);
+    const queryParams = {
+      trip: event.trip,
+      departure: event.departure,
+      arrival: event.arrival,
+      departure_date: event.departure_date,
+      arrival_date: event.arrival_date,
+      class: event.class ? event.class : 'Economy',
+      adult: event.adult,
+      child: event.child ? event.child : 0,
+      infant: event.infant ? event.infant : 0
+    };
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });
   }
 
@@ -294,7 +292,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.flightDetails = event;
   }
 
-  resetFilter(){
-    this.isResetFilter=(new Date()).toString();
+  resetFilter() {
+    this.isResetFilter = (new Date()).toString();
   }
 }
