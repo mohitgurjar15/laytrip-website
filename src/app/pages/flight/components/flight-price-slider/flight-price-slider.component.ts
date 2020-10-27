@@ -88,7 +88,8 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes['dates']){
+   
+    if(changes['dates'].currentValue.length){
       setTimeout(()=>{this.loadJquery();},100)
     }
   }

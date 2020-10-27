@@ -63,7 +63,12 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
     let location:any = this.cookieService.get('__loc');
-    this.location = JSON.parse(location);
+    try{
+      this.location = JSON.parse(location);
+    }
+    catch(e){
+
+    }
     
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
@@ -71,8 +76,8 @@ export class TravelerFormComponent implements OnInit {
       lastName: ['', Validators.required,WhiteSpaceValidator.cannotContainSpace],
       gender: ['M', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
-      country_id: [this.location.country.name ? this.location.country.name : ''],
+      country_code: [typeof this.location!='undefined' ? this.location.country.phonecode : '', [Validators.required]],
+      country_id: [typeof this.location!='undefined' ? this.location.country.name : ''],
       phone_no: ['', [Validators.required]],
       dob : ['', Validators.required],
       passport_expiry : [''],

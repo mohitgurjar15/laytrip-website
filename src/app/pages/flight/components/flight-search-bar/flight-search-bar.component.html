@@ -106,11 +106,10 @@
                               [readonlyInput]="true" 
                               (onMonthChange)="changeMonth($event)"
                               panelStyleClass="calender-price-view">
-                              <p-header *ngIf="isCalenderPriceLoading" class="calender-header">We are retrieving monthly prices</p-header>
-                              <ng-template pTemplate="date" let-date>
+                              <p-header *ngIf="!isRoundTrip && isCalenderPriceLoading" class="calender-header">We are retrieving monthly prices...</p-header>
+                              <ng-template  pTemplate="date" let-date>
                                 <span>{{date.day}}</span>
                                 <br><span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
-                                
                               </ng-template>
                           </p-calendar>
                           <div class="prev-next">

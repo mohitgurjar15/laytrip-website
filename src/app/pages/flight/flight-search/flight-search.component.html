@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="col-lg-9">
-        <app-flight-price-slider *ngIf="tripType=='oneway'" [dates]="dates"></app-flight-price-slider>
+        <app-flight-price-slider *ngIf="!flexibleNotFound && tripType=='oneway'" [dates]="dates"></app-flight-price-slider>
         <app-flight-item-wrapper  [flightDetails]="flightDetails"></app-flight-item-wrapper>
       </div>
     </div>

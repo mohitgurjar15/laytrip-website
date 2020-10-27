@@ -226,9 +226,6 @@ export class HomeComponent implements OnInit {
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
 
-    if(this.flightSearchForm){
-      console.log(this.flightSearchForm.controls)
-    }
 
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
