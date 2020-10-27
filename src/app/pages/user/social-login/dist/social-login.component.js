@@ -24,6 +24,8 @@ var SocialLoginComponent = /** @class */ (function () {
         this.apiError = '';
         this.test = false;
         this.loading = false;
+        this.google_loading = false;
+        this.apple_loading = false;
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -84,6 +86,7 @@ var SocialLoginComponent = /** @class */ (function () {
     SocialLoginComponent.prototype.googleLogin = function () {
         var _this = this;
         this.auth2.attachClickHandler(this.loginElement.nativeElement, {}, function (googleUser) {
+            _this.google_loading = true;
             var profile = googleUser.getBasicProfile();
             // YOUR CODE HERE
             var json_data = {
@@ -99,15 +102,18 @@ var SocialLoginComponent = /** @class */ (function () {
             };
             _this.userService.socialLogin(json_data).subscribe(function (data) {
                 if (data.user_details) {
+                    _this.google_loading = false;
                     localStorage.setItem("_lay_sess", data.user_details.access_token);
                     $('#sign_in_modal').modal('hide');
                     _this.router.url;
                     document.getElementById('navbarNav').click();
                 }
             }, function (error) {
+                _this.google_loading = false;
                 _this.socialError.emit(error.message);
             });
         }, function (error) {
+            _this.google_loading = false;
             _this.socialError.emit('Authentication failed.');
             // this.toastr.error("Something went wrong!", 'SignIn Error');
         });
@@ -155,22 +161,23 @@ var SocialLoginComponent = /** @class */ (function () {
                         "os_version": "7.0"
                     };
                     _this.userService.socialLogin(json_data).subscribe(function (data) {
+                        _this.loading = false;
                         if (data.user_details) {
                             localStorage.setItem("_lay_sess", data.user_details.access_token);
                             $('#sign_in_modal').modal('hide');
                             _this.test = true;
-                            _this.loading = false;
                             document.getElementById('navbarNav').click();
                             _this.router.url;
                         }
                     }, function (error) {
-                        _this.loading = true;
+                        _this.loading = false;
                         _this.socialError.emit(error.message);
                         _this.toastr.error(error.message, 'SignIn Error');
                     });
                 });
             }
             else {
+                _this.loading = false;
                 _this.socialError.emit('Authentication failed.');
                 // this.toastr.error("Something went wrong!", 'SignIn Error');
             }
@@ -179,7 +186,6 @@ var SocialLoginComponent = /** @class */ (function () {
     SocialLoginComponent.prototype.loginWithApple = function () {
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
     };
-    SocialLoginComponent.prototype.ngDoCheck = function () { };
     __decorate([
         core_1.Output()
     ], SocialLoginComponent.prototype, "socialError");
