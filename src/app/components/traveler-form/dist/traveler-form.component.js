@@ -44,9 +44,9 @@ var TravelerFormComponent = /** @class */ (function () {
         this.location = JSON.parse(location);
         this.adultForm = this.formBuilder.group({
             title: ['mr', forms_1.Validators.required],
+            firstName: ['', forms_1.Validators.required, custom_validators_1.WhiteSpaceValidator.cannotContainSpace],
+            lastName: ['', forms_1.Validators.required, custom_validators_1.WhiteSpaceValidator.cannotContainSpace],
             gender: ['M', forms_1.Validators.required],
-            firstName: ['', forms_1.Validators.required],
-            lastName: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [forms_1.Validators.required]],
             country_id: [this.location.country.name ? this.location.country.name : ''],
@@ -60,7 +60,7 @@ var TravelerFormComponent = /** @class */ (function () {
         if (this.traveler.userId) {
             this.adultForm.patchValue({
                 title: this.traveler.title ? this.traveler.title : 'mr',
-                firstName: this.traveler.firstName,
+                firstName: this.traveler.firstName ? this.traveler.firstName : '',
                 lastName: this.traveler.lastName,
                 email: this.traveler.email,
                 gender: this.traveler.gender ? this.traveler.gender : 'M',

@@ -8,7 +8,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
-import { phoneAndPhoneCodeValidation } from '../../_helpers/custom.validators';
+import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../_helpers/custom.validators';
 
 
 declare var $: any;
@@ -67,9 +67,9 @@ export class TravelerFormComponent implements OnInit {
     
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
+      firstName: ['', Validators.required,WhiteSpaceValidator.cannotContainSpace],
+      lastName: ['', Validators.required,WhiteSpaceValidator.cannotContainSpace],
       gender: ['M', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
       country_id: [this.location.country.name ? this.location.country.name : ''],
@@ -86,7 +86,7 @@ export class TravelerFormComponent implements OnInit {
 
       this.adultForm.patchValue({
         title: this.traveler.title ? this.traveler.title : 'mr',
-        firstName: this.traveler.firstName,
+        firstName: this.traveler.firstName? this.traveler.firstName :'',
         lastName: this.traveler.lastName,
         email: this.traveler.email,
         gender: this.traveler.gender ? this.traveler.gender : 'M',
