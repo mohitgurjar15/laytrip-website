@@ -23,6 +23,8 @@ export class SocialLoginComponent implements OnInit {
   apiError: string = '';
   test: boolean = false;
   loading: boolean = false;
+  google_loading: boolean = false;
+  apple_loading: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -95,9 +97,9 @@ export class SocialLoginComponent implements OnInit {
 
 
   googleLogin() {
-
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
+        this.google_loading = true;
 
         let profile = googleUser.getBasicProfile();
 
@@ -115,15 +117,18 @@ export class SocialLoginComponent implements OnInit {
         };
         this.userService.socialLogin(json_data).subscribe((data: any) => {
           if (data.user_details) {
+            this.google_loading = false;
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
             this.router.url;
             document.getElementById('navbarNav').click();
           }
         }, (error: HttpErrorResponse) => {
+          this.google_loading = false;
           this.socialError.emit(error.message);
         });
       }, (error) => {
+        this.google_loading = false;
         this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       });
@@ -174,22 +179,22 @@ export class SocialLoginComponent implements OnInit {
           };
 
           this.userService.socialLogin(json_data).subscribe((data: any) => {
-
+            this.loading = false;
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
               this.test = true;
-               this.loading = false;
               document.getElementById('navbarNav').click();
               this.router.url;
             }
           }, (error: HttpErrorResponse) => {
-            this.loading = true;
+            this.loading = false;
             this.socialError.emit(error.message);
             this.toastr.error(error.message, 'SignIn Error');
           });
         });
       } else {
+        this.loading = false;
         this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       }
@@ -199,6 +204,4 @@ export class SocialLoginComponent implements OnInit {
   loginWithApple(): void {
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
   }
-
-  ngDoCheck() { }
 }

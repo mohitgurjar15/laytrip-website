@@ -72,19 +72,16 @@ export class ProfileComponent implements OnInit {
     this.getCurrencies();
     
     let location:any = this.cookieService.get('__loc');
-    try{
-      this.location = JSON.parse(location);
-    }
-    catch(e){
 
-    }
+    this.location = JSON.parse(location);
+    
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
       first_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
       last_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
+      country_id: [this.location.country.name ? this.location.country.name : ''],
       dob: ['', Validators.required],
-      country_code: [typeof this.location!='undefined' ? this.location.country.phonecode : ''],
-      country_id: [typeof this.location!='undefined' ? this.location.country.name : ''],
+      country_code: [this.location.country.phonecode ? this.location.country.phonecode : ''],
       phone_no: [''],
       address: [''],
       email: [''],
@@ -274,9 +271,9 @@ export class ProfileComponent implements OnInit {
       formdata.append("address1",this.profileForm.value.address);
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
-      formdata.append("passportNumber",this.profileForm.value.passport_number);
+      formdata.append("passport_number",this.profileForm.value.passport_number);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-      formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
+      formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
       if(typeof this.profileForm.value.country_id === 'string'){
         if(this.selectResponse.country.id){
           formdata.append("country_id", this.selectResponse.country.id);
@@ -288,20 +285,24 @@ export class ProfileComponent implements OnInit {
       }
 
       if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : null);
+        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
       } else{
-        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : null);
+        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
       }
       if(typeof(this.profileForm.value.country_code) === 'string'){     
         formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code : '' );
       } else {
         formdata.append("country_code", this.selectResponse.countryCode);
       } 
-      if(this.profileForm.value.language_id) {        
-        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : null);
+      if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
+        formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id :'');        
+      } else {
+        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id :'');
       }
-      if(this.profileForm.value.currency_id){        
-        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : '');
+      if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
+        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
+      } else {
+        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
       }         
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
