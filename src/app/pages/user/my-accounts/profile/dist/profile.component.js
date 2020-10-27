@@ -247,9 +247,9 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("address1", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
-            formdata.append("passportNumber", this.profileForm.value.passport_number);
+            formdata.append("passport_number", this.profileForm.value.passport_number);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-            formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : '');
+            formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : '');
             if (typeof this.profileForm.value.country_id === 'string') {
                 if (this.selectResponse.country.id) {
                     formdata.append("country_id", this.selectResponse.country.id);
