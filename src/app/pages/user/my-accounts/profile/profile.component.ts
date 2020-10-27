@@ -72,19 +72,16 @@ export class ProfileComponent implements OnInit {
     this.getCurrencies();
     
     let location:any = this.cookieService.get('__loc');
-    try{
-      this.location = JSON.parse(location);
-    }
-    catch(e){
 
-    }
+    this.location = JSON.parse(location);
+    
     this.profileForm = this.formBuilder.group({
       title: ['mr'],
       first_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
       last_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
+      country_id: [this.location.country.name ? this.location.country.name : ''],
       dob: ['', Validators.required],
-      country_code: [typeof this.location!='undefined' ? this.location.country.phonecode : ''],
-      country_id: [typeof this.location!='undefined' ? this.location.country.name : ''],
+      country_code: [this.location.country.phonecode ? this.location.country.phonecode : ''],
       phone_no: [''],
       address: [''],
       email: [''],
@@ -287,19 +284,25 @@ export class ProfileComponent implements OnInit {
         formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
       }
 
-      if(this.profileForm.value.state_id) {        
-        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : null);
+      if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
+        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
+      } else{
+        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
       }
       if(typeof(this.profileForm.value.country_code) === 'string'){     
         formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code : '' );
       } else {
         formdata.append("country_code", this.selectResponse.countryCode);
       } 
-      if(this.profileForm.value.language_id) {        
-        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : null);
+      if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
+        formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id :'');        
+      } else {
+        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id :'');
       }
-      if(this.profileForm.value.currency_id){        
-        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : '');
+      if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
+        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
+      } else {
+        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
       }         
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
