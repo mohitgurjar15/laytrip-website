@@ -19,10 +19,20 @@
 
 
 
-  <script>
+  <!-- <script>
     function initFreshChat() {
       window.fcWidget.init({
         token: "6035dcfa-d45a-4c1a-ba1f-2403638febe3",
+        host: "https://wchat.freshchat.com"
+      });
+    }
+    function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+  </script> -->
+
+  <script>
+    function initFreshChat() {
+      window.fcWidget.init({
+        token: "dd6dc59e-c42a-4f79-8d30-c58c1ea2c51b",
         host: "https://wchat.freshchat.com"
       });
     }

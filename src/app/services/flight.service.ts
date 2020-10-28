@@ -164,5 +164,14 @@ export class FlightService {
         );
     }
 
-    
+    getPredictionDate(data){
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
+        const url = environment.apiUrl + `v1/flight/predicted-booking-date`;
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
+            catchError(this.handleError)
+        );
+    }
 }

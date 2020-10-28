@@ -68,6 +68,7 @@ export class FlightSummaryComponent implements OnInit {
       }
       this.flightService.airRevalidate(routeData).subscribe((response:any)=>{
           this.flightDetail=response;
+          //sessionStorage.setItem('__route',JSON.stringify(response));
           this.setTotalPrice();
           this.flightSummaryLoader=false;
           this.outWardStopCount=response[0].routes[0].stops.length-1;
@@ -76,7 +77,6 @@ export class FlightSummaryComponent implements OnInit {
           this.totalTravelerValue.emit(this.totalTraveler);
           
           this.getRouteDetails.emit(response);
-          //sessionStorage.setItem('__route',JSON.stringify(response));
 
         },(error)=>{
           
