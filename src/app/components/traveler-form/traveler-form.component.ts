@@ -72,8 +72,8 @@ export class TravelerFormComponent implements OnInit {
     
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')],
+      lastName: ['', Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')],
       gender: ['M', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       country_code: [typeof this.location!='undefined' ? this.location.country.phonecode : '', [Validators.required]],

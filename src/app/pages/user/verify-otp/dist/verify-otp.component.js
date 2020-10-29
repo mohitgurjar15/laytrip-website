@@ -115,7 +115,6 @@ var VerifyOtpComponent = /** @class */ (function () {
         }
     };
     VerifyOtpComponent.prototype.onKeydown = function (event) {
-        console.log(event.target.tabIndex);
         var tabIndex = event.target.tabIndex ? '.tab' + (event.target.tabIndex - 1) : 1;
         if (event.key == 'Backspace') {
             $(tabIndex).focus();

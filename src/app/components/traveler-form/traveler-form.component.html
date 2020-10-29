@@ -67,20 +67,22 @@
           <div *ngIf="adultForm.controls.firstName.errors.required" class="text-danger">Please enter
             first name.
           </div>
+          <div *ngIf="adultForm.controls.firstName.errors.pattern" class="text-danger">First name must be 3 character long or no whitespace allowed.</div>
+
          
         </div>
       </div>
       <div class="form_field half">
         <label>Last Name<sup>*</sup></label>
         <div class="text_field">
-          <input type="text" formControlName="lastName" maxlength="20" tabindex="2" placeholder="Enter Last Name">
+          <input type="text" formControlName="lastName" maxlength="20" placeholder="Enter Last Name">
         </div>
         <div *ngIf="(submitted  || adultForm.controls.lastName.touched) && adultForm.controls.lastName.errors"
           class="focus-input100 login-error">
           <div *ngIf="adultForm.controls.lastName.errors.required" class="text-danger">Please enter
             last name.
           </div>
-         
+          <div *ngIf="adultForm.controls.lastName.errors.pattern" class="text-danger">Last name must be 3 character long or no whitespace allowed.</div>         
         </div>
       </div>
     </div>

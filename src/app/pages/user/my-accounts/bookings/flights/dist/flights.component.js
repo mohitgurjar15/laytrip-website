@@ -28,31 +28,20 @@ var FlightsComponent = /** @class */ (function () {
         this.cancellationPolicyArray = [];
         this.isNotFound = false;
         this.loading = true;
+        this.notFoundBaggageDetails = false;
     }
     FlightsComponent.prototype.ngOnInit = function () {
         this.page = 1;
+        this.loading = true;
         this.isNotFound = false;
         this.limit = this.perPageLimitConfig[0];
         this.getBookings();
     };
-    /* ngOnChanges(changes:SimpleChanges){
-      this.showPaginationBar = true;
-      this.flightList = changes.flightLists.currentValue;
-      console.log()
-    }
-  
-    ngAfterContentChecked() {
-      // this.flightBookings = this.flightList;
-      // this.totalItems = this.flightBookings.length;
-  
-      if(this.totalItems === 0) {
-        // this.isNotFound = true;
-        this.showPaginationBar = false;
-      }
-    } */
     FlightsComponent.prototype.pageChange = function (event) {
-        this.showPaginationBar = false;
+        window.scroll(0, 0);
+        this.loading = true;
         this.page = event;
+        this.getBookings();
     };
     FlightsComponent.prototype.showDetails = function (index) {
         var _this = this;
@@ -68,6 +57,7 @@ var FlightsComponent = /** @class */ (function () {
     };
     FlightsComponent.prototype.getBookings = function () {
         var _this = this;
+        this.loading = true;
         this.userService.getBookings(this.page, this.limit).subscribe(function (res) {
             if (res) {
                 _this.flightBookings = res.data.map(function (flight) {
@@ -114,9 +104,10 @@ var FlightsComponent = /** @class */ (function () {
         this.loadBaggageDetails = true;
         this.flightService.getBaggageDetails(routeCode).subscribe(function (data) {
             _this.baggageDetails = data;
-            _this.loadBaggageDetails = false;
+            _this.loadBaggageDetails = _this.notFoundBaggageDetails = false;
         }, function (err) {
             _this.loadBaggageDetails = false;
+            _this.notFoundBaggageDetails = true;
             _this.errorMessage = err.message;
         });
     };

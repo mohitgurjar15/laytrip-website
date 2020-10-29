@@ -7,7 +7,7 @@
         <h5>No Flight Booking Found</h5>
     </div>
 </div>
-<div class="result_listing one_way_list roundtrip_list">
+<div class="result_listing one_way_list roundtrip_list" *ngIf="!loading">
     <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
             <div class="block_booking_info">
@@ -311,11 +311,11 @@
                         <div class="card-body">
                             <div class="tab_detail baggage_rules_cnt">
                                 <div class="triangle_right"></div>
-                                <div class="detail_left">
+                                <!-- <div class="detail_left">
                                     <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
                                     <p>Indigo</p>
                                     <span>EWR - DEN</span>
-                                </div>
+                                </div> -->
                                 <div class="detail_right" *ngIf="loadBaggageDetails">
                                     <div class="w-100">
                                         <p class="fb_animation mb-0 h-auto w-100"></p>
@@ -323,7 +323,7 @@
                                     </div>
                                     <p class="fb_animation mb-0 h-auto w-100"></p>
                                 </div>
-                                <div class="detail_right" *ngIf="!loadBaggageDetails">
+                                <div class="detail_right" *ngIf="!loadBaggageDetails && !notFoundBaggageDetails">
                                     <table>
                                         <thead>
                                             <tr>
@@ -345,7 +345,9 @@
 
                                     <p>The baggage information is just for reference. Please Check with airline before
                                         check-in.</p>
-                                </div>
+                                    </div>
+                                    <p *ngIf="!loadBaggageDetails && notFoundBaggageDetails">There is no baggage information found</p>
+
                                 <div class="triangle_left"></div>
                             </div>
                         </div>

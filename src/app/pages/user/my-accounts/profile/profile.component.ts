@@ -69,36 +69,40 @@ export class ProfileComponent implements OnInit {
     window.scroll(0,0);
     this.getCountry();
     this.getLanguages();
-    this.getCurrencies();
-    
+    this.getCurrencies();    
+   
     let location:any = this.cookieService.get('__loc');
-
-    this.location = JSON.parse(location);
+    try{
+      this.location = JSON.parse(location);
+    }catch(e){}
     
+   
     this.profileForm = this.formBuilder.group({
-      title: ['mr'],
-      first_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
-      last_name: ['', [Validators.required,Validators.minLength(3), WhiteSpaceValidator.cannotContainSpace]],
-      country_id: [this.location.country.name ? this.location.country.name : ''],
-      dob: ['', Validators.required],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : ''],
-      phone_no: [''],
-      address: [''],
-      email: [''],
-      zip_code: [''],
-      state_id: [''],
-      city_name: [''],
-      gender: ['M'],
-      profile_pic: [''],      
-      currency_id: [''],      
-      address2: [''],      
-      language_id: [''],      
-      passport_expiry: [''],      
-      passport_number: [''],      
-    }, { validator: phoneAndPhoneCodeValidation('adult') });
+        title: ['mr'],
+        first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+        last_name: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+        country_id: [this.location.country.name ? this.location.country.name : ''],
+        dob: ['', Validators.required],
+        country_code: [''],
+        phone_no: [''],
+        address: [''],
+        email: [''],
+        zip_code: [''],
+        state_id: [''],
+        city_name: [''],
+        gender: ['M'],
+        profile_pic: [''],      
+        currency_id: [''],      
+        address2: [''],      
+        language_id: [''],      
+        passport_expiry: [''],      
+        passport_number: [''],      
+      }, { validator: phoneAndPhoneCodeValidation('adult') });
 
-    this.getProfileInfo();
+         
+      this.getProfileInfo(); 
   }
+
 
 
 
@@ -119,7 +123,12 @@ export class ProfileComponent implements OnInit {
           country_name:country.name+ ' ' +country.phonecode,
           flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
         }
-      })
+      });
+      const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+      console.log(countryCode.country_name)
+
+      this.profileForm.controls.country_code.setValue(countryCode.country_name);
+      
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);
@@ -201,8 +210,16 @@ export class ProfileComponent implements OnInit {
       this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
       
       const country = res.country.id ? res.country : this.location.country;
+      
       this.getStates(country);
 
+      let  countryCode  = '';
+      console.log(typeof res.countryCode,res.countryCode)
+      if(typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode){
+        countryCode = this.countries_code.filter(item => item.id == res.countryCode)[0];
+      } else {
+         countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
+      }
       this.profileForm.patchValue({      
           first_name: res.firstName,
           last_name: res.lastName,
@@ -211,7 +228,7 @@ export class ProfileComponent implements OnInit {
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
           dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
-          country_code : res.countryCode ? res.countryCode : this.location.country.phonecode,        
+          country_code : countryCode,        
           phone_no  : res.phoneNo,        
           country_id: res.country.name ? res.country.name : this.location.country.name,
           state_id: res.state.name,       
@@ -289,8 +306,9 @@ export class ProfileComponent implements OnInit {
       } else{
         formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
       }
-      if(typeof(this.profileForm.value.country_code) === 'string'){     
-        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code : '' );
+      console.log(typeof this.profileForm.value.country_code)
+      if(typeof(this.profileForm.value.country_code) === 'object'){     
+        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '' );
       } else {
         formdata.append("country_code", this.selectResponse.countryCode);
       } 
