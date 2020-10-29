@@ -105,7 +105,6 @@ var ProfileComponent = /** @class */ (function () {
                     };
                 });
             var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-            console.log(countryCode.country_name);
             _this.profileForm.controls.country_code.setValue(countryCode.country_name);
         }, function (error) {
             if (error.status === 401) {
@@ -185,7 +184,6 @@ var ProfileComponent = /** @class */ (function () {
             var country = res.country.id ? res.country : _this.location.country;
             _this.getStates(country);
             var countryCode = '';
-            console.log(typeof res.countryCode, res.countryCode);
             if (typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode) {
                 countryCode = _this.countries_code.filter(function (item) { return item.id == res.countryCode; })[0];
             }

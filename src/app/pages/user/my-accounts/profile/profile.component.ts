@@ -125,8 +125,6 @@ export class ProfileComponent implements OnInit {
         }
       });
       const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-      console.log(countryCode.country_name)
-
       this.profileForm.controls.country_code.setValue(countryCode.country_name);
       
     }, (error: HttpErrorResponse) => {
@@ -214,7 +212,6 @@ export class ProfileComponent implements OnInit {
       this.getStates(country);
 
       let  countryCode  = '';
-      console.log(typeof res.countryCode,res.countryCode)
       if(typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode){
         countryCode = this.countries_code.filter(item => item.id == res.countryCode)[0];
       } else {

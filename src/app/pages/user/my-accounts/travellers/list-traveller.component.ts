@@ -8,7 +8,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { TravellerFormComponent } from './traveller-form/traveller-form.component';
 import { ThrowStmt } from '@angular/compiler';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../../../services/generic.service';
 declare var $: any;
 
 @Component({
