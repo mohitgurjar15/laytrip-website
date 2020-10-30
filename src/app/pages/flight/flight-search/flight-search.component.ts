@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LayTripStoreService } from '../../../state/layTrip/layTrip-store.service';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LayTripService } from '../../../state/layTrip/services/layTrip.service';
 import { Location } from '@angular/common';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
@@ -35,9 +33,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   calenderPrices: [] = []
 
   constructor(
-    private layTripStoreService: LayTripStoreService,
     private route: ActivatedRoute,
-    private layTripService: LayTripService,
     private flightService: FlightService,
     public router: Router,
     public location: Location,
@@ -108,11 +104,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
 
+      this.dates = [];
+      console.log("this.dates", this.dates)
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
           this.flexibleLoading = false;
           this.flexibleNotFound = false;
           this.dates = res;
+          console.log("this.dates1", this.dates)
         }
       }, err => {
         this.flexibleNotFound = true;

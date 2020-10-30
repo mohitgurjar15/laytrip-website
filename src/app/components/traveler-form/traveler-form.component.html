@@ -67,6 +67,9 @@
           <div *ngIf="adultForm.controls.firstName.errors.required" class="text-danger">Please enter
             first name.
           </div>
+          <div *ngIf="adultForm.controls.firstName.errors.pattern" class="text-danger">First name must be 3 character long or no whitespace allowed.</div>
+
+         
         </div>
       </div>
       <div class="form_field half">
@@ -79,6 +82,7 @@
           <div *ngIf="adultForm.controls.lastName.errors.required" class="text-danger">Please enter
             last name.
           </div>
+          <div *ngIf="adultForm.controls.lastName.errors.pattern" class="text-danger">Last name must be 3 character long or no whitespace allowed.</div>         
         </div>
       </div>
     </div>
@@ -107,7 +111,7 @@
             <div class="code">
               <div class="dropdown">
                 <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true" [items]="countries_code"
-                bindLabel="country_name" bindValue="code" clearSearchOnAdd="true" formControlName="country_code" placeholder="Select country code">
+                bindLabel="country_name" clearSearchOnAdd="true" formControlName="country_code" placeholder="Select country code">
 
                 <ng-template ng-label-tmp let-item="item" let-clear="clear">
                   <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
@@ -125,15 +129,9 @@
             </div>
           </div>
         </div>
-        <div *ngIf="type === 'adult' && adultForm.controls.country_code.errors" class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.country_code.errors.required && adultForm.controls.country_code.touched"
-            class="text-danger">Please enter country code</div>
-        </div>
-        <div *ngIf="type === 'adult' && adultForm.controls.phone_no.errors" class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.phone_no.errors.required && adultForm.controls.phone_no.touched"
-            class="text-danger">Please enter phone no.</div>
-          <div *ngIf="adultForm.controls.phone_no.errors.minlength" class="text-danger">Phone number should be minimum
-            at least 10 digit</div>
+        <div *ngIf="(submitted || adultForm.controls.country_code.touched || adultForm.controls.phone_no.touched) 
+          && adultForm.hasError('phoneAndPhoneCodeError')">
+            <p class="text-danger">Please enter phone number</p>
         </div>
       </div>
     </div>
@@ -207,6 +205,7 @@
               [monthNavigator]="true"
               yearRange="2020:2030"
               [defaultDate]="dobMaxDate"
+              panelStyleClass="calender-passport-expiry"
               >
           </p-calendar>
           <div

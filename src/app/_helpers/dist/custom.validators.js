@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.phoneAndPhoneCodeValidation = exports.optValidation = exports.phoneCodeAndPhoneValidation = exports.fileSizeValidator = exports.validateImageFile = void 0;
+exports.WhiteSpaceValidator = exports.phoneAndPhoneCodeValidation = exports.optValidation = exports.phoneCodeAndPhoneValidation = exports.fileSizeValidator = exports.validateImageFile = void 0;
 function validateImageFile(name) {
     var allowed_extensions = ['jpg', 'jpeg', 'png'];
     var ext = name.substring(name.lastIndexOf('.') + 1);
@@ -40,11 +40,38 @@ function optValidation() {
     };
 }
 exports.optValidation = optValidation;
-function phoneAndPhoneCodeValidation() {
+function phoneAndPhoneCodeValidation(type) {
+    if (type === void 0) { type = ''; }
     return function (form) {
-        return (!form.value.phone_no || !form.value.country_code)
-            ? { phoneAndPhoneCodeError: true }
-            : null;
+        if (type == 'adult') {
+            if (!form.value.phone_no) {
+                return { phoneAndPhoneCodeError: true };
+            }
+            if (!form.value.phone_no) {
+                return { phoneAndPhoneCodeError: true };
+            }
+            else if (!form.value.phone_no || !form.value.country_code) {
+                return { phoneAndPhoneCodeError: true };
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
     };
 }
 exports.phoneAndPhoneCodeValidation = phoneAndPhoneCodeValidation;
+var WhiteSpaceValidator = /** @class */ (function () {
+    function WhiteSpaceValidator() {
+    }
+    WhiteSpaceValidator.cannotContainSpace = function (control) {
+        if (control.value.indexOf(' ') >= 0) {
+            return { cannotContainSpace: true };
+        }
+        return null;
+    };
+    return WhiteSpaceValidator;
+}());
+exports.WhiteSpaceValidator = WhiteSpaceValidator;

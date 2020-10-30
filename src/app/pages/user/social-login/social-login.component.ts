@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -19,8 +19,12 @@ import { ToastrService } from 'ngx-toastr';
 
 export class SocialLoginComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
+  @Output() socialError = new EventEmitter<string>();
   apiError: string = '';
   test: boolean = false;
+  loading: boolean = false;
+  google_loading: boolean = false;
+  apple_loading: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -61,7 +65,9 @@ export class SocialLoginComponent implements OnInit {
             this.router.url;
           }
         }, (error: HttpErrorResponse) => {
-          console.log(error);
+         
+          this.socialError.emit(error.message);
+          this.toastr.error(error.message, 'SignIn Error');
         });
       }
     });
@@ -91,9 +97,9 @@ export class SocialLoginComponent implements OnInit {
 
 
   googleLogin() {
-
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
+        this.google_loading = true;
 
         let profile = googleUser.getBasicProfile();
 
@@ -111,15 +117,19 @@ export class SocialLoginComponent implements OnInit {
         };
         this.userService.socialLogin(json_data).subscribe((data: any) => {
           if (data.user_details) {
+            this.google_loading = false;
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
             this.router.url;
             document.getElementById('navbarNav').click();
           }
         }, (error: HttpErrorResponse) => {
-          this.toastr.error(error.message, 'SignIn Error');
+          this.google_loading = false;
+          this.socialError.emit(error.message);
         });
       }, (error) => {
+        this.google_loading = false;
+        this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       });
   }
@@ -149,7 +159,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
-
+    this.loading = true;
     window['FB'].login((response) => {
       if (response.authResponse) {
 
@@ -169,7 +179,7 @@ export class SocialLoginComponent implements OnInit {
           };
 
           this.userService.socialLogin(json_data).subscribe((data: any) => {
-
+            this.loading = false;
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
@@ -178,12 +188,14 @@ export class SocialLoginComponent implements OnInit {
               this.router.url;
             }
           }, (error: HttpErrorResponse) => {
+            this.loading = false;
+            this.socialError.emit(error.message);
             this.toastr.error(error.message, 'SignIn Error');
           });
-
         });
       } else {
-        this.apiError = 'User login failed';
+        this.loading = false;
+        this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       }
     }, { scope: 'email' });
@@ -192,6 +204,4 @@ export class SocialLoginComponent implements OnInit {
   loginWithApple(): void {
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
   }
-
-  ngDoCheck() { }
 }

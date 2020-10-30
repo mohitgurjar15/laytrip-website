@@ -94,6 +94,9 @@ export class FlightSearchBarComponent implements OnInit {
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
       this.isRoundTrip = true;
     }
+    else{
+      this.isRoundTrip=false;
+    }
     this.arrivalCode = this.route.snapshot.queryParams['arrival'];
     this.flightSearchForm = this.fb.group({
       fromDestination: [[Validators.required]],
@@ -337,47 +340,50 @@ export class FlightSearchBarComponent implements OnInit {
     let departureDate =  this.route.snapshot.queryParams['departure_date'];
     let departureDates = departureDate.split("-");
     this.monthYearArr.push(`${departureDates[1]}-${departureDates[0]}`);
-    this.isCalenderPriceLoading=false;
+    if(typeof changes['calenderPrices'].currentValue!='undefined' && changes['calenderPrices'].firstChange==false){
+      this.isCalenderPriceLoading=false;
+    }
   }
 
   changeMonth(event){
     
-    let month=event.month;
-    month = month.toString().length==1?'0'+month:month;
-    let monthYearName = `${month}-${event.year}`;
-    if(!this.monthYearArr.includes(monthYearName)){
-      this.monthYearArr.push(monthYearName)
-      let startDate:any = moment([event.year,event.month-1]);
-      let endDate:any =  moment(startDate).endOf('month');
-      
-      startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
-      endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
-      if(!moment().isBefore(startDate)){
-        startDate = moment().format("YYYY-MM-DD")
-      }
+    if(!this.isRoundTrip){
+      let month=event.month;
+      month = month.toString().length==1?'0'+month:month;
+      let monthYearName = `${month}-${event.year}`;
+      if(!this.monthYearArr.includes(monthYearName)){
+        this.monthYearArr.push(monthYearName)
+        let startDate:any = moment([event.year,event.month-1]);
+        let endDate:any =  moment(startDate).endOf('month');
+        
+        startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
+        endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+        if(!moment().isBefore(startDate)){
+          startDate = moment().format("YYYY-MM-DD")
+        }
 
-      let payload={
-        source_location: this.route.snapshot.queryParams['departure'],
-        destination_location: this.route.snapshot.queryParams['arrival'],
-        flight_class: this.route.snapshot.queryParams['class'],
-        adult_count: this.route.snapshot.queryParams['adult'],
-        child_count: this.route.snapshot.queryParams['child'],
-        infant_count: this.route.snapshot.queryParams['infant'],
-        start_date :startDate,
-        end_date :endDate
-      }
-      
-      this.isCalenderPriceLoading=true;
-      this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+        let payload={
+          source_location: this.route.snapshot.queryParams['departure'],
+          destination_location: this.route.snapshot.queryParams['arrival'],
+          flight_class: this.route.snapshot.queryParams['class'],
+          adult_count: this.route.snapshot.queryParams['adult'],
+          child_count: this.route.snapshot.queryParams['child'],
+          infant_count: this.route.snapshot.queryParams['infant'],
+          start_date :startDate,
+          end_date :endDate
+        }
         
+        this.isCalenderPriceLoading=true;
+        this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+          
+            this.isCalenderPriceLoading=false;
+            this.calenderPrices = [...this.calenderPrices,...res];
+          
+        }, err => {
           this.isCalenderPriceLoading=false;
-          this.calenderPrices = [...this.calenderPrices,...res];
-        
-      }, err => {
-        this.isCalenderPriceLoading=false;
-      });
+        });
+      }
     }
-    
   }
 
 }

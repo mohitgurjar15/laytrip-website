@@ -18,3 +18,7 @@ input.ng-invalid.ng-touched {
 .img_country_code {
   border-radius: 3px;
 }
+
+::ng-deep .calender-passport-expiry {
+  min-width: 300px !important;
+}

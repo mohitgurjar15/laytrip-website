@@ -67,6 +67,7 @@
                 }
                 .ng-value{
                     padding: 0 15px;
+                    color: #000;
                 }
             }
             .ng-clear-wrapper {
@@ -124,9 +125,12 @@
                 box-shadow: none;
             }
             .ng-value-container{
-                height: auto;    
+                height: auto;
+                
                 .ng-value{
                     height: auto;
+                    font-size: 14px;
+                    color: #000000;
                 }
                 .ng-input{
                     height: auto;
@@ -228,4 +232,43 @@
 .calender_price{
     font-size: 9px;
     color:#012178;
+}
+
+.search_result {
+	.result_listing.one_way_list {
+		.search_block {
+			.detail_info_show {
+				.tab-content {
+					.card-body {
+						.tab_detail.baggage_rules_cnt {
+							.detail_right {
+								width: 100% !important;
+								table {
+									width: 100% !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+    }
+    .result_listing.roundtrip_list {
+		.search_block {
+			.detail_info_show {
+				.tab-content {
+					.card-body {
+						.tab_detail.baggage_rules_cnt {
+							.detail_right {
+								width: 100% !important;
+								table {
+									width: 100% !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

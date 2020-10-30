@@ -64,10 +64,13 @@
                     </div>
                     <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
                         class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.firstName.errors.required" class="text-danger">Please
-                            enter
-                            first name.
+                        <div *ngIf="coAccountForm.controls.firstName.errors.required" class="text-danger">Please enter first name.
                         </div>
+                      
+                        <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
+                            <p class="text-danger">Please enter valid first name </p>
+                        </div> -->
+                        <div *ngIf="coAccountForm.controls.firstName.errors.pattern" class="text-danger">First name must be 3 character long or no whitespace allowed.</div>
                     </div>
                 </div>
                 <div class="form_field half">
@@ -78,10 +81,9 @@
                     </div>
                     <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
                         class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.lastName.errors.required" class="text-danger">Please
-                            enter
-                            last name.
+                        <div *ngIf="coAccountForm.controls.lastName.errors.required" class="text-danger">Please enter last name.
                         </div>
+                        <div *ngIf="coAccountForm.controls.lastName.errors.pattern" class="text-danger">Last name must be 3 character long or no whitespace allowed.</div>
                     </div>
                 </div>
             </div>
@@ -99,9 +101,7 @@
                             email.
                         </div>
                         <div *ngIf="coAccountForm.controls.email.errors.pattern" class="text-danger">Please
-                            enter valid
-                            email
-                            address.</div>
+                            enter valid email address.</div>
                     </div>
                 </div>
                 <div class="form_field half">
@@ -111,7 +111,7 @@
                             <div class="code">
                                 <div class="dropdown">
                                     <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true"
-                                        [items]="countries_code" bindValue="code" bindLabel="country_name" clearSearchOnAdd="true"
+                                        [items]="countries_code" bindLabel="country_name" clearSearchOnAdd="true"
                                         formControlName="country_code" placeholder="Select country code">
                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                             <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
@@ -130,15 +130,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div *ngIf="coAccountForm.controls.country_code.errors" class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.country_code.errors.required && coAccountForm.controls.country_code.touched"
-                            class="text-danger">Please enter country code</div>
-                    </div>
-                    <div *ngIf="submitted && coAccountForm.controls.phone_no.errors" class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.phone_no.errors.required" class="text-danger">Please
-                            enter phone no.</div>
-                    </div> -->
-                    <div *ngIf="(coAccountForm.hasError('phoneAndPhoneCodeError') && (coAccountForm.controls.country_code.touched || coAccountForm.controls.phone_no.touched)) || submitted">
+                    <div *ngIf="(submitted || coAccountForm.controls.country_code.touched || coAccountForm.controls.phone_no.touched) 
+                                             && coAccountForm.hasError('phoneAndPhoneCodeError')">
                         <p class="text-danger">Please enter phone number</p>
                     </div>
                 </div>
@@ -162,7 +155,7 @@
                 </div>
                 <div class="form_field half">
                     <label>Nationality<sup>*</sup></label>
-                    <div class="text_field custom-select">
+                    <div class this.selectResponse.preferredLanguage.id="text_field custom-select">
                         <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="7"
                             [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
                             placeholder="Select nationality">
@@ -187,21 +180,23 @@
 
             <div class="form_row">
                 <div class="form_field half">
-                    <label>Passport Expiration Date</label>
-                    <div class="text_field">
-                        <p-calendar tabindex="6" inputStyleClass="custom_datpicker birth_date" inputId="basic"
-                            formControlName="passport_expiry" [minDate]="expiryMinDate" [yearNavigator]="true"
-                            [monthNavigator]="true" yearRange="2020:2030" [defaultDate]="dobMaxDate">
-                        </p-calendar>
-                    </div>
-                </div>
-                <div class="form_field half">
                     <label>Passport Number</label>
                     <div class="text_field">
                         <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
                             placeholder="Passport Number">
                     </div>
                 </div>
+                <div class="form_field half">
+                    <label>Passport Expiration Date</label>
+                    <div class="text_field">
+                        <p-calendar tabindex="6" inputStyleClass="custom_datpicker birth_date" inputId="basic"
+                            formControlName="passport_expiry" [minDate]="expiryMinDate" [yearNavigator]="true"
+                            [monthNavigator]="true" yearRange="2020:2030" [defaultDate]="dobMaxDate"
+                            panelStyleClass="calender-passport-expiry">
+                        </p-calendar>
+                    </div>
+                </div>
+                
             </div>
 
 

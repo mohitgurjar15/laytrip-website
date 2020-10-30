@@ -39,7 +39,7 @@
               (input)="onInputEntry($event, input6)" formControlName="otp6" maxlength="1" tabindex="6" class="tab6" placeholder="0">
           </li>
         </ul>
-        <div *ngIf="(otpForm.hasError('otpsError') && otpForm.controls.otp1.touched) || submitted">
+        <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp1.touched || submitted)">
           <p class="text-danger">Please enter OTP</p>
         </div>
         <!-- <div *ngIf="(submitted || errorMessage) && otpForm.controls.otp1.errors" class="focus-input100 login-error">

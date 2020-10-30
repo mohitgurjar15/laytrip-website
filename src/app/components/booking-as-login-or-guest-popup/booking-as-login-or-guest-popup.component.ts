@@ -31,7 +31,8 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
     if(type == 'login'){
       this.isShowGuestPopupValueChange.emit(false);
       $("#sign_in_modal").modal('show');
-    } if (type == 'guest'){      
+    } if (type == 'guest'){ 
+      sessionStorage.setItem('__insMode',btoa('no-instalment'))     
       this.router.navigate(['/flight/travelers',this.routeCode]);      
     }
   }

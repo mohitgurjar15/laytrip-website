@@ -12,7 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
-import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
+import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../../../../_helpers/custom.validators';
 
 @Component({
   selector: 'app-traveller-form',
@@ -25,11 +25,11 @@ export class TravellerFormComponent implements OnInit {
   @Output() travelersChanges = new EventEmitter();
   @Input() travellerId: any;
   @Input() travelerInfo: any;
+  @Input() countries=[];
+  @Input() countries_code=[];
 
   coAccountForm: FormGroup;
-  countries: any = [];
   traveller: any = [];
-  countries_code: any = [];
   isLoggedIn: boolean = false;
   submitted = false;
   loading = false;
@@ -60,24 +60,29 @@ export class TravellerFormComponent implements OnInit {
 
   ngOnInit() {
     this.checkUser();
-    this.getCountry();
     let location:any = this.cookieService.get('__loc');
-    this.location = JSON.parse(location);
+    try{
+      this.location = JSON.parse(location);
+    }
+    catch(e){}
+    
+    const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
 
     this.coAccountForm = this.formBuilder.group({
       title: ['mr'],
       gender: ['M'],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      lastName: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
       phone_no: ['', [Validators.required]],
-      country_id: [this.location.country.name ? this.location.country.name : '', Validators.required],
+      country_id: [typeof this.location!='undefined' ? this.location.country.name : '',[ Validators.required]],
+      country_code: [typeof countryCode.country_name !='undefined' ? countryCode.country_name : '', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
       user_type: ['']
-    }, { validator: phoneAndPhoneCodeValidation() });
+    }, { validator: phoneAndPhoneCodeValidation('adult') });
+
     this.setUserTypeValidation();
 
     if (this.travellerId) {
@@ -87,8 +92,13 @@ export class TravellerFormComponent implements OnInit {
   }
 
   setTravelerForm() {
-    
       this.traveller = this.travelerInfo;
+      let  countryCode  = '';
+      if(typeof this.travelerInfo.countryCode != 'undefined' && typeof this.travelerInfo.countryCode == 'string'){
+        countryCode = this.countries_code.filter(item => item.id == this.travelerInfo.countryCode)[0];      
+      } else {
+         countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
+      }
       this.coAccountForm.patchValue({
         title: this.travelerInfo.title?this.travelerInfo.title:'mr',
         firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
@@ -96,12 +106,13 @@ export class TravellerFormComponent implements OnInit {
         email: this.travelerInfo.email ? this.travelerInfo.email : '',
         gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
         phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
-        country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
+        country_code: countryCode,
         country_id: this.travelerInfo.country.name ? this.travelerInfo.country.name : '',
         dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
         passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
         passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : '',   
     });
+    console.log(this.coAccountForm)
   }
 
   close() {
@@ -131,7 +142,7 @@ export class TravellerFormComponent implements OnInit {
     }
   }
 
-  getCountry() {
+  /* getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
       this.countries = data.map(country => {
         return {
@@ -150,17 +161,20 @@ export class TravellerFormComponent implements OnInit {
             country_name:country.name+ ' ' +country.phonecode,
             flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
           }
-        })
+        });
+        console.log(this.countries_code)
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);
       }
     });
   }
+ */
 
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.coAccountForm.invalid) {
+      console.log(this.coAccountForm)
       this.submitted = true;
       this.loading = false;
       return;
@@ -174,7 +188,15 @@ export class TravellerFormComponent implements OnInit {
           country_id = this.location.country.id;
         }
       }
-      console.log(typeof this.coAccountForm.value.passport_expiry )
+      let country_code = this.coAccountForm.value.country_code;
+      if(typeof country_code == 'object'){
+        country_code = country_code.id ? country_code.id :  this.location.country.id;
+      } else if(typeof country_code == 'string'){
+        country_code = this.travelerInfo.countryCode ? this.travelerInfo.countryCode : this.location.country.id;
+      } else {
+        country_code = this.location.country.id;
+      }
+
       let jsonData = {
         title: this.coAccountForm.value.title,
         first_name: this.coAccountForm.value.firstName,
@@ -184,15 +206,13 @@ export class TravellerFormComponent implements OnInit {
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : null,
         passport_number: this.coAccountForm.value.passport_number,
-        country_code: this.coAccountForm.value.country_code &&
-          this.coAccountForm.value.country_code !== 'null' ? this.coAccountForm.value.country_code : this.coAccountForm.value.country_code,
+        country_code : country_code ? country_code  : this.location.country.id, 
         phone_no: this.coAccountForm.value.phone_no,
       };
       let emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
 
       if (this.travellerId) {
-        // jsonData = Object.assign(jsonData, emailObj);
-
+        jsonData = Object.assign(jsonData, emailObj);
         this.flightService.updateAdult(jsonData,this.travellerId).subscribe((data: any) => {
           this.travelersChanges.emit(data);          
           this.activeModal.close();
@@ -202,10 +222,10 @@ export class TravellerFormComponent implements OnInit {
               this.router.navigate(['/']);
             }
             this.toastr.error(error.error.message, 'Traveller Update Error');
-        }); 
+        });
       } else {
         jsonData = Object.assign(jsonData, emailObj);
-        
+
         this.flightService.addAdult(jsonData).subscribe((data: any) => {
           this.travelersChanges.emit(data);
           this.activeModal.close();
@@ -223,6 +243,7 @@ export class TravellerFormComponent implements OnInit {
       }
     }
   }
+
 
   ngOnChanges(changes: SimpleChanges) {
   }

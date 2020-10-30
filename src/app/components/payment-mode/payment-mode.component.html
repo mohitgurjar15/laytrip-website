@@ -7,9 +7,9 @@
                 <li>Default Instalment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
             </ul>
         </div>
-        <div class="block_detail_right">
+        <!-- <div class="block_detail_right">
             Booking available on <span>26th Nov, 2020</span>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -261,10 +261,14 @@
             </div>
 
         </div>
-        <div class="block_installment_date">
-            <p>We will perform your actual booking before <span>26th Nov, 2020</span>.</p>
-            <p>Enjoy Stress free travel experience with Laytrip.</p>
+        <!-- <div class="block_installment_date" *ngIf="pridictionLoading">
+            <p class="fb_animation w-100 mb-2"></p>
+            <p class="fb_animation w-100 mb-0"></p>
         </div>
+        <div class="block_installment_date" *ngIf="!pridictionLoading">
+            <p>We will perform your actual booking before <span>{{predictionDate}}</span>.</p>
+            <p>Enjoy Stress free travel experience with Laytrip.</p>
+        </div> -->
     </div>
 </div>
 

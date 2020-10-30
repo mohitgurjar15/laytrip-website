@@ -58,12 +58,9 @@ export class UserService {
   signup(formValue) {
     let data = {
       "signup_via": "web",
-      "first_name": formValue.first_name,
-      "last_name": formValue.last_name,
       "email": formValue.email,
       "password": formValue.password,
       "confirm_password": formValue.confirm_password,
-      "gender": 'M',//formValue.gender,
       "device_type": 1,
       "device_model": "RNE-L22",
       "device_token": "123abc#$%456",

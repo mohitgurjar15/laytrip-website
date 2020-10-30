@@ -8,6 +8,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
+import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../_helpers/custom.validators';
 
 
 declare var $: any;
@@ -23,8 +24,8 @@ export class TravelerFormComponent implements OnInit {
   @Input('var') usersType: any = '';
   @Input() traveler: any = [];
   @Input() type: string;
-  @Input() countries: [];
-  @Input() countries_code: [];
+  @Input() countries=[];
+  @Input() countries_code= [];
   @Output() travelerFormChange = new EventEmitter();
   @Output() auditFormStatus = new EventEmitter();
 
@@ -62,36 +63,47 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
     let location:any = this.cookieService.get('__loc');
-    this.location = JSON.parse(location);
-   
+    try{
+      this.location = JSON.parse(location);
+    }
+    catch(e){
+
+    }
+    const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
+      firstName: ['',[ Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       gender: ['M', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
-      country_id: [this.location.country.name ? this.location.country.name : ''],
+      country_code: [typeof countryCode.country_name !='undefined' ? countryCode.country_name : '', [Validators.required]],
+      country_id: [typeof this.location!='undefined' ? this.location.country.name : ''],
       phone_no: ['', [Validators.required]],
       dob : ['', Validators.required],
       passport_expiry : [''],
       frequently_no: [''],
       user_type: ['']
-    });
+    }, { validator: phoneAndPhoneCodeValidation(this.type) });
 
     this.setUserTypeValidation();
 
     if (this.traveler.userId) {
-
+      let  countryCode  = '';
+      if(typeof this.traveler.countryCode != 'undefined' && typeof this.traveler.countryCode == 'string'){
+        countryCode = this.countries_code.filter(item => item.id == this.traveler.countryCode)[0];      
+      } else {
+         countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
+      }
       this.adultForm.patchValue({
         title: this.traveler.title ? this.traveler.title : 'mr',
-        firstName: this.traveler.firstName,
-        lastName: this.traveler.lastName,
+        firstName: this.traveler.firstName? this.traveler.firstName :'',
+        lastName: this.traveler.lastName ? this.traveler.lastName : '',
         email: this.traveler.email,
         gender: this.traveler.gender ? this.traveler.gender : 'M',
-        country_code: this.traveler.countryCode,
+        country_code: countryCode,
         phone_no: this.traveler.phoneNo,
-        country_id: this.traveler.country != null ? this.traveler.country.name : '',
+        country_id: this.traveler.country != null ? this.traveler.country.name : this.location.country.name,
         passport_number: this.traveler.passportNumber,
         dob: this.traveler.dob ? new Date(this.traveler.dob) : '',
         passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
@@ -123,18 +135,16 @@ export class TravelerFormComponent implements OnInit {
       this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
     } else if (this.type === 'child') {
-      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
-      phoneControl.setValidators(null)
-      countryControl.setValidators(null);
       this.dobMinDate =  new Date(moment().subtract(12,'years').format("MM/DD/YYYY") );
       this.dobMaxDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
- 
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
+      phoneControl.setValidators(null)
+      countryControl.setValidators(null);
     } else if (this.type === 'infant') {
       this.dobMinDate =  new Date(moment().subtract(2,'years').format("MM/DD/YYYY") );
       this.dobMaxDate = new Date();
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
- 
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
@@ -166,22 +176,28 @@ export class TravelerFormComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.adultForm.invalid) {
+      console.log(this.adultForm)
       this.submitted = true;
       this.loading = false;
       return;
     } else {
-      console.log("s",this.adultForm.value)
       let country_id = this.adultForm.value.country_id.id;
       if (!Number(country_id)) {
-        console.log(this.traveler.country)
         if(this.traveler.country){
           country_id = ( this.traveler.country.id ) ? this.traveler.country.id : '';
         } else {
           country_id = this.location.country.id;
         }
       }
-      console.log(country_id)
-    
+      let country_code = this.adultForm.value.country_code;
+      if(typeof country_code == 'object'){
+        country_code = country_code.id ? country_code.id :  this.location.country.id;
+      } else if(typeof country_code == 'string'){
+        country_code = this.traveler.countryCode ? this.traveler.countryCode : this.location.country.id;
+      } else {
+        country_code = this.location.country.id;
+      }
+      console.log(country_code)
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
@@ -199,25 +215,24 @@ export class TravelerFormComponent implements OnInit {
 
       if (this.type === 'adult') {
         let adultObj = {
-          country_code: this.adultForm.value.country_code.country_name &&
-            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code : this.adultForm.value.country_code,
+          country_code : country_code ? country_code  : this.location.country.id, 
           phone_no: this.adultForm.value.phone_no,
         };
         jsonData = Object.assign(jsonData, adultObj);
       }
-      // console.log(this.adultForm.value.country_code,jsonData)
       if (this.traveler && this.traveler.userId) {
         this.flightService.updateAdult(jsonData, this.traveler.userId).subscribe((data: any) => {
           this.submitted = this.loading = false;
-          // this.travelerFormChange.observers.push(data);
           this.travelerFormChange.emit(data);
           $('.collapse').collapse('hide');
           $('#accordion-' + this.type).hide();
         }, (error: HttpErrorResponse) => {
-          console.log('error');
           this.submitted = this.loading = false;
           if (error.status === 401) {
+            this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             this.router.navigate(['/']);
+          } else {
+            this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
           }
         });
       } else {
@@ -239,6 +254,7 @@ export class TravelerFormComponent implements OnInit {
         }, (error: HttpErrorResponse) => {
           this.submitted = this.loading = false;
           if (error.status === 401) {
+            this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
             this.router.navigate(['/']);
           } else {
             this.toastr.error(error.error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });

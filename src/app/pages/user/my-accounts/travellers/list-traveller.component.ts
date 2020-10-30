@@ -8,6 +8,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { TravellerFormComponent } from './traveller-form/traveller-form.component';
 import { ThrowStmt } from '@angular/compiler';
+import { GenericService } from '../../../../services/generic.service';
 declare var $: any;
 
 @Component({
@@ -19,6 +20,8 @@ export class ListTravellerComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   travelers = [];
   closeResult = '';
+  countries: any = [];
+  countries_code: any = [];
   userId: string;
   loading = true;
   loops = [0, 1, 2, 3, 4, 5];
@@ -33,12 +36,17 @@ export class ListTravellerComponent implements OnInit {
   isMasterSel:boolean;
   categoryList:any;
   checkedCategoryList:any;
+  selectedAll: any;
+  selectedAllSecondname: any;
+  name: any;
 
   constructor(
     public travelerService: TravelerService,
     public router: Router,
     public modalService: NgbModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private genericService: GenericService
+
 
   ) {
     this.isMasterSel = false;
@@ -48,6 +56,7 @@ export class ListTravellerComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0,0);
+    this.getCountry();
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
   
@@ -104,6 +113,8 @@ export class ListTravellerComponent implements OnInit {
     this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal',centered: true });
     (<TravellerFormComponent>this.modalReference.componentInstance).travellerId = userId;
     (<TravellerFormComponent>this.modalReference.componentInstance).travelerInfo = traveler;
+    (<TravellerFormComponent>this.modalReference.componentInstance).countries = this.countries;
+    (<TravellerFormComponent>this.modalReference.componentInstance).countries_code = this.countries_code;
     this.modalReference.componentInstance.travelersChanges.subscribe(($e) => {
       const index = this.travelers.indexOf($e.userId, 0);
       if(index){
@@ -119,7 +130,7 @@ export class ListTravellerComponent implements OnInit {
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.getTravelers();
+      // this.getTravelers();
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(this.closeResult)
     });
@@ -159,9 +170,32 @@ export class ListTravellerComponent implements OnInit {
     });
     this.modalReference.close();
   }
-  selectedAll: any;
-  selectedAllSecondname: any;
-  name: any;
+ 
+  getCountry() {
+    this.genericService.getCountry().subscribe((data: any) => {
+      this.countries = data.map(country => {
+        return {
+          id: country.id,
+          name: country.name,
+          code: country.phonecode,
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+        }
+      }),
+        this.countries_code = data.map(country => {
+          return {
+            id: country.id,
+            name: country.phonecode+' ('+country.iso2+')',
+            code:country.phonecode,
+            country_name:country.name+ ' ' +country.phonecode,
+            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+          }
+        });
+    }, (error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        this.router.navigate(['/']);
+      }
+    });
+  }
 
   checkUncheckAll() {
     var checkboxes = document.getElementsByClassName('travelerCheckbox');

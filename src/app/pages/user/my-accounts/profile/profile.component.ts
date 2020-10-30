@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation } from '../../../../_helpers/custom.validators';
+import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation,WhiteSpaceValidator } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   maxDate: any = {};
   public startDate: Date;
   is_gender: boolean = true;
-  is_type: string = '';
+  is_type: string = 'M';
   public imageFile:any  = '';
   public imageFileError = false;
   public imageErrorMsg: string = 'Image is required';
@@ -47,12 +47,12 @@ export class ProfileComponent implements OnInit {
   seletedDob :any;
 
   dobMinDate= new Date();
+  location;
   dobMaxDate: moment.Moment = moment();
   locale = {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
   };
-  location;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,33 +69,42 @@ export class ProfileComponent implements OnInit {
     window.scroll(0,0);
     this.getCountry();
     this.getLanguages();
-    this.getCurrencies();
-    this.getProfileInfo();
-    
+    this.getCurrencies();    
+   
     let location:any = this.cookieService.get('__loc');
-    this.location = JSON.parse(location);
+    try{
+      this.location = JSON.parse(location);
+    }catch(e){}
     
+   
     this.profileForm = this.formBuilder.group({
-      title: ['mr'],
-      first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
-      country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [Validators.required]],
-      country_id: [this.location.country.name ? this.location.country.name : ''],
-      dob: ['', Validators.required],
-      phone_no: ['', [Validators.required]],
-      address: [''],
-      email: [''],
-      zip_code: [''],
-      state_id: [''],
-      city_name: [''],
-      gender: ['M'],
-      profile_pic: [''],      
-      address2: [''],      
-      language_id: [''],      
-      passport_expiry: [''],      
-      passport_number: [''],      
-    }, { validator: phoneAndPhoneCodeValidation() });
+        title: ['mr'],
+        first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+        last_name: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+        country_id: [this.location.country.name ? this.location.country.name : ''],
+        dob: ['', Validators.required],
+        country_code: [''],
+        phone_no: [''],
+        address: [''],
+        email: [''],
+        zip_code: [''],
+        state_id: [''],
+        city_name: [''],
+        gender: ['M'],
+        profile_pic: [''],      
+        currency_id: [''],      
+        address2: [''],      
+        language_id: [''],      
+        passport_expiry: [''],      
+        passport_number: [''],      
+      }, { validator: phoneAndPhoneCodeValidation('adult') });
+
+         
+      this.getProfileInfo(); 
   }
+
+
+
 
   getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
@@ -114,7 +123,10 @@ export class ProfileComponent implements OnInit {
           country_name:country.name+ ' ' +country.phonecode,
           flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
         }
-      })
+      });
+      const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+      this.profileForm.controls.country_code.setValue(countryCode.country_name);
+      
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);
@@ -154,19 +166,11 @@ export class ProfileComponent implements OnInit {
   }
 
   clickGender(event,type){
-    this.is_type = '';
-    this.is_gender = false;       
-      if(type =='M'){
-        this.is_type = 'M';
-      } else if(type =='F'){
-        this.is_type = 'F';        
-      } else if(type =='N') {
-        this.is_type = 'N';
-      } else {
-        this.is_gender = false;
-        this.is_type = '';
-      }
-      this.is_gender = true;
+    this.is_gender = true; 
+    this.is_type = 'M';      
+    if(type =='F'){
+      this.is_type = 'F';        
+    } 
   }
 
 
@@ -200,9 +204,19 @@ export class ProfileComponent implements OnInit {
       this.image = res.profilePic;
       this.selectResponse = res;
 
-      this.is_type = res.gender;
+      this.is_type = res.gender ? res.gender :'M';
       this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
+      
+      const country = res.country.id ? res.country : this.location.country;
+      
+      this.getStates(country);
 
+      let  countryCode  = '';
+      if(typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode){
+        countryCode = this.countries_code.filter(item => item.id == res.countryCode)[0];
+      } else {
+         countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
+      }
       this.profileForm.patchValue({      
           first_name: res.firstName,
           last_name: res.lastName,
@@ -211,9 +225,9 @@ export class ProfileComponent implements OnInit {
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
           dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
-          country_code : res.countryCode,        
+          country_code : countryCode,        
           phone_no  : res.phoneNo,        
-          country_id: res.country.name,
+          country_id: res.country.name ? res.country.name : this.location.country.name,
           state_id: res.state.name,       
           city_name  : res.cityName,        
           address  : res.address,  
@@ -240,6 +254,7 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls.gender.setValue(this.is_type);
     }
     if (this.profileForm.invalid) {
+      console.log(this.profileForm)
       this.submitted = true;      
       this.loading = false;
       //scroll top if any error 
@@ -270,10 +285,9 @@ export class ProfileComponent implements OnInit {
       formdata.append("address1",this.profileForm.value.address);
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
-      formdata.append("passportNumber",this.profileForm.value.passport_number);
+      formdata.append("passport_number",this.profileForm.value.passport_number);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-      formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
-      // console.log(typeof this.profileForm.value.country_id )
+      formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
       if(typeof this.profileForm.value.country_id === 'string'){
         if(this.selectResponse.country.id){
           formdata.append("country_id", this.selectResponse.country.id);
@@ -285,24 +299,25 @@ export class ProfileComponent implements OnInit {
       }
 
       if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.selectResponse.state.id);
+        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
       } else{
-        formdata.append("state_id", this.profileForm.value.state_id);
+        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
       }
-      if(typeof(this.profileForm.value.country_code) === 'string'){     
-        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code : '' );
+      console.log(typeof this.profileForm.value.country_code)
+      if(typeof(this.profileForm.value.country_code) === 'object'){     
+        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '' );
       } else {
         formdata.append("country_code", this.selectResponse.countryCode);
       } 
       if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
-        formdata.append("language_id", this.selectResponse.preferredLanguage.id);        
+        formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id :'');        
       } else {
-        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : 1);
+        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id :'');
       }
       if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
-        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id : '');
+        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
       } else {
-        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : 1);
+        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
       }         
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 

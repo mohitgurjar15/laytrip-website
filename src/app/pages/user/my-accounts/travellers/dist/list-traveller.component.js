@@ -13,14 +13,17 @@ var moment = require("moment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var traveller_form_component_1 = require("./traveller-form/traveller-form.component");
 var ListTravellerComponent = /** @class */ (function () {
-    function ListTravellerComponent(travelerService, router, modalService, toastr) {
+    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService) {
         this.travelerService = travelerService;
         this.router = router;
         this.modalService = modalService;
         this.toastr = toastr;
+        this.genericService = genericService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this.closeResult = '';
+        this.countries = [];
+        this.countries_code = [];
         this.loading = true;
         this.loops = [0, 1, 2, 3, 4, 5];
         this.dataPassToChild = null;
@@ -31,6 +34,8 @@ var ListTravellerComponent = /** @class */ (function () {
         this.isMasterSel = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
+        window.scroll(0, 0);
+        this.getCountry();
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
         this.loading = true;
@@ -82,6 +87,8 @@ var ListTravellerComponent = /** @class */ (function () {
         this.modalReference = this.modalService.open(traveller_form_component_1.TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal', centered: true });
         this.modalReference.componentInstance.travellerId = userId;
         this.modalReference.componentInstance.travelerInfo = traveler;
+        this.modalReference.componentInstance.countries = this.countries;
+        this.modalReference.componentInstance.countries_code = this.countries_code;
         this.modalReference.componentInstance.travelersChanges.subscribe(function ($e) {
             var index = _this.travelers.indexOf($e.userId, 0);
             if (index) {
@@ -98,7 +105,7 @@ var ListTravellerComponent = /** @class */ (function () {
         this.modalReference.result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
         }, function (reason) {
-            _this.getTravelers();
+            // this.getTravelers();
             _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
             console.log(_this.closeResult);
         });
@@ -138,6 +145,32 @@ var ListTravellerComponent = /** @class */ (function () {
             }
         });
         this.modalReference.close();
+    };
+    ListTravellerComponent.prototype.getCountry = function () {
+        var _this = this;
+        this.genericService.getCountry().subscribe(function (data) {
+            _this.countries = data.map(function (country) {
+                return {
+                    id: country.id,
+                    name: country.name,
+                    code: country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                };
+            }),
+                _this.countries_code = data.map(function (country) {
+                    return {
+                        id: country.id,
+                        name: country.phonecode + ' (' + country.iso2 + ')',
+                        code: country.phonecode,
+                        country_name: country.name + ' ' + country.phonecode,
+                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                    };
+                });
+        }, function (error) {
+            if (error.status === 401) {
+                _this.router.navigate(['/']);
+            }
+        });
     };
     ListTravellerComponent.prototype.checkUncheckAll = function () {
         var checkboxes = document.getElementsByClassName('travelerCheckbox');

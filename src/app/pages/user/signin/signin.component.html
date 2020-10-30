@@ -63,7 +63,7 @@
             </form>
             <div class="modal_btm">
                 <span>Or login via</span>
-                <app-social-login></app-social-login>
+                <app-social-login (socialError)="socialError($event)"></app-social-login>
                 <p>Don't have an account? <a href="javascript:void(0);" (click)="openPage({value: 'signUp'})"
                         class="signUp">Sign Up</a></p>
             </div>

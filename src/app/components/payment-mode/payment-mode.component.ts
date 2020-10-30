@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
+import { FlightService } from '../../services/flight.service';
+import { error } from 'protractor';
 declare var $: any; 
 
 @Component({
@@ -28,8 +30,11 @@ export class PaymentModeComponent implements OnInit {
   @Input() customInstalmentData:any={};
   constructor(
     private genericService:GenericService,
-    private commonFunction:CommonFunction
-  ) { }
+    private commonFunction:CommonFunction,
+    private flightService:FlightService
+  ) {
+    this.getPredictionDate();
+   }
   
   @Input() flightSummary;
   @Input() isShowSummary:boolean;
@@ -38,6 +43,8 @@ export class PaymentModeComponent implements OnInit {
   sellingPrice:number;
   isInstalemtMode:boolean=true;
   disablePartialPayment:boolean=false;
+  predictionDate:string='';
+  pridictionLoading:boolean=false;
   
   instalmentRequest={
     instalment_type: "weekly",
@@ -624,5 +631,45 @@ export class PaymentModeComponent implements OnInit {
         this.sellingPrice = this.flightSummary[0].secondary_selling_price;
       }
       return this.sellingPrice;
+  }
+
+  getPredictionDate(){
+
+    let routeInfo:any = sessionStorage.getItem("__route");
+    let _itinerary:any = sessionStorage.getItem("_itinerary")
+    try{
+
+        routeInfo = JSON.parse(routeInfo);
+        _itinerary = JSON.parse(_itinerary);
+        let searchParams={
+          source_location: routeInfo.departure_code,
+          destination_location: routeInfo.arrival_code,
+          departure_date: moment(routeInfo.departure_date,"DD/MM/YYYY").format("YYYY-MM-DD"),
+          flight_class: routeInfo.routes[0].stops[0].cabin_class,
+          adult_count: Number(_itinerary.adult),
+          child_count: Number(_itinerary.child),
+          infant_count: Number(_itinerary.infant),
+          unique_token: routeInfo.unique_code
+        }
+        this.pridictionLoading=true;
+        this.flightService.getPredictionDate(searchParams).subscribe((res:any)=>{
+
+          this.pridictionLoading=false;
+          if(res.length){
+            let pridictedData=res.find(date=>date.is_booking_avaible==true)
+            if(Object.keys(pridictedData).length){
+              this.predictionDate=this.commonFunction.convertDateFormat(pridictedData.date,"DD/MM/YYYY") ;
+            }
+          }
+        },
+        (error)=>{
+          this.pridictionLoading=false;
+          }
+        )
+    }
+    catch(e){
+
+    }
+    
   }
 }

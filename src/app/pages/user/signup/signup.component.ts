@@ -15,14 +15,13 @@ declare var $: any;
   styleUrls: ['./signup.component.scss']
 })
 
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
   signupForm: FormGroup;
   submitted = false;
   closeResult = '';
-  is_gender: boolean = true;
   is_type: string = 'M';
   emailForVerifyOtp : string = '';
   loading: boolean = false;
@@ -45,7 +44,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required]      
     },{
-      valiabedator: MustMatch('password', 'confirm_password'),
+      validators: MustMatch('password', 'confirm_password'),
     });
   }  
 
@@ -74,34 +73,13 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
 
     }
-  }
+  } 
  
-  ngOnDestroy() {}
-
- 
-  clickGender(event,type){
-    this.is_type = '';
-    this.is_gender = false;       
-      if(type =='M'){
-        this.is_type = 'M';
-      } else if(type =='F'){
-        this.is_type = 'F';        
-      } else if(type =='N') {
-        this.is_type = 'N';
-      } else {
-        this.is_gender = false;
-        this.is_type = '';
-      }
-      this.is_gender = true;
-  }
     
   onSubmit() {
-    // this.openOtpPage();
     this.submitted = this.loading  = true;
-    
-    if(this.signupForm.controls.gender.errors && this.is_gender){
-      this.signupForm.controls.gender.setValue(this.is_type);
-    } 
+   
+    console.log(this.signupForm)
     if (this.signupForm.invalid) {
       this.submitted = true;      
       this.loading = false;

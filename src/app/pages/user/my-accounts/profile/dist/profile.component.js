@@ -33,7 +33,7 @@ var ProfileComponent = /** @class */ (function () {
         this.minDate = {};
         this.maxDate = {};
         this.is_gender = true;
-        this.is_type = '';
+        this.is_type = 'M';
         this.imageFile = '';
         this.imageFileError = false;
         this.imageErrorMsg = 'Image is required';
@@ -53,20 +53,23 @@ var ProfileComponent = /** @class */ (function () {
         };
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        window.scroll(0, 0);
         this.getCountry();
         this.getLanguages();
         this.getCurrencies();
-        this.getProfileInfo();
         var location = this.cookieService.get('__loc');
-        this.location = JSON.parse(location);
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) { }
         this.profileForm = this.formBuilder.group({
             title: ['mr'],
-            first_name: ['', [forms_1.Validators.required]],
-            last_name: ['', [forms_1.Validators.required]],
-            country_code: [this.location.country.phonecode ? this.location.country.phonecode : '', [forms_1.Validators.required]],
+            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             country_id: [this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
-            phone_no: ['', [forms_1.Validators.required]],
+            country_code: [''],
+            phone_no: [''],
             address: [''],
             email: [''],
             zip_code: [''],
@@ -74,11 +77,13 @@ var ProfileComponent = /** @class */ (function () {
             city_name: [''],
             gender: ['M'],
             profile_pic: [''],
+            currency_id: [''],
             address2: [''],
             language_id: [''],
             passport_expiry: [''],
             passport_number: ['']
-        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation() });
+        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
+        this.getProfileInfo();
     };
     ProfileComponent.prototype.getCountry = function () {
         var _this = this;
@@ -99,6 +104,8 @@ var ProfileComponent = /** @class */ (function () {
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
+            var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+            _this.profileForm.controls.country_code.setValue(countryCode.country_name);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);
@@ -137,22 +144,11 @@ var ProfileComponent = /** @class */ (function () {
         });
     };
     ProfileComponent.prototype.clickGender = function (event, type) {
-        this.is_type = '';
-        this.is_gender = false;
-        if (type == 'M') {
-            this.is_type = 'M';
-        }
-        else if (type == 'F') {
+        this.is_gender = true;
+        this.is_type = 'M';
+        if (type == 'F') {
             this.is_type = 'F';
         }
-        else if (type == 'N') {
-            this.is_type = 'N';
-        }
-        else {
-            this.is_gender = false;
-            this.is_type = '';
-        }
-        this.is_gender = true;
     };
     ProfileComponent.prototype.onFileSelect = function (event) {
         var _this = this;
@@ -183,8 +179,17 @@ var ProfileComponent = /** @class */ (function () {
             _this.loading = false;
             _this.image = res.profilePic;
             _this.selectResponse = res;
-            _this.is_type = res.gender;
+            _this.is_type = res.gender ? res.gender : 'M';
             _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
+            var country = res.country.id ? res.country : _this.location.country;
+            _this.getStates(country);
+            var countryCode = '';
+            if (typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode) {
+                countryCode = _this.countries_code.filter(function (item) { return item.id == res.countryCode; })[0];
+            }
+            else {
+                countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+            }
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -193,9 +198,9 @@ var ProfileComponent = /** @class */ (function () {
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
                 dob: res.dob ? moment(res.dob).format('MM/DD/YYYY') : '',
-                country_code: res.countryCode,
+                country_code: countryCode,
                 phone_no: res.phoneNo,
-                country_id: res.country.name,
+                country_id: res.country.name ? res.country.name : _this.location.country.name,
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
@@ -222,6 +227,7 @@ var ProfileComponent = /** @class */ (function () {
             this.profileForm.controls.gender.setValue(this.is_type);
         }
         if (this.profileForm.invalid) {
+            console.log(this.profileForm);
             this.submitted = true;
             this.loading = false;
             //scroll top if any error 
@@ -253,10 +259,9 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("address1", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
-            formdata.append("passportNumber", this.profileForm.value.passport_number);
+            formdata.append("passport_number", this.profileForm.value.passport_number);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-            formdata.append("passportExpiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD'));
-            // console.log(typeof this.profileForm.value.country_id )
+            formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : '');
             if (typeof this.profileForm.value.country_id === 'string') {
                 if (this.selectResponse.country.id) {
                     formdata.append("country_id", this.selectResponse.country.id);
@@ -269,28 +274,29 @@ var ProfileComponent = /** @class */ (function () {
                 formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
             }
             if (typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-                formdata.append("state_id", this.selectResponse.state.id);
+                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
             }
             else {
-                formdata.append("state_id", this.profileForm.value.state_id);
+                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             }
-            if (typeof (this.profileForm.value.country_code) === 'string') {
-                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
+            console.log(typeof this.profileForm.value.country_code);
+            if (typeof (this.profileForm.value.country_code) === 'object') {
+                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '');
             }
             else {
                 formdata.append("country_code", this.selectResponse.countryCode);
             }
             if (!Number.isInteger(Number(this.profileForm.value.language_id))) {
-                formdata.append("language_id", this.selectResponse.preferredLanguage.id);
+                formdata.append("language_id", this.selectResponse.preferredLanguage.id ? this.selectResponse.preferredLanguage.id : '');
             }
             else {
-                formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : 1);
+                formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : '');
             }
             if (!Number.isInteger(Number(this.profileForm.value.currency_id))) {
                 formdata.append("currency_id", this.selectResponse.preferredCurrency.id ? this.selectResponse.preferredCurrency.id : '');
             }
             else {
-                formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : 1);
+                formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : '');
             }
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 _this.submitted = _this.loading = false;
