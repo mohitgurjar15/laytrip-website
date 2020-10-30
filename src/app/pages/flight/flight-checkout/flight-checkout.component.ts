@@ -71,7 +71,7 @@ export class FlightCheckoutComponent implements OnInit {
       if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
       }
-      this.routeCode = this.route.snapshot.paramMap.get('rc')
+      this.routeCode = decodeURIComponent(this.route.snapshot.paramMap.get('rc'))
 
       this.bookingTimerConfiguration();
       this.setInstalmentInfo();
