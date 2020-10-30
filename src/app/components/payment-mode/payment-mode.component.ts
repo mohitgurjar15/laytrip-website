@@ -28,6 +28,7 @@ export class PaymentModeComponent implements OnInit {
   }>(); 
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
+  @Input() priceData=[];
   constructor(
     private genericService:GenericService,
     private commonFunction:CommonFunction,
@@ -85,8 +86,8 @@ export class PaymentModeComponent implements OnInit {
   totalPrice;
 
   ngOnInit(){
-    this.discountedPrice = this.flightSummary[0].secondary_selling_price
-    this.instalmentRequest.amount= this.flightSummary[0].selling_price;
+    //this.discountedPrice = this.flightSummary[0].secondary_selling_price;
+    //this.instalmentRequest.amount= this.flightSummary[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemntsBiweekly('biweekly');
     this.getInstalemntsMonthly('monthly');
@@ -164,7 +165,7 @@ export class PaymentModeComponent implements OnInit {
       firstInstalment:this.firstInstalment
     })
 
-    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
+    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.priceData[0].selling_price){
       this.toggleFullPayment();
     }
     this.calculateInstalment();
@@ -189,9 +190,8 @@ export class PaymentModeComponent implements OnInit {
         this.customAmount = this.monthlyDefaultInstalment;
       }
 
-      console.log(this.firstInstalment)
-      if(Number(this.firstInstalment)+this.customAmount > this.flightSummary[0].selling_price){
-        this.customAmount = this.flightSummary[0].selling_price - this.firstInstalment;
+      if(Number(this.firstInstalment)+this.customAmount > this.priceData[0].selling_price){
+        this.customAmount = this.priceData[0].selling_price - this.firstInstalment;
       }
     }
 
@@ -341,7 +341,7 @@ export class PaymentModeComponent implements OnInit {
   }
 
   triggerPayemntMode(type){
-    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))<=this.flightSummary[0].selling_price){
+    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))<=this.priceData[0].selling_price){
       if( type=='instalment'){
 
         this.isInstalemtMode = true;
@@ -356,7 +356,7 @@ export class PaymentModeComponent implements OnInit {
           firstInstalment:this.firstInstalment
         });
         //console.log("One",this.flightSummary[0].selling_price,this.defaultInstalment)
-        this.redeemableLayCredit.emit(this.flightSummary[0].selling_price-this.defaultInstalment)
+        this.redeemableLayCredit.emit(this.priceData[0].selling_price-this.defaultInstalment)
       }
 
       if(type=='no-instalment'){
@@ -560,6 +560,7 @@ export class PaymentModeComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("changeschanges",changes)
     if (changes['laycreditpoints']) {
       this.laycreditpoints = changes['laycreditpoints'].currentValue;
       this.getInstalmentData.emit({ 
@@ -573,7 +574,7 @@ export class PaymentModeComponent implements OnInit {
         firstInstalment:this.firstInstalment
       })
       
-      if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.flightSummary[0].selling_price){
+      if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.priceData[0].selling_price){
         this.toggleFullPayment();
         this.disablePartialPayment=true;   
       }
@@ -581,6 +582,11 @@ export class PaymentModeComponent implements OnInit {
         this.disablePartialPayment=false;   
       }
       this.calculateInstalment();
+    }
+
+    if(changes['priceData']){
+      this.discountedPrice = changes['priceData'].currentValue[0].secondary_selling_price;
+      this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
     }
   }
 
@@ -626,9 +632,9 @@ export class PaymentModeComponent implements OnInit {
   }
 
   getTotalPrice(){
-      this.sellingPrice=this.flightSummary[0].selling_price;
-      if(this.flightSummary[0].secondary_selling_price){
-        this.sellingPrice = this.flightSummary[0].secondary_selling_price;
+      this.sellingPrice=this.priceData[0].selling_price;
+      if(this.priceData[0].secondary_selling_price){
+        this.sellingPrice = this.priceData[0].secondary_selling_price;
       }
       return this.sellingPrice;
   }

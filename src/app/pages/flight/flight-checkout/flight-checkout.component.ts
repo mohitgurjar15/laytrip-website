@@ -52,6 +52,7 @@ export class FlightCheckoutComponent implements OnInit {
     showPartialPayemntOption:boolean=false;
     partialPaymentAmount:number=0;
     payNowAmount:number=0;
+    priceData=[];
 
     constructor(
       private route: ActivatedRoute,
@@ -65,6 +66,7 @@ export class FlightCheckoutComponent implements OnInit {
     ngOnInit() {
       
       window.scroll(0,0);
+      this.getSellingPrice();
       this.userInfo = getLoginUserInfo();
       if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
@@ -383,6 +385,27 @@ export class FlightCheckoutComponent implements OnInit {
     totalNumberOfcard(count){
       if(count==0){
         this.showAddCardForm=true;
+      }
+    }
+
+    getSellingPrice(){
+     
+      try{
+        let __route = sessionStorage.getItem('__route');
+        let response  = JSON.parse(__route);
+        response[0]=response;
+        let payLoad ={
+          departure_date : moment(response[0].departure_date,'DD/MM/YYYY').format("YYYY-MM-DD"),
+          net_rate  : response[0].net_rate
+        }
+        this.flightService.getSellingPrice(payLoad).subscribe((res:any)=>{
+          this.priceData=res;
+        },(error)=>{
+    
+        })
+      }
+      catch(e){
+  
       }
     }
 }

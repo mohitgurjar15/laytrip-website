@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute , Router} from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
+import { FlightService } from '../../../services/flight.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-flight-payment',
@@ -30,10 +32,12 @@ export class FlightPaymentComponent implements OnInit {
   partialPaymentAmount:number;
   payNowAmount:number=0;
   redeemableLayPoints:number;
+  priceData=[]
 
   constructor(
     private route: ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private flightService: FlightService
   ) { }
 
   ngOnInit() {
@@ -47,6 +51,7 @@ export class FlightPaymentComponent implements OnInit {
       response[0]=response;
       this.flightSummary=response;
       this.sellingPrice = response[0].selling_price;
+      this.getSellingPrice();
     }
     catch(e){
 
@@ -63,6 +68,19 @@ export class FlightPaymentComponent implements OnInit {
     }
   }
   
+  getSellingPrice(){
+     
+    let payLoad ={
+      departure_date : moment(this.flightSummary[0].departure_date,'DD/MM/YYYY').format("YYYY-MM-DD"),
+      net_rate  : this.flightSummary[0].net_rate
+    }
+    this.flightService.getSellingPrice(payLoad).subscribe((res:any)=>{
+
+      this.priceData=res;
+    },(error)=>{
+
+    })
+  }
 
   selectInstalmentMode(instalmentMode){
     this.instalmentMode=instalmentMode;

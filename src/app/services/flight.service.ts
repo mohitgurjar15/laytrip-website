@@ -174,4 +174,11 @@ export class FlightService {
             catchError(this.handleError)
         );
     }
+
+    getSellingPrice(data){
+        const url = environment.apiUrl + `v1/flight/selling-price`;
+        return this.http.post(url, data, this.commonFunction.setHeaders()).pipe(
+            catchError(this.handleError)
+        );
+    }
 }
