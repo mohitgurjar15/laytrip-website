@@ -18,6 +18,7 @@ export class FlightSummaryComponent implements OnInit {
   @Input() partialPaymentAmount:number=0;
   @Input() payNowAmount:number=0;
   @Input() instalmentMode:string;
+  @Input() priceData=[];
 
   routeCode:string='';
   constructor(
@@ -103,7 +104,7 @@ export class FlightSummaryComponent implements OnInit {
       //this.airRevalidate();
     }
     catch(error){
-
+      console.log("iiiiiii")
       this.flightAvailable.emit(true)
     }
   }
@@ -141,16 +142,16 @@ export class FlightSummaryComponent implements OnInit {
   setTotalPrice(){
 
     if(this.instalmentMode=='instalment'){
-      this.totalPrice = this.flightDetail[0].selling_price;
+      this.totalPrice = this.priceData[0].selling_price;
     }
     else{
-      if(typeof this.flightDetail[0].secondary_selling_price!=='undefined' && this.flightDetail[0].secondary_selling_price){
+      if(typeof this.priceData[0].secondary_selling_price!=='undefined' && this.priceData[0].secondary_selling_price){
 
-        this.totalPrice = this.flightDetail[0].secondary_selling_price;
+        this.totalPrice = this.priceData[0].secondary_selling_price;
       }
       else{
         
-        this.totalPrice = this.flightDetail[0].selling_price;
+        this.totalPrice = this.priceData[0].selling_price;
       }
     }
 
