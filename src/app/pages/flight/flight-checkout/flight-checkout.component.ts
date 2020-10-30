@@ -317,6 +317,7 @@ export class FlightCheckoutComponent implements OnInit {
       this.customAmount = data.customAmount;
       this.customInstalment = data.customInstalment;
       this.partialPaymentAmount = data.partialPaymentAmount;
+      console.log(")))))",data)
       if(this.instalmentMode=='instalment'){
         
         this.payNowAmount=Number(data.firstInstalment)-Number(this.laycreditpoints);

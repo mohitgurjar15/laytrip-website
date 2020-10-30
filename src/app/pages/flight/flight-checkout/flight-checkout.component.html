@@ -46,7 +46,8 @@
                                 <div class="block_detail">
                                     <!-- <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit> -->
                                     <app-payment-mode 
-                                        *ngIf="flightSummary.length && isShowPaymentOption" 
+                                        *ngIf="flightSummary.length && isShowPaymentOption && priceData.length" 
+                                        [priceData]="priceData"
                                         [flightSummary]="flightSummary" 
                                         (selectInstalmentMode)="selectInstalmentMode($event)" 
                                         (getInstalmentData)="getInstalmentData($event)"
@@ -103,6 +104,8 @@
               
           </div>
           <div class="col-lg-4">
+            <app-flight-summary-loader *ngIf="!priceData.length"></app-flight-summary-loader>
+            
             <app-flight-summary 
                 *ngIf="priceData.length"
                 [priceData]="priceData"

@@ -48,6 +48,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
+                <app-flight-summary-loader *ngIf="!priceData.length"></app-flight-summary-loader>
                 <app-flight-summary 
                     *ngIf="priceData.length"
                     [priceData]="priceData"

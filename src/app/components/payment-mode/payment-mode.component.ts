@@ -86,8 +86,8 @@ export class PaymentModeComponent implements OnInit {
   totalPrice;
 
   ngOnInit(){
-    //this.discountedPrice = this.flightSummary[0].secondary_selling_price;
-    //this.instalmentRequest.amount= this.flightSummary[0].selling_price;
+    
+    this.instalmentRequest.amount= this.priceData[0].selling_price;
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemntsBiweekly('biweekly');
     this.getInstalemntsMonthly('monthly');
