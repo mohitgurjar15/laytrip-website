@@ -75,7 +75,7 @@
                   <div class="form_field half col-md-12 p-0">
                     <label>Message<sup>*</sup></label>
                     <div class="text_field">
-                      <input type="textarea" formControlName="message" maxlength="20" tabindex="5"
+                      <input type="textarea" formControlName="message" maxlength="250" tabindex="5"
                         placeholder="Enter your Message">
                       <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
                         <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">Please

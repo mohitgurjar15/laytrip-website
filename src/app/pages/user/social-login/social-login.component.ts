@@ -42,11 +42,11 @@ export class SocialLoginComponent implements OnInit {
   ngOnInit() {
     this.loadGoogleSdk();
     this.loadFacebookSdk();
-    // APPLE LOGIN RESPONSE
+    // APPLE LOGIN RESPONSE 
     this.authService.authState.subscribe((userInfo: any) => {
       if (userInfo) {
         let objApple = getUserDetails(userInfo.authorization.id_token);
-        let json_data = {
+        let jsonData = {
           "account_type": 1, 
           "name": '',
           "email": objApple.email,
@@ -57,7 +57,7 @@ export class SocialLoginComponent implements OnInit {
           "app_version": "1.0",
           "os_version": "7.0"
         };
-        this.userService.socialLogin(json_data).subscribe((data: any) => {
+        this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
@@ -104,7 +104,7 @@ export class SocialLoginComponent implements OnInit {
         let profile = googleUser.getBasicProfile();
 
         // YOUR CODE HERE
-        let json_data = {
+        let jsonData = {
           "account_type": 1,
           "name": profile.getName(),
           "email": profile.getEmail(),
@@ -115,7 +115,7 @@ export class SocialLoginComponent implements OnInit {
           "app_version": "1.0",
           "os_version": "7.0"
         };
-        this.userService.socialLogin(json_data).subscribe((data: any) => {
+        this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
             this.google_loading = false;
             localStorage.setItem("_lay_sess", data.user_details.access_token);
@@ -166,7 +166,7 @@ export class SocialLoginComponent implements OnInit {
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
-          let json_data = {
+          let jsonData = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
             "email": userInfo.email ? userInfo.email : '',
@@ -178,7 +178,7 @@ export class SocialLoginComponent implements OnInit {
             "os_version": "7.0"
           };
 
-          this.userService.socialLogin(json_data).subscribe((data: any) => {
+          this.userService.socialLogin(jsonData).subscribe((data: any) => {
             this.loading = false;
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);

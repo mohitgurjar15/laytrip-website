@@ -65,20 +65,20 @@
                                 </a>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-                                <a class="nav-link login_btn" href="javascript:void(0)" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
+                                <a class="nav-link login_btn"  data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                             </li>
 
                             <li class="nav-item" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <!-- <a class="nav-link" href="javascript:void(0)" [routerLink]="['/account']" >My Profile</a> -->
 
                                 <div class="dropdown account_ddown">
-                                    <a class="nav-link" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a class="nav-link"  class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a  [routerLink]="['/account']">My Account</a></li>
-                                        <li><a href="javascript:void(0);" (click)="onLoggedout()">Logout</a></li>
+                                        <li><a  (click)="onLoggedout()">Logout</a></li>
                                     </ul>
                                 </div>
                             </li>
