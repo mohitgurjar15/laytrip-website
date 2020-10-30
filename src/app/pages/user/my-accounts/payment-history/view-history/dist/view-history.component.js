@@ -17,7 +17,7 @@ var ViewHistoryComponent = /** @class */ (function () {
         this.currencySymbol = '';
     }
     ViewHistoryComponent.prototype.ngOnInit = function () {
-        console.log("this.list", this.item);
+        // console.log("this.list",this.item)
     };
     ViewHistoryComponent.prototype.ngOnChanges = function (changes) {
         this.list = changes.item.currentValue;

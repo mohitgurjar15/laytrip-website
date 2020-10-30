@@ -304,35 +304,26 @@
                                     <div class="form_field half">
                                         <label>First Name<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" formControlName="first_name"  maxlength="20" tabindex="1">
+                                            <input type="text" formControlName="first_name"maxlength="25" tabindex="1">
                                         </div>
                                         <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors"
                                             class="focus-input100 login-error">
                                             <div *ngIf="profileForm.controls.first_name.errors.required"
                                                 class="text-danger">Please enter your first name.</div>
-                                                <div *ngIf="(profileForm.controls.first_name.errors.cannotContainSpace)">
-                                                    <p class="text-danger">Please enter valid first name </p>
-                                                </div>
-                                                <div *ngIf="(profileForm.controls.first_name.errors.minlength)">
-                                                    <p class="text-danger">First name must be longer than or equal to 3 characters </p>
-                                                </div>
+                                                <div *ngIf="profileForm.controls.first_name.errors.pattern" class="text-danger">First name must be 3 character long or no whitespace allowed.</div>
+
                                         </div>
                                     </div>
                                     <div class="form_field half">
                                         <label>Last Name<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" formControlName="last_name"  minlength="3" maxlength="20" tabindex="2">
+                                            <input type="text" formControlName="last_name" maxlength="25" tabindex="2">
                                         </div>
                                         <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
                                             class="focus-input100 login-error">
                                             <div *ngIf="profileForm.controls.last_name.errors.required"
                                                 class="text-danger">Please enter your last name.</div>
-                                            <div *ngIf="(profileForm.controls.last_name.errors.cannotContainSpace)">
-                                                <p class="text-danger">Please enter valid last name </p>
-                                            </div>
-                                            <div *ngIf="(profileForm.controls.last_name.errors.minlength)">
-                                                <p class="text-danger">Last name must be longer than or equal to 3 characters </p>
-                                            </div>
+                                            <div *ngIf="profileForm.controls.last_name.errors.pattern" class="text-danger">Last name must be 3 character long or no whitespace allowed.</div>
 
                                         </div>
                                     </div>
@@ -355,7 +346,7 @@
                                                 <div class="code">
                                                     <div class="dropdown">
                                                         <ng-select class="ng-customClass" tabindex="4"
-                                                            selectOnTab="true" [items]="countries_code" bindValue="code"
+                                                            selectOnTab="true" [items]="countries_code"
                                                             bindLabel="country_name" clearSearchOnAdd="true"
                                                             formControlName="country_code"
                                                             placeholder="Select country code">

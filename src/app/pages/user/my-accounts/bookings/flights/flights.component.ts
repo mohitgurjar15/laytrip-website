@@ -31,7 +31,7 @@ export class FlightsComponent implements OnInit {
   isNotFound:boolean= false;
   loading = true;
   pageNumber:number;
-
+  notFoundBaggageDetails = false;
 
   constructor(   
      private commonFunction: CommonFunction,
@@ -43,30 +43,17 @@ export class FlightsComponent implements OnInit {
 
   ngOnInit() {
     this.page = 1;
+    this.loading = true;
     this.isNotFound = false;
     this.limit = this.perPageLimitConfig[0];
     this.getBookings();
   }
- 
-  /* ngOnChanges(changes:SimpleChanges){    
-    this.showPaginationBar = true;
-    this.flightList = changes.flightLists.currentValue;
-    console.log()
-  }
-
-  ngAfterContentChecked() {
-    // this.flightBookings = this.flightList;
-    // this.totalItems = this.flightBookings.length;
-
-    if(this.totalItems === 0) {
-      // this.isNotFound = true;
-      this.showPaginationBar = false;
-    }
-  } */
 
   pageChange(event) {
-    this.showPaginationBar = false;
+    window.scroll(0,0);
+    this.loading = true;
     this.page = event;    
+    this.getBookings();
   }
 
   showDetails(index) {
@@ -83,6 +70,7 @@ export class FlightsComponent implements OnInit {
   }
 
   getBookings(){
+    this.loading = true;
     this.userService.getBookings(this.page, this.limit).subscribe((res: any) => {
       if (res) {
         this.flightBookings = res.data.map(flight => {
@@ -111,7 +99,8 @@ export class FlightsComponent implements OnInit {
         });
         this.totalItems = res.total_count;
         this.isNotFound = false;
-        this.loading = false;this.showPaginationBar = true;
+        this.loading = false;
+        this.showPaginationBar = true;
       }
     }, err => {
       this.isNotFound = true;
@@ -129,9 +118,10 @@ export class FlightsComponent implements OnInit {
     this.loadBaggageDetails = true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
       this.baggageDetails = data;
-      this.loadBaggageDetails = false;
+      this.loadBaggageDetails =this.notFoundBaggageDetails  = false;      
     }, (err) => {
       this.loadBaggageDetails=false;
+      this.notFoundBaggageDetails=true;
       this.errorMessage = err.message;
     });
   }

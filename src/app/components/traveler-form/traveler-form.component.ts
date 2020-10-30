@@ -24,8 +24,8 @@ export class TravelerFormComponent implements OnInit {
   @Input('var') usersType: any = '';
   @Input() traveler: any = [];
   @Input() type: string;
-  @Input() countries: [];
-  @Input() countries_code: [];
+  @Input() countries=[];
+  @Input() countries_code= [];
   @Output() travelerFormChange = new EventEmitter();
   @Output() auditFormStatus = new EventEmitter();
 
@@ -69,14 +69,15 @@ export class TravelerFormComponent implements OnInit {
     catch(e){
 
     }
-    
+    const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+
     this.adultForm = this.formBuilder.group({
       title: ['mr',Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['',[ Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       gender: ['M', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [typeof this.location!='undefined' ? this.location.country.phonecode : '', [Validators.required]],
+      country_code: [typeof countryCode.country_name !='undefined' ? countryCode.country_name : '', [Validators.required]],
       country_id: [typeof this.location!='undefined' ? this.location.country.name : ''],
       phone_no: ['', [Validators.required]],
       dob : ['', Validators.required],
@@ -88,14 +89,19 @@ export class TravelerFormComponent implements OnInit {
     this.setUserTypeValidation();
 
     if (this.traveler.userId) {
-
+      let  countryCode  = '';
+      if(typeof this.traveler.countryCode != 'undefined' && typeof this.traveler.countryCode == 'string'){
+        countryCode = this.countries_code.filter(item => item.id == this.traveler.countryCode)[0];      
+      } else {
+         countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
+      }
       this.adultForm.patchValue({
         title: this.traveler.title ? this.traveler.title : 'mr',
         firstName: this.traveler.firstName? this.traveler.firstName :'',
         lastName: this.traveler.lastName ? this.traveler.lastName : '',
         email: this.traveler.email,
         gender: this.traveler.gender ? this.traveler.gender : 'M',
-        country_code: this.traveler.countryCode ? this.traveler.countryCode : this.location.country.phonecode,
+        country_code: countryCode,
         phone_no: this.traveler.phoneNo,
         country_id: this.traveler.country != null ? this.traveler.country.name : this.location.country.name,
         passport_number: this.traveler.passportNumber,
@@ -183,7 +189,15 @@ export class TravelerFormComponent implements OnInit {
           country_id = this.location.country.id;
         }
       }
-    
+      let country_code = this.adultForm.value.country_code;
+      if(typeof country_code == 'object'){
+        country_code = country_code.id ? country_code.id :  this.location.country.id;
+      } else if(typeof country_code == 'string'){
+        country_code = this.traveler.countryCode ? this.traveler.countryCode : this.location.country.id;
+      } else {
+        country_code = this.location.country.id;
+      }
+      console.log(country_code)
       let jsonData = {
         title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
@@ -201,8 +215,7 @@ export class TravelerFormComponent implements OnInit {
 
       if (this.type === 'adult') {
         let adultObj = {
-          country_code: this.adultForm.value.country_code.country_name &&
-            this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code : this.adultForm.value.country_code,
+          country_code : country_code ? country_code  : this.location.country.id, 
           phone_no: this.adultForm.value.phone_no,
         };
         jsonData = Object.assign(jsonData, adultObj);

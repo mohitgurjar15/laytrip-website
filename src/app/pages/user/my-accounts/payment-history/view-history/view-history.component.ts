@@ -20,7 +20,7 @@ export class ViewHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("this.list",this.item)
+    // console.log("this.list",this.item)
   }
 
   ngOnChanges(changes:SimpleChanges){

@@ -58,14 +58,17 @@ var ProfileComponent = /** @class */ (function () {
         this.getLanguages();
         this.getCurrencies();
         var location = this.cookieService.get('__loc');
-        this.location = JSON.parse(location);
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) { }
         this.profileForm = this.formBuilder.group({
             title: ['mr'],
-            first_name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3), custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
-            last_name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3), custom_validators_1.WhiteSpaceValidator.cannotContainSpace]],
+            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             country_id: [this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
-            country_code: [this.location.country.phonecode ? this.location.country.phonecode : ''],
+            country_code: [''],
             phone_no: [''],
             address: [''],
             email: [''],
@@ -101,6 +104,8 @@ var ProfileComponent = /** @class */ (function () {
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
+            var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+            _this.profileForm.controls.country_code.setValue(countryCode.country_name);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);
@@ -178,6 +183,13 @@ var ProfileComponent = /** @class */ (function () {
             _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
             var country = res.country.id ? res.country : _this.location.country;
             _this.getStates(country);
+            var countryCode = '';
+            if (typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode) {
+                countryCode = _this.countries_code.filter(function (item) { return item.id == res.countryCode; })[0];
+            }
+            else {
+                countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+            }
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -186,7 +198,7 @@ var ProfileComponent = /** @class */ (function () {
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
                 dob: res.dob ? moment(res.dob).format('MM/DD/YYYY') : '',
-                country_code: res.countryCode ? res.countryCode : _this.location.country.phonecode,
+                country_code: countryCode,
                 phone_no: res.phoneNo,
                 country_id: res.country.name ? res.country.name : _this.location.country.name,
                 state_id: res.state.name,
@@ -267,8 +279,9 @@ var ProfileComponent = /** @class */ (function () {
             else {
                 formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             }
-            if (typeof (this.profileForm.value.country_code) === 'string') {
-                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
+            console.log(typeof this.profileForm.value.country_code);
+            if (typeof (this.profileForm.value.country_code) === 'object') {
+                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '');
             }
             else {
                 formdata.append("country_code", this.selectResponse.countryCode);

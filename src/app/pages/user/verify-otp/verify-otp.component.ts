@@ -138,7 +138,6 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onKeydown(event){
-    console.log(event.target.tabIndex)
     const tabIndex = event.target.tabIndex ? '.tab'+(event.target.tabIndex-1): 1;
     if(event.key == 'Backspace'){
       $(tabIndex).focus();

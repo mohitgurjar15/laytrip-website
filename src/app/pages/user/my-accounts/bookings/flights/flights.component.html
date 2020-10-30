@@ -1,13 +1,79 @@
-<section class="search_result flight pb-0" *ngIf="loading">
+<!-- <section class="search_result flight pb-0" *ngIf="loading">
     <app-flight-loader></app-flight-loader>
-</section>
+</section> -->
 <div class="account_cnt_main booking_main" *ngIf="isNotFound">
     <div class="block_nobooking_available">
         <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
         <h5>No Flight Booking Found</h5>
     </div>
 </div>
-<div class="result_listing one_way_list roundtrip_list">
+<div class="result_listing one_way_list roundtrip_list" *ngIf="loading">
+    <div class="search_block">
+        <div class="listing_block">
+            <div class="block_booking_info">
+                <div class="row">
+                    <div class="col-md-9">
+                        <ul>
+                            <li class="w-50">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                            <li class="w-50">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="block_cancle">
+                            <div class="fb_animation w-100 mb-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 px-0">
+                    <div class="block_im">
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                        <div class="fb_animation ml-3 mr-3"></div>
+                    </div>
+                </div>
+                <div class="col-md-7 px-0">
+                    <div class="block_detail">
+                        <div class="block_detail_top">
+                            <p class="fb_animation w-100 mb-0"></p>
+                            <p class="fb_animation w-100 mb-0"></p>
+                            <p class="fb_animation w-100 mb-0"></p>
+                            <p class="fb_animation w-100 mb-2"></p>
+                        </div>
+                        <div class="block_detail_btm">
+                            <div class="show_detail w-100">
+                                <p class="fb_animation w-50 mb-0"></p>
+                            </div>
+                            <div class="info_price_origin w-100">
+                                <p class="fb_animation w-100 mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 px-0">
+                    <div class="block_price">
+                        <p class="fb_animation w-100 mb-3"></p>
+                        <p class="fb_animation w-100 mb-4"></p>
+                        <p class="fb_animation w-100 mb-2"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="result_listing one_way_list roundtrip_list" *ngIf="!loading">
     <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
             <div class="block_booking_info">
@@ -311,11 +377,11 @@
                         <div class="card-body">
                             <div class="tab_detail baggage_rules_cnt">
                                 <div class="triangle_right"></div>
-                                <div class="detail_left">
+                                <!-- <div class="detail_left">
                                     <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
                                     <p>Indigo</p>
                                     <span>EWR - DEN</span>
-                                </div>
+                                </div> -->
                                 <div class="detail_right" *ngIf="loadBaggageDetails">
                                     <div class="w-100">
                                         <p class="fb_animation mb-0 h-auto w-100"></p>
@@ -323,7 +389,7 @@
                                     </div>
                                     <p class="fb_animation mb-0 h-auto w-100"></p>
                                 </div>
-                                <div class="detail_right" *ngIf="!loadBaggageDetails">
+                                <div class="detail_right" *ngIf="!loadBaggageDetails && !notFoundBaggageDetails">
                                     <table>
                                         <thead>
                                             <tr>
@@ -345,7 +411,9 @@
 
                                     <p>The baggage information is just for reference. Please Check with airline before
                                         check-in.</p>
-                                </div>
+                                    </div>
+                                    <p *ngIf="!loadBaggageDetails && notFoundBaggageDetails">There is no baggage information found</p>
+
                                 <div class="triangle_left"></div>
                             </div>
                         </div>

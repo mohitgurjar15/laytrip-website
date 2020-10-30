@@ -66,12 +66,11 @@
                         class="focus-input100 login-error">
                         <div *ngIf="coAccountForm.controls.firstName.errors.required" class="text-danger">Please enter first name.
                         </div>
-                        <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.minlength)">
-                            <p class="text-danger">First name must be longer than or equal to 3 characters. </p>
-                        </div> -->
-                        <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
+                      
+                        <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
                             <p class="text-danger">Please enter valid first name </p>
-                        </div>
+                        </div> -->
+                        <div *ngIf="coAccountForm.controls.firstName.errors.pattern" class="text-danger">First name must be 3 character long or no whitespace allowed.</div>
                     </div>
                 </div>
                 <div class="form_field half">
@@ -84,12 +83,7 @@
                         class="focus-input100 login-error">
                         <div *ngIf="coAccountForm.controls.lastName.errors.required" class="text-danger">Please enter last name.
                         </div>
-                        <!-- <div *ngIf="(coAccountForm.controls.lastName.errors.minlength)">
-                            <p class="text-danger">First name must be longer than or equal to 3 characters. </p>
-                        </div> -->
-                        <div *ngIf="(coAccountForm.controls.lastName.errors.cannotContainSpace)">
-                            <p class="text-danger">Please enter valid last name </p>
-                        </div>
+                        <div *ngIf="coAccountForm.controls.lastName.errors.pattern" class="text-danger">Last name must be 3 character long or no whitespace allowed.</div>
                     </div>
                 </div>
             </div>
@@ -117,7 +111,7 @@
                             <div class="code">
                                 <div class="dropdown">
                                     <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true"
-                                        [items]="countries_code" bindValue="code" bindLabel="country_name" clearSearchOnAdd="true"
+                                        [items]="countries_code" bindLabel="country_name" clearSearchOnAdd="true"
                                         formControlName="country_code" placeholder="Select country code">
                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                             <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>

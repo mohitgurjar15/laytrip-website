@@ -23,6 +23,8 @@ var TravelerFormComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.usersType = '';
         this.traveler = [];
+        this.countries = [];
+        this.countries_code = [];
         this.travelerFormChange = new core_1.EventEmitter();
         this.auditFormStatus = new core_1.EventEmitter();
         this.submitted = false;
@@ -40,19 +42,21 @@ var TravelerFormComponent = /** @class */ (function () {
         this.expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
         }
         catch (e) {
         }
+        var countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         this.adultForm = this.formBuilder.group({
             title: ['mr', forms_1.Validators.required],
-            firstName: ['', forms_1.Validators.required],
-            lastName: ['', forms_1.Validators.required],
+            firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             gender: ['M', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            country_code: [typeof this.location != 'undefined' ? this.location.country.phonecode : '', [forms_1.Validators.required]],
+            country_code: [typeof countryCode.country_name != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : ''],
             phone_no: ['', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
@@ -62,13 +66,20 @@ var TravelerFormComponent = /** @class */ (function () {
         }, { validator: custom_validators_1.phoneAndPhoneCodeValidation(this.type) });
         this.setUserTypeValidation();
         if (this.traveler.userId) {
+            var countryCode_1 = '';
+            if (typeof this.traveler.countryCode != 'undefined' && typeof this.traveler.countryCode == 'string') {
+                countryCode_1 = this.countries_code.filter(function (item) { return item.id == _this.traveler.countryCode; })[0];
+            }
+            else {
+                countryCode_1 = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+            }
             this.adultForm.patchValue({
                 title: this.traveler.title ? this.traveler.title : 'mr',
                 firstName: this.traveler.firstName ? this.traveler.firstName : '',
                 lastName: this.traveler.lastName ? this.traveler.lastName : '',
                 email: this.traveler.email,
                 gender: this.traveler.gender ? this.traveler.gender : 'M',
-                country_code: this.traveler.countryCode ? this.traveler.countryCode : this.location.country.phonecode,
+                country_code: countryCode_1,
                 phone_no: this.traveler.phoneNo,
                 country_id: this.traveler.country != null ? this.traveler.country.name : this.location.country.name,
                 passport_number: this.traveler.passportNumber,
@@ -154,6 +165,17 @@ var TravelerFormComponent = /** @class */ (function () {
                     country_id = this.location.country.id;
                 }
             }
+            var country_code = this.adultForm.value.country_code;
+            if (typeof country_code == 'object') {
+                country_code = country_code.id ? country_code.id : this.location.country.id;
+            }
+            else if (typeof country_code == 'string') {
+                country_code = this.traveler.countryCode ? this.traveler.countryCode : this.location.country.id;
+            }
+            else {
+                country_code = this.location.country.id;
+            }
+            console.log(country_code);
             var jsonData = {
                 title: this.adultForm.value.title,
                 first_name: this.adultForm.value.firstName,
@@ -170,8 +192,7 @@ var TravelerFormComponent = /** @class */ (function () {
             }
             if (this.type === 'adult') {
                 var adultObj = {
-                    country_code: this.adultForm.value.country_code.country_name &&
-                        this.adultForm.value.country_code !== 'null' ? this.adultForm.value.country_code : this.adultForm.value.country_code,
+                    country_code: country_code ? country_code : this.location.country.id,
                     phone_no: this.adultForm.value.phone_no
                 };
                 jsonData = Object.assign(jsonData, adultObj);
