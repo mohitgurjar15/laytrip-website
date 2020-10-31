@@ -28,6 +28,7 @@ import { FlightSessionTimeOutComponent } from './components/flight-session-time-
 import { BaggagePolicyPopupComponent } from './components/baggage-policy-popup/baggage-policy-popup.component';
 import { CancellationPolicyPopupComponent } from './components/cancellation-policy-popup/cancellation-policy-popup.component';
 import { FlightPaymentComponent } from './flight-payment/flight-payment.component';
+import { FlightSummaryLoaderComponent } from './components/flight-summary-loader/flight-summary-loader.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { FlightPaymentComponent } from './flight-payment/flight-payment.componen
     FlightSessionTimeOutComponent,
     BaggagePolicyPopupComponent,
     CancellationPolicyPopupComponent,
-    FlightPaymentComponent
+    FlightPaymentComponent,
+    FlightSummaryLoaderComponent
   ],
   imports: [
     CommonModule,

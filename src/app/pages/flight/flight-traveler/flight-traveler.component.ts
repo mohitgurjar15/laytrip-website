@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
-import { map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-traveler',
@@ -36,6 +37,7 @@ export class FlightTravelerComponent implements OnInit {
   isComplete : boolean = false;
   payNowAmount:number=0;
   instalmentMode:string='';
+  priceData=[];
 
   
   constructor(
@@ -43,13 +45,15 @@ export class FlightTravelerComponent implements OnInit {
     private route: ActivatedRoute,
     private cookieService: CookieService,
     private toastr: ToastrService,
-    private router:Router
+    private router:Router,
+    private flightService:FlightService
   ) { }
 
   ngOnInit() {
     window.scroll(0,0);
     this.loading = true;
     this.getTravelers();
+    this.getSellingPrice();
 
     if(sessionStorage.getItem('_itinerary')){
       this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
@@ -200,5 +204,27 @@ export class FlightTravelerComponent implements OnInit {
 
   onActivate(event){
     window.scroll(0,0);
+  }
+
+  getSellingPrice(){
+     
+    try{
+      let __route = sessionStorage.getItem('__route');
+      let response  = JSON.parse(__route);
+      response[0]=response;
+      let payLoad ={
+        departure_date : moment(response[0].departure_date,'DD/MM/YYYY').format("YYYY-MM-DD"),
+        net_rate  : response[0].net_rate
+      }
+      this.flightService.getSellingPrice(payLoad).subscribe((res:any)=>{
+  
+        this.priceData=res;
+      },(error)=>{
+  
+      })
+    }
+    catch(e){
+
+    }
   }
 }
