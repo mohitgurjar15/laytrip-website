@@ -28,7 +28,7 @@ export class PlanSummaryComponent implements OnInit, AfterContentChecked {
       this.todayDate = moment().format("MM/DD/YYYY");
       this.validityDaysRange = this.todayDate + ' to ' + moment().add(this.planSummaryData.validityDays, 'days').format("MM/DD/YYYY");
     }
-    // 7 Aug 2020 to 6 Sep 2020
+    console.log(this.planSummaryData);
   }
 
   toggleCancellationPolicy() {

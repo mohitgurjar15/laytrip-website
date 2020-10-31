@@ -119,9 +119,9 @@ export class UserService {
   }
 
   getPaymentHistory(pageNumber, limit, filterForm) {
-    
+
     let queryString = "";
-    if(filterForm && filterForm != 'undefined'){
+    if (filterForm && filterForm != 'undefined') {
       if (filterForm.bookingId) {
         queryString += (filterForm.bookingId) ? '&booking_id=' + filterForm.bookingId : '';
       }
@@ -166,5 +166,9 @@ export class UserService {
 
   payNowSubscription(data) {
     return this.http.post(this.apiURL + 'v1/subscription', data, this.commonFunction.setHeaders());
+  }
+
+  addNewPoints(data) {
+    return this.http.post(this.apiURL + 'v1/laytrip-point/add', data, this.commonFunction.setHeaders());
   }
 }
