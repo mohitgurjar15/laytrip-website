@@ -189,25 +189,23 @@
     </div>
     <div *ngIf="is_passport_required && type!='infant'" class="form_row">
       <div class="form_field half">
-        <label>Passport Expiry</label>
-        <!-- <input type="text" tabindex="8" ngxDaterangepickerMd formControlName="passport_expiry"
-          class="form-control custom_datpicker" showDropdowns="true" alwaysShowCalendars="true" placeholder=""
-          [singleDatePicker]="true" (datesUpdated)="expiryDateUpdate($event)" [locale]="locale" [autoApply]="true"
-          showDropdowns="true" [minDate]="expiryMinDate" />
-          -->
-          <p-calendar 
-          tabindex="6"
-            inputStyleClass="custom_datpicker birth_date"
-              inputId="basic" 
-              formControlName="passport_expiry" 
-              [minDate]="expiryMinDate"             
-              [yearNavigator]="true"
-              [monthNavigator]="true"
-              yearRange="2020:2030"
-              [defaultDate]="dobMaxDate"
-              panelStyleClass="calender-passport-expiry"
-              >
-          </p-calendar>
+        <label>Passport Expiry</label>      
+          <div class="text_field">
+            <p-calendar 
+            tabindex="6"
+              inputStyleClass="custom_datpicker birth_date"
+                inputId="basic" 
+                formControlName="passport_expiry" 
+                [minDate]="expiryMinDate"             
+                [yearNavigator]="true"
+                [monthNavigator]="true"
+                placeholder="Passport Expiry"
+                yearRange="2020:2050"
+                [defaultDate]="passportMaxDate"
+                panelStyleClass="calender-passport-expiry"
+                >
+            </p-calendar>
+          </div>
           <div
           *ngIf="(submitted  || adultForm.controls.passport_expiry.touched) && adultForm.controls.passport_expiry.errors"
           class="focus-input100 login-error">
