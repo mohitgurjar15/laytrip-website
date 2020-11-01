@@ -38,6 +38,7 @@ var FlightsComponent = /** @class */ (function () {
         this.getBookings();
     };
     FlightsComponent.prototype.pageChange = function (event) {
+        this.showPaginationBar = false;
         window.scroll(0, 0);
         this.loading = true;
         this.page = event;

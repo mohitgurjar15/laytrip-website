@@ -67,7 +67,7 @@
           <div *ngIf="adultForm.controls.firstName.errors.required" class="text-danger">Please enter
             first name.
           </div>
-          <div *ngIf="adultForm.controls.firstName.errors.pattern" class="text-danger">First name must be 3 character long or no whitespace allowed.</div>
+          <div *ngIf="adultForm.controls.firstName.errors.pattern" class="text-danger">First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
 
          
         </div>
@@ -82,7 +82,7 @@
           <div *ngIf="adultForm.controls.lastName.errors.required" class="text-danger">Please enter
             last name.
           </div>
-          <div *ngIf="adultForm.controls.lastName.errors.pattern" class="text-danger">Last name must be 3 character long or no whitespace allowed.</div>         
+          <div *ngIf="adultForm.controls.lastName.errors.pattern" class="text-danger">Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>         
         </div>
       </div>
     </div>
