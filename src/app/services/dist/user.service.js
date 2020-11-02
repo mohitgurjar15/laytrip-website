@@ -127,6 +127,10 @@ var UserService = /** @class */ (function () {
     UserService.prototype.payNowSubscription = function (data) {
         return this.http.post(this.apiURL + 'v1/subscription', data, this.commonFunction.setHeaders());
     };
+    UserService.prototype.subscribeNow = function (email) {
+        var data = { email: email };
+        return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
+    };
     UserService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

@@ -169,4 +169,9 @@ export class UserService {
   payNowSubscription(data) {
     return this.http.post(this.apiURL + 'v1/subscription', data, this.commonFunction.setHeaders());
   }
+
+  subscribeNow(email) {
+    const data = {email:email};
+    return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
+  }
 }

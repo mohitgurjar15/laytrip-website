@@ -69,7 +69,7 @@ export class TravellerFormComponent implements OnInit {
     const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
 
     this.coAccountForm = this.formBuilder.group({
-      title: ['mr'],
+      // title: ['mr'],
       gender: ['M'],
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
@@ -100,7 +100,7 @@ export class TravellerFormComponent implements OnInit {
          countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
       }
       this.coAccountForm.patchValue({
-        title: this.travelerInfo.title?this.travelerInfo.title:'mr',
+        // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
         firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
         lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
         email: this.travelerInfo.email ? this.travelerInfo.email : '',
@@ -142,39 +142,9 @@ export class TravellerFormComponent implements OnInit {
     }
   }
 
-  /* getCountry() {
-    this.genericService.getCountry().subscribe((data: any) => {
-      this.countries = data.map(country => {
-        return {
-          id: country.id,
-          name: country.name,
-          code: country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-
-        }
-      }),
-        this.countries_code = data.map(country => {
-          return {
-            id: country.id,
-            name: country.phonecode+' ('+country.iso2+')',
-            code:country.phonecode,
-            country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-          }
-        });
-        console.log(this.countries_code)
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
-    });
-  }
- */
-
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.coAccountForm.invalid) {
-      console.log(this.coAccountForm)
       this.submitted = true;
       this.loading = false;
       return;
@@ -198,7 +168,7 @@ export class TravellerFormComponent implements OnInit {
       }
 
       let jsonData = {
-        title: this.coAccountForm.value.title,
+        // title: this.coAccountForm.value.title,
         first_name: this.coAccountForm.value.firstName,
         last_name: this.coAccountForm.value.lastName,
         dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),

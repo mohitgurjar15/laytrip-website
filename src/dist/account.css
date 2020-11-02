@@ -135,7 +135,7 @@
   padding: 0;
 }
 .account_part .account_saidbar .saidbar_menu ul li .dropdown .dropdown-menu li a {
-  padding: 10px 30px 10px 60px;
+  padding: 10px 30px;
   font-size: 14px;
   font-weight: 300;
   position: relative;
@@ -714,45 +714,58 @@
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a {
     width: auto;
-    padding: 15px 20px;
+    padding: 12px 40px;
     text-align: center;
-    background: #ebf9fe;
+    background: #1943FF;
     font-size: 13px;
     font-weight: 500;
     border: none;
-    color: #8188AB;
+    color: #ffffff;
     text-transform: uppercase;
     border-radius: 0;
     position: relative;
+    display: flex;
+    align-items: center;
   }
-  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:before {
-    width: 1px;
-    height: 20px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    background: #D8D4FE;
-    content: "";
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a img {
+    margin-right: 15px;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .default-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .active-icon {
+    display: none;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active {
     border: none;
-    background: #00AEEF;
-    color: #ffffff;
+    background: #ffffff;
+    color: #1943FF;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .active-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .default-icon {
+    display: none;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover {
     border: none;
-    background: #00AEEF;
-    color: #ffffff;
+    background: #ffffff;
+    color: #1943FF;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover .active-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover .default-icon {
+    display: none;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li:first-child a {
-    border-radius: 5px 0 0 0;
+    border-radius: 20px 0 0 0;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li:first-child a:before {
     display: none;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li:last-child a {
-    border-radius: 0 5px 0 0;
+    border-radius: 0 20px 0 0;
   }
 }
 @media (min-width: 991px) {
@@ -787,12 +800,6 @@
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane:last-child {
     margin: 0;
-  }
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane.active .card-header {
-    background: #ebf9fe;
-  }
-  .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane.active .card-header h5 a {
-    color: #0045FF;
   }
 }
 .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card {
@@ -859,6 +866,18 @@
     word-break: break-word;
   }
 }
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle {
+  width: 100%;
+  text-align: center;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle a {
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: #00BFFD;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
 .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_detail.noborder {
   border: none;
   padding: 0;
@@ -910,6 +929,34 @@
   .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available h5 {
     font-size: 20px;
   }
+}
+.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li a {
+  background: #ebf9fe;
+  color: #8188AB;
+  padding: 15px 35px;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li a.active {
+  background: #00AEEF;
+  color: #ffffff;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li a::before {
+  width: 1px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: #D8D4FE;
+  content: "";
+}
+.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li:first-child a {
+  border-radius: 5px 0 0 0;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li:first-child a:before {
+  display: none;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li:last-child a {
+  border-radius: 0 5px 0 0;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content {
   position: relative;
@@ -1086,7 +1133,7 @@
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right p span {
   font-size: 14px;
 }
-.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right .pay_status {
+.account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right .pay_status a {
   width: auto;
   background: #ffffff;
   padding: 2px 7px;
@@ -1496,7 +1543,7 @@
 }
 .account_part .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a {
   line-height: 22px;
-  background: #00AEEF;
+  background: #8188AB;
   border-radius: 5px;
   font-size: 10px;
   font-weight: 500;
@@ -2343,40 +2390,22 @@
     border: none;
   }
   .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a {
-    width: 200px;
-    padding: 15px;
+    width: auto;
+    padding: 12px 40px;
     text-align: center;
-    background: #ebf9fe;
+    background: #1943FF;
     font-size: 13px;
     font-weight: 500;
     border: none;
-    color: #8188AB;
+    color: #ffffff;
     text-transform: uppercase;
     border-radius: 0;
     position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
   }
-  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:before {
-    width: 1px;
-    height: 20px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    background: #D8D4FE;
-    content: "";
-  }
-  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a.active {
-    border: none;
-    background: #00AEEF;
-    color: #ffffff;
-  }
-  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:hover {
-    border: none;
-    background: #00AEEF;
-    color: #ffffff;
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a img {
+    margin-right: 15px;
   }
   .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a .notifiy_simbol {
     width: 6px;
@@ -2385,14 +2414,42 @@
     background: #FC7E66;
     margin: -1px 0 0 5px;
   }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a .default-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a .active-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a.active {
+    border: none;
+    background: #ffffff;
+    color: #1943FF;
+  }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a.active .active-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:hover {
+    border: none;
+    background: #ffffff;
+    color: #1943FF;
+  }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:hover .active-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:hover .default-icon {
+    display: none;
+  }
   .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li:first-child a {
-    border-radius: 5px 0 0 0;
+    border-radius: 20px 0 0 0;
   }
   .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li:first-child a:before {
     display: none;
   }
   .account_part .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li:last-child a {
-    border-radius: 0 5px 0 0;
+    border-radius: 0 20px 0 0;
   }
 }
 @media (min-width: 768px) {
@@ -2427,13 +2484,6 @@
   }
   .account_part .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane:last-child {
     margin: 0;
-  }
-  .account_part .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane.active .card-header {
-    background: #ebf9fe;
-    border-bottom-color: #E0E2E5;
-  }
-  .account_part .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane.active .card-header h5 a {
-    color: #0045FF;
   }
 }
 .account_part .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body {
@@ -2550,8 +2600,9 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_blue.svg) no-repeat;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_orange.svg) no-repeat;
   background-size: cover;
+  margin: 0;
   margin: 0 30px 0 0;
   position: relative;
 }
@@ -2569,7 +2620,7 @@
   transform: translateY(-50%) rotate(-90deg);
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 7px;
 }
 .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li .block_point {
   padding: 0 0 0 30px;
@@ -2581,19 +2632,6 @@
   font-weight: 500;
   color: #ffffff;
   margin: 0;
-}
-.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li:last-child {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_orange.svg) no-repeat;
-  background-size: cover;
-  margin: 0;
-}
-.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li:last-child span {
-  left: 7px;
-}
-@media (max-width: 480px) {
-  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li:last-child {
-    background-position: bottom center;
-  }
 }
 @media (max-width: 767px) {
   .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add {
@@ -2630,6 +2668,24 @@
   font-weight: 500;
   color: #8188AB;
 }
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li a {
+  background: #ebf9fe;
+  color: #8188AB;
+  padding: 15px 70px;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li a.active {
+  background: #00AEEF;
+  color: #ffffff;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li:first-child a {
+  border-radius: 5px 0 0 0;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li:first-child a:before {
+  display: none;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li:last-child a {
+  border-radius: 0 5px 0 0;
+}
 .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available {
   width: 100%;
   text-align: center;
@@ -2657,42 +2713,76 @@
 }
 .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list {
   padding: 25px 15px;
-}
-.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul {
-  width: 100%;
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: space-between;
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 @media (max-width: 767px) {
-  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul {
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list {
     flex-flow: column;
   }
 }
-.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li {
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point {
+  width: 20%;
+  font-size: 16px;
+  font-weight: 500;
+  color: #FC7E66;
+  font-weight: 600;
+  display: flex;
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point img {
+  margin: 0 5px 0 0;
+}
+@media (max-width: 767px) {
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point {
+    width: 100%;
+    padding-bottom: 15px;
+    justify-content: center;
+  }
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 16px;
   font-weight: 500;
   color: #000000;
+  padding-left: 30px;
 }
 @media (max-width: 767px) {
-  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li {
-    padding: 0 0 10px;
-  }
-  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li:last-child {
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info {
+    width: 100%;
     padding: 0;
   }
 }
-.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li.text_clr_orange {
-  color: #FC7E66;
-  font-weight: 600;
+@media (max-width: 480px) {
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info {
+    flex-flow: column;
+  }
 }
-.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li.text_clr_orange img {
-  margin: 0 5px 0 0;
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_left {
+  width: 40%;
 }
-.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list ul li.text_clr_grey {
+@media (max-width: 480px) {
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_left {
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+  }
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_right {
+  width: 40%;
+  text-align: right;
+}
+@media (max-width: 480px) {
+  .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_right {
+    width: 100%;
+    text-align: center;
+  }
+}
+.account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_right span {
+  width: 100%;
   color: #8188AB;
 }
 .account_part .account_cnt_main.subscription_plan .block_subscription_plan {
@@ -2728,6 +2818,9 @@
   width: 50%;
   border-radius: 15px;
   box-shadow: 0px 3px 6px rgba(2, 33, 119, 0.25);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
 }
 @media (max-width: 767px) {
   .account_part .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block {
@@ -2825,6 +2918,7 @@
   width: 100%;
   border-radius: 0 0 15px 15px;
   height: 62px;
+  overflow: hidden;
 }
 .account_part .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription a {
   width: 100%;
@@ -3014,11 +3108,11 @@
   display: flex;
   justify-content: flex-end;
   margin: 30px 0 0;
-  padding: 0 30px 0 0;
+  padding: 0;
 }
 .account_part .form_update_btn button {
   width: auto;
-  padding: 11px 25px;
+  padding: 11px 90px;
   background: #1943FF;
   border-radius: 8px;
   border: 1px solid #1943FF;
@@ -3405,11 +3499,12 @@
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field .custom_listing li {
   display: flex;
   justify-content: space-between;
-  padding: 0 80px 0 0;
+  padding: 0 50px 0 0;
   align-items: center;
   color: #8188AB;
   font-size: 14px;
   font-weight: 300;
+  min-width: 130px;
 }
 @media (max-width: 575px) {
   .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field .custom_listing li {
@@ -3769,4 +3864,100 @@
 }
 .cmn_delete_modal .modal-dialog .modal-content .modal-footer .form_btn button.btn_no:hover {
   border-color: #1943FF;
+}
+
+.cancle_alert_modal {
+  padding: 0 !important;
+}
+.cancle_alert_modal .modal-dialog {
+  max-width: 880px;
+  width: 96%;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-header {
+  border-bottom: none;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-header .close {
+  opacity: 1;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt {
+  text-align: center;
+  padding-bottom: 15px;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt h3 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 60px;
+  color: #000000;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  color: #707070;
+  margin: 0;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_contact {
+  display: flex;
+  margin: 40px 0;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+}
+@media (max-width: 480px) {
+  .cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_contact {
+    flex-flow: column;
+    margin: 20px 0;
+  }
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_contact li {
+  padding: 0 25px;
+}
+@media (max-width: 480px) {
+  .cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_contact li {
+    padding: 5px 0;
+  }
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_contact li a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_contact li a i {
+  margin: 0 10px 0 0;
+  color: #0045FF;
+  font-size: 16px;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_btn a {
+  min-width: 200px;
+  display: inline-block;
+  line-height: 48px;
+  padding: 0 25px;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 8px;
+  background: #1943FF;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_btn a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #FC7E66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_btn a:hover {
+  border-color: #FC7E66;
+}
+.cancle_alert_modal .modal-dialog .modal-content .modal-body .modal_cnt .block_btn a:hover:before {
+  height: 190%;
 }

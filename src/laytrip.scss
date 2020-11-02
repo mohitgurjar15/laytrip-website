@@ -179,6 +179,9 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
               .text_field {
                 .ui-calendar {
                   width: 100%;
+                  input{
+                    padding: 0;
+                  }
                 }
               }
             }
@@ -197,7 +200,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
           .field_bolck {
             .field_inn {
               .ui-calendar {
-                width: 100%;
+                width: 100%;                
               }
               .passport_expiry_cal{
                 .ui-calendar{
@@ -313,9 +316,11 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 .ng-select.ng-customClass {
 	.ng-select-container {
 		.ng-value-container {
-			.ng-placeholder{
+      padding-left: 0;
+      .ng-placeholder{
 				font-size: 14px;
-			}
+      }
+      
 		}
 	}
 }

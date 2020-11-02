@@ -1,6 +1,6 @@
 <div class="block_add_passenger">
   <form [formGroup]="adultForm" (ngSubmit)="onSubmit()">
-    <div class="form_row">
+    <!-- <div class="form_row">
       <div class="form_field">
         <label>Title<sup>*</sup></label>
         <ul class="custom_listing">
@@ -28,7 +28,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="form_row">
       <div class="form_field">
         <label>Gender<sup>*</sup></label>
@@ -124,14 +124,20 @@
               </div>
             </div>
             <div class="number">
-              <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
+              <input type="text" formControlName="phone_no" maxlength="10"
                 (keypress)="commonFunction.validateNumber($event)" tabindex="5" placeholder="0000 0000 00">
             </div>
           </div>
         </div>
-        <div *ngIf="(submitted || adultForm.controls.country_code.touched || adultForm.controls.phone_no.touched) 
-          && adultForm.hasError('phoneAndPhoneCodeError')">
-            <p class="text-danger">Please enter phone number</p>
+        <div *ngIf="(submitted || adultForm.controls.country_code.touched || adultForm.controls.phone_no.touched)">
+          <div *ngIf="adultForm.hasError('phoneAndPhoneCodeError')">
+              <p class="text-danger">Please enter phone number.</p>
+          </div>
+          <!-- <div *ngIf="adultForm.controls.phone_no.errors.minlength || adultForm.controls.phone_no.errors.maxlength ">
+              <p class="text-danger">Phone number should be minimum 10 and maximum 10 digit.</p>
+          </div> -->
+        
+
         </div>
       </div>
     </div>
