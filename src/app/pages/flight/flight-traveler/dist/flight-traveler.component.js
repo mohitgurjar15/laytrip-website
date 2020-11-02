@@ -120,7 +120,6 @@ var FlightTravelerComponent = /** @class */ (function () {
     FlightTravelerComponent.prototype.checkObj = function (obj, travellerKeys) {
         var isComplete = true;
         var userStr = JSON.stringify(obj);
-        console.log("userStr", userStr);
         JSON.parse(userStr, function (key, value) {
             if (!value && travellerKeys.indexOf(key) !== -1) {
                 return isComplete = false;

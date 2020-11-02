@@ -143,7 +143,6 @@ export class FlightTravelerComponent implements OnInit {
   checkObj(obj,travellerKeys) { 
     let isComplete = true;
     const userStr = JSON.stringify(obj);
-    console.log("userStr",userStr)
     JSON.parse(userStr, (key, value) => {
       if(!value &&  travellerKeys.indexOf(key) !== -1){
         return isComplete = false;                
