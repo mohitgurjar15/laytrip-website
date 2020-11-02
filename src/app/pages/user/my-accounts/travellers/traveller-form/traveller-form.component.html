@@ -61,16 +61,16 @@
                     <div class="text_field">
                         <input type="text" formControlName="firstName" maxlength="20" tabindex="1"
                             placeholder="First Name">
-                    </div>
-                    <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
-                        class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.firstName.errors.required" class="text-danger">Please enter first name.
-                        </div>
-                      
-                        <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
-                            <p class="text-danger">Please enter valid first name </p>
-                        </div> -->
-                        <div *ngIf="coAccountForm.controls.firstName.errors.pattern" class="text-danger">First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
+                            <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
+                                class="focus-input100 login-error">
+                                <div *ngIf="coAccountForm.controls.firstName.errors.required" class="error_text">Please enter first name.
+                                </div>
+                              
+                                <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
+                                    <p class="error_text">Please enter valid first name </p>
+                                </div> -->
+                                <div *ngIf="coAccountForm.controls.firstName.errors.pattern" class="error_text">First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
+                            </div>
                     </div>
                 </div>
                 <div class="form_field half">
@@ -78,12 +78,12 @@
                     <div class="text_field">
                         <input type="text" formControlName="lastName" maxlength="20" tabindex="2"
                             placeholder="last Name">
-                    </div>
-                    <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
-                        class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.lastName.errors.required" class="text-danger">Please enter last name.
-                        </div>
-                        <div *ngIf="coAccountForm.controls.lastName.errors.pattern" class="text-danger">Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
+                            <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
+                                class="focus-input100 login-error">
+                                <div *ngIf="coAccountForm.controls.lastName.errors.required" class="error_text">Please enter last name.
+                                </div>
+                                <div *ngIf="coAccountForm.controls.lastName.errors.pattern" class="error_text">Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -96,11 +96,11 @@
                     </div>
                     <div *ngIf="(submitted  || coAccountForm.controls.email.touched) && coAccountForm.controls.email.errors"
                         class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.email.errors.required" class="text-danger">Please
+                        <div *ngIf="coAccountForm.controls.email.errors.required" class="error_text">Please
                             enter
                             email.
                         </div>
-                        <div *ngIf="coAccountForm.controls.email.errors.pattern" class="text-danger">Please
+                        <div *ngIf="coAccountForm.controls.email.errors.pattern" class="error_text">Please
                             enter valid email address.</div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                     </div>
                     <div *ngIf="(submitted || coAccountForm.controls.country_code.touched || coAccountForm.controls.phone_no.touched) 
                                              && coAccountForm.hasError('phoneAndPhoneCodeError')">
-                        <p class="text-danger">Please enter phone number</p>
+                        <p class="error_text">Please enter phone number</p>
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@
 
                     </div>
                     <div *ngIf="(submitted && coAccountForm.controls.dob.errors)" class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.dob.errors.required" class="text-danger">Please
+                        <div *ngIf="coAccountForm.controls.dob.errors.required" class="error_text">Please
                             select
                             date of birth.
                         </div>
@@ -170,10 +170,7 @@
                     </div>
                     <div *ngIf="(submitted  || coAccountForm.controls.country_id.touched) && coAccountForm.controls.country_id.errors"
                         class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.country_id.errors.required" class="text-danger">
-                            Please select
-                            nationality.
-                        </div>
+                        <div *ngIf="coAccountForm.controls.country_id.errors.required" class="error_text"> Please select nationality.</div>
                     </div>
                 </div>
             </div>

@@ -10,6 +10,7 @@
 		background: $primary-color;
 		padding: 30px 0;
 		border-radius: 3px;
+		top: 60px;
 
 		.saidbar_top {
 			width: auto;
@@ -305,6 +306,14 @@
 
 						.text_field {
 							width: 100%;
+
+							.error_text {
+								width: 100%;
+								color: $error-color;
+								font-size: 10px;
+								font-weight: 400;
+								margin: 5px 0 0;
+							}
 						}
 
 						.custom_listing {
@@ -449,6 +458,14 @@
 
 							.field_inn {
 								margin-bottom: 30px;
+
+								.error_text {
+									width: 100%;
+									color: $error-color;
+									font-size: 10px;
+									font-weight: 400;
+									margin: 5px 0 0;
+								}
 
 								&:last-child {
 									margin-bottom: 0;
@@ -699,6 +716,14 @@
 								}
 							}
 
+							.error_text {
+								width: 100%;
+								color: $error-color;
+								font-size: 10px;
+								font-weight: 400;
+								margin: 5px 0 0;
+							}
+
 							.text_field {
 								width: 100%;
 								position: relative;
@@ -727,6 +752,14 @@
 										background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
 										background-position: right center;
 									}
+								}
+
+								.error_text {
+									width: 100%;
+									color: $error-color;
+									font-size: 10px;
+									font-weight: 400;
+									margin: 5px 0 0;
 								}
 
 								&.custom-select {
@@ -1117,7 +1150,7 @@
 									padding: 30px;
 
 									img {
-										width: 250px;
+										width: 120px;
 									}
 
 									h5 {
@@ -2136,7 +2169,7 @@
 				padding: 30px;
 
 				img {
-					width: 250px;
+					width: 120px;
 				}
 
 				h5 {
@@ -2400,7 +2433,7 @@
 						padding: 30px;
 
 						img {
-							width: 150px;
+							width: 100px;
 						}
 
 						h5 {
@@ -3238,7 +3271,7 @@
 									padding: 30px;
 
 									img {
-										width: 250px;
+										width: 120px;
 									}
 
 									h5 {
@@ -4252,6 +4285,14 @@
 
 								@media(max-width: 575px) {
 									width: 100%;
+								}
+
+								.error_text {
+									width: 100%;
+									color: $error-color;
+									font-size: 10px;
+									font-weight: 400;
+									margin: 5px 0 0;
 								}
 
 								.text_field {

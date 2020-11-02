@@ -15,7 +15,7 @@
           <div class="text_field">
             <input type="text" formControlName="first_name" maxlength="20" tabindex="1" placeholder="Enter first name">
             <div *ngIf="cardActionForm.controls.first_name.errors && cardActionForm.controls.first_name.touched">
-              <p *ngIf="cardActionForm.controls.first_name.errors" class="text-danger">Please enter your first
+              <p *ngIf="cardActionForm.controls.first_name.errors" class="error_text">Please enter your first
                 name.
               </p>
             </div>
@@ -26,7 +26,7 @@
           <div class="text_field">
             <input type="text" formControlName="last_name" maxlength="20" tabindex="2" placeholder="Enter last name">
             <div *ngIf="cardActionForm.controls.last_name.errors && cardActionForm.controls.last_name.touched">
-              <p *ngIf="cardActionForm.controls.last_name.errors" class="text-danger">Please enter your last
+              <p *ngIf="cardActionForm.controls.last_name.errors" class="error_text">Please enter your last
                 name.
               </p>
             </div>
@@ -39,7 +39,7 @@
           <div class="text_field">
             <input type="text" maxlength="20" tabindex="3" placeholder="Enter Name on Card" formControlName="card_name">
             <div *ngIf="cardActionForm.controls.card_name.errors && cardActionForm.controls.card_name.touched">
-              <p *ngIf="cardActionForm.controls.card_name.errors.required" class="text-danger">Please enter Name on
+              <p *ngIf="cardActionForm.controls.card_name.errors.required" class="error_text">Please enter Name on
                 Card.
               </p>
             </div>
@@ -52,7 +52,7 @@
               [textMask]="mask">
             <!-- [textMask]="mask" -->
             <div *ngIf="cardActionForm.controls.card_number.errors && cardActionForm.controls.card_number.touched">
-              <p *ngIf="cardActionForm.controls.card_number.errors.required" class="text-danger">Please enter card
+              <p *ngIf="cardActionForm.controls.card_number.errors.required" class="error_text">Please enter card
                 number.
               </p>
             </div>
@@ -64,7 +64,7 @@
           <div class="text_field">
             <input type="text" tabindex="5" placeholder="Enter CVV no." formControlName="card_cvv" [textMask]="cvvNoMask">
             <div *ngIf="cardActionForm.controls.card_cvv.errors && cardActionForm.controls.card_cvv.touched">
-              <p *ngIf="cardActionForm.controls.card_cvv.errors.required" class="text-danger">Please enter card CVV
+              <p *ngIf="cardActionForm.controls.card_cvv.errors.required" class="error_text">Please enter card CVV
                 number.
               </p>
             </div>
@@ -81,7 +81,7 @@
               view="month" tabindex="6" [readonlyInput]="true">
             </p-calendar>
             <div *ngIf="cardActionForm.controls.card_expiry.errors && cardActionForm.controls.card_expiry.touched">
-              <p *ngIf="cardActionForm.controls.card_expiry.errors.required" class="text-danger">Please enter card expiry date.
+              <p *ngIf="cardActionForm.controls.card_expiry.errors.required" class="error_text">Please enter card expiry date.
               </p>
             </div>
             <!-- <input class="birth_date" type="text" maxlength="20" tabindex="4" placeholder="Dd/mm/yyyy"

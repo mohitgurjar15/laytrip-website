@@ -146,12 +146,23 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.pushTraveler = function (event) {
-        var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
+        alert();
+        var travellerKeys = ["firstName", "lastName", "email", "dob", "gender"];
+        var _itinerary;
+        var _itineraryJson;
+        _itinerary = sessionStorage.getItem('_itinerary');
+        try {
+            _itineraryJson = JSON.parse(_itinerary);
+        }
+        catch (e) { }
         if (event.user_type === 'adult') {
             var index = this._adults.indexOf(event.userId, 0);
             this._adults = this._adults.filter(function (item) { return item.userId != event.userId; });
             this.showAddAdultForm = false;
-            var adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "phoneNo", "title"];
+            var adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo"];
+            if (_itineraryJson && _itineraryJson.is_passport_required) {
+                adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo", "passportNumber", "passportExpiry"];
+            }
             event.isComplete = this.checkObj(event, adultTravellerKeys);
             this._adults.push(event);
         }

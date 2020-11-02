@@ -10,13 +10,15 @@ exports.FlightTravelerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
+var moment = require("moment");
 var FlightTravelerComponent = /** @class */ (function () {
-    function FlightTravelerComponent(travelerService, route, cookieService, toastr, router) {
+    function FlightTravelerComponent(travelerService, route, cookieService, toastr, router, flightService) {
         this.travelerService = travelerService;
         this.route = route;
         this.cookieService = cookieService;
         this.toastr = toastr;
         this.router = router;
+        this.flightService = flightService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this._adults = [];
@@ -36,11 +38,14 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.showPartialPayemntOption = false;
         this.isComplete = false;
         this.payNowAmount = 0;
+        this.instalmentMode = '';
+        this.priceData = [];
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
         this.loading = true;
         this.getTravelers();
+        this.getSellingPrice();
         if (sessionStorage.getItem('_itinerary')) {
             this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
             this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
@@ -50,9 +55,13 @@ var FlightTravelerComponent = /** @class */ (function () {
         customInstalmentData = JSON.parse(customInstalmentData);
         console.log("customInstalmentData", customInstalmentData);
         this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
-        this.payNowAmount = customInstalmentData.payNowAmount;
-        var instalmentMode = atob(sessionStorage.getItem('__insMode'));
-        this.showPartialPayemntOption = instalmentMode == 'instalment' ? true : false;
+        this.instalmentMode = atob(sessionStorage.getItem('__insMode'));
+        this.showPartialPayemntOption = this.instalmentMode == 'instalment' ? true : false;
+        if (this.instalmentMode == 'no-instalment') {
+        }
+        else {
+            this.payNowAmount = customInstalmentData.payNowAmount;
+        }
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
@@ -88,9 +97,19 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.checkTravellerComplete = function (object, type) {
         var isEmpty = false;
-        var travellerKeys = ["firstName", "lastName", "email", "dob", "gender", "title"];
+        var travellerKeys = ["firstName", "lastName", "email", "dob", "gender"];
+        var _itinerary;
+        var _itineraryJson;
+        _itinerary = sessionStorage.getItem('_itinerary');
+        try {
+            _itineraryJson = JSON.parse(_itinerary);
+        }
+        catch (e) { }
         if (type == 'adult') {
-            var adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo", "title"];
+            var adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo"];
+            if (_itineraryJson && _itineraryJson.is_passport_required) {
+                adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo", "passportNumber", "passportExpiry"];
+            }
             isEmpty = this.checkObj(object, adultTravellerKeys);
         }
         else if (type == 'child' || type == 'infant') {
@@ -101,6 +120,7 @@ var FlightTravelerComponent = /** @class */ (function () {
     FlightTravelerComponent.prototype.checkObj = function (obj, travellerKeys) {
         var isComplete = true;
         var userStr = JSON.stringify(obj);
+        console.log("userStr", userStr);
         JSON.parse(userStr, function (key, value) {
             if (!value && travellerKeys.indexOf(key) !== -1) {
                 return isComplete = false;
@@ -161,6 +181,24 @@ var FlightTravelerComponent = /** @class */ (function () {
     };
     FlightTravelerComponent.prototype.onActivate = function (event) {
         window.scroll(0, 0);
+    };
+    FlightTravelerComponent.prototype.getSellingPrice = function () {
+        var _this = this;
+        try {
+            var __route = sessionStorage.getItem('__route');
+            var response = JSON.parse(__route);
+            response[0] = response;
+            var payLoad = {
+                departure_date: moment(response[0].departure_date, 'DD/MM/YYYY').format("YYYY-MM-DD"),
+                net_rate: response[0].net_rate
+            };
+            this.flightService.getSellingPrice(payLoad).subscribe(function (res) {
+                _this.priceData = res;
+            }, function (error) {
+            });
+        }
+        catch (e) {
+        }
     };
     FlightTravelerComponent = __decorate([
         core_1.Component({
