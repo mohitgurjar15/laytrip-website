@@ -125,7 +125,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             this.router.navigate(["flight/payment/" + route.route_code]);
         }
         else {
-            this.router.navigate(["flight/traveler/" + route.route_code]);
+            this.router.navigate(["flight/travelers/" + route.route_code]);
         }
     };
     FlightItemWrapperComponent.prototype.checkInstalmentAvalability = function () {

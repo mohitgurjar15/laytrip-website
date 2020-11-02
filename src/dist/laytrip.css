@@ -66,6 +66,9 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half .field_inn .text_field .ui-calendar {
   width: 100%;
 }
+.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half .field_inn .text_field .ui-calendar input {
+  padding: 0;
+}
 
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .ui-calendar {
   width: 100%;
@@ -97,6 +100,9 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   min-width: 200px !important;
 }
 
+.ng-select.ng-customClass .ng-select-container .ng-value-container {
+  padding-left: 0;
+}
 .ng-select.ng-customClass .ng-select-container .ng-value-container .ng-placeholder {
   font-size: 14px;
 }

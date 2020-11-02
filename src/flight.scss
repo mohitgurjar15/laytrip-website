@@ -2320,7 +2320,7 @@
 										padding: 20px 0;
 										border: 1px solid $box-border-color;
 										border-radius: 10px;
-										margin: 0 0 20px;
+										margin: 0 0 10px;
 
 										@media(max-width:767px) {
 											padding: 15px;
@@ -2543,21 +2543,13 @@
 										}
 
 										&:last-child {
-											margin: 10px 0 0;
+											margin: 5px 0 0;
 											position: relative;
-
-											&:before {
-												width: 100%;
-												height: 1px;
-												background: $primary-color;
-												position: absolute;
-												top: -10px;
-												left: 0;
-												content: '';
-											}
-
 										}
+
 									}
+
+
 
 									&.fare_detail_cnt {
 										padding: 30px 30px 20px;
@@ -2933,6 +2925,24 @@
 									}
 								}
 
+								.block_fllight_name {
+									width: 100%;
+									font-size: 16px;
+									font-weight: 500;
+									color: $text-black;
+
+									@media(max-width:767px) {
+										font-size: 14px;
+									}
+
+									span {
+										color: $text-lightblue;
+
+										@media(max-width:767px) {
+											display: block;
+										}
+									}
+								}
 							}
 
 						}
@@ -4019,6 +4029,14 @@
 													@media(max-width: 767px) {
 														width: 100%;
 													}
+
+													.error_text {
+														width: 100%;
+														color: $error-color;
+														font-size: 10px;
+														font-weight: 400;
+														margin: 5px 0 0;
+													}
 												}
 
 												.custom_listing {
@@ -4137,6 +4155,14 @@
 															color: $box-border-color;
 															-webkit-text-fill-color: $box-border-color;
 														}
+													}
+
+													.error_text {
+														width: 100%;
+														color: $error-color;
+														font-size: 10px;
+														font-weight: 400;
+														margin: 5px 0 0;
 													}
 
 													&.custom-select {
@@ -5459,6 +5485,14 @@
 
 										}
 									}
+
+									.error_text {
+										width: 100%;
+										color: $error-color;
+										font-size: 10px;
+										font-weight: 400;
+										margin: 5px 0 0;
+									}
 								}
 							}
 						}
@@ -5514,6 +5548,14 @@
 											sup {
 												color: $error-color;
 											}
+										}
+
+										.error_text {
+											width: 100%;
+											color: $error-color;
+											font-size: 10px;
+											font-weight: 400;
+											margin: 5px 0 0;
 										}
 
 										.text_field {
@@ -5610,6 +5652,14 @@
 														display: none;
 													}
 												}
+											}
+
+											.error_text {
+												width: 100%;
+												color: $error-color;
+												font-size: 10px;
+												font-weight: 400;
+												margin: 5px 0 0;
 											}
 										}
 									}
@@ -6317,6 +6367,14 @@
 											sup {
 												color: $error-color;
 											}
+										}
+
+										.error_text {
+											width: 100%;
+											color: $error-color;
+											font-size: 10px;
+											font-weight: 400;
+											margin: 5px 0 0;
 										}
 
 										.text_field {
@@ -8171,7 +8229,7 @@
 			}
 
 			p {
-				font-size: 20px;
+				font-size: 16px;
 				font-weight: 500;
 				color: $text_grey_dark;
 				margin: 0 0 15px;
@@ -9727,9 +9785,13 @@
 			@media(max-width:575px) {
 				font-size: 14px;
 			}
+
+			a {
+				color: $text-lightblue;
+			}
 		}
 
-		a {
+		.btn_laytrip {
 			display: inline-block;
 			line-height: 50px;
 			padding: 0 40px;

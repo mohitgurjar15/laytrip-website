@@ -171,4 +171,9 @@ export class UserService {
   addNewPoints(data) {
     return this.http.post(this.apiURL + 'v1/laytrip-point/add', data, this.commonFunction.setHeaders());
   }
+  
+  subscribeNow(email) {
+    const data = {email:email};
+    return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
+  }
 }
