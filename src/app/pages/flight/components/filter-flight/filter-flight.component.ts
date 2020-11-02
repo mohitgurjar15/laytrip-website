@@ -26,6 +26,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   departureTimeSlotCityName;
   currency;
   showMinAirline:number=4;
+  airLineCount:number;
   s3BucketUrl = environment.s3BucketUrl;
   form: FormGroup;
   priceSlider: FormGroup = new FormGroup({
@@ -135,6 +136,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     }
     if (this.filterFlightDetails && this.filterFlightDetails.airline_list) {
       // FOR FLIGHT AIRLINE - AIRLINE
+      this.airLineCount = this.filterFlightDetails.airline_list.legth+1; 
       this.airlineList = this.filterFlightDetails.airline_list;
       this.airlineList.forEach(element => {
         return element.isChecked =false;  

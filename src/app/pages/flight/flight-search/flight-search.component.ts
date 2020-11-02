@@ -33,6 +33,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ​flexibleNotFound:boolean=false;
   dates:[]=[];
   calenderPrices:[]=[]
+  errorMessage:string='';
 
   constructor(
     private layTripStoreService: LayTripStoreService,
@@ -82,7 +83,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   getFlightSearchData(payload, tripType) {
     this.loading = true;
     this.tripType = tripType;
-
+    this.errorMessage='';
     if (payload && tripType === 'roundtrip') {
       
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
@@ -93,10 +94,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-        /* if (err && err.status === 404) { */
-        this.isNotFound = true;
+        if (err && err.status === 404) {
+          this.errorMessage=err.message;
+        }
+        else{
+          this.isNotFound = true;
+        }
+
         this.loading = false;
-        /* } */
       });
     } else {
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
@@ -107,7 +112,13 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-        this.isNotFound = true;
+
+        if(err.status==422){
+          this.errorMessage=err.message;
+        }
+        else{
+          this.isNotFound = true;
+        }
         this.loading = false;
       });
 

@@ -5,8 +5,9 @@
 
 
 <app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
+<app-flight-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-flight-error>
 
-<section class="search_result flight" *ngIf="!loading && !isNotFound">
+<section class="search_result flight" *ngIf="!loading && !isNotFound && errorMessage==''">
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
@@ -36,7 +37,7 @@
       <a href="javascript:void(0)" class="responsive_filter_btn">Show Filter</a>
   </div>
 </div>
-<div id="responsive_filter_show" class="responsive_filter_show" *ngIf="!loading && !isNotFound">
+<div id="responsive_filter_show" class="responsive_filter_show" *ngIf="!loading && !isNotFound && errorMessage==''">
   <div class="filter_popup">
       <div class="filter_head_popup">
           <div class="filter_clear">
