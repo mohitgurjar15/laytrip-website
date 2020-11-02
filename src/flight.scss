@@ -8229,7 +8229,7 @@
 			}
 
 			p {
-				font-size: 20px;
+				font-size: 16px;
 				font-weight: 500;
 				color: $text_grey_dark;
 				margin: 0 0 15px;
@@ -9785,9 +9785,13 @@
 			@media(max-width:575px) {
 				font-size: 14px;
 			}
+
+			a {
+				color: $text-lightblue;
+			}
 		}
 
-		a {
+		.btn_laytrip {
 			display: inline-block;
 			line-height: 50px;
 			padding: 0 40px;

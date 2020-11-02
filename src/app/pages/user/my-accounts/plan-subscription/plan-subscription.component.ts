@@ -81,7 +81,6 @@ export class PlanSubscriptionComponent implements OnInit {
   onPayNow() {
     this.loading = true;
     const data = { plan_id: this.planId, currency_id: this.currency.id, card_token: this.cardToken };
-    console.log(this.planId, this.currency.id, this.cardToken);
     this.userService.payNowSubscription(data).subscribe((res: any) => {
       this.loading = true;
       this.toastr.success(res.message, 'Plan Subscription');

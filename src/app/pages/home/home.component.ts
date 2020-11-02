@@ -19,17 +19,9 @@ export class HomeComponent implements OnInit {
   modules: Module[];
   moduleList: any = {};
   switchBtnValue = false;
-  tempSwapData =
-    {
-      leftSideValue: {},
-      rightSideValue: {}
-    };
-  swapped = [];
-  isSwap = false;
-  swapError = '';
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
-  flightSearchFormSubmitted:boolean=false;
+  flightSearchFormSubmitted: boolean = false;
 
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationCode;
@@ -62,6 +54,13 @@ export class HomeComponent implements OnInit {
     };
 
   searchedValue = [];
+  swapDepartureAirport;
+  swapArrivalAirport;
+  swapElementValue = {
+    isSwap: false,
+    fromDestination: null,
+    toDestination: null
+  };
 
   constructor(
     private genericService: GenericService,
@@ -71,8 +70,8 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
   ) {
     this.flightSearchForm = this.fb.group({
-      fromDestination: ['',[Validators.required]],
-      toDestination: ['',[Validators.required]],
+      fromDestination: ['', [Validators.required]],
+      toDestination: ['', [Validators.required]],
       departureDate: [[Validators.required]],
       returnDate: [[Validators.required]]
     });
@@ -177,9 +176,11 @@ export class HomeComponent implements OnInit {
     if (event && event.key && event.key === 'fromSearch') {
       this.fromDestinationCode = event.value.code;
       this.searchedValue.push({ key: 'fromSearch', value: event.value });
+      this.swapDepartureAirport = event.value;
     } else if (event && event.key && event.key === 'toSearch') {
       this.toDestinationCode = event.value.code;
       this.searchedValue.push({ key: 'toSearch', value: event.value });
+      this.swapArrivalAirport = event.value;
     }
     this.searchFlightInfo.departure = this.fromDestinationCode;
     this.searchFlightInfo.arrival = this.toDestinationCode;
@@ -188,18 +189,6 @@ export class HomeComponent implements OnInit {
   getDateWithFormat(date) {
     this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
     // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
-  }
-
-  getSwappedValue(event) {
-    if (event && event.key && event.key === 'fromSearch') {
-      this.tempSwapData.leftSideValue = event.value;
-    } else if (event && event.key && event.key === 'toSearch') {
-      this.tempSwapData.rightSideValue = event.value;
-    }
-  }
-
-  switchDestination() {
-
   }
 
   changeTravellerInfo(event) {
@@ -212,7 +201,7 @@ export class HomeComponent implements OnInit {
   }
 
   searchFlights() {
-    this.flightSearchFormSubmitted=true;
+    this.flightSearchFormSubmitted = true;
     let queryParams: any = {};
     queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
     queryParams.departure = this.searchFlightInfo.departure;
@@ -226,6 +215,9 @@ export class HomeComponent implements OnInit {
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
 
+    if (this.flightSearchForm) {
+      console.log(this.flightSearchForm.controls)
+    }
 
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
@@ -283,5 +275,4 @@ export class HomeComponent implements OnInit {
       }
     }
   }
- 
 }

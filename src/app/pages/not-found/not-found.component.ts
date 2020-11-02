@@ -8,10 +8,10 @@ import { environment } from '../../../environments/environment';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor() { }
   s3BucketUrl = environment.s3BucketUrl;
+  constructor() { }
   ngOnInit(): void {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
   }
 

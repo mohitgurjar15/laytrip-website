@@ -1,0 +1,42 @@
+<form [formGroup]="addPointsForm">
+  <div class="block_addpoints">
+    <div class="block_title_section">
+      <h5>Add Points</h5>
+    </div>
+    <div class="block_point">
+      <div class="block_point_left">
+        <label>Choose an amount</label>
+        <ul class="custom_listing">
+          <li>
+            <label class="custom_radio">$100
+              <input type="radio" value="100" checked="checked" formControlName="default_add_points"
+                (change)="addPointsForm.controls.custom_add_points.setValue('');changeValue(addPointsForm.value)">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <li>
+            <label class="custom_radio">$200
+              <input type="radio" value="200" formControlName="default_add_points"
+                (change)="addPointsForm.controls.custom_add_points.setValue('');changeValue(addPointsForm.value)">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <li>
+            <label class="custom_radio">$500
+              <input type="radio" value="500" formControlName="default_add_points"
+                (change)="addPointsForm.controls.custom_add_points.setValue('');changeValue(addPointsForm.value)">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="block_point_right">
+        <label>Amount*</label>
+        <div class="block_amount">
+          <input type="text" tabindex="1" maxlength="10" placeholder="$100" formControlName="custom_add_points"
+            (keyup)="addPointsForm.controls.default_add_points.setValue('');addCusomPoint(addPointsForm.value)">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

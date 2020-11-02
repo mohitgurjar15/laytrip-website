@@ -27,6 +27,7 @@ import { BookingAsLoginOrGuestPopupComponent } from './booking-as-login-or-guest
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PlanSummaryComponent } from './plan-summary/plan-summary.component';
+import { AddPointsComponent } from './add-points/add-points.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PlanSummaryComponent } from './plan-summary/plan-summary.component';
     RedeemLaycreditComponent,
     BookingFeedbackComponent,
     BookingAsLoginOrGuestPopupComponent,
-    PlanSummaryComponent
+    PlanSummaryComponent,
+    AddPointsComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +81,8 @@ import { PlanSummaryComponent } from './plan-summary/plan-summary.component';
     RedeemLaycreditComponent,
     BookingFeedbackComponent,
     BookingAsLoginOrGuestPopupComponent,
-    PlanSummaryComponent
+    PlanSummaryComponent,
+    AddPointsComponent
   ],
   providers: [DatePipe],
 

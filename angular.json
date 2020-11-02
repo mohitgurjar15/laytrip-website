@@ -100,6 +100,14 @@
                   "with": "src/environments/environment.mohit.ts"
                 }
               ]
+            },
+            "varshil": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.varshil.ts"
+                }
+              ]
             }
           }
         },
@@ -120,6 +128,9 @@
             },
             "mohit": {
               "browserTarget": "laytrip-website:build:mohit"
+            },
+            "varshil": {
+              "browserTarget": "laytrip-website:build:varshil"
             }
           }
         },
