@@ -148,7 +148,7 @@ export class FlightTravelerComponent implements OnInit {
       if(!value &&  travellerKeys.indexOf(key) !== -1){
         return isComplete = false;                
       }          
-    });
+    }); 
     return isComplete;
   }
 
