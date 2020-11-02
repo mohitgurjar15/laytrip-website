@@ -16,11 +16,9 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Input() placeHolder: string;
   @Input() defaultSelected: string;
   @Input() id;
-  @Input() swappedData;
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
-  @Output() getSwapValue = new EventEmitter<any>();
   defaultSelectedTemp;
   airportDefaultDestValue;
   departureAirport;
@@ -46,8 +44,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    if (this.swappedData) {
-    }
+    
   }
 
   searchAirport(searchItem) {

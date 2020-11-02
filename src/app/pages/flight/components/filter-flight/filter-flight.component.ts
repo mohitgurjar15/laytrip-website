@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
-import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
@@ -83,7 +82,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private layTripStoreService: LayTripStoreService
   ) { }
 
   ngOnInit() {
