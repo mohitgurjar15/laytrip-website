@@ -1,6 +1,6 @@
 <div class="block_add_passenger">
   <form [formGroup]="adultForm" (ngSubmit)="onSubmit()">
-    <div class="form_row">
+    <!-- <div class="form_row">
       <div class="form_field">
         <label>Title<sup>*</sup></label>
         <ul class="custom_listing">
@@ -28,7 +28,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="form_row">
       <div class="form_field">
         <label>Gender<sup>*</sup></label>
@@ -61,15 +61,12 @@
         <div class="text_field">
           <input type="text" formControlName="firstName" maxlength="80" tabindex="1" placeholder="Enter First Name">
           <input type="hidden" formControlName="user_type" #var [value]="type">
-        </div>
-        <div *ngIf="(submitted  || adultForm.controls.firstName.touched) && adultForm.controls.firstName.errors"
-          class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.firstName.errors.required" class="text-danger">Please enter
-            first name.
+          <div *ngIf="(submitted  || adultForm.controls.firstName.touched) && adultForm.controls.firstName.errors"
+            class="focus-input100 login-error">
+            <div *ngIf="adultForm.controls.firstName.errors.required" class="error_text">Please enter
+              first name.</div>
+            <div *ngIf="adultForm.controls.firstName.errors.pattern" class="error_text">First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>         
           </div>
-          <div *ngIf="adultForm.controls.firstName.errors.pattern" class="text-danger">First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
-
-         
         </div>
       </div>
       <div class="form_field half">
@@ -79,10 +76,10 @@
         </div>
         <div *ngIf="(submitted  || adultForm.controls.lastName.touched) && adultForm.controls.lastName.errors"
           class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.lastName.errors.required" class="text-danger">Please enter
+          <div *ngIf="adultForm.controls.lastName.errors.required" class="error_text">Please enter
             last name.
           </div>
-          <div *ngIf="adultForm.controls.lastName.errors.pattern" class="text-danger">Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>         
+          <div *ngIf="adultForm.controls.lastName.errors.pattern" class="error_text">Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>         
         </div>
       </div>
     </div>
@@ -95,10 +92,10 @@
         </div>
         <div *ngIf="(submitted  || adultForm.controls.email.touched) && adultForm.controls.email.errors"
           class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.email.errors.required" class="text-danger">Please enter
+          <div *ngIf="adultForm.controls.email.errors.required" class="error_text">Please enter
             email.
           </div>
-          <div *ngIf="adultForm.controls.email.errors.pattern" class="text-danger">Please enter valid
+          <div *ngIf="adultForm.controls.email.errors.pattern" class="error_text">Please enter valid
             email
             address.</div>
         </div>
@@ -111,7 +108,7 @@
             <div class="code">
               <div class="dropdown">
                 <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true" [items]="countries_code"
-                bindLabel="country_name" clearSearchOnAdd="true" formControlName="country_code" placeholder="Select country code">
+                bindLabel="country_name" clearSearchOnAdd="true" formControlName="country_code" placeholder="Select Country Code">
 
                 <ng-template ng-label-tmp let-item="item" let-clear="clear">
                   <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
@@ -124,14 +121,20 @@
               </div>
             </div>
             <div class="number">
-              <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
+              <input type="text" formControlName="phone_no" maxlength="10"
                 (keypress)="commonFunction.validateNumber($event)" tabindex="5" placeholder="0000 0000 00">
             </div>
           </div>
         </div>
-        <div *ngIf="(submitted || adultForm.controls.country_code.touched || adultForm.controls.phone_no.touched) 
-          && adultForm.hasError('phoneAndPhoneCodeError')">
-            <p class="text-danger">Please enter phone number</p>
+        <div *ngIf="(submitted || adultForm.controls.country_code.touched || adultForm.controls.phone_no.touched)">
+          <div *ngIf="adultForm.hasError('phoneAndPhoneCodeError')">
+              <p class="error_text">Please enter phone number.</p>
+          </div>
+          <!-- <div *ngIf="adultForm.controls.phone_no.errors.minlength || adultForm.controls.phone_no.errors.maxlength ">
+              <p class="error_text">Phone number should be minimum 10 and maximum 10 digit.</p>
+          </div> -->
+        
+
         </div>
       </div>
     </div>
@@ -160,7 +163,7 @@
           </p-calendar>
         </div>
          <div *ngIf="(submitted && adultForm.controls.dob.errors)" class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.dob.errors.required" class="text-danger">Please select
+          <div *ngIf="adultForm.controls.dob.errors.required" class="error_text">Please select
             date of birth.
           </div>
         </div>
@@ -181,7 +184,7 @@
         </div>
         <div *ngIf="(submitted  || adultForm.controls.country_id.touched) && adultForm.controls.country_id.errors"
           class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.country_id.errors.required" class="text-danger">Please select
+          <div *ngIf="adultForm.controls.country_id.errors.required" class="error_text">Please select
             nationality.
           </div>
         </div>
@@ -189,7 +192,7 @@
     </div>
     <div *ngIf="is_passport_required && type!='infant'" class="form_row">
       <div class="form_field half">
-        <label>Passport Expiry</label>      
+        <label>Passport Expiry<sup *ngIf="is_passport_required && type!='infant'">*</sup></label>      
           <div class="text_field">
             <p-calendar 
             tabindex="6"
@@ -209,13 +212,13 @@
           <div
           *ngIf="(submitted  || adultForm.controls.passport_expiry.touched) && adultForm.controls.passport_expiry.errors"
           class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.passport_expiry.errors.required" class="text-danger">Please select 
+          <div *ngIf="adultForm.controls.passport_expiry.errors.required" class="error_text">Please select 
             passport export date.
           </div>
         </div>
       </div> 
       <div class="form_field half">
-        <label>Passport Number</label>
+        <label>Passport Number<sup *ngIf="is_passport_required && type!='infant'">*</sup></label>
         <div class="text_field">
           <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
             placeholder="Passport Number">
@@ -223,7 +226,7 @@
         <div
           *ngIf="(submitted  || adultForm.controls.passport_number.touched) && adultForm.controls.passport_number.errors"
           class="focus-input100 login-error">
-          <div *ngIf="adultForm.controls.passport_number.errors.required" class="text-danger">Please enter
+          <div *ngIf="adultForm.controls.passport_number.errors.required" class="error_text">Please enter
             passport number.
           </div>
         </div>

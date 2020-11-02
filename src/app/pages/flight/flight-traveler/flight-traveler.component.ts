@@ -114,12 +114,23 @@ export class FlightTravelerComponent implements OnInit {
 
   checkTravellerComplete(object,type){
     let isEmpty = false;
-    let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
-
+    let travellerKeys = ["firstName","lastName","email","dob","gender"];
+    let _itinerary : any;
+    let _itineraryJson : any;
+     _itinerary =  sessionStorage.getItem('_itinerary');
+    try{
+       _itineraryJson  = JSON.parse(_itinerary);
+       
+      }catch(e){}
+      
     if(type == 'adult'){
-      let adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo","title"];
-      isEmpty = this.checkObj(object,adultTravellerKeys);     
+      let adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo"];
+      
+      if(_itineraryJson && _itineraryJson.is_passport_required) {
+         adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo","passportNumber","passportExpiry"];        
+      }
 
+      isEmpty = this.checkObj(object,adultTravellerKeys);     
     } else if(type == 'child' || type == 'infant'){
       isEmpty = this.checkObj(object,travellerKeys);
     } 
@@ -132,7 +143,7 @@ export class FlightTravelerComponent implements OnInit {
   checkObj(obj,travellerKeys) { 
     let isComplete = true;
     const userStr = JSON.stringify(obj);
-
+    console.log("userStr",userStr)
     JSON.parse(userStr, (key, value) => {
       if(!value &&  travellerKeys.indexOf(key) !== -1){
         return isComplete = false;                

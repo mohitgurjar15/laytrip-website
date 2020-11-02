@@ -48,7 +48,7 @@ var TravellerFormComponent = /** @class */ (function () {
         catch (e) { }
         var countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         this.coAccountForm = this.formBuilder.group({
-            title: ['mr'],
+            // title: ['mr'],
             gender: ['M'],
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
@@ -77,7 +77,7 @@ var TravellerFormComponent = /** @class */ (function () {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
         this.coAccountForm.patchValue({
-            title: this.travelerInfo.title ? this.travelerInfo.title : 'mr',
+            // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
             firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
             lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
             email: this.travelerInfo.email ? this.travelerInfo.email : '',
@@ -112,39 +112,10 @@ var TravellerFormComponent = /** @class */ (function () {
             this.isLoggedIn = true;
         }
     };
-    /* getCountry() {
-      this.genericService.getCountry().subscribe((data: any) => {
-        this.countries = data.map(country => {
-          return {
-            id: country.id,
-            name: country.name,
-            code: country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-  
-          }
-        }),
-          this.countries_code = data.map(country => {
-            return {
-              id: country.id,
-              name: country.phonecode+' ('+country.iso2+')',
-              code:country.phonecode,
-              country_name:country.name+ ' ' +country.phonecode,
-              flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-            }
-          });
-          console.log(this.countries_code)
-      }, (error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.router.navigate(['/']);
-        }
-      });
-    }
-   */
     TravellerFormComponent.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.coAccountForm.invalid) {
-            console.log(this.coAccountForm);
             this.submitted = true;
             this.loading = false;
             return;
@@ -170,7 +141,7 @@ var TravellerFormComponent = /** @class */ (function () {
                 country_code = this.location.country.id;
             }
             var jsonData = {
-                title: this.coAccountForm.value.title,
+                // title: this.coAccountForm.value.title,
                 first_name: this.coAccountForm.value.firstName,
                 last_name: this.coAccountForm.value.lastName,
                 dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),

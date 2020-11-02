@@ -24,10 +24,21 @@
                     <div class="our_subscription">
                         <p>Be the first to get nearly updates</p>
                         <div class="subscription">
-                            <form action="post">
-                                <input type="email" name="mail" maxlength="40" tabindex="1" placeholder="Enter Your Email Address" />
-                                <button>Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+                            <form [formGroup]="subscribeForm" (ngSubmit)="subscribeNow()">
+                                <input type="email" formControlName="email" maxlength="40" tabindex="1" placeholder="Enter Your Email Address" />
+                                
+<!--                                 <button (click)="subscribeNow()">Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+ -->
+                                <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                             </form>
+                            <div *ngIf="(submitted  || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors"
+                                class="focus-input100 login-error">
+                                <div *ngIf="subscribeForm.controls.email.errors.required" class="text-danger">Please enter
+                                    email.
+                                </div>
+                                <div *ngIf="subscribeForm.controls.email.errors.pattern" class="text-danger">Please enter valid email address.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
