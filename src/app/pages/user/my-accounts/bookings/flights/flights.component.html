@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="result_listing one_way_list roundtrip_list" *ngIf="loading">
-    <div class="search_block">
+    <div class="search_block" *ngFor="let index of [0,1,2,3,4,5]">
         <div class="listing_block">
             <div class="block_booking_info">
                 <div class="row">
@@ -115,7 +115,7 @@
                         </div>
                         <div class="block_detail_btm">
                             <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
-                                <a href="javascript:void(0);" class="show_more_detail"
+                                <a class="show_more_detail hover-link"
                                     (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                     Flight Details

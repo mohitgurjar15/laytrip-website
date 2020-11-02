@@ -46,6 +46,7 @@ export class TravelerFormComponent implements OnInit {
 
   dobMinDate;
   dobMaxDate; 
+  passportMaxDate = new Date(moment().format("YYYY-MM-DD"));
   minyear;
   maxyear;
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
@@ -82,6 +83,7 @@ export class TravelerFormComponent implements OnInit {
       phone_no: ['', [Validators.required]],
       dob : ['', Validators.required],
       passport_expiry : [''],
+      passport_number : [''],
       frequently_no: [''],
       user_type: ['']
     }, { validator: phoneAndPhoneCodeValidation(this.type) });
@@ -133,6 +135,7 @@ export class TravelerFormComponent implements OnInit {
 
       this.dobMinDate = new Date(moment().subtract(50,'years').format("MM/DD/YYYY") );
       this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
+
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
     } else if (this.type === 'child') {
       this.dobMinDate =  new Date(moment().subtract(12,'years').format("MM/DD/YYYY") );

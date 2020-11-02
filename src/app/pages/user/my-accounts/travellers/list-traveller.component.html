@@ -12,7 +12,7 @@
                 <!-- <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"   value="">
                 <span class="checkmark"></span>Select all -->
               </label>
-              <a href="javascript:void(0);" (click)="openTravellerModal(content)">+ Add New Co-Traveller</a>
+              <a class="hover-link" (click)="openTravellerModal(content)">+ Add New Co-Traveller</a>
             </div>
             <div class="block_traveller_btm">
               <div class="block_no_traveller" *ngIf="notFound">
@@ -57,12 +57,12 @@
                     <div class="list_action">
                       <ul>
                         <li>
-                          <a href="javascript:void(0);" (click)="openTravellerModal(content,traveler.userId,traveler)">
+                          <a class="hover-link" (click)="openTravellerModal(content,traveler.userId,traveler)">
                             <img src="{{s3BucketUrl}}assets/images/icon/ic_edit.svg" alt="Edit Icon">
                           </a>
                         </li>
                         <li *ngIf="traveler.roleId != 6">
-                          <a href="javascript:void(0);" (click)="deleteTravellerModal(deleteContent,traveler.userId)">
+                          <a class="hover-link" (click)="deleteTravellerModal(deleteContent,traveler.userId)">
                             <img src="{{s3BucketUrl}}assets/images/icon/ic_trash.svg" alt="Delete Icon">
                           </a>
                         </li>

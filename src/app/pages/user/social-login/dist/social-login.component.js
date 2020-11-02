@@ -31,11 +31,11 @@ var SocialLoginComponent = /** @class */ (function () {
         var _this = this;
         this.loadGoogleSdk();
         this.loadFacebookSdk();
-        // APPLE LOGIN RESPONSE
+        // APPLE LOGIN RESPONSE 
         this.authService.authState.subscribe(function (userInfo) {
             if (userInfo) {
                 var objApple = jwt_helper_1.getUserDetails(userInfo.authorization.id_token);
-                var json_data = {
+                var jsonData = {
                     "account_type": 1,
                     "name": '',
                     "email": objApple.email,
@@ -46,7 +46,7 @@ var SocialLoginComponent = /** @class */ (function () {
                     "app_version": "1.0",
                     "os_version": "7.0"
                 };
-                _this.userService.socialLogin(json_data).subscribe(function (data) {
+                _this.userService.socialLogin(jsonData).subscribe(function (data) {
                     if (data.user_details) {
                         localStorage.setItem("_lay_sess", data.user_details.access_token);
                         $('#sign_in_modal').modal('hide');
@@ -89,7 +89,7 @@ var SocialLoginComponent = /** @class */ (function () {
             _this.google_loading = true;
             var profile = googleUser.getBasicProfile();
             // YOUR CODE HERE
-            var json_data = {
+            var jsonData = {
                 "account_type": 1,
                 "name": profile.getName(),
                 "email": profile.getEmail(),
@@ -100,7 +100,7 @@ var SocialLoginComponent = /** @class */ (function () {
                 "app_version": "1.0",
                 "os_version": "7.0"
             };
-            _this.userService.socialLogin(json_data).subscribe(function (data) {
+            _this.userService.socialLogin(jsonData).subscribe(function (data) {
                 if (data.user_details) {
                     _this.google_loading = false;
                     localStorage.setItem("_lay_sess", data.user_details.access_token);
@@ -149,7 +149,7 @@ var SocialLoginComponent = /** @class */ (function () {
                 window['FB'].api('/me', {
                     fields: 'last_name, first_name, email'
                 }, function (userInfo) {
-                    var json_data = {
+                    var jsonData = {
                         "account_type": 1,
                         "name": userInfo.first_name + ' ' + userInfo.last_name,
                         "email": userInfo.email ? userInfo.email : '',
@@ -160,7 +160,7 @@ var SocialLoginComponent = /** @class */ (function () {
                         "app_version": "1.0",
                         "os_version": "7.0"
                     };
-                    _this.userService.socialLogin(json_data).subscribe(function (data) {
+                    _this.userService.socialLogin(jsonData).subscribe(function (data) {
                         _this.loading = false;
                         if (data.user_details) {
                             localStorage.setItem("_lay_sess", data.user_details.access_token);

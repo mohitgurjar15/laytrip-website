@@ -39,6 +39,7 @@ var TravelerFormComponent = /** @class */ (function () {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
+        this.passportMaxDate = new Date(moment().format("YYYY-MM-DD"));
         this.expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
@@ -61,6 +62,7 @@ var TravelerFormComponent = /** @class */ (function () {
             phone_no: ['', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
+            passport_number: [''],
             frequently_no: [''],
             user_type: ['']
         }, { validator: custom_validators_1.phoneAndPhoneCodeValidation(this.type) });

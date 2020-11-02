@@ -104,3 +104,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 .search_result .result_listing.roundtrip_list .search_block .detail_info_show .nav-tabs li {
   width: 33% !important;
 }
+
+.hover-link {
+  cursor: pointer;
+}
