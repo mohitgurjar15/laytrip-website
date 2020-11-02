@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mobile-and-subscribe',
@@ -15,10 +16,11 @@ export class MobileAndSubscribeComponent implements OnInit {
   subscribeForm:FormGroup;
   submitted = false;
   loading = false;
+  success = false;
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
-
+    private userService: UserService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -36,9 +38,11 @@ export class MobileAndSubscribeComponent implements OnInit {
     } else {
       this.userService.subscribeNow(this.subscribeForm.value.email).subscribe((data: any) => {
         this.submitted = this.loading  = false;
-        
+        this.success = true;
+        this.toastr.success(data.message, 'Subscribed Successful');       
       }, (error: HttpErrorResponse) => {
-        this.submitted = this.loading  = false;        
+        this.submitted = this.loading  = this.success = false; 
+        this.toastr.error(error.error.message, 'Subscribed Error');       
       });
     }
   }

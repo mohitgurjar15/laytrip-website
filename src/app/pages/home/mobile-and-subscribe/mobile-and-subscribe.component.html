@@ -29,16 +29,16 @@
                                 
 <!--                                 <button (click)="subscribeNow()">Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
  -->
-                                <button type="submit">Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+                                <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i> Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                             </form>
                             <div *ngIf="(submitted  || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors"
-                                    class="focus-input100 login-error">
-                                    <div *ngIf="subscribeForm.controls.email.errors.required" class="text-danger">Please enter
-                                        email.
-                                    </div>
-                                    <div *ngIf="subscribeForm.controls.email.errors.pattern" class="text-danger">Please enter valid email address.
-                                    </div>
+                                class="focus-input100 login-error">
+                                <div *ngIf="subscribeForm.controls.email.errors.required" class="text-danger">Please enter
+                                    email.
                                 </div>
+                                <div *ngIf="subscribeForm.controls.email.errors.pattern" class="text-danger">Please enter valid email address.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

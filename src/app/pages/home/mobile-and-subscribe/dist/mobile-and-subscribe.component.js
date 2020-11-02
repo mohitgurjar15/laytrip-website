@@ -11,12 +11,14 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../environments/environment");
 var MobileAndSubscribeComponent = /** @class */ (function () {
-    function MobileAndSubscribeComponent(formBuilder, userService) {
+    function MobileAndSubscribeComponent(formBuilder, userService, toastr) {
         this.formBuilder = formBuilder;
         this.userService = userService;
+        this.toastr = toastr;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
         this.loading = false;
+        this.success = false;
     }
     MobileAndSubscribeComponent.prototype.ngOnInit = function () {
         this.subscribeForm = this.formBuilder.group({
@@ -34,8 +36,11 @@ var MobileAndSubscribeComponent = /** @class */ (function () {
         else {
             this.userService.subscribeNow(this.subscribeForm.value.email).subscribe(function (data) {
                 _this.submitted = _this.loading = false;
+                _this.success = true;
+                _this.toastr.success(data.message, 'Subscribed Successful');
             }, function (error) {
-                _this.submitted = _this.loading = false;
+                _this.submitted = _this.loading = _this.success = false;
+                _this.toastr.error(error.error.message, 'Subscribed Error');
             });
         }
     };
