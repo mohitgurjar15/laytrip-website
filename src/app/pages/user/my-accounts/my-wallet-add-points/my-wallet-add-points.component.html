@@ -1,0 +1,84 @@
+<section class="detail_info_main payment_info flight add_points">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="detail_info_left">
+          <div class="block_payment">
+            <div class="block_pay_info">
+              <app-add-points (addNewPoints)="addNewPoints($event)"></app-add-points>
+              <div class="block_card_select">
+                <div class="block_title_section">
+                  <h5>Select Credit Card</h5>
+                </div>
+                <div class="block_detail">
+                  <app-card-list *ngIf="userInfo.roleId!=7" [newCard]="newCard"
+                    (selectCreditCard)="selectCreditCard($event)" (totalNumberOfcard)="totalNumberOfcard($event)">
+                  </app-card-list>
+                  <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
+                    <a href="javascript:void(0);" (click)="toggleAddcardForm()">+ Add New Card</a>
+                  </div>
+                  <app-add-card *ngIf="userInfo.roleId!=7 && showAddCardForm" (emitNewCard)="emitNewCard($event)">
+                  </app-add-card>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="block_condition_agree">
+            <ul>
+              <!-- <li>
+                <label class="custom_checkbox">
+                  <input type="checkbox" value="">
+                  <span class="checkmark"></span>
+                </label>
+                <p>I agree <a href="javascript:void(0);">Terms &amp; Conditions</a> | <a
+                    href="javascript:void(0);">Privacy Policy</a></p>
+              </li> -->
+            </ul>
+            <div class="btn_payment">
+              <a class="btn btn_laytrip" href="javascript:void(0);" (click)="addPoints()">
+                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>Add Points <img
+                  src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="detail_info_right subscribe_payment_detail">
+          <h5>Booking <span>Summary</span></h5>
+          <div class="block_top">
+            <div class="summary_info">
+              <div class="info_top">
+                <ul>
+                  <li>Add Points</li>
+                </ul>
+                <p>Valid upto 3 years</p>
+                <div class="btm_aerrow"></div>
+              </div>
+            </div>
+          </div>
+          <div class="cmn_block">
+            <div class="block_inner">
+              <h6>Detail</h6>
+              <ul>
+                <li>Detail<span>{{ currency?.symbol }}{{addedPoints}}</span></li>
+              </ul>
+            </div>
+            <div class="total_payment">
+              <ul>
+                <li>Total <span>{{ currency?.symbol }}{{addedPoints}}</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="cmn_block policies">
+            <div class="block_inner">
+              <h6>Check our Policies</h6>
+              <ul>
+                <li><a class="anchor-text" (click)="toggleCancellationPolicy()">Cancellation policy</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

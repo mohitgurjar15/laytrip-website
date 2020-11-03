@@ -305,27 +305,28 @@
                                         <label>First Name<sup>*</sup></label>
                                         <div class="text_field">
                                             <input type="text" formControlName="first_name"maxlength="25" tabindex="1">
+                                            <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors"
+                                                class="focus-input100 login-error">
+                                                <p *ngIf="profileForm.controls.first_name.errors.required"
+                                                    class="error_text">Please enter your first name.</p>
+                                                    <div *ngIf="profileForm.controls.first_name.errors.pattern" class="error_text">First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
+                                            </div>
                                         </div>
-                                        <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors"
-                                            class="focus-input100 login-error">
-                                            <div *ngIf="profileForm.controls.first_name.errors.required"
-                                                class="text-danger">Please enter your first name.</div>
-                                                <div *ngIf="profileForm.controls.first_name.errors.pattern" class="text-danger">First name must be 3 character long or no whitespace allowed.</div>
-
-                                        </div>
+                                       
                                     </div>
                                     <div class="form_field half">
                                         <label>Last Name<sup>*</sup></label>
                                         <div class="text_field">
                                             <input type="text" formControlName="last_name" maxlength="25" tabindex="2">
-                                        </div>
-                                        <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
-                                            class="focus-input100 login-error">
-                                            <div *ngIf="profileForm.controls.last_name.errors.required"
-                                                class="text-danger">Please enter your last name.</div>
-                                            <div *ngIf="profileForm.controls.last_name.errors.pattern" class="text-danger">Last name must be 3 character long or no whitespace allowed.</div>
+                                            <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
+                                                class="focus-input100 login-error">
+                                                <div *ngIf="profileForm.controls.last_name.errors.required"
+                                                    class="error_text">Please enter your last name.</div>
+                                                <div *ngIf="profileForm.controls.last_name.errors.pattern" class="error_text">Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
 
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
 
@@ -376,12 +377,12 @@
                                             <!-- <div *ngIf="(submitted  || profileForm.controls.country_code.touched) && profileForm.controls.country_code.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.country_code.errors.required"
-                                                    class="text-danger">Please enter
+                                                    class="error_text">Please enter
                                                     country code.</div>
                                             </div> -->
                                             <div *ngIf="(submitted || profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) 
                                              && profileForm.hasError('phoneAndPhoneCodeError')">
-                                                <p class="text-danger">Please enter phone number</p>
+                                                <p class="error_text">Please enter phone number</p>
                                             </div>
                                         </div>
                                     </div>
@@ -401,7 +402,7 @@
                                                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors"
                                                     class="focus-input100 login-error">
                                                     <div *ngIf="profileForm.controls.dob.errors.required"
-                                                        class="text-danger">Please choose
+                                                        class="error_text">Please choose
                                                         your date of birth.</div>
                                                 </div>
                                             </div>
@@ -503,7 +504,7 @@
                                             <!-- <div *ngIf="(submitted  || profileForm.controls.address.touched) && profileForm.controls.address.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.address.errors.required"
-                                                    class="text-danger">Please enter your address.</div>
+                                                    class="error_text">Please enter your address.</div>
                                             </div> -->
                                         </div>
                                         <div class="field_inn">
@@ -539,7 +540,7 @@
                                             <!-- <div *ngIf="(submitted  || profileForm.controls.country_id.touched) && profileForm.controls.country_id.errors "
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.country_id.errors.required"
-                                                    class="text-danger">Please seletct
+                                                    class="error_text">Please seletct
                                                     country.</div>
                                             </div> -->
                                         </div>
@@ -567,7 +568,7 @@
                                             <!-- <div *ngIf="(submitted  || profileForm.controls.state_id.touched) && profileForm.controls.state_id.errors "
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.state_id.errors.required"
-                                                    class="text-danger">Please seletct
+                                                    class="error_text">Please seletct
                                                     state.</div>
                                             </div> -->
                                         </div>
@@ -581,7 +582,7 @@
                                             <!--  <div *ngIf="(submitted || profileForm.controls.zip_code.touched) && profileForm.controls.zip_code.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.zip_code.errors.required"
-                                                    class="text-danger">Please enter your zip code.</div>
+                                                    class="error_text">Please enter your zip code.</div>
                                             </div> -->
                                         </div>
                                     </div>

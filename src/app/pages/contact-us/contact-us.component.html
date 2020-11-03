@@ -17,13 +17,14 @@
                     <label>Full Name<sup>*</sup></label>
                     <div class="text_field">
                       <input type="text" formControlName="name" maxlength="20" tabindex="1"
-                        placeholder="Enter Full Name">
+                        placeholder="Enter full name">
                       <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched"
                         class="focus-input100 login-error">
                         <div *ngIf="contactUsForm.controls.name.errors.required" class="text-danger">Please
                           enter
                           full name.
                         </div>
+                        <div *ngIf="contactUsForm.controls.name.errors.pattern" class="text-danger">Name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
                       </div>
                     </div>
                   </div>
@@ -55,7 +56,14 @@
                           <div class="dropdown">
                             <ng-select class="ng-customClass country_code" tabindex="3" selectOnTab="true"
                               [items]="countries_code" bindLabel="name" clearSearchOnAdd="true"
-                              formControlName="country_code" placeholder="select">
+                              formControlName="country_code" placeholder="Select country code">
+                              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select country' }} </span>
+                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                              </ng-template>                                                        
+                              <ng-template ng-option-tmp let-item="item">
+                                  <img class="img_country_code" [src]="item.flag" width="20px" height="20px"> {{item.name}}
+                              </ng-template>
                             </ng-select>
                           </div>
                         </div>
@@ -65,8 +73,8 @@
                   <div class="form_field half">
                     <label>Phone</label>
                     <div class="number">
-                      <input type="text" formControlName="phone_no" maxlength="10" minlength="10" tabindex="4"
-                        placeholder="Enter your phone no.">
+                      <input type="text"  (keypress)="commonFunction.validateNumber($event)" formControlName="phone_no" maxlength="10" minlength="10" tabindex="4"
+                      placeholder="0000 0000 00">
                     </div>
                   </div>
                 </div>
@@ -75,8 +83,8 @@
                   <div class="form_field half col-md-12 p-0">
                     <label>Message<sup>*</sup></label>
                     <div class="text_field">
-                      <input type="textarea" formControlName="message" maxlength="20" tabindex="5"
-                        placeholder="Enter your Message">
+                      <input type="textarea" formControlName="message" maxlength="250" tabindex="5"
+                        placeholder="Enter your message">
                       <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
                         <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">Please
                           enter

@@ -12,6 +12,7 @@ import { SearchTripComponent } from './search-trip/search-trip.component';
 import { ListTravellerComponent } from './travellers/list-traveller.component';
 import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
 import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
+import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add-points.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
     path: 'my-wallet',
     component: MyWalletComponent,
   },
+  {
+    path: 'my-wallet/add-points',
+    component: MyWalletAddPointsComponent
+  }
 ];
 
 @NgModule({

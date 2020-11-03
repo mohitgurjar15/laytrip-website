@@ -6,16 +6,15 @@
             top: 100%;
             background: $background-white;
             left: 0;
-            width:480px;
-            @media(max-width: 767px) {
+            width: 480px;
+            @media (max-width: 767px) {
                 width: 410px;
             }
 
-            @media(max-width: 480px) {
+            @media (max-width: 480px) {
                 width: 100%;
             }
         }
-        
 
         .ng-input {
             input {
@@ -48,7 +47,7 @@
                 z-index: 0 !important;
             }
         }
-    
+
         .ng-select-container {
             border: none !important;
             height: 100%;
@@ -65,7 +64,7 @@
                         padding-left: 0px !important;
                     }
                 }
-                .ng-value{
+                .ng-value {
                     padding: 0 15px;
                     color: #000;
                 }
@@ -96,45 +95,46 @@
                     padding: 3px 3px 3px 10px !important;
                     font-size: 14px;
                     font-weight: normal;
-
                 }
 
-                .parent{
+                .parent {
                     padding: 5px 5px 5px 30px;
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
-                    background-position: left center; 
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg)
+                        no-repeat;
+                    background-position: left center;
                     color: #012178;
                 }
-                .child{
+                .child {
                     padding: 5px 5px 5px 50px !important;
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg)
+                        no-repeat;
                     background-position: left 25px center;
                     color: #808080;
                 }
             }
         }
     }
-    &.ng-customClass{
-        .ng-select-container{            
-            height:100%;	
-            border:none !important;
+    &.ng-customClass {
+        .ng-select-container {
+            height: 100%;
+            border: none !important;
             display: flex;
             align-items: center;
             border-radius: 0;
-            &:hover{
+            &:hover {
                 box-shadow: none;
             }
-            .ng-value-container{
+            .ng-value-container {
                 height: auto;
-                
-                .ng-value{
+
+                .ng-value {
                     height: auto;
                     font-size: 14px;
                     color: #000000;
                 }
-                .ng-input{
+                .ng-input {
                     height: auto;
-                    input{
+                    input {
                         height: auto !important;
                         border: none !important;
                     }
@@ -168,7 +168,7 @@
     background-color: #fff;
     border: 1px solid #fc7e66;
     border-radius: 50%;
-    outline:none;
+    outline: none;
     // border-top-left-radius: 3px;
     // border-top-right-radius: 3px;
 }
@@ -181,9 +181,8 @@
     display: none;
 }
 
-
 .custom_range_slide {
-    p{
+    p {
         margin: 0;
         font-size: 14px;
         font-weight: 300;
@@ -200,7 +199,7 @@
             font-size: 14px;
             font-weight: 300;
             color: #8188ab;
-            display: none
+            display: none;
         }
     }
 }
@@ -215,60 +214,85 @@
     background: #fc7e66;
 }
 
-.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input{
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+.home_banner
+    .banner_inner
+    .banner_tab
+    .tab-content
+    .flight_tab
+    .tab-content
+    .tab-pane
+    .flight_search
+    .flight-grid
+    .grid_box.secound
+    .search_area
+    input {
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
+        no-repeat !important;
 }
 
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input{
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
+        no-repeat !important;
 }
 
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info{
-    height:22px !important;
-    margin-top:-3px !important;
-    margin-bottom:2px !important;
+.modify_search
+    .flight_tab
+    .tab-content
+    .flight_search
+    .flight-grid
+    .grid_box.third
+    .travellers
+    .search_area
+    .travel_info {
+    height: 22px !important;
+    margin-top: -3px !important;
+    margin-bottom: 2px !important;
 }
 
-.calender_price{
+.calender_price {
     font-size: 9px;
-    color:#012178;
+    color: #012178;
 }
 
 .search_result {
-	.result_listing.one_way_list {
-		.search_block {
-			.detail_info_show {
-				.tab-content {
-					.card-body {
-						.tab_detail.baggage_rules_cnt {
-							.detail_right {
-								width: 100% !important;
-								table {
-									width: 100% !important;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+    .result_listing.one_way_list {
+        .search_block {
+            .detail_info_show {
+                .tab-content {
+                    .card-body {
+                        .tab_detail.baggage_rules_cnt {
+                            .detail_right {
+                                width: 100% !important;
+                                table {
+                                    width: 100% !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     .result_listing.roundtrip_list {
-		.search_block {
-			.detail_info_show {
-				.tab-content {
-					.card-body {
-						.tab_detail.baggage_rules_cnt {
-							.detail_right {
-								width: 100% !important;
-								table {
-									width: 100% !important;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+        .search_block {
+            .detail_info_show {
+                .tab-content {
+                    .card-body {
+                        .tab_detail.baggage_rules_cnt {
+                            .detail_right {
+                                width: 100% !important;
+                                table {
+                                    width: 100% !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.anchor-text {
+    cursor: pointer;
 }

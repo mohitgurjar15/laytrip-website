@@ -6,6 +6,7 @@
 @import "_cstm-traveller-info.scss";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~ngx-toastr/toastr.css';
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 
 .wrapper {
@@ -2540,12 +2541,13 @@ select {
 		width: 100%;
 		background: $background-white;
 		border-radius: 20px;
-
 		position: relative;
 		margin: 0 0 40px;
+		height: calc(100% - 40px);
 
 		@media(max-width: 991px) {
 			margin-bottom: 30px;
+			height: calc(100% - 30px);
 		}
 
 		a {
@@ -2816,7 +2818,7 @@ select {
 						padding: 0 20px;
 						font-size: 14px;
 						color: $text-grey;
-						text-transform: uppercase;
+						text-transform: none;
 
 						&::placeholder {
 							color: $placeholder-text;
@@ -4290,6 +4292,10 @@ select {
 
 						&:last-child {
 							margin: 0;
+						}
+
+						a {
+							color: $text-lightblue;
 						}
 					}
 

@@ -27,7 +27,7 @@ export class ContactUsComponent implements OnInit {
   ngOnInit() {
     window.scroll(0,0);
     this.contactUsForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
+      name: ['',[ Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       country_code: ['Select'],
       phone_no: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
@@ -42,7 +42,8 @@ export class ContactUsComponent implements OnInit {
         return {
           id: country.id,
           name: country.phonecode + ' (' + country.iso2 + ')',
-          code: country.phonecode
+          code: country.phonecode,
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
         };
       });
     });

@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
-import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
 import { Subscription } from 'rxjs';
 import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -69,7 +68,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   subcell = '$100';
 
   constructor(
-    private layTripStoreService: LayTripStoreService,
     private flightService: FlightService,
     private router: Router,
     private route: ActivatedRoute,

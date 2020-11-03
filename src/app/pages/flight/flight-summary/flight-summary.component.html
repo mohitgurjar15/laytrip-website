@@ -183,7 +183,7 @@
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[0]">
                     <div class="flight_info_text">
                         <h6>{{ flightDetail[0].routes[0].stops[0].departure_code }}  - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[0].stops[0].departure_time }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_time }}</span></h6>
-                        <a [ngClass]="{'detail_open': outwardDetails === true}" id="more_detail_flight" (click)="toggleRouteDetails('onward')">{{ outwardDetails==false?'Show Details':'Hide Details' }} </a>
+                        <a class="hover-link" [ngClass]="{'detail_open': outwardDetails === true}" id="more_detail_flight" (click)="toggleRouteDetails('onward')">{{ outwardDetails==false?'Show Details':'Hide Details' }} </a>
                     </div>
                     <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[0].stops.length-1==0}" id="flight_info" *ngIf="outwardDetails">
                         <div class="flight_cityname">
@@ -321,7 +321,7 @@
         <div class="partial_pay_info" *ngIf="flightDetail[0].start_price && showPartialPayemntOption">
             <ul>
                 <li>
-                    <p>Partial Payment <img src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon"></p>
+                    <p>Partial Payment <img src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon" title="This payment amount will be automatically deducted at each one of your payment due dates. At any time, you can adjust this amount in your payment settings."></p>
                     <span>{{ currency?.symbol }}{{partialPaymentAmount | number : '1.2-2'}}/instalment</span>
                 </li>
             </ul>

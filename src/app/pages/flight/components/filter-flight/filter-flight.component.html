@@ -298,8 +298,8 @@
     
     <div class="block_top_in">
       <h5>Airlines</h5>
-      <a *ngIf="showMinAirline==4" class="view_more"  (click)="toggleAirlines('more')">Show All</a>
-      <a *ngIf="showMinAirline!=4" class="view_more"  (click)="toggleAirlines('less')">Show Less</a>
+      <a *ngIf="showMinAirline==4 && airLineCount>4" class="view_more"  (click)="toggleAirlines('more')">Show All</a>
+      <a *ngIf="showMinAirline!=4 && airLineCount>4" class="view_more"  (click)="toggleAirlines('less')">Show Less</a>
     </div>
     <ul>
       <ng-container *ngFor="let airline of airlineList; index as i" >

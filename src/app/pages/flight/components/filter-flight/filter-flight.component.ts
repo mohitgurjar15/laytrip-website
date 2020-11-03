@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
-import { LayTripStoreService } from '../../../../state/layTrip/layTrip-store.service';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
@@ -26,6 +25,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   departureTimeSlotCityName;
   currency;
   showMinAirline:number=4;
+  airLineCount:number;
   s3BucketUrl = environment.s3BucketUrl;
   form: FormGroup;
   priceSlider: FormGroup = new FormGroup({
@@ -82,7 +82,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private layTripStoreService: LayTripStoreService
   ) { }
 
   ngOnInit() {
@@ -135,6 +134,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     }
     if (this.filterFlightDetails && this.filterFlightDetails.airline_list) {
       // FOR FLIGHT AIRLINE - AIRLINE
+      this.airLineCount = this.filterFlightDetails.airline_list.legth+1; 
       this.airlineList = this.filterFlightDetails.airline_list;
       this.airlineList.forEach(element => {
         return element.isChecked =false;  

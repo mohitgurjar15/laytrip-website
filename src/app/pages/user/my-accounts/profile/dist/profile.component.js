@@ -227,7 +227,6 @@ var ProfileComponent = /** @class */ (function () {
             this.profileForm.controls.gender.setValue(this.is_type);
         }
         if (this.profileForm.invalid) {
-            console.log(this.profileForm);
             this.submitted = true;
             this.loading = false;
             //scroll top if any error 

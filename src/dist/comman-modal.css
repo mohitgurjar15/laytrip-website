@@ -145,6 +145,7 @@
 .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-in-container .signin_modal .modal_cnt form .form_row .text_field .error_text {
   width: 100%;
   color: #FF0000;
+  font-size: 10px;
   font-weight: 400;
   margin: 5px 0 0;
 }
@@ -488,6 +489,7 @@
 .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.sign-up-container .sign_up .modal_cnt form .form_row .text_field .error_text {
   width: 100%;
   color: #FF0000;
+  font-size: 10px;
   font-weight: 400;
   margin: 5px 0 0;
   text-align: left;
@@ -769,6 +771,13 @@
 }
 .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row .text_field input.error {
   border-color: #FF0000;
+}
+.comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_row .text_field .error_text {
+  width: 100%;
+  color: #FF0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
 }
 .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.forgotpassword-container .forgot_modal .modal_cnt form .form_btn {
   width: 100%;
@@ -1107,6 +1116,7 @@
 .comman_modal .modal-dialog .sign_in_modal .modal-content .modal_container .form-container.resetpass-container .resetpass_modal .modal_cnt form .form_row .text_field .error_text {
   width: 100%;
   color: #FF0000;
+  font-size: 10px;
   font-weight: 400;
   margin: 5px 0 0;
 }

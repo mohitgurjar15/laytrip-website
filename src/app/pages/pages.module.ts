@@ -23,6 +23,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { FaqComponent } from './faq/faq.component';
+import { WhyLaytripComponent } from './why-laytrip/why-laytrip.component';
+import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { FaqComponent } from './faq/faq.component';
     ContactUsComponent,
     CancellationPolicyComponent,
     PrivacyPolicyComponent,
-    FaqComponent
+    FaqComponent,
+    WhyLaytripComponent,
+    PartialPaymentComponent
   ],
   imports: [
     CommonModule,

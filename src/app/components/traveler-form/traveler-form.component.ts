@@ -46,6 +46,7 @@ export class TravelerFormComponent implements OnInit {
 
   dobMinDate;
   dobMaxDate; 
+  passportMaxDate = new Date(moment().format("YYYY-MM-DD"));
   minyear;
   maxyear;
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
@@ -65,27 +66,31 @@ export class TravelerFormComponent implements OnInit {
     let location:any = this.cookieService.get('__loc');
     try{
       this.location = JSON.parse(location);
-    }
-    catch(e){
-
-    }
+    }catch(e){}
+    let _itinerary =  sessionStorage.getItem('_itinerary');
+    try{
+      this.is_passport_required  = _itinerary? JSON.parse(_itinerary).is_passport_required : false;
+      console.log(this.is_passport_required )
+    }catch(e){}
+      
     const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
 
     this.adultForm = this.formBuilder.group({
-      title: ['mr',Validators.required],
-      firstName: ['',[ Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      // title: ['mr',Validators.required],
+      firstName: ['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      gender: ['M', Validators.required],
+      gender: ['M',[ Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [typeof countryCode.country_name !='undefined' ? countryCode.country_name : '', [Validators.required]],
-      country_id: [typeof this.location!='undefined' ? this.location.country.name : ''],
+      country_code: [typeof countryCode !='undefined' ? countryCode.country_name : '', [Validators.required]],
+      country_id: [typeof this.location!='undefined' ? this.location.country.name : '',[Validators.required]],
       phone_no: ['', [Validators.required]],
-      dob : ['', Validators.required],
+      dob : ['', [Validators.required]],
       passport_expiry : [''],
+      passport_number : [''],
       frequently_no: [''],
       user_type: ['']
     }, { validator: phoneAndPhoneCodeValidation(this.type) });
-
+    
     this.setUserTypeValidation();
 
     if (this.traveler.userId) {
@@ -96,7 +101,7 @@ export class TravelerFormComponent implements OnInit {
          countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
       }
       this.adultForm.patchValue({
-        title: this.traveler.title ? this.traveler.title : 'mr',
+        // title: this.traveler.title ? this.traveler.title : 'mr',
         firstName: this.traveler.firstName? this.traveler.firstName :'',
         lastName: this.traveler.lastName ? this.traveler.lastName : '',
         email: this.traveler.email,
@@ -133,6 +138,7 @@ export class TravelerFormComponent implements OnInit {
 
       this.dobMinDate = new Date(moment().subtract(50,'years').format("MM/DD/YYYY") );
       this.dobMaxDate = new Date(moment().subtract(12, 'years').format("MM/DD/YYYY"));
+
       this.minyear = moment(this.dobMinDate).format("YYYY") + ":"+ moment(this.dobMaxDate).format("YYYY");
     } else if (this.type === 'child') {
       this.dobMinDate =  new Date(moment().subtract(12,'years').format("MM/DD/YYYY") );
@@ -197,9 +203,8 @@ export class TravelerFormComponent implements OnInit {
       } else {
         country_code = this.location.country.id;
       }
-      console.log(country_code)
       let jsonData = {
-        title: this.adultForm.value.title,
+        // title: this.adultForm.value.title,
         first_name: this.adultForm.value.firstName,
         last_name: this.adultForm.value.lastName,
         frequently_no: this.adultForm.value.frequently_no,

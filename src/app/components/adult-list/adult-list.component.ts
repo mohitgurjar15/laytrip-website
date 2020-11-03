@@ -160,17 +160,30 @@ export class AdultListComponent implements OnInit {
 
 
   pushTraveler(event) {
-    let travellerKeys = ["firstName","lastName","email","dob","gender","title"];
-
+    let travellerKeys = ["firstName","lastName","email","dob","gender"];
+    let _itinerary : any;
+    let _itineraryJson : any;
+     _itinerary =  sessionStorage.getItem('_itinerary');
+    try{
+    _itineraryJson  = JSON.parse(_itinerary);
+    
+    }catch(e){}
+    
     if (event.user_type === 'adult') {
 
       const index = this._adults.indexOf(event.userId, 0);
       this._adults = this._adults.filter(item => item.userId != event.userId );  
-      this.showAddAdultForm = false;
-      let adultTravellerKeys = ["firstName","lastName","email","dob","gender","phoneNo","title"];      
+
+      this.showAddAdultForm = false;      
+
+      let adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo"];
+      
+      if(_itineraryJson && _itineraryJson.is_passport_required) {
+         adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo","passportNumber","passportExpiry"];        
+      }
+      
       event.isComplete = this.checkObj(event,adultTravellerKeys);           
       this._adults.push(event);
-
     } else if (event.user_type === 'child') {
 
       this._childs = this._childs.filter(item => item.userId != event.userId );
@@ -189,7 +202,6 @@ export class AdultListComponent implements OnInit {
   checkObj(obj,travellerKeys) { 
     let isComplete = true;
     const userStr = JSON.stringify(obj);
-
     JSON.parse(userStr, (key, value) => {
       if(!value &&  travellerKeys.indexOf(key) !== -1){
         return isComplete = false;                

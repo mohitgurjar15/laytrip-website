@@ -5,8 +5,6 @@ import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 import * as moment from 'moment';
-import { data } from '../components/search-airport/airport';
-
 
 @Injectable({
   providedIn: 'root'
@@ -121,9 +119,9 @@ export class UserService {
   }
 
   getPaymentHistory(pageNumber, limit, filterForm) {
-    
+
     let queryString = "";
-    if(filterForm && filterForm != 'undefined'){
+    if (filterForm && filterForm != 'undefined') {
       if (filterForm.bookingId) {
         queryString += (filterForm.bookingId) ? '&booking_id=' + filterForm.bookingId : '';
       }
@@ -168,5 +166,14 @@ export class UserService {
 
   payNowSubscription(data) {
     return this.http.post(this.apiURL + 'v1/subscription', data, this.commonFunction.setHeaders());
+  }
+
+  addNewPoints(data) {
+    return this.http.post(this.apiURL + 'v1/laytrip-point/add', data, this.commonFunction.setHeaders());
+  }
+  
+  subscribeNow(email) {
+    const data = {email:email};
+    return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
   }
 }

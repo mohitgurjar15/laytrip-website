@@ -39,6 +39,7 @@ var TravelerFormComponent = /** @class */ (function () {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
+        this.passportMaxDate = new Date(moment().format("YYYY-MM-DD"));
         this.expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
     }
     TravelerFormComponent.prototype.ngOnInit = function () {
@@ -47,20 +48,26 @@ var TravelerFormComponent = /** @class */ (function () {
         try {
             this.location = JSON.parse(location);
         }
-        catch (e) {
+        catch (e) { }
+        var _itinerary = sessionStorage.getItem('_itinerary');
+        try {
+            this.is_passport_required = _itinerary ? JSON.parse(_itinerary).is_passport_required : false;
+            console.log(this.is_passport_required);
         }
+        catch (e) { }
         var countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         this.adultForm = this.formBuilder.group({
-            title: ['mr', forms_1.Validators.required],
+            // title: ['mr',Validators.required],
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            gender: ['M', forms_1.Validators.required],
+            gender: ['M', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            country_code: [typeof countryCode.country_name != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
-            country_id: [typeof this.location != 'undefined' ? this.location.country.name : ''],
+            country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
+            country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required]],
-            dob: ['', forms_1.Validators.required],
+            dob: ['', [forms_1.Validators.required]],
             passport_expiry: [''],
+            passport_number: [''],
             frequently_no: [''],
             user_type: ['']
         }, { validator: custom_validators_1.phoneAndPhoneCodeValidation(this.type) });
@@ -74,7 +81,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 countryCode_1 = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
             }
             this.adultForm.patchValue({
-                title: this.traveler.title ? this.traveler.title : 'mr',
+                // title: this.traveler.title ? this.traveler.title : 'mr',
                 firstName: this.traveler.firstName ? this.traveler.firstName : '',
                 lastName: this.traveler.lastName ? this.traveler.lastName : '',
                 email: this.traveler.email,
@@ -175,9 +182,8 @@ var TravelerFormComponent = /** @class */ (function () {
             else {
                 country_code = this.location.country.id;
             }
-            console.log(country_code);
             var jsonData = {
-                title: this.adultForm.value.title,
+                // title: this.adultForm.value.title,
                 first_name: this.adultForm.value.firstName,
                 last_name: this.adultForm.value.lastName,
                 frequently_no: this.adultForm.value.frequently_no,
