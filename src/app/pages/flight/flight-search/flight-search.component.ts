@@ -122,7 +122,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.flexibleLoading = false;
           this.flexibleNotFound = false;
           this.dates = res;
-          console.log("this.dates1", this.dates)
         }
       }, err => {
         this.flexibleNotFound = true;

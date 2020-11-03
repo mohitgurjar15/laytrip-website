@@ -9,6 +9,8 @@ import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
 import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../_helpers/custom.validators';
+import { NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateCustomParserFormatter } from '../../_helpers/ngbDateCustomParserFormatter';
 
 
 declare var $: any;
@@ -16,7 +18,10 @@ declare var $: any;
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',
-  styleUrls: ['./traveler-form.component.scss']
+  styleUrls: ['./traveler-form.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+  ]
 })
 
 export class TravelerFormComponent implements OnInit {
@@ -46,7 +51,7 @@ export class TravelerFormComponent implements OnInit {
 
   dobMinDate;
   dobMaxDate; 
-  passportMaxDate = new Date(moment().format("YYYY-MM-DD"));
+  passportMaxDate:any = new Date(moment().format("YYYY-MM-DD"));
   minyear;
   maxyear;
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
@@ -59,7 +64,8 @@ export class TravelerFormComponent implements OnInit {
     public commonFunction: CommonFunction,
     private cookieService: CookieService,
     private toastr: ToastrService,
-
+    private ngbDateParserFormatter: NgbDateParserFormatter,
+    config: NgbDatepickerConfig
   ) { }
 
   ngOnInit() {
@@ -67,12 +73,22 @@ export class TravelerFormComponent implements OnInit {
     try{
       this.location = JSON.parse(location);
     }catch(e){}
+
     let _itinerary =  sessionStorage.getItem('_itinerary');
     try{
       this.is_passport_required  = _itinerary? JSON.parse(_itinerary).is_passport_required : false;
-      console.log(this.is_passport_required )
     }catch(e){}
-      
+    let _route =  sessionStorage.getItem('__route');
+    try{
+      let routes  = JSON.parse(_route);
+
+      if(routes.departure_date && routes.arrival_date){
+        this.passportMaxDate = this.getPassportMaxDate(routes.arrival_date);
+      }else if(!routes.getMonth && routes.departure_date){        
+        this.passportMaxDate =  this.getPassportMaxDate(routes.departure_date);
+      }
+    }catch(e){}
+
     const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
 
     this.adultForm = this.formBuilder.group({
@@ -117,6 +133,15 @@ export class TravelerFormComponent implements OnInit {
     }
   }
 
+  getPassportMaxDate(maxDate){
+    const date = {
+      year: this.ngbDateParserFormatter.parse(maxDate).year,
+      month: this.ngbDateParserFormatter.parse(maxDate).month,
+      day: this.ngbDateParserFormatter.parse(maxDate).day
+    }
+    var dateFormat = `${date.year}-${date.month}-${date.day}`;
+    return new Date(dateFormat);
+  }
   ngDoCheck() {
     this.checkUser();
     this.countries = this.countries;
