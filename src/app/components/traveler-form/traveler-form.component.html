@@ -110,7 +110,7 @@
                 <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true" [items]="countries_code"
                 bindLabel="country_name" clearSearchOnAdd="true" formControlName="country_code" placeholder="Select Country Code">
 
-                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                <ng-template ng-label-tmp let-item="item" clearAllText="sd"  let-clear="clear">
                   <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
                   <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                 </ng-template>                                                        

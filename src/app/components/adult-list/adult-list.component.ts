@@ -160,7 +160,6 @@ export class AdultListComponent implements OnInit {
 
 
   pushTraveler(event) {
-    alert();
     let travellerKeys = ["firstName","lastName","email","dob","gender"];
     let _itinerary : any;
     let _itineraryJson : any;

@@ -67,30 +67,30 @@ export class TravelerFormComponent implements OnInit {
     try{
       this.location = JSON.parse(location);
     }catch(e){}
-
     let _itinerary =  sessionStorage.getItem('_itinerary');
     try{
-      this.is_passport_required  = JSON.parse(_itinerary).is_passport_required;
+      this.is_passport_required  = _itinerary? JSON.parse(_itinerary).is_passport_required : false;
+      console.log(this.is_passport_required )
     }catch(e){}
-
+      
     const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
 
     this.adultForm = this.formBuilder.group({
       // title: ['mr',Validators.required],
-      firstName: ['',[ Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      firstName: ['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      gender: ['M', Validators.required],
+      gender: ['M',[ Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      country_code: [typeof countryCode.country_name !='undefined' ? countryCode.country_name : '', [Validators.required]],
+      country_code: [typeof countryCode !='undefined' ? countryCode.country_name : '', [Validators.required]],
       country_id: [typeof this.location!='undefined' ? this.location.country.name : '',[Validators.required]],
       phone_no: ['', [Validators.required]],
-      dob : ['', Validators.required],
+      dob : ['', [Validators.required]],
       passport_expiry : [''],
       passport_number : [''],
       frequently_no: [''],
       user_type: ['']
     }, { validator: phoneAndPhoneCodeValidation(this.type) });
-
+    
     this.setUserTypeValidation();
 
     if (this.traveler.userId) {

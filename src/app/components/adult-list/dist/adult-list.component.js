@@ -146,7 +146,6 @@ var AdultListComponent = /** @class */ (function () {
         }
     };
     AdultListComponent.prototype.pushTraveler = function (event) {
-        alert();
         var travellerKeys = ["firstName", "lastName", "email", "dob", "gender"];
         var _itinerary;
         var _itineraryJson;
