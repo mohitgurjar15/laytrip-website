@@ -89,7 +89,7 @@ export class FlightPaymentComponent implements OnInit {
   }
 
   getInstalmentData(data){
-
+    console.log("=============+==========")
     this.additionalAmount = data.additionalAmount;
     this.instalmentType = data.instalmentType;
     this.customAmount = data.customAmount;
