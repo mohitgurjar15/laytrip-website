@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../services/user.service';
 import { environment } from '../../../../../environments/environment';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
+import { GenericService } from '../../../../services/generic.service';
 
 @Component({
   selector: 'app-my-wallet-add-points',
@@ -21,11 +22,14 @@ export class MyWalletAddPointsComponent implements OnInit {
   showAddCardForm: boolean = false;
   addedPoints;
   loading = false;
+  laycreditpoints: number = 0;
+  customInstalmentData: any;
 
   constructor(
     private router: Router,
     private userService: UserService,
     private toastr: ToastrService,
+    private genericService: GenericService,
   ) { }
 
   ngOnInit() {
@@ -35,6 +39,7 @@ export class MyWalletAddPointsComponent implements OnInit {
     if (typeof this.userInfo.roleId === 'undefined') {
       this.router.navigate(['/']);
     }
+    this.getLayCreditInfo();
   }
 
   emitNewCard(event) {
@@ -68,12 +73,20 @@ export class MyWalletAddPointsComponent implements OnInit {
     const data = { points: this.addedPoints, card_token: this.cardToken };
     this.userService.addNewPoints(data).subscribe((res: any) => {
       this.loading = true;
+      this.getLayCreditInfo();
       this.toastr.success(res.message, 'Points');
       this.router.navigate(['/account/my-wallet']);
     }, (error: HttpErrorResponse) => {
       this.loading = false;
       this.toastr.error(error.error.message);
     });
+  }
+
+  getLayCreditInfo() {
+    this.genericService.getAvailableLaycredit().subscribe((res: any) => {
+      document.getElementById("layPoints").innerHTML = res.total_available_points
+    }, (error => {
+    }))
   }
 
 }
