@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-add-points',
