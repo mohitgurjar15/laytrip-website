@@ -84,7 +84,7 @@ export class MyWalletAddPointsComponent implements OnInit {
 
   getLayCreditInfo() {
     this.genericService.getAvailableLaycredit().subscribe((res: any) => {
-      document.getElementById("layPoints").innerHTML = res.total_available_points
+      document.getElementById("layPoints").innerHTML = res.total_available_points;
     }, (error => {
     }))
   }
