@@ -88,6 +88,7 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnInit(){
     
+    //console.log("laycreditpoints",this.laycreditpoints)
     this.instalmentRequest.amount= this.priceData[0].selling_price;
     this.partialPaymentSellingPrice= this.priceData[0].selling_price;
 
