@@ -50,7 +50,7 @@ export class FlightPaymentComponent implements OnInit {
       let response  = JSON.parse(__route);
       response[0]=response;
       this.flightSummary=response;
-      this.sellingPrice = response[0].selling_price;
+      //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
     catch(e){
@@ -77,6 +77,7 @@ export class FlightPaymentComponent implements OnInit {
     this.flightService.getSellingPrice(payLoad).subscribe((res:any)=>{
 
       this.priceData=res;
+      this.sellingPrice = this.priceData[0].selling_price;
     },(error)=>{
 
     })
@@ -89,7 +90,7 @@ export class FlightPaymentComponent implements OnInit {
   }
 
   getInstalmentData(data){
-    console.log("=============+==========")
+
     this.additionalAmount = data.additionalAmount;
     this.instalmentType = data.instalmentType;
     this.customAmount = data.customAmount;

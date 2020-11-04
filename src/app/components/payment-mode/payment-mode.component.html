@@ -46,9 +46,9 @@
                         </div>
                     </label>
                 </li>
-                <li [ngClass]="{'active_tab': durationType === 'biweekly'}" [ngClass]="{'disable_payment_option': biWeeklyFirstInstalment+laycreditpoints > sellingPrice}">
+                <li [ngClass]="{'active_tab': durationType === 'biweekly', 'disable_payment_option': convertToNumber(biWeeklyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
+                        <input type="radio" name="weekly-installment" [disabled]="convertToNumber(biWeeklyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Bi-weekly <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
@@ -58,9 +58,9 @@
                         </div>
                     </label>
                 </li>
-                <li [ngClass]="{'active_tab': durationType === 'monthly'}">
+                <li [ngClass]="{'active_tab': durationType === 'monthly','disable_payment_option': convertToNumber(monthlyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
+                        <input type="radio" name="weekly-installment" [disabled]="convertToNumber(monthlyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Monthly <span>({{monthlyDefaultInstalmentNo}} payments)</span>

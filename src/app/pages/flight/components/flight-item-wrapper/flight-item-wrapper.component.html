@@ -552,6 +552,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="block_fllight_name">
+                                        Return Flight: <span>{{item.routes[1].stops[0].departure_info.city}} to {{item.routes[1].stops[item.routes[1].stops.length-1].departure_info.city}}</span>
+                                    </div>
                                     <div class="tab_detail flight_info_cnt">
                                         <div *ngFor="let flightInfo of item.routes[1].stops; let i = index">
                                             <div class="flight_layover" *ngIf="flightInfo.is_layover">

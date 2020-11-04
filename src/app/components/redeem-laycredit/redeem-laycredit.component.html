@@ -17,14 +17,18 @@
 
 <div class="block_detail">
   <div class="block_laycredit_checkbox" *ngIf="totalLaycreditPoints">
-    <label class="custom_checkbox">
-      <input type="checkbox" (change)="toggleLayCredit($event)">
-      <span class="checkmark"></span>
-      Use Laycredit for this booking. You have <span>{{totalLaycreditPoints}} Laycredits</span> in your wallet.
-    </label>
+   
+    <div class="toggle_switch">
+      <label class="switch">
+        <input type="checkbox" (change)="toggleLayCredit($event)">
+        <span class="slider round"></span>
+      </label>
+      <p>Use Laycredit for this booking. You have <span>{{totalLaycreditPoints}} Laycredits</span> in your wallet.</p>
+    </div>
+
     <div class="block_apply_laycredits" id="Laycredits_apply">
       <div class="block_top">
-        <label>Apply Laycredits </label><span>{{value}}</span>
+        <label>Apply Laycredits</label><span>{{value}}</span>
       </div>
       <div class="block_btm">
         <div class="custom_range_slide redeem_laypoint">

@@ -67,9 +67,8 @@ export class RedeemLaycreditComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes",changes)
     if (typeof changes['sellingPrice']!='undefined') {
-      
+      console.log("changes['sellingPrice'].currentValue",changes['sellingPrice'].currentValue)
         this.sellingPrice = changes['sellingPrice'].currentValue;
         if(this.totalLaycreditPoints > Number(this.sellingPrice)){
           this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.sellingPrice});    
