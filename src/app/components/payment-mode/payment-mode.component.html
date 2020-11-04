@@ -88,7 +88,7 @@
                                                     </button>
                                                 </div> -->
                                                 <div class="block_amount">
-                                                    <input type="number" min="{{defaultInstalment}}" [(ngModel)]="upFrontPayment" (change)="changeAdditionalAmount($event)" tabindex="1">
+                                                    <input autofocus type="number" min="{{defaultInstalment}}" [(ngModel)]="upFrontPayment" (change)="changeAdditionalAmount($event)" tabindex="1">
                                                 </div>
                                                 <!-- <div class="block_plus  pay_block">
                                                     <button (click)="setAdditionalAmount('add')">

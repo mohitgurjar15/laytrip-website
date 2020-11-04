@@ -89,6 +89,7 @@
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
                                                             [label]="'From'" [placeHolder]="'New York'"
                                                             [defaultSelected]="'NY, United States'"
+                                                            [tabIndex]=1
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
@@ -106,6 +107,7 @@
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
                                                             [label]="'TO'" [placeHolder]="'Los Angeles'"
                                                             [defaultSelected]="'CA, United States'"
+                                                            [tabIndex]=2
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
