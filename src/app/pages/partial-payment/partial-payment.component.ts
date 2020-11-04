@@ -18,6 +18,7 @@ export class PartialPaymentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     const pageType = 'partial-payment';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {

@@ -18,6 +18,7 @@ export class WhyLaytripComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     const pageType = 'why-laytrip';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {
