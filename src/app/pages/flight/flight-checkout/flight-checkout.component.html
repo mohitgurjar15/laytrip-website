@@ -109,6 +109,7 @@
             <app-flight-summary 
                 *ngIf="priceData.length"
                 [priceData]="priceData"
+                [laycreditpoints]="laycreditpoints"
                 (flightAvailable)="flightAvailable($event)" 
                 [showPartialPayemntOption]="showPartialPayemntOption" 
                 (getRouteDetails)="getFlightSummaryData($event)" 

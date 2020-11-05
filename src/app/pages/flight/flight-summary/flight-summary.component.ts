@@ -19,7 +19,8 @@ export class FlightSummaryComponent implements OnInit {
   @Input() payNowAmount:number=0;
   @Input() instalmentMode:string;
   @Input() priceData=[];
-
+  @Input() laycreditpoints:number=0;
+ 
   routeCode:string='';
   constructor(
     public flightService:FlightService,

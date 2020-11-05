@@ -58,7 +58,5 @@ export class RedeemLaycreditComponent implements OnInit {
         this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.totalLaycreditPoints});
       }
     }
-
-    
   }
 }
