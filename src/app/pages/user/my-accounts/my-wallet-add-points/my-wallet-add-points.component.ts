@@ -24,6 +24,7 @@ export class MyWalletAddPointsComponent implements OnInit {
   loading = false;
   laycreditpoints: number = 0;
   customInstalmentData: any;
+  isDisableAddButton = true;
 
   constructor(
     private router: Router,
@@ -62,6 +63,15 @@ export class MyWalletAddPointsComponent implements OnInit {
 
   addNewPoints(event) {
     this.addedPoints = event;
+    if (event && event < 10) {
+      this.isDisableAddButton = true;
+    } else if (event === 0) {
+      this.isDisableAddButton = true;
+    } else if (event === null) {
+      this.isDisableAddButton = true;
+    } else {
+      this.isDisableAddButton = false;
+    }
   }
 
   toggleCancellationPolicy() {
@@ -72,7 +82,7 @@ export class MyWalletAddPointsComponent implements OnInit {
     this.loading = true;
     const data = { points: this.addedPoints, card_token: this.cardToken };
     this.userService.addNewPoints(data).subscribe((res: any) => {
-      this.loading = true;
+      this.loading = false;
       this.getLayCreditInfo();
       this.toastr.success(res.message, 'Points');
       this.router.navigate(['/account/my-wallet']);
