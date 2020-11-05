@@ -177,7 +177,6 @@ export class PaymentModeComponent implements OnInit {
   changeCustomInstalmentAmount(event){
     if(this.customMethod=='amount'){
       this.customAmount = Number(event.target.value);
-      console.log(this.customAmount,this.weeklyDefaultInstalment,"-----")
       if(this.customAmount<this.secondInstalment){
         
       }
@@ -358,7 +357,6 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
         });
-        console.log("One",this.flightSummary[0].selling_price,this.defaultInstalment)
         this.redeemableLayCredit.emit(this.priceData[0].selling_price-this.defaultInstalment)
       }
 
@@ -376,7 +374,6 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
         })
-        console.log("two")
         this.redeemableLayCredit.emit(this.getTotalPrice())
       }
       this.selectInstalmentMode.emit(type)
@@ -563,7 +560,6 @@ export class PaymentModeComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changeschanges",changes)
     if (changes['laycreditpoints']) {
       this.laycreditpoints = changes['laycreditpoints'].currentValue;
       this.getInstalmentData.emit({ 
@@ -607,7 +603,6 @@ export class PaymentModeComponent implements OnInit {
       payNowAmount:this.getPayNowAmount(),
       firstInstalment:this.firstInstalment
     });
-    console.log("three")
     this.redeemableLayCredit.emit(this.getTotalPrice())
 
     this.upFrontPayment = this.defaultInstalment;

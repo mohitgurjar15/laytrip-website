@@ -12,7 +12,8 @@
                                 </div>
                                 
                                 <div class="block_detail">
-                                    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}" sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit>
+                                    <app-redeem-laycredit-loader *ngIf="isLayCreditLoading" ></app-redeem-laycredit-loader>
+                                    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}" sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
                                 </div>
 
                             </div>

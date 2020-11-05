@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
+import { GenericService } from '../../../services/generic.service';
 
 @Component({
   selector: 'app-flight-payment',
@@ -32,13 +33,18 @@ export class FlightPaymentComponent implements OnInit {
   partialPaymentAmount:number;
   payNowAmount:number=0;
   redeemableLayPoints:number;
-  priceData=[]
+  priceData=[];
+  totalLaycreditPoints:number=0;
+  isLayCreditLoading:boolean=false;
 
   constructor(
     private route: ActivatedRoute,
     private router:Router,
-    private flightService: FlightService
-  ) { }
+    private flightService: FlightService,
+    private genericService:GenericService
+  ) { 
+    this.totalLaycredit();
+  }
 
   ngOnInit() {
     window.scroll(0,0);
@@ -58,6 +64,16 @@ export class FlightPaymentComponent implements OnInit {
     }
 
     sessionStorage.setItem('__insMode',btoa(this.instalmentMode))
+  }
+
+  totalLaycredit(){
+    this.isLayCreditLoading=true;
+    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+      this.isLayCreditLoading=false;
+      this.totalLaycreditPoints=res.total_available_points;
+    },(error=>{
+      this.isLayCreditLoading=false;
+    }))
   }
 
   applyLaycredit(laycreditpoints){
