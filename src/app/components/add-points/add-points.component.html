@@ -8,21 +8,21 @@
         <label>Choose an amount</label>
         <ul class="custom_listing">
           <li>
-            <label class="custom_radio">$100
+            <label class="custom_radio">{{currency.symbol}}100
               <input type="radio" value="100" checked="checked" formControlName="default_add_points"
                 (change)="addPointsForm.controls.custom_add_points.setValue('');changeValue(addPointsForm.value)">
               <span class="checkmark"></span>
             </label>
           </li>
           <li>
-            <label class="custom_radio">$200
+            <label class="custom_radio">{{currency.symbol}}200
               <input type="radio" value="200" formControlName="default_add_points"
                 (change)="addPointsForm.controls.custom_add_points.setValue('');changeValue(addPointsForm.value)">
               <span class="checkmark"></span>
             </label>
           </li>
           <li>
-            <label class="custom_radio">$500
+            <label class="custom_radio">{{currency.symbol}}500
               <input type="radio" value="500" formControlName="default_add_points"
                 (change)="addPointsForm.controls.custom_add_points.setValue('');changeValue(addPointsForm.value)">
               <span class="checkmark"></span>
@@ -33,8 +33,15 @@
       <div class="block_point_right">
         <label>Amount*</label>
         <div class="block_amount">
-          <input type="text" tabindex="1" maxlength="10" placeholder="$100" formControlName="custom_add_points"
+          <input type="number" step=".01" maxlength="10"
+            placeholder="{{currency.symbol}}100" formControlName="custom_add_points"
             (keyup)="addPointsForm.controls.default_add_points.setValue('');addCusomPoint(addPointsForm.value)">
+          <div
+            *ngIf="addPointsForm.controls.custom_add_points.errors && addPointsForm.controls.custom_add_points.touched">
+            <p *ngIf="addPointsForm.controls.custom_add_points.errors.min" class="text-danger">Amount should be a
+              atleast
+              {{currency.symbol}}10</p>
+          </div>
         </div>
       </div>
     </div>

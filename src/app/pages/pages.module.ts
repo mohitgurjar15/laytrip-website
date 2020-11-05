@@ -25,6 +25,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { FaqComponent } from './faq/faq.component';
 import { WhyLaytripComponent } from './why-laytrip/why-laytrip.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
+import { DownloadAppComponent } from './download-app/download-app.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PartialPaymentComponent } from './partial-payment/partial-payment.compo
     PrivacyPolicyComponent,
     FaqComponent,
     WhyLaytripComponent,
-    PartialPaymentComponent
+    PartialPaymentComponent,
+    DownloadAppComponent
   ],
   imports: [
     CommonModule,

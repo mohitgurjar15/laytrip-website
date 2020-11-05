@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie';
 export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   @Input() label: string;
+  @Input() tabIndex:number;
   @Input() placeHolder: string;
   @Input() defaultSelected: string;
   @Input() id;

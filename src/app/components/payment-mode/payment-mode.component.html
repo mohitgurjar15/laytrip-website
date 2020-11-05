@@ -46,9 +46,9 @@
                         </div>
                     </label>
                 </li>
-                <li [ngClass]="{'active_tab': durationType === 'biweekly'}" [ngClass]="{'disable_payment_option': biWeeklyFirstInstalment+laycreditpoints > sellingPrice}">
+                <li [ngClass]="{'active_tab': durationType === 'biweekly', 'disable_payment_option': convertToNumber(biWeeklyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
+                        <input type="radio" name="weekly-installment" [disabled]="convertToNumber(biWeeklyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Bi-weekly <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
@@ -58,9 +58,9 @@
                         </div>
                     </label>
                 </li>
-                <li [ngClass]="{'active_tab': durationType === 'monthly'}">
+                <li [ngClass]="{'active_tab': durationType === 'monthly','disable_payment_option': convertToNumber(monthlyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
+                        <input type="radio" name="weekly-installment" [disabled]="convertToNumber(monthlyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Monthly <span>({{monthlyDefaultInstalmentNo}} payments)</span>
@@ -88,7 +88,7 @@
                                                     </button>
                                                 </div> -->
                                                 <div class="block_amount">
-                                                    <input type="number" min="{{defaultInstalment}}" [(ngModel)]="upFrontPayment" (change)="changeAdditionalAmount($event)" tabindex="1">
+                                                    <input autofocus type="number" min="{{defaultInstalment}}" [(ngModel)]="upFrontPayment" (change)="changeAdditionalAmount($event)" tabindex="1">
                                                 </div>
                                                 <!-- <div class="block_plus  pay_block">
                                                     <button (click)="setAdditionalAmount('add')">

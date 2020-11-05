@@ -135,7 +135,7 @@ export class FlightSummaryComponent implements OnInit {
 
     if (changes['instalmentMode']) {
       this.instalmentMode = changes['instalmentMode'].currentValue;
-      //this.setTotalPrice();
+      this.setTotalPrice();
     }
   }
 
@@ -154,6 +154,8 @@ export class FlightSummaryComponent implements OnInit {
         this.totalPrice = this.priceData[0].selling_price;
       }
     }
+
+    console.log("this.totalPrice",this.totalPrice,this.priceData,this.payNowAmount)
 
   }
 }

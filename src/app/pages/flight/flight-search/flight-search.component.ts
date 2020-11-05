@@ -43,6 +43,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scroll(0, 0);
+
+    sessionStorage.removeItem("__insMode")
+    sessionStorage.removeItem("__islt")
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -122,7 +125,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.flexibleLoading = false;
           this.flexibleNotFound = false;
           this.dates = res;
-          console.log("this.dates1", this.dates)
         }
       }, err => {
         this.flexibleNotFound = true;

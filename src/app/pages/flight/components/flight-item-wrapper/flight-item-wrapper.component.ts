@@ -19,8 +19,8 @@ import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
     trigger('listAnimation', [
       transition('* => *', [ // each time the binding value changes
         query(':leave', [
-          stagger(50, [
-            animate('0.0s', style({ opacity: 0 }))
+          stagger(10, [
+            animate('0.001s', style({ opacity: 0 }))
           ])
         ], { optional: true }),
         query(':enter', [

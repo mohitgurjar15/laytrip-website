@@ -91,7 +91,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       // FOR FILTER FLIGHT - PRICE & PARTIAL PRICE
       this.priceValue = this.filterFlightDetails.price_range.min_price ? this.filterFlightDetails.price_range.min_price : 0;
       this.priceHighValue = this.filterFlightDetails.price_range.max_price ? this.filterFlightDetails.price_range.max_price : 0;
-      this.priceSlider.controls.price.setValue([this.priceValue,this.priceHighValue])
+      this.priceSlider.controls.price.setValue([Math.floor(this.priceValue),Math.ceil(this.priceHighValue)])
       
       this.minPrice = this.priceValue;
       this.maxPrice = this.priceHighValue ;
@@ -119,7 +119,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         parseInt(this.filterFlightDetails.partial_payment_price_range.max_price) ?
           parseInt(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
 
-      this.partialPriceSlider.controls.partial_price.setValue([this.partialPaymentValue,this.partialPaymentHighValue])
+      this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue),Math.ceil(this.partialPaymentHighValue)])
     }
     if (this.filterFlightDetails && this.filterFlightDetails.arrival_time_slot || this.filterFlightDetails
       && this.filterFlightDetails.depature_time_slot) {

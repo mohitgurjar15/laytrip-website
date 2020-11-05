@@ -65,9 +65,9 @@
                             <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">
                                 Book Now
                             </a>
-                            <span class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
+                            <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
-                                partial payment</span>
+                                partial payment</a>
                         </div>
                     </div>
                 </div>
@@ -462,9 +462,9 @@
                             <p *ngIf="item.start_price > 0">
                                 <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
                             <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">Book Now</a>
-                            <span class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
+                            <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
-                                partial payment</span>
+                                partial payment</a>
                         </div>
                     </div>
                 </div>
@@ -551,6 +551,9 @@
                                                 <div class="flight_going" *ngIf="i === 0">Outbound</div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="block_fllight_name">
+                                        Return Flight: <span>{{item.routes[1].stops[0].departure_info.city}} to {{item.routes[1].stops[item.routes[1].stops.length-1].arrival_info.city}}</span>
                                     </div>
                                     <div class="tab_detail flight_info_cnt">
                                         <div *ngFor="let flightInfo of item.routes[1].stops; let i = index">

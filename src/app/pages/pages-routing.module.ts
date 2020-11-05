@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { DownloadAppComponent } from './download-app/download-app.component';
 import { FaqComponent } from './faq/faq.component';
 import { PagesComponent } from './pages.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
@@ -48,6 +49,10 @@ const routes: Routes = [
             {
                 path: 'partial-payment',
                 component: PartialPaymentComponent
+            },
+            {
+                path: 'download-app',
+                component: DownloadAppComponent
             },
         ]
     }

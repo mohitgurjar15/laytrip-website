@@ -46,6 +46,7 @@ export class PaymentModeComponent implements OnInit {
   disablePartialPayment:boolean=false;
   predictionDate:string='';
   pridictionLoading:boolean=false;
+  partialPaymentSellingPrice:number=0;
   
   instalmentRequest={
     instalment_type: "weekly",
@@ -87,7 +88,10 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnInit(){
     
+    //console.log("laycreditpoints",this.laycreditpoints)
     this.instalmentRequest.amount= this.priceData[0].selling_price;
+    this.partialPaymentSellingPrice= this.priceData[0].selling_price;
+
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     this.getInstalemntsBiweekly('biweekly');
     this.getInstalemntsMonthly('monthly');
@@ -119,7 +123,6 @@ export class PaymentModeComponent implements OnInit {
     else{
       
       this.getInstalemnts('weekly');
-      this.triggerPayemntMode('instalment');
     }
     
   }
@@ -174,7 +177,6 @@ export class PaymentModeComponent implements OnInit {
   changeCustomInstalmentAmount(event){
     if(this.customMethod=='amount'){
       this.customAmount = Number(event.target.value);
-      console.log(this.customAmount,this.weeklyDefaultInstalment,"-----")
       if(this.customAmount<this.secondInstalment){
         
       }
@@ -236,7 +238,7 @@ export class PaymentModeComponent implements OnInit {
         if(this.customInstalment){
           this.defaultInstalmentNo = this.defaultInstalmentNo - this.customInstalment;
         } */
-        
+        setTimeout(()=>{ this.triggerPayemntMode('instalment'); },2000);
         this.getInstalmentData.emit({ 
           additionalAmount:this.additionalAmount, 
           instalmentType:this.durationType, 
@@ -247,7 +249,6 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
         })
-        //this.redeemableLayCredit.emit(this.flightSummary[0].selling_price-this.defaultInstalment)
         
       }
       else{
@@ -288,6 +289,8 @@ export class PaymentModeComponent implements OnInit {
       if(this.instalments.instalment_available==true){
         this.monthlyDefaultInstalmentNo = this.instalments.instalment_date.length;
         this.monthlyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
+        this.monthlyFirstInstalment = this.instalments.instalment_date[1].instalment_amount;
+
       }
       else{
         this.instalmentAvavible=false;
@@ -307,7 +310,6 @@ export class PaymentModeComponent implements OnInit {
         this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
         this.weeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
         this.weeklyFirsttInstalment = this.instalments.instalment_date[0].instalment_amount;
-        this.monthlyFirstInstalment = this.instalments.instalment_date[1].instalment_amount;
       }
       else{
         this.instalmentAvavible=false;
@@ -355,7 +357,6 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
         });
-        //console.log("One",this.flightSummary[0].selling_price,this.defaultInstalment)
         this.redeemableLayCredit.emit(this.priceData[0].selling_price-this.defaultInstalment)
       }
 
@@ -373,7 +374,6 @@ export class PaymentModeComponent implements OnInit {
           payNowAmount:this.getPayNowAmount(),
           firstInstalment:this.firstInstalment
         })
-        console.log("two")
         this.redeemableLayCredit.emit(this.getTotalPrice())
       }
       this.selectInstalmentMode.emit(type)
@@ -560,7 +560,6 @@ export class PaymentModeComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changeschanges",changes)
     if (changes['laycreditpoints']) {
       this.laycreditpoints = changes['laycreditpoints'].currentValue;
       this.getInstalmentData.emit({ 
@@ -604,7 +603,6 @@ export class PaymentModeComponent implements OnInit {
       payNowAmount:this.getPayNowAmount(),
       firstInstalment:this.firstInstalment
     });
-    console.log("three")
     this.redeemableLayCredit.emit(this.getTotalPrice())
 
     this.upFrontPayment = this.defaultInstalment;
@@ -677,5 +675,9 @@ export class PaymentModeComponent implements OnInit {
 
     }
     
+  }
+
+  convertToNumber(number){
+    return Number(number)
   }
 }

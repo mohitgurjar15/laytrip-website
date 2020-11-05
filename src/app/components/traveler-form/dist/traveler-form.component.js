@@ -12,14 +12,17 @@ var forms_1 = require("@angular/forms");
 var moment = require("moment");
 var environment_1 = require("../../../environments/environment");
 var custom_validators_1 = require("../../_helpers/custom.validators");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var ngbDateCustomParserFormatter_1 = require("../../_helpers/ngbDateCustomParserFormatter");
 var TravelerFormComponent = /** @class */ (function () {
-    function TravelerFormComponent(formBuilder, flightService, router, commonFunction, cookieService, toastr) {
+    function TravelerFormComponent(formBuilder, flightService, router, commonFunction, cookieService, toastr, ngbDateParserFormatter, config) {
         this.formBuilder = formBuilder;
         this.flightService = flightService;
         this.router = router;
         this.commonFunction = commonFunction;
         this.cookieService = cookieService;
         this.toastr = toastr;
+        this.ngbDateParserFormatter = ngbDateParserFormatter;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.usersType = '';
         this.traveler = [];
@@ -52,7 +55,17 @@ var TravelerFormComponent = /** @class */ (function () {
         var _itinerary = sessionStorage.getItem('_itinerary');
         try {
             this.is_passport_required = _itinerary ? JSON.parse(_itinerary).is_passport_required : false;
-            console.log(this.is_passport_required);
+        }
+        catch (e) { }
+        var _route = sessionStorage.getItem('__route');
+        try {
+            var routes = JSON.parse(_route);
+            if (routes.departure_date && routes.arrival_date) {
+                this.passportMaxDate = this.getPassportMaxDate(routes.arrival_date);
+            }
+            else if (!routes.getMonth && routes.departure_date) {
+                this.passportMaxDate = this.getPassportMaxDate(routes.departure_date);
+            }
         }
         catch (e) { }
         var countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
@@ -95,6 +108,15 @@ var TravelerFormComponent = /** @class */ (function () {
                 frequently_no: ''
             });
         }
+    };
+    TravelerFormComponent.prototype.getPassportMaxDate = function (maxDate) {
+        var date = {
+            year: this.ngbDateParserFormatter.parse(maxDate).year,
+            month: this.ngbDateParserFormatter.parse(maxDate).month,
+            day: this.ngbDateParserFormatter.parse(maxDate).day
+        };
+        var dateFormat = date.year + "-" + date.month + "-" + date.day;
+        return new Date(dateFormat);
     };
     TravelerFormComponent.prototype.ngDoCheck = function () {
         this.checkUser();
@@ -276,7 +298,10 @@ var TravelerFormComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-traveler-form',
             templateUrl: './traveler-form.component.html',
-            styleUrls: ['./traveler-form.component.scss']
+            styleUrls: ['./traveler-form.component.scss'],
+            providers: [
+                { provide: ng_bootstrap_1.NgbDateParserFormatter, useClass: ngbDateCustomParserFormatter_1.NgbDateCustomParserFormatter }
+            ]
         })
     ], TravelerFormComponent);
     return TravelerFormComponent;
