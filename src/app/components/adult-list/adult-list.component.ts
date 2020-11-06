@@ -24,6 +24,9 @@ export class AdultListComponent implements OnInit {
   @Input() _infants: any = [];
 
   counter = 0;
+  adultCounter = 0;
+  childCounter = 0;
+  infantCounter = 0;
   totalTravelerCount = 0;
   _travelers = [];
   _selectedId = [];
@@ -41,7 +44,7 @@ export class AdultListComponent implements OnInit {
   adultCollapse: boolean = false;
   count = 0;
   random = 0;
-  _itinerary: any;
+  _itinerary: any = [];
   countries: any = [];
   countries_code: any = [];
   containers = [];
@@ -50,6 +53,8 @@ export class AdultListComponent implements OnInit {
     child: [],
     infant: []
   };
+  totalAdult=0;
+  countChild=0;
 
   constructor(
     private cookieService: CookieService,
@@ -61,13 +66,133 @@ export class AdultListComponent implements OnInit {
   ngOnInit() {
     this.checkUser();
     this.getCountry();
+    let _itinerary:any =  sessionStorage.getItem('_itinerary');
+    try{
+      this._itinerary = _itinerary ? JSON.parse(_itinerary) : this._itinerary;
+    }catch(e){}
+
     if (this.type == 'adult' && !this.isLoggedIn) {
       this.showAddAdultForm = true;
     }
   }
 
+
+  selectAdult(event, traveler){
+ 
+    let totalTraveler = Number(this._itinerary.adult);
+    if (this._itinerary) {
+      if (event.target.checked) {
+        let travelerData = {
+          "userId": traveler.userId,
+          "firstName": traveler.firstName,
+          "lastName": traveler.lastName,
+          "email": traveler.email
+        };
+        this._travelers.push(travelerData);
+        this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        if (this.counter + 1 < totalTraveler ) {
+          // this.checkBoxDisable = false;
+          this.counter++;
+        } else {
+          if(this.counter + 1 == totalTraveler){
+            this.counter++;
+          }
+          // this.checkBoxDisable = true;                
+        }
+        if (traveler.user_type == 'adult') {
+          this._itinerarySelection.adult.push(traveler.userId);
+        } 
+      } else {
+        if(this.counter >= totalTraveler || this.counter <= totalTraveler){
+          this.counter--;
+        }
+        // this.checkBoxDisable = false;
+        this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
+        this.cookieService.remove('_travelers');
+        this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        if (traveler.user_type == 'adult') {
+          this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
+        } 
+      }
+      console.log(this.counter)
+    }
+    this.totalAdult = this.counter;
+    this.adultsCount.emit((this.counter));
+    this._itinerarySelectionArray.emit(this._itinerarySelection);
+  }
+
+  selectItinerary(event, traveler){
+   
+    let totalAdult = Number(this._itinerary.infant);
+    let totalChild = Number(this._itinerary.child);
+    let totalInfat = Number(this._itinerary.infant);
+    if (this._itinerary) {
+      if (event.target.checked) {
+        let travelerData = {
+          "userId": traveler.userId,
+          "firstName": traveler.firstName,
+          "lastName": traveler.lastName,
+          "email": traveler.email
+        };
+        this._travelers.push(travelerData);
+        this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        if (this.adultCounter + 1 < totalAdult && traveler.user_type == 'adult') {
+          this.adultCounter++;            
+          // this.checkBoxDisable = false;
+        }else if (this.childCounter + 1 < totalChild && traveler.user_type == 'child') {
+          this.childCounter++;            
+          // this.checkBoxDisable = false;
+        } else if (this.infantCounter + 1 < totalInfat && traveler.user_type == 'infant') {          
+          this.infantCounter++;
+        }
+        
+        if(this.adultCounter + 1 == totalAdult && traveler.user_type == 'adult'){
+          this.adultCounter++;       
+          // this.checkBoxDisable = true;                
+        }else if(this.childCounter + 1 == totalChild && traveler.user_type == 'child'){
+          this.childCounter++;       
+          // this.checkBoxDisable = true;                
+        } else if(this.infantCounter + 1 == totalInfat && traveler.user_type == 'infant'){              
+          this.infantCounter++;       
+        }
+
+        if (traveler.user_type == 'adult') {
+          this._itinerarySelection.adult.push(traveler.userId);
+        } else if (traveler.user_type == 'child') {
+          this._itinerarySelection.child.push(traveler.userId);
+        } else if(traveler.user_type == 'infant' ){
+          this._itinerarySelection.infant.push(traveler.userId);
+        } 
+      } else {
+        
+        // this.checkBoxDisable = false;
+        this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
+        this.cookieService.remove('_travelers');
+        this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        if (traveler.user_type == 'adult') {
+          if(this.adultCounter >= totalAdult || this.adultCounter <= totalAdult){
+            this.adultCounter--;
+          }
+          this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
+        } else if (traveler.user_type == 'child') {
+          if(this.childCounter >= totalChild || this.childCounter <= totalChild){
+            this.childCounter--;
+          }
+          this._itinerarySelection.child = this._itinerarySelection.child.filter(obj => obj !== traveler.userId);
+        } else if(traveler.user_type == 'infant'){
+          if(this.infantCounter >= totalInfat || this.infantCounter <= totalInfat){
+            this.infantCounter--;
+          }
+          this._itinerarySelection.child = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
+        }
+      }
+    }
+    console.log(this._travelers)
+    this._itinerarySelectionArray.emit(this._itinerarySelection);
+  }
+  
   selectTraveler(event, traveler) {
-    this._itinerary = sessionStorage.getItem('_itinerary') ? JSON.parse(sessionStorage.getItem('_itinerary')) : '';
+    
     let totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
     if (this._itinerary) {
       if (event.target.checked) {
@@ -96,7 +221,6 @@ export class AdultListComponent implements OnInit {
           this._itinerarySelection.infant.push(traveler.userId);
         }
       } else {
-        console.log(this.counter,totalTraveler)
         if(this.counter >= totalTraveler || this.counter <= totalTraveler){
           this.counter--;
         }
