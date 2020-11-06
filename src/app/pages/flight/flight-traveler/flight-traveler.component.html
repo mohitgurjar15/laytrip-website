@@ -16,14 +16,10 @@
                         </div>
                     </div>
                     <div class="block_passanger_info">
-                         <div class="block_title_section" *ngIf="travelers.length">
-                            <h5>Passenger Info</h5>
-                            <span>({{selectedAdults}}/{{totalTraveler}} selected)</span>
-                        </div>
-                        <div class="passanger_detail_main">
-                            <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler"  [_adults]="_adults" [_childs]="_childs" [_infants]="_infants" [travelers]="travelers" (adultsCount)="getAdultCount($event)"
+                         
+                        <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler"  [_adults]="_adults" [_childs]="_childs" [_infants]="_infants" [travelers]="travelers" (adultsCount)="getAdultCount($event)"
                             (_itinerarySelectionArray)="getItinerarySelectionArray($event)"></app-adult-list>
-                        </div>
+                        
                     </div>
                     
                     <div class="btn_payment">

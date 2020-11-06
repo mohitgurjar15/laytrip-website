@@ -304,7 +304,7 @@
                                     <div class="form_field half">
                                         <label>First Name<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" formControlName="first_name"maxlength="25" tabindex="1">
+                                            <input type="text" placeholder="Enter First Name" formControlName="first_name"maxlength="25" tabindex="1">
                                             <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors"
                                                 class="focus-input100 login-error">
                                                 <p *ngIf="profileForm.controls.first_name.errors.required"
@@ -317,7 +317,7 @@
                                     <div class="form_field half">
                                         <label>Last Name<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" formControlName="last_name" maxlength="25" tabindex="2">
+                                            <input type="text" placeholder="Enter Last Name" formControlName="last_name" maxlength="25" tabindex="2">
                                             <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
                                                 class="focus-input100 login-error">
                                                 <div *ngIf="profileForm.controls.last_name.errors.required"
@@ -336,7 +336,7 @@
                                         <div class="text_field">
                                             <input
                                                 [readonly]="selectResponse.email != '' && selectResponse.email !='undefined' "
-                                                type="email" formControlName="email" tabindex="3">
+                                                type="email" placeholder="Enter Email" formControlName="email" tabindex="3">
                                         </div>
 
                                     </div>
@@ -424,7 +424,7 @@
                                             <label>Currency</label>
                                             <div class="text_field custom-select">
                                                 <ng-select class="ng-customClass" tabindex="8" selectOnTab="true"
-                                                    placeholder="Select Preferred Language"
+                                                    placeholder="Select Preferred Currency"
                                                     formControlName="currency_id">
                                                     <ng-option *ngFor="let currency of currencies"
                                                         value="{{currency.id}}">
@@ -548,7 +548,7 @@
                                             <label>City</label>
                                             <div class="text_field custom-select">
                                                 <input type="text" formControlName="city_name" maxlength="250"
-                                                    tabindex="13" placeholder="Enter address line 2">
+                                                    tabindex="13" placeholder="Enter City">
 
                                             </div>
                                         </div>
@@ -615,7 +615,7 @@
                                                     [minDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true"
                                                     [monthNavigator]="true" yearRange="2020:2030"
                                                     [defaultDate]="dobMinDate" tabindex="16"
-                                                    panelStyleClass="calender-passport-expiry">
+                                                    panelStyleClass="calender-passport-expiry" placeholder="Enter Passport Expiration Date">
                                                 </p-calendar>
                                             </div>
                                         </div>
