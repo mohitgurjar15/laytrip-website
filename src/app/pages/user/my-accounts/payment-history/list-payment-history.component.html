@@ -52,7 +52,12 @@
                                 </div>
                             </div>
                             <div class="filter_btn">
-                                <button (click)="getPaymentHistory()">Filter</button>
+                                <button 
+                                [disabled]="filterForm.controls.bookingId.value === '' && 
+                                  filterForm.controls.module.value === '' &&
+                                   filterForm.controls.start_date.value === '' && 
+                                   filterForm.controls.end_date.value === ''"
+                                 (click)="getPaymentHistory()">Filter</button>
                             </div>
                         </div>
                     </form>

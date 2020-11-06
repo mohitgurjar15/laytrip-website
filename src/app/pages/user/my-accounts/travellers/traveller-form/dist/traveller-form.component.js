@@ -45,8 +45,12 @@ var TravellerFormComponent = /** @class */ (function () {
         try {
             this.location = JSON.parse(location);
         }
-        catch (e) { }
-        var countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+        catch (e) {
+        }
+        var countryCode;
+        if (this.location) {
+            countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+        }
         this.coAccountForm = this.formBuilder.group({
             // title: ['mr'],
             gender: ['M'],
@@ -55,7 +59,7 @@ var TravellerFormComponent = /** @class */ (function () {
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
-            country_code: [typeof countryCode.country_name != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
+            country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: [''],
@@ -84,12 +88,11 @@ var TravellerFormComponent = /** @class */ (function () {
             gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
             phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
             country_code: countryCode,
-            country_id: this.travelerInfo.country.name ? this.travelerInfo.country.name : '',
+            country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
             dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
             passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : ''
         });
-        console.log(this.coAccountForm);
     };
     TravellerFormComponent.prototype.close = function () {
         this.activeModal.close();

@@ -148,10 +148,10 @@
 						}
 
 						.dropdown-menu {
-							background: transparent;
+							background: $primary-color;
 							border: none;
 							position: relative !important;
-							transform: none !important;
+							transform: translate3d(0px, 0, 0px) !important;
 							margin: 0;
 							transition: 0.3s;
 
@@ -3306,9 +3306,8 @@
 										}
 
 										.block_point {
-											width: 20%;
+											width: 40%;
 											font-size: 16px;
-											font-weight: 500;
 											color: $secondary-color;
 											font-weight: 600;
 											display: flex;
@@ -3325,7 +3324,7 @@
 										}
 
 										.block_point_info {
-											width: 80%;
+											width: 100%;
 											display: flex;
 											justify-content: space-between;
 											align-items: center;

@@ -64,9 +64,12 @@ export class TravellerFormComponent implements OnInit {
     try{
       this.location = JSON.parse(location);
     }
-    catch(e){}
-    
-    const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+    catch(e){
+    }
+    let countryCode:any;
+    if(this.location){
+      countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+    }
 
     this.coAccountForm = this.formBuilder.group({
       // title: ['mr'],
@@ -76,7 +79,7 @@ export class TravellerFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required]],
       country_id: [typeof this.location!='undefined' ? this.location.country.name : '',[ Validators.required]],
-      country_code: [typeof countryCode.country_name !='undefined' ? countryCode.country_name : '', [Validators.required]],
+      country_code: [typeof countryCode !='undefined' ? countryCode.country_name : '', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
@@ -86,7 +89,6 @@ export class TravellerFormComponent implements OnInit {
     this.setUserTypeValidation();
 
     if (this.travellerId) {
-      
       this.setTravelerForm();
     }
   }
@@ -99,6 +101,7 @@ export class TravellerFormComponent implements OnInit {
       } else {
          countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
       }
+
       this.coAccountForm.patchValue({
         // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
         firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
@@ -107,12 +110,11 @@ export class TravellerFormComponent implements OnInit {
         gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
         phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
         country_code: countryCode,
-        country_id: this.travelerInfo.country.name ? this.travelerInfo.country.name : '',
+        country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
         dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
         passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
         passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : '',   
     });
-    console.log(this.coAccountForm)
   }
 
   close() {
