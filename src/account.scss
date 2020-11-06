@@ -889,12 +889,37 @@
 									display: none;
 								}
 
+								.disabled-icon {
+									display: none;
+								}
+
 								&.active {
 									border: none;
 									background: $background-white;
 									color: $primary-color;
 
 									.active-icon {
+										display: block;
+									}
+
+									.default-icon {
+										display: none;
+									}
+
+									.default-icon {
+										display: none;
+									}
+								}
+
+								&.disabled {
+									background: $text_grey_dark;
+									color: $disabled-text;
+
+									.active-icon {
+										display: none;
+									}
+
+									.disabled-icon {
 										display: block;
 									}
 
@@ -1822,6 +1847,14 @@
 						z-index: 9;
 						overflow: hidden;
 						white-space: normal;
+
+						&.disabled {
+							background: $text_grey_dark;
+							border: 1px solid $text_grey_dark;
+							color: $disabled-text;
+							pointer-events: none;
+							cursor: default;
+						}
 
 						&::before {
 							content: "";

@@ -765,6 +765,9 @@
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .active-icon {
     display: none;
   }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .disabled-icon {
+    display: none;
+  }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active {
     border: none;
     background: #ffffff;
@@ -774,6 +777,22 @@
     display: block;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled {
+    background: #707070;
+    color: #323233;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .active-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .disabled-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .default-icon {
     display: none;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover {
@@ -1524,6 +1543,13 @@
   z-index: 9;
   overflow: hidden;
   white-space: normal;
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button.disabled {
+  background: #707070;
+  border: 1px solid #707070;
+  color: #323233;
+  pointer-events: none;
+  cursor: default;
 }
 .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button::before {
   content: "";
