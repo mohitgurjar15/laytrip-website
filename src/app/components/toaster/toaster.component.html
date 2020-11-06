@@ -1,0 +1,12 @@
+<div class="toster toster_{{type}} {{position}} " role="alert" *ngIf="isVisible">
+  <div class="alert_icon">
+    <img src="{{s3BucketUrl}}assets/images/icon/ic_alert_{{type}}.svg" alt="">
+  </div>
+  <div class="alert_message">
+    <h6>{{title}}</h6>
+    <span>{{message}}</span>
+  </div>
+  <div class="alert_close" *ngIf="closable">
+    <a href="javascript:void(0);" (click)="toggleAlert()">X</a>
+  </div>
+</div>
