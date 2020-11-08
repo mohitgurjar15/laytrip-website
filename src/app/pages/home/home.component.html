@@ -129,7 +129,6 @@
                                                             <a href="javascript:void(0);"
                                                                 (click)="dateChange('departure','next')">Next</a>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                                 <div class="date_to">
@@ -198,7 +197,8 @@
 <!--  Close Banner Section-->
 
 <app-featured-city></app-featured-city>
-
+<app-dr-adventure *ngIf="countryCode==='DR'"></app-dr-adventure>
+<app-last-min-hotel-deal *ngIf="countryCode==='DR'"></app-last-min-hotel-deal>
 <app-partial-payment></app-partial-payment>
 
 <!-- <app-deal></app-deal> -->

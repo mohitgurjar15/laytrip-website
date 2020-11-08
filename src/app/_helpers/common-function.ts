@@ -160,10 +160,10 @@ export class CommonFunction {
 
         try{
           
-          let location:any = this.cookieService.get('__loc'); 
+          /* let location:any = this.cookieService.get('__loc'); 
           if(typeof location!='undefined'){
             location = JSON.parse(location);
-            if(location.country.iso2=='PL'){
+            if(location.country.iso2=='DR'){
                 return location.country.iso2;
             }
             else{
@@ -172,7 +172,10 @@ export class CommonFunction {
           }
           else{
             return ''
-          }
+          } */
+
+          let countryCode = localStorage.getItem("__uorigin");
+          return countryCode || '';
         }
         catch(e){
             return '';

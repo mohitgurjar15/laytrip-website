@@ -1,10 +1,13 @@
  <!--  Start Header Section-->
- <header class="site_header">
+ <header class="site_header" [ngClass]="{'dr_home': countryCode==='DR'}">
     <div class="container">
         <div class="row">
             <div id="app" class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" [routerLink]="['/']"><img src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo" /></a>
+                    <a  class="navbar-brand" [routerLink]="['/']">
+                        <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo" />
+                        <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo" />
+                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -13,10 +16,10 @@
                             <li class="nav-item">
                                 <a class="nav-link hover-link" [routerLink]="['/partial-payment']">Partial Payment</a>
                             </li>
-                            <li class="nav-item" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6)">
-                                <a class="nav-link hover-link">
-                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
-                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
+                            <li class="nav-item"  *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6)">
+                                <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}">
+                                    <img *ngIf="countryCode!=='DR'" class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
+                                    <img *ngIf="countryCode!=='DR'" class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
                                     <span id="layPoints">{{showTotalLayCredit}}</span> 
                                 </a>
                             </li>
@@ -65,7 +68,7 @@
                                 </a>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-                                <a class="nav-link login_btn hover-link"  data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
+                                <a class="nav-link login_btn hover-link" [ngClass]="{'dr_login_btn': countryCode==='DR'}"  data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                             </li>
 
                             <li class="nav-item" *ngIf="isLoggedIn && userDetails.roleId != 7">
@@ -88,7 +91,7 @@
                 </nav>
             </div>
             <div class="show_resposive">
-                <a *ngIf="!isLoggedIn" class="nav-link login_btn hover-link" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
+                <a *ngIf="!isLoggedIn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" class="nav-link login_btn hover-link" data-toggle="modal" data-target="#sign_in_modal" >Sign In</a>
                 <div class="dropdown account_ddown" *ngIf="isLoggedIn && userDetails.roleId != 7">
                     <a class="nav-link hover-link" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">

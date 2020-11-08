@@ -15,7 +15,12 @@ export class AppComponent {
     private cookieService:CookieService,
     private genericService:GenericService
   ){
+    this.setUserOrigin();
     this.getUserLocationInfo();
+  }
+
+  setUserOrigin(){
+    localStorage.setItem('__uorigin','IN')
   }
 
   getUserLocationInfo(){
@@ -25,7 +30,6 @@ export class AppComponent {
       let location:any = this.cookieService.get('__loc');      
       if(typeof location=='undefined'){
         this.genericService.getUserLocationInfo().subscribe((res:any)=>{
-          console.log("location",res)
           this.cookieService.put('__loc',JSON.stringify(res), { expires : new Date(moment().add('7',"days").format())})
           this.redirectToDRsite(res)
         },(error)=>{
@@ -33,7 +37,6 @@ export class AppComponent {
         })
       }
       else{
-        console.log("window.location.origin",window.location.origin)
         location = JSON.parse(location);
         this.redirectToDRsite(location)
         
@@ -47,7 +50,8 @@ export class AppComponent {
 
   redirectToDRsite(location){
     console.log("Location",location)
-    if(location.country.iso2=='PL'){
+    if(location.country.iso2=='DR'){
+
       if(window.location.origin=='https://staging.laytrip.com' || window.location.origin=='http://staging.laytrip.com' || window.location.origin=='http://localhost:4200' ){
         //window.location.href='https://www.google.com/'
       }

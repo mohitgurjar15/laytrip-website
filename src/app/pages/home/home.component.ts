@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted: boolean = false;
-
+  countryCode:string;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationCode;
   toDestinationCode;
@@ -79,6 +79,7 @@ export class HomeComponent implements OnInit {
 
     this.flightDepartureMinDate = new Date();
     this.flightReturnMinDate = this.departureDate;
+    this.countryCode = this.commonFunction.getUserCountry();
   }
 
   ngOnInit(): void {

@@ -74,6 +74,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }
 
+    this.countryCode = this.commonFunction.getUserCountry();
+    console.log("this.countryCode",this.countryCode)
   }
 
   ngOnInit(): void {
