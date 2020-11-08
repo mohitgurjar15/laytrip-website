@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var must_match_validators_1 = require("../../../_helpers/must-match.validators");
+var custom_validators_1 = require("../../../_helpers/custom.validators");
 var ResetPasswordComponent = /** @class */ (function () {
     function ResetPasswordComponent(formBuilder, userService, commonFunctoin) {
         this.formBuilder = formBuilder;
@@ -36,7 +37,7 @@ var ResetPasswordComponent = /** @class */ (function () {
             otp5: ['', forms_1.Validators.required],
             otp6: ['', forms_1.Validators.required]
         }, {
-            validator: must_match_validators_1.MustMatch('new_password', 'confirm_password')
+            validator: [must_match_validators_1.MustMatch('new_password', 'confirm_password'), custom_validators_1.optValidation()]
         });
     };
     ResetPasswordComponent.prototype.openPage = function (event) {
@@ -67,9 +68,7 @@ var ResetPasswordComponent = /** @class */ (function () {
         });
         this.submitted = this.loading = true;
         if (this.resetForm.invalid) {
-            console.log(this.resetForm.controls);
-            if (inputDataOtp.length < 6) {
-                console.log('error');
+            if (inputDataOtp.length != 6) {
                 this.errorMessage = "Please enter OTP.";
             }
             this.loading = false;
@@ -90,6 +89,14 @@ var ResetPasswordComponent = /** @class */ (function () {
                 _this.resetSuccess = _this.submitted = _this.loading = false;
                 _this.apiMessage = error.error.message;
             });
+        }
+    };
+    ResetPasswordComponent.prototype.onKeydown = function (event) {
+        console.log(event.key);
+        var tabIndex = event.target.tabIndex ? '.tab' + (event.target.tabIndex - 1) : 1;
+        if (event.key == 'Backspace') {
+            $(tabIndex).focus();
+            $('.tab' + event.target.tabIndex).val('');
         }
     };
     __decorate([
