@@ -8,8 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo } from '../../_helpers/jwt.helper';
 import { AuthComponent } from '../../pages/user/auth/auth.component';
-import { CookieService } from 'ngx-cookie';
-import * as moment from 'moment';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 declare var $: any;
 
 @Component({
@@ -36,14 +35,17 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   userDetails;
   username;
   _isLayCredit = false;
+  countryCode:string='';
 
   constructor(
     private genericService: GenericService,
     public translate: TranslateService,
     public modalService: NgbModal,
     public router: Router,
-    private cookieService:CookieService
+    private commonFunction:CommonFunction
   ) {
+
+    this.countryCode = this.commonFunction.getUserCountry();
     let _langunage = localStorage.getItem('_lang');
     let _currency = localStorage.getItem('_curr');
     if (_langunage) {
@@ -79,7 +81,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getLangunages();
     this.getCurrencies();
     this.loadJquery();
-    this.getUserLocationInfo();
+    //this.getUserLocationInfo();
     if (this.isLoggedIn) {
       if (this.userDetails.roleId != 7) {
         this.totalLaycredit();
@@ -237,41 +239,5 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   openSignModal() {
     const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
-  }
-
-  getUserLocationInfo(){
-
-    try{
-      
-      let location:any = this.cookieService.get('__loc');      
-      if(typeof location=='undefined'){
-        this.genericService.getUserLocationInfo().subscribe((res:any)=>{
-          console.log("location",res)
-          this.cookieService.put('__loc',JSON.stringify(res), { expires : new Date(moment().add('7',"days").format())})
-          this.redirectToDRsite(res)
-        },(error)=>{
-    
-        })
-      }
-      else{
-        console.log("window.location.origin",window.location.origin)
-        location = JSON.parse(location);
-        this.redirectToDRsite(location)
-        
-      }
-    }
-    catch(e){
-
-    }
-    
-  }
-
-  redirectToDRsite(location){
-    console.log("Location",location)
-    if(location.country.iso2=='PL'){
-      if(window.location.origin=='https://staging.laytrip.com' || window.location.origin=='http://staging.laytrip.com' || window.location.origin=='http://localhost:4200' ){
-        window.location.href='https://www.google.com/'
-      }
-    }
   }
 }
