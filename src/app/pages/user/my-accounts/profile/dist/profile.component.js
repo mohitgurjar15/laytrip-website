@@ -165,6 +165,7 @@ var ProfileComponent = /** @class */ (function () {
         if (!custom_validators_1.fileSizeValidator(event.target.files[0])) {
             this.imageFileError = true;
             this.imageErrorMsg = 'Please select file up to 2mb size';
+            this.toastr.error(this.imageErrorMsg, 'Profile Error');
             return;
         }
         //file render

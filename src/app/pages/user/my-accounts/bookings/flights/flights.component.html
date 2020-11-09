@@ -134,7 +134,7 @@
                     <div class="block_price">
                         <p>Instalment per week</p>
                         <p><span>${{item.instalment_amount | number : '1.2-2'}}</span></p>
-                        <span class="partial_payment_info">Instalment Payment Info</span>
+                        <a  target="_blank" [routerLink]="['/partial-payment']"><span class="partial_payment_info">Instalment Payment Info</span></a>
                     </div>
                 </div>
             </div>
@@ -234,7 +234,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
-                        (click)="getBaggageDetails(item.moduleInfo.route_code)">Baggage Rules</a>
+                       >Baggage Rules</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a href="#Cancellation-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
@@ -382,14 +382,14 @@
                                     <p>Indigo</p>
                                     <span>EWR - DEN</span>
                                 </div> -->
-                                <div class="detail_right" *ngIf="loadBaggageDetails">
+                              <!--   <div class="detail_right" *ngIf="loadBaggageDetails">
                                     <div class="w-100">
                                         <p class="fb_animation mb-0 h-auto w-100"></p>
                                         <p class="fb_animation mb-0 h-auto w-100"></p>
                                     </div>
                                     <p class="fb_animation mb-0 h-auto w-100"></p>
-                                </div>
-                                <div class="detail_right" *ngIf="!loadBaggageDetails && !notFoundBaggageDetails">
+                                </div> -->
+                                <div class="detail_right">
                                     <table>
                                         <thead>
                                             <tr>
@@ -400,11 +400,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let baggage of baggageDetails">
-                                                <td data-title="Flight">{{ baggage?.flight_number }}</td>
-                                                <td data-title="Depart">{{ baggage?.departure_airport }}</td>
-                                                <td data-title="Arrive">{{ baggage?.arrival_airport }}</td>
-                                                <td data-title="Free Baggage">{{ baggage?.baggage_capacity }}</td>
+                                            <tr  *ngFor="let baggage of item.routes;let i = index">
+                                                <td data-title="Flight">{{ baggage.stops[i].flight_number }}</td>
+                                                <td data-title="Depart">{{ baggage.stops[i].departure_info.name }}</td>
+                                                <td data-title="Arrive">{{ baggage.stops[i].arrival_info.name }}</td>
+                                                <td data-title="Free Baggage" >{{ baggage.stops[i].checkin_baggage || 'N/A'}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -453,7 +453,7 @@
                                         </ul>
                                     </div>
                                 </div> -->
-                                <div class="rules_cnt_btm">
+                                name     <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>

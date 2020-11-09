@@ -75,7 +75,7 @@ export class MyWalletAddPointsComponent implements OnInit {
       this.loading = true;
       this.getLayCreditInfo();
       this.toastr.success(res.message, 'Points');
-      this.router.navigate(['/account/my-wallet']);
+      this.router.navigate(['/account/lay-credit-points']);
     }, (error: HttpErrorResponse) => {
       this.loading = false;
       this.toastr.error(error.error.message);
