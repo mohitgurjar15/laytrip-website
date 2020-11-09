@@ -64,7 +64,7 @@ const routes: Routes = [
     component: FlightTripDetailComponent,
   },
   {
-    path: 'my-wallet',
+    path: 'lay-credit-points',
     component: MyWalletComponent,
   },
   {

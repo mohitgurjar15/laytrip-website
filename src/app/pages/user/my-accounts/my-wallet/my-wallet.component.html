@@ -12,9 +12,9 @@
                                 <li>
                                     <p class="fb_animation w-100 mb-0"></p>
                                 </li>
-                                <li>
+                               <!--  <li>
                                     <p class="fb_animation w-100 mb-0"></p>
-                                </li>
+                                </li> -->
                             </ul>
                             <ul *ngIf="travellerPoints">
                                 <!-- <li>
@@ -27,8 +27,8 @@
                                 <li>
                                     <span>Total</span>
                                     <div class="block_point">
-                                        Earning Laycredit points
-                                        <p>{{travellerPoints.total_earned_points | number : '1.2-2' || 0}}</p>
+                                        Available Laycredit points
+                                        <p>{{travellerPoints.total_available_points | number : '1.2-2' || 0}}</p>
                                     </div>
                                 </li>
                             </ul>
