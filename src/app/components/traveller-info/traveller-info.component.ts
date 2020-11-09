@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
 
 @Component({
@@ -18,6 +19,7 @@ export class TravellerInfoComponent implements OnInit {
   totalPerson: number = 1;
   class = 'Economy';
   errorMessage:string='';
+  countryCode:string;
 
   travellerInfo = {
     adult: 0,
@@ -28,13 +30,16 @@ export class TravellerInfoComponent implements OnInit {
   };
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private commonFunction:CommonFunction
   ) {
     this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
     this.infantValue = parseInt(this.route.snapshot.queryParams['infant']) ? parseInt(this.route.snapshot.queryParams['infant']) : 0;
     this.totalPerson = this.adultValue + this.childValue + this.infantValue;
     this.class = this.route.snapshot.queryParams['class'] ? this.route.snapshot.queryParams['class'] : 'Economy';
+
+    this.countryCode = this.commonFunction.getUserCountry()
   }
 
   ngOnInit() {

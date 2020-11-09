@@ -5,8 +5,7 @@
             <div id="app" class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a  class="navbar-brand" [routerLink]="['/']">
-                        <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/logo.svg" alt="Logo" />
-                        <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo" />
+                        <img  src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo" />
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
@@ -25,12 +24,12 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto nav_right">   
-                            <li class="nav-item cus_pad">
+                            <!-- <li class="nav-item cus_pad">
                                 <a class="nav-link hover-link">
                                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Notifications.svg" alt="">
                                     <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/Ic_Notifications_active.svg" alt="">
                                 </a>
-                            </li>
+                            </li> -->
                             <!-- <li class="nav-item cus_pad">
                                 <a class="nav-link" href="javascript:void(0);">
                                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_message.svg" alt="">

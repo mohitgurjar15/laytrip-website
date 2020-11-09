@@ -87,16 +87,19 @@
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
-                                                            [label]="'From'" [placeHolder]="'New York'"
-                                                            [defaultSelected]="'NY, United States'"
+                                                            [label]="'From'" [placeHolder]="'Santo Domingo'"
+                                                            [defaultSelected]="'SDQ, Dominican Republic'"
                                                             [tabIndex]=1
+                                                            [defaultCity]="'Santo Domingo'"
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
                                                 </div>
-                                                <div class="switch_btn">
+                                                <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                                                     <a href="javascript:void(0);">
-                                                        <img src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
+                                                        <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
+                                                            alt="Switch Image" />
+                                                        <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
                                                             alt="Switch Image" />
                                                     </a>
                                                 </div>
@@ -106,8 +109,9 @@
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
                                                             [label]="'TO'" [placeHolder]="'Los Angeles'"
-                                                            [defaultSelected]="'CA, United States'"
+                                                            [defaultSelected]="'LAX, United States'"
                                                             [tabIndex]=2
+                                                            [defaultCity]="'Los Angeles'"
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
@@ -115,7 +119,7 @@
                                             </li>
                                             <li class="grid_box secound">
                                                 <div class="date_form">
-                                                    <div class="search_area">
+                                                    <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                                         <label>Departure</label>
                                                         <p-calendar inputId="basic" [(ngModel)]="departureDate"
                                                             [ngModelOptions]="{standalone: true}" flightDepartureMinDate
@@ -138,7 +142,7 @@
                                                             return date</p>
                                                     </div>
 
-                                                    <div class="search_area" *ngIf="isRoundTrip">
+                                                    <div class="search_area" *ngIf="isRoundTrip" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                                         <label>Return</label>
                                                         <p-calendar inputId="basic" [(ngModel)]="returnDate"
                                                             [ngModelOptions]="{standalone: true}" flightReturnMinDate
@@ -155,7 +159,7 @@
                                                 </div>
                                             </li>
                                             <li class="grid_box third">
-                                                <div class="travellers">
+                                                <div class="travellers" >
                                                     <app-traveller-info label="TRAVELLERS & CLASS"
                                                         (changeValue)="changeTravellerInfo($event)">
                                                     </app-traveller-info>
@@ -196,14 +200,14 @@
 
 <!--  Close Banner Section-->
 
-<app-featured-city></app-featured-city>
+<app-featured-city *ngIf="countryCode!=='DR'"></app-featured-city>
 <app-dr-adventure *ngIf="countryCode==='DR'"></app-dr-adventure>
 <app-last-min-hotel-deal *ngIf="countryCode==='DR'"></app-last-min-hotel-deal>
 <app-partial-payment></app-partial-payment>
 
 <!-- <app-deal></app-deal> -->
 
-<app-user-benefit></app-user-benefit>
+<!-- <app-user-benefit></app-user-benefit> -->
 
 <!-- <app-discover-city></app-discover-city> -->
 

@@ -26,6 +26,7 @@ import { FaqComponent } from './faq/faq.component';
 import { WhyLaytripComponent } from './why-laytrip/why-laytrip.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 import { DownloadAppComponent } from './download-app/download-app.component';
+import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DownloadAppComponent } from './download-app/download-app.component';
     FaqComponent,
     WhyLaytripComponent,
     PartialPaymentComponent,
-    DownloadAppComponent
+    DownloadAppComponent,
+    ComingSoonComponent
   ],
   imports: [
     CommonModule,

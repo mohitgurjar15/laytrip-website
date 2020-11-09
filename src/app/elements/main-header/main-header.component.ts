@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo } from '../../_helpers/jwt.helper';
 import { AuthComponent } from '../../pages/user/auth/auth.component';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
 
 @Component({

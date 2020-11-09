@@ -20,7 +20,14 @@ export class AppComponent {
   }
 
   setUserOrigin(){
-    localStorage.setItem('__uorigin','IN')
+
+    let host = window.location.origin;
+    if(host.includes("dr.") || host.includes("loc")){
+      localStorage.setItem('__uorigin','DR')
+    }
+    else{
+      localStorage.removeItem('__uorigin')
+    }
   }
 
   getUserLocationInfo(){
@@ -50,7 +57,7 @@ export class AppComponent {
 
   redirectToDRsite(location){
     console.log("Location",location)
-    if(location.country.iso2=='DR'){
+    if(location.country.iso2=='PL'){
 
       if(window.location.origin=='https://staging.laytrip.com' || window.location.origin=='http://staging.laytrip.com' || window.location.origin=='http://localhost:4200' ){
         //window.location.href='https://www.google.com/'

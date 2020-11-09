@@ -58,12 +58,29 @@
 						.tab-pane {
 							.flight_search {
 								.flight-grid {
-									.grid_box.third {
-										.travellers {
-											.search_area {
-												.travel_info {
-													&:before {
-														background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+									.grid_box {
+										&.first {
+											.switch_btn {
+												&.dr_layout {
+													width: 36px;
+													height: 36px;
+
+													img {
+														width: 20px;
+													}
+												}
+											}
+										}
+
+										&.third {
+											.travellers {
+												.search_area {
+													.travel_info {
+														&.dr_travel_info {
+															&:before {
+																background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+															}
+														}
 													}
 												}
 											}

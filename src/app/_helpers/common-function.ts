@@ -159,21 +159,6 @@ export class CommonFunction {
     getUserCountry(){
 
         try{
-          
-          /* let location:any = this.cookieService.get('__loc'); 
-          if(typeof location!='undefined'){
-            location = JSON.parse(location);
-            if(location.country.iso2=='DR'){
-                return location.country.iso2;
-            }
-            else{
-                return '';
-            }
-          }
-          else{
-            return ''
-          } */
-
           let countryCode = localStorage.getItem("__uorigin");
           return countryCode || '';
         }

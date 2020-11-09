@@ -43,8 +43,8 @@ export class HomeComponent implements OnInit {
   searchFlightInfo =
     {
       trip: 'oneway',
-      departure: '',
-      arrival: '',
+      departure: 'SDQ',
+      arrival: 'LAX',
       departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
       arrival_date: '',
       class: '',
