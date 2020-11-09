@@ -51,7 +51,7 @@
                         <input type="radio" name="weekly-installment" [disabled]="convertToNumber(biWeeklyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
                         <span class="checkmark"></span>
                         <div class="left">
-                            Bi-weekly <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
+                            Biweekly <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
                         </div>
                         <div class="right">
                             ${{biWeeklyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
