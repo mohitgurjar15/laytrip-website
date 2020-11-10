@@ -76,9 +76,6 @@ export class AdultListComponent implements OnInit {
     }
   }
 
-
- 
-
   selectItinerary(event, traveler){
    
     let totalAdult = Number(this._itinerary.adult);
@@ -94,7 +91,6 @@ export class AdultListComponent implements OnInit {
         };
         this._travelers.push(travelerData);
         this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-        console.log(this.childCounter + 1,totalChild)
         if (this.adultCounter + 1 < totalAdult && traveler.user_type == 'adult') {
           this.adultCounter++;            
           // this.checkBoxDisable = false;
@@ -254,8 +250,7 @@ export class AdultListComponent implements OnInit {
   }
 
   infantCollapseClick() {
-    this.infantCollapse = !this.infantCollapse;
-    
+    this.infantCollapse = !this.infantCollapse;    
   }
 
   childCollapseClick() {
@@ -264,8 +259,6 @@ export class AdultListComponent implements OnInit {
 
   adultCollapseClick() {
     this.adultCollapse = !this.adultCollapse;
-    console.log(this.adultCollapse)
-
   }
 
   getCountry() {

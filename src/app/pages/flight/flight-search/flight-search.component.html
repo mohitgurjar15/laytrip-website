@@ -15,7 +15,7 @@
         <div class="filter_saidbar">
           <div class="filter_by d-none d-lg-block">
             <div class="block_inn">
-              <h4>Filter by</h4>
+              <h4>Filter By</h4>
               <a class="anchor_link" (click)="resetFilter()" >Reset</a>
             </div>
             <app-filter-flight  [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}></app-filter-flight>
@@ -51,7 +51,7 @@
       <div class="filter_cnt">
           <div class="filter_saidbar">
             <div class="filter_by">
-              <h4>Filter by</h4>
+              <h4>Filter By</h4>
               <app-filter-flight [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"></app-filter-flight>
             </div>
           </div>

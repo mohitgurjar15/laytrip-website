@@ -32,7 +32,7 @@ var ContactUsComponent = /** @class */ (function () {
         this.contactUsForm = this.formBuilder.group({
             name: ['', [forms_1.Validators.required]],
             country_code: [''],
-            phone_no: ['', [forms_1.Validators.required]],
+            phone_no: [''],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             message: ['', [forms_1.Validators.required]]
         });

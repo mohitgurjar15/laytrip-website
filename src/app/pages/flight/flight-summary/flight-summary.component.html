@@ -239,8 +239,9 @@
                 </div>
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[1]">
                     <div class="flight_info_text">
+
                         <h6>{{ flightDetail[0].routes[1].stops[0].departure_code }}  - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[1].stops[0].departure_time }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_time }}</span></h6>
-                        <a [ngClass]="{'detail_open': inwardDetails === true}" id="more_detail_flight_inbound" (click)="toggleRouteDetails('inward')">{{ inwardDetails==false?'Show Details':'Hide Details' }}</a>
+                        <a class="hover-link" [ngClass]="{'detail_open': inwardDetails === true}" id="more_detail_flight_inbound" (click)="toggleRouteDetails('inward')">{{ inwardDetails==false?'Show Details':'Hide Details' }}</a>
                     </div>
                     <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[1].stops.length-1==0}"   id="flight_info_inbound" *ngIf="inwardDetails">
                         <div class="flight_cityname">
@@ -326,7 +327,7 @@
         <div class="partial_pay_info" *ngIf="flightDetail[0].start_price && showPartialPayemntOption">
             <ul>
                 <li>
-                    <p>Partial Payment <img src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon" title="This payment amount will be automatically deducted at each one of your payment due dates. At any time, you can adjust this amount in your payment settings."></p>
+                    <p>Partial Payment <img class="hover-link" src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon" title="This payment amount will be automatically deducted at each one of your payment due dates. At any time, you can adjust this amount in your payment settings."></p>
                     <span>{{ currency?.symbol }}{{partialPaymentAmount | number : '1.2-2'}}/instalment</span>
                 </li>
             </ul>
@@ -343,8 +344,8 @@
         <div class="block_inner">
             <h6>Check our Policies</h6>
             <ul>
-                <li><a class="hyper_link" (click)="toggleBaggagePolicy()" data-toggle="modal" data-target="#baggage_policy_modal">Baggage policy</a></li>
-                <li><a class="hyper_link" (click)="toggleCancellationPolicy()" data-toggle="modal" data-target="#cancellation_policy_modal">Cancellation policy</a></li>
+                <li><a class="hyper_link" (click)="toggleBaggagePolicy()" data-toggle="modal" data-target="#baggage_policy_modal">Baggage Policy</a></li>
+                <li><a class="hyper_link" (click)="toggleCancellationPolicy()" data-toggle="modal" data-target="#cancellation_policy_modal">Cancellation Policy</a></li>
             </ul>
         </div>
     </div>

@@ -38,7 +38,7 @@
                             </div>
                             <div class="block_detail_btm">
                                 <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
-                                    <a href="javascript:void(0);" class="show_more_detail"
+                                    <a  class="show_more_detail hover-link"
                                         (click)="showDetails(blockIndex)">
                                         <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                         Flight Details
@@ -68,7 +68,7 @@
                                     <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
                                 </div>
                             </div>
-                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">
+                            <a class="book_btn hover-link" (click)="bookNow(item)">
                                 Book Now
                             </a>
                             <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
@@ -444,7 +444,7 @@
                             </div>
                             <div class="block_detail_btm">
                                 <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
-                                    <a href="javascript:void(0);" class="show_more_detail"
+                                    <a  class="show_more_detail hover-link"
                                         (click)="showDetails(blockIndex)">
                                         <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                         Flight Details
@@ -475,7 +475,7 @@
                                     <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
                                 </div>
                             </div>
-                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">Book Now</a>
+                            <a class="book_btn hover-link"  (click)="bookNow(item)">Book Now</a>
                             <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
                                 partial payment</a>
