@@ -107,7 +107,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   font-size: 14px;
 }
 
-.search_result .result_listing.roundtrip_list .search_block .detail_info_show .nav-tabs li {
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .bookingListNavTab li {
   width: 33% !important;
 }
 

@@ -49,8 +49,8 @@
                         </label>
                     </div>
                     <div class="forgot_pass">
-                        <a href="javascript:void(0);" (click)="openPage({value: 'forgotPassword'})"
-                            class="forgotPassword">Forgot Password?</a>
+                        <a (click)="openPage({value: 'forgotPassword'})"
+                            class="forgotPassword  hover-link">Forgot Password?</a>
                     </div>
                 </div>
                 
@@ -64,8 +64,8 @@
             <div class="modal_btm">
                 <span>Or login via</span>
                 <app-social-login (socialError)="socialError($event)"></app-social-login>
-                <p>Don't have an account? <a href="javascript:void(0);" (click)="openPage({value: 'signUp'})"
-                        class="signUp">Sign Up</a></p>
+                <p>Don't have an account? <a  (click)="openPage({value: 'signUp'})"
+                        class="signUp hover-link">Sign Up</a></p>
             </div>
         </div>
     </div>

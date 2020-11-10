@@ -52,9 +52,9 @@
     </ul>
     <div class="flight_cat">
       <ul>
-        <li><a class="active_cat" [ngClass]="{ 'active_cat' : class === 'Economy' }" href="javascript:void(0);" (click)="btnClickForChange({type: 'class', value: 'Economy'})" >Economy</a></li>
-        <li><a [ngClass]="{ 'active_cat' : class === 'Business' }" href="javascript:void(0);" (click)="btnClickForChange({type: 'class', value: 'Business'})">Business</a></li>
-        <li><a [ngClass]="{ 'active_cat' : class === 'First' }" href="javascript:void(0);" (click)="btnClickForChange({type: 'class', value: 'First'})">First</a></li>
+        <li><a class="active_cat hover-link" [ngClass]="{ 'active_cat' : class === 'Economy' }"  (click)="btnClickForChange({type: 'class', value: 'Economy'})" >Economy</a></li>
+        <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'Business' }"  (click)="btnClickForChange({type: 'class', value: 'Business'})">Business</a></li>
+        <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'First' }"  (click)="btnClickForChange({type: 'class', value: 'First'})">First</a></li>
       </ul>
     </div>
   </div>
