@@ -129,7 +129,7 @@
                     </div>
                 </div>
             </div>
-            <a class="add_passenger_btn" href="javascript:void(0);"
+            <a class="add_passenger_btn hover-link" 
                 (click)="addForms('adult')">{{showAddAdultForm ? '-' : '+'}}
                 Add {{'Adult' | titlecase}}</a>
             <!-- Without Login -->
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="add_passenger_btn" href="javascript:void(0);"
+                <a class="add_passenger_btn hover-link"
                     (click)="addForms('child')">{{showAddChildForm ? '-' : '+'}}
                     Add {{'Child' | titlecase}}</a>
                 <div id="accordion-child" class="accordion" *ngIf="showAddChildForm">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="add_passenger_btn" href="javascript:void(0);"
+                <a class="add_passenger_btn hover-link"
                     (click)="addForms('infant')">{{showAddInfantForm ? '-' : '+'}}
                     Add {{'Infant' | titlecase}}</a>
                 <div id="accordion-infant" class="accordion" *ngIf="showAddInfantForm">

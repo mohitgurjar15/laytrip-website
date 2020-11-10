@@ -39,7 +39,7 @@ export class ContactUsComponent implements OnInit {
     this.contactUsForm = this.formBuilder.group({
       name: ['',[ Validators.required]],
       country_code: [ ''],
-      phone_no: ['', [Validators.required]],
+      phone_no: [''],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       message: ['', [Validators.required]],
     });
