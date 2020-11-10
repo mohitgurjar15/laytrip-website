@@ -57,11 +57,17 @@
                         </div>
                     </div>
                     <div class="col-md-4 px-0">
-                        <div class="block_price">
-                            <p *ngIf="item.start_price > 0">Starts from</p>
-                            <p *ngIf="item.start_price > 0">
-                                <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
-                            <!-- <a class="book_btn" href="javascript:void(0);"></a> -->
+                        <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
+                            <div class="block_inn_pr" *ngIf="item.start_price > 0">
+                                <div class="block">
+                                    <p>Down payment</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
+                                </div>
+                                <div class="block">
+                                    <p>From 2nd week</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
+                                </div>
+                            </div>
                             <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">
                                 Book Now
                             </a>
@@ -337,7 +343,7 @@
         <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
             <div class="listing_block">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <div class="block_main">
                             <div class="block_top">
                                 <div class="block_inner">
@@ -456,11 +462,19 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 px-0">
-                        <div class="block_price">
-                            <p *ngIf="item.start_price > 0">Starts from</p>
-                            <p *ngIf="item.start_price > 0">
-                                <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
+
+                    <div class="col-md-4 px-0">
+                        <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
+                            <div class="block_inn_pr" *ngIf="item.start_price > 0">
+                                <div class="block">
+                                    <p>Down payment</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
+                                </div>
+                                <div class="block">
+                                    <p>From 2nd week</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
+                                </div>
+                            </div>
                             <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">Book Now</a>
                             <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
