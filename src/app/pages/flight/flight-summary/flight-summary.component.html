@@ -239,7 +239,7 @@
                 </div>
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[1]">
                     <div class="flight_info_text">
-                        <h6>{{ flightDetail[0].routes[1].stops[0].departure_code }}  - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[1].stops[0].departure_time }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_time }} | {{ flightDetail[0].routes[1].stops[0].departure_time }}</span></h6>
+                        <h6>{{ flightDetail[0].routes[1].stops[0].departure_code }}  - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[1].stops[0].departure_time }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_time }}</span></h6>
                         <a [ngClass]="{'detail_open': inwardDetails === true}" id="more_detail_flight_inbound" (click)="toggleRouteDetails('inward')">{{ inwardDetails==false?'Show Details':'Hide Details' }}</a>
                     </div>
                     <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[1].stops.length-1==0}"   id="flight_info_inbound" *ngIf="inwardDetails">
