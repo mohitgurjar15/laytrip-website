@@ -81,7 +81,6 @@ var AdultListComponent = /** @class */ (function () {
                 };
                 this._travelers.push(travelerData);
                 this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-                console.log(this.childCounter + 1, totalChild);
                 if (this.adultCounter + 1 < totalAdult && traveler.user_type == 'adult') {
                     this.adultCounter++;
                     // this.checkBoxDisable = false;
@@ -233,7 +232,6 @@ var AdultListComponent = /** @class */ (function () {
     };
     AdultListComponent.prototype.adultCollapseClick = function () {
         this.adultCollapse = !this.adultCollapse;
-        console.log(this.adultCollapse);
     };
     AdultListComponent.prototype.getCountry = function () {
         var _this = this;
