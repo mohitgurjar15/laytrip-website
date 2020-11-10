@@ -1,0 +1,409 @@
+@import "_cstm-variable.scss";
+@import "_dr_home_variable.scss";
+
+
+.site_header {
+	&.dr_home {
+		.navbar {
+			.site_menu {
+				.nav_left {
+					li {
+						a {
+							&.dr_coin {
+								border: 1px solid $dr_border_clr;
+								padding: 5px 6px 5px 30px;
+								border-radius: 20px;
+								color: $dr_text_clr_blue;
+								position: relative;
+
+								&:before {
+									width: 15px;
+									height: 15px;
+									background: $pink_clr;
+									border-radius: 50%;
+									position: absolute;
+									top: 50%;
+									left: 7px;
+									transform: translateY(-50%);
+									content: '';
+								}
+							}
+						}
+					}
+				}
+
+				.nav_right {
+					li {
+						&:last-child {
+							a {
+								&.login_btn {
+									background: $pink_clr;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+.home_banner {
+	.banner_inner {
+		.banner_tab {
+			.tab-content {
+				.flight_tab {
+					.tab-content {
+						.tab-pane {
+							.flight_search {
+								.flight-grid {
+									.grid_box {
+										&.first {
+											.switch_btn {
+												&.dr_layout {
+													width: 36px;
+													height: 36px;
+
+													img {
+														width: 20px;
+													}
+												}
+											}
+										}
+
+										&.third {
+											.travellers {
+												.search_area {
+													.travel_info {
+														&.dr_travel_info {
+															&:before {
+																background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.block_dominican_republic {
+	width: 100%;
+	padding: 100px 0px 100px;
+	background: $background-white;
+
+	.block_left_title {
+		h2 {
+			font-size: 52px;
+			line-height: 70px;
+			font-weight: 600;
+			color: $active-tab-text;
+
+			span {
+				display: block;
+			}
+		}
+	}
+
+	.block_right_logo {
+		img {
+			max-width: 100%;
+		}
+	}
+
+	.block_dominican_republic_list {
+		width: 100%;
+		margin: 50px 0 55px;
+
+		ul {
+			width: 100%;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+
+			li {
+				padding: 0 7.5px 0;
+
+				&:first-child {
+					padding-left: 0;
+				}
+
+				&:last-child {
+					padding-right: 0;
+				}
+
+				&.mt-45 {
+					margin-top: 45px;
+				}
+
+				a {
+					display: inline-block;
+					box-shadow: 3px 4px 40px $shadow_bg;
+
+					img {
+						width: 100%;
+						object-fit: cover;
+						height: 350px;
+						border-radius: 7px;
+					}
+				}
+			}
+		}
+	}
+
+	.block_btn {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+
+		.btn_dr_home {
+			display: inline-block;
+			line-height: 50px;
+			padding: 0 20px;
+			font-size: 20px;
+			letter-spacing: 0.4px;
+			color: $text-white;
+			font-weight: 400;
+			border-radius: 8px;
+			background: $active-tab-text;
+			position: relative;
+			z-index: 9;
+			overflow: hidden;
+			box-shadow: 3px 4px 40px $shadow_bg;
+
+			img {
+				margin: 0 0 0 10px;
+				height: 20px;
+			}
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 0%;
+				background: $pink_clr;
+				z-index: -1;
+				transition: 0.8s;
+				border-radius: 0 0 50% 50%;
+			}
+
+			&:hover {
+				border-color: $pink_clr;
+
+				&:before {
+					height: 190%;
+				}
+			}
+
+			@media(max-width: 575px) {
+				font-size: 16px;
+			}
+		}
+	}
+}
+
+
+.exclusive_deals_list {
+	width: 100%;
+	padding: 0px 0px 100px;
+	background: $background-white;
+
+	@media(max-width: 1199px) {}
+
+	@media(max-width: 767px) {}
+
+	.section_title {
+		width: 100%;
+		margin: 0 0 75px;
+
+		h2 {
+			font-size: 52px;
+			line-height: 70px;
+			font-weight: 600;
+			color: $active-tab-text;
+		}
+	}
+
+	.deal_list {
+		width: 100%;
+		margin: 30px 0 0;
+
+		.dr_deal_slid {
+			position: relative;
+
+			.slick-list {
+				padding: 0;
+			}
+
+			.slick-slide {
+				margin: 0 10px;
+
+				.slid_block {
+					width: 100%;
+					border-radius: 20px;
+					position: relative;
+
+					.block_im {
+						width: 100%;
+						height: 380px;
+						box-shadow: 3px 4px 40px $shadow_bg;
+
+						img {
+							width: 100%;
+							border-radius: 10px;
+							height: 100%;
+							object-fit: cover;
+						}
+					}
+
+					.block_in {
+						width: 100%;
+						margin: 10px 0 0;
+
+						.info_top {
+							width: 100%;
+							display: flex;
+							align-items: center;
+							margin-bottom: 15px;
+
+							.block_star {
+								width: auto;
+								padding-right: 25px;
+
+								ul {
+									width: auto;
+									margin: 0;
+									padding: 0;
+									list-style: none;
+									display: flex;
+
+									li {
+										padding-right: 5px;
+
+										&:last-child {
+											padding: 0;
+										}
+									}
+								}
+							}
+
+							.block_name {
+								font-size: 16px;
+								line-height: 25px;
+								font-weight: 400;
+								color: $dr_text_clr_dark_grey;
+							}
+						}
+
+						.deal_name {
+							font-size: 22px;
+							line-height: 33px;
+							font-weight: 400;
+							color: $dr_text_clr_dark_grey;
+							margin: 0;
+						}
+
+						.block_btm {
+							font-size: 16px;
+							line-height: 25px;
+							font-weight: 400;
+							color: $dr_text_clr_dark_grey;
+
+							span {
+								font-size: 26px;
+								line-height: 39px;
+								font-weight: 700;
+								color: $pink_clr;
+							}
+						}
+					}
+				}
+			}
+
+			.slick-arrow {
+				position: absolute;
+				top: 40%;
+				transform: translateY(-50%);
+				width: 35px;
+				height: 35px;
+				background: $background-white;
+				box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+				font-size: 0;
+				border: none;
+				border-radius: 8px;
+				z-index: 9;
+
+				&.slick-prev {
+					left: -50px;
+					position: absolute;
+
+					&:before {
+						content: "\f104";
+						font-family: FontAwesome;
+						font-size: 24px;
+						color: $text-light-grey;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+					}
+
+					&:hover {
+						&:before {
+							color: $pink_clr;
+						}
+					}
+
+					@media(max-width: 992px) {
+						left: -25px;
+					}
+
+					@media(max-width: 575px) {
+						left: -5px;
+					}
+				}
+
+				&.slick-next {
+					right: -50px;
+
+					&:before {
+						content: "\f105";
+						font-family: FontAwesome;
+						font-size: 24px;
+						color: $text-light-grey;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+					}
+
+					&:hover {
+						&:before {
+							color: $pink_clr;
+						}
+					}
+
+					@media(max-width: 992px) {
+						right: -25px;
+					}
+
+					@media(max-width: 575px) {
+						right: -5px;
+					}
+				}
+			}
+		}
+	}
+}

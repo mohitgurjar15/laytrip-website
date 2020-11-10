@@ -20,6 +20,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
+  @Input() defaultCity:string;
   defaultSelectedTemp;
   airportDefaultDestValue;
   departureAirport;

@@ -35,9 +35,12 @@
               </li> -->
             </ul>
             <div class="btn_payment">
-              <a class="btn btn_laytrip" href="javascript:void(0);" (click)="addPoints()">
+              <!-- <a class="btn btn_laytrip" href="javascript:void(0);" (click)="addPoints()">
                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>Add Points <img
-                  src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                  src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a> -->
+              <button class="btn btn_laytrip" [disabled]="isDisableAddButton" (click)="addPoints()"><i
+                  class="fa fa-spinner fa-spin" *ngIf="loading"></i> Add Points <img
+                  src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
             </div>
           </div>
         </div>

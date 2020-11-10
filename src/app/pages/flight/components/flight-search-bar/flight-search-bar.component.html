@@ -62,13 +62,16 @@
                           
                         </div>
                       </div>
-                      <div class="switch_btn">
+                      <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                         <a href="javascript:void(0);">
-                          <img src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg" alt="Switch Image" />
+                          <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
+                                                            alt="Switch Image" />
+                          <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
+                                                            alt="Switch Image" />
                         </a>
                       </div>
                       <div class="flight_to">
-                        <div class="search_area">
+                        <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                           <label>To</label>
                           
                           <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="display_name"
@@ -94,7 +97,7 @@
                     </li>
                     <li class="grid_box secound">
                       <div class="date_form">
-                        <div class="search_area">
+                        <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                           <label>Departure</label>
                           <p-calendar 
                               inputId="basic" 
@@ -125,7 +128,7 @@
                           <label>Return</label>
                           <p (click)="toggleOnewayRoundTrip('roundtrip')">Tap to add return date</p>
                         </div>
-                        <div class="search_area" *ngIf="isRoundTrip">
+                        <div class="search_area" *ngIf="isRoundTrip" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                           <label>Return</label>
                           <p-calendar 
                               inputId="basic" 

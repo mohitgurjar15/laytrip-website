@@ -224,15 +224,44 @@
     .flight_search
     .flight-grid
     .grid_box.secound
-    .search_area
-    input {
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
-        no-repeat !important;
-}
+    .search_area{
+        input {
+            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
+                no-repeat !important;
+        }
+        &.dr_search_area{
+            input{
 
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
-        no-repeat !important;
+                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px
+                no-repeat !important;
+            }
+        }
+    }
+    
+
+.modify_search {
+    .flight_tab {
+        .tab-content {
+            .flight_search {
+                .flight-grid {
+                    .grid_box.secound {
+                        .search_area {
+                            input {
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+                            }
+                            &.dr_search_area{
+                                input{
+                    
+                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px
+                                    no-repeat !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .modify_search

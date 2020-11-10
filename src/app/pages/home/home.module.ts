@@ -13,6 +13,8 @@ import { MobileAndSubscribeComponent } from './mobile-and-subscribe/mobile-and-s
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
+import { LastMinHotelDealComponent } from './last-min-hotel-deal/last-min-hotel-deal.component';
+import { DrAdventureComponent } from './dr-adventure/dr-adventure.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -22,6 +24,8 @@ import { CalendarModule } from 'primeng/calendar';
     UserBenefitComponent,
     MobileAndSubscribeComponent,
     PartialPaymentComponent,
+    LastMinHotelDealComponent,
+    DrAdventureComponent,
   ],
   imports: [
     CommonModule,

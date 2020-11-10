@@ -35,6 +35,7 @@
                     *ngIf="priceData.length"
                     [priceData]="priceData"
                     checkAvailability="local" 
+                    [laycreditpoints]="laycreditpoints"
                     (flightAvailable)="flightAvailable($event)" 
                     [showPartialPayemntOption]="showPartialPayemntOption" 
                     partialPaymentAmount={{partialPaymentAmount}}

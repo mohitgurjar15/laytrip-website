@@ -32,10 +32,12 @@
               "src/assets/css/slick.css",
               "src/styles-app-loading.scss",
               "src/styles.scss",
+              "src/dr_home.scss",
               "src/flight.scss",
               "src/account.scss",
               "src/comman-modal.scss",
               "src/laytrip.scss",
+              "src/alert.scss",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/primeng/resources/themes/bootstrap/theme.css",
               "node_modules/primeng/resources/primeng.min.css"

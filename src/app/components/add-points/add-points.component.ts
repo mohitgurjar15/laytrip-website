@@ -40,5 +40,9 @@ export class AddPointsComponent implements OnInit {
       this.addPointsForm.controls.default_add_points.setValue('100');
       this.addNewPoints.emit(this.addPointsForm.value.default_add_points);
     }
+    if (event.custom_add_points === 0) {
+      this.addPointsForm.controls.default_add_points.setValue(null);
+      this.addNewPoints.emit(null);
+    }
   }
 }

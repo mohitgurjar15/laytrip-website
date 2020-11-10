@@ -310,6 +310,11 @@
                         <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
                     </p>
                 </li>
+
+                <p *ngIf="laycreditpoints>0">
+                    Laycredits  
+                    <span>{{ laycreditpoints | number : '1.2-2' }}</span>
+                </p>
             </ul>
         </div>
         <!-- <div class="block_inner last">
