@@ -621,6 +621,12 @@
 					background: $background-white;
 					border-radius: 5px;
 					padding: 15px;
+					position: relative;
+					overflow: hidden;
+
+					@media(max-width:767px) {
+						height: 100%;
+					}
 
 					.row {
 						align-items: center;
@@ -760,7 +766,7 @@
 								justify-content: center;
 								padding-bottom: 10px;
 								border-bottom: 1px solid $box-border-color;
-								margin: 0 0 10px;
+								margin: 0;
 							}
 
 							.show_detail {
@@ -856,25 +862,51 @@
 						width: 100%;
 						text-align: center;
 						padding: 0 15px;
+						position: relative;
+						z-index: 9;
 
-						p {
-							width: 100%;
-							margin: 0 0 10px;
-							font-size: 12px;
-							font-weight: 300;
-							color: $text-grey;
-
-							&:first-child {
-								margin: 0 0 5px;
-							}
-
-							span {
-								font-size: 28px;
-								color: $primary-color;
-								font-weight: 600;
-							}
-
+						@media(max-width:767px) {
+							padding: 15px 15px 0;
 						}
+
+						.block_inn_pr {
+							width: 100%;
+							display: flex;
+							justify-content: space-around;
+							align-items: center;
+
+							.block {
+								margin: 0 0 15px;
+
+								p {
+									width: 100%;
+									margin: 0;
+									font-size: 12px;
+									font-weight: 300;
+									color: $text-grey;
+
+									&:first-child {
+										margin: 0 0 5px;
+									}
+
+									span {
+										font-size: 24px;
+										color: $primary-color;
+										font-weight: 600;
+									}
+								}
+
+								&:last-child {
+									p {
+										span {
+											font-size: 20px;
+											color: $text-darkblue;
+										}
+									}
+								}
+							}
+						}
+
 
 						.book_btn {
 							display: inline-block;
@@ -918,6 +950,26 @@
 							font-weight: 500;
 							color: $text-lightblue;
 						}
+
+						&.block_pr {
+							&:after {
+								width: 66%;
+								height: 130%;
+								background: $paytype_bg;
+								content: '';
+								position: absolute;
+								top: -20px;
+								right: 0;
+								bottom: -20px;
+								z-index: -1;
+								border-bottom: 190px solid transparent;
+								border-left: 52px solid $background-white;
+
+								@media(max-width:767px) {
+									top: 0;
+								}
+							}
+						}
 					}
 
 					&.add_shadow {
@@ -925,6 +977,8 @@
 						position: relative;
 						z-index: 1;
 					}
+
+
 				}
 
 				.detail_info_show {
@@ -1758,6 +1812,11 @@
 					background: $background-white;
 					border-radius: 5px;
 					padding: 15px;
+					overflow: hidden;
+
+					@media(max-width:767px) {
+						height: 100%;
+					}
 
 					.row {
 						align-items: center;
@@ -1795,7 +1854,7 @@
 									text-align: left;
 									height: 100%;
 									border-right: 2px dashed rgba(63, 48, 249, 0.2);
-									padding: 0 15px;
+									padding: 0 15px 0 0;
 
 									@media(max-width:767px) {
 										border-right: none;
@@ -1942,10 +2001,8 @@
 								justify-content: center;
 								padding-bottom: 10px;
 								border-bottom: 1px solid $box-border-color;
-								margin: 0 0 10px;
+								margin: 0 0 0px;
 							}
-
-
 
 							.show_detail {
 								width: auto;
@@ -2041,29 +2098,51 @@
 						width: 100%;
 						text-align: center;
 						padding: 0 15px;
+						position: relative;
+						z-index: 9;
 
 
 						@media(max-width:767px) {
 							border-left: none;
+							padding: 15px 15px 0;
 						}
 
-						p {
+						.block_inn_pr {
 							width: 100%;
-							margin: 0 0 10px;
-							font-size: 12px;
-							font-weight: 300;
-							color: $text-grey;
+							display: flex;
+							justify-content: space-around;
+							align-items: center;
 
-							&:first-child {
-								margin: 0 0 5px;
+							.block {
+								margin: 0 0 15px;
+
+								p {
+									width: 100%;
+									margin: 0;
+									font-size: 12px;
+									font-weight: 300;
+									color: $text-grey;
+
+									&:first-child {
+										margin: 0 0 5px;
+									}
+
+									span {
+										font-size: 24px;
+										color: $primary-color;
+										font-weight: 600;
+									}
+								}
+
+								&:last-child {
+									p {
+										span {
+											font-size: 20px;
+											color: $text-darkblue;
+										}
+									}
+								}
 							}
-
-							span {
-								font-size: 28px;
-								color: $primary-color;
-								font-weight: 600;
-							}
-
 						}
 
 						.book_btn {
@@ -2107,6 +2186,27 @@
 							font-size: 12px;
 							font-weight: 500;
 							color: $text-lightblue;
+						}
+
+						&.block_pr {
+							&:after {
+								width: 66%;
+								height: 190%;
+								background: $paytype_bg;
+								content: '';
+								position: absolute;
+								top: -35%;
+								right: 0;
+								bottom: -20px;
+								z-index: -1;
+								border-bottom: 290px solid transparent;
+								border-left: 52px solid $background-white;
+								z-index: -1;
+
+								@media(max-width:767px) {
+									top: 0;
+								}
+							}
 						}
 					}
 				}
@@ -3292,7 +3392,7 @@
 							width: 100%;
 							display: block;
 							position: relative;
-							padding-left: 25px;
+							padding-left: 35px;
 							margin: 0;
 							cursor: pointer;
 							font-size: 14px;
