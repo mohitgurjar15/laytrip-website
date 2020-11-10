@@ -53,6 +53,7 @@ export class AddGuestCardComponent implements OnInit {
     this.cardDetails.expiry=moment(this.expiryDate).format('MM/YYYY');
     this.emitGuestCardDetails.emit(this.cardDetails);
   }
+  
   validateCard(event){
     if(typeof event.first_name=='undefined' || event.first_name=='')
       this.isValidFirstName=false;
