@@ -17,6 +17,8 @@ var SearchTripComponent = /** @class */ (function () {
         this.isTripNotFound = false;
     }
     SearchTripComponent.prototype.ngOnInit = function () {
+        $(document).find('.site_menu').removeClass("show");
+        window.scroll(0, 0);
         this.SearchTripForm = this.formBuilder.group({
             tripId: ['', forms_1.Validators.required]
         });
