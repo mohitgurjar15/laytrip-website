@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-search-trip',
@@ -17,6 +18,7 @@ export class SearchTripComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    $(document).find('.site_menu').removeClass("show");
     window.scroll(0,0);
     this.SearchTripForm = this.formBuilder.group({
       tripId: ['',Validators.required],
