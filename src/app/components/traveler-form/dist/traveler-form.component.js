@@ -165,7 +165,13 @@ var TravelerFormComponent = /** @class */ (function () {
         passport_expiryControl.updateValueAndValidity();
     };
     TravelerFormComponent.prototype.ngOnChanges = function (changes) {
+        var _this = this;
         if (changes['traveler']) {
+        }
+        if (this.location) {
+            var countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+            console.log(countryCode.country_name);
+            this.adultForm.controls.country_code.setValue(countryCode.country_name);
         }
     };
     TravelerFormComponent.prototype.checkUser = function () {
