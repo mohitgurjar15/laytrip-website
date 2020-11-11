@@ -29,6 +29,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { PlanSummaryComponent } from './plan-summary/plan-summary.component';
 import { AddPointsComponent } from './add-points/add-points.component';
 import { RedeemLaycreditLoaderComponent } from './redeem-laycredit-loader/redeem-laycredit-loader.component';
+import { ToasterComponent } from './toaster/toaster.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { RedeemLaycreditLoaderComponent } from './redeem-laycredit-loader/redeem
     BookingAsLoginOrGuestPopupComponent,
     PlanSummaryComponent,
     AddPointsComponent,
-    RedeemLaycreditLoaderComponent
+    RedeemLaycreditLoaderComponent,
+    ToasterComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +87,8 @@ import { RedeemLaycreditLoaderComponent } from './redeem-laycredit-loader/redeem
     BookingAsLoginOrGuestPopupComponent,
     PlanSummaryComponent,
     AddPointsComponent,
-    RedeemLaycreditLoaderComponent
+    RedeemLaycreditLoaderComponent,
+    ToasterComponent
   ],
   providers: [DatePipe],
 

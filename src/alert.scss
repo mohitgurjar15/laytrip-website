@@ -1,0 +1,205 @@
+@import "_cstm-variable.scss";
+
+.alert {
+	padding: 12px 15px;
+	box-shadow: 0px 2px 20px $alert_shadow;
+	background: $background-white;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+
+	&:before {
+		width: 5px;
+		height: calc(100% - 30px);
+		position: absolute;
+		left: 15px;
+		top: 15px;
+		content: '';
+	}
+
+	.alert_icon {
+		position: relative;
+		padding: 0 20px 0 25px;
+
+	}
+
+	.alert_message {
+		width: 100%;
+		display: flex;
+		flex-flow: column;
+
+		h6 {
+			font-size: 20px;
+			line-height: 30px;
+			font-weight: 500;
+			color: $background-blue;
+			margin: 0;
+
+			@media(max-width: 575px) {
+				font-size: 16px;
+			}
+		}
+
+		p {
+			font-size: 16px;
+			line-height: 25px;
+			font-weight: 500;
+			color: $text-grey;
+			margin: 0;
+
+			@media(max-width: 575px) {
+				font-size: 13px;
+			}
+		}
+	}
+
+	.alert_close {
+		padding-left: 15px;
+
+		a {
+			font-size: 14px;
+			color: $text-black;
+		}
+	}
+
+	&.alert_info {
+		&:before {
+			background: $info_bg;
+		}
+	}
+
+	&.alert_warning {
+		&:before {
+			background: $warning_bg;
+		}
+	}
+
+	&.alert_success {
+		&:before {
+			background: $success_bg;
+		}
+	}
+}
+
+
+.toster {
+	padding: 12px 15px;
+	box-shadow: 0px 2px 20px $alert_shadow;
+	background: $background-white;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	position: absolute;
+	z-index: 99;
+
+	&:before {
+		width: 5px;
+		height: calc(100% - 30px);
+		position: absolute;
+		left: 15px;
+		top: 15px;
+		content: '';
+	}
+
+	.alert_icon {
+		position: relative;
+		padding: 0 20px 0 25px;
+
+	}
+
+	.alert_message {
+		width: 100%;
+		display: flex;
+		flex-flow: column;
+
+		h6 {
+			font-size: 20px;
+			line-height: 30px;
+			font-weight: 500;
+			color: $background-blue;
+			margin: 0;
+
+			@media(max-width: 575px) {
+				font-size: 16px;
+			}
+		}
+
+		p {
+			font-size: 16px;
+			line-height: 25px;
+			font-weight: 500;
+			color: $text-grey;
+			margin: 0;
+
+			@media(max-width: 575px) {
+				font-size: 13px;
+			}
+		}
+	}
+
+	.alert_close {
+		padding-left: 15px;
+
+		a {
+			font-size: 14px;
+			color: $text-black;
+		}
+	}
+
+	&.toster_info {
+		&:before {
+			background: $info_bg;
+		}
+	}
+
+	&.toster_warning {
+		&:before {
+			background: $warning_bg;
+		}
+	}
+
+	&.toster_success {
+		&:before {
+			background: $success_bg;
+		}
+	}
+}
+
+.po_top_left {
+	top: 15px;
+	left: 15px;
+}
+
+.po_top_right {
+	top: 15px;
+	right: 15px;
+}
+
+.po_top_center {
+	top: 15px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.po_bottom_left {
+	bottom: 15px;
+	left: 15px;
+}
+
+.po_bottom_right {
+	bottom: 15px;
+	right: 15px;
+}
+
+.po_bottom_center {
+	bottom: 15px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.po_center {
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+}

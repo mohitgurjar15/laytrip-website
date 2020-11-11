@@ -24,7 +24,6 @@ function fileSizeValidator(file) {
 exports.fileSizeValidator = fileSizeValidator;
 function phoneCodeAndPhoneValidation() {
     return function (form) {
-        console.log(form.value.country_code);
         return (form.value.phone_no) ||
             (!form.value.phone_no)
             ? { phoneCodeAndPhoneError: true }

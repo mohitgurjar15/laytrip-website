@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie';
 
 @Injectable({
     providedIn: 'root',
@@ -7,6 +8,11 @@ import * as moment from 'moment';
 
 export class CommonFunction {
 
+    constructor(
+        private cookieService:CookieService
+    ){
+
+    }
 
     closeModal(modelBox) {
         return modelBox = false;
@@ -148,6 +154,17 @@ export class CommonFunction {
             url : '/',
             params : {}
         };
+    }
+
+    getUserCountry(){
+
+        try{
+          let countryCode = localStorage.getItem("__uorigin");
+          return countryCode || '';
+        }
+        catch(e){
+            return '';
+        }
     }
 }
 

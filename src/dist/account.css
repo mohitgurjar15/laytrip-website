@@ -124,10 +124,10 @@
   transition: 0.3s;
 }
 .account_part .account_saidbar .saidbar_menu ul li .dropdown .dropdown-menu {
-  background: transparent;
+  background: #1943FF;
   border: none;
   position: relative !important;
-  transform: none !important;
+  transform: translate3d(0px, 0, 0px) !important;
   margin: 0;
   transition: 0.3s;
 }
@@ -765,6 +765,9 @@
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .active-icon {
     display: none;
   }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .disabled-icon {
+    display: none;
+  }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active {
     border: none;
     background: #ffffff;
@@ -774,6 +777,22 @@
     display: block;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled {
+    background: #707070;
+    color: #323233;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .active-icon {
+    display: none;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .disabled-icon {
+    display: block;
+  }
+  .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .default-icon {
     display: none;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover {
@@ -1524,6 +1543,13 @@
   z-index: 9;
   overflow: hidden;
   white-space: normal;
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button.disabled {
+  background: #707070;
+  border: 1px solid #707070;
+  color: #323233;
+  pointer-events: none;
+  cursor: default;
 }
 .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button::before {
   content: "";
@@ -2752,9 +2778,8 @@
   }
 }
 .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point {
-  width: 20%;
+  width: 40%;
   font-size: 16px;
-  font-weight: 500;
   color: #FC7E66;
   font-weight: 600;
   display: flex;
@@ -2770,7 +2795,7 @@
   }
 }
 .account_part .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

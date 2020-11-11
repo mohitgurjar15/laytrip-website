@@ -40,7 +40,7 @@ export class FlightCheckoutComponent implements OnInit {
     customAmount:number | null;
     customInstalment:number | null;
     newCard;
-    guestCardDetails;
+    guestCardDetails={ first_name:'', last_name:'',card_cvv:'', card_number:'',expiry:'' };
     isFlightNotAvailable:boolean=false;
     isSessionTimeOut:boolean=false;
     isShowCardOption:boolean=true;
@@ -317,7 +317,6 @@ export class FlightCheckoutComponent implements OnInit {
       this.customAmount = data.customAmount;
       this.customInstalment = data.customInstalment;
       this.partialPaymentAmount = data.partialPaymentAmount;
-      console.log(")))))",data)
       if(this.instalmentMode=='instalment'){
         
         this.payNowAmount=Number(data.firstInstalment)-Number(this.laycreditpoints);

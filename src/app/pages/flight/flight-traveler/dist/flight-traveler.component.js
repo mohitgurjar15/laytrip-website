@@ -40,6 +40,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.payNowAmount = 0;
         this.instalmentMode = '';
         this.priceData = [];
+        this.slectedItinerary = {};
     }
     FlightTravelerComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -131,6 +132,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.selectedAdults = count;
     };
     FlightTravelerComponent.prototype.getItinerarySelectionArray = function (itinerarys) {
+        this.slectedItinerary = itinerarys;
         this._travellersCountValid = false;
         if (itinerarys.adult.length === Number(this._itinerary.adult)
             && itinerarys.child.length === Number(this._itinerary.child)
@@ -139,6 +141,10 @@ var FlightTravelerComponent = /** @class */ (function () {
         }
     };
     FlightTravelerComponent.prototype.checkTravelesValid = function () {
+        if (typeof this.slectedItinerary == 'undefined' || Object.keys(this.slectedItinerary).length == 0 || (typeof this.slectedItinerary.adult != 'undefined' && this.slectedItinerary.adult.length == 0 && this.slectedItinerary.child.length == 0 && this.slectedItinerary.infant.length == 0)) {
+            this.toastr.error('Please select itinerary', 'Invalid Criteria', { positionClass: 'toast-top-center', easeTime: 1000 });
+            return;
+        }
         if (this._travellersCountValid) {
             this.router.navigate(['/flight/checkout', this.routeCode]);
         }

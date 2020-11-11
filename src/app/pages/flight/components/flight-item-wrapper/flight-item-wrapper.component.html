@@ -38,7 +38,7 @@
                             </div>
                             <div class="block_detail_btm">
                                 <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
-                                    <a href="javascript:void(0);" class="show_more_detail"
+                                    <a  class="show_more_detail hover-link"
                                         (click)="showDetails(blockIndex)">
                                         <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                         Flight Details
@@ -57,12 +57,18 @@
                         </div>
                     </div>
                     <div class="col-md-4 px-0">
-                        <div class="block_price">
-                            <p *ngIf="item.start_price > 0">Starts from</p>
-                            <p *ngIf="item.start_price > 0">
-                                <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
-                            <!-- <a class="book_btn" href="javascript:void(0);"></a> -->
-                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">
+                        <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
+                            <div class="block_inn_pr" *ngIf="item.start_price > 0">
+                                <div class="block">
+                                    <p>Down payment</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
+                                </div>
+                                <div class="block">
+                                    <p>From 2nd week</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
+                                </div>
+                            </div>
+                            <a class="book_btn hover-link" (click)="bookNow(item)">
                                 Book Now
                             </a>
                             <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
@@ -337,7 +343,7 @@
         <div class="search_block" *ngFor="let item of flightListArray; let blockIndex = index;">
             <div class="listing_block">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <div class="block_main">
                             <div class="block_top">
                                 <div class="block_inner">
@@ -438,7 +444,7 @@
                             </div>
                             <div class="block_detail_btm">
                                 <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
-                                    <a href="javascript:void(0);" class="show_more_detail"
+                                    <a  class="show_more_detail hover-link"
                                         (click)="showDetails(blockIndex)">
                                         <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                         Flight Details
@@ -456,12 +462,20 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 px-0">
-                        <div class="block_price">
-                            <p *ngIf="item.start_price > 0">Starts from</p>
-                            <p *ngIf="item.start_price > 0">
-                                <span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span> /week</p>
-                            <a class="book_btn" href="javascript:void(0)" (click)="bookNow(item)">Book Now</a>
+
+                    <div class="col-md-4 px-0">
+                        <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
+                            <div class="block_inn_pr" *ngIf="item.start_price > 0">
+                                <div class="block">
+                                    <p>Down payment</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
+                                </div>
+                                <div class="block">
+                                    <p>From 2nd week</p>
+                                    <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
+                                </div>
+                            </div>
+                            <a class="book_btn hover-link"  (click)="bookNow(item)">Book Now</a>
                             <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
                                 partial payment</a>

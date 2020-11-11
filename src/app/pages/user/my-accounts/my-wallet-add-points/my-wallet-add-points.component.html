@@ -15,7 +15,7 @@
                     (selectCreditCard)="selectCreditCard($event)" (totalNumberOfcard)="totalNumberOfcard($event)">
                   </app-card-list>
                   <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
-                    <a href="javascript:void(0);" (click)="toggleAddcardForm()">+ Add New Card</a>
+                    <a class="hover-link" (click)="toggleAddcardForm()">+ Add New Card</a>
                   </div>
                   <app-add-card *ngIf="userInfo.roleId!=7 && showAddCardForm" (emitNewCard)="emitNewCard($event)">
                   </app-add-card>
@@ -35,9 +35,12 @@
               </li> -->
             </ul>
             <div class="btn_payment">
-              <a class="btn btn_laytrip" href="javascript:void(0);" (click)="addPoints()">
+              <!-- <a class="btn btn_laytrip" href="javascript:void(0);" (click)="addPoints()">
                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>Add Points <img
-                  src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                  src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a> -->
+              <button class="btn btn_laytrip" [disabled]="isDisableAddButton" (click)="addPoints()"><i
+                  class="fa fa-spinner fa-spin" *ngIf="loading"></i> Add Points <img
+                  src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
             </div>
           </div>
         </div>

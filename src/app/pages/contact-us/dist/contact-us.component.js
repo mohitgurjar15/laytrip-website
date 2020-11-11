@@ -11,25 +11,31 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
 var ContactUsComponent = /** @class */ (function () {
-    function ContactUsComponent(formBuilder, toastr, genericService, commonFunction) {
+    function ContactUsComponent(formBuilder, toastr, genericService, commonFunction, cookieService) {
         this.formBuilder = formBuilder;
         this.toastr = toastr;
         this.genericService = genericService;
         this.commonFunction = commonFunction;
+        this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
         this.countries_code = [];
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
+        this.getCountry();
+        var location = this.cookieService.get('__loc');
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) { }
         this.contactUsForm = this.formBuilder.group({
-            name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            country_code: ['Select'],
-            phone_no: ['', [forms_1.Validators.required]],
+            name: ['', [forms_1.Validators.required]],
+            country_code: [''],
+            phone_no: [''],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             message: ['', [forms_1.Validators.required]]
         });
-        this.getCountry();
     };
     ContactUsComponent.prototype.getCountry = function () {
         var _this = this;
@@ -39,9 +45,14 @@ var ContactUsComponent = /** @class */ (function () {
                     id: country.id,
                     name: country.phonecode + ' (' + country.iso2 + ')',
                     code: country.phonecode,
+                    country_name: country.name + ' ' + country.phonecode,
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
             });
+            if (_this.location) {
+                var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+                _this.contactUsForm.controls.country_code.setValue(countryCode.country_name);
+            }
         });
     };
     ContactUsComponent.prototype.onSubmit = function (formValue) {
@@ -54,7 +65,7 @@ var ContactUsComponent = /** @class */ (function () {
             this.loading = false;
             return;
         }
-        formValue.country_code = formValue.country_code.code;
+        formValue.country_code = formValue.country_code.id;
         this.genericService.createEnquiry(formValue).subscribe(function (res) {
             _this.loading = false;
             _this.toastr.success(res.message, 'Success');

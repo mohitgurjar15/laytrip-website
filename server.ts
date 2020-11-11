@@ -9,7 +9,13 @@ import * as express from 'express';
 import {join} from 'path';
 import 'localstorage-polyfill'
 
+const domino = require('domino');
+const fs = require('fs');
+const template = fs.readFileSync('dist/browser/index.html').toString();
+const window = domino.createWindow(template);
+
 global['localStorage'] = localStorage;
+global['window'] = window;
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();

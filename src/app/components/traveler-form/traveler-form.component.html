@@ -59,7 +59,7 @@
       <div class="form_field half">
         <label>First Name<sup>*</sup></label>
         <div class="text_field">
-          <input type="text" formControlName="firstName" maxlength="80" tabindex="1" placeholder="Enter First Name">
+          <input type="text" formControlName="firstName" maxlength="80" tabindex="1" placeholder="Enter first name">
           <input type="hidden" formControlName="user_type" #var [value]="type">
           <div *ngIf="(submitted  || adultForm.controls.firstName.touched) && adultForm.controls.firstName.errors"
             class="focus-input100 login-error">
@@ -72,7 +72,7 @@
       <div class="form_field half">
         <label>Last Name<sup>*</sup></label>
         <div class="text_field">
-          <input type="text" formControlName="lastName" maxlength="20" tabindex="2" placeholder="Enter Last Name">
+          <input type="text" formControlName="lastName" maxlength="20" tabindex="2" placeholder="Enter last name">
         </div>
         <div *ngIf="(submitted  || adultForm.controls.lastName.touched) && adultForm.controls.lastName.errors"
           class="focus-input100 login-error">
@@ -88,7 +88,7 @@
         <label>Email<sup>*</sup></label>
         <div class="text_field">
           <input type="email" [readonly]="traveler.userId" formControlName="email" maxlength="50" tabindex="3"
-            placeholder="Enter Your Email">
+            placeholder="Enter your email">
         </div>
         <div *ngIf="(submitted  || adultForm.controls.email.touched) && adultForm.controls.email.errors"
           class="focus-input100 login-error">
@@ -108,7 +108,7 @@
             <div class="code">
               <div class="dropdown">
                 <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true" [items]="countries_code"
-                bindLabel="country_name" clearSearchOnAdd="true" formControlName="country_code" placeholder="Select Country Code">
+                bindLabel="country_name" clearSearchOnAdd="true" formControlName="country_code" placeholder="Select country code">
 
                 <ng-template ng-label-tmp let-item="item" clearAllText="sd"  let-clear="clear">
                   <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.country_name ? item.country_name :  'Select country code' }} </span>
@@ -159,6 +159,7 @@
               [monthNavigator]="true"
               [yearRange]="minyear"
               [defaultDate]="dobMaxDate"
+              placeholder="Enter date of birth"
               >
           </p-calendar>
         </div>
@@ -172,7 +173,7 @@
         <label>Nationality<sup>*</sup></label>
         <div class="text_field custom-select">
           <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="7" [selectOnTab]="true"
-            formControlName="country_id" selectOnTab="true" placeholder="Select Nationality">
+            formControlName="country_id" selectOnTab="true" placeholder="Select nationality">
             <ng-template ng-label-tmp let-item="item" let-clear="clear">
               <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select country' }} </span>
               <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
@@ -202,7 +203,7 @@
                 [minDate]="passportMaxDate"             
                 [yearNavigator]="true"
                 [monthNavigator]="true"
-                placeholder="Passport Expiry"
+                placeholder="Enter passport expiry"
                 yearRange="2020:2050"
                 [defaultDate]="passportMaxDate"
                 panelStyleClass="calender-passport-expiry"
@@ -221,7 +222,7 @@
         <label>Passport Number<sup *ngIf="is_passport_required && type!='infant'">*</sup></label>
         <div class="text_field">
           <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
-            placeholder="Passport Number">
+            placeholder="Enter passport number">
         </div>
         <div
           *ngIf="(submitted  || adultForm.controls.passport_number.touched) && adultForm.controls.passport_number.errors"

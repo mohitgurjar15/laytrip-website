@@ -38,7 +38,8 @@ export class FlightTravelerComponent implements OnInit {
   payNowAmount:number=0;
   instalmentMode:string='';
   priceData=[];
-
+  laycreditpoints:number;
+  slectedItinerary:any={};
   
   constructor(
     private travelerService:TravelerService,
@@ -66,6 +67,7 @@ export class FlightTravelerComponent implements OnInit {
     console.log("customInstalmentData",customInstalmentData)
     
     this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
+    this.laycreditpoints = customInstalmentData.layCreditPoints;
     this.instalmentMode=atob(sessionStorage.getItem('__insMode'))
     this.showPartialPayemntOption= this.instalmentMode=='instalment'?true:false;
     if(this.instalmentMode=='no-instalment'){
@@ -156,17 +158,21 @@ export class FlightTravelerComponent implements OnInit {
   }
 
   getItinerarySelectionArray(itinerarys){  
+    this.slectedItinerary = itinerarys;
     this._travellersCountValid = false;
     if(itinerarys.adult.length === Number(this._itinerary.adult)
     && itinerarys.child.length === Number(this._itinerary.child) 
     && itinerarys.infant.length === Number(this._itinerary.infant)
     ){
       this._travellersCountValid = true;
-    }
+    } 
   }
 
   checkTravelesValid() {
-
+    if(typeof this.slectedItinerary == 'undefined' || Object.keys(this.slectedItinerary).length == 0 || (typeof this.slectedItinerary.adult != 'undefined' && this.slectedItinerary.adult.length == 0 && this.slectedItinerary.child.length == 0 && this.slectedItinerary.infant.length == 0)) {
+      this.toastr.error('Please select itinerary', 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
+      return;
+    }
     if(this._travellersCountValid ){
       this.router.navigate(['/flight/checkout',this.routeCode]);
     } else {

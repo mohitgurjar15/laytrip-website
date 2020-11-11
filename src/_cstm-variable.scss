@@ -61,6 +61,7 @@ $bg-summary-one : rgba(252, 126, 102, 1);
 $bg-summary-two : rgba(1, 33, 120, 1);
 $bg-light-green : rgba(25, 221, 0, 0.1);
 $bg-popup-one : rgba(0, 191, 253, 1);
+$paytype_bg : rgba(0, 174, 239, 0.08);
 
 $fb-bg : #EEF1F6;
 $fb-bg-border : rgba(24, 84, 207, 0.15);
@@ -96,11 +97,16 @@ $grey_light : #F5F4FA;
 $disabled-text : #323233;
 $switch_active_bg : #ced8fb;
 $switch_bg : #0c4efe;
+$alert_shadow : rgba(0, 0, 0, 0.18);
 
 
 $fb-loader-bg : #F6F6F6;
 $fb-loader-colorone : #f8f8f8;
 $fb-loader-colortwo : #DBDBDB;
+
+$info_bg: #2F86EB;
+$warning_bg: #FFC021;
+$success_bg: #47D764;
 
 
 $item-width: 65vw;

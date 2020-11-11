@@ -23,9 +23,7 @@
                     <input type="text" formControlName="last_name" maxlength="20" tabindex="101"
                         placeholder="Enter last name">
                     <div *ngIf="cardForm.controls.last_name.errors && cardForm.controls.last_name.touched">
-                        <p *ngIf="cardForm.controls.last_name.errors" class="error_text">Please enter your
-                            last
-                            name.
+                        <p *ngIf="cardForm.controls.last_name.errors" class="error_text">Please enter yourlast name.
                         </p>
                     </div>
                 </div>
@@ -95,7 +93,7 @@
 
         <div class="form_btn">
             <button type="submit">
-                <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin"></i>Add card</button>
+                <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin"></i>Add Card</button>
         </div>
     </div>
 </form>

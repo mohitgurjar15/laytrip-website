@@ -76,12 +76,12 @@ export class ProfileComponent implements OnInit {
       this.location = JSON.parse(location);
     }catch(e){}
     
-   
+
     this.profileForm = this.formBuilder.group({
         title: ['mr'],
         first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
         last_name: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-        country_id: [this.location.country.name ? this.location.country.name : ''],
+        country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
         dob: ['', Validators.required],
         country_code: [''],
         phone_no: [''],
@@ -124,8 +124,10 @@ export class ProfileComponent implements OnInit {
           flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
         }
       });
-      const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-      this.profileForm.controls.country_code.setValue(countryCode.country_name);
+      if(this.location){
+        const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+        this.profileForm.controls.country_code.setValue(countryCode.country_name);
+      }
       
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
@@ -187,6 +189,7 @@ export class ProfileComponent implements OnInit {
     if(!fileSizeValidator(event.target.files[0])){
         this.imageFileError = true;
         this.imageErrorMsg = 'Please select file up to 2mb size';
+        this.toastr.error(this.imageErrorMsg, 'Profile Error');
         return;
     }
     //file render
@@ -206,16 +209,21 @@ export class ProfileComponent implements OnInit {
 
       this.is_type = res.gender ? res.gender :'M';
       this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
-      
-      const country = res.country.id ? res.country : this.location.country;
-      
-      this.getStates(country);
+      if(typeof this.location != 'undefined' || typeof res.country.id != 'undefined'){
+        const country = res.country.id ? res.country : this.location.country;
+        if(typeof country != 'undefined')              
+        this.getStates(country);
+      }
 
       let  countryCode  = '';
       if(typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode){
         countryCode = this.countries_code.filter(item => item.id == res.countryCode)[0];
       } else {
-         countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
+         countryCode = typeof this.location != 'undefined' ? this.countries_code.filter(item => item.id == this.location.country.id)[0] : '';      
+      }
+      let countryName = '';
+      if(typeof this.location != 'undefined'){
+        countryName = this.location.country.name;
       }
       this.profileForm.patchValue({      
           first_name: res.firstName,
@@ -227,7 +235,7 @@ export class ProfileComponent implements OnInit {
           dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
           country_code : countryCode,        
           phone_no  : res.phoneNo,        
-          country_id: res.country.name ? res.country.name : this.location.country.name,
+          country_id: res.country.name ? res.country.name :countryName,
           state_id: res.state.name,       
           city_name  : res.cityName,        
           address  : res.address,  

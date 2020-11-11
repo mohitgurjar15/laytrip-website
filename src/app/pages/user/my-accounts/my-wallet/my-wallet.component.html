@@ -8,21 +8,27 @@
                 <div class="account_cnt_main ac_notifications ac_mywallet">
                     <div class="block_laycredit_points">
                         <div class="block_points_info">
-                            <ul *ngIf="pointsLoading"><li><p class="fb_animation w-100 mb-0"></p></li>
-                                <li><p class="fb_animation w-100 mb-0"></p></li></ul>
-                            <ul *ngIf="travellerPoints">
+                            <ul *ngIf="pointsLoading">
                                 <li>
+                                    <p class="fb_animation w-100 mb-0"></p>
+                                </li>
+                               <!--  <li>
+                                    <p class="fb_animation w-100 mb-0"></p>
+                                </li> -->
+                            </ul>
+                            <ul *ngIf="travellerPoints">
+                                <!-- <li>
                                     <span>Current</span>
                                     <div class="block_point">
                                         Laycredit points
                                         <p>{{travellerPoints.total_available_points | number : '1.2-2'  || 0}}</p>
                                     </div>
-                                </li>
+                                </li> -->
                                 <li>
                                     <span>Total</span>
                                     <div class="block_point">
-                                        Earning Laycredit points
-                                        <p>{{travellerPoints.total_earned_points | number : '1.2-2' || 0}}</p>
+                                        Available Laycredit points
+                                        <p>{{travellerPoints.total_available_points | number : '1.2-2' || 0}}</p>
                                     </div>
                                 </li>
                             </ul>
@@ -44,7 +50,7 @@
                         <ul id="my_wallet_tabs" class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a href="#Earnings" class="nav-link active" data-toggle="tab" role="tab">
-                                    Earnings
+                                    Top Up
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -68,67 +74,50 @@
                                     role="tabpanel" aria-labelledby="heading-Earnings">
                                     <div class="card-body">
                                         <div class="block_nocard_available" *ngIf="isEarningPointNotFound">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg" alt="Card Icon">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg"
+                                                alt="Card Icon">
                                             <h5>No Lay points available</h5>
                                         </div>
                                         <div class="block_notification">
                                             <div *ngIf="loading">
-                                                <div class="block_list">
-                                                    <ul>
-                                                        <li class="text_clr_orange w-100">
+                                                <div class="block_list" *ngFor="let index of [0,1,2,3,4,5]">
+                                                    <div class="block_point">
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                    </div>
+                                                    <div class="block_point_info">
+                                                        <div class="block_point_left">
                                                             <p class="fb_animation w-100 mb-0"></p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="block_list">
-                                                    <ul>
-                                                        <li class="text_clr_orange w-100">
+                                                        </div>
+                                                        <div class="block_point_right">
                                                             <p class="fb_animation w-100 mb-0"></p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="block_list">
-                                                    <ul>
-                                                        <li class="text_clr_orange w-100">
-                                                            <p class="fb_animation w-100 mb-0"></p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="block_list">
-                                                    <ul>
-                                                        <li class="text_clr_orange w-100">
-                                                            <p class="fb_animation w-100 mb-0"></p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="block_list">
-                                                    <ul>
-                                                        <li class="text_clr_orange w-100">
-                                                            <p class="fb_animation w-100 mb-0"></p>
-                                                        </li>
-                                                    </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                            <div class="block_list" *ngFor="let item of earnedPoints; let i = index;">
-                                                <ul>
-                                                    <li>{{i+1}}</li>
-                                                    <li class="text_clr_orange">
+                                            <div *ngIf="!loading">
+                                                <div class="block_list"
+                                                    *ngFor="let item of earnedPoints; let i = index;">
+                                                    <div class="block_point">
                                                         <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
                                                             alt="">
                                                         {{item.points}} Points
-                                                    </li>
-                                                    <li>{{ getDateFormat(item.earnDate) }}</li>
-                                                </ul>
+                                                    </div>
+                                                    <div class="block_point_info">
+                                                        <div class="block_point_left">Money Added</div>
+                                                        <div class="block_point_right">
+                                                            <span>{{ getDateFormat(item.earnDate) }}</span></div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="pagination_main">  
+                                            <div class="pagination_main">
                                                 <div class="pagination_result">
                                                     <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
-                                                </div>        
+                                                </div>
                                                 <div class="pagination_list">
-                                                    <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
-                                                    [(page)]="page" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
-                                                    (pageChange)="pageChange($event)">
+                                                    <ngb-pagination *ngIf="showPaginationBar"
+                                                        class="d-flex justify-content-end" [collectionSize]="totalItems"
+                                                        [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"
+                                                        [maxSize]="5" [rotate]="true" (pageChange)="pageChange($event)">
                                                     </ngb-pagination>
                                                 </div>
                                             </div>
@@ -150,7 +139,8 @@
                                     role="tabpanel" aria-labelledby="heading-Redeemed">
                                     <div class="card-body">
                                         <div class="block_nocard_available" *ngIf="isRedeedemPointNotFound">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg" alt="Card Icon">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/Ic_no_creditcard_available.svg"
+                                                alt="Card Icon">
                                             <h5>No Lay points available</h5>
                                         </div>
                                         <div class="block_notification">
@@ -192,26 +182,30 @@
                                                 </div>
                                             </div>
                                             <div *ngIf="!reedemloading">
-                                                <div class="block_list" *ngFor="let item of redeemedPoints; let i = index;">
-                                                    <ul>
-                                                        <li>{{i+1}}</li>
-                                                        <li class="text_clr_orange">
-                                                            <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
-                                                                alt="">
-                                                            {{item.points}} Points
-                                                        </li>
-                                                        <li>{{ getDateFormat(item.redeemDate) }}</li>
-                                                    </ul>
-                                                </div>   
-                                            </div>                                        
-                                            <div class="pagination_main">  
+                                                <div class="block_list"
+                                                    *ngFor="let item of redeemedPoints; let i = index;">
+                                                    <div class="block_point">
+                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_points_orange.svg"
+                                                            alt="">
+                                                        {{item.points}} Points
+                                                    </div>
+                                                    <div class="block_point_info">
+                                                        <div class="block_point_left">Money Added</div>
+                                                        <div class="block_point_right">
+                                                            <span>{{ getDateFormat(item.redeemDate) }}</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pagination_main">
                                                 <div class="pagination_result">
                                                     <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
-                                                </div>        
+                                                </div>
                                                 <div class="pagination_list">
-                                                    <ngb-pagination *ngIf="showReedemPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalReedemItems"
-                                                    [(page)]="page2" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
-                                                    (pageChange)="reedemPageChange($event)">
+                                                    <ngb-pagination *ngIf="showReedemPaginationBar"
+                                                        class="d-flex justify-content-end"
+                                                        [collectionSize]="totalReedemItems" [(page)]="page2"
+                                                        [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5"
+                                                        [rotate]="true" (pageChange)="reedemPageChange($event)">
                                                     </ngb-pagination>
                                                 </div>
                                             </div>

@@ -12,23 +12,19 @@
                     <div class="block_top" *ngIf="!isLoggedIn">
                         <div class="block_inner">
                             <h5>Quickly add travellers from your added list</h5>
-                            <a href="javascript:void(0);"  data-toggle="modal" data-target="#sign_in_modal">Sign In to Continue</a>
+                            <a class="hover-link"  data-toggle="modal" data-target="#sign_in_modal">Sign In to Continue</a>
                         </div>
                     </div>
                     <div class="block_passanger_info">
-                         <div class="block_title_section" *ngIf="travelers.length">
-                            <h5>Passenger Info</h5>
-                            <span>({{selectedAdults}}/{{totalTraveler}} selected)</span>
-                        </div>
-                        <div class="passanger_detail_main">
-                            <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler"  [_adults]="_adults" [_childs]="_childs" [_infants]="_infants" [travelers]="travelers" (adultsCount)="getAdultCount($event)"
+                         
+                        <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler"  [_adults]="_adults" [_childs]="_childs" [_infants]="_infants" [travelers]="travelers" (adultsCount)="getAdultCount($event)"
                             (_itinerarySelectionArray)="getItinerarySelectionArray($event)"></app-adult-list>
-                        </div>
+                        
                     </div>
                     
                     <div class="btn_payment">
                         <a class="btn btn_laytrip" (click)="checkTravelesValid()" >
-                            Continue to payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow">
+                            Continue To Payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow">
                           </a>
                     </div>
                 </div>
@@ -39,6 +35,7 @@
                     *ngIf="priceData.length"
                     [priceData]="priceData"
                     checkAvailability="local" 
+                    [laycreditpoints]="laycreditpoints"
                     (flightAvailable)="flightAvailable($event)" 
                     [showPartialPayemntOption]="showPartialPayemntOption" 
                     partialPaymentAmount={{partialPaymentAmount}}

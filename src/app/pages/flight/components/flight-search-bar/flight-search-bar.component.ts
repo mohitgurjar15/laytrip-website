@@ -21,6 +21,7 @@ export class FlightSearchBarComponent implements OnInit {
   flightSearchForm: FormGroup;
   monthYearArr=[];
   isCalenderPriceLoading:boolean=true;
+  countryCode:string='';
 
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   isRoundTrip = false;
@@ -141,6 +142,8 @@ export class FlightSearchBarComponent implements OnInit {
     else{
       this.flightReturnMinDate = new Date(this.departureDate);
     }
+
+    this.countryCode= this.commonFunction.getUserCountry();
   }
 
   ngOnInit() {

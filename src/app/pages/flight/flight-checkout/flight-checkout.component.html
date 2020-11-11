@@ -11,7 +11,7 @@
                               <h6>Travellers</h6>
                               <div class="traveller_detail" *ngFor="let traveler of travelerList">
                                   <span>{{traveler.firstName}} {{traveler.lastName}}</span>
-                                  <a href="javascript:void(0);">Send E-ticket</a>
+                                  <!-- <a href="javascript:void(0);">Send E-ticket</a> -->
                               </div>
                           </div>
                         </div>
@@ -74,7 +74,7 @@
                               <div class="block_detail">
                                   <app-card-list *ngIf="userInfo.roleId!=7"  [newCard]="newCard" (selectCreditCard)="selectCreditCard($event)" (totalNumberOfcard)="totalNumberOfcard($event)"></app-card-list>
                                   <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
-                                      <a href="javascript:void(0);" (click)="toggleAddcardForm()" >+ Add New Card</a>
+                                      <a class="hover-link" (click)="toggleAddcardForm()" >+ Add New Card</a>
                                   </div>
                                   <app-add-card *ngIf="userInfo.roleId!=7 && showAddCardForm" (emitNewCard)="emitNewCard($event)"></app-add-card>
                                   <app-add-guest-card *ngIf="userInfo.roleId==7 && showAddCardForm" (emitGuestCardDetails)="emitGuestCardDetails($event)" [validateCardDetails]="validateCardDetails"></app-add-guest-card>
@@ -109,6 +109,7 @@
             <app-flight-summary 
                 *ngIf="priceData.length"
                 [priceData]="priceData"
+                [laycreditpoints]="laycreditpoints"
                 (flightAvailable)="flightAvailable($event)" 
                 [showPartialPayemntOption]="showPartialPayemntOption" 
                 (getRouteDetails)="getFlightSummaryData($event)" 

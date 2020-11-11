@@ -33,14 +33,14 @@
       <div class="block_point_right">
         <label>Amount*</label>
         <div class="block_amount">
-          <input type="number" step=".01" maxlength="10"
-            placeholder="{{currency.symbol}}100" formControlName="custom_add_points"
+          <input type="number" step=".01" maxlength="10"  placeholder="100"
+            formControlName="custom_add_points"
             (keyup)="addPointsForm.controls.default_add_points.setValue('');addCusomPoint(addPointsForm.value)">
           <div
             *ngIf="addPointsForm.controls.custom_add_points.errors && addPointsForm.controls.custom_add_points.touched">
-            <p *ngIf="addPointsForm.controls.custom_add_points.errors.min" class="text-danger">Amount should be a
-              atleast
+            <p *ngIf="addPointsForm.controls.custom_add_points.errors.min" class="text-danger">Amount should be at least
               {{currency.symbol}}10</p>
+            <!-- <p *ngIf="addPointsForm.controls.custom_add_points.errors.pattern" class="text-danger">Please enter valid amount</p> -->
           </div>
         </div>
       </div>

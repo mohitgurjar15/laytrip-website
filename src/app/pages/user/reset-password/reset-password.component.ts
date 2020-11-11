@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { MustMatch } from '../../../_helpers/must-match.validators';
+import { optValidation } from '../../../_helpers/custom.validators';
 
 declare var $: any;
 
@@ -49,7 +50,8 @@ export class ResetPasswordComponent implements OnInit {
       otp5: ['', Validators.required],
       otp6: ['', Validators.required],
     },{
-      validator: MustMatch('new_password', 'confirm_password'),
+      validator: [MustMatch('new_password', 'confirm_password'),optValidation()]
+     
     });
   }
 
@@ -85,9 +87,7 @@ export class ResetPasswordComponent implements OnInit {
     this.submitted = this.loading = true;
     
     if (this.resetForm.invalid) {
-      console.log(this.resetForm.controls)
-      if(inputDataOtp.length < 6){
-        console.log('error')
+      if(inputDataOtp.length != 6){
         this.errorMessage = "Please enter OTP.";
       }
      
@@ -108,6 +108,15 @@ export class ResetPasswordComponent implements OnInit {
         this.resetSuccess = this.submitted = this.loading  = false;
         this.apiMessage = error.error.message;
       });
+    }
+  }
+
+  onKeydown(event){
+    console.log(event.key)
+    const tabIndex = event.target.tabIndex ? '.tab'+(event.target.tabIndex-1): 1;
+    if(event.key == 'Backspace'){
+      $(tabIndex).focus();
+      $('.tab'+event.target.tabIndex).val('');
     }
   }
 }

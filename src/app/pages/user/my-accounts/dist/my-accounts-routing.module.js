@@ -21,6 +21,7 @@ var search_trip_component_1 = require("./search-trip/search-trip.component");
 var list_traveller_component_1 = require("./travellers/list-traveller.component");
 var plan_subscription_component_1 = require("./plan-subscription/plan-subscription.component");
 var view_history_component_1 = require("./payment-history/view-history/view-history.component");
+var my_wallet_add_points_component_1 = require("./my-wallet-add-points/my-wallet-add-points.component");
 var routes = [
     {
         path: '',
@@ -71,9 +72,13 @@ var routes = [
         component: flight_trip_detail_component_1.FlightTripDetailComponent
     },
     {
-        path: 'my-wallet',
+        path: 'lay-credit-points',
         component: my_wallet_component_1.MyWalletComponent
     },
+    {
+        path: 'my-wallet/add-points',
+        component: my_wallet_add_points_component_1.MyWalletAddPointsComponent
+    }
 ];
 var MyAccountsRoutingModule = /** @class */ (function () {
     function MyAccountsRoutingModule() {

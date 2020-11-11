@@ -23,6 +23,9 @@ var AdultListComponent = /** @class */ (function () {
         this._childs = [];
         this._infants = [];
         this.counter = 0;
+        this.adultCounter = 0;
+        this.childCounter = 0;
+        this.infantCounter = 0;
         this.totalTravelerCount = 0;
         this._travelers = [];
         this._selectedId = [];
@@ -40,6 +43,7 @@ var AdultListComponent = /** @class */ (function () {
         this.adultCollapse = false;
         this.count = 0;
         this.random = 0;
+        this._itinerary = [];
         this.countries = [];
         this.countries_code = [];
         this.containers = [];
@@ -48,17 +52,25 @@ var AdultListComponent = /** @class */ (function () {
             child: [],
             infant: []
         };
+        this.totalAdult = 0;
+        this.countChild = 0;
     }
     AdultListComponent.prototype.ngOnInit = function () {
         this.checkUser();
         this.getCountry();
+        var _itinerary = sessionStorage.getItem('_itinerary');
+        try {
+            this._itinerary = _itinerary ? JSON.parse(_itinerary) : this._itinerary;
+        }
+        catch (e) { }
         if (this.type == 'adult' && !this.isLoggedIn) {
             this.showAddAdultForm = true;
         }
     };
-    AdultListComponent.prototype.selectTraveler = function (event, traveler) {
-        this._itinerary = sessionStorage.getItem('_itinerary') ? JSON.parse(sessionStorage.getItem('_itinerary')) : '';
-        var totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
+    AdultListComponent.prototype.selectItinerary = function (event, traveler) {
+        var totalAdult = Number(this._itinerary.adult);
+        var totalChild = Number(this._itinerary.child);
+        var totalInfant = Number(this._itinerary.infant);
         if (this._itinerary) {
             if (event.target.checked) {
                 var travelerData = {
@@ -69,15 +81,33 @@ var AdultListComponent = /** @class */ (function () {
                 };
                 this._travelers.push(travelerData);
                 this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-                if (this.counter + 1 < totalTraveler) {
+                if (this.adultCounter + 1 < totalAdult && traveler.user_type == 'adult') {
+                    this.adultCounter++;
                     // this.checkBoxDisable = false;
-                    this.counter++;
                 }
                 else {
-                    if (this.counter + 1 == totalTraveler) {
-                        this.counter++;
+                    if (this.adultCounter + 1 == totalAdult && traveler.user_type == 'adult') {
+                        this.adultCounter++;
+                        // this.checkBoxDisable = true;                
                     }
-                    // this.checkBoxDisable = true;                
+                }
+                if (this.childCounter + 1 < totalChild && traveler.user_type == 'child') {
+                    this.childCounter++;
+                    // this.checkBoxDisable = false;
+                }
+                else {
+                    if (this.childCounter + 1 == totalChild && traveler.user_type == 'child') {
+                        this.childCounter++;
+                        // this.checkBoxDisable = true;                
+                    }
+                }
+                if (this.infantCounter + 1 < totalInfant && traveler.user_type == 'infant') {
+                    this.infantCounter++;
+                }
+                else {
+                    if (this.infantCounter + 1 == totalInfant && traveler.user_type == 'infant') {
+                        this.infantCounter++;
+                    }
                 }
                 if (traveler.user_type == 'adult') {
                     this._itinerarySelection.adult.push(traveler.userId);
@@ -85,32 +115,35 @@ var AdultListComponent = /** @class */ (function () {
                 else if (traveler.user_type == 'child') {
                     this._itinerarySelection.child.push(traveler.userId);
                 }
-                else {
+                else if (traveler.user_type == 'infant') {
                     this._itinerarySelection.infant.push(traveler.userId);
                 }
             }
             else {
-                console.log(this.counter, totalTraveler);
-                if (this.counter >= totalTraveler || this.counter <= totalTraveler) {
-                    this.counter--;
-                }
                 // this.checkBoxDisable = false;
                 this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
                 this.cookieService.remove('_travelers');
                 this.cookieService.put("_travelers", JSON.stringify(this._travelers));
                 if (traveler.user_type == 'adult') {
+                    if (this.adultCounter >= totalAdult || this.adultCounter <= totalAdult) {
+                        this.adultCounter--;
+                    }
                     this._itinerarySelection.adult = this._itinerarySelection.adult.filter(function (obj) { return obj !== traveler.userId; });
                 }
                 else if (traveler.user_type == 'child') {
+                    if (this.childCounter >= totalChild || this.childCounter <= totalChild) {
+                        this.childCounter--;
+                    }
                     this._itinerarySelection.child = this._itinerarySelection.child.filter(function (obj) { return obj !== traveler.userId; });
                 }
-                else {
-                    this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
+                else if (traveler.user_type == 'infant') {
+                    if (this.infantCounter >= totalInfant || this.infantCounter <= totalInfant) {
+                        this.infantCounter--;
+                    }
+                    this._itinerarySelection.child = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
                 }
             }
-            console.log(this.counter);
         }
-        this.adultsCount.emit((this.counter));
         this._itinerarySelectionArray.emit(this._itinerarySelection);
     };
     AdultListComponent.prototype.getRandomNumber = function (i) {

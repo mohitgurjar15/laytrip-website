@@ -66,7 +66,7 @@ var ProfileComponent = /** @class */ (function () {
             title: ['mr'],
             first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            country_id: [this.location.country.name ? this.location.country.name : ''],
+            country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
             country_code: [''],
             phone_no: [''],
@@ -104,8 +104,10 @@ var ProfileComponent = /** @class */ (function () {
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
-            var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-            _this.profileForm.controls.country_code.setValue(countryCode.country_name);
+            if (_this.location) {
+                var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+                _this.profileForm.controls.country_code.setValue(countryCode.country_name);
+            }
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);
@@ -163,6 +165,7 @@ var ProfileComponent = /** @class */ (function () {
         if (!custom_validators_1.fileSizeValidator(event.target.files[0])) {
             this.imageFileError = true;
             this.imageErrorMsg = 'Please select file up to 2mb size';
+            this.toastr.error(this.imageErrorMsg, 'Profile Error');
             return;
         }
         //file render
@@ -181,14 +184,21 @@ var ProfileComponent = /** @class */ (function () {
             _this.selectResponse = res;
             _this.is_type = res.gender ? res.gender : 'M';
             _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
-            var country = res.country.id ? res.country : _this.location.country;
-            _this.getStates(country);
+            if (typeof _this.location != 'undefined' || typeof res.country.id != 'undefined') {
+                var country = res.country.id ? res.country : _this.location.country;
+                if (typeof country != 'undefined')
+                    _this.getStates(country);
+            }
             var countryCode = '';
             if (typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode) {
                 countryCode = _this.countries_code.filter(function (item) { return item.id == res.countryCode; })[0];
             }
             else {
-                countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
+                countryCode = typeof _this.location != 'undefined' ? _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0] : '';
+            }
+            var countryName = '';
+            if (typeof _this.location != 'undefined') {
+                countryName = _this.location.country.name;
             }
             _this.profileForm.patchValue({
                 first_name: res.firstName,
@@ -200,7 +210,7 @@ var ProfileComponent = /** @class */ (function () {
                 dob: res.dob ? moment(res.dob).format('MM/DD/YYYY') : '',
                 country_code: countryCode,
                 phone_no: res.phoneNo,
-                country_id: res.country.name ? res.country.name : _this.location.country.name,
+                country_id: res.country.name ? res.country.name : countryName,
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
