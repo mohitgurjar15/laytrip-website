@@ -85,6 +85,8 @@ export class PaymentModeComponent implements OnInit {
   payNowPrice:number=0;
   discountedPrice:number;
   totalPrice;
+  secondAccordiain:boolean=false;
+  showThirdAccrodian:boolean=false;
 
   ngOnInit(){
     
@@ -136,8 +138,16 @@ export class PaymentModeComponent implements OnInit {
     
   }
 
+  toggleSecondAccordian(){
+    this.secondAccordiain= !this.secondAccordiain;
+  }
+
   toggleaccordin(){
     this.showFirstAccrodian = !this.showFirstAccrodian;
+  }
+
+  toggleThirdAccordian(){
+    this.showThirdAccrodian = !this.showThirdAccrodian;
   }
 
   /* changeAdditionalAmount(event){

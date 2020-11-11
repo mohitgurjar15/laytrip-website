@@ -1,11 +1,25 @@
 <!--  Start Banner Section-->
-<section class="home_banner">
+<section class="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
     <div class="container banner_inner">
         <div class="banner_text">
-            <h2>Welcome to <span>LayTrip!</span></h2>
-            <p>Travel without stressing your wallet</p>
+            <div class="block_left">
+                <h2>Welcome to <span>LayTrip!</span></h2>
+                <p>Travel without stressing your wallet</p>
+            </div>
+
+            <div class="block_right" *ngIf="countryCode=='DR'">
+                <img src="{{s3BucketUrl}}assets/images/dominican_republic_logo.svg" alt="Dominican Republic">
+                <span>Dominican Republic has it all</span>
+            </div>
         </div>
+        
+
         <div class="banner_tab">
+            <div class="block_dr_text" *ngIf="countryCode=='DR'">
+                Dominican Republic has it all, get it with Partial Payments
+                <span>República Dominicana lo tiene todo, consíguelo con pagos flexibles</span>
+            </div>
+            
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab"

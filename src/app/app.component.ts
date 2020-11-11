@@ -22,7 +22,7 @@ export class AppComponent {
   setUserOrigin(){
 
     let host = window.location.origin;
-    if(host.includes("dr.") || host.includes("loc")){
+    if(host.includes("dr.")){
       localStorage.setItem('__uorigin','DR')
     }
     else{

@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { LastMinHotelDealComponent } from './last-min-hotel-deal/last-min-hotel-deal.component';
 import { DrAdventureComponent } from './dr-adventure/dr-adventure.component';
+import { NgxGalleryModule } from 'ngx-gallery';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -35,7 +37,8 @@ import { DrAdventureComponent } from './dr-adventure/dr-adventure.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    NgxGalleryModule
   ]
 })
 export class HomeModule { }

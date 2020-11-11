@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-coming-soon',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComingSoonComponent implements OnInit {
 
+  s3BucketUrl = environment.s3BucketUrl
   constructor() { }
 
   ngOnInit() {
