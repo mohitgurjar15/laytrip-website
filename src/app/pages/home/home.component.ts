@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
   flightSearchFormSubmitted: boolean = false;
   countryCode:string;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationCode;
-  toDestinationCode;
+  fromDestinationCode='SDQ';
+  toDestinationCode='JFK';
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     {
       trip: 'oneway',
       departure: 'SDQ',
-      arrival: 'LAX',
+      arrival: 'JFK',
       departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
       arrival_date: '',
       class: '',
