@@ -5,16 +5,16 @@
               <div class="account_cnt_main search_trip">
                   <div class="block_search_trip">
                       <div class="block_title">
-                          <h5>Search your trip</h5>
+                          <h5>Search your booking</h5>
                       </div>
                       <div class="search_block">
                           <form  [formGroup]="SearchTripForm" (ngSubmit)="onSubmit()">
                               <div class="search_field">
-                                  <label>Trip ID</label>
-                                  <input type="text" tabindex="1" maxlength="40" formControlName="tripId" placeholder="Enter your trip id">
+                                  <label>Booking ID</label>
+                                  <input type="text" tabindex="1" maxlength="40" formControlName="tripId" placeholder="Enter your booking id">
                                   <div *ngIf="(submitted  || SearchTripForm.controls.tripId.touched) && SearchTripForm.controls.tripId.errors"
                                   class="focus-input100 login-error">
-                                  <div *ngIf="SearchTripForm.controls.tripId.errors.required" class="text-danger">Please enter
+                                  <div *ng Trip SearchingIf="SearchTripForm.controls.tripId.errors.required" class="text-danger">Please enter
                                     trip id.
                                   </div>
                                 </div>

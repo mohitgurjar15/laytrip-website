@@ -60,7 +60,7 @@
                         <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
                             <div class="block_inn_pr" *ngIf="item.start_price > 0">
                                 <div class="block">
-                                    <p>Down payment</p>
+                                    <p>Down Payment</p>
                                     <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
                                 </div>
                                 <div class="block">

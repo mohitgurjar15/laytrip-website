@@ -64,7 +64,7 @@ var FlightsComponent = /** @class */ (function () {
                 _this.flightBookings = res.data.map(function (flight) {
                     if (flight.moduleId == 1) {
                         return {
-                            tripId: flight.id,
+                            tripId: flight.laytripBookingId,
                             journey_type: flight.locationInfo.journey_type,
                             bookingDate: _this.commonFunction.convertDateFormat(flight.bookingDate, 'YYYY-MM-DD'),
                             departure_time: flight.moduleInfo[0].routes[0].stops[0].departure_time,

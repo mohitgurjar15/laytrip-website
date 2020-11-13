@@ -29,8 +29,7 @@ export class SearchTripComponent implements OnInit {
     if (this.SearchTripForm.invalid) {
       this.submitted = true;
       return;
-    } else {
-      
+    } else {    
       this.router.navigate(['/account/trip/'+ this.SearchTripForm.value.tripId]);
     }
   }
