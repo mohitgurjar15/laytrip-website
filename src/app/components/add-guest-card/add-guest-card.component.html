@@ -38,7 +38,7 @@
         <div class="form_field">
             <label>Card Number<sup>*</sup></label>
             <div class="text_field">
-                <input type="text"  maxlength="20" tabindex="101" name="card_number" [textMask]="mask"
+                <input type="text"   autocomplete="off"  maxlength="20" tabindex="101" name="card_number" [textMask]="mask"
                     placeholder="Enter card number" (change)="handleCardDetails($event)">
                 <p *ngIf="!isValidCardNumber" class="text-danger">Please enter your card
                     number.
@@ -78,7 +78,7 @@
         <div class="form_field">
             <label>Cvv<sup>*</sup></label>
             <div class="text_field">
-                <input autocomplete="off"  type="text"  maxlength="20" name="card_cvv"
+                <input autocomplete="off"  [textMask]="cvvNoMask" type="text"  name="card_cvv"
                     placeholder="123" tabindex="103" (change)="handleCardDetails($event)" >
                 <p *ngIf="!isValidCvv" class="text-danger">Please enter cvv number.
                 </p>

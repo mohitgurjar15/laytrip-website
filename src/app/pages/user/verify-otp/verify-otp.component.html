@@ -46,7 +46,7 @@
           <div *ngIf="otpForm.controls.otp1.errors.required" class="text-danger">{{errorMessage}}</div>
         </div> -->
         <div class="resend_otp_code">
-          <span></span><a class="text-right" *ngIf="!otpVerified" href="javascript:void(0);"
+          <span></span><a class="text-right hover-link" *ngIf="!otpVerified"
             (click)="resendOtp()">Resend code <i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
         </div>
         <div class="form_btn">

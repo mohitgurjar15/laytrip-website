@@ -10,7 +10,8 @@ exports.CommonFunction = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
 var CommonFunction = /** @class */ (function () {
-    function CommonFunction() {
+    function CommonFunction(cookieService) {
+        this.cookieService = cookieService;
     }
     CommonFunction.prototype.closeModal = function (modelBox) {
         return modelBox = false;
@@ -26,6 +27,7 @@ var CommonFunction = /** @class */ (function () {
         }
     };
     CommonFunction.prototype.validateNumber = function (e) {
+        console.log('sd');
         var input = String.fromCharCode(e.charCode);
         var reg = /^[0-9]*$/;
         if (!reg.test(input)) {
@@ -65,6 +67,9 @@ var CommonFunction = /** @class */ (function () {
             return moment(date, sourceFormat).format('MM/DD/YYYY');
         }
         return date;
+    };
+    CommonFunction.prototype.convertDateYYYYMMDD = function (date, sourceFormat) {
+        return moment(date, sourceFormat).format('YYYY-MM-DD');
     };
     CommonFunction.prototype.dateFormat = function (languageCode) {
         if (languageCode === void 0) { languageCode = null; }
@@ -120,10 +125,12 @@ var CommonFunction = /** @class */ (function () {
         var queryParams = {};
         if (url) {
             prevUrl = url.split('?');
-            var params = prevUrl[1].split('&');
-            for (var i in params) {
-                var param = params[i].split("=");
-                queryParams[param[0]] = param[1];
+            if (typeof prevUrl[1] != 'undefined') {
+                var params = prevUrl[1].split('&');
+                for (var i in params) {
+                    var param = params[i].split("=");
+                    queryParams[param[0]] = param[1];
+                }
             }
             return {
                 url: prevUrl[0],
@@ -134,6 +141,15 @@ var CommonFunction = /** @class */ (function () {
             url: '/',
             params: {}
         };
+    };
+    CommonFunction.prototype.getUserCountry = function () {
+        try {
+            var countryCode = localStorage.getItem("__uorigin");
+            return countryCode || '';
+        }
+        catch (e) {
+            return '';
+        }
     };
     CommonFunction = __decorate([
         core_1.Injectable({

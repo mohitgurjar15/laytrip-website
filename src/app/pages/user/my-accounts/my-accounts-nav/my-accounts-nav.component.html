@@ -11,7 +11,6 @@
         </div>
     </div>
     <div class="saidbar_menu">
-        <h4>Main Menu</h4>
         <ul>
             <li>
                 <a [routerLink]="['/account/bookings']" [routerLinkActive]="['active_link']">
@@ -45,7 +44,7 @@
             </li>
             <li>
                 <div class="dropdown">
-                    <a (click)="onToggleSubMenu($event)"  href="javascript:void(0);" class="dropdown-toggle" [routerLinkActive]="['active_link']"
+                    <a (click)="onToggleSubMenu($event)"  class="dropdown-toggle hover-link" [routerLinkActive]="['active_link']"
                         data-toggle="dropdown">
                         <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
                         Settings

@@ -65,7 +65,9 @@ var ContactUsComponent = /** @class */ (function () {
             this.loading = false;
             return;
         }
-        formValue.country_code = formValue.country_code.id;
+        if (formValue.country_code) {
+            formValue.country_code = formValue.country_code.id;
+        }
         this.genericService.createEnquiry(formValue).subscribe(function (res) {
             _this.loading = false;
             _this.toastr.success(res.message, 'Success');

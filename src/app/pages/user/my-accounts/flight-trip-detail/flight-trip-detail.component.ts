@@ -37,9 +37,7 @@ export class FlightTripDetailComponent implements OnInit {
 
     }, (error: HttpErrorResponse) => {
       this.isTripDetailloading = this.bookingLoader= false;
-      this.isFlightNotAvailable =  this.isTripNotFound  = true;
-      if (error.status === 404) {
-      }
+      this.isFlightNotAvailable =  this.isTripNotFound  = true;      
     });
   }
 
