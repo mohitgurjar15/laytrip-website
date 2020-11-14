@@ -88,7 +88,7 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getBookings = function (pageNumber, limit) {
         return this.http.get(this.apiURL + "v1/booking/user-booking-list?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
     };
-    UserService.prototype.getPaymentHistory = function (pageNumber, limit, filterForm) {
+    UserService.prototype.getPaymentHistory = function (pageNumber, limit, filterForm, payment_status) {
         var queryString = "";
         if (filterForm && filterForm != 'undefined') {
             if (filterForm.bookingId) {
@@ -104,7 +104,7 @@ var UserService = /** @class */ (function () {
                 queryString += (filterForm.end_date) ? '&payment_end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
             }
         }
-        return this.http.get(this.apiURL + "v1/booking/payment?payment_type=1&limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
+        return this.http.get(this.apiURL + "v1/booking/payment?payment_type=1&limit=" + limit + "&page_no=" + pageNumber + "&payment_status=" + payment_status + queryString, this.commonFunction.setHeaders());
     };
     UserService.prototype.getModules = function (pageNumber, limit) {
         return this.http.get(this.apiURL + "v1/modules?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
@@ -126,6 +126,9 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.payNowSubscription = function (data) {
         return this.http.post(this.apiURL + 'v1/subscription', data, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.addNewPoints = function (data) {
+        return this.http.post(this.apiURL + 'v1/laytrip-point/add', data, this.commonFunction.setHeaders());
     };
     UserService.prototype.subscribeNow = function (email) {
         var data = { email: email };

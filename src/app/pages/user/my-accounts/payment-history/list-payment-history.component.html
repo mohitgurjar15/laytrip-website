@@ -70,9 +70,9 @@
                             <!-- <li class="nav-item">
                               <a href="#Pending-pay" class="nav-link" data-toggle="tab" role="tab">Pending Payment</a>
                           </li>-->
-                          <!-- <li class="nav-item">
+                          <li class="nav-item">
                               <a href="#Failed-pay" class="nav-link" data-toggle="tab" role="tab">Failed Payment</a>
-                          </li>  -->
+                          </li> 
                         </ul>
                         <div id="payment_content" class="tab-content" role="tablist">
                             <div id="Active-pay" class="card tab-pane fade show active" role="tabpanel"
@@ -91,7 +91,7 @@
                                         <div class="block_pay_list_inner">
                                             <div class="block_booking_list_inner">
                                                 
-                                                <app-history-list [historyResult]="historyResult"></app-history-list>
+                                                <app-history-list  [historyResult]="historyResult" [payment_status]="1"  ></app-history-list>
                                             </div>
                                         </div>
                                     </div>
@@ -228,11 +228,9 @@
                                 <div id="collapse-Failed-pay" class="collapse" role="tabpanel" data-parent="#payment_content" aria-labelledby="heading-Failed-pay">
                                     <div class="card-body">
                                         <div class="block_pay_list_inner">
-                                            <div class="block_search">
-                                                
+                                            <div class="block_booking_list_inner">
+                                                <app-history-list [historyResult]="historyResult" [payment_status]="0" ></app-history-list>                                                
                                             </div>
-                                          
-                                            
                                         </div>
                                     </div>
                                 </div>

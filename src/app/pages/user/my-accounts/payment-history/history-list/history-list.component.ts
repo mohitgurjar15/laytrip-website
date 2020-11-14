@@ -16,7 +16,8 @@ export class HistoryListComponent implements OnInit {
   @Output() bookingData = new EventEmitter();
   s3BucketUrl = environment.s3BucketUrl;
   @Input() historyResult;
-  @Input() list : any = [];
+  @Input() payment_status;
+  list : any = [];
   historys: [];
   public filterData={};
   filterInfo={};
@@ -30,6 +31,8 @@ export class HistoryListComponent implements OnInit {
   showPaginationBar: boolean = false;
   pageNumber:number;
   notFound=false;
+  activeBookings=[];
+  failedBookings=[];
 
   constructor(
     private commonFunction:CommonFunction,
@@ -59,9 +62,11 @@ export class HistoryListComponent implements OnInit {
    if(this.filterData != 'undefined'){     
      this.filterInfo = this.filterData;
    }
-
-    this.userService.getPaymentHistory(this.page, this.limit,this.filterInfo).subscribe((res: any) => {
-        this.list = res.data;
+   console.log("this.payment_status",this.payment_status)
+    this.userService.getPaymentHistory(this.page, this.limit,this.filterInfo,this.payment_status).subscribe((res: any) => {
+      // this.activeBooking = res.map 
+      this.list  = res.data;
+      
         this.showPaginationBar = true;
         this.listLength =res.total_result;
         this.loading = this.notFound  = false;
@@ -80,8 +85,6 @@ export class HistoryListComponent implements OnInit {
 
   viewDetailClick(item) {
     this.item = item;
-    console.log(this.item)
-
     // this.router.navigate(['/account/payment/detail']);
   } 
 
