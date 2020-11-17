@@ -56,7 +56,7 @@ const routes: Routes = [
     component: AccountCardListComponent
   },
   {
-    path: 'search-trip',
+    path: 'search-booking',
     component: SearchTripComponent,
   },
   {

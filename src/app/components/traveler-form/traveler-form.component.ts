@@ -90,7 +90,7 @@ export class TravelerFormComponent implements OnInit {
     }catch(e){}
 
     const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-
+    
     this.adultForm = this.formBuilder.group({
       // title: ['mr',Validators.required],
       firstName: ['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
@@ -193,6 +193,11 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnChanges(changes) {
     if (changes['traveler']) {
+    }
+    if(this.location){
+      const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+      console.log(countryCode.country_name)
+      this.adultForm.controls.country_code.setValue(countryCode.country_name)
     }
   }
 

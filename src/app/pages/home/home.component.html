@@ -1,11 +1,25 @@
 <!--  Start Banner Section-->
-<section class="home_banner">
+<section class="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
     <div class="container banner_inner">
         <div class="banner_text">
-            <h2>Welcome to <span>LayTrip!</span></h2>
-            <p>Travel without stressing your wallet</p>
+            <div class="block_left" *ngIf="countryCode!='DR'">
+                <h2>Welcome to <span>laytrip!</span></h2>
+                <p>Travel without stressing your wallet</p>
+            </div>
+
+            <!-- <div class="block_right" *ngIf="countryCode=='DR'">
+                <img src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0" alt="Dominican Republic">
+                <span>Dominican Republic has it all</span>
+            </div> -->
         </div>
+        
+
         <div class="banner_tab">
+            <div class="block_dr_text" *ngIf="countryCode=='DR'">
+                Dominican Republic has it all, get it with Partial Payments
+                <span>República Dominicana lo tiene todo, consíguelo con pagos flexibles</span>
+            </div>
+            
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab"
@@ -108,10 +122,10 @@
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
-                                                            [label]="'TO'" [placeHolder]="'Los Angeles'"
-                                                            [defaultSelected]="'LAX, United States'"
+                                                            [label]="'TO'" [placeHolder]="'New York'"
+                                                            [defaultSelected]="'JFK, USA'"
                                                             [tabIndex]=2
-                                                            [defaultCity]="'Los Angeles'"
+                                                            [defaultCity]="'New York'"
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
@@ -194,6 +208,14 @@
                     <h2>Accommodation</h2>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="stripper" *ngIf="countryCode=='DR'">
+    <div class="container">
+        <div class="row">
+            <p>Spring Break special deals <span>/ Precios especiales por Semana Santa</span></p>
         </div>
     </div>
 </section>

@@ -89,3 +89,23 @@ a:hover {
         font-size: 16px;
     }
 }
+
+.stripper{
+
+    background-color: #0043ff;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    p{
+         margin: 0;
+        font-size: 16px;
+        color: #fff;
+        font-weight: 600;
+        width: 100%;
+        span{
+            font-size: 16px;
+            color: #fff;
+            font-weight: 400;
+        }
+    }
+}

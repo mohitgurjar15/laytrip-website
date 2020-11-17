@@ -46,8 +46,8 @@ export class ListPaymentHistoryComponent implements OnInit {
 
   getPaymentHistory() {
     this.historyResult = this.filterForm.value;
-    /*  this.loading = true;
-      this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
+     this.loading = true;
+      this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value,1).subscribe((res: any) => {
           this.historyResult = res.data;
           this.loading = this.notFound  = false;
       }, err => {
@@ -56,7 +56,7 @@ export class ListPaymentHistoryComponent implements OnInit {
 
         if (err && err.status === 404) {
         }
-      });   */ 
+      });   
   }
   
   getBookingHistory(event) {

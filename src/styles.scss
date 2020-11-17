@@ -315,7 +315,7 @@ select {
 
 	&.fixed-top {
 		position: fixed;
-		z-index: 99999;
+		z-index: 99;
 		height: auto !important;
 		animation: smoothScroll 1s forwards;
 	}
@@ -715,11 +715,29 @@ select {
 
 					.dropdown {
 
-						a {
-							img {
-								padding: 0 5px 0 0;
+						&.cus_drop {
+
+							ul {
+								li {
+									a {
+										img {
+											padding: 0 5px 0 0;
+										}
+									}
+
+									&:last-child {
+										a {
+											img {
+												width: auto;
+												height: auto;
+												border-radius: 0;
+											}
+										}
+									}
+								}
 							}
 						}
+
 
 						.dropdown-menu {
 							-webkit-animation: fadeInUp 500ms;
@@ -967,6 +985,10 @@ select {
 
 				@media(max-width: 767px) {
 					font-size: 30px;
+				}
+
+				@media(max-width: 575px) {
+					font-size: 27px;
 				}
 			}
 

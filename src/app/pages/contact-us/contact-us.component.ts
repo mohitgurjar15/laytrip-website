@@ -72,7 +72,9 @@ export class ContactUsComponent implements OnInit {
       this.loading = false;
       return;
     }
-    formValue.country_code = formValue.country_code.id;
+    if(formValue.country_code){
+      formValue.country_code = formValue.country_code.id;
+    }
     this.genericService.createEnquiry(formValue).subscribe((res: any) => {
       this.loading = false;
       this.toastr.success(res.message, 'Success');

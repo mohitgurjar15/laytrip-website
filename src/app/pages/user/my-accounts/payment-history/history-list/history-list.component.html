@@ -54,8 +54,8 @@
     </div>
 </div>
 <div class="block_nobooking_available" *ngIf="notFound && !loading">
-    <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Hotel Icon">
-    <h5>No Payment Available</h5>
+    <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
+    <h5>No Payment Available</h5>    
 </div>
 <div *ngIf="!loading && !notFound">
     <div class="pay_listing" *ngFor="let item of list; let i = index;">
@@ -82,7 +82,7 @@
         <div class="list_btm">
             <div class="grid_block">
                 <ul>
-                    <li class="fb_medium">Order ID: <span>{{item.id || '--'}}</span></li>
+                    <li class="fb_medium">Booking ID: <span>{{item.laytripBookingId || '--'}}</span></li>
                     <li>Order Type: <span>{{ item.module.name | titlecase  }}</span></li>
                 </ul>
             </div>

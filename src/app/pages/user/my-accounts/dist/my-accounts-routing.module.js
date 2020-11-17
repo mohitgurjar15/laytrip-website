@@ -64,7 +64,7 @@ var routes = [
         component: account_card_list_component_1.AccountCardListComponent
     },
     {
-        path: 'search-trip',
+        path: 'search-booking',
         component: search_trip_component_1.SearchTripComponent
     },
     {

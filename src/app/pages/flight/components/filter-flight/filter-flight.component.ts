@@ -134,7 +134,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     }
     if (this.filterFlightDetails && this.filterFlightDetails.airline_list) {
       // FOR FLIGHT AIRLINE - AIRLINE
-      this.airLineCount = this.filterFlightDetails.airline_list.legth+1; 
+      this.airLineCount = this.filterFlightDetails.airline_list.length+1; 
       this.airlineList = this.filterFlightDetails.airline_list;
       this.airlineList.forEach(element => {
         return element.isChecked =false;  
@@ -519,7 +519,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.priceSlider.reset({price: [this.filterFlightDetails.price_range.min_price,this.filterFlightDetails.price_range.max_price]});
 
       //Reset partial payment
-      this.partialPriceSlider.reset({price: [this.filterFlightDetails.partial_payment_price_range.min_price,this.filterFlightDetails.partial_payment_price_range.max_price]});
+      this.partialPriceSlider.reset({partial_price: [this.filterFlightDetails.partial_payment_price_range.min_price,this.filterFlightDetails.partial_payment_price_range.max_price]});
 
       //Reset airlines
       if(typeof this.airlineList!='undefined' && this.airlineList.length){

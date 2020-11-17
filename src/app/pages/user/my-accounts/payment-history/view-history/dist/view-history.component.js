@@ -24,7 +24,6 @@ var ViewHistoryComponent = /** @class */ (function () {
         if (this.list) {
             this.currencySymbol = this.list.currency2.symbol ? this.list.currency2.symbol : '$';
         }
-        console.log("this.list", this.list);
         if (this.list && this.list != 'undefined') {
         }
     };

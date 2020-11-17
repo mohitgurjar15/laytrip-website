@@ -34,6 +34,13 @@ var AddGuestCardComponent = /** @class */ (function () {
                 /\d/, /\d/, /\d/, /\d/
             ]
         };
+        this.cvvNoMask = {
+            guide: false,
+            showMask: false,
+            mask: [
+                /\d/, /\d/, /\d/, /\d/
+            ]
+        };
     }
     AddGuestCardComponent.prototype.ngOnInit = function () {
         var _this = this;

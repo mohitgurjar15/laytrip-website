@@ -439,7 +439,7 @@
                                         <div class="select_gender">
                                             <ul>
                                                 <li>
-                                                    <a href="javascript:void(0);" (click)="clickGender($event,'M')"
+                                                    <a class="hover-link" (click)="clickGender($event,'M')"
                                                     [ngClass]="{'active_gender': is_type == 'M'}"
                                                         >
                                                         <div class="gender_type">
@@ -454,7 +454,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0);" (click)="clickGender($event,'F')"
+                                                    <a class="hover-link" (click)="clickGender($event,'F')"
                                                         [ngClass]="is_gender && is_type == 'F' ? 'active_gender' : ''">
                                                         <div class="gender_type">
                                                             <img class="default-icon"
