@@ -211,17 +211,17 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   sortFlight(event) {
     let { key, order } = event;
     if (key === 'total_duration') {
-      this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
+      this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
     }
     else if (key === 'arrival') {
-      this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
+      this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
     }
     else if (key === 'departure') {
 
-      this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
+      this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
     }
     else {
-      this.flightDetails = this.sortJSON(this.flightDetails, key, order);
+      this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
     }
 
   }
