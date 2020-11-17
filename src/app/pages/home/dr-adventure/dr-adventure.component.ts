@@ -41,31 +41,31 @@ export class DrAdventureComponent implements OnInit {
             small: `${this.s3BucketUrl}assets/images/im-1.webp`,
             medium: `${this.s3BucketUrl}assets/images/img-1-big.webp`,
             big: `${this.s3BucketUrl}assets/images/img-1-big.webp`,
-            description : 'Sample 1'
+            description : 'Los Tres Ojos'
         },
         {
           small: `${this.s3BucketUrl}assets/images/im-2.webp`,
           medium: `${this.s3BucketUrl}assets/images/im-2-big.png`,
           big: `${this.s3BucketUrl}assets/images/im-2-big.png`,
-          description : 'Sample 2'
+          description : 'Bahía de las Aguilas'
         },
         {
           small: `${this.s3BucketUrl}assets/images/im-3.webp`,
           medium: `${this.s3BucketUrl}assets/images/im-3-big.jpg`,
           big: `${this.s3BucketUrl}assets/images/im-3-big.jpg`,
-          description : 'Sample 3'
+          description : 'Santo Domingo’s Colonial City'
         },
         {
           small: `${this.s3BucketUrl}assets/images/im-4.webp`,
           medium: `${this.s3BucketUrl}assets/images/im-4-web.jpg`,
           big: `${this.s3BucketUrl}assets/images/im-4-web.jpg`,
-          description : 'Sample 4'
+          description : 'Catalina Island'
         },
         {
           small: `${this.s3BucketUrl}assets/images/im-5.webp`,
           medium: `${this.s3BucketUrl}assets/images/im-5-big.jpg`,
           big: `${this.s3BucketUrl}assets/images/im-5-big.jpg`,
-          description : 'Sample 5'
+          description : 'Pico Duarte'
         }
         
     ];
