@@ -26,6 +26,8 @@ var HistoryListComponent = /** @class */ (function () {
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.showPaginationBar = false;
         this.notFound = false;
+        this.activeBookings = [];
+        this.failedBookings = [];
     }
     HistoryListComponent.prototype.ngOnInit = function () {
         this.page = 1;
@@ -46,7 +48,9 @@ var HistoryListComponent = /** @class */ (function () {
         if (this.filterData != 'undefined') {
             this.filterInfo = this.filterData;
         }
-        this.userService.getPaymentHistory(this.page, this.limit, this.filterInfo).subscribe(function (res) {
+        console.log("this.payment_status", this.payment_status);
+        this.userService.getPaymentHistory(this.page, this.limit, this.filterInfo, this.payment_status).subscribe(function (res) {
+            // this.activeBooking = res.map 
             _this.list = res.data;
             _this.showPaginationBar = true;
             _this.listLength = res.total_result;
@@ -64,7 +68,6 @@ var HistoryListComponent = /** @class */ (function () {
     };
     HistoryListComponent.prototype.viewDetailClick = function (item) {
         this.item = item;
-        console.log(this.item);
         // this.router.navigate(['/account/payment/detail']);
     };
     __decorate([
@@ -75,7 +78,7 @@ var HistoryListComponent = /** @class */ (function () {
     ], HistoryListComponent.prototype, "historyResult");
     __decorate([
         core_1.Input()
-    ], HistoryListComponent.prototype, "list");
+    ], HistoryListComponent.prototype, "payment_status");
     HistoryListComponent = __decorate([
         core_1.Component({
             selector: 'app-history-list',

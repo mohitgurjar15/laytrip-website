@@ -21,6 +21,7 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         this.notFound = false;
     }
     ListPaymentHistoryComponent.prototype.ngOnInit = function () {
+        window.scroll(0, 0);
         this.loading = true;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
@@ -33,18 +34,18 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
         });
     };
     ListPaymentHistoryComponent.prototype.getPaymentHistory = function () {
+        var _this = this;
         this.historyResult = this.filterForm.value;
-        /*  this.loading = true;
-          this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value).subscribe((res: any) => {
-              this.historyResult = res.data;
-              this.loading = this.notFound  = false;
-          }, err => {
-            this.notFound = true;
-            this.loading = false;
-    
+        this.loading = true;
+        this.userService.getPaymentHistory(this.pageNumber, this.limit, this.filterForm.value, 1).subscribe(function (res) {
+            _this.historyResult = res.data;
+            _this.loading = _this.notFound = false;
+        }, function (err) {
+            _this.notFound = true;
+            _this.loading = false;
             if (err && err.status === 404) {
             }
-          });   */
+        });
     };
     ListPaymentHistoryComponent.prototype.getBookingHistory = function (event) {
         this.itemDetail = event;

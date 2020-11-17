@@ -56,7 +56,6 @@ export class AppComponent {
   }
 
   redirectToDRsite(location){
-    console.log("Location",location)
     if(location.country.iso2=='PL'){
 
       if(window.location.origin=='https://staging.laytrip.com' || window.location.origin=='http://staging.laytrip.com' || window.location.origin=='http://localhost:4200' ){

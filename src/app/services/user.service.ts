@@ -118,7 +118,7 @@ export class UserService {
       `${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}`, this.commonFunction.setHeaders());
   }
 
-  getPaymentHistory(pageNumber, limit, filterForm) {
+  getPaymentHistory(pageNumber, limit, filterForm,payment_status) {
 
     let queryString = "";
     if (filterForm && filterForm != 'undefined') {
@@ -137,7 +137,7 @@ export class UserService {
     }
 
     return this.http.get(
-      `${this.apiURL}v1/booking/payment?payment_type=1&limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders());
+      `${this.apiURL}v1/booking/payment?payment_type=1&limit=${limit}&page_no=${pageNumber}&payment_status=${payment_status}${queryString}`, this.commonFunction.setHeaders());
   }
 
   getModules(pageNumber, limit) {
