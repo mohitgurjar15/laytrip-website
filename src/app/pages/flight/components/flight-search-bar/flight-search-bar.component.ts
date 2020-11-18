@@ -37,16 +37,7 @@ export class FlightSearchBarComponent implements OnInit {
       child: null,
       infant: null
     };
-
-  switchBtnValue = false;
-  tempSwapData =
-    {
-      leftSideValue: {},
-      rightSideValue: {}
-    };
-  swapped = [];
-  isSwap = false;
-  swapError = '';
+  
   selectedAirport = {};
 
   loadingDeparture = false;
@@ -239,13 +230,7 @@ export class FlightSearchBarComponent implements OnInit {
     }
   }
 
-  getSwappedValue(event) {
-    if (event && event.key && event.key === 'fromSearch') {
-      this.tempSwapData.leftSideValue = event.value;
-    } else if (event && event.key && event.key === 'toSearch') {
-      this.tempSwapData.rightSideValue = event.value;
-    }
-  }
+  
 
   changeTravellerInfo(event) {
     this.searchFlightInfo.adult = event.adult;
@@ -389,4 +374,18 @@ export class FlightSearchBarComponent implements OnInit {
     }
   }
 
+  swapAirport(){
+
+    let temp=this.airportDefaultDestValue;
+    this.airportDefaultDestValue= this.airportDefaultArrivalValue;
+    this.airportDefaultArrivalValue = temp;
+
+    let tempAirport = this.departureAirport;
+    this.departureAirport = this.arrivalAirport;
+    this.arrivalAirport= tempAirport;
+
+    let tempCode = this.searchFlightInfo.departure;
+    this.searchFlightInfo.departure = this.searchFlightInfo.arrival;
+    this.searchFlightInfo.arrival = tempCode;
+  }
 }

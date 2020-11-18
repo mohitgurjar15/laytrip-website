@@ -15,6 +15,6 @@
         </ng-template>
     </ng-select>
     <span *ngIf="defaultSelected">{{ defaultSelected }}</span>
-    <span *ngIf="selectedAirport">{{ selectedAirport.code }}, {{ selectedAirport.country }}</span>
+    <span *ngIf="selectedAirport?.code">{{ selectedAirport.code }}, {{ selectedAirport.country }}</span>
     
 </div>

@@ -101,16 +101,16 @@
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
-                                                            [label]="'From'" [placeHolder]="'Santo Domingo'"
-                                                            [defaultSelected]="'SDQ, Dominican Republic'"
+                                                            [label]="'From'" [placeHolder]=departureCity
+                                                            [defaultSelected]=departureAirportCountry
                                                             [tabIndex]=1
-                                                            [defaultCity]="'Santo Domingo'"
+                                                            [defaultCity]=departureCity
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
                                                 </div>
                                                 <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
-                                                    <a href="javascript:void(0);">
+                                                    <a  (click)="swapAirport()">
                                                         <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
                                                             alt="Switch Image" />
                                                         <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
@@ -122,10 +122,10 @@
                                                     <div class="search_area">
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
-                                                            [label]="'TO'" [placeHolder]="'New York'"
-                                                            [defaultSelected]="'JFK, USA'"
+                                                            [label]="'TO'" [placeHolder]=arrivalCity
+                                                            [defaultSelected]=arrivalAirportCountry
                                                             [tabIndex]=2
-                                                            [defaultCity]="'New York'"
+                                                            [defaultCity]=arrivalCity
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
