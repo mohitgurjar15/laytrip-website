@@ -50,7 +50,7 @@ export class HistoryListComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges) {   
     this.filterData = changes.historyResult.currentValue;
-    if(this.filterData ){
+    if(this.filterData){
       this.showPaginationBar = false;
       this.getPaymentHistory();
     }
@@ -59,10 +59,9 @@ export class HistoryListComponent implements OnInit {
   getPaymentHistory() {
     this.loading = true;
     this.filterInfo = null;
-   if(this.filterData != 'undefined'){     
-     this.filterInfo = this.filterData;
-   }
-   console.log("this.payment_status",this.payment_status)
+    if(this.filterData != 'undefined'){     
+      this.filterInfo = this.filterData;
+    }
     this.userService.getPaymentHistory(this.page, this.limit,this.filterInfo,this.payment_status).subscribe((res: any) => {
       // this.activeBooking = res.map 
       this.list  = res.data;
@@ -85,7 +84,7 @@ export class HistoryListComponent implements OnInit {
 
   viewDetailClick(item) {
     this.item = item;
-    // this.router.navigate(['/account/payment/detail']);
+    this.router.navigate(['/account/payment/detail/'+item.laytripBookingId]);
   } 
 
 }

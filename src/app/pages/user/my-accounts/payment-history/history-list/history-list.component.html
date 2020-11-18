@@ -59,7 +59,7 @@
 </div>
 <div *ngIf="!loading && !notFound">
     <div class="pay_listing" *ngFor="let item of list; let i = index;">
-        <div class="list_top">
+        <div class="list_top" *ngIf="item.totalInstallments > 0">
             <div class="list_left">
                 <ul>
                     <li>Total Paid: <span>${{item.paidAmount | number : '1.2-2' || 0}}</span></li>
@@ -72,7 +72,7 @@
                     <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
                 </ul>
             </div>
-            <div class="list_right">
+            <div class="list_right" >
                 <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(item.nextInstalmentDate)  }} days</span></p>
                 <div class="pay_status">
                   <a>  Pay Early</a>
@@ -102,7 +102,7 @@
             </div>
             <div class="grid_block">
                 <span style="display: none;">Pending</span>
-                <a class="viewDetailBtn" data-toggle="modal" data-target="#payment_view_modal"
+                <a class="viewDetailBtn"
                     (click)="viewDetailClick(item)">View Details</a>
             </div>
         </div>
@@ -122,4 +122,4 @@
     </div>
 </div>
 
-<app-view-history [item]="item"></app-view-history>
+<!-- <app-view-history  [item]="item"></app-view-history> -->

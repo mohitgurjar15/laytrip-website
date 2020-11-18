@@ -64,14 +64,14 @@
                     <div class="block_booking_list block_payment_list">
                         <ul id="payment_tabs" class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a href="#Active-pay" class="nav-link active" data-toggle="tab" role="tab">Active
+                                <a href="#Active-pay" (click)="tabClick()" class="nav-link active" data-toggle="tab" role="tab">Active
                                     Payment</a>
                             </li>
                             <!-- <li class="nav-item">
                               <a href="#Pending-pay" class="nav-link" data-toggle="tab" role="tab">Pending Payment</a>
                           </li>-->
                           <li class="nav-item">
-                              <a href="#Failed-pay" class="nav-link" data-toggle="tab" role="tab">Failed Payment</a>
+                              <a href="#Failed-pay" (click)="tabClick()" class="nav-link" data-toggle="tab" role="tab">Failed Payment</a>
                           </li> 
                         </ul>
                         <div id="payment_content" class="tab-content" role="tablist">
@@ -90,7 +90,6 @@
                                     <div class="card-body">
                                         <div class="block_pay_list_inner">
                                             <div class="block_booking_list_inner">
-                                                
                                                 <app-history-list  [historyResult]="historyResult" [payment_status]="1"  ></app-history-list>
                                             </div>
                                         </div>

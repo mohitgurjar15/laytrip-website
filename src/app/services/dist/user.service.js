@@ -104,7 +104,7 @@ var UserService = /** @class */ (function () {
                 queryString += (filterForm.end_date) ? '&payment_end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
             }
         }
-        return this.http.get(this.apiURL + "v1/booking/payment?payment_type=1&limit=" + limit + "&page_no=" + pageNumber + "&payment_status=" + payment_status + queryString, this.commonFunction.setHeaders());
+        return this.http.get(this.apiURL + "v1/booking/payment?limit=" + limit + "&page_no=" + pageNumber + "&payment_status=" + payment_status + queryString, this.commonFunction.setHeaders());
     };
     UserService.prototype.getModules = function (pageNumber, limit) {
         return this.http.get(this.apiURL + "v1/modules?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());

@@ -48,7 +48,6 @@ var HistoryListComponent = /** @class */ (function () {
         if (this.filterData != 'undefined') {
             this.filterInfo = this.filterData;
         }
-        console.log("this.payment_status", this.payment_status);
         this.userService.getPaymentHistory(this.page, this.limit, this.filterInfo, this.payment_status).subscribe(function (res) {
             // this.activeBooking = res.map 
             _this.list = res.data;
@@ -68,7 +67,7 @@ var HistoryListComponent = /** @class */ (function () {
     };
     HistoryListComponent.prototype.viewDetailClick = function (item) {
         this.item = item;
-        // this.router.navigate(['/account/payment/detail']);
+        this.router.navigate(['/account/payment/detail/' + item.laytripBookingId]);
     };
     __decorate([
         core_1.Output()
