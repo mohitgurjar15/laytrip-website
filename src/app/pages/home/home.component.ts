@@ -25,7 +25,12 @@ export class HomeComponent implements OnInit {
   countryCode:string;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationCode='SDQ';
+  departureCity='Santo Domingo';
+  departureAirportCountry='SDQ, Dominican Republic';
+
   toDestinationCode='JFK';
+  arrivalCity='New York';
+  arrivalAirportCountry='JFK, USA';
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -54,13 +59,6 @@ export class HomeComponent implements OnInit {
     };
 
   searchedValue = [];
-  swapDepartureAirport;
-  swapArrivalAirport;
-  swapElementValue = {
-    isSwap: false,
-    fromDestination: null,
-    toDestination: null
-  };
 
   constructor(
     private genericService: GenericService,
@@ -146,14 +144,17 @@ export class HomeComponent implements OnInit {
   }
 
   destinationChangedValue(event) {
+    console.log("yeeeee")
     if (event && event.key && event.key === 'fromSearch') {
       this.fromDestinationCode = event.value.code;
+      this.departureCity = event.value.city;
+      this.departureAirportCountry = `${event.value.code}, ${event.value.country}`
       this.searchedValue.push({ key: 'fromSearch', value: event.value });
-      this.swapDepartureAirport = event.value;
     } else if (event && event.key && event.key === 'toSearch') {
       this.toDestinationCode = event.value.code;
+      this.arrivalCity = event.value.city;
+      this.arrivalAirportCountry = `${event.value.code}, ${event.value.country}`
       this.searchedValue.push({ key: 'toSearch', value: event.value });
-      this.swapArrivalAirport = event.value;
     }
     this.searchFlightInfo.departure = this.fromDestinationCode;
     this.searchFlightInfo.arrival = this.toDestinationCode;
@@ -247,5 +248,24 @@ export class HomeComponent implements OnInit {
         this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
       }
     }
+  }
+
+  swapAirport(){
+
+    let temp=this.fromDestinationCode;
+    this.fromDestinationCode = this.toDestinationCode;
+    this.toDestinationCode=temp;
+
+    this.searchFlightInfo.departure=this.searchFlightInfo.arrival;
+    this.searchFlightInfo.arrival=temp;
+
+    let tempCity=this.departureCity;
+    this.departureCity= this.arrivalCity;
+    this.arrivalCity=tempCity;
+
+    let tempAirportCountry= this.departureAirportCountry;
+    this.departureAirportCountry= this.arrivalAirportCountry;
+    this.arrivalAirportCountry = tempAirportCountry;
+    
   }
 }

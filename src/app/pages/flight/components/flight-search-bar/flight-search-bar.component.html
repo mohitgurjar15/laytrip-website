@@ -63,7 +63,7 @@
                         </div>
                       </div>
                       <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
-                        <a href="javascript:void(0);">
+                        <a class="anchor-text" (click)="swapAirport()">
                           <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
                                                             alt="Switch Image" />
                           <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
