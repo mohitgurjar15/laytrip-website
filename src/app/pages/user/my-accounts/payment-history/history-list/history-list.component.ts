@@ -39,6 +39,7 @@ export class HistoryListComponent implements OnInit {
     private flightCommonFunction :FlightCommonFunction,
     private userService: UserService,
     public router: Router
+    
   ) { }
 
   ngOnInit() {
@@ -87,4 +88,7 @@ export class HistoryListComponent implements OnInit {
     this.router.navigate(['/account/payment/detail/'+item.laytripBookingId]);
   } 
 
+  dateConvert(date){
+    return this.commonFunction.convertDateFormat(new Date(date),"MM/DD/YYYY")
+  }
 }

@@ -69,6 +69,9 @@ var HistoryListComponent = /** @class */ (function () {
         this.item = item;
         this.router.navigate(['/account/payment/detail/' + item.laytripBookingId]);
     };
+    HistoryListComponent.prototype.dateConvert = function (date) {
+        return this.commonFunction.convertDateFormat(new Date(date), "MM/DD/YYYY");
+    };
     __decorate([
         core_1.Output()
     ], HistoryListComponent.prototype, "bookingData");
