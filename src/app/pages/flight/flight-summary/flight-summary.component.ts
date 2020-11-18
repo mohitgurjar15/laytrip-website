@@ -42,6 +42,7 @@ export class FlightSummaryComponent implements OnInit {
   showBaggePolicy:boolean=false;
   showCancellationPolicy:boolean=false;
   totalPrice:number;
+  fareBreakDown:[]=[];
 
   @Output() getRouteDetails = new EventEmitter();
 
@@ -144,19 +145,21 @@ export class FlightSummaryComponent implements OnInit {
 
     if(this.instalmentMode=='instalment'){
       this.totalPrice = this.priceData[0].selling_price;
+      this.fareBreakDown = this.flightDetail[0].fare_break_dwon;
     }
     else{
       if(typeof this.priceData[0].secondary_selling_price!=='undefined' && this.priceData[0].secondary_selling_price){
 
         this.totalPrice = this.priceData[0].secondary_selling_price;
+        this.fareBreakDown = this.flightDetail[0].secondary_fare_break_down;
       }
       else{
         
         this.totalPrice = this.priceData[0].selling_price;
+        this.fareBreakDown = this.flightDetail[0].fare_break_dwon;
       }
     }
 
-    console.log("this.totalPrice",this.totalPrice,this.priceData,this.payNowAmount)
 
   }
 }
