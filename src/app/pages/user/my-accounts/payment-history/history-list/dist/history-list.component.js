@@ -72,6 +72,26 @@ var HistoryListComponent = /** @class */ (function () {
     HistoryListComponent.prototype.dateConvert = function (date) {
         return this.commonFunction.convertDateFormat(new Date(date), "MM/DD/YYYY");
     };
+    HistoryListComponent.prototype.getPercentage1 = function (value, totalValue, type) {
+        var configValue = document.querySelector('.progress-bar');
+        // configValue.style.left = setLeft();
+        configValue.style.width = 24;
+        /* if(type ==1){
+          return "width:"+Math.floor((value/totalValue)*100)+"%;";
+        } else {
+          return "left:"+Math.floor((value/totalValue)*100)+"%;";
+        } */
+    };
+    HistoryListComponent.prototype.getPercentage = function (value, totalValue, type) {
+        if (type == 1) {
+            return { 'width': Math.floor((value / totalValue) * 100) + '%' }; //"width:"+Math.floor((value/totalValue)*100)+"%;";
+        }
+        else {
+            return { 'left': Math.floor((value / totalValue) * 100) + '%' };
+        }
+        var styles = { 'width': '25%' };
+        return styles;
+    };
     __decorate([
         core_1.Output()
     ], HistoryListComponent.prototype, "bookingData");

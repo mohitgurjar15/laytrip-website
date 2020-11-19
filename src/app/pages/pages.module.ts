@@ -27,6 +27,7 @@ import { WhyLaytripComponent } from './why-laytrip/why-laytrip.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 import { DownloadAppComponent } from './download-app/download-app.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
+import { SsoLoginComponent } from './sso-login/sso-login.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
     WhyLaytripComponent,
     PartialPaymentComponent,
     DownloadAppComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    SsoLoginComponent
   ],
   imports: [
     CommonModule,
