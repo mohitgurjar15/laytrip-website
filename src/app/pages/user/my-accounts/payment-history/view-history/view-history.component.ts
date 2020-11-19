@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { FlightCommonFunction } from '../../../../../_helpers/flight-common-function';
 import { environment } from '../../../../../../environments/environment';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

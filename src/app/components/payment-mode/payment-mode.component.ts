@@ -87,6 +87,7 @@ export class PaymentModeComponent implements OnInit {
   totalPrice;
   secondAccordiain:boolean=false;
   showThirdAccrodian:boolean=false;
+  secondInstalmentTemp:number=0;
 
   ngOnInit(){
     
@@ -342,6 +343,7 @@ export class PaymentModeComponent implements OnInit {
   changeDuration(type){
     this.durationType=type;
     this.customMethod='';
+    //this.secondInstalmentTemp=0;
     this.additionalAmount=0;
     //this.laycreditpoints=0;
     this.instalmentRequest.custom_amount=null;
@@ -559,6 +561,8 @@ export class PaymentModeComponent implements OnInit {
           this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
           this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
           this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
+          this.secondInstalmentTemp = this.instalments.instalment_date[1].instalment_amount;
+
           this.remainingInstalment = this.instalments.instalment_date.length-1;
 
           this.getInstalmentData.emit({ 
