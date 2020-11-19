@@ -65,10 +65,10 @@
                     <li>Total Paid: <span>${{item.paidAmount | number : '1.2-2' || 0}}</span></li>
                     <li>
                         <div class="progress">
-                            <!-- <div class="progress-bar"  [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,1)" ></div>
-                            <div class="progress_dot" [ngStyle]="getPercentage((item.totalAmount-item.paidAmount),item.totalAmount,2)"></div> -->
-                            <div class="progress-bar"  style="width: 25%;" ></div>
-                            <div class="progress_dot" style="left: 23%;"></div>
+                            <div class="progress-bar"  [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,1)" ></div>
+                            <div class="progress_dot" [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,2)"></div>
+                            <!-- <div class="progress-bar"  style="width: 25%;" ></div>
+                            <div class="progress_dot" style="left: 23%;"></div> -->
                         </div>
                     </li>
                     <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>

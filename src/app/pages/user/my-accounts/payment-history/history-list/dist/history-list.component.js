@@ -84,7 +84,7 @@ var HistoryListComponent = /** @class */ (function () {
     };
     HistoryListComponent.prototype.getPercentage = function (value, totalValue, type) {
         if (type == 1) {
-            return { 'width': Math.floor((value / totalValue) * 100) + '%' }; //"width:"+Math.floor((value/totalValue)*100)+"%;";
+            return { 'width': (Math.floor((value / totalValue) * 100) + 2) + '%' }; //"width:"+Math.floor((value/totalValue)*100)+"%;";
         }
         else {
             return { 'left': Math.floor((value / totalValue) * 100) + '%' };
