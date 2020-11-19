@@ -6,25 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.UserModule = void 0;
+exports.SsoLoginComponent = void 0;
 var core_1 = require("@angular/core");
-var common_1 = require("@angular/common");
-var forms_1 = require("@angular/forms");
-var user_routing_module_1 = require("./user-routing.module");
-var UserModule = /** @class */ (function () {
-    function UserModule() {
+var SsoLoginComponent = /** @class */ (function () {
+    function SsoLoginComponent() {
     }
-    UserModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                common_1.CommonModule,
-                forms_1.ReactiveFormsModule,
-                forms_1.FormsModule,
-                user_routing_module_1.UserRoutingModule,
-            ],
-            declarations: []
+    SsoLoginComponent.prototype.ngOnInit = function () {
+        alert();
+        console.log('sdsd');
+    };
+    SsoLoginComponent = __decorate([
+        core_1.Component({
+            selector: 'app-sso-login',
+            templateUrl: './sso-login.component.html',
+            styleUrls: ['./sso-login.component.scss']
         })
-    ], UserModule);
-    return UserModule;
+    ], SsoLoginComponent);
+    return SsoLoginComponent;
 }());
-exports.UserModule = UserModule;
+exports.SsoLoginComponent = SsoLoginComponent;
