@@ -16,6 +16,7 @@ export class ViewHistoryComponent implements OnInit {
   list:any;
   currencySymbol='';
   id;
+  loader=false;
   constructor(    
     private commonFunction:CommonFunction,
     private flightCommonFunction :FlightCommonFunction,
@@ -25,6 +26,7 @@ export class ViewHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loader = true;
     this.route.params.subscribe(params => this.id = params['id']);
     this.getPaytmentDetailView();
   }
@@ -40,17 +42,20 @@ export class ViewHistoryComponent implements OnInit {
  */  
 
   getPaytmentDetailView(){
+    this.loader = true;
     var filterData = {bookingId : this.id};
 
     this.userService.getPaymentHistory(1, 1,filterData,'').subscribe((res: any) => {
       // this.activeBooking = res.map 
       this.list  = res.data;
+      this.loader = false;
       this.currencySymbol =  this.list[0].currency2.symbol ? this.list[0].currency2.symbol : '$';
     
         /* this.showPaginationBar = true;
         this.listLength =res.total_result;
         this.loading = this.notFound  = false; */
     }, err => {
+      this.loader = false;
      /*  this.notFound = true;
       this.loading = this.showPaginationBar = false; */
     });   

@@ -126,11 +126,13 @@ export class AdultListComponent implements OnInit {
           this._itinerarySelection.infant.push(traveler.userId);
         } 
       } else {
-        
+        console.log(this.adultCounter,totalAdult)
+
         // this.checkBoxDisable = false;
         this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
         this.cookieService.remove('_travelers');
         this.cookieService.put("_travelers", JSON.stringify(this._travelers));
+        console.log(this.adultCounter , totalAdult)
         if (traveler.user_type == 'adult') {
           if(this.adultCounter >= totalAdult || this.adultCounter <= totalAdult){
             this.adultCounter--;
