@@ -1,106 +1,131 @@
-<!-- <div class="modal fade payment_view_modal" id="payment_view_modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="pay_modal_cnt" *ngIf="list">
-                <div class="pay_modal_top">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-                    </button>
-                    <p>Booking ID: <span>{{list.laytripBookingId || '--'}}</span></p>
-                </div>
-                <div class="pay_modal_btm" >
-                    <div class="block_inner">
-                        <div class="block_title">
-                            <h5>Payment Details</h5>
-                        </div>
-                        <div class="pay_detail_info">
-                            <div class="detail_info_left">
-                                <ul>
-                                    <li *ngIf="list.bookingInstalments.length > 0">
-                                        <span>Partial Payment Type :</span>
-                                        <p>{{list.bookingInstalments[0].instalmentType || '--' | titlecase }}</p>
-                                    </li>
-                                    <li>
-                                        <span>Total Booking Amount :</span>
-                                        <p>{{currencySymbol}}{{list.totalAmount | number : '1.2-2'}}</p>
-                                    </li>
-                                    <li>
-                                        <span>Partial Payment Part :</span>
-                                        <p>{{list.totalInstallments}} Installment</p>
-                                    </li>
-  
-                                    <li *ngIf="list.bookingInstalments.length > 0">
-                                        <span  >Partial Payment Start Date :</span>
-                                        <p>{{ flightCommonFunction.getPaymentStartDate(list.bookingInstalments) }}</p>
-                                    </li>
-                                    <li *ngIf="list.nextInstalmentDate">
-                                        <span>Next Partial payment Date :</span>
-                                        <p>{{dateConvert(list.nextInstalmentDate)}}</p>
-                                    </li>
-                                    <li  *ngIf="list.bookingInstalments.length > 0">
-                                        <span>Partial Payment Amount :</span>
-                                        <p>{{ currencySymbol }}{{list.bookingInstalments[0].amount | number : '1.2-2'}}</p>
-                                    </li>
-                                    <li>
-                                        <span>Paid Amount :</span>
-                                        <p>{{ currencySymbol }}{{list.paidAmount | number : '1.2-2'}}</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="detail_info_right">
-                                <div class="list_right" *ngIf="list.bookingInstalments.length > 0 ">
-                                    <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(list.nextInstalmentDate)  }} days</span></p>
-                                    <div class="pay_status">
-                                        Pay Early
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block_inner" *ngIf="list.totalInstallments > 0">
-                        <div class="block_title">
-                            <h5>Partial Payment Detail</h5>
-                        </div>
-                        <div class="pay_detail_tbl">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    <tr *ngFor="let instalment of list.bookingInstalments; let i=index;">
-                                        <td data-title="ID">{{i +1 }}</td>
-                                        <td data-title="Amount">{{ currencySymbol}}{{  instalment.amount | number : '1.2-2' }}</td>
-                                        <td data-title="Date">{{ dateConvert(instalment.instalmentDate) }}</td>
-                                        <td data-title="Status"><span [ngClass]="{'status_paid': instalment.instalmentStatus,'status_pending': instalment.instalmentStatus != true}">{{instalment.instalmentStatus ? 'Paid':'Pending'}}</span></td>
-                                    </tr>                                 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div> -->
-  <section class="account_part">
+<section class="account_part">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
                 <app-my-accounts-nav></app-my-accounts-nav>
             </div>
             <div class="col-lg-9">
-                <div class="account_cnt_main booking_main" *ngIf="list">
+                <div class="account_cnt_main booking_main" *ngIf="loader">
+                    <div class="pay_modal_cnt">
+                        <div class="pay_modal_top">
+                            <p class="d-none">Booking ID: <span>----------</span></p>
+                            <a href="Account-payment-history.html">Back</a>
+                        </div>
+                        <div class="pay_modal_btm">
+                            <div class="block_inner">
+                                <div class="block_title">
+                                    <h5>
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                    </h5>
+                                </div>
+                                <div class="pay_detail_info">
+                                    <div class="detail_info_left w-100">
+                                        <ul>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                            <li>
+                                                <p class="fb_animation w-100 mb-0"></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                   
+                                    <div class="detail_info_right d-none">
+                                        <div class="list_right">
+                                            <p>Payment Due in <span>6 days</span></p>
+                                            <div class="pay_status">
+                                                Pay Early
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block_inner">
+                                <div class="block_title">
+                                    <h5>
+                                        <p class="fb_animation w-100 mb-0"></p>
+                                    </h5>
+                                </div>
+                                <div class="pay_detail_tbl">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </th>
+                                                <th>
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </th>
+                                                <th>
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </th>
+                                                <th>
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-title="ID">
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </td>
+                                                <td data-title="Amount">
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </td>
+                                                <td data-title="Date">
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </td>
+                                                <td data-title="Status"><span class="status_paid">
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                    </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td data-title="ID">
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </td>
+                                                <td data-title="Amount">
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </td>
+                                                <td data-title="Date">
+                                                    <p class="fb_animation w-100 mb-0"></p>
+                                                </td>
+                                                <td data-title="Status"><span class="status_pending">
+                                                        <p class="fb_animation w-100 mb-0"></p>
+                                                    </span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="account_cnt_main booking_main"  *ngIf="!loader">
                     <div class="pay_modal_cnt">
                         <div class="pay_modal_top">
                             <p>Booking ID: <span>{{list[0].laytripBookingId || '--'}}</span></p>
                             <a [routerLink]="['/account/payment']">Back</a>
                         </div>
-                        <div class="pay_modal_btm">
+                        <div class="pay_modal_btm" > 
                             <div class="block_inner">
                                 <div class="block_title">
                                     <h5>Payment Details</h5>
@@ -147,7 +172,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="detail_info_right" *ngIf="list[0].totalInstallments > 0">
+                                    <div class="detail_info_right d-none" *ngIf="list[0].totalInstallments > 0">
                                         <div class="list_right">
                                             <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(list[0].nextInstalmentDate)  }} days</span></p>
                                             <div class="pay_status">

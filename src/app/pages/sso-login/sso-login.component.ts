@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {  getUserDetails } from '../../_helpers/jwt.helper';
+import {  getUserDetails, redirectToLogin } from '../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-sso-login',
@@ -8,19 +8,26 @@ import {  getUserDetails } from '../../_helpers/jwt.helper';
   styleUrls: ['./sso-login.component.scss']
 })
 export class SsoLoginComponent implements OnInit {
-  token;
+  token='';
   constructor(    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => this.token = params['id']);
-
+    this.route.queryParams.forEach(params => {
+      this.token  = params.sid
+    })
     this.ssonLogin();
   }
 
   ssonLogin(){
-    console.log( this.token)
-    // getUserDetails('sd')
+    if(this.token){
+      var userDetail = getUserDetails(this.token);
+      if(userDetail && userDetail.roleId != 7 ){
+        localStorage.setItem("_lay_sess", this.token);
+      } else {
+        redirectToLogin();
+      }
+    }
   }
 
 }

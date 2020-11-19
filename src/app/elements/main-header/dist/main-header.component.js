@@ -12,11 +12,12 @@ var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var auth_component_1 = require("../../pages/user/auth/auth.component");
 var MainHeaderComponent = /** @class */ (function () {
-    function MainHeaderComponent(genericService, translate, modalService, router) {
+    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction) {
         this.genericService = genericService;
         this.translate = translate;
         this.modalService = modalService;
         this.router = router;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.langunages = [];
         this.selectedLanunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
@@ -29,6 +30,8 @@ var MainHeaderComponent = /** @class */ (function () {
         this.totalLayCredit = 0;
         this.showTotalLayCredit = 0;
         this._isLayCredit = false;
+        this.countryCode = '';
+        this.countryCode = this.commonFunction.getUserCountry();
         var _langunage = localStorage.getItem('_lang');
         var _currency = localStorage.getItem('_curr');
         if (_langunage) {
@@ -56,6 +59,8 @@ var MainHeaderComponent = /** @class */ (function () {
                 this.isCurrencySet = false;
             }
         }
+        this.countryCode = this.commonFunction.getUserCountry();
+        console.log("this.countryCode", this.countryCode);
     }
     MainHeaderComponent_1 = MainHeaderComponent;
     MainHeaderComponent.prototype.ngOnInit = function () {
@@ -63,6 +68,7 @@ var MainHeaderComponent = /** @class */ (function () {
         this.getLangunages();
         this.getCurrencies();
         this.loadJquery();
+        //this.getUserLocationInfo();
         if (this.isLoggedIn) {
             if (this.userDetails.roleId != 7) {
                 this.totalLaycredit();
@@ -189,6 +195,9 @@ var MainHeaderComponent = /** @class */ (function () {
         this.genericService.getAvailableLaycredit().subscribe(function (res) {
             _this.totalLayCredit = res.total_available_points;
         }, (function (error) {
+            if (error.status == 406) {
+                jwt_helper_1.redirectToLogin();
+            }
         }));
     };
     MainHeaderComponent.prototype.openSignModal = function () {

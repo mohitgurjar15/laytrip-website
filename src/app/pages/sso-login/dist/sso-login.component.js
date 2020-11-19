@@ -8,18 +8,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.SsoLoginComponent = void 0;
 var core_1 = require("@angular/core");
+var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var SsoLoginComponent = /** @class */ (function () {
     function SsoLoginComponent(route) {
         this.route = route;
+        this.token = '';
     }
     SsoLoginComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.route.params.subscribe(function (params) { return _this.token = params['id']; });
+        this.route.queryParams.forEach(function (params) {
+            _this.token = params.sid;
+        });
         this.ssonLogin();
     };
     SsoLoginComponent.prototype.ssonLogin = function () {
-        console.log(this.token);
-        // getUserDetails('sd')
+        if (this.token) {
+            var userDetail = jwt_helper_1.getUserDetails(this.token);
+            if (userDetail && userDetail.roleId != 7) {
+                localStorage.setItem("_lay_sess", this.token);
+            }
+            else {
+                jwt_helper_1.redirectToLogin();
+            }
+        }
     };
     SsoLoginComponent = __decorate([
         core_1.Component({

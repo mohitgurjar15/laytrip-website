@@ -69,7 +69,7 @@ var routes = [
                 component: coming_soon_component_1.ComingSoonComponent
             },
             {
-                path: 'sson/:sid',
+                path: 'sson',
                 component: sso_login_component_1.SsoLoginComponent
             },
         ]

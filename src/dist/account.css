@@ -1082,6 +1082,7 @@
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left {
   width: auto;
+  padding: 15px 0;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul {
   width: 100%;

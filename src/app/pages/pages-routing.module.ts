@@ -61,7 +61,7 @@ const routes: Routes = [
                 component: ComingSoonComponent
             },
             {
-                path: 'sson/:sid',
+                path: 'sson',
                 component: SsoLoginComponent
             },
         ]

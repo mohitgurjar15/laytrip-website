@@ -8,7 +8,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="list_right" style="flex-flow: column;">
+            <div class="list_right d-none" style="flex-flow: column;">
                 <p class="fb_animation w-100 mb-0"></p>
                 <p class="fb_animation w-100 mb-0"></p>
             </div>
@@ -74,7 +74,7 @@
                     <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
                 </ul>
             </div> 
-            <div class="list_right" >
+            <div class="list_right d-none">
                 <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(item.nextInstalmentDate)  }} days</span></p>
                 <div class="pay_status">
                   <a>  Pay Early</a>
