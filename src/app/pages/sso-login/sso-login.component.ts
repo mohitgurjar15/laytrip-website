@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {  getUserDetails } from '../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-sso-login',
@@ -6,13 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sso-login.component.scss']
 })
 export class SsoLoginComponent implements OnInit {
-
-  constructor() { }
+  token;
+  constructor(    private route: ActivatedRoute
+    ) { }
 
   ngOnInit() {
-    alert()
-    console.log('sdsd')
+    this.route.params.subscribe(params => this.token = params['id']);
 
+    this.ssonLogin();
+  }
+
+  ssonLogin(){
+    console.log( this.token)
+    // getUserDetails('sd')
   }
 
 }

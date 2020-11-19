@@ -9,11 +9,17 @@ exports.__esModule = true;
 exports.SsoLoginComponent = void 0;
 var core_1 = require("@angular/core");
 var SsoLoginComponent = /** @class */ (function () {
-    function SsoLoginComponent() {
+    function SsoLoginComponent(route) {
+        this.route = route;
     }
     SsoLoginComponent.prototype.ngOnInit = function () {
-        alert();
-        console.log('sdsd');
+        var _this = this;
+        this.route.params.subscribe(function (params) { return _this.token = params['id']; });
+        this.ssonLogin();
+    };
+    SsoLoginComponent.prototype.ssonLogin = function () {
+        console.log(this.token);
+        // getUserDetails('sd')
     };
     SsoLoginComponent = __decorate([
         core_1.Component({
