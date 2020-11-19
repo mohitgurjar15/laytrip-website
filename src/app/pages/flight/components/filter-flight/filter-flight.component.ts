@@ -516,10 +516,10 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.inBoundStops=[];
 
       //Reset Price
-      this.priceSlider.reset({price: [this.filterFlightDetails.price_range.min_price,this.filterFlightDetails.price_range.max_price]});
+      this.priceSlider.reset({price: [Math.floor(this.filterFlightDetails.price_range.min_price),Math.ceil(this.filterFlightDetails.price_range.max_price)]});
 
       //Reset partial payment
-      this.partialPriceSlider.reset({partial_price: [this.filterFlightDetails.partial_payment_price_range.min_price,this.filterFlightDetails.partial_payment_price_range.max_price]});
+      this.partialPriceSlider.reset({partial_price: [Math.floor(this.filterFlightDetails.partial_payment_price_range.min_price),Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price)]});
 
       //Reset airlines
       if(typeof this.airlineList!='undefined' && this.airlineList.length){

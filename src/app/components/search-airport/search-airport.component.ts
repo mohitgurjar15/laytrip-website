@@ -32,7 +32,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   ) {
   }
 
-  selectedAirport = {};
+  selectedAirport:any = {};
   keyword = 'name';
   data = [];
   loading = false;
@@ -83,8 +83,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
       this.placeHolder = this.placeHolder;
       this.defaultSelected = this.defaultSelected;
     }
-    this.selectedAirport = event;
-    this.defaultSelected = '';
+    //this.selectedAirport = event;
+    this.defaultSelected = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
     } else if (event && index && index === 'toSearch') {

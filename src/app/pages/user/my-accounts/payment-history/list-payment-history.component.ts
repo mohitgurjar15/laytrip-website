@@ -43,11 +43,14 @@ export class ListPaymentHistoryComponent implements OnInit {
       module: [''],
     });
   }
-
+  tabClick(){
+    this.filterForm.reset();
+    this.historyResult = {};
+  }
   getPaymentHistory() {
     this.historyResult = this.filterForm.value;
      this.loading = true;
-      this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value,1).subscribe((res: any) => {
+      /* this.userService.getPaymentHistory(this.pageNumber, this.limit,this.filterForm.value,1).subscribe((res: any) => {
           this.historyResult = res.data;
           this.loading = this.notFound  = false;
       }, err => {
@@ -56,7 +59,7 @@ export class ListPaymentHistoryComponent implements OnInit {
 
         if (err && err.status === 404) {
         }
-      });   
+      });  */  
   }
   
   getBookingHistory(event) {

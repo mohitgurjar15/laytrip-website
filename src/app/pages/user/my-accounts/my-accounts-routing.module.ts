@@ -36,7 +36,7 @@ const routes: Routes = [
     component: ListPaymentHistoryComponent,
   },
   {
-    path: 'payment/detail',
+    path: 'payment/detail/:id',
     component: ViewHistoryComponent,
   },
   {

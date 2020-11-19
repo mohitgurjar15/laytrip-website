@@ -44,7 +44,7 @@ var routes = [
         component: list_payment_history_component_1.ListPaymentHistoryComponent
     },
     {
-        path: 'payment/detail',
+        path: 'payment/detail/:id',
         component: view_history_component_1.ViewHistoryComponent
     },
     {

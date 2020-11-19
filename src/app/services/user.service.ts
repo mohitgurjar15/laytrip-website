@@ -137,7 +137,7 @@ export class UserService {
     }
 
     return this.http.get(
-      `${this.apiURL}v1/booking/payment?payment_type=1&limit=${limit}&page_no=${pageNumber}&payment_status=${payment_status}${queryString}`, this.commonFunction.setHeaders());
+      `${this.apiURL}v1/booking/payment?limit=${limit}&page_no=${pageNumber}&payment_status=${payment_status}${queryString}`, this.commonFunction.setHeaders());
   }
 
   getModules(pageNumber, limit) {

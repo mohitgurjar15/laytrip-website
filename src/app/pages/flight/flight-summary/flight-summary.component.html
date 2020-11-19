@@ -297,7 +297,7 @@
         <div class="block_inner ">
             <h6>Fare Break Down</h6>
             <ul>
-                <li *ngFor="let priceInfo of flightDetail[0].fare_break_dwon">
+                <li *ngFor="let priceInfo of fareBreakDown">
                     <p *ngIf="priceInfo.type=='ADT'">
                         Base Fare ({{priceInfo.quantity}} Adult) 
                         <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
@@ -334,8 +334,8 @@
         </div>
         <div class="total_payment">
             <ul>
-                <li>Total <span [ngClass]="{'text_line': payNowAmount >=0 && totalPrice!=payNowAmount}">{{ currency?.symbol }}{{totalPrice | number : '1.2-2'}}</span></li>
-                <li *ngIf="payNowAmount >=0 && totalPrice!=payNowAmount">Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
+                <li>Total <span [ngClass]="{'text_line': payNowAmount >0 && totalPrice!=payNowAmount}">{{ currency?.symbol }}{{totalPrice | number : '1.2-2'}}</span></li>
+                <li *ngIf="payNowAmount >0 && totalPrice!=payNowAmount">Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
             </ul>
         </div>
         

@@ -59,7 +59,7 @@
 </div>
 <div *ngIf="!loading && !notFound">
     <div class="pay_listing" *ngFor="let item of list; let i = index;">
-        <div class="list_top">
+        <div class="list_top" *ngIf="item.totalInstallments > 0">
             <div class="list_left">
                 <ul>
                     <li>Total Paid: <span>${{item.paidAmount | number : '1.2-2' || 0}}</span></li>
@@ -72,7 +72,7 @@
                     <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
                 </ul>
             </div>
-            <div class="list_right">
+            <div class="list_right" >
                 <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(item.nextInstalmentDate)  }} days</span></p>
                 <div class="pay_status">
                   <a>  Pay Early</a>
@@ -82,7 +82,7 @@
         <div class="list_btm">
             <div class="grid_block">
                 <ul>
-                    <li class="fb_medium">Booking ID: <span>{{item.laytripBookingId || '--'}}</span></li>
+                    <li class="fb_medium">Order Id: <span>{{item.laytripBookingId || '--'}}</span></li>
                     <li>Order Type: <span>{{ item.module.name | titlecase  }}</span></li>
                 </ul>
             </div>
@@ -91,6 +91,7 @@
                     <li class="fb_medium">Total Amount: <span>${{item.totalAmount | number : '1.2-2' || 0}}</span></li>
                     <li *ngIf="item.totalInstallments > 0">Instalment: <span>${{item.bookingInstalments[0].amount }} /
                             Weekly</span></li>
+                    <li *ngIf="item.totalInstallments == 0">Booking Date: <span>{{ dateConvert(item.bookingDate) }}</span></li>
                 </ul>
             </div>
             <div class="grid_block" *ngIf="item.totalInstallments > 0">
@@ -102,7 +103,7 @@
             </div>
             <div class="grid_block">
                 <span style="display: none;">Pending</span>
-                <a class="viewDetailBtn" data-toggle="modal" data-target="#payment_view_modal"
+                <a class="viewDetailBtn"
                     (click)="viewDetailClick(item)">View Details</a>
             </div>
         </div>
@@ -122,4 +123,4 @@
     </div>
 </div>
 
-<app-view-history [item]="item"></app-view-history>
+<!-- <app-view-history  [item]="item"></app-view-history> -->

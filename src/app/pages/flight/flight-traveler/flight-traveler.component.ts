@@ -70,12 +70,12 @@ export class FlightTravelerComponent implements OnInit {
     this.laycreditpoints = customInstalmentData.layCreditPoints;
     this.instalmentMode=atob(sessionStorage.getItem('__insMode'))
     this.showPartialPayemntOption= this.instalmentMode=='instalment'?true:false;
-    if(this.instalmentMode=='no-instalment'){
+    /* if(this.instalmentMode=='no-instalment'){
       
     }
     else{
-      this.payNowAmount = customInstalmentData.payNowAmount;
-    }
+    } */
+    this.payNowAmount = customInstalmentData.payNowAmount;
   }
   
   

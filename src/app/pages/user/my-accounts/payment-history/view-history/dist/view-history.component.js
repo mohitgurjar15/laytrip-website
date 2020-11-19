@@ -10,22 +10,42 @@ exports.ViewHistoryComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
 var ViewHistoryComponent = /** @class */ (function () {
-    function ViewHistoryComponent(commonFunction, flightCommonFunction) {
+    function ViewHistoryComponent(commonFunction, flightCommonFunction, userService, route) {
         this.commonFunction = commonFunction;
         this.flightCommonFunction = flightCommonFunction;
+        this.userService = userService;
+        this.route = route;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.currencySymbol = '';
     }
     ViewHistoryComponent.prototype.ngOnInit = function () {
-        // console.log("this.list",this.item)
+        var _this = this;
+        this.route.params.subscribe(function (params) { return _this.id = params['id']; });
+        this.getPaytmentDetailView();
     };
-    ViewHistoryComponent.prototype.ngOnChanges = function (changes) {
+    /*   ngOnChanges(changes:SimpleChanges){
         this.list = changes.item.currentValue;
-        if (this.list) {
-            this.currencySymbol = this.list.currency2.symbol ? this.list.currency2.symbol : '$';
+        if(this.list){
+          this.currencySymbol =  this.list.currency2.symbol ? this.list.currency2.symbol : '$';
         }
-        if (this.list && this.list != 'undefined') {
+        if(this.list &&  this.list != 'undefined' ){
         }
+      }
+     */
+    ViewHistoryComponent.prototype.getPaytmentDetailView = function () {
+        var _this = this;
+        var filterData = { bookingId: this.id };
+        this.userService.getPaymentHistory(1, 1, filterData, '').subscribe(function (res) {
+            // this.activeBooking = res.map 
+            _this.list = res.data;
+            _this.currencySymbol = _this.list[0].currency2.symbol ? _this.list[0].currency2.symbol : '$';
+            /* this.showPaginationBar = true;
+            this.listLength =res.total_result;
+            this.loading = this.notFound  = false; */
+        }, function (err) {
+            /*  this.notFound = true;
+             this.loading = this.showPaginationBar = false; */
+        });
     };
     ViewHistoryComponent.prototype.dateConvert = function (date) {
         return this.commonFunction.convertDateFormat(new Date(date), "MM/DD/YYYY");
