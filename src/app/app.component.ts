@@ -19,7 +19,6 @@ export class AppComponent {
     this.getUserLocationInfo();
   }
   ngOnInit(){
-    console.log('hello')
   }
   setUserOrigin(){
     

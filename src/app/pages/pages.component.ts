@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { GenericService } from '../services/generic.service';
 import { redirectToLogin } from '../_helpers/jwt.helper';
 
@@ -15,9 +15,13 @@ export class PagesComponent implements OnInit {
     private genericService: GenericService,
 
     ) {
-      this.router.events.subscribe((val) =>{         
-           this.checkUserValidate();
-      });
+      this.router.events.subscribe((event: Event) => {
+        if (event instanceof NavigationStart) {
+            // Trigger when route change
+            this.checkUserValidate();
+        }
+
+    });
    }
 
   ngOnInit() {    
