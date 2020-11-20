@@ -20,8 +20,7 @@ export class PagesComponent implements OnInit {
             // Trigger when route change
             this.checkUserValidate();
         }
-
-    });
+      });
    }
 
   ngOnInit() {    
