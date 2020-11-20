@@ -90,11 +90,13 @@ export class FlightsComponent implements OnInit {
               airline : flight.moduleInfo[0].routes[0].stops[0].airline,
               flight_number : flight.moduleInfo[0].routes[0].stops[0].flight_number,
               instalment_amount : flight.moduleInfo[0].start_price,
-              selling_price : flight.moduleInfo[0].selling_price,
+              selling_price : flight.bookingType ==2 ? flight.moduleInfo[0].secondary_selling_price :flight.moduleInfo[0].selling_price,
               stop_count : flight.moduleInfo[0].instalment_details.stop_count,
               is_refundable : flight.moduleInfo[0].instalment_details.is_refundable,
               routes : flight.moduleInfo[0].routes,
-              moduleInfo:flight.moduleInfo[0]
+              moduleInfo:flight.moduleInfo[0],
+              travelers:flight.travelers,
+              bookingType:flight.bookingType
             }
           }
         });

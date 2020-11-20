@@ -103,7 +103,8 @@
                             <div class="flight_stop_detail">
                                 <p>{{item.duration}}</p>
                                 <div class="border-dot">
-                                    <img src="{{s3BucketUrl}}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/flight-duration_im.svg"
+                                        alt="Duration Images">
                                 </div>
                                 <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Non-Stop</span>
                             </div>
@@ -115,8 +116,7 @@
                         </div>
                         <div class="block_detail_btm">
                             <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
-                                <a class="show_more_detail hover-link"
-                                    (click)="showDetails(blockIndex)">
+                                <a class="show_more_detail hover-link" (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                     Flight Details
                                 </a>
@@ -134,7 +134,8 @@
                     <div class="block_price">
                         <p>Instalment per week</p>
                         <p><span>${{item.instalment_amount | number : '1.2-2'}}</span></p>
-                        <a  target="_blank" [routerLink]="['/partial-payment']"><span class="partial_payment_info">Instalment Payment Info</span></a>
+                        <a target="_blank" [routerLink]="['/partial-payment']"><span
+                                class="partial_payment_info">Instalment Payment Info</span></a>
                     </div>
                 </div>
             </div>
@@ -233,13 +234,15 @@
                     <a href="#Fare-Detail-oneway" class="nav-link" data-toggle="tab" role="tab">Fare Details</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
-                       >Baggage Rules</a>
+                    <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab">Baggage Rules</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a href="#Cancellation-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
                         (click)="getCancellationPolicy(item.moduleInfo.route_code)">Cancellation Rules</a>
                 </li> -->
+                <li class="nav-item">
+                    <a href="#Traveller" class="nav-link" data-toggle="tab" role="tab">Travellers</a>
+                </li>
             </ul>
             <div id="content" class="tab-content" role="tablist">
                 <div id="flight-info-oneway" class="card tab-pane fade show active" role="tabpanel"
@@ -326,8 +329,34 @@
                         <div class="card-body">
                             <div class="tab_detail fare_detail_cnt">
                                 <div class="triangle_right"></div>
-                                <ul>
+                                <ul *ngIf="item.bookingType == 1 || !item.moduleInfo.secondary_fare_break_down">
                                     <li *ngFor="let fareDetails of item.moduleInfo.fare_break_dwon">
+                                        <p *ngIf="fareDetails.type == 'ADT'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Adult)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'CHD'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Child)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type == 'INF'">
+                                            Base Fare
+                                            ({{ fareDetails?.quantity }}
+                                            Infant)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                        <p *ngIf="fareDetails.type === 'total'">
+                                            Total Fare ({{ fareDetails?.quantity }} traveller)
+                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                                <ul *ngIf="item.bookingType == 2 && item.moduleInfo.secondary_fare_break_down">
+                                    <li *ngFor="let fareDetails of item.moduleInfo.secondary_fare_break_down">
                                         <p *ngIf="fareDetails.type == 'ADT'">
                                             Base Fare
                                             ({{ fareDetails?.quantity }}
@@ -382,7 +411,7 @@
                                     <p>Indigo</p>
                                     <span>EWR - DEN</span>
                                 </div> -->
-                              <!--   <div class="detail_right" *ngIf="loadBaggageDetails">
+                                <!--   <div class="detail_right" *ngIf="loadBaggageDetails">
                                     <div class="w-100">
                                         <p class="fb_animation mb-0 h-auto w-100"></p>
                                         <p class="fb_animation mb-0 h-auto w-100"></p>
@@ -400,19 +429,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr  *ngFor="let baggage of item.routes;let i = index">
+                                            <tr *ngFor="let baggage of item.routes;let i = index">
                                                 <td data-title="Flight">{{ baggage.stops[i].flight_number }}</td>
                                                 <td data-title="Depart">{{ baggage.stops[i].departure_info.name }}</td>
                                                 <td data-title="Arrive">{{ baggage.stops[i].arrival_info.name }}</td>
-                                                <td data-title="Free Baggage" >{{ baggage.stops[i].checkin_baggage || 'N/A'}}</td>
+                                                <td data-title="Free Baggage">
+                                                    {{ baggage.stops[i].checkin_baggage || 'N/A'}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
 
                                     <p>The baggage information is just for reference. Please Check with airline before
                                         check-in.</p>
-                                    </div>
-                                    <p *ngIf="!loadBaggageDetails && notFoundBaggageDetails">There is no baggage information found</p>
+                                </div>
+                                <p *ngIf="!loadBaggageDetails && notFoundBaggageDetails">There is no baggage information
+                                    found</p>
 
                                 <div class="triangle_left"></div>
                             </div>
@@ -434,7 +465,7 @@
                         <div class="card-body">
                             <div class="tab_detail cancellation_rules_cnt">
                                 <div class="triangle_right"></div>
-                               <!--  <div class="rules_cnt_top">
+                                <!--  <div class="rules_cnt_top">
                                     <div class="detail_left">
                                         <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
                                         <p>Indigo</p>
@@ -453,7 +484,7 @@
                                         </ul>
                                     </div>
                                 </div> -->
-                                name     <div class="rules_cnt_btm">
+                                name <div class="rules_cnt_btm">
                                     <span>Terms & Conditions</span>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
@@ -469,6 +500,31 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="triangle_left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Traveller" class="card tab-pane fade" role="tabpanel"
+                    aria-labelledby="Traveller">
+                    <div class="card-header" role="tab" id="heading-Fare-Detail-oneway">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-Fare-Detail-oneway"
+                                aria-expanded="false" aria-controls="collapse-Fare-Detail">
+                                Fare Details
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-Fare-Detail-oneway" class="collapse" data-parent="#content" role="tabpanel"
+                        aria-labelledby="heading-Fare-Detail-oneway">
+                        <div class="card-body">
+                            <div class="tab_detail fare_detail_cnt">
+                                <div class="triangle_right"></div>
+                                <ul>
+                                    <li *ngFor="let traveler of item.travelers;let i = index">
+                                        <p>Traveller ({{traveler.userData.user_type | titlecase}}) <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span></p>
+                                    </li>
+                                </ul>
                                 <div class="triangle_left"></div>
                             </div>
                         </div>

@@ -27,7 +27,7 @@
                                 <li>
                                     <span>Total</span>
                                     <div class="block_point">
-                                        Available Laycredit points
+                                        Available laytrip points
                                         <p>{{travellerPoints.total_available_points | number : '1.2-2' || 0}}</p>
                                     </div>
                                 </li>
@@ -103,7 +103,7 @@
                                                         {{item.points}} Points
                                                     </div>
                                                     <div class="block_point_info">
-                                                        <div class="block_point_left">Money Added</div>
+                                                        <div class="block_point_left">Laytrip Point Added</div>
                                                         <div class="block_point_right">
                                                             <span>{{ getDateFormat(item.earnDate) }}</span></div>
                                                     </div>
@@ -130,7 +130,8 @@
                                 <div class="card-header" role="tab" id="heading-Redeemed">
                                     <h5 class="mb-0">
                                         <a class="collapsed" data-toggle="collapse" href="#collapse-Redeemed"
-                                            aria-expanded="false" aria-controls="collapse-Redeemed">
+                                            aria-expanded="false" aria-controls="collapse-Laytrip points redeemed
+                                            Redeemed">
                                             Redeemed
                                         </a>
                                     </h5>
@@ -190,7 +191,7 @@
                                                         {{item.points}} Points
                                                     </div>
                                                     <div class="block_point_info">
-                                                        <div class="block_point_left">Money Added</div>
+                                                        <div class="block_point_left">Laytrip points redeemed</div>
                                                         <div class="block_point_right">
                                                             <span>{{ getDateFormat(item.redeemDate) }}</span></div>
                                                     </div>
