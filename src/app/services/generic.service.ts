@@ -119,4 +119,8 @@ export class GenericService {
   getFaqData() {
     return this.http.get(environment.apiUrl + 'v1/faq');
   }
+
+  checkUserValidate(token) {
+    return this.http.get(environment.apiUrl + 'v1/auth/validate-user/' + token);
+  }
 }

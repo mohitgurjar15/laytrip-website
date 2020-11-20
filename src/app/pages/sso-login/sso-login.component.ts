@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {  getUserDetails, redirectToLogin } from '../../_helpers/jwt.helper';
 
 @Component({
@@ -9,7 +9,9 @@ import {  getUserDetails, redirectToLogin } from '../../_helpers/jwt.helper';
 })
 export class SsoLoginComponent implements OnInit {
   token='';
-  constructor(    private route: ActivatedRoute
+  constructor(    
+    private route: ActivatedRoute,
+    public router: Router
     ) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class SsoLoginComponent implements OnInit {
       var userDetail = getUserDetails(this.token);
       if(userDetail && userDetail.roleId != 7 ){
         localStorage.setItem("_lay_sess", this.token);
+        this.router.navigate(['/']);
       } else {
         redirectToLogin();
       }

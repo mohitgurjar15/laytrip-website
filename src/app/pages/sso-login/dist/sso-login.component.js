@@ -10,8 +10,9 @@ exports.SsoLoginComponent = void 0;
 var core_1 = require("@angular/core");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var SsoLoginComponent = /** @class */ (function () {
-    function SsoLoginComponent(route) {
+    function SsoLoginComponent(route, router) {
         this.route = route;
+        this.router = router;
         this.token = '';
     }
     SsoLoginComponent.prototype.ngOnInit = function () {
@@ -26,6 +27,7 @@ var SsoLoginComponent = /** @class */ (function () {
             var userDetail = jwt_helper_1.getUserDetails(this.token);
             if (userDetail && userDetail.roleId != 7) {
                 localStorage.setItem("_lay_sess", this.token);
+                this.router.navigate(['/']);
             }
             else {
                 jwt_helper_1.redirectToLogin();
