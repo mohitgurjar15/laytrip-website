@@ -18,7 +18,6 @@ var AppComponent = /** @class */ (function () {
         this.getUserLocationInfo();
     }
     AppComponent.prototype.ngOnInit = function () {
-        console.log('hello');
     };
     AppComponent.prototype.setUserOrigin = function () {
         var host = window.location.origin;

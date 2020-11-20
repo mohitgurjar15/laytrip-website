@@ -8,14 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.PagesComponent = void 0;
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var jwt_helper_1 = require("../_helpers/jwt.helper");
 var PagesComponent = /** @class */ (function () {
     function PagesComponent(router, genericService) {
         var _this = this;
         this.router = router;
         this.genericService = genericService;
-        this.router.events.subscribe(function (val) {
-            _this.checkUserValidate();
+        this.router.events.subscribe(function (event) {
+            if (event instanceof router_1.NavigationStart) {
+                // Trigger when route change
+                _this.checkUserValidate();
+            }
         });
     }
     PagesComponent.prototype.ngOnInit = function () {
