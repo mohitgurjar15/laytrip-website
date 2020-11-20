@@ -25,7 +25,7 @@
             <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</p>
           </div>
           <div class="block_btm">
-            <span>${{item.price | number : '1.2-2'}}</span>
+            <span>${{item.secondary_start_price>0 ?item.secondary_start_price : item.price | number : '1.2-2'}}</span>
           </div>
         </a>
       </div>
