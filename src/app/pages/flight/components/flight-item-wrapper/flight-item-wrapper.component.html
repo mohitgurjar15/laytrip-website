@@ -44,7 +44,7 @@
                                         Flight Details
                                     </a>
                                 </div>
-                                <div class="info_price_origin">
+                                <!-- <div class="info_price_origin">
                                     <div class="refundable" *ngIf="item.is_refundable">Refundable </div>
                                     <div class="no_refundable" *ngIf="!item.is_refundable">Non-Refundable </div>
 
@@ -52,24 +52,27 @@
                                         Total
                                         <span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 px-0">
                         <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
-                            <div class="block_inn_pr" *ngIf="item.start_price > 0">
-                                <div class="block">
+                            <div class="block_inn_pr" >
+                                <!-- <div class="block">
                                     <p>Down Payment</p>
                                     <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
-                                </div>
-                                <div class="block">
-                                    <p>From 2nd week</p>
+                                </div> -->
+                                <div class="block" *ngIf="item.start_price > 0">
+                                    <p>Starts from</p>
                                     <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
+                                </div>
+                                <div class="block" *ngIf="item.start_price == 0">
+                                    <p><span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span></p>
                                 </div>
                             </div>
                             <a class="book_btn hover-link" (click)="bookNow(item)">
-                                Book Now
+                               {{ item.start_price>0 ? 'Select': 'Book Now' }} 
                             </a>
                             <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
@@ -202,12 +205,21 @@
                                                 <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             </p>
                                         </li>
-                                        <!-- <li>Total Fare (1 Adult) <span>{{ currency?.symbol }}126</span></li> -->
                                     </ul>
-                                    <!-- <p><span>Note:</span> It is a long established fact that a reader will be distracted by
-                                            the readable content of a page when looking at its layout. The point of using Lorem
-                                            Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-                                            using ‘Content here, content here’, making it look like readable English.</p> -->
+                                    <ul *ngIf="item.instalment_details.instalment_available">
+                                        <li class="down_payment">
+                                            Down payment 
+                                            <span class="down_value">{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span>
+                                        </li>
+                                        <ng-container *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
+                                            <li *ngIf="i>0">
+                                                <div class="detail"> {{i}} Instalment
+                                                    <p>{{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</p>
+                                                </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                            </li>
+                                        </ng-container>
+                                    </ul>
+                                   
                                     <div class="triangle_left"></div>
                                 </div>
                             </div>
@@ -450,14 +462,14 @@
                                         Flight Details
                                     </a>
                                 </div>
-                                <div class="info_price_origin">
+                                <!-- <div class="info_price_origin">
                                     <div class="refundable" *ngIf="item.is_refundable">Refundable </div>
                                     <div class="no_refundable" *ngIf="!item.is_refundable">Non-Refundable </div>
                                     <div class="ogigin_price">
                                         Total
                                         <span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -465,17 +477,22 @@
 
                     <div class="col-md-4 px-0">
                         <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
-                            <div class="block_inn_pr" *ngIf="item.start_price > 0">
-                                <div class="block">
+                            <div class="block_inn_pr" >
+                                <!-- <div class="block">
                                     <p>Down payment</p>
                                     <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
-                                </div>
-                                <div class="block">
-                                    <p>From 2nd week</p>
+                                </div> -->
+                                <div class="block" *ngIf="item.start_price > 0">
+                                    <p>Starts from</p>
                                     <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /week</p>
                                 </div>
+                                <div class="block" *ngIf="item.start_price == 0">
+                                    <p><span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span></p>
+                                </div>
                             </div>
-                            <a class="book_btn hover-link"  (click)="bookNow(item)">Book Now</a>
+                            <a class="book_btn hover-link"  (click)="bookNow(item)">
+                                {{ item.start_price>0 ? 'Select': 'Book Now' }} 
+                            </a>
                             <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
                                 partial payment</a>
@@ -666,6 +683,20 @@
                                                 </p>
                                             </li>
                                         </ul>
+                                        <ul *ngIf="item.instalment_details.instalment_available">
+                                            <li class="down_payment">
+                                                Down payment 
+                                                <span class="down_value">{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span>
+                                            </li>
+                                            <ng-container *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
+                                                <li *ngIf="i>0">
+                                                    <div class="detail"> {{i}} Instalment
+                                                        <p>{{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</p>
+                                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                        
 
                                         <div class="triangle_left"></div>
                                     </div>

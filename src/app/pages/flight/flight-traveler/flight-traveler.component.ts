@@ -55,6 +55,7 @@ export class FlightTravelerComponent implements OnInit {
     this.loading = true;
     this.getTravelers();
     this.getSellingPrice();
+    this.checkUser()
 
     if(sessionStorage.getItem('_itinerary')){
       this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
@@ -70,11 +71,7 @@ export class FlightTravelerComponent implements OnInit {
     this.laycreditpoints = customInstalmentData.layCreditPoints;
     this.instalmentMode=atob(sessionStorage.getItem('__insMode'))
     this.showPartialPayemntOption= this.instalmentMode=='instalment'?true:false;
-    /* if(this.instalmentMode=='no-instalment'){
-      
-    }
-    else{
-    } */
+   
     this.payNowAmount = customInstalmentData.payNowAmount;
   }
   
@@ -205,14 +202,14 @@ export class FlightTravelerComponent implements OnInit {
     }
   }
   
-  ngDoCheck(){
+  /* ngDoCheck(){
 
     this.checkUser(); 
     if(this.is_traveller === false){
       this.loading = true;
       this.getTravelers();
     } 
-  }
+  } */
 
   flightAvailable(event){
     this.isFlightNotAvailable=event;

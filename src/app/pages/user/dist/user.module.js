@@ -20,7 +20,7 @@ var UserModule = /** @class */ (function () {
                 common_1.CommonModule,
                 forms_1.ReactiveFormsModule,
                 forms_1.FormsModule,
-                user_routing_module_1.UserRoutingModule
+                user_routing_module_1.UserRoutingModule,
             ],
             declarations: []
         })

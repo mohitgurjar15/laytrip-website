@@ -18,11 +18,12 @@ export class AppComponent {
     this.setUserOrigin();
     this.getUserLocationInfo();
   }
-
+  ngOnInit(){
+  }
   setUserOrigin(){
-
+    
     let host = window.location.origin;
-    if(host.includes("dr.") || host.includes("loc")){
+    if(host.includes("dr.")){
       localStorage.setItem('__uorigin','DR')
     }
     else{
@@ -62,5 +63,9 @@ export class AppComponent {
         //window.location.href='https://www.google.com/'
       }
     }
+  }
+
+  checkUserValidate(){
+    
   }
 }

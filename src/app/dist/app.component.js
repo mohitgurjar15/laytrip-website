@@ -17,9 +17,11 @@ var AppComponent = /** @class */ (function () {
         this.setUserOrigin();
         this.getUserLocationInfo();
     }
+    AppComponent.prototype.ngOnInit = function () {
+    };
     AppComponent.prototype.setUserOrigin = function () {
         var host = window.location.origin;
-        if (host.includes("dr.")) {
+        if (host.includes("dr.") || host.includes("loc")) {
             localStorage.setItem('__uorigin', 'DR');
         }
         else {
@@ -51,6 +53,8 @@ var AppComponent = /** @class */ (function () {
                 //window.location.href='https://www.google.com/'
             }
         }
+    };
+    AppComponent.prototype.checkUserValidate = function () {
     };
     AppComponent = __decorate([
         core_1.Component({

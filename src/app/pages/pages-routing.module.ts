@@ -8,6 +8,7 @@ import { FaqComponent } from './faq/faq.component';
 import { PagesComponent } from './pages.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { SsoLoginComponent } from './sso-login/sso-login.component';
 import { WhyLaytripComponent } from './why-laytrip/why-laytrip.component';
 
 const routes: Routes = [
@@ -58,6 +59,10 @@ const routes: Routes = [
             {
                 path: 'coming-soon',
                 component: ComingSoonComponent
+            },
+            {
+                path: 'sson',
+                component: SsoLoginComponent
             },
         ]
     }

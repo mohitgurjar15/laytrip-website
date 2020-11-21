@@ -127,8 +127,7 @@ export class ProfileComponent implements OnInit {
       if(this.location){
         const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
         this.profileForm.controls.country_code.setValue(countryCode.country_name);
-      }
-      
+      }      
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);

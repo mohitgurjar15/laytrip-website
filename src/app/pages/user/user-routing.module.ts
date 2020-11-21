@@ -6,6 +6,7 @@ const routes: Routes = [
     path: '', 
     loadChildren: './my-accounts/my-accounts.module#MyAccountsModule'
   },
+  
 ];
 
 @NgModule({

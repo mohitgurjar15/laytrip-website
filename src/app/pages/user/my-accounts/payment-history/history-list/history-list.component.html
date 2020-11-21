@@ -8,7 +8,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="list_right" style="flex-flow: column;">
+            <div class="list_right d-none" style="flex-flow: column;">
                 <p class="fb_animation w-100 mb-0"></p>
                 <p class="fb_animation w-100 mb-0"></p>
             </div>
@@ -65,25 +65,27 @@
                     <li>Total Paid: <span>${{item.paidAmount | number : '1.2-2' || 0}}</span></li>
                     <li>
                         <div class="progress">
-                            <div class="progress-bar" style="width: 25%;"></div>
-                            <div class="progress_dot" style="left:23%;"></div>
+                            <div class="progress-bar"  [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,1)" ></div>
+                            <div class="progress_dot" [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,2)"></div>
+                            <!-- <div class="progress-bar"  style="width: 25%;" ></div>
+                            <div class="progress_dot" style="left: 23%;"></div> -->
                         </div>
                     </li>
                     <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
                 </ul>
-            </div>
-            <div class="list_right" >
+            </div> 
+            <div class="list_right d-none">
                 <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(item.nextInstalmentDate)  }} days</span></p>
                 <div class="pay_status">
                   <a>  Pay Early</a>
-                </div>
-            </div>
+                </div> 
+            </div> 
         </div>
         <div class="list_btm">
             <div class="grid_block">
                 <ul>
-                    <li class="fb_medium">Order Id: <span>{{item.laytripBookingId || '--'}}</span></li>
-                    <li>Order Type: <span>{{ item.module.name | titlecase  }}</span></li>
+                    <li class="fb_medium">Booking Id: <span>{{item.laytripBookingId || '--'}}</span></li>
+                    <li>Booking Type: <span>{{ item.module.name | titlecase  }}</span></li>
                 </ul>
             </div>
             <div class="grid_block">

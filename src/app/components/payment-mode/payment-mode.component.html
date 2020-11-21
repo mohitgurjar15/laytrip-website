@@ -42,31 +42,38 @@
                             Weekly <span>({{weeklyDefaultInstalmentNo}} payments)</span>
                         </div>
                         <div class="right">
-                            ${{weeklyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                            ${{weeklySecondInstalmentTemp ? weeklySecondInstalmentTemp : weeklyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
                         </div>
                     </label>
                 </li>
-                <li [ngClass]="{'active_tab': durationType === 'biweekly', 'disable_payment_option': convertToNumber(biWeeklyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice}">
+                <li [ngClass]="{'active_tab': durationType === 'biweekly', 'disable_payment_option': biWeeklySecondInstalmentTemp<=0 || convertToNumber(biWeeklyFirstInstalment) > partialPaymentSellingPrice}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [disabled]="convertToNumber(biWeeklyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
+                        <input type="radio" name="weekly-installment" [disabled]=" biWeeklySecondInstalmentTemp<=0 || convertToNumber(biWeeklyFirstInstalment) > partialPaymentSellingPrice" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Biweekly <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
                         </div>
-                        <div class="right">
-                            ${{biWeeklyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                        <div class="right" *ngIf="biWeeklySecondInstalmentTemp>=0">
+                            ${{biWeeklySecondInstalmentTemp ? biWeeklySecondInstalmentTemp : biWeeklyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                        </div>
+
+                        <div class="right" *ngIf="biWeeklySecondInstalmentTemp<0">
+                            $0 <span>Per Instalment</span>
                         </div>
                     </label>
                 </li>
-                <li [ngClass]="{'active_tab': durationType === 'monthly','disable_payment_option': convertToNumber(monthlyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice}">
+                <li [ngClass]="{'active_tab': durationType === 'monthly','disable_payment_option': monthlySecondInstalmentTemp <=0 ||  convertToNumber(monthlyFirstInstalment) > partialPaymentSellingPrice}">
                     <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [disabled]="convertToNumber(monthlyFirstInstalment)+convertToNumber(laycreditpoints) > partialPaymentSellingPrice" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
+                        <input type="radio" name="weekly-installment" [disabled]="monthlySecondInstalmentTemp <=0 || convertToNumber(monthlyFirstInstalment) > partialPaymentSellingPrice" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
                         <span class="checkmark"></span>
                         <div class="left">
                             Monthly <span>({{monthlyDefaultInstalmentNo}} payments)</span>
                         </div>
-                        <div class="right">
-                            ${{monthlyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                        <div class="right" *ngIf="monthlySecondInstalmentTemp>=0">
+                            ${{monthlySecondInstalmentTemp ? monthlySecondInstalmentTemp : monthlyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                        </div>
+                        <div class="right" *ngIf="monthlySecondInstalmentTemp<0">
+                            $0 <span>Per Instalment</span>
                         </div>
                     </label>
                 </li>

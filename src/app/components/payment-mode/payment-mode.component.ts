@@ -87,7 +87,9 @@ export class PaymentModeComponent implements OnInit {
   totalPrice;
   secondAccordiain:boolean=false;
   showThirdAccrodian:boolean=false;
-  secondInstalmentTemp:number=0;
+  weeklySecondInstalmentTemp:number=0;
+  biWeeklySecondInstalmentTemp:number=0;
+  monthlySecondInstalmentTemp:number=0;
 
   ngOnInit(){
     
@@ -285,11 +287,12 @@ export class PaymentModeComponent implements OnInit {
     this.instalmentRequest.instalment_type=type;
 
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      this.instalments=res;
-      if(this.instalments.instalment_available==true){
-        this.biWeeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
-        this.biWeeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
-        this.biWeeklyFirstInstalment = this.instalments.instalment_date[0].instalment_amount;
+      
+      if(res.instalment_available==true){
+        this.biWeeklyDefaultInstalmentNo = res.instalment_date.length;
+        this.biWeeklyDefaultInstalment = res.instalment_date[1].instalment_amount;
+        this.biWeeklyFirstInstalment = res.instalment_date[0].instalment_amount;
+        this.biWeeklySecondInstalmentTemp = res.instalment_date[1].instalment_amount;
       }
       else{
         this.instalmentAvavible=false;
@@ -305,12 +308,12 @@ export class PaymentModeComponent implements OnInit {
     this.instalmentRequest.instalment_type=type;
 
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      this.instalments=res;
-      if(this.instalments.instalment_available==true){
-        this.monthlyDefaultInstalmentNo = this.instalments.instalment_date.length;
-        this.monthlyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
-        this.monthlyFirstInstalment = this.instalments.instalment_date[1].instalment_amount;
-
+      
+      if(res.instalment_available==true){
+        this.monthlyDefaultInstalmentNo = res.instalment_date.length;
+        this.monthlyDefaultInstalment = res.instalment_date[1].instalment_amount;
+        this.monthlyFirstInstalment = res.instalment_date[0].instalment_amount;
+        this.monthlySecondInstalmentTemp = res.instalment_date[1].instalment_amount;
       }
       else{
         this.instalmentAvavible=false;
@@ -323,13 +326,13 @@ export class PaymentModeComponent implements OnInit {
   getInstalemntsWeekly(type){
 
     this.instalmentRequest.instalment_type=type;
-
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      this.instalments=res;
-      if(this.instalments.instalment_available==true){
-        this.weeklyDefaultInstalmentNo = this.instalments.instalment_date.length;
-        this.weeklyDefaultInstalment = this.instalments.instalment_date[1].instalment_amount;
-        this.weeklyFirsttInstalment = this.instalments.instalment_date[0].instalment_amount;
+      
+      if(res.instalment_available==true){
+        this.weeklyDefaultInstalmentNo = res.instalment_date.length;
+        this.weeklyDefaultInstalment = res.instalment_date[1].instalment_amount;
+        this.weeklyFirsttInstalment = res.instalment_date[0].instalment_amount;
+        this.weeklySecondInstalmentTemp = res.instalment_date[1].instalment_amount;
       }
       else{
         this.instalmentAvavible=false;
@@ -361,6 +364,11 @@ export class PaymentModeComponent implements OnInit {
       payNowAmount:this.getPayNowAmount(),
       firstInstalment:this.firstInstalment
     })
+
+    
+    this.getInstalemntsWeekly('weekly')
+    this.getInstalemntsBiweekly('biweekly')
+    this.getInstalemntsMonthly('monthly')
   }
 
   triggerPayemntMode(type){
@@ -553,6 +561,7 @@ export class PaymentModeComponent implements OnInit {
       this.instalmentRequest.custom_instalment_no=this.customInstalment;
     }
 
+    this.instalmentRequest.instalment_type =this.durationType;
     this.instalmentRequest.additional_amount=(this.upFrontPayment-this.defaultInstalment) + Number(this.laycreditpoints);
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
@@ -561,7 +570,10 @@ export class PaymentModeComponent implements OnInit {
           this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
           this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
           this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
-          this.secondInstalmentTemp = this.instalments.instalment_date[1].instalment_amount;
+          this.getInstalemntsWeekly('weekly')
+          this.getInstalemntsBiweekly('biweekly')
+          this.getInstalemntsMonthly('monthly')
+          
 
           this.remainingInstalment = this.instalments.instalment_date.length-1;
 

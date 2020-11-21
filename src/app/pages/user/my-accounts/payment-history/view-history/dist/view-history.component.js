@@ -17,9 +17,11 @@ var ViewHistoryComponent = /** @class */ (function () {
         this.route = route;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.currencySymbol = '';
+        this.loader = false;
     }
     ViewHistoryComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.loader = true;
         this.route.params.subscribe(function (params) { return _this.id = params['id']; });
         this.getPaytmentDetailView();
     };
@@ -34,15 +36,18 @@ var ViewHistoryComponent = /** @class */ (function () {
      */
     ViewHistoryComponent.prototype.getPaytmentDetailView = function () {
         var _this = this;
+        this.loader = true;
         var filterData = { bookingId: this.id };
         this.userService.getPaymentHistory(1, 1, filterData, '').subscribe(function (res) {
             // this.activeBooking = res.map 
             _this.list = res.data;
+            _this.loader = false;
             _this.currencySymbol = _this.list[0].currency2.symbol ? _this.list[0].currency2.symbol : '$';
             /* this.showPaginationBar = true;
             this.listLength =res.total_result;
             this.loading = this.notFound  = false; */
         }, function (err) {
+            _this.loader = false;
             /*  this.notFound = true;
              this.loading = this.showPaginationBar = false; */
         });
