@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
@@ -66,7 +66,10 @@ export class HomeComponent implements OnInit {
     public fb: FormBuilder,
     public router: Router,
     public cd: ChangeDetectorRef,
+    private renderer:Renderer2
   ) {
+
+    this.renderer.addClass(document.body, 'bg_color');
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
       toDestination: ['', [Validators.required]],
@@ -268,4 +271,9 @@ export class HomeComponent implements OnInit {
     this.arrivalAirportCountry = tempAirportCountry;
     
   }
+
+  ngOnDestroy() {
+    this.renderer.removeClass(document.body, 'bg_color');
+  }
+
 }
