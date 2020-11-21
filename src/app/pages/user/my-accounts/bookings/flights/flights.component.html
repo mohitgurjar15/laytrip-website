@@ -520,9 +520,9 @@
                         <div class="card-body">
                             <div class="tab_detail fare_detail_cnt">
                                 <div class="triangle_right"></div>
-                                <ul>
-                                    <li *ngFor="let traveler of item.travelers;let i = index">
-                                        <li>Traveller ({{traveler.userData.user_type | titlecase}}) <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span></li>
+                                <ul *ngFor="let traveler of item.travelers;let i = index">
+                                    <li >
+                                        Traveller ({{traveler.userData.user_type | titlecase}}) <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span>
                                     </li>
                                 </ul>
                                 <div class="triangle_left"></div>
