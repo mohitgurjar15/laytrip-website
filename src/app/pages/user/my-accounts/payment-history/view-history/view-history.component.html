@@ -164,7 +164,7 @@
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
                                                 <span>Partial Payment Amount :</span>
-                                                <p>{{ currencySymbol }}{{list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
+                                                <p>{{ currencySymbol }}{{list[0].bookingInstalments[1].amount ||  list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
                                                 <span>Paid Amount :</span>
@@ -197,7 +197,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let instalment of list[0].bookingInstalments; let i=index;">
+                                            <tr *ngFor="let instalment of list[0].bookingInstalments | slice:1; let i = index;">
                                                 <td data-title="ID">{{i +1 }}</td>
                                                 <td data-title="Amount">{{ currencySymbol}}{{  instalment.amount | number : '1.2-2' }}</td>
                                                 <td data-title="Date">{{ dateConvert(instalment.instalmentDate) }}</td>

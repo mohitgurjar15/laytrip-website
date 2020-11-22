@@ -157,6 +157,7 @@ export class FlightTravelerComponent implements OnInit {
   getItinerarySelectionArray(itinerarys){  
     this.slectedItinerary = itinerarys;
     this._travellersCountValid = false;
+
     if(itinerarys.adult.length === Number(this._itinerary.adult)
     && itinerarys.child.length === Number(this._itinerary.child) 
     && itinerarys.infant.length === Number(this._itinerary.infant)
