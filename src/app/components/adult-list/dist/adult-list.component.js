@@ -125,7 +125,6 @@ var AdultListComponent = /** @class */ (function () {
                 this._travelers = this._travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
                 this.cookieService.remove('_travelers');
                 this.cookieService.put("_travelers", JSON.stringify(this._travelers));
-                console.log(this.adultCounter, totalAdult);
                 var cookieTrveller = JSON.parse(this.cookieService.get("_travelers"));
                 var cookieAdults = [];
                 var cookieChilds = [];
@@ -141,24 +140,23 @@ var AdultListComponent = /** @class */ (function () {
                         cookieInfant.push(element.user_type);
                     }
                 });
-                console.log(cookieChilds.length + 1, totalChild);
-                if (traveler.user_type == 'adult' && cookieAdults.length + 1 <= totalAdult) {
-                    if (this.adultCounter >= totalAdult || this.adultCounter <= totalAdult) {
+                if (traveler.user_type == 'adult') {
+                    if ((this.adultCounter >= totalAdult || this.adultCounter <= totalAdult) && cookieAdults.length + 1 <= totalAdult) {
                         this.adultCounter--;
                     }
                     this._itinerarySelection.adult = this._itinerarySelection.adult.filter(function (obj) { return obj !== traveler.userId; });
                 }
-                else if (traveler.user_type == 'child' && cookieChilds.length + 1 <= totalChild) {
-                    if (this.childCounter >= totalChild || this.childCounter <= totalChild) {
+                else if (traveler.user_type == 'child') {
+                    if ((this.childCounter >= totalChild || this.childCounter <= totalChild) && cookieChilds.length + 1 <= totalChild) {
                         this.childCounter--;
                     }
                     this._itinerarySelection.child = this._itinerarySelection.child.filter(function (obj) { return obj !== traveler.userId; });
                 }
-                else if (traveler.user_type == 'infant' && cookieInfant.length + 1 <= totalInfant) {
-                    if (this.infantCounter >= totalInfant || this.infantCounter <= totalInfant) {
+                else if (traveler.user_type == 'infant') {
+                    if ((this.infantCounter >= totalInfant || this.infantCounter <= totalInfant) && cookieInfant.length + 1 <= totalInfant) {
                         this.infantCounter--;
                     }
-                    this._itinerarySelection.child = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
+                    this._itinerarySelection.infant = this._itinerarySelection.infant.filter(function (obj) { return obj !== traveler.userId; });
                 }
             }
         }

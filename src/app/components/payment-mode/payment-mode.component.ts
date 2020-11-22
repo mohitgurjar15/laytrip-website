@@ -102,7 +102,6 @@ export class PaymentModeComponent implements OnInit {
     this.getInstalemntsMonthly('monthly');
     this.getInstalemntsWeekly('weekly');
     if(Object.keys(this.customInstalmentData).length){
-      console.log("this.customInstalmentData",this.customInstalmentData)
       this.additionalAmount = this.customInstalmentData.additionalAmount;
       this.durationType = this.customInstalmentData.instalmentType;
       this.customAmount = this.customInstalmentData.customAmount;
