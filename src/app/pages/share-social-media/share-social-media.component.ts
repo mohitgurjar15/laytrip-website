@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MODAL_TYPE } from 'src/app/components/confirmation-modal/confirmation-modal.component';
+import { MODAL_TYPE } from '../../components/confirmation-modal/confirmation-modal.component';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ShareSocialMediaComponent } from 'src/app/pages/share-social-media/share-social-media.component';
+import { ShareSocialMediaComponent } from '../../pages/share-social-media/share-social-media.component';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 @Component({
