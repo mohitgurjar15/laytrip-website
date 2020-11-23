@@ -29,6 +29,8 @@ var FlightsComponent = /** @class */ (function () {
         this.isNotFound = false;
         this.loading = true;
         this.notFoundBaggageDetails = false;
+        this.filterData = {};
+        this.filterInfo = {};
     }
     FlightsComponent.prototype.ngOnInit = function () {
         this.page = 1;
@@ -43,6 +45,13 @@ var FlightsComponent = /** @class */ (function () {
         this.loading = true;
         this.page = event;
         this.getBookings();
+    };
+    FlightsComponent.prototype.ngOnChanges = function (changes) {
+        this.filterData = changes.result.currentValue;
+        if (this.filterData) {
+            this.showPaginationBar = false;
+            this.getBookings();
+        }
     };
     FlightsComponent.prototype.showDetails = function (index) {
         var _this = this;
@@ -59,7 +68,10 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.getBookings = function () {
         var _this = this;
         this.loading = true;
-        this.userService.getBookings(this.page, this.limit).subscribe(function (res) {
+        if (this.filterData != 'undefined') {
+            this.filterInfo = this.filterData;
+        }
+        this.userService.getBookings(this.page, this.limit, this.filterInfo).subscribe(function (res) {
             if (res) {
                 _this.flightBookings = res.data.map(function (flight) {
                     if (flight.moduleId == 1) {
@@ -135,6 +147,9 @@ var FlightsComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], FlightsComponent.prototype, "flightLists");
+    __decorate([
+        core_1.Input()
+    ], FlightsComponent.prototype, "result");
     FlightsComponent = __decorate([
         core_1.Component({
             selector: 'app-flights',

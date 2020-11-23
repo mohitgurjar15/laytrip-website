@@ -10,19 +10,48 @@ exports.ListBookingsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var ListBookingsComponent = /** @class */ (function () {
-    function ListBookingsComponent(userService, commonFunction) {
+    function ListBookingsComponent(userService, commonFunction, formBuilder) {
         this.userService = userService;
         this.commonFunction = commonFunction;
+        this.formBuilder = formBuilder;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
         this.flightLists = [];
         this.perPageLimitConfig = [10, 25, 50, 100];
+        this.startMinDate = new Date();
     }
     ListBookingsComponent.prototype.ngOnInit = function () {
         // this.loading = true;
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
-        // this.getBookings();
+        this.getModule();
+        this.filterForm = this.formBuilder.group({
+            bookingId: [''],
+            start_date: [''],
+            end_date: [''],
+            module: ['']
+        });
+    };
+    ListBookingsComponent.prototype.getModule = function () {
+        var _this = this;
+        this.userService.getModules(this.pageNumber, this.limit).subscribe(function (res) {
+            _this.modules = res.data.map(function (module) {
+                if (module.status) {
+                    return {
+                        id: module.id,
+                        name: module.name.toUpperCase()
+                    };
+                }
+            });
+        }, function (err) {
+        });
+    };
+    ListBookingsComponent.prototype.getFlightResult = function () {
+        this.result = this.filterForm.value;
+        this.loading = true;
+    };
+    ListBookingsComponent.prototype.startDateUpdate = function (date) {
+        this.endDate = new Date(date);
     };
     ListBookingsComponent = __decorate([
         core_1.Component({

@@ -12,6 +12,7 @@ import { UserService } from '../../../../../services/user.service';
 export class FlightsComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() flightLists;
+  @Input() result;
   flightList = [];
   flightBookings = [];
   page :1;
@@ -32,6 +33,8 @@ export class FlightsComponent implements OnInit {
   loading = true;
   pageNumber:number;
   notFoundBaggageDetails = false;
+  public filterData={};
+  filterInfo={};
 
   constructor(   
      private commonFunction: CommonFunction,
@@ -57,6 +60,14 @@ export class FlightsComponent implements OnInit {
     this.getBookings();
   }
 
+  ngOnChanges(changes: SimpleChanges) {   
+    this.filterData = changes.result.currentValue;
+
+    if(this.filterData){
+      this.showPaginationBar = false;
+      this.getBookings();
+    }
+  }
   showDetails(index) {
 
     if (typeof this.showFlightDetails[index] === 'undefined') {
@@ -72,7 +83,10 @@ export class FlightsComponent implements OnInit {
 
   getBookings(){
     this.loading = true;
-    this.userService.getBookings(this.page, this.limit).subscribe((res: any) => {
+    if(this.filterData != 'undefined'){     
+      this.filterInfo = this.filterData;
+    }
+    this.userService.getBookings(this.page, this.limit,this.filterInfo).subscribe((res: any) => {
       if (res) {
         this.flightBookings = res.data.map(flight => {
           if(flight.moduleId == 1){

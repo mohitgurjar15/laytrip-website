@@ -76,11 +76,17 @@
 <div class="result_listing one_way_list roundtrip_list" *ngIf="!loading">
     <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
-            <div class="block_booking_info">
-                <ul>
-                    <li>Booking ID <span>{{item.tripId}}</span></li>
+            <div class="block_booking_info">            
+                <div class="row">
+                    <div class="col-md-9">
+                        <ul>
+                            <li>Booking ID <span>{{item.tripId}}</span></li>
                     <li>Booked on <span>{{ item.bookingDate}}</span></li>
-                </ul>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="block_cancle"> <a href="javascript:void(0);" data-toggle="modal" data-target="#cancle_alert_modal">Cancel Booking</a> <span class="complete">Completed</span> </div>                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-2 px-0">

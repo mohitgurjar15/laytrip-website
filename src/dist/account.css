@@ -914,9 +914,22 @@
     word-break: break-word;
   }
 }
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info span.complete {
+  font-size: 16px;
+  color: #119300;
+  font-weight: 500;
+}
+.account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info span.refund {
+  font-size: 16px;
+  color: #FF0000;
+  font-weight: 500;
+}
 .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle {
   width: 100%;
   text-align: center;
+  line-height: 28px;
+  display: flex;
+  flex-flow: column;
 }
 .account_part .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle a {
   padding: 4px 10px;
