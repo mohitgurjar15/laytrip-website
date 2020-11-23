@@ -74,9 +74,12 @@
                             <a class="book_btn hover-link" (click)="bookNow(item)">
                                {{ item.start_price>0 ? 'Select': 'Book Now' }} 
                             </a>
-                            <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
+                            <!-- <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
-                                partial payment</a>
+                                partial payment</a> -->
+                            <div class="show_detail">
+                                <a class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment plan details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -493,9 +496,12 @@
                             <a class="book_btn hover-link"  (click)="bookNow(item)">
                                 {{ item.start_price>0 ? 'Select': 'Book Now' }} 
                             </a>
-                            <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
+                            <!-- <a target="_blank" class="partial_payment_info anchor-text" [routerLink]="['/partial-payment']">Learn
                                 more about
-                                partial payment</a>
+                                partial payment</a> -->
+                            <div class="show_detail">
+                                <a class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment plan details</a>
+                            </div>
                         </div>
                     </div>
                 </div>

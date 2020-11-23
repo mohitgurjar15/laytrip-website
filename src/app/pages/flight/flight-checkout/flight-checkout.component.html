@@ -85,17 +85,17 @@
                   </div>
                   <div class="block_condition_agree">
                       <ul>
-                          <li>
+                          <!-- <li>
                               <label class="custom_checkbox">
                                   <input type="checkbox" (click)="acceptTermCondtion()">
                                   <span class="checkmark"></span>
                               </label>
                               <p>I agree <a href="javascript:void(0);" (click)="acceptTermCondtion()">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
-                          </li>
+                          </li> -->
                           
                       </ul>
                       <div class="btn_payment">
-                        <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="bookFlight()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+                        <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="toggleTermConditionPopup()" >Pay & Complete Booking <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                       </div>
                   </div>
                   
@@ -127,3 +127,4 @@
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
 <app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>
 <app-booking-feedback *ngIf="isShowFeedbackPopup" [bookingId]="bookingId" (feedbackValueChange)="feedbackToggle($event)"></app-booking-feedback>
+<app-popup-term-condition *ngIf="isShowTermConditionPopup" (closeTermCoditionPopup)="closeTermCoditionPopup($event)"  (acceptTermCondtion)="acceptTermCondtion($event)"></app-popup-term-condition>
