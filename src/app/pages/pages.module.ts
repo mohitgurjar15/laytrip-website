@@ -28,6 +28,7 @@ import { PartialPaymentComponent } from './partial-payment/partial-payment.compo
 import { DownloadAppComponent } from './download-app/download-app.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { SsoLoginComponent } from './sso-login/sso-login.component';
+import { ShareSocialMediaComponent } from './share-social-media/share-social-media.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SsoLoginComponent } from './sso-login/sso-login.component';
     PartialPaymentComponent,
     DownloadAppComponent,
     ComingSoonComponent,
-    SsoLoginComponent
+    SsoLoginComponent,
+    ShareSocialMediaComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +66,7 @@ import { SsoLoginComponent } from './sso-login/sso-login.component';
     // NG5 SLIDER
     Ng5SliderModule,
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent,AuthComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent,AuthComponent,ShareSocialMediaComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }

@@ -85,8 +85,23 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getProfile = function () {
         return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
     };
-    UserService.prototype.getBookings = function (pageNumber, limit) {
-        return this.http.get(this.apiURL + "v1/booking/user-booking-list?limit=" + limit + "&page_no=" + pageNumber, this.commonFunction.setHeaders());
+    UserService.prototype.getBookings = function (pageNumber, limit, filterForm) {
+        var queryString = "";
+        if (filterForm && filterForm != 'undefined') {
+            if (filterForm.bookingId) {
+                queryString += (filterForm.bookingId) ? '&booking_id=' + filterForm.bookingId : '';
+            }
+            if (filterForm.module) {
+                queryString += (filterForm.module.id) ? '&booking_type=' + filterForm.module.id : '';
+            }
+            if (filterForm.start_date) {
+                queryString += (filterForm.start_date) ? '&start_date=' + moment(filterForm.start_date).format("YYYY-MM-DD") : '';
+            }
+            if (filterForm.end_date) {
+                queryString += (filterForm.end_date) ? '&end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
+            }
+        }
+        return this.http.get(this.apiURL + "v1/booking/user-booking-list?limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
     };
     UserService.prototype.getPaymentHistory = function (pageNumber, limit, filterForm, payment_status) {
         var queryString = "";
