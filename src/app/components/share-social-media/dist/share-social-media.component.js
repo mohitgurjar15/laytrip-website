@@ -35,7 +35,9 @@ var ShareSocialMediaComponent = /** @class */ (function () {
             window.open("https://plus.google.com/share?url=" + environment_1.environment.siteUrl + ",\"\",\"height=550,width=525,left=100,top=100,menubar=0");
         }
         else if (media == 'Whatapp') {
-            window.open("whatsapp://send?text= Share via WhatsApp , See More: " + environment_1.environment.siteUrl);
+            var message = encodeURIComponent('Laytrip');
+            var whatsapp_url = "whatsapp://send?text=" + message;
+            window.location.href = whatsapp_url;
         }
         return false;
     };
