@@ -4,6 +4,7 @@ import { SecondaryFooterComponent } from './secondary-footer/secondary-footer.co
 import { TranslateModule } from '@ngx-translate/core';
 import { PagesModule } from '../pages/pages.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShareSocialMediaComponent } from '../components/share-social-media/share-social-media.component';
 
 
 
@@ -18,6 +19,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports:[
   ],
-  entryComponents:[]
+  entryComponents:[ShareSocialMediaComponent]
 })
 export class ElementsModule { }

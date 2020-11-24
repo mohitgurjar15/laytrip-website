@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.MainFooterComponent = void 0;
 var core_1 = require("@angular/core");
-var share_social_media_component_1 = require("src/app/pages/share-social-media/share-social-media.component");
+var share_social_media_component_1 = require("../../components/share-social-media/share-social-media.component");
 var environment_1 = require("../../../environments/environment");
 var MainFooterComponent = /** @class */ (function () {
     function MainFooterComponent(modalService) {

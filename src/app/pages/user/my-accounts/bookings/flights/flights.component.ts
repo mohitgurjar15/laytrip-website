@@ -110,7 +110,8 @@ export class FlightsComponent implements OnInit {
               routes : flight.moduleInfo[0].routes,
               moduleInfo:flight.moduleInfo[0],
               travelers:flight.travelers,
-              bookingType:flight.bookingType
+              bookingType:flight.bookingType,
+              bookingStatus:flight.bookingStatus
             }
           }
         });

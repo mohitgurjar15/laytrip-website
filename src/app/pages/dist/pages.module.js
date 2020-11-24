@@ -37,7 +37,6 @@ var partial_payment_component_1 = require("./partial-payment/partial-payment.com
 var download_app_component_1 = require("./download-app/download-app.component");
 var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
 var sso_login_component_1 = require("./sso-login/sso-login.component");
-var share_social_media_component_1 = require("./share-social-media/share-social-media.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -64,7 +63,6 @@ var PagesModule = /** @class */ (function () {
                 download_app_component_1.DownloadAppComponent,
                 coming_soon_component_1.ComingSoonComponent,
                 sso_login_component_1.SsoLoginComponent,
-                share_social_media_component_1.ShareSocialMediaComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -78,7 +76,7 @@ var PagesModule = /** @class */ (function () {
                 // NG5 SLIDER
                 ng5_slider_1.Ng5SliderModule,
             ],
-            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent, share_social_media_component_1.ShareSocialMediaComponent],
+            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
         })
     ], PagesModule);

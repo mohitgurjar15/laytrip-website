@@ -34,13 +34,40 @@ var redeem_laycredit_component_1 = require("./redeem-laycredit/redeem-laycredit.
 var booking_feedback_component_1 = require("./booking-feedback/booking-feedback.component");
 var booking_as_login_or_guest_popup_component_1 = require("./booking-as-login-or-guest-popup/booking-as-login-or-guest-popup.component");
 var ng_lottie_1 = require("ng-lottie");
+var angular2_text_mask_1 = require("angular2-text-mask");
+var plan_summary_component_1 = require("./plan-summary/plan-summary.component");
+var add_points_component_1 = require("./add-points/add-points.component");
+var redeem_laycredit_loader_component_1 = require("./redeem-laycredit-loader/redeem-laycredit-loader.component");
+var toaster_component_1 = require("./toaster/toaster.component");
+var share_social_media_component_1 = require("./share-social-media/share-social-media.component");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
     ComponentsModule = __decorate([
         core_1.NgModule({
             declarations: [
-                search_airport_component_1.SearchAirportComponent, traveller_info_component_1.TravellerInfoComponent, checkout_progress_component_1.CheckoutProgressComponent, adult_list_component_1.AdultListComponent, child_list_component_1.ChildListComponent, infant_list_component_1.InfantListComponent, booking_timer_component_1.BookingTimerComponent, payment_mode_component_1.PaymentModeComponent, card_list_component_1.CardListComponent, add_card_component_1.AddCardComponent, traveler_form_component_1.TravelerFormComponent, full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent, booking_enquiry_info_component_1.BookingEnquiryInfoComponent, add_guest_card_component_1.AddGuestCardComponent, redeem_laycredit_component_1.RedeemLaycreditComponent, booking_feedback_component_1.BookingFeedbackComponent, booking_as_login_or_guest_popup_component_1.BookingAsLoginOrGuestPopupComponent
+                search_airport_component_1.SearchAirportComponent,
+                traveller_info_component_1.TravellerInfoComponent,
+                checkout_progress_component_1.CheckoutProgressComponent,
+                adult_list_component_1.AdultListComponent,
+                child_list_component_1.ChildListComponent,
+                infant_list_component_1.InfantListComponent,
+                booking_timer_component_1.BookingTimerComponent,
+                payment_mode_component_1.PaymentModeComponent,
+                card_list_component_1.CardListComponent,
+                add_card_component_1.AddCardComponent,
+                traveler_form_component_1.TravelerFormComponent,
+                full_page_overlay_loader_component_1.FullPageOverlayLoaderComponent,
+                booking_enquiry_info_component_1.BookingEnquiryInfoComponent,
+                add_guest_card_component_1.AddGuestCardComponent,
+                redeem_laycredit_component_1.RedeemLaycreditComponent,
+                booking_feedback_component_1.BookingFeedbackComponent,
+                booking_as_login_or_guest_popup_component_1.BookingAsLoginOrGuestPopupComponent,
+                plan_summary_component_1.PlanSummaryComponent,
+                add_points_component_1.AddPointsComponent,
+                redeem_laycredit_loader_component_1.RedeemLaycreditLoaderComponent,
+                toaster_component_1.ToasterComponent,
+                share_social_media_component_1.ShareSocialMediaComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -52,7 +79,8 @@ var ComponentsModule = /** @class */ (function () {
                 ng5_slider_1.Ng5SliderModule,
                 ngx_cookie_1.CookieModule.forRoot(),
                 calendar_1.CalendarModule,
-                ng_lottie_1.LottieAnimationViewModule.forRoot()
+                ng_lottie_1.LottieAnimationViewModule.forRoot(),
+                angular2_text_mask_1.TextMaskModule,
             ],
             exports: [
                 search_airport_component_1.SearchAirportComponent,
@@ -70,7 +98,12 @@ var ComponentsModule = /** @class */ (function () {
                 add_guest_card_component_1.AddGuestCardComponent,
                 redeem_laycredit_component_1.RedeemLaycreditComponent,
                 booking_feedback_component_1.BookingFeedbackComponent,
-                booking_as_login_or_guest_popup_component_1.BookingAsLoginOrGuestPopupComponent
+                booking_as_login_or_guest_popup_component_1.BookingAsLoginOrGuestPopupComponent,
+                plan_summary_component_1.PlanSummaryComponent,
+                add_points_component_1.AddPointsComponent,
+                redeem_laycredit_loader_component_1.RedeemLaycreditLoaderComponent,
+                toaster_component_1.ToasterComponent,
+                share_social_media_component_1.ShareSocialMediaComponent
             ],
             providers: [common_1.DatePipe]
         })
