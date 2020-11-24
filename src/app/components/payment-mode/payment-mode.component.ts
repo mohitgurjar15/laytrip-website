@@ -29,12 +29,16 @@ export class PaymentModeComponent implements OnInit {
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
   @Input() priceData=[];
+  percentageArray=[];
+  percentageValue:number;
   constructor(
     private genericService:GenericService,
     private commonFunction:CommonFunction,
     private flightService:FlightService
   ) {
-    this.getPredictionDate();
+    //this.getPredictionDate();
+    //this.loadJS();
+    
    }
   
   @Input() flightSummary;
@@ -92,6 +96,7 @@ export class PaymentModeComponent implements OnInit {
   monthlySecondInstalmentTemp:number=0;
 
   ngOnInit(){
+    
     
     //console.log("laycreditpoints",this.laycreditpoints)
     this.instalmentRequest.amount= this.priceData[0].selling_price;
@@ -168,9 +173,38 @@ export class PaymentModeComponent implements OnInit {
     })
     this.calculateInstalment();
   } */
-  changeAdditionalAmount(event){
+  /* changeAdditionalAmount(event){
 
     this.upFrontPayment = Number(event.target.value);
+    if(this.upFrontPayment<this.defaultInstalment){
+      this.upFrontPayment=this.defaultInstalment;
+    }
+
+    this.additionalAmount = this.upFrontPayment-this.defaultInstalment;
+    this.remainingAmount=this.remainingAmount-this.upFrontPayment;
+    this.firstInstalment=this.upFrontPayment;
+    this.getInstalmentData.emit({ 
+      additionalAmount:this.additionalAmount, 
+      instalmentType:this.durationType, 
+      customAmount: this.instalmentRequest.custom_amount,
+      customInstalment : this.instalmentRequest.custom_instalment_no,
+      layCreditPoints : this.laycreditpoints,
+      partialPaymentAmount : this.secondInstalment,
+      payNowAmount:this.getPayNowAmount(),
+      firstInstalment:this.firstInstalment
+    })
+
+    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.priceData[0].selling_price){
+      this.toggleFullPayment();
+    }
+    this.calculateInstalment();
+  } */
+
+  changeAdditionalAmount(){
+
+    console.log(this.upFrontPayment,"before")
+    this.upFrontPayment = (this.instalmentRequest.amount*Number(this.percentageValue))/100;
+    console.log(this.upFrontPayment,"After")
     if(this.upFrontPayment<this.defaultInstalment){
       this.upFrontPayment=this.defaultInstalment;
     }
@@ -244,6 +278,12 @@ export class PaymentModeComponent implements OnInit {
       if(this.instalments.instalment_available==true){
 
         this.instalmentAvavible=true;
+        if(this.instalments.percentage==20){
+          this.percentageArray=[20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100];
+        }
+        else{
+          this.percentageArray=[40,45,50,55,60,65,70,75,80,85,90,95,100];
+        }
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
         this.defaultInstalment  = this.instalments.instalment_date[0].instalment_amount;
@@ -344,10 +384,14 @@ export class PaymentModeComponent implements OnInit {
 
   changeDuration(type){
     this.durationType=type;
+    if(this.instalments.percentage==20){
+      this.percentageValue=20;
+    }
+    else{
+      this.percentageValue=40;
+    }
     this.customMethod='';
-    //this.secondInstalmentTemp=0;
     this.additionalAmount=0;
-    //this.laycreditpoints=0;
     this.instalmentRequest.custom_amount=null;
     this.instalmentRequest.custom_instalment_no=null;
     this.instalmentRequest.additional_amount=Number(this.laycreditpoints);
@@ -565,7 +609,8 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){
-          
+
+          console.log("percentageArray",this.percentageArray)
           this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
           this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
           this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
@@ -713,5 +758,85 @@ export class PaymentModeComponent implements OnInit {
 
   convertToNumber(number){
     return Number(number)
+  }
+
+  loadJS(){
+    // Start Custom Select js
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    /*look for any elements with the class "custom - select":*/
+    x = document.getElementsByClassName("custom-select");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+      selElmnt = x[i].getElementsByTagName("select")[0];
+      ll = selElmnt.length;
+      /*for each element, create a new DIV that will act as the selected item:*/
+      a = document.createElement("DIV");
+      a.setAttribute("class", "select-selected");
+      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+      x[i].appendChild(a);
+      /*for each element, create a new DIV that will contain the option list:*/
+      b = document.createElement("DIV");
+      b.setAttribute("class", "select-items select-hide");
+      for (j = 1; j < ll; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function (e) {
+          /*when an item is clicked, update the original select box,
+          and the selected item:*/
+          var y, i, k, s, h, sl, yl;
+          s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+          sl = s.length;
+          h = this.parentNode.previousSibling;
+          for (i = 0; i < sl; i++) {
+            if (s.options[i].innerHTML == this.innerHTML) {
+              s.selectedIndex = i;
+              h.innerHTML = this.innerHTML;
+              y = this.parentNode.getElementsByClassName("same-as-selected");
+              yl = y.length;
+              for (k = 0; k < yl; k++) {
+                y[k].removeAttribute("class");
+              }
+              this.setAttribute("class", "same-as-selected");
+              break;
+            }
+          }
+          h.click();
+        });
+        b.appendChild(c);
+      }
+      x[i].appendChild(b);
+      a.addEventListener("click", function (e) {
+        /*when the select box is clicked, close any other select boxes,
+        and open/close the current select box:*/
+        e.stopPropagation();
+        this.closeAllSelect(this);
+        this.nextSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
+      });
+    }
+  }
+
+  closeAllSelect(elmnt) {
+    /*a function that will close all select boxes in the document,
+    except the current select box:*/
+    var x, y, i, xl, yl, arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    xl = x.length;
+    yl = y.length;
+    for (i = 0; i < yl; i++) {
+      if (elmnt == y[i]) {
+        arrNo.push(i)
+      } else {
+        y[i].classList.remove("select-arrow-active");
+      }
+    }
+    for (i = 0; i < xl; i++) {
+      if (arrNo.indexOf(i)) {
+        x[i].classList.add("select-hide");
+      }
+    }
   }
 }
