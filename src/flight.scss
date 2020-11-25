@@ -5878,7 +5878,7 @@
 								width: 100%;
 								background: $bg-tab-detail;
 								padding: 15px 20px;
-								margin: 20px 0 0;
+								margin: 20px 0;
 								display: flex;
 								justify-content: space-between;
 
@@ -7045,78 +7045,78 @@
 															text-align: center;
 															position: relative;
 
-															.custom-select {
-																height: 40px;
-																border-top: none;
-																border-left: none;
-																border-right: none;
-																border-bottom: 1px solid $box-border-color;
-																background: transparent;
-																padding: 0;
-
-																select {
-																	display: none;
-																}
-
-																.select-selected {
-																	background-color: transparent;
-																	line-height: 40px;
-																	font-size: 16px;
-																	font-weight: 700;
-																	color: $text-blue;
-																	position: relative;
-
-																	&:after {
-																		position: absolute;
-																		content: "";
-																		top: 17px;
-																		right: 0px;
-																		width: 0;
-																		height: 0;
-																		border: 4px solid transparent;
-																		border-color: $text-grey transparent transparent transparent;
-																	}
-
-																	&.select-arrow-active {
-																		&:after {
-																			border-color: transparent transparent $text-grey transparent;
-																			top: 11px;
-																		}
-																	}
-																}
-
-																.select-items {
-																	position: absolute;
-																	background-color: $text-grey;
-																	top: 100%;
-																	left: 0;
-																	right: 0;
-																	z-index: 99;
-
-																	div {
-																		color: $text-white;
-																		padding: 8px 16px;
-																		border: 1px solid transparent;
-																		border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-																		cursor: pointer;
-																		user-select: none;
-																		font-size: 14px;
-																		color: $text-white;
-
-																		&:hover {
-																			background-color: rgba(0, 0, 0, 0.1);
-																		}
-
-																		&.same-as-selected {
-																			background-color: rgba(0, 0, 0, 0.1);
-																		}
-																	}
-
-																	&.select-hide {
-																		display: none;
-																	}
-																}
-															}
+															// .custom-select {
+															//  height: 40px;
+															//	border-top: none;
+															//	border-left: none;
+															//	border-right: none;
+															//	border-bottom: 1px solid $box-border-color;
+															//	background: transparent;
+															//	padding: 0;
+															//
+															//	select {
+															//		display: none;
+															//	}
+															//
+															//	.select-selected {
+															//		background-color: transparent;
+															//		line-height: 40px;
+															//		font-size: 16px;
+															//		font-weight: 700;
+															//		color: $text-blue;
+															//		position: relative;
+															//
+															//		  &:after {
+															//				position: absolute;
+															//				content: "";
+															//				top: 17px;
+															//				right: 0px;
+															//				width: 0;
+															//				height: 0;
+															//				border: 4px solid transparent;
+															//				border-color: $text-grey transparent transparent transparent;
+															//		}
+															//    
+															//		&.select-arrow-active {
+															//		   &:after {
+															//					border-color: transparent transparent $text-grey transparent;
+															//					top: 11px;
+															//			 }
+															//		}
+															//  }
+															//
+															//  .select-items {
+															//    position: absolute;
+															//		background-color: $text-grey;
+															//		top: 100%;
+															//		left: 0;
+															//		right: 0;
+															//		z-index: 99;
+															// 
+															//			div {
+															//			  color: $text-white;
+															//				padding: 8px 16px;
+															//				border: 1px solid transparent;
+															//				border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+															//				cursor: pointer;
+															//				user-select: none;
+															//				font-size: 14px;
+															//				color: $text-white;
+															//
+															//				&:hover {
+															//				    background-color: rgba(0, 0, 0, 0.1);
+															//				}
+															//
+															//				&.same-as-selected {
+															//				    background-color: rgba(0, 0, 0, 0.1);
+															//				}
+															//		 }
+															//
+															//		&.select-hide {
+															//		    display: none;
+															//    }
+															//  }
+															//}
 
 															input {
 																width: 100%;

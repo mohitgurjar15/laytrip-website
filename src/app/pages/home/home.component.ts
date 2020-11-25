@@ -7,6 +7,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { airports } from '../flight/airports';
 
 @Component({
   selector: 'app-home',
@@ -24,13 +25,17 @@ export class HomeComponent implements OnInit {
   flightSearchFormSubmitted: boolean = false;
   countryCode:string;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationCode='SDQ';
-  departureCity='Santo Domingo';
-  departureAirportCountry='SDQ, Dominican Republic';
-
-  toDestinationCode='JFK';
-  arrivalCity='New York';
-  arrivalAirportCountry='JFK, USA';
+  fromDestinationCode='JFK';
+  departureCity='New York';
+  departureAirportCountry='JFK, USA';
+  fromAirport=airports[this.fromDestinationCode];
+  
+  
+  
+  toDestinationCode='PUJ';
+  arrivalCity='Higuey';
+  arrivalAirportCountry='PUJ, Dominican Republic';
+  toAirport=airports[this.toDestinationCode];
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -40,16 +45,16 @@ export class HomeComponent implements OnInit {
   flightDepartureMinDate;
   flightReturnMinDate;
 
-  departureDate = new Date(moment().add(30, 'days').format("MM/DD/YYYY"));
-  returnDate = new Date(moment().add(37, 'days').format("MM/DD/YYYY"))
+  departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
+  returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
 
   searchFlightInfo =
     {
       trip: 'oneway',
-      departure: 'SDQ',
-      arrival: 'JFK',
+      departure: this.fromDestinationCode,
+      arrival: this.toDestinationCode,
       departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
       arrival_date: '',
       class: '',
@@ -68,7 +73,9 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private renderer:Renderer2
   ) {
-
+    
+    this.fromAirport['display_name'] = `${this.fromAirport.city},${this.fromAirport.country},(${this.fromAirport.code}),${this.fromAirport.name}`;
+    this.toAirport['display_name'] = `${this.toAirport.city},${this.toAirport.country},(${this.toAirport.code}),${this.toAirport.name}`;
     this.renderer.addClass(document.body, 'bg_color');
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
@@ -147,7 +154,6 @@ export class HomeComponent implements OnInit {
   }
 
   destinationChangedValue(event) {
-    console.log("yeeeee")
     if (event && event.key && event.key === 'fromSearch') {
       this.fromDestinationCode = event.value.code;
       this.departureCity = event.value.city;
@@ -191,10 +197,6 @@ export class HomeComponent implements OnInit {
     queryParams.adult = this.searchFlightInfo.adult;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-
-    if (this.flightSearchForm) {
-      console.log(this.flightSearchForm.controls)
-    }
 
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {

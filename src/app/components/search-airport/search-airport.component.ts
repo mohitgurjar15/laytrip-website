@@ -21,6 +21,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
   @Input() defaultCity:string;
+  @Input() airport;
   defaultSelectedTemp;
   airportDefaultDestValue;
   departureAirport;
@@ -40,6 +41,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.defaultSelectedTemp = this.defaultSelected;
     this.setDefaultAirport();
+    this.data[0]=this.airport;
+    console.log(this.airport,"+++")
   }
 
   ngDocheck() {

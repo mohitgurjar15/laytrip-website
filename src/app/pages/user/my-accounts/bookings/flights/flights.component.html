@@ -87,7 +87,7 @@
                     <div class="col-md-3">
                         <div class="block_cancle"> 
                             <a class="hover-link" style="display: none;" data-toggle="modal" data-target="#cancle_alert_modal">Cancel Booking</a> 
-                            <span [ngClass]="{'complete': item.bookingStatus , 'refund':!item.bookingStatus }">{{ item.bookingStatus ? 'Completed' : 'Pending' }}</span> </div>                    </div>
+                            <span [ngClass]="{'complete': item.bookingStatus , 'refund':!item.bookingStatus }">{{ bookingStatus[item.bookingStatus] }}</span> </div>                    </div>
                 </div>
             </div>
             <div class="row">
@@ -389,10 +389,10 @@
                                         </p>
                                     </li>
                                 </ul>
-                                <p><span>Note:</span> It is a long established fact that a reader will be distracted by
+                                <!-- <p><span>Note:</span> It is a long established fact that a reader will be distracted by
                                     the readable content of a page when looking at its layout. The point of using Lorem
                                     Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-                                    using ‘Content here, content here’, making it look like readable English.</p>
+                                    using ‘Content here, content here’, making it look like readable English.</p> -->
                                 <div class="triangle_left"></div>
                             </div>
                         </div>

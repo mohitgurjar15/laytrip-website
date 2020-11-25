@@ -3,6 +3,7 @@ import { CommonFunction } from '../../../../../_helpers/common-function';
 import { environment } from '../../../../../../environments/environment';
 import { FlightService } from '../../../../../services/flight.service';
 import { UserService } from '../../../../../services/user.service';
+import { BookingStatus } from '../../../../../constant/booking-status.const';
 
 @Component({
   selector: 'app-flights',
@@ -35,14 +36,16 @@ export class FlightsComponent implements OnInit {
   notFoundBaggageDetails = false;
   public filterData={};
   filterInfo={};
+  bookingStatus;
 
   constructor(   
      private commonFunction: CommonFunction,
      private flightService: FlightService,
      private userService: UserService
 
-
-  ) { }
+  ) { 
+    this.bookingStatus =  BookingStatus;
+  }
 
   ngOnInit() {
     this.page = 1;

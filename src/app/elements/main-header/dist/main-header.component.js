@@ -60,7 +60,6 @@ var MainHeaderComponent = /** @class */ (function () {
             }
         }
         this.countryCode = this.commonFunction.getUserCountry();
-        console.log("this.countryCode", this.countryCode);
     }
     MainHeaderComponent_1 = MainHeaderComponent;
     MainHeaderComponent.prototype.ngOnInit = function () {

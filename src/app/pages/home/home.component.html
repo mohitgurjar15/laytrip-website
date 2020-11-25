@@ -104,6 +104,7 @@
                                                             [label]="'From'" [placeHolder]=departureCity
                                                             [defaultSelected]=departureAirportCountry
                                                             [tabIndex]=1
+                                                            [airport]=fromAirport
                                                             [defaultCity]=departureCity
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
@@ -125,6 +126,7 @@
                                                             [label]="'TO'" [placeHolder]=arrivalCity
                                                             [defaultSelected]=arrivalAirportCountry
                                                             [tabIndex]=2
+                                                            [airport]=toAirport
                                                             [defaultCity]=arrivalCity
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
