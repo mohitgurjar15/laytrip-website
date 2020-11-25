@@ -202,16 +202,21 @@ export class PaymentModeComponent implements OnInit {
 
   changeAdditionalAmount(){
 
-    console.log(this.upFrontPayment,"before")
-    this.upFrontPayment = (this.instalmentRequest.amount*Number(this.percentageValue))/100;
-    console.log(this.upFrontPayment,"After")
-    if(this.upFrontPayment<this.defaultInstalment){
-      this.upFrontPayment=this.defaultInstalment;
+    this.upFrontPayment = ((this.instalmentRequest.amount-Number(this.laycreditpoints)) *Number(this.percentageValue))/100;
+    if(this.percentageValue==this.percentageArray[0]){
+      this.additionalAmount = Number(this.laycreditpoints);
     }
+    else{
+      this.additionalAmount = Number(this.laycreditpoints) + this.getPerecentageAmount() -this.defaultInstalment;
+    }
+    console.log("this.additionalAmountthis.additionalAmount",this.additionalAmount)
+    /* if(this.upFrontPayment<this.defaultInstalment){
+      this.upFrontPayment=this.defaultInstalment;
+    } */
 
-    this.additionalAmount = this.upFrontPayment-this.defaultInstalment;
+    //this.additionalAmount = this.upFrontPayment-this.defaultInstalment;
     this.remainingAmount=this.remainingAmount-this.upFrontPayment;
-    this.firstInstalment=this.upFrontPayment;
+    //this.firstInstalment=this.upFrontPayment;
     this.getInstalmentData.emit({ 
       additionalAmount:this.additionalAmount, 
       instalmentType:this.durationType, 
@@ -280,9 +285,11 @@ export class PaymentModeComponent implements OnInit {
         this.instalmentAvavible=true;
         if(this.instalments.percentage==20){
           this.percentageArray=[20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100];
+          this.percentageValue=20;
         }
         else{
           this.percentageArray=[40,45,50,55,60,65,70,75,80,85,90,95,100];
+          this.percentageValue=40;
         }
         this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
         this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
@@ -295,6 +302,7 @@ export class PaymentModeComponent implements OnInit {
         this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
 
         this.defaultInstalment = this.defaultInstalment - Number(this.laycreditpoints)-(this.additionalAmount);
+        //this.additionalAmount = Number(this.laycreditpoints) + ((this.instalmentRequest.amount-Number(this.laycreditpoints)) *Number(this.percentageValue))/100;
         /* console.log(this.defaultInstalmentNo,"----",this.customInstalment)
         if(this.customInstalment){
           this.defaultInstalmentNo = this.defaultInstalmentNo - this.customInstalment;
@@ -605,12 +613,12 @@ export class PaymentModeComponent implements OnInit {
     }
 
     this.instalmentRequest.instalment_type =this.durationType;
-    this.instalmentRequest.additional_amount=(this.upFrontPayment-this.defaultInstalment) + Number(this.laycreditpoints);
+    //this.instalmentRequest.additional_amount=(this.upFrontPayment-this.defaultInstalment) + Number(this.laycreditpoints);
+    console.log(this.additionalAmount,"this.additionalAmount");
+    this.instalmentRequest.additional_amount=this.additionalAmount;
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){
-
-          console.log("percentageArray",this.percentageArray)
           this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
           this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
           this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
@@ -641,6 +649,15 @@ export class PaymentModeComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['laycreditpoints']) {
       this.laycreditpoints = changes['laycreditpoints'].currentValue;
+      if(typeof this.percentageValue!='undefined'){
+        if(this.percentageArray[0]==this.percentageValue){
+          this.additionalAmount = Number(this.laycreditpoints);
+        }
+        else{
+          this.additionalAmount = Number(this.laycreditpoints) + this.getPerecentageAmount() -this.defaultInstalment;
+        }
+      }
+      console.log("------",this.additionalAmount)
       this.getInstalmentData.emit({ 
         additionalAmount:this.additionalAmount, 
         instalmentType:this.durationType, 
@@ -652,13 +669,13 @@ export class PaymentModeComponent implements OnInit {
         firstInstalment:this.firstInstalment
       })
       
-      if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.priceData[0].selling_price){
+      /* if((Number(this.defaultInstalment) + Number(this.additionalAmount))>=this.priceData[0].selling_price){
         this.toggleFullPayment();
         this.disablePartialPayment=true;   
       }
       else{
         this.disablePartialPayment=false;   
-      }
+      } */
       this.calculateInstalment();
     }
 
@@ -696,12 +713,12 @@ export class PaymentModeComponent implements OnInit {
   }
 
   getPayNowAmount(){
+    this.sellingPrice = this.getTotalPrice();    
     if(this.isInstalemtMode){
 
-      this.payNowPrice= this.upFrontPayment;
+      this.payNowPrice= this.defaultInstalment+this.getPerecentageAmount();
     }
     else{
-      this.sellingPrice = this.getTotalPrice();    
       this.payNowPrice = Number(this.sellingPrice) -Number(this.laycreditpoints);
     }
 
@@ -754,6 +771,10 @@ export class PaymentModeComponent implements OnInit {
 
     }
     
+  }
+
+  getPerecentageAmount(){
+    return ((this.instalmentRequest.amount-Number(this.laycreditpoints)) *Number(this.percentageValue))/100;
   }
 
   convertToNumber(number){
