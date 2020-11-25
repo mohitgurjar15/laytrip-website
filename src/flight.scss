@@ -618,7 +618,7 @@
 					overflow: hidden;
 
 					@media(max-width: 767px) {
-						height: 100%;
+						height: auto;
 					}
 
 					.row {
@@ -1194,7 +1194,7 @@
 								&.flight_info_cnt {
 									padding: 20px 0;
 									max-height: 445px;
-									overflow-y: scroll;
+									overflow-y: auto;
 									overflow-x: hidden;
 
 									@media(max-width: 767px) {
@@ -1464,7 +1464,7 @@
 								&.fare_detail_cnt {
 									padding: 30px 30px 20px;
 									max-height: 445px;
-									overflow-y: scroll;
+									overflow-y: auto;
 									overflow-x: hidden;
 
 									@media(max-width: 767px) {
@@ -1544,7 +1544,7 @@
 									padding: 20px;
 									flex-flow: row;
 									max-height: 445px;
-									overflow-y: scroll;
+									overflow-y: auto;
 									overflow-x: hidden;
 
 									@media(max-width: 767px) {
@@ -1691,7 +1691,7 @@
 									padding: 20px;
 									flex-flow: column;
 									max-height: 445px;
-									overflow-y: scroll;
+									overflow-y: auto;
 									overflow-x: hidden;
 
 									@media(max-width: 767px) {
@@ -7119,14 +7119,14 @@
 															}
 
 															input {
-																	width: 100%;
-																	font-size: 16px;
-																	font-weight: 600;
-																	color: $text-blue;
-																	border: none;
-																	text-align: center;
-																	border-bottom: 1px solid $box-border-color;
-																}
+																width: 100%;
+																font-size: 16px;
+																font-weight: 600;
+																color: $text-blue;
+																border: none;
+																text-align: center;
+																border-bottom: 1px solid $box-border-color;
+															}
 														}
 
 														.pay_block {
