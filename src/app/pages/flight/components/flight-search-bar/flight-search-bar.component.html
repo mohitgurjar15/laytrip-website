@@ -116,10 +116,8 @@
                               </ng-template>
                           </p-calendar>
                           <div class="prev-next">
-                            <a href="javascript:void(0);"
-                                (click)="dateChange('departure','previous')">Prev</a>
-                            <a href="javascript:void(0);"
-                                (click)="dateChange('departure','next')">Next</a>
+                            <a class="anchor-text" (click)="dateChange('departure','previous')">Prev</a>
+                            <a class="anchor-text"  (click)="dateChange('departure','next')">Next</a>
                           </div>
                         </div>
                       </div>
@@ -141,8 +139,8 @@
                               >
                           </p-calendar>
                           <div class="prev-next">
-                            <a href="javascript:void(0);" (click)="dateChange('arrival','previous')">Prev</a>
-                            <a href="javascript:void(0);" (click)="dateChange('arrival','next')">Next</a>
+                            <a class="anchor-text" (click)="dateChange('arrival','previous')">Prev</a>
+                            <a class="anchor-text" (click)="dateChange('arrival','next')">Next</a>
                           </div>
                           
                       </div>

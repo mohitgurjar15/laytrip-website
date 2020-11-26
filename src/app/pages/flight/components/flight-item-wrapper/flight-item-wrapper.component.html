@@ -96,7 +96,7 @@
                     </li>
                     <li class="nav-item">
                         <a id="tab-C" href="#Baggage-Rules" class="nav-link" data-toggle="tab" role="tab"
-                            (click)="getBaggageDetails(item.route_code)">Baggage Rules</a>
+                            >Baggage Rules</a>
                     </li>
                     <li class="nav-item">
                         <a id="tab-d" href="#Cancellation-Rules" class="nav-link" data-toggle="tab" role="tab"
@@ -243,36 +243,30 @@
                             <div class="card-body">
                                 <div class="tab_detail baggage_rules_cnt">
                                     <div class="triangle_right"></div>
-                                    <!-- <div class="detail_left">
-                                            <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
-                                            <p>Indigo</p>
-                                            <span>{{ flightInfo?.departure_code }} - DEN</span>
-                                        </div> -->
-                                    <div class="detail_right" *ngIf="loadBaggageDetails">
-                                        <div class="w-100">
-                                            <p class="fb_animation mb-0 h-auto w-100"></p>
-                                            <p class="fb_animation mb-0 h-auto w-100"></p>
-                                        </div>
-                                        <p class="fb_animation mb-0 h-auto w-100"></p>
-                                    </div>
-
-                                    <div class="detail_right" *ngIf="!loadBaggageDetails">
+                                    <div class="detail_right">
                                         <table>
                                             <thead>
                                                 <tr>
                                                     <th>Flight</th>
                                                     <th>Depart</th>
                                                     <th>Arrive</th>
-                                                    <th>Free Baggage</th>
+                                                    <th>Checkin Baggage</th>
+                                                    <th>Cabin Baggage</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- <tr *ngIf="!baggageDetails">Loading..</tr> -->
-                                                <tr *ngFor="let baggage of baggageDetails">
-                                                    <td data-title="Flight">{{ baggage?.flight_number }}</td>
-                                                    <td data-title="Depart">{{ baggage?.departure_airport }}</td>
-                                                    <td data-title="Arrive">{{ baggage?.arrival_airport }}</td>
-                                                    <td data-title="Free Baggage">{{ baggage?.baggage_capacity }}</td>
+                                                
+                                                <tr *ngFor="let flightInfo of item.routes[0].stops; let i = index">
+                                                    <td data-title="Flight">{{ flightInfo?.airline }}-{{ flightInfo?.flight_number }}</td>
+                                                    <td data-title="Depart">{{ flightInfo?.departure_info.name }}
+                                                    </td>
+                                                    <td data-title="Arrive">{{ flightInfo?.arrival_info.name }}</td>
+                                                    <td data-title="Free Baggage">
+                                                        {{ flightInfo?.checkin_baggage }}
+                                                    </td>
+                                                    <td data-title="Cabin Baggage">
+                                                        {{ flightInfo?.cabin_baggage }}
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -516,7 +510,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#Baggage-Rules" class="nav-link" data-toggle="tab" role="tab"
-                            (click)="getBaggageDetails(item.route_code)">Baggage Rules</a>
+                            >Baggage Rules</a>
                     </li>
                     <li class="nav-item">
                         <a href="#Cancellation-Rules" class="nav-link" data-toggle="tab" role="tab"
@@ -727,33 +721,40 @@
                                     <div class="tab_detail baggage_rules_cnt">
                                         <div class="triangle_right"></div>
                                         <div class="block_baggage">
-
-                                            <div class="detail_right" *ngIf="loadBaggageDetails">
-                                                <div class="w-100">
-                                                    <p class="fb_animation mb-0 h-auto w-100"></p>
-                                                    <p class="fb_animation mb-0 h-auto w-100"></p>
-                                                </div>
-                                                <p class="fb_animation mb-0 h-auto w-100"></p>
-                                            </div>
-
-                                            <div class="detail_right" *ngIf="!loadBaggageDetails">
+                                            <div class="detail_right">
                                                 <table>
                                                     <thead>
                                                         <tr>
                                                             <th>Flight</th>
                                                             <th>Depart</th>
                                                             <th>Arrive</th>
-                                                            <th>Free Baggage</th>
+                                                            <th>Checkin Baggage</th>
+                                                            <th>Cabin Baggage</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let baggage of baggageDetails">
-                                                            <td data-title="Flight">{{ baggage?.flight_number }}</td>
-                                                            <td data-title="Depart">{{ baggage?.departure_airport }}
+                                                        <tr *ngFor="let flightInfo of item.routes[0].stops; let i = index">
+                                                            <td data-title="Flight">{{ flightInfo?.airline }}-{{ flightInfo?.flight_number }}</td>
+                                                            <td data-title="Depart">{{ flightInfo?.departure_info.name }}
                                                             </td>
-                                                            <td data-title="Arrive">{{ baggage?.arrival_airport }}</td>
+                                                            <td data-title="Arrive">{{ flightInfo?.arrival_info.name }}</td>
+                                                            <td data-title="Checkin Baggage">
+                                                                {{ flightInfo?.checkin_baggage }}
+                                                            </td>
+                                                            <td data-title="Cabin Baggage">
+                                                                {{ flightInfo?.cabin_baggage }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngFor="let flightInfo of item.routes[1].stops; let i = index">
+                                                            <td data-title="Flight">{{ flightInfo?.airline }}-{{ flightInfo?.flight_number }}</td>
+                                                            <td data-title="Depart">{{ flightInfo?.departure_info.name }}
+                                                            </td>
+                                                            <td data-title="Arrive">{{ flightInfo?.arrival_info.name }}</td>
                                                             <td data-title="Free Baggage">
-                                                                {{ baggage?.baggage_capacity }}
+                                                                {{ flightInfo?.checkin_baggage }}
+                                                            </td>
+                                                            <td data-title="Cabin Baggage">
+                                                                {{ flightInfo?.cabin_baggage }}
                                                             </td>
                                                         </tr>
                                                     </tbody>
