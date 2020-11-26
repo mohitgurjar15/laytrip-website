@@ -370,6 +370,7 @@
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half input.birth_date {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
+  padding: 0 !important;
 }
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field.half .phone_no {
   width: 100%;
@@ -607,7 +608,7 @@
     width: 48%;
   }
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn {
     width: 100%;
   }
@@ -654,6 +655,7 @@
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input.birth_date {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
+  padding: 0 !important;
 }
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field .error_text {
   width: 100%;
@@ -723,6 +725,16 @@
 }
 .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck.half {
   width: 49%;
+}
+@media (max-width: 991px) {
+  .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck.half .field_inn {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .account_part .account_cnt_main .update_location_detail .detail_update .form_row .field_bolck.half {
+    width: 100%;
+  }
 }
 .account_part .account_cnt_main.booking_main {
   background: transparent;
@@ -1446,6 +1458,7 @@
 .account_part .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field input.birth_date {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
+  padding: 0 !important;
 }
 .account_part .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field input:placeholder {
   color: #E0E2E5;
@@ -3486,6 +3499,9 @@
   padding: 0;
 }
 
+.cmn_add_edit_modal {
+  z-index: 9999999999;
+}
 .cmn_add_edit_modal .modal-dialog {
   max-width: 1024px;
   width: 96%;
@@ -3671,6 +3687,7 @@
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field input.birth_date {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
+  padding: 0 !important;
 }
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field input:placeholder {
   color: #E0E2E5;

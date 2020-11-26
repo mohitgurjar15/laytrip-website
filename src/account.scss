@@ -119,7 +119,7 @@
 							&.dropdown-toggle {
 								&:after {
 									border: none;
-									background: url(http://d2q1prebf1m2s9.cloudfront.net/assets//images/icon/ic_arrow-right.svg) no-repeat;
+									background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_arrow-right.svg) no-repeat;
 									width: 10px;
 									height: 8px;
 									background-size: contain;
@@ -414,8 +414,9 @@
 								}
 
 								&.birth_date {
-									background: url(http://d2q1prebf1m2s9.cloudfront.net/assets//images/icon/ic_calendar.svg) no-repeat;
+									background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
 									background-position: right center;
+									padding: 0 !important;
 								}
 							}
 
@@ -744,8 +745,9 @@
 									}
 
 									&.birth_date {
-										background: url(http://d2q1prebf1m2s9.cloudfront.net/assets//images/icon/ic_calendar.svg) no-repeat;
+										background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
 										background-position: right center;
+										padding: 0 !important;
 									}
 								}
 
@@ -1718,8 +1720,9 @@
 									}
 
 									&.birth_date {
-										background: url(http://d2q1prebf1m2s9.cloudfront.net/assets//images/icon/ic_calendar.svg) no-repeat;
+										background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
 										background-position: right center;
+										padding: 0 !important;
 									}
 
 									&:placeholder {
@@ -3173,7 +3176,7 @@
 								border-radius: 5px;
 								display: flex;
 								align-items: center;
-								background: url(http://d2q1prebf1m2s9.cloudfront.net/assets//images/point_bg_orange.svg) no-repeat;
+								background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_orange.svg) no-repeat;
 								background-size: cover;
 								margin: 0;
 								margin: 0 30px 0 0;
@@ -3448,7 +3451,7 @@
 
 						.block_top {
 							width: 100%;
-							background: url(http://d2q1prebf1m2s9.cloudfront.net/assets//images/Subscription_top_bg.svg) no-repeat;
+							background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg) no-repeat;
 							background-size: 100%;
 							padding: 55px 0 85px;
 							color: $text-white;
@@ -4128,7 +4131,7 @@
 //<!-- Close Payment view Modal css -->
 //<!-- Start Add Card Modal css -->
 .cmn_add_edit_modal {
-	index: 9999999999;
+	z-index: 9999999999;
 
 	.modal-dialog {
 		max-width: 1024px;
@@ -4330,8 +4333,9 @@
 										}
 
 										&.birth_date {
-											background: url(http://d2q1prebf1m2s9.cloudfront.net/assets//images/icon/ic_calendar.svg) no-repeat;
+											background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
 											background-position: right center;
+											padding: 0 !important;
 										}
 
 										&:placeholder {

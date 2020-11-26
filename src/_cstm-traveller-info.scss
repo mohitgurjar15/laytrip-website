@@ -12,9 +12,8 @@
                                     .traveller_add_block {
                                         width: 260px;
                                         position: absolute;
-                                        top: 50%;
-                                        left: 105%;
-                                        transform: translateY(-50%);
+                                        top: 113%;
+                                        right: 0;
                                         background: $background-white;
                                         box-shadow: 0px 3px 15px $shadow-black;
                                         padding: 15px;
@@ -25,13 +24,12 @@
                                         &:before {
                                             width: 0;
                                             height: 0;
-                                            border-top: 9px solid transparent;
-                                            border-bottom: 9px solid transparent;
-                                            border-right: 9px solid $background-white;
+                                            border-left: 9px solid transparent;
+                                            border-right: 9px solid transparent;
+                                            border-bottom: 9px solid $background-white;
                                             position: absolute;
-                                            top: 50%;
-                                            left: -9px;
-                                            transform: translateY(-50%);
+                                            top: -9px;
+                                            right: 19px;                                            
                                             content: "";
                                             z-index: 2;
                                         }
@@ -39,13 +37,12 @@
                                         &:after {
                                             width: 0;
                                             height: 0;
-                                            border-top: 10px solid transparent;
-                                            border-bottom: 10px solid transparent;
-                                            border-right: 10px solid $text-light-grey;
+                                            border-left: 10px solid transparent;
+                                            border-right: 10px solid transparent;
+                                            border-bottom: 10px solid $text-light-grey;
                                             position: absolute;
-                                            top: 50%;
-                                            left: -10px;
-                                            transform: translateY(-50%);
+                                            top: -11px;
+                                            right: 18px;
                                             content: "";
                                         }
 

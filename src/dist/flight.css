@@ -193,6 +193,12 @@
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area.dr_search_area input {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px no-repeat !important;
 }
+@media (max-width: 575px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area .calender-responsive-view {
+    right: 0 !important;
+    left: auto !important;
+  }
+}
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
@@ -399,6 +405,9 @@
   font-weight: 400;
   color: #8188AB;
   padding: 0 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 @media (max-width: 480px) {
   .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area {
@@ -779,7 +788,7 @@
 }
 @media (max-width: 767px) {
   .search_result .result_listing.one_way_list .search_block .listing_block {
-    height: 100%;
+    height: auto;
   }
 }
 .search_result .result_listing.one_way_list .search_block .listing_block .row {
@@ -1274,7 +1283,7 @@
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.flight_info_cnt {
   padding: 20px 0;
   max-height: 445px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 @media (max-width: 767px) {
@@ -1523,7 +1532,7 @@
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.fare_detail_cnt {
   padding: 30px 30px 20px;
   max-height: 445px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 @media (max-width: 767px) {
@@ -1593,7 +1602,7 @@
   padding: 20px;
   flex-flow: row;
   max-height: 445px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 @media (max-width: 767px) {
@@ -1718,7 +1727,7 @@
   padding: 20px;
   flex-flow: column;
   max-height: 445px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 @media (max-width: 767px) {
@@ -5281,7 +5290,7 @@
   width: 100%;
   background: #ebf9fe;
   padding: 15px 20px;
-  margin: 20px 0 0;
+  margin: 20px 0;
   display: flex;
   justify-content: space-between;
 }
@@ -6294,66 +6303,14 @@
   text-align: center;
   position: relative;
 }
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select {
-  height: 40px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid #E0E2E5;
-  background: transparent;
-  padding: 0;
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select select {
-  display: none;
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-selected {
-  background-color: transparent;
-  line-height: 40px;
+.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount input {
+  width: 100%;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: #0045FF;
-  position: relative;
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-selected:after {
-  position: absolute;
-  content: "";
-  top: 17px;
-  right: 0px;
-  width: 0;
-  height: 0;
-  border: 4px solid transparent;
-  border-color: #8188AB transparent transparent transparent;
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #8188AB transparent;
-  top: 11px;
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-items {
-  position: absolute;
-  background-color: #8188AB;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-items div {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-  user-select: none;
-  font-size: 14px;
-  color: #ffffff;
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-items div:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-items div.same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .block_amount .custom-select .select-items.select-hide {
-  display: none;
+  border: none;
+  text-align: center;
+  border-bottom: 1px solid #E0E2E5;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .installment_main .block_installment_option .installment_top .tab-content .installment_ingo .accordion .accordion-group .accordion-heading .accordion-toggle .block_pay_instalment .pay_block {
   width: 25px;
@@ -8128,6 +8085,185 @@
 .page_load .block_price_changes .block_price_changes_inner .popup_btn li:last-child a:hover:before {
   height: 190%;
 }
+.page_load .block_pay_trems_conditions {
+  width: 900px;
+  max-width: 96%;
+  float: left;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 50px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 767px) {
+  .page_load .block_pay_trems_conditions {
+    padding: 25px;
+  }
+}
+@media (max-width: 575px) {
+  .page_load .block_pay_trems_conditions {
+    padding: 15px;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner {
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner {
+    height: 100%;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .modal_top {
+  text-align: left;
+  margin: 0 0 30px;
+}
+@media (max-width: 575px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .modal_top {
+    margin: 0 0 20px;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .modal_top h2 {
+  text-transform: uppercase;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .modal_top h2 img {
+  margin-right: 10px;
+}
+@media (max-width: 575px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .modal_top h2 {
+    padding: 0;
+    font-size: 18px;
+  }
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .modal_top h2 img {
+    width: 30px;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main {
+  width: 100%;
+  text-align: left;
+}
+@media (max-width: 767px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main {
+    height: auto;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .text {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 30px;
+}
+@media (max-width: 767px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .text {
+    padding-right: 15px;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .text p {
+  font-size: 14px;
+  line-height: 21px;
+  color: #8188AB;
+  margin-bottom: 15px;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .text p:last-child {
+  margin-bottom: 0;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn {
+  width: 100%;
+  margin: 40px 0 0;
+}
+@media (max-width: 767px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn {
+    margin: 35px 0 0;
+  }
+}
+@media (max-width: 575px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn {
+    margin: 26px 0 0;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li {
+  padding: 0 15px;
+}
+@media (max-width: 767px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li {
+    padding: 0 11px;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a {
+  display: inline-block;
+  line-height: 50px;
+  padding: 0 30px;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 400;
+  border-radius: 8px;
+  background: #1943FF;
+  border: 1px solid #1943FF;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #FC7E66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a:hover {
+  border-color: #FC7E66;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a:hover:before {
+  height: 190%;
+}
+@media (max-width: 575px) {
+  .page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a {
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 15px;
+  }
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a.btn_decline {
+  background: transparent;
+  border: 1px solid #8188AB;
+  color: #8188AB;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a.btn_decline:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #8188AB;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a.btn_decline:hover {
+  color: #ffffff;
+}
+.page_load .block_pay_trems_conditions .block_pay_trems_conditions_inner .block_modal_main .block_pop_btn ul li a.btn_decline:hover:before {
+  height: 190%;
+}
 
 .block_noresult_found {
   width: 100%;
@@ -8498,139 +8634,6 @@
   color: #8188AB;
   margin: 10px 0 0;
   text-align: left;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content {
-  padding: 50px;
-}
-@media (max-width: 767px) {
-  .baggage_policy_modal.pay_modal_guestuser .modal-content {
-    padding: 20px;
-  }
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .modal_top {
-  text-align: left;
-}
-@media (max-width: 575px) {
-  .baggage_policy_modal.pay_modal_guestuser .modal-content .modal_top {
-    margin: 0 0 20px;
-  }
-}
-@media (max-width: 575px) {
-  .baggage_policy_modal.pay_modal_guestuser .modal-content .modal_top h2 {
-    padding: 0;
-    font-size: 18px;
-  }
-  .baggage_policy_modal.pay_modal_guestuser .modal-content .modal_top h2 img {
-    width: 30px;
-  }
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main {
-  width: 100%;
-}
-@media (max-width: 767px) {
-  .baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main {
-    height: auto;
-  }
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .text {
-  max-height: 300px;
-  overflow-y: auto;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .text p {
-  font-size: 14px;
-  line-height: 21px;
-  color: #8188AB;
-  margin-bottom: 15px;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .text p:last-child {
-  margin-bottom: 0;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn {
-  width: 100%;
-  margin: 40px 0 0;
-}
-@media (max-width: 575px) {
-  .baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn {
-    margin: 26px 0 0;
-  }
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li {
-  padding: 0 15px;
-}
-@media (max-width: 575px) {
-  .baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li {
-    padding: 0 7px;
-  }
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a {
-  display: inline-block;
-  line-height: 50px;
-  padding: 0 30px;
-  font-size: 20px;
-  color: #ffffff;
-  font-weight: 400;
-  border-radius: 8px;
-  background: #1943FF;
-  border: 1px solid #1943FF;
-  position: relative;
-  z-index: 9;
-  overflow: hidden;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: #FC7E66;
-  z-index: -1;
-  transition: 0.8s;
-  border-radius: 0 0 50% 50%;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a:hover {
-  border-color: #FC7E66;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a:hover:before {
-  height: 190%;
-}
-@media (max-width: 575px) {
-  .baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a {
-    font-size: 14px;
-    line-height: 40px;
-    padding: 0 15px;
-  }
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a.btn_decline {
-  background: transparent;
-  border: 1px solid #8188AB;
-  color: #8188AB;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a.btn_decline:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: #8188AB;
-  z-index: -1;
-  transition: 0.8s;
-  border-radius: 0 0 50% 50%;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a.btn_decline:hover {
-  color: #ffffff;
-}
-.baggage_policy_modal.pay_modal_guestuser .modal-content .block_modal_main .block_pop_btn ul li a.btn_decline:hover:before {
-  height: 190%;
 }
 
 .cancellation_policy_modal .modal-dialog {

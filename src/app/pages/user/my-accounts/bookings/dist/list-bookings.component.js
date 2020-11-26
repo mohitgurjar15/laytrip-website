@@ -36,13 +36,14 @@ var ListBookingsComponent = /** @class */ (function () {
         var _this = this;
         this.userService.getModules(this.pageNumber, this.limit).subscribe(function (res) {
             _this.modules = res.data.map(function (module) {
-                if (module.status) {
+                if (module.status == true) {
                     return {
                         id: module.id,
                         name: module.name.toUpperCase()
                     };
                 }
             });
+            console.log(_this.modules);
         }, function (err) {
         });
     };
