@@ -46,13 +46,14 @@ export class ListBookingsComponent implements OnInit {
   getModule(){
     this.userService.getModules(this.pageNumber, this.limit).subscribe((res: any) => {
       this.modules  = res.data.map(function (module) {
-        if(module.status){
+        if(module.status == true){
           return {
             id:module.id,
             name:module.name.toUpperCase()
           } 
         }
       });
+      console.log(this.modules)
    }, err => {
     
    }); 

@@ -1,7 +1,7 @@
 <!-- <section class="search_result flight pb-0" *ngIf="loading">
     <app-flight-loader></app-flight-loader>
 </section> -->
-<div class="account_cnt_main booking_main" *ngIf="isNotFound">
+<div class="account_cnt_main booking_main" *ngIf="isNotFound && !loading">
     <div class="block_nobooking_available">
         <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
         <h5>No Flight Booking Found</h5>
@@ -73,7 +73,7 @@
         </div>
     </div>
 </div>
-<div class="result_listing one_way_list roundtrip_list" *ngIf="!loading">
+<div class="result_listing one_way_list roundtrip_list" *ngIf="!loading && !isNotFound">
     <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
             <div class="block_booking_info">            

@@ -1,0 +1,149 @@
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block {
+  width: 260px;
+  position: absolute;
+  top: 113%;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  border: 1px solid #D5D7E3;
+  border-radius: 5px;
+  z-index: 99;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block:before {
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid #ffffff;
+  position: absolute;
+  top: -9px;
+  right: 19px;
+  content: "";
+  z-index: 2;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block:after {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #D5D7E3;
+  position: absolute;
+  top: -11px;
+  right: 18px;
+  content: "";
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 20px;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .left {
+  font-size: 10px;
+  font-weight: 400;
+  color: #8188AB;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .left span {
+  font-size: 14px;
+  color: #012178;
+  display: block;
+  padding: 0;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .right {
+  width: 100px;
+  display: flex;
+  align-items: center;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .right .qtyminus {
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  border: 1px solid #FC7E66;
+  border-radius: 5px;
+  color: #FC7E66;
+  padding: 0;
+  font-size: 18px;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .right .qtyminus.un_active {
+  border: 1px solid #D5D7E3;
+  color: #D5D7E3;
+  cursor: not-allowed;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .right .qtyminus.disable_btn {
+  cursor: not-allowed;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .right .qty {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #012178;
+  border: none;
+  text-align: center;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .right .qtyplus {
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  border: 1px solid #FC7E66;
+  border-radius: 5px;
+  color: #FC7E66;
+  padding: 0;
+  font-size: 18px;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block .flight_cat {
+  width: 100%;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block .flight_cat ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block .flight_cat ul li {
+  width: 48%;
+  margin: 0 0 10px;
+  padding: 0;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block .flight_cat ul li:last-child {
+  width: 100%;
+  margin: 0;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block .flight_cat ul li a {
+  line-height: 32px;
+  width: 100%;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #D5D7E3;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #D5D7E3;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block .flight_cat ul li a:hover {
+  background: #FC7E66;
+  border: 1px solid #FC7E66;
+  color: #ffffff;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block .flight_cat ul li a.active_cat {
+  background: #FC7E66;
+  border: 1px solid #FC7E66;
+  color: #ffffff;
+}
+
+app-flight-search-bar .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .traveller_add_block ul li .right .qty {
+  width: 50px !important;
+}
