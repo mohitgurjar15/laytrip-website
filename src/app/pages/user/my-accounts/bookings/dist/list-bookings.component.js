@@ -41,6 +41,10 @@ var ListBookingsComponent = /** @class */ (function () {
                         id: module.id,
                         name: module.name.toUpperCase()
                     };
+                    /* this.modules.push({
+                      id:module.id,
+                      name:module.name.toUpperCase()
+                    }); */
                 }
             });
             console.log(_this.modules);
