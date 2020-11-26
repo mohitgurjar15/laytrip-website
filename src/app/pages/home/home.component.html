@@ -144,10 +144,8 @@
                                                             [readonlyInput]="true">
                                                         </p-calendar>
                                                         <div class="prev-next">
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('departure','previous')">Prev</a>
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('departure','next')">Next</a>
+                                                            <a (click)="dateChange('departure','previous')">Prev</a>
+                                                            <a (click)="dateChange('departure','next')">Next</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -165,10 +163,8 @@
                                                             [minDate]="flightReturnMinDate" [readonlyInput]="true">
                                                         </p-calendar>
                                                         <div class="prev-next">
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('arrival','previous')">Prev</a>
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('arrival','next')">Next</a>
+                                                            <a (click)="dateChange('arrival','previous')">Prev</a>
+                                                            <a (click)="dateChange('arrival','next')">Next</a>
                                                         </div>
                                                     </div>
 
