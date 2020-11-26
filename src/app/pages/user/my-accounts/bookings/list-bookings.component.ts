@@ -51,6 +51,10 @@ export class ListBookingsComponent implements OnInit {
             id:module.id,
             name:module.name.toUpperCase()
           } 
+          /* this.modules.push({
+            id:module.id,
+            name:module.name.toUpperCase()
+          }); */
         }
       });
       console.log(this.modules)
