@@ -218,7 +218,8 @@ export class FlightCheckoutComponent implements OnInit {
         additional_amount       : this.additionalAmount,
         card_token              : this.cardToken,
         custom_instalment_amount: this.customAmount,
-        custom_instalment_no    : this.customInstalment
+        custom_instalment_no    : this.customInstalment,
+        booking_through         : 'web'
       }
 
       this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
