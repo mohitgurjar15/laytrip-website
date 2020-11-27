@@ -1554,7 +1554,33 @@
   .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn {
     width: 100%;
     text-align: right;
+    margin-left: 0;
   }
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn ul {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: column;
+}
+@media (max-width: 991px) {
+  .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn ul {
+    flex-flow: row;
+  }
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn ul li {
+  margin: 0 0 20px;
+}
+@media (max-width: 991px) {
+  .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn ul li {
+    margin: 0 15px 0 0;
+  }
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn ul li:last-child {
+  margin: 0;
 }
 .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button {
   width: 100%;
@@ -1600,6 +1626,27 @@
   .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button {
     width: 200px;
   }
+}
+@media (max-width: 575px) {
+  .account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button {
+    width: 117px;
+    padding: 8px 25px;
+    font-size: 14px;
+  }
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset {
+  background: #8188AB;
+  border-color: #8188AB;
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset.disabled {
+  background: #707070;
+  border: 1px solid #707070;
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset:hover {
+  border-color: #FC7E66;
+}
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset:hover:before {
+  height: 190%;
 }
 .account_part .account_cnt_main.booking_main .pay_modal_cnt {
   background: #ffffff;

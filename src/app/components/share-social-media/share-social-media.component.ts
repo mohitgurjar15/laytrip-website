@@ -24,15 +24,14 @@ export class ShareSocialMediaComponent implements OnInit {
 
 
   share(media){
-    if(media == 'Pinterest'){
-      
-      window.open(`https://pinterest.com/pin/create/bookmarklet/?url=${environment.siteUrl}`);
+    if(media == 'Pinterest'){     
+      window.open('http://www.pinterest.com/pin/create/button/?url=' + encodeURIComponent(environment.siteUrl)+ '&media=' + encodeURIComponent('http://d2q1prebf1m2s9.cloudfront.net/assets/images/dr_logo.svg') + '&description=' + encodeURIComponent('Book now, pay in installments. Making travel affordable to all.'));
     }else if(media == 'Twitter'){
-      window.open(`https://twitter.com/intent/tweet?original_referer=${environment.siteUrl}&url=${environment.siteUrl}`);
+      window.open(`https://twitter.com/intent/tweet?original_referer=${environment.siteUrl}&url=${environment.siteUrl}&text=Book now, pay in installments. Making travel affordable to all.`);
       
     }else if(media == 'Facebook'){
-      window.open('https://www.facebook.com/sharer/sharer.php?u='+escape(environment.siteUrl)+'&text=Book now, pay in installments. Making travel affordable to all', '', 
-      'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');      
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${escape(environment.siteUrl)}&t=${escape('Book now, pay in installments. Making travel affordable to all')}`, '', 
+      'menubar=no,toolbar=no,resizable=yes,scrollbars=textyes,height=300,width=600');      
     }else if(media == 'Google'){
       window.open(`https://plus.google.com/share?url=${environment.siteUrl},"","height=550,width=525,left=100,top=100,menubar=0`);      
      

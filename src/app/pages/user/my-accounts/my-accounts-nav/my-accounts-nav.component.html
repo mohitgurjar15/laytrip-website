@@ -1,7 +1,7 @@
 <div class="account_saidbar">
     <div class="saidbar_top">
         <div class="block_inner">
-            <a [routerLink]="['/account/']"><span>
+            <a [routerLink]="['/account/']" title="My Profile" ><span>
                     <img src="{{_login_user_info.profilePic ||  defaultImage}}" alt="Profile Image">
                 </span></a>
             <div class="member_info">
@@ -50,7 +50,7 @@
                         Settings
                     </a>
                     <ul class="dropdown-menu"  [routerLinkActive]="['show']">
-                        <li><a [routerLink]="['/account/settings/change-password']"
+                        <li *ngIf="_login_user_info.socialAccountId === ''"><a [routerLink]="['/account/settings/change-password']"
                                 [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_change_pass.svg" alt="Settings Icon">
                                 Change Password</a></li>
                     </ul>

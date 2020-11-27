@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.FlightsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
+var booking_status_const_1 = require("../../../../../constant/booking-status.const");
 var FlightsComponent = /** @class */ (function () {
     function FlightsComponent(commonFunction, flightService, userService) {
         this.commonFunction = commonFunction;
@@ -31,8 +32,11 @@ var FlightsComponent = /** @class */ (function () {
         this.notFoundBaggageDetails = false;
         this.filterData = {};
         this.filterInfo = {};
+        this.bookingStatus = booking_status_const_1.BookingStatus;
     }
     FlightsComponent.prototype.ngOnInit = function () {
+        var _currency = localStorage.getItem('_curr');
+        this.currency = JSON.parse(_currency);
         this.page = 1;
         this.loading = true;
         this.isNotFound = false;
@@ -96,7 +100,8 @@ var FlightsComponent = /** @class */ (function () {
                             moduleInfo: flight.moduleInfo[0],
                             travelers: flight.travelers,
                             bookingType: flight.bookingType,
-                            bookingStatus: flight.bookingStatus
+                            bookingStatus: flight.bookingStatus,
+                            bookingInstalments: flight.bookingInstalments
                         };
                     }
                 });

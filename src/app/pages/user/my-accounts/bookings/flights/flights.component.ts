@@ -37,7 +37,8 @@ export class FlightsComponent implements OnInit {
   public filterData={};
   filterInfo={};
   bookingStatus;
-
+  currency;
+  
   constructor(   
      private commonFunction: CommonFunction,
      private flightService: FlightService,
@@ -48,6 +49,8 @@ export class FlightsComponent implements OnInit {
   }
 
   ngOnInit() {
+    let _currency = localStorage.getItem('_curr');
+    this.currency = JSON.parse(_currency);
     this.page = 1;
     this.loading = true;
     this.isNotFound = false;
@@ -114,7 +117,8 @@ export class FlightsComponent implements OnInit {
               moduleInfo:flight.moduleInfo[0],
               travelers:flight.travelers,
               bookingType:flight.bookingType,
-              bookingStatus:flight.bookingStatus
+              bookingStatus:flight.bookingStatus,
+              bookingInstalments:flight.bookingInstalments
             }
           }
         });

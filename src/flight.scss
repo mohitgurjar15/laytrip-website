@@ -2145,6 +2145,19 @@
 							padding: 15px 15px 0;
 						}
 
+						p {
+							font-size: 14px;
+							color: $text-black;
+							margin: 0;
+						}
+
+						h6 {
+							font-size: 24px;
+							font-weight: 600;
+							color: $text_blue;
+							margin: 15px 0;
+						}
+
 						.show_detail {
 							width: auto;
 							display: flex;
@@ -2317,6 +2330,7 @@
 									position: relative;
 									z-index: 1;
 									transition: all 0.3s ease 0s;
+									text-transform: none;
 
 									&.active {
 										background: $text-lightblue;

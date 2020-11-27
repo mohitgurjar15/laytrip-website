@@ -58,6 +58,10 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.startDateUpdate = function (date) {
         this.endDate = new Date(date);
     };
+    ListBookingsComponent.prototype.reset = function () {
+        this.ngOnInit();
+        this.getFlightResult();
+    };
     ListBookingsComponent = __decorate([
         core_1.Component({
             selector: 'app-list-bookings',

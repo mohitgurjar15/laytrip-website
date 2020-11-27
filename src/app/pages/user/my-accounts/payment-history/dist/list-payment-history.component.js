@@ -71,6 +71,10 @@ var ListPaymentHistoryComponent = /** @class */ (function () {
     ListPaymentHistoryComponent.prototype.startDateUpdate = function (date) {
         this.endDate = new Date(date);
     };
+    ListPaymentHistoryComponent.prototype.reset = function () {
+        this.ngOnInit();
+        this.getPaymentHistory();
+    };
     ListPaymentHistoryComponent = __decorate([
         core_1.Component({
             selector: 'app-list-payment-history',

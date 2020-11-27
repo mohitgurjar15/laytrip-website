@@ -72,4 +72,10 @@ export class ListBookingsComponent implements OnInit {
     this.endDate = new Date(date)
   }
 
+
+  reset() {
+    this.ngOnInit();
+    this.getFlightResult();
+  }
+
 }
