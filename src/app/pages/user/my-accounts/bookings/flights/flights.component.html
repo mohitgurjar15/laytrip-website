@@ -433,7 +433,8 @@
                                                 <th>Flight</th>
                                                 <th>Depart</th>
                                                 <th>Arrive</th>
-                                                <th>Free Baggage</th>
+                                                <th>Checkin Baggage</th>
+                                                <th>Cabin Baggage</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -443,6 +444,8 @@
                                                 <td data-title="Arrive">{{ baggage.stops[i].arrival_info.name }}</td>
                                                 <td data-title="Free Baggage">
                                                     {{ baggage.stops[i].checkin_baggage || 'N/A'}}</td>
+                                                <td data-title="Free Baggage">
+                                                    {{ baggage.stops[i].cabin_baggage || 'N/A'}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

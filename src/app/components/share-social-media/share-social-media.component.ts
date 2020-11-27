@@ -31,7 +31,7 @@ export class ShareSocialMediaComponent implements OnInit {
       window.open(`https://twitter.com/intent/tweet?original_referer=${environment.siteUrl}&url=${environment.siteUrl}`);
       
     }else if(media == 'Facebook'){
-      window.open('https://www.facebook.com/sharer/sharer.php?u='+escape(environment.siteUrl)+'&t='+document.title, '', 
+      window.open('https://www.facebook.com/sharer/sharer.php?u='+escape(environment.siteUrl)+'&text=Book now, pay in installments. Making travel affordable to all', '', 
       'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');      
     }else if(media == 'Google'){
       window.open(`https://plus.google.com/share?url=${environment.siteUrl},"","height=550,width=525,left=100,top=100,menubar=0`);      
