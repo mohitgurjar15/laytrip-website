@@ -19,7 +19,7 @@
                   <p *ngIf="bookingData.booking_details.bookingType==2">Full payment</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                  <span>Partial Payment Type :</span>
+                  <span>Installment Payment Type :</span>
                   <p>{{bookingData.booking_details.bookingInstalments[0].instalmentType | titlecase}}</p>
               </li>
               <li>
@@ -27,19 +27,19 @@
                   <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.totalAmount | number : '1.2-2'}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                  <span>Partial Payment Part :</span>
+                  <span>Installment Payment Part :</span>
                   <p>{{bookingData.booking_details.bookingInstalments.length}} Instalment</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                  <span>Partial Payment Start Date :</span>
+                  <span>Installment Payment Start Date :</span>
                   <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[0].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                  <span>Next Partial Payment Date :</span>
+                  <span>Next Installment Payment Date :</span>
                   <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[1].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                  <span>Partial Payment Amount :</span>
+                  <span>Installment Payment Amount :</span>
                   <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.bookingInstalments[1].amount |  number : '1.2-2'}}</p>
               </li>
           </ul>
