@@ -76,18 +76,22 @@
 <div class="result_listing one_way_list roundtrip_list" *ngIf="!loading && !isNotFound">
     <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
-            <div class="block_booking_info">            
+            <div class="block_booking_info">
                 <div class="row">
                     <div class="col-md-9">
                         <ul>
                             <li>Booking ID <span>{{item.tripId}}</span></li>
-                    <li>Booked on <span>{{ item.bookingDate}}</span></li>
+                            <li>Booked on <span>{{ item.bookingDate}}</span></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
-                        <div class="block_cancle"> 
-                            <a class="hover-link" style="display: none;" data-toggle="modal" data-target="#cancle_alert_modal">Cancel Booking</a> 
-                            <span [ngClass]="{'complete': item.bookingStatus , 'refund':item.bookingStatus == 0 }">{{ bookingStatus[item.bookingStatus] }}</span> </div>                    </div>
+                        <div class="block_cancle">
+                            <a class="hover-link" data-toggle="modal" data-target="#cancle_alert_modal">Cancel
+                                Booking</a>
+                            <span
+                                [ngClass]="{'complete': item.bookingStatus , 'refund':item.bookingStatus == 0 }">{{ bookingStatus[item.bookingStatus] }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -141,19 +145,29 @@
                 <div class="col-md-3 px-0">
                     <div class="block_price">
                         <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
-                        <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}</h6>
-                        <a target="_blank" [routerLink]="['/partial-payment']"><span
-                                class="partial_payment_info" *ngIf="item.bookingType ==1">Instalment Payment Info</span></a>
+                        <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
+                        </h6>
+                        <a target="_blank" [routerLink]="['/partial-payment']"><span class="partial_payment_info"
+                                *ngIf="item.bookingType ==1">Instalment Payment Info</span></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="listing_block" *ngIf="item.journey_type === 'round-trip'">
             <div class="block_booking_info">
-                <ul>
-                    <li>Booking ID <span>{{item.tripId}}</span></li>
-                    <li>Booked on <span>{{ item.bookingDate}}</span></li>
-                </ul>
+                <div class="row">
+                    <div class="col-md-9">
+                        <ul>
+                            <li>Booking ID <span>{{item.tripId}}</span></li>
+                            <li>Booked on <span>{{ item.bookingDate}}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="block_cancle">
+                            <a href="javascript:void(0);">Cancel Booking</a>
+                            <span class="refund">Refund</span> </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-9">
@@ -224,10 +238,13 @@
                 </div>
 
                 <div class="col-md-3 px-0">
+
                     <div class="block_price">
                         <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
-                        <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}</h6>
-                        <span class="partial_paInstalment Payment Infoyment_info" *ngIf="item.bookingType ==1">Instalment Payment Info</span>
+                        <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
+                        </h6>
+                        <span class="partial_payment_info"
+                            *ngIf="item.bookingType ==1" [routerLink]="['/partial-payment']">Instalment Payment Info</span>
                     </div>
                 </div>
             </div>
@@ -390,13 +407,15 @@
                                 </ul>
                                 <ul *ngIf="item.bookingInstalments.length > 0">
                                     <li class="down_payment">
-                                        Down payment 
-                                        <span class="down_value">{{ currency?.symbol }}{{ item?.instalment_amount | number : '1.2-2'}}</span>
+                                        Down payment
+                                        <span
+                                            class="down_value">{{ currency?.symbol }}{{ item?.instalment_amount | number : '1.2-2'}}</span>
                                     </li>
                                     <ng-container *ngFor="let instalment of item.bookingInstalments; let i = index">
                                         <li *ngIf="i>0">
                                             <div class="detail"> {{i}} Instalment
-                                                 <p>{{ commonFunction.convertDateFormat(instalment.instalmentDate,'YYYY-MM-DD')}}</p> 
+                                                <p>{{ commonFunction.convertDateFormat(instalment.instalmentDate,'YYYY-MM-DD')}}
+                                                </p>
                                             </div> <span> {{ currency?.symbol }}{{instalment.amount}} </span>
                                         </li>
                                     </ng-container>
@@ -475,14 +494,14 @@
                 </div>
                 <div id="Cancellation-Rules-oneway" class="card tab-pane fade" role="tabpanel"
                     aria-labelledby="Cancellation-Rules-oneway">
-                    <div class="card-header" role="tab" id="heading-Cancellation-Rules-oneway">
+                   <!--  <div class="card-header" role="tab" id="heading-Cancellation-Rules-oneway">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" href="#collapse-Cancellation-Rules"
                                 aria-expanded="false" aria-controls="collapse-Cancellation-Rules-oneway">
                                 Cancellation Rules
                             </a>
                         </h5>
-                    </div>
+                    </div> -->
                     <div id="collapse-Cancellation-Rules-oneway" class="collapse" role="tabpanel" data-parent="#content"
                         aria-labelledby="heading-Cancellation-Rules-oneway">
                         <div class="card-body">
@@ -528,8 +547,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="Traveller" class="card tab-pane fade" role="tabpanel"
-                    aria-labelledby="Traveller">
+                <div id="Traveller" class="card tab-pane fade" role="tabpanel" aria-labelledby="Traveller">
                     <div class="card-header" role="tab" id="heading-Fare-Detail-oneway">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" href="#collapse-Fare-Detail-oneway"
@@ -545,7 +563,8 @@
                                 <div class="triangle_right"></div>
                                 <ul *ngFor="let traveler of item.travelers;let i = index">
                                     <li>
-                                        Traveller ({{traveler.userData.user_type | titlecase}}) <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span>
+                                        Traveller ({{traveler.userData.user_type | titlecase}})
+                                        <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span>
                                     </li>
                                 </ul>
                                 <div class="triangle_left"></div>

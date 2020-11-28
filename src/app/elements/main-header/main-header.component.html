@@ -110,7 +110,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a [routerLink]="['/account']"class="hover-link">My Account</a></li>
-                        <li><a class="hover-link">Logout</a></li>
+                        <li><a class="hover-link" (click)="onLoggedout()">Logout</a></li>
                     </ul>
                 </div>
             </div>
