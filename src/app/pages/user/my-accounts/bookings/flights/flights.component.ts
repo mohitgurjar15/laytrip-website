@@ -4,6 +4,9 @@ import { environment } from '../../../../../../environments/environment';
 import { FlightService } from '../../../../../services/flight.service';
 import { UserService } from '../../../../../services/user.service';
 import { BookingStatus } from '../../../../../constant/booking-status.const';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { redirectToLogin } from '../../../../../_helpers/jwt.helper';
+
 
 @Component({
   selector: 'app-flights',
@@ -38,11 +41,14 @@ export class FlightsComponent implements OnInit {
   filterInfo={};
   bookingStatus;
   currency;
-  
+  closeResult = '';
+  modalReference: any;
+
   constructor(   
      private commonFunction: CommonFunction,
      private flightService: FlightService,
-     private userService: UserService
+     private userService: UserService,
+     private modalService: NgbModal
 
   ) { 
     this.bookingStatus =  BookingStatus;
@@ -128,6 +134,7 @@ export class FlightsComponent implements OnInit {
         this.showPaginationBar = true;
       }
     }, err => {
+      redirectToLogin();
       this.isNotFound = true;
       this.showPaginationBar = this.loading = false;    
     });
@@ -168,5 +175,27 @@ export class FlightsComponent implements OnInit {
 
   toggleCancellationContent(){
     this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
+  }
+
+  open(content) {
+    console.log(content)
+    this.modalReference = this.modalService.open(content, { windowClass: 'cancle_alert_modal',centered: true });
+    this.modalReference.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.getTravelers();
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult)
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }
