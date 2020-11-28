@@ -1,0 +1,6 @@
+.site_header .navbar .site_menu .nav_right li:last-child a:after {
+  display: none;
+}
+.site_header .show_resposive a:after {
+  display: none;
+}

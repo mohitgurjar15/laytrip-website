@@ -16,6 +16,7 @@ var PagesComponent = /** @class */ (function () {
         this.router = router;
         this.genericService = genericService;
         this.router.events.subscribe(function (event) {
+            console.log('hello');
             if (event instanceof router_1.NavigationStart) {
                 // Trigger when route change
                 _this.checkUserValidate();

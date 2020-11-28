@@ -984,7 +984,6 @@
 
 					@media(max-width:991px) {
 						.tab-pane {
-							display: block;
 							opacity: 1;
 							margin: 0 0 15px;
 							border: 1px solid $box-border-color;
@@ -1062,6 +1061,7 @@
 
 																@media(max-width: 767px) {
 																	flex-flow: column;
+																	text-align: center;
 																}
 
 																li {
@@ -1121,6 +1121,10 @@
 																	font-size: 14px;
 																	font-weight: 500;
 																	color: $text-white;
+																}
+
+																@media(max-width: 767px) {
+																	padding: 15px 0 0;
 																}
 															}
 														}
