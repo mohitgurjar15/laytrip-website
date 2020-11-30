@@ -26,5 +26,9 @@
 	border-radius: 3px;
 }
 ::ng-deep .calender-passport-expiry{
-    min-width: 300px !important;  
+    min-width: 100% !important;  
+}
+
+.cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field .text_field.custom-select{
+	border-bottom: 1px solid #E0E2E5;		
 }

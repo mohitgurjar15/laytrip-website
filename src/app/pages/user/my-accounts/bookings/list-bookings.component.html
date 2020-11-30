@@ -55,13 +55,27 @@
                     </div>
                 </div>
                 <div class="filter_btn">
+                  <ul>
+                    <li>
+                      <button class="btn_reset"  (click)="reset()">Reset</button>
+                    </li>
+                    <li>
+                      <button  [disabled]="filterForm.controls.bookingId.value === '' && 
+                      filterForm.controls.module.value === '' &&
+                      filterForm.controls.start_date.value === '' && 
+                      filterForm.controls.end_date.value === ''"
+                     (click)="getFlightResult()">Filter</button>
+                    </li>
+                  </ul>
+                </div>
+                <!-- <div class="filter_btn">
                     <button 
                     [disabled]="filterForm.controls.bookingId.value === '' && 
                       filterForm.controls.module.value === '' &&
                        filterForm.controls.start_date.value === '' && 
                        filterForm.controls.end_date.value === ''"
                      (click)="getFlightResult()">Filter</button>
-                </div>
+                </div> -->
             </div>
         </form>
           <div class="block_booking_list">

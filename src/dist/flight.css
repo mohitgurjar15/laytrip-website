@@ -1878,7 +1878,7 @@
 }
 @media (max-width: 767px) {
   .search_result .result_listing.roundtrip_list .search_block .listing_block {
-    height: 100%;
+    height: auto;
   }
 }
 .search_result .result_listing.roundtrip_list .search_block .listing_block .row {
@@ -2133,6 +2133,17 @@
     padding: 15px 15px 0;
   }
 }
+.search_result .result_listing.roundtrip_list .search_block .listing_block .block_price p {
+  font-size: 14px;
+  color: #000000;
+  margin: 0;
+}
+.search_result .result_listing.roundtrip_list .search_block .listing_block .block_price h6 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #0045FF;
+  margin: 15px 0;
+}
 .search_result .result_listing.roundtrip_list .search_block .listing_block .block_price .show_detail {
   width: auto;
   display: flex;
@@ -2282,6 +2293,7 @@
     position: relative;
     z-index: 1;
     transition: all 0.3s ease 0s;
+    text-transform: none;
   }
   .search_result .result_listing.roundtrip_list .search_block .detail_info_show .nav-tabs li a.active {
     background: #00AEEF;

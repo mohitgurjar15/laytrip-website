@@ -984,7 +984,6 @@
 
 					@media(max-width:991px) {
 						.tab-pane {
-							display: block;
 							opacity: 1;
 							margin: 0 0 15px;
 							border: 1px solid $box-border-color;
@@ -1062,6 +1061,7 @@
 
 																@media(max-width: 767px) {
 																	flex-flow: column;
+																	text-align: center;
 																}
 
 																li {
@@ -1121,6 +1121,10 @@
 																	font-size: 14px;
 																	font-weight: 500;
 																	color: $text-white;
+																}
+
+																@media(max-width: 767px) {
+																	padding: 15px 0 0;
 																}
 															}
 														}
@@ -1842,6 +1846,33 @@
 					@media(max-width: 991px) {
 						width: 100%;
 						text-align: right;
+						margin-left: 0;
+					}
+
+					ul {
+						width: 100%;
+						list-style: none;
+						margin: 0;
+						padding: 0;
+						display: flex;
+						justify-content: flex-end;
+						flex-flow: column;
+
+						@media(max-width: 991px) {
+							flex-flow: row;
+						}
+
+						li {
+							margin: 0 0 20px;
+
+							@media(max-width: 991px) {
+								margin: 0 15px 0 0;
+							}
+
+							&:last-child {
+								margin: 0;
+							}
+						}
 					}
 
 					button {
@@ -1890,6 +1921,30 @@
 
 						@media(max-width:991px) {
 							width: 200px;
+						}
+
+						@media(max-width:575px) {
+							width: 117px;
+							padding: 8px 25px;
+							font-size: 14px;
+						}
+
+						&.btn_reset {
+							background: $background-grey;
+							border-color: $background-grey;
+
+							&.disabled {
+								background: $text_grey_dark;
+								border: 1px solid $text_grey_dark;
+							}
+
+							&:hover {
+								border-color: $secondary-color;
+
+								&:before {
+									height: 190%;
+								}
+							}
 						}
 					}
 				}
