@@ -124,7 +124,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   toggleCancellationContent(){
     this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
-    console.log("this.loadMoreCancellationPolicy",this.loadMoreCancellationPolicy)
   }
 
   ngAfterContentChecked() {
@@ -168,7 +167,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
     sessionStorage.setItem('__route',JSON.stringify(route));
     console.log("this.isInstalmentAvailable",this.isInstalmentAvailable)
-    if(this.isInstalmentAvailable){
+    if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
       this.router.navigate([`flight/payment/${route.route_code}`]);
     } else{
       this.router.navigate([`flight/travelers/${route.route_code}`]);
