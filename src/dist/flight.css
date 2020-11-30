@@ -263,6 +263,7 @@
   color: #8188AB;
   font-size: 14px;
   display: flex;
+  align-items: center;
 }
 @media (max-width: 575px) {
   .modify_search .flight_tab .nav-tabs .nav-item a {
@@ -273,6 +274,8 @@
 }
 .modify_search .flight_tab .nav-tabs .nav-item a img {
   margin-right: 5px;
+  width: 18px;
+  height: 18px;
 }
 .modify_search .flight_tab .nav-tabs .nav-item a.active {
   background: #FFF2EF;
