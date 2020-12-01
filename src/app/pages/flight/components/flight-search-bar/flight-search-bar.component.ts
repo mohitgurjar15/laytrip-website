@@ -140,6 +140,7 @@ export class FlightSearchBarComponent implements OnInit {
   ngOnInit() {
     this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
     this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
+    this.searchFlightInfo.class = this.route.snapshot.queryParams['class'];
   }
 
   searchAirportDeparture(searchItem) {
@@ -241,6 +242,7 @@ export class FlightSearchBarComponent implements OnInit {
   }
 
   searchFlights() {
+    console.log(this.searchFlightInfo);
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';

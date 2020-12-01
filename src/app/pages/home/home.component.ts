@@ -23,19 +23,19 @@ export class HomeComponent implements OnInit {
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted: boolean = false;
-  countryCode:string;
+  countryCode: string;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationCode='JFK';
-  departureCity='New York';
-  departureAirportCountry='JFK, USA';
-  fromAirport=airports[this.fromDestinationCode];
-  
-  
-  
-  toDestinationCode='PUJ';
-  arrivalCity='Higuey';
-  arrivalAirportCountry='PUJ, Dominican Republic';
-  toAirport=airports[this.toDestinationCode];
+  fromDestinationCode = 'JFK';
+  departureCity = 'New York';
+  departureAirportCountry = 'JFK, USA';
+  fromAirport = airports[this.fromDestinationCode];
+
+
+
+  toDestinationCode = 'PUJ';
+  arrivalCity = 'Higuey';
+  arrivalAirportCountry = 'PUJ, Dominican Republic';
+  toAirport = airports[this.toDestinationCode];
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -71,9 +71,9 @@ export class HomeComponent implements OnInit {
     public fb: FormBuilder,
     public router: Router,
     public cd: ChangeDetectorRef,
-    private renderer:Renderer2
+    private renderer: Renderer2
   ) {
-    
+
     this.fromAirport['display_name'] = `${this.fromAirport.city},${this.fromAirport.country},(${this.fromAirport.code}),${this.fromAirport.name}`;
     this.toAirport['display_name'] = `${this.toAirport.city},${this.toAirport.country},(${this.toAirport.code}),${this.toAirport.name}`;
     this.renderer.addClass(document.body, 'bg_color');
@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
   loadJquery() {
 
 
-    
+
 
     // Start Featured List Js
     $(".deals_slid").slick({
@@ -255,23 +255,37 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  swapAirport(){
+  swapAirport() {
 
-    let temp=this.fromDestinationCode;
+    let temp = this.fromDestinationCode;
     this.fromDestinationCode = this.toDestinationCode;
-    this.toDestinationCode=temp;
+    this.toDestinationCode = temp;
 
-    this.searchFlightInfo.departure=this.searchFlightInfo.arrival;
-    this.searchFlightInfo.arrival=temp;
+    this.searchFlightInfo.departure = this.searchFlightInfo.arrival;
+    this.searchFlightInfo.arrival = temp;
 
-    let tempCity=this.departureCity;
-    this.departureCity= this.arrivalCity;
-    this.arrivalCity=tempCity;
+    let tempCity = this.departureCity;
+    this.departureCity = this.arrivalCity;
+    this.arrivalCity = tempCity;
 
-    let tempAirportCountry= this.departureAirportCountry;
-    this.departureAirportCountry= this.arrivalAirportCountry;
+    let tempAirportCountry = this.departureAirportCountry;
+    this.departureAirportCountry = this.arrivalAirportCountry;
     this.arrivalAirportCountry = tempAirportCountry;
-    
+
+  }
+
+  clickOnTab(tabName) {
+    if (tabName === 'flight') {
+      console.log(tabName);
+      let flight = document.getElementById('home_banner');
+      flight.style.background = 'green';
+      // flight.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
+    } else if (tabName === 'hotel') {
+      console.log(tabName);
+      let hotel = document.getElementById('home_banner');
+      hotel.style.background = 'red';
+      // hotel.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
+    }
   }
 
   ngOnDestroy() {

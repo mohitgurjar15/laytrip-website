@@ -6,7 +6,8 @@
                 <div class="card-head" id="headingOne">
                     <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
                         aria-controls="collapseOne">
-                        <img src="{{s3BucketUrl}}assets/images/icon/ic_detail_icon.svg" alt="Info Image"> Travelling during COVID-19
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_detail_icon.svg" alt="Info Image"> Travelling
+                        during COVID-19
                     </h2>
                 </div>
 
@@ -23,7 +24,7 @@
 </section>
 <!-- Covid-19 section end-->
 <!--  Start Banner Section-->
-<section class="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
+<section class="home_banner" id="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
@@ -47,14 +48,15 @@
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab"
-                        aria-selected="true">
+                        aria-selected="true" (click)="clickOnTab('flight')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg"
                             alt="Flight Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg"
                             alt="Flight Icon" />
                         <span>Flight</span>
                     </a>
-                    <a class="nav-item nav-link disabled" id="nav-hotel" role="tab" aria-selected="false">
+                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
+                        aria-selected="false" (click)="clickOnTab('hotel')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg"
                             alt="Hotel Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg"
@@ -63,7 +65,8 @@
                             alt="Flight Icon">
                         <span>Hotel</span>
                     </a>
-                    <a class="nav-item nav-link disabled" id="nav-accommodation" role="tab" aria-selected="false">
+                    <a class="nav-item nav-link disabled" id="nav-accommodation" role="tab" aria-selected="false"
+                        (click)="clickOnTab('home-rentals')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg"
                             alt="Accommodation Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg"
