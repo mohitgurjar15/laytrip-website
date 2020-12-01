@@ -8,7 +8,6 @@
 @import '~ngx-toastr/toastr.css';
 //@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-
 .wrapper {
 	position: relative;
 	min-height: calc(100vh - 50px);
@@ -21,7 +20,7 @@ body {
 	padding: 0;
 	font-size: 14px;
 	font-weight: 400;
-	background: #F5F5F5;
+	background: $bg-body;
 	overflow-x: hidden;
 
 	&.open {
@@ -1010,9 +1009,10 @@ select {
 					border: none;
 					font-size: 14px;
 					font-weight: 500;
-					color: #ffffff;
+					color: $text-white;
 					text-decoration: none;
 					border-radius: 0;
+					white-space: nowrap;
 
 					img {
 						margin-right: 15px;
@@ -3965,7 +3965,6 @@ select {
 										z-index: 99;
 
 										div {
-											color: #ffffff;
 											padding: 8px 16px;
 											border: 1px solid transparent;
 											border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -4609,7 +4608,6 @@ select {
 											z-index: 99;
 
 											div {
-												color: #ffffff;
 												padding: 8px 16px;
 												border: 1px solid transparent;
 												border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -4800,7 +4798,7 @@ select {
 
 	.block_cmn {
 		p {
-			color: #707070 !important;
+			color: $text_grey_dark !important;
 			font-weight: 400 !important;
 			font-size: 16px !important;
 			line-height: 24px !important;

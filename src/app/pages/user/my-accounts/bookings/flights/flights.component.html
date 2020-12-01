@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class="block_detail_btm">
-                            <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
+                            <div class="c" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
                                 <a class="show_more_detail hover-link" (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                     Flight Details
@@ -221,7 +221,7 @@
                         </div>
                         <div class="block_detail_btm">
                             <div class="show_detail">
-                                <a href="javascript:void(0);" class="show_more_detail"
+                                <a class="show_more_detail hover-link"
                                     (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                     Flight Details
@@ -249,7 +249,7 @@
                 </div>
             </div>
         </div>
-        </div>
+        </div> 
         <div class="detail_info_show on_out_said" [attr.id]="blockIndex" *ngIf="showFlightDetails[blockIndex] === true">
             <ul id="tabs" class="nav nav-tabs bookingListNavTab" role="tablist">
                 <li class="nav-item">
@@ -269,7 +269,7 @@
                     <a href="#Traveller" class="nav-link" data-toggle="tab" role="tab">Travellers</a>
                 </li>
             </ul>
-            <div id="content" class="tab-content" role="tablist">
+            <div id="content" class="tab-chttps://prnt.sc/vp3pstontent" role="tablist">
                 <div id="flight-info-oneway" class="card tab-pane fade show active" role="tabpanel"
                     aria-labelledby="flight-info-oneway">
                     <div class="card-header" role="tab" id="heading-flight-info-oneway">
@@ -587,7 +587,7 @@
     </div>
     <div class="pagination_list">
         <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="totalItems"
-            [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true"
+            [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="2" [rotate]="true"
             (pageChange)="pageChange($event)">
         </ngb-pagination>
     </div>
