@@ -276,6 +276,7 @@ export class PaymentModeComponent implements OnInit {
         
       }
       else{
+        this.isInstalemtMode = false;
         this.instalmentAvavible=false;
         this.selectInstalmentMode.emit('no-instalment');
         this.redeemableLayCredit.emit(this.priceData[0].selling_price)
