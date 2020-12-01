@@ -767,6 +767,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    white-space: nowrap;
   }
   .account_part .account_cnt_main.booking_main .block_booking_list .nav-tabs li a img {
     margin-right: 15px;

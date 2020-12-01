@@ -242,7 +242,6 @@ export class FlightSearchBarComponent implements OnInit {
   }
 
   searchFlights() {
-    console.log(this.searchFlightInfo);
     this.searchFlightInfo.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     this.searchFlightInfo.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     this.searchFlightInfo.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';

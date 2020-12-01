@@ -15,7 +15,7 @@
           <ul>
               <li>
                   <span>Payment Type :</span>
-                  <p *ngIf="bookingData.booking_details.bookingType==1">Partial payment</p>
+                  <p *ngIf="bookingData.booking_details.bookingType==1">Installment payment</p>
                   <p *ngIf="bookingData.booking_details.bookingType==2">Full payment</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">

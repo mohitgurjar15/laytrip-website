@@ -41,7 +41,7 @@
 
         <div class="banner_tab">
             <div class="block_dr_text" *ngIf="countryCode=='DR'">
-                Dominican Republic has it all, get it with Partial Payments
+                Dominican Republic has it all, get it with Installment payments
                 <span>República Dominicana lo tiene todo, consíguelo con pagos flexibles</span>
             </div>
 
@@ -55,8 +55,9 @@
                             alt="Flight Icon" />
                         <span>Flight</span>
                     </a>
-                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
-                        aria-selected="false" (click)="clickOnTab('hotel')">
+                    <a class="nav-item nav-link disabled" id="nav-hotel" role="tab" aria-selected="false"
+                        (click)="clickOnTab('hotel')">
+                        <!-- data-toggle="tab" href="#hotel" -->
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg"
                             alt="Hotel Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg"

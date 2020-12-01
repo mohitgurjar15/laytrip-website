@@ -14,7 +14,7 @@
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
                         <ul class="navbar-nav nav_left" *ngIf="countryCode!=='DR'">
                             <li class="nav-item">
-                                <a class="nav-link hover-link" [routerLink]="['/partial-payment']">Partial Payment</a>
+                                <a class="nav-link hover-link" [routerLink]="['/partial-payment']">Installment payment</a>
                             </li>
                             <li class="nav-item"  *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6)">
                                 <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}" [routerLink]="['/account/lay-credit-points']">
@@ -40,7 +40,7 @@
                             </li> -->
 
                             <li class="nav-item" [ngClass]="{'dr_pay':countryCode==='DR'}" *ngIf="countryCode==='DR'">
-                                <a class="nav-link hover-link" [routerLink]="['/partial-payment']">Partial Payment</a>
+                                <a class="nav-link hover-link" [routerLink]="['/partial-payment']">Installment payment</a>
                             </li>
                             <li class="nav-item"  *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode==='DR'" >
                                 <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}" [routerLink]="['/account/lay-credit-points']">

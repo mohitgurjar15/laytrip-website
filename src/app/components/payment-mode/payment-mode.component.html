@@ -282,7 +282,7 @@
 
 
 <!-- Face Book Loader Start -->
-<ul class="block_installment_radio" *ngIf="!instalmentAvavible">
+<ul class="block_installment_radio" *ngIf="isInstalmentLoading">
     <li style="flex-flow: column">
         <p class="fb_animation w-100 mb-0"></p>
         <p class="fb_animation w-100 mb-0"></p>
@@ -292,7 +292,7 @@
         <p class="fb_animation w-100 mb-0"></p>
     </li>
 </ul>
-<div class="installment_main" *ngIf="!instalmentAvavible">
+<div class="installment_main" *ngIf="isInstalmentLoading">
     <div class="block_installment_option" id="installment_option_show">
         <div class="installment_top">
 

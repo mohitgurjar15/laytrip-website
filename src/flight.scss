@@ -1,7 +1,6 @@
 @import "_cstm-variable.scss";
 @import "_cstm-components.scss";
 
-
 //<!-- Start Search Modify section -->
 .modify_search {
 	width: 100%;
@@ -32,6 +31,7 @@
 					color: $text-grey;
 					font-size: 14px;
 					display: flex;
+					align-items: center;
 
 					@media(max-width: 575px) {
 						padding: 5px 8px;
@@ -41,6 +41,8 @@
 
 					img {
 						margin-right: 5px;
+						width: 18px;
+						height: 18px;
 					}
 
 					&.active {

@@ -25,17 +25,17 @@ export class HomeComponent implements OnInit {
   flightSearchFormSubmitted: boolean = false;
   countryCode: string;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationCode = 'JFK';
-  departureCity = 'New York';
-  departureAirportCountry = 'JFK, USA';
-  fromAirport = airports[this.fromDestinationCode];
-
-
-
-  toDestinationCode = 'PUJ';
-  arrivalCity = 'Higuey';
-  arrivalAirportCountry = 'PUJ, Dominican Republic';
-  toAirport = airports[this.toDestinationCode];
+  fromDestinationCode='JFK';
+  departureCity='New York';
+  departureAirportCountry='JFK, USA';
+  fromAirport=airports[this.fromDestinationCode];
+  
+  
+  
+  toDestinationCode='PUJ';
+  arrivalCity='Punta Cana';
+  arrivalAirportCountry='PUJ, Dominican Republic';
+  toAirport=airports[this.toDestinationCode];
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -276,14 +276,12 @@ export class HomeComponent implements OnInit {
 
   clickOnTab(tabName) {
     if (tabName === 'flight') {
-      console.log(tabName);
       let flight = document.getElementById('home_banner');
-      flight.style.background = 'green';
+      // flight.style.background = 'green';
       // flight.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
     } else if (tabName === 'hotel') {
-      console.log(tabName);
       let hotel = document.getElementById('home_banner');
-      hotel.style.background = 'red';
+      // hotel.style.background = 'red';
       // hotel.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
     }
   }
