@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   
   
   toDestinationCode='PUJ';
-  arrivalCity='Higuey';
+  arrivalCity='Punta Cana';
   arrivalAirportCountry='PUJ, Dominican Republic';
   toAirport=airports[this.toDestinationCode];
 
