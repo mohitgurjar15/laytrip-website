@@ -62,6 +62,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   isInstalmentAvailable=false;
   userInfo;
   totalLaycreditPoints:number=0;
+  showFareDetails:number=0;
 
   isRoundTrip = false;
 
@@ -133,19 +134,29 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     });
   }
 
-  showDetails(index) {
+  showDetails(index,flag=null) {
     if (typeof this.showFlightDetails[index] === 'undefined') {
       this.showFlightDetails[index] = true;
     } else {
       this.showFlightDetails[index] = !this.showFlightDetails[index];
     }
+
+    if(flag=='true'){
+      this.showFareDetails=1;
+    }
+    else{
+      
+      this.showFareDetails=0;
+    }
+
     this.showFlightDetails = this.showFlightDetails.map((item, i) => {
       return ((index === i) && this.showFlightDetails[index] === true) ? true : false;
     });
   }
 
   closeFlightDetail() {
-      
+    
+    this.showFareDetails=0;
     this.showFlightDetails = this.showFlightDetails.map(item => {
       return false;
     });
