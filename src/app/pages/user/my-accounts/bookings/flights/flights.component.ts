@@ -105,7 +105,7 @@ export class FlightsComponent implements OnInit {
             return {
               tripId : flight.laytripBookingId,
               journey_type : flight.locationInfo.journey_type,
-              bookingDate : this.commonFunction.convertDateFormat(flight.bookingDate,'YYYY-MM-DD'),
+              bookingDate : this.commonFunction.convertDateFormat(flight.checkInDate,'YYYY-MM-DD'),
               departure_time : flight.moduleInfo[0].routes[0].stops[0].departure_time,
               arrival_time : flight.moduleInfo[0].routes[0].stops[0].arrival_time,
               departure_city : flight.moduleInfo[0].routes[0].stops[0].departure_info.city,
@@ -134,7 +134,6 @@ export class FlightsComponent implements OnInit {
         this.showPaginationBar = true;
       }
     }, err => {
-      redirectToLogin();
       this.isNotFound = true;
       this.showPaginationBar = this.loading = false;    
     });
