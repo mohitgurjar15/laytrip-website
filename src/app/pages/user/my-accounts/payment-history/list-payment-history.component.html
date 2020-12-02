@@ -52,13 +52,19 @@
                                 </div>
                             </div>
                             <div class="filter_btn">
-                                <button 
-                                [disabled]="filterForm.controls.bookingId.value === '' && 
-                                  filterForm.controls.module.value === '' &&
-                                   filterForm.controls.start_date.value === '' && 
-                                   filterForm.controls.end_date.value === ''"
-                                 (click)="getPaymentHistory()">Filter</button>
-                            </div>
+                                <ul>
+                                  <li>
+                                    <button class="btn_reset" (click)="reset()">Reset</button>
+                                  </li>
+                                  <li>
+                                    <button  [disabled]="filterForm.controls.bookingId.value === '' && 
+                                    filterForm.controls.module.value === '' &&
+                                     filterForm.controls.start_date.value === '' && 
+                                     filterForm.controls.end_date.value === ''"
+                                   (click)="getPaymentHistory()">Filter</button>
+                                  </li>
+                                </ul>
+                              </div>
                         </div>
                     </form>
                     <div class="block_booking_list block_payment_list">
@@ -216,7 +222,7 @@
                                 </div>
                             </div>
 
-                            <div id="Failed-pay" class="card tab-pane fade" role="tabpanel" aria-labelledby="Failed-pay">
+                            <div id="Failed-pay" style="display: none;" class="card tab-pane fade" role="tabpanel" aria-labelledby="Failed-pay">
                                 <div class="card-header" role="tab" id="heading-Failed-pay">
                                     <h5 class="mb-0">
                                         <a class="collapsed" data-toggle="collapse" href="#collapse-Failed-pay" aria-expanded="false" aria-controls="collapse-Failed-pay">

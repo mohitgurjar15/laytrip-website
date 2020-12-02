@@ -47,6 +47,7 @@ var FlightTravelerComponent = /** @class */ (function () {
         this.loading = true;
         this.getTravelers();
         this.getSellingPrice();
+        this.checkUser();
         if (sessionStorage.getItem('_itinerary')) {
             this._itinerary = JSON.parse(sessionStorage.getItem('_itinerary'));
             this.totalTraveler = (Number(this._itinerary.adult) + Number(this._itinerary.child) + Number(this._itinerary.infant));
@@ -56,13 +57,10 @@ var FlightTravelerComponent = /** @class */ (function () {
         customInstalmentData = JSON.parse(customInstalmentData);
         console.log("customInstalmentData", customInstalmentData);
         this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
+        this.laycreditpoints = customInstalmentData.layCreditPoints;
         this.instalmentMode = atob(sessionStorage.getItem('__insMode'));
         this.showPartialPayemntOption = this.instalmentMode == 'instalment' ? true : false;
-        if (this.instalmentMode == 'no-instalment') {
-        }
-        else {
-            this.payNowAmount = customInstalmentData.payNowAmount;
-        }
+        this.payNowAmount = customInstalmentData.payNowAmount;
     };
     FlightTravelerComponent.prototype.getTravelers = function () {
         var _this = this;
@@ -174,13 +172,14 @@ var FlightTravelerComponent = /** @class */ (function () {
             this.isLoggedIn = true;
         }
     };
-    FlightTravelerComponent.prototype.ngDoCheck = function () {
-        this.checkUser();
-        if (this.is_traveller === false) {
-            this.loading = true;
-            this.getTravelers();
-        }
-    };
+    /* ngDoCheck(){
+  
+      this.checkUser();
+      if(this.is_traveller === false){
+        this.loading = true;
+        this.getTravelers();
+      }
+    } */
     FlightTravelerComponent.prototype.flightAvailable = function (event) {
         this.isFlightNotAvailable = event;
     };

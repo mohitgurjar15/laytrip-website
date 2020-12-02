@@ -237,6 +237,12 @@
                 no-repeat !important;
             }
         }
+        @media(max-width: 575px) {
+            .calender-responsive-view{
+                right: 0 !important;
+                left: auto !important;
+            }
+        }
     }
     
 

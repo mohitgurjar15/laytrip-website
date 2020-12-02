@@ -31,6 +31,12 @@ var reset_password_component_1 = require("./user/reset-password/reset-password.c
 var contact_us_component_1 = require("./contact-us/contact-us.component");
 var cancellation_policy_component_1 = require("./cancellation-policy/cancellation-policy.component");
 var privacy_policy_component_1 = require("./privacy-policy/privacy-policy.component");
+var faq_component_1 = require("./faq/faq.component");
+var why_laytrip_component_1 = require("./why-laytrip/why-laytrip.component");
+var partial_payment_component_1 = require("./partial-payment/partial-payment.component");
+var download_app_component_1 = require("./download-app/download-app.component");
+var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
+var sso_login_component_1 = require("./sso-login/sso-login.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -50,7 +56,13 @@ var PagesModule = /** @class */ (function () {
                 reset_password_component_1.ResetPasswordComponent,
                 contact_us_component_1.ContactUsComponent,
                 cancellation_policy_component_1.CancellationPolicyComponent,
-                privacy_policy_component_1.PrivacyPolicyComponent
+                privacy_policy_component_1.PrivacyPolicyComponent,
+                faq_component_1.FaqComponent,
+                why_laytrip_component_1.WhyLaytripComponent,
+                partial_payment_component_1.PartialPaymentComponent,
+                download_app_component_1.DownloadAppComponent,
+                coming_soon_component_1.ComingSoonComponent,
+                sso_login_component_1.SsoLoginComponent,
             ],
             imports: [
                 common_1.CommonModule,

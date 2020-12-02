@@ -47,6 +47,7 @@ export class PaymentModeComponent implements OnInit {
   predictionDate:string='';
   pridictionLoading:boolean=false;
   partialPaymentSellingPrice:number=0;
+  isInstalmentLoading:boolean=false;
   
   instalmentRequest={
     instalment_type: "weekly",
@@ -102,7 +103,6 @@ export class PaymentModeComponent implements OnInit {
     this.getInstalemntsMonthly('monthly');
     this.getInstalemntsWeekly('weekly');
     if(Object.keys(this.customInstalmentData).length){
-      console.log("this.customInstalmentData",this.customInstalmentData)
       this.additionalAmount = this.customInstalmentData.additionalAmount;
       this.durationType = this.customInstalmentData.instalmentType;
       this.customAmount = this.customInstalmentData.customAmount;
@@ -240,8 +240,10 @@ export class PaymentModeComponent implements OnInit {
 
     this.instalmentRequest.instalment_type=type;
 
+    this.isInstalmentLoading=true;
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
       this.instalments=res;
+      this.isInstalmentLoading=false;
       if(this.instalments.instalment_available==true){
 
         this.instalmentAvavible=true;
@@ -274,8 +276,10 @@ export class PaymentModeComponent implements OnInit {
         
       }
       else{
+        this.isInstalemtMode = false;
         this.instalmentAvavible=false;
         this.selectInstalmentMode.emit('no-instalment');
+        this.redeemableLayCredit.emit(this.priceData[0].selling_price)
       }
     },(err)=>{
 

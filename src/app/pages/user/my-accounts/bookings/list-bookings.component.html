@@ -9,6 +9,75 @@
        
 
         <div class="account_cnt_main booking_main">
+          <form [formGroup]="filterForm" >
+
+            <div class="block_filter_payment">
+                <div class="filter_form">
+                    <div class="form_row">
+                        <div class="form_field">
+                            <label>Booking ID</label>
+                            <div class="text_field">
+                                <input type="text" formControlName="bookingId" maxlength="50" tabindex="1"
+                                    placeholder="Booking ID">
+                            </div>
+                        </div>
+                        <div class="form_field">
+                            <label>Booking Type</label>
+                            <div class="text_field custom-select">
+                                <ng-select class="ng-customClass" [items]="modules" bindLabel="name"
+                                    tabindex="7" [selectOnTab]="true" formControlName="module"
+                                    selectOnTab="true" placeholder="Select booking type">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="form_field">
+                            <label>Booking Start Date</label>
+                            <div class="text_field">
+                                <p-calendar inputId="basic" inputStyleClass="custom_datpicker birth_date"
+                                    formControlName="start_date" [readonlyInput]="true"
+                                    [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2025"
+                                    [defaultDate]="startMinDate" (onSelect)=startDateUpdate($event)>
+                                </p-calendar>
+                            </div>
+                        </div>
+                        <div class="form_field">
+                            <label>Booking End Date</label>
+                            <div class="text_field">
+                                <p-calendar inputStyleClass="custom_datpicker birth_date" inputId="basic"
+                                    formControlName="end_date" [minDate]="endDate" [readonlyInput]="true"
+                                    [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2025"
+                                    [defaultDate]="endDate" endDate>
+                                </p-calendar>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter_btn">
+                  <ul>
+                    <li>
+                      <button class="btn_reset"  (click)="reset()">Reset</button>
+                    </li>
+                    <li>
+                      <button  [disabled]="filterForm.controls.bookingId.value === '' && 
+                      filterForm.controls.module.value === '' &&
+                      filterForm.controls.start_date.value === '' && 
+                      filterForm.controls.end_date.value === ''"
+                     (click)="getFlightResult()">Filter</button>
+                    </li>
+                  </ul>
+                </div>
+                <!-- <div class="filter_btn">
+                    <button 
+                    [disabled]="filterForm.controls.bookingId.value === '' && 
+                      filterForm.controls.module.value === '' &&
+                       filterForm.controls.start_date.value === '' && 
+                       filterForm.controls.end_date.value === ''"
+                     (click)="getFlightResult()">Filter</button>
+                </div> -->
+            </div>
+        </form>
           <div class="block_booking_list">
             <ul id="booking_tabs" class="nav nav-tabs" role="tablist">
               <li class="nav-item">
@@ -52,14 +121,14 @@
                     <div class="block_booking_list_inner">
                       
                       <div class="search_result flight">
-                        <app-flights [flightLists]="flightLists"></app-flights>
+                        <app-flights [result]="result" [flightLists]="flightLists"></app-flights>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="booking-hotel" class="card tab-pane fade" role="tabpanel" aria-labelledby="booking-hotel">
+              <!-- <div id="booking-hotel" class="card tab-pane fade" role="tabpanel" aria-labelledby="booking-hotel">
                 <div class="card-header" role="tab" id="heading-booking-hotel">
                   <h5 class="mb-0">
                     <a class="collapsed" data-toggle="collapse" href="#collapse-booking-hotel" aria-expanded="false"
@@ -76,9 +145,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
-              <div id="booking-accommodation" class="card tab-pane fade" role="tabpanel"
+              <!-- <div id="booking-accommodation" class="card tab-pane fade" role="tabpanel"
                 aria-labelledby="booking-accommodation">
                 <div class="card-header" role="tab" id="heading-booking-accommodation">
                   <h5 class="mb-0">
@@ -96,7 +165,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

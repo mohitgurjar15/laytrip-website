@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CovidPageComponent } from './covid-page/covid-page.component';
 import { DownloadAppComponent } from './download-app/download-app.component';
 import { FaqComponent } from './faq/faq.component';
 import { PagesComponent } from './pages.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
             {
                 path: 'sson',
                 component: SsoLoginComponent
+            },
+            {
+                path: 'covid-19',
+                component: CovidPageComponent
             },
         ]
     }

@@ -29,6 +29,7 @@ export class FlightCheckoutComponent implements OnInit {
     travelerList;
     isDisableBookBtn:boolean=true;
     isTandCaccepeted:boolean=false;
+    isShowTermConditionPopup:boolean=false;
     bookingStatus:number=0;
     userInfo;
     bookingTimerConfig;
@@ -96,7 +97,7 @@ export class FlightCheckoutComponent implements OnInit {
 
       }
 
-      let instalmentMode=atob(sessionStorage.getItem('__insMode'))
+      let instalmentMode=sessionStorage.getItem('__insMode')?atob(sessionStorage.getItem('__insMode')):'';
       this.instalmentMode= instalmentMode || 'no-instalment';
       if(this.userInfo.roleId==7){
         this.instalmentMode='no-instalment';
@@ -171,9 +172,11 @@ export class FlightCheckoutComponent implements OnInit {
       this.instalmentMode=instalmentMode;
     }
 
-    acceptTermCondtion(){
-      this.isTandCaccepeted=!this.isTandCaccepeted;
-      this.validateBookingButton();
+    acceptTermCondtion(event){
+      this.isTandCaccepeted=event;
+      //this.validateBookingButton();
+      this.isShowTermConditionPopup=false;
+      this.bookFlight();
     }
 
     bookFlight(){
@@ -215,7 +218,8 @@ export class FlightCheckoutComponent implements OnInit {
         additional_amount       : this.additionalAmount,
         card_token              : this.cardToken,
         custom_instalment_amount: this.customAmount,
-        custom_instalment_no    : this.customInstalment
+        custom_instalment_no    : this.customInstalment,
+        booking_through         : 'web'
       }
 
       this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
@@ -260,8 +264,7 @@ export class FlightCheckoutComponent implements OnInit {
       
       this.isDisableBookBtn=true;
       if(
-        this.userInfo.roleId!=7 &&
-        this.isTandCaccepeted==true &&
+        this.userInfo.roleId!=7  &&
         (this.cardToken!='' || this.laycreditpoints>=this.sellingPrice)
       ){
         this.isDisableBookBtn=false;
@@ -407,5 +410,13 @@ export class FlightCheckoutComponent implements OnInit {
       catch(e){
   
       }
+    }
+
+    toggleTermConditionPopup(){
+      this.isShowTermConditionPopup=!this.isShowTermConditionPopup;
+    }
+    
+    closeTermCoditionPopup(){
+      this.isShowTermConditionPopup=!this.isShowTermConditionPopup;
     }
 }

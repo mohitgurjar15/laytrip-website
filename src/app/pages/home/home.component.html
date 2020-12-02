@@ -1,5 +1,30 @@
+<!-- Covid-19 section start -->
+<section class="block_covid">
+    <div class="container">
+        <div class="accordion" id="accordionCovid">
+            <div class="card">
+                <div class="card-head" id="headingOne">
+                    <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_detail_icon.svg" alt="Info Image"> Travelling
+                        during COVID-19
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCovid"
+                    style="">
+                    <div class="card-body">
+                        <p>Please be advised on our cancellation and refund policies. <a [routerLink]="['/covid-19']"
+                                target="_blank">read more.</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Covid-19 section end-->
 <!--  Start Banner Section-->
-<section class="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
+<section class="home_banner" id="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
@@ -12,25 +37,27 @@
                 <span>Dominican Republic has it all</span>
             </div> -->
         </div>
-        
+
 
         <div class="banner_tab">
             <div class="block_dr_text" *ngIf="countryCode=='DR'">
-                Dominican Republic has it all, get it with Partial Payments
+                Dominican Republic has it all, get it with Installment payments
                 <span>República Dominicana lo tiene todo, consíguelo con pagos flexibles</span>
             </div>
-            
+
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab"
-                        aria-selected="true">
+                        aria-selected="true" (click)="clickOnTab('flight')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg"
                             alt="Flight Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg"
                             alt="Flight Icon" />
                         <span>Flight</span>
                     </a>
-                    <a class="nav-item nav-link disabled" id="nav-hotel" role="tab" aria-selected="false">
+                    <a class="nav-item nav-link disabled" id="nav-hotel" role="tab" aria-selected="false"
+                        (click)="clickOnTab('hotel')">
+                        <!-- data-toggle="tab" href="#hotel" -->
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg"
                             alt="Hotel Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg"
@@ -39,7 +66,8 @@
                             alt="Flight Icon">
                         <span>Hotel</span>
                     </a>
-                    <a class="nav-item nav-link disabled" id="nav-accommodation" role="tab" aria-selected="false">
+                    <a class="nav-item nav-link disabled" id="nav-accommodation" role="tab" aria-selected="false"
+                        (click)="clickOnTab('home-rentals')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg"
                             alt="Accommodation Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg"
@@ -102,18 +130,19 @@
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'fromDestination'" [id]="'fromSearch'"
                                                             [label]="'From'" [placeHolder]=departureCity
-                                                            [defaultSelected]=departureAirportCountry
-                                                            [tabIndex]=1
-                                                            [defaultCity]=departureCity
+                                                            [defaultSelected]=departureAirportCountry [tabIndex]=1
+                                                            [airport]=fromAirport [defaultCity]=departureCity
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
                                                 </div>
                                                 <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
-                                                    <a  (click)="swapAirport()">
-                                                        <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
+                                                    <a (click)="swapAirport()">
+                                                        <img *ngIf="countryCode!=='DR'"
+                                                            src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
                                                             alt="Switch Image" />
-                                                        <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
+                                                        <img *ngIf="countryCode==='DR'"
+                                                            src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
                                                             alt="Switch Image" />
                                                     </a>
                                                 </div>
@@ -123,9 +152,8 @@
                                                         <app-search-airport [form]="flightSearchForm"
                                                             [controlName]="'toDestination'" [id]="'toSearch'"
                                                             [label]="'TO'" [placeHolder]=arrivalCity
-                                                            [defaultSelected]=arrivalAirportCountry
-                                                            [tabIndex]=2
-                                                            [defaultCity]=arrivalCity
+                                                            [defaultSelected]=arrivalAirportCountry [tabIndex]=2
+                                                            [airport]=toAirport [defaultCity]=arrivalCity
                                                             (changeValue)="destinationChangedValue($event)">
                                                         </app-search-airport>
                                                     </div>
@@ -133,7 +161,8 @@
                                             </li>
                                             <li class="grid_box secound">
                                                 <div class="date_form">
-                                                    <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                                    <div class="search_area"
+                                                        [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                                         <label>Departure</label>
                                                         <p-calendar inputId="basic" [(ngModel)]="departureDate"
                                                             [ngModelOptions]="{standalone: true}" flightDepartureMinDate
@@ -142,10 +171,8 @@
                                                             [readonlyInput]="true">
                                                         </p-calendar>
                                                         <div class="prev-next">
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('departure','previous')">Prev</a>
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('departure','next')">Next</a>
+                                                            <a (click)="dateChange('departure','previous')">Prev</a>
+                                                            <a (click)="dateChange('departure','next')">Next</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -156,24 +183,24 @@
                                                             return date</p>
                                                     </div>
 
-                                                    <div class="search_area" *ngIf="isRoundTrip" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                                    <div class="search_area" *ngIf="isRoundTrip"
+                                                        [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                                         <label>Return</label>
                                                         <p-calendar inputId="basic" [(ngModel)]="returnDate"
                                                             [ngModelOptions]="{standalone: true}" flightReturnMinDate
-                                                            [minDate]="flightReturnMinDate" [readonlyInput]="true">
+                                                            [minDate]="flightReturnMinDate" [readonlyInput]="true"
+                                                            panelStyleClass="calender-responsive-view">
                                                         </p-calendar>
                                                         <div class="prev-next">
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('arrival','previous')">Prev</a>
-                                                            <a href="javascript:void(0);"
-                                                                (click)="dateChange('arrival','next')">Next</a>
+                                                            <a (click)="dateChange('arrival','previous')">Prev</a>
+                                                            <a (click)="dateChange('arrival','next')">Next</a>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </li>
                                             <li class="grid_box third">
-                                                <div class="travellers" >
+                                                <div class="travellers">
                                                     <app-traveller-info label="TRAVELLERS & CLASS"
                                                         (changeValue)="changeTravellerInfo($event)">
                                                     </app-traveller-info>

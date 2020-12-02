@@ -140,6 +140,7 @@ export class FlightSearchBarComponent implements OnInit {
   ngOnInit() {
     this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
     this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
+    this.searchFlightInfo.class = this.route.snapshot.queryParams['class'];
   }
 
   searchAirportDeparture(searchItem) {

@@ -28,6 +28,7 @@ import { PartialPaymentComponent } from './partial-payment/partial-payment.compo
 import { DownloadAppComponent } from './download-app/download-app.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { SsoLoginComponent } from './sso-login/sso-login.component';
+import { CovidPageComponent } from './covid-page/covid-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SsoLoginComponent } from './sso-login/sso-login.component';
     PartialPaymentComponent,
     DownloadAppComponent,
     ComingSoonComponent,
-    SsoLoginComponent
+    SsoLoginComponent,
+    CovidPageComponent,
   ],
   imports: [
     CommonModule,

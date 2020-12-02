@@ -58,6 +58,7 @@ export class FlightSummaryComponent implements OnInit {
     } else if(this.checkAvailability=='trip-details') {
       this.flightDetail = this.flightSummary;
       this.flightSummaryLoader = false;
+      this.setTotalPriceForTripDetails();
     }else{      
       this.airRevalidate();
     }
@@ -159,7 +160,25 @@ export class FlightSummaryComponent implements OnInit {
         this.fareBreakDown = this.flightDetail[0].fare_break_dwon;
       }
     }
+  }
 
+  setTotalPriceForTripDetails(){
 
+    if(this.instalmentMode=='instalment'){
+      this.totalPrice = this.flightDetail[0].selling_price;
+      this.fareBreakDown = this.flightDetail[0].fare_break_dwon;
+    }
+    else{
+      if(typeof this.flightDetail[0].secondary_selling_price!=='undefined' && this.flightDetail[0].secondary_selling_price){
+
+        this.totalPrice = this.flightDetail[0].secondary_selling_price;
+        this.fareBreakDown = this.flightDetail[0].secondary_fare_break_down;
+      }
+      else{
+        
+        this.totalPrice = this.flightDetail[0].selling_price;
+        this.fareBreakDown = this.flightDetail[0].fare_break_dwon;
+      }
+    }
   }
 }

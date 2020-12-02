@@ -9,11 +9,15 @@ exports.__esModule = true;
 exports.FlightsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
+var booking_status_const_1 = require("../../../../../constant/booking-status.const");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var jwt_helper_1 = require("../../../../../_helpers/jwt.helper");
 var FlightsComponent = /** @class */ (function () {
-    function FlightsComponent(commonFunction, flightService, userService) {
+    function FlightsComponent(commonFunction, flightService, userService, modalService) {
         this.commonFunction = commonFunction;
         this.flightService = flightService;
         this.userService = userService;
+        this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.flightList = [];
         this.flightBookings = [];
@@ -29,8 +33,14 @@ var FlightsComponent = /** @class */ (function () {
         this.isNotFound = false;
         this.loading = true;
         this.notFoundBaggageDetails = false;
+        this.filterData = {};
+        this.filterInfo = {};
+        this.closeResult = '';
+        this.bookingStatus = booking_status_const_1.BookingStatus;
     }
     FlightsComponent.prototype.ngOnInit = function () {
+        var _currency = localStorage.getItem('_curr');
+        this.currency = JSON.parse(_currency);
         this.page = 1;
         this.loading = true;
         this.isNotFound = false;
@@ -43,6 +53,13 @@ var FlightsComponent = /** @class */ (function () {
         this.loading = true;
         this.page = event;
         this.getBookings();
+    };
+    FlightsComponent.prototype.ngOnChanges = function (changes) {
+        this.filterData = changes.result.currentValue;
+        if (this.filterData) {
+            this.showPaginationBar = false;
+            this.getBookings();
+        }
     };
     FlightsComponent.prototype.showDetails = function (index) {
         var _this = this;
@@ -59,7 +76,10 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.getBookings = function () {
         var _this = this;
         this.loading = true;
-        this.userService.getBookings(this.page, this.limit).subscribe(function (res) {
+        if (this.filterData != 'undefined') {
+            this.filterInfo = this.filterData;
+        }
+        this.userService.getBookings(this.page, this.limit, this.filterInfo).subscribe(function (res) {
             if (res) {
                 _this.flightBookings = res.data.map(function (flight) {
                     if (flight.moduleId == 1) {
@@ -83,7 +103,9 @@ var FlightsComponent = /** @class */ (function () {
                             routes: flight.moduleInfo[0].routes,
                             moduleInfo: flight.moduleInfo[0],
                             travelers: flight.travelers,
-                            bookingType: flight.bookingType
+                            bookingType: flight.bookingType,
+                            bookingStatus: flight.bookingStatus,
+                            bookingInstalments: flight.bookingInstalments
                         };
                     }
                 });
@@ -93,6 +115,7 @@ var FlightsComponent = /** @class */ (function () {
                 _this.showPaginationBar = true;
             }
         }, function (err) {
+            jwt_helper_1.redirectToLogin();
             _this.isNotFound = true;
             _this.showPaginationBar = _this.loading = false;
         });
@@ -132,9 +155,35 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.toggleCancellationContent = function () {
         this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
     };
+    FlightsComponent.prototype.open = function (content) {
+        var _this = this;
+        console.log(content);
+        this.modalReference = this.modalService.open(content, { windowClass: 'cancle_alert_modal', centered: true });
+        this.modalReference.result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            // this.getTravelers();
+            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+            console.log(_this.closeResult);
+        });
+    };
+    FlightsComponent.prototype.getDismissReason = function (reason) {
+        if (reason === ng_bootstrap_1.ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === ng_bootstrap_1.ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
+    };
     __decorate([
         core_1.Input()
     ], FlightsComponent.prototype, "flightLists");
+    __decorate([
+        core_1.Input()
+    ], FlightsComponent.prototype, "result");
     FlightsComponent = __decorate([
         core_1.Component({
             selector: 'app-flights',

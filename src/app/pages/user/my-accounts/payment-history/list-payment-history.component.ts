@@ -84,5 +84,12 @@ export class ListPaymentHistoryComponent implements OnInit {
   startDateUpdate(date) {
     this.endDate = new Date(date)
   }
+
+
+  reset() {
+    this.ngOnInit();
+    this.getPaymentHistory();
+  }
+
 }
  

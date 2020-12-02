@@ -25,7 +25,26 @@
               <app-flight-confirmation *ngIf="isTripDetailloading" [bookingData]="bookingResult" ></app-flight-confirmation>              
           </div>
           <div class="col-lg-4">
-            <app-flight-summary *ngIf="isTripDetailloading"  checkAvailability="trip-details" [flightSummary]="bookingResult.booking_details.moduleInfo"></app-flight-summary>
+            <app-flight-summary 
+                *ngIf="isTripDetailloading"  
+                checkAvailability="trip-details" 
+                [laycreditpoints]="bookingResult.booking_details.layCredit"
+                [flightSummary]="bookingResult.booking_details.moduleInfo"
+                [instalmentMode]="instalmentMode">
+            </app-flight-summary>
+
+            <!-- <app-flight-summary 
+                    *ngIf="priceData.length"
+                    [priceData]="priceData"
+                    checkAvailability="local" 
+                    [laycreditpoints]="laycreditpoints"
+                    (flightAvailable)="flightAvailable($event)" 
+                    [showPartialPayemntOption]="showPartialPayemntOption" 
+                    partialPaymentAmount={{partialPaymentAmount}}
+                    payNowAmount={{payNowAmount}}
+                    [instalmentMode]="instalmentMode">
+
+                </app-flight-summary> -->
           </div>
       </div>
   </div>

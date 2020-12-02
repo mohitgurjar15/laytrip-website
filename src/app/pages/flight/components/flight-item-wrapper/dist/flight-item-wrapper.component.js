@@ -13,8 +13,7 @@ var animations_1 = require("@angular/animations");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../../app/_helpers/jwt.helper");
 var FlightItemWrapperComponent = /** @class */ (function () {
-    function FlightItemWrapperComponent(layTripStoreService, flightService, router, route, cookieService, commonFunction, genericService) {
-        this.layTripStoreService = layTripStoreService;
+    function FlightItemWrapperComponent(flightService, router, route, cookieService, commonFunction, genericService) {
         this.flightService = flightService;
         this.router = router;
         this.route = route;
@@ -43,7 +42,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
     FlightItemWrapperComponent.prototype.ngOnInit = function () {
         var _currency = localStorage.getItem('_curr');
         this.currency = JSON.parse(_currency);
-        // console.log(this.flightDetails);
+        console.log('sds', this.showFlightDetails);
         this.flightList = this.flightDetails;
         this.userInfo = jwt_helper_1.getLoginUserInfo();
         if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
@@ -171,8 +170,8 @@ var FlightItemWrapperComponent = /** @class */ (function () {
                 animations_1.trigger('listAnimation', [
                     animations_1.transition('* => *', [
                         animations_1.query(':leave', [
-                            animations_1.stagger(50, [
-                                animations_1.animate('0.0s', animations_1.style({ opacity: 0 }))
+                            animations_1.stagger(10, [
+                                animations_1.animate('0.001s', animations_1.style({ opacity: 0 }))
                             ])
                         ], { optional: true }),
                         animations_1.query(':enter', [

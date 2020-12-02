@@ -1,7 +1,7 @@
 <!-- <section class="search_result flight pb-0" *ngIf="loading">
     <app-flight-loader></app-flight-loader>
 </section> -->
-<div class="account_cnt_main booking_main" *ngIf="isNotFound">
+<div class="account_cnt_main booking_main" *ngIf="isNotFound && !loading">
     <div class="block_nobooking_available">
         <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
         <h5>No Flight Booking Found</h5>
@@ -73,14 +73,26 @@
         </div>
     </div>
 </div>
-<div class="result_listing one_way_list roundtrip_list" *ngIf="!loading">
+<div class="result_listing one_way_list roundtrip_list" *ngIf="!loading && !isNotFound">
     <div class="search_block" *ngFor="let item of flightBookings; let blockIndex = index;">
         <div class="listing_block" *ngIf="item.journey_type === 'oneway'">
             <div class="block_booking_info">
-                <ul>
-                    <li>Booking ID <span>{{item.tripId}}</span></li>
-                    <li>Booked on <span>{{ item.bookingDate}}</span></li>
-                </ul>
+                <div class="row">
+                    <div class="col-md-9">
+                        <ul>
+                            <li>Booking ID <span>{{item.tripId}}</span></li>
+                            <li>Booked on <span>{{ item.bookingDate}}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="block_cancle">
+                            <a class="hover-link" (click)="open(content)" data-toggle="modal" data-target="#cancle_alert_modal">Cancel
+                                Booking</a>
+                            <span
+                                [ngClass]="{'complete': item.bookingStatus , 'refund':item.bookingStatus == 0 }">{{ bookingStatus[item.bookingStatus] }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-2 px-0">
@@ -111,41 +123,51 @@
                             <div class="detail_info">
                                 <p>Arrival</p>
                                 <h4>{{item.arrival_time}}</h4>
-                                <span>{{item.arrival_city}}</span>
+                                <span>{{item.arrival_city}}</span>2
                             </div>
                         </div>
                         <div class="block_detail_btm">
-                            <div class="show_detail" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
+                            <div class="c" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
                                 <a class="show_more_detail hover-link" (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                     Flight Details
                                 </a>
                             </div>
-                            <div class="info_price_origin">
-                                <div class="refundable">Refundable</div>
+                            <!-- <div class="info_price_origin">
+                                <div class="refundable" >Refundable</div>
                                 <div class="ogigin_price">
                                     Total <span>${{item.selling_price | number : '1.2-2'}}</span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 px-0">
                     <div class="block_price">
-                        <p>Instalment per week</p>
-                        <p><span>${{item.instalment_amount | number : '1.2-2'}}</span></p>
-                        <a target="_blank" [routerLink]="['/partial-payment']"><span
-                                class="partial_payment_info">Instalment Payment Info</span></a>
+                        <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
+                        <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
+                        </h6>
+                        <a target="_blank" [routerLink]="['/partial-payment']"><span class="partial_payment_info"
+                                *ngIf="item.bookingType ==1">Instalment Payment Info</span></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="listing_block" *ngIf="item.journey_type === 'round-trip'">
             <div class="block_booking_info">
-                <ul>
-                    <li>Booking ID <span>{{item.tripId}}</span></li>
-                    <li>Booked on <span>{{ item.bookingDate}}</span></li>
-                </ul>
+                <div class="row">
+                    <div class="col-md-9">
+                        <ul>
+                            <li>Booking ID <span>{{item.tripId}}</span></li>
+                            <li>Booked on <span>{{ item.bookingDate}}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="block_cancle">
+                            <a class="hover-link" (click)="open(content)">Cancel Booking</a>
+                            <span
+                            [ngClass]="{'complete': item.bookingStatus , 'refund':item.bookingStatus == 0 }">{{ bookingStatus[item.bookingStatus] }}</span>                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-9">
@@ -199,32 +221,35 @@
                         </div>
                         <div class="block_detail_btm">
                             <div class="show_detail">
-                                <a href="javascript:void(0);" class="show_more_detail"
+                                <a class="show_more_detail hover-link"
                                     (click)="showDetails(blockIndex)">
                                     <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">
                                     Flight Details
                                 </a>
                             </div>
-                            <div class="info_price_origin">
-                                <div class="refundable">Refundable</div>
+                            <!-- <div class="info_price_origin">
+                                <div class="refundable" >Refundable</div>
                                 <div class="ogigin_price">
                                     Total <span>${{item.selling_price | number : '1.2-2'}}</span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-3 px-0">
+
                     <div class="block_price">
-                        <p>Instalment per week</p>
-                        <p><span>${{item.instalment_amount | number : '1.2-2'}}</span></p>
-                        <span class="partial_payment_info">Instalment Payment Info</span>
+                        <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
+                        <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
+                        </h6>
+                        <span class="partial_payment_info"
+                            *ngIf="item.bookingType ==1" [routerLink]="['/partial-payment']">Instalment Payment Info</span>
                     </div>
                 </div>
             </div>
         </div>
-
+        </div> 
         <div class="detail_info_show on_out_said" [attr.id]="blockIndex" *ngIf="showFlightDetails[blockIndex] === true">
             <ul id="tabs" class="nav nav-tabs bookingListNavTab" role="tablist">
                 <li class="nav-item">
@@ -244,7 +269,7 @@
                     <a href="#Traveller" class="nav-link" data-toggle="tab" role="tab">Travellers</a>
                 </li>
             </ul>
-            <div id="content" class="tab-content" role="tablist">
+            <div id="content" class="tab-chttps://prnt.sc/vp3pstontent" role="tablist">
                 <div id="flight-info-oneway" class="card tab-pane fade show active" role="tabpanel"
                     aria-labelledby="flight-info-oneway">
                     <div class="card-header" role="tab" id="heading-flight-info-oneway">
@@ -257,7 +282,7 @@
                     </div>
                     <div id="collapse-flight-info-oneway" class="collapse show" data-parent="#content" role="tabpanel"
                         aria-labelledby="heading-flight-info-oneway">
-                        <div class="card-body noborder" *ngFor="let flight of item.routes; let i = index">
+                        <div class="card-body noborder noborder" *ngFor="let flight of item.routes; let i = index">
                             <div class="block_flight_info">
                                 <div class="tab_detail flight_info_cnt">
                                     <div *ngFor="let flightInfo of flight.stops">
@@ -293,7 +318,6 @@
                                                             <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
                                                                 alt="Duration Images">
                                                         </div>
-                                                        <p>Flight Duration</p>
                                                     </div>
                                                     <div class="flight_info_detail">
                                                         <h4>{{ flightInfo?.arrival_code }}
@@ -326,66 +350,84 @@
                     </div>
                     <div id="collapse-Fare-Detail-oneway" class="collapse" data-parent="#content" role="tabpanel"
                         aria-labelledby="heading-Fare-Detail-oneway">
-                        <div class="card-body">
-                            <div class="tab_detail fare_detail_cnt">
-                                <div class="triangle_right"></div>
-                                <ul *ngIf="item.bookingType == 1 || !item.moduleInfo.secondary_fare_break_down">
-                                    <li *ngFor="let fareDetails of item.moduleInfo.fare_break_dwon">
-                                        <p *ngIf="fareDetails.type == 'ADT'">
-                                            Base Fare
-                                            ({{ fareDetails?.quantity }}
-                                            Adult)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                        <p *ngIf="fareDetails.type == 'CHD'">
-                                            Base Fare
-                                            ({{ fareDetails?.quantity }}
-                                            Child)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                        <p *ngIf="fareDetails.type == 'INF'">
-                                            Base Fare
-                                            ({{ fareDetails?.quantity }}
-                                            Infant)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                        <p *ngIf="fareDetails.type === 'total'">
-                                            Total Fare ({{ fareDetails?.quantity }} traveller)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                    </li>
-                                </ul>
-                                <ul *ngIf="item.bookingType == 2 && item.moduleInfo.secondary_fare_break_down">
-                                    <li *ngFor="let fareDetails of item.moduleInfo.secondary_fare_break_down">
-                                        <p *ngIf="fareDetails.type == 'ADT'">
-                                            Base Fare
-                                            ({{ fareDetails?.quantity }}
-                                            Adult)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                        <p *ngIf="fareDetails.type == 'CHD'">
-                                            Base Fare
-                                            ({{ fareDetails?.quantity }}
-                                            Child)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                        <p *ngIf="fareDetails.type == 'INF'">
-                                            Base Fare
-                                            ({{ fareDetails?.quantity }}
-                                            Infant)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                        <p *ngIf="fareDetails.type === 'total'">
-                                            Total Fare ({{ fareDetails?.quantity }} traveller)
-                                            <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
-                                        </p>
-                                    </li>
-                                </ul>
-                                <p><span>Note:</span> It is a long established fact that a reader will be distracted by
-                                    the readable content of a page when looking at its layout. The point of using Lorem
-                                    Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-                                    using ‘Content here, content here’, making it look like readable English.</p>
-                                <div class="triangle_left"></div>
+                        <div class="card-body noborder">
+                            <div class="block_flight_info">
+                                <div class="tab_detail fare_detail_cnt">
+                                    <div class="triangle_right"></div>
+                                    <ul *ngIf="item.bookingType == 1 || !item.moduleInfo.secondary_fare_break_down">
+                                        <li *ngFor="let fareDetails of item.moduleInfo.fare_break_dwon">
+                                            <p *ngIf="fareDetails.type == 'ADT'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Adult)
+                                            </p>
+                                            <span *ngIf="fareDetails.type == 'ADT'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            <p *ngIf="fareDetails.type == 'CHD'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Child)
+                                            </p>
+                                            <span *ngIf="fareDetails.type == 'CHD'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            <p *ngIf="fareDetails.type == 'INF'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Infant)
+                                            </p>
+                                            <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            <p *ngIf="fareDetails.type === 'total'">
+                                                Total Fare ({{ fareDetails?.quantity }} traveller)
+                                            </p>
+                                            <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </li>
+                                    </ul>
+                                    <ul *ngIf="item.bookingType == 2 && item.moduleInfo.secondary_fare_break_down">
+                                        <li *ngFor="let fareDetails of item.moduleInfo.secondary_fare_break_down">
+                                            <p *ngIf="fareDetails.type == 'ADT'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Adult)
+                                            </p>
+                                            <span *ngIf="fareDetails.type == 'ADT'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            <p *ngIf="fareDetails.type == 'CHD'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Child)
+                                            </p>
+                                            <span *ngIf="fareDetails.type == 'CHD'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            <p *ngIf="fareDetails.type == 'INF'">
+                                                Base Fare
+                                                ({{ fareDetails?.quantity }}
+                                                Infant)
+                                            </p>
+                                            <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                            <p *ngIf="fareDetails.type === 'total'">
+                                                Total Fare ({{ fareDetails?.quantity }} traveller)
+                                            </p>
+                                            <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
+                                        </li>
+                                    </ul>
+                                    <ul *ngIf="item.bookingInstalments.length > 0">
+                                        <li class="down_payment">
+                                            Down payment
+                                            <span
+                                                class="down_value">{{ currency?.symbol }}{{ item?.instalment_amount | number : '1.2-2'}}</span>
+                                        </li>
+                                        <ng-container *ngFor="let instalment of item.bookingInstalments; let i = index">
+                                            <li *ngIf="i>0">
+                                                <div class="detail"> {{i}} Instalment
+                                                    <p>{{ commonFunction.convertDateFormat(instalment.instalmentDate,'YYYY-MM-DD')}}
+                                                    </p>
+                                                </div> 
+                                                <span> {{ currency?.symbol }}{{instalment.amount}} </span>
+                                            </li>
+                                        </ng-container>
+                                    </ul>
+                                    <!-- <p><span>Note:</span> It is a long established fact that a reader will be distracted by
+                                        the readable content of a page when looking at its layout. The point of using Lorem
+                                        Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                                        using ‘Content here, content here’, making it look like readable English.</p> -->
+                                    <div class="triangle_left"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -403,7 +445,7 @@
                     </div>
                     <div id="collapse-Baggage-Rules-oneway" class="collapse" role="tabpanel" data-parent="#content"
                         aria-labelledby="heading-Baggage-Rules-oneway">
-                        <div class="card-body">
+                        <div class="card-body  noborder">
                             <div class="tab_detail baggage_rules_cnt">
                                 <div class="triangle_right"></div>
                                 <!-- <div class="detail_left">
@@ -425,7 +467,8 @@
                                                 <th>Flight</th>
                                                 <th>Depart</th>
                                                 <th>Arrive</th>
-                                                <th>Free Baggage</th>
+                                                <th>Checkin Baggage</th>
+                                                <th>Cabin Baggage</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -435,6 +478,8 @@
                                                 <td data-title="Arrive">{{ baggage.stops[i].arrival_info.name }}</td>
                                                 <td data-title="Free Baggage">
                                                     {{ baggage.stops[i].checkin_baggage || 'N/A'}}</td>
+                                                <td data-title="Free Baggage">
+                                                    {{ baggage.stops[i].cabin_baggage || 'N/A'}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -452,17 +497,17 @@
                 </div>
                 <div id="Cancellation-Rules-oneway" class="card tab-pane fade" role="tabpanel"
                     aria-labelledby="Cancellation-Rules-oneway">
-                    <div class="card-header" role="tab" id="heading-Cancellation-Rules-oneway">
+                    <!--  <div class="card-header" role="tab" id="heading-Cancellation-Rules-oneway">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" href="#collapse-Cancellation-Rules"
                                 aria-expanded="false" aria-controls="collapse-Cancellation-Rules-oneway">
                                 Cancellation Rules
                             </a>
                         </h5>
-                    </div>
+                    </div> -->
                     <div id="collapse-Cancellation-Rules-oneway" class="collapse" role="tabpanel" data-parent="#content"
                         aria-labelledby="heading-Cancellation-Rules-oneway">
-                        <div class="card-body">
+                        <div class="card-body noborder">
                             <div class="tab_detail cancellation_rules_cnt">
                                 <div class="triangle_right"></div>
                                 <!--  <div class="rules_cnt_top">
@@ -505,8 +550,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="Traveller" class="card tab-pane fade" role="tabpanel"
-                    aria-labelledby="Traveller">
+                <div id="Traveller" class="card tab-pane fade" role="tabpanel" aria-labelledby="Traveller">
                     <div class="card-header" role="tab" id="heading-Fare-Detail-oneway">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" href="#collapse-Fare-Detail-oneway"
@@ -517,25 +561,60 @@
                     </div>
                     <div id="collapse-Fare-Detail-oneway" class="collapse" data-parent="#content" role="tabpanel"
                         aria-labelledby="heading-Fare-Detail-oneway">
-                        <div class="card-body">
-                            <div class="tab_detail fare_detail_cnt">
-                                <div class="triangle_right"></div>
-                                <ul *ngFor="let traveler of item.travelers;let i = index">
-                                    <li >
-                                        Traveller ({{traveler.userData.user_type | titlecase}}) <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span>
-                                    </li>
-                                </ul>
-                                <div class="triangle_left"></div>
+                        <div class="card-body noborder">
+                            <div class="block_flight_info">
+                                <div class="tab_detail fare_detail_cnt">
+                                    <div class="triangle_right"></div>
+                                    <ul *ngFor="let traveler of item.travelers;let i = index">
+                                        <li>
+                                            Traveller ({{traveler.userData.user_type || 'N/A' | titlecase}})
+                                            <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span>
+                                        </li>
+                                    </ul>
+                                    <div class="triangle_left"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 <br>
-<ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems"
-    [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true"
-    (pageChange)="pageChange($event)">
-</ngb-pagination>
+<div class="pagination_main" *ngIf="showPaginationBar">
+    <div class="pagination_result">
+        <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
+    </div>
+    <div class="pagination_list">
+        <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="totalItems"
+            [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="2" [rotate]="true"
+            (pageChange)="pageChange($event)">
+        </ngb-pagination>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal_cnt">
+            <h3>Alert</h3>
+            <p>To cancel this booking please contact our support team</p>
+            <ul class="block_contact">
+                <li>
+                    <a class="hover-link" ><i class="fa fa-envelope" aria-hidden="true"></i> support@laytrip.com</a>
+                </li>
+
+                <li>
+                    <a class="hover-link"><i class="fa fa-phone" aria-hidden="true"></i> +00 000 000 0000</a>
+                </li>
+            </ul>
+            <div class="block_btn">
+                <a class="hover-link" (click)="modal.dismiss('Cross click')" class="hover-link">Ok</a>
+            </div>
+        </div>
+    </div>
+</ng-template>

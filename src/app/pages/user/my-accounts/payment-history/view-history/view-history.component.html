@@ -135,11 +135,11 @@
                                         <ul>
                                             <li>
                                                 <span>Payment Type :</span>
-                                                <p *ngIf="list[0].totalInstallments > 0">Partial Payment</p>
+                                                <p *ngIf="list[0].totalInstallments > 0">Installment Payment</p>
                                                 <p *ngIf="list[0].totalInstallments == 0">Full Payment</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Partial Payment Type :</span>
+                                                <span>Installment Payment Type :</span>
                                                 <p>{{list[0].bookingInstalments[0].instalmentType || '--' | titlecase }}</p>
                                             </li>
                                             <li>
@@ -151,20 +151,20 @@
                                                 <p>{{ dateConvert(list[0].bookingDate) }}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Partial Payment Part :</span>
-                                                <p>{{list[0].totalInstallments}} Installment</p>
+                                                <span>Installment Payment Part :</span>
+                                                <p>{{list[0].totalInstallments}} Instalment</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Partial Payment Start Date :</span>
+                                                <span>Installment Payment Start Date :</span>
                                                 <p>{{ flightCommonFunction.getPaymentStartDate(list[0].bookingInstalments) }}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Next Partial Payment Date :</span>
+                                                <span>Next Installment Payment Date :</span>
                                                 <p>{{dateConvert(list[0].nextInstalmentDate)}}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Partial Payment Amount :</span>
-                                                <p>{{ currencySymbol }}{{list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
+                                                <span>Installment Payment Amount :</span>
+                                                <p>{{ currencySymbol }}{{list[0].bookingInstalments[1].amount ||  list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
                                                 <span>Paid Amount :</span>
@@ -184,7 +184,7 @@
                             </div>
                             <div class="block_inner" *ngIf="list[0].totalInstallments > 0">
                                 <div class="block_title">
-                                    <h5>Partial Payment Detail</h5>
+                                    <h5>Installment Payment Detail</h5>
                                 </div>
                                 <div class="pay_detail_tbl">
                                     <table>
@@ -197,7 +197,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let instalment of list[0].bookingInstalments; let i=index;">
+                                            <tr *ngFor="let instalment of list[0].bookingInstalments | slice:1; let i = index;">
                                                 <td data-title="ID">{{i +1 }}</td>
                                                 <td data-title="Amount">{{ currencySymbol}}{{  instalment.amount | number : '1.2-2' }}</td>
                                                 <td data-title="Date">{{ dateConvert(instalment.instalmentDate) }}</td>

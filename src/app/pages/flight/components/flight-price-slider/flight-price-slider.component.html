@@ -16,7 +16,7 @@
 </div>
 
 <div class="price_by_date" *ngIf="dates.length>0">
-  <label>Flexible Dates</label>
+  <label>Flexible Dates <span *ngIf="dates[0].secondary_start_price >0" class="price_per_week_label">(weekly payment)</span></label>
   <div class="price_day_slider" >
     <div class="inner" *ngFor="let item of dates">
       <div class="slid_block">

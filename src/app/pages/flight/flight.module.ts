@@ -30,6 +30,7 @@ import { CancellationPolicyPopupComponent } from './components/cancellation-poli
 import { FlightPaymentComponent } from './flight-payment/flight-payment.component';
 import { FlightSummaryLoaderComponent } from './components/flight-summary-loader/flight-summary-loader.component';
 import { FlightErrorComponent } from './components/flight-error/flight-error.component';
+import { PopupTermConditionComponent } from './components/popup-term-condition/popup-term-condition.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { FlightErrorComponent } from './components/flight-error/flight-error.com
     CancellationPolicyPopupComponent,
     FlightPaymentComponent,
     FlightSummaryLoaderComponent,
-    FlightErrorComponent
+    FlightErrorComponent,
+    PopupTermConditionComponent
   ],
   imports: [
     CommonModule,

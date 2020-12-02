@@ -3,6 +3,10 @@ import { CommonFunction } from '../../../../../_helpers/common-function';
 import { environment } from '../../../../../../environments/environment';
 import { FlightService } from '../../../../../services/flight.service';
 import { UserService } from '../../../../../services/user.service';
+import { BookingStatus } from '../../../../../constant/booking-status.const';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { redirectToLogin } from '../../../../../_helpers/jwt.helper';
+
 
 @Component({
   selector: 'app-flights',
@@ -12,6 +16,7 @@ import { UserService } from '../../../../../services/user.service';
 export class FlightsComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() flightLists;
+  @Input() result;
   flightList = [];
   flightBookings = [];
   page :1;
@@ -32,16 +37,26 @@ export class FlightsComponent implements OnInit {
   loading = true;
   pageNumber:number;
   notFoundBaggageDetails = false;
+  public filterData={};
+  filterInfo={};
+  bookingStatus;
+  currency;
+  closeResult = '';
+  modalReference: any;
 
   constructor(   
      private commonFunction: CommonFunction,
      private flightService: FlightService,
-     private userService: UserService
+     private userService: UserService,
+     private modalService: NgbModal
 
-
-  ) { }
+  ) { 
+    this.bookingStatus =  BookingStatus;
+  }
 
   ngOnInit() {
+    let _currency = localStorage.getItem('_curr');
+    this.currency = JSON.parse(_currency);
     this.page = 1;
     this.loading = true;
     this.isNotFound = false;
@@ -57,6 +72,14 @@ export class FlightsComponent implements OnInit {
     this.getBookings();
   }
 
+  ngOnChanges(changes: SimpleChanges) {   
+    this.filterData = changes.result.currentValue;
+
+    if(this.filterData){
+      this.showPaginationBar = false;
+      this.getBookings();
+    }
+  }
   showDetails(index) {
 
     if (typeof this.showFlightDetails[index] === 'undefined') {
@@ -72,7 +95,10 @@ export class FlightsComponent implements OnInit {
 
   getBookings(){
     this.loading = true;
-    this.userService.getBookings(this.page, this.limit).subscribe((res: any) => {
+    if(this.filterData != 'undefined'){     
+      this.filterInfo = this.filterData;
+    }
+    this.userService.getBookings(this.page, this.limit,this.filterInfo).subscribe((res: any) => {
       if (res) {
         this.flightBookings = res.data.map(flight => {
           if(flight.moduleId == 1){
@@ -96,7 +122,9 @@ export class FlightsComponent implements OnInit {
               routes : flight.moduleInfo[0].routes,
               moduleInfo:flight.moduleInfo[0],
               travelers:flight.travelers,
-              bookingType:flight.bookingType
+              bookingType:flight.bookingType,
+              bookingStatus:flight.bookingStatus,
+              bookingInstalments:flight.bookingInstalments
             }
           }
         });
@@ -106,6 +134,7 @@ export class FlightsComponent implements OnInit {
         this.showPaginationBar = true;
       }
     }, err => {
+      redirectToLogin();
       this.isNotFound = true;
       this.showPaginationBar = this.loading = false;    
     });
@@ -146,5 +175,27 @@ export class FlightsComponent implements OnInit {
 
   toggleCancellationContent(){
     this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
+  }
+
+  open(content) {
+    console.log(content)
+    this.modalReference = this.modalService.open(content, { windowClass: 'cancle_alert_modal',centered: true });
+    this.modalReference.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.getTravelers();
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult)
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

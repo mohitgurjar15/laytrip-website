@@ -16,7 +16,6 @@ export class FeaturedCityComponent implements OnInit {
   ) { 
 
     this.countryCode = this.commonFunction.getUserCountry();
-    console.log("this.",this.countryCode)
     if(this.countryCode==''){
       setTimeout(()=>{this.loadJquery();},100) 
     }

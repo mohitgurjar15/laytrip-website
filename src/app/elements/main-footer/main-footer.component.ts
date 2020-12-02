@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ShareSocialMediaComponent } from '../../components/share-social-media/share-social-media.component';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 @Component({
@@ -9,7 +11,7 @@ declare var $: any;
 export class MainFooterComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.loadJquery();
@@ -36,5 +38,10 @@ export class MainFooterComponent implements OnInit {
 
     });
     // Close Back to Top Js
+  }
+
+  openShare() {
+    const modalRef = this.modalService.open(ShareSocialMediaComponent,{ windowClass: 'share_modal', centered: true });
+    modalRef.componentInstance.name = 'World';
   }
 }
