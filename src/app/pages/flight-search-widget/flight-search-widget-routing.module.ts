@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FlightSearchComponent } from './flight-search/flight-search.component';
-import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
-import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
-import { FlightPaymentComponent } from './flight-payment/flight-payment.component';
+import { FlightSearchComponent } from '../flight-search-widget/flight-search/flight-search.component';
+import { FlightTravelerComponent } from '../flight-search-widget/flight-traveler/flight-traveler.component';
+import { FlightCheckoutComponent } from '../flight-search-widget/flight-checkout/flight-checkout.component';
+import { FlightPaymentComponent } from '../flight-search-widget/flight-payment/flight-payment.component';
 
 const routes: Routes = [
   {
@@ -28,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FlightRoutingModule { }
+export class FlightSearchWidgetRoutingModule { }

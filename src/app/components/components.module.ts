@@ -32,6 +32,10 @@ import { RedeemLaycreditLoaderComponent } from './redeem-laycredit-loader/redeem
 import { ToasterComponent } from './toaster/toaster.component';
 import { ShareSocialMediaComponent } from './share-social-media/share-social-media.component';
 
+// HOTEL SHARED COMPONENTS
+import { GuestInfoComponent } from './hotel-shared-components/guest-info/guest-info.component';
+import { SearchHotelComponent } from './hotel-shared-components/search-hotel/search-hotel.component';
+
 @NgModule({
   declarations: [
     SearchAirportComponent,
@@ -55,7 +59,10 @@ import { ShareSocialMediaComponent } from './share-social-media/share-social-med
     AddPointsComponent,
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
-    ShareSocialMediaComponent
+    ShareSocialMediaComponent,
+    // HOTEL SHARED COMPONENT
+    GuestInfoComponent,
+    SearchHotelComponent
   ],
   imports: [
     CommonModule,
@@ -91,7 +98,10 @@ import { ShareSocialMediaComponent } from './share-social-media/share-social-med
     AddPointsComponent,
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
-    ShareSocialMediaComponent
+    ShareSocialMediaComponent,
+    // HOTEL SHARED COMPONENT
+    GuestInfoComponent,
+    SearchHotelComponent
   ],
   providers: [DatePipe],
 

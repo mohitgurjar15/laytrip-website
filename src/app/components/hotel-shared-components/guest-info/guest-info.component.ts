@@ -1,0 +1,145 @@
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CommonFunction } from '../../../_helpers/common-function';
+declare var $: any;
+
+@Component({
+  selector: 'app-guest-info',
+  templateUrl: './guest-info.component.html',
+  styleUrls: ['./guest-info.component.scss']
+})
+export class GuestInfoComponent implements OnInit {
+
+  @Output() changeValue = new EventEmitter<any>();
+  @Input() label;
+
+  adultValue: number = 1;
+  childValue: number = 0;
+  infantValue: number = 0;
+  totalPerson: number = 1;
+  class = 'Economy';
+  errorMessage:string='';
+  countryCode:string;
+
+  travellerInfo = {
+    adult: 0,
+    child: 0,
+    infant: 0,
+    class: 'Economy',
+    totalPerson: 0,
+  };
+
+  constructor(
+    private route: ActivatedRoute,
+    private commonFunction:CommonFunction
+  ) {
+    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
+    this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
+    this.infantValue = parseInt(this.route.snapshot.queryParams['infant']) ? parseInt(this.route.snapshot.queryParams['infant']) : 0;
+    this.totalPerson = this.adultValue + this.childValue + this.infantValue;
+    this.class = this.route.snapshot.queryParams['class'] ? this.route.snapshot.queryParams['class'] : 'Economy';
+
+    this.countryCode = this.commonFunction.getUserCountry()
+  }
+
+  ngOnInit() {
+    this.loadJquery();
+  }
+
+  loadJquery() {
+    $("body").click(function () {
+      $("#add_traveler_open").hide("slow");
+    });
+
+    $("#add_traveler").click(function (e) {
+      e.stopPropagation();
+      $("#add_traveler_open").slideToggle("slow");
+    });
+
+    $('#add_traveler_open').click(
+      function (e) {
+        e.stopPropagation();
+      }
+    );
+
+  }
+
+  btnClickForChange(item) {
+    // FOR ADULT
+    if (item && item.type === 'minus' && item.label === 'adult') {
+
+      if(this.adultValue-1 < this.infantValue){
+        this.errorMessage="Infant count should be less than Adults.";
+        return false;
+      }
+      else{
+        this.errorMessage='';
+      }
+      this.adultValue = this.adultValue - 1;
+    } else if (item && item.type === 'plus' && item.label === 'adult') {
+      if(this.adultValue+1 + this.childValue  > 9){
+        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
+        return ;
+      }
+      else{
+        this.errorMessage='';
+      }
+      this.adultValue = this.adultValue + 1;
+
+    }
+    // FOR CHILD
+    if (item && item.type === 'minus' && item.label === 'child') {
+      if(this.adultValue + this.childValue-1  < 9){
+        this.errorMessage='';
+      }
+      else{
+        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
+        return ;
+      }
+      this.childValue = this.childValue - 1;
+    } else if (item && item.type === 'plus' && item.label === 'child') {
+      if(this.adultValue + this.childValue+1  > 9){
+        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
+        return ;
+      }
+      else{
+        this.errorMessage='';
+      }
+      this.childValue = this.childValue + 1;
+    }
+    // FOR INFANT
+    if (item && item.type === 'minus' && item.label === 'infant') {
+      
+      this.infantValue = this.infantValue - 1;
+      if(this.infantValue < this.adultValue){
+        this.errorMessage='';
+      }
+    } else if (item && item.type === 'plus' && item.label === 'infant') {
+
+      if(this.infantValue+1 > this.adultValue){
+        this.errorMessage="Infant count should be less than Adults.";
+        return false;
+      }
+      else{
+        this.errorMessage='';
+      }
+      this.infantValue = this.infantValue + 1;
+    }
+
+    this.totalPerson = this.adultValue + this.childValue + this.infantValue;
+
+    if (item && item.type === 'class' && item.value) {
+      this.travellerInfo.class = item.value;
+      this.class = item.value;
+    }
+
+    this.travellerInfo = {
+      adult: this.adultValue,
+      child: this.childValue,
+      infant: this.infantValue,
+      class: this.travellerInfo.class,
+      totalPerson: this.totalPerson
+    };
+    this.changeValue.emit(this.travellerInfo);
+  }
+}
