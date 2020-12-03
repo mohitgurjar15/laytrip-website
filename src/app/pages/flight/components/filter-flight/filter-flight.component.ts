@@ -382,7 +382,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       
       filterdFlights=filterdFlights.filter(item=>{
 
-        return item.start_price>=this.minPartialPaymentPrice && item.start_price<=this.maxPartialPaymentPrice;
+        return item.secondary_start_price>=this.minPartialPaymentPrice && item.secondary_start_price<=this.maxPartialPaymentPrice;
       })
     }
 
@@ -497,6 +497,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
       })
     }
+
     this.filterFlight.emit(filterdFlights); 
   }
 
