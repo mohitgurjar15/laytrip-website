@@ -210,6 +210,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   sortFlight(event) {
     let { key, order } = event;
+    console.log("Before Key:",key,this.flightDetails)
     if (key === 'total_duration') {
       this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
     }
@@ -217,12 +218,13 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
     }
     else if (key === 'departure') {
-
+      
       this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
     }
     else {
       this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
     }
+    console.log("After Key:",key,this.flightDetails)
 
   }
 
