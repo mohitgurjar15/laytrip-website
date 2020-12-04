@@ -22,7 +22,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted: boolean = false;
-  countryCode: string;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationCode='JFK';
   departureCity='New York';
@@ -74,7 +73,6 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     this.fromAirport['display_name'] = `${this.fromAirport.city},${this.fromAirport.country},(${this.fromAirport.code}),${this.fromAirport.name}`;
     this.toAirport['display_name'] = `${this.toAirport.city},${this.toAirport.country},(${this.toAirport.code}),${this.toAirport.name}`;
-    this.renderer.addClass(document.body, 'bg_color');
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
       toDestination: ['', [Validators.required]],
@@ -85,7 +83,6 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     this.flightDepartureMinDate = new Date();
     this.flightReturnMinDate = this.departureDate;
-    this.countryCode = this.commonFunction.getUserCountry();
   }
 
   ngOnInit(): void {
@@ -212,22 +209,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.departureAirportCountry = this.arrivalAirportCountry;
     this.arrivalAirportCountry = tempAirportCountry;
 
-  }
-
-  clickOnTab(tabName) {
-    if (tabName === 'flight') {
-      let flight = document.getElementById('home_banner');
-      // flight.style.background = 'green';
-      // flight.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
-    } else if (tabName === 'hotel') {
-      let hotel = document.getElementById('home_banner');
-      // hotel.style.background = 'red';
-      // hotel.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
-    }
-  }
-
-  ngOnDestroy() {
-    this.renderer.removeClass(document.body, 'bg_color');
   }
 
 }
