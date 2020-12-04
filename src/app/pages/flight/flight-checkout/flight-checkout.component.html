@@ -123,7 +123,7 @@
 </section>
 
 <app-flight-booking-failed *ngIf="bookingStatus==2"></app-flight-booking-failed>
-<app-full-page-overlay-loader *ngIf="bookingLoader" image="{{s3BucketUrl}}assets/images/flight-load_im.png"  module="Flight" type="Booking"></app-full-page-overlay-loader>
+<app-popup-loader *ngIf="bookingLoader" ></app-popup-loader>
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
 <app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>
 <app-booking-feedback *ngIf="isShowFeedbackPopup" [bookingId]="bookingId" (feedbackValueChange)="feedbackToggle($event)"></app-booking-feedback>

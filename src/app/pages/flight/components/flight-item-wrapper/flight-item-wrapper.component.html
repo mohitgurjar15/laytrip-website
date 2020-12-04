@@ -216,7 +216,7 @@
                                         </li>
                                         <ng-container *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
                                             <li *ngIf="i>0">
-                                                <div class="detail"> {{i}} Instalment
+                                                <div class="detail"> {{i}} Installment
                                                     <p>{{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</p>
                                                 </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
                                             </li>
@@ -332,7 +332,7 @@
                                         <a class="view_more"
                                             *ngIf="!loadCancellationPolicy && cancellationPolicyArray.length"
                                             (click)="toggleCancellationContent()">
-                                            {{ loadMoreCancellationPolicy===true ? 'View less' : 'View More' }}</a>
+                                            {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a>
                                     </div>
                                     <div class="triangle_left"></div>
                                 </div>

@@ -44,7 +44,7 @@ export class SortFlightComponent implements OnInit {
     this.sortFlight.emit({ key , order })
   }
 
-  resetFilter(key,order){
+  resetSorting(key,order){
     this.sortType='lh_price';
     this.sortFlight.emit({ key , order })
   }
