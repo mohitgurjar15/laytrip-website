@@ -148,7 +148,7 @@
                         <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                         </h6>
                         <a target="_blank" [routerLink]="['/partial-payment']"><span class="partial_payment_info"
-                                *ngIf="item.bookingType ==1">Instalment Payment Info</span></a>
+                                *ngIf="item.bookingType ==1">Installment Payment Info</span></a>
                     </div>
                 </div>
             </div>
@@ -244,7 +244,7 @@
                         <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                         </h6>
                         <span class="partial_payment_info"
-                            *ngIf="item.bookingType ==1" [routerLink]="['/partial-payment']">Instalment Payment Info</span>
+                            *ngIf="item.bookingType ==1" [routerLink]="['/partial-payment']">Installment Payment Info</span>
                     </div>
                 </div>
             </div>
@@ -414,11 +414,11 @@
                                         </li>
                                         <ng-container *ngFor="let instalment of item.bookingInstalments; let i = index">
                                             <li *ngIf="i>0">
-                                                <div class="detail"> {{i}} Instalment
+                                                <div class="detail"> {{i}} Installment
                                                     <p>{{ commonFunction.convertDateFormat(instalment.instalmentDate,'YYYY-MM-DD')}}
                                                     </p>
                                                 </div> 
-                                                <span> {{ currency?.symbol }}{{instalment.amount}} </span>
+                                                <span> {{ currency?.symbol }}{{instalment.amount | number : '1.2-2'}} </span>
                                             </li>
                                         </ng-container>
                                     </ul>

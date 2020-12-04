@@ -5,43 +5,43 @@
     </button>
     <div class="block_feedback_inner">
       <h6>Feedback</h6>
-      <p>How would you rate your experience using Laytrip?</p>
+      <p>How would you rate your experience using laytrip?</p>
       <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
         <div class="block_feedback_add">
           <ul>
             <li>
-              <a  [ngClass]="{'active': _rating === 'Terrible'}"  (click)="selectRating($event,'Terrible')" href="javascript:void(0);">
+              <a class="anchor-text"  [ngClass]="{'active': _rating === 'Terrible'}"  (click)="selectRating($event,'Terrible')" >
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback-Terrible.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback-Terrible-clr.svg" alt="Feedback Image">
                 <span>Terrible</span>
               </a>
             </li>
             <li>
-              <a [ngClass]="{'active': _rating === 'Bad'}"  href="javascript:void(0);" (click)="selectRating($event,'Bad')">
+              <a class="anchor-text" [ngClass]="{'active': _rating === 'Bad'}"   (click)="selectRating($event,'Bad')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback-Bad.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback-Bad-clr.svg" alt="Feedback Image">
                 <span>Bad</span>
               </a>
             </li>
             <li>
-              <a [ngClass]="{'active': _rating === 'Okay'}"  href="javascript:void(0);" (click)="selectRating($event,'Okay')">
+              <a class="anchor-text" [ngClass]="{'active': _rating === 'Okay'}"   (click)="selectRating($event,'Okay')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback-Okay.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback-Okay-clr.svg" alt="Feedback Image">
                 <span>Okay</span>
               </a>
             </li>
             <li>
-              <a [ngClass]="{'active': _rating === 'Good'}"  href="javascript:void(0);" (click)="selectRating($event,'Good')">
+              <a class="anchor-text" [ngClass]="{'active': _rating === 'Good'}"   (click)="selectRating($event,'Good')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback-Good.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback-Good-clr.svg" alt="Feedback Image">
                 <span>Good</span>
               </a>
             </li>
             <li>
-              <a [ngClass]="{'active': _rating === 'Excllent'}"  href="javascript:void(0);" (click)="selectRating($event,'Excllent')">
+              <a class="anchor-text" [ngClass]="{'active': _rating === 'Excllent'}"   (click)="selectRating($event,'Excllent')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback-Excellent.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback-Excellent-clr.svg" alt="Feedback Image">
-                <span>Excllent</span>
+                <span>Excellent</span>
               </a>
             </li>
           </ul>
