@@ -2,6 +2,7 @@
 
 .ng-select {
     &.laytrip-input {
+        padding: 0 15px 0 0;
         .ng-dropdown-panel {
             top: 100%;
             background: $background-white;
@@ -51,7 +52,8 @@
         .ng-select-container {
             border: none !important;
             height: 100%;
-            min-height: 0px !important;
+            min-height: 0px !important; 
+            display: block;
             &:hover {
                 box-shadow: none !important;
             }
@@ -65,9 +67,12 @@
                     }
                 }
                 .ng-value {
-                    padding: 0 15px;
+                    padding: 0 0 0 15px;
                     color: #000;    
-                    overflow: unset !important;
+                    //overflow: unset !important;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
                 }
             }
             .ng-clear-wrapper {
