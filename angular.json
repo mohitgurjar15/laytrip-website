@@ -110,6 +110,14 @@
                   "with": "src/environments/environment.varshil.ts"
                 }
               ]
+            },
+            "keyur": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.keyur.ts"
+                }
+              ]
             }
           }
         },
@@ -133,6 +141,9 @@
             },
             "varshil": {
               "browserTarget": "laytrip-website:build:varshil"
+            },
+             "keyur": {
+              "browserTarget": "laytrip-website:build:keyur"
             }
           }
         },
