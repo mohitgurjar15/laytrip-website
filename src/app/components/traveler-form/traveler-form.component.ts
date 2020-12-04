@@ -127,7 +127,7 @@ export class TravelerFormComponent implements OnInit {
         country_id: this.traveler.country != null ? this.traveler.country.name : this.location.country.name,
         passport_number: this.traveler.passportNumber,
         dob: this.traveler.dob ? new Date(this.traveler.dob) : '',
-        passport_expiry: this.traveler.passport_expiry ? new Date(this.traveler.passport_expiry) : '',
+        passport_expiry: this.traveler.passportExpiry ? new Date(this.traveler.passportExpiry) : '',
         frequently_no: ''
       });
     }
