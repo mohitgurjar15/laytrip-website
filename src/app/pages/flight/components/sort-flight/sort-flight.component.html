@@ -1,0 +1,93 @@
+<div class="filter_saidbar">
+  <div class="block_result_found">
+    <p>{{flightDetails.length}} Flights found from</p>
+    <span>{{departureCode}} to {{arrivalCode}}</span>
+  </div>
+  <div class="short_by">
+    <div class="block_inn">
+      <h4>Sort By</h4>
+      <a class="anchor_link"  (click)="resetFilter('selling_price','ASC')"> Reset</a>
+    </div>
+    <div class="accordion block_shortby" id="accordion">
+      <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
+        <div class="accordion-heading" (click)="toggleLowToHigh()">
+          <a  class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Lowest To Highest
+          </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <div class="block_cmn price">
+              <h5>Price</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Lowest To Highest
+                    <input type="radio" [checked]="sortType=='lh_price'"  (click)="sortFlightData('selling_price','ASC','lh_price')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Highest To Lowest
+                    <input type="radio" [checked]="sortType=='hl_price'" (click)="sortFlightData('selling_price','DESC','hl_price')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div class="block_cmn duration">
+              <h5>Duration</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Shortest
+                    <input type="radio" [checked]="sortType=='lh_duration'"  (click)="sortFlightData('total_duration','ASC','lh_duration')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Longest
+                    <input type="radio" [checked]="sortType=='hl_duration'" (click)="sortFlightData('total_duration','DESC','hl_duration')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div class="block_cmn arrival">
+              <h5>Arrival</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Earliest
+                    <input type="radio" [checked]="sortType=='lh_arrival'" (click)="sortFlightData('arrival','ASC','lh_arrival')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Latest
+                    <input type="radio" [checked]="sortType=='hl_arrival'" (click)="sortFlightData('arrival','DESC','hl_arrival')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div class="block_cmn departure">
+              <h5>Departure</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Earliest
+                    <input type="radio" [checked]="sortType=='lh_departure'" (click)="sortFlightData('departure','ASC','lh_departure')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Latest
+                    <input type="radio" [checked]="sortType=='hl_departure'" (click)="sortFlightData('departure','DESC','hl_departure')">
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

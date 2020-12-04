@@ -14,7 +14,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ListPaymentHistoryComponent } from './payment-history/list-payment-history.component';
 import { HistoryListComponent } from './payment-history/history-list/history-list.component';
 import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
-import { FlightSearchWidgetModule } from '../../flight-search-widget/flight-search-widget.module';
+import { FlightModule } from '../../flight/flight.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { TravellerFormComponent } from './travellers/traveller-form/traveller-form.component';
 import { SubscriptionPlanComponent } from './subscription/subscription-plan.component';
@@ -64,7 +64,7 @@ import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add
     NgSelectModule,
     NgbModule,
     CalendarModule,
-    FlightSearchWidgetModule,
+    FlightModule,
     TextMaskModule,
     ComponentsModule
   ],

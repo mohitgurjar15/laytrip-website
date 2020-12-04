@@ -23,11 +23,7 @@ const routes: Routes = [
             },
             {
                 path: 'flight',
-                loadChildren: './flight-search-widget/flight-search-widget.module#FlightSearchWidgetModule'
-            },
-            {
-                path: 'hotel',
-                loadChildren: './hotel-search-widget/hotel-search-widget.module#HotelSearchWidgetModule',
+                loadChildren: './flight/flight.module#FlightModule'
             },
             {
                 path: 'account',

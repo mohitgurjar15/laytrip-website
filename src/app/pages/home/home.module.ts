@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -16,8 +16,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { LastMinHotelDealComponent } from './last-min-hotel-deal/last-min-hotel-deal.component';
 import { DrAdventureComponent } from './dr-adventure/dr-adventure.component';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { FlightSearchWidgetComponent } from '../flight-search-widget/flight-search-widget.component';
-import { HotelSearchWidgetComponent } from '../hotel-search-widget/hotel-search-widget.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +28,6 @@ import { HotelSearchWidgetComponent } from '../hotel-search-widget/hotel-search-
     PartialPaymentComponent,
     LastMinHotelDealComponent,
     DrAdventureComponent,
-    FlightSearchWidgetComponent,
-    HotelSearchWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +39,6 @@ import { HotelSearchWidgetComponent } from '../hotel-search-widget/hotel-search-
     ReactiveFormsModule,
     CalendarModule,
     NgxGalleryModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  ]
 })
 export class HomeModule { }
