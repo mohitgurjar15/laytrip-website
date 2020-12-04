@@ -27,7 +27,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   departureCity='New York';
   departureAirportCountry='JFK, USA';
   fromAirport=airports[this.fromDestinationCode];
-  
+  countryCode: string;
   
   
   toDestinationCode='PUJ';
@@ -79,10 +79,10 @@ export class FlightSearchWidgetComponent implements OnInit {
       departureDate: [[Validators.required]],
       returnDate: [[Validators.required]]
     });
-    //this.flightReturnMinDate = moment().add(30, 'days');
 
     this.flightDepartureMinDate = new Date();
     this.flightReturnMinDate = this.departureDate;
+    this.countryCode = this.commonFunction.getUserCountry();
   }
 
   ngOnInit(): void {
