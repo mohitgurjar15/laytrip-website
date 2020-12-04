@@ -42,7 +42,7 @@
                     Laytrip Points
                 </a>
             </li>
-            <li>
+            <li *ngIf="_login_user_info.socialAccountId === ''">
                 <div class="dropdown">
                     <a (click)="onToggleSubMenu($event)"  class="dropdown-toggle hover-link" [routerLinkActive]="['active_link']"
                         data-toggle="dropdown">
