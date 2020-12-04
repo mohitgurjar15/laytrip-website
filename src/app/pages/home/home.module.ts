@@ -16,6 +16,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { LastMinHotelDealComponent } from './last-min-hotel-deal/last-min-hotel-deal.component';
 import { DrAdventureComponent } from './dr-adventure/dr-adventure.component';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FlightSearchWidgetComponent } from './flight-search-widget/flight-search-widget.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     PartialPaymentComponent,
     LastMinHotelDealComponent,
     DrAdventureComponent,
+    FlightSearchWidgetComponent,
   ],
   imports: [
     CommonModule,

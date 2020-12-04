@@ -1,13 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
-import { airports } from '../flight/airports';
 
 @Component({
   selector: 'app-home',
@@ -19,52 +17,10 @@ export class HomeComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   modules: Module[];
   moduleList: any = {};
-  switchBtnValue = false;
   isRoundTrip: boolean = false;
-  flightSearchForm: FormGroup;
-  flightSearchFormSubmitted: boolean = false;
+  
   countryCode: string;
-  // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationCode='JFK';
-  departureCity='New York';
-  departureAirportCountry='JFK, USA';
-  fromAirport=airports[this.fromDestinationCode];
   
-  
-  
-  toDestinationCode='PUJ';
-  arrivalCity='Punta Cana';
-  arrivalAirportCountry='PUJ, Dominican Republic';
-  toAirport=airports[this.toDestinationCode];
-
-  locale = {
-    format: 'MM/DD/YYYY',
-    displayFormat: 'MM/DD/YYYY'
-  };
-
-  flightDepartureMinDate;
-  flightReturnMinDate;
-
-  departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
-  returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
-
-  totalPerson: number = 1;
-
-  searchFlightInfo =
-    {
-      trip: 'oneway',
-      departure: this.fromDestinationCode,
-      arrival: this.toDestinationCode,
-      departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
-      arrival_date: '',
-      class: '',
-      adult: 1,
-      child: null,
-      infant: null
-    };
-
-  searchedValue = [];
-
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -73,20 +29,7 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private renderer: Renderer2
   ) {
-
-    this.fromAirport['display_name'] = `${this.fromAirport.city},${this.fromAirport.country},(${this.fromAirport.code}),${this.fromAirport.name}`;
-    this.toAirport['display_name'] = `${this.toAirport.city},${this.toAirport.country},(${this.toAirport.code}),${this.toAirport.name}`;
-    this.renderer.addClass(document.body, 'bg_color');
-    this.flightSearchForm = this.fb.group({
-      fromDestination: ['', [Validators.required]],
-      toDestination: ['', [Validators.required]],
-      departureDate: [[Validators.required]],
-      returnDate: [[Validators.required]]
-    });
-    //this.flightReturnMinDate = moment().add(30, 'days');
-
-    this.flightDepartureMinDate = new Date();
-    this.flightReturnMinDate = this.departureDate;
+   
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
@@ -97,10 +40,6 @@ export class HomeComponent implements OnInit {
   }
 
   loadJquery() {
-
-
-
-
     // Start Featured List Js
     $(".deals_slid").slick({
       dots: false,
@@ -153,62 +92,6 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  destinationChangedValue(event) {
-    if (event && event.key && event.key === 'fromSearch') {
-      this.fromDestinationCode = event.value.code;
-      this.departureCity = event.value.city;
-      this.departureAirportCountry = `${event.value.code}, ${event.value.country}`
-      this.searchedValue.push({ key: 'fromSearch', value: event.value });
-    } else if (event && event.key && event.key === 'toSearch') {
-      this.toDestinationCode = event.value.code;
-      this.arrivalCity = event.value.city;
-      this.arrivalAirportCountry = `${event.value.code}, ${event.value.country}`
-      this.searchedValue.push({ key: 'toSearch', value: event.value });
-    }
-    this.searchFlightInfo.departure = this.fromDestinationCode;
-    this.searchFlightInfo.arrival = this.toDestinationCode;
-  }
-
-  getDateWithFormat(date) {
-    this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
-    // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
-  }
-
-  changeTravellerInfo(event) {
-    this.searchFlightInfo.adult = event.adult;
-    this.searchFlightInfo.child = event.child;
-    this.searchFlightInfo.infant = event.infant;
-    this.searchFlightInfo.class = event.class;
-    this.totalPerson = event.totalPerson;
-    this.searchedValue.push({ key: 'travellers', value: event });
-  }
-
-  searchFlights() {
-    this.flightSearchFormSubmitted = true;
-    let queryParams: any = {};
-    queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
-    queryParams.departure = this.searchFlightInfo.departure;
-    queryParams.arrival = this.searchFlightInfo.arrival;
-    queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
-    if (this.isRoundTrip === true) {
-      queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
-    }
-    queryParams.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
-    queryParams.adult = this.searchFlightInfo.adult;
-    queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
-    queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-
-    if (this.searchFlightInfo && this.totalPerson &&
-      this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
-      localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
-      this.router.navigate(['flight/search'], {
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
-      });
-    }
-
-  }
-
   toggleOnewayRoundTrip(type) {
 
     if (type === 'roundtrip') {
@@ -216,62 +99,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.isRoundTrip = false;
     }
-  }
-
-
-  departureDateUpdate(date) {
-    this.returnDate = new Date(date)
-    this.flightReturnMinDate = new Date(date)
-  }
-
-  dateChange(type, direction) {
-
-    if (type == 'departure') {
-      if (direction === 'previous') {
-        if (moment(this.departureDate).isAfter(moment(new Date()))) {
-          this.departureDate = new Date(moment(this.departureDate).subtract(1, 'days').format('MM/DD/YYYY'))
-        }
-      }
-
-      else {
-        this.departureDate = new Date(moment(this.departureDate).add(1, 'days').format('MM/DD/YYYY'))
-        if (moment(this.departureDate).isAfter(this.returnDate)) {
-          this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
-        }
-      }
-      this.flightReturnMinDate = new Date(this.departureDate)
-    }
-
-    if (type == 'arrival') {
-
-      if (direction === 'previous') {
-        if (moment(this.departureDate).isBefore(this.returnDate)) {
-          this.returnDate = new Date(moment(this.returnDate).subtract(1, 'days').format('MM/DD/YYYY'))
-        }
-      }
-      else {
-        this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'))
-      }
-    }
-  }
-
-  swapAirport() {
-
-    let temp = this.fromDestinationCode;
-    this.fromDestinationCode = this.toDestinationCode;
-    this.toDestinationCode = temp;
-
-    this.searchFlightInfo.departure = this.searchFlightInfo.arrival;
-    this.searchFlightInfo.arrival = temp;
-
-    let tempCity = this.departureCity;
-    this.departureCity = this.arrivalCity;
-    this.arrivalCity = tempCity;
-
-    let tempAirportCountry = this.departureAirportCountry;
-    this.departureAirportCountry = this.arrivalAirportCountry;
-    this.arrivalAirportCountry = tempAirportCountry;
-
   }
 
   clickOnTab(tabName) {
@@ -285,7 +112,6 @@ export class HomeComponent implements OnInit {
       // hotel.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
     }
   }
-
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'bg_color');
   }
