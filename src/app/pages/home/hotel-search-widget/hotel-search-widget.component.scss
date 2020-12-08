@@ -1,0 +1,19 @@
+@import "../../../../cstm-variable";
+
+.hotel-error {
+    border: 1px solid red;
+    border-radius: 8px;
+}
+.date_form {
+    .autocomplete-container {
+        box-shadow: none !important;
+    }
+}
+
+.disable-div {
+    cursor: not-allowed;
+    background-color: rgb(235, 235, 228) !important;
+    & input {
+        cursor: not-allowed !important;
+    }
+}

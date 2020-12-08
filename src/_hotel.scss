@@ -8,9 +8,16 @@ $pink: #F826C1;
 /*------------- color variables ------------*/
 
 /*----------------- responsive variations -----------------*/
+$tab-max: 1032px;
 $ipad-view: 991px;
 $tab-view: 768px;
 $mobile-view: 558px;
+
+@mixin  tab-max {
+    @media (max-width: #{$tab-max}) {
+        @content;
+    }
+}
 @mixin  ipad-view {
     @media (max-width: #{$ipad-view}) {
         @content;

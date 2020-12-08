@@ -26,6 +26,10 @@ const routes: Routes = [
                 loadChildren: './flight/flight.module#FlightModule'
             },
             {
+                path: 'hotel',
+                loadChildren: './hotel/hotel.module#HotelModule'
+            },
+            {
                 path: 'account',
                 loadChildren: './user/user.module#UserModule'
             },

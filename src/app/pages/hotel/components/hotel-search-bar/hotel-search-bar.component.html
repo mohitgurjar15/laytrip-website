@@ -1,0 +1,75 @@
+<section class="modify_search hotels">
+  <div class="container">
+    <div class="row">
+      <!-- <form class="" [formGroup]="hotelSearchForm" novalidate autocomplete="off" (ngSubmit)="searchHotel()"> -->
+      <div class="hotels_search">
+        <ul class="hotels-grid oneway">
+          <li class="grid_box first">
+            <div class="hotel_where">
+              <div class="search_area">
+                <label>Destination</label>
+                <ng-select [loading]="loadingDestination" [selectOnTab]="true" [items]="data" bindLabel="title"
+                  bindValue="title" [(ngModel)]="defaultCity" minTermLength="3" notFoundText="" [virtualScroll]="true"
+                  [(ngModel)]="hotelDefaultDestValue" [ngModelOptions]="{standalone: true}"
+                  (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDestination($event)"
+                  loadingText="" (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
+                  placeholder="{{ placeHolder1 }}">
+                  <!-- [(ngModel)]="defaultSelected" -->
+                  <ng-template ng-label-tmp let-item="item">
+                    <div class="hotel-parent">
+                      <!-- <img height="15" width="15" [src]="item.thumbnail" /> -->
+                      <div class="sub-parent">{{item.title}}</div>
+                    </div>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    <div class="hotel-parent">
+                      <img height="15" width="15" [src]="item.thumbnail" />
+                      <div class="sub-parent">{{item.title}}</div>
+                    </div>
+                  </ng-template>
+                </ng-select>
+                <span *ngIf="defaultCity">{{ defaultCity }}, {{defaultCountry}}</span>
+              </div>
+            </div>
+          </li>
+          <li class="grid_box secound">
+            <div class="date_form">
+              <div class="search_area">
+                <label>Check IN</label>
+                <p-calendar inputId="basic" [(ngModel)]="checkInDate" [ngModelOptions]="{standalone: true}"
+                  checkInMinDate [minDate]="checkInMinDate" (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
+                </p-calendar>
+                <div class="prev-next">
+                  <a (click)="dateChange('checkIn','previous')">Prev</a>
+                  <a (click)="dateChange('checkIn','next')">Next</a>
+                </div>
+              </div>
+            </div>
+            <div class="date_to">
+              <div class="search_area">
+                <label>check out</label>
+                <p-calendar inputId="basic" [(ngModel)]="checkOutDate" [ngModelOptions]="{standalone: true}"
+                  checkOutMinDate [minDate]="checkOutMinDate" [readonlyInput]="true"
+                  (onSelect)=checkOutDateUpdate($event) panelStyleClass="calender-responsive-view">
+                </p-calendar>
+                <div class="prev-next">
+                  <a (click)="dateChange('checkOut','previous')">Prev</a>
+                  <a (click)="dateChange('checkOut','next')">Next</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="grid_box third">
+            <div class="travellers">
+              <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)"></app-guest-info>
+            </div>
+          </li>
+        </ul>
+        <div class="serch_btn">
+          <button (click)="searchHotel()"><span>Modify Search</span></button>
+        </div>
+      </div>
+      <!-- </form> -->
+    </div>
+  </div>
+</section>

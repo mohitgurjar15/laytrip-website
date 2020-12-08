@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Key } from 'protractor';
 import { CommonFunction } from '../../../_helpers/common-function';
 declare var $: any;
 
@@ -13,33 +14,37 @@ export class GuestInfoComponent implements OnInit {
   @Output() changeValue = new EventEmitter<any>();
   @Input() label;
 
-  adultValue: number = 1;
-  childValue: number = 0;
-  infantValue: number = 0;
-  totalPerson: number = 1;
-  class = 'Economy';
-  errorMessage:string='';
-  countryCode:string;
-
-  travellerInfo = {
-    adult: 0,
-    child: 0,
-    infant: 0,
-    class: 'Economy',
-    totalPerson: 0,
-  };
+  totalRoom = [];
+  errorMessage: string = '';
+  countryCode: string;
+  roomsGroup = [
+    {
+      id: 0,
+      adultValue: 2,
+      childValue: 0
+    }
+  ];
+  occupanciesInfoTemp = [{
+    adults: 2,
+    children: [],
+  }];
+  occupanciesInfo = [{
+    adults: 2,
+    children: [],
+  }];
+  totalPerson: number;
+  roomIndex = 0;
 
   constructor(
     private route: ActivatedRoute,
-    private commonFunction:CommonFunction
+    private commonFunction: CommonFunction
   ) {
-    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
-    this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
-    this.infantValue = parseInt(this.route.snapshot.queryParams['infant']) ? parseInt(this.route.snapshot.queryParams['infant']) : 0;
-    this.totalPerson = this.adultValue + this.childValue + this.infantValue;
-    this.class = this.route.snapshot.queryParams['class'] ? this.route.snapshot.queryParams['class'] : 'Economy';
-
-    this.countryCode = this.commonFunction.getUserCountry()
+    // this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
+    // this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
+    this.roomsGroup.forEach((i) => {
+      this.totalPerson = i.adultValue + i.childValue;
+    });
+    this.countryCode = this.commonFunction.getUserCountry();
   }
 
   ngOnInit() {
@@ -48,15 +53,15 @@ export class GuestInfoComponent implements OnInit {
 
   loadJquery() {
     $("body").click(function () {
-      $("#add_traveler_open").hide("slow");
+      $("#add_child_open").hide("slow");
     });
 
-    $("#add_traveler").click(function (e) {
+    $("#add_child").click(function (e) {
       e.stopPropagation();
-      $("#add_traveler_open").slideToggle("slow");
+      $("#add_child_open").slideToggle("slow");
     });
 
-    $('#add_traveler_open').click(
+    $('#add_child_open').click(
       function (e) {
         e.stopPropagation();
       }
@@ -64,82 +69,129 @@ export class GuestInfoComponent implements OnInit {
 
   }
 
-  btnClickForChange(item) {
-    // FOR ADULT
-    if (item && item.type === 'minus' && item.label === 'adult') {
-
-      if(this.adultValue-1 < this.infantValue){
-        this.errorMessage="Infant count should be less than Adults.";
-        return false;
-      }
-      else{
-        this.errorMessage='';
-      }
-      this.adultValue = this.adultValue - 1;
-    } else if (item && item.type === 'plus' && item.label === 'adult') {
-      if(this.adultValue+1 + this.childValue  > 9){
-        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
-        return ;
-      }
-      else{
-        this.errorMessage='';
-      }
-      this.adultValue = this.adultValue + 1;
-
-    }
-    // FOR CHILD
-    if (item && item.type === 'minus' && item.label === 'child') {
-      if(this.adultValue + this.childValue-1  < 9){
-        this.errorMessage='';
-      }
-      else{
-        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
-        return ;
-      }
-      this.childValue = this.childValue - 1;
-    } else if (item && item.type === 'plus' && item.label === 'child') {
-      if(this.adultValue + this.childValue+1  > 9){
-        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
-        return ;
-      }
-      else{
-        this.errorMessage='';
-      }
-      this.childValue = this.childValue + 1;
-    }
-    // FOR INFANT
-    if (item && item.type === 'minus' && item.label === 'infant') {
-      
-      this.infantValue = this.infantValue - 1;
-      if(this.infantValue < this.adultValue){
-        this.errorMessage='';
-      }
-    } else if (item && item.type === 'plus' && item.label === 'infant') {
-
-      if(this.infantValue+1 > this.adultValue){
-        this.errorMessage="Infant count should be less than Adults.";
-        return false;
-      }
-      else{
-        this.errorMessage='';
-      }
-      this.infantValue = this.infantValue + 1;
-    }
-
-    this.totalPerson = this.adultValue + this.childValue + this.infantValue;
-
-    if (item && item.type === 'class' && item.value) {
-      this.travellerInfo.class = item.value;
-      this.class = item.value;
-    }
-
-    this.travellerInfo = {
-      adult: this.adultValue,
-      child: this.childValue,
-      infant: this.infantValue,
-      class: this.travellerInfo.class,
-      totalPerson: this.totalPerson
-    };
-    this.changeValue.emit(this.travellerInfo);
+  counter(i: number) {
+    return new Array(i);
   }
+
+  addRoom(index) {
+    this.roomsGroup.push({
+      id: index + 1,
+      adultValue: 2,
+      childValue: 0
+    });
+    this.roomIndex = index++;
+    console.log(this.roomsGroup);
+  }
+
+  removeRoom(index) {
+    this.roomsGroup.splice(index, 1);
+    this.roomIndex--;
+    console.log(this.roomsGroup);
+  }
+
+  addRemovePerson(item) {
+    this.roomsGroup.forEach((i) => {
+      if (item) {
+        // FOR ADULT
+        this.roomsGroup.forEach((i) => {
+          if (item && item.type === 'minus' && item.label === 'adult') {
+            i.adultValue = i.adultValue - 1;
+          } else if (item && item.type === 'plus' && item.label === 'adult') {
+            i.adultValue = i.adultValue + 1;
+          }
+          this.totalPerson = i.adultValue + i.childValue;
+          this.changeValue.emit(this.occupanciesInfoTemp);
+        });
+      }
+      // FOR CHILD
+      if (item) {
+        this.roomsGroup.forEach((i) => {
+          if (item && item.type === 'minus' && item.label === 'child') {
+            i.childValue = i.childValue - 1;
+            if (i.childValue === 4 || i.childValue < 4) {
+              this.errorMessage = '';
+            }
+            this.occupanciesInfoTemp.forEach((oc) => {
+              if (i.childValue === 0) {
+                oc.children = [];
+              } else {
+                oc.children.pop();
+              }
+            });
+          } else if (item && item.type === 'plus' && item.label === 'child') {
+            i.childValue = i.childValue + 1;
+            if (i.childValue > 4) {
+              this.errorMessage = 'Maximum number of passengers all together should not exceed 4 except child.';
+            }
+            this.occupanciesInfoTemp.forEach((oc) => {
+              if (i.childValue === 0) {
+                oc.children = [];
+              } else {
+                oc.children.push(1);
+              }
+            });
+          }
+        });
+        this.totalPerson = i.adultValue + i.childValue;
+        this.changeValue.emit(this.occupanciesInfoTemp);
+      }
+    });
+  }
+
+  changeChildAge(age) {
+    this.occupanciesInfo.forEach((oc) => {
+      oc.children.push(parseInt(age));
+    });
+    console.log(this.occupanciesInfo);
+  }
+
+  // room2btnClickForChange(item) {
+  //   // FOR ADULT
+  //   if (item && item.type === 'minus' && item.label === 'adult') {
+
+  //     if (this.adultValue - 1 < this.childValue) {
+  //       this.errorMessage = "Infant count should be less than Adults.";
+  //       return false;
+  //     } else {
+  //       this.errorMessage = '';
+  //     }
+  //     this.adultValue = this.adultValue - 1;
+  //   } else if (item && item.type === 'plus' && item.label === 'adult') {
+  //     if (this.adultValue + 1 + this.childValue > 9) {
+  //       this.errorMessage = "Maximum number of passengers all together should not exceed 9 except infants.";
+  //       return;
+  //     } else {
+  //       this.errorMessage = '';
+  //     }
+  //     this.adultValue = this.adultValue + 1;
+
+  //   }
+  //   // FOR CHILD
+  //   if (item && item.type === 'minus' && item.label === 'child') {
+  //     if (this.adultValue + this.childValue - 1 < 9) {
+  //       this.errorMessage = '';
+  //     } else {
+  //       this.errorMessage = "Maximum number of passengers all together should not exceed 9 except infants.";
+  //       return;
+  //     }
+  //     this.childValue = this.childValue - 1;
+  //   } else if (item && item.type === 'plus' && item.label === 'child') {
+  //     if (this.adultValue + this.childValue + 1 > 9) {
+  //       this.errorMessage = "Maximum number of passengers all together should not exceed 9 except infants.";
+  //       return;
+  //     } else {
+  //       this.errorMessage = '';
+  //     }
+  //     this.childValue = this.childValue + 1;
+  //   }
+
+  //   this.totalPerson = this.adultValue + this.childValue;
+
+  //   // this.occupanciesInfoTemp = {
+  //   //   adult: this.adultValue,
+  //   //   child: this.childValue,
+  //   //   totalPerson: this.totalPerson
+  //   // };
+  //   this.changeValue.emit(this.occupanciesInfoTemp);
+  // }
 }

@@ -52,7 +52,7 @@
         .ng-select-container {
             border: none !important;
             height: 100%;
-            min-height: 0px !important; 
+            min-height: 0px !important;
             display: block;
             &:hover {
                 box-shadow: none !important;
@@ -68,7 +68,7 @@
                 }
                 .ng-value {
                     padding: 0 0 0 15px;
-                    color: #000;    
+                    color: #000;
                     //overflow: unset !important;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -220,6 +220,7 @@
     background: #fc7e66;
 }
 
+// FLIGHT
 .home_banner
     .banner_inner
     .banner_tab
@@ -230,26 +231,24 @@
     .flight_search
     .flight-grid
     .grid_box.secound
-    .search_area{
+    .search_area {
+    input {
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
+            no-repeat !important;
+    }
+    &.dr_search_area {
         input {
-            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
-                no-repeat !important;
-        }
-        &.dr_search_area{
-            input{
-
-                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px
-                no-repeat !important;
-            }
-        }
-        @media(max-width: 575px) {
-            .calender-responsive-view{
-                right: 0 !important;
-                left: auto !important;
-            }
+            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center
+                right 15px no-repeat !important;
         }
     }
-    
+    @media (max-width: 575px) {
+        .calender-responsive-view {
+            right: 0 !important;
+            left: auto !important;
+        }
+    }
+}
 
 .modify_search {
     .flight_tab {
@@ -259,13 +258,13 @@
                     .grid_box.secound {
                         .search_area {
                             input {
-                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg)
+                                    center right 15px no-repeat !important;
                             }
-                            &.dr_search_area{
-                                input{
-                    
-                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px
-                                    no-repeat !important;
+                            &.dr_search_area {
+                                input {
+                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                                        center right 15px no-repeat !important;
                                 }
                             }
                         }

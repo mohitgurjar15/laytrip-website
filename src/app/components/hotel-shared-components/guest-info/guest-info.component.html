@@ -4,82 +4,69 @@
     <span>{{ totalPerson }}</span> Traveller
     <div class="drop_aerrow"></div>
   </div>
-  <span>{{ class }}</span>
+  <span>Rooms</span>
+  <!-- {{ totalRoom }} Rooms -->
   <div class="traveller_add_block" id="add_child_open" style="display: none;">
     <!-- room 1 div -->
-    <div class="rooms_aloc">
-      <div class="room_label_main">
-        <span>
-          Room 1
-        </span>
-        <span>
-          <a href="">Add a room</a>
-        </span>
-      </div>
-      <ul>
-        <li>
-          <div class="left"> <span>Adult</span> (12+ years)
+    <ng-container *ngFor="let room of roomsGroup;let id=index;">
+      <div class="rooms_aloc" [attr.id]="id">
+        <div class="room_label_main">
+          <span>
+            Room {{id+1}}
+          </span>
+          <span>
+            <a (click)="addRoom(id)" *ngIf="id+1 === 1">Add a room</a>
+            <a (click)="removeRoom(id)" *ngIf="id+1 > 1" [ngClass]="{'remove_room':id+1 > 1}">Remove a room</a>
+          </span>
+        </div>
+        <ul>
+          <li>
+            <div class="left"> <span>Adult</span> (12+ years)
+            </div>
+            <div class="right">
+              <input type='button' value='-' class='qtyminus un_active' field='quantity'
+                [disabled]="room.adultValue === 2 && room.adultValue > 0" id="{{id}}"
+                [ngClass]="{ 'un_active' : room.adultValue === 2 && room.adultValue > 0 }"
+                (click)="addRemovePerson({type: 'minus',label: 'adult', value: room.adultValue})" />
+              <input type='text' name='quantity' value='{{ room.adultValue }}' class='qty' />
+              <input type='button' value='+' class='qtyplus' field='quantity' id="{{id}}"
+                (click)="addRemovePerson({type: 'plus',label: 'adult', value: room.adultValue})" />
+            </div>
+          </li>
+          <li>
+            <div class="left"> <span>Child</span> (1+12 years)
+            </div>
+            <div class="right">
+              <input type='button' value='-' class='qtyminus' field='quantity' id="{{id}}"
+                [ngClass]="{ 'disable_btn' : room.childValue === 0}" [disabled]="room.childValue === 0"
+                (click)="addRemovePerson({type: 'minus',label: 'child', value: room.childValue})" />
+              <input type='text' name='quantity' value='{{ room.childValue === 0 ? 0 : room.childValue }}'
+                class='qty' />
+              <input type='button' value='+' class='qtyplus' field='quantity'
+                [ngClass]="{ 'disable_btn' : room.childValue === 0 && room.childValue === 4}"
+                [disabled]="room.childValue > 4" id="{{id}}"
+                (click)="addRemovePerson({type: 'plus',label: 'child', value: room.childValue})" />
+            </div>
+          </li>
+          <li class="guest_error">
+            {{errorMessage}}
+          </li>
+        </ul>
+        <ng-container *ngFor="let child of occupanciesInfoTemp">
+          <div class="child_sel_wrapper">
+            <div class="child_boxes open" *ngFor="let subchild of child.children;let idx=index">
+              <span class="label_name">Child {{idx+1}} age</span>
+              <select name="" id="{{id}}" #childAge (change)="changeChildAge(childAge.value)">
+                <option *ngFor='let in of counter(12) ;let i = index' value="{{i+1}}">{{i+1}}</option>
+              </select>
+            </div>
           </div>
-          <div class="right">
-            <input type='button' value='-' class='qtyminus un_active' data-field='quantity' />
-            <input type='text' name='quantity' value='0' class='qty' />
-            <input type='button' value='+' class='qtyplus' data-field='quantity' /> </div>
-        </li>
-        <li>
-          <div class="left"> <span>Child</span> (2+12 years)
-          </div>
-          <div class="right">
-            <input type='button' value='-' class='qtyminus' data-field='quantity' />
-            <input type='text' name='quantity' value='0' class='qty' />
-            <input type='button' value='+' class='qtyplus' data-field='quantity' /> </div>
-        </li>
-      </ul>
-      <div class="child_sel_wrapper">
-        <div class="child_boxes">
-          <span class="label_name">Child 1 age</span>
-          <select name="" id="child1">
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-          </select>
-        </div>
-        <div class="child_boxes">
-          <span class="label_name">Child 2 age</span>
-          <select name="" id="child2">
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-          </select>
-        </div>
-        <div class="child_boxes">
-          <span class="label_name">Child 3 age</span>
-          <select name="" id="child3">
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-          </select>
-        </div>
-        <div class="child_boxes">
-          <span class="label_name">Child 4 age</span>
-          <select name="" id="child4">
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-            <option value="">12</option>
-          </select>
-        </div>
+        </ng-container>
       </div>
-    </div>
+    </ng-container>
     <!-- room 1 div -->
     <!-- room 2 div -->
-    <div class="rooms_aloc marign_rooms">
+    <!-- <div class="rooms_aloc marign_rooms">
       <div class="room_label_main">
         <span>
           Room 2
@@ -93,17 +80,24 @@
           <div class="left"> <span>Adult</span> (12+ years)
           </div>
           <div class="right">
-            <input type='button' value='-' class='qtyminus un_active' data-field='quantity' />
-            <input type='text' name='quantity' value='0' class='qty' />
-            <input type='button' value='+' class='qtyplus' data-field='quantity' /> </div>
+            <input type='button' value='-' class='qtyminus un_active' field='quantity'
+              [disabled]="adultValue === 1 && adultValue > 0"
+              [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }"
+              (click)="room1btnClickForChange({type: 'minus',label: 'adult', value: adultValue})" />
+            <input type='text' name='quantity' value='{{ adultValue }}' class='qty' />
+            <input type='button' value='+' class='qtyplus' field='quantity'
+              (click)="room2btnClickForChange({type: 'plus',label: 'adult', value: adultValue})" /> </div>
         </li>
         <li>
-          <div class="left"> <span>Child</span> (2+12 years)
+          <div class="left"> <span>Child</span> (1+12 years)
           </div>
           <div class="right">
-            <input type='button' value='-' class='qtyminus' data-field='quantity' />
-            <input type='text' name='quantity' value='0' class='qty' />
-            <input type='button' value='+' class='qtyplus' data-field='quantity' /> </div>
+            <input type='button' value='-' class='qtyminus' field='quantity'
+              [ngClass]="{ 'disable_btn' : childValue === 0 }" [disabled]="childValue === 0"
+              (click)="room1btnClickForChange({type: 'minus',label: 'child', value: childValue})" />
+            <input type='text' name='quantity' value='{{ childValue }}' class='qty' />
+            <input type='button' value='+' class='qtyplus' field='quantity'
+              (click)="room2btnClickForChange({type: 'plus',label: 'child', value: childValue})" /> </div>
         </li>
 
       </ul>
@@ -149,12 +143,6 @@
           </select>
         </div>
       </div>
-      <!-- <div class="room_bottom_label">
-        <span>
-          <a href="">Add anothet room</a>
-        </span>
-      </div> -->
-    </div>
-    <!-- room 2 div -->
+    </div> -->
   </div>
 </div>
