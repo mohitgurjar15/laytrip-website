@@ -43,6 +43,7 @@ export class FlightsComponent implements OnInit {
   currency;
   closeResult = '';
   modalReference: any;
+  showFareDetails:number=0;
 
   constructor(   
      private commonFunction: CommonFunction,
@@ -80,12 +81,20 @@ export class FlightsComponent implements OnInit {
       this.getBookings();
     }
   }
-  showDetails(index) {
+  showDetails(index,flag=null) {
 
     if (typeof this.showFlightDetails[index] === 'undefined') {
       this.showFlightDetails[index] = true;
     } else {
       this.showFlightDetails[index] = !this.showFlightDetails[index];
+    }
+
+    if(flag=='true'){
+      this.showFareDetails=1;
+    }
+    else{
+      
+      this.showFareDetails=0;
     }
 
     this.showFlightDetails = this.showFlightDetails.map((item, i) => {
@@ -140,6 +149,7 @@ export class FlightsComponent implements OnInit {
   }
 
   closeFlightDetail() {
+    this.showFareDetails=0;
     this.showFlightDetails = this.showFlightDetails.map(item => {
       return false;
     });
