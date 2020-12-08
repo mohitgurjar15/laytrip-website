@@ -31,6 +31,7 @@ import { AddPointsComponent } from './add-points/add-points.component';
 import { RedeemLaycreditLoaderComponent } from './redeem-laycredit-loader/redeem-laycredit-loader.component';
 import { ToasterComponent } from './toaster/toaster.component';
 import { ShareSocialMediaComponent } from './share-social-media/share-social-media.component';
+import { RentalInfoComponent } from './rental-info/rental-info.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ShareSocialMediaComponent } from './share-social-media/share-social-med
     AddPointsComponent,
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
-    ShareSocialMediaComponent
+    ShareSocialMediaComponent,
+    RentalInfoComponent
   ],
   imports: [
     CommonModule,
@@ -91,7 +93,8 @@ import { ShareSocialMediaComponent } from './share-social-media/share-social-med
     AddPointsComponent,
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
-    ShareSocialMediaComponent
+    ShareSocialMediaComponent,
+    RentalInfoComponent
   ],
   providers: [DatePipe],
 
