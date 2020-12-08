@@ -147,8 +147,8 @@
                         <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
                         <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                         </h6>
-                        <a target="_blank" [routerLink]="['/partial-payment']"><span class="partial_payment_info"
-                                *ngIf="item.bookingType ==1">Installment Payment Info</span></a>
+                        <a class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info"
+                                *ngIf="item.bookingType ==1">Payment plan details</span></a>
                     </div>
                 </div>
             </div>
@@ -243,8 +243,7 @@
                         <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
                         <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                         </h6>
-                        <span class="partial_payment_info"
-                            *ngIf="item.bookingType ==1" [routerLink]="['/partial-payment']">Installment Payment Info</span>
+                        <a *ngIf="item.bookingType ==1" class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info">Payment plan details</span></a>
                     </div>
                 </div>
             </div>
@@ -253,10 +252,10 @@
         <div class="detail_info_show on_out_said" [attr.id]="blockIndex" *ngIf="showFlightDetails[blockIndex] === true">
             <ul id="tabs" class="nav nav-tabs bookingListNavTab" role="tablist">
                 <li class="nav-item">
-                    <a href="#flight-info-oneway" class="nav-link active" data-toggle="tab" role="tab">Flight Info</a>
+                    <a href="#flight-info-oneway" class="nav-link" [ngClass]="{'active':showFareDetails==0}" data-toggle="tab" role="tab">Flight Info</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Fare-Detail-oneway" class="nav-link" data-toggle="tab" role="tab">Fare Details</a>
+                    <a href="#Fare-Detail-oneway" class="nav-link" [ngClass]="{'active':showFareDetails==1}" data-toggle="tab" role="tab">Fare Details</a>
                 </li>
                 <li class="nav-item">
                     <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab">Baggage Rules</a>
@@ -270,7 +269,7 @@
                 </li>
             </ul>
             <div id="content" class="tab-content" role="tablist">
-                <div id="flight-info-oneway" class="card tab-pane fade show active" role="tabpanel"
+                <div id="flight-info-oneway" class="card tab-pane fade " [ngClass]="{'show active':showFareDetails==0}" role="tabpanel"
                     aria-labelledby="flight-info-oneway">
                     <div class="card-header" role="tab" id="heading-flight-info-oneway">
                         <h5 class="mb-0">
@@ -338,7 +337,7 @@
                     </div>
                 </div>
 
-                <div id="Fare-Detail-oneway" class="card tab-pane fade" role="tabpanel"
+                <div id="Fare-Detail-oneway" class="card tab-pane fade" [ngClass]="{'show active':showFareDetails==1}" role="tabpanel"
                     aria-labelledby="Fare-Detail-oneway">
                     <div class="card-header" role="tab" id="heading-Fare-Detail-oneway">
                         <h5 class="mb-0">
