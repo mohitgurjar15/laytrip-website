@@ -265,7 +265,7 @@
                         (click)="getCancellationPolicy(item.moduleInfo.route_code)">Cancellation Rules</a>
                 </li> -->
                 <li class="nav-item">
-                    <a href="#Traveller" class="nav-link" data-toggle="tab" role="tab">Travellers</a>
+                    <a href="#Traveller" class="nav-link" data-toggle="tab" role="tab">Travelers</a>
                 </li>
             </ul>
             <div id="content" class="tab-content" role="tablist">
@@ -374,7 +374,7 @@
                                             </p>
                                             <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                Total Fare ({{ fareDetails?.quantity }} traveller)
+                                                Total Fare ({{ fareDetails?.quantity }} traveler)
                                             </p>
                                             <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </li>
@@ -400,7 +400,7 @@
                                             </p>
                                             <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                Total Fare ({{ fareDetails?.quantity }} traveller)
+                                                Total Fare ({{ fareDetails?.quantity }} traveler)
                                             </p>
                                             <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </li>
@@ -566,7 +566,7 @@
                                     <div class="triangle_right"></div>
                                     <ul *ngFor="let traveler of item.travelers;let i = index">
                                         <li>
-                                            Traveller ({{traveler.userData.user_type || 'N/A' | titlecase}})
+                                            Traveler ({{traveler.userData.user_type || 'N/A' | titlecase}})
                                             <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span>
                                         </li>
                                     </ul>
