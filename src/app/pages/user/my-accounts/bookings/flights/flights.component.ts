@@ -193,7 +193,7 @@ export class FlightsComponent implements OnInit {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.getTravelers();
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
       console.log(this.closeResult)
     });
   }

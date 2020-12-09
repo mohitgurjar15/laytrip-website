@@ -30,6 +30,7 @@ import { HomeRentalsComponent } from './bookings/home-rentals/home-rentals.compo
 import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
 import { ComponentsModule } from '../../../components/components.module';
 import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add-points.component';
+import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-popup.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add
     TripNotFoundComponent,
     PlanSubscriptionComponent,
     MyWalletAddPointsComponent,
+    SendEmailPopupComponent,
   ],
   imports: [
     CommonModule,
