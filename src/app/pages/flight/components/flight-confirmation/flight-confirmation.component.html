@@ -27,8 +27,12 @@
                   <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.totalAmount | number : '1.2-2'}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
+                <span>Down payment :</span>
+                <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.bookingInstalments[0].amount |  number : '1.2-2'}}</p>
+              </li>
+              <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Installment Payment Part :</span>
-                  <p>{{bookingData.booking_details.bookingInstalments.length}} Installment</p>
+                  <p>{{bookingData.booking_details.bookingInstalments.length-1}} Installment</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Installment Payment Start Date :</span>

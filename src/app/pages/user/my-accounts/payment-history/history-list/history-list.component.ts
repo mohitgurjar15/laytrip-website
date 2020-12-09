@@ -4,6 +4,7 @@ import { FlightCommonFunction } from '../../../../../_helpers/flight-common-func
 import { environment } from '../../../../../../environments/environment';
 import { UserService } from '../../../../../services/user.service';
 import { Router } from '@angular/router';
+import { InstalmentType } from '../../../../../constant/instalment-type.const';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class HistoryListComponent implements OnInit {
   notFound=false;
   activeBookings=[];
   failedBookings=[];
+  instalmentType;
 
   constructor(
     private commonFunction:CommonFunction,
@@ -40,7 +42,9 @@ export class HistoryListComponent implements OnInit {
     private userService: UserService,
     public router: Router
     
-  ) { }
+  ) {
+    this.instalmentType=InstalmentType
+   }
 
   ngOnInit() {
     this.page = 1;        
