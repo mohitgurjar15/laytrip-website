@@ -54,7 +54,7 @@ export class SendEmailPopupComponent implements OnInit {
 
   removeEmail(ix) {
     const control = <FormArray>this.f.formArray1;
-    control.removeAt(ix);
+    control.removeAt(ix); 
   }
 
   onSubmit(){
