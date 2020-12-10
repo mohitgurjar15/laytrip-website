@@ -1,0 +1,125 @@
+<!-- Start Baggage policy modal -->
+<div class="modal fade add_baggage_modal" id="add_baggage_modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal_main">
+        <div class="modal_top">
+          <h2>Add Baggage</h2>
+          <button type="button" class="close" data-dismiss="modal">
+            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+          </button>
+        </div>
+        <div class="block_modal_main" *ngIf="isLoaded">
+          <ul class="block_bording_info">
+            <li>
+              {{flightDetail.routes[0].stops[0].departure_info.city}} ({{flightDetail.routes[0].stops[0].departure_info.code}}) <span>{{flightDetail.routes[0].stops[0].departure_info.country}}</span>
+            </li>
+            <li>
+              <div class="block_airline_name">
+                {{flightDetail.routes[0].stops[0].airline_name}}
+              </div>
+              <div class="block_border"></div>
+              <div class="block_flight_number">
+                Flight {{flightDetail.routes[0].stops[0].airline}}-{{flightDetail.routes[0].stops[0].flight_number}}
+              </div>
+            </li>
+            <li>
+              {{flightDetail.routes[0].stops[flightDetail.routes[0].stops.length-1].arrival_info.city}}  ({{flightDetail.routes[0].stops[flightDetail.routes[0].stops.length-1].arrival_info.code}}) <span>{{flightDetail.routes[0].stops[flightDetail.routes[0].stops.length-1].arrival_info.country}}</span>
+            </li>
+            <li>
+              {{flightDetail.routes[0].stops[0].departure_time}}  - {{flightDetail.routes[0].stops[flightDetail.routes[0].stops.length-1].arrival_time}} <span>THU, NOV 29</span>
+            </li>
+            
+          </ul>
+
+          <div class="block_check_inbags">
+            <h3>Check-in Bags</h3>
+            <div class="block_bags_wight">
+              <ul class="wight_list">
+                <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value="">
+                    <span class="checkmark"></span>
+                    <div class="block_inn">
+                      <img class="ic_normal" src="{{s3BucketUrl}}assets/images/icon/ic_small_bag.svg" alt="Icon">
+                      <img class="ic_select" src="{{s3BucketUrl}}assets/images/icon/ic_small_bag_hover.svg" alt="Icon">
+                      <div>7KG bag</div>
+                    </div>
+                  </label>
+                </li>
+                <ng-container *ngIf="flightDetail.extra_service.outbound.length">
+                  <li *ngFor="let baggageType of outBoundBagType">
+                    <label class="custom_checkbox">
+                      <input type="checkbox" value="">
+                      <span class="checkmark"></span>
+                      <div class="block_inn">
+                        <img class="ic_normal" src="{{s3BucketUrl}}assets/images/icon/ic_midium_bag.svg" alt="Icon">
+                        <img class="ic_select" src="{{s3BucketUrl}}assets/images/icon/ic_midium_bag_hover.svg" alt="Icon">
+                        <div>{{baggageType.value.description.title}} <span></span></div>
+                      </div>
+                    </label>
+                  </li>
+                </ng-container>
+                
+                <!-- <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value="">
+                    <span class="checkmark"></span>
+                    <div class="block_inn">
+                      <img class="ic_normal" src="{{s3BucketUrl}}assets/images/icon/ic_large_bag.svg" alt="Icon">
+                      <img class="ic_select" src="{{s3BucketUrl}}assets/images/icon/ic_large_bag_hover.svg" alt="Icon">
+                      <div>20KG bag <span>$20</span></div>
+                    </div>
+                  </label>
+                </li> -->
+              </ul>
+              <div class="block_passenger_list">
+                <ul>
+                  <li *ngFor="let i of [].constructor(totalPassanger)">
+                    <div class="block_in one">
+                      <div class="block_icon">
+                        <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_travellers-icon.svg" alt="Icon">
+                      </div>
+                      <div class="block_text">
+                        Passenger 1 <span>Detail</span>
+                      </div>
+                    </div>
+
+                    <ng-container *ngIf="flightDetail.extra_service.outbound.length">
+                        <div class="block_in two" *ngFor="let baggageType of outBoundBagType">
+                          <div class="block_baggage">
+                            <div class="">
+                              <select  class="form-control" >
+                                <ng-container *ngFor="let baggage of flightDetail.extra_service.outbound">
+                                  <option  *ngIf="baggage.bag_type==baggageType.bag_type" >{{baggage.description.weight}}</option>
+                                </ng-container>
+                               
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                    </ng-container>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="block_modal_btm">
+            <div class="block_btn">
+              <ul>
+                <li>
+                  <a class="btn_remove" href="javascript:void(0);">Remove</a>
+                </li>
+                <li>
+                  <a href="javascript:void(0);">Next Flight <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Close Baggage policy modal -->

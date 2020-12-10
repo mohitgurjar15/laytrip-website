@@ -5,6 +5,27 @@
           <div class="col-lg-8">
               <div class="detail_info_left">
                   <div class="block_payment">
+                        <div class="block_bording_bags">
+                            <div class="block_title_section">
+                                <h5>Add Bags</h5>
+                            </div>
+                            <ul class="block_select">
+                                <!-- <li>
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#priority_boarding_modal">
+                                        <img class="ic_normal" src="{{s3BucketUrl}}assets/images/icon/ic_boarding.svg" alt="Icon">
+                                        <img class="ic_hover" src="{{s3BucketUrl}}assets/images/icon/ic_boarding_hover.svg" alt="Icon">
+                                        Add Priority Boarding
+                                    </a>
+                                </li> -->
+                                <li>
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#add_baggage_modal">
+                                        <img class="ic_normal" src="{{s3BucketUrl}}assets/images/icon/ic_Baggage.svg" alt="Icon">
+                                        <img class="ic_hover" src="{{s3BucketUrl}}assets/images/icon/ic_Baggage_hover.svg" alt="Icon">
+                                        Add Baggage
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="block_pay_info">
                             <div class="block_payment_mode no_pad">
                                 <div class="block_title_section">
@@ -61,3 +82,4 @@
 
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
 <app-booking-as-login-or-guest-popup (isShowGuestPopupValueChange)="changePopupValue($event)" *ngIf="isShowGuestPopup"></app-booking-as-login-or-guest-popup>
+<app-extra-baggage></app-extra-baggage>
