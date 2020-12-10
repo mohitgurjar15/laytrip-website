@@ -9,8 +9,8 @@ declare var $: any;
 })
 export class SortHotelComponent implements OnInit {
 
-  @Output() sortFlight = new EventEmitter<{ key: string, order: string }>();
-  @Input() flightDetails;
+  @Output() sortHotel = new EventEmitter<{ key: string, order: string }>();
+  @Input() hotelDetails;
 
   constructor(
   ) {

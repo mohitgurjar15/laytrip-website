@@ -83,38 +83,38 @@
         .tab-content {
             .flight_search {
                 .flight-grid {
-                    .grid_box{
-                        &.first{
-                            .search_area{
-
+                    .grid_box {
+                        &.first {
+                            .search_area {
                                 padding: 5px 0 !important;
                             }
                         }
-                        &.secound{
-                            .date_form{
+                        &.secound {
+                            .date_form {
                                 position: relative;
                             }
 
-                            .date_to{
+                            .date_to {
                                 position: relative;
                                 height: 100%;
                             }
-                            
-                            .search_area{
+
+                            .search_area {
                                 height: 100%;
                                 display: flex;
                                 flex-flow: column;
                                 justify-content: space-between;
-                                input{
+                                input {
                                     width: 100%;
                                     left: 0;
                                     position: relative;
-                                    &.date_icon{
+                                    &.date_icon {
                                         position: absolute;
                                         top: 50%;
                                         right: 0;
                                         transform: translateY(-50%);
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) no-repeat;
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg)
+                                            no-repeat;
                                         background-position: center right 15px;
                                     }
                                 }
@@ -124,18 +124,14 @@
                 }
             }
         }
-
     }
-    
 }
 
-
-.disable_return_date{
-
+.disable_return_date {
     height: 100%;
-    p{
+    p {
         padding: 0 15px;
-        margin:0;
+        margin: 0;
         font-size: 16px;
         color: $text-grey;
         cursor: pointer;
@@ -143,21 +139,27 @@
     }
 }
 
-::ng-deep .calender-price-view{
+::ng-deep .calender-price-view {
     //width: 340px;
     min-width: 340px !important;
     .ui-state-active {
         background-color: #012178 !important;
-        .calender_price{
+        .calender_price {
             color: #fff !important;
         }
     }
 }
 
-.calender-header{
+.calender-header {
     text-align: center;
     width: 100%;
     display: inline-block;
     padding: 0 20px;
 }
 
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+}

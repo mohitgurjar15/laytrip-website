@@ -32,6 +32,13 @@ export class HotelService {
             );
     }
 
+    getFilterObjectsHotel(data) {
+        return this.http.post(`${environment.apiUrl}v1/hotel/filter-objects`, data, this.commonFunction.setHeaders())
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     handleError(error) {
         let errorMessage = {};
         if (error.status == 0) {

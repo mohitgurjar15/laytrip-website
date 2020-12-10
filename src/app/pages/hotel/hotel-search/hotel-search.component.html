@@ -10,15 +10,15 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-        <!-- <app-sort-hotel (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails"></app-sort-hotel> -->
+        <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
         <div class="filter_saidbar">
           <div class="filter_by d-none d-lg-block">
             <div class="block_inn">
               <h4>Filter By</h4>
               <a class="anchor_link" (click)="resetFilter()">Reset</a>
             </div>
-            <!-- <app-filter-hotel [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"
-              isResetFilter={{isResetFilter}}></app-filter-hotel> -->
+            <app-filter-hotel *ngIf="filterHotelDetails" [filterHotelDetails]="filterHotelDetails" (filterHotel)="filterHotel($event)"
+              isResetFilter={{isResetFilter}}></app-filter-hotel>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
             Map view
           </button>
         </div> -->
-        <app-hotel-item-wrapper [hotelDetails]="hotelDetails"></app-hotel-item-wrapper>
+        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelDetails]="hotelDetails"></app-hotel-item-wrapper>
       </div>
     </div>
   </div>

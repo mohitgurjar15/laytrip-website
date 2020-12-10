@@ -33,31 +33,63 @@
             </div>
           </li>
           <li class="grid_box secound">
-            <div class="date_form">
-              <div class="search_area">
-                <label>Check IN</label>
-                <p-calendar inputId="basic" [(ngModel)]="checkInDate" [ngModelOptions]="{standalone: true}"
-                  checkInMinDate [minDate]="checkInMinDate" (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
-                </p-calendar>
-                <div class="prev-next">
-                  <a (click)="dateChange('checkIn','previous')">Prev</a>
-                  <a (click)="dateChange('checkIn','next')">Next</a>
+            <form class="form-inline">
+              <div class="form-group hidden">
+                <div class="input-group">
+                  <!-- [maxDate]="checkInMinDate" -->
+                  <input [autoClose]="true" [startDate]="checkInMinDate" [minDate]="checkInMinDate" name="datepicker"
+                    class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                    (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden"
+                    [startDate]="checkInDate!">
+                  <ng-template #t let-date let-focused="focused" let-disabled="disabled">
+                    <span class="custom-day" [class.focused]="focused" [class.day-disabled]="disabled"
+                      [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+                      (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
                 </div>
               </div>
-            </div>
-            <div class="date_to">
-              <div class="search_area">
-                <label>check out</label>
-                <p-calendar inputId="basic" [(ngModel)]="checkOutDate" [ngModelOptions]="{standalone: true}"
+              <div class="date_form">
+                <div class="search_area">
+                  <label>Check IN</label>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input #dpFromDate class="form-control" name="dpFromDate" [value]="formatter.format(checkInDate)"
+                        (click)="datepicker.toggle()"
+                        (input)="checkInDate = validateInput(checkInDate, dpFromDate.value)" readonly>
+                    </div>
+                  </div>
+                  <!-- <p-calendar inputId="basic" [(ngModel)]="checkInDate" [ngModelOptions]="{standalone: true}"
+                  checkInMinDate [minDate]="checkInMinDate" (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
+                </p-calendar> -->
+                  <div class="prev-next">
+                    <a (click)="dateChange('checkIn','previous')">Prev</a>
+                    <a (click)="dateChange('checkIn','next')">Next</a>
+                  </div>
+                </div>
+              </div>
+              <div class="date_to">
+                <div class="search_area">
+                  <label>check out</label>
+                  <div class="form-group ml-2">
+                    <div class="input-group">
+                      <input #dpToDate class="form-control" (click)="datepicker.toggle()" name="dpToDate"
+                        [value]="formatter.format(checkOutDate)"
+                        (input)="checkOutDate = validateInput(checkOutDate, dpToDate.value)" readonly>
+                    </div>
+                  </div>
+                  <!-- <p-calendar inputId="basic" [(ngModel)]="checkOutDate" [ngModelOptions]="{standalone: true}"
                   checkOutMinDate [minDate]="checkOutMinDate" [readonlyInput]="true"
                   (onSelect)=checkOutDateUpdate($event) panelStyleClass="calender-responsive-view">
-                </p-calendar>
-                <div class="prev-next">
-                  <a (click)="dateChange('checkOut','previous')">Prev</a>
-                  <a (click)="dateChange('checkOut','next')">Next</a>
+                </p-calendar> -->
+                  <div class="prev-next">
+                    <a (click)="dateChange('checkOut','previous')">Prev</a>
+                    <a (click)="dateChange('checkOut','next')">Next</a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </form>
           </li>
           <li class="grid_box third">
             <div class="travellers">

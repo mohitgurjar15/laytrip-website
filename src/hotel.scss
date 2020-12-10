@@ -152,6 +152,12 @@
     }
 }
 
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+    background: $hotel-secondary-color;
+}
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+    border: 1px solid $hotel-secondary-color;
+}
 // NG-SELECT FOCUS REMOVE CSS START
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
     box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -653,14 +659,14 @@
                                                 color: $text-light-grey;
 
                                                 &:hover {
-                                                    background: $secondary-color;
-                                                    border: 1px solid $secondary-color;
+                                                    background: $hotel-secondary-color;
+                                                    border: 1px solid $hotel-secondary-color;
                                                     color: $text-white;
                                                 }
 
                                                 &.active_cat {
-                                                    background: $secondary-color;
-                                                    border: 1px solid $secondary-color;
+                                                    background: $hotel-secondary-color;
+                                                    border: 1px solid $hotel-secondary-color;
                                                     color: $text-white;
                                                 }
                                             }
@@ -707,7 +713,7 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $secondary-color;
+                    background: $hotel-secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
@@ -1229,14 +1235,14 @@
                                                 color: $text-light-grey;
 
                                                 &:hover {
-                                                    background: $secondary-color;
-                                                    border: 1px solid $secondary-color;
+                                                    background: $hotel-secondary-color;
+                                                    border: 1px solid $hotel-secondary-color;
                                                     color: $text-white;
                                                 }
 
                                                 &.active_cat {
-                                                    background: $secondary-color;
-                                                    border: 1px solid $secondary-color;
+                                                    background: $hotel-secondary-color;
+                                                    border: 1px solid $hotel-secondary-color;
                                                     color: $text-white;
                                                 }
                                             }
@@ -1283,7 +1289,7 @@
                     left: 0;
                     width: 100%;
                     height: 0%;
-                    background: $secondary-color;
+                    background: $hotel-secondary-color;
                     z-index: -1;
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
@@ -1926,7 +1932,7 @@
                                             &:checked {
                                                 ~ {
                                                     .checkmark {
-                                                        border: 1px solid $secondary-color;
+                                                        border: 1px solid $hotel-secondary-color;
 
                                                         &:after {
                                                             display: block;
@@ -1955,7 +1961,7 @@
                                                 width: 8px;
                                                 height: 8px;
                                                 border-radius: 50%;
-                                                background: $secondary-color;
+                                                background: $hotel-secondary-color;
                                             }
                                         }
                                     }
@@ -2045,7 +2051,7 @@
                                     &:checked {
                                         ~ {
                                             .checkmark {
-                                                border: 1px solid $secondary-color;
+                                                border: 1px solid $hotel-secondary-color;
 
                                                 &:after {
                                                     display: block;
@@ -2074,7 +2080,7 @@
                                         width: 8px;
                                         height: 8px;
                                         border-radius: 50%;
-                                        background: $secondary-color;
+                                        background: $hotel-secondary-color;
                                     }
                                 }
                             }
@@ -2112,12 +2118,12 @@
                             .ui-slider-handle {
                                 width: 13px;
                                 height: 13px;
-                                border-color: $secondary-color;
+                                border-color: $hotel-secondary-color;
                                 top: -6px;
                             }
 
                             .ui-widget-header {
-                                background: $secondary-color;
+                                background: $hotel-secondary-color;
                             }
                         }
                     }
@@ -2223,7 +2229,7 @@
                         .view_more {
                             font-size: 14px;
                             font-weight: 400;
-                            color: $secondary-color;
+                            color: $hotel-secondary-color;
                             display: block;
                         }
                     }
@@ -2264,7 +2270,7 @@
                                     &:checked {
                                         ~ {
                                             .checkmark {
-                                                border-color: $secondary-color;
+                                                border-color: $hotel-secondary-color;
 
                                                 &:after {
                                                     opacity: 1;
@@ -2296,7 +2302,7 @@
                                         width: 6px;
                                         height: 9px;
                                         border-radius: 2px;
-                                        border: solid $secondary-color;
+                                        border: solid $hotel-secondary-color;
                                         border-top-width: medium;
                                         border-right-width: medium;
                                         border-bottom-width: medium;
@@ -2334,14 +2340,35 @@
                     }
 
                     .searchbar_box {
-                        input {
-                            border: 1px solid $box-border-color;
-                            border-radius: 3px;
-                            width: 100%;
-                            height: 32px;
-                            padding: 0 12px;
-                            margin-bottom: 15px;
+                        label {
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: #8188ab;
+                            margin: 0 0 10px;
                         }
+                        .ng-select-container {
+                            border: none;
+                            margin-bottom: 20px;
+                            height: 39px;
+                            &:hover {
+                                box-shadow: none;
+                            }
+                        }
+                        .ng-input {
+                            padding: 0;
+                            input {
+                                // border: 1px solid $box-border-color;
+                                border-bottom: 1px solid $box-border-color;
+                                // border-radius: 3px;
+                                width: 100%;
+                                height: 32px;
+                                padding: 0;
+                                //margin-bottom: 15px;
+                                font-size: 14px;
+                                color: #000;
+                            }
+                        }
+
                         .search_btns {
                             display: flex;
                             justify-content: space-between;
@@ -2350,11 +2377,12 @@
                                 display: inline-block;
                                 line-height: 38px;
                                 padding: 0 25px;
-                                font-size: 16px;
-                                color: $text-white;
+                                font-size: 13px;
+                                color: $text-grey;
                                 font-weight: 500;
-                                border-radius: 8px;
-                                background: $btn-bg;
+                                border-radius: 20px;
+                                background: transparent;
+                                border: 1px solid $text-grey;
                                 position: relative;
                                 z-index: 9;
                                 overflow: hidden;
@@ -2362,7 +2390,8 @@
                                 cursor: pointer;
 
                                 &:last-child {
-                                    background: #8188ab;
+                                    background: $btn-bg;
+                                    border: 1px solid $btn-bg;
                                 }
 
                                 &:before {
@@ -2535,33 +2564,52 @@
                                         }
                                         .review_section_wrap {
                                             display: flex;
-                                            justify-content: flex-start;
+                                            justify-content: space-between;
                                             align-items: center;
                                             margin: 5px 0 10px;
-                                            .rating_num {
-                                                span {
-                                                    background-color: #1445f5;
-                                                    color: $text-white;
-                                                    font-size: 12px;
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    display: flex;
-                                                    align-items: center;
-                                                    justify-content: center;
-                                                    border-radius: 5px;
-                                                }
-                                            }
-                                            .stars_text {
-                                                margin-left: 14px;
-                                                .stars_rating {
-                                                    margin-top: 5px;
-                                                    img {
+                                            .left_bar {
+                                                display: flex;
+                                                .rating_num {
+                                                    span {
+                                                        background-color: #1445f5;
+                                                        color: $text-white;
+                                                        font-size: 12px;
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: center;
+                                                        border-radius: 5px;
                                                     }
                                                 }
-                                                .review_num_text {
-                                                    a {
-                                                        font-size: 12px;
-                                                        color: $text-grey;
+                                                .stars_text {
+                                                    margin-left: 14px;
+                                                    .stars_rating {
+                                                        margin-top: 5px;
+                                                        img {
+                                                        }
+                                                    }
+                                                    .review_num_text {
+                                                        a {
+                                                            font-size: 12px;
+                                                            color: $text-grey;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .ammin_listing {
+                                                display: flex;
+                                                align-items: center;
+
+                                                .amminities_list {
+                                                    font-size: 12px;
+                                                    text-transform: uppercase;
+                                                    color: #5a5a5a;
+                                                    font-weight: 500;
+                                                    margin-left: 20px;
+                                                    img {
+                                                        margin-right: 8px;
                                                     }
                                                 }
                                             }
@@ -2582,6 +2630,7 @@
                             justify-content: space-between;
                             border-top: 1px solid $box-border-color;
                             padding-top: 10px;
+                            margin-bottom: 10px;
 
                             @include tab-view {
                                 flex-wrap: wrap;
@@ -2633,20 +2682,13 @@
                                     }
                                 }
                             }
+                            .weekly_price_wrps {
+                                font-size: 12px;
+                                color: $text-grey;
 
-                            .ammin_listing {
-                                display: flex;
-                                align-items: center;
-
-                                .amminities_list {
-                                    font-size: 12px;
-                                    text-transform: uppercase;
-                                    color: #5a5a5a;
-                                    font-weight: 500;
-                                    margin-left: 20px;
-                                    img {
-                                        margin-right: 8px;
-                                    }
+                                span {
+                                    color: $pink;
+                                    font-size: 20px;
                                 }
                             }
                         }
@@ -2755,7 +2797,7 @@
                             font-size: 16px;
                             color: $text-white;
                             font-weight: 500;
-                            border-radius: 8px;
+                            border-radius: 20px;
                             background: $btn-bg;
                             position: relative;
                             z-index: 9;
@@ -4373,7 +4415,7 @@
                                             &:checked {
                                                 ~ {
                                                     .checkmark {
-                                                        border: 1px solid $secondary-color;
+                                                        border: 1px solid $hotel-secondary-color;
 
                                                         &:after {
                                                             display: block;
@@ -4402,7 +4444,7 @@
                                                 width: 8px;
                                                 height: 8px;
                                                 border-radius: 50%;
-                                                background: $secondary-color;
+                                                background: $hotel-secondary-color;
                                             }
                                         }
                                     }
@@ -4492,7 +4534,7 @@
                                     &:checked {
                                         ~ {
                                             .checkmark {
-                                                border: 1px solid $secondary-color;
+                                                border: 1px solid $hotel-secondary-color;
 
                                                 &:after {
                                                     display: block;
@@ -4521,7 +4563,7 @@
                                         width: 8px;
                                         height: 8px;
                                         border-radius: 50%;
-                                        background: $secondary-color;
+                                        background: $hotel-secondary-color;
                                     }
                                 }
                             }
@@ -4559,12 +4601,12 @@
                             .ui-slider-handle {
                                 width: 13px;
                                 height: 13px;
-                                border-color: $secondary-color;
+                                border-color: $hotel-secondary-color;
                                 top: -6px;
                             }
 
                             .ui-widget-header {
-                                background: $secondary-color;
+                                background: $hotel-secondary-color;
                             }
                         }
                     }
@@ -4670,7 +4712,7 @@
                         .view_more {
                             font-size: 14px;
                             font-weight: 400;
-                            color: $secondary-color;
+                            color: $hotel-secondary-color;
                             display: block;
                         }
                     }
@@ -4711,7 +4753,7 @@
                                     &:checked {
                                         ~ {
                                             .checkmark {
-                                                border-color: $secondary-color;
+                                                border-color: $hotel-secondary-color;
 
                                                 &:after {
                                                     opacity: 1;
@@ -4743,7 +4785,7 @@
                                         width: 6px;
                                         height: 9px;
                                         border-radius: 2px;
-                                        border: solid $secondary-color;
+                                        border: solid $hotel-secondary-color;
                                         border-top-width: medium;
                                         border-right-width: medium;
                                         border-bottom-width: medium;
@@ -4800,7 +4842,7 @@
                                 font-size: 16px;
                                 color: $text-white;
                                 font-weight: 500;
-                                border-radius: 8px;
+                                border-radius: 20px;
                                 background: $btn-bg;
                                 position: relative;
                                 z-index: 9;
@@ -5202,7 +5244,7 @@
                             font-size: 16px;
                             color: $text-white;
                             font-weight: 500;
-                            border-radius: 8px;
+                            border-radius: 20px;
                             background: $btn-bg;
                             position: relative;
                             z-index: 9;
@@ -6260,3 +6302,165 @@
     }
 }
 // Close Search Modify section
+
+// detail slider
+.hotel_detail_slider {
+    padding-bottom: 40px;
+
+    .slider-container {
+        .slider-for {
+            margin-bottom: 15px;
+
+            img {
+                width: 100%;
+                min-height: 100%;
+
+                .item-slick {
+                }
+            }
+
+            .slick-track {
+                .slick-slide {
+                    &:before {
+                        content: "";
+                        background-image: linear-gradient(180deg, transparent, $text-black);
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+                }
+            }
+
+            .slider-overlay {
+                position: absolute;
+                width: 100%;
+                bottom: 10px;
+                padding: 20px;
+                color: $text-white;
+                margin: 0px;
+
+                .hotel_name {
+                    padding-bottom: 30px;
+                }
+
+                #border {
+                    position: relative;
+                    width: 20%;
+                    height: 1px;
+                    background-color: $text-white;
+                    margin: 0 0;
+                }
+
+                .rate-box {
+                    background: $text-white;
+                    padding: 8px 5px;
+                    border-radius: 10px;
+                    color: $text-black;
+                    text-align: center;
+                    margin-right: 10px;
+                }
+
+                .rating {
+                    border-bottom: 2px solid;
+                    padding-bottom: 6px;
+                }
+
+                .room-rating {
+                    text-align: right;
+                }
+            }
+        }
+
+        .slider-nav {
+            margin: auto;
+
+            .item-slick {
+                max-width: 153px;
+                margin-right: 15px;
+                outline: none !important;
+                cursor: pointer;
+
+                img {
+                    max-width: 100%;
+                    background-size: cover;
+                    background-position: center;
+
+                    &.more-image {
+                        content: "";
+                        background-color: dimgrey;
+                    }
+                }
+            }
+
+            .slick-active {
+                outline: none !important;
+            }
+        }
+
+        .slick-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 50;
+            margin-top: -12px;
+        }
+
+        .slick-prev {
+            left: 0;
+        }
+
+        .slick-next {
+            right: 0;
+        }
+    }
+}
+// detail slider
+
+// hotel tab
+.hotel_detail_tabs {
+    .nav-tabs {
+        border-bottom: none;
+
+        .nav-item {
+            width: 100%;
+            max-width: 180px;
+            text-align: center;
+            margin-right: 1px;
+
+            a {
+                color: $text-black;
+                background-color: $bg-load_grey;
+                border: none;
+                border-radius: 0px;
+                padding: 20px;
+
+                &:hover,
+                &.active {
+                    color: $text-white;
+                    background-color: $primary-color;
+                }
+            }
+
+            @media (max-width: 767px) {
+                max-width: 33%;
+            }
+        }
+    }
+
+    .tab-content {
+        background-color: $text-white;
+        padding: 35px 40px;
+        box-shadow: 0px 3px 6px $bg-black-opacity-half;
+        border-radius: 0 0 20px 20px;
+
+        .tab-pane {
+            p {
+                color: $text-grey;
+                line-height: 2.2;
+                font-weight: 300;
+            }
+        }
+    }
+}
+// hotel tab

@@ -114,6 +114,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
       this.defaultSelected = this.defaultSelected;
     }
     //this.selectedHotel = event;
+    this.defaultSelected = [];
     this.defaultSelected = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });

@@ -25,12 +25,12 @@
             </div>
             <div class="right">
               <input type='button' value='-' class='qtyminus un_active' field='quantity'
-                [disabled]="room.adultValue === 2 && room.adultValue > 0" id="{{id}}"
-                [ngClass]="{ 'un_active' : room.adultValue === 2 && room.adultValue > 0 }"
-                (click)="addRemovePerson({type: 'minus',label: 'adult', value: room.adultValue})" />
-              <input type='text' name='quantity' value='{{ room.adultValue }}' class='qty' />
+                [disabled]="room.adults === 2 && room.adults > 0" id="{{id}}"
+                [ngClass]="{ 'un_active' : room.adults === 2 && room.adults > 0 }"
+                (click)="addRemovePerson({id: id, type: 'minus',label: 'adult', value: room.adults})" />
+              <input type='text' name='quantity' value='{{ room.adults }}' class='qty' readonly />
               <input type='button' value='+' class='qtyplus' field='quantity' id="{{id}}"
-                (click)="addRemovePerson({type: 'plus',label: 'adult', value: room.adultValue})" />
+                (click)="addRemovePerson({id: id, type: 'plus',label: 'adult', value: room.adults})" />
             </div>
           </li>
           <li>
@@ -38,25 +38,26 @@
             </div>
             <div class="right">
               <input type='button' value='-' class='qtyminus' field='quantity' id="{{id}}"
-                [ngClass]="{ 'disable_btn' : room.childValue === 0}" [disabled]="room.childValue === 0"
-                (click)="addRemovePerson({type: 'minus',label: 'child', value: room.childValue})" />
-              <input type='text' name='quantity' value='{{ room.childValue === 0 ? 0 : room.childValue }}'
-                class='qty' />
+                [ngClass]="{ 'disable_btn' : room.child.length === 0}" [disabled]="room.child.length === 0"
+                (click)="addRemovePerson({id: id, type: 'minus',label: 'child', value: room.child.length})" />
+              <input type='text' name='quantity' value='{{ room.child.length === 0 ? 0 : room.child.length }}'
+                class='qty' readonly />
               <input type='button' value='+' class='qtyplus' field='quantity'
-                [ngClass]="{ 'disable_btn' : room.childValue === 0 && room.childValue === 4}"
-                [disabled]="room.childValue > 4" id="{{id}}"
-                (click)="addRemovePerson({type: 'plus',label: 'child', value: room.childValue})" />
+                [ngClass]="{ 'disable_btn' : room.child.length === 0 && room.child.length === 4}"
+                [disabled]="room.child.length > 4" id="{{id}}"
+                (click)="addRemovePerson({id: id, type: 'plus',label: 'child', value: room.child.length})" />
             </div>
           </li>
           <li class="guest_error">
             {{errorMessage}}
           </li>
         </ul>
-        <ng-container *ngFor="let child of occupanciesInfoTemp">
+        <ng-container>
           <div class="child_sel_wrapper">
-            <div class="child_boxes open" *ngFor="let subchild of child.children;let idx=index">
+            <div class="child_boxes open" *ngFor="let childage of room.child;let idx=index;">
               <span class="label_name">Child {{idx+1}} age</span>
-              <select name="" id="{{id}}" #childAge (change)="changeChildAge(childAge.value)">
+              <select name="" id="{{id}}" #child (change)="changeChildAge(child.value, id)">
+                <option value="">Select Age</option>
                 <option *ngFor='let in of counter(12) ;let i = index' value="{{i+1}}">{{i+1}}</option>
               </select>
             </div>
@@ -81,12 +82,12 @@
           </div>
           <div class="right">
             <input type='button' value='-' class='qtyminus un_active' field='quantity'
-              [disabled]="adultValue === 1 && adultValue > 0"
-              [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }"
-              (click)="room1btnClickForChange({type: 'minus',label: 'adult', value: adultValue})" />
-            <input type='text' name='quantity' value='{{ adultValue }}' class='qty' />
+              [disabled]="adults === 1 && adults > 0"
+              [ngClass]="{ 'un_active' : adults === 1 && adults > 0 }"
+              (click)="room1btnClickForChange({type: 'minus',label: 'adult', value: adults})" />
+            <input type='text' name='quantity' value='{{ adults }}' class='qty' />
             <input type='button' value='+' class='qtyplus' field='quantity'
-              (click)="room2btnClickForChange({type: 'plus',label: 'adult', value: adultValue})" /> </div>
+              (click)="room2btnClickForChange({type: 'plus',label: 'adult', value: adults})" /> </div>
         </li>
         <li>
           <div class="left"> <span>Child</span> (1+12 years)

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -35,7 +35,7 @@ import { google } from 'google-maps';
     ])
   ],
 })
-export class HotelItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
+export class HotelItemWrapperComponent implements OnInit, OnDestroy {
 
   @Input() hotelDetails;
   @Input() filter;
@@ -48,9 +48,14 @@ export class HotelItemWrapperComponent implements OnInit, AfterContentChecked, O
   currency;
   isMapView = false;
   hotelLatLng;
+  defaultLat;
+  defaultLng;
 
   subscriptions: Subscription[] = [];
   hotelDetailIdArray = [];
+  geoCodes = [];
+  mapCanvas;
+  myLatLng;
 
   hideDiv = true;
   showHotelDetails = [];
@@ -84,23 +89,20 @@ export class HotelItemWrapperComponent implements OnInit, AfterContentChecked, O
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    console.log(this.hotelDetails);
     this.hotelsList = this.hotelDetails;
     this.userInfo = getLoginUserInfo();
-
     this.totalLaycredit();
-  }
+    this.defaultLat = this.route.snapshot.queryParams['latitude'];
+    this.defaultLng = this.route.snapshot.queryParams['longitude'];
 
-  // counter(i: any) {
-  //   return new Array(i);
-  // }
-
-
-  ngAfterContentChecked() {
     this.hotelListArray = this.hotelsList;
     this.hotelListArray.forEach(item => {
       this.hotelDetailIdArray.push(item.route_code);
     });
+  }
+
+  counter(i: any) {
+    return new Array(i);
   }
 
   differentView(view) {
@@ -108,25 +110,33 @@ export class HotelItemWrapperComponent implements OnInit, AfterContentChecked, O
       this.isMapView = false;
     } else {
       this.isMapView = true;
+      this.mapCanvas = document.getElementById('map');
+      this.myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
       this.initMap();
-
     }
   }
 
   initMap() {
+    // var mapCanvas = document.getElementById('map');
+    // const myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
+    let mapOptions = {
+      zoom: 8,
+      center: this.myLatLng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false,
+      streetViewControl: false,
+      scrollwheel: true,
+    };
+    var map = new google.maps.Map(this.mapCanvas, mapOptions);
     this.hotelListArray.forEach((i) => {
-      const myLatLng = { lat: parseFloat(i.geocodes.latitude), lng: parseFloat(i.geocodes.longitude) };
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: myLatLng,
-        zoom: 4
-      });
       var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(parseFloat(i.geocodes.latitude), parseFloat(i.geocodes.longitude)),
         map: map,
-        anchorPoint: new google.maps.Point(0, -29),
-        position: { lat: parseFloat(i.geocodes.latitude), lng: parseFloat(i.geocodes.longitude) },
-        draggable: false,
-        title: i.name
+        title: i.name,
+        animation: google.maps.Animation.DROP,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       });
+      marker.setMap(map);
       let infowindow = new google.maps.InfoWindow({
         content: i.name
       });

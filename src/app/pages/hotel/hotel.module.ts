@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HotelRoutingModule } from './hotel-routing.module';
 import { HotelSearchComponent } from './hotel-search/hotel-search.component';
 import { HotelLoaderComponent } from './components/hotel-loader/hotel-loader.component';
@@ -11,6 +12,7 @@ import { SortHotelComponent } from './components/sort-hotel/sort-hotel.component
 import { FilterHotelComponent } from './components/filter-hotel/filter-hotel.component';
 import { HotelItemWrapperComponent } from './components/hotel-item-wrapper/hotel-item-wrapper.component';
 import { HotelSearchBarComponent } from './components/hotel-search-bar/hotel-search-bar.component';
+import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ComponentsModule } from '../../components/components.module';
 import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
@@ -20,6 +22,9 @@ import { CookieModule } from 'ngx-cookie';
 import { CalendarModule } from 'primeng/calendar';
 // // AGM (ANGULAR GOOGLE MAP)
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+
+// NGX-GALLERY
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     HotelItemWrapperComponent,
     HotelSearchBarComponent,
     ClickOutSideDirective,
+    HotelDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +47,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,
@@ -48,12 +55,13 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
       // apiKey: 'AIzaSyB63siq6uISCHD-x3MkitGQogoz8n7jy7M',
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
-    })
+    }),
+    NgxGalleryModule
   ],
   exports: [
     HotelLoaderComponent,
     HotelPopupLoaderComponent,
-    HotelNotFoundComponent
-  ]
+    HotelNotFoundComponent,
+  ],
 })
 export class HotelModule { }
