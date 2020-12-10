@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { resetCompiledComponents } from '@angular/core/src/render3/jit/module';
-import { AbstractControl, FormArray,FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { FlightService } from 'src/app/services/flight.service';
+import { UserService } from 'src/app/services/user.service';
 import { environment } from '../../../../../../environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-send-email-popup',
@@ -13,20 +20,28 @@ export class SendEmailPopupComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   emailForm: FormGroup;
   submitted = false;
+  loading: boolean = false;
+  apiError = '';
+  @Input() bookingId;
 
   constructor(
-    private formBuilder: FormBuilder,
-      ) {
-        // this.emailForm = this.formBuilder.group({
-        //   email: this.formBuilder.array([
-        //     this.formBuilder.control(null)
-        //   ])
-        // })
-  }
+    private flightService: FlightService,
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private router:Router,
+    public activeModal: NgbActiveModal
+  ) { }
 
   ngOnInit() {
     this.validate();
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['bookingId']) {
+      this.bookingId = changes['bookingId'].currentValue;
+    }
+  }
+
 
   public validate(): void {
     this.emailForm = new FormGroup({
@@ -34,7 +49,7 @@ export class SendEmailPopupComponent implements OnInit {
         this.initX()
       ])
     });
-    // this.formGroup.valueChanges.subscribe(data => console.log(data));
+    // console.log(this.emailForm)
   }
 
   get f() { return this.emailForm.controls; }
@@ -42,7 +57,6 @@ export class SendEmailPopupComponent implements OnInit {
   public initX(): FormGroup {
     return new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]),
-      
     });
   }
 
@@ -51,19 +65,37 @@ export class SendEmailPopupComponent implements OnInit {
     control.push(this.initX());
   }
 
-
   removeEmail(ix) {
     const control = <FormArray>this.f.formArray1;
-    control.removeAt(ix); 
+    control.removeAt(ix);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
+    this.loading = true;
+    let payload = {
+      emails:[]
+    }
+    if (this.emailForm.invalid) {
+      this.submitted = true;
+      this.loading = false;
+      return;
+    } else {
+       
+       this.emailForm.controls.formArray1.value.forEach(element => {
+          payload.emails.push(element);
+       });
 
-    const control = <FormArray>this.f.formArray1;
-    console.log(control)
-    if(control.invalid){
-      control.markAsTouched();
+      this.flightService.sendEmail(payload, this.bookingId).subscribe((data: any) => {
+        this.submitted = this.loading = false;
+        this.toastr.success(data.message, 'Success');
+        this.emailForm.reset();
+        this.activeModal.close();
+      }, (error: HttpErrorResponse) => {
+        this.apiError = error.message;
+        this.submitted = this.loading = false;
+        this.toastr.error(error.message, 'Error Send Email');
+      });
     }
   }
 }

@@ -135,7 +135,8 @@
                                 </div>
                             </div> -->
                             <div class="info_price_origin">
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#send_mail_modal">Send email</a>
+                                <a href="javascript:void(0);" data-toggle="modal" (click)="goToBookingId(item.tripId)" data-target="#send_mail_modal">Send email</a>
+                                <!-- (click)="goToBookingId(bookingId)" -->
                                 <!--
                                 <div class="refundable">Refundable</div>
                                 <div class="ogigin_price"> Total <span>$350</span> </div>
@@ -580,4 +581,4 @@
             </div>
         </div>
     </ng-template>
-    <app-send-email-popup></app-send-email-popup>
+    <app-send-email-popup *ngIf="bookingId" bookingId={{bookingId}}></app-send-email-popup>

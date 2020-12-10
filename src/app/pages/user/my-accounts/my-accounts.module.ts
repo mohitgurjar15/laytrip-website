@@ -72,6 +72,6 @@ import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-
   ],
   providers: [DatePipe, NgbActiveModal],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [TravellerFormComponent, CardActionFormComponent, ConfirmationModalComponent]
+  entryComponents: [TravellerFormComponent, CardActionFormComponent, ConfirmationModalComponent, SendEmailPopupComponent]
 })
 export class MyAccountsModule { }
