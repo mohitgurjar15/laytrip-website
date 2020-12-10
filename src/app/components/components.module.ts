@@ -31,6 +31,7 @@ import { AddPointsComponent } from './add-points/add-points.component';
 import { RedeemLaycreditLoaderComponent } from './redeem-laycredit-loader/redeem-laycredit-loader.component';
 import { ToasterComponent } from './toaster/toaster.component';
 import { ShareSocialMediaComponent } from './share-social-media/share-social-media.component';
+import { RentalInfoComponent } from './rental-info/rental-info.component';
 
 // HOTEL SHARED COMPONENTS
 import { GuestInfoComponent } from './hotel-shared-components/guest-info/guest-info.component';
@@ -62,7 +63,8 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     ShareSocialMediaComponent,
     // HOTEL SHARED COMPONENT
     GuestInfoComponent,
-    SearchHotelComponent
+    SearchHotelComponent,
+    RentalInfoComponent
   ],
   imports: [
     CommonModule,
@@ -101,7 +103,8 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     ShareSocialMediaComponent,
     // HOTEL SHARED COMPONENT
     GuestInfoComponent,
-    SearchHotelComponent
+    SearchHotelComponent,
+    RentalInfoComponent
   ],
   providers: [DatePipe],
 

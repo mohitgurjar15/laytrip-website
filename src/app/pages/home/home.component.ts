@@ -115,6 +115,11 @@ export class HomeComponent implements OnInit {
       document.getElementById('home_banner').style.backgroundSize = 'cover';
       document.getElementById('login_btn').style.background = '#FF00BC';
     }
+    else if (tabName === 'home-rentals') {
+      let home_rentals = document.getElementById('home_banner');
+      // hotel.style.background = 'red';
+      // hotel.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
+    }
   }
 
   ngOnDestroy() {

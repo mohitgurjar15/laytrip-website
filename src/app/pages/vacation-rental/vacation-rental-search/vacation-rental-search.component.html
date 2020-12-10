@@ -1,0 +1,14 @@
+<app-vacation-rental-search-bar></app-vacation-rental-search-bar>
+<section class="search_result home_rental">
+   <div class="container">
+   <div class="row">
+      <div class="col-lg-3">
+       <app-sort-vacation-rental></app-sort-vacation-rental>  
+       <!-- <app-filter-vacation-rental></app-filter-vacation-rental>   -->
+      </div>
+       <div class="col-lg-9">
+        <app-vacation-item-wrapper *ngIf="rentalDetails" [rentalDetails]="rentalDetails"></app-vacation-item-wrapper>
+      </div>
+   </div>
+</div>
+</section>

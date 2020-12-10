@@ -18,6 +18,8 @@ import { DrAdventureComponent } from './dr-adventure/dr-adventure.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FlightSearchWidgetComponent } from './flight-search-widget/flight-search-widget.component';
 import { HotelSearchWidgetComponent } from './hotel-search-widget/hotel-search-widget.component';
+import { VacationSearchWidgetComponent } from './vacation-search-widget/vacation-search-widget.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { HotelSearchWidgetComponent } from './hotel-search-widget/hotel-search-w
     DrAdventureComponent,
     FlightSearchWidgetComponent,
     HotelSearchWidgetComponent,
+    VacationSearchWidgetComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,8 @@ import { HotelSearchWidgetComponent } from './hotel-search-widget/hotel-search-w
     FormsModule,
     ReactiveFormsModule,
     CalendarModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    NgSelectModule
   ]
 })
 export class HomeModule { }
