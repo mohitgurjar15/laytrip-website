@@ -34,6 +34,7 @@
             }
             span {
                 &.ng-arrow-wrapper {
+                    display: none !important;
                     span {
                         &.ng-arrow {
                             margin: 0 !important;
@@ -220,6 +221,7 @@
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -303,6 +305,7 @@
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -346,6 +349,7 @@
                         .search_area {
                             border-radius: 8px 0 0 8px;
                             // height: 100%;
+                            height: 103px;
                         }
                     }
 
@@ -390,6 +394,7 @@
                             border-radius: 8px;
                             background: $background-white;
                             position: relative;
+                            height: 103px;
 
                             .travel_info {
                                 width: 100%;
@@ -766,6 +771,7 @@
                     display: flex;
                     justify-content: space-between;
                     position: relative;
+                    width: 45%;
 
                     @include ipad-view {
                         width: 100%;
@@ -777,6 +783,7 @@
                     }
 
                     .hotel_where {
+                        width: 100%;
                         @include ipad-view {
                             width: 100%;
                         }
@@ -793,10 +800,11 @@
                     }
 
                     .search_area {
-                        padding: 15px 0;
+                        padding: 15px 0 10px;
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -880,6 +888,7 @@
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -890,7 +899,8 @@
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
-
+                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                                center right 15px no-repeat !important;
                             @media (max-width: 1199px) {
                                 font-size: 16px;
                             }
@@ -921,7 +931,8 @@
 
                         .search_area {
                             border-radius: 8px 0 0 8px;
-                            height: 100%;
+                            // height: 100%;
+                            height: 103px;
                         }
                     }
 
@@ -966,6 +977,7 @@
                             border-radius: 8px;
                             background: $background-white;
                             position: relative;
+                            height: 103px;
 
                             .travel_info {
                                 width: 100%;
@@ -1419,6 +1431,7 @@
                             font-weight: 400;
                             padding: 0 15px;
                             text-transform: uppercase;
+                            justify-content: flex-start;
                         }
 
                         input {
@@ -1544,6 +1557,7 @@
                             display: flex;
                             flex-flow: column;
                             justify-content: space-between;
+                            height: 93.6px;
 
                             //								input {
                             //									height: 35px;
@@ -1625,6 +1639,7 @@
                                 border-radius: 8px;
                                 background: $background-white;
                                 position: relative;
+                                height: 93.6px;
 
                                 .travel_info {
                                     width: 100%;
@@ -1682,6 +1697,164 @@
                                     font-weight: 400;
                                     color: $text-grey;
                                     padding: 0 15px;
+                                }
+                            }
+                        }
+                    }
+
+                    .traveller_add_block {
+                        width: 260px;
+                        position: absolute;
+                        top: 108%;
+                        right: 0;
+                        background: $background-white;
+                        box-shadow: 0px 3px 15px $shadow-black;
+                        padding: 15px;
+                        border: 1px solid $text-light-grey;
+                        border-radius: 5px;
+                        z-index: 99;
+
+                        &:before {
+                            width: 0;
+                            height: 0;
+                            border-left: 9px solid transparent;
+                            border-right: 9px solid transparent;
+                            border-bottom: 9px solid $background-white;
+                            position: absolute;
+                            top: -9px;
+                            right: 21px;
+                            content: '';
+                            z-index: 2;
+                        }
+
+                        &:after {
+                            width: 0;
+                            height: 0;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-bottom: 10px solid $text-light-grey;
+                            position: absolute;
+                            top: -10px;
+                            right: 20px;
+                            content: '';
+                        }
+
+                        ul {
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+
+                            li {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding: 0 0 20px;
+
+                                .left {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+
+                                    span {
+                                        font-size: 14px;
+                                        color: $text-darkblue;
+                                        display: block;
+                                        padding: 0;
+                                    }
+                                }
+
+                                .right {
+                                    width: 100px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    .qtyminus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $secondary-color;
+                                            color: $secondary-color;
+                                        }
+                                    }
+
+                                    .qty {
+                                        width: 30px;
+                                        height: 30px;
+                                        font-size: 20px;
+                                        font-weight: 400;
+                                        color: $text-darkblue;
+                                        border: none;
+                                        text-align: center;
+                                    }
+
+                                    .qtyplus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $secondary-color;
+                                            color: $secondary-color;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .flight_cat {
+                            width: 100%;
+
+                            ul {
+                                display: flex;
+                                flex-wrap: wrap;
+                                align-content: center;
+                                justify-content: space-between;
+
+                                li {
+                                    width: 48%;
+                                    margin: 0 0 10px;
+                                    padding: 0;
+
+                                    &:last-child {
+                                        width: 100%;
+                                        margin: 0;
+                                    }
+
+                                    a {
+                                        line-height: 32px;
+                                        width: 100%;
+                                        text-align: center;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        font-size: 14px;
+                                        color: $text-light-grey;
+
+                                        &:hover {
+                                            background: $secondary-color;
+                                            border: 1px solid $secondary-color;
+                                            color: $text-white;
+                                        }
+
+                                        &.active_cat {
+                                            background: $secondary-color;
+                                            border: 1px solid $secondary-color;
+                                            color: $text-white;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1768,6 +1941,12 @@
         }
     }
 
+    .sticky-top {
+        &.left_side_bar{
+            top: 80px;
+        }
+    }
+    
     .filter_saidbar {
         width: 100%;
 
@@ -2005,6 +2184,9 @@
                 border: 1px solid $box-border-color;
                 background: $background-white;
                 border-radius: 3px;
+                max-height: calc(100vh - 310px);
+                overflow-y: auto;
+                overflow-x: hidden;
 
                 .cmn_block {
                     padding: 20px 15px;
@@ -2173,7 +2355,7 @@
                                 .block_cmn {
                                     width: 100%;
                                     padding: 15px 15px;
-                                    background: $bg-tab-detail;
+                                    background: transparent;
 
                                     h5 {
                                         width: 100%;
@@ -2392,6 +2574,7 @@
                                 &:last-child {
                                     background: $btn-bg;
                                     border: 1px solid $btn-bg;
+                                    color: $text-white;
                                 }
 
                                 &:before {
@@ -2547,6 +2730,7 @@
                                     .detail_info {
                                         font-size: 12px;
                                         color: $text-grey;
+                                        width: 100%;
 
                                         h4 {
                                             font-size: 20px;
@@ -2561,6 +2745,14 @@
 
                                         span {
                                             margin: 5px 0 0;
+                                            &.adress_span{
+                                                max-width: 380px;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                display: inline-block;
+                                                width: 100%;
+                                            }
                                         }
                                         .review_section_wrap {
                                             display: flex;
@@ -3693,6 +3885,14 @@
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
+                                    .adress_span{
+                                        max-width: 140px;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
                                     .ammin_listing {
                                         display: flex;
                                         .amminities_list {
@@ -3904,6 +4104,7 @@
                             font-weight: 400;
                             padding: 0 15px;
                             text-transform: uppercase;
+                            justify-content: flex-start;
                         }
 
                         input {
@@ -4028,6 +4229,7 @@
                             display: flex;
                             flex-flow: column;
                             justify-content: space-between;
+                            height: 93.6px;
 
                             //								input {
                             //									height: 35px;
@@ -4109,6 +4311,7 @@
                                 border-radius: 8px;
                                 background: $background-white;
                                 position: relative;
+                                height: 93.6px;
 
                                 .travel_info {
                                     width: 100%;
@@ -4249,6 +4452,11 @@
                     }
                 }
             }
+        }
+    }
+    .sticky-top {
+        &.left_side_bar{
+            top: 80px;
         }
     }
     .filter_saidbar {
@@ -4488,7 +4696,10 @@
                 border: 1px solid $box-border-color;
                 background: $background-white;
                 border-radius: 3px;
-
+                max-height: calc(100vh - 310px);
+                overflow-y: auto;
+                overflow-x: hidden;
+                
                 .cmn_block {
                     padding: 20px 15px;
                     border-bottom: 1px solid $box-border-color;
@@ -4656,7 +4867,7 @@
                                 .block_cmn {
                                     width: 100%;
                                     padding: 15px 15px;
-                                    background: $bg-tab-detail;
+                                    background: transparent;
 
                                     h5 {
                                         width: 100%;
@@ -5007,6 +5218,7 @@
                                     .detail_info {
                                         font-size: 12px;
                                         color: $text-grey;
+                                        width: 100%;
 
                                         h4 {
                                             font-size: 20px;
@@ -5021,6 +5233,14 @@
 
                                         span {
                                             margin: 5px 0 0;
+                                            &.adress_span{
+                                                max-width: 380px;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                display: inline-block;
+                                                width: 100%;
+                                            }
                                         }
                                         .review_section_wrap {
                                             display: flex;
@@ -6140,6 +6360,14 @@
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
+                                    .adress_span{
+                                        max-width: 140px;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
                                     .ammin_listing {
                                         display: flex;
                                         .amminities_list {

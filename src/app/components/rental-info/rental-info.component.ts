@@ -48,16 +48,12 @@ export class RentalInfoComponent implements OnInit {
   $("#add_room_open").slideUp("slow");
 });
 
-$("#add_room").click(function (e) {
+$("#rental_add_room").click(function (e) {
   e.stopPropagation();
-  $("#add_room_open").slideToggle("slow");
-});
-$("#add_child").click(function (e) {
-  e.stopPropagation();
-  $("#add_child_open").slideToggle("slow");
+  $("#rental_add_room_open").slideToggle("slow");
 });
 
-$('#add_room_open').click(
+$('#rental_add_room_open').click(
   function (e) {
     e.stopPropagation();
   }
