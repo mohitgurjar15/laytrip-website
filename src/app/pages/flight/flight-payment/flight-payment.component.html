@@ -82,4 +82,4 @@
 
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available> 
 <app-booking-as-login-or-guest-popup (isShowGuestPopupValueChange)="changePopupValue($event)" *ngIf="isShowGuestPopup"></app-booking-as-login-or-guest-popup>
-<app-extra-baggage></app-extra-baggage>
+<app-extra-baggage *ngIf="flightDetails.length" [flightDetail]="flightDetails"></app-extra-baggage>

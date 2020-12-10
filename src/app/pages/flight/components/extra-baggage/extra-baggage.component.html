@@ -75,13 +75,13 @@
               </ul>
               <div class="block_passenger_list">
                 <ul>
-                  <li *ngFor="let i of [].constructor(totalPassanger)">
+                  <li *ngFor="let i of [].constructor(totalPassanger);let indexOfelement=index">
                     <div class="block_in one">
                       <div class="block_icon">
                         <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_travellers-icon.svg" alt="Icon">
                       </div>
                       <div class="block_text">
-                        Passenger 1 <span>Detail</span>
+                        Passenger {{indexOfelement+1}} <span>Detail</span>
                       </div>
                     </div>
 
@@ -90,6 +90,7 @@
                           <div class="block_baggage">
                             <div class="">
                               <select  class="form-control" >
+                                <option value="0">--Select--</option>
                                 <ng-container *ngFor="let baggage of flightDetail.extra_service.outbound">
                                   <option  *ngIf="baggage.bag_type==baggageType.bag_type" >{{baggage.description.weight}}</option>
                                 </ng-container>

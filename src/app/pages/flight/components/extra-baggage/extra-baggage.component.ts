@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FlightService } from 'src/app/services/flight.service';
 import { environment } from '../../../../../environments/environment';
@@ -11,7 +11,7 @@ import { environment } from '../../../../../environments/environment';
 export class ExtraBaggageComponent implements OnInit {
 
   routeCode:string;
-  flightDetail:any={};
+  @Input() flightDetail:any={};
   isLoaded:boolean=false;
   outBoundBagType:any=[];
   totalPassanger:number;
@@ -24,38 +24,35 @@ export class ExtraBaggageComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   ngOnInit() {
     //this.loadJs();
-    this.airRevalidate();
   }
 
-  airRevalidate(){
-    this.isLoaded=false;
-    let routeData={
-      route_code: decodeURIComponent(this.route.snapshot.paramMap.get('rc'))
-    }
-    this.flightService.airRevalidate(routeData).subscribe((response:any)=>{
-        this.flightDetail=response[0];
-        this.isLoaded=true;
-        if(this.flightDetail.extra_service.outbound.length){
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("changes",changes)
+    if (typeof changes['flightDetail'].currentValue!='undefined') {
+      this.isLoaded=true;
+     
+      this.flightDetail = changes['flightDetail'].currentValue[0];
+      if(this.flightDetail.extra_service.outbound.length){
 
-          for(let baggage of this.flightDetail.extra_service.outbound){
+        for(let baggage of this.flightDetail.extra_service.outbound){
 
-            if(this.outBoundBagType.findIndex(x=>x.bag_type==baggage.bag_type)==-1){
+          if(this.outBoundBagType.findIndex(x=>x.bag_type==baggage.bag_type)==-1){
 
-              this.outBoundBagType.push({ bag_type : baggage.bag_type, value: baggage })
-            }
+            this.outBoundBagType.push({ bag_type : baggage.bag_type, value: baggage })
           }
         }
+      }
 
-        this.totalPassanger = Number(this.flightDetail.adult_count);
-        if(typeof this.flightDetail.child_count!='undefined'){
-          this.totalPassanger+= Number(this.flightDetail.child_count);
-        }
-        if(typeof this.flightDetail.infant_count!='undefined'){
-          this.totalPassanger+= Number(this.flightDetail.infant_count);
-        }
-      },(error)=>{
-        this.isLoaded=true;
-    })
+      this.totalPassanger = Number(this.flightDetail.adult_count);
+      if(typeof this.flightDetail.child_count!='undefined'){
+        this.totalPassanger+= Number(this.flightDetail.child_count);
+      }
+      if(typeof this.flightDetail.infant_count!='undefined'){
+        this.totalPassanger+= Number(this.flightDetail.infant_count);
+      }
+    }
+
+    
   }
 
   loadJs(){
@@ -137,4 +134,5 @@ export class ExtraBaggageComponent implements OnInit {
     }
   }
 
+  
 }

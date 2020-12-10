@@ -36,6 +36,7 @@ export class FlightPaymentComponent implements OnInit {
   priceData=[];
   totalLaycreditPoints:number=0;
   isLayCreditLoading:boolean=false;
+  flightDetails=[];
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +45,7 @@ export class FlightPaymentComponent implements OnInit {
     private genericService:GenericService
   ) { 
     this.totalLaycredit();
+    this.airRevalidate();
   }
 
   ngOnInit() {
@@ -146,4 +148,14 @@ export class FlightPaymentComponent implements OnInit {
   redeemableLayCredit(event){
     this.redeemableLayPoints=event;
   }
+  airRevalidate(){
+    let routeData={
+      route_code: decodeURIComponent(this.route.snapshot.paramMap.get('rc'))
+    }
+    this.flightService.airRevalidate(routeData).subscribe((response:any)=>{
+        this.flightDetails=response;
+      },(error)=>{
+    })
+  }
+
 }
