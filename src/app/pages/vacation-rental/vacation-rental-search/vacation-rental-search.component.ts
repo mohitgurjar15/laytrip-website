@@ -14,7 +14,7 @@ import { VacationRentalService } from '../../../services/vacation-rental.service
   templateUrl: './vacation-rental-search.component.html',
   styleUrls: ['./vacation-rental-search.component.scss']
 })
-export class VacationRentalSearchComponent implements OnInit {
+export class VacationRentalSearchComponent implements OnInit, OnDestroy {
 
   s3BucketUrl = environment.s3BucketUrl;
   loading = true;
@@ -23,6 +23,7 @@ export class VacationRentalSearchComponent implements OnInit {
   rentalSearchInfo;
   rentalDetails;
   rentalFilterDetails;
+  subscriptions: Subscription[] = [];
   constructor(  
   	private route: ActivatedRoute,
     private rentalService: VacationRentalService,
@@ -62,6 +63,7 @@ export class VacationRentalSearchComponent implements OnInit {
       }, err => {
         if (err && err.status === 404) {
           this.errorMessage=err.message;
+          this.isNotFound = true;
         }
         else{
           this.isNotFound = true;
@@ -70,5 +72,8 @@ export class VacationRentalSearchComponent implements OnInit {
         this.loading = false;
       });
    
+  }
+    ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

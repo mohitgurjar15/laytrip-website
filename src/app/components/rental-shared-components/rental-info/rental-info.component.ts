@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonFunction } from '../../_helpers/common-function';
+import { CommonFunction } from '../../../_helpers/common-function';
 declare var $: any;
 
 @Component({

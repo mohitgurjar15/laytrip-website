@@ -29,7 +29,7 @@ export class VacationSearchWidgetComponent implements OnInit {
   rentalCheckoutMinDate; 
   data = [];
   loading = false;
-  destination='';
+  destination:any='';
 
   rentalForm:any= {
     id:'',
@@ -134,7 +134,7 @@ export class VacationSearchWidgetComponent implements OnInit {
   }
 
    selectEvent(event) {
-    this.destination=event.id;
+    this.destination=event;
     console.log(this.destination);
   }
 
@@ -171,7 +171,11 @@ export class VacationSearchWidgetComponent implements OnInit {
     queryParams.adult_count=formData.adult_count;
     queryParams.child=formData.child;
     queryParams.number_and_children_ages=formData.number_and_children_ages;
+    queryParams.city=this.destination.city;
+    queryParams.display_name=this.destination.display_name;
+    queryParams.country=this.destination.country;
     console.log(queryParams);
+    localStorage.setItem('_rental', JSON.stringify(queryParams));
       this.router.navigate(['vacation-rental/search'], {
         queryParams: queryParams,
         queryParamsHandling: 'merge'

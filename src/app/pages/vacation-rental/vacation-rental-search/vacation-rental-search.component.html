@@ -1,5 +1,7 @@
 <app-vacation-rental-search-bar></app-vacation-rental-search-bar>
-<section class="search_result home_rental">
+<app-vacation-loader *ngIf="loading" ></app-vacation-loader>
+<app-vacation-not-found *ngIf="isNotFound" ></app-vacation-not-found>
+<section class="search_result home_rental" *ngIf="!loading && !isNotFound && errorMessage==''">
    <div class="container">
    <div class="row">
       <div class="col-lg-3">
