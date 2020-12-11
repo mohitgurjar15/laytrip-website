@@ -80,14 +80,13 @@
                 <div class="row">
                     <div class="col-md-9">
                         <ul>
-                            <li>Booking ID <span>{{item.tripId}}</span></li>
+                            <li>{{'booking_id' | translate}} <span>{{item.tripId}}</span></li>
                             <li>Travelling on <span>{{ item.checkInDate}}</span></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <div class="block_cancle">
-                            <a class="hover-link" (click)="open(content)" data-toggle="modal" data-target="#cancle_alert_modal">Cancel
-                                Booking</a>
+                            <a class="hover-link" (click)="open(content)" data-toggle="modal" data-target="#cancle_alert_modal">{{'cancel_booking_title' | translate}}</a>
                             <span [ngClass]="{'complete': item.bookingStatus , 'refund':item.bookingStatus == 0 }">{{ bookingStatus[item.bookingStatus] }}</span>
                         </div>
                     </div>
@@ -161,7 +160,7 @@
                 <div class="row">
                     <div class="col-md-9">
                         <ul>
-                            <li>Booking ID <span>{{item.tripId}}</span></li>
+                            <li>{{'booking_id' | translate}}<span>{{item.tripId}}</span></li>
                             <li>Travelling on <span>{{ item.checkInDate}}</span></li>
                         </ul>
                     </div>

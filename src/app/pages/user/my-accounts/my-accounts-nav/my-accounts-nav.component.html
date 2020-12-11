@@ -1,12 +1,12 @@
 <div class="account_saidbar">
     <div class="saidbar_top">
         <div class="block_inner">
-            <a [routerLink]="['/account/']" title="My Profile" ><span>
+            <a [routerLink]="['/account/']" title="My Profile"><span>
                     <img src="{{_login_user_info.profilePic ||  defaultImage}}" alt="Profile Image">
                 </span></a>
             <div class="member_info">
                 <h6>{{_login_user_info.username}}</h6>
-                <p *ngIf="_login_user_info.createdDate">Member since {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD')  }}</p>
+                <p *ngIf="_login_user_info.createdDate">{{'member_since' | translate}} {{ commonFunction.convertDateFormat(_login_user_info.createdDate,'YYYY-MM-DD') }}</p>
             </div>
         </div>
     </div>
@@ -14,49 +14,42 @@
         <ul>
             <li>
                 <a [routerLink]="['/account/bookings']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_booing.svg" alt="Bookings Icon">
-                    My Bookings
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_booing.svg" alt="Bookings Icon"> {{'my_booking' | translate}}
                 </a>
             </li>
             <li>
                 <a [routerLink]="['/account/payment']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon">
-                    Payment History
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon"> Payment History
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);"  [routerLink]="['/account/account-card-list']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon">
-                    Credit Cards
+                <a href="javascript:void(0);" [routerLink]="['/account/account-card-list']" [routerLinkActive]="['active_link']">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon"> Credit Cards
                 </a>
             </li>
             <li>
                 <a [routerLink]="['/account/travellers']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon">
-                    Co-Travelers
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_co_travellers.svg" alt="Co Travellers Icon"> Co-Travelers
                 </a>
             </li>
             <li>
                 <a [routerLink]="['/account/lay-credit-points']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_my_wallet.svg" alt="My Wallet Icon">
-                    Laytrip Points
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_my_wallet.svg" alt="My Wallet Icon"> Laytrip Points
                 </a>
             </li>
             <li *ngIf="_login_user_info.socialAccountId === ''">
                 <div class="dropdown">
-                    <a (click)="onToggleSubMenu($event)"  class="dropdown-toggle hover-link" [routerLinkActive]="['active_link']"
-                        data-toggle="dropdown">
-                        <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon">
-                        Settings
+                    <a (click)="onToggleSubMenu($event)" class="dropdown-toggle hover-link" [routerLinkActive]="['active_link']" data-toggle="dropdown">
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon"> Settings
                     </a>
-                    <ul class="dropdown-menu"  [routerLinkActive]="['show']">
-                        <li *ngIf="_login_user_info.socialAccountId === ''"><a [routerLink]="['/account/settings/change-password']"
-                                [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_change_pass.svg" alt="Settings Icon">
-                                Change Password</a></li>
+                    <ul class="dropdown-menu" [routerLinkActive]="['show']">
+                        <li *ngIf="_login_user_info.socialAccountId === ''">
+                            <a [routerLink]="['/account/settings/change-password']" [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_change_pass.svg" alt="Settings Icon"> Change Password</a>
+                        </li>
                     </ul>
                 </div>
             </li>
-           <!--  <li>
+            <!--  <li>
                 <a [routerLink]="['/account/subscription']" [routerLinkActive]="['active_link']">
                     <img src="{{s3BucketUrl}}assets/images/icon/ic_subscription.svg" alt="Subscription Icon">
                     Subscription
