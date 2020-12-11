@@ -1,5 +1,8 @@
 <div class="home_tab">
-    <form [formGroup]="rentalSearchForm" novalidate autocomplete="off">
+   <h2 *ngIf="showCommingSoon">
+      Coming soon
+  </h2>
+   <form *ngIf="!showCommingSoon" [formGroup]="rentalSearchForm" novalidate autocomplete="off">
       <div class="home_search">
          <ul class="home-grid oneway">
             <li class="grid_box first">

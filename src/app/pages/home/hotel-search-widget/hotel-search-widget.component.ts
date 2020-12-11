@@ -63,6 +63,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   ];
 
+  showCommingSoon:boolean=false;
+  
+
   constructor(
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -98,6 +101,11 @@ export class HotelSearchWidgetComponent implements OnInit {
         }
       ],
     };
+
+    let host = window.location.origin;
+    if(host.includes("hotel-vr")){
+      this.showCommingSoon=true;
+    }
   }
 
   ngOnInit(): void {

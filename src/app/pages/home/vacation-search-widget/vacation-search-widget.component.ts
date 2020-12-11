@@ -43,6 +43,7 @@ export class VacationSearchWidgetComponent implements OnInit {
   totalPerson: number = 1;
   rentalSearchFormSubmitted: boolean = false;
   error_message='';
+  showCommingSoon:boolean=false;
   constructor( private genericService: GenericService,
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -62,6 +63,10 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    let host = window.location.origin;
+    if(host.includes("hotel-vr")){
+      this.showCommingSoon=true;
+    }
   }
 
 
