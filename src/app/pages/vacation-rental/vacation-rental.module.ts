@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { VacationRentalRoutingModule } from './vacation-rental-routing.module';
@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Ng5SliderModule } from 'ng5-slider';
 import { VacationNotFoundComponent } from './components/vacation-not-found/vacation-not-found.component';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent],
@@ -24,7 +25,8 @@ import { VacationNotFoundComponent } from './components/vacation-not-found/vacat
     ReactiveFormsModule,
     NgSelectModule,
     Ng5SliderModule,
+    ComponentsModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class VacationRentalModule { }

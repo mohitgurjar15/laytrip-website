@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
@@ -9,6 +9,8 @@ import { environment } from '../../../../../environments/environment';
 export class SortVacationRentalComponent implements OnInit {
   
   s3BucketUrl = environment.s3BucketUrl;
+  @Input() rentalDetails;
+
   constructor() { }
 
   ngOnInit() {

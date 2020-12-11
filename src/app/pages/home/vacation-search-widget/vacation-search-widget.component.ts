@@ -35,13 +35,14 @@ export class VacationSearchWidgetComponent implements OnInit {
     id:'',
     type:"city",
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
-    check_out_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
+    check_out_date:new Date(moment().add(7, 'days').format("MM/DD/YYYY")),
     number_and_children_ages:'',
     adult_count:1,
     child:'',
   }
   totalPerson: number = 1;
   rentalSearchFormSubmitted: boolean = false;
+  error_message='';
   constructor( private genericService: GenericService,
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -153,6 +154,7 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   //Start search Vacation rentals function
   searchRentals(formData){
+    this.error_message='';
     this.rentalSearchFormSubmitted = true;
     if(this.rentalSearchForm.invalid) 
     {
@@ -160,6 +162,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     }
     else if(formData.child !=''){
       if(formData.number_and_children_ages.length !== formData.child){
+        this.error_message='please select child age';
         return ;
     }
    }

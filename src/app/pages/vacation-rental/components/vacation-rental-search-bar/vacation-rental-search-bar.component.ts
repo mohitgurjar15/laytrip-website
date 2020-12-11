@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class VacationRentalSearchBarComponent implements OnInit {
   
   @Output() searchBarInfo = new EventEmitter<any>();
+  @Input() calenderPrices:any=[];
   s3BucketUrl = environment.s3BucketUrl;
   rentalSearchForm: FormGroup;
   countryCode:string='';
@@ -34,6 +35,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
   destination:any='';
   data:any=[];
   defaultData:any;
+  
   constructor( public fb: FormBuilder,
     private rentalService: VacationRentalService,
     public commonFunction: CommonFunction,
@@ -60,16 +62,10 @@ export class VacationRentalSearchBarComponent implements OnInit {
     }];
     this.defaultData=info.display_name;
     console.log(this.data);
-    // this.rentalForm.id = this.route.snapshot.queryParams['id'];
-    // //this.rentalForm.check_in_date= this.route.snapshot.queryParams['check_in_date'];
-    // this.rentalForm.check_in_date=this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['check_in_date'], 'YYYY-MM-DD');
-    // this.rentalForm.check_out_date= this.commonFunction.convertDateFormat(this.route.snapshot.queryParams['check_out_date'], 'YYYY-MM-DD');
-    // this.rentalForm.number_and_children_ages= this.route.snapshot.queryParams['number_and_children_ages'];
-    // this.rentalForm.child= this.route.snapshot.queryParams['child'];
-    // this.rentalForm.adult_count= this.route.snapshot.queryParams['adult_count'];
-    // this.data=[{id: 19, type: "city", display_name: "Barcelona,Spain", city: "Barcelona", country: "Spain"}];
-    // console.log(this.rentalForm);
+    this.rentalForm.check_in_date=this.commonFunction.convertDateFormat(info.check_in_date, 'YYYY-MM-DD');
+    this.rentalForm.check_out_date=this.commonFunction.convertDateFormat(info.check_out_date, 'YYYY-MM-DD');
   }
+
 
 
   rentalDateUpdate(date) {
@@ -78,6 +74,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
   }
 
    changeRentalInfo(event){
+     console.log(event);
     this.rentalForm.adult_count = event.adult;
     this.rentalForm.child = event.child;
     //this.rentalForm.number_and_children_ages = event.child_age[0].children;

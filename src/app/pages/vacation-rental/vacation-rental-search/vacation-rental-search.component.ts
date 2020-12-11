@@ -76,4 +76,8 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
+  getSearchItem(event) {
+    console.log(event);
+  }
 }

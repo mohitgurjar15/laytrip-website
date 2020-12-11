@@ -36,6 +36,10 @@ export class RentalInfoComponent implements OnInit {
   	private route: ActivatedRoute,
     private commonFunction:CommonFunction){
 
+    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
+    this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
+    //this.rentalForm.number_and_children_ages = event.child_age;
+    this.totalPerson = this.adultValue + this.childValue;
   	  this.countryCode = this.commonFunction.getUserCountry()
     }
 

@@ -61,6 +61,9 @@
                       (changeValue)="changeRentalInfo($event)">
                 </app-rental-info>
                </div>
+            <span class="child_error" *ngIf="error_message !=''">
+              {{error_message}}
+            </span> 
             </li>
          </ul>
          <div class="serch_btn">
