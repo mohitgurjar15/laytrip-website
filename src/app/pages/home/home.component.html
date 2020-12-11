@@ -11,7 +11,9 @@
 
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCovid" style="">
                     <div class="card-body">
-                        <p>Please be advised on our cancellation and refund policies. <a [routerLink]="['/covid-19']" target="_blank">read more.</a></p>
+                        <p>{{'covid_description' | translate}}
+                            <a [routerLink]="['/covid-19']" target="_blank" [innerHTML]="'read_more' | translate"></a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -46,20 +48,20 @@
                     <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-selected="true" (click)="clickOnTab('flight')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg" alt="Flight Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg" alt="Flight Icon" />
-                        <span>Flight</span>
+                        <span>{{'flight' | translate}}</span>
                     </a>
                     <a class="nav-item nav-link disabled" id="nav-hotel" role="tab" aria-selected="false" (click)="clickOnTab('hotel')">
                         <!-- data-toggle="tab" href="#hotel" -->
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg" alt="Hotel Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg" alt="Hotel Icon" />
                         <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-disabled.svg" alt="Flight Icon">
-                        <span>Hotel</span>
+                        <span>{{'hotel' | translate}}</span>
                     </a>
                     <a class="nav-item nav-link disabled" id="nav-accommodation" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg" alt="Accommodation Icon" />
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg" alt="Accommodation Icon" />
                         <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-disabled.svg" alt="Flight Icon">
-                        <span>Home Rentals</span>
+                        <span>{{'home_rental' | translate}}</span>
                     </a>
                 </div>
             </nav>
@@ -68,7 +70,7 @@
                     <app-flight-search-widget></app-flight-search-widget>
                 </div>
                 <div class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
-                    <h2>Hotel</h2>
+                    <h2>{{'hotel' | translate}}</h2>
                 </div>
                 <div class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
                     <h2>Accommodation</h2>
