@@ -26,6 +26,10 @@ const routes: Routes = [
                 loadChildren: './flight/flight.module#FlightModule'
             },
             {
+                path: 'hotel',
+                loadChildren: './hotel/hotel.module#HotelModule'
+            },
+            {
                 path: 'vacation-rental',
                 loadChildren: './vacation-rental/vacation-rental.module#VacationRentalModule'
             },

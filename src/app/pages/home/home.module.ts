@@ -17,6 +17,7 @@ import { LastMinHotelDealComponent } from './last-min-hotel-deal/last-min-hotel-
 import { DrAdventureComponent } from './dr-adventure/dr-adventure.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FlightSearchWidgetComponent } from './flight-search-widget/flight-search-widget.component';
+import { HotelSearchWidgetComponent } from './hotel-search-widget/hotel-search-widget.component';
 import { VacationSearchWidgetComponent } from './vacation-search-widget/vacation-search-widget.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -32,6 +33,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     LastMinHotelDealComponent,
     DrAdventureComponent,
     FlightSearchWidgetComponent,
+    HotelSearchWidgetComponent,
     VacationSearchWidgetComponent,
   ],
   imports: [

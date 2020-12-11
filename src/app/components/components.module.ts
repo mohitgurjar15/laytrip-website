@@ -33,6 +33,10 @@ import { ToasterComponent } from './toaster/toaster.component';
 import { ShareSocialMediaComponent } from './share-social-media/share-social-media.component';
 import { RentalInfoComponent } from './rental-shared-components/rental-info/rental-info.component';
 
+// HOTEL SHARED COMPONENTS
+import { GuestInfoComponent } from './hotel-shared-components/guest-info/guest-info.component';
+import { SearchHotelComponent } from './hotel-shared-components/search-hotel/search-hotel.component';
+
 @NgModule({
   declarations: [
     SearchAirportComponent,
@@ -57,6 +61,8 @@ import { RentalInfoComponent } from './rental-shared-components/rental-info/rent
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+    GuestInfoComponent,
+    SearchHotelComponent,
     RentalInfoComponent
   ],
   imports: [
@@ -94,6 +100,8 @@ import { RentalInfoComponent } from './rental-shared-components/rental-info/rent
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+    GuestInfoComponent,
+    SearchHotelComponent,
     RentalInfoComponent
   ],
   providers: [DatePipe],
