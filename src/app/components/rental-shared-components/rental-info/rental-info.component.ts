@@ -49,7 +49,7 @@ export class RentalInfoComponent implements OnInit {
 
   loadJquery() {
     $("body").click(function () {
-  $("#add_room_open").slideUp("slow");
+  $("#rental_add_room_open").slideUp("slow");
 });
 
 $("#rental_add_room").click(function (e) {
