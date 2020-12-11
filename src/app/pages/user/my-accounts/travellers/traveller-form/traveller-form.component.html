@@ -1,6 +1,6 @@
 <div class="modal-header">
     <div class="block_title">
-        <h5>{{ travellerId ? 'Edit Co-Travellers' : 'Add Co-Travellers'}}</h5>
+        <h5>{{ travellerId ? 'Edit Co-Traveler' : 'Add Co-Traveler'}}</h5>
     </div>
     <button type="button" class="close" (click)="close()">
         <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
@@ -203,7 +203,7 @@
     <div class="modal-footer">
         <div class="form_btn">
             <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
-                {{ travellerId ? 'Update Traveller' : 'Add Traveller' }} </button>
+                {{ travellerId ? 'Update Traveler' : 'Add Traveler' }} </button>
         </div>
     </div>
 </form>

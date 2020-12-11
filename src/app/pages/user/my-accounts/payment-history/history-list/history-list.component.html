@@ -91,8 +91,8 @@
             <div class="grid_block">
                 <ul>
                     <li class="fb_medium">Total Amount: <span>${{item.totalAmount | number : '1.2-2' || 0}}</span></li>
-                    <li *ngIf="item.totalInstallments > 0">Instalment: <span>${{item.bookingInstalments[0].amount }} /
-                            Weekly</span></li>
+                    <li *ngIf="item.totalInstallments > 0">Installment: <span>${{item.bookingInstalments[1].amount | number : '1.2-2' }} /
+                            {{instalmentType[item.bookingInstalments[0].instalmentType]}}</span></li>
                     <li *ngIf="item.totalInstallments == 0">Booking Date: <span>{{ dateConvert(item.bookingDate) }}</span></li>
                 </ul>
             </div>

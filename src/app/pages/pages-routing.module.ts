@@ -30,6 +30,10 @@ const routes: Routes = [
                 loadChildren: './hotel/hotel.module#HotelModule'
             },
             {
+                path: 'vacation-rental',
+                loadChildren: './vacation-rental/vacation-rental.module#VacationRentalModule'
+            },
+            {
                 path: 'account',
                 loadChildren: './user/user.module#UserModule'
             },

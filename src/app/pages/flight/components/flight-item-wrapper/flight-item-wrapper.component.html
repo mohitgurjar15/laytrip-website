@@ -204,7 +204,7 @@
                                                 <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             </p>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                Total Fare ({{ fareDetails?.quantity }} traveller)
+                                                Total Fare ({{ fareDetails?.quantity }} traveler)
                                                 <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             </p>
                                         </li>
@@ -216,7 +216,7 @@
                                         </li>
                                         <ng-container *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
                                             <li *ngIf="i>0">
-                                                <div class="detail"> {{i}} Instalment
+                                                <div class="detail"> {{i}} Installment
                                                     <p>{{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</p>
                                                 </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
                                             </li>
@@ -332,7 +332,7 @@
                                         <a class="view_more"
                                             *ngIf="!loadCancellationPolicy && cancellationPolicyArray.length"
                                             (click)="toggleCancellationContent()">
-                                            {{ loadMoreCancellationPolicy===true ? 'View less' : 'View More' }}</a>
+                                            {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a>
                                     </div>
                                     <div class="triangle_left"></div>
                                 </div>
@@ -678,7 +678,7 @@
                                                     <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                                 </p>
                                                 <p *ngIf="fareDetails.type === 'total'">
-                                                    Total Fare ({{ fareDetails?.quantity }} traveller)
+                                                    Total Fare ({{ fareDetails?.quantity }} traveler)
                                                     <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                                 </p>
                                             </li>

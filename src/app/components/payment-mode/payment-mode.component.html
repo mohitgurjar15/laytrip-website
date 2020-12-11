@@ -3,8 +3,8 @@
     <div class="pay_deatil_info">
         <div class="block_detail_left">
             <ul>
-                <li>1st Instalment <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
-                <li>Default Instalment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
+                <li>1st Installment <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
+                <li>Default Installment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
             </ul>
         </div>
         <!-- <div class="block_detail_right">
@@ -15,7 +15,7 @@
 
 <ul class="block_installment_radio" *ngIf="instalmentAvavible && showFullPartialPayOption">
     <li [ngClass]="{'disable_payment_option': disablePartialPayment === true, 'select': isInstalemtMode===true}" >
-        <label class="custom_radio">Pay with Instalment  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
+        <label class="custom_radio">Pay with Installment  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/week</span>
             <input type="radio" name="payment_mode" [disabled]="disablePartialPayment" [checked]="isInstalemtMode==true" (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
@@ -42,7 +42,7 @@
                             Weekly <span>({{weeklyDefaultInstalmentNo}} payments)</span>
                         </div>
                         <div class="right">
-                            ${{weeklySecondInstalmentTemp ? weeklySecondInstalmentTemp : weeklyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                            ${{weeklySecondInstalmentTemp ? weeklySecondInstalmentTemp : weeklyDefaultInstalment | number : '1.2-2'}} <span>Per Installment</span>
                         </div>
                     </label>
                 </li>
@@ -54,11 +54,11 @@
                             Biweekly <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
                         </div>
                         <div class="right" *ngIf="biWeeklySecondInstalmentTemp>=0">
-                            ${{biWeeklySecondInstalmentTemp ? biWeeklySecondInstalmentTemp : biWeeklyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                            ${{biWeeklySecondInstalmentTemp ? biWeeklySecondInstalmentTemp : biWeeklyDefaultInstalment | number : '1.2-2'}} <span>Per Installment</span>
                         </div>
 
                         <div class="right" *ngIf="biWeeklySecondInstalmentTemp<0">
-                            $0 <span>Per Instalment</span>
+                            $0 <span>Per Installment</span>
                         </div>
                     </label>
                 </li>
@@ -70,10 +70,10 @@
                             Monthly <span>({{monthlyDefaultInstalmentNo}} payments)</span>
                         </div>
                         <div class="right" *ngIf="monthlySecondInstalmentTemp>=0">
-                            ${{monthlySecondInstalmentTemp ? monthlySecondInstalmentTemp : monthlyDefaultInstalment | number : '1.2-2'}} <span>Per Instalment</span>
+                            ${{monthlySecondInstalmentTemp ? monthlySecondInstalmentTemp : monthlyDefaultInstalment | number : '1.2-2'}} <span>Per Installment</span>
                         </div>
                         <div class="right" *ngIf="monthlySecondInstalmentTemp<0">
-                            $0 <span>Per Instalment</span>
+                            $0 <span>Per Installment</span>
                         </div>
                     </label>
                 </li>
@@ -86,7 +86,7 @@
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle custom_aerrow hover-link">
-                                        <div class="left_block">Modify your first instalment</div>
+                                        <div class="left_block">Modify your down payment</div>
                                         <div class="right_block">
                                             <div class="block_pay_instalment">
                                                 <!-- <div class="block_mins pay_block">
@@ -124,7 +124,7 @@
                                                     <span class="point_use">${{laycreditpoints}}</span>
                                                 </li>
                                                 <li>
-                                                    First instalment amount
+                                                    First installment amount
                                                     <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
                                                 </li>
                                             </ul>
@@ -138,7 +138,7 @@
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsetwo">
                                         <div class="left_block">
                                             Pay your remaining amount
-                                            <span>For {{this.remainingInstalment}} instalments with ${{secondInstalment | number : '1.2-2'}} per instalment</span>
+                                            <span>For {{this.remainingInstalment}} instalments with ${{secondInstalment | number : '1.2-2'}} per installment</span>
                                         </div>
                                         <div class="right_block">
                                             Total <span>${{instalmentRequest.amount | number : '1.2-2'}}</span>
@@ -171,7 +171,7 @@
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <label class="custom_radio">Instalment
+                                                    <label class="custom_radio">Installment
                                                         <input type="radio" name="custom_method" [checked]='instalmentRequest.custom_instalment_no!=null' value='instalment' (change)="selectCustomMethod($event);">
                                                         <span class="checkmark"></span>
                                                     </label>
@@ -252,7 +252,7 @@
                                                 
                                                 <li *ngFor="let instalment of instalments.instalment_date; index as i">
                                                     <div>
-                                                        {{i+1}} Instalment
+                                                        {{i+1}} Installment
                                                         <p> {{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}} <!-- <span>Booking date</span> --></p>
                                                     </div>
                                                     <span>${{instalment.instalment_amount | number : '1.2-2'}}</span>

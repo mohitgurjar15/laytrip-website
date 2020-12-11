@@ -1,5 +1,10 @@
 <div class="hotel_tab">
-  <form [formGroup]="hotelSearchForm" novalidate autocomplete="off" (ngSubmit)="searchHotels()">
+
+  <h2 *ngIf="showCommingSoon">
+      Coming soon
+  </h2>
+
+  <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" novalidate autocomplete="off" (ngSubmit)="searchHotels()">
     <div class="hotels_search">
       <ul class="hotels-grid oneway">
         <li class="grid_box first">

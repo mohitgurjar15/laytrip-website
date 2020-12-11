@@ -12,12 +12,12 @@
                 <!-- <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"   value="">
                 <span class="checkmark"></span>Select all -->
               </label>
-              <a class="hover-link" (click)="openTravellerModal(content)">+ Add New Co-Traveller</a>
+              <a class="hover-link" (click)="openTravellerModal(content)">+ Add New Co-Traveler</a>
             </div>
             <div class="block_traveller_btm">
               <div class="block_no_traveller" *ngIf="notFound">
                 <img src="{{s3BucketUrl}}assets/images/icon/ic_traveller.svg" alt="Traveller Icon">
-                <h5>No Traveller Available</h5>
+                <h5>No Traveler Available</h5>
               </div>
               <div *ngIf="loading">
 
@@ -101,7 +101,7 @@
 <ng-template #deleteContent let-modal>
   <div class="modal-header">
     <div class="block_title">
-      <h4>Delete Co - Traveller</h4>
+      <h4>Delete Co - Traveler</h4>
     </div>
     <button type="button" class="close"  (click)="modal.dismiss('Cross click')">
         <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
@@ -109,7 +109,7 @@
   </div>
   <div class="modal-body">
     <div class="modal_btm">
-      <p>Are you sure you want to delete traveller?</p>
+      <p>Are you sure you want to delete traveler?</p>
     </div>
   </div>
   <div class="modal-footer">
