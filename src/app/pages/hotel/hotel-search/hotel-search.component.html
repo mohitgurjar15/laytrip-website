@@ -1,0 +1,69 @@
+<app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-hotel-search-bar>
+
+<app-hotel-loader *ngIf="loading"></app-hotel-loader>
+<app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
+
+<app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
+<app-hotel-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-hotel-error>
+
+<section class="search_result hotels" *ngIf="!loading && !isNotFound && errorMessage==''">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
+        <div class="filter_saidbar">
+          <div class="filter_by d-none d-lg-block">
+            <div class="block_inn">
+              <h4>Filter By</h4>
+              <a class="anchor_link" (click)="resetFilter()">Reset</a>
+            </div>
+            <app-filter-hotel *ngIf="filterHotelDetails" [filterHotelDetails]="filterHotelDetails" (filterHotel)="filterHotel($event)"
+              isResetFilter={{isResetFilter}}></app-filter-hotel>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <!-- <div class="view_btn_wrapper">
+          <button class="list_v_btn">
+            <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
+            List view
+          </button>
+          <button class="map_v_btn">
+            <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view">
+            Map view
+          </button>
+        </div> -->
+        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelDetails]="hotelDetails"></app-hotel-item-wrapper>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- For responsive -->
+<!-- <div class="filter_responsive flight" id="responsive_filter">
+  <div class="btn_filter">
+      <a href="javascript:void(0)" class="responsive_filter_btn">Show Filter</a>
+  </div>
+</div>
+<div id="responsive_filter_show" class="responsive_filter_show" *ngIf="!loading && !isNotFound && errorMessage==''">
+  <div class="filter_popup">
+      <div class="filter_head_popup">
+          <div class="filter_clear">
+            <a class="anchor_link" (click)="resetFilter()" >Reset</a>
+          </div>
+          <h3>Filter</h3>
+          <div class="filter_close">
+              <a href="javascript:void(0)"><img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt=""></a>
+          </div>
+      </div>
+      <div class="filter_cnt">
+          <div class="filter_saidbar">
+            <div class="filter_by">
+              <h4>Filter By</h4>
+              <app-filter-hotel [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"></app-filter-hotel>
+            </div>
+          </div>
+      </div>
+  </div>
+</div> -->

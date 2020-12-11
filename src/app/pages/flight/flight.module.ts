@@ -13,7 +13,6 @@ import { FlightNotFoundComponent } from './components/flight-not-found/flight-no
 import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
 import { FlightSummaryComponent } from './flight-summary/flight-summary.component';
 import { ComponentsModule } from '../../components/components.module';
-import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
@@ -33,6 +32,9 @@ import { FlightErrorComponent } from './components/flight-error/flight-error.com
 import { PopupTermConditionComponent } from './components/popup-term-condition/popup-term-condition.component';
 import { PopupLoaderComponent } from './components/popup-loader/popup-loader.component';
 
+// HELPERS MODULE
+import { HelpersModule } from '../../_helpers/_helpers.module';
+
 @NgModule({
   declarations: [
     FlightSearchComponent,
@@ -44,7 +46,6 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
     FlightNotFoundComponent,
     FlightTravelerComponent,
     FlightSummaryComponent,
-    ClickOutSideDirective,
     FlightCheckoutComponent,
     BookingSummaryLoaderComponent,
     FlightConfirmationComponent,
@@ -64,6 +65,7 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
     CommonModule,
     FlightRoutingModule,
     Ng5SliderModule,
+    HelpersModule,
     ComponentsModule,
     FormsModule, 
     ReactiveFormsModule,
