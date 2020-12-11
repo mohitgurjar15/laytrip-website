@@ -1,0 +1,76 @@
+<div class="filter_saidbar">
+  <div class="block_result_found">
+    <p>{{hotelDetails.length}} Hotels found from</p>
+    <!-- <span>{{hotelDetails[0].address.city_name}},{{hotelDetails[0].address.country_name}}</span> -->
+    <span>{{hotelDetails[0].address.city_name}}</span>
+  </div>
+  <div class="short_by">
+    <div class="block_inn">
+      <h4>Short by</h4> <a href="javascript:void(0);">Reset</a>
+    </div>
+    <div class="accordion block_shortby" id="accordion-shortby">
+      <div class="accordion-group">
+        <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse"
+            data-parent="#accordion-shortby" href="#collapseshortBy">
+            Lowest to highest
+          </a> </div>
+        <div id="collapseshortBy" class="accordion-body filter_acc collapse">
+          <div class="accordion-inner">
+            <div class="block_cmn price">
+              <h5>Price</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Lowest to highest
+                    <input type="radio" checked="checked" name="price_radio"> <span class="checkmark"></span> </label>
+                </li>
+                <li>
+                  <label class="custom_radio">highest to lowest
+                    <input type="radio" name="price_radio"> <span class="checkmark"></span> </label>
+                </li>
+              </ul>
+            </div>
+            <div class="block_cmn duration">
+              <h5>Duration</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Shortest
+                    <input type="radio" name="duration_radio"> <span class="checkmark"></span> </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Longest
+                    <input type="radio" name="duration_radio"> <span class="checkmark"></span> </label>
+                </li>
+              </ul>
+            </div>
+            <div class="block_cmn arrival">
+              <h5>Arrival</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Earliest
+                    <input type="radio" name="arrival_radio"> <span class="checkmark"></span> </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Shortest
+                    <input type="radio" name="arrival_radio"> <span class="checkmark"></span> </label>
+                </li>
+              </ul>
+            </div>
+            <div class="block_cmn departure">
+              <h5>Departure</h5>
+              <ul>
+                <li>
+                  <label class="custom_radio">Earliest
+                    <input type="radio" name="departure_radio"> <span class="checkmark"></span> </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Shortest
+                    <input type="radio" name="departure_radio"> <span class="checkmark"></span> </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
