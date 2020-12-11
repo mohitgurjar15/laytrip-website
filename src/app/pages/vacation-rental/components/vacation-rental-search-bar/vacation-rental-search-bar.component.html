@@ -10,9 +10,9 @@
                                     <div class="search_area">
                                         <label>Destination</label>
                                         <!-- {{data | json }} -->
-                                         <ng-select [formControlName]="'fromDestination'" [loading]="loading" [selectOnTab]="true" [items]="data"
+                                         <ng-select [formControlName]="'fromDestination'"  [selectOnTab]="true" [items]="data"
                                          bindLabel="display_name" bindValue="id" [(ngModel)]="defaultData" notFoundText="" [virtualScroll]="true" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)" (clear)="onRemove($event)"
-                                          class="laytrip-input" placeholder="Destination" [tabIndex]="tabIndex" >
+                                          class="laytrip-input" placeholder="Destination"  >
                                            <ng-template ng-option-tmp  let-item="item" let-index="index" let-search="searchTerm">
                                             <div>
                                             {{item.city}},{{item.country}}-{{item.display_name}}

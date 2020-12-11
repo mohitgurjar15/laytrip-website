@@ -6,6 +6,7 @@
 @import "_cstm-traveller-info.scss";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~ngx-toastr/toastr.css';
+@import "_dr_home_variable.scss";
 //@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 .wrapper {
@@ -593,7 +594,7 @@ select {
 								line-height: 30px;
 								padding: 0 15px;
 								color: $text-white;
-								background: $secondary-color;
+								background: $pink_clr;
 								border-radius: 6px;
 								font-weight: 400;
 								position: relative;
@@ -607,7 +608,7 @@ select {
 									left: 0;
 									width: 100%;
 									height: 0%;
-									background: $text-grey;
+									background: $primary-color;
 									z-index: -1;
 									transition: 0.8s;
 									border-radius: 0 0 50% 50%;
@@ -1136,9 +1137,9 @@ select {
 								}
 
 								&.active {
-									color: $secondary-color;
-									background: $tab-active-bg;
-									border: 1px solid $tab-active-bg;
+									color: $pink_clr;
+									background: $bg_tab_active;
+									border: 1px solid $border_tab_active;
 
 									.active-icon {
 										display: block;
@@ -1266,8 +1267,8 @@ select {
 											}
 
 											.switch_btn {
-												width: 30px;
-												height: 30px;
+												width: 36px;
+												height: 36px;
 												background: $background-white;
 												border: 1px solid $box-border-color;
 												position: absolute;
@@ -1278,7 +1279,7 @@ select {
 												z-index: 9;
 
 												img {
-													width: 15px;
+													width: 20px;
 													position: absolute;
 													top: 50%;
 													left: 50%;
@@ -1424,7 +1425,7 @@ select {
 															right: 20px;
 															top: 50%;
 															transform: translateY(-50%);
-															background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg) no-repeat;
+															background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
 														}
 
 														span {
@@ -1565,8 +1566,8 @@ select {
 																		font-size: 18px;
 
 																		&:hover {
-																			border: 1px solid $secondary-color;
-																			color: $secondary-color;
+																			border: 1px solid $pink_clr;
+																			color: $pink_clr;
 																		}
 																	}
 																}
@@ -1603,14 +1604,14 @@ select {
 																		color: $text-light-grey;
 
 																		&:hover {
-																			background: $secondary-color;
-																			border: 1px solid $secondary-color;
+																			background: $pink_clr;
+																			border: 1px solid $pink_clr;
 																			color: $text-white;
 																		}
 
 																		&.active_cat {
-																			background: $secondary-color;
-																			border: 1px solid $secondary-color;
+																			background: $pink_clr;
+																			border: 1px solid $pink_clr;
 																			color: $text-white;
 																		}
 																	}
