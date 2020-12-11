@@ -101,6 +101,10 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterContentChecked() {
+    this.hotelListArray = this.hotelsList;
+  }
+
   counter(i: any) {
     return new Array(i);
   }
@@ -120,7 +124,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
     // var mapCanvas = document.getElementById('map');
     // const myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
     let mapOptions = {
-      zoom: 8,
+      zoom: 12,
       center: this.myLatLng,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,

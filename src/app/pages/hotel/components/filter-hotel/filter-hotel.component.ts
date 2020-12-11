@@ -207,6 +207,19 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   // }
 
   /**
+   * Filter by hotel ratings
+   * @param event 
+   */
+  filterByRatings(event, index) {
+    console.log(event);
+    if (event.target.checked === true) {
+      
+    } else {
+     
+    }
+  }
+
+  /**
    * Filetr by airlines
    * @param event 
    */

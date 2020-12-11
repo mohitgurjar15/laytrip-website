@@ -2,15 +2,15 @@
   <div class="block_result_found">
     <p>{{hotelDetails.length}} Hotels found from</p>
     <!-- <span>{{hotelDetails[0].address.city_name}},{{hotelDetails[0].address.country_name}}</span> -->
-    <span>{{hotelDetails[0].address.city_name}}</span>
+    <span>{{locationName}}</span>
   </div>
   <div class="short_by">
     <div class="block_inn">
-      <h4>Short by</h4> <a href="javascript:void(0);">Reset</a>
+      <h4>Short by</h4> <a (click)="resetSorting('selling_price','ASC')">Reset</a>
     </div>
     <div class="accordion block_shortby" id="accordion-shortby">
-      <div class="accordion-group">
-        <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse"
+      <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
+        <div class="accordion-heading" (click)="toggleLowToHigh()"> <a class="accordion-toggle" data-toggle="collapse"
             data-parent="#accordion-shortby" href="#collapseshortBy">
             Lowest to highest
           </a> </div>
@@ -21,11 +21,15 @@
               <ul>
                 <li>
                   <label class="custom_radio">Lowest to highest
-                    <input type="radio" checked="checked" name="price_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='lh_price'"
+                      (click)="sortHotelData('selling_price','ASC','lh_price')"> <span class="checkmark"></span>
+                  </label>
                 </li>
                 <li>
                   <label class="custom_radio">highest to lowest
-                    <input type="radio" name="price_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='hl_price'"
+                      (click)="sortHotelData('selling_price','DESC','hl_price')"> <span class="checkmark"></span>
+                  </label>
                 </li>
               </ul>
             </div>
@@ -34,11 +38,15 @@
               <ul>
                 <li>
                   <label class="custom_radio">Shortest
-                    <input type="radio" name="duration_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='lh_duration'"
+                      (click)="sortHotelData('total_duration','ASC','lh_duration')"> <span class="checkmark"></span>
+                  </label>
                 </li>
                 <li>
                   <label class="custom_radio">Longest
-                    <input type="radio" name="duration_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='hl_duration'"
+                      (click)="sortHotelData('total_duration','DESC','hl_duration')"> <span class="checkmark"></span>
+                  </label>
                 </li>
               </ul>
             </div>
@@ -47,11 +55,13 @@
               <ul>
                 <li>
                   <label class="custom_radio">Earliest
-                    <input type="radio" name="arrival_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='lh_arrival'"
+                      (click)="sortHotelData('arrival','ASC','lh_arrival')"> <span class="checkmark"></span> </label>
                 </li>
                 <li>
                   <label class="custom_radio">Shortest
-                    <input type="radio" name="arrival_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='hl_arrival'"
+                      (click)="sortHotelData('arrival','DESC','hl_arrival')"> <span class="checkmark"></span> </label>
                 </li>
               </ul>
             </div>
@@ -60,11 +70,15 @@
               <ul>
                 <li>
                   <label class="custom_radio">Earliest
-                    <input type="radio" name="departure_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='lh_departure'"
+                      (click)="sortHotelData('departure','ASC','lh_departure')"> <span class="checkmark"></span>
+                  </label>
                 </li>
                 <li>
                   <label class="custom_radio">Shortest
-                    <input type="radio" name="departure_radio"> <span class="checkmark"></span> </label>
+                    <input type="radio" [checked]="sortType=='hl_departure'"
+                      (click)="sortHotelData('departure','DESC','hl_departure')"> <span class="checkmark"></span>
+                  </label>
                 </li>
               </ul>
             </div>

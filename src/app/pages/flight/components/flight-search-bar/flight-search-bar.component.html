@@ -7,7 +7,7 @@
             <li class="nav-item">
               <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('onway')" data-toggle="tab" href="#Oneway">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg"
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg"
                   alt="Oneway Icon" />
                 <span>Oneway</span>
               </a>
@@ -15,7 +15,7 @@
             <li class="nav-item">
               <a class="nav-link"  [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg"
                   alt="Return Icon" />
                 <span>Round Trip</span>
               </a>
@@ -64,14 +64,12 @@
                       </div>
                       <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                         <a class="anchor-text" (click)="swapAirport()">
-                          <img *ngIf="countryCode!=='DR'" src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
-                                                            alt="Switch Image" />
-                          <img *ngIf="countryCode==='DR'" src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
+                          <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
                                                             alt="Switch Image" />
                         </a>
                       </div>
                       <div class="flight_to">
-                        <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                        <div class="search_area">
                           <label>To</label>
                           
                           <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="display_name"
@@ -97,7 +95,7 @@
                     </li>
                     <li class="grid_box secound">
                       <div class="date_form">
-                        <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                        <div class="search_area">
                           <label>Departure</label>
                           <p-calendar 
                               inputId="basic" 
@@ -126,7 +124,7 @@
                           <label>Return</label>
                           <p (click)="toggleOnewayRoundTrip('roundtrip')">Tap to add return date</p>
                         </div>
-                        <div class="search_area" *ngIf="isRoundTrip" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                        <div class="search_area" *ngIf="isRoundTrip">
                           <label>Return</label>
                           <p-calendar 
                               inputId="basic" 

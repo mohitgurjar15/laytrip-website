@@ -3,15 +3,6 @@
     <div class="block_top_in">
       <h5>Price</h5>
     </div>
-    <form [formGroup]="priceSlider">
-      <div class="custom_range_slide">
-        <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
-        <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
-          [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
-          (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
-        <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
-      </div>
-    </form>
     <ul class="block_price_radio">
       <li>
         <label class="custom_radio">Total
@@ -22,11 +13,15 @@
           <input type="radio" name="fl_price_radio"> <span class="checkmark"></span> </label>
       </li>
     </ul>
-    <div class="range_slid">
-      <p>
-        <input type="text" id="price-amount" class="amount" readonly> </p>
-      <div id="price-range" class="slid_rang"></div>
-    </div>
+    <form [formGroup]="priceSlider">
+      <div class="custom_range_slide">
+        <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+        <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
+          [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
+          (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
+        <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
+      </div>
+    </form>
   </div>
   <div class="cmn_block">
     <div class="block_top_in">
@@ -56,7 +51,7 @@
               <ul>
                 <li *ngFor="let item of ratingStar | keyvalue">
                   <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>{{item.key}} Star</label> <span><img
+                    <input type="checkbox" value="{{item.key}}" (click)="filterByRatings($event,item.key)"> <span class="checkmark"></span>{{item.key}} Star</label> <span><img
                       src="{{s3BucketUrl}}assets/images/icon/stars/{{item.key}}s.svg" alt="5 Stars Icon"></span></li>
                 <!-- <li>
                   <label class="custom_checkbox">
@@ -95,21 +90,6 @@
                 <li *ngFor="let item of amenities | keyvalue">
                   <label class="custom_checkbox">
                     <input type="checkbox" value=""> <span class="checkmark"></span>{{item.key}}</label></li>
-                <!-- <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>Airport</label></li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>Parking</label></li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>Fitness centre</label></li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>Pool</label></li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>Spa</label></li> -->
               </ul>
             </div>
           </div>
