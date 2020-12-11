@@ -1,0 +1,84 @@
+ <!-- Start Search Modify section -->
+        <section class="modify_search home_rental">
+            <div class="container">
+                <div class="row">
+                 <form [formGroup]="rentalSearchForm" novalidate autocomplete="off">
+                    <div class="home_search">
+                        <ul class="home-grid oneway">
+                            <li class="grid_box first">
+                                <div class="hotel_where">
+                                    <div class="search_area">
+                                        <label>Destination</label>
+                                        <!-- {{data | json }} -->
+                                         <ng-select [formControlName]="'fromDestination'" [loading]="loading" [selectOnTab]="true" [items]="data"
+                                         bindLabel="display_name" bindValue="id" [(ngModel)]="defaultData" notFoundText="" [virtualScroll]="true" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)" (clear)="onRemove($event)"
+                                          class="laytrip-input" placeholder="Destination" [tabIndex]="tabIndex" >
+                                           <ng-template ng-option-tmp  let-item="item" let-index="index" let-search="searchTerm">
+                                            <div>
+                                            {{item.city}},{{item.country}}-{{item.display_name}}
+                                            </div>
+                                           </ng-template>
+                                            <ng-template ng-label-tmp let-item="item">
+                                            {{item.city}}
+                                            </ng-template>
+                                         </ng-select>
+                                      </div>
+                                </div>
+                            </li>
+                            <li class="grid_box secound">
+                                <div class="date_form">
+                                    <div class="search_area"
+                                        [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                        <label>Check In</label>
+                                        <p-calendar inputId="basic" [(ngModel)]="rentalForm.check_in_date"
+                                         [ngModelOptions]="{standalone: true}"rentalCheckInMinDate
+                                         [minDate]="rentalCheckInMinDate"
+                                         (onSelect)=rentalDateUpdate($event)
+                                         [readonlyInput]="true">
+                                        </p-calendar>
+                                        <div class="prev-next">
+                                          <a (click)="dateChange('checkIn','previous')">Prev</a>
+                                          <a (click)="dateChange('checkIn','next')">Next</a>
+                                        </div>
+                                   </div>
+                                </div>
+                                <div class="date_to">
+                                   <div class="search_area"
+                                    [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                    <label>Check OUT</label>
+                                    <p-calendar inputId="basic" [(ngModel)]="rentalForm.check_out_date"
+                                     [ngModelOptions]="{standalone: true}"rentalCheckoutMinDate
+                                     [minDate]="rentalCheckoutMinDate"
+                                     [readonlyInput]="true">
+                                    </p-calendar>
+                                    <div class="prev-next">
+                                      <a (click)="dateChange('checkOut','previous')">Prev</a>
+                                      <a (click)="dateChange('checkOut','next')">Next</a>
+                                    </div>
+                                 </div>
+                                </div>
+                            </li>
+                              <li class="grid_box third">
+                                <div class="travellers">
+                                <app-rental-info label="GUEST"
+                                (changeValue)="changeRentalInfo($event)">
+                                </app-rental-info>
+                                   <!--  <div class="search_area">
+                                        <label>Guest</label>
+                                        <div class="travel_info"> <span>01</span> Traveller
+                                            <div class="drop_aerrow"></div>
+                                        </div> <span>Economy</span>
+                                    </div> -->
+                                </div>
+                            </li>
+                            
+                        </ul>
+                        <div class="serch_btn">
+                            <button><span>Modify Search</span></button>
+                        </div>
+                    </div>
+                 </form>
+                </div>
+            </div>
+        </section>
+        <!-- Close Search Modify section -->

@@ -66,7 +66,7 @@
                             alt="Flight Icon">
                         <span>Hotel</span>
                     </a>
-                    <a class="nav-item nav-link disabled" id="nav-accommodation" role="tab" aria-selected="false"
+                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-selected="false"
                         (click)="clickOnTab('home-rentals')">
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg"
                             alt="Accommodation Icon" />
@@ -86,7 +86,7 @@
                     <app-hotel-search-widget></app-hotel-search-widget>
                 </div>
                 <div class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
-                    <h2>Accommodation</h2>
+                    <app-vacation-search-widget></app-vacation-search-widget>
                 </div>
             </div>
         </div>
