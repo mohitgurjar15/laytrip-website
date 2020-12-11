@@ -103,7 +103,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     };
 
     let host = window.location.origin;
-    if(host.includes("hotel-vr")){
+    if(host.includes("staging")){
       this.showCommingSoon=true;
     }
   }

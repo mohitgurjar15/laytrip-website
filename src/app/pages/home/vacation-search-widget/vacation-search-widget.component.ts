@@ -64,7 +64,7 @@ export class VacationSearchWidgetComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
     let host = window.location.origin;
-    if(host.includes("hotel-vr")){
+    if(host.includes("staging")){
       this.showCommingSoon=true;
     }
   }
