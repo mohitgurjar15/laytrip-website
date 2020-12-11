@@ -1,0 +1,120 @@
+<div class="fliter_block">
+  <div class="cmn_block price">
+    <div class="block_top_in">
+      <h5>Price</h5>
+    </div>
+    <ul class="block_price_radio">
+      <li>
+        <label class="custom_radio">Total
+          <input type="radio" checked="checked" name="fl_price_radio"> <span class="checkmark"></span> </label>
+      </li>
+      <li>
+        <label class="custom_radio">Weekly
+          <input type="radio" name="fl_price_radio"> <span class="checkmark"></span> </label>
+      </li>
+    </ul>
+    <form [formGroup]="priceSlider">
+      <div class="custom_range_slide">
+        <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+        <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
+          [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
+          (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
+        <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
+      </div>
+    </form>
+  </div>
+  <div class="cmn_block">
+    <div class="block_top_in">
+      <h5>Hotel Name</h5>
+    </div>
+    <div class="searchbar_box">
+      <!-- <input type="text" id="" class="amount" placeholder="Ahmedabad"> -->
+      <label for="">Search Hotel</label>
+      <ng-select [items]="people" bindLabel="name" [loading]="peopleLoading" placeholder="Search Hotel">
+      </ng-select>
+      <div class="search_btns">
+        <a>Clear</a>
+        <a>Search</a>
+      </div>
+    </div>
+  </div>
+  <div class="cmn_block pad_no">
+    <div class="accordion block_shortby" id="accordion-starrates">
+      <div class="accordion-group">
+        <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse"
+            data-parent="#accordion-starrates" href="#collapseOutbound">
+            Star ratings
+          </a> </div>
+        <div id="collapseOutbound" class="accordion-body filter_acc collapse">
+          <div class="accordion-inner">
+            <div class="block_cmn stop">
+              <ul>
+                <li *ngFor="let item of ratingStar | keyvalue">
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value="{{item.key}}" (click)="filterByRatings($event,item.key)"> <span class="checkmark"></span>{{item.key}} Star</label> <span><img
+                      src="{{s3BucketUrl}}assets/images/icon/stars/{{item.key}}s.svg" alt="5 Stars Icon"></span></li>
+                <!-- <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value=""> <span class="checkmark"></span>4 Star</label> <span><img
+                      src="{{s3BucketUrl}}assets/images/icon/stars/4s.svg" alt="5 Stars Icon"></span> </li>
+                <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value=""> <span class="checkmark"></span>3 Star</label> <span><img
+                      src="{{s3BucketUrl}}assets/images/icon/stars/3s.svg" alt="5 Stars Icon"></span> </li>
+                <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value=""> <span class="checkmark"></span>2 Star</label> <span><img
+                      src="{{s3BucketUrl}}assets/images/icon/stars/2s.svg" alt="5 Stars Icon"></span> </li>
+                <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value=""> <span class="checkmark"></span>1 Star</label> <span><img
+                      src="{{s3BucketUrl}}assets/images/icon/stars/1s.svg" alt="5 Stars Icon"></span> </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cmn_block pad_no">
+    <div class="accordion block_shortby" id="accordion-amenities">
+      <div class="accordion-group">
+        <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse"
+            data-parent="#accordion-amenities" href="#collapseInbound">
+            Amenities
+          </a> </div>
+        <div id="collapseInbound" class="accordion-body filter_acc collapse">
+          <div class="accordion-inner">
+            <div class="block_cmn stop">
+              <ul>
+                <li *ngFor="let item of amenities | keyvalue">
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value=""> <span class="checkmark"></span>{{item.key}}</label></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cmn_block departure_to">
+    <div class="block_top_in">
+      <h5>Cancellation Policy</h5>
+      <!--<a class="view_more" href="javascript:void(0);">Show All</a> -->
+    </div>
+    <ul>
+      <li>
+        <label class="custom_checkbox">
+          <input type="checkbox" value=""> <span class="checkmark"></span>
+          <p>Free Cancellation</p>
+        </label>
+      </li>
+      <li>
+        <label class="custom_checkbox">
+          <input type="checkbox" value=""> <span class="checkmark"></span>
+          <p>Non Refundable</p>
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+@import "./../../../../../cstm-variable";
+
+.flight_form {
+    position: relative;
+}
+.laytrip-input {
+    width: 100%;
+    border: none;
+    height: 30px;
+    margin-bottom: 0px;
+    font-size: 20px;
+    color: #8188ab;
+    font-weight: 600;
+}
+
+.item-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 12px 0px 0px;
+        border-bottom: 1px solid $box-border-color;
+        margin-left: 15px;
+
+        .item-left {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            p {
+                font-size: 14px;
+                margin: 0;
+                color: $text-black;
+                font-weight: 400;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                &:last-child {
+                    font-size: 10px;
+                    color: $text-grey;
+                    margin: 2px 0 0;
+                }
+            }
+            .item-name {
+                font-size: 20px;
+                font-weight: 600;
+                color: #012178;
+            }
+        }
+
+        .item-right {
+            p {
+                width: 35px;
+                font-size: 14px;
+                color: $text-black;
+                font-weight: 500;
+                text-align: center;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.disable-div {
+    cursor: not-allowed;
+    background-color: rgb(235, 235, 228) !important;
+    & input {
+        cursor: not-allowed !important;
+    }
+}
+
+.disable-btn {
+    cursor: not-allowed;
+}
+
+.modify_search {
+    .flight_tab {
+        .tab-content {
+            .flight_search {
+                .flight-grid {
+                    .grid_box {
+                        &.first {
+                            .search_area {
+                                padding: 5px 0 !important;
+                            }
+                        }
+                        &.secound {
+                            .date_form {
+                                position: relative;
+                            }
+
+                            .date_to {
+                                position: relative;
+                                height: 100%;
+                            }
+
+                            .search_area {
+                                height: 100%;
+                                display: flex;
+                                flex-flow: column;
+                                justify-content: space-between;
+                                input {
+                                    width: 100%;
+                                    left: 0;
+                                    position: relative;
+                                    &.date_icon {
+                                        position: absolute;
+                                        top: 50%;
+                                        right: 0;
+                                        transform: translateY(-50%);
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg)
+                                            no-repeat;
+                                        background-position: center right 15px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.disable_return_date {
+    height: 100%;
+    p {
+        padding: 0 15px;
+        margin: 0;
+        font-size: 16px;
+        color: $text-grey;
+        cursor: pointer;
+        line-height: normal;
+    }
+}
+
+::ng-deep .calender-price-view {
+    //width: 340px;
+    min-width: 340px !important;
+    .ui-state-active {
+        background-color: #012178 !important;
+        .calender_price {
+            color: #fff !important;
+        }
+    }
+}
+
+.calender-header {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+}

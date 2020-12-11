@@ -1,0 +1,21 @@
+.search_result
+    .result_listing.one_way_list
+    .search_block
+    .detail_info_show
+    .tab-content
+    .card-body
+    .tab_detail.fare_detail_cnt
+    p {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.view_more {
+    cursor: pointer;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}

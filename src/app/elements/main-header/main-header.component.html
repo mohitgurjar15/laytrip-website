@@ -81,7 +81,7 @@
                                 </a>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-                                <a class="nav-link login_btn hover-link" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">Sign In</a>
+                                <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">Sign In</a>
                             </li>
 
                             <li class="nav-item" *ngIf="isLoggedIn && userDetails.roleId != 7">
