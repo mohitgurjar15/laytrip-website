@@ -3,7 +3,7 @@
       <div class="home_search">
          <ul class="home-grid oneway">
             <li class="grid_box first">
-               <div class="hotel_where" [ngClass]="{'homecheck-error':rentalSearchFormSubmitted&&  rentalSearchForm.controls.fromDestination.errors && rentalSearchForm.controls.fromDestination.errors.required==true}">
+               <div class="home_where" [ngClass]="{'homecheck-error':rentalSearchFormSubmitted&&  rentalSearchForm.controls.fromDestination.errors && rentalSearchForm.controls.fromDestination.errors.required==true}">
                   <div class="search_area">
                      <label>Destination</label>
                       <ng-select [formControlName]="'fromDestination'" [loading]="loading" [selectOnTab]="true" [items]="data"

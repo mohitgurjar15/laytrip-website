@@ -696,7 +696,7 @@
                 width: auto;
                 padding: 10px 25px;
                 background: $primary-color;
-                border-radius: 8px;
+                border-radius: 30px;
                 border: none;
                 font-size: 20px;
                 color: $text-white;
@@ -782,7 +782,7 @@
                         flex-flow: column;
                     }
 
-                    .hotel_where {
+                    .home_where {
                         width: 100%;
                         @include ipad-view {
                             width: 100%;
@@ -1279,7 +1279,7 @@
                 width: auto;
                 padding: 10px 25px;
                 background: $primary-color;
-                border-radius: 8px;
+                border-radius: 30px;
                 border: none;
                 font-size: 20px;
                 color: $text-white;
@@ -2184,7 +2184,7 @@
                 border: 1px solid $box-border-color;
                 background: $background-white;
                 border-radius: 3px;
-                max-height: calc(100vh - 310px);
+                max-height: calc(100vh - 334px);
                 overflow-y: auto;
                 overflow-x: hidden;
 
@@ -2698,7 +2698,8 @@
                                     .hotel_list_img_wrp {
                                         position: relative;
                                         img {
-                                            width: 100%;
+                                            max-width: 100%;
+                                            height: 100%;
                                         }
                                         .fav_sections {
                                             position: absolute;
@@ -2736,7 +2737,7 @@
                                             font-size: 20px;
                                             color: $text-black;
                                             font-weight: 600;
-                                            margin-bottom: 5px;
+                                            margin: 10px 0 5px;
 
                                             @media (max-width: 767px) {
                                                 font-size: 16px;
@@ -3825,7 +3826,8 @@
                             .hotel_list_img_wrp {
                                 position: relative;
                                 img {
-                                    width: 100%;
+                                    max-width: 100%;
+                                    height: 100%;
                                 }
                                 .fav_sections {
                                     position: absolute;
@@ -4696,7 +4698,7 @@
                 border: 1px solid $box-border-color;
                 background: $background-white;
                 border-radius: 3px;
-                max-height: calc(100vh - 310px);
+                max-height: calc(100vh - 334px);
                 overflow-y: auto;
                 overflow-x: hidden;
                 
@@ -5186,7 +5188,8 @@
                                     .hotel_list_img_wrp {
                                         position: relative;
                                         img {
-                                            width: 100%;
+                                            max-width: 100%;
+                                            height: 100%;
                                         }
                                         .fav_sections {
                                             position: absolute;
@@ -5224,7 +5227,7 @@
                                             font-size: 20px;
                                             color: $text-black;
                                             font-weight: 600;
-                                            margin-bottom: 5px;
+                                            margin: 10px 0 5px;
 
                                             @media (max-width: 767px) {
                                                 font-size: 16px;
@@ -6300,7 +6303,8 @@
                             .hotel_list_img_wrp {
                                 position: relative;
                                 img {
-                                    width: 100%;
+                                    max-width: 100%;
+                                    height: 100%;
                                 }
                                 .fav_sections {
                                     position: absolute;
@@ -6535,69 +6539,50 @@
 .hotel_detail_slider {
     padding-bottom: 40px;
 
-    .slider-container {
-        .slider-for {
-            margin-bottom: 15px;
+    .slider_main_contain {
+        position: relative;
 
-            img {
-                width: 100%;
-                min-height: 100%;
+        ngx-gallery{
+            width: 100% !important;
+            height: 500px !important;
+        }
 
-                .item-slick {
-                }
+        .slider-overlay {
+            position: absolute;
+            width: 100%;
+            bottom: 10px;
+            padding: 20px;
+            color: $text-white;
+            margin: 0px;
+
+            .hotel_name {
+                padding-bottom: 30px;
             }
 
-            .slick-track {
-                .slick-slide {
-                    &:before {
-                        content: "";
-                        background-image: linear-gradient(180deg, transparent, $text-black);
-                        width: 100%;
-                        height: 100%;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                    }
-                }
+            #border {
+                position: relative;
+                width: 20%;
+                height: 1px;
+                background-color: $text-white;
+                margin: 0 0;
             }
 
-            .slider-overlay {
-                position: absolute;
-                width: 100%;
-                bottom: 10px;
-                padding: 20px;
-                color: $text-white;
-                margin: 0px;
+            .rate-box {
+                background: $text-white;
+                padding: 8px 5px;
+                border-radius: 10px;
+                color: $text-black;
+                text-align: center;
+                margin-right: 10px;
+            }
 
-                .hotel_name {
-                    padding-bottom: 30px;
-                }
+            .rating {
+                border-bottom: 2px solid;
+                padding-bottom: 6px;
+            }
 
-                #border {
-                    position: relative;
-                    width: 20%;
-                    height: 1px;
-                    background-color: $text-white;
-                    margin: 0 0;
-                }
-
-                .rate-box {
-                    background: $text-white;
-                    padding: 8px 5px;
-                    border-radius: 10px;
-                    color: $text-black;
-                    text-align: center;
-                    margin-right: 10px;
-                }
-
-                .rating {
-                    border-bottom: 2px solid;
-                    padding-bottom: 6px;
-                }
-
-                .room-rating {
-                    text-align: right;
-                }
+            .room-rating {
+                text-align: right;
             }
         }
 
