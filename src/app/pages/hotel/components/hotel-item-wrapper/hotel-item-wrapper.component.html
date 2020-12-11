@@ -46,7 +46,7 @@
                                                         <div class="stars_text">
                                                             <div class="stars_rating">
                                                                 <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
+                                                                    alt="Stars" *ngFor='let in of counter(item.rating)'>
                                                                 <!-- *ngFor='let in of counter(item.rating)' -->
                                                                 <!-- <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
                                                                     alt="Stars">
@@ -100,7 +100,7 @@
                                                 Details </a>
                                         </div>
                                         <div class="weekly_price_wrps">
-                                            <span>{{currency?.symbol}}{{item?.avg_night_price}}</span>/night
+                                            <span>{{currency?.symbol}}{{item?.selling?.avg_night_price}}</span>/night
                                         </div>
                                     </div>
                                 </div>
@@ -113,9 +113,12 @@
                 <div class="col-md-3 px-0">
                     <div class="block_price block_pr">
                         <div class="block_inn_pr">
-                            <div class="block">
+                            <div class="block" *ngIf="item.secondary_start_price > 0">
                                 <p>Room Starts from</p>
-                                <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span> /week</p>
+                                <p><span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> /week</p>
+                            </div>
+                            <div class="block" *ngIf="item.secondary_start_price === 0">
+                                <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
                             </div>
                         </div> <a class="book_btn" href="flight-add-passenger.html">Select</a>
                         <div class="show_detail">

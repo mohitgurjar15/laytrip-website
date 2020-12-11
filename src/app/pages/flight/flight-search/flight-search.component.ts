@@ -302,6 +302,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   filterFlight(event) {
+    console.log(event);
     this.flightDetails = event;
   }
 
