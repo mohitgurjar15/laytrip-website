@@ -23,17 +23,16 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted: boolean = false;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationCode='JFK';
-  departureCity='New York';
-  departureAirportCountry='JFK, USA';
-  fromAirport=airports[this.fromDestinationCode];
+  fromDestinationCode = 'JFK';
+  departureCity = 'New York';
+  departureAirportCountry = 'JFK, USA';
+  fromAirport = airports[this.fromDestinationCode];
   countryCode: string;
-  
-  
-  toDestinationCode='PUJ';
-  arrivalCity='Punta Cana';
-  arrivalAirportCountry='PUJ, Dominican Republic';
-  toAirport=airports[this.toDestinationCode];
+
+  toDestinationCode = 'PUJ';
+  arrivalCity = 'Punta Cana';
+  arrivalAirportCountry = 'PUJ, Dominican Republic';
+  toAirport = airports[this.toDestinationCode];
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -87,6 +86,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.countryCode = this.commonFunction.getUserCountry();
   }
 
 
@@ -94,12 +94,12 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (event && event.key && event.key === 'fromSearch') {
       this.fromDestinationCode = event.value.code;
       this.departureCity = event.value.city;
-      this.departureAirportCountry = `${event.value.code}, ${event.value.country}`
+      this.departureAirportCountry = `${event.value.code}, ${event.value.country}`;
       this.searchedValue.push({ key: 'fromSearch', value: event.value });
     } else if (event && event.key && event.key === 'toSearch') {
       this.toDestinationCode = event.value.code;
       this.arrivalCity = event.value.city;
-      this.arrivalAirportCountry = `${event.value.code}, ${event.value.country}`
+      this.arrivalAirportCountry = `${event.value.code}, ${event.value.country}`;
       this.searchedValue.push({ key: 'toSearch', value: event.value });
     }
     this.searchFlightInfo.departure = this.fromDestinationCode;
@@ -157,8 +157,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   departureDateUpdate(date) {
-    this.returnDate = new Date(date)
-    this.flightReturnMinDate = new Date(date)
+    this.returnDate = new Date(date);
+    this.flightReturnMinDate = new Date(date);
   }
 
   dateChange(type, direction) {

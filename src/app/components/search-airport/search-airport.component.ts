@@ -13,14 +13,14 @@ import { CookieService } from 'ngx-cookie';
 export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   @Input() label: string;
-  @Input() tabIndex:number;
+  @Input() tabIndex: number;
   @Input() placeHolder: string;
   @Input() defaultSelected: string;
   @Input() id;
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
-  @Input() defaultCity:string;
+  @Input() defaultCity: string;
   @Input() airport;
   defaultSelectedTemp;
   airportDefaultDestValue;
@@ -29,11 +29,11 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   constructor(
     private flightService: FlightService,
     public cd: ChangeDetectorRef,
-    public cookieService:CookieService
+    public cookieService: CookieService
   ) {
   }
 
-  selectedAirport:any = {};
+  selectedAirport: any = {};
   keyword = 'name';
   data = [];
   loading = false;
@@ -41,21 +41,19 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.defaultSelectedTemp = this.defaultSelected;
     this.setDefaultAirport();
-    this.data[0]=this.airport;
-    console.log(this.airport,"+++")
+    this.data[0] = this.airport;
   }
 
   ngDocheck() {
   }
 
   ngAfterViewChecked() {
-    
+
   }
 
   searchAirport(searchItem) {
     this.loading = true;
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
-      // console.log(response);
       this.data = response.map(res => {
         this.loading = false;
         return {
@@ -100,12 +98,11 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
     this.defaultSelected = this.defaultSelectedTemp;
   }
 
-  setDefaultAirport(){
-    console.log("Innnn")
-    try{
-      let location:any = this.cookieService.get('__loc');
+  setDefaultAirport() {
+    try {
+      let location: any = this.cookieService.get('__loc');
       location = JSON.parse(location);
-      if(typeof location.airport!=='undefined'){
+      if (typeof location.airport !== 'undefined') {
         /* location.airport.display_name = `${location.city},${location.country},(${location.code}),${location.name}`,
         this.data[0] = location.airport;
         this.airportDefaultDestValue = this.data[0].city;
@@ -113,7 +110,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
         this.selectedAirport = this.data[0]; */
       }
     }
-    catch(error){
+    catch (error) {
 
     }
   }

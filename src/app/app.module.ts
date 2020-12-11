@@ -30,14 +30,14 @@ import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
     ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    SocialLoginModule
+    SocialLoginModule,
   ],
   providers: [
     {

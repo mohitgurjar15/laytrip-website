@@ -1,0 +1,52 @@
+@import "../../../../cstm-variable";
+
+.hotel-error {
+    border: 1px solid red;
+    border-radius: 8px;
+}
+.date_form {
+    .autocomplete-container {
+        box-shadow: none !important;
+    }
+}
+
+.disable-div {
+    cursor: not-allowed;
+    background-color: rgb(235, 235, 228) !important;
+    & input {
+        cursor: not-allowed !important;
+    }
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range,
+.custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+
+.custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+}
+
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.custom-day.day-disabled {
+    color: lightgrey !important;
+}
