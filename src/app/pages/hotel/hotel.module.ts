@@ -15,7 +15,7 @@ import { HotelSearchBarComponent } from './components/hotel-search-bar/hotel-sea
 import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ComponentsModule } from '../../components/components.module';
-import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
+// import { ClickOutSideDirective } from '../../_helpers/clickOutSide.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CookieModule } from 'ngx-cookie';
@@ -25,6 +25,9 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 // NGX-GALLERY
 import { NgxGalleryModule } from 'ngx-gallery';
+
+// HELPERS MODULE
+import { HelpersModule } from '../../_helpers/_helpers.module';
 
 @NgModule({
   declarations: [
@@ -37,13 +40,14 @@ import { NgxGalleryModule } from 'ngx-gallery';
     FilterHotelComponent,
     HotelItemWrapperComponent,
     HotelSearchBarComponent,
-    ClickOutSideDirective,
+    // ClickOutSideDirective,
     HotelDetailComponent,
   ],
   imports: [
     CommonModule,
     HotelRoutingModule,
     Ng5SliderModule,
+    HelpersModule,
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,

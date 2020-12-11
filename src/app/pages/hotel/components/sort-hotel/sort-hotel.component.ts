@@ -11,12 +11,21 @@ export class SortHotelComponent implements OnInit {
 
   @Output() sortHotel = new EventEmitter<{ key: string, order: string }>();
   @Input() hotelDetails;
+  locationName;
+  sortType: string = 'lh_price';
+  lowToHighToggle: boolean = false;
 
   constructor(
   ) {
   }
 
   ngOnInit() {
+    const info = JSON.parse(localStorage.getItem('_hote'));
+    info.forEach(i => {
+      if (i.key === 'fromSearch') {
+        this.locationName = i.value.city;
+      }
+    });
     this.loadJquery();
   }
 
@@ -29,6 +38,28 @@ export class SortHotelComponent implements OnInit {
     $(document).on('hide', '#accordion', function (e) {
       $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
     });
+  }
+
+  sortHotelData(key, order, name) {
+    this.sortType = name;
+    this.sortHotel.emit({ key, order })
+  }
+
+  resetSorting(key, order) {
+    this.sortType = 'lh_price';
+    this.sortHotel.emit({ key, order })
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['hotelDetails'].currentValue != 'undefined') {
+      if (this.hotelDetails != 'undefined') {
+        this.hotelDetails = changes['hotelDetails'].currentValue;
+      }
+    }
+  }
+
+  toggleLowToHigh() {
+    this.lowToHighToggle = !this.lowToHighToggle;
   }
 
 }

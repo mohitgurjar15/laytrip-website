@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { HotelService } from 'src/app/services/hotel.service';
+import { HotelService } from '../../../services/hotel.service';
 
 @Component({
   selector: 'app-hotel-search',
@@ -23,13 +23,14 @@ export class HotelSearchComponent implements OnInit {
   isNotFound = false;
   hotelDetails;
   filterHotelDetails;
+  temp = [];
 
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
   ) {
     // document.getElementById('login_btn').style.background = '#FF00BC';
-   }
+  }
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -60,8 +61,9 @@ export class HotelSearchComponent implements OnInit {
     this.errorMessage = '';
     this.hotelService.getHotelSearchResult(payload).subscribe((res: any) => {
       this.hotelDetails = res.data.hotels;
+      this.temp = res.data.hotels;
       if (res && res.data) {
-        const payload = {token: res.data.details.token};
+        const payload = { token: res.data.details.token };
         this.hotelService.getFilterObjectsHotel(payload).subscribe((response: any) => {
           if (response && response.data) {
             this.filterHotelDetails = response.data;
@@ -103,7 +105,45 @@ export class HotelSearchComponent implements OnInit {
     // console.log("After Key:", key, this.hotelDetails)
   }
 
+  // sortJSON(data, key, way) {
+  //   if (typeof data === "undefined") {
+  //     return data;
+  //   } else {
+  //     return data.sort(function (a, b) {
+  //       var x = a[key];
+  //       var y = b[key];
+  //       if (way === 'ASC') {
+  //         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  //       }
+  //       if (way === 'DESC') {
+  //         return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+  //       }
+  //     });
+  //   }
+  // }
+
+  // sortByDuration(data, key, way) {
+  //   if (typeof data === "undefined") {
+  //     return data;
+  //   }
+  //   else {
+  //     return data.sort(function (a, b) {
+  //       let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+  //       let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+  //       console.log(`${a.arrival_date} ${a.arrival_time}`, `${a.departure_date} ${a.departure_time}`, x, y, way)
+  //       if (way === 'ASC') {
+  //         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  //       }
+  //       if (way === 'DESC') {
+  //         return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+  //       }
+  //     });
+  //   }
+  // }
+
   filterHotel(event) {
-    this.hotelDetails = event;
+    if (event && event.key && event.key === 'rating') {
+      
+    }
   }
 }

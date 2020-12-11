@@ -60,7 +60,6 @@ export class HotelSearchBarComponent implements OnInit {
 
   ngOnInit() {
     const info = JSON.parse(localStorage.getItem('_hote'));
-    console.log(info);
     info.forEach(i => {
       if (i.key === 'fromSearch') {
         this.defaultCity = i.value.city;
@@ -132,6 +131,18 @@ export class HotelSearchBarComponent implements OnInit {
         this.loadingDestination = false;
       }
     );
+  }
+
+  selectEvent(event, data) {
+
+  }
+
+  dateChange(type, direction) {
+
+  }
+
+  modifySearch() {
+    
   }
 
   // checkInDateUpdate(date) {
