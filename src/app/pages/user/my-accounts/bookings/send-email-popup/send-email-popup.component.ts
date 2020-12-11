@@ -1,13 +1,11 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { resetCompiledComponents } from '@angular/core/src/render3/jit/module';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { FlightService } from 'src/app/services/flight.service';
-import { UserService } from 'src/app/services/user.service';
+import { FlightService } from '../../../../../services/flight.service';
 import { environment } from '../../../../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
