@@ -35,7 +35,6 @@
               "src/dr_home.scss",
               "src/flight.scss",
               "src/hotel.scss",
-              "src/vacation.scss",
               "src/account.scss",
               "src/comman-modal.scss",
               "src/laytrip.scss",
@@ -43,7 +42,7 @@
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/primeng/resources/themes/bootstrap/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
-           ],
+            ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
@@ -144,7 +143,7 @@
             "varshil": {
               "browserTarget": "laytrip-website:build:varshil"
             },
-             "keyur": {
+            "keyur": {
               "browserTarget": "laytrip-website:build:keyur"
             }
           }
@@ -172,7 +171,7 @@
               "src/laytrip.scss",
               "src/assets/css/daterangepicker.min.css",
               "node_modules/ngx-toastr/toastr.css"
-     ],
+            ],
             "scripts": [],
             "assets": [
               "src/favicon.ico",

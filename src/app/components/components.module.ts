@@ -61,6 +61,7 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+    // HOTEL SHARED COMPONENT
     GuestInfoComponent,
     SearchHotelComponent,
     RentalInfoComponent
@@ -100,6 +101,7 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+    // HOTEL SHARED COMPONENT
     GuestInfoComponent,
     SearchHotelComponent,
     RentalInfoComponent

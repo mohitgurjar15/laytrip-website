@@ -33,7 +33,7 @@
                                         <div class="block_detail_top">
                                             <div class="detail_info">
                                                 <h4>{{item?.name}}</h4>
-                                                <span><img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
+                                                <span class="adress_span"><img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
                                                         alt="Map pin">
                                                     {{item?.full_address}}</span>
                                                 <div class="review_section_wrap">
@@ -77,11 +77,11 @@
                                                                     alt="">
                                                             </div>
                                                             <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/tv_icon.svg"
+                                                                <img src="{{s3BucketUrl}}assets/images/hotels/nosmoking.svg"
                                                                     alt="">
                                                             </div>
                                                             <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/tv_icon.svg"
+                                                                <img src="{{s3BucketUrl}}assets/images/hotels/ac.svg"
                                                                     alt="">
                                                             </div>
                                                         </div>
@@ -185,7 +185,11 @@
 <div class="result_listing hotel_map_listings" [hidden]="!isMapView">
     <div class="col-lg-12" *ngFor="let item of hotelListArray; let blockIndex = index;">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-8">
+                <div id="map"></div>
+                <!-- <img src="{{s3BucketUrl}}assets/images/hotels/map.svg" alt="Map image" style="width: 100%;"> -->
+            </div>
+            <div class="col-lg-4 pl-0">
                 <div class="search_block">
                     <div class="listing_block">
                         <div class="block_main">
@@ -229,7 +233,7 @@
                                                     <h4>{{item?.name}}</h4>
                                                     <div class="place_name">
                                                         <div>
-                                                            <span>
+                                                            <span class="adress_span">
                                                                 <img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
                                                                     alt="Map pin"> {{item?.full_address}}
                                                             </span>
@@ -269,10 +273,6 @@
 
 
                 </div>
-            </div>
-            <div class="col-lg-8 pl-0">
-                <div id="map"></div>
-                <!-- <img src="{{s3BucketUrl}}assets/images/hotels/map.svg" alt="Map image" style="width: 100%;"> -->
             </div>
         </div>
     </div>
