@@ -9,9 +9,9 @@
                <div class="hotel_where" [ngClass]="{'homecheck-error':rentalSearchFormSubmitted&&  rentalSearchForm.controls.fromDestination.errors && rentalSearchForm.controls.fromDestination.errors.required==true}">
                   <div class="search_area">
                      <label>Destination</label>
-                      <ng-select [formControlName]="'fromDestination'" [loading]="loading" [selectOnTab]="true" [items]="data"
+                      <ng-select [formControlName]="'fromDestination'" [selectOnTab]="true" [items]="data"
                      bindLabel="display_name" bindValue="id"  notFoundText="" [virtualScroll]="true" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)" (clear)="onRemove($event)"
-                       class="laytrip-input" placeholder="Destination" [tabIndex]="tabIndex" [(ngModel)]="rentalForm.id">
+                       class="laytrip-input" placeholder="Destination"  [(ngModel)]="rentalForm.id">
                        <ng-template ng-option-tmp  let-item="item" let-index="index" let-search="searchTerm">
                         <div>
                         {{item.city}},{{item.country}}-{{item.display_name}}
