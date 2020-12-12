@@ -56,6 +56,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
   geoCodes = [];
   mapCanvas;
   myLatLng;
+  map;
 
   hideDiv = true;
   showHotelDetails = [];
@@ -89,20 +90,18 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    this.hotelsList = this.hotelDetails;
+    this.hotelListArray = this.hotelDetails.hotels;
+    this.hotelListArray.forEach((i) => {
+      this.geoCodes.push(i.geocodes);
+    });
     this.userInfo = getLoginUserInfo();
     this.totalLaycredit();
     this.defaultLat = this.route.snapshot.queryParams['latitude'];
     this.defaultLng = this.route.snapshot.queryParams['longitude'];
-
-    this.hotelListArray = this.hotelsList;
-    this.hotelListArray.forEach(item => {
-      this.hotelDetailIdArray.push(item.route_code);
-    });
   }
 
   ngAfterContentChecked() {
-    this.hotelListArray = this.hotelsList;
+    this.hotelListArray = this.hotelDetails.hotels;
   }
 
   counter(i: any) {
@@ -116,13 +115,33 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
       this.isMapView = true;
       this.mapCanvas = document.getElementById('map');
       this.myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
-      this.initMap();
+      let mapOptions = {
+        zoom: 12,
+        center: this.myLatLng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false,
+        scrollwheel: true,
+      };
+      this.map = new google.maps.Map(this.mapCanvas, mapOptions);
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(this.myLatLng),
+        map: this.map,
+        // title: i.name,
+        animation: google.maps.Animation.DROP,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+      });
+      marker.setMap(this.map);
+      // if (typeof google === 'object' && typeof google.maps === 'object') {
+      //   console.log('yes');
+      // }
+      // this.initMap();
     }
   }
 
   initMap() {
-    // var mapCanvas = document.getElementById('map');
-    // const myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
+    this.mapCanvas = document.getElementById('map');
+    this.myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
     let mapOptions = {
       zoom: 12,
       center: this.myLatLng,
@@ -132,22 +151,35 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
       scrollwheel: true,
     };
     var map = new google.maps.Map(this.mapCanvas, mapOptions);
-    this.hotelListArray.forEach((i) => {
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(parseFloat(i.geocodes.latitude), parseFloat(i.geocodes.longitude)),
-        map: map,
-        title: i.name,
-        animation: google.maps.Animation.DROP,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-      });
-      marker.setMap(map);
-      let infowindow = new google.maps.InfoWindow({
-        content: i.name
-      });
-      marker.addListener("click", () => {
-        infowindow.open(map, marker);
-      });
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(this.myLatLng),
+      map: map,
+      // title: i.name,
+      animation: google.maps.Animation.DROP,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     });
+    marker.setMap(map);
+    if (typeof google === 'object' && typeof google.maps === 'object') {
+      console.log('yes');
+      setTimeout(() => {
+        this.geoCodes.forEach((i) => {
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(parseFloat(i.latitude), parseFloat(i.longitude)),
+            map: map,
+            title: i.name,
+            animation: google.maps.Animation.DROP,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+          });
+          marker.setMap(map);
+          let infowindow = new google.maps.InfoWindow({
+            content: i.name
+          });
+          marker.addListener("click", () => {
+            infowindow.open(map, marker);
+          });
+        });
+      }, 1000);
+    }
   }
 
   showDetails(index, flag = null) {

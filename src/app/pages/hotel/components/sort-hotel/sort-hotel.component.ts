@@ -42,7 +42,7 @@ export class SortHotelComponent implements OnInit {
 
   sortHotelData(key, order, name) {
     this.sortType = name;
-    this.sortHotel.emit({ key, order })
+    this.sortHotel.emit({ key, order });
   }
 
   resetSorting(key, order) {

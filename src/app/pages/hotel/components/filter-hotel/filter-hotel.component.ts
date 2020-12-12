@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
@@ -12,9 +12,9 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './filter-hotel.component.html',
   styleUrls: ['./filter-hotel.component.scss']
 })
-export class FilterHotelComponent implements OnInit, OnDestroy {
+export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() filterHotelDetails: any;
+  @Input() hotelDetailsMain: any;
   @Input() isResetFilter: string;
   @Output() filterHotel = new EventEmitter();
   depatureTimeSlot;
@@ -79,8 +79,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   };
 
   subscriptions: Subscription[] = [];
-  ratingStar;
-  amenities;
+  ratingStar = [];
+  amenities = [];
+  ratingArray = [];
+  amenitiesArray = [];
 
   people = [
     {
@@ -117,25 +119,34 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currency = JSON.parse(this._currency);
 
-    console.log(this.filterHotelDetails);
-    if (this.filterHotelDetails && this.filterHotelDetails.price) {
+    console.log(this.hotelDetailsMain);
+    if (this.hotelDetailsMain && this.hotelDetailsMain.filter_objects) {
       // FOR FILTER HOTEL - PRICE
-      this.priceValue = this.filterHotelDetails.price.min ? this.filterHotelDetails.price.min : 0;
-      this.priceHighValue = this.filterHotelDetails.price.max ? this.filterHotelDetails.price.max : 0;
+      this.priceValue = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
+      this.priceHighValue = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
       this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
 
       this.minPrice = this.priceValue;
       this.maxPrice = this.priceHighValue;
 
-      this.priceOptions.floor = this.filterHotelDetails.price.min ? this.filterHotelDetails.price.min : 0;
-      this.priceOptions.ceil = this.filterHotelDetails.price.max ? this.filterHotelDetails.price.max : 0;
+      this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
+      this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+
+      if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
+        this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
+        this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
+        this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
+
+        this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
+        this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+      }
+
+      this.amenities = this.hotelDetailsMain.filter_objects.ameneties;
+      this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
     }
-
-    this.ratingStar = this.filterHotelDetails.ratings;
-    this.amenities = this.filterHotelDetails.ameneties;
-
     this.loadJquery();
   }
+
 
   counter(i: any) {
     return new Array(i);
@@ -195,336 +206,119 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.showMinAirline = (type === 'more') ? 500 : 4;
   }
 
-
   /**
    * Filter by price range
    * @param event 
    */
-  // fliterByPrice(event) {
-  //   this.minPrice = event.value;
-  //   this.maxPrice = event.highValue;
-  //   this.filterFlights();
-  // }
+  fliterByPrice(event) {
+    this.minPrice = event.value;
+    this.maxPrice = event.highValue;
+    this.filterHotels();
+  }
 
   /**
    * Filter by hotel ratings
    * @param event 
    */
-  filterByRatings(event, index) {
-    console.log(event);
+  filterByHotelRatings(event, count) {
     if (event.target.checked === true) {
-      
-    } else {
-     
+      this.ratingArray.push(parseInt(count));
     }
+    else {
+      this.ratingArray = this.ratingArray.filter(item => {
+        return item != count;
+      })
+    }
+    this.filterHotels();
+    console.log('this.ratingArray::', this.ratingArray);
   }
 
   /**
-   * Filetr by airlines
-   * @param event 
-   */
-  // filterByAirline(event, index) {
-
-  //   if (event.target.checked === true) {
-  //     this.airLines.push(event.target.value)
-
-  //   }
-  //   else {
-  //     this.airLines = this.airLines.filter(airline => {
-
-  //       return airline != event.target.value;
-  //     })
-  //   }
-  //   this.airlineList[index].isChecked = !this.airlineList[index].isChecked;
-  //   this.filterFlights();
-  // }
-
-  // fliterByPartialPayment(event) {
-  //   this.minPartialPaymentPrice = event.value;
-  //   this.maxPartialPaymentPrice = event.highValue;
-  //   this.filterFlights();
-  // }
-
-  // filterByOutBoundDepartureTimeSlot(event, journey, type, slot) {
-
-  //   let slotValue: any = {
-  //     value: slot,
-  //     journey: journey,
-  //     type: type
-  //   }
-  //   if (event.target.checked) {
-
-  //     this.outBoundDepartureTimeRangeSlots.push(slotValue);
-  //   }
-  //   else {
-
-  //     this.outBoundDepartureTimeRangeSlots = this.outBoundDepartureTimeRangeSlots.filter(slot => {
-  //       return JSON.stringify(slot) !== JSON.stringify(slotValue);
-  //     })
-  //   }
-  //   this.filterFlights();
-  // }
-
-  // filterByOutBoundArrivalTimeSlot(event, journey, type, slot) {
-
-  //   let slotValue: any = {
-  //     value: slot,
-  //     journey: journey,
-  //     type: type
-  //   }
-  //   if (event.target.checked) {
-
-  //     this.outBoundArrivalTimeRangeSlots.push(slotValue);
-  //   }
-  //   else {
-
-  //     this.outBoundArrivalTimeRangeSlots = this.outBoundArrivalTimeRangeSlots.filter(slot => {
-  //       return JSON.stringify(slot) !== JSON.stringify(slotValue);
-  //     })
-  //   }
-  //   this.filterFlights();
-  // }
-
-  // filterByInBoundDepartureTimeSlot(event, journey, type, slot) {
-  //   let slotValue: any = {
-  //     value: slot,
-  //     journey: journey,
-  //     type: type
-  //   }
-  //   if (event.target.checked) {
-  //     this.inBoundDepartureTimeRangeSlots.push(slotValue);
-  //   }
-  //   else {
-  //     this.inBoundDepartureTimeRangeSlots = this.inBoundDepartureTimeRangeSlots.filter(slot => {
-  //       return JSON.stringify(slot) !== JSON.stringify(slotValue);
-  //     })
-  //   }
-  //   this.filterFlights();
-  // }
-
-  // filterByInBoundArrivalTimeSlot(event, journey, type, slot) {
-  //   let slotValue: any = {
-  //     value: slot,
-  //     journey: journey,
-  //     type: type
-  //   }
-  //   if (event.target.checked) {
-  //     this.inBoundArrivalTimeRangeSlots.push(slotValue);
-  //   }
-  //   else {
-  //     this.inBoundArrivalTimeRangeSlots = this.inBoundArrivalTimeRangeSlots.filter(slot => {
-  //       return JSON.stringify(slot) !== JSON.stringify(slotValue);
-  //     })
-  //   }
-  //   this.filterFlights();
-  // }
-
-  // filterByDepartureStop(event, stopCount) {
-
-  //   if (event.target.checked === true) {
-  //     this.outBoundStops.push(stopCount)
-  //   }
-  //   else {
-  //     this.outBoundStops = this.outBoundStops.filter(stop => {
-  //       return stop != stopCount
-  //     })
-  //   }
-  //   this.filterFlights();
-  // }
-
-  // filterByArrivalStop(event, stopCount) {
-
-  //   if (event.target.checked === true) {
-  //     this.inBoundStops.push(stopCount)
-  //   }
-  //   else {
-  //     this.inBoundStops = this.inBoundStops.filter(stop => {
-  //       return stop != stopCount
-  //     })
-  //   }
-
-  //   this.filterFlights();
-  // }
-
+  * Filter by hotel ratings
+  * @param event 
+  */
+  filterByHotelAmenities(event, value) {
+    if (event.target.checked === true) {
+      this.amenities.push(value);
+    }
+    else {
+      this.amenities = this.amenities.filter(item => {
+        return item.amenities.value !== value;
+      })
+    }
+    this.filterHotels();
+  }
 
   /**
-   * Comman function to process filtration of flight
-   */
-  // filterFlights() {
+  * Common function to process filtration of hotel
+  */
+  filterHotels() {
+    let filteredHotels = this.hotelDetailsMain.hotels;
+    console.log(filteredHotels.length, 'filteredHotels');
+    /* Filter hotel, based on min & max price */
+    if (this.minPrice && this.maxPrice) {
+      filteredHotels = filteredHotels.filter(item => {
+        return item.selling.total >= this.minPrice && item.selling.total <= this.maxPrice;
+      })
+    }
 
-  //   let filterdFlights = this.filterHotelDetails.items;
+    /* Filter hotels ratings */
+    if (this.ratingArray.length) {
+      filteredHotels = filteredHotels.filter(item => {
+        // console.log(item.rating, 'item.rating');
+        return this.ratingArray.includes(item.rating);
+      })
+    }
 
-  //   /* Filter flight based on min & max price */
-  //   if (this.minPrice && this.maxPrice) {
+    /* Filter hotels amenities */
+    if (this.amenitiesArray.length) {
+      filteredHotels = filteredHotels.filter(item => {
+        // console.log(item);
+        return this.amenitiesArray.includes(item.inbound_stop_count);
+      })
+    }
 
-  //     filterdFlights = filterdFlights.filter(item => {
+    console.log(filteredHotels)
+    this.filterHotel.emit(filteredHotels);
+  }
 
-  //       return item.selling_price >= this.minPrice && item.selling_price <= this.maxPrice;
-  //     })
-  //   }
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes:::::::', changes);
+    if (typeof changes['hotelDetailsMain'].currentValue != 'undefined') {
+      if (typeof this.hotelDetailsMain != 'undefined') {
+        this.hotelDetailsMain = changes['hotelDetailsMain'].currentValue;
+      }
+    }
+    if (changes['isResetFilter']) {
+      this.isResetFilter = changes['isResetFilter'].currentValue;
+      this.minPrice = this.hotelDetailsMain.filter_objects.price.min;
+      this.maxPrice = this.hotelDetailsMain.filter_objects.price.max;
+      this.ratingArray = [];
+      this.minPartialPaymentPrice = 0;
+      this.maxPartialPaymentPrice = 0;
+      this.outBoundDepartureTimeRangeSlots = [];
+      this.outBoundArrivalTimeRangeSlots = [];
+      this.inBoundDepartureTimeRangeSlots = [];
+      this.inBoundArrivalTimeRangeSlots = [];
+      this.outBoundStops = [];
+      this.inBoundStops = [];
 
-  //   /* Filter flight based on airline selected */
-  //   if (this.airLines.length) {
-  //     filterdFlights = filterdFlights.filter(item => {
+      //Reset Price
+      this.priceSlider.reset({ price: [Math.floor(this.hotelDetailsMain.filter_objects.price.min), Math.ceil(this.hotelDetailsMain.filter_objects.price.max)] });
 
-  //       return this.airLines.includes(item.airline);
-  //     })
-  //   }
+      //Reset partial payment
+      // this.partialPriceSlider.reset({ partial_price: [Math.floor(this.hotelDetailsMain.partial_payment_price_range.min_price), Math.ceil(this.hotelDetailsMain.partial_payment_price_range.max_price)] });
 
-  //   /* Filter flight based on min & max partial payment price */
-  //   if (this.minPartialPaymentPrice && this.maxPartialPaymentPrice) {
+      // Reset ratings
+      if (typeof this.ratingArray != 'undefined' && this.ratingArray.length) {
 
-  //     filterdFlights = filterdFlights.filter(item => {
+        this.ratingArray.forEach(element => {
+          return element.isChecked = false;
+        });
+      }
 
-  //       return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
-  //     })
-  //   }
-
-  //   /* Filter based on outbound departure time slot */
-  //   if (this.outBoundDepartureTimeRangeSlots.length) {
-  //     filterdFlights = filterdFlights.filter(item => {
-  //       let journeyIndex;
-  //       let typeIndex;
-  //       let timeValue;
-  //       for (let slot of this.outBoundDepartureTimeRangeSlots) {
-
-  //         journeyIndex = slot.journey == 'outbound' ? 0 : 1;
-  //         typeIndex = slot.type == 'departure' ? 0 : item.routes[journeyIndex].stops.length - 1;
-  //         timeValue = slot.type == 'departure' ? 'departure_time' : 'arrival_time';
-
-  //         if (
-  //           moment(item.routes[journeyIndex].stops[typeIndex][timeValue], 'hh:mm A').
-  //             isBetween(
-  //               moment(slot.value.from_time, 'hh:mm a'),
-  //               moment(slot.value.to_time, 'hh:mm a'))
-  //         ) {
-  //           return true;
-  //         }
-  //       }
-  //     })
-  //   }
-
-  //   /* Filter based on outbound arrival time slot */
-  //   if (this.outBoundArrivalTimeRangeSlots.length) {
-  //     filterdFlights = filterdFlights.filter(item => {
-  //       let journeyIndex;
-  //       let typeIndex;
-  //       let timeValue;
-  //       for (let slot of this.outBoundArrivalTimeRangeSlots) {
-
-  //         journeyIndex = slot.journey == 'outbound' ? 0 : 1;
-  //         typeIndex = slot.type == 'departure' ? 0 : item.routes[journeyIndex].stops.length - 1;
-  //         timeValue = slot.type == 'departure' ? 'departure_time' : 'arrival_time';
-
-  //         if (
-  //           moment(item.routes[journeyIndex].stops[typeIndex][timeValue], 'hh:mm A').
-  //             isBetween(
-  //               moment(slot.value.from_time, 'hh:mm a'),
-  //               moment(slot.value.to_time, 'hh:mm a'))
-  //         ) {
-  //           return true;
-  //         }
-  //       }
-  //     })
-  //   }
-
-  //   /* Filter based on inbound departure time slot */
-  //   if (this.inBoundDepartureTimeRangeSlots.length) {
-  //     filterdFlights = filterdFlights.filter(item => {
-  //       let journeyIndex;
-  //       let typeIndex;
-  //       let timeValue;
-  //       for (let slot of this.inBoundDepartureTimeRangeSlots) {
-
-  //         journeyIndex = slot.journey == 'outbound' ? 0 : 1;
-  //         typeIndex = slot.type == 'departure' ? 0 : item.routes[journeyIndex].stops.length - 1;
-  //         timeValue = slot.type == 'departure' ? 'departure_time' : 'arrival_time';
-
-  //         if (
-  //           moment(item.routes[journeyIndex].stops[typeIndex][timeValue], 'hh:mm A').
-  //             isBetween(
-  //               moment(slot.value.from_time, 'hh:mm a'),
-  //               moment(slot.value.to_time, 'hh:mm a'))
-  //         ) {
-  //           return true;
-  //         }
-  //       }
-  //     })
-  //   }
-
-  //   /* Filter based on inbound arrival time slot */
-  //   if (this.inBoundArrivalTimeRangeSlots.length) {
-  //     filterdFlights = filterdFlights.filter(item => {
-  //       let journeyIndex;
-  //       let typeIndex;
-  //       let timeValue;
-  //       for (let slot of this.inBoundArrivalTimeRangeSlots) {
-
-  //         journeyIndex = slot.journey == 'outbound' ? 0 : 1;
-  //         typeIndex = slot.type == 'departure' ? 0 : item.routes[journeyIndex].stops.length - 1;
-  //         timeValue = slot.type == 'departure' ? 'departure_time' : 'arrival_time';
-
-  //         if (
-  //           moment(item.routes[journeyIndex].stops[typeIndex][timeValue], 'hh:mm A').
-  //             isBetween(
-  //               moment(slot.value.from_time, 'hh:mm a'),
-  //               moment(slot.value.to_time, 'hh:mm a'))
-  //         ) {
-  //           return true;
-  //         }
-  //       }
-  //     })
-  //   }
-
-  //   if (this.outBoundStops.length) {
-  //     filterdFlights = filterdFlights.filter(item => {
-
-  //       return this.outBoundStops.includes(item.stop_count);
-
-  //     })
-  //   }
-
-  //   if (this.inBoundStops.length) {
-  //     filterdFlights = filterdFlights.filter(item => {
-
-  //       return this.inBoundStops.includes(item.inbound_stop_count);
-
-  //     })
-  //   }
-  //   this.filterHotel.emit(filterdFlights);
-  // }
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes['isResetFilter']) {
-  //     this.isResetFilter = changes['isResetFilter'].currentValue;
-  //     this.minPrice = this.filterHotelDetails.price_range.min_price;
-  //     this.maxPrice = this.filterHotelDetails.price_range.max_price;
-  //     this.airLines = [];
-  //     this.minPartialPaymentPrice = 0;
-  //     this.maxPartialPaymentPrice = 0;
-  //     this.outBoundDepartureTimeRangeSlots = [];
-  //     this.outBoundArrivalTimeRangeSlots = [];
-  //     this.inBoundDepartureTimeRangeSlots = [];
-  //     this.inBoundArrivalTimeRangeSlots = [];
-  //     this.outBoundStops = [];
-  //     this.inBoundStops = [];
-
-  //     //Reset Price
-  //     this.priceSlider.reset({ price: [Math.floor(this.filterHotelDetails.price_range.min_price), Math.ceil(this.filterHotelDetails.price_range.max_price)] });
-
-  //     //Reset partial payment
-  //     this.partialPriceSlider.reset({ partial_price: [Math.floor(this.filterHotelDetails.partial_payment_price_range.min_price), Math.ceil(this.filterHotelDetails.partial_payment_price_range.max_price)] });
-
-  //     //Reset airlines
-  //     if (typeof this.airlineList != 'undefined' && this.airlineList.length) {
-
-  //       this.airlineList.forEach(element => {
-  //         return element.isChecked = false;
-  //       });
-  //     }
-
-  //     $("input:checkbox").prop('checked', false);
-  //     this.filterFlights();
-  //   }
-  // }
+      $("input:checkbox").prop('checked', false);
+      this.filterHotels();
+    }
+  }
 }

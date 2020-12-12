@@ -49,10 +49,11 @@
           <div class="accordion-inner">
             <div class="block_cmn stop">
               <ul>
-                <li *ngFor="let item of ratingStar | keyvalue">
+                <li *ngFor="let item of ratingStar">
                   <label class="custom_checkbox">
-                    <input type="checkbox" value="{{item.key}}" (click)="filterByRatings($event,item.key)"> <span class="checkmark"></span>{{item.key}} Star</label> <span><img
-                      src="{{s3BucketUrl}}assets/images/icon/stars/{{item.key}}s.svg" alt="5 Stars Icon"></span></li>
+                    <input type="checkbox" value="{{item.title}}" (click)="filterByHotelRatings($event,item.title)"> <span
+                      class="checkmark"></span>{{item.title}} Star</label> <span><img
+                      src="{{s3BucketUrl}}assets/images/icon/stars/{{item.title}}s.svg" alt="5 Stars Icon"></span></li>
                 <!-- <li>
                   <label class="custom_checkbox">
                     <input type="checkbox" value=""> <span class="checkmark"></span>4 Star</label> <span><img
@@ -87,9 +88,9 @@
           <div class="accordion-inner">
             <div class="block_cmn stop">
               <ul>
-                <li *ngFor="let item of amenities | keyvalue">
+                <li *ngFor="let item of amenities">
                   <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>{{item.key}}</label></li>
+                    <input type="checkbox" value=""> <span class="checkmark" (click)="filterByHotelAmenities($event,item.title)"></span>{{item.title}}</label></li>
               </ul>
             </div>
           </div>

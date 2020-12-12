@@ -18,7 +18,7 @@
                 <h4>Filter By</h4>
                 <a class="anchor_link" (click)="resetFilter()">Reset</a>
               </div>
-              <app-filter-hotel *ngIf="filterHotelDetails" [filterHotelDetails]="filterHotelDetails" (filterHotel)="filterHotel($event)"
+              <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain" (filterHotel)="filterHotel($event)"
                 isResetFilter={{isResetFilter}}></app-filter-hotel>
             </div>
           </div>
