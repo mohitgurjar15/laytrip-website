@@ -30,11 +30,12 @@
     <div class="searchbar_box">
       <!-- <input type="text" id="" class="amount" placeholder="Ahmedabad"> -->
       <label for="">Search Hotel</label>
-      <ng-select [items]="people" bindLabel="name" [loading]="peopleLoading" placeholder="Search Hotel">
+      <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
+        placeholder="Search Hotel" [clearable]="false" [selectOnTab]="true">
       </ng-select>
       <div class="search_btns">
-        <a>Clear</a>
-        <a>Search</a>
+        <a (click)="clearHotelSearch()">Clear</a>
+        <a (click)="searchHotel()">Search</a>
       </div>
     </div>
   </div>
@@ -51,25 +52,10 @@
               <ul>
                 <li *ngFor="let item of ratingStar">
                   <label class="custom_checkbox">
-                    <input type="checkbox" value="{{item.title}}" (click)="filterByHotelRatings($event,item.title)"> <span
-                      class="checkmark"></span>{{item.title}} Star</label> <span><img
-                      src="{{s3BucketUrl}}assets/images/icon/stars/{{item.title}}s.svg" alt="5 Stars Icon"></span></li>
-                <!-- <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>4 Star</label> <span><img
-                      src="{{s3BucketUrl}}assets/images/icon/stars/4s.svg" alt="5 Stars Icon"></span> </li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>3 Star</label> <span><img
-                      src="{{s3BucketUrl}}assets/images/icon/stars/3s.svg" alt="5 Stars Icon"></span> </li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>2 Star</label> <span><img
-                      src="{{s3BucketUrl}}assets/images/icon/stars/2s.svg" alt="5 Stars Icon"></span> </li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"></span>1 Star</label> <span><img
-                      src="{{s3BucketUrl}}assets/images/icon/stars/1s.svg" alt="5 Stars Icon"></span> </li> -->
+                    <input type="checkbox" value="{{item.title}}" (click)="filterByHotelRatings($event,item.title)">
+                    <span class="checkmark"></span>{{item.title}} Star</label> <span><img
+                      src="{{s3BucketUrl}}assets/images/icon/stars/{{item.title}}s.svg" alt="5 Stars Icon"></span>
+                </li>
               </ul>
             </div>
           </div>
@@ -90,7 +76,9 @@
               <ul>
                 <li *ngFor="let item of amenities">
                   <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark" (click)="filterByHotelAmenities($event,item.title)"></span>{{item.title}}</label></li>
+                    <input type="checkbox" value=""> <span class="checkmark"
+                      (click)="filterByHotelAmenities($event,item.title)"></span>{{item.title}}</label>
+                </li>
               </ul>
             </div>
           </div>
@@ -106,13 +94,13 @@
     <ul>
       <li>
         <label class="custom_checkbox">
-          <input type="checkbox" value=""> <span class="checkmark"></span>
+          <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
           <p>Free Cancellation</p>
         </label>
       </li>
       <li>
         <label class="custom_checkbox">
-          <input type="checkbox" value=""> <span class="checkmark"></span>
+          <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
           <p>Non Refundable</p>
         </label>
       </li>

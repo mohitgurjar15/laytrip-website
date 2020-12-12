@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -104,7 +104,7 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     // HOTEL SHARED COMPONENT
     GuestInfoComponent,
     SearchHotelComponent,
-    RentalInfoComponent
+    RentalInfoComponent,
   ],
   providers: [DatePipe],
 

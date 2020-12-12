@@ -4,8 +4,9 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDatepicker, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDatepicker, NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../../_helpers/ngbDateCustomParserFormatter';
+import { parse } from 'querystring';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -63,8 +64,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   ];
 
-  showCommingSoon:boolean=false;
-  
+  showCommingSoon: boolean = false;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -103,8 +103,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     };
 
     let host = window.location.origin;
-    if(host.includes("staging")){
-      this.showCommingSoon=true;
+    if (host.includes("staging")) {
+      this.showCommingSoon = true;
     }
   }
 
@@ -192,8 +192,16 @@ export class HotelSearchWidgetComponent implements OnInit {
       checkOutDate: this.checkOutDate
     };
     if (selectedDate.checkInDate && selectedDate.checkOutDate) {
-      this.searchHotelInfo.check_in = `${selectedDate.checkInDate.year}-${selectedDate.checkInDate.month}-${selectedDate.checkInDate.day}`;
-      this.searchHotelInfo.check_out = `${selectedDate.checkOutDate.year}-${selectedDate.checkOutDate.month}-${selectedDate.checkOutDate.day}`;
+      if (selectedDate.checkInDate.day < 10 || selectedDate.checkInDate.month < 10) {
+        this.searchHotelInfo.check_in = `${selectedDate.checkInDate.year}-0${selectedDate.checkInDate.month}-0${selectedDate.checkInDate.day}`;
+      } else {
+        this.searchHotelInfo.check_in = `${selectedDate.checkInDate.year}-${selectedDate.checkInDate.month}-${selectedDate.checkInDate.day}`;
+      }
+      if (selectedDate.checkOutDate.day < 10 || selectedDate.checkOutDate.month < 10) {
+        this.searchHotelInfo.check_out = `${selectedDate.checkOutDate.year}-0${selectedDate.checkOutDate.month}-0${selectedDate.checkOutDate.day}`;
+      } else {
+        this.searchHotelInfo.check_out = `${selectedDate.checkOutDate.year}-${selectedDate.checkOutDate.month}-${selectedDate.checkOutDate.day}`;
+      }
     }
   }
 

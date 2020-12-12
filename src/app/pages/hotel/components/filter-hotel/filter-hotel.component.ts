@@ -83,7 +83,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
   amenities = [];
   ratingArray = [];
   amenitiesArray = [];
+  policyArray = [];
 
+  hotelNamesArray = [];
+  hotelname;
   people = [
     {
       'id': '5a15b13c36e7a7f00cf0d7cb',
@@ -119,32 +122,48 @@ export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit() {
     this.currency = JSON.parse(this._currency);
 
-    console.log(this.hotelDetailsMain);
-    if (this.hotelDetailsMain && this.hotelDetailsMain.filter_objects) {
-      // FOR FILTER HOTEL - PRICE
-      this.priceValue = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-      this.priceHighValue = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
-      this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
+    if (this.hotelDetailsMain) {
+      this.hotelDetailsMain.hotels.forEach(i => {
+        this.hotelNamesArray.push({ hotelName: i.name });
+      });
+      if (this.hotelDetailsMain.filter_objects) {
 
-      this.minPrice = this.priceValue;
-      this.maxPrice = this.priceHighValue;
-
-      this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-      this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
-
-      if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
-        this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
-        this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
+        // FOR FILTER HOTEL - PRICE
+        this.priceValue = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
+        this.priceHighValue = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
         this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
+
+        this.minPrice = this.priceValue;
+        this.maxPrice = this.priceHighValue;
 
         this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
         this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
-      }
 
-      this.amenities = this.hotelDetailsMain.filter_objects.ameneties;
-      this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
+        if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
+          this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
+          this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
+          this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
+
+          this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
+          this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+        }
+
+        this.amenities = this.hotelDetailsMain.filter_objects.ameneties;
+        this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
+      }
     }
     this.loadJquery();
+  }
+
+  clearHotelSearch() {
+    this.hotelname = 'Search Hotel';
+    this.filterHotel.emit(this.hotelDetailsMain.hotels);
+  }
+
+  searchHotel() {
+    if (this.hotelname) {
+      this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
+    }
   }
 
 
@@ -213,7 +232,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
   fliterByPrice(event) {
     this.minPrice = event.value;
     this.maxPrice = event.highValue;
-    this.filterHotels();
+    this.filterHotels({});
   }
 
   /**
@@ -229,8 +248,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
         return item != count;
       })
     }
-    this.filterHotels();
-    console.log('this.ratingArray::', this.ratingArray);
+    this.filterHotels({});
   }
 
   /**
@@ -244,17 +262,27 @@ export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
     else {
       this.amenities = this.amenities.filter(item => {
         return item.amenities.value !== value;
-      })
+      });
     }
-    this.filterHotels();
+    this.filterHotels({});
+  }
+
+  filterByPolicy(event) {
+    if (event.target.checked === true) {
+      this.policyArray.push(event.target.value);
+    } else {
+      this.policyArray = this.policyArray.filter(item => {
+        return item !== event.target.value;
+      });
+    }
+    this.filterHotels({});
   }
 
   /**
   * Common function to process filtration of hotel
   */
-  filterHotels() {
+  filterHotels(hotelname) {
     let filteredHotels = this.hotelDetailsMain.hotels;
-    console.log(filteredHotels.length, 'filteredHotels');
     /* Filter hotel, based on min & max price */
     if (this.minPrice && this.maxPrice) {
       filteredHotels = filteredHotels.filter(item => {
@@ -265,25 +293,35 @@ export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
     /* Filter hotels ratings */
     if (this.ratingArray.length) {
       filteredHotels = filteredHotels.filter(item => {
-        // console.log(item.rating, 'item.rating');
         return this.ratingArray.includes(item.rating);
-      })
+      });
     }
 
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredHotels = filteredHotels.filter(item => {
-        // console.log(item);
         return this.amenitiesArray.includes(item.inbound_stop_count);
       })
     }
 
-    console.log(filteredHotels)
+    /* Filter hotels policy */
+    if (this.policyArray.length) {
+      filteredHotels = filteredHotels.filter(item => {
+        return this.policyArray.includes(item.refundable);
+      })
+    }
+
+    /* Search hotels by name */
+    if (hotelname && hotelname.key === 'searchByHotelName') {
+      filteredHotels = filteredHotels.filter(item => {
+        return item.name === hotelname.value;
+      });
+    }
+
     this.filterHotel.emit(filteredHotels);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes:::::::', changes);
     if (typeof changes['hotelDetailsMain'].currentValue != 'undefined') {
       if (typeof this.hotelDetailsMain != 'undefined') {
         this.hotelDetailsMain = changes['hotelDetailsMain'].currentValue;
@@ -306,19 +344,15 @@ export class FilterHotelComponent implements OnInit, OnDestroy, OnChanges {
       //Reset Price
       this.priceSlider.reset({ price: [Math.floor(this.hotelDetailsMain.filter_objects.price.min), Math.ceil(this.hotelDetailsMain.filter_objects.price.max)] });
 
-      //Reset partial payment
-      // this.partialPriceSlider.reset({ partial_price: [Math.floor(this.hotelDetailsMain.partial_payment_price_range.min_price), Math.ceil(this.hotelDetailsMain.partial_payment_price_range.max_price)] });
-
       // Reset ratings
       if (typeof this.ratingArray != 'undefined' && this.ratingArray.length) {
-
         this.ratingArray.forEach(element => {
           return element.isChecked = false;
         });
       }
 
       $("input:checkbox").prop('checked', false);
-      this.filterHotels();
+      this.filterHotels({});
     }
   }
 }

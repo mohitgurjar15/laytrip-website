@@ -111,7 +111,6 @@ export class HotelSearchComponent implements OnInit {
   }
 
   sortByRatings(data, key, way) {
-    console.log(data, key);
     if (typeof data === "undefined") {
       return data;
     } else {
@@ -146,11 +145,7 @@ export class HotelSearchComponent implements OnInit {
   }
 
   filterHotel(event) {
-    console.log('evnt::::', event);
-    console.log('this.hotelDetails1::', this.hotelDetails);
     this.hotelDetails.hotels = event;
-    console.log('this.hotelDetails2::', this.hotelDetails);
-    console.log('this.hotelDetailsMAIN::', this.hotelDetailsMain);
   }
 
   resetFilter() {

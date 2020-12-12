@@ -8,6 +8,7 @@
         Map view
     </button>
 </div>
+
 <div [hidden]="isMapView" [@listAnimation]="hotelListArray.length" (@listAnimation.start)="logAnimation($event)"
     (@listAnimation.done)="logAnimation($event)" class="result_listing hotel_listings"
     (clickOutside)="closeHotelDetail()">
@@ -146,7 +147,7 @@
         </div>
     </div>
 
-    <div class="pagination_main">
+    <!-- <div class="pagination_main">
         <div class="pagination_result">
             <p>Showing 1 to 10 of 60 Results</p>
         </div>
@@ -172,7 +173,7 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="result_listing hotel_map_listings" [hidden]="!isMapView">
     <div class="col-lg-12">
@@ -259,7 +260,7 @@
             </div>
         </div>
     </div>
-    <div class="pagination_main">
+    <!-- <div class="pagination_main">
         <div class="pagination_result">
             <p>Showing 1 to 10 of 60 Results</p>
         </div>
@@ -285,6 +286,6 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> -->
 </div>
 <app-hotel-not-found *ngIf="!hotelListArray.length"></app-hotel-not-found>
