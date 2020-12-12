@@ -20,7 +20,7 @@
                                 <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}" [routerLink]="['/account/lay-credit-points']">
                                     <img *ngIf="countryCode!=='DR'" class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
                                     <img *ngIf="countryCode!=='DR'" class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
-                                    <span id="layPoints">{{showTotalLayCredit}}</span> 
+                                    <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}}</span> 
                                 </a>
                             </li>
                         </ul>
@@ -46,7 +46,7 @@
                                 <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}" [routerLink]="['/account/lay-credit-points']">
                                     <img *ngIf="countryCode!=='DR'" class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
                                     <img *ngIf="countryCode!=='DR'" class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
-                                    <span id="layPoints">{{showTotalLayCredit}}</span> 
+                                    <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}}</span> 
                                 </a>
                             </li>
 
