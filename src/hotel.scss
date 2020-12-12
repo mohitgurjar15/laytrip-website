@@ -6544,19 +6544,63 @@
 
         ngx-gallery{
             width: 100% !important;
-            height: 500px !important;
+            height: 700px !important;
+
+            @include tab-view{
+                height: 350px !important;
+            }
+            ngx-gallery-image{
+                .ngx-gallery-image-wrapper{
+                    border-radius: 5px;
+    
+                    .ngx-gallery-image.ngx-gallery-active:before {
+                        content: " ";
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index: -1;
+                        top: 0;
+                        left: 0;
+                        background: -webkit-radial-gradient(top center, ellipse cover, rgba(255,255,255,0.15) 0%,rgba(0,0,0,0.5) 100%);
+                    }
+                }
+            }
+            ngx-gallery-thumbnails{
+                a{
+                    &.ngx-gallery-thumbnail{
+                        border-radius: 5px;
+                    }
+                }
+            }
+            
         }
 
         .slider-overlay {
             position: absolute;
             width: 100%;
-            bottom: 10px;
+            bottom: 160px;
             padding: 20px;
             color: $text-white;
             margin: 0px;
+            z-index: 9999;
+            @include tab-view{
+                bottom: 90px;
+                padding: 0px 15px;
+            }
 
             .hotel_name {
                 padding-bottom: 30px;
+                span{
+                    font-size: 12px;
+                }
+                @include tab-view{
+                    padding-bottom: 10px;
+                    
+                    h4{
+                        font-size: 18px;
+                        margin-bottom: 2px;
+                    }
+                }
             }
 
             #border {
@@ -6566,23 +6610,51 @@
                 background-color: $text-white;
                 margin: 0 0;
             }
-
-            .rate-box {
-                background: $text-white;
-                padding: 8px 5px;
-                border-radius: 10px;
-                color: $text-black;
-                text-align: center;
-                margin-right: 10px;
-            }
-
-            .rating {
-                border-bottom: 2px solid;
-                padding-bottom: 6px;
-            }
-
             .room-rating {
-                text-align: right;
+                
+                @include tab-view{
+                    margin: 10px 0;
+                }
+                .room_rate_box{
+                    display: flex;
+                    justify-content: flex-end;
+                    @include tab-view{
+                        justify-content: flex-start;
+                    }
+                    .rate-box {
+                        background: $text-white;
+                        font-size: 14px;
+                        border-radius: 10px;
+                        color: $text-black;
+                        margin-right: 10px;
+                        width: 35px;
+                        height: 35px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        @include tab-view{
+                            font-size: 11px;
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+                    .rating {
+                        border-bottom: 2px solid;
+                        display: flex;
+                        padding: 0;
+                        align-items: center;
+                        font-size: 12px;
+                        @include tab-view{
+                            border-bottom: none;
+                        }
+                        i{
+                            &:first-child{
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                }
+                
             }
         }
 
@@ -6636,10 +6708,20 @@
         border-bottom: none;
 
         .nav-item {
-            width: 100%;
-            max-width: 180px;
+            width: 25%;
             text-align: center;
-            margin-right: 1px;
+            &:first-child{
+                a{
+                    border-top-left-radius: 5px;
+                    margin: 0px 1px 0 0;
+                }
+            }
+            &:last-child{
+                a{
+                    border-top-right-radius: 5px;
+                    margin: 0px 0 0 1px;
+                }
+            }
 
             a {
                 color: $text-black;
@@ -6647,16 +6729,17 @@
                 border: none;
                 border-radius: 0px;
                 padding: 20px;
-
+                margin: 0px 1px;
+                
                 &:hover,
                 &.active {
                     color: $text-white;
                     background-color: $primary-color;
                 }
-            }
-
-            @media (max-width: 767px) {
-                max-width: 33%;
+                @include tab-view{
+                    padding: 8px;
+                    font-size: 12px;
+                }
             }
         }
     }
@@ -6666,12 +6749,26 @@
         padding: 35px 40px;
         box-shadow: 0px 3px 6px $bg-black-opacity-half;
         border-radius: 0 0 20px 20px;
+        @include tab-view{
+            padding: 15px;
+            font-size: 12px;
+        }
 
         .tab-pane {
+            h4{
+                @include tab-view{
+                    font-size: 16px;
+                }
+            }
+            
             p {
                 color: $text-grey;
                 line-height: 2.2;
                 font-weight: 300;
+                @include tab-view{
+                    font-size: 12px;
+                    line-height: 21px;
+                }
             }
         }
     }
