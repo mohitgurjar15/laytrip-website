@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private renderer: Renderer2
   ) {
-
+    this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
   }
 

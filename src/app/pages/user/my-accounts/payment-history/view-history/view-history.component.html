@@ -184,7 +184,7 @@
                             </div>
                             <div class="block_inner" *ngIf="list[0].totalInstallments > 0">
                                 <div class="block_title">
-                                    <h5>Installment Payment Detail</h5>
+                                    <h5>Installment Payment Details</h5>
                                 </div>
                                 <div class="pay_detail_tbl">
                                     <table>
@@ -197,7 +197,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let instalment of list[0].bookingInstalments | slice:1; let i = index;">
+                                            <tr *ngFor="let instalment of list[0].bookingInstalments ; let i = index;">
                                                 <td data-title="ID">{{i +1 }}</td>
                                                 <td data-title="Amount">{{ currencySymbol}}{{  instalment.amount | number : '1.2-2' }}</td>
                                                 <td data-title="Date">{{ dateConvert(instalment.instalmentDate) }}</td>
