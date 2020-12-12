@@ -9,7 +9,7 @@
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
           </button>
         </div>
-        <div class="block_modal_main" *ngIf="isLoaded">
+        <div class="block_modal_main" *ngIf="isLoaded && isBaggageFound">
           <ul class="block_bording_info">
             <li>
               {{flightDetail.routes[0].stops[0].departure_info.city}} ({{flightDetail.routes[0].stops[0].departure_info.code}}) <span>{{flightDetail.routes[0].stops[0].departure_info.country}}</span>

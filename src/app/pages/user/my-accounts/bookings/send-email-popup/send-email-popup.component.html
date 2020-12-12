@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <div class="block_title">
+        <h5>Send E-ticket</h5>
+    </div>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.close()">
+<img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+</button>
+</div>
+<form [formGroup]="emailForm" novalidate autocomplete="off">
+    <div class="modal-body">
+        <div class="modal_cnt">
+            <div formArrayName="formArray1" class="block_modal">
+                <div *ngFor="let email of f.formArray1['controls']; let i=index">
+                    <div formGroupName="{{i}}" class="formArray1">
+                        <div class="block_mail">
+                            <label>Email*</label>
+                            <div class="block_field">
+                                <input type="email" tabindex="1" onkeypress='return event.charCode != 32' formControlName="email" maxlength="50">
+                                <div *ngIf="i===0" class="block_btn add_btn">
+                                    <a href="javascript:void(0);" (click)="addEmail()">+</a>
+                                </div>
+                                <div *ngIf="i >= 1" class="block_btn remove_btn">
+                                    <a href="javascript:void(0);" (click)="removeEmail(i)">-</a>
+                                </div>
+                            </div>
+                            <div *ngIf="(submitted || email['controls'].email.touched) && email['controls'].email.errors">
+                                <p *ngIf="email['controls'].email.errors.required" class="error_text">Please enter your email address.</p>
+                                <p *ngIf="email['controls'].email.errors.pattern" class="error_text">Please enter valid email address.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" block_btn_send ">
+                    <button type="submit" (click)="onSubmit()"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i>&nbsp;Confirm & Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

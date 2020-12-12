@@ -1,3 +1,4 @@
+@import "_dr_home_variable.scss";
 // NG-SELECT SCSS
 
 .ng-select {
@@ -52,7 +53,7 @@
         .ng-select-container {
             border: none !important;
             height: 100%;
-            min-height: 0px !important; 
+            min-height: 0px !important;
             display: block;
             &:hover {
                 box-shadow: none !important;
@@ -68,7 +69,7 @@
                 }
                 .ng-value {
                     padding: 0 0 0 15px;
-                    color: #000;    
+                    color: #000;
                     //overflow: unset !important;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -162,7 +163,7 @@
 }
 
 .custom_range_slide .ng5-slider .ng5-slider-selection {
-    background: #fc7e66;
+    background: $pink_clr;
 }
 
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
@@ -172,7 +173,7 @@
     // bottom: 0;
     top: -6px;
     background-color: #fff;
-    border: 1px solid #fc7e66;
+    border: 1px solid $pink_clr;
     border-radius: 50%;
     outline: none;
     // border-top-left-radius: 3px;
@@ -212,14 +213,15 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
     font-weight: bold;
-    color: #fc7e66;
+    color: $pink_clr;
     display: none;
 }
 
 .custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-    background: #fc7e66;
+    background: $pink_clr;
 }
 
+// FLIGHT
 .home_banner
     .banner_inner
     .banner_tab
@@ -230,26 +232,18 @@
     .flight_search
     .flight-grid
     .grid_box.secound
-    .search_area{
-        input {
-            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px
-                no-repeat !important;
-        }
-        &.dr_search_area{
-            input{
-
-                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px
-                no-repeat !important;
-            }
-        }
-        @media(max-width: 575px) {
-            .calender-responsive-view{
-                right: 0 !important;
-                left: auto !important;
-            }
+    .search_area {
+    input {
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px
+            no-repeat !important;
+    }
+    @media (max-width: 575px) {
+        .calender-responsive-view {
+            right: 0 !important;
+            left: auto !important;
         }
     }
-    
+}
 
 .modify_search {
     .flight_tab {
@@ -259,14 +253,8 @@
                     .grid_box.secound {
                         .search_area {
                             input {
-                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
-                            }
-                            &.dr_search_area{
-                                input{
-                    
-                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px
-                                    no-repeat !important;
-                                }
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                                        center right 15px no-repeat !important;
                             }
                         }
                     }
@@ -336,4 +324,8 @@
 
 .anchor-text {
     cursor: pointer;
+}
+
+.hotel_tab .hotels_search .hotels-grid .grid_box.secound label {
+    justify-content: flex-start !important;
 }

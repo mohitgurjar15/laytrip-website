@@ -13,6 +13,7 @@ export class ExtraBaggageComponent implements OnInit {
   routeCode:string;
   @Input() flightDetail:any={};
   isLoaded:boolean=false;
+  isBaggageFound:boolean=false;
   outBoundBagType:any=[];
   totalPassanger:number;
   constructor(
@@ -27,12 +28,11 @@ export class ExtraBaggageComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes",changes)
     if (typeof changes['flightDetail'].currentValue!='undefined') {
       this.isLoaded=true;
-     
       this.flightDetail = changes['flightDetail'].currentValue[0];
-      if(this.flightDetail.extra_service.outbound.length){
+      if(typeof this.flightDetail.extra_service!='undefined' && this.flightDetail.extra_service.outbound.length){
+        this.isBaggageFound=true;
 
         for(let baggage of this.flightDetail.extra_service.outbound){
 
@@ -51,7 +51,7 @@ export class ExtraBaggageComponent implements OnInit {
         this.totalPassanger+= Number(this.flightDetail.infant_count);
       }
     }
-
+    console.log("isBaggageFound",this.isBaggageFound)
     
   }
 

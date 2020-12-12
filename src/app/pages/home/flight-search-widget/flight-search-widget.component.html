@@ -6,7 +6,7 @@
               <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg"
                   alt="Oneway Icon" />
               <img class="active-icon"
-                  src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg"
+                  src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg"
                   alt="Oneway Icon" />
               <span>Oneway</span>
           </a>
@@ -17,7 +17,7 @@
               <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg"
                   alt="Return Icon" />
               <img class="active-icon"
-                  src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
+                  src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg"
                   alt="Return Icon" />
               <span>Round Trip</span>
           </a>
@@ -56,11 +56,8 @@
                           </div>
                           <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                               <a (click)="swapAirport()">
-                                  <img *ngIf="countryCode!=='DR'"
-                                      src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
-                                      alt="Switch Image" />
-                                  <img *ngIf="countryCode==='DR'"
-                                      src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
+                                  
+                                  <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
                                       alt="Switch Image" />
                               </a>
                           </div>

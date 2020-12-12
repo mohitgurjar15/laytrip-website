@@ -1,4 +1,5 @@
 @import "_cstm-variable.scss";
+@import "_dr_home_variable.scss";
 
 //<!-- Start Account Section Css -->
 .account_part {
@@ -168,7 +169,7 @@
 										width: 6px;
 										height: 6px;
 										border-radius: 50%;
-										background: $secondary-color;
+										background: $pink_clr;
 										margin: 0 0 0 5px;
 									}
 								}
@@ -354,7 +355,7 @@
 										&:checked {
 											~ {
 												.checkmark {
-													border: 1px solid $secondary-color;
+													border: 1px solid $pink_clr;
 
 													&:after {
 														display: block;
@@ -383,7 +384,7 @@
 											width: 8px;
 											height: 8px;
 											border-radius: 50%;
-											background: $secondary-color;
+											background: $pink_clr;
 										}
 									}
 								}
@@ -2440,7 +2441,7 @@
 						&:checked {
 							~ {
 								.checkmark {
-									border-color: $secondary-color;
+									border-color: $pink_clr;
 
 									&:after {
 										opacity: 1;
@@ -2472,7 +2473,7 @@
 							width: 6px;
 							height: 9px;
 							border-radius: 2px;
-							border: solid $secondary-color;
+							border: solid $pink_clr;
 							border-top-width: medium;
 							border-right-width: medium;
 							border-bottom-width: medium;
@@ -2597,7 +2598,7 @@
 										span {
 											font-size: 14px;
 											font-weight: 400;
-											color: $secondary-color;
+											color: $pink_clr;
 											padding: 0 0 0 10px;
 										}
 
@@ -2721,7 +2722,7 @@
 									&:checked {
 										~ {
 											.checkmark {
-												border-color: $secondary-color;
+												border-color: $pink_clr;
 
 												&:after {
 													opacity: 1;
@@ -2753,7 +2754,7 @@
 										width: 6px;
 										height: 9px;
 										border-radius: 2px;
-										border: solid $secondary-color;
+										border: solid $pink_clr;
 										border-top-width: medium;
 										border-right-width: medium;
 										border-bottom-width: medium;
@@ -2991,7 +2992,7 @@
 									width: 6px;
 									height: 6px;
 									border-radius: 50%;
-									background: $secondary-color;
+									background: $pink_clr;
 									margin: -1px 0 0 5px;
 								}
 
@@ -3136,7 +3137,7 @@
 										position: relative;
 										font-size: 14px;
 										font-weight: 500;
-										color: $secondary-color;
+										color: $pink_clr;
 
 										img {
 											position: absolute;
@@ -3232,7 +3233,7 @@
 								border-radius: 5px;
 								display: flex;
 								align-items: center;
-								background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_orange.svg) no-repeat;
+								background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg) no-repeat;
 								background-size: cover;
 								margin: 0;
 								margin: 0 30px 0 0;
@@ -3390,7 +3391,7 @@
 										.block_point {
 											width: 40%;
 											font-size: 16px;
-											color: $secondary-color;
+											color: $pink_clr;
 											font-weight: 600;
 											display: flex;
 
@@ -3606,7 +3607,7 @@
 									color: $text-white;
 									font-weight: 400;
 									border-radius: 0 0 15px 15px;
-									background: $secondary-color;
+									background: $pink_clr;
 									position: relative;
 									z-index: 9;
 									overflow: hidden;
@@ -4320,7 +4321,7 @@
 											&:checked {
 												~ {
 													.checkmark {
-														border: 1px solid $secondary-color;
+														border: 1px solid $pink_clr;
 
 														&:after {
 															display: block;
@@ -4349,7 +4350,7 @@
 												width: 8px;
 												height: 8px;
 												border-radius: 50%;
-												background: $secondary-color;
+												background: $pink_clr;
 											}
 										}
 									}

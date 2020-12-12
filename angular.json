@@ -34,6 +34,8 @@
               "src/styles.scss",
               "src/dr_home.scss",
               "src/flight.scss",
+              "src/hotel.scss",
+              "src/vacation.scss",
               "src/account.scss",
               "src/comman-modal.scss",
               "src/laytrip.scss",
@@ -110,6 +112,14 @@
                   "with": "src/environments/environment.varshil.ts"
                 }
               ]
+            },
+            "keyur": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.keyur.ts"
+                }
+              ]
             }
           }
         },
@@ -133,6 +143,9 @@
             },
             "varshil": {
               "browserTarget": "laytrip-website:build:varshil"
+            },
+             "keyur": {
+              "browserTarget": "laytrip-website:build:keyur"
             }
           }
         },
@@ -153,6 +166,7 @@
               "src/styles-app-loading.scss",
               "src/styles.scss",
               "src/flight.scss",
+              "src/hotel.scss",
               "src/account.scss",
               "src/comman-modal.scss",
               "src/laytrip.scss",

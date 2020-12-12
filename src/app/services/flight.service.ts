@@ -122,18 +122,18 @@ export class FlightService {
             currency: 'USD',
             language: 'en'
         }
-        const url = environment.apiUrl+`v1/flight/flexible-day-rate`;
+        const url = environment.apiUrl + `v1/flight/flexible-day-rate`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
             catchError(this.handleError)
         );
     }
 
-    getFlightCalenderDate(data){
+    getFlightCalenderDate(data) {
         let headers = {
             currency: 'USD',
             language: 'en'
         }
-        const url = environment.apiUrl+`v1/flight/calender-day-rate`;
+        const url = environment.apiUrl + `v1/flight/calender-day-rate`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
             catchError(this.handleError)
         );
@@ -150,7 +150,7 @@ export class FlightService {
         );
     }
 
-    addFeedback(payload){
+    addFeedback(payload) {
         return this.http.post(`${environment.apiUrl}v1/booking-feedback`, payload, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
@@ -161,10 +161,10 @@ export class FlightService {
         return this.http.get(`${environment.apiUrl}v1/booking/booking-details/${bookingId}`, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
-        );
+            );
     }
 
-    getPredictionDate(data){
+    getPredictionDate(data) {
         let headers = {
             currency: 'USD',
             language: 'en'
@@ -175,9 +175,16 @@ export class FlightService {
         );
     }
 
-    getSellingPrice(data){
+    getSellingPrice(data) {
         const url = environment.apiUrl + `v1/flight/selling-price`;
         return this.http.post(url, data, this.commonFunction.setHeaders()).pipe(
+            catchError(this.handleError)
+        );
+    }
+
+    sendEmail(data) {
+        const url = environment.apiUrl + `v1/booking/share-booking-detail`;
+        return this.http.post(url,data, this.commonFunction.setHeaders()).pipe(
             catchError(this.handleError)
         );
     }

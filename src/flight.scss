@@ -31,6 +31,7 @@
 					margin: 0 20px 0 0;
 					color: $text-grey;
 					font-size: 14px;
+					font-weight: 500;
 					display: flex;
 					align-items: center;
 
@@ -47,9 +48,9 @@
 					}
 
 					&.active {
-						background: $tab-active-bg;
-						color: $secondary-color;
-						border-color: transparent;
+						background: $bg_tab_active;
+						color: $pink_clr;
+						border-color: $pink_clr;
 
 						.active-icon {
 							display: block
@@ -61,9 +62,9 @@
 					}
 
 					&:hover {
-						background: $tab-active-bg;
-						color: $secondary-color;
-						border-color: transparent;
+						background: $bg_tab_active;
+						color: $pink_clr;
+						border-color: $pink_clr;
 
 						.active-icon {
 							display: block;
@@ -212,7 +213,7 @@
 								z-index: 1111;
 
 								img {
-									width: 15px;
+									width: 16px;
 									position: absolute;
 									top: 50%;
 									left: 50%;
@@ -351,7 +352,7 @@
 											right: 15px;
 											top: 50%;
 											transform: translateY(-50%);
-											background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg) no-repeat;
+											background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
 											background-size: cover;
 										}
 
@@ -405,9 +406,9 @@
 					button {
 						width: auto;
 						padding: 10px 25px;
-						background: $secondary-color;
+						background: $pink_clr;
 						border-radius: 8px;
-						border: 1px solid $secondary-color;
+						border: 1px solid $pink_clr;
 						font-size: 16px;
 						color: $text-white;
 						transition: 0.3s;
@@ -1788,7 +1789,7 @@
 
 													div {
 														padding: 10px 15px;
-														font-weight: 400;
+														font-weight: 500;
 														color: $text-black;
 														border-right: 1px solid $box-border-color;
 														background: $bg-light-grey;
@@ -2540,7 +2541,7 @@
 											.flight_going {
 												font-size: 10px;
 												font-weight: 500;
-												color: $primary-color;
+												color: $pink_clr;
 												position: absolute;
 												top: 0;
 												right: 20px;
@@ -3397,7 +3398,7 @@
 										&:checked {
 											~ {
 												.checkmark {
-													border: 1px solid $secondary-color;
+													border: 1px solid $pink_clr;
 
 													&:after {
 														display: block;
@@ -3426,7 +3427,7 @@
 											width: 8px;
 											height: 8px;
 											border-radius: 50%;
-											background: $secondary-color;
+											background: $pink_clr;
 										}
 									}
 								}
@@ -3516,7 +3517,7 @@
 								&:checked {
 									~ {
 										.checkmark {
-											border: 1px solid $secondary-color;
+											border: 1px solid $pink_clr;
 
 											&:after {
 												display: block;
@@ -3545,7 +3546,7 @@
 									width: 8px;
 									height: 8px;
 									border-radius: 50%;
-									background: $secondary-color;
+									background: $pink_clr;
 								}
 							}
 						}
@@ -3583,12 +3584,12 @@
 						.ui-slider-handle {
 							width: 13px;
 							height: 13px;
-							border-color: $secondary-color;
+							border-color: $pink_clr;
 							top: -6px;
 						}
 
 						.ui-widget-header {
-							background: $secondary-color;
+							background: $pink_clr;
 						}
 					}
 				}
@@ -3694,7 +3695,7 @@
 					.view_more {
 						font-size: 14px;
 						font-weight: 400;
-						color: $secondary-color;
+						color: $pink_clr;
 						display: block;
 					}
 				}
@@ -3735,7 +3736,7 @@
 								&:checked {
 									~ {
 										.checkmark {
-											border-color: $secondary-color;
+											border-color: $pink_clr;
 
 											&:after {
 												opacity: 1;
@@ -3767,7 +3768,7 @@
 									width: 6px;
 									height: 9px;
 									border-radius: 2px;
-									border: solid $secondary-color;
+									border: solid $pink_clr;
 									border-top-width: medium;
 									border-right-width: medium;
 									border-bottom-width: medium;
@@ -4082,7 +4083,7 @@
 												&:checked {
 													~ {
 														.checkmark {
-															border-color: $secondary-color;
+															border-color: $pink_clr;
 
 															&:after {
 																opacity: 1;
@@ -4114,7 +4115,7 @@
 													width: 6px;
 													height: 9px;
 													border-radius: 2px;
-													border: solid $secondary-color;
+													border: solid $pink_clr;
 													border-top-width: medium;
 													border-right-width: medium;
 													border-bottom-width: medium;
@@ -4172,7 +4173,7 @@
 												}
 
 												&.status_incomplete {
-													color: $secondary-color;
+													color: $pink_clr;
 												}
 
 												@media(max-width: 480px) {
@@ -4276,7 +4277,7 @@
 																&:checked {
 																	~ {
 																		.checkmark {
-																			border: 1px solid $secondary-color;
+																			border: 1px solid $pink_clr;
 
 																			&:after {
 																				display: block;
@@ -4305,7 +4306,7 @@
 																	width: 8px;
 																	height: 8px;
 																	border-radius: 50%;
-																	background: $secondary-color;
+																	background: $pink_clr;
 																}
 															}
 														}
@@ -4587,7 +4588,7 @@
 										&:checked {
 											~ {
 												.checkmark {
-													border-color: $secondary-color;
+													border-color: $pink_clr;
 
 													&:after {
 														opacity: 1;
@@ -4619,7 +4620,7 @@
 											width: 6px;
 											height: 9px;
 											border-radius: 2px;
-											border: solid $secondary-color;
+											border: solid $pink_clr;
 											border-top-width: medium;
 											border-right-width: medium;
 											border-bottom-width: medium;
@@ -5042,7 +5043,7 @@
 							&:before {
 								width: 2px;
 								height: 88%;
-								background: $secondary-color;
+								background: $pink_clr;
 								position: absolute;
 								top: 5%;
 								left: 1px;
@@ -5066,10 +5067,11 @@
 									width: 9px;
 									height: 9px;
 									border-radius: 50%;
-									background: $secondary-color;
+									background: $pink_clr;
+									border: 1px solid $text-yellow;
 									position: absolute;
 									top: 10px;
-									left: -12px;
+									left: -13px;
 									content: '';
 								}
 
@@ -5252,7 +5254,7 @@
 
 				ul {
 					width: 100%;
-					padding: 0 15px 20px;
+					padding: 0 15px 0px;
 					margin: 0;
 					list-style: none;
 
@@ -5261,8 +5263,15 @@
 						justify-content: space-between;
 						align-items: center;
 						font-size: 14px;
+						padding: 0 0 10px;
 						font-weight: 400;
 						color: $text-black;
+
+						&.lay_point {
+							span {
+								color: $pink_clr;
+							}
+						}
 					}
 				}
 
@@ -6111,8 +6120,9 @@
 										color: $text-black;
 
 										span {
-											color: $secondary-color;
+											color: $pink_clr;
 											padding: 0 5px;
+											font-weight: 500;
 										}
 									}
 								}
@@ -6142,10 +6152,15 @@
 											margin: 0;
 										}
 
-										span {
+										p {
 											font-size: 14px;
 											font-weight: 500;
-											color: $secondary-color;
+											color: $text-black;
+											margin: 0;
+
+											span {
+												color: $pink_clr;
+											}
 										}
 									}
 
@@ -6159,14 +6174,14 @@
 												background: $text-grey;
 
 												.ui-widget-header {
-													background: $secondary-color;
+													background: $pink_clr;
 												}
 
 												.ui-slider-handle {
 													width: 13px;
 													height: 13px;
 													top: -6px;
-													border-color: $secondary-color;
+													border-color: $pink_clr;
 													background: $background-white;
 												}
 											}
@@ -6241,8 +6256,9 @@
 
 									span {
 										font-size: 16px;
-										color: $secondary-color;
+										color: $pink_clr;
 										display: block;
+										font-weight: 500;
 									}
 								}
 							}
@@ -6468,7 +6484,7 @@
 													&:checked {
 														~ {
 															.checkmark {
-																border-color: $secondary-color;
+																border-color: $pink_clr;
 
 																&:after {
 																	opacity: 1;
@@ -6487,6 +6503,7 @@
 													margin-right: 11px;
 													position: relative;
 													top: 3px;
+													border: 1px solid $text-grey;
 													background: $background-white;
 
 													&:before {
@@ -6496,7 +6513,6 @@
 														top: 0;
 														left: 0;
 														content: '';
-														border: 1px solid $text-grey;
 													}
 
 													&:after {
@@ -6511,7 +6527,7 @@
 														width: 6px;
 														height: 9px;
 														border-radius: 2px;
-														border: solid $secondary-color;
+														border: solid $pink_clr;
 														border-top-width: medium;
 														border-right-width: medium;
 														border-bottom-width: medium;
@@ -7009,7 +7025,7 @@
 											&:checked {
 												~ {
 													.checkmark {
-														border: 1px solid $secondary-color;
+														border: 1px solid $pink_clr;
 
 														&:after {
 															display: block;
@@ -7038,7 +7054,7 @@
 												width: 8px;
 												height: 8px;
 												border-radius: 50%;
-												background: $secondary-color;
+												background: $pink_clr;
 											}
 										}
 
@@ -7058,7 +7074,7 @@
 											text-align: center;
 											font-size: 14px;
 											font-weight: 600;
-											color: $secondary-color;
+											color: $pink_clr;
 
 											span {
 												display: block;
@@ -7329,7 +7345,7 @@
 																color: $text-black;
 
 																&.point_use {
-																	color: $error-color;
+																	color: $pink_clr;
 																}
 															}
 
@@ -7368,7 +7384,7 @@
 																	&:checked {
 																		~ {
 																			.checkmark {
-																				border: 1px solid $secondary-color;
+																				border: 1px solid $pink_clr;
 
 																				&:after {
 																					display: block;
@@ -7397,7 +7413,7 @@
 																		width: 8px;
 																		height: 8px;
 																		border-radius: 50%;
-																		background: $secondary-color;
+																		background: $pink_clr;
 																	}
 																}
 															}
@@ -7484,7 +7500,7 @@
 																		color: $text-grey;
 
 																		span {
-																			color: $secondary-color;
+																			color: $pink_clr;
 																			padding-left: 40px;
 																			font-size: 12px;
 																			font-weight: 400;
@@ -7526,7 +7542,7 @@
 								margin: 0;
 
 								span {
-									font-weight: 500;
+									font-weight: 600;
 									color: $text-blue;
 								}
 							}
@@ -7577,7 +7593,7 @@
 								&:checked {
 									~ {
 										.checkmark {
-											border-color: $secondary-color;
+											border-color: $pink_clr;
 
 											&:after {
 												opacity: 1;
@@ -7596,6 +7612,7 @@
 								vertical-align: middle;
 								margin-right: 11px;
 								position: relative;
+								background: $background-white;
 
 								&:after {
 									content: '';
@@ -7609,7 +7626,7 @@
 									width: 6px;
 									height: 9px;
 									border-radius: 2px;
-									border: solid $secondary-color;
+									border: solid $pink_clr;
 									border-top-width: medium;
 									border-right-width: medium;
 									border-bottom-width: medium;
@@ -8118,7 +8135,7 @@
 										&:checked {
 											~ {
 												.checkmark {
-													border: 1px solid $secondary-color;
+													border: 1px solid $pink_clr;
 													color: $text-black;
 
 													&:after {
@@ -8148,7 +8165,7 @@
 											width: 8px;
 											height: 8px;
 											border-radius: 50%;
-											background: $secondary-color;
+											background: $pink_clr;
 										}
 									}
 								}
@@ -8684,7 +8701,7 @@
 			}
 
 			.ui-widget-header {
-				background: $secondary-color;
+				background: $pink_clr;
 			}
 		}
 	}
@@ -11458,7 +11475,7 @@
 										}
 
 										.block_icon {
-											margin-right: 20px;
+											margin: 3px 20px 0 0;
 										}
 
 										.block_text {
@@ -11484,64 +11501,80 @@
 											width: auto;
 											display: flex;
 											justify-content: center;
+											position: relative;
 
-											.block_mins {
-												width: 30px;
+											.custom-select {
+												width: 80px;
 												height: 30px;
+												border: 1px solid $box-border-color;
+												background: transparent;
+												padding: 0;
 
-												a {
-													width: 30px;
-													height: 30px;
-													display: inline-block;
-													background: transparent;
-													border: 1px solid $text-light-grey;
-													color: $text-light-grey;
+												select {
+													display: none;
+												}
+
+												.select-selected {
+													background-color: transparent;
 													line-height: 30px;
-													text-align: center;
-													border-radius: 5px;
-													font-size: 10px;
+													font-size: 14px;
+													color: $text-black;
+													display: flex;
+													align-items: center;
+													justify-content: center;
+													padding-right: 15px;
 
-													&:hover {
-														color: $pink_clr;
-														border-color: $pink_clr;
+													&:after {
+														position: absolute;
+														content: "";
+														top: 15px;
+														right: 7px;
+														width: 0;
+														height: 0;
+														border: 4px solid transparent;
+														border-color: $text-grey transparent transparent transparent;
+													}
+
+													&.select-arrow-active {
+														&:after {
+															border-color: transparent transparent $text-grey transparent;
+															top: 11px;
+														}
 													}
 												}
-											}
 
-											.block_baggage_wight {
-												width: 35px;
+												.select-items {
+													position: absolute;
+													background-color: $text-grey;
+													top: 30px;
+													left: 0;
+													right: 0;
+													z-index: 99;
+													max-height: 150px;
+													overflow-y: auto;
 
-												input {
-													width: 100%;
-													height: 30px;
-													border: none;
-													font-size: 20px;
-													line-height: 30px;
-													font-weight: 400;
-													color: $text-darkblue;
-													text-align: center;
-												}
-											}
+													div {
+														padding: 0px 16px;
+														line-height: 30px;
+														text-align: center;
+														border: 1px solid transparent;
+														border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+														cursor: pointer;
+														user-select: none;
+														font-size: 14px;
+														color: $text-white;
 
-											.block_plus {
-												width: 30px;
-												height: 30px;
+														&:hover {
+															background-color: rgba(0, 0, 0, 0.1);
+														}
 
-												a {
-													width: 30px;
-													height: 30px;
-													display: inline-block;
-													background: transparent;
-													border: 1px solid $text-light-grey;
-													color: $text-light-grey;
-													line-height: 30px;
-													text-align: center;
-													border-radius: 5px;
-													font-size: 10px;
+														&.same-as-selected {
+															background-color: rgba(0, 0, 0, 0.1);
+														}
+													}
 
-													&:hover {
-														color: $pink_clr;
-														border-color: $pink_clr;
+													&.select-hide {
+														display: none;
 													}
 												}
 											}
@@ -11783,6 +11816,14 @@
 										}
 									}
 								}
+							}
+
+							.error_text {
+								width: 100%;
+								color: $error-color;
+								font-size: 10px;
+								font-weight: 400;
+								margin: 5px 0 0;
 							}
 						}
 

@@ -18,9 +18,8 @@ export class HomeComponent implements OnInit {
   modules: Module[];
   moduleList: any = {};
   isRoundTrip: boolean = false;
-  
   countryCode: string;
-  
+
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private renderer: Renderer2
   ) {
-   
+    this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
@@ -102,16 +101,27 @@ export class HomeComponent implements OnInit {
   }
 
   clickOnTab(tabName) {
+    document.getElementById('home_banner').style.position = 'relative';
+    document.getElementById('home_banner').style.width = '100%';
+    document.getElementById('home_banner').style.paddingBottom = '50px';
     if (tabName === 'flight') {
-      let flight = document.getElementById('home_banner');
-      // flight.style.background = 'green';
-      // flight.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/banner1.svg) no-repeat";
+      document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+      document.getElementById('home_banner').style.backgroundSize = 'cover';
+      document.getElementById('login_btn').style.background = '#FC7E66';
     } else if (tabName === 'hotel') {
-      let hotel = document.getElementById('home_banner');
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+      document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+      document.getElementById('home_banner').style.backgroundSize = 'cover';
+      document.getElementById('login_btn').style.background = '#FF00BC';
+    }
+    else if (tabName === 'home-rentals') {
+      let home_rentals = document.getElementById('home_banner');
       // hotel.style.background = 'red';
       // hotel.style.background.link('http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg');
     }
   }
+
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'bg_color');
   }
