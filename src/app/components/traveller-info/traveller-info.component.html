@@ -10,7 +10,7 @@
         <ul>
             <li>
                 <div class="left">
-                    <span>Adult</span> (12+ years)
+                    <span>{{'adult' | translate}}</span> (12+ {{'years' | translate}})
                 </div>
                 <div class="right">
                     <input type='button' value='-' class='qtyminus' field='quantity' [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})"
@@ -21,7 +21,7 @@
             </li>
             <li>
                 <div class="left">
-                    <span>Child</span> (2-12 years)
+                    <span>{{'child' | translate}}</span> (2-12 {{'years' | translate}})
                 </div>
                 <div class="right">
                     <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : childValue === 0 }" [disabled]="childValue === 0" (click)="btnClickForChange({type: 'minus',label: 'child', value: childValue})" />
@@ -31,7 +31,7 @@
             </li>
             <li>
                 <div class="left">
-                    <span>Infant(s)</span> (Below 2 years)
+                    <span>{{'infant' | translate}}</span> (Below 2 {{'years' | translate}})
                 </div>
                 <div class="right">
                     <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : infantValue === 0 }" [disabled]="infantValue === 0" (click)="btnClickForChange({type: 'minus',label: 'infant', value: infantValue})" />
@@ -45,9 +45,9 @@
         </ul>
         <div class="flight_cat">
             <ul>
-                <li><a class="active_cat hover-link" [ngClass]="{ 'active_cat' : class === 'Economy' }" (click)="btnClickForChange({type: 'class', value: 'Economy'})">Economy</a></li>
-                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'Business' }" (click)="btnClickForChange({type: 'class', value: 'Business'})">Business</a></li>
-                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'First' }" (click)="btnClickForChange({type: 'class', value: 'First'})">First</a></li>
+                <li><a class="active_cat hover-link" [ngClass]="{ 'active_cat' : class === 'Economy' }" (click)="btnClickForChange({type: 'class', value: 'Economy'})">{{'economy_class' | translate}}</a></li>
+                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'Business' }" (click)="btnClickForChange({type: 'class', value: 'Business'})">{{'business_class' | translate}}</a></li>
+                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'First' }" (click)="btnClickForChange({type: 'class', value: 'First'})">{{'first_class' | translate}}</a></li>
             </ul>
         </div>
     </div>

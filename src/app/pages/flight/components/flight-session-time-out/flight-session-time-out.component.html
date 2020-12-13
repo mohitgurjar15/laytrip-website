@@ -1,16 +1,15 @@
 <div class="page_load">
-  <div class="block_session-timeout">
-      <div class="block_session-timeout_inner">
-          <h6>Session Timeout</h6>
-          <div class="block_im">
-              <img src="{{s3BucketUrl}}assets/images/Session-Timeout-im.svg" alt="Session Timeout Images">
-          </div>
-          <p>Due to browser inactivity for the past 10 minutes your session has timed out and you must search again.
-              We apologies for the inconvenience, but session timeouts were added for security reasons to ensure that your data is protected
-          </p>
-          <a [routerLink]=[url] [queryParams]="queryParams">
-              Go back to previous page
+    <div class="block_session-timeout">
+        <div class="block_session-timeout_inner">
+            <h6>{{'session_timeout' | translate}}</h6>
+            <div class="block_im">
+                <img src="{{s3BucketUrl}}assets/images/Session-Timeout-im.svg" alt="Session Timeout Images">
+            </div>
+            <p>{{'session_timeout_descrition' | translate}}
+            </p>
+            <a [routerLink]=[url] [queryParams]="queryParams">
+              {{'go_back_to_previous_page' | translate}}
           </a>
-      </div>
-  </div>
+        </div>
+    </div>
 </div>

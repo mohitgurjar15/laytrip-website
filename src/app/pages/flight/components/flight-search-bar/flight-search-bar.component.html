@@ -8,14 +8,14 @@
                             <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('onway')" data-toggle="tab" href="#Oneway">
                                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
                                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg" alt="Oneway Icon" />
-                                <span>Oneway</span>
+                                <span>{{'oneway' | translate}}</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
                                 <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
                                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg" alt="Return Icon" />
-                                <span>Round Trip</span>
+                                <span>{{'round_trip' | translate}}</span>
                             </a>
                         </li>
                         <!-- 
@@ -38,7 +38,7 @@
                                         <li class="grid_box first">
                                             <div class="flight_form">
                                                 <div class="search_area">
-                                                    <label>From</label>
+                                                    <label>{{'from' | translate}}</label>
                                                     <ng-select [loading]="loadingDeparture" [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city" [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true" [(ngModel)]="airportDefaultDestValue" [ngModelOptions]="{standalone: true}"
                                                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)" loadingText="" (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input" placeholder="{{ placeHolder1 }}">
                                                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
@@ -63,7 +63,7 @@
                                             </div>
                                             <div class="flight_to">
                                                 <div class="search_area">
-                                                    <label>To</label>
+                                                    <label>{{'to' | translate}}</label>
 
                                                     <ng-select [loading]="loadingArrival" [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city" [(ngModel)]="airportDefaultArrivalValue" [ngModelOptions]="{standalone: true}" [clearable]="false" minTermLength="3" notFoundText="" (clear)="onRemove($event,{key: 'toSearch'})"
                                                         [virtualScroll]="true" (search)="changeSearchArrival($event)" loadingText="" (change)="selectEvent($event, {key: 'toSearch'})" class="laytrip-input" placeholder="{{ placeHolder2 }}">
@@ -84,7 +84,7 @@
                                         <li class="grid_box secound">
                                             <div class="date_form">
                                                 <div class="search_area">
-                                                    <label>Departure</label>
+                                                    <label>{{'departure' | translate}}</label>
                                                     <p-calendar inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true" (onMonthChange)="changeMonth($event)"
                                                         panelStyleClass="calender-price-view">
                                                         <p-header *ngIf="!isRoundTrip && isCalenderPriceLoading" class="calender-header">We are retrieving monthly prices...</p-header>
@@ -101,16 +101,16 @@
                                             </div>
                                             <div class="date_to">
                                                 <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
-                                                    <label>Return</label>
-                                                    <p (click)="toggleOnewayRoundTrip('roundtrip')">Tap to add return date</p>
+                                                    <label>{{'return' | translate}}</label>
+                                                    <p (click)="toggleOnewayRoundTrip('roundtrip')">{{'tap_to_add_return_date' | translate}}</p>
                                                 </div>
                                                 <div class="search_area" *ngIf="isRoundTrip">
-                                                    <label>Return</label>
+                                                    <label>{{'return' | translate}}</label>
                                                     <p-calendar inputId="basic" [(ngModel)]="returnDate" [ngModelOptions]="{standalone: true}" flightReturnMinDate [minDate]="flightReturnMinDate" [readonlyInput]="true" panelStyleClass="calender-price-view">
                                                     </p-calendar>
                                                     <div class="prev-next">
-                                                        <a class="anchor-text" (click)="dateChange('arrival','previous')">Prev</a>
-                                                        <a class="anchor-text" (click)="dateChange('arrival','next')">Next</a>
+                                                        <a class="anchor-text" (click)="dateChange('arrival','previous')">{{'prev' | translate}}</a>
+                                                        <a class="anchor-text" (click)="dateChange('arrival','next')">{{'next' | translate}}</a>
                                                     </div>
 
                                                 </div>
@@ -127,7 +127,7 @@
                                         </li>
                                     </ul>
                                     <div class="serch_btn">
-                                        <button><span>Modify Search</span></button>
+                                        <button><span>{{'modify_search' | translate}}</span></button>
                                     </div>
                                 </div>
                             </form>
@@ -136,7 +136,7 @@
 
                         <!-- ####################  ROUND TRIP START ################ -->
                         <div id="Return" class="tab-pane fade">
-                            <h3>Round Trip</h3>
+                            <h3>{{'round_trip' | translate}}</h3>
                         </div>
                         <!-- ####################  ROUND TRIP END ################ -->
 

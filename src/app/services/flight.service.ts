@@ -182,8 +182,8 @@ export class FlightService {
         );
     }
 
-    sendEmail(data, bookingId) {
-        const url = environment.apiUrl + `v1/booking/share-booking-detail/${bookingId}`;
+    sendEmail(data) {
+        const url = environment.apiUrl + `v1/booking/share-booking-detail`;
         return this.http.post(url,data, this.commonFunction.setHeaders()).pipe(
             catchError(this.handleError)
         );

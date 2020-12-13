@@ -1,64 +1,64 @@
 <div class="modal fade baggage_policy_modal" id="baggage_policy_modal">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal_top">
-              <h2>Baggage Policy</h2>
-              <button type="button" class="close" data-dismiss="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal_top">
+                <h2>Baggage Policy</h2>
+                <button type="button" class="close" data-dismiss="modal">
                   <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
               </button>
-          </div>
-          <div class="block_modal_main">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="block_modal_right">
-                            <!-- <div class="detail_left">
+            </div>
+            <div class="block_modal_main">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="block_modal_right">
+                                <!-- <div class="detail_left">
                                 <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
                                 <p>Indigo</p>
                                 <span>EWR - DEN</span>
                             </div> -->
-                            <div class="detail_right" *ngIf="loadBaggageDetails">
-                              <div class="w-100">
-                                  <p class="fb_animation mb-0 h-auto w-100"></p>
-                                  <p class="fb_animation mb-0 h-auto w-100"></p>
-                              </div>
-                              <p class="fb_animation mb-0 h-auto w-100"></p>
-                            </div>
-                            <div class="detail_right" *ngIf="!loadBaggageDetails">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Flight</th>
-                                            <th>Depart</th>
-                                            <th>Arrive</th>
-                                            <th>Free Baggage</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ng-container *ngIf="baggageDetails.length">
-                                          <tr *ngFor="let baggageInfo of baggageDetails">
-                                            <td data-title="Flight">{{baggageInfo.flight_number}}</td>
-                                            <td data-title="Depart">{{baggageInfo.departure_airport}}</td>
-                                            <td data-title="Arrive">{{baggageInfo.arrival_airport}}</td>
-                                            <td data-title="Free Baggage">{{baggageInfo.baggage_capacity}}</td>
-                                          </tr>
-                                        </ng-container>
-                                        
-                                        <tr *ngIf="isError">
-                                          <td colspan="4">{{errorMessage}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p>The baggage information is just for reference. Please Check with airline before check-in.</p>
+                                <div class="detail_right" *ngIf="loadBaggageDetails">
+                                    <div class="w-100">
+                                        <p class="fb_animation mb-0 h-auto w-100"></p>
+                                        <p class="fb_animation mb-0 h-auto w-100"></p>
+                                    </div>
+                                    <p class="fb_animation mb-0 h-auto w-100"></p>
+                                </div>
+                                <div class="detail_right" *ngIf="!loadBaggageDetails">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{{'flight' | translate}}</th>
+                                                <th>{{'depart' | translate}}</th>
+                                                <th>{{'arrive' | translate}}</th>
+                                                <th>Free Baggage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ng-container *ngIf="baggageDetails.length">
+                                                <tr *ngFor="let baggageInfo of baggageDetails">
+                                                    <td data-title="Flight">{{baggageInfo.flight_number}}</td>
+                                                    <td data-title="Depart">{{baggageInfo.departure_airport}}</td>
+                                                    <td data-title="Arrive">{{baggageInfo.arrival_airport}}</td>
+                                                    <td data-title="Free Baggage">{{baggageInfo.baggage_capacity}}</td>
+                                                </tr>
+                                            </ng-container>
+
+                                            <tr *ngIf="isError">
+                                                <td colspan="4">{{errorMessage}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>{{'baggage_info_description' | translate}}</p>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-                  
-                  
                 </div>
+
             </div>
-              
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
 </div>

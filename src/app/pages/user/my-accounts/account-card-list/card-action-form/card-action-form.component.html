@@ -1,40 +1,38 @@
 <div class="modal-header">
-  <div class="block_title">
-    <h5>Add Card</h5>
-  </div>
-  <button type="button" class="close" (click)="close()">
+    <div class="block_title">
+        <h5>{{'add_card' | translate}}</h5>
+    </div>
+    <button type="button" class="close" (click)="close()">
     <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
   </button>
 </div>
 <form [formGroup]="cardActionForm" (ngSubmit)="onSubmit(cardActionForm.value)">
-  <div class="modal-body">
-    <div class="add_card_form">
-      <div class="form_row">
-        <div class="form_field half">
-          <label>First Name<sup>*</sup></label>
-          <div class="text_field">
-            <input type="text" formControlName="first_name" maxlength="20" tabindex="1" placeholder="Enter first name">
-            <div *ngIf="cardActionForm.controls.first_name.errors && cardActionForm.controls.first_name.touched">
-              <p *ngIf="cardActionForm.controls.first_name.errors" class="error_text">Please enter your first
-                name.
-              </p>
+    <div class="modal-body">
+        <div class="add_card_form">
+            <div class="form_row">
+                <div class="form_field half">
+                    <label>{{'first_name' | translate}}<sup>*</sup></label>
+                    <div class="text_field">
+                        <input type="text" formControlName="first_name" maxlength="20" tabindex="1" placeholder="{{'first_name_placeholder' | translate}}">
+                        <div *ngIf="cardActionForm.controls.first_name.errors && cardActionForm.controls.first_name.touched">
+                            <p *ngIf="cardActionForm.controls.first_name.errors" class="error_text">{{'first_name_touched_validation' | translate}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_field half">
+                    <label>{{'last_name' | translate}}<sup>*</sup></label>
+                    <div class="text_field">
+                        <input type="text" formControlName="last_name" maxlength="20" tabindex="2" placeholder="{{'last_name_placeholder' | translate}}">
+                        <div *ngIf="cardActionForm.controls.last_name.errors && cardActionForm.controls.last_name.touched">
+                            <p *ngIf="cardActionForm.controls.last_name.errors" class="error_text">{{'last_name_touched_validation' | translate}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="form_field half">
-          <label>Last Name<sup>*</sup></label>
-          <div class="text_field">
-            <input type="text" formControlName="last_name" maxlength="20" tabindex="2" placeholder="Enter last name">
-            <div *ngIf="cardActionForm.controls.last_name.errors && cardActionForm.controls.last_name.touched">
-              <p *ngIf="cardActionForm.controls.last_name.errors" class="error_text">Please enter your last
-                name.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form_row">
-        <!-- <div class="form_field half">
+            <div class="form_row">
+                <!-- <div class="form_field half">
           <label>Name on Card<sup>*</sup></label>
           <div class="text_field">
             <input type="text" maxlength="20" tabindex="3" placeholder="Enter Name on Card" formControlName="card_name">
@@ -45,57 +43,53 @@
             </div>
           </div>
         </div> -->
-        <div class="form_field half">
-          <label>Card Number<sup>*</sup></label>
-          <div class="text_field">
-            <input type="text" tabindex="4" placeholder="0000 0000 0000 0000 0000" formControlName="card_number"
-              [textMask]="mask">
-            <!-- [textMask]="mask" -->
-            <div *ngIf="cardActionForm.controls.card_number.errors && cardActionForm.controls.card_number.touched">
-              <p *ngIf="cardActionForm.controls.card_number.errors.required" class="error_text">Please enter card
-                number.
-              </p>
-            </div>
-          </div>
-        </div>
+                <div class="form_field half">
+                    <label>{{'card_number' | translate}}<sup>*</sup></label>
+                    <div class="text_field">
+                        <input type="text" tabindex="4" placeholder="0000 0000 0000 0000 0000" formControlName="card_number" [textMask]="mask">
+                        <!-- [textMask]="mask" -->
+                        <div *ngIf="cardActionForm.controls.card_number.errors && cardActionForm.controls.card_number.touched">
+                            <p *ngIf="cardActionForm.controls.card_number.errors.required" class="error_text">{{'card_number_touched_validation' | translate}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form_field half">
-          <label>CVV</label>
-          <div class="text_field">
-            <input type="text" tabindex="5" placeholder="Enter CVV no." formControlName="card_cvv" [textMask]="cvvNoMask">
-            <div *ngIf="cardActionForm.controls.card_cvv.errors && cardActionForm.controls.card_cvv.touched">
-              <p *ngIf="cardActionForm.controls.card_cvv.errors.required" class="error_text">Please enter card CVV
-                number.
-              </p>
-            </div>
-          </div>
-        </div>
+                <div class="form_field half">
+                    <label>{{'cvv' | translate}}</label>
+                    <div class="text_field">
+                        <input type="text" tabindex="5" placeholder="{{'cvv_placeholder' | translate}}" formControlName="card_cvv" [textMask]="cvvNoMask">
+                        <div *ngIf="cardActionForm.controls.card_cvv.errors && cardActionForm.controls.card_cvv.touched">
+                            <p *ngIf="cardActionForm.controls.card_cvv.errors.required" class="error_text">{{'cvv_touched_validation' | translate}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-      </div>
-      <div class="form_row">
-
-        <div class="form_field half">
-          <label>Expiry</label>
-          <div class="text_field">
-            <p-calendar inputId="basic" formControlName="card_expiry" [minDate]="expiryMinDate" dateFormat="mm/yy"
-              view="month" tabindex="6" [readonlyInput]="true">
-            </p-calendar>
-            <div *ngIf="cardActionForm.controls.card_expiry.errors && cardActionForm.controls.card_expiry.touched">
-              <p *ngIf="cardActionForm.controls.card_expiry.errors.required" class="error_text">Please enter card expiry date.
-              </p>
             </div>
-            <!-- <input class="birth_date" type="text" maxlength="20" tabindex="4" placeholder="Dd/mm/yyyy"
+            <div class="form_row">
+
+                <div class="form_field half">
+                    <label>{{'expiry' | translate}}</label>
+                    <div class="text_field">
+                        <p-calendar inputId="basic" formControlName="card_expiry" [minDate]="expiryMinDate" dateFormat="mm/yy" view="month" tabindex="6" [readonlyInput]="true">
+                        </p-calendar>
+                        <div *ngIf="cardActionForm.controls.card_expiry.errors && cardActionForm.controls.card_expiry.touched">
+                            <p *ngIf="cardActionForm.controls.card_expiry.errors.required" class="error_text">{{'expiry_date_touched_validation' | translate}}
+                            </p>
+                        </div>
+                        <!-- <input class="birth_date" type="text" maxlength="20" tabindex="4" placeholder="Dd/mm/yyyy"
               formControlName="card_expiry"> -->
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="modal-footer">
-    <div class="form_btn">
-      <button type="button" (click)="close()">Close</button>
-      <button type="submit">
-        <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin"></i> Save</button>
+    <div class="modal-footer">
+        <div class="form_btn">
+            <button type="button" (click)="close()">{{'close' | translate}}</button>
+            <button type="submit">
+        <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin"></i> {{'save' | translate}}</button>
+        </div>
     </div>
-  </div>
 </form>

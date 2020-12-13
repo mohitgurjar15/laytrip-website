@@ -19,12 +19,12 @@
             </li>
             <li>
                 <a [routerLink]="['/account/payment']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon"> Payment History
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_payment_history.svg" alt="Payment History Icon"> {{'payment_history' | translate}}
                 </a>
             </li>
             <li>
                 <a href="javascript:void(0);" [routerLink]="['/account/account-card-list']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon"> Credit Cards
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_credit_cards.svg" alt="Credit Cards Icon"> {{'credit_card' | translate}}
                 </a>
             </li>
             <li>
@@ -34,17 +34,17 @@
             </li>
             <li>
                 <a [routerLink]="['/account/lay-credit-points']" [routerLinkActive]="['active_link']">
-                    <img src="{{s3BucketUrl}}assets/images/icon/ic_my_wallet.svg" alt="My Wallet Icon"> Laytrip Points
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_my_wallet.svg" alt="My Wallet Icon"> {{'laytrip_point' | translate}}
                 </a>
             </li>
             <li *ngIf="_login_user_info.socialAccountId === ''">
                 <div class="dropdown">
                     <a (click)="onToggleSubMenu($event)" class="dropdown-toggle hover-link" [routerLinkActive]="['active_link']" data-toggle="dropdown">
-                        <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon"> Settings
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_settings.svg" alt="Settings Icon"> {{'setting' | translate}}
                     </a>
                     <ul class="dropdown-menu" [routerLinkActive]="['show']">
                         <li *ngIf="_login_user_info.socialAccountId === ''">
-                            <a [routerLink]="['/account/settings/change-password']" [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_change_pass.svg" alt="Settings Icon"> Change Password</a>
+                            <a [routerLink]="['/account/settings/change-password']" [routerLinkActive]="['active_link']"><img src="{{s3BucketUrl}}assets/images/icon/ic_change_pass.svg" alt="Settings Icon"> {{'change_password' | translate}}</a>
                         </li>
                     </ul>
                 </div>
