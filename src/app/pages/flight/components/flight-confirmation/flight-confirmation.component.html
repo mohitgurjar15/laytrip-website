@@ -15,8 +15,8 @@
           <ul>
               <li>
                   <span>Payment Type :</span>
-                  <p *ngIf="bookingData.booking_details.bookingType==1">Installment payment</p>
-                  <p *ngIf="bookingData.booking_details.bookingType==2">Full payment</p>
+                  <p *ngIf="bookingData.booking_details.bookingType==1">Installment Payment</p>
+                  <p *ngIf="bookingData.booking_details.bookingType==2">Full Payment</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
                   <span>Installment Payment Type :</span>
@@ -27,7 +27,7 @@
                   <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.totalAmount | number : '1.2-2'}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                <span>Down payment :</span>
+                <span>Down Payment :</span>
                 <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.bookingInstalments[0].amount |  number : '1.2-2'}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
@@ -35,11 +35,11 @@
                   <p>{{bookingData.booking_details.bookingInstalments.length-1}} Installment</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                  <span>Installment Payment Start Date :</span>
+                  <span>Installment Payment Start Date :&nbsp;</span>
                   <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[0].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
-                  <span>Next Installment Payment Date :</span>
+                  <span>Next Installment Payment Date :&nbsp;</span>
                   <p>{{commonFunction.convertDateFormat(bookingData.booking_details.bookingInstalments[1].instalmentDate,'YYYY-MM-DD')}}</p>
               </li>
               <li *ngIf="bookingData.booking_details.bookingType==1">
