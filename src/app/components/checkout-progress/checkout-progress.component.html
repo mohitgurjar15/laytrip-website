@@ -1,34 +1,34 @@
 <section class="banner_detail">
-  <div class="container">
-      <div class="row">
-          <div class="col-lg-6">
-              <div class="cnt_left">
-                  <img src="{{s3BucketUrl}}assets/images/icon/ic_detail_icon.svg" alt="detail Iocn">
-                  <h2>Check our cancellation policy before making a booking.</h2>
-              </div>
-          </div>
-          <div class="col-lg-6">
-              <div class="cnt_right">
-                  <ul>
-                     <li [ngClass]="{'active': progressStep.step1==true}">
-                        <div class="border_block"><span>1</span></div>
-                        <p>Payment</p>
-                     </li>
-                      <li [ngClass]="{'active': progressStep.step2==true}" >
-                          <div class="border_block"><span>2</span></div>
-                          <p>Traveler Details</p>
-                      </li>
-                      <li [ngClass]="{'active': progressStep.step3==true}">
-                          <div class="border_block"><span>3</span></div>
-                          <p>Checkout</p>
-                      </li>
-                      <li [ngClass]="{'active': progressStep.step4==true}">
-                          <div class="border_block"><span>4</span></div>
-                          <p>Confirmation</p>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-  </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="cnt_left">
+                    <img src="{{s3BucketUrl}}assets/images/icon/ic_detail_icon.svg" alt="detail Iocn">
+                    <h2>{{'check_cancellation_polycy_before_make_booking' | translate}}</h2>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cnt_right">
+                    <ul>
+                        <li [ngClass]="{'active': progressStep.step1==true}">
+                            <div class="border_block"><span>1</span></div>
+                            <p>{{'payment' | translate}}</p>
+                        </li>
+                        <li [ngClass]="{'active': progressStep.step2==true}">
+                            <div class="border_block"><span>2</span></div>
+                            <p>{{'traveler_detail' | translate}}</p>
+                        </li>
+                        <li [ngClass]="{'active': progressStep.step3==true}">
+                            <div class="border_block"><span>3</span></div>
+                            <p>{{'checkout' | translate}}</p>
+                        </li>
+                        <li [ngClass]="{'active': progressStep.step4==true}">
+                            <div class="border_block"><span>4</span></div>
+                            <p>{{'confirmation' | translate}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

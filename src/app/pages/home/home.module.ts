@@ -39,7 +39,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    TranslateModule,
     ComponentsModule,
     NgbModule,
     FormsModule,

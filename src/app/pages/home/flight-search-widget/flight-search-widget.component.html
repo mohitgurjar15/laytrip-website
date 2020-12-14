@@ -1,28 +1,20 @@
 <div class="flight_tab">
-  <ul class="nav nav-tabs">
-      <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab"
-              href="#Oneway" (click)="toggleOnewayRoundTrip('onway')">
-              <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg"
-                  alt="Oneway Icon" />
-              <img class="active-icon"
-                  src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active.svg"
-                  alt="Oneway Icon" />
-              <span>Oneway</span>
-          </a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab"
-              href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
-              <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg"
-                  alt="Return Icon" />
-              <img class="active-icon"
-                  src="{{s3BucketUrl}}assets/images/icon/return-icon-active.svg"
-                  alt="Return Icon" />
-              <span>Round Trip</span>
-          </a>
-      </li>
-      <!-- <li class="nav-item">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('onway')">
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg" alt="Oneway Icon" />
+                <span>{{'oneway' | translate}}</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg" alt="Return Icon" />
+                <span>{{'round_trip' | translate}}</span>
+            </a>
+        </li>
+        <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#Multi-city">
               <img class="default-icon"
                   src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg"
@@ -33,115 +25,86 @@
               <span>Multi city</span>
           </a>
       </li> -->
-  </ul>
-  <!-- Tab panes -->
-  <div class="tab-content">
-      <div id="Oneway" class="tab-pane active">
-          <form [formGroup]="flightSearchForm" novalidate autocomplete="off"
-              (ngSubmit)="searchFlights()">
-              <div class="flight_search">
-                  <ul class="flight-grid oneway">
-                      <li class="grid_box first">
-                          <div class="flight_form"
-                              [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
-                              <div class="search_area">
-                                  <app-search-airport [form]="flightSearchForm"
-                                      [controlName]="'fromDestination'" [id]="'fromSearch'"
-                                      [label]="'From'" [placeHolder]=departureCity
-                                      [defaultSelected]=departureAirportCountry [tabIndex]=1
-                                      [airport]=fromAirport [defaultCity]=departureCity
-                                      (changeValue)="destinationChangedValue($event)">
-                                  </app-search-airport>
-                              </div>
-                          </div>
-                          <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
-                              <a (click)="swapAirport()">
-                                  <img *ngIf="countryCode!=='DR'"
-                                      src="{{s3BucketUrl}}assets/images/icon/switch-btn_im.svg"
-                                      alt="Switch Image" />
-                                  <img *ngIf="countryCode==='DR'"
-                                      src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg"
-                                      alt="Switch Image" />
-                              </a>
-                          </div>
-                          <div class="flight_to"
-                              [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
-                              <div class="search_area">
-                                  <app-search-airport [form]="flightSearchForm"
-                                      [controlName]="'toDestination'" [id]="'toSearch'"
-                                      [label]="'TO'" [placeHolder]=arrivalCity
-                                      [defaultSelected]=arrivalAirportCountry [tabIndex]=2
-                                      [airport]=toAirport [defaultCity]=arrivalCity
-                                      (changeValue)="destinationChangedValue($event)">
-                                  </app-search-airport>
-                              </div>
-                          </div>
-                      </li>
-                      <li class="grid_box secound">
-                          <div class="date_form">
-                              <div class="search_area"
-                                  [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                                  <label>Departure</label>
-                                  <p-calendar inputId="basic" [(ngModel)]="departureDate"
-                                      [ngModelOptions]="{standalone: true}" flightDepartureMinDate
-                                      [minDate]="flightDepartureMinDate"
-                                      (onSelect)=departureDateUpdate($event)
-                                      [readonlyInput]="true">
-                                  </p-calendar>
-                                  <div class="prev-next">
-                                      <a (click)="dateChange('departure','previous')">Prev</a>
-                                      <a (click)="dateChange('departure','next')">Next</a>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="date_to">
-                              <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
-                                  <label>Return</label>
-                                  <p (click)="toggleOnewayRoundTrip('roundtrip')">Tap to add
-                                      return date</p>
-                              </div>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="Oneway" class="tab-pane active">
+            <form [formGroup]="flightSearchForm" novalidate autocomplete="off" (ngSubmit)="searchFlights()">
+                <div class="flight_search">
+                    <ul class="flight-grid oneway">
+                        <li class="grid_box first">
+                            <div class="flight_form" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
+                                <div class="search_area">
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'" [label]="'from' | translate" [placeHolder]=departureCity [defaultSelected]=departureAirportCountry [tabIndex]=1 [airport]=fromAirport [defaultCity]=departureCity
+                                        (changeValue)="destinationChangedValue($event)">
+                                    </app-search-airport>
+                                </div>
+                            </div>
+                            <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
+                                <a (click)="swapAirport()">
 
-                              <div class="search_area" *ngIf="isRoundTrip"
-                                  [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                                  <label>Return</label>
-                                  <p-calendar inputId="basic" [(ngModel)]="returnDate"
-                                      [ngModelOptions]="{standalone: true}" flightReturnMinDate
-                                      [minDate]="flightReturnMinDate" [readonlyInput]="true"
-                                      panelStyleClass="calender-responsive-view">
-                                  </p-calendar>
-                                  <div class="prev-next">
-                                      <a (click)="dateChange('arrival','previous')">Prev</a>
-                                      <a (click)="dateChange('arrival','next')">Next</a>
-                                  </div>
-                              </div>
+                                    <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg" alt="Switch Image" />
+                                </a>
+                            </div>
+                            <div class="flight_to" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
+                                <div class="search_area">
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'" [label]="'to' | translate" [placeHolder]=arrivalCity [defaultSelected]=arrivalAirportCountry [tabIndex]=2 [airport]=toAirport [defaultCity]=arrivalCity (changeValue)="destinationChangedValue($event)">
+                                    </app-search-airport>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="grid_box secound">
+                            <div class="date_form">
+                                <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                    <label>{{'departure' | translate}}</label>
+                                    <p-calendar inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true">
+                                    </p-calendar>
+                                    <div class="prev-next">
+                                        <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>
+                                        <a (click)="dateChange('departure','next')">{{'next' | translate}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="date_to">
+                                <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
+                                    <label>{{'return' | translate}}</label>
+                                    <p (click)="toggleOnewayRoundTrip('roundtrip')">{{'tap_to_add_return_date' | translate}}</p>
+                                </div>
 
-                          </div>
-                      </li>
-                      <li class="grid_box third">
-                          <div class="travellers">
-                              <app-traveller-info label="TRAVELERS & CLASS"
-                                  (changeValue)="changeTravellerInfo($event)">
-                              </app-traveller-info>
-                          </div>
-                      </li>
-                  </ul>
-                  <div class="serch_btn">
-                      <button>Search Flights <img
+                                <div class="search_area" *ngIf="isRoundTrip" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                    <label>{{'return' | translate}}</label>
+                                    <p-calendar inputId="basic" [(ngModel)]="returnDate" [ngModelOptions]="{standalone: true}" flightReturnMinDate [minDate]="flightReturnMinDate" [readonlyInput]="true" panelStyleClass="calender-responsive-view">
+                                    </p-calendar>
+                                    <div class="prev-next">
+                                        <a (click)="dateChange('arrival','previous')">{{'prev' | translate}}</a>
+                                        <a (click)="dateChange('arrival','next')">{{'next' | translate}}</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                        <li class="grid_box third">
+                            <div class="travellers">
+                                <app-traveller-info label="TRAVELERS & CLASS" (changeValue)="changeTravellerInfo($event)">
+                                </app-traveller-info>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="serch_btn">
+                        <button>{{'search_flight' | translate}} <img
                               src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
                               alt="Right Arrow" /></button>
-                  </div>
-              </div>
-          </form>
-      </div>
-      <div id="Return" class="tab-pane fade"><br>
-          <h3>Menu 1</h3>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-              ea commodo consequat.</p>
-      </div>
-      <div id="Multi-city" class="tab-pane fade"><br>
-          <h3>Menu 2</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-              laudantium, totam rem aperiam.</p>
-      </div>
-  </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="Return" class="tab-pane fade"><br>
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div id="Multi-city" class="tab-pane fade"><br>
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+    </div>
 </div>

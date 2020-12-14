@@ -67,6 +67,7 @@ export class SendEmailPopupComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     let payload = {
+     bookingId:'' ,
       emails:[]
     }
     if (this.emailForm.invalid) {
@@ -75,9 +76,10 @@ export class SendEmailPopupComponent implements OnInit {
       return;
     } else {
        this.emailForm.controls.formArray1.value.forEach(element => {
+          payload.bookingId = this.bookingId
           payload.emails.push(element);
        });
-      this.flightService.sendEmail(payload, this.bookingId).subscribe((data: any) => {
+      this.flightService.sendEmail(payload).subscribe((data: any) => {
         this.submitted = this.loading = false;
         this.toastr.success(data.message, 'Success');
         this.emailForm.reset();

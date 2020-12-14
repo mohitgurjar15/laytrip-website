@@ -10,8 +10,7 @@
                 <div class="card_add_pass">
                     <div class="card-header" id="adultOne">
                         <h2 class="mb-0">
-                            <button type="button" class="btn btn-link" data-toggle="collapse"
-                                data-target="#adultcollapseOne">
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#adultcollapseOne">
                                 <p class="fb_animation w-100 mb-0"></p>
                             </button>
                         </h2>
@@ -21,8 +20,7 @@
                 <div class="card_add_pass">
                     <div class="card-header" id="adultTwo">
                         <h2 class="mb-0">
-                            <button type="button" class="btn btn-link" data-toggle="collapse"
-                                data-target="#adultcollapseTwo">
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#adultcollapseTwo">
                                 <p class="fb_animation w-100 mb-0"></p>
                             </button>
                         </h2>
@@ -43,8 +41,7 @@
                                 <input type="checkbox" value="">
                                 <span class="checkmark"></span>
                             </label>
-                            <button type="button" class="btn btn-link" data-toggle="collapse"
-                                data-target="#childcollapseOne">
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#childcollapseOne">
                                 <p class="fb_animation w-100 mb-0"></p>
                             </button>
                         </h2>
@@ -58,8 +55,7 @@
                                 <input type="checkbox" value="">
                                 <span class="checkmark"></span>
                             </label>
-                            <button type="button" class="btn btn-link" data-toggle="collapse"
-                                data-target="#childcollapseTwo">
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#childcollapseTwo">
                                 <p class="fb_animation w-100 mb-0"></p>
                             </button>
                         </h2>
@@ -90,12 +86,12 @@
 </div>
 
 <div class="passanger_detail_main">
-    
+
     <div class="block_passenger_detail" *ngIf="!loader">
         <div class="block_passenger_info">
             <div class="block_title_section">
-                <h6>Adult <span>(Above 12 years)</span></h6>
-                <span >({{adultCounter}}/{{_itinerary.adult || 0}} selected)</span>
+                <h6>{{'adult' | translate}} <span>(Above 12 years)</span></h6>
+                <span>({{adultCounter}}/{{_itinerary.adult || 0}} selected)</span>
             </div>
             <!-- <h6>Adult <span>(Above 12 years)</span></h6> -->
 
@@ -109,8 +105,7 @@
                                         (click)="selectItinerary($event,traveler)" type="checkbox">
                                     <span class="checkmark"></span>
                                 </label>
-                                <button (click)="adultCollapseClick()" type="button" class="btn btn-link"
-                                    data-toggle="collapse" [attr.data-target]="'#adultcollapseOne'+ i">
+                                <button (click)="adultCollapseClick()" type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#adultcollapseOne'+ i">
                                     {{traveler.firstName || 'N/A'}} {{traveler.lastName}}
                                     <i class="fa fa-angle-down"></i>
                                     <span id="adultFormStatus-{{i}}"
@@ -118,30 +113,25 @@
                                 </button>
                             </h2>
                         </div>
-                        <div *ngIf="adultCollapse" id="adultcollapseOne{{i}}" class="collapse cus_collapse"
-                            aria-labelledby="adultOne+i" data-parent="#accordion-Adults">
+                        <div *ngIf="adultCollapse" id="adultcollapseOne{{i}}" class="collapse cus_collapse" aria-labelledby="adultOne+i" data-parent="#accordion-Adults">
                             <div class="card-body">
-                                <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'adult'"
-                                    [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
+                                <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'adult'" [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                                 </app-traveler-form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <a class="add_passenger_btn hover-link" 
-                (click)="addForms('adult')">{{showAddAdultForm ? '-' : '+'}}
-                Add {{'Adult' | titlecase}}</a>
+            <a class="add_passenger_btn hover-link" (click)="addForms('adult')">{{showAddAdultForm ? '-' : '+'}}
+                {{'add_adult' | translate}}</a>
             <!-- Without Login -->
             <div id="accordion-Adult" class="accordion" *ngIf="showAddAdultForm">
                 <div class="card_add_pass add-more">
                     <div class="card-header" id="adultOne">
                     </div>
-                    <div id="adultcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne"
-                        data-parent="#accordion-Adult">
+                    <div id="adultcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne" data-parent="#accordion-Adult">
                         <div class="card-body">
-                            <app-traveler-form [type]="'adult'" (travelerFormChange)="pushTraveler($event)"
-                                [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
+                            <app-traveler-form [type]="'adult'" (travelerFormChange)="pushTraveler($event)" [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
                         </div>
                     </div>
                 </div>
@@ -150,7 +140,7 @@
         <div *ngIf="isLoggedIn">
             <div class="block_passenger_info" *ngIf="_itinerary.child > 0">
                 <div class="block_title_section">
-                    <h6>Child <span>(Above 2-12 years)</span></h6>
+                    <h6>{{'child' | translate}} <span>(Above 2-12 years)</span></h6>
                     <span>({{childCounter}}/{{_itinerary.child || 'N/A'}} selected)</span>
                 </div>
                 <!-- <h6>Child <span>(Above 2-12 years)</span></h6> -->
@@ -164,8 +154,7 @@
                                             (click)="selectItinerary($event,traveler)" type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <button (click)="childCollapseClick()" type="button" class="btn btn-link"
-                                        data-toggle="collapse" [attr.data-target]="'#childcollapseOne'+ i">
+                                    <button (click)="childCollapseClick()" type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#childcollapseOne'+ i">
                                         {{traveler.firstName}} {{traveler.lastName}}
                                         <i class="fa fa-angle-down"></i>
                                         <span id="adultFormStatus-{{i}}" class="status_complete">Complete</span>
@@ -173,41 +162,36 @@
 
                                 </h2>
                             </div>
-                            <div *ngIf="childCollapse" id="childcollapseOne{{i}}" class="collapse cus_collapse"
-                                aria-labelledby="adultOne+i" data-parent="#accordion-childs">
+                            <div *ngIf="childCollapse" id="childcollapseOne{{i}}" class="collapse cus_collapse" aria-labelledby="adultOne+i" data-parent="#accordion-childs">
                                 <div class="card-body">
-                                    <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'child'"
-                                        [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
+                                    <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'child'" [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                                     </app-traveler-form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="add_passenger_btn hover-link"
-                    (click)="addForms('child')">{{showAddChildForm ? '-' : '+'}}
+                <a class="add_passenger_btn hover-link" (click)="addForms('child')">{{showAddChildForm ? '-' : '+'}}
                     Add {{'Child' | titlecase}}</a>
                 <div id="accordion-child" class="accordion" *ngIf="showAddChildForm">
                     <div class="card_add_pass add-more">
                         <div class="card-header" id="childOne">
                         </div>
-                        <div id="childcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne"
-                            data-parent="#accordion-child">
+                        <div id="childcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne" data-parent="#accordion-child">
                             <div class="card-body">
-                                <app-traveler-form [type]="'child'" (travelerFormChange)="pushTraveler($event)"
-                                    [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
+                                <app-traveler-form [type]="'child'" (travelerFormChange)="pushTraveler($event)" [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="block_passenger_info"  *ngIf="_itinerary.infant > 0">
+            <div class="block_passenger_info" *ngIf="_itinerary.infant > 0">
                 <div class="block_title_section">
-                    <h6>Infant <span>(Above 2 years)</span></h6>
+                    <h6>{{'infant' | translate}} <span>(Below 2 years)</span></h6>
                     <span>({{infantCounter}}/{{_itinerary.infant || 'N/A'}} selected)</span>
                 </div>
-               <!--  <h6>Infant <span>(Above 2 years)</span></h6> -->
+                <!--  <h6>Infant <span>(Above 2 years)</span></h6> -->
                 <div id="accordion-infants" class="accordion" *ngIf="_infants.length">
                     <div *ngFor="let traveler of _infants; let i = index;">
                         <div class="card_add_pass" *ngIf="traveler.user_type==='infant'">
@@ -218,38 +202,32 @@
                                             (click)="selectItinerary($event,traveler)" type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <button (click)="infantCollapseClick()" type="button" class="btn btn-link"
-                                        data-toggle="collapse" [attr.data-target]="'#infantcollapseOne'+ i">
+                                    <button (click)="infantCollapseClick()" type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#infantcollapseOne'+ i">
                                         {{traveler.firstName}} {{traveler.lastName}}
                                         <i class="fa fa-angle-down"></i>
                                         <span id="adultFormStatus-{{i}}" class="status_complete">Complete</span>
                                     </button>
                                 </h2>
                             </div>
-                            <div *ngIf="infantCollapse" id="infantcollapseOne{{i}}" class="collapse cus_collapse"
-                                aria-labelledby="adultOne+i" data-parent="#accordion-infants">
+                            <div *ngIf="infantCollapse" id="infantcollapseOne{{i}}" class="collapse cus_collapse" aria-labelledby="adultOne+i" data-parent="#accordion-infants">
                                 <div class="card-body">
-                                    <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'infant'"
-                                        [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
+                                    <app-traveler-form (travelerFormChange)="pushTraveler($event)" [type]="'infant'" [traveler]="traveler" [countries]="countries" [countries_code]="countries_code">
                                     </app-traveler-form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="add_passenger_btn hover-link"
-                    (click)="addForms('infant')">{{showAddInfantForm ? '-' : '+'}}
+                <a class="add_passenger_btn hover-link" (click)="addForms('infant')">{{showAddInfantForm ? '-' : '+'}}
                     Add {{'Infant' | titlecase}}</a>
                 <div id="accordion-infant" class="accordion" *ngIf="showAddInfantForm">
                     <div class="card_add_pass add-more">
                         <div class="card-header" id="infantOne">
 
                         </div>
-                        <div id="infantcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne"
-                            data-parent="#accordion-infant">
+                        <div id="infantcollapseOne" class="collapse cus_collapse show" aria-labelledby="adultOne" data-parent="#accordion-infant">
                             <div class="card-body">
-                                <app-traveler-form [type]="'infant'" (travelerFormChange)="pushTraveler($event)"
-                                    [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
+                                <app-traveler-form [type]="'infant'" (travelerFormChange)="pushTraveler($event)" [countries]="countries" [countries_code]="countries_code"></app-traveler-form>
                             </div>
                         </div>
                     </div>

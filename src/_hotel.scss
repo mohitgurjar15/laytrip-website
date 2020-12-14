@@ -1,7 +1,7 @@
+@import "_cstm-variable.scss";
 /*------------- color variables ------------*/
 $pink: #F826C1;
-
-
+$hotel-secondary-color : #F826C1;
 @function color($color-name) {
     @return map-get($colors , $color-name )
 };
