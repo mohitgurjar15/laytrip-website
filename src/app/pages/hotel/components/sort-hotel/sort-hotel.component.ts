@@ -47,7 +47,7 @@ export class SortHotelComponent implements OnInit {
 
   resetSorting(key, order) {
     this.sortType = 'lh_price';
-    this.sortHotel.emit({ key, order })
+    this.sortHotel.emit({ key, order });
   }
 
   ngOnChanges(changes: SimpleChanges) {

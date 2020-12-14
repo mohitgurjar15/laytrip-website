@@ -110,6 +110,7 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.hotelSearchFormSubmitted = false;
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.fromDestinationInfo) {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;

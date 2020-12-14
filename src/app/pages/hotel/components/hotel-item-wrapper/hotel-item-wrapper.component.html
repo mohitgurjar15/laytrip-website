@@ -113,7 +113,7 @@
                             <div class="block" *ngIf="item.secondary_start_price === 0">
                                 <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
                             </div>
-                        </div> <a class="book_btn" href="flight-add-passenger.html">Select</a>
+                        </div> <a class="book_btn" [routerLink]="['/hotel/detail/',item.id]">Select</a>
                         <div class="show_detail">
                             <a href="javascript:void(0);" class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment
