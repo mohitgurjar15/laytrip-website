@@ -220,7 +220,6 @@
     "status": "Estado",
     "full_payment": "Pago completo",
     "no_payment_avilable": "No hay pago disponible",
-
     "credit_card": "Tarjetas de crédito",
     "add_new_card": "Agregar nueva tarjeta",
     "add_card": "Agregar tarjeta",
@@ -235,7 +234,6 @@
     "expiry_date_touched_validation": "Ingrese la fecha de vencimiento de la tarjeta.",
     "close": "Cerrar",
     "save": "Salvar",
-
     "yrs": "Edad",
     "male": "Masculino",
     "female": "Femenino",
@@ -247,7 +245,6 @@
     "select_nationality_touched_validation": "Seleccione la nacionalidad.",
     "first_name_string_validation": "El nombre debe tener un mínimo de 2 caracteres y un máximo de 30 caracteres y no debe contener dígitos ni caracteres especiales.",
     "last_name_string_validation": "El apellido debe tener un mínimo de 2 caracteres y un máximo de 30 caracteres y no debe contener dígitos ni caracteres especiales.",
-
     "laytrip_point": "Puntos Laytrip",
     "total": "Total",
     "avilable_laytrip_point": "Puntos de Laytrip disponibles",
@@ -256,7 +253,6 @@
     "point": "Puntos",
     "laytrip_point_added": "Puntos Laytrip agregados",
     "laytrip_point_reedeemed": "Puntos Laytrip canjeados",
-
     "setting": "Configuraciones",
     "change_password": "Cambia la contraseña",
     "current_password": "contraseña actual",
@@ -270,7 +266,6 @@
     "current_password_not_match": "Tu contraseña actual no coincide",
     "password_update": "Contraseña actualiza",
     "update_password_successfully_message": "¡Su contraseña se ha actualizado correctamente!",
-
     "searching_flight": "Buscando vuelos",
     "finding_you_best_avilable_flight_option": "Encontrarle las mejores opciones de vuelo disponibles",
     "modify_search": "Modificar búsqueda",
@@ -322,7 +317,6 @@
     "cancellation_rule": "Reglas de cancelación",
     "view_more": "Ver más",
     "view_less": "Ver menos",
-
     "checkout": "Revisa",
     "check_cancellation_polycy_before_make_booking": "Consulte nuestra política de cancelación antes de realizar una reserva.",
     "payment": "Pago",
@@ -377,6 +371,7 @@
     "use_laycredi_in_booking_info_message_1": "Utilice Laycredit para esta reserva. Tiene",
     "use_laycredi_in_booking_info_message_2": "Laycredits en su billetera.",
     "dicounted_price": "Precio descontado",
+    "laycredit": "Laycredits",
     "session_timeout": "Hora de término de la sesión",
     "session_timeout_descrition": "Debido a la inactividad del navegador durante los últimos 10 minutos, su sesión ha expirado y debe buscar nuevamente. Lamentamos las molestias, pero se agregaron tiempos de espera de sesión por razones de seguridad para garantizar que sus datos estén protegidos.",
     "go_back_to_previous_page": "Volver a la página anterior",
@@ -388,7 +383,6 @@
     "accept": "Aceptar",
     "error": "Error",
     "something_went_worng_error": "¡Ups! Algo salió mal. Inténtalo de nuevo.",
-
     "verify_account": "Verifica tu cuenta",
     "newest_member_of_inspirational_description": "Eres el miembro más reciente de una comunidad de viajeros mundial inspiradora.",
     "explore_endless_possibilities": "Explore infinitas posibilidades ahora:",

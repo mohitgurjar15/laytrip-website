@@ -160,7 +160,6 @@
     "other_detail": "Other Details",
     "profile_update": "Profile Updated",
     "profile_update_successfully_messege": "Profile has been updated successfully!",
-
     "my_booking": "My Bookings",
     "booking_id": "Booking ID",
     "booking_type": "Booking Type",
@@ -221,7 +220,6 @@
     "status": "Status",
     "full_payment": "Full Payment",
     "no_payment_avilable": "No Payment Available",
-
     "credit_card": "Credit Cards",
     "add_new_card": "Add New Card",
     "add_card": "Add Card",
@@ -236,7 +234,6 @@
     "expiry_date_touched_validation": "Please enter card expiry date.",
     "close": "Close",
     "save": "Save",
-
     "yrs": "yrs",
     "male": "Male",
     "female": "Female",
@@ -248,7 +245,6 @@
     "select_nationality_touched_validation": "Please select nationality.",
     "first_name_string_validation": "First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.",
     "last_name_string_validation": "Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.",
-
     "laytrip_point": "Laytrip Points",
     "total": "Total",
     "avilable_laytrip_point": "Available laytrip points",
@@ -257,7 +253,6 @@
     "point": "Points",
     "laytrip_point_added": "Laytrip points added",
     "laytrip_point_reedeemed": "Laytrip points redeemed",
-
     "setting": "Settings",
     "change_password": "Change Password",
     "current_password": "Current Password",
@@ -271,7 +266,6 @@
     "current_password_not_match": "Your current password doesn't match",
     "password_update": "Password Updated",
     "update_password_successfully_message": "Your password has been updated successfully!",
-
     "searching_flight": "Searching Flights",
     "finding_you_best_avilable_flight_option": "Finding you the best available flight options",
     "modify_search": "Modify Search",
@@ -323,7 +317,6 @@
     "cancellation_rule": "Cancellation Rules",
     "view_more": "View More",
     "view_less": "View Less",
-
     "checkout": "Checkout",
     "check_cancellation_polycy_before_make_booking": "Check our cancellation policy before making a booking.",
     "payment": "Payment",
@@ -390,7 +383,6 @@
     "accept": "Accept",
     "error": "Error",
     "something_went_worng_error": "Oops. Something went wrong. Please try again.",
-
     "verify_account": "Verify your account",
     "newest_member_of_inspirational_description": "You’re the newest member of an inspirational worldwide community of travellers.",
     "explore_endless_possibilities": "Explore endless possibilities now:",
@@ -412,5 +404,4 @@
     "password_reset": "Password Reset",
     "requested_a_password_reset_for_user_account": "You're receiving this email because you requested a password reset for your user account at laytrip.",
     "disregard_this_email": "If you didn't request this change, you can disregard this email - we have not yet reset your password."
-
 }

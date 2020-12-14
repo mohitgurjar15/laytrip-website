@@ -172,7 +172,7 @@
                     <li class="ic_flight"><img src="{{s3BucketUrl}}assets/images/icon/summary_flight_ic.svg" alt="Flight Icon"></li>
                     <li>{{flightDetail[0].arrival_code}}</li>
                 </ul>
-                <p>{{ commonFunction.convertDateFormat(flightDetail[0].departure_date,'DD/MM/YYYY')}} | {{totalTraveler}} Passenger | {{flightDetail[0].routes[0].stops[0].cabin_class}}</p>
+                <p>{{ commonFunction.convertDateFormat(flightDetail[0].departure_date,'DD/MM/YYYY')}} | {{totalTraveler}} {{'passenger' | translate}} | {{flightDetail[0].routes[0].stops[0].cabin_class}}</p>
                 <div class="btm_aerrow"></div>
             </div>
             <div class="info_btm">
@@ -329,7 +329,7 @@
             <ul>
                 <li>
                     <p>{{'inst_payment' | translate}} <img class="hover-link" src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon" title="This payment amount will be automatically deducted at each one of your payment due dates. At any time, you can adjust this amount in your payment settings."></p>
-                    <span>{{ currency?.symbol }}{{partialPaymentAmount | number : '1.2-2'}}/installment</span>
+                    <span>{{ currency?.symbol }}{{partialPaymentAmount | number : '1.2-2'}}/{{'installment' | translate}}</span>
                 </li>
             </ul>
         </div>

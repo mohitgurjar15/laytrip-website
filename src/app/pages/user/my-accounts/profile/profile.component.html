@@ -303,20 +303,20 @@
                                     <div class="form_field half">
                                         <label>{{'first_name' | translate}}<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" placeholder="Enter first name" formControlName="first_name" maxlength="25" tabindex="1">
+                                            <input type="text" placeholder="{{'first_name_placeholder' | translate}}" formControlName="first_name" maxlength="25" tabindex="1">
                                             <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors" class="focus-input100 login-error">
-                                                <p *ngIf="profileForm.controls.first_name.errors.required" class="error_text">Please enter your first name.</p>
-                                                <div *ngIf="profileForm.controls.first_name.errors.pattern" class="error_text">First name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
+                                                <p *ngIf="profileForm.controls.first_name.errors.required" class="error_text">{{'first_name_touched_validation' | translate}}</p>
+                                                <div *ngIf="profileForm.controls.first_name.errors.pattern" class="error_text">{{'first_name_string_validation' | translate}}</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form_field half">
                                         <label>{{'last_name' | translate}}<sup>*</sup></label>
                                         <div class="text_field">
-                                            <input type="text" placeholder="Enter last name" formControlName="last_name" maxlength="25" tabindex="2">
+                                            <input type="text" placeholder="{{'last_name_placeholder' | translate}}" formControlName="last_name" maxlength="25" tabindex="2">
                                             <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors" class="focus-input100 login-error">
-                                                <div *ngIf="profileForm.controls.last_name.errors.required" class="error_text">Please enter your last name.</div>
-                                                <div *ngIf="profileForm.controls.last_name.errors.pattern" class="error_text">Last name should be minimum 2 character and maximum 30 character long and it should not contain digit & special character.</div>
+                                                <div *ngIf="profileForm.controls.last_name.errors.required" class="error_text">{{'last_name_touched_validation' | translate}}</div>
+                                                <div *ngIf="profileForm.controls.last_name.errors.pattern" class="error_text">{{'last_name_string_validation' | translate}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -362,7 +362,7 @@
                                             </div> -->
                                             <div *ngIf="(submitted || profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) 
                                              && profileForm.hasError('phoneAndPhoneCodeError')">
-                                                <p class="error_text">Please enter phone number</p>
+                                                <p class="error_text">{{'phone_touched_validation' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -372,18 +372,18 @@
                                         <div class="field_inn">
                                             <label>{{'dob' | translate}}<sup>*</sup></label>
                                             <div class="text_field">
-                                                <p-calendar inputStyleClass="custom_datpicker birth_date" inputId="basic" tabindex="6" formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020" placeholder="Select date of birth"
+                                                <p-calendar inputStyleClass="custom_datpicker birth_date" inputId="basic" tabindex="6" formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020" placeholder="{{'dob_placeholder' | translate}}"
                                                     [defaultDate]="dobMinDate">
                                                 </p-calendar>
                                                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors" class="focus-input100 login-error">
-                                                    <div *ngIf="profileForm.controls.dob.errors.required" class="error_text">Please choose your date of birth.</div>
+                                                    <div *ngIf="profileForm.controls.dob.errors.required" class="error_text">{{'dob_touched_validation' | translate}}</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="field_inn">
                                             <label>{{'language' | translate}}</label>
                                             <div class="text_field custom-select">
-                                                <ng-select class="ng-customClass" tabindex="7" seime lectOnTab="true" placeholder="Select preferred language" formControlName="language_id">
+                                                <ng-select class="ng-customClass" tabindex="7" seime lectOnTab="true" placeholder="{{'language_placeholder' | translate}}" formControlName="language_id">
                                                     <ng-option *ngFor="let language of languages" value="{{language.id}}">
                                                         {{language.name}}
                                                     </ng-option>
@@ -393,7 +393,7 @@
                                         <div class="field_inn">
                                             <label>{{'currency' | translate}}</label>
                                             <div class="text_field custom-select">
-                                                <ng-select class="ng-customClass" tabindex="8" selectOnTab="true" placeholder="Select preferred currency" formControlName="currency_id">
+                                                <ng-select class="ng-customClass" tabindex="8" selectOnTab="true" placeholder="{{'currency_placeholder' | translate}}" formControlName="currency_id">
                                                     <ng-option *ngFor="let currency of currencies" value="{{currency.id}}">
                                                         {{currency.code}}
                                                     </ng-option>
@@ -411,7 +411,7 @@
                                                             <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/male.svg" alt="male Icon">
                                                             <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/male-active.svg" alt="male Icon">
                                                         </div>
-                                                        <span>Male</span>
+                                                        <span>{{'male' | translate}}</span>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -420,7 +420,7 @@
                                                             <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/female.svg" alt="Female Icon">
                                                             <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/female-active.svg" alt="Female Icon">
                                                         </div>
-                                                        <span>Female</span>
+                                                        <span>{{'female' | translate}}</span>
                                                     </a>
                                                 </li>
                                                 <!-- <li>

@@ -23,12 +23,12 @@
                                     <div class="border-dot">
                                         <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
                                     </div>
-                                    <span *ngIf="item.stop_count===0">Non-Stop</span>
+                                    <span *ngIf="item.stop_count===0">{{'non_stop' | translate}}</span>
                                     <span *ngIf="item.stop_count === 1">1 Stop</span>
                                     <span *ngIf="item.stop_count > 1">{{item.stop_count}} Stops</span>
                                 </div>
                                 <div class="detail_info">
-                                    <p>Arrival</p>
+                                    <p>{{'arrival' | translate}}</p>
                                     <h4>{{ item?.arrival_time }}</h4>
                                     <span>{{ item?.arrival_info.city }}</span>
                                 </div>
@@ -349,12 +349,12 @@
                                                         <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
                                                     </div>
 
-                                                    <span *ngIf="item.stop_count===0">Non-Stop</span>
+                                                    <span *ngIf="item.stop_count===0">{{'non_stop' | translate}}</span>
                                                     <span *ngIf="item.stop_count === 1">1 Stop</span>
                                                     <span *ngIf="item.stop_count > 1">{{item.stop_count}} Stops</span>
                                                 </div>
                                                 <div class="detail_info">
-                                                    <p>Arrival</p>
+                                                    <p>{{'arrival' | translate}}</p>
                                                     <h4>{{ item?.routes[0].stops[item?.routes[0].stops.length-1].arrival_time }}
                                                     </h4>
                                                     <span>{{ item?.routes[0].stops[item?.routes[0].stops.length-1].arrival_info.city }}</span>
@@ -393,13 +393,13 @@
                                                         <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
                                                     </div>
 
-                                                    <span *ngIf="item.inbound_stop_count===0">Non-Stop</span>
+                                                    <span *ngIf="item.inbound_stop_count===0">{{'non_stop' | translate}}</span>
                                                     <span *ngIf="item.inbound_stop_count === 1">1 Stop</span>
                                                     <span *ngIf="item.inbound_stop_count > 1">{{item.inbound_stop_count}}
                                                         Stops</span>
                                                 </div>
                                                 <div class="detail_info">
-                                                    <p>Arrival</p>
+                                                    <p>{{'arrival' | translate}}</p>
                                                     <h4>{{ item?.routes[1].stops[item?.routes[1].stops.length-1]?.arrival_time }}
                                                     </h4>
                                                     <span>{{ item?.routes[1].stops[item?.routes[1].stops.length-1].arrival_info?.city }}</span>
