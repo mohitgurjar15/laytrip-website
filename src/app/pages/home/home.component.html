@@ -4,18 +4,16 @@
         <div class="accordion" id="accordionCovid">
             <div class="card">
                 <div class="card-head" id="headingOne">
-                    <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
-                        aria-controls="collapseOne">
-                        <img src="{{s3BucketUrl}}assets/images/icon/ic_detail_icon.svg" alt="Info Image"> Travelling
-                        during COVID-19
+                    <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <img src="{{s3BucketUrl}}assets/images/icon/ic_detail_icon.svg" alt="Info Image">{{'covid_title' | translate}}
                     </h2>
                 </div>
 
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCovid"
-                    style="">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCovid" style="">
                     <div class="card-body">
-                        <p>Please be advised on our cancellation and refund policies. <a [routerLink]="['/covid-19']"
-                                target="_blank">read more.</a></p>
+                        <p>{{'covid_description' | translate}}
+                            <a [routerLink]="['/covid-19']" target="_blank" [innerHTML]="'read_more' | translate"></a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -28,8 +26,8 @@
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
-                <h2>Welcome to <span>laytrip!</span></h2>
-                <p>Travel without stressing your wallet</p>
+                <h2 [innerHTML]="'flight_main_title' | translate"></h2>
+                <p>{{'flight_second_title' | translate}}</p>
             </div>
 
             <!-- <div class="block_right" *ngIf="countryCode=='DR'">
@@ -47,34 +45,23 @@
 
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab"
-                        aria-selected="true" (click)="clickOnTab('flight')">
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg"
-                            alt="Flight Icon" />
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg"
-                            alt="Flight Icon" />
-                        <span>Flight</span>
+                    <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-selected="true" (click)="clickOnTab('flight')">
+                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon.svg" alt="Flight Icon" />
+                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/flight-icon-active.svg" alt="Flight Icon" />
+                        <span>{{'flight' | translate}}</span>
                     </a>
-                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
-                        aria-selected="false" (click)="clickOnTab('hotel')">
+                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-selected="false" (click)="clickOnTab('hotel')">
                         <!-- data-toggle="tab" href="#hotel" -->
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg"
-                            alt="Hotel Icon" />
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg"
-                            alt="Hotel Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-disabled.svg"
-                            alt="Flight Icon">
-                        <span>Hotel</span>
+                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon.svg" alt="Hotel Icon" />
+                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-active.svg" alt="Hotel Icon" />
+                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-disabled.svg" alt="Flight Icon">
+                        <span>{{'hotel' | translate}}</span>
                     </a>
-                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-selected="false"
-                        (click)="clickOnTab('home-rentals')">
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg"
-                            alt="Accommodation Icon" />
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg"
-                            alt="Accommodation Icon" />
-                        <img class="disabled-icon"
-                            src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-disabled.svg" alt="Flight Icon">
-                        <span>Home Rentals</span>
+                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
+                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon.svg" alt="Accommodation Icon" />
+                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-active.svg" alt="Accommodation Icon" />
+                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-disabled.svg" alt="Flight Icon">
+                        <span>{{'home_rental' | translate}}</span>
                     </a>
                 </div>
             </nav>

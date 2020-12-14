@@ -9,7 +9,7 @@
                     <div class="pay_modal_cnt">
                         <div class="pay_modal_top">
                             <p class="d-none">Booking ID: <span>----------</span></p>
-                           <!--  <a href="Account-payment-history.html">Back</a> -->
+                            <!--  <a href="Account-payment-history.html">Back</a> -->
                         </div>
                         <div class="pay_modal_btm">
                             <div class="block_inner">
@@ -47,7 +47,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                   
+
                                     <div class="detail_info_right d-none">
                                         <div class="list_right">
                                             <p>Payment Due in <span>6 days</span></p>
@@ -118,56 +118,56 @@
                         </div>
                     </div>
                 </div>
-            
-                <div class="account_cnt_main booking_main"  *ngIf="!loader">
+
+                <div class="account_cnt_main booking_main" *ngIf="!loader">
                     <div class="pay_modal_cnt">
                         <div class="pay_modal_top">
-                            <p>Booking ID: <span>{{list[0].laytripBookingId || '--'}}</span></p>
-                            <a [routerLink]="['/account/payment']">Back</a>
+                            <p>{{'booking_id' | translate}}: <span>{{list[0].laytripBookingId || '--'}}</span></p>
+                            <a [routerLink]="['/account/payment']">{{'back' | translate}}</a>
                         </div>
-                        <div class="pay_modal_btm" > 
+                        <div class="pay_modal_btm">
                             <div class="block_inner">
                                 <div class="block_title">
-                                    <h5>Payment Details</h5>
+                                    <h5>{{'payment_detail' | translate}}</h5>
                                 </div>
                                 <div class="pay_detail_info">
                                     <div class="detail_info_left">
                                         <ul>
                                             <li>
-                                                <span>Payment Type :</span>
-                                                <p *ngIf="list[0].totalInstallments > 0">Installment Payment</p>
-                                                <p *ngIf="list[0].totalInstallments == 0">Full Payment</p>
+                                                <span>{{'payment_type' | translate}} :</span>
+                                                <p *ngIf="list[0].totalInstallments > 0">{{'inst_payment' | translate}}</p>
+                                                <p *ngIf="list[0].totalInstallments == 0">{{'full_payment' | translate}}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Installment Payment Type :</span>
+                                                <span>{{'installment_payment_type' | translate}} :</span>
                                                 <p>{{list[0].bookingInstalments[0].instalmentType || '--' | titlecase }}</p>
                                             </li>
                                             <li>
-                                                <span>Total Booking Amount :</span>
+                                                <span>{{'total_booking_amount' | translate}} :</span>
                                                 <p>{{currencySymbol}}{{list[0].totalAmount | number : '1.2-2'}}</p>
                                             </li>
-                                            <li  *ngIf="list[0].totalInstallments == 0">
-                                                <span>Booking Date :</span>
+                                            <li *ngIf="list[0].totalInstallments == 0">
+                                                <span>{{'booking_date' | translate}} :</span>
                                                 <p>{{ dateConvert(list[0].bookingDate) }}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Installment Payment Part :</span>
+                                                <span>{{'installment_payment_part' | translate}} :</span>
                                                 <p>{{list[0].totalInstallments}} Installment</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Installment Payment Start Date :</span>
+                                                <span>{{'installment_payment_start_date' | translate}}  :</span>
                                                 <p>{{ flightCommonFunction.getPaymentStartDate(list[0].bookingInstalments) }}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Next Installment Payment Date :</span>
+                                                <span>{{'next_installment_payment_date' | translate}} :</span>
                                                 <p>{{dateConvert(list[0].nextInstalmentDate)}}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Installment Payment Amount :</span>
-                                                <p>{{ currencySymbol }}{{list[0].bookingInstalments[1].amount ||  list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
+                                                <span>{{'inst_payment_amt' | translate}} :</span>
+                                                <p>{{ currencySymbol }}{{list[0].bookingInstalments[1].amount || list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
-                                                <span>Paid Amount :</span>
+                                                <span>{{'paid_amt' | translate}} :</span>
                                                 <p>{{ currencySymbol }}{{list[0].paidAmount | number : '1.2-2'}}</p>
                                             </li>
                                         </ul>
@@ -184,22 +184,22 @@
                             </div>
                             <div class="block_inner" *ngIf="list[0].totalInstallments > 0">
                                 <div class="block_title">
-                                    <h5>Installment Payment Details</h5>
+                                    <h5>{{'inst_payment_detail' | translate}}</h5>
                                 </div>
                                 <div class="pay_detail_tbl">
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Amount</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
+                                                <th>{{'id' | translate}}</th>
+                                                <th>{{'amt' | translate}}</th>
+                                                <th>{{'date' | translate}}</th>
+                                                <th>{{'status' | translate}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let instalment of list[0].bookingInstalments ; let i = index;">
                                                 <td data-title="ID">{{i +1 }}</td>
-                                                <td data-title="Amount">{{ currencySymbol}}{{  instalment.amount | number : '1.2-2' }}</td>
+                                                <td data-title="Amount">{{ currencySymbol}}{{ instalment.amount | number : '1.2-2' }}</td>
                                                 <td data-title="Date">{{ dateConvert(instalment.instalmentDate) }}</td>
                                                 <td data-title="Status"><span [ngClass]="{'status_paid': instalment.instalmentStatus,'status_pending': instalment.instalmentStatus != true}">{{instalment.instalmentStatus ? 'Paid':'Pending'}}</span></td>
                                             </tr>
