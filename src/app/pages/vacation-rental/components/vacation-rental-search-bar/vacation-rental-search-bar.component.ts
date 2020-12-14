@@ -19,13 +19,13 @@ export class VacationRentalSearchBarComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   rentalSearchForm: FormGroup;
   countryCode:string='';
-
+  loading = false;
   rentalForm:any= {
     id:'',
     type:"city",
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     check_out_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
-    number_and_children_ages:'',
+    number_and_children_ages:[],
     adult_count:1,
     child:'',
   }
@@ -35,7 +35,12 @@ export class VacationRentalSearchBarComponent implements OnInit {
   destination:any='';
   data:any=[];
   defaultData:any;
-  
+  defaultCity:'Barcelona';
+  defaultCountry:'Spain';
+  rentalDefaultDestValue;
+  destinationRental: any = {};
+  placeHolder:'Barcelona';
+  defaultSelected:any='Barcelona';
   constructor( public fb: FormBuilder,
     private rentalService: VacationRentalService,
     public commonFunction: CommonFunction,
@@ -53,14 +58,17 @@ export class VacationRentalSearchBarComponent implements OnInit {
   ngOnInit() {
     const info = JSON.parse(localStorage.getItem('_rental'));
     console.log(info);
+
     this.data=[{
           id: info.id,
-          display_name: info.display_name,
+          title: info.display_name,
           type: info.type,
           city: info.city,
           country: info.country,
     }];
-    this.defaultData=info.display_name;
+     this.defaultCity    = info.city;
+     this.defaultCountry = info.country;
+      
     console.log(this.data);
     this.rentalForm.check_in_date=this.commonFunction.convertDateFormat(info.check_in_date, 'YYYY-MM-DD');
     this.rentalForm.check_out_date=this.commonFunction.convertDateFormat(info.check_out_date, 'YYYY-MM-DD');
@@ -80,21 +88,6 @@ export class VacationRentalSearchBarComponent implements OnInit {
     //this.rentalForm.number_and_children_ages = event.child_age[0].children;
     this.rentalForm.number_and_children_ages = event.child_age;
     this.totalPerson = event.totalPerson;
-  }
-
-    onChangeSearch(event) {
-    if (event.term.length > 2) {
-      //this.searchByRental(event.term);
-    }
-  }
-
-   selectEvent(event) {
-    this.destination=event;
-    console.log(this.destination);
-  }
-
-  onRemove(event) {
-    this.rentalForm.id='';
   }
 
   dateChange(type, direction) {
@@ -127,6 +120,62 @@ export class VacationRentalSearchBarComponent implements OnInit {
       }
     }
 
+  }
+
+   searchByRental(searchItem) {
+    this.loading = true;
+    this.rentalService.searchRentalData(searchItem).subscribe((response: any) => {
+      console.log(response);
+      this.data = response.map(res => {
+
+        console.log(res);
+        this.loading = false;
+        return {
+          id: res.id,
+          title: res.display_name,
+          type: res.type,
+          city: res.city,
+          country: res.country,
+        };
+      });
+    },
+      error => {
+        this.loading = false;
+      }
+    );
+  }
+
+  onChangeSearch(event) {
+    if (event.term.length > 2) {
+      this.searchByRental(event.term);
+    }
+  }
+
+   selectEvent(event, index) {
+     console.log(event,index);
+     if (!event) {
+      this.placeHolder = this.placeHolder;
+      this.defaultSelected = this.defaultSelected;
+    }
+    this.defaultSelected = '';
+    this.defaultSelected = event;
+  }
+
+  onRemove(event, item) {
+    if (item.key === 'fromSearch1') {
+      this.destinationRental = Object.create(null);
+    }
+  }
+
+  searchRentals(formData){
+    formData.id=this.defaultSelected.id;
+    formData.city=this.defaultSelected.city;
+    formData.country=this.defaultSelected.country;
+    formData.display_name=this.defaultSelected.title;
+    formData.check_in_date=moment(formData.check_in_date).format("YYYY/MM/DD");
+    formData.check_out_date=moment(formData.check_out_date).format("YYYY/MM/DD");
+    console.log(formData);
+    this.searchBarInfo.emit(formData);
   }
 
 

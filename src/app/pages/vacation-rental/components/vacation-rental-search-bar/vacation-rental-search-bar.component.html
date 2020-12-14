@@ -9,19 +9,22 @@
                                 <div class="hotel_where">
                                     <div class="search_area">
                                         <label>Destination</label>
-                                        <!-- {{data | json }} -->
-                                         <ng-select [formControlName]="'fromDestination'" [loading]="loading" [selectOnTab]="true" [items]="data"
-                                         bindLabel="display_name" bindValue="id" [(ngModel)]="defaultData" notFoundText="" [virtualScroll]="true" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)" (clear)="onRemove($event)"
-                                          class="laytrip-input" placeholder="Destination" [tabIndex]="tabIndex" >
-                                           <ng-template ng-option-tmp  let-item="item" let-index="index" let-search="searchTerm">
-                                            <div>
-                                            {{item.city}},{{item.country}}-{{item.display_name}}
+                                         <ng-select [loading]="loading" [selectOnTab]="true" [items]="data"
+                                         bindLabel="title" bindValue="title" [(ngModel)]="defaultCity" notFoundText="" [virtualScroll]="true" [(ngModel)]="rentalDefaultDestValue" [ngModelOptions]="{standalone: true}" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, {key: 'fromSearch1'})"(clear)="onRemove($event)"
+                                          class="laytrip-input" placeholder="{{ placeHolder }}">
+                                          <ng-template ng-label-tmp let-item="item">
+                                        <div class="hotel-parent">
+                                            <!-- <img height="15" width="15" [src]="item.thumbnail" /> -->
+                                            <div class="sub-parent">{{item.title}}</div>
+                                        </div>
+                                        </ng-template>
+                                        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                                            <div class="hotel-parent">
+                                                <div class="sub-parent">{{item.city}},{{item.country}}-{{item.title}}</div>
                                             </div>
-                                           </ng-template>
-                                            <ng-template ng-label-tmp let-item="item">
-                                            {{item.city}}
-                                            </ng-template>
-                                         </ng-select>
+                                        </ng-template>
+                                    </ng-select>
+                                    <span *ngIf="defaultCity">{{ defaultCity }}, {{defaultCountry}}</span>
                                       </div>
                                 </div>
                             </li>
@@ -73,7 +76,7 @@
                             </li>
                             
                         </ul>
-                        <div class="serch_btn">
+                        <div class="serch_btn" (click)="searchRentals(rentalForm)">
                             <button><span>Modify Search</span></button>
                         </div>
                     </div>

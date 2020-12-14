@@ -8,7 +8,12 @@
             <li class="grid_box first">
                <div class="hotel_where" [ngClass]="{'homecheck-error':rentalSearchFormSubmitted&&  rentalSearchForm.controls.fromDestination.errors && rentalSearchForm.controls.fromDestination.errors.required==true}">
                   <div class="search_area">
-                     <label>Destination</label>
+                      <app-vacation-search [form]="rentalSearchForm"
+                      [controlName]="'fromDestination'" [id]="'fromSearch1'"
+                      [label]="'DESTINATION'" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1
+                      [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
+                      </app-vacation-search>
+                    <!--  <label>Destination</label>
                       <ng-select [formControlName]="'fromDestination'" [selectOnTab]="true" [items]="data"
                      bindLabel="display_name" bindValue="id"  notFoundText="" [virtualScroll]="true" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)" (clear)="onRemove($event)"
                        class="laytrip-input" placeholder="Destination"  [(ngModel)]="rentalForm.id">
@@ -21,7 +26,7 @@
                         {{item.city}}
                         </ng-template>
                      </ng-select>
-                     <span *ngIf="destination?.country">{{ destination.country }}</span>
+                     <span *ngIf="destination?.country">{{ destination.country }}</span> -->
                   </div>
                </div>
             </li>

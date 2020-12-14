@@ -26,7 +26,7 @@ export class RentalInfoComponent implements OnInit {
     child_age:[]
   };
 
-  childData = [{
+  childData:any = [{
     children: [],
   }];
 
@@ -35,10 +35,13 @@ export class RentalInfoComponent implements OnInit {
   constructor( 
   	private route: ActivatedRoute,
     private commonFunction:CommonFunction){
-
     this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
-    //this.rentalForm.number_and_children_ages = event.child_age;
+    //this.childAgeInfo = info.number_and_children_ages;
+    // this.childData=[{
+    //   children:[1]
+    // }]
+    // this.childAgeInfo=[5];
     this.totalPerson = this.adultValue + this.childValue;
   	  this.countryCode = this.commonFunction.getUserCountry()
     }
