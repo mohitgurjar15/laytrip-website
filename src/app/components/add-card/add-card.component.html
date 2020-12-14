@@ -5,25 +5,22 @@
             <!-- <input type="hidden" formControlName="payment_method_token" id="payment_method_token"> -->
 
             <div class="form_field">
-                <label>First Name<sup>*</sup></label>
+                <label>{{'first_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="first_name" maxlength="20" tabindex="101"
-                        placeholder="Enter first name">
+                    <input type="text" formControlName="first_name" maxlength="20" tabindex="101" placeholder="{{'first_name_placeholder' | translate}}">
                     <div *ngIf="cardForm.controls.first_name.errors && cardForm.controls.first_name.touched">
-                        <p *ngIf="cardForm.controls.first_name.errors" class="error_text">Please enter
-                            your first name.
+                        <p *ngIf="cardForm.controls.first_name.errors" class="error_text">{{'first_name_touched_validation' | translate}}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div class="form_field">
-                <label>Last Name<sup>*</sup></label>
+                <label>{{'last_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="last_name" maxlength="20" tabindex="101"
-                        placeholder="Enter last name">
+                    <input type="text" formControlName="last_name" maxlength="20" tabindex="101" placeholder="{{'last_name_placeholder' | translate}}">
                     <div *ngIf="cardForm.controls.last_name.errors && cardForm.controls.last_name.touched">
-                        <p *ngIf="cardForm.controls.last_name.errors" class="error_text">Please enter yourlast name.
+                        <p *ngIf="cardForm.controls.last_name.errors" class="error_text">{{'last_name_touched_validation' | translate}}
                         </p>
                     </div>
                 </div>
@@ -42,29 +39,25 @@
         <div class="form_row">
 
             <div class="form_field">
-                <label>Card Number<sup>*</sup></label>
+                <label>{{'card_number' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="card_number" tabindex="101" [textMask]="mask"
-                        placeholder="Enter card number">
+                    <input type="text" formControlName="card_number" tabindex="101" [textMask]="mask" placeholder="Enter card number">
                     <div *ngIf="cardForm.controls.card_number.errors && cardForm.controls.card_number.touched">
-                        <p *ngIf="cardForm.controls.card_number.errors.required" class="error_text">Please enter your
-                            card number.
+                        <p *ngIf="cardForm.controls.card_number.errors.required" class="error_text">{{'card_number_touched_validation' | translate}}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div class="form_field">
-                <label>Expiry<sup>*</sup></label>
+                <label>{{'expiry' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <!-- <input autocomplete="off" class="birth_date" type="text" formControlName="expiry" maxlength="20"
                         placeholder="MM/YYYY" tabindex="103" id="expiry_date"> -->
-                    <p-calendar inputId="basic" formControlName="expiry" [minDate]="expiryMinDate" dateFormat="mm/yy"
-                        view="month" tabindex="102" [readonlyInput]="true">
+                    <p-calendar inputId="basic" formControlName="expiry" [minDate]="expiryMinDate" dateFormat="mm/yy" view="month" tabindex="102" [readonlyInput]="true">
                     </p-calendar>
                     <div *ngIf="cardForm.controls.expiry.errors && cardForm.controls.expiry.touched">
-                        <p *ngIf="cardForm.controls.expiry.errors" class="error_text">Please enter expiry
-                            date.
+                        <p *ngIf="cardForm.controls.expiry.errors" class="error_text">{{'expiry_date_touched_validation' | translate}}
                         </p>
                     </div>
                 </div>
@@ -78,13 +71,11 @@
         </div>
         <div class="form_row">
             <div class="form_field">
-                <label>Cvv<sup>*</sup></label>
+                <label>{{'cvv' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input autocomplete="off" type="text" formControlName="card_cvv" placeholder="123"
-                        tabindex="103" [textMask]="cvvNoMask">
+                    <input autocomplete="off" type="text" formControlName="card_cvv" placeholder="123" tabindex="103" [textMask]="cvvNoMask">
                     <div *ngIf="cardForm.controls.card_cvv.errors && cardForm.controls.card_cvv.touched">
-                        <p *ngIf="cardForm.controls.card_cvv.errors" class="error_text">Please enter cvv
-                            number.
+                        <p *ngIf="cardForm.controls.card_cvv.errors" class="error_text">{{'cvv_touched_validation' | translate}}
                         </p>
                     </div>
                 </div>
@@ -93,7 +84,7 @@
 
         <div class="form_btn">
             <button type="submit">
-                <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin"></i>Add Card</button>
+                <i *ngIf="saveCardLoader" class="fa fa-spinner fa-spin"></i>{{'add_card' | translate}}</button>
         </div>
     </div>
 </form>

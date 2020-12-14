@@ -1,111 +1,93 @@
 <section class="block_contact_us_main">
-  <div class="container">
-    <div class="block_contact_inner">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="block_contact_im">
-            <img src="{{s3BucketUrl}}assets/images/contact-us-im.svg" alt="Contact Us Image">
-          </div>
+    <div class="container">
+        <div class="block_contact_inner">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="block_contact_im">
+                        <img src="{{s3BucketUrl}}assets/images/contact-us-im.svg" alt="Contact Us Image">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="block_contact_form">
+                        <h6>{{'contact_us_title' | translate}}</h6>
+                        <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
+                            <div class="block_form">
+                                <div class="form_row">
+                                    <div class="form_field half">
+                                        <label>{{'full_name' | translate}}<sup>*</sup></label>
+                                        <div class="text_field">
+                                            <input type="text" formControlName="name" maxlength="20" tabindex="1" placeholder="{{'full_name_placeholder' | translate}}">
+                                            <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched" class="focus-input100 login-error">
+                                                <div *ngIf="contactUsForm.controls.name.errors.required" class="text-danger">{{'full_name_touched_validation' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_field half">
+                                        <label>{{'email_small' | translate}}<sup>*</sup></label>
+                                        <div class="text_field">
+                                            <input type="email" formControlName="email" maxlength="50" tabindex="2" placeholder="{{'email_placeholder' | translate}}">
+                                            <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.touched">
+                                                <div *ngIf="contactUsForm.controls.email.errors.required" class="text-danger">{{'email_touched_validation' | translate}}
+                                                </div>
+                                                <div *ngIf="contactUsForm.controls.email.errors.pattern" class="text-danger">{{'email_invalid_validation' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_row">
+                                    <div class="form_field half">
+                                        <label>{{'country_code' | translate}}</label>
+                                        <div class="text_field">
+                                            <div class="phone_no">
+                                                <div class="code">
+                                                    <div class="dropdown">
+                                                        <ng-select class="ng-customClass country_code" tabindex="3" selectOnTab="true" [items]="countries_code" bindLabel="country_name" clearSearchOnAdd="true" formControlName="country_code" placeholder="{{'country_code_placeholder' | translate}}">
+                                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                                <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select country' }} </span>
+                                                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                            </ng-template>
+                                                            <ng-template ng-option-tmp let-item="item">
+                                                                <img class="img_country_code" [src]="item.flag" width="20px" height="20px"> {{item.name}}
+                                                            </ng-template>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_field half">
+                                        <label>{{'phone_no' | translate}}</label>
+                                        <div class="number">
+                                            <input type="text" (keypress)="commonFunction.validateNumber($event)" formControlName="phone_no" maxlength="10" minlength="10" tabindex="4" placeholder="0000 0000 00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_row">
+                                    <div class="form_field half col-md-12 p-0">
+                                        <label>{{'messege' | translate}}<sup>*</sup></label>
+                                        <div class="text_field">
+                                            <input type="textarea" formControlName="message" maxlength="250" tabindex="5" placeholder="{{'messege_placeholder' | translate}}">
+                                            <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
+                                                <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">{{'messege_touched_validation' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_btn">
+                                    <button type="submit">
+                    <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' | translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6">
-          <div class="block_contact_form">
-            <h6>Contact US</h6>
-            <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
-              <div class="block_form">
-                <div class="form_row">
-                  <div class="form_field half">
-                    <label>Full Name<sup>*</sup></label>
-                    <div class="text_field">
-                      <input type="text" formControlName="name" maxlength="20" tabindex="1"
-                        placeholder="Enter full name">
-                      <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched"
-                        class="focus-input100 login-error">
-                        <div *ngIf="contactUsForm.controls.name.errors.required" class="text-danger">Please
-                          enter
-                          full name.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form_field half">
-                    <label>Email<sup>*</sup></label>
-                    <div class="text_field">
-                      <input type="email" formControlName="email" maxlength="50" tabindex="2"
-                        placeholder="Enter your email">
-                      <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.touched">
-                        <div *ngIf="contactUsForm.controls.email.errors.required" class="text-danger">Please
-                          enter
-                          email.
-                        </div>
-                        <div *ngIf="contactUsForm.controls.email.errors.pattern" class="text-danger">Please
-                          enter valid
-                          email
-                          address.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form_row">
-                  <div class="form_field half">
-                    <label>Country Code</label>
-                    <div class="text_field">
-                      <div class="phone_no">
-                        <div class="code">
-                          <div class="dropdown">
-                            <ng-select class="ng-customClass country_code"
-                             tabindex="3" selectOnTab="true"
-                              [items]="countries_code" 
-                              bindLabel="country_name"
-                               clearSearchOnAdd="true"
-                              formControlName="country_code" placeholder="Select country code">
-                              <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                <span class="ng-value-label"><img class="img_country_code" [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'" width="20px" height="20px">   {{ item.name ? item.name :  'Select country' }} </span>
-                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                              </ng-template>                                                        
-                              <ng-template ng-option-tmp let-item="item">
-                                  <img class="img_country_code" [src]="item.flag" width="20px" height="20px"> {{item.name}}
-                              </ng-template>
-                            </ng-select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form_field half">
-                    <label>Phone</label>
-                    <div class="number">
-                      <input type="text"  (keypress)="commonFunction.validateNumber($event)" formControlName="phone_no" maxlength="10" minlength="10" tabindex="4"
-                      placeholder="0000 0000 00">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form_row">
-                  <div class="form_field half col-md-12 p-0">
-                    <label>Message<sup>*</sup></label>
-                    <div class="text_field">
-                      <input type="textarea" formControlName="message" maxlength="250" tabindex="5"
-                        placeholder="Enter your message">
-                      <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
-                        <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">Please
-                          enter
-                          message.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form_btn">
-                  <button type="submit">
-                    <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;Submit</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </section>

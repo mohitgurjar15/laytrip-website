@@ -80,14 +80,13 @@
                 <div class="row">
                     <div class="col-md-9">
                         <ul>
-                            <li>Booking ID <span>{{item.tripId}}</span></li>
+                            <li>{{'booking_id' | translate}} <span>{{item.tripId}}</span></li>
                             <li>Travelling on <span>{{ item.checkInDate}}</span></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <div class="block_cancle">
-                            <a class="hover-link" (click)="open(content)" data-toggle="modal" data-target="#cancle_alert_modal">Cancel
-                                Booking</a>
+                            <a class="hover-link" (click)="open(content)" data-toggle="modal" data-target="#cancle_alert_modal">{{'cancel_booking_title' | translate}}</a>
                             <span [ngClass]="{'complete': item.bookingStatus , 'refund':item.bookingStatus == 0 }">{{ bookingStatus[item.bookingStatus] }}</span>
                         </div>
                     </div>
@@ -117,7 +116,7 @@
                                 <span>{{ item.stop_count === 0 ? 'Non -' : item.stop_count }} Non-Stop</span>
                             </div>
                             <div class="detail_info">
-                                <p>Arrival</p>
+                                <p>{{'arrival' | translate}}</p>
                                 <h4>{{item.arrival_time}}</h4>
                                 <span>{{item.arrival_city}}</span>2
                             </div>
@@ -125,7 +124,7 @@
                         <div class="block_detail_btm">
                             <div class="c" [ngClass]="{'open_detail':showFlightDetails[blockIndex]}">
                                 <a class="show_more_detail hover-link" (click)="showDetails(blockIndex)">
-                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon"> Flight Details
+                                    <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon"> {{'flight_detail' | translate}}
                                 </a>
                             </div>
                             <!-- <div class="info_price_origin">
@@ -151,7 +150,7 @@
                         <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                         </h6>
                         <a class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info"
-                                *ngIf="item.bookingType ==1">Payment plan details</span></a>
+                                *ngIf="item.bookingType ==1">{{'payment_plan_detail' | translate}}</span></a>
                     </div>
                 </div>
             </div>
@@ -161,7 +160,7 @@
                 <div class="row">
                     <div class="col-md-9">
                         <ul>
-                            <li>Booking ID <span>{{item.tripId}}</span></li>
+                            <li>{{'booking_id' | translate}}<span>{{item.tripId}}</span></li>
                             <li>Travelling on <span>{{ item.checkInDate}}</span></li>
                         </ul>
                     </div>
@@ -205,10 +204,10 @@
                                                         <img src="{{s3BucketUrl}}assets/images/icon/flight-duration_im.svg" alt="Duration Images">
                                                     </div>
                                                     <span>{{ trip.stops[0].stop_count === 0 ? 'Non -' : trip.stops[0].stop_count }}
-                                                    Non Stop</span>
+                                                    {{'non_stop_without_hiphen' | translate}}</span>
                                                 </div>
                                                 <div class="detail_info">
-                                                    <p>Arrival</p>
+                                                    <p>{{'arrival' | translate}}</p>
                                                     <h4>{{trip.stops[0].arrival_time}} <span></span></h4>
                                                     <span>{{trip.stops[0].arrival_info.city}}</span>
                                                 </div>
@@ -221,7 +220,7 @@
                             <div class="block_detail_btm">
                                 <div class="show_detail">
                                     <a class="show_more_detail hover-link" (click)="showDetails(blockIndex)">
-                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon"> Flight Details
+                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon"> {{'flight_detail' | translate}}
                                     </a>
                                 </div>
                                 <!-- <div class="info_price_origin">
@@ -240,7 +239,7 @@
                             <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
                             <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                             </h6>
-                            <a *ngIf="item.bookingType ==1" class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info">Payment plan details</span></a>
+                            <a *ngIf="item.bookingType ==1" class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info">{{'payment_plan_detail' | translate}}</span></a>
                         </div>
                     </div>
                 </div>
@@ -249,13 +248,13 @@
         <div class="detail_info_show on_out_said" [attr.id]="blockIndex" *ngIf="showFlightDetails[blockIndex] === true">
             <ul id="tabs" class="nav nav-tabs bookingListNavTab" role="tablist">
                 <li class="nav-item">
-                    <a href="#flight-info-oneway" class="nav-link" [ngClass]="{'active':showFareDetails==0}" data-toggle="tab" role="tab">Flight Info</a>
+                    <a href="#flight-info-oneway" class="nav-link" [ngClass]="{'active':showFareDetails==0}" data-toggle="tab" role="tab">{{'flight_info' | translate}}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Fare-Detail-oneway" class="nav-link" [ngClass]="{'active':showFareDetails==1}" data-toggle="tab" role="tab">Fare Details</a>
+                    <a href="#Fare-Detail-oneway" class="nav-link" [ngClass]="{'active':showFareDetails==1}" data-toggle="tab" role="tab">{{'fare_detail' | translate}}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab">Baggage Rules</a>
+                    <a href="#Baggage-Rules-oneway" class="nav-link" data-toggle="tab" role="tab">{{'baggage_rule' | translate}}</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a href="#Cancellation-Rules-oneway" class="nav-link" data-toggle="tab" role="tab"
@@ -270,7 +269,7 @@
                     <div class="card-header" role="tab" id="heading-flight-info-oneway">
                         <h5 class="mb-0">
                             <a data-toggle="collapse" href="#collapse-flight-info-oneway" aria-expanded="true" aria-controls="collapse-flight-info">
-                                Flight Info
+                                {{'flight_info' | translate}}
                             </a>
                         </h5>
                     </div>
@@ -331,7 +330,7 @@
                     <div class="card-header" role="tab" id="heading-Fare-Detail-oneway">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" href="#collapse-Fare-Detail-oneway" aria-expanded="false" aria-controls="collapse-Fare-Detail">
-                                Fare Details
+                                {{'fare_detail' | translate}}
                             </a>
                         </h5>
                     </div>
@@ -343,19 +342,19 @@
                                     <ul *ngIf="item.bookingType == 1 || !item.moduleInfo.secondary_fare_break_down">
                                         <li *ngFor="let fareDetails of item.moduleInfo.fare_break_dwon">
                                             <p *ngIf="fareDetails.type == 'ADT'">
-                                                Base Fare ({{ fareDetails?.quantity }} Adult)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Adult)
                                             </p>
                                             <span *ngIf="fareDetails.type == 'ADT'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'CHD'">
-                                                Base Fare ({{ fareDetails?.quantity }} Child)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Child)
                                             </p>
                                             <span *ngIf="fareDetails.type == 'CHD'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'INF'">
-                                                Base Fare ({{ fareDetails?.quantity }} Infant)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Infant)
                                             </p>
                                             <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                Total Fare ({{ fareDetails?.quantity }} traveler)
+                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} traveler)
                                             </p>
                                             <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </li>
@@ -363,31 +362,31 @@
                                     <ul *ngIf="item.bookingType == 2 && item.moduleInfo.secondary_fare_break_down">
                                         <li *ngFor="let fareDetails of item.moduleInfo.secondary_fare_break_down">
                                             <p *ngIf="fareDetails.type == 'ADT'">
-                                                Base Fare ({{ fareDetails?.quantity }} Adult)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Adult)
                                             </p>
                                             <span *ngIf="fareDetails.type == 'ADT'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'CHD'">
-                                                Base Fare ({{ fareDetails?.quantity }} Child)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Child)
                                             </p>
                                             <span *ngIf="fareDetails.type == 'CHD'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'INF'">
-                                                Base Fare ({{ fareDetails?.quantity }} Infant)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Infant)
                                             </p>
                                             <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                Total Fare ({{ fareDetails?.quantity }} traveler)
+                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} traveler)
                                             </p>
                                             <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </li>
                                     </ul>
                                     <ul *ngIf="item.bookingInstalments.length > 0">
                                         <li class="down_payment">
-                                            Down payment
+                                            {{'down_payment' | translate}}
                                             <span class="down_value">{{ currency?.symbol }}{{ item?.instalment_amount | number : '1.2-2'}}</span>
                                         </li>
                                         <ng-container *ngFor="let instalment of item.bookingInstalments; let i = index">
                                             <li *ngIf="i>0">
-                                                <div class="detail"> {{i}} Installment
+                                                <div class="detail"> {{i}} {{'installment' | translate}}
                                                     <p>{{ commonFunction.convertDateFormat(instalment.instalmentDate,'YYYY-MM-DD')}}
                                                     </p>
                                                 </div>
@@ -410,7 +409,7 @@
                     <div class="card-header" role="tab" id="heading-Baggage-Rules-oneway">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" href="#collapse-Baggage-Rules-oneway" aria-expanded="false" aria-controls="collapse-Baggage-Rules">
-                                Baggage Rules
+                                {{'baggage_rule' | translate}}
                             </a>
                         </h5>
                     </div>
@@ -434,11 +433,11 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Flight</th>
-                                                <th>Depart</th>
-                                                <th>Arrive</th>
-                                                <th>Checkin Baggage</th>
-                                                <th>Cabin Baggage</th>
+                                                <th>{{'flight' | translate}}</th>
+                                                <th>{{'depart' | translate}}</th>
+                                                <th>{{'arrive' | translate}}</th>
+                                                <th>{{'checkin_baggage' | translate}}</th>
+                                                <th>{{'cabin_baggage' | translate}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -454,7 +453,7 @@
                                         </tbody>
                                     </table>
 
-                                    <p>The baggage information is just for reference. Please Check with airline before check-in.
+                                    <p>{{'baggage_info_description' | translate}}
                                     </p>
                                 </div>
                                 <p *ngIf="!loadBaggageDetails && notFoundBaggageDetails">There is no baggage information found
@@ -499,7 +498,7 @@
                                 </div> -->
                                 name
                                 <div class="rules_cnt_btm">
-                                    <span>Terms & Conditions</span>
+                                    <span>{{'term_and_condition' | translate}}</span>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
                                     <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
@@ -521,7 +520,7 @@
                     <div class="card-header" role="tab" id="heading-Fare-Detail-oneway">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" href="#collapse-Fare-Detail-oneway" aria-expanded="false" aria-controls="collapse-Fare-Detail">
-                                Fare Details
+                                {{'fare_detail' | translate}}
                             </a>
                         </h5>
                     </div>
@@ -564,8 +563,8 @@
         </div>
         <div class="modal-body">
             <div class="modal_cnt">
-                <h3>Alert</h3>
-                <p>To cancel this booking please contact our support team</p>
+                <h3>{{'alert' | translate}}</h3>
+                <p>{{'cancel_booking_description' | translate}}</p>
                 <ul class="block_contact">
                     <li>
                         <a class="hover-link"><i class="fa fa-envelope" aria-hidden="true"></i> support@laytrip.com</a>
@@ -576,7 +575,7 @@
                     </li>
                 </ul>
                 <div class="block_btn">
-                    <a class="hover-link" (click)="modal.dismiss('Cross click')" class="hover-link">Ok</a>
+                    <a class="hover-link" (click)="modal.dismiss('Cross click')" class="hover-link">{{'ok' | translate}}</a>
                 </div>
             </div>
         </div>
