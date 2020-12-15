@@ -163,12 +163,21 @@
                                                 <p>{{dateConvert(list[0].nextInstalmentDate)}}</p>
                                             </li>
                                             <li *ngIf="list[0].totalInstallments > 0">
+                                                <span>Down Payment :</span>
+                                                <p>{{ currencySymbol }}{{list[0].bookingInstalments[0].amount || list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
+                                            </li>
+                                            <li *ngIf="list[0].totalInstallments > 0">
                                                 <span>{{'inst_payment_amt' | translate}} :</span>
                                                 <p>{{ currencySymbol }}{{list[0].bookingInstalments[1].amount || list[0].bookingInstalments[0].amount | number : '1.2-2'}}</p>
                                             </li>
+                                           
                                             <li *ngIf="list[0].totalInstallments > 0">
                                                 <span>{{'paid_amt' | translate}} :</span>
                                                 <p>{{ currencySymbol }}{{list[0].paidAmount | number : '1.2-2'}}</p>
+                                            </li>
+                                            <li *ngIf="list[0].layCredit > 0">
+                                                <span>Laytrip Points :</span>
+                                                <p>{{list[0].layCredit | number : '1.2-2'}}</p>
                                             </li>
                                         </ul>
                                     </div>
