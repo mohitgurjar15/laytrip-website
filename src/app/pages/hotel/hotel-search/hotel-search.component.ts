@@ -1,12 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-declare var $: any;
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-
-import { Location } from '@angular/common';
-import * as moment from 'moment';
-import { CommonFunction } from '../../../_helpers/common-function';
 import { HotelService } from '../../../services/hotel.service';
 
 @Component({
