@@ -151,8 +151,8 @@ export class VacationRentalSearchBarComponent implements OnInit {
     }
   }
 
-   selectEvent(event, index) {
-     console.log(event,index);
+   selectEvent(event) {
+     console.log(event);
      if (!event) {
       this.placeHolder = this.placeHolder;
       this.defaultSelected = this.defaultSelected;
