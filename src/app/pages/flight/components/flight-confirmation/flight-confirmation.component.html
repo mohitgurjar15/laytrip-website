@@ -32,7 +32,7 @@
                 </li>
                 <li *ngIf="bookingData.booking_details.bookingType==1">
                     <span>{{'installment_payment_part' | translate}} :</span>
-                    <p>{{bookingData.booking_details.bookingInstalments.length-1}} Installment</p>
+                    <p>{{bookingData.booking_details.bookingInstalments.length-1}} {{'installment' | translate}}</p>
                 </li>
                 <li *ngIf="bookingData.booking_details.bookingType==1">
                     <span>{{'installment_payment_start_date' | translate}} :&nbsp;</span>

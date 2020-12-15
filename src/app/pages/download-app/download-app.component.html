@@ -31,7 +31,7 @@
                                         <p>{{'mobile_page_get_nearly_update' | translate}}</p>
                                         <div class="subscription">
                                             <form [formGroup]="subscribeForm" (ngSubmit)="subscribeNow()">
-                                                <input type="email" formControlName="email" maxlength="40" tabindex="1" placeholder="Enter Your Email Address">
+                                                <input type="email" formControlName="email" maxlength="40" tabindex="1" placeholder="{{'mobile_page_subscribe_email_placeholder' | translate}}">
                                                 <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'mobil_page_subscribe_now_button' | translate}} <img
                             src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                                             </form>

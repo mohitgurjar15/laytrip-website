@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <a class="add_passenger_btn hover-link" (click)="addForms('child')">{{showAddChildForm ? '-' : '+'}}
-                    Add {{'Child' | titlecase}}</a>
+                    {{'add_child' | translate}}</a>
                 <div id="accordion-child" class="accordion" *ngIf="showAddChildForm">
                     <div class="card_add_pass add-more">
                         <div class="card-header" id="childOne">
@@ -219,7 +219,7 @@
                     </div>
                 </div>
                 <a class="add_passenger_btn hover-link" (click)="addForms('infant')">{{showAddInfantForm ? '-' : '+'}}
-                    Add {{'Infant' | titlecase}}</a>
+                  {{'add_infant' | translate}}</a>
                 <div id="accordion-infant" class="accordion" *ngIf="showAddInfantForm">
                     <div class="card_add_pass add-more">
                         <div class="card-header" id="infantOne">

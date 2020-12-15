@@ -111,7 +111,7 @@
                                         <div class="flight_layover" *ngIf="flightInfo.is_layover">
                                             <div class="triangle_right"></div>
                                             <div class="layover_info">
-                                                Layover of <span>{{ flightInfo?.layover_duration }}</span> at {{flightInfo.departure_info.city}}
+                                                {{'layover_of' | translate}} <span>{{ flightInfo?.layover_duration }}</span> at {{flightInfo.departure_info.city}}
                                             </div>
                                             <div class="triangle_left"></div>
                                         </div>
@@ -488,7 +488,7 @@
                                             <div class="flight_layover" *ngIf="flightInfo.is_layover">
                                                 <div class="triangle_right"></div>
                                                 <div class="layover_info">
-                                                    Layover of <span>{{ flightInfo?.layover_duration }}</span> at {{ flightInfo.departure_info.city }}
+                                                    {{'layover_of' | translate}} <span>{{ flightInfo?.layover_duration }}</span> at {{ flightInfo.departure_info.city }}
                                                 </div>
                                                 <div class="triangle_left"></div>
                                             </div>
@@ -538,7 +538,7 @@
                                             <div class="flight_layover" *ngIf="flightInfo.is_layover">
                                                 <div class="triangle_right"></div>
                                                 <div class="layover_info">
-                                                    Layover of <span>{{ flightInfo?.layover_duration }}</span> at {{flightInfo.departure_info.city}}
+                                                    {{'layover_of' | translate}} <span>{{ flightInfo?.layover_duration }}</span> at {{flightInfo.departure_info.city}}
                                                 </div>
                                                 <div class="triangle_left"></div>
                                             </div>

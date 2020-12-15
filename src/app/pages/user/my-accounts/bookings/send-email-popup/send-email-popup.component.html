@@ -13,9 +13,9 @@
                 <div *ngFor="let email of f.formArray1['controls']; let i=index">
                     <div formGroupName="{{i}}" class="formArray1">
                         <div class="block_mail">
-                            <label>Email*</label>
+                            <label>{{'email_small' | translate}}*</label>
                             <div class="block_field">
-                                <input type="email" tabindex="1" onkeypress='return event.charCode != 32' formControlName="email" maxlength="50">
+                                <input type="email" tabindex="1" onkeypress='return event.charCode != 32' placeholder="{{'email_placeholder' | translate}}" formControlName="email" maxlength="50">
                                 <div *ngIf="i===0" class="block_btn add_btn">
                                     <a href="javascript:void(0);" (click)="addEmail()">+</a>
                                 </div>
@@ -24,8 +24,8 @@
                                 </div>
                             </div>
                             <div *ngIf="(submitted || email['controls'].email.touched) && email['controls'].email.errors">
-                                <p *ngIf="email['controls'].email.errors.required" class="error_text">Please enter your email address.</p>
-                                <p *ngIf="email['controls'].email.errors.pattern" class="error_text">Please enter valid email address.</p>
+                                <p *ngIf="email['controls'].email.errors.required" class="error_text">{{'email_touched_validation' | translate}}</p>
+                                <p *ngIf="email['controls'].email.errors.pattern" class="error_text">{{'email_invalid_validation' | translate}}</p>
                             </div>
                         </div>
                     </div>
