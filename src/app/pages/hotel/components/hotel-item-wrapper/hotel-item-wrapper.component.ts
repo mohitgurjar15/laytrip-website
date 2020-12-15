@@ -35,7 +35,7 @@ import { google } from 'google-maps';
     ])
   ],
 })
-export class HotelItemWrapperComponent implements OnInit, OnDestroy {
+export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   @Input() hotelDetails;
   @Input() filter;
@@ -52,28 +52,17 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
   defaultLng;
 
   subscriptions: Subscription[] = [];
-  hotelDetailIdArray = [];
   geoCodes = [];
   mapCanvas;
   myLatLng;
+  map;
 
-  hideDiv = true;
   showHotelDetails = [];
-  showDiv = false;
-  routeCode = [];
-  baggageDetails;
-  cancellationPolicy;
-  cancellationPolicyArray = [];
-  loadMoreCancellationPolicy: boolean = false;
   errorMessage;
-  loadBaggageDetails: boolean = true;
-  loadCancellationPolicy: boolean = false;
-  isInstalmentAvailable = false;
   userInfo;
   totalLaycreditPoints: number = 0;
   showFareDetails: number = 0;
-
-  subcell = '$100';
+  hotelInfo;
 
   constructor(
     private flightService: FlightService,
@@ -86,23 +75,29 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    window.scroll(0, 0);
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    this.hotelsList = this.hotelDetails;
+    const info = JSON.parse(localStorage.getItem('_hote'));
+    if (info) {
+      info.forEach(element => {
+        if (element.key === 'guest') {
+          this.hotelInfo = element.value;
+        }
+      });
+    }
+    this.hotelListArray = this.hotelDetails;
+    this.hotelListArray.forEach((i) => {
+      this.geoCodes.push(i.geocodes);
+    });
     this.userInfo = getLoginUserInfo();
-    this.totalLaycredit();
+    // this.totalLaycredit();
     this.defaultLat = this.route.snapshot.queryParams['latitude'];
     this.defaultLng = this.route.snapshot.queryParams['longitude'];
-
-    this.hotelListArray = this.hotelsList;
-    this.hotelListArray.forEach(item => {
-      this.hotelDetailIdArray.push(item.route_code);
-    });
   }
 
   ngAfterContentChecked() {
-    this.hotelListArray = this.hotelsList;
+    this.hotelListArray = this.hotelDetails;
   }
 
   counter(i: any) {
@@ -116,13 +111,30 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
       this.isMapView = true;
       this.mapCanvas = document.getElementById('map');
       this.myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
-      this.initMap();
+      let mapOptions = {
+        zoom: 12,
+        center: this.myLatLng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false,
+        scrollwheel: true,
+      };
+      this.map = new google.maps.Map(this.mapCanvas, mapOptions);
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(this.myLatLng),
+        map: this.map,
+        // title: i.name,
+        animation: google.maps.Animation.DROP,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+      });
+      marker.setMap(this.map);
+      // this.initMap();
     }
   }
 
   initMap() {
-    // var mapCanvas = document.getElementById('map');
-    // const myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
+    // this.mapCanvas = document.getElementById('map');
+    this.myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
     let mapOptions = {
       zoom: 12,
       center: this.myLatLng,
@@ -132,9 +144,18 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
       scrollwheel: true,
     };
     var map = new google.maps.Map(this.mapCanvas, mapOptions);
-    this.hotelListArray.forEach((i) => {
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(parseFloat(i.geocodes.latitude), parseFloat(i.geocodes.longitude)),
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(this.myLatLng),
+      map: map,
+      // title: i.name,
+      animation: google.maps.Animation.DROP,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    });
+    marker.setMap(map);
+    var marker;
+    this.geoCodes.forEach((i) => {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(parseFloat(i.latitude), parseFloat(i.longitude)),
         map: map,
         title: i.name,
         animation: google.maps.Animation.DROP,
@@ -175,18 +196,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy {
     this.showHotelDetails = this.showHotelDetails.map(item => {
       return false;
     });
-  }
-
-  checkInstalmentAvalability() {
-    let instalmentRequest = {
-      checkin_date: this.route.snapshot.queryParams['departure_date'],
-      booking_date: moment().format("YYYY-MM-DD")
-    }
-    this.genericService.getInstalemntsAvailability(instalmentRequest).subscribe((res: any) => {
-      if (res.instalment_availability) {
-        this.isInstalmentAvailable = res.instalment_availability;
-      }
-    })
   }
 
   totalLaycredit() {

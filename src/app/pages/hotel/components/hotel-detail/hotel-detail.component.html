@@ -4,232 +4,38 @@
     <div class="row">
       <div class="col-lg-9">
         <div class="hotel_detail_slider">
-          <div class="slider-container">
-            <div class="slider-for slick-initialized slick-slider">
-              <div class="slick-list draggable" style="height: 555.078px;">
-                <div class="slick-track" style="opacity: 1; width: 4125px;">
-                  <div class="slick-slide" data-slick-index="0" aria-hidden="true" tabindex="-1"
-                    style="width: 825px; position: relative; left: 0px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
-                    <div>
-                      <div class="item-slick" style="width: 100%; display: inline-block;">
-                        <img class="" src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" alt="Alt">
-                        <div class="row slider-overlay">
-                          <div class="col-md-6">
-                            <div class="hotel_name">
-                              <h4>
-                                Hotel Aura, IGI Airport
-                              </h4>
-                              <span>
-                                Sighisoara, Romania
-                              </span>
+         
+          <div class="slider_main_contain" style="position: relative;">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
 
-                            </div>
-                            <div id="border"></div>
-                          </div>
-                          <div class="col-md-6 room-rating">
-                            <div>
-                              <span class="rate-box">
-                                5.0
-                              </span>
-                              <span class="rating">
-                                1.6+ Traveller Ratings:
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            <div class="slider-overlay">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="hotel_name">
+                    <h4>
+                      {{hotelDetails?.name}}, {{hotelDetails?.state_code}}
+                    </h4>
+                    <span>
+                      {{hotelDetails?.city_name}}, {{hotelDetails?.country_name}}
+                    </span>
                   </div>
-                  <div class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1"
-                    style="width: 825px; position: relative; left: -825px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
-                    <div>
-                      <div class="item-slick" style="width: 100%; display: inline-block;">
-                        <img class="item-slick" src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg"
-                          alt="Alt">
-                        <div class="row slider-overlay">
-                          <div class="col-md-6">
-                            <div class="hotel_name">
-                              <h4>
-                                Hotel Aura, IGI Airport
-                              </h4>
-                              <span>
-                                Sighisoara, Romania
-                              </span>
-
-                            </div>
-                            <div id="border"></div>
-                          </div>
-                          <div class="col-md-6 room-rating">
-                            <div>
-                              <span class="rate-box">
-                                5.0
-                              </span>
-                              <span class="rating">
-                                1.6+ Traveller Ratings:
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1"
-                    style="width: 825px; position: relative; left: -1650px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
-                    <div>
-                      <div class="item-slick" style="width: 100%; display: inline-block;">
-                        <img class="item-slick" src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg"
-                          alt="Alt">
-                        <div class="row slider-overlay">
-                          <div class="col-md-6">
-                            <div class="hotel_name">
-                              <h4>
-                                Hotel Aura, IGI Airport
-                              </h4>
-                              <span>
-                                Sighisoara, Romania
-                              </span>
-
-                            </div>
-                            <div id="border"></div>
-                          </div>
-                          <div class="col-md-6 room-rating">
-                            <div>
-                              <span class="rate-box">
-                                5.0
-                              </span>
-                              <span class="rating">
-                                1.6+ Traveller Ratings:
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1"
-                    style="width: 825px; position: relative; left: -2475px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
-                    <div>
-                      <div class="item-slick" style="width: 100%; display: inline-block;">
-                        <img class="item-slick" src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg"
-                          alt="Alt">
-                        <div class="row slider-overlay">
-                          <div class="col-md-6">
-                            <div class="hotel_name">
-                              <h4>
-                                Hotel Aura, IGI Airport
-                              </h4>
-                              <span>
-                                Sighisoara, Romania
-                              </span>
-
-                            </div>
-                            <div id="border"></div>
-                          </div>
-                          <div class="col-md-6 room-rating">
-                            <div>
-                              <span class="rate-box">
-                                5.0
-                              </span>
-                              <span class="rating">
-                                1.6+ Traveller Ratings:
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="slick-slide slick-current slick-active" data-slick-index="4" aria-hidden="false"
-                    style="width: 825px; position: relative; left: -3300px; top: 0px; z-index: 999; opacity: 1;">
-                    <div>
-                      <div class="item-slick" style="width: 100%; display: inline-block;">
-                        <img class="item-slick" src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg"
-                          alt="Alt">
-                        <div class="row slider-overlay">
-                          <div class="col-md-6">
-                            <div class="hotel_name">
-                              <h4>
-                                Hotel Aura, IGI Airport
-                              </h4>
-                              <span>
-                                Sighisoara, Romania
-                              </span>
-
-                            </div>
-                            <div id="border"></div>
-                          </div>
-                          <div class="col-md-6 room-rating">
-                            <div>
-                              <span class="rate-box">
-                                5.0
-                              </span>
-                              <span class="rating">
-                                1.6+ Traveller Ratings:
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div id="border"></div>
                 </div>
-              </div>
-            </div>
-            <div class="slider-nav slick-initialized slick-slider">
-              <div class="slick-list draggable">
-                <div class="slick-track" style="opacity: 1; width: 25000px; transform: translate3d(-672px, 0px, 0px);">
-                  <div class="slick-slide slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1">
-                    <div><img class="item-slick" src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg"
-                        alt="Alt" style="width: 100%; display: inline-block;"></div>
-                  </div>
-                  <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="-1">
-                    <div><img class="item-slick" src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg"
-                        alt="Alt" style="width: 100%; display: inline-block;"></div>
-                  </div>
-                  <div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="-1">
-                    <div><img class="item-slick" src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg"
-                        alt="Alt" style="width: 100%; display: inline-block;"></div>
-                  </div>
-                  <div class="slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="-1">
-                    <div><img class="item-slick" src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg"
-                        alt="Alt" style="width: 100%; display: inline-block;"></div>
-                  </div>
-                  <div class="slick-slide slick-current slick-active" data-slick-index="4" aria-hidden="false">
-                    <div><img class="item-slick more-image"
-                        src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" alt="Alt"
-                        style="width: 100%; display: inline-block;"></div>
+                <div class="col-md-6 room-rating">
+                  <div class="room_rate_box">
+                    <span class="rate-box">
+                      {{hotelDetails?.review_rating | number : '1.1-1'}}
+                    </span>
+                    <span class="rating">
+                      {{hotelDetails?.rating}} Traveller Ratings:
+                      <i class="fa fa-star" *ngFor='let in of counter(hotelDetails?.rating)'></i>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
         </div>
         <div class="hotel_detail_tabs">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -244,6 +50,10 @@
             <li class="nav-item">
               <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
                 aria-selected="false">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map"
+                aria-selected="false">Map</a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -309,6 +119,7 @@
               </div>
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact...</div>
+            <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">map...</div>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@
         Map view
     </button>
 </div>
+
 <div [hidden]="isMapView" [@listAnimation]="hotelListArray.length" (@listAnimation.start)="logAnimation($event)"
     (@listAnimation.done)="logAnimation($event)" class="result_listing hotel_listings"
     (clickOutside)="closeHotelDetail()">
@@ -33,32 +34,24 @@
                                         <div class="block_detail_top">
                                             <div class="detail_info">
                                                 <h4>{{item?.name}}</h4>
-                                                <span><img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
+                                                <span class="adress_span"><img
+                                                        src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
                                                         alt="Map pin">
                                                     {{item?.full_address}}</span>
                                                 <div class="review_section_wrap">
                                                     <div class="left_bar">
                                                         <div class="rating_num">
                                                             <span>
-                                                                {{item?.rating}}
+                                                                {{item?.review_rating}}
                                                             </span>
                                                         </div>
                                                         <div class="stars_text">
                                                             <div class="stars_rating">
                                                                 <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
                                                                     alt="Stars" *ngFor='let in of counter(item.rating)'>
-                                                                <!-- *ngFor='let in of counter(item.rating)' -->
-                                                                <!-- <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars"> -->
                                                             </div>
                                                             <div class="review_num_text">
-                                                                <a href="javascript:void(0);">3204 Reviews</a>
+                                                                <a>{{item?.review_rating_desc}}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -77,11 +70,11 @@
                                                                     alt="">
                                                             </div>
                                                             <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/tv_icon.svg"
+                                                                <img src="{{s3BucketUrl}}assets/images/hotels/nosmoking.svg"
                                                                     alt="">
                                                             </div>
                                                             <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/tv_icon.svg"
+                                                                <img src="{{s3BucketUrl}}assets/images/hotels/ac.svg"
                                                                     alt="">
                                                             </div>
                                                         </div>
@@ -120,7 +113,7 @@
                             <div class="block" *ngIf="item.secondary_start_price === 0">
                                 <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
                             </div>
-                        </div> <a class="book_btn" href="flight-add-passenger.html">Select</a>
+                        </div> <a class="book_btn" [routerLink]="['/hotel/detail/',item.id]">Select</a>
                         <div class="show_detail">
                             <a href="javascript:void(0);" class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment
@@ -137,9 +130,21 @@
                     <div class="tab_detail fare_detail_cnt">
                         <div class="triangle_right"></div>
                         <ul>
-                            <li>Base Fare (1 Adult) <span>{{ currency?.symbol }}113</span></li>
-                            <li>Taxes and Fees (1 Adult) <span>$13</span></li>
-                            <li>Total Fare (1 Adult) <span>$126</span></li>
+                            <!-- <li *ngFor="let hotel of hotelInfo">
+                                <p *ngIf="hotel.adults">
+                                    Base Fare ({{hotel.adults}} Adult)
+                                </p>
+                                <span>{{ currency?.symbol
+                                    }}{{item?.selling?.total}}</span>
+                                <p *ngIf="hotel.children && hotel.children.length">
+                                    Base Fare ({{hotel.children.length}} Child)
+                                </p>
+                                <span>{{ currency?.symbol
+                                    }}{{item?.selling?.total}}</span>
+                            </li> -->
+                            <li>Total Fare (traveler) <span>{{ currency?.symbol
+                                    }}{{item?.selling?.total}}</span></li>
+                            <!-- <li>Taxes and Fees (1 Adult) <span>$13</span></li> -->
                         </ul>
 
                         <p><span>Note:</span> It is a long established fact that a reader will be distracted by the
@@ -154,7 +159,7 @@
         </div>
     </div>
 
-    <div class="pagination_main">
+    <!-- <div class="pagination_main">
         <div class="pagination_result">
             <p>Showing 1 to 10 of 60 Results</p>
         </div>
@@ -180,13 +185,16 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="result_listing hotel_map_listings" [hidden]="!isMapView">
-    <div class="col-lg-12" *ngFor="let item of hotelListArray; let blockIndex = index;">
+    <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-4">
-                <div class="search_block">
+            <div class="col-lg-8" style="height: 200px; width: 200px;">
+                <div id="map"></div>
+            </div>
+            <div class="col-lg-4 pl-0">
+                <div class="search_block" *ngFor="let item of hotelListArray">
                     <div class="listing_block">
                         <div class="block_main">
                             <div class="block_top">
@@ -200,21 +208,13 @@
                                                 <div class="review_section_wrap">
                                                     <div class="rating_num">
                                                         <span>
-                                                            {{item?.rating}}
+                                                            {{item?.review_rating}}
                                                         </span>
                                                     </div>
 
                                                     <div class="stars_rating">
                                                         <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                            alt="Stars">
-                                                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                            alt="Stars">
-                                                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                            alt="Stars">
-                                                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                            alt="Stars">
-                                                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                            alt="Stars">
+                                                            alt="Stars" *ngFor='let in of counter(item.rating)'>
                                                     </div>
 
                                                 </div>
@@ -229,7 +229,7 @@
                                                     <h4>{{item?.name}}</h4>
                                                     <div class="place_name">
                                                         <div>
-                                                            <span>
+                                                            <span class="adress_span">
                                                                 <img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
                                                                     alt="Map pin"> {{item?.full_address}}
                                                             </span>
@@ -266,17 +266,11 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-            </div>
-            <div class="col-lg-8 pl-0">
-                <div id="map"></div>
-                <!-- <img src="{{s3BucketUrl}}assets/images/hotels/map.svg" alt="Map image" style="width: 100%;"> -->
             </div>
         </div>
     </div>
-    <div class="pagination_main">
+    <!-- <div class="pagination_main">
         <div class="pagination_result">
             <p>Showing 1 to 10 of 60 Results</p>
         </div>
@@ -302,6 +296,6 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> -->
 </div>
-<!-- <app-flight-not-found *ngIf="!flightListArray.length"></app-flight-not-found> -->
+<app-hotel-not-found *ngIf="!hotelListArray.length"></app-hotel-not-found>

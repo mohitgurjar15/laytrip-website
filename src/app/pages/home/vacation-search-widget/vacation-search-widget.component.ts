@@ -36,14 +36,24 @@ export class VacationSearchWidgetComponent implements OnInit {
     type:"city",
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     check_out_date:new Date(moment().add(7, 'days').format("MM/DD/YYYY")),
-    number_and_children_ages:'',
+    number_and_children_ages:[],
     adult_count:1,
     child:'',
-  }
+  };
+  defaultCity:'Barcelona';
+  fromDestinationTitle:'Wonderful Apartment in Barcelona (4 guests)';
+  fromDestinationInfo:any = {
+    id: 10515,
+    country: 'Spain',
+    city: 'Barcelona',
+    display_name: 'Wonderful Apartment in Barcelona (4 guests)',
+    type: 'city',
+  };
   totalPerson: number = 1;
   rentalSearchFormSubmitted: boolean = false;
   error_message='';
   showCommingSoon:boolean=false;
+  searchedValue:any=[];
   constructor( private genericService: GenericService,
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -67,6 +77,17 @@ export class VacationSearchWidgetComponent implements OnInit {
     if(host.includes("staging")){
       this.showCommingSoon=true;
     }
+
+     if (this.fromDestinationInfo) {
+      this.rentalForm.city = this.fromDestinationInfo.city;
+      this.rentalForm.country = this.fromDestinationInfo.country;
+      this.rentalForm.id = this.fromDestinationInfo.id;
+      this.rentalForm.display_name = this.fromDestinationInfo.display_name;
+      this.rentalForm.city = this.fromDestinationInfo.city;
+      this.searchedValue.push({ key: 'fromSearch1', value: this.fromDestinationInfo });
+      console.log(this.searchedValue);
+    }
+    
   }
 
 
@@ -157,8 +178,22 @@ export class VacationSearchWidgetComponent implements OnInit {
     this.totalPerson = event.totalPerson;
   }
 
+   destinationChangedValue(event) {
+    console.log(event);
+    if (event && event.key && event.key === 'fromSearch1') {
+      this.searchedValue[0]['value'] = event.value;
+      this.fromDestinationTitle = event.value.title;
+      this.rentalForm.city = event.value.city;
+      this.rentalForm.country = event.value.country;
+      this.rentalForm.id = event.value.id;
+      this.rentalForm.display_name = event.value.title;
+    }
+  }
+
   //Start search Vacation rentals function
   searchRentals(formData){
+    // console.log(formData);
+    // return false;
     this.error_message='';
     this.rentalSearchFormSubmitted = true;
     if(this.rentalSearchForm.invalid) 
@@ -172,16 +207,16 @@ export class VacationSearchWidgetComponent implements OnInit {
     }
    }
     let queryParams: any = {};
-    queryParams.id=formData.id;
     queryParams.type=formData.type;
     queryParams.check_in_date=(moment(formData.check_in_date).format('YYYY-MM-DD'));
     queryParams.check_out_date=(moment(formData.check_out_date).format('YYYY-MM-DD'));
     queryParams.adult_count=formData.adult_count;
+    queryParams.id=formData.id;
     queryParams.child=formData.child;
     queryParams.number_and_children_ages=formData.number_and_children_ages;
-    queryParams.city=this.destination.city;
-    queryParams.display_name=this.destination.display_name;
-    queryParams.country=this.destination.country;
+    queryParams.city=this.rentalForm.city;
+    queryParams.display_name=this.rentalForm.display_name;
+    queryParams.country=this.rentalForm.country;
     console.log(queryParams);
     localStorage.setItem('_rental', JSON.stringify(queryParams));
       this.router.navigate(['vacation-rental/search'], {

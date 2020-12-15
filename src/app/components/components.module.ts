@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -37,6 +37,7 @@ import { RentalInfoComponent } from './rental-shared-components/rental-info/rent
 import { GuestInfoComponent } from './hotel-shared-components/guest-info/guest-info.component';
 import { SearchHotelComponent } from './hotel-shared-components/search-hotel/search-hotel.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 
 @NgModule({
   declarations: [
@@ -62,9 +63,12 @@ import { TranslateModule } from '@ngx-translate/core';
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+
+    // HOTEL SHARED COMPONENT
     GuestInfoComponent,
     SearchHotelComponent,
-    RentalInfoComponent
+    RentalInfoComponent,
+    VacationSearchComponent
   ],
   imports: [
     CommonModule,
@@ -105,7 +109,8 @@ import { TranslateModule } from '@ngx-translate/core';
     GuestInfoComponent,
     SearchHotelComponent,
     RentalInfoComponent,
-    TranslateModule
+    TranslateModule,
+    VacationSearchComponent
   ],
   providers: [DatePipe],
 

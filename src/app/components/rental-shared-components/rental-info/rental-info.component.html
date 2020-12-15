@@ -1,10 +1,10 @@
 <div class="search_area">
   <label>{{ label }}</label>
-  <div class="travel_info" id="add_room" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
+  <div class="travel_info" id="rental_add_room" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
     <span>{{ totalPerson }}</span> Guest <div class="drop_aerrow">
     </div>
   </div>
-  <div class="traveller_add_block" id="add_room_open" style="display: none;">
+  <div class="traveller_add_block" id="rental_add_room_open" style="display: none;">
     <div class="rooms_aloc ">
     <ul>
       <li>
@@ -42,7 +42,7 @@
             <div class="child_boxes open" *ngFor="let subchild of child.children;let idx=index">
               <span class="label_name">Child {{idx+1}} age</span>
               <select name="" id="{{id}}" #childAge (change)="changeChildAge(childAge.value,idx)">
-                <option value="">Select Age</option>
+                <option value="" disabled>Select Age</option>
                 <option *ngFor='let in of counter(12) ;let i = index' value="{{i+1}}">{{i+1}}</option>
               </select>
             </div>
