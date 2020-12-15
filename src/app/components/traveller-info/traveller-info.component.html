@@ -1,7 +1,7 @@
 <div class="search_area">
     <label>{{ label }}</label>
     <div class="travel_info" id="add_traveler" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
-        <span>{{ totalPerson }}</span> Traveler
+        <span>{{ totalPerson }}</span> {{'traveler' | translate}}
         <div class="drop_aerrow">
         </div>
     </div>
@@ -31,7 +31,7 @@
             </li>
             <li>
                 <div class="left">
-                    <span>{{'infant' | translate}}</span> (Below 2 {{'years' | translate}})
+                    <span>{{'infant' | translate}}</span> ({{'below' | translate}} 2 {{'years' | translate}})
                 </div>
                 <div class="right">
                     <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : infantValue === 0 }" [disabled]="infantValue === 0" (click)="btnClickForChange({type: 'minus',label: 'infant', value: infantValue})" />

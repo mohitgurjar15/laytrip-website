@@ -2,8 +2,8 @@
     <div class="pay_deatil_info">
         <div class="block_detail_left">
             <ul>
-                <li>1st Installment <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
-                <li>Default Installment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
+                <li>{{'1st_installment' | translate}} <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
+                <li>{{'default_installment' | translate}} ({{'for' | translate}} {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
             </ul>
         </div>
         <!-- <div class="block_detail_right">
@@ -14,7 +14,7 @@
 
 <ul class="block_installment_radio" *ngIf="instalmentAvavible && showFullPartialPayOption">
     <li [ngClass]="{'disable_payment_option': disablePartialPayment === true, 'select': isInstalemtMode===true}">
-        <label class="custom_radio">{{'pay_with_installment' | translate}}  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/{{'week' | translate}}</span>
+        <label class="custom_radio">{{'pay_with_installment' | translate}}  <span>{{'starts_from' | translate}} ${{weeklyDefaultInstalment | number : '1.2-2'}}/{{'week' | translate}}</span>
             <input type="radio" name="payment_mode" [disabled]="disablePartialPayment" [checked]="isInstalemtMode==true" (click)="triggerPayemntMode('instalment')">
             <span class="checkmark"></span>
         </label>
@@ -85,7 +85,7 @@
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle custom_aerrow hover-link">
-                                        <div class="left_block">Modify your down payment</div>
+                                        <div class="left_block">{{'modify_your_down_payment' | translate}}</div>
                                         <div class="right_block">
                                             <div class="block_pay_instalment">
                                                 <!-- <div class="block_mins pay_block">
@@ -119,7 +119,7 @@
                                                     <span>${{instalmentRequest.amount | number : '1.2-2'}}</span>
                                                 </li>
                                                 <li *ngIf="laycreditpoints > 0">
-                                                    Laytrip point use
+                                                    {{'laytrip_point_use' | translate}}
                                                     <span class="point_use">${{laycreditpoints}}</span>
                                                 </li>
                                                 <li>

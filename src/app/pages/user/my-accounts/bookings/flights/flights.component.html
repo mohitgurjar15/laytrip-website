@@ -4,7 +4,7 @@
 <div class="account_cnt_main booking_main" *ngIf="isNotFound && !loading">
     <div class="block_nobooking_available">
         <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
-        <h5>No Flight Booking Found</h5>
+        <h5>{{'no_flight_booking_found' | translate}}</h5>
     </div>
 </div>
 <div class="result_listing one_way_list roundtrip_list" *ngIf="loading">
@@ -81,7 +81,7 @@
                     <div class="col-md-9">
                         <ul>
                             <li>{{'booking_id' | translate}} <span>{{item.tripId}}</span></li>
-                            <li>Travelling on <span>{{ item.checkInDate}}</span></li>
+                            <li>{{'travelling_on' | translate}} <span>{{ item.checkInDate}}</span></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -104,7 +104,7 @@
                     <div class="block_detail">
                         <div class="block_detail_top">
                             <div class="detail_info">
-                                <p>Departure</p>
+                                <p>{{'departute' | translate}}</p>
                                 <h4>{{item.departure_time}} <span></span></h4>
                                 <span>{{item.departure_city}}</span>
                             </div>
@@ -134,7 +134,7 @@
                                 </div>
                             </div> -->
                             <div class="info_price_origin">
-                                <a href="javascript:void(0);" data-toggle="modal" (click)="goToBookingId(item.tripId)" data-target="#send_mail_modal">Send email</a>
+                                <a href="javascript:void(0);" data-toggle="modal" (click)="goToBookingId(item.tripId)" data-target="#send_mail_modal">{{'send_email' | translate}}</a>
                                 <!-- (click)="goToBookingId(bookingId)" -->
                                 <!--
                                 <div class="refundable">Refundable</div>
@@ -146,7 +146,7 @@
                 </div>
                 <div class="col-md-3 px-0">
                     <div class="block_price">
-                        <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
+                        <p>{{item.bookingType==1 ? ('start_from' | translate) : ('total_prise' | translate) }}</p>
                         <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                         </h6>
                         <a class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info"
@@ -161,12 +161,12 @@
                     <div class="col-md-9">
                         <ul>
                             <li>{{'booking_id' | translate}}<span>{{item.tripId}}</span></li>
-                            <li>Travelling on <span>{{ item.checkInDate}}</span></li>
+                            <li>{{'travelling_on' | translate}} <span>{{ item.checkInDate}}</span></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <div class="block_cancle">
-                            <a class="hover-link" (click)="open(content)">Cancel Booking</a>
+                            <a class="hover-link" (click)="open(content)">{{'cancel_booking_title' | translate}}</a>
                             <span [ngClass]="{'complete': item.bookingStatus , 'refund':item.bookingStatus == 0 }">{{ bookingStatus[item.bookingStatus] }}</span> </div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                                 <div class="block_inner" *ngFor="let trip of item.routes">
                                     <div class="col-md-4 col-lg-5 px-0">
                                         <div class="block_im">
-                                            <div class="flight_wards">Outwards</div>
+                                            <div class="flight_wards">{{'outwards' | translate}}</div>
                                             <div class="flight_wards_info">
                                                 <img src="{{trip.stops[0].airline_logo}}" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';" alt="{{item.airline_name}} Logo">
                                                 <div class="info_flight_name">
@@ -194,7 +194,7 @@
                                         <div class="block_detail noborder">
                                             <div class="block_detail_top">
                                                 <div class="detail_info">
-                                                    <p>Departure</p>
+                                                    <p>{{'departute' | translate}}</p>
                                                     <h4>{{trip.stops[0].departure_time}} <span></span></h4>
                                                     <span>{{trip.stops[0].departure_info.city}}</span>
                                                 </div>
@@ -261,7 +261,7 @@
                         (click)="getCancellationPolicy(item.moduleInfo.route_code)">Cancellation Rules</a>
                 </li> -->
                 <li class="nav-item">
-                    <a href="#Traveller" class="nav-link" data-toggle="tab" role="tab">Travelers</a>
+                    <a href="#Traveller" class="nav-link" data-toggle="tab" role="tab">{{'traveler' | translate}}</a>
                 </li>
             </ul>
             <div id="content" class="tab-content" role="tablist">
@@ -281,7 +281,7 @@
                                         <div class="flight_layover" *ngIf="flightInfo.is_layover">
                                             <div class="triangle_right"></div>
                                             <div class="layover_info">
-                                                Change of Planes <span>| {{ flightInfo?.layover_duration }}</span> Layover
+                                                {{'change_of_planes' | translate}} <span>| {{ flightInfo?.layover_duration }}</span> {{'layover' | translate}}
                                             </div>
                                             <div class="triangle_left"></div>
                                         </div>
@@ -316,7 +316,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="flight_going" *ngIf="i === 0">Outwards</div>
+                                            <div class="flight_going" *ngIf="i === 0">{{'outwards' | translate}}</div>
                                         </div>
 
                                     </div>
@@ -342,19 +342,19 @@
                                     <ul *ngIf="item.bookingType == 1 || !item.moduleInfo.secondary_fare_break_down">
                                         <li *ngFor="let fareDetails of item.moduleInfo.fare_break_dwon">
                                             <p *ngIf="fareDetails.type == 'ADT'">
-                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Adult)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} {{'adult' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type == 'ADT'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'CHD'">
-                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Child)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} {{'child' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type == 'CHD'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'INF'">
-                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Infant)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} {{'infant' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} traveler)
+                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} {{'traveler' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </li>
@@ -362,19 +362,19 @@
                                     <ul *ngIf="item.bookingType == 2 && item.moduleInfo.secondary_fare_break_down">
                                         <li *ngFor="let fareDetails of item.moduleInfo.secondary_fare_break_down">
                                             <p *ngIf="fareDetails.type == 'ADT'">
-                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Adult)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} {{'adult' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type == 'ADT'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'CHD'">
-                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Child)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} {{'child' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type == 'CHD'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type == 'INF'">
-                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} Infant)
+                                                {{'base_fare' | translate}} ({{ fareDetails?.quantity }} {{'infant' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type == 'INF'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} traveler)
+                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} {{'traveler' | translate}})
                                             </p>
                                             <span *ngIf="fareDetails.type === 'total'">{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                         </li>
@@ -456,7 +456,7 @@
                                     <p>{{'baggage_info_description' | translate}}
                                     </p>
                                 </div>
-                                <p *ngIf="!loadBaggageDetails && notFoundBaggageDetails">There is no baggage information found
+                                <p *ngIf="!loadBaggageDetails && notFoundBaggageDetails">{{'no_baggage_info_messege' | translate}}
                                 </p>
 
                                 <div class="triangle_left"></div>
@@ -531,7 +531,7 @@
                                     <div class="triangle_right"></div>
                                     <ul *ngFor="let traveler of item.travelers;let i = index">
                                         <li>
-                                            Traveler ({{traveler.userData.user_type || 'N/A' | titlecase}})
+                                            {{'traveler' | translate}} ({{traveler.userData.user_type || 'N/A' | titlecase}})
                                             <span>{{traveler.userData.firstName + ' '+traveler.userData.lastName}}</span>
                                         </li>
                                     </ul>

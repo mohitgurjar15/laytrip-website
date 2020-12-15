@@ -8,7 +8,7 @@
                             <app-add-points (addNewPoints)="addNewPoints($event)"></app-add-points>
                             <div class="block_card_select">
                                 <div class="block_title_section">
-                                    <h5>Select Credit Card</h5>
+                                    <h5>{{'select_credit_card' | translate}}</h5>
                                 </div>
                                 <div class="block_detail">
                                     <app-card-list *ngIf="userInfo.roleId!=7" [newCard]="newCard" (selectCreditCard)="selectCreditCard($event)" (totalNumberOfcard)="totalNumberOfcard($event)">

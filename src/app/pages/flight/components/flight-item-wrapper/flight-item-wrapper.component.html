@@ -14,7 +14,7 @@
                         <div class="block_detail">
                             <div class="block_detail_top">
                                 <div class="detail_info">
-                                    <p>Departure</p>
+                                    <p>{{'departute' | translate}}</p>
                                     <h4>{{ item?.departure_time }}</h4>
                                     <span>{{ item?.departure_info.city }}</span>
                                 </div>
@@ -25,7 +25,7 @@
                                     </div>
                                     <span *ngIf="item.stop_count===0">{{'non_stop' | translate}}</span>
                                     <span *ngIf="item.stop_count === 1">1 Stop</span>
-                                    <span *ngIf="item.stop_count > 1">{{item.stop_count}} Stops</span>
+                                    <span *ngIf="item.stop_count > 1">{{item.stop_count}} {{'stops' | translate}}</span>
                                 </div>
                                 <div class="detail_info">
                                     <p>{{'arrival' | translate}}</p>
@@ -59,7 +59,7 @@
                                     <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
                                 </div> -->
                                 <div class="block" *ngIf="item.start_price > 0">
-                                    <p>Starts from</p>
+                                    <p>{{'starts_from' | translate}}</p>
                                     <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /{{'week'| translate}}</p>
                                 </div>
                                 <div class="block" *ngIf="item.start_price == 0">
@@ -180,7 +180,7 @@
                                                 <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             </p>
                                             <p *ngIf="fareDetails.type === 'total'">
-                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} traveler)
+                                                {{'total_fare' | translate}} ({{ fareDetails?.quantity }} {{'traveler' | translate}})
                                                 <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                             </p>
                                         </li>
@@ -339,7 +339,7 @@
                                         <div class="block_detail">
                                             <div class="block_detail_top">
                                                 <div class="detail_info">
-                                                    <p>Departure</p>
+                                                    <p>{{'departute' | translate}}</p>
                                                     <h4>{{ item?.routes[0].stops[0].departure_time }}</h4>
                                                     <span>{{ item?.routes[0].stops[0].departure_info.city }}</span>
                                                 </div>
@@ -350,8 +350,8 @@
                                                     </div>
 
                                                     <span *ngIf="item.stop_count===0">{{'non_stop' | translate}}</span>
-                                                    <span *ngIf="item.stop_count === 1">1 Stop</span>
-                                                    <span *ngIf="item.stop_count > 1">{{item.stop_count}} Stops</span>
+                                                    <span *ngIf="item.stop_count === 1">{{'1_stop' | translate}}</span>
+                                                    <span *ngIf="item.stop_count > 1">{{item.stop_count}} {{'stops' | translate}}</span>
                                                 </div>
                                                 <div class="detail_info">
                                                     <p>{{'arrival' | translate}}</p>
@@ -383,7 +383,7 @@
                                         <div class="block_detail">
                                             <div class="block_detail_top">
                                                 <div class="detail_info">
-                                                    <p>Departure</p>
+                                                    <p>{{'departute' | translate}}</p>
                                                     <h4>{{ item?.routes[1].stops[0].departure_time }}</h4>
                                                     <span>{{ item?.routes[1].stops[0].departure_info.city }}</span>
                                                 </div>
@@ -396,7 +396,7 @@
                                                     <span *ngIf="item.inbound_stop_count===0">{{'non_stop' | translate}}</span>
                                                     <span *ngIf="item.inbound_stop_count === 1">1 Stop</span>
                                                     <span *ngIf="item.inbound_stop_count > 1">{{item.inbound_stop_count}}
-                                                        Stops</span>
+                                                        {{'stops' | translate}}</span>
                                                 </div>
                                                 <div class="detail_info">
                                                     <p>{{'arrival' | translate}}</p>
@@ -436,7 +436,7 @@
                                     <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
                                 </div> -->
                                 <div class="block" *ngIf="item.start_price > 0">
-                                    <p>Starts from</p>
+                                    <p>{{'starts_from' | translate}}</p>
                                     <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /{{'week'| translate}}</p>
                                 </div>
                                 <div class="block" *ngIf="item.start_price == 0">
@@ -613,7 +613,7 @@
                                                     <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                                 </p>
                                                 <p *ngIf="fareDetails.type === 'total'">
-                                                    {{'total_fare' | translate}} ({{ fareDetails?.quantity }} traveler)
+                                                    {{'total_fare' | translate}} ({{ fareDetails?.quantity }} {{'traveler' | translate}})
                                                     <span>{{ currency?.symbol }}{{ fareDetails?.price | number : '1.2-2'}}</span>
                                                 </p>
                                             </li>

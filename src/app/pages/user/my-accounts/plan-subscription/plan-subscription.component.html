@@ -7,7 +7,7 @@
                         <div class="block_pay_info" *ngIf="isShowCardOption">
                             <div class="block_card_select">
                                 <div class="block_title_section">
-                                    <h5 *ngIf="userInfo.roleId!=7">Select Credit Card</h5>
+                                    <h5 *ngIf="userInfo.roleId!=7">{{'select_credit_card' | translate}}</h5>
                                     <h5 *ngIf="userInfo.roleId==7">Credit Card Details
                                     </h5>
                                 </div>

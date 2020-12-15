@@ -90,7 +90,7 @@
     <div class="block_passenger_detail" *ngIf="!loader">
         <div class="block_passenger_info">
             <div class="block_title_section">
-                <h6>{{'adult' | translate}} <span>(Above 12 years)</span></h6>
+                <h6>{{'adult' | translate}} <span>({{'above_12_years' | translate}})</span></h6>
                 <span>({{adultCounter}}/{{_itinerary.adult || 0}} selected)</span>
             </div>
             <!-- <h6>Adult <span>(Above 12 years)</span></h6> -->
@@ -140,7 +140,7 @@
         <div *ngIf="isLoggedIn">
             <div class="block_passenger_info" *ngIf="_itinerary.child > 0">
                 <div class="block_title_section">
-                    <h6>{{'child' | translate}} <span>(Above 2-12 years)</span></h6>
+                    <h6>{{'child' | translate}} <span>({{'above_2-12_years' | translate}})</span></h6>
                     <span>({{childCounter}}/{{_itinerary.child || 'N/A'}} selected)</span>
                 </div>
                 <!-- <h6>Child <span>(Above 2-12 years)</span></h6> -->
@@ -188,7 +188,7 @@
 
             <div class="block_passenger_info" *ngIf="_itinerary.infant > 0">
                 <div class="block_title_section">
-                    <h6>{{'infant' | translate}} <span>(Below 2 years)</span></h6>
+                    <h6>{{'infant' | translate}} <span>({{'below' | translate}} 2 years)</span></h6>
                     <span>({{infantCounter}}/{{_itinerary.infant || 'N/A'}} selected)</span>
                 </div>
                 <!--  <h6>Infant <span>(Above 2 years)</span></h6> -->

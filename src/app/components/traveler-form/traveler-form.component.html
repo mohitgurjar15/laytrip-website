@@ -174,7 +174,7 @@
                     </p-calendar>
                 </div>
                 <div *ngIf="(submitted  || adultForm.controls.passport_expiry.touched) && adultForm.controls.passport_expiry.errors" class="focus-input100 login-error">
-                    <div *ngIf="adultForm.controls.passport_expiry.errors.required" class="error_text">Please select passport export date.
+                    <div *ngIf="adultForm.controls.passport_expiry.errors.required" class="error_text">{{'passport_export_touched_validation' | translate}}
                     </div>
                 </div>
             </div>
@@ -184,7 +184,7 @@
                     <input type="text" formControlName="passport_number" maxlength="30" tabindex="9" placeholder="{{'passport_number_placeholder' | translate}}">
                 </div>
                 <div *ngIf="(submitted  || adultForm.controls.passport_number.touched) && adultForm.controls.passport_number.errors" class="focus-input100 login-error">
-                    <div *ngIf="adultForm.controls.passport_number.errors.required" class="error_text">Please enter passport number.
+                    <div *ngIf="adultForm.controls.passport_number.errors.required" class="error_text">{{'passport_number_touched_validation' | translate}}
                     </div>
                 </div>
             </div>
