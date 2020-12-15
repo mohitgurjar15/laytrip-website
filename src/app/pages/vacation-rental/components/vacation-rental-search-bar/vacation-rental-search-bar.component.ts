@@ -165,10 +165,10 @@ export class VacationRentalSearchBarComponent implements OnInit {
     this.defaultCountry =this.defaultSelected.country;
   }
 
-  onRemove(event, item) {
-    if (item.key === 'fromSearch1') {
+  onRemove(event) {
+    //if (item.key === 'fromSearch1') {
       this.defaultCity = Object.create(null);
-    }
+    //}
   }
 
   searchRentals(formData){
