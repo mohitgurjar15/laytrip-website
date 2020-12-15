@@ -499,7 +499,7 @@ ngb-datepicker{
                                 padding: 15px;
                                 border: 1px solid $text-light-grey;
                                 border-radius: 5px;
-                                z-index: 99;
+                                z-index: 9999;
 
                                 &:before {
                                     width: 0;
@@ -1083,7 +1083,7 @@ ngb-datepicker{
                                 padding: 15px;
                                 border: 1px solid $text-light-grey;
                                 border-radius: 5px;
-                                z-index: 99;
+                                z-index: 9999;
 
                                 &:before {
                                     width: 0;
@@ -1763,7 +1763,7 @@ ngb-datepicker{
                                     padding: 15px;
                                     border: 1px solid $text-light-grey;
                                     border-radius: 5px;
-                                    z-index: 99;
+                                    z-index: 9999;
     
                                     &:before {
                                         width: 0;
@@ -1994,7 +1994,7 @@ ngb-datepicker{
                         padding: 15px;
                         border: 1px solid $text-light-grey;
                         border-radius: 5px;
-                        z-index: 99;
+                        z-index: 9999;
 
                         &:before {
                             width: 0;
@@ -2902,7 +2902,7 @@ ngb-datepicker{
 
         button {
             background-color: $background-white;
-            padding: 15px 12px;
+            padding: 7px 12px;
             border: 1px solid $box-border-color;
             border-radius: 8px;
             color: $text-grey;
@@ -2990,7 +2990,7 @@ ngb-datepicker{
                                         position: relative;
                                         background-position: center center;
                                         width: 100%;
-                                        height: 176px;
+                                        height: 170px;
                                         img {
                                             max-width: 100%;
                                             height: 100%;
@@ -3046,7 +3046,7 @@ ngb-datepicker{
                                         }
 
                                         span {
-                                            margin: 5px 0 0;
+                                            margin: 0;
                                             &.adress_span{
                                                 max-width: 380px;
                                                 white-space: nowrap;
@@ -3079,9 +3079,7 @@ ngb-datepicker{
                                                 .stars_text {
                                                     margin-left: 14px;
                                                     .stars_rating {
-                                                        margin-top: 5px;
-                                                        img {
-                                                        }
+                                                        margin-top: 0px;
                                                     }
                                                     .review_num_text {
                                                         a {
@@ -4130,7 +4128,7 @@ ngb-datepicker{
                                 position: relative;
                                 background-position: center center;
                                 width: 100%;
-                                height: 176px;
+                                height: 170px;
                                 img {
                                     max-width: 100%;
                                     height: 100%;
@@ -4251,9 +4249,7 @@ ngb-datepicker{
                                     .stars_text {
                                         margin-left: 14px;
                                         .stars_rating {
-                                            margin-top: 5px;
-                                            img {
-                                            }
+                                            margin-top: 0;
                                         }
                                         .review_num_text {
                                             a {
@@ -5682,7 +5678,7 @@ ngb-datepicker{
 
         button {
             background-color: $background-white;
-            padding: 15px 12px;
+            padding: 7px 12px;
             border: 1px solid $box-border-color;
             border-radius: 8px;
             color: $text-grey;
@@ -5770,7 +5766,7 @@ ngb-datepicker{
                                         position: relative;
                                         background-position: center center;
                                         width: 100%;
-                                        height: 176px;
+                                        height: 170px;
                                         img {
                                             max-width: 100%;
                                             height: 100%;
@@ -5826,7 +5822,7 @@ ngb-datepicker{
                                         }
 
                                         span {
-                                            margin: 5px 0 0;
+                                            margin: 0;
                                             &.adress_span{
                                                 max-width: 380px;
                                                 white-space: nowrap;
@@ -5857,7 +5853,7 @@ ngb-datepicker{
                                             .stars_text {
                                                 margin-left: 14px;
                                                 .stars_rating {
-                                                    margin-top: 5px;
+                                                    margin-top: 0;
                                                 }
                                                 .review_num_text {
                                                     a {
@@ -6895,7 +6891,7 @@ ngb-datepicker{
                                 position: relative;
                                 background-position: center center;
                                 width: 100%;
-                                height: 176px;
+                                height: 170px;
                                 img {
                                     max-width: 100%;
                                     height: 100%;
@@ -7016,9 +7012,7 @@ ngb-datepicker{
                                     .stars_text {
                                         margin-left: 14px;
                                         .stars_rating {
-                                            margin-top: 5px;
-                                            img {
-                                            }
+                                            margin-top: 0;
                                         }
                                         .review_num_text {
                                             a {
@@ -7145,12 +7139,14 @@ ngb-datepicker{
 
         ngx-gallery{
             width: 100% !important;
-            height: 700px !important;
+            height: 590px !important;
 
             @include tab-view{
                 height: 350px !important;
             }
             ngx-gallery-image{
+                margin-bottom: 13px;
+
                 .ngx-gallery-image-wrapper{
                     border-radius: 5px;
     
@@ -7170,6 +7166,7 @@ ngb-datepicker{
                 a{
                     &.ngx-gallery-thumbnail{
                         border-radius: 5px;
+                        max-height: 115px;
                     }
                 }
             }
@@ -7347,9 +7344,9 @@ ngb-datepicker{
 
     .tab-content {
         background-color: $text-white;
-        padding: 35px 40px;
-        box-shadow: 0px 3px 6px $bg-black-opacity-half;
-        border-radius: 0 0 20px 20px;
+        padding: 20px;
+        box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+        border-radius: 0 0 5px 5px;
         @include tab-view{
             padding: 15px;
             font-size: 12px;
@@ -7357,6 +7354,7 @@ ngb-datepicker{
 
         .tab-pane {
             h4{
+                font-weight: 600;
                 @include tab-view{
                     font-size: 16px;
                 }
@@ -7364,22 +7362,81 @@ ngb-datepicker{
             
             p {
                 color: $text-grey;
-                line-height: 2.2;
+                line-height: 21px;
                 font-weight: 300;
+                margin-bottom: 20px;
                 @include tab-view{
                     font-size: 12px;
-                    line-height: 21px;
                 }
             }
             .amenities_listin_tab{
-                i{
-                    color: $text-grey;
-                    font-size: 14px;
+                .aminities_detailing{
+                    padding: 5px;
+                    i{
+                        color: $text-grey;
+                        font-size: 14px;
+                    }
+                    span{
+                        font-size: 12px;
+                        color: $text-grey;
+                        padding-left: 10px !important;
+                    }
                 }
-                span{
-                    font-size: 12px;
+            }
+            .reviews_wrapper_main{
+                .ratings_section{
+                    display: flex;
+                    justify-content: flex-start;
+                    .rating_num{
+                        .blue_box{
+                            color: $text-white;
+                            background-color: $primary-color;
+                            height: 46px;
+                            width: 46px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 17px;
+                            clip-path: polygon(21% 0, 100% 0%, 75% 100%, 0% 100%);
+                        }
+                    }
+                    .rating_detail{
+                        margin-left: 15px;
+                        .users_name{
+                            font-size: 14px;
+                            margin-bottom: 5px;
+                            display: flex;
+                        }
+                        .stars_text{
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            margin-bottom: 10px;
+                            .stars_wrapper{
+                                margin-right: 5px;
+                                img{
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    align-items: center;
+                                }
+                            }
+                            p{
+                                color: #19DD00;
+                                font-size: 14px;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+                .rating_text{
                     color: $text-grey;
-                    padding-left: 10px !important;
+                    line-height: 21px;
+                    font-weight: 300;
+                    margin-bottom: 20px;
+                    margin-left: 65px;
+                    @include tab-view{
+                        font-size: 12px;
+                    }
                 }
             }
         }

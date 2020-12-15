@@ -4,13 +4,13 @@
     <div class="row">
       <div class="col-lg-9">
         <div class="hotel_detail_slider">
-         
+
           <div class="slider_main_contain" style="position: relative;">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
 
             <div class="slider-overlay">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <div class="hotel_name">
                     <h4>
                       {{hotelDetails?.name}}, {{hotelDetails?.state_code}}
@@ -21,7 +21,7 @@
                   </div>
                   <div id="border"></div>
                 </div>
-                <div class="col-md-6 room-rating">
+                <div class="col-md-4 room-rating">
                   <div class="room_rate_box">
                     <span class="rate-box">
                       {{hotelDetails?.review_rating | number : '1.1-1'}}
@@ -48,7 +48,7 @@
                 aria-selected="false">Amenities</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
                 aria-selected="false">Reviews</a>
             </li>
             <li class="nav-item">
@@ -92,33 +92,90 @@
                 distribution of lettersas opposed to using ‘Content here, content here.
               </p>
               <div class="row amenities_listin_tab">
-                <div class="col-md-4 p-3">
-                  <i class="fa fa-wifi fa-lg" aria-hidden="true"></i>
-                  <span class="pl-3">Free WIFI </span>
+                <div class="col-md-4">
+                  <div class="aminities_detailing">
+                    <i class="fa fa-wifi fa-lg" aria-hidden="true"></i>
+                    <span class="pl-3">Free WIFI </span>
+                  </div>
                 </div>
-                <div class="col-md-4 p-3">
-                  <i class="fa fa-television fa-lg" aria-hidden="true"></i>
-                  <span class="pl-3">Flat Screen TV</span>
+                <div class="col-md-4">
+                  <div class="aminities_detailing">
+                    <i class="fa fa-television fa-lg" aria-hidden="true"></i>
+                    <span class="pl-3">Flat Screen TV</span>
+                  </div>
                 </div>
-                <div class="col-md-4 p-3">
-                  <i class="fa fa-snowflake-o fa-lg" aria-hidden="true"></i>
-                  <span class="pl-3">Air conditioner</span>
+                <div class="col-md-4">
+                  <div class="aminities_detailing">
+                    <i class="fa fa-snowflake-o fa-lg" aria-hidden="true"></i>
+                    <span class="pl-3">Air conditioner</span>
+                  </div>
                 </div>
-                <div class="col-md-4 p-3">
-                  <i class="fa fa-shower fa-lg" aria-hidden="true"></i>
-                  <span class="pl-3">Private Bathroom</span>
+                <div class="col-md-4">
+                  <div class="aminities_detailing">
+                    <i class="fa fa-shower fa-lg" aria-hidden="true"></i>
+                    <span class="pl-3">Private Bathroom</span>
+                  </div>
                 </div>
-                <div class="col-md-4 p-3">
-                  <i class="fa fa-cutlery fa-lg" aria-hidden="true"></i>
-                  <span class="pl-3">Breakfast Included</span>
+                <div class="col-md-4">
+                  <div class="aminities_detailing">
+                    <i class="fa fa-cutlery fa-lg" aria-hidden="true"></i>
+                    <span class="pl-3">Breakfast Included</span>
+                  </div>
                 </div>
-                <div class="col-md-4 p-3">
-                  <i class="fa fa-wifi fa-lg" aria-hidden="true"></i>
-                  <span class="pl-3">Free WIFI</span>
+                <div class="col-md-4">
+                  <div class="aminities_detailing">
+                    <i class="fa fa-wifi fa-lg" aria-hidden="true"></i>
+                    <span class="pl-3">Free WIFI</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact...</div>
+            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <div class="reviews_wrapper_main">
+                <div class="ratings_section">
+                  <div class="rating_num">
+                    <span class="blue_box">
+                      8.8
+                    </span>
+                  </div>
+                  <div class="rating_detail">
+                    <span class="users_name">User Name</span>
+                    <div class="stars_text">
+                      <div class="stars_wrapper">
+                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
+                      </div>
+                      <p>Fabulous</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="rating_text">
+                  It is a long established fact that a reader will be distracted by the readable content of apage when
+                  looking at its layout.
+                </p>
+              </div>
+              <div class="reviews_wrapper_main">
+                <div class="ratings_section">
+                  <div class="rating_num">
+                    <span class="blue_box">
+                      8.8
+                    </span>
+                  </div>
+                  <div class="rating_detail">
+                    <span class="users_name">User Name</span>
+                    <div class="stars_text">
+                      <div class="stars_wrapper">
+                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
+                      </div>
+                      <p>Fabulous</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="rating_text">
+                  It is a long established fact that a reader will be distracted by the readable content of apage when
+                  looking at its layout.
+                </p>
+              </div>
+            </div>
             <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">map...</div>
           </div>
         </div>
