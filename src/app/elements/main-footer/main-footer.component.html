@@ -9,8 +9,7 @@
                             <a [routerLink]="['/']">
                                 <img src="{{s3BucketUrl}}assets/images/footer_logo.svg" alt="Logo" />
                             </a>
-                            <p>Making travel affordable for all.
-                                Book now, pay with installments.</p>
+                            <p>{{'laytrip_info_page_title_1_description' | translate}}</p>
 
                             <!-- <div class="company_contact">
                                 <h5>Reach Us</h5>
@@ -27,7 +26,7 @@
                     <div class="col-lg-9">
                         <div class="ftr_menu">
                             <div class="menu_grid">
-                                <h5>Reach Us</h5>
+                                <h5>{{'laytrip_info_page_title_2' | translate}}</h5>
                                 <ul>
                                     <ul>
                                         <li><a href="mailto:support@laytrip.com"><i class="fa fa-envelope"
@@ -40,13 +39,17 @@
                             </div>
 
                             <div class="menu_grid">
-                                <h5>Company</h5>
+                                <h5>{{'laytrip_info_page_title_3' | translate}}</h5>
                                 <ul>
-                                    <li><a [routerLink]="['/why-laytrip']">Why laytrip?</a></li>
+                                    <li>
+                                        <a [routerLink]="['/why-laytrip']" [innerHTML]="'laytrip_info_page_title_3_description_1' | translate"></a>
+                                    </li>
                                     <!-- <li><a href="javascript:void(0);">Media and News</a></li> -->
                                     <!-- <li><a href="javascript:void(0);">Download the App</a></li>
                                     <li><a href="javascript:void(0);">Media and News</a></li> -->
-                                    <li><a [routerLink]="['/download-app']">Download the App</a></li>
+                                    <li>
+                                        <a [routerLink]="['/download-app']" [innerHTML]="'laytrip_info_page_title_3_description_2' | translate"></a>
+                                    </li>
                                 </ul>
                             </div>
                             <!-- <div class="menu_grid">
@@ -67,15 +70,21 @@
                                 </ul>
                             </div> -->
                             <div class="menu_grid">
-                                <h5>Support</h5>
+                                <h5>{{'laytrip_info_page_title_4' | translate}}</h5>
                                 <ul>
-                                    <li><a [routerLink]="['/faq']">FAQs</a></li>
-                                    <li><a [routerLink]="['/contact-us']">Contact Us</a></li>
+                                    <li>
+                                        <a [routerLink]="['/faq']" [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
+                                    </li>
+                                    <li>
+                                        <a [routerLink]="['/contact-us']" [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"></a>
+                                    </li>
                                     <!-- <li><a [routerLink]="['/cancellation-policy']">Booking and Cancellation Policies</a>
                                     </li> -->
                                     <!-- <li><a [routerLink]="['/privacy-policy']">Privacy</a></li> -->
                                     <!-- <li><a href="javascript:void(0);">Terms</a></li> -->
-                                    <li><a [routerLink]="['/account/search-trip']">Check Booking Status</a></li>
+                                    <li>
+                                        <a [routerLink]="['/account/search-trip']" [innerHTML]="'laytrip_info_page_title_4_description_3' | translate"></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -87,7 +96,7 @@
     <div class="footer_btm">
         <div class="container">
             <div class="row">
-                <p>Affordable flight, hotel and home rentals bookings with laytrip.© laytrip 2020</p>
+                <p>{{'home_page_footer' | translate}}</p>
             </div>
         </div>
     </div>
@@ -97,6 +106,6 @@
     <a href="javascript:void(0);" (click)="openShare()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg" alt="Share"> </a>
 </div>
 
-<a id="back_to_top" title="Back to top" >
+<a id="back_to_top" title="Back to top">
     <img src="{{s3BucketUrl}}assets/images/icon/backtotop.svg" alt="Back to top">
 </a>

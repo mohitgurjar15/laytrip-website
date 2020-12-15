@@ -13,10 +13,10 @@
                 <div class="col-md-6">
                   <div class="hotel_name">
                     <h4>
-                      Hotel Aura, IGI Airport
+                      {{hotelDetails?.name}}, {{hotelDetails?.state_code}}
                     </h4>
                     <span>
-                      Sighisoara, Romania
+                      {{hotelDetails?.city_name}}, {{hotelDetails?.country_name}}
                     </span>
                   </div>
                   <div id="border"></div>
@@ -24,15 +24,11 @@
                 <div class="col-md-6 room-rating">
                   <div class="room_rate_box">
                     <span class="rate-box">
-                      5.0
+                      {{hotelDetails?.review_rating | number : '1.1-1'}}
                     </span>
                     <span class="rating">
-                      1.6+ Traveller Ratings:
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
+                      {{hotelDetails?.rating}} Traveller Ratings:
+                      <i class="fa fa-star" *ngFor='let in of counter(hotelDetails?.rating)'></i>
                     </span>
                   </div>
                 </div>

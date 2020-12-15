@@ -11,7 +11,6 @@ import { ElementsModule } from './elements/elements.module';
 import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 

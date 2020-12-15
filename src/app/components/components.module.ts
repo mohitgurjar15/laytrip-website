@@ -36,6 +36,8 @@ import { RentalInfoComponent } from './rental-shared-components/rental-info/rent
 // HOTEL SHARED COMPONENTS
 import { GuestInfoComponent } from './hotel-shared-components/guest-info/guest-info.component';
 import { SearchHotelComponent } from './hotel-shared-components/search-hotel/search-hotel.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 
 @NgModule({
   declarations: [
@@ -61,10 +63,12 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+
     // HOTEL SHARED COMPONENT
     GuestInfoComponent,
     SearchHotelComponent,
-    RentalInfoComponent
+    RentalInfoComponent,
+    VacationSearchComponent
   ],
   imports: [
     CommonModule,
@@ -78,6 +82,7 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     CalendarModule,
     LottieAnimationViewModule.forRoot(),
     TextMaskModule,
+    TranslateModule
   ],
   exports: [
     SearchAirportComponent,
@@ -101,10 +106,11 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
-    // HOTEL SHARED COMPONENT
     GuestInfoComponent,
     SearchHotelComponent,
     RentalInfoComponent,
+    TranslateModule,
+    VacationSearchComponent
   ],
   providers: [DatePipe],
 

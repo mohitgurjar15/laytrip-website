@@ -1,318 +1,295 @@
-
 <div class="fliter_block">
-  <div class="cmn_block price">
-    <div class="block_top_in">
-      <h5>Price</h5>
-    </div>
-    <form [formGroup]="priceSlider">
-      <div class="custom_range_slide">
-        <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
-        <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
-          [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
-      </div>
-    </form>
-  </div>
-  <div class="cmn_block partial_payment_price" *ngIf="partialPaymentValue>0">
-    <div class="block_top_in">
-      <h5>Installment Payment Price</h5>
-    </div>
-    <form [formGroup]="partialPriceSlider">
-      <div class="custom_range_slide">
-        <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}</p>
-        <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
-        [(value)]="partialPaymentValue" formControlName="partial_price" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)">
-      </ng5-slider>
-      </div>
-    </form>
-  </div>
- 
-  <div class="cmn_block pad_no">
-    <div class="accordion block_shortby" id="accordion-outbound">
-      <div class="accordion-group" [ngClass]="{'active':isShowoutbound==true}">
-        <div class="accordion-heading" (click)="toggleOutbound()">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-outbound"
-            href="#collapseOutbound">
-            Outbound
-          </a>
+    <div class="cmn_block price">
+        <div class="block_top_in">
+            <h5>{{'price' | translate}}</h5>
         </div>
-        <div id="collapseOutbound" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <div class="block_cmn stop">
-              <div class="block_top_in">
-                <h5>Stops</h5>
-              </div>
-              <ul>
-                <li *ngIf="flightStops.non_stop.min_price !== null && flightStops.non_stop.min_price !== 0">
-                  <label class="custom_checkbox">
+        <form [formGroup]="priceSlider">
+            <div class="custom_range_slide">
+                <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+                <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue" [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
+            </div>
+        </form>
+    </div>
+    <div class="cmn_block partial_payment_price" *ngIf="partialPaymentValue>0">
+        <div class="block_top_in">
+            <h5>{{'installment_payment_price' | translate}}</h5>
+        </div>
+        <form [formGroup]="partialPriceSlider">
+            <div class="custom_range_slide">
+                <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}</p>
+                <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue" [(value)]="partialPaymentValue" formControlName="partial_price" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)">
+                </ng5-slider>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmn_block pad_no">
+        <div class="accordion block_shortby" id="accordion-outbound">
+            <div class="accordion-group" [ngClass]="{'active':isShowoutbound==true}">
+                <div class="accordion-heading" (click)="toggleOutbound()">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-outbound" href="#collapseOutbound">
+            {{'outbound' | translate}}
+          </a>
+                </div>
+                <div id="collapseOutbound" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <div class="block_cmn stop">
+                            <div class="block_top_in">
+                                <h5>Stops</h5>
+                            </div>
+                            <ul>
+                                <li *ngIf="flightStops.non_stop.min_price !== null && flightStops.non_stop.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (click)="filterByDepartureStop($event,0)">
                     <span class="checkmark"></span>
-                    Non Stop
+                    {{'non_stop_without_hiphen' | translate}}
                   </label>
-                  <span>{{ currency?.symbol }}{{ flightStops?.non_stop?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li *ngIf="flightStops.one_stop.min_price !== null && flightStops.one_stop.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ flightStops?.non_stop?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="flightStops.one_stop.min_price !== null && flightStops.one_stop.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (click)="filterByDepartureStop($event,1)">
                     <span class="checkmark"></span>
-                    1 Stop
+                    1 {{'stop' | translate}}
                   </label>
-                  <span>{{ currency?.symbol }}{{ flightStops?.one_stop?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="flightStops.two_and_two_plus_stop.min_price !== null && flightStops.two_and_two_plus_stop.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ flightStops?.one_stop?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="flightStops.two_and_two_plus_stop.min_price !== null && flightStops.two_and_two_plus_stop.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (click)="filterByDepartureStop($event,2)">
                     <span class="checkmark"></span>
-                    Two or More Stops
+                    {{'two_or_more_stop' | translate}}
                   </label>
-                  <span>{{ currency?.symbol }}{{ flightStops?.two_and_two_plus_stop?.min_price | number : '1.2-2'}}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="block_cmn arrival_to">
-              <div class="block_top_in">
-                <h5>Arrival to {{ arrivalTimeSlotCityName }}</h5>
-              </div>
-              <ul>
-                <li
-                  *ngIf="arrivalTimeSlot.first_slot.min_price !== null && arrivalTimeSlot.first_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ flightStops?.two_and_two_plus_stop?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block_cmn arrival_to">
+                            <div class="block_top_in">
+                                <h5>{{'arrival_to' | translate}} {{ arrivalTimeSlotCityName }}</h5>
+                            </div>
+                            <ul>
+                                <li *ngIf="arrivalTimeSlot.first_slot.min_price !== null && arrivalTimeSlot.first_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByOutBoundArrivalTimeSlot($event,'outbound','arrival',depatureTimeSlot.first_slot)">
                     <span class="checkmark"></span>
                     12AM - 6AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="arrivalTimeSlot.second_slot.min_price !== null && arrivalTimeSlot.second_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="arrivalTimeSlot.second_slot.min_price !== null && arrivalTimeSlot.second_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByOutBoundArrivalTimeSlot($event,'outbound','arrival',depatureTimeSlot.second_slot)">
                     <span class="checkmark"></span>
                     6AM - 12PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="arrivalTimeSlot.third_slot.min_price !== null && arrivalTimeSlot.third_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="arrivalTimeSlot.third_slot.min_price !== null && arrivalTimeSlot.third_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByOutBoundArrivalTimeSlot($event,'outbound','arrival',depatureTimeSlot.third_slot)">
                     <span class="checkmark"></span>
                     12PM - 6PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="arrivalTimeSlot.fourth_slot.min_price !== null && arrivalTimeSlot.fourth_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="arrivalTimeSlot.fourth_slot.min_price !== null && arrivalTimeSlot.fourth_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByOutBoundArrivalTimeSlot($event,'outbound','arrival',depatureTimeSlot.fourth_slot)">
                     <span class="checkmark"></span>
                     6PM - 12AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="block_cmn departure_to">
-              <div class="block_top_in">
-                <h5>Departure to {{ departureTimeSlotCityName }}</h5>
-              </div>
-              <ul>
-                <li
-                  *ngIf="depatureTimeSlot.first_slot.min_price !== null && depatureTimeSlot.first_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ arrivalTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block_cmn departure_to">
+                            <div class="block_top_in">
+                                <h5>{{'departure_to' | translate}} {{ departureTimeSlotCityName }}</h5>
+                            </div>
+                            <ul>
+                                <li *ngIf="depatureTimeSlot.first_slot.min_price !== null && depatureTimeSlot.first_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox"  (change)="filterByOutBoundDepartureTimeSlot($event,'outbound','departure',depatureTimeSlot.first_slot)">
                     <span class="checkmark"></span>
                     12AM - 6AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ depatureTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="depatureTimeSlot.second_slot.min_price !== null && depatureTimeSlot.second_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ depatureTimeSlot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="depatureTimeSlot.second_slot.min_price !== null && depatureTimeSlot.second_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByOutBoundDepartureTimeSlot($event,'outbound','departure',depatureTimeSlot.second_slot)">
                     <span class="checkmark"></span>
                     6AM - 12PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ depatureTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="depatureTimeSlot.third_slot.min_price !== null && depatureTimeSlot.third_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ depatureTimeSlot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="depatureTimeSlot.third_slot.min_price !== null && depatureTimeSlot.third_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox"  (change)="filterByOutBoundDepartureTimeSlot($event,'outbound','departure',depatureTimeSlot.third_slot)">
                     <span class="checkmark"></span>
                     12PM - 6PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ depatureTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="depatureTimeSlot.fourth_slot.min_price !== null && depatureTimeSlot.fourth_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ depatureTimeSlot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="depatureTimeSlot.fourth_slot.min_price !== null && depatureTimeSlot.fourth_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox"  (change)="filterByOutBoundDepartureTimeSlot($event,'outbound','departure',depatureTimeSlot.fourth_slot)">
                     <span class="checkmark"></span>
                     6PM - 12AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ depatureTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-              </ul>
+                                    <span>{{ currency?.symbol }}{{ depatureTimeSlot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="cmn_block pad_no" *ngIf="filterFlightDetails.inbound_arrival_time_slot">
-    <div class="accordion block_shortby" id="accordion-inbound">
-      <div class="accordion-group" [ngClass]="{'active':isShowinbound==true}">
-        <div class="accordion-heading" (click)="toggleInbound()">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-inbound"
-            href="#collapseInbound">
-            Inbound
+    <div class="cmn_block pad_no" *ngIf="filterFlightDetails.inbound_arrival_time_slot">
+        <div class="accordion block_shortby" id="accordion-inbound">
+            <div class="accordion-group" [ngClass]="{'active':isShowinbound==true}">
+                <div class="accordion-heading" (click)="toggleInbound()">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-inbound" href="#collapseInbound">
+            {{'inbound' | translate}}
           </a>
-        </div>
-        <div id="collapseInbound" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <div class="block_cmn stop">
-              <div class="block_top_in">
-                <h5>Stops</h5>
-              </div>
-              <ul>
-                <li *ngIf="filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== 0">
-                  <label class="custom_checkbox">
+                </div>
+                <div id="collapseInbound" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <div class="block_cmn stop">
+                            <div class="block_top_in">
+                                <h5>Stops</h5>
+                            </div>
+                            <ul>
+                                <li *ngIf="filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (click)="filterByArrivalStop($event,0)">
                     <span class="checkmark"></span>
-                    Non Stop
+                    {{'non_stop_without_hiphen' | translate}}
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_stop_data?.non_stop?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li *ngIf="filterFlightDetails?.inbound_stop_data?.one_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.one_stop.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_stop_data?.non_stop?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails?.inbound_stop_data?.one_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.one_stop.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (click)="filterByArrivalStop($event,1)">
                     <span class="checkmark"></span>
-                    1 Stop
+                    1 {{'stop' | translate}}
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails?.inbound_stop_data?.one_stop?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="filterFlightDetails?.inbound_stop_data?.two_and_two_plus_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.two_and_two_plus_stop.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails?.inbound_stop_data?.one_stop?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails?.inbound_stop_data?.two_and_two_plus_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.two_and_two_plus_stop.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (click)="filterByArrivalStop($event,2)">
                     <span class="checkmark"></span>
-                    Two or More Stops
+                    {{'two_or_more_stop' | translate}}
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails?.inbound_stop_data?.two_and_two_plus_stop?.min_price | number : '1.2-2'}}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="block_cmn arrival_to">
-              <div class="block_top_in">
-                <h5>Arrival to {{  departureTimeSlotCityName}}</h5>
-              </div>
-              <ul>
-                <li
-                  *ngIf="filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails?.inbound_stop_data?.two_and_two_plus_stop?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block_cmn arrival_to">
+                            <div class="block_top_in">
+                                <h5>{{'arrival_to' | translate}} {{ departureTimeSlotCityName}}</h5>
+                            </div>
+                            <ul>
+                                <li *ngIf="filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundArrivalTimeSlot($event,'inbound','arrival',filterFlightDetails.inbound_arrival_time_slot?.first_slot)">
                     <span class="checkmark"></span>
                     12AM - 6AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.first_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="filterFlightDetails.inbound_arrival_time_slot.second_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.second_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails.inbound_arrival_time_slot.second_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.second_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundArrivalTimeSlot($event,'inbound','arrival',filterFlightDetails.inbound_arrival_time_slot?.second_slot)">
                     <span class="checkmark"></span>
                     6AM - 12PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.second_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="filterFlightDetails.inbound_arrival_time_slot.third_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.third_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails.inbound_arrival_time_slot.third_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.third_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundArrivalTimeSlot($event,'inbound','arrival',filterFlightDetails.inbound_arrival_time_slot?.third_slot)">
                     <span class="checkmark"></span>
                     12PM - 6PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.third_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="filterFlightDetails.inbound_arrival_time_slot.fourth_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.fourth_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails.inbound_arrival_time_slot.fourth_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.fourth_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundArrivalTimeSlot($event,'inbound','arrival',filterFlightDetails.inbound_arrival_time_slot?.fourth_slot)">
                     <span class="checkmark"></span>
                     6PM - 12AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="block_cmn departure_to">
-              <div class="block_top_in">
-                <h5>Departure to {{ arrivalTimeSlotCityName }}</h5>
-              </div>
-              <ul>
-                <li
-                  *ngIf="filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_arrival_time_slot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block_cmn departure_to">
+                            <div class="block_top_in">
+                                <h5>{{'departure_to' | translate}} {{ arrivalTimeSlotCityName }}</h5>
+                            </div>
+                            <ul>
+                                <li *ngIf="filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.first_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundDepartureTimeSlot($event,'inbound','departure',filterFlightDetails.inbound_depature_time_slot?.first_slot)">
                     <span class="checkmark"></span>
                     12AM - 6AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.first_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="filterFlightDetails.inbound_depature_time_slot.second_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.second_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.first_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails.inbound_depature_time_slot.second_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.second_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundDepartureTimeSlot($event,'inbound','departure',filterFlightDetails.inbound_depature_time_slot?.second_slot)">
                     <span class="checkmark"></span>
                     6AM - 12PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.second_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="filterFlightDetails.inbound_depature_time_slot.third_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.third_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.second_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails.inbound_depature_time_slot.third_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.third_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundDepartureTimeSlot($event,'inbound','departure',filterFlightDetails.inbound_depature_time_slot?.third_slot)">
                     <span class="checkmark"></span>
                     12PM - 6PM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.third_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-                <li
-                  *ngIf="filterFlightDetails.inbound_depature_time_slot.fourth_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.fourth_slot.min_price !== 0">
-                  <label class="custom_checkbox">
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.third_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                                <li *ngIf="filterFlightDetails.inbound_depature_time_slot.fourth_slot.min_price !== null && filterFlightDetails.inbound_depature_time_slot.fourth_slot.min_price !== 0">
+                                    <label class="custom_checkbox">
                     <input type="checkbox" (change)="filterByInBoundDepartureTimeSlot($event,'inbound','departure',filterFlightDetails.inbound_depature_time_slot?.fourth_slot)">
                     <span class="checkmark"></span>
                     6PM - 12AM
                   </label>
-                  <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
-                </li>
-              </ul>
+                                    <span>{{ currency?.symbol }}{{ filterFlightDetails.inbound_depature_time_slot?.fourth_slot?.min_price | number : '1.2-2'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="cmn_block departure_to">
-    
-    <div class="block_top_in">
-      <h5>Airlines</h5>
-      <a *ngIf="showMinAirline==4 && airLineCount>4" class="view_more"  (click)="toggleAirlines('more')">Show All</a>
-      <a *ngIf="showMinAirline!=4 && airLineCount>4" class="view_more"  (click)="toggleAirlines('less')">Show Less</a>
-    </div>
-    <ul>
-      <ng-container *ngFor="let airline of airlineList; index as i" >
-      <li *ngIf="i < showMinAirline" title="{{ airline?.airline_name }}">
-        <label class="custom_checkbox">
+    <div class="cmn_block departure_to">
+
+        <div class="block_top_in">
+            <h5>{{'airlines' | translate}}</h5>
+            <a *ngIf="showMinAirline==4 && airLineCount>4" class="view_more" (click)="toggleAirlines('more')">{{'show_all' | translate}}</a>
+            <a *ngIf="showMinAirline!=4 && airLineCount>4" class="view_more" (click)="toggleAirlines('less')">{{'show_less' | translate}}</a>
+        </div>
+        <ul>
+            <ng-container *ngFor="let airline of airlineList; index as i">
+                <li *ngIf="i < showMinAirline" title="{{ airline?.airline_name }}">
+                    <label class="custom_checkbox">
           <input type="checkbox" [checked]="airline.isChecked==true" value="{{ airline?.airline_code }}" (change)="filterByAirline($event,i)">
           <span class="checkmark"></span>
           <p>{{ airline?.airline_name }}</p>
         </label>
-        <span>{{ currency?.symbol }}{{ airline?.selling_price | number : '1.2-2' }} ({{ airline?.count }})</span>
-      </li>
-    </ng-container>
-    </ul>
-    
-  </div>
+                    <span>{{ currency?.symbol }}{{ airline?.selling_price | number : '1.2-2' }} ({{ airline?.count }})</span>
+                </li>
+            </ng-container>
+        </ul>
+
+    </div>
 </div>

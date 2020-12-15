@@ -163,7 +163,7 @@
 
 <!-- Content -->
 <div class="detail_info_right" *ngIf="!flightSummaryLoader">
-    <h5>Booking <span>Summary</span></h5>
+    <h5>{{'booking_summary' | translate}}</h5>
     <div class="block_top" *ngIf="flightDetail[0]">
         <div class="summary_info">
             <div class="info_top">
@@ -172,34 +172,34 @@
                     <li class="ic_flight"><img src="{{s3BucketUrl}}assets/images/icon/summary_flight_ic.svg" alt="Flight Icon"></li>
                     <li>{{flightDetail[0].arrival_code}}</li>
                 </ul>
-                <p>{{ commonFunction.convertDateFormat(flightDetail[0].departure_date,'DD/MM/YYYY')}} | {{totalTraveler}} Passenger | {{flightDetail[0].routes[0].stops[0].cabin_class}}</p>
+                <p>{{ commonFunction.convertDateFormat(flightDetail[0].departure_date,'DD/MM/YYYY')}} | {{totalTraveler}} {{'passenger' | translate}} | {{flightDetail[0].routes[0].stops[0].cabin_class}}</p>
                 <div class="btm_aerrow"></div>
             </div>
             <div class="info_btm">
                 <div class="info_btm_top">
-                    <div class="info_left">Outbound</div>
-                    <div class="info_right"><span>{{flightDetail[0].routes[0].duration}}, </span>{{ flightDetail[0].routes[0].stops.length-1 === 0 ? 'Non-' : flightDetail[0].routes[0].stops.length-1 }} Stop</div>
+                    <div class="info_left">{{'outbound' | translate}}</div>
+                    <div class="info_right"><span>{{flightDetail[0].routes[0].duration}}, </span>{{ flightDetail[0].routes[0].stops.length-1 === 0 ? 'Non-' : flightDetail[0].routes[0].stops.length-1 }} {{'stop' | translate}}</div>
                 </div>
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[0]">
                     <div class="flight_info_text">
-                        <h6>{{ flightDetail[0].routes[0].stops[0].departure_code }}  - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[0].stops[0].departure_time }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_time }}</span></h6>
+                        <h6>{{ flightDetail[0].routes[0].stops[0].departure_code }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[0].stops[0].departure_time }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_time }}</span></h6>
                         <a class="hover-link" [ngClass]="{'detail_open': outwardDetails === true}" id="more_detail_flight" (click)="toggleRouteDetails('onward')">{{ outwardDetails==false?'Show Details':'Hide Details' }} </a>
                     </div>
                     <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[0].stops.length-1==0}" id="flight_info" *ngIf="outwardDetails">
                         <div class="flight_cityname">
                             {{flightDetail[0].routes[0].stops[0].departure_info.city}} ({{flightDetail[0].routes[0].stops[0].departure_info.code}}) <span>{{flightDetail[0].routes[0].stops[0].departure_info.name}}, {{flightDetail[0].routes[0].stops[0].departure_info.country}}</span>
                         </div>
-                        
+
                         <div *ngFor="let stop of flightDetail[0].routes[0].stops">
                             <div class="block_layover" *ngIf="stop.is_layover">
                                 <div class="layover_name">
                                     <p>{{ stop.departure_info.city }} ({{stop.departure_info.code}}) <span>{{ stop.departure_info.name }}, {{ stop.departure_info.country }}</span></p>
                                 </div>
                                 <div class="layover_time">
-                                    <p>{{stop.layover_duration}} <span>Layover time</span></p>
+                                    <p>{{stop.layover_duration}} <span>{{'layover_time' | translate}}</span></p>
                                 </div>
                             </div>
-    
+
                             <div class="flight_middle">
                                 <div class="middle_top">
                                     <img src="{{ stop.airline_logo }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
@@ -207,7 +207,7 @@
                                 </div>
                                 <div class="middle_btm">
                                     <div class="info_left">
-                                        <span>Flight {{stop.airline}}-{{stop.flight_number}}</span>
+                                        <span>{{'flight' | translate}} {{stop.airline}}-{{stop.flight_number}}</span>
                                         <div class="flight_time_info">
                                             <div class="flight_time_left">
                                                 {{stop.departure_time}} <span>{{ commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY') }}</span>
@@ -221,12 +221,12 @@
                                         </div>
                                     </div>
                                     <div class="info_right">
-                                        {{stop.duration}} <span>Duration</span>
+                                        {{stop.duration}} <span>{{'duration' | translate}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
 
                         <div class="flight_cityname">
                             {{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.city}} ({{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.code}}) <span>{{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.name}}, {{flightDetail[0].routes[0].stops[outWardStopCount].arrival_info.country}}</span>
@@ -240,14 +240,14 @@
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[1]">
                     <div class="flight_info_text">
 
-                        <h6>{{ flightDetail[0].routes[1].stops[0].departure_code }}  - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[1].stops[0].departure_time }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_time }}</span></h6>
+                        <h6>{{ flightDetail[0].routes[1].stops[0].departure_code }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[1].stops[0].departure_time }} - {{ flightDetail[0].routes[1].stops[inWardStopCount].arrival_time }}</span></h6>
                         <a class="hover-link" [ngClass]="{'detail_open': inwardDetails === true}" id="more_detail_flight_inbound" (click)="toggleRouteDetails('inward')">{{ inwardDetails==false?'Show Details':'Hide Details' }}</a>
                     </div>
-                    <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[1].stops.length-1==0}"   id="flight_info_inbound" *ngIf="inwardDetails">
+                    <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[1].stops.length-1==0}" id="flight_info_inbound" *ngIf="inwardDetails">
                         <div class="flight_cityname">
                             {{flightDetail[0].routes[1].stops[0].departure_info.city}} ({{flightDetail[0].routes[1].stops[0].departure_info.code}}) <span>{{flightDetail[0].routes[1].stops[0].departure_info.name}}, {{flightDetail[0].routes[1].stops[0].departure_info.country}}</span>
                         </div>
-                        
+
                         <div *ngFor="let stop of flightDetail[0].routes[1].stops">
                             <div class="block_layover" *ngIf="stop.is_layover">
                                 <div class="layover_name">
@@ -257,15 +257,16 @@
                                     <p>{{stop.layover_duration}} <span>Layover time</span></p>
                                 </div>
                             </div>
-    
+
                             <div class="flight_middle">
                                 <div class="middle_top">
                                     <img src="{{ stop.airline_logo }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
-                                    <p>{{stop.airline_name}} <!-- <span>Operated by Nacil Air India</span> --></p>
+                                    <p>{{stop.airline_name}}
+                                        <!-- <span>Operated by Nacil Air India</span> --></p>
                                 </div>
                                 <div class="middle_btm">
                                     <div class="info_left">
-                                        <span>Flight {{stop.airline}}-{{stop.flight_number}}</span>
+                                        <span>{{'flight' | translate}} {{stop.airline}}-{{stop.flight_number}}</span>
                                         <div class="flight_time_info">
                                             <div class="flight_time_left">
                                                 {{stop.departure_time}} <span>{{ commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY') }}</span>
@@ -279,12 +280,12 @@
                                         </div>
                                     </div>
                                     <div class="info_right">
-                                        {{stop.duration}} <span>Duration</span>
+                                        {{stop.duration}} <span>{{'duration' | translate}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="flight_cityname">
                             {{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.city}} ({{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.code}}) <span>{{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.name}}, {{flightDetail[0].routes[1].stops[inWardStopCount].arrival_info.country}}</span>
                         </div>
@@ -295,25 +296,25 @@
     </div>
     <div class="cmn_block">
         <div class="block_inner ">
-            <h6>Fare Break Down</h6>
+            <h6>{{'fare_break_down' | translate}}</h6>
             <ul>
                 <li *ngFor="let priceInfo of fareBreakDown">
                     <p *ngIf="priceInfo.type=='ADT'">
-                        Base Fare ({{priceInfo.quantity}} Adult) 
+                        {{'base_fare' | translate}} ({{priceInfo.quantity}} {{'adult' | translate}})
                         <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
                     </p>
                     <p *ngIf="priceInfo.type=='CHD'">
-                        Base Fare ({{priceInfo.quantity}} Child) 
+                        {{'base_fare' | translate}} ({{priceInfo.quantity}} {{'child' | translate}})
                         <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
                     </p>
                     <p *ngIf="priceInfo.type=='INF'">
-                        Base Fare ({{priceInfo.quantity}} Infant) 
+                        {{'base_fare' | translate}} ({{priceInfo.quantity}} {{'infant' | translate}})
                         <span>{{ currency?.symbol }}{{ priceInfo.price | number : '1.2-2' }}</span>
                     </p>
                 </li>
 
                 <p *ngIf="laycreditpoints>0">
-                    Laycredits  
+                    {{'laycredit' | translate}}
                     <span>{{ laycreditpoints | number : '1.2-2' }}</span>
                 </p>
             </ul>
@@ -327,25 +328,25 @@
         <div class="partial_pay_info" *ngIf="flightDetail[0].start_price && showPartialPayemntOption">
             <ul>
                 <li>
-                    <p>Installment Payment <img class="hover-link" src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon" title="This payment amount will be automatically deducted at each one of your payment due dates. At any time, you can adjust this amount in your payment settings."></p>
-                    <span>{{ currency?.symbol }}{{partialPaymentAmount | number : '1.2-2'}}/installment</span>
+                    <p>{{'inst_payment' | translate}} <img class="hover-link" src="{{s3BucketUrl}}assets/images/icon/ic_information.svg" alt="Information icon" title="This payment amount will be automatically deducted at each one of your payment due dates. At any time, you can adjust this amount in your payment settings."></p>
+                    <span>{{ currency?.symbol }}{{partialPaymentAmount | number : '1.2-2'}}/{{'installment' | translate}}</span>
                 </li>
             </ul>
         </div>
         <div class="total_payment">
             <ul>
-                <li>Total <span [ngClass]="{'text_line': payNowAmount >=0 && totalPrice!=payNowAmount}">{{ currency?.symbol }}{{totalPrice | number : '1.2-2'}}</span></li>
-                <li *ngIf="payNowAmount >=0 && totalPrice!=payNowAmount">Pay Now <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
+                <li>{{'total' | translate}} <span [ngClass]="{'text_line': payNowAmount >=0 && totalPrice!=payNowAmount}">{{ currency?.symbol }}{{totalPrice | number : '1.2-2'}}</span></li>
+                <li *ngIf="payNowAmount >=0 && totalPrice!=payNowAmount">{{'pay_now' | translate}} <span>{{ currency?.symbol }}{{payNowAmount | number : '1.2-2'}}</span></li>
             </ul>
         </div>
-        
+
     </div>
     <div class="cmn_block policies">
         <div class="block_inner">
-            <h6>Check our Policies</h6>
+            <h6>{{'check_our_policies' | translate}}</h6>
             <ul>
-                <li><a class="hyper_link" (click)="toggleBaggagePolicy()" data-toggle="modal" data-target="#baggage_policy_modal">Baggage Policy</a></li>
-                <li><a class="hyper_link" (click)="toggleCancellationPolicy()" data-toggle="modal" data-target="#cancellation_policy_modal">Cancellation Policy</a></li>
+                <li><a class="hyper_link" (click)="toggleBaggagePolicy()" data-toggle="modal" data-target="#baggage_policy_modal">{{'baggage' | translate}}</a></li>
+                <li><a class="hyper_link" (click)="toggleCancellationPolicy()" data-toggle="modal" data-target="#cancellation_policy_modal">{{'cancellation_policy' | translate}}</a></li>
             </ul>
         </div>
     </div>

@@ -484,7 +484,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
     if (this.outBoundStops.length) {
       filterdFlights = filterdFlights.filter(item => {
-        console.log(item.stop_count);
         return this.outBoundStops.includes(item.stop_count);
 
       })

@@ -12,22 +12,18 @@
                     <div class="block_top" *ngIf="!isLoggedIn">
                         <div class="block_inner">
                             <h5>Quickly add travelers from your added list</h5>
-                            <a class="hover-link" data-toggle="modal" data-target="#sign_in_modal">Sign In to
-                                Continue</a>
+                            <a class="hover-link" data-toggle="modal" data-target="#sign_in_modal">{{'sing_in_to_countinue' | translate}}</a>
                         </div>
                     </div>
                     <div class="block_passanger_info">
 
-                        <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler" [_adults]="_adults"
-                            [_childs]="_childs" [_infants]="_infants" [travelers]="travelers"
-                            (adultsCount)="getAdultCount($event)"
-                            (_itinerarySelectionArray)="getItinerarySelectionArray($event)"></app-adult-list>
+                        <app-adult-list type="adult" age="12" totalTravelerCount="totalTraveler" [_adults]="_adults" [_childs]="_childs" [_infants]="_infants" [travelers]="travelers" (adultsCount)="getAdultCount($event)" (_itinerarySelectionArray)="getItinerarySelectionArray($event)"></app-adult-list>
 
                     </div>
 
                     <div class="btn_payment">
                         <a class="btn btn_laytrip" (click)="checkTravelesValid()">
-                            Continue To Payment <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                            {{'continue_to_payment' | translate}} <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
                                 alt="Right Arrow">
                         </a>
                     </div>
@@ -35,9 +31,7 @@
             </div>
             <div class="col-lg-4">
                 <app-flight-summary-loader *ngIf="!priceData.length"></app-flight-summary-loader>
-                <app-flight-summary *ngIf="priceData.length" [priceData]="priceData" checkAvailability="local"
-                    [laycreditpoints]="laycreditpoints" (flightAvailable)="flightAvailable($event)"
-                    [showPartialPayemntOption]="showPartialPayemntOption" partialPaymentAmount={{partialPaymentAmount}}
+                <app-flight-summary *ngIf="priceData.length" [priceData]="priceData" checkAvailability="local" [laycreditpoints]="laycreditpoints" (flightAvailable)="flightAvailable($event)" [showPartialPayemntOption]="showPartialPayemntOption" partialPaymentAmount={{partialPaymentAmount}}
                     payNowAmount={{payNowAmount}} [instalmentMode]="instalmentMode">
 
                 </app-flight-summary>

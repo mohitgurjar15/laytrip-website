@@ -1,25 +1,23 @@
-
-
 <div class="block_detail">
-  <div class="block_laycredit_checkbox" *ngIf="totalLaycreditPoints">
-   
-    <div class="toggle_switch">
-      <label class="switch">
+    <div class="block_laycredit_checkbox" *ngIf="totalLaycreditPoints">
+
+        <div class="toggle_switch">
+            <label class="switch">
         <input type="checkbox" (change)="toggleLayCredit($event)">
         <span class="slider round"></span>
       </label>
-      <p>Use Laycredit for this booking. You have <span>{{totalLaycreditPoints}} Laycredits</span> in your wallet.</p>
-    </div>
-
-    <div class="block_apply_laycredits" id="Laycredits_apply">
-      <div class="block_top">
-        <label>Apply Laycredits</label><span>{{value}}</span>
-      </div>
-      <div class="block_btm">
-        <div class="custom_range_slide redeem_laypoint">
-          <ng5-slider class="custom-class" [(value)]="value" [options]="laycreditOptions" (userChangeEnd)="selectLaycredit($event)"></ng5-slider>
+            <p>{{'use_laycredi_in_booking_info_message_1' | translate}} <span>{{totalLaycreditPoints}} </span> {{'use_laycredi_in_booking_info_message_2' | translate}}</p>
         </div>
-      </div>
+
+        <div class="block_apply_laycredits" id="Laycredits_apply">
+            <div class="block_top">
+                <label>{{'apply_laycredit' | translate}}</label><span>{{value}}</span>
+            </div>
+            <div class="block_btm">
+                <div class="custom_range_slide redeem_laypoint">
+                    <ng5-slider class="custom-class" [(value)]="value" [options]="laycreditOptions" (userChangeEnd)="selectLaycredit($event)"></ng5-slider>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

@@ -6,11 +6,14 @@
     <ul class="block_price_radio">
       <li>
         <label class="custom_radio">Total
-          <input type="radio" checked="checked" name="fl_price_radio"> <span class="checkmark"></span> </label>
+          <input type="radio" [checked]="sortType=='filter_total_price'" name="fl_price_radio"
+            (click)="filterHotelByPrice('total','filter_total_price')">
+          <span class="checkmark"></span> </label>
       </li>
       <li>
         <label class="custom_radio">Weekly
-          <input type="radio" name="fl_price_radio"> <span class="checkmark"></span> </label>
+          <input type="radio" [checked]="sortType=='filter_weekly_price'" name="fl_price_radio"
+            (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span> </label>
       </li>
     </ul>
     <form [formGroup]="priceSlider">

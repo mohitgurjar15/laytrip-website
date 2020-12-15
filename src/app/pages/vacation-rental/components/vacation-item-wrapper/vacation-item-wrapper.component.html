@@ -1,5 +1,4 @@
-
- <!-- <div class="view_btn_wrapper">
+<!-- <div class="view_btn_wrapper">
     <button class="list_v_btn">
     <img src="assets/images/hotels/list_btn.svg" alt="List view"> 
     List view
@@ -10,111 +9,111 @@
     </button>
   </div> -->
 <div class="result_listing hotel_listings">
-    <div class="search_block"  *ngFor="let item of rentalListArray; let blockIndex = index;">
-      <div class="listing_block">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="block_main">
-              <div class="block_top">
-                <div class="block_inner">
-                  <div class="col-md-4 col-lg-4 px-0">
-                    <div class="block_im">
-                      <div class="hotel_list_img_wrp">
-                        <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo"
-                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
-                        <!-- <span class="fav_sections">
+    <div class="search_block" *ngFor="let item of rentalListArray; let blockIndex = index;">
+        <div class="listing_block">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="block_main">
+                        <div class="block_top">
+                            <div class="block_inner">
+                                <div class="col-md-4 col-lg-4 px-0">
+                                    <div class="block_im">
+                                        <div class="hotel_list_img_wrp">
+                                            <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                            <!-- <span class="fav_sections">
                         <a href="javascript:void(0);" class="heart_blank"></a>
                         </span> -->
-                       <!--  <img src="assets/images/hotels/hotels01.png" alt="Hotel image"> -->
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-8 col-lg-8 pr-0">
-                    <div class="block_detail">
-                      <div class="block_detail_top">
-                        <div class="detail_info">
-                          <h4>{{ item?.property_name }}</h4>
-                          <span><img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg" alt="Map pin">{{ item?.city }}</span>
-                          <div class="review_section_wrap" style="visibility: hidden;">
-                            <div class="rating_num">
-                              <span>
+                                            <!--  <img src="assets/images/hotels/hotels01.png" alt="Hotel image"> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-8 pr-0">
+                                    <div class="block_detail">
+                                        <div class="block_detail_top">
+                                            <div class="detail_info">
+                                                <h4>{{ item?.property_name }}</h4>
+                                                <span><img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg" alt="Map pin">{{ item?.city }}</span>
+                                                <div class="review_section_wrap" style="visibility: hidden;">
+                                                    <div class="rating_num">
+                                                        <span>
                               5.0
                               </span>
-                            </div>
-                            <div class="stars_text">
-                              <div class="stars_rating">
-                                <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
-                                <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
-                                <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
-                                <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
-                                <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
-                              </div>
-                              <div class="review_num_text">
-                                <a href="javascript:void(0);">3204 Reviews</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="block_detail_btm">
-                      <div class="show_detail">
-                        <a href="javascript:void(0);" class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon"> Fare Details </a>
-                      </div>
-                      <div class="ammin_listing">
-                        <!-- <div class="amminities_list">
+                                                    </div>
+                                                    <div class="stars_text">
+                                                        <div class="stars_rating">
+                                                            <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
+                                                            <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
+                                                            <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
+                                                            <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
+                                                            <img src="assets/images/hotels/rating_stars.svg" alt="Stars">
+                                                        </div>
+                                                        <div class="review_num_text">
+                                                            <a href="javascript:void(0);">3204 Reviews</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="block_detail_btm">
+                                        <div class="show_detail">
+                                            <a href="javascript:void(0);" class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon"> Fare Details </a>
+                                        </div>
+                                        <div class="ammin_listing">
+                                            <!-- <div class="amminities_list">
                           {{item.amenties}}
                         </div> -->
-                        <div class="amminities_list">
-                          <img src="{{s3BucketUrl}}assets/images/hotels/wifi_icon.svg" alt=""> WIFI
-                        </div>
-                        <!-- <div class="amminities_list">
+                                            <div class="amminities_list">
+                                                <img src="{{s3BucketUrl}}assets/images/hotels/wifi_icon.svg" alt=""> WIFI
+                                            </div>
+                                            <!-- <div class="amminities_list">
                           <img src="assets/images/hotels/cup_icon.svg" alt=""> breakfast
                         </div>
                         <div class="amminities_list">
                           <img src="assets/images/hotels/tv_icon.svg" alt=""> TV
                         </div> -->
-                      </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 px-0">
-            <div class="block_price block_pr">
-              <div class="block_inn_pr">
-                <div class="block">
-                  <p>Room Starts from</p>
-                  <p><span>{{currency?.symbol}}{{item?.selling_price}}</span> /week</p>
+                <div class="col-md-3 px-0">
+                    <div class="block_price block_pr">
+                        <div class="block_inn_pr">
+                            <div class="block">
+                                <p>Room Starts from</p>
+                                <p><span>{{currency?.symbol}}{{item?.selling_price}}</span> /week</p>
+                            </div>
+                        </div>
+                        <a class="book_btn" href="flight-add-passenger.html">Select</a>
+                        <div class="show_detail">
+                            <a href="javascript:void(0);" class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">{{'payment_plan_detail' | translate}}</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <a class="book_btn" href="flight-add-passenger.html">Select</a>
-              <div class="show_detail">
-                <a href="javascript:void(0);" class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment plan details</a>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="detail_info_show" style="display: none;">
-        <div class="card-body">
-          <div class="block_flight_info">
-            <div class="tab_detail fare_detail_cnt">
-              <div class="triangle_right"></div>
-              <ul>
-                <li>Base Fare (1 Adult) <span>$113</span></li>
-                <li>Taxes and Fees (1 Adult) <span>$13</span></li>
-                <li>Total Fare (1 Adult) <span>$126</span></li>
-              </ul>
-              <p><span>Note:</span> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English.</p>
-              <div class="triangle_left"></div>
+        <div class="detail_info_show" style="display: none;">
+            <div class="card-body">
+                <div class="block_flight_info">
+                    <div class="tab_detail fare_detail_cnt">
+                        <div class="triangle_right"></div>
+                        <ul>
+                            <li>Base Fare (1 Adult) <span>$113</span></li>
+                            <li>Taxes and Fees (1 Adult) <span>$13</span></li>
+                            <li>Total Fare (1 Adult) <span>$126</span></li>
+                        </ul>
+                        <p><span>Note:</span> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
+                            letters, as opposed to using ‘Content here, content here’, making it look like readable English.</p>
+                        <div class="triangle_left"></div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-   <!--  <div class="search_block">
+    <!--  <div class="search_block">
       <div class="listing_block">
         <div class="row">
           <div class="col-md-9">
@@ -190,7 +189,7 @@
               </div>
               <a class="book_btn" href="flight-add-passenger.html">Select</a>
               <div class="show_detail">
-                <a href="javascript:void(0);" class="show_more_detail"> <img src="assets/images/icon/ic_info.svg" alt="Information Icon">Payment plan details</a>
+                <a href="javascript:void(0);" class="show_more_detail"> <img src="assets/images/icon/ic_info.svg" alt="Information Icon">{{'payment_plan_detail' | translate}}</a>
               </div>
             </div>
           </div>
@@ -213,7 +212,7 @@
         </div>
       </div>
     </div> -->
-   <!--  <div class="pagination_main">
+    <!--  <div class="pagination_main">
       <div class="pagination_result">
         <p>Showing 1 to 10 of 60 Results</p>
       </div>
@@ -238,8 +237,8 @@
         </nav>
       </div>
     </div> -->
-  </div>
-  <!-- <div class="result_listing hotel_map_listings">
+</div>
+<!-- <div class="result_listing hotel_map_listings">
     <div class="col-lg-12">
       <div class="row">
         <div class="col-lg-4">

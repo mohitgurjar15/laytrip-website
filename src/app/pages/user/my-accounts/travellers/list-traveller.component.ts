@@ -155,7 +155,7 @@ export class ListTravellerComponent implements OnInit {
     this.travelerService.delete(this.userId).subscribe((data: any) => {
       this.getTravelers();
       if (data.message) {
-        this.toastr.success('Traveller deleted successfully.', 'Success');
+        this.toastr.success('Traveler deleted successfully.', 'Success');
       } else {
         this.toastr.error(data.message, 'Failure');
       }

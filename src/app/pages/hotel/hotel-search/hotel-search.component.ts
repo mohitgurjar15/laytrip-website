@@ -23,18 +23,20 @@ export class HotelSearchComponent implements OnInit {
   isNotFound = false;
   hotelDetails;
   hotelDetailsMain;
-  filterHotelDetails;
   isResetFilter: string = 'no';
+  subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
   ) {
-    // document.getElementById('login_btn').style.background = '#FF00BC';
   }
-
+  
   ngOnInit() {
     window.scroll(0, 0);
+    setTimeout(() => {
+      document.getElementById('login_btn').style.background = '#FF00BC';
+    }, 1000);
 
     let payload: any = {};
     const info = JSON.parse(localStorage.getItem('_hote'));
@@ -62,7 +64,7 @@ export class HotelSearchComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
     this.hotelService.getHotelSearchResult(payload).subscribe((res: any) => {
-      this.hotelDetails = res.data;
+      this.hotelDetails = res.data.hotels;
       this.hotelDetailsMain = res.data;
       this.loading = false;
       this.isNotFound = false;
@@ -83,13 +85,12 @@ export class HotelSearchComponent implements OnInit {
 
   sortHotels(event) {
     let { key, order } = event;
-    console.log("Before Key:", key, this.hotelDetails);
     if (key === 'total') {
-      this.hotelDetails.hotels = this.sortJSON(this.hotelDetails.hotels, key, order);
+      this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
     } else if (key === 'rating') {
-      this.hotelDetails.hotels = this.sortByRatings(this.hotelDetails.hotels, key, order);
+      this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
     } else if (key === 'name') {
-      this.hotelDetails.hotels = this.sortByHotelName(this.hotelDetails.hotels, key, order);
+      this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
     }
   }
 
@@ -145,10 +146,14 @@ export class HotelSearchComponent implements OnInit {
   }
 
   filterHotel(event) {
-    this.hotelDetails.hotels = event;
+    this.hotelDetails = event;
   }
 
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

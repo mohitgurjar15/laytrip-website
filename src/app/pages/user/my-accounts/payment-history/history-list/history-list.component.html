@@ -1,4 +1,4 @@
-<div  *ngIf="loading">
+<div *ngIf="loading">
     <div class="pay_listing" *ngFor="let index of [0,1,2,3,4,5]">
         <div class="list_top">
             <div class="list_left w-100">
@@ -55,58 +55,57 @@
 </div>
 <div class="block_nobooking_available" *ngIf="notFound && !loading">
     <img src="{{s3BucketUrl}}assets/images/icon/ic_flight_nobooking.svg" alt="Flight Icon">
-    <h5>No Payment Available</h5>    
+    <h5>{{'no_payment_avilable' | translate}}</h5>
 </div>
 <div *ngIf="!loading && !notFound">
     <div class="pay_listing" *ngFor="let item of list; let i = index;">
         <div class="list_top" *ngIf="item.totalInstallments > 0">
             <div class="list_left">
                 <ul>
-                    <li>Total Paid: <span>${{item.paidAmount | number : '1.2-2' || 0}}</span></li>
+                    <li>{{'total_paid' | translate}}: <span>${{item.paidAmount | number : '1.2-2' || 0}}</span></li>
                     <li>
                         <div class="progress">
-                            <div class="progress-bar"  [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,1)" ></div>
+                            <div class="progress-bar" [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,1)"></div>
                             <div class="progress_dot" [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,2)"></div>
                             <!-- <div class="progress-bar"  style="width: 25%;" ></div>
                             <div class="progress_dot" style="left: 23%;"></div> -->
                         </div>
                     </li>
-                    <li>Total Remaining: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
+                    <li>{{'total_remaining' | translate}}: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
                 </ul>
-            </div> 
+            </div>
             <div class="list_right d-none">
                 <p>Payment Due in <span>{{ commonFunction.getPaymentDueDay(item.nextInstalmentDate)  }} days</span></p>
                 <div class="pay_status">
-                  <a>  Pay Early</a>
-                </div> 
-            </div> 
+                    <a>  Pay Early</a>
+                </div>
+            </div>
         </div>
         <div class="list_btm">
             <div class="grid_block">
                 <ul>
-                    <li class="fb_medium">Booking Id: <span>{{item.laytripBookingId || '--'}}</span></li>
-                    <li>Booking Type: <span>{{ item.module.name | titlecase  }}</span></li>
+                    <li class="fb_medium">{{'booking_id' | translate}}: <span>{{item.laytripBookingId || '--'}}</span></li>
+                    <li>{{'booking_type' | translate}}: <span>{{ item.module.name | titlecase  }}</span></li>
                 </ul>
             </div>
             <div class="grid_block">
                 <ul>
-                    <li class="fb_medium">Total Amount: <span>${{item.totalAmount | number : '1.2-2' || 0}}</span></li>
-                    <li *ngIf="item.totalInstallments > 0">Installment: <span>${{item.bookingInstalments[1].amount | number : '1.2-2' }} /
+                    <li class="fb_medium">{{'total_amount' | translate}}: <span>${{item.totalAmount | number : '1.2-2' || 0}}</span></li>
+                    <li *ngIf="item.totalInstallments > 0">{{'installment' | translate}}: <span>${{item.bookingInstalments[1].amount | number : '1.2-2' }} /
                             {{instalmentType[item.bookingInstalments[0].instalmentType]}}</span></li>
                     <li *ngIf="item.totalInstallments == 0">Booking Date: <span>{{ dateConvert(item.bookingDate) }}</span></li>
                 </ul>
             </div>
             <div class="grid_block" *ngIf="item.totalInstallments > 0">
                 <ul>
-                    <li>Payment Start: <span>{{ flightCommonFunction.getPaymentStartDate(item.bookingInstalments) }}</span>
+                    <li>{{'payment_start' | translate}}: <span>{{ flightCommonFunction.getPaymentStartDate(item.bookingInstalments) }}</span>
                     </li>
-                    <li>Payment End: <span>{{ flightCommonFunction.getPaymentEndDate(item.bookingInstalments) }}</span></li>
+                    <li>{{'payment_end' | translate}}: <span>{{ flightCommonFunction.getPaymentEndDate(item.bookingInstalments) }}</span></li>
                 </ul>
             </div>
             <div class="grid_block">
                 <span style="display: none;">Pending</span>
-                <a class="viewDetailBtn"
-                    (click)="viewDetailClick(item)">View Details</a>
+                <a class="viewDetailBtn" (click)="viewDetailClick(item)">{{'view_detail' | translate}}</a>
             </div>
         </div>
     </div>
@@ -118,9 +117,7 @@
         <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
     </div>
     <div class="pagination_list">
-        <ngb-pagination class="d-flex justify-content-end" [collectionSize]="listLength" [(page)]="page"
-            [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true"
-            (pageChange)="pageChange($event)">
+        <ngb-pagination class="d-flex justify-content-end" [collectionSize]="listLength" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true" (pageChange)="pageChange($event)">
         </ngb-pagination>
     </div>
 </div>
