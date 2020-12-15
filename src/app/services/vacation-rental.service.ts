@@ -29,6 +29,7 @@ export class VacationRentalService {
      getRentalDetailSearchData(data) {
         let headers = {
             currency: 'USD',
+            language: 'en'
         }
         const url = environment.apiUrl + `v1/vacation-rental/availability`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(

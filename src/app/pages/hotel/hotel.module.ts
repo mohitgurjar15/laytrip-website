@@ -60,7 +60,7 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
-    NgxGalleryModule
+    NgxGalleryModule,
   ],
   exports: [
     HotelLoaderComponent,

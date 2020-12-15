@@ -34,16 +34,18 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     window.scroll(0, 0);
     let payload: any = {};
+    const info = JSON.parse(localStorage.getItem('_rental'));
     this.route.queryParams.forEach(params => {
       this.rentalSearchInfo = params;
         payload = {
-          id: params.id,
+          id: info.id,
           type: params.type,
           check_in_date: params.check_in_date,
           check_out_date: params.check_out_date,
           adult_count: parseInt(params.adult_count),
-          number_and_children_ages:params.number_and_children_ages,
+          number_and_children_ages:info.number_and_children_ages,
         }; 
+        console.log("---54545454----",payload);
       this.getRentalSearchData(payload);
     });
   }
@@ -79,5 +81,6 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
 
   getSearchItem(event) {
     console.log(event);
+    this.getRentalSearchData(event);
   }
 }

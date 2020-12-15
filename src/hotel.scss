@@ -35,6 +35,7 @@
             }
             span {
                 &.ng-arrow-wrapper {
+                    display: none !important;
                     span {
                         &.ng-arrow {
                             margin: 0 !important;
@@ -221,6 +222,7 @@
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -304,6 +306,7 @@
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -347,6 +350,7 @@
                         .search_area {
                             border-radius: 8px 0 0 8px;
                             // height: 100%;
+                            height: 103px;
                         }
                     }
 
@@ -391,6 +395,7 @@
                             border-radius: 8px;
                             background: $background-white;
                             position: relative;
+                            height: 103px;
 
                             .travel_info {
                                 width: 100%;
@@ -692,7 +697,7 @@
                 width: auto;
                 padding: 10px 25px;
                 background: $primary-color;
-                border-radius: 8px;
+                border-radius: 30px;
                 border: none;
                 font-size: 20px;
                 color: $text-white;
@@ -767,6 +772,7 @@
                     display: flex;
                     justify-content: space-between;
                     position: relative;
+                    width: 45%;
 
                     @include ipad-view {
                         width: 100%;
@@ -777,7 +783,8 @@
                         flex-flow: column;
                     }
 
-                    .hotel_where {
+                    .home_where {
+                        width: 100%;
                         @include ipad-view {
                             width: 100%;
                         }
@@ -794,10 +801,11 @@
                     }
 
                     .search_area {
-                        padding: 15px 0;
+                        padding: 15px 0 10px;
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -881,6 +889,7 @@
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
+                        height: 103px;
 
                         input {
                             width: 100%;
@@ -891,7 +900,8 @@
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
-
+                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                                center right 15px no-repeat !important;
                             @media (max-width: 1199px) {
                                 font-size: 16px;
                             }
@@ -922,7 +932,8 @@
 
                         .search_area {
                             border-radius: 8px 0 0 8px;
-                            height: 100%;
+                            // height: 100%;
+                            height: 103px;
                         }
                     }
 
@@ -967,6 +978,7 @@
                             border-radius: 8px;
                             background: $background-white;
                             position: relative;
+                            height: 103px;
 
                             .travel_info {
                                 width: 100%;
@@ -1268,7 +1280,7 @@
                 width: auto;
                 padding: 10px 25px;
                 background: $primary-color;
-                border-radius: 8px;
+                border-radius: 30px;
                 border: none;
                 font-size: 20px;
                 color: $text-white;
@@ -1420,6 +1432,7 @@
                             font-weight: 400;
                             padding: 0 15px;
                             text-transform: uppercase;
+                            justify-content: flex-start;
                         }
 
                         input {
@@ -1545,6 +1558,7 @@
                             display: flex;
                             flex-flow: column;
                             justify-content: space-between;
+                            height: 93.6px;
 
                             //								input {
                             //									height: 35px;
@@ -1626,6 +1640,7 @@
                                 border-radius: 8px;
                                 background: $background-white;
                                 position: relative;
+                                height: 93.6px;
 
                                 .travel_info {
                                     width: 100%;
@@ -1683,6 +1698,164 @@
                                     font-weight: 400;
                                     color: $text-grey;
                                     padding: 0 15px;
+                                }
+                            }
+                        }
+                    }
+
+                    .traveller_add_block {
+                        width: 260px;
+                        position: absolute;
+                        top: 108%;
+                        right: 0;
+                        background: $background-white;
+                        box-shadow: 0px 3px 15px $shadow-black;
+                        padding: 15px;
+                        border: 1px solid $text-light-grey;
+                        border-radius: 5px;
+                        z-index: 99;
+
+                        &:before {
+                            width: 0;
+                            height: 0;
+                            border-left: 9px solid transparent;
+                            border-right: 9px solid transparent;
+                            border-bottom: 9px solid $background-white;
+                            position: absolute;
+                            top: -9px;
+                            right: 21px;
+                            content: '';
+                            z-index: 2;
+                        }
+
+                        &:after {
+                            width: 0;
+                            height: 0;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-bottom: 10px solid $text-light-grey;
+                            position: absolute;
+                            top: -10px;
+                            right: 20px;
+                            content: '';
+                        }
+
+                        ul {
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+
+                            li {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding: 0 0 20px;
+
+                                .left {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+
+                                    span {
+                                        font-size: 14px;
+                                        color: $text-darkblue;
+                                        display: block;
+                                        padding: 0;
+                                    }
+                                }
+
+                                .right {
+                                    width: 100px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    .qtyminus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $secondary-color;
+                                            color: $secondary-color;
+                                        }
+                                    }
+
+                                    .qty {
+                                        width: 30px;
+                                        height: 30px;
+                                        font-size: 20px;
+                                        font-weight: 400;
+                                        color: $text-darkblue;
+                                        border: none;
+                                        text-align: center;
+                                    }
+
+                                    .qtyplus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $secondary-color;
+                                            color: $secondary-color;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .flight_cat {
+                            width: 100%;
+
+                            ul {
+                                display: flex;
+                                flex-wrap: wrap;
+                                align-content: center;
+                                justify-content: space-between;
+
+                                li {
+                                    width: 48%;
+                                    margin: 0 0 10px;
+                                    padding: 0;
+
+                                    &:last-child {
+                                        width: 100%;
+                                        margin: 0;
+                                    }
+
+                                    a {
+                                        line-height: 32px;
+                                        width: 100%;
+                                        text-align: center;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        font-size: 14px;
+                                        color: $text-light-grey;
+
+                                        &:hover {
+                                            background: $secondary-color;
+                                            border: 1px solid $secondary-color;
+                                            color: $text-white;
+                                        }
+
+                                        &.active_cat {
+                                            background: $secondary-color;
+                                            border: 1px solid $secondary-color;
+                                            color: $text-white;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1769,6 +1942,12 @@
         }
     }
 
+    .sticky-top {
+        &.left_side_bar{
+            top: 80px;
+        }
+    }
+    
     .filter_saidbar {
         width: 100%;
 
@@ -2006,6 +2185,9 @@
                 border: 1px solid $box-border-color;
                 background: $background-white;
                 border-radius: 3px;
+                max-height: calc(100vh - 334px);
+                overflow-y: auto;
+                overflow-x: hidden;
 
                 .cmn_block {
                     padding: 20px 15px;
@@ -2174,7 +2356,7 @@
                                 .block_cmn {
                                     width: 100%;
                                     padding: 15px 15px;
-                                    background: $bg-tab-detail;
+                                    background: transparent;
 
                                     h5 {
                                         width: 100%;
@@ -2393,6 +2575,7 @@
                                 &:last-child {
                                     background: $btn-bg;
                                     border: 1px solid $btn-bg;
+                                    color: $text-white;
                                 }
 
                                 &:before {
@@ -2516,7 +2699,8 @@
                                     .hotel_list_img_wrp {
                                         position: relative;
                                         img {
-                                            width: 100%;
+                                            max-width: 100%;
+                                            height: 100%;
                                         }
                                         .fav_sections {
                                             position: absolute;
@@ -2548,12 +2732,13 @@
                                     .detail_info {
                                         font-size: 12px;
                                         color: $text-grey;
+                                        width: 100%;
 
                                         h4 {
                                             font-size: 20px;
                                             color: $text-black;
                                             font-weight: 600;
-                                            margin-bottom: 5px;
+                                            margin: 10px 0 5px;
 
                                             @media (max-width: 767px) {
                                                 font-size: 16px;
@@ -2562,6 +2747,14 @@
 
                                         span {
                                             margin: 5px 0 0;
+                                            &.adress_span{
+                                                max-width: 380px;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                display: inline-block;
+                                                width: 100%;
+                                            }
                                         }
                                         .review_section_wrap {
                                             display: flex;
@@ -3634,7 +3827,8 @@
                             .hotel_list_img_wrp {
                                 position: relative;
                                 img {
-                                    width: 100%;
+                                    max-width: 100%;
+                                    height: 100%;
                                 }
                                 .fav_sections {
                                     position: absolute;
@@ -3694,6 +3888,14 @@
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
+                                    .adress_span{
+                                        max-width: 140px;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
                                     .ammin_listing {
                                         display: flex;
                                         .amminities_list {
@@ -3905,6 +4107,7 @@
                             font-weight: 400;
                             padding: 0 15px;
                             text-transform: uppercase;
+                            justify-content: flex-start;
                         }
 
                         input {
@@ -4029,6 +4232,7 @@
                             display: flex;
                             flex-flow: column;
                             justify-content: space-between;
+                            height: 93.6px;
 
                             //								input {
                             //									height: 35px;
@@ -4110,6 +4314,7 @@
                                 border-radius: 8px;
                                 background: $background-white;
                                 position: relative;
+                                height: 93.6px;
 
                                 .travel_info {
                                     width: 100%;
@@ -4250,6 +4455,11 @@
                     }
                 }
             }
+        }
+    }
+    .sticky-top {
+        &.left_side_bar{
+            top: 80px;
         }
     }
     .filter_saidbar {
@@ -4489,7 +4699,10 @@
                 border: 1px solid $box-border-color;
                 background: $background-white;
                 border-radius: 3px;
-
+                max-height: calc(100vh - 334px);
+                overflow-y: auto;
+                overflow-x: hidden;
+                
                 .cmn_block {
                     padding: 20px 15px;
                     border-bottom: 1px solid $box-border-color;
@@ -4657,7 +4870,7 @@
                                 .block_cmn {
                                     width: 100%;
                                     padding: 15px 15px;
-                                    background: $bg-tab-detail;
+                                    background: transparent;
 
                                     h5 {
                                         width: 100%;
@@ -4976,7 +5189,8 @@
                                     .hotel_list_img_wrp {
                                         position: relative;
                                         img {
-                                            width: 100%;
+                                            max-width: 100%;
+                                            height: 100%;
                                         }
                                         .fav_sections {
                                             position: absolute;
@@ -5008,12 +5222,13 @@
                                     .detail_info {
                                         font-size: 12px;
                                         color: $text-grey;
+                                        width: 100%;
 
                                         h4 {
                                             font-size: 20px;
                                             color: $text-black;
                                             font-weight: 600;
-                                            margin-bottom: 5px;
+                                            margin: 10px 0 5px;
 
                                             @media (max-width: 767px) {
                                                 font-size: 16px;
@@ -5022,6 +5237,14 @@
 
                                         span {
                                             margin: 5px 0 0;
+                                            &.adress_span{
+                                                max-width: 380px;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                display: inline-block;
+                                                width: 100%;
+                                            }
                                         }
                                         .review_section_wrap {
                                             display: flex;
@@ -6081,7 +6304,8 @@
                             .hotel_list_img_wrp {
                                 position: relative;
                                 img {
-                                    width: 100%;
+                                    max-width: 100%;
+                                    height: 100%;
                                 }
                                 .fav_sections {
                                     position: absolute;
@@ -6141,6 +6365,14 @@
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
+                                    .adress_span{
+                                        max-width: 140px;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
                                     .ammin_listing {
                                         display: flex;
                                         .amminities_list {
@@ -6308,69 +6540,122 @@
 .hotel_detail_slider {
     padding-bottom: 40px;
 
-    .slider-container {
-        .slider-for {
-            margin-bottom: 15px;
+    .slider_main_contain {
+        position: relative;
 
-            img {
-                width: 100%;
-                min-height: 100%;
+        ngx-gallery{
+            width: 100% !important;
+            height: 700px !important;
 
-                .item-slick {
-                }
+            @include tab-view{
+                height: 350px !important;
             }
-
-            .slick-track {
-                .slick-slide {
-                    &:before {
-                        content: "";
-                        background-image: linear-gradient(180deg, transparent, $text-black);
+            ngx-gallery-image{
+                .ngx-gallery-image-wrapper{
+                    border-radius: 5px;
+    
+                    .ngx-gallery-image.ngx-gallery-active:before {
+                        content: " ";
                         width: 100%;
                         height: 100%;
                         position: absolute;
+                        z-index: -1;
                         top: 0;
                         left: 0;
+                        background: -webkit-radial-gradient(top center, ellipse cover, rgba(255,255,255,0.15) 0%,rgba(0,0,0,0.5) 100%);
+                    }
+                }
+            }
+            ngx-gallery-thumbnails{
+                a{
+                    &.ngx-gallery-thumbnail{
+                        border-radius: 5px;
+                    }
+                }
+            }
+            
+        }
+
+        .slider-overlay {
+            position: absolute;
+            width: 100%;
+            bottom: 160px;
+            padding: 20px;
+            color: $text-white;
+            margin: 0px;
+            z-index: 9999;
+            @include tab-view{
+                bottom: 90px;
+                padding: 0px 15px;
+            }
+
+            .hotel_name {
+                padding-bottom: 30px;
+                span{
+                    font-size: 12px;
+                }
+                @include tab-view{
+                    padding-bottom: 10px;
+                    
+                    h4{
+                        font-size: 18px;
+                        margin-bottom: 2px;
                     }
                 }
             }
 
-            .slider-overlay {
-                position: absolute;
-                width: 100%;
-                bottom: 10px;
-                padding: 20px;
-                color: $text-white;
-                margin: 0px;
-
-                .hotel_name {
-                    padding-bottom: 30px;
+            #border {
+                position: relative;
+                width: 20%;
+                height: 1px;
+                background-color: $text-white;
+                margin: 0 0;
+            }
+            .room-rating {
+                
+                @include tab-view{
+                    margin: 10px 0;
                 }
-
-                #border {
-                    position: relative;
-                    width: 20%;
-                    height: 1px;
-                    background-color: $text-white;
-                    margin: 0 0;
+                .room_rate_box{
+                    display: flex;
+                    justify-content: flex-end;
+                    @include tab-view{
+                        justify-content: flex-start;
+                    }
+                    .rate-box {
+                        background: $text-white;
+                        font-size: 14px;
+                        border-radius: 10px;
+                        color: $text-black;
+                        margin-right: 10px;
+                        width: 35px;
+                        height: 35px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        @include tab-view{
+                            font-size: 11px;
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+                    .rating {
+                        border-bottom: 2px solid;
+                        display: flex;
+                        padding: 0;
+                        align-items: center;
+                        font-size: 12px;
+                        @include tab-view{
+                            border-bottom: none;
+                        }
+                        i{
+                            &:first-child{
+                                margin-left: 5px;
+                            }
+                        }
+                    }
                 }
-
-                .rate-box {
-                    background: $text-white;
-                    padding: 8px 5px;
-                    border-radius: 10px;
-                    color: $text-black;
-                    text-align: center;
-                    margin-right: 10px;
-                }
-
-                .rating {
-                    border-bottom: 2px solid;
-                    padding-bottom: 6px;
-                }
-
-                .room-rating {
-                    text-align: right;
-                }
+                
             }
         }
 
@@ -6424,10 +6709,20 @@
         border-bottom: none;
 
         .nav-item {
-            width: 100%;
-            max-width: 180px;
+            width: 25%;
             text-align: center;
-            margin-right: 1px;
+            &:first-child{
+                a{
+                    border-top-left-radius: 5px;
+                    margin: 0px 1px 0 0;
+                }
+            }
+            &:last-child{
+                a{
+                    border-top-right-radius: 5px;
+                    margin: 0px 0 0 1px;
+                }
+            }
 
             a {
                 color: $text-black;
@@ -6435,16 +6730,17 @@
                 border: none;
                 border-radius: 0px;
                 padding: 20px;
-
+                margin: 0px 1px;
+                
                 &:hover,
                 &.active {
                     color: $text-white;
                     background-color: $primary-color;
                 }
-            }
-
-            @media (max-width: 767px) {
-                max-width: 33%;
+                @include tab-view{
+                    padding: 8px;
+                    font-size: 12px;
+                }
             }
         }
     }
@@ -6454,12 +6750,26 @@
         padding: 35px 40px;
         box-shadow: 0px 3px 6px $bg-black-opacity-half;
         border-radius: 0 0 20px 20px;
+        @include tab-view{
+            padding: 15px;
+            font-size: 12px;
+        }
 
         .tab-pane {
+            h4{
+                @include tab-view{
+                    font-size: 16px;
+                }
+            }
+            
             p {
                 color: $text-grey;
                 line-height: 2.2;
                 font-weight: 300;
+                @include tab-view{
+                    font-size: 12px;
+                    line-height: 21px;
+                }
             }
         }
     }
