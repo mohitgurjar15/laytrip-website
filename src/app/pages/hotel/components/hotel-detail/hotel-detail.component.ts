@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
+import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
@@ -11,10 +13,17 @@ export class HotelDetailComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   calenderPrices: [] = [];
+  hotelId;
+  hotelDetails;
+  imageTemp = [];
+
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private hotelService: HotelService,
+  ) { }
 
   ngOnInit() {
 
@@ -25,9 +34,14 @@ export class HotelDetailComponent implements OnInit {
         thumbnailsColumns: 1,
         image: false,
         imageAnimation: NgxGalleryAnimation.Slide,
+        spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
+        imageArrows: false,
+        thumbnailsArrows: false,
+        imageAutoPlay: true,
+        thumbnailsRemainingCount: true
       },
       {
-        thumbnailsColumns: 3,
+        thumbnailsColumns: 5,
         thumbnailsRows: 1,
         thumbnailsPercent: 30,
         imagePercent: 100,
@@ -41,66 +55,41 @@ export class HotelDetailComponent implements OnInit {
       },
     ];
 
-    this.galleryImages = [
-      {
-        small: 'http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg',
-        medium: 'http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg',
-        big: 'http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg',
-        description: 'Los Tres Ojos'
-      },
-      {
-        small: 'http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg',
-        medium: 'http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg',
-        big: 'http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg',
-        description: 'Bahía de las Aguilas'
-      },
-      {
-        small: 'http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg',
-        medium: 'http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg',
-        big: 'http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg',
-        description: 'Bahía de las Aguilas'
-      },
-      {
-        small: 'http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg',
-        medium: 'http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg',
-        big: 'http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg',
-        description: 'Bahía de las Aguilas'
+    this.route.params.subscribe(params => {
+      if (params) {
+        this.hotelId = params.id;
       }
-    ];
+    });
+    this.hotelService.getHotelDetail(`${this.hotelId}`).subscribe((res: any) => {
+      console.log(res);
+      if (res && res.data) {
+        this.hotelDetails = {
+          name: res.data.name,
+          city_name: res.data.address.city_name,
+          state_code: res.data.address.state_code,
+          country_name: res.data.address.country_name,
+          rating: res.data.rating,
+          review_rating: res.data.review_rating,
+        };
+        if (res.data.images) {
+          res.data.images.forEach(imageUrl => {
+            this.imageTemp.push({
+              small: `${imageUrl}`,
+              medium: `${imageUrl}`,
+              big: `${imageUrl}`,
+              description: `${this.hotelDetails.name}`
+            });
+            this.galleryImages = this.imageTemp;
+          });
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
 
-    // this.galleryImages = [
-    //   {
-    //     small: `${this.s3BucketUrl}assets/images/im-1.webp`,
-    //     medium: `${this.s3BucketUrl}assets/images/img-1-big.webp`,
-    //     big: `${this.s3BucketUrl}assets/images/img-1-big.webp`,
-    //     description: 'Los Tres Ojos'
-    //   },
-    //   {
-    //     small: `${this.s3BucketUrl}assets/images/im-2.webp`,
-    //     medium: `${this.s3BucketUrl}assets/images/im-2-big.png`,
-    //     big: `${this.s3BucketUrl}assets/images/im-2-big.png`,
-    //     description: 'Bahía de las Aguilas'
-    //   },
-    //   {
-    //     small: `${this.s3BucketUrl}assets/images/im-3.webp`,
-    //     medium: `${this.s3BucketUrl}assets/images/im-3-big.jpg`,
-    //     big: `${this.s3BucketUrl}assets/images/im-3-big.jpg`,
-    //     description: 'Santo Domingo’s Colonial City'
-    //   },
-    //   {
-    //     small: `${this.s3BucketUrl}assets/images/im-4.webp`,
-    //     medium: `${this.s3BucketUrl}assets/images/im-4-web.jpg`,
-    //     big: `${this.s3BucketUrl}assets/images/im-4-web.jpg`,
-    //     description: 'Catalina Island'
-    //   },
-    //   {
-    //     small: `${this.s3BucketUrl}assets/images/im-5.webp`,
-    //     medium: `${this.s3BucketUrl}assets/images/im-5-big.jpg`,
-    //     big: `${this.s3BucketUrl}assets/images/im-5-big.jpg`,
-    //     description: 'Pico Duarte'
-    //   }
-
-    // ];
+  counter(i: any) {
+    return new Array(i);
   }
 
   getSearchItem(event) {
