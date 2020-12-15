@@ -10,12 +10,12 @@
                                     <div class="search_area">
                                         <label>Destination</label>
                                          <ng-select [loading]="loading" [selectOnTab]="true" [items]="data"
-                                         bindLabel="title" bindValue="title" [(ngModel)]="defaultCity" notFoundText="" [virtualScroll]="true" [(ngModel)]="rentalDefaultDestValue" [ngModelOptions]="{standalone: true}" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, {key: 'fromSearch1'})"(clear)="onRemove($event)"
+                                         bindLabel="city" bindValue="city" [(ngModel)]="defaultCity" notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, {key: 'fromSearch1'})"(clear)="onRemove($event,item)"
                                           class="laytrip-input" placeholder="{{ placeHolder }}">
                                           <ng-template ng-label-tmp let-item="item">
                                         <div class="hotel-parent">
                                             <!-- <img height="15" width="15" [src]="item.thumbnail" /> -->
-                                            <div class="sub-parent">{{item.title}}</div>
+                                            <div class="sub-parent">{{item.city}}</div>
                                         </div>
                                         </ng-template>
                                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
@@ -24,7 +24,7 @@
                                             </div>
                                         </ng-template>
                                     </ng-select>
-                                    <span *ngIf="defaultCity">{{ defaultCity }}, {{defaultCountry}}</span>
+                                    <span *ngIf="defaultSelected">{{ defaultCity }}, {{defaultCountry}}</span>
                                       </div>
                                 </div>
                             </li>

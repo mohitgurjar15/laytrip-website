@@ -35,8 +35,8 @@ export class VacationRentalSearchBarComponent implements OnInit {
   destination:any='';
   data:any=[];
   defaultData:any;
-  defaultCity:'Barcelona';
-  defaultCountry:'Spain';
+  defaultCity:'';
+  defaultCountry:'';
   rentalDefaultDestValue;
   destinationRental: any = {};
   placeHolder:'Barcelona';
@@ -158,23 +158,29 @@ export class VacationRentalSearchBarComponent implements OnInit {
       this.defaultSelected = this.defaultSelected;
     }
     this.defaultSelected = '';
+    this.defaultCity = '';
+    this.defaultCountry = '';
     this.defaultSelected = event;
+    this.defaultCity =this.defaultSelected.city;
+    this.defaultCountry =this.defaultSelected.country;
   }
 
   onRemove(event, item) {
     if (item.key === 'fromSearch1') {
-      this.destinationRental = Object.create(null);
+      this.defaultCity = Object.create(null);
     }
   }
 
   searchRentals(formData){
-    formData.id=this.defaultSelected.id;
-    formData.city=this.defaultSelected.city;
-    formData.country=this.defaultSelected.country;
-    formData.display_name=this.defaultSelected.title;
+    console.log(this.data);
+    formData.id=this.defaultSelected.id == undefined ? this.data[0].id:this.defaultSelected.id;
+    formData.city=this.defaultSelected.city == undefined ? this.data[0].id:this.defaultSelected.city;
+    formData.country=this.defaultSelected.country == undefined ? this.data[0].id:this.defaultSelected.country;
+    formData.display_name=this.defaultSelected.title == undefined ? this.data[0].id:this.defaultSelected.title;
     formData.check_in_date=moment(formData.check_in_date).format("YYYY/MM/DD");
     formData.check_out_date=moment(formData.check_out_date).format("YYYY/MM/DD");
     console.log(formData);
+    localStorage.setItem('_rental', JSON.stringify(formData));
     this.searchBarInfo.emit(formData);
   }
 
