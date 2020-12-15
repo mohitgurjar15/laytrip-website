@@ -130,9 +130,21 @@
                     <div class="tab_detail fare_detail_cnt">
                         <div class="triangle_right"></div>
                         <ul>
-                            <li>Base Fare (1 Adult) <span>{{ currency?.symbol }}113</span></li>
-                            <li>Taxes and Fees (1 Adult) <span>$13</span></li>
-                            <li>Total Fare (1 Adult) <span>$126</span></li>
+                            <!-- <li *ngFor="let hotel of hotelInfo">
+                                <p *ngIf="hotel.adults">
+                                    Base Fare ({{hotel.adults}} Adult)
+                                </p>
+                                <span>{{ currency?.symbol
+                                    }}{{item?.selling?.total}}</span>
+                                <p *ngIf="hotel.children && hotel.children.length">
+                                    Base Fare ({{hotel.children.length}} Child)
+                                </p>
+                                <span>{{ currency?.symbol
+                                    }}{{item?.selling?.total}}</span>
+                            </li> -->
+                            <li>Total Fare (traveler) <span>{{ currency?.symbol
+                                    }}{{item?.selling?.total}}</span></li>
+                            <!-- <li>Taxes and Fees (1 Adult) <span>$13</span></li> -->
                         </ul>
 
                         <p><span>Note:</span> It is a long established fact that a reader will be distracted by the
