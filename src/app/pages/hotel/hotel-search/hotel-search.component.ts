@@ -25,18 +25,27 @@ export class HotelSearchComponent implements OnInit {
   hotelDetailsMain;
   isResetFilter: string = 'no';
   subscriptions: Subscription[] = [];
+  searchedValue = [];
+  roomsGroup = [
+    {
+      adults: 2,
+      child: [],
+      children: []
+    }
+  ];
 
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
   ) {
   }
-  
+
   ngOnInit() {
     window.scroll(0, 0);
     setTimeout(() => {
       document.getElementById('login_btn').style.background = '#FF00BC';
     }, 1000);
+    this.searchedValue.push({ key: 'guest', value: this.roomsGroup });
 
     let payload: any = {};
     const info = JSON.parse(localStorage.getItem('_hote'));
@@ -155,5 +164,6 @@ export class HotelSearchComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
   }
 }

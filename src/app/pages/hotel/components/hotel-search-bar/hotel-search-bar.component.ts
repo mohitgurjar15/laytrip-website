@@ -23,11 +23,9 @@ export class HotelSearchBarComponent implements OnInit {
   hotelSearchForm: FormGroup;
   loadingDestination = false;
   data = [];
-  itemIcon = '';
   placeHolder1 = 'New York';
   // tslint:disable-next-line: quotemark
   totalPerson: number = 1;
-  hotelDefaultDestValue;
   destinationHotel: any = {};
   // checkInDate = new Date(moment().format('MM/DD/YYYY'));
   // checkOutDate = new Date(moment().add(38, 'days').format('MM/DD/YYYY'));
@@ -40,6 +38,14 @@ export class HotelSearchBarComponent implements OnInit {
   defaultCity;
   defaultCountry;
   searchedValue = [];
+  itemIconArray = {
+    hotel: `${this.s3BucketUrl}assets/images/icon/hotel.png`,
+    city: `${this.s3BucketUrl}assets/images/icon/city.png`,
+    airport: `${this.s3BucketUrl}assets/images/icon/airport.png`,
+    region: `${this.s3BucketUrl}assets/images/icon/region.png`,
+    poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
+  };
+  defaultHotel: any = {};
 
   constructor(
     public fb: FormBuilder,
@@ -60,25 +66,23 @@ export class HotelSearchBarComponent implements OnInit {
 
   ngOnInit() {
     const info = JSON.parse(localStorage.getItem('_hote'));
+    console.log(info);
     info.forEach(i => {
       if (i.key === 'fromSearch') {
-        this.defaultCity = i.value.city;
-        this.defaultCountry = i.value.country;
-      }
-      // this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
-      // this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
-
-      this.data = [
-        {
+        this.data = [{
           city: i.value.city,
           country: i.value.country,
           hotel_id: i.value.hotel_id,
           title: i.value.title,
           type: i.value.type,
-          geo_codes: { lat: this.route.snapshot.queryParams['latitude'], long: this.route.snapshot.queryParams['longitude'] },
-          thumbnail: this.itemIcon
+          geo_codes: { lat: i.value.geo_codes.lat, long: i.value.geo_codes.long },
         }
-      ];
+        ];
+        this.defaultHotel.city = i.value.city;
+        this.defaultHotel.country = i.value.country;
+      }
+      // this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
+      // this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
     });
 
     let current = new Date();
@@ -92,29 +96,11 @@ export class HotelSearchBarComponent implements OnInit {
   searchHotel(searchItem) {
     this.loadingDestination = true;
     const searchedData = { term: searchItem };
-    // const iconArray = {
-    //   city: 'City',
-    //   airport: 'Airport',
-    //   region: 'Region',
-    //   poi: 'Point of Interest',
-    //   hotel: 'Hotel',
-    // };
     this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       console.log(response);
       if (response && response.data && response.data.length) {
         this.data = response.data.map(res => {
           this.loadingDestination = false;
-          // if (res && res.type === 'city') {
-          //   this.itemIcon = 'city';
-          // } else if (res && res.type === 'airport') {
-          //   this.itemIcon = 'airport';
-          // } else if (res && res.type === 'poi') {
-          //   this.itemIcon = 'pointofinterest';
-          // } else if (res && res.type === 'region') {
-          //   this.itemIcon = 'region';
-          // } else if (res && res.type === 'hotel') {
-          //   this.itemIcon = 'hotel';
-          // }
           return {
             city: res.city,
             country: res.country,
@@ -122,7 +108,6 @@ export class HotelSearchBarComponent implements OnInit {
             title: res.title,
             type: res.type,
             geo_codes: res.geo_codes,
-            thumbnail: this.itemIcon
           };
         });
       }
@@ -133,16 +118,12 @@ export class HotelSearchBarComponent implements OnInit {
     );
   }
 
-  selectEvent(event, data) {
-
-  }
-
   dateChange(type, direction) {
 
   }
 
   modifySearch() {
-    
+
   }
 
   // checkInDateUpdate(date) {
@@ -155,9 +136,9 @@ export class HotelSearchBarComponent implements OnInit {
   //   this.checkOutMinDate = new Date(date);
   // }
 
-  changeSearchDestination(event) {
+  onChangeSearch(event) {
     if (event.term.length > 2) {
-      this.searchHotelDestination(event.term);
+      this.searchHotel(event.term);
     }
   }
 
@@ -166,26 +147,17 @@ export class HotelSearchBarComponent implements OnInit {
     this.searchedValue.push({ key: 'guest', value: event });
   }
 
-  searchHotelDestination(searchItem) {
-    this.loadingDestination = true;
-    this.hotelService.searchHotels(searchItem).subscribe((response: any) => {
-      this.data = response.map(res => {
-        this.loadingDestination = false;
-        return {
-          id: res.id,
-          name: res.name,
-          code: res.code,
-          city: res.city,
-          country: res.country,
-          display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-          parentId: res.parentId
-        };
-      });
-    },
-      error => {
-        this.loadingDestination = false;
-      }
-    );
+  selectEvent(event, item) {
+    if (!event) {
+      this.placeHolder1 = this.placeHolder1;
+      this.defaultHotel.city = this.defaultHotel.city;
+      this.defaultHotel.country = this.defaultHotel.country;
+    }
+    if (event && item && item.key === 'fromSearch') {
+      this.defaultHotel.city = event.city;
+      this.defaultHotel.country = event.country;
+      this.searchedValue.push({ key: 'fromSearch', value: event });
+    }
   }
 
   onRemove(event, item) {

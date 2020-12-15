@@ -211,7 +211,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   logAnimation(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   ngOnDestroy(): void {

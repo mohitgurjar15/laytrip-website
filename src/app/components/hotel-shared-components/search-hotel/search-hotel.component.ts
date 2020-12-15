@@ -2,8 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 import { HotelService } from '../../../services/hotel.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-// import { data } from './airport';
-
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-search-hotel',
@@ -12,6 +11,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class SearchHotelComponent implements OnInit, AfterViewChecked {
 
+  s3BucketUrl = environment.s3BucketUrl;
   @Input() label: string;
   @Input() tabIndex: number;
   @Input() placeHolder: string;
@@ -27,7 +27,13 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
   selectedHotel: any = {};
   loading = false;
   data = [];
-  itemIcon = '';
+  itemIconArray = {
+    hotel: `${this.s3BucketUrl}assets/images/icon/hotel.png`,
+    city: `${this.s3BucketUrl}assets/images/icon/city.png`,
+    airport: `${this.s3BucketUrl}assets/images/icon/airport.png`,
+    region: `${this.s3BucketUrl}assets/images/icon/region.png`,
+    poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
+  };
 
   constructor(
     private hotelService: HotelService,
@@ -46,7 +52,6 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         title: this.defaultSelected.title,
         type: this.defaultSelected.type,
         geo_codes: this.defaultSelected.geo_codes,
-        thumbnail: this.itemIcon
       });
     }
   }
@@ -61,29 +66,10 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
   searchHotel(searchItem) {
     this.loading = true;
     const searchedData = { term: searchItem };
-    // const iconArray = {
-    //   city: 'City',
-    //   airport: 'Airport',
-    //   region: 'Region',
-    //   poi: 'Point of Interest',
-    //   hotel: 'Hotel',
-    // };
     this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
-      console.log(response);
       if (response && response.data && response.data.length) {
         this.data = response.data.map(res => {
           this.loading = false;
-          // if (res && res.type === 'city') {
-          //   this.itemIcon = 'city';
-          // } else if (res && res.type === 'airport') {
-          //   this.itemIcon = 'airport';
-          // } else if (res && res.type === 'poi') {
-          //   this.itemIcon = 'pointofinterest';
-          // } else if (res && res.type === 'region') {
-          //   this.itemIcon = 'region';
-          // } else if (res && res.type === 'hotel') {
-          //   this.itemIcon = 'hotel';
-          // }
           return {
             city: res.city,
             country: res.country,
@@ -91,7 +77,6 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
             title: res.title,
             type: res.type,
             geo_codes: res.geo_codes,
-            thumbnail: this.itemIcon
           };
         });
       }
