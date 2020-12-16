@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HotelService } from '../../../services/hotel.service';
+import { CommonFunction } from '../../../_helpers/common-function';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-hotel-search',
@@ -32,6 +34,8 @@ export class HotelSearchComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
+    public commonFunction: CommonFunction,
+    public router: Router,
   ) {
   }
 
@@ -52,7 +56,6 @@ export class HotelSearchComponent implements OnInit {
         longitude: params.longitude,
         occupancies: [],
         filter: true,
-
       };
       info.forEach(item => {
         payload.occupancies.push({ adults: item.adults, children: item.children });
@@ -75,13 +78,8 @@ export class HotelSearchComponent implements OnInit {
       } else {
         this.isNotFound = true;
       }
-
       this.loading = false;
     });
-  }
-
-  getSearchItem(event) {
-    console.log(event);
   }
 
   sortHotels(event) {
@@ -154,8 +152,23 @@ export class HotelSearchComponent implements OnInit {
     this.isResetFilter = (new Date()).toString();
   }
 
+  getHotelSearchDataByModify(event) {
+    let urlData = this.commonFunction.decodeUrl(this.router.url);
+    let locations = {city: event.city, country: event.country};
+    let queryParams: any = {};
+    queryParams.check_in = moment(event.check_in).format('YYYY-MM-DD');
+    queryParams.check_out = moment(event.check_out).format('YYYY-MM-DD');
+    queryParams.latitude = parseFloat(event.latitude);
+    queryParams.longitude = parseFloat(event.longitude);
+    queryParams.itenery = btoa(JSON.stringify(event.occupancies));
+    queryParams.location = btoa(JSON.stringify(locations));
+    console.log(queryParams);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
-    localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
   }
 }
