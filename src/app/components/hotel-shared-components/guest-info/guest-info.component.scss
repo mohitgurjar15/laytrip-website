@@ -3,3 +3,25 @@
     color: #ff0000;
     font-size: 12px;
 }
+
+.qtyminus,
+.qtyplus {
+    &.un_active {
+        border: 1px solid #d5d7e3 !important;
+        color: #d5d7e3 !important;
+        cursor: not-allowed;
+        &:hover {
+            border: 1px solid #d5d7e3 !important;
+            color: #d5d7e3 !important;
+            cursor: not-allowed;
+            background: #f1f1f1;
+        }
+    }
+
+    &.disable_btn {
+        border: 1px solid #d5d7e3;
+        color: #d5d7e3;
+        cursor: not-allowed;
+        background: #f1f1f1;
+    }
+}

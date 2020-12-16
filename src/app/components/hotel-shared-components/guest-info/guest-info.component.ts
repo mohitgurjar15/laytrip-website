@@ -81,7 +81,7 @@ export class GuestInfoComponent implements OnInit {
   }
 
   removeRoom(index) {
-    this.roomsGroup.pop();
+    this.roomsGroup.splice(index, 1);
     this.totalPerson = this.getTotalPerson();
     this.changeValue.emit(this.roomsGroup);
   }
@@ -99,9 +99,6 @@ export class GuestInfoComponent implements OnInit {
     if (item && item.type === 'plus' && item.label === 'child') {
       this.roomsGroup[item.id].child.push(1);
       this.totalPerson = this.getTotalPerson();
-      if (this.roomsGroup[item.id].child.length > 4) {
-        this.errorMessage = 'Maximum number of passengers all together should not exceed 4 except child.';
-      }
     } else if (item && item.type === 'minus' && item.label === 'child') {
       this.roomsGroup[item.id].child.pop();
       this.roomsGroup[item.id].children.pop();
