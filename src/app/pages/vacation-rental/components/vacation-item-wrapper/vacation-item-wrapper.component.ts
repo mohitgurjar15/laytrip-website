@@ -28,6 +28,12 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
   userInfo;
   rentalListArray = [];
   rentalDetailIdArray=[];
+  isMapView = false;
+  markers =[];
+  zoom=10;
+  lat:number;
+  long:number;
+
   constructor(  
   	private rentalService: VacationRentalService,
     private router: Router,
@@ -52,4 +58,26 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+    changeView(view) {
+    if (view === 'listView') {
+      console.log("---11111111-----")
+      this.isMapView = false;
+    } else {
+      this.isMapView = true;
+      this.markers=[];
+      this.lat=this.rentalListArray[0].latitude;
+      this.long=this.rentalListArray[0].longintude;
+      for (var _i = 0; _i < this.rentalListArray.length; _i++) {
+        this.markers.push({
+          lat:this.rentalListArray[_i].latitude,
+          lng:this.rentalListArray[_i].longintude,
+          label:this.rentalListArray[_i].property_name,  
+        })
+     }
+        console.log(this.markers);
+     };
+    }
+
+
+  
 }

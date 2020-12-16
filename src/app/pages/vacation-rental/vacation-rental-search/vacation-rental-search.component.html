@@ -1,6 +1,6 @@
 <app-vacation-rental-search-bar (searchBarInfo)="getSearchItem($event)"></app-vacation-rental-search-bar>
 <app-vacation-loader *ngIf="loading" ></app-vacation-loader>
-<!-- <app-vacation-not-found *ngIf="isNotFound" ></app-vacation-not-found> -->
+<app-vacation-not-found *ngIf="isNotFound" ></app-vacation-not-found>
 <section class="search_result home_rental" *ngIf="!loading && !isNotFound && errorMessage==''">
    <div class="container">
    <div class="row">
