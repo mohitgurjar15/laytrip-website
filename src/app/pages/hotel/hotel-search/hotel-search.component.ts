@@ -1,12 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-declare var $: any;
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-
-import { Location } from '@angular/common';
-import * as moment from 'moment';
-import { CommonFunction } from '../../../_helpers/common-function';
 import { HotelService } from '../../../services/hotel.service';
 
 @Component({
@@ -25,18 +20,27 @@ export class HotelSearchComponent implements OnInit {
   hotelDetailsMain;
   isResetFilter: string = 'no';
   subscriptions: Subscription[] = [];
+  searchedValue = [];
+  roomsGroup = [
+    {
+      adults: 2,
+      child: [],
+      children: []
+    }
+  ];
 
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
   ) {
   }
-  
+
   ngOnInit() {
     window.scroll(0, 0);
     setTimeout(() => {
       document.getElementById('login_btn').style.background = '#FF00BC';
     }, 1000);
+    this.searchedValue.push({ key: 'guest', value: this.roomsGroup });
 
     let payload: any = {};
     const info = JSON.parse(localStorage.getItem('_hote'));
@@ -155,5 +159,6 @@ export class HotelSearchComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
   }
 }

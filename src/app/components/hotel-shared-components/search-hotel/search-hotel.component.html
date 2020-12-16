@@ -14,7 +14,7 @@
         </ng-template>
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
             <div class="hotel-parent">
-                <img height="15" width="15" [src]="item.thumbnail" />
+                <img height="15" width="15" [src]="itemIconArray[item.type]" />
                 <div class="sub-parent">{{item.title}}</div>
             </div>
         </ng-template>

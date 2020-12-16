@@ -4,7 +4,7 @@
     <span>{{ totalPerson }}</span> Traveller
     <div class="drop_aerrow"></div>
   </div>
-  <span>Rooms</span>
+  <span>{{roomsGroup.length}} Rooms</span>
   <!-- {{ totalRoom }} Rooms -->
   <div class="traveller_add_block" id="add_child_open" style="display: none;">
     <!-- room 1 div -->
@@ -15,7 +15,8 @@
             Room {{id+1}}
           </span>
           <span>
-            <a (click)="addRoom(id)" *ngIf="id+1 === 1">Add a room</a>
+            <a (click)="addRoom(id)" *ngIf="roomsGroup.length === 1 || roomsGroup.length < 8 && id+1 === 1">Add a
+              room</a>
             <a (click)="removeRoom(id)" *ngIf="id+1 > 1" [ngClass]="{'remove_room':id+1 > 1}">Remove a room</a>
           </span>
         </div>
@@ -25,11 +26,12 @@
             </div>
             <div class="right">
               <input type='button' value='-' class='qtyminus un_active' field='quantity'
-                [disabled]="room.adults === 2 && room.adults > 0" id="{{id}}"
-                [ngClass]="{ 'un_active' : room.adults === 2 && room.adults > 0 }"
+                [disabled]="room.adults === 1 && room.adults > 0" id="{{id}}"
+                [ngClass]="{ 'un_active' : room.adults === 1 && room.adults > 0 }"
                 (click)="addRemovePerson({id: id, type: 'minus',label: 'adult', value: room.adults})" />
               <input type='text' name='quantity' value='{{ room.adults }}' class='qty' readonly />
               <input type='button' value='+' class='qtyplus' field='quantity' id="{{id}}"
+                [ngClass]="{'un_active' : room.adults === 4 && room.adults > 0}" [disabled]="room.adults === 4"
                 (click)="addRemovePerson({id: id, type: 'plus',label: 'adult', value: room.adults})" />
             </div>
           </li>
@@ -38,18 +40,15 @@
             </div>
             <div class="right">
               <input type='button' value='-' class='qtyminus' field='quantity' id="{{id}}"
-                [ngClass]="{ 'disable_btn' : room.child.length === 0}" [disabled]="room.child.length === 0"
+                [ngClass]="{ 'un_active' : room.child.length === 0}" [disabled]="room.child.length === 0"
                 (click)="addRemovePerson({id: id, type: 'minus',label: 'child', value: room.child.length})" />
               <input type='text' name='quantity' value='{{ room.child.length === 0 ? 0 : room.child.length }}'
                 class='qty' readonly />
               <input type='button' value='+' class='qtyplus' field='quantity'
-                [ngClass]="{ 'disable_btn' : room.child.length === 0 && room.child.length === 4}"
-                [disabled]="room.child.length > 4" id="{{id}}"
+                [ngClass]="{ 'un_active' : room.child.length > 0 && room.child.length === 4}"
+                [disabled]="room.child.length === 4" id="{{id}}"
                 (click)="addRemovePerson({id: id, type: 'plus',label: 'child', value: room.child.length})" />
             </div>
-          </li>
-          <li class="guest_error">
-            {{errorMessage}}
           </li>
         </ul>
         <ng-container>

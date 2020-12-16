@@ -8,11 +8,11 @@
             <div class="hotel_where">
               <div class="search_area">
                 <label>Destination</label>
-                <ng-select [loading]="loadingDestination" [selectOnTab]="true" [items]="data" bindLabel="title"
-                  bindValue="title" [(ngModel)]="defaultCity" minTermLength="3" notFoundText="" [virtualScroll]="true"
-                  [(ngModel)]="hotelDefaultDestValue" [ngModelOptions]="{standalone: true}"
-                  (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDestination($event)"
-                  loadingText="" (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
+                <ng-select [loading]="loadingDestination" [selectOnTab]="true" [clearable]="false" [items]="data"
+                  bindLabel="title" bindValue="title" [(ngModel)]="this.defaultHotel.city" minTermLength="3" notFoundText=""
+                  [virtualScroll]="true" [ngModelOptions]="{standalone: true}"
+                  (clear)="onRemove($event,{key: 'fromSearch'})" (search)="onChangeSearch($event)" loadingText=""
+                  (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
                   placeholder="{{ placeHolder1 }}">
                   <!-- [(ngModel)]="defaultSelected" -->
                   <ng-template ng-label-tmp let-item="item">
@@ -23,12 +23,12 @@
                   </ng-template>
                   <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                     <div class="hotel-parent">
-                      <img height="15" width="15" [src]="item.thumbnail" />
+                      <img height="15" width="15" [src]="itemIconArray[item.type]" />
                       <div class="sub-parent">{{item.title}}</div>
                     </div>
                   </ng-template>
                 </ng-select>
-                <span *ngIf="defaultCity">{{ defaultCity }}, {{defaultCountry}}</span>
+                <span *ngIf="defaultHotel">{{ defaultHotel.city }}, {{defaultHotel.country}}</span>
               </div>
             </div>
           </li>
