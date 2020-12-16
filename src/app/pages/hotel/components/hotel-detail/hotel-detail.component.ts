@@ -12,7 +12,6 @@ import { environment } from '../../../../../environments/environment';
 export class HotelDetailComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  calenderPrices: [] = [];
   hotelId;
   hotelDetails;
   imageTemp = [];
