@@ -10,7 +10,7 @@
                                     <div class="search_area">
                                         <label>Destination</label>
                                          <ng-select [loading]="loading" [selectOnTab]="true" [items]="data"
-                                         bindLabel="city" bindValue="city" [(ngModel)]="defaultCity" notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, {key: 'fromSearch1'})"(clear)="onRemove($event)"
+                                         bindLabel="city" bindValue="city" [(ngModel)]="defaultCity" notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)"(clear)="onRemove($event)"
                                           class="laytrip-input" placeholder="{{ placeHolder }}">
                                           <ng-template ng-label-tmp let-item="item">
                                         <div class="hotel-parent">
