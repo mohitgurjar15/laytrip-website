@@ -130,6 +130,10 @@ export class HotelSearchBarComponent implements OnInit {
     );
   }
 
+  dateChange(type, direction) {
+    console.log('date change');
+  }
+
   modifySearch() {
 
   }
