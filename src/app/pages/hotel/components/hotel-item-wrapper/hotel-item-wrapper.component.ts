@@ -78,12 +78,14 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     window.scroll(0, 0);
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    // const info = JSON.parse(localStorage.getItem('_hote'));
-    // console.log(info);
-    // if (info && info.key === 'guest') {
-    //   this.hotelInfo = info.value;
-    //   console.log('hotelInfo::::', this.hotelInfo);
-    // }
+    const info = JSON.parse(localStorage.getItem('_hote'));
+    if (info) {
+      info.forEach(element => {
+        if (element.key === 'guest') {
+          this.hotelInfo = element.value;
+        }
+      });
+    }
     this.hotelListArray = this.hotelDetails;
     this.hotelListArray.forEach((i) => {
       this.geoCodes.push(i.geocodes);

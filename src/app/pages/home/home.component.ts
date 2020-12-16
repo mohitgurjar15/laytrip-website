@@ -70,6 +70,8 @@ export class HomeComponent implements OnInit {
       ]
     });
     // Close Featured List Js
+
+    $('[data-toggle="popover"]').popover();   
   }
 
 

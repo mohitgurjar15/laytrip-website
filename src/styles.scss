@@ -4855,54 +4855,73 @@ select {
 
 .block_covid {
 	width: 100%;
-	background: $covid_bg;
-	box-shadow: 0px 0px 5px $bg-black-opacity-half;
+	background: $pink_clr;
 	position: relative;
 	z-index: 9;
+	padding: 15px 0;
 
-	.accordion {
-		.card {
-			border: none;
-			margin-bottom: 0px;
-			background: $covid_bg;
+	span {
+		font-size: 16px;
+		font-weight: 400;
+		color: $text-white;
 
-			h2 {
-				background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_up_arrow.svg) no-repeat calc(100% - 0px) center;
-				background-size: 20px;
-				cursor: pointer;
-				font-size: 16px;
-				font-weight: 600;
-				padding: 15px 0;
-				color: $text-black;
-				display: flex;
-				align-items: center;
-
-				&.collapsed {
-					background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_down_arrow.svg);
-				}
-
-				img {
-					height: 20px;
-					margin-right: 10px;
-				}
-			}
+		img {
+			height: 20px;
+			margin-right: 10px;
 		}
 
-		.card-body {
-			padding: 0 0 15px;
-
-			p {
-				font-size: 14px;
-				line-height: 21px;
-				color: $text-black;
-				margin: 0;
-
-				a {
-					color: $text-blue;
-				}
-			}
+		a {
+			color: $text-white;
+			font-weight: 500;
+			text-transform: capitalize;
+			text-decoration: underline;
 		}
 	}
+
+
+	//	.accordion {
+	//		.card {
+	//			border: none;
+	//			margin-bottom: 0px;
+	//			background: $covid_bg;
+	//
+	//			h2 {
+	//				background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_up_arrow.svg) no-repeat calc(100% - 0px) center;
+	//				background-size: 20px;
+	//				cursor: pointer;
+	//				font-size: 16px;
+	//				font-weight: 600;
+	//				padding: 15px 0;
+	//				color: $text-black;
+	//				display: flex;
+	//				align-items: center;
+	//
+	//				&.collapsed {
+	//					background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_down_arrow.svg);
+	//				}
+	//
+	//				img {
+	//					height: 20px;
+	//					margin-right: 10px;
+	//				}
+	//			}
+	//		}
+	//
+	//		.card-body {
+	//			padding: 0 0 15px;
+	//
+	//			p {
+	//				font-size: 14px;
+	//				line-height: 21px;
+	//				color: $text-black;
+	//				margin: 0;
+	//
+	//				a {
+	//					color: $text-blue;
+	//				}
+	//			}
+	//		}
+	//	}
 }
 
 .block_covid_19 {

@@ -39,6 +39,14 @@ export class HotelService {
             );
     }
 
+    getHotelDetail(id) {
+        console.log(id);
+        return this.http.post(`${environment.apiUrl}v1/hotel/detail`, { hotel_id: id }, this.commonFunction.setHeaders())
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     handleError(error) {
         let errorMessage = {};
         if (error.status == 0) {
