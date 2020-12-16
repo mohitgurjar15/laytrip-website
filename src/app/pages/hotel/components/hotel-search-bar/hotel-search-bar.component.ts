@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input, SimpleChanges, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,6 +17,7 @@ import { NgbDateCustomParserFormatter } from '../../../../_helpers/ngbDateCustom
 })
 export class HotelSearchBarComponent implements OnInit {
 
+  @ViewChild('dateFilter', undefined) private dateFilter: any;
   @Output() searchBarInfo = new EventEmitter<any>();
   @Input() calenderPrices: any = [];
   s3BucketUrl = environment.s3BucketUrl;
@@ -27,11 +28,9 @@ export class HotelSearchBarComponent implements OnInit {
   // tslint:disable-next-line: quotemark
   totalPerson: number = 1;
   destinationHotel: any = {};
-  // checkInDate = new Date(moment().format('MM/DD/YYYY'));
-  // checkOutDate = new Date(moment().add(38, 'days').format('MM/DD/YYYY'));
-  checkInDate: NgbDate;
-  checkOutDate: NgbDate | null = null;
-  hoveredDate: NgbDate | null = null;
+  checkInDate = new Date();
+  checkOutDate = new Date();
+  rangeDates: Date[];
   isPrevButton = false;
   checkInMinDate;
   checkOutMinDate;
@@ -46,6 +45,19 @@ export class HotelSearchBarComponent implements OnInit {
     poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
   };
   defaultHotel: any = {};
+  searchHotelInfo = {
+    latitude: null,
+    longitude: null,
+    check_in: null,
+    check_out: null,
+    occupancies: [
+      {
+        adults: null,
+        child: [],
+        children: []
+      }
+    ],
+  };
 
   constructor(
     public fb: FormBuilder,
@@ -60,37 +72,37 @@ export class HotelSearchBarComponent implements OnInit {
       fromDestination: ['', Validators.required]
     });
 
-    this.checkInDate = calendar.getToday();
-    this.checkOutDate = calendar.getNext(calendar.getToday(), 'd', 7);
+    this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
+    this.checkInMinDate = this.checkInDate;
+    this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
+    this.checkOutMinDate = this.checkOutDate;
+    this.rangeDates = [this.checkInDate, this.checkOutDate];
+
+    this.searchHotelInfo =
+    {
+      latitude: this.route.snapshot.queryParams['latitude'],
+      longitude: this.route.snapshot.queryParams['longitude'],
+      check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
+      check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
+      occupancies: [
+        {
+          adults: null,
+          child: [],
+          children: []
+        }
+      ],
+    };
   }
 
   ngOnInit() {
-    const info = JSON.parse(localStorage.getItem('_hote'));
-    console.log(info);
-    info.forEach(i => {
-      if (i.key === 'fromSearch') {
-        this.data = [{
-          city: i.value.city,
-          country: i.value.country,
-          hotel_id: i.value.hotel_id,
-          title: i.value.title,
-          type: i.value.type,
-          geo_codes: { lat: i.value.geo_codes.lat, long: i.value.geo_codes.long },
-        }
-        ];
-        this.defaultHotel.city = i.value.city;
-        this.defaultHotel.country = i.value.country;
+    if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['location']) {
+      const info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+      console.log(info);
+      if (info) {
+        this.defaultHotel.city = info.city;
+        this.defaultHotel.country = info.country;
       }
-      // this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
-      // this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
-    });
-
-    let current = new Date();
-    this.checkInMinDate = {
-      year: current.getFullYear(),
-      month: current.getMonth() + 1,
-      day: current.getDate()
-    };
+    }
   }
 
   searchHotel(searchItem) {
@@ -119,22 +131,35 @@ export class HotelSearchBarComponent implements OnInit {
   }
 
   dateChange(type, direction) {
-
+    console.log('date change');
   }
 
   modifySearch() {
 
   }
 
-  // checkInDateUpdate(date) {
-  //   this.checkInDate = new Date(date);
-  //   this.checkInMinDate = new Date(date);
-  // }
+  checkInDateUpdate(date) {
+    console.log(date);
+    // this is only for closing date range picker, after selecting both dates
+    if (this.rangeDates[1]) { // If second date is selected
+      this.dateFilter.hideOverlay();
+    };
+    if (this.rangeDates[0] && this.rangeDates[1]) {
+      this.checkInDate = this.rangeDates[0];
+      this.checkInMinDate = this.rangeDates[0];
+      this.checkOutDate = this.rangeDates[1];
+      this.checkOutMinDate = this.rangeDates[1];
+      this.searchHotelInfo.check_in = this.checkInDate;
+      this.searchHotelInfo.check_out = this.checkOutDate;
+    }
+    console.log(this.searchHotelInfo);
+  }
 
-  // checkOutDateUpdate(date) {
-  //   this.checkOutDate = new Date(date);
-  //   this.checkOutMinDate = new Date(date);
-  // }
+  checkOutDateUpdate(date) {
+    // this.checkOutDate = new Date(date);
+    // this.checkOutMinDate = new Date(date);
+    // this.searchHotelInfo.check_out = this.checkOutDate;
+  }
 
   onChangeSearch(event) {
     if (event.term.length > 2) {
@@ -166,39 +191,13 @@ export class HotelSearchBarComponent implements OnInit {
     }
   }
 
-  onDateSelection(date: NgbDate) {
-    if (!this.checkInDate && !this.checkOutDate) {
-      this.checkInDate = date;
-    } else if (this.checkInDate && !this.checkOutDate && date.after(this.checkInDate)) {
-      this.checkOutDate = date;
-    } else {
-      this.checkOutDate = null;
-      this.checkInDate = date;
-    }
-    const selectedDate = {
-      checkInDate: this.checkInDate,
-      checkOutDate: this.checkOutDate
-    };
-    if (selectedDate.checkInDate && selectedDate.checkOutDate) {
-      // this.searchHotelInfo.check_in = `${selectedDate.checkInDate.year}-${selectedDate.checkInDate.month}-${selectedDate.checkInDate.day}`;
-      // this.searchHotelInfo.check_out = `${selectedDate.checkOutDate.year}-${selectedDate.checkOutDate.month}-${selectedDate.checkOutDate.day}`;
-    }
+  changeTravellerInfo(event) {
+    console.log(event);
+    // this.searchHotelInfo.adult = event.adult;
+    // this.searchFlightInfo.child = event.child;
+    // this.searchFlightInfo.infant = event.infant;
+    // this.searchFlightInfo.class = event.class;
+    // this.totalPerson = event.totalPerson;
   }
 
-  isRange(date: NgbDate) {
-    return date.equals(this.checkInDate) || (this.checkOutDate && date.equals(this.checkOutDate)) || this.isInside(date) || this.isHovered(date);
-  }
-
-  isHovered(date: NgbDate) {
-    return this.checkInDate && !this.checkOutDate && this.hoveredDate && date.after(this.checkInDate) && date.before(this.hoveredDate);
-  }
-
-  isInside(date: NgbDate) {
-    return this.checkOutDate && date.after(this.checkInDate) && date.before(this.checkOutDate);
-  }
-
-  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-  }
 }

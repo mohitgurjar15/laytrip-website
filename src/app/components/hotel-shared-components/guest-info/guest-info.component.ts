@@ -30,22 +30,23 @@ export class GuestInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private commonFunction: CommonFunction
   ) {
-    const info = JSON.parse(localStorage.getItem('_hote'));
-    if (info) {
-      info.forEach(i => {
-        if (i && i.key === 'guest') {
-          this.roomsGroup = i.value;
-        }
-      });
-    } else {
-      this.roomsGroup = this.roomsGroup;
-    }
-    this.totalPerson = this.getTotalPerson();
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
   ngOnInit() {
     this.loadJquery();
+    if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
+      const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+      if (info && info.length) {
+        info.forEach(item => {
+          this.roomsGroup.push({ adults: item.adults, child: item.child, children: item.children });
+        });
+      }
+    } else {
+      this.roomsGroup = this.roomsGroup;
+    }
+    console.log(this.roomsGroup);
+    this.totalPerson = this.getTotalPerson();
   }
 
   loadJquery() {

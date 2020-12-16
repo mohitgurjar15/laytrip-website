@@ -43,7 +43,7 @@ export class HotelSearchComponent implements OnInit {
     this.searchedValue.push({ key: 'guest', value: this.roomsGroup });
 
     let payload: any = {};
-    const info = JSON.parse(localStorage.getItem('_hote'));
+    const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
     this.route.queryParams.forEach(params => {
       payload = {
         check_in: params.check_in,
@@ -51,14 +51,11 @@ export class HotelSearchComponent implements OnInit {
         latitude: params.latitude,
         longitude: params.longitude,
         occupancies: [],
-        filter: true
+        filter: true,
+
       };
-      info.forEach(element => {
-        if (element && element.key === 'guest') {
-          element.value.forEach(item => {
-            payload.occupancies.push({ adults: item.adults, children: item.children });
-          });
-        }
+      info.forEach(item => {
+        payload.occupancies.push({ adults: item.adults, children: item.children });
       });
     });
     this.getHotelSearchData(payload);
