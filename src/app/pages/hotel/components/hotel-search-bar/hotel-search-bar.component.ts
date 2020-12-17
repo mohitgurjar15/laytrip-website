@@ -22,7 +22,7 @@ export class HotelSearchBarComponent implements OnInit {
   @Input() calenderPrices: any = [];
   s3BucketUrl = environment.s3BucketUrl;
   hotelSearchForm: FormGroup;
-  loadingDestination = false;
+  loading = false;
   data = [];
   placeHolder1 = 'New York';
   // tslint:disable-next-line: quotemark
@@ -45,11 +45,13 @@ export class HotelSearchBarComponent implements OnInit {
     poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
   };
   defaultHotel: any = {};
-  searchHotelInfo = {
+  searchHotelInfo: any = {
     latitude: null,
     longitude: null,
     check_in: null,
     check_out: null,
+    city: '',
+    country: '',
     occupancies: [
       {
         adults: null,
@@ -65,54 +67,54 @@ export class HotelSearchBarComponent implements OnInit {
     public commonFunction: CommonFunction,
     public cd: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
   ) {
     this.hotelSearchForm = this.fb.group({
       fromDestination: ['', Validators.required]
     });
+  }
 
+  ngOnInit() {
     this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
     this.checkInMinDate = this.checkInDate;
     this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
     this.checkOutMinDate = this.checkOutDate;
     this.rangeDates = [this.checkInDate, this.checkOutDate];
 
-    this.searchHotelInfo =
-    {
-      latitude: this.route.snapshot.queryParams['latitude'],
-      longitude: this.route.snapshot.queryParams['longitude'],
-      check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
-      check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
-      occupancies: [
-        {
-          adults: null,
-          child: [],
-          children: []
+    if (this.route && this.route.snapshot && this.route.snapshot.queryParams) {
+      let info;
+      this.searchHotelInfo =
+      {
+        latitude: this.route.snapshot.queryParams['latitude'],
+        longitude: this.route.snapshot.queryParams['longitude'],
+        check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
+        check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
+      };
+      if (this.route.snapshot.queryParams['location']) {
+        info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+        if (info) {
+          this.defaultHotel.city = info.city;
+          this.defaultHotel.country = info.country;
+          this.searchHotelInfo.city = info.city;
+          this.searchHotelInfo.country = info.country;
         }
-      ],
-    };
-  }
-
-  ngOnInit() {
-    if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['location']) {
-      const info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-      console.log(info);
-      if (info) {
-        this.defaultHotel.city = info.city;
-        this.defaultHotel.country = info.country;
+      }
+      if (this.route.snapshot.queryParams['itenery']) {
+        info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+        if (info) {
+          this.searchHotelInfo.occupancies = info;
+        }
       }
     }
   }
 
   searchHotel(searchItem) {
-    this.loadingDestination = true;
+    this.loading = true;
     const searchedData = { term: searchItem };
     this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
-      console.log(response);
       if (response && response.data && response.data.length) {
         this.data = response.data.map(res => {
-          this.loadingDestination = false;
+          this.loading = false;
           return {
             city: res.city,
             country: res.country,
@@ -125,7 +127,7 @@ export class HotelSearchBarComponent implements OnInit {
       }
     },
       error => {
-        this.loadingDestination = false;
+        this.loading = false;
       }
     );
   }
@@ -134,12 +136,7 @@ export class HotelSearchBarComponent implements OnInit {
     console.log('date change');
   }
 
-  modifySearch() {
-
-  }
-
   checkInDateUpdate(date) {
-    console.log(date);
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
@@ -152,13 +149,6 @@ export class HotelSearchBarComponent implements OnInit {
       this.searchHotelInfo.check_in = this.checkInDate;
       this.searchHotelInfo.check_out = this.checkOutDate;
     }
-    console.log(this.searchHotelInfo);
-  }
-
-  checkOutDateUpdate(date) {
-    // this.checkOutDate = new Date(date);
-    // this.checkOutMinDate = new Date(date);
-    // this.searchHotelInfo.check_out = this.checkOutDate;
   }
 
   onChangeSearch(event) {
@@ -170,6 +160,7 @@ export class HotelSearchBarComponent implements OnInit {
   changeGuestInfo(event) {
     this.totalPerson = event.totalPerson;
     this.searchedValue.push({ key: 'guest', value: event });
+    this.searchHotelInfo.occupancies = event;
   }
 
   selectEvent(event, item) {
@@ -181,23 +172,28 @@ export class HotelSearchBarComponent implements OnInit {
     if (event && item && item.key === 'fromSearch') {
       this.defaultHotel.city = event.city;
       this.defaultHotel.country = event.country;
+      this.searchHotelInfo.latitude = event.geo_codes.lat;
+      this.searchHotelInfo.longitude = event.geo_codes.long;
+      this.searchHotelInfo.city = event.city;
+      this.searchHotelInfo.country = event.country;
       this.searchedValue.push({ key: 'fromSearch', value: event });
     }
   }
 
   onRemove(event, item) {
     if (item.key === 'fromSearch') {
-      this.destinationHotel = Object.create(null);
+      this.defaultHotel = Object.create(null);
     }
   }
 
-  changeTravellerInfo(event) {
-    console.log(event);
-    // this.searchHotelInfo.adult = event.adult;
-    // this.searchFlightInfo.child = event.child;
-    // this.searchFlightInfo.infant = event.infant;
-    // this.searchFlightInfo.class = event.class;
-    // this.totalPerson = event.totalPerson;
+  modifyHotelSearch() {
+    console.log(this.searchHotelInfo);
+    if (this.searchHotelInfo && this.searchHotelInfo.latitude &&
+      this.searchHotelInfo.longitude &&
+      this.searchHotelInfo.check_in &&
+      this.searchHotelInfo.check_out &&
+      this.searchHotelInfo.occupancies) {
+      this.searchBarInfo.emit(this.searchHotelInfo);
+    }
   }
-
 }

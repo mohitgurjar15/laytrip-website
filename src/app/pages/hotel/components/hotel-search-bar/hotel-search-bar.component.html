@@ -1,14 +1,13 @@
 <section class="modify_search hotels">
   <div class="container">
     <div class="row">
-      <!-- <form class="" [formGroup]="hotelSearchForm" novalidate autocomplete="off" (ngSubmit)="searchHotel()"> -->
       <div class="hotels_search">
         <ul class="hotels-grid oneway">
           <li class="grid_box first">
             <div class="hotel_where">
               <div class="search_area">
                 <label>Destination</label>
-                <ng-select [loading]="loadingDestination" [selectOnTab]="true" [clearable]="false" [items]="data"
+                <ng-select [loading]="loading" [selectOnTab]="true" [clearable]="false" [items]="data"
                   bindLabel="title" bindValue="title" [(ngModel)]="this.defaultHotel.city" minTermLength="3"
                   notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}"
                   (clear)="onRemove($event,{key: 'fromSearch'})" (search)="onChangeSearch($event)" loadingText=""
@@ -47,19 +46,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="date_to">
-              <div class="search_area">
-                <label>check out</label>
-                <p-calendar inputId="basic" [(ngModel)]="checkOutDate" [ngModelOptions]="{standalone: true}"
-                  checkOutMinDate [minDate]="checkOutMinDate" [readonlyInput]="true"
-                  (onSelect)=checkOutDateUpdate($event) panelStyleClass="calender-responsive-view">
-                </p-calendar>
-                <div class="prev-next">
-                  <a (click)="dateChange('checkOut','previous')">Prev</a>
-                  <a (click)="dateChange('checkOut','next')">Next</a>
-                </div>
-              </div>
-            </div> -->
           </li>
           <li class="grid_box third">
             <div class="travellers">
@@ -68,10 +54,9 @@
           </li>
         </ul>
         <div class="serch_btn">
-          <button (click)="modifySearch()"><span>Modify Search</span></button>
+          <button (click)="modifyHotelSearch()"><span>Modify Search</span></button>
         </div>
       </div>
-      <!-- </form> -->
     </div>
   </div>
 </section>

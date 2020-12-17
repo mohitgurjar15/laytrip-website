@@ -71,7 +71,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     });
     this.checkInMinDate = new Date();
     this.checkOutMinDate = this.checkInDate;
-    this.checkOutDate.setDate(this.checkInDate.getDate() + 2);
+    this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
     this.rangeDates = [this.checkInDate, this.checkOutDate];
 
     this.searchHotelInfo =
@@ -122,13 +122,6 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchHotelInfo.check_in = this.checkInDate;
       this.searchHotelInfo.check_out = this.checkOutDate;
     }
-    console.log(this.searchHotelInfo);
-  }
-
-  checkOutDateUpdate(date) {
-    // this.checkOutDate = new Date(date);
-    // this.checkOutMinDate = new Date(date);
-    // this.searchHotelInfo.check_out = this.checkOutDate;
   }
 
   // dateChange(type, direction) {
