@@ -207,6 +207,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.filterHotels({});
   }
 
+  fliterByPartialPayment(event) {
+    this.minPartialPaymentPrice = event.value;
+    this.maxPartialPaymentPrice = event.highValue;
+    this.filterHotels({});
+  }
+
   /**
    * Filter by hotel ratings
    * @param event 

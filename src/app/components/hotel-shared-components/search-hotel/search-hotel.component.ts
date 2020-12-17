@@ -34,6 +34,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
     region: `${this.s3BucketUrl}assets/images/icon/region.png`,
     poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
   };
+  recentSearchInfo: any = {};
 
   constructor(
     private hotelService: HotelService,
@@ -54,6 +55,12 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         geo_codes: this.defaultSelected.geo_codes,
       });
     }
+    // if (localStorage.getItem('_hote')) {
+    //   console.log(JSON.parse(atob(localStorage.getItem('_hote'))));
+    //   this.recentSearchInfo = JSON.parse(atob(localStorage.getItem('_hote')));
+    // } else {
+    //   console.log('no');
+    // }
   }
 
   ngDocheck() {
@@ -85,9 +92,11 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         this.loading = false;
       }
     );
+
   }
 
   onChangeSearch(event) {
+    this.recentSearchInfo = {};
     if (event.term.length > 2) {
       this.searchHotel(event.term);
     }
@@ -103,6 +112,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
     this.defaultSelected = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
+      // localStorage.setItem('_hote', btoa(JSON.stringify(event)));
     }
   }
 

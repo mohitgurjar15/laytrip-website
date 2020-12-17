@@ -1,4 +1,4 @@
-<app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-hotel-search-bar>
+<app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getHotelSearchDataByModify($event)"></app-hotel-search-bar>
 
 <app-hotel-loader *ngIf="loading"></app-hotel-loader>
 <app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
@@ -7,7 +7,7 @@
 <app-hotel-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-hotel-error>
 
 <section class="search_result hotels" *ngIf="!loading && !isNotFound && errorMessage==''">
-  <div class="container">
+  <div class="container pl-0 pr-0">
     <div class="row">
       <div class="col-lg-3">
         <div class="sticky-top left_side_bar">
