@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 declare const google: any;
 import { google } from 'google-maps';
+import { collect } from 'collect.js';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -52,7 +53,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   defaultLng;
 
   subscriptions: Subscription[] = [];
-  geoCodes = [];
+  geoCodes;
   mapCanvas;
   myLatLng;
   map;
@@ -87,13 +88,20 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       });
     }
     this.hotelListArray = this.hotelDetails;
-    this.hotelListArray.forEach((i) => {
-      this.geoCodes.push(i.geocodes);
-    });
+    // this.geoCodes = collect(this.hotelDetails).pluck('geocodes').map((item: any) => {
+    //   return {
+    //     latitude: parseFloat(item.latitude),
+    //     longitude: parseFloat(item.longitude)
+    //   }
+    // });
+    // this.hotelListArray.forEach((i) => {
+    //   this.geoCodes.push(i.geocodes);
+    // });
     this.userInfo = getLoginUserInfo();
     // this.totalLaycredit();
-    this.defaultLat = this.route.snapshot.queryParams['latitude'];
-    this.defaultLng = this.route.snapshot.queryParams['longitude'];
+    this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
+    this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
+    console.log(this.geoCodes, this.defaultLat, this.defaultLng);
   }
 
   ngAfterContentChecked() {
@@ -105,70 +113,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   differentView(view) {
-    if (view === 'listView') {
-      this.isMapView = false;
-    } else {
-      this.isMapView = true;
-      this.mapCanvas = document.getElementById('map');
-      this.myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
-      let mapOptions = {
-        zoom: 12,
-        center: this.myLatLng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        streetViewControl: false,
-        scrollwheel: true,
-      };
-      this.map = new google.maps.Map(this.mapCanvas, mapOptions);
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(this.myLatLng),
-        map: this.map,
-        // title: i.name,
-        animation: google.maps.Animation.DROP,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-      });
-      marker.setMap(this.map);
-      // this.initMap();
-    }
-  }
-
-  initMap() {
-    // this.mapCanvas = document.getElementById('map');
-    this.myLatLng = { lat: parseFloat(this.defaultLat), lng: parseFloat(this.defaultLng) };
-    let mapOptions = {
-      zoom: 12,
-      center: this.myLatLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      mapTypeControl: false,
-      streetViewControl: false,
-      scrollwheel: true,
-    };
-    var map = new google.maps.Map(this.mapCanvas, mapOptions);
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(this.myLatLng),
-      map: map,
-      // title: i.name,
-      animation: google.maps.Animation.DROP,
-      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-    });
-    marker.setMap(map);
-    var marker;
-    this.geoCodes.forEach((i) => {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(parseFloat(i.latitude), parseFloat(i.longitude)),
-        map: map,
-        title: i.name,
-        animation: google.maps.Animation.DROP,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-      });
-      marker.setMap(map);
-      let infowindow = new google.maps.InfoWindow({
-        content: i.name
-      });
-      marker.addListener("click", () => {
-        infowindow.open(map, marker);
-      });
-    });
+    this.isMapView = (view !== 'listView');
   }
 
   showDetails(index, flag = null) {
