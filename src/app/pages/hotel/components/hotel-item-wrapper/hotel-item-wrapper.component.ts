@@ -64,6 +64,13 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   totalLaycreditPoints: number = 0;
   showFareDetails: number = 0;
   hotelInfo;
+  amenitiesObject = {
+    breakfast: `${this.s3BucketUrl}assets/images/hotels/breakfast.svg`,
+    wifi: `${this.s3BucketUrl}assets/images/hotels/wifi.svg`,
+    no_smoking: `${this.s3BucketUrl}assets/images/hotels/no_smoking.svg`,
+    tv: `${this.s3BucketUrl}assets/images/hotels/tv.svg`,
+    ac: `${this.s3BucketUrl}assets/images/hotels/ac.svg`,
+  }
 
   constructor(
     private flightService: FlightService,
@@ -101,7 +108,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     // this.totalLaycredit();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
     this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
-    console.log(this.geoCodes, this.defaultLat, this.defaultLng);
   }
 
   ngAfterContentChecked() {

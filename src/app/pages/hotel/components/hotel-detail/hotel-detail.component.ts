@@ -69,6 +69,7 @@ export class HotelDetailComponent implements OnInit {
           country_name: res.data.address.country_name,
           rating: res.data.rating,
           review_rating: res.data.review_rating,
+          description: res.data.description
         };
         if (res.data.images) {
           res.data.images.forEach(imageUrl => {

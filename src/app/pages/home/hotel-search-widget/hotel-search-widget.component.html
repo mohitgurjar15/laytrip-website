@@ -22,7 +22,7 @@
           <div class="date_form"
             [ngClass]="{'hotel-error': hotelSearchFormSubmitted && hotelSearchForm.controls.fromDestination.errors && hotelSearchForm.controls.fromDestination.errors.required==true}">
             <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-              <label>Check In</label>
+              <label>Check In-Check Out</label>
               <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
                 [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
                 panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
