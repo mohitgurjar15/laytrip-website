@@ -38,6 +38,9 @@ import { GuestInfoComponent } from './hotel-shared-components/guest-info/guest-i
 import { SearchHotelComponent } from './hotel-shared-components/search-hotel/search-hotel.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+
+
 
 @NgModule({
   declarations: [
@@ -82,7 +85,8 @@ import { VacationSearchComponent } from './rental-shared-components/vacation-sea
     CalendarModule,
     LottieAnimationViewModule.forRoot(),
     TextMaskModule,
-    TranslateModule
+    TranslateModule,
+    NgScrollbarModule
   ],
   exports: [
     SearchAirportComponent,
@@ -110,7 +114,8 @@ import { VacationSearchComponent } from './rental-shared-components/vacation-sea
     SearchHotelComponent,
     RentalInfoComponent,
     TranslateModule,
-    VacationSearchComponent
+    VacationSearchComponent,
+    NgScrollbarModule
   ],
   providers: [DatePipe],
 
