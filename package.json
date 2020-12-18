@@ -13,7 +13,7 @@
         "compile:server": "webpack --config webpack.server.config.js --progress --colors",
         "serve:ssr": "node dist/server",
         "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-        "build:client-and-server-bundles": "ng build --prod && ng run laytrip-website:server:production"
+        "build:client-and-server-bundles": "ng build --prod --outputHashing=all && ng run laytrip-website:server:production"
     },
     "private": true,
     "dependencies": {
@@ -55,6 +55,7 @@
         "ngx-cookie": "^5.0.0",
         "ngx-countdown": "^3.1.0",
         "ngx-gallery": "^5.10.0",
+        "ngx-scrollbar": "4.2.0",
         "ngx-toastr": "^10.1.0",
         "node-sass": "^4.0.0",
         "popper.js": "^1.16.1",

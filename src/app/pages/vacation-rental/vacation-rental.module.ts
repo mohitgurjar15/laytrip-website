@@ -14,6 +14,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { Ng5SliderModule } from 'ng5-slider';
 import { VacationNotFoundComponent } from './components/vacation-not-found/vacation-not-found.component';
 import { ComponentsModule } from '../../components/components.module';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 @NgModule({
   declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent],
@@ -25,7 +26,12 @@ import { ComponentsModule } from '../../components/components.module';
     ReactiveFormsModule,
     NgSelectModule,
     Ng5SliderModule,
-    ComponentsModule
+    ComponentsModule,
+    AgmCoreModule.forRoot({
+      // apiKey: 'AIzaSyB63siq6uISCHD-x3MkitGQogoz8n7jy7M',
+      apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
+      libraries: ['places']
+    }),
   ],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
