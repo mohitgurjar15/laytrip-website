@@ -581,6 +581,7 @@ ngb-datepicker{
                                             margin: 2px;
                                             width: 48%;
                                             display: none;
+                                            
                                             &.open {
                                                 display: block;
                                             }
@@ -592,6 +593,17 @@ ngb-datepicker{
                                                 border: none;
                                                 width: 100%;
                                                 font-size: 12px;
+                                                -webkit-appearance: none;
+                                                -moz-appearance: none;
+                                                appearance: none;
+                                                &::after{
+                                                    content: '';
+                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                            center right 15px no-repeat !important;
+                                                    height: 34px;
+                                                    padding: 15px 0px 0px 8px;
+                                                    position: absolute;
+                                                }
                                             }
                                         }
                                     }
@@ -1176,6 +1188,17 @@ ngb-datepicker{
                                                 border: none;
                                                 width: 100%;
                                                 font-size: 12px;
+                                                -webkit-appearance: none;
+                                                -moz-appearance: none;
+                                                appearance: none;
+                                                &::after{
+                                                    content: '';
+                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                center right 15px no-repeat !important;
+                                                        height: 34px;
+                                                        padding: 15px 0px 0px 8px;
+                                                        position: absolute;
+                                                }
                                             }
                                         }
                                     }
@@ -1845,6 +1868,7 @@ ngb-datepicker{
                                                 margin: 2px;
                                                 width: 48%;
                                                 display: none;
+                                                
                                                 &.open {
                                                     display: block;
                                                 }
@@ -1856,6 +1880,17 @@ ngb-datepicker{
                                                     border: none;
                                                     width: 100%;
                                                     font-size: 12px;
+                                                    -webkit-appearance: none;
+                                                    -moz-appearance: none;
+                                                    appearance: none;
+                                                    &::after{
+                                                        content: '';
+                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                center right 15px no-repeat !important;
+                                                        height: 34px;
+                                                        padding: 15px 0px 0px 8px;
+                                                        position: absolute;
+                                                    }
                                                 }
                                             }
                                         }
@@ -4805,6 +4840,7 @@ ngb-datepicker{
                                                 margin: 2px;
                                                 width: 48%;
                                                 display: none;
+                                                
                                                 &.open {
                                                     display: block;
                                                 }
@@ -4816,6 +4852,18 @@ ngb-datepicker{
                                                     border: none;
                                                     width: 100%;
                                                     font-size: 12px;
+                                                    -webkit-appearance: none;
+                                                    -moz-appearance: none;
+                                                    appearance: none;
+                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                                    center right 15px no-repeat !important;
+                                                    &::after{
+                                                        content: '';
+                                                       
+                                                        height: 34px;
+                                                        padding: 15px 0px 0px 8px;
+                                                        position: absolute;
+                                                    }
                                                 }
                                             }
                                         }
