@@ -55,9 +55,9 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         geo_codes: this.defaultSelected.geo_codes,
       });
     }
-    // if (localStorage.getItem('_hote')) {
-    //   console.log(JSON.parse(atob(localStorage.getItem('_hote'))));
-    //   this.recentSearchInfo = JSON.parse(atob(localStorage.getItem('_hote')));
+    // if (localStorage.getItem('_hotel_recent')) {
+    //   console.log(JSON.parse(atob(localStorage.getItem('_hotel_recent'))));
+    //   this.recentSearchInfo = JSON.parse(atob(localStorage.getItem('_hotel_recent')));
     // } else {
     //   console.log('no');
     // }
@@ -112,7 +112,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
     this.defaultSelected = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
-      // localStorage.setItem('_hote', btoa(JSON.stringify(event)));
+      // localStorage.setItem('_hotel_recent', btoa(JSON.stringify(event)));
     }
   }
 
