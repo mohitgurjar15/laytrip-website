@@ -20,11 +20,6 @@ export class VacationSearchWidgetComponent implements OnInit {
  modules: Module[];
  moduleList: any = {};
 
- locale = {
-    format: 'MM/DD/YYYY',
-    displayFormat: 'MM/DD/YYYY'
-  };
-
   rentalCheckInMinDate;
   rentalCheckoutMinDate; 
   data = [];
@@ -37,7 +32,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     check_out_date:new Date(moment().add(7, 'days').format("MM/DD/YYYY")),
     number_and_children_ages:[],
-    adult_count:1,
+    adult_count:2,
     child:'',
   };
   defaultCity:'Barcelona';
@@ -49,7 +44,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     display_name: 'Wonderful Apartment in Barcelona (4 guests)',
     type: 'city',
   };
-  totalPerson: number = 1;
+  totalPerson: number = 2;
   rentalSearchFormSubmitted: boolean = false;
   error_message='';
   showCommingSoon:boolean=false;
@@ -58,8 +53,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
-    private rentalService: VacationRentalService,
-    private renderer: Renderer2) { 
+    private rentalService: VacationRentalService) { 
 
     this.rentalSearchForm = this.fb.group({   
       fromDestination: ['', [Validators.required]],
@@ -187,6 +181,7 @@ export class VacationSearchWidgetComponent implements OnInit {
       this.rentalForm.country = event.value.country;
       this.rentalForm.id = event.value.id;
       this.rentalForm.display_name = event.value.title;
+      this.rentalForm.type = event.value.type;
     }
   }
 
