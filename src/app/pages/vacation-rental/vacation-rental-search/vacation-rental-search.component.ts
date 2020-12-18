@@ -126,6 +126,7 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
   filterRental(event) {
     console.log(event);
     this.rentalDetails = event;
+    console.log(this.rentalDetails);
   }
 
   resetFilter() {
