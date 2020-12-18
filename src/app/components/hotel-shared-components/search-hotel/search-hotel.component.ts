@@ -35,6 +35,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
     poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
   };
   recentSearchInfo: any = {};
+  isShowRecentSearch = true;
 
   constructor(
     private hotelService: HotelService,
@@ -55,12 +56,12 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         geo_codes: this.defaultSelected.geo_codes,
       });
     }
-    // if (localStorage.getItem('_hotel_recent')) {
-    //   console.log(JSON.parse(atob(localStorage.getItem('_hotel_recent'))));
-    //   this.recentSearchInfo = JSON.parse(atob(localStorage.getItem('_hotel_recent')));
-    // } else {
-    //   console.log('no');
-    // }
+    if (localStorage.getItem('_hotel_recent')) {
+      console.log(JSON.parse(atob(localStorage.getItem('_hotel_recent'))));
+      this.data = [JSON.parse(atob(localStorage.getItem('_hotel_recent')))];
+    } else {
+      console.log('no');
+    }
   }
 
   ngDocheck() {
@@ -73,6 +74,8 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
   searchHotel(searchItem) {
     this.loading = true;
     const searchedData = { term: searchItem };
+    this.data = [];
+    this.isShowRecentSearch = false;
     this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       if (response && response.data && response.data.length) {
         this.data = response.data.map(res => {
@@ -112,7 +115,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
     this.defaultSelected = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
-      // localStorage.setItem('_hotel_recent', btoa(JSON.stringify(event)));
+      localStorage.setItem('_hotel_recent', btoa(JSON.stringify(event)));
     }
   }
 

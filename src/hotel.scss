@@ -79,6 +79,11 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     overflow: hidden;
+                    .sub-parent{
+                        font-size: 20px;
+                        color: #000;
+                        font-weight: 600;
+                    }
                 }
             }
             .ng-clear-wrapper {
@@ -348,7 +353,7 @@ ngb-datepicker {
                             border: none;
                             height: 35px;
                             margin-bottom: 1px;
-                            font-size: 14px;
+                            font-size: 20px;
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
@@ -581,6 +586,7 @@ ngb-datepicker {
                                             margin: 2px;
                                             width: 48%;
                                             display: none;
+                                            
                                             &.open {
                                                 display: block;
                                             }
@@ -592,6 +598,17 @@ ngb-datepicker {
                                                 border: none;
                                                 width: 100%;
                                                 font-size: 12px;
+                                                -webkit-appearance: none;
+                                                -moz-appearance: none;
+                                                appearance: none;
+                                                &::after{
+                                                    content: '';
+                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                            center right 15px no-repeat !important;
+                                                    height: 34px;
+                                                    padding: 15px 0px 0px 8px;
+                                                    position: absolute;
+                                                }
                                             }
                                         }
                                     }
@@ -649,6 +666,7 @@ ngb-datepicker {
                                                     color: $text-darkblue;
                                                     border: none;
                                                     text-align: center;
+                                                    padding: 0;
                                                 }
 
                                                 .qtyplus {
@@ -932,7 +950,7 @@ ngb-datepicker {
                             border: none;
                             height: 35px;
                             margin-bottom: 1px;
-                            font-size: 14px;
+                            font-size: 20px;
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
@@ -1176,6 +1194,17 @@ ngb-datepicker {
                                                 border: none;
                                                 width: 100%;
                                                 font-size: 12px;
+                                                -webkit-appearance: none;
+                                                -moz-appearance: none;
+                                                appearance: none;
+                                                &::after{
+                                                    content: '';
+                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                center right 15px no-repeat !important;
+                                                        height: 34px;
+                                                        padding: 15px 0px 0px 8px;
+                                                        position: absolute;
+                                                }
                                             }
                                         }
                                     }
@@ -1233,6 +1262,7 @@ ngb-datepicker {
                                                     color: $text-darkblue;
                                                     border: none;
                                                     text-align: center;
+                                                    padding: 0;
                                                 }
 
                                                 .qtyplus {
@@ -1423,6 +1453,9 @@ ngb-datepicker {
 
 // start Search Modify section
 .hotels {
+    &.search_result {
+        padding: 30px 0 40px;
+    }
     &.modify_search {
         width: 100%;
         background: $text-darkblue;
@@ -1477,7 +1510,7 @@ ngb-datepicker {
                             border: none;
                             height: 25px;
                             margin-bottom: 0;
-                            font-size: 16px;
+                            font-size: 20px;
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
@@ -1844,6 +1877,7 @@ ngb-datepicker {
                                                 margin: 2px;
                                                 width: 48%;
                                                 display: none;
+                                                
                                                 &.open {
                                                     display: block;
                                                 }
@@ -1855,6 +1889,17 @@ ngb-datepicker {
                                                     border: none;
                                                     width: 100%;
                                                     font-size: 12px;
+                                                    -webkit-appearance: none;
+                                                    -moz-appearance: none;
+                                                    appearance: none;
+                                                    &::after{
+                                                        content: '';
+                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                center right 15px no-repeat !important;
+                                                        height: 34px;
+                                                        padding: 15px 0px 0px 8px;
+                                                        position: absolute;
+                                                    }
                                                 }
                                             }
                                         }
@@ -1912,6 +1957,7 @@ ngb-datepicker {
                                                         color: $text-darkblue;
                                                         border: none;
                                                         text-align: center;
+                                                        padding: 0;
                                                     }
 
                                                     .qtyplus {
@@ -2074,6 +2120,7 @@ ngb-datepicker {
                                         color: $text-darkblue;
                                         border: none;
                                         text-align: center;
+                                        padding: 0;
                                     }
 
                                     .qtyplus {
@@ -2466,15 +2513,18 @@ ngb-datepicker {
                 background: $background-white;
                 border-radius: 3px;
                 max-height: calc(100vh - 334px);
-                overflow-y: auto;
-                overflow-x: hidden;
+                // overflow-y: auto;
+                // overflow-x: hidden;
 
                 .cmn_block {
                     padding: 20px 15px;
                     border-bottom: 1px solid $box-border-color;
 
                     &:last-child {
-                        border-bottom: none;
+                        border: 1px solid #E0E2E5;
+                        background:  $background-white;
+                        border-radius: 3px;
+                        border-top: none;
                     }
 
                     .block_price_radio {
@@ -2896,16 +2946,68 @@ ngb-datepicker {
     .view_btn_wrapper {
         width: 100%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         margin-bottom: 18px;
+        .block_result_found {
+            padding: 20px;
+            background: $background-white;
+            border: 1px solid $box-border-color;
+            border-radius: 8px;
+            margin:0;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+
+            // &:after {
+            //     width: 0;
+            //     height: 0;
+            //     border-left: 10px solid transparent;
+            //     border-right: 10px solid transparent;
+            //     border-top: 10px solid $box-border-color;
+            //     position: absolute;
+            //     bottom: -15px;
+            //     left: 50%;
+            //     transform: translate(-50%, -50%);
+            //     content: "";
+            // }
+
+            // &:before {
+            //     width: 0;
+            //     height: 0;
+            //     border-left: 9px solid transparent;
+            //     border-right: 9px solid transparent;
+            //     border-top: 9px solid $background-white;
+            //     position: absolute;
+            //     bottom: -12px;
+            //     left: 50%;
+            //     transform: translate(-50%, -50%);
+            //     content: "";
+            //     z-index: 2;
+            // }
+
+            p {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-grey;
+                margin: 0 0 2px;
+            }
+
+            span {
+                font-size: 20px;
+                font-weight: 600;
+                color: $text-black;
+            }
+        }
 
         button {
             background-color: $background-white;
-            padding: 7px 12px;
+            padding: 0 25px;
             border: 1px solid $box-border-color;
             border-radius: 8px;
             color: $text-grey;
-            font-size: 12px;
+            font-size: 14px;
+            height: 68px;
             img {
                 margin-right: 5px;
             }
@@ -2985,14 +3087,15 @@ ngb-datepicker {
                                     }
                                     .hotel_list_img_wrp {
                                         position: relative;
-                                        background-size: cover;
-                                        position: relative;
-                                        background-position: center center;
+                                        // background-size: cover;
+                                        // background-position: center center;
                                         width: 100%;
                                         height: 170px;
                                         img {
                                             max-width: 100%;
                                             height: 100%;
+                                            object-fit: cover;
+                                            object-position: center;
                                         }
                                         .fav_sections {
                                             position: absolute;
@@ -4122,14 +4225,15 @@ ngb-datepicker {
                             }
                             .hotel_list_img_wrp {
                                 position: relative;
-                                background-size: cover;
-                                position: relative;
-                                background-position: center center;
+                                // background-size: cover;
+                                // background-position: center center;
                                 width: 100%;
                                 height: 170px;
                                 img {
                                     max-width: 100%;
                                     height: 100%;
+                                    object-fit: cover;
+                                    object-position: center;
                                 }
                                 .fav_sections {
                                     position: absolute;
@@ -4164,6 +4268,10 @@ ngb-datepicker {
                                     }
                                     .stars_rating {
                                         display: flex;
+                                        img{
+                                            object-fit: contain;
+                                            max-width: 24px;
+                                        }
                                     }
                                 }
                             }
@@ -4366,6 +4474,9 @@ ngb-datepicker {
 
 // start Search Modify section
 .home_rental {
+    &.search_result {
+        padding: 30px 0 40px;
+    }
     &.modify_search {
         width: 100%;
         background: $text-darkblue;
@@ -4420,7 +4531,7 @@ ngb-datepicker {
                             border: none;
                             height: 25px;
                             margin-bottom: 0;
-                            font-size: 16px;
+                            font-size: 20px;
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
@@ -4802,6 +4913,7 @@ ngb-datepicker {
                                                 margin: 2px;
                                                 width: 48%;
                                                 display: none;
+                                                
                                                 &.open {
                                                     display: block;
                                                 }
@@ -4813,6 +4925,18 @@ ngb-datepicker {
                                                     border: none;
                                                     width: 100%;
                                                     font-size: 12px;
+                                                    -webkit-appearance: none;
+                                                    -moz-appearance: none;
+                                                    appearance: none;
+                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                                    center right 15px no-repeat !important;
+                                                    &::after{
+                                                        content: '';
+                                                       
+                                                        height: 34px;
+                                                        padding: 15px 0px 0px 8px;
+                                                        position: absolute;
+                                                    }
                                                 }
                                             }
                                         }
@@ -4870,6 +4994,7 @@ ngb-datepicker {
                                                         color: $text-darkblue;
                                                         border: none;
                                                         text-align: center;
+                                                        padding: 0;
                                                     }
 
                                                     .qtyplus {
@@ -5264,15 +5389,18 @@ ngb-datepicker {
                 background: $background-white;
                 border-radius: 3px;
                 max-height: calc(100vh - 334px);
-                overflow-y: auto;
-                overflow-x: hidden;
+                // overflow-y: auto;
+                // overflow-x: hidden;
 
                 .cmn_block {
                     padding: 20px 15px;
                     border-bottom: 1px solid $box-border-color;
 
                     &:last-child {
-                        border-bottom: none;
+                        border: 1px solid #E0E2E5;
+                        background:  $background-white;
+                        border-radius: 3px;
+                        border-top: none;
                     }
 
                     .block_price_radio {
@@ -5670,16 +5798,40 @@ ngb-datepicker {
     .view_btn_wrapper {
         width: 100%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         margin-bottom: 18px;
+
+        .block_result_found {
+            padding: 20px;
+            background: $background-white;
+            border: 1px solid $box-border-color;
+            border-radius: 8px;
+            margin: 0;
+            text-align: center;
+            position: relative;
+
+            p {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-grey;
+                margin: 0 0 2px;
+            }
+
+            span {
+                font-size: 20px;
+                font-weight: 600;
+                color: $text-black;
+            }
+        }
 
         button {
             background-color: $background-white;
-            padding: 7px 12px;
+            padding: 0 25px;
             border: 1px solid $box-border-color;
             border-radius: 8px;
             color: $text-grey;
-            font-size: 12px;
+            font-size: 14px;
+            height: 68px;
             img {
                 margin-right: 5px;
             }
@@ -6852,7 +7004,7 @@ ngb-datepicker {
                 }
             }
         }
-        &.hotel_map_listings {
+        &.home_map_listings {
             .search_block {
                 background-color: $background-white;
                 box-shadow: 1px 3px 4px #ccc;
@@ -6881,16 +7033,17 @@ ngb-datepicker {
                                 border-right: none;
                                 padding: 0;
                             }
-                            .hotel_list_img_wrp {
+                            .home_list_img_wrp {
                                 position: relative;
-                                background-size: cover;
-                                position: relative;
-                                background-position: center center;
+                                // background-size: cover;
+                                // background-position: center center;
                                 width: 100%;
                                 height: 170px;
                                 img {
                                     max-width: 100%;
                                     height: 100%;
+                                    object-fit: cover;
+                                    object-position: center;
                                 }
                                 .fav_sections {
                                     position: absolute;
@@ -6925,6 +7078,10 @@ ngb-datepicker {
                                     }
                                     .stars_rating {
                                         display: flex;
+                                        img{
+                                            object-fit: contain;
+                                            max-width: 24px;
+                                        }
                                     }
                                 }
                             }
@@ -7122,6 +7279,7 @@ ngb-datepicker {
             }
         }
     }
+
 }
 // Close Search Modify section
 

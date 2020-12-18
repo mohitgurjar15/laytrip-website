@@ -1,12 +1,21 @@
 <div class="view_btn_wrapper">
-    <button class="list_v_btn" (click)="differentView('listView')" [hidden]="!isMapView">
-        <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
-        List view
-    </button>
-    <button class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
-        <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view">
-        Map view
-    </button>
+    <div>
+        <div class="block_result_found">
+            <p>{{hotelDetails.length}} Hotels found from</p>
+            <!-- <span>{{hotelDetails[0].address.city_name}},{{hotelDetails[0].address.country_name}}</span> -->
+            <span>{{locationName}}</span>
+          </div>
+    </div>
+    <div>
+        <button class="list_v_btn" (click)="differentView('listView')" [hidden]="!isMapView">
+            <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
+            List view
+        </button>
+        <button class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
+            <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view">
+            Map view
+        </button>
+    </div>
 </div>
 
 <div [hidden]="isMapView" [@listAnimation]="hotelListArray.length" (@listAnimation.start)="logAnimation($event)"
@@ -21,11 +30,11 @@
                             <div class="block_inner">
                                 <div class="col-md-4 col-lg-4 px-0">
                                     <div class="block_im">
-                                        <div class="hotel_list_img_wrp" style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
+                                        <div class="hotel_list_img_wrp" >
                                             <span class="fav_sections">
                                                 <a href="javascript:void(0);" class="heart_blank"></a>
                                             </span>
-                                            <!-- <img src="{{item?.thumbnail}}" alt="Hotel image"> -->
+                                            <img src="{{item?.thumbnail}}" alt="Hotel image">
                                         </div>
                                     </div>
                                 </div>
@@ -191,6 +200,8 @@
                 </agm-map>
             </div>
             <div class="col-lg-4 pl-0">
+                <ng-scrollbar #scrollable [invertX]="invertX" [invertY]="invertY" [trackX]="true" [compact]="compact" [shown]="shown"
+  [disableOnBreakpoints]="false"> 
                 <div class="search_block" *ngFor="let item of hotelListArray">
                     <div class="listing_block">
                         <div class="block_main">
@@ -198,7 +209,7 @@
                                 <div class="block_inner">
                                     <div class="">
                                         <div class="block_im">
-                                            <div class="hotel_list_img_wrp" style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
+                                            <div class="hotel_list_img_wrp" style="background-image: url('{{item?.thumbnail}}');">
                                                 <span class="fav_sections">
                                                     <a href="javascript:void(0);" class="heart_blank"></a>
                                                 </span>
@@ -256,6 +267,7 @@
                         </div>
                     </div>
                 </div>
+            </ng-scrollbar>
             </div>
         </div>
     </div>
