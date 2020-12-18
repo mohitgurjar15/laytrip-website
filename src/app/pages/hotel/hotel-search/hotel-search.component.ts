@@ -1,13 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-declare var $: any;
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
-import { Location } from '@angular/common';
-import * as moment from 'moment';
-import { CommonFunction } from '../../../_helpers/common-function';
 import { HotelService } from '../../../services/hotel.service';
+import { CommonFunction } from '../../../_helpers/common-function';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-hotel-search',
@@ -25,21 +22,32 @@ export class HotelSearchComponent implements OnInit {
   hotelDetailsMain;
   isResetFilter: string = 'no';
   subscriptions: Subscription[] = [];
+  searchedValue = [];
+  roomsGroup = [
+    {
+      adults: 2,
+      child: [],
+      children: []
+    }
+  ];
 
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
+    public commonFunction: CommonFunction,
+    public router: Router,
   ) {
   }
-  
+
   ngOnInit() {
     window.scroll(0, 0);
     setTimeout(() => {
       document.getElementById('login_btn').style.background = '#FF00BC';
     }, 1000);
+    this.searchedValue.push({ key: 'guest', value: this.roomsGroup });
 
     let payload: any = {};
-    const info = JSON.parse(localStorage.getItem('_hote'));
+    const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
     this.route.queryParams.forEach(params => {
       payload = {
         check_in: params.check_in,
@@ -47,14 +55,10 @@ export class HotelSearchComponent implements OnInit {
         latitude: params.latitude,
         longitude: params.longitude,
         occupancies: [],
-        filter: true
+        filter: true,
       };
-      info.forEach(element => {
-        if (element && element.key === 'guest') {
-          element.value.forEach(item => {
-            payload.occupancies.push({ adults: item.adults, children: item.children });
-          });
-        }
+      info.forEach(item => {
+        payload.occupancies.push({ adults: item.adults, children: item.children });
       });
     });
     this.getHotelSearchData(payload);
@@ -74,13 +78,8 @@ export class HotelSearchComponent implements OnInit {
       } else {
         this.isNotFound = true;
       }
-
       this.loading = false;
     });
-  }
-
-  getSearchItem(event) {
-    console.log(event);
   }
 
   sortHotels(event) {
@@ -151,6 +150,22 @@ export class HotelSearchComponent implements OnInit {
 
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
+  }
+
+  getHotelSearchDataByModify(event) {
+    let urlData = this.commonFunction.decodeUrl(this.router.url);
+    let locations = {city: event.city, country: event.country};
+    let queryParams: any = {};
+    queryParams.check_in = moment(event.check_in).format('YYYY-MM-DD');
+    queryParams.check_out = moment(event.check_out).format('YYYY-MM-DD');
+    queryParams.latitude = parseFloat(event.latitude);
+    queryParams.longitude = parseFloat(event.longitude);
+    queryParams.itenery = btoa(JSON.stringify(event.occupancies));
+    queryParams.location = btoa(JSON.stringify(locations)); 
+    console.log(queryParams);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
+    });
   }
 
   ngOnDestroy(): void {

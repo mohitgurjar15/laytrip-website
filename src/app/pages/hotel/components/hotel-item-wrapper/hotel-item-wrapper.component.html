@@ -58,24 +58,8 @@
                                                     <div class="right_bar">
                                                         <div class="ammin_listing">
                                                             <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/wifi_icon.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/cup_icon.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/tv_icon.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/nosmoking.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/ac.svg"
-                                                                    alt="">
+                                                                <img *ngFor="let icon of item.amenities.fixed"
+                                                                    [src]="amenitiesObject[icon]" alt="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -115,7 +99,7 @@
                             </div>
                         </div> <a class="book_btn" [routerLink]="['/hotel/detail/',item.id]">Select</a>
                         <div class="show_detail">
-                            <a href="javascript:void(0);" class="show_more_detail"> <img
+                            <a (click)="showDetails(blockIndex,'true')" class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment
                                 plan details</a>
                         </div>
@@ -130,28 +114,31 @@
                     <div class="tab_detail fare_detail_cnt">
                         <div class="triangle_right"></div>
                         <ul>
-                            <!-- <li *ngFor="let hotel of hotelInfo">
-                                <p *ngIf="hotel.adults">
-                                    Base Fare ({{hotel.adults}} Adult)
-                                </p>
-                                <span>{{ currency?.symbol
-                                    }}{{item?.selling?.total}}</span>
-                                <p *ngIf="hotel.children && hotel.children.length">
-                                    Base Fare ({{hotel.children.length}} Child)
-                                </p>
-                                <span>{{ currency?.symbol
-                                    }}{{item?.selling?.total}}</span>
-                            </li> -->
-                            <li>Total Fare (traveler) <span>{{ currency?.symbol
+                            <li>Base Fare <span>{{ currency?.symbol
+                                    }}{{item?.selling?.sub_total}}</span></li>
+                            <li>Taxes and Fees <span>{{ currency?.symbol
+                                    }}{{item?.selling?.taxes}}</span></li>
+                            <li>Total Fare <span>{{ currency?.symbol
                                     }}{{item?.selling?.total}}</span></li>
-                            <!-- <li>Taxes and Fees (1 Adult) <span>$13</span></li> -->
                         </ul>
-
-                        <p><span>Note:</span> It is a long established fact that a reader will be distracted by the
-                            readable content of a page when looking at its layout. The point of using Lorem Ipsum is
-                            that it has a more-or-less normal distribution of letters, as opposed to using ‘Content
-                            here, content here’, making it look like readable English.</p>
                         <div class="triangle_left"></div>
+                        <ul *ngIf="item.instalment_details.instalment_available">
+                            <li class="down_payment">
+                                {{'down_payment' | translate}}
+                                <span class="down_value">{{ currency?.symbol }}{{ item?.start_price | number :
+                                    '1.2-2'}}</span>
+                            </li>
+                            <ng-container
+                                *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
+                                <li *ngIf="i>0">
+                                    <div class="detail"> {{i}} {{'installment' | translate}}
+                                        <p>{{
+                                            commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}
+                                        </p>
+                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                </li>
+                            </ng-container>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -191,7 +178,17 @@
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-8" style="height: 200px; width: 200px;">
-                <div id="map"></div>
+                <agm-map [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10">
+                    <agm-marker-cluster
+                        imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+                        <agm-marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
+                            [longitude]="hotel.geocodes.longitude">
+                            <agm-info-window>
+                                Demo
+                            </agm-info-window>
+                        </agm-marker>
+                    </agm-marker-cluster>
+                </agm-map>
             </div>
             <div class="col-lg-4 pl-0">
                 <div class="search_block" *ngFor="let item of hotelListArray">
@@ -236,16 +233,8 @@
                                                         </div>
                                                         <div class="ammin_listing">
                                                             <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/wifi_icon.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/cup_icon.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="amminities_list">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/tv_icon.svg"
-                                                                    alt="">
+                                                                <img *ngFor="let icon of item.amenities.fixed"
+                                                                    [src]="amenitiesObject[icon]" alt="">
                                                             </div>
                                                         </div>
                                                     </div>

@@ -1,6 +1,5 @@
-<app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-hotel-search-bar>
 <section class="search_result hotels">
-  <div class="container pl-0 pr-0">
+  <div class="container">
     <div class="row">
       <div class="col-lg-9">
         <div class="hotel_detail_slider">
@@ -10,7 +9,7 @@
 
             <div class="slider-overlay">
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-6">
                   <div class="hotel_name">
                     <h4>
                       {{hotelDetails?.name}}, {{hotelDetails?.state_code}}
@@ -21,7 +20,7 @@
                   </div>
                   <div id="border"></div>
                 </div>
-                <div class="col-md-4 room-rating">
+                <div class="col-md-6 room-rating">
                   <div class="room_rate_box">
                     <span class="rate-box">
                       {{hotelDetails?.review_rating | number : '1.1-1'}}
@@ -48,7 +47,7 @@
                 aria-selected="false">Amenities</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
                 aria-selected="false">Reviews</a>
             </li>
             <li class="nav-item">
@@ -57,126 +56,55 @@
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <h4>Lorem Ipsum dolar sit ament</h4>
+            <p *ngIf="loading">Loading..</p>
+            <div [hidden]="loading" class="tab-pane fade active show" id="home" role="tabpanel"
+              aria-labelledby="home-tab">
+              <h4>Description</h4>
               <p>
+                {{hotelDetails?.description}}
+              </p>
+              <!-- <h4>Guest policy</h4> -->
+              <!-- <p>
                 It is a long established fact that a reader will be distracted by the readable content of a page
                 when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
                 distribution of lettersas opposed to using ‘Content here, content here’, making it look like readable
                 English.It is a long established fact that a reader will be distracted by the readable content of a
                 page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
                 normal distribution of lettersas opposed to using ‘Content here, content here’, making it look like
-              </p>
-              <h4>Guest policy</h4>
-              <p>
-                It is a long established fact that a reader will be distracted by the readable content of a page
-                when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                distribution of lettersas opposed to using ‘Content here, content here’, making it look like readable
-                English.It is a long established fact that a reader will be distracted by the readable content of a
-                page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of lettersas opposed to using ‘Content here, content here’, making it look like
-              </p>
-              <h4>Hotel important information</h4>
-              <p>
+              </p> -->
+              <!-- <h4>Hotel important information</h4> -->
+              <!-- <p>
                 It is a long established fact that a reader will be distracted by the readable content of a page
                 when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
                 distribution of lettersas opposed to using ‘Content here, content here.
-              </p>
-
+              </p> -->
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <h4>Hotel important information</h4>
-              <p>
+              <h4>Amenities</h4>
+              <!-- <p>
                 It is a long established fact that a reader will be distracted by the readable content of a page
                 when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
                 distribution of lettersas opposed to using ‘Content here, content here.
-              </p>
-              <div class="row amenities_listin_tab">
-                <div class="col-md-4">
-                  <div class="aminities_detailing">
-                    <i class="fa fa-wifi fa-lg" aria-hidden="true"></i>
-                    <span class="pl-3">Free WIFI </span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="aminities_detailing">
-                    <i class="fa fa-television fa-lg" aria-hidden="true"></i>
-                    <span class="pl-3">Flat Screen TV</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="aminities_detailing">
-                    <i class="fa fa-snowflake-o fa-lg" aria-hidden="true"></i>
-                    <span class="pl-3">Air conditioner</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="aminities_detailing">
-                    <i class="fa fa-shower fa-lg" aria-hidden="true"></i>
-                    <span class="pl-3">Private Bathroom</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="aminities_detailing">
-                    <i class="fa fa-cutlery fa-lg" aria-hidden="true"></i>
-                    <span class="pl-3">Breakfast Included</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="aminities_detailing">
-                    <i class="fa fa-wifi fa-lg" aria-hidden="true"></i>
-                    <span class="pl-3">Free WIFI</span>
-                  </div>
+              </p> -->
+              <div class="row">
+                <div class="col-md-4 p-3" *ngFor="let item of hotelDetails?.amenities.list">
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                  <span class="pl-3">{{item}}</span>
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-              <div class="reviews_wrapper_main">
-                <div class="ratings_section">
-                  <div class="rating_num">
-                    <span class="blue_box">
-                      8.8
-                    </span>
-                  </div>
-                  <div class="rating_detail">
-                    <span class="users_name">User Name</span>
-                    <div class="stars_text">
-                      <div class="stars_wrapper">
-                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
-                      </div>
-                      <p>Fabulous</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="rating_text">
-                  It is a long established fact that a reader will be distracted by the readable content of apage when
-                  looking at its layout.
-                </p>
-              </div>
-              <div class="reviews_wrapper_main">
-                <div class="ratings_section">
-                  <div class="rating_num">
-                    <span class="blue_box">
-                      8.8
-                    </span>
-                  </div>
-                  <div class="rating_detail">
-                    <span class="users_name">User Name</span>
-                    <div class="stars_text">
-                      <div class="stars_wrapper">
-                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
-                      </div>
-                      <p>Fabulous</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="rating_text">
-                  It is a long established fact that a reader will be distracted by the readable content of apage when
-                  looking at its layout.
-                </p>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact...</div>
+            <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
+              <div style="height: 400px; width: 100%;">
+                <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+                  [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
+                  <agm-marker iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    [latitude]="hotelDetails?.hotelLocations?.latitude"
+                    [longitude]="hotelDetails?.hotelLocations?.longitude">
+                  </agm-marker>
+                </agm-map>
               </div>
             </div>
-            <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">map...</div>
           </div>
         </div>
       </div>

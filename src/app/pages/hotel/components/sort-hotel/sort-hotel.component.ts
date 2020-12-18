@@ -16,16 +16,18 @@ export class SortHotelComponent implements OnInit {
   lowToHighToggle: boolean = false;
 
   constructor(
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
-    const info = JSON.parse(localStorage.getItem('_hote'));
-    info.forEach(i => {
-      if (i.key === 'fromSearch') {
-        this.locationName = i.value.city;
+    if (this.route.snapshot.queryParams['location']) {
+      const info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+      if (info) {
+        this.locationName = info.city;
       }
-    });
+    }
+    this.sortHotelData('total', 'ASC', 'lh_price');
     this.loadJquery();
   }
 
