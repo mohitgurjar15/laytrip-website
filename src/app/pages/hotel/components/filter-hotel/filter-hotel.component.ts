@@ -17,7 +17,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   compact = false;
   invertX = false;
   invertY = false;
-
   shown = 'native';
 
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)

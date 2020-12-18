@@ -38,6 +38,11 @@ import { collect } from 'collect.js';
 })
 export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterContentChecked {
 
+  compact = false;
+  invertX = false;
+  invertY = false;
+  shown = 'native';
+  
   @Input() hotelDetails;
   @Input() filter;
 
