@@ -113,6 +113,8 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
   }
 
    filterByAmenities(event, value) {
+     console.log(event);
+     console.log(value);
     if (event.target.checked === true) {
       this.amenities.push(value);
     }
@@ -137,7 +139,7 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredRentals = filteredRentals.filter(item => {
-        //return this.amenitiesArray.includes(item.inbound_stop_count);
+        return this.amenitiesArray.includes(item);
       })
     }
 
