@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     SocialLoginModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {
