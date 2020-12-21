@@ -1,10 +1,9 @@
 <section class="search_result hotels">
   <div class="container">
     <div class="row">
-      <div class="col-lg-9">
+      <div class="col-lg-8">
         <div class="hotel_detail_slider">
-
-          <div class="slider_main_contain" style="position: relative;">
+          <div class="slider_main_contain">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
 
             <div class="slider-overlay">
@@ -34,7 +33,6 @@
               </div>
             </div>
           </div>
-
         </div>
         <div class="hotel_detail_tabs">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -153,8 +151,100 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3">
-
+      <div class="col-lg-4">
+        <div class="hotel_detail_sidebar">
+          <h3 class="section_title">
+            Booking Summary
+          </h3>
+          <div class="display_wrapper">
+            <div class="detail_display">
+              <div class="display_text">
+                <h2>Hotel Aura, IGI</h2>
+                <p>
+                  <span>2 Rooms</span><span>2 Adults</span><span>1 Child</span>
+                </p>
+              </div>
+              <img src="{{s3BucketUrl}}assets/images/Union 1.png" alt="hotel display image">
+            </div>
+            <div class="display_daterange_wrapper">
+              <div class="display_daterange">
+                <div class="datewrapper">
+                  <label for="">CHECK IN</label>
+                  <span>
+                    <span>Oct 24 2020</span>
+                    <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                  </span>
+                </div>
+                <div class="datewrapper">
+                  <label for="">CHECK OUT</label>
+                  <span>
+                    <span>Oct 24 2020</span>
+                    <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fare_detail_wrapper">
+            <div class="fare_section">
+              <span class="fare_title">
+                Room Details
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div class="fare_section">
+              <span class="fare_title">
+                Room Details
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div class="fare_section">
+              <span class="fare_title">
+                Room Details
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>1st Installment 
+                  <span>(Oct 24 2020)</span>
+                </span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+          </div>
+          <div class="fare_total_wrapper">
+            <span>Total</span>
+            <span>$350</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
