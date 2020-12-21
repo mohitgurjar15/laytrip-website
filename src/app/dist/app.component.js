@@ -10,18 +10,34 @@ exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(cookieService, genericService) {
+    function AppComponent(cookieService, genericService, swPush) {
         this.cookieService = cookieService;
         this.genericService = genericService;
+        this.swPush = swPush;
         this.title = 'laytrip-website';
+        this.VAPID_PUBLIC_KEY = "BL6lEBuIL5QndQkV6pP-r1za33NJQ0u9fj2SWplSfk3ZmKj5i7Kcyq9C1simRWRxfgHXQHF_8zFDYO8jv6ljF68";
         this.setUserOrigin();
         this.getUserLocationInfo();
     }
     AppComponent.prototype.ngOnInit = function () {
+        var token = localStorage.getItem('_lay_sess');
+        console.log(token);
+        if (token) {
+            this.subscribeToNotifications();
+        }
+    };
+    AppComponent.prototype.subscribeToNotifications = function () {
+        console.log("subscribeToNotifications");
+        this.swPush.requestSubscription({
+            serverPublicKey: this.VAPID_PUBLIC_KEY
+        })
+            .then(function (sub) { return console.log(sub, 'here'); }
+        //this.newsletterService.addPushSubscriber(sub).subscribe()
+        )["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
     };
     AppComponent.prototype.setUserOrigin = function () {
         var host = window.location.origin;
-        if (host.includes("dr.") || host.includes("loc")) {
+        if (host.includes("dr.")) {
             localStorage.setItem('__uorigin', 'DR');
         }
         else {
