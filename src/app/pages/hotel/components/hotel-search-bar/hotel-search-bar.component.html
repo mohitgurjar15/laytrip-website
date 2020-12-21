@@ -11,7 +11,7 @@
                   bindLabel="title" bindValue="title" [(ngModel)]="this.defaultHotel.city" minTermLength="3"
                   notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}"
                   (clear)="onRemove($event,{key: 'fromSearch'})" (search)="onChangeSearch($event)" loadingText=""
-                  (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
+                  (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input-new"
                   placeholder="{{ placeHolder1 }}">
                   <!-- [(ngModel)]="defaultSelected" -->
                   <ng-template ng-label-tmp let-item="item">
