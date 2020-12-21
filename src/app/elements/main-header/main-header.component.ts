@@ -18,7 +18,7 @@ declare var $: any;
 })
 export class MainHeaderComponent implements OnInit, DoCheck {
 
-  @ViewChild(MainHeaderComponent) headerComponent: MainHeaderComponent;
+  @ViewChild(MainHeaderComponent, { static: false }) headerComponent: MainHeaderComponent;
 
   s3BucketUrl = environment.s3BucketUrl;
   langunages: Langunage[] = [];
