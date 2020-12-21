@@ -7,8 +7,8 @@
             <div class="hotel_where">
               <div class="search_area">
                 <label>Destination</label>
-                <ng-select [loading]="loading" [selectOnTab]="true" [clearable]="false" [items]="data"
-                  bindLabel="title" bindValue="title" [(ngModel)]="this.defaultHotel.city" minTermLength="3"
+                <ng-select [loading]="loading" [selectOnTab]="true" [clearable]="false" [items]="data" bindLabel="title"
+                  bindValue="title" groupBy="recentSearches" [(ngModel)]="this.defaultHotel.city" minTermLength="3"
                   notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}"
                   (clear)="onRemove($event,{key: 'fromSearch'})" (search)="onChangeSearch($event)" loadingText=""
                   (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"

@@ -60,6 +60,8 @@ export class HotelSearchBarComponent implements OnInit {
       }
     ],
   };
+  recentSearchInfo = [];
+  isShowRecentSearch = true;
 
   constructor(
     public fb: FormBuilder,
@@ -105,6 +107,23 @@ export class HotelSearchBarComponent implements OnInit {
           this.searchHotelInfo.occupancies = info;
         }
       }
+    }
+    if (localStorage.getItem('_hotel_recent')) {
+      this.recentSearchInfo = JSON.parse(localStorage.getItem('_hotel_recent'));
+      this.data = this.recentSearchInfo.map(item => {
+        return {
+          city: item.city,
+          country: item.country,
+          hotel_id: null,
+          title: item.title,
+          type: item.type,
+          geo_codes: item.geo_codes,
+          recentSearches: 'Recent Searches',
+          isRecentSearch: true
+        }
+      });
+    } else {
+      console.log('no');
     }
   }
 
@@ -177,6 +196,10 @@ export class HotelSearchBarComponent implements OnInit {
       this.searchHotelInfo.city = event.city;
       this.searchHotelInfo.country = event.country;
       this.searchedValue.push({ key: 'fromSearch', value: event });
+    }
+    if (this.recentSearchInfo && this.recentSearchInfo.length < 3) {
+      this.recentSearchInfo.push(event);
+      localStorage.setItem('_hotel_recent', JSON.stringify(this.recentSearchInfo));
     }
   }
 

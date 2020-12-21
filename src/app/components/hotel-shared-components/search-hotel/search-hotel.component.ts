@@ -53,11 +53,9 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         type: this.defaultSelected.type,
         geo_codes: this.defaultSelected.geo_codes,
       });
-      // this.recentSearchInfo = this.data;
     }
     if (localStorage.getItem('_hotel_recent')) {
       this.recentSearchInfo = JSON.parse(localStorage.getItem('_hotel_recent'));
-      // this.data = this.recentSearchInfo;
       this.data = this.recentSearchInfo.map(item => {
         return {
           city: item.city,
