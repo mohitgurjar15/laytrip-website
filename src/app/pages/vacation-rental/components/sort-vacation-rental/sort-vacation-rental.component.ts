@@ -13,10 +13,16 @@ export class SortVacationRentalComponent implements OnInit {
   @Input() rentalDetails;
   sortType: string = 'lh_price';
   lowToHighToggle: boolean = false;
+  locationName;
+  constructor(private route: ActivatedRoute) { 
 
-  constructor() { }
+  }
 
   ngOnInit() {
+     const info = JSON.parse(localStorage.getItem('_rental'));
+      if (info) {
+        this.locationName = info.city;
+    }
   	this.loadJquery();
   }
 

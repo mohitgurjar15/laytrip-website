@@ -178,11 +178,11 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
       this.sortType = 'filter_total_price';
 
       // Reset amenities
-      if (typeof this.amenities != 'undefined' && this.amenities.length) {
-        this.amenities.forEach(element => {
-          return element.isChecked = false;
-        });
-      }
+      // if (typeof this.amenities != 'undefined' && this.amenities.length) {
+      //   this.amenities.forEach(element => {
+      //     return element.isChecked = false;
+      //   });
+      // }
 
       // Reset hotel name search
       this.rentalname = 'Search Home';

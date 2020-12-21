@@ -7,29 +7,9 @@
     <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view"> 
     Map view
     </button>
-  </div>
-<div class="result_listing home_listings" [hidden]="isMapView" *ngIf="rentalListArray.length">
-    <div>
-        <div class="block_result_found">
-            <p>{{rentalDetails.length}} Home Rentals found from</p>
-            <!-- <span>{{rentalDetails[0].city}}</span>  -->
-            <span></span>
-        </div>
-    </div>
-    <div>
-        <button class="list_v_btn" (click)="changeView('listView')" [hidden]="!isMapView">
-            <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
-            List view
-        </button>
-        <button class="map_v_btn" (click)="changeView('mapView')" [hidden]="isMapView">
-            <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view">
-            Map view
-        </button>
-    </div>
 </div>
-<div class="result_listing home_listings" [hidden]="isMapView">
->>>>>>> 0dee738a2b7308d7f0c7e0026e897440ba7eb48c
-    <div class="search_block" *ngFor="let item of rentalListArray; let blockIndex = index;">
+<div class="result_listing home_listings" [hidden]="isMapView" *ngIf="rentalListArray.length">
+<div class="search_block" *ngFor="let item of rentalListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
                 <div class="col-md-9">
@@ -115,7 +95,7 @@
                         <div class="block_inn_pr">
                             <div class="block">
                                 <p>Room Starts from</p>
-                                <p><span>{{currency?.symbol}}{{item?.selling_price}}</span> /week</p>
+                                <p><span>{{currency?.symbol}}{{item?.selling_price}}</span></p>
                             </div>
                         </div>
                         <a class="book_btn" href="flight-add-passenger.html">Select</a>
@@ -179,7 +159,7 @@
                                     <div class="">
                                         <div class="block_im">
                                             <div class="home_list_img_wrp"
-                                                style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
+                                                >
                                                 <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo"
                                                     onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                             </div>
@@ -228,7 +208,7 @@
                             <div class="block_inn_pr">
                                 <div class="block">
                                     <p>Room Starts from</p>
-                                    <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span> /week</p>
+                                    <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span></p>
                                 </div>
                             </div>
                         </div>
