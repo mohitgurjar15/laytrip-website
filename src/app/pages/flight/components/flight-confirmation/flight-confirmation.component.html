@@ -27,7 +27,7 @@
                     <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.totalAmount | number : '1.2-2'}}</p>
                 </li>
                 <li *ngIf="bookingData.booking_details.bookingType==1">
-                    <span>Down Payment :</span>
+                    <span>{{'down_payment' | translate}} :</span>
                     <p>{{bookingData.booking_details.currency2.symbol}}{{bookingData.booking_details.bookingInstalments[0].amount | number : '1.2-2'}}</p>
                 </li>
                 <li *ngIf="bookingData.booking_details.bookingType==1">
@@ -51,7 +51,7 @@
 
         <div class="block_inner">
             <h5>{{'cancellation_policy' | translate}}</h5>
-            <p>To know more check our <a href="javascript:void(0);" class="anchor-text">{{'cancellation_policy' | translate}}</a> & <a href="javascript:void(0);">Privacy Policy</a></p>
+            <p>{{'to_know_more_check_out' | translate}} <a href="javascript:void(0);" class="anchor-text">{{'cancellation_policy' | translate}}</a> & <a href="javascript:void(0);">{{'privacy_and_policy' | translate}}</a></p>
         </div>
 
         <div class="block_inner">
@@ -68,7 +68,7 @@
             </ul>
             <div class="msg_block">
                 {{'we_wish_you_pleasant_stay' | translate}}
-                <br>&nbsp;&nbsp;{{'your_laytrip_team' | translate}}
+                <br>&nbsp;&nbsp;-{{'your_laytrip_team' | translate}}
             </div>
         </div>
     </div>
