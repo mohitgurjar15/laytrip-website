@@ -38,11 +38,6 @@ import { collect } from 'collect.js';
 })
 export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterContentChecked {
 
-  compact = false;
-  invertX = false;
-  invertY = false;
-  shown = 'native';
-  
   @Input() hotelDetails;
   @Input() filter;
 
@@ -114,6 +109,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
     this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
   }
+
+  
 
   ngAfterContentChecked() {
     this.hotelListArray = this.hotelDetails;
