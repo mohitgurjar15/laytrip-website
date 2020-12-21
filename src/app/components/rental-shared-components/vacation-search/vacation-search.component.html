@@ -3,7 +3,7 @@
     <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
         bindLabel="title" bindValue="title" [(ngModel)]="defaultSelected.city" [clearable]="false" minTermLength="3"
         notFoundText="" [virtualScroll]="true" (search)="onChangeSearch($event)" loadingText=""
-        (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input"
+        (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input-new"
         placeholder="{{ placeHolder }}" [tabIndex]="tabIndex">
         <!-- [(ngModel)]="defaultSelected" -->
         <ng-template ng-label-tmp let-item="item">

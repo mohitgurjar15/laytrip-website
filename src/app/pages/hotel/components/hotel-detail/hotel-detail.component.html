@@ -1,10 +1,9 @@
 <section class="search_result hotels">
   <div class="container">
     <div class="row">
-      <div class="col-lg-9">
+      <div class="col-lg-8">
         <div class="hotel_detail_slider">
-
-          <div class="slider_main_contain" style="position: relative;">
+          <div class="slider_main_contain">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
 
             <div class="slider-overlay">
@@ -34,7 +33,6 @@
               </div>
             </div>
           </div>
-
         </div>
         <div class="hotel_detail_tabs">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -47,7 +45,7 @@
                 aria-selected="false">Amenities</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
                 aria-selected="false">Reviews</a>
             </li>
             <li class="nav-item">
@@ -93,7 +91,52 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact...</div>
+            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <div class="reviews_wrapper_main">
+                <div class="ratings_section">
+                  <div class="rating_num">
+                    <span class="blue_box">
+                      8.8
+                    </span>
+                  </div>
+                  <div class="rating_detail">
+                    <span class="users_name">User Name</span>
+                    <div class="stars_text">
+                      <div class="stars_wrapper">
+                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
+                      </div>
+                      <p>Fabulous</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="rating_text">
+                  It is a long established fact that a reader will be distracted by the readable content of apage when
+                  looking at its layout.
+                </p>
+              </div>
+              <div class="reviews_wrapper_main">
+                <div class="ratings_section">
+                  <div class="rating_num">
+                    <span class="blue_box">
+                      8.8
+                    </span>
+                  </div>
+                  <div class="rating_detail">
+                    <span class="users_name">User Name</span>
+                    <div class="stars_text">
+                      <div class="stars_wrapper">
+                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
+                      </div>
+                      <p>Fabulous</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="rating_text">
+                  It is a long established fact that a reader will be distracted by the readable content of apage when
+                  looking at its layout.
+                </p>
+              </div>
+            </div>
             <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
               <div style="height: 400px; width: 100%;">
                 <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
@@ -108,8 +151,100 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3">
-
+      <div class="col-lg-4">
+        <div class="hotel_detail_sidebar">
+          <h3 class="section_title">
+            Booking Summary
+          </h3>
+          <div class="display_wrapper">
+            <div class="detail_display">
+              <div class="display_text">
+                <h2>Hotel Aura, IGI</h2>
+                <p>
+                  <span>2 Rooms</span><span>2 Adults</span><span>1 Child</span>
+                </p>
+              </div>
+              <img src="{{s3BucketUrl}}assets/images/Union 1.png" alt="hotel display image">
+            </div>
+            <div class="display_daterange_wrapper">
+              <div class="display_daterange">
+                <div class="datewrapper">
+                  <label for="">CHECK IN</label>
+                  <span>
+                    <span>Oct 24 2020</span>
+                    <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                  </span>
+                </div>
+                <div class="datewrapper">
+                  <label for="">CHECK OUT</label>
+                  <span>
+                    <span>Oct 24 2020</span>
+                    <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fare_detail_wrapper">
+            <div class="fare_section">
+              <span class="fare_title">
+                Room Details
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div class="fare_section">
+              <span class="fare_title">
+                Room Details
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div class="fare_section">
+              <span class="fare_title">
+                Room Details
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>1st Installment 
+                  <span>(Oct 24 2020)</span>
+                </span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+          </div>
+          <div class="fare_total_wrapper">
+            <span>Total</span>
+            <span>$350</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
