@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { 
     path: '', 
-    loadChildren: './my-accounts/my-accounts.module#MyAccountsModule'
+    loadChildren: () => import('./my-accounts/my-accounts.module').then(m => m.MyAccountsModule)
   },
   
 ];

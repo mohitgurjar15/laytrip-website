@@ -11,7 +11,8 @@
             top: 100%;
             background: $background-white;
             left: 0;
-            width: 480px;
+            //width: 480px;
+            width: 100%;
             @media (max-width: 767px) {
                 width: 410px;
             }
@@ -112,7 +113,7 @@
                     padding: 10px 10px 10px 10px;
                     display: flex !important;
                     img {
-                        background: darkred;
+                        // background: darkred;
                         margin: 2px 5px 5px 0px;
                     }
                     .sub-parent {
@@ -165,6 +166,40 @@
     box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
 }
 // NG-SELECT FOCUS REMOVE CSS END
+
+// datepicker hotel and rentals search
+ngb-datepicker {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    .ngb-dp-header {
+        padding: 0.75em 0;
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #c7c7c7;
+    }
+    .ngb-dp-months {
+        .ngb-dp-month {
+            ngb-datepicker-month-view {
+                .ngb-dp-weekdays {
+                    background-color: #fff !important;
+                    border-bottom: none !important;
+                    .ngb-dp-weekday {
+                        color: #000;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: bold;
+                    }
+                }
+                .ngb-dp-week {
+                    .ngb-dp-day {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+}
+// datepicker hotel and rentals search
 
 // hotel tab
 .hotel_tab {
@@ -345,10 +380,10 @@
                     }
 
                     .date_form {
-                        width: 50%;
+                        width: 100%;
 
                         .search_area {
-                            border-radius: 8px 0 0 8px;
+                            border-radius: 8px;
                             // height: 100%;
                             height: 103px;
                         }
@@ -464,7 +499,7 @@
                                 padding: 15px;
                                 border: 1px solid $text-light-grey;
                                 border-radius: 5px;
-                                z-index: 99;
+                                z-index: 9999;
 
                                 &:before {
                                     width: 0;
@@ -513,6 +548,7 @@
                                                 font-size: 12px;
                                                 font-weight: 500;
                                                 text-transform: uppercase;
+                                                cursor: pointer;
                                                 &.remove_room {
                                                     color: $error-color;
                                                 }
@@ -1047,7 +1083,7 @@
                                 padding: 15px;
                                 border: 1px solid $text-light-grey;
                                 border-radius: 5px;
-                                z-index: 99;
+                                z-index: 9999;
 
                                 &:before {
                                     width: 0;
@@ -1096,6 +1132,7 @@
                                                 font-size: 12px;
                                                 font-weight: 500;
                                                 text-transform: uppercase;
+                                                cursor: pointer;
                                                 &.remove_room {
                                                     color: $error-color;
                                                 }
@@ -1444,6 +1481,13 @@
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
+                            &[readonly] {
+                                background-color: transparent;
+                            }
+                            &:focus {
+                                outline: none;
+                                box-shadow: none;
+                            }
                         }
                     }
 
@@ -1548,7 +1592,15 @@
                             width: 100%;
                             margin-bottom: 15px;
                         }
-
+                        .input-group {
+                            width: 100%;
+                            input {
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
+                                background-size: 20px;
+                                background-repeat: no-repeat;
+                                background-position: center right 15px;
+                            }
+                        }
                         .search_area {
                             padding: 10px 0;
                             border: 1px solid $box-border-color;
@@ -1579,11 +1631,11 @@
                         }
 
                         .date_form {
-                            width: 50%;
+                            width: 100%;
                             position: relative;
 
                             .search_area {
-                                border-radius: 8px 0 0 8px;
+                                border-radius: 8px;
 
                                 .prev-next {
                                     width: 60%;
@@ -1652,6 +1704,7 @@
                                     position: relative;
                                     padding: 0 15px;
                                     text-transform: uppercase;
+                                    cursor: pointer;
 
                                     &:before {
                                         width: 20px;
@@ -1661,7 +1714,7 @@
                                         right: 15px;
                                         top: 50%;
                                         transform: translateY(-50%);
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg)
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg)
                                             no-repeat;
                                         background-size: cover;
                                     }
@@ -1699,6 +1752,233 @@
                                     color: $text-grey;
                                     padding: 0 15px;
                                 }
+                                .traveller_add_block {
+                                    width: 260px;
+                                    position: absolute;
+                                    top: 108%;
+                                    right: 0;
+                                    background: $background-white;
+                                    box-shadow: 0px 3px 15px $shadow-black;
+                                    padding: 15px;
+                                    border: 1px solid $text-light-grey;
+                                    border-radius: 5px;
+                                    z-index: 9999;
+
+                                    &:before {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 9px solid transparent;
+                                        border-right: 9px solid transparent;
+                                        border-bottom: 9px solid $background-white;
+                                        position: absolute;
+                                        top: -9px;
+                                        right: 21px;
+                                        content: "";
+                                        z-index: 2;
+                                    }
+
+                                    &:after {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 10px solid transparent;
+                                        border-right: 10px solid transparent;
+                                        border-bottom: 10px solid $text-light-grey;
+                                        position: absolute;
+                                        top: -10px;
+                                        right: 20px;
+                                        content: "";
+                                    }
+                                    .rooms_aloc {
+                                        &.marign_rooms {
+                                            margin-top: 10px;
+                                            border-top: 1px solid $box-border-color;
+                                            padding-top: 10px;
+                                        }
+                                        .room_label_main {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            margin-bottom: 10px;
+                                            span {
+                                                padding: 0;
+                                                &:first-child {
+                                                    font-size: 14px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                }
+                                                a {
+                                                    color: $pink;
+                                                    font-size: 12px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                    cursor: pointer;
+                                                    &.remove_room {
+                                                        color: $error-color;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .room_bottom_label {
+                                            display: flex;
+                                            justify-content: flex-end;
+                                            align-items: center;
+                                            span {
+                                                padding: 0;
+                                                a {
+                                                    color: $pink;
+                                                    font-size: 12px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                }
+                                            }
+                                        }
+                                        .child_sel_wrapper {
+                                            display: flex;
+                                            flex-wrap: wrap;
+                                            justify-content: flex-start;
+                                            .child_boxes {
+                                                border: 1px solid $box-border-color;
+                                                border-radius: 8px;
+                                                background: $background-white;
+                                                padding: 5px 10px;
+                                                margin: 2px;
+                                                width: 48%;
+                                                display: none;
+                                                &.open {
+                                                    display: block;
+                                                }
+                                                .label_name {
+                                                    padding: 0;
+                                                    width: 100%;
+                                                }
+                                                select {
+                                                    border: none;
+                                                    width: 100%;
+                                                    font-size: 12px;
+                                                }
+                                            }
+                                        }
+                                        ul {
+                                            margin: 0;
+                                            padding: 0;
+                                            list-style: none;
+
+                                            li {
+                                                width: 100%;
+                                                display: flex;
+                                                justify-content: space-between;
+                                                align-items: center;
+                                                padding: 0 0 20px;
+
+                                                .left {
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    color: $text-grey;
+
+                                                    span {
+                                                        font-size: 14px;
+                                                        color: $text-darkblue;
+                                                        display: block;
+                                                        padding: 0;
+                                                    }
+                                                }
+
+                                                .right {
+                                                    width: 100px;
+                                                    display: flex;
+                                                    align-items: center;
+
+                                                    .qtyminus {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        background: $background-white;
+                                                        border: 1px solid $text-light-grey;
+                                                        border-radius: 5px;
+                                                        color: $text-light-grey;
+                                                        padding: 0;
+                                                        font-size: 18px;
+
+                                                        &:hover {
+                                                            border: 1px solid $pink;
+                                                            color: $pink;
+                                                        }
+                                                    }
+
+                                                    .qty {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        font-size: 20px;
+                                                        font-weight: 400;
+                                                        color: $text-darkblue;
+                                                        border: none;
+                                                        text-align: center;
+                                                    }
+
+                                                    .qtyplus {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        background: $background-white;
+                                                        border: 1px solid $text-light-grey;
+                                                        border-radius: 5px;
+                                                        color: $text-light-grey;
+                                                        padding: 0;
+                                                        font-size: 18px;
+
+                                                        &:hover {
+                                                            border: 1px solid $pink;
+                                                            color: $pink;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .flight_cat {
+                                        width: 100%;
+
+                                        ul {
+                                            display: flex;
+                                            flex-wrap: wrap;
+                                            align-content: center;
+                                            justify-content: space-between;
+
+                                            li {
+                                                width: 48%;
+                                                margin: 0 0 10px;
+                                                padding: 0;
+
+                                                &:last-child {
+                                                    width: 100%;
+                                                    margin: 0;
+                                                }
+
+                                                a {
+                                                    line-height: 32px;
+                                                    width: 100%;
+                                                    text-align: center;
+                                                    background: $background-white;
+                                                    border: 1px solid $text-light-grey;
+                                                    border-radius: 5px;
+                                                    font-size: 14px;
+                                                    color: $text-light-grey;
+
+                                                    &:hover {
+                                                        background: $hotel-secondary-color;
+                                                        border: 1px solid $hotel-secondary-color;
+                                                        color: $text-white;
+                                                    }
+
+                                                    &.active_cat {
+                                                        background: $hotel-secondary-color;
+                                                        border: 1px solid $hotel-secondary-color;
+                                                        color: $text-white;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -1713,7 +1993,7 @@
                         padding: 15px;
                         border: 1px solid $text-light-grey;
                         border-radius: 5px;
-                        z-index: 99;
+                        z-index: 9999;
 
                         &:before {
                             width: 0;
@@ -1724,7 +2004,7 @@
                             position: absolute;
                             top: -9px;
                             right: 21px;
-                            content: '';
+                            content: "";
                             z-index: 2;
                         }
 
@@ -1737,7 +2017,7 @@
                             position: absolute;
                             top: -10px;
                             right: 20px;
-                            content: '';
+                            content: "";
                         }
 
                         ul {
@@ -1943,11 +2223,11 @@
     }
 
     .sticky-top {
-        &.left_side_bar{
+        &.left_side_bar {
             top: 80px;
         }
     }
-    
+
     .filter_saidbar {
         width: 100%;
 
@@ -2449,6 +2729,7 @@
                                     width: 100%;
                                     height: 100%;
                                     opacity: 0;
+                                    cursor: pointer;
 
                                     &:checked {
                                         ~ {
@@ -2572,6 +2853,12 @@
                                 margin-bottom: 10px;
                                 cursor: pointer;
 
+                                &:first-child {
+                                    &:hover {
+                                        color: $text-white;
+                                    }
+                                }
+
                                 &:last-child {
                                     background: $btn-bg;
                                     border: 1px solid $btn-bg;
@@ -2614,7 +2901,7 @@
 
         button {
             background-color: $background-white;
-            padding: 15px 12px;
+            padding: 7px 12px;
             border: 1px solid $box-border-color;
             border-radius: 8px;
             color: $text-grey;
@@ -2698,6 +2985,11 @@
                                     }
                                     .hotel_list_img_wrp {
                                         position: relative;
+                                        background-size: cover;
+                                        position: relative;
+                                        background-position: center center;
+                                        width: 100%;
+                                        height: 170px;
                                         img {
                                             max-width: 100%;
                                             height: 100%;
@@ -2739,6 +3031,12 @@
                                             color: $text-black;
                                             font-weight: 600;
                                             margin: 10px 0 5px;
+                                            max-width: 380px;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            display: inline-block;
+                                            width: 100%;
 
                                             @media (max-width: 767px) {
                                                 font-size: 16px;
@@ -2746,8 +3044,8 @@
                                         }
 
                                         span {
-                                            margin: 5px 0 0;
-                                            &.adress_span{
+                                            margin: 0;
+                                            &.adress_span {
                                                 max-width: 380px;
                                                 white-space: nowrap;
                                                 overflow: hidden;
@@ -2779,9 +3077,7 @@
                                                 .stars_text {
                                                     margin-left: 14px;
                                                     .stars_rating {
-                                                        margin-top: 5px;
-                                                        img {
-                                                        }
+                                                        margin-top: 0px;
                                                     }
                                                     .review_num_text {
                                                         a {
@@ -3826,6 +4122,11 @@
                             }
                             .hotel_list_img_wrp {
                                 position: relative;
+                                background-size: cover;
+                                position: relative;
+                                background-position: center center;
+                                width: 100%;
+                                height: 170px;
                                 img {
                                     max-width: 100%;
                                     height: 100%;
@@ -3888,7 +4189,7 @@
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
-                                    .adress_span{
+                                    .adress_span {
                                         max-width: 140px;
                                         white-space: nowrap;
                                         overflow: hidden;
@@ -3909,6 +4210,12 @@
                                     color: $text-black;
                                     font-weight: 600;
                                     margin: 5px 0;
+                                    max-width: 380px;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    display: inline-block;
+                                    width: 100%;
 
                                     @media (max-width: 767px) {
                                         font-size: 16px;
@@ -3939,9 +4246,7 @@
                                     .stars_text {
                                         margin-left: 14px;
                                         .stars_rating {
-                                            margin-top: 5px;
-                                            img {
-                                            }
+                                            margin-top: 0;
                                         }
                                         .review_num_text {
                                             a {
@@ -4119,6 +4424,13 @@
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
+                            &[readonly] {
+                                background-color: transparent;
+                            }
+                            &:focus {
+                                outline: none;
+                                box-shadow: none;
+                            }
                         }
                     }
 
@@ -4140,6 +4452,7 @@
                         }
 
                         .hotel_where {
+                            width: 100%;
                             @include ipad-view {
                                 width: 100%;
                             }
@@ -4222,7 +4535,15 @@
                             width: 100%;
                             margin-bottom: 15px;
                         }
-
+                        .input-group {
+                            width: 100%;
+                            input {
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
+                                background-size: 20px;
+                                background-repeat: no-repeat;
+                                background-position: center right 15px;
+                            }
+                        }
                         .search_area {
                             padding: 10px 0;
                             border: 1px solid $box-border-color;
@@ -4237,6 +4558,21 @@
                             //								input {
                             //									height: 35px;
                             //								}
+                            input {
+                                width: 100%;
+                                border: none;
+                                height: 35px;
+                                margin-bottom: 1px;
+                                font-size: 14px;
+                                color: $text-black;
+                                font-weight: 600;
+                                padding: 0 15px;
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                                    center right 15px no-repeat !important;
+                                @media (max-width: 1199px) {
+                                    font-size: 16px;
+                                }
+                            }
                             .date_icon {
                                 width: 20px;
                                 height: 20px;
@@ -4326,6 +4662,7 @@
                                     position: relative;
                                     padding: 0 15px;
                                     text-transform: uppercase;
+                                    cursor: pointer;
 
                                     &:before {
                                         width: 20px;
@@ -4335,7 +4672,7 @@
                                         right: 15px;
                                         top: 50%;
                                         transform: translateY(-50%);
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg)
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg)
                                             no-repeat;
                                         background-size: cover;
                                     }
@@ -4372,6 +4709,233 @@
                                     font-weight: 400;
                                     color: $text-grey;
                                     padding: 0 15px;
+                                }
+                                .traveller_add_block {
+                                    width: 260px;
+                                    position: absolute;
+                                    top: 108%;
+                                    right: 0;
+                                    background: $background-white;
+                                    box-shadow: 0px 3px 15px $shadow-black;
+                                    padding: 15px;
+                                    border: 1px solid $text-light-grey;
+                                    border-radius: 5px;
+                                    z-index: 99;
+
+                                    &:before {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 9px solid transparent;
+                                        border-right: 9px solid transparent;
+                                        border-bottom: 9px solid $background-white;
+                                        position: absolute;
+                                        top: -9px;
+                                        right: 21px;
+                                        content: "";
+                                        z-index: 2;
+                                    }
+
+                                    &:after {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 10px solid transparent;
+                                        border-right: 10px solid transparent;
+                                        border-bottom: 10px solid $text-light-grey;
+                                        position: absolute;
+                                        top: -10px;
+                                        right: 20px;
+                                        content: "";
+                                    }
+                                    .rooms_aloc {
+                                        &.marign_rooms {
+                                            margin-top: 10px;
+                                            border-top: 1px solid $box-border-color;
+                                            padding-top: 10px;
+                                        }
+                                        .room_label_main {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            margin-bottom: 10px;
+                                            span {
+                                                padding: 0;
+                                                &:first-child {
+                                                    font-size: 14px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                }
+                                                a {
+                                                    color: $pink;
+                                                    font-size: 12px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                    cursor: pointer;
+                                                    &.remove_room {
+                                                        color: $error-color;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .room_bottom_label {
+                                            display: flex;
+                                            justify-content: flex-end;
+                                            align-items: center;
+                                            span {
+                                                padding: 0;
+                                                a {
+                                                    color: $pink;
+                                                    font-size: 12px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                }
+                                            }
+                                        }
+                                        .child_sel_wrapper {
+                                            display: flex;
+                                            flex-wrap: wrap;
+                                            justify-content: flex-start;
+                                            .child_boxes {
+                                                border: 1px solid $box-border-color;
+                                                border-radius: 8px;
+                                                background: $background-white;
+                                                padding: 5px 10px;
+                                                margin: 2px;
+                                                width: 48%;
+                                                display: none;
+                                                &.open {
+                                                    display: block;
+                                                }
+                                                .label_name {
+                                                    padding: 0;
+                                                    width: 100%;
+                                                }
+                                                select {
+                                                    border: none;
+                                                    width: 100%;
+                                                    font-size: 12px;
+                                                }
+                                            }
+                                        }
+                                        ul {
+                                            margin: 0;
+                                            padding: 0;
+                                            list-style: none;
+
+                                            li {
+                                                width: 100%;
+                                                display: flex;
+                                                justify-content: space-between;
+                                                align-items: center;
+                                                padding: 0 0 20px;
+
+                                                .left {
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    color: $text-grey;
+
+                                                    span {
+                                                        font-size: 14px;
+                                                        color: $text-darkblue;
+                                                        display: block;
+                                                        padding: 0;
+                                                    }
+                                                }
+
+                                                .right {
+                                                    width: 100px;
+                                                    display: flex;
+                                                    align-items: center;
+
+                                                    .qtyminus {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        background: $background-white;
+                                                        border: 1px solid $text-light-grey;
+                                                        border-radius: 5px;
+                                                        color: $text-light-grey;
+                                                        padding: 0;
+                                                        font-size: 18px;
+
+                                                        &:hover {
+                                                            border: 1px solid $pink;
+                                                            color: $pink;
+                                                        }
+                                                    }
+
+                                                    .qty {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        font-size: 20px;
+                                                        font-weight: 400;
+                                                        color: $text-darkblue;
+                                                        border: none;
+                                                        text-align: center;
+                                                    }
+
+                                                    .qtyplus {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        background: $background-white;
+                                                        border: 1px solid $text-light-grey;
+                                                        border-radius: 5px;
+                                                        color: $text-light-grey;
+                                                        padding: 0;
+                                                        font-size: 18px;
+
+                                                        &:hover {
+                                                            border: 1px solid $pink;
+                                                            color: $pink;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .flight_cat {
+                                        width: 100%;
+
+                                        ul {
+                                            display: flex;
+                                            flex-wrap: wrap;
+                                            align-content: center;
+                                            justify-content: space-between;
+
+                                            li {
+                                                width: 48%;
+                                                margin: 0 0 10px;
+                                                padding: 0;
+
+                                                &:last-child {
+                                                    width: 100%;
+                                                    margin: 0;
+                                                }
+
+                                                a {
+                                                    line-height: 32px;
+                                                    width: 100%;
+                                                    text-align: center;
+                                                    background: $background-white;
+                                                    border: 1px solid $text-light-grey;
+                                                    border-radius: 5px;
+                                                    font-size: 14px;
+                                                    color: $text-light-grey;
+
+                                                    &:hover {
+                                                        background: $hotel-secondary-color;
+                                                        border: 1px solid $hotel-secondary-color;
+                                                        color: $text-white;
+                                                    }
+
+                                                    &.active_cat {
+                                                        background: $hotel-secondary-color;
+                                                        border: 1px solid $hotel-secondary-color;
+                                                        color: $text-white;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -4458,7 +5022,7 @@
         }
     }
     .sticky-top {
-        &.left_side_bar{
+        &.left_side_bar {
             top: 80px;
         }
     }
@@ -4702,7 +5266,7 @@
                 max-height: calc(100vh - 334px);
                 overflow-y: auto;
                 overflow-x: hidden;
-                
+
                 .cmn_block {
                     padding: 20px 15px;
                     border-bottom: 1px solid $box-border-color;
@@ -4963,6 +5527,7 @@
                                     width: 100%;
                                     height: 100%;
                                     opacity: 0;
+                                    cursor: pointer;
 
                                     &:checked {
                                         ~ {
@@ -5064,6 +5629,12 @@
                                 margin-bottom: 10px;
                                 cursor: pointer;
 
+                                &:first-child {
+                                    &:hover {
+                                        color: $text-white;
+                                    }
+                                }
+
                                 &:last-child {
                                     background: #8188ab;
                                 }
@@ -5104,7 +5675,7 @@
 
         button {
             background-color: $background-white;
-            padding: 15px 12px;
+            padding: 7px 12px;
             border: 1px solid $box-border-color;
             border-radius: 8px;
             color: $text-grey;
@@ -5123,7 +5694,7 @@
             justify-content: space-between;
         }
 
-        &.hotel_listings {
+        &.home_listings {
             .search_block {
                 width: 100%;
                 margin-bottom: 15px;
@@ -5186,8 +5757,13 @@
                                         border-right: none;
                                         padding: 0;
                                     }
-                                    .hotel_list_img_wrp {
+                                    .home_list_img_wrp {
                                         position: relative;
+                                        background-size: cover;
+                                        position: relative;
+                                        background-position: center center;
+                                        width: 100%;
+                                        height: 170px;
                                         img {
                                             max-width: 100%;
                                             height: 100%;
@@ -5229,6 +5805,12 @@
                                             color: $text-black;
                                             font-weight: 600;
                                             margin: 10px 0 5px;
+                                            max-width: 380px;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            display: inline-block;
+                                            width: 100%;
 
                                             @media (max-width: 767px) {
                                                 font-size: 16px;
@@ -5236,8 +5818,8 @@
                                         }
 
                                         span {
-                                            margin: 5px 0 0;
-                                            &.adress_span{
+                                            margin: 0;
+                                            &.adress_span {
                                                 max-width: 380px;
                                                 white-space: nowrap;
                                                 overflow: hidden;
@@ -5267,9 +5849,7 @@
                                             .stars_text {
                                                 margin-left: 14px;
                                                 .stars_rating {
-                                                    margin-top: 5px;
-                                                    img {
-                                                    }
+                                                    margin-top: 0;
                                                 }
                                                 .review_num_text {
                                                     a {
@@ -5543,7 +6123,7 @@
                             margin: 0;
                         }
 
-                        .block_flight_info {
+                        .block_home_info {
                             @include tab-view {
                                 padding: 5px;
                             }
@@ -5625,7 +6205,7 @@
                                     }
                                 }
 
-                                &.flight_info_cnt {
+                                &.home_info_cnt {
                                     padding: 20px 0;
                                     max-height: 445px;
                                     overflow-y: scroll;
@@ -6303,6 +6883,11 @@
                             }
                             .hotel_list_img_wrp {
                                 position: relative;
+                                background-size: cover;
+                                position: relative;
+                                background-position: center center;
+                                width: 100%;
+                                height: 170px;
                                 img {
                                     max-width: 100%;
                                     height: 100%;
@@ -6365,7 +6950,7 @@
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
-                                    .adress_span{
+                                    .adress_span {
                                         max-width: 140px;
                                         white-space: nowrap;
                                         overflow: hidden;
@@ -6386,6 +6971,12 @@
                                     color: $text-black;
                                     font-weight: 600;
                                     margin: 5px 0;
+                                    max-width: 380px;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    display: inline-block;
+                                    width: 100%;
 
                                     @media (max-width: 767px) {
                                         font-size: 16px;
@@ -6416,9 +7007,7 @@
                                     .stars_text {
                                         margin-left: 14px;
                                         .stars_rating {
-                                            margin-top: 5px;
-                                            img {
-                                            }
+                                            margin-top: 0;
                                         }
                                         .review_num_text {
                                             a {
@@ -6543,17 +7132,19 @@
     .slider_main_contain {
         position: relative;
 
-        ngx-gallery{
+        ngx-gallery {
             width: 100% !important;
-            height: 700px !important;
+            height: 590px !important;
 
-            @include tab-view{
+            @include tab-view {
                 height: 350px !important;
             }
-            ngx-gallery-image{
-                .ngx-gallery-image-wrapper{
+            ngx-gallery-image {
+                margin-bottom: 13px;
+
+                .ngx-gallery-image-wrapper {
                     border-radius: 5px;
-    
+
                     .ngx-gallery-image.ngx-gallery-active:before {
                         content: " ";
                         width: 100%;
@@ -6562,18 +7153,23 @@
                         z-index: -1;
                         top: 0;
                         left: 0;
-                        background: -webkit-radial-gradient(top center, ellipse cover, rgba(255,255,255,0.15) 0%,rgba(0,0,0,0.5) 100%);
+                        background: -webkit-radial-gradient(
+                            top center,
+                            ellipse cover,
+                            rgba(255, 255, 255, 0.15) 0%,
+                            rgba(0, 0, 0, 0.5) 100%
+                        );
                     }
                 }
             }
-            ngx-gallery-thumbnails{
-                a{
-                    &.ngx-gallery-thumbnail{
+            ngx-gallery-thumbnails {
+                a {
+                    &.ngx-gallery-thumbnail {
                         border-radius: 5px;
+                        max-height: 115px;
                     }
                 }
             }
-            
         }
 
         .slider-overlay {
@@ -6584,20 +7180,20 @@
             color: $text-white;
             margin: 0px;
             z-index: 9999;
-            @include tab-view{
+            @include tab-view {
                 bottom: 90px;
                 padding: 0px 15px;
             }
 
             .hotel_name {
-                padding-bottom: 30px;
-                span{
+                padding-bottom: 20px;
+                span {
                     font-size: 12px;
                 }
-                @include tab-view{
+                @include tab-view {
                     padding-bottom: 10px;
-                    
-                    h4{
+
+                    h4 {
                         font-size: 18px;
                         margin-bottom: 2px;
                     }
@@ -6612,14 +7208,13 @@
                 margin: 0 0;
             }
             .room-rating {
-                
-                @include tab-view{
+                @include tab-view {
                     margin: 10px 0;
                 }
-                .room_rate_box{
+                .room_rate_box {
                     display: flex;
                     justify-content: flex-end;
-                    @include tab-view{
+                    @include tab-view {
                         justify-content: flex-start;
                     }
                     .rate-box {
@@ -6633,7 +7228,7 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        @include tab-view{
+                        @include tab-view {
                             font-size: 11px;
                             width: 25px;
                             height: 25px;
@@ -6645,17 +7240,16 @@
                         padding: 0;
                         align-items: center;
                         font-size: 12px;
-                        @include tab-view{
+                        @include tab-view {
                             border-bottom: none;
                         }
-                        i{
-                            &:first-child{
+                        i {
+                            &:first-child {
                                 margin-left: 5px;
                             }
                         }
                     }
                 }
-                
             }
         }
 
@@ -6711,14 +7305,14 @@
         .nav-item {
             width: 25%;
             text-align: center;
-            &:first-child{
-                a{
+            &:first-child {
+                a {
                     border-top-left-radius: 5px;
                     margin: 0px 1px 0 0;
                 }
             }
-            &:last-child{
-                a{
+            &:last-child {
+                a {
                     border-top-right-radius: 5px;
                     margin: 0px 0 0 1px;
                 }
@@ -6731,13 +7325,13 @@
                 border-radius: 0px;
                 padding: 20px;
                 margin: 0px 1px;
-                
+
                 &:hover,
                 &.active {
                     color: $text-white;
                     background-color: $primary-color;
                 }
-                @include tab-view{
+                @include tab-view {
                     padding: 8px;
                     font-size: 12px;
                 }
@@ -6747,31 +7341,118 @@
 
     .tab-content {
         background-color: $text-white;
-        padding: 35px 40px;
-        box-shadow: 0px 3px 6px $bg-black-opacity-half;
-        border-radius: 0 0 20px 20px;
-        @include tab-view{
+        padding: 20px;
+        box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+        border-radius: 0 0 5px 5px;
+        @include tab-view {
             padding: 15px;
             font-size: 12px;
         }
 
         .tab-pane {
-            h4{
-                @include tab-view{
+            h4 {
+                font-weight: 600;
+                @include tab-view {
                     font-size: 16px;
                 }
             }
-            
+
             p {
                 color: $text-grey;
-                line-height: 2.2;
+                line-height: 21px;
                 font-weight: 300;
-                @include tab-view{
+                margin-bottom: 20px;
+                @include tab-view {
                     font-size: 12px;
+                }
+            }
+            .amenities_listin_tab {
+                .aminities_detailing {
+                    padding: 5px;
+                    i {
+                        color: $text-grey;
+                        font-size: 14px;
+                    }
+                    span {
+                        font-size: 12px;
+                        color: $text-grey;
+                        padding-left: 10px !important;
+                    }
+                }
+            }
+            .reviews_wrapper_main {
+                .ratings_section {
+                    display: flex;
+                    justify-content: flex-start;
+                    .rating_num {
+                        .blue_box {
+                            color: $text-white;
+                            background-color: $primary-color;
+                            height: 46px;
+                            width: 46px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 17px;
+                            clip-path: polygon(21% 0, 100% 0%, 75% 100%, 0% 100%);
+                        }
+                    }
+                    .rating_detail {
+                        margin-left: 15px;
+                        .users_name {
+                            font-size: 14px;
+                            margin-bottom: 5px;
+                            display: flex;
+                        }
+                        .stars_text {
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            margin-bottom: 10px;
+                            .stars_wrapper {
+                                margin-right: 5px;
+                                img {
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    align-items: center;
+                                }
+                            }
+                            p {
+                                color: #19dd00;
+                                font-size: 14px;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+                .rating_text {
+                    color: $text-grey;
                     line-height: 21px;
+                    font-weight: 300;
+                    margin-bottom: 20px;
+                    margin-left: 65px;
+                    @include tab-view {
+                        font-size: 12px;
+                    }
                 }
             }
         }
     }
 }
 // hotel tab
+
+// HOTEL CUSTOM CSS
+.recent-search-head {
+    border-bottom: 1px solid #000;
+    line-height: 2.2;
+}
+.hotel-parent-recent-search {
+    padding: 2px 10px 10px 10px;
+
+    .recent-search-body {
+        display: flex;
+        img {
+            margin: 2px 5px 5px 0px;
+        }
+    }
+}

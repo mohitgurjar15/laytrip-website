@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, AfterContentChecked, ViewChild } from '@angular/core';
+import { Component, OnInit, DoCheck,  ViewChild, Renderer2 } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
@@ -18,7 +18,7 @@ declare var $: any;
 })
 export class MainHeaderComponent implements OnInit, DoCheck {
 
-  @ViewChild(MainHeaderComponent) headerComponent: MainHeaderComponent;
+  @ViewChild(MainHeaderComponent, { static: false }) headerComponent: MainHeaderComponent;
 
   s3BucketUrl = environment.s3BucketUrl;
   langunages: Langunage[] = [];
@@ -42,7 +42,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public translate: TranslateService,
     public modalService: NgbModal,
     public router: Router,
-    private commonFunction:CommonFunction
+    private commonFunction:CommonFunction,
+    private renderer: Renderer2
   ) {
 
     this.countryCode = this.commonFunction.getUserCountry();
@@ -54,6 +55,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.selectedLanunage = _lang;
         translate.setDefaultLang(this.selectedLanunage.iso_1Code);
         this.isLanunageSet = true;
+        this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
       } catch (error) {
         this.isLanunageSet = false;
         translate.setDefaultLang('en');
@@ -75,6 +77,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }
 
     this.countryCode = this.commonFunction.getUserCountry();
+    
   }
 
   ngOnInit(): void {
@@ -112,7 +115,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
       this.selectedLanunage = langunage;
       localStorage.setItem("_lang", JSON.stringify(langunage))
+      this.renderer.removeClass(document.body, `en_lang`);
+      this.renderer.removeClass(document.body, `es_lang`);
+      this.renderer.removeClass(document.body, `it_lang`);
       this.translate.use(langunage.iso_1Code);
+      this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
     }
   }
 

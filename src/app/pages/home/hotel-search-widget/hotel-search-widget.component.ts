@@ -1,30 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDatepicker, NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDateCustomParserFormatter } from '../../../_helpers/ngbDateCustomParserFormatter';
-import { parse } from 'querystring';
 
 @Component({
   selector: 'app-hotel-search-widget',
   templateUrl: './hotel-search-widget.component.html',
   styleUrls: ['./hotel-search-widget.component.scss'],
-  providers: [{ provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }],
 })
 export class HotelSearchWidgetComponent implements OnInit {
 
+  @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   s3BucketUrl = environment.s3BucketUrl;
   countryCode: string;
-  // checkInDate = new Date(moment().format('MM/DD/YYYY'));
-  // checkOutDate = new Date(moment().add(38, 'days').format('MM/DD/YYYY'));
-  // maxDate: any = {};
-  // minDate: any = {};
-  checkInDate: NgbDate;
-  checkOutDate: NgbDate | null = null;
-  hoveredDate: NgbDate | null = null;
+  checkInDate = new Date();
+  checkOutDate = new Date();
+  rangeDates: Date[];
+  maxDate: any = {};
+  minDate: any = {};
   checkInMinDate;
   checkOutMinDate;
   isPrevButton = false;
@@ -70,30 +65,21 @@ export class HotelSearchWidgetComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
-    private calendar: NgbCalendar,
-    public formatter: NgbDateParserFormatter,
-    private config: NgbDatepickerConfig,
   ) {
-    this.checkInMinDate = new Date();
     this.hotelSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
     });
-    this.checkInDate = calendar.getToday();
-    this.checkOutDate = calendar.getNext(calendar.getToday(), 'd', 7);
-
-    let current = new Date();
-    this.checkInMinDate = {
-      year: current.getFullYear(),
-      month: current.getMonth() + 1,
-      day: current.getDate()
-    };
+    this.checkInMinDate = new Date();
+    this.checkOutMinDate = this.checkInDate;
+    this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
+    this.rangeDates = [this.checkInDate, this.checkOutDate];
 
     this.searchHotelInfo =
     {
       latitude: null,
       longitude: null,
-      check_in: `${this.checkInDate.year}-${this.checkInDate.month}-${this.checkInDate.day}`,
-      check_out: `${this.checkOutDate.year}-${this.checkOutDate.month}-${this.checkOutDate.day}`,
+      check_in: this.checkInDate,
+      check_out: this.checkOutDate,
       occupancies: [
         {
           adults: null,
@@ -122,106 +108,48 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
-  // checkInDateUpdate(date) {
-  //   this.checkInDate = new Date(date);
-  //   this.checkInMinDate = new Date(date);
-  //   this.searchHotelInfo.check_in = this.checkInDate;
-  // }
-
-  // checkOutDateUpdate(date) {
-  //   this.checkOutDate = new Date(date);
-  //   this.checkOutMinDate = new Date(date);
-  //   this.searchHotelInfo.check_out = this.checkOutDate;
-  // }
-
-  dateChange(type, direction) {
-    const checkindate = `${this.searchHotelInfo.check_in.year}/${this.searchHotelInfo.check_in.month}/${this.searchHotelInfo.check_in.day}`;
-    const checkoutdate = `${this.searchHotelInfo.check_out.year}/${this.searchHotelInfo.check_out.month}/${this.searchHotelInfo.check_out.day}`;
-    if (type === 'checkIn') {
-      if (direction === 'previous') {
-        this.checkInDate = this.calendar.getPrev(this.checkInDate, 'd', 1);
-      } else {
-        this.checkInDate = this.calendar.getNext(this.checkInDate, 'd', 1);
-      }
-    }
-    if (type === 'checkOut') {
-      if (direction === 'previous') {
-        this.checkOutDate = this.calendar.getPrev(this.checkOutDate, 'd', 1);
-        this.isPrevButton = false;
-      } else {
-        this.checkOutDate = this.calendar.getNext(this.checkOutDate, 'd', 1);
-        this.isPrevButton = true;
-      }
-    }
-    // if (type === 'checkIn') {
-    //   if (direction === 'previous') {
-    //     if (moment(this.checkInDate).isAfter(moment(new Date()))) {
-    //       this.checkInDate = new Date(moment(this.checkInDate).subtract(1, 'days').format('MM/DD/YYYY'));
-    //     }
-    //   } else {
-    //     this.checkInDate = new Date(moment(this.checkInDate).add(1, 'days').format('MM/DD/YYYY'));
-    //     if (moment(this.checkInDate).isAfter(this.checkOutDate)) {
-    //       this.checkOutDate = new Date(moment(this.checkOutDate).add(1, 'days').format('MM/DD/YYYY'));
-    //     }
-    //   }
-    //   this.checkOutMinDate = new Date(this.checkInDate);
-    // }
-
-    // if (type === 'checkOut') {
-
-    //   if (direction === 'previous') {
-    //     if (moment(this.checkInDate).isBefore(this.checkOutDate)) {
-    //       this.checkOutDate = new Date(moment(this.checkOutDate).subtract(1, 'days').format('MM/DD/YYYY'));
-    //     }
-    //   } else {
-    //     this.checkOutDate = new Date(moment(this.checkOutDate).add(1, 'days').format('MM/DD/YYYY'));
-    //   }
-    // }
-  }
-
-  onDateSelection(date: NgbDate) {
-    if (!this.checkInDate && !this.checkOutDate) {
-      this.checkInDate = date;
-    } else if (this.checkInDate && !this.checkOutDate && date.after(this.checkInDate)) {
-      this.checkOutDate = date;
-    } else {
-      this.checkOutDate = null;
-      this.checkInDate = date;
-    }
-    const selectedDate = {
-      checkInDate: this.checkInDate,
-      checkOutDate: this.checkOutDate
+  checkInDateUpdate(date) {
+    console.log(date);
+    // this is only for closing date range picker, after selecting both dates
+    if (this.rangeDates[1]) { // If second date is selected
+      this.dateFilter.hideOverlay();
     };
-    if (selectedDate.checkInDate && selectedDate.checkOutDate) {
-      if (selectedDate.checkInDate.day < 10 || selectedDate.checkInDate.month < 10) {
-        this.searchHotelInfo.check_in = `${selectedDate.checkInDate.year}-0${selectedDate.checkInDate.month}-0${selectedDate.checkInDate.day}`;
-      } else {
-        this.searchHotelInfo.check_in = `${selectedDate.checkInDate.year}-${selectedDate.checkInDate.month}-${selectedDate.checkInDate.day}`;
-      }
-      if (selectedDate.checkOutDate.day < 10 || selectedDate.checkOutDate.month < 10) {
-        this.searchHotelInfo.check_out = `${selectedDate.checkOutDate.year}-0${selectedDate.checkOutDate.month}-0${selectedDate.checkOutDate.day}`;
-      } else {
-        this.searchHotelInfo.check_out = `${selectedDate.checkOutDate.year}-${selectedDate.checkOutDate.month}-${selectedDate.checkOutDate.day}`;
-      }
+    if (this.rangeDates[0] && this.rangeDates[1]) {
+      this.checkInDate = this.rangeDates[0];
+      this.checkInMinDate = this.rangeDates[0];
+      this.checkOutDate = this.rangeDates[1];
+      this.checkOutMinDate = this.rangeDates[1];
+      this.searchHotelInfo.check_in = this.checkInDate;
+      this.searchHotelInfo.check_out = this.checkOutDate;
     }
   }
 
-  isRange(date: NgbDate) {
-    return date.equals(this.checkInDate) || (this.checkOutDate && date.equals(this.checkOutDate)) || this.isInside(date) || this.isHovered(date);
-  }
+  // dateChange(type, direction) {
+  //   if (type === 'checkIn') {
+  //     if (direction === 'previous') {
+  //       if (moment(this.checkInDate).isAfter(moment(new Date()))) {
+  //         this.checkInDate = new Date(moment(this.checkInDate).subtract(1, 'days').format('MM/DD/YYYY'));
+  //       }
+  //     } else {
+  //       this.checkInDate = new Date(moment(this.checkInDate).add(1, 'days').format('MM/DD/YYYY'));
+  //       if (moment(this.checkInDate).isAfter(this.checkOutDate)) {
+  //         this.checkOutDate = new Date(moment(this.checkOutDate).add(1, 'days').format('MM/DD/YYYY'));
+  //       }
+  //     }
+  //     this.checkOutMinDate = new Date(this.checkInDate);
+  //   }
 
-  isHovered(date: NgbDate) {
-    return this.checkInDate && !this.checkOutDate && this.hoveredDate && date.after(this.checkInDate) && date.before(this.hoveredDate);
-  }
+  //   if (type === 'checkOut') {
 
-  isInside(date: NgbDate) {
-    return this.checkOutDate && date.after(this.checkInDate) && date.before(this.checkOutDate);
-  }
-
-  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-  }
+  //     if (direction === 'previous') {
+  //       if (moment(this.checkInDate).isBefore(this.checkOutDate)) {
+  //         this.checkOutDate = new Date(moment(this.checkOutDate).subtract(1, 'days').format('MM/DD/YYYY'));
+  //       }
+  //     } else {
+  //       this.checkOutDate = new Date(moment(this.checkOutDate).add(1, 'days').format('MM/DD/YYYY'));
+  //     }
+  //   }
+  // }
 
   changeGuestInfo(event) {
     if (this.searchedValue && this.searchedValue.find(i => i.key === 'guest')) {
@@ -241,14 +169,16 @@ export class HotelSearchWidgetComponent implements OnInit {
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
     let queryParams: any = {};
-    queryParams.check_in = this.searchHotelInfo.check_in;
-    queryParams.check_out = this.searchHotelInfo.check_out;
+    queryParams.check_in = moment(this.searchHotelInfo.check_in).format('YYYY-MM-DD');
+    queryParams.check_out = moment(this.searchHotelInfo.check_out).format('YYYY-MM-DD');
     queryParams.latitude = this.searchHotelInfo.latitude;
     queryParams.longitude = this.searchHotelInfo.longitude;
+    queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
+    queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
 
     if (this.searchHotelInfo && this.totalPerson && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out) {
-      localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
+      // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
       this.router.navigate(['hotel/search'], {
         queryParams: queryParams,
         queryParamsHandling: 'merge'

@@ -9,8 +9,8 @@ import { CookieService } from 'ngx-cookie';
 export class CommonFunction {
 
     constructor(
-        private cookieService:CookieService
-    ){
+        private cookieService: CookieService
+    ) {
 
     }
 
@@ -46,7 +46,7 @@ export class CommonFunction {
     }
 
     setHeaders(params = null) {
-        let reqData: any = {headers: {}};
+        let reqData: any = { headers: {} };
         const accessToken = localStorage.getItem('_lay_sess');
         if (accessToken) {
             reqData = {
@@ -74,9 +74,9 @@ export class CommonFunction {
     }
 
     convertDateYYYYMMDD(date, sourceFormat) {
-        
+
         return moment(date, sourceFormat).format('YYYY-MM-DD')
-       
+
     }
     dateFormat(languageCode = null) {
 
@@ -126,44 +126,44 @@ export class CommonFunction {
         dateSent = new Date(dateSent);
         const days = Math.floor((Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
         if (days > 0) {
-          return days;
+            return days;
         } else {
-          return 0;
+            return 0;
         }
-      }
+    }
 
-    decodeUrl(url){
-        let prevUrl=[];
-        let queryParams={}
-        if(url){
+    decodeUrl(url) {
+        let prevUrl = [];
+        let queryParams = {}
+        if (url) {
             prevUrl = url.split('?')
-            if(typeof prevUrl[1]!='undefined'){
+            if (typeof prevUrl[1] != 'undefined') {
 
                 let params = prevUrl[1].split('&');
-                for(let i in params){
+                for (let i in params) {
                     let param = params[i].split("=");
-                    queryParams[param[0]]=param[1];
+                    queryParams[param[0]] = param[1];
                 }
             }
 
             return {
-                url : prevUrl[0],
-                params : queryParams
+                url: prevUrl[0],
+                params: queryParams
             }
         }
         return {
-            url : '/',
-            params : {}
+            url: '/',
+            params: {}
         };
     }
 
-    getUserCountry(){
+    getUserCountry() {
 
-        try{
-          let countryCode = localStorage.getItem("__uorigin");
-          return countryCode || '';
+        try {
+            let countryCode = localStorage.getItem("__uorigin");
+            return countryCode || '';
         }
-        catch(e){
+        catch (e) {
             return '';
         }
     }

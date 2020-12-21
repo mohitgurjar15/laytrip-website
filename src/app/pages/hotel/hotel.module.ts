@@ -28,6 +28,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
 
 // HELPERS MODULE
 import { HelpersModule } from '../../_helpers/_helpers.module';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
+    AgmJsMarkerClustererModule,
     NgxGalleryModule,
   ],
   exports: [

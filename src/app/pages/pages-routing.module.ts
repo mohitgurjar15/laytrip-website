@@ -19,23 +19,23 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren: './home/home.module#HomeModule'
+                loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
             },
             {
                 path: 'flight',
-                loadChildren: './flight/flight.module#FlightModule'
+                loadChildren: () => import('./flight/flight.module').then(m => m.FlightModule)
             },
             {
                 path: 'hotel',
-                loadChildren: './hotel/hotel.module#HotelModule'
+                loadChildren: () => import('./hotel/hotel.module').then(m => m.HotelModule)
             },
             {
                 path: 'vacation-rental',
-                loadChildren: './vacation-rental/vacation-rental.module#VacationRentalModule'
+                loadChildren: () => import('./vacation-rental/vacation-rental.module').then(m => m.VacationRentalModule)
             },
             {
                 path: 'account',
-                loadChildren: './user/user.module#UserModule'
+                loadChildren: () => import('./user/user.module').then(m => m.UserModule)
             },
             {
                 path: 'contact-us',

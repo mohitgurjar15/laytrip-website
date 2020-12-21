@@ -11,6 +11,10 @@ import { CommonFunction } from '../_helpers/common-function';
 
 export class HotelService {
 
+    headers = {
+        currency: 'USD',
+        language: 'en'
+    }
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
@@ -19,21 +23,21 @@ export class HotelService {
     }
 
     searchHotels(data) {
-        return this.http.post(`${environment.apiUrl}v1/hotel/search-location/`, data, this.commonFunction.setHeaders())
+        return this.http.post(`${environment.apiUrl}v1/hotel/search-location/`, data)
             .pipe(
                 catchError(this.handleError)
             );
     }
 
     getHotelSearchResult(data) {
-        return this.http.post(`${environment.apiUrl}v1/hotel/search/`, data, this.commonFunction.setHeaders())
+        return this.http.post(`${environment.apiUrl}v1/hotel/search/`, data, this.commonFunction.setHeaders(this.headers))
             .pipe(
                 catchError(this.handleError)
             );
     }
 
     getFilterObjectsHotel(data) {
-        return this.http.post(`${environment.apiUrl}v1/hotel/filter-objects`, data, this.commonFunction.setHeaders())
+        return this.http.post(`${environment.apiUrl}v1/hotel/filter-objects`, data, this.commonFunction.setHeaders(this.headers))
             .pipe(
                 catchError(this.handleError)
             );
@@ -41,7 +45,7 @@ export class HotelService {
 
     getHotelDetail(id) {
         console.log(id);
-        return this.http.post(`${environment.apiUrl}v1/hotel/detail`, { hotel_id: id }, this.commonFunction.setHeaders())
+        return this.http.post(`${environment.apiUrl}v1/hotel/detail`, { hotel_id: id }, this.commonFunction.setHeaders(this.headers))
             .pipe(
                 catchError(this.handleError)
             );

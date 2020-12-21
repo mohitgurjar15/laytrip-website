@@ -151,8 +151,8 @@ export class VacationRentalSearchBarComponent implements OnInit {
     }
   }
 
-   selectEvent(event, index) {
-     console.log(event,index);
+   selectEvent(event) {
+     console.log(event);
      if (!event) {
       this.placeHolder = this.placeHolder;
       this.defaultSelected = this.defaultSelected;
@@ -165,10 +165,10 @@ export class VacationRentalSearchBarComponent implements OnInit {
     this.defaultCountry =this.defaultSelected.country;
   }
 
-  onRemove(event, item) {
-    if (item.key === 'fromSearch1') {
+  onRemove(event) {
+    //if (item.key === 'fromSearch1') {
       this.defaultCity = Object.create(null);
-    }
+    //}
   }
 
   searchRentals(formData){

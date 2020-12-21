@@ -30,22 +30,20 @@ export class GuestInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private commonFunction: CommonFunction
   ) {
-    const info = JSON.parse(localStorage.getItem('_hote'));
-    if (info) {
-      info.forEach(i => {
-        if (i && i.key === 'guest') {
-          this.roomsGroup = i.value;
-        }
-      });
-    } else {
-      this.roomsGroup = this.roomsGroup;
-    }
-    this.totalPerson = this.getTotalPerson();
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
   ngOnInit() {
     this.loadJquery();
+    if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
+      const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+      if (info && info.length) {
+        this.roomsGroup = info;
+      }
+    } else {
+      this.roomsGroup = this.roomsGroup;
+    }
+    this.totalPerson = this.getTotalPerson();
   }
 
   loadJquery() {
@@ -81,7 +79,7 @@ export class GuestInfoComponent implements OnInit {
   }
 
   removeRoom(index) {
-    this.roomsGroup.pop();
+    this.roomsGroup.splice(index, 1);
     this.totalPerson = this.getTotalPerson();
     this.changeValue.emit(this.roomsGroup);
   }
@@ -99,9 +97,6 @@ export class GuestInfoComponent implements OnInit {
     if (item && item.type === 'plus' && item.label === 'child') {
       this.roomsGroup[item.id].child.push(1);
       this.totalPerson = this.getTotalPerson();
-      if (this.roomsGroup[item.id].child.length > 4) {
-        this.errorMessage = 'Maximum number of passengers all together should not exceed 4 except child.';
-      }
     } else if (item && item.type === 'minus' && item.label === 'child') {
       this.roomsGroup[item.id].child.pop();
       this.roomsGroup[item.id].children.pop();

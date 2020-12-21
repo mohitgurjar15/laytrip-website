@@ -4,20 +4,30 @@
         bindLabel="title" bindValue="title" [(ngModel)]="defaultSelected.city" [clearable]="false" minTermLength="3"
         notFoundText="" [virtualScroll]="true" (search)="onChangeSearch($event)" loadingText=""
         (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input"
-        placeholder="{{ placeHolder }}" [tabIndex]="tabIndex">
-        <!-- [(ngModel)]="defaultSelected" -->
+        placeholder="{{ defaultCity }}" [tabIndex]="tabIndex">
+        <!-- [(ngModel)]="defaultSelected.city" -->
         <ng-template ng-label-tmp let-item="item">
             <div class="hotel-parent">
                 <!-- <img height="15" width="15" [src]="item.thumbnail" /> -->
                 <div class="sub-parent">{{item.title}}</div>
             </div>
         </ng-template>
+        <!-- <ng-template ng-option-tmp let-item="recentSearchInfo" [ngIf]="recentSearchInfo">
+            <div class="hotel-parent-recent-search" *ngIf="recentSearchInfo">
+                <h6 class="recent-search-head">Recent Searches</h6>
+                <div class="recent-search-body">
+                    <img height="15" width="15" [src]="itemIconArray[recentSearchInfo.type]" />
+                    <div class="sub-parent">{{recentSearchInfo.title}}</div>
+                </div>
+            </div>
+        </ng-template> -->
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
             <div class="hotel-parent">
-                <img height="15" width="15" [src]="item.thumbnail" />
+                <img height="15" width="15" [src]="itemIconArray[item.type]" />
                 <div class="sub-parent">{{item.title}}</div>
             </div>
         </ng-template>
+
     </ng-select>
     <span *ngIf="defaultSelected">{{ defaultSelected.city }}, {{defaultSelected.country}}</span>
 </div>

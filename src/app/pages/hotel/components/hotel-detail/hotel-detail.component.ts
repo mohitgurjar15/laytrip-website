@@ -12,10 +12,10 @@ import { environment } from '../../../../../environments/environment';
 export class HotelDetailComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  calenderPrices: [] = [];
   hotelId;
   hotelDetails;
   imageTemp = [];
+  loading = false;
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -26,7 +26,7 @@ export class HotelDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.loading = true;
     this.galleryOptions = [
       {
         width: '100%',
@@ -63,6 +63,7 @@ export class HotelDetailComponent implements OnInit {
     this.hotelService.getHotelDetail(`${this.hotelId}`).subscribe((res: any) => {
       console.log(res);
       if (res && res.data) {
+        this.loading = false;
         this.hotelDetails = {
           name: res.data.name,
           city_name: res.data.address.city_name,
@@ -70,7 +71,11 @@ export class HotelDetailComponent implements OnInit {
           country_name: res.data.address.country_name,
           rating: res.data.rating,
           review_rating: res.data.review_rating,
+          description: res.data.description,
+          amenities: res.data.amenities,
+          hotelLocations: res.data.geocodes
         };
+        console.log(this.hotelDetails);
         if (res.data.images) {
           res.data.images.forEach(imageUrl => {
             this.imageTemp.push({
@@ -84,6 +89,7 @@ export class HotelDetailComponent implements OnInit {
         }
       }
     }, error => {
+      this.loading = false;
       console.log(error);
     });
   }
