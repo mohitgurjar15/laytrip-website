@@ -9,31 +9,31 @@ exports.__esModule = true;
 exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
+var environment_1 = require("../environments/environment");
 var AppComponent = /** @class */ (function () {
     function AppComponent(cookieService, genericService, swPush) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.swPush = swPush;
         this.title = 'laytrip-website';
-        this.VAPID_PUBLIC_KEY = "BL6lEBuIL5QndQkV6pP-r1za33NJQ0u9fj2SWplSfk3ZmKj5i7Kcyq9C1simRWRxfgHXQHF_8zFDYO8jv6ljF68";
+        this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
         this.setUserOrigin();
         this.getUserLocationInfo();
     }
     AppComponent.prototype.ngOnInit = function () {
         var token = localStorage.getItem('_lay_sess');
-        console.log(token);
         if (token) {
             this.subscribeToNotifications();
         }
     };
     AppComponent.prototype.subscribeToNotifications = function () {
-        console.log("subscribeToNotifications");
+        var _this = this;
         this.swPush.requestSubscription({
             serverPublicKey: this.VAPID_PUBLIC_KEY
         })
-            .then(function (sub) { return console.log(sub, 'here'); }
-        //this.newsletterService.addPushSubscriber(sub).subscribe()
-        )["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
+            .then(function (sub) {
+            return _this.genericService.addPushSubscriber(sub).subscribe();
+        })["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
     };
     AppComponent.prototype.setUserOrigin = function () {
         var host = window.location.origin;
