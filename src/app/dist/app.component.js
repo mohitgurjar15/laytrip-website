@@ -9,13 +9,14 @@ exports.__esModule = true;
 exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
+var environment_1 = require("../environments/environment");
 var AppComponent = /** @class */ (function () {
     function AppComponent(cookieService, genericService, swPush) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.swPush = swPush;
         this.title = 'laytrip-website';
-        this.VAPID_PUBLIC_KEY = "BL6lEBuIL5QndQkV6pP-r1za33NJQ0u9fj2SWplSfk3ZmKj5i7Kcyq9C1simRWRxfgHXQHF_8zFDYO8jv6ljF68";
+        this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
         this.setUserOrigin();
         this.getUserLocationInfo();
     }
@@ -31,8 +32,7 @@ var AppComponent = /** @class */ (function () {
             serverPublicKey: this.VAPID_PUBLIC_KEY
         })
             .then(function (sub) {
-            //console.log(JSON.stringify(sub),'here') 
-            return _this.genericService.addPushSubscriber(JSON.stringify(sub)).subscribe();
+            return _this.genericService.addPushSubscriber(sub).subscribe();
         })["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
     };
     AppComponent.prototype.setUserOrigin = function () {

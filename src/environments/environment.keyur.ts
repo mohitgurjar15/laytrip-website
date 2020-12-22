@@ -5,6 +5,7 @@ export const environment = {
     s3BucketUrl:'http://localhost/laytrip-website/laytrip_ui/',
     fb_api_key:'402941427334423',
     google_client_id:'154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com',
-    siteUrl: 'https://staging.laytrip.com'
+    siteUrl: 'https://staging.laytrip.com',
+
 
   };

@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie';
 import { GenericService } from './services/generic.service';
 import * as moment from 'moment';
 import { SwPush } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { SwPush } from '@angular/service-worker';
 })
 export class AppComponent {
   title = 'laytrip-website';
-  readonly VAPID_PUBLIC_KEY = "BL6lEBuIL5QndQkV6pP-r1za33NJQ0u9fj2SWplSfk3ZmKj5i7Kcyq9C1simRWRxfgHXQHF_8zFDYO8jv6ljF68";
+  VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
 
   constructor(
     private cookieService:CookieService,
@@ -29,14 +30,14 @@ export class AppComponent {
     }
   }
 
-  subscribeToNotifications() {
 
+  subscribeToNotifications() {
     this.swPush.requestSubscription({
         serverPublicKey: this.VAPID_PUBLIC_KEY
     })
     .then(sub =>
-      //console.log(JSON.stringify(sub),'here') 
-        this.genericService.addPushSubscriber(JSON.stringify(sub)).subscribe()
+
+        this.genericService.addPushSubscriber(sub).subscribe()
       )
     .catch(err => console.error("Could not subscribe to notifications", err));
   }
