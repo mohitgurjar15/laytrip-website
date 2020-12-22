@@ -182,3 +182,63 @@ agm-map {
         }
     }
 }
+
+.hotel_detail_tabs{
+    margin-bottom: 10px;
+}
+
+.result_listing{
+    &.hotel_listings{
+        .section_title{
+            color: $text-grey;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 10px 0;
+            text-align: left;
+            padding: 0;
+        }
+        .search_block{
+            .listing_block{
+                .block_detail{
+                    .block_detail_top{
+                        .detail_info{
+                            .refen_tag{
+                                display: flex;
+                                margin-bottom: 10px;
+                                padding-bottom: 10px;
+                                border-bottom: 1px solid #E0E2E5;
+                                span{
+                                    background-color: $bg-green;
+                                    color: $text-white;
+                                    border-radius: 5px;
+                                    padding: 5px 15px;
+                                    font-size: 10px;
+                                }
+                            }
+                            .review_section_wrap{
+                                .right_bar{
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 100%;
+                                    .amminities_list{
+                                        margin-left: 0;
+                                        img{
+                                            margin-right: 10px;
+                                            max-width: 18px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .right_sectiond_price{
+                    max-width: 175px;
+                    @include tab-view {
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
