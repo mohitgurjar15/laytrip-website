@@ -61,29 +61,9 @@
               <p>
                 {{hotelDetails?.description}}
               </p>
-              <!-- <h4>Guest policy</h4> -->
-              <!-- <p>
-                It is a long established fact that a reader will be distracted by the readable content of a page
-                when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                distribution of lettersas opposed to using ‘Content here, content here’, making it look like readable
-                English.It is a long established fact that a reader will be distracted by the readable content of a
-                page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of lettersas opposed to using ‘Content here, content here’, making it look like
-              </p> -->
-              <!-- <h4>Hotel important information</h4> -->
-              <!-- <p>
-                It is a long established fact that a reader will be distracted by the readable content of a page
-                when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                distribution of lettersas opposed to using ‘Content here, content here.
-              </p> -->
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <h4>Amenities</h4>
-              <!-- <p>
-                It is a long established fact that a reader will be distracted by the readable content of a page
-                when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                distribution of lettersas opposed to using ‘Content here, content here.
-              </p> -->
               <div class="row">
                 <div class="col-md-4 p-3" *ngFor="let item of hotelDetails?.amenities.list">
                   <i class="fa fa-check-circle" aria-hidden="true"></i>
@@ -92,42 +72,21 @@
               </div>
             </div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-              <div class="reviews_wrapper_main">
+              <div class="reviews_wrapper_main" *ngFor="let item of hotelDetails?.hotelReviews">
                 <div class="ratings_section">
                   <div class="rating_num">
                     <span class="blue_box">
-                      8.8
+                      {{item?.average_rating}}
                     </span>
                   </div>
                   <div class="rating_detail">
-                    <span class="users_name">User Name</span>
+                    <span class="users_name">{{item?.user_name}}</span>
                     <div class="stars_text">
                       <div class="stars_wrapper">
-                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
+                        <img *ngFor='let in of counter(item.average_rating)'
+                          src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
                       </div>
-                      <p>Fabulous</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="rating_text">
-                  It is a long established fact that a reader will be distracted by the readable content of apage when
-                  looking at its layout.
-                </p>
-              </div>
-              <div class="reviews_wrapper_main">
-                <div class="ratings_section">
-                  <div class="rating_num">
-                    <span class="blue_box">
-                      8.8
-                    </span>
-                  </div>
-                  <div class="rating_detail">
-                    <span class="users_name">User Name</span>
-                    <div class="stars_text">
-                      <div class="stars_wrapper">
-                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
-                      </div>
-                      <p>Fabulous</p>
+                      <p>{{item?.average_rating_description}}</p>
                     </div>
                   </div>
                 </div>
@@ -150,11 +109,226 @@
             </div>
           </div>
         </div>
+
+        <!-- *ngFor="let item of hotelRoomArray; let blockIndex = index;" -->
+        <div class="result_listing hotel_listings">
+          <div class="section_title">
+            Hotels
+          </div>
+          <div class="search_block">
+            <div class="listing_block">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="block_main">
+                    <div class="block_top">
+                      <div class="block_inner">
+                        <div class="col-md-4 col-lg-4 px-0">
+                          <div class="block_im">
+                            <div class="hotel_list_img_wrp">
+                              <!-- <span class="fav_sections">
+                                <a href="javascript:void(0);" class="heart_blank"></a>
+                              </span> -->
+                              <img src="" alt="Hotel image">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-8 col-lg-8 pr-0">
+                          <div class="block_detail">
+                            <div class="block_detail_top">
+                              <div class="detail_info">
+                                <h4>abcs</h4>
+                                <div class="refen_tag">
+                                  <span>Refundable</span>
+                                </div>
+                                <div class="review_section_wrap">
+                                  <div class="right_bar">
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="" alt=""> aaaaa
+                                      </div>
+                                    </div>
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="" alt=""> aaaaa
+                                      </div>
+                                    </div>
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="" alt=""> aaaaa
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 px-0 right_sectiond_price">
+                  <div class="row">
+                    <div class="block_price block_pr">
+                      <div class="block_inn_pr">
+                        <div class="block">
+                          <p>Room Starts from</p>
+                          <p><span>11</span> /week</p>
+                        </div>
+                      </div> <a class="book_btn" href="">Select</a>
+                      <div class="show_detail">
+                        <a class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
+                            alt="Information Icon">Payment
+                          plan details</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail_info_show d-none">
+              <div class="card-body">
+                <div class="block_flight_info">
+                  <div class="tab_detail fare_detail_cnt">
+                    <div class="triangle_right"></div>
+                    <ul>
+                      <li>Base Fare <span>44</span></li>
+                      <li>Taxes and Fees <span>44</span></li>
+                      <li>Total Fare <span>44</span></li>
+                    </ul>
+                    <div class="triangle_left"></div>
+                    <ul>
+                      <li class="down_payment">
+                        11
+                        <span class="down_value">111</span>
+                      </li>
+                      <ng-container>
+                        <li>
+                          <div class="detail">aa
+                            <p>aa
+                            </p>
+                          </div> <span>aa</span>
+                        </li>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="search_block">
+            <div class="listing_block">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="block_main">
+                    <div class="block_top">
+                      <div class="block_inner">
+                        <div class="col-md-4 col-lg-4 px-0">
+                          <div class="block_im">
+                            <div class="hotel_list_img_wrp">
+                              <!-- <span class="fav_sections">
+                                <a href="javascript:void(0);" class="heart_blank"></a>
+                              </span> -->
+                              <img src="" alt="Hotel image">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-8 col-lg-8 pr-0">
+                          <div class="block_detail">
+                            <div class="block_detail_top">
+                              <div class="detail_info">
+                                <h4>abcs</h4>
+                                <div class="refen_tag">
+                                  <span>Refundable</span>
+                                </div>
+                                <div class="review_section_wrap">
+                                  <div class="right_bar">
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="" alt=""> aaaaa
+                                      </div>
+                                    </div>
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="" alt=""> aaaaa
+                                      </div>
+                                    </div>
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="" alt=""> aaaaa
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 px-0 right_sectiond_price">
+                  <div class="row">
+                    <div class="block_price block_pr">
+                      <div class="block_inn_pr">
+                        <div class="block">
+                          <p>Room Starts from</p>
+                          <p><span>11</span> /week</p>
+                        </div>
+                      </div> <a class="book_btn" href="">Select</a>
+                      <div class="show_detail">
+                        <a class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
+                            alt="Information Icon">Payment
+                          plan details</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail_info_show d-none">
+              <div class="card-body">
+                <div class="block_flight_info">
+                  <div class="tab_detail fare_detail_cnt">
+                    <div class="triangle_right"></div>
+                    <ul>
+                      <li>Base Fare <span>44</span></li>
+                      <li>Taxes and Fees <span>44</span></li>
+                      <li>Total Fare <span>44</span></li>
+                    </ul>
+                    <div class="triangle_left"></div>
+                    <ul>
+                      <li class="down_payment">
+                        11
+                        <span class="down_value">111</span>
+                      </li>
+                      <ng-container>
+                        <li>
+                          <div class="detail">aa
+                            <p>aa
+                            </p>
+                          </div> <span>aa</span>
+                        </li>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
+
+
       <div class="col-lg-4">
         <div class="hotel_detail_sidebar">
           <h3 class="section_title">
-            Booking Summary
+            Room Summary
           </h3>
           <div class="display_wrapper">
             <div class="detail_display">
@@ -172,14 +346,14 @@
                   <label for="">CHECK IN</label>
                   <span>
                     <span>Oct 24 2020</span>
-                    <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                    <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_calender-icon.svg" alt="">
                   </span>
                 </div>
                 <div class="datewrapper">
                   <label for="">CHECK OUT</label>
                   <span>
                     <span>Oct 24 2020</span>
-                    <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                    <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_calender-icon.svg" alt="">
                   </span>
                 </div>
               </div>
@@ -229,7 +403,7 @@
                 <span>1</span>
               </div>
               <div class="fare_listing">
-                <span>1st Installment 
+                <span>1st Installment
                   <span>(Oct 24 2020)</span>
                 </span>
                 <span>1</span>

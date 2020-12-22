@@ -26,11 +26,11 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
   loading = false;
   data = [];
   itemIconArray = {
-    hotel: `${this.s3BucketUrl}assets/images/icon/hotel.png`,
-    city: `${this.s3BucketUrl}assets/images/icon/city.png`,
-    airport: `${this.s3BucketUrl}assets/images/icon/airport.png`,
-    region: `${this.s3BucketUrl}assets/images/icon/region.png`,
-    poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
+    hotel: `${this.s3BucketUrl}assets/images/hotels/hotel.svg`,
+    city: `${this.s3BucketUrl}assets/images/hotels/city.svg`,
+    airport: `${this.s3BucketUrl}assets/images/hotels/airport.svg`,
+    region: `${this.s3BucketUrl}assets/images/hotels/region.svg`,
+    poi: `${this.s3BucketUrl}assets/images/hotels/poi.svg`,
   };
   recentSearchInfo = [];
   isShowRecentSearch = true;
