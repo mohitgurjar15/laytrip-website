@@ -21,19 +21,19 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         var token = localStorage.getItem('_lay_sess');
-        console.log(token);
         if (token) {
             this.subscribeToNotifications();
         }
     };
     AppComponent.prototype.subscribeToNotifications = function () {
-        console.log("subscribeToNotifications");
+        var _this = this;
         this.swPush.requestSubscription({
             serverPublicKey: this.VAPID_PUBLIC_KEY
         })
-            .then(function (sub) { return console.log(sub, 'here'); }
-        //this.newsletterService.addPushSubscriber(sub).subscribe()
-        )["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
+            .then(function (sub) {
+            //console.log(JSON.stringify(sub),'here') 
+            return _this.genericService.addPushSubscriber(JSON.stringify(sub)).subscribe();
+        })["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
     };
     AppComponent.prototype.setUserOrigin = function () {
         var host = window.location.origin;
