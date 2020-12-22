@@ -92,10 +92,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }
   }
-
-  ngAfterContentChecked() {
-   
-  }
+  
 
   ngDoCheck() {
     this.checkUser();
