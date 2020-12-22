@@ -54,7 +54,7 @@
     "ngx-cookie": "^5.0.0",
     "ngx-countdown": "^3.1.0",
     "ngx-gallery": "^5.10.0",
-    "ngx-scrollbar": "^7.5.2",
+    "ngx-scrollbar": "4.2.0",
     "ngx-toastr": "^10.1.0",
     "node-sass": "^4.0.0",
     "popper.js": "^1.16.1",
