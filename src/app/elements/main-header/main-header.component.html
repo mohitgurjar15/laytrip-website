@@ -81,7 +81,11 @@
                                 </a>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-                                <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">{{'sign_in' | translate}}</a>
+                                <!-- <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">{{'sign_in' | translate}}</a> -->
+                                <a class="nav-link login_btn_text hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"><defs></defs><path class="a" d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0"/></svg>
+                                    {{'sign_in' | translate}}
+                                </a>
                             </li>
 
                             <li class="nav-item" *ngIf="isLoggedIn && userDetails.roleId != 7">
@@ -102,7 +106,10 @@
                 </nav>
             </div>
             <div class="show_resposive">
-                <a *ngIf="!isLoggedIn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" class="nav-link login_btn hover-link" data-toggle="modal" data-target="#sign_in_modal">Sign In</a>
+                <a *ngIf="!isLoggedIn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" class="nav-link login_btn_text hover-link" data-toggle="modal" data-target="#sign_in_modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"><defs></defs><path class="a" d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0"/></svg>
+                    Sign In
+                </a>
                 <div class="dropdown account_ddown" *ngIf="isLoggedIn && userDetails.roleId != 7">
                     <a class="nav-link hover-link" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
