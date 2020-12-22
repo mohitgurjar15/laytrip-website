@@ -146,10 +146,54 @@
 ::ng-deep .calender-price-view{
     //width: 340px;
     min-width: 340px !important;
-    .ui-state-active {
-        background-color: #012178 !important;
-        .calender_price{
-            color: #fff !important;
+    
+
+    .p-datepicker-calendar-container{
+        .p-datepicker-calendar{
+            tbody{
+                tr{
+                    td{
+                        .p-ripple{
+                            display: flex;
+                            flex-flow: column;
+                            width: auto;
+                            height: auto;
+                            border-radius: 0;
+                            background: transparent;
+
+                            &:hover{
+                                background: transparent;
+                                .c_date{
+                                    background: #F826C1;
+                                }
+                            }
+                            &.p-highlight {
+                                background: transparent !important;
+                                .c_date{
+                                    background: #F826C1;
+                                }
+                            }
+                        }
+
+                        .c_date{
+                            display: block;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            background: #2196F3;
+                            padding: 5px;
+                            text-align: center;
+                            line-height: 20px;
+                            color: #fff !important;
+                        }
+                        .calender_price{
+                            display: block;
+                            margin-top:3px;
+                        }
+                        
+                    }
+                }
+            }
         }
     }
 }
@@ -161,27 +205,5 @@
     padding: 0 20px;
 }
 
-p-calendar{
-    .p-datepicker-calendar-container{
-        .p-datepicker-calendar{
-            tbody{
-                tr{
-                    td{
-                        span{
-                            &.p-highlight{
-                                display: flex;
-                                flex-direction: column;
-                                align-items: center;
-                                justify-content: center;
-                                span{
-                                    font-size: 10px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+
 
