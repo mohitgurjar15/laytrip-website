@@ -15,6 +15,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { VacationNotFoundComponent } from './components/vacation-not-found/vacation-not-found.component';
 import { ComponentsModule } from '../../components/components.module';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 @NgModule({
   declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent],
@@ -32,6 +33,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
+    AgmJsMarkerClustererModule,
   ],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

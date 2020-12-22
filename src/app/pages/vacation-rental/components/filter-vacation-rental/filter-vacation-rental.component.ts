@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class FilterVacationRentalComponent implements OnInit,OnDestroy {
 
+  compact = false;
+  invertX = false;
+  invertY = false;
+  shown = 'native';
+
+  @ViewChild("scrollable", { static: true, read: ElementRef } as any)
+  scrollbar: ElementRef;
+  contentWrapper: HTMLElement;
+  
   @Input() rentalFilterDetails: any;
   @Input() isResetFilter: string;
   @Output() filterRental = new EventEmitter();

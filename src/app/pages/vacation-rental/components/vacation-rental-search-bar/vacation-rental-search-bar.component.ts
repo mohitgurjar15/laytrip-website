@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input, SimpleChanges,ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,7 +13,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./vacation-rental-search-bar.component.scss']
 })
 export class VacationRentalSearchBarComponent implements OnInit {
-  
+
+  @ViewChild('dateFilter', undefined) private dateFilter: any;
   @Output() searchBarInfo = new EventEmitter<any>();
   @Input() calenderPrices:any=[];
   s3BucketUrl = environment.s3BucketUrl;
@@ -25,10 +26,11 @@ export class VacationRentalSearchBarComponent implements OnInit {
     type:"",
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     check_out_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
-    number_and_children_ages:[],
-    adult_count:1,
-    child:'',
+    number_and_children_ages:undefined,
+    adult_count:undefined,
+    child:undefined,
   }
+  rangeDates: Date[];
   totalPerson: number = 1;
   rentalCheckInMinDate;
   rentalCheckoutMinDate;
@@ -50,8 +52,8 @@ export class VacationRentalSearchBarComponent implements OnInit {
   	
     this.rentalSearchForm = this.fb.group({   
       fromDestination: ['', [Validators.required]],
-      check_in_date: [[Validators.required]],
-      check_out_date: [[Validators.required]],
+      //check_in_date: [[Validators.required]],
+      //check_out_date: [[Validators.required]],
     });
   }
 
@@ -65,20 +67,34 @@ export class VacationRentalSearchBarComponent implements OnInit {
           type: info.type,
           city: info.city,
           country: info.country,
+          adult_count: info.adult_count,
+          child: info.child,
+          number_and_children_ages: info.number_and_children_ages,
     }];
      this.defaultCity    = info.city;
      this.defaultCountry = info.country;
       
     console.log(this.data);
-    this.rentalForm.check_in_date=this.commonFunction.convertDateFormat(info.check_in_date, 'YYYY-MM-DD');
-    this.rentalForm.check_out_date=this.commonFunction.convertDateFormat(info.check_out_date, 'YYYY-MM-DD');
+    this.rentalForm.check_in_date=new Date(info.check_in_date); 
+    this.rentalForm.check_out_date=new Date(info.check_out_date);   
+    this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
+
   }
 
 
 
   rentalDateUpdate(date) {
-    this.rentalForm.check_out_date = new Date(date)
-    this.rentalCheckoutMinDate = new Date(date)
+    // this.rentalForm.check_out_date = new Date(date)
+    // this.rentalCheckoutMinDate = new Date(date)
+     if (this.rangeDates[1]) { // If second date is selected
+      this.dateFilter.hideOverlay();
+    };
+    if (this.rangeDates[0] && this.rangeDates[1]) {
+      this.rentalCheckInMinDate = this.rangeDates[0];
+      this.rentalForm.check_in_date  = this.rentalCheckInMinDate;
+      this.rentalForm.check_out_date = this.rangeDates[1];
+      
+   }
   }
 
    changeRentalInfo(event){
@@ -172,7 +188,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
   }
 
   searchRentals(formData){
-    console.log(this.data);
+    
     formData.id=this.defaultSelected.id == undefined ? this.data[0].id:this.defaultSelected.id;
     formData.city=this.defaultSelected.city == undefined ? this.data[0].id:this.defaultSelected.city;
     formData.country=this.defaultSelected.country == undefined ? this.data[0].id:this.defaultSelected.country;
@@ -180,7 +196,11 @@ export class VacationRentalSearchBarComponent implements OnInit {
     formData.type=this.defaultSelected.type == undefined ? this.data[0].type:this.defaultSelected.type;
     formData.check_in_date=moment(formData.check_in_date).format("YYYY-MM-DD");
     formData.check_out_date=moment(formData.check_out_date).format("YYYY-MM-DD");
+    formData.adult_count=formData.adult_count == undefined ? this.data[0].adult_count:formData.adult_count;
+    formData.child=formData.child == undefined ? this.data[0].child:formData.child;
+    formData.number_and_children_ages=formData.number_and_children_ages == undefined ? this.data[0].number_and_children_ages:formData.number_and_children_ages;
     console.log(formData);
+    //return false;
     localStorage.setItem('_rental', JSON.stringify(formData));
     this.searchBarInfo.emit(formData);
   }

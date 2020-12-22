@@ -6,8 +6,6 @@ import { VacationRentalService } from '../../../../services/vacation-rental.serv
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-import { CommonFunction } from '../../../../_helpers/common-function';
-import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 
@@ -29,17 +27,10 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
   isMapView = false;
   markers = [];
   zoom = 10;
-  lat: number;
-  long: number;
-  price: any;
-  dis_image: any;
   constructor(
     private rentalService: VacationRentalService,
     private router: Router,
-    private route: ActivatedRoute,
-    private cookieService: CookieService,
-    private commonFunction: CommonFunction,
-    private genericService: GenericService) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -61,23 +52,8 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     if (view === 'listView') {
       this.isMapView = false;
     } else {
-      this.isMapView = true;
-      this.markers = [];
-      this.lat = this.rentalListArray[0].latitude;
-      this.long = this.rentalListArray[0].longintude;
-      this.price = this.rentalListArray[0].selling_price;
-      //this.dis_image=this.rentalListArray[0].display_image;
-      for (var _i = 0; _i < this.rentalListArray.length; _i++) {
-        this.markers.push({
-          lat: this.rentalListArray[_i].latitude,
-          lng: this.rentalListArray[_i].longintude,
-          label: this.rentalListArray[_i].property_name,
-          price: this.rentalListArray[_i].selling_price,
-          dis_image: this.rentalListArray[_i].display_image,
-          //map_icon:'http://maps.google.com/mapfiles/ms/icons/green.png'  
-        })
-      }
-    };
+       this.isMapView = true;
+    }
   }
 
   onMouseOver(infoWindow, gm) {

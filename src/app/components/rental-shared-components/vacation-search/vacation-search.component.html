@@ -1,6 +1,6 @@
 <div [formGroup]="form">
     <label>{{label}}</label>
-    <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
+    <ng-select [formControlName]="controlName" [loading]="loading"  [selectOnTab]="true" [items]="data"
         bindLabel="title" bindValue="title" [(ngModel)]="defaultSelected.city" [clearable]="false" minTermLength="3"
         notFoundText="" [virtualScroll]="true" (search)="onChangeSearch($event)" loadingText=""
         (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input"
