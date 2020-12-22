@@ -369,7 +369,7 @@
     "pay_and_complete_booking": "Pay & Complete Booking",
     "apply_laycredit": "Apply Laycredits",
     "use_laycredi_in_booking_info_message_1": "Use Laycredit for this booking.You have",
-    "use_laycredi_in_booking_info_message_2": "<span>Laycredits</span> in your wallet.",
+    "use_laycredi_in_booking_info_message_2": "in your wallet.",
     "dicounted_price": "Discounted Price",
     "laycredit": "Laycredits",
     "session_timeout": "Session Timeout",
@@ -404,7 +404,6 @@
     "password_reset": "Password Reset",
     "requested_a_password_reset_for_user_account": "You're receiving this email because you requested a password reset for your user account at laytrip.",
     "disregard_this_email": "If you didn't request this change, you can disregard this email - we have not yet reset your password.",
-
     "travellers_and_class": "TRAVELERS & CLASS",
     "travelling_on": "Travelling on",
     "send_email": "Send email",
@@ -464,5 +463,4 @@
     "1_stop": "1 Stop",
     "bi_weekly": "Bi-weekly",
     "traveler": "Traveler"
-
 }
