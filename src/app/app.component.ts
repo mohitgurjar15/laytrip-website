@@ -24,20 +24,19 @@ export class AppComponent {
 
   ngOnInit(){
     var token = localStorage.getItem('_lay_sess');
-    console.log(token)
     if(token){
       this.subscribeToNotifications()
     }
   }
 
   subscribeToNotifications() {
-    console.log("subscribeToNotifications")
 
     this.swPush.requestSubscription({
         serverPublicKey: this.VAPID_PUBLIC_KEY
     })
-    .then(sub =>console.log(sub,'here') 
-      //this.newsletterService.addPushSubscriber(sub).subscribe()
+    .then(sub =>
+      //console.log(JSON.stringify(sub),'here') 
+        this.genericService.addPushSubscriber(JSON.stringify(sub)).subscribe()
       )
     .catch(err => console.error("Could not subscribe to notifications", err));
   }

@@ -29,6 +29,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 // HELPERS MODULE
 import { HelpersModule } from '../../_helpers/_helpers.module';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
     HotelSearchBarComponent,
     // ClickOutSideDirective,
     HotelDetailComponent,
+    HotelPaymentComponent,
   ],
   imports: [
     CommonModule,

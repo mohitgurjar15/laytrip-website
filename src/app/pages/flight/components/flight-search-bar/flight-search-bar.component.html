@@ -85,12 +85,12 @@
                                             <div class="date_form">
                                                 <div class="search_area">
                                                     <label>{{'departure' | translate}}</label>
-                                                    <p-calendar inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true" (onMonthChange)="changeMonth($event)"
+                                                    <p-calendar  inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true" (onMonthChange)="changeMonth($event)"
                                                         panelStyleClass="calender-price-view">
                                                         <p-header *ngIf="!isRoundTrip && isCalenderPriceLoading" class="calender-header">We are retrieving monthly prices...</p-header>
                                                         <ng-template pTemplate="date" let-date>
-                                                            <span>{{date.day}}</span>
-                                                            <br><span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
+                                                            <span class="c_date">{{date.day}}</span>
+                                                            <span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
                                                         </ng-template>
                                                     </p-calendar>
                                                     <div class="prev-next">
@@ -107,6 +107,9 @@
                                                 <div class="search_area" *ngIf="isRoundTrip">
                                                     <label>{{'return' | translate}}</label>
                                                     <p-calendar inputId="basic" [(ngModel)]="returnDate" [ngModelOptions]="{standalone: true}" flightReturnMinDate [minDate]="flightReturnMinDate" [readonlyInput]="true" panelStyleClass="calender-price-view">
+                                                        <ng-template pTemplate="date" let-date>
+                                                            <span class="c_date">{{date.day}}</span>
+                                                        </ng-template>
                                                     </p-calendar>
                                                     <div class="prev-next">
                                                         <a class="anchor-text" (click)="dateChange('arrival','previous')">{{'prev' | translate}}</a>

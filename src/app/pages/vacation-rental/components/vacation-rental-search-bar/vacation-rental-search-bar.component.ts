@@ -22,7 +22,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
   loading = false;
   rentalForm:any= {
     id:'',
-    type:"city",
+    type:"",
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     check_out_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     number_and_children_ages:[],
@@ -177,8 +177,9 @@ export class VacationRentalSearchBarComponent implements OnInit {
     formData.city=this.defaultSelected.city == undefined ? this.data[0].id:this.defaultSelected.city;
     formData.country=this.defaultSelected.country == undefined ? this.data[0].id:this.defaultSelected.country;
     formData.display_name=this.defaultSelected.title == undefined ? this.data[0].id:this.defaultSelected.title;
-    formData.check_in_date=moment(formData.check_in_date).format("YYYY/MM/DD");
-    formData.check_out_date=moment(formData.check_out_date).format("YYYY/MM/DD");
+    formData.type=this.defaultSelected.type == undefined ? this.data[0].type:this.defaultSelected.type;
+    formData.check_in_date=moment(formData.check_in_date).format("YYYY-MM-DD");
+    formData.check_out_date=moment(formData.check_out_date).format("YYYY-MM-DD");
     console.log(formData);
     localStorage.setItem('_rental', JSON.stringify(formData));
     this.searchBarInfo.emit(formData);

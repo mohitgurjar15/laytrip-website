@@ -123,4 +123,12 @@ export class GenericService {
   checkUserValidate(token) {
     return this.http.get(environment.apiUrl + 'v1/auth/validate-user/' + token);
   }
+
+  addPushSubscriber(data){
+    console.log(data)
+    return this.http.post(`${environment.apiUrl}v1/auth​/add-notification-token`, data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }
