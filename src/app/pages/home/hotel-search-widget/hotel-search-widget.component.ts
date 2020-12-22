@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HotelSearchWidgetComponent implements OnInit {
 
-  @ViewChild('dateFilter', undefined) private dateFilter: any;
+  @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   s3BucketUrl = environment.s3BucketUrl;
   countryCode: string;
   checkInDate = new Date();

@@ -17,7 +17,7 @@ import { NgbDateCustomParserFormatter } from '../../../../_helpers/ngbDateCustom
 })
 export class HotelSearchBarComponent implements OnInit {
 
-  @ViewChild('dateFilter', undefined) private dateFilter: any;
+  @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   @Output() searchBarInfo = new EventEmitter<any>();
   @Input() calenderPrices: any = [];
   s3BucketUrl = environment.s3BucketUrl;
