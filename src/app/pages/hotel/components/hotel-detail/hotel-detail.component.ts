@@ -3,19 +3,41 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-hotel-detail',
   templateUrl: './hotel-detail.component.html',
-  styleUrls: ['./hotel-detail.component.scss']
+  styleUrls: ['./hotel-detail.component.scss'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        query(':leave', [
+          stagger(10, [
+            animate('0.001s', style({ opacity: 0 }))
+          ])
+        ], { optional: true }),
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(50, [
+            animate('0.5s', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ],
 })
 export class HotelDetailComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   hotelId;
+  hotelToken;
   hotelDetails;
+  hotelRoomArray = [];
   imageTemp = [];
   loading = false;
+  showRoomDetails = [];
+  showFareDetails: number = 0;
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -58,9 +80,10 @@ export class HotelDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params) {
         this.hotelId = params.id;
+        this.hotelToken = params.token;
       }
     });
-    this.hotelService.getHotelDetail(`${this.hotelId}`).subscribe((res: any) => {
+    this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       console.log(res);
       if (res && res.data) {
         this.loading = false;
@@ -73,7 +96,8 @@ export class HotelDetailComponent implements OnInit {
           review_rating: res.data.review_rating,
           description: res.data.description,
           amenities: res.data.amenities,
-          hotelLocations: res.data.geocodes
+          hotelLocations: res.data.geocodes,
+          hotelReviews: res.data.reviews
         };
         console.log(this.hotelDetails);
         if (res.data.images) {
@@ -92,13 +116,46 @@ export class HotelDetailComponent implements OnInit {
       this.loading = false;
       console.log(error);
     });
+    this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
+      if (res) {
+        console.log(res);
+        // this.hotelRoomArray = res;
+      }
+    });
   }
 
   counter(i: any) {
     return new Array(i);
   }
 
-  getSearchItem(event) {
-    console.log(event);
+  showDetails(index, flag = null) {
+    if (typeof this.showRoomDetails[index] === 'undefined') {
+      this.showRoomDetails[index] = true;
+    } else {
+      this.showRoomDetails[index] = !this.showRoomDetails[index];
+    }
+
+    if (flag == 'true') {
+      this.showFareDetails = 1;
+    }
+    else {
+
+      this.showFareDetails = 0;
+    }
+
+    this.showRoomDetails = this.showRoomDetails.map((item, i) => {
+      return ((index === i) && this.showRoomDetails[index] === true) ? true : false;
+    });
+  }
+
+  closeHotelDetail() {
+    this.showFareDetails = 0;
+    this.showRoomDetails = this.showRoomDetails.map(item => {
+      return false;
+    });
+  }
+
+  logAnimation(event) {
+    // console.log(event);
   }
 }
