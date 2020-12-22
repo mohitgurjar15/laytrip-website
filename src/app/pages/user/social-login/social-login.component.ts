@@ -36,7 +36,7 @@ export class SocialLoginComponent implements OnInit {
 
   ) { }
 
-  @ViewChild('loginRef') loginElement: ElementRef;
+  @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
   auth2: any;
 
   ngOnInit() {
