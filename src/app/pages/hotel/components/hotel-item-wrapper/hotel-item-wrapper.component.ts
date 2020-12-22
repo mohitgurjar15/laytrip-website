@@ -39,6 +39,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   @Input() hotelDetails;
   @Input() filter;
+  @Input() hotelToken;
 
   animationState = 'out';
   hotelsList;
@@ -123,7 +124,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     if (typeof this.showMapDetails[index] === 'undefined') {
       this.showMapDetails[index] = true;
       document.getElementById(index).scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
+    }
+    else {
       this.showMapDetails[index] = !this.showMapDetails[index];
       document.getElementById(index).scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -182,6 +184,10 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   logAnimation(event) {
     // console.log(event);
+  }
+
+  redirectToDetail(id) {
+    this.router.navigate(['/hotel/detail', id, this.hotelToken]);
   }
 
   ngOnDestroy(): void {

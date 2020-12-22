@@ -20,6 +20,7 @@ export class HotelSearchComponent implements OnInit {
   isNotFound = false;
   hotelDetails;
   hotelDetailsMain;
+  hotelToken;
   isResetFilter: string = 'no';
   subscriptions: Subscription[] = [];
   searchedValue = [];
@@ -41,9 +42,11 @@ export class HotelSearchComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
-    setTimeout(() => {
-      document.getElementById('login_btn').style.background = '#FF00BC';
-    }, 1000);
+    if (document.getElementById('login_btn')) {
+      setTimeout(() => {
+        document.getElementById('login_btn').style.background = '#FF00BC';
+      }, 1000);
+    }
     this.searchedValue.push({ key: 'guest', value: this.roomsGroup });
 
     let payload: any = {};
@@ -70,6 +73,7 @@ export class HotelSearchComponent implements OnInit {
     this.hotelService.getHotelSearchResult(payload).subscribe((res: any) => {
       this.hotelDetails = res.data.hotels;
       this.hotelDetailsMain = res.data;
+      this.hotelToken = res.data.details.token;
       this.loading = false;
       this.isNotFound = false;
     }, err => {
@@ -154,14 +158,14 @@ export class HotelSearchComponent implements OnInit {
 
   getHotelSearchDataByModify(event) {
     let urlData = this.commonFunction.decodeUrl(this.router.url);
-    let locations = {city: event.city, country: event.country};
+    let locations = { city: event.city, country: event.country };
     let queryParams: any = {};
     queryParams.check_in = moment(event.check_in).format('YYYY-MM-DD');
     queryParams.check_out = moment(event.check_out).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(event.latitude);
     queryParams.longitude = parseFloat(event.longitude);
     queryParams.itenery = btoa(JSON.stringify(event.occupancies));
-    queryParams.location = btoa(JSON.stringify(locations)); 
+    queryParams.location = btoa(JSON.stringify(locations));
     console.log(queryParams);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
