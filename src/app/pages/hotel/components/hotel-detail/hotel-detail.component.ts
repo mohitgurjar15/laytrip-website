@@ -4,6 +4,12 @@ import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gal
 import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { collect } from 'collect.js';
+import { CommonFunction } from '../../../../_helpers/common-function';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 
 @Component({
   selector: 'app-hotel-detail',
@@ -36,8 +42,18 @@ export class HotelDetailComponent implements OnInit {
   hotelRoomArray = [];
   imageTemp = [];
   loading = false;
-  showRoomDetails = [];
+  currency;
   showFareDetails: number = 0;
+  roomSummary = {
+    hotelInfo: {},
+    roomDetail: {
+      totalRoom: null,
+      totalAdults: null,
+      totalChildren: null,
+      checkIn: '',
+      checkOut: ''
+    }
+  };
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -45,10 +61,17 @@ export class HotelDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
+    private toastr: ToastrService,
+    public router: Router,
+    private commonFunction: CommonFunction,
+    public modalService: NgbModal,
   ) { }
 
   ngOnInit() {
     this.loading = true;
+    let _currency = localStorage.getItem('_curr');
+    this.currency = JSON.parse(_currency);
+    let occupancies;
     this.galleryOptions = [
       {
         width: '100%',
@@ -85,23 +108,24 @@ export class HotelDetailComponent implements OnInit {
     });
     this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       console.log(res);
-      if (res && res.data) {
+      if (res && res.data && res.data.hotel) {
         this.loading = false;
         this.hotelDetails = {
-          name: res.data.name,
-          city_name: res.data.address.city_name,
-          state_code: res.data.address.state_code,
-          country_name: res.data.address.country_name,
-          rating: res.data.rating,
-          review_rating: res.data.review_rating,
-          description: res.data.description,
-          amenities: res.data.amenities,
-          hotelLocations: res.data.geocodes,
-          hotelReviews: res.data.reviews
+          name: res.data.hotel.name,
+          city_name: res.data.hotel.address.city_name,
+          state_code: res.data.hotel.address.state_code,
+          country_name: res.data.hotel.address.country_name,
+          rating: res.data.hotel.rating,
+          review_rating: res.data.hotel.review_rating,
+          description: res.data.hotel.description,
+          amenities: res.data.hotel.amenities,
+          hotelLocations: res.data.hotel.geocodes,
+          hotelReviews: res.data.hotel.reviews,
+          thumbnail: res.data.hotel.thumbnail
         };
         console.log(this.hotelDetails);
-        if (res.data.images) {
-          res.data.images.forEach(imageUrl => {
+        if (res.data.hotel.images) {
+          res.data.hotel.images.forEach(imageUrl => {
             this.imageTemp.push({
               small: `${imageUrl}`,
               medium: `${imageUrl}`,
@@ -111,16 +135,30 @@ export class HotelDetailComponent implements OnInit {
             this.galleryImages = this.imageTemp;
           });
         }
+        occupancies = collect(res.data.details.occupancies);
+        this.roomSummary.roomDetail.checkIn = res.data.details.check_in;
+        this.roomSummary.roomDetail.checkOut = res.data.details.check_out;
+        if (res.data.details && res.data.details.occupancies && res.data.details.occupancies.length) {
+          this.roomSummary.roomDetail.totalRoom = occupancies.count();
+          this.roomSummary.roomDetail.totalAdults = occupancies.sum('adults');
+          this.roomSummary.roomDetail.totalChildren = occupancies.flatMap((value) => value['children']).count();
+        }
       }
     }, error => {
       this.loading = false;
-      console.log(error);
+      this.toastr.error('Search session is expired', 'Error');
+      this.router.navigate(['/']);
     });
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       if (res) {
         console.log(res);
-        // this.hotelRoomArray = res;
+        this.hotelRoomArray = res.data;
+        this.roomSummary.hotelInfo = res.data[0];
       }
+    }, error => {
+      this.loading = false;
+      this.toastr.error('Search session is expired', 'Error');
+      this.router.navigate(['/']);
     });
   }
 
@@ -128,31 +166,28 @@ export class HotelDetailComponent implements OnInit {
     return new Array(i);
   }
 
-  showDetails(index, flag = null) {
-    if (typeof this.showRoomDetails[index] === 'undefined') {
-      this.showRoomDetails[index] = true;
-    } else {
-      this.showRoomDetails[index] = !this.showRoomDetails[index];
-    }
-
-    if (flag == 'true') {
-      this.showFareDetails = 1;
-    }
-    else {
-
-      this.showFareDetails = 0;
-    }
-
-    this.showRoomDetails = this.showRoomDetails.map((item, i) => {
-      return ((index === i) && this.showRoomDetails[index] === true) ? true : false;
-    });
+  showRoomDetails(roomInfo) {
+    this.roomSummary.hotelInfo = roomInfo;
   }
 
-  closeHotelDetail() {
-    this.showFareDetails = 0;
-    this.showRoomDetails = this.showRoomDetails.map(item => {
-      return false;
+  openPolicyPopup(policyInfo, type) {
+    const payload = {
+      policyInfo,
+      type,
+      title: '',
+    }
+    if (type === 'cancellation_policies') {
+      payload.title = 'Room Cancellation Policy';
+    } else if (type === 'policies') {
+      payload.title = 'Room Policy';
+    }
+    const modalRef = this.modalService.open(HotelPolicyPopupComponent, {
+      windowClass: '',
+      centered: true,
+      size: 'lg',
     });
+    // tslint:disable-next-line: no-angle-bracket-type-assertion
+    (<HotelPolicyPopupComponent>modalRef.componentInstance).data = payload;
   }
 
   logAnimation(event) {

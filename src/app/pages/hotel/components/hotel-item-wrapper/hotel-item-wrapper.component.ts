@@ -51,6 +51,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   hotelLatLng;
   defaultLat;
   defaultLng;
+  hotelName;
 
   subscriptions: Subscription[] = [];
   geoCodes;
@@ -95,6 +96,9 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       });
     }
     this.hotelListArray = this.hotelDetails;
+    if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
+      this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+    }
     // this.geoCodes = collect(this.hotelDetails).pluck('geocodes').map((item: any) => {
     //   return {
     //     latitude: parseFloat(item.latitude),
@@ -133,6 +137,9 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   ngAfterContentChecked() {
     this.hotelListArray = this.hotelDetails;
+    if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
+      this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+    }
   }
 
   counter(i: any) {
