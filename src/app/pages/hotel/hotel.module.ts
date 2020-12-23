@@ -30,6 +30,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { HelpersModule } from '../../_helpers/_helpers.module';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
+import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
     // ClickOutSideDirective,
     HotelDetailComponent,
     HotelPaymentComponent,
+    HotelPolicyPopupComponent,
   ],
   imports: [
     CommonModule,
@@ -72,5 +74,6 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
     HotelPopupLoaderComponent,
     HotelNotFoundComponent,
   ],
+  entryComponents: [HotelPolicyPopupComponent]
 })
 export class HotelModule { }
