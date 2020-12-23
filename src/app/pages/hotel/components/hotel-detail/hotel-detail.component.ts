@@ -44,7 +44,7 @@ export class HotelDetailComponent implements OnInit {
   loading = false;
   currency;
   showFareDetails: number = 0;
-  roomSummary = {
+  roomSummary: any = {
     hotelInfo: {},
     roomDetail: {
       totalRoom: null,
