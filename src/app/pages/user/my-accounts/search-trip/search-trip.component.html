@@ -1,32 +1,30 @@
 <section class="account_part">
-  <div class="container">
-      <div class="row">
-          <div class="col-lg-12">
-              <div class="account_cnt_main search_trip">
-                  <div class="block_search_trip">
-                      <div class="block_title">
-                          <h5>Search your booking</h5>
-                      </div>
-                      <div class="search_block">
-                          <form  [formGroup]="SearchTripForm" (ngSubmit)="onSubmit()">
-                              <div class="search_field">
-                                  <label>Booking ID</label>
-                                  <input type="text" tabindex="1" maxlength="40" formControlName="tripId" placeholder="Enter your booking id">
-                                  <div *ngIf="(submitted  || SearchTripForm.controls.tripId.touched) && SearchTripForm.controls.tripId.errors"
-                                  class="focus-input100 login-error">
-                                  <div *ng Trip SearchingIf="SearchTripForm.controls.tripId.errors.required" class="text-danger">Please enter
-                                    trip id.
-                                  </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="account_cnt_main search_trip">
+                    <div class="block_search_trip">
+                        <div class="block_title">
+                            <h5>{{'search_your_booking_title' | translate}}</h5>
+                        </div>
+                        <div class="search_block">
+                            <form [formGroup]="SearchTripForm" (ngSubmit)="onSubmit()">
+                                <div class="search_field">
+                                    <label>{{'booking_id' | translate}}</label>
+                                    <input type="text" tabindex="1" maxlength="40" formControlName="tripId" placeholder="{{'booking_id_placeholder' | translate}}">
+                                    <div *ngIf="(submitted  || SearchTripForm.controls.tripId.touched) && SearchTripForm.controls.tripId.errors" class="focus-input100 login-error">
+                                        <div *ng Trip SearchingIf="SearchTripForm.controls.tripId.errors.required" class="text-danger">Please enter trip id.
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="search_btn">
-                                  <button type="submit">Submit</button>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                                <div class="search_btn">
+                                    <button type="submit">{{'submit' | translate}}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

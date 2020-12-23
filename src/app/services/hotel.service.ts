@@ -13,7 +13,8 @@ export class HotelService {
 
     headers = {
         currency: 'USD',
-        language: 'en'
+        language: 'en',
+        token: ``,
     }
     constructor(
         private http: HttpClient,
@@ -43,9 +44,17 @@ export class HotelService {
             );
     }
 
-    getHotelDetail(id) {
-        console.log(id);
+    getHotelDetail(id, token) {
+        this.headers.token = `${token}`;
         return this.http.post(`${environment.apiUrl}v1/hotel/detail`, { hotel_id: id }, this.commonFunction.setHeaders(this.headers))
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getRoomDetails(id, token) {
+        this.headers.token = `${token}`;
+        return this.http.post(`${environment.apiUrl}v1/hotel/rooms`, { hotel_id: id }, this.commonFunction.setHeaders(this.headers))
             .pipe(
                 catchError(this.handleError)
             );

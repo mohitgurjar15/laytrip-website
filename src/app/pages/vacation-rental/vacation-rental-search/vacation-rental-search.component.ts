@@ -3,8 +3,6 @@ declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
-import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { VacationRentalService } from '../../../services/vacation-rental.service';
@@ -24,12 +22,10 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
   rentalDetails;
   rentalFilterDetails;
   subscriptions: Subscription[] = [];
+  isResetFilter: string = 'no';
   constructor(  
   	private route: ActivatedRoute,
-    private rentalService: VacationRentalService,
-    public router: Router,
-    public location: Location,
-    public commonFunction: CommonFunction,) { }
+    private rentalService: VacationRentalService) { }
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -75,12 +71,69 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
       });
    
   }
-    ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
+   
 
   getSearchItem(event) {
     console.log(event);
-    this.getRentalSearchData(event);
+    //this.getRentalSearchData(event);
+  }
+
+  //Sort Section Start
+   sortRentals(event) {
+     console.log(event);
+    let { key, order } = event;
+    if (key === 'total') {
+      this.rentalDetails = this.sortJSON(this.rentalDetails, key, order);
+    }else if (key === 'property_name') {
+      this.rentalDetails = this.sortByRental(this.rentalDetails, key, order);
+    }
+  }
+
+  sortJSON(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    } else {
+      return data.sort(function (a, b) {
+        var x = a.selling_price;
+        var y = b.selling_price;
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+   sortByRental(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    } else {
+      return data.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  filterRental(event) {
+    console.log(event);
+    this.rentalDetails = event;
+    console.log(this.rentalDetails);
+  }
+
+  resetFilter() {
+    this.isResetFilter = (new Date()).toString();
+  }
+
+   ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

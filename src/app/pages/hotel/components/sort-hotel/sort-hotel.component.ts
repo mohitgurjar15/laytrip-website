@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
@@ -9,11 +9,24 @@ declare var $: any;
 })
 export class SortHotelComponent implements OnInit {
 
+  @ViewChild("scrollable", { static: true, read: ElementRef } as any)
+  scrollbar: ElementRef;
+  contentWrapper: HTMLElement;
   @Output() sortHotel = new EventEmitter<{ key: string, order: string }>();
   @Input() hotelDetails;
   locationName;
   sortType: string = 'lh_price';
   lowToHighToggle: boolean = false;
+
+  autoHeight() {
+    if (!this.contentWrapper) {
+      this.contentWrapper = document.querySelector(".ng-scroll-content");
+    }
+    if (this.scrollbar) {
+      this.scrollbar.nativeElement.style.height =
+        this.contentWrapper.clientHeight + "px";
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,

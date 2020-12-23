@@ -13,9 +13,9 @@ export class RentalInfoComponent implements OnInit {
   @Output() changeValue = new EventEmitter<any>();
   @Input() label;
 
-  adultValue: number = 1;
+  adultValue: number = 2;
   childValue: number = 0;
-  totalPerson: number = 1;
+  totalPerson: number = 2;
   errorMessage:string='';
   countryCode:string;
 
@@ -35,7 +35,7 @@ export class RentalInfoComponent implements OnInit {
   constructor( 
   	private route: ActivatedRoute,
     private commonFunction:CommonFunction){
-    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
+    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 2;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
     //this.childAgeInfo = info.number_and_children_ages;
     // this.childData=[{
@@ -79,8 +79,8 @@ $('#rental_add_room_open').click(
 
       this.adultValue = this.adultValue - 1;
     } else if (item && item.type === 'plus' && item.label === 'adult') {
-      if(this.adultValue+1 + this.childValue  > 9){
-        this.errorMessage="Maximum number of passengers all together should not exceed 9 except infants.";
+      if(this.adultValue+1 > 4){
+        this.errorMessage="Maximum number of adult all together should not exceed 4 except.";
         return ;
       }
       else{
@@ -91,11 +91,11 @@ $('#rental_add_room_open').click(
     }
     // FOR CHILD
     if (item && item.type === 'minus' && item.label === 'child') {
-      if(this.adultValue + this.childValue-1  < 9){
+      if(this.childValue-1  < 4){
         this.errorMessage='';
       }
       else{
-        this.errorMessage="Maximum number of guests all together should not exceed 9.";
+        this.errorMessage="Maximum number of childs all together should not exceed 4.";
         return ;
       }
       this.childValue = this.childValue - 1;
@@ -114,8 +114,8 @@ $('#rental_add_room_open').click(
 
       //Check Child 
     } else if (item && item.type === 'plus' && item.label === 'child') {
-      if(this.adultValue + this.childValue+1  > 9){
-        this.errorMessage="Maximum number of guests all together should not exceed 9 except.";
+      if(this.childValue+1  > 4){
+        this.errorMessage="Maximum number of childs all together should not exceed 4 except.";
         return ;
       }
       else{

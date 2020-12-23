@@ -1,12 +1,20 @@
 <div class="view_btn_wrapper">
-    <button class="list_v_btn" (click)="differentView('listView')" [hidden]="!isMapView">
-        <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
-        List view
-    </button>
-    <button class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
-        <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view">
-        Map view
-    </button>
+    <div>
+        <div class="block_result_found">
+            <p>{{hotelDetails.length}} Hotels found from</p>
+            <span>{{hotelDetails[0].address.city_name}},{{hotelDetails[0].address.country_name}}</span>
+        </div>
+    </div>
+    <div>
+        <button class="list_v_btn" (click)="differentView('listView')" [hidden]="!isMapView">
+            <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
+            List view
+        </button>
+        <button class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
+            <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view">
+            Map view
+        </button>
+    </div>
 </div>
 
 <div [hidden]="isMapView" [@listAnimation]="hotelListArray.length" (@listAnimation.start)="logAnimation($event)"
@@ -21,11 +29,11 @@
                             <div class="block_inner">
                                 <div class="col-md-4 col-lg-4 px-0">
                                     <div class="block_im">
-                                        <div class="hotel_list_img_wrp" style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
+                                        <div class="hotel_list_img_wrp">
                                             <span class="fav_sections">
                                                 <a href="javascript:void(0);" class="heart_blank"></a>
                                             </span>
-                                            <!-- <img src="{{item?.thumbnail}}" alt="Hotel image"> -->
+                                            <img src="{{item?.thumbnail}}" alt="Hotel image">
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +105,7 @@
                             <div class="block" *ngIf="item.secondary_start_price === 0">
                                 <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
                             </div>
-                        </div> <a class="book_btn" [routerLink]="['/hotel/detail/',item.id]">Select</a>
+                        </div> <a class="book_btn" (click)="redirectToDetail(item.id)">Select</a>
                         <div class="show_detail">
                             <a (click)="showDetails(blockIndex,'true')" class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment
@@ -178,63 +186,75 @@
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-8" style="height: 200px; width: 200px;">
-                <agm-map [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10">
+                <agm-map #gm [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10">
                     <agm-marker-cluster
                         imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-                        <agm-marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
-                            [longitude]="hotel.geocodes.longitude">
-                            <agm-info-window>
-                                Demo
+                        <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
+                            [longitude]="hotel.geocodes.longitude"
+                            [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-map-marker.svg', scaledSize: {height: 80,width: 48}}"
+                            [label]="{text:currency?.symbol+hotel?.selling?.total, fontSize: '12px'}"
+                            (mouseOver)="infoWindowAction(infoWindow, $event, 'open')"
+                            (mouseOut)="infoWindowAction(infoWindow, $event, 'close')"
+                            (markerClick)="infoWindowAction(hotel.id, $event, 'click')">
+                            <!-- [iconUrl]="s3BucketUrl+'assets/images/hotels/custom-map-marker.svg'" -->
+                            <agm-info-window [disableAutoPan]="false" #infoWindow>
+                                <div>
+                                    <p>{{hotel.name}}</p>
+                                </div>
                             </agm-info-window>
                         </agm-marker>
                     </agm-marker-cluster>
                 </agm-map>
             </div>
-            <div class="col-lg-4 pl-0">
-                <div class="search_block" *ngFor="let item of hotelListArray">
-                    <div class="listing_block">
-                        <div class="block_main">
-                            <div class="block_top">
-                                <div class="block_inner">
-                                    <div class="">
-                                        <div class="block_im">
-                                            <div class="hotel_list_img_wrp" style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
-                                                <span class="fav_sections">
-                                                    <a href="javascript:void(0);" class="heart_blank"></a>
-                                                </span>
-                                                <div class="review_section_wrap">
-                                                    <div class="rating_num">
-                                                        <span>
-                                                            {{item?.review_rating}}
-                                                        </span>
-                                                    </div>
-
-                                                    <div class="stars_rating">
-                                                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                            alt="Stars" *ngFor='let in of counter(item.rating)'>
-                                                    </div>
-
-                                                </div>
-                                                <!-- <img src="{{item?.thumbnail}}" alt="Hotel image"> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <div class="block_detail">
-                                            <div class="block_detail_top">
-                                                <div class="detail_info">
-                                                    <h4>{{item?.name}}</h4>
-                                                    <div class="place_name">
-                                                        <div>
-                                                            <span class="adress_span">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
-                                                                    alt="Map pin"> {{item?.full_address}}
+            <div class="col-lg-4 pl-0" style="max-height: 560px; overflow-y: auto;">
+                <ng-container *ngFor="let item of hotelListArray">
+                    <div class="search_block" [attr.id]="item.id"
+                        [ngClass]="{'selected-hotel':showMapDetails[item.id]}">
+                        <div class="listing_block">
+                            <div class="block_main">
+                                <div class="block_top">
+                                    <div class="block_inner">
+                                        <div class="">
+                                            <div class="block_im">
+                                                <div class="hotel_list_img_wrp">
+                                                    <span class="fav_sections">
+                                                        <a href="javascript:void(0);" class="heart_blank"></a>
+                                                    </span>
+                                                    <img src="{{item?.thumbnail}}" alt="Hotel image">
+                                                    <div class="review_section_wrap">
+                                                        <div class="rating_num">
+                                                            <span>
+                                                                {{item?.review_rating}}
                                                             </span>
                                                         </div>
-                                                        <div class="ammin_listing">
-                                                            <div class="amminities_list">
-                                                                <img *ngFor="let icon of item.amenities.fixed"
-                                                                    [src]="amenitiesObject[icon]" alt="">
+
+                                                        <div class="stars_rating">
+                                                            <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
+                                                                alt="Stars" *ngFor='let in of counter(item.rating)'>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- <img src="{{item?.thumbnail}}" alt="Hotel image"> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="block_detail">
+                                                <div class="block_detail_top">
+                                                    <div class="detail_info">
+                                                        <h4>{{item?.name}}</h4>
+                                                        <div class="place_name">
+                                                            <div>
+                                                                <span class="adress_span">
+                                                                    <img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
+                                                                        alt="Map pin"> {{item?.full_address}}
+                                                                </span>
+                                                            </div>
+                                                            <div class="ammin_listing">
+                                                                <div class="amminities_list">
+                                                                    <img *ngFor="let icon of item.amenities.fixed"
+                                                                        [src]="amenitiesObject[icon]" alt="">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -244,18 +264,21 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="block_price block_pr">
-                            <div class="block_inn_pr">
-                                <div class="block">
-                                    <p>Room Starts from</p>
-                                    <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span> /week</p>
+                            <div class="block_price block_pr">
+                                <div class="block_inn_pr">
+                                    <div class="block" *ngIf="item.secondary_start_price > 0">
+                                        <p>Room Starts from</p>
+                                        <p><span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> /week</p>
+                                    </div>
+                                    <div class="block" *ngIf="item.secondary_start_price === 0">
+                                        <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

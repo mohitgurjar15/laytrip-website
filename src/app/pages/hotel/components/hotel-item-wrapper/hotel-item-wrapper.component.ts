@@ -1,8 +1,7 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
-import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
@@ -40,6 +39,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   @Input() hotelDetails;
   @Input() filter;
+  @Input() hotelToken;
 
   animationState = 'out';
   hotelsList;
@@ -71,9 +71,9 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     tv: `${this.s3BucketUrl}assets/images/hotels/tv.svg`,
     ac: `${this.s3BucketUrl}assets/images/hotels/ac.svg`,
   }
+  showMapDetails = [];
 
   constructor(
-    private flightService: FlightService,
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
@@ -108,6 +108,27 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     // this.totalLaycredit();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
     this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
+  }
+
+  infoWindowAction(template, event, action) {
+    if (action === 'open') {
+      template.open();
+    } else if (action === 'close') {
+      template.close();
+    } else if (action === 'click') {
+      this.showMapInfo(template);
+    }
+  }
+
+  showMapInfo(index) {
+    if (typeof this.showMapDetails[index] === 'undefined') {
+      this.showMapDetails[index] = true;
+      document.getElementById(index).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    else {
+      this.showMapDetails[index] = !this.showMapDetails[index];
+      document.getElementById(index).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   ngAfterContentChecked() {
@@ -163,6 +184,10 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   logAnimation(event) {
     // console.log(event);
+  }
+
+  redirectToDetail(id) {
+    this.router.navigate(['/hotel/detail', id, this.hotelToken]);
   }
 
   ngOnDestroy(): void {

@@ -138,4 +138,11 @@ export class GenericService {
         catchError(this.handleError)
       );
   }
+
+  getAllInstalemnts(data){
+    return this.http.post(`${environment.apiUrl}v1/instalment/calculate-all-instalment`, data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }

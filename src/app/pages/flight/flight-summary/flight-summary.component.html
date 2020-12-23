@@ -183,7 +183,7 @@
                 <div class="info_btm_btm" *ngIf="flightDetail[0]?.routes[0]">
                     <div class="flight_info_text">
                         <h6>{{ flightDetail[0].routes[0].stops[0].departure_code }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_code }} <span>{{ flightDetail[0].routes[0].stops[0].departure_time }} - {{ flightDetail[0].routes[0].stops[outWardStopCount].arrival_time }}</span></h6>
-                        <a class="hover-link" [ngClass]="{'detail_open': outwardDetails === true}" id="more_detail_flight" (click)="toggleRouteDetails('onward')">{{ outwardDetails==false?'Show Details':'Hide Details' }} </a>
+                        <a class="hover-link" [ngClass]="{'detail_open': outwardDetails === true}" id="more_detail_flight" (click)="toggleRouteDetails('onward')">{{ outwardDetails==false?('show_detail' | translate):('hide_detail' | translate) }} </a>
                     </div>
                     <div class="flight_info" [ngClass]="{'non_stop': flightDetail[0].routes[0].stops.length-1==0}" id="flight_info" *ngIf="outwardDetails">
                         <div class="flight_cityname">

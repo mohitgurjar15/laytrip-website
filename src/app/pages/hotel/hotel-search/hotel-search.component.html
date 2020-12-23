@@ -17,7 +17,7 @@
               <div class="block_inn">
                 <h4>Filter By</h4>
                 <a class="anchor_link" (click)="resetFilter()">Reset</a>
-              </div>
+              </div> 
               <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain" (filterHotel)="filterHotel($event)"
                 isResetFilter={{isResetFilter}}></app-filter-hotel>
             </div>
@@ -35,7 +35,7 @@
             Map view
           </button>
         </div> -->
-        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelDetails]="hotelDetails"></app-hotel-item-wrapper>
+        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelToken]="hotelToken" [hotelDetails]="hotelDetails"></app-hotel-item-wrapper>
       </div>
     </div>
   </div>

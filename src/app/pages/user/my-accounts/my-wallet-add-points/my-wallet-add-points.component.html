@@ -8,7 +8,7 @@
                             <app-add-points (addNewPoints)="addNewPoints($event)"></app-add-points>
                             <div class="block_card_select">
                                 <div class="block_title_section">
-                                    <h5>Select Credit Card</h5>
+                                    <h5>{{'select_credit_card' | translate}}</h5>
                                 </div>
                                 <div class="block_detail">
                                     <app-card-list *ngIf="userInfo.roleId!=7" [newCard]="newCard" (selectCreditCard)="selectCreditCard($event)" (totalNumberOfcard)="totalNumberOfcard($event)">
@@ -67,15 +67,15 @@
                         </div>
                         <div class="total_payment">
                             <ul>
-                                <li>Total <span>{{ currency?.symbol }}{{addedPoints}}</span></li>
+                                <li>{{'total' | translate}} <span>{{ currency?.symbol }}{{addedPoints}}</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="cmn_block policies">
                         <div class="block_inner">
-                            <h6>Check our Policies</h6>
+                            <h6>{{'check_our_policies' | translate}}</h6>
                             <ul>
-                                <li><a class="anchor-text" (click)="toggleCancellationPolicy()">Cancellation policy</a></li>
+                                <li><a class="anchor-text" (click)="toggleCancellationPolicy()">{{'cancellation_policy' | translate}}</a></li>
                             </ul>
                         </div>
                     </div>
