@@ -21,6 +21,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
   rentalSearchForm: FormGroup;
   countryCode:string='';
   loading = false;
+  error_message='';
   rentalForm:any= {
     id:'',
     type:"",
@@ -188,7 +189,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
   }
 
   searchRentals(formData){
-    
+    this.error_message='';
     formData.id=this.defaultSelected.id == undefined ? this.data[0].id:this.defaultSelected.id;
     formData.city=this.defaultSelected.city == undefined ? this.data[0].id:this.defaultSelected.city;
     formData.country=this.defaultSelected.country == undefined ? this.data[0].id:this.defaultSelected.country;
@@ -199,6 +200,15 @@ export class VacationRentalSearchBarComponent implements OnInit {
     formData.adult_count=formData.adult_count == undefined ? this.data[0].adult_count:formData.adult_count;
     formData.child=formData.child == undefined ? this.data[0].child:formData.child;
     formData.number_and_children_ages=formData.number_and_children_ages == undefined ? this.data[0].number_and_children_ages:formData.number_and_children_ages;
+     console.log(formData);
+    if(formData.child !='' || formData.child != undefined)
+    {
+      if(formData.number_and_children_ages.length !== formData.child)
+      {
+        this.error_message='please select child age';
+        return;
+      }
+    }
     console.log(formData);
     //return false;
     localStorage.setItem('_rental', JSON.stringify(formData));

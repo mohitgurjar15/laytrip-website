@@ -1,0 +1,244 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+agm-map {
+    height: 100%;
+    width: 100%;
+}
+.hotel_detail_sidebar{
+    .section_title{
+        color: $dark_text_blue_header;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: left;
+        padding: 0;
+    }
+    .display_wrapper{
+        background-color: $background-white;
+        border: 1px solid #E0E2E5;
+
+        .detail_display{
+            position: relative;
+            width: 100%;
+            &::after{
+                content: '';
+                background: transparent linear-gradient(270deg, #FC7E66 0%, #012178 100%) 0% 0% no-repeat padding-box;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 93%;
+                width: 100%;
+                opacity: 0.8;
+            }
+            .display_text{
+                position: absolute;
+                z-index: 9;
+                left: 0;
+                top: 0;
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                color: $text-white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                h2{
+                    font-size: 24px;
+                    font-weight: 600;
+                }
+                span{
+                    padding-right: 10px;
+                    margin-left: 5px;
+                    position: relative;
+                    font-size: 14px;
+                    font-weight: 600;
+
+                    &::after{
+                        content: '';
+                        height: 20px;
+                        width: 1px;
+                        background-color: $background-white;
+                        position: absolute;
+                        right: 2px;
+                    }
+                    &:last-child{
+                        padding-right: 0;
+                        &::after{
+                            width: 0;
+                        }
+                    }
+                }
+            }
+            img{
+                max-width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+        .display_daterange_wrapper{
+            padding: 15px;
+            .display_daterange{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 1px solid $text-grey;
+                border-radius: 5px;
+
+                .datewrapper{
+                    border-right: 1px solid $text-grey;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    flex: 1;
+                    padding: 10px;
+
+                    label{
+                        color: $text-grey;
+                        font-size: 10px;
+                        margin-bottom: 3px;
+                    }
+                    span{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        font-size: 14px;
+                        font-weight: 600;
+                        img{
+                            max-width: 20px;
+                        }
+                    }
+                    &:last-child{
+                        border-right: 0;
+                    }
+                }
+            }
+        }
+    }
+    .fare_detail_wrapper{
+        background-color: $background-white;
+        border: 1px solid #E0E2E5;
+        padding: 15px;
+        margin-top: 10px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        .fare_section{
+            .fare_title{
+                color: $text-grey;
+                font-size: 14px;
+                padding: 5px 0;
+                display: block;
+            }
+            .fare_listing{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 0;
+                span{
+                    color: $text-black;
+                    font-size: 14px;
+                    span{
+                        color: $text-grey;
+                    }
+                }
+                &:last-child{
+                    border-bottom: 2px dashed $border-blue-light;
+                    padding-bottom: 10px;
+                }
+            }
+            &:first-child{
+                .fare_title{
+                    padding-top: 0;
+                }
+            }
+            &:last-child{
+                .fare_listing{
+                    &:last-child{
+                        border-bottom: none;
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+    .fare_total_wrapper{
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $primary-color;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        span{
+            color: $text-white;
+            font-size: 14px;
+            &:last-child{
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.hotel_detail_tabs{
+    margin-bottom: 10px;
+}
+
+.result_listing{
+    &.hotel_listings{
+        .section_title{
+            color: $text-grey;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 10px 0;
+            text-align: left;
+            padding: 0;
+        }
+        .search_block{
+            .listing_block{
+                .block_detail{
+                    .block_detail_top{
+                        .detail_info{
+                            .refen_tag{
+                                display: flex;
+                                margin-bottom: 10px;
+                                padding-bottom: 10px;
+                                border-bottom: 1px solid #E0E2E5;
+                                span{
+                                    background-color: $bg-green;
+                                    color: $text-white;
+                                    border-radius: 5px;
+                                    padding: 5px 15px;
+                                    font-size: 10px;
+                                }
+                            }
+                            .review_section_wrap{
+                                .right_bar{
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 100%;
+                                    .amminities_list{
+                                        margin-left: 0;
+                                        img{
+                                            margin-right: 10px;
+                                            max-width: 18px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .right_sectiond_price{
+                    max-width: 175px;
+                    @include tab-view {
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

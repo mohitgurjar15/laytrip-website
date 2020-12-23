@@ -16,9 +16,11 @@ import { VacationNotFoundComponent } from './components/vacation-not-found/vacat
 import { ComponentsModule } from '../../components/components.module';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { VacationDetailComponent } from './components/vacation-detail/vacation-detail.component';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
-  declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent],
+  declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent, VacationDetailComponent],
   imports: [
     CommonModule,
     VacationRentalRoutingModule,
@@ -34,6 +36,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
       libraries: ['places']
     }),
     AgmJsMarkerClustererModule,
+    NgxGalleryModule,
   ],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
