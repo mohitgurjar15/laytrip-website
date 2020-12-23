@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   title = 'laytrip-website';
-  VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
+  readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
 
   constructor(
     private cookieService:CookieService,
@@ -36,8 +36,8 @@ export class AppComponent {
         serverPublicKey: this.VAPID_PUBLIC_KEY
     })
     .then(sub =>
-
-        this.genericService.addPushSubscriber(sub).subscribe()
+      console.log(sub.endpoint)
+        // this.genericService.addPushSubscriber(sub).subscribe()
       )
     .catch(err => console.error("Could not subscribe to notifications", err));
   }
