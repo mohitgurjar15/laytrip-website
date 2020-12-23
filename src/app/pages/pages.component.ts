@@ -23,7 +23,8 @@ export class PagesComponent implements OnInit {
       });
    }
 
-  ngOnInit() {    
+  ngOnInit() {   
+    this.checkUserValidate(); 
     document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
   }
 

@@ -72,7 +72,7 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li *ngFor="let langunage of langunages"><a href="#" (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                        <li *ngFor="let langunage of langunages"><a (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
                                     </ul>
                                 </div>
                             </li>

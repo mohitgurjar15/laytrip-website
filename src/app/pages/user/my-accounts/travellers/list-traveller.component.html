@@ -1,121 +1,119 @@
 <section class="account_part">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
-        <app-my-accounts-nav></app-my-accounts-nav>
-      </div>
-      <div class="col-lg-9">
-        <div class="account_cnt_main co_traveller">
-          <div class="block_co_traveller_main">
-            <div class="block_traveller_top">
-              <label class="custom_checkbox">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <app-my-accounts-nav></app-my-accounts-nav>
+            </div>
+            <div class="col-lg-9">
+                <div class="account_cnt_main co_traveller">
+                    <div class="block_co_traveller_main">
+                        <div class="block_traveller_top">
+                            <label class="custom_checkbox">
                 <!-- <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"   value="">
                 <span class="checkmark"></span>Select all -->
               </label>
-              <a class="hover-link" (click)="openTravellerModal(content)">+ Add New Co-Traveler</a>
-            </div>
-            <div class="block_traveller_btm">
-              <div class="block_no_traveller" *ngIf="notFound">
-                <img src="{{s3BucketUrl}}assets/images/icon/ic_traveller.svg" alt="Traveller Icon">
-                <h5>No Traveler Available</h5>
-              </div>
-              <div *ngIf="loading">
+                            <a class="hover-link" (click)="openTravellerModal(content)">+ {{'add_new_co_traveler' | translate}}</a>
+                        </div>
+                        <div class="block_traveller_btm">
+                            <div class="block_no_traveller" *ngIf="notFound">
+                                <img src="{{s3BucketUrl}}assets/images/icon/ic_traveller.svg" alt="Traveller Icon">
+                                <h5>{{'no_traveler_avilable' | translate}}</h5>
+                            </div>
+                            <div *ngIf="loading">
 
-                <ul *ngFor="let loop of loops;">
-                  <li>
-                    <!-- <label class="custom_checkbox">
+                                <ul *ngFor="let loop of loops;">
+                                    <li>
+                                        <!-- <label class="custom_checkbox">
                       <input type="checkbox" value="">
                       <span class="checkmark"></span>
                     </label> -->
-                    <div class="traveller_list">
-                      <div class="list_block w-100">
-                        <div class="traveller_name">
-                          <p class="fb_animation w-100 mb-2"></p>
-                        </div>
-                        <div class="traveller_age">
-                          <p class="fb_animation w-25 mb-0"></p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              
-              <ul *ngFor="let traveler of travelers | slice: (pageNumber-1) * pageSize : (pageNumber-1) * pageSize + pageSize; let i = index">
-                <li>
-                 <!--  <label class="custom_checkbox">
+                                        <div class="traveller_list">
+                                            <div class="list_block w-100">
+                                                <div class="traveller_name">
+                                                    <p class="fb_animation w-100 mb-2"></p>
+                                                </div>
+                                                <div class="traveller_age">
+                                                    <p class="fb_animation w-25 mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <ul *ngFor="let traveler of travelers | slice: (pageNumber-1) * pageSize : (pageNumber-1) * pageSize + pageSize; let i = index">
+                                <li>
+                                    <!--  <label class="custom_checkbox">
                     <input type="checkbox" [(ngModel)]="traveler.isSelected" (change)="isAllSelected()" class="travelerCheckbox" value="">
                     <span class="checkmark"></span>
                   </label> -->
-                  <div class="traveller_list">
-                    <div class="list_block">
+                                    <div class="traveller_list">
+                                        <div class="list_block">
 
-                      <div class="traveller_name">{{traveler.firstName || 'N/A' | titlecase }} {{traveler.lastName | titlecase}}
-                        <span>({{traveler.user_type | titlecase}})</span></div>
-                      <div class="traveller_age" *ngIf="traveler.dob && traveler.dob !='null' ">{{calculateAge(traveler.dob)}}  {{getGender(traveler.gender)}}</div>
-                    </div>
-                    <div class="list_action">
-                      <ul>
-                        <li>
-                          <a class="hover-link" (click)="openTravellerModal(content,traveler.userId,traveler)">
-                            <img src="{{s3BucketUrl}}assets/images/icon/ic_edit.svg" alt="Edit Icon">
-                          </a>
-                        </li>
-                        <li *ngIf="traveler.roleId != 6">
-                          <a class="hover-link" (click)="deleteTravellerModal(deleteContent,traveler.userId)">
-                            <img src="{{s3BucketUrl}}assets/images/icon/ic_trash.svg" alt="Delete Icon">
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
+                                            <div class="traveller_name">{{traveler.firstName || 'N/A' | titlecase }} {{traveler.lastName | titlecase}}
+                                                <span>({{traveler.user_type | titlecase}})</span></div>
+                                            <div class="traveller_age" *ngIf="traveler.dob && traveler.dob !='null' ">{{calculateAge(traveler.dob)}} {{getGender(traveler.gender)}}</div>
+                                        </div>
+                                        <div class="list_action">
+                                            <ul>
+                                                <li>
+                                                    <a class="hover-link" (click)="openTravellerModal(content,traveler.userId,traveler)">
+                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_edit.svg" alt="Edit Icon">
+                                                    </a>
+                                                </li>
+                                                <li *ngIf="traveler.roleId != 6">
+                                                    <a class="hover-link" (click)="deleteTravellerModal(deleteContent,traveler.userId)">
+                                                        <img src="{{s3BucketUrl}}assets/images/icon/ic_trash.svg" alt="Delete Icon">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
 
-              </ul>
-              <div class="pagination_main">  
-                <div class="pagination_result">
-                  <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
-                </div>        
-                <div class="pagination_list">
-                  <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="travelers.length"
-                  [(page)]="pageNumber" [pageSize]="pageSize"  [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
-                  (pageChange)="pageChange($event)">
-                  </ngb-pagination>
-      
+                            </ul>
+                            <div class="pagination_main">
+                                <div class="pagination_result">
+                                    <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
+                                </div>
+                                <div class="pagination_list">
+                                    <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="travelers.length" [(page)]="pageNumber" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true" (pageChange)="pageChange($event)">
+                                    </ngb-pagination>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-            </div>
-          </div>
         </div>
-        
-      </div>
     </div>
-  </div>
 </section>
 
 <ng-template #content let-modal>
-  <app-traveller-form [countries]="countries" [countries_code]="countries_code" [modalReference]="modalReference">
-  </app-traveller-form>
+    <app-traveller-form [countries]="countries" [countries_code]="countries_code" [modalReference]="modalReference">
+    </app-traveller-form>
 </ng-template>
 
 <ng-template #deleteContent let-modal>
-  <div class="modal-header">
-    <div class="block_title">
-      <h4>Delete Co - Traveler</h4>
-    </div>
-    <button type="button" class="close"  (click)="modal.dismiss('Cross click')">
+    <div class="modal-header">
+        <div class="block_title">
+            <h4>Delete Co - Traveler</h4>
+        </div>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
         <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
     </button>
-  </div>
-  <div class="modal-body">
-    <div class="modal_btm">
-      <p>Are you sure you want to delete traveler?</p>
     </div>
-  </div>
-  <div class="modal-footer">
-    <div class="form_btn">
-        <button type="button" class="btn_no" (click)="modal.dismiss('Cross click')">No</button>
-        <button type="button" (click)="deleteTraveller()">Yes</button>
+    <div class="modal-body">
+        <div class="modal_btm">
+            <p>Are you sure you want to delete traveler?</p>
+        </div>
     </div>
-</div>
+    <div class="modal-footer">
+        <div class="form_btn">
+            <button type="button" class="btn_no" (click)="modal.dismiss('Cross click')">No</button>
+            <button type="button" (click)="deleteTraveller()">Yes</button>
+        </div>
+    </div>
 </ng-template>

@@ -35,7 +35,7 @@
                     <div class="accordion-inner">
                         <div class="block_cmn stop">
                             <div class="block_top_in">
-                                <h5>Stops</h5>
+                                <h5>{{'stops' | translate}}</h5>
                             </div>
                             <ul>
                                 <li *ngIf="flightStops.non_stop.min_price !== null && flightStops.non_stop.min_price !== 0">
@@ -159,7 +159,7 @@
                     <div class="accordion-inner">
                         <div class="block_cmn stop">
                             <div class="block_top_in">
-                                <h5>Stops</h5>
+                                <h5>{{'stops' | translate}}</h5>
                             </div>
                             <ul>
                                 <li *ngIf="filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== 0">
