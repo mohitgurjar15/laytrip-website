@@ -15,9 +15,12 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { VacationNotFoundComponent } from './components/vacation-not-found/vacation-not-found.component';
 import { ComponentsModule } from '../../components/components.module';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { VacationDetailComponent } from './components/vacation-detail/vacation-detail.component';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
-  declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent],
+  declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent, VacationDetailComponent],
   imports: [
     CommonModule,
     VacationRentalRoutingModule,
@@ -32,6 +35,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
+    AgmJsMarkerClustererModule,
+    NgxGalleryModule,
   ],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

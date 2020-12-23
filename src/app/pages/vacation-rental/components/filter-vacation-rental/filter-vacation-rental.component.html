@@ -1,3 +1,5 @@
+<ng-scrollbar #scrollable [invertX]="invertX" [invertY]="invertY" [trackX]="true" [compact]="compact" [shown]="shown"
+  [disableOnBreakpoints]="false">
 <div class="fliter_block">
   <div class="cmn_block price">
     <div class="block_top_in">
@@ -53,8 +55,8 @@
               <ul>
                 <li *ngFor="let item of amenities">
                   <label class="custom_checkbox">
-                    <input type="checkbox" value=""> <span class="checkmark"
-                      (click)="filterByAmenities($event,item.title)"></span>{{item}}</label>
+                    <input type="checkbox" [checked]="item.isChecked==true" value="item"> <span class="checkmark"
+                      (click)="filterByAmenities($event,item)"></span>{{item}}</label>
                 </li>
               </ul>
             </div>
@@ -64,3 +66,4 @@
     </div>
   </div>
 </div>
+</ng-scrollbar>

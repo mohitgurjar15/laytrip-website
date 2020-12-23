@@ -37,6 +37,17 @@ export class VacationRentalService {
         );
     }
 
+     getRentalDetail(lang,currency,data) {
+        let headers = {
+            language: lang,
+            currency: currency
+        }
+        const url = environment.apiUrl + `v1/vacation-rental/details`;
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
+            catchError(this.handleError)
+       );
+    }
+
     handleError(error) {
         let errorMessage = {};
         if (error.status == 0) {

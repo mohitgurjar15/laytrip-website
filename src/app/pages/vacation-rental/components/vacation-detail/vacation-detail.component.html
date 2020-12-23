@@ -1,0 +1,334 @@
+<section class="search_result hotels">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="hotel_detail_slider">
+          <div class="slider_main_contain">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+
+            <div class="slider-overlay">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="hotel_name">
+                    <h4>
+                      {{rentalDetails?.name}}
+                    </h4>
+                    <span>
+                      {{rentalDetails?.city_name}}, {{rentalDetails?.country_name}}
+                    </span>
+                  </div>
+                  <div id="border"></div>
+                </div>
+               <!--  <div class="col-md-6 room-rating">
+                  <div class="room_rate_box">
+                    <span class="rate-box">
+                      
+                    </span>
+                    <span class="rating">
+                     
+                      <i class="fa fa-star"></i>
+                    </span>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hotel_detail_tabs">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Amenities</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
+                aria-selected="false">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map"
+                aria-selected="false">Map</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <p *ngIf="loading">Loading..</p>
+            <div [hidden]="loading" class="tab-pane fade active show" id="home" role="tabpanel"
+              aria-labelledby="home-tab">
+              <h4>Description</h4>
+              <p>
+            	{{rentalDetails?.description}}
+              </p>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <h4>Amenities</h4>
+              <div class="row">
+                <div class="col-md-4 p-3" *ngFor="let item of rentalDetails?.amenities">
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                  <span class="pl-3">{{item}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <div class="reviews_wrapper_main">
+                <div class="ratings_section">
+                  <div class="rating_num">
+                    <span class="blue_box">
+                      
+                    </span>
+                  </div>
+                  <div class="rating_detail">
+                    <span class="users_name"></span>
+                    <div class="stars_text">
+                      <div class="stars_wrapper">
+                        <img 
+                          src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
+                      </div>
+                      <p></p>
+                    </div>
+                  </div>
+                </div>
+                <p class="rating_text">
+                </p>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
+              <div style="height: 400px; width: 100%;">
+                <agm-map [latitude]="lat"
+                  [longitude]="long" [zoom]="12">
+                  <agm-marker iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    [latitude]="lat"
+                    [longitude]="long">
+                  </agm-marker>
+                </agm-map>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result_listing hotel_listings">
+          <div class="section_title">
+            Rooms
+          </div>
+          <div class="search_block">
+            <div class="listing_block">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="block_main">
+                    <div class="block_top">
+                      <div class="block_inner">
+                        <div class="col-md-4 col-lg-4 px-0">
+                          <div class="block_im">
+                            <div class="hotel_list_img_wrp">
+                              <img src="" alt="Hotel image">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-8 col-lg-8 pr-0">
+                          <div class="block_detail">
+                            <div class="block_detail_top">
+                              <div class="detail_info">
+                                <h4></h4>
+                                <div class="refen_tag">
+                                  <span></span>
+                                </div>
+                                <div class="review_section_wrap">
+                                  <div class="right_bar">
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="" alt=""> 
+                                      </div>
+                                    </div>
+                                    <div class="ammin_listing">
+                                      <div class="amminities_list">
+                                        <img src="{{s3BucketUrl}}assets/images/hotels/breakfast.svg" alt="">
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 px-0 right_sectiond_price">
+                  <div class="row">
+                    <div class="block_price block_pr">
+                      <div class="block_inn_pr">
+                        <div class="block">
+                          <p>Room Starts from</p>
+                          <p><span></span> /week</p>
+                        </div>
+                        <div class="block">
+                          <p><span></span></p>
+                        </div>
+                      </div> <a class="book_btn" href="">Select</a>
+                      <div class="show_detail">
+                        <a class="show_more_detail"> <img
+                            src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment
+                          plan details</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showRoomDetails[blockIndex] === true">
+              <div class="card-body">
+                <div class="block_flight_info">
+                  <div class="tab_detail fare_detail_cnt">
+                    <div class="triangle_right"></div>
+                    <ul>
+                      <li>Base Fare <span>44</span></li>
+                      <li>Taxes and Fees <span>44</span></li>
+                      <li>Total Fare <span>44</span></li>
+                    </ul>
+                    <div class="triangle_left"></div>
+                    <ul>
+                      <li class="down_payment">
+                        11
+                        <span class="down_value">111</span>
+                      </li>
+                      <ng-container>
+                        <li>
+                          <div class="detail">aa
+                            <p>aa
+                            </p>
+                          </div> <span>aa</span>
+                        </li>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="hotel_detail_sidebar">
+          <h3 class="section_title">
+            Room Summary
+          </h3>
+          <div class="display_wrapper">
+            <div class="detail_display">
+              <div class="display_text">
+                <h2></h2>
+                <p>
+                  <span>
+                    Rooms</span><span>
+                    Adults</span><span> Child</span>
+                </p>
+              </div>
+              <img src="{{s3BucketUrl}}assets/images/Union 1.png" alt="hotel display image">
+            </div>
+            <div class="display_daterange_wrapper">
+              <div class="display_daterange">
+                <div class="datewrapper">
+                  <label for="">CHECK IN</label>
+                  <span>
+                    <span></span>
+                    <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                  </span>
+                </div>
+                <div class="datewrapper">
+                  <label for="">CHECK OUT</label>
+                  <span>
+                    <span></span>
+                    <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_calender-icon.svg" alt="">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fare_detail_wrapper">
+            <div class="fare_section">
+              <span class="fare_title">
+                Room Details
+              </span>
+              <div class="fare_listing">
+                <span>Cancellation policies</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Policies</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span></span>
+                <span>Included</span>
+              </div>
+            </div>
+            <div class="fare_section">
+              <span class="fare_title">
+                Payment
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div class="fare_section">
+              <span class="fare_title">
+                Fare Details
+              </span>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>1st Installment
+                  <span>(Oct 24 2020)</span>
+                </span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div class="fare_section">
+              <span class="fare_title">
+                Price Details
+              </span>
+              <div class="fare_listing">
+                <span>Hotel</span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>1st Installment
+                  <span>(Oct 24 2020)</span>
+                </span>
+                <span>1</span>
+              </div>
+              <div class="fare_listing">
+                <span>Room</span>
+                <span>1</span>
+              </div>
+            </div>
+          </div>
+          <div class="fare_total_wrapper">
+            <span>Total</span>
+            <span>$350</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

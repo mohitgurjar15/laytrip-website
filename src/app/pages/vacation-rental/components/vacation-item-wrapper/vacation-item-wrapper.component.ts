@@ -6,10 +6,9 @@ import { VacationRentalService } from '../../../../services/vacation-rental.serv
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-import { CommonFunction } from '../../../../_helpers/common-function';
-import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-vacation-item-wrapper',
@@ -29,17 +28,21 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
   isMapView = false;
   markers = [];
   zoom = 10;
-  lat: number;
-  long: number;
-  price: any;
-  dis_image: any;
+  showHomeDetails = [];
+  showFareDetails: number = 0;
+  amenitiesObject = {
+    breakfast: `${this.s3BucketUrl}assets/images/hotels/breakfast.svg`,
+    ComplimentaryWirelessInternet: `${this.s3BucketUrl}assets/images/hotels/wifi.svg`,
+    NonSmokingRooms: `${this.s3BucketUrl}assets/images/hotels/no_smoking.svg`,
+    tv: `${this.s3BucketUrl}assets/images/hotels/tv.svg`,
+    AirConditioning: `${this.s3BucketUrl}assets/images/hotels/ac.svg`,
+  }
+
   constructor(
     private rentalService: VacationRentalService,
     private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService,
-    private commonFunction: CommonFunction,
-    private genericService: GenericService) { }
+    private commonFunction: CommonFunction) { }
 
   ngOnInit() {
 
@@ -61,23 +64,8 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     if (view === 'listView') {
       this.isMapView = false;
     } else {
-      this.isMapView = true;
-      this.markers = [];
-      this.lat = this.rentalListArray[0].latitude;
-      this.long = this.rentalListArray[0].longintude;
-      this.price = this.rentalListArray[0].selling_price;
-      //this.dis_image=this.rentalListArray[0].display_image;
-      for (var _i = 0; _i < this.rentalListArray.length; _i++) {
-        this.markers.push({
-          lat: this.rentalListArray[_i].latitude,
-          lng: this.rentalListArray[_i].longintude,
-          label: this.rentalListArray[_i].property_name,
-          price: this.rentalListArray[_i].selling_price,
-          dis_image: this.rentalListArray[_i].display_image,
-          //map_icon:'http://maps.google.com/mapfiles/ms/icons/green.png'  
-        })
-      }
-    };
+       this.isMapView = true;
+    }
   }
 
   onMouseOver(infoWindow, gm) {
@@ -93,4 +81,35 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
   onMouseOut(infoWindow, gm) {
     infoWindow.close();
   }
+
+  showDetails(index, flag = null) {
+    if (typeof this.showHomeDetails[index] === 'undefined') {
+      this.showHomeDetails[index] = true;
+    } else {
+      this.showHomeDetails[index] = !this.showHomeDetails[index];
+    }
+
+    if (flag == 'true') {
+      this.showFareDetails = 1;
+    }
+    else {
+
+      this.showFareDetails = 0;
+    }
+
+    this.showHomeDetails = this.showHomeDetails.map((item, i) => {
+      return ((index === i) && this.showHomeDetails[index] === true) ? true : false;
+    });
+  }
+   closeHomeDetail() {
+    this.showFareDetails = 0;
+    this.showHomeDetails = this.showHomeDetails.map(item => {
+      return false;
+    });
+  }
+
+  redirectToDetail(id,lat,long) {
+    this.router.navigate(['/vacation-rental/detail', id],{ queryParams: { lat: lat,long :long}});
+  }
+
 }

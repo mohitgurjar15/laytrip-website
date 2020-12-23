@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -15,11 +15,12 @@ import { VacationRentalService } from '../../../services/vacation-rental.service
 })
 export class VacationSearchWidgetComponent implements OnInit {
 
+ @ViewChild('dateFilter', undefined) private dateFilter: any;
  s3BucketUrl = environment.s3BucketUrl;
  rentalSearchForm: FormGroup;
  modules: Module[];
  moduleList: any = {};
-
+ rangeDates: Date[];
   rentalCheckInMinDate;
   rentalCheckoutMinDate; 
   data = [];
@@ -57,12 +58,13 @@ export class VacationSearchWidgetComponent implements OnInit {
 
     this.rentalSearchForm = this.fb.group({   
       fromDestination: ['', [Validators.required]],
-      check_in_date: [[Validators.required]],
-      check_out_date: [[Validators.required]],
+      // check_in_date: [[Validators.required]],
+      // check_out_date: [[Validators.required]],
     });
 
     this.rentalCheckInMinDate = new Date();
     this.rentalCheckoutMinDate = this.rentalForm.check_in_date;
+    this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
    }
 
   ngOnInit() {
@@ -87,8 +89,17 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   //Date Change
    rentalDateUpdate(date) {
-    this.rentalForm.check_out_date = new Date(date)
-    this.rentalCheckoutMinDate = new Date(date)
+    //this.rentalForm.check_out_date = new Date(date)
+    //this.rentalCheckoutMinDate = new Date(date)
+    if (this.rangeDates[1]) { // If second date is selected
+      this.dateFilter.hideOverlay();
+    };
+    if (this.rangeDates[0] && this.rangeDates[1]) {
+      this.rentalCheckInMinDate = this.rangeDates[0];
+      this.rentalForm.check_in_date  = this.rentalCheckInMinDate;
+      this.rentalForm.check_out_date = this.rangeDates[1];
+      
+    }
   }
 
   dateChange(type, direction) {
@@ -187,8 +198,6 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   //Start search Vacation rentals function
   searchRentals(formData){
-    // console.log(formData);
-    // return false;
     this.error_message='';
     this.rentalSearchFormSubmitted = true;
     if(this.rentalSearchForm.invalid) 
