@@ -107,8 +107,8 @@
                 <ul>
                   <li *ngFor="let item of amenities">
                     <label class="custom_checkbox">
-                      <input type="checkbox" value=""> <span class="checkmark"
-                        (click)="filterByHotelAmenities($event,item.title)"></span>{{item.title}}</label>
+                      <input type="checkbox" value="{{item.title}}" (click)="filterByHotelAmenities($event,item.title)">
+                      <span class="checkmark"></span>{{item.title}}</label>
                   </li>
                 </ul>
               </div>

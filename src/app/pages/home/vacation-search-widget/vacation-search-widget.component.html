@@ -35,19 +35,23 @@
                    <div class="search_area"
                         [ngClass]="{'dr_search_area':countryCode=='DR'}">
                         <label>Check In</label>
-                        <p-calendar inputId="basic" [(ngModel)]="rentalForm.check_in_date"
+                         <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
+                        [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="rentalCheckInMinDate"
+                        panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=rentalDateUpdate($event) [readonlyInput]="true">
+                      </p-calendar>
+                       <!--  <p-calendar inputId="basic" [(ngModel)]="rentalForm.check_in_date"
                          [ngModelOptions]="{standalone: true}"rentalCheckInMinDate
                          [minDate]="rentalCheckInMinDate"
                          (onSelect)=rentalDateUpdate($event)
                          [readonlyInput]="true">
-                        </p-calendar>
+                        </p-calendar> -->
                         <div class="prev-next">
                           <a (click)="dateChange('checkIn','previous')">Prev</a>
                           <a (click)="dateChange('checkIn','next')">Next</a>
                         </div>
                    </div>
                </div>
-               <div class="date_to">
+              <!--  <div class="date_to">
                   <div class="search_area"
                         [ngClass]="{'dr_search_area':countryCode=='DR'}">
                         <label>Check OUT</label>
@@ -61,7 +65,7 @@
                           <a (click)="dateChange('checkOut','next')">Next</a>
                         </div>
                    </div>
-               </div>
+               </div> -->
             </li>
             <li class="grid_box third">
                <div class="travellers">
