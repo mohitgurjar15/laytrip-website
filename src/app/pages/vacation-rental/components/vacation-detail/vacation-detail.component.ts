@@ -19,6 +19,9 @@ export class VacationDetailComponent implements OnInit {
   rentalId;
   rentalDetails;
   imageTemp = [];
+  lat:number;
+  long:number;
+
   constructor(
   	private route: ActivatedRoute,
     private rentalService: VacationRentalService,) { }
@@ -56,6 +59,8 @@ export class VacationDetailComponent implements OnInit {
      this.route.params.subscribe(params => {
       if (params) {
         this.rentalId = params.id;
+        this.lat=Number(this.route.snapshot.queryParams.lat);
+        this.long=Number(this.route.snapshot.queryParams.long);
       }
     });
 

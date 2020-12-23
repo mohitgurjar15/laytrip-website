@@ -108,8 +108,8 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     });
   }
 
-  redirectToDetail(id) {
-    this.router.navigate(['/vacation-rental/detail', id]);
+  redirectToDetail(id,lat,long) {
+    this.router.navigate(['/vacation-rental/detail', id],{ queryParams: { lat: lat,long :long}});
   }
 
 }

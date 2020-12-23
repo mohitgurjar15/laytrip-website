@@ -99,7 +99,7 @@
                                 <p><span>{{currency?.symbol}}{{item?.selling_price}}</span></p>
                             </div>
                         </div>
-                        <a class="book_btn" (click)="redirectToDetail(item.property_id)">Select</a>
+                        <a class="book_btn" (click)="redirectToDetail(item.property_id,item.latitude,item.longintude)">Select</a>
                         <div class="show_detail">
                             <a (click)="showDetails(blockIndex,'true')"  class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
