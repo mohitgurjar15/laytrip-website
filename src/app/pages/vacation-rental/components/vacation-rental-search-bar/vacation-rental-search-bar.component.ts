@@ -68,7 +68,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
 
     this.data=[{
           id: info.id,
-          title: info.display_name,
+          display_name: info.display_name,
           type: info.type,
           city: info.city,
           country: info.country,
@@ -153,7 +153,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
         this.loading = false;
         return {
           id: res.id,
-          title: res.display_name,
+          display_name: res.display_name,
           type: res.type,
           city: res.city,
           country: res.country,
@@ -195,9 +195,9 @@ export class VacationRentalSearchBarComponent implements OnInit {
   searchRentals(formData){
     this.error_message='';
     formData.id=this.defaultSelected.id == undefined ? this.data[0].id:this.defaultSelected.id;
-    formData.city=this.defaultSelected.city == undefined ? this.data[0].id:this.defaultSelected.city;
-    formData.country=this.defaultSelected.country == undefined ? this.data[0].id:this.defaultSelected.country;
-    formData.display_name=this.defaultSelected.title == undefined ? this.data[0].id:this.defaultSelected.title;
+    formData.city=this.defaultSelected.city == undefined ? this.data[0].city:this.defaultSelected.city;
+    formData.country=this.defaultSelected.country == undefined ? this.data[0].country:this.defaultSelected.country;
+    formData.display_name=this.defaultSelected.display_name == undefined ? this.data[0].display_name:this.defaultSelected.display_name;
     formData.type=this.defaultSelected.type == undefined ? this.data[0].type:this.defaultSelected.type;
     formData.check_in_date=moment(formData.check_in_date).format("YYYY-MM-DD");
     formData.check_out_date=moment(formData.check_out_date).format("YYYY-MM-DD");

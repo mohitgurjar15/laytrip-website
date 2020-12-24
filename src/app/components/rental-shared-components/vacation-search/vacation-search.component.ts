@@ -42,7 +42,7 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
         city: this.defaultSelected.city,
         country: this.defaultSelected.country,
         id: this.defaultSelected.id,
-        title: this.defaultSelected.display_name,
+        display_name: this.defaultSelected.display_name,
         type: this.defaultSelected.type,
       });
     }
@@ -67,7 +67,7 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
         this.loading = false;
         return {
           id: res.id,
-          title: res.display_name,
+          display_name: res.display_name,
           type: res.type,
           city: res.city,
           country: res.country,
