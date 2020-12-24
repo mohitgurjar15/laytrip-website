@@ -215,14 +215,16 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   }
 
-  checkInDateUpdate(date) {
+  returnDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
-      // this.checkInDate = this.rangeDates[0];
-      // this.checkInMinDate = this.rangeDates[0];
+       this.departureDate = this.rangeDates[0];
+       this.flightDepartureMinDate = this.rangeDates[0];
+       this.returnDate = this.rangeDates[1];
+       this.rangeDates = [this.departureDate,this.returnDate];
       // this.checkOutDate = this.rangeDates[1];
       // this.checkOutMinDate = this.rangeDates[1];
       // this.searchHotelInfo.check_in = this.checkInDate;

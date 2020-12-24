@@ -73,8 +73,8 @@
                                     </p-calendar>
 
                                     <p-calendar *ngIf="isRoundTrip" dateFormat="d M yy" #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
-                                        [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="checkInMinDate"
-                                        panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
+                                        [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate"
+                                        panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
                                     </p-calendar>
                                     <!-- <div class="prev-next">
                                         <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>

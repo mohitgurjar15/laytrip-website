@@ -1,0 +1,94 @@
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+.deal_sec{
+    width: 100%;
+	padding: 20px 0;
+	background: $background-white;
+
+	@include tab-view{
+		padding: 15px 0;
+	}
+    .deal_sec_wrapper{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px 80px;
+
+        @include tab-view{
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .deal_section_row{
+            flex: 1;
+            margin: 15px 20px;
+            .deal_sec_inner{
+                overflow: hidden;
+                position: relative;
+                z-index: 2;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                border-radius: 10px;
+                max-height: 300px;
+                &:hover{
+                    img{
+                        transform: scale(1.1);
+                    }
+                }
+                img{
+                    width: 100%;
+                    border-radius: 20px;
+                    transform: scale(1);
+                    transition: 1s;
+                    object-fit: cover;
+                }
+                .image_about_text{
+                    position: absolute;
+                    bottom: 15px;
+                    button {
+                        width: 100%;
+                        height: 100%;
+                        padding: 10px 25px;
+                        background: $background-white;
+                        border-radius: 25px;
+                        border: none;
+                        font-size: 17px;
+                        color: $active-tab-text;
+                        transition: 0.3s;
+                        position: relative;
+                        z-index: 9;
+                        overflow: hidden;
+                        white-space: normal;
+                
+                
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 0%;
+                            background: $hotel-secondary-color;
+                            z-index: -1;
+                            transition: 0.8s;
+                            border-radius: 0 0 50% 50%;
+                        }
+                
+                        &:hover {
+                            &:before {
+                                height: 190%;
+                            }
+                            color: $text-white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

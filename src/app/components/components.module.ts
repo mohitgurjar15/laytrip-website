@@ -124,3 +124,4 @@ import { FlightClassComponent } from './flight-class/flight-class.component';
 
 })
 export class ComponentsModule { }
+
