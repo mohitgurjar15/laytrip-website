@@ -39,6 +39,7 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
 import { TranslateModule } from '@ngx-translate/core';
 import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { FlightClassComponent } from './flight-class/flight-class.component';
 
 
 
@@ -71,7 +72,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     GuestInfoComponent,
     SearchHotelComponent,
     RentalInfoComponent,
-    VacationSearchComponent
+    VacationSearchComponent,
+    FlightClassComponent
   ],
   imports: [
     CommonModule,

@@ -35,18 +35,28 @@ export class RentalInfoComponent implements OnInit {
   constructor( 
   	private route: ActivatedRoute,
     private commonFunction:CommonFunction){
-    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 2;
+    this.adultValue = parseInt(this.route.snapshot.queryParams['adult_count']) ? parseInt(this.route.snapshot.queryParams['adult_count']) : 2;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
     //this.childAgeInfo = info.number_and_children_ages;
     // this.childData=[{
     //   children:[1]
     // }]
     // this.childAgeInfo=[5];
+   
     this.totalPerson = this.adultValue + this.childValue;
   	  this.countryCode = this.commonFunction.getUserCountry()
     }
 
   ngOnInit() {
+    const info = JSON.parse(localStorage.getItem('_rental'));
+    console.log("----------jdsjdfsjfdsjfdsjfd",this.childValue);
+    if(this.childValue  == 0){
+       this.childAgeInfo;
+    }else{
+      this.childAgeInfo=info.number_and_children_ages;
+      this.childData[0].children=info.number_and_children_ages;
+    }
+    console.log(this.childAgeInfo);
   	this.loadJquery();
   }
 

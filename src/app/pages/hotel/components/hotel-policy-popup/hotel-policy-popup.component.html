@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <div class="block_title">
+        <h5>{{data.title}}</h5>
+    </div>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.close()">
+        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+    </button>
+</div>
+<div class="modal-body mb-3" *ngIf="data.type === 'cancellation_policies'">
+    <ng-container *ngFor="let policy of policyArray">
+        <h6>From {{policy.after | date}} {{policy.after | date: 'hh:mm'}} to {{policy.before | date}} {{policy.before
+            | date: 'hh:mm'}} {{currency.symbol}}{{policy.total_charges}} penalty will be charged</h6>
+        <span>{{policy.description}}</span>
+    </ng-container>
+</div>
+<div class="modal-body mb-3" *ngIf="data.type === 'policies'">
+    <ng-container *ngFor="let policy of policyArray">
+        <h6 class="mt-3">{{policy.title}}</h6>
+        <span *ngFor="let paragraph of policy.paragraph_data">{{paragraph}}</span>
+    </ng-container>
+</div>

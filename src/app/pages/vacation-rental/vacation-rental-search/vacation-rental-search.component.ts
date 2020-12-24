@@ -75,7 +75,7 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
 
   getSearchItem(event) {
     console.log(event);
-    //this.getRentalSearchData(event);
+    this.getRentalSearchData(event);
   }
 
   //Sort Section Start

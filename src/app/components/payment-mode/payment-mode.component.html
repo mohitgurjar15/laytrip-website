@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" *ngIf="instalmentAvavible">
     <h5>Choose How You Pay</h5>
     <button type="button" class="btn btn-outline-primary btn-lg" (click)="togglePaymentMode('instalment')">Installments</button>&nbsp;&nbsp;&nbsp;
     <button type="button" class="btn btn-outline-secondary btn-lg" (click)="togglePaymentMode('no-instalment')">Full Payment</button>
@@ -7,15 +7,15 @@
 
     <div *ngIf="paymentType=='instalment'">
       <h6>Downpayment Options</h6>
-      <button type="button" class="btn btn-outline-secondary" (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" (click)="toggleDownPayment(2)">${{downPayments[2] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==0}" (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==1}" (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==2}" (click)="toggleDownPayment(2)">${{downPayments[2] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
       
       <br><br>
       <h6>Installment Payment Options</h6>
-      <button type="button" class="btn btn-outline-secondary" (click)="togglePaymentFrequency('weekly')">Weeky ${{weeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" (click)="togglePaymentFrequency('biweekly')">Biweeky${{biWeeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" (click)="togglePaymentFrequency('monthly')">Monthly ${{montlyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='weekly'}" (click)="togglePaymentFrequency('weekly')">Weeky ${{weeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='biweekly'}" (click)="togglePaymentFrequency('biweekly')">Biweeky${{biWeeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='monthly'}" (click)="togglePaymentFrequency('monthly')">Monthly ${{montlyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
     </div>
       
     <br><br><br><br>
@@ -25,9 +25,9 @@
           Total Price
           <span class="badge badge-primary badge-pill">${{sellingPrice | number : '1.2-2'}}</span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li *ngIf="laycreditpoints>0" class="list-group-item d-flex justify-content-between align-items-center">
           Applied points
-          <span class="badge badge-primary badge-pill">12</span>
+          <span class="badge badge-primary badge-pill">{{laycreditpoints | number : '1.2-2' }}</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Total Due
@@ -35,14 +35,14 @@
         </li>
        
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            As $30 Down and $5/week for 15 weeks
+            As ${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}} Down and ${{instalments.instalment_date[1].instalment_amount | number : '1.2-2'}}/week for ${{instalments.instalment_date.length-1}} weeks
             <div class="dropdown">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                 Installment list
               </button>
-              <div class="dropdown-menu">
+              <div class="dropdown-menu" *ngIf="instalments">
                 <ng-container *ngFor="let instalment of instalments.instalment_date">
-                  <a class="dropdown-item" href="#">Date: {{instalment.instalment_date}}=>{{instalment.instalment_amount}}</a>
+                  <a class="dropdown-item" href="#">Date: {{instalment.instalment_date}}=>{{instalment.instalment_amount | number : '1.2-2'}}</a>
                 </ng-container>
               </div>
             </div>

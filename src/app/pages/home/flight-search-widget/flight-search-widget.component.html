@@ -14,6 +14,18 @@
                 <span>{{'round_trip' | translate}}</span>
             </a>
         </li>
+        <li class="nav-item">
+            <div class="travellers">
+                <app-traveller-info label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)">
+                </app-traveller-info>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="travellers">
+                <app-traveller-info label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)">
+                </app-traveller-info>
+            </div>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#Multi-city">
               <img class="default-icon"
@@ -56,16 +68,16 @@
                         <li class="grid_box secound">
                             <div class="date_form">
                                 <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                                    <label>{{'departure' | translate}}</label>
+                                    <!-- <label>{{'departure' | translate}}</label> -->
                                     <p-calendar inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true">
                                     </p-calendar>
-                                    <div class="prev-next">
+                                    <!-- <div class="prev-next">
                                         <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>
                                         <a (click)="dateChange('departure','next')">{{'next' | translate}}</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
-                            <div class="date_to">
+                            <!-- <div class="date_to">
                                 <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
                                     <label>{{'return' | translate}}</label>
                                     <p (click)="toggleOnewayRoundTrip('roundtrip')">{{'tap_to_add_return_date' | translate}}</p>
@@ -81,20 +93,18 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> -->
                         </li>
                         <li class="grid_box third">
-                            <div class="travellers">
-                                <app-traveller-info label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)">
-                                </app-traveller-info>
+                            
+                            <div class="serch_btn">
+                                <button> <img
+                                      src="{{s3BucketUrl}}assets/images/search_icon.svg"
+                                      alt="search_icon" /></button>
                             </div>
                         </li>
                     </ul>
-                    <div class="serch_btn">
-                        <button>{{'search_flight' | translate}} <img
-                              src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
-                              alt="Right Arrow" /></button>
-                    </div>
+                   
                 </div>
             </form>
         </div>

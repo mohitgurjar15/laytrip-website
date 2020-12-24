@@ -2,6 +2,7 @@
 /*------------- color variables ------------*/
 $pink: #F826C1;
 $hotel-secondary-color : #F826C1;
+$bg-grey-light : #D6D6D6;
 @function color($color-name) {
     @return map-get($colors , $color-name )
 };

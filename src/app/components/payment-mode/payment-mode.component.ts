@@ -48,7 +48,7 @@ export class PaymentModeComponent implements OnInit {
   }
   instalments;
   allInstalments;
-  durationType:string='weekly'; // [weekly,biweekly,monthly]
+  instalmentType:string='weekly'; // [weekly,biweekly,monthly]
   paymentType:string='instalment';
   additionalAmount:number=0;
   remainingAmount:number;
@@ -64,25 +64,34 @@ export class PaymentModeComponent implements OnInit {
   biWeeklyInstalment:number=0;
   montlyInstalment:number=0;
   downPayments=[];
-  //downPayment:number=0;
+  selectedDownPaymentIndex:number=0;
   sellingPrice:number;
 
   ngOnInit(){
 
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
-    this.getTotalPrice();
-    this.getAllInstalment();
-    this.calculateInstalment();
+    if(this.instalmentRequest.checkin_date){
+
+      this.getTotalPrice();
+      this.getAllInstalment();
+      this.calculateInstalment(null,'redeemable_point');
+    }
   }
   
-  calculateInstalment(type1=null){
+  calculateInstalment(type1=null,type2=null,type3=null){
     
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
-        console.log()
         if(this.instalments.instalment_available==true){
           if(type1!=null && type1=='down-payment'){
             this.calculateDownPayment(this.instalments.instalment_date[0].instalment_amount)
+          }
+          if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
+            this.redeemableLayCredit.emit(this.sellingPrice-this.instalments.instalment_date[0].instalment_amount);
+          }
+          console.log("this.sellingPrice-this.laycreditpoints",this.sellingPrice-this.laycreditpoints)
+          if(type3!=null && type3!='down-payment-with-laytrip'){
+            this.calculateDownPayment(this.sellingPrice-this.laycreditpoints)
           }
         }
       },(err)=>{
@@ -92,8 +101,9 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['laycreditpoints']) {
-      
-      this.calculateInstalment();
+      this.laycreditpoints =Number(changes['laycreditpoints'].currentValue);
+      this.instalmentRequest.additional_amount = this.laycreditpoints;
+      this.calculateInstalment('down-payment',null,'down-payment-with-laytrip');
     }
 
     if(changes['priceData']){
@@ -126,7 +136,6 @@ export class PaymentModeComponent implements OnInit {
           this.montlyInstalment   = res.monthly_instalments[1].instalment_amount;
           this.calculateDownPayment(res.weekly_instalments[0].instalment_amount);
         }
-        
       },(err)=>{
 
     })
@@ -158,9 +167,16 @@ export class PaymentModeComponent implements OnInit {
    */
   togglePaymentFrequency(type){
 
+    /* Reset Section */
+    this.instalmentRequest.down_payment=0;
+    this.selectedDownPaymentIndex=0;
+    /* End Reset Section */
+    
     this.instalmentRequest.instalment_type=type;
+    this.instalmentType=type;
     this.calculateInstalment(type='down-payment');
     
+    this.redeemableLayCredit.emit(this.sellingPrice-this.downPayments[0]);
   }
   
   /**
@@ -169,9 +185,9 @@ export class PaymentModeComponent implements OnInit {
    */
   toggleDownPayment(index){
 
-    //this.downPayment = this.downPayments[index];
+    this.selectedDownPaymentIndex=index;
     this.instalmentRequest.down_payment= this.downPayments[index];
+    this.redeemableLayCredit.emit(this.sellingPrice-this.downPayments[index]);
     this.calculateInstalment();
-    //console.log("this.downPayment",this.downPayment)
   }
 }

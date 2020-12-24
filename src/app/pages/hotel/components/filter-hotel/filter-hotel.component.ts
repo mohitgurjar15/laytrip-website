@@ -253,10 +253,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   */
   filterByHotelAmenities(event, value) {
     if (event.target.checked === true) {
-      this.amenities.push(value);
+      this.amenitiesArray.push(value);
     }
     else {
-      this.amenities = this.amenities.filter(item => {
+      this.amenitiesArray = this.amenitiesArray.filter(item => {
         return item !== value;
       });
     }
@@ -313,8 +313,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
+      console.log(this.amenitiesArray);
       filteredHotels = filteredHotels.filter(item => {
-        return this.amenitiesArray.includes(item.inbound_stop_count);
+        return this.amenitiesArray.some(r => item.amenities.list.includes(r));
+        // return this.amenitiesArray.includes(item.amenities.list);
       })
     }
 
@@ -351,10 +353,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['isResetFilter']) {
+      console.log(changes['isResetFilter']);
       this.isResetFilter = changes['isResetFilter'].currentValue;
       this.minPrice = this.hotelDetailsMain.filter_objects.price.min;
       this.maxPrice = this.hotelDetailsMain.filter_objects.price.max;
-
       // Reset Price
       this.priceSlider.reset({ price: [Math.floor(this.hotelDetailsMain.filter_objects.price.min), Math.ceil(this.hotelDetailsMain.filter_objects.price.max)] });
 
@@ -362,24 +364,18 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       this.sortType = 'filter_total_price';
 
       // Reset ratings
-      if (typeof this.ratingArray != 'undefined' && this.ratingArray.length) {
-        this.ratingArray.forEach(element => {
-          return element.isChecked = false;
-        });
+      if (this.ratingArray && this.ratingArray.length) {
+        return this.ratingArray = [];
       }
 
       // Reset amenities
-      if (typeof this.amenities != 'undefined' && this.amenities.length) {
-        this.amenities.forEach(element => {
-          return element.isChecked = false;
-        });
+      if (this.amenitiesArray.length) {
+        return this.amenitiesArray = [];
       }
 
       // Reset policy
-      if (typeof this.policyArray != 'undefined' && this.policyArray.length) {
-        this.policyArray.forEach(element => {
-          return element.isChecked = false;
-        });
+      if (this.policyArray.length) {
+        return this.policyArray = [];
       }
 
       // Reset hotel name search
