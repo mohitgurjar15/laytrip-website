@@ -25,6 +25,7 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
   selectedRental: any = {};
   loading = false;
   data = [];
+  recentSearchInfo:any = [];
   itemIconArray = {
     hotel: `${this.s3BucketUrl}assets/images/hotels/hotel.svg`,
     city: `${this.s3BucketUrl}assets/images/hotels/city.svg`,
@@ -47,6 +48,22 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
       });
     }
     console.log(this.defaultSelected);
+    if (localStorage.getItem('_rental_recent')) {
+      this.recentSearchInfo = JSON.parse(localStorage.getItem('_rental_recent'));
+      this.data = this.recentSearchInfo.map(item => {
+        return {
+          city: item.city,
+          country: item.country,
+          id: item.id,
+          display_name: item.display_name,
+          type: item.type,
+          recentSearches: 'Recent Searches',
+          isRecentSearch: true
+        }
+      });
+    } else {
+      console.log('no');
+    }
 
   }
 
@@ -96,6 +113,24 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
     this.defaultSelected = event;
     if (event && index && index === 'fromSearch1') {
       this.changeValue.emit({ key: 'fromSearch1', value: event });
+      if (this.recentSearchInfo && this.recentSearchInfo.length < 3) {
+
+        const check=this.recentSearchInfo.some(temp =>temp.id == this.defaultSelected.id)
+        if(!check)
+        {
+
+         this.recentSearchInfo.unshift({id:event.id,city:event.city,country:event.country,display_name:event.display_name,type:event.type});
+          localStorage.setItem('_rental_recent', JSON.stringify(this.recentSearchInfo));
+        }
+      }
+      else{
+         const check=this.recentSearchInfo.some(temp =>temp.id == this.defaultSelected.id)
+        if(!check){
+          this.recentSearchInfo.pop();
+          this.recentSearchInfo.unshift({id:event.id,city:event.city,country:event.country,display_name:event.display_name,type:event.type});
+          localStorage.setItem('_rental_recent', JSON.stringify(this.recentSearchInfo));
+       }
+      }
     }
   }
 
