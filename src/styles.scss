@@ -523,16 +523,17 @@ select {
 												flex-wrap: wrap;
 												align-content: center;
 												justify-content: space-between;
+												padding: 0;
 
 												li {
-													width: 48%;
+													width:100%;
 													margin: 0 0 10px;
 													padding: 0;
 
-													&:last-child {
-														width: 100%;
-														margin: 0;
-													}
+													// &:last-child {
+													// 	width: 100%;
+													// 	margin: 0;
+													// }
 
 													a {
 														line-height: 32px;
@@ -540,9 +541,10 @@ select {
 														text-align: center;
 														background: $background-white;
 														border: 1px solid $text-light-grey;
-														border-radius: 5px;
+														border-radius: 20px;
 														font-size: 14px;
 														color: $text-light-grey;
+														justify-content: center;
 
 														&:hover {
 															background: $pink_clr;
