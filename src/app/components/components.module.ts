@@ -117,9 +117,11 @@ import { FlightClassComponent } from './flight-class/flight-class.component';
     RentalInfoComponent,
     TranslateModule,
     VacationSearchComponent,
-    NgScrollbarModule
+    NgScrollbarModule,
+    FlightClassComponent
   ],
   providers: [DatePipe],
 
 })
 export class ComponentsModule { }
+

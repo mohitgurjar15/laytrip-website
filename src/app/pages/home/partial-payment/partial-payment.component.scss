@@ -12,8 +12,9 @@
 	position: relative;
 	margin: 100px 0;
 
-	@media(max-width: 767px) {
-		padding: 100px 0;
+	@include tab-view {
+        padding: 15px 0;
+        margin: 15px 0;
 	}
 
 	.partial_payment_info {
@@ -21,11 +22,21 @@
         justify-content: space-around;
         align-items: center;
         width: 100%;
+
+        @include tab-view{
+            flex-direction: column;
+        }
         .partial_info_sections{
             text-align: center;
             .pay_info_inner_wrapper{
                 color: $text-black;
                 padding: 10px 60px;
+                @include ipad-view{
+                    padding: 20px 0;
+                }
+                @include mobile-view{
+                    padding: 20px 15px;
+                }
                 .pay_type_img_wrap{
                     margin-bottom: 15px;
                 }
@@ -36,6 +47,9 @@
                     line-height: 23px;
                     padding: 0 17px;
                     width: 100%;
+                    @include mobile-view{
+                        padding: 0;
+                    }
                 }
                 p{
                     margin: 5px 0 10px;
