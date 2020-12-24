@@ -42,12 +42,5 @@
                 {{errorMessage}}
             </li>
         </ul>
-        <div class="flight_cat">
-            <ul>
-                <li><a class="active_cat hover-link" [ngClass]="{ 'active_cat' : class === 'Economy' }" (click)="btnClickForChange({type: 'class', value: 'Economy'})">{{'economy_class' | translate}}</a></li>
-                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'Business' }" (click)="btnClickForChange({type: 'class', value: 'Business'})">{{'business_class' | translate}}</a></li>
-                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'First' }" (click)="btnClickForChange({type: 'class', value: 'First'})">{{'first_class' | translate}}</a></li>
-            </ul>
-        </div>
     </div>
 </div>
