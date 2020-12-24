@@ -44,6 +44,10 @@ export class VacationRentalSearchBarComponent implements OnInit {
   destinationRental: any = {};
   placeHolder:'Barcelona';
   defaultSelected:any='Barcelona';
+  itemIconArray = {
+    hotel: `${this.s3BucketUrl}assets/images/hotels/hotel.svg`,
+    city: `${this.s3BucketUrl}assets/images/hotels/city.svg`,
+  };
   constructor( public fb: FormBuilder,
     private rentalService: VacationRentalService,
     public commonFunction: CommonFunction,
@@ -197,11 +201,11 @@ export class VacationRentalSearchBarComponent implements OnInit {
     formData.type=this.defaultSelected.type == undefined ? this.data[0].type:this.defaultSelected.type;
     formData.check_in_date=moment(formData.check_in_date).format("YYYY-MM-DD");
     formData.check_out_date=moment(formData.check_out_date).format("YYYY-MM-DD");
-    formData.adult_count=formData.adult_count == undefined ? this.data[0].adult_count:formData.adult_count;
-    formData.child=formData.child == undefined ? this.data[0].child:formData.child;
+    formData.adult_count=this.rentalForm.adult_count == undefined ? this.data[0].adult_count:this.rentalForm.adult_count;
+    formData.child=this.rentalForm.child == undefined ? this.data[0].child:this.rentalForm.child;
     formData.number_and_children_ages=formData.number_and_children_ages == undefined ? this.data[0].number_and_children_ages:formData.number_and_children_ages;
-     console.log(formData);
-    if(formData.child !='' || formData.child != undefined)
+    console.log(formData);
+    if(formData.child !== "")
     {
       if(formData.number_and_children_ages.length !== formData.child)
       {

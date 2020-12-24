@@ -4,6 +4,9 @@ import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gal
 import { VacationRentalService } from '../../../../services/vacation-rental.service';
 import { environment } from '../../../../../environments/environment';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { CommonFunction } from '../../../../_helpers/common-function';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-vacation-detail',
@@ -19,12 +22,19 @@ export class VacationDetailComponent implements OnInit {
   rentalId;
   rentalDetails;
   imageTemp = [];
+  rentalRoomData=[];
   lat:number;
   long:number;
-
+  currency;
+  lang;
+  info;
+  roomData;
   constructor(
   	private route: ActivatedRoute,
-    private rentalService: VacationRentalService,) { }
+    private rentalService: VacationRentalService,
+    private commonFunction: CommonFunction,
+    private toastr: ToastrService,
+    public router: Router) { }
 
   ngOnInit() {
 
@@ -64,19 +74,19 @@ export class VacationDetailComponent implements OnInit {
       }
     });
 
-     let currency = JSON.parse(localStorage.getItem('_curr'));
-     let lang     =JSON.parse(localStorage.getItem('_lang'));
-     let info   =JSON.parse(localStorage.getItem('_rental'));
+     this.currency = JSON.parse(localStorage.getItem('_curr'));
+     this.lang     =JSON.parse(localStorage.getItem('_lang'));
+     this.info   =JSON.parse(localStorage.getItem('_rental'));
      let payload: any = {};
       payload = {
           id: this.rentalId,
-          check_in_date: info.check_in_date,
-          check_out_date: info.check_out_date,
-          adult_count: parseInt(info.adult_count),
-          number_and_children_ages:info.number_and_children_ages,
+          check_in_date: this.info.check_in_date,
+          check_out_date:this.info.check_out_date,
+          adult_count: parseInt(this.info.adult_count),
+          number_and_children_ages:this.info.number_and_children_ages,
         }; 
      //Start Service call data
-      this.rentalService.getRentalDetail(lang.iso_1Code,currency.code,payload).subscribe((res: any) => {
+      this.rentalService.getRentalDetail(this.lang.iso_1Code,this.currency.code,payload).subscribe((res: any) => {
       console.log(res);
       if (res) {
         this.loading = false;
@@ -87,6 +97,10 @@ export class VacationDetailComponent implements OnInit {
           description: res.description,
           amenities: res.amenities,
         };
+        if(res.rooms){
+        	this.rentalRoomData=res.rooms;
+        	this.roomData=res.rooms[0];
+        }
         console.log(this.rentalDetails);
         if (res.images) {
           res.images.forEach(imageUrl => {
@@ -102,10 +116,20 @@ export class VacationDetailComponent implements OnInit {
       }
  
     }, error => {
-      this.loading = false;
-      console.log(error);
+       this.loading = false;
+      this.toastr.error('session is expired', 'Error');
+      this.router.navigate(['/']);
     });
      //End Service call data
+  }
+
+  counter(i: any) {
+    return new Array(i);
+  }
+
+  showRoomDetails(roomInfo) {
+  	console.log(roomInfo);
+    this.roomData = roomInfo;
   }
 
 }

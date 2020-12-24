@@ -20,6 +20,7 @@
                                         </ng-template>
                                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                                             <div class="hotel-parent">
+                                              <img height="15" width="15" [src]="itemIconArray[item.type]" />
                                                 <div class="sub-parent">{{item.city}},{{item.country}}-{{item.title}}</div>
                                             </div>
                                         </ng-template>
@@ -32,7 +33,7 @@
                                 <div class="date_form">
                                     <div class="search_area"
                                         [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                                        <label>Check In</label>
+                                        <label>Check In-Check Out</label>
                                         <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" rentalCheckInMinDate [minDate]="rentalCheckInMinDate"
                                         panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=rentalDateUpdate($event)

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 import { VacationRentalService } from '../../../services/vacation-rental.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-vacation-search',
@@ -10,6 +11,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class VacationSearchComponent implements OnInit, AfterViewChecked {
 
+  s3BucketUrl = environment.s3BucketUrl;
   @Input() label: string;
   @Input() tabIndex: number;
   @Input() placeHolder: string;
@@ -23,7 +25,10 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
   selectedRental: any = {};
   loading = false;
   data = [];
-
+  itemIconArray = {
+    hotel: `${this.s3BucketUrl}assets/images/hotels/hotel.svg`,
+    city: `${this.s3BucketUrl}assets/images/hotels/city.svg`,
+  };
 
   constructor(  
   	private rentalService: VacationRentalService,

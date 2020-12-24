@@ -91,12 +91,14 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
 
 
    clearRentalSearch() {
-    this.rentalname = 'Search Home';
-    this.filterRental.emit(this.rentalFilterDetails.items);
+    if(this.rentalname !== 'Search Home') { 
+     this.rentalname = 'Search Home';
+     this.filterRental.emit(this.rentalFilterDetails.items);
+   }
   }
 
   searchRental() {
-    if (this.rentalname) {
+    if(this.rentalname !== 'Search Home') {
       this.filterRentals({ key: 'searchByRental', value: this.rentalname.rentalName });
     }
   }
@@ -125,10 +127,10 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
      console.log(event);
      console.log(value);
     if (event.target.checked === true) {
-      this.amenities.push(value);
+      this.amenitiesArray.push(value);
     }
     else {
-      this.amenities = this.amenities.filter(item => {
+      this.amenitiesArray = this.amenitiesArray.filter(item => {
         return item !== value;
       });
     }
@@ -147,8 +149,11 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
 
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
-      filteredRentals = filteredRentals.filter(item => {
-        return this.amenitiesArray.includes(item);
+      console.log(this.amenitiesArray);
+       filteredRentals = filteredRentals.filter(item => {
+        return this.amenitiesArray.some(r => item.amenities.includes(r));
+      // filteredRentals = filteredRentals.filter(item => {
+      //   return this.amenitiesArray.includes(item);
       })
     }
 
@@ -192,6 +197,9 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
       //     return element.isChecked = false;
       //   });
       // }
+      if (this.amenitiesArray.length) {
+        return this.amenitiesArray = [];
+      }
 
       // Reset hotel name search
       this.rentalname = 'Search Home';
