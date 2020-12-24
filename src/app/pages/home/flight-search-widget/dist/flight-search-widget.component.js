@@ -37,7 +37,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             format: 'MM/DD/YYYY',
             displayFormat: 'MM/DD/YYYY'
         };
-        this.departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
+        this.departureDate = new Date(moment().add(31, 'days').format("DD MMM YYYY"));
         this.returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.searchFlightInfo = {
@@ -52,8 +52,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             infant: null
         };
         this.searchedValue = [];
-        this.checkInDate = new Date();
-        this.checkOutDate = new Date();
         this.fromAirport['display_name'] = this.fromAirport.city + "," + this.fromAirport.country + ",(" + this.fromAirport.code + ")," + this.fromAirport.name;
         this.toAirport['display_name'] = this.toAirport.city + "," + this.toAirport.country + ",(" + this.toAirport.code + ")," + this.toAirport.name;
         this.flightSearchForm = this.fb.group({
@@ -65,10 +63,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.flightDepartureMinDate = new Date();
         this.flightReturnMinDate = this.departureDate;
         this.countryCode = this.commonFunction.getUserCountry();
-        this.checkInMinDate = new Date();
-        this.checkOutMinDate = this.checkInDate;
-        this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
-        this.rangeDates = [this.checkInDate, this.checkOutDate];
+        console.log(this.departureDate);
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         window.scrollTo(0, 0);
@@ -184,12 +179,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
-            this.checkInDate = this.rangeDates[0];
-            this.checkInMinDate = this.rangeDates[0];
-            this.checkOutDate = this.rangeDates[1];
-            this.checkOutMinDate = this.rangeDates[1];
-            /* this.searchHotelInfo.check_in = this.checkInDate;
-            this.searchHotelInfo.check_out = this.checkOutDate; */
+            // this.checkInDate = this.rangeDates[0];
+            // this.checkInMinDate = this.rangeDates[0];
+            // this.checkOutDate = this.rangeDates[1];
+            // this.checkOutMinDate = this.rangeDates[1];
+            // this.searchHotelInfo.check_in = this.checkInDate;
+            // this.searchHotelInfo.check_out = this.checkOutDate;
         }
     };
     __decorate([

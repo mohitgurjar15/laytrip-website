@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -16,6 +16,9 @@ import { Router } from '@angular/router';
 export class FlightSearchWidgetComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
+  @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
+  rangeDates: Date[];
+  checkInMinDate;
   modules: Module[];
   moduleList: any = {};
   switchBtnValue = false;
@@ -42,7 +45,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightDepartureMinDate;
   flightReturnMinDate;
 
-  departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
+  departureDate = new Date(moment().add(31, 'days').format("DD MMM YYYY"));
   returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
@@ -82,6 +85,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightDepartureMinDate = new Date();
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
+    console.log(this.departureDate)
   }
 
   ngOnInit(): void {
@@ -209,6 +213,22 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.departureAirportCountry = this.arrivalAirportCountry;
     this.arrivalAirportCountry = tempAirportCountry;
 
+  }
+
+  checkInDateUpdate(date) {
+    console.log(date);
+    // this is only for closing date range picker, after selecting both dates
+    if (this.rangeDates[1]) { // If second date is selected
+      this.dateFilter.hideOverlay();
+    };
+    if (this.rangeDates[0] && this.rangeDates[1]) {
+      // this.checkInDate = this.rangeDates[0];
+      // this.checkInMinDate = this.rangeDates[0];
+      // this.checkOutDate = this.rangeDates[1];
+      // this.checkOutMinDate = this.rangeDates[1];
+      // this.searchHotelInfo.check_in = this.checkInDate;
+      // this.searchHotelInfo.check_out = this.checkOutDate;
+    }
   }
 
 }

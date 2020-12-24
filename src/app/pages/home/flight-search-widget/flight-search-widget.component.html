@@ -69,7 +69,12 @@
                             <div class="date_form">
                                 <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                     <!-- <label>{{'departure' | translate}}</label> -->
-                                    <p-calendar inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true">
+                                    <p-calendar *ngIf="!isRoundTrip" inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true">
+                                    </p-calendar>
+
+                                    <p-calendar *ngIf="isRoundTrip" #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
+                                        [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
+                                        panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
                                     </p-calendar>
                                     <!-- <div class="prev-next">
                                         <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>
