@@ -2,26 +2,39 @@
 <section class="partial_payment">
     <div class="container">
         <div class="row">
-            <div class="col-lg-7 offset-lg-5">
-                <div class="partial_payment_info">
-                    <h6>laytrip</h6>
-                    <h3 [innerHTML]="'installment_info_page_title' | translate"></h3>
-                    <div class="payment_info_txt">
-                        <p>{{'installment_info_page_description_1' | translate}}</p>
-                        <p>{{'installment_info_page_description_2' | translate}}</p>
-                        <p>{{'installment_info_page_description_3' | translate}}</p>
-                    </div>
-                    <div class="how_work">
-                        <span>{{'installment_info_page_small_title' | translate}}</span>
-                        <p>{{'installment_info_page_small_title_description' | translate}}</p>
-                        <ul>
-                            <li>{{'installment_info_page_pay_weekly' | translate}}</li>
-                            <li>{{'installment_info_page_pay_biweekly' | translate}}</li>
-                            <li>{{'installment_info_page_pay_monthly' | translate}}</li>
-                        </ul>
-                        <a class="learn_btn hover-link" [routerLink]="['partial-payment']">{{'installment_info_page_learn_more' | translate}}<img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+            <div class="partial_payment_info">
+                <div class="partial_info_sections">
+                    <div class="pay_info_inner_wrapper">
+                        <div class="pay_type_img_wrap">
+                            <img src="{{s3BucketUrl}}assets/images/calendarPay.svg" alt="calendarPay">
+                        </div>
+                        <div class="pay_title">Installment Payment Plans</div>
+                        <p>Book now, pay most of your itinerary later</p>
                     </div>
                 </div>
+                <div class="partial_info_sections">
+                    <div class="pay_info_inner_wrapper">
+                        <div class="pay_type_img_wrap">
+                            <img src="{{s3BucketUrl}}assets/images/credit-cardPay.svg" alt="credit-cardPay">
+                        </div>
+                        <div class="pay_title">No Interest No Credit Check</div>
+                        <p>Anyone can book travel</p>
+                    </div>
+                </div>
+                <div class="partial_info_sections">
+                    <div class="pay_info_inner_wrapper">
+                        <div class="pay_type_img_wrap">
+                            <img src="{{s3BucketUrl}}assets/images/pcPay.svg" alt="pcPay">
+                        </div>
+                        <div class="pay_title">One-stop Travel</div>
+                        <p>Book everything on the laytrip.com platform</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cta_extra_btn_wrapper">
+                <button>
+                    Learn more
+                </button>
             </div>
         </div>
     </div>
