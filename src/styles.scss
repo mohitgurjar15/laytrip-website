@@ -7,6 +7,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~ngx-toastr/toastr.css';
 @import "_dr_home_variable.scss";
+@import "_hotel.scss";
 //@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 .wrapper {
@@ -357,118 +358,8 @@ select {
 		.banner_tab {
 			width: 100%;
 			padding: 40px 0 0;
-
-			@media(max-width: 1199px) {}
-
-			@media(max-width: 767px) {}
-
-			.nav-tabs {
-				border: none;
-				display: inline-flex;
-				flex-wrap: nowrap;
-
-				@media(max-width: 480px) {
-					display: inline-flex;
-				}
-
-				a {
-					display: flex;
-					align-items: center;
-					padding: 20px 30px 20px 30px;
-					background: $primary-color;
-					border: none;
-					font-size: 14px;
-					font-weight: 500;
-					color: $text-white;
-					text-decoration: none;
-					border-radius: 0;
-					white-space: nowrap;
-
-					img {
-						margin-right: 15px;
-					}
-
-					.default-icon {
-						display: block;
-					}
-
-					.active-icon {
-						display: none;
-					}
-
-					.disabled-icon {
-						display: none;
-					}
-
-					&:first-child {
-						border-radius: 20px 0 0 0;
-					}
-
-					&:last-child {
-						border-radius: 0 20px 0 0;
-					}
-
-					&.active {
-						background: $background-white;
-						color: $active-tab-text;
-
-						.active-icon {
-							display: block;
-						}
-
-						.disabled-icon {
-							display: none;
-						}
-
-						.default-icon {
-							display: none;
-						}
-					}
-
-					&.disabled {
-						background: $text_grey_dark;
-						color: $disabled-text;
-
-						.active-icon {
-							display: none;
-						}
-
-						.disabled-icon {
-							display: block;
-						}
-
-						.default-icon {
-							display: none;
-						}
-					}
-
-					@media(max-width: 767px) {
-						padding: 20px;
-					}
-
-					@media(max-width: 480px) {
-						img {
-							margin-right: 0;
-						}
-
-						span {
-							display: none;
-						}
-					}
-				}
-			}
-
+			
 			.tab-content {
-				width: 100%;
-				padding: 20px 30px 55px;
-				background: $background-white;
-				border-radius: 0 20px 20px 20px;
-				box-shadow: 0px 50px 50px $shadow-black;
-
-				@media(max-width: 480px) {
-					padding: 20px 5px 40px;
-				}
-
 				.flight_tab {
 					width: 100%;
 
@@ -524,6 +415,242 @@ select {
 
 									span {
 										display: inline-block;
+									}
+								}
+							}
+
+							.travellers {
+								width: 100%;
+
+								label {
+									width: 100%;
+									margin-bottom: 0px;
+									font-size: 10px;
+									color: $text-grey;
+									font-weight: 400;
+									padding: 0 15px;
+									text-transform: uppercase;
+								}
+
+								.search_area {
+									padding: 15px 0;
+									border: 1px solid $box-border-color;
+									border-radius: 8px;
+									background: $background-white;
+									position: relative;
+
+									.travel_info {
+										width: 100%;
+										height: 30px;
+										display: flex;
+										line-height: 30px;
+										font-size: 10px;
+										color: $text-black;
+										position: relative;
+										padding: 0 20px;
+										cursor: pointer;
+
+										&:before {
+											width: 24px;
+											height: 24px;
+											content: '';
+											position: absolute;
+											right: 20px;
+											top: 50%;
+											transform: translateY(-50%);
+											background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+										}
+
+										span {
+											font-size: 20px;
+											font-weight: 600;
+											padding: 0 10px 0 0;
+											color: $text-black;
+										}
+
+										.drop_aerrow {
+											width: auto;
+											position: relative;
+											margin-left: 20px;
+
+											&:before {
+												content: '';
+												position: absolute;
+												left: 110%;
+												top: 50%;
+												width: 0;
+												height: 0;
+												border-left: 3px solid transparent;
+												border-right: 3px solid transparent;
+												border-top: 3px solid $text-grey;
+												transform: translate(-50%, -50%);
+											}
+										}
+									}
+
+									span {
+										font-size: 10px;
+										font-weight: 400;
+										color: $text-grey;
+										padding: 0 20px;
+									}
+
+									.traveller_add_block {
+										width: 260px;
+										position: absolute;
+										top: 108%;
+										right: 0;
+										background: $background-white;
+										box-shadow: 0px 3px 15px $shadow-black;
+										padding: 15px;
+										border: 1px solid $text-light-grey;
+										border-radius: 5px;
+										z-index: 99;
+
+										&:before {
+											width: 0;
+											height: 0;
+											border-left: 9px solid transparent;
+											border-right: 9px solid transparent;
+											border-bottom: 9px solid $background-white;
+											position: absolute;
+											top: -9px;
+											right: 21px;
+											content: '';
+											z-index: 2;
+										}
+
+										&:after {
+											width: 0;
+											height: 0;
+											border-left: 10px solid transparent;
+											border-right: 10px solid transparent;
+											border-bottom: 10px solid $text-light-grey;
+											position: absolute;
+											top: -10px;
+											right: 20px;
+											content: '';
+										}
+
+										ul {
+											margin: 0;
+											padding: 0;
+											list-style: none;
+
+											li {
+												width: 100%;
+												display: flex;
+												justify-content: space-between;
+												align-items: center;
+												padding: 0 0 20px;
+
+												.left {
+													font-size: 10px;
+													font-weight: 400;
+													color: $text-grey;
+
+													span {
+														font-size: 14px;
+														color: $text-darkblue;
+														display: block;
+														padding: 0;
+													}
+												}
+
+												.right {
+													width: 100px;
+													display: flex;
+													align-items: center;
+
+													.qtyminus {
+														width: 30px;
+														height: 30px;
+														background: $background-white;
+														border: 1px solid $text-light-grey;
+														border-radius: 5px;
+														color: $text-light-grey;
+														padding: 0;
+														font-size: 18px;
+
+														&:hover {
+															border: 1px solid $secondary-color;
+															color: $secondary-color;
+														}
+													}
+
+													.qty {
+														width: 30px;
+														height: 30px;
+														font-size: 20px;
+														font-weight: 400;
+														color: $text-darkblue;
+														border: none;
+														text-align: center;
+													}
+
+													.qtyplus {
+														width: 30px;
+														height: 30px;
+														background: $background-white;
+														border: 1px solid $text-light-grey;
+														border-radius: 5px;
+														color: $text-light-grey;
+														padding: 0;
+														font-size: 18px;
+
+														&:hover {
+															border: 1px solid $pink_clr;
+															color: $pink_clr;
+														}
+													}
+												}
+											}
+										}
+
+										.flight_cat {
+											width: 100%;
+
+											ul {
+												display: flex;
+												flex-wrap: wrap;
+												align-content: center;
+												justify-content: space-between;
+
+												li {
+													width: 48%;
+													margin: 0 0 10px;
+													padding: 0;
+
+													&:last-child {
+														width: 100%;
+														margin: 0;
+													}
+
+													a {
+														line-height: 32px;
+														width: 100%;
+														text-align: center;
+														background: $background-white;
+														border: 1px solid $text-light-grey;
+														border-radius: 5px;
+														font-size: 14px;
+														color: $text-light-grey;
+
+														&:hover {
+															background: $pink_clr;
+															border: 1px solid $pink_clr;
+															color: $text-white;
+														}
+
+														&.active_cat {
+															background: $pink_clr;
+															border: 1px solid $pink_clr;
+															color: $text-white;
+														}
+													}
+												}
+											}
+										}
 									}
 								}
 							}
@@ -698,7 +825,6 @@ select {
 													color: $text-black;
 													font-weight: 600;
 													padding: 0 15px;
-
 													@media(max-width: 1199px) {
 														font-size: 16px;
 													}
@@ -755,237 +881,59 @@ select {
 												width: 100%;
 											}
 
-											.travellers {
+											.serch_btn {
 												width: 100%;
-
-												label {
-													width: 100%;
-													margin-bottom: 0px;
-													font-size: 10px;
-													color: $text-grey;
-													font-weight: 400;
-													padding: 0 15px;
-													text-transform: uppercase;
-												}
-
-												.search_area {
-													padding: 15px 0;
-													border: 1px solid $box-border-color;
+												height: 100%;
+			
+												button {
+													width: auto;
+													height: 100%;
+													padding: 10px 25px;
+													background: $hotel-secondary-color;
 													border-radius: 8px;
-													background: $background-white;
+													border: none;
+													font-size: 20px;
+													color: $text-white;
+													transition: 0.3s;
 													position: relative;
-
-													.travel_info {
-														width: 100%;
-														height: 30px;
-														display: flex;
-														line-height: 30px;
-														font-size: 10px;
-														color: $text-black;
-														position: relative;
-														padding: 0 20px;
-														cursor: pointer;
-
-														&:before {
-															width: 24px;
-															height: 24px;
-															content: '';
-															position: absolute;
-															right: 20px;
-															top: 50%;
-															transform: translateY(-50%);
-															background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
-														}
-
-														span {
-															font-size: 20px;
-															font-weight: 600;
-															padding: 0 10px 0 0;
-															color: $text-black;
-														}
-
-														.drop_aerrow {
-															width: auto;
-															position: relative;
-															margin-left: 20px;
-
-															&:before {
-																content: '';
-																position: absolute;
-																left: 110%;
-																top: 50%;
-																width: 0;
-																height: 0;
-																border-left: 3px solid transparent;
-																border-right: 3px solid transparent;
-																border-top: 3px solid $text-grey;
-																transform: translate(-50%, -50%);
-															}
-														}
+													z-index: 9;
+													overflow: hidden;
+													white-space: normal;
+			
+													img {
+														margin-left: 40px;
+														height: 20px;
 													}
-
-													span {
-														font-size: 10px;
-														font-weight: 400;
-														color: $text-grey;
-														padding: 0 20px;
-													}
-
-													.traveller_add_block {
-														width: 260px;
+			
+													&::before {
+														content: "";
 														position: absolute;
-														top: 108%;
-														right: 0;
-														background: $background-white;
-														box-shadow: 0px 3px 15px $shadow-black;
-														padding: 15px;
-														border: 1px solid $text-light-grey;
-														border-radius: 5px;
-														z-index: 99;
-
+														top: 0;
+														left: 0;
+														width: 100%;
+														height: 0%;
+														background: $secondary-color;
+														z-index: -1;
+														transition: 0.8s;
+														border-radius: 0 0 50% 50%;
+													}
+			
+													&:hover {
 														&:before {
-															width: 0;
-															height: 0;
-															border-left: 9px solid transparent;
-															border-right: 9px solid transparent;
-															border-bottom: 9px solid $background-white;
-															position: absolute;
-															top: -9px;
-															right: 21px;
-															content: '';
-															z-index: 2;
+															height: 190%;
 														}
-
-														&:after {
-															width: 0;
-															height: 0;
-															border-left: 10px solid transparent;
-															border-right: 10px solid transparent;
-															border-bottom: 10px solid $text-light-grey;
-															position: absolute;
-															top: -10px;
-															right: 20px;
-															content: '';
-														}
-
-														ul {
-															margin: 0;
-															padding: 0;
-															list-style: none;
-
-															li {
-																width: 100%;
-																display: flex;
-																justify-content: space-between;
-																align-items: center;
-																padding: 0 0 20px;
-
-																.left {
-																	font-size: 10px;
-																	font-weight: 400;
-																	color: $text-grey;
-
-																	span {
-																		font-size: 14px;
-																		color: $text-darkblue;
-																		display: block;
-																		padding: 0;
-																	}
-																}
-
-																.right {
-																	width: 100px;
-																	display: flex;
-																	align-items: center;
-
-																	.qtyminus {
-																		width: 30px;
-																		height: 30px;
-																		background: $background-white;
-																		border: 1px solid $text-light-grey;
-																		border-radius: 5px;
-																		color: $text-light-grey;
-																		padding: 0;
-																		font-size: 18px;
-
-																		&:hover {
-																			border: 1px solid $secondary-color;
-																			color: $secondary-color;
-																		}
-																	}
-
-																	.qty {
-																		width: 30px;
-																		height: 30px;
-																		font-size: 20px;
-																		font-weight: 400;
-																		color: $text-darkblue;
-																		border: none;
-																		text-align: center;
-																	}
-
-																	.qtyplus {
-																		width: 30px;
-																		height: 30px;
-																		background: $background-white;
-																		border: 1px solid $text-light-grey;
-																		border-radius: 5px;
-																		color: $text-light-grey;
-																		padding: 0;
-																		font-size: 18px;
-
-																		&:hover {
-																			border: 1px solid $pink_clr;
-																			color: $pink_clr;
-																		}
-																	}
-																}
-															}
-														}
-
-														.flight_cat {
-															width: 100%;
-
-															ul {
-																display: flex;
-																flex-wrap: wrap;
-																align-content: center;
-																justify-content: space-between;
-
-																li {
-																	width: 48%;
-																	margin: 0 0 10px;
-																	padding: 0;
-
-																	&:last-child {
-																		width: 100%;
-																		margin: 0;
-																	}
-
-																	a {
-																		line-height: 32px;
-																		width: 100%;
-																		text-align: center;
-																		background: $background-white;
-																		border: 1px solid $text-light-grey;
-																		border-radius: 5px;
-																		font-size: 14px;
-																		color: $text-light-grey;
-
-																		&:hover {
-																			background: $pink_clr;
-																			border: 1px solid $pink_clr;
-																			color: $text-white;
-																		}
-
-																		&.active_cat {
-																			background: $pink_clr;
-																			border: 1px solid $pink_clr;
-																			color: $text-white;
-																		}
-																	}
-																}
-															}
+													}
+												}
+			
+												@media(max-width: 480px) {
+													bottom: -60px;
+			
+													button {
+														padding: 10px 20px;
+														font-size: 16px;
+			
+														img {
+															margin-left: 30px;
 														}
 													}
 												}
@@ -994,65 +942,7 @@ select {
 									}
 								}
 
-								.serch_btn {
-									width: 100%;
-									text-align: right;
-									position: absolute;
-									bottom: -75px;
-									right: 0;
-
-									button {
-										width: auto;
-										padding: 10px 25px;
-										background: $primary-color;
-										border-radius: 8px;
-										border: none;
-										font-size: 20px;
-										color: $text-white;
-										transition: 0.3s;
-										position: relative;
-										z-index: 9;
-										overflow: hidden;
-										white-space: normal;
-
-										img {
-											margin-left: 40px;
-											height: 20px;
-										}
-
-										&::before {
-											content: "";
-											position: absolute;
-											top: 0;
-											left: 0;
-											width: 100%;
-											height: 0%;
-											background: $secondary-color;
-											z-index: -1;
-											transition: 0.8s;
-											border-radius: 0 0 50% 50%;
-										}
-
-										&:hover {
-											&:before {
-												height: 190%;
-											}
-										}
-									}
-
-									@media(max-width: 480px) {
-										bottom: -60px;
-
-										button {
-											padding: 10px 20px;
-											font-size: 16px;
-
-											img {
-												margin-left: 30px;
-											}
-										}
-									}
-								}
+								
 							}
 						}
 					}

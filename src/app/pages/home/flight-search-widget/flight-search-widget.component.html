@@ -14,6 +14,12 @@
                 <span>{{'round_trip' | translate}}</span>
             </a>
         </li>
+        <li class="nav-item">
+            <div class="travellers">
+                <app-traveller-info label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)">
+                </app-traveller-info>
+            </div>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#Multi-city">
               <img class="default-icon"
@@ -84,17 +90,15 @@
                             </div>
                         </li>
                         <li class="grid_box third">
-                            <div class="travellers">
-                                <app-traveller-info label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)">
-                                </app-traveller-info>
+                            
+                            <div class="serch_btn">
+                                <button>{{'search_flight' | translate}} <img
+                                      src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                                      alt="Right Arrow" /></button>
                             </div>
                         </li>
                     </ul>
-                    <div class="serch_btn">
-                        <button>{{'search_flight' | translate}} <img
-                              src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
-                              alt="Right Arrow" /></button>
-                    </div>
+                   
                 </div>
             </form>
         </div>
