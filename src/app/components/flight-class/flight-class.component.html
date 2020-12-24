@@ -1,1 +1,17 @@
-<p>flight-class works!</p>
+<div class="search_area">
+    <!-- <label>{{ label }}</label> -->
+    <div class="class_sec_info" id="add_class_sec">
+         Economy
+        <div class="drop_aerrow">
+        </div>
+    </div>
+    <div class="class_sec_wrapper" id="add_class_sec_open" style="display: none;">
+        <div class="flight_cat">
+            <ul>
+                <li><a class="active_cat hover-link" [ngClass]="{ 'active_cat' : class === 'Economy' }" (click)="btnClickForChange({type: 'class', value: 'Economy'})">{{'economy_class' | translate}}</a></li>
+                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'Business' }" (click)="btnClickForChange({type: 'class', value: 'Business'})">{{'business_class' | translate}}</a></li>
+                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'First' }" (click)="btnClickForChange({type: 'class', value: 'First'})">{{'first_class' | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
