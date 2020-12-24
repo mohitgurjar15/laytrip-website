@@ -18,7 +18,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   rangeDates: Date[];
-  checkInMinDate;
   modules: Module[];
   moduleList: any = {};
   switchBtnValue = false;
@@ -45,7 +44,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightDepartureMinDate;
   flightReturnMinDate;
 
-  departureDate = new Date(moment().add(31, 'days').format("DD MMM YYYY"));
+  departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
   returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
@@ -85,7 +84,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightDepartureMinDate = new Date();
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
-    console.log(this.departureDate)
+    this.rangeDates = [this.departureDate, this.returnDate];
+
   }
 
   ngOnInit(): void {
@@ -216,7 +216,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   checkInDateUpdate(date) {
-    console.log(date);
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();

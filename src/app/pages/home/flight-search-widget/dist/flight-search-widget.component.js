@@ -37,7 +37,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             format: 'MM/DD/YYYY',
             displayFormat: 'MM/DD/YYYY'
         };
-        this.departureDate = new Date(moment().add(31, 'days').format("DD MMM YYYY"));
+        this.departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
         this.returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.searchFlightInfo = {
@@ -63,7 +63,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.flightDepartureMinDate = new Date();
         this.flightReturnMinDate = this.departureDate;
         this.countryCode = this.commonFunction.getUserCountry();
-        console.log(this.departureDate);
+        this.rangeDates = [this.departureDate, this.returnDate];
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         window.scrollTo(0, 0);
@@ -172,7 +172,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.arrivalAirportCountry = tempAirportCountry;
     };
     FlightSearchWidgetComponent.prototype.checkInDateUpdate = function (date) {
-        console.log(date);
         // this is only for closing date range picker, after selecting both dates
         if (this.rangeDates[1]) { // If second date is selected
             this.dateFilter.hideOverlay();
