@@ -10405,7 +10405,7 @@ h3 {
 }
 
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center left 15px no-repeat !important;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area.dr_search_area input {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px no-repeat !important;
@@ -11745,14 +11745,14 @@ select:focus {
 }
 @media (max-width: 1199px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input {
-    font-size: 16px;
+    font-size: 16px; 
   }
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area .prev-next {
   width: 60%;
   display: flex;
   padding: 0 0 0 15px;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area .prev-next a {
   font-size: 10px;

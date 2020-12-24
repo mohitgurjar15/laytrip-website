@@ -1,24 +1,15 @@
 <div class="view_btn_wrapper">
-    <div>
-        <div class="block_result_found">
-            <p>{{rentalDetails.length}} Home Rentals found from</p>
-            <!-- <span>{{rentalDetails[0].city}}</span>  -->
-            <span></span>
-        </div>
-    </div>
-    <div>
-        <button class="list_v_btn" (click)="changeView('listView')" [hidden]="!isMapView">
-            <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
-            List view
-        </button>
-        <button class="map_v_btn" (click)="changeView('mapView')" [hidden]="isMapView">
-            <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view">
-            Map view
-        </button>
-    </div>
+    <button class="list_v_btn" (click)="changeView('listView')" [hidden]="!isMapView">
+    <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view"> 
+    List view
+    </button>
+    <button class="map_v_btn" (click)="changeView('mapView')" [hidden]="isMapView">
+    <img src="{{s3BucketUrl}}assets/images/hotels/map_btn.svg" alt="List view"> 
+    Map view
+    </button>
 </div>
-<div class="result_listing home_listings" [hidden]="isMapView">
-    <div class="search_block" *ngFor="let item of rentalListArray; let blockIndex = index;">
+<div class="result_listing home_listings" [hidden]="isMapView" *ngIf="rentalListArray.length" (clickOutside)="closeHomeDetail()">
+<div class="search_block" *ngFor="let item of rentalListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
                 <div class="col-md-9">
@@ -73,8 +64,9 @@
                                         </div>
                                     </div>
                                     <div class="block_detail_btm">
-                                        <div class="show_detail">
-                                            <a href="javascript:void(0);" class="show_more_detail"> <img
+                                        <div class="show_detail" [ngClass]="{'open_detail':showHomeDetails[blockIndex]}">
+                                            <a href="javascript:void(0);" class="show_more_detail"
+                                                (click)="showDetails(blockIndex)"> <img
                                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
                                                     alt="Information Icon"> Fare Details </a>
                                         </div>
@@ -104,12 +96,12 @@
                         <div class="block_inn_pr">
                             <div class="block">
                                 <p>Room Starts from</p>
-                                <p><span>{{currency?.symbol}}{{item?.selling_price}}</span> /week</p>
+                                <p><span>{{currency?.symbol}}{{item?.selling_price}}</span></p>
                             </div>
                         </div>
-                        <a class="book_btn" href="flight-add-passenger.html">Select</a>
+                        <a class="book_btn" (click)="redirectToDetail(item.property_id,item.latitude,item.longintude)">Select</a>
                         <div class="show_detail">
-                            <a href="javascript:void(0);" class="show_more_detail"> <img
+                            <a (click)="showDetails(blockIndex,'true')"  class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
                                     alt="Information Icon">{{'payment_plan_detail' | translate}}</a>
                         </div>
@@ -117,7 +109,41 @@
                 </div>
             </div>
         </div>
-        <div class="detail_info_show" style="display: none;">
+         <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showHomeDetails[blockIndex] === true">
+            <div class="card-body">
+                <div class="block_flight_info">
+                    <div class="tab_detail fare_detail_cnt">
+                        <div class="triangle_right"></div>
+                        <ul>
+                            <li>Base Fare <span>{{ currency?.symbol
+                                    }}{{item?.selling_price}}</span></li>
+                            <li>Total Fare <span>{{ currency?.symbol
+                                    }}{{item?.selling_price}}</span></li>
+                        </ul>
+                        <div class="triangle_left"></div>
+                        <ul *ngIf="item.instalment_details.instalment_available">
+                            <li class="down_payment">
+                                {{'down_payment' | translate}}
+                                <span class="down_value">{{ currency?.symbol }}{{ item?.start_price | number :
+                                    '1.2-2'}}</span>
+                            </li>
+                            <ng-container
+                                *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
+                                <li *ngIf="i>0">
+                                    <div class="detail"> {{i}} {{'installment' | translate}}
+                                        <p>{{
+                                            commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}
+                                        </p>
+                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="detail_info_show" style="display: none;">
             <div class="card-body">
                 <div class="block_flight_info">
                     <div class="tab_detail fare_detail_cnt">
@@ -136,22 +162,22 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
-<div class="result_listing home_map_listings" [hidden]="!isMapView">
+<div class="result_listing home_map_listings" [hidden]="!isMapView" *ngIf="rentalListArray.length">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-8" style="height: 200px; width: 200px;">
-                <agm-map [latitude]='lat' [longitude]='long' [zoom]='zoom' [usePanning]='true'>
-                    <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng"
+                <agm-map [latitude]='rentalListArray[0]?.latitude' [longitude]='rentalListArray[0]?.longintude' [zoom]='zoom' [usePanning]='true'>
+                    <agm-marker *ngFor="let marker of rentalListArray" [latitude]="marker?.latitude" [longitude]="marker.longintude"
                         (mouseOver)="onMouseOver(infoWindow, $event)" (mouseOut)="onMouseOut(infoWindow, $event)">
                         <agm-info-window [disableAutoPan]="false" #infoWindow>
                             <!-- <div>
                                 <img src="{{marker?.dis_image || defaultImage }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                 </div> -->
                             <div>
-                                {{marker.label}}
+                                {{marker?.property_name}}
                             </div>
                         </agm-info-window>
                     </agm-marker>
@@ -168,7 +194,7 @@
                                     <div class="">
                                         <div class="block_im">
                                             <div class="home_list_img_wrp"
-                                                style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
+                                                >
                                                 <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo"
                                                     onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                             </div>
@@ -217,7 +243,7 @@
                             <div class="block_inn_pr">
                                 <div class="block">
                                     <p>Room Starts from</p>
-                                    <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span> /week</p>
+                                    <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span></p>
                                 </div>
                             </div>
                         </div>

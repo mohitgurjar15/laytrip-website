@@ -21,7 +21,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   switchBtnValue = false;
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
-  flightSearchFormSubmitted: boolean = false;
+  flightSearchFormSubmitted = false;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromDestinationCode = 'JFK';
   departureCity = 'New York';

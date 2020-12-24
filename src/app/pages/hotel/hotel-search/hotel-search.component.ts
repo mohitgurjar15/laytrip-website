@@ -153,7 +153,7 @@ export class HotelSearchComponent implements OnInit {
   }
 
   resetFilter() {
-    this.isResetFilter = (new Date()).toString();
+    this.isResetFilter = '';
   }
 
   getHotelSearchDataByModify(event) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class FilterVacationRentalComponent implements OnInit,OnDestroy {
 
+  compact = false;
+  invertX = false;
+  invertY = false;
+  shown = 'native';
+
+  @ViewChild("scrollable", { static: true, read: ElementRef } as any)
+  scrollbar: ElementRef;
+  contentWrapper: HTMLElement;
+  
   @Input() rentalFilterDetails: any;
   @Input() isResetFilter: string;
   @Output() filterRental = new EventEmitter();
@@ -113,6 +122,8 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
   }
 
    filterByAmenities(event, value) {
+     console.log(event);
+     console.log(value);
     if (event.target.checked === true) {
       this.amenities.push(value);
     }
@@ -137,7 +148,7 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredRentals = filteredRentals.filter(item => {
-        //return this.amenitiesArray.includes(item.inbound_stop_count);
+        return this.amenitiesArray.includes(item);
       })
     }
 
@@ -176,11 +187,11 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
       this.sortType = 'filter_total_price';
 
       // Reset amenities
-      if (typeof this.amenities != 'undefined' && this.amenities.length) {
-        this.amenities.forEach(element => {
-          return element.isChecked = false;
-        });
-      }
+      // if (typeof this.amenities != 'undefined' && this.amenities.length) {
+      //   this.amenities.forEach(element => {
+      //     return element.isChecked = false;
+      //   });
+      // }
 
       // Reset hotel name search
       this.rentalname = 'Search Home';
