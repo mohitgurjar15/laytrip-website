@@ -78,7 +78,7 @@ export class PaymentModeComponent implements OnInit {
     }
   }
   
-  calculateInstalment(type1=null,type2=null){
+  calculateInstalment(type1=null,type2=null,type3=null){
     
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
@@ -89,6 +89,10 @@ export class PaymentModeComponent implements OnInit {
           if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
             this.redeemableLayCredit.emit(this.sellingPrice-this.instalments.instalment_date[0].instalment_amount);
           }
+          console.log("this.sellingPrice-this.laycreditpoints",this.sellingPrice-this.laycreditpoints)
+          if(type3!=null && type3!='down-payment-with-laytrip'){
+            this.calculateDownPayment(this.sellingPrice-this.laycreditpoints)
+          }
         }
       },(err)=>{
 
@@ -97,7 +101,9 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['laycreditpoints']) {
-      
+      this.laycreditpoints =Number(changes['laycreditpoints'].currentValue);
+      this.instalmentRequest.additional_amount = this.laycreditpoints;
+      this.calculateInstalment('down-payment',null,'down-payment-with-laytrip');
     }
 
     if(changes['priceData']){
