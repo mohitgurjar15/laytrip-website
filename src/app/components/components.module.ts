@@ -39,6 +39,7 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
 import { TranslateModule } from '@ngx-translate/core';
 import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -86,7 +87,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     LottieAnimationViewModule.forRoot(),
     TextMaskModule,
     TranslateModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    InfiniteScrollModule
   ],
   exports: [
     SearchAirportComponent,
@@ -115,7 +117,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     RentalInfoComponent,
     TranslateModule,
     VacationSearchComponent,
-    NgScrollbarModule
+    NgScrollbarModule,
+    InfiniteScrollModule
   ],
   providers: [DatePipe],
 

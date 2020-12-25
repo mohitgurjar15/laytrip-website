@@ -27,3 +27,17 @@ agm-map {
 .selected-hotel {
     border: 3px solid #000 !important;
 }
+
+.infinite-search-results {
+    height: 100rem;
+    overflow-y: auto;
+}
+
+.scrollLoading_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 25px;
+}

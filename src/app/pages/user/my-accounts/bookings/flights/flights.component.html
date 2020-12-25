@@ -149,7 +149,7 @@
                         <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
                         <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                         </h6>
-                        <a class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info"
+                        <a class="anchor-tag" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info"
                                 *ngIf="item.bookingType ==1">{{'payment_plan_detail' | translate}}</span></a>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                             <p>{{item.bookingType==1 ? 'Start from' : 'Total Price' }}</p>
                             <h6>${{ item.bookingType == 2 ? item.selling_price : item.instalment_amount | number : '1.2-2'}}
                             </h6>
-                            <a *ngIf="item.bookingType ==1" class="anchor-text" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info">{{'payment_plan_detail' | translate}}</span></a>
+                            <a *ngIf="item.bookingType ==1" class="anchor-tag" (click)="showDetails(blockIndex,'true')"><span class="partial_payment_info">{{'payment_plan_detail' | translate}}</span></a>
                         </div>
                     </div>
                 </div>

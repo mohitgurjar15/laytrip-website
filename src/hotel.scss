@@ -29,6 +29,11 @@
         }
 
         .ng-select-container {
+            .ng-spinner-loader {
+                position: absolute;
+                right: 0;
+                top: 5px;
+            }
             .ng-value-container {
                 .ng-placeholder {
                     padding: 0 15px;
@@ -108,6 +113,14 @@
             .ng-dropdown-panel-items {
                 max-height: 255px;
                 //border: 1px solid #808080;
+                .ng-option-disabled {
+                    border-bottom: 1px solid #e0e2e5 !important;
+                    .ng-option-label {
+                        font-size: 15px !important;
+                        font-weight: 500 !important;
+                        color: #012178 !important;
+                    }
+                }
                 .ng-option {
                     padding: 3px 3px 3px 10px !important;
                     font-size: 14px;
@@ -356,7 +369,8 @@ ngb-datepicker {
                             font-size: 20px;
                             color: $text-black;
                             font-weight: 600;
-                            padding: 0 15px;
+                            // padding: 0 15px;
+                            padding: 0 32px 0 15px;
                             background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
                                 center right 15px no-repeat !important;
                             @media (max-width: 1199px) {
@@ -1491,6 +1505,14 @@ ngb-datepicker {
                     border-radius: 8px;
                     margin: 0;
 
+                    .date_form {
+                        .search_area {
+                            input {
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                                    center right 15px no-repeat !important;
+                            }
+                        }
+                    }
                     .search_area {
                         padding: 10px 0;
 
@@ -1513,7 +1535,9 @@ ngb-datepicker {
                             font-size: 20px;
                             color: $text-black;
                             font-weight: 600;
-                            padding: 0 15px;
+                            padding: 0 32px 0 15px;
+                            // background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                            //     center right 15px no-repeat !important;
                             &[readonly] {
                                 background-color: transparent;
                             }
@@ -2867,6 +2891,11 @@ ngb-datepicker {
                             &:hover {
                                 box-shadow: none;
                             }
+                            .ng-spinner-loader {
+                                position: absolute;
+                                right: 0;
+                                top: 5px;
+                            }
                         }
                         .ng-input {
                             padding: 0;
@@ -2948,66 +2977,73 @@ ngb-datepicker {
         display: flex;
         justify-content: space-between;
         margin-bottom: 18px;
-        .block_result_found {
-            padding: 20px;
-            background: $background-white;
-            border: 1px solid $box-border-color;
-            border-radius: 8px;
-            margin: 0;
-            text-align: center;
-            position: relative;
-            display: flex;
-            justify-content: space-around;
+        .hotel-counter-wrapper {
+            flex: 2;
+            .block_result_found {
+                padding: 10px 20px;
+                background: $background-white;
+                border: 1px solid $box-border-color;
+                border-radius: 8px;
+                margin: 0;
+                text-align: center;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
 
-            // &:after {
-            //     width: 0;
-            //     height: 0;
-            //     border-left: 10px solid transparent;
-            //     border-right: 10px solid transparent;
-            //     border-top: 10px solid $box-border-color;
-            //     position: absolute;
-            //     bottom: -15px;
-            //     left: 50%;
-            //     transform: translate(-50%, -50%);
-            //     content: "";
-            // }
+                // &:after {
+                //     width: 0;
+                //     height: 0;
+                //     border-left: 10px solid transparent;
+                //     border-right: 10px solid transparent;
+                //     border-top: 10px solid $box-border-color;
+                //     position: absolute;
+                //     bottom: -15px;
+                //     left: 50%;
+                //     transform: translate(-50%, -50%);
+                //     content: "";
+                // }
 
-            // &:before {
-            //     width: 0;
-            //     height: 0;
-            //     border-left: 9px solid transparent;
-            //     border-right: 9px solid transparent;
-            //     border-top: 9px solid $background-white;
-            //     position: absolute;
-            //     bottom: -12px;
-            //     left: 50%;
-            //     transform: translate(-50%, -50%);
-            //     content: "";
-            //     z-index: 2;
-            // }
+                // &:before {
+                //     width: 0;
+                //     height: 0;
+                //     border-left: 9px solid transparent;
+                //     border-right: 9px solid transparent;
+                //     border-top: 9px solid $background-white;
+                //     position: absolute;
+                //     bottom: -12px;
+                //     left: 50%;
+                //     transform: translate(-50%, -50%);
+                //     content: "";
+                //     z-index: 2;
+                // }
 
-            p {
-                font-size: 16px;
-                font-weight: 500;
-                color: $text-grey;
-                margin: 0 0 2px;
-            }
+                p {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $text-grey;
+                    margin: 0 0 2px;
+                }
 
-            span {
-                font-size: 20px;
-                font-weight: 600;
-                color: $text-black;
+                span {
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: $text-black;
+                    margin-left: 10px;
+                    margin-bottom: 3px;
+                }
             }
         }
 
         button {
             background-color: $background-white;
-            padding: 0 25px;
+            padding: 10px 20px;
             border: 1px solid $box-border-color;
             border-radius: 8px;
             color: $text-grey;
             font-size: 14px;
-            height: 68px;
+            height: 55px;
+            margin-left: 10px;
             img {
                 margin-right: 5px;
             }

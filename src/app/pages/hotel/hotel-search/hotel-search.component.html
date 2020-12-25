@@ -1,4 +1,5 @@
-<app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getHotelSearchDataByModify($event)"></app-hotel-search-bar>
+<app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getHotelSearchDataByModify($event)">
+</app-hotel-search-bar>
 
 <app-hotel-loader *ngIf="loading"></app-hotel-loader>
 <app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
@@ -17,9 +18,9 @@
               <div class="block_inn">
                 <h4>Filter By</h4>
                 <a class="anchor_link" (click)="resetFilter()">Reset</a>
-              </div> 
-              <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain" (filterHotel)="filterHotel($event)"
-                isResetFilter={{isResetFilter}}></app-filter-hotel>
+              </div>
+              <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
+                (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
             </div>
           </div>
         </div>
@@ -35,7 +36,8 @@
             Map view
           </button>
         </div> -->
-        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelToken]="hotelToken" [hotelDetails]="hotelDetails"></app-hotel-item-wrapper>
+        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelToken]="hotelToken" [hotelDetails]="hotelDetails">
+        </app-hotel-item-wrapper>
       </div>
     </div>
   </div>

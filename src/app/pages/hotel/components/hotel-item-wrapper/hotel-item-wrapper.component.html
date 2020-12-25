@@ -1,7 +1,7 @@
 <div class="view_btn_wrapper">
-    <div>
+    <div class="hotel-counter-wrapper">
         <div class="block_result_found">
-            <p>{{hotelListArray.length}} Hotels found from</p>
+            <p>{{hotelDetails.length}} Hotels found from</p>
             <span>{{hotelName}}</span>
         </div>
     </div>
@@ -18,8 +18,11 @@
 </div>
 
 <div [hidden]="isMapView" [@listAnimation]="hotelListArray.length" (@listAnimation.start)="logAnimation($event)"
-    (@listAnimation.done)="logAnimation($event)" class="result_listing hotel_listings"
-    (clickOutside)="closeHotelDetail()">
+    (@listAnimation.done)="logAnimation($event)" class="result_listing hotel_listings infinite-search-results"
+    (clickOutside)="closeHotelDetail()" infiniteScroll [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollDisabled]="isFullListDisplayed" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
+    (scrolled)="onScrollDown()">
+
     <div class="search_block" *ngFor="let item of hotelListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
@@ -105,8 +108,8 @@
                             <div class="block" *ngIf="item.secondary_start_price === 0">
                                 <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
                             </div>
-                        </div> <a class="book_btn" (click)="redirectToDetail(item.id)">Select</a>
-                        <div class="show_detail">
+                        </div> <a class="book_btn anchor-tag" (click)="redirectToDetail(item.id)">Select</a>
+                        <div class="show_detail anchor-tag">
                             <a (click)="showDetails(blockIndex,'true')" class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment
                                 plan details</a>
@@ -154,6 +157,8 @@
         </div>
     </div>
 
+
+
     <!-- <div class="pagination_main">
         <div class="pagination_result">
             <p>Showing 1 to 10 of 60 Results</p>
@@ -182,6 +187,15 @@
         </div>
     </div> -->
 </div>
+
+<div *ngIf="scrollLoading" class="scrollLoading_wrapper">
+    <i class="fa fa-spinner fa-spin"></i>
+</div>
+
+<div *ngIf="isFullListDisplayed">
+    <p>No more hotel found!</p>
+</div>
+
 <div class="result_listing hotel_map_listings" [hidden]="!isMapView">
     <div class="col-lg-12">
         <div class="row">
@@ -269,7 +283,8 @@
                                 <div class="block_inn_pr">
                                     <div class="block" *ngIf="item.secondary_start_price > 0">
                                         <p>Room Starts from</p>
-                                        <p><span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> /week</p>
+                                        <p><span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> /week
+                                        </p>
                                     </div>
                                     <div class="block" *ngIf="item.secondary_start_price === 0">
                                         <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
@@ -310,4 +325,5 @@
         </div>
     </div> -->
 </div>
+
 <app-hotel-not-found *ngIf="!hotelListArray.length"></app-hotel-not-found>

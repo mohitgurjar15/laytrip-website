@@ -107,7 +107,6 @@ export class HotelDetailComponent implements OnInit {
       }
     });
     this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
-      console.log(res);
       if (res && res.data && res.data.hotel) {
         this.loading = false;
         this.hotelDetails = {
@@ -123,7 +122,6 @@ export class HotelDetailComponent implements OnInit {
           hotelReviews: res.data.hotel.reviews,
           thumbnail: res.data.hotel.thumbnail
         };
-        console.log(this.hotelDetails);
         if (res.data.hotel.images) {
           res.data.hotel.images.forEach(imageUrl => {
             this.imageTemp.push({
@@ -151,7 +149,6 @@ export class HotelDetailComponent implements OnInit {
     });
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       if (res) {
-        console.log(res);
         this.hotelRoomArray = res.data;
         this.roomSummary.hotelInfo = res.data[0];
       }
