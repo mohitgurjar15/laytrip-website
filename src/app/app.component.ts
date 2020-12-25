@@ -12,8 +12,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   title = 'laytrip-website';
-  readonly VAPID_PUBLIC_KEY = 'BKyEUms8UH61hh8r2wuoxwMo5gW_iaP1lvVqGRMRIk6iQLxXeq9mWsbnW-uy1vKkKCKovDjriNiZCCqRQ7hrlbo';// environment.VAPID_PUBLIC_KEY;
-
+  readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,

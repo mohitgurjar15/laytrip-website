@@ -9,13 +9,14 @@ exports.__esModule = true;
 exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
+var environment_1 = require("../environments/environment");
 var AppComponent = /** @class */ (function () {
     function AppComponent(cookieService, genericService, swPush) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.swPush = swPush;
         this.title = 'laytrip-website';
-        this.VAPID_PUBLIC_KEY = 'BKyEUms8UH61hh8r2wuoxwMo5gW_iaP1lvVqGRMRIk6iQLxXeq9mWsbnW-uy1vKkKCKovDjriNiZCCqRQ7hrlbo'; // environment.VAPID_PUBLIC_KEY;
+        this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
         this.setUserOrigin();
         this.getUserLocationInfo();
     }
