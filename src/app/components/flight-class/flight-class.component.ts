@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -7,7 +7,9 @@ declare var $: any;
   styleUrls: ['./flight-class.component.scss']
 })
 export class FlightClassComponent implements OnInit {
-
+  
+  @Output() changeValue = new EventEmitter<any>();
+  class = 'Economy';
   constructor() { }
 
   ngOnInit() {
@@ -30,6 +32,12 @@ export class FlightClassComponent implements OnInit {
       }
     );
 
+  }
+
+  btnClickForChange(item){
+    this.changeValue.emit(item.value);
+    this.class = item.value;
+    $("#add_class_sec_open").hide("slow");
   }
 }
 

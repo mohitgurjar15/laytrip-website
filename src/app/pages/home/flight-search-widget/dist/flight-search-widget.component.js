@@ -93,9 +93,13 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchFlightInfo.adult = event.adult;
         this.searchFlightInfo.child = event.child;
         this.searchFlightInfo.infant = event.infant;
-        this.searchFlightInfo["class"] = event["class"];
         this.totalPerson = event.totalPerson;
         this.searchedValue.push({ key: 'travellers', value: event });
+    };
+    FlightSearchWidgetComponent.prototype.changeEconomyInfo = function (event) {
+        console.log(event);
+        this.searchFlightInfo["class"] = event;
+        console.log(this.searchFlightInfo["class"]);
     };
     FlightSearchWidgetComponent.prototype.searchFlights = function () {
         this.flightSearchFormSubmitted = true;

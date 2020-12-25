@@ -119,9 +119,14 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.adult = event.adult;
     this.searchFlightInfo.child = event.child;
     this.searchFlightInfo.infant = event.infant;
-    this.searchFlightInfo.class = event.class;
     this.totalPerson = event.totalPerson;
     this.searchedValue.push({ key: 'travellers', value: event });
+  }
+
+  changeEconomyInfo(event){
+    console.log(event)
+    this.searchFlightInfo.class = event;
+    console.log( this.searchFlightInfo.class )
   }
 
   searchFlights() {

@@ -1,6 +1,6 @@
 <div [formGroup]="form">
     <label>{{label}}</label>
-    <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city" [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true" [(ngModel)]="defaultCity"
+    <ng-select [formControlName]="controlName" [loading]="false" id="{{id}}" [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city" [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true" [(ngModel)]="defaultCity"
         (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input" placeholder="{{ placeHolder }}" [tabIndex]="tabIndex">
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
             <div [ngClass]="(item.parentId==0)?'parent':'child'">
