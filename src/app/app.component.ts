@@ -12,8 +12,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   title = 'laytrip-website';
-  readonly VAPID_PUBLIC_KEY = 'BKyEUms8UH61hh8r2wuoxwMo5gW_iaP1lvVqGRMRIk6iQLxXeq9mWsbnW-uy1vKkKCKovDjriNiZCCqRQ7hrlbo';// environment.VAPID_PUBLIC_KEY;
-
+  readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
@@ -36,9 +35,7 @@ export class AppComponent {
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
   })
-  .then(sub =>
-    console.log("mohit",sub) 
-    // this.genericService.addPushSubscriber(sub).subscribe()
+  .then(sub =>   this.genericService.addPushSubscriber(sub).subscribe()
     )
   .catch(err => console.error("Could not subscribe to notifications", err));
     /* this.swPush.requestSubscription({
