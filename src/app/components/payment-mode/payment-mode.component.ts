@@ -54,7 +54,7 @@ export class PaymentModeComponent implements OnInit {
   remainingAmount:number;
   remainingInstalment:number;
   firstInstalment:number;
-  defaultInstalment:number;
+  defaultDownPayment:number;
   defaultInstalmentNo:number;
   totalLaycreditPoints=0;
   instalmentAvavible:boolean=false;
@@ -74,11 +74,19 @@ export class PaymentModeComponent implements OnInit {
 
       this.getTotalPrice();
       this.getAllInstalment();
-      this.calculateInstalment(null,'redeemable_point');
+      this.calculateInstalment(null,'redeemable_point',null,'set-default-downpayment');
     }
   }
+
   
-  calculateInstalment(type1=null,type2=null,type3=null){
+  /**
+   * 
+   * @param type1 => To calculate first, second & third down payment
+   * @param type2 => To calculate redeemable point
+   * @param type3 => To calculate first , second & third down payment with laytrip point redeem
+   * @param type4 => To Set default down payment
+   */
+  calculateInstalment(type1=null,type2=null,type3=null,type4=null){
     
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
@@ -89,9 +97,11 @@ export class PaymentModeComponent implements OnInit {
           if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
             this.redeemableLayCredit.emit(this.sellingPrice-this.instalments.instalment_date[0].instalment_amount);
           }
-          console.log("this.sellingPrice-this.laycreditpoints",this.sellingPrice-this.laycreditpoints)
           if(type3!=null && type3!='down-payment-with-laytrip'){
             this.calculateDownPayment(this.sellingPrice-this.laycreditpoints)
+          }
+          if(type4!=null && type4!='set-default-downpayment'){
+            this.defaultDownPayment = this.instalments.instalment_date[0].instalment_amount;
           }
         }
       },(err)=>{
