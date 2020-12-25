@@ -46,7 +46,7 @@ export class RedeemLaycreditComponent implements OnInit {
   } */
 
   ngOnChanges(changes: SimpleChanges) {
-    console.error("changes['redeemableLayPoints']",changes)
+    console.log("changes['redeemableLayPoints']",changes)
     if (typeof changes['redeemableLayPoints']!='undefined') {
 
       if(this.totalLaycreditPoints > Number(this.sellingPrice)){
