@@ -73,7 +73,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     if(host.includes("staging")){
       this.showCommingSoon=true;
     }
-
+     
      if (this.fromDestinationInfo) {
       this.rentalForm.city = this.fromDestinationInfo.city;
       this.rentalForm.country = this.fromDestinationInfo.country;
@@ -187,11 +187,11 @@ export class VacationSearchWidgetComponent implements OnInit {
     console.log(event);
     if (event && event.key && event.key === 'fromSearch1') {
       this.searchedValue[0]['value'] = event.value;
-      this.fromDestinationTitle = event.value.title;
+      this.fromDestinationTitle = event.value.display_name;
       this.rentalForm.city = event.value.city;
       this.rentalForm.country = event.value.country;
       this.rentalForm.id = event.value.id;
-      this.rentalForm.display_name = event.value.title;
+      this.rentalForm.display_name = event.value.display_name;
       this.rentalForm.type = event.value.type;
     }
   }

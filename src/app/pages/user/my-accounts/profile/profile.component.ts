@@ -231,7 +231,7 @@ export class ProfileComponent implements OnInit {
           gender  : res.gender ? res.gender : 'M',        
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
-          dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
+          dob  : res.dob ? moment(res.dob).format('d m yy'):'',        
           country_code : countryCode,        
           phone_no  : res.phoneNo,        
           country_id: res.country.name ? res.country.name :countryName,

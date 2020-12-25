@@ -10,17 +10,18 @@
                                     <div class="search_area">
                                         <label>Destination</label>
                                          <ng-select [loading]="loading" [selectOnTab]="true" [items]="data"
-                                         bindLabel="title" bindValue="title" [(ngModel)]="defaultCity" notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)"(clear)="onRemove($event)"
+                                         bindLabel="display_name" bindValue="city" [(ngModel)]="defaultCity" notFoundText="" [virtualScroll]="true" [ngModelOptions]="{standalone: true}" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)"(clear)="onRemove($event)"
                                           class="laytrip-input-new" placeholder="{{ placeHolder }}">
                                           <ng-template ng-label-tmp let-item="item">
                                         <div class="hotel-parent">
                                             <!-- <img height="15" width="15" [src]="item.thumbnail" /> -->
-                                            <div class="sub-parent">{{item.title}}</div>
+                                            <div class="sub-parent">{{item.city}}</div>
                                         </div>
                                         </ng-template>
                                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                                             <div class="hotel-parent">
-                                                <div class="sub-parent">{{item.city}},{{item.country}}-{{item.title}}</div>
+                                              <img height="15" width="15" [src]="itemIconArray[item.type]" />
+                                                <div class="sub-parent">{{item.city}}-{{item.display_name}}</div>
                                             </div>
                                         </ng-template>
                                     </ng-select>
@@ -32,7 +33,7 @@
                                 <div class="date_form">
                                     <div class="search_area"
                                         [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                                        <label>Check In</label>
+                                        <label>Check In-Check Out</label>
                                         <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" rentalCheckInMinDate [minDate]="rentalCheckInMinDate"
                                         panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=rentalDateUpdate($event)

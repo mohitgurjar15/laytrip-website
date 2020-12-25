@@ -55,8 +55,7 @@
               <ul>
                 <li *ngFor="let item of amenities">
                   <label class="custom_checkbox">
-                    <input type="checkbox" [checked]="item.isChecked==true" value="item"> <span class="checkmark"
-                      (click)="filterByAmenities($event,item)"></span>{{item}}</label>
+                    <input type="checkbox" value="{{item}}" (click)="filterByAmenities($event,item)"> <span class="checkmark"></span>{{item}}</label>
                 </li>
               </ul>
             </div>
