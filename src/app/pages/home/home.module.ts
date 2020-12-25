@@ -46,6 +46,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CalendarModule,
     NgxGalleryModule,
     NgSelectModule
+  ],
+  exports : [
+    FlightSearchWidgetComponent
   ]
 })
 export class HomeModule { }
