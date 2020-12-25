@@ -44,7 +44,7 @@ export class PaymentModeComponent implements OnInit {
     booking_date: moment().format("YYYY-MM-DD"),
     amount: 0,
     additional_amount: 0,
-    down_payment:0
+    selected_down_payment:0
   }
   instalments;
   allInstalments;
@@ -54,7 +54,6 @@ export class PaymentModeComponent implements OnInit {
   remainingAmount:number;
   remainingInstalment:number;
   firstInstalment:number;
-  defaultDownPayment:number;
   defaultInstalmentNo:number;
   totalLaycreditPoints=0;
   instalmentAvavible:boolean=false;
@@ -64,6 +63,7 @@ export class PaymentModeComponent implements OnInit {
   biWeeklyInstalment:number=0;
   montlyInstalment:number=0;
   downPayments=[];
+  defaultDownPayments=[];
   selectedDownPaymentIndex:number=0;
   sellingPrice:number;
 
@@ -74,7 +74,7 @@ export class PaymentModeComponent implements OnInit {
 
       this.getTotalPrice();
       this.getAllInstalment();
-      this.calculateInstalment(null,'redeemable_point',null,'set-default-downpayment');
+      this.calculateInstalment('down-payment','redeemable_point','set-default-down-payment');
     }
   }
 
@@ -83,25 +83,24 @@ export class PaymentModeComponent implements OnInit {
    * 
    * @param type1 => To calculate first, second & third down payment
    * @param type2 => To calculate redeemable point
-   * @param type3 => To calculate first , second & third down payment with laytrip point redeem
-   * @param type4 => To Set default down payment
+   * @param type3 => Set default downpayments
    */
-  calculateInstalment(type1=null,type2=null,type3=null,type4=null){
+  calculateInstalment(type1=null,type2=null,type3=null){
     
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){
           if(type1!=null && type1=='down-payment'){
-            this.calculateDownPayment(this.instalments.instalment_date[0].instalment_amount)
+            this.downPayments=this.instalments.down_payment;
           }
+
+          if(type3!=null && type3=='set-default-down-payment'){
+            this.defaultDownPayments=this.instalments.down_payment;
+            //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[0]);
+          }
+
           if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
-            this.redeemableLayCredit.emit(this.sellingPrice-this.instalments.instalment_date[0].instalment_amount);
-          }
-          if(type3!=null && type3!='down-payment-with-laytrip'){
-            this.calculateDownPayment(this.sellingPrice-this.laycreditpoints)
-          }
-          if(type4!=null && type4!='set-default-downpayment'){
-            this.defaultDownPayment = this.instalments.instalment_date[0].instalment_amount;
+            this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.selectedDownPaymentIndex]);
           }
         }
       },(err)=>{
@@ -113,11 +112,14 @@ export class PaymentModeComponent implements OnInit {
     if (changes['laycreditpoints']) {
       this.laycreditpoints =Number(changes['laycreditpoints'].currentValue);
       this.instalmentRequest.additional_amount = this.laycreditpoints;
-      this.calculateInstalment('down-payment',null,'down-payment-with-laytrip');
+      //this.calculateDownPayment(this.sellingPrice,this.downPayments[0])
+      this.calculateInstalment('down-payment',null);
+      this.getAllInstalment();
     }
 
     if(changes['priceData']){
-      this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
+      //this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
+      this.instalmentRequest.amount= 100;
     }
   }
 
@@ -126,11 +128,14 @@ export class PaymentModeComponent implements OnInit {
   }
 
   getTotalPrice(){
-    this.sellingPrice=this.priceData[0].selling_price;
-    if(this.priceData[0].secondary_selling_price){
-      this.sellingPrice = this.priceData[0].secondary_selling_price;
-    }
-    return this.sellingPrice;
+    /* this.sellingPrice=this.priceData[0].selling_price;
+
+    if(this.paymentType=='no-instalment'){
+      if(this.priceData[0].secondary_selling_price){
+        this.sellingPrice = this.priceData[0].secondary_selling_price;
+      }
+    } */
+    return this.sellingPrice=100;
   }
 
   convertToNumber(number){
@@ -144,22 +149,22 @@ export class PaymentModeComponent implements OnInit {
           this.weeklyInstalment   = res.weekly_instalments[1].instalment_amount;
           this.biWeeklyInstalment = res.biweekly_instalments[1].instalment_amount;
           this.montlyInstalment   = res.monthly_instalments[1].instalment_amount;
-          this.calculateDownPayment(res.weekly_instalments[0].instalment_amount);
+          //this.calculateDownPayment(res.weekly_instalments[0].instalment_amount);
         }
       },(err)=>{
 
     })
   }
 
-  calculateDownPayment(amount){
+  calculateDownPayment(sellingPrice,firstDownPayment){
 
     this.downPayments=[];
-    this.downPayments.push(amount);
+    this.downPayments.push(firstDownPayment);
 
-    let secondDownPayment = amount+(amount*10)/100;
+    let secondDownPayment = firstDownPayment+(sellingPrice*10)/100;
     this.downPayments.push(secondDownPayment);
 
-    let thirdDownPayment = amount+(amount*20)/100;
+    let thirdDownPayment = secondDownPayment+(sellingPrice*10)/100;
     this.downPayments.push(thirdDownPayment);
   }
 
@@ -178,15 +183,17 @@ export class PaymentModeComponent implements OnInit {
   togglePaymentFrequency(type){
 
     /* Reset Section */
-    this.instalmentRequest.down_payment=0;
-    this.selectedDownPaymentIndex=0;
+    //this.instalmentRequest.down_payment=0;
+    //this.selectedDownPaymentIndex=0;
+
+    //this.instalmentRequest.down_payment=this.defaultDownPayments[this.selectedDownPaymentIndex];
+    
     /* End Reset Section */
     
     this.instalmentRequest.instalment_type=type;
     this.instalmentType=type;
-    this.calculateInstalment(type='down-payment');
-    
-    this.redeemableLayCredit.emit(this.sellingPrice-this.downPayments[0]);
+    this.calculateInstalment('down-payment','redeemable_point','set-default-down-payment');
+    this.getAllInstalment();
   }
   
   /**
@@ -196,8 +203,10 @@ export class PaymentModeComponent implements OnInit {
   toggleDownPayment(index){
 
     this.selectedDownPaymentIndex=index;
-    this.instalmentRequest.down_payment= this.downPayments[index];
-    this.redeemableLayCredit.emit(this.sellingPrice-this.downPayments[index]);
+    //this.instalmentRequest.down_payment= this.downPayments[index];
+    this.instalmentRequest.selected_down_payment= this.selectedDownPaymentIndex;
+    this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[index]);
     this.calculateInstalment();
+    this.getAllInstalment();
   }
 }
