@@ -27,14 +27,11 @@ var AppComponent = /** @class */ (function () {
         }
     };
     AppComponent.prototype.subscribeToNotifications = function () {
+        var _this = this;
         this.swPush.requestSubscription({
             serverPublicKey: this.VAPID_PUBLIC_KEY
         })
-            .then(function (sub) {
-            return console.log("mohit", sub);
-        }
-        // this.genericService.addPushSubscriber(sub).subscribe()
-        )["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
+            .then(function (sub) { return _this.genericService.addPushSubscriber(sub).subscribe(); })["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
         /* this.swPush.requestSubscription({
             serverPublicKey: this.VAPID_PUBLIC_KEY
         })
