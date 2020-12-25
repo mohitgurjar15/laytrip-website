@@ -34,6 +34,8 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
 
 // HELPERS MODULE
 import { HelpersModule } from '../../_helpers/_helpers.module';
+import { FlightSearchWidgetComponent } from '../home/flight-search-widget/flight-search-widget.component';
+import { HomeModule } from '../home/home.module';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,8 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
     ReactiveFormsModule,
     NgSelectModule,
     CookieModule.forRoot(),
-    CalendarModule
+    CalendarModule,
+    HomeModule
   ],
   exports:[FlightLoaderComponent,FlightNotFoundComponent,FlightConfirmationComponent,FlightSummaryComponent]
 })
