@@ -1,5 +1,11 @@
 <!-- <app-flight-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar> -->
-<app-flight-search-widget></app-flight-search-widget>
+<div class="search_tab_listing_wrapper">
+    <div class="container">
+        <div class="searchbar_box_common">
+            <app-flight-search-widget></app-flight-search-widget>
+        </div>
+    </div>
+</div>
 
 <app-flight-loader *ngIf="loading"></app-flight-loader>
 <app-popup-loader *ngIf="loading"></app-popup-loader>
@@ -18,12 +24,14 @@
                             <h4>{{'filter_by' | translate}}</h4>
                             <a class="anchor_link" (click)="resetFilter()">{{'reset' | translate}}</a>
                         </div>
-                        <app-filter-flight [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}></app-filter-flight>
+                        <app-filter-flight [filterFlightDetails]="filterFlightDetails"
+                            (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}></app-filter-flight>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9">
-                <app-flight-price-slider *ngIf="!flexibleNotFound && tripType=='oneway'" [dates]="dates"></app-flight-price-slider>
+                <app-flight-price-slider *ngIf="!flexibleNotFound && tripType=='oneway'" [dates]="dates">
+                </app-flight-price-slider>
                 <app-flight-item-wrapper [flightDetails]="flightDetails"></app-flight-item-wrapper>
             </div>
         </div>
@@ -52,7 +60,8 @@
             <div class="filter_saidbar">
                 <div class="filter_by">
                     <h4>{{'filter_by' | translate}}</h4>
-                    <app-filter-flight [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"></app-filter-flight>
+                    <app-filter-flight [filterFlightDetails]="filterFlightDetails"
+                        (filterFlight)="filterFlight($event)"></app-filter-flight>
                 </div>
             </div>
         </div>

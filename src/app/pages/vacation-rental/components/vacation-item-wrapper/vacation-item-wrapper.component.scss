@@ -1,3 +1,57 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 agm-map {
   height: 300px;
+}
+.view_btn_wrapper{
+  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    .home-counter-wrapper{
+      flex: 2;
+      .block_result_found{
+        padding: 10px 20px;
+        background: $background-white;
+        border: 1px solid $box-border-color;
+        border-radius: 8px;
+        margin: 0;
+        text-align: center;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        p {
+          font-size: 16px;
+          font-weight: 500;
+          color: $text-grey;
+          margin: 0 0 2px;
+      }
+         span {
+          font-size: 20px;
+          font-weight: 600;
+          color: $text-black;
+          margin-left: 10px;
+          margin-bottom: 3px;
+        }
+        
+      }
+    }
+    button {
+      background-color: $background-white;
+      padding: 10px 20px;
+      border: 1px solid $box-border-color;
+      border-radius: 8px;
+      color: $text-grey;
+      font-size: 14px;
+      height: 55px;
+      margin-left: 10px;
+      img {
+          margin-right: 5px;
+      }
+    }
 }
