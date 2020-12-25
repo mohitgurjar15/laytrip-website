@@ -1,13 +1,383 @@
-<div class="page_load hotels">
-        <div class="page_load_inner">
-            <div class="page_laoding">
-                <!-- <lottie-player class="animation_player" src="https://assets3.lottiefiles.com/packages/lf20_vTKQNW.json" background="transparent" speed="1" loop autoplay></lottie-player> -->
-                <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_hotel_loader.svg" alt="Loading Images">
-                <h6> Searching <span>Home</span></h6>
-                <div id="Loader_progressbar">
-                    <div class="progress-label">Loading...</div>
+<!-- Start Search Result section -->
+<section class="search_result flight">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-3">
+              <div class="filter_saidbar">
+                  <div class="short_by">
+                      <h4 class="fb_animation w-50"></h4>
+                      <div class=" accordion block_shortby" id="accordion">
+                          <div class="accordion-group">
+                              <div class="accordion-heading">
+                                  <div class="fb_animation"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="filter_by d-md-none d-lg-block">
+                      <h4 class="fb_animation w-50"></h4>
+                      <div class="fliter_block">
+                          <div class="cmn_block price">
+                              <h5 class="fb_animation w-50"></h5>
+                              <div class="range_slid">
+                                  <p class="fb_animation mb-2 w-50"></p>
+                                  <div class="fb_animation"></div>
+                              </div>
+                          </div>
+                          <div class="cmn_block partial_payment_price">
+                              <h5 class="fb_animation w-50"></h5>
+                              <div class="range_slid">
+                                  <p class="fb_animation mb-2 w-50"></p>
+                                  <div class="fb_animation"></div>
+                              </div>
+                          </div>
+                          <div class="cmn_block stop">
+                              <h5 class="fb_animation w-50"></h5>
+                              <ul>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="cmn_block arrival_to">
+                              <h5 class="fb_animation w-50"></h5>
+                              <ul>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="cmn_block departure_to">
+                              <h5 class="fb_animation w-50"></h5>
+                              <ul>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="cmn_block departure_to">
+                              <h5 class="fb_animation w-50"></h5>
+                              <ul>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                                  <li>
+                                      <p class="fb_animation mb-0 w-50"></p>
+                                      <p class="fb_animation mb-0 w-25"></p>
+                                  </li>
+                              </ul>
+                              <a class="view_more" href="javascript:void(0);">
+                                  <p class="fb_animation mb-0 w-50"></p>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="price_by_date p-2" style="background: #fff;">
+                <div class="d-flex w-100">
+                    <div class="inner w-100">
+                        <div class="slid_block">
+                            <a href="javascript:void(0);">
+                                <div class="block_top">
+                                    <p class="fb_animation"></p>
+                                </div>
+                                <div class="block_btm">
+                                    <p class="fb_animation mb-0"></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
             </div>
-        </div>
-    </div>
+              <div class="result_listing one_way_list">
+                  <div class="search_block">
+                      <div class="listing_block">
+                          <div class="row">
+                              <div class="col-md-2 px-0">
+                                  <div class="block_im">
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 px-0">
+                                  <div class="block_detail">
+                                      <div class="block_detail_top">
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-2"></p>
+                                      </div>
+                                      <div class="block_detail_btm">
+                                          <div class="show_detail">
+                                              <p class="fb_animation w-50 mb-0"></p>
+                                          </div>
+                                          <div class="info_price_origin">
+                                              <p class="fb_animation w-100 mb-0"></p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4 px-0">
+                                  <div class="block_price">
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                      <p class="fb_animation w-100 mb-0"></p>
+                                      <p class="fb_animation w-100 mb-3"></p>
+                                      <div class="fb_animation mb-0 w-50 mx-auto"></div>
+                                      <div class="fb_animation mb-3 w-50 mx-auto"></div>
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="search_block">
+                      <div class="listing_block">
+                          <div class="row">
+                              <div class="col-md-2 px-0">
+                                  <div class="block_im">
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 px-0">
+                                  <div class="block_detail">
+                                      <div class="block_detail_top">
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-2"></p>
+                                      </div>
+                                      <div class="block_detail_btm">
+                                          <div class="show_detail">
+                                              <p class="fb_animation w-50 mb-0"></p>
+                                          </div>
+                                          <div class="info_price_origin">
+                                              <p class="fb_animation w-100 mb-0"></p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4 px-0">
+                                  <div class="block_price">
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                      <p class="fb_animation w-100 mb-0"></p>
+                                      <p class="fb_animation w-100 mb-3"></p>
+                                      <div class="fb_animation mb-0 w-50 mx-auto"></div>
+                                      <div class="fb_animation mb-3 w-50 mx-auto"></div>
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="search_block">
+                      <div class="listing_block">
+                          <div class="row">
+                              <div class="col-md-2 px-0">
+                                  <div class="block_im">
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 px-0">
+                                  <div class="block_detail">
+                                      <div class="block_detail_top">
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-2"></p>
+                                      </div>
+                                      <div class="block_detail_btm">
+                                          <div class="show_detail">
+                                              <p class="fb_animation w-50 mb-0"></p>
+                                          </div>
+                                          <div class="info_price_origin">
+                                              <p class="fb_animation w-100 mb-0"></p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4 px-0">
+                                  <div class="block_price">
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                      <p class="fb_animation w-100 mb-0"></p>
+                                      <p class="fb_animation w-100 mb-3"></p>
+                                      <div class="fb_animation mb-0 w-50 mx-auto"></div>
+                                      <div class="fb_animation mb-3 w-50 mx-auto"></div>
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="search_block">
+                      <div class="listing_block">
+                          <div class="row">
+                              <div class="col-md-2 px-0">
+                                  <div class="block_im">
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 px-0">
+                                  <div class="block_detail">
+                                      <div class="block_detail_top">
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-2"></p>
+                                      </div>
+                                      <div class="block_detail_btm">
+                                          <div class="show_detail">
+                                              <p class="fb_animation w-50 mb-0"></p>
+                                          </div>
+                                          <div class="info_price_origin">
+                                              <p class="fb_animation w-100 mb-0"></p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4 px-0">
+                                  <div class="block_price">
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                      <p class="fb_animation w-100 mb-0"></p>
+                                      <p class="fb_animation w-100 mb-3"></p>
+                                      <div class="fb_animation mb-0 w-50 mx-auto"></div>
+                                      <div class="fb_animation mb-3 w-50 mx-auto"></div>
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="search_block">
+                      <div class="listing_block">
+                          <div class="row">
+                              <div class="col-md-2 px-0">
+                                  <div class="block_im">
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                      <div class="fb_animation ml-3"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 px-0">
+                                  <div class="block_detail">
+                                      <div class="block_detail_top">
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-0"></p>
+                                          <p class="fb_animation w-100 mb-2"></p>
+                                      </div>
+                                      <div class="block_detail_btm">
+                                          <div class="show_detail">
+                                              <p class="fb_animation w-50 mb-0"></p>
+                                          </div>
+                                          <div class="info_price_origin">
+                                              <p class="fb_animation w-100 mb-0"></p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4 px-0">
+                                  <div class="block_price">
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                      <p class="fb_animation w-100 mb-0"></p>
+                                      <p class="fb_animation w-100 mb-3"></p>
+                                      <div class="fb_animation mb-0 w-50 mx-auto"></div>
+                                      <div class="fb_animation mb-3 w-50 mx-auto"></div>
+                                      <p class="fb_animation w-100 mb-2"></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Close Search Result section -->

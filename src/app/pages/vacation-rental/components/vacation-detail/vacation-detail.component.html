@@ -44,10 +44,10 @@
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
                 aria-selected="false">Amenities</a>
             </li>
-            <li class="nav-item">
+           <!--  <li class="nav-item">
               <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
                 aria-selected="false">Reviews</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map"
                 aria-selected="false">Map</a>
@@ -71,7 +71,7 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+            <!-- <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
               <div class="reviews_wrapper_main">
                 <div class="ratings_section">
                   <div class="rating_num">
@@ -93,7 +93,7 @@
                 <p class="rating_text">
                 </p>
               </div>
-            </div>
+            </div> -->
             <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
               <div style="height: 400px; width: 100%;">
                 <agm-map [latitude]="lat"
@@ -112,7 +112,7 @@
           <div class="section_title">
             Rooms
           </div>
-          <div class="search_block">
+          <div class="search_block" *ngFor="let item of rentalRoomData; let blockIndex = index;">
             <div class="listing_block">
               <div class="row">
                 <div class="col-md-9">
@@ -122,7 +122,7 @@
                         <div class="col-md-4 col-lg-4 px-0">
                           <div class="block_im">
                             <div class="hotel_list_img_wrp">
-                              <img src="" alt="Hotel image">
+                              <img src="{{galleryImages[0]?.small}}" alt="Hotel image">
                             </div>
                           </div>
                         </div>
@@ -130,25 +130,26 @@
                           <div class="block_detail">
                             <div class="block_detail_top">
                               <div class="detail_info">
-                                <h4></h4>
+                                <h4>{{item?.name}}</h4>
                                 <div class="refen_tag">
-                                  <span></span>
+                                  <span>{{item.cancellation_policy.is_refundable === 'false' ? 'Non-Refundable' : 'Refundable'}}</span>
                                 </div>
-                                <div class="review_section_wrap">
+                                <!-- <div class="review_section_wrap">
                                   <div class="right_bar">
-                                    <div class="ammin_listing">
-                                      <div class="amminities_list">
-                                        <img src="" alt=""> 
-                                      </div>
-                                    </div>
-                                    <div class="ammin_listing">
+                                    <div class="ammin_listing" *ngIf="item.beddings && item.beddings.length">
                                       <div class="amminities_list">
                                         <img src="{{s3BucketUrl}}assets/images/hotels/breakfast.svg" alt="">
-                                        
+                                        {{item?.beddings}}
+                                      </div>
+                                    </div>
+                                    <div class="ammin_listing" *ngIf="item.amenities && item.amenities.length">
+                                      <div class="amminities_list">
+                                        <img src="{{s3BucketUrl}}assets/images/hotels/breakfast.svg" alt="">
+                                        {{item?.amenities}}
                                       </div>
                                     </div>
                                   </div>
-                                </div>
+                                </div> -->
                               </div>
                             </div>
                           </div>
@@ -161,17 +162,17 @@
                   <div class="row">
                     <div class="block_price block_pr">
                       <div class="block_inn_pr">
-                        <div class="block">
+                        <div class="block" *ngIf="item.secondary_start_price > 0">
                           <p>Room Starts from</p>
-                          <p><span></span> /week</p>
+                          <p><span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> /week</p>
                         </div>
-                        <div class="block">
-                          <p><span></span></p>
+                        <div class="block" *ngIf="item.secondary_start_price === 0">
+                          <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span></p>
                         </div>
-                      </div> <a class="book_btn" href="">Select</a>
+                      </div> <a class="book_btn" (click)="showRoomDetails(item)">Select</a>
                       <div class="show_detail">
-                        <a class="show_more_detail"> <img
-                            src="{{s3BucketUrl}}assets/images/icon/ic_info.svg" alt="Information Icon">Payment
+                        <a class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
+                            alt="Information Icon">Payment
                           plan details</a>
                       </div>
                     </div>
@@ -179,41 +180,11 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showRoomDetails[blockIndex] === true">
-              <div class="card-body">
-                <div class="block_flight_info">
-                  <div class="tab_detail fare_detail_cnt">
-                    <div class="triangle_right"></div>
-                    <ul>
-                      <li>Base Fare <span>44</span></li>
-                      <li>Taxes and Fees <span>44</span></li>
-                      <li>Total Fare <span>44</span></li>
-                    </ul>
-                    <div class="triangle_left"></div>
-                    <ul>
-                      <li class="down_payment">
-                        11
-                        <span class="down_value">111</span>
-                      </li>
-                      <ng-container>
-                        <li>
-                          <div class="detail">aa
-                            <p>aa
-                            </p>
-                          </div> <span>aa</span>
-                        </li>
-                      </ng-container>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
 
-      <div class="col-lg-4">
+       <div class="col-lg-4">
         <div class="hotel_detail_sidebar">
           <h3 class="section_title">
             Room Summary
@@ -221,11 +192,10 @@
           <div class="display_wrapper">
             <div class="detail_display">
               <div class="display_text">
-                <h2></h2>
+                <h2>{{roomData?.name}}</h2>
                 <p>
-                  <span>
-                    Rooms</span><span>
-                    Adults</span><span> Child</span>
+                  <span>{{info?.adult_count}}
+                    Adults</span><span>{{info?.number_and_children_ages.length}} Child</span>
                 </p>
               </div>
               <img src="{{s3BucketUrl}}assets/images/Union 1.png" alt="hotel display image">
@@ -235,14 +205,14 @@
                 <div class="datewrapper">
                   <label for="">CHECK IN</label>
                   <span>
-                    <span></span>
+                    <span>{{info?.check_in_date}}</span>
                     <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_calender-icon.svg" alt="">
                   </span>
                 </div>
                 <div class="datewrapper">
                   <label for="">CHECK OUT</label>
                   <span>
-                    <span></span>
+                    <span>{{info?.check_out_date}}</span>
                     <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_calender-icon.svg" alt="">
                   </span>
                 </div>
@@ -254,34 +224,39 @@
               <span class="fare_title">
                 Room Details
               </span>
-              <div class="fare_listing">
-                <span>Cancellation policies</span>
-                <span>1</span>
-              </div>
-              <div class="fare_listing">
-                <span>Policies</span>
-                <span>1</span>
-              </div>
-              <div class="fare_listing">
-                <span></span>
+             <!--  <div class="fare_listing" *ngIf="roomSummary?.hotelInfo?.board_type && roomSummary?.hotelInfo?.board_type !== 'NONE'">
+                <span>{{roomSummary?.hotelInfo?.board_type}}</span>
                 <span>Included</span>
+              </div> -->
+              <div class="fare_listing">
+                <a  href="javascript:void(0)">
+                  Cancellation policies
+                </a>
+              </div>
+              <div class="fare_listing">
+              	<a  href="javascript:void(0)">
+                  Policies
+                </a>
               </div>
             </div>
-            <div class="fare_section">
+            <div class="fare_section" *ngIf="roomData?.instalment_details?.instalment_available">
               <span class="fare_title">
                 Payment
               </span>
               <div class="fare_listing">
-                <span>Room</span>
-                <span>1</span>
+                <span>Down Payment</span>
+                <span>{{ currency?.symbol }}{{ roomData?.start_price | number :
+                  '1.2-2'}}</span>
               </div>
-              <div class="fare_listing">
-                <span>Room</span>
-                <span>1</span>
-              </div>
-              <div class="fare_listing">
-                <span>Room</span>
-                <span>1</span>
+              <div class="fare_listing"
+                *ngFor="let instalment of roomData?.instalment_details?.instalment_date; let i = index">
+                <ng-template [ngIf]="i>0">
+                  <span>{{i}} Installment
+                    <span>{{
+                      commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</span>
+                  </span>
+                  <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                </ng-template>
               </div>
             </div>
             <div class="fare_section">
@@ -289,19 +264,15 @@
                 Fare Details
               </span>
               <div class="fare_listing">
-                <span>Room</span>
-                <span>1</span>
+                <span>Base Fare</span>
+                <span>{{ currency?.symbol
+                  }}{{roomData?.selling_price}}</span>
               </div>
-              <div class="fare_listing">
-                <span>1st Installment
-                  <span>(Oct 24 2020)</span>
-                </span>
-                <span>1</span>
-              </div>
-              <div class="fare_listing">
-                <span>Room</span>
-                <span>1</span>
-              </div>
+              <!-- <div class="fare_listing">
+                <span>Taxes & Fees</span>
+                <span>{{ currency?.symbol
+                  }}{{roomSummary?.hotelInfo?.selling?.taxes}}</span>
+              </div> -->
             </div>
             <div class="fare_section">
               <span class="fare_title">
@@ -309,23 +280,15 @@
               </span>
               <div class="fare_listing">
                 <span>Hotel</span>
-                <span>1</span>
-              </div>
-              <div class="fare_listing">
-                <span>1st Installment
-                  <span>(Oct 24 2020)</span>
-                </span>
-                <span>1</span>
-              </div>
-              <div class="fare_listing">
-                <span>Room</span>
-                <span>1</span>
+                <span>{{ currency?.symbol
+                  }}{{roomData?.selling_price}}</span>
               </div>
             </div>
           </div>
           <div class="fare_total_wrapper">
             <span>Total</span>
-            <span>$350</span>
+            <span>{{ currency?.symbol
+              }}{{roomData?.selling_price}}</span>
           </div>
         </div>
       </div>

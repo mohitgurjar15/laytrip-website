@@ -31,11 +31,12 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
   showHomeDetails = [];
   showFareDetails: number = 0;
   amenitiesObject = {
-    breakfast: `${this.s3BucketUrl}assets/images/hotels/breakfast.svg`,
-    ComplimentaryWirelessInternet: `${this.s3BucketUrl}assets/images/hotels/wifi.svg`,
-    NonSmokingRooms: `${this.s3BucketUrl}assets/images/hotels/no_smoking.svg`,
+
+    ac: `${this.s3BucketUrl}assets/images/hotels/ac.svg`,
+    wifi: `${this.s3BucketUrl}assets/images/hotels/wifi.svg`,
+    coffe_tea: `${this.s3BucketUrl}assets/images/hotels/breakfast.svg`,
+    no_smoking: `${this.s3BucketUrl}assets/images/hotels/no_smoking.svg`,
     tv: `${this.s3BucketUrl}assets/images/hotels/tv.svg`,
-    AirConditioning: `${this.s3BucketUrl}assets/images/hotels/ac.svg`,
   }
 
   constructor(
