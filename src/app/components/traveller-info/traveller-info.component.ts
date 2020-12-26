@@ -54,6 +54,7 @@ export class TravellerInfoComponent implements OnInit {
     $("#add_traveler").click(function (e) {
       e.stopPropagation();
       $("#add_traveler_open").slideToggle("slow");
+      $("#add_class_sec_open").hide();
     });
 
     $('#add_traveler_open').click(

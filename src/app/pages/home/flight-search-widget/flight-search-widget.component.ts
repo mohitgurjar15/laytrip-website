@@ -58,7 +58,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       arrival: this.toDestinationCode,
       departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
       arrival_date: '',
-      class: '',
+      class: 'Economy',
       adult: 1,
       child: null,
       infant: null
@@ -108,7 +108,9 @@ export class FlightSearchWidgetComponent implements OnInit {
           this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
           this.toAirport = airports[this.toDestinationCode];
           this.toggleOnewayRoundTrip(params['trip']);
+          
           this.searchFlightInfo.class = params['class'];
+
           this.departureDate = new Date(params['departure_date'])
           this.returnDate = new Date(params['arrival_date'])
           this.rangeDates = [this.departureDate, this.returnDate];

@@ -49,7 +49,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             arrival: this.toDestinationCode,
             departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
             arrival_date: '',
-            "class": '',
+            "class": 'Economy',
             adult: 1,
             child: null,
             infant: null

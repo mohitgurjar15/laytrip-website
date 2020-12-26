@@ -12,7 +12,6 @@ var FlightClassComponent = /** @class */ (function () {
     function FlightClassComponent(eRef) {
         this.eRef = eRef;
         this.changeValue = new core_1.EventEmitter();
-        this["class"] = 'Economy';
     }
     FlightClassComponent.prototype.ngOnInit = function () {
         this.loadJquery();
@@ -24,6 +23,7 @@ var FlightClassComponent = /** @class */ (function () {
         $("#add_class_sec").click(function (e) {
             e.stopPropagation();
             $("#add_class_sec_open").slideToggle();
+            $('#add_traveler_open').hide();
         });
         $('#add_class_sec_open').click(function (e) {
             e.stopPropagation();
@@ -31,12 +31,15 @@ var FlightClassComponent = /** @class */ (function () {
     };
     FlightClassComponent.prototype.btnClickForChange = function (item) {
         this.changeValue.emit(item.value);
-        this["class"] = item.value;
+        this.flightClass = item.value;
         $("#add_class_sec_open").hide("slow");
     };
     __decorate([
         core_1.Output()
     ], FlightClassComponent.prototype, "changeValue");
+    __decorate([
+        core_1.Input()
+    ], FlightClassComponent.prototype, "flightClass");
     FlightClassComponent = __decorate([
         core_1.Component({
             selector: 'app-flight-class',
