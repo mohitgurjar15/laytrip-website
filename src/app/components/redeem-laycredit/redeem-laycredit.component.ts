@@ -58,6 +58,10 @@ export class RedeemLaycreditComponent implements OnInit {
       else{
         this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.totalLaycreditPoints});
       }
+
+      if(this.selectedLayCredit > changes['redeemableLayPoints'].currentValue){
+        this.applyLaycredit.emit(changes['redeemableLayPoints'].currentValue)
+      }
     }
   }
 }

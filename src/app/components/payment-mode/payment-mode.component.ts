@@ -104,7 +104,7 @@ export class PaymentModeComponent implements OnInit {
           } */
 
           if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
-            console.log("this.instalmentType==",this.defaultDownPayments[this.instalmentType],"====",this.selectedDownPaymentIndex)
+            console.log("this.instalmentType==",this.defaultDownPayments[this.instalmentType],"====",this.selectedDownPaymentIndex,"+++",this.sellingPrice,this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex])
             this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
           }
         }
@@ -114,9 +114,7 @@ export class PaymentModeComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes===>",changes)
     if (changes['laycreditpoints']) {
-      console.log("changes===<<<<",changes)
       this.laycreditpoints =Number(changes['laycreditpoints'].currentValue);
       this.instalmentRequest.additional_amount = this.laycreditpoints;
       this.calculateInstalment('down-payment',null);
@@ -124,8 +122,8 @@ export class PaymentModeComponent implements OnInit {
     }
 
     if(changes['priceData']){
-      //this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
-      this.instalmentRequest.amount= 100;
+      this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
+      //this.instalmentRequest.amount= 100;
     }
   }
 
@@ -134,14 +132,14 @@ export class PaymentModeComponent implements OnInit {
   }
 
   getTotalPrice(){
-    /* this.sellingPrice=this.priceData[0].selling_price;
+    this.sellingPrice=this.priceData[0].selling_price;
 
     if(this.paymentType=='no-instalment'){
       if(this.priceData[0].secondary_selling_price){
         this.sellingPrice = this.priceData[0].secondary_selling_price;
       }
-    } */
-    return this.sellingPrice=100;
+    }
+    //return this.sellingPrice=100;
   }
 
   convertToNumber(number){
@@ -157,10 +155,10 @@ export class PaymentModeComponent implements OnInit {
           this.montlyInstalment   = res.monthly_instalments[1].instalment_amount;
 
           if(type1!=null && type1=='set-default-down-payment'){
-
             this.defaultDownPayments.weekly = res.weekly_down_payment;
             this.defaultDownPayments.biweekly = res.bi_weekly_down_payment;
             this.defaultDownPayments.monthly = res.monthly_down_payment;
+            this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
           }
         }
       },(err)=>{
