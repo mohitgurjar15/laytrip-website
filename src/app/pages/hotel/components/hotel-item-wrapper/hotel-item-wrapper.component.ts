@@ -155,8 +155,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     }
   }
 
-
-
   counter(i: any) {
     return new Array(i);
   }

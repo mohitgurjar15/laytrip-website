@@ -54,6 +54,7 @@ export class HotelDetailComponent implements OnInit {
       checkOut: ''
     }
   };
+  dataLoading = false;
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -143,7 +144,6 @@ export class HotelDetailComponent implements OnInit {
         }
       }
     }, error => {
-      this.loading = false;
       this.toastr.error('Search session is expired', 'Error');
       this.router.navigate(['/']);
     });
@@ -164,7 +164,11 @@ export class HotelDetailComponent implements OnInit {
   }
 
   showRoomDetails(roomInfo) {
-    this.roomSummary.hotelInfo = roomInfo;
+    this.dataLoading = true;
+    setTimeout(() => {
+      this.roomSummary.hotelInfo = roomInfo;
+      this.dataLoading = false;
+    }, 1000);
   }
 
   openPolicyPopup(policyInfo, type) {
@@ -179,7 +183,7 @@ export class HotelDetailComponent implements OnInit {
       payload.title = 'Room Policy';
     }
     const modalRef = this.modalService.open(HotelPolicyPopupComponent, {
-      windowClass: '',
+      windowClass: 'custom-z-index',
       centered: true,
       size: 'lg',
     });

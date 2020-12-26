@@ -21,7 +21,6 @@ export class HotelPolicyPopupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.data);
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     if (this.data && this.data.type === 'cancellation_policies') {

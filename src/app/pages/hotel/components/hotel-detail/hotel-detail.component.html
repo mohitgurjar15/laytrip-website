@@ -358,7 +358,7 @@
   </div>
 </section>
 <!-- Close Search Result section -->
-<section class="search_result hotels">
+<section class="search_result hotels" *ngIf="galleryImages && galleryImages.length">
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
@@ -467,7 +467,7 @@
           </div>
         </div>
 
-        <div class="result_listing hotel_listings">
+        <div class="result_listing hotel_listings" *ngIf="hotelRoomArray && hotelRoomArray.length">
           <div class="section_title">
             Rooms
           </div>
@@ -491,7 +491,9 @@
                               <div class="detail_info">
                                 <h4>{{item?.title}}</h4>
                                 <div class="refen_tag">
-                                  <span>{{item.is_refundable === 'false' ? 'Non-Refundable' : 'Refundable'}}</span>
+                                  <span
+                                    [ngClass]="{'non-refundable':item.is_refundable === 'false', 'refundable':item.is_refundable !== 'false'}">{{item.is_refundable
+                                    === 'false' ? 'Non-Refundable' : 'Refundable'}}</span>
                                 </div>
                                 <div class="review_section_wrap">
                                   <div class="right_bar">
@@ -581,8 +583,11 @@
           <div class="display_wrapper">
             <div class="detail_display">
               <div class="display_text">
-                <h2>{{roomSummary?.hotelInfo?.title}}</h2>
-                <p>
+                <div *ngIf="dataLoading" class="dataLoading">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </div>
+                <h2 *ngIf="!dataLoading">{{roomSummary?.hotelInfo?.title}}</h2>
+                <p *ngIf="!dataLoading">
                   <span>{{roomSummary?.roomDetail?.totalRoom}}
                     Rooms</span><span>{{roomSummary?.roomDetail?.totalAdults}}
                     Adults</span><span>{{roomSummary?.roomDetail?.totalChildren}} Child</span>
@@ -594,14 +599,20 @@
               <div class="display_daterange">
                 <div class="datewrapper">
                   <label for="">CHECK IN</label>
-                  <span>
+                  <div *ngIf="dataLoading" class="dataLoading">
+                    <i class="fa fa-spinner fa-spin"></i>
+                  </div>
+                  <span *ngIf="!dataLoading">
                     <span>{{roomSummary?.roomDetail?.checkIn}}</span>
                     <img src="{{s3BucketUrl}}assets/images/hotels/disabled-calendar-icon.svg" alt="">
                   </span>
                 </div>
                 <div class="datewrapper">
                   <label for="">CHECK OUT</label>
-                  <span>
+                  <div *ngIf="dataLoading" class="dataLoading">
+                    <i class="fa fa-spinner fa-spin"></i>
+                  </div>
+                  <span *ngIf="!dataLoading">
                     <span>{{roomSummary?.roomDetail?.checkOut}}</span>
                     <img src="{{s3BucketUrl}}assets/images/hotels/disabled-calendar-icon.svg" alt="">
                   </span>
@@ -610,7 +621,10 @@
             </div>
           </div>
           <div class="fare_detail_wrapper">
-            <div class="fare_section">
+            <div *ngIf="dataLoading" class="dataLoading">
+              <i class="fa fa-spinner fa-spin"></i>
+            </div>
+            <div class="fare_section" *ngIf="!dataLoading">
               <span class="fare_title">
                 Room Details
               </span>
@@ -632,7 +646,8 @@
                 </a>
               </div>
             </div>
-            <div class="fare_section" *ngIf="roomSummary?.hotelInfo?.instalment_details?.instalment_available">
+            <div class="fare_section"
+              *ngIf="roomSummary?.hotelInfo?.instalment_details?.instalment_available && !dataLoading">
               <span class="fare_title">
                 Payment
               </span>
@@ -652,7 +667,7 @@
                 </ng-template>
               </div>
             </div>
-            <div class="fare_section">
+            <div class="fare_section" *ngIf="!dataLoading">
               <span class="fare_title">
                 Fare Details
               </span>
@@ -667,7 +682,7 @@
                   }}{{roomSummary?.hotelInfo?.selling?.taxes}}</span>
               </div>
             </div>
-            <div class="fare_section">
+            <div class="fare_section" *ngIf="!dataLoading">
               <span class="fare_title">
                 Price Details
               </span>
@@ -680,7 +695,7 @@
           </div>
           <div class="fare_total_wrapper">
             <span>Total</span>
-            <span>{{ currency?.symbol
+            <span *ngIf="!dataLoading">{{ currency?.symbol
               }}{{roomSummary?.hotelInfo?.selling?.total}}</span>
           </div>
         </div>
