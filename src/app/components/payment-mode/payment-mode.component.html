@@ -1,7 +1,7 @@
 
 <div class="container" *ngIf="instalmentAvavible">
     <h5>Choose How You Pay</h5>
-    <button type="button" class="btn btn-outline-secondary btn-lg" [ngClass]="{'btn-outline-success':paymentType=='instalment'}" (click)="togglePaymentMode('instalment')">Installments</button>&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-secondary btn-lg" [ngClass]="{'btn-outline-success':paymentType=='instalment'}" [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>&nbsp;&nbsp;&nbsp;
     <button type="button" class="btn btn-outline-secondary btn-lg" [ngClass]="{'btn-outline-success':paymentType=='no-instalment'}" (click)="togglePaymentMode('no-instalment')">Full Payment</button>
     <br><br>
 

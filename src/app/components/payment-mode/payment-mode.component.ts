@@ -73,6 +73,7 @@ export class PaymentModeComponent implements OnInit {
   selectedDownPaymentIndex:number=0;
   sellingPrice:number;
   minimumPriceValidationError:string='Your installment price is less then $5, Partial payment option is not available for this Offer.';
+  isBelowMinimumInstallment:boolean=false;
 
   ngOnInit(){
 
@@ -104,10 +105,17 @@ export class PaymentModeComponent implements OnInit {
             this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
           }
 
-          if(this.instalments.instalment_date[1].instalment_amount<5 && this.paymentType=='instalment'){
-           // alert("Less then 5")
-           this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
-           this.togglePaymentMode('no-instalment');
+          if(this.instalments.instalment_date[1].instalment_amount<5){
+            
+            if(this.paymentType=='instalment'){
+
+             this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
+             this.togglePaymentMode('no-instalment');
+            }
+            this.isBelowMinimumInstallment=true;
+          }
+          else{
+            this.isBelowMinimumInstallment=false;
           }
           this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
         }
@@ -187,6 +195,10 @@ export class PaymentModeComponent implements OnInit {
    * @param type ['instalment','no-instalment']
    */
   togglePaymentMode(type){
+
+    if(type=='instalment' && this.isBelowMinimumInstallment){
+      return;
+    }
     this.paymentType=type;
   }
 
