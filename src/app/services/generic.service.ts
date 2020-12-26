@@ -132,7 +132,6 @@ export class GenericService {
       "auth_keys":data.keys.auth,
       "p256dh_keys":data.keys.p256dh,
     };
-    console.log(notificationData,"notificationData")
     return this.http.post(`${environment.apiUrl}v1/auth​/add-notification-token`, notificationData)
       .pipe(
         catchError(this.handleError)

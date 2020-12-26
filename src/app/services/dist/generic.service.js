@@ -95,8 +95,11 @@ var GenericService = /** @class */ (function () {
             "auth_keys": data.keys.auth,
             "p256dh_keys": data.keys.p256dh
         };
-        console.log(notificationData, "notificationData");
         return this.http.post(environment_1.environment.apiUrl + "v1/auth\u200B/add-notification-token", notificationData)
+            .pipe(operators_1.catchError(this.handleError));
+    };
+    GenericService.prototype.getAllInstalemnts = function (data) {
+        return this.http.post(environment_1.environment.apiUrl + "v1/instalment/calculate-all-instalment", data)
             .pipe(operators_1.catchError(this.handleError));
     };
     GenericService = __decorate([
