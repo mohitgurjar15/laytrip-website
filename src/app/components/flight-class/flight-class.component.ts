@@ -18,12 +18,12 @@ export class FlightClassComponent implements OnInit {
   
   loadJquery() {
     $("body").click(function () {
-      $("#add_class_sec_open").hide("slow");
+      $("#add_class_sec_open").hide();
     });
 
     $("#add_class_sec").click(function (e) {
       e.stopPropagation();
-      $("#add_class_sec_open").slideToggle("slow");
+      $("#add_class_sec_open").slideToggle();
     });
 
     $('#add_class_sec_open').click(
@@ -34,15 +34,7 @@ export class FlightClassComponent implements OnInit {
 
   }
 
-  @HostListener('body:click', ['$event'])
-  clickout(event) {
-    console.log(event.target)
-    if(this.eRef.nativeElement.contains(event.target)) {
-      console.log('inside')      
-    } else {
-      console.log('outside')
-    }
-  }
+ 
   btnClickForChange(item){
     this.changeValue.emit(item.value);
     this.class = item.value;

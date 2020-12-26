@@ -73,8 +73,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
         this.route.queryParams.subscribe(function (params) {
-            console.log(params);
-            if (params.length > 0) {
+            if (Object.keys(params).length > 0) {
                 _this.fromSearch = airports_1.airports[params['departure']];
                 _this.fromDestinationCode = _this.fromSearch.code;
                 _this.departureCity = _this.fromSearch.city;

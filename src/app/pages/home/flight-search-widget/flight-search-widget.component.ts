@@ -95,8 +95,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
 
     this.route.queryParams.subscribe(params => {
-      console.log(params)
-      if(params.length > 0){      
+       if(Object.keys(params).length > 0){      
           this.fromSearch = airports[params['departure']];
           this.fromDestinationCode = this.fromSearch.code;
           this.departureCity = this.fromSearch.city;
@@ -113,6 +112,7 @@ export class FlightSearchWidgetComponent implements OnInit {
           this.departureDate = new Date(params['departure_date'])
           this.returnDate = new Date(params['arrival_date'])
           this.rangeDates = [this.departureDate, this.returnDate];
+
       }
     });
 
@@ -241,7 +241,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     let tempAirportCountry = this.departureAirportCountry;
     this.departureAirportCountry = this.arrivalAirportCountry;
     this.arrivalAirportCountry = tempAirportCountry;
-
   }
 
   returnDateUpdate(date) {
