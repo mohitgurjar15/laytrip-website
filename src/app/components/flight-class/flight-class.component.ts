@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef} from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -10,7 +10,7 @@ export class FlightClassComponent implements OnInit {
   
   @Output() changeValue = new EventEmitter<any>();
   class = 'Economy';
-  constructor() { }
+  constructor(private eRef: ElementRef) { }
 
   ngOnInit() {
     this.loadJquery();
@@ -34,6 +34,15 @@ export class FlightClassComponent implements OnInit {
 
   }
 
+  @HostListener('body:click', ['$event'])
+  clickout(event) {
+    console.log(event.target)
+    if(this.eRef.nativeElement.contains(event.target)) {
+      console.log('inside')      
+    } else {
+      console.log('outside')
+    }
+  }
   btnClickForChange(item){
     this.changeValue.emit(item.value);
     this.class = item.value;
