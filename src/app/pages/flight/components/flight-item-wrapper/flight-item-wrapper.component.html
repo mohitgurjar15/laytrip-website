@@ -194,7 +194,7 @@
                                             <li *ngIf="i>0">
                                                 <div class="detail"> {{i}} {{'installment' | translate}}
                                                     <p>{{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</p>
-                                                </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                                </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount | number : '1.2-2'}}</span>
                                             </li>
                                         </ng-container>
                                     </ul>
@@ -627,7 +627,7 @@
                                                 <li *ngIf="i>0">
                                                     <div class="detail"> {{i}} Instalment
                                                         <p>{{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</p>
-                                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount | number : '1.2-2'}}</span>
                                                 </li>
                                             </ng-container>
                                         </ul>

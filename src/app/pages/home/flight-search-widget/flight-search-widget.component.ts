@@ -25,15 +25,17 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted = false;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromDestinationCode = 'JFK';
-  departureCity = 'New York';
-  departureAirportCountry = 'JFK, USA';
+  fromSearch = airports['JFK'];
+  fromDestinationCode = this.fromSearch.code;
+  departureCity = this.fromSearch.city;
+  departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
   fromAirport = airports[this.fromDestinationCode];
   countryCode: string;
 
-  toDestinationCode = 'PUJ';
-  arrivalCity = 'Punta Cana';
-  arrivalAirportCountry = 'PUJ, Dominican Republic';
+  toSearch=airports['PUJ'];
+  toDestinationCode = this.toSearch.code;
+  arrivalCity = this.toSearch.city;
+  arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
   toAirport = airports[this.toDestinationCode];
 
   locale = {
