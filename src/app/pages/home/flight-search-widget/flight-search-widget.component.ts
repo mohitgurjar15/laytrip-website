@@ -6,7 +6,7 @@ import { airports } from '../../flight/airports';
 import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -48,7 +48,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
   returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
-
+  
   totalPerson: number = 1;
 
   searchFlightInfo =
@@ -71,6 +71,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
+    private route: ActivatedRoute,
     private renderer: Renderer2
   ) {
 
@@ -87,12 +88,35 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
-
   }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
+
+    this.route.queryParams.subscribe(params => {
+      console.log(params)
+      if(params.length > 0){      
+          this.fromSearch = airports[params['departure']];
+          this.fromDestinationCode = this.fromSearch.code;
+          this.departureCity = this.fromSearch.city;
+          this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
+          this.fromAirport = airports[this.fromDestinationCode];
+
+          this.toSearch = airports[params['arrival']];
+          this.toDestinationCode = this.toSearch.code;
+          this.arrivalCity = this.toSearch.city;
+          this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
+          this.toAirport = airports[this.toDestinationCode];
+          this.toggleOnewayRoundTrip(params['trip']);
+          this.searchFlightInfo.class = params['class'];
+          this.departureDate = new Date(params['departure_date'])
+          this.returnDate = new Date(params['arrival_date'])
+          this.rangeDates = [this.departureDate, this.returnDate];
+      }
+    });
+
+
   }
 
 
@@ -126,9 +150,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeEconomyInfo(event){
-    console.log(event)
     this.searchFlightInfo.class = event;
-    console.log( this.searchFlightInfo.class )
   }
 
   searchFlights() {
