@@ -37,12 +37,12 @@ export class VacationSearchWidgetComponent implements OnInit {
     child:'',
   };
   defaultCity:'Barcelona';
-  fromDestinationTitle:'Wonderful Apartment in Barcelona (4 guests)';
+  fromDestinationTitle:'Barcelona,Spain';
   fromDestinationInfo:any = {
-    id: 10515,
+    id: 19492,
     country: 'Spain',
     city: 'Barcelona',
-    display_name: 'Wonderful Apartment in Barcelona (4 guests)',
+    display_name: 'Barcelona,Spain',
     type: 'city',
   };
   totalPerson: number = 2;
