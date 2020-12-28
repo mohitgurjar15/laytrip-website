@@ -53,6 +53,15 @@ select {
 		outline: none;
 	}
 }
+.tab_search_area{
+    input{
+        &.p-inputtext{
+			&:focus{
+				box-shadow: none !important;
+			}
+        } 
+	}
+}
 
 //<!-- Start Coming Soon page css -->
 .coming_soon {
