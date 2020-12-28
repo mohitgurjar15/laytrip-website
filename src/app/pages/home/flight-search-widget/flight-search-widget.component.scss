@@ -44,6 +44,19 @@
 a:hover {
     cursor: pointer;
 }
+.tab_search_area{
+    ::ng-deep .laytrip-cal-view{
+        padding: 0;
+        td{
+            padding: 0.1rem !important;
+            span{
+                width: 2rem;
+                height: 2rem;
+                font-size: 12px;
+            }
+        }
+    }
+}
 
 .home_banner {
     .banner_inner {

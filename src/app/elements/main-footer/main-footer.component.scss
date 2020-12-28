@@ -13,3 +13,40 @@
 .block_share{
     bottom: 100px;
 }
+.footer_cta_dropdown{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    @include mobile-view{
+        justify-content: center;
+    }
+    .cta_drop_wrp{
+        font-size: 14px;
+        color: $text-grey;
+        font-weight: 400;
+        margin-right: 30px;
+        ul{
+            &.dropdown-menu{
+                padding: 0;
+                li{
+                    a{
+                        color:  $background-blue;
+                        margin: 0;
+                        padding: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+.menu_grid{
+    .footer_down_links{
+        li{
+            width: auto !important;
+            padding: 0 0 10px;
+            display: inline-block;
+            margin: 0 5px 0 0;
+        }
+    }
+}
