@@ -2,15 +2,15 @@
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('onway')">
-                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg" alt="Oneway Icon" />
+                <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg" alt="Oneway Icon" /> -->
                 <span>{{'oneway' | translate}}</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
-                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg" alt="Return Icon" />
+                <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg" alt="Return Icon" /> -->
                 <span>{{'round_trip' | translate}}</span>
             </a>
         </li>

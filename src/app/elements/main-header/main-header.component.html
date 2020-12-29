@@ -12,7 +12,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
-                        <ul class="navbar-nav nav_left" *ngIf="countryCode!=='DR'">
+                        <!-- <ul class="navbar-nav nav_left" *ngIf="countryCode!=='DR'">
                             <li class="nav-item">
                                 <a class="nav-link hover-link" [routerLink]="['/partial-payment']">{{'installment_payment' | translate}}</a>
                             </li>
@@ -23,7 +23,7 @@
                                     <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}}</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> -->
                         <ul class="navbar-nav ml-auto nav_right" [ngClass]="{'dr_menu':countryCode==='DR'}">
 
                             <!-- <li class="nav-item cus_pad">
