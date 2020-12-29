@@ -99,10 +99,12 @@ export class PaymentModeComponent implements OnInit {
         if(this.instalments.instalment_available==true){
           if(type1!=null && type1=='down-payment'){
             this.downPayments=this.instalments.down_payment;
+            this.redeemableLayCredit.emit(this.sellingPrice);
           }
 
           if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
-            this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
+            //Below line commented for temporary reason
+            //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
           }
 
           if(this.instalments.instalment_date[1].instalment_amount<5){
@@ -169,8 +171,8 @@ export class PaymentModeComponent implements OnInit {
             this.defaultDownPayments.weekly = res.weekly_down_payment;
             this.defaultDownPayments.biweekly = res.bi_weekly_down_payment;
             this.defaultDownPayments.monthly = res.monthly_down_payment;
-            console.log("this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]",this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex])
-            this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
+            //Below line commented for temporary reason
+            //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
           }
         }
       },(err)=>{
@@ -231,7 +233,8 @@ export class PaymentModeComponent implements OnInit {
     this.selectedDownPaymentIndex=index;
     //this.instalmentRequest.down_payment= this.downPayments[index];
     this.instalmentRequest.selected_down_payment= this.selectedDownPaymentIndex;
-    this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);
+    //Below line commented for temporary reason
+    //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);
     this.calculateInstalment();
     this.getAllInstalment();
   }

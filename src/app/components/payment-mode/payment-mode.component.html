@@ -13,9 +13,9 @@
       
       <br><br>
       <h6>Installment Payment Options</h6>
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='weekly'}" (click)="togglePaymentFrequency('weekly')">Weeky ${{weeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='biweekly'}" (click)="togglePaymentFrequency('biweekly')">Biweeky${{biWeeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='monthly'}" (click)="togglePaymentFrequency('monthly')">Monthly ${{montlyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='weekly'}" (click)="togglePaymentFrequency('weekly')"     [disabled]="weeklyInstalment < 5" >Weeky ${{weeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='biweekly'}" (click)="togglePaymentFrequency('biweekly')" [disabled]="biWeeklyInstalment < 5">Biweeky${{biWeeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='monthly'}" (click)="togglePaymentFrequency('monthly')"   [disabled]="montlyInstalment < 5">Monthly ${{montlyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
     </div>
       
     <br><br><br><br>

@@ -13,11 +13,12 @@ var environment_1 = require("../../../../environments/environment");
 var airports_1 = require("../../flight/airports");
 var moment = require("moment");
 var FlightSearchWidgetComponent = /** @class */ (function () {
-    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, renderer) {
+    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
+        this.route = route;
         this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
@@ -25,13 +26,15 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.isRoundTrip = false;
         this.flightSearchFormSubmitted = false;
         // DATE OF FROM_DESTINATION & TO_DESTINATION
-        this.fromDestinationCode = 'JFK';
-        this.departureCity = 'New York';
-        this.departureAirportCountry = 'JFK, USA';
+        this.fromSearch = airports_1.airports['JFK'];
+        this.fromDestinationCode = this.fromSearch.code;
+        this.departureCity = this.fromSearch.city;
+        this.departureAirportCountry = this.fromSearch.code + ", " + this.fromSearch.country;
         this.fromAirport = airports_1.airports[this.fromDestinationCode];
-        this.toDestinationCode = 'PUJ';
-        this.arrivalCity = 'Punta Cana';
-        this.arrivalAirportCountry = 'PUJ, Dominican Republic';
+        this.toSearch = airports_1.airports['PUJ'];
+        this.toDestinationCode = this.toSearch.code;
+        this.arrivalCity = this.toSearch.city;
+        this.arrivalAirportCountry = this.toSearch.code + ", " + this.toSearch.country;
         this.toAirport = airports_1.airports[this.toDestinationCode];
         this.locale = {
             format: 'MM/DD/YYYY',
@@ -46,7 +49,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             arrival: this.toDestinationCode,
             departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
             arrival_date: '',
-            "class": '',
+            "class": 'Economy',
             adult: 1,
             child: null,
             infant: null
@@ -66,8 +69,28 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.rangeDates = [this.departureDate, this.returnDate];
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
+        var _this = this;
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
+        this.route.queryParams.subscribe(function (params) {
+            if (Object.keys(params).length > 0) {
+                _this.fromSearch = airports_1.airports[params['departure']];
+                _this.fromDestinationCode = _this.fromSearch.code;
+                _this.departureCity = _this.fromSearch.city;
+                _this.departureAirportCountry = _this.fromSearch.code + ", " + _this.fromSearch.country;
+                _this.fromAirport = airports_1.airports[_this.fromDestinationCode];
+                _this.toSearch = airports_1.airports[params['arrival']];
+                _this.toDestinationCode = _this.toSearch.code;
+                _this.arrivalCity = _this.toSearch.city;
+                _this.arrivalAirportCountry = _this.toSearch.code + ", " + _this.toSearch.country;
+                _this.toAirport = airports_1.airports[_this.toDestinationCode];
+                _this.toggleOnewayRoundTrip(params['trip']);
+                _this.searchFlightInfo["class"] = params['class'];
+                _this.departureDate = new Date(params['departure_date']);
+                _this.returnDate = new Date(params['arrival_date']);
+                _this.rangeDates = [_this.departureDate, _this.returnDate];
+            }
+        });
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
         if (event && event.key && event.key === 'fromSearch') {
@@ -97,9 +120,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchedValue.push({ key: 'travellers', value: event });
     };
     FlightSearchWidgetComponent.prototype.changeEconomyInfo = function (event) {
-        console.log(event);
         this.searchFlightInfo["class"] = event;
-        console.log(this.searchFlightInfo["class"]);
     };
     FlightSearchWidgetComponent.prototype.searchFlights = function () {
         this.flightSearchFormSubmitted = true;
