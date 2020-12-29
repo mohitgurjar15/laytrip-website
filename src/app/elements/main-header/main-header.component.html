@@ -7,19 +7,26 @@
                     <a class="navbar-brand" [routerLink]="['/']">
                         <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo" />
                     </a>
-                    <img *ngIf="countryCode=='DR'" class="dr_im" src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0" alt="Dominican Republic">
+                    <img *ngIf="countryCode=='DR'" class="dr_im"
+                        src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0"
+                        alt="Dominican Republic">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
                         <ul class="navbar-nav nav_left" *ngIf="countryCode!=='DR'">
                             <li class="nav-item">
-                                <a class="nav-link hover-link" [routerLink]="['/partial-payment']">{{'installment_payment' | translate}}</a>
+                                <a class="nav-link hover-link"
+                                    [routerLink]="['/partial-payment']">{{'installment_payment' | translate}}</a>
                             </li>
                             <li class="nav-item" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6)">
-                                <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}" [routerLink]="['/account/lay-credit-points']">
-                                    <img *ngIf="countryCode!=='DR'" class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
-                                    <img *ngIf="countryCode!=='DR'" class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
+                                <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}"
+                                    [routerLink]="['/account/lay-credit-points']">
+                                    <img *ngIf="countryCode!=='DR'" class="default-icon"
+                                        src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
+                                    <img *ngIf="countryCode!=='DR'" class="active-icon"
+                                        src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg"
+                                        alt="Credits Icon">
                                     <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}}</span>
                                 </a>
                             </li>
@@ -40,12 +47,18 @@
                             </li> -->
 
                             <li class="nav-item" [ngClass]="{'dr_pay':countryCode==='DR'}" *ngIf="countryCode==='DR'">
-                                <a class="nav-link hover-link" [routerLink]="['/partial-payment']">{{'installment_payment' | translate}}</a>
+                                <a class="nav-link hover-link"
+                                    [routerLink]="['/partial-payment']">{{'installment_payment' | translate}}</a>
                             </li>
-                            <li class="nav-item" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode==='DR'">
-                                <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}" [routerLink]="['/account/lay-credit-points']">
-                                    <img *ngIf="countryCode!=='DR'" class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
-                                    <img *ngIf="countryCode!=='DR'" class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
+                            <li class="nav-item"
+                                *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode==='DR'">
+                                <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}"
+                                    [routerLink]="['/account/lay-credit-points']">
+                                    <img *ngIf="countryCode!=='DR'" class="default-icon"
+                                        src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
+                                    <img *ngIf="countryCode!=='DR'" class="active-icon"
+                                        src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg"
+                                        alt="Credits Icon">
                                     <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}}</span>
                                 </a>
                             </li>
@@ -72,18 +85,25 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li *ngFor="let langunage of langunages"><a (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                        <li *ngFor="let langunage of langunages"><a
+                                                (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <a class="nav-link" [routerLink]="['/account/search-booking']"><i class="fa fa-search" aria-hidden="true"></i>
+                                <a class="nav-link" [routerLink]="['/account/search-booking']"><i class="fa fa-search"
+                                        aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
                                 <!-- <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">{{'sign_in' | translate}}</a> -->
-                                <a class="nav-link login_btn_text hover-link" id="login_btn"  data-toggle="modal" data-target="#sign_in_modal"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"><defs></defs><path class="a" d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0"/></svg>
+                                <a class="nav-link login_btn_text hover-link" id="login_btn" data-toggle="modal"
+                                    data-target="#sign_in_modal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+                                        <defs></defs>
+                                        <path class="a"
+                                            d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
+                                    </svg>
                                     {{'sign_in' | translate}}
                                 </a>
                             </li>
@@ -95,8 +115,17 @@
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a [routerLink]="['/account/bookings']">{{'my_account_header' | translate}}</a></li>
-                                        <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' | translate}}</a></li>
+                                        <li
+                                            *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
+                                            <a class="nav-link hover-link"
+                                                [routerLink]="['/account/lay-credit-points']">
+                                                <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}} Points</span>
+                                            </a>
+                                        </li>
+                                        <li><a [routerLink]="['/account/bookings']">{{'my_account_header' |
+                                                translate}}</a></li>
+                                        <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' |
+                                                translate}}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -106,8 +135,13 @@
                 </nav>
             </div>
             <div class="show_resposive">
-                <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" data-toggle="modal" data-target="#sign_in_modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"><defs></defs><path class="a" d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0"/></svg>
+                <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" data-toggle="modal"
+                    data-target="#sign_in_modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+                        <defs></defs>
+                        <path class="a"
+                            d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
+                    </svg>
                     Sign In
                 </a>
                 <div class="dropdown account_ddown" *ngIf="isLoggedIn && userDetails.roleId != 7">
@@ -116,7 +150,8 @@
                         <span>{{userDetails.firstName}}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a [routerLink]="['/account']" class="hover-link">{{'my_account_header' | translate}}</a></li>
+                        <li><a [routerLink]="['/account']" class="hover-link">{{'my_account_header' | translate}}</a>
+                        </li>
                         <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' | translate}}</a></li>
                     </ul>
                 </div>
