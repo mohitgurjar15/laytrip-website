@@ -2917,7 +2917,7 @@ ngb-datepicker {
         justify-content: space-between;
         margin-bottom: 18px;
         .block_result_found {
-            padding: 20px;
+            
             background: $background-white;
             border: 1px solid $box-border-color;
             border-radius: 8px;
@@ -2925,7 +2925,8 @@ ngb-datepicker {
             text-align: center;
             position: relative;
             display: flex;
-            justify-content: space-around;
+            padding: 10px 20px;
+            justify-content: flex-start;
 
             // &:after {
             //     width: 0;
@@ -2965,17 +2966,20 @@ ngb-datepicker {
                 font-size: 20px;
                 font-weight: 600;
                 color: $text-black;
+                margin-left: 10px;
+                margin-bottom: 3px;
             }
         }
 
         button {
             background-color: $background-white;
-            padding: 0 25px;
             border: 1px solid $box-border-color;
-            border-radius: 8px;
             color: $text-grey;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-size: 14px;
-            height: 68px;
+            height: 55px;
+            margin-left: 10px;
             img {
                 margin-right: 5px;
             }
