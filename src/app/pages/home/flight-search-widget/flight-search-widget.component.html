@@ -47,7 +47,7 @@
                         <li class="grid_box first">
                             <div class="flight_form" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
                                 <div class="search_area">
-                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'" [label]="'from' | translate" [placeHolder]=departureCity [defaultSelected]=departureAirportCountry [tabIndex]=1 [airport]=fromAirport [defaultCity]=departureCity
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'" [label]="'from' | translate" [placeHolder]=fromSearch.city [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch [defaultCity]=fromSearch.city
                                         (changeValue)="destinationChangedValue($event)">
                                     </app-search-airport>
                                 </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="flight_to" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
                                 <div class="search_area">
-                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'" [label]="'to' | translate" [placeHolder]=arrivalCity [defaultSelected]=arrivalAirportCountry [tabIndex]=2 [airport]=toAirport [defaultCity]=arrivalCity (changeValue)="destinationChangedValue($event)">
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'" [label]="'to' | translate" [placeHolder]=toSearch.city [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]=toSearch.city (changeValue)="destinationChangedValue($event)">
                                     </app-search-airport>
                                 </div>
                             </div>

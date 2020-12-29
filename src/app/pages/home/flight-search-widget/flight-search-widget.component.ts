@@ -26,17 +26,17 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightSearchFormSubmitted = false;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromSearch = airports['JFK'];
-  fromDestinationCode = this.fromSearch.code;
-  departureCity = this.fromSearch.city;
-  departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
-  fromAirport = airports[this.fromDestinationCode];
+  //fromDestinationCode = this.fromSearch.code;
+  //departureCity = this.fromSearch.city;
+  //departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
+  //fromAirport = airports[this.fromDestinationCode];
   countryCode: string;
 
   toSearch=airports['PUJ'];
-  toDestinationCode = this.toSearch.code;
-  arrivalCity = this.toSearch.city;
-  arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
-  toAirport = airports[this.toDestinationCode];
+  //toDestinationCode = this.toSearch.code;
+  //arrivalCity = this.toSearch.city;
+  //arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
+  //toAirport = airports[this.toDestinationCode];
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -54,8 +54,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   searchFlightInfo =
     {
       trip: 'oneway',
-      departure: this.fromDestinationCode,
-      arrival: this.toDestinationCode,
+      departure: this.fromSearch.code,
+      arrival: this.toSearch.code,
       departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
       arrival_date: '',
       class: 'Economy',
@@ -75,8 +75,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     private renderer: Renderer2
   ) {
 
-    this.fromAirport['display_name'] = `${this.fromAirport.city},${this.fromAirport.country},(${this.fromAirport.code}),${this.fromAirport.name}`;
-    this.toAirport['display_name'] = `${this.toAirport.city},${this.toAirport.country},(${this.toAirport.code}),${this.toAirport.name}`;
+    this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
+    this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
       toDestination: ['', [Validators.required]],
@@ -97,16 +97,16 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
        if(Object.keys(params).length > 0){      
           this.fromSearch = airports[params['departure']];
-          this.fromDestinationCode = this.fromSearch.code;
-          this.departureCity = this.fromSearch.city;
-          this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
-          this.fromAirport = airports[this.fromDestinationCode];
+          //this.fromDestinationCode = this.fromSearch.code;
+          //this.departureCity = this.fromSearch.city;
+          //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
+          //this.fromAirport = airports[this.fromDestinationCode];
 
           this.toSearch = airports[params['arrival']];
-          this.toDestinationCode = this.toSearch.code;
-          this.arrivalCity = this.toSearch.city;
-          this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
-          this.toAirport = airports[this.toDestinationCode];
+          //this.toDestinationCode = this.toSearch.code;
+          //this.arrivalCity = this.toSearch.city;
+          //this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
+          //this.toAirport = airports[this.toDestinationCode];
           this.toggleOnewayRoundTrip(params['trip']);
           
           this.searchFlightInfo.class = params['class'];
@@ -124,18 +124,19 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {
-      this.fromDestinationCode = event.value.code;
-      this.departureCity = event.value.city;
-      this.departureAirportCountry = `${event.value.code}, ${event.value.country}`;
-      this.searchedValue.push({ key: 'fromSearch', value: event.value });
+      //this.fromDestinationCode = event.value.code;
+      this.fromSearch = event.value;
+      //this.departureCity = this.fromSearch.city;
+      //this.departureAirportCountry = `${this.fromSearch.code}, ${this.fromSearch.country}`;
+      this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
     } else if (event && event.key && event.key === 'toSearch') {
-      this.toDestinationCode = event.value.code;
-      this.arrivalCity = event.value.city;
-      this.arrivalAirportCountry = `${event.value.code}, ${event.value.country}`;
-      this.searchedValue.push({ key: 'toSearch', value: event.value });
+      this.toSearch = event.value;
+      //this.arrivalCity = this.toSearch.city;
+      //this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
+      this.searchedValue.push({ key: 'toSearch', value: this.toSearch });
     }
-    this.searchFlightInfo.departure = this.fromDestinationCode;
-    this.searchFlightInfo.arrival = this.toDestinationCode;
+    this.searchFlightInfo.departure = this.fromSearch.code;
+    this.searchFlightInfo.arrival = this.toSearch.code;
   }
 
   getDateWithFormat(date) {
@@ -229,20 +230,21 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   swapAirport() {
 
-    let temp = this.fromDestinationCode;
-    this.fromDestinationCode = this.toDestinationCode;
-    this.toDestinationCode = temp;
+    let temp = this.searchFlightInfo.departure;
 
     this.searchFlightInfo.departure = this.searchFlightInfo.arrival;
     this.searchFlightInfo.arrival = temp;
 
-    let tempCity = this.departureCity;
+    /* let tempCity = this.departureCity;
     this.departureCity = this.arrivalCity;
-    this.arrivalCity = tempCity;
+    this.arrivalCity = tempCity; */
 
-    let tempAirportCountry = this.departureAirportCountry;
-    this.departureAirportCountry = this.arrivalAirportCountry;
-    this.arrivalAirportCountry = tempAirportCountry;
+
+    console.log("Before:::",this.fromSearch,this.toSearch)
+    let tempAirport = this.fromSearch;
+    this.fromSearch = this.toSearch;
+    this.toSearch = tempAirport;
+    console.log("After:::",this.fromSearch,this.toSearch)
   }
 
   returnDateUpdate(date) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked, SimpleChanges } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
@@ -20,9 +20,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
-  @Input() defaultCity: string;
+  @Input() defaultCity: any;
   @Input() airport;
-  defaultSelectedTemp;
   airportDefaultDestValue;
   departureAirport;
 
@@ -39,8 +38,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   loading = false;
 
   ngOnInit() {
-    this.defaultSelectedTemp = this.defaultSelected;
     this.setDefaultAirport();
+    //this.data.push(this.airport)
     this.data[0] = this.airport;
   }
 
@@ -82,10 +81,8 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   selectEvent(event, index) {
     if (!event) {
       this.placeHolder = this.placeHolder;
-      this.defaultSelected = this.defaultSelected;
     }
     //this.selectedAirport = event;
-    this.defaultSelected = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
     } else if (event && index && index === 'toSearch') {
@@ -95,7 +92,6 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   onRemove(event) {
     this.selectedAirport = {};
-    this.defaultSelected = this.defaultSelectedTemp;
   }
 
   setDefaultAirport() {
@@ -114,4 +110,13 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
     }
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("this.defaultCity",this.defaultCity)
+    console.log("changes",changes)
+    if (changes['airport']) {
+      //this.defaultCity = changes['airport'].currentValue.city;
+    }
+  }
+  
 }
