@@ -67,14 +67,14 @@
                         </li>
                         <li class="grid_box secound">
                             <div class="date_form">
-                                <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                     <!-- <label>{{'departure' | translate}}</label> -->
-                                    <p-calendar *ngIf="!isRoundTrip" dateFormat="d M yy" inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true">
+                                    <p-calendar *ngIf="!isRoundTrip"  dateFormat="d M yy" inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true" panelStyleClass="calender-responsive-view laytrip-cal-view">
                                     </p-calendar>
 
                                     <p-calendar *ngIf="isRoundTrip" dateFormat="d M yy" #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate"
-                                        panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
+                                        panelStyleClass="calender-responsive-view laytrip-cal-view" [numberOfMonths]="2" (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
                                     </p-calendar>
                                     <!-- <div class="prev-next">
                                         <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>
