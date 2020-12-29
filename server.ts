@@ -17,6 +17,8 @@ const window = domino.createWindow(template);
 global['localStorage'] = localStorage;
 global['window'] = window;
 global['document'] = window.document;
+window.Object = Object;
+global['Event'] = null;
 
 
 // Faster server renders w/ Prod mode (dev mode never needed)
