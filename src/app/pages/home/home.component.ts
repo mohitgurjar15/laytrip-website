@@ -107,27 +107,27 @@ export class HomeComponent implements OnInit {
     document.getElementById('home_banner').style.width = '100%';
     document.getElementById('home_banner').style.paddingBottom = '50px';
     if (tabName === 'flight') {
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/banner1.svg) no-repeat";
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-bg.svg) no-repeat";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
-      if (document.getElementById('login_btn')) {
-        document.getElementById('login_btn').style.background = '#FC7E66';
-      }
+      // if (document.getElementById('login_btn')) {
+      //   document.getElementById('login_btn').style.background = '#FC7E66';
+      // }
     } else if (tabName === 'hotel') {
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
-      if (document.getElementById('login_btn')) {
-        document.getElementById('login_btn').style.background = '#FF00BC';
-      }
+      // if (document.getElementById('login_btn')) {
+      //   document.getElementById('login_btn').style.background = '#FF00BC';
+      // }
     }
     else if (tabName === 'home-rentals') {
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
-      if (document.getElementById('login_btn')) {
-        document.getElementById('login_btn').style.background = '#FF00BC';
-      }
+      // if (document.getElementById('login_btn')) {
+      //   document.getElementById('login_btn').style.background = '#FF00BC';
+      // }
     }
   }
 

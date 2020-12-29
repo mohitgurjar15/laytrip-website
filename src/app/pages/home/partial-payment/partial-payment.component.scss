@@ -6,11 +6,11 @@
 
 //<!-- Start Partial Payment Section css -->
 .partial_payment {
-	padding: 50px 0;
+	padding: 50px 0 0;
 	// background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/partial_payment_bg.webp) no-repeat;
 	// background-size: cover;
 	position: relative;
-	margin: 100px 0;
+	margin: 10px 0;
 
 	@include tab-view {
         padding: 15px 0;
