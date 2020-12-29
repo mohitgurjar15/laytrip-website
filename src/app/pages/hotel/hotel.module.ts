@@ -31,6 +31,7 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
+import { HomeModule } from '../home/home.module';
 
 
 @NgModule({
@@ -68,11 +69,13 @@ import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel
     }),
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
+    HomeModule
   ],
   exports: [
     HotelLoaderComponent,
     HotelPopupLoaderComponent,
     HotelNotFoundComponent,
+    HomeModule
   ],
   entryComponents: [HotelPolicyPopupComponent]
 })

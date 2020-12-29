@@ -1,4 +1,12 @@
-<app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getHotelSearchDataByModify($event)"></app-hotel-search-bar>
+<!-- <app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getHotelSearchDataByModify($event)"></app-hotel-search-bar> -->
+
+<div class="search_tab_listing_wrapper">
+  <div class="container">
+      <div class="searchbar_box_common">
+          <app-hotel-search-widget></app-hotel-search-widget>
+      </div>
+  </div>
+</div>
 
 <app-hotel-loader *ngIf="loading"></app-hotel-loader>
 <app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
