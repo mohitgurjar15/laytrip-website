@@ -20,10 +20,10 @@
                 <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails"></app-sort-flight>
                 <div class="filter_saidbar">
                     <div class="filter_by d-none d-lg-block">
-                        <div class="block_inn">
+                        <!-- <div class="block_inn">
                             <h4>{{'filter_by' | translate}}</h4>
                             <a class="anchor_link" (click)="resetFilter()">{{'reset' | translate}}</a>
-                        </div>
+                        </div> -->
                         <app-filter-flight [filterFlightDetails]="filterFlightDetails"
                             (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}></app-filter-flight>
                     </div>
