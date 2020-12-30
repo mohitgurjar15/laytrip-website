@@ -123,4 +123,25 @@ export class GenericService {
   checkUserValidate(token) {
     return this.http.get(environment.apiUrl + 'v1/auth/validate-user/' + token);
   }
+
+  addPushSubscriber(data){
+    console.log(data,data.endpoint,'here')
+
+    var notificationData = {
+      "end_point":data.endpoint,
+      "auth_keys":data.keys.auth,
+      "p256dh_keys":data.keys.p256dh,
+    };
+    return this.http.post(`${environment.apiUrl}v1/auth​/add-notification-token`, notificationData)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getAllInstalemnts(data){
+    return this.http.post(`${environment.apiUrl}v1/instalment/calculate-all-instalment`, data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }

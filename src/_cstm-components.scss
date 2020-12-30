@@ -8,7 +8,7 @@
             top: 100%;
             background: $background-white;
             left: 0;
-            width: 480px;
+            width: 100%;
             @media (max-width: 767px) {
                 width: 410px;
             }
@@ -70,6 +70,8 @@
                 .ng-value {
                     padding: 0 0 0 15px;
                     color: #000;
+                    font-size: 16px;
+                    font-weight: 600;
                     //overflow: unset !important;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -221,29 +223,6 @@
     background: $pink_clr;
 }
 
-// FLIGHT
-.home_banner
-    .banner_inner
-    .banner_tab
-    .tab-content
-    .flight_tab
-    .tab-content
-    .tab-pane
-    .flight_search
-    .flight-grid
-    .grid_box.secound
-    .search_area {
-    input {
-        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right
-            15px no-repeat !important;
-    }
-    @media (max-width: 575px) {
-        .calender-responsive-view {
-            right: 0 !important;
-            left: auto !important;
-        }
-    }
-}
 
 .modify_search {
     .flight_tab {
@@ -254,7 +233,7 @@
                         .search_area {
                             input {
                                 background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
-                                    center right 15px no-repeat !important;
+                                        center left 15px no-repeat !important;
                             }
                         }
                     }

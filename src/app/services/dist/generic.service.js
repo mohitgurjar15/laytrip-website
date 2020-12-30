@@ -88,6 +88,20 @@ var GenericService = /** @class */ (function () {
     GenericService.prototype.checkUserValidate = function (token) {
         return this.http.get(environment_1.environment.apiUrl + 'v1/auth/validate-user/' + token);
     };
+    GenericService.prototype.addPushSubscriber = function (data) {
+        console.log(data, data.endpoint, 'here');
+        var notificationData = {
+            "end_point": data.endpoint,
+            "auth_keys": data.keys.auth,
+            "p256dh_keys": data.keys.p256dh
+        };
+        return this.http.post(environment_1.environment.apiUrl + "v1/auth\u200B/add-notification-token", notificationData)
+            .pipe(operators_1.catchError(this.handleError));
+    };
+    GenericService.prototype.getAllInstalemnts = function (data) {
+        return this.http.post(environment_1.environment.apiUrl + "v1/instalment/calculate-all-instalment", data)
+            .pipe(operators_1.catchError(this.handleError));
+    };
     GenericService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

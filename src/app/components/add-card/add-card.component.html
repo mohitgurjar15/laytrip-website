@@ -57,7 +57,7 @@
                     <p-calendar inputId="basic" formControlName="expiry" [minDate]="expiryMinDate" dateFormat="mm/yy" view="month" tabindex="102" [readonlyInput]="true">
                     </p-calendar>
                     <div *ngIf="cardForm.controls.expiry.errors && cardForm.controls.expiry.touched">
-                        <p *ngIf="cardForm.controls.expiry.errors" class="error_text">{{'expiry_date_touched_validation' | translate}}
+                        <p *ngIf="cardForm.controls.expiry.errors" class="error_text">{{'card_expiry_date_touched_validation' | translate}}
                         </p>
                     </div>
                 </div>

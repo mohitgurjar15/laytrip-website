@@ -48,7 +48,7 @@
                     placeholder="MM/YYYY" tabindex="103" id="expiry_date"> -->
                 <p-calendar inputId="basic" [(ngModel)]="expiryDate" [ngModelOptions]="{standalone: true}" expiryMinDate [minDate]="expiryMinDate" dateFormat="mm/yy" view="month" (onSelect)=expiryDateUpdate($event) tabindex="103" [readonlyInput]="true">
                 </p-calendar>
-                <p *ngIf="!isValidExpiry" class="text-danger">Please enter expiry date.
+                <p *ngIf="!isValidExpiry" class="text-danger">{{'expiry_date_touched_validation' | translate}}
                 </p>
             </div>
         </div>

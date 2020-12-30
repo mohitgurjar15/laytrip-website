@@ -40,6 +40,14 @@ var add_points_component_1 = require("./add-points/add-points.component");
 var redeem_laycredit_loader_component_1 = require("./redeem-laycredit-loader/redeem-laycredit-loader.component");
 var toaster_component_1 = require("./toaster/toaster.component");
 var share_social_media_component_1 = require("./share-social-media/share-social-media.component");
+var rental_info_component_1 = require("./rental-shared-components/rental-info/rental-info.component");
+// HOTEL SHARED COMPONENTS
+var guest_info_component_1 = require("./hotel-shared-components/guest-info/guest-info.component");
+var search_hotel_component_1 = require("./hotel-shared-components/search-hotel/search-hotel.component");
+var core_2 = require("@ngx-translate/core");
+var vacation_search_component_1 = require("./rental-shared-components/vacation-search/vacation-search.component");
+var ngx_scrollbar_1 = require("ngx-scrollbar");
+var flight_class_component_1 = require("./flight-class/flight-class.component");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
@@ -67,7 +75,13 @@ var ComponentsModule = /** @class */ (function () {
                 add_points_component_1.AddPointsComponent,
                 redeem_laycredit_loader_component_1.RedeemLaycreditLoaderComponent,
                 toaster_component_1.ToasterComponent,
-                share_social_media_component_1.ShareSocialMediaComponent
+                share_social_media_component_1.ShareSocialMediaComponent,
+                // HOTEL SHARED COMPONENT
+                guest_info_component_1.GuestInfoComponent,
+                search_hotel_component_1.SearchHotelComponent,
+                rental_info_component_1.RentalInfoComponent,
+                vacation_search_component_1.VacationSearchComponent,
+                flight_class_component_1.FlightClassComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -81,6 +95,8 @@ var ComponentsModule = /** @class */ (function () {
                 calendar_1.CalendarModule,
                 ng_lottie_1.LottieAnimationViewModule.forRoot(),
                 angular2_text_mask_1.TextMaskModule,
+                core_2.TranslateModule,
+                ngx_scrollbar_1.NgScrollbarModule
             ],
             exports: [
                 search_airport_component_1.SearchAirportComponent,
@@ -103,7 +119,14 @@ var ComponentsModule = /** @class */ (function () {
                 add_points_component_1.AddPointsComponent,
                 redeem_laycredit_loader_component_1.RedeemLaycreditLoaderComponent,
                 toaster_component_1.ToasterComponent,
-                share_social_media_component_1.ShareSocialMediaComponent
+                share_social_media_component_1.ShareSocialMediaComponent,
+                guest_info_component_1.GuestInfoComponent,
+                search_hotel_component_1.SearchHotelComponent,
+                rental_info_component_1.RentalInfoComponent,
+                core_2.TranslateModule,
+                vacation_search_component_1.VacationSearchComponent,
+                ngx_scrollbar_1.NgScrollbarModule,
+                flight_class_component_1.FlightClassComponent
             ],
             providers: [common_1.DatePipe]
         })

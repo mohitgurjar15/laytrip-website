@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { GenericService } from './services/generic.service';
 import * as moment from 'moment';
+import { SwPush } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +12,42 @@ import * as moment from 'moment';
 })
 export class AppComponent {
   title = 'laytrip-website';
-  
+  readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
   constructor(
     private cookieService:CookieService,
-    private genericService:GenericService
+    private genericService:GenericService,
+    private swPush: SwPush,
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
   }
+
   ngOnInit(){
+    var token = localStorage.getItem('_lay_sess');
+    if(token){
+      this.subscribeToNotifications()
+    }
   }
+
+
+  subscribeToNotifications() {
+
+    this.swPush.requestSubscription({
+      serverPublicKey: this.VAPID_PUBLIC_KEY
+  })
+  .then(sub =>   this.genericService.addPushSubscriber(sub).subscribe()
+    )
+  .catch(err => console.error("Could not subscribe to notifications", err));
+    /* this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY
+    })
+    .then(sub =>
+      console.log(sub)
+        // this.genericService.addPushSubscriber(sub).subscribe()
+      )
+    .catch(err => console.error(this.VAPID_PUBLIC_KEY,"Could not subscribe to notifications", err)); */
+  }
+
   setUserOrigin(){
     
     let host = window.location.origin;

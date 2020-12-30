@@ -1,363 +1,54 @@
-<div class="block_detail" *ngIf="isShowSummary">
-    <div class="pay_deatil_info">
-        <div class="block_detail_left">
-            <ul>
-                <li>1st Installment <span>${{instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span></li>
-                <li>Default Installment (for {{this.remainingInstalment}} instalments) <span>${{secondInstalment | number : '1.2-2'}}</span></li>
-            </ul>
-        </div>
-        <!-- <div class="block_detail_right">
-            Booking available on <span>26th Nov, 2020</span>
-        </div> -->
+
+<div class="container" *ngIf="instalmentAvavible">
+    <h5>Choose How You Pay</h5>
+    <button type="button" class="btn btn-outline-secondary btn-lg" [ngClass]="{'btn-outline-success':paymentType=='instalment'}" [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-secondary btn-lg" [ngClass]="{'btn-outline-success':paymentType=='no-instalment'}" (click)="togglePaymentMode('no-instalment')">Full Payment</button>
+    <br><br>
+
+    <div *ngIf="paymentType=='instalment'">
+      <h6>Downpayment Options</h6>
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==0}" (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==1}" (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==2}" (click)="toggleDownPayment(2)">${{downPayments[2] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      
+      <br><br>
+      <h6>Installment Payment Options</h6>
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='weekly'}" (click)="togglePaymentFrequency('weekly')"     [disabled]="weeklyInstalment < 5" >Weeky ${{weeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='biweekly'}" (click)="togglePaymentFrequency('biweekly')" [disabled]="biWeeklyInstalment < 5">Biweeky${{biWeeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='monthly'}" (click)="togglePaymentFrequency('monthly')"   [disabled]="montlyInstalment < 5">Monthly ${{montlyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
     </div>
-</div>
-
-<ul class="block_installment_radio" *ngIf="instalmentAvavible && showFullPartialPayOption">
-    <li [ngClass]="{'disable_payment_option': disablePartialPayment === true, 'select': isInstalemtMode===true}">
-        <label class="custom_radio">{{'pay_with_installment' | translate}}  <span>Starts from ${{weeklyDefaultInstalment | number : '1.2-2'}}/{{'week' | translate}}</span>
-            <input type="radio" name="payment_mode" [disabled]="disablePartialPayment" [checked]="isInstalemtMode==true" (click)="triggerPayemntMode('instalment')">
-            <span class="checkmark"></span>
-        </label>
-    </li>
-    <li [ngClass]="{'select': isInstalemtMode==false}">
-        <label class="custom_radio">{{'full_payment' | translate}} <span [ngClass]="{'text-line': discountedPrice >0 }">Total ${{instalmentRequest.amount | number : '1.2-2'}}</span>
-            <span *ngIf="discountedPrice>0">{{'dicounted_price' | translate}} ${{discountedPrice | number : '1.2-2'}}</span>
-            <input type="radio" name="payment_mode" [checked]="isInstalemtMode==false" (click)="triggerPayemntMode('no-instalment')">
-            <span class="checkmark"></span>
-        </label>
-    </li>
-</ul>
-
-<div class="installment_main" *ngIf="isInstalemtMode && instalmentAvavible && isShowPartialPaymentDetails">
-    <div class="block_installment_option">
-        <div class="installment_top">
-
-            <ul class="custom_tab">
-                <li [ngClass]="{'active_tab': durationType === 'weekly'}">
-                    <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [checked]="durationType=='weekly'" (click)="changeDuration('weekly')">
-                        <span class="checkmark"></span>
-                        <div class="left">
-                            {{'weekly' | translate}} <span>({{weeklyDefaultInstalmentNo}} payments)</span>
-                        </div>
-                        <div class="right">
-                            ${{weeklySecondInstalmentTemp ? weeklySecondInstalmentTemp : weeklyDefaultInstalment | number : '1.2-2'}} <span>{{'per_installment' | translate}}</span>
-                        </div>
-                    </label>
-                </li>
-                <li [ngClass]="{'active_tab': durationType === 'biweekly', 'disable_payment_option': biWeeklySecondInstalmentTemp<=0 || convertToNumber(biWeeklyFirstInstalment) > partialPaymentSellingPrice}">
-                    <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [disabled]=" biWeeklySecondInstalmentTemp<=0 || convertToNumber(biWeeklyFirstInstalment) > partialPaymentSellingPrice" [checked]="durationType=='biweekly'" (click)="changeDuration('biweekly')">
-                        <span class="checkmark"></span>
-                        <div class="left">
-                            {{'biweekly' | translate}} <span>({{biWeeklyDefaultInstalmentNo}} payments)</span>
-                        </div>
-                        <div class="right" *ngIf="biWeeklySecondInstalmentTemp>=0">
-                            ${{biWeeklySecondInstalmentTemp ? biWeeklySecondInstalmentTemp : biWeeklyDefaultInstalment | number : '1.2-2'}} <span>{{'per_installment' | translate}}</span>
-                        </div>
-
-                        <div class="right" *ngIf="biWeeklySecondInstalmentTemp<0">
-                            $0 <span>{{'per_installment' | translate}}</span>
-                        </div>
-                    </label>
-                </li>
-                <li [ngClass]="{'active_tab': durationType === 'monthly','disable_payment_option': monthlySecondInstalmentTemp <=0 ||  convertToNumber(monthlyFirstInstalment) > partialPaymentSellingPrice}">
-                    <label class="custom_radio">
-                        <input type="radio" name="weekly-installment" [disabled]="monthlySecondInstalmentTemp <=0 || convertToNumber(monthlyFirstInstalment) > partialPaymentSellingPrice" [checked]="durationType=='monthly'" (click)="changeDuration('monthly')">
-                        <span class="checkmark"></span>
-                        <div class="left">
-                            {{'monthly' | translate}} <span>({{monthlyDefaultInstalmentNo}} payments)</span>
-                        </div>
-                        <div class="right" *ngIf="monthlySecondInstalmentTemp>=0">
-                            ${{monthlySecondInstalmentTemp ? monthlySecondInstalmentTemp : monthlyDefaultInstalment | number : '1.2-2'}} <span>{{'per_installment' | translate}}</span>
-                        </div>
-                        <div class="right" *ngIf="monthlySecondInstalmentTemp<0">
-                            $0 <span>{{'per_installment' | translate}}</span>
-                        </div>
-                    </label>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="" id="pay-weekly">
-                    <div class="installment_ingo">
-                        <div class="accordion" id="accordion">
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle custom_aerrow hover-link">
-                                        <div class="left_block">Modify your down payment</div>
-                                        <div class="right_block">
-                                            <div class="block_pay_instalment">
-                                                <!-- <div class="block_mins pay_block">
-                                                    <button (click)="setAdditionalAmount('minus')">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </button>
-                                                </div> -->
-                                                <div class="block_amount">
-                                                    <input autofocus type="number" min="{{defaultInstalment}}" [(ngModel)]="upFrontPayment" (change)="changeAdditionalAmount($event)" tabindex="1">
-                                                </div>
-                                                <!-- <div class="block_plus  pay_block">
-                                                    <button (click)="setAdditionalAmount('add')">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="icon" (click)="toggleaccordin()">
-                                            <i *ngIf="!showFirstAccrodian" class="fa fa-chevron-right" aria-hidden="true"></i>
-                                            <i *ngIf="showFirstAccrodian" class="fa fa-chevron-down" aria-hidden="true"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div id="collapseOne" class="accordion-body" *ngIf="showFirstAccrodian" [ngClass]="{'collapse show':showFirstAccrodian==true}">
-                                    <div class="accordion-inner">
-
-                                        <div class="block_inn">
-                                            <ul>
-                                                <li>
-                                                    {{'booking_total' | translate}}
-                                                    <span>${{instalmentRequest.amount | number : '1.2-2'}}</span>
-                                                </li>
-                                                <li *ngIf="laycreditpoints > 0">
-                                                    Laytrip point use
-                                                    <span class="point_use">${{laycreditpoints}}</span>
-                                                </li>
-                                                <li>
-                                                    {{'first_installment_amt' | translate}}
-                                                    <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="accordion-group" [ngClass]="{'active':secondAccordiain==true}">
-                                <div class="accordion-heading" (click)="toggleSecondAccordian()">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsetwo">
-                                        <div class="left_block">
-                                            {{'pay_remaining_amt' | translate}}
-                                            <span>For {{this.remainingInstalment}} instalments with ${{secondInstalment | number : '1.2-2'}} {{'per_installment' | translate}}</span>
-                                        </div>
-                                        <div class="right_block">
-                                            {{'total' | translate}} <span>${{instalmentRequest.amount | number : '1.2-2'}}</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div id="collapsetwo" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <div class="block_inn">
-                                            <ul>
-                                                <li>
-                                                    <label class="custom_radio">{{'amt' | translate}}
-                                                        <input type="checkbox" name="custom_method" [checked]='instalmentRequest.custom_amount!=null' value="amount" (change)="selectCustomMethod($event);">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <div class="block_pay_instalment">
-                                                        <!-- <div class="block_mins pay_block">
-                                                            <a href="javascript:void(0);" (click)="setCustomAmount('decrease')">
-                                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div> -->
-                                                        <div class="block_amount">
-                                                            <input type="text" [(ngModel)]="customAmount" (change)="changeCustomInstalmentAmount($event)" tabindex="2">
-                                                        </div>
-                                                        <!-- <div class="block_plus  pay_block">
-                                                            <a href="javascript:void(0);"  (click)="setCustomAmount('increase')">
-                                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div> -->
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <label class="custom_radio">{{'installment' | translate}}
-                                                        <input type="radio" name="custom_method" [checked]='instalmentRequest.custom_instalment_no!=null' value='instalment' (change)="selectCustomMethod($event);">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <div class="block_pay_instalment">
-                                                        <div class="block_mins pay_block">
-                                                            <a class="hover-link" (click)="setCustomInstalmentNo('decrease')">
-                                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                        <!-- <div class="block_amount">
-                                                            <input type="number" [(ngModel)]="customInstalment"  tabindex="3">
-                                                        </div> -->
-                                                        &nbsp; {{customInstalment}} &nbsp;
-                                                        <div class="block_plus  pay_block">
-                                                            <a class="hover-link" (click)="setCustomInstalmentNo('increase')">
-                                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                        <div class="left_block">Instalment calculation</div>
-                                        <div class="right_block"></div>
-                                    </a>
-                                </div>
-                                <div id="collapseThree" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <div class="block_inn">
-                                            <ul>
-                                                <li>
-                                                    1st Instalment
-                                                    <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
-                                                </li>
-                                                <li>
-                                                    Default Instalment (for {{this.remainingInstalment}} weeks)
-                                                    <span>${{defaultInstalment | number : '1.2-2' }}</span>
-                                                </li>
-                                                <li>
-                                                    Additional Amount
-                                                    <span>${{additionalAmount}}</span>
-                                                </li>
-                                                <li>
-                                                    Laytrip points
-                                                    <span class="point_use">-${{laycreditpoints}}</span>
-                                                </li>
-                                                <li class="last">
-                                                    Total you will pay
-                                                    <span>${{instalmentRequest.amount | number : '1.2-2'}}</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <div class="accordion-group" [ngClass]="{'active':showThirdAccrodian==true}">
-                                <div class="accordion-heading" (click)="toggleThirdAccordian()">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                        <div class="left_block">Instalment details</div>
-                                        <div class="right_block"></div>
-                                    </a>
-                                </div>
-                                <div id="collapseFour" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <div class="block_inn">
-                                            <ul class="instalment_detail">
-
-                                                <li *ngFor="let instalment of instalments.instalment_date; index as i">
-                                                    <div>
-                                                        {{i+1}} {{'installment' | translate}}
-                                                        <p> {{ commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}
-                                                            <!-- <span>Booking date</span> --></p>
-                                                    </div>
-                                                    <span>${{instalment.instalment_amount | number : '1.2-2'}}</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+      
+    <br><br><br><br>
+    <h6>Break Down</h6>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Total Price
+          <span class="badge badge-primary badge-pill">${{sellingPrice | number : '1.2-2'}}</span>
+        </li>
+        <li *ngIf="laycreditpoints>0" class="list-group-item d-flex justify-content-between align-items-center">
+          Applied points
+          <span class="badge badge-primary badge-pill">{{laycreditpoints | number : '1.2-2' }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Total Due
+          <span class="badge badge-primary badge-pill">${{remainingAmount | number : '1.2-2'}}</span>
+        </li>
+       
+        <li *ngIf="paymentType=='instalment'" class="list-group-item d-flex justify-content-between align-items-center">
+            As ${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}} Down and ${{instalments.instalment_date[1].instalment_amount | number : '1.2-2'}}/installment for {{instalments.instalment_date.length-1}} installments
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Installment list
+              </button>
+              <div class="dropdown-menu" *ngIf="instalments">
+                <ng-container *ngFor="let instalment of instalments.instalment_date">
+                  <a class="dropdown-item" href="#">Date: {{instalment.instalment_date}}=>{{instalment.instalment_amount | number : '1.2-2'}}</a>
+                </ng-container>
+              </div>
             </div>
+        </li>
 
-        </div>
-        <!-- <div class="block_installment_date" *ngIf="pridictionLoading">
-            <p class="fb_animation w-100 mb-2"></p>
-            <p class="fb_animation w-100 mb-0"></p>
-        </div>
-        <div class="block_installment_date" *ngIf="!pridictionLoading">
-            <p>We will perform your actual booking before <span>{{predictionDate}}</span>.</p>
-            <p>Enjoy Stress free travel experience with Laytrip.</p>
-        </div> -->
-    </div>
+    </ul>
+    
 </div>
 
-
-<!-- Face Book Loader Start -->
-<ul class="block_installment_radio" *ngIf="isInstalmentLoading">
-    <li style="flex-flow: column">
-        <p class="fb_animation w-100 mb-0"></p>
-        <p class="fb_animation w-100 mb-0"></p>
-    </li>
-    <li style="flex-flow: column">
-        <p class="fb_animation w-100 mb-0"></p>
-        <p class="fb_animation w-100 mb-0"></p>
-    </li>
-</ul>
-<div class="installment_main" *ngIf="isInstalmentLoading">
-    <div class="block_installment_option" id="installment_option_show">
-        <div class="installment_top">
-
-            <ul class="custom_tab">
-                <li class="active_tab">
-                    <p class="fb_animation w-100 mb-0"></p>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </li>
-                <li>
-                    <p class="fb_animation w-100 mb-0"></p>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </li>
-                <li>
-                    <p class="fb_animation w-100 mb-0"></p>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="" id="pay-weekly">
-                    <div class="installment_ingo">
-                        <div class="accordion" id="accordion">
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle custom_aerrow" href="javascript:void(0);">
-                                        <p class="fb_animation w-100 mb-0"></p>
-                                        <div class="icon" onclick="toggleaccordin();">
-                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsetwo">
-                                        <p class="fb_animation w-100 mb-0"></p>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                        <p class="fb_animation w-100 mb-0"></p>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                        <p class="fb_animation w-100 mb-0"></p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="block_installment_date">
-            <p class="fb_animation w-100 mb-2"></p>
-            <p class="fb_animation w-100 mb-0"></p>
-        </div>
-    </div>
-</div>
-<!-- Face Book End -->

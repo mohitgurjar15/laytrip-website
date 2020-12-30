@@ -2,9 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
-import { FlightService } from '../../services/flight.service';
-import { error } from 'protractor';
-declare var $: any; 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-payment-mode',
@@ -32,566 +30,96 @@ export class PaymentModeComponent implements OnInit {
   constructor(
     private genericService:GenericService,
     private commonFunction:CommonFunction,
-    private flightService:FlightService
+    private toastr: ToastrService
   ) {
-    this.getPredictionDate();
    }
   
   @Input() flightSummary;
   @Input() isShowSummary:boolean;
   @Input() showFullPartialPayOption:boolean=true;
   @Input() isShowPartialPaymentDetails:boolean=true;
-  sellingPrice:number;
-  isInstalemtMode:boolean=true;
-  disablePartialPayment:boolean=false;
-  predictionDate:string='';
-  pridictionLoading:boolean=false;
-  partialPaymentSellingPrice:number=0;
-  isInstalmentLoading:boolean=false;
+  
   
   instalmentRequest={
     instalment_type: "weekly",
     checkin_date: '',
     booking_date: moment().format("YYYY-MM-DD"),
     amount: 0,
-    additional_amount: null,
-    custom_instalment_no: null,
-    custom_amount: null
+    additional_amount: 0,
+    selected_down_payment:0
   }
   instalments;
-  durationType:string='weekly'; // [weekly,biweekly,monthly]
+  allInstalments;
+  instalmentType:string='weekly'; // [weekly,biweekly,monthly]
+  paymentType:string='instalment';
   additionalAmount:number=0;
   remainingAmount:number;
   remainingInstalment:number;
   firstInstalment:number;
-  customAmount:number;
-  customInstalment:number;
-  defaultInstalment:number;
   defaultInstalmentNo:number;
-  customMethod:string;
-  secondInstalment:number;
   totalLaycreditPoints=0;
   instalmentAvavible:boolean=false;
-  showFirstAccrodian:boolean=false;
-  weeklyDefaultInstalmentNo:number=0;
-  weeklyDefaultInstalment:number=0;
-  weeklyFirsttInstalment:number=0;
-  biWeeklyDefaultInstalmentNo:number=0;
-  biWeeklyDefaultInstalment:number=0;
-  biWeeklyFirstInstalment:number=0;
-  monthlyDefaultInstalmentNo:number=0;
-  monthlyDefaultInstalment:number=0;
-  monthlyFirstInstalment:number=0;
-  upFrontPayment:number=0;
   payNowPrice:number=0;
-  discountedPrice:number;
   totalPrice;
-  secondAccordiain:boolean=false;
-  showThirdAccrodian:boolean=false;
-  weeklySecondInstalmentTemp:number=0;
-  biWeeklySecondInstalmentTemp:number=0;
-  monthlySecondInstalmentTemp:number=0;
+  weeklyInstalment:number=0;
+  biWeeklyInstalment:number=0;
+  montlyInstalment:number=0;
+  downPayments=[];
+  defaultDownPayments={
+    weekly : [],
+    biweekly : [],
+    monthly : []
+  }
+  selectedDownPaymentIndex:number=0;
+  sellingPrice:number;
+  minimumPriceValidationError:string='Your installment price is less then $5, Partial payment option is not available for this Offer.';
+  isBelowMinimumInstallment:boolean=false;
 
   ngOnInit(){
-    
-    //console.log("laycreditpoints",this.laycreditpoints)
-    this.instalmentRequest.amount= this.priceData[0].selling_price;
-    this.partialPaymentSellingPrice= this.priceData[0].selling_price;
 
     this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
-    this.getInstalemntsBiweekly('biweekly');
-    this.getInstalemntsMonthly('monthly');
-    this.getInstalemntsWeekly('weekly');
-    if(Object.keys(this.customInstalmentData).length){
-      this.additionalAmount = this.customInstalmentData.additionalAmount;
-      this.durationType = this.customInstalmentData.instalmentType;
-      this.customAmount = this.customInstalmentData.customAmount;
-      this.customInstalment = this.customInstalmentData.customInstalment;
-      this.laycreditpoints = this.customInstalmentData.layCreditPoints;
-      if(this.customAmount!=null){
-        this.customMethod = 'amount';
-      }
-      else if(this.customInstalment!=null){
-        this.customMethod = 'instalment';
-      }
-      else{
-        this.customMethod='';
-      }
-      this.instalmentRequest.instalment_type = this.durationType;
-      this.instalmentRequest.custom_instalment_no=this.customInstalment;
-      this.instalmentRequest.custom_amount = this.customAmount;
-      this.instalmentRequest.additional_amount =Number(this.additionalAmount)+Number(this.laycreditpoints);
-      this.getInstalmentData.emit({ 
-        additionalAmount:this.additionalAmount, 
-        instalmentType:this.durationType, 
-        customAmount: this.instalmentRequest.custom_amount,
-        customInstalment : this.instalmentRequest.custom_instalment_no,
-        layCreditPoints : this.laycreditpoints,
-        partialPaymentAmount : this.secondInstalment,
-        payNowAmount:this.getPayNowAmount(),
-        firstInstalment:this.customInstalmentData.firstInstalment
-      })
-      setTimeout(()=>{this.getInstalemnts(this.durationType);},2000)
-      
+    if(this.instalmentRequest.checkin_date){
+
+      this.getTotalPrice();
+      this.getAllInstalment('set-default-down-payment');
+      this.calculateInstalment('down-payment');
     }
-    else{
-      
-      this.getInstalemnts('weekly');
-    }
-    
   }
 
-  toggleSecondAccordian(){
-    this.secondAccordiain= !this.secondAccordiain;
-  }
-
-  toggleaccordin(){
-    this.showFirstAccrodian = !this.showFirstAccrodian;
-  }
-
-  toggleThirdAccordian(){
-    this.showThirdAccrodian = !this.showThirdAccrodian;
-  }
-
-  /* changeAdditionalAmount(event){
-
-    this.additionalAmount = Number(event.target.value);
-
-    this.remainingAmount=this.remainingAmount-this.additionalAmount;
-    this.firstInstalment+=this.additionalAmount;
-    this.getInstalmentData.emit({ 
-      additionalAmount:this.additionalAmount , 
-      instalmentType:this.durationType, 
-      customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment
-    })
-    this.calculateInstalment();
-  } */
-  changeAdditionalAmount(event){
-
-    this.upFrontPayment = Number(event.target.value);
-    if(this.upFrontPayment<this.defaultInstalment){
-      this.upFrontPayment=this.defaultInstalment;
-    }
-
-    this.additionalAmount = this.upFrontPayment-this.defaultInstalment;
-    this.remainingAmount=this.remainingAmount-this.upFrontPayment;
-    this.firstInstalment=this.upFrontPayment;
-    this.getInstalmentData.emit({ 
-      additionalAmount:this.additionalAmount, 
-      instalmentType:this.durationType, 
-      customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment,
-      payNowAmount:this.getPayNowAmount(),
-      firstInstalment:this.firstInstalment
-    })
-
-    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.priceData[0].selling_price){
-      this.toggleFullPayment();
-    }
-    this.calculateInstalment();
-  }
-
-  changeCustomInstalmentAmount(event){
-    if(this.customMethod=='amount'){
-      this.customAmount = Number(event.target.value);
-      if(this.customAmount<this.secondInstalment){
-        
-      }
-
-      if(this.durationType=='weekly' && this.customAmount<this.weeklyDefaultInstalment){
-        this.customAmount = this.weeklyDefaultInstalment;
-      }
-      else if(this.durationType=='biweekly' && this.customAmount<this.biWeeklyDefaultInstalment){
-        
-        this.customAmount = this.biWeeklyDefaultInstalment;
-      }
-      else if(this.durationType=='monthly' && this.customAmount<this.monthlyDefaultInstalment){
-        this.customAmount = this.monthlyDefaultInstalment;
-      }
-
-      if(Number(this.firstInstalment)+this.customAmount > this.priceData[0].selling_price){
-        this.customAmount = this.priceData[0].selling_price - this.firstInstalment;
-      }
-    }
-
-    this.getInstalmentData.emit({ 
-      additionalAmount:this.additionalAmount , 
-      instalmentType:this.durationType, 
-      customAmount: this.customAmount,
-      customInstalment : null,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.customAmount,
-      payNowAmount:this.getPayNowAmount(),
-      firstInstalment:this.firstInstalment
-    })
-    this.calculateInstalment();
-  }
-
-  /**
-   * 
-   * @param type [weekly,biweekly,monthly]
-   */
-  getInstalemnts(type){
-
-    this.instalmentRequest.instalment_type=type;
-
-    this.isInstalmentLoading=true;
-    this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      this.instalments=res;
-      this.isInstalmentLoading=false;
-      if(this.instalments.instalment_available==true){
-
-        this.instalmentAvavible=true;
-        this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
-        this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
-        this.defaultInstalment  = this.instalments.instalment_date[0].instalment_amount;
-        this.upFrontPayment  = this.instalments.instalment_date[0].instalment_amount-this.laycreditpoints;
-        this.customAmount     = this.instalments.instalment_date[1].instalment_amount;
-        this.customInstalment = this.instalments.instalment_date.length;
-        this.defaultInstalmentNo = this.instalments.instalment_date.length;
-        this.remainingInstalment = this.instalments.instalment_date.length-1;
-        this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
-
-        this.defaultInstalment = this.defaultInstalment - Number(this.laycreditpoints)-(this.additionalAmount);
-        /* console.log(this.defaultInstalmentNo,"----",this.customInstalment)
-        if(this.customInstalment){
-          this.defaultInstalmentNo = this.defaultInstalmentNo - this.customInstalment;
-        } */
-        setTimeout(()=>{ this.triggerPayemntMode('instalment'); },2000);
-        this.getInstalmentData.emit({ 
-          additionalAmount:this.additionalAmount, 
-          instalmentType:this.durationType, 
-          customAmount: this.instalmentRequest.custom_amount,
-          customInstalment : this.instalmentRequest.custom_instalment_no,
-          layCreditPoints : this.laycreditpoints,
-          partialPaymentAmount : this.secondInstalment,
-          payNowAmount:this.getPayNowAmount(),
-          firstInstalment:this.firstInstalment
-        })
-        
-      }
-      else{
-        this.isInstalemtMode = false;
-        this.instalmentAvavible=false;
-        this.selectInstalmentMode.emit('no-instalment');
-        this.redeemableLayCredit.emit(this.priceData[0].selling_price)
-      }
-    },(err)=>{
-
-    })
-  }
-
-  getInstalemntsBiweekly(type){
-
-    this.instalmentRequest.instalment_type=type;
-
-    this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      
-      if(res.instalment_available==true){
-        this.biWeeklyDefaultInstalmentNo = res.instalment_date.length;
-        this.biWeeklyDefaultInstalment = res.instalment_date[1].instalment_amount;
-        this.biWeeklyFirstInstalment = res.instalment_date[0].instalment_amount;
-        this.biWeeklySecondInstalmentTemp = res.instalment_date[1].instalment_amount;
-      }
-      else{
-        this.instalmentAvavible=false;
-        this.selectInstalmentMode.emit('no-instalment');
-      }
-    },(err)=>{
-
-    })
-  }
-
-  getInstalemntsMonthly(type){
-
-    this.instalmentRequest.instalment_type=type;
-
-    this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      
-      if(res.instalment_available==true){
-        this.monthlyDefaultInstalmentNo = res.instalment_date.length;
-        this.monthlyDefaultInstalment = res.instalment_date[1].instalment_amount;
-        this.monthlyFirstInstalment = res.instalment_date[0].instalment_amount;
-        this.monthlySecondInstalmentTemp = res.instalment_date[1].instalment_amount;
-      }
-      else{
-        this.instalmentAvavible=false;
-        this.selectInstalmentMode.emit('no-instalment');
-      }
-    },(err)=>{
-
-    })
-  }
-  getInstalemntsWeekly(type){
-
-    this.instalmentRequest.instalment_type=type;
-    this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      
-      if(res.instalment_available==true){
-        this.weeklyDefaultInstalmentNo = res.instalment_date.length;
-        this.weeklyDefaultInstalment = res.instalment_date[1].instalment_amount;
-        this.weeklyFirsttInstalment = res.instalment_date[0].instalment_amount;
-        this.weeklySecondInstalmentTemp = res.instalment_date[1].instalment_amount;
-      }
-      else{
-        this.instalmentAvavible=false;
-        this.selectInstalmentMode.emit('no-instalment');
-      }
-    },(err)=>{
-
-    })
-  }
-
-  changeDuration(type){
-    this.durationType=type;
-    this.customMethod='';
-    //this.secondInstalmentTemp=0;
-    this.additionalAmount=0;
-    //this.laycreditpoints=0;
-    this.instalmentRequest.custom_amount=null;
-    this.instalmentRequest.custom_instalment_no=null;
-    this.instalmentRequest.additional_amount=Number(this.laycreditpoints);
-    
-    this.getInstalemnts(this.durationType);
-    this.getInstalmentData.emit({ 
-      additionalAmount:this.additionalAmount , 
-      instalmentType:this.durationType, 
-      customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment,
-      payNowAmount:this.getPayNowAmount(),
-      firstInstalment:this.firstInstalment
-    })
-
-    
-    this.getInstalemntsWeekly('weekly')
-    this.getInstalemntsBiweekly('biweekly')
-    this.getInstalemntsMonthly('monthly')
-  }
-
-  triggerPayemntMode(type){
-    if((Number(this.laycreditpoints) + Number(this.upFrontPayment))<=this.priceData[0].selling_price){
-      if( type=='instalment'){
-
-        this.isInstalemtMode = true;
-        this.getInstalmentData.emit({ 
-          additionalAmount:this.additionalAmount , 
-          instalmentType:this.durationType, 
-          customAmount: this.customAmount,
-          customInstalment : null,
-          layCreditPoints :this.laycreditpoints,
-          partialPaymentAmount : this.secondInstalment,
-          payNowAmount:this.getPayNowAmount(),
-          firstInstalment:this.firstInstalment
-        });
-        this.redeemableLayCredit.emit(this.priceData[0].selling_price-this.defaultInstalment)
-      }
-
-      if(type=='no-instalment'){
-
-        this.isInstalemtMode = false;
-       
-        this.getInstalmentData.emit({ 
-          additionalAmount:this.additionalAmount , 
-          instalmentType:'', 
-          customAmount: null,
-          customInstalment : null,
-          layCreditPoints :this.laycreditpoints,
-          partialPaymentAmount : this.instalments.instalment_date[1].instalment_amount,
-          payNowAmount:this.getPayNowAmount(),
-          firstInstalment:this.firstInstalment
-        })
-        this.redeemableLayCredit.emit(this.getTotalPrice())
-      }
-      this.selectInstalmentMode.emit(type)
-    } 
-    else{
-      this.isInstalemtMode = false;
-    }
-
-  }
-
-
-  /**
-   * 
-   * @param type [add,minus]
-   */
-  setAdditionalAmount(type){
-    if(type=='add'){
-      this.additionalAmount+=1;
-      this.remainingAmount=this.remainingAmount-1;
-      this.firstInstalment+=1;
-    }
-    else{
-
-      if(this.additionalAmount!=0){
-        this.additionalAmount-=1;
-        this.remainingAmount=this.remainingAmount+1;
-        this.firstInstalment-=1;
-      }
-    }
-    this.getInstalmentData.emit({ 
-      additionalAmount:this.additionalAmount , 
-      instalmentType:this.durationType, 
-      customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment,
-      payNowAmount:this.getPayNowAmount(),
-      firstInstalment:this.firstInstalment
-    })
-    this.calculateInstalment();
-
-  }
-
-  /**
-   * 
-   * @param type [increase,decrease]
-   */
-  /* setCustomAmount(type){
-
-    if(this.customMethod=='amount'){
-
-      if(type=='increase'){
-        this.customAmount+=1;
-        this.calculateInstalment();
-      }
-      else{
-
-        if(this.defaultInstalment<this.customAmount){
-
-          this.customAmount-=1;
-          this.calculateInstalment();
-        }
-      }
-      this.getInstalmentData.emit({ 
-        additionalAmount:this.additionalAmount , 
-        instalmentType:this.durationType, 
-        customAmount: this.customAmount,
-        customInstalment : null,
-        layCreditPoints : this.laycreditpoints,
-        partialPaymentAmount : this.secondInstalment,
-        payNowAmount:this.getPayNowAmount()
-      })
-    }
-  } */
-
-  /**
-   * 
-   * @param type [increase,decrease]
-   */
-  setCustomInstalmentNo(type){
-    if(this.customMethod=='instalment'){
-      if(type=='increase'){
-
-        if(this.defaultInstalmentNo>this.customInstalment){
   
-          this.customInstalment+=1;
-          this.calculateInstalment();
-        }
-      }
-      else{
-         if(this.customInstalment>2){
-           this.customInstalment-=1;
-           this.calculateInstalment();
-         }
-      }
-    }
-    this.getInstalmentData.emit({ 
-      additionalAmount:this.additionalAmount , 
-      instalmentType:this.durationType, 
-      customAmount: null,
-      customInstalment : this.customInstalment,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment,
-      payNowAmount:this.getPayNowAmount(),
-      firstInstalment:this.firstInstalment
-    })
-  }
-
   /**
    * 
-   * @param type [amount,instalment]
+   * @param type1 => To calculate first, second & third down payment
+   * @param type2 => To calculate redeemable point
    */
-  selectCustomMethod(event){
+  calculateInstalment(type1=null,type2=null,type3=null){
     
-    if(event.target.value=='amount'){
-      this.instalmentRequest.custom_amount=this.customAmount;
-      this.instalmentRequest.custom_instalment_no=null;
-    }
-    else if(event.target.value=='instalment'){
-      this.instalmentRequest.custom_amount=null;
-      this.instalmentRequest.custom_instalment_no=this.customInstalment;
-    }
-    this.getInstalmentData.emit({ 
-      additionalAmount:this.additionalAmount , 
-      instalmentType:this.durationType, 
-      customAmount: this.instalmentRequest.custom_amount,
-      customInstalment : this.instalmentRequest.custom_instalment_no,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment,
-      payNowAmount:this.getPayNowAmount(),
-      firstInstalment:this.firstInstalment
-    })
-    if(this.durationType=='weekly'){
-      this.customAmount = this.weeklyDefaultInstalment;
-    }
-    else if(this.durationType=='biweekly'){
-      this.customAmount = this.biWeeklyDefaultInstalment;
-    }
-    else{
-      this.customAmount = this.monthlyDefaultInstalment;
-    }
-    this.customInstalment = this.defaultInstalmentNo;
-    this.customMethod=event.target.checked?event.target.value:'';
-    this.calculateInstalment();
-  }
-  
-  calculateInstalment(){
-
-    if(this.customMethod=='amount'){
-
-      this.instalmentRequest.custom_amount=this.customAmount;
-      this.instalmentRequest.custom_instalment_no=null;
-    }
-    else if(this.customMethod=='instalment'){
-      this.instalmentRequest.custom_amount=null;
-      this.instalmentRequest.custom_instalment_no=this.customInstalment;
-    }
-
-    this.instalmentRequest.instalment_type =this.durationType;
-    this.instalmentRequest.additional_amount=(this.upFrontPayment-this.defaultInstalment) + Number(this.laycreditpoints);
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){
-          
-          this.firstInstalment  = this.instalments.instalment_date[0].instalment_amount;
-          this.remainingAmount  = this.instalmentRequest.amount - parseFloat(this.instalments.instalment_date[0].instalment_amount)
-          this.secondInstalment = this.instalments.instalment_date[1].instalment_amount;
-          this.getInstalemntsWeekly('weekly')
-          this.getInstalemntsBiweekly('biweekly')
-          this.getInstalemntsMonthly('monthly')
-          
+          if(type1!=null && type1=='down-payment'){
+            this.downPayments=this.instalments.down_payment;
+            this.redeemableLayCredit.emit(this.sellingPrice);
+          }
 
-          this.remainingInstalment = this.instalments.instalment_date.length-1;
+          if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
+            //Below line commented for temporary reason
+            //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
+          }
 
-          this.getInstalmentData.emit({ 
-            additionalAmount:this.additionalAmount, 
-            instalmentType:this.durationType, 
-            customAmount: this.instalmentRequest.custom_amount,
-            customInstalment : this.instalmentRequest.custom_instalment_no,
-            layCreditPoints : this.laycreditpoints,
-            partialPaymentAmount : this.secondInstalment,
-            payNowAmount:this.getPayNowAmount(),
-            firstInstalment:this.firstInstalment
-          })
-          
+          if(this.instalments.instalment_date[1].instalment_amount<5){
+            
+            if(this.paymentType=='instalment'){
+
+             this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
+             this.togglePaymentMode('no-instalment');
+            }
+            this.isBelowMinimumInstallment=true;
+          }
+          else{
+            this.isBelowMinimumInstallment=false;
+          }
+          this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
         }
       },(err)=>{
 
@@ -600,123 +128,114 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['laycreditpoints']) {
-      this.laycreditpoints = changes['laycreditpoints'].currentValue;
-      this.getInstalmentData.emit({ 
-        additionalAmount:this.additionalAmount, 
-        instalmentType:this.durationType, 
-        customAmount: this.instalmentRequest.custom_amount,
-        customInstalment : this.instalmentRequest.custom_instalment_no,
-        layCreditPoints : this.laycreditpoints,
-        partialPaymentAmount : this.secondInstalment,
-        payNowAmount:this.getPayNowAmount(),
-        firstInstalment:this.firstInstalment
-      })
-      
-      if((Number(this.laycreditpoints) + Number(this.upFrontPayment))>=this.priceData[0].selling_price){
-        this.toggleFullPayment();
-        this.disablePartialPayment=true;   
-      }
-      else{
-        this.disablePartialPayment=false;   
-      }
-      this.calculateInstalment();
+      this.laycreditpoints =Number(changes['laycreditpoints'].currentValue);
+      this.instalmentRequest.additional_amount = this.laycreditpoints;
+      this.calculateInstalment('down-payment',null);
+      this.getAllInstalment();
     }
 
     if(changes['priceData']){
-      this.discountedPrice = changes['priceData'].currentValue[0].secondary_selling_price;
       this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
+      //this.instalmentRequest.amount= 100;
     }
-  }
-
-  toggleFullPayment(){
-    this.isInstalemtMode = false;
-    this.selectInstalmentMode.emit('no-instalment');
-    this.firstInstalment = this.defaultInstalment;
-    this.getInstalmentData.emit({ 
-      additionalAmount:0, 
-      instalmentType:'', 
-      customAmount: null,
-      customInstalment : null,
-      layCreditPoints : this.laycreditpoints,
-      partialPaymentAmount : this.secondInstalment,
-      payNowAmount:this.getPayNowAmount(),
-      firstInstalment:this.firstInstalment
-    });
-    this.redeemableLayCredit.emit(this.getTotalPrice())
-
-    this.upFrontPayment = this.defaultInstalment;
-    this.firstInstalment = this.defaultInstalment;
-    this.additionalAmount=0;
-    this.customAmount = this.defaultInstalment;
-    this.customInstalment = this.defaultInstalmentNo;
-    this.instalmentRequest.custom_amount=null;
-    this.instalmentRequest.custom_instalment_no=null;
-    this.instalmentRequest.additional_amount=0;
-    this.calculateInstalment();
   }
 
   getPayNowAmount(){
-    if(this.isInstalemtMode){
-
-      this.payNowPrice= this.upFrontPayment;
-    }
-    else{
-      this.sellingPrice = this.getTotalPrice();    
-      this.payNowPrice = Number(this.sellingPrice) -Number(this.laycreditpoints);
-    }
-
-    return this.payNowPrice;
+    
   }
 
   getTotalPrice(){
-      this.sellingPrice=this.priceData[0].selling_price;
+    this.sellingPrice=this.priceData[0].selling_price;
+
+    if(this.paymentType=='no-instalment'){
       if(this.priceData[0].secondary_selling_price){
         this.sellingPrice = this.priceData[0].secondary_selling_price;
       }
-      return this.sellingPrice;
-  }
-
-  getPredictionDate(){
-
-    let routeInfo:any = sessionStorage.getItem("__route");
-    let _itinerary:any = sessionStorage.getItem("_itinerary")
-    try{
-
-        routeInfo = JSON.parse(routeInfo);
-        _itinerary = JSON.parse(_itinerary);
-        let searchParams={
-          source_location: routeInfo.departure_code,
-          destination_location: routeInfo.arrival_code,
-          departure_date: moment(routeInfo.departure_date,"DD/MM/YYYY").format("YYYY-MM-DD"),
-          flight_class: routeInfo.routes[0].stops[0].cabin_class,
-          adult_count: Number(_itinerary.adult),
-          child_count: Number(_itinerary.child),
-          infant_count: Number(_itinerary.infant),
-          unique_token: routeInfo.unique_code
-        }
-        this.pridictionLoading=true;
-        this.flightService.getPredictionDate(searchParams).subscribe((res:any)=>{
-
-          this.pridictionLoading=false;
-          if(res.length){
-            let pridictedData=res.find(date=>date.is_booking_avaible==true)
-            if(Object.keys(pridictedData).length){
-              this.predictionDate=this.commonFunction.convertDateFormat(pridictedData.date,"DD/MM/YYYY") ;
-            }
-          }
-        },
-        (error)=>{
-          this.pridictionLoading=false;
-          }
-        )
     }
-    catch(e){
-
-    }
-    
+    //return this.sellingPrice=100;
   }
 
   convertToNumber(number){
     return Number(number)
+  }
+
+  getAllInstalment(type1=null){
+    this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
+        if(res.instalment_available==true){
+          this.instalmentAvavible=true;
+          this.weeklyInstalment   = res.weekly_instalments[1].instalment_amount;
+          this.biWeeklyInstalment = res.biweekly_instalments[1].instalment_amount;
+          this.montlyInstalment   = res.monthly_instalments[1].instalment_amount;
+
+          if(type1!=null && type1=='set-default-down-payment'){
+            this.defaultDownPayments.weekly = res.weekly_down_payment;
+            this.defaultDownPayments.biweekly = res.bi_weekly_down_payment;
+            this.defaultDownPayments.monthly = res.monthly_down_payment;
+            //Below line commented for temporary reason
+            //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
+          }
+        }
+      },(err)=>{
+
+    })
+  }
+
+  calculateDownPayment(sellingPrice,firstDownPayment){
+
+    this.downPayments=[];
+    this.downPayments.push(firstDownPayment);
+
+    let secondDownPayment = firstDownPayment+(sellingPrice*10)/100;
+    this.downPayments.push(secondDownPayment);
+
+    let thirdDownPayment = secondDownPayment+(sellingPrice*10)/100;
+    this.downPayments.push(thirdDownPayment);
+  }
+
+  /**
+   * 
+   * @param type ['instalment','no-instalment']
+   */
+  togglePaymentMode(type){
+
+    if(type=='instalment' && this.isBelowMinimumInstallment){
+      return;
+    }
+    this.paymentType=type;
+  }
+
+  /**
+   * 
+   * @param type ['weekly','biweekly','monthly']
+   */
+  togglePaymentFrequency(type){
+
+    /* Reset Section */
+    //this.instalmentRequest.down_payment=0;
+    //this.selectedDownPaymentIndex=0;
+
+    //this.instalmentRequest.down_payment=this.defaultDownPayments[this.selectedDownPaymentIndex];
+    
+    /* End Reset Section */
+    
+    this.instalmentRequest.instalment_type=type;
+    this.instalmentType=type;
+    this.calculateInstalment('down-payment','redeemable_point','set-default-down-payment');
+    this.getAllInstalment();
+  }
+  
+  /**
+   * 
+   * @param index [it will hold the first(0) ,second(1) or third(2) downpayment option]
+   */
+  toggleDownPayment(index){
+
+    this.selectedDownPaymentIndex=index;
+    //this.instalmentRequest.down_payment= this.downPayments[index];
+    this.instalmentRequest.selected_down_payment= this.selectedDownPaymentIndex;
+    //Below line commented for temporary reason
+    //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);
+    this.calculateInstalment();
+    this.getAllInstalment();
   }
 }

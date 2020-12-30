@@ -19,7 +19,7 @@ export class RedeemLaycreditComponent implements OnInit {
     floor: 0,
     ceil: 0,
     step: 0.1,
-    disabled:true
+    disabled:false
   };
   constructor(
     private genericService:GenericService
@@ -34,7 +34,7 @@ export class RedeemLaycreditComponent implements OnInit {
     this.applyLaycredit.emit(this.selectedLayCredit)
   }
 
-  toggleLayCredit(event){
+  /* toggleLayCredit(event){
     if(event.target.checked){
       this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: false});
       this.applyLaycredit.emit(this.selectedLayCredit)
@@ -43,10 +43,10 @@ export class RedeemLaycreditComponent implements OnInit {
       this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: true});
       this.applyLaycredit.emit(0)
     }
-  }
+  } */
 
   ngOnChanges(changes: SimpleChanges) {
-    console.error("changes['redeemableLayPoints']",changes['redeemableLayPoints'])
+    console.log("changes['redeemableLayPoints']",changes)
     if (typeof changes['redeemableLayPoints']!='undefined') {
 
       if(this.totalLaycreditPoints > Number(this.sellingPrice)){
@@ -57,6 +57,10 @@ export class RedeemLaycreditComponent implements OnInit {
       }
       else{
         this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.totalLaycreditPoints});
+      }
+
+      if(this.selectedLayCredit > changes['redeemableLayPoints'].currentValue){
+        this.applyLaycredit.emit(changes['redeemableLayPoints'].currentValue)
       }
     }
   }

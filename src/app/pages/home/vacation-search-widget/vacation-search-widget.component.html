@@ -1,19 +1,29 @@
 <div class="home_tab">
    <h2 *ngIf="showCommingSoon">
       Coming soon
-  </h2>
+   </h2>
+   <div class="tab_upper_content">
+      <div class="travellers">
+         <app-rental-info label="GUEST" (changeValue)="changeRentalInfo($event)">
+         </app-rental-info>
+      </div>
+      <span class="child_error" *ngIf="error_message !=''">
+         {{error_message}}
+      </span>
+   </div>
    <form *ngIf="!showCommingSoon" [formGroup]="rentalSearchForm" novalidate autocomplete="off">
       <div class="home_search">
          <ul class="home-grid oneway">
             <li class="grid_box first">
-               <div class="home_where" [ngClass]="{'homecheck-error':rentalSearchFormSubmitted&&  rentalSearchForm.controls.fromDestination.errors && rentalSearchForm.controls.fromDestination.errors.required==true}">
+               <div class="home_where"
+                  [ngClass]="{'homecheck-error':rentalSearchFormSubmitted&&  rentalSearchForm.controls.fromDestination.errors && rentalSearchForm.controls.fromDestination.errors.required==true}">
                   <div class="search_area">
-                      <app-vacation-search [form]="rentalSearchForm"
-                      [controlName]="'fromDestination'" [id]="'fromSearch1'"
-                      [label]="'DESTINATION'" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1
-                      [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
-                      </app-vacation-search>
-                    <!--  <label>Destination</label>
+                     <app-vacation-search [form]="rentalSearchForm" [controlName]="'fromDestination'"
+                        [id]="'fromSearch1'" [label]="'DESTINATION'" [placeHolder]=defaultCity
+                        [defaultSelected]=fromDestinationInfo [tabIndex]=1 [defaultCity]=defaultCity
+                        (changeValue)="destinationChangedValue($event)">
+                     </app-vacation-search>
+                     <!--  <label>Destination</label>
                       <ng-select [formControlName]="'fromDestination'" [selectOnTab]="true" [items]="data"
                      bindLabel="display_name" bindValue="id"  notFoundText="" [virtualScroll]="true" [clearable]="false"  (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event)" (clear)="onRemove($event)"
                        class="laytrip-input" placeholder="Destination"  [(ngModel)]="rentalForm.id">
@@ -32,26 +42,26 @@
             </li>
             <li class="grid_box secound">
                <div class="date_form">
-                   <div class="search_area"
-                        [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                        <label>Check In-Check Out</label>
-                         <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
+                  <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                     <!-- <label>Check In-Check Out</label> -->
+                     <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
                         [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="rentalCheckInMinDate"
-                        panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=rentalDateUpdate($event) [readonlyInput]="true">
-                      </p-calendar>
-                       <!--  <p-calendar inputId="basic" [(ngModel)]="rentalForm.check_in_date"
+                        panelStyleClass="calender-responsive-view laytrip-cal-view" [numberOfMonths]="2"
+                        (onSelect)=rentalDateUpdate($event) [readonlyInput]="true">
+                     </p-calendar>
+                     <!--  <p-calendar inputId="basic" [(ngModel)]="rentalForm.check_in_date"
                          [ngModelOptions]="{standalone: true}"rentalCheckInMinDate
                          [minDate]="rentalCheckInMinDate"
                          (onSelect)=rentalDateUpdate($event)
                          [readonlyInput]="true">
                         </p-calendar> -->
-                        <div class="prev-next">
-                          <a (click)="dateChange('checkIn','previous')">Prev</a>
-                          <a (click)="dateChange('checkIn','next')">Next</a>
-                        </div>
-                   </div>
+                     <!-- <div class="prev-next">
+                        <a (click)="dateChange('checkIn','previous')">Prev</a>
+                        <a (click)="dateChange('checkIn','next')">Next</a>
+                     </div> -->
+                  </div>
                </div>
-              <!--  <div class="date_to">
+               <!--  <div class="date_to">
                   <div class="search_area"
                         [ngClass]="{'dr_search_area':countryCode=='DR'}">
                         <label>Check OUT</label>
@@ -68,20 +78,12 @@
                </div> -->
             </li>
             <li class="grid_box third">
-               <div class="travellers">
-                <app-rental-info label="GUEST"
-                      (changeValue)="changeRentalInfo($event)">
-                </app-rental-info>
+               <div class="serch_btn">
+                  <button (click)="searchRentals(rentalForm)"><img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" /></button>
                </div>
-            <span class="child_error" *ngIf="error_message !=''">
-              {{error_message}}
-            </span> 
             </li>
          </ul>
-         <div class="serch_btn">
-            <button (click)="searchRentals(rentalForm)">Search Home<img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
-             alt="Right Arrow"/></button>
-         </div>
+         
       </div>
    </form>
 </div>

@@ -40,6 +40,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FlightClassComponent } from './flight-class/flight-class.component';
 
 
 
@@ -72,7 +73,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     GuestInfoComponent,
     SearchHotelComponent,
     RentalInfoComponent,
-    VacationSearchComponent
+    VacationSearchComponent,
+    FlightClassComponent
   ],
   imports: [
     CommonModule,
@@ -118,9 +120,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     TranslateModule,
     VacationSearchComponent,
     NgScrollbarModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    FlightClassComponent
   ],
   providers: [DatePipe],
 
 })
 export class ComponentsModule { }
+

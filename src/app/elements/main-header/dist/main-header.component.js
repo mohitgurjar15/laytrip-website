@@ -12,12 +12,13 @@ var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var auth_component_1 = require("../../pages/user/auth/auth.component");
 var MainHeaderComponent = /** @class */ (function () {
-    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction) {
+    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, renderer) {
         this.genericService = genericService;
         this.translate = translate;
         this.modalService = modalService;
         this.router = router;
         this.commonFunction = commonFunction;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.langunages = [];
         this.selectedLanunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
@@ -40,6 +41,7 @@ var MainHeaderComponent = /** @class */ (function () {
                 this.selectedLanunage = _lang;
                 translate.setDefaultLang(this.selectedLanunage.iso_1Code);
                 this.isLanunageSet = true;
+                this.renderer.addClass(document.body, this.selectedLanunage.iso_1Code + "_lang");
             }
             catch (error) {
                 this.isLanunageSet = false;
@@ -74,8 +76,6 @@ var MainHeaderComponent = /** @class */ (function () {
             }
         }
     };
-    MainHeaderComponent.prototype.ngAfterContentChecked = function () {
-    };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
         // this.userDetails = getLoginUserInfo();
@@ -92,7 +92,11 @@ var MainHeaderComponent = /** @class */ (function () {
         if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
             this.selectedLanunage = langunage;
             localStorage.setItem("_lang", JSON.stringify(langunage));
+            this.renderer.removeClass(document.body, "en_lang");
+            this.renderer.removeClass(document.body, "es_lang");
+            this.renderer.removeClass(document.body, "it_lang");
             this.translate.use(langunage.iso_1Code);
+            this.renderer.addClass(document.body, this.selectedLanunage.iso_1Code + "_lang");
         }
     };
     /**
@@ -205,7 +209,7 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     var MainHeaderComponent_1;
     __decorate([
-        core_1.ViewChild(MainHeaderComponent_1)
+        core_1.ViewChild(MainHeaderComponent_1, { static: false })
     ], MainHeaderComponent.prototype, "headerComponent");
     MainHeaderComponent = MainHeaderComponent_1 = __decorate([
         core_1.Component({

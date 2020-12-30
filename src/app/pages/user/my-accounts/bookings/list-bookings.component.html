@@ -33,14 +33,14 @@
                                     <div class="form_field">
                                         <label>{{'booking_start_date' | translate}}</label>
                                         <div class="text_field">
-                                            <p-calendar inputId="basic" inputStyleClass="custom_datpicker birth_date" formControlName="start_date" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2025" [defaultDate]="startMinDate" (onSelect)=startDateUpdate($event)>
+                                            <p-calendar dateFormat="d M yy" inputId="basic" inputStyleClass="custom_datpicker birth_date" formControlName="start_date" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2025" [defaultDate]="startMinDate" (onSelect)=startDateUpdate($event)>
                                             </p-calendar>
                                         </div>
                                     </div>
                                     <div class="form_field">
                                         <label>{{'booking_end_date' | translate}}</label>
                                         <div class="text_field">
-                                            <p-calendar inputStyleClass="custom_datpicker birth_date" inputId="basic" formControlName="end_date" [minDate]="endDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2025" [defaultDate]="endDate" endDate>
+                                            <p-calendar dateFormat="d M yy" inputStyleClass="custom_datpicker birth_date" inputId="basic" formControlName="end_date" [minDate]="endDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2025" [defaultDate]="endDate" endDate>
                                             </p-calendar>
                                         </div>
                                     </div>
@@ -53,9 +53,9 @@
                                     </li>
                                     <li>
                                         <button [disabled]="filterForm.controls.bookingId.value === '' && 
-                      filterForm.controls.module.value === '' &&
-                      filterForm.controls.start_date.value === '' && 
-                      filterForm.controls.end_date.value === ''" (click)="getFlightResult()">{{'filter' | translate}}</button>
+                                            filterForm.controls.module.value === '' &&
+                                            filterForm.controls.start_date.value === '' && 
+                                            filterForm.controls.end_date.value === ''" (click)="getFlightResult()">{{'filter' | translate}}</button>
                                     </li>
                                 </ul>
                             </div>
@@ -100,7 +100,7 @@
                                 <div class="card-header" role="tab" id="heading-booking-flight">
                                     <h5 class="mb-0">
                                         <a data-toggle="collapse" href="#collapse-booking-flight" aria-expanded="true" aria-controls="collapse-booking-flight">
-                      Flight
+                      {{'flight' | translate}}
                     </a>
                                     </h5>
                                 </div>

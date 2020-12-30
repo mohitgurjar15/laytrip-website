@@ -221,6 +221,343 @@ ngb-datepicker {
 
 // hotel tab
 .hotel_tab {
+    .tab_upper_content{
+        width: 100%;
+        margin-bottom: 24px;
+        .travellers {
+            width: auto;
+            display: inline-block;
+
+            label {
+                width: 100%;
+                margin-bottom: 0px;
+                font-size: 10px;
+                color: $text-grey;
+                font-weight: 400;
+                padding: 0 15px;
+                text-transform: uppercase;
+            }
+
+            .search_area {
+                background: $background-white;
+                position: relative;
+
+                .travel_info {
+                    width: 100%;
+                    height: 30px;
+                    display: flex;
+                    line-height: 30px;
+                    font-size: 14px;
+                    color: $text-grey;
+                    position: relative;
+                    padding: 0 20px;
+                    cursor: pointer;
+
+                    span {
+                        font-size: 14px;
+                        padding: 0 10px 0 0;
+                    }
+
+                    .drop_aerrow {
+                        width: auto;
+                        position: relative;
+                        margin-left: 20px;
+
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            left: 110%;
+                            top: 50%;
+                            width: 0;
+                            height: 0;
+                            border-left: 3px solid transparent;
+                            border-right: 3px solid transparent;
+                            border-top: 3px solid $text-grey;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                }
+
+                span {
+                    font-size: 10px;
+                    font-weight: 400;
+                    color: $text-grey;
+                    padding: 0 20px;
+                }
+
+                .traveller_add_block {
+                    width: 260px;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background: $background-white;
+                    box-shadow: 0px 3px 15px $shadow-black;
+                    padding: 15px;
+                    border: 1px solid $text-light-grey;
+                    border-radius: 5px;
+                    z-index: 99;
+
+                    &:before {
+                        width: 0;
+                        height: 0;
+                        border-left: 9px solid transparent;
+                        border-right: 9px solid transparent;
+                        border-bottom: 9px solid $background-white;
+                        position: absolute;
+                        top: -9px;
+                        left: 21px;
+                        content: '';
+                        z-index: 2;
+                    }
+
+                    &:after {
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        border-bottom: 10px solid $text-light-grey;
+                        position: absolute;
+                        top: -10px;
+                        left: 20px;
+                        content: '';
+                    }
+                    .rooms_aloc {
+                        &.marign_rooms {
+                            margin-top: 10px;
+                            border-top: 1px solid $box-border-color;
+                            padding-top: 10px;
+                        }
+                        .room_label_main {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 10px;
+                            span {
+                                padding: 0;
+                                &:first-child {
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    text-transform: uppercase;
+                                }
+                                a {
+                                    color: $pink;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-transform: uppercase;
+                                    cursor: pointer;
+                                    &.remove_room {
+                                        color: $error-color;
+                                    }
+                                }
+                            }
+                        }
+                        .room_bottom_label {
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center;
+                            span {
+                                padding: 0;
+                                a {
+                                    color: $pink;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-transform: uppercase;
+                                }
+                            }
+                        }
+                        .child_sel_wrapper {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: flex-start;
+                            .child_boxes {
+                                border: 1px solid $box-border-color;
+                                border-radius: 8px;
+                                background: $background-white;
+                                padding: 5px 10px;
+                                margin: 2px;
+                                width: 48%;
+                                display: none;
+                                &.open {
+                                    display: block;
+                                }
+                                .label_name {
+                                    padding: 0;
+                                    width: 100%;
+                                }
+                                select {
+                                    border: none;
+                                    width: 100%;
+                                    font-size: 12px;
+                                    -webkit-appearance: none;
+                                    -moz-appearance: none;
+                                    appearance: none;
+                                    &::after {
+                                        content: "";
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                            center right 15px no-repeat !important;
+                                        height: 34px;
+                                        padding: 15px 0px 0px 8px;
+                                        position: absolute;
+                                    }
+                                }
+                            }
+                        }
+                        ul {
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+
+                            li {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding: 0 0 20px;
+
+                                .left {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+
+                                    span {
+                                        font-size: 14px;
+                                        color: $text-darkblue;
+                                        display: block;
+                                        padding: 0;
+                                    }
+                                }
+
+                                .right {
+                                    width: 100px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    .qtyminus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $pink;
+                                            color: $pink;
+                                        }
+                                    }
+
+                                    .qty {
+                                        width: 30px;
+                                        height: 30px;
+                                        font-size: 20px;
+                                        font-weight: 400;
+                                        color: $text-darkblue;
+                                        border: none;
+                                        text-align: center;
+                                        padding: 0;
+                                    }
+
+                                    .qtyplus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $pink;
+                                            color: $pink;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+
+                        li {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 0 0 20px;
+
+                            .left {
+                                font-size: 10px;
+                                font-weight: 400;
+                                color: $text-grey;
+
+                                span {
+                                    font-size: 14px;
+                                    color: $text-darkblue;
+                                    display: block;
+                                    padding: 0;
+                                }
+                            }
+
+                            .right {
+                                width: 100px;
+                                display: flex;
+                                align-items: center;
+
+                                .qtyminus {
+                                    width: 30px;
+                                    height: 30px;
+                                    background: $background-white;
+                                    border: 1px solid $text-light-grey;
+                                    border-radius: 5px;
+                                    color: $text-light-grey;
+                                    padding: 0;
+                                    font-size: 18px;
+
+                                    &:hover {
+                                        border: 1px solid $secondary-color;
+                                        color: $secondary-color;
+                                    }
+                                }
+
+                                .qty {
+                                    width: 30px;
+                                    height: 30px;
+                                    font-size: 20px;
+                                    font-weight: 400;
+                                    color: $text-darkblue;
+                                    border: none;
+                                    text-align: center;
+                                }
+
+                                .qtyplus {
+                                    width: 30px;
+                                    height: 30px;
+                                    background: $background-white;
+                                    border: 1px solid $text-light-grey;
+                                    border-radius: 5px;
+                                    color: $text-light-grey;
+                                    padding: 0;
+                                    font-size: 18px;
+
+                                    &:hover {
+                                        border: 1px solid $pink_clr;
+                                        color: $pink_clr;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
     .hotels_search {
         position: relative;
 
@@ -242,7 +579,7 @@ ngb-datepicker {
                     display: flex;
                     justify-content: space-between;
                     position: relative;
-                    width: 45%;
+                    width: 60%;
 
                     @include ipad-view {
                         width: 100%;
@@ -271,18 +608,17 @@ ngb-datepicker {
                     }
 
                     .search_area {
-                        padding: 15px 0 10px;
+                        padding: 8px 0;
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
-                        height: 103px;
 
                         input {
                             width: 100%;
                             border: none;
                             height: 30px;
                             margin-bottom: 0px;
-                            font-size: 20px;
+                            font-size: 16px;
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
@@ -305,40 +641,15 @@ ngb-datepicker {
                             z-index: auto;
                         }
                     }
-
-                    .switch_btn {
-                        width: 30px;
-                        height: 30px;
-                        background: $background-white;
-                        border: 1px solid $box-border-color;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        border-radius: 50%;
-                        z-index: 9;
-
-                        img {
-                            width: 15px;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        @media (max-width: 480px) {
-                            left: 90%;
-                        }
-                    }
                 }
 
                 &.secound {
-                    width: 35%;
+                    width: 30%;
                     display: flex;
                     justify-content: space-between;
                     position: relative;
 
-                    @include ipad-view {
+                    @media(max-width: 991px) {
                         width: 100%;
                         margin-bottom: 20px;
                     }
@@ -354,26 +665,29 @@ ngb-datepicker {
                     }
 
                     .search_area {
-                        padding: 15px 0;
+                        padding: 8px 0;
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
-                        height: 103px;
 
                         input {
                             width: 100%;
                             border: none;
-                            height: 35px;
+                            height: 48px;
                             margin-bottom: 1px;
-                            font-size: 20px;
+                            font-size: 16px;
                             color: $text-black;
                             font-weight: 600;
-                            // padding: 0 15px;
-                            padding: 0 32px 0 15px;
-                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
-                                center right 15px no-repeat !important;
-                            @media (max-width: 1199px) {
+                            padding: 0 15px 0 70px;
+                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+                        @media (max-width: 575px) {
+                            .calender-responsive-view {
+                                right: 0 !important;
+                                left: auto !important;
+                            }
+                        }
+                            @media(max-width: 1199px) {
                                 font-size: 16px;
                             }
                         }
@@ -400,25 +714,21 @@ ngb-datepicker {
 
                     .date_form {
                         width: 100%;
-
+                        p-calendar{
+                            display: flex;
+                            align-items: center;
+                            height: 100%;
+                        }
                         .search_area {
                             border-radius: 8px;
-                            // height: 100%;
-                            height: 103px;
+                            height: 100%;
                         }
                     }
 
-                    .date_to {
-                        width: 50%;
-
-                        .search_area {
-                            border-radius: 0 8px 8px 0;
-                        }
-                    }
                 }
 
                 &.third {
-                    width: 20%;
+                    width: 10%;
                     padding-right: 0;
 
                     @include ipad-view {
@@ -430,322 +740,58 @@ ngb-datepicker {
                         width: 100%;
                     }
 
-                    .travellers {
+                    .serch_btn {
                         width: 100%;
+                        height: 100%;
 
-                        label {
+                        button {
                             width: 100%;
-                            margin-bottom: 0px;
-                            font-size: 10px;
-                            color: $text-grey;
-                            font-weight: 400;
-                            padding: 0 15px;
-                            text-transform: uppercase;
-                        }
-
-                        .search_area {
-                            padding: 15px 0;
-                            border: 1px solid $box-border-color;
+                            height: 100%;
+                            padding: 10px 25px;
+                            background: $hotel-secondary-color;
                             border-radius: 8px;
-                            background: $background-white;
+                            border: none;
+                            font-size: 20px;
+                            color: $text-white;
+                            transition: 0.3s;
                             position: relative;
-                            height: 103px;
+                            z-index: 9;
+                            overflow: hidden;
+                            white-space: normal;
 
-                            .travel_info {
-                                width: 100%;
-                                height: 30px;
-                                display: flex;
-                                line-height: 30px;
-                                font-size: 10px;
-                                color: $text-black;
-                                position: relative;
-                                padding: 0 20px;
-                                cursor: pointer;
-
-                                &:before {
-                                    width: 24px;
-                                    height: 24px;
-                                    content: "";
-                                    position: absolute;
-                                    right: 20px;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                    background: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg")
-                                        no-repeat;
-                                }
-
-                                span {
-                                    font-size: 20px;
-                                    font-weight: 600;
-                                    padding: 0 10px 0 0;
-                                    color: $text-black;
-                                }
-
-                                .drop_aerrow {
-                                    width: auto;
-                                    position: relative;
-                                    margin-left: 20px;
-
-                                    &:before {
-                                        content: "";
-                                        position: absolute;
-                                        left: 110%;
-                                        top: 50%;
-                                        width: 0;
-                                        height: 0;
-                                        border-left: 3px solid transparent;
-                                        border-right: 3px solid transparent;
-                                        border-top: 3px solid $text-grey;
-                                        transform: translate(-50%, -50%);
-                                    }
-                                }
+                            img {
+                                max-height: 29px;
                             }
 
-                            span {
-                                font-size: 10px;
-                                font-weight: 400;
-                                color: $text-grey;
-                                padding: 0 20px;
-                            }
-
-                            .traveller_add_block {
-                                width: 260px;
+                            &::before {
+                                content: "";
                                 position: absolute;
-                                top: 108%;
-                                right: 0;
-                                background: $background-white;
-                                box-shadow: 0px 3px 15px $shadow-black;
-                                padding: 15px;
-                                border: 1px solid $text-light-grey;
-                                border-radius: 5px;
-                                z-index: 9999;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 0%;
+                                background: $secondary-color;
+                                z-index: -1;
+                                transition: 0.8s;
+                                border-radius: 0 0 50% 50%;
+                            }
 
+                            &:hover {
                                 &:before {
-                                    width: 0;
-                                    height: 0;
-                                    border-left: 9px solid transparent;
-                                    border-right: 9px solid transparent;
-                                    border-bottom: 9px solid $background-white;
-                                    position: absolute;
-                                    top: -9px;
-                                    right: 21px;
-                                    content: "";
-                                    z-index: 2;
+                                    height: 190%;
                                 }
+                            }
+                        }
 
-                                &:after {
-                                    width: 0;
-                                    height: 0;
-                                    border-left: 10px solid transparent;
-                                    border-right: 10px solid transparent;
-                                    border-bottom: 10px solid $text-light-grey;
-                                    position: absolute;
-                                    top: -10px;
-                                    right: 20px;
-                                    content: "";
-                                }
-                                .rooms_aloc {
-                                    &.marign_rooms {
-                                        margin-top: 10px;
-                                        border-top: 1px solid $box-border-color;
-                                        padding-top: 10px;
-                                    }
-                                    .room_label_main {
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-                                        margin-bottom: 10px;
-                                        span {
-                                            padding: 0;
-                                            &:first-child {
-                                                font-size: 14px;
-                                                font-weight: 500;
-                                                text-transform: uppercase;
-                                            }
-                                            a {
-                                                color: $pink;
-                                                font-size: 12px;
-                                                font-weight: 500;
-                                                text-transform: uppercase;
-                                                cursor: pointer;
-                                                &.remove_room {
-                                                    color: $error-color;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .room_bottom_label {
-                                        display: flex;
-                                        justify-content: flex-end;
-                                        align-items: center;
-                                        span {
-                                            padding: 0;
-                                            a {
-                                                color: $pink;
-                                                font-size: 12px;
-                                                font-weight: 500;
-                                                text-transform: uppercase;
-                                            }
-                                        }
-                                    }
-                                    .child_sel_wrapper {
-                                        display: flex;
-                                        flex-wrap: wrap;
-                                        justify-content: flex-start;
-                                        .child_boxes {
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 8px;
-                                            background: $background-white;
-                                            padding: 5px 10px;
-                                            margin: 2px;
-                                            width: 48%;
-                                            display: none;
+                        @media(max-width: 480px) {
+                            bottom: -60px;
 
-                                            &.open {
-                                                display: block;
-                                            }
-                                            .label_name {
-                                                padding: 0;
-                                                width: 100%;
-                                            }
-                                            select {
-                                                border: none;
-                                                width: 100%;
-                                                font-size: 12px;
-                                                -webkit-appearance: none;
-                                                -moz-appearance: none;
-                                                appearance: none;
-                                                &::after {
-                                                    content: "";
-                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
-                                                        center right 15px no-repeat !important;
-                                                    height: 34px;
-                                                    padding: 15px 0px 0px 8px;
-                                                    position: absolute;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    ul {
-                                        margin: 0;
-                                        padding: 0;
-                                        list-style: none;
+                            button {
+                                padding: 10px 20px;
+                                font-size: 16px;
 
-                                        li {
-                                            width: 100%;
-                                            display: flex;
-                                            justify-content: space-between;
-                                            align-items: center;
-                                            padding: 0 0 20px;
-
-                                            .left {
-                                                font-size: 10px;
-                                                font-weight: 400;
-                                                color: $text-grey;
-
-                                                span {
-                                                    font-size: 14px;
-                                                    color: $text-darkblue;
-                                                    display: block;
-                                                    padding: 0;
-                                                }
-                                            }
-
-                                            .right {
-                                                width: 100px;
-                                                display: flex;
-                                                align-items: center;
-
-                                                .qtyminus {
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    background: $background-white;
-                                                    border: 1px solid $text-light-grey;
-                                                    border-radius: 5px;
-                                                    color: $text-light-grey;
-                                                    padding: 0;
-                                                    font-size: 18px;
-
-                                                    &:hover {
-                                                        border: 1px solid $pink;
-                                                        color: $pink;
-                                                    }
-                                                }
-
-                                                .qty {
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    font-size: 20px;
-                                                    font-weight: 400;
-                                                    color: $text-darkblue;
-                                                    border: none;
-                                                    text-align: center;
-                                                    padding: 0;
-                                                }
-
-                                                .qtyplus {
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    background: $background-white;
-                                                    border: 1px solid $text-light-grey;
-                                                    border-radius: 5px;
-                                                    color: $text-light-grey;
-                                                    padding: 0;
-                                                    font-size: 18px;
-
-                                                    &:hover {
-                                                        border: 1px solid $pink;
-                                                        color: $pink;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .flight_cat {
-                                    width: 100%;
-
-                                    ul {
-                                        display: flex;
-                                        flex-wrap: wrap;
-                                        align-content: center;
-                                        justify-content: space-between;
-
-                                        li {
-                                            width: 48%;
-                                            margin: 0 0 10px;
-                                            padding: 0;
-
-                                            &:last-child {
-                                                width: 100%;
-                                                margin: 0;
-                                            }
-
-                                            a {
-                                                line-height: 32px;
-                                                width: 100%;
-                                                text-align: center;
-                                                background: $background-white;
-                                                border: 1px solid $text-light-grey;
-                                                border-radius: 5px;
-                                                font-size: 14px;
-                                                color: $text-light-grey;
-
-                                                &:hover {
-                                                    background: $hotel-secondary-color;
-                                                    border: 1px solid $hotel-secondary-color;
-                                                    color: $text-white;
-                                                }
-
-                                                &.active_cat {
-                                                    background: $hotel-secondary-color;
-                                                    border: 1px solid $hotel-secondary-color;
-                                                    color: $text-white;
-                                                }
-                                            }
-                                        }
-                                    }
+                                img {
+                                    margin-left: 30px;
                                 }
                             }
                         }
@@ -754,71 +800,350 @@ ngb-datepicker {
             }
         }
 
-        .serch_btn {
-            width: 100%;
-            text-align: right;
-            position: absolute;
-            bottom: -75px;
-            right: 0;
 
-            button {
-                width: auto;
-                padding: 10px 25px;
-                background: $primary-color;
-                border-radius: 30px;
-                border: none;
-                font-size: 20px;
-                color: $text-white;
-                transition: 0.3s;
-                position: relative;
-                z-index: 9;
-                overflow: hidden;
-                white-space: normal;
-
-                img {
-                    margin-left: 40px;
-                    height: 20px;
-                }
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 0%;
-                    background: $hotel-secondary-color;
-                    z-index: -1;
-                    transition: 0.8s;
-                    border-radius: 0 0 50% 50%;
-                }
-
-                &:hover {
-                    &:before {
-                        height: 190%;
-                    }
-                }
-            }
-
-            @media (max-width: 480px) {
-                bottom: -60px;
-
-                button {
-                    padding: 10px 20px;
-                    font-size: 16px;
-
-                    img {
-                        margin-left: 30px;
-                    }
-                }
-            }
-        }
     }
 }
 // hotel tab
 
 // home tab
 .home_tab {
+    .tab_upper_content{
+        width: 100%;
+        margin-bottom: 24px;
+        .travellers {
+            width: auto;
+            display: inline-block;
+
+            label {
+                width: 100%;
+                margin-bottom: 0px;
+                font-size: 10px;
+                color: $text-grey;
+                font-weight: 400;
+                padding: 0 15px;
+                text-transform: uppercase;
+            }
+
+            .search_area {
+                background: $background-white;
+                position: relative;
+
+                .travel_info {
+                    width: 100%;
+                    height: 30px;
+                    display: flex;
+                    line-height: 30px;
+                    font-size: 14px;
+                    color: $text-grey;
+                    position: relative;
+                    padding: 0 20px;
+                    cursor: pointer;
+
+                    span {
+                        font-size: 14px;
+                        padding: 0 10px 0 0;
+                    }
+
+                    .drop_aerrow {
+                        width: auto;
+                        position: relative;
+                        margin-left: 20px;
+
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            left: 110%;
+                            top: 50%;
+                            width: 0;
+                            height: 0;
+                            border-left: 3px solid transparent;
+                            border-right: 3px solid transparent;
+                            border-top: 3px solid $text-grey;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                }
+
+                span {
+                    font-size: 10px;
+                    font-weight: 400;
+                    color: $text-grey;
+                    padding: 0 20px;
+                }
+
+                .traveller_add_block {
+                    width: 260px;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background: $background-white;
+                    box-shadow: 0px 3px 15px $shadow-black;
+                    padding: 15px;
+                    border: 1px solid $text-light-grey;
+                    border-radius: 5px;
+                    z-index: 99;
+
+                    &:before {
+                        width: 0;
+                        height: 0;
+                        border-left: 9px solid transparent;
+                        border-right: 9px solid transparent;
+                        border-bottom: 9px solid $background-white;
+                        position: absolute;
+                        top: -9px;
+                        left: 21px;
+                        content: '';
+                        z-index: 2;
+                    }
+
+                    &:after {
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        border-bottom: 10px solid $text-light-grey;
+                        position: absolute;
+                        top: -10px;
+                        left: 20px;
+                        content: '';
+                    }
+                    .rooms_aloc {
+                        &.marign_rooms {
+                            margin-top: 10px;
+                            border-top: 1px solid $box-border-color;
+                            padding-top: 10px;
+                        }
+                        .room_label_main {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 10px;
+                            span {
+                                padding: 0;
+                                &:first-child {
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    text-transform: uppercase;
+                                }
+                                a {
+                                    color: $pink;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-transform: uppercase;
+                                    cursor: pointer;
+                                    &.remove_room {
+                                        color: $error-color;
+                                    }
+                                }
+                            }
+                        }
+                        .room_bottom_label {
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center;
+                            span {
+                                padding: 0;
+                                a {
+                                    color: $pink;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-transform: uppercase;
+                                }
+                            }
+                        }
+                        .child_sel_wrapper {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: flex-start;
+                            .child_boxes {
+                                border: 1px solid $box-border-color;
+                                border-radius: 8px;
+                                background: $background-white;
+                                padding: 5px 10px;
+                                margin: 2px;
+                                width: 48%;
+                                display: none;
+                                &.open {
+                                    display: block;
+                                }
+                                .label_name {
+                                    padding: 0;
+                                    width: 100%;
+                                }
+                                select {
+                                    border: none;
+                                    width: 100%;
+                                    font-size: 12px;
+                                    -webkit-appearance: none;
+                                    -moz-appearance: none;
+                                    appearance: none;
+                                    &::after {
+                                        content: "";
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
+                                            center right 15px no-repeat !important;
+                                        height: 34px;
+                                        padding: 15px 0px 0px 8px;
+                                        position: absolute;
+                                    }
+                                }
+                            }
+                        }
+                        ul {
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+
+                            li {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding: 0 0 20px;
+
+                                .left {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+
+                                    span {
+                                        font-size: 14px;
+                                        color: $text-darkblue;
+                                        display: block;
+                                        padding: 0;
+                                    }
+                                }
+
+                                .right {
+                                    width: 100px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    .qtyminus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $pink;
+                                            color: $pink;
+                                        }
+                                    }
+
+                                    .qty {
+                                        width: 30px;
+                                        height: 30px;
+                                        font-size: 20px;
+                                        font-weight: 400;
+                                        color: $text-darkblue;
+                                        border: none;
+                                        text-align: center;
+                                        padding: 0;
+                                    }
+
+                                    .qtyplus {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: $background-white;
+                                        border: 1px solid $text-light-grey;
+                                        border-radius: 5px;
+                                        color: $text-light-grey;
+                                        padding: 0;
+                                        font-size: 18px;
+
+                                        &:hover {
+                                            border: 1px solid $pink;
+                                            color: $pink;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+
+                        li {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 0 0 20px;
+
+                            .left {
+                                font-size: 10px;
+                                font-weight: 400;
+                                color: $text-grey;
+
+                                span {
+                                    font-size: 14px;
+                                    color: $text-darkblue;
+                                    display: block;
+                                    padding: 0;
+                                }
+                            }
+
+                            .right {
+                                width: 100px;
+                                display: flex;
+                                align-items: center;
+
+                                .qtyminus {
+                                    width: 30px;
+                                    height: 30px;
+                                    background: $background-white;
+                                    border: 1px solid $text-light-grey;
+                                    border-radius: 5px;
+                                    color: $text-light-grey;
+                                    padding: 0;
+                                    font-size: 18px;
+
+                                    &:hover {
+                                        border: 1px solid $secondary-color;
+                                        color: $secondary-color;
+                                    }
+                                }
+
+                                .qty {
+                                    width: 30px;
+                                    height: 30px;
+                                    font-size: 20px;
+                                    font-weight: 400;
+                                    color: $text-darkblue;
+                                    border: none;
+                                    text-align: center;
+                                }
+
+                                .qtyplus {
+                                    width: 30px;
+                                    height: 30px;
+                                    background: $background-white;
+                                    border: 1px solid $text-light-grey;
+                                    border-radius: 5px;
+                                    color: $text-light-grey;
+                                    padding: 0;
+                                    font-size: 18px;
+
+                                    &:hover {
+                                        border: 1px solid $pink_clr;
+                                        color: $pink_clr;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
     .home_search {
         position: relative;
 
@@ -840,7 +1165,7 @@ ngb-datepicker {
                     display: flex;
                     justify-content: space-between;
                     position: relative;
-                    width: 45%;
+                    width: 60%;
 
                     @include ipad-view {
                         width: 100%;
@@ -869,18 +1194,17 @@ ngb-datepicker {
                     }
 
                     .search_area {
-                        padding: 15px 0 10px;
+                        padding: 8px 0;
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
-                        height: 103px;
 
                         input {
                             width: 100%;
                             border: none;
                             height: 30px;
                             margin-bottom: 0px;
-                            font-size: 20px;
+                            font-size: 16px;
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
@@ -894,49 +1218,15 @@ ngb-datepicker {
                         }
                     }
 
-                    .hotel_form {
-                        position: relative;
-                        z-index: 1;
-
-                        @media (max-width: 480px) {
-                            width: 100%;
-                            z-index: auto;
-                        }
-                    }
-
-                    .switch_btn {
-                        width: 30px;
-                        height: 30px;
-                        background: $background-white;
-                        border: 1px solid $box-border-color;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        border-radius: 50%;
-                        z-index: 9;
-
-                        img {
-                            width: 15px;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        @media (max-width: 480px) {
-                            left: 90%;
-                        }
-                    }
                 }
 
                 &.secound {
-                    width: 35%;
+                    width: 30%;
                     display: flex;
                     justify-content: space-between;
                     position: relative;
 
-                    @include ipad-view {
+                    @media(max-width: 991px) {
                         width: 100%;
                         margin-bottom: 20px;
                     }
@@ -952,25 +1242,29 @@ ngb-datepicker {
                     }
 
                     .search_area {
-                        padding: 15px 0;
+                        padding: 8px 0;
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
-                        height: 103px;
 
                         input {
                             width: 100%;
                             border: none;
-                            height: 35px;
+                            height: 48px;
                             margin-bottom: 1px;
-                            font-size: 20px;
+                            font-size: 16px;
                             color: $text-black;
                             font-weight: 600;
-                            padding: 0 15px;
-                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
-                                center right 15px no-repeat !important;
-                            @media (max-width: 1199px) {
+                            padding: 0 15px 0 70px;
+                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+                        @media (max-width: 575px) {
+                            .calender-responsive-view {
+                                right: 0 !important;
+                                left: auto !important;
+                            }
+                        }
+                            @media(max-width: 1199px) {
                                 font-size: 16px;
                             }
                         }
@@ -996,26 +1290,22 @@ ngb-datepicker {
                     }
 
                     .date_form {
-                        width: 50%;
-
+                        width: 100%;
+                        p-calendar{
+                            display: flex;
+                            align-items: center;
+                            height: 100%;
+                        }
                         .search_area {
-                            border-radius: 8px 0 0 8px;
-                            // height: 100%;
-                            height: 103px;
+                            border-radius: 8px;
+                            height: 100%;
                         }
                     }
 
-                    .date_to {
-                        width: 50%;
-
-                        .search_area {
-                            border-radius: 0 8px 8px 0;
-                        }
-                    }
                 }
 
                 &.third {
-                    width: 20%;
+                    width: 10%;
                     padding-right: 0;
 
                     @include ipad-view {
@@ -1027,384 +1317,61 @@ ngb-datepicker {
                         width: 100%;
                     }
 
-                    .travellers {
+                    .serch_btn {
                         width: 100%;
+                        height: 100%;
 
-                        label {
+                        button {
                             width: 100%;
-                            margin-bottom: 0px;
-                            font-size: 10px;
-                            color: $text-grey;
-                            font-weight: 400;
-                            padding: 0 15px;
-                            text-transform: uppercase;
-                        }
-
-                        .search_area {
-                            padding: 15px 0;
-                            border: 1px solid $box-border-color;
+                            height: 100%;
+                            padding: 10px 25px;
+                            background: $hotel-secondary-color;
                             border-radius: 8px;
-                            background: $background-white;
+                            border: none;
+                            font-size: 20px;
+                            color: $text-white;
+                            transition: 0.3s;
                             position: relative;
-                            height: 103px;
+                            z-index: 9;
+                            overflow: hidden;
+                            white-space: normal;
 
-                            .travel_info {
-                                width: 100%;
-                                height: 30px;
-                                display: flex;
-                                line-height: 30px;
-                                font-size: 10px;
-                                color: $text-black;
-                                position: relative;
-                                padding: 0 20px;
-                                cursor: pointer;
-
-                                &:before {
-                                    width: 24px;
-                                    height: 24px;
-                                    content: "";
-                                    position: absolute;
-                                    right: 20px;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                    background: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg")
-                                        no-repeat;
-                                }
-
-                                span {
-                                    font-size: 20px;
-                                    font-weight: 600;
-                                    padding: 0 10px 0 0;
-                                    color: $text-black;
-                                }
-
-                                .drop_aerrow {
-                                    width: auto;
-                                    position: relative;
-                                    margin-left: 20px;
-
-                                    &:before {
-                                        content: "";
-                                        position: absolute;
-                                        left: 110%;
-                                        top: 50%;
-                                        width: 0;
-                                        height: 0;
-                                        border-left: 3px solid transparent;
-                                        border-right: 3px solid transparent;
-                                        border-top: 3px solid $text-grey;
-                                        transform: translate(-50%, -50%);
-                                    }
-                                }
+                            img {
+                                max-height: 29px;
                             }
 
-                            span {
-                                font-size: 10px;
-                                font-weight: 400;
-                                color: $text-grey;
-                                padding: 0 20px;
-                            }
-
-                            .traveller_add_block {
-                                width: 260px;
+                            &::before {
+                                content: "";
                                 position: absolute;
-                                top: 108%;
-                                right: 0;
-                                background: $background-white;
-                                box-shadow: 0px 3px 15px $shadow-black;
-                                padding: 15px;
-                                border: 1px solid $text-light-grey;
-                                border-radius: 5px;
-                                z-index: 9999;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 0%;
+                                background: $secondary-color;
+                                z-index: -1;
+                                transition: 0.8s;
+                                border-radius: 0 0 50% 50%;
+                            }
 
+                            &:hover {
                                 &:before {
-                                    width: 0;
-                                    height: 0;
-                                    border-left: 9px solid transparent;
-                                    border-right: 9px solid transparent;
-                                    border-bottom: 9px solid $background-white;
-                                    position: absolute;
-                                    top: -9px;
-                                    right: 21px;
-                                    content: "";
-                                    z-index: 2;
-                                }
-
-                                &:after {
-                                    width: 0;
-                                    height: 0;
-                                    border-left: 10px solid transparent;
-                                    border-right: 10px solid transparent;
-                                    border-bottom: 10px solid $text-light-grey;
-                                    position: absolute;
-                                    top: -10px;
-                                    right: 20px;
-                                    content: "";
-                                }
-                                .rooms_aloc {
-                                    &.marign_rooms {
-                                        margin-top: 10px;
-                                        border-top: 1px solid $box-border-color;
-                                        padding-top: 10px;
-                                    }
-                                    .room_label_main {
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-                                        margin-bottom: 10px;
-                                        span {
-                                            padding: 0;
-                                            &:first-child {
-                                                font-size: 14px;
-                                                font-weight: 500;
-                                                text-transform: uppercase;
-                                            }
-                                            a {
-                                                color: $pink;
-                                                font-size: 12px;
-                                                font-weight: 500;
-                                                text-transform: uppercase;
-                                                cursor: pointer;
-                                                &.remove_room {
-                                                    color: $error-color;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .room_bottom_label {
-                                        display: flex;
-                                        justify-content: flex-end;
-                                        align-items: center;
-                                        span {
-                                            padding: 0;
-                                            a {
-                                                color: $pink;
-                                                font-size: 12px;
-                                                font-weight: 500;
-                                                text-transform: uppercase;
-                                            }
-                                        }
-                                    }
-                                    .child_sel_wrapper {
-                                        display: flex;
-                                        flex-wrap: wrap;
-                                        justify-content: flex-start;
-                                        .child_boxes {
-                                            border: 1px solid $box-border-color;
-                                            border-radius: 8px;
-                                            background: $background-white;
-                                            padding: 5px 10px;
-                                            margin: 2px;
-                                            width: 48%;
-                                            display: none;
-                                            &.open {
-                                                display: block;
-                                            }
-                                            .label_name {
-                                                padding: 0;
-                                                width: 100%;
-                                            }
-                                            select {
-                                                border: none;
-                                                width: 100%;
-                                                font-size: 12px;
-                                                -webkit-appearance: none;
-                                                -moz-appearance: none;
-                                                appearance: none;
-                                                &::after {
-                                                    content: "";
-                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
-                                                        center right 15px no-repeat !important;
-                                                    height: 34px;
-                                                    padding: 15px 0px 0px 8px;
-                                                    position: absolute;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    ul {
-                                        margin: 0;
-                                        padding: 0;
-                                        list-style: none;
-
-                                        li {
-                                            width: 100%;
-                                            display: flex;
-                                            justify-content: space-between;
-                                            align-items: center;
-                                            padding: 0 0 20px;
-
-                                            .left {
-                                                font-size: 10px;
-                                                font-weight: 400;
-                                                color: $text-grey;
-
-                                                span {
-                                                    font-size: 14px;
-                                                    color: $text-darkblue;
-                                                    display: block;
-                                                    padding: 0;
-                                                }
-                                            }
-
-                                            .right {
-                                                width: 100px;
-                                                display: flex;
-                                                align-items: center;
-
-                                                .qtyminus {
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    background: $background-white;
-                                                    border: 1px solid $text-light-grey;
-                                                    border-radius: 5px;
-                                                    color: $text-light-grey;
-                                                    padding: 0;
-                                                    font-size: 18px;
-
-                                                    &:hover {
-                                                        border: 1px solid $pink;
-                                                        color: $pink;
-                                                    }
-                                                }
-
-                                                .qty {
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    font-size: 20px;
-                                                    font-weight: 400;
-                                                    color: $text-darkblue;
-                                                    border: none;
-                                                    text-align: center;
-                                                    padding: 0;
-                                                }
-
-                                                .qtyplus {
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    background: $background-white;
-                                                    border: 1px solid $text-light-grey;
-                                                    border-radius: 5px;
-                                                    color: $text-light-grey;
-                                                    padding: 0;
-                                                    font-size: 18px;
-
-                                                    &:hover {
-                                                        border: 1px solid $pink;
-                                                        color: $pink;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .flight_cat {
-                                    width: 100%;
-
-                                    ul {
-                                        display: flex;
-                                        flex-wrap: wrap;
-                                        align-content: center;
-                                        justify-content: space-between;
-
-                                        li {
-                                            width: 48%;
-                                            margin: 0 0 10px;
-                                            padding: 0;
-
-                                            &:last-child {
-                                                width: 100%;
-                                                margin: 0;
-                                            }
-
-                                            a {
-                                                line-height: 32px;
-                                                width: 100%;
-                                                text-align: center;
-                                                background: $background-white;
-                                                border: 1px solid $text-light-grey;
-                                                border-radius: 5px;
-                                                font-size: 14px;
-                                                color: $text-light-grey;
-
-                                                &:hover {
-                                                    background: $hotel-secondary-color;
-                                                    border: 1px solid $hotel-secondary-color;
-                                                    color: $text-white;
-                                                }
-
-                                                &.active_cat {
-                                                    background: $hotel-secondary-color;
-                                                    border: 1px solid $hotel-secondary-color;
-                                                    color: $text-white;
-                                                }
-                                            }
-                                        }
-                                    }
+                                    height: 190%;
                                 }
                             }
                         }
-                    }
-                }
-            }
-        }
 
-        .serch_btn {
-            width: 100%;
-            text-align: right;
-            position: absolute;
-            bottom: -75px;
-            right: 0;
+                        @media(max-width: 480px) {
+                            bottom: -60px;
 
-            button {
-                width: auto;
-                padding: 10px 25px;
-                background: $primary-color;
-                border-radius: 30px;
-                border: none;
-                font-size: 20px;
-                color: $text-white;
-                transition: 0.3s;
-                position: relative;
-                z-index: 9;
-                overflow: hidden;
-                white-space: normal;
+                            button {
+                                padding: 10px 20px;
+                                font-size: 16px;
 
-                img {
-                    margin-left: 40px;
-                    height: 20px;
-                }
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 0%;
-                    background: $hotel-secondary-color;
-                    z-index: -1;
-                    transition: 0.8s;
-                    border-radius: 0 0 50% 50%;
-                }
-
-                &:hover {
-                    &:before {
-                        height: 190%;
-                    }
-                }
-            }
-
-            @media (max-width: 480px) {
-                bottom: -60px;
-
-                button {
-                    padding: 10px 20px;
-                    font-size: 16px;
-
-                    img {
-                        margin-left: 30px;
+                                img {
+                                    margin-left: 30px;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2977,70 +2944,67 @@ ngb-datepicker {
         display: flex;
         justify-content: space-between;
         margin-bottom: 18px;
-        .hotel-counter-wrapper {
-            flex: 2;
-            .block_result_found {
-                padding: 10px 20px;
-                background: $background-white;
-                border: 1px solid $box-border-color;
-                border-radius: 8px;
-                margin: 0;
-                text-align: center;
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
+        .block_result_found {
 
-                // &:after {
-                //     width: 0;
-                //     height: 0;
-                //     border-left: 10px solid transparent;
-                //     border-right: 10px solid transparent;
-                //     border-top: 10px solid $box-border-color;
-                //     position: absolute;
-                //     bottom: -15px;
-                //     left: 50%;
-                //     transform: translate(-50%, -50%);
-                //     content: "";
-                // }
+            background: $background-white;
+            border: 1px solid $box-border-color;
+            border-radius: 8px;
+            margin: 0;
+            text-align: center;
+            position: relative;
+            display: flex;
+            padding: 10px 20px;
+            justify-content: flex-start;
 
-                // &:before {
-                //     width: 0;
-                //     height: 0;
-                //     border-left: 9px solid transparent;
-                //     border-right: 9px solid transparent;
-                //     border-top: 9px solid $background-white;
-                //     position: absolute;
-                //     bottom: -12px;
-                //     left: 50%;
-                //     transform: translate(-50%, -50%);
-                //     content: "";
-                //     z-index: 2;
-                // }
+            // &:after {
+            //     width: 0;
+            //     height: 0;
+            //     border-left: 10px solid transparent;
+            //     border-right: 10px solid transparent;
+            //     border-top: 10px solid $box-border-color;
+            //     position: absolute;
+            //     bottom: -15px;
+            //     left: 50%;
+            //     transform: translate(-50%, -50%);
+            //     content: "";
+            // }
 
-                p {
-                    font-size: 16px;
-                    font-weight: 500;
-                    color: $text-grey;
-                    margin: 0 0 2px;
-                }
+            // &:before {
+            //     width: 0;
+            //     height: 0;
+            //     border-left: 9px solid transparent;
+            //     border-right: 9px solid transparent;
+            //     border-top: 9px solid $background-white;
+            //     position: absolute;
+            //     bottom: -12px;
+            //     left: 50%;
+            //     transform: translate(-50%, -50%);
+            //     content: "";
+            //     z-index: 2;
+            // }
 
-                span {
-                    font-size: 20px;
-                    font-weight: 600;
-                    color: $text-black;
-                    margin-left: 10px;
-                    margin-bottom: 3px;
-                }
+            p {
+                font-size: 16px;
+                font-weight: 500;
+                color: $text-grey;
+                margin: 0 0 2px;
+            }
+
+            span {
+                font-size: 20px;
+                font-weight: 600;
+                color: $text-black;
+                margin-left: 10px;
+                margin-bottom: 3px;
             }
         }
 
         button {
             background-color: $background-white;
-            padding: 10px 20px;
             border: 1px solid $box-border-color;
-            border-radius: 8px;
             color: $text-grey;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-size: 14px;
             height: 55px;
             margin-left: 10px;
@@ -5766,13 +5730,41 @@ ngb-datepicker {
                     }
 
                     .searchbar_box {
-                        input {
-                            border: 1px solid $box-border-color;
-                            border-radius: 3px;
-                            width: 100%;
-                            height: 32px;
-                            padding: 0 12px;
-                            margin-bottom: 15px;
+                        // input {
+                        //     border: 1px solid $box-border-color;
+                        //     border-radius: 3px;
+                        //     width: 100%;
+                        //     height: 32px;
+                        //     padding: 0 12px;
+                        //     margin-bottom: 15px;
+                        // }
+                        label {
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: #8188ab;
+                            margin: 0 0 10px;
+                        }
+                        .ng-select-container {
+                            border: none;
+                            margin-bottom: 20px;
+                            height: 39px;
+                            &:hover {
+                                box-shadow: none;
+                            }
+                        }
+                        .ng-input {
+                            padding: 0;
+                            input {
+                                // border: 1px solid $box-border-color;
+                                border-bottom: 1px solid $box-border-color;
+                                // border-radius: 3px;
+                                width: 100%;
+                                height: 32px;
+                                padding: 0;
+                                //margin-bottom: 15px;
+                                font-size: 14px;
+                                color: #000;
+                            }
                         }
                         .search_btns {
                             display: flex;
@@ -5831,48 +5823,6 @@ ngb-datepicker {
         }
     }
 
-    .view_btn_wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 18px;
-
-        .block_result_found {
-            padding: 20px;
-            background: $background-white;
-            border: 1px solid $box-border-color;
-            border-radius: 8px;
-            margin: 0;
-            text-align: center;
-            position: relative;
-
-            p {
-                font-size: 16px;
-                font-weight: 500;
-                color: $text-grey;
-                margin: 0 0 2px;
-            }
-
-            span {
-                font-size: 20px;
-                font-weight: 600;
-                color: $text-black;
-            }
-        }
-
-        button {
-            background-color: $background-white;
-            padding: 0 25px;
-            border: 1px solid $box-border-color;
-            border-radius: 8px;
-            color: $text-grey;
-            font-size: 14px;
-            height: 68px;
-            img {
-                margin-right: 5px;
-            }
-        }
-    }
     .result_listing {
         width: 100%;
         display: flex;
@@ -7039,6 +6989,7 @@ ngb-datepicker {
                     }
                 }
             }
+
         }
         &.home_map_listings {
             .search_block {
@@ -7319,7 +7270,7 @@ ngb-datepicker {
 // Close Search Modify section
 
 // detail slider
-.hotel_detail_slider {
+.hotel_detail_slider , .home_detail_slider {
     padding-bottom: 40px;
 
     .slider_main_contain {
@@ -7491,7 +7442,7 @@ ngb-datepicker {
 // detail slider
 
 // hotel tab
-.hotel_detail_tabs {
+.hotel_detail_tabs , .home_detail_tab {
     .nav-tabs {
         border-bottom: none;
 

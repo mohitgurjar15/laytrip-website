@@ -8,7 +8,7 @@
                         <app-booking-timer (sessionTimeout)="sessionTimeout($event)" [config]="bookingTimerConfig"></app-booking-timer>
                         <div class="block_pay_info">
                             <div class="block_travellers">
-                                <h6>Travelers</h6>
+                                <h6>{{'traveler' | translate}}</h6>
                                 <div class="traveller_detail" *ngFor="let traveler of travelerList">
                                     <span>{{traveler.firstName}} {{traveler.lastName}}</span>
                                     <!-- <a href="javascript:void(0);">Send E-ticket</a> -->
@@ -58,7 +58,7 @@
                         <div class="block_pay_info" *ngIf="isShowCardOption">
                             <div class="block_card_select">
                                 <div class="block_title_section">
-                                    <h5 *ngIf="userInfo.roleId!=7">Select Credit Card</h5>
+                                    <h5 *ngIf="userInfo.roleId!=7">{{'select_credit_card' | translate}}</h5>
                                     <h5 *ngIf="userInfo.roleId==7">{{'credit_card_detail' | translate}}
                                     </h5>
                                 </div>

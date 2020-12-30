@@ -92,10 +92,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }
   }
-
-  ngAfterContentChecked() {
-   
-  }
+  
 
   ngDoCheck() {
     this.checkUser();
@@ -249,5 +246,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   openSignModal() {
     const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
+  }
+
+  openChatWidget(){
+    var t1=document.getElementById("topic1");
+    /* if(t1){ 
+            window.fcWidget.show();
+            window.fcWidget.open();
+            console.log('widget opened');
+    } */
   }
 }

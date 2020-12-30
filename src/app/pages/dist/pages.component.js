@@ -23,6 +23,7 @@ var PagesComponent = /** @class */ (function () {
         });
     }
     PagesComponent.prototype.ngOnInit = function () {
+        this.checkUserValidate();
         document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
     };
     PagesComponent.prototype.checkUserValidate = function () {

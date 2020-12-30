@@ -44,6 +44,28 @@
 a:hover {
     cursor: pointer;
 }
+.tab_search_area{
+    ::ng-deep .laytrip-cal-view{
+        padding: 0;
+        input{
+            &.p-inputtext{
+                &:enabled{
+                    &:focus{
+                        box-shadow: none !important;
+                    }
+                }
+            } 
+        }
+        td{
+            padding: 0.1rem !important;
+            span{
+                width: 2rem;
+                height: 2rem;
+                font-size: 12px;
+            }
+        }
+    }
+}
 
 .home_banner {
     .banner_inner {
@@ -69,7 +91,6 @@ a:hover {
         }
     }
 }
-
 
 
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input{

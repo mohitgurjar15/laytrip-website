@@ -1,0 +1,109 @@
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+//<!-- Start Partial Payment Section css -->
+.partial_payment {
+	padding: 50px 0 0;
+	// background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/partial_payment_bg.webp) no-repeat;
+	// background-size: cover;
+	position: relative;
+	margin: 10px 0;
+
+	@include tab-view {
+        padding: 15px 0;
+        margin: 15px 0;
+	}
+
+	.partial_payment_info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+
+        @include tab-view{
+            flex-direction: column;
+        }
+        .partial_info_sections{
+            text-align: center;
+            .pay_info_inner_wrapper{
+                color: $text-black;
+                padding: 10px 60px;
+                @include ipad-view{
+                    padding: 20px 0;
+                }
+                @include mobile-view{
+                    padding: 20px 15px;
+                }
+                .pay_type_img_wrap{
+                    margin-bottom: 15px;
+                }
+                .pay_title{
+                    margin: 15px 0;
+                    font-weight: 800;
+                    font-size: 21px;
+                    line-height: 23px;
+                    padding: 0 17px;
+                    width: 100%;
+                    @include mobile-view{
+                        padding: 0;
+                    }
+                }
+                p{
+                    margin: 5px 0 10px;
+                    font-size: 18px;
+                    line-height: 23px;
+                }
+            }
+        }
+		
+    }
+    .cta_extra_btn_wrapper{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 10px 0;
+        align-items: center;
+        button {
+            max-width: 155px;
+            width: 100%;
+            height: 100%;
+            padding: 10px 25px;
+            background: $hotel-secondary-color;
+            border-radius: 25px;
+            border: none;
+            font-size: 18px;
+            color: $text-white;
+            transition: 0.3s;
+            position: relative;
+            z-index: 9;
+            overflow: hidden;
+            white-space: normal;
+    
+    
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 0%;
+                background: $secondary-color;
+                z-index: -1;
+                transition: 0.8s;
+                border-radius: 0 0 50% 50%;
+            }
+    
+            &:hover {
+                &:before {
+                    height: 190%;
+                }
+            }
+        }
+    }
+    
+}
+
+//<!-- Close Partial Payment Section css -->

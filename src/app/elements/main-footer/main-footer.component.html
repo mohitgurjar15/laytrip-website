@@ -9,8 +9,38 @@
                             <a [routerLink]="['/']">
                                 <img src="{{s3BucketUrl}}assets/images/footer_logo.svg" alt="Logo" />
                             </a>
-                            <p>{{'laytrip_info_page_title_1_description' | translate}}</p>
-
+                            <!-- <p>{{'laytrip_info_page_title_1_description' | translate}}</p> -->
+                            <p>Layaway travel for everyone</p>
+                            <div class="footer_cta_dropdown">
+                                <div class="cta_drop_wrp">
+                                    <div class="dropdown cus_drop">
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">
+                                            <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code
+                                            }}
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li *ngFor="let currency of currencies">
+                                                <a href="#" (click)="changeCurrency(currency)">
+                                                    <img src="{{currency.flag}}" alt="" /> {{ currency.code }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cta_drop_wrp">
+                                    <div class="dropdown cus_drop">
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">
+                                            {{ selectedLanunage.name }}
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li *ngFor="let langunage of langunages"><a
+                                                    (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- <div class="company_contact">
                                 <h5>Reach Us</h5>
                                 <ul>
@@ -25,65 +55,71 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="ftr_menu">
-                            <div class="menu_grid">
+                            <!-- <div class="menu_grid">
                                 <h5>{{'laytrip_info_page_title_2' | translate}}</h5>
                                 <ul>
                                     <ul>
                                         <li><a href="mailto:support@laytrip.com"><i class="fa fa-envelope"
                                                     aria-hidden="true"></i>
                                                 support@laytrip.com</a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i> +00
+                                        <li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i>
+                                                +00
                                                 000 000 0000</a></li>
                                     </ul>
                                 </ul>
-                            </div>
+                            </div> -->
 
                             <div class="menu_grid">
                                 <h5>{{'laytrip_info_page_title_3' | translate}}</h5>
                                 <ul>
                                     <li>
-                                        <a [routerLink]="['/why-laytrip']" [innerHTML]="'laytrip_info_page_title_3_description_1' | translate"></a>
+                                        <a [routerLink]="['/why-laytrip']"
+                                            [innerHTML]="'laytrip_info_page_title_3_description_1' | translate"></a>
                                     </li>
                                     <!-- <li><a href="javascript:void(0);">Media and News</a></li> -->
                                     <!-- <li><a href="javascript:void(0);">Download the App</a></li>
                                     <li><a href="javascript:void(0);">Media and News</a></li> -->
                                     <li>
-                                        <a [routerLink]="['/download-app']" [innerHTML]="'laytrip_info_page_title_3_description_2' | translate"></a>
+                                        <a [routerLink]="['/download-app']"
+                                            [innerHTML]="'laytrip_info_page_title_3_description_2' | translate"></a>
                                     </li>
                                 </ul>
                             </div>
-                            <!-- <div class="menu_grid">
-                                <h5>Partners</h5>
-                                <ul>
-                                    <li><a href="javascript:void(0);">Become a Partner</a></li>
-                                    <li><a href="javascript:void(0);">Membership options</a></li>
-                                    <li><a [routerLink]="['/partial-payment']">Partial Payment Travelling</a></li>
-                                </ul>
-                            </div>
-                            <div class="menu_grid">
-                                <h5>Explore</h5>
-                                <ul>
-                                    <li><a href="javascript:void(0);">Flights</a></li>
-                                    <li><a href="javascript:void(0);">Hotels</a></li>
-                                    <li><a href="javascript:void(0);">Home Rentals</a></li>
-                                    <li><a href="javascript:void(0);">Special Deals</a></li>
-                                </ul>
-                            </div> -->
                             <div class="menu_grid">
                                 <h5>{{'laytrip_info_page_title_4' | translate}}</h5>
                                 <ul>
                                     <li>
-                                        <a [routerLink]="['/faq']" [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
+                                        <a [routerLink]="['/faq']"
+                                            [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li>
                                     <li>
-                                        <a [routerLink]="['/contact-us']" [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"></a>
+                                        <a [routerLink]="['/contact-us']"
+                                            [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"></a>
                                     </li>
                                     <!-- <li><a [routerLink]="['/cancellation-policy']">Booking and Cancellation Policies</a>
                                     </li> -->
                                     <!-- <li><a [routerLink]="['/privacy-policy']">Privacy</a></li> -->
                                     <!-- <li><a href="javascript:void(0);">Terms</a></li> -->
                                     <li>
-                                        <a [routerLink]="['/account/search-trip']" [innerHTML]="'laytrip_info_page_title_4_description_3' | translate"></a>
+                                        <a [routerLink]="['/account/search-trip']"
+                                            [innerHTML]="'laytrip_info_page_title_4_description_3' | translate"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="menu_grid">
+                                <h5>Get our App</h5>
+                                <ul class="footer_down_links">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <img src="{{s3BucketUrl}}assets/images/app_store_footer.svg" alt="App Store"
+                                                title="App Store">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <img src="{{s3BucketUrl}}assets/images/playstore_footer.svg"
+                                                alt="Play Store" title="playstore">
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -103,7 +139,8 @@
 </section>
 <!-- Close Footer Section -->
 <div class="block_share">
-    <a href="javascript:void(0);" (click)="openShare()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg" alt="Share"> </a>
+    <a href="javascript:void(0);" (click)="openShare()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg"
+            alt="Share"> </a>
 </div>
 
 <a id="back_to_top" title="Back to top">
