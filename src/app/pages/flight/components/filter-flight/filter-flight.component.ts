@@ -151,6 +151,8 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     this.loadJquery();
   }
 
+  
+
   toggleOutbound() {
     this.isShowoutbound = !this.isShowoutbound;
   }
@@ -195,6 +197,15 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       $("body").removeClass('overflow-hidden');
     });
     //Close REsponsive Fliter js
+
+    // Start filter Shortby js
+    $(document).on('show', '#accordion2', function (e) {
+      $(e.target).prev('.accordion-heading').addClass('accordion-opened');
+    });
+
+    $(document).on('hide', '#accordion2', function (e) {
+      $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
+    });
   }
 
   ngOnDestroy(): void {

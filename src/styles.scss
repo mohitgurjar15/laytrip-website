@@ -53,6 +53,15 @@ select {
 		outline: none;
 	}
 }
+.tab_search_area{
+    input{
+        &.p-inputtext{
+			&:focus{
+				box-shadow: none !important;
+			}
+        } 
+	}
+}
 
 //<!-- Start Coming Soon page css -->
 .coming_soon {
@@ -297,28 +306,10 @@ select {
 
 //<!--  Start Banner Section css -->
 .home_banner {
-	width: 100%;
-	position: relative;
-	background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg) no-repeat;
-	background-size: cover;
-	padding-bottom: 50px;
-
-	&:before {
-		width: 100%;
-		height: 180px;
-		background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner_bottom.svg) repeat-x;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		content: '';
-	}
+	
 
 	.banner_inner {
-		position: relative;
-		top: 50px;
-		left: 0;
-		transform: none;
-
+		
 		.banner_text {
 			width: auto;
 
@@ -378,9 +369,9 @@ select {
 								line-height: 32px;
 								border-radius: 16px;
 								padding: 0 8px;
-								border: 1px solid $tab-border-color;
-								background: $tab-bg;
-								color: $tab-text-color;
+								border: 1px solid $text-grey;
+								background: $background-white;
+								color: $text-grey;
 								text-decoration: none;
 								font-size: 14px;
 								font-weight: 500;
@@ -397,9 +388,9 @@ select {
 								}
 
 								&.active {
-									color: $pink_clr;
-									background: $bg_tab_active;
-									border: 1px solid $border_tab_active;
+									color: $active-tab-text;
+									background: $background-white;
+									border: 1px solid $active-tab-text;
 
 									.active-icon {
 										display: block;
@@ -411,10 +402,11 @@ select {
 								}
 
 								@media(max-width: 480px) {
-									font-size: 10px;
+									font-size: 14px;
 
 									span {
 										display: inline-block;
+										font-size: 14px;
 									}
 								}
 							}
@@ -849,8 +841,8 @@ select {
 											}
 
 											.switch_btn {
-												width: 36px;
-												height: 36px;
+												width: 32px;
+												height: 32px;
 												background: $background-white;
 												border: 1px solid $box-border-color;
 												position: absolute;
@@ -861,7 +853,7 @@ select {
 												z-index: 9;
 
 												img {
-													width: 20px;
+													width: 14px;
 													position: absolute;
 													top: 50%;
 													left: 50%;
@@ -1136,9 +1128,9 @@ select {
 						line-height: 32px;
 						border-radius: 16px;
 						padding: 0 8px;
-						border: 1px solid $tab-border-color;
-						background: $tab-bg;
-						color: $tab-text-color;
+						border: 1px solid $text-grey;
+						background: $background-white;
+						color: $text-grey;
 						text-decoration: none;
 						font-size: 14px;
 						font-weight: 500;
@@ -1155,9 +1147,9 @@ select {
 						}
 
 						&.active {
-							color: $pink_clr;
-							background: $bg_tab_active;
-							border: 1px solid $border_tab_active;
+							color: $active-tab-text;
+							background: $background-white;
+							border: 1px solid $active-tab-text;
 
 							.active-icon {
 								display: block;
@@ -1169,10 +1161,11 @@ select {
 						}
 
 						@media(max-width: 480px) {
-							font-size: 10px;
+							font-size: 14px;
 
 							span {
 								display: inline-block;
+								font-size: 14px;
 							}
 						}
 					}
@@ -1607,8 +1600,8 @@ select {
 									}
 
 									.switch_btn {
-										width: 36px;
-										height: 36px;
+										width: 32px;
+										height: 32px;
 										background: $background-white;
 										border: 1px solid $box-border-color;
 										position: absolute;
@@ -1619,7 +1612,7 @@ select {
 										z-index: 9;
 
 										img {
-											width: 20px;
+											width: 14px;
 											position: absolute;
 											top: 50%;
 											left: 50%;
@@ -1732,7 +1725,7 @@ select {
 									.serch_btn {
 										width: 100%;
 										height: 100%;
-
+	
 										button {
 											width: 100%;
 											height: 100%;
@@ -1747,11 +1740,11 @@ select {
 											z-index: 9;
 											overflow: hidden;
 											white-space: normal;
-
+	
 											img {
 												max-height: 29px;
 											}
-
+	
 											&::before {
 												content: "";
 												position: absolute;
@@ -1764,21 +1757,21 @@ select {
 												transition: 0.8s;
 												border-radius: 0 0 50% 50%;
 											}
-
+	
 											&:hover {
 												&:before {
 													height: 190%;
 												}
 											}
 										}
-
+	
 										@media(max-width: 480px) {
 											bottom: -60px;
-
+	
 											button {
 												padding: 10px 20px;
 												font-size: 16px;
-
+	
 												img {
 													margin-left: 30px;
 												}
@@ -1788,6 +1781,8 @@ select {
 								}
 							}
 						}
+
+						
 					}
 				}
 			}
@@ -2518,7 +2513,7 @@ select {
 					margin-bottom: 15px;
 
 					img {
-						display: block;
+						display: inline-block;
 					}
 				}
 
@@ -4398,76 +4393,6 @@ select {
 }
 
 
-.block_covid {
-	width: 100%;
-	background: $pink_clr;
-	position: relative;
-	z-index: 9;
-	padding: 15px 0;
-
-	span {
-		font-size: 16px;
-		font-weight: 400;
-		color: $text-white;
-
-		img {
-			height: 20px;
-			margin-right: 10px;
-		}
-
-		a {
-			color: $text-white;
-			font-weight: 500;
-			text-transform: capitalize;
-			text-decoration: underline;
-		}
-	}
-
-
-	//	.accordion {
-	//		.card {
-	//			border: none;
-	//			margin-bottom: 0px;
-	//			background: $covid_bg;
-	//
-	//			h2 {
-	//				background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_up_arrow.svg) no-repeat calc(100% - 0px) center;
-	//				background-size: 20px;
-	//				cursor: pointer;
-	//				font-size: 16px;
-	//				font-weight: 600;
-	//				padding: 15px 0;
-	//				color: $text-black;
-	//				display: flex;
-	//				align-items: center;
-	//
-	//				&.collapsed {
-	//					background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_down_arrow.svg);
-	//				}
-	//
-	//				img {
-	//					height: 20px;
-	//					margin-right: 10px;
-	//				}
-	//			}
-	//		}
-	//
-	//		.card-body {
-	//			padding: 0 0 15px;
-	//
-	//			p {
-	//				font-size: 14px;
-	//				line-height: 21px;
-	//				color: $text-black;
-	//				margin: 0;
-	//
-	//				a {
-	//					color: $text-blue;
-	//				}
-	//			}
-	//		}
-	//	}
-}
 
 .block_covid_19 {
 	width: 100%;

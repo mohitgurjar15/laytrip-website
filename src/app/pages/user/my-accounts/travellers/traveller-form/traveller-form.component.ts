@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, SimpleChanges,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
 import * as moment from 'moment';
@@ -25,8 +25,8 @@ export class TravellerFormComponent implements OnInit {
   @Output() travelersChanges = new EventEmitter();
   @Input() travellerId: any;
   @Input() travelerInfo: any;
-  @Input() countries=[];
-  @Input() countries_code=[];
+  @Input() countries = [];
+  @Input() countries_code = [];
 
   coAccountForm: FormGroup;
   traveller: any = [];
@@ -44,6 +44,9 @@ export class TravellerFormComponent implements OnInit {
     displayFormat: 'DD/MM/YYYY'
   };
   location;
+  isChild = false;
+  isInfant = false;
+  isAdult = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,14 +63,14 @@ export class TravellerFormComponent implements OnInit {
 
   ngOnInit() {
     this.checkUser();
-    let location:any = this.cookieService.get('__loc');
-    try{
+    let location: any = this.cookieService.get('__loc');
+    try {
       this.location = JSON.parse(location);
     }
-    catch(e){
+    catch (e) {
     }
-    let countryCode:any;
-    if(this.location){
+    let countryCode: any;
+    if (this.location) {
       countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
     }
 
@@ -75,11 +78,11 @@ export class TravellerFormComponent implements OnInit {
       // title: ['mr'],
       gender: ['M'],
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      lastName: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required]],
-      country_id: [typeof this.location!='undefined' ? this.location.country.name : '',[ Validators.required]],
-      country_code: [typeof countryCode !='undefined' ? countryCode.country_name : '', [Validators.required]],
+      country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
+      country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
@@ -94,27 +97,55 @@ export class TravellerFormComponent implements OnInit {
   }
 
   setTravelerForm() {
-      this.traveller = this.travelerInfo;
-      let  countryCode  = '';
-      if(typeof this.travelerInfo.countryCode != 'undefined' && typeof this.travelerInfo.countryCode == 'string'){
-        countryCode = this.countries_code.filter(item => item.id == this.travelerInfo.countryCode)[0];      
-      } else {
-         countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];      
-      }
+    this.traveller = this.travelerInfo;
+    let countryCode = '';
+    if (typeof this.travelerInfo.countryCode != 'undefined' && typeof this.travelerInfo.countryCode == 'string') {
+      countryCode = this.countries_code.filter(item => item.id == this.travelerInfo.countryCode)[0];
+    } else {
+      countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
+    }
 
-      this.coAccountForm.patchValue({
-        // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
-        firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
-        lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
-        email: this.travelerInfo.email ? this.travelerInfo.email : '',
-        gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
-        phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
-        country_code: countryCode,
-        country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
-        dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
-        passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
-        passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : '',   
+    this.coAccountForm.patchValue({
+      // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
+      firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
+      lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
+      email: this.travelerInfo.email ? this.travelerInfo.email : '',
+      gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
+      phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
+      country_code: countryCode,
+      country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
+      dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
+      passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
+      passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : '',
     });
+  }
+
+  changeDateOfBirth(event) {
+    let todayDate = moment();
+    let birthYear = moment(event, 'YYYY');
+    let age = parseInt(todayDate.diff(birthYear, 'y', true).toFixed(2));
+    console.log(age);
+    if (age && age === 2 || age > 2 && age < 12) {
+      // FOR CHILD
+      this.isChild = true;
+      this.isInfant = false;
+      this.isAdult = false;
+    } else if (age && age < 2 || age === 0) {
+      // FOR INFANT
+      this.isInfant = true;
+      this.isAdult = false;
+      this.isChild = false;
+    } else if (age && age > 12) {
+      // FOR ADULT
+      this.isChild = false;
+      this.isInfant = false;
+      this.isAdult = true;
+    } else {
+      // FOR ONLY ADULT
+      this.isAdult = true;
+      this.isChild = false;
+      this.isInfant = false;
+    }
   }
 
   close() {
@@ -151,19 +182,19 @@ export class TravellerFormComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-     
+
       let country_id = this.coAccountForm.value.country_id.id;
       if (!Number(country_id)) {
-        if(this.traveller.country){
-          country_id = ( this.traveller.country.id ) ? this.traveller.country.id : '';
+        if (this.traveller.country) {
+          country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
         } else {
           country_id = this.location.country.id;
         }
       }
       let country_code = this.coAccountForm.value.country_code;
-      if(typeof country_code == 'object'){
-        country_code = country_code.id ? country_code.id :  this.location.country.id;
-      } else if(typeof country_code == 'string'){
+      if (typeof country_code == 'object') {
+        country_code = country_code.id ? country_code.id : this.location.country.id;
+      } else if (typeof country_code == 'string') {
         country_code = this.travelerInfo.countryCode ? this.travelerInfo.countryCode : this.location.country.id;
       } else {
         country_code = this.location.country.id;
@@ -178,22 +209,22 @@ export class TravellerFormComponent implements OnInit {
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : null,
         passport_number: this.coAccountForm.value.passport_number,
-        country_code : country_code ? country_code  : this.location.country.id, 
+        country_code: country_code ? country_code : this.location.country.id,
         phone_no: this.coAccountForm.value.phone_no,
       };
       let emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
 
       if (this.travellerId) {
         jsonData = Object.assign(jsonData, emailObj);
-        this.flightService.updateAdult(jsonData,this.travellerId).subscribe((data: any) => {
-          this.travelersChanges.emit(data);          
+        this.flightService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
+          this.travelersChanges.emit(data);
           this.activeModal.close();
         }, (error: HttpErrorResponse) => {
-            this.submitted = this.loading = false;
-            if (error.status === 401) {
-              this.router.navigate(['/']);
-            }
-            this.toastr.error(error.error.message, 'Traveller Update Error');
+          this.submitted = this.loading = false;
+          if (error.status === 401) {
+            this.router.navigate(['/']);
+          }
+          this.toastr.error(error.error.message, 'Traveller Update Error');
         });
       } else {
         jsonData = Object.assign(jsonData, emailObj);
@@ -208,7 +239,7 @@ export class TravellerFormComponent implements OnInit {
             this.router.navigate(['/']);
           } else {
             this.submitted = this.loading = false;
-            this.toastr.error(error.error.message, 'Traveller Update Error');
+            this.toastr.error(error.error.message, 'Traveller Add Error');
           }
         });
 

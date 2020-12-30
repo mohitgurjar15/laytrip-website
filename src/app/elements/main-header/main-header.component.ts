@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck,  ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, Renderer2 } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
@@ -21,69 +21,27 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   @ViewChild(MainHeaderComponent, { static: false }) headerComponent: MainHeaderComponent;
 
   s3BucketUrl = environment.s3BucketUrl;
-  langunages: Langunage[] = [];
-  selectedLanunage: Langunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
-  isLanunageSet: boolean = false;
   defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
 
-  currencies: Currency[] = [];
-  selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
-  isCurrencySet: boolean = false;
   isLoggedIn = false;
   totalLayCredit = 0;
   showTotalLayCredit = 0;
   userDetails;
   username;
   _isLayCredit = false;
-  countryCode:string='';
 
   constructor(
     private genericService: GenericService,
     public translate: TranslateService,
     public modalService: NgbModal,
     public router: Router,
-    private commonFunction:CommonFunction,
+    private commonFunction: CommonFunction,
     private renderer: Renderer2
   ) {
-
-    this.countryCode = this.commonFunction.getUserCountry();
-    let _langunage = localStorage.getItem('_lang');
-    let _currency = localStorage.getItem('_curr');
-    if (_langunage) {
-      try {
-        let _lang = JSON.parse(_langunage);
-        this.selectedLanunage = _lang;
-        translate.setDefaultLang(this.selectedLanunage.iso_1Code);
-        this.isLanunageSet = true;
-        this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
-      } catch (error) {
-        this.isLanunageSet = false;
-        translate.setDefaultLang('en');
-      }
-    } else {
-      translate.setDefaultLang('en');
-    }
-
-    if (_currency) {
-
-      try {
-        let _curr = JSON.parse(_currency);
-        this.selectedCurrency = _curr;
-        this.isCurrencySet = true;
-      }
-      catch (error) {
-        this.isCurrencySet = false;
-      }
-    }
-
-    this.countryCode = this.commonFunction.getUserCountry();
-    
   }
 
   ngOnInit(): void {
     this.checkUser();
-    this.getLangunages();
-    this.getCurrencies();
     this.loadJquery();
     //this.getUserLocationInfo();
     if (this.isLoggedIn) {
@@ -92,7 +50,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }
   }
-  
+
 
   ngDoCheck() {
     this.checkUser();
@@ -103,90 +61,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   ngOnChanges() {
     // this.totalLaycredit();
   }
-  /**
-   * change user lanunage
-   * @param langunage 
-   */
-  changeLangunage(langunage: Langunage) {
-
-    if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
-      this.selectedLanunage = langunage;
-      localStorage.setItem("_lang", JSON.stringify(langunage))
-      this.renderer.removeClass(document.body, `en_lang`);
-      this.renderer.removeClass(document.body, `es_lang`);
-      this.renderer.removeClass(document.body, `it_lang`);
-      this.translate.use(langunage.iso_1Code);
-      this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
-    }
-  }
-
-  /**
-   * Get all langunages
-   */
-  getLangunages() {
-    this.genericService.getAllLangunage().subscribe(
-      (response: LangunageModel) => {
-        this.langunages = response.data.filter(lang => lang.active == true);
-        if (!this.isLanunageSet) {
-          this.isLanunageSet = true;
-          this.selectedLanunage = this.langunages[0];
-          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
-        }
-        else {
-          let find = this.langunages.find(langunage => langunage.id == this.selectedLanunage.id)
-          if (!find) {
-            this.isLanunageSet = true;
-            this.selectedLanunage = this.langunages[0];
-            localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
-          }
-        }
-      },
-      (error) => {
-
-      }
-    )
-  }
-
-  /**
-   * Get all currencies
-   */
-  getCurrencies() {
-
-    this.genericService.getCurrencies().subscribe(
-      (response: CurrencyModel) => {
-
-        this.currencies = response.data.filter(currency => currency.status == true);
-        for (let i = 0; i < this.currencies.length; i++) {
-          this.currencies[i].flag = `${this.s3BucketUrl}assets/images/icon/${this.currencies[i].code}.svg`;
-        }
-        if (!this.isCurrencySet) {
-
-          this.isCurrencySet = true;
-          this.selectedCurrency = this.currencies[0];
-
-          localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
-        }
-        else {
-          let find = this.currencies.find(currency => currency.id == this.selectedCurrency.id)
-          if (!find) {
-            this.isCurrencySet = true;
-            this.selectedCurrency = this.currencies[0];
-            localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
-          }
-        }
-      },
-      (error) => {
-
-      }
-    )
-  }
-
-  changeCurrency(currency: Currency) {
-    if (JSON.stringify(currency) != JSON.stringify(this.selectedCurrency)) {
-      this.selectedCurrency = currency;
-      localStorage.setItem("_curr", JSON.stringify(currency))
-    }
-  }
 
   checkUser() {
     let userToken = localStorage.getItem('_lay_sess');
@@ -196,7 +70,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
       this.userDetails = getLoginUserInfo();
-      if (this.userDetails.roleId != 7 && !this._isLayCredit ) {
+      if (this.userDetails.roleId != 7 && !this._isLayCredit) {
         this.totalLaycredit();
       }
       this.showTotalLayCredit = this.totalLayCredit;
@@ -237,7 +111,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.genericService.getAvailableLaycredit().subscribe((res: any) => {
       this.totalLayCredit = res.total_available_points;
     }, (error => {
-      if(error.status == 406){
+      if (error.status == 406) {
         redirectToLogin();
       }
     }))
@@ -246,5 +120,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   openSignModal() {
     const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
+  }
+
+  openChatWidget(){
+    var t1=document.getElementById("topic1");
+    /* if(t1){ 
+            window.fcWidget.show();
+            window.fcWidget.open();
+            console.log('widget opened');
+    } */
   }
 }
