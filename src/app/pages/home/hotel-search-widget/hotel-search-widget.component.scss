@@ -1,4 +1,9 @@
 @import "../../../../cstm-variable";
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 .hotel-error {
     border: 1px solid red;
@@ -49,4 +54,26 @@
 
 .custom-day.day-disabled {
     color: lightgrey !important;
+}
+.tab_search_area{
+    ::ng-deep .laytrip-cal-view{
+        padding: 0;
+        input{
+            &.p-inputtext{
+                &:enabled{
+                    &:focus{
+                        box-shadow: none !important;
+                    }
+                }
+            } 
+        }
+        td{
+            padding: 0.1rem !important;
+            span{
+                width: 2rem;
+                height: 2rem;
+                font-size: 12px;
+            }
+        }
+    }
 }

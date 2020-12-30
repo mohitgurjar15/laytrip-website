@@ -122,7 +122,7 @@
 
 					.dropdown-menu {
 						padding: 0;
-						min-width: 120px;
+						min-width: 165px;
 
 						a {
 							padding: 10px;
@@ -378,10 +378,26 @@
 										border-bottom: 1px solid $box-border-color;
 
 										a {
-											color: $text-darkblue;
-
+											color: $text-grey;
+											font-size: 14px;
 											&:hover {
-												color: $text-white;
+												color: $primary-color;
+												background-color: $bg-body;
+											}
+											.lay_points_dot{
+												position: relative;
+												width: 100%;
+												padding-left: 22px;
+												display: flex;
+												&::before{
+													content: '';
+													height: 18px;
+													width: 18px;
+													background-color: $hotel-secondary-color;
+													position: absolute;
+													left: 0;
+													border-radius: 50%;
+												}
 											}
 										}
 
