@@ -247,4 +247,13 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
   }
+
+  openChatWidget(){
+    var t1=document.getElementById("topic1");
+    /* if(t1){ 
+            window.fcWidget.show();
+            window.fcWidget.open();
+            console.log('widget opened');
+    } */
+  }
 }

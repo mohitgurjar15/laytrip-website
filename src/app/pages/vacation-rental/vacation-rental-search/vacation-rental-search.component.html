@@ -1,4 +1,11 @@
-<app-vacation-rental-search-bar (searchBarInfo)="getSearchItem($event)"></app-vacation-rental-search-bar>
+<!-- <app-vacation-rental-search-bar (searchBarInfo)="getSearchItem($event)"></app-vacation-rental-search-bar> -->
+<div class="search_tab_listing_wrapper">
+  <div class="container">
+      <div class="searchbar_box_common">
+          <app-vacation-search-widget></app-vacation-search-widget>
+      </div>
+  </div>
+</div>
 <app-vacation-loader *ngIf="loading" ></app-vacation-loader>
 <app-vacation-popup-loader *ngIf="loading"></app-vacation-popup-loader>
 <app-vacation-not-found *ngIf="isNotFound" ></app-vacation-not-found>

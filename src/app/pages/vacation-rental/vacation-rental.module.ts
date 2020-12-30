@@ -19,6 +19,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { VacationDetailComponent } from './components/vacation-detail/vacation-detail.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { VacationPopupLoaderComponent } from './components/vacation-popup-loader/vacation-popup-loader.component';
+import { HomeModule } from '../home/home.module';
 
 @NgModule({
   declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent, VacationDetailComponent, VacationPopupLoaderComponent],
@@ -38,7 +39,11 @@ import { VacationPopupLoaderComponent } from './components/vacation-popup-loader
     }),
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
+    HomeModule
   ],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports : [
+    HomeModule
+  ]
 })
 export class VacationRentalModule { }
