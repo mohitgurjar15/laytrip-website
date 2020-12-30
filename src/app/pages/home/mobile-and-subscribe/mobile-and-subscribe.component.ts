@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class MobileAndSubscribeComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  subscribeForm:FormGroup;
+  subscribeForm: FormGroup;
   submitted = false;
   loading = false;
   success = false;
@@ -29,7 +29,7 @@ export class MobileAndSubscribeComponent implements OnInit {
     });
   }
 
-  subscribeNow(){
+  subscribeNow() {
     this.submitted = this.loading = true;
     if (this.subscribeForm.invalid) {
       this.submitted = true;
@@ -37,12 +37,12 @@ export class MobileAndSubscribeComponent implements OnInit {
       return;
     } else {
       this.userService.subscribeNow(this.subscribeForm.value.email).subscribe((data: any) => {
-        this.submitted = this.loading  = false;
+        this.submitted = this.loading = false;
         this.success = true;
-        this.toastr.success(data.message, 'Subscribed Successful');       
+        this.toastr.success(data.message, 'Subscribed Successful');
       }, (error: HttpErrorResponse) => {
-        this.submitted = this.loading  = this.success = false; 
-        this.toastr.error(error.error.message, 'Subscribed Error');       
+        this.submitted = this.loading = this.success = false;
+        this.toastr.error(error.error.message, 'Subscribed Error');
       });
     }
   }
