@@ -1,19 +1,19 @@
 <div class="filter_saidbar">
-    <div class="block_result_found">
+    <!-- <div class="block_result_found">
         <p>{{flightDetails.length}} {{'flight_found_from' | translate}}</p>
         <span>{{departureCode}} to {{arrivalCode}}</span>
-    </div>
+    </div> -->
     <div class="short_by">
-        <div class="block_inn">
+        <!-- <div class="block_inn">
             <h4>{{'sort_by' | translate}}</h4>
             <a class="anchor_link" (click)="resetSorting('selling_price','ASC')"> {{'reset' | translate}}</a>
-        </div>
+        </div> -->
         <div class="accordion block_shortby" id="accordion">
             <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
                 <div class="accordion-heading" (click)="toggleLowToHigh()">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-            {{'lowest_to_highest' | translate}}
-          </a>
+                        {{'lowest_to_highest' | translate}}
+                    </a>
                 </div>
                 <div id="collapseOne" class="accordion-body collapse">
                     <div class="accordion-inner">
@@ -22,15 +22,17 @@
                             <ul>
                                 <li>
                                     <label class="custom_radio">{{'lowest_to_highest' | translate}}
-                    <input type="radio" [checked]="sortType=='lh_price'"  (click)="sortFlightData('selling_price','ASC','lh_price')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='lh_price'"
+                                            (click)="sortFlightData('selling_price','ASC','lh_price')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                                 <li>
                                     <label class="custom_radio">{{'highest_to_lowest' | translate}}
-                    <input type="radio" [checked]="sortType=='hl_price'" (click)="sortFlightData('selling_price','DESC','hl_price')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='hl_price'"
+                                            (click)="sortFlightData('selling_price','DESC','hl_price')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                             </ul>
                         </div>
@@ -39,15 +41,17 @@
                             <ul>
                                 <li>
                                     <label class="custom_radio">{{'shortest' | translate}}
-                    <input type="radio" [checked]="sortType=='lh_duration'"  (click)="sortFlightData('total_duration','ASC','lh_duration')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='lh_duration'"
+                                            (click)="sortFlightData('total_duration','ASC','lh_duration')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                                 <li>
                                     <label class="custom_radio">{{'longest' | translate}}
-                    <input type="radio" [checked]="sortType=='hl_duration'" (click)="sortFlightData('total_duration','DESC','hl_duration')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='hl_duration'"
+                                            (click)="sortFlightData('total_duration','DESC','hl_duration')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                             </ul>
                         </div>
@@ -56,15 +60,17 @@
                             <ul>
                                 <li>
                                     <label class="custom_radio">{{'earliest' | translate}}
-                    <input type="radio" [checked]="sortType=='lh_arrival'" (click)="sortFlightData('arrival','ASC','lh_arrival')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='lh_arrival'"
+                                            (click)="sortFlightData('arrival','ASC','lh_arrival')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                                 <li>
                                     <label class="custom_radio">{{'letest' | translate}}
-                    <input type="radio" [checked]="sortType=='hl_arrival'" (click)="sortFlightData('arrival','DESC','hl_arrival')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='hl_arrival'"
+                                            (click)="sortFlightData('arrival','DESC','hl_arrival')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                             </ul>
                         </div>
@@ -73,15 +79,17 @@
                             <ul>
                                 <li>
                                     <label class="custom_radio">{{'earliest' | translate}}
-                    <input type="radio" [checked]="sortType=='lh_departure'" (click)="sortFlightData('departure','ASC','lh_departure')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='lh_departure'"
+                                            (click)="sortFlightData('departure','ASC','lh_departure')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                                 <li>
                                     <label class="custom_radio">{{'letest' | translate}}
-                    <input type="radio" [checked]="sortType=='hl_departure'" (click)="sortFlightData('departure','DESC','hl_departure')">
-                    <span class="checkmark"></span>
-                  </label>
+                                        <input type="radio" [checked]="sortType=='hl_departure'"
+                                            (click)="sortFlightData('departure','DESC','hl_departure')">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </li>
                             </ul>
                         </div>
