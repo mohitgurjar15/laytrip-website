@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VacationRentalService } from '../../../services/vacation-rental.service';
 
 @Component({
@@ -54,6 +54,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
+    private route: ActivatedRoute,
     private rentalService: VacationRentalService) { 
 
     this.rentalSearchForm = this.fb.group({   
@@ -73,17 +74,46 @@ export class VacationSearchWidgetComponent implements OnInit {
     if(host.includes("staging")){
       this.showCommingSoon=true;
     }
-     
-     if (this.fromDestinationInfo) {
-      this.rentalForm.city = this.fromDestinationInfo.city;
-      this.rentalForm.country = this.fromDestinationInfo.country;
-      this.rentalForm.id = this.fromDestinationInfo.id;
-      this.rentalForm.display_name = this.fromDestinationInfo.display_name;
-      this.rentalForm.city = this.fromDestinationInfo.city;
-      this.searchedValue.push({ key: 'fromSearch1', value: this.fromDestinationInfo });
-      console.log(this.searchedValue);
-    }
-    
+
+    this.route.queryParams.subscribe(params => {
+        if(Object.keys(params).length > 0){
+          const info = JSON.parse(localStorage.getItem('_rental'));
+          this.searchedValue=[];
+          this.rentalForm.city = params.city;
+          this.rentalForm.country = params.country;
+          this.rentalForm.id = params.id;
+          this.rentalForm.display_name = params.display_name;
+          this.rentalForm.type = params.type;
+          this.rentalForm.adult_count= info.adult_count,
+          this.rentalForm.child= info.child,
+          this.rentalForm.number_and_children_ages=info.number_and_children_ages
+          this.rentalForm.check_in_date=new Date(info.check_in_date); 
+          this.rentalForm.check_out_date=new Date(info.check_out_date);   
+          this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
+          //Changes
+          this.fromDestinationInfo.city = params.city;
+          this.fromDestinationInfo.country = params.country;
+          this.fromDestinationInfo.id = params.id;
+          this.fromDestinationInfo.display_name = params.display_name;
+          this.fromDestinationInfo.type = params.type;
+
+          this.searchedValue.push({ key: 'fromSearch1', value: this.fromDestinationInfo });
+          console.log(this.searchedValue);
+
+        }
+        else{
+          this.searchedValue=[];
+        //if(this.fromDestinationInfo){
+          this.rentalForm.city = this.fromDestinationInfo.city;
+          this.rentalForm.country = this.fromDestinationInfo.country;
+          this.rentalForm.id = this.fromDestinationInfo.id;
+          this.rentalForm.display_name = this.fromDestinationInfo.display_name;
+          this.rentalForm.type = this.fromDestinationInfo.type;
+          this.searchedValue.push({ key: 'fromSearch1', value: this.fromDestinationInfo });
+          console.log(this.searchedValue);
+        }      
+    });
+
   }
 
 

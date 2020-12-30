@@ -27,21 +27,20 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
   	private route: ActivatedRoute,
     private rentalService: VacationRentalService) { }
 
-  ngOnInit() {
+ async ngOnInit() {
     window.scroll(0, 0);
     let payload: any = {};
-    const info = JSON.parse(localStorage.getItem('_rental'));
     this.route.queryParams.forEach(params => {
-      this.rentalSearchInfo = params;
+    const info = JSON.parse(localStorage.getItem('_rental'));
+     this.rentalSearchInfo = params;
         payload = {
-          id: info.id,
+          id: params.id,
           type: params.type,
           check_in_date: params.check_in_date,
           check_out_date: params.check_out_date,
           adult_count: parseInt(params.adult_count),
           number_and_children_ages:info.number_and_children_ages,
         }; 
-        console.log("---54545454----",payload);
       this.getRentalSearchData(payload);
     });
   }
@@ -51,11 +50,10 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
       this.errorMessage='';
       this.rentalService.getRentalDetailSearchData(payload).subscribe((res: any) => {
         if (res) {
-          console.log("---------------------------",res);
+          console.log(res.items);
           this.loading = false;
           this.isNotFound = false;
           this.rentalDetails = res.items;
-          console.log("----------11111-----------------",this.rentalDetails);
           this.rentalFilterDetails = res;    
         }
       }, err => {
