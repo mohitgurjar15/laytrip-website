@@ -383,11 +383,12 @@
 											&:hover {
 												color: $primary-color;
 												background-color: $bg-body;
+												font-weight: 500;
 											}
 											.lay_points_dot{
 												position: relative;
 												width: 100%;
-												padding-left: 22px;
+												padding-left: 24px;
 												display: flex;
 												&::before{
 													content: '';
@@ -396,6 +397,7 @@
 													background-color: $hotel-secondary-color;
 													position: absolute;
 													left: 0;
+													top: 1px;
 													border-radius: 50%;
 												}
 											}

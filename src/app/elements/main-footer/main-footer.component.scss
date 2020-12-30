@@ -4,19 +4,23 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-#back_to_top{
-    bottom: 160px;
-}
+
 /* .site_footer .footer_top .ftr_flex_row .ftr_menu .menu_grid{
     width: 33% !important;
 } */
-.block_share{
-    bottom: 100px;
+.quick-footer-section{
+    position: fixed;
+    right: 30px;
+    display: flex;
+    bottom: 60px;
+    flex-direction: column;
 }
 .footer_cta_dropdown{
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    margin-top: 40px;
+
     @include mobile-view{
         justify-content: center;
     }
