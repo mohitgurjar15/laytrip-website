@@ -4,8 +4,8 @@
         <a class="anchor_link" (click)="resetSorting('selling_price','ASC')"> {{'reset' | translate}}</a>
     </div> -->
     <div class="accordion block_shortby" id="accordion2">
-        <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
-            <div class="accordion-heading" (click)="toggleLowToHigh()">
+        <div class="accordion-group" >
+            <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
                     {{'sort_by' | translate}} 
                     <!-- <span (click)="resetSorting('selling_price','ASC')">{{'reset' | translate}}</span> -->

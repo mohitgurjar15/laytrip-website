@@ -239,12 +239,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.departureCity = this.arrivalCity;
     this.arrivalCity = tempCity; */
 
-
-    console.log("Before:::",this.fromSearch,this.toSearch)
     let tempAirport = this.fromSearch;
     this.fromSearch = this.toSearch;
     this.toSearch = tempAirport;
-    console.log("After:::",this.fromSearch,this.toSearch)
   }
 
   returnDateUpdate(date) {

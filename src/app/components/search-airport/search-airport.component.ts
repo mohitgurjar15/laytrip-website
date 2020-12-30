@@ -112,11 +112,10 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("this.defaultCity",this.defaultCity)
-    console.log("changes",changes)
     if (changes['airport']) {
-      //this.defaultCity = changes['airport'].currentValue.city;
+      this.defaultCity = changes['airport'].currentValue.city;
+      this.data = [changes['airport'].currentValue];
     }
   }
-  
+
 }
