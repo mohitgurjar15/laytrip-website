@@ -79,6 +79,11 @@
                                         flightDepartureMinDate [minDate]="flightDepartureMinDate"
                                         (onSelect)=departureDateUpdate($event) [readonlyInput]="true"
                                         panelStyleClass="calender-responsive-view laytrip-cal-view">
+                                        <p-header *ngIf="!isRoundTrip" class="calender-header">We are retrieving monthly prices...</p-header>
+                                        <ng-template pTemplate="date" let-date>
+                                            <span class="c_date">{{date.day}}</span>
+                                            <span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
+                                        </ng-template>
                                     </p-calendar>
 
                                     <p-calendar *ngIf="isRoundTrip" dateFormat="d M yy" #dateFilter inputId="range"

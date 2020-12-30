@@ -47,14 +47,26 @@ a:hover {
   cursor: pointer;
 }
 
+.tab_search_area ::ng-deep .laytrip-cal-view {
+  padding: 0;
+}
+.tab_search_area ::ng-deep .laytrip-cal-view input.p-inputtext:enabled:focus {
+  box-shadow: none !important;
+}
+.tab_search_area ::ng-deep .laytrip-cal-view td {
+  padding: 0.1rem !important;
+}
+.tab_search_area ::ng-deep .laytrip-cal-view td span {
+  width: 2rem;
+  height: 2rem;
+  font-size: 12px;
+}
+
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first {
   z-index: 2;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first .flight_to {
   z-index: 0;
-}
-.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.second .date_form {
-  width: 100%;
 }
 
 .home_banner .banner_inner .banner_tab .nav-tabs a.disable_module {
@@ -88,4 +100,21 @@ a:hover {
   font-size: 16px;
   color: #fff;
   font-weight: 400;
+}
+
+.calender-header {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  padding: 0 20px;
+}
+
+::ng-deep .calender-price-view {
+  min-width: 340px !important;
+}
+::ng-deep .calender-price-view .ui-state-active {
+  background-color: #012178 !important;
+}
+::ng-deep .calender-price-view .ui-state-active .calender_price {
+  color: #fff !important;
 }

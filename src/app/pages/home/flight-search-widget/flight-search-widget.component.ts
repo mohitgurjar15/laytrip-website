@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -20,10 +20,12 @@ export class FlightSearchWidgetComponent implements OnInit {
   rangeDates: Date[];
   modules: Module[];
   moduleList: any = {};
+  @Input() calenderPrices:any=[];
   switchBtnValue = false;
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted = false;
+  isCalenderPriceLoading:boolean=true;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromSearch = airports['JFK'];
   //fromDestinationCode = this.fromSearch.code;
@@ -112,7 +114,8 @@ export class FlightSearchWidgetComponent implements OnInit {
           this.searchFlightInfo.class = params['class'];
 
           this.departureDate = new Date(params['departure_date'])
-          this.returnDate = new Date(params['arrival_date'])
+          // this.returnDate = new Date(params['arrival_date']);
+          this.returnDate = params['arrival_date'] ? new Date(params['arrival_date']) : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
           this.rangeDates = [this.departureDate, this.returnDate];
 
       }
@@ -121,6 +124,11 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if(typeof changes['calenderPrices'].currentValue!='undefined' && changes['calenderPrices'].firstChange==false){
+      this.isCalenderPriceLoading=false;
+    }
+  }
 
   destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {
@@ -261,4 +269,19 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
+  getPrice(d,m,y){
+    let month:any=parseInt(m)+1;
+    let day  = d.toString().length==1 ? '0'+d : d;
+    month    = month.toString().length==1 ? '0'+month : month;
+    let date = `${day}/${month}/${y}`;
+    let price:any = this.calenderPrices.find((d:any)=> d.date == date);
+    console.log(price)
+    if(price){
+
+      if(price.secondary_start_price>0){
+        return `$${price.secondary_start_price.toFixed(2)}`;
+      }
+      return `$${price.price.toFixed(2)}`;
+    }
+  }
 }
