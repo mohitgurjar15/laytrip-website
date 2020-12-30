@@ -3314,12 +3314,14 @@
 			margin-bottom: 20px;
 
 			.accordion-group {
-				//background: $background-white;
+				background: $background-white;
 				border: 1px solid $box-border-color;
 				border-radius: 35px;
 
 				.accordion-heading {
 					padding: 20px 15px;
+					display: flex;
+					align-items: center;
 
 					.accordion-toggle {
 						font-size: 20px;
@@ -3328,23 +3330,39 @@
 						width: 100%;
 						display: block;
 
-						&:after {
-							font-family: 'FontAwesome';
-							content: "\f054";
-							float: right;
-							color: $text-grey;
-							font-weight: normal;
-							transition: 0.3s;
-						}
+						// &:after {
+						// 	font-family: 'FontAwesome';
+						// 	content: "\f054";
+						// 	float: right;
+						// 	color: $text-grey;
+						// 	font-weight: normal;
+						// 	transition: 0.3s;
+						// }
+					}
+					&:after {
+						font-family: 'FontAwesome';
+						content: "\f054";
+						float: right;
+						color: $text-grey;
+						font-weight: normal;
+						transition: 0.3s;
+					}
+					.anchor_link{
+						color: $text_light_yellow;
+						font-size: 16px;
+    					margin-right: 10px;
 					}
 				}
 
 				&.active {
 					.accordion-heading {
-						.accordion-toggle {
 							&:after {
 								content: "\f078";
 							}
+						.accordion-toggle {
+							// &:after {
+							// 	content: "\f078";
+							// }
 						}
 					}
 				}
@@ -3416,7 +3434,7 @@
 										height: 14px;
 										width: 14px;
 										background-color: transparent;
-										border: 1px solid $text-grey;
+										border: 1px solid $text_light_yellow;
 										border-radius: 50%;
 
 										&:after {
@@ -3428,7 +3446,7 @@
 											width: 8px;
 											height: 8px;
 											border-radius: 50%;
-											background: $pink_clr;
+											background: $text_light_yellow;
 										}
 									}
 								}
@@ -3624,6 +3642,11 @@
 									font-weight: normal;
 								}
 							}
+							&:after {
+								
+								content: "";
+								
+							}
 						}
 
 						&.active {
@@ -3637,10 +3660,11 @@
 						}
 
 						.accordion-body {
+							background: $background-white;
 							.block_cmn {
 								width: 100%;
 								padding: 15px 15px;
-								background: $bg-tab-detail;
+								
 
 								h5 {
 									width: 100%;
@@ -3696,7 +3720,7 @@
 					.view_more {
 						font-size: 14px;
 						font-weight: 400;
-						color: $pink_clr;
+						color: $text_light_yellow;
 						display: block;
 					}
 				}
@@ -3737,7 +3761,7 @@
 								&:checked {
 									~ {
 										.checkmark {
-											border-color: $pink_clr;
+											border-color: $text_light_yellow;
 
 											&:after {
 												opacity: 1;
@@ -3769,7 +3793,7 @@
 									width: 6px;
 									height: 9px;
 									border-radius: 2px;
-									border: solid $pink_clr;
+									border: solid $text_light_yellow;
 									border-top-width: medium;
 									border-right-width: medium;
 									border-bottom-width: medium;
@@ -3810,12 +3834,14 @@
 	}
 	.filter_main_wrapper{
 		.accordion-group {
-			// background: $background-white;
+			background: $background-white;
 			border: 1px solid $box-border-color;
 			border-radius: 35px;
 
 			.accordion-heading {
 				padding: 20px 15px;
+				display: flex;
+				align-items: center;
 
 				.accordion-toggle {
 					font-size: 20px;
@@ -3824,23 +3850,39 @@
 					width: 100%;
 					display: block;
 
-					&:after {
-						font-family: 'FontAwesome';
-						content: "\f054";
-						float: right;
-						color: $text-grey;
-						font-weight: normal;
-						transition: 0.3s;
-					}
+					// &:after {
+					// 	font-family: 'FontAwesome';
+					// 	content: "\f054";
+					// 	float: right;
+					// 	color: $text-grey;
+					// 	font-weight: normal;
+					// 	transition: 0.3s;
+					// }
+				}
+				&:after {
+					font-family: 'FontAwesome';
+					content: "\f054";
+					float: right;
+					color: $text-grey;
+					font-weight: normal;
+					transition: 0.3s;
+				}
+				.anchor_link{
+					color: $text_light_yellow;
+					font-size: 16px;
+					margin-right: 10px;
 				}
 			}
 
 			&.active {
 				.accordion-heading {
 					.accordion-toggle {
-						&:after {
-							content: "\f078";
-						}
+						// &:after {
+						// 	content: "\f078";
+						// }
+					}
+					&:after {
+						content: "\f078";
 					}
 				}
 			}
@@ -4425,7 +4467,7 @@
 																height: 14px;
 																width: 14px;
 																background-color: transparent;
-																border: 1px solid $text-grey;
+																border: 1px solid $text_light_yellow;
 																border-radius: 50%;
 
 																&:after {

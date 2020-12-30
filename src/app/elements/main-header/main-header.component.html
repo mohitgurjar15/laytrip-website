@@ -55,11 +55,11 @@
                                     <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}}</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a class="nav-link" [routerLink]="['/account/search-booking']"><i class="fa fa-search"
                                         aria-hidden="true"></i>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
                                 <!-- <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">{{'sign_in' | translate}}</a> -->
                                 <a class="nav-link login_btn_text hover-link" id="login_btn" data-toggle="modal"
