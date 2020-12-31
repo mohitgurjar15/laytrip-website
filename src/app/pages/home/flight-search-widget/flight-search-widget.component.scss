@@ -1,4 +1,9 @@
 @import '../../../../cstm-variable';
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 .flight-error{
     border: 1px solid red;
@@ -46,7 +51,67 @@ a:hover {
 }
 .tab_search_area{
     ::ng-deep .laytrip-cal-view{
-        padding: 0;
+        padding: 5px;
+        background-color: $bg-crad;
+        p-header{
+            &.calender-header{
+                padding: 0 10px;
+                margin-bottom: 5px;
+                p{
+                    padding: 0;
+                    margin-bottom: 2px;
+                }
+                .calender_header_wrapper{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-bottom: 5px;
+                    span{
+                        font-size: 12px;
+                        margin-right: 15px;
+                        padding-left: 20px;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        &.green_var{
+                            color: $bg-green;
+                            &::before{
+                                background-color: $bg-green;
+                            }
+                        }
+                        &.yellow_var{
+                            color: $text_light_yellow;
+                            &::before{
+                                background-color: $text_light_yellow;
+                            }
+                        }
+                        &.red_var{
+                            color: $error-color;
+                            &::before{
+                                background-color: $error-color;
+                            }
+                        }
+                        &::before{
+                            content: '';
+                            height: 15px;
+                            width: 15px;
+                            border-radius: 50%;
+                            position: absolute;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+        }
+        .p-datepicker-group-container{
+           background-color: $background-white;
+           border-radius: 15px;
+           .p-datepicker-header{
+                padding: 0 0.5rem;
+                border-top-right-radius: 15px !important;
+                border-top-left-radius: 15px !important;
+           }
+        }
         input{
             &.p-inputtext{
                 &:enabled{
@@ -56,14 +121,73 @@ a:hover {
                 }
             } 
         }
-        td{
-            padding: 0.1rem !important;
-            span{
-                width: 2rem;
-                height: 2rem;
-                font-size: 12px;
+        table{
+            margin: 0;
+            th{
+                font-size: 13px !important;
+                border-bottom: none !important;
+                font-weight: 600 !important;
+                text-align: center;
+            }
+            td{
+                padding: 0.1rem !important;
+                
+                span{
+                    width: auto;
+                    height: auto;
+                    font-size: 11px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    border: none !important;
+                    border-radius: 0 !important;
+                    box-shadow: none !important;
+                    color: $text-grey;
+                    margin: 2px;
+                    &:hover{
+                        background: none !important;
+                    }
+                    &.p-highlight{
+                        background: none !important;
+                        font-weight: 500;
+                    }
+                    &.c_date{
+                        border-radius: 50% !important;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 600;
+                        &.green_date{
+                            color: $bg-green;
+                            background-color: $bg-green-light;
+                            &:hover{
+                                background-color: $bg-green-light !important;
+                            }
+                        }
+                        &.yellow_date{
+                            color: $text_light_yellow;
+                            background-color: $bg-yellow-light;
+                            &:hover{
+                                background-color: $bg-yellow-light !important;
+                            }
+                        }
+                        &.red_date{
+                            color: $error-color;
+                            background-color: $bg-red-light;
+                            &:hover{
+                                background-color: $bg-red-light !important;
+                            }
+                        }
+                    }
+                    &.calender_price{
+                        font-size: 10px;
+                    }
+                }
             }
         }
+        
     }
 }
 
