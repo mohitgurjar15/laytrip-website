@@ -275,13 +275,26 @@ export class FlightSearchWidgetComponent implements OnInit {
     month    = month.toString().length==1 ? '0'+month : month;
     let date = `${day}/${month}/${y}`;
     let price:any = this.calenderPrices.find((d:any)=> d.date == date);
-    console.log(price)
     if(price){
 
       if(price.secondary_start_price>0){
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
       return `$${price.price.toFixed(2)}`;
+    }
+  }
+  getPriceClass(d,m,y){
+    let month:any=parseInt(m)+1;
+    let day  = d.toString().length==1 ? '0'+d : d;
+    month    = month.toString().length==1 ? '0'+month : month;
+    let date = `${day}/${month}/${y}`;
+    let price:any = this.calenderPrices.find((d:any)=> d.date == date);
+    if(price){
+
+      if(price.secondary_start_price>0){
+        return `${price.flag}`;
+      }
+      return `${price.flag}`;
     }
   }
 }
