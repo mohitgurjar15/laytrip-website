@@ -36,9 +36,9 @@
                             <li class="nav-item">
                                 <a class="nav-link hover-link">About</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link hover-link">Support</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item" [ngClass]="{'dr_pay':countryCode==='DR'}" *ngIf="countryCode==='DR'">
                                 <a class="nav-link hover-link"
                                     [routerLink]="['/partial-payment']">{{'installment_payment' | translate}}</a>
