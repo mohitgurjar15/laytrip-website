@@ -27,6 +27,29 @@ agm-map {
 .selected-hotel {
     border: 3px solid #000 !important;
 }
-.hotel-counter-wrapper{
-    flex: 2;
+
+.infinite-search-results {
+    height: 100rem;
+    overflow-y: auto;
+}
+
+.scrollLoading_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 25px;
+}
+
+.no-hotel-in-list {
+    border-radius: 20px;
+    font-size: 13px;
+    color: #8188ab;
+    background: transparent;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }

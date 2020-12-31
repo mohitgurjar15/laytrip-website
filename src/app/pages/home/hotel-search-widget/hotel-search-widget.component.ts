@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -37,7 +37,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   };
   searchedValue = [];
   hotelSearchFormSubmitted = false;
-  searchHotelInfo = {
+  searchHotelInfo: any = {
     latitude: null,
     longitude: null,
     check_in: null,
@@ -49,8 +49,6 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     ],
   };
-  totalPerson: number = 1;
-
   selectedGuest = [
     {
       adults: 2,
@@ -65,10 +63,12 @@ export class HotelSearchWidgetComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
+    private route: ActivatedRoute,
   ) {
     this.hotelSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
     });
+    
     this.checkInMinDate = new Date();
     this.checkOutMinDate = this.checkInDate;
     this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
@@ -94,10 +94,44 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     window.scrollTo(0, 0);
-    this.hotelSearchFormSubmitted = false;
     this.countryCode = this.commonFunction.getUserCountry();
+
+    if (this.route && this.route.snapshot.queryParams['check_in']) {
+      this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
+      this.checkInMinDate = this.checkInDate;
+      this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
+      this.checkOutMinDate = this.checkOutDate;
+      this.rangeDates = [this.checkInDate, this.checkOutDate];
+
+      if (this.route && this.route.snapshot && this.route.snapshot.queryParams) {
+        let info;
+        this.searchHotelInfo =
+        {
+          latitude: this.route.snapshot.queryParams['latitude'],
+          longitude: this.route.snapshot.queryParams['longitude'],
+          check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
+          check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
+        };
+        if (this.route.snapshot.queryParams['location']) {
+          info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+          if (info) {
+            this.fromDestinationInfo.city = info.city;
+            this.fromDestinationInfo.country = info.country;
+            this.searchHotelInfo.city = info.city;
+            this.searchHotelInfo.country = info.country;
+          }
+        }
+        if (this.route.snapshot.queryParams['itenery']) {
+          info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+          if (info) {
+            this.searchHotelInfo.occupancies = info;
+          }
+        }
+      }
+    }
+
     if (this.fromDestinationInfo) {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
@@ -154,6 +188,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   changeGuestInfo(event) {
     if (this.searchedValue && this.searchedValue.find(i => i.key === 'guest')) {
       this.searchedValue[1]['value'] = event;
+      this.searchHotelInfo.occupancies = event;
     }
   }
 
@@ -171,13 +206,13 @@ export class HotelSearchWidgetComponent implements OnInit {
     let queryParams: any = {};
     queryParams.check_in = moment(this.searchHotelInfo.check_in).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.searchHotelInfo.check_out).format('YYYY-MM-DD');
-    queryParams.latitude = this.searchHotelInfo.latitude;
-    queryParams.longitude = this.searchHotelInfo.longitude;
+    queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
+    queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
     queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
 
-    if (this.searchHotelInfo && this.totalPerson && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
-      this.searchHotelInfo.check_in && this.searchHotelInfo.check_out) {
+    if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
+      this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
       // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
       this.router.navigate(['hotel/search'], {
         queryParams: queryParams,

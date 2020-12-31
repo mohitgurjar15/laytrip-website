@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -40,12 +40,14 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   @Input() hotelDetails;
   @Input() filter;
   @Input() hotelToken;
-
   animationState = 'out';
   hotelsList;
   s3BucketUrl = environment.s3BucketUrl;
   public defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
   hotelListArray = [];
+  noOfDataToShowInitially = 20;
+  dataToLoad = 20;
+  isFullListDisplayed = false;
   currency;
   isMapView = false;
   hotelLatLng;
@@ -73,6 +75,9 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     ac: `${this.s3BucketUrl}assets/images/hotels/ac.svg`,
   }
   showMapDetails = [];
+  scrollDistance = 2;
+  throttle = 50;
+  scrollLoading = false;
 
   constructor(
     private router: Router,
@@ -81,6 +86,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     private commonFunction: CommonFunction,
     private genericService: GenericService,
   ) {
+
   }
 
   ngOnInit() {
@@ -95,23 +101,37 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
         }
       });
     }
-    this.hotelListArray = this.hotelDetails;
+    // this.hotelListArray = this.hotelDetails;
+    this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
     if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
       this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
     }
-    // this.geoCodes = collect(this.hotelDetails).pluck('geocodes').map((item: any) => {
-    //   return {
-    //     latitude: parseFloat(item.latitude),
-    //     longitude: parseFloat(item.longitude)
-    //   }
-    // });
-    // this.hotelListArray.forEach((i) => {
-    //   this.geoCodes.push(i.geocodes);
-    // });
     this.userInfo = getLoginUserInfo();
     // this.totalLaycredit();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
     this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
+  }
+
+  onScrollDown() {
+    this.scrollLoading = true;
+    setTimeout(() => {
+      if (this.noOfDataToShowInitially <= this.hotelListArray.length) {
+        this.noOfDataToShowInitially += this.dataToLoad;
+        this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+        this.scrollLoading = false;
+      } else {
+        this.isFullListDisplayed = true;
+        this.scrollLoading = false;
+      }
+    }, 1000);
+  }
+
+  ngAfterContentChecked() {
+    // this.hotelListArray = this.hotelDetails;
+    this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+    if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
+      this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+    }
   }
 
   infoWindowAction(template, event, action) {
@@ -132,13 +152,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     else {
       this.showMapDetails[index] = !this.showMapDetails[index];
       document.getElementById(index).scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-
-  ngAfterContentChecked() {
-    this.hotelListArray = this.hotelDetails;
-    if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
-      this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
     }
   }
 
