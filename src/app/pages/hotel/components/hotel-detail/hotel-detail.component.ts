@@ -54,6 +54,7 @@ export class HotelDetailComponent implements OnInit {
       checkOut: ''
     }
   };
+  dataLoading = false;
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -107,7 +108,6 @@ export class HotelDetailComponent implements OnInit {
       }
     });
     this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
-      console.log(res);
       if (res && res.data && res.data.hotel) {
         this.loading = false;
         this.hotelDetails = {
@@ -123,7 +123,6 @@ export class HotelDetailComponent implements OnInit {
           hotelReviews: res.data.hotel.reviews,
           thumbnail: res.data.hotel.thumbnail
         };
-        console.log(this.hotelDetails);
         if (res.data.hotel.images) {
           res.data.hotel.images.forEach(imageUrl => {
             this.imageTemp.push({
@@ -145,13 +144,11 @@ export class HotelDetailComponent implements OnInit {
         }
       }
     }, error => {
-      this.loading = false;
       this.toastr.error('Search session is expired', 'Error');
       this.router.navigate(['/']);
     });
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       if (res) {
-        console.log(res);
         this.hotelRoomArray = res.data;
         this.roomSummary.hotelInfo = res.data[0];
       }
@@ -167,7 +164,11 @@ export class HotelDetailComponent implements OnInit {
   }
 
   showRoomDetails(roomInfo) {
-    this.roomSummary.hotelInfo = roomInfo;
+    this.dataLoading = true;
+    setTimeout(() => {
+      this.roomSummary.hotelInfo = roomInfo;
+      this.dataLoading = false;
+    }, 1000);
   }
 
   openPolicyPopup(policyInfo, type) {
@@ -182,7 +183,7 @@ export class HotelDetailComponent implements OnInit {
       payload.title = 'Room Policy';
     }
     const modalRef = this.modalService.open(HotelPolicyPopupComponent, {
-      windowClass: '',
+      windowClass: 'custom-z-index',
       centered: true,
       size: 'lg',
     });
