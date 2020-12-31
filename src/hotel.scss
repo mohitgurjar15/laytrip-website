@@ -161,10 +161,10 @@
 }
 
 .custom_range_slide .ng5-slider .ng5-slider-selection {
-    background: $hotel-secondary-color;
+    background: $text_light_yellow;
 }
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
-    border: 1px solid $hotel-secondary-color;
+    border: 1px solid $text_light_yellow;
 }
 // NG-SELECT FOCUS REMOVE CSS START
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
@@ -280,7 +280,7 @@ ngb-datepicker {
                     background: $background-white;
                     box-shadow: 0px 3px 15px $shadow-black;
                     padding: 15px;
-                    border: 1px solid $text-light-grey;
+                    border: 1px solid #E0E2E5;
                     border-radius: 5px;
                     z-index: 99;
         
@@ -302,7 +302,7 @@ ngb-datepicker {
                         height: 0;
                         border-left: 10px solid transparent;
                         border-right: 10px solid transparent;
-                        border-bottom: 10px solid $text-light-grey;
+                        border-bottom: 10px solid #E0E2E5;
                         position: absolute;
                         top: -10px;
                         left: 20px;
@@ -424,7 +424,7 @@ ngb-datepicker {
                                         height: 30px;
                                         background: $background-white;
                                         border: 1px solid $text-light-grey;
-                                        border-radius: 5px;
+                                        border-radius: 25px;
                                         color: $text-light-grey;
                                         padding: 0;
                                         font-size: 18px;
@@ -450,9 +450,9 @@ ngb-datepicker {
                                         width: 30px;
                                         height: 30px;
                                         background: $background-white;
-                                        border: 1px solid $text-light-grey;
-                                        border-radius: 5px;
-                                        color: $text-light-grey;
+                                        border: 1px solid $pink;
+                                        border-radius: 25px;
+                                        color: $pink;
                                         padding: 0;
                                         font-size: 18px;
 
@@ -501,7 +501,7 @@ ngb-datepicker {
                                     height: 30px;
                                     background: $background-white;
                                     border: 1px solid $text-light-grey;
-                                    border-radius: 5px;
+                                    border-radius: 25px;
                                     color: $text-light-grey;
                                     padding: 0;
                                     font-size: 18px;
@@ -526,9 +526,9 @@ ngb-datepicker {
                                     width: 30px;
                                     height: 30px;
                                     background: $background-white;
-                                    border: 1px solid $text-light-grey;
-                                    border-radius: 5px;
-                                    color: $text-light-grey;
+                                    border: 1px solid $pink;
+                                    border-radius: 25px;
+                                    color: $pink;
                                     padding: 0;
                                     font-size: 18px;
         
@@ -866,7 +866,7 @@ ngb-datepicker {
                     background: $background-white;
                     box-shadow: 0px 3px 15px $shadow-black;
                     padding: 15px;
-                    border: 1px solid $text-light-grey;
+                    border: 1px solid #E0E2E5;
                     border-radius: 5px;
                     z-index: 99;
         
@@ -888,7 +888,7 @@ ngb-datepicker {
                         height: 0;
                         border-left: 10px solid transparent;
                         border-right: 10px solid transparent;
-                        border-bottom: 10px solid $text-light-grey;
+                        border-bottom: 10px solid #E0E2E5;
                         position: absolute;
                         top: -10px;
                         left: 20px;
@@ -1010,7 +1010,7 @@ ngb-datepicker {
                                         height: 30px;
                                         background: $background-white;
                                         border: 1px solid $text-light-grey;
-                                        border-radius: 5px;
+                                        border-radius: 25px;
                                         color: $text-light-grey;
                                         padding: 0;
                                         font-size: 18px;
@@ -1036,9 +1036,9 @@ ngb-datepicker {
                                         width: 30px;
                                         height: 30px;
                                         background: $background-white;
-                                        border: 1px solid $text-light-grey;
-                                        border-radius: 5px;
-                                        color: $text-light-grey;
+                                        border: 1px solid $pink;
+                                        border-radius: 25px;
+                                        color: $pink;
                                         padding: 0;
                                         font-size: 18px;
 
@@ -1087,7 +1087,7 @@ ngb-datepicker {
                                     height: 30px;
                                     background: $background-white;
                                     border: 1px solid $text-light-grey;
-                                    border-radius: 5px;
+                                    border-radius: 25px;
                                     color: $text-light-grey;
                                     padding: 0;
                                     font-size: 18px;
@@ -1112,9 +1112,9 @@ ngb-datepicker {
                                     width: 30px;
                                     height: 30px;
                                     background: $background-white;
-                                    border: 1px solid $text-light-grey;
-                                    border-radius: 5px;
-                                    color: $text-light-grey;
+                                    border: 1px solid $pink;
+                                    border-radius: 25px;
+                                    color: $pink;
                                     padding: 0;
                                     font-size: 18px;
         
@@ -1761,7 +1761,7 @@ ngb-datepicker {
                                     background: $background-white;
                                     box-shadow: 0px 3px 15px $shadow-black;
                                     padding: 15px;
-                                    border: 1px solid $text-light-grey;
+                                    border: 1px solid #E0E2E5;
                                     border-radius: 5px;
                                     z-index: 9999;
 
@@ -1783,7 +1783,7 @@ ngb-datepicker {
                                         height: 0;
                                         border-left: 10px solid transparent;
                                         border-right: 10px solid transparent;
-                                        border-bottom: 10px solid $text-light-grey;
+                                        border-bottom: 10px solid #E0E2E5;
                                         position: absolute;
                                         top: -10px;
                                         right: 20px;
@@ -1906,7 +1906,7 @@ ngb-datepicker {
                                                         height: 30px;
                                                         background: $background-white;
                                                         border: 1px solid $text-light-grey;
-                                                        border-radius: 5px;
+                                                        border-radius: 25px;
                                                         color: $text-light-grey;
                                                         padding: 0;
                                                         font-size: 18px;
@@ -1932,9 +1932,9 @@ ngb-datepicker {
                                                         width: 30px;
                                                         height: 30px;
                                                         background: $background-white;
-                                                        border: 1px solid $text-light-grey;
-                                                        border-radius: 5px;
-                                                        color: $text-light-grey;
+                                                        border: 1px solid $pink;
+                                                        border-radius: 25px;
+                                                        color: $pink;
                                                         padding: 0;
                                                         font-size: 18px;
 
@@ -2005,7 +2005,7 @@ ngb-datepicker {
                         background: $background-white;
                         box-shadow: 0px 3px 15px $shadow-black;
                         padding: 15px;
-                        border: 1px solid $text-light-grey;
+                        border: 1px solid #E0E2E5;
                         border-radius: 5px;
                         z-index: 9999;
 
@@ -2027,7 +2027,7 @@ ngb-datepicker {
                             height: 0;
                             border-left: 10px solid transparent;
                             border-right: 10px solid transparent;
-                            border-bottom: 10px solid $text-light-grey;
+                            border-bottom: 10px solid #E0E2E5;
                             position: absolute;
                             top: -10px;
                             right: 20px;
@@ -2069,7 +2069,7 @@ ngb-datepicker {
                                         height: 30px;
                                         background: $background-white;
                                         border: 1px solid $text-light-grey;
-                                        border-radius: 5px;
+                                        border-radius: 25px;
                                         color: $text-light-grey;
                                         padding: 0;
                                         font-size: 18px;
@@ -2095,9 +2095,9 @@ ngb-datepicker {
                                         width: 30px;
                                         height: 30px;
                                         background: $background-white;
-                                        border: 1px solid $text-light-grey;
-                                        border-radius: 5px;
-                                        color: $text-light-grey;
+                                        border: 1px solid $pink;
+                                        border-radius: 25px;
+                                        color: $pink;
                                         padding: 0;
                                         font-size: 18px;
 
@@ -4801,7 +4801,7 @@ ngb-datepicker {
                                     background: $background-white;
                                     box-shadow: 0px 3px 15px $shadow-black;
                                     padding: 15px;
-                                    border: 1px solid $text-light-grey;
+                                    border: 1px solid #E0E2E5;
                                     border-radius: 5px;
                                     z-index: 99;
 
@@ -4823,7 +4823,7 @@ ngb-datepicker {
                                         height: 0;
                                         border-left: 10px solid transparent;
                                         border-right: 10px solid transparent;
-                                        border-bottom: 10px solid $text-light-grey;
+                                        border-bottom: 10px solid #E0E2E5;
                                         position: absolute;
                                         top: -10px;
                                         right: 20px;
@@ -4947,7 +4947,7 @@ ngb-datepicker {
                                                         height: 30px;
                                                         background: $background-white;
                                                         border: 1px solid $text-light-grey;
-                                                        border-radius: 5px;
+                                                        border-radius: 25px;
                                                         color: $text-light-grey;
                                                         padding: 0;
                                                         font-size: 18px;
@@ -4973,9 +4973,9 @@ ngb-datepicker {
                                                         width: 30px;
                                                         height: 30px;
                                                         background: $background-white;
-                                                        border: 1px solid $text-light-grey;
-                                                        border-radius: 5px;
-                                                        color: $text-light-grey;
+                                                        border: 1px solid $pink;
+                                                        border-radius: 25px;
+                                                        color: $pink;
                                                         padding: 0;
                                                         font-size: 18px;
 

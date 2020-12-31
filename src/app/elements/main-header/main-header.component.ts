@@ -29,6 +29,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   userDetails;
   username;
   _isLayCredit = false;
+  countryCode:string;
 
   constructor(
     private genericService: GenericService,
@@ -49,6 +50,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.totalLaycredit();
       }
     }
+    this.countryCode = this.commonFunction.getUserCountry();
   }
 
 
@@ -120,14 +122,5 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   openSignModal() {
     const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
-  }
-
-  openChatWidget(){
-    var t1=document.getElementById("topic1");
-    /* if(t1){ 
-            window.fcWidget.show();
-            window.fcWidget.open();
-            console.log('widget opened');
-    } */
   }
 }

@@ -130,3 +130,20 @@ a:hover {
         }
     }
 }
+.calender-header{
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    padding: 0 20px;
+}
+::ng-deep .calender-price-view{
+    //width: 340px;
+    min-width: 340px !important;
+    .ui-state-active {
+        background-color: #012178 !important;
+        .calender_price{
+            color: #fff !important;
+        }
+    }
+}
+

@@ -76,9 +76,9 @@ export class MainFooterComponent implements OnInit {
     $(window).scroll(function () {
       var height = $(window).scrollTop();
       if (height > 100) {
-        $('#back_to_top').fadeIn();
+        $('#back_to_top').css("display", "flex").fadeIn(10000);
       } else {
-        $('#back_to_top').fadeOut();
+        $('#back_to_top').css("display", "none").fadeOut(0);
       }
     });
     $(document).ready(function () {
