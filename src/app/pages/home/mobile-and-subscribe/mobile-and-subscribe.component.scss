@@ -23,6 +23,11 @@
             font-size: 30px;
             font-weight: 600;
             margin-bottom: 30px;
+
+            @include tab-view{
+                font-size: 22px;
+                margin-bottom: 28px;
+            }
         }
         .custom_input_wrapper {
             border: 3px solid $pink;
@@ -40,6 +45,9 @@
                 background-color: transparent;
                 font-size: 22px;
                 width: 100%;
+                @include tab-view{
+                    font-size: 18px;
+                }
             }
             button {
                 max-width: 155px;
@@ -56,6 +64,11 @@
                 overflow: hidden;
                 white-space: normal;
                 right: -1px;
+
+                @include tab-view{
+                    max-width: 85px;
+                    font-size: 18px;
+                }
 
                 &::before {
                     content: "";
