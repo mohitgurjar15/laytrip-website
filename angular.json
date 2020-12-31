@@ -116,6 +116,14 @@
                 }
               ]
             },
+            "chirag": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.chirag.ts"
+                }
+              ]
+            },
             "keyur": {
               "fileReplacements": [
                 {
@@ -146,6 +154,9 @@
             },
             "varshil": {
               "browserTarget": "laytrip-website:build:varshil"
+            },
+            "chirag": {
+              "browserTarget": "laytrip-website:build:chirag"
             },
             "keyur": {
               "browserTarget": "laytrip-website:build:keyur"
