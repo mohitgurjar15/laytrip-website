@@ -32,6 +32,13 @@ export class MobileAndSubscribeComponent implements OnInit {
     });
   }
 
+  changeEmail() {
+    this.successMessage = '';
+    this.errorMessage = '';
+    this.success = false;
+    this.error = false;
+  }
+
   subscribeNow() {
     this.submitted = this.loading = true;
     if (this.subscribeForm.invalid) {
@@ -44,17 +51,17 @@ export class MobileAndSubscribeComponent implements OnInit {
         this.success = true;
         this.error = false;
         this.errorMessage = '';
+        this.subscribeForm.markAsUntouched();
         this.subscribeForm.controls.email.setValue('');
         this.successMessage = data.message;
-        this.subscribeForm.markAsUntouched();
         // this.toastr.success(data.message, '');
       }, (error: HttpErrorResponse) => {
         this.error = true;
         this.successMessage = '';
         this.submitted = this.loading = this.success = false;
         this.subscribeForm.controls.email.setValue('');
-        this.errorMessage = error.error.message;
         this.subscribeForm.markAsUntouched();
+        this.errorMessage = error.error.message;
         // this.toastr.error(error.error.message, 'Subscribed Error');
       });
     }
