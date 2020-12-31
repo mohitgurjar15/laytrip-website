@@ -32,7 +32,7 @@ var FlightClassComponent = /** @class */ (function () {
     FlightClassComponent.prototype.btnClickForChange = function (item) {
         this.changeValue.emit(item.value);
         this.flightClass = item.value;
-        $("#add_class_sec_open").hide("slow");
+        $("#add_class_sec_open").hide();
     };
     __decorate([
         core_1.Output()

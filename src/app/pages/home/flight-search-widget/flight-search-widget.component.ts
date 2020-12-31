@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -33,7 +34,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   //departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
   //fromAirport = airports[this.fromDestinationCode];
   countryCode: string;
-
+  monthYearArr=[];
   toSearch=airports['PUJ'];
   //toDestinationCode = this.toSearch.code;
   //arrivalCity = this.toSearch.city;
@@ -74,7 +75,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     public fb: FormBuilder,
     public router: Router,
     private route: ActivatedRoute,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private flightService: FlightService
   ) {
 
     this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
@@ -125,9 +127,12 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('here ')
     if(typeof changes['calenderPrices'].currentValue!='undefined' && changes['calenderPrices'].firstChange==false){
       this.isCalenderPriceLoading=false;
     }
+    console.log(this.isCalenderPriceLoading)
+
   }
 
   destinationChangedValue(event) {
@@ -275,13 +280,52 @@ export class FlightSearchWidgetComponent implements OnInit {
     month    = month.toString().length==1 ? '0'+month : month;
     let date = `${day}/${month}/${y}`;
     let price:any = this.calenderPrices.find((d:any)=> d.date == date);
-    console.log(price)
     if(price){
-
       if(price.secondary_start_price>0){
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
       return `$${price.price.toFixed(2)}`;
+    }
+  }
+
+  changeMonth(event){
+    
+    if(!this.isRoundTrip){
+      let month=event.month;
+      month = month.toString().length==1?'0'+month:month;
+      let monthYearName = `${month}-${event.year}`;
+      if(!this.monthYearArr.includes(monthYearName)){
+        this.monthYearArr.push(monthYearName)
+        let startDate:any = moment([event.year,event.month-1]);
+        let endDate:any =  moment(startDate).endOf('month');
+        
+        startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
+        endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+        if(!moment().isBefore(startDate)){
+          startDate = moment().format("YYYY-MM-DD")
+        }
+
+        let payload={
+          source_location: this.route.snapshot.queryParams['departure'],
+          destination_location: this.route.snapshot.queryParams['arrival'],
+          flight_class: this.route.snapshot.queryParams['class'],
+          adult_count: this.route.snapshot.queryParams['adult'],
+          child_count: this.route.snapshot.queryParams['child'],
+          infant_count: this.route.snapshot.queryParams['infant'],
+          start_date :startDate,
+          end_date :endDate
+        }
+        
+        this.isCalenderPriceLoading=true;
+        this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+          
+            this.isCalenderPriceLoading=false;
+            this.calenderPrices = [...this.calenderPrices,...res];
+          
+        }, err => {
+          this.isCalenderPriceLoading=false;
+        });
+      }
     }
   }
 }
