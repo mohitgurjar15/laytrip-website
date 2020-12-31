@@ -444,22 +444,26 @@ select {
 										}
 
 										.drop_aerrow {
-											width: auto;
+											width: 14px;
 											position: relative;
 											margin-left: 20px;
+											background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+											background-position: right;
+											background-repeat: no-repeat;
+											background-size: 12px;
 
-											&:before {
-												content: '';
-												position: absolute;
-												left: 110%;
-												top: 50%;
-												width: 0;
-												height: 0;
-												border-left: 3px solid transparent;
-												border-right: 3px solid transparent;
-												border-top: 3px solid $text-grey;
-												transform: translate(-50%, -50%);
-											}
+											// &:before {
+											// 	content: '';
+											// 	position: absolute;
+											// 	left: 110%;
+											// 	top: 50%;
+											// 	width: 0;
+											// 	height: 0;
+											// 	border-left: 3px solid transparent;
+											// 	border-right: 3px solid transparent;
+											// 	border-top: 3px solid $text-grey;
+											// 	transform: translate(-50%, -50%);
+											// }
 										}
 									}
 
@@ -473,7 +477,7 @@ select {
 									.class_sec_wrapper {
 										width: 260px;
 										position: absolute;
-										top: 108%;
+										top: 118%;
 										right: 0;
 										background: $background-white;
 										box-shadow: 0px 3px 15px $shadow-black;
@@ -595,22 +599,26 @@ select {
 										}
 
 										.drop_aerrow {
-											width: auto;
+											width: 14px;
 											position: relative;
 											margin-left: 20px;
+											background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+											background-position: right;
+											background-repeat: no-repeat;
+											background-size: 12px;
 
-											&:before {
-												content: '';
-												position: absolute;
-												left: 110%;
-												top: 50%;
-												width: 0;
-												height: 0;
-												border-left: 3px solid transparent;
-												border-right: 3px solid transparent;
-												border-top: 3px solid $text-grey;
-												transform: translate(-50%, -50%);
-											}
+											// &:before {
+											// 	content: '';
+											// 	position: absolute;
+											// 	left: 110%;
+											// 	top: 50%;
+											// 	width: 0;
+											// 	height: 0;
+											// 	border-left: 3px solid transparent;
+											// 	border-right: 3px solid transparent;
+											// 	border-top: 3px solid $text-grey;
+											// 	transform: translate(-50%, -50%);
+											// }
 										}
 									}
 
@@ -624,7 +632,7 @@ select {
 									.traveller_add_block {
 										width: 260px;
 										position: absolute;
-										top: 108%;
+										top: 118%;
 										right: 0;
 										background: $background-white;
 										box-shadow: 0px 3px 15px $shadow-black;
@@ -1207,22 +1215,26 @@ select {
 								}
 
 								.drop_aerrow {
-									width: auto;
+									width: 14px;
 									position: relative;
 									margin-left: 20px;
+									background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+									background-position: right;
+									background-repeat: no-repeat;
+									background-size: 12px;
 
-									&:before {
-										content: '';
-										position: absolute;
-										left: 110%;
-										top: 50%;
-										width: 0;
-										height: 0;
-										border-left: 3px solid transparent;
-										border-right: 3px solid transparent;
-										border-top: 3px solid $text-grey;
-										transform: translate(-50%, -50%);
-									}
+									// &:before {
+									// 	content: '';
+									// 	position: absolute;
+									// 	left: 110%;
+									// 	top: 50%;
+									// 	width: 0;
+									// 	height: 0;
+									// 	border-left: 3px solid transparent;
+									// 	border-right: 3px solid transparent;
+									// 	border-top: 3px solid $text-grey;
+									// 	transform: translate(-50%, -50%);
+									// }
 								}
 							}
 
@@ -1236,7 +1248,7 @@ select {
 							.class_sec_wrapper {
 								width: 260px;
 								position: absolute;
-								top: 108%;
+								top: 118%;
 								right: 0;
 								background: $background-white;
 								box-shadow: 0px 3px 15px $shadow-black;
@@ -1357,22 +1369,26 @@ select {
 								}
 
 								.drop_aerrow {
-									width: auto;
+									width: 14px;
 									position: relative;
 									margin-left: 20px;
+									background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+									background-position: right;
+									background-repeat: no-repeat;
+									background-size: 12px;
 
-									&:before {
-										content: '';
-										position: absolute;
-										left: 110%;
-										top: 50%;
-										width: 0;
-										height: 0;
-										border-left: 3px solid transparent;
-										border-right: 3px solid transparent;
-										border-top: 3px solid $text-grey;
-										transform: translate(-50%, -50%);
-									}
+									// &:before {
+									// 	content: '';
+									// 	position: absolute;
+									// 	left: 110%;
+									// 	top: 50%;
+									// 	width: 0;
+									// 	height: 0;
+									// 	border-left: 3px solid transparent;
+									// 	border-right: 3px solid transparent;
+									// 	border-top: 3px solid $text-grey;
+									// 	transform: translate(-50%, -50%);
+									// }
 								}
 							}
 
@@ -1386,7 +1402,7 @@ select {
 							.traveller_add_block {
 								width: 260px;
 								position: absolute;
-								top: 108%;
+								top: 118%;
 								right: 0;
 								background: $background-white;
 								box-shadow: 0px 3px 15px $shadow-black;
@@ -1540,6 +1556,7 @@ select {
 									display: flex;
 									justify-content: space-between;
 									position: relative;
+									padding-left: 0;
 
 									@media(max-width: 991px) {
 										width: 100%;
