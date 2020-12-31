@@ -1,1 +1,16 @@
-<app-traveler-form></app-traveler-form>
+
+<div id="accordion">
+    <div class="card" *ngFor="let dummy of ' '.repeat(2).split(''), let x = index">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" [href]="'#collapse'+x" >
+          Passgener {{x}}
+        </a>
+      </div>
+      <div [id]="'collapse'+x" class="collapse show" data-parent="#accordion">
+        <div class="card-body">
+            <app-traveler-form></app-traveler-form>
+            <app-my-traveler></app-my-traveler>
+        </div>
+      </div>
+    </div>
+</div>

@@ -181,7 +181,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
       this.router.navigate([`flight/payment/${route.route_code}`]);
     } else{
-      this.router.navigate([`flight/travelers/${route.route_code}`]);
+      this.router.navigate([`flight/checkout/${route.route_code}`]);
     }   
   }
 
