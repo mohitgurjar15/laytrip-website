@@ -30,8 +30,8 @@
               <!-- <label>Check In-Check Out</label> -->
               <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
                 [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
-                panelStyleClass="calender-responsive-view laytrip-cal-view" [numberOfMonths]="2" (onSelect)=checkInDateUpdate($event)
-                [readonlyInput]="true">
+                panelStyleClass="calender-responsive-view laytrip-cal-view" [numberOfMonths]="2"
+                (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
               </p-calendar>
               <!-- <div class="prev-next">
                 <a (click)="dateChange('checkIn','previous')">Prev</a>

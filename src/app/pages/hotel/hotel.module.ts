@@ -33,7 +33,6 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
 import { HomeModule } from '../home/home.module';
 
-
 @NgModule({
   declarations: [
     HotelSearchComponent,

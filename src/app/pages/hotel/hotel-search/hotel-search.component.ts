@@ -22,7 +22,6 @@ export class HotelSearchComponent implements OnInit {
   hotelDetailsMain;
   hotelToken;
   isResetFilter: string = 'no';
-  subscriptions: Subscription[] = [];
   searchedValue = [];
   roomsGroup = [
     {
@@ -42,13 +41,11 @@ export class HotelSearchComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
-    if (document.getElementById('login_btn')) {
-      setTimeout(() => {
-        document.getElementById('login_btn').style.background = '#FF00BC';
-      }, 1000);
-    }
-    this.searchedValue.push({ key: 'guest', value: this.roomsGroup });
-
+    // if (document.getElementById('login_btn')) {
+    //   setTimeout(() => {
+    //     document.getElementById('login_btn').style.background = '#FF00BC';
+    //   }, 1000);
+    // }
     let payload: any = {};
     const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
     this.route.queryParams.forEach(params => {
@@ -63,8 +60,8 @@ export class HotelSearchComponent implements OnInit {
       info.forEach(item => {
         payload.occupancies.push({ adults: item.adults, children: item.children });
       });
+      this.getHotelSearchData(payload);
     });
-    this.getHotelSearchData(payload);
   }
 
   getHotelSearchData(payload) {
@@ -170,9 +167,5 @@ export class HotelSearchComponent implements OnInit {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

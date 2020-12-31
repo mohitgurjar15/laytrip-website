@@ -65,7 +65,7 @@
                     <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                         Join</button>
                 </div>
-                <div *ngIf="(submitted  || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors"
+                <div *ngIf="(submitted || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors"
                     class="focus-input100 login-error">
                     <div *ngIf="subscribeForm.controls.email.errors.required" class="text-danger">
                         {{'mobile_page_subscribe_email_touched_validation' | translate}}
@@ -73,6 +73,10 @@
                     <div *ngIf="subscribeForm.controls.email.errors.pattern" class="text-danger">
                         {{'email_invalid_validation' | translate}}
                     </div>
+                </div>
+                <div class="message_block">
+                    <p class="message_success" *ngIf="success">{{successMessage}}</p>
+                    <p class="message_error" *ngIf="error">{{errorMessage}}</p>
                 </div>
             </div>
         </div>
