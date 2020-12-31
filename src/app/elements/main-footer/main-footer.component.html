@@ -15,6 +15,18 @@
                                 <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
                                         <a class="dropdown-toggle hover-link" data-toggle="dropdown">
+                                            {{ selectedLanunage.name }}
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li *ngFor="let langunage of langunages"><a
+                                                    (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cta_drop_wrp">
+                                    <div class="dropdown cus_drop">
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">
                                             <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code
                                             }}
                                             <span class="caret"></span>
@@ -25,18 +37,6 @@
                                                     <img src="{{currency.flag}}" alt="" /> {{ currency.code }}
                                                 </a>
                                             </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cta_drop_wrp">
-                                    <div class="dropdown cus_drop">
-                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">
-                                            {{ selectedLanunage.name }}
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li *ngFor="let langunage of langunages"><a
-                                                    (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -72,26 +72,30 @@
                             <div class="menu_grid">
                                 <h5>{{'laytrip_info_page_title_3' | translate}}</h5>
                                 <ul>
-                                    <li>
+                                    <!-- <li>
                                         <a [routerLink]="['/why-laytrip']"
                                             [innerHTML]="'laytrip_info_page_title_3_description_1' | translate"></a>
-                                    </li>
+                                    </li> -->
                                     <!-- <li><a href="javascript:void(0);">Media and News</a></li> -->
                                     <!-- <li><a href="javascript:void(0);">Download the App</a></li>
                                     <li><a href="javascript:void(0);">Media and News</a></li> -->
-                                    <li>
+                                    <!-- <li>
                                         <a [routerLink]="['/download-app']"
                                             [innerHTML]="'laytrip_info_page_title_3_description_2' | translate"></a>
+                                    </li> -->
+                                    <li>
+                                        <a [routerLink]="['/faq']"
+                                            [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="menu_grid">
                                 <h5>{{'laytrip_info_page_title_4' | translate}}</h5>
                                 <ul>
-                                    <li>
+                                    <!-- <li>
                                         <a [routerLink]="['/faq']"
                                             [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a [routerLink]="['/contact-us']"
                                             [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"></a>
@@ -100,10 +104,10 @@
                                     </li> -->
                                     <!-- <li><a [routerLink]="['/privacy-policy']">Privacy</a></li> -->
                                     <!-- <li><a href="javascript:void(0);">Terms</a></li> -->
-                                    <li>
+                                    <!-- <li>
                                         <a [routerLink]="['/account/search-trip']"
                                             [innerHTML]="'laytrip_info_page_title_4_description_3' | translate"></a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div class="menu_grid">

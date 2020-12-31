@@ -78,10 +78,20 @@
                                         [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}"
                                         flightDepartureMinDate [minDate]="flightDepartureMinDate"
                                         (onSelect)=departureDateUpdate($event) [readonlyInput]="true"
-                                        panelStyleClass="calender-responsive-view laytrip-cal-view" (onMonthChange)="changeMonth($event)">
-                                        <p-header *ngIf="!isRoundTrip  && isCalenderPriceLoading" class="calender-header">We are retrieving monthly prices...</p-header>
+                                        (onMonthChange)="changeMonth($event)"
+                                        panelStyleClass="calender-responsive-view laytrip-cal-view">
+                                        <p-header class="calender-header" *ngIf="calPrices">
+                                            <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
+                                            <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
+                                                <span class="green_var">${{lowMinPrice}}</span>
+                                                <span class="yellow_var">${{midMinPrice}}</span>
+                                                <span class="red_var">${{highMinPrice}}</span>
+                                            </div>
+                                        </p-header>
+
                                         <ng-template pTemplate="date" let-date>
-                                            <span class="c_date">{{date.day}}</span>
+                                            <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high'}"
+                                            >{{date.day}}</span>
                                             <span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
                                         </ng-template>
                                     </p-calendar>
