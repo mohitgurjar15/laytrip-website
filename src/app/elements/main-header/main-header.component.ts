@@ -29,6 +29,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   userDetails;
   username;
   _isLayCredit = false;
+  countryCode:string;
 
   constructor(
     private genericService: GenericService,
@@ -49,6 +50,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.totalLaycredit();
       }
     }
+    this.countryCode = this.commonFunction.getUserCountry();
   }
 
 

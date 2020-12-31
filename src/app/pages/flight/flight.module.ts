@@ -34,7 +34,6 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
 
 // HELPERS MODULE
 import { HelpersModule } from '../../_helpers/_helpers.module';
-import { FlightSearchWidgetComponent } from '../home/flight-search-widget/flight-search-widget.component';
 import { HomeModule } from '../home/home.module';
 
 @NgModule({
@@ -76,6 +75,11 @@ import { HomeModule } from '../home/home.module';
     CalendarModule,
     HomeModule
   ],
-  exports:[FlightLoaderComponent,FlightNotFoundComponent,FlightConfirmationComponent,FlightSummaryComponent]
+  exports:[
+    FlightLoaderComponent,
+    FlightNotFoundComponent,
+    FlightConfirmationComponent,
+    FlightSummaryComponent
+  ]
 })
 export class FlightModule { }

@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -40,6 +40,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FlightClassComponent } from './flight-class/flight-class.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
+import { TravelerListComponent } from './traveler-list/traveler-list.component';
+import { MyTravelerComponent } from './my-traveler/my-traveler.component';
+import { PriceSummaryComponent } from './price-summary/price-summary.component';
+import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
 
 
 
@@ -73,7 +78,12 @@ import { FlightClassComponent } from './flight-class/flight-class.component';
     SearchHotelComponent,
     RentalInfoComponent,
     VacationSearchComponent,
-    FlightClassComponent
+    FlightClassComponent,
+    CartItemComponent,
+    TravelerListComponent,
+    MyTravelerComponent,
+    PriceSummaryComponent,
+    FlightCartItemComponent
   ],
   imports: [
     CommonModule,
@@ -118,7 +128,11 @@ import { FlightClassComponent } from './flight-class/flight-class.component';
     TranslateModule,
     VacationSearchComponent,
     NgScrollbarModule,
-    FlightClassComponent
+    FlightClassComponent,
+    CartItemComponent,
+    TravelerListComponent,
+    MyTravelerComponent,
+    PriceSummaryComponent
   ],
   providers: [DatePipe],
 

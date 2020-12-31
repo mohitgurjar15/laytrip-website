@@ -1,4 +1,4 @@
-<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
+<!-- <app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
 <section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
     <div class="container">
         <div class="row">
@@ -11,7 +11,6 @@
                                 <h6>{{'traveler' | translate}}</h6>
                                 <div class="traveller_detail" *ngFor="let traveler of travelerList">
                                     <span>{{traveler.firstName}} {{traveler.lastName}}</span>
-                                    <!-- <a href="javascript:void(0);">Send E-ticket</a> -->
                                 </div>
                             </div>
                         </div>
@@ -44,7 +43,6 @@
 
 
                                 <div class="block_detail">
-                                    <!-- <app-redeem-laycredit sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" ></app-redeem-laycredit> -->
                                     <app-payment-mode *ngIf="flightSummary.length && isShowPaymentOption && priceData.length" [priceData]="priceData" [flightSummary]="flightSummary" (selectInstalmentMode)="selectInstalmentMode($event)" (getInstalmentData)="getInstalmentData($event)" [showFullPartialPayOption]=false
                                         [isShowPartialPaymentDetails]="isShowPartialPaymentDetails" [isShowSummary]=true [customInstalmentData]="customInstalmentData">
                                     </app-payment-mode>
@@ -54,7 +52,6 @@
                         <div class="block_pay_info">
                             <app-booking-enquiry-info></app-booking-enquiry-info>
                         </div>
-                        <!-- <app-redeem-laycredit></app-redeem-laycredit> -->
                         <div class="block_pay_info" *ngIf="isShowCardOption">
                             <div class="block_card_select">
                                 <div class="block_title_section">
@@ -76,14 +73,6 @@
                     </div>
                     <div class="block_condition_agree">
                         <ul>
-                            <!-- <li>
-                              <label class="custom_checkbox">
-                                  <input type="checkbox" (click)="acceptTermCondtion()">
-                                  <span class="checkmark"></span>
-                              </label>
-                              <p>I agree <a href="javascript:void(0);" (click)="acceptTermCondtion()">Terms & Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
-                          </li> -->
-
                         </ul>
                         <div class="btn_payment">
                             <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="toggleTermConditionPopup()">{{'pay_and_complete_booking' | translate}} <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
@@ -110,4 +99,17 @@
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available>
 <app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>
 <app-booking-feedback *ngIf="isShowFeedbackPopup" [bookingId]="bookingId" (feedbackValueChange)="feedbackToggle($event)"></app-booking-feedback>
-<app-popup-term-condition *ngIf="isShowTermConditionPopup" (closeTermCoditionPopup)="closeTermCoditionPopup($event)" (acceptTermCondtion)="acceptTermCondtion($event)"></app-popup-term-condition>
+<app-popup-term-condition *ngIf="isShowTermConditionPopup" (closeTermCoditionPopup)="closeTermCoditionPopup($event)" (acceptTermCondtion)="acceptTermCondtion($event)"></app-popup-term-condition> -->
+
+<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <app-cart-item></app-cart-item>
+            </div>
+            <div class="col-lg-4">
+                
+            </div>
+        </div>
+    </div>
+</section> 
