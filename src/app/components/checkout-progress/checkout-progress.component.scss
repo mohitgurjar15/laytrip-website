@@ -1,0 +1,102 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.progress_breadcum_wrapper{
+    background-color: $bg-body;
+    margin-top: 40px;
+    .prgrs_container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12.5px 0;
+        .progress_bar_inner{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .pr_steps_wrapper{
+                position: relative;
+                padding-right: 30px;
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+                &::after{
+                    content: '';
+                    background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg');
+                    background-repeat: no-repeat;
+                    background-size: 8px;
+                    padding: 8px 4px;
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+                }
+                &:last-child{
+                    padding: 0;
+                    margin: 0;
+                    &::after{
+                        background-image: none;
+                    }
+                }
+                .step_num{
+                    font-size: 14px;
+                    color: $text-white;
+                    background-color: $mid_gray_bg;
+                    border-radius: 50%;
+                    height: 25px;
+                    width: 27px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 10px;
+                }
+                .step_text{
+                    font-size: 14px;
+                    color: $text-grey;
+                }
+                &.current{
+                    .step_num{
+                        color: $text-white;
+                        background-color: $pink;
+                    }
+                    .step_text{
+                        color: $pink;
+                    }
+                }
+            }
+        }
+        .cart_section{
+            .cart_i_wrapper{
+                position: relative;
+                background-color: $background-grey;
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                a{
+                    img{
+                        max-width: 20px;
+                    }
+                    .cart_count{
+                        font-size: 14px;
+                        position: absolute;
+                        top: 2px;
+                        right: -18px;
+                        color: $text-white;
+                        background-color: $pink;
+                        border-radius: 50%;
+                        height: 25px;
+                        width: 27px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+}

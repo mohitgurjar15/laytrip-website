@@ -1,5 +1,5 @@
 <app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
-<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
+<!-- <section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -12,12 +12,19 @@
                                 </div>
 
                                 <div class="block_detail">
-                                    <app-redeem-laycredit-loader *ngIf="isLayCreditLoading"></app-redeem-laycredit-loader>
-                                    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}" sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)" [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
+                                    <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
+                                    </app-redeem-laycredit-loader>
+                                    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}"
+                                        sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)"
+                                        [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
                                 </div>
 
                             </div>
-                            <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary" [priceData]="priceData" laycreditpoints="{{laycreditpoints}}" (selectInstalmentMode)="selectInstalmentMode($event)" (getInstalmentData)="getInstalmentData($event)" (redeemableLayCredit)="redeemableLayCredit($event)">
+                            <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary"
+                                [priceData]="priceData" laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
                             </app-payment-mode>
                         </div>
                         <div class="block_pay_info">
@@ -26,7 +33,9 @@
                     </div>
 
                     <div class="btn_payment">
-                        <a class="btn btn_laytrip" (click)="checkUserAndRedirect()">{{'countinue_to_guest_detail' | translate}}<img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                        <a class="btn btn_laytrip" (click)="checkUserAndRedirect()">{{'countinue_to_guest_detail' |
+                            translate}}<img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                                alt="Right Arrow"></a>
                     </div>
                 </div>
 
@@ -34,13 +43,40 @@
             </div>
             <div class="col-lg-4">
                 <app-flight-summary-loader *ngIf="!priceData.length"></app-flight-summary-loader>
-                <app-flight-summary *ngIf="priceData.length" [priceData]="priceData" checkAvailability="local" [laycreditpoints]="laycreditpoints" (flightAvailable)="flightAvailable($event)" [showPartialPayemntOption]="showPartialPayemntOption" partialPaymentAmount={{partialPaymentAmount}}
+                <app-flight-summary *ngIf="priceData.length" [priceData]="priceData" checkAvailability="local"
+                    [laycreditpoints]="laycreditpoints" (flightAvailable)="flightAvailable($event)"
+                    [showPartialPayemntOption]="showPartialPayemntOption" partialPaymentAmount={{partialPaymentAmount}}
                     payNowAmount={{payNowAmount}} [instalmentMode]="instalmentMode">
                 </app-flight-summary>
             </div>
         </div>
     </div>
+</section> -->
+<div class="block_detail">
+    <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
+    </app-redeem-laycredit-loader>
+    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}"
+        sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)"
+        [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
+</div>
+
+<section class="payment_mode_main_wrapper flight">
+    <div class="payment_container">
+        <div class="payment_mode_wrapper">
+            <h3>Choose How You Pay</h3>
+            <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary" [priceData]="priceData"
+                laycreditpoints="{{laycreditpoints}}" (selectInstalmentMode)="selectInstalmentMode($event)"
+                (getInstalmentData)="getInstalmentData($event)" (redeemableLayCredit)="redeemableLayCredit($event)">
+            </app-payment-mode>
+        </div>
+        <app-booking-enquiry-info></app-booking-enquiry-info>
+        <div class="cta_btn_wrapper">
+            <button (click)="checkUserAndRedirect()">Continue to Payment</button>
+        </div>
+    </div>
 </section>
 
+
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available>
-<app-booking-as-login-or-guest-popup (isShowGuestPopupValueChange)="changePopupValue($event)" *ngIf="isShowGuestPopup"></app-booking-as-login-or-guest-popup>
+<app-booking-as-login-or-guest-popup (isShowGuestPopupValueChange)="changePopupValue($event)" *ngIf="isShowGuestPopup">
+</app-booking-as-login-or-guest-popup>

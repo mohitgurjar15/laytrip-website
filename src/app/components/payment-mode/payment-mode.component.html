@@ -1,54 +1,68 @@
-
-<div class="container" *ngIf="instalmentAvavible">
-    <h5>Choose How You Pay</h5>
-    <button type="button" class="btn btn-outline-secondary btn-lg" [ngClass]="{'btn-outline-success':paymentType=='instalment'}" [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>&nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-outline-secondary btn-lg" [ngClass]="{'btn-outline-success':paymentType=='no-instalment'}" (click)="togglePaymentMode('no-instalment')">Full Payment</button>
-    <br><br>
+<div *ngIf="instalmentAvavible">
+  <div class="payment_accordion">
+    <div class="payment_mode_header">
+      <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='instalment'}"
+        [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>
+      <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='no-instalment'}"
+        (click)="togglePaymentMode('no-instalment')">Full Payment</button>
+    </div>
 
     <div *ngIf="paymentType=='instalment'">
-      <h6>Downpayment Options</h6>
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==0}" (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==1}" (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':selectedDownPaymentIndex==2}" (click)="toggleDownPayment(2)">${{downPayments[2] | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      
-      <br><br>
-      <h6>Installment Payment Options</h6>
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='weekly'}" (click)="togglePaymentFrequency('weekly')"     [disabled]="weeklyInstalment < 5" >Weeky ${{weeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='biweekly'}" (click)="togglePaymentFrequency('biweekly')" [disabled]="biWeeklyInstalment < 5">Biweeky${{biWeeklyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-outline-secondary" [ngClass]="{'btn-outline-success':instalmentType=='monthly'}" (click)="togglePaymentFrequency('monthly')"   [disabled]="montlyInstalment < 5">Monthly ${{montlyInstalment  | number : '1.2-2' }}</button>&nbsp;&nbsp;&nbsp;
+      <h3>Downpayment Options</h3>
+      <div class="flex_center_wrapper">
+        <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==0}"
+          (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}</button>
+        <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==1}"
+          (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>
+        <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==2}"
+          (click)="toggleDownPayment(2)">${{downPayments[2] | number : '1.2-2' }}</button>
+      </div>
+
+      <h3>Installment Payment Options</h3>
+      <div class="flex_center_wrapper">
+        <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='weekly'}"
+          (click)="togglePaymentFrequency('weekly')" [disabled]="weeklyInstalment < 5">Weeky ${{weeklyInstalment |
+          number : '1.2-2' }}</button>
+        <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='biweekly'}"
+          (click)="togglePaymentFrequency('biweekly')" [disabled]="biWeeklyInstalment < 5">Biweeky${{biWeeklyInstalment
+          | number : '1.2-2' }}</button>
+        <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='monthly'}"
+          (click)="togglePaymentFrequency('monthly')" [disabled]="montlyInstalment < 5">Monthly ${{montlyInstalment |
+          number : '1.2-2' }}</button>
+      </div>
     </div>
-      
-    <br><br><br><br>
-    <h6>Break Down</h6>
+    <h3>Break Down</h3>
     <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Total Price
-          <span class="badge badge-primary badge-pill">${{sellingPrice | number : '1.2-2'}}</span>
-        </li>
-        <li *ngIf="laycreditpoints>0" class="list-group-item d-flex justify-content-between align-items-center">
-          Applied points
-          <span class="badge badge-primary badge-pill">{{laycreditpoints | number : '1.2-2' }}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Total Due
-          <span class="badge badge-primary badge-pill">${{remainingAmount | number : '1.2-2'}}</span>
-        </li>
-       
-        <li *ngIf="paymentType=='instalment'" class="list-group-item d-flex justify-content-between align-items-center">
-            As ${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}} Down and ${{instalments.instalment_date[1].instalment_amount | number : '1.2-2'}}/installment for {{instalments.instalment_date.length-1}} installments
-            <div class="dropdown">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                Installment list
-              </button>
-              <div class="dropdown-menu" *ngIf="instalments">
-                <ng-container *ngFor="let instalment of instalments.instalment_date">
-                  <a class="dropdown-item" href="#">Date: {{instalment.instalment_date}}=>{{instalment.instalment_amount | number : '1.2-2'}}</a>
-                </ng-container>
-              </div>
-            </div>
-        </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Total Price
+        <span class="badge badge-primary badge-pill">${{sellingPrice | number : '1.2-2'}}</span>
+      </li>
+      <li *ngIf="laycreditpoints>0" class="list-group-item d-flex justify-content-between align-items-center">
+        Applied points
+        <span class="badge badge-primary badge-pill">{{laycreditpoints | number : '1.2-2' }}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Total Due
+        <span class="badge badge-primary badge-pill">${{remainingAmount | number : '1.2-2'}}</span>
+      </li>
+
+      <li *ngIf="paymentType=='instalment'" class="list-group-item d-flex justify-content-between align-items-center">
+        As ${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}} Down and
+        ${{instalments.instalment_date[1].instalment_amount | number : '1.2-2'}}/installment for
+        {{instalments.instalment_date.length-1}} installments
+        <div class="dropdown">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Installment list
+          </button>
+          <div class="dropdown-menu" *ngIf="instalments">
+            <ng-container *ngFor="let instalment of instalments.instalment_date">
+              <a class="dropdown-item" href="#">Date: {{instalment.instalment_date}}=>{{instalment.instalment_amount |
+                number : '1.2-2'}}</a>
+            </ng-container>
+          </div>
+        </div>
+      </li>
 
     </ul>
-    
+  </div>
 </div>
-
