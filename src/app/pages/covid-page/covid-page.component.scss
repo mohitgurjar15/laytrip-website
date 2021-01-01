@@ -1,0 +1,55 @@
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+.block_covid_19 {
+	width: 100%;
+	padding: 60px 0 30px;
+
+	.block_covid_cnt {
+		width: 100%;
+
+		.block_cnt {
+			width: 100%;
+			margin: 0 0 30px;
+
+			h2 {
+				width: 100%;
+				margin-bottom: 20px;
+				font-size: 20px;
+				font-weight: 700;
+				color: $text-black;
+			}
+
+			p {
+				width: 100%;
+				margin-bottom: 15px;
+				font-size: 14px;
+				font-weight: 400;
+				color: $text-black;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				a {
+					color: $text-blue;
+				}
+
+				span {
+					a {
+						font-weight: 500;
+						color: $text-black;
+					}
+				}
+			}
+
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+}
