@@ -54,6 +54,7 @@ export class FlightCheckoutComponent implements OnInit {
     partialPaymentAmount:number=0;
     payNowAmount:number=0;
     priceData=[];
+    travelerCounts=[];
 
     constructor(
       private route: ActivatedRoute,
@@ -92,6 +93,15 @@ export class FlightCheckoutComponent implements OnInit {
             
           }
         }
+      }
+      catch(e){
+
+      }
+
+      try{
+        let _itinerary = sessionStorage.getItem('_itinerary');
+        _itinerary = JSON.parse(_itinerary)
+        this.travelerCounts.push(_itinerary);
       }
       catch(e){
 

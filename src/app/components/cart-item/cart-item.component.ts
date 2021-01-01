@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-cart-item',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartItemComponent implements OnInit {
 
+  @Input() totalPassenger:[];
   constructor() { }
 
   ngOnInit(): void {
+    //console.log("this.totalPassenger",this.totalPassenger)
   }
 
 }
