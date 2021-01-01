@@ -100,7 +100,7 @@
                                         selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate
                                         [minDate]="flightDepartureMinDate"
-                                        panelStyleClass="calender-responsive-view laytrip-cal-view" [numberOfMonths]="2"
+                                        panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender" [numberOfMonths]="2"
                                         (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
                                     </p-calendar>
                                     <!-- <div class="prev-next">

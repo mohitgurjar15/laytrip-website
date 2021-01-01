@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-traveler-list',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TravelerListComponent implements OnInit {
 
+  @Input() totalPassenger;
   constructor() { }
 
   ngOnInit(): void {
+    console.log("this.totalPassenger...",this.totalPassenger)
   }
 
 }
