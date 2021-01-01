@@ -17,6 +17,9 @@ export class MobileAndSubscribeComponent implements OnInit {
   submitted = false;
   loading = false;
   success = false;
+  error = false;
+  successMessage = '';
+  errorMessage = '';
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -29,6 +32,13 @@ export class MobileAndSubscribeComponent implements OnInit {
     });
   }
 
+  changeEmail() {
+    this.successMessage = '';
+    this.errorMessage = '';
+    this.success = false;
+    this.error = false;
+  }
+
   subscribeNow() {
     this.submitted = this.loading = true;
     if (this.subscribeForm.invalid) {
@@ -39,10 +49,20 @@ export class MobileAndSubscribeComponent implements OnInit {
       this.userService.subscribeNow(this.subscribeForm.value.email).subscribe((data: any) => {
         this.submitted = this.loading = false;
         this.success = true;
-        this.toastr.success(data.message, 'Subscribed Successful');
+        this.error = false;
+        this.errorMessage = '';
+        this.subscribeForm.markAsUntouched();
+        this.subscribeForm.controls.email.setValue('');
+        this.successMessage = data.message;
+        // this.toastr.success(data.message, '');
       }, (error: HttpErrorResponse) => {
+        this.error = true;
+        this.successMessage = '';
         this.submitted = this.loading = this.success = false;
-        this.toastr.error(error.error.message, 'Subscribed Error');
+        this.subscribeForm.controls.email.setValue('');
+        this.subscribeForm.markAsUntouched();
+        this.errorMessage = error.error.message;
+        // this.toastr.error(error.error.message, 'Subscribed Error');
       });
     }
   }

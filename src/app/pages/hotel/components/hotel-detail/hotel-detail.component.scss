@@ -185,10 +185,9 @@ agm-map {
             }
         }
     }
-    
 }
-.hotel_detail_slider{
-    .slider_main_contain{
+.hotel_detail_slider {
+    .slider_main_contain {
         z-index: 9;
     }
 }
@@ -224,6 +223,12 @@ agm-map {
                                     padding: 5px 15px;
                                     font-size: 10px;
                                 }
+                                .refundable {
+                                    background-color: $bg-green;
+                                }
+                                .non-refundable {
+                                    background-color: $error-color;
+                                }
                             }
                             .review_section_wrap {
                                 .right_bar {
@@ -251,4 +256,14 @@ agm-map {
             }
         }
     }
+}
+
+.dataLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // margin-top: 15px;
+    width: 100%;
+    font-size: 25px;
+    margin-bottom: 0.5rem;
 }

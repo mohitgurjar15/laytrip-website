@@ -40,6 +40,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FlightClassComponent } from './flight-class/flight-class.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { TravelerListComponent } from './traveler-list/traveler-list.component';
 import { MyTravelerComponent } from './my-traveler/my-traveler.component';
@@ -98,7 +99,8 @@ import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-
     LottieAnimationViewModule.forRoot(),
     TextMaskModule,
     TranslateModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    InfiniteScrollModule
   ],
   exports: [
     SearchAirportComponent,
@@ -129,6 +131,7 @@ import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-
     VacationSearchComponent,
     NgScrollbarModule,
     FlightClassComponent,
+    InfiniteScrollModule,
     CartItemComponent,
     TravelerListComponent,
     MyTravelerComponent,
