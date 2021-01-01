@@ -5,6 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 exports.FlightSearchWidgetComponent = void 0;
 var core_1 = require("@angular/core");
@@ -13,13 +20,14 @@ var environment_1 = require("../../../../environments/environment");
 var airports_1 = require("../../flight/airports");
 var moment = require("moment");
 var FlightSearchWidgetComponent = /** @class */ (function () {
-    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer) {
+    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer, flightService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
         this.route = route;
         this.renderer = renderer;
+        this.flightService = flightService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.calenderPrices = [];
@@ -29,6 +37,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.isCalenderPriceLoading = true;
         // DATE OF FROM_DESTINATION & TO_DESTINATION
         this.fromSearch = airports_1.airports['JFK'];
+        this.monthYearArr = [];
         this.toSearch = airports_1.airports['PUJ'];
         //toDestinationCode = this.toSearch.code;
         //arrivalCity = this.toSearch.city;
@@ -41,6 +50,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
         this.returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"));
         this.totalPerson = 1;
+        this.lowMinPrice = 0;
+        this.midMinPrice = 0;
+        this.highMinPrice = 0;
+        this.calPrices = false;
         this.searchFlightInfo = {
             trip: 'oneway',
             departure: this.fromSearch.code,
@@ -70,8 +83,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var _this = this;
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
+        if (this.calenderPrices.length == 0) {
+            this.isCalenderPriceLoading = false;
+        }
         this.route.queryParams.subscribe(function (params) {
             if (Object.keys(params).length > 0) {
+                _this.calPrices = true;
                 _this.fromSearch = airports_1.airports[params['departure']];
                 //this.fromDestinationCode = this.fromSearch.code;
                 //this.departureCity = this.fromSearch.city;
@@ -89,11 +106,15 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.returnDate = params['arrival_date'] ? new Date(params['arrival_date']) : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
                 _this.rangeDates = [_this.departureDate, _this.returnDate];
             }
+            else {
+                _this.calPrices = false;
+            }
         });
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
             this.isCalenderPriceLoading = false;
+            // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
         }
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
@@ -222,13 +243,77 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         month = month.toString().length == 1 ? '0' + month : month;
         var date = day + "/" + month + "/" + y;
         var price = this.calenderPrices.find(function (d) { return d.date == date; });
-        console.log(price);
+        this.getMinimumPricesList(this.calenderPrices);
         if (price) {
             if (price.secondary_start_price > 0) {
                 return "$" + price.secondary_start_price.toFixed(2);
             }
             return "$" + price.price.toFixed(2);
         }
+    };
+    FlightSearchWidgetComponent.prototype.getPriceClass = function (d, m, y) {
+        var month = parseInt(m) + 1;
+        var day = d.toString().length == 1 ? '0' + d : d;
+        month = month.toString().length == 1 ? '0' + month : month;
+        var date = day + "/" + month + "/" + y;
+        var price = this.calenderPrices.find(function (d) { return d.date == date; });
+        if (price) {
+            if (price.secondary_start_price > 0) {
+                return "" + price.flag;
+            }
+            return "" + price.flag;
+        }
+    };
+    FlightSearchWidgetComponent.prototype.changeMonth = function (event) {
+        var _this = this;
+        if (!this.isRoundTrip) {
+            var month = event.month;
+            month = month.toString().length == 1 ? '0' + month : month;
+            var monthYearName = month + "-" + event.year;
+            if (!this.monthYearArr.includes(monthYearName) && this.calPrices) {
+                this.monthYearArr.push(monthYearName);
+                var startDate = moment([event.year, event.month - 1]);
+                var endDate = moment(startDate).endOf('month');
+                startDate = moment(startDate.toDate()).format("YYYY-MM-DD");
+                endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+                if (!moment().isBefore(startDate)) {
+                    startDate = moment().format("YYYY-MM-DD");
+                }
+                var payload = {
+                    source_location: this.route.snapshot.queryParams['departure'],
+                    destination_location: this.route.snapshot.queryParams['arrival'],
+                    flight_class: this.route.snapshot.queryParams['class'],
+                    adult_count: this.route.snapshot.queryParams['adult'],
+                    child_count: this.route.snapshot.queryParams['child'],
+                    infant_count: this.route.snapshot.queryParams['infant'],
+                    start_date: startDate,
+                    end_date: endDate
+                };
+                this.isCalenderPriceLoading = true;
+                this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
+                    _this.isCalenderPriceLoading = false;
+                    _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
+                    _this.getMinimumPricesList(res);
+                }, function (err) {
+                    _this.isCalenderPriceLoading = false;
+                });
+            }
+        }
+    };
+    FlightSearchWidgetComponent.prototype.getMinimumPricesList = function (prices) {
+        this.lowMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'low'; }));
+        this.midMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'medium'; }));
+        this.highMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'high'; }));
+    };
+    FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {
+        return prices.reduce(function (min, p) {
+            if (p.secondary_start_price > 0) {
+                return p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
+            }
+            else {
+                return p.price < min ? p.price : min, prices[0].price;
+            }
+        }, 0);
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

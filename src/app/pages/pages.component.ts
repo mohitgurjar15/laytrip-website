@@ -16,7 +16,7 @@ export class PagesComponent implements OnInit {
 
     ) {
       this.router.events.subscribe((event: Event) => {
-        if (event instanceof NavigationStart) {
+          if (event instanceof NavigationStart) {
             // Trigger when route change
             this.checkUserValidate();
         }
