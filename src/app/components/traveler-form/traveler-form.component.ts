@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../_helpers/custom.validators';
 import { NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../_helpers/ngbDateCustomParserFormatter';
+import { CheckOutService } from '../../services/checkout.service';
 declare var $: any;
 @Component({
   selector: 'app-traveler-form',
@@ -24,6 +25,8 @@ declare var $: any;
 export class TravelerFormComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() travelerType:string;
+  @Input() traveler;
+  travelerForm: FormGroup;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -33,10 +36,30 @@ export class TravelerFormComponent implements OnInit {
     private cookieService: CookieService,
     private toastr: ToastrService,
     private ngbDateParserFormatter: NgbDateParserFormatter,
-    config: NgbDatepickerConfig
+    config: NgbDatepickerConfig,
+    private checkOutService:CheckOutService
   ) { }
 
   ngOnInit() {
-   
+      
+    this.travelerForm = this.formBuilder.group({
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        phone_number: ['', [Validators.required, Validators.maxLength(4)]],
+        gender: ['', [Validators.required, Validators.maxLength(20)]],
+        email: ['', Validators.required]
+    });
+    //this.travelerForm.controls.first_name.setValue(this.traveler.firstName)
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("changes",changes)
+    if (changes['traveler']) {
+      this.traveler= changes['traveler'].currentValue;
+      this.travelerForm.controls.first_name.setValue(this.traveler.firstName)
+      this.travelerForm.controls.last_name.setValue(this.traveler.lastName)
+      this.travelerForm.controls.email.setValue(this.traveler.email)
+    }
   }
 }

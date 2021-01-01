@@ -8,8 +8,8 @@
       </div>
       <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">
         <div class="card-body">
-            <app-traveler-form travelerType="adult"></app-traveler-form>
-            <app-my-traveler></app-my-traveler>
+            <app-traveler-form travelerType="adult" [traveler]="traveler"></app-traveler-form>
+            <app-my-traveler [travelers]="travelers" ></app-my-traveler>
         </div>
       </div>
     </div>

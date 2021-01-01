@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit, Output, SimpleChanges,EventEmitter } from '@angular/core';
+import { CheckOutService } from '../../services/checkout.service'
 @Component({
   selector: 'app-my-traveler',
   templateUrl: './my-traveler.component.html',
@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyTravelerComponent implements OnInit {
 
-  constructor() { }
+  @Input() travelers;
+  constructor(
+    private checkOutService:CheckOutService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  chooseTraveler(userId){
+
+    let traveler = this.travelers.find(item=> item.userId==userId)
+    this.checkOutService.selectTraveler(traveler)
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['travelers']) {
+      this.travelers = changes['travelers'].currentValue;
+    }
+  }
+
+  
 }

@@ -105,7 +105,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <app-cart-item [totalPassenger]="travelerCounts[0]"></app-cart-item>
+                <app-cart-item 
+                    moduleType="flight"
+                    [travelers]="travelers"
+                    [totalPassenger]="travelerCounts[0]">
+                </app-cart-item>
             </div>
             <div class="col-lg-4">
                 
