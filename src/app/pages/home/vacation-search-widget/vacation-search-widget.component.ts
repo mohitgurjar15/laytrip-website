@@ -29,6 +29,7 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   rentalForm:any= {
     id:'',
+    name:'',
     type:"city",
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     check_out_date:new Date(moment().add(7, 'days').format("MM/DD/YYYY")),
@@ -82,6 +83,7 @@ export class VacationSearchWidgetComponent implements OnInit {
           this.rentalForm.city = params.city;
           this.rentalForm.country = params.country;
           this.rentalForm.id = params.id;
+          this.rentalForm.name = info.display_name;
           this.rentalForm.display_name = params.display_name;
           this.rentalForm.type = params.type;
           this.rentalForm.adult_count= info.adult_count,
@@ -221,6 +223,7 @@ export class VacationSearchWidgetComponent implements OnInit {
       this.rentalForm.city = event.value.city;
       this.rentalForm.country = event.value.country;
       this.rentalForm.id = event.value.id;
+      this.rentalForm.name = event.value.display_name;
       this.rentalForm.display_name = event.value.display_name;
       this.rentalForm.type = event.value.type;
     }
@@ -246,6 +249,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     queryParams.check_out_date=(moment(formData.check_out_date).format('YYYY-MM-DD'));
     queryParams.adult_count=formData.adult_count;
     queryParams.id=formData.id;
+    queryParams.name=this.rentalForm.display_name;
     queryParams.child=formData.child;
     queryParams.number_and_children_ages=formData.number_and_children_ages;
     queryParams.city=this.rentalForm.city;

@@ -34,7 +34,7 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
     const info = JSON.parse(localStorage.getItem('_rental'));
      this.rentalSearchInfo = params;
         payload = {
-          id: params.id,
+          name: info.name,
           type: params.type,
           check_in_date: params.check_in_date,
           check_out_date: params.check_out_date,
