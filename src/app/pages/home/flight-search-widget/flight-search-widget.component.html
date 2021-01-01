@@ -83,9 +83,9 @@
                                         <p-header class="calender-header" *ngIf="calPrices">
                                             <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
-                                                <span class="green_var">${{lowMinPrice}}</span>
-                                                <span class="yellow_var">${{midMinPrice}}</span>
-                                                <span class="red_var">${{highMinPrice}}</span>
+                                                <span class="green_var" *ngIf="lowMinPrice > 0">${{lowMinPrice}}</span>
+                                                <span class="yellow_var" *ngIf="midMinPrice > 0">${{midMinPrice}}</span>
+                                                <span class="red_var" *ngIf="highMinPrice > 0">${{highMinPrice}}</span>
                                             </div>
                                         </p-header>
 

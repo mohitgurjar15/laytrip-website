@@ -318,7 +318,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       let month=event.month;
       month = month.toString().length==1?'0'+month:month;
       let monthYearName = `${month}-${event.year}`;
-      if(!this.monthYearArr.includes(monthYearName)){
+      if(!this.monthYearArr.includes(monthYearName) && this.calPrices){
         this.monthYearArr.push(monthYearName)
         let startDate:any = moment([event.year,event.month-1]);
         let endDate:any =  moment(startDate).endOf('month');
@@ -357,7 +357,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'))
     this.midMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'medium'));
     this.highMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'high'));
-  // console.log(prices,this.lowMinPrice,this.midMinPrice,this.highMinPrice)
   }
 
   getMinPrice(prices){
@@ -365,7 +364,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(p.secondary_start_price > 0 ){
         return  p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
       } else {
-        return  p.start_price < min ? p.start_price : min, prices[0].start_price;
+        return  p.price < min ? p.price : min, prices[0].price;
       }
     }, 0);
   }

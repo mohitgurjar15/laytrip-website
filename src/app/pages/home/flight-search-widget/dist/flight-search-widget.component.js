@@ -270,7 +270,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             var month = event.month;
             month = month.toString().length == 1 ? '0' + month : month;
             var monthYearName = month + "-" + event.year;
-            if (!this.monthYearArr.includes(monthYearName)) {
+            if (!this.monthYearArr.includes(monthYearName) && this.calPrices) {
                 this.monthYearArr.push(monthYearName);
                 var startDate = moment([event.year, event.month - 1]);
                 var endDate = moment(startDate).endOf('month');
@@ -304,7 +304,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'low'; }));
         this.midMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'medium'; }));
         this.highMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'high'; }));
-        // console.log(prices,this.lowMinPrice,this.midMinPrice,this.highMinPrice)
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {
         return prices.reduce(function (min, p) {
@@ -312,7 +311,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 return p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
             }
             else {
-                return p.start_price < min ? p.start_price : min, prices[0].start_price;
+                return p.price < min ? p.price : min, prices[0].price;
             }
         }, 0);
     };

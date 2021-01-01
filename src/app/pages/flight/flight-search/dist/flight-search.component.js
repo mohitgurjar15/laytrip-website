@@ -133,7 +133,6 @@ var FlightSearchComponent = /** @class */ (function () {
         this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
             if (res) {
                 _this.calenderPrices = res;
-                console.log('here', _this.calenderPrices);
             }
         }, function (err) {
         });

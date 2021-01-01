@@ -153,7 +153,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
       if (res) {
         this.calenderPrices = res;
-        console.log('here',this.calenderPrices)
       }
     }, err => {
 
