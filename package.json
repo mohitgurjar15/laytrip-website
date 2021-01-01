@@ -55,6 +55,7 @@
     "ng5-slider": "^1.2.4",
     "ngx-cookie": "^5.0.0",
     "ngx-countdown": "^3.1.0",
+    "ngx-device-detector": "^2.0.4",
     "ngx-gallery": "^5.10.0",
     "ngx-infinite-scroll": "8.0.0",
     "ngx-scrollbar": "4.2.0",

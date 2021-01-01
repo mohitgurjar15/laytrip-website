@@ -8,14 +8,15 @@ import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-
+import { DeviceDetectorService } from 'ngx-device-detector';
+declare var Spreedly: any;
 @Component({
   selector: 'app-flight-checkout',
   templateUrl: './flight-checkout.component.html',
   styleUrls: ['./flight-checkout.component.scss']
 })
 export class FlightCheckoutComponent implements OnInit {
-   
+
     s3BucketUrl = environment.s3BucketUrl;
     validateCardDetails:Subject<any> = new Subject();
     showAddCardForm:boolean=false;
@@ -48,12 +49,13 @@ export class FlightCheckoutComponent implements OnInit {
     isShowPaymentOption:boolean=true;
     isShowFeedbackPopup:boolean=false;
     isShowPartialPaymentDetails:boolean=false;
-    bookingId;  
+    bookingId;
     customInstalmentData:any;
     showPartialPayemntOption:boolean=false;
     partialPaymentAmount:number=0;
     payNowAmount:number=0;
     priceData=[];
+  deviceInfo: any = [];
 
     constructor(
       private route: ActivatedRoute,
@@ -61,11 +63,12 @@ export class FlightCheckoutComponent implements OnInit {
       private flightService:FlightService,
       private cookieService: CookieService,
       private genericService:GenericService,
-      private toastr: ToastrService
+      private toastr: ToastrService,
+      private deviceService: DeviceDetectorService
     ) { }
-    
+
     ngOnInit() {
-      
+      this.deviceInfo = this.deviceService.getDeviceInfo();
       window.scroll(0,0);
       this.getSellingPrice();
       this.userInfo = getLoginUserInfo();
@@ -77,7 +80,7 @@ export class FlightCheckoutComponent implements OnInit {
       this.bookingTimerConfiguration();
       this.setInstalmentInfo();
 
-      
+
       let travelersIds = this.cookieService.get('_travelers');
       try{
         travelersIds = JSON.parse(travelersIds);
@@ -89,7 +92,7 @@ export class FlightCheckoutComponent implements OnInit {
             this.travelers.push({
               "traveler_id" : travelersIds[i]['userId']
             })
-            
+
           }
         }
       }
@@ -118,7 +121,7 @@ export class FlightCheckoutComponent implements OnInit {
         }
       }
       else{
-        
+
         this.bookingTimerConfig={
           leftTime: 600, format: 'm:s'
         };
@@ -140,7 +143,7 @@ export class FlightCheckoutComponent implements OnInit {
         this.customAmount = this.customInstalmentData.customAmount;
         this.customInstalment = this.customInstalmentData.customInstalment;
         this.instalmentType = this.customInstalmentData.instalmentType;
-        
+
       }
       catch(error){
 
@@ -180,7 +183,7 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     bookFlight(){
-      
+
       /* Guest user */
       if(this.userInfo.roleId==7){
         let isValid = this.validateCard(this.guestCardDetails);
@@ -208,7 +211,15 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     bookFlightApi(){
-      window.scroll(0,0);
+      window.scroll(0, 0);
+      var browser_size = '01';
+      // The accept header from your server side rendered page. You'll need to inject it into the page. Below is an example.
+      var acceptHeader = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
+      // The request should include the browser data collected by using `Spreedly.ThreeDS.serialize().
+      let browser_info = Spreedly.ThreeDS.serialize(
+        browser_size,
+        acceptHeader
+      );
       let bookingData={
         payment_type            : this.instalmentMode,
         laycredit_points        : this.laycreditpoints,
@@ -219,28 +230,30 @@ export class FlightCheckoutComponent implements OnInit {
         card_token              : this.cardToken,
         custom_instalment_amount: this.customAmount,
         custom_instalment_no    : this.customInstalment,
-        booking_through         : 'web'
+        booking_through: 'web',
+        browser_info
       }
 
-      this.flightService.bookFligt(bookingData).subscribe((res:any)=>{
-        this.bookingStatus=1;
-        this.bookingId = res.laytrip_booking_id;
-        this.bookingLoader=false;
-        this.progressStep = { step1:true, step2:true, step3:true, step4:true }
-        this.bookingResult=res;
-        this.isShowFeedbackPopup = true; 
-        if(this.laycreditpoints>0){
-          this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
-            document.getElementById("layPoints").innerHTML=res.total_available_points
-            
-          },(error=>{
-      
-          }))
-        }
+      this.flightService.bookFligt(bookingData).subscribe((res: any) => {
+        console.log(res);
+        // this.bookingStatus=1;
+        // this.bookingId = res.laytrip_booking_id;
+        // this.bookingLoader=false;
+        // this.progressStep = { step1:true, step2:true, step3:true, step4:true }
+        // this.bookingResult=res;
+        // this.isShowFeedbackPopup = true;
+        // if(this.laycreditpoints>0){
+        //   this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+        //     document.getElementById("layPoints").innerHTML=res.total_available_points
+
+        //   },(error=>{
+
+        //   }))
+        // }
       },(error)=>{
-        
+
         if(error.status==404){
-          this.bookingStatus=2; // Flight Not available  
+          this.bookingStatus=2; // Flight Not available
         }
         if(error.status==424){
           this.bookingStatus=2; // Booking failed from supplier side
@@ -254,14 +267,14 @@ export class FlightCheckoutComponent implements OnInit {
 
     bookingDetails(bookingId){
       this.flightService.getBookingDetails(bookingId).subscribe((res:any)=>{
-        
+
       },(error)=>{
 
       })
     }
 
     validateBookingButton(){
-      
+
       this.isDisableBookBtn=true;
       if(
         this.userInfo.roleId!=7  &&
@@ -289,7 +302,7 @@ export class FlightCheckoutComponent implements OnInit {
         return false;
       if(typeof guestCardDetails.card_cvv=='undefined' || guestCardDetails.card_cvv=='')
         return false;
-      
+
     }
 
     getFlightSummaryData(data){
@@ -299,12 +312,12 @@ export class FlightCheckoutComponent implements OnInit {
         this.sellingPrice = data[0].selling_price;
       }
       else{
-        
+
         if(typeof data[0].secondary_selling_price!='undefined' && data[0].secondary_selling_price>0){
           this.sellingPrice = data[0].secondary_selling_price;
         }
         else{
-          
+
           this.sellingPrice = data[0].selling_price;
         }
       }
@@ -321,7 +334,7 @@ export class FlightCheckoutComponent implements OnInit {
       this.customInstalment = data.customInstalment;
       this.partialPaymentAmount = data.partialPaymentAmount;
       if(this.instalmentMode=='instalment'){
-        
+
         this.payNowAmount=Number(data.firstInstalment)-Number(this.laycreditpoints);
       }
       else{
@@ -339,9 +352,9 @@ export class FlightCheckoutComponent implements OnInit {
       } */
       /* this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
         if(res.instalment_available==true){
-          
+
           this.partialPaymentAmount=res.instalment_date[1].instalment_amount;
-          
+
           if(this.instalmentMode=='instalment'){
             console.log("res.instalment_date",res.instalment_date)
             this.payNowAmount=Number(res.instalment_date[0].instalment_amount)-Number(this.laycreditpoints);
@@ -354,7 +367,7 @@ export class FlightCheckoutComponent implements OnInit {
           this.payNowAmount=Number(this.sellingPrice)-Number(this.laycreditpoints);
         }
       },(err)=>{
-  
+
       }) */
     }
 
@@ -374,7 +387,7 @@ export class FlightCheckoutComponent implements OnInit {
     sessionTimeout(event){
       this.isSessionTimeOut=event;
     }
-    
+
     feedbackToggle(event){
       if(event){
         this.isShowFeedbackPopup=false;
@@ -392,7 +405,7 @@ export class FlightCheckoutComponent implements OnInit {
     }
 
     getSellingPrice(){
-     
+
       try{
         let __route = sessionStorage.getItem('__route');
         let response  = JSON.parse(__route);
@@ -404,18 +417,18 @@ export class FlightCheckoutComponent implements OnInit {
         this.flightService.getSellingPrice(payLoad).subscribe((res:any)=>{
           this.priceData=res;
         },(error)=>{
-    
+
         })
       }
       catch(e){
-  
+
       }
     }
 
     toggleTermConditionPopup(){
       this.isShowTermConditionPopup=!this.isShowTermConditionPopup;
     }
-    
+
     closeTermCoditionPopup(){
       this.isShowTermConditionPopup=!this.isShowTermConditionPopup;
     }
