@@ -119,6 +119,7 @@ export class FlightsComponent implements OnInit {
     }
     this.userService.getBookings(this.page, this.limit, this.filterInfo).subscribe((res: any) => {
       if (res) {
+        console.log(res)
         this.flightBookings = res.data.map(flight => {
           if (flight.moduleId == 1) {
             return {
@@ -145,8 +146,10 @@ export class FlightsComponent implements OnInit {
               bookingStatus: flight.bookingStatus,
               bookingInstalments: flight.bookingInstalments
             }
-          }
+          } 
         });
+        console.log('this.flightBookings',this.flightBookings)
+
         this.totalItems = res.total_count;
         this.isNotFound = false;
         this.loading = false;

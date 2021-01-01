@@ -130,7 +130,7 @@ export class UserService {
       }
     }
     return this.http.get(
-      `${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders());
+      `${this.apiURL}v1/booking/user-booking-list?module_id=1&limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders());
   }
 
   getPaymentHistory(pageNumber, limit, filterForm,payment_status) {

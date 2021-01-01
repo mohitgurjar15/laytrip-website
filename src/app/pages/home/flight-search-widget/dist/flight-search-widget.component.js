@@ -304,6 +304,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'low'; }));
         this.midMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'medium'; }));
         this.highMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'high'; }));
+        console.log(this.lowMinPrice, this.midMinPrice, this.highMinPrice);
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {
         return prices.reduce(function (min, p) {
