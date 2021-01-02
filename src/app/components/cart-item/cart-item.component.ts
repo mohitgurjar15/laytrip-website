@@ -8,10 +8,19 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 export class CartItemComponent implements OnInit {
 
   @Input() totalPassenger:[];
+  @Input() moduleType:string;
+  @Input() travelers:[];
+
   constructor() { }
 
   ngOnInit(): void {
-    //console.log("this.totalPassenger",this.totalPassenger)
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['travelers']) {
+      this.travelers = changes['travelers'].currentValue;
+      console.log("this.totalPassenger, cart item",this.travelers)
+    }
   }
 
 }
