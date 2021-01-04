@@ -206,10 +206,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     // console.log(event);
   }
 
-  redirectToDetail(id) {
-    this.router.navigate(['/hotel/detail', id, this.hotelToken]);
-  }
-
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
