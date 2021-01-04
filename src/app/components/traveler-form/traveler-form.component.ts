@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FlightService } from '../../services/flight.service';
 import * as moment from 'moment';
@@ -49,12 +48,9 @@ export class TravelerFormComponent implements OnInit {
         gender: ['', [Validators.required, Validators.maxLength(20)]],
         email: ['', Validators.required]
     });
-    //this.travelerForm.controls.first_name.setValue(this.traveler.firstName)
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes",changes)
     if (changes['traveler']) {
       this.traveler= changes['traveler'].currentValue;
       this.travelerForm.controls.first_name.setValue(this.traveler.firstName)
