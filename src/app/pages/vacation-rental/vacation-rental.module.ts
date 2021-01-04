@@ -21,6 +21,9 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { VacationPopupLoaderComponent } from './components/vacation-popup-loader/vacation-popup-loader.component';
 import { HomeModule } from '../home/home.module';
 
+// HELPERS MODULE
+import { HelpersModule } from '../../_helpers/_helpers.module';
+
 @NgModule({
   declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent, VacationDetailComponent, VacationPopupLoaderComponent],
   imports: [
@@ -39,7 +42,8 @@ import { HomeModule } from '../home/home.module';
     }),
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
-    HomeModule
+    HomeModule,
+    HelpersModule
   ],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports : [

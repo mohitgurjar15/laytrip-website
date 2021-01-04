@@ -47,7 +47,6 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
         type: this.defaultSelected.type,
       });
     }
-    console.log(this.defaultSelected);
     if (localStorage.getItem('_rental_recent')) {
       this.recentSearchInfo = JSON.parse(localStorage.getItem('_rental_recent'));
       this.data = this.recentSearchInfo.map(item => {
@@ -62,7 +61,6 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
         }
       });
     } else {
-      console.log('no');
     }
 
   }
@@ -77,10 +75,7 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
   searchByRental(searchItem) {
     this.loading = true;
     this.rentalService.searchRentalData(searchItem).subscribe((response: any) => {
-      console.log(response);
       this.data = response.map(res => {
-
-        console.log(res);
         this.loading = false;
         return {
           id: res.id,
@@ -114,11 +109,9 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
     if (event && index && index === 'fromSearch1') {
       this.changeValue.emit({ key: 'fromSearch1', value: event });
       if (this.recentSearchInfo && this.recentSearchInfo.length < 3) {
-
         const check=this.recentSearchInfo.some(temp =>temp.id == this.defaultSelected.id)
         if(!check)
         {
-
          this.recentSearchInfo.unshift({id:event.id,city:event.city,country:event.country,display_name:event.display_name,type:event.type});
           localStorage.setItem('_rental_recent', JSON.stringify(this.recentSearchInfo));
         }
@@ -138,5 +131,4 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
     this.selectedRental = {};
     this.defaultSelected = this.defaultSelectedTemp;
   }
-
 }

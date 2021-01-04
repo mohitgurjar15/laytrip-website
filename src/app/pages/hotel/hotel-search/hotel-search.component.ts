@@ -47,8 +47,9 @@ export class HotelSearchComponent implements OnInit {
     //   }, 1000);
     // }
     let payload: any = {};
-    const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+    let info;
     this.route.queryParams.forEach(params => {
+      info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
       payload = {
         check_in: params.check_in,
         check_out: params.check_out,

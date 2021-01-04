@@ -38,6 +38,7 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     no_smoking: `${this.s3BucketUrl}assets/images/hotels/no_smoking.svg`,
     tv: `${this.s3BucketUrl}assets/images/hotels/tv.svg`,
   }
+  showMapDetails = [];
 
   constructor(
     private rentalService: VacationRentalService,
@@ -50,6 +51,7 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.rentalListArray = this.rentalDetails;
+    console.log(this.rentalListArray);
     this.userInfo = getLoginUserInfo();
   }
 
@@ -69,18 +71,39 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     }
   }
 
-  onMouseOver(infoWindow, gm) {
+  // onMouseOver(infoWindow, gm) {
 
-    if (gm.lastOpen != null) {
-      gm.lastOpen.close();
+  //   if (gm.lastOpen != null) {
+  //     gm.lastOpen.close();
+  //   }
+
+  //   gm.lastOpen = infoWindow;
+
+  //   infoWindow.open();
+  // }
+  // onMouseOut(infoWindow, gm) {
+  //   infoWindow.close();
+  // }
+
+  infoWindowAction(template, event, action) {
+    if (action === 'open') {
+      template.open();
+    } else if (action === 'close') {
+      template.close();
+    } else if (action === 'click') {
+      this.showMapInfo(template);
     }
-
-    gm.lastOpen = infoWindow;
-
-    infoWindow.open();
   }
-  onMouseOut(infoWindow, gm) {
-    infoWindow.close();
+
+  showMapInfo(index) {
+    if (typeof this.showMapDetails[index] === 'undefined') {
+      this.showMapDetails[index] = true;
+      document.getElementById(index).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    else {
+      this.showMapDetails[index] = !this.showMapDetails[index];
+      document.getElementById(index).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   showDetails(index, flag = null) {

@@ -108,7 +108,6 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
   }
 
    filterRentalByPrice(key, name) {
-    console.log(key, name);
     if (key === 'total') {
       this.sortType = name;
     } else if (key === 'weekly') {
@@ -124,8 +123,6 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
   }
 
    filterByAmenities(event, value) {
-     console.log(event);
-     console.log(value);
     if (event.target.checked === true) {
       this.amenitiesArray.push(value);
     }
@@ -149,7 +146,6 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
 
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
-      console.log(this.amenitiesArray);
        filteredRentals = filteredRentals.filter(item => {
         return this.amenitiesArray.some(r => item.amenities.includes(r));
       // filteredRentals = filteredRentals.filter(item => {

@@ -142,6 +142,51 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
+  // ngAfterContentChecked() {
+  //   if (this.route && this.route.snapshot.queryParams['check_in']) {
+  //     this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
+  //     this.checkInMinDate = this.checkInDate;
+  //     this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
+  //     this.checkOutMinDate = this.checkOutDate;
+  //     this.rangeDates = [this.checkInDate, this.checkOutDate];
+
+  //     if (this.route && this.route.snapshot && this.route.snapshot.queryParams) {
+  //       let info;
+  //       this.searchHotelInfo =
+  //       {
+  //         latitude: this.route.snapshot.queryParams['latitude'],
+  //         longitude: this.route.snapshot.queryParams['longitude'],
+  //         check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
+  //         check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
+  //       };
+  //       if (this.route.snapshot.queryParams['location']) {
+  //         info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+  //         if (info) {
+  //           this.fromDestinationInfo.city = info.city;
+  //           this.fromDestinationInfo.country = info.country;
+  //           this.searchHotelInfo.city = info.city;
+  //           this.searchHotelInfo.country = info.country;
+  //         }
+  //       }
+  //       if (this.route.snapshot.queryParams['itenery']) {
+  //         info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+  //         if (info) {
+  //           this.searchHotelInfo.occupancies = info;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   if (this.fromDestinationInfo) {
+  //     this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
+  //     this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
+  //     this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
+  //   }
+  //   if (this.selectedGuest) {
+  //     this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
+  //   }
+  // }
+
   checkInDateUpdate(date) {
     console.log(date);
     // this is only for closing date range picker, after selecting both dates
@@ -214,9 +259,12 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
       // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
-      this.router.navigate(['hotel/search'], {
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
+      // this.router.navigate(['hotel/search'], {
+      //   queryParams: queryParams,
+      //   queryParamsHandling: 'merge'
+      // });
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
     }
   }

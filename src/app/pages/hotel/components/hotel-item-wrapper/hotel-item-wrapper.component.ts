@@ -101,10 +101,14 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
         }
       });
     }
+    let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+    if (hotelinfo) {
+      this.hotelName = hotelinfo.city;
+    }
     // this.hotelListArray = this.hotelDetails;
     this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
     if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
-      this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+      // this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
     }
     this.userInfo = getLoginUserInfo();
     // this.totalLaycredit();
@@ -129,9 +133,13 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   ngAfterContentChecked() {
     // this.hotelListArray = this.hotelDetails;
     this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-    if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
-      this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+    let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+    if (hotelinfo) {
+      this.hotelName = hotelinfo.city;
     }
+    // if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
+    //   this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+    // }
   }
 
   infoWindowAction(template, event, action) {
@@ -204,10 +212,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   logAnimation(event) {
     // console.log(event);
-  }
-
-  redirectToDetail(id) {
-    this.router.navigate(['/hotel/detail', id, this.hotelToken]);
   }
 
   ngOnDestroy(): void {

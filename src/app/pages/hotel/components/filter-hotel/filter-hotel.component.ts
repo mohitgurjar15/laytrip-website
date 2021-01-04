@@ -313,7 +313,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
-      console.log(this.amenitiesArray);
       filteredHotels = filteredHotels.filter(item => {
         return this.amenitiesArray.some(r => item.amenities.list.includes(r));
         // return this.amenitiesArray.includes(item.amenities.list);
@@ -353,7 +352,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['isResetFilter']) {
-      console.log(changes['isResetFilter']);
       this.isResetFilter = changes['isResetFilter'].currentValue;
       this.minPrice = this.hotelDetailsMain.filter_objects.price.min;
       this.maxPrice = this.hotelDetailsMain.filter_objects.price.max;

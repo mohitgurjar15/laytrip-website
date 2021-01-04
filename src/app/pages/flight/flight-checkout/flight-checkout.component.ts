@@ -9,7 +9,7 @@ import { GenericService } from '../../../services/generic.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TravelerService } from '../../../services/traveler.service';
-import { CheckOutService } from 'src/app/services/checkout.service';
+import { CheckOutService } from '../../../services/checkout.service';
 
 @Component({
   selector: 'app-flight-checkout',

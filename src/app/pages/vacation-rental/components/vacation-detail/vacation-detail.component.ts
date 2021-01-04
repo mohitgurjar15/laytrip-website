@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./vacation-detail.component.scss']
 })
 export class VacationDetailComponent implements OnInit {
- 
+
   s3BucketUrl = environment.s3BucketUrl;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -22,15 +22,16 @@ export class VacationDetailComponent implements OnInit {
   rentalId;
   rentalDetails;
   imageTemp = [];
-  rentalRoomData=[];
-  lat:number;
-  long:number;
+  rentalRoomData = [];
+  lat: number;
+  long: number;
   currency;
   lang;
   info;
   roomData;
+  dataLoading = false;
   constructor(
-  	private route: ActivatedRoute,
+    private route: ActivatedRoute,
     private rentalService: VacationRentalService,
     private commonFunction: CommonFunction,
     private toastr: ToastrService,
@@ -38,7 +39,7 @@ export class VacationDetailComponent implements OnInit {
 
   ngOnInit() {
 
-  	this.loading = true;
+    this.loading = true;
     this.galleryOptions = [
       {
         width: '100%',
@@ -66,28 +67,27 @@ export class VacationDetailComponent implements OnInit {
         height: '600px'
       },
     ];
-     this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       if (params) {
         this.rentalId = params.id;
-        this.lat=Number(this.route.snapshot.queryParams.lat);
-        this.long=Number(this.route.snapshot.queryParams.long);
+        this.lat = Number(this.route.snapshot.queryParams.lat);
+        this.long = Number(this.route.snapshot.queryParams.long);
       }
     });
 
-     this.currency = JSON.parse(localStorage.getItem('_curr'));
-     this.lang     =JSON.parse(localStorage.getItem('_lang'));
-     this.info   =JSON.parse(localStorage.getItem('_rental'));
-     let payload: any = {};
-      payload = {
-          id: this.rentalId,
-          check_in_date: this.info.check_in_date,
-          check_out_date:this.info.check_out_date,
-          adult_count: parseInt(this.info.adult_count),
-          number_and_children_ages:this.info.number_and_children_ages,
-        }; 
-     //Start Service call data
-      this.rentalService.getRentalDetail(this.lang.iso_1Code,this.currency.code,payload).subscribe((res: any) => {
-      console.log(res);
+    this.currency = JSON.parse(localStorage.getItem('_curr'));
+    this.lang = JSON.parse(localStorage.getItem('_lang'));
+    this.info = JSON.parse(localStorage.getItem('_rental'));
+    let payload: any = {};
+    payload = {
+      id: this.rentalId,
+      check_in_date: this.info.check_in_date,
+      check_out_date: this.info.check_out_date,
+      adult_count: parseInt(this.info.adult_count),
+      number_and_children_ages: this.info.number_and_children_ages,
+    };
+    //Start Service call data
+    this.rentalService.getRentalDetail(this.lang.iso_1Code, this.currency.code, payload).subscribe((res: any) => {
       if (res) {
         this.loading = false;
         this.rentalDetails = {
@@ -97,11 +97,10 @@ export class VacationDetailComponent implements OnInit {
           description: res.description,
           amenities: res.amenities,
         };
-        if(res.rooms){
-        	this.rentalRoomData=res.rooms;
-        	this.roomData=res.rooms[0];
+        if (res.rooms) {
+          this.rentalRoomData = res.rooms;
+          this.roomData = res.rooms[0];
         }
-        console.log(this.rentalDetails);
         if (res.images) {
           res.images.forEach(imageUrl => {
             this.imageTemp.push({
@@ -114,13 +113,13 @@ export class VacationDetailComponent implements OnInit {
           });
         }
       }
- 
+
     }, error => {
-       this.loading = false;
+      this.loading = false;
       this.toastr.error('session is expired', 'Error');
       this.router.navigate(['/']);
     });
-     //End Service call data
+    //End Service call data
   }
 
   counter(i: any) {
@@ -128,8 +127,11 @@ export class VacationDetailComponent implements OnInit {
   }
 
   showRoomDetails(roomInfo) {
-  	console.log(roomInfo);
-    this.roomData = roomInfo;
+    this.dataLoading = true;
+    setTimeout(() => {
+      this.roomData = roomInfo;
+      this.dataLoading = false;
+    }, 1000);
   }
 
 }
