@@ -243,3 +243,13 @@ agm-map {
         }
     }
 }
+
+.dataLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // margin-top: 15px;
+    width: 100%;
+    font-size: 25px;
+    margin-bottom: 0.5rem;
+}

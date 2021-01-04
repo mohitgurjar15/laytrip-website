@@ -64,8 +64,6 @@ export class VacationRentalSearchBarComponent implements OnInit {
 
   ngOnInit() {
     const info = JSON.parse(localStorage.getItem('_rental'));
-    console.log(info);
-
     this.data=[{
           id: info.id,
           display_name: info.display_name,
@@ -79,7 +77,6 @@ export class VacationRentalSearchBarComponent implements OnInit {
      this.defaultCity    = info.city;
      this.defaultCountry = info.country;
       
-    console.log(this.data);
     this.rentalForm.check_in_date=new Date(info.check_in_date); 
     this.rentalForm.check_out_date=new Date(info.check_out_date);   
     this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
@@ -103,7 +100,6 @@ export class VacationRentalSearchBarComponent implements OnInit {
   }
 
    changeRentalInfo(event){
-     console.log(event);
     this.rentalForm.adult_count = event.adult;
     this.rentalForm.child = event.child;
     //this.rentalForm.number_and_children_ages = event.child_age[0].children;
@@ -146,10 +142,7 @@ export class VacationRentalSearchBarComponent implements OnInit {
    searchByRental(searchItem) {
     this.loading = true;
     this.rentalService.searchRentalData(searchItem).subscribe((response: any) => {
-      console.log(response);
       this.data = response.map(res => {
-
-        console.log(res);
         this.loading = false;
         return {
           id: res.id,
@@ -173,7 +166,6 @@ export class VacationRentalSearchBarComponent implements OnInit {
   }
 
    selectEvent(event) {
-     console.log(event);
      if (!event) {
       this.placeHolder = this.placeHolder;
       this.defaultSelected = this.defaultSelected;
@@ -204,7 +196,6 @@ export class VacationRentalSearchBarComponent implements OnInit {
     formData.adult_count=this.rentalForm.adult_count == undefined ? this.data[0].adult_count:this.rentalForm.adult_count;
     formData.child=this.rentalForm.child == undefined ? this.data[0].child:this.rentalForm.child;
     formData.number_and_children_ages=formData.number_and_children_ages == undefined ? this.data[0].number_and_children_ages:formData.number_and_children_ages;
-    console.log(formData);
     if(formData.child !== "")
     {
       if(formData.number_and_children_ages.length !== formData.child)
@@ -213,11 +204,8 @@ export class VacationRentalSearchBarComponent implements OnInit {
         return;
       }
     }
-    console.log(formData);
     //return false;
     localStorage.setItem('_rental', JSON.stringify(formData));
     this.searchBarInfo.emit(formData);
   }
-
-
 }

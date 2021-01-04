@@ -51,7 +51,6 @@ export class SortVacationRentalComponent implements OnInit {
   }
 
   sortRentalData(key, order, name) {
-  	console.log(key,order,name);
     this.sortType = name;
     this.sortRental.emit({ key, order });
   }

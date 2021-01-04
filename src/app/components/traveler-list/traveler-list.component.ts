@@ -1,4 +1,5 @@
 import { Component, Input, OnInit,  SimpleChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { CheckOutService } from '../../services/checkout.service';
 @Component({
   selector: 'app-traveler-list',
@@ -10,7 +11,7 @@ export class TravelerListComponent implements OnInit {
   @Input() totalPassenger;
   @Input() travelers:[];
   selectedTravelers;
-
+  travelerForm: FormGroup;
   constructor(
     private checkOutService:CheckOutService
   ) { }
