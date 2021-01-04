@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VacationRentalService } from '../../../services/vacation-rental.service';
 
 @Component({
@@ -29,6 +29,7 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   rentalForm:any= {
     id:'',
+    name:'',
     type:"city",
     check_in_date:new Date(moment().add(1, 'days').format("MM/DD/YYYY")),
     check_out_date:new Date(moment().add(7, 'days').format("MM/DD/YYYY")),
@@ -37,12 +38,12 @@ export class VacationSearchWidgetComponent implements OnInit {
     child:'',
   };
   defaultCity:'Barcelona';
-  fromDestinationTitle:'Wonderful Apartment in Barcelona (4 guests)';
+  fromDestinationTitle:'Barcelona,Spain';
   fromDestinationInfo:any = {
-    id: 10515,
+    id: 19492,
     country: 'Spain',
     city: 'Barcelona',
-    display_name: 'Wonderful Apartment in Barcelona (4 guests)',
+    display_name: 'Barcelona,Spain',
     type: 'city',
   };
   totalPerson: number = 2;
@@ -54,6 +55,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
+    private route: ActivatedRoute,
     private rentalService: VacationRentalService) { 
 
     this.rentalSearchForm = this.fb.group({   
@@ -73,17 +75,47 @@ export class VacationSearchWidgetComponent implements OnInit {
     if(host.includes("staging")){
       this.showCommingSoon=true;
     }
-     
-     if (this.fromDestinationInfo) {
-      this.rentalForm.city = this.fromDestinationInfo.city;
-      this.rentalForm.country = this.fromDestinationInfo.country;
-      this.rentalForm.id = this.fromDestinationInfo.id;
-      this.rentalForm.display_name = this.fromDestinationInfo.display_name;
-      this.rentalForm.city = this.fromDestinationInfo.city;
-      this.searchedValue.push({ key: 'fromSearch1', value: this.fromDestinationInfo });
-      console.log(this.searchedValue);
-    }
-    
+
+    this.route.queryParams.subscribe(params => {
+        if(Object.keys(params).length > 0){
+          const info = JSON.parse(localStorage.getItem('_rental'));
+          this.searchedValue=[];
+          this.rentalForm.city = params.city;
+          this.rentalForm.country = params.country;
+          this.rentalForm.id = params.id;
+          this.rentalForm.name = info.display_name;
+          this.rentalForm.display_name = params.display_name;
+          this.rentalForm.type = params.type;
+          this.rentalForm.adult_count= info.adult_count,
+          this.rentalForm.child= info.child,
+          this.rentalForm.number_and_children_ages=info.number_and_children_ages
+          this.rentalForm.check_in_date=new Date(info.check_in_date); 
+          this.rentalForm.check_out_date=new Date(info.check_out_date);   
+          this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
+          //Changes
+          this.fromDestinationInfo.city = params.city;
+          this.fromDestinationInfo.country = params.country;
+          this.fromDestinationInfo.id = params.id;
+          this.fromDestinationInfo.display_name = params.display_name;
+          this.fromDestinationInfo.type = params.type;
+
+          this.searchedValue.push({ key: 'fromSearch1', value: this.fromDestinationInfo });
+          console.log(this.searchedValue);
+
+        }
+        else{
+          this.searchedValue=[];
+        //if(this.fromDestinationInfo){
+          this.rentalForm.city = this.fromDestinationInfo.city;
+          this.rentalForm.country = this.fromDestinationInfo.country;
+          this.rentalForm.id = this.fromDestinationInfo.id;
+          this.rentalForm.display_name = this.fromDestinationInfo.display_name;
+          this.rentalForm.type = this.fromDestinationInfo.type;
+          this.searchedValue.push({ key: 'fromSearch1', value: this.fromDestinationInfo });
+          console.log(this.searchedValue);
+        }      
+    });
+
   }
 
 
@@ -191,6 +223,7 @@ export class VacationSearchWidgetComponent implements OnInit {
       this.rentalForm.city = event.value.city;
       this.rentalForm.country = event.value.country;
       this.rentalForm.id = event.value.id;
+      this.rentalForm.name = event.value.display_name;
       this.rentalForm.display_name = event.value.display_name;
       this.rentalForm.type = event.value.type;
     }
@@ -216,6 +249,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     queryParams.check_out_date=(moment(formData.check_out_date).format('YYYY-MM-DD'));
     queryParams.adult_count=formData.adult_count;
     queryParams.id=formData.id;
+    queryParams.name=this.rentalForm.display_name;
     queryParams.child=formData.child;
     queryParams.number_and_children_ages=formData.number_and_children_ages;
     queryParams.city=this.rentalForm.city;
