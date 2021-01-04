@@ -216,6 +216,10 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     this.showMinAirline = (type === 'more') ? 500 : 4;
   }
 
+  resetSorting(key,order) {
+
+  }
+
 
   /**
    * Filter by price range
