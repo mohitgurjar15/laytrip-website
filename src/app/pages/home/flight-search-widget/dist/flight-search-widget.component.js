@@ -20,7 +20,7 @@ var environment_1 = require("../../../../environments/environment");
 var airports_1 = require("../../flight/airports");
 var moment = require("moment");
 var FlightSearchWidgetComponent = /** @class */ (function () {
-    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer, flightService) {
+    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer, flightService, homeService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
@@ -28,6 +28,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.route = route;
         this.renderer = renderer;
         this.flightService = flightService;
+        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.calenderPrices = [];
@@ -82,17 +83,29 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        this.homeService.getToString.subscribe(function (toSearchString) {
+            console.log(toSearchString);
+            if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+                var keys = toSearchString;
+                _this.toSearch = null;
+                // if(typeof this.toSearch != 'undefined'){
+                _this.toSearch = airports_1.airports[keys];
+                // this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+                _this.searchFlightInfo.arrival = _this.toSearch.code;
+                console.log(_this.toSearch);
+                // }
+            }
+        });
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.calenderPrices.length == 0) {
             this.isCalenderPriceLoading = false;
         }
-        console.log('inint');
         this.route.queryParams.subscribe(function (params) {
             if (Object.keys(params).length > 0) {
                 _this.calPrices = true;
                 _this.fromSearch = airports_1.airports[params['departure']];
                 //this.fromDestinationCode = this.fromSearch.code;
-                //this.departureCity = this.fromSearch.city;
+                //this.departureCity = this.fromSearch.city;toSearch
                 //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
                 //this.fromAirport = airports[this.fromDestinationCode];
                 _this.toSearch = airports_1.airports[params['arrival']];
@@ -114,6 +127,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
+        console.log(typeof changes['calenderPrices'].currentValue);
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
             // this.isCalenderPriceLoading=false;
             // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
@@ -151,6 +165,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchFlightInfo["class"] = event;
     };
     FlightSearchWidgetComponent.prototype.searchFlights = function () {
+        var _this = this;
         this.flightSearchFormSubmitted = true;
         var queryParams = {};
         queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
@@ -167,9 +182,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         if (this.searchFlightInfo && this.totalPerson &&
             this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
             localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
-            this.router.navigate(['flight/search'], {
-                queryParams: queryParams,
-                queryParamsHandling: 'merge'
+            /* this.router.navigate(['flight/search'], {
+              queryParams: queryParams,
+              queryParamsHandling: 'merge'
+            }); */
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                _this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
             });
         }
     };
@@ -240,6 +258,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
+        this.isCalenderPriceLoading = true;
         var month = parseInt(m) + 1;
         var day = d.toString().length == 1 ? '0' + d : d;
         month = month.toString().length == 1 ? '0' + month : month;
@@ -247,6 +266,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var price = this.calenderPrices.find(function (d) { return d.date == date; });
         this.getMinimumPricesList(this.calenderPrices);
         if (price) {
+            this.isCalenderPriceLoading = false;
             if (price.secondary_start_price > 0) {
                 return "$" + price.secondary_start_price.toFixed(2);
             }
@@ -274,7 +294,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.calPrices = true;
             }
         });
-        console.log(this.calPrices);
         this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
         if (!this.isRoundTrip) {
             var month = event.month;
@@ -301,13 +320,14 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 };
                 var CurrentDate = new Date();
                 var GivenDate = new Date(endDate);
-                console.log("GivenDate:", GivenDate, "CurrentDate", CurrentDate, "start", new Date(startDate));
                 if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
                     this.isCalenderPriceLoading = this.calPrices = true;
                     this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
-                        _this.isCalenderPriceLoading = false;
                         _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
                         _this.getMinimumPricesList(res);
+                        console.log(_this.isCalenderPriceLoading, _this.calPrices, _this);
+                        _this.isCalenderPriceLoading = false;
+                        console.log(_this.isCalenderPriceLoading, _this.calPrices);
                     }, function (err) {
                         _this.calPrices = false;
                         _this.isCalenderPriceLoading = false;
@@ -339,6 +359,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         else {
             return 0;
         }
+    };
+    FlightSearchWidgetComponent.prototype.setToString = function (newItem) {
+        console.log('here', newItem);
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

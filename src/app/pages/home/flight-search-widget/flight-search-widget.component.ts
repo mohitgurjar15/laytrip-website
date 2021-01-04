@@ -9,6 +9,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { start } from 'repl';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -81,8 +82,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
-    private flightService: FlightService
+    private flightService: FlightService,
+    private homeService: HomeService
   ) {
+    
 
     this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
     this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
@@ -101,22 +104,37 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.homeService.getToString.subscribe(toSearchString=>{
+      console.log(toSearchString)
+      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
+        let keys : any = toSearchString;
+        this.toSearch = null;    
+        // if(typeof this.toSearch != 'undefined'){
+          this.toSearch = airports[keys];
+          // this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+          this.searchFlightInfo.arrival = this.toSearch.code;
+
+          console.log(this.toSearch)
+        // }
+      }
+    });
+
     this.countryCode = this.commonFunction.getUserCountry();
     if(this.calenderPrices.length == 0){
       this.isCalenderPriceLoading=false;
     }
-    console.log('inint')
     this.route.queryParams.subscribe(params => {
       
       if(Object.keys(params).length > 0){ 
         this.calPrices = true;     
           this.fromSearch = airports[params['departure']];
           //this.fromDestinationCode = this.fromSearch.code;
-          //this.departureCity = this.fromSearch.city;
+          //this.departureCity = this.fromSearch.city;toSearch
           //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
           //this.fromAirport = airports[this.fromDestinationCode];
 
           this.toSearch = airports[params['arrival']];
+          
           //this.toDestinationCode = this.toSearch.code;
           //this.arrivalCity = this.toSearch.city;
           //this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
@@ -137,8 +155,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
-    if(typeof changes['calenderPrices'].currentValue!='undefined' && changes['calenderPrices'].firstChange==false){
+    console.log(typeof changes['calenderPrices'].currentValue)
+    if(typeof changes['calenderPrices'].currentValue !='undefined' && changes['calenderPrices'].firstChange==false){
       // this.isCalenderPriceLoading=false;
       // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
     }
@@ -196,9 +214,12 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
-      this.router.navigate(['flight/search'], {
+      /* this.router.navigate(['flight/search'], {
         queryParams: queryParams,
         queryParamsHandling: 'merge'
+      }); */
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
     }
 
@@ -284,6 +305,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   getPrice(d,m,y){
+    this.isCalenderPriceLoading = true;
     let month:any=parseInt(m)+1;
     let day  = d.toString().length==1 ? '0'+d : d;
     month    = month.toString().length==1 ? '0'+month : month;
@@ -292,6 +314,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.getMinimumPricesList(this.calenderPrices);
 
     if(price){
+      this.isCalenderPriceLoading = false;
       if(price.secondary_start_price>0){
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
@@ -321,7 +344,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.calPrices = true;
       } 
     });
-    console.log(this.calPrices)
+
     this.lowMinPrice= this.highMinPrice = this.midMinPrice = 0;
     if(!this.isRoundTrip){
       let month=event.month;
@@ -351,14 +374,16 @@ export class FlightSearchWidgetComponent implements OnInit {
         }
         var CurrentDate = new Date();
         var GivenDate = new Date(endDate);
-        console.log("GivenDate:",GivenDate,"CurrentDate",CurrentDate,"start",new Date(startDate))
+
         if(GivenDate > CurrentDate || CurrentDate < new Date(startDate)){
             this.isCalenderPriceLoading = this.calPrices = true;
             this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
               
-            this.isCalenderPriceLoading = false;
-            this.calenderPrices = [...this.calenderPrices,...res];
-            this.getMinimumPricesList(res);
+              this.calenderPrices = [...this.calenderPrices,...res];
+              this.getMinimumPricesList(res);
+              console.log(this.isCalenderPriceLoading,this.calPrices,this)
+              this.isCalenderPriceLoading = false;
+              console.log(this.isCalenderPriceLoading,this.calPrices)
           }, err => {
             this.calPrices = false;
             this.isCalenderPriceLoading = false;
@@ -391,5 +416,10 @@ export class FlightSearchWidgetComponent implements OnInit {
       return 0;
     }
  }
+
+  setToString(newItem: string) {
+    console.log('here',newItem)
+  }
+
 
 }
