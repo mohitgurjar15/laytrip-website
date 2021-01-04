@@ -10,8 +10,8 @@
     <div *ngIf="paymentType=='instalment'" class="inner_accordion">
       <!-- <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
       </app-redeem-laycredit-loader> -->
-      <app-redeem-laycredit redeemableLayPoints="100" sellingPrice="100" (applyLaycredit)="applyLaycredit($event)"
-        [totalLaycreditPoints]="100"></app-redeem-laycredit>
+      <app-redeem-laycredit redeemableLayPoints={{sellingPrice}} sellingPrice={{sellingPrice}} (applyLaycredit)="applyLaycredit($event)"
+        [totalLaycreditPoints]="sellingPrice"></app-redeem-laycredit>
       <h3>Downpayment Options</h3>
       <div class="flex_center_wrapper">
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==0}"
@@ -76,7 +76,7 @@
   </div>
 </div>
 
-<div class="pay_summery_wrapper">
+<!-- <div class="pay_summery_wrapper">
   <h3>Payment Summary</h3>
   <div class="pay_sum_inner">
     <div class="pay_list_wrper">
@@ -143,6 +143,50 @@
               <div class="due_details">
                 <span>Due Jan 1, 2021</span>
                 <span>$30</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="pay_summery_wrapper" *ngIf="paymentType=='instalment'">
+  <h3>Payment Summary</h3>
+  <div class="pay_sum_inner">
+    <div class="pay_list_wrper">
+      <div class="pay_listing">
+        <span>Downpayment</span>
+        <span>${{instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
+      </div>
+      
+      <!-- <div class="pay_listing">
+        <span>Add-ons</span>
+        <span>$60</span>
+      </div> -->
+      <div class="pay_listing" *ngIf="laycreditpoints>0">
+        <span>Applied Laytrip Points</span>
+        <span>-${{laycreditpoints | number : '1.2-2' }} </span>
+      </div>
+    </div>
+    <div class="price_accordion" id="price_collapse">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            Total Due Now
+            <span>${{remainingAmount | number : '1.2-2'}}</span>
+          </button>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
+          <div class="card-body">
+            <div class="pay_sap_setions">
+              <h3>Installments</h3>
+              <div class="due_details" *ngFor="let instalment of instalments.instalment_date | slice:1">
+                <span>Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
+                <span>${{instalment.instalment_amount |
+                  number : '1.2-2'}}</span>
               </div>
             </div>
           </div>
