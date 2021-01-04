@@ -8,20 +8,30 @@
 .payment_mode_main_wrapper{
     background-color: $background-white;
     .payment_container{
-        max-width: 650px;
+        max-width: 658px;
         margin: 0 auto;
+        @include tab-view{
+            width: 100%;
+            padding: 10px;
+        }
         .payment_mode_wrapper{
+            display: flex;
+            flex-direction: column;
             h3{
                 color: $blue-text;
                 font-size: 34px;
                 margin-bottom: 5px;
+                margin: 25px 0 15px;
+                @include tab-view{
+                    font-size: 18px;
+                }
             }
         }
         .cta_btn_wrapper{
             display: flex;
             justify-content: center;
             width: 100%;
-            margin: 10px 0;
+            margin: 25px 0 15px;
             align-items: center;
             button {
                 width: auto;

@@ -52,16 +52,14 @@
         </div>
     </div>
 </section> -->
-<div class="block_detail">
-    <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
-    </app-redeem-laycredit-loader>
-    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}"
-        sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)"
-        [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
-</div>
 
 <section class="payment_mode_main_wrapper flight">
     <div class="payment_container">
+        <!-- <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
+        </app-redeem-laycredit-loader>
+        <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}"
+            sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)"
+            [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit> -->
         <div class="payment_mode_wrapper">
             <h3>Choose How You Pay</h3>
             <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary" [priceData]="priceData"
@@ -69,7 +67,7 @@
                 (getInstalmentData)="getInstalmentData($event)" (redeemableLayCredit)="redeemableLayCredit($event)">
             </app-payment-mode>
         </div>
-        <app-booking-enquiry-info></app-booking-enquiry-info>
+        <!-- <app-booking-enquiry-info></app-booking-enquiry-info> -->
         <div class="cta_btn_wrapper">
             <button (click)="checkUserAndRedirect()">Continue to Payment</button>
         </div>

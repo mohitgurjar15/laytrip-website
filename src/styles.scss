@@ -63,6 +63,22 @@ select {
 	}
 }
 
+.block_apply_laycredits{
+    .custom_range_slide {
+		.point_val{
+			margin: 0 15px;
+		}
+        .ng5-slider{
+            .ng5-slider-pointer{
+                border: 1px solid $pink;
+                background-color: $pink;
+			}
+			.ng5-slider-bar{
+				background: $pink;
+			}
+        }
+    }
+}
 //<!-- Start Coming Soon page css -->
 .coming_soon {
 	width: 100%;
