@@ -9,7 +9,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { start } from 'repl';
-import { HomeService } from 'src/app/services/home.service';
+import { HomeService } from '../../../services/home.service';
 
 @Component({
   selector: 'app-flight-search-widget',
