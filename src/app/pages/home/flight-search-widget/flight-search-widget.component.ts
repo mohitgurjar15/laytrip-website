@@ -105,8 +105,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     if(this.calenderPrices.length == 0){
       this.isCalenderPriceLoading=false;
     }
+    console.log('inint')
     this.route.queryParams.subscribe(params => {
-
+      
       if(Object.keys(params).length > 0){ 
         this.calPrices = true;     
           this.fromSearch = airports[params['departure']];
@@ -132,10 +133,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.calPrices = false;
       }
     });
-    this.lowMinPrice=0;
-    this.midMinPrice=0;
-    this.highMinPrice=0;
-
+    this.lowMinPrice= this.midMinPrice = this.highMinPrice = 0;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -317,9 +315,14 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeMonth(event){
-    this.lowMinPrice=0;
-    this.midMinPrice=0;
-    this.highMinPrice=0;
+    this.route.queryParams.subscribe(params => {      
+      this.calPrices = false;
+      if(Object.keys(params).length > 0){ 
+        this.calPrices = true;
+      } 
+    });
+    console.log(this.calPrices)
+    this.lowMinPrice= this.highMinPrice = this.midMinPrice = 0;
     if(!this.isRoundTrip){
       let month=event.month;
       month = month.toString().length==1?'0'+month:month;
@@ -348,7 +351,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         }
         var CurrentDate = new Date();
         var GivenDate = new Date(endDate);
-
+        console.log("GivenDate:",GivenDate,"CurrentDate",CurrentDate,"start",new Date(startDate))
         if(GivenDate > CurrentDate || CurrentDate < new Date(startDate)){
             this.isCalenderPriceLoading = this.calPrices = true;
             this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
@@ -357,6 +360,7 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.calenderPrices = [...this.calenderPrices,...res];
             this.getMinimumPricesList(res);
           }, err => {
+            this.calPrices = false;
             this.isCalenderPriceLoading = false;
           });
         } else {
@@ -366,12 +370,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
-  getMinimumPricesList(prices){
-    
+  getMinimumPricesList(prices){    
     this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'));
     this.midMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'medium'));
     this.highMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'high'));
-    console.log(this.lowMinPrice,this.midMinPrice,this.highMinPrice)
   }
 
   getMinPrice(prices){
