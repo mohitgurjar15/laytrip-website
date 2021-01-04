@@ -50,7 +50,6 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
       this.errorMessage='';
       this.rentalService.getRentalDetailSearchData(payload).subscribe((res: any) => {
         if (res) {
-          console.log(res.items);
           this.loading = false;
           this.isNotFound = false;
           this.rentalDetails = res.items;
@@ -72,13 +71,11 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
    
 
   getSearchItem(event) {
-    console.log(event);
     this.getRentalSearchData(event);
   }
 
   //Sort Section Start
    sortRentals(event) {
-     console.log(event);
     let { key, order } = event;
     if (key === 'total') {
       this.rentalDetails = this.sortJSON(this.rentalDetails, key, order);
@@ -122,9 +119,7 @@ export class VacationRentalSearchComponent implements OnInit, OnDestroy {
   }
 
   filterRental(event) {
-    console.log(event);
     this.rentalDetails = event;
-    console.log(this.rentalDetails);
   }
 
   resetFilter() {

@@ -49,14 +49,12 @@ export class RentalInfoComponent implements OnInit {
 
   ngOnInit() {
     const info = JSON.parse(localStorage.getItem('_rental'));
-    console.log("----------jdsjdfsjfdsjfdsjfd",this.childValue);
     if(this.childValue  == 0){
        this.childAgeInfo;
     }else{
       this.childAgeInfo=info.number_and_children_ages;
       this.childData[0].children=info.number_and_children_ages;
     }
-    console.log(this.childAgeInfo);
   	this.loadJquery();
   }
 
@@ -139,7 +137,6 @@ $('#rental_add_room_open').click(
           oc.children.push(1);
         }
       });
-     console.log(this.childData);
     }
     
     this.totalPerson = this.adultValue + this.childValue;
@@ -158,14 +155,12 @@ $('#rental_add_room_open').click(
     //   oc.children.push(parseInt(age));
     // });
      const index=this.childAgeInfo.hasOwnProperty(id);
-     console.log(index);
      if(index == true){
        this.childAgeInfo[id]=parseInt(age);
      }
      else{
        this.childAgeInfo.push(parseInt(age));
      }
-    console.log(this.childAgeInfo);
   }
 
 }
