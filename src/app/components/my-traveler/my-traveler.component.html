@@ -1,5 +1,10 @@
-<ul class="list-group list-group-horizontal">
-    <li class="list-group-item">Alex</li>
-    <li class="list-group-item">Tom</li>
-    <li class="list-group-item">Jon</li>
-  </ul>
+<br><hr>
+<div class="row">
+    <ng-container *ngFor="let traveler of travelers">
+      <div class="col-lg-3">
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="chooseTraveler(traveler.userId)">
+          {{traveler.firstName ? traveler.firstName+' '+traveler.lastName : traveler.email  }}
+        </button>
+      </div>
+    </ng-container>
+  </div>
