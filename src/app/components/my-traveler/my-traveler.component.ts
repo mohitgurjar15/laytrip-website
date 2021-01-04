@@ -8,6 +8,7 @@ import { CheckOutService } from '../../services/checkout.service'
 export class MyTravelerComponent implements OnInit {
 
   @Input() travelers;
+  @Input() traveler_number;
   constructor(
     private checkOutService:CheckOutService
   ) { }
@@ -19,11 +20,14 @@ export class MyTravelerComponent implements OnInit {
 
     let traveler = this.travelers.find(item=> item.userId==userId)
     this.checkOutService.selectTraveler(traveler)
+    this.checkOutService.selectTravelerNumber(this.traveler_number)
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("changes123",changes)
     if (changes['travelers']) {
       this.travelers = changes['travelers'].currentValue;
+      
     }
   }
 
