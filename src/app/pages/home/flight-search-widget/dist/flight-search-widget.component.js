@@ -317,26 +317,23 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'low'; }));
         this.midMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'medium'; }));
         this.highMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'high'; }));
+        console.log(this.lowMinPrice, this.midMinPrice, this.highMinPrice);
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {
-        console.log(prices);
-        var values = prices.map(function (v) {
-            if (v.secondary_start_price > 0) {
-                return v.secondary_start_price;
-            }
-            else {
-                return v.price;
-            }
-        });
-        return Math.min.apply(null, values);
-        /*     return prices.reduce(function(min, p){
-              if(p.secondary_start_price > 0 ){
-                return  p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
-              } else {
-                return  p.price < min ? p.price : min, prices[0].price;
-              }
-            }, 0);
-         */ 
+        if (prices.length > 0) {
+            var values = prices.map(function (v) {
+                if (v.secondary_start_price > 0) {
+                    return v.secondary_start_price;
+                }
+                else {
+                    return v.price;
+                }
+            });
+            return Math.min.apply(null, values);
+        }
+        else {
+            return 0;
+        }
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

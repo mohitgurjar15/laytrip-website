@@ -371,28 +371,23 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'));
     this.midMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'medium'));
     this.highMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'high'));
-  
+    console.log(this.lowMinPrice,this.midMinPrice,this.highMinPrice)
   }
 
   getMinPrice(prices){
-    console.log(prices)
-    let values  = prices.map(function(v) {
-      if(v.secondary_start_price > 0 ){
-        return v.secondary_start_price;
-      } else {
-        return v.price;
-      }
-    });
-
-    return Math.min.apply( null, values );
-
-/*     return prices.reduce(function(min, p){
-      if(p.secondary_start_price > 0 ){
-        return  p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
-      } else {
-        return  p.price < min ? p.price : min, prices[0].price;
-      } 
-    }, 0);
- */   }
+    if(prices.length > 0){    
+      let values  = prices.map(function(v) {
+        if(v.secondary_start_price > 0 ){
+          return v.secondary_start_price;
+        } else {
+          return v.price;
+        }
+      });
+    
+      return Math.min.apply( null, values );
+    } else {
+      return 0;
+    }
+ }
 
 }
