@@ -284,6 +284,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   getPrice(d,m,y){
+    this.isCalenderPriceLoading = true;
     let month:any=parseInt(m)+1;
     let day  = d.toString().length==1 ? '0'+d : d;
     month    = month.toString().length==1 ? '0'+month : month;
@@ -291,6 +292,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     let price:any = this.calenderPrices.find((d:any)=> d.date == date);
     this.getMinimumPricesList(this.calenderPrices);
 
+    this.isCalenderPriceLoading = false;
     if(price){
       if(price.secondary_start_price>0){
         return `$${price.secondary_start_price.toFixed(2)}`;
@@ -351,7 +353,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         }
         var CurrentDate = new Date();
         var GivenDate = new Date(endDate);
-        console.log("GivenDate:",GivenDate,"CurrentDate",CurrentDate,"start",new Date(startDate))
         if(GivenDate > CurrentDate || CurrentDate < new Date(startDate)){
             this.isCalenderPriceLoading = this.calPrices = true;
             this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
@@ -360,11 +361,10 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.calenderPrices = [...this.calenderPrices,...res];
             this.getMinimumPricesList(res);
           }, err => {
-            this.calPrices = false;
-            this.isCalenderPriceLoading = false;
+            this.calPrices = this.isCalenderPriceLoading = false;
           });
         } else {
-          this.calPrices = false;
+          this.calPrices = this.isCalenderPriceLoading = false;
         }
       }
     }

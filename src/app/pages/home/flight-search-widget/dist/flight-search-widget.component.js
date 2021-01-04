@@ -240,12 +240,14 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
+        this.isCalenderPriceLoading = true;
         var month = parseInt(m) + 1;
         var day = d.toString().length == 1 ? '0' + d : d;
         month = month.toString().length == 1 ? '0' + month : month;
         var date = day + "/" + month + "/" + y;
         var price = this.calenderPrices.find(function (d) { return d.date == date; });
         this.getMinimumPricesList(this.calenderPrices);
+        this.isCalenderPriceLoading = false;
         if (price) {
             if (price.secondary_start_price > 0) {
                 return "$" + price.secondary_start_price.toFixed(2);
@@ -301,7 +303,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 };
                 var CurrentDate = new Date();
                 var GivenDate = new Date(endDate);
-                console.log("GivenDate:", GivenDate, "CurrentDate", CurrentDate, "start", new Date(startDate));
                 if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
                     this.isCalenderPriceLoading = this.calPrices = true;
                     this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
@@ -309,12 +310,11 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                         _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
                         _this.getMinimumPricesList(res);
                     }, function (err) {
-                        _this.calPrices = false;
-                        _this.isCalenderPriceLoading = false;
+                        _this.calPrices = _this.isCalenderPriceLoading = false;
                     });
                 }
                 else {
-                    this.calPrices = false;
+                    this.calPrices = this.isCalenderPriceLoading = false;
                 }
             }
         }
