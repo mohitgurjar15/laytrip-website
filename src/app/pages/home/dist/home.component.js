@@ -10,13 +10,14 @@ exports.HomeComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer) {
+    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
         this.cd = cd;
         this.renderer = renderer;
+        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.isRoundTrip = false;
@@ -117,7 +118,8 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.setToString = function (newItem) {
         this.toString = newItem;
-        console.log('homecomponent', newItem);
+        console.log('homecomponent', this.toString);
+        this.homeService.setToString(newItem);
     };
     HomeComponent = __decorate([
         core_1.Component({

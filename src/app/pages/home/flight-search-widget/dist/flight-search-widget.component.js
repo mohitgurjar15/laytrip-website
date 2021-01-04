@@ -20,7 +20,7 @@ var environment_1 = require("../../../../environments/environment");
 var airports_1 = require("../../flight/airports");
 var moment = require("moment");
 var FlightSearchWidgetComponent = /** @class */ (function () {
-    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer, flightService) {
+    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer, flightService, homeService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
@@ -28,10 +28,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.route = route;
         this.renderer = renderer;
         this.flightService = flightService;
+        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.calenderPrices = [];
-        this.toSearchString = '';
         this.switchBtnValue = false;
         this.isRoundTrip = false;
         this.flightSearchFormSubmitted = false;
@@ -67,7 +67,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             infant: null
         };
         this.searchedValue = [];
-        console.log('widget', this.toSearchString);
         this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
         this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
         this.flightSearchForm = this.fb.group({
@@ -84,17 +83,29 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        this.homeService.getToString.subscribe(function (toSearchString) {
+            console.log(toSearchString);
+            if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+                var keys = toSearchString;
+                _this.toSearch = null;
+                // if(typeof this.toSearch != 'undefined'){
+                _this.toSearch = airports_1.airports[keys];
+                // this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+                _this.searchFlightInfo.arrival = _this.toSearch.code;
+                console.log(_this.toSearch);
+                // }
+            }
+        });
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.calenderPrices.length == 0) {
             this.isCalenderPriceLoading = false;
         }
-        console.log('inint');
         this.route.queryParams.subscribe(function (params) {
             if (Object.keys(params).length > 0) {
                 _this.calPrices = true;
                 _this.fromSearch = airports_1.airports[params['departure']];
                 //this.fromDestinationCode = this.fromSearch.code;
-                //this.departureCity = this.fromSearch.city;
+                //this.departureCity = this.fromSearch.city;toSearch
                 //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
                 //this.fromAirport = airports[this.fromDestinationCode];
                 _this.toSearch = airports_1.airports[params['arrival']];
@@ -358,9 +369,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], FlightSearchWidgetComponent.prototype, "calenderPrices");
-    __decorate([
-        core_1.Input()
-    ], FlightSearchWidgetComponent.prototype, "toSearchString");
     FlightSearchWidgetComponent = __decorate([
         core_1.Component({
             selector: 'app-flight-search-widget',

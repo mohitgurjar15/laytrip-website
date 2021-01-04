@@ -6,6 +6,7 @@ import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit {
     public fb: FormBuilder,
     public router: Router,
     public cd: ChangeDetectorRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private homeService:HomeService
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
@@ -138,7 +140,8 @@ export class HomeComponent implements OnInit {
 
   setToString(newItem: string) {
     this.toString = newItem;
-    console.log('homecomponent',newItem)
+    console.log('homecomponent',this.toString)
+    this.homeService.setToString(newItem); 
   }
 
 }

@@ -9,6 +9,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { start } from 'repl';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -23,7 +24,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   modules: Module[];
   moduleList: any = {};
   @Input() calenderPrices:any=[];
-  @Input() toSearchString:any = '';
   switchBtnValue = false;
   isRoundTrip: boolean = false;
   flightSearchForm: FormGroup;
@@ -82,10 +82,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
-    private flightService: FlightService
+    private flightService: FlightService,
+    private homeService: HomeService
   ) {
-    console.log('widget',this.toSearchString)
-
+    
 
     this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
     this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
@@ -104,22 +104,37 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.homeService.getToString.subscribe(toSearchString=>{
+      console.log(toSearchString)
+      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
+        let keys : any = toSearchString;
+        this.toSearch = null;    
+        // if(typeof this.toSearch != 'undefined'){
+          this.toSearch = airports[keys];
+          // this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+          this.searchFlightInfo.arrival = this.toSearch.code;
+
+          console.log(this.toSearch)
+        // }
+      }
+    });
+
     this.countryCode = this.commonFunction.getUserCountry();
     if(this.calenderPrices.length == 0){
       this.isCalenderPriceLoading=false;
     }
-    console.log('inint')
     this.route.queryParams.subscribe(params => {
       
       if(Object.keys(params).length > 0){ 
         this.calPrices = true;     
           this.fromSearch = airports[params['departure']];
           //this.fromDestinationCode = this.fromSearch.code;
-          //this.departureCity = this.fromSearch.city;
+          //this.departureCity = this.fromSearch.city;toSearch
           //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
           //this.fromAirport = airports[this.fromDestinationCode];
 
           this.toSearch = airports[params['arrival']];
+          
           //this.toDestinationCode = this.toSearch.code;
           //this.arrivalCity = this.toSearch.city;
           //this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
