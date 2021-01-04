@@ -1,3 +1,77 @@
+@import '../../../../cstm-variable';
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.payment_mode_main_wrapper{
+    background-color: $background-white;
+    .payment_container{
+        max-width: 658px;
+        margin: 0 auto;
+        @include tab-view{
+            width: 100%;
+            padding: 10px;
+        }
+        .payment_mode_wrapper{
+            display: flex;
+            flex-direction: column;
+            h3{
+                color: $blue-text;
+                font-size: 34px;
+                margin-bottom: 5px;
+                margin: 25px 0 15px;
+                @include tab-view{
+                    font-size: 18px;
+                }
+            }
+        }
+        .cta_btn_wrapper{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 25px 0 15px;
+            align-items: center;
+            button {
+                width: auto;
+                height: 54px;
+                padding: 10px 45px;
+                background: $primary-color;
+                border-radius: 25px;
+                border: none;
+                font-size: 18px;
+                color: $text-white;
+                transition: 0.3s;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
+                white-space: normal;
+        
+        
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 0%;
+                    background: $hotel-secondary-color;
+                    z-index: -1;
+                    transition: 0.8s;
+                    border-radius: 0 0 50% 50%;
+                }
+        
+                &:hover {
+                    &:before {
+                        height: 190%;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .btn_payment{
     display: flex;
     justify-content: flex-end;
