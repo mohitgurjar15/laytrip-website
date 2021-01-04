@@ -8,6 +8,7 @@ import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -131,14 +132,16 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.calPrices = false;
       }
     });
-
+    this.lowMinPrice=0;
+    this.midMinPrice=0;
+    this.highMinPrice=0;
 
   }
 
   ngOnChanges(changes: SimpleChanges) {
 
     if(typeof changes['calenderPrices'].currentValue!='undefined' && changes['calenderPrices'].firstChange==false){
-      this.isCalenderPriceLoading=false;
+      // this.isCalenderPriceLoading=false;
       // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
     }
   }
@@ -314,7 +317,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeMonth(event){
-    
+    this.lowMinPrice=0;
+    this.midMinPrice=0;
+    this.highMinPrice=0;
     if(!this.isRoundTrip){
       let month=event.month;
       month = month.toString().length==1?'0'+month:month;
@@ -326,6 +331,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         
         startDate = moment(startDate.toDate()).format("YYYY-MM-DD");
         endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+
         if(!moment().isBefore(startDate)){
           startDate = moment().format("YYYY-MM-DD");
         }
@@ -340,36 +346,53 @@ export class FlightSearchWidgetComponent implements OnInit {
           start_date :startDate,
           end_date :endDate
         }
-          this.isCalenderPriceLoading = true;
-          this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
-            
-          this.isCalenderPriceLoading = false;
-          this.calenderPrices = [...this.calenderPrices,...res];
-          this.getMinimumPricesList(res);
-        }, err => {
-          this.isCalenderPriceLoading = false;
-        });
+        var CurrentDate = new Date();
+        var GivenDate = new Date(endDate);
+
+        if(GivenDate > CurrentDate || CurrentDate < new Date(startDate)){
+            this.isCalenderPriceLoading = this.calPrices = true;
+            this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+              
+            this.isCalenderPriceLoading = false;
+            this.calenderPrices = [...this.calenderPrices,...res];
+            this.getMinimumPricesList(res);
+          }, err => {
+            this.isCalenderPriceLoading = false;
+          });
+        } else {
+          this.calPrices = false;
+        }
       }
     }
   }
 
   getMinimumPricesList(prices){
-
-    this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'))
-    this.midMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'medium'));
-    this.highMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'high'));
-    console.log(this.lowMinPrice,this.midMinPrice,this.highMinPrice)
+    
+    this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'));
+    this.midMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'medium'));
+    this.highMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'high'));
+  
   }
 
   getMinPrice(prices){
-   
-    return prices.reduce(function(min, p){
+    console.log(prices)
+    let values  = prices.map(function(v) {
+      if(v.secondary_start_price > 0 ){
+        return v.secondary_start_price;
+      } else {
+        return v.price;
+      }
+    });
+
+    return Math.min.apply( null, values );
+
+/*     return prices.reduce(function(min, p){
       if(p.secondary_start_price > 0 ){
         return  p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
       } else {
         return  p.price < min ? p.price : min, prices[0].price;
-      }
+      } 
     }, 0);
-   }
+ */   }
 
 }

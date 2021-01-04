@@ -110,10 +110,13 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.calPrices = false;
             }
         });
+        this.lowMinPrice = 0;
+        this.midMinPrice = 0;
+        this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
-            this.isCalenderPriceLoading = false;
+            // this.isCalenderPriceLoading=false;
             // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
         }
     };
@@ -266,6 +269,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.changeMonth = function (event) {
         var _this = this;
+        this.lowMinPrice = 0;
+        this.midMinPrice = 0;
+        this.highMinPrice = 0;
         if (!this.isRoundTrip) {
             var month = event.month;
             month = month.toString().length == 1 ? '0' + month : month;
@@ -289,14 +295,21 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                     start_date: startDate,
                     end_date: endDate
                 };
-                this.isCalenderPriceLoading = true;
-                this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
-                    _this.isCalenderPriceLoading = false;
-                    _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
-                    _this.getMinimumPricesList(res);
-                }, function (err) {
-                    _this.isCalenderPriceLoading = false;
-                });
+                var CurrentDate = new Date();
+                var GivenDate = new Date(endDate);
+                if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
+                    this.isCalenderPriceLoading = this.calPrices = true;
+                    this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
+                        _this.isCalenderPriceLoading = false;
+                        _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
+                        _this.getMinimumPricesList(res);
+                    }, function (err) {
+                        _this.isCalenderPriceLoading = false;
+                    });
+                }
+                else {
+                    this.calPrices = false;
+                }
             }
         }
     };
@@ -304,17 +317,26 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'low'; }));
         this.midMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'medium'; }));
         this.highMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'high'; }));
-        console.log(this.lowMinPrice, this.midMinPrice, this.highMinPrice);
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {
-        return prices.reduce(function (min, p) {
-            if (p.secondary_start_price > 0) {
-                return p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
+        console.log(prices);
+        var values = prices.map(function (v) {
+            if (v.secondary_start_price > 0) {
+                return v.secondary_start_price;
             }
             else {
-                return p.price < min ? p.price : min, prices[0].price;
+                return v.price;
             }
-        }, 0);
+        });
+        return Math.min.apply(null, values);
+        /*     return prices.reduce(function(min, p){
+              if(p.secondary_start_price > 0 ){
+                return  p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
+              } else {
+                return  p.price < min ? p.price : min, prices[0].price;
+              }
+            }, 0);
+         */ 
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
