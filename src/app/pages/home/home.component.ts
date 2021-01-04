@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   moduleList: any = {};
   isRoundTrip: boolean = false;
   countryCode: string;
+  toString: string;
 
   constructor(
     private genericService: GenericService,
@@ -133,6 +134,11 @@ export class HomeComponent implements OnInit {
 
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'bg_color');
+  }
+
+  setToString(newItem: string) {
+    this.toString = newItem;
+    console.log('homecomponent',newItem)
   }
 
 }
