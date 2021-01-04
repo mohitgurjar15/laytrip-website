@@ -1,12 +1,12 @@
 <div class="card">
     <div class="card-header">
-        <app-flight-cart-item></app-flight-cart-item>
+        <app-flight-cart-item ></app-flight-cart-item>
     </div>
 
     <div class="card-body">
-        <app-traveler-list></app-traveler-list>
-    </div>
-    <div class="card-footer">
-        <app-my-traveler></app-my-traveler>
+        <app-traveler-list 
+            [travelers]="travelers"
+            [totalPassenger]="totalPassenger">
+        </app-traveler-list>
     </div>
   </div>

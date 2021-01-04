@@ -32,6 +32,8 @@ var FlightSearchComponent = /** @class */ (function () {
     FlightSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scroll(0, 0);
+        sessionStorage.removeItem("__insMode");
+        sessionStorage.removeItem("__islt");
         var payload = {};
         this.route.queryParams.forEach(function (params) {
             _this.flightSearchInfo = params;
@@ -102,7 +104,6 @@ var FlightSearchComponent = /** @class */ (function () {
                 _this.loading = false;
             });
             this.dates = [];
-            console.log("this.dates", this.dates);
             this.flightService.getFlightFlexibleDates(payload).subscribe(function (res) {
                 if (res) {
                     _this.flexibleLoading = false;
@@ -185,18 +186,20 @@ var FlightSearchComponent = /** @class */ (function () {
     };
     FlightSearchComponent.prototype.sortFlight = function (event) {
         var key = event.key, order = event.order;
+        console.log("Before Key:", key, this.flightDetails);
         if (key === 'total_duration') {
-            this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
+            this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
         }
         else if (key === 'arrival') {
-            this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
+            this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
         }
         else if (key === 'departure') {
-            this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
+            this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
         }
         else {
-            this.flightDetails = this.sortJSON(this.flightDetails, key, order);
+            this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
         }
+        console.log("After Key:", key, this.flightDetails);
     };
     FlightSearchComponent.prototype.sortJSON = function (data, key, way) {
         if (typeof data === "undefined") {

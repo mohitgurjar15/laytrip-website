@@ -40,7 +40,7 @@ export class FlightClassComponent implements OnInit {
   btnClickForChange(item){
     this.changeValue.emit(item.value);
     this.flightClass = item.value;
-    $("#add_class_sec_open").hide("slow");
+    $("#add_class_sec_open").hide();
   }
 }
 

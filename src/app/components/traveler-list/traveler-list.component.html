@@ -1,1 +1,30 @@
-<app-traveler-form></app-traveler-form>
+
+<div id="accordion">
+    <div class="card" *ngFor="let dummy of ' '.repeat(totalPassenger.adult).split(''), let x = index">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" >
+          Traveler {{x+1}}
+        </a>
+      </div>
+      <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">
+        <div class="card-body">
+            <app-traveler-form travelerType="adult" [traveler]="selectedTravelers"></app-traveler-form>
+            <app-my-traveler [travelers]="travelers" ></app-my-traveler>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngFor="let dummy of ' '.repeat(totalPassenger.child).split(''), let x = index">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" [href]="'#child_collapse'+x" >
+          Child {{x+1}}
+        </a>
+      </div>
+      <div [id]="'child_collapse'+x" class="collapse show" data-parent="#accordion">
+        <div class="card-body">
+            <app-traveler-form travelerType="child"></app-traveler-form>
+            <app-my-traveler></app-my-traveler>
+        </div>
+      </div>
+    </div>
+</div>

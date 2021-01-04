@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -33,7 +34,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   //departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
   //fromAirport = airports[this.fromDestinationCode];
   countryCode: string;
-
+  monthYearArr=[];
   toSearch=airports['PUJ'];
   //toDestinationCode = this.toSearch.code;
   //arrivalCity = this.toSearch.city;
@@ -52,7 +53,10 @@ export class FlightSearchWidgetComponent implements OnInit {
   returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
   
   totalPerson: number = 1;
-
+  lowMinPrice=0;
+  midMinPrice=0;
+  highMinPrice=0;
+  calPrices = false;
   searchFlightInfo =
     {
       trip: 'oneway',
@@ -74,7 +78,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     public fb: FormBuilder,
     public router: Router,
     private route: ActivatedRoute,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private flightService: FlightService
   ) {
 
     this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
@@ -95,9 +100,13 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
-
+    if(this.calenderPrices.length == 0){
+      this.isCalenderPriceLoading=false;
+    }
     this.route.queryParams.subscribe(params => {
-       if(Object.keys(params).length > 0){      
+
+      if(Object.keys(params).length > 0){ 
+        this.calPrices = true;     
           this.fromSearch = airports[params['departure']];
           //this.fromDestinationCode = this.fromSearch.code;
           //this.departureCity = this.fromSearch.city;
@@ -117,7 +126,8 @@ export class FlightSearchWidgetComponent implements OnInit {
           // this.returnDate = new Date(params['arrival_date']);
           this.returnDate = params['arrival_date'] ? new Date(params['arrival_date']) : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
           this.rangeDates = [this.departureDate, this.returnDate];
-
+      } else {
+        this.calPrices = false;
       }
     });
 
@@ -125,8 +135,10 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+
     if(typeof changes['calenderPrices'].currentValue!='undefined' && changes['calenderPrices'].firstChange==false){
       this.isCalenderPriceLoading=false;
+      // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
     }
   }
 
@@ -275,14 +287,16 @@ export class FlightSearchWidgetComponent implements OnInit {
     month    = month.toString().length==1 ? '0'+month : month;
     let date = `${day}/${month}/${y}`;
     let price:any = this.calenderPrices.find((d:any)=> d.date == date);
-    if(price){
+    this.getMinimumPricesList(this.calenderPrices);
 
+    if(price){
       if(price.secondary_start_price>0){
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
       return `$${price.price.toFixed(2)}`;
     }
   }
+
   getPriceClass(d,m,y){
     let month:any=parseInt(m)+1;
     let day  = d.toString().length==1 ? '0'+d : d;
@@ -297,4 +311,62 @@ export class FlightSearchWidgetComponent implements OnInit {
       return `${price.flag}`;
     }
   }
+
+  changeMonth(event){
+    
+    if(!this.isRoundTrip){
+      let month=event.month;
+      month = month.toString().length==1?'0'+month:month;
+      let monthYearName = `${month}-${event.year}`;
+      if(!this.monthYearArr.includes(monthYearName) && this.calPrices){
+        this.monthYearArr.push(monthYearName)
+        let startDate:any = moment([event.year,event.month-1]);
+        let endDate:any =  moment(startDate).endOf('month');
+        
+        startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
+        endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+        if(!moment().isBefore(startDate)){
+          startDate = moment().format("YYYY-MM-DD")
+        }
+
+        let payload={
+          source_location: this.route.snapshot.queryParams['departure'],
+          destination_location: this.route.snapshot.queryParams['arrival'],
+          flight_class: this.route.snapshot.queryParams['class'],
+          adult_count: this.route.snapshot.queryParams['adult'],
+          child_count: this.route.snapshot.queryParams['child'],
+          infant_count: this.route.snapshot.queryParams['infant'],
+          start_date :startDate,
+          end_date :endDate
+        }
+          this.isCalenderPriceLoading = true;
+          this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+            
+          this.isCalenderPriceLoading = false;
+          this.calenderPrices = [...this.calenderPrices,...res];
+          this.getMinimumPricesList(res);
+        }, err => {
+          this.isCalenderPriceLoading = false;
+        });
+      }
+    }
+  }
+
+  getMinimumPricesList(prices){
+
+    this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'))
+    this.midMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'medium'));
+    this.highMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'high'));
+  }
+
+  getMinPrice(prices){
+    return prices.reduce(function(min, p){    
+      if(p.secondary_start_price > 0 ){
+        return  p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
+      } else {
+        return  p.price < min ? p.price : min, prices[0].price;
+      }
+    }, 0);
+  }
+
 }

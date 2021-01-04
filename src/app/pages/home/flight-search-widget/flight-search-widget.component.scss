@@ -144,12 +144,23 @@ a:hover {
                     box-shadow: none !important;
                     color: $text-grey;
                     margin: 2px;
+                    position: relative;
                     &:hover{
                         background: none !important;
                     }
                     &.p-highlight{
                         background: none !important;
                         font-weight: 500;
+                        overflow: visible;
+                        &::before{
+                            content: '';
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 50%;
+                            background-color: $pink;
+                            position: absolute;
+                            top: -5px;
+                        }
                     }
                     &.c_date{
                         border-radius: 50% !important;
@@ -183,11 +194,34 @@ a:hover {
                     }
                     &.calender_price{
                         font-size: 10px;
+                        height: 15px;
                     }
                 }
             }
         }
-        
+        &.round_trip_calender{
+            table{
+                td{
+                    span{
+                        height: 35px;
+                        width: 35px;
+                        &.p-highlight{
+                            color: $pink !important;
+                            background-color: $bg-pink-light !important;
+                            border-radius: 50% !important;
+                            &:hover{
+                                background-color: $bg-pink-light !important;
+                            }
+                            &::before{
+                                content: '';
+                                width: 0;
+                                height: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

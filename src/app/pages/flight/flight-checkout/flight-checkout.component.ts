@@ -8,6 +8,8 @@ import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { TravelerService } from '../../../services/traveler.service';
+import { CheckOutService } from 'src/app/services/checkout.service';
 
 @Component({
   selector: 'app-flight-checkout',
@@ -54,6 +56,7 @@ export class FlightCheckoutComponent implements OnInit {
     partialPaymentAmount:number=0;
     payNowAmount:number=0;
     priceData=[];
+    travelerCounts=[];
 
     constructor(
       private route: ActivatedRoute,
@@ -61,13 +64,17 @@ export class FlightCheckoutComponent implements OnInit {
       private flightService:FlightService,
       private cookieService: CookieService,
       private genericService:GenericService,
-      private toastr: ToastrService
+      private toastr: ToastrService,
+      private travelerService:TravelerService,
+      private checkOutService:CheckOutService
     ) { }
     
     ngOnInit() {
-      
+      this.checkOutService.getTraveler.subscribe(message => console.log(message))
+
       window.scroll(0,0);
       this.getSellingPrice();
+      this.getTravelers();
       this.userInfo = getLoginUserInfo();
       if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
@@ -77,21 +84,10 @@ export class FlightCheckoutComponent implements OnInit {
       this.bookingTimerConfiguration();
       this.setInstalmentInfo();
 
-      
-      let travelersIds = this.cookieService.get('_travelers');
       try{
-        travelersIds = JSON.parse(travelersIds);
-
-        this.travelerList=travelersIds;
-
-        if(travelersIds.length){
-          for(let i=0; i < travelersIds.length; i++){
-            this.travelers.push({
-              "traveler_id" : travelersIds[i]['userId']
-            })
-            
-          }
-        }
+        let _itinerary = sessionStorage.getItem('_itinerary');
+        _itinerary = JSON.parse(_itinerary)
+        this.travelerCounts.push(_itinerary);
       }
       catch(e){
 
@@ -418,5 +414,13 @@ export class FlightCheckoutComponent implements OnInit {
     
     closeTermCoditionPopup(){
       this.isShowTermConditionPopup=!this.isShowTermConditionPopup;
+    }
+
+    getTravelers() {
+      this.travelerService.getTravelers().subscribe((res:any)=>{
+        this.travelers=res.data;
+        console.log("This.travelers, checkout",this.travelers)        
+      })
+      
     }
 }
