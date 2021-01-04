@@ -11,13 +11,14 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
 var booking_status_const_1 = require("../../../../../constant/booking-status.const");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-var jwt_helper_1 = require("../../../../../_helpers/jwt.helper");
+var send_email_popup_component_1 = require("../send-email-popup/send-email-popup.component");
 var FlightsComponent = /** @class */ (function () {
-    function FlightsComponent(commonFunction, flightService, userService, modalService) {
+    function FlightsComponent(commonFunction, flightService, userService, modalService, route) {
         this.commonFunction = commonFunction;
         this.flightService = flightService;
         this.userService = userService;
         this.modalService = modalService;
+        this.route = route;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.flightList = [];
         this.flightBookings = [];
@@ -36,6 +37,7 @@ var FlightsComponent = /** @class */ (function () {
         this.filterData = {};
         this.filterInfo = {};
         this.closeResult = '';
+        this.showFareDetails = 0;
         this.bookingStatus = booking_status_const_1.BookingStatus;
     }
     FlightsComponent.prototype.ngOnInit = function () {
@@ -46,6 +48,10 @@ var FlightsComponent = /** @class */ (function () {
         this.isNotFound = false;
         this.limit = this.perPageLimitConfig[0];
         this.getBookings();
+    };
+    FlightsComponent.prototype.goToBookingId = function (bookingId) {
+        var modalRef = this.modalService.open(send_email_popup_component_1.SendEmailPopupComponent, { windowClass: 'modal fade send_mail_modal', centered: true });
+        modalRef.componentInstance.bookingId = bookingId;
     };
     FlightsComponent.prototype.pageChange = function (event) {
         this.showPaginationBar = false;
@@ -61,13 +67,20 @@ var FlightsComponent = /** @class */ (function () {
             this.getBookings();
         }
     };
-    FlightsComponent.prototype.showDetails = function (index) {
+    FlightsComponent.prototype.showDetails = function (index, flag) {
         var _this = this;
+        if (flag === void 0) { flag = null; }
         if (typeof this.showFlightDetails[index] === 'undefined') {
             this.showFlightDetails[index] = true;
         }
         else {
             this.showFlightDetails[index] = !this.showFlightDetails[index];
+        }
+        if (flag == 'true') {
+            this.showFareDetails = 1;
+        }
+        else {
+            this.showFareDetails = 0;
         }
         this.showFlightDetails = this.showFlightDetails.map(function (item, i) {
             return ((index === i) && _this.showFlightDetails[index] === true) ? true : false;
@@ -81,12 +94,13 @@ var FlightsComponent = /** @class */ (function () {
         }
         this.userService.getBookings(this.page, this.limit, this.filterInfo).subscribe(function (res) {
             if (res) {
+                console.log(res);
                 _this.flightBookings = res.data.map(function (flight) {
                     if (flight.moduleId == 1) {
                         return {
                             tripId: flight.laytripBookingId,
                             journey_type: flight.locationInfo.journey_type,
-                            bookingDate: _this.commonFunction.convertDateFormat(flight.bookingDate, 'YYYY-MM-DD'),
+                            checkInDate: _this.commonFunction.convertDateFormat(flight.checkInDate, 'YYYY-MM-DD'),
                             departure_time: flight.moduleInfo[0].routes[0].stops[0].departure_time,
                             arrival_time: flight.moduleInfo[0].routes[0].stops[0].arrival_time,
                             departure_city: flight.moduleInfo[0].routes[0].stops[0].departure_info.city,
@@ -109,18 +123,19 @@ var FlightsComponent = /** @class */ (function () {
                         };
                     }
                 });
+                console.log('this.flightBookings', _this.flightBookings);
                 _this.totalItems = res.total_count;
                 _this.isNotFound = false;
                 _this.loading = false;
                 _this.showPaginationBar = true;
             }
         }, function (err) {
-            jwt_helper_1.redirectToLogin();
             _this.isNotFound = true;
             _this.showPaginationBar = _this.loading = false;
         });
     };
     FlightsComponent.prototype.closeFlightDetail = function () {
+        this.showFareDetails = 0;
         this.showFlightDetails = this.showFlightDetails.map(function (item) {
             return false;
         });

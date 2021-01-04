@@ -86,6 +86,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         if (this.calenderPrices.length == 0) {
             this.isCalenderPriceLoading = false;
         }
+        console.log('inint');
         this.route.queryParams.subscribe(function (params) {
             if (Object.keys(params).length > 0) {
                 _this.calPrices = true;
@@ -110,10 +111,11 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.calPrices = false;
             }
         });
+        this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
-            this.isCalenderPriceLoading = false;
+            // this.isCalenderPriceLoading=false;
             // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
         }
     };
@@ -266,6 +268,14 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.changeMonth = function (event) {
         var _this = this;
+        this.route.queryParams.subscribe(function (params) {
+            _this.calPrices = false;
+            if (Object.keys(params).length > 0) {
+                _this.calPrices = true;
+            }
+        });
+        console.log(this.calPrices);
+        this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
         if (!this.isRoundTrip) {
             var month = event.month;
             month = month.toString().length == 1 ? '0' + month : month;
@@ -289,14 +299,23 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                     start_date: startDate,
                     end_date: endDate
                 };
-                this.isCalenderPriceLoading = true;
-                this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
-                    _this.isCalenderPriceLoading = false;
-                    _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
-                    _this.getMinimumPricesList(res);
-                }, function (err) {
-                    _this.isCalenderPriceLoading = false;
-                });
+                var CurrentDate = new Date();
+                var GivenDate = new Date(endDate);
+                console.log("GivenDate:", GivenDate, "CurrentDate", CurrentDate, "start", new Date(startDate));
+                if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
+                    this.isCalenderPriceLoading = this.calPrices = true;
+                    this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
+                        _this.isCalenderPriceLoading = false;
+                        _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
+                        _this.getMinimumPricesList(res);
+                    }, function (err) {
+                        _this.calPrices = false;
+                        _this.isCalenderPriceLoading = false;
+                    });
+                }
+                else {
+                    this.calPrices = false;
+                }
             }
         }
     };
@@ -306,14 +325,20 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.highMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'high'; }));
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {
-        return prices.reduce(function (min, p) {
-            if (p.secondary_start_price > 0) {
-                return p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
-            }
-            else {
-                return p.price < min ? p.price : min, prices[0].price;
-            }
-        }, 0);
+        if (prices.length > 0) {
+            var values = prices.map(function (v) {
+                if (v.secondary_start_price > 0) {
+                    return v.secondary_start_price;
+                }
+                else {
+                    return v.price;
+                }
+            });
+            return Math.min.apply(null, values);
+        }
+        else {
+            return 0;
+        }
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

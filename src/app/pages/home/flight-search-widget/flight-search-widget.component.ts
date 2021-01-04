@@ -8,6 +8,7 @@ import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -57,6 +58,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   midMinPrice=0;
   highMinPrice=0;
   calPrices = false;
+  
   searchFlightInfo =
     {
       trip: 'oneway',
@@ -103,8 +105,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     if(this.calenderPrices.length == 0){
       this.isCalenderPriceLoading=false;
     }
+    console.log('inint')
     this.route.queryParams.subscribe(params => {
-
+      
       if(Object.keys(params).length > 0){ 
         this.calPrices = true;     
           this.fromSearch = airports[params['departure']];
@@ -130,14 +133,13 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.calPrices = false;
       }
     });
-
-
+    this.lowMinPrice= this.midMinPrice = this.highMinPrice = 0;
   }
 
   ngOnChanges(changes: SimpleChanges) {
 
     if(typeof changes['calenderPrices'].currentValue!='undefined' && changes['calenderPrices'].firstChange==false){
-      this.isCalenderPriceLoading=false;
+      // this.isCalenderPriceLoading=false;
       // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
     }
   }
@@ -313,20 +315,28 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeMonth(event){
-    
+    this.route.queryParams.subscribe(params => {      
+      this.calPrices = false;
+      if(Object.keys(params).length > 0){ 
+        this.calPrices = true;
+      } 
+    });
+    console.log(this.calPrices)
+    this.lowMinPrice= this.highMinPrice = this.midMinPrice = 0;
     if(!this.isRoundTrip){
       let month=event.month;
       month = month.toString().length==1?'0'+month:month;
       let monthYearName = `${month}-${event.year}`;
       if(!this.monthYearArr.includes(monthYearName) && this.calPrices){
-        this.monthYearArr.push(monthYearName)
+        this.monthYearArr.push(monthYearName);
         let startDate:any = moment([event.year,event.month-1]);
         let endDate:any =  moment(startDate).endOf('month');
         
-        startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
+        startDate = moment(startDate.toDate()).format("YYYY-MM-DD");
         endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+
         if(!moment().isBefore(startDate)){
-          startDate = moment().format("YYYY-MM-DD")
+          startDate = moment().format("YYYY-MM-DD");
         }
 
         let payload={
@@ -339,34 +349,47 @@ export class FlightSearchWidgetComponent implements OnInit {
           start_date :startDate,
           end_date :endDate
         }
-          this.isCalenderPriceLoading = true;
-          this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
-            
-          this.isCalenderPriceLoading = false;
-          this.calenderPrices = [...this.calenderPrices,...res];
-          this.getMinimumPricesList(res);
-        }, err => {
-          this.isCalenderPriceLoading = false;
-        });
+        var CurrentDate = new Date();
+        var GivenDate = new Date(endDate);
+        console.log("GivenDate:",GivenDate,"CurrentDate",CurrentDate,"start",new Date(startDate))
+        if(GivenDate > CurrentDate || CurrentDate < new Date(startDate)){
+            this.isCalenderPriceLoading = this.calPrices = true;
+            this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+              
+            this.isCalenderPriceLoading = false;
+            this.calenderPrices = [...this.calenderPrices,...res];
+            this.getMinimumPricesList(res);
+          }, err => {
+            this.calPrices = false;
+            this.isCalenderPriceLoading = false;
+          });
+        } else {
+          this.calPrices = false;
+        }
       }
     }
   }
 
-  getMinimumPricesList(prices){
-
-    this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'))
-    this.midMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'medium'));
-    this.highMinPrice = this.getMinPrice( prices.filter(book => book.flag === 'high'));
+  getMinimumPricesList(prices){    
+    this.lowMinPrice = this.getMinPrice(prices.filter(book => book.flag === 'low'));
+    this.midMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'medium'));
+    this.highMinPrice =  this.getMinPrice(prices.filter(book => book.flag === 'high'));
   }
 
   getMinPrice(prices){
-    return prices.reduce(function(min, p){    
-      if(p.secondary_start_price > 0 ){
-        return  p.secondary_start_price < min ? p.secondary_start_price : min, prices[0].secondary_start_price;
-      } else {
-        return  p.price < min ? p.price : min, prices[0].price;
-      }
-    }, 0);
-  }
+    if(prices.length > 0){    
+      let values  = prices.map(function(v) {
+        if(v.secondary_start_price > 0 ){
+          return v.secondary_start_price;
+        } else {
+          return v.price;
+        }
+      });
+    
+      return Math.min.apply( null, values );
+    } else {
+      return 0;
+    }
+ }
 
 }

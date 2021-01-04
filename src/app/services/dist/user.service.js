@@ -101,7 +101,7 @@ var UserService = /** @class */ (function () {
                 queryString += (filterForm.end_date) ? '&end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
             }
         }
-        return this.http.get(this.apiURL + "v1/booking/user-booking-list?limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
+        return this.http.get(this.apiURL + "v1/booking/user-booking-list?module_id=1&limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
     };
     UserService.prototype.getPaymentHistory = function (pageNumber, limit, filterForm, payment_status) {
         var queryString = "";

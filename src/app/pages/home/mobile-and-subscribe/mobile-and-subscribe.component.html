@@ -59,10 +59,10 @@
                 <h3>Join Laytrip for Discounts to Your Favorite Destinations</h3>
 
                 <div class="custom_input_wrapper">
-                    <input type="email" formControlName="email" maxlength="40" tabindex="1" (click)="changeEmail()"
+                    <input type="email" formControlName="email" maxlength="40"  (click)="changeEmail()"
                         placeholder="{{ 'mobile_page_subscribe_email_placeholder' | translate}}">
                     <!-- <button>Join</button> -->
-                    <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                    <button type="submit" ><i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                         Join</button>
                 </div>
                 <div *ngIf="(submitted || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors"

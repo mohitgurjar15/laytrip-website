@@ -79,7 +79,7 @@
                                         flightDepartureMinDate [minDate]="flightDepartureMinDate"
                                         (onSelect)=departureDateUpdate($event) [readonlyInput]="true"
                                         (onMonthChange)="changeMonth($event)"
-                                        panelStyleClass="calender-responsive-view laytrip-cal-view">
+                                        panelStyleClass="calender-responsive-view laytrip-cal-view"  [readonlyInput]="true">
                                         <p-header class="calender-header" *ngIf="calPrices">
                                             <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
