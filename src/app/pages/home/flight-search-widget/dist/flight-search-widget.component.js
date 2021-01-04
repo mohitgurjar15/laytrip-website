@@ -127,7 +127,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
-        console.log(typeof changes['calenderPrices'].currentValue);
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
             // this.isCalenderPriceLoading=false;
             // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
@@ -258,7 +257,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
-        this.isCalenderPriceLoading = true;
+        // this.isCalenderPriceLoading = true;
         var month = parseInt(m) + 1;
         var day = d.toString().length == 1 ? '0' + d : d;
         month = month.toString().length == 1 ? '0' + month : month;
@@ -266,7 +265,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var price = this.calenderPrices.find(function (d) { return d.date == date; });
         this.getMinimumPricesList(this.calenderPrices);
         if (price) {
-            this.isCalenderPriceLoading = false;
+            // this.isCalenderPriceLoading = false;
             if (price.secondary_start_price > 0) {
                 return "$" + price.secondary_start_price.toFixed(2);
             }
@@ -294,7 +293,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.calPrices = true;
             }
         });
-        this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
         if (!this.isRoundTrip) {
             var month = event.month;
             month = month.toString().length == 1 ? '0' + month : month;
@@ -321,6 +319,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 var CurrentDate = new Date();
                 var GivenDate = new Date(endDate);
                 if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
+                    this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+                    console.log(this.lowMinPrice, this.midMinPrice, this.highMinPrice);
                     this.isCalenderPriceLoading = this.calPrices = true;
                     this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
                         _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
