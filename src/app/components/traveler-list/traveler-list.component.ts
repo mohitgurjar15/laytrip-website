@@ -9,7 +9,7 @@ export class TravelerListComponent implements OnInit {
 
   @Input() totalPassenger;
   @Input() travelers:[];
-  traveler;
+  selectedTravelers;
 
   constructor(
     private checkOutService:CheckOutService
@@ -18,7 +18,7 @@ export class TravelerListComponent implements OnInit {
   ngOnInit(): void {
     this.checkOutService.getTraveler.subscribe(
       traveler => {
-        this.traveler=traveler;
+        this.selectedTravelers=traveler;
     })
   }
 
