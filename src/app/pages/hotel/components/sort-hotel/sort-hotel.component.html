@@ -6,13 +6,13 @@
   </div> -->
   <div class="short_by">
     <div class="block_inn">
-      <h4>Sort by</h4> <a class="anchor_link" (click)="resetSorting('total','ASC')">Reset</a>
+      <h4>Sort By</h4> <a class="anchor_link" (click)="resetSorting('total','ASC')">Reset</a>
     </div>
     <div class="accordion block_shortby" id="accordion-shortby">
       <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
         <div class="accordion-heading" (click)="toggleLowToHigh()"> <a class="accordion-toggle" data-toggle="collapse"
             data-parent="#accordion-shortby" href="#collapseshortBy">
-            Lowest to highest
+            Lowest to Highest
           </a> </div>
         <div id="collapseshortBy" class="accordion-body filter_acc collapse">
           <div class="accordion-inner">
@@ -20,13 +20,13 @@
               <h5>Price</h5>
               <ul>
                 <li>
-                  <label class="custom_radio">Lowest to highest
+                  <label class="custom_radio">Lowest to Highest
                     <input type="radio" [checked]="sortType=='lh_price'"
                       (click)="sortHotelData('total','ASC','lh_price')"> <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
-                  <label class="custom_radio">Highest to lowest
+                  <label class="custom_radio">Highest to Lowest
                     <input type="radio" [checked]="sortType=='hl_price'"
                       (click)="sortHotelData('total','DESC','hl_price')"> <span class="checkmark"></span>
                   </label>
@@ -37,13 +37,13 @@
               <h5>Ratings</h5>
               <ul>
                 <li>
-                  <label class="custom_radio">Lowest to highest
+                  <label class="custom_radio">Lowest to Highest
                     <input type="radio" [checked]="sortType=='lh_duration'"
                       (click)="sortHotelData('rating','ASC','lh_duration')"> <span class="checkmark"></span>
                   </label>
                 </li>
                 <li>
-                  <label class="custom_radio">Highest to lowest
+                  <label class="custom_radio">Highest to Lowest
                     <input type="radio" [checked]="sortType=='hl_duration'"
                       (click)="sortHotelData('rating','DESC','hl_duration')"> <span class="checkmark"></span>
                   </label>

@@ -72,10 +72,10 @@
     </div>
     <div class="cmn_block pad_no">
       <div class="accordion block_shortby" id="accordion-starrates">
-        <div class="accordion-group">
-          <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse"
+        <div class="accordion-group" [ngClass]="{'active': ratingToggle === true}">
+          <div class="accordion-heading" (click)="toggleRating()"> <a class="accordion-toggle" data-toggle="collapse"
               data-parent="#accordion-starrates" href="#collapseOutbound">
-              Star ratings
+              Star Ratings
             </a> </div>
           <div id="collapseOutbound" class="accordion-body filter_acc collapse">
             <div class="accordion-inner">
@@ -96,8 +96,8 @@
     </div>
     <div class="cmn_block pad_no">
       <div class="accordion block_shortby" id="accordion-amenities">
-        <div class="accordion-group">
-          <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse"
+        <div class="accordion-group" [ngClass]="{'active': amenitiesToggle === true}">
+          <div class="accordion-heading" (click)="toggleAmenities()"> <a class="accordion-toggle" data-toggle="collapse"
               data-parent="#accordion-amenities" href="#collapseInbound">
               Amenities
             </a> </div>
