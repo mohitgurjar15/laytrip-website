@@ -25,15 +25,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   @Input() hotelDetailsMain: any;
   @Input() isResetFilter: string;
   @Output() filterHotel = new EventEmitter();
-  depatureTimeSlot;
-  arrivalTimeSlot;
-  flightStops;
-  airlineList;
-  arrivalTimeSlotCityName;
-  departureTimeSlotCityName;
   currency;
-  showMinAirline: number = 4;
-  airLineCount: number;
   s3BucketUrl = environment.s3BucketUrl;
   form: FormGroup;
   priceSlider: FormGroup = new FormGroup({
@@ -42,8 +34,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   partialPriceSlider: FormGroup = new FormGroup({
     partial_price: new FormControl([20, 80])
   });
-  isShowoutbound: boolean = false;
-  isShowinbound: boolean = false;
 
   /* Varibale for filter */
   minPrice: number;
@@ -51,12 +41,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   airLines = [];
   minPartialPaymentPrice: number;
   maxPartialPaymentPrice: number;
-  outBoundDepartureTimeRangeSlots = [];
-  outBoundArrivalTimeRangeSlots = [];
-  inBoundDepartureTimeRangeSlots = [];
-  inBoundArrivalTimeRangeSlots = [];
-  outBoundStops = [];
-  inBoundStops = [];
   /* End of filter variable */
 
   // tslint:disable-next-line: variable-name
@@ -96,6 +80,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   hotelNamesArray = [];
   hotelname;
   sortType: string = 'filter_total_price';
+  ratingToggle: boolean = false;
+  amenitiesToggle: boolean = false;
 
   constructor(
   ) { }
@@ -136,16 +122,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.loadJquery();
   }
 
-  autoHeight() {
-    if (!this.contentWrapper) {
-      this.contentWrapper = document.querySelector(".ng-scroll-content");
-    }
-    if (this.scrollbar) {
-      this.scrollbar.nativeElement.style.height =
-        this.contentWrapper.clientHeight + "px";
-    }
-  }
-
   clearHotelSearch() {
     this.hotelname = 'Search Hotel';
     this.filterHotel.emit(this.hotelDetailsMain.hotels);
@@ -159,14 +135,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   counter(i: any) {
     return new Array(i);
-  }
-
-  toggleOutbound() {
-    this.isShowoutbound = !this.isShowoutbound;
-  }
-
-  toggleInbound() {
-    this.isShowinbound = !this.isShowinbound;
   }
 
   loadJquery() {
@@ -205,14 +173,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       $("body").removeClass('overflow-hidden');
     });
     //Close REsponsive Fliter js
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
-  toggleAirlines(type) {
-    this.showMinAirline = (type === 'more') ? 500 : 4;
   }
 
   /**
@@ -315,7 +275,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     if (this.amenitiesArray.length) {
       filteredHotels = filteredHotels.filter(item => {
         return this.amenitiesArray.some(r => item.amenities.list.includes(r));
-        // return this.amenitiesArray.includes(item.amenities.list);
       })
     }
 
@@ -363,24 +322,38 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
       // Reset ratings
       if (this.ratingArray && this.ratingArray.length) {
-        return this.ratingArray = [];
+        this.ratingArray = [];
+        this.filterHotels({});
       }
 
       // Reset amenities
-      if (this.amenitiesArray.length) {
-        return this.amenitiesArray = [];
+      if (this.amenitiesArray && this.amenitiesArray.length) {
+        this.amenitiesArray = [];
+        this.filterHotels({});
       }
 
       // Reset policy
-      if (this.policyArray.length) {
-        return this.policyArray = [];
+      if (this.policyArray && this.policyArray.length) {
+        this.policyArray = [];
+        this.filterHotels({});
       }
 
       // Reset hotel name search
       this.hotelname = 'Search Hotel';
 
       $("input:checkbox").prop('checked', false);
-      this.filterHotels({});
     }
+  }
+
+  toggleRating() {
+    this.ratingToggle = !this.ratingToggle;
+  }
+
+  toggleAmenities() {
+    this.amenitiesToggle = !this.amenitiesToggle;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

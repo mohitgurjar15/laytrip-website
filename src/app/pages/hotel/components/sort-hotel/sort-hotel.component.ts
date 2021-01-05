@@ -18,16 +18,6 @@ export class SortHotelComponent implements OnInit {
   sortType: string = 'lh_price';
   lowToHighToggle: boolean = false;
 
-  autoHeight() {
-    if (!this.contentWrapper) {
-      this.contentWrapper = document.querySelector(".ng-scroll-content");
-    }
-    if (this.scrollbar) {
-      this.scrollbar.nativeElement.style.height =
-        this.contentWrapper.clientHeight + "px";
-    }
-  }
-
   constructor(
     private route: ActivatedRoute,
   ) {
