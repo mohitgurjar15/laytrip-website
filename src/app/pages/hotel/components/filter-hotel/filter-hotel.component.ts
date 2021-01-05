@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
@@ -23,9 +23,17 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
   @Input() hotelDetailsMain: any;
-  @Input() isResetFilter: string;
+  @Input() isResetFilter;
   @Output() filterHotel = new EventEmitter();
+  depatureTimeSlot;
+  arrivalTimeSlot;
+  flightStops;
+  airlineList;
+  arrivalTimeSlotCityName;
+  departureTimeSlotCityName;
   currency;
+  showMinAirline: number = 4;
+  airLineCount: number;
   s3BucketUrl = environment.s3BucketUrl;
   form: FormGroup;
   priceSlider: FormGroup = new FormGroup({
@@ -34,6 +42,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   partialPriceSlider: FormGroup = new FormGroup({
     partial_price: new FormControl([20, 80])
   });
+  isShowoutbound: boolean = false;
+  isShowinbound: boolean = false;
 
   /* Varibale for filter */
   minPrice: number;
@@ -41,6 +51,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   airLines = [];
   minPartialPaymentPrice: number;
   maxPartialPaymentPrice: number;
+  outBoundDepartureTimeRangeSlots = [];
+  outBoundArrivalTimeRangeSlots = [];
+  inBoundDepartureTimeRangeSlots = [];
+  inBoundArrivalTimeRangeSlots = [];
+  outBoundStops = [];
+  inBoundStops = [];
   /* End of filter variable */
 
   // tslint:disable-next-line: variable-name
@@ -80,8 +96,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   hotelNamesArray = [];
   hotelname;
   sortType: string = 'filter_total_price';
-  ratingToggle: boolean = false;
-  amenitiesToggle: boolean = false;
+  lowToHighToggleRating: boolean = false;
+  lowToHighToggleAmenities: boolean = false;
 
   constructor(
   ) { }
@@ -122,6 +138,16 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.loadJquery();
   }
 
+  autoHeight() {
+    if (!this.contentWrapper) {
+      this.contentWrapper = document.querySelector(".ng-scroll-content");
+    }
+    if (this.scrollbar) {
+      this.scrollbar.nativeElement.style.height =
+        this.contentWrapper.clientHeight + "px";
+    }
+  }
+
   clearHotelSearch() {
     this.hotelname = 'Search Hotel';
     this.filterHotel.emit(this.hotelDetailsMain.hotels);
@@ -135,6 +161,14 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   counter(i: any) {
     return new Array(i);
+  }
+
+  toggleOutbound() {
+    this.isShowoutbound = !this.isShowoutbound;
+  }
+
+  toggleInbound() {
+    this.isShowinbound = !this.isShowinbound;
   }
 
   loadJquery() {
@@ -173,6 +207,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       $("body").removeClass('overflow-hidden');
     });
     //Close REsponsive Fliter js
+  }
+
+
+
+  toggleAirlines(type) {
+    this.showMinAirline = (type === 'more') ? 500 : 4;
   }
 
   /**
@@ -243,7 +283,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterHotelByPrice(key, name) {
-    console.log(key, name);
     if (key === 'total') {
       this.sortType = name;
     } else if (key === 'weekly') {
@@ -310,6 +349,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
     if (changes['isResetFilter']) {
       this.isResetFilter = changes['isResetFilter'].currentValue;
       this.minPrice = this.hotelDetailsMain.filter_objects.price.min;
@@ -345,12 +385,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleRating() {
-    this.ratingToggle = !this.ratingToggle;
+  toggleLowToHighRating() {
+    this.lowToHighToggleRating = !this.lowToHighToggleRating;
   }
 
-  toggleAmenities() {
-    this.amenitiesToggle = !this.amenitiesToggle;
+  toggleLowToHighAmenities() {
+    this.lowToHighToggleAmenities = !this.lowToHighToggleAmenities;
   }
 
   ngOnDestroy(): void {

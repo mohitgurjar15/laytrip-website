@@ -147,10 +147,13 @@ export class HotelSearchComponent implements OnInit {
   }
 
   filterHotel(event) {
-    this.hotelDetails = event;
+    setTimeout(() => {
+      this.hotelDetails = event;
+    }, 100);
   }
 
   resetFilter() {
+    console.log('yesssss::::');
     this.isResetFilter = '';
   }
 
