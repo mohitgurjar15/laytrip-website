@@ -103,6 +103,18 @@
             </div>
         </div>
     </div>
+    <div class="row">
+			<div class="col-md-12">
+				<div id="device-fingerprint" class="hidden">
+
+				</div>
+
+				<div id="challenge-modal" class="hidden">
+					<div id="challenge">
+					</div>
+				</div>
+			</div>
+		</div>
 </section>
 
 <app-flight-booking-failed *ngIf="bookingStatus==2"></app-flight-booking-failed>
@@ -111,3 +123,5 @@
 <app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>
 <app-booking-feedback *ngIf="isShowFeedbackPopup" [bookingId]="bookingId" (feedbackValueChange)="feedbackToggle($event)"></app-booking-feedback>
 <app-popup-term-condition *ngIf="isShowTermConditionPopup" (closeTermCoditionPopup)="closeTermCoditionPopup($event)" (acceptTermCondtion)="acceptTermCondtion($event)"></app-popup-term-condition>
+
+<style src = "https://core.spreedly.com/iframe/express-2.min.js"></style>

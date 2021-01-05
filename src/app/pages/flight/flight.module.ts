@@ -36,6 +36,9 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
 import { HelpersModule } from '../../_helpers/_helpers.module';
 import { FlightSearchWidgetComponent } from '../home/flight-search-widget/flight-search-widget.component';
 import { HomeModule } from '../home/home.module';
+import { SpreedlyService } from 'src/app/services/spreedly.service';
+import { FlightConfirmComponent } from './flight-confirm/flight-confirm.component';
+import { FlightFailureComponent } from './flight-failure/flight-failure.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,9 @@ import { HomeModule } from '../home/home.module';
     FlightSummaryLoaderComponent,
     FlightErrorComponent,
     PopupTermConditionComponent,
-    PopupLoaderComponent
+    PopupLoaderComponent,
+    FlightConfirmComponent,
+    FlightFailureComponent
   ],
   imports: [
     CommonModule,
@@ -69,13 +74,16 @@ import { HomeModule } from '../home/home.module';
     Ng5SliderModule,
     HelpersModule,
     ComponentsModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,
     HomeModule
   ],
-  exports:[FlightLoaderComponent,FlightNotFoundComponent,FlightConfirmationComponent,FlightSummaryComponent]
+  exports: [FlightLoaderComponent, FlightNotFoundComponent, FlightConfirmationComponent, FlightSummaryComponent],
+  providers: [
+    SpreedlyService
+  ]
 })
 export class FlightModule { }

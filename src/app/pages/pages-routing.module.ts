@@ -76,6 +76,10 @@ const routes: Routes = [
             {
                 path: 'covid-19',
                 component: CovidPageComponent
+          },
+            {
+                path: 'book',
+                loadChildren: () => import('./book/book.module').then(m => m.BookModule)
             },
         ]
     }

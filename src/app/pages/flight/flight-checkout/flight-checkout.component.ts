@@ -9,7 +9,9 @@ import { GenericService } from '../../../services/generic.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { DeviceDetectorService } from 'ngx-device-detector';
-declare var Spreedly: any;
+import { SpreedlyService } from 'src/app/services/spreedly.service';
+import { BookService } from 'src/app/services/book.service';
+
 @Component({
   selector: 'app-flight-checkout',
   templateUrl: './flight-checkout.component.html',
@@ -61,10 +63,12 @@ export class FlightCheckoutComponent implements OnInit {
       private route: ActivatedRoute,
       private router:Router,
       private flightService:FlightService,
+      private bookService:BookService,
       private cookieService: CookieService,
       private genericService:GenericService,
       private toastr: ToastrService,
-      private deviceService: DeviceDetectorService
+      private deviceService: DeviceDetectorService,
+      private spreedly: SpreedlyService
     ) { }
 
     ngOnInit() {
@@ -212,14 +216,9 @@ export class FlightCheckoutComponent implements OnInit {
 
     bookFlightApi(){
       window.scroll(0, 0);
-      var browser_size = '01';
-      // The accept header from your server side rendered page. You'll need to inject it into the page. Below is an example.
-      var acceptHeader = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
-      // The request should include the browser data collected by using `Spreedly.ThreeDS.serialize().
-      let browser_info = Spreedly.ThreeDS.serialize(
-        browser_size,
-        acceptHeader
-      );
+
+      let browser_info = this.spreedly.browserInfo();
+
       let bookingData={
         payment_type            : this.instalmentMode,
         laycredit_points        : this.laycreditpoints,
@@ -234,8 +233,18 @@ export class FlightCheckoutComponent implements OnInit {
         browser_info
       }
 
-      this.flightService.bookFligt(bookingData).subscribe((res: any) => {
-        console.log(res);
+      this.bookService.validate(bookingData).subscribe((res: any) => {
+      // this.flightService.bookFligt(bookingData).subscribe((res: any) => {
+        let transaction = res.transaction;
+        if (transaction.state == "succeeded") {
+          // redirectUrl = res.redirect_url;
+          // window.location.href = redirectUrl;
+        } else if (transaction.state == "pending") {
+          this.spreedly.lifeCycle(transaction);
+        } else {
+
+        }
+        // console.log(transaction);
         // this.bookingStatus=1;
         // this.bookingId = res.laytrip_booking_id;
         // this.bookingLoader=false;

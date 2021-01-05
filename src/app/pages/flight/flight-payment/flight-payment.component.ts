@@ -42,13 +42,13 @@ export class FlightPaymentComponent implements OnInit {
     private router:Router,
     private flightService: FlightService,
     private genericService:GenericService
-  ) { 
+  ) {
     this.totalLaycredit();
   }
 
   ngOnInit() {
     window.scroll(0,0);
-    this.routeCode = this.route.snapshot.paramMap.get('rc');  
+    this.routeCode = this.route.snapshot.paramMap.get('rc');
     this.userInfo = getLoginUserInfo();
 
     let __route = sessionStorage.getItem('__route');
@@ -83,9 +83,9 @@ export class FlightPaymentComponent implements OnInit {
       this.isShowPaymentOption=false;
     }
   }
-  
+
   getSellingPrice(){
-     
+
     let payLoad ={
       departure_date : moment(this.flightSummary[0].departure_date,'DD/MM/YYYY').format("YYYY-MM-DD"),
       net_rate  : this.flightSummary[0].net_rate
@@ -122,16 +122,16 @@ export class FlightPaymentComponent implements OnInit {
   }
 
   checkUserAndRedirect(){
-    
+
     if(typeof this.userInfo.roleId!='undefined' && this.userInfo.roleId!=7){
-      this.router.navigate(['/flight/travelers',this.routeCode]);      
+      this.router.navigate(['/flight/travelers',this.routeCode]);
     } else {
       this.isShowGuestPopup=true;
     }
   }
 
   changePopupValue(event){
-    this.isShowGuestPopup = event; 
+    this.isShowGuestPopup = event;
   }
 
   ngDoCheck() {

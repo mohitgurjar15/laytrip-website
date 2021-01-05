@@ -52,7 +52,7 @@ import { CovidPageComponent } from './covid-page/covid-page.component';
     DownloadAppComponent,
     ComingSoonComponent,
     SsoLoginComponent,
-    CovidPageComponent,
+    CovidPageComponent
   ],
   imports: [
     CommonModule,
