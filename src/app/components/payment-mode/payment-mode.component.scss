@@ -33,7 +33,15 @@ input[type=number] {
 //     }
 //   }
 // }
-
+h3{
+  color: $blue-text;
+  font-size: 34px;
+  margin-bottom: 5px;
+  margin: 25px 0 15px;
+  @include tab-view{
+      font-size: 18px;
+  }
+}
 .payment_accordion{
   .payment_mode_header{
     display: flex;
