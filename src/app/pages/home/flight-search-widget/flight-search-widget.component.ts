@@ -9,7 +9,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { start } from 'repl';
-import { HomeService } from 'src/app/services/home.service';
+import { HomeService } from '../../../services/home.service';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -155,7 +155,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(typeof changes['calenderPrices'].currentValue)
     if(typeof changes['calenderPrices'].currentValue !='undefined' && changes['calenderPrices'].firstChange==false){
       // this.isCalenderPriceLoading=false;
       // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
@@ -305,7 +304,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   getPrice(d,m,y){
-    this.isCalenderPriceLoading = true;
+    // this.isCalenderPriceLoading = true;
     let month:any=parseInt(m)+1;
     let day  = d.toString().length==1 ? '0'+d : d;
     month    = month.toString().length==1 ? '0'+month : month;
@@ -314,7 +313,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.getMinimumPricesList(this.calenderPrices);
 
     if(price){
-      this.isCalenderPriceLoading = false;
+      // this.isCalenderPriceLoading = false;
       if(price.secondary_start_price>0){
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
@@ -345,7 +344,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       } 
     });
 
-    this.lowMinPrice= this.highMinPrice = this.midMinPrice = 0;
+   
     if(!this.isRoundTrip){
       let month=event.month;
       month = month.toString().length==1?'0'+month:month;
@@ -376,6 +375,8 @@ export class FlightSearchWidgetComponent implements OnInit {
         var GivenDate = new Date(endDate);
 
         if(GivenDate > CurrentDate || CurrentDate < new Date(startDate)){
+          this.lowMinPrice= this.highMinPrice = this.midMinPrice = 0;
+          console.log(this.lowMinPrice,this.midMinPrice,this.highMinPrice)
             this.isCalenderPriceLoading = this.calPrices = true;
             this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
               
