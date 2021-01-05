@@ -427,7 +427,7 @@ select {
 								}
 							}
 							.class_section {
-								width: 100%;
+								width: 140px;
 
 								label {
 									width: 100%;
@@ -453,6 +453,7 @@ select {
 										position: relative;
 										padding: 0 20px;
 										cursor: pointer;
+										justify-content: flex-end;
 
 										span {
 											font-size: 14px;
@@ -510,7 +511,7 @@ select {
 											border-bottom: 9px solid $background-white;
 											position: absolute;
 											top: -9px;
-											right: 21px;
+											right: 16px;
 											content: '';
 											z-index: 2;
 										}
@@ -523,7 +524,7 @@ select {
 											border-bottom: 10px solid #E0E2E5;
 											position: absolute;
 											top: -10px;
-											right: 20px;
+											right: 15px;
 											content: '';
 										}
 
@@ -582,7 +583,7 @@ select {
 							}
 
 							.travellers {
-								width: 100%;
+								width: 150px;
 
 								label {
 									width: 100%;
@@ -608,6 +609,7 @@ select {
 										position: relative;
 										padding: 0 20px;
 										cursor: pointer;
+										justify-content: flex-end;
 
 										span {
 											font-size: 14px;
@@ -665,7 +667,7 @@ select {
 											border-bottom: 9px solid $background-white;
 											position: absolute;
 											top: -9px;
-											right: 21px;
+											right: 16px;
 											content: '';
 											z-index: 2;
 										}
@@ -678,7 +680,7 @@ select {
 											border-bottom: 10px solid #E0E2E5;
 											position: absolute;
 											top: -10px;
-											right: 20px;
+											right: 15px;
 											content: '';
 										}
 
@@ -753,6 +755,9 @@ select {
 															color: $pink_clr;
 														}
 													}
+												}
+												&:last-child{
+													padding: 0;
 												}
 											}
 										}
@@ -2647,7 +2652,7 @@ select {
 					h5 {
 						width: auto;
 						font-size: 14px;
-						color: $text-white;
+						color: $box-border-color;
 						font-weight: 600;
 						margin: 0 0 15px;
 					}
@@ -2665,8 +2670,8 @@ select {
 							a {
 								font-size: 14px;
 								color: $box-border-color;
-								font-weight: 400;
-								opacity: 0.7;
+								font-weight: 600;
+								//opacity: 0.7;
 
 								&:hover {
 									color: $secondary-color;

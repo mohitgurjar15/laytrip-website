@@ -307,6 +307,7 @@
 								padding: 0 15px;
 								color: $pink_clr;
 								border-radius: 6px;
+								font-size: 14px;
 								font-weight: 400;
 								position: relative;
 								z-index: 9;
@@ -324,7 +325,7 @@
 								
                                 svg{
                                     fill: $pink_clr;
-                                    max-width: 18px;
+                                    max-width: 29px;
                                 }
 								&:hover {
                                     color: $primary-color;
@@ -532,7 +533,8 @@
                 line-height: 30px;
                 padding: 0 15px;
                 color: $pink_clr;
-                border-radius: 6px;
+				border-radius: 6px;
+				font-size: 14px;
                 font-weight: 400;
                 position: relative;
                 z-index: 9;
@@ -550,7 +552,7 @@
                 
                 svg{
                     fill: $pink_clr;
-                    max-width: 18px;
+                    max-width: 29px;
                 }
                 &:hover {
                     color: $primary-color;
