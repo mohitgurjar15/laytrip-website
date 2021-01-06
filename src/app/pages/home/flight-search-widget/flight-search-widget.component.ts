@@ -315,6 +315,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     if(price){
       // this.isCalenderPriceLoading = false;
       if(price.secondary_start_price>0){
+        if(price.secondary_start_price<5){
+          return '5.00';
+        }
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
       return `$${price.price.toFixed(2)}`;
