@@ -33,15 +33,7 @@ input[type=number] {
 //     }
 //   }
 // }
-h3{
-  color: $blue-text;
-  font-size: 34px;
-  margin-bottom: 5px;
-  margin: 25px 0 15px;
-  @include tab-view{
-      font-size: 18px;
-  }
-}
+
 .payment_accordion{
   .payment_mode_header{
     display: flex;
@@ -195,6 +187,31 @@ h3{
             @include tab-view{
               font-size: 16px;
             }
+
+            &.fb_animation{
+                &[aria-expanded="true"]{
+                    &:after {
+                      font-family: '';
+                      content: "";
+                      position: absolute;
+                      color: $blue-text;
+                      font-weight: normal;
+                      transition: 0.3s;
+                      right: 20px;
+                    }
+                  }
+                  &[aria-expanded="false"]{
+                    &:after {
+                      font-family: '';
+                      content: "";
+                      position: absolute;
+                      color: $blue-text;
+                      font-weight: normal;
+                      transition: 0.3s;
+                      right: 20px;
+                    }
+                  }
+            }
             
             &[aria-expanded="true"]{
               &:after {
@@ -210,7 +227,7 @@ h3{
             &[aria-expanded="false"]{
               &:after {
                 font-family: 'FontAwesome';
-                content: "\f078";
+                content: "";
                 position: absolute;
                 color: $blue-text;
                 font-weight: normal;

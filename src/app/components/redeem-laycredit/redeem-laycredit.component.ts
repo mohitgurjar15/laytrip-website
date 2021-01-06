@@ -34,20 +34,9 @@ export class RedeemLaycreditComponent implements OnInit {
     this.applyLaycredit.emit(this.selectedLayCredit)
   }
 
-  /* toggleLayCredit(event){
-    if(event.target.checked){
-      this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: false});
-      this.applyLaycredit.emit(this.selectedLayCredit)
-    }
-    else{
-      this.laycreditOptions = Object.assign({}, this.laycreditOptions, {disabled: true});
-      this.applyLaycredit.emit(0)
-    }
-  } */
-
   ngOnChanges(changes: SimpleChanges) {
     console.log("changes['redeemableLayPoints']",changes)
-    if (typeof changes['redeemableLayPoints']!='undefined') {
+    /* if (typeof changes['redeemableLayPoints']!='undefined') {
 
       if(this.totalLaycreditPoints > Number(this.sellingPrice)){
         this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : changes['redeemableLayPoints'].currentValue});    
@@ -61,6 +50,15 @@ export class RedeemLaycreditComponent implements OnInit {
 
       if(this.selectedLayCredit > changes['redeemableLayPoints'].currentValue){
         this.applyLaycredit.emit(changes['redeemableLayPoints'].currentValue)
+      }
+    } */
+    if (typeof changes['totalLaycreditPoints']!='undefined') {
+
+      if(this.totalLaycreditPoints > Number(this.sellingPrice)){
+        this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.sellingPrice});    
+      }
+      else{
+        this.laycreditOptions = Object.assign({}, this.laycreditOptions, {ceil : this.totalLaycreditPoints});
       }
     }
   }

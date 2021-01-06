@@ -74,6 +74,8 @@ export class PaymentModeComponent implements OnInit {
   sellingPrice:number;
   minimumPriceValidationError:string='Your installment price is less then $5, Partial payment option is not available for this Offer.';
   isBelowMinimumInstallment:boolean=false;
+  isLayCreditLoading:boolean=false;
+  isPaymentCalulcatorLoading:boolean=false;
 
   ngOnInit(){
 
@@ -81,6 +83,7 @@ export class PaymentModeComponent implements OnInit {
     if(this.instalmentRequest.checkin_date){
 
       this.getTotalPrice();
+      this.totalLaycredit();
       this.getAllInstalment('set-default-down-payment');
       this.calculateInstalment('down-payment');
     }
@@ -160,7 +163,12 @@ export class PaymentModeComponent implements OnInit {
   }
 
   getAllInstalment(type1=null){
+
+    if(!this.weeklyInstalment){
+      this.isPaymentCalulcatorLoading=true;
+    }
     this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
+        this.isPaymentCalulcatorLoading=false;
         if(res.instalment_available==true){
           this.instalmentAvavible=true;
           this.weeklyInstalment   = res.weekly_instalments[1].instalment_amount;
@@ -176,7 +184,7 @@ export class PaymentModeComponent implements OnInit {
           }
         }
       },(err)=>{
-
+        this.isPaymentCalulcatorLoading=false;
     })
   }
 
@@ -237,5 +245,22 @@ export class PaymentModeComponent implements OnInit {
     //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);
     this.calculateInstalment();
     this.getAllInstalment();
+  }
+
+  applyLaycredit(laycreditpoints){
+    this.laycreditpoints=laycreditpoints;
+    this.instalmentRequest.additional_amount = this.laycreditpoints;
+    this.calculateInstalment('down-payment',null);
+    this.getAllInstalment();
+  }
+
+  totalLaycredit(){
+    this.isLayCreditLoading=true;
+    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
+      this.totalLaycreditPoints=res.total_available_points;
+      this.isLayCreditLoading=false;
+    },(error=>{
+      this.isLayCreditLoading=false;
+    }))
   }
 }
