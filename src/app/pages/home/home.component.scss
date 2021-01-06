@@ -8,13 +8,14 @@
 .home_banner {
 	width: 100%;
 	position: relative;
-	background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/flight-tab-bg.svg) !important;
+	background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/flight-tab-new-bg.svg) !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
 	background-position: center center !important;
-	padding-bottom: 130px;
+	height: calc(100vh - 95px);
+	//padding-bottom: 130px;
 	@include tab-view {
-		padding-bottom: 60px;
+		//padding-bottom: 60px;
 	}
 
 	// height: calc(100vh - 95px);
@@ -30,13 +31,19 @@
 	// }
 
 	.banner_inner {
-		position: relative;
-		top: 170px;
+		// position: relative;
+		// top: 170px;
+		// left: 0;
+		// transform: none;
+		// padding: 0;
+		position: absolute;
+		bottom: 0;
+		right: 0;
 		left: 0;
-		transform: none;
 		padding: 0;
+		transform: translate(0%, 4%);
 		@include tab-view {
-			top: 70px;
+			//top: 70px;
 		}
 
 		.banner_text {
