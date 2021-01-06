@@ -23,7 +23,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
   @Input() hotelDetailsMain: any;
-  @Input() isResetFilter;
+  @Input() isResetFilter: string;
   @Output() filterHotel = new EventEmitter();
   depatureTimeSlot;
   arrivalTimeSlot;
@@ -349,7 +349,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     if (changes['isResetFilter']) {
       this.isResetFilter = changes['isResetFilter'].currentValue;
       this.minPrice = this.hotelDetailsMain.filter_objects.price.min;

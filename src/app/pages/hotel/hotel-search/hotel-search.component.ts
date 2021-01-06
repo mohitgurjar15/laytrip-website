@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -36,6 +36,7 @@ export class HotelSearchComponent implements OnInit {
     private hotelService: HotelService,
     public commonFunction: CommonFunction,
     public router: Router,
+    private cd: ChangeDetectorRef
   ) {
   }
 
@@ -153,8 +154,7 @@ export class HotelSearchComponent implements OnInit {
   }
 
   resetFilter() {
-    console.log('yesssss::::');
-    this.isResetFilter = '';
+    this.isResetFilter = (new Date()).toString();
   }
 
   getHotelSearchDataByModify(event) {
