@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HomeService } from '../../../services/home.service';
 import { environment } from '../../../../environments/environment';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-deal',
@@ -10,14 +12,20 @@ export class DealComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Output() toString = new EventEmitter<string>();
-  
-  constructor() { }
+  @Input()  dealList;
+  list;
+  constructor(
+    private homeService : HomeService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+  
+  ngAfterContentChecked(){
+    this.list = this.dealList;
   }
 
   btnDealClick(code : string){
     window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-    this.toString.emit(code);
+    this.toString.emit(code);  
   }
 }

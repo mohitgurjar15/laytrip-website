@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="deal_sec_wrapper">
-                <div class="deal_section_row">
+                <div class="deal_section_row"  *ngFor="let item of list;">
                     <div class="deal_sec_inner">
                         <img src="{{s3BucketUrl}}assets/images/deal-1.webp" alt="Deal Image" />
                         <div class="image_about_text">
@@ -11,14 +11,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="deal_section_row">
+                <!-- <div class="deal_section_row">
                     <div class="deal_sec_inner">
                         <img src="{{s3BucketUrl}}assets/images/deal-1.webp" alt="Deal Image" />
                         <div class="image_about_text">
                             <button (click)="btnDealClick('JFK')">Find Deals to Cancún</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
