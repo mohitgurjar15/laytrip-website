@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -36,6 +36,7 @@ export class HotelSearchComponent implements OnInit {
     private hotelService: HotelService,
     public commonFunction: CommonFunction,
     public router: Router,
+    private cd: ChangeDetectorRef
   ) {
   }
 
@@ -147,11 +148,13 @@ export class HotelSearchComponent implements OnInit {
   }
 
   filterHotel(event) {
-    this.hotelDetails = event;
+    setTimeout(() => {
+      this.hotelDetails = event;
+    }, 100);
   }
 
   resetFilter() {
-    this.isResetFilter = '';
+    this.isResetFilter = (new Date()).toString();
   }
 
   getHotelSearchDataByModify(event) {
@@ -164,7 +167,6 @@ export class HotelSearchComponent implements OnInit {
     queryParams.longitude = parseFloat(event.longitude);
     queryParams.itenery = btoa(JSON.stringify(event.occupancies));
     queryParams.location = btoa(JSON.stringify(locations));
-    console.log(queryParams);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });

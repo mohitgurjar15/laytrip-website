@@ -60,7 +60,7 @@
                                 </div> -->
                                 <div class="block" *ngIf="item.start_price > 0">
                                     <p>{{'starts_from' | translate}}</p>
-                                    <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /{{'week'| translate}}</p>
+                                    <p><span>{{ currency?.symbol }}{{ item.secondary_start_price < 5 ? '5.00' : item.secondary_start_price | number : '1.2-2'}}</span> /{{'week'| translate}}</p>
                                 </div>
                                 <div class="block" *ngIf="item.start_price == 0">
                                     <p><span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span></p>
@@ -437,7 +437,7 @@
                                 </div> -->
                                 <div class="block" *ngIf="item.start_price > 0">
                                     <p>{{'starts_from' | translate}}</p>
-                                    <p><span>{{ currency?.symbol }}{{ item?.secondary_start_price | number : '1.2-2'}}</span> /{{'week'| translate}}</p>
+                                    <p><span>{{ currency?.symbol }}{{ item.secondary_start_price < 5 ? '5.00' : item.secondary_start_price | number : '1.2-2'}}</span> /{{'week'| translate}}</p>
                                 </div>
                                 <div class="block" *ngIf="item.start_price == 0">
                                     <p><span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span></p>

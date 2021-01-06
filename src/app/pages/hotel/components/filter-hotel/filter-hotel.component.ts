@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
@@ -96,6 +96,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   hotelNamesArray = [];
   hotelname;
   sortType: string = 'filter_total_price';
+  lowToHighToggleRating: boolean = false;
+  lowToHighToggleAmenities: boolean = false;
 
   constructor(
   ) { }
@@ -207,9 +209,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     //Close REsponsive Fliter js
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
+
 
   toggleAirlines(type) {
     this.showMinAirline = (type === 'more') ? 500 : 4;
@@ -283,7 +283,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterHotelByPrice(key, name) {
-    console.log(key, name);
     if (key === 'total') {
       this.sortType = name;
     } else if (key === 'weekly') {
@@ -315,7 +314,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     if (this.amenitiesArray.length) {
       filteredHotels = filteredHotels.filter(item => {
         return this.amenitiesArray.some(r => item.amenities.list.includes(r));
-        // return this.amenitiesArray.includes(item.amenities.list);
       })
     }
 
@@ -363,24 +361,38 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
       // Reset ratings
       if (this.ratingArray && this.ratingArray.length) {
-        return this.ratingArray = [];
+        this.ratingArray = [];
+        this.filterHotels({});
       }
 
       // Reset amenities
-      if (this.amenitiesArray.length) {
-        return this.amenitiesArray = [];
+      if (this.amenitiesArray && this.amenitiesArray.length) {
+        this.amenitiesArray = [];
+        this.filterHotels({});
       }
 
       // Reset policy
-      if (this.policyArray.length) {
-        return this.policyArray = [];
+      if (this.policyArray && this.policyArray.length) {
+        this.policyArray = [];
+        this.filterHotels({});
       }
 
       // Reset hotel name search
       this.hotelname = 'Search Hotel';
 
       $("input:checkbox").prop('checked', false);
-      this.filterHotels({});
     }
+  }
+
+  toggleLowToHighRating() {
+    this.lowToHighToggleRating = !this.lowToHighToggleRating;
+  }
+
+  toggleLowToHighAmenities() {
+    this.lowToHighToggleAmenities = !this.lowToHighToggleAmenities;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

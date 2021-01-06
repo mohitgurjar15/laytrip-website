@@ -93,4 +93,21 @@ export class FlightPriceSliderComponent implements OnInit {
       setTimeout(()=>{this.loadJquery();},100)
     }
   }
+
+  getPrice(item){
+
+    let price;
+    if(item.secondary_start_price>0){
+      if(item.secondary_start_price<5){
+        price='5.00';
+      }
+      else{
+        price = item.secondary_start_price;
+      }
+    }
+    else{
+      price = item.price
+    }
+    return price;
+  }
 }
