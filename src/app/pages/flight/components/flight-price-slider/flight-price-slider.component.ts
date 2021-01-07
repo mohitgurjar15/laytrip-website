@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
 declare var $: any;
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-flight-price-slider',
@@ -23,7 +24,7 @@ export class FlightPriceSliderComponent implements OnInit {
   child:number;
   infant:number;
 
-  @Input() dates:[]=[];
+  @Input() dates=[];
 
   constructor(
     private commonFunction:CommonFunction,
@@ -91,7 +92,27 @@ export class FlightPriceSliderComponent implements OnInit {
    
     if(changes['dates'].currentValue.length){
       setTimeout(()=>{this.loadJquery();},100)
+      this.flipDates(this.dates)
     }
+  }
+
+  flipDates(dates){
+    let result =[]
+    let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
+    let targetIndex =4;
+    for(let i=targetIndex; i <= sourceIndex; i++){
+        
+        result.push(this.dates[i])
+    }
+    
+    for(let i=sourceIndex+1; i < this.dates.length; i++){
+        result.push(this.dates[i])
+    }
+    
+     for(let i=0; i < targetIndex; i++){
+        result.push(this.dates[i])
+    }
+    this.dates = result;
   }
 
   getPrice(item){

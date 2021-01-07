@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit {
     if (tabName === 'flight') {
       this.getDeal(1);
 
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-bg.svg) no-repeat";
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {
