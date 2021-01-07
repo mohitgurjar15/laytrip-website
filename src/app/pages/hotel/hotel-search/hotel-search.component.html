@@ -19,7 +19,6 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="sticky-top left_side_bar">
-          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
           <div class="filter_saidbar">
             <div class="filter_by d-none d-lg-block">
               <div class="block_inn">
@@ -30,6 +29,7 @@
                 isResetFilter={{isResetFilter}}></app-filter-hotel>
             </div>
           </div>
+          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
         </div>
       </div>
       <div class="col-lg-9">
