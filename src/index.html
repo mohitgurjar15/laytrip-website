@@ -51,6 +51,24 @@
         }
       }    
     });
+<<<<<<< HEAD
+
+    window.fcWidget.on("widget:opened", function(resp) {
+      console.log('Widget Opened');
+      $(".quick-footer-section").toggle()
+    });
+
+    window.fcWidget.on("widget:closed", function(resp) {
+      console.log('Widget Closed');
+      $(".quick-footer-section").toggle()
+    });
+  }
+
+ 
+  function initialize(i, t) { var e; i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e)) } function initiateCall() { initialize(document, "freshchat-js-sdk") } window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
+
+  
+=======
     
   }
 
@@ -65,6 +83,7 @@
        } 
        window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
    
+>>>>>>> b18de211ffd1409c80010850987ee0848b511b03
 </script>
 
 <body>
