@@ -259,7 +259,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }, 2000);
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
-        this.isCalenderPriceLoading = true;
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
         this.currentMonth = m == 1 ? '0' + m : m;
         this.currentYear = y;
@@ -271,7 +270,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.getMinimumPricesList(this.calenderPrices);
         var event = { "month": m, "year": y };
         if (price) {
-            // this.isCalenderPriceLoading = false;
             if (price.secondary_start_price > 0) {
                 if (price.secondary_start_price < 5) {
                     return '5.00';
@@ -350,6 +348,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.getMinimumPricesList = function (prices) {
         var _this = this;
+        console.log(prices);
         this.lowMinPrice = this.getMinPrice(prices.filter(function (item) { return item.flag === 'low' && _this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM') && _this.currentYear == new Date(item.date).getFullYear(); })); // /* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
         this.midMinPrice = this.getMinPrice(prices.filter(function (item) { return item.flag === 'medium' && _this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM') && _this.currentYear == new Date(item.date).getFullYear(); })); ///* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
         this.highMinPrice = this.getMinPrice(prices.filter(function (item) { return item.flag === 'high' && _this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM') && _this.currentYear == new Date(item.date).getFullYear(); })); // /* && this.currentMonth === book.date.getMonth() && this.currentYear === book.date.getYear() */));

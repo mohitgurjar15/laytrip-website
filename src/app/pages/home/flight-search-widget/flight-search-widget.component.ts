@@ -316,7 +316,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   getPrice(d,m,y){
-   this.isCalenderPriceLoading = true;
     this.lowMinPrice= this.midMinPrice = this.highMinPrice = 0;      
     this.currentMonth = m ==1 ? '0'+m : m;
     this.currentYear = y;
@@ -328,9 +327,7 @@ export class FlightSearchWidgetComponent implements OnInit {
    
     this.getMinimumPricesList(this.calenderPrices);
     var event = {"month":m,"year":y};
-    if(price){
-      // this.isCalenderPriceLoading = false;
-      
+    if(price){      
       if(price.secondary_start_price>0){
         if(price.secondary_start_price<5){
           return '5.00';
@@ -406,7 +403,6 @@ export class FlightSearchWidgetComponent implements OnInit {
           this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
               this.calenderPrices = [...this.calenderPrices,...res];
               this.getMinimumPricesList(this.calenderPrices);
-
               this.isCalenderPriceLoading = false;
           }, err => {
             this.calPrices = false;
@@ -419,8 +415,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
-  getMinimumPricesList(prices){  
-  
+  getMinimumPricesList(prices) {    
+    console.log(prices)
     this.lowMinPrice = this.getMinPrice(prices.filter(item => item.flag === 'low' && this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM')  && this.currentYear == new Date(item.date).getFullYear()));// /* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
     this.midMinPrice =  this.getMinPrice(prices.filter(item => item.flag === 'medium' && this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM')  && this.currentYear == new Date(item.date).getFullYear()));///* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
     this.highMinPrice =  this.getMinPrice(prices.filter(item => item.flag === 'high' && this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM')  && this.currentYear == new Date(item.date).getFullYear()));// /* && this.currentMonth === book.date.getMonth() && this.currentYear === book.date.getYear() */));
@@ -441,8 +437,7 @@ export class FlightSearchWidgetComponent implements OnInit {
           }
           return v.price;
         }
-      });
-    
+      });    
       return Math.min.apply( null, values );
     } else {
       return 0;
