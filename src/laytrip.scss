@@ -86,7 +86,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 }
 
 
-//Traveller Page dob  
+//Traveller Page dob
 .detail_info_main {
   &.add_passenger {
     .detail_info_left {
@@ -168,7 +168,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
   }
 }
 
-//Profile page date picker 
+//Profile page date picker
 .account_part {
   .account_cnt_main {
     .update_info {
@@ -200,7 +200,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
           .field_bolck {
             .field_inn {
               .ui-calendar {
-                width: 100%;                
+                width: 100%;
               }
               .passport_expiry_cal{
                 .ui-calendar{
@@ -228,14 +228,14 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 							.text_field {
                 .ui-calendar {
                   width: 100%;
-                }   
+                }
                 .phone_no {
 									.code {
 										width: 150px;
 									}
-								}             
+								}
               }
-              
+
 						}
 					}
 				}
@@ -287,12 +287,12 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
             .field_bolck {
               .field_inn {
                 .text_field {
-                  .passport_expiry_cal{                  
-                    .ui-calendar {                    
+                  .passport_expiry_cal{
+                    .ui-calendar {
                         .ui-datepicker {
                           width: 200px !important;
                           min-width: auto !important;
-                        }                        
+                        }
                     }
                   }
                 }
@@ -302,8 +302,8 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
         }
       }
     }
-  } 
-} 
+  }
+}
 ::ng-deep{
   .ui-calendar {
     .ui-datepicker{
@@ -320,7 +320,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
       .ng-placeholder{
 				font-size: 14px;
       }
-      
+
 		}
 	}
 }
@@ -338,3 +338,7 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 	}
 } */
 .hover-link{cursor: pointer;}
+
+.challangeIframe {
+  height: 300px;
+}

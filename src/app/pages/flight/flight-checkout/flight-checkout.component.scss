@@ -3,3 +3,12 @@
         cursor: pointer;
     }
 }
+.hidden {
+  display: none;
+}
+
+#challenge-modal #challenge iframe {
+  width: 100% !important;
+  height: 500px !important;
+}
+

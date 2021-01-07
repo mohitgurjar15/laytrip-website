@@ -37,8 +37,7 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
 import { FlightSearchWidgetComponent } from '../home/flight-search-widget/flight-search-widget.component';
 import { HomeModule } from '../home/home.module';
 import { SpreedlyService } from 'src/app/services/spreedly.service';
-import { FlightConfirmComponent } from './flight-confirm/flight-confirm.component';
-import { FlightFailureComponent } from './flight-failure/flight-failure.component';
+import { BookModule } from '../book/book.module';
 
 @NgModule({
   declarations: [
@@ -65,8 +64,6 @@ import { FlightFailureComponent } from './flight-failure/flight-failure.componen
     FlightErrorComponent,
     PopupTermConditionComponent,
     PopupLoaderComponent,
-    FlightConfirmComponent,
-    FlightFailureComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +76,8 @@ import { FlightFailureComponent } from './flight-failure/flight-failure.componen
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,
-    HomeModule
+    HomeModule,
+    BookModule
   ],
   exports: [FlightLoaderComponent, FlightNotFoundComponent, FlightConfirmationComponent, FlightSummaryComponent],
   providers: [

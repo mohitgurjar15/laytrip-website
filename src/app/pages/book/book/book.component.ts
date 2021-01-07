@@ -32,11 +32,11 @@ export class BookComponent implements OnInit {
     };
 
     this.bookService.bookFlight(bookingData).subscribe((res: any) => {
+      console.log(res);
       if (res.status == 'complete') {
-        console.log(res);
-        this.router.navigate(['/book/confirmation'])
+        this.router.navigateByUrl('/book/confirmation',{ skipLocationChange: false })
       } else {
-        this.router.navigate(['/book/failure'])
+        this.router.navigateByUrl('/book/failure',{ skipLocationChange: false })
       }
     });
   }

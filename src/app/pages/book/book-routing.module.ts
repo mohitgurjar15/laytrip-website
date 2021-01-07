@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BookComponent } from './book/book.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FailureComponent } from './failure/failure.component';
+import { PurchaseComponent } from './purchase/purchase.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'failure',
     component: FailureComponent,
+  },
+  {
+    path: 'purchase',
+    component: PurchaseComponent,
   }
 ];
 

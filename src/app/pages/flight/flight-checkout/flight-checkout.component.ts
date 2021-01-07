@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { SpreedlyService } from 'src/app/services/spreedly.service';
 import { BookService } from 'src/app/services/book.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-flight-checkout',
@@ -57,6 +58,8 @@ export class FlightCheckoutComponent implements OnInit {
     partialPaymentAmount:number=0;
     payNowAmount:number=0;
     priceData=[];
+
+  challengePopUp: boolean = false;
   deviceInfo: any = [];
 
     constructor(
@@ -68,7 +71,8 @@ export class FlightCheckoutComponent implements OnInit {
       private genericService:GenericService,
       private toastr: ToastrService,
       private deviceService: DeviceDetectorService,
-      private spreedly: SpreedlyService
+      private spreedly: SpreedlyService,
+      @Inject(DOCUMENT) private document: Document
     ) { }
 
     ngOnInit() {
@@ -218,6 +222,7 @@ export class FlightCheckoutComponent implements OnInit {
       window.scroll(0, 0);
 
       let browser_info = this.spreedly.browserInfo();
+      let site_url = this.document.location.origin;
 
       let bookingData={
         payment_type            : this.instalmentMode,
@@ -230,20 +235,36 @@ export class FlightCheckoutComponent implements OnInit {
         custom_instalment_amount: this.customAmount,
         custom_instalment_no    : this.customInstalment,
         booking_through: 'web',
-        browser_info
+        browser_info,
+        site_url: this.document.location.origin
+        // site_url: 'https://demo.eztoflow.com'
       }
 
       this.bookService.validate(bookingData).subscribe((res: any) => {
-      // this.flightService.bookFligt(bookingData).subscribe((res: any) => {
         let transaction = res.transaction;
+        console.log('res', [res]);
+
+        let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+        res.redirection = redirection;
         if (transaction.state == "succeeded") {
-          // redirectUrl = res.redirect_url;
-          // window.location.href = redirectUrl;
+
+          console.log('succeeded', [redirection]);
+          /* Note: Do not use this.router.navigateByUrl or navigate here */
+          window.location.href = redirection;
         } else if (transaction.state == "pending") {
-          this.spreedly.lifeCycle(transaction);
+
+          console.log('pending', [res]);
+
+          this.bookingLoader = false;
+          this.challengePopUp = true;
+          this.spreedly.lifeCycle(res);
         } else {
 
+          console.log('fail', [res]);
+
+          this.router.navigate(['/book/failure']);
         }
+      // this.flightService.bookFligt(bookingData).subscribe((res: any) => {
         // console.log(transaction);
         // this.bookingStatus=1;
         // this.bookingId = res.laytrip_booking_id;

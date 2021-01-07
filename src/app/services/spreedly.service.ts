@@ -1,12 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Event } from '@angular/router';
+import { HttpClient } from "@angular/common/http";
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { Event, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { CommonFunction } from "../_helpers/common-function";
+import { throwError } from "rxjs";
+import { catchError, retry } from "rxjs/operators";
 
 declare var Spreedly: any;
+declare var env: any;
 
 @Injectable()
 export class SpreedlyService {
-
-  constructor() { }
+  eventData: any;
+  constructor(
+    private router:Router,
+    @Inject(DOCUMENT) private document: Document,
+    private http: HttpClient,
+    private commonFunction: CommonFunction
+  ) { }
 
   browserInfo() {
 
@@ -24,7 +36,14 @@ export class SpreedlyService {
 
   }
 
-  lifeCycle(transaction: any) {
+  lifeCycle(res: any) {
+
+    let transaction = res.transaction;
+
+    let accessToken = localStorage.getItem('_lay_sess');
+
+    env.init(environment, accessToken, res.redirection);
+
     var lifecycle = new Spreedly.ThreeDS.Lifecycle({
       environmentKey: "9KGMvRTcGfbQkaHQU0fPlr2jnQ8",
       // The environmentKey field is required, but if omitted, you will receive a console warning message and the transaction will still succeed.
@@ -32,18 +51,18 @@ export class SpreedlyService {
       // The DOM node that you'd like to inject hidden iframes
       challengeIframeLocation: 'challenge',
       // The DOM node that you'd like to inject the challenge flow
-      transactionToken: transaction.token
+      transactionToken: transaction.token,
       // The token for the transaction - used to poll for state
       // The css classes that you'd like to apply to the challenge iframe.
-      //
+      challengeIframeClasses: 'challangeIframe'
       // Note: This is where you'll change the height and width of the challenge
       //       iframe. You'll need to match the height and width option that you
       //       selected when collecting browser data with `Spreedly.ThreeDS.serialize`.
       //       For instance if you selected '04' for browserSize you'll need to have a
       //       CSS class that has width and height of 600px by 400px.
     });
-
-    let status3ds = Spreedly.on('3ds:status', this.statusUpdates);
+    // Spreedly.on('3ds:status', spreedlyStatus.updates);
+    // let status3ds = Spreedly.on('3ds:status', this.statusUpdates);
 
     var transactionData = {
       state: transaction.state,
@@ -59,88 +78,13 @@ export class SpreedlyService {
       challenge_form: transaction.challenge_form,
       // The challenge form that is injected when the user is challenged
       challenge_url: transaction.challenge_url,
-      redirect_url: 'http://localhost:4200/flight/confirmation',
-      // redirect_url: 'https://demo.eztoflow.com/',
+      // redirect_url: 'http://localhost:4200/flight/confirmation',
+      redirect_url: res.redirection,
       // The challenge url that is loaded when there is no challenge form
     };
 
-    console.log("transaction data");
-    console.log(transactionData);
-
-    console.log("Start lifecycle");
     lifecycle.start(transactionData);
   }
 
-  statusUpdates ($event) {
-    console.log("event data");
-    console.log($event.action);
-    // if (event.action === 'succeeded') {
 
-    //   // finish your checkout and redirect to success page
-
-    // } else if (event.action === 'error') {
-    //   // present an error to the user to retry
-    // } else if (event.action === 'challenge') {
-    //   console.log('in');
-    //   // Show your modal containing the div provided in `challengeIframeLocation` when
-    //   // creating the lifecycle event.
-    //   //
-    //   // Example HTML on your page:
-    //   //
-    //   // <head>
-    //   //   <style>
-    //   //     .hidden {
-    //   //       display: none;
-    //   //     }
-    //   //
-    //   //     #challenge-modal {
-    //   //       <!-- style your modal here -->
-    //   //     }
-    //   //   </style>
-    //   // </head>
-    //   // <body>
-    //   //   <div id="device-fingerprint" class="hidden">
-    //   //     <!-- Spreedly injects content into this div,
-    //   //          do not nest the challenge div inside of it -->
-    //   //   </div>
-    //   //   <div id="challenge-modal" class="hidden">
-    //   //     <div id="challenge">
-    //   //     </div>
-    //   //   </div>
-    //   // </body>
-    //   //
-    //   //  Example lifecycle object from step 6:
-    //   //
-    //   //  var lifecycle = new Spreedly.ThreeDS.Lifecycle({
-    //   //    hiddenIframeLocation: 'device-fingerprint',
-    //   //    challengeIframeLocation: 'challenge',
-    //   //    ...
-    //   //  })
-    //   //
-    //   //  and then we show the challenge-modal
-    //   //
-
-    // } else if (event.action === 'trigger-completion') {
-    //   // 1. make a request to your backend to do an authenticated call to Spreedly to complete the request
-    //   //    The completion call is `https://core.spreedly.com/v1/transactions/[transaction-token]/complete.json (or .xml)`
-    //   // 2a. if the transaction is marked as "succeeded" finish your checkout and redirect to success page
-    //   // 2b. if the transaction is marked "pending" you'll need to call finalize `event.finalize(transaction)` with the transaction data from the authenticated completion call.
-
-    //   // This is an example of the authenticated call that you'd make
-    //   // to your service.
-    //   // fetch(`https://your-service/complete/${purchaseToken}.json`, { method: 'POST' })
-    //   //   .then(response => response.json())
-    //   //   .then((data) => {
-    //   //     if (data.state === 'succeeded') {
-
-    //   //       // finish your checkout and redirect to success page
-
-    //   //     }
-
-    //   //     if (data.state === 'pending') {
-    //   //       event.finalize(data);
-    //   //     }
-    //   // })
-    // }
-  }
 }
