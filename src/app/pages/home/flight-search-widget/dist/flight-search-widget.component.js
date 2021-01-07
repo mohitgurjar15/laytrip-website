@@ -121,22 +121,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             }
         });
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
-        // this.getDates(JSON.parse(this.data),'2021-02');
-    };
-    FlightSearchWidgetComponent.prototype.getDates = function (calenderPrices, selectedDate) {
-        var currentMonth = new Date(); //current date
-        var filterData = [];
-        selectedDate = moment(selectedDate).format('YYYY-MM');
-        console.log(selectedDate);
-        calenderPrices.forEach(function (obj) {
-            var d = moment(obj.date).format('YYYY-MM'); //json date 
-            console.log(d, 'd');
-            if (d == selectedDate) {
-                filterData.push(obj);
-            }
-        });
-        // console.log('filterData',filterData)
-        return filterData;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
@@ -270,20 +254,20 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
+        this.currentMonth = m == 1 ? '0' + m : m;
+        this.currentYear = y;
         var month = parseInt(m) + 1;
         var day = d.toString().length == 1 ? '0' + d : d;
         month = month.toString().length == 1 ? '0' + month : month;
         var date = day + "/" + month + "/" + y;
         var price = this.calenderPrices.find(function (d) { return d.date == date; });
-        var selectedCal = [];
-        if (m != 0) {
-            selectedCal = this.getDates(this.calenderPrices, date);
-        }
-        console.log(selectedCal);
-        this.getMinimumPricesList(selectedCal);
+        this.getMinimumPricesList(this.calenderPrices);
         var event = { "month": m, "year": y };
         if (price) {
             if (price.secondary_start_price > 0) {
+                if (price.secondary_start_price < 5) {
+                    return '5.00';
+                }
                 return "$" + price.secondary_start_price.toFixed(2);
             }
             return "$" + price.price.toFixed(2);
@@ -311,6 +295,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.calPrices = true;
             }
         });
+        this.currentMonth = event.month.length == 1 ? '0' + event.month : event.month;
+        this.currentYear = event.year;
         if (!this.isRoundTrip) {
             var month = event.month;
             month = month.toString().length == 1 ? '0' + month : month;
@@ -322,7 +308,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 startDate = moment(startDate.toDate()).format("YYYY-MM-DD");
                 endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
                 if (!moment().isBefore(startDate)) {
-                    startDate = moment().format("YYYY-MM-DD");
+                    startDate = moment().format("Y@YYY-MM-DD");
                 }
                 var payload = {
                     source_location: this.route.snapshot.queryParams['departure'],
@@ -341,8 +327,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                     this.isCalenderPriceLoading = this.calPrices = true;
                     this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
                         _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
-                        console.log(_this.calenderPrices);
-                        _this.getMinimumPricesList(res);
+                        _this.getMinimumPricesList(_this.calenderPrices);
                         _this.isCalenderPriceLoading = false;
                     }, function (err) {
                         _this.calPrices = false;
@@ -350,15 +335,17 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                     });
                 }
                 else {
-                    this.calPrices = false;
+                    this.calPrices = this.isCalenderPriceLoading = false;
                 }
             }
         }
     };
     FlightSearchWidgetComponent.prototype.getMinimumPricesList = function (prices) {
-        this.lowMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'low'; }));
-        this.midMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'medium'; }));
-        this.highMinPrice = this.getMinPrice(prices.filter(function (book) { return book.flag === 'high'; }));
+        var _this = this;
+        this.lowMinPrice = this.getMinPrice(prices.filter(function (item) { return item.flag === 'low' && _this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM') && _this.currentYear == new Date(item.date).getFullYear(); })); // /* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
+        this.midMinPrice = this.getMinPrice(prices.filter(function (item) { return item.flag === 'medium' && _this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM') && _this.currentYear == new Date(item.date).getFullYear(); })); ///* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
+        this.highMinPrice = this.getMinPrice(prices.filter(function (item) { return item.flag === 'high' && _this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM') && _this.currentYear == new Date(item.date).getFullYear(); })); // /* && this.currentMonth === book.date.getMonth() && this.currentYear === book.date.getYear() */));
+        // console.log(this.lowMinPrice,this.midMinPrice,this.highMinPrice)
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {
         if (prices.length > 0) {
