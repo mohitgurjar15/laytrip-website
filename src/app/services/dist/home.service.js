@@ -9,13 +9,40 @@ exports.__esModule = true;
 exports.HomeService = void 0;
 var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
+var operators_1 = require("rxjs/operators");
+var environment_1 = require("../../environments/environment");
 var HomeService = /** @class */ (function () {
-    function HomeService() {
+    function HomeService(http, commonFunction) {
+        this.http = http;
+        this.commonFunction = commonFunction;
         this.toString = new rxjs_1.BehaviorSubject({});
         this.getToString = this.toString.asObservable();
     }
+    HomeService.prototype.handleError = function (error) {
+        var errorMessage = {};
+        if (error.status == 0) {
+            console.log("API Server is not responding");
+        }
+        if (error.error instanceof ErrorEvent) {
+            // client-side error
+            errorMessage = { message: error.error.message };
+        }
+        else {
+            // server-side error
+            errorMessage = { status: error.status, message: error.error.message };
+        }
+        return rxjs_1.throwError(errorMessage);
+    };
     HomeService.prototype.setToString = function (flightToCode) {
         this.toString.next(flightToCode);
+    };
+    HomeService.prototype.getDealList = function (moduleId) {
+        var headers = {
+            currency: 'USD',
+            language: 'en'
+        };
+        return this.http.get(environment_1.environment.apiUrl + "v1/deal/" + moduleId, this.commonFunction.setHeaders(headers))
+            .pipe(operators_1.catchError(this.handleError));
     };
     HomeService = __decorate([
         core_1.Injectable({

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   isRoundTrip: boolean = false;
   countryCode: string;
   toString: string;
+  moduleId=1;
+  dealList;
 
   constructor(
     private genericService: GenericService,
@@ -39,6 +41,7 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
     this.getModules();
     this.loadJquery();
+    this.getDeal(this.moduleId);
   }
 
   loadJquery() {
@@ -96,6 +99,8 @@ export class HomeComponent implements OnInit {
     );
   }
 
+
+
   toggleOnewayRoundTrip(type) {
 
     if (type === 'roundtrip') {
@@ -105,11 +110,21 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  getDeal(moduleId){
+    this.homeService.getDealList(moduleId).subscribe(
+      (response) => {
+      this.dealList = response['data'];
+      console.log(this.dealList)
+      },(error) => {});
+  }
+
   clickOnTab(tabName) {
     document.getElementById('home_banner').style.position = 'relative';
     document.getElementById('home_banner').style.width = '100%';
     document.getElementById('home_banner').style.paddingBottom = '180px';
     if (tabName === 'flight') {
+      this.getDeal(1);
+
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
@@ -117,6 +132,7 @@ export class HomeComponent implements OnInit {
       //   document.getElementById('login_btn').style.background = '#FC7E66';
       // }
     } else if (tabName === 'hotel') {
+      this.getDeal(2);
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
@@ -125,6 +141,7 @@ export class HomeComponent implements OnInit {
       // }
     }
     else if (tabName === 'home-rentals') {
+      this.getDeal(3);
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
@@ -140,7 +157,6 @@ export class HomeComponent implements OnInit {
 
   setToString(newItem: string) {
     this.toString = newItem;
-    console.log('homecomponent',this.toString)
     this.homeService.setToString(newItem); 
   }
 

@@ -82,10 +82,10 @@
                                         panelStyleClass="calender-responsive-view laytrip-cal-view"  [readonlyInput]="true">
                                         <p-header class="calender-header" *ngIf="calPrices">
                                             <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
-                                            <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
-                                                <span class="green_var" *ngIf="lowMinPrice > 0">${{lowMinPrice}}</span>
-                                                <span class="yellow_var" *ngIf="midMinPrice > 0">${{midMinPrice}}</span>
-                                                <span class="red_var" *ngIf="highMinPrice > 0">${{highMinPrice}}</span>
+                                            <div class="calender_header_wrapper" [hidden]="isCalenderPriceLoading">
+                                                <span class="green_var" [hidden]="lowMinPrice == 0">${{lowMinPrice}}</span>
+                                                <span class="yellow_var" [hidden]="midMinPrice == 0">${{midMinPrice}}</span>
+                                                <span class="red_var" [hidden]="highMinPrice == 0">${{highMinPrice}}</span>
                                             </div>
                                         </p-header>
 
@@ -102,6 +102,7 @@
                                         [minDate]="flightDepartureMinDate"
                                         panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender" [numberOfMonths]="2"
                                         (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
+                                       
                                     </p-calendar>
                                     <!-- <div class="prev-next">
                                         <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>
