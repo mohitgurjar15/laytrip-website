@@ -252,6 +252,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             // this.searchHotelInfo.check_out = this.checkOutDate;
         }
     };
+    FlightSearchWidgetComponent.prototype.ngAfterViewChecked = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.isCalenderPriceLoading = false;
+        }, 2000);
+    };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
         this.isCalenderPriceLoading = true;
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
@@ -265,8 +271,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.getMinimumPricesList(this.calenderPrices);
         var event = { "month": m, "year": y };
         if (price) {
-            this.isCalenderPriceLoading = false;
-            console.log(this.isCalenderPriceLoading);
+            // this.isCalenderPriceLoading = false;
             if (price.secondary_start_price > 0) {
                 if (price.secondary_start_price < 5) {
                     return '5.00';

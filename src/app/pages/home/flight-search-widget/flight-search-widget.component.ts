@@ -309,6 +309,11 @@ export class FlightSearchWidgetComponent implements OnInit {
       // this.searchHotelInfo.check_out = this.checkOutDate;
     }
   }
+  ngAfterViewChecked(){
+    setTimeout(() => {
+      this.isCalenderPriceLoading = false;
+    }, 2000);
+  }
 
   getPrice(d,m,y){
    this.isCalenderPriceLoading = true;
@@ -324,8 +329,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.getMinimumPricesList(this.calenderPrices);
     var event = {"month":m,"year":y};
     if(price){
-      this.isCalenderPriceLoading = false;
-      console.log(this.isCalenderPriceLoading)
+      // this.isCalenderPriceLoading = false;
+      
       if(price.secondary_start_price>0){
         if(price.secondary_start_price<5){
           return '5.00';
@@ -396,8 +401,9 @@ export class FlightSearchWidgetComponent implements OnInit {
 
         if(GivenDate > CurrentDate || CurrentDate < new Date(startDate)){
           this.lowMinPrice= this.highMinPrice = this.midMinPrice = 0;
-            this.isCalenderPriceLoading = this.calPrices = true;
-            this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+          this.isCalenderPriceLoading = this.calPrices = true;
+            
+          this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
               this.calenderPrices = [...this.calenderPrices,...res];
               this.getMinimumPricesList(this.calenderPrices);
 
