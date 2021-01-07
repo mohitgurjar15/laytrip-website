@@ -424,8 +424,14 @@ export class FlightSearchWidgetComponent implements OnInit {
     if(prices.length > 0){    
       let values  = prices.map(function(v) {
         if(v.secondary_start_price > 0 ){
+          if(v.secondary_start_price < 5){
+            return '5.00';
+          }
           return v.secondary_start_price;
         } else {
+          if(v.price < 5){
+            return '5.00';
+          }
           return v.price;
         }
       });
