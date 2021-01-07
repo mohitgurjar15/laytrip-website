@@ -311,8 +311,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   getPrice(d,m,y){
-   
-
+   this.isCalenderPriceLoading = true;
     this.lowMinPrice= this.midMinPrice = this.highMinPrice = 0;      
     this.currentMonth = m ==1 ? '0'+m : m;
     this.currentYear = y;
@@ -325,6 +324,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.getMinimumPricesList(this.calenderPrices);
     var event = {"month":m,"year":y};
     if(price){
+      this.isCalenderPriceLoading = false;
+      console.log(this.isCalenderPriceLoading)
       if(price.secondary_start_price>0){
         if(price.secondary_start_price<5){
           return '5.00';
