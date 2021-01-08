@@ -29,6 +29,7 @@
         }
 
         .ng-select-container {
+            display: flex !important;
             .ng-value-container {
                 .ng-placeholder {
                     padding: 0 15px;
@@ -237,7 +238,7 @@ ngb-datepicker {
                     font-size: 14px;
                     color: $text-grey;
                     position: relative;
-                    padding: 0 20px;
+                    padding: 0 20px 0 0;
                     cursor: pointer;
         
                     span {
@@ -286,7 +287,9 @@ ngb-datepicker {
                     padding: 15px;
                     border: 1px solid #E0E2E5;
                     border-radius: 5px;
-                    z-index: 99;
+                    z-index: 1021;
+                    max-height: 500px;
+                    overflow-y: auto;
         
                     &:before {
                         width: 0;
@@ -296,7 +299,7 @@ ngb-datepicker {
                         border-bottom: 9px solid $background-white;
                         position: absolute;
                         top: -9px;
-                        left: 21px;
+                        left: 91px;
                         content: '';
                         z-index: 2;
                     }
@@ -309,10 +312,14 @@ ngb-datepicker {
                         border-bottom: 10px solid #E0E2E5;
                         position: absolute;
                         top: -10px;
-                        left: 20px;
+                        left: 90px;
                         content: '';
                     }
                     .rooms_aloc {
+                        margin-top: 10px;
+                        &:first-child{
+                            margin: 0;
+                        }
                         &.marign_rooms {
                             margin-top: 10px;
                             border-top: 1px solid $box-border-color;
@@ -571,6 +578,7 @@ ngb-datepicker {
                     justify-content: space-between;
                     position: relative;
                     width: 60%;
+                    padding-left: 0;
 
                     @include ipad-view {
                         width: 100%;
@@ -1431,6 +1439,12 @@ ngb-datepicker {
 .hotels {
     &.search_result {
         padding: 30px 0 40px;
+        margin-top: 30px;
+        .hotel_detail_sidebar {
+            &.sticky-top{
+                top: 70px;
+            }
+        }
     }
     &.modify_search {
         width: 100%;
@@ -2309,6 +2323,7 @@ ngb-datepicker {
 
         .short_by {
             width: 100%;
+            margin-top: 20px;
 
             .block_inn {
                 width: 100%;
@@ -2336,38 +2351,39 @@ ngb-datepicker {
                 .accordion-group {
                     background: $background-white;
                     border: 1px solid $box-border-color;
-                    border-radius: 3px;
-
-                    .accordion-heading {
+                    border-radius: 35px;
+                    .accordion-heading{
                         padding: 20px 15px;
+                        display: flex;
+                        align-items: center;
 
                         .accordion-toggle {
-                            font-size: 16px;
-                            color: $text-black;
+                            font-size: 20px;
+                            color: $text-grey;
                             font-weight: 500;
                             width: 100%;
                             display: block;
 
-                            &:after {
-                                font-family: "FontAwesome";
-                                content: "\f054";
-                                float: right;
-                                color: $text-grey;
-                                font-weight: normal;
-                                transition: 0.3s;
-                            }
+                            // &:after {
+                            //     font-family: "FontAwesome";
+                            //     content: "\f054";
+                            //     float: right;
+                            //     color: $text-grey;
+                            //     font-weight: normal;
+                            //     transition: 0.3s;
+                            // }
                         }
                     }
 
-                    &.active {
-                        .accordion-heading {
-                            .accordion-toggle {
-                                &:after {
-                                    content: "\f078";
-                                }
-                            }
-                        }
-                    }
+                    // &.active {
+                    //     .accordion-heading {
+                    //         .accordion-toggle {
+                    //             &:after {
+                    //                 content: "\f078";
+                    //             }
+                    //         }
+                    //     }
+                    // }
 
                     .accordion-body {
                         .block_cmn {
@@ -2920,6 +2936,46 @@ ngb-datepicker {
                     }
                 }
             }
+
+            .block_shortby{
+                .accordion-group{
+                    background: $background-white;
+                    border: 1px solid $box-border-color;
+                    border-radius: 35px;
+                    .accordion-heading{
+                        padding: 20px 15px;
+                        display: flex;
+                        align-items: center;
+                       .accordion-toggle{
+                            font-size: 20px;
+                            color: $text-grey;
+                            font-weight: 500;
+                            width: 100%;
+                            display: block;
+                       }
+                       &:after {
+                            font-family: 'FontAwesome';
+                            content: "\f054";
+                            float: right;
+                            color: $text-grey;
+                            font-weight: normal;
+                            transition: 0.3s;
+                        }
+                        .anchor_link{
+                            color: $text_light_yellow;
+                            font-size: 16px;
+                            margin-right: 10px;
+                        }
+                    }
+                    &.active {
+                        .accordion-heading {
+                            &:after {
+                                content: "\f078";
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -2928,60 +2984,63 @@ ngb-datepicker {
         display: flex;
         justify-content: space-between;
         margin-bottom: 18px;
-        .block_result_found {
-            
-            background: $background-white;
-            border: 1px solid $box-border-color;
-            border-radius: 8px;
-            margin: 0;
-            text-align: center;
-            position: relative;
-            display: flex;
-            padding: 10px 20px;
-            justify-content: flex-start;
-
-            // &:after {
-            //     width: 0;
-            //     height: 0;
-            //     border-left: 10px solid transparent;
-            //     border-right: 10px solid transparent;
-            //     border-top: 10px solid $box-border-color;
-            //     position: absolute;
-            //     bottom: -15px;
-            //     left: 50%;
-            //     transform: translate(-50%, -50%);
-            //     content: "";
-            // }
-
-            // &:before {
-            //     width: 0;
-            //     height: 0;
-            //     border-left: 9px solid transparent;
-            //     border-right: 9px solid transparent;
-            //     border-top: 9px solid $background-white;
-            //     position: absolute;
-            //     bottom: -12px;
-            //     left: 50%;
-            //     transform: translate(-50%, -50%);
-            //     content: "";
-            //     z-index: 2;
-            // }
-
-            p {
-                font-size: 16px;
-                font-weight: 500;
-                color: $text-grey;
-                margin: 0 0 2px;
-            }
-
-            span {
-                font-size: 20px;
-                font-weight: 600;
-                color: $text-black;
-                margin-left: 10px;
-                margin-bottom: 3px;
+        .hotel-counter-wrapper{
+            flex: 1;
+            .block_result_found {
+                background: $background-white;
+                border: 1px solid $box-border-color;
+                border-radius: 8px;
+                margin: 0;
+                align-items: center;
+                position: relative;
+                display: flex;
+                padding: 10px 20px;
+                justify-content: flex-start;
+    
+                // &:after {
+                //     width: 0;
+                //     height: 0;
+                //     border-left: 10px solid transparent;
+                //     border-right: 10px solid transparent;
+                //     border-top: 10px solid $box-border-color;
+                //     position: absolute;
+                //     bottom: -15px;
+                //     left: 50%;
+                //     transform: translate(-50%, -50%);
+                //     content: "";
+                // }
+    
+                // &:before {
+                //     width: 0;
+                //     height: 0;
+                //     border-left: 9px solid transparent;
+                //     border-right: 9px solid transparent;
+                //     border-top: 9px solid $background-white;
+                //     position: absolute;
+                //     bottom: -12px;
+                //     left: 50%;
+                //     transform: translate(-50%, -50%);
+                //     content: "";
+                //     z-index: 2;
+                // }
+    
+                p {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $text-grey;
+                    margin: 0 0 2px;
+                }
+    
+                span {
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: $text-black;
+                    margin-left: 10px;
+                    margin-bottom: 3px;
+                }
             }
         }
+        
 
         button {
             background-color: $background-white;

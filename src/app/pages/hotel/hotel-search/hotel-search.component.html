@@ -15,21 +15,21 @@
 <app-hotel-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-hotel-error>
 
 <section class="search_result hotels" *ngIf="!loading && !isNotFound && errorMessage==''">
-  <div class="container pl-0 pr-0">
+  <div class="container">
     <div class="row">
       <div class="col-lg-3">
         <div class="sticky-top left_side_bar">
-          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
           <div class="filter_saidbar">
             <div class="filter_by d-none d-lg-block">
-              <div class="block_inn">
+              <!-- <div class="block_inn">
                 <h4>Filter By</h4>
                 <a class="anchor_link" (click)="resetFilter()">Reset</a>
-              </div> 
+              </div>  -->
               <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain" (filterHotel)="filterHotel($event)"
                 isResetFilter={{isResetFilter}}></app-filter-hotel>
             </div>
           </div>
+          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
         </div>
       </div>
       <div class="col-lg-9">

@@ -207,6 +207,15 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       $("body").removeClass('overflow-hidden');
     });
     //Close REsponsive Fliter js
+
+    // Start filter Shortby js
+    $(document).on('show', '#accordion3', function (e) {
+      $(e.target).prev('.accordion-heading').addClass('accordion-opened');
+    });
+
+    $(document).on('hide', '#accordion3', function (e) {
+      $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
+    });
   }
 
 
