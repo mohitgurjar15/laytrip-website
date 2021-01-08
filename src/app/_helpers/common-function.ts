@@ -68,7 +68,7 @@ export class CommonFunction {
     convertDateFormat(date, sourceFormat, languageCode = null) {
 
         if (languageCode == null) {
-            return moment(date, sourceFormat).format('DD MMM YYYY')
+            return moment(date, sourceFormat).format('MMM DD YYYY')
         }
         return date;
     }
