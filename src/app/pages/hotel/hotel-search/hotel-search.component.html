@@ -2,9 +2,9 @@
 
 <div class="search_tab_listing_wrapper">
   <div class="container">
-      <div class="searchbar_box_common">
-          <app-hotel-search-widget></app-hotel-search-widget>
-      </div>
+    <div class="searchbar_box_common">
+      <app-hotel-search-widget></app-hotel-search-widget>
+    </div>
   </div>
 </div>
 
@@ -19,17 +19,17 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="sticky-top left_side_bar">
+          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
           <div class="filter_saidbar">
             <div class="filter_by d-none d-lg-block">
               <!-- <div class="block_inn">
                 <h4>Filter By</h4>
                 <a class="anchor_link" (click)="resetFilter()">Reset</a>
               </div>  -->
-              <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain" (filterHotel)="filterHotel($event)"
-                isResetFilter={{isResetFilter}}></app-filter-hotel>
+              <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
+                (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
             </div>
           </div>
-          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
         </div>
       </div>
       <div class="col-lg-9">
@@ -43,7 +43,8 @@
             Map view
           </button>
         </div> -->
-        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelToken]="hotelToken" [hotelDetails]="hotelDetails"></app-hotel-item-wrapper>
+        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelToken]="hotelToken" [hotelDetails]="hotelDetails">
+        </app-hotel-item-wrapper>
       </div>
     </div>
   </div>
