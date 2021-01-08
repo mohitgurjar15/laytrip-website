@@ -1,12 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input,  SimpleChanges } from '@angular/core';
+import { FormGroup, FormBuilder,  FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FlightService } from '../../services/flight.service';
-import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
-import { CookieService } from 'ngx-cookie';
-import { ToastrService } from 'ngx-toastr';
 import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../_helpers/custom.validators';
 import { NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../_helpers/ngbDateCustomParserFormatter';
@@ -25,37 +21,101 @@ export class TravelerFormComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() travelerType:string;
   @Input() traveler;
+  @Input() travelers;
   travelerForm: FormGroup;
+  traveler_number;
+  fields;
   
   constructor(
     private formBuilder: FormBuilder,
-    private flightService: FlightService,
     public router: Router,
     public commonFunction: CommonFunction,
-    private cookieService: CookieService,
-    private toastr: ToastrService,
-    private ngbDateParserFormatter: NgbDateParserFormatter,
     config: NgbDatepickerConfig,
     private checkOutService:CheckOutService
   ) { }
 
   ngOnInit() {
-      
+
+    this.fields = {
+      type: {
+        users: [
+          {
+            first_name: '',
+            last_name: '',
+            email: '',
+            phone_number:'',
+            dob:'',
+            country:'',
+            gender:''
+          },
+          {
+            first_name: '',
+            last_name: '',
+            email: '',
+            phone_number:'',
+            dob:'',
+            country:'',
+            gender:''
+          }
+        ]
+      }
+    };
+
     this.travelerForm = this.formBuilder.group({
+      type: this.formBuilder.group({
+        users: this.formBuilder.array([])
+      })
+    });
+    this.patch();
+    /* this.travelerForm = this.formBuilder.group({
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
         phone_number: ['', [Validators.required, Validators.maxLength(4)]],
         gender: ['', [Validators.required, Validators.maxLength(20)]],
         email: ['', Validators.required]
-    });
+    }); */
+
+    this.checkOutService.getTravelerNumber.subscribe(number=>{ 
+      console.log("Number",number) 
+      this.traveler_number=number;
+      this.checkOutService.getTraveler.subscribe((traveler:any)=>{
+        console.log(traveler,"Trvaler")
+        this.fields.type.users[this.traveler_number].first_name=traveler.firstName;
+        console.log(this.fields,"this.fields")
+        //this.patch()
+      })
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['traveler']) {
-      this.traveler= changes['traveler'].currentValue;
+      /* this.traveler= changes['traveler'].currentValue;
       this.travelerForm.controls.first_name.setValue(this.traveler.firstName)
       this.travelerForm.controls.last_name.setValue(this.traveler.lastName)
-      this.travelerForm.controls.email.setValue(this.traveler.email)
+      this.travelerForm.controls.email.setValue(this.traveler.email) */
     }
+  }
+
+  patch() {
+    const control = <FormArray>this.travelerForm.get('type.users');
+    this.fields.type.users.forEach(x => {
+      control.push(this.patchValues(x))
+    })
+  }
+
+  patchValues(x) {
+    return this.formBuilder.group({
+      first_name: [x.first_name],
+      last_name: [x.last_name],
+      email: [x.email],
+      phone_number: [x.phone_number],
+      dob: [x.dob],
+      country:[x.country],
+      gender:[x.gender]
+    })
+  }
+
+  submit(value){
+    console.log("value",value)
   }
 }

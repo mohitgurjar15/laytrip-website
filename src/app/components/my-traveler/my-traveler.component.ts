@@ -14,6 +14,8 @@ export class MyTravelerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkOutService.getTravelers.subscribe(travelers => this.travelers=travelers)
+    
   }
 
   chooseTraveler(userId){
@@ -24,11 +26,7 @@ export class MyTravelerComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes123",changes)
-    if (changes['travelers']) {
-      this.travelers = changes['travelers'].currentValue;
-      
-    }
+    
   }
 
   

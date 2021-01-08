@@ -15,14 +15,10 @@ export class PaymentModeComponent implements OnInit {
   @Output() selectInstalmentMode = new EventEmitter();
   @Output() redeemableLayCredit = new EventEmitter();
   @Output() getInstalmentData = new EventEmitter<{
-    additionalAmount:number,
     instalmentType:string,
-    customAmount:number,
-    customInstalment:number,
     layCreditPoints:number,
-    partialPaymentAmount:number,
-    payNowAmount:number,
-    firstInstalment:number
+    instalments:[],
+    remainingAmount:number
   }>(); 
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
@@ -124,9 +120,16 @@ export class PaymentModeComponent implements OnInit {
           }
           this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
         }
+
+        this.getInstalmentData.emit({
+          layCreditPoints :this.laycreditpoints,
+          instalmentType: this.instalmentType,
+          instalments:this.instalments,
+          remainingAmount:this.remainingAmount
+        })
       },(err)=>{
 
-    })
+      })
   }
 
   ngOnChanges(changes: SimpleChanges) {
