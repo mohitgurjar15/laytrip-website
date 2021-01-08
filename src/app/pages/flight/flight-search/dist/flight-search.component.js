@@ -85,6 +85,18 @@ var FlightSearchComponent = /** @class */ (function () {
                 }
                 _this.loading = false;
             });
+            this.dates = [];
+            this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe(function (res) {
+                if (res) {
+                    _this.flexibleLoading = false;
+                    _this.flexibleNotFound = false;
+                    _this.dates = res;
+                }
+            }, function (err) {
+                _this.flexibleNotFound = true;
+                _this.flexibleLoading = false;
+            });
+            this.getCalenderPrice(payload);
         }
         else {
             this.flightService.getFlightSearchResult(payload).subscribe(function (res) {
