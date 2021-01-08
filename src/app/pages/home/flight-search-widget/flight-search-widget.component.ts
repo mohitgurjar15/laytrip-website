@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+declare var $: any;
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -108,6 +109,12 @@ export class FlightSearchWidgetComponent implements OnInit {
   
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    $("#search_large_btn").hover(
+      function () {
+        $('.norm_btn').toggleClass("d-none");
+        $('.hover_btn').toggleClass("show");
+      }
+    );
     this.homeService.getToString.subscribe(toSearchString=>{
       if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
         let keys : any = toSearchString;

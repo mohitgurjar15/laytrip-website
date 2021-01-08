@@ -78,7 +78,7 @@
             padding: 10px 25px;
             background: $hotel-secondary-color;
             border-radius: 25px;
-            border: none;
+            border: 1px solid $hotel-secondary-color;
             font-size: 18px;
             color: $text-white;
             transition: 0.3s;
@@ -86,7 +86,7 @@
             z-index: 9;
             overflow: hidden;
             white-space: normal;
-    
+            
     
             &::before {
                 content: "";
@@ -95,13 +95,15 @@
                 left: 0;
                 width: 100%;
                 height: 0%;
-                background: $active-tab-text;
+                background: $background-white;
                 z-index: -1;
                 transition: 0.8s;
                 border-radius: 0 0 50% 50%;
             }
     
             &:hover {
+                border: 1px solid $hotel-secondary-color;
+                color: $hotel-secondary-color;
                 &:before {
                     height: 190%;
                 }

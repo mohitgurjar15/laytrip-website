@@ -1,14 +1,16 @@
 <div class="flight_tab">
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('onway')">
+            <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway"
+                (click)="toggleOnewayRoundTrip('onway')">
                 <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg" alt="Oneway Icon" /> -->
                 <span>{{'oneway' | translate}}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
+            <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway"
+                (click)="toggleOnewayRoundTrip('roundtrip')">
                 <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
                 <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg" alt="Return Icon" /> -->
                 <span>{{'round_trip' | translate}}</span>
@@ -49,8 +51,10 @@
                             <div class="flight_form"
                                 [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
                                 <div class="search_area">
-                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'" [label]="'from' | translate" [placeHolder]=fromSearch.city [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch [defaultCity]=fromSearch.city
-                                        (changeValue)="destinationChangedValue($event)">
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
+                                        [id]="'fromSearch'" [label]="'from' | translate" [placeHolder]=fromSearch.city
+                                        [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch
+                                        [defaultCity]=fromSearch.city (changeValue)="destinationChangedValue($event)">
                                     </app-search-airport>
                                 </div>
                             </div>
@@ -64,7 +68,10 @@
                             <div class="flight_to"
                                 [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
                                 <div class="search_area">
-                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'" [label]="'to' | translate" [placeHolder]=toSearch.city [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]=toSearch.city (changeValue)="destinationChangedValue($event)">
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'"
+                                        [id]="'toSearch'" [label]="'to' | translate" [placeHolder]=toSearch.city
+                                        [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]=toSearch.city
+                                        (changeValue)="destinationChangedValue($event)">
                                     </app-search-airport>
                                 </div>
                             </div>
@@ -79,20 +86,25 @@
                                         flightDepartureMinDate [minDate]="flightDepartureMinDate"
                                         (onSelect)=departureDateUpdate($event) [readonlyInput]="true"
                                         (onMonthChange)="changeMonth($event)"
-                                        panelStyleClass="calender-responsive-view laytrip-cal-view"  [readonlyInput]="true">
+                                        panelStyleClass="calender-responsive-view laytrip-cal-view"
+                                        [readonlyInput]="true">
                                         <p-header class="calender-header" *ngIf="calPrices">
                                             <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
-                                                <span class="green_var" [hidden]="lowMinPrice == 0">${{lowMinPrice}}</span>
-                                                <span class="yellow_var" [hidden]="midMinPrice == 0">${{midMinPrice}}</span>
-                                                <span class="red_var" [hidden]="highMinPrice == 0">${{highMinPrice}}</span>
+                                                <span class="green_var"
+                                                    [hidden]="lowMinPrice == 0">${{lowMinPrice}}</span>
+                                                <span class="yellow_var"
+                                                    [hidden]="midMinPrice == 0">${{midMinPrice}}</span>
+                                                <span class="red_var"
+                                                    [hidden]="highMinPrice == 0">${{highMinPrice}}</span>
                                             </div>
                                         </p-header>
 
                                         <ng-template pTemplate="date" let-date>
-                                            <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high'}"
-                                            >{{date.day}}</span>
-                                            <span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
+                                            <span class="c_date"
+                                                [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high'}">{{date.day}}</span>
+                                            <span class="calender_price">{{ getPrice(date.day,date.month,date.year)
+                                                }}</span>
                                         </ng-template>
                                     </p-calendar>
 
@@ -100,9 +112,9 @@
                                         selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate
                                         [minDate]="flightDepartureMinDate"
-                                        panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender" [numberOfMonths]="2"
-                                        (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
-                                       
+                                        panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender"
+                                        [numberOfMonths]="2" (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
+
                                     </p-calendar>
                                     <!-- <div class="prev-next">
                                         <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>
@@ -131,8 +143,10 @@
                         <li class="grid_box third">
 
                             <div class="serch_btn">
-                                <button> <img src="{{s3BucketUrl}}assets/images/search_icon.svg"
-                                        alt="search_icon" /></button>
+                                <button id="search_large_btn"> 
+                                    <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" class="norm_btn" />
+                                    <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="search_icon" class="hover_btn" />
+                                </button>
                             </div>
                         </li>
                     </ul>

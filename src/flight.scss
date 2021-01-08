@@ -3614,28 +3614,15 @@
 								display: block;
 								outline: none;
 								padding: 20px 15px;
-
-								&:after {
-									font-family: 'FontAwesome';
-									content: "\f054";
-									float: right;
-									color: $text-grey;
-									font-weight: normal;
-								}
 							}
 							&:after {
-								
-								content: "";
-								
+								content: "\f054";
 							}
 						}
-
 						&.active {
 							.accordion-heading {
-								.accordion-toggle {
-									&:after {
-										content: "\f078";
-									}
+								&:after {
+									content: "\f078";
 								}
 							}
 						}
