@@ -3329,15 +3329,6 @@
 						font-weight: 500;
 						width: 100%;
 						display: block;
-
-						// &:after {
-						// 	font-family: 'FontAwesome';
-						// 	content: "\f054";
-						// 	float: right;
-						// 	color: $text-grey;
-						// 	font-weight: normal;
-						// 	transition: 0.3s;
-						// }
 					}
 					&:after {
 						font-family: 'FontAwesome';
@@ -3351,19 +3342,6 @@
 						color: $text_light_yellow;
 						font-size: 16px;
     					margin-right: 10px;
-					}
-				}
-
-				&.active {
-					.accordion-heading {
-							&:after {
-								content: "\f078";
-							}
-						.accordion-toggle {
-							// &:after {
-							// 	content: "\f078";
-							// }
-						}
 					}
 				}
 
@@ -3797,10 +3775,10 @@
 									height: 9px;
 									border-radius: 2px;
 									border: solid $text_light_yellow;
-									border-top-width: medium;
-									border-right-width: medium;
-									border-bottom-width: medium;
-									border-left-width: medium;
+									// border-top-width: medium;
+									// border-right-width: medium;
+									// border-bottom-width: medium;
+									// border-left-width: medium;
 									border-width: 0 2px 2px 0;
 									transform: rotate(45deg);
 									-webkit-transform: rotate(45deg);
@@ -4175,10 +4153,10 @@
 													height: 9px;
 													border-radius: 2px;
 													border: solid $pink_clr;
-													border-top-width: medium;
-													border-right-width: medium;
-													border-bottom-width: medium;
-													border-left-width: medium;
+													// border-top-width: medium;
+													// border-right-width: medium;
+													// border-bottom-width: medium;
+													// border-left-width: medium;
 													border-width: 0 2px 2px 0;
 													transform: rotate(45deg);
 													-webkit-transform: rotate(45deg);
@@ -4680,10 +4658,10 @@
 											height: 9px;
 											border-radius: 2px;
 											border: solid $pink_clr;
-											border-top-width: medium;
-											border-right-width: medium;
-											border-bottom-width: medium;
-											border-left-width: medium;
+											// border-top-width: medium;
+											// border-right-width: medium;
+											// border-bottom-width: medium;
+											// border-left-width: medium;
 											border-width: 0 2px 2px 0;
 											transform: rotate(45deg);
 											-webkit-transform: rotate(45deg);
@@ -6587,10 +6565,10 @@
 														height: 9px;
 														border-radius: 2px;
 														border: solid $pink_clr;
-														border-top-width: medium;
-														border-right-width: medium;
-														border-bottom-width: medium;
-														border-left-width: medium;
+														// border-top-width: medium;
+														// border-right-width: medium;
+														// border-bottom-width: medium;
+														// border-left-width: medium;
 														border-width: 0 2px 2px 0;
 														transform: rotate(45deg);
 														-webkit-transform: rotate(45deg);
@@ -6890,10 +6868,10 @@
 												height: 9px;
 												border-radius: 2px;
 												border: solid $secondary-color;
-												border-top-width: medium;
-												border-right-width: medium;
-												border-bottom-width: medium;
-												border-left-width: medium;
+												// border-top-width: medium;
+												// border-right-width: medium;
+												// border-bottom-width: medium;
+												// border-left-width: medium;
 												border-width: 0 2px 2px 0;
 												transform: rotate(45deg);
 												-webkit-transform: rotate(45deg);
@@ -7686,10 +7664,10 @@
 									height: 9px;
 									border-radius: 2px;
 									border: solid $pink_clr;
-									border-top-width: medium;
-									border-right-width: medium;
-									border-bottom-width: medium;
-									border-left-width: medium;
+									// border-top-width: medium;
+									// border-right-width: medium;
+									// border-bottom-width: medium;
+									// border-left-width: medium;
 									border-width: 0 2px 2px 0;
 									transform: rotate(45deg);
 									-webkit-transform: rotate(45deg);
