@@ -4,12 +4,12 @@
         <a class="anchor_link" (click)="resetSorting('selling_price','ASC')"> {{'reset' | translate}}</a>
     </div> -->
     <div class="accordion block_shortby" id="accordion2">
-        <div class="accordion-group" >
-            <div class="accordion-heading">
+        <div class="accordion-group" [ngClass]="{'active': is_open === true}">
+            <div class="accordion-heading" (click)="toggleFilter()">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                    {{'sort_by' | translate}} 
+                    {{'filter_by' | translate}}
                 </a>
-                <a class="anchor_link" (click)="resetSorting('selling_price','ASC')"> {{'reset' | translate}}</a>
+                <a class="anchor_link" (click)="resetFilter()"> {{'reset' | translate}}</a>
             </div>
             <div id="collapseTwo" class="accordion-body collapse">
                 <div class="accordion-inner">

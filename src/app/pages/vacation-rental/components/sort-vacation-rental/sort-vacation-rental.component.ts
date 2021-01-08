@@ -17,15 +17,6 @@ export class SortVacationRentalComponent implements OnInit {
   sortType: string = 'lh_price';
   lowToHighToggle: boolean = false;
   locationName;
-   autoHeight() {
-    if (!this.contentWrapper) {
-      this.contentWrapper = document.querySelector(".ng-scroll-content");
-    }
-    if (this.scrollbar) {
-      this.scrollbar.nativeElement.style.height =
-        this.contentWrapper.clientHeight + "px";
-    }
-  }
   
   constructor(private route: ActivatedRoute) { 
 
