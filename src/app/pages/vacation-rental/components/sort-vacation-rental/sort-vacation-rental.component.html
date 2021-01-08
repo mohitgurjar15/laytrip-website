@@ -4,7 +4,7 @@
       <div class="block_inn">
          <h4>Sort by</h4> <a class="anchor_link" (click)="resetSorting('total','ASC')">Reset</a>
       </div>
-      <ng-scrollbar #scrollable track="all" (updated)="autoHeight()">
+      <ng-scrollbar #scrollable track="all">
          <div class="accordion block_shortby" id="accordion-shortby">
             <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
                <div class="accordion-heading" (click)="toggleLowToHigh()"> <a class="accordion-toggle"

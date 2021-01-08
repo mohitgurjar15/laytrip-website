@@ -12,7 +12,7 @@
             <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
                 <div class="accordion-heading" (click)="toggleLowToHigh()">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        {{'lowest_to_highest' | translate}}
+                        {{'sort_by' | translate}}
                     </a>
                     <a class="anchor_link" (click)="resetSorting('selling_price','ASC')"> {{'reset' | translate}}</a>
                 </div>

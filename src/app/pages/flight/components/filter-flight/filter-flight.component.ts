@@ -79,6 +79,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   };
 
   subscriptions: Subscription[] = [];
+  is_open : boolean = false;
 
 
   constructor(
@@ -151,8 +152,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     this.loadJquery();
   }
 
-  
-
   toggleOutbound() {
     this.isShowoutbound = !this.isShowoutbound;
   }
@@ -216,8 +215,39 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     this.showMinAirline = (type === 'more') ? 500 : 4;
   }
 
-  resetSorting(key,order) {
+  toggleFilter() {
+    this.is_open = !this.is_open;
+  }
 
+  resetFilter() {
+    this.minPrice = this.filterFlightDetails.price_range.min_price;
+    this.maxPrice = this.filterFlightDetails.price_range.max_price;
+    this.airLines = [];
+    this.minPartialPaymentPrice = 0;
+    this.maxPartialPaymentPrice = 0;
+    this.outBoundDepartureTimeRangeSlots = [];
+    this.outBoundArrivalTimeRangeSlots = [];
+    this.inBoundDepartureTimeRangeSlots = [];
+    this.inBoundArrivalTimeRangeSlots = [];
+    this.outBoundStops = [];
+    this.inBoundStops = [];
+
+    //Reset Price
+    this.priceSlider.reset({ price: [Math.floor(this.filterFlightDetails.price_range.min_price), Math.ceil(this.filterFlightDetails.price_range.max_price)] });
+
+    //Reset partial payment
+    this.partialPriceSlider.reset({ partial_price: [Math.floor(this.filterFlightDetails.partial_payment_price_range.min_price), Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price)] });
+
+    //Reset airlines
+    if (typeof this.airlineList != 'undefined' && this.airlineList.length) {
+
+      this.airlineList.forEach(element => {
+        return element.isChecked = false;
+      });
+    }
+
+    $("input:checkbox").prop('checked', false);
+    this.filterFlights();
   }
 
 
