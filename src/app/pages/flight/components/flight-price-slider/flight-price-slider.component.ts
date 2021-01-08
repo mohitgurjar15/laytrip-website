@@ -16,6 +16,7 @@ export class FlightPriceSliderComponent implements OnInit {
   ​flexibleNotFound:boolean=false;
   departureDate:string;
   departure_date:string;
+  arrivalDate:string;
   trip:string;
   departure:string;
   arrival:string;
@@ -33,6 +34,10 @@ export class FlightPriceSliderComponent implements OnInit {
     this.departureDate = this.route.snapshot.queryParams['departure_date'];
     this.departureDate = this.commonFunction.convertDateFormat(this.departureDate,'YYYY-MM-DD')
     this.trip      = this.route.snapshot.queryParams['trip'];
+    if(this.trip == 'roundtrip'){
+      this.arrivalDate = this.route.snapshot.queryParams['arrival_date'];
+      this.arrivalDate = this.commonFunction.convertDateFormat(this.arrivalDate,'YYYY-MM-DD')
+    }
     this.departure = this.route.snapshot.queryParams['departure'];
     this.arrival = this.route.snapshot.queryParams['arrival'];
     this.class = this.route.snapshot.queryParams['class'];
@@ -109,7 +114,7 @@ export class FlightPriceSliderComponent implements OnInit {
         result.push(this.dates[i])
     }
     
-     for(let i=0; i < targetIndex; i++){
+    for(let i=0; i < targetIndex; i++){
         result.push(this.dates[i])
     }
     this.dates = result;
@@ -130,5 +135,10 @@ export class FlightPriceSliderComponent implements OnInit {
       price = item.price
     }
     return price;
+  }
+
+  getFlexibleArivalDate(date){
+    var arrivalDate = moment(date, "DD/MM/YYYY").add(3, 'days');
+    return this.commonFunction.convertDateFormat(arrivalDate,"DD/MM/YYYY");
   }
 }

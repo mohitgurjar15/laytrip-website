@@ -99,6 +99,19 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
         this.loading = false;
       });
+      this.dates = [];
+      this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
+        if (res) {
+          this.flexibleLoading = false;
+          this.flexibleNotFound = false;
+          this.dates = res;
+        }
+      }, err => {
+        this.flexibleNotFound = true;
+        this.flexibleLoading = false;
+      });
+
+      this.getCalenderPrice(payload)
     } else {
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {

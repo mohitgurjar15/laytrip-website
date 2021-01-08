@@ -127,6 +127,16 @@ export class FlightService {
             catchError(this.handleError)
         );
     }
+    getFlightFlexibleDatesRoundTrip(data) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
+        const url = environment.apiUrl + `v1/flight/flexible-day-rate-for-round-trip`;
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
+            catchError(this.handleError)
+        );
+    }
 
     getFlightCalenderDate(data) {
         let headers = {

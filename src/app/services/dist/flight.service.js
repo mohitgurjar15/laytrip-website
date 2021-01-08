@@ -89,6 +89,30 @@ var FlightService = /** @class */ (function () {
         var url = environment_1.environment.apiUrl + "v1/flight/search-oneway-flight";
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(operators_1.catchError(this.handleError));
     };
+    FlightService.prototype.getFlightFlexibleDates = function (data) {
+        var headers = {
+            currency: 'USD',
+            language: 'en'
+        };
+        var url = environment_1.environment.apiUrl + "v1/flight/flexible-day-rate";
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.getFlightFlexibleDatesRoundTrip = function (data) {
+        var headers = {
+            currency: 'USD',
+            language: 'en'
+        };
+        var url = environment_1.environment.apiUrl + "v1/flight/flexible-day-rate-for-round-trip";
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.getFlightCalenderDate = function (data) {
+        var headers = {
+            currency: 'USD',
+            language: 'en'
+        };
+        var url = environment_1.environment.apiUrl + "v1/flight/calender-day-rate";
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(operators_1.catchError(this.handleError));
+    };
     FlightService.prototype.getRoundTripFlightSearchResult = function (data) {
         var headers = {
             currency: 'USD',
@@ -104,6 +128,22 @@ var FlightService = /** @class */ (function () {
     FlightService.prototype.getFlightBookingDetails = function (bookingId) {
         return this.http.get(environment_1.environment.apiUrl + "v1/booking/booking-details/" + bookingId, this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.getPredictionDate = function (data) {
+        var headers = {
+            currency: 'USD',
+            language: 'en'
+        };
+        var url = environment_1.environment.apiUrl + "v1/flight/predicted-booking-date";
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.getSellingPrice = function (data) {
+        var url = environment_1.environment.apiUrl + "v1/flight/selling-price";
+        return this.http.post(url, data, this.commonFunction.setHeaders()).pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.sendEmail = function (data) {
+        var url = environment_1.environment.apiUrl + "v1/booking/share-booking-detail";
+        return this.http.post(url, data, this.commonFunction.setHeaders()).pipe(operators_1.catchError(this.handleError));
     };
     FlightService = __decorate([
         core_1.Injectable({
