@@ -47,7 +47,7 @@
   <div formGroupName="type">
 		<div formArrayName="users">
       <div id="accordion">
-        <div class="card" *ngFor="let child of travelerForm.get('type.users').controls; let x = index">
+        <div class="card" *ngFor="let child of travelerForm.get('type.users')['controls']; let x = index">
           <div class="card-header">
             <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" >
               Traveler {{x+1}}

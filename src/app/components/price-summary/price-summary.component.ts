@@ -8,7 +8,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 })
 export class PriceSummaryComponent implements OnInit {
 
-  @Input() priceSummary=[];
+  @Input() priceSummary;
   @Input() priceData=[];
   
   constructor(

@@ -10,7 +10,7 @@
           <span>Downpayment</span>
           <span>${{priceSummary.instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
         </div>
-        <div class="pay_listing" *ngIf="laycreditpoints>0">
+        <div class="pay_listing" *ngIf="priceSummary.layCreditPoints>0">
           <span>Applied Laytrip Points</span>
           <span>-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
         </div>
