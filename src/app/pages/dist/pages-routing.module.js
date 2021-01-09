@@ -9,9 +9,11 @@ exports.__esModule = true;
 exports.PagesRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var about_us_component_1 = require("./about-us/about-us.component");
 var cancellation_policy_component_1 = require("./cancellation-policy/cancellation-policy.component");
 var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
 var contact_us_component_1 = require("./contact-us/contact-us.component");
+var covid_page_component_1 = require("./covid-page/covid-page.component");
 var download_app_component_1 = require("./download-app/download-app.component");
 var faq_component_1 = require("./faq/faq.component");
 var pages_component_1 = require("./pages.component");
@@ -26,15 +28,23 @@ var routes = [
         children: [
             {
                 path: '',
-                loadChildren: './home/home.module#HomeModule'
+                loadChildren: function () { return Promise.resolve().then(function () { return require('./home/home.module'); }).then(function (m) { return m.HomeModule; }); }
             },
             {
                 path: 'flight',
-                loadChildren: './flight/flight.module#FlightModule'
+                loadChildren: function () { return Promise.resolve().then(function () { return require('./flight/flight.module'); }).then(function (m) { return m.FlightModule; }); }
+            },
+            {
+                path: 'hotel',
+                loadChildren: function () { return Promise.resolve().then(function () { return require('./hotel/hotel.module'); }).then(function (m) { return m.HotelModule; }); }
+            },
+            {
+                path: 'vacation-rental',
+                loadChildren: function () { return Promise.resolve().then(function () { return require('./vacation-rental/vacation-rental.module'); }).then(function (m) { return m.VacationRentalModule; }); }
             },
             {
                 path: 'account',
-                loadChildren: './user/user.module#UserModule'
+                loadChildren: function () { return Promise.resolve().then(function () { return require('./user/user.module'); }).then(function (m) { return m.UserModule; }); }
             },
             {
                 path: 'contact-us',
@@ -71,6 +81,14 @@ var routes = [
             {
                 path: 'sson',
                 component: sso_login_component_1.SsoLoginComponent
+            },
+            {
+                path: 'covid-19',
+                component: covid_page_component_1.CovidPageComponent
+            },
+            {
+                path: 'about',
+                component: about_us_component_1.AboutUsComponent
             },
         ]
     }

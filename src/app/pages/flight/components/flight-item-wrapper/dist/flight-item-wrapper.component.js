@@ -22,7 +22,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         this.genericService = genericService;
         this.animationState = 'out';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
         this.flightListArray = [];
         this.subscriptions = [];
         this.flightDetailIdArray = [];
@@ -36,6 +36,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         this.loadCancellationPolicy = false;
         this.isInstalmentAvailable = false;
         this.totalLaycreditPoints = 0;
+        this.showFareDetails = 0;
         this.isRoundTrip = false;
         this.subcell = '$100';
     }
@@ -80,7 +81,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
     };
     FlightItemWrapperComponent.prototype.toggleCancellationContent = function () {
         this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
-        console.log("this.loadMoreCancellationPolicy", this.loadMoreCancellationPolicy);
     };
     FlightItemWrapperComponent.prototype.ngAfterContentChecked = function () {
         var _this = this;
@@ -89,19 +89,27 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             _this.flightDetailIdArray.push(item.route_code);
         });
     };
-    FlightItemWrapperComponent.prototype.showDetails = function (index) {
+    FlightItemWrapperComponent.prototype.showDetails = function (index, flag) {
         var _this = this;
+        if (flag === void 0) { flag = null; }
         if (typeof this.showFlightDetails[index] === 'undefined') {
             this.showFlightDetails[index] = true;
         }
         else {
             this.showFlightDetails[index] = !this.showFlightDetails[index];
         }
+        if (flag == 'true') {
+            this.showFareDetails = 1;
+        }
+        else {
+            this.showFareDetails = 0;
+        }
         this.showFlightDetails = this.showFlightDetails.map(function (item, i) {
             return ((index === i) && _this.showFlightDetails[index] === true) ? true : false;
         });
     };
     FlightItemWrapperComponent.prototype.closeFlightDetail = function () {
+        this.showFareDetails = 0;
         this.showFlightDetails = this.showFlightDetails.map(function (item) {
             return false;
         });
@@ -120,11 +128,11 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
         sessionStorage.setItem('__route', JSON.stringify(route));
         console.log("this.isInstalmentAvailable", this.isInstalmentAvailable);
-        if (this.isInstalmentAvailable) {
+        if (this.isInstalmentAvailable || this.totalLaycreditPoints > 0) {
             this.router.navigate(["flight/payment/" + route.route_code]);
         }
         else {
-            this.router.navigate(["flight/travelers/" + route.route_code]);
+            this.router.navigate(["flight/checkout/" + route.route_code]);
         }
     };
     FlightItemWrapperComponent.prototype.checkInstalmentAvalability = function () {
