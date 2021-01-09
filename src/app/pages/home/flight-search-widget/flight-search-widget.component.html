@@ -92,11 +92,11 @@
                                             <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
                                                 <span class="green_var"
-                                                    [hidden]="lowMinPrice == 0">${{lowMinPrice}}</span>
+                                                    [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
                                                 <span class="yellow_var"
-                                                    [hidden]="midMinPrice == 0">${{midMinPrice}}</span>
+                                                    [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>
                                                 <span class="red_var"
-                                                    [hidden]="highMinPrice == 0">${{highMinPrice}}</span>
+                                                    [hidden]="getPriceLabel('highMinPrice') == 0">${{getPriceLabel('highMinPrice')}}</span>
                                             </div>
                                         </p-header>
 
