@@ -2323,7 +2323,7 @@ ngb-datepicker {
 
         .short_by {
             width: 100%;
-            margin-top: 20px;
+            //margin-top: 20px;
 
             .block_inn {
                 width: 100%;
@@ -2364,6 +2364,7 @@ ngb-datepicker {
                             width: 100%;
                             display: block;
                         }
+                        
                     }
 
                     &.active {
@@ -2954,6 +2955,13 @@ ngb-datepicker {
                             color: $text_light_yellow;
                             font-size: 16px;
                             margin-right: 10px;
+                        }
+                    }
+                    &.active {
+                        .accordion-heading {
+                            &:after {
+                                content: "\f078";
+                            }
                         }
                     }
                 }

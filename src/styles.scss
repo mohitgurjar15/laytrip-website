@@ -497,36 +497,36 @@ select {
 										top: 118%;
 										right: 0;
 										background: $background-white;
-										box-shadow: 0px 3px 15px $shadow-black;
+										//box-shadow: 0px 3px 15px $shadow-black;
 										padding: 15px;
 										border: 1px solid #E0E2E5;
-										border-radius: 5px;
+										border-radius: 0 0 5px 5px;
 										z-index: 99;
 
-										&:before {
-											width: 0;
-											height: 0;
-											border-left: 9px solid transparent;
-											border-right: 9px solid transparent;
-											border-bottom: 9px solid $background-white;
-											position: absolute;
-											top: -9px;
-											right: 16px;
-											content: '';
-											z-index: 2;
-										}
+										// &:before {
+										// 	width: 0;
+										// 	height: 0;
+										// 	border-left: 9px solid transparent;
+										// 	border-right: 9px solid transparent;
+										// 	border-bottom: 9px solid $background-white;
+										// 	position: absolute;
+										// 	top: -9px;
+										// 	right: 16px;
+										// 	content: '';
+										// 	z-index: 2;
+										// }
 
-										&:after {
-											width: 0;
-											height: 0;
-											border-left: 10px solid transparent;
-											border-right: 10px solid transparent;
-											border-bottom: 10px solid #E0E2E5;
-											position: absolute;
-											top: -10px;
-											right: 15px;
-											content: '';
-										}
+										// &:after {
+										// 	width: 0;
+										// 	height: 0;
+										// 	border-left: 10px solid transparent;
+										// 	border-right: 10px solid transparent;
+										// 	border-bottom: 10px solid #E0E2E5;
+										// 	position: absolute;
+										// 	top: -10px;
+										// 	right: 15px;
+										// 	content: '';
+										// }
 
 										.flight_cat {
 											width: 100%;
@@ -653,36 +653,36 @@ select {
 										top: 118%;
 										right: 0;
 										background: $background-white;
-										box-shadow: 0px 3px 15px $shadow-black;
+										//box-shadow: 0px 3px 15px $shadow-black;
 										padding: 15px;
 										border: 1px solid #E0E2E5;
-										border-radius: 5px;
+										border-radius: 0 0 5px 5px;
 										z-index: 99;
 
-										&:before {
-											width: 0;
-											height: 0;
-											border-left: 9px solid transparent;
-											border-right: 9px solid transparent;
-											border-bottom: 9px solid $background-white;
-											position: absolute;
-											top: -9px;
-											right: 16px;
-											content: '';
-											z-index: 2;
-										}
+										// &:before {
+										// 	width: 0;
+										// 	height: 0;
+										// 	border-left: 9px solid transparent;
+										// 	border-right: 9px solid transparent;
+										// 	border-bottom: 9px solid $background-white;
+										// 	position: absolute;
+										// 	top: -9px;
+										// 	right: 16px;
+										// 	content: '';
+										// 	z-index: 2;
+										// }
 
-										&:after {
-											width: 0;
-											height: 0;
-											border-left: 10px solid transparent;
-											border-right: 10px solid transparent;
-											border-bottom: 10px solid #E0E2E5;
-											position: absolute;
-											top: -10px;
-											right: 15px;
-											content: '';
-										}
+										// &:after {
+										// 	width: 0;
+										// 	height: 0;
+										// 	border-left: 10px solid transparent;
+										// 	border-right: 10px solid transparent;
+										// 	border-bottom: 10px solid #E0E2E5;
+										// 	position: absolute;
+										// 	top: -10px;
+										// 	right: 15px;
+										// 	content: '';
+										// }
 
 										ul {
 											margin: 0;
@@ -1004,7 +1004,11 @@ select {
 													width: 100%;
 													height: 100%;
 													padding: 10px 25px;
-													background: $hotel-secondary-color;
+													background-color: $hotel-secondary-color;
+													// background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_icon.svg);
+													// background-repeat: no-repeat;
+													// background-position: center;
+													background-size: 27px;
 													border-radius: 8px;
 													border: none;
 													font-size: 20px;
@@ -1014,9 +1018,19 @@ select {
 													z-index: 9;
 													overflow: hidden;
 													white-space: normal;
+													display: flex;
+													align-items: center;
+													justify-content: center;
 			
 													img {
 														max-height: 29px;
+														&.hover_btn{
+															display: none; 
+															&.show{
+																display: block;
+															}
+														}
+
 													}
 			
 													&::before {
@@ -1026,13 +1040,15 @@ select {
 														left: 0;
 														width: 100%;
 														height: 0%;
-														background: $active-tab-text;
+														background-color: $background-white;
 														z-index: -1;
 														transition: 0.8s;
 														border-radius: 0 0 50% 50%;
 													}
 			
 													&:hover {
+														// background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_pink.svg);
+														border: 1px solid $hotel-secondary-color;
 														&:before {
 															height: 190%;
 														}
@@ -1272,36 +1288,36 @@ select {
 								top: 118%;
 								right: 0;
 								background: $background-white;
-								box-shadow: 0px 3px 15px $shadow-black;
+								//box-shadow: 0px 3px 15px $shadow-black;
 								padding: 15px;
 								border: 1px solid #E0E2E5;
-								border-radius: 5px;
+								border-radius: 0 0 5px 5px;
 								z-index: 99;
 
-								&:before {
-									width: 0;
-									height: 0;
-									border-left: 9px solid transparent;
-									border-right: 9px solid transparent;
-									border-bottom: 9px solid $background-white;
-									position: absolute;
-									top: -9px;
-									right: 21px;
-									content: '';
-									z-index: 2;
-								}
+								// &:before {
+								// 	width: 0;
+								// 	height: 0;
+								// 	border-left: 9px solid transparent;
+								// 	border-right: 9px solid transparent;
+								// 	border-bottom: 9px solid $background-white;
+								// 	position: absolute;
+								// 	top: -9px;
+								// 	right: 21px;
+								// 	content: '';
+								// 	z-index: 2;
+								// }
 
-								&:after {
-									width: 0;
-									height: 0;
-									border-left: 10px solid transparent;
-									border-right: 10px solid transparent;
-									border-bottom: 10px solid #E0E2E5;
-									position: absolute;
-									top: -10px;
-									right: 20px;
-									content: '';
-								}
+								// &:after {
+								// 	width: 0;
+								// 	height: 0;
+								// 	border-left: 10px solid transparent;
+								// 	border-right: 10px solid transparent;
+								// 	border-bottom: 10px solid #E0E2E5;
+								// 	position: absolute;
+								// 	top: -10px;
+								// 	right: 20px;
+								// 	content: '';
+								// }
 
 								.flight_cat {
 									width: 100%;
@@ -1426,36 +1442,36 @@ select {
 								top: 118%;
 								right: 0;
 								background: $background-white;
-								box-shadow: 0px 3px 15px $shadow-black;
+								//box-shadow: 0px 3px 15px $shadow-black;
 								padding: 15px;
 								border: 1px solid #E0E2E5;
-								border-radius: 5px;
+								border-radius: 0 0 5px 5px;
 								z-index: 99;
 
-								&:before {
-									width: 0;
-									height: 0;
-									border-left: 9px solid transparent;
-									border-right: 9px solid transparent;
-									border-bottom: 9px solid $background-white;
-									position: absolute;
-									top: -9px;
-									right: 21px;
-									content: '';
-									z-index: 2;
-								}
+								// &:before {
+								// 	width: 0;
+								// 	height: 0;
+								// 	border-left: 9px solid transparent;
+								// 	border-right: 9px solid transparent;
+								// 	border-bottom: 9px solid $background-white;
+								// 	position: absolute;
+								// 	top: -9px;
+								// 	right: 21px;
+								// 	content: '';
+								// 	z-index: 2;
+								// }
 
-								&:after {
-									width: 0;
-									height: 0;
-									border-left: 10px solid transparent;
-									border-right: 10px solid transparent;
-									border-bottom: 10px solid #E0E2E5;
-									position: absolute;
-									top: -10px;
-									right: 20px;
-									content: '';
-								}
+								// &:after {
+								// 	width: 0;
+								// 	height: 0;
+								// 	border-left: 10px solid transparent;
+								// 	border-right: 10px solid transparent;
+								// 	border-bottom: 10px solid #E0E2E5;
+								// 	position: absolute;
+								// 	top: -10px;
+								// 	right: 20px;
+								// 	content: '';
+								// }
 
 								ul {
 									margin: 0;
@@ -1775,7 +1791,11 @@ select {
 											width: 100%;
 											height: 100%;
 											padding: 10px 25px;
-											background: $hotel-secondary-color;
+											background-color: $hotel-secondary-color;
+											// background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_icon.svg);
+											// background-repeat: no-repeat;
+											// background-position: center;
+											background-size: 27px;
 											border-radius: 8px;
 											border: none;
 											font-size: 20px;
@@ -1785,9 +1805,19 @@ select {
 											z-index: 9;
 											overflow: hidden;
 											white-space: normal;
+											display: flex;
+											align-items: center;
+											justify-content: center;
 	
 											img {
 												max-height: 29px;
+												&.hover_btn{
+													display: none; 
+													&.show{
+														display: block;
+													}
+												}
+
 											}
 	
 											&::before {
@@ -1797,13 +1827,15 @@ select {
 												left: 0;
 												width: 100%;
 												height: 0%;
-												background: $active-tab-text;
+												background-color: $background-white;
 												z-index: -1;
 												transition: 0.8s;
 												border-radius: 0 0 50% 50%;
 											}
 	
 											&:hover {
+												// background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_pink.svg);
+												border: 1px solid $hotel-secondary-color;
 												&:before {
 													height: 190%;
 												}
