@@ -14,21 +14,20 @@ export class MyTravelerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkOutService.getTraveler.subscribe(travelers => this.travelers=travelers)
+    
   }
 
   chooseTraveler(userId){
 
     let traveler = this.travelers.find(item=> item.userId==userId)
-    this.checkOutService.selectTraveler(traveler)
+    traveler['traveler_number']=this.traveler_number
+    this.checkOutService.selectTraveler({traveler})
     this.checkOutService.selectTravelerNumber(this.traveler_number)
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes123",changes)
-    if (changes['travelers']) {
-      this.travelers = changes['travelers'].currentValue;
-      
-    }
+    
   }
 
   
