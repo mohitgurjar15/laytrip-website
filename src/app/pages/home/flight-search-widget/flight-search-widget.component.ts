@@ -115,18 +115,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         $('.hover_btn').toggleClass("show");
       }
     );
-    this.homeService.getToString.subscribe(toSearchString=>{
-      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
-        let keys : any = toSearchString;
-        this.toSearch = null;    
-        // if(typeof this.toSearch != 'undefined'){
-          this.toSearch = airports[keys];
-          // this.toSearch['getDates'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
-          this.searchFlightInfo.arrival = this.toSearch.code;
-
-        // }
-      }
-    });
 
     this.countryCode = this.commonFunction.getUserCountry();
     if(this.calenderPrices.length == 0){
@@ -158,6 +146,15 @@ export class FlightSearchWidgetComponent implements OnInit {
           this.rangeDates = [this.departureDate, this.returnDate];
       } else {
         this.calPrices = false;
+      }
+    });
+    this.homeService.getToString.subscribe(toSearchString=> {
+      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
+        let keys : any = toSearchString;
+        this.toSearch = null;   
+        this.toSearch = airports[keys];
+        this.searchFlightInfo.arrival = this.toSearch.code;
+        console.log(this)   
       }
     });
    

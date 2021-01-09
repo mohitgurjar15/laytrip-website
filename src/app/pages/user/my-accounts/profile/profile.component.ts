@@ -207,7 +207,8 @@ export class ProfileComponent implements OnInit {
       this.selectResponse = res;
 
       this.is_type = res.gender ? res.gender :'M';
-      this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
+      this.seletedDob = moment(res.dob).format("MMM d yy");
+      console.log(this.seletedDob)
       if(typeof this.location != 'undefined' || typeof res.country.id != 'undefined'){
         const country = res.country.id ? res.country : this.location.country;
         if(typeof country != 'undefined')              
@@ -231,7 +232,7 @@ export class ProfileComponent implements OnInit {
           gender  : res.gender ? res.gender : 'M',        
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
-          dob  : res.dob ? moment(res.dob).format('d m yy'):'',        
+          dob  : res.dob ? moment(res.dob).format('MMM d yy'):'',        
           country_code : countryCode,        
           phone_no  : res.phoneNo,        
           country_id: res.country.name ? res.country.name :countryName,
@@ -241,7 +242,7 @@ export class ProfileComponent implements OnInit {
           language_id : res.preferredLanguage.name,     
           currency_id : res.preferredCurrency.code,     
           profile_pic: res.profilePic, 
-          passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '', 
+          passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MMM d yy') : '', 
           passport_number: res.passportNumber  
       });
 
@@ -293,6 +294,7 @@ export class ProfileComponent implements OnInit {
       formdata.append("gender",this.is_type);
       formdata.append("passport_number",this.profileForm.value.passport_number);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+      console.log(moment(this.profileForm.value.dob).format('YYYY-MM-DD'))
       formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
       if(typeof this.profileForm.value.country_id === 'string'){
         if(this.selectResponse.country.id){
@@ -309,7 +311,6 @@ export class ProfileComponent implements OnInit {
       } else{
         formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
       }
-      console.log(typeof this.profileForm.value.country_code)
       if(typeof(this.profileForm.value.country_code) === 'object'){     
         formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '' );
       } else {

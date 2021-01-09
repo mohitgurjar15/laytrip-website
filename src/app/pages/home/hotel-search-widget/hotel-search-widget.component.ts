@@ -188,7 +188,6 @@ export class HotelSearchWidgetComponent implements OnInit {
   // }
 
   checkInDateUpdate(date) {
-    console.log(date);
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
