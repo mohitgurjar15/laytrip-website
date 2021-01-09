@@ -72,12 +72,7 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    $("#search_large_btn2").hover(
-      function () {
-        $('.norm_btn').toggleClass("d-none");
-        $('.hover_btn').toggleClass("show");
-      }
-    );
+   
     let host = window.location.origin;
     if (host.includes("staging")) {
       this.showCommingSoon = true;

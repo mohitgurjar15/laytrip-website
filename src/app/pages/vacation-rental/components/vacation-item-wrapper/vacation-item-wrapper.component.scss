@@ -12,6 +12,10 @@ agm-map {
     display: flex;
     justify-content: space-between;
     margin-bottom: 18px;
+
+    @include tab-view {
+      flex-direction: column;
+  }
     .home-counter-wrapper{
       flex: 2;
       .block_result_found{
@@ -52,6 +56,10 @@ agm-map {
       margin-left: 10px;
       img {
           margin-right: 5px;
+      }
+      @include tab-view {
+        margin: 10px 0 0 0;
+        width: 100%;
       }
     }
 }

@@ -88,7 +88,55 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
         this.amenities = this.rentalFilterDetails.amenties;
       }
     }
+    this.loadJquery();
 
+  }
+
+  loadJquery() {
+    //Start REsponsive Fliter js
+    $(window).on("scroll", function () {
+      if ($(window).width() < 1200) {
+        if ($(this).scrollTop() < 10) {
+          $('#responsive_filter').slideUp("slow");
+        }
+
+        if ($(this).scrollTop() > 10) {
+          $('#responsive_filter').slideDown("slow");
+        }
+
+        var scrollHeight = $(document).height();
+        var scrollPosition = $(window).height() + $(window).scrollTop();
+        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+          $('#responsive_filter').slideUp("slow");
+        }
+      } else {
+        $('#responsive_filter').hide("slow");
+      }
+    });
+    var sheight = $(window).scrollTop();
+    var swidth = $(window).width();
+    if (sheight > 10 && swidth < 991) {
+      $('#responsive_filter').slideDown("slow");
+    }
+    $(".responsive_filter_btn").click(function () {
+      $("#responsive_filter_show").slideDown("slow");
+      $("body").addClass('overflow-hidden');
+    });
+
+    $(".filter_close > a").click(function () {
+      $("#responsive_filter_show").slideUp("slow");
+      $("body").removeClass('overflow-hidden');
+    });
+    //Close REsponsive Fliter js
+
+    // Start filter Shortby js
+    $(document).on('show', '#accordion-filteredtby', function (e) {
+      $(e.target).prev('.accordion-heading').addClass('accordion-opened');
+    });
+
+    $(document).on('hide', '#accordion-filteredtby', function (e) {
+      $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
+    });
   }
 
   toggleFilter() {
@@ -184,6 +232,32 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
   }
 
 
+  resetFilter() {
+    this.minPrice = this.rentalFilterDetails.price_range.min_price;
+    this.maxPrice = this.rentalFilterDetails.price_range.max_price;
+
+    // Reset Price
+    this.priceSlider.reset({ price: [Math.floor(this.rentalFilterDetails.price_range.min_price), Math.ceil(this.rentalFilterDetails.price_range.max_price)] });
+
+    // Reset price by total or weekly
+    this.sortType = 'filter_total_price';
+
+    // Reset amenities
+    // if (typeof this.amenities != 'undefined' && this.amenities.length) {
+    //   this.amenities.forEach(element => {
+    //     return element.isChecked = false;
+    //   });
+    // }
+    if (this.amenitiesArray.length) {
+      return this.amenitiesArray = [];
+    }
+
+    // Reset hotel name search
+    this.rentalname = 'Search Home';
+
+    $("input:checkbox").prop('checked', false);
+    this.filterRentals({});
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['isResetFilter']) {
