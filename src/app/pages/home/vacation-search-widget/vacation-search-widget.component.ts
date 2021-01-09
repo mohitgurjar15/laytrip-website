@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+declare var $: any;
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -71,6 +72,12 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    $("#search_large_btn2").hover(
+      function () {
+        $('.norm_btn').toggleClass("d-none");
+        $('.hover_btn').toggleClass("show");
+      }
+    );
     let host = window.location.origin;
     if (host.includes("staging")) {
       this.showCommingSoon = true;
