@@ -11,7 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './filter-vacation-rental.component.html',
   styleUrls: ['./filter-vacation-rental.component.scss']
 })
-export class FilterVacationRentalComponent implements OnInit,OnDestroy {
+export class FilterVacationRentalComponent implements OnInit, OnDestroy {
 
   compact = false;
   invertX = false;
@@ -21,7 +21,7 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
-  
+
   @Input() rentalFilterDetails: any;
   @Input() isResetFilter: string;
   @Output() filterRental = new EventEmitter();
@@ -51,13 +51,15 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
   rentalname;
   currency;
   subscriptions: Subscription[] = [];
+  lowToHighToggleAmenities: boolean = false;
+  is_open: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-  	this.currency = JSON.parse(this._currency);
+    this.currency = JSON.parse(this._currency);
 
-  	 if (this.rentalFilterDetails) {
+    if (this.rentalFilterDetails) {
       this.rentalFilterDetails.items.forEach(i => {
         this.homeData.push({ rentalName: i.property_name });
       });
@@ -89,25 +91,33 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
 
   }
 
+  toggleFilter() {
+    this.is_open = !this.is_open;
+  }
 
-   clearRentalSearch() {
-    if(this.rentalname !== 'Search Home') { 
-     this.rentalname = 'Search Home';
-     this.filterRental.emit(this.rentalFilterDetails.items);
-   }
+  toggleLowToHighAmenities() {
+    this.lowToHighToggleAmenities = !this.lowToHighToggleAmenities;
+  }
+
+
+  clearRentalSearch() {
+    if (this.rentalname !== 'Search Home') {
+      this.rentalname = 'Search Home';
+      this.filterRental.emit(this.rentalFilterDetails.items);
+    }
   }
 
   searchRental() {
-    if(this.rentalname !== 'Search Home') {
+    if (this.rentalname !== 'Search Home') {
       this.filterRentals({ key: 'searchByRental', value: this.rentalname.rentalName });
     }
   }
 
-   ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-   filterRentalByPrice(key, name) {
+  filterRentalByPrice(key, name) {
     if (key === 'total') {
       this.sortType = name;
     } else if (key === 'weekly') {
@@ -122,7 +132,7 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
     this.filterRentals({});
   }
 
-   filterByAmenities(event, value) {
+  filterByAmenities(event, value) {
     if (event.target.checked === true) {
       this.amenitiesArray.push(value);
     }
@@ -146,10 +156,10 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
 
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
-       filteredRentals = filteredRentals.filter(item => {
+      filteredRentals = filteredRentals.filter(item => {
         return this.amenitiesArray.some(r => item.amenities.includes(r));
-      // filteredRentals = filteredRentals.filter(item => {
-      //   return this.amenitiesArray.includes(item);
+        // filteredRentals = filteredRentals.filter(item => {
+        //   return this.amenitiesArray.includes(item);
       })
     }
 
@@ -163,19 +173,19 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
     /* Filter by price total or weekly */
     if (this.sortType === 'total') {
       filteredRentals = filteredRentals.filter(item => {
-        
+
       });
     } else if (this.sortType === 'weekly') {
       filteredRentals = filteredRentals.filter(item => {
-      
+
       });
     }
     this.filterRental.emit(filteredRentals);
   }
 
-  
 
-   ngOnChanges(changes: SimpleChanges) {
+
+  ngOnChanges(changes: SimpleChanges) {
     if (changes['isResetFilter']) {
       this.isResetFilter = changes['isResetFilter'].currentValue;
       this.minPrice = this.rentalFilterDetails.price_range.min_price;

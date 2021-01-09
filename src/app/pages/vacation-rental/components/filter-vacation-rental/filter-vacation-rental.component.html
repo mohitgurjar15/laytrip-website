@@ -1,6 +1,6 @@
 <div class="accordion block_shortby" id="accordion-filteredtby">
-  <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
-    <div class="accordion-heading" (click)="toggleLowToHigh()">
+  <div class="accordion-group" [ngClass]="{'active': is_open === true}">
+    <div class="accordion-heading" (click)="toggleFilter()">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-filteredtby" href="#collapseFiltertBy">
         <!-- Lowest to highest -->
         Filter By
@@ -56,8 +56,8 @@
             </div>
             <div class="cmn_block pad_no">
               <div class="accordion block_shortby" id="accordion-amenities">
-                <div class="accordion-group">
-                  <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse"
+                <div class="accordion-group" [ngClass]="{'active': lowToHighToggleAmenities === true}">
+                  <div class="accordion-heading" (click)="toggleLowToHighAmenities()"> <a class="accordion-toggle" data-toggle="collapse"
                       data-parent="#accordion-amenities" href="#collapseInbound">
                       Amenities
                     </a> </div>
