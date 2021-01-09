@@ -4551,6 +4551,11 @@ ngb-datepicker {
 .home_rental {
     &.search_result {
         padding: 30px 0 40px;
+        @include tab-view{
+            .container{
+                padding: 0 15px !important;
+            }
+        }
     }
     &.modify_search {
         width: 100%;
@@ -6077,6 +6082,11 @@ ngb-datepicker {
                                             justify-content: flex-start;
                                             align-items: center;
                                             margin: 5px 0 10px;
+
+                                            @include tab-view{
+                                                display: none;
+                                            }
+                                            
                                             .rating_num {
                                                 span {
                                                     background-color: #1445f5;
