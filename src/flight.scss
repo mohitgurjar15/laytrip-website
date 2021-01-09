@@ -777,7 +777,7 @@
 									align-items: center;
 									font-size: 14px;
 									font-weight: 500;
-									color: $text-lightblue;
+									color: $primary-color;
 									position: relative;
 
 									img {
@@ -793,7 +793,7 @@
 										height: 0;
 										border-top: 3px solid transparent;
 										border-bottom: 3px solid transparent;
-										border-left: 3px solid $text-lightblue;
+										border-left: 3px solid $primary-color;
 										transform: translate(-50%, -50%);
 									}
 								}
@@ -805,7 +805,7 @@
 											height: 0;
 											border-left: 3px solid transparent;
 											border-right: 3px solid transparent;
-											border-top: 3px solid $text-lightblue;
+											border-top: 3px solid $primary-color;
 											left: 105%;
 											top: 54%;
 										}
@@ -886,7 +886,7 @@
 								align-items: center;
 								font-size: 12px;
 								font-weight: 500;
-								color: #00AEEF;
+								color: $primary-color;
 								position: relative;
 
 								img {
@@ -902,7 +902,7 @@
 									height: 0;
 									border-top: 3px solid transparent;
 									border-bottom: 3px solid transparent;
-									border-left: 3px solid #00AEEF;
+									border-left: 3px solid $primary-color;
 									transform: translate(-50%, -50%);
 								}
 							}
@@ -954,12 +954,13 @@
 							font-size: 16px;
 							color: $text-white;
 							font-weight: 500;
-							border-radius: 8px;
-							background: $btn-bg;
+							border-radius: 25px;
+							background: $primary-color;
 							position: relative;
 							z-index: 9;
 							overflow: hidden;
 							margin-bottom: 10px;
+							border: 1px solid $primary-color;
 
 							&:before {
 								content: "";
@@ -968,17 +969,18 @@
 								left: 0;
 								width: 100%;
 								height: 0%;
-								background: $primary-color;
+								background: $background-white;
 								z-index: -1;
 								transition: 0.8s;
-								border-radius: 0 0 50% 50%;
+								border-radius: 25px;
 							}
 
 							&:hover {
-								border-color: $primary-color;
-
+								// border: 1px solid $primary-color;
+								color: $primary-color;
 								&:before {
-									height: 190%;
+									height: 37px;
+    								width: 100%;
 								}
 							}
 						}
@@ -1055,7 +1057,7 @@
 									transition: all 0.3s ease 0s;
 
 									&.active {
-										background: $text-lightblue;
+										background: $primary-color;
 										color: $text-white;
 										border-radius: 15px;
 									}
@@ -2065,7 +2067,7 @@
 									display: inline;
 									font-size: 14px;
 									font-weight: 500;
-									color: $text-lightblue;
+									color: $primary-color;
 									position: relative;
 
 									img {
@@ -2081,7 +2083,7 @@
 										height: 0;
 										border-top: 3px solid transparent;
 										border-bottom: 3px solid transparent;
-										border-left: 3px solid $text-lightblue;
+										border-left: 3px solid $primary-color;
 										transform: translate(-50%, -50%);
 									}
 								}
@@ -2093,7 +2095,7 @@
 											height: 0;
 											border-left: 3px solid transparent;
 											border-right: 3px solid transparent;
-											border-top: 3px solid $text-lightblue;
+											border-top: 3px solid $primary-color;
 											left: 105%;
 											top: 54%;
 										}
@@ -2188,7 +2190,7 @@
 								align-items: center;
 								font-size: 12px;
 								font-weight: 500;
-								color: #00AEEF;
+								color: $primary-color;
 								position: relative;
 
 								img {
@@ -2204,7 +2206,7 @@
 									height: 0;
 									border-top: 3px solid transparent;
 									border-bottom: 3px solid transparent;
-									border-left: 3px solid #00AEEF;
+									border-left: 3px solid $primary-color;
 									transform: translate(-50%, -50%);
 								}
 							}
@@ -2256,12 +2258,13 @@
 							font-size: 16px;
 							color: $text-white;
 							font-weight: 500;
-							border-radius: 8px;
-							background: $btn-bg;
+							border-radius: 25px;
+							background: $primary-color;
 							position: relative;
 							z-index: 9;
 							overflow: hidden;
 							margin-bottom: 10px;
+							border: 1px solid $primary-color;
 
 							&:before {
 								content: "";
@@ -2270,17 +2273,18 @@
 								left: 0;
 								width: 100%;
 								height: 0%;
-								background: $primary-color;
+								background: $background-white;
 								z-index: -1;
 								transition: 0.8s;
-								border-radius: 0 0 50% 50%;
+								border-radius: 25px;
 							}
 
 							&:hover {
-								border-color: $primary-color;
-
+								//border: 1px solid $primary-color;
+								color: $primary-color;
 								&:before {
-									height: 190%;
+									height: 37px;
+    								width: 100%;
 								}
 							}
 						}
@@ -2353,13 +2357,13 @@
 									text-transform: none;
 
 									&.active {
-										background: $text-lightblue;
+										background: $primary-color;
 										color: $text-white;
 										border-radius: 15px;
 									}
 
 									&:hover {
-										background: $text-lightblue;
+										background: $primary-color;
 										color: $text-white;
 										border-radius: 15px;
 									}

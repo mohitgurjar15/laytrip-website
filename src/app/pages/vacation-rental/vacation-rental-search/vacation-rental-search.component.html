@@ -17,10 +17,10 @@
        <app-sort-vacation-rental (sortRental)="sortRentals($event)" [rentalDetails]="rentalDetails"></app-sort-vacation-rental>
        <div class="filter_saidbar">
             <div class="filter_by d-none d-lg-block">
-              <div class="block_inn">
+              <!-- <div class="block_inn">
                 <h4>Filter By</h4>
                 <a class="anchor_link" (click)="resetFilter()">Reset</a>
-              </div>
+              </div> -->
                 <app-filter-vacation-rental *ngIf="rentalFilterDetails" [rentalFilterDetails]="rentalFilterDetails" (filterRental)="filterRental($event)"
                 isResetFilter={{isResetFilter}}></app-filter-vacation-rental>  
             </div>

@@ -747,7 +747,8 @@ ngb-datepicker {
                             width: 100%;
                             height: 100%;
                             padding: 10px 25px;
-                            background: $hotel-secondary-color;
+                            background-color: $hotel-secondary-color;
+                            background-size: 27px;
                             border-radius: 8px;
                             border: none;
                             font-size: 20px;
@@ -757,9 +758,19 @@ ngb-datepicker {
                             z-index: 9;
                             overflow: hidden;
                             white-space: normal;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
 
                             img {
                                 max-height: 29px;
+                                &.hover_btn{
+                                    display: none; 
+                                    &.show{
+                                        display: block;
+                                    }
+                                }
+
                             }
 
                             &::before {
@@ -769,13 +780,14 @@ ngb-datepicker {
                                 left: 0;
                                 width: 100%;
                                 height: 0%;
-                                background: $secondary-color;
+                                background-color: $background-white;
                                 z-index: -1;
                                 transition: 0.8s;
                                 border-radius: 0 0 50% 50%;
                             }
 
                             &:hover {
+                                border: 1px solid $hotel-secondary-color;
                                 &:before {
                                     height: 190%;
                                 }
@@ -835,7 +847,7 @@ ngb-datepicker {
                     font-size: 14px;
                     color: $text-grey;
                     position: relative;
-                    padding: 0 20px;
+                    padding: 0 20px 0 0;
                     cursor: pointer;
         
                     span {
@@ -1169,6 +1181,7 @@ ngb-datepicker {
                     justify-content: space-between;
                     position: relative;
                     width: 60%;
+                    padding-left: 0;
 
                     @include ipad-view {
                         width: 100%;
@@ -1328,7 +1341,8 @@ ngb-datepicker {
                             width: 100%;
                             height: 100%;
                             padding: 10px 25px;
-                            background: $hotel-secondary-color;
+                            background-color: $hotel-secondary-color;
+                            background-size: 27px;
                             border-radius: 8px;
                             border: none;
                             font-size: 20px;
@@ -1338,9 +1352,19 @@ ngb-datepicker {
                             z-index: 9;
                             overflow: hidden;
                             white-space: normal;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
 
                             img {
                                 max-height: 29px;
+                                &.hover_btn{
+                                    display: none; 
+                                    &.show{
+                                        display: block;
+                                    }
+                                }
+
                             }
 
                             &::before {
@@ -1350,13 +1374,14 @@ ngb-datepicker {
                                 left: 0;
                                 width: 100%;
                                 height: 0%;
-                                background: $secondary-color;
+                                background-color: $background-white;
                                 z-index: -1;
                                 transition: 0.8s;
                                 border-radius: 0 0 50% 50%;
                             }
 
                             &:hover {
+                                border: 1px solid $hotel-secondary-color;
                                 &:before {
                                     height: 190%;
                                 }
@@ -2341,7 +2366,7 @@ ngb-datepicker {
                 a {
                     font-size: 16px;
                     font-weight: 500;
-                    color: $text-lightblue;
+                    color: $primary-color;
                 }
             }
 
@@ -2489,7 +2514,7 @@ ngb-datepicker {
                 a {
                     font-size: 16px;
                     font-weight: 500;
-                    color: $text-lightblue;
+                    color: $primary-color;
                 }
             }
 
@@ -2896,8 +2921,8 @@ ngb-datepicker {
                                 }
 
                                 &:last-child {
-                                    background: $btn-bg;
-                                    border: 1px solid $btn-bg;
+                                    background: $primary-color;
+                                    border: 1px solid $primary-color;
                                     color: $text-white;
                                 }
 
@@ -3273,7 +3298,7 @@ ngb-datepicker {
                                     display: inline;
                                     font-size: 14px;
                                     font-weight: 500;
-                                    color: $text-lightblue;
+                                    color: $primary-color;
                                     position: relative;
 
                                     img {
@@ -3289,7 +3314,7 @@ ngb-datepicker {
                                         height: 0;
                                         border-top: 3px solid transparent;
                                         border-bottom: 3px solid transparent;
-                                        border-left: 3px solid $text-lightblue;
+                                        border-left: 3px solid $primary-color;
                                         transform: translate(-50%, -50%);
                                     }
                                 }
@@ -3301,7 +3326,7 @@ ngb-datepicker {
                                             height: 0;
                                             border-left: 3px solid transparent;
                                             border-right: 3px solid transparent;
-                                            border-top: 3px solid $text-lightblue;
+                                            border-top: 3px solid $primary-color;
                                             left: 105%;
                                             top: 54%;
                                         }
@@ -3416,6 +3441,7 @@ ngb-datepicker {
                             }
                         }
 
+                        
                         .book_btn {
                             display: inline-block;
                             line-height: 38px;
@@ -3424,11 +3450,12 @@ ngb-datepicker {
                             color: $text-white;
                             font-weight: 500;
                             border-radius: 20px;
-                            background: $btn-bg;
+                            background: $primary-color;
                             position: relative;
                             z-index: 9;
                             overflow: hidden;
                             margin-bottom: 10px;
+                            border: 1px solid $primary-color;
 
                             &:before {
                                 content: "";
@@ -3437,18 +3464,18 @@ ngb-datepicker {
                                 left: 0;
                                 width: 100%;
                                 height: 0%;
-                                background: $primary-color;
+                                background: $background-white;
                                 z-index: -1;
                                 transition: 0.8s;
-                                border-radius: 0 0 50% 50%;
+                                border-radius: 25px;
                             }
 
                             &:hover {
-                                border-color: $primary-color;
-
+                                color: $primary-color;
                                 &:before {
-                                    height: 190%;
-                                }
+									height: 37px;
+                                    width: 100%;
+								}
                             }
                         }
 
@@ -3457,7 +3484,7 @@ ngb-datepicker {
                             margin: 10px 0 0;
                             font-size: 12px;
                             font-weight: 500;
-                            color: $text-lightblue;
+                            color: $primary-color;
                         }
 
                         &.block_pr {
@@ -4215,7 +4242,7 @@ ngb-datepicker {
                                 }
 
                                 span {
-                                    color: $text-lightblue;
+                                    color: $primary-color;
 
                                     @include tab-view {
                                         display: block;
@@ -4427,7 +4454,7 @@ ngb-datepicker {
                                     display: inline;
                                     font-size: 14px;
                                     font-weight: 500;
-                                    color: $text-lightblue;
+                                    color: $primary-color;
                                     position: relative;
 
                                     img {
@@ -4443,7 +4470,7 @@ ngb-datepicker {
                                         height: 0;
                                         border-top: 3px solid transparent;
                                         border-bottom: 3px solid transparent;
-                                        border-left: 3px solid $text-lightblue;
+                                        border-left: 3px solid $primary-color;
                                         transform: translate(-50%, -50%);
                                     }
                                 }
@@ -4455,7 +4482,7 @@ ngb-datepicker {
                                             height: 0;
                                             border-left: 3px solid transparent;
                                             border-right: 3px solid transparent;
-                                            border-top: 3px solid $text-lightblue;
+                                            border-top: 3px solid $primary-color;
                                             left: 105%;
                                             top: 54%;
                                         }
@@ -5259,7 +5286,7 @@ ngb-datepicker {
                 a {
                     font-size: 16px;
                     font-weight: 500;
-                    color: $text-lightblue;
+                    color: $primary-color;
                 }
             }
 
@@ -5269,35 +5296,26 @@ ngb-datepicker {
                 .accordion-group {
                     background: $background-white;
                     border: 1px solid $box-border-color;
-                    border-radius: 3px;
-
-                    .accordion-heading {
+                    border-radius: 35px;
+                    .accordion-heading{
                         padding: 20px 15px;
+                        display: flex;
+                        align-items: center;
 
                         .accordion-toggle {
-                            font-size: 16px;
-                            color: $text-black;
+                            font-size: 20px;
+                            color: $text-grey;
                             font-weight: 500;
                             width: 100%;
                             display: block;
-
-                            &:after {
-                                font-family: "FontAwesome";
-                                content: "\f054";
-                                float: right;
-                                color: $text-grey;
-                                font-weight: normal;
-                                transition: 0.3s;
-                            }
                         }
+                        
                     }
 
                     &.active {
                         .accordion-heading {
-                            .accordion-toggle {
-                                &:after {
-                                    content: "\f078";
-                                }
+                            &:after {
+                                content: "\f078";
                             }
                         }
                     }
@@ -5381,7 +5399,7 @@ ngb-datepicker {
                                                 width: 8px;
                                                 height: 8px;
                                                 border-radius: 50%;
-                                                background: $hotel-secondary-color;
+                                                background: $text_light_yellow;
                                             }
                                         }
                                     }
@@ -5416,13 +5434,13 @@ ngb-datepicker {
                 a {
                     font-size: 16px;
                     font-weight: 500;
-                    color: $text-lightblue;
+                    color: $primary-color;
                 }
             }
 
             .fliter_block {
                 width: 100%;
-                border: 1px solid $box-border-color;
+                //border: 1px solid $box-border-color;
                 background: $background-white;
                 border-radius: 3px;
                 max-height: calc(100vh - 334px);
@@ -5575,25 +5593,25 @@ ngb-datepicker {
                                     outline: none;
                                     padding: 20px 15px;
 
-                                    &:after {
-                                        font-family: "FontAwesome";
-                                        content: "\f054";
-                                        float: right;
-                                        color: $text-grey;
-                                        font-weight: normal;
-                                    }
+                                    // &:after {
+                                    //     font-family: "FontAwesome";
+                                    //     content: "\f054";
+                                    //     float: right;
+                                    //     color: $text-grey;
+                                    //     font-weight: normal;
+                                    // }
                                 }
                             }
 
-                            &.active {
-                                .accordion-heading {
-                                    .accordion-toggle {
-                                        &:after {
-                                            content: "\f078";
-                                        }
-                                    }
-                                }
-                            }
+                            // &.active {
+                            //     .accordion-heading {
+                            //         .accordion-toggle {
+                            //             &:after {
+                            //                 content: "\f078";
+                            //             }
+                            //         }
+                            //     }
+                            // }
 
                             .accordion-body {
                                 .block_cmn {
@@ -5767,14 +5785,6 @@ ngb-datepicker {
                     }
 
                     .searchbar_box {
-                        // input {
-                        //     border: 1px solid $box-border-color;
-                        //     border-radius: 3px;
-                        //     width: 100%;
-                        //     height: 32px;
-                        //     padding: 0 12px;
-                        //     margin-bottom: 15px;
-                        // }
                         label {
                             font-size: 12px;
                             font-weight: 500;
@@ -5803,6 +5813,7 @@ ngb-datepicker {
                                 color: #000;
                             }
                         }
+
                         .search_btns {
                             display: flex;
                             justify-content: space-between;
@@ -5811,11 +5822,12 @@ ngb-datepicker {
                                 display: inline-block;
                                 line-height: 38px;
                                 padding: 0 25px;
-                                font-size: 16px;
-                                color: $text-white;
+                                font-size: 13px;
+                                color: $text-grey;
                                 font-weight: 500;
                                 border-radius: 20px;
-                                background: $btn-bg;
+                                background: transparent;
+                                border: 1px solid $text-grey;
                                 position: relative;
                                 z-index: 9;
                                 overflow: hidden;
@@ -5829,7 +5841,9 @@ ngb-datepicker {
                                 }
 
                                 &:last-child {
-                                    background: #8188ab;
+                                    background: $primary-color;
+                                    border: 1px solid $primary-color;
+                                    color: $text-white;
                                 }
 
                                 &:before {
@@ -5852,6 +5866,46 @@ ngb-datepicker {
                                         height: 190%;
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .block_shortby{
+                .accordion-group{
+                    background: $background-white;
+                    border: 1px solid $box-border-color;
+                    border-radius: 35px;
+                    .accordion-heading{
+                        padding: 20px 15px;
+                        display: flex;
+                        align-items: center;
+                       .accordion-toggle{
+                            font-size: 20px;
+                            color: $text-grey;
+                            font-weight: 500;
+                            width: 100%;
+                            display: block;
+                       }
+                       &:after {
+                            font-family: 'FontAwesome';
+                            content: "\f054";
+                            float: right;
+                            color: $text-grey;
+                            font-weight: normal;
+                            transition: 0.3s;
+                        }
+                        .anchor_link{
+                            color: $text_light_yellow;
+                            font-size: 16px;
+                            margin-right: 10px;
+                        }
+                    }
+                    &.active {
+                        .accordion-heading {
+                            &:after {
+                                content: "\f078";
                             }
                         }
                     }
@@ -6066,7 +6120,7 @@ ngb-datepicker {
                                     display: inline;
                                     font-size: 14px;
                                     font-weight: 500;
-                                    color: $text-lightblue;
+                                    color: $primary-color;
                                     position: relative;
 
                                     img {
@@ -6082,7 +6136,7 @@ ngb-datepicker {
                                         height: 0;
                                         border-top: 3px solid transparent;
                                         border-bottom: 3px solid transparent;
-                                        border-left: 3px solid $text-lightblue;
+                                        border-left: 3px solid $primary-color;
                                         transform: translate(-50%, -50%);
                                     }
                                 }
@@ -6094,7 +6148,7 @@ ngb-datepicker {
                                             height: 0;
                                             border-left: 3px solid transparent;
                                             border-right: 3px solid transparent;
-                                            border-top: 3px solid $text-lightblue;
+                                            border-top: 3px solid $primary-color;
                                             left: 105%;
                                             top: 54%;
                                         }
@@ -6224,11 +6278,12 @@ ngb-datepicker {
                             color: $text-white;
                             font-weight: 500;
                             border-radius: 20px;
-                            background: $btn-bg;
+                            background: $primary-color;
                             position: relative;
                             z-index: 9;
                             overflow: hidden;
                             margin-bottom: 10px;
+                            border: 1px solid $primary-color;
 
                             &:before {
                                 content: "";
@@ -6237,18 +6292,18 @@ ngb-datepicker {
                                 left: 0;
                                 width: 100%;
                                 height: 0%;
-                                background: $primary-color;
+                                background: $background-white;
                                 z-index: -1;
                                 transition: 0.8s;
-                                border-radius: 0 0 50% 50%;
+                                border-radius: 25px;
                             }
 
                             &:hover {
-                                border-color: $primary-color;
-
+                                color: $primary-color;
                                 &:before {
-                                    height: 190%;
-                                }
+									height: 37px;
+                                    width: 100%;
+								}
                             }
                         }
 
@@ -6257,7 +6312,7 @@ ngb-datepicker {
                             margin: 10px 0 0;
                             font-size: 12px;
                             font-weight: 500;
-                            color: $text-lightblue;
+                            color: $primary-color;
                         }
 
                         &.block_pr {
@@ -7015,7 +7070,7 @@ ngb-datepicker {
                                 }
 
                                 span {
-                                    color: $text-lightblue;
+                                    color: $primary-color;
 
                                     @include tab-view {
                                         display: block;
@@ -7228,7 +7283,7 @@ ngb-datepicker {
                                     display: inline;
                                     font-size: 14px;
                                     font-weight: 500;
-                                    color: $text-lightblue;
+                                    color: $primary-color;
                                     position: relative;
 
                                     img {
@@ -7244,7 +7299,7 @@ ngb-datepicker {
                                         height: 0;
                                         border-top: 3px solid transparent;
                                         border-bottom: 3px solid transparent;
-                                        border-left: 3px solid $text-lightblue;
+                                        border-left: 3px solid $primary-color;
                                         transform: translate(-50%, -50%);
                                     }
                                 }
@@ -7256,7 +7311,7 @@ ngb-datepicker {
                                             height: 0;
                                             border-left: 3px solid transparent;
                                             border-right: 3px solid transparent;
-                                            border-top: 3px solid $text-lightblue;
+                                            border-top: 3px solid $primary-color;
                                             left: 105%;
                                             top: 54%;
                                         }
@@ -7619,6 +7674,13 @@ ngb-datepicker {
                     }
                 }
             }
+        }
+    }
+}
+.home_detail_tab{
+    .nav-tabs {
+        .nav-item {
+            width: 33.33%;
         }
     }
 }

@@ -1005,9 +1005,6 @@ select {
 													height: 100%;
 													padding: 10px 25px;
 													background-color: $hotel-secondary-color;
-													// background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_icon.svg);
-													// background-repeat: no-repeat;
-													// background-position: center;
 													background-size: 27px;
 													border-radius: 8px;
 													border: none;
@@ -1047,7 +1044,6 @@ select {
 													}
 			
 													&:hover {
-														// background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_pink.svg);
 														border: 1px solid $hotel-secondary-color;
 														&:before {
 															height: 190%;

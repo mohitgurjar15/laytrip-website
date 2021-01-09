@@ -43,8 +43,10 @@
                                         <div class="block_detail_top">
                                             <div class="detail_info">
                                                 <h4>{{ item?.property_name }}</h4>
-                                                <span><img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
-                                                        alt="Map pin">{{ item?.city }}</span>
+                                                <span class="adress_span">
+                                                    <img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
+                                                        alt="Map pin"> {{ item?.city }}
+                                                </span>
                                                 <div class="review_section_wrap" style="visibility: hidden;">
                                                     <div class="rating_num">
                                                         <span>
@@ -224,8 +226,8 @@
                                                         <h4>{{ item?.property_name }}</h4>
                                                         <span><img
                                                                 src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
-                                                                alt="Map pin">{{ item?.city }}</span>
-                                                        <div class="review_section_wrap" style="visibility: hidden;">
+                                                                alt="Map pin"> {{ item?.city }}</span>
+                                                        <div class="review_section_wrap" style="display: none;">
                                                             <div class="rating_num">
                                                                 <span>
                                                                     5.0
