@@ -201,7 +201,9 @@
             </div>
             <div class="col-lg-4 pl-0" style="max-height: 560px; overflow-y: auto;">
                 <ng-container *ngFor="let item of rentalListArray">
-                    <div class="search_block" [attr.id]="item.property_id" [ngClass]="{'selected-home':showMapDetails[item.property_id]}">
+                    <div class="search_block" [attr.id]="item.property_id"
+                        [ngClass]="{'selected-home':showMapDetails[item.property_id]}"
+                        (click)="redirectToDetail(item.property_id,item.latitude,item.longintude)">
                         <div class="listing_block anchor-tag hover-anchor-tag">
                             <div class="block_main">
                                 <div class="block_top">
@@ -209,7 +211,8 @@
                                         <div class="">
                                             <div class="block_im">
                                                 <div class="home_list_img_wrp">
-                                                    <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo"
+                                                    <img src="{{item?.display_image || defaultImage }}"
+                                                        alt="Airlines Logo"
                                                         onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                                 </div>
                                             </div>

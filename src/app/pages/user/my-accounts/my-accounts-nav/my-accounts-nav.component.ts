@@ -19,7 +19,7 @@ export class MyAccountsNavComponent implements OnInit {
   expandedThird: boolean;
 
   
-  public defaultImage = this.s3BucketUrl+'assets/images/profile_im.svg';
+  public defaultImage = this.s3BucketUrl+'assets/images/profile_laytrip.svg';
 
   constructor( public router: Router,
     public commonFunction: CommonFunction,

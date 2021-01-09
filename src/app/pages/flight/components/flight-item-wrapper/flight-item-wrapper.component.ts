@@ -41,7 +41,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   animationState = 'out';
   flightList;
   s3BucketUrl = environment.s3BucketUrl;
-  public defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+  public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   flightListArray = [];
   currency;
 

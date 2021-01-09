@@ -20,54 +20,15 @@ var MainHeaderComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        this.langunages = [];
-        this.selectedLanunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
-        this.isLanunageSet = false;
-        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
-        this.currencies = [];
-        this.selectedCurrency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' };
-        this.isCurrencySet = false;
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
         this.isLoggedIn = false;
         this.totalLayCredit = 0;
         this.showTotalLayCredit = 0;
         this._isLayCredit = false;
-        this.countryCode = '';
-        this.countryCode = this.commonFunction.getUserCountry();
-        var _langunage = localStorage.getItem('_lang');
-        var _currency = localStorage.getItem('_curr');
-        if (_langunage) {
-            try {
-                var _lang = JSON.parse(_langunage);
-                this.selectedLanunage = _lang;
-                translate.setDefaultLang(this.selectedLanunage.iso_1Code);
-                this.isLanunageSet = true;
-                this.renderer.addClass(document.body, this.selectedLanunage.iso_1Code + "_lang");
-            }
-            catch (error) {
-                this.isLanunageSet = false;
-                translate.setDefaultLang('en');
-            }
-        }
-        else {
-            translate.setDefaultLang('en');
-        }
-        if (_currency) {
-            try {
-                var _curr = JSON.parse(_currency);
-                this.selectedCurrency = _curr;
-                this.isCurrencySet = true;
-            }
-            catch (error) {
-                this.isCurrencySet = false;
-            }
-        }
-        this.countryCode = this.commonFunction.getUserCountry();
     }
     MainHeaderComponent_1 = MainHeaderComponent;
     MainHeaderComponent.prototype.ngOnInit = function () {
         this.checkUser();
-        this.getLangunages();
-        this.getCurrencies();
         this.loadJquery();
         //this.getUserLocationInfo();
         if (this.isLoggedIn) {
@@ -75,6 +36,7 @@ var MainHeaderComponent = /** @class */ (function () {
                 this.totalLaycredit();
             }
         }
+        this.countryCode = this.commonFunction.getUserCountry();
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
@@ -83,76 +45,6 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.ngOnChanges = function () {
         // this.totalLaycredit();
-    };
-    /**
-     * change user lanunage
-     * @param langunage
-     */
-    MainHeaderComponent.prototype.changeLangunage = function (langunage) {
-        if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
-            this.selectedLanunage = langunage;
-            localStorage.setItem("_lang", JSON.stringify(langunage));
-            this.renderer.removeClass(document.body, "en_lang");
-            this.renderer.removeClass(document.body, "es_lang");
-            this.renderer.removeClass(document.body, "it_lang");
-            this.translate.use(langunage.iso_1Code);
-            this.renderer.addClass(document.body, this.selectedLanunage.iso_1Code + "_lang");
-        }
-    };
-    /**
-     * Get all langunages
-     */
-    MainHeaderComponent.prototype.getLangunages = function () {
-        var _this = this;
-        this.genericService.getAllLangunage().subscribe(function (response) {
-            _this.langunages = response.data.filter(function (lang) { return lang.active == true; });
-            if (!_this.isLanunageSet) {
-                _this.isLanunageSet = true;
-                _this.selectedLanunage = _this.langunages[0];
-                localStorage.setItem("_lang", JSON.stringify(_this.langunages[0]));
-            }
-            else {
-                var find = _this.langunages.find(function (langunage) { return langunage.id == _this.selectedLanunage.id; });
-                if (!find) {
-                    _this.isLanunageSet = true;
-                    _this.selectedLanunage = _this.langunages[0];
-                    localStorage.setItem("_lang", JSON.stringify(_this.langunages[0]));
-                }
-            }
-        }, function (error) {
-        });
-    };
-    /**
-     * Get all currencies
-     */
-    MainHeaderComponent.prototype.getCurrencies = function () {
-        var _this = this;
-        this.genericService.getCurrencies().subscribe(function (response) {
-            _this.currencies = response.data.filter(function (currency) { return currency.status == true; });
-            for (var i = 0; i < _this.currencies.length; i++) {
-                _this.currencies[i].flag = _this.s3BucketUrl + "assets/images/icon/" + _this.currencies[i].code + ".svg";
-            }
-            if (!_this.isCurrencySet) {
-                _this.isCurrencySet = true;
-                _this.selectedCurrency = _this.currencies[0];
-                localStorage.setItem("_curr", JSON.stringify(_this.currencies[0]));
-            }
-            else {
-                var find = _this.currencies.find(function (currency) { return currency.id == _this.selectedCurrency.id; });
-                if (!find) {
-                    _this.isCurrencySet = true;
-                    _this.selectedCurrency = _this.currencies[0];
-                    localStorage.setItem("_curr", JSON.stringify(_this.currencies[0]));
-                }
-            }
-        }, function (error) {
-        });
-    };
-    MainHeaderComponent.prototype.changeCurrency = function (currency) {
-        if (JSON.stringify(currency) != JSON.stringify(this.selectedCurrency)) {
-            this.selectedCurrency = currency;
-            localStorage.setItem("_curr", JSON.stringify(currency));
-        }
     };
     MainHeaderComponent.prototype.checkUser = function () {
         var userToken = localStorage.getItem('_lay_sess');

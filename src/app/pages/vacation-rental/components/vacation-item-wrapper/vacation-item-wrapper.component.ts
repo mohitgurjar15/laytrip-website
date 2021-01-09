@@ -19,7 +19,7 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
 
   @Input() rentalDetails;
   s3BucketUrl = environment.s3BucketUrl;
-  public defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+  public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   currency;
   subscriptions: Subscription[] = [];
   userInfo;

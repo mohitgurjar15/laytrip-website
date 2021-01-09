@@ -18,7 +18,7 @@ var MyAccountsNavComponent = /** @class */ (function () {
         this.profile_pic = '';
         this._login_user_info = [];
         this.isLoggedIn = false;
-        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
     }
     MyAccountsNavComponent.prototype.ngOnInit = function () {
     };

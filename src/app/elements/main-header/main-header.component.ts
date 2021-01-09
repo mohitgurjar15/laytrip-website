@@ -21,7 +21,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   @ViewChild(MainHeaderComponent, { static: false }) headerComponent: MainHeaderComponent;
 
   s3BucketUrl = environment.s3BucketUrl;
-  defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+  defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
 
   isLoggedIn = false;
   totalLayCredit = 0;
