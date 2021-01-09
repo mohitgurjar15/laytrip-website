@@ -81,7 +81,7 @@
                                 <div class="search_area tab_search_area"
                                     [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                     <!-- <label>{{'departure' | translate}}</label> -->
-                                    <p-calendar *ngIf="!isRoundTrip" dateFormat="d M yy" inputId="basic"
+                                    <p-calendar *ngIf="!isRoundTrip" dateFormat="M d yy" inputId="basic"
                                         [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}"
                                         flightDepartureMinDate [minDate]="flightDepartureMinDate"
                                         (onSelect)=departureDateUpdate($event) [readonlyInput]="true"
@@ -108,7 +108,7 @@
                                         </ng-template>
                                     </p-calendar>
 
-                                    <p-calendar *ngIf="isRoundTrip" dateFormat="d M yy" #dateFilter inputId="range"
+                                    <p-calendar *ngIf="isRoundTrip" dateFormat="M d yy" #dateFilter inputId="range"
                                         selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate
                                         [minDate]="flightDepartureMinDate"
