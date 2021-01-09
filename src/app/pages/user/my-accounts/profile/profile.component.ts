@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   public imageFileError = false;
   public imageErrorMsg: string = 'Image is required';
   image: any = '';
-  public defaultImage = this.s3BucketUrl+'assets/images/profile_im.svg';
+  public defaultImage = this.s3BucketUrl+'assets/images/profile_laytrip.svg';
   public file:any  = '';
   public isFile  = true;
   public profile_pic = false;

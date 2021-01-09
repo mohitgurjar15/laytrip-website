@@ -29,6 +29,7 @@ import { DownloadAppComponent } from './download-app/download-app.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { SsoLoginComponent } from './sso-login/sso-login.component';
 import { CovidPageComponent } from './covid-page/covid-page.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CovidPageComponent } from './covid-page/covid-page.component';
     ComingSoonComponent,
     SsoLoginComponent,
     CovidPageComponent,
+    AboutUsComponent,
   ],
   imports: [
     CommonModule,

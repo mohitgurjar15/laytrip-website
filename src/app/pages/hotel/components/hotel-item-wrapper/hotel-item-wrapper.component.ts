@@ -43,7 +43,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   animationState = 'out';
   hotelsList;
   s3BucketUrl = environment.s3BucketUrl;
-  public defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+  public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   hotelListArray = [];
   noOfDataToShowInitially = 20;
   dataToLoad = 20;
