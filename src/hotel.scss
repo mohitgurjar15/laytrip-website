@@ -2924,6 +2924,10 @@ ngb-datepicker {
                                     background: $primary-color;
                                     border: 1px solid $primary-color;
                                     color: $text-white;
+                                    &:hover {
+                                        background: transparent;
+                                        color: $primary-color;
+                                    }
                                 }
 
                                 &:before {
@@ -5864,6 +5868,10 @@ ngb-datepicker {
                                     background: $primary-color;
                                     border: 1px solid $primary-color;
                                     color: $text-white;
+                                    &:hover {
+                                        background: transparent;
+                                        color: $primary-color;
+                                    }
                                 }
 
                                 &:before {
