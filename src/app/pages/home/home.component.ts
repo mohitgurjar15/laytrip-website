@@ -102,7 +102,6 @@ export class HomeComponent implements OnInit {
 
 
   toggleOnewayRoundTrip(type) {
-
     if (type === 'roundtrip') {
       this.isRoundTrip = true;
     } else {
@@ -114,7 +113,6 @@ export class HomeComponent implements OnInit {
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
       this.dealList = response['data'];
-      console.log(this.dealList)
       },(error) => {});
   }
 
