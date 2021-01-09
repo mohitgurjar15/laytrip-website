@@ -835,7 +835,7 @@ ngb-datepicker {
                     font-size: 14px;
                     color: $text-grey;
                     position: relative;
-                    padding: 0 20px;
+                    padding: 0 20px 0 0;
                     cursor: pointer;
         
                     span {
@@ -1169,6 +1169,7 @@ ngb-datepicker {
                     justify-content: space-between;
                     position: relative;
                     width: 60%;
+                    padding-left: 0;
 
                     @include ipad-view {
                         width: 100%;
@@ -3440,15 +3441,18 @@ ngb-datepicker {
                                 background: $primary-color;
                                 z-index: -1;
                                 transition: 0.8s;
-                                border-radius: 0 0 50% 50%;
+                                border-radius: 25px;
                             }
 
                             &:hover {
                                 border-color: $primary-color;
 
                                 &:before {
-                                    height: 190%;
-                                }
+									height: 99.5%;
+									width: 99%;
+									left: 0.5%;
+									top: 0.6%;
+								}
                             }
                         }
 
@@ -6240,15 +6244,18 @@ ngb-datepicker {
                                 background: $primary-color;
                                 z-index: -1;
                                 transition: 0.8s;
-                                border-radius: 0 0 50% 50%;
+                                border-radius: 25px;
                             }
 
                             &:hover {
                                 border-color: $primary-color;
 
                                 &:before {
-                                    height: 190%;
-                                }
+									height: 99.5%;
+									width: 99%;
+									left: 0.5%;
+									top: 0.6%;
+								}
                             }
                         }
 
