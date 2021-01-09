@@ -131,8 +131,8 @@ export class VacationSearchWidgetComponent implements OnInit {
       this.dateFilter.hideOverlay();
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
-      this.rentalCheckInMinDate = this.rangeDates[0];
-      this.rentalForm.check_in_date = this.rentalCheckInMinDate;
+      this.rentalCheckInMinDate = new Date();
+      this.rentalForm.check_in_date = this.rangeDates[0];
       this.rentalForm.check_out_date = this.rangeDates[1];
 
     }

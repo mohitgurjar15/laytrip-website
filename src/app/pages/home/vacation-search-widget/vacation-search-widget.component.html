@@ -44,7 +44,7 @@
                <div class="date_form">
                   <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                      <!-- <label>Check In-Check Out</label> -->
-                     <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
+                     <p-calendar #dateFilter inputId="range" dateFormat="M d yy" selectionMode="range" [(ngModel)]="rangeDates"
                         [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="rentalCheckInMinDate"
                         panelStyleClass="calender-responsive-view laytrip-cal-view" [numberOfMonths]="2"
                         (onSelect)=rentalDateUpdate($event) [readonlyInput]="true">
