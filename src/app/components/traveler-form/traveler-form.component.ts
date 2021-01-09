@@ -75,16 +75,18 @@ export class TravelerFormComponent implements OnInit {
         email: ['', Validators.required]
     }); */
 
-    this.checkOutService.getTravelerNumber.subscribe(number=>{ 
-      console.log("Number",number) 
-      this.traveler_number=number;
+    this.checkOutService.getTravelerNumber.subscribe((traveler_number:any)=>{ 
       this.checkOutService.getTraveler.subscribe((traveler:any)=>{
-        console.log(traveler,"Trvaler")
-        this.fields.type.users[this.traveler_number].first_name=traveler.firstName;
-        console.log(this.fields,"this.fields")
-        //this.patch()
+        console.log("Jaipur",traveler)
+        this.fields.type.users[traveler.traveler_number].first_name=traveler.firstName;
+        this.fields.type.users[traveler.traveler_number].last_name=traveler.lastName;
+        this.fields.type.users[traveler.traveler_number].email=traveler.email;
+        console.log("=>>>>>",traveler)
+        this.patch()
       })
     })
+
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -97,10 +99,12 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patch() {
-    const control = <FormArray>this.travelerForm.get('type.users');
+    let control:any = <FormArray>this.travelerForm.get('type.users');
+    control.controls=[];
     this.fields.type.users.forEach(x => {
       control.push(this.patchValues(x))
     })
+
   }
 
   patchValues(x) {
