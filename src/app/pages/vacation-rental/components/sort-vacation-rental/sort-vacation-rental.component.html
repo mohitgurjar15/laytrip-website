@@ -1,18 +1,23 @@
 <div class="filter_saidbar">
 
    <div class="short_by">
-      <div class="block_inn">
+      <!-- <div class="block_inn">
          <h4>Sort by</h4> <a class="anchor_link" (click)="resetSorting('total','ASC')">Reset</a>
-      </div>
-      <ng-scrollbar #scrollable track="all">
-         <div class="accordion block_shortby" id="accordion-shortby">
-            <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
-               <div class="accordion-heading" (click)="toggleLowToHigh()"> <a class="accordion-toggle"
-                     data-toggle="collapse" data-parent="#accordion-shortby" href="#collapseshortBy">
-                     Lowest to highest
-                  </a> </div>
-               <div id="collapseshortBy" class="accordion-body filter_acc collapse">
-                  <div class="accordion-inner">
+      </div> -->
+
+      <div class="accordion block_shortby" id="accordion-shortby">
+         <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
+            <div class="accordion-heading" (click)="toggleLowToHigh()">
+               <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-shortby"
+                  href="#collapseshortBy">
+                  <!-- Lowest to highest -->
+                  Sort by
+               </a>
+               <a class="anchor_link" (click)="resetSorting('total','ASC')">Reset</a>
+            </div>
+            <div id="collapseshortBy" class="accordion-body filter_acc collapse">
+               <div class="accordion-inner">
+                  <ng-scrollbar #scrollable track="all">
                      <div class="block_cmn price">
                         <h5>Price</h5>
                         <ul>
@@ -47,11 +52,11 @@
                            </li>
                         </ul>
                      </div>
-                  </div>
+                  </ng-scrollbar>
                </div>
             </div>
          </div>
-      </ng-scrollbar>
+      </div>
    </div>
    <!--  <div class="short_by">
                <div class="block_inn">

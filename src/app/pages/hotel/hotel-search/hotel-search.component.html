@@ -71,8 +71,9 @@
       <div class="filter_cnt">
           <div class="filter_saidbar">
             <div class="filter_by">
-              <h4>Filter By</h4>
-              <app-filter-hotel [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"></app-filter-hotel>
+              
+              <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
+                (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
             </div>
           </div>
       </div>

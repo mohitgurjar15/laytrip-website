@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
@@ -96,6 +97,12 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    $("#search_large_btn3").hover(
+      function () {
+        $('.norm_btn').toggleClass("d-none");
+        $('.hover_btn').toggleClass("show");
+      }
+    );
     this.countryCode = this.commonFunction.getUserCountry();
 
     if (this.route && this.route.snapshot.queryParams['check_in']) {
