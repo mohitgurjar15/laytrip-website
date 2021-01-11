@@ -1,7 +1,9 @@
-<section class="block_covid_19">
+<section class="block_covid_19 block_cms_page_main">
   <div class="container">
     <div class="row">
-      <div *ngIf="!loading" class="col-lg-12" [innerHtml]="cmsData.enContent">
+      <div class="col-lg-12">
+        <div *ngIf="!loading" class="block_cmspage_comman cms_laytrip" [innerHtml]="cmsData.enContent">
+        </div>
       </div>
     </div>
   </div>
