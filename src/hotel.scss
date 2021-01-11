@@ -5869,7 +5869,7 @@ ngb-datepicker {
                                     border: 1px solid $primary-color;
                                     color: $text-white;
                                     &:hover {
-                                        background: transparent;
+                                        // background: transparent;
                                         color: $primary-color;
                                     }
                                 }
@@ -5881,7 +5881,7 @@ ngb-datepicker {
                                     left: 0;
                                     width: 100%;
                                     height: 0%;
-                                    background: $primary-color;
+                                    background: $background-white;
                                     z-index: -1;
                                     transition: 0.8s;
                                     border-radius: 0 0 50% 50%;
