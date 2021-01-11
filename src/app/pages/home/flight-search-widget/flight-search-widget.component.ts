@@ -160,8 +160,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         let keys : any = toSearchString;
         this.toSearch = null;   
         this.toSearch = airports[keys];
-        this.searchFlightInfo.arrival = this.toSearch.code;
-        console.log(this)   
+        this.searchFlightInfo.arrival = this.toSearch.code; 
       }
     });
    
@@ -301,9 +300,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     var event = {"month":m,"year":y};
     if(price){      
       if(price.secondary_start_price>0){
-        if(price.secondary_start_price<5){
-          return '5.00';
-        }
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
       return `$${price.price.toFixed(2)}`;
@@ -404,8 +400,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof lowMinPrice!='undefined' && lowMinPrice.length){
         this.lowMinPrice = this.getMinPrice(lowMinPrice)
       }
-      console.log("this.lowMinPrice",this.lowMinPrice,lowMinPrice)
-      return this.lowMinPrice;
+      return this.lowMinPrice.toFixed(2);
     }
     if(type=='midMinPrice'){
 
@@ -413,8 +408,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof midMinPrice!='undefined' && midMinPrice.length){
         this.midMinPrice = this.getMinPrice(midMinPrice)
       }
-      console.log("this.midMinPrice",this.midMinPrice,midMinPrice)
-      return this.midMinPrice;
+      return this.midMinPrice.toFixed(2);
     }
     if(type=='highMinPrice'){
 
@@ -422,7 +416,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof highMinPrice!='undefined' && highMinPrice.length){
         this.highMinPrice = this.getMinPrice(highMinPrice)
       }
-      return this.highMinPrice;
+      return this.highMinPrice.toFixed(2);
     }
   }
 
