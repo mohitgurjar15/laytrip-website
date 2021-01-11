@@ -86,8 +86,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         this.route.queryParams.subscribe(function (params) {
             if (Object.keys(params).length > 0) {
+                _this.homeService.deleteToString();
                 _this.calPrices = true;
                 _this.fromSearch = airports_1.airports[params['departure']];
+                console.log('hello', _this.fromSearch);
                 //this.fromDestinationCode = this.fromSearch.code;
                 //this.departureCity = this.fromSearch.city;toSearch
                 //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
@@ -110,14 +112,18 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         });
         this.homeService.getToString.subscribe(function (toSearchString) {
             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+                console.log(toSearchString);
                 var keys = toSearchString;
                 // this.toSearch = null;   
                 _this.toSearch = airports_1.airports[keys];
                 _this.flightSearchForm.controls.fromDestination.setValue('');
                 _this.fromSearch = [];
-                console.log(_this);
                 _this.searchFlightInfo.arrival = _this.toSearch.code;
             }
+        });
+        this.homeService.deleteToString();
+        this.homeService.getToString.subscribe(function (toSearchString) {
+            console.log(toSearchString);
         });
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };

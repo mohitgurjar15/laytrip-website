@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie';
   templateUrl: './search-airport.component.html',
   styleUrls: ['./search-airport.component.scss']
 })
-export class SearchAirportComponent implements OnInit, AfterViewChecked {
+export class SearchAirportComponent implements OnInit {
 
   @Input() label: string;
   @Input() tabIndex: number;
@@ -41,13 +41,6 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
     this.setDefaultAirport();
     //this.data.push(this.airport)
     this.data[0] = this.airport ? this.airport : [];
-  }
-
-  ngDocheck() {
-  }
-
-  ngAfterViewChecked() {
-
   }
 
   searchAirport(searchItem) {
@@ -112,11 +105,11 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(changes['airport'].currentValue)
+
     if (changes['airport']) {
-      console.log(Object.keys(changes['airport'].currentValue).length,this.data);
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
       this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-
     }
   }
 

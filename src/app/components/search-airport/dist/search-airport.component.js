@@ -25,10 +25,6 @@ var SearchAirportComponent = /** @class */ (function () {
         //this.data.push(this.airport)
         this.data[0] = this.airport ? this.airport : [];
     };
-    SearchAirportComponent.prototype.ngDocheck = function () {
-    };
-    SearchAirportComponent.prototype.ngAfterViewChecked = function () {
-    };
     SearchAirportComponent.prototype.searchAirport = function (searchItem) {
         var _this = this;
         this.loading = true;
@@ -85,8 +81,8 @@ var SearchAirportComponent = /** @class */ (function () {
         }
     };
     SearchAirportComponent.prototype.ngOnChanges = function (changes) {
+        console.log(changes['airport'].currentValue);
         if (changes['airport']) {
-            console.log(Object.keys(changes['airport'].currentValue).length, this.data);
             this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
             this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
         }
