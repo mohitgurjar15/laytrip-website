@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+declare var $: any;
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -71,6 +72,7 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+   
     let host = window.location.origin;
     if (host.includes("staging")) {
       this.showCommingSoon = true;
@@ -124,8 +126,8 @@ export class VacationSearchWidgetComponent implements OnInit {
       this.dateFilter.hideOverlay();
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
-      this.rentalCheckInMinDate = this.rangeDates[0];
-      this.rentalForm.check_in_date = this.rentalCheckInMinDate;
+      this.rentalCheckInMinDate = new Date();
+      this.rentalForm.check_in_date = this.rangeDates[0];
       this.rentalForm.check_out_date = this.rangeDates[1];
 
     }

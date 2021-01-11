@@ -92,11 +92,11 @@
                                             <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
                                                 <span class="green_var"
-                                                    [hidden]="lowMinPrice == 0">${{lowMinPrice}}</span>
+                                                    [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
                                                 <span class="yellow_var"
-                                                    [hidden]="midMinPrice == 0">${{midMinPrice}}</span>
+                                                    [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>
                                                 <span class="red_var"
-                                                    [hidden]="highMinPrice == 0">${{highMinPrice}}</span>
+                                                    [hidden]="getPriceLabel('highMinPrice') == 0">${{getPriceLabel('highMinPrice')}}</span>
                                             </div>
                                         </p-header>
 
@@ -143,7 +143,7 @@
                         <li class="grid_box third">
 
                             <div class="serch_btn">
-                                <button id="search_large_btn"> 
+                                <button id="search_large_btn1"> 
                                     <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" class="norm_btn" />
                                     <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="search_icon" class="hover_btn" />
                                 </button>

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   isRoundTrip: boolean = false;
   countryCode: string;
   toString: string;
-  moduleId=1;
+  moduleId = 1;
   dealList;
 
   constructor(
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     public router: Router,
     public cd: ChangeDetectorRef,
     private renderer: Renderer2,
-    private homeService:HomeService
+    private homeService: HomeService
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
@@ -80,6 +80,15 @@ export class HomeComponent implements OnInit {
     $('[data-toggle="popover"]').popover();
   }
 
+  ngAfterViewInit() {
+    $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
+      function () {
+        $('.norm_btn').toggleClass("d-none");
+        $('.hover_btn').toggleClass("show");
+      }
+    );
+  }
+
 
   /**
    * Get All module like (hotel, flight & VR)
@@ -109,11 +118,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getDeal(moduleId){
+  getDeal(moduleId) {
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
-      this.dealList = response['data'];
-      },(error) => {});
+        this.dealList = response['data'];
+      }, (error) => { });
   }
 
   clickOnTab(tabName) {
@@ -155,7 +164,7 @@ export class HomeComponent implements OnInit {
 
   setToString(newItem: string) {
     this.toString = newItem;
-    this.homeService.setToString(newItem); 
+    this.homeService.setToString(newItem);
   }
 
 }

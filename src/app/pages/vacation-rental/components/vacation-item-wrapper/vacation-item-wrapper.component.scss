@@ -12,6 +12,10 @@ agm-map {
     display: flex;
     justify-content: space-between;
     margin-bottom: 18px;
+
+    @include tab-view {
+      flex-direction: column;
+  }
     .home-counter-wrapper{
       flex: 2;
       .block_result_found{
@@ -53,6 +57,10 @@ agm-map {
       img {
           margin-right: 5px;
       }
+      @include tab-view {
+        margin: 10px 0 0 0;
+        width: 100%;
+      }
     }
 }
 
@@ -60,6 +68,6 @@ agm-map {
   border: 3px solid #000 !important;
 }
 
-.hover-anchor-tag:hover {
-  border: 1px solid #000 !important;
-}
+// .hover-anchor-tag:hover {
+//   border: 1px solid #000 !important;
+// }

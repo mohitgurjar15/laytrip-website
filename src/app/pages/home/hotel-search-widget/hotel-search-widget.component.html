@@ -28,7 +28,7 @@
             [ngClass]="{'hotel-error': hotelSearchFormSubmitted && hotelSearchForm.controls.fromDestination.errors && hotelSearchForm.controls.fromDestination.errors.required==true}">
             <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
               <!-- <label>Check In-Check Out</label> -->
-              <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
+              <p-calendar #dateFilter inputId="range" dateFormat="M d yy" selectionMode="range" [(ngModel)]="rangeDates"
                 [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
                 panelStyleClass="calender-responsive-view laytrip-cal-view" [numberOfMonths]="2"
                 (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
@@ -55,7 +55,10 @@
         </li>
         <li class="grid_box third">
           <div class="serch_btn">
-            <button> <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" /></button>
+            <button id="search_large_btn2">
+              <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" class="norm_btn" />
+              <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="search_icon" class="hover_btn" />
+            </button>
           </div>
         </li>
       </ul>
