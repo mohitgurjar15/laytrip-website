@@ -40,7 +40,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.setDefaultAirport();
     //this.data.push(this.airport)
-    this.data[0] = this.airport;
+    this.data[0] = this.airport ? this.airport : [];
   }
 
   ngDocheck() {
@@ -113,8 +113,10 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['airport']) {
-      this.defaultCity = changes['airport'].currentValue.city;
-      this.data = [changes['airport'].currentValue];
+      console.log(Object.keys(changes['airport'].currentValue).length,this.data);
+      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+
     }
   }
 
