@@ -86,10 +86,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         this.route.queryParams.subscribe(function (params) {
             if (Object.keys(params).length > 0) {
-                _this.homeService.deleteToString();
+                //delete BehaviorSubject in the listing page
+                _this.homeService.removeToString();
                 _this.calPrices = true;
                 _this.fromSearch = airports_1.airports[params['departure']];
-                console.log('hello', _this.fromSearch);
                 //this.fromDestinationCode = this.fromSearch.code;
                 //this.departureCity = this.fromSearch.city;toSearch
                 //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
@@ -121,10 +121,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.searchFlightInfo.arrival = _this.toSearch.code;
             }
         });
-        this.homeService.deleteToString();
-        this.homeService.getToString.subscribe(function (toSearchString) {
-            console.log(toSearchString);
-        });
+        //delete BehaviorSubject at the end
+        this.homeService.removeToString();
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {

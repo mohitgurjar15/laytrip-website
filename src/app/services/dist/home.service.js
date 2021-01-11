@@ -44,11 +44,8 @@ var HomeService = /** @class */ (function () {
         return this.http.get(environment_1.environment.apiUrl + "v1/deal/" + moduleId, this.commonFunction.setHeaders(headers))
             .pipe(operators_1.catchError(this.handleError));
     };
-    HomeService.prototype.deleteToString = function () {
+    HomeService.prototype.removeToString = function () {
         this.toString.next({});
-    };
-    HomeService.prototype.removeRoomArr = function () {
-        this.toString.next();
     };
     HomeService = __decorate([
         core_1.Injectable({

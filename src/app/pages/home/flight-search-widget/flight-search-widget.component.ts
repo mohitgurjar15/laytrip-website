@@ -117,11 +117,11 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
 
       if (Object.keys(params).length > 0) {
-        this.homeService.deleteToString();  
+        //delete BehaviorSubject in the listing page
+        this.homeService.removeToString();  
 
         this.calPrices = true;
         this.fromSearch = airports[params['departure']];
-        console.log('hello',this.fromSearch)
         //this.fromDestinationCode = this.fromSearch.code;
         //this.departureCity = this.fromSearch.city;toSearch
         //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
@@ -157,12 +157,8 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.arrival = this.toSearch.code;
       }
     });
-    
-    this.homeService.deleteToString();  
-
-    this.homeService.getToString.subscribe(toSearchString=> {
-      console.log(toSearchString)    
-    });
+    //delete BehaviorSubject at the end
+    this.homeService.removeToString();  
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;      
     
   }

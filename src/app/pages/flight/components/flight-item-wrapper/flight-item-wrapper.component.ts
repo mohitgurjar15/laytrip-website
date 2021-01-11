@@ -82,7 +82,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    console.log('sds',this.showFlightDetails);
     this.flightList = this.flightDetails;
     this.userInfo = getLoginUserInfo();
 

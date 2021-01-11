@@ -48,10 +48,7 @@ export class HomeService {
             catchError(this.handleError)
         );
     }
-    deleteToString() {
+    removeToString() {
         this.toString.next({})
-    }
-    removeRoomArr() {        
-        this.toString.next();
-    }
+    }   
 }

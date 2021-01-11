@@ -105,7 +105,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes['airport'].currentValue)
 
     if (changes['airport']) {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
