@@ -109,7 +109,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
+    
     this.homeService.getToString.subscribe(toSearchString => {
       if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
         let keys: any = toSearchString;
