@@ -126,7 +126,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         dateNow.setMinutes(dateNow.getMinutes() + 10);
         sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
         sessionStorage.setItem('__route', JSON.stringify(route));
-        console.log("this.isInstalmentAvailable", this.isInstalmentAvailable);
         if (this.isInstalmentAvailable || this.totalLaycreditPoints > 0) {
             this.router.navigate(["flight/payment/" + route.route_code]);
         }
@@ -157,7 +156,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         this.flightList = changes.flightDetails.currentValue;
     };
     FlightItemWrapperComponent.prototype.logAnimation = function (event) {
-        console.log(event);
+        // console.log(event);
     };
     FlightItemWrapperComponent.prototype.ngOnDestroy = function () {
         this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });

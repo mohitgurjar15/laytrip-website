@@ -81,7 +81,6 @@ var FlightPriceSliderComponent = /** @class */ (function () {
     };
     FlightPriceSliderComponent.prototype.flipDates = function (dates) {
         var _this = this;
-        console.log(dates);
         var result = [];
         var sourceIndex = dates.findIndex(function (date) { return moment(date.date, "DD/MM/YYYY").format("YYYY-MM-DD") === _this.route.snapshot.queryParams['departure_date']; });
         var targetIndex = 4;
