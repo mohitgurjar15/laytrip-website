@@ -1,7 +1,9 @@
-<section class="block_about_us">
+<section class="block_cms_page_main">
     <div class="container">
       <div class="row">
-        <div *ngIf="!loading" class="col-lg-12" [innerHtml]="cmsData.enContent">
+        <div class="col-lg-12">
+          <div *ngIf="!loading" class="block_cmspage_comman cms_laytrip"  [innerHtml]="cmsData.enContent">
+          </div>
         </div>
       </div>
     </div>

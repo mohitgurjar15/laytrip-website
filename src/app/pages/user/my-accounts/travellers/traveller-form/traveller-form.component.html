@@ -95,7 +95,7 @@
                 <div class="form_field half">
                     <label>{{'dob' | translate}}<sup>*</sup></label>
                     <div class="text_field">
-                        <p-calendar dateFormat="d M yy" tabindex="6" inputStyleClass="custom_datpicker birth_date"
+                        <p-calendar dateFormat="M d yy" tabindex="6" inputStyleClass="custom_datpicker birth_date"
                             inputId="basic" formControlName="dob" placeholder="{{'dob_placeholder' | translate}}"
                             [maxDate]="dobMaxDate" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020"
                             [defaultDate]="dobMaxDate" (onSelect)=changeDateOfBirth($event)>
@@ -199,7 +199,7 @@
                 <div class="form_field half">
                     <label>{{'passport_expiry_date' | translate}}</label>
                     <div class="text_field">
-                        <p-calendar dateFormat="d M yy" tabindex="6" inputStyleClass="custom_datpicker birth_date"
+                        <p-calendar dateFormat="M d yy" tabindex="6" inputStyleClass="custom_datpicker birth_date"
                             inputId="basic" formControlName="passport_expiry" [minDate]="expiryMinDate"
                             [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2030"
                             [defaultDate]="dobMaxDate" panelStyleClass="calender-passport-expiry"

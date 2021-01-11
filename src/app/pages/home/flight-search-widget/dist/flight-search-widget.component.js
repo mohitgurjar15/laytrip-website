@@ -80,16 +80,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
-        this.homeService.getToString.subscribe(function (toSearchString) {
-            if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-                var keys = toSearchString;
-                _this.toSearch = null;
-                // if(typeof this.toSearch != 'undefined'){
-                _this.toSearch = airports_1.airports[keys];
-                // this.toSearch['getDates'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
-                _this.searchFlightInfo.arrival = _this.toSearch.code;
-                // }
-            }
+        $("#search_large_btn").hover(function () {
+            $('.norm_btn').toggleClass("d-none");
+            $('.hover_btn').toggleClass("show");
         });
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.calenderPrices.length == 0) {
@@ -117,6 +110,15 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             }
             else {
                 _this.calPrices = false;
+            }
+        });
+        this.homeService.getToString.subscribe(function (toSearchString) {
+            if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+                var keys = toSearchString;
+                _this.toSearch = null;
+                _this.toSearch = airports_1.airports[keys];
+                _this.searchFlightInfo.arrival = _this.toSearch.code;
+                console.log(_this);
             }
         });
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;

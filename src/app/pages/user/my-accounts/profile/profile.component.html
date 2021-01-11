@@ -372,7 +372,7 @@
                                         <div class="field_inn">
                                             <label>{{'dob' | translate}}<sup>*</sup></label>
                                             <div class="text_field">
-                                                <p-calendar dateFormat="d M yy" inputStyleClass="custom_datpicker birth_date" inputId="basic" tabindex="6" formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020" placeholder="{{'dob_placeholder' | translate}}"
+                                                <p-calendar dateFormat="M d yy" inputStyleClass="custom_datpicker birth_date" inputId="basic" tabindex="6" formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020" placeholder="{{'dob_placeholder' | translate}}"
                                                     [defaultDate]="dobMinDate">
                                                 </p-calendar>
                                                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors" class="focus-input100 login-error">
@@ -554,7 +554,7 @@
                                             <label>{{'passport_expiry_date' | translate}}</label>
                                             <div class="text_field">
                                                 <p-calendar inputStyleClass="custom_datpicker passport_expiry_cal birth_date" inputId="basic" formControlName="passport_expiry" [minDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2030" [defaultDate]="dobMinDate"
-                                                    tabindex="16" panelStyleClass="calender-passport-expiry" placeholder="{{'passport_expiry_date_placeholder' | translate}}">
+                                                    tabindex="16"  dateFormat="M d yy" panelStyleClass="calender-passport-expiry" placeholder="{{'passport_expiry_date_placeholder' | translate}}">
                                                 </p-calendar>
                                             </div>
                                         </div>
