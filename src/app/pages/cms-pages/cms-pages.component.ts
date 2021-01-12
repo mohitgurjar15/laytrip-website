@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
