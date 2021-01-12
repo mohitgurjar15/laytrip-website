@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-price-summary',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PriceSummaryComponent implements OnInit {
 
-  constructor() { }
+  @Input() priceSummary;
+  @Input() priceData=[];
+  
+  constructor(
+    private commonFunction:CommonFunction
+  ) { }
 
   ngOnInit(): void {
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['priceSummary']) {
+      this.priceSummary = changes['priceSummary'].currentValue;
+    }
   }
 
 }
