@@ -244,7 +244,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     else {
       this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
     }
-    console.log("After Key:",key,this.flightDetails)
+    // console.log("After Key:",key,this.flightDetails)
 
   }
 

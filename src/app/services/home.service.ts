@@ -10,10 +10,10 @@ import { CommonFunction } from "../_helpers/common-function";
     providedIn: 'root',
   })
 export class HomeService {
-    private toString = new BehaviorSubject({});
+    private toString : any = new BehaviorSubject({});
     getToString = this.toString.asObservable();
 
-  
+    
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
@@ -21,7 +21,7 @@ export class HomeService {
 
     handleError(error) {
         let errorMessage = {};
-        if (error.status == 0) {
+        if (error.starepertoireSubjecttus == 0) {
             console.log("API Server is not responding")
         }
         if (error.error instanceof ErrorEvent) {
@@ -48,4 +48,7 @@ export class HomeService {
             catchError(this.handleError)
         );
     }
+    removeToString() {
+        this.toString.next({})
+    }   
 }
