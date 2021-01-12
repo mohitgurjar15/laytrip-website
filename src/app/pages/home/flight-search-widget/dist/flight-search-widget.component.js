@@ -112,13 +112,19 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         });
         this.homeService.getToString.subscribe(function (toSearchString) {
             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-                console.log(toSearchString);
                 var keys = toSearchString;
                 // this.toSearch = null;   
                 _this.toSearch = airports_1.airports[keys];
                 _this.flightSearchForm.controls.fromDestination.setValue('');
                 _this.fromSearch = [];
-                _this.searchFlightInfo.arrival = _this.toSearch.code;
+                // this.flightDepartureMinDate = moment(this.departureDate).add(1 ,'M');
+                if (!_this.isRoundTrip) {
+                    _this.departureDate = new Date(moment(_this.departureDate).add(1, 'M').format("MM/DD/YYYY"));
+                }
+                else {
+                    _this.rangeDates = [new Date(moment(_this.departureDate).add(1, 'M').format("MM/DD/YYYY")), new Date(moment(_this.returnDate).add(1, 'M').format("MM/DD/YYYY"))];
+                    _this.searchFlightInfo.arrival = _this.toSearch.code;
+                }
             }
         });
         //delete BehaviorSubject at the end
@@ -240,9 +246,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var price = this.calenderPrices.find(function (d) { return d.date == date; });
         if (price) {
             if (price.secondary_start_price > 0) {
-                if (price.secondary_start_price < 5) {
-                    return '5.00';
-                }
                 return "$" + price.secondary_start_price.toFixed(2);
             }
             return "$" + price.price.toFixed(2);
@@ -321,21 +324,21 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             if (typeof lowMinPrice != 'undefined' && lowMinPrice.length) {
                 this.lowMinPrice = this.getMinPrice(lowMinPrice);
             }
-            return this.lowMinPrice;
+            return this.lowMinPrice.toFixed(2);
         }
         if (type == 'midMinPrice') {
             var midMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'medium' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
             if (typeof midMinPrice != 'undefined' && midMinPrice.length) {
                 this.midMinPrice = this.getMinPrice(midMinPrice);
             }
-            return this.midMinPrice;
+            return this.midMinPrice.toFixed(2);
         }
         if (type == 'highMinPrice') {
             var highMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'high' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
             if (typeof highMinPrice != 'undefined' && highMinPrice.length) {
                 this.highMinPrice = this.getMinPrice(highMinPrice);
             }
-            return this.highMinPrice;
+            return this.highMinPrice.toFixed(2);
         }
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {

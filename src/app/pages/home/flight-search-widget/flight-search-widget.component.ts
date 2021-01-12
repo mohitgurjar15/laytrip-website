@@ -53,7 +53,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightDepartureMinDate;
   flightReturnMinDate;
 
-  departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
+  departureDate : any = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
   returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
@@ -148,13 +148,18 @@ export class FlightSearchWidgetComponent implements OnInit {
     
     this.homeService.getToString.subscribe(toSearchString=> {
       if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
-       console.log(toSearchString)
         let keys : any = toSearchString;
         // this.toSearch = null;   
         this.toSearch = airports[keys];
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.fromSearch = [];
-        this.searchFlightInfo.arrival = this.toSearch.code;
+        // this.flightDepartureMinDate = moment(this.departureDate).add(1 ,'M');
+        if(!this.isRoundTrip){
+          this.departureDate = new Date(moment(this.departureDate).add(1, 'M').format("MM/DD/YYYY"));
+        } else {
+          this.rangeDates =[ new Date(moment(this.departureDate).add(1, 'M').format("MM/DD/YYYY")), new Date(moment(this.returnDate).add(1, 'M').format("MM/DD/YYYY"))];
+          this.searchFlightInfo.arrival = this.toSearch.code;
+        }
       }
     });
     //delete BehaviorSubject at the end
