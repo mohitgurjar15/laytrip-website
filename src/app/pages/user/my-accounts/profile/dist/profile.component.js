@@ -201,6 +201,7 @@ var ProfileComponent = /** @class */ (function () {
             if (typeof _this.location != 'undefined') {
                 countryName = _this.location.country.name;
             }
+            console.log(moment(res.dob).format('MMM d yy'));
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,

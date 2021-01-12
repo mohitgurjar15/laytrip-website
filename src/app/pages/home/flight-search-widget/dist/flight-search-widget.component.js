@@ -119,10 +119,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.fromSearch = [];
                 // this.flightDepartureMinDate = moment(this.departureDate).add(1 ,'M');
                 if (!_this.isRoundTrip) {
-                    _this.departureDate = new Date(moment(_this.departureDate).add(1, 'M').format("MM/DD/YYYY"));
+                    _this.departureDate = new Date(moment().add(1, 'M').format("MM/DD/YYYY"));
                 }
                 else {
-                    _this.rangeDates = [new Date(moment(_this.departureDate).add(1, 'M').format("MM/DD/YYYY")), new Date(moment(_this.returnDate).add(1, 'M').format("MM/DD/YYYY"))];
+                    _this.rangeDates = [new Date(moment().add(1, 'M').format("MM/DD/YYYY")), new Date(moment().add(38, 'days').format("MM/DD/YYYY"))];
                     _this.searchFlightInfo.arrival = _this.toSearch.code;
                 }
             }

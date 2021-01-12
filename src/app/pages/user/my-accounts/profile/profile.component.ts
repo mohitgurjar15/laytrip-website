@@ -225,6 +225,7 @@ export class ProfileComponent implements OnInit {
       if(typeof this.location != 'undefined'){
         countryName = this.location.country.name;
       }
+      console.log(moment(res.dob).format('MMM d yy'))
       this.profileForm.patchValue({      
           first_name: res.firstName,
           last_name: res.lastName,

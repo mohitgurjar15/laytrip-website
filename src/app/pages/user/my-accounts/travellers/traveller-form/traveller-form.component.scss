@@ -32,3 +32,57 @@
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field .text_field.custom-select{
 	border-bottom: 1px solid #E0E2E5;		
 }
+
+::ng-deep .calender-price-view{
+    //width: 340px;
+    min-width: 340px !important;
+    
+    .p-datepicker-calendar-container{
+        .p-datepicker-calendar{
+            tbody{
+                tr{
+                    td{
+                        .p-ripple{
+                            display: flex;
+                            flex-flow: column;
+                            width: auto;
+                            height: auto;
+                            border-radius: 0;
+                            background: transparent;
+
+                            &:hover{
+                                background: transparent;
+                                .c_date{
+                                    background: #F826C1;
+                                }
+                            }
+                            &.p-highlight {
+                                background: transparent !important;
+                                .c_date{
+                                    background: #F826C1;
+                                }
+                            }
+                        }
+
+                        .c_date{
+                            display: block;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            background: #2196F3;
+                            padding: 5px;
+                            text-align: center;
+                            line-height: 20px;
+                            color: #fff !important;
+                        }
+                        .calender_price{
+                            display: block;
+                            margin-top:3px;
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+}

@@ -155,9 +155,9 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.fromSearch = [];
         // this.flightDepartureMinDate = moment(this.departureDate).add(1 ,'M');
         if(!this.isRoundTrip){
-          this.departureDate = new Date(moment(this.departureDate).add(1, 'M').format("MM/DD/YYYY"));
+          this.departureDate = new Date(moment().add(1, 'M').format("MM/DD/YYYY"));
         } else {
-          this.rangeDates =[ new Date(moment(this.departureDate).add(1, 'M').format("MM/DD/YYYY")), new Date(moment(this.returnDate).add(1, 'M').format("MM/DD/YYYY"))];
+          this.rangeDates =[ new Date(moment().add(1, 'M').format("MM/DD/YYYY")), new Date(moment().add(38, 'days').format("MM/DD/YYYY"))];
           this.searchFlightInfo.arrival = this.toSearch.code;
         }
       }
