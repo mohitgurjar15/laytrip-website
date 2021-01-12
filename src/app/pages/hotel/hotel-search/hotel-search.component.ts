@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { HotelService } from '../../../services/hotel.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
+declare var $: any;
 
 @Component({
   selector: 'app-hotel-search',
@@ -64,6 +65,15 @@ export class HotelSearchComponent implements OnInit {
       });
       this.getHotelSearchData(payload);
     });
+  }
+
+  ngAfterViewInit() {
+    $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
+      function () {
+        $('.norm_btn').toggleClass("d-none");
+        $('.hover_btn').toggleClass("show");
+      }
+    );
   }
 
   getHotelSearchData(payload) {
