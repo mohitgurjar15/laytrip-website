@@ -13,7 +13,7 @@
                   <!-- Lowest to highest -->
                   Sort by
                </a>
-               <a class="anchor_link" (click)="resetSorting('total','ASC')">Reset</a>
+               <a class="anchor_link" [hidden]="lowToHighToggle !== true" (click)="resetSorting('total','ASC')">Reset</a>
             </div>
             <div id="collapseshortBy" class="accordion-body filter_acc collapse">
                <div class="accordion-inner">

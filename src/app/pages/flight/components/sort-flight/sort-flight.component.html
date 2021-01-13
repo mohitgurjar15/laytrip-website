@@ -14,7 +14,7 @@
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                         {{'sort_by' | translate}}
                     </a>
-                    <a class="anchor_link" (click)="resetSorting('selling_price','ASC')"> {{'reset' | translate}}</a>
+                    <a class="anchor_link" [hidden]="lowToHighToggle !== true" (click)="resetSorting('selling_price','ASC')"> {{'reset' | translate}}</a>
                 </div>
                 <div id="collapseOne" class="accordion-body collapse">
                     <div class="accordion-inner">

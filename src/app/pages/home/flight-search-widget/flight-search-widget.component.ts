@@ -404,7 +404,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof lowMinPrice!='undefined' && lowMinPrice.length){
         this.lowMinPrice = this.getMinPrice(lowMinPrice)
       }
-      console.log("this.lowMinPrice",this.lowMinPrice,lowMinPrice)
       return this.lowMinPrice;
     }
     if(type=='midMinPrice'){
@@ -413,7 +412,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof midMinPrice!='undefined' && midMinPrice.length){
         this.midMinPrice = this.getMinPrice(midMinPrice)
       }
-      console.log("this.midMinPrice",this.midMinPrice,midMinPrice)
       return this.midMinPrice;
     }
     if(type=='highMinPrice'){
