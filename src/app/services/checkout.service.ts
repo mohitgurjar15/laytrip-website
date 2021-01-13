@@ -15,6 +15,9 @@ export class CheckOutService {
     getTraveler = this.traveler.asObservable();
     getTravelerNumber = this.traveler_number.asObservable();
 
+    private travelers = new BehaviorSubject([]);
+    getTravelers = this.travelers.asObservable();
+
     constructor() { }
 
     selectTraveler(traveler) {
@@ -23,6 +26,10 @@ export class CheckOutService {
 
     selectTravelerNumber(traveler_number){
         this.traveler_number.next(traveler_number)
+    }
+
+    setTravelers(travelers){
+        this.travelers.next(travelers)
     }
 }
    

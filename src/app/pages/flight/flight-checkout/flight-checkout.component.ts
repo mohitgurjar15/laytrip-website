@@ -418,9 +418,7 @@ export class FlightCheckoutComponent implements OnInit {
 
     getTravelers() {
       this.travelerService.getTravelers().subscribe((res:any)=>{
-        this.travelers=res.data;
-        console.log("This.travelers, checkout",this.travelers)        
+        this.travelers=res.data;      
       })
-      
     }
 }

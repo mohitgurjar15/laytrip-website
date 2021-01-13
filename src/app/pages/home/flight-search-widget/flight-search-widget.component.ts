@@ -32,7 +32,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightSearchFormSubmitted = false;
   isCalenderPriceLoading: boolean = true;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromSearch = airports['JFK'];
+  fromSearch : any = airports['JFK'];
   //fromDestinationCode = this.fromSearch.code;
   //departureCity = this.fromSearch.city;
   //departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
@@ -79,7 +79,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     };
 
   searchedValue = [];
-
+  
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -110,19 +110,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
 
-    this.homeService.getToString.subscribe(toSearchString => {
-      if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-        let keys: any = toSearchString;
-        this.toSearch = null;
-        // if(typeof this.toSearch != 'undefined'){
-        this.toSearch = airports[keys];
-        // this.toSearch['getDates'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
-        this.searchFlightInfo.arrival = this.toSearch.code;
-
-        // }
-      }
-    });
-
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.calenderPrices.length == 0) {
       this.isCalenderPriceLoading = false;
@@ -130,6 +117,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
 
       if (Object.keys(params).length > 0) {
+        //delete BehaviorSubject in the listing page
+        this.homeService.removeToString();  
+
         this.calPrices = true;
         this.fromSearch = airports[params['departure']];
         //this.fromDestinationCode = this.fromSearch.code;
@@ -155,17 +145,21 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.calPrices = false;
       }
     });
+    
     this.homeService.getToString.subscribe(toSearchString=> {
       if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
+       console.log(toSearchString)
         let keys : any = toSearchString;
-        this.toSearch = null;   
+        // this.toSearch = null;   
         this.toSearch = airports[keys];
+        this.flightSearchForm.controls.fromDestination.setValue('');
+        this.fromSearch = [];
         this.searchFlightInfo.arrival = this.toSearch.code;
-        console.log(this)   
       }
     });
-   
-    this.lowMinPrice= this.midMinPrice = this.highMinPrice = 0;      
+    //delete BehaviorSubject at the end
+    this.homeService.removeToString();  
+    this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;      
     
   }
 
@@ -297,13 +291,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     month = month.toString().length == 1 ? '0' + month : month;
     let date = `${day}/${month}/${y}`;
     let price:any = this.calenderPrices.find((d:any)=> d.date == date);
-    //this.getMinimumPricesList(this.calenderPrices);
-    var event = {"month":m,"year":y};
     if(price){      
       if(price.secondary_start_price>0){
-        if(price.secondary_start_price<5){
-          return '5.00';
-        }
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
       return `$${price.price.toFixed(2)}`;
@@ -373,7 +362,6 @@ export class FlightSearchWidgetComponent implements OnInit {
             
           this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
               this.calenderPrices = [...this.calenderPrices,...res];
-              //this.getMinimumPricesList(this.calenderPrices);
               this.isCalenderPriceLoading = false;
           }, err => {
             this.calPrices = false;
@@ -386,17 +374,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
-  getMinimumPricesList(prices) {
-        
-    //this.lowMinPrice = this.getMinPrice(prices.filter(item => item.flag === 'low' && this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM')  && this.currentYear == new Date(item.date).getFullYear()));// /* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
-    //this.midMinPrice =  this.getMinPrice(prices.filter(item => item.flag === 'medium' && this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM')  && this.currentYear == new Date(item.date).getFullYear()));///* && this.currentMonth === item.date.getMonth() && this.currentYear === item.date.getYear() */));
-    //this.highMinPrice =  this.getMinPrice(prices.filter(item => item.flag === 'high' && this.currentMonth == moment(item.date, 'YYYY-MM-DD').format('MM')  && this.currentYear == new Date(item.date).getFullYear()));// /* && this.currentMonth === book.date.getMonth() && this.currentYear === book.date.getYear() */));
-    //alert(this.lowMinPrice+":"+this.midMinPrice+":"+this.highMinPrice+":"+this.currentMonth+":"+this.currentYear)
-  }
-
-  getPriceLabel(type){
-
-    
+  
+  getPriceLabel(type){    
     
     if(type=='lowMinPrice'){
 
@@ -404,7 +383,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof lowMinPrice!='undefined' && lowMinPrice.length){
         this.lowMinPrice = this.getMinPrice(lowMinPrice)
       }
-      return this.lowMinPrice;
+      return this.lowMinPrice.toFixed(2);
     }
     if(type=='midMinPrice'){
 
@@ -412,7 +391,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof midMinPrice!='undefined' && midMinPrice.length){
         this.midMinPrice = this.getMinPrice(midMinPrice)
       }
-      return this.midMinPrice;
+      return this.midMinPrice.toFixed(2);
     }
     if(type=='highMinPrice'){
 
@@ -420,7 +399,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof highMinPrice!='undefined' && highMinPrice.length){
         this.highMinPrice = this.getMinPrice(highMinPrice)
       }
-      return this.highMinPrice;
+      return this.highMinPrice.toFixed(2);
     }
   }
 

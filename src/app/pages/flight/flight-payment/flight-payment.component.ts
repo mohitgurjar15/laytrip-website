@@ -5,6 +5,9 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
+import { FormGroup } from '@angular/forms';
+import { TravelerService } from '../../../services/traveler.service';
+import { CheckOutService } from '../../../services/checkout.service';
 
 @Component({
   selector: 'app-flight-payment',
@@ -36,12 +39,17 @@ export class FlightPaymentComponent implements OnInit {
   priceData=[];
   totalLaycreditPoints:number=0;
   isLayCreditLoading:boolean=false;
+  priceSummary;
+  travelerForm: FormGroup;
+  travelers=[];
 
   constructor(
     private route: ActivatedRoute,
     private router:Router,
     private flightService: FlightService,
-    private genericService:GenericService
+    private genericService:GenericService,
+    private travelerService:TravelerService,
+    private checkOutService:CheckOutService
   ) { 
     this.totalLaycredit();
   }
@@ -50,6 +58,9 @@ export class FlightPaymentComponent implements OnInit {
     window.scroll(0,0);
     this.routeCode = this.route.snapshot.paramMap.get('rc');  
     this.userInfo = getLoginUserInfo();
+    if(Object.keys(this.userInfo).length>0){
+      this.getTravelers();
+    }
 
     let __route = sessionStorage.getItem('__route');
     try{
@@ -107,13 +118,9 @@ export class FlightPaymentComponent implements OnInit {
 
   getInstalmentData(data){
 
-    this.additionalAmount = data.additionalAmount;
     this.instalmentType = data.instalmentType;
-    this.customAmount = data.customAmount;
-    this.customInstalment = data.customInstalment;
     this.laycreditpoints = data.layCreditPoints;
-    this.partialPaymentAmount=data.partialPaymentAmount;
-    this.payNowAmount = data.payNowAmount;
+    this.priceSummary=data;
     sessionStorage.setItem('__islt',btoa(JSON.stringify(data)))
   }
 
@@ -145,5 +152,12 @@ export class FlightPaymentComponent implements OnInit {
 
   redeemableLayCredit(event){
     this.redeemableLayPoints=event;
+  }
+
+  getTravelers() {
+    this.travelerService.getTravelers().subscribe((res:any)=>{
+      //this.travelers=res.data;
+      this.checkOutService.setTravelers(res.data)
+    })
   }
 }

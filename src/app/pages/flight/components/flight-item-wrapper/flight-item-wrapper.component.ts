@@ -82,7 +82,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    console.log('sds',this.showFlightDetails);
     this.flightList = this.flightDetails;
     this.userInfo = getLoginUserInfo();
 
@@ -177,7 +176,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     
     sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
     sessionStorage.setItem('__route',JSON.stringify(route));
-    console.log("this.isInstalmentAvailable",this.isInstalmentAvailable)
     if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
       this.router.navigate([`flight/payment/${route.route_code}`]);
     } else{
@@ -212,7 +210,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   logAnimation(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   ngOnDestroy(): void {

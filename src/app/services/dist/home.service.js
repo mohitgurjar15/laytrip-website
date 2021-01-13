@@ -20,7 +20,7 @@ var HomeService = /** @class */ (function () {
     }
     HomeService.prototype.handleError = function (error) {
         var errorMessage = {};
-        if (error.status == 0) {
+        if (error.starepertoireSubjecttus == 0) {
             console.log("API Server is not responding");
         }
         if (error.error instanceof ErrorEvent) {
@@ -43,6 +43,9 @@ var HomeService = /** @class */ (function () {
         };
         return this.http.get(environment_1.environment.apiUrl + "v1/deal/" + moduleId, this.commonFunction.setHeaders(headers))
             .pipe(operators_1.catchError(this.handleError));
+    };
+    HomeService.prototype.removeToString = function () {
+        this.toString.next({});
     };
     HomeService = __decorate([
         core_1.Injectable({

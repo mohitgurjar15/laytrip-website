@@ -140,6 +140,10 @@
 								// top: 1px;
 								border-radius: 50%;
 							}
+
+							@include ipad-view{
+								max-width: 130px;
+							}
 						}
 					}
 
@@ -698,7 +702,7 @@
 	width: 100%;
 	background: rgba(248, 38, 193, 0.8);
 	position: absolute;
-	z-index: 9;
+	z-index: 50;
 	padding: 10px 0;
 
 	span {

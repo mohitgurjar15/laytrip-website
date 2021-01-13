@@ -1,31 +1,98 @@
+<!-- <form [formGroup]="travelerForm" (ngSubmit)="submit(travelerForm.value)">
+  <div formGroupName="type">
+		<div formArrayName="users">
+      <div *ngFor="let child of travelerForm.get('type.users').controls; let i = index">
+        <div [formGroupName]="i">
+            <div class="form-row" style="margin-top:20px">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_number">
+              </div>
+              <div class="col">
+                <select class="form-control" formControlName="gender">
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">  
+              
+              <div class="col">
+                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Nationality" formControlName="country">
+              </div>
+              
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit">Submit</button>
+</form> -->
 
-    <div class="form-row">
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_number">
-      </div>
-      <div class="col">
-        <select class="form-control" formControlName="gender">
-          <option>Male</option>
-          <option>Female</option>
-        </select>
+
+
+
+<form [formGroup]="travelerForm" (ngSubmit)="submit(travelerForm.value)">
+  <div formGroupName="type">
+		<div formArrayName="users">
+      <div id="accordion">
+        <div class="card" *ngFor="let traveler of travelerForm.get('type.users')['controls']; let x = index">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" >
+              Traveler {{x+1}}
+            </a>
+          </div>
+          <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+                <div [formGroupName]="x">
+                  <div class="form-row" style="margin-top:20px">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_number">
+                    </div>
+                    <div class="col">
+                      <select class="form-control" formControlName="gender">
+                        <option>Male</option>
+                        <option>Female</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">  
+                    
+                    <div class="col">
+                      <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Nationality" formControlName="country">
+                    </div>
+                    
+                  </div>
+                </div>
+                <app-my-traveler [travelers]="travelers" traveler_number={{x}} ></app-my-traveler>
+            </div>
+          </div>
+        </div>
+        <button type="submit">Submit</button>
       </div>
     </div>
-    <div class="form-row">  
-      
-      <div class="col">
-        <input type="email" class="form-control" placeholder="Email" formControlName="email">
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Nationality" formControlName="dob">
-      </div>
-      
-    </div>
+  </div>
+</form>

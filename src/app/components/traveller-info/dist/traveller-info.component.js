@@ -38,7 +38,7 @@ var TravellerInfoComponent = /** @class */ (function () {
     };
     TravellerInfoComponent.prototype.loadJquery = function () {
         $("body").click(function () {
-            $("#add_traveler_open").hide("slow");
+            $("#add_traveler_open").hide();
         });
         $("#add_traveler").click(function (e) {
             e.stopPropagation();

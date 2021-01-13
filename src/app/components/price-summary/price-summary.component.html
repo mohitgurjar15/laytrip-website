@@ -1,1 +1,42 @@
-<p>price-summary works!</p>
+<div class="pay_summery_wrapper">
+    <h3>Payment Summary</h3>
+    <div class="pay_sum_inner">
+      <div class="pay_list_wrper">
+        <div class="pay_listing">
+          <span>Total Purchase</span>
+          <span>${{priceSummary.instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
+        </div>
+        <div class="pay_listing">
+          <span>Downpayment</span>
+          <span>${{priceSummary.instalments.instalment_date[0].instalment_amount | number : '1.2-2'}}</span>
+        </div>
+        <div class="pay_listing" *ngIf="priceSummary.layCreditPoints>0">
+          <span>Applied Laytrip Points</span>
+          <span>-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
+        </div>
+      </div>
+      <div class="price_accordion" id="price_collapse">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              Total Due Now
+              <span>${{priceSummary.remainingAmount | number : '1.2-2'}}</span>
+            </button>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
+            <div class="card-body">
+              <div class="pay_sap_setions" *ngIf="priceSummary.instalments!='undefined'">
+                <h3>Installments</h3>
+                <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1">
+                  <span>Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
+                  <span>${{instalment.instalment_amount |
+                    number : '1.2-2'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

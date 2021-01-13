@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HomeService } from '../../../services/home.service';
 import { environment } from '../../../../environments/environment';
 import { timeStamp } from 'console';
+import { airports } from '../../flight/airports';
 
 @Component({
   selector: 'app-deal',

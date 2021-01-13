@@ -102,7 +102,6 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   flipDates(dates){
-    console.log(dates)
     let result =[]
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
     let targetIndex = 4;
