@@ -30,6 +30,7 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { SsoLoginComponent } from './sso-login/sso-login.component';
 import { CovidPageComponent } from './covid-page/covid-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CmsPagesComponent } from './cms-pages/cms-pages.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     SsoLoginComponent,
     CovidPageComponent,
     AboutUsComponent,
+    CmsPagesComponent,
   ],
   imports: [
     CommonModule,

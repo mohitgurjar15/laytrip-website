@@ -338,3 +338,11 @@ input.border-css.ng-touched.ng-dirty ng-invalid {
 	}
 } */
 .hover-link{cursor: pointer;}
+
+.account_datepicker{
+	span {
+		&.p-calendar {
+			width: 100%;
+		}
+	}
+}

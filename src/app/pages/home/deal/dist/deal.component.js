@@ -14,8 +14,11 @@ var DealComponent = /** @class */ (function () {
         this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.toString = new core_1.EventEmitter();
+        this.dealList = [];
+        this.list = [];
     }
-    DealComponent.prototype.ngOnInit = function () { };
+    DealComponent.prototype.ngOnInit = function () {
+    };
     DealComponent.prototype.ngAfterContentChecked = function () {
         this.list = this.dealList;
     };

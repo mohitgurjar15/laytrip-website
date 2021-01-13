@@ -1,20 +1,7 @@
 <section class="block_covid_19 block_cms_page_main">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <div *ngIf="!loading" class="block_cmspage_comman cms_laytrip" [innerHtml]="cmsData.enContent">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- skeleton loading start -->
-<section class="block_cms_page_main">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-12"  *ngIf="loading">
         <div class="block_cmspage_comman cms_laytrip">
           <div class="fb_animation pb-3 pt-3 mb-3">
           </div>
@@ -32,7 +19,10 @@
           </div>
         </div>
       </div>
+      <div class="col-lg-12">
+        <div *ngIf="!loading" class="block_cmspage_comman cms_laytrip" [innerHtml]="cmsData.enContent">
+        </div>
+      </div>
     </div>
   </div>
 </section>
-<!-- skeleton loading end -->
