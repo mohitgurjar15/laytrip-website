@@ -38,6 +38,7 @@ var download_app_component_1 = require("./download-app/download-app.component");
 var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
 var sso_login_component_1 = require("./sso-login/sso-login.component");
 var covid_page_component_1 = require("./covid-page/covid-page.component");
+var about_us_component_1 = require("./about-us/about-us.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -65,6 +66,7 @@ var PagesModule = /** @class */ (function () {
                 coming_soon_component_1.ComingSoonComponent,
                 sso_login_component_1.SsoLoginComponent,
                 covid_page_component_1.CovidPageComponent,
+                about_us_component_1.AboutUsComponent,
             ],
             imports: [
                 common_1.CommonModule,

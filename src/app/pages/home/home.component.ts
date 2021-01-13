@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   countryCode: string;
   toString: string;
   moduleId = 1;
-  dealList;
+  dealList= [];
 
   constructor(
     private genericService: GenericService,
@@ -122,7 +122,9 @@ export class HomeComponent implements OnInit {
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
         this.dealList = response['data'];
-      }, (error) => { });
+      }, (error) => { 
+        
+      });
   }
 
   clickOnTab(tabName) {

@@ -13,13 +13,15 @@ export class DealComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Output() toString = new EventEmitter<string>();
-  @Input()  dealList;
-  list;
+  @Input()  dealList = [];
+  list = [];
   constructor(
     private homeService : HomeService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+  
   
   ngAfterContentChecked(){
     this.list = this.dealList;
