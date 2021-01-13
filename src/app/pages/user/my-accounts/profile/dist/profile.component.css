@@ -22,3 +22,42 @@ input.ng-invalid.ng-touched {
 ::ng-deep .calender-passport-expiry {
   min-width: 300px !important;
 }
+
+::ng-deep .calender-price-view {
+  min-width: 340px !important;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple {
+  display: flex;
+  flex-flow: column;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple:hover {
+  background: transparent;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple:hover .c_date {
+  background: #F826C1;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight {
+  background: transparent !important;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight .c_date {
+  background: #F826C1;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .c_date {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #2196F3;
+  padding: 5px;
+  text-align: center;
+  line-height: 20px;
+  color: #fff !important;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .calender_price {
+  display: block;
+  margin-top: 3px;
+}
