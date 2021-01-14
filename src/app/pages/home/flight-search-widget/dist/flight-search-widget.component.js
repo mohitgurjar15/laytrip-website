@@ -112,13 +112,19 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         });
         this.homeService.getToString.subscribe(function (toSearchString) {
             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-                console.log(toSearchString);
                 var keys = toSearchString;
                 // this.toSearch = null;   
                 _this.toSearch = airports_1.airports[keys];
                 _this.flightSearchForm.controls.fromDestination.setValue('');
                 _this.fromSearch = [];
-                _this.searchFlightInfo.arrival = _this.toSearch.code;
+                // this.flightDepartureMinDate = moment(this.departureDate).add(1 ,'M');
+                if (!_this.isRoundTrip) {
+                    _this.departureDate = new Date(moment().add(1, 'M').format("MM/DD/YYYY"));
+                }
+                else {
+                    _this.rangeDates = [new Date(moment().add(1, 'M').format("MM/DD/YYYY")), new Date(moment().add(38, 'days').format("MM/DD/YYYY"))];
+                    _this.searchFlightInfo.arrival = _this.toSearch.code;
+                }
             }
         });
         //delete BehaviorSubject at the end
@@ -240,9 +246,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var price = this.calenderPrices.find(function (d) { return d.date == date; });
         if (price) {
             if (price.secondary_start_price > 0) {
-                if (price.secondary_start_price < 5) {
-                    return '5.00';
-                }
                 return "$" + price.secondary_start_price.toFixed(2);
             }
             return "$" + price.price.toFixed(2);
@@ -317,25 +320,35 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.getPriceLabel = function (type) {
         var _this = this;
         if (type == 'lowMinPrice') {
+            this.calenderPrices.filter(function (x) {
+                if (x.flag === 'low') {
+                    console.log(x.flag);
+                    console.log(moment(x.date, 'DD/MM/YYYY').format('MM'), _this.currentMonth);
+                    console.log(moment(x.date, 'DD/MM/YYYY').format('YY'), _this.currentYear);
+                }
+            });
             var lowMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'low' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
+            console.log(this.lowMinPrice);
             if (typeof lowMinPrice != 'undefined' && lowMinPrice.length) {
                 this.lowMinPrice = this.getMinPrice(lowMinPrice);
             }
-            return this.lowMinPrice;
+            return this.lowMinPrice.toFixed(2);
         }
         if (type == 'midMinPrice') {
             var midMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'medium' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
+            console.log(this.midMinPrice);
             if (typeof midMinPrice != 'undefined' && midMinPrice.length) {
                 this.midMinPrice = this.getMinPrice(midMinPrice);
             }
-            return this.midMinPrice;
+            return this.midMinPrice.toFixed(2);
         }
         if (type == 'highMinPrice') {
             var highMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'high' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
+            console.log(this.highMinPrice, highMinPrice.length);
             if (typeof highMinPrice != 'undefined' && highMinPrice.length) {
                 this.highMinPrice = this.getMinPrice(highMinPrice);
             }
-            return this.highMinPrice;
+            return this.highMinPrice.toFixed(2);
         }
     };
     FlightSearchWidgetComponent.prototype.getMinPrice = function (prices) {

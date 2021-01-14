@@ -64,7 +64,7 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.convertDateFormat = function (date, sourceFormat, languageCode) {
         if (languageCode === void 0) { languageCode = null; }
         if (languageCode == null) {
-            return moment(date, sourceFormat).format('DD MMM YYYY');
+            return moment(date, sourceFormat).format('MMM DD, YYYY');
         }
         return date;
     };

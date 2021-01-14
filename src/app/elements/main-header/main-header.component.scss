@@ -140,6 +140,10 @@
 								// top: 1px;
 								border-radius: 50%;
 							}
+
+							@include ipad-view{
+								max-width: 130px;
+							}
 						}
 					}
 

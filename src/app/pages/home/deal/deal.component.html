@@ -2,7 +2,23 @@
 <section class="deal_sec">
     <div class="container">
         <div class="row">
-            <div class="deal_sec_wrapper">
+            <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
+                <div class="deal_section_row">
+                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                        <div class="image_about_text">
+                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal_section_row">
+                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                        <div class="image_about_text">
+                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="deal_sec_wrapper" *ngIf="list.length > 0">
                 <div class="deal_section_row"  *ngFor="let item of list;">
                     <div class="deal_sec_inner">
                         <img [src]="item?.image" alt="Deal Image" />
@@ -11,15 +27,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="deal_section_row">
-                    <div class="deal_sec_inner">
-                        <img src="{{s3BucketUrl}}assets/images/deal_new_2.png" alt="Deal Image" />
-                        <div class="image_about_text">
-                            <button (click)="btnDealClick('JFK')">Find Deals to Punta cana</button>
-                        </div>
-                    </div>
-                </div> -->
             </div>
+           
         </div>
     </div>
 </section>

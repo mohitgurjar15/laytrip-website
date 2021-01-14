@@ -22,6 +22,7 @@ var HomeComponent = /** @class */ (function () {
         this.moduleList = {};
         this.isRoundTrip = false;
         this.moduleId = 1;
+        this.dealList = [];
         this.renderer.addClass(document.body, 'bg_color');
         this.countryCode = this.commonFunction.getUserCountry();
     }
@@ -65,6 +66,12 @@ var HomeComponent = /** @class */ (function () {
         // Close Featured List Js
         $('[data-toggle="popover"]').popover();
     };
+    HomeComponent.prototype.ngAfterViewInit = function () {
+        $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(function () {
+            $('.norm_btn').toggleClass("d-none");
+            $('.hover_btn').toggleClass("show");
+        });
+    };
     /**
      * Get All module like (hotel, flight & VR)
      */
@@ -90,8 +97,8 @@ var HomeComponent = /** @class */ (function () {
         var _this = this;
         this.homeService.getDealList(moduleId).subscribe(function (response) {
             _this.dealList = response['data'];
-            console.log(_this.dealList);
-        }, function (error) { });
+        }, function (error) {
+        });
     };
     HomeComponent.prototype.clickOnTab = function (tabName) {
         document.getElementById('home_banner').style.position = 'relative';

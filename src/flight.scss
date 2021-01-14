@@ -3348,6 +3348,13 @@
     					margin-right: 10px;
 					}
 				}
+				&.active {
+					.accordion-heading {
+						&:after {
+							content: "\f078";
+						}
+					}
+				}
 
 				.accordion-body {
 					.block_cmn {

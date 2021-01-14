@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var about_us_component_1 = require("./about-us/about-us.component");
 var cancellation_policy_component_1 = require("./cancellation-policy/cancellation-policy.component");
+var cms_pages_component_1 = require("./cms-pages/cms-pages.component");
 var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
 var contact_us_component_1 = require("./contact-us/contact-us.component");
 var covid_page_component_1 = require("./covid-page/covid-page.component");
@@ -89,6 +90,10 @@ var routes = [
             {
                 path: 'about',
                 component: about_us_component_1.AboutUsComponent
+            },
+            {
+                path: 'pages',
+                component: cms_pages_component_1.CmsPagesComponent
             },
         ]
     }

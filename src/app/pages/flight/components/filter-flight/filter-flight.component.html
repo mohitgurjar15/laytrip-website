@@ -9,7 +9,7 @@
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
                     {{'filter_by' | translate}}
                 </a>
-                <a class="anchor_link" (click)="resetFilter()"> {{'reset' | translate}}</a>
+                <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> {{'reset' | translate}}</a>
             </div>
             <div id="collapseTwo" class="accordion-body collapse">
                 <div class="accordion-inner">

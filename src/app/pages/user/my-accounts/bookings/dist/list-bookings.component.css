@@ -1,26 +1,5 @@
-input.ng-invalid.ng-touched {
-  border-bottom: 1px solid #f4516c !important;
-}
-
-.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown {
-  height: 40px;
-  width: 150px;
-}
-.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-customClass .ng-select-container {
-  border-radius: 0;
-}
-
-.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select.ng-customClass .ng-select-container {
-  height: 100%;
-  border: none;
-}
-
-.img_country_code {
-  border-radius: 3px;
-}
-
-::ng-deep .calender-passport-expiry {
-  min-width: 300px !important;
+.account_part .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field.booking-id {
+  width: 100%;
 }
 
 ::ng-deep .calender-price-view {
