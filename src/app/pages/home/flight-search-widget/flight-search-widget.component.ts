@@ -381,20 +381,20 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   
   getPriceLabel(type){    
-    
+    this.isCalenderPriceLoading = true;
     if(type=='lowMinPrice'){
       this.calenderPrices.filter(x => {
-        if(x.flag === 'low'){
+        if(x.flag == 'low'){
           console.log(x.flag)
           console.log(moment(x.date, 'DD/MM/YYYY').format('MM'),this.currentMonth)
           console.log(moment(x.date, 'DD/MM/YYYY').format('YY'),this.currentYear)
         }
       })
       let lowMinPrice = this.calenderPrices.filter(item => item.flag === 'low' && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')  && this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'));
-      console.log(this.lowMinPrice)
       if(typeof lowMinPrice!='undefined' && lowMinPrice.length){
         this.lowMinPrice = this.getMinPrice(lowMinPrice)
       }
+      this.isCalenderPriceLoading = false;
       return this.lowMinPrice.toFixed(2);
     }
     if(type=='midMinPrice'){
@@ -404,7 +404,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof midMinPrice!='undefined' && midMinPrice.length){
         this.midMinPrice = this.getMinPrice(midMinPrice)
       }
-
+      this.isCalenderPriceLoading = false;
       return this.midMinPrice.toFixed(2);
     }
     if(type=='highMinPrice'){
@@ -414,7 +414,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof highMinPrice!='undefined' && highMinPrice.length){
         this.highMinPrice = this.getMinPrice(highMinPrice)
       }
-
+      this.isCalenderPriceLoading = false;
       return this.highMinPrice.toFixed(2);
     }
   }
