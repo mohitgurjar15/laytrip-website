@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 
@@ -17,7 +17,9 @@ export class CmsPagesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private genericService: GenericService
+    private genericService: GenericService,
+    public router: Router
+
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class CmsPagesComponent implements OnInit {
         this.pageType = params.preview;
         this.preview();
       } else {
-
+        this.router.navigate(['/not-found']);
       }
     });   
   }
@@ -37,7 +39,7 @@ export class CmsPagesComponent implements OnInit {
       this.cmsData = res;
       this.loading = false;
     },(err)=>{
-      this.loading = false;
+      this.router.navigate(['/not-found'])
       // this.isPaymentCalulcatorLoading=false;
     })
   }

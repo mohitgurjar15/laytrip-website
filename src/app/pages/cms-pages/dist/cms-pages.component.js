@@ -10,9 +10,10 @@ exports.CmsPagesComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var CmsPagesComponent = /** @class */ (function () {
-    function CmsPagesComponent(route, genericService) {
+    function CmsPagesComponent(route, genericService, router) {
         this.route = route;
         this.genericService = genericService;
+        this.router = router;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
     }
@@ -24,6 +25,7 @@ var CmsPagesComponent = /** @class */ (function () {
                 _this.preview();
             }
             else {
+                _this.router.navigate(['/not-found']);
             }
         });
     };
@@ -34,7 +36,7 @@ var CmsPagesComponent = /** @class */ (function () {
             _this.cmsData = res;
             _this.loading = false;
         }, function (err) {
-            _this.loading = false;
+            _this.router.navigate(['/not-found']);
             // this.isPaymentCalulcatorLoading=false;
         });
     };

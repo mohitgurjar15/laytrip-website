@@ -320,7 +320,15 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.getPriceLabel = function (type) {
         var _this = this;
         if (type == 'lowMinPrice') {
+            this.calenderPrices.filter(function (x) {
+                if (x.flag === 'low') {
+                    console.log(x.flag);
+                    console.log(moment(x.date, 'DD/MM/YYYY').format('MM'), _this.currentMonth);
+                    console.log(moment(x.date, 'DD/MM/YYYY').format('YY'), _this.currentYear);
+                }
+            });
             var lowMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'low' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
+            console.log(this.lowMinPrice);
             if (typeof lowMinPrice != 'undefined' && lowMinPrice.length) {
                 this.lowMinPrice = this.getMinPrice(lowMinPrice);
             }
@@ -328,6 +336,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         if (type == 'midMinPrice') {
             var midMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'medium' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
+            console.log(this.midMinPrice);
             if (typeof midMinPrice != 'undefined' && midMinPrice.length) {
                 this.midMinPrice = this.getMinPrice(midMinPrice);
             }
@@ -335,6 +344,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         if (type == 'highMinPrice') {
             var highMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'high' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
+            console.log(this.highMinPrice, highMinPrice.length);
             if (typeof highMinPrice != 'undefined' && highMinPrice.length) {
                 this.highMinPrice = this.getMinPrice(highMinPrice);
             }
