@@ -42,6 +42,7 @@ export class FlightPaymentComponent implements OnInit {
   priceSummary;
   travelerForm: FormGroup;
   travelers=[];
+  carts=[];
 
   constructor(
     private route: ActivatedRoute,
@@ -67,6 +68,11 @@ export class FlightPaymentComponent implements OnInit {
       let response  = JSON.parse(__route);
       response[0]=response;
       this.flightSummary=response;
+      this.carts[0]={
+        type : 'flight',
+        module_info:this.flightSummary[0],
+        travelers:[]
+      };
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }

@@ -19,12 +19,10 @@ declare var $: any;
 
 export class TravelerFormComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  @Input() travelerType:string;
-  @Input() traveler;
-  @Input() travelers;
+  @Input() totalTraveler;
   travelerForm: FormGroup;
   traveler_number;
-  fields;
+  travelers;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -36,34 +34,34 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.fields = {
+    this.travelers = {
       type: {
-        users: [
-          {
-            first_name: '',
-            last_name: '',
-            email: '',
-            phone_number:'',
-            dob:'',
-            country:'',
-            gender:''
-          },
-          {
-            first_name: '',
-            last_name: '',
-            email: '',
-            phone_number:'',
-            dob:'',
-            country:'',
-            gender:''
-          }
-        ]
+        adults : [],
+        childs : [],
+        infants: []
       }
     };
 
+    for(let i=0; i < this.totalTraveler.adult_count; i++){
+      this.travelers.type.adults.push(
+        {
+          first_name: '',
+          last_name: '',
+          email: '',
+          phone_number:'',
+          dob:'',
+          country:'',
+          gender:''
+        }
+      )
+    }
+
+    console.log( this.travelers.type)
+
+
     this.travelerForm = this.formBuilder.group({
       type: this.formBuilder.group({
-        users: this.formBuilder.array([])
+        adults: this.formBuilder.array([])
       })
     });
     this.patch();
@@ -77,15 +75,12 @@ export class TravelerFormComponent implements OnInit {
 
     this.checkOutService.getTravelerNumber.subscribe((traveler_number:any)=>{ 
       this.checkOutService.getTraveler.subscribe((traveler:any)=>{
-        console.log("Jaipur",traveler)
-        this.fields.type.users[traveler.traveler_number].first_name=traveler.firstName;
-        this.fields.type.users[traveler.traveler_number].last_name=traveler.lastName;
-        this.fields.type.users[traveler.traveler_number].email=traveler.email;
-        console.log("=>>>>>",traveler)
+        this.travelers.type.adults[traveler.traveler_number].first_name=traveler.firstName;
+        this.travelers.type.adults[traveler.traveler_number].last_name=traveler.lastName;
+        this.travelers.type.adults[traveler.traveler_number].email=traveler.email;
         this.patch()
       })
     })
-
     
   }
 
@@ -99,9 +94,9 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patch() {
-    let control:any = <FormArray>this.travelerForm.get('type.users');
+    let control:any = <FormArray>this.travelerForm.get('type.adults');
     control.controls=[];
-    this.fields.type.users.forEach(x => {
+    this.travelers.type.adults.forEach(x => {
       control.push(this.patchValues(x))
     })
 

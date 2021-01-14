@@ -14,7 +14,7 @@ export class MyTravelerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.checkOutService.getTraveler.subscribe(travelers => this.travelers=travelers)
+    this.checkOutService.getTravelers.subscribe(travelers => this.travelers=travelers)
     
   }
 

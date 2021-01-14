@@ -61,8 +61,7 @@ import { FlightCartItemComponent } from './components/flight-cart-item/flight-ca
     FlightSummaryLoaderComponent,
     FlightErrorComponent,
     PopupTermConditionComponent,
-    PopupLoaderComponent,
-    FlightCartItemComponent
+    PopupLoaderComponent
   ],
   imports: [
     CommonModule,

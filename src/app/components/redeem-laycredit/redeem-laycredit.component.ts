@@ -18,7 +18,6 @@ export class RedeemLaycreditComponent implements OnInit {
   laycreditOptions: Options = {
     floor: 0,
     ceil: 0,
-    step: 0.1,
     disabled:false
   };
   constructor(
