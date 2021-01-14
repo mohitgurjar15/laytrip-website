@@ -5,7 +5,7 @@
         <!-- Lowest to highest -->
         Filter By
       </a>
-      <a class="anchor_link" (click)="resetFilter()">Reset</a>
+      <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()">Reset</a>
     </div>
     <div id="collapseFiltertBy" class="accordion-body filter_acc collapse">
       <div class="accordion-inner">
