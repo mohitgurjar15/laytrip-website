@@ -15,6 +15,10 @@ export class CartItemComponent implements OnInit {
     infant_count:0
   };
 
+  mandtoryField={
+    
+  }
+
   constructor() { }
 
   ngOnInit(): void {

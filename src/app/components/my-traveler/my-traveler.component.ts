@@ -22,8 +22,8 @@ export class MyTravelerComponent implements OnInit {
 
     let traveler = this.travelers.find(item=> item.userId==userId)
     traveler['traveler_number']=this.traveler_number
-    this.checkOutService.selectTraveler({traveler})
-    this.checkOutService.selectTravelerNumber(this.traveler_number)
+    this.checkOutService.selectTraveler(traveler)
+    //this.checkOutService.selectTravelerNumber(this.traveler_number)
   }
 
   ngOnChanges(changes: SimpleChanges) {
