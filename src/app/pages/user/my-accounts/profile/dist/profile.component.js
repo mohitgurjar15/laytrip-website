@@ -208,7 +208,7 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
-                dob: res.dob ? moment(res.dob).format('MMM d yy') : '',
+                dob: res.dob ? moment(res.dob).format('MMM d, yy') : '',
                 country_code: countryCode,
                 phone_no: res.phoneNo,
                 country_id: res.country.name ? res.country.name : countryName,
@@ -218,7 +218,7 @@ var ProfileComponent = /** @class */ (function () {
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
                 profile_pic: res.profilePic,
-                passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d yy') : '',
+                passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
                 passport_number: res.passportNumber
             });
         }, function (error) {

@@ -37,6 +37,9 @@ var TravellerFormComponent = /** @class */ (function () {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
+        this.isChild = false;
+        this.isInfant = false;
+        this.isAdult = true;
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -93,6 +96,35 @@ var TravellerFormComponent = /** @class */ (function () {
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
             passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : ''
         });
+    };
+    TravellerFormComponent.prototype.changeDateOfBirth = function (event) {
+        var todayDate = moment();
+        var birthYear = moment(event, 'YYYY');
+        var age = parseInt(todayDate.diff(birthYear, 'y', true).toFixed(2));
+        if (age && age === 2 || age > 2 && age < 12) {
+            // FOR CHILD
+            this.isChild = true;
+            this.isInfant = false;
+            this.isAdult = false;
+        }
+        else if (age && age < 2 || age === 0) {
+            // FOR INFANT
+            this.isInfant = true;
+            this.isAdult = false;
+            this.isChild = false;
+        }
+        else if (age && age > 12) {
+            // FOR ADULT
+            this.isChild = false;
+            this.isInfant = false;
+            this.isAdult = true;
+        }
+        else {
+            // FOR ONLY ADULT
+            this.isAdult = true;
+            this.isChild = false;
+            this.isInfant = false;
+        }
     };
     TravellerFormComponent.prototype.close = function () {
         this.activeModal.close();
@@ -182,7 +214,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     }
                     else {
                         _this.submitted = _this.loading = false;
-                        _this.toastr.error(error.error.message, 'Traveller Update Error');
+                        _this.toastr.error(error.error.message, 'Traveller Add Error');
                     }
                 });
             }
