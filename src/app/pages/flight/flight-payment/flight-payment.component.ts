@@ -166,4 +166,8 @@ export class FlightPaymentComponent implements OnInit {
       this.checkOutService.setTravelers(res.data)
     })
   }
+
+  submitHandle(){
+    
+  }
 }
