@@ -105,6 +105,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
+    
   }
 
   ngOnInit(): void {
@@ -137,7 +138,9 @@ export class FlightSearchWidgetComponent implements OnInit {
 
         this.searchFlightInfo.class = params['class'];
 
-        this.departureDate = new Date(params['departure_date'])
+        this.departureDate = new Date(params['departure_date']);
+        this.currentMonth = moment(this.departureDate).format("MM");
+        this.currentYear = moment(this.departureDate).format("YYYY");
         // this.returnDate = new Date(params['arrival_date']);
         this.returnDate = params['arrival_date'] ? new Date(params['arrival_date']) : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
         this.rangeDates = [this.departureDate, this.returnDate];
@@ -288,9 +291,10 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   getPrice(d, m, y) {
+
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
-    this.currentMonth = m.toString().length == 1 ? '0' + m : m;
-    this.currentYear = y;
+    // this.currentMonth = m.toString().length == 1 ? '0' + m : m;
+    // this.currentYear = y;
     let month: any = parseInt(m) + 1;
     let day = d.toString().length == 1 ? '0' + d : d;
     month = month.toString().length == 1 ? '0' + month : month;
@@ -380,18 +384,15 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   
-  getPriceLabel(type){    
-    
+  getPriceLabel(type){ 
+    this.isCalenderPriceLoading = true;
     if(type=='lowMinPrice'){
-      this.calenderPrices.filter(x => {
-        if(x.flag === 'low'){
-          
-        }
-      })
+     
       let lowMinPrice = this.calenderPrices.filter(item => item.flag === 'low' && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')  && this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'));
       if(typeof lowMinPrice!='undefined' && lowMinPrice.length){
         this.lowMinPrice = this.getMinPrice(lowMinPrice)
       }
+      this.isCalenderPriceLoading = false;
       return this.lowMinPrice.toFixed(2);
     }
     if(type=='midMinPrice'){
@@ -400,16 +401,15 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(typeof midMinPrice!='undefined' && midMinPrice.length){
         this.midMinPrice = this.getMinPrice(midMinPrice)
       }
-
+      this.isCalenderPriceLoading = false;
       return this.midMinPrice.toFixed(2);
     }
     if(type=='highMinPrice'){
-
       let highMinPrice = this.calenderPrices.filter(item => item.flag === 'high' && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')  && this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'));
       if(typeof highMinPrice!='undefined' && highMinPrice.length){
         this.highMinPrice = this.getMinPrice(highMinPrice)
       }
-
+      this.isCalenderPriceLoading = false;
       return this.highMinPrice.toFixed(2);
     }
   }

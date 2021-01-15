@@ -95,7 +95,7 @@
                 <div class="form_field half">
                     <label>{{'dob' | translate}}<sup>*</sup></label>
                     <div class="text_field">
-                        <p-calendar class="account_datepicker" dateFormat="M d yy" tabindex="6" inputStyleClass="custom_datpicker birth_date"
+                        <p-calendar class="account_datepicker" dateFormat="M d, yy" tabindex="3" inputStyleClass="custom_datpicker birth_date"
                             inputId="basic" formControlName="dob" placeholder="{{'dob_placeholder' | translate}}"
                             [maxDate]="dobMaxDate" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020"
                             [defaultDate]="dobMaxDate" panelStyleClass="calender-price-view" (onSelect)=changeDateOfBirth($event)>
@@ -111,7 +111,7 @@
                 <div class="form_field half">
                     <label>{{'nationality' | translate}}<sup>*</sup></label>
                     <div class="text_field custom-select">
-                        <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="7"
+                        <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="4"
                             [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
                             placeholder="{{'select_nationality_placeholder' | translate}}">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
@@ -139,7 +139,7 @@
                     <label>{{'email' | translate}}<sup>*</sup></label>
                     <div class="text_field">
                         <input type="email" [readonly]="travelerInfo.email" formControlName="email" maxlength="40"
-                            tabindex="4" placeholder="{{'email_placeholder' | translate}}">
+                            tabindex="5" placeholder="{{'email_placeholder' | translate}}">
                     </div>
                     <div *ngIf="(submitted  || coAccountForm.controls.email.touched) && coAccountForm.controls.email.errors"
                         class="focus-input100 login-error">
@@ -156,7 +156,7 @@
                         <div class="phone_no">
                             <div class="code">
                                 <div class="dropdown">
-                                    <ng-select class="ng-customClass country_code" tabindex="4" selectOnTab="true"
+                                    <ng-select class="ng-customClass country_code" tabindex="6" selectOnTab="true"
                                         [items]="countries_code" bindLabel="country_name" clearSearchOnAdd="true"
                                         formControlName="country_code"
                                         placeholder="{{'country_code_placeholder' | translate}}">
@@ -177,7 +177,7 @@
                             </div>
                             <div class="number">
                                 <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
-                                    (keypress)="commonFunction.validateNumber($event)" tabindex="5"
+                                    (keypress)="commonFunction.validateNumber($event)" tabindex="7"
                                     placeholder="0000 0000 00">
                             </div>
                         </div>
@@ -192,14 +192,14 @@
                 <div class="form_field half">
                     <label>{{'passport_number' | translate}}</label>
                     <div class="text_field">
-                        <input type="text" formControlName="passport_number" maxlength="30" tabindex="9"
+                        <input type="text" formControlName="passport_number" maxlength="30" tabindex="8"
                             placeholder="{{'passport_number_placeholder' | translate}}">
                     </div>
                 </div>
                 <div class="form_field half">
                     <label>{{'passport_expiry_date' | translate}}</label>
                     <div class="text_field">
-                        <p-calendar class="account_datepicker" dateFormat="M d yy" tabindex="6" inputStyleClass="custom_datpicker birth_date"
+                        <p-calendar class="account_datepicker" dateFormat="M d, yy" tabindex="9" inputStyleClass="custom_datpicker birth_date"
                             inputId="basic" formControlName="passport_expiry" [minDate]="expiryMinDate"
                             [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2030"
                             [defaultDate]="dobMaxDate" panelStyleClass="calender-price-view calender-passport-expiry"
