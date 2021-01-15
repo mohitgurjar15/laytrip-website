@@ -385,13 +385,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     if(type=='lowMinPrice'){
       this.calenderPrices.filter(x => {
         if(x.flag === 'low'){
-          console.log(x.flag)
-          console.log(moment(x.date, 'DD/MM/YYYY').format('MM'),this.currentMonth)
-          console.log(moment(x.date, 'DD/MM/YYYY').format('YY'),this.currentYear)
+          
         }
       })
       let lowMinPrice = this.calenderPrices.filter(item => item.flag === 'low' && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')  && this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'));
-      console.log(this.lowMinPrice)
       if(typeof lowMinPrice!='undefined' && lowMinPrice.length){
         this.lowMinPrice = this.getMinPrice(lowMinPrice)
       }
@@ -400,7 +397,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     if(type=='midMinPrice'){
 
       let midMinPrice =  this.calenderPrices.filter(item => item.flag === 'medium' && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')  && this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'));
-      console.log(this.midMinPrice)
       if(typeof midMinPrice!='undefined' && midMinPrice.length){
         this.midMinPrice = this.getMinPrice(midMinPrice)
       }
@@ -410,7 +406,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     if(type=='highMinPrice'){
 
       let highMinPrice = this.calenderPrices.filter(item => item.flag === 'high' && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')  && this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'));
-      console.log(this.highMinPrice,highMinPrice.length)
       if(typeof highMinPrice!='undefined' && highMinPrice.length){
         this.highMinPrice = this.getMinPrice(highMinPrice)
       }

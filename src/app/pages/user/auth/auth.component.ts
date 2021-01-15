@@ -45,8 +45,6 @@ export class AuthComponent implements OnInit {
       this.signUpModal = true;
       // $('#sign_in_modal').modal('show');
       // $('.modal_container').addClass('right-panel-active');
-    
-    console.log("sds",this)
 
   }
   pageChange(event) {

@@ -253,8 +253,18 @@ export class PaymentModeComponent implements OnInit {
   applyLaycredit(laycreditpoints){
     this.laycreditpoints=laycreditpoints;
     this.instalmentRequest.additional_amount = this.laycreditpoints;
-    this.calculateInstalment('down-payment',null);
-    this.getAllInstalment();
+    if(this.instalmentAvavible){
+      this.calculateInstalment('down-payment',null);
+      this.getAllInstalment();
+    }
+    else{
+      this.getInstalmentData.emit({
+        layCreditPoints :this.laycreditpoints,
+        instalmentType: this.instalmentType,
+        instalments:this.instalments,
+        remainingAmount:this.remainingAmount
+      })
+    }
   }
 
   totalLaycredit(){

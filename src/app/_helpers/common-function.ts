@@ -29,7 +29,6 @@ export class CommonFunction {
         }
     }
     validateNumber(e: any) {
-        console.log('sd')
         let input = String.fromCharCode(e.charCode);
         const reg = /^[0-9]*$/;
 

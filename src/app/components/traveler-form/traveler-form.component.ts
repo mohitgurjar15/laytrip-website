@@ -40,30 +40,11 @@ export class TravelerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
    
-   let x=travelersFileds.flight.adult; 
-
-   for(let i=0; i < this.totalTraveler.adult_count; i++){
-      
-      let y ={
-        first_name: '',
-        last_name: '',
-        email: '',
-        country_code:'',
-        phone_number:'',
-        dob:'',
-        country:'',
-        gender:''
-      }
-      //console.log(y,x)
-      this.travelers.type.adults.push(y)
+    for(let i=0; i < this.totalTraveler.adult_count; i++){
+      this.travelers.type.adults.push(Object.assign({},travelersFileds.flight.adult))
     }
     
-
-    //console.log(JSON.stringify(travelersFileds.flight.adult))
-
-
     this.travelerForm = this.formBuilder.group({
       type: this.formBuilder.group({
         adults: this.formBuilder.array([])
@@ -71,6 +52,9 @@ export class TravelerFormComponent implements OnInit {
     });
     this.patch();
 
+    this.travelerForm.valueChanges.subscribe(value=>{
+      this.checkOutService.emitTravelersformData(this.travelerForm)
+    })
    
     
     this.checkOutService.getTraveler.subscribe((traveler:any)=>{
@@ -83,11 +67,6 @@ export class TravelerFormComponent implements OnInit {
     })
 
     
-
-    /* this.travelers.type.adults[1].first_name="Suresh";
-    this.travelers.type.adults[1].last_name="Suthar";
-    this.travelers.type.adults[1].email="traveler.email";
-    console.log("==this.travelers==",this.travelers) */
   }
 
   /* ngOnChanges(changes: SimpleChanges) {

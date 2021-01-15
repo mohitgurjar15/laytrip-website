@@ -61,15 +61,13 @@
                 <div class="">
                     <app-traveler-form></app-traveler-form>
                 </div> -->
-                
                 <app-cart [carts]="carts"></app-cart>
             </div>
             <div class="col-lg-5">
                 <div class="payment_container">
                     <!-- <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
                     </app-redeem-laycredit-loader>
-                    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}"
-                        sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)"
+                    <app-redeem-laycredit  redeemableLayPoints={{sellingPrice}} sellingPrice={{sellingPrice}} (applyLaycredit)="applyLaycredit($event)"
                         [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit> -->
                     <div class="payment_mode_wrapper">
                         
@@ -83,7 +81,7 @@
                     <!-- <app-booking-enquiry-info></app-booking-enquiry-info> -->
                     <div class="cta_btn_wrapper">
                         <!-- <button (click)="checkUserAndRedirect()">Continue to Payment</button> -->
-                        <button >Continue to Payment</button>
+                        <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button>
                     </div>
                 </div>
             </div>

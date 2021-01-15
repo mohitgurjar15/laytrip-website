@@ -65,7 +65,6 @@ export class FlightTravelerComponent implements OnInit {
 
     let customInstalmentData:any=atob(sessionStorage.getItem('__islt'))
     customInstalmentData = JSON.parse(customInstalmentData);
-    console.log("customInstalmentData",customInstalmentData)
     
     this.partialPaymentAmount = customInstalmentData.partialPaymentAmount;
     this.laycreditpoints = customInstalmentData.layCreditPoints;

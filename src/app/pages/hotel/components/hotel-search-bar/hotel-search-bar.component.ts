@@ -123,7 +123,6 @@ export class HotelSearchBarComponent implements OnInit {
         }
       });
     } else {
-      console.log('no');
     }
   }
 

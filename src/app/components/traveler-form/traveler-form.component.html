@@ -19,7 +19,7 @@
                   <div class="form-row" style="margin-top:20px">
                     <div class="col">
                       <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
-                      <div *ngIf="traveler.controls.first_name.errors" class="error">
+                      <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors" class="error">
                         <div *ngIf="traveler.controls.first_name.errors.required">Your name is required</div>
                       </div> 
                     </div>
@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <!-- <button type="submit">Submit</button> -->
       </div>
     </div>
   </div>
