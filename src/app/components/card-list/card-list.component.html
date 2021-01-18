@@ -1,94 +1,16 @@
-<!-- Loader -->
-<div class="card_list" *ngIf="cardLoader">
-    <ul>
-        <li>
-            <div class="card_check">
-                <label class="custom_checkbox">
-                    <input type="checkbox" value="">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-            <div class="card_detail">
-                <div class="card_type">
-                    <p class="fb_animation w-100 mb-0"></p>
-                </div>
-                <h6 class="fb_animation w-100"></h6>
-                <span>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </span>
-                <span>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </span>
-            </div>
-        </li>
-        <li>
-            <div class="card_check">
-                <label class="custom_checkbox">
-                    <input type="checkbox" value="">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-            <div class="card_detail">
-                <div class="card_type">
-                    <p class="fb_animation w-100 mb-0"></p>
-                </div>
-                <h6 class="fb_animation w-100"></h6>
-                <span>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </span>
-                <span>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </span>
-            </div>
-        </li>
-        <li>
-            <div class="card_check">
-                <label class="custom_checkbox">
-                    <input type="checkbox" value="">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-            <div class="card_detail">
-                <div class="card_type">
-                    <p class="fb_animation w-100 mb-0"></p>
-                </div>
-                <h6 class="fb_animation w-100"></h6>
-                <span>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </span>
-                <span>
-                    <p class="fb_animation w-100 mb-0"></p>
-                </span>
-            </div>
-        </li>
-    </ul>
-</div>
 
-<!-- Content -->
-<div class="card_list" *ngIf="!cardLoader">
-  <ul *ngIf="cards.length">
-      <li *ngFor="let card of cards">
-          <div class="card_check">
-              <label class="custom_checkbox">
-                  <input type="radio" value="{{card.cardToken}}" [checked]="card.cardToken==cardToken" name="card_token" (click)="selectCard(card.cardToken)">
-                  <span class="checkmark"></span>
-              </label>
-          </div>
-          <div class="card_detail">
-              <!-- <div class="card_type">
-                  <img src="{{s3BucketUrl}}assets/images/visa.svg" alt="Visa Card">
-              </div> -->
-              <h6>{{card.cardType | titlecase}} Card ****{{card.cardDigits}}</h6>
-              <span>{{ card.cardHolderName }}</span>
-              <!-- <span>Expires 07/2025</span> -->
-              <!-- <div class="block_card_cvv">
-                  <input type="text" name="" tabindex="" placeholder="Enter CVV no.">
-              </div> -->
-          </div>
-      </li>
-      
-  </ul>
-  <!-- <ul *ngIf="!cards.length">
-    <li>No card founds!</li>
-  </ul> -->
-</div>
+<div id="accordion">
+
+    <div class="card"  *ngFor="let card of cards">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+            {{card.cardType | titlecase}} Card ****{{card.cardDigits}}
+        </a>
+      </div>
+      <div id="collapseOne" class="collapse show" data-parent="#accordion">
+        <div class="card-body">
+            {{ card.cardHolderName }}
+        </div>
+      </div>
+    </div>
+  </div>
