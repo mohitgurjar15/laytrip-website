@@ -62,7 +62,26 @@
                     <app-traveler-form></app-traveler-form>
                 </div> -->
                 <app-cart [carts]="carts"></app-cart>
+                <div class="col-lg-7">
+                    <div id="accordion">
+                        <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                            Collapsible Group Item #1
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                <app-add-card></app-add-card>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <app-card-list></app-card-list>
+                </div>
+
             </div>
+            
             <div class="col-lg-5">
                 <div class="payment_container">
                     <!-- <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
