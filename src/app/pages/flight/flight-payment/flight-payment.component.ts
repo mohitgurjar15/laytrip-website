@@ -42,6 +42,8 @@ export class FlightPaymentComponent implements OnInit {
   priceSummary;
   travelerForm: FormGroup;
   travelers=[];
+  carts=[];
+  isValidData:boolean=false;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,12 +69,22 @@ export class FlightPaymentComponent implements OnInit {
       let response  = JSON.parse(__route);
       response[0]=response;
       this.flightSummary=response;
+      this.carts[0]={
+        type : 'flight',
+        module_info:this.flightSummary[0],
+        travelers:[]
+      };
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
     catch(e){
 
     }
+
+    this.checkOutService.getTravelerFormData.subscribe((travelerFrom:any)=>{
+      console.log("get traveler form",travelerFrom);
+      this.isValidData= travelerFrom.status==='VALID'?true : false;
+    })
 
     sessionStorage.setItem('__insMode',btoa(this.instalmentMode))
   }
@@ -82,6 +94,7 @@ export class FlightPaymentComponent implements OnInit {
     this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
       this.isLayCreditLoading=false;
       this.totalLaycreditPoints=res.total_available_points;
+      console.log("this.totalLaycreditPoints////",this.totalLaycreditPoints)
     },(error=>{
       this.isLayCreditLoading=false;
     }))
@@ -119,7 +132,7 @@ export class FlightPaymentComponent implements OnInit {
   getInstalmentData(data){
 
     this.instalmentType = data.instalmentType;
-    this.laycreditpoints = data.layCreditPoints;
+    //this.laycreditpoints = data.layCreditPoints;
     this.priceSummary=data;
     sessionStorage.setItem('__islt',btoa(JSON.stringify(data)))
   }
@@ -159,5 +172,9 @@ export class FlightPaymentComponent implements OnInit {
       //this.travelers=res.data;
       this.checkOutService.setTravelers(res.data)
     })
+  }
+
+  handleSubmit(){
+    console.log("valid data")
   }
 }

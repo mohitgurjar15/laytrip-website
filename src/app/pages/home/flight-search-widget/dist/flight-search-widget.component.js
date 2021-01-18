@@ -102,6 +102,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.toggleOnewayRoundTrip(params['trip']);
                 _this.searchFlightInfo["class"] = params['class'];
                 _this.departureDate = new Date(params['departure_date']);
+                _this.currentMonth = moment(_this.departureDate).format("MM");
+                _this.currentYear = moment(_this.departureDate).format("YYYY");
                 // this.returnDate = new Date(params['arrival_date']);
                 _this.returnDate = params['arrival_date'] ? new Date(params['arrival_date']) : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
                 _this.rangeDates = [_this.departureDate, _this.returnDate];
@@ -237,8 +239,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
-        this.currentMonth = m.toString().length == 1 ? '0' + m : m;
-        this.currentYear = y;
+        // this.currentMonth = m.toString().length == 1 ? '0' + m : m;
+        // this.currentYear = y;
         var month = parseInt(m) + 1;
         var day = d.toString().length == 1 ? '0' + d : d;
         month = month.toString().length == 1 ? '0' + month : month;
@@ -319,11 +321,13 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.getPriceLabel = function (type) {
         var _this = this;
+        this.isCalenderPriceLoading = true;
         if (type == 'lowMinPrice') {
             var lowMinPrice = this.calenderPrices.filter(function (item) { return item.flag === 'low' && _this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM') && _this.currentYear == moment(item.date, 'DD/MM/YYYY').format('YYYY'); });
             if (typeof lowMinPrice != 'undefined' && lowMinPrice.length) {
                 this.lowMinPrice = this.getMinPrice(lowMinPrice);
             }
+            this.isCalenderPriceLoading = false;
             return this.lowMinPrice.toFixed(2);
         }
         if (type == 'midMinPrice') {
@@ -331,6 +335,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             if (typeof midMinPrice != 'undefined' && midMinPrice.length) {
                 this.midMinPrice = this.getMinPrice(midMinPrice);
             }
+            this.isCalenderPriceLoading = false;
             return this.midMinPrice.toFixed(2);
         }
         if (type == 'highMinPrice') {
@@ -338,6 +343,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             if (typeof highMinPrice != 'undefined' && highMinPrice.length) {
                 this.highMinPrice = this.getMinPrice(highMinPrice);
             }
+            this.isCalenderPriceLoading = false;
             return this.highMinPrice.toFixed(2);
         }
     };

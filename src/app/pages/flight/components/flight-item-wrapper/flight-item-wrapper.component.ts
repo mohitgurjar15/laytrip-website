@@ -176,11 +176,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     
     sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
     sessionStorage.setItem('__route',JSON.stringify(route));
-    if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
-      this.router.navigate([`flight/payment/${route.route_code}`]);
+    /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
     } else{
       this.router.navigate([`flight/checkout/${route.route_code}`]);
-    }   
+    } */   
+    this.router.navigate([`flight/payment/${route.route_code}`]);
   }
 
   checkInstalmentAvalability(){

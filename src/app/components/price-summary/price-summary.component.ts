@@ -24,4 +24,8 @@ export class PriceSummaryComponent implements OnInit {
     }
   }
 
+  typeOf(value) {
+    return typeof value;
+  }
+
 }

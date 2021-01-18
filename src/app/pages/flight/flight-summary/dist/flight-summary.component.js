@@ -47,7 +47,6 @@ var FlightSummaryComponent = /** @class */ (function () {
     };
     FlightSummaryComponent.prototype.airRevalidate = function () {
         var _this = this;
-        console.log('here');
         var routeData = {
             route_code: this.route.snapshot.paramMap.get('rc')
         };

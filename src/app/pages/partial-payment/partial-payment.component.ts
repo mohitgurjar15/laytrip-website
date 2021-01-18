@@ -22,7 +22,6 @@ export class PartialPaymentComponent implements OnInit {
     const pageType = 'partial-payment';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {
-      console.log(res);
       this.cmsData = res;
       this.loading = false;
     });

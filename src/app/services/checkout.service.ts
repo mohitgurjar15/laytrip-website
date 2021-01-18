@@ -11,12 +11,16 @@ export enum Events{
 export class CheckOutService {
     
     private traveler = new BehaviorSubject({});
-    private traveler_number = new BehaviorSubject({});
     getTraveler = this.traveler.asObservable();
+
+    private traveler_number = new BehaviorSubject({});
     getTravelerNumber = this.traveler_number.asObservable();
 
     private travelers = new BehaviorSubject([]);
     getTravelers = this.travelers.asObservable();
+
+    private travelerFormData = new BehaviorSubject([]);
+    getTravelerFormData = this.travelerFormData.asObservable();
 
     constructor() { }
 
@@ -30,6 +34,10 @@ export class CheckOutService {
 
     setTravelers(travelers){
         this.travelers.next(travelers)
+    }
+
+    emitTravelersformData(travelers){
+        this.travelerFormData.next(travelers)
     }
 }
    

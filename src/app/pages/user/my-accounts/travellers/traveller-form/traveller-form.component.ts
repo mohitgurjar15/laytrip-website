@@ -124,7 +124,6 @@ export class TravellerFormComponent implements OnInit {
     let todayDate = moment();
     let birthYear = moment(event, 'YYYY');
     let age = parseInt(todayDate.diff(birthYear, 'y', true).toFixed(2));
-    console.log(age);
     if (age && age === 2 || age > 2 && age < 12) {
       // FOR CHILD
       this.isChild = true;

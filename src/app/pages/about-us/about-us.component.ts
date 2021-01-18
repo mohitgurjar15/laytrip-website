@@ -21,7 +21,6 @@ export class AboutUsComponent implements OnInit {
     const pageType = 'about';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {
-      console.log(this.cmsData)
       this.cmsData = res;
       this.loading = false;
     });

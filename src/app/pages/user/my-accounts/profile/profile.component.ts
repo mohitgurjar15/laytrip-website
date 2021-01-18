@@ -207,8 +207,7 @@ export class ProfileComponent implements OnInit {
       this.selectResponse = res;
 
       this.is_type = res.gender ? res.gender :'M';
-      this.seletedDob = moment(res.dob).format("MMM d yy");
-      console.log(this.seletedDob)
+      this.seletedDob = moment(res.dob).format("MMM d, yy");
       if(typeof this.location != 'undefined' || typeof res.country.id != 'undefined'){
         const country = res.country.id ? res.country : this.location.country;
         if(typeof country != 'undefined')              
@@ -225,7 +224,7 @@ export class ProfileComponent implements OnInit {
       if(typeof this.location != 'undefined'){
         countryName = this.location.country.name;
       }
-      console.log(moment(res.dob).format('MMM d yy'))
+      console.log(moment(res.dob).format('MMM d, yy'))
       this.profileForm.patchValue({      
           first_name: res.firstName,
           last_name: res.lastName,
@@ -233,7 +232,7 @@ export class ProfileComponent implements OnInit {
           gender  : res.gender ? res.gender : 'M',        
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
-          dob  : res.dob ? moment(res.dob).format('MMM d yy'):'',        
+          dob  : res.dob ? moment(res.dob).format('MMM d, yy') : '',        
           country_code : countryCode,        
           phone_no  : res.phoneNo,        
           country_id: res.country.name ? res.country.name :countryName,
@@ -243,7 +242,7 @@ export class ProfileComponent implements OnInit {
           language_id : res.preferredLanguage.name,     
           currency_id : res.preferredCurrency.code,     
           profile_pic: res.profilePic, 
-          passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MMM d yy') : '', 
+          passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '', 
           passport_number: res.passportNumber  
       });
 
@@ -283,6 +282,8 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
+      // console.log(this.profileForm.value.dob, moment(this.profileForm.value.dob).format('YYYY-MM-DD'))
+
       formdata.append("title",this.profileForm.value.title);
       formdata.append("first_name",this.profileForm.value.first_name);
       formdata.append("last_name",this.profileForm.value.last_name);

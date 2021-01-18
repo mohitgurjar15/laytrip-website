@@ -7,19 +7,36 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 })
 export class CartItemComponent implements OnInit {
 
-  @Input() totalPassenger:[];
-  @Input() moduleType:string;
+  @Input() cartItem;
   @Input() travelers:[];
+  totalTraveler={
+    adult_count :0,
+    child_count :0,
+    infant_count:0
+  };
+
+  mandtoryField={
+    
+  }
 
   constructor() { }
 
   ngOnInit(): void {
+    try{
+      let _itinerary:any = sessionStorage.getItem("_itinerary");
+      _itinerary = JSON.parse(_itinerary);
+      this.totalTraveler.adult_count = Number(_itinerary.adult);
+      this.totalTraveler.child_count = Number(_itinerary.child);
+      this.totalTraveler.infant_count= Number(_itinerary.infant);
+    }
+    catch(e){
+      console.log("Error",e)
+    }
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['travelers']) {
-      this.travelers = changes['travelers'].currentValue;
-      console.log("this.totalPassenger, cart item",this.travelers)
+    if(changes['cartItem']){
+      this.cartItem = changes['cartItem'].currentValue;
     }
   }
 

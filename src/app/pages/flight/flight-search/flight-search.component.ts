@@ -230,7 +230,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   sortFlight(event) {
     let { key, order } = event;
-    console.log("Before Key:",key,this.flightDetails)
     if (key === 'total_duration') {
       this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
     }
@@ -274,7 +273,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       return data.sort(function (a, b) {
         let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
         let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
-        console.log(`${a.arrival_date} ${a.arrival_time}`, `${a.departure_date} ${a.departure_time}`, x, y, way)
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }

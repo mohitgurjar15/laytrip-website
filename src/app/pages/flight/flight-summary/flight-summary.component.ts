@@ -107,7 +107,6 @@ export class FlightSummaryComponent implements OnInit {
       //this.airRevalidate();
     }
     catch(error){
-      console.log("iiiiiii")
       this.flightAvailable.emit(true)
     }
   }

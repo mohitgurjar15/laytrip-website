@@ -46,6 +46,8 @@ import { TravelerListComponent } from './traveler-list/traveler-list.component';
 import { MyTravelerComponent } from './my-traveler/my-traveler.component';
 import { PriceSummaryComponent } from './price-summary/price-summary.component';
 import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-loader.component';
+import { CartComponent } from './cart/cart.component';
+import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
 
 
 
@@ -84,7 +86,9 @@ import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-l
     TravelerListComponent,
     MyTravelerComponent,
     PriceSummaryComponent,
-    PaymentModeLoaderComponent
+    PaymentModeLoaderComponent,
+    CartComponent,
+    FlightCartItemComponent
   ],
   imports: [
     CommonModule,
@@ -137,7 +141,8 @@ import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-l
     MyTravelerComponent,
     PriceSummaryComponent,
     PaymentModeLoaderComponent,
-    TravelerFormComponent
+    TravelerFormComponent,
+    CartComponent
   ],
   providers: [DatePipe],
 

@@ -29,7 +29,6 @@ export class CommonFunction {
         }
     }
     validateNumber(e: any) {
-        console.log('sd')
         let input = String.fromCharCode(e.charCode);
         const reg = /^[0-9]*$/;
 
@@ -68,7 +67,7 @@ export class CommonFunction {
     convertDateFormat(date, sourceFormat, languageCode = null) {
 
         if (languageCode == null) {
-            return moment(date, sourceFormat).format('MMM DD YYYY')
+            return moment(date, sourceFormat).format('MMM DD, YYYY')
         }
         return date;
     }

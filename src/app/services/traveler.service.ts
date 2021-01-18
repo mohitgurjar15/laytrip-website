@@ -45,7 +45,6 @@ export class TravelerService{
 
 
     handleError(error) { 
-        console.log("====",error);
         let errorMessage = {};
         if(error.status==0){
             console.log("API Server is not responding")
