@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="form_row">
-                    <label>{{'password' | translate}}<sup>*</sup></label>
+                    <label>{{'password' | translate}}<sup>*</sup></label> 
                     <div class="text_field pass_show">
                         <input class="border-css" [ngClass]="{'error': (submitted  && !loading && loginForm.controls.password.errors) }" type="password" autocomplete="new-password" [type]="fieldTextType ? 'text' : 'password'" formControlName="password" maxlength="100" tabindex="102"
                             placeholder="{{'password_placholder' | translate}}">
