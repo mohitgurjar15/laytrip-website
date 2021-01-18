@@ -1,3 +1,33 @@
 <div class="card">
     <div class="card-body">JFK-SDK</div>
+</div>
+
+
+<div id="accordion">
+
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Adult
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        <app-traveler-form [totalTraveler]="totalTraveler"></app-traveler-form>
+      </div>
+    </div>
   </div>
+
+  <!-- <div class="card">
+    <div class="card-header">
+      <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+        Collapsible Group Item #2
+      </a>
+    </div>
+    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+      <div class="card-body">
+        Lorem ipsum..
+      </div>
+    </div>
+  </div> -->
+</div>

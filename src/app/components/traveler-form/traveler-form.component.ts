@@ -29,7 +29,6 @@ export class TravelerFormComponent implements OnInit {
       infants: []
     }
   };
-  //@ViewChild('documentEditForm',null) documentEditForm: FormGroupDirective; 
   
   constructor(
     private formBuilder: FormBuilder,
@@ -44,7 +43,10 @@ export class TravelerFormComponent implements OnInit {
     for(let i=0; i < this.totalTraveler.adult_count; i++){
       this.travelers.type.adults.push(Object.assign({},travelersFileds.flight.adult))
     }
-    
+    for(let i=0; i < this.totalTraveler.child_count; i++){
+      this.travelers.type.adults.push(Object.assign({},travelersFileds.flight.child))
+    }
+    console.log(this.travelers,"....")
     this.travelerForm = this.formBuilder.group({
       type: this.formBuilder.group({
         adults: this.formBuilder.array([])
