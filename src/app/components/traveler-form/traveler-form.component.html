@@ -52,7 +52,7 @@
                   </div>
 
                   <div class="form-row">
-                      <div class="col" *ngIf="typeOf(travelers.type.adults[x].passport_number)!='undefined'">
+                      <div class="col" *ngIf="travelers.type?.adults[x]?.passport_number">
                         <input type="text" class="form-control" placeholder="Passport number" formControlName="passport_number">
                       </div>
                   </div>

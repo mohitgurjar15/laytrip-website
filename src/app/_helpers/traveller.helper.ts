@@ -2,6 +2,7 @@ export const travelersFileds={
 
     flight : {
         adult : {
+            type : 'adult',
             first_name: '',
             last_name: '',
             email: '',
@@ -14,6 +15,7 @@ export const travelersFileds={
             passport_expiry:'' */
         },
         child : {
+            type : 'child',
             first_name: '',
             last_name: '',
             dob:'',
@@ -23,6 +25,7 @@ export const travelersFileds={
             passport_expiry:''
         },
         infant : {
+            type : 'infant',
             first_name: '',
             last_name: '',
             dob:'',
