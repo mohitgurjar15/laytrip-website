@@ -1,3 +1,9 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 .view_more{
     cursor: pointer;
 }
@@ -5,3 +11,100 @@
 .anchor_link {
     cursor: pointer;
 }
+
+//<!-- Start Responsive Filter css -->
+.filter_responsive {
+	width: 100%;
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 999;
+
+	.btn_filter {
+		width: 100%;
+		text-align: center;
+
+		a {
+			width: 100%;
+			display: inline-block;
+			padding: 10px;
+			background: $secondary-color;
+			color: $text-white;
+			font-size: 14px;
+			text-decoration: none;
+		}
+	}
+}
+
+.responsive_filter_show {
+	background: $bg-light-grey;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 99999;
+	display: none;
+
+	.filter_popup {
+		width: 100%;
+
+		.filter_head_popup {
+			width: 100%;
+			padding: 10px 20px;
+			background: $text-darkblue;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+
+			.filter_clear {
+				width: auto;
+				line-height: 26px;
+				position: absolute;
+				top: 50%;
+				left: 15px;
+				transform: translateY(-50%);
+
+				a {
+					color: $text-white;
+				}
+			}
+
+			h3 {
+				display: inline-block;
+				color: $text-white;
+				font-size: 16px;
+				margin: 0;
+			}
+
+			.filter_close {
+				width: auto;
+				position: absolute;
+				top: 50%;
+				right: 15px;
+				transform: translateY(-50%);
+
+				img {
+					width: 20px;
+					height: 20px;
+				}
+			}
+		}
+
+		.filter_cnt {
+			width: 100%;
+			padding: 15px;
+			overflow-y: scroll;
+			height: calc(100vh - 30px);
+
+			.filter_by {
+				margin: 0 0 30px;
+			}
+		}
+	}
+}
+
+//<!-- Close Responsive Filter css -->
