@@ -1,0 +1,127 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+.pay_summery_wrapper{
+    margin-top: 25px;
+    h3{
+      color: $blue-text;
+      font-size: 34px;
+      margin-bottom: 10px;
+      @include tab-view{
+        font-size: 18px;
+    }
+    }
+    .pay_sum_inner{
+      border-radius: 15px;
+      border: 1px solid $feedback_text-clr;
+      .pay_list_wrper{
+        padding: 15px 15px 0;
+        @include tab-view{
+          padding: 15px;
+        }
+        .pay_listing{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: $text-black;
+          font-size: 16px;
+          margin-bottom: 10px;
+          @include tab-view{
+            font-size: 12px;
+          }
+          &:last-child{
+            margin: 0;
+          }
+        }
+      }
+      .price_accordion{
+        .card{
+          border-bottom-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border: none;
+          //border-top: 1px solid $feedback_text-clr;
+          .card-header{
+            background-color: transparent;
+            // border-bottom-left-radius: 15px;
+            // border-bottom-right-radius: 15px;
+            border: none;
+            padding: 15px;
+            .card_header_btn{
+              font-weight: 600;
+              color: $text-black;
+              font-size: 16px;
+              border: none;
+              background-color: transparent;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              padding: 0 45px 0 0;
+              @include tab-view{
+                font-size: 16px;
+              }
+              
+              &[aria-expanded="true"]{
+                &:after {
+                  font-family: 'FontAwesome';
+                  content: "\f077";
+                  position: absolute;
+                  color: $blue-text;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 20px;
+                }
+              }
+              &[aria-expanded="false"]{
+                &:after {
+                  font-family: 'FontAwesome';
+                  content: "\f078";
+                  position: absolute;
+                  color: $blue-text;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 20px;
+                }
+              }
+            }
+          }
+          .card-body{
+            padding: 15px;
+            border-top: 1px solid $feedback_text-clr;
+            .pay_sap_setions{
+              &:first-child{
+                h3{
+                  margin-top: 0;
+                }
+              }
+              h3{
+                color: $text-grey;
+                font-size: 16px;
+                margin-top: 25px;
+                margin-bottom: 10px;
+                @include tab-view{
+                  font-size: 16px;
+              }
+              }
+              .due_details{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: $text-black;
+                font-size: 16px;
+                @include tab-view{
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

@@ -107,4 +107,10 @@
 	}
 }
 
+.mobile_view_popup{
+	display: none;
+	@include tab-view{
+		display: block;
+	}
+}
 //<!-- Close Responsive Filter css -->

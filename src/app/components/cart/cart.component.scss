@@ -1,0 +1,36 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+h3{
+    color: $blue-text;
+    font-size: 34px;
+    margin-bottom: 5px;
+    margin: 25px 0 15px;
+    @include tab-view{
+        font-size: 18px;
+    }
+  }
+.booking_tab_header{
+    li{
+        &.active{
+            background-color: $background-white;
+            padding: 10px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            a{
+                border: 1px solid $pink;
+                border-radius: 25px;
+                padding: 5px;
+                color: $text-black;
+            }
+        }
+        a{
+            
+        }
+    }
+}
