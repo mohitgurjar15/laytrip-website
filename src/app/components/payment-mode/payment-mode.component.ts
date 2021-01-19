@@ -81,7 +81,7 @@ export class PaymentModeComponent implements OnInit {
       this.getTotalPrice();
       this.totalLaycredit();
       this.getAllInstalment('set-default-down-payment');
-      this.calculateInstalment('down-payment');
+      this.calculateInstalment('down-payment',null);
     }
   }
 
@@ -106,18 +106,23 @@ export class PaymentModeComponent implements OnInit {
             //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
           }
 
-          if(this.instalments.instalment_date[1].instalment_amount<5){
+          if(this.instalments.instalment_date[1].instalment_amount<5 && type3==null){
             
             if(this.paymentType=='instalment'){
 
              this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
              this.togglePaymentMode('no-instalment');
             }
-            this.isBelowMinimumInstallment=true;
+            //this.isBelowMinimumInstallment=true;
+            this.minimumInstallmentValidation();
           }
           else{
-            this.isBelowMinimumInstallment=false;
+            //this.isBelowMinimumInstallment=false;
+            if(type3!=null && type3=='min-instal'){
+            }
+            this.minimumInstallmentValidation();
           }
+          
           this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
         }
 
@@ -221,14 +226,6 @@ export class PaymentModeComponent implements OnInit {
    */
   togglePaymentFrequency(type){
 
-    /* Reset Section */
-    //this.instalmentRequest.down_payment=0;
-    //this.selectedDownPaymentIndex=0;
-
-    //this.instalmentRequest.down_payment=this.defaultDownPayments[this.selectedDownPaymentIndex];
-    
-    /* End Reset Section */
-    
     this.instalmentRequest.instalment_type=type;
     this.instalmentType=type;
     this.calculateInstalment('down-payment','redeemable_point','set-default-down-payment');
@@ -276,4 +273,59 @@ export class PaymentModeComponent implements OnInit {
       this.isLayCreditLoading=false;
     }))
   }
+
+  minimumInstallmentValidation(){
+    this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
+      if(this.instalmentType=='weekly' && this.instalments.instalment_date[1].instalment_amount<5){
+
+        if(res.biweekly_instalments[1].instalment_amount>5){
+          this.instalmentType='biweekly';
+          this.calculateInstalment(null,null,'min-instal');
+          this.isBelowMinimumInstallment=false;
+          console.log("1One")
+        }
+        else if(res.monthly_instalments[1].instalment_amount>5){
+          this.instalmentType='monthly';
+          this.calculateInstalment(null,null,'min-instal');
+          this.isBelowMinimumInstallment=false;
+          console.log("2TWO")
+        }
+        else{
+          this.isBelowMinimumInstallment=true;
+          console.log("First::",this.isBelowMinimumInstallment)
+        }
+      }
+      else if(this.instalmentType=='biweekly' && this.instalments.instalment_date[1].instalment_amount<5){
+  
+        if(res.monthly_instalments[1].instalment_amount>5){
+          this.instalmentType='monthly';
+          this.calculateInstalment(null,null,'min-instal');
+          this.isBelowMinimumInstallment=false;
+        }
+        else{
+          this.isBelowMinimumInstallment=true;
+          console.log("Second::",this.isBelowMinimumInstallment)
+        }
+      }
+      else if(this.instalmentType=='monthly'){
+        this.isBelowMinimumInstallment=true;
+        console.log("Third::",this.isBelowMinimumInstallment)
+        /* if(res.weekly_instalments[1].instalment_amount>=5){
+          this.isBelowMinimumInstallment=false;
+        }
+        if(res.biweekly_instalments[1].instalment_amount>=5){
+          this.isBelowMinimumInstallment=false;
+        } */
+        if(res.monthly_instalments[1].instalment_amount>=5){
+          this.isBelowMinimumInstallment=false;
+        }
+      }
+      console.log("this.isBelowMinimumInstallment",this.isBelowMinimumInstallment,this.instalmentType)
+    },(err)=>{
+     
+  })
+    
+
+  }
+  
 }
