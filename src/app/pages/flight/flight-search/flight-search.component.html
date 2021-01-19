@@ -27,6 +27,32 @@
                         <app-filter-flight [filterFlightDetails]="filterFlightDetails"
                             (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}></app-filter-flight>
                     </div>
+                    <!-- For responsive -->
+                    <div class="filter_responsive flight" id="responsive_filter">
+                        <div class="btn_filter">
+                            <a href="javascript:void(0)" class="responsive_filter_btn">Filter by</a>
+                        </div>
+                    </div>
+                    
+                    <div id="responsive_filter_show" class="responsive_filter_show" *ngIf="!loading && !isNotFound && errorMessage==''">
+                        <div class="filter_popup">
+                            <div class="filter_head_popup">
+                                <div class="filter_close">
+                                    <a href="javascript:void(0)">
+                                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="filter_cnt">
+                                <div class="filter_saidbar">
+                                    <div class="filter_by">
+                                        <app-filter-flight [filterFlightDetails]="filterFlightDetails"
+                                            (filterFlight)="filterFlight($event)"></app-filter-flight>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-9">
@@ -39,31 +65,3 @@
 </section>
 
 
-<!-- For responsive -->
-<div class="filter_responsive flight" id="responsive_filter">
-    <div class="btn_filter">
-        <a href="javascript:void(0)" class="responsive_filter_btn">Show Filter</a>
-    </div>
-</div>
-<div id="responsive_filter_show" class="responsive_filter_show" *ngIf="!loading && !isNotFound && errorMessage==''">
-    <div class="filter_popup">
-        <div class="filter_head_popup">
-            <div class="filter_clear">
-                <a class="anchor_link" (click)="resetFilter()">{{'reset' | translate}}</a>
-            </div>
-            <h3>Filter</h3>
-            <div class="filter_close">
-                <a href="javascript:void(0)"><img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt=""></a>
-            </div>
-        </div>
-        <div class="filter_cnt">
-            <div class="filter_saidbar">
-                <div class="filter_by">
-                    <h4>{{'filter_by' | translate}}</h4>
-                    <app-filter-flight [filterFlightDetails]="filterFlightDetails"
-                        (filterFlight)="filterFlight($event)"></app-filter-flight>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

@@ -1,33 +1,155 @@
-<div class="card">
-    <div class="card-body">JFK-SDK</div>
+<h3 class="section_header">
+  Booking
+</h3>
+<div class="card accordion_detailed_wrps wo_return">
+  <div class="card-body">
+    <div class="line_name_header">
+      <div class="line_shortname">
+        <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="" class="Pink filled Flight" />
+        JFK-SDK
+      </div>
+      <div class="line_company_name">
+        American Airlines
+        <span class="hrs_">
+          2h
+        </span>
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="date_wrp">
+        Dec 9, 2021
+      </div>
+      <div class="fl_number">
+        <span class="pink_stamp"></span>
+        Flight DL - 447
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="timing_wrp">
+        11:50 am - 1:35 pm
+      </div>
+      <div class="class_wrps">
+        Economy
+      </div>
+    </div>
+    <div class="change_plane_wrapper">
+      <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
+      Change Planes in LAX
+    </div>
+    <div class="line_name_header">
+      <div class="line_shortname">
+        <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="" class="Pink filled Flight" />
+        LAX - MIA
+      </div>
+      <div class="line_company_name">
+        American Airlines
+        <span class="hrs_">
+          2h
+        </span>
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="date_wrp">
+        Dec 9, 2021
+      </div>
+      <div class="fl_number">
+        <span class="pink_stamp"></span>
+        Flight DL - 447
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="timing_wrp">
+        11:50 am - 1:35 pm
+      </div>
+      <div class="class_wrps">
+        Economy
+      </div>
+    </div>
+  </div>
+</div>
+<div class="total_hrs_wrps">
+  5h
+</div>
+<div class="card accordion_detailed_wrps w_return">
+  <div class="card-body">
+    <div class="line_name_header">
+      <div class="line_shortname">
+        <img src="{{s3BucketUrl}}assets/images/icon/blue_return_flight.svg" alt="" class="Pink filled Flight" />
+        JFK-SDK
+      </div>
+      <div class="line_company_name">
+        American Airlines
+        <span class="hrs_">
+          2h
+        </span>
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="date_wrp">
+        Dec 9, 2021
+      </div>
+      <div class="fl_number">
+        <span class="pink_stamp"></span>
+        Flight DL - 447
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="timing_wrp">
+        11:50 am - 1:35 pm
+      </div>
+      <div class="class_wrps">
+        Economy
+      </div>
+    </div>
+    <div class="change_plane_wrapper">
+      <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="yellow double flight" />
+      Change Planes in LAX
+    </div>
+    <div class="line_name_header">
+      <div class="line_shortname">
+        <img src="{{s3BucketUrl}}assets/images/icon/blue_return_flight.svg" alt="" class="yellow double flight" />
+        LAX - MIA
+      </div>
+      <div class="line_company_name">
+        American Airlines
+        <span class="hrs_">
+          2h
+        </span>
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="date_wrp">
+        Dec 9, 2021
+      </div>
+      <div class="fl_number">
+        <span class="pink_stamp"></span>
+        Flight DL - 447
+      </div>
+    </div>
+    <div class="line_detail_wrap">
+      <div class="timing_wrp">
+        11:50 am - 1:35 pm
+      </div>
+      <div class="class_wrps">
+        Economy
+      </div>
+    </div>
+  </div>
+</div>
+<div class="total_hrs_wrps">
+  5h
 </div>
 
-
-<div id="accordion">
-
-  <div class="card">
+<div id="accordion1" class="sub_accordions">
     <div class="card-header">
-      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+      <a class="card-link section_header" data-toggle="collapse" href="#collapse_"  aria-expanded="false"
+      aria-controls="collapse_">
         Adult
       </a>
     </div>
-    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+    <div id="collapse_" class="collapse show" data-parent="#accordion1">
       <div class="card-body">
         <app-traveler-form [totalTraveler]="totalTraveler"></app-traveler-form>
       </div>
     </div>
-  </div>
-
-  <!-- <div class="card">
-    <div class="card-header">
-      <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-        Collapsible Group Item #2
-      </a>
-    </div>
-    <div id="collapseTwo" class="collapse" data-parent="#accordion">
-      <div class="card-body">
-        Lorem ipsum..
-      </div>
-    </div>
-  </div> -->
 </div>

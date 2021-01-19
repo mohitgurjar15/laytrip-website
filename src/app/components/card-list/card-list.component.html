@@ -3,11 +3,11 @@
 
     <div class="card"  *ngFor="let card of cards">
       <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        <a class="card-link" data-toggle="collapse" href="#collapse_item">
             {{card.cardType | titlecase}} Card ****{{card.cardDigits}}
         </a>
       </div>
-      <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div id="collapse_item" class="collapse show" data-parent="#accordion">
         <div class="card-body">
             {{ card.cardHolderName }}
         </div>

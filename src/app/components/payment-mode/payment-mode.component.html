@@ -1,7 +1,6 @@
-
 <div *ngIf="!isPaymentCalulcatorLoading">
-  <h3 *ngIf="instalmentAvavible">Choose How You Pay</h3>     
-  <div class="payment_accordion" >
+  <h3 *ngIf="instalmentAvavible">Choose How You Pay</h3>
+  <div class="payment_accordion">
     <div class="payment_mode_header" *ngIf="instalmentAvavible">
       <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='instalment'}"
         [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>
@@ -9,12 +8,12 @@
         (click)="togglePaymentMode('no-instalment')">Full Payment</button>
     </div>
 
-    <div  class="inner_accordion">
+    <div class="inner_accordion">
       <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
       </app-redeem-laycredit-loader>
-      
-      <app-redeem-laycredit  redeemableLayPoints={{sellingPrice}} sellingPrice={{sellingPrice}} (applyLaycredit)="applyLaycredit($event)"
-        [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
+
+      <app-redeem-laycredit redeemableLayPoints={{sellingPrice}} sellingPrice={{sellingPrice}}
+        (applyLaycredit)="applyLaycredit($event)" [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
       <h3 *ngIf="paymentType=='instalment' && instalmentAvavible">Downpayment Options</h3>
       <div class="flex_center_wrapper" *ngIf="paymentType=='instalment' && instalmentAvavible">
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==0}"
@@ -25,7 +24,7 @@
           (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==2}"
           (click)="toggleDownPayment(2)">${{downPayments[2] | number : '1.2-2' }}</button>
-    </div>
+      </div>
 
       <h3 *ngIf="paymentType=='instalment' && instalmentAvavible">Installment Payment Options</h3>
       <div class="flex_center_wrapper" *ngIf="paymentType=='instalment' && instalmentAvavible">
@@ -121,8 +120,3 @@
     </div>
   </div>
 </div> -->
-
-
-
-
-

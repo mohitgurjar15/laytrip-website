@@ -49,7 +49,7 @@ h3{
       justify-content: center;
     }
     .btn_accrodion{
-      height: 80px;
+      height: 48px;
       margin-right: 0;
       @include tab-view{
         height: 45px;
@@ -63,7 +63,7 @@ h3{
   .btn_accrodion{
     background-color: $background-white;
     color: $text-grey;
-    font-size: 34px;
+    font-size: 11px;
     border: 1px solid $background-grey;
     border-radius: 15px;
     flex: 1;
@@ -76,13 +76,13 @@ h3{
       margin-right: 0;
     }
     &.current_active_btn{
-      color: $blue-text;
-      border: 1px solid $blue-text;
+      color: $active-tab-text;
+      border: 1px solid $active-tab-text;
     }
   }
   h3{
     color: $text-grey;
-    font-size: 26px;
+    font-size: 11px;
     margin-top: 35px;
     margin-bottom: 15px;
     @include tab-view{
@@ -98,12 +98,12 @@ h3{
     .btn_accrodion{
       background-color: $background-white;
       color: $text-black;
-      font-size: 34px;
+      font-size: 16px;
       border: 1px solid $background-grey;
       border-radius: 15px;
       flex: 1;
-      height: 108px;
-      width: 206px;
+      height: 61px;
+      width: 104px;
       margin-right: 20px;
       display: flex;
       flex-direction: column;
@@ -123,131 +123,13 @@ h3{
       }
       span{
         color: $pink;
-        font-size: 16px;
+        font-size: 11px;
         @include tab-view{
           font-size: 12px;
         }
         &.gray_text{
           color: $text-grey;
-        }
-      }
-    }
-  }
-}
-
-.pay_summery_wrapper{
-  margin-top: 25px;
-  h3{
-    color: $blue-text;
-    font-size: 34px;
-    margin-bottom: 10px;
-    @include tab-view{
-      font-size: 18px;
-  }
-  }
-  .pay_sum_inner{
-    border-radius: 15px;
-    border: 1px solid $feedback_text-clr;
-    .pay_list_wrper{
-      padding: 20px;
-      @include tab-view{
-        padding: 15px;
-      }
-      .pay_listing{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: $text-black;
-        font-size: 26px;
-        margin-bottom: 10px;
-        @include tab-view{
           font-size: 12px;
-        }
-        &:last-child{
-          margin: 0;
-        }
-      }
-    }
-    .price_accordion{
-      .card{
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border: none;
-        border-top: 1px solid $feedback_text-clr;
-        .card-header{
-          background-color: transparent;
-          border-width: 0 1px 0 0;
-          border-bottom-left-radius: 15px;
-          border-bottom-right-radius: 15px;
-          padding: 15px;
-          .card_header_btn{
-            font-weight: 600;
-            color: $text-black;
-            font-size: 26px;
-            border: none;
-            background-color: transparent;
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0 45px 0 0;
-            @include tab-view{
-              font-size: 16px;
-            }
-            
-            &[aria-expanded="true"]{
-              &:after {
-                font-family: 'FontAwesome';
-                content: "\f077";
-                position: absolute;
-                color: $blue-text;
-                font-weight: normal;
-                transition: 0.3s;
-                right: 20px;
-              }
-            }
-            &[aria-expanded="false"]{
-              &:after {
-                font-family: 'FontAwesome';
-                content: "\f078";
-                position: absolute;
-                color: $blue-text;
-                font-weight: normal;
-                transition: 0.3s;
-                right: 20px;
-              }
-            }
-          }
-        }
-        .card-body{
-          padding: 15px;
-          .pay_sap_setions{
-            &:first-child{
-              h3{
-                margin-top: 0;
-              }
-            }
-            h3{
-              color: $text-grey;
-              font-size: 26px;
-              margin-top: 25px;
-              margin-bottom: 10px;
-              @include tab-view{
-                font-size: 16px;
-            }
-            }
-            .due_details{
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              color: $text-black;
-              font-size: 26px;
-              @include tab-view{
-                font-size: 12px;
-              }
-            }
-          }
         }
       }
     }

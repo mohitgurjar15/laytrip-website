@@ -54,59 +54,54 @@
 </section> -->
 
 <section class="payment_mode_main_wrapper flight">
-    <form>
-        <div class="row">
-            <div class="col-lg-7">
-                <!-- <app-flight-cart-item></app-flight-cart-item>
-                <div class="">
-                    <app-traveler-form></app-traveler-form>
-                </div> -->
-                <app-cart [carts]="carts"></app-cart>
+    <div class="container">
+        <form>
+            <div class="row">
                 <div class="col-lg-7">
-                    <div id="accordion">
-                        <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                            Collapsible Group Item #1
-                            </a>
-                        </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <app-add-card></app-add-card>
+                    <h3>Your Bookings</h3>
+                    <div class="booking_detail_bg_wrps">
+                        <app-cart [carts]="carts"></app-cart>
+                    </div>
+                    <h3>Credit Card Details</h3>
+                    <div class="booking_detail_bg_wrps">
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                        Collapsible Group Item #1
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <app-add-card></app-add-card>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <app-card-list></app-card-list>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="payment_container">
+                        <div class="payment_mode_wrapper">
+                            <app-payment-mode-loader *ngIf="!priceData.length"></app-payment-mode-loader>
+                            <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary"
+                                [priceData]="priceData" laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
+                            </app-payment-mode>
+                            <app-price-summary *ngIf="priceData.length" [priceSummary]="priceSummary"
+                                [priceData]="priceData"></app-price-summary>
+                        </div>
+                        <div class="cta_btn_wrapper">
+                            <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button>
                         </div>
                     </div>
-                    <app-card-list></app-card-list>
-                </div>
-
-            </div>
-            
-            <div class="col-lg-5">
-                <div class="payment_container">
-                    <!-- <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
-                    </app-redeem-laycredit-loader>
-                    <app-redeem-laycredit  redeemableLayPoints={{sellingPrice}} sellingPrice={{sellingPrice}} (applyLaycredit)="applyLaycredit($event)"
-                        [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit> -->
-                    <div class="payment_mode_wrapper">
-                        
-                        <app-payment-mode-loader *ngIf="!priceData.length"></app-payment-mode-loader>
-                        <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary" [priceData]="priceData"
-                            laycreditpoints="{{laycreditpoints}}" (selectInstalmentMode)="selectInstalmentMode($event)"
-                            (getInstalmentData)="getInstalmentData($event)" (redeemableLayCredit)="redeemableLayCredit($event)">
-                        </app-payment-mode>
-                        <app-price-summary *ngIf="priceData.length" [priceSummary]="priceSummary" [priceData]="priceData"></app-price-summary>
-                    </div>
-                    <!-- <app-booking-enquiry-info></app-booking-enquiry-info> -->
-                    <div class="cta_btn_wrapper">
-                        <!-- <button (click)="checkUserAndRedirect()">Continue to Payment</button> -->
-                        <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button>
-                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-    
+        </form>
+    </div>
 </section>
 
 
