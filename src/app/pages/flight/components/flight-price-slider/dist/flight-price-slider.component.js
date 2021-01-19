@@ -114,7 +114,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         return price;
     };
     FlightPriceSliderComponent.prototype.getFlexibleArivalDate = function (date) {
-        var arrivalDate = moment(date, "DD/MM/YYYY").add(3, 'days');
+        var arrivalDate = moment(date, "DD/MM/YYYY").add(6, 'days');
         return this.commonFunction.convertDateFormat(arrivalDate, "DD/MM/YYYY");
     };
     __decorate([

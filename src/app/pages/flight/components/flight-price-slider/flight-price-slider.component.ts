@@ -141,8 +141,8 @@ export class FlightPriceSliderComponent implements OnInit {
     return price;
   }
 
-  getFlexibleArivalDate(date){
-    var arrivalDate = moment(date, "DD/MM/YYYY").add(3, 'days');
+  getFlexibleArivalDate(date){ 
+    var arrivalDate = moment(date, "DD/MM/YYYY").add(6, 'days');
     return this.commonFunction.convertDateFormat(arrivalDate,"DD/MM/YYYY");
   }
 }
