@@ -1,3 +1,9 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 .view_more {
     cursor: pointer;
 }
@@ -12,4 +18,10 @@ ng-scrollbar {
     --scrollbar-thumb-hover-color: #ff00bc;
     --scrollbar-border-radius: 15px;
     // max-height: 300px;
+}
+.mobile_view_popup{
+    display: none;
+    @include tab-view{
+        display: block;
+    }
 }

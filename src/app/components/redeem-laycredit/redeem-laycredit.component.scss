@@ -19,8 +19,11 @@
         display: inline-block;
         width: 100%;
         .point_div_wrps{
-            width: 50%;
-            display: inline-block;
+            // width: 50%;
+            // display: inline-block;
+            label{
+                font-size: 19px;
+            }
             @include tab-view{
                 width: 100%;
             }
