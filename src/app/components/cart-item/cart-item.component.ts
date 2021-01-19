@@ -1,12 +1,15 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-cart-item',
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss']
 })
+
 export class CartItemComponent implements OnInit {
 
+  s3BucketUrl = environment.s3BucketUrl;
   @Input() cartItem;
   @Input() travelers:[];
   totalTraveler={

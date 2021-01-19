@@ -1,17 +1,33 @@
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">JFK-MIA, Feb 11, 2021-Feb 15,2021</a>
-        </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse in">
-        <div class="panel-body">
-            <app-flight-cart-item></app-flight-cart-item>
-        </div>
+<div class="panel-group inner_accordion_wrapper" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false"
+          aria-controls="collapse1">
+          <span class="headerin_wrapper">
+            <span class="header_name">
+              <span class="title_image">
+                <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+              </span>
+              JFK
+              <span class="flight_routing_imgs">
+                <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
+                <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f_return.svg" alt="" class="route_image" />
+              </span>
+              MIA
+            </span>
+            <span class="header_date">Dec 9, 2021 - Dec 15, 2021</span>
+          </span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in pannel_cont_wrapper">
+      <div class="panel-body">
+        <app-flight-cart-item></app-flight-cart-item>
       </div>
     </div>
-    <!-- <div class="panel panel-default">
+  </div>
+  <!-- <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Travellers</a>
@@ -23,4 +39,4 @@
         </div>
       </div>
     </div> -->
-  </div> 
+</div>
