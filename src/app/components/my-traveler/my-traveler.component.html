@@ -1,10 +1,11 @@
-<br><hr>
 <div class="row">
-    <ng-container *ngFor="let traveler of travelers">
+  <ng-container *ngFor="let traveler of travelers">
+    <div class="suggetion_wrapper">
       <div class="col-lg-3">
         <button type="button" class="btn btn-sm btn-outline-secondary" (click)="chooseTraveler(traveler.userId)">
-          {{traveler.firstName ? traveler.firstName+' '+traveler.lastName : traveler.email  }}
+          {{traveler.firstName ? traveler.firstName+' '+traveler.lastName : traveler.email }}
         </button>
       </div>
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
+</div>
