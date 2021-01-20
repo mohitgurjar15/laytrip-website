@@ -39,6 +39,7 @@ var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
 var sso_login_component_1 = require("./sso-login/sso-login.component");
 var covid_page_component_1 = require("./covid-page/covid-page.component");
 var about_us_component_1 = require("./about-us/about-us.component");
+var cms_pages_component_1 = require("./cms-pages/cms-pages.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -67,6 +68,7 @@ var PagesModule = /** @class */ (function () {
                 sso_login_component_1.SsoLoginComponent,
                 covid_page_component_1.CovidPageComponent,
                 about_us_component_1.AboutUsComponent,
+                cms_pages_component_1.CmsPagesComponent,
             ],
             imports: [
                 common_1.CommonModule,
