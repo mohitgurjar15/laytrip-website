@@ -2,8 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import * as moment from 'moment';
+declare var $: any;
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { GenericService } from '../../services/generic.service';
+
 @Component({
   selector: 'app-add-card',
   templateUrl: './add-card.component.html',
@@ -20,7 +23,6 @@ export class AddCardComponent implements OnInit {
   @Output() emitNewCard = new EventEmitter();
   // @ViewChild('cardAddForm') cardAddFormElement: ElementRef;
   //@ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
-  disabledSavecardbutton: boolean = true;
   cardForm: FormGroup;
   submitted: boolean = false;
   token: string;
@@ -59,6 +61,7 @@ export class AddCardComponent implements OnInit {
       card_number: ['', [Validators.required, Validators.maxLength(20)]],
       expiry: ['', Validators.required]
     });
+    this.spreedlySdk();
   }
 
   spreedlySdk() {
@@ -67,60 +70,124 @@ export class AddCardComponent implements OnInit {
       'cvvEl': 'spreedly-cvv',
     });
 
-    Spreedly.on('ready', function () {
-      Spreedly.setPlaceholder("number", "Card Number");
+    Spreedly.on('ready', function (frame) {
+      Spreedly.setPlaceholder("number", "000 000 000 000 0000");
       Spreedly.setPlaceholder("cvv", "CVV");
       Spreedly.setFieldType("cvv", "text");
-      Spreedly.setFieldType("number", "text");
+      Spreedly.setFieldType('number', 'text');
       Spreedly.transferFocus("number");
-      // Spreedly.setNumberFormat("maskedFormat");
-      this.disabledSavecardbutton = false;
-      console.log('this.disabledSavecardbutton', this.disabledSavecardbutton);
+      Spreedly.setFieldType('cvv', 'text');
+      Spreedly.setNumberFormat('maskedFormat');
+      Spreedly.setStyle('number', 'width: 70%; border-radius: 3px; border: 1px solid #ccc; padding: .65em .5em; font-size: 91%;');
+      Spreedly.setStyle('cvv', 'width: 65%; border-radius: 3px; border: 1px solid #ccc; padding: .65em .5em; font-size: 91%;');
+    });
+
+    Spreedly.on('errors', function (errors) {
+      var messageEl = document.getElementById('errors');
+      var errorBorder = "1px solid red";
+      for (var i = 0; i < errors.length; i++) {
+        var error = errors[i];
+        if (error["attribute"]) {
+          var masterFormElement = document.getElementById(error["attribute"]);
+          if (masterFormElement) {
+            masterFormElement.style.border = errorBorder
+          } else {
+            Spreedly.setStyle(error["attribute"], "border: " + errorBorder + ";");
+          }
+        }
+        messageEl.innerHTML += error["message"] + "<br/>";
+      }
+    });
+
+    Spreedly.on('fieldEvent', function (name, event, activeElement, inputData) {
+      if (event == 'input') {
+        if (inputData["validCvv"]) {
+          Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
+        } else {
+          Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
+        }
+        // if (inputData["cvvLength"] === 3) {
+        //   Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
+        // } else {
+        //   Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
+        // }
+        // if (inputData["cvvLength"] === 4) {
+        //   Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
+        // } else {
+        //   Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
+        // }
+        if (inputData["validNumber"]) {
+          Spreedly.setStyle('number', "background-color: #e8f0fe;");
+        } else {
+          Spreedly.setStyle('number', "background-color: #FFFFFF;");
+        }
+      }
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {
-      // Set the token in the hidden form field
-      var tokenField = document.getElementById('payment_method_token');
-      tokenField.setAttribute('value', token);
+      var tokenField = document.getElementById("payment_method_token");
+      tokenField.setAttribute("value", token);
       this.token = token;
-      // console.log(this.cardForm.controls.payment_method_token.value);
-      // this.cardForm.controls.payment_method_token.setValue(token);
-      console.log("this.token", token);
-      // console.log(pmData);
+
       let cardData = {
         card_type: pmData.card_type,
         card_holder_name: pmData.full_name,
         card_token: pmData.token,
         card_last_digit: pmData.last_four_digits
       };
-      console.log(cardData);
-      this.saveCard(cardData)
-      //this.submitPaymentForm(cardData);
-      //var masterForm = document.getElementById('payment-form') as HTMLFormElement;
-      // console.log(masterForm);
-      //masterForm.submit();
-      // this.saveCard(cardData);
-      // this.cardAddFormElement.nativeElement.submit();
+      $.ajax({
+        url: `${environment.apiUrl}v1/payment`,
+        method: 'POST',
+        headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmRlODRmODctNTNlNi00MDdhLTgwMTItMGE5ZDgwOGQ1MmMxIiwiZW1haWwiOiJzdXJlc2hAaXRvbmVjbGljay5jb20iLCJ1c2VybmFtZSI6InN1cmVzaCBzdXRoYXIiLCJmaXJzdE5hbWUiOiJzdXJlc2giLCJwaG9uZSI6Ijk4Mzg0Mjc4MjMiLCJtaWRkbGVOYW1lIjoiIiwibGFzdE5hbWUiOiJzdXRoYXIiLCJzYWx0IjoiJDJiJDEwJFR5czkzeEtQbHlwREhpSWlINzRGbGUiLCJwcm9maWxlUGljIjoiaHR0cDovL3N0YWdpbmcubGF5dHJpcC5jb206NDA0MC9wcm9maWxlL3VzZXItMTAzOGIuanBlZyIsInJvbGVJZCI6NiwiY3JlYXRlZERhdGUiOiIyMDIxLTAxLTEzVDExOjQ5OjI3LjI4OFoiLCJzb2NpYWxBY2NvdW50SWQiOiIiLCJpYXQiOjE2MTEwNDUzNTUsImV4cCI6MzE4Nzg0NTM1NX0.vIFtwzxVUu-BqE8dTlfXcBvrX2jE01X3EIm99CiVh2M' },
+        data: cardData,
+        success: function (obj) {
+          console.log('card:::::', obj);
+          // this.emitNewCard.emit(obj);
+          $('#accordion-card').append(`<div class="card"><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapseOne"> ${obj.cardType} Card ****${obj.cardDigits} </a></div><div class="collapse show" data-parent="#accordion" id="collapseOne"><div  class="card-body"> ${obj.cardHolderName} </div></div></div>`);
+          $("#payment-form")[0].reset();
+          Spreedly.init('YNEdZFTwB1tRR4zwvcMIaUxZq3g', {
+            'numberEl': 'spreedly-number',
+            'cvvEl': 'spreedly-cvv',
+          });
+        },
+        error: function (error) {
+          console.log('card:::::', error);
+          // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
+        }
+      });
+
+      // For demonstration purposes just display the token
+      // var messageEl = document.getElementById('message');
+      // messageEl.innerHTML = "Success! The returned payment method token is: " + token;
     });
   }
 
   submitPaymentForm() {
-    this.cardForm.controls.card_number.setValue(this.cardForm.controls.card_number.value.replace(/\s/g, ""));
-    this.cardError = '';
-    this.submitted = true;
-    if (this.cardForm.invalid) {
-      const controls = this.cardForm.controls;
-      Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
-      return;
+    var normalBorder = "1px solid #ccc";
+    var paymentMethodFields = ['first_name', 'last_name', 'month', 'year'],
+      options = {};
+    for (var i = 0; i < paymentMethodFields.length; i++) {
+      var field = paymentMethodFields[i];
+
+      // Reset existing styles (to clear previous errors)
+      var fieldEl = (<HTMLInputElement>document.getElementById(field));
+      fieldEl.style.border = normalBorder;
+
+      // add value to options
+      options[field] = fieldEl.value;
     }
-    let cardData = {
-      first_name: this.cardForm.controls.first_name.value,
-      last_name: this.cardForm.controls.last_name.value,
-      card_cvv: this.cardForm.controls.card_cvv.value,
-      card_number: this.cardForm.controls.card_number.value.replace(/\s/g, ""),
-      expiry: moment(this.cardForm.controls.expiry.value).format('MM/YYYY')
-    }
-    this.saveCard(cardData);
+
+    // Reset frame styles
+    Spreedly.setStyle('number', "border: " + normalBorder + ";");
+    Spreedly.setStyle('cvv', "border: " + normalBorder + ";");
+
+    // Reset previous messages
+    document.getElementById('errors').innerHTML = "";
+    document.getElementById('message').innerHTML = "";
+
+    // Tokenize!
+    Spreedly.tokenizeCreditCard(options);
+    // this.saveCard(cardData);
   }
 
   saveCard(cardData) {
