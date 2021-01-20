@@ -114,6 +114,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         return price;
     };
     FlightPriceSliderComponent.prototype.getFlexibleArivalDate = function (date) {
+        console.log('sds');
         var startDate = moment(this.departureDate, 'MMM DD, YYYY');
         var endDate = moment(this.arrivalDate, 'MMM DD, YYYY');
         var intervalDay = endDate.diff(startDate, 'days');
