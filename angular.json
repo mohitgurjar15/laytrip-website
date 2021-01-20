@@ -53,6 +53,7 @@
               "src/assets/js/jquery-ui.js",
               "src/assets/js/slick.js",
               "src/assets/js/iframe-v1.min.js",
+              "src/assets/js/spreedly.js",
               "src/assets/js/apple-auth.js"
             ],
             "es5BrowserSupport": true
