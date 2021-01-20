@@ -74,6 +74,11 @@ export class FlightPaymentComponent implements OnInit {
         module_info:this.flightSummary[0],
         travelers:[]
       };
+      /* this.carts[1]={
+        type : 'flight',
+        module_info:this.flightSummary[0],
+        travelers:[]
+      }; */
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
