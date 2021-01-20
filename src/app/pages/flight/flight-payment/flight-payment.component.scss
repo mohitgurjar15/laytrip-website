@@ -97,6 +97,8 @@
             width: 100%;
             margin: 25px 0 15px;
             align-items: center;
+            flex-direction: column;
+
             button {
                 width: auto;
                 height: 54px;
@@ -113,6 +115,7 @@
                 white-space: normal;
                 cursor: pointer;
                 border: 1px solid $primary-color;
+                margin-bottom: 10px;
         
                 &::before {
                     content: "";
@@ -131,6 +134,23 @@
                     color: $primary-color;
                     &:before {
                         height: 190%;
+                    }
+                }
+                &.trans_btn{
+                    color: $pink;
+                    background-color: transparent;
+                    border: 2px solid $box-border-color;
+                    &::before{
+                        background: $pink;
+                    }
+                    &:hover{
+                        color: $text-white;
+                    }
+                }
+                .white_search{
+                    display: none;
+                    &.show{
+                        display: inline-block;
                     }
                 }
             }
