@@ -78,9 +78,9 @@ export class FlightCheckoutComponent implements OnInit {
       this.getSellingPrice();
       this.getTravelers();
       this.userInfo = getLoginUserInfo();
-      if(typeof this.userInfo.roleId=='undefined'){
+      /* if(typeof this.userInfo.roleId=='undefined'){
         this.router.navigate(['/'])
-      }
+      } */
       this.routeCode = decodeURIComponent(this.route.snapshot.paramMap.get('rc'))
 
       this.bookingTimerConfiguration();
