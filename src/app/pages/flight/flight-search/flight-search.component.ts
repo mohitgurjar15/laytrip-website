@@ -8,6 +8,8 @@ import { Location } from '@angular/common';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { GenericService } from '../../../services/generic.service';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -27,15 +29,21 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   tripType: string = '';
 
-  ​flexibleLoading:boolean=false;
-  ​flexibleNotFound:boolean=false;
-  dates:[]=[];
-  calenderPrices:[]=[]
-  errorMessage:string='';
+  flexibleLoading: boolean = false;
+  flexibleNotFound: boolean = false;
+  dates: [] = [];
+  calenderPrices: [] = []
+  errorMessage: string = '';
+
+  // CART VARIABLE
+  cartItemsCount;
+  cartItems;
 
   constructor(
     private route: ActivatedRoute,
     private flightService: FlightService,
+    private genericService: GenericService,
+    private cartService: CartService,
     public router: Router,
     public location: Location,
     public commonFunction: CommonFunction,
@@ -73,6 +81,23 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       }
       this.getFlightSearchData(payload, params.trip);
     });
+
+    // GET CART LIST FROM GENERIC SERVICE
+    this.genericService.getCartList().subscribe((res: any) => {
+      console.log('cart list:::::', res);
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        this.cartService.setCartItems(res.data);
+        this.cartItems = res.data;
+        if (res.count) {
+          this.cartItemsCount = res.count;
+        }
+        // GET CART ITEMS FROM CART SERVICE
+        this.cartService.getCartItems.subscribe(items => {
+          console.log('items:::cart:::', items);
+        });
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -88,7 +113,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   getFlightSearchData(payload, tripType) {
     this.loading = true;
     this.tripType = tripType;
-    this.errorMessage='';
+    this.errorMessage = '';
     if (payload && tripType === 'roundtrip') {
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
@@ -99,9 +124,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
       }, err => {
         if (err && err.status === 404) {
-          this.errorMessage=err.message;
+          this.errorMessage = err.message;
         }
-        else{
+        else {
           this.isNotFound = true;
         }
 
@@ -130,10 +155,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
       }, err => {
 
-        if(err.status==422){
-          this.errorMessage=err.message;
+        if (err.status == 422) {
+          this.errorMessage = err.message;
         }
-        else{
+        else {
           this.isNotFound = true;
         }
         this.loading = false;
@@ -237,7 +262,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
     }
     else if (key === 'departure') {
-      
+
       this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
     }
     else {

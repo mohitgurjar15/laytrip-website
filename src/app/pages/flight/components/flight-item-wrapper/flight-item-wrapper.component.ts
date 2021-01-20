@@ -10,6 +10,7 @@ import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
+import { CartService } from '../../../../services/cart.service';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -37,6 +38,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   @Input() flightDetails;
   @Input() filter;
+  cartItems;
 
   animationState = 'out';
   flightList;
@@ -54,15 +56,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   routeCode = [];
   baggageDetails;
   cancellationPolicy;
-  cancellationPolicyArray=[];
-  loadMoreCancellationPolicy:boolean=false;
+  cancellationPolicyArray = [];
+  loadMoreCancellationPolicy: boolean = false;
   errorMessage;
-  loadBaggageDetails:boolean = true;
-  loadCancellationPolicy:boolean=false;
-  isInstalmentAvailable=false;
+  loadBaggageDetails: boolean = true;
+  loadCancellationPolicy: boolean = false;
+  isInstalmentAvailable = false;
   userInfo;
-  totalLaycreditPoints:number=0;
-  showFareDetails:number=0;
+  totalLaycreditPoints: number = 0;
+  showFareDetails: number = 0;
 
   isRoundTrip = false;
 
@@ -73,12 +75,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private commonFunction:CommonFunction,
-    private genericService:GenericService
+    private commonFunction: CommonFunction,
+    private genericService: GenericService,
+    private cartService: CartService,
   ) {
-   }
+  }
 
   ngOnInit() {
+
+    // GET CART ITEMS FROM CART SERVICE
+    this.cartService.getCartItems.subscribe(items => {
+      console.log('items:::cart:::', items);
+      this.cartItems = items;
+    });
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
@@ -109,21 +118,21 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   getCancellationPolicy(routeCode) {
 
-    this.loadCancellationPolicy=true;
-    this.loadMoreCancellationPolicy=false;
-    this.errorMessage='';
-    this.flightService.getCancellationPolicy(routeCode).subscribe((data:any) => {
+    this.loadCancellationPolicy = true;
+    this.loadMoreCancellationPolicy = false;
+    this.errorMessage = '';
+    this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
       this.cancellationPolicyArray = data.cancellation_policy.split('--')
-      this.loadCancellationPolicy=false;
+      this.loadCancellationPolicy = false;
       this.cancellationPolicy = data;
     }, (err) => {
-      this.loadCancellationPolicy=false;
+      this.loadCancellationPolicy = false;
       this.errorMessage = err.message;
     });
   }
 
-  toggleCancellationContent(){
-    this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
+  toggleCancellationContent() {
+    this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
   }
 
   ngAfterContentChecked() {
@@ -133,19 +142,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     });
   }
 
-  showDetails(index,flag=null) {
+  showDetails(index, flag = null) {
     if (typeof this.showFlightDetails[index] === 'undefined') {
       this.showFlightDetails[index] = true;
     } else {
       this.showFlightDetails[index] = !this.showFlightDetails[index];
     }
 
-    if(flag=='true'){
-      this.showFareDetails=1;
+    if (flag == 'true') {
+      this.showFareDetails = 1;
     }
-    else{
-      
-      this.showFareDetails=0;
+    else {
+
+      this.showFareDetails = 0;
     }
 
     this.showFlightDetails = this.showFlightDetails.map((item, i) => {
@@ -154,59 +163,89 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   closeFlightDetail() {
-    
-    this.showFareDetails=0;
+
+    this.showFareDetails = 0;
     this.showFlightDetails = this.showFlightDetails.map(item => {
       return false;
     });
   }
 
   bookNow(route) {
- 
+    // console.log(route);
+    // // if (this.cartItems) {
+    //   //   if (this.cartItems[0].paymentType === 'instalment') {
+
+    //   //   }
+    //   // }
+    //   console.log(this.cartItems.length);
+    // if (this.cartItems && this.cartItems.length >= 2) {
+    //   alert('You can not add more than 5 items in cart');
+    // } else {
+    //   const itinerary = {
+    //     adult: this.route.snapshot.queryParams["adult"],
+    //     child: this.route.snapshot.queryParams["child"],
+    //     infant: this.route.snapshot.queryParams["infant"],
+    //     is_passport_required: route.is_passport_required
+    //   };
+    //   let lastSearchUrl = this.router.url;
+    //   this.cookieService.put('_prev_search', lastSearchUrl);
+    //   const dateNow = new Date();
+    //   dateNow.setMinutes(dateNow.getMinutes() + 10);
+
+    //   sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+    //   sessionStorage.setItem('__route', JSON.stringify(route));
+    //   /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
+    //   } else{
+    //     this.router.navigate([`flight/checkout/${route.route_code}`]);
+    //   } */
+    //   this.router.navigate([`flight/payment/${route.route_code}`]);
+    // }
+
     const itinerary = {
       adult: this.route.snapshot.queryParams["adult"],
       child: this.route.snapshot.queryParams["child"],
       infant: this.route.snapshot.queryParams["infant"],
-      is_passport_required : route.is_passport_required
+      is_passport_required: route.is_passport_required
     };
-    let lastSearchUrl=this.router.url;
+    let lastSearchUrl = this.router.url;
     this.cookieService.put('_prev_search', lastSearchUrl);
     const dateNow = new Date();
     dateNow.setMinutes(dateNow.getMinutes() + 10);
-    
-    sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
-    sessionStorage.setItem('__route',JSON.stringify(route));
+
+    sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+    sessionStorage.setItem('__route', JSON.stringify(route));
     /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
     } else{
       this.router.navigate([`flight/checkout/${route.route_code}`]);
-    } */   
+    } */
     this.router.navigate([`flight/payment/${route.route_code}`]);
+
   }
 
-  checkInstalmentAvalability(){
-    let instalmentRequest={
+  checkInstalmentAvalability() {
+    let instalmentRequest = {
       checkin_date: this.route.snapshot.queryParams['departure_date'],
       booking_date: moment().format("YYYY-MM-DD")
     }
-    this.genericService.getInstalemntsAvailability(instalmentRequest).subscribe((res:any)=>{
-      if(res.instalment_availability){
+    this.genericService.getInstalemntsAvailability(instalmentRequest).subscribe((res: any) => {
+      if (res.instalment_availability) {
         this.isInstalmentAvailable = res.instalment_availability;
       }
     })
   }
 
-  totalLaycredit(){
-    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
-      this.totalLaycreditPoints=res.total_available_points;
-    },(error=>{
+  totalLaycredit() {
+    this.genericService.getAvailableLaycredit().subscribe((res: any) => {
+      this.totalLaycreditPoints = res.total_available_points;
+    }, (error => {
 
     }))
   }
 
 
-  ngOnChanges(changes:SimpleChanges){
-    
-    this.flightList=changes.flightDetails.currentValue;
+  ngOnChanges(changes: SimpleChanges) {
+
+    this.flightList = changes.flightDetails.currentValue;
   }
 
   logAnimation(event) {
