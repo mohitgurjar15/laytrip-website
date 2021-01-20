@@ -181,5 +181,6 @@ export class FlightPaymentComponent implements OnInit {
 
   handleSubmit(){
     console.log("valid data")
+    this.router.navigate(['/flight/checkout', this.routeCode]);
   }
 }
