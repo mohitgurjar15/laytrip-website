@@ -39,7 +39,7 @@
                             <!-- <li class="nav-item">
                                 <a class="nav-link hover-link">Support</a>
                             </li> -->
-                            <li class="nav-item"
+                            <li class="nav-item disabled"
                                 *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
                                 <a class="nav-link hover-link" [routerLink]="['/account/lay-credit-points']">
                                     <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit | number :
@@ -90,8 +90,8 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li
-                                            *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
-                                            <a class="nav-link hover-link"
+                                            *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'" class="disabled">
+                                            <a class="nav-link hover-link "
                                                 [routerLink]="['/account/lay-credit-points']">
                                                 <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit |
                                                     number : '1.2-2'}}

@@ -63,6 +63,14 @@ select {
 	}
 }
 
+.disabled{
+	filter: grayscale(90%);
+    pointer-events: none;
+    opacity: 0.5;
+}
+.error_field{
+	color: $error-color;
+}
 .block_apply_laycredits{
     .custom_range_slide {
 		.point_val{
