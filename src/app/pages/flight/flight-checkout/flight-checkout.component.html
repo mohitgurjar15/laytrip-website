@@ -83,13 +83,13 @@
                 <div class="col-lg-5">
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
-                            <app-payment-mode-loader *ngIf="!priceData.length"></app-payment-mode-loader>
+                            <!-- <app-payment-mode-loader *ngIf="!priceData.length"></app-payment-mode-loader>
                             <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary"
                                 [priceData]="priceData" laycreditpoints="{{laycreditpoints}}"
                                 (selectInstalmentMode)="selectInstalmentMode($event)"
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
-                            </app-payment-mode>
+                            </app-payment-mode> -->
                             <app-price-summary *ngIf="priceData.length" [priceSummary]="priceSummary"
                                 [priceData]="priceData"></app-price-summary>
                         </div>

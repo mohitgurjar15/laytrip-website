@@ -57,6 +57,8 @@ export class FlightCheckoutComponent implements OnInit {
     payNowAmount:number=0;
     priceData=[];
     travelerCounts=[];
+    carts=[];
+    priceSummary;
 
     constructor(
       private route: ActivatedRoute,
@@ -83,11 +85,34 @@ export class FlightCheckoutComponent implements OnInit {
 
       this.bookingTimerConfiguration();
       this.setInstalmentInfo();
+      this.priceSummary={ layCreditPoints : 0 , instalmentType : 'weekly',instalments:{"instalment_available":true,"instalment_date":[{"instalment_date":"2021-01-20","instalment_amount":143.2},{"instalment_date":"2021-01-27","instalment_amount":107.4},{"instalment_date":"2021-02-03","instalment_amount":107.39500000000001}],"percentage":40,"down_payment":[143.2,179,214.79]},remainingAmount:20}
 
       try{
         let _itinerary = sessionStorage.getItem('_itinerary');
         _itinerary = JSON.parse(_itinerary)
         this.travelerCounts.push(_itinerary);
+      }
+      catch(e){
+
+      }
+
+      let __route = sessionStorage.getItem('__route');
+      try{
+        let response  = JSON.parse(__route);
+        response[0]=response;
+        this.flightSummary=response;
+        this.carts[0]={
+          type : 'flight',
+          module_info:this.flightSummary[0],
+          travelers:[]
+        };
+        /* this.carts[1]={
+          type : 'flight',
+          module_info:this.flightSummary[0],
+          travelers:[]
+        }; */
+        //this.sellingPrice = response[0].selling_price;
+        //this.getSellingPrice();
       }
       catch(e){
 
@@ -399,6 +424,7 @@ export class FlightCheckoutComponent implements OnInit {
         }
         this.flightService.getSellingPrice(payLoad).subscribe((res:any)=>{
           this.priceData=res;
+          console.log("this.priceData",this.priceData);
         },(error)=>{
     
         })
