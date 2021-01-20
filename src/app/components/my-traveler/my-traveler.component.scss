@@ -7,4 +7,24 @@
 
 .suggetion_wrapper{
     margin-top: 25px;
+    padding: 15px 13px;
+    button{
+        color: $text_light_yellow;
+        border: 1px solid $text_light_yellow;
+        border-radius: 5px;
+        font-size: 12px;
+        height: 35px;
+        display: inline-block;
+        margin: 5px;
+        padding: 0 10px;
+        width: auto;
+        &:hover{
+            color: $text-white;
+            background-color: $text_light_yellow;
+        }
+        &:focus{
+            outline: none;
+            box-shadow: none;
+        }
+    }
 }

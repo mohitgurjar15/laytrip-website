@@ -1,11 +1,9 @@
 <div class="row">
-  <ng-container *ngFor="let traveler of travelers">
-    <div class="suggetion_wrapper">
-      <div class="col-lg-3">
-        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="chooseTraveler(traveler.userId)">
-          {{traveler.firstName ? traveler.firstName+' '+traveler.lastName : traveler.email }}
-        </button>
-      </div>
-    </div>
-  </ng-container>
+  <div class="suggetion_wrapper">
+    <ng-container *ngFor="let traveler of travelers">
+      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="chooseTraveler(traveler.userId)">
+        {{traveler.firstName ? traveler.firstName+' '+traveler.lastName : traveler.email }}
+      </button>
+    </ng-container>
+  </div>
 </div>
