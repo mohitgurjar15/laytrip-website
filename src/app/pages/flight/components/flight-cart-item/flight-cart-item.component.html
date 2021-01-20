@@ -136,20 +136,24 @@
     </div>
   </div>
 </div>
-<div class="total_hrs_wrps">
+<div class="total_hrs_wrps cta_btns_wrps">
+  <span class="ct_btns">
+    <button>Delete</button>
+    <!-- <button>Edit</button> -->
+  </span>
   5h
 </div>
 
-<div id="accordion1" class="sub_accordions">
+<!-- <div id="accordion1" class="sub_accordions">
     <div class="card-header">
       <a class="card-link section_header" data-toggle="collapse" href="#collapse_"  aria-expanded="false"
       aria-controls="collapse_">
         Adult
       </a>
-    </div>
-    <div id="collapse_" class="collapse show" data-parent="#accordion1">
+    </div> -->
+    <div id="collapse_" class="collapse show sub_accordions" data-parent="#accordion1">
       <div class="card-body">
         <app-traveler-form [totalTraveler]="totalTraveler"></app-traveler-form>
       </div>
     </div>
-</div>
+<!-- </div> -->
