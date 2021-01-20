@@ -69,6 +69,13 @@ export class GenericService {
       );
   }
 
+  getCartList() {
+    return this.http.get(`${environment.apiUrl}v1/cart/list`, this.commonFunction.setHeaders())
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   handleError(error) {
 
     let errorMessage = {};
