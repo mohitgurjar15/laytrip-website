@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from '.././../../../../environments/environment';
 
 @Component({
   selector: 'app-flight-cart-item',
@@ -7,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FlightCartItemComponent implements OnInit {
 
+  s3BucketUrl = environment.s3BucketUrl;
   constructor() { }
   @Input() travelers:[];
   totalTraveler={

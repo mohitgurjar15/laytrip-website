@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -7,6 +8,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
+  s3BucketUrl = environment.s3BucketUrl;
   @Input() carts;
   constructor() { }
 
