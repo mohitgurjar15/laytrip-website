@@ -142,7 +142,11 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   getFlexibleArivalDate(date){
-    var arrivalDate = moment(date, "DD/MM/YYYY").add(3, 'days');
+    console.log('sds')
+    var startDate = moment(this.departureDate,'MMM DD, YYYY');
+    var  endDate = moment(this.arrivalDate,'MMM DD, YYYY');  
+    var intervalDay = endDate.diff(startDate,'days');
+    var arrivalDate = moment(date, "DD/MM/YYYY").add(intervalDay, 'days');
     return this.commonFunction.convertDateFormat(arrivalDate,"DD/MM/YYYY");
-  }
+  } 
 }

@@ -52,6 +52,7 @@
     "localstorage-polyfill": "^1.0.1",
     "moment": "^2.27.0",
     "ng-lottie": "^0.3.2",
+    "ng-otp-input": "^1.7.1",
     "ng5-slider": "^1.2.4",
     "ngx-cookie": "^5.0.0",
     "ngx-countdown": "^3.1.0",
@@ -70,7 +71,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.29",
-    "@angular/cli": "~8.3.29",
+    "@angular/cli": "^8.3.29",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~2.8.8",

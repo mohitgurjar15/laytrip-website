@@ -101,25 +101,4 @@
 <app-booking-feedback *ngIf="isShowFeedbackPopup" [bookingId]="bookingId" (feedbackValueChange)="feedbackToggle($event)"></app-booking-feedback>
 <app-popup-term-condition *ngIf="isShowTermConditionPopup" (closeTermCoditionPopup)="closeTermCoditionPopup($event)" (acceptTermCondtion)="acceptTermCondtion($event)"></app-popup-term-condition> -->
 
-<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="row">
-                    <!-- <app-cart-item 
-                        moduleType="flight"
-                        [travelers]="travelers"
-                        [totalPassenger]="travelerCounts[0]">
-                    </app-cart-item> -->
-                </div>
 
-                <div class="row">
-                    
-                </div>
-            </div>
-            <div class="col-lg-4">
-                
-            </div>
-        </div>
-    </div>
-</section> 
