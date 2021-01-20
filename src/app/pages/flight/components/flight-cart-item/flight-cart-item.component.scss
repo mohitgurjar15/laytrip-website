@@ -90,41 +90,62 @@
     font-size: 18px;
     margin: 5px 0;
     padding: 0 15px;
-}
-.sub_accordions{
-    .card-header{
-        border: none;
-        background-color: transparent;
-        padding: 0;
-        .section_header{
-            color: $active-tab-text;
-            font-size: 16px;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-
-            &[aria-expanded="true"]{
-                &:after {
-                    font-family: 'FontAwesome';
-                    content: "\f077";
-                    color: $text-grey;
-                    font-weight: normal;
-                    transition: 0.3s;
-                    right: 0;
-                }
-            }
-            &[aria-expanded="false"]{
-                &:after {
-                    font-family: 'FontAwesome';
-                    content: "\f078";
-                    color: $text-grey;
-                    font-weight: normal;
-                    transition: 0.3s;
-                    right: 0;
+    &.cta_btns_wrps{
+        justify-content: space-between;
+        .ct_btns{
+            button{
+                background-color: transparent;
+                color: $text_light_yellow;
+                border: none;
+                box-shadow: none;
+                font-size: 16px;
+                padding: 0;
+                // margin-right: 40px;
+                &:last-child{
+                    margin: 0;
                 }
             }
         }
+
+    }
+}
+.sub_accordions{
+    // .card-header{
+    //     border: none;
+    //     background-color: transparent;
+    //     padding: 0;
+    //     .section_header{
+    //         color: $active-tab-text;
+    //         font-size: 16px;
+    //         font-weight: 500;
+    //         display: flex;
+    //         justify-content: space-between;
+    //         align-items: center;
+    //         width: 100%;
+
+    //         &[aria-expanded="true"]{
+    //             &:after {
+    //                 font-family: 'FontAwesome';
+    //                 content: "\f077";
+    //                 color: $text-grey;
+    //                 font-weight: normal;
+    //                 transition: 0.3s;
+    //                 right: 0;
+    //             }
+    //         }
+    //         &[aria-expanded="false"]{
+    //             &:after {
+    //                 font-family: 'FontAwesome';
+    //                 content: "\f078";
+    //                 color: $text-grey;
+    //                 font-weight: normal;
+    //                 transition: 0.3s;
+    //                 right: 0;
+    //             }
+    //         }
+    //     }
+    // }
+    .card-body{
+        padding: 0;
     }
 }
