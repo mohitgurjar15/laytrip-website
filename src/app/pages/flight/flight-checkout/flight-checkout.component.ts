@@ -21,7 +21,7 @@ export class FlightCheckoutComponent implements OnInit {
     s3BucketUrl = environment.s3BucketUrl;
     validateCardDetails:Subject<any> = new Subject();
     showAddCardForm:boolean=false;
-    progressStep={ step1:true, step2:true, step3:true,step4:false };
+    progressStep={ step1:false, step2:true, step3:false,step4:false };
     cardToken:string='';
     instalmentMode='instalment';
     laycreditpoints:number=0;
