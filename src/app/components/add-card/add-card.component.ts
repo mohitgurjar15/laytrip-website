@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import * as moment from 'moment';
 declare var $: any;
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 
 @Component({
