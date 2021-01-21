@@ -17,30 +17,44 @@ h3{
   }
 .booking_tab_header{
     border-bottom: none;
+    position: relative;
+    z-index: 9;
     li{
+        background-color: #F7F7F7;
+        padding: 10px;
+        border: 1px solid $box-border-color;
+        position: relative;
+        top: 7px;
+        &:last-child{
+            border-top-right-radius: 10px;
+        }
+        a{
+            color: $mid_gray_bg;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+        }
         &.active{
             background-color: $background-white;
-            padding: 10px;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-            border: 1px solid $box-border-color;
             border-bottom: none;
             display: flex;
+            top: 0;
+            height: 71px;
             a{
+                width: 177px;
                 border: 2px solid $pink;
                 border-radius: 25px;
                 padding: 5px 20px;
                 color: $text-black;
                 font-weight: 600;
                 font-size: 20px;
-                width: 177px;
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
+                flex-direction: row;
+                padding: 0 20px;
             }
-        }
-        a{  
-            
         }
     }
 }
@@ -52,5 +66,6 @@ h3{
     border-top-right-radius: 10px;
     border: 1px solid $box-border-color;
     border-top: none;
-
+    z-index: 10;
+    position: relative;
 }
