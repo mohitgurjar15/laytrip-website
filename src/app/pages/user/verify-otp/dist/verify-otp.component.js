@@ -27,6 +27,17 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.errorMessage = '';
         this.spinner = false;
         this.apiError = '';
+        this.config = {
+            allowNumbersOnly: true,
+            length: 6,
+            isPasswordInput: true,
+            disableAutoFocus: true,
+            placeholder: '0',
+            inputStyles: {
+                'width': '50px',
+                'height': '50px'
+            }
+        };
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({

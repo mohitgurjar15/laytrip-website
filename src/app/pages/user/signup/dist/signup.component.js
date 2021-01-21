@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var must_match_validators_1 = require("../../../_helpers/must-match.validators");
+var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
 var SignupComponent = /** @class */ (function () {
     function SignupComponent(modalService, formBuilder, userService, router) {
         this.modalService = modalService;
@@ -28,6 +29,8 @@ var SignupComponent = /** @class */ (function () {
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signupForm = this.formBuilder.group({
+            first_name: ['', [forms_1.Validators.required]],
+            last_name: ['', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
             confirm_password: ['', forms_1.Validators.required]
@@ -59,6 +62,10 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
+        $('#sign_up_modal').modal('hide');
+        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent);
+        modalRef.componentInstance.name = 'World';
+        return;
         this.submitted = this.loading = true;
         console.log(this.signupForm);
         if (this.signupForm.invalid) {

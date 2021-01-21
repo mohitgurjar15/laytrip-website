@@ -28,7 +28,19 @@ export class VerifyOtpComponent implements OnInit {
   spinner = false;
   @Input() emailForVerifyOtp;
   apiError :string =  '';
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: true,
+    disableAutoFocus: true,
+    placeholder: '0',
+    inputStyles: {
+      'width': '50px',
+      'height': '50px'
+    }
+  };
 
+  
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
