@@ -20,42 +20,59 @@ h3{
     position: relative;
     z-index: 9;
     li{
-        background-color: #F7F7F7;
-        padding: 10px;
-        border: 1px solid $box-border-color;
-        position: relative;
-        top: 7px;
-        &:last-child{
-            border-top-right-radius: 10px;
-        }
-        a{
-            color: $mid_gray_bg;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-direction: column;
-        }
-        &.active{
-            background-color: $background-white;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            border-bottom: none;
-            display: flex;
-            top: 0;
-            height: 71px;
+        &:first-child{
             a{
-                width: 177px;
-                border: 2px solid $pink;
-                border-radius: 25px;
-                padding: 5px 20px;
-                color: $text-black;
-                font-weight: 600;
-                font-size: 20px;
-                flex-direction: row;
-                padding: 0 20px;
+                border-top-left-radius: 10px;
             }
         }
+        &:last-child{
+            a{
+                border-top-right-radius: 10px;
+            }
+        }
+        a{  
+            background-color: #F7F7F7;
+            padding: 10px 20px;
+            border: 1px solid $box-border-color;
+            position: relative;
+            top: 12px;
+            display: flex;
+            span{
+                color: $mid_gray_bg;
+                font-size: 14px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+                img{
+                    margin-bottom: 5px;
+                }
+            }
+            &.active{
+                background-color: $background-white;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom: none;
+                top: 0;
+                height: 71px;
+                padding: 10px;
+                span{
+                    width: 177px;
+                    border: 2px solid $pink;
+                    border-radius: 25px;
+                    padding: 5px 20px;
+                    color: $text-black;
+                    font-weight: 600;
+                    font-size: 20px;
+                    flex-direction: row;
+                    padding: 0 20px;
+                    img{
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+        
     }
 }
 .booking_tab_content{
