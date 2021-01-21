@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from 'src/app/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flight-payment',
@@ -44,7 +45,7 @@ export class FlightPaymentComponent implements OnInit {
   priceSummary;
   travelerForm: FormGroup;
   travelers=[];
-  carts=[];
+  carts=[{type:'',module_info:''}];
   isValidData:boolean=false;
 
   constructor(
@@ -54,7 +55,8 @@ export class FlightPaymentComponent implements OnInit {
     private genericService:GenericService,
     private travelerService:TravelerService,
     private checkOutService:CheckOutService,
-    private cartService:CartService
+    private cartService:CartService,
+    private toastrService:ToastrService
   ) { 
     this.totalLaycredit();
   }
@@ -67,10 +69,27 @@ export class FlightPaymentComponent implements OnInit {
       this.getTravelers();
     }
 
-    this.cartService.getCartItems.subscribe(items => {
+    /* this.genericService.getCartList().subscribe((items:any) => {
       console.log('items:::cart:::', items);
-      
-    });
+      let j=0;
+      let notAvilableItems=[];
+      for(let i in items.data){
+
+        if(items.data[i].is_available){
+          
+          this.carts[0].type=items.data[i].type;
+          this.carts[0].module_info=items.data[i].moduleInfo[0];
+          j++;
+        }
+        else{
+          notAvilableItems.push(items.data[i])
+        }
+      }
+
+      if(notAvilableItems.length){
+        this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
+      }
+    }); */
 
     let __route = sessionStorage.getItem('__route');
     try{
