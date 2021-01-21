@@ -164,7 +164,7 @@ export class AddCardComponent implements OnInit {
 
   submitPaymentForm() {
     var normalBorder = "1px solid #ccc";
-    var paymentMethodFields = ['first_name', 'last_name', 'month', 'year'],
+    var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     for (var i = 0; i < paymentMethodFields.length; i++) {
       var field = paymentMethodFields[i];
