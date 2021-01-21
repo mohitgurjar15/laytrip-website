@@ -1,10 +1,12 @@
 <ul class="nav nav-tabs booking_tab_header">
     <ng-container *ngFor="let cart of carts;index as i">
-        <li [ngClass]='{"active":i==0}'>
+        <li>
             <ng-container *ngIf="cart.type=='flight'">
-                <a data-toggle="tab" [href]="'#cart_item'+i">
-                    <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
-                    {{cart.module_info.departure_code}} - {{cart.module_info.arrival_code}}
+                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]='{"active":i==0}'>
+                    <span>
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        {{cart.module_info.departure_code}} - {{cart.module_info.arrival_code}}
+                    </span>
                 </a>
             </ng-container>
         </li>        
