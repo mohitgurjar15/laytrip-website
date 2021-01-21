@@ -9,6 +9,7 @@ import { GenericService } from '../../../services/generic.service';
 import { FormGroup } from '@angular/forms';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-flight-payment',
@@ -52,7 +53,8 @@ export class FlightPaymentComponent implements OnInit {
     private flightService: FlightService,
     private genericService:GenericService,
     private travelerService:TravelerService,
-    private checkOutService:CheckOutService
+    private checkOutService:CheckOutService,
+    private cartService:CartService
   ) { 
     this.totalLaycredit();
   }
@@ -64,6 +66,11 @@ export class FlightPaymentComponent implements OnInit {
     if(Object.keys(this.userInfo).length>0){
       this.getTravelers();
     }
+
+    this.cartService.getCartItems.subscribe(items => {
+      console.log('items:::cart:::', items);
+      
+    });
 
     let __route = sessionStorage.getItem('__route');
     try{
