@@ -95,8 +95,8 @@
                         </div>
                         <div class="cta_btn_wrapper">
                             <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->
-                            <button (click)="handleSubmit()">Continue to Payment</button>
-                            <button  (click)="handleSubmit()" class="trans_btn">
+                            <button >Continue to Payment</button>
+                            <button  class="trans_btn">
                                 <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="Search icon" />
                                 Save & Add More
                             </button>
@@ -107,8 +107,3 @@
         </form>
     </div>
 </section>
-
-
-<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available>
-<app-booking-as-login-or-guest-popup (isShowGuestPopupValueChange)="changePopupValue($event)" *ngIf="isShowGuestPopup">
-</app-booking-as-login-or-guest-popup>
