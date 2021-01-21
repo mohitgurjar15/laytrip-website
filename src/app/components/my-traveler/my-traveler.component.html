@@ -3,6 +3,9 @@
     <ng-container *ngFor="let traveler of travelers">
       <button type="button" class="btn btn-sm btn-outline-secondary" (click)="chooseTraveler(traveler.userId)">
         {{traveler.firstName ? traveler.firstName+' '+traveler.lastName : traveler.email }}
+        <a href="" class="close_icon">
+          <i class="fa fa-times"></i>
+        </a>
       </button>
     </ng-container>
   </div>
