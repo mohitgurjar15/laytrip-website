@@ -1,4 +1,4 @@
-<div class="form-container sign-in-container">
+<!-- <div class="form-container sign-in-container">
     <div class="signin_modal">
         <div class="modal_top">
             <div class="modal_title">
@@ -59,4 +59,78 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+<div class="modal fade comman_modal" id="sign_in_modal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="sign_in_modal">
+				<button type="button" class="close" data-dismiss="modal"> <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon"> </button>
+				<div class="modal_top">
+					<div class="modal_title">
+						<h4>{{'sign_in' | translate}}</h4>
+					</div>
+				</div>
+				<div class="modal_cnt">
+					<form [formGroup]="loginForm" novalidate autocomplete="off">
+						<div class="form_row">
+							<div class="text_field">
+                                <input  type="email" [ngClass]="{'error': (submitted  && !loading && loginForm.controls.email.errors)}"  type="email" maxlength="50" formControlName="email"
+                                 tabindex="101" placeholder="{{'email_placeholder' | translate}}">
+                                <div *ngIf="(submitted || loginForm.controls.email.touched) && loginForm.controls.email.errors">
+                                    <p *ngIf="loginForm.controls.email.errors.required" class="error_text">{{'email_touched_validation' | translate}}</p>
+                                    <p *ngIf="loginForm.controls.email.errors.pattern" class="error_text">{{'email_invalid_validation' | translate}}</p>
+                                </div>
+							</div>
+						</div>
+						<div class="form_row">
+							<div class="text_field pass_show">
+                                <input tabindex="102"  [ngClass]="{'error': (submitted  && !loading && loginForm.controls.password.errors) }" type="password" autocomplete="new-password"
+                                 [type]="fieldTextType ? 'text' : 'password'"  formControlName="password" maxlength="20"  placeholder="{{'password_placholder' | translate}}">
+								<span class="ptxt"><i [ngClass]="fieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
+                                    aria-hidden="true" (click)="toggleFieldTextType()"></i></span>
+                                <div *ngIf="(submitted || loginForm.controls.password.touched) && loginForm.controls.password.errors">
+                                    <p *ngIf="loginForm.controls.password.errors.required" class="error_text">{{'password_touched_validation' | translate}}
+                                    </p>
+                                    <p *ngIf="loginForm.controls.password.errors.pattern" class="error_text">Please enter valid password.
+                                    </p>
+                                </div>
+							</div>
+						</div>
+						<div class="form_row last">
+							<div class="forgot_pass"> <a href="javascript:void(0);" class="forgotPassword">Forgot Password?</a> </div>
+							<div class="check">
+								<label class="custom_checkbox">
+									<input  tabindex="103" type="checkbox" value=""> <span class="checkmark"></span>Remember me </label>
+								</div>
+							</div>
+							<div class="form_btn">
+								<button type="submit" class="btn  btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_in' | translate}}
+                                </button>
+							</div>
+						</form>
+						<div class="modal_btm">
+							<div class="border_block"><span>Or</span></div>
+							<!-- <ul>
+								<li>
+									<a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg" alt="Apple"></a>
+								</li>
+								<li>
+									<a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/google.svg" alt="Google"></a>
+								</li>
+								<li>
+									<a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg" alt="Facebook"></a>
+								</li>
+							</ul> -->
+                            <app-social-login (socialError)="socialError($event)"></app-social-login>
+                            <p>{{'do_not_have_an_account' | translate}} <a href="javascript:void(0);" class="signUp">Sign Up</a></p>
+							<div class="block_logo">
+								<img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

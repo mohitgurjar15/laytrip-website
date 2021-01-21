@@ -1,4 +1,4 @@
-<ul>
+<!-- <ul>
     <li><a class="social-btn" (click)="fbLogin()"> <img src="{{s3BucketUrl}}assets/images/icon/facebook.svg"
                 alt="Facebook">
             Facebook</a></li>
@@ -8,4 +8,15 @@
     <li><a class="social-btn" (click)="loginWithApple()"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg"
                 alt="Apple"> Apple
             ID</a></li>
-</ul>
+</ul> -->
+<ul>
+    <li>
+        <a class="social-btn" (click)="loginWithApple()" ><img src="{{s3BucketUrl}}assets/images/icon/apple.svg" alt="Apple"></a>
+    </li>
+    <li>
+        <a class="g-signin2  social-btn" #loginRef  #closeAddExpenseModal><img src="{{s3BucketUrl}}assets/images/icon/google.svg" alt="Google"></a>
+    </li>
+    <li>
+        <a class="social-btn" (click)="fbLogin()" ><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg" alt="Facebook"></a>
+    </li>
+</ul> 
