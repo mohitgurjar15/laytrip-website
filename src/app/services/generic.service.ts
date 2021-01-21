@@ -70,7 +70,11 @@ export class GenericService {
   }
 
   getCartList() {
-    return this.http.get(`${environment.apiUrl}v1/cart/list`, this.commonFunction.setHeaders())
+    let headers = {
+      currency: 'USD',
+      language: 'en'
+    }
+    return this.http.get(`${environment.apiUrl}v1/cart/list`, this.commonFunction.setHeaders(headers))
       .pipe(
         catchError(this.handleError)
       );
