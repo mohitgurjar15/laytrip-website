@@ -1,125 +1,109 @@
-<!-- <app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
-<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
+<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
+<!-- <section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="detail_info_left" *ngIf="bookingStatus==0">
+                <div class="detail_info_left">
                     <div class="block_payment">
-                        <app-booking-timer (sessionTimeout)="sessionTimeout($event)" [config]="bookingTimerConfig"></app-booking-timer>
                         <div class="block_pay_info">
-                            <div class="block_travellers">
-                                <h6>{{'traveler' | translate}}</h6>
-                                <div class="traveller_detail" *ngFor="let traveler of travelerList">
-                                    <span>{{traveler.firstName}} {{traveler.lastName}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block_pay_info" *ngIf="userInfo.roleId!=7 && instalmentMode=='instalment'">
-                            <div class="block_payment_mode">
+                            <div class="block_payment_mode no_pad">
                                 <div class="block_title_section">
-                                    <h5>{{'inst_payment_detail' | translate}}</h5>
-                                    <a (click)="toggleInstalmentMode()">{{'change' | translate}}</a>
+                                    <h5>{{'choose_payment_mode' | translate}}</h5>
                                 </div>
-
-                                <div class="block_detail" *ngIf="!flightSummary.length">
-                                    <div class="pay_deatil_info">
-                                        <div class="block_detail_left">
-                                            <ul>
-                                                <li>
-                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                </li>
-                                                <li>
-                                                    <p class="fb_animation w-100 mb-0"></p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="block_detail_right ml-5">
-                                            <p class="fb_animation w-100 mb-0"></p> <span>
-                                                <p class="fb_animation w-100 mb-0"></p>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
 
                                 <div class="block_detail">
-                                    <app-payment-mode *ngIf="flightSummary.length && isShowPaymentOption && priceData.length" [priceData]="priceData" [flightSummary]="flightSummary" (selectInstalmentMode)="selectInstalmentMode($event)" (getInstalmentData)="getInstalmentData($event)" [showFullPartialPayOption]=false
-                                        [isShowPartialPaymentDetails]="isShowPartialPaymentDetails" [isShowSummary]=true [customInstalmentData]="customInstalmentData">
-                                    </app-payment-mode>
+                                    <app-redeem-laycredit-loader *ngIf="isLayCreditLoading">
+                                    </app-redeem-laycredit-loader>
+                                    <app-redeem-laycredit redeemableLayPoints="{{redeemableLayPoints}}"
+                                        sellingPrice="{{sellingPrice}}" (applyLaycredit)="applyLaycredit($event)"
+                                        [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
                                 </div>
+
                             </div>
+                            <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary"
+                                [priceData]="priceData" laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
+                            </app-payment-mode>
                         </div>
                         <div class="block_pay_info">
                             <app-booking-enquiry-info></app-booking-enquiry-info>
                         </div>
-                        <div class="block_pay_info" *ngIf="isShowCardOption">
-                            <div class="block_card_select">
-                                <div class="block_title_section">
-                                    <h5 *ngIf="userInfo.roleId!=7">{{'select_credit_card' | translate}}</h5>
-                                    <h5 *ngIf="userInfo.roleId==7">{{'credit_card_detail' | translate}}
-                                    </h5>
-                                </div>
-                                <div class="block_detail">
-                                    <app-card-list *ngIf="userInfo.roleId!=7" [newCard]="newCard" (selectCreditCard)="selectCreditCard($event)" (totalNumberOfcard)="totalNumberOfcard($event)"></app-card-list>
-                                    <div class="add_card_btn" *ngIf="userInfo.roleId!=7">
-                                        <a class="hover-link" (click)="toggleAddcardForm()">{{showAddCardForm? '-' : '+'}} {{'add_new_card' | translate}}</a>
-                                    </div>
-                                    <app-add-card *ngIf="userInfo.roleId!=7 && showAddCardForm" (emitNewCard)="emitNewCard($event)"></app-add-card>
-                                    <app-add-guest-card *ngIf="userInfo.roleId==7 && showAddCardForm" (emitGuestCardDetails)="emitGuestCardDetails($event)" [validateCardDetails]="validateCardDetails"></app-add-guest-card>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="block_condition_agree">
-                        <ul>
-                        </ul>
-                        <div class="btn_payment">
-                            <button class="btn btn_laytrip" [disabled]="isDisableBookBtn" (click)="toggleTermConditionPopup()">{{'pay_and_complete_booking' | translate}} <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
-                        </div>
                     </div>
 
+                    <div class="btn_payment">
+                        <a class="btn btn_laytrip" (click)="checkUserAndRedirect()">{{'countinue_to_guest_detail' |
+                            translate}}<img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg"
+                                alt="Right Arrow"></a>
+                    </div>
                 </div>
-                <app-flight-confirmation *ngIf="bookingStatus==1" [bookingData]="bookingResult"></app-flight-confirmation>
+
 
             </div>
             <div class="col-lg-4">
                 <app-flight-summary-loader *ngIf="!priceData.length"></app-flight-summary-loader>
-
-                <app-flight-summary *ngIf="priceData.length" [priceData]="priceData" [laycreditpoints]="laycreditpoints" (flightAvailable)="flightAvailable($event)" [showPartialPayemntOption]="showPartialPayemntOption" (getRouteDetails)="getFlightSummaryData($event)"
-                    partialPaymentAmount={{partialPaymentAmount}} payNowAmount={{payNowAmount}} [instalmentMode]="instalmentMode">
+                <app-flight-summary *ngIf="priceData.length" [priceData]="priceData" checkAvailability="local"
+                    [laycreditpoints]="laycreditpoints" (flightAvailable)="flightAvailable($event)"
+                    [showPartialPayemntOption]="showPartialPayemntOption" partialPaymentAmount={{partialPaymentAmount}}
+                    payNowAmount={{payNowAmount}} [instalmentMode]="instalmentMode">
                 </app-flight-summary>
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
-<app-flight-booking-failed *ngIf="bookingStatus==2"></app-flight-booking-failed>
-<app-popup-loader *ngIf="bookingLoader"></app-popup-loader>
-<app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available>
-<app-flight-session-time-out *ngIf="isSessionTimeOut"></app-flight-session-time-out>
-<app-booking-feedback *ngIf="isShowFeedbackPopup" [bookingId]="bookingId" (feedbackValueChange)="feedbackToggle($event)"></app-booking-feedback>
-<app-popup-term-condition *ngIf="isShowTermConditionPopup" (closeTermCoditionPopup)="closeTermCoditionPopup($event)" (acceptTermCondtion)="acceptTermCondtion($event)"></app-popup-term-condition> -->
-
-<section class="detail_info_main payment_info book_confirm_login book_confirm_guest flight" *ngIf="bookingStatus!=2">
+<section class="payment_mode_main_wrapper flight">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="row">
-                    <!-- <app-cart-item 
-                        moduleType="flight"
-                        [travelers]="travelers"
-                        [totalPassenger]="travelerCounts[0]">
-                    </app-cart-item> -->
+        <form>
+            <div class="row">
+                <div class="col-lg-7">
+                    <h3>Your Bookings</h3>
+                    <div class="booking_detail_bg_wrps">
+                        <app-cart [carts]="carts"></app-cart>
+                    </div>
+                    <h3>Credit Card Details</h3>
+                    <div class="booking_detail_bg_wrps">
+                        <div id="accordion" class="card_accordion">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne" aria-expanded="true"> 
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <app-add-card></app-add-card>
+                                    </div>
+                                </div>
+                                <app-card-list></app-card-list>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="row">
-                    
+                <div class="col-lg-5">
+                    <div class="payment_container">
+                        <div class="payment_mode_wrapper">
+                            <!-- <app-payment-mode-loader *ngIf="!priceData.length"></app-payment-mode-loader>
+                            <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary"
+                                [priceData]="priceData" laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
+                            </app-payment-mode> -->
+                            <app-price-summary *ngIf="priceData.length" [priceSummary]="priceSummary"
+                                [priceData]="priceData"></app-price-summary>
+                        </div>
+                        <div class="cta_btn_wrapper">
+                            <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->
+                            <button >Continue to Payment</button>
+                            <button  class="trans_btn">
+                                <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="Search icon" />
+                                Save & Add More
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                
-            </div>
-        </div>
+        </form>
     </div>
-</section> 
+</section>

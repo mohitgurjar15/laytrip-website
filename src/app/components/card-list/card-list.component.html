@@ -1,5 +1,5 @@
 
-<div id="accordion">
+<!-- <div id="accordion">
 
     <div class="card"  *ngFor="let card of cards">
       <div class="card-header">
@@ -13,4 +13,53 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <div id="card_list_accodrio" class="accordion_cardss">
+    <div class="card">
+        <div class="card-header">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="true"
+                aria-controls="collapse11">
+                <span class="heade_wrps">
+                  <img src="{{s3BucketUrl}}assets/images/master_cards_img.svg" alt="Card icon" /> 
+                  Mastercard ending in 2365
+                </span>
+            </a>
+        </div>
+        <div id="collapse11" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col col-lg-4">
+                        <div class="card_headbar">
+                            Name on Card
+                        </div>
+                        <div class="card_texter">
+                            Victor Pacheco
+                        </div>
+                    </div>
+                    <div class="col col-lg-4">
+                        <div class="card_headbar">
+                            Billing Address
+                        </div>
+                        <div class="card_texter">
+                            Victor Pacheco <span> Via della Libertà #19 Milano, 33098 Italia 3478691146</span>
+                        </div>
+                    </div>
+                    <div class="col col-lg-2">
+                        <div class="card_headbar">
+                            Expires
+                        </div>
+                        <div class="card_texter">
+                            09/2023
+                        </div>
+                    </div>
+                    <div class="col col-lg-2">
+                        <div class="save_btn_wrps">
+                            <a href="javascript:void(0);">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

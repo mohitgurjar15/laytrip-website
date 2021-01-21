@@ -33,20 +33,20 @@
         <div class="prgrs_container">
             <div class="progress_bar_inner">
                 <div class="pr_steps_wrapper ">
-                    <a href="javascript:void(0);" class="current">
+                    <a href="javascript:void(0);" [ngClass]="{'current': progressStep.step1==true}">
                         <span class="step_num">1</span>
                         <span class="step_text">Booking</span>
                     </a>
                 </div>
-                <div class="pr_steps_wrapper">
+               <!--  <div class="pr_steps_wrapper">
                     <a href="javascript:void(0);">
                         <span class="step_num">2</span>
                         <span class="step_text">Payment</span>
                     </a>
-                </div>
+                </div> -->
                 <div class="pr_steps_wrapper">
-                    <a href="javascript:void(0);">
-                        <span class="step_num">3</span>
+                    <a href="javascript:void(0);" [ngClass]="{'current': progressStep.step2==true}">
+                        <span class="step_num">2</span>
                         <span class="step_text">Checkout</span>
                     </a>
                 </div>

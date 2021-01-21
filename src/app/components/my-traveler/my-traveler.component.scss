@@ -1,0 +1,30 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.suggetion_wrapper{
+    margin-bottom: 10px;
+    padding: 15px 13px;
+    button{
+        color: $text_light_yellow;
+        border: 1px solid $text_light_yellow;
+        border-radius: 5px;
+        font-size: 12px;
+        height: 35px;
+        display: inline-block;
+        margin: 5px;
+        padding: 0 10px;
+        width: auto;
+        &:hover{
+            color: $text-white;
+            background-color: $text_light_yellow;
+        }
+        &:focus{
+            outline: none;
+            box-shadow: none;
+        }
+    }
+}

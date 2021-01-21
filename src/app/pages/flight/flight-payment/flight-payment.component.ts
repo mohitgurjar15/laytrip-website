@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 import { ActivatedRoute , Router} from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
@@ -74,6 +75,11 @@ export class FlightPaymentComponent implements OnInit {
         module_info:this.flightSummary[0],
         travelers:[]
       };
+      /* this.carts[1]={
+        type : 'flight',
+        module_info:this.flightSummary[0],
+        travelers:[]
+      }; */
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
@@ -87,6 +93,14 @@ export class FlightPaymentComponent implements OnInit {
     })
 
     sessionStorage.setItem('__insMode',btoa(this.instalmentMode))
+  }
+  ngAfterViewInit() {
+    $(".trans_btn").hover(
+      function () {
+        $('.pink_search').toggleClass("d-none");
+        $('.white_search').toggleClass("show");
+      }
+    );
   }
 
   totalLaycredit(){
@@ -176,5 +190,6 @@ export class FlightPaymentComponent implements OnInit {
 
   handleSubmit(){
     console.log("valid data")
+    this.router.navigate(['/flight/checkout', this.routeCode]);
   }
 }

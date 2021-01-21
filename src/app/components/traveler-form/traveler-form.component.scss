@@ -20,7 +20,12 @@
 }
 .accordion_bookings{
   .card{
+    border: 1px solid $grayed_border;
+    border-radius: 10px;
     .card-header{
+      border: none;
+      background-color: transparent;
+      padding: 15px;
       .card-link{
         font-weight: 600;
         color: $text-black;
@@ -52,6 +57,65 @@
                 transition: 0.3s;
                 right: 0;
             }
+        }
+      }
+    }
+    .card-body{
+      padding: 15px;
+      .sub_cat_wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0 0 15px 0;
+        .add_btn_lined{
+          color: $text_light_yellow;
+          border: 1px solid $text_light_yellow;
+          border-radius: 5px;
+          font-size: 12px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 20px;
+          padding: 0 10px;
+          &:last-child{
+            margin: 0;
+          }
+        }
+      }
+      .common_form{
+        label{
+          color: $mid_gray_bg;
+          font-size: 12px;
+          font-weight: 500;
+        }
+        input{
+          border: none;
+          border-radius: 0;
+          border-bottom: 2px solid $box-border-color;
+          font-size: 14px;
+          padding: 8px 0;
+          &:focus{
+            outline: none;
+            box-shadow: none;
+          }
+        }
+        select{
+          border: none;
+          border-radius: 0;
+          border-bottom: 2px solid $box-border-color;
+          font-size: 14px;
+          padding: 8px 0;
+          &:focus{
+            outline: none;
+            box-shadow: none;
+          }
+        }
+        .dobs{
+          input{
+            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+            background-size: 20px;
+          }
         }
       }
     }

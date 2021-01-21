@@ -113,14 +113,14 @@ export class PaymentModeComponent implements OnInit {
              this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
              this.togglePaymentMode('no-instalment');
             }
-            //this.isBelowMinimumInstallment=true;
-            this.minimumInstallmentValidation();
+            this.isBelowMinimumInstallment=true;
+           // this.minimumInstallmentValidation();
           }
           else{
-            //this.isBelowMinimumInstallment=false;
-            if(type3!=null && type3=='min-instal'){
-            }
-            this.minimumInstallmentValidation();
+            this.isBelowMinimumInstallment=false;
+            /* if(type3!=null && type3=='min-instal'){
+              this.minimumInstallmentValidation();
+            } */
           }
           
           this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
@@ -158,11 +158,11 @@ export class PaymentModeComponent implements OnInit {
   getTotalPrice(){
     this.sellingPrice=this.priceData[0].selling_price;
 
-    if(this.paymentType=='no-instalment'){
+    /* if(this.paymentType=='no-instalment'){
       if(this.priceData[0].secondary_selling_price){
         this.sellingPrice = this.priceData[0].secondary_selling_price;
       }
-    }
+    } */
     //return this.sellingPrice=100;
   }
 
@@ -276,39 +276,41 @@ export class PaymentModeComponent implements OnInit {
 
   minimumInstallmentValidation(){
     this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
+      let instalmentType;
+      let isBelowMinimumInstallment;
       if(this.instalmentType=='weekly' && this.instalments.instalment_date[1].instalment_amount<5){
 
         if(res.biweekly_instalments[1].instalment_amount>5){
-          this.instalmentType='biweekly';
+          instalmentType='biweekly';
           this.calculateInstalment(null,null,'min-instal');
-          this.isBelowMinimumInstallment=false;
+          isBelowMinimumInstallment=false;
           console.log("1One")
         }
         else if(res.monthly_instalments[1].instalment_amount>5){
-          this.instalmentType='monthly';
+          instalmentType='monthly';
           this.calculateInstalment(null,null,'min-instal');
-          this.isBelowMinimumInstallment=false;
+          isBelowMinimumInstallment=false;
           console.log("2TWO")
         }
         else{
-          this.isBelowMinimumInstallment=true;
+          isBelowMinimumInstallment=true;
           console.log("First::",this.isBelowMinimumInstallment)
         }
       }
       else if(this.instalmentType=='biweekly' && this.instalments.instalment_date[1].instalment_amount<5){
   
         if(res.monthly_instalments[1].instalment_amount>5){
-          this.instalmentType='monthly';
+          instalmentType='monthly';
           this.calculateInstalment(null,null,'min-instal');
-          this.isBelowMinimumInstallment=false;
+          isBelowMinimumInstallment=false;
         }
         else{
-          this.isBelowMinimumInstallment=true;
+          isBelowMinimumInstallment=true;
           console.log("Second::",this.isBelowMinimumInstallment)
         }
       }
-      else if(this.instalmentType=='monthly'){
-        this.isBelowMinimumInstallment=true;
+      else if(this.instalmentType=='monthly' && this.instalments.instalment_date[1].instalment_amount<5){
+        isBelowMinimumInstallment=true;
         console.log("Third::",this.isBelowMinimumInstallment)
         /* if(res.weekly_instalments[1].instalment_amount>=5){
           this.isBelowMinimumInstallment=false;
@@ -317,9 +319,11 @@ export class PaymentModeComponent implements OnInit {
           this.isBelowMinimumInstallment=false;
         } */
         if(res.monthly_instalments[1].instalment_amount>=5){
-          this.isBelowMinimumInstallment=false;
+          isBelowMinimumInstallment=false;
         }
       }
+      this.isBelowMinimumInstallment=isBelowMinimumInstallment || this.isBelowMinimumInstallment;
+      this.instalmentType=instalmentType || this.instalmentType;
       console.log("this.isBelowMinimumInstallment",this.isBelowMinimumInstallment,this.instalmentType)
     },(err)=>{
      
