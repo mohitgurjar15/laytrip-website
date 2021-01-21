@@ -24,7 +24,8 @@
                     <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
                     <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                       class="error">
-                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Your name is required</small>
+                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Your name is
+                        required</small>
                     </div>
                   </div>
                   <div class="col">
@@ -66,7 +67,56 @@
                   </div>
                 </div>
               </div>
-              
+
+              <div id="accordion_add" class="accordion_addn">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="heade_wrps">
+                      Add-Ons
+                    </span>
+                    <ul class="nav nav-pills" id="addon_tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link active"id="baggage-tab" data-toggle="tab" href="#baggage" role="tab"
+                          aria-controls="baggage" aria-selected="true">Baggage</a>
+                      </li>
+                      <li class="nav-item disabled" role="presentation">
+                        <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab"
+                          aria-controls="boarding" aria-selected="false">Priority Boarding</a>
+                      </li>
+                      <li class="nav-item disabled" role="presentation">
+                        <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab"
+                          aria-controls="insurance" aria-selected="false">Insurance</a>
+                      </li>
+                    </ul>
+                    <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor"
+                      aria-expanded="true" aria-controls="add_acord">
+                    </a>
+                  </div>
+                  <div id="add_acord" class="collapse show" data-parent="#accordion_add">
+                    <div class="card-body">
+                      <div class="tab-content" id="addon_tabContent">
+                        <div class="tab-pane fade show active" id="baggage" role="tabpanel" aria-labelledby="baggage-tab">
+                          <div class="addon_listins_wrps">
+                            <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+                              Total Weight: Check-in baggage - up to 3lb || 16.39 USD
+                            </button>
+                            <ul class="dropdown-menu dropdownList" aria-labelledby="dropdownMenu2">
+                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 3lb || 16.39 USD</button></li>
+                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 4lb || 18.39 USD</button></li>
+                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 5lb || 20.39 USD</button></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="boarding" role="tabpanel" aria-labelledby="boarding-tab">
+                        </div>
+                        <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">.bbbb
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
