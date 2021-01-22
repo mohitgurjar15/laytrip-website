@@ -61,7 +61,7 @@ export class SignupComponent implements OnInit {
 
   openOtpPage() {
     $('#sign_up_modal').modal('hide');
-    const modalRef = this.modalService.open(VerifyOtpComponent);
+    const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true});
     (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }
 

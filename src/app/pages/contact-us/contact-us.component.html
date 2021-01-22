@@ -1,14 +1,76 @@
-<section class="block_contact_us_main">
-    <div class="container">
+<section class="block_contact_us_main modal fade comman_modal" id="contact_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="contact_modal_wrp">
+                <div class="modal_title">
+                    Contact Us
+                    <button type="button" class="close" data-dismiss="modal">
+                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                    </button>
+                </div>
+                <div class="modal_content">
+                    <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
+                        <div class="form_row">
+                            <div class="text_field">
+                                <input type="text" formControlName="name" maxlength="20" tabindex="1"
+                                    placeholder="{{'full_name_placeholder' | translate}}">
+                                <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched"
+                                    class="focus-input100 login-error">
+                                    <div *ngIf="contactUsForm.controls.name.errors.required" class="text-danger">
+                                        {{'full_name_touched_validation' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="text_field">
+                                <input type="email" formControlName="email" maxlength="50" tabindex="2"
+                                    placeholder="{{'email_placeholder' | translate}}">
+                                <div
+                                    *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.touched">
+                                    <div *ngIf="contactUsForm.controls.email.errors.required" class="text-danger">
+                                        {{'email_touched_validation' | translate}}
+                                    </div>
+                                    <div *ngIf="contactUsForm.controls.email.errors.pattern" class="text-danger">
+                                        {{'email_invalid_validation' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="text_field">
+                                <textarea formControlName="message" maxlength="250" tabindex="8" rows="5"
+                                    placeholder="{{'messege_placeholder' | translate}}">
+                                    </textarea>
+                                <div
+                                    *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
+                                    <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">
+                                        {{'messege_touched_validation' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_btn">
+                            <button type="submit">
+                                <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' |
+                                translate}}</button>
+                        </div>
+                        <div class="footer_logo">
+                            <a href="javascrip:void(0);">
+                                <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="logo Icon">
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container">
         <div class="block_contact_inner">
             <div class="row">
+                
                 <div class="col-lg-6">
-                    <div class="block_contact_im">
-                        <img src="{{s3BucketUrl}}assets/images/contact-us-im.svg" alt="Contact Us Image"> 
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="block_contact_form">
+                    <div class="block_contact_form"> 
                         <h6>{{'contact_us_title' | translate}}</h6>
                         <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
                             <div class="block_form">
@@ -89,5 +151,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
