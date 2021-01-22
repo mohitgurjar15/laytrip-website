@@ -778,13 +778,20 @@ select {
                   }
                 }
               }
-            }
+            } 
 
             @media (max-width: 480px) {
               flex-wrap: wrap;
 
               li {
-                margin: 0 5px 5px 0;
+				margin: 0 5px 5px 0;
+				
+				&.class_resp{
+					width: 100%;
+				}
+				&.travellers_resp{
+					width: 100%;
+				}
 
                 &:last-child {
                   margin: 0;

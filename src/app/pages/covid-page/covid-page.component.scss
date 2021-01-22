@@ -52,4 +52,9 @@
 			}
 		}
 	}
+	@include tab-view{
+		.block_cmspage_comman {
+			padding: 20px;
+		}
+	}
 }
