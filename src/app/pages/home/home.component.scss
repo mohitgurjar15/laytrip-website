@@ -17,6 +17,7 @@
 	z-index: 9;
 	@include tab-view {
 		//padding-bottom: 60px;
+		height: 100%;
 	}
 
 	// height: calc(100vh - 95px);
@@ -43,8 +44,10 @@
 		left: 0;
 		padding: 0;
 		transform: translate(0%, 4%);
-		@include mobile-view{
-			transform: translate(0%, 40%);
+		@include tab-view{
+			transform: translate(0%, 0%);
+			position: relative;
+			padding-top: 70px;
 		}
 
 		.banner_text {
