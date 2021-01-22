@@ -7,8 +7,10 @@
 
 .block_modal_main{
     .modal_title{
-        font-size: 32px;
-        color: $active-tab-text;
+        font-size: 32px !important;
+        color: $active-tab-text !important;
+        text-transform: capitalize !important;
+        font-weight: 500 !important;
     }
     .modal_cnt{
         flex-direction: column;
