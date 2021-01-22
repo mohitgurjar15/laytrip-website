@@ -145,6 +145,10 @@ a:hover {
                     color: $text-grey;
                     margin: 2px;
                     position: relative;
+
+                    @include mobile-view{
+                        width: 33px;
+                    }
                     &:hover{
                         background: none !important;
                     }

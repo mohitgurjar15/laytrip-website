@@ -7,11 +7,16 @@
 
 .block_modal_main{
     .modal_title{
-        font-size: 32px;
-        color: $active-tab-text;
+        font-size: 32px !important;
+        color: $active-tab-text !important;
+        text-transform: capitalize !important;
+        font-weight: 500 !important;
     }
     .modal_cnt{
         flex-direction: column;
+        @include tab-view{
+            height: 30vh !important;
+        }
         .share_i_wrapper{
             display: flex;
             justify-content: center;
@@ -26,12 +31,22 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                @include tab-view{
+                    margin-right: 15px;
+                    height: 66px;
+                    width: 66px;
+                }
                 
                 &:last-child{
                     margin: 0;
                 }
                 img{
                     max-width: 49px;
+                    @include tab-view{
+                        max-height: 36px;
+                        max-width: 36px;
+                    }
                 }
             }
         }

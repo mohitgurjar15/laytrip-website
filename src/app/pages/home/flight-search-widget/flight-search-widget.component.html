@@ -16,13 +16,13 @@
                 <span>{{'round_trip' | translate}}</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item class_resp">
             <div class="class_section">
                 <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
                 </app-flight-class>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item travellers_resp">
             <div class="travellers">
                 <app-traveller-info label="{{'travellers_and_class' | translate}}"
                     (changeValue)="changeTravellerInfo($event)">

@@ -778,13 +778,20 @@ select {
                   }
                 }
               }
-            }
+            } 
 
             @media (max-width: 480px) {
               flex-wrap: wrap;
 
               li {
-                margin: 0 5px 5px 0;
+				margin: 0 5px 5px 0;
+				
+				&.class_resp{
+					width: 100%;
+				}
+				&.travellers_resp{
+					width: 100%;
+				}
 
                 &:last-child {
                   margin: 0;
@@ -2796,15 +2803,20 @@ select {
 // <!-- Start Share Modal css -->
 .share_modal {
   .modal-dialog {
-    max-width: 1024px;
-    width: 96%;
+    max-width: 514px;
+	width: 96%;
 
-    .modal-content {
-      padding: 40px 80px;
-      border-radius: 15px;
+	.modal-content {
+		padding: 25px 40px;
+		border-radius: 15px;
 
       @media (max-width: 767px) {
-        padding: 20px 15px;
+		padding: 20px 15px;
+		bottom: 0px;
+		left: 0;
+		position: fixed;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
       }
 
       .block_modal_main {

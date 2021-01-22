@@ -97,8 +97,9 @@
                                             [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li> -->
                                     <li>
-                                        <a [routerLink]="['/contact-us']"
-                                            [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"></a>
+                                        <a [routerLink]="['/contact-us']" 
+                                            [innerHTML]="'laytrip_info_page_title_4_description_2' | translate" data-toggle="modal"
+                                            data-target="#contact_modal"></a>
                                     </li>
                                     <!-- <li><a [routerLink]="['/cancellation-policy']">Booking and Cancellation Policies</a>
                                     </li> -->
@@ -153,3 +154,4 @@
         <img src="{{s3BucketUrl}}assets/images/icon/backtotop.svg" alt="Back to top">
     </a> -->
 </div>
+<app-contact-us></app-contact-us>

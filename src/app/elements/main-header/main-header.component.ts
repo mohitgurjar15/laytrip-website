@@ -10,7 +10,7 @@ import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { AuthComponent } from '../../pages/user/auth/auth.component';
 import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
-
+ 
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
