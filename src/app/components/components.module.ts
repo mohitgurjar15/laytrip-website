@@ -48,6 +48,7 @@ import { PriceSummaryComponent } from './price-summary/price-summary.component';
 import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-loader.component';
 import { CartComponent } from './cart/cart.component';
 import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
+import { CartLoaderComponent } from './cart-loader/cart-loader.component';
 
 
 
@@ -88,7 +89,8 @@ import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-
     PriceSummaryComponent,
     PaymentModeLoaderComponent,
     CartComponent,
-    FlightCartItemComponent
+    FlightCartItemComponent,
+    CartLoaderComponent
   ],
   imports: [
     CommonModule,
