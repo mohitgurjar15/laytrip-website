@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import * as moment from 'moment';
 declare var $: any;
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 
 @Component({
@@ -135,26 +135,26 @@ export class AddCardComponent implements OnInit {
         card_token: pmData.token,
         card_last_digit: pmData.last_four_digits
       };
-      $.ajax({
-        url: `${environment.apiUrl}v1/payment`,
-        method: 'POST',
-        headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmRlODRmODctNTNlNi00MDdhLTgwMTItMGE5ZDgwOGQ1MmMxIiwiZW1haWwiOiJzdXJlc2hAaXRvbmVjbGljay5jb20iLCJ1c2VybmFtZSI6InN1cmVzaCBzdXRoYXIiLCJmaXJzdE5hbWUiOiJzdXJlc2giLCJwaG9uZSI6Ijk4Mzg0Mjc4MjMiLCJtaWRkbGVOYW1lIjoiIiwibGFzdE5hbWUiOiJzdXRoYXIiLCJzYWx0IjoiJDJiJDEwJFR5czkzeEtQbHlwREhpSWlINzRGbGUiLCJwcm9maWxlUGljIjoiaHR0cDovL3N0YWdpbmcubGF5dHJpcC5jb206NDA0MC9wcm9maWxlL3VzZXItMTAzOGIuanBlZyIsInJvbGVJZCI6NiwiY3JlYXRlZERhdGUiOiIyMDIxLTAxLTEzVDExOjQ5OjI3LjI4OFoiLCJzb2NpYWxBY2NvdW50SWQiOiIiLCJpYXQiOjE2MTEwNDUzNTUsImV4cCI6MzE4Nzg0NTM1NX0.vIFtwzxVUu-BqE8dTlfXcBvrX2jE01X3EIm99CiVh2M' },
-        data: cardData,
-        success: function (obj) {
-          console.log('card:::::', obj);
-          // this.emitNewCard.emit(obj);
-          $('#accordion-card').append(`<div class="card"><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapseOne"> ${obj.cardType} Card ****${obj.cardDigits} </a></div><div class="collapse show" data-parent="#accordion" id="collapseOne"><div  class="card-body"> ${obj.cardHolderName} </div></div></div>`);
-          $("#payment-form")[0].reset();
-          Spreedly.init('YNEdZFTwB1tRR4zwvcMIaUxZq3g', {
-            'numberEl': 'spreedly-number',
-            'cvvEl': 'spreedly-cvv',
-          });
-        },
-        error: function (error) {
-          console.log('card:::::', error);
-          // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
-        }
-      });
+      // $.ajax({
+      //   url: `${environment.apiUrl}v1/payment`,
+      //   method: 'POST',
+      //   headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmRlODRmODctNTNlNi00MDdhLTgwMTItMGE5ZDgwOGQ1MmMxIiwiZW1haWwiOiJzdXJlc2hAaXRvbmVjbGljay5jb20iLCJ1c2VybmFtZSI6InN1cmVzaCBzdXRoYXIiLCJmaXJzdE5hbWUiOiJzdXJlc2giLCJwaG9uZSI6Ijk4Mzg0Mjc4MjMiLCJtaWRkbGVOYW1lIjoiIiwibGFzdE5hbWUiOiJzdXRoYXIiLCJzYWx0IjoiJDJiJDEwJFR5czkzeEtQbHlwREhpSWlINzRGbGUiLCJwcm9maWxlUGljIjoiaHR0cDovL3N0YWdpbmcubGF5dHJpcC5jb206NDA0MC9wcm9maWxlL3VzZXItMTAzOGIuanBlZyIsInJvbGVJZCI6NiwiY3JlYXRlZERhdGUiOiIyMDIxLTAxLTEzVDExOjQ5OjI3LjI4OFoiLCJzb2NpYWxBY2NvdW50SWQiOiIiLCJpYXQiOjE2MTEwNDUzNTUsImV4cCI6MzE4Nzg0NTM1NX0.vIFtwzxVUu-BqE8dTlfXcBvrX2jE01X3EIm99CiVh2M' },
+      //   data: cardData,
+      //   success: function (obj) {
+      //     console.log('card:::::', obj);
+      //     // this.emitNewCard.emit(obj);
+      //     $('#accordion-card').append(`<div class="card"><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapseOne"> ${obj.cardType} Card ****${obj.cardDigits} </a></div><div class="collapse show" data-parent="#accordion" id="collapseOne"><div  class="card-body"> ${obj.cardHolderName} </div></div></div>`);
+      //     $("#payment-form")[0].reset();
+      //     Spreedly.init('YNEdZFTwB1tRR4zwvcMIaUxZq3g', {
+      //       'numberEl': 'spreedly-number',
+      //       'cvvEl': 'spreedly-cvv',
+      //     });
+      //   },
+      //   error: function (error) {
+      //     console.log('card:::::', error);
+      //     // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
+      //   }
+      // });
 
       // For demonstration purposes just display the token
       // var messageEl = document.getElementById('message');
@@ -164,7 +164,7 @@ export class AddCardComponent implements OnInit {
 
   submitPaymentForm() {
     var normalBorder = "1px solid #ccc";
-    var paymentMethodFields = ['first_name', 'last_name', 'month', 'year'],
+    var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     for (var i = 0; i < paymentMethodFields.length; i++) {
       var field = paymentMethodFields[i];
@@ -173,9 +173,23 @@ export class AddCardComponent implements OnInit {
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
       fieldEl.style.border = normalBorder;
 
+      console.log(fieldEl.id);
+
       // add value to options
-      options[field] = fieldEl.value;
+      // options[field] = fieldEl.value;
+
+      if (fieldEl.id === 'month-year') {
+        let value = fieldEl.value;
+        let values = value.split("/");
+        options['month'] = values[0];
+        options['year'] = values[1];
+      }
+      else {
+        // add value to options
+        options[field] = fieldEl.value
+      }
     }
+    console.log('OPTIONS::::', options);
 
     // Reset frame styles
     Spreedly.setStyle('number', "border: " + normalBorder + ";");
