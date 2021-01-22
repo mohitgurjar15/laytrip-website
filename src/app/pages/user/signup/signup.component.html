@@ -77,21 +77,22 @@
 				<button type="button" class="close" data-dismiss="modal"> <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon"> </button>
 				<div class="modal_top">
 					<div class="modal_title">
+                        <div class="block_im">
+                            <img src="{{s3BucketUrl}}assets/images/popup_im.png" alt="image">
+                        </div>
 						<h4>{{'sign_up' | translate}}</h4>
 					</div>
 				</div>
 				<div class="modal_cnt">
 					<form [formGroup]="signupForm">
 						<div class="form_row">
-							<div class="text_field">
+							<div class="text_field half">
 								<input  type="text" formControlName="first_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}" maxlength="20" tabindex="1" placeholder="{{'first_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors">
                                     <div *ngIf="signupForm.controls.first_name.errors.required">{{'first_name_touched_validation' | translate}}</div>
                                 </div>
-							</div>
-						</div>
-						<div class="form_row">
-							<div class="text_field">
+                            </div>
+                            <div class="text_field half">
 								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="20" tabindex="1"  placeholder="{{'last_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
                                     <div *ngIf="signupForm.controls.last_name.errors.required">{{'last_name_touched_validation' | translate}}</div>
@@ -108,7 +109,7 @@
 							</div>
 						</div>					
 						<div class="form_row">
-							<div class="text_field">
+							<div class="text_field pass_show">
 								<input [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'"  formControlName="email" maxlength="20" tabindex="1"  placeholder="{{'password' | translate}}">
                                 <span class="ptxt"><i id="passEye"
                                     [ngClass]="passFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
@@ -121,7 +122,7 @@
 							</div>
 						</div>					
 						<div class="form_row">
-							<div class="text_field">
+							<div class="text_field pass_show">
 								<input   [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="email" maxlength="20" tabindex="1"  placeholder="{{'confirm_password' | translate}}">
                                 <span class="ptxt"><i id="cnfEye"
                                     [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
@@ -134,11 +135,15 @@
 							</div>
 						</div>					
 						<div class="form_row last">
-							<div class="forgot_pass"> <a href="javascript:void(0);" class="forgotPassword">Forgot Password?</a> </div>
-                                <div class="check">
-                                    <label class="custom_checkbox">
-                                    <input type="checkbox" value=""> <span class="checkmark"></span>Remember me </label>
+                            <div class="check">
+                                <label class="custom_checkbox">
+                                    <input type="checkbox" value=""> 
+                                    <span class="checkmark"></span>  
+                                </label>
+                                <div>
+                                    I have read and agree to the <a href="javascript:void(0);">Terms of Use</a> and the <a href="javascript:void(0);">Privacy Policy</a>
                                 </div>
+                            </div>
                         </div>
 							<div class="form_btn">
                                 <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
