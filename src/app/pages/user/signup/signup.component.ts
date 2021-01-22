@@ -81,7 +81,7 @@ export class SignupComponent implements OnInit {
     
   onSubmit() {
     $('#sign_up_modal').modal('hide');
-    const modalRef = this.modalService.open(VerifyOtpComponent);
+    const modalRef = this.modalService.open(VerifyOtpComponent, { windowClass:'otp_window', centered: true });
     modalRef.componentInstance.name = 'World';
     return;
     this.submitted = this.loading  = true;

@@ -36,8 +36,8 @@ export class VerifyOtpComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '0',
     inputStyles: {
-      'width': '50px',
-      'height': '50px'
+      'width': '64px',
+      'height': '64px'
     }
   };
   isResend = false;
