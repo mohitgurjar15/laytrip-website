@@ -132,10 +132,8 @@
                     <div class="modal_btm">
                         <div class="border_block"><span>Or</span></div>
                         <app-social-login (socialError)="socialError($event)"></app-social-login>
-                        <p>{{'do_not_have_an_account' | translate}} <a href="javascript:void(0);"  
-                            data-toggle="modal" 
-                            data-target="#sign_up_modal" data-dismiss="modal" class="signUp">Sign
-                                Up</a></p>
+                        <p>{{'do_not_have_an_account' | translate}} 
+                            <a (click)="btnSignUpClick()" class="signUp hover-link">{{'sign_up' | translate}}</a></p>
                         <div class="block_logo">
                             <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
                         </div>

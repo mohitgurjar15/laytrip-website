@@ -90,12 +90,14 @@
 								<input  type="text" formControlName="first_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}" maxlength="20" tabindex="1" placeholder="{{'first_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors">
                                     <div *ngIf="signupForm.controls.first_name.errors.required">{{'first_name_touched_validation' | translate}}</div>
+                                    <div *ngIf="signupForm.controls.first_name.errors.pattern" class="error_text">{{'first_name_string_validation' | translate}}</div>
                                 </div>
                             </div>
                             <div class="text_field half">
 								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="20" tabindex="2"  placeholder="{{'last_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
                                     <div *ngIf="signupForm.controls.last_name.errors.required">{{'last_name_touched_validation' | translate}}</div>
+                                    <div *ngIf="signupForm.controls.first_name.errors.pattern" class="error_text">{{'last_name_string_validation' | translate}}</div>
                                 </div>
 							</div>
 						</div>
@@ -137,40 +139,45 @@
 						<div class="form_row last">
                             <div class="check">
                                 <label class="custom_checkbox">
-                                    <input tabindex="6" type="checkbox" value=""> 
+                                    <input  formControlName="checked" tabindex="6" type="checkbox" value="">
                                     <span class="checkmark"></span>  
+                                    
                                 </label>
                                 <div>
-                                    I have read and agree to the <a href="javascript:void(0);">Terms of Use</a> and the <a href="javascript:void(0);">Privacy Policy</a>
+                                    {{'already_account' | translate }}<a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
                                 </div>
                             </div>
                         </div>
-							<div class="form_btn">
-                                <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
-                                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
-                                </button>
-							</div>
-						</form>
-						<div class="modal_btm">
-							<div class="border_block"><span>Or</span></div>
-							<ul>
-								<li>
-									<a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg" alt="Apple"></a>
-								</li>
-								<li>
-									<a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/google.svg" alt="Google"></a>
-								</li>
-								<li>
-									<a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg" alt="Facebook"></a>
-								</li>
-							</ul>
-							<p>Dont't have an account? <a href="javascript:void(0);" class="signIn">Sign In</a></p>
-							<div class="block_logo">
-								<img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                        <div class="error_text" *ngIf="(submitted || signupForm.controls.checked.touched) && signupForm.controls.checked.errors">
+                            <div *ngIf="signupForm.controls.checked.errors.required">{{'checked_touched_validaion' | translate}}</div>
+                        </div> 
+                        <div class="form_btn">
+                            <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
+                            </button>
+                        </div>
+					</form>
+                    <div class="modal_btm">
+                        <div class="border_block"><span>Or</span></div>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg" alt="Apple"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/google.svg" alt="Google"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg" alt="Facebook"></a>
+                            </li>
+                        </ul>
+                        <p>Dont't have an account? <a href="javascript:void(0);" class="signIn" data-toggle="modal" 
+                            data-target="#sign_in_modal" >{{'sign_in' | translate}}</a></p>
+                        <div class="block_logo">
+                            <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>

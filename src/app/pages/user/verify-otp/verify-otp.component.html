@@ -55,17 +55,21 @@
 <div class="modal_otp_block">
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">{{'sign_in_otp_title' | translate}}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <p style="color: red;">{{apiError}}</p>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div>
     <div class="modal-body">
+        <div *ngIf="otpVerified" class="modal_message">
+            <h4 style="color: green;">Your OTP is verified successfully.</h4>
+        </div>
         <form [formGroup]="otpForm" *ngIf="!otpVerified">
             
             <div class="form_row">
                 <div class="text_field">
-                    <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
-                    <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp1.touched || submitted)">
+                    <ng-otp-input #ngOtpInput  (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
+                    <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
                         <p class="error_text">{{'otp_touched_validation' | translate}}</p>
                     </div>
 

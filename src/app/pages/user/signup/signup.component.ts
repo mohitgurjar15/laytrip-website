@@ -39,15 +39,16 @@ export class SignupComponent implements OnInit {
     ) {}
 
   ngOnInit() {    
-
+    
     this.signupForm = this.formBuilder.group({
-      first_name:['',[Validators.required]],
-      last_name:['',[Validators.required]],
+      first_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      last_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-      confirm_password: ['', Validators.required]      
+      confirm_password: ['', Validators.required],
+      checked:  ['', Validators.required],      
     },{
-      validators: MustMatch('password', 'confirm_password'),
+      validators: MustMatch('password', 'confirm_password'),     
     });
     this.signupForm.reset();
   }  
@@ -82,10 +83,10 @@ export class SignupComponent implements OnInit {
  
     
   onSubmit() {
-
-    this.submitted = this.loading  = true;
-   
-    console.log(this.signupForm)
+  this.openOtpPage();
+  return;
+    this.submitted = this.loading  = true;   
+    console.log(this.signupForm.controls)
     if (this.signupForm.invalid) {
       this.submitted = true;      
       this.loading = false;

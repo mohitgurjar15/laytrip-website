@@ -29,11 +29,12 @@ var SignupComponent = /** @class */ (function () {
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signupForm = this.formBuilder.group({
-            first_name: ['', [forms_1.Validators.required]],
-            last_name: ['', [forms_1.Validators.required]],
+            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-            confirm_password: ['', forms_1.Validators.required]
+            confirm_password: ['', forms_1.Validators.required],
+            checked: ['', forms_1.Validators.required]
         }, {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
@@ -47,7 +48,7 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
-        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent);
+        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     SignupComponent.prototype.closeModal = function () {
@@ -64,8 +65,10 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
+        this.openOtpPage();
+        return;
         this.submitted = this.loading = true;
-        console.log(this.signupForm);
+        console.log(this.signupForm.controls);
         if (this.signupForm.invalid) {
             this.submitted = true;
             this.loading = false;
