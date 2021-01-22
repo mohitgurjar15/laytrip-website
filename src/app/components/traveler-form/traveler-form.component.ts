@@ -21,12 +21,11 @@ export class TravelerFormComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() totalTraveler;
   travelerForm: FormGroup;
+  @Input() cartNumber:number;
   traveler_number;
   travelers = {
     type: {
-      adults : [],
-      childs : [],
-      infants: []
+      adults : []
     }
   };
   
@@ -39,7 +38,8 @@ export class TravelerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   
+    
+    console.log("inn",this.cartNumber,"...")
     for(let i=0; i < this.totalTraveler.adult_count; i++){
       this.travelers.type.adults.push(Object.assign({},travelersFileds.flight.adult))
     }
