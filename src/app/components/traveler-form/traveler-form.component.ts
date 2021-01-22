@@ -7,6 +7,7 @@ import { NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bo
 import { NgbDateCustomParserFormatter } from '../../_helpers/ngbDateCustomParserFormatter';
 import { CheckOutService } from '../../services/checkout.service';
 import { travelersFileds } from '../../_helpers/traveller.helper';
+import { CartService } from 'src/app/services/cart.service';
 declare var $: any;
 @Component({
   selector: 'app-traveler-form',
@@ -23,8 +24,16 @@ export class TravelerFormComponent implements OnInit {
   travelerForm: FormGroup;
   @Input() cartNumber:number;
   traveler_number;
-  travelers = {
+  /* travelers = {
     type: {
+      adults : []
+    }
+  }; */
+  travelers={
+    type0 : {
+      adults : []
+    },
+    type1 : {
       adults : []
     }
   };
@@ -34,21 +43,33 @@ export class TravelerFormComponent implements OnInit {
     public router: Router,
     public commonFunction: CommonFunction,
     config: NgbDatepickerConfig,
-    private checkOutService:CheckOutService
+    private checkOutService:CheckOutService,
+    private cartService:CartService
   ) { }
 
   ngOnInit() {
     
-    console.log("inn",this.cartNumber,"...")
+    //this.travelers[`type${this.cartNumber}`].adults=[];
+    console.log("My cart number", this.cartNumber)
+
+    this.cartService.getCartTravelers.subscribe((travelers:any)=>{
+      this.travelers =travelers;
+    })
+
+      //this.travelers = travelers;
     for(let i=0; i < this.totalTraveler.adult_count; i++){
-      this.travelers.type.adults.push(Object.assign({},travelersFileds.flight.adult))
+      //Object.assign({},this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.adult)))
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.adult));
+      this.cartService.setCartTravelers(this.travelers)
     }
-    for(let i=0; i < this.totalTraveler.child_count; i++){
-      this.travelers.type.adults.push(Object.assign({},travelersFileds.flight.child))
-    }
+   
     console.log(this.travelers,"....")
+    
     this.travelerForm = this.formBuilder.group({
-      type: this.formBuilder.group({
+      type0: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type1: this.formBuilder.group({
         adults: this.formBuilder.array([])
       })
     });
@@ -57,13 +78,20 @@ export class TravelerFormComponent implements OnInit {
     this.travelerForm.valueChanges.subscribe(value=>{
       this.checkOutService.emitTravelersformData(this.travelerForm)
     })
-   
+    
+    this.cartService.getSelectedCart.subscribe(cartNumber=>{
+      this.cartNumber = cartNumber;
+      console.log("this.cartNumber...",this.cartNumber)
+    })
+
     
     this.checkOutService.getTraveler.subscribe((traveler:any)=>{
       if(Object.keys(traveler).length>0){
-        this.travelers.type.adults[traveler.traveler_number].first_name=traveler.firstName;
-        this.travelers.type.adults[traveler.traveler_number].last_name=traveler.lastName;
-        this.travelers.type.adults[traveler.traveler_number].email=traveler.email;
+        console.log("Current Cart",this.cartNumber,this.travelers)
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name=traveler.firstName;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name=traveler.lastName;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email=traveler.email;
+        console.log("this.travelers",this.travelers);
         this.patch()
       }
     })
@@ -76,9 +104,9 @@ export class TravelerFormComponent implements OnInit {
   } */
 
   patch() {
-    let control:any = <FormArray>this.travelerForm.get('type.adults');
+    let control:any = <FormArray>this.travelerForm.get(`type${this.cartNumber}.adults`);
     control.controls=[];
-    this.travelers.type.adults.forEach((x,i) => {
+    this.travelers[`type${this.cartNumber}`].adults.forEach((x,i) => {
       control.push(this.patchValues(x))
     })
 
