@@ -17,12 +17,14 @@ export class CartService {
   private cartNumber = new BehaviorSubject(0)
   getSelectedCart = this.cartNumber.asObservable();
 
-  private cartTravelers = new BehaviorSubject({type0 : {
-    adults : []
-  },
-  type1 : {
-    adults : []
-  }});
+  private cartTravelers = new BehaviorSubject({
+    type0 : {
+      adults : []
+    },
+    type1 : {
+      adults : []
+    }
+  });
   getCartTravelers = this.cartTravelers.asObservable();
 
 

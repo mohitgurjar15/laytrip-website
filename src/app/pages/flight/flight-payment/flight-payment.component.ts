@@ -223,4 +223,15 @@ export class FlightPaymentComponent implements OnInit {
     console.log("valid data")
     this.router.navigate(['/flight/checkout', this.routeCode]);
   }
+
+  ngOnDestroy() {
+    this.cartService.setCartTravelers({
+      type0 : {
+        adults : []
+      },
+      type1 : {
+        adults : []
+      }
+    });
+ }
 }
