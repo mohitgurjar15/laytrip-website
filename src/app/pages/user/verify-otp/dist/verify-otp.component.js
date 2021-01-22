@@ -31,13 +31,15 @@ var VerifyOtpComponent = /** @class */ (function () {
             allowNumbersOnly: true,
             length: 6,
             isPasswordInput: true,
-            disableAutoFocus: true,
+            disableAutoFocus: false,
             placeholder: '0',
             inputStyles: {
                 'width': '50px',
                 'height': '50px'
             }
         };
+        this.status = 'ready';
+        this.counter.begin();
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({
@@ -141,6 +143,9 @@ var VerifyOtpComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], VerifyOtpComponent.prototype, "emailForVerifyOtp");
+    __decorate([
+        core_1.ViewChild('countdown', { static: true })
+    ], VerifyOtpComponent.prototype, "counter");
     VerifyOtpComponent = __decorate([
         core_1.Component({
             selector: 'app-verify-otp',

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input,EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, Input,EventEmitter, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { optValidation } from '../../../_helpers/custom.validators';
+import { CountdownComponent } from 'ngx-countdown';
 declare var $: any;
 
 @Component({
@@ -32,13 +33,15 @@ export class VerifyOtpComponent implements OnInit {
     allowNumbersOnly: true,
     length: 6,
     isPasswordInput: true,
-    disableAutoFocus: true,
+    disableAutoFocus: false,
     placeholder: '0',
     inputStyles: {
       'width': '50px',
       'height': '50px'
     }
   };
+  status = 'ready';
+  @ViewChild('countdown', {static: true}) counter: CountdownComponent;
 
   
   constructor(
@@ -47,7 +50,10 @@ export class VerifyOtpComponent implements OnInit {
     private userService : UserService,
     public router: Router,
     public commonFunctoin: CommonFunction
-    ) { }
+    ) {
+      this.counter.begin();
+
+     }
 
   ngOnInit() {
 
@@ -60,7 +66,6 @@ export class VerifyOtpComponent implements OnInit {
       otp6: ['', Validators.required],
     }, { validator: optValidation() });
 
-   
   }
 
   closeModal(){
