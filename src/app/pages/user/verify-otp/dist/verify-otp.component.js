@@ -35,7 +35,8 @@ var VerifyOtpComponent = /** @class */ (function () {
             placeholder: '0',
             inputStyles: {
                 'width': '50px',
-                'height': '50px'
+                'height': '50px',
+                'min-height': 'auto'
             }
         };
         this.isResend = false;
@@ -52,6 +53,10 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.timerComplete = function () {
         this.isResend = true;
+    };
+    VerifyOtpComponent.prototype.onOtpChange = function (event) {
+        console.log(this.emailForVerifyOtp);
+        this.otp = event;
     };
     VerifyOtpComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });
@@ -82,7 +87,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         });
     };
     VerifyOtpComponent.prototype.onInputEntry = function (event, nextInput) {
-        var input = event.target;
+        var input = event.event;
         var length = input.value.length;
         var maxLength = input.attributes.maxlength.value;
         if (length >= maxLength) {
@@ -91,13 +96,10 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.onSubmit = function () {
         var _this = this;
-        var inputDataOtp = '';
-        Object.keys(this.otpForm.controls).forEach(function (key) {
-            inputDataOtp += _this.otpForm.get(key).value;
-        });
+        console.log(this.emailForVerifyOtp);
         this.submitted = this.loading = true;
         if (this.otpForm.invalid) {
-            if (inputDataOtp.length != 6) {
+            if (this.otp.toString().length != 6) {
                 this.errorMessage = "Please enter OTP.";
             }
             this.submitted = true;
@@ -107,7 +109,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         else {
             var data = {
                 "email": this.emailForVerifyOtp,
-                "otp": inputDataOtp
+                "otp": this.otp
             };
             this.userService.verifyOtp(data).subscribe(function (data) {
                 _this.otpVerified = true;

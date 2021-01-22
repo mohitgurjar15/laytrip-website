@@ -37,12 +37,13 @@ export class VerifyOtpComponent implements OnInit {
     placeholder: '0',
     inputStyles: {
       'width': '50px',
-      'height': '50px'
+      'height': '50px',
+      'min-height':'auto'
     }
   };
   isResend = false;
   @ViewChild('countdown',{static:true}) public counter: CountdownComponent;
-
+  otp:number;
   
   constructor(
     public modalService: NgbModal,
@@ -72,7 +73,10 @@ export class VerifyOtpComponent implements OnInit {
     this.isResend = true; 
   }
 
- 
+  onOtpChange(event){
+    console.log(this.emailForVerifyOtp)
+    this.otp = event;
+  }
 
   
   closeModal(){
@@ -109,7 +113,7 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onInputEntry(event, nextInput) {
-    const input = event.target;
+    const input = event.event;
     const length = input.value.length;
     const maxLength = input.attributes.maxlength.value;
 
@@ -119,14 +123,10 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onSubmit() {  
-    let inputDataOtp: string = '';
-
-    Object.keys(this.otpForm.controls).forEach((key) => {
-      inputDataOtp += this.otpForm.get(key).value;
-    }); 
+    console.log(this.emailForVerifyOtp)
     this.submitted = this.loading = true;
     if (this.otpForm.invalid) {
-      if(inputDataOtp.length != 6){
+      if(this.otp.toString().length != 6){
         this.errorMessage = "Please enter OTP.";
       }
       this.submitted = true;     
@@ -136,7 +136,7 @@ export class VerifyOtpComponent implements OnInit {
 
       let data = {
         "email":this.emailForVerifyOtp,
-        "otp": inputDataOtp,
+        "otp": this.otp,
        }; 
       
       this.userService.verifyOtp(data).subscribe((data: any) => {
