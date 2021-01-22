@@ -11,6 +11,7 @@ import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -78,6 +79,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private commonFunction: CommonFunction,
     private genericService: GenericService,
     private cartService: CartService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -85,8 +87,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
     // GET CART ITEMS FROM CART SERVICE
     this.cartService.getCartItems.subscribe(items => {
-      console.log('items:::cart:::', items);
       this.cartItems = items;
+      console.log(this.cartItems);
     });
 
     let _currency = localStorage.getItem('_curr');
@@ -171,54 +173,64 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
-    // console.log(route);
     // // if (this.cartItems) {
     //   //   if (this.cartItems[0].paymentType === 'instalment') {
 
     //   //   }
     //   // }
     //   console.log(this.cartItems.length);
-    // if (this.cartItems && this.cartItems.length >= 2) {
-    //   alert('You can not add more than 5 items in cart');
-    // } else {
-    //   const itinerary = {
-    //     adult: this.route.snapshot.queryParams["adult"],
-    //     child: this.route.snapshot.queryParams["child"],
-    //     infant: this.route.snapshot.queryParams["infant"],
-    //     is_passport_required: route.is_passport_required
-    //   };
-    //   let lastSearchUrl = this.router.url;
-    //   this.cookieService.put('_prev_search', lastSearchUrl);
-    //   const dateNow = new Date();
-    //   dateNow.setMinutes(dateNow.getMinutes() + 10);
+    if (this.cartItems && this.cartItems.length >= 4) {
+      // this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+      this.router.navigate([`flight/payment/${route.route_code}`]);
+    } else {
+      const payload = {
+        module_id: 1,
+        route_code: route.route_code,
+        // room_id: 42945378451569
+      };
+      this.cartService.addCartItem(payload).subscribe((res: any) => {
+        // console.log(res);
+        this.cartService.setCartItems(route);
+        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+      });
+      const itinerary = {
+        adult: this.route.snapshot.queryParams["adult"],
+        child: this.route.snapshot.queryParams["child"],
+        infant: this.route.snapshot.queryParams["infant"],
+        is_passport_required: route.is_passport_required
+      };
+      let lastSearchUrl = this.router.url;
+      this.cookieService.put('_prev_search', lastSearchUrl);
+      const dateNow = new Date();
+      dateNow.setMinutes(dateNow.getMinutes() + 10);
 
-    //   sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-    //   sessionStorage.setItem('__route', JSON.stringify(route));
-    //   /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
-    //   } else{
-    //     this.router.navigate([`flight/checkout/${route.route_code}`]);
-    //   } */
-    //   this.router.navigate([`flight/payment/${route.route_code}`]);
-    // }
+      sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+      sessionStorage.setItem('__route', JSON.stringify(route));
+      /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
+      } else{
+        this.router.navigate([`flight/checkout/${route.route_code}`]);
+      } */
+      this.router.navigate([`flight/payment/${route.route_code}`]);
+    }
 
-    const itinerary = {
-      adult: this.route.snapshot.queryParams["adult"],
-      child: this.route.snapshot.queryParams["child"],
-      infant: this.route.snapshot.queryParams["infant"],
-      is_passport_required: route.is_passport_required
-    };
-    let lastSearchUrl = this.router.url;
-    this.cookieService.put('_prev_search', lastSearchUrl);
-    const dateNow = new Date();
-    dateNow.setMinutes(dateNow.getMinutes() + 10);
+    // const itinerary = {
+    //   adult: this.route.snapshot.queryParams["adult"],
+    //   child: this.route.snapshot.queryParams["child"],
+    //   infant: this.route.snapshot.queryParams["infant"],
+    //   is_passport_required: route.is_passport_required
+    // };
+    // let lastSearchUrl = this.router.url;
+    // this.cookieService.put('_prev_search', lastSearchUrl);
+    // const dateNow = new Date();
+    // dateNow.setMinutes(dateNow.getMinutes() + 10);
 
-    sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-    sessionStorage.setItem('__route', JSON.stringify(route));
-    /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
-    } else{
-      this.router.navigate([`flight/checkout/${route.route_code}`]);
-    } */
-    this.router.navigate([`flight/payment/${route.route_code}`]);
+    // sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+    // sessionStorage.setItem('__route', JSON.stringify(route));
+    // /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
+    // } else{
+    //   this.router.navigate([`flight/checkout/${route.route_code}`]);
+    // } */
+    // this.router.navigate([`flight/payment/${route.route_code}`]);
 
   }
 

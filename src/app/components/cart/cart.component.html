@@ -16,7 +16,7 @@
 <div class="tab-content booking_tab_content">
     <ng-container *ngFor="let cart of carts;index as i">
         <div [id]="'cart_item'+i" class="tab-pane fade in" [ngClass]='{"show active":i==0}' >
-            <app-cart-item [cartItem]="cart"></app-cart-item>
+            <app-cart-item cartNumber={{i}} [cartItem]="cart"></app-cart-item>
         </div>
     </ng-container>
 </div>

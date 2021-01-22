@@ -12,6 +12,7 @@ export class CartItemComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() cartItem;
   @Input() travelers:[];
+  @Input() cartNumber:number;
   totalTraveler={
     adult_count :0,
     child_count :0,
@@ -25,6 +26,7 @@ export class CartItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("cartNumber",this.cartNumber)
     try{
       let _itinerary:any = sessionStorage.getItem("_itinerary");
       _itinerary = JSON.parse(_itinerary);
