@@ -38,8 +38,7 @@ var VerifyOtpComponent = /** @class */ (function () {
                 'height': '50px'
             }
         };
-        this.status = 'ready';
-        this.counter.begin();
+        this.isResend = false;
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({
@@ -50,6 +49,9 @@ var VerifyOtpComponent = /** @class */ (function () {
             otp5: ['', forms_1.Validators.required],
             otp6: ['', forms_1.Validators.required]
         }, { validator: custom_validators_1.optValidation() });
+    };
+    VerifyOtpComponent.prototype.timerComplete = function () {
+        this.isResend = true;
     };
     VerifyOtpComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });

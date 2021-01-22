@@ -40,8 +40,8 @@ export class VerifyOtpComponent implements OnInit {
       'height': '50px'
     }
   };
-  status = 'ready';
-  @ViewChild('countdown', {static: true}) counter: CountdownComponent;
+  isResend = false;
+  @ViewChild('countdown',{static:true}) public counter: CountdownComponent;
 
   
   constructor(
@@ -51,7 +51,7 @@ export class VerifyOtpComponent implements OnInit {
     public router: Router,
     public commonFunctoin: CommonFunction
     ) {
-      this.counter.begin();
+     
 
      }
 
@@ -65,9 +65,16 @@ export class VerifyOtpComponent implements OnInit {
       otp5: ['', Validators.required],
       otp6: ['', Validators.required],
     }, { validator: optValidation() });
-
+    
   }
 
+  timerComplete() {
+    this.isResend = true; 
+  }
+
+ 
+
+  
   closeModal(){
     this.valueChange.emit({ key: 'signIn', value: true });
     $('#sign_in_modal').modal('hide');
