@@ -61,6 +61,7 @@
                     <h3>Your Bookings</h3>
                     <div class="booking_detail_bg_wrps">
                         <app-cart [carts]="carts"></app-cart>
+                        <app-cart-loader></app-cart-loader>
                     </div>
                     <h3>Credit Card Details</h3>
                     <div class="booking_detail_bg_wrps">
@@ -108,50 +109,6 @@
         </form>
     </div>
 </section>
-
-<!-- skeleton loader starts -->
-<section class="payment_mode_main_wrapper flight">
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="col-lg-7"> 
-                    <div class="fb_animation pb-1 pt-1 mt-2 mb-3" style="height: 45px;"></div>
-                    <div class="booking_detail_bg_wrps">
-                        <div class="card">
-                            <div style="display: flex;">
-                                <div class="fb_animation pb-1 pt-1 m-3 mr-0" style="height: 55px; width: 145px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3 ml-1" style="height: 55px; width: 145px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3 ml-1" style="height: 55px; width: 145px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3 ml-1" style="height: 55px; width: 145px;"></div>
-                            </div>
-                            <div class="fb_animation pb-1 pt-1 m-3" style="height: 25px;"></div>
-                            <div class="card">
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 25px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 45px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 25px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 45px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fb_animation pb-1 pt-1 mt-2 mb-3" style="height: 45px;"></div>
-                    <div class="booking_detail_bg_wrps">
-                        <div class="card">
-                            <div class="fb_animation pb-1 pt-1 m-3" style="height: 45px;"></div>
-                            <div class="fb_animation pb-1 pt-1 m-3" style="height: 25px;"></div>
-                            <div class="card">
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 25px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 45px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 25px;"></div>
-                                <div class="fb_animation pb-1 pt-1 m-3" style="height: 45px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
-<!-- skeleton loader ends -->
 
 
 <app-flight-not-available *ngIf="isFlightNotAvailable"></app-flight-not-available>

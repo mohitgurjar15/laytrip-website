@@ -144,7 +144,8 @@ import { CartLoaderComponent } from './cart-loader/cart-loader.component';
     PriceSummaryComponent,
     PaymentModeLoaderComponent,
     TravelerFormComponent,
-    CartComponent
+    CartComponent,
+    CartLoaderComponent
   ],
   providers: [DatePipe],
 

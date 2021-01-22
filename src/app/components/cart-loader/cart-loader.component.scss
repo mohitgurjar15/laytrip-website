@@ -1,0 +1,164 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.payment_mode_main_wrapper{
+    background-color: $background-white;
+    h3{
+        color: $blue-text;
+        font-size: 34px;
+        margin-bottom: 5px;
+        margin: 25px 0 15px;
+        @include tab-view{
+            font-size: 18px;
+        }
+    }
+    .booking_detail_bg_wrps{
+        background-color: $bg-body;
+        border-radius: 5px;
+        padding: 15px;
+        .card_accordion{
+            .card{
+                border: 1px solid $grayed_border;
+                border-radius: 10px;
+                .card-header{
+                    border: none;
+                    background-color: transparent;
+                    a{
+                        font-weight: 600;
+                        color: $text-black;
+                        font-size: 16px;
+                        border: none;
+                        background-color: transparent;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        padding: 0;
+            
+                        &[aria-expanded="true"]{
+                            &:after {
+                                font-family: 'FontAwesome';
+                                content: "\f077";
+                                color: $text-grey;
+                                font-weight: normal;
+                                transition: 0.3s;
+                                right: 10px;
+                                position: absolute;
+                                top: 5px;
+                            }
+                        }
+                        &[aria-expanded="false"]{
+                            &:after {
+                                font-family: 'FontAwesome';
+                                content: "\f078";
+                                color: $text-grey;
+                                font-weight: normal;
+                                transition: 0.3s;
+                                right: 10px;
+                                position: absolute;
+                                top: 5px;
+                            }
+                        }
+                    }
+                }
+                .card-body{
+                    padding: 15px;
+                }
+            }
+        }
+    }
+    .payment_container{
+        max-width: 658px;
+        margin: 0 auto;
+        @include tab-view{
+            width: 100%;
+            padding: 10px;
+        }
+        .payment_mode_wrapper{
+            display: flex;
+            flex-direction: column;
+            h3{
+                color: $blue-text;
+                font-size: 34px;
+                margin-bottom: 5px;
+                margin: 25px 0 15px;
+                @include tab-view{
+                    font-size: 18px;
+                }
+            }
+        }
+        .cta_btn_wrapper{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 25px 0 15px;
+            align-items: center;
+            flex-direction: column;
+
+            button {
+                width: auto;
+                height: 54px;
+                padding: 10px 45px;
+                background: $primary-color;
+                border-radius: 25px;
+                border: none;
+                font-size: 18px;
+                color: $text-white;
+                transition: 0.3s;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
+                white-space: normal;
+                cursor: pointer;
+                border: 1px solid $primary-color;
+                margin-bottom: 10px;
+        
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 0%;
+                    background: $background-white;
+                    z-index: -1;
+                    transition: 0.8s;
+                    border-radius: 0 0 50% 50%;
+                }
+        
+                &:hover {
+                    color: $primary-color;
+                    &:before {
+                        height: 190%;
+                    }
+                }
+                &.trans_btn{
+                    color: $pink;
+                    background-color: transparent;
+                    border: 2px solid $box-border-color;
+                    &::before{
+                        background: $pink;
+                    }
+                    &:hover{
+                        color: $text-white;
+                    }
+                }
+                .white_search{
+                    display: none;
+                    &.show{
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.btn_payment{
+    display: flex;
+    justify-content: flex-end;
+}
