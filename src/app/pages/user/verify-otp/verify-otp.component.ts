@@ -58,7 +58,7 @@ export class VerifyOtpComponent implements OnInit {
   ngOnInit() {
 
     this.otpForm = this.formBuilder.group({
-      otp: [this.otp],  
+      otp: [''],  
     }, { validator: optValidation() });
     
   }

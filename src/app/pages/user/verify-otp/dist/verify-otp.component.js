@@ -43,7 +43,7 @@ var VerifyOtpComponent = /** @class */ (function () {
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({
-            otp: [this.otp]
+            otp: ['']
         }, { validator: custom_validators_1.optValidation() });
     };
     VerifyOtpComponent.prototype.timerComplete = function () {
