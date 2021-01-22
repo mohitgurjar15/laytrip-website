@@ -9,6 +9,14 @@ import { GenericService } from '../../../services/generic.service';
 import { FormGroup } from '@angular/forms';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
+import { CartService } from 'src/app/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
+
+export interface CartItem{
+  
+  type : string;
+  module_info : {},
+}
 
 @Component({
   selector: 'app-flight-payment',
@@ -52,7 +60,9 @@ export class FlightPaymentComponent implements OnInit {
     private flightService: FlightService,
     private genericService:GenericService,
     private travelerService:TravelerService,
-    private checkOutService:CheckOutService
+    private checkOutService:CheckOutService,
+    private cartService:CartService,
+    private toastrService:ToastrService
   ) { 
     this.totalLaycredit();
   }
@@ -65,21 +75,43 @@ export class FlightPaymentComponent implements OnInit {
       this.getTravelers();
     }
 
+    this.genericService.getCartList().subscribe((items:any) => {
+      //console.log('items:::cart:::', items);
+      let notAvilableItems=[];
+      let cart:any;
+      for(let i=0; i<items.data.length; i++){
+        cart={};
+        cart.type = items.data[i].type;
+        cart.module_info = items.data[i].moduleInfo[0];
+        this.carts.push(cart);
+        /* if(items.data[i].is_available){
+          
+          
+        }
+        else{
+          notAvilableItems.push(items.data[i])
+        } */
+      }
+      console.log("this.carts...",this.carts)
+
+      if(notAvilableItems.length){
+        this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
+      }
+    });
+
     let __route = sessionStorage.getItem('__route');
     try{
       let response  = JSON.parse(__route);
       response[0]=response;
       this.flightSummary=response;
-      this.carts[0]={
+     /*  this.carts[0]={
         type : 'flight',
-        module_info:this.flightSummary[0],
-        travelers:[]
+        module_info:this.flightSummary
       };
       this.carts[1]={
         type : 'flight',
-        module_info:this.flightSummary[0],
-        travelers:[]
-      }; 
+        module_info:this.flightSummary
+      };  */
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
@@ -108,7 +140,7 @@ export class FlightPaymentComponent implements OnInit {
     this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
       this.isLayCreditLoading=false;
       this.totalLaycreditPoints=res.total_available_points;
-      console.log("this.totalLaycreditPoints////",this.totalLaycreditPoints)
+      //console.log("this.totalLaycreditPoints////",this.totalLaycreditPoints)
     },(error=>{
       this.isLayCreditLoading=false;
     }))
