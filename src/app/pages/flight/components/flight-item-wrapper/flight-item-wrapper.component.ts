@@ -87,8 +87,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
     // GET CART ITEMS FROM CART SERVICE
     this.cartService.getCartItems.subscribe(items => {
-      console.log('items:::cart:::', items);
       this.cartItems = items;
+      console.log(this.cartItems);
     });
 
     let _currency = localStorage.getItem('_curr');
@@ -180,16 +180,18 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     //   // }
     //   console.log(this.cartItems.length);
     if (this.cartItems && this.cartItems.length >= 4) {
-      this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+      // this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+      this.router.navigate([`flight/payment/${route.route_code}`]);
     } else {
       const payload = {
         module_id: 1,
         route_code: route.route_code,
         // room_id: 42945378451569
       };
-      this.cartService.setCartItems(route);
       this.cartService.addCartItem(payload).subscribe((res: any) => {
-        console.log(res);
+        // console.log(res);
+        this.cartService.setCartItems(route);
+        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
       });
       const itinerary = {
         adult: this.route.snapshot.queryParams["adult"],

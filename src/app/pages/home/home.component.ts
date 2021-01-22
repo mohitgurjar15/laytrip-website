@@ -7,6 +7,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,10 @@ export class HomeComponent implements OnInit {
   countryCode: string;
   toString: string;
   moduleId = 1;
-  dealList= [];
+  dealList = [];
+  // CART VARIABLE
+  cartItemsCount;
+  cartItems;
 
   constructor(
     private genericService: GenericService,
@@ -31,7 +35,8 @@ export class HomeComponent implements OnInit {
     public router: Router,
     public cd: ChangeDetectorRef,
     private renderer: Renderer2,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private cartService: CartService,
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
@@ -42,6 +47,23 @@ export class HomeComponent implements OnInit {
     this.getModules();
     this.loadJquery();
     this.getDeal(this.moduleId);
+
+    // GET CART LIST FROM GENERIC SERVICE
+    this.genericService.getCartList().subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        this.cartService.setCartItems(res.data);
+        this.cartItems = res.data;
+        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+        if (res.count) {
+          this.cartItemsCount = res.count;
+        }
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+        this.cartItems = [];
+      }
+    });
   }
 
   loadJquery() {
@@ -122,8 +144,8 @@ export class HomeComponent implements OnInit {
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
         this.dealList = response['data'];
-      }, (error) => { 
-        
+      }, (error) => {
+
       });
   }
 

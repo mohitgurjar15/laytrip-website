@@ -3,13 +3,10 @@ declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
 import { Location } from '@angular/common';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { GenericService } from '../../../services/generic.service';
-import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -35,15 +32,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   calenderPrices: [] = []
   errorMessage: string = '';
 
-  // CART VARIABLE
-  cartItemsCount;
-  cartItems;
-
   constructor(
     private route: ActivatedRoute,
     private flightService: FlightService,
-    private genericService: GenericService,
-    private cartService: CartService,
     public router: Router,
     public location: Location,
     public commonFunction: CommonFunction,
@@ -80,23 +71,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         };
       }
       this.getFlightSearchData(payload, params.trip);
-    });
-
-    // GET CART LIST FROM GENERIC SERVICE
-    this.genericService.getCartList().subscribe((res: any) => {
-      console.log('cart list:::::', res);
-      if (res) {
-        // SET CART ITEMS IN CART SERVICE
-        this.cartService.setCartItems(res.data);
-        this.cartItems = res.data;
-        if (res.count) {
-          this.cartItemsCount = res.count;
-        }
-        // GET CART ITEMS FROM CART SERVICE
-        this.cartService.getCartItems.subscribe(items => {
-          console.log('items:::cart:::', items);
-        });
-      }
     });
   }
 
