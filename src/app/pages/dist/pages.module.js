@@ -41,6 +41,7 @@ var covid_page_component_1 = require("./covid-page/covid-page.component");
 var about_us_component_1 = require("./about-us/about-us.component");
 var cms_pages_component_1 = require("./cms-pages/cms-pages.component");
 var ng_otp_input_1 = require("ng-otp-input");
+var ngx_countdown_1 = require("ngx-countdown");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -82,7 +83,8 @@ var PagesModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 // NG5 SLIDER
                 ng5_slider_1.Ng5SliderModule,
-                ng_otp_input_1.NgOtpInputModule
+                ng_otp_input_1.NgOtpInputModule,
+                ngx_countdown_1.CountdownModule
             ],
             entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
