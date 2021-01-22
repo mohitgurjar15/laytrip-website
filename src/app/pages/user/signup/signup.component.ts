@@ -49,6 +49,7 @@ export class SignupComponent implements OnInit {
     },{
       validators: MustMatch('password', 'confirm_password'),
     });
+    this.signupForm.reset();
   }  
 
   openSignInPage() {
@@ -59,8 +60,9 @@ export class SignupComponent implements OnInit {
   }
 
   openOtpPage() {
-    this.pageData = true;
-    this.valueChange.emit({ key: 'otpModal', value: this.pageData,emailForVerifyOtp:this.emailForVerifyOtp });
+    $('#sign_up_modal').modal('hide');
+    const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true});
+    (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }
 
   closeModal(){
@@ -80,10 +82,7 @@ export class SignupComponent implements OnInit {
  
     
   onSubmit() {
-    $('#sign_up_modal').modal('hide');
-    const modalRef = this.modalService.open(VerifyOtpComponent, { windowClass:'otp_window', centered: true });
-    modalRef.componentInstance.name = 'World';
-    return;
+
     this.submitted = this.loading  = true;
    
     console.log(this.signupForm)
@@ -97,9 +96,7 @@ export class SignupComponent implements OnInit {
         this.emailForVerifyOtp = this.signupForm.value.email;
         this.submitted = this.loading = false;         
         this.openOtpPage();   
-
       }, (error: HttpErrorResponse) => {       
-        console.log(error);
         this.apiError = error.message;
         this.submitted = this.loading = false;
       });

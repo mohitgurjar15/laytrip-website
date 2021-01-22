@@ -1,0 +1,49 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.block_modal_main{
+    .modal_title{
+        font-size: 32px;
+        color: $active-tab-text;
+    }
+    .modal_cnt{
+        flex-direction: column;
+        .share_i_wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            a{
+                margin-right: 25px;
+                border: 3px solid $pink;
+                height: 88px;
+                width: 88px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                &:last-child{
+                    margin: 0;
+                }
+                img{
+                    max-width: 49px;
+                }
+            }
+        }
+        .footer_logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 30px;
+            img{
+                max-width: 62px;
+            }
+        }
+    }
+}

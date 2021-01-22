@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="text_field half">
-								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="20" tabindex="1"  placeholder="{{'last_name' | translate}}">
+								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="20" tabindex="2"  placeholder="{{'last_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
                                     <div *ngIf="signupForm.controls.last_name.errors.required">{{'last_name_touched_validation' | translate}}</div>
                                 </div>
@@ -101,7 +101,7 @@
 						</div>
 						<div class="form_row">
 							<div class="text_field">
-								<input  type="email" [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}" formControlName="email" maxlength="20" tabindex="1"  placeholder="{{'email' | translate}}">
+								<input  type="email" [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}" formControlName="email" maxlength="20" tabindex="3"  placeholder="{{'email' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.email.touched) && signupForm.controls.email.errors">
                                     <div *ngIf="signupForm.controls.email.errors.required">{{'email_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.email.errors.pattern">{{'email_invalid_validation' | translate}}</div>
@@ -110,7 +110,7 @@
 						</div>					
 						<div class="form_row">
 							<div class="text_field pass_show">
-								<input [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'"  formControlName="email" maxlength="20" tabindex="1"  placeholder="{{'password' | translate}}">
+								<input [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'"  formControlName="password" maxlength="20" tabindex="4"  placeholder="{{'password' | translate}}">
                                 <span class="ptxt"><i id="passEye"
                                     [ngClass]="passFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -123,7 +123,7 @@
 						</div>					
 						<div class="form_row">
 							<div class="text_field pass_show">
-								<input   [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="email" maxlength="20" tabindex="1"  placeholder="{{'confirm_password' | translate}}">
+								<input   [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="20" tabindex="5"  placeholder="{{'confirm_password' | translate}}">
                                 <span class="ptxt"><i id="cnfEye"
                                     [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -137,7 +137,7 @@
 						<div class="form_row last">
                             <div class="check">
                                 <label class="custom_checkbox">
-                                    <input type="checkbox" value=""> 
+                                    <input tabindex="6" type="checkbox" value=""> 
                                     <span class="checkmark"></span>  
                                 </label>
                                 <div>
@@ -173,4 +173,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>

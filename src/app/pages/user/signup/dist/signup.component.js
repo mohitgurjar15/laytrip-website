@@ -37,6 +37,7 @@ var SignupComponent = /** @class */ (function () {
         }, {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
+        this.signupForm.reset();
     };
     SignupComponent.prototype.openSignInPage = function () {
         $('.modal_container').removeClass('right-panel-active');
@@ -45,8 +46,9 @@ var SignupComponent = /** @class */ (function () {
         this.valueChange.emit({ key: 'signIn', value: this.pageData });
     };
     SignupComponent.prototype.openOtpPage = function () {
-        this.pageData = true;
-        this.valueChange.emit({ key: 'otpModal', value: this.pageData, emailForVerifyOtp: this.emailForVerifyOtp });
+        $('#sign_up_modal').modal('hide');
+        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent);
+        modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     SignupComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });
@@ -62,10 +64,6 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
-        $('#sign_up_modal').modal('hide');
-        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent);
-        modalRef.componentInstance.name = 'World';
-        return;
         this.submitted = this.loading = true;
         console.log(this.signupForm);
         if (this.signupForm.invalid) {
@@ -79,7 +77,6 @@ var SignupComponent = /** @class */ (function () {
                 _this.submitted = _this.loading = false;
                 _this.openOtpPage();
             }, function (error) {
-                console.log(error);
                 _this.apiError = error.message;
                 _this.submitted = _this.loading = false;
             });

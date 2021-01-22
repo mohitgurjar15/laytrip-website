@@ -68,12 +68,13 @@
                     <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp1.touched || submitted)">
                         <p class="error_text">{{'otp_touched_validation' | translate}}</p>
                     </div>
+
                 </div>
             </div>
             <div class="resend_otp_code">
                 <div>
                     <countdown [config]="{leftTime: 5}"
-                    (finished)="timerComplete()">$!m!:$!s!</countdown>remaining
+             (finished)="timerComplete()">$!m!:$!s!</countdown>remaining
                 </div>
                 <a class="text-right hover-link" *ngIf="!otpVerified" (click)="resendOtp()"><p *ngIf="isResend">{{'resend_code' | translate}} </p><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
             </div>
