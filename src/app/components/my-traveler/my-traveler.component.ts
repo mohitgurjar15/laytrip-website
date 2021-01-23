@@ -9,6 +9,7 @@ export class MyTravelerComponent implements OnInit {
 
   @Input() travelers;
   @Input() traveler_number;
+  selectedTraveler:string='123';
   constructor(
     private checkOutService:CheckOutService
   ) { }
@@ -18,12 +19,19 @@ export class MyTravelerComponent implements OnInit {
     
   }
 
-  chooseTraveler(userId){
+  selectTraveler(userId){
 
+    this.selectedTraveler=userId;
+    console.log(this.selectedTraveler)
     let traveler = this.travelers.find(item=> item.userId==userId)
     traveler['traveler_number']=this.traveler_number
     this.checkOutService.selectTraveler(traveler)
-    //this.checkOutService.selectTravelerNumber(this.traveler_number)
+  }
+
+  removeTraveler(userId){
+    this.selectedTraveler='';
+    let  traveler = { traveler_number: this.traveler_number };
+    this.checkOutService.selectTraveler(traveler)
   }
 
   ngOnChanges(changes: SimpleChanges) {

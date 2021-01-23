@@ -1,11 +1,136 @@
 <form [formGroup]="travelerForm" (ngSubmit)="submit(travelerForm.value)">
-  <div formGroupName="type">
+  <div *ngIf="travelers.type0.adults.length>0 && cartNumber==0" formGroupName="type0">
     <div formArrayName="adults">
-      <div id="accordion" class="accordion_bookings" *ngIf="travelers.type.adults.length>0">
-        <div class="card" *ngFor="let traveler of travelerForm.get('type.adults')['controls']; let x = index">
+      <div id="accordion" class="accordion_bookings">
+        <div class="card" *ngFor="let traveler of travelerForm.get('type0.adults')['controls']; let x = index">
           <div class="card-header">
             <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" aria-expanded="false">
               Booking Traveler {{x+1}}
+            </a>
+          </div>
+          <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+              <div class="sub_cat_wrapper">
+                <a href="javascript:void(0);" class="add_btn_lined">Add Adult (Over 12)</a>
+                <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
+                <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
+              </div>
+              <app-my-traveler [travelers]="travelers" traveler_number={{x}}></app-my-traveler>
+
+              <div [formGroupName]="x" class="common_form">
+                <div class="form-row">
+                  <div class="col">
+                    <label for="">First Name*</label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
+                    <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
+                      class="error">
+                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Your name is
+                        required</small>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="">Last Name*</label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+                  </div>
+
+                  <div class="col">
+                    <label for="">Gender*</label>
+                    <select class="form-control" formControlName="gender">
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row mt-3">
+                  <div class="col">
+                    <label for="">Email*</label>
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                  </div>
+                  <div class="col">
+                    <label for="">Telephone*</label>
+                    <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_number">
+                  </div>
+                  <div class="col dobs">
+                    <label for="">Date of birth*</label>
+                    <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
+                  </div>
+                </div>
+                <div class="form-row mt-3">
+                  <div class="col col-lg-4" *ngIf="travelers.type?.adults[x]?.passport_number">
+                    <label for="">Passport number</label>
+                    <input type="text" class="form-control" placeholder="Passport number"
+                      formControlName="passport_number">
+                  </div>
+                  <div class="col col-lg-4">
+                    <label for="">Nationality*</label>
+                    <input type="text" class="form-control" placeholder="Nationality" formControlName="country">
+                  </div>
+                </div>
+              </div>
+
+              <div id="accordion_add" class="accordion_addn">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="heade_wrps">
+                      Add-Ons
+                    </span>
+                    <ul class="nav nav-pills" id="addon_tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link active"id="baggage-tab" data-toggle="tab" href="#baggage" role="tab"
+                          aria-controls="baggage" aria-selected="true">Baggage</a>
+                      </li>
+                      <li class="nav-item disabled" role="presentation">
+                        <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab"
+                          aria-controls="boarding" aria-selected="false">Priority Boarding</a>
+                      </li>
+                      <li class="nav-item disabled" role="presentation">
+                        <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab"
+                          aria-controls="insurance" aria-selected="false">Insurance</a>
+                      </li>
+                    </ul>
+                    <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor"
+                      aria-expanded="true" aria-controls="add_acord">
+                    </a>
+                  </div>
+                  <div id="add_acord" class="collapse show" data-parent="#accordion_add">
+                    <div class="card-body">
+                      <div class="tab-content" id="addon_tabContent">
+                        <div class="tab-pane fade show active" id="baggage" role="tabpanel" aria-labelledby="baggage-tab">
+                          <div class="addon_listins_wrps">
+                            <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+                              Total Weight: Check-in baggage - up to 3lb || 16.39 USD
+                            </button>
+                            <ul class="dropdown-menu dropdownList" aria-labelledby="dropdownMenu2">
+                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 3lb || 16.39 USD</button></li>
+                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 4lb || 18.39 USD</button></li>
+                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 5lb || 20.39 USD</button></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="boarding" role="tabpanel" aria-labelledby="boarding-tab">
+                        </div>
+                        <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">.bbbb
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- <button type="submit">Submit</button> -->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="travelers.type1.adults.length>0 && cartNumber==1" formGroupName="type1">
+    <div formArrayName="adults">
+      <div id="accordion" class="accordion_bookings">
+        <div class="card" *ngFor="let traveler of travelerForm.get('type1.adults')['controls']; let x = index">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" aria-expanded="false">
+              Booking Traveler{{cartNumber}} {{x+1}}
             </a>
           </div>
           <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">

@@ -9,21 +9,26 @@
               <span class="title_image">
                 <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
               </span>
-              JFK
-              <span class="flight_routing_imgs">
+              {{cartItem.module_info?.departure_code}}
+              <span class="flight_routing_imgs" *ngIf="cartItem.module_info?.routes?.length > 1">
                 <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
                 <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f_return.svg" alt="" class="route_image" />
               </span>
-              MIA
+              <span class="flight_routing_imgs" *ngIf="cartItem.module_info?.routes?.length === 1">
+                <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
+              </span>
+              {{cartItem.module_info?.arrival_code}}
             </span>
-            <span class="header_date">Dec 9, 2021 - Dec 15, 2021</span>
+            <span
+              class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}
+              - {{commonFunction.convertDateFormat(cartItem.module_info?.arrival_date,'DD/MM/YYYY')}}</span>
           </span>
         </a>
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse in pannel_cont_wrapper show">
       <div class="panel-body">
-        <app-flight-cart-item></app-flight-cart-item>
+        <app-flight-cart-item cartNumber={{cartNumber}} [cartItem]="cartItem"></app-flight-cart-item>
       </div>
     </div>
   </div>
