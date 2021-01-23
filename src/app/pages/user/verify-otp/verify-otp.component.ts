@@ -45,7 +45,7 @@ export class VerifyOtpComponent implements OnInit {
   @ViewChild('countdown',{static:false}) counter: CountdownComponent;
   otp:number=0;
   
-  configCountDown : any = {leftTime: 5,demand: false};
+  configCountDown : any = {leftTime: 60,demand: false};
   
   constructor(
     public modalService: NgbModal,
@@ -66,7 +66,7 @@ export class VerifyOtpComponent implements OnInit {
 
   timerComplete() {
     this.isResend = true; 
-    this.configCountDown = {leftTime: 5,demand: true};
+    this.configCountDown = {leftTime: 60,demand: true};
 
   }
 
@@ -145,7 +145,6 @@ export class VerifyOtpComponent implements OnInit {
         if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
           this.router.navigate(['account/subscription']);
         } else {
-          console.log('here')
           // this.activeModal.close();
           // $('#sign_in_modal').modal('show');
           // this.valueChange.emit({ key: 'signIn', value: true}); 
