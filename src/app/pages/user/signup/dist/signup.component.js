@@ -65,8 +65,8 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.openOtpPage();
-        return;
+        // this.openOtpPage();
+        // return;
         this.submitted = this.loading = true;
         console.log(this.signupForm.controls);
         if (this.signupForm.invalid) {
