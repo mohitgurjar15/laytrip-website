@@ -97,7 +97,7 @@
 								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="20" tabindex="2"  placeholder="{{'last_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
                                     <div *ngIf="signupForm.controls.last_name.errors.required">{{'last_name_touched_validation' | translate}}</div>
-                                    <div *ngIf="signupForm.controls.first_name.errors.pattern" class="error_text">{{'last_name_string_validation' | translate}}</div>
+                                    <div *ngIf="signupForm.controls.last_name.errors.pattern" class="error_text">{{'last_name_string_validation' | translate}}</div>
                                 </div>
 							</div>
 						</div>

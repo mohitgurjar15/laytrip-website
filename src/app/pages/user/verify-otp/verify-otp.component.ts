@@ -41,9 +41,11 @@ export class VerifyOtpComponent implements OnInit {
     }
   };
   isResend = false;
-  @ViewChild('ngOtpInput',{static:true}) ngOtpInputRef:any;//Get reference using ViewChild and the specified hash
-  @ViewChild('countdown',{static:true}) public counter: CountdownComponent;
+  @ViewChild('ngOtpInput',{static:false}) ngOtpInputRef:any;//Get reference using ViewChild and the specified hash
+  @ViewChild('countdown',{static:false}) counter: CountdownComponent;
   otp:number=0;
+  
+  configCountDown : any = {leftTime: 5,demand: false};
   
   constructor(
     public modalService: NgbModal,
@@ -56,7 +58,6 @@ export class VerifyOtpComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-
     this.otpForm = this.formBuilder.group({
       otp: [''],  
     }, { validator: optValidation() });
@@ -65,16 +66,18 @@ export class VerifyOtpComponent implements OnInit {
 
   timerComplete() {
     this.isResend = true; 
+    this.configCountDown = {leftTime: 5,demand: true};
+
   }
 
   onOtpChange(event){
     this.otp = event;
-    this.otpForm.controls.otp.setValue(event);
-    this.ngOtpInputRef.setValue(event);
-    console.log(this.otpForm,this)
+    if(event.length == 6){
+      this.otpForm.controls.otp.setValue(event);
+      this.ngOtpInputRef.setValue(event);
+    }
   }
 
-  
   closeModal(){
     this.valueChange.emit({ key: 'signIn', value: true });
     $('#sign_in_modal').modal('hide');
@@ -97,13 +100,11 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   resendOtp(){
-    console.log(this.emailForVerifyOtp,this.otpForm)
-    this.otpForm.controls.otp.setValue(this.otp);
-    this.otpForm.reset();
+    this.ngOtpInputRef.setValue('');
+    // this.otpForm.reset();
     this.spinner = true;
     this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
-      this.spinner = false;
-      this.isResend = false;
+      this.spinner = this.isResend = false;
       this.counter.begin();
     }, (error: HttpErrorResponse) => {       
       this.submitted = this.spinner = false;
@@ -137,14 +138,17 @@ export class VerifyOtpComponent implements OnInit {
       this.userService.verifyOtp(data).subscribe((data: any) => {
         this.otpVerified = true;  
         this.submitted = this.loading = false;    
-        $('#sign_in_modal').modal('hide');
+        // $('#sign_in_modal').modal('hide');
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         const userDetails = getLoginUserInfo();    
         const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
         if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
           this.router.navigate(['account/subscription']);
         } else {
-          this.valueChange.emit({ key: 'signIn', value: true}); 
+          console.log('here')
+          // this.activeModal.close();
+          // $('#sign_in_modal').modal('show');
+          // this.valueChange.emit({ key: 'signIn', value: true}); 
         }
 
       }, (error: HttpErrorResponse) => {       

@@ -77,7 +77,7 @@
             </div>
             <div class="resend_otp_code">
                 <div>
-                    <countdown [config]="{leftTime: 5}"
+                    <countdown #countdown  [config]="configCountDown"
              (finished)="timerComplete()">$!m!:$!s!</countdown>remaining
                 </div>
                 <a class="text-right hover-link" *ngIf="!otpVerified" (click)="resendOtp()"><p *ngIf="isResend">{{'resend_code' | translate}} </p><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
