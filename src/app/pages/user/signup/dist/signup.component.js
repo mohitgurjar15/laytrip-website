@@ -85,6 +85,12 @@ var SignupComponent = /** @class */ (function () {
             });
         }
     };
+    SignupComponent.prototype.openSignInModal = function () {
+        $('#sign_up_modal').modal('hide');
+    };
+    SignupComponent.prototype.socialError = function (error) {
+        this.apiError = error;
+    };
     __decorate([
         core_1.Input()
     ], SignupComponent.prototype, "pageData");

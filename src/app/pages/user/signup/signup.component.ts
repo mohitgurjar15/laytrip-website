@@ -104,6 +104,9 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  openSignInModal(){
+    $('#sign_up_modal').modal('hide');
+  }
   socialError(error){
     this.apiError = error;
   } 
