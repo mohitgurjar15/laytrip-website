@@ -7,7 +7,7 @@ import { NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bo
 import { NgbDateCustomParserFormatter } from '../../_helpers/ngbDateCustomParserFormatter';
 import { CheckOutService } from '../../services/checkout.service';
 import { travelersFileds } from '../../_helpers/traveller.helper';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from '../../services/cart.service';
 declare var $: any;
 @Component({
   selector: 'app-traveler-form',
