@@ -11,7 +11,6 @@ import * as moment from 'moment'
 })
 export class FlightPriceSliderComponent implements OnInit {
 
-
   ​flexibleLoading:boolean=false;
   ​flexibleNotFound:boolean=false;
   departureDate:string;
@@ -142,7 +141,6 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   getFlexibleArivalDate(date){
-    console.log('sds')
     var startDate = moment(this.departureDate,'MMM DD, YYYY');
     var  endDate = moment(this.arrivalDate,'MMM DD, YYYY');  
     var intervalDay = endDate.diff(startDate,'days');

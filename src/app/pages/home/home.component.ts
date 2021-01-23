@@ -49,11 +49,12 @@ export class HomeComponent implements OnInit {
     this.getDeal(this.moduleId);
 
     // GET CART LIST FROM GENERIC SERVICE
-    this.genericService.getCartList().subscribe((res: any) => {
+    this.cartService.getCartList().subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
         this.cartService.setCartItems(res.data);
         this.cartItems = res.data;
+        console.log(this.cartItems);
         localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
         if (res.count) {
           this.cartItemsCount = res.count;

@@ -20,8 +20,8 @@
                 <div class="col col-lg-4">
                     <label>Expiration Date</label>
                     <div class="cvv_wrapper">
-                        <input type="text" class="spf-input-text spf-exp" id="month-year" maxlength="6"
-                            placeholder="MM/YYYY">
+                        <input type="text" class="spf-input-text spf-exp" id="month-year"
+                            placeholder="MM/YYYY" [textMask]="dateYeaMask">
                         <!-- <label class="spf-label-secondary" for="spf-exp-m">Month (MM)</label> -->
                         <!-- <span class="spf-exp-divider">/</span>
                         <input type="text" class="spf-input-text spf-exp" id="year" size="5" maxlength="4"
