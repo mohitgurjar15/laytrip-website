@@ -80,7 +80,7 @@
                     <countdown #countdown  [config]="configCountDown"
              (finished)="timerComplete()">$!m!:$!s!</countdown>remaining
                 </div>
-                <a class="text-right hover-link" *ngIf="!otpVerified" (click)="resendOtp()"><p [ngClass]="isResend ? '' : 'desable'" >{{'resend_code' | translate}} </p><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
+                <a class="text-right hover-link" [ngClass]="isResend ? '' : 'disable_link'" *ngIf="!otpVerified" (click)="resendOtp()"><p>{{'resend_code' | translate}} </p><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
             </div>
             
             
