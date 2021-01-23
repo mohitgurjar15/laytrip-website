@@ -12,6 +12,7 @@ var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
+var forgot_password_component_1 = require("../forgot-password/forgot-password.component");
 var SigninComponent = /** @class */ (function () {
     function SigninComponent(modalService, formBuilder, userService, router, commonFunction) {
         this.modalService = modalService;
@@ -116,6 +117,11 @@ var SigninComponent = /** @class */ (function () {
         $('#sign_in_modal').modal('hide');
         var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
+    };
+    SigninComponent.prototype.openForgotPassModal = function () {
+        $('#sign_in_modal').modal('hide');
+        var modalRef = this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true });
+        // (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
     };
     __decorate([
         core_1.Input()
