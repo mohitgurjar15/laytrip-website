@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Renderer2 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -39,7 +39,7 @@ export class SigninComponent  implements OnInit {
     private userService : UserService,
     public router: Router,
     public commonFunction:CommonFunction,
-
+    private renderer: Renderer2,
     ) { }    
 
 
@@ -129,6 +129,7 @@ export class SigninComponent  implements OnInit {
     $('#sign_in_modal').modal('hide');
     $('#sign_up_modal').modal('show');
     $("body").addClass("modal-open");
+    this.renderer.addClass(document.body, 'modal-open');
 
   }
 

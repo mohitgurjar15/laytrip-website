@@ -5,6 +5,7 @@ import { GenericService } from '../../services/generic.service';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
+declare var $: any;
 
 @Component({
   selector: 'app-contact-us',
@@ -76,6 +77,7 @@ export class ContactUsComponent implements OnInit {
       formValue.country_code = formValue.country_code.id;
     }
     this.genericService.createEnquiry(formValue).subscribe((res: any) => {
+      $('#contact_modal').modal('hide');
       this.loading = false;
       this.toastr.success(res.message, 'Success');
       this.ngOnInit();

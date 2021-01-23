@@ -14,12 +14,13 @@ var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
 var forgot_password_component_1 = require("../forgot-password/forgot-password.component");
 var SigninComponent = /** @class */ (function () {
-    function SigninComponent(modalService, formBuilder, userService, router, commonFunction) {
+    function SigninComponent(modalService, formBuilder, userService, router, commonFunction, renderer) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
         this.commonFunction = commonFunction;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.signUpModal = false;
         this.signInModal = true;
@@ -112,6 +113,7 @@ var SigninComponent = /** @class */ (function () {
         $('#sign_in_modal').modal('hide');
         $('#sign_up_modal').modal('show');
         $("body").addClass("modal-open");
+        this.renderer.addClass(document.body, 'modal-open');
     };
     SigninComponent.prototype.openOtpPage = function () {
         $('#sign_in_modal').modal('hide');
