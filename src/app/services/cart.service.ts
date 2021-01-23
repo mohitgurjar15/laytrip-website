@@ -23,6 +23,17 @@ export class CartService {
     this.cartItems.next(cartItem);
   }
 
+  getCartList() {
+    let headers = {
+      currency: 'USD',
+      language: 'en'
+    }
+    return this.http.get(`${environment.apiUrl}v1/cart/list`, this.commonFunction.setHeaders(headers))
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   addCartItem(data) {
     let headers = {
       currency: 'USD',
@@ -32,6 +43,10 @@ export class CartService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  deleteCartItem(id) {
+    return this.http.delete(environment.apiUrl + 'v1/cart/delete/' + id, this.commonFunction.setHeaders());
   }
 
   handleError(error) {

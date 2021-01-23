@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -11,40 +12,41 @@ export class CartItemComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() cartItem;
-  @Input() travelers:[];
-  @Input() cartNumber:number;
-  totalTraveler={
-    adult_count :0,
-    child_count :0,
-    infant_count:0
+  @Input() travelers: [];
+  @Input() cartNumber: number;
+  totalTraveler = {
+    adult_count: 0,
+    child_count: 0,
+    infant_count: 0
   };
 
-  mandtoryField={
-    
+  mandtoryField = {
+
   }
 
-  constructor() { }
+  constructor(
+    private commonFunction: CommonFunction
+  ) { }
 
   ngOnInit(): void {
-    console.log("cartNumber",this.cartNumber)
-    try{
-      let _itinerary:any = sessionStorage.getItem("_itinerary");
+    try {
+      let _itinerary: any = sessionStorage.getItem("_itinerary");
       _itinerary = JSON.parse(_itinerary);
       this.totalTraveler.adult_count = Number(_itinerary.adult);
       this.totalTraveler.child_count = Number(_itinerary.child);
-      this.totalTraveler.infant_count= Number(_itinerary.infant);
+      this.totalTraveler.infant_count = Number(_itinerary.infant);
     }
-    catch(e){
-      console.log("Error",e)
+    catch (e) {
+      console.log("Error", e)
     }
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
-    if(changes['cartItem']){
+    if (changes['cartItem']) {
       this.cartItem = changes['cartItem'].currentValue;
     }
   }
-  random(){
+  random() {
     return Math.floor((Math.random() * 100) + 1);
   }
 }

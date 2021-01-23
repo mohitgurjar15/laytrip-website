@@ -39,7 +39,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   @Input() flightDetails;
   @Input() filter;
-  cartItems;
+  cartItems = [];
 
   animationState = 'out';
   flightList;
@@ -84,12 +84,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   ngOnInit() {
-
-    // GET CART ITEMS FROM CART SERVICE
-    this.cartService.getCartItems.subscribe(items => {
-      this.cartItems = items;
-      console.log(this.cartItems);
-    });
 
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
@@ -181,18 +175,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     //   console.log(this.cartItems.length);
     if (this.cartItems && this.cartItems.length >= 4) {
       // this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-      this.router.navigate([`flight/payment/${route.route_code}`]);
+      // this.router.navigate([`flight/payment/${route.route_code}`]);
     } else {
-      const payload = {
-        module_id: 1,
-        route_code: route.route_code,
-        // room_id: 42945378451569
-      };
-      this.cartService.addCartItem(payload).subscribe((res: any) => {
-        // console.log(res);
-        this.cartService.setCartItems(route);
-        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-      });
       const itinerary = {
         adult: this.route.snapshot.queryParams["adult"],
         child: this.route.snapshot.queryParams["child"],
@@ -210,7 +194,24 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       } else{
         this.router.navigate([`flight/checkout/${route.route_code}`]);
       } */
-      this.router.navigate([`flight/payment/${route.route_code}`]);
+      const payload = {
+        module_id: 1,
+        route_code: route.route_code,
+        // room_id: 42945378451569
+      };
+      this.cartService.addCartItem(payload).subscribe((res: any) => {
+        // console.log(res);
+        if (res) {
+          this.cartService.setCartItems(route);
+          // GET CART ITEMS FROM CART SERVICE
+          this.cartService.getCartItems.subscribe(items => {
+            this.cartItems.push(items);
+          });
+          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+          this.router.navigate([`flight/payment/${route.route_code}`]);
+        }
+      });
+
     }
 
     // const itinerary = {
