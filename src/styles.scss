@@ -4485,7 +4485,54 @@ select {
       }
     }
   }
+  .about_page_cmn{
+    .block_cmspage_comman {
+      @include tab-view{
+        padding: 15px;
+      }
+    }
+    h3{
+			color: $blue-text;
+			font-size: 34px;
+			font-weight: 500;
+      margin-bottom: 20px;
+      @include tab-view{
+        font-size: 28px;
+      }
+    }
+    .detail_wpr{
+      display: flex;
+      margin-bottom: 30px;
+      @include tab-view{
+        picture{
+          display: none;
+        }
+      }
+    }
+    .para_detail{
+      font-size: 18px;
+      color: $mid_gray_bg;
+      margin-bottom: 20px;
+      a{
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+    h5{
+      color: $text-black;
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+  }
+
   &.block_covid_19{
+    h3{
+			color: $blue-text;
+			font-size: 34px;
+			font-weight: 500;
+			margin-bottom: 20px;
+		}
     .block_cmspage_comman{
       p{
         font-size: 18px;
