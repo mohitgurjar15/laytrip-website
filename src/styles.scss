@@ -4485,6 +4485,27 @@ select {
       }
     }
   }
+  &.block_covid_19{
+    .block_cmspage_comman{
+      p{
+        font-size: 18px;
+        &:first-child{
+          color: $mid_gray_bg;
+        }
+        u{
+          text-decoration: none;
+          a{
+            color: $primary-color;
+            text-decoration: none;
+          }
+        }
+        a{
+          color: $primary-color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }
 
 .subscribe {

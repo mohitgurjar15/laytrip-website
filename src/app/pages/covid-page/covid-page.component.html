@@ -20,7 +20,9 @@
         </div>
       </div>
       <div class="col-lg-12">
-        <div *ngIf="!loading" class="block_cmspage_comman cms_laytrip" [innerHtml]="cmsData.enContent">
+        <div class="block_cmspage_comman cms_laytrip">
+          <h3>COVID-19 Travel</h3>
+          <div *ngIf="!loading" [innerHtml]="cmsData.enContent"></div>
         </div>
       </div>
     </div>
