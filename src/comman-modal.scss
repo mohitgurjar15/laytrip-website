@@ -1,6 +1,14 @@
 @import "_cstm-variable.scss";
 
 //<!-- Start Login Signup & Forgot Password popup Css -->
+.forgot_window{
+    .modal-content{
+        border-radius:10px;        
+    }
+}
+
+
+
 .comman_modal {
   .modal-dialog {
     max-width: 1024px;

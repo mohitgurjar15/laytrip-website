@@ -78,7 +78,7 @@
 				<div class="modal_top">
 					<div class="modal_title">
                         <div class="block_im">
-                            <img src="{{s3BucketUrl}}assets/images/popup_im.png" alt="image">
+                            <img src="{{s3BucketUrl}}assets/images/modal_head_im.png" alt="image">
                         </div>
 						<h4>{{'sign_up' | translate}}</h4>
 					</div>
@@ -170,8 +170,11 @@
                                 <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg" alt="Facebook"></a>
                             </li>
                         </ul>
+                        <app-social-login (socialError)="socialError($event)"></app-social-login>
+
                         <p>Dont't have an account? <a (click)="openSignInModal()" class="signIn hover-link" data-toggle="modal" 
                             data-target="#sign_in_modal" data-dismiss="modal">{{'sign_in' | translate}}</a></p>
+
                         <div class="block_logo">
                             <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
                         </div>
