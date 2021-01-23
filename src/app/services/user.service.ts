@@ -96,7 +96,7 @@ export class UserService {
 
   forgotPassword(formValue) {
     let data = {
-      "email": formValue.email,
+      "email": typeof formValue.email != 'undefined' ? formValue.email : formValue,
     };
     return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
       .pipe(

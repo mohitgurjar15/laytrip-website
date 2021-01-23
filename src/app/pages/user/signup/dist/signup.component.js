@@ -28,6 +28,8 @@ var SignupComponent = /** @class */ (function () {
         this.apiError = '';
         this.is_email_available = false;
         this.emailExist = false;
+        this.isCaptchaValidated = false;
+        this.message = "";
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signupForm = this.formBuilder.group({
@@ -41,12 +43,6 @@ var SignupComponent = /** @class */ (function () {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
         this.signupForm.reset();
-    };
-    SignupComponent.prototype.openSignInPage = function () {
-        $('.modal_container').removeClass('right-panel-active');
-        $('.forgotpassword-container').removeClass('show_forgotpass');
-        this.pageData = true;
-        this.valueChange.emit({ key: 'signIn', value: this.pageData });
     };
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
@@ -65,10 +61,17 @@ var SignupComponent = /** @class */ (function () {
             this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
         }
     };
+    SignupComponent.prototype.resolved = function (captchaResponse) {
+        this.isCaptchaValidated = true;
+    };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
         // this.openOtpPage();
         // return;
+        if (this.isCaptchaValidated == false) {
+            this.message = "You are robot!";
+            return;
+        }
         this.submitted = this.loading = true;
         if (this.signupForm.invalid) {
             this.submitted = true;

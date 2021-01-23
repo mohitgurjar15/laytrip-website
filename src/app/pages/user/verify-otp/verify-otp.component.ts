@@ -92,10 +92,7 @@ export class VerifyOtpComponent implements OnInit {
   }
   
   openSignInPage() {
-    $('.modal_container').removeClass('right-panel-active');
-    $('.forgotpassword-container').removeClass('show_forgotpass');
-    this.pageData = true;
-    this.valueChange.emit({ key: 'signIn', value: this.pageData });
+   
   }
 
   resendOtp(){

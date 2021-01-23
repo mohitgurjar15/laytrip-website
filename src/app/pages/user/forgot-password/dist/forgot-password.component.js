@@ -59,8 +59,8 @@ var ForgotPasswordComponent = /** @class */ (function () {
             this.userService.forgotPassword(this.forgotForm.value).subscribe(function (data) {
                 _this.submitted = false;
                 _this.forgotPasswordSuccess = true;
-                // this.valueChange.emit({ key: 'reset-password', value: true,emailForVerifyOtp:this.forgotForm.value.email,isReset:true });  
                 _this.forgotEmail = _this.forgotForm.value.email;
+                _this.openResetModal();
             }, function (error) {
                 _this.submitted = _this.loading = false;
                 _this.apiMessage = error.message;
@@ -68,6 +68,7 @@ var ForgotPasswordComponent = /** @class */ (function () {
         }
     };
     ForgotPasswordComponent.prototype.openResetModal = function () {
+        this.activeModal.close();
         var modalRef = this.modalService.open(reset_password_component_1.ResetPasswordComponent, { windowClass: 'forgot_window', centered: true });
         modalRef.componentInstance.emailForVerifyOtp = this.forgotEmail;
     };
