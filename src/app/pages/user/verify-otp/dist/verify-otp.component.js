@@ -120,6 +120,7 @@ var VerifyOtpComponent = /** @class */ (function () {
                     _this.router.navigate(['account/subscription']);
                 }
                 else {
+                    console.log('here');
                     // this.activeModal.close();
                     // $('#sign_in_modal').modal('show');
                     // this.valueChange.emit({ key: 'signIn', value: true}); 
