@@ -40,6 +40,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         };
         this.isResend = false;
         this.otp = 0;
+        this.configCountDown = { leftTime: 5, demand: false };
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({
@@ -48,10 +49,11 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.timerComplete = function () {
         this.isResend = true;
+        this.configCountDown = { leftTime: 5, demand: true };
     };
     VerifyOtpComponent.prototype.onOtpChange = function (event) {
         this.otp = event;
-        this.otpForm.controls.otp.setValue(event);
+        // this.otpForm.controls.otp.setValue(event);
         this.ngOtpInputRef.setValue(event);
         console.log(this.otpForm, this);
     };
@@ -74,9 +76,12 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.resendOtp = function () {
         var _this = this;
+        // this.counter.begin();
+        // return;
         console.log(this.emailForVerifyOtp, this.otpForm);
-        this.otpForm.controls.otp.setValue(this.otp);
-        this.otpForm.reset();
+        this.ngOtpInputRef.setValue('');
+        // this.otpForm.controls.otp.setValue(this.otp);
+        // this.otpForm.reset();
         this.spinner = true;
         this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
             _this.spinner = false;
@@ -119,7 +124,8 @@ var VerifyOtpComponent = /** @class */ (function () {
                     _this.router.navigate(['account/subscription']);
                 }
                 else {
-                    _this.valueChange.emit({ key: 'signIn', value: true });
+                    $('#sign_in_modal').modal('show');
+                    // this.valueChange.emit({ key: 'signIn', value: true}); 
                 }
             }, function (error) {
                 _this.apiError = error.message;
@@ -144,10 +150,10 @@ var VerifyOtpComponent = /** @class */ (function () {
         core_1.Input()
     ], VerifyOtpComponent.prototype, "emailForVerifyOtp");
     __decorate([
-        core_1.ViewChild('ngOtpInput', { static: true })
+        core_1.ViewChild('ngOtpInput', { static: false })
     ], VerifyOtpComponent.prototype, "ngOtpInputRef");
     __decorate([
-        core_1.ViewChild('countdown', { static: true })
+        core_1.ViewChild('countdown', { static: false })
     ], VerifyOtpComponent.prototype, "counter");
     VerifyOtpComponent = __decorate([
         core_1.Component({
