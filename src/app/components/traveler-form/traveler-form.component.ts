@@ -50,7 +50,6 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     
     //this.travelers[`type${this.cartNumber}`].adults=[];
-    console.log("My cart number", this.cartNumber)
 
     this.cartService.getCartTravelers.subscribe((travelers:any)=>{
       this.travelers =travelers;
@@ -62,8 +61,6 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.adult));
       this.cartService.setCartTravelers(this.travelers)
     }
-   
-    console.log(this.travelers,"....")
     
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -81,17 +78,15 @@ export class TravelerFormComponent implements OnInit {
     
     this.cartService.getSelectedCart.subscribe(cartNumber=>{
       this.cartNumber = cartNumber;
-      console.log("this.cartNumber...",this.cartNumber)
     })
 
     
     this.checkOutService.getTraveler.subscribe((traveler:any)=>{
       if(Object.keys(traveler).length>0){
-        console.log("Current Cart",this.cartNumber,this.travelers)
+        console.log("Current Cart",this.cartNumber,traveler)
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name=traveler.firstName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name=traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email=traveler.email;
-        console.log("this.travelers",this.travelers);
         this.patch()
       }
     })

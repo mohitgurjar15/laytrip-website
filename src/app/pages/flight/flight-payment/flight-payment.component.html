@@ -60,8 +60,8 @@
                 <div class="col-lg-7">
                     <h3>Your Bookings</h3>
                     <div class="booking_detail_bg_wrps">
-                        <app-cart [carts]="carts"></app-cart>
-                        <app-cart-loader></app-cart-loader>
+                        <app-cart *ngIf="carts.length>0" [carts]="carts"></app-cart>
+                        <app-cart-loader *ngIf="carts.length==0"></app-cart-loader>
                     </div>
                     <h3>Credit Card Details</h3>
                     <div class="booking_detail_bg_wrps">
