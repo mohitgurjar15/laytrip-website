@@ -150,10 +150,11 @@
                                     {{'already_account' | translate }}<a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
                                 </div>
                             </div>
+                            <div class="error_text" *ngIf="(submitted || signupForm.controls.checked.touched) && signupForm.controls.checked.errors">
+                                <div *ngIf="signupForm.controls.checked.errors.required">{{'checked_touched_validaion' | translate}}</div>
+                            </div> 
                         </div>
-                        <div class="error_text" *ngIf="(submitted || signupForm.controls.checked.touched) && signupForm.controls.checked.errors">
-                            <div *ngIf="signupForm.controls.checked.errors.required">{{'checked_touched_validaion' | translate}}</div>
-                        </div> 
+                        
                         <div class="form_btn">
                             <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
