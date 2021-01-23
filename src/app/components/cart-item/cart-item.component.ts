@@ -25,7 +25,7 @@ export class CartItemComponent implements OnInit {
   }
 
   constructor(
-    private commonFunction: CommonFunction
+    public commonFunction: CommonFunction
   ) { }
 
   ngOnInit(): void {

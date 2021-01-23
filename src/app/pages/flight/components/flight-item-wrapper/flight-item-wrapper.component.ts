@@ -175,7 +175,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     //   console.log(this.cartItems.length);
     if (this.cartItems && this.cartItems.length >= 4) {
       // this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-      // this.router.navigate([`flight/payment/${route.route_code}`]);
+      this.router.navigate([`flight/payment/${route.route_code}`]);
     } else {
       const itinerary = {
         adult: this.route.snapshot.queryParams["adult"],
