@@ -10,7 +10,8 @@
                     <img *ngIf="countryCode=='DR'" class="dr_im"
                         src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0"
                         alt="Dominican Republic">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-expanded="false">
                         <span class="navbar-toggler-icon">
                             <span class="line"></span>
                             <span class="line"></span>
@@ -38,7 +39,7 @@
                                 </a>
                             </li> -->
                             <li class="nav-item">
-                                <a  [routerLink]="['/about']" class="nav-link hover-link">About</a>
+                                <a [routerLink]="['/about']" class="nav-link hover-link">About</a>
                             </li>
                             <!-- <li class="nav-item">
                                 <a class="nav-link hover-link">Support</a>
@@ -93,8 +94,8 @@
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li
-                                            *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'" class="disabled">
+                                        <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
+                                            class="disabled">
                                             <a class="nav-link hover-link "
                                                 [routerLink]="['/account/lay-credit-points']">
                                                 <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit |
@@ -146,7 +147,8 @@
             <img data-toggle="popover" title="Covid-19" data-placement="bottom" data-trigger="hover"
                 data-content="Covid-19 description" src="{{s3BucketUrl}}assets/images/info_icon_laytrip.svg"
                 alt="Info Image">
-            COVID-19 Travel <a [routerLink]="['/covid-19']" target="_blank" [innerHTML]="'read_more' | translate"></a>
+            COVID-19 Travel <a [routerLink]="['/covid-19']" target="_blank" [innerHTML]="'read_more' | translate"
+                *ngIf="isCovidPage"></a>
         </span>
         <!-- <div class="accordion" id="accordionCovid">
             <div class="card">
