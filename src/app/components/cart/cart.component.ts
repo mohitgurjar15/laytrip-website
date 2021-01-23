@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -10,7 +11,9 @@ export class CartComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() carts;
-  constructor() { }
+  constructor(
+    private cartService:CartService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +23,10 @@ export class CartComponent implements OnInit {
     if(changes['carts']){
       this.carts = changes['carts'].currentValue;
     }
+  }
+
+  selectCart(cartNumber){
+    this.cartService.setCardNumber(cartNumber)
   }
 
 }

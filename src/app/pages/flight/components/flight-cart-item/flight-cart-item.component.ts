@@ -11,6 +11,7 @@ export class FlightCartItemComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   constructor() { }
   @Input() travelers:[];
+  @Input() cartNumber;
   totalTraveler={
     adult_count :0,
     child_count :0,
