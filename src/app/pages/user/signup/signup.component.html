@@ -159,17 +159,6 @@
 					</form>
                     <div class="modal_btm">
                         <div class="border_block"><span>Or</span></div>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg" alt="Apple"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/google.svg" alt="Google"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg" alt="Facebook"></a>
-                            </li>
-                        </ul>
                         <app-social-login (socialError)="socialError($event)"></app-social-login>
 
                         <p>Dont't have an account? <a (click)="openSignInModal()" class="signIn hover-link" data-toggle="modal" 
