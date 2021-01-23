@@ -102,8 +102,12 @@ var SigninComponent = /** @class */ (function () {
         this.fieldTextType = !this.fieldTextType;
     };
     SigninComponent.prototype.socialError = function (error) {
-        console.log(error);
         this.apiError = error;
+    };
+    SigninComponent.prototype.btnSignUpClick = function () {
+        $('#sign_in_modal').modal('hide');
+        $('#sign_up_modal').modal('show');
+        $("body").addClass("modal-open");
     };
     __decorate([
         core_1.Input()

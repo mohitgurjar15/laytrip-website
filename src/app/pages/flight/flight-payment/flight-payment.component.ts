@@ -9,7 +9,7 @@ import { GenericService } from '../../../services/generic.service';
 import { FormGroup } from '@angular/forms';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from '../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 
 export interface CartItem {

@@ -118,7 +118,14 @@ export class SigninComponent  implements OnInit {
   }
 
   socialError(error){
-    console.log(error)
     this.apiError = error;
   } 
+
+  btnSignUpClick(){
+    $('#sign_in_modal').modal('hide');
+    $('#sign_up_modal').modal('show');
+    $("body").addClass("modal-open");
+
+  }
 }
+
