@@ -3,11 +3,12 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="block_cmspage_comman cms_faq">
-          <div class="block_top">
-            <h6>FAQs</h6>
-          </div>
           <div class="block_faq_info">
+            
             <div class="block_text w-50">
+              <div class="block_top">
+                <h6>FAQs</h6> 
+              </div>
               <div class="block_heading">
                 <p class="fb_animation w-50 mb-0"></p>
                 <p class="fb_animation w-50 mb-0"></p>
@@ -280,11 +281,12 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="block_cmspage_comman cms_faq">
-          <div class="block_top">
-            <h6>FAQs</h6>
-          </div>
+          
           <div class="block_faq_info" *ngFor="let faqData of faqDetail;let i=index">
             <div class="block_text">
+              <div class="block_top">
+                <h6>FAQs</h6>
+              </div>
               <div class="block_heading">{{i+1}}.&nbsp;{{ faqData.name }}</div>
               <ngb-accordion [closeOthers]="true" [destroyOnHide]="false" #acc="ngbAccordion"
                 activeIds="{{faqData.name}}0">

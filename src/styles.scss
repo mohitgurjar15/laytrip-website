@@ -4380,13 +4380,15 @@ select {
 
                 .btn-link {
                   width: 100%;
-                  padding: 0 0 0 25px;
-                  font-size: 14px;
-                  color: $text-grey;
+                  padding: 0 25px;
+                  font-size: 18px;
+                  color: $mid_gray_bg;
                   font-weight: 500;
                   line-height: 21px;
                   text-align: left;
                   position: relative;
+                  display: flex;
+                  align-items: center;
 
                   &:hover {
                     text-decoration: none;
@@ -4404,7 +4406,42 @@ select {
                     top: 7px;
                     left: 0;
                     content: "";
-                    background: $text-grey;
+                    background: $mid_gray_bg;
+                  }
+                  
+                  &[aria-expanded="false"]{
+                    &::after{
+                      content: "";
+                      position: relative;
+                      padding: 0 9px;
+                      margin-left: 10px;
+                      background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                      background-position: right;
+                      background-repeat: no-repeat;
+                      background-size: 12px;
+                      @include tab-view{
+                        position: absolute;
+                        right: 0;
+                        height: 12px;
+                      }
+                    }
+                  }
+                  &[aria-expanded="true"]{
+                    &::after{
+                      content: "";
+                      position: relative;
+                      padding: 0 9px;
+                      margin-left: 10px;
+                      background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                      background-position: right;
+                      background-repeat: no-repeat;
+                      background-size: 12px;
+                      @include tab-view{
+                        position: absolute;
+                        right: 0;
+                        height: 12px;
+                      }
+                    }
                   }
                 }
               }
@@ -4423,9 +4460,10 @@ select {
 
               .card-body {
                 padding: 15px 0 0 25px;
-
+                font-size: 18px;
+                color: $grayed_border;
                 p {
-                  font-size: 14px;
+                  font-size: 18px;
                   color: $text-grey;
                   font-weight: 400;
                   line-height: 21px;
@@ -4443,6 +4481,74 @@ select {
         .block_im {
           width: auto;
           padding: 0 0 0 50px;
+        }
+      }
+    }
+  }
+  .about_page_cmn{
+    .block_cmspage_comman {
+      @include tab-view{
+        padding: 15px;
+      }
+    }
+    h3{
+			color: $blue-text;
+			font-size: 34px;
+			font-weight: 500;
+      margin-bottom: 20px;
+      @include tab-view{
+        font-size: 28px;
+      }
+    }
+    .detail_wpr{
+      display: flex;
+      margin-bottom: 30px;
+      @include tab-view{
+        picture{
+          display: none;
+        }
+      }
+    }
+    .para_detail{
+      font-size: 18px;
+      color: $mid_gray_bg;
+      margin-bottom: 20px;
+      a{
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+    h5{
+      color: $text-black;
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+  }
+
+  &.block_covid_19{
+    h3{
+			color: $blue-text;
+			font-size: 34px;
+			font-weight: 500;
+			margin-bottom: 20px;
+		}
+    .block_cmspage_comman{
+      p{
+        font-size: 18px;
+        &:first-child{
+          color: $mid_gray_bg;
+        }
+        u{
+          text-decoration: none;
+          a{
+            color: $primary-color;
+            text-decoration: none;
+          }
+        }
+        a{
+          color: $primary-color;
+          text-decoration: none;
         }
       }
     }

@@ -20,7 +20,8 @@
         </div>
       </div>
       <div class="col-lg-12">
-        <div *ngIf="!loading" class="block_cmspage_comman cms_laytrip" [innerHtml]="cmsData.enContent">
+        <div class="block_cmspage_comman cms_laytrip">
+          <div *ngIf="!loading" [innerHtml]="cmsData.enContent"></div>
         </div>
       </div>
     </div>
