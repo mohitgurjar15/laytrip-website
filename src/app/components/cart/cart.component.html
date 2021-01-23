@@ -2,7 +2,7 @@
     <ng-container *ngFor="let cart of carts;index as i">
         <li>
             <ng-container *ngIf="cart.type=='flight'">
-                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]='{"active":i==0}'>
+                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]='{"active":i==0}' (click)="selectCart(i)" >
                     <span>
                         <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                         {{cart.module_info.departure_code}} - {{cart.module_info.arrival_code}}

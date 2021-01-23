@@ -9,16 +9,16 @@ exports.__esModule = true;
 exports.VerifyOtpComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
-var forms_1 = require("@angular/forms");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var custom_validators_1 = require("../../../_helpers/custom.validators");
 var VerifyOtpComponent = /** @class */ (function () {
-    function VerifyOtpComponent(modalService, formBuilder, userService, router, commonFunctoin) {
+    function VerifyOtpComponent(modalService, formBuilder, userService, router, commonFunctoin, activeModal) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
         this.commonFunctoin = commonFunctoin;
+        this.activeModal = activeModal;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
@@ -30,33 +30,33 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.config = {
             allowNumbersOnly: true,
             length: 6,
-            isPasswordInput: true,
+            isPasswordInput: false,
             disableAutoFocus: false,
             placeholder: '0',
             inputStyles: {
-                'width': '50px',
-                'height': '50px',
-                'min-height': 'auto'
+                'width': '64px',
+                'height': '64px'
             }
         };
         this.isResend = false;
+        this.otp = 0;
+        this.configCountDown = { leftTime: 60, demand: false };
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({
-            otp1: ['', forms_1.Validators.required],
-            otp2: ['', forms_1.Validators.required],
-            otp3: ['', forms_1.Validators.required],
-            otp4: ['', forms_1.Validators.required],
-            otp5: ['', forms_1.Validators.required],
-            otp6: ['', forms_1.Validators.required]
+            otp: ['']
         }, { validator: custom_validators_1.optValidation() });
     };
     VerifyOtpComponent.prototype.timerComplete = function () {
         this.isResend = true;
+        this.configCountDown = { leftTime: 60, demand: true };
     };
     VerifyOtpComponent.prototype.onOtpChange = function (event) {
-        console.log(this.emailForVerifyOtp);
         this.otp = event;
+        if (event.length == 6) {
+            this.otpForm.controls.otp.setValue(event);
+            this.ngOtpInputRef.setValue(event);
+        }
     };
     VerifyOtpComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });
@@ -77,10 +77,12 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.resendOtp = function () {
         var _this = this;
-        this.otpForm.reset();
+        this.ngOtpInputRef.setValue('');
+        // this.otpForm.reset();
         this.spinner = true;
         this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
-            _this.spinner = false;
+            _this.spinner = _this.isResend = false;
+            _this.counter.begin();
         }, function (error) {
             _this.submitted = _this.spinner = false;
             _this.apiError = error.message;
@@ -96,12 +98,8 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log(this.emailForVerifyOtp);
         this.submitted = this.loading = true;
-        if (this.otpForm.invalid) {
-            if (this.otp.toString().length != 6) {
-                this.errorMessage = "Please enter OTP.";
-            }
+        if (this.otpForm.hasError('otpsError')) {
             this.submitted = true;
             this.loading = false;
             return;
@@ -114,8 +112,7 @@ var VerifyOtpComponent = /** @class */ (function () {
             this.userService.verifyOtp(data).subscribe(function (data) {
                 _this.otpVerified = true;
                 _this.submitted = _this.loading = false;
-                $('.modal_container').removeClass('right-panel-active');
-                $('#sign_in_modal').modal('hide');
+                // $('#sign_in_modal').modal('hide');
                 localStorage.setItem("_lay_sess", data.userDetails.access_token);
                 var userDetails = jwt_helper_1.getLoginUserInfo();
                 var _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
@@ -123,7 +120,9 @@ var VerifyOtpComponent = /** @class */ (function () {
                     _this.router.navigate(['account/subscription']);
                 }
                 else {
-                    _this.valueChange.emit({ key: 'signIn', value: true });
+                    // this.activeModal.close();
+                    // $('#sign_in_modal').modal('show');
+                    // this.valueChange.emit({ key: 'signIn', value: true}); 
                 }
             }, function (error) {
                 _this.apiError = error.message;
@@ -148,7 +147,10 @@ var VerifyOtpComponent = /** @class */ (function () {
         core_1.Input()
     ], VerifyOtpComponent.prototype, "emailForVerifyOtp");
     __decorate([
-        core_1.ViewChild('countdown', { static: true })
+        core_1.ViewChild('ngOtpInput', { static: false })
+    ], VerifyOtpComponent.prototype, "ngOtpInputRef");
+    __decorate([
+        core_1.ViewChild('countdown', { static: false })
     ], VerifyOtpComponent.prototype, "counter");
     VerifyOtpComponent = __decorate([
         core_1.Component({

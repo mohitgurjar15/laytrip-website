@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 
 declare var $: any;
 
@@ -26,6 +27,7 @@ export class SigninComponent  implements OnInit {
   fieldTextType :  boolean;
   apiError :string =  '';
   public loading: boolean = false;
+  emailForVerifyOtp : string = '';
 
   @Input() pageData;
   @Output() valueChange = new EventEmitter();
@@ -85,8 +87,9 @@ export class SigninComponent  implements OnInit {
       }, (error: HttpErrorResponse) => {       
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
-            $('.modal_container').addClass('right-panel-active');
-            this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
+            this.openOtpPage();
+            // $('.modal_container').addClass('right-panel-active');
+            // this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
             
           }, (error: HttpErrorResponse) => {       
             this.submitted = this.loading = false;
@@ -118,7 +121,20 @@ export class SigninComponent  implements OnInit {
   }
 
   socialError(error){
-    console.log(error)
     this.apiError = error;
   } 
+
+  btnSignUpClick(){
+    $('#sign_in_modal').modal('hide');
+    $('#sign_up_modal').modal('show');
+    $("body").addClass("modal-open");
+
+  }
+
+  openOtpPage() {
+    $('#sign_in_modal').modal('hide');
+    const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true});
+    (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
+  }
 }
+

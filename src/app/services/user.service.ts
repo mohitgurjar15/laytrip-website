@@ -69,6 +69,8 @@ export class UserService {
       "app_version": "1.0",
       "os_version": "7.0",
     };
+    console.log(data)
+
     return this.http.post(this.apiURL + 'v1/auth/signup', data)
       .pipe(
         retry(1),

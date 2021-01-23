@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input,EventEmitter, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class VerifyOtpComponent implements OnInit {
   config = {
     allowNumbersOnly: true,
     length: 6,
-    isPasswordInput: true,
+    isPasswordInput: false,
     disableAutoFocus: false,
     placeholder: '0',
     inputStyles: {
@@ -41,43 +41,43 @@ export class VerifyOtpComponent implements OnInit {
     }
   };
   isResend = false;
-  @ViewChild('countdown',{static:true}) public counter: CountdownComponent;
-  otp:number;
+  @ViewChild('ngOtpInput',{static:false}) ngOtpInputRef:any;//Get reference using ViewChild and the specified hash
+  @ViewChild('countdown',{static:false}) counter: CountdownComponent;
+  otp:number=0;
+  
+  configCountDown : any = {leftTime: 60,demand: false};
   
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
     public router: Router,
-    public commonFunctoin: CommonFunction
-    ) {
-     
+    public commonFunctoin: CommonFunction,
+    public activeModal: NgbActiveModal
 
-     }
+    ) { }
 
   ngOnInit() {
-
     this.otpForm = this.formBuilder.group({
-      otp1: ['', Validators.required],
-      otp2: ['', Validators.required],
-      otp3: ['', Validators.required],
-      otp4: ['', Validators.required],
-      otp5: ['', Validators.required],
-      otp6: ['', Validators.required],
+      otp: [''],  
     }, { validator: optValidation() });
     
   }
 
   timerComplete() {
     this.isResend = true; 
+    this.configCountDown = {leftTime: 60,demand: true};
+
   }
 
   onOtpChange(event){
-    console.log(this.emailForVerifyOtp)
     this.otp = event;
+    if(event.length == 6){
+      this.otpForm.controls.otp.setValue(event);
+      this.ngOtpInputRef.setValue(event);
+    }
   }
 
-  
   closeModal(){
     this.valueChange.emit({ key: 'signIn', value: true });
     $('#sign_in_modal').modal('hide');
@@ -100,11 +100,12 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   resendOtp(){
-    this.otpForm.reset();
+    this.ngOtpInputRef.setValue('');
+    // this.otpForm.reset();
     this.spinner = true;
     this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
-      this.spinner = false;
-
+      this.spinner = this.isResend = false;
+      this.counter.begin();
     }, (error: HttpErrorResponse) => {       
       this.submitted = this.spinner = false;
       this.apiError = error.message;
@@ -122,13 +123,9 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onSubmit() {  
-    console.log(this.emailForVerifyOtp)
     this.submitted = this.loading = true;
-    if (this.otpForm.invalid) {
-      if(this.otp.toString().length != 6){
-        this.errorMessage = "Please enter OTP.";
-      }
-      this.submitted = true;     
+    if (this.otpForm.hasError('otpsError')) {
+      this.submitted = true; 
       this.loading = false; 
       return;
     } else {    
@@ -141,15 +138,16 @@ export class VerifyOtpComponent implements OnInit {
       this.userService.verifyOtp(data).subscribe((data: any) => {
         this.otpVerified = true;  
         this.submitted = this.loading = false;    
-        $('.modal_container').removeClass('right-panel-active');
-        $('#sign_in_modal').modal('hide');
+        // $('#sign_in_modal').modal('hide');
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         const userDetails = getLoginUserInfo();    
         const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
         if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
           this.router.navigate(['account/subscription']);
         } else {
-          this.valueChange.emit({ key: 'signIn', value: true}); 
+          // this.activeModal.close();
+          // $('#sign_in_modal').modal('show');
+          // this.valueChange.emit({ key: 'signIn', value: true}); 
         }
 
       }, (error: HttpErrorResponse) => {       
