@@ -9,7 +9,6 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 declare var $: any;
 
@@ -140,16 +139,15 @@ export class SigninComponent  implements OnInit {
     (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }
 
-  // openForgotPassModal() {
-  //   $('#sign_in_modal').modal('hide');
-  //   const modalRef = this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true});
-  //   // (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
-  // }
+  openForgotPassModal() {
+    $('#sign_in_modal').modal('hide');
+    const modalRef = this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true});
+  }
 
-  openResetPassModal() {
+ /*  openResetPassModal() {
     $('#sign_in_modal').modal('hide');
     const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'resetpass_window', centered: true});
     // (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
-  }
+  } */
 }
 

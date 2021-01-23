@@ -23,6 +23,7 @@ export class ResetPasswordComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
   resetForm: FormGroup;
   submitted = false;
+  spinner: boolean = false;
   loading: boolean = false;
   resetSuccess: boolean = false;
   apiMessage =  '';
@@ -30,6 +31,7 @@ export class ResetPasswordComponent implements OnInit {
   errorMessage = '';
   cnfPassFieldTextType :  boolean;
   passFieldTextType :  boolean;
+  isResend :  boolean = false;
   config = {
     allowNumbersOnly: true,
     length: 6,
@@ -41,6 +43,7 @@ export class ResetPasswordComponent implements OnInit {
       'height': '64px'
     }
   };
+  configCountDown : any = {leftTime: 60,demand: false};
 
  
   constructor(
@@ -87,7 +90,7 @@ export class ResetPasswordComponent implements OnInit {
 
     }
   }
-  
+
   onSubmit() {
     let inputDataOtp: string = '';
 
@@ -132,4 +135,16 @@ export class ResetPasswordComponent implements OnInit {
       $('.tab'+event.target.tabIndex).val('');
     }
   }
+
+  timerComplete() {
+    this.isResend = true; 
+    this.configCountDown = {leftTime: 60,demand: true};
+  }
+
+  resendOtp(){
+
+  }
+  onOtpChange(event){
+  }
+  
 }

@@ -70,7 +70,6 @@ var SignupComponent = /** @class */ (function () {
         // this.openOtpPage();
         // return;
         this.submitted = this.loading = true;
-        console.log(this.signupForm.controls);
         if (this.signupForm.invalid) {
             this.submitted = true;
             this.loading = false;

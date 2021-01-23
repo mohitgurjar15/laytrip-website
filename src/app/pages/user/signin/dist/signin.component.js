@@ -123,7 +123,6 @@ var SigninComponent = /** @class */ (function () {
     SigninComponent.prototype.openForgotPassModal = function () {
         $('#sign_in_modal').modal('hide');
         var modalRef = this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true });
-        // (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
     };
     __decorate([
         core_1.Input()

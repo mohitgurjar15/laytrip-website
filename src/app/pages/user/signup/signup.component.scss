@@ -7,7 +7,7 @@
 .comman_modal {
   padding: 0 !important;
   z-index: 2147483601;
-  overflow: auto;
+
   .modal-dialog {
     max-width: 500px;
   }
@@ -133,7 +133,6 @@
               justify-content: space-between;
               align-items: center;
               margin: 0 0 25px;
-              flex-flow:column;
 
               .check {
                 width: 100%;
@@ -221,18 +220,6 @@
                 a {
                   font-size: 12px;
                   color: $active-tab-text;
-                }
-              }
-
-              .error_text {
-                width: 100%;
-                margin: 5px 0 0;
-                text-align: left;
-
-                div{
-                  color: $error-color;
-                  font-size: 10px;
-                  font-weight: 400;
                 }
               }
             }

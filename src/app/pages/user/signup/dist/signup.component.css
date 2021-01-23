@@ -272,7 +272,6 @@
 .comman_modal {
   padding: 0 !important;
   z-index: 2147483601;
-  overflow: auto;
 }
 .comman_modal .modal-dialog {
   max-width: 500px;
