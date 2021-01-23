@@ -1,4 +1,4 @@
-<div class="form-container otp-container show_otp">
+<!-- <div class="form-container otp-container show_otp">
     <div class="verify_otp_modal">
         <div class="modal_top">
             <div class="modal_title">
@@ -36,9 +36,7 @@
                 <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp1.touched || submitted)">
                     <p class="text-danger">{{'otp_touched_validation' | translate}}</p>
                 </div>
-                <!-- <div *ngIf="(submitted || errorMessage) && otpForm.controls.otp1.errors" class="focus-input100 login-error">
-          <div *ngIf="otpForm.controls.otp1.errors.required" class="text-danger">{{errorMessage}}</div>
-        </div> -->
+                
                 <div class="resend_otp_code">
                     <span></span><a class="text-right hover-link" *ngIf="!otpVerified" (click)="resendOtp()">{{'resend_code' | translate}} <i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
                 </div>
@@ -52,5 +50,44 @@
         <div class="modal_change_link">
             <p>Back to <a class="hover-link" id="signIn" (click)="openSignInPage()">{{'sign_in' | translate}}</a></p>
         </div>
+    </div>
+</div> -->
+<div class="modal_otp_block">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'sign_in_otp_title' | translate}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="otpForm" *ngIf="!otpVerified">
+            
+            <div class="form_row">
+                <div class="text_field">
+                    <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
+                    <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp1.touched || submitted)">
+                        <p class="error_text">{{'otp_touched_validation' | translate}}</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="resend_otp_code">
+                <div>
+                    <countdown [config]="{leftTime: 5}"
+             (finished)="timerComplete()">$!m!:$!s!</countdown>remaining
+                </div>
+                <a class="text-right hover-link" *ngIf="!otpVerified" (click)="resendOtp()"><p *ngIf="isResend">{{'resend_code' | translate}} </p><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
+            </div>
+            
+            
+            <div class="form_btn">
+                <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'veryfy' | translate}}
+                </button>
+            </div>
+            <div class="block_logo">
+                <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
+            </div>
+        </form>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MustMatch } from '../../../_helpers/must-match.validators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 
 declare var $: any;
 
@@ -40,12 +41,15 @@ export class SignupComponent implements OnInit {
   ngOnInit() {    
 
     this.signupForm = this.formBuilder.group({
+      first_name:['',[Validators.required]],
+      last_name:['',[Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required]      
     },{
       validators: MustMatch('password', 'confirm_password'),
     });
+    this.signupForm.reset();
   }  
 
   openSignInPage() {
@@ -56,8 +60,9 @@ export class SignupComponent implements OnInit {
   }
 
   openOtpPage() {
-    this.pageData = true;
-    this.valueChange.emit({ key: 'otpModal', value: this.pageData,emailForVerifyOtp:this.emailForVerifyOtp });
+    $('#sign_up_modal').modal('hide');
+    const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true});
+    (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }
 
   closeModal(){
@@ -77,6 +82,7 @@ export class SignupComponent implements OnInit {
  
     
   onSubmit() {
+
     this.submitted = this.loading  = true;
    
     console.log(this.signupForm)
@@ -90,9 +96,7 @@ export class SignupComponent implements OnInit {
         this.emailForVerifyOtp = this.signupForm.value.email;
         this.submitted = this.loading = false;         
         this.openOtpPage();   
-
       }, (error: HttpErrorResponse) => {       
-        console.log(error);
         this.apiError = error.message;
         this.submitted = this.loading = false;
       });

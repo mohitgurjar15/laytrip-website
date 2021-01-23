@@ -1,0 +1,64 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.block_modal_main{
+    .modal_title{
+        font-size: 32px !important;
+        color: $active-tab-text !important;
+        text-transform: capitalize !important;
+        font-weight: 500 !important;
+    }
+    .modal_cnt{
+        flex-direction: column;
+        @include tab-view{
+            height: 30vh !important;
+        }
+        .share_i_wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            a{
+                margin-right: 25px;
+                border: 3px solid $pink;
+                height: 88px;
+                width: 88px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @include tab-view{
+                    margin-right: 15px;
+                    height: 66px;
+                    width: 66px;
+                }
+                
+                &:last-child{
+                    margin: 0;
+                }
+                img{
+                    max-width: 49px;
+                    @include tab-view{
+                        max-height: 36px;
+                        max-width: 36px;
+                    }
+                }
+            }
+        }
+        .footer_logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 30px;
+            img{
+                max-width: 62px;
+            }
+        }
+    }
+}

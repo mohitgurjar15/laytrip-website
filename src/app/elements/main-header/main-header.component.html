@@ -10,8 +10,12 @@
                     <img *ngIf="countryCode=='DR'" class="dr_im"
                         src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0"
                         alt="Dominican Republic">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
+                        <span class="navbar-toggler-icon">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </span>
                     </button>
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
                         <!-- <ul class="navbar-nav nav_left" *ngIf="countryCode!=='DR'">
@@ -164,4 +168,4 @@
     </div>
 </section>
 <!-- Covid-19 section end-->
-<app-auth></app-auth>
+<app-signin></app-signin>

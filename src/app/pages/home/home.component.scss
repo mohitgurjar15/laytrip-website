@@ -127,6 +127,11 @@
 					@include tab-view {
 						height: 59px;
 						width: 59px;
+						margin-right: 20px;
+
+						&:last-child{
+							margin-right: 0;
+						}
 						img{
 							max-width: 27px;
 						}

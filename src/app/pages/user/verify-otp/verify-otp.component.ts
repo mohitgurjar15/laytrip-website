@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input,EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, Input,EventEmitter, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { optValidation } from '../../../_helpers/custom.validators';
+import { CountdownComponent } from 'ngx-countdown';
 declare var $: any;
 
 @Component({
@@ -28,14 +29,31 @@ export class VerifyOtpComponent implements OnInit {
   spinner = false;
   @Input() emailForVerifyOtp;
   apiError :string =  '';
-
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: true,
+    disableAutoFocus: false,
+    placeholder: '0',
+    inputStyles: {
+      'width': '64px',
+      'height': '64px'
+    }
+  };
+  isResend = false;
+  @ViewChild('countdown',{static:true}) public counter: CountdownComponent;
+  otp:number;
+  
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
     public router: Router,
     public commonFunctoin: CommonFunction
-    ) { }
+    ) {
+     
+
+     }
 
   ngOnInit() {
 
@@ -47,10 +65,19 @@ export class VerifyOtpComponent implements OnInit {
       otp5: ['', Validators.required],
       otp6: ['', Validators.required],
     }, { validator: optValidation() });
-
-   
+    
   }
 
+  timerComplete() {
+    this.isResend = true; 
+  }
+
+  onOtpChange(event){
+    console.log(this.emailForVerifyOtp)
+    this.otp = event;
+  }
+
+  
   closeModal(){
     this.valueChange.emit({ key: 'signIn', value: true });
     $('#sign_in_modal').modal('hide');
@@ -85,7 +112,7 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onInputEntry(event, nextInput) {
-    const input = event.target;
+    const input = event.event;
     const length = input.value.length;
     const maxLength = input.attributes.maxlength.value;
 
@@ -95,14 +122,10 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onSubmit() {  
-    let inputDataOtp: string = '';
-
-    Object.keys(this.otpForm.controls).forEach((key) => {
-      inputDataOtp += this.otpForm.get(key).value;
-    }); 
+    console.log(this.emailForVerifyOtp)
     this.submitted = this.loading = true;
     if (this.otpForm.invalid) {
-      if(inputDataOtp.length != 6){
+      if(this.otp.toString().length != 6){
         this.errorMessage = "Please enter OTP.";
       }
       this.submitted = true;     
@@ -112,7 +135,7 @@ export class VerifyOtpComponent implements OnInit {
 
       let data = {
         "email":this.emailForVerifyOtp,
-        "otp": inputDataOtp,
+        "otp": this.otp,
        }; 
       
       this.userService.verifyOtp(data).subscribe((data: any) => {

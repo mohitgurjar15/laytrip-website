@@ -31,6 +31,8 @@ import { SsoLoginComponent } from './sso-login/sso-login.component';
 import { CovidPageComponent } from './covid-page/covid-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CmsPagesComponent } from './cms-pages/cms-pages.component';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { CmsPagesComponent } from './cms-pages/cms-pages.component';
     CovidPageComponent,
     AboutUsComponent,
     CmsPagesComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -69,6 +72,8 @@ import { CmsPagesComponent } from './cms-pages/cms-pages.component';
     FormsModule,
     // NG5 SLIDER
     Ng5SliderModule,
+    NgOtpInputModule,
+    CountdownModule
   ],
   entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, AuthComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

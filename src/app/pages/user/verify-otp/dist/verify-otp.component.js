@@ -27,6 +27,19 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.errorMessage = '';
         this.spinner = false;
         this.apiError = '';
+        this.config = {
+            allowNumbersOnly: true,
+            length: 6,
+            isPasswordInput: true,
+            disableAutoFocus: false,
+            placeholder: '0',
+            inputStyles: {
+                'width': '50px',
+                'height': '50px',
+                'min-height': 'auto'
+            }
+        };
+        this.isResend = false;
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({
@@ -37,6 +50,13 @@ var VerifyOtpComponent = /** @class */ (function () {
             otp5: ['', forms_1.Validators.required],
             otp6: ['', forms_1.Validators.required]
         }, { validator: custom_validators_1.optValidation() });
+    };
+    VerifyOtpComponent.prototype.timerComplete = function () {
+        this.isResend = true;
+    };
+    VerifyOtpComponent.prototype.onOtpChange = function (event) {
+        console.log(this.emailForVerifyOtp);
+        this.otp = event;
     };
     VerifyOtpComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });
@@ -67,7 +87,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         });
     };
     VerifyOtpComponent.prototype.onInputEntry = function (event, nextInput) {
-        var input = event.target;
+        var input = event.event;
         var length = input.value.length;
         var maxLength = input.attributes.maxlength.value;
         if (length >= maxLength) {
@@ -76,13 +96,10 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.onSubmit = function () {
         var _this = this;
-        var inputDataOtp = '';
-        Object.keys(this.otpForm.controls).forEach(function (key) {
-            inputDataOtp += _this.otpForm.get(key).value;
-        });
+        console.log(this.emailForVerifyOtp);
         this.submitted = this.loading = true;
         if (this.otpForm.invalid) {
-            if (inputDataOtp.length != 6) {
+            if (this.otp.toString().length != 6) {
                 this.errorMessage = "Please enter OTP.";
             }
             this.submitted = true;
@@ -92,7 +109,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         else {
             var data = {
                 "email": this.emailForVerifyOtp,
-                "otp": inputDataOtp
+                "otp": this.otp
             };
             this.userService.verifyOtp(data).subscribe(function (data) {
                 _this.otpVerified = true;
@@ -130,6 +147,9 @@ var VerifyOtpComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], VerifyOtpComponent.prototype, "emailForVerifyOtp");
+    __decorate([
+        core_1.ViewChild('countdown', { static: true })
+    ], VerifyOtpComponent.prototype, "counter");
     VerifyOtpComponent = __decorate([
         core_1.Component({
             selector: 'app-verify-otp',
