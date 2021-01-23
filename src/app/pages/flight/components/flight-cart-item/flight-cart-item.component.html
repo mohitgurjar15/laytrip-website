@@ -49,7 +49,7 @@
     <button (click)="deleteCart(cartItem.id)">Delete</button>
     <!-- <button>Edit</button> -->
   </span>
-  {{cartItem.module_info?.total_duration}}
+  {{cartItem.module_info?.routes[0]?.duration}}
 </div>
 
 <!-- ROUNDTRIP -->
@@ -97,7 +97,7 @@
     <span class="ct_btns">
       <!-- <button>Edit</button> -->
     </span>
-    {{cartItem.module_info?.total_duration}}
+    {{cartItem.module_info?.routes[1]?.duration}}
   </div>
 
   <div class="card accordion_detailed_wrps w_return">
@@ -145,7 +145,7 @@
     <button (click)="deleteCart(cartItem.id)">Delete</button>
     <!-- <button>Edit</button> -->
   </span>
-  {{cartItem.module_info?.total_duration}}
+  {{cartItem.module_info?.routes[0]?.duration}}
 </div>
 
 <!-- <div id="accordion1" class="sub_accordions">
