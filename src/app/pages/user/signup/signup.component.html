@@ -155,14 +155,19 @@
                             </div> 
                         </div>
                         
+                        <div class="form_row">
+                            <div class="text_field">
+                                <re-captcha (resolved)="resolved($event)" siteKey="6LcPUboZAAAAAN1Sh411ruqdmT4OD6ZDe65rTsVO"></re-captcha>
+                                <div class="error_text" *ngIf="!isCaptchaValidated">{{ message }}</div>
+                            </div>
+                        </div> 
                         <div class="form_btn">
-                            <re-captcha (resolved)="resolved($event)" siteKey="6LcPUboZAAAAAN1Sh411ruqdmT4OD6ZDe65rTsVO"></re-captcha>
-                            <div align="start" class="text-danger" *ngIf="!isCaptchaValidated">{{ message }}</div>
-                        </div>
-                        <div class="form_btn">
-                            <button type="submit" [disabled]="signupForm.valid" [ngClass]="{'disable':!signupForm.valid}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                            <button type="submit" [disabled]="signupForm.valid" [ngClass]="{'btn_disable':!signupForm.valid}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
                             </button>
+                        </div>
+                        <div class="block_api_error">
+                            Email is not registered with us. Please check your email.
                         </div>
 					</form>
                     <div class="modal_btm">
