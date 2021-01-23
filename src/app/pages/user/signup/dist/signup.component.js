@@ -49,7 +49,7 @@ var SignupComponent = /** @class */ (function () {
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
         var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
-        modalRef.componentInstance.emailForVerifyOtp = 'dsfds@yopmail.com'; //this.emailForVerifyOtp;
+        modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     SignupComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });
@@ -65,8 +65,8 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.openOtpPage();
-        return;
+        // this.openOtpPage();
+        // return;
         this.submitted = this.loading = true;
         console.log(this.signupForm.controls);
         if (this.signupForm.invalid) {

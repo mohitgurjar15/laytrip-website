@@ -63,7 +63,7 @@ export class SignupComponent implements OnInit {
   openOtpPage() {
     $('#sign_up_modal').modal('hide');
     const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true});
-    (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = 'dsfds@yopmail.com'; //this.emailForVerifyOtp;
+    (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }
 
   closeModal(){
@@ -83,8 +83,8 @@ export class SignupComponent implements OnInit {
  
     
   onSubmit() {
-  this.openOtpPage();
-  return;
+  // this.openOtpPage();
+  // return;
     this.submitted = this.loading  = true;   
     console.log(this.signupForm.controls)
     if (this.signupForm.invalid) {

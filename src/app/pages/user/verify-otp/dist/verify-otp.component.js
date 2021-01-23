@@ -40,7 +40,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         };
         this.isResend = false;
         this.otp = 0;
-        this.configCountDown = { leftTime: 5, demand: false };
+        this.configCountDown = { leftTime: 60, demand: false };
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         this.otpForm = this.formBuilder.group({
@@ -49,7 +49,7 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.timerComplete = function () {
         this.isResend = true;
-        this.configCountDown = { leftTime: 5, demand: true };
+        this.configCountDown = { leftTime: 60, demand: true };
     };
     VerifyOtpComponent.prototype.onOtpChange = function (event) {
         this.otp = event;
@@ -120,7 +120,6 @@ var VerifyOtpComponent = /** @class */ (function () {
                     _this.router.navigate(['account/subscription']);
                 }
                 else {
-                    console.log('here');
                     // this.activeModal.close();
                     // $('#sign_in_modal').modal('show');
                     // this.valueChange.emit({ key: 'signIn', value: true}); 

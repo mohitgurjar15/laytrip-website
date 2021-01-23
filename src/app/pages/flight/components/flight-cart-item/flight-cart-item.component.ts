@@ -14,11 +14,12 @@ export class FlightCartItemComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() cartItem;
-  @Input() travelers: [];
-  totalTraveler = {
-    adult_count: 0,
-    child_count: 0,
-    infant_count: 0
+  @Input() travelers:[];
+  @Input() cartNumber;
+  totalTraveler={
+    adult_count :0,
+    child_count :0,
+    infant_count:0
   };
   // CART VARIABLE
   cartItemsCount;

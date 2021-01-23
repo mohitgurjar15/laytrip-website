@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
+var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
 var SigninComponent = /** @class */ (function () {
     function SigninComponent(modalService, formBuilder, userService, router, commonFunction) {
         this.modalService = modalService;
@@ -24,6 +25,7 @@ var SigninComponent = /** @class */ (function () {
         this.submitted = false;
         this.apiError = '';
         this.loading = false;
+        this.emailForVerifyOtp = '';
         this.valueChange = new core_1.EventEmitter();
     }
     SigninComponent.prototype.ngOnInit = function () {
@@ -71,8 +73,9 @@ var SigninComponent = /** @class */ (function () {
             }, function (error) {
                 if (error.status == 406) {
                     _this.userService.resendOtp(_this.loginForm.value.email).subscribe(function (data) {
-                        $('.modal_container').addClass('right-panel-active');
-                        _this.valueChange.emit({ key: 'otpModal', value: true, emailForVerifyOtp: _this.loginForm.value.email });
+                        _this.openOtpPage();
+                        // $('.modal_container').addClass('right-panel-active');
+                        // this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
                     }, function (error) {
                         _this.submitted = _this.loading = false;
                         _this.apiError = error.message;
@@ -108,6 +111,11 @@ var SigninComponent = /** @class */ (function () {
         $('#sign_in_modal').modal('hide');
         $('#sign_up_modal').modal('show');
         $("body").addClass("modal-open");
+    };
+    SigninComponent.prototype.openOtpPage = function () {
+        $('#sign_in_modal').modal('hide');
+        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
+        modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     __decorate([
         core_1.Input()

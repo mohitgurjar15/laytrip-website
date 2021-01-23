@@ -14,6 +14,20 @@ export class CartService {
   private cartItems = new BehaviorSubject({});
   getCartItems = this.cartItems.asObservable();
 
+  private cartNumber = new BehaviorSubject(0)
+  getSelectedCart = this.cartNumber.asObservable();
+
+  private cartTravelers = new BehaviorSubject({
+    type0 : {
+      adults : []
+    },
+    type1 : {
+      adults : []
+    }
+  });
+  getCartTravelers = this.cartTravelers.asObservable();
+
+
   constructor(
     private http: HttpClient,
     private commonFunction: CommonFunction
@@ -63,5 +77,13 @@ export class CartService {
       errorMessage = { status: error.status, message: error.error.message };
     }
     return throwError(errorMessage);
+  }
+
+  setCardNumber(cartNumber){
+    this.cartNumber.next(cartNumber)
+  }
+
+  setCartTravelers(travelers){
+    this.cartTravelers.next(travelers);
   }
 }
