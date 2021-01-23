@@ -85,6 +85,9 @@ var SignupComponent = /** @class */ (function () {
             });
         }
     };
+    SignupComponent.prototype.openSignInModal = function () {
+        $('#sign_up_modal').modal('hide');
+    };
     __decorate([
         core_1.Input()
     ], SignupComponent.prototype, "pageData");
