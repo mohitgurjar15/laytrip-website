@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 declare var $: any;
 
 @Component({
@@ -21,6 +22,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   forgotModal = false;
   loading: boolean = false;
   apiMessage =  '';
+  forgotEmail =  '';
   forgotPasswordSuccess : boolean = false;
 
   constructor(
@@ -70,14 +72,18 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
       this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
         this.submitted = false;    
         this.forgotPasswordSuccess = true;
-        this.valueChange.emit({ key: 'reset-password', value: true,emailForVerifyOtp:this.forgotForm.value.email,isReset:true });  
-        $('.modal_container').addClass('right-panel-active');
-        $('.resetpass-container').addClass('show_resetpass');
+        // this.valueChange.emit({ key: 'reset-password', value: true,emailForVerifyOtp:this.forgotForm.value.email,isReset:true });  
+        this.forgotEmail = this.forgotForm.value.email;
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading  = false;
         this.apiMessage = error.message;
 
       }); 
     }
+  }
+
+  openResetModal(){
+    const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'forgot_window', centered: true});
+    (<ResetPasswordComponent>modalRef.componentInstance).emailForVerifyOtp = this.forgotEmail;
   }
 }

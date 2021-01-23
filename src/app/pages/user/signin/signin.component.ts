@@ -140,7 +140,6 @@ export class SigninComponent  implements OnInit {
 
   openForgotPassModal() {
     $('#sign_in_modal').modal('hide');
-
     const modalRef = this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true});
     // (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }

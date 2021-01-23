@@ -103,10 +103,13 @@
 						</div>
 						<div class="form_row">
 							<div class="text_field">
-								<input  type="email" [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}" formControlName="email" maxlength="20" tabindex="3"  placeholder="{{'email' | translate}}">
+								<input #email type="email" (input)="onSearchChange($event.target.value)"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}" formControlName="email" maxlength="20" tabindex="3"  placeholder="{{'email' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.email.touched) && signupForm.controls.email.errors">
                                     <div *ngIf="signupForm.controls.email.errors.required">{{'email_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.email.errors.pattern">{{'email_invalid_validation' | translate}}</div>
+                                </div>
+                                <div class="error_text" *ngIf="emailExist" class="text-danger">
+                                    {{'email_exist_validation'|translate}}
                                 </div>
 							</div>
 						</div>					

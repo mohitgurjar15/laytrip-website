@@ -75,6 +75,7 @@ export class ResetPasswordComponent implements OnInit {
 
     }
   }
+  
   onSubmit() {
     let inputDataOtp: string = '';
 
