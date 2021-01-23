@@ -49,6 +49,7 @@ import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-l
 import { CartComponent } from './cart/cart.component';
 import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
 import { CartLoaderComponent } from './cart-loader/cart-loader.component';
+import { FullPageLoaderComponent } from './full-page-loader/full-page-loader.component';
 
 
 
@@ -90,7 +91,8 @@ import { CartLoaderComponent } from './cart-loader/cart-loader.component';
     PaymentModeLoaderComponent,
     CartComponent,
     FlightCartItemComponent,
-    CartLoaderComponent
+    CartLoaderComponent,
+    FullPageLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -145,7 +147,8 @@ import { CartLoaderComponent } from './cart-loader/cart-loader.component';
     PaymentModeLoaderComponent,
     TravelerFormComponent,
     CartComponent,
-    CartLoaderComponent
+    CartLoaderComponent,
+    FullPageLoaderComponent
   ],
   providers: [DatePipe],
 

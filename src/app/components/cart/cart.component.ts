@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -15,9 +15,9 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes:SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
 
-    if(changes['carts']){
+    if (changes['carts']) {
       this.carts = changes['carts'].currentValue;
     }
   }

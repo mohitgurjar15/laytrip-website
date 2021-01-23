@@ -15,14 +15,14 @@
     </div>
   </div> -->
 
-  <div id="card_list_accodrio" class="accordion_cardss">
+  <div id="card_list_accodrio" class="accordion_cardss" *ngFor="let card of cards">
     <div class="card">
         <div class="card-header">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="true"
                 aria-controls="collapse11">
                 <span class="heade_wrps">
                   <img src="{{s3BucketUrl}}assets/images/master_cards_img.svg" alt="Card icon" /> 
-                  Mastercard ending in 2365
+                  {{card.cardType | titlecase}} ending in 2365
                 </span>
             </a>
         </div>
@@ -34,7 +34,7 @@
                             Name on Card
                         </div>
                         <div class="card_texter">
-                            Victor Pacheco
+                            {{ card.cardHolderName }}
                         </div>
                     </div>
                     <div class="col col-lg-4">

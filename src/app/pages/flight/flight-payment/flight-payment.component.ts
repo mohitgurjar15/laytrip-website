@@ -53,6 +53,7 @@ export class FlightPaymentComponent implements OnInit {
   travelers = [];
   carts = [];
   isValidData: boolean = false;
+  cartLoading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -84,6 +85,7 @@ export class FlightPaymentComponent implements OnInit {
         cart.module_info = items.data[i].moduleInfo[0];
         cart.id = items.data[i].id;
         this.carts.push(cart);
+        this.cartLoading = false;
         if (items.data[i].is_available) {
 
 

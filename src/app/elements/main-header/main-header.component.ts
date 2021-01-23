@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
@@ -10,7 +10,7 @@ import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { AuthComponent } from '../../pages/user/auth/auth.component';
 import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
- 
+
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
@@ -29,7 +29,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   userDetails;
   username;
   _isLayCredit = false;
-  countryCode:string;
+  countryCode: string;
+  isCovidPage = true;
 
   constructor(
     private genericService: GenericService,
@@ -37,7 +38,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public modalService: NgbModal,
     public router: Router,
     private commonFunction: CommonFunction,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    public cd: ChangeDetectorRef
   ) {
   }
 
@@ -56,6 +58,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.checkUser();
+    let host = window.location.href;
+    if (host.includes("covid-19")) {
+      this.isCovidPage = false;
+      this.cd.detectChanges();
+    }
     // this.userDetails = getLoginUserInfo();
     // this.totalLaycredit();
   }
