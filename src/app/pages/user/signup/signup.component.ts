@@ -83,8 +83,8 @@ export class SignupComponent implements OnInit {
  
     
   onSubmit() {
-  this.openOtpPage();
-  return;
+  // this.openOtpPage();
+  // return;
     this.submitted = this.loading  = true;   
     console.log(this.signupForm.controls)
     if (this.signupForm.invalid) {
