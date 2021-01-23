@@ -29,6 +29,9 @@ export class SignupComponent implements OnInit {
   cnfPassFieldTextType :  boolean;
   passFieldTextType :  boolean;
   apiError =  '';
+  is_email_available = false;
+  emailExist = false;
+
 
 
   constructor(
@@ -110,4 +113,21 @@ export class SignupComponent implements OnInit {
   socialError(error){
     this.apiError = error;
   } 
+
+  onSearchChange(searchValue: string): void {  
+    console.log(searchValue);
+  }
+  emailVeryfiying() {
+    console.log('value')
+    /* this.userService.emailVeryfiy(value).subscribe((data: any) => {
+      console.log(data)
+      if (data && data.is_available) {
+        this.is_email_available = data.is_available;
+        this.emailExist = true;
+      }
+      else {
+        this.emailExist = false;
+      }
+    }); */
+  }
 }

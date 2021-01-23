@@ -26,6 +26,8 @@ var SignupComponent = /** @class */ (function () {
         this.emailForVerifyOtp = '';
         this.loading = false;
         this.apiError = '';
+        this.is_email_available = false;
+        this.emailExist = false;
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signupForm = this.formBuilder.group({
@@ -90,6 +92,22 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.socialError = function (error) {
         this.apiError = error;
+    };
+    SignupComponent.prototype.onSearchChange = function (searchValue) {
+        console.log(searchValue);
+    };
+    SignupComponent.prototype.emailVeryfiying = function () {
+        console.log('value');
+        /* this.userService.emailVeryfiy(value).subscribe((data: any) => {
+          console.log(data)
+          if (data && data.is_available) {
+            this.is_email_available = data.is_available;
+            this.emailExist = true;
+          }
+          else {
+            this.emailExist = false;
+          }
+        }); */
     };
     __decorate([
         core_1.Input()
