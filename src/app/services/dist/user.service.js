@@ -152,6 +152,9 @@ var UserService = /** @class */ (function () {
         var data = { email: email };
         return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
     };
+    UserService.prototype.emailVeryfiy = function (email) {
+        return this.http.get(this.apiURL + "auth/verify-email-id?email=" + email, this.commonFunction.setHeaders());
+    };
     UserService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

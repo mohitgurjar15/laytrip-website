@@ -7,6 +7,7 @@
     "password_placholder": "Introducir la contraseña",
     "email_touched_validation": "Por favor, introduzca su dirección de correo electrónico.",
     "password_touched_validation": "Por favor, introduzca su contraseña.",
+    "email_exist_validation": "Tu correo electrónico ya existe.",
     "email_invalid_validation": "Por favor ingrese una dirección de correo electrónico válida.",
     "invalid_login_credentials": "¡Credenciales de acceso invalidos! Introduzca la dirección de correo electrónico y la contraseña correctas.",
     "account_disable": "Su cuenta ha sido inhabilitada. Póngase en contacto con la persona del administrador.",

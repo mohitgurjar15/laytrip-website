@@ -13,18 +13,33 @@ var forms_1 = require("@angular/forms");
 var must_match_validators_1 = require("../../../_helpers/must-match.validators");
 var custom_validators_1 = require("../../../_helpers/custom.validators");
 var ResetPasswordComponent = /** @class */ (function () {
-    function ResetPasswordComponent(formBuilder, userService, commonFunctoin) {
+    function ResetPasswordComponent(formBuilder, userService, commonFunctoin, activeModal) {
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.commonFunctoin = commonFunctoin;
+        this.activeModal = activeModal;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
+        this.spinner = false;
         this.loading = false;
         this.resetSuccess = false;
         this.apiMessage = '';
         this.resetPasswordSuccess = false;
         this.errorMessage = '';
+        this.isResend = false;
+        this.config = {
+            allowNumbersOnly: true,
+            length: 6,
+            isPasswordInput: false,
+            disableAutoFocus: false,
+            placeholder: '0',
+            inputStyles: {
+                'width': '64px',
+                'height': '64px'
+            }
+        };
+        this.configCountDown = { leftTime: 60, demand: false };
     }
     ResetPasswordComponent.prototype.ngOnInit = function () {
         this.resetForm = this.formBuilder.group({
@@ -98,6 +113,14 @@ var ResetPasswordComponent = /** @class */ (function () {
             $(tabIndex).focus();
             $('.tab' + event.target.tabIndex).val('');
         }
+    };
+    ResetPasswordComponent.prototype.timerComplete = function () {
+        this.isResend = true;
+        this.configCountDown = { leftTime: 60, demand: true };
+    };
+    ResetPasswordComponent.prototype.resendOtp = function () {
+    };
+    ResetPasswordComponent.prototype.onOtpChange = function (event) {
     };
     __decorate([
         core_1.Input()

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from '../../services/cart.service';
 import { environment } from '../../../environments/environment';
 
 @Component({

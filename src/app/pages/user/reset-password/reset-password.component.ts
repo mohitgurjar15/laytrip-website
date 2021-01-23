@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgbModal,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
@@ -22,6 +23,7 @@ export class ResetPasswordComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
   resetForm: FormGroup;
   submitted = false;
+  spinner: boolean = false;
   loading: boolean = false;
   resetSuccess: boolean = false;
   apiMessage =  '';
@@ -29,13 +31,26 @@ export class ResetPasswordComponent implements OnInit {
   errorMessage = '';
   cnfPassFieldTextType :  boolean;
   passFieldTextType :  boolean;
-
+  isResend :  boolean = false;
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: '0',
+    inputStyles: {
+      'width': '64px',
+      'height': '64px'
+    }
+  };
+  configCountDown : any = {leftTime: 60,demand: false};
 
  
   constructor(
     private formBuilder: FormBuilder,
     private userService : UserService,
-    public commonFunctoin: CommonFunction
+    public commonFunctoin: CommonFunction,
+    public activeModal: NgbActiveModal
   
   ) { }
 
@@ -75,6 +90,7 @@ export class ResetPasswordComponent implements OnInit {
 
     }
   }
+
   onSubmit() {
     let inputDataOtp: string = '';
 
@@ -119,4 +135,16 @@ export class ResetPasswordComponent implements OnInit {
       $('.tab'+event.target.tabIndex).val('');
     }
   }
+
+  timerComplete() {
+    this.isResend = true; 
+    this.configCountDown = {leftTime: 60,demand: true};
+  }
+
+  resendOtp(){
+
+  }
+  onOtpChange(event){
+  }
+  
 }

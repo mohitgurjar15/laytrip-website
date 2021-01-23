@@ -29,6 +29,9 @@ export class SignupComponent implements OnInit {
   cnfPassFieldTextType :  boolean;
   passFieldTextType :  boolean;
   apiError =  '';
+  is_email_available = false;
+  emailExist = false;
+
 
 
   constructor(
@@ -86,7 +89,6 @@ export class SignupComponent implements OnInit {
   // this.openOtpPage();
   // return;
     this.submitted = this.loading  = true;   
-    console.log(this.signupForm.controls)
     if (this.signupForm.invalid) {
       this.submitted = true;      
       this.loading = false;
@@ -102,5 +104,29 @@ export class SignupComponent implements OnInit {
         this.submitted = this.loading = false;
       });
     }
+  }
+
+  openSignInModal(){
+    $('#sign_up_modal').modal('hide');
+  }
+  socialError(error){
+    this.apiError = error;
+  } 
+
+  onSearchChange(searchValue: string): void {  
+    console.log(searchValue);
+  }
+  emailVeryfiying() {
+    console.log('value')
+    /* this.userService.emailVeryfiy(value).subscribe((data: any) => {
+      console.log(data)
+      if (data && data.is_available) {
+        this.is_email_available = data.is_available;
+        this.emailExist = true;
+      }
+      else {
+        this.emailExist = false;
+      }
+    }); */
   }
 }

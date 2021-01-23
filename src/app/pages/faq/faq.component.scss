@@ -1,0 +1,44 @@
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.block_cms_page_main{
+    .block_cmspage_comman{
+        @include tab-view{
+            padding: 15px;
+        }
+        .block_top{
+            text-align: left;
+            h6{
+                color: $blue-text;
+                font-size: 34px;
+                font-weight: 500;
+            }
+        }
+        .block_faq_info{
+            .block_text{
+                @include tab-view{
+                    width: 100%;
+                }
+                .block_heading{
+                    color: $text-black;
+                    font-weight: 500;
+                }
+                .card{
+                    .card-header{
+                        button{
+                            color: $mid_gray_bg;
+                        }
+                    }
+                }
+            }
+            .block_im{
+                @include tab-view{
+                        display: none;
+                }
+            }
+        }
+    }
+}

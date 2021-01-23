@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Renderer2 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { UserService } from '../../../services/user.service';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 declare var $: any;
 
@@ -38,7 +39,7 @@ export class SigninComponent  implements OnInit {
     private userService : UserService,
     public router: Router,
     public commonFunction:CommonFunction,
-
+    private renderer: Renderer2,
     ) { }    
 
 
@@ -128,6 +129,7 @@ export class SigninComponent  implements OnInit {
     $('#sign_in_modal').modal('hide');
     $('#sign_up_modal').modal('show');
     $("body").addClass("modal-open");
+    this.renderer.addClass(document.body, 'modal-open');
 
   }
 
@@ -136,5 +138,16 @@ export class SigninComponent  implements OnInit {
     const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true});
     (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }
+
+  openForgotPassModal() {
+    $('#sign_in_modal').modal('hide');
+    const modalRef = this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true});
+  }
+
+ /*  openResetPassModal() {
+    $('#sign_in_modal').modal('hide');
+    const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'resetpass_window', centered: true});
+    // (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
+  } */
 }
 

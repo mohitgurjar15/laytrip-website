@@ -195,4 +195,9 @@ export class UserService {
     const data = {email:email};
     return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
   }
+  
+  emailVeryfiy(email){
+    return this.http.get(`${this.apiURL}auth/verify-email-id?email=${email}`, this.commonFunction.setHeaders())
+  }
 }
+

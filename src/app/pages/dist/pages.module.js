@@ -86,7 +86,7 @@ var PagesModule = /** @class */ (function () {
                 ng_otp_input_1.NgOtpInputModule,
                 ngx_countdown_1.CountdownModule
             ],
-            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent],
+            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent, forgot_password_component_1.ForgotPasswordComponent],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
         })
     ], PagesModule);

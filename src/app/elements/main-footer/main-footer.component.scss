@@ -30,6 +30,10 @@
         color: $text-grey;
         font-weight: 400;
         margin-right: 30px;
+        @include tab-view{
+            margin: 0;
+            width: 95px;
+        }
         ul{
             &.dropdown-menu{
                 padding: 0;

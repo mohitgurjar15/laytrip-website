@@ -75,7 +75,7 @@ import { CountdownModule } from 'ngx-countdown';
     NgOtpInputModule,
     CountdownModule
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, AuthComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, AuthComponent,ForgotPasswordComponent,ResetPasswordComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }
