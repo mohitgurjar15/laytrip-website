@@ -72,9 +72,10 @@ export class VerifyOtpComponent implements OnInit {
 
   onOtpChange(event){
     this.otp = event;
-    // this.otpForm.controls.otp.setValue(event);
-    this.ngOtpInputRef.setValue(event);
-    console.log(this.otpForm,this)
+    if(event.length == 6){
+      this.otpForm.controls.otp.setValue(event);
+      this.ngOtpInputRef.setValue(event);
+    }
   }
 
   closeModal(){
@@ -99,16 +100,11 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   resendOtp(){
-    // this.counter.begin();
-    // return;
-    console.log(this.emailForVerifyOtp,this.otpForm)
     this.ngOtpInputRef.setValue('');
-    // this.otpForm.controls.otp.setValue(this.otp);
     // this.otpForm.reset();
     this.spinner = true;
     this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
-      this.spinner = false;
-      this.isResend = false;
+      this.spinner = this.isResend = false;
       this.counter.begin();
     }, (error: HttpErrorResponse) => {       
       this.submitted = this.spinner = false;
@@ -142,14 +138,15 @@ export class VerifyOtpComponent implements OnInit {
       this.userService.verifyOtp(data).subscribe((data: any) => {
         this.otpVerified = true;  
         this.submitted = this.loading = false;    
-        $('#sign_in_modal').modal('hide');
+        // $('#sign_in_modal').modal('hide');
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         const userDetails = getLoginUserInfo();    
         const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
         if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
           this.router.navigate(['account/subscription']);
         } else {
-          $('#sign_in_modal').modal('show');
+          // this.activeModal.close();
+          // $('#sign_in_modal').modal('show');
           // this.valueChange.emit({ key: 'signIn', value: true}); 
         }
 

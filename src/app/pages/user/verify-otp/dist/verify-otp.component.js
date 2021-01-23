@@ -53,9 +53,10 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.onOtpChange = function (event) {
         this.otp = event;
-        // this.otpForm.controls.otp.setValue(event);
-        this.ngOtpInputRef.setValue(event);
-        console.log(this.otpForm, this);
+        if (event.length == 6) {
+            this.otpForm.controls.otp.setValue(event);
+            this.ngOtpInputRef.setValue(event);
+        }
     };
     VerifyOtpComponent.prototype.closeModal = function () {
         this.valueChange.emit({ key: 'signIn', value: true });
@@ -76,16 +77,11 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.resendOtp = function () {
         var _this = this;
-        // this.counter.begin();
-        // return;
-        console.log(this.emailForVerifyOtp, this.otpForm);
         this.ngOtpInputRef.setValue('');
-        // this.otpForm.controls.otp.setValue(this.otp);
         // this.otpForm.reset();
         this.spinner = true;
         this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
-            _this.spinner = false;
-            _this.isResend = false;
+            _this.spinner = _this.isResend = false;
             _this.counter.begin();
         }, function (error) {
             _this.submitted = _this.spinner = false;
@@ -116,7 +112,7 @@ var VerifyOtpComponent = /** @class */ (function () {
             this.userService.verifyOtp(data).subscribe(function (data) {
                 _this.otpVerified = true;
                 _this.submitted = _this.loading = false;
-                $('#sign_in_modal').modal('hide');
+                // $('#sign_in_modal').modal('hide');
                 localStorage.setItem("_lay_sess", data.userDetails.access_token);
                 var userDetails = jwt_helper_1.getLoginUserInfo();
                 var _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
@@ -124,7 +120,8 @@ var VerifyOtpComponent = /** @class */ (function () {
                     _this.router.navigate(['account/subscription']);
                 }
                 else {
-                    $('#sign_in_modal').modal('show');
+                    // this.activeModal.close();
+                    // $('#sign_in_modal').modal('show');
                     // this.valueChange.emit({ key: 'signIn', value: true}); 
                 }
             }, function (error) {
