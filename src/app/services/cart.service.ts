@@ -37,12 +37,12 @@ export class CartService {
     this.cartItems.next(cartItem);
   }
 
-  getCartList() {
+  getCartList(live_availiblity='no') {
     let headers = {
       currency: 'USD',
       language: 'en'
     }
-    return this.http.get(`${environment.apiUrl}v1/cart/list`, this.commonFunction.setHeaders(headers))
+    return this.http.get(`${environment.apiUrl}v1/cart/list?live_availiblity=${live_availiblity}`, this.commonFunction.setHeaders(headers))
       .pipe(
         catchError(this.handleError)
       );

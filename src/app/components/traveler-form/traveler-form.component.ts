@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,  ViewChild } from '@angular/core';
+import { Component, OnInit, Input,  ViewChild, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder,  FormArray, Validators, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
@@ -87,6 +87,10 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name=traveler.firstName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name=traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email=traveler.email;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId=traveler.userId;
+
+        //this.travelers= Object.assign({},this.travelers)
+        
         this.patch()
       }
     })
@@ -94,9 +98,9 @@ export class TravelerFormComponent implements OnInit {
     
   }
 
-  /* ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     
-  } */
+  }
 
   patch() {
     let control:any = <FormArray>this.travelerForm.get(`type${this.cartNumber}.adults`);
@@ -115,7 +119,8 @@ export class TravelerFormComponent implements OnInit {
       phone_number: [x.phone_number],
       dob: [x.dob],
       country:[x.country],
-      gender:[x.gender]
+      gender:[x.gender],
+      userId:[x.userId]
     })
   }
 
@@ -127,4 +132,5 @@ export class TravelerFormComponent implements OnInit {
   typeOf(value) {
     return typeof value;
   }
+  
 }

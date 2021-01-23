@@ -75,7 +75,7 @@ export class FlightPaymentComponent implements OnInit {
       this.getTravelers();
     }
 
-    this.cartService.getCartList().subscribe((items: any) => {
+    /* this.cartService.getCartList('yes').subscribe((items: any) => {
       let notAvilableItems = [];
       let cart: any;
       for (let i = 0; i < items.data.length; i++) {
@@ -95,21 +95,21 @@ export class FlightPaymentComponent implements OnInit {
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
-    });
+    }); */
 
     let __route = sessionStorage.getItem('__route');
     try {
       let response = JSON.parse(__route);
       response[0] = response;
       this.flightSummary = response;
-      // this.carts[0]={
-      //   type : 'flight',
-      //   module_info:this.flightSummary
-      // };
-      // this.carts[1]={
-      //   type : 'flight',
-      //   module_info:this.flightSummary
-      // }; 
+      this.carts[0]={
+        type : 'flight',
+        module_info:this.flightSummary
+      };
+      this.carts[1]={
+        type : 'flight',
+        module_info:this.flightSummary
+      }; 
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
