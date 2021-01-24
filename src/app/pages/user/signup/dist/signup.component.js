@@ -61,7 +61,7 @@ var SignupComponent = /** @class */ (function () {
             this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
         }
     };
-    SignupComponent.prototype.resolved = function (captchaResponse) {
+    SignupComponent.prototype.captchaResponse = function (response) {
         this.isCaptchaValidated = true;
     };
     SignupComponent.prototype.onSubmit = function () {

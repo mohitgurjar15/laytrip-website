@@ -74,11 +74,10 @@ export class SignupComponent implements OnInit {
       
     }else if(event.target.id == 'cnfEye'){
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
-
     }
   } 
 
-  resolved(captchaResponse: string) {
+  captchaResponse(response: string) {
     this.isCaptchaValidated = true;
   }
     

@@ -128,8 +128,10 @@ export class SigninComponent  implements OnInit {
   btnSignUpClick(){
     $('#sign_in_modal').modal('hide');
     $('#sign_up_modal').modal('show');
-    $("body").addClass("modal-open");
-    this.renderer.addClass(document.body, 'modal-open');
+    $("#signup-form").trigger( "reset" );
+    setTimeout(() => {
+      this.renderer.addClass(document.body, 'modal-open');
+    }, 2000);
 
   }
 
@@ -141,13 +143,7 @@ export class SigninComponent  implements OnInit {
 
   openForgotPassModal() {
     $('#sign_in_modal').modal('hide');
-    const modalRef = this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true});
+    this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true});
   }
-
- /*  openResetPassModal() {
-    $('#sign_in_modal').modal('hide');
-    const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'resetpass_window', centered: true});
-    // (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
-  } */
 }
 

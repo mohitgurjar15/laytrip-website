@@ -71,7 +71,7 @@ export class ResetPasswordComponent implements OnInit {
 
   openSignInPage() {
     this.activeModal.close();
-    $('#sign_in_modal').modal('hide');    
+    $('#sign_in_modal').modal('show');    
   }
 
   toggleFieldTextType(event){
@@ -83,7 +83,8 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    console.log(this.otp)
+    console.log(this.ngOtpInputRef)
     this.submitted = this.loading = true;
     
     if (this.resetForm.invalid && this.resetForm.hasError('otpsError')) {     
@@ -100,7 +101,8 @@ export class ResetPasswordComponent implements OnInit {
       this.userService.resetPassword(request_param).subscribe((data: any) => {
         this.submitted = false;    
         this.resetSuccess = true;
-      }, (error: HttpErrorResponse) => {   
+      }, (error: HttpErrorResponse) => {  
+        console.log(error) 
         this.resetSuccess = this.submitted = this.loading  = false;
         this.apiMessage = error.error.message;
       });
@@ -127,10 +129,14 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onOtpChange(event){
-    this.otp = event;
+    console.log(event)
     if(event.length == 6){
+      this.otp = event;
+      console.log(event.length)
+      console.log(this.otp)
       this.resetForm.controls.otp.setValue(event);
       this.ngOtpInputRef.setValue(event);
+      
     }
   }
   

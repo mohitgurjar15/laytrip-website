@@ -53,7 +53,7 @@ var ResetPasswordComponent = /** @class */ (function () {
     };
     ResetPasswordComponent.prototype.openSignInPage = function () {
         this.activeModal.close();
-        $('#sign_in_modal').modal('hide');
+        $('#sign_in_modal').modal('show');
     };
     ResetPasswordComponent.prototype.toggleFieldTextType = function (event) {
         if (event.target.id == 'passEye') {
@@ -65,6 +65,8 @@ var ResetPasswordComponent = /** @class */ (function () {
     };
     ResetPasswordComponent.prototype.onSubmit = function () {
         var _this = this;
+        console.log(this.otp);
+        console.log(this.ngOtpInputRef);
         this.submitted = this.loading = true;
         if (this.resetForm.invalid && this.resetForm.hasError('otpsError')) {
             this.loading = false;
@@ -82,6 +84,7 @@ var ResetPasswordComponent = /** @class */ (function () {
                 _this.submitted = false;
                 _this.resetSuccess = true;
             }, function (error) {
+                console.log(error);
                 _this.resetSuccess = _this.submitted = _this.loading = false;
                 _this.apiMessage = error.error.message;
             });
@@ -106,8 +109,11 @@ var ResetPasswordComponent = /** @class */ (function () {
         });
     };
     ResetPasswordComponent.prototype.onOtpChange = function (event) {
-        this.otp = event;
+        console.log(event);
         if (event.length == 6) {
+            this.otp = event;
+            console.log(event.length);
+            console.log(this.otp);
             this.resetForm.controls.otp.setValue(event);
             this.ngOtpInputRef.setValue(event);
         }
