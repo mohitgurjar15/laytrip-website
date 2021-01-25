@@ -9,6 +9,7 @@ import { CheckOutService } from '../../services/checkout.service';
 import { travelersFileds } from '../../_helpers/traveller.helper';
 import { CartService } from '../../services/cart.service';
 declare var $: any;
+import * as moment from 'moment';
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',
@@ -37,6 +38,7 @@ export class TravelerFormComponent implements OnInit {
       adults : []
     }
   };
+  dobMinDate= new Date();
   
   constructor(
     private formBuilder: FormBuilder,
@@ -88,6 +90,8 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name=traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email=traveler.email;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId=traveler.userId;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender=traveler.gender;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob).format('MMM d, yy');
 
         //this.travelers= Object.assign({},this.travelers)
         

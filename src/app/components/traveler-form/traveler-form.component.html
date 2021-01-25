@@ -48,8 +48,8 @@
                   <div class="col">
                     <label for="">Gender*</label>
                     <select class="form-control" formControlName="gender">
-                      <option>Male</option>
-                      <option>Female</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
                     </select>
                   </div>
                 </div>
@@ -64,7 +64,9 @@
                   </div>
                   <div class="col dobs">
                     <label for="">Date of birth*</label>
-                    <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
+                    <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
+                    <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="calender-price-view" inputStyleClass="custom_datpicker birth_date" inputId="basic"  formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020" placeholder="Date of birth" [defaultDate]="dobMinDate">
+                    </p-calendar>
                   </div>
                 </div>
                 <div class="form-row mt-3">
