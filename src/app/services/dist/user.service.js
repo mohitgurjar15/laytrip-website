@@ -56,7 +56,6 @@ var UserService = /** @class */ (function () {
             "app_version": "1.0",
             "os_version": "7.0"
         };
-        console.log(data);
         return this.http.post(this.apiURL + 'v1/auth/signup', data)
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
@@ -71,7 +70,7 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.forgotPassword = function (formValue) {
         var data = {
-            "email": formValue.email
+            "email": typeof formValue.email != 'undefined' ? formValue.email : formValue
         };
         return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
@@ -151,6 +150,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.subscribeNow = function (email) {
         var data = { email: email };
         return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
+    };
+    UserService.prototype.emailVeryfiy = function (email) {
+        return this.http.get(this.apiURL + "v1/auth/verify-email-id?email=" + email, this.commonFunction.setHeaders());
     };
     UserService = __decorate([
         core_1.Injectable({

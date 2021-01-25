@@ -181,6 +181,5 @@ export class MainFooterComponent implements OnInit {
 
   openShare() {
     const modalRef = this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true });
-    modalRef.componentInstance.name = 'World';
   }
 }

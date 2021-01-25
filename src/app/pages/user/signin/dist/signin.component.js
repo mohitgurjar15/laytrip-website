@@ -12,13 +12,15 @@ var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
+var forgot_password_component_1 = require("../forgot-password/forgot-password.component");
 var SigninComponent = /** @class */ (function () {
-    function SigninComponent(modalService, formBuilder, userService, router, commonFunction) {
+    function SigninComponent(modalService, formBuilder, userService, router, commonFunction, renderer) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
         this.commonFunction = commonFunction;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.signUpModal = false;
         this.signInModal = true;
@@ -108,14 +110,22 @@ var SigninComponent = /** @class */ (function () {
         this.apiError = error;
     };
     SigninComponent.prototype.btnSignUpClick = function () {
+        var _this = this;
         $('#sign_in_modal').modal('hide');
         $('#sign_up_modal').modal('show');
-        $("body").addClass("modal-open");
+        $("#signup-form").trigger("reset");
+        setTimeout(function () {
+            _this.renderer.addClass(document.body, 'modal-open');
+        }, 2000);
     };
     SigninComponent.prototype.openOtpPage = function () {
         $('#sign_in_modal').modal('hide');
         var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
+    };
+    SigninComponent.prototype.openForgotPassModal = function () {
+        $('#sign_in_modal').modal('hide');
+        this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true });
     };
     __decorate([
         core_1.Input()

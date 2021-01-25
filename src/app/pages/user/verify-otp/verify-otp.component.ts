@@ -40,7 +40,7 @@ export class VerifyOtpComponent implements OnInit {
       'height': '64px'
     }
   };
-  isResend = false;
+  isResend : boolean = false;
   @ViewChild('ngOtpInput',{static:false}) ngOtpInputRef:any;//Get reference using ViewChild and the specified hash
   @ViewChild('countdown',{static:false}) counter: CountdownComponent;
   otp:number=0;
@@ -67,7 +67,6 @@ export class VerifyOtpComponent implements OnInit {
   timerComplete() {
     this.isResend = true; 
     this.configCountDown = {leftTime: 60,demand: true};
-
   }
 
   onOtpChange(event){
@@ -93,10 +92,7 @@ export class VerifyOtpComponent implements OnInit {
   }
   
   openSignInPage() {
-    $('.modal_container').removeClass('right-panel-active');
-    $('.forgotpassword-container').removeClass('show_forgotpass');
-    this.pageData = true;
-    this.valueChange.emit({ key: 'signIn', value: this.pageData });
+   
   }
 
   resendOtp(){

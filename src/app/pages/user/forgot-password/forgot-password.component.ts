@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 declare var $: any;
 
 @Component({
@@ -21,13 +22,15 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   forgotModal = false;
   loading: boolean = false;
   apiMessage =  '';
+  forgotEmail =  '';
   forgotPasswordSuccess : boolean = false;
 
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private userService : UserService  
-      ) { }
+    private userService : UserService,
+    public activeModal: NgbActiveModal
+  ) { }
 
 
   ngOnInit() {
@@ -69,14 +72,18 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
       this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
         this.submitted = false;    
         this.forgotPasswordSuccess = true;
-        this.valueChange.emit({ key: 'reset-password', value: true,emailForVerifyOtp:this.forgotForm.value.email,isReset:true });  
-        $('.modal_container').addClass('right-panel-active');
-        $('.resetpass-container').addClass('show_resetpass');
+        this.forgotEmail = this.forgotForm.value.email;
+        this.openResetModal();
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading  = false;
         this.apiMessage = error.message;
-
       }); 
     }
+  }
+
+  openResetModal(){
+    this.activeModal.close();
+    const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'forgot_window', centered: true});
+    (<ResetPasswordComponent>modalRef.componentInstance).emailForVerifyOtp = this.forgotEmail;
   }
 }

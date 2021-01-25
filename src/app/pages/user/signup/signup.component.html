@@ -78,23 +78,23 @@
 				<div class="modal_top">
 					<div class="modal_title">
                         <div class="block_im">
-                            <img src="{{s3BucketUrl}}assets/images/popup_im.png" alt="image">
+                            <img src="{{s3BucketUrl}}assets/images/modal_head_im.png" alt="image">
                         </div>
 						<h4>{{'sign_up' | translate}}</h4>
 					</div>
 				</div>
 				<div class="modal_cnt">
-					<form [formGroup]="signupForm">
+					<form id="signup-form" [formGroup]="signupForm">
 						<div class="form_row">
 							<div class="text_field half">
-								<input  type="text" formControlName="first_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}" maxlength="20" tabindex="1" placeholder="{{'first_name' | translate}}">
+								<input  type="text" formControlName="first_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}" maxlength="25" tabindex="1" placeholder="{{'first_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors">
                                     <div *ngIf="signupForm.controls.first_name.errors.required">{{'first_name_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.first_name.errors.pattern" class="error_text">{{'first_name_string_validation' | translate}}</div>
                                 </div>
                             </div>
                             <div class="text_field half">
-								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="20" tabindex="2"  placeholder="{{'last_name' | translate}}">
+								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="25" tabindex="2"  placeholder="{{'last_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
                                     <div *ngIf="signupForm.controls.last_name.errors.required">{{'last_name_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.last_name.errors.pattern" class="error_text">{{'last_name_string_validation' | translate}}</div>
@@ -103,16 +103,20 @@
 						</div>
 						<div class="form_row">
 							<div class="text_field">
-								<input  type="email" [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}" formControlName="email" maxlength="20" tabindex="3"  placeholder="{{'email' | translate}}">
+                                <input #email type="email" (input)="checkEmailExist($event.target.value)"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}"
+                                 formControlName="email" maxlength="50" tabindex="3"  placeholder="{{'email' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.email.touched) && signupForm.controls.email.errors">
                                     <div *ngIf="signupForm.controls.email.errors.required">{{'email_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.email.errors.pattern">{{'email_invalid_validation' | translate}}</div>
+                                </div>
+                                <div class="error_text" *ngIf="emailExist">
+                                    {{'email_exist_validation'|translate}}
                                 </div>
 							</div>
 						</div>					
 						<div class="form_row">
 							<div class="text_field pass_show">
-								<input [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'"  formControlName="password" maxlength="20" tabindex="4"  placeholder="{{'password' | translate}}">
+								<input [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'"  formControlName="password" maxlength="50" tabindex="4"  placeholder="{{'password' | translate}}">
                                 <span class="ptxt"><i id="passEye"
                                     [ngClass]="passFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -125,7 +129,7 @@
 						</div>					
 						<div class="form_row">
 							<div class="text_field pass_show">
-								<input   [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="20" tabindex="5"  placeholder="{{'confirm_password' | translate}}">
+								<input   [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="5"  placeholder="{{'confirm_password' | translate}}">
                                 <span class="ptxt"><i id="cnfEye"
                                     [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -139,39 +143,40 @@
 						<div class="form_row last">
                             <div class="check">
                                 <label class="custom_checkbox">
-                                    <input  formControlName="checked" tabindex="6" type="checkbox" value="">
+                                    <input (change)="checkAccept($event)" formControlName="checked" tabindex="6" type="checkbox">
                                     <span class="checkmark"></span>  
-                                    
                                 </label>
                                 <div>
-                                    {{'already_account' | translate }}<a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
+                                    {{'already_account' | translate }} <a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
                                 </div>
                             </div>
+                            <div *ngIf="(submitted || signupForm.controls.checked.touched) && signupForm.controls.checked.errors" class="error_text">
+                                <div>{{'checked_touched_validaion' | translate}}</div>
+                            </div>  
                         </div>
-                        <div class="error_text" *ngIf="(submitted || signupForm.controls.checked.touched) && signupForm.controls.checked.errors">
-                            <div *ngIf="signupForm.controls.checked.errors.required">{{'checked_touched_validaion' | translate}}</div>
+                        
+                        <div class="form_row">
+                            <div class="text_field">
+                                <re-captcha (resolved)="captchaResponse($event)" tabindex="7" siteKey="6LcPUboZAAAAAN1Sh411ruqdmT4OD6ZDe65rTsVO"></re-captcha>
+                                <div class="error_text" *ngIf="!isCaptchaValidated && submitted">{{ 're_captcha_error_message' | translate }}</div>
+                            </div>
                         </div> 
                         <div class="form_btn">
-                            <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                            <button type="submit" [disabled]="!signupForm.valid" [ngClass]="{'btn_disable':!signupForm.valid}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
                             </button>
+                        </div>
+                        <div class="block_api_error" *ngIf="apiError.length > 0">
+                            {{apiError}}
                         </div>
 					</form>
                     <div class="modal_btm">
                         <div class="border_block"><span>Or</span></div>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/apple.svg" alt="Apple"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/google.svg" alt="Google"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/icon/facebook.svg" alt="Facebook"></a>
-                            </li>
-                        </ul>
-                        <p>Dont't have an account? <a href="javascript:void(0);" class="signIn" data-toggle="modal" 
-                            data-target="#sign_in_modal" >{{'sign_in' | translate}}</a></p>
+                        <app-social-login (socialError)="socialError($event)"></app-social-login>
+
+                        <p>Dont't have an account? <a (click)="openSignInModal()" class="signIn hover-link" data-toggle="modal" 
+                            data-target="#sign_in_modal" data-dismiss="modal">{{'sign_in' | translate}}</a></p>
+
                         <div class="block_logo">
                             <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
                         </div>

@@ -26,6 +26,10 @@ var SignupComponent = /** @class */ (function () {
         this.emailForVerifyOtp = '';
         this.loading = false;
         this.apiError = '';
+        this.is_email_available = false;
+        this.emailExist = false;
+        this.isCaptchaValidated = false;
+        this.message = "";
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signupForm = this.formBuilder.group({
@@ -39,12 +43,7 @@ var SignupComponent = /** @class */ (function () {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
         this.signupForm.reset();
-    };
-    SignupComponent.prototype.openSignInPage = function () {
-        $('.modal_container').removeClass('right-panel-active');
-        $('.forgotpassword-container').removeClass('show_forgotpass');
-        this.pageData = true;
-        this.valueChange.emit({ key: 'signIn', value: this.pageData });
+        this.signupForm.controls.checked.setValue(false);
     };
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
@@ -63,13 +62,16 @@ var SignupComponent = /** @class */ (function () {
             this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
         }
     };
+    SignupComponent.prototype.captchaResponse = function (response) {
+        this.isCaptchaValidated = true;
+    };
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
         // this.openOtpPage();
         // return;
+        console.log(this.signupForm);
         this.submitted = this.loading = true;
-        console.log(this.signupForm.controls);
-        if (this.signupForm.invalid) {
+        if (this.signupForm.invalid || !this.isCaptchaValidated) {
             this.submitted = true;
             this.loading = false;
             return;
@@ -82,6 +84,35 @@ var SignupComponent = /** @class */ (function () {
             }, function (error) {
                 _this.apiError = error.message;
                 _this.submitted = _this.loading = false;
+            });
+        }
+    };
+    SignupComponent.prototype.openSignInModal = function () {
+        $('#sign_up_modal').modal('hide');
+    };
+    SignupComponent.prototype.socialError = function (error) {
+        this.apiError = error;
+    };
+    SignupComponent.prototype.checkAccept = function (event) {
+        if (event.target.checked) {
+            this.signupForm.controls.checked.setValue(true);
+        }
+        else {
+            this.signupForm.controls.checked.setValue(false);
+        }
+    };
+    SignupComponent.prototype.checkEmailExist = function (emailString) {
+        var _this = this;
+        if (emailString.toString().length >= 3) {
+            this.userService.emailVeryfiy(emailString).subscribe(function (data) {
+                console.log(data);
+                if (data && data.is_available) {
+                    _this.is_email_available = data.is_available;
+                    _this.emailExist = true;
+                }
+                else {
+                    _this.emailExist = false;
+                }
             });
         }
     };

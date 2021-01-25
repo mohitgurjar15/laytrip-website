@@ -13,7 +13,7 @@ export class CheckOutService {
     private traveler = new BehaviorSubject({});
     getTraveler = this.traveler.asObservable();
 
-    private traveler_number = new BehaviorSubject({});
+    private traveler_number = new BehaviorSubject(0);
     getTravelerNumber = this.traveler_number.asObservable();
 
     private travelers = new BehaviorSubject([]);

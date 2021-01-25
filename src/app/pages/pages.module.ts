@@ -33,6 +33,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { CmsPagesComponent } from './cms-pages/cms-pages.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { CountdownModule } from 'ngx-countdown';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -73,9 +74,10 @@ import { CountdownModule } from 'ngx-countdown';
     // NG5 SLIDER
     Ng5SliderModule,
     NgOtpInputModule,
-    CountdownModule
+    CountdownModule,
+    RecaptchaModule
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, AuthComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, AuthComponent,ForgotPasswordComponent,ResetPasswordComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }

@@ -69,7 +69,6 @@ export class UserService {
       "app_version": "1.0",
       "os_version": "7.0",
     };
-    console.log(data)
 
     return this.http.post(this.apiURL + 'v1/auth/signup', data)
       .pipe(
@@ -96,7 +95,7 @@ export class UserService {
 
   forgotPassword(formValue) {
     let data = {
-      "email": formValue.email,
+      "email": typeof formValue.email != 'undefined' ? formValue.email : formValue,
     };
     return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
       .pipe(
@@ -195,4 +194,9 @@ export class UserService {
     const data = {email:email};
     return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
   }
+  
+  emailVeryfiy(email){
+    return this.http.get(`${this.apiURL}v1/auth/verify-email-id?email=${email}`, this.commonFunction.setHeaders())
+  }
 }
+

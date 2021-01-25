@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, SimpleChanges,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges,EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { CheckOutService } from '../../services/checkout.service'
 @Component({
   selector: 'app-my-traveler',
@@ -9,34 +9,38 @@ export class MyTravelerComponent implements OnInit {
 
   @Input() travelers;
   @Input() traveler_number;
-  selectedTraveler:string='123';
+  @Input() travelerId;
+  traveler:any={}
   constructor(
     private checkOutService:CheckOutService
   ) { }
 
   ngOnInit(): void {
+    console.log("Helllo", this.travelerId)
+    /* if(this.travelerId){
+      this.selectedTraveler=this.travelerId;
+    } */
     this.checkOutService.getTravelers.subscribe(travelers => this.travelers=travelers)
     
   }
 
-  selectTraveler(userId){
+  selectTraveler(traveler){
+    //console.log("My traveler",traveler)
 
-    this.selectedTraveler=userId;
-    console.log(this.selectedTraveler)
-    let traveler = this.travelers.find(item=> item.userId==userId)
-    traveler['traveler_number']=this.traveler_number
+    traveler.traveler_number=this.traveler_number;
+
+    this.travelerId=traveler.userId;
+
+    //console.log(this.selectedTraveler,"Selected traveler:::::")
+
+    //setTimeout(()=>{this.checkOutService.selectTraveler(traveler)},100)
     this.checkOutService.selectTraveler(traveler)
-  }
-
-  removeTraveler(userId){
-    this.selectedTraveler='';
-    let  traveler = { traveler_number: this.traveler_number };
-    this.checkOutService.selectTraveler(traveler)
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
     
   }
 
-  
+  removeTraveler(userId){
+    /* this.selectedTraveler='';
+    let  traveler = { traveler_number: this.traveler_number };
+    this.checkOutService.selectTraveler(traveler) */
+  }
 }

@@ -69,6 +69,7 @@ var ContactUsComponent = /** @class */ (function () {
             formValue.country_code = formValue.country_code.id;
         }
         this.genericService.createEnquiry(formValue).subscribe(function (res) {
+            $('#contact_modal').modal('hide');
             _this.loading = false;
             _this.toastr.success(res.message, 'Success');
             _this.ngOnInit();

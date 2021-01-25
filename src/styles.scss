@@ -4628,37 +4628,4 @@ body {
     }
   }
 }
-.otp_window {
-  .modal-content {
-    border-radius: 10px;
-  }
-}
-.modal_otp_block {
-  .modal-body {
-    .form_row {
-      .text_field {
-        ng-otp-input {
-          .ng-star-inserted {
-            width: 100%;
-            min-height: auto !important;
-            display: flex;
-            justify-content: center;
 
-            input {
-              border-radius: 50%;
-              font-size: 27px;
-              color: $mid_gray_bg;
-
-              @include mobile-view {
-                width: 36px !important;
-                height: 36px !important;
-                margin: 0 4px;
-                font-size: 20px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}

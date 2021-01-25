@@ -29,6 +29,10 @@ export class SignupComponent implements OnInit {
   cnfPassFieldTextType :  boolean;
   passFieldTextType :  boolean;
   apiError =  '';
+  is_email_available = false;
+  emailExist = false;
+  public isCaptchaValidated: boolean = false;
+  public message: string = "";
 
 
   constructor(
@@ -39,7 +43,7 @@ export class SignupComponent implements OnInit {
     ) {}
 
   ngOnInit() {    
-    
+
     this.signupForm = this.formBuilder.group({
       first_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       last_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
@@ -51,14 +55,9 @@ export class SignupComponent implements OnInit {
       validators: MustMatch('password', 'confirm_password'),     
     });
     this.signupForm.reset();
-  }  
+    this.signupForm.controls.checked.setValue(false);
 
-  openSignInPage() {
-    $('.modal_container').removeClass('right-panel-active');
-    $('.forgotpassword-container').removeClass('show_forgotpass');
-    this.pageData = true;
-    this.valueChange.emit({ key: 'signIn', value: this.pageData });
-  }
+  }  
 
   openOtpPage() {
     $('#sign_up_modal').modal('hide');
@@ -77,17 +76,20 @@ export class SignupComponent implements OnInit {
       
     }else if(event.target.id == 'cnfEye'){
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
-
     }
   } 
- 
+
+  captchaResponse(response: string) {
+    this.isCaptchaValidated = true;
+  }
     
   onSubmit() {
   // this.openOtpPage();
   // return;
+    console.log(this.signupForm)
+
     this.submitted = this.loading  = true;   
-    console.log(this.signupForm.controls)
-    if (this.signupForm.invalid) {
+    if (this.signupForm.invalid || !this.isCaptchaValidated) {
       this.submitted = true;      
       this.loading = false;
       return;
@@ -101,6 +103,36 @@ export class SignupComponent implements OnInit {
         this.apiError = error.message;
         this.submitted = this.loading = false;
       });
+    }
+  }
+
+  openSignInModal(){
+    $('#sign_up_modal').modal('hide');
+  }
+  socialError(error){
+    this.apiError = error;
+  } 
+
+  checkAccept(event){
+    if(event.target.checked){
+      this.signupForm.controls.checked.setValue(true);
+    } else {
+      this.signupForm.controls.checked.setValue(false);
+    }
+  }  
+  
+  checkEmailExist(emailString) {
+    if(emailString.toString().length >= 3){
+      this.userService.emailVeryfiy(emailString).subscribe((data: any) => {
+        console.log(data)
+        if (data && data.is_available) {
+          this.is_email_available = data.is_available;
+          this.emailExist = true;
+        }
+        else {
+          this.emailExist = false;
+        }
+      }); 
     }
   }
 }
