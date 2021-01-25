@@ -27,7 +27,7 @@
                   </a>
                 </button>
               </div>
-              <app-my-traveler [travelers]="travelers" traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler [travelers]="travelers" travelerId={{traveler.controls.userId.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -157,7 +157,7 @@
                 <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
                 <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
               </div>
-              <app-my-traveler [travelers]="travelers" traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler [travelers]="travelers"  traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
