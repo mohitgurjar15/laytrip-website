@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
     ) {}
 
   ngOnInit() {    
-    
+
     this.signupForm = this.formBuilder.group({
       first_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       last_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
@@ -55,6 +55,8 @@ export class SignupComponent implements OnInit {
       validators: MustMatch('password', 'confirm_password'),     
     });
     this.signupForm.reset();
+    this.signupForm.controls.checked.setValue(false);
+
   }  
 
   openOtpPage() {
@@ -84,12 +86,10 @@ export class SignupComponent implements OnInit {
   onSubmit() {
   // this.openOtpPage();
   // return;
-    if (this.isCaptchaValidated == false) {
-      this.message = "You are robot!";
-      return;
-    }
+    console.log(this.signupForm)
+
     this.submitted = this.loading  = true;   
-    if (this.signupForm.invalid) {
+    if (this.signupForm.invalid || !this.isCaptchaValidated) {
       this.submitted = true;      
       this.loading = false;
       return;
@@ -113,20 +113,26 @@ export class SignupComponent implements OnInit {
     this.apiError = error;
   } 
 
-  onSearchChange(searchValue: string): void {  
-    console.log(searchValue);
-  }
-  emailVeryfiying() {
-    console.log('value')
-    /* this.userService.emailVeryfiy(value).subscribe((data: any) => {
-      console.log(data)
-      if (data && data.is_available) {
-        this.is_email_available = data.is_available;
-        this.emailExist = true;
-      }
-      else {
-        this.emailExist = false;
-      }
-    }); */
+  checkAccept(event){
+    if(event.target.checked){
+      this.signupForm.controls.checked.setValue(true);
+    } else {
+      this.signupForm.controls.checked.setValue(false);
+    }
+  }  
+  
+  checkEmailExist(emailString) {
+    if(emailString.toString().length >= 3){
+      this.userService.emailVeryfiy(emailString).subscribe((data: any) => {
+        console.log(data)
+        if (data && data.is_available) {
+          this.is_email_available = data.is_available;
+          this.emailExist = true;
+        }
+        else {
+          this.emailExist = false;
+        }
+      }); 
+    }
   }
 }
