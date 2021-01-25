@@ -84,7 +84,7 @@
 					</div>
 				</div>
 				<div class="modal_cnt">
-					<form [formGroup]="signupForm">
+					<form id="signup-form" [formGroup]="signupForm">
 						<div class="form_row">
 							<div class="text_field half">
 								<input  type="text" formControlName="first_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}" maxlength="20" tabindex="1" placeholder="{{'first_name' | translate}}">
@@ -155,10 +155,19 @@
                             </div> 
                         </div>
                         
+                        <div class="form_row">
+                            <div class="text_field">
+                                <re-captcha (resolved)="captchaResponse($event)" siteKey="6LcPUboZAAAAAN1Sh411ruqdmT4OD6ZDe65rTsVO"></re-captcha>
+                                <div class="error_text" *ngIf="!isCaptchaValidated">{{ message }}</div>
+                            </div>
+                        </div> 
                         <div class="form_btn">
-                            <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                            <button type="submit" [disabled]="signupForm.valid" [ngClass]="{'btn_disable':!signupForm.valid}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
                             </button>
+                        </div>
+                        <div class="block_api_error" *ngIf="apiError.length > 0">
+                            {{apiError}}
                         </div>
 					</form>
                     <div class="modal_btm">

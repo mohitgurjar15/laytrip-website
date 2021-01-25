@@ -72,17 +72,17 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
       this.userService.forgotPassword(this.forgotForm.value).subscribe((data: any) => {
         this.submitted = false;    
         this.forgotPasswordSuccess = true;
-        // this.valueChange.emit({ key: 'reset-password', value: true,emailForVerifyOtp:this.forgotForm.value.email,isReset:true });  
         this.forgotEmail = this.forgotForm.value.email;
+        this.openResetModal();
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.loading  = false;
         this.apiMessage = error.message;
-
       }); 
     }
   }
 
   openResetModal(){
+    this.activeModal.close();
     const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'forgot_window', centered: true});
     (<ResetPasswordComponent>modalRef.componentInstance).emailForVerifyOtp = this.forgotEmail;
   }

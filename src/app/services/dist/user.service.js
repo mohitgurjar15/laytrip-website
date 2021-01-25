@@ -71,7 +71,7 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.forgotPassword = function (formValue) {
         var data = {
-            "email": formValue.email
+            "email": typeof formValue.email != 'undefined' ? formValue.email : formValue
         };
         return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));

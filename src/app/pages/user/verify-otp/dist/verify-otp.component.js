@@ -70,10 +70,6 @@ var VerifyOtpComponent = /** @class */ (function () {
         }
     };
     VerifyOtpComponent.prototype.openSignInPage = function () {
-        $('.modal_container').removeClass('right-panel-active');
-        $('.forgotpassword-container').removeClass('show_forgotpass');
-        this.pageData = true;
-        this.valueChange.emit({ key: 'signIn', value: this.pageData });
     };
     VerifyOtpComponent.prototype.resendOtp = function () {
         var _this = this;

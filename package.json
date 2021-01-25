@@ -53,6 +53,7 @@
     "moment": "^2.27.0",
     "ng-lottie": "^0.3.2",
     "ng-otp-input": "^1.7.1",
+    "ng-recaptcha": "^7.0.1",
     "ng5-slider": "^1.2.4",
     "ngx-cookie": "^5.0.0",
     "ngx-countdown": "^3.2.0",

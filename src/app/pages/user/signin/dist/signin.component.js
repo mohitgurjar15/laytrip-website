@@ -110,10 +110,13 @@ var SigninComponent = /** @class */ (function () {
         this.apiError = error;
     };
     SigninComponent.prototype.btnSignUpClick = function () {
+        var _this = this;
         $('#sign_in_modal').modal('hide');
         $('#sign_up_modal').modal('show');
-        $("body").addClass("modal-open");
-        this.renderer.addClass(document.body, 'modal-open');
+        $("#signup-form").trigger("reset");
+        setTimeout(function () {
+            _this.renderer.addClass(document.body, 'modal-open');
+        }, 2000);
     };
     SigninComponent.prototype.openOtpPage = function () {
         $('#sign_in_modal').modal('hide');
@@ -122,7 +125,7 @@ var SigninComponent = /** @class */ (function () {
     };
     SigninComponent.prototype.openForgotPassModal = function () {
         $('#sign_in_modal').modal('hide');
-        var modalRef = this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true });
+        this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true });
     };
     __decorate([
         core_1.Input()

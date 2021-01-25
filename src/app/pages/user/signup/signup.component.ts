@@ -31,7 +31,8 @@ export class SignupComponent implements OnInit {
   apiError =  '';
   is_email_available = false;
   emailExist = false;
-
+  public isCaptchaValidated: boolean = false;
+  public message: string = "";
 
 
   constructor(
@@ -56,13 +57,6 @@ export class SignupComponent implements OnInit {
     this.signupForm.reset();
   }  
 
-  openSignInPage() {
-    $('.modal_container').removeClass('right-panel-active');
-    $('.forgotpassword-container').removeClass('show_forgotpass');
-    this.pageData = true;
-    this.valueChange.emit({ key: 'signIn', value: this.pageData });
-  }
-
   openOtpPage() {
     $('#sign_up_modal').modal('hide');
     const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true});
@@ -80,14 +74,20 @@ export class SignupComponent implements OnInit {
       
     }else if(event.target.id == 'cnfEye'){
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
-
     }
   } 
- 
+
+  captchaResponse(response: string) {
+    this.isCaptchaValidated = true;
+  }
     
   onSubmit() {
   // this.openOtpPage();
   // return;
+    if (this.isCaptchaValidated == false) {
+      this.message = "You are robot!";
+      return;
+    }
     this.submitted = this.loading  = true;   
     if (this.signupForm.invalid) {
       this.submitted = true;      
