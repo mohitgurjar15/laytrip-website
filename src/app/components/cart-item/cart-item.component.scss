@@ -49,6 +49,8 @@
                     padding-right: 20px;
                     @include tab-view{
                         flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
                     }
                     .header_name{
                         display: flex;

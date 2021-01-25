@@ -3,7 +3,7 @@
         <li>
             <ng-container *ngIf="cart.type=='flight'">
                 <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]='{"active":i==0}' (click)="selectCart(i)" >
-                    <span>
+                    <span class="tab_round_wrps">
                         <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                         <span class="tab_txt_head">{{cart.module_info.departure_code}} - {{cart.module_info.arrival_code}}</span>
                     </span>
