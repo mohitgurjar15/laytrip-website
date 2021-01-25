@@ -68,6 +68,7 @@ var SignupComponent = /** @class */ (function () {
         var _this = this;
         // this.openOtpPage();
         // return;
+        console.log(this.signupForm.controls);
         if (this.isCaptchaValidated == false) {
             this.message = "You are robot!";
             return;
