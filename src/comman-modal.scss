@@ -2,6 +2,13 @@
 @import "_hotel.scss";
 
 //<!-- Start Login Signup & Forgot Password popup Css -->
+
+.bg_color {
+  #fc_frame {
+    z-index: 999 !important;
+  }
+}
+
 .otp_window {
   .modal-content {
     border-radius: 10px;
@@ -37,7 +44,7 @@
   }
 }
 
-.resetpass_window{
+.resetpass_window {
   .modal-content {
     border-radius: 10px;
   }
@@ -73,14 +80,11 @@
   }
 }
 
-
-.forgot_window{
-    .modal-content{
-        border-radius:10px;        
-    }
+.forgot_window {
+  .modal-content {
+    border-radius: 10px;
+  }
 }
-
-
 
 // .comman_modal {
 //   .modal-dialog {
