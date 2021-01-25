@@ -104,6 +104,11 @@
                 }
                 &.error {
                   border-color: $error-color;
+                  color: $error-color;
+                  &::placeholder {
+                    color: $error-color;
+                    -webkit-text-fill-color: $error-color;
+                  }
                 }
               }
               .error_text {
