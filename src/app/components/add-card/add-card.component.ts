@@ -113,16 +113,6 @@ export class AddCardComponent implements OnInit {
         } else {
           Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
         }
-        // if (inputData["cvvLength"] === 3) {
-        //   Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
-        // } else {
-        //   Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
-        // }
-        // if (inputData["cvvLength"] === 4) {
-        //   Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
-        // } else {
-        //   Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
-        // }
         if (inputData["validNumber"]) {
           Spreedly.setStyle('number', "background-color: #e8f0fe;");
         } else {
@@ -145,16 +135,59 @@ export class AddCardComponent implements OnInit {
       $.ajax({
         url: `${environment.apiUrl}v1/payment`,
         method: 'POST',
-        headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmRlODRmODctNTNlNi00MDdhLTgwMTItMGE5ZDgwOGQ1MmMxIiwiZW1haWwiOiJzdXJlc2hAaXRvbmVjbGljay5jb20iLCJ1c2VybmFtZSI6InN1cmVzaCBzdXRoYXIiLCJmaXJzdE5hbWUiOiJzdXJlc2giLCJwaG9uZSI6Ijk4Mzg0Mjc4MjMiLCJtaWRkbGVOYW1lIjoiIiwibGFzdE5hbWUiOiJzdXRoYXIiLCJzYWx0IjoiJDJiJDEwJFR5czkzeEtQbHlwREhpSWlINzRGbGUiLCJwcm9maWxlUGljIjoiaHR0cDovL3N0YWdpbmcubGF5dHJpcC5jb206NDA0MC9wcm9maWxlL3VzZXItMTAzOGIuanBlZyIsInJvbGVJZCI6NiwiY3JlYXRlZERhdGUiOiIyMDIxLTAxLTEzVDExOjQ5OjI3LjI4OFoiLCJzb2NpYWxBY2NvdW50SWQiOiIiLCJpYXQiOjE2MTEwNDUzNTUsImV4cCI6MzE4Nzg0NTM1NX0.vIFtwzxVUu-BqE8dTlfXcBvrX2jE01X3EIm99CiVh2M' },
+        headers: { Authorization: `Bearer ${localStorage.getItem('_lay_sess')}` },
         data: cardData,
         success: function (obj) {
           // this.emitNewCard.emit(obj);
-          $('#accordion-card').append(`<div class="card"><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapseOne"> ${obj.cardType} Card ****${obj.cardDigits} </a></div><div class="collapse show" data-parent="#accordion" id="collapseOne"><div  class="card-body"> ${obj.cardHolderName} </div></div></div>`);
+          $('#accordion-card').append(`<div class="card">
+          <div class="card-header">
+              <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="true"
+                  aria-controls="collapse11">
+                  <span class="heade_wrps">
+                      <img [src]="cardObject[obj.cardType]" alt="Card icon" />
+                      ${obj.cardType} ending in ${obj.cardDigits}
+                  </span>
+              </a>
+          </div>
+          <div id="card" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                  <div class="form-row">
+                      <div class="col col-lg-4">
+                          <div class="card_headbar">
+                              Name on Card
+                          </div>
+                          <div class="card_texter">
+                              ${obj.cardHolderName}
+                          </div>
+                      </div>
+                      <div class="col col-lg-4">
+                          <div class="card_headbar">
+                              Billing Address
+                          </div>
+                          <div class="card_texter">
+                              Victor Pacheco <span> Via della Libertà #19 Milano, 33098 Italia 3478691146</span>
+                          </div>
+                      </div>
+                      <div class="col col-lg-2">
+                          <div class="card_headbar">
+                              Expires
+                          </div>
+                          <div class="card_texter">
+                              09/2023
+                          </div>
+                      </div>
+                      <div class="col col-lg-2">
+                          <div class="save_btn_wrps">
+                              <a href="javascript:void(0);">Delete</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>`);
           $("#payment-form")[0].reset();
-          Spreedly.init('YNEdZFTwB1tRR4zwvcMIaUxZq3g', {
-            'numberEl': 'spreedly-number',
-            'cvvEl': 'spreedly-cvv',
-          });
+          Spreedly.reload();
+          // window.location.reload();
         },
         error: function (error) {
           console.log('error:', error);

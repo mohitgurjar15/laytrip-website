@@ -1,4 +1,8 @@
 <!-- <app-flight-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar> -->
+<!-- <ngx-spinner type = "ball-clip-rotate">
+</ngx-spinner> -->
+<!-- template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />" -->
+<!-- template="<img src='{{s3BucketUrl}}assets/images/loading-flight.gif' />" -->
 <div class="search_tab_listing_wrapper">
     <div class="container">
         <div class="searchbar_box_common">
@@ -33,8 +37,9 @@
                             <a href="javascript:void(0)" class="responsive_filter_btn">Filter by</a>
                         </div>
                     </div>
-                    
-                    <div id="responsive_filter_show" class="responsive_filter_show" *ngIf="!loading && !isNotFound && errorMessage==''">
+
+                    <div id="responsive_filter_show" class="responsive_filter_show"
+                        *ngIf="!loading && !isNotFound && errorMessage==''">
                         <div class="filter_popup">
                             <div class="filter_head_popup">
                                 <div class="filter_close">
@@ -63,5 +68,3 @@
         </div>
     </div>
 </section>
-
-
