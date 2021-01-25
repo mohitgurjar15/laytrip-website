@@ -144,15 +144,14 @@
                                 <label class="custom_checkbox">
                                     <input  formControlName="checked" tabindex="6" type="checkbox" value="">
                                     <span class="checkmark"></span>  
-                                    
                                 </label>
                                 <div>
-                                    {{'already_account' | translate }}<a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
+                                    {{'already_account' | translate }} <a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
                                 </div>
                             </div>
-                            <div class="error_text" *ngIf="(submitted || signupForm.controls.checked.touched) && signupForm.controls.checked.errors">
-                                <div *ngIf="signupForm.controls.checked.errors.required">{{'checked_touched_validaion' | translate}}</div>
-                            </div> 
+                            <div class="error_text">
+                                <div>{{'checked_touched_validaion' | translate}}</div>
+                            </div>  
                         </div>
                         
                         <div class="form_row">

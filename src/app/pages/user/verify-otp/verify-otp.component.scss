@@ -9,6 +9,12 @@
     justify-content: center;
     border: none;
     padding: 45px 20px 10px;
+    flex-flow: column;
+    align-items: center;
+
+    .ic_suc {
+      margin: 0 0 15px;
+    }
 
     h4 {
       font-size: 23px;
@@ -76,12 +82,12 @@
           color: $active-tab-text;
         }
 
-        &.disable_link{
-            cursor:default;
+        &.disable_link {
+          cursor: default;
 
-            p{
-                color:$text_grey_dark;
-            }
+          p {
+            color: $text_grey_dark;
+          }
         }
       }
     }
