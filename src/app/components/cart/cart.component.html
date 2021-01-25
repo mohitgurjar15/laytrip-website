@@ -5,7 +5,7 @@
                 <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]='{"active":i==0}' (click)="selectCart(i)" >
                     <span>
                         <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
-                        {{cart.module_info.departure_code}} - {{cart.module_info.arrival_code}}
+                        <span class="tab_txt_head">{{cart.module_info.departure_code}} - {{cart.module_info.arrival_code}}</span>
                     </span>
                 </a>
             </ng-container>

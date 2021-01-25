@@ -19,19 +19,23 @@
             align-items: center;
             @include mobile-view{
                 align-items: flex-start;
-                flex-direction: column;
+                //flex-direction: column;
             }
             .pr_steps_wrapper{
                 position: relative;
                 margin-right: 10px;
                 @include mobile-view{
+                    margin-right: 0;
                     margin-bottom: 10px;
                 }
                 a{
                     padding-right: 50px;
                     display: flex;
                     align-items: center;
-                    
+                    @include mobile-view{
+                        padding-right: 30px;
+                        font-size: 10px;
+                    }
                     .step_num{
                         font-size: 14px;
                         color: $text-white;
