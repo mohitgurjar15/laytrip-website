@@ -3,11 +3,10 @@
     <ng-container *ngFor="let traveler of travelers">
       <button type="button" class="btn btn-sm btn-outline-secondary" (click)="selectTraveler(traveler)">
         {{traveler.firstName ? traveler.firstName+' '+traveler.lastName : traveler.email }}
-        <a *ngIf="selectedTraveler==traveler.userId" (click)="removeTraveler(traveler.userId)" class="close_icon">
+        <a *ngIf="travelerId==traveler.userId" (click)="removeTraveler(traveler.userId)" class="close_icon">
           <i class="fa fa-times"></i>
         </a>
       </button>
     </ng-container>
   </div>
 </div>
-{{selectedTraveler}}

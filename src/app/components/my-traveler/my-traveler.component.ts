@@ -10,14 +10,13 @@ export class MyTravelerComponent implements OnInit {
   @Input() travelers;
   @Input() traveler_number;
   @Input() travelerId;
-  selectedTraveler;
   traveler:any={}
   constructor(
     private checkOutService:CheckOutService
   ) { }
 
   ngOnInit(): void {
-    console.log("Helllo", this.selectedTraveler,this.travelerId)
+    console.log("Helllo", this.travelerId)
     /* if(this.travelerId){
       this.selectedTraveler=this.travelerId;
     } */
@@ -30,7 +29,7 @@ export class MyTravelerComponent implements OnInit {
 
     traveler.traveler_number=this.traveler_number;
 
-    this.selectedTraveler=traveler.userId;
+    this.travelerId=traveler.userId;
 
     //console.log(this.selectedTraveler,"Selected traveler:::::")
 
