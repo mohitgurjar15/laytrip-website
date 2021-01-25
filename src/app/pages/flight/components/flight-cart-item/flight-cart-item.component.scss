@@ -15,51 +15,89 @@
     border-radius: 10px;
     .card-body{
         padding: 15px;
-        .line_name_header{
+        .cols_wrps{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 20px;
-
-            .line_shortname{
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                color: $text-black;
-                font-weight: 600;
-                flex: 1;
-                img{
-                    margin-right: 20px;
-                }
+            @include tab-view{
+                align-items: flex-start;
+                flex-direction: column;
             }
-            .line_company_name{
+            .lines_cols{
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color: $mid_gray_bg ;
+                flex-direction: column;
                 flex: 1;
-                .hrs_{
+                width: 100%;
+                font-size: 20px;
+                color: $mid_gray_bg ;
+                @include tab-view{
                     font-size: 18px;
                 }
-            }
-        }
-        .line_detail_wrap{
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            font-size: 20px;
-            color: $mid_gray_bg;
-            margin: 5px 0;
-            div{
-                flex: 1;
-                display: flex;
-                align-items: center;
-                .pink_stamp{
-                    width: 14px;
-                    height: 14px;
-                    background-color: $pink;
-                    border-radius: 50%;
-                    margin-right: 10px;
+                .colmns_w{
+                    @include tab-view{
+                        margin-bottom: 10px;
+                    }
+                }
+                &:last-child{
+                    .colmns_w{
+                        @include tab-view{
+                            &:last-child{
+                                margin-bottom: 0px;
+                            }
+                        }
+                    }
+                }
+                .line_shortname{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    color: $text-black;
+                    font-weight: 600;
+                    flex: 1;
+                    img{
+                        margin-right: 20px;
+                        @include tab-view{
+                            max-width: 20px;
+                            margin-right: 5px;
+                        }
+                    }
+                    .hrs_{
+                        display: none;
+                        font-size: 18px;
+                        color: $mid_gray_bg ;
+                        font-weight: 400;
+                        @include tab-view{
+                            display: flex;
+                        }
+                    }
+                }
+                .line_company_name{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
+                    .hrs_{
+                        font-size: 18px;
+                        @include tab-view{
+                            display: none;
+                        }
+                    }
+                }
+                .fl_number{
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    .pink_stamp{
+                        width: 14px;
+                        height: 14px;
+                        background-color: $pink;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                        @include tab-view{
+                            width: 8px;
+                            height: 8px;
+                        }
+                    }
                 }
             }
         }
@@ -75,6 +113,10 @@
             margin: 40px 0;
             img{
                 margin-right: 15px;
+            }
+            @include tab-view{
+                margin: 20px 0;
+                font-size: 15px;
             }
         }
     }
