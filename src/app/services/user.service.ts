@@ -196,7 +196,7 @@ export class UserService {
   }
   
   emailVeryfiy(email){
-    return this.http.get(`${this.apiURL}auth/verify-email-id?email=${email}`, this.commonFunction.setHeaders())
+    return this.http.get(`${this.apiURL}v1/auth/verify-email-id?email=${email}`, this.commonFunction.setHeaders())
   }
 }
 

@@ -13,11 +13,12 @@ import { ListTravellerComponent } from './travellers/list-traveller.component';
 import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
 import { ViewHistoryComponent } from './payment-history/view-history/view-history.component';
 import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add-points.component';
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfileComponent
+    component: AccountComponent
   },
   {
     path: 'profile',
