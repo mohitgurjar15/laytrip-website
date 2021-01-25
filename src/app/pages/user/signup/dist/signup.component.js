@@ -30,6 +30,7 @@ var SignupComponent = /** @class */ (function () {
         this.emailExist = false;
         this.isCaptchaValidated = false;
         this.message = "";
+        this.iAccept = false;
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signupForm = this.formBuilder.group({
@@ -42,8 +43,6 @@ var SignupComponent = /** @class */ (function () {
         }, {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
-        this.signupForm.reset();
-        this.signupForm.controls.checked.setValue(false);
     };
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
@@ -66,12 +65,12 @@ var SignupComponent = /** @class */ (function () {
         this.isCaptchaValidated = true;
     };
     SignupComponent.prototype.onSubmit = function () {
-        var _this = this;
         // this.openOtpPage();
         // return;
-        console.log(this.signupForm);
+        var _this = this;
         this.submitted = this.loading = true;
-        if (this.signupForm.invalid || !this.isCaptchaValidated) {
+        console.log(this.iAccept);
+        if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept) {
             this.submitted = true;
             this.loading = false;
             return;
@@ -95,10 +94,10 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.checkAccept = function (event) {
         if (event.target.checked) {
-            this.signupForm.controls.checked.setValue(true);
+            this.iAccept = true;
         }
         else {
-            this.signupForm.controls.checked.setValue(false);
+            this.iAccept = false;
         }
     };
     SignupComponent.prototype.checkEmailExist = function (emailString) {
