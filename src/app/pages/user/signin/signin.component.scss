@@ -256,6 +256,20 @@
                   width: calc(100% - 2px);
                 }
               }
+
+              &.btn_disable {
+                cursor: default;
+                background: $mid_gray_bg;
+                border-color: $mid_gray_bg;
+
+                &:before {
+                  background: $mid_gray_bg;
+                }
+
+                &:hover {
+                  color: $text-white;
+                }
+              }
             }
           }
 
