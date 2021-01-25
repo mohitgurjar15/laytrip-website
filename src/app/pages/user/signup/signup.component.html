@@ -87,14 +87,14 @@
 					<form id="signup-form" [formGroup]="signupForm">
 						<div class="form_row">
 							<div class="text_field half">
-								<input  type="text" formControlName="first_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}" maxlength="20" tabindex="1" placeholder="{{'first_name' | translate}}">
+								<input  type="text" formControlName="first_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.first_name.errors}" maxlength="25" tabindex="1" placeholder="{{'first_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors">
                                     <div *ngIf="signupForm.controls.first_name.errors.required">{{'first_name_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.first_name.errors.pattern" class="error_text">{{'first_name_string_validation' | translate}}</div>
                                 </div>
                             </div>
                             <div class="text_field half">
-								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="20" tabindex="2"  placeholder="{{'last_name' | translate}}">
+								<input  type="text" formControlName="last_name" [ngClass]="{'error': submitted  && !loading && signupForm.controls.last_name.errors}" maxlength="25" tabindex="2"  placeholder="{{'last_name' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
                                     <div *ngIf="signupForm.controls.last_name.errors.required">{{'last_name_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.last_name.errors.pattern" class="error_text">{{'last_name_string_validation' | translate}}</div>
@@ -103,19 +103,20 @@
 						</div>
 						<div class="form_row">
 							<div class="text_field">
-								<input #email type="email" (input)="onSearchChange($event.target.value)"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}" formControlName="email" maxlength="20" tabindex="3"  placeholder="{{'email' | translate}}">
+                                <input #email type="email" (input)="checkEmailExist($event.target.value)"  [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}"
+                                 formControlName="email" maxlength="50" tabindex="3"  placeholder="{{'email' | translate}}">
 								<div class="error_text" *ngIf="(submitted || signupForm.controls.email.touched) && signupForm.controls.email.errors">
                                     <div *ngIf="signupForm.controls.email.errors.required">{{'email_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.email.errors.pattern">{{'email_invalid_validation' | translate}}</div>
                                 </div>
-                                <div class="error_text" *ngIf="emailExist" class="text-danger">
+                                <div class="error_text" *ngIf="emailExist">
                                     {{'email_exist_validation'|translate}}
                                 </div>
 							</div>
 						</div>					
 						<div class="form_row">
 							<div class="text_field pass_show">
-								<input [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'"  formControlName="password" maxlength="20" tabindex="4"  placeholder="{{'password' | translate}}">
+								<input [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'"  formControlName="password" maxlength="50" tabindex="4"  placeholder="{{'password' | translate}}">
                                 <span class="ptxt"><i id="passEye"
                                     [ngClass]="passFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -128,7 +129,7 @@
 						</div>					
 						<div class="form_row">
 							<div class="text_field pass_show">
-								<input   [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="20" tabindex="5"  placeholder="{{'confirm_password' | translate}}">
+								<input   [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="5"  placeholder="{{'confirm_password' | translate}}">
                                 <span class="ptxt"><i id="cnfEye"
                                     [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -142,7 +143,7 @@
 						<div class="form_row last">
                             <div class="check">
                                 <label class="custom_checkbox">
-                                    <input  formControlName="checked" tabindex="6" type="checkbox" value="">
+                                    <input (change)="checkAccept($event)" formControlName="checked" tabindex="6" type="checkbox">
                                     <span class="checkmark"></span>  
                                 </label>
                                 <div>
@@ -157,7 +158,7 @@
                         <div class="form_row">
                             <div class="text_field">
                                 <re-captcha (resolved)="captchaResponse($event)" tabindex="7" siteKey="6LcPUboZAAAAAN1Sh411ruqdmT4OD6ZDe65rTsVO"></re-captcha>
-                                <div class="error_text" *ngIf="!isCaptchaValidated">{{ message }}</div>
+                                <div class="error_text" *ngIf="!isCaptchaValidated && submitted">{{ 're_captcha_error_message' | translate }}</div>
                             </div>
                         </div> 
                         <div class="form_btn">
