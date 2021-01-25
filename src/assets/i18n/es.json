@@ -41,6 +41,7 @@
     "password_reset_sucessfully_description": "Inicie sesión con su nueva contraseña",
     "sign_up": "Regístrate",
     "resister": "REGISTRARSE",
+    "re_captcha_error_message": "Tu eres robot!",
     "sign_up_to_continue": "Regístrese para continuar",
     "accept_term_and_condition": "Al hacer clic en el botón Registrarse, acepta nuestros",
     "term_and_condition": "Términos y condiciones",

@@ -47,6 +47,11 @@
                     align-items: center;
                     flex: 1;
                     padding-right: 20px;
+                    @include tab-view{
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                    }
                     .header_name{
                         display: flex;
                         justify-content: space-between;
@@ -65,11 +70,17 @@
                             img{
                                 width: 24px;
                             }
+                            @include tab-view{
+                                display: none;
+                            }
                         }
                         .flight_routing_imgs{
                             display: flex;
                             flex-direction: column;
                             padding: 0 20px;
+                            @include tab-view{
+                                max-width: 110px;
+                            }
                         }
                     }
                     .header_date{

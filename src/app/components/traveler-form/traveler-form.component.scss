@@ -66,7 +66,9 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin: 0 0 15px 0;
+        width: 100%;
+        flex-wrap: wrap;
+        //margin: 0 0 15px 0;
         .add_btn_lined{
           color: $text_light_yellow;
           border: 1px solid $text_light_yellow;
@@ -80,12 +82,13 @@
           margin-right: 20px;
           padding: 0 10px;
           position: relative;
+          margin-bottom: 15px;
           &:focus{
             outline: none;
             box-shadow: none;
         }
           &:last-child{
-            margin: 0;
+            //margin: 0;
           }
           .close_icon{
             position: absolute;
@@ -135,6 +138,11 @@
             background-size: 20px;
           }
         }
+        .mb-sm-10{
+          @include tab-view{
+            margin-bottom: 10px;
+          }
+        }
       }
       .accordion_addn{
         margin-top: 20px;
@@ -147,11 +155,55 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            @include tab-view{
+              flex-direction: column;
+            }
             .heade_wrps{
               color: $active-tab-text;
               font-size: 16px;
               font-weight: 500;
               margin-right: 15px;
+              @include tab-view{
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin: 0;
+              }
+              .responsive_anch{
+                display: none;
+                @include tab-view{
+                  font-weight: 600;
+                  color: $text-black;
+                  font-size: 16px;
+                  border: none;
+                  background-color: transparent;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 0;
+          
+                  &[aria-expanded="true"]{
+                      &:after {
+                          font-family: 'FontAwesome';
+                          content: "\f077";
+                          color: $text-grey;
+                          font-weight: normal;
+                          transition: 0.3s;
+                          right: 0;
+                      }
+                  }
+                  &[aria-expanded="false"]{
+                      &:after {
+                          font-family: 'FontAwesome';
+                          content: "\f078";
+                          color: $text-grey;
+                          font-weight: normal;
+                          transition: 0.3s;
+                          right: 0;
+                      }
+                  }
+                }
+              }
             }
             .addon_anchor{
               font-weight: 600;
@@ -184,12 +236,27 @@
                       right: 0;
                   }
               }
+              @include tab-view{
+                display: none;
+              }
             }
             #addon_tab{
               flex-direction: row;
               flex-wrap: nowrap;
               flex: 2;
+              @include tab-view{
+                flex-wrap: wrap;
+                margin: 5px 0;
+                width: 100%;
+              }
               li{
+                @include tab-view{
+                  margin-left: 5px;
+                  margin-bottom: 5px;
+                  &:first-child{
+                    margin-left: 0;
+                  }
+                }
                 a{
                   background-color: $background-white;
                   color: #E4E4E4;
@@ -197,6 +264,9 @@
                   border-radius: 8px;
                   font-size: 14px;
                   margin: 0 5px;
+                  @include tab-view{
+                    margin: 0;
+                  }
                   &.active{
                     color: $active-tab-text;
                     border: 1px solid $active-tab-text;
@@ -211,6 +281,9 @@
             .addon_listins_wrps{
               display: flex;
               justify-content: flex-end;
+              @include tab-view{
+                justify-content: flex-start;
+              }
               .addon_btn_drop{
                 background-color: $background-white;
                 color: $mid_gray_bg;
@@ -253,11 +326,22 @@
                     position: absolute;
                   }
                 }
+                @include tab-view{
+                  margin-right: 0;
+                  text-align: left;
+                  align-items: center;
+                  display: flex;
+                }
               }
               .dropdownList{
                 li{
                   button{
                     border: none;
+                    @include tab-view{
+                      padding: 5px;
+                      font-size: 12px;
+                      white-space: normal;
+                    }
                     &:focus{
                       outline: none;
                       box-shadow: none;

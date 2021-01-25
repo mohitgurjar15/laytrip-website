@@ -36,6 +36,11 @@ var trip_not_found_component_1 = require("./trip-not-found/trip-not-found.compon
 var angular2_text_mask_1 = require("angular2-text-mask");
 var confirmation_modal_component_1 = require("../../../components/confirmation-modal/confirmation-modal.component");
 var home_rentals_component_1 = require("./bookings/home-rentals/home-rentals.component");
+var plan_subscription_component_1 = require("./plan-subscription/plan-subscription.component");
+var components_module_1 = require("../../../components/components.module");
+var my_wallet_add_points_component_1 = require("./my-wallet-add-points/my-wallet-add-points.component");
+var send_email_popup_component_1 = require("./bookings/send-email-popup/send-email-popup.component");
+var my_accounts_component_1 = require("./my-accounts.component");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -62,6 +67,10 @@ var MyAccountsModule = /** @class */ (function () {
                 search_trip_component_1.SearchTripComponent,
                 flight_trip_detail_component_1.FlightTripDetailComponent,
                 trip_not_found_component_1.TripNotFoundComponent,
+                plan_subscription_component_1.PlanSubscriptionComponent,
+                my_wallet_add_points_component_1.MyWalletAddPointsComponent,
+                send_email_popup_component_1.SendEmailPopupComponent,
+                my_accounts_component_1.MyAccountsComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -72,11 +81,12 @@ var MyAccountsModule = /** @class */ (function () {
                 ng_bootstrap_1.NgbModule,
                 calendar_1.CalendarModule,
                 flight_module_1.FlightModule,
-                angular2_text_mask_1.TextMaskModule
+                angular2_text_mask_1.TextMaskModule,
+                components_module_1.ComponentsModule,
             ],
             providers: [common_1.DatePipe, ng_bootstrap_1.NgbActiveModal],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA],
-            entryComponents: [traveller_form_component_1.TravellerFormComponent, card_action_form_component_1.CardActionFormComponent, confirmation_modal_component_1.ConfirmationModalComponent]
+            entryComponents: [traveller_form_component_1.TravellerFormComponent, card_action_form_component_1.CardActionFormComponent, confirmation_modal_component_1.ConfirmationModalComponent, send_email_popup_component_1.SendEmailPopupComponent]
         })
     ], MyAccountsModule);
     return MyAccountsModule;

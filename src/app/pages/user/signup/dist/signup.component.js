@@ -43,6 +43,7 @@ var SignupComponent = /** @class */ (function () {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
         this.signupForm.reset();
+        this.signupForm.controls.checked.setValue(false);
     };
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
@@ -68,12 +69,9 @@ var SignupComponent = /** @class */ (function () {
         var _this = this;
         // this.openOtpPage();
         // return;
-        if (this.isCaptchaValidated == false) {
-            this.message = "You are robot!";
-            return;
-        }
+        console.log(this.signupForm);
         this.submitted = this.loading = true;
-        if (this.signupForm.invalid) {
+        if (this.signupForm.invalid || !this.isCaptchaValidated) {
             this.submitted = true;
             this.loading = false;
             return;
@@ -95,21 +93,28 @@ var SignupComponent = /** @class */ (function () {
     SignupComponent.prototype.socialError = function (error) {
         this.apiError = error;
     };
-    SignupComponent.prototype.onSearchChange = function (searchValue) {
-        console.log(searchValue);
+    SignupComponent.prototype.checkAccept = function (event) {
+        if (event.target.checked) {
+            this.signupForm.controls.checked.setValue(true);
+        }
+        else {
+            this.signupForm.controls.checked.setValue(false);
+        }
     };
-    SignupComponent.prototype.emailVeryfiying = function () {
-        console.log('value');
-        /* this.userService.emailVeryfiy(value).subscribe((data: any) => {
-          console.log(data)
-          if (data && data.is_available) {
-            this.is_email_available = data.is_available;
-            this.emailExist = true;
-          }
-          else {
-            this.emailExist = false;
-          }
-        }); */
+    SignupComponent.prototype.checkEmailExist = function (emailString) {
+        var _this = this;
+        if (emailString.toString().length >= 3) {
+            this.userService.emailVeryfiy(emailString).subscribe(function (data) {
+                console.log(data);
+                if (data && data.is_available) {
+                    _this.is_email_available = data.is_available;
+                    _this.emailExist = true;
+                }
+                else {
+                    _this.emailExist = false;
+                }
+            });
+        }
     };
     __decorate([
         core_1.Input()

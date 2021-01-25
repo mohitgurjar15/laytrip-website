@@ -9,33 +9,38 @@
         <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
         Change Planes in {{stop?.layover_airport_name}}
       </div>
-      <div class="line_name_header">
-        <div class="line_shortname">
-          <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="" class="Pink filled Flight" />
-          {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+      <div class="cols_wrps">
+        <div class="lines_cols">
+          <div class="line_shortname colmns_w">
+            <span>
+              <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="" class="Pink filled Flight" />
+              {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+            </span>
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="date_wrp colmns_w">
+            {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
+          </div>
+          <div class="timing_wrp colmns_w">
+            {{stop.departure_time}} - {{stop.arrival_time}}
+          </div>
         </div>
-        <div class="line_company_name">
-          {{stop.airline_name}}
-          <span class="hrs_">
-            {{stop.duration}}
-          </span>
-        </div>
-      </div>
-      <div class="line_detail_wrap">
-        <div class="date_wrp">
-          {{commonFunction.convertDateFormat(stop?.departure_date,'DD/MM/YYYY')}}
-        </div>
-        <div class="fl_number">
-          <span class="pink_stamp"></span>
-          Flight {{stop.airline}}-{{stop.flight_number}}
-        </div>
-      </div>
-      <div class="line_detail_wrap">
-        <div class="timing_wrp">
-          {{stop.departure_time}} - {{stop.arrival_time}}
-        </div>
-        <div class="class_wrps">
-          {{stop.cabin_class}}
+        <div class="lines_cols">
+          <div class="line_company_name colmns_w">
+            {{stop.airline_name}}
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="fl_number colmns_w">
+            <span class="pink_stamp"></span>
+            Flight {{stop.airline}}-{{stop.flight_number}}
+          </div>
+          <div class="class_wrps colmns_w">
+            {{stop.cabin_class}}
+          </div>
         </div>
       </div>
     </div>
@@ -60,34 +65,34 @@
         <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="yellow double flight" />
         Change Planes in {{stop?.layover_airport_name}}
       </div>
-      <div class="line_name_header">
-        <div class="line_shortname">
-          <img *ngIf="cartItem.module_info?.routes[1]?.type === 'inbound'"
+      <div class="cols_wrps">
+        <div class="lines_cols">
+          <div class="line_shortname colmns_w">
+            <img *ngIf="cartItem.module_info?.routes[1]?.type === 'inbound'"
             src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="" class="Pink filled Flight" />
-          {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+            {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+          </div>
+          <div class="date_wrp colmns_w">
+            {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
+          </div>
+          <div class="timing_wrp colmns_w">
+            {{stop.departure_time}} - {{stop.arrival_time}}
+          </div>
         </div>
-        <div class="line_company_name">
-          {{stop.airline_name}}
-          <span class="hrs_">
-            {{stop.duration}}
-          </span>
-        </div>
-      </div>
-      <div class="line_detail_wrap">
-        <div class="date_wrp">
-          {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
-        </div>
-        <div class="fl_number">
-          <span class="pink_stamp"></span>
-          Flight {{stop.airline}}-{{stop.flight_number}}
-        </div>
-      </div>
-      <div class="line_detail_wrap">
-        <div class="timing_wrp">
-          {{stop.departure_time}} - {{stop.arrival_time}}
-        </div>
-        <div class="class_wrps">
-          {{stop.cabin_class}}
+        <div class="lines_cols">
+          <div class="line_company_name colmns_w">
+            {{stop.airline_name}}
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="fl_number colmns_w">
+            <span class="pink_stamp"></span>
+            Flight {{stop.airline}}-{{stop.flight_number}}
+          </div>
+          <div class="class_wrps colmns_w">
+            {{stop.cabin_class}}
+          </div>
         </div>
       </div>
     </div>
@@ -105,6 +110,36 @@
       <div class="change_plane_wrapper" *ngIf="stop.is_layover">
         <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="yellow double flight" />
         Change Planes in {{stop?.layover_airport_name}}
+      </div>
+      <div class="cols_wrps">
+        <div class="lines_cols">
+          <div class="line_shortname">
+            <img *ngIf="cartItem.module_info?.routes[1]?.type === 'inbound'"
+              src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="" class="Pink filled Flight" />
+            {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+          </div>
+          <div class="date_wrp">
+            {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
+          </div>
+          <div class="timing_wrp">
+            {{stop.departure_time}} - {{stop.arrival_time}}
+          </div>
+        </div>
+        <div class="lines_cols">
+          <div class="line_company_name">
+            {{stop.airline_name}}
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="fl_number">
+            <span class="pink_stamp"></span>
+            Flight {{stop.airline}}-{{stop.flight_number}}
+          </div>
+          <div class="class_wrps">
+            {{stop.cabin_class}}
+          </div>
+        </div>
       </div>
       <div class="line_name_header">
         <div class="line_shortname">

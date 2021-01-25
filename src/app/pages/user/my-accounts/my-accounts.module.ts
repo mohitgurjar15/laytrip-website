@@ -31,6 +31,9 @@ import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription
 import { ComponentsModule } from '../../../components/components.module';
 import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add-points.component';
 import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-popup.component';
+import { AccountComponent } from './account/account.component';
+import { PreferancesComponent } from './preferances/preferances.component';
+import { SecurityComponent } from './security/security.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-
     PlanSubscriptionComponent,
     MyWalletAddPointsComponent,
     SendEmailPopupComponent,
+    AccountComponent,
+    PreferancesComponent,
+    SecurityComponent,
   ],
   imports: [
     CommonModule,
