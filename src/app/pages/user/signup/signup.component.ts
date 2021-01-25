@@ -84,6 +84,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
   // this.openOtpPage();
   // return;
+  console.log(this.signupForm.controls)
     if (this.isCaptchaValidated == false) {
       this.message = "You are robot!";
       return;
