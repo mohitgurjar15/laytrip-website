@@ -150,7 +150,7 @@
                                     {{'already_account' | translate }} <a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
                                 </div>
                             </div>
-                            <div class="error_text">
+                            <div *ngIf="(submitted || signupForm.controls.checked.touched) && signupForm.controls.checked.errors" class="error_text">
                                 <div>{{'checked_touched_validaion' | translate}}</div>
                             </div>  
                         </div>
