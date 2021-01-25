@@ -7,6 +7,11 @@
 
 .payment_mode_main_wrapper{
     background-color: $background-white;
+    @include tab-view{
+        .col-lg-7{
+            padding: 0;
+        }
+    }
     h3{
         color: $blue-text;
         font-size: 34px;
@@ -14,6 +19,7 @@
         margin: 25px 0 15px;
         @include tab-view{
             font-size: 18px;
+            padding: 0 15px;
         }
     }
     .booking_detail_bg_wrps{
@@ -76,7 +82,7 @@
         margin: 0 auto;
         @include tab-view{
             width: 100%;
-            padding: 10px;
+            padding: 10px 0;
         }
         .payment_mode_wrapper{
             display: flex;

@@ -81,7 +81,7 @@
                         <div class="form_row">
                             <div class="text_field">
                                 <input type="email"
-                                    [ngClass]="{'error': (submitted  && !loading && loginForm.controls.email.errors)}"
+                                    [ngClass]="{'error': (submitted && loginForm.controls.email.errors ) || (  loginForm.controls.email.touched && loginForm.controls.email.errors)}"
                                     type="email" maxlength="50" formControlName="email" tabindex="101"
                                     placeholder="{{'email_placeholder' | translate}}">
                                 <div
@@ -96,7 +96,7 @@
                         <div class="form_row">
                             <div class="text_field pass_show">
                                 <input tabindex="102"
-                                    [ngClass]="{'error': (submitted  && !loading && loginForm.controls.password.errors) }"
+                                    [ngClass]="{'error':  (submitted && loginForm.controls.password.errors ) || (  loginForm.controls.password.touched && loginForm.controls.password.errors)}"
                                     type="password" autocomplete="new-password"
                                     [type]="fieldTextType ? 'text' : 'password'" formControlName="password"
                                     maxlength="20" placeholder="{{'password_placholder' | translate}}">

@@ -1,5 +1,21 @@
+
 <app-profile></app-profile>
 <app-traveller></app-traveller>
-<app-account-card-list></app-account-card-list>
+<div class="booking_detail_bg_wrps">
+    <div id="accordion" class="card_accordion">
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne" aria-expanded="true"> 
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    <app-add-card></app-add-card>
+                </div>
+            </div>
+            <app-card-list></app-card-list>
+        </div>
+    </div>
+</div>
 <app-preferances></app-preferances>
 <app-security></app-security>
