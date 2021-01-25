@@ -12,21 +12,21 @@ export class CartComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() carts;
   constructor(
-    private cartService:CartService
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes:SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
 
-    if(changes['carts']){
+    if (changes['carts']) {
       this.carts = changes['carts'].currentValue;
     }
   }
 
-  selectCart(cartNumber){
-    this.cartService.setCardNumber(cartNumber)
+  selectCart(cartNumber) {
+    this.cartService.setCardNumber(cartNumber);
   }
 
 }

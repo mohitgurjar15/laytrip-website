@@ -4,23 +4,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex"/>
+  <meta name="robots" content="noindex" />
   <meta http-equiv="cache-control" content="no-cache, no-store">
   <title>Laytrip-Easy Bookings, Easy Payments</title>
   <base href="/">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap"
+    type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    type="text/css" />
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU&amp;libraries=places" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU&amp;libraries=places"
+    type="text/javascript"></script>
 
   <style>
-    .custom_fc_frame{
+    .custom_fc_frame {
       right: 20px !important;
       bottom: 20px !important;
     }
-    .custom_fc_frame .d-hotline.h-btn{
+
+    .custom_fc_frame .d-hotline.h-btn {
       border-radius: 50% !important;
     }
   </style>
@@ -48,27 +53,27 @@
       host: "https://wchat.freshchat.com",
       config: {
         cssNames: {
-            widget: "custom_fc_frame"
+          widget: "custom_fc_frame"
         }
-      }    
+      }
     });
 
-    window.fcWidget.on("widget:opened", function(resp) {
+    window.fcWidget.on("widget:opened", function (resp) {
       console.log('Widget Opened');
       $(".quick-footer-section").toggle()
     });
 
-    window.fcWidget.on("widget:closed", function(resp) {
+    window.fcWidget.on("widget:closed", function (resp) {
       console.log('Widget Closed');
       $(".quick-footer-section").toggle()
     });
-    
+
   }
 
-  
+
   function initialize(i, t) { var e; i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e)) } function initiateCall() { initialize(document, "freshchat-js-sdk") } window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
 
-  
+
 </script>
 
 <body>
@@ -80,8 +85,8 @@
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>
           <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7"/>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7" />
           </filter>
         </defs>
       </svg>

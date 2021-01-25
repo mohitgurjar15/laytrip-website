@@ -3,6 +3,7 @@ import { environment } from '.././../../../../environments/environment';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../services/generic.service';
 import { CartService } from '../../../../services/cart.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-cart-item',
@@ -28,7 +29,8 @@ export class FlightCartItemComponent implements OnInit {
     private commonFunction: CommonFunction,
     private genericService: GenericService,
     private cartService: CartService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +54,6 @@ export class FlightCartItemComponent implements OnInit {
         // SET CART ITEMS IN CART SERVICE
         this.cartService.setCartItems(res.data);
         this.cartItems = res.data;
-        console.log(this.cartItems);
         localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
         if (res.count) {
           this.cartItemsCount = res.count;
@@ -69,8 +70,11 @@ export class FlightCartItemComponent implements OnInit {
   deleteCart(id) {
     this.cartService.deleteCartItem(id).subscribe((res: any) => {
       this.cartItems.splice(id, 1);
-      // this.cartService.setCartItems(this.cartItems);
-      this.ngOnInit();
+      let queryParams = {};
+      let urlData = this.commonFunction.decodeUrl(this.router.url);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
+      });
     }, error => {
       console.log(error);
     });
