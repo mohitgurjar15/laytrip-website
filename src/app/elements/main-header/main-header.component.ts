@@ -55,36 +55,38 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (this.isLoggedIn) {
       if (this.userDetails.roleId != 7) {
         this.totalLaycredit();
+        this.getCartList();
       }
     }
     this.countryCode = this.commonFunction.getUserCountry();
-    this.getCartList();
   }
 
   getCartList() {
-    // GET CART LIST FROM GENERIC SERVICE
-    this.cartService.getCartList().subscribe((res: any) => {
-      if (res) {
-        // SET CART ITEMS IN CART SERVICE
-        this.cartService.setCartItems(res.data);
-        this.cartItems = res.data;
-        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-        if (res.count) {
-          this.cartItemsCount = res.count;
+    if (this.isLoggedIn) {
+      // GET CART LIST FROM GENERIC SERVICE
+      this.cartService.getCartList().subscribe((res: any) => {
+        if (res) {
+          // SET CART ITEMS IN CART SERVICE
+          this.cartService.setCartItems(res.data);
+          this.cartItems = res.data;
+          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+          if (res.count) {
+            this.cartItemsCount = res.count;
+          }
+          this.cd.detectChanges();
         }
-        this.cd.detectChanges();
-      }
-    }, (error) => {
-      if (error && error.status === 404) {
-        this.cartItems = [];
-      }
-    });
+      }, (error) => {
+        if (error && error.status === 404) {
+          this.cartItems = [];
+        }
+      });
+    }
   }
 
 
   ngDoCheck() {
     this.checkUser();
-    this.getCartList();
+    // this.getCartList();
     let host = window.location.href;
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
@@ -108,6 +110,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.userDetails = getLoginUserInfo();
       if (this.userDetails.roleId != 7 && !this._isLayCredit) {
         this.totalLaycredit();
+        this.getCartList();
       }
       this.showTotalLayCredit = this.totalLayCredit;
     }
@@ -118,6 +121,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
     localStorage.removeItem('$crt');
+    this.cartItemsCount = '';
+    this.cartService.setCartItems(this.cartItemsCount);
     this.router.navigate(['/']);
   }
 
