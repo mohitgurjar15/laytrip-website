@@ -10,37 +10,29 @@ export class MyTravelerComponent implements OnInit {
   @Input() travelers;
   @Input() traveler_number;
   @Input() travelerId;
+  @Input() traveler_type:string;
   traveler:any={}
   constructor(
     private checkOutService:CheckOutService
   ) { }
 
   ngOnInit(): void {
-    console.log("Helllo", this.travelerId)
-    /* if(this.travelerId){
-      this.selectedTraveler=this.travelerId;
-    } */
+    console.log("traveler_type",this.traveler_type,this.traveler_number)
     this.checkOutService.getTravelers.subscribe(travelers => this.travelers=travelers)
-    
   }
 
   selectTraveler(traveler){
-    //console.log("My traveler",traveler)
 
     traveler.traveler_number=this.traveler_number;
 
     this.travelerId=traveler.userId;
-
-    //console.log(this.selectedTraveler,"Selected traveler:::::")
-
-    //setTimeout(()=>{this.checkOutService.selectTraveler(traveler)},100)
     this.checkOutService.selectTraveler(traveler)
     
   }
 
   removeTraveler(userId){
-    /* this.selectedTraveler='';
+    this.travelerId='';
     let  traveler = { traveler_number: this.traveler_number };
-    this.checkOutService.selectTraveler(traveler) */
+    this.checkOutService.selectTraveler(traveler)
   }
 }

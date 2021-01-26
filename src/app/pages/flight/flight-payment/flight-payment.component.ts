@@ -66,6 +66,7 @@ export class FlightPaymentComponent implements OnInit {
     private toastrService: ToastrService
   ) {
     this.totalLaycredit();
+    this.getCountry();
   }
 
   ngOnInit() {
@@ -112,6 +113,7 @@ export class FlightPaymentComponent implements OnInit {
         type : 'flight',
         module_info:this.flightSummary
       }; 
+      this.cartLoading=false;
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
@@ -219,6 +221,12 @@ export class FlightPaymentComponent implements OnInit {
     })
   }
 
+  getCountry(){
+    this.genericService.getCountry().subscribe(res=>{
+      this.checkOutService.setCountries(res);
+    })
+  }
+
   handleSubmit() {
     this.router.navigate(['/flight/checkout', this.routeCode]);
   }
@@ -233,4 +241,5 @@ export class FlightPaymentComponent implements OnInit {
       }
     });
  }
+
 }

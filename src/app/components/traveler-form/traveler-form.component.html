@@ -11,23 +11,23 @@
           <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">
             <div class="card-body">
               <div class="sub_cat_wrapper">
-                <button class="add_btn_lined">Add Adult (Over 12)
-                  <a href="javascript:void(0);" class="close_icon">
+                <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)
+                  <a *ngIf="traveler.controls.type.value=='adult'" href="javascript:void(0);" class="close_icon">
                     <i class="fa fa-times"></i>
                   </a>
                 </button>
-                <button class="add_btn_lined">Add Child (2-12)
-                  <a href="javascript:void(0);" class="close_icon">
+                <button (click)="selectTravelerType('child',x)" class="add_btn_lined">Add Child (2-12)
+                  <a *ngIf="traveler.controls.type.value=='child'" href="javascript:void(0);" class="close_icon">
                     <i class="fa fa-times"></i>
                   </a>
                 </button>
-                <button class="add_btn_lined">Add Infant (Under 12)
-                  <a href="javascript:void(0);" class="close_icon">
+                <button (click)="selectTravelerType('infant',x)" class="add_btn_lined">Add Infant (Under 12)
+                  <a *ngIf="traveler.controls.type.value=='infant'" href="javascript:void(0);" class="close_icon">
                     <i class="fa fa-times"></i>
                   </a>
                 </button>
               </div>
-              <app-my-traveler [travelers]="travelers" travelerId={{traveler.controls.userId.value}} traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler [travelers]="travelers" travelerId={{traveler.controls.userId.value}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -36,35 +36,52 @@
                     <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
                     <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                       class="error">
-                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Your name is
-                        required</small>
+                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter your first name.</small>
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Last Name*</label>
                     <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+                    <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
+                      class="error">
+                      <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your last name.</small>
+                    </div>
                   </div>
 
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Gender*</label>
                     <select class="form-control" formControlName="gender">
-                      <option>Male</option>
-                      <option>Female</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
                     </select>
+                    <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors"
+                      class="error">
+                      <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your gender.</small>
+                    </div>
                   </div>
                 </div>
                 <div class="form-row mt-3">
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Email*</label>
                     <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                    <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors"
+                      class="error">
+                      <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter your email address.</small>
+                    </div>
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Telephone*</label>
                     <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_number">
+                    <div *ngIf="traveler.controls.phone_number.touched && traveler.controls.phone_number.errors"
+                      class="error">
+                      <small *ngIf="traveler.controls.phone_number.errors.required" class="error_field">Please enter your telephone number..</small>
+                    </div>
                   </div>
                   <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                     <label for="">Date of birth*</label>
-                    <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
+                    <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
+                    <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="calender-price-view" inputStyleClass="custom_datpicker birth_date" inputId="basic"  formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020" placeholder="Date of birth" [defaultDate]="dobMinDate">
+                    </p-calendar>
                   </div>
                 </div>
                 <div class="form-row mt-3">
@@ -75,7 +92,13 @@
                   </div>
                   <div class="col-sm-12 col-md-4" >
                     <label for="">Nationality*</label>
-                    <input type="text" class="form-control" placeholder="Nationality" formControlName="country">
+                    <!-- <input type="text" class="form-control" placeholder="Nationality" formControlName="country"> -->
+                    <ng-select [items]="countries" 
+                              bindLabel="name" 
+                              bindValue="id"
+                              formControlName="country"
+                              >
+                    </ng-select>
                   </div>
                 </div>
               </div>

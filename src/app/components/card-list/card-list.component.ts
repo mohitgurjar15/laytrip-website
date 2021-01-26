@@ -19,6 +19,18 @@ export class CardListComponent implements OnInit {
   @Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
   cardToken: string = '';
+
+  cardObject = {
+    visa: `${this.s3BucketUrl}assets/images/card_visa.svg`,
+    master: `${this.s3BucketUrl}assets/images/master_cards_img.svg`,
+    american_express: `${this.s3BucketUrl}assets/images/card_amex.svg`,
+    discover: `${this.s3BucketUrl}assets/images/card_discover.svg`,
+    dankort: `${this.s3BucketUrl}assets/images/card_dankort.svg`,
+    maestro: `${this.s3BucketUrl}assets/images/card_maestro.svg`,
+    jcb: `${this.s3BucketUrl}assets/images/card_jcb.svg`,
+    diners_club: `${this.s3BucketUrl}assets/images/card_dinners_club.svg`,
+  }
+
   ngOnInit() {
     this.getCardlist();
   }

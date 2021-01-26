@@ -22,6 +22,9 @@ export class CheckOutService {
     private travelerFormData = new BehaviorSubject([]);
     getTravelerFormData = this.travelerFormData.asObservable();
 
+    private countires = new BehaviorSubject([])
+    getCountries = this.countires.asObservable();
+
     constructor() { }
 
     selectTraveler(traveler) {
@@ -38,6 +41,10 @@ export class CheckOutService {
 
     emitTravelersformData(travelers){
         this.travelerFormData.next(travelers)
+    }
+
+    setCountries(countires){
+        this.countires.next(countires)
     }
 }
    
