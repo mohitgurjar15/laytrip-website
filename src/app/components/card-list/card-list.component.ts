@@ -40,7 +40,6 @@ export class CardListComponent implements OnInit {
     this.genericService.getCardlist().subscribe((res: any) => {
       this.cardLoader = false;
       this.cards = res;
-      console.log(this.cards);
       this.totalNumberOfcard.emit(res.length)
     }, (error) => {
       this.cardLoader = false;
@@ -57,7 +56,6 @@ export class CardListComponent implements OnInit {
     if (typeof changes['newCard'].currentValue !== 'undefined') {
       if (typeof this.newCard !== 'undefined') {
         this.cards.push(this.newCard);
-        console.log(this.cards);
         this.cardToken = this.newCard.cardToken;
         this.selectCreditCard.emit(this.newCard.cardToken)
       }

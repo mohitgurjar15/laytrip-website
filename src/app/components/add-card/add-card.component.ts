@@ -139,7 +139,7 @@ export class AddCardComponent implements OnInit {
         data: cardData,
         success: function (obj) {
           // this.emitNewCard.emit(obj);
-          $('#accordion-card').append(`<div class="card">
+          $('#card-list').append(`<div class="card">
           <div class="card-header">
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="true"
                   aria-controls="collapse11">
