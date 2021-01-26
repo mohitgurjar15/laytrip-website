@@ -483,11 +483,16 @@
 									}
 
 									li {
-										border-bottom: 1px solid $box-border-color;
-
+										border-bottom: 0px solid $box-border-color;
+										&:first-child{
+											a{
+												padding: 10px 10px 0px 10px;
+											}
+										}
 										a {
 											color: $text-grey;
 											font-size: 14px;
+											padding: 0 10px 10px 10px;
 											&:hover {
 												color: $primary-color;
 												background-color: $bg-body;
@@ -543,6 +548,104 @@
 								width: auto;
 								display: inline-block;
 							}
+						}
+					}
+
+					
+					.dropdown {
+						&.account_ddown {
+							.dropdown-menu {
+								left: auto;
+								right: 0;
+								top: 120%;
+								border: 1px solid $box-border-color;
+								border-radius: 5px;
+
+								&:before {
+									width: 0;
+									height: 0;
+									border-left: 9px solid transparent;
+									border-right: 9px solid transparent;
+									border-bottom: 9px solid $background-white;
+									position: absolute;
+									top: -9px;
+									right: 20px;
+									content: '';
+									z-index: 2;
+								}
+
+								&:after {
+									width: 0;
+									height: 0;
+									border-left: 10px solid transparent;
+									border-right: 10px solid transparent;
+									border-bottom: 10px solid $box-border-color;
+									position: absolute;
+									top: -10px;
+									right: 19px;
+									content: '';
+								}
+
+								li {
+									border-bottom: 0px solid $box-border-color;
+
+									a {
+										color: $text-grey;
+										font-size: 14px;
+										&:hover {
+											color: $primary-color;
+											background-color: $bg-body;
+											font-weight: 500;
+										}
+										.lay_points_dot{
+											position: relative;
+											width: 100%;
+											padding-left: 24px;
+											display: flex;
+											border: none;
+											&::before{
+												content: '';
+												height: 18px;
+												width: 18px;
+												background-color: $hotel-secondary-color;
+												position: absolute;
+												left: 0;
+												top: 5px;
+												border-radius: 50%;
+											}
+										}
+									}
+
+									&:first-child {
+										border-radius: 5px 5px 0 0;
+
+										a {
+											border-radius: 5px 5px 0 0;
+										}
+									}
+
+									&:last-child {
+										border-radius: 0 0 5px 5px;
+										border-bottom: none;
+
+										a {
+											border-radius: 0 0 5px 5px;
+										}
+									}
+								}
+							}
+						}
+					}
+
+					@media(max-width: 991px) {
+						width: 100%;
+						padding: 10px 15px;
+						border: none;
+						display: none;
+
+						a {
+							width: auto;
+							display: inline-block;
 						}
 					}
 
@@ -712,7 +815,7 @@
 					}
 
 					li {
-						border-bottom: 1px solid $box-border-color;
+						border-bottom: 0px solid $box-border-color;
 
 						a {
 							color: $text-darkblue;
