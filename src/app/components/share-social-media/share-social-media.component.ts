@@ -52,11 +52,15 @@ export class ShareSocialMediaComponent implements OnInit {
   }
   copyToClipboard() {
     var dummy = document.createElement("textarea");
+    dummy.setAttribute("id", "dummy_textarea");
     document.body.appendChild(dummy);
     dummy.value = environment.siteUrl;
     dummy.select();
     document.execCommand("copy");
+
     this.isCopyText = true;
+
+    $('#dummy_textarea').hide()
     setTimeout(() => {      
       this.isCopyText = false;
     }, 2000);
