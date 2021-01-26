@@ -86,7 +86,7 @@ export class SigninComponent  implements OnInit {
           } 
         }
       }, (error: HttpErrorResponse) => { 
-        this.loading = false;      
+        this.loading = false;       
         if(error.status == 406){
           this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
             this.openOtpPage();
