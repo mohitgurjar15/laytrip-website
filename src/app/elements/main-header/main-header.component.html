@@ -86,13 +86,14 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item" *ngIf="isLoggedIn && userDetails.roleId != 7">
+                            <li class="nav-item " *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
                                     <a class="nav-link" class="dropdown-toggle hover-link" data-toggle="dropdown">
                                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
+                                        <li><a class="hover-link" (click)="onLoggedout()">My Account</a></li>
                                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                                             class="disabled">
                                             <a class="nav-link hover-link "
