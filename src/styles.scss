@@ -4506,7 +4506,7 @@ select {
       display: flex;
       margin-bottom: 30px;
       @include tab-view{
-        picture{
+        span{
           display: none;
         }
       }
