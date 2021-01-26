@@ -1,8 +1,8 @@
 {
     "flight_main_title": "Welcome to  <span>laytrip</span>!",
     "flight_second_title": "Layaway travel for everyone",
-    "email": "EMAIL",
-    "password": "PASSWORD",
+    "email": "Email",
+    "password": "Password",
     "email_placeholder": "Email",
     "password_placholder": "Password",
     "email_touched_validation": "Please enter your email address.",
