@@ -74,7 +74,6 @@ export class SocialLoginComponent implements OnInit {
   }
 
   loadGoogleSdk() {
-    console.log('here')
     window['googleSDKLoaded'] = () => {
       window['gapi'].load('auth2', () => {
         this.auth2 = window['gapi'].auth2.init({
@@ -98,7 +97,9 @@ export class SocialLoginComponent implements OnInit {
 
 
   googleLogin() {
-    console.log('here')
+    // this.loadGoogleSdk();
+    console.log(this.auth2)
+    console.log(this.auth2)
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
         this.google_loading = true;

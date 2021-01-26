@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { MustMatch } from '../../../_helpers/must-match.validators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
+import { RecaptchaComponent } from 'ng-recaptcha';
 
 declare var $: any;
 
@@ -34,6 +35,7 @@ export class SignupComponent implements OnInit {
   public isCaptchaValidated: boolean = false;
   public message: string = "";
   iAccept : boolean = false;
+  @ViewChild('captchaElem',{static:false}) captchaElem: RecaptchaComponent;
 
   constructor(
     public modalService: NgbModal,
@@ -43,14 +45,13 @@ export class SignupComponent implements OnInit {
     ) {}
 
   ngOnInit() {    
-
     this.signupForm = this.formBuilder.group({
       first_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       last_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required],
-      checked:  ['', Validators.required],      
+      checked:  ['', Validators.required],  
     },{
       validators: MustMatch('password', 'confirm_password'),     
     });

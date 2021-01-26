@@ -76,31 +76,11 @@ export class VerifyOtpComponent implements OnInit {
       this.otpForm.controls.otp.setValue(event);
       this.ngOtpInputRef.setValue(event);
     }
-  }
-
-  closeModal(){
-    this.valueChange.emit({ key: 'signIn', value: true });
-    $('#sign_in_modal').modal('hide');
-  }
-
-  validateNumber(e: any) {
-    let input = String.fromCharCode(e.charCode);
-    const reg = /^[0-9]*$/;
-    
-    if (!reg.test(input)) {
-      e.preventDefault();
-    }
-  }
-  
-  openSignInPage() {
-   
-  }
+  }  
 
   resendOtp(){
     if(this.isResend){
-
       this.ngOtpInputRef.setValue('');
-      // this.otpForm.reset();
       this.spinner = true;
       this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
         this.spinner = this.isResend = false;
@@ -129,41 +109,29 @@ export class VerifyOtpComponent implements OnInit {
       this.loading = false; 
       return;
     } else {    
-
+      var otpValue='';
+      let otps : any = this.ngOtpInputRef.otpForm.value;
+        Object.values(otps).forEach((v) => {    
+        otpValue += v;
+      });
       let data = {
         "email":this.emailForVerifyOtp,
-        "otp": this.otp,
+        "otp": otpValue,
        }; 
       
       this.userService.verifyOtp(data).subscribe((data: any) => {
         this.otpVerified = true;  
         this.submitted = this.loading = false;    
-        // $('#sign_in_modal').modal('hide');
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         const userDetails = getLoginUserInfo();    
         const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
         if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
           this.router.navigate(['account/subscription']);
-        } else {
-          // this.activeModal.close();
-          // $('#sign_in_modal').modal('show');
-          // this.valueChange.emit({ key: 'signIn', value: true}); 
         }
-
       }, (error: HttpErrorResponse) => {       
         this.apiError = error.message;
         this.submitted = this.loading = false;        
-      });                    
-      
+      });                          
     }
-  }
-
-  onKeydown(event){
-    const tabIndex = event.target.tabIndex ? '.tab'+(event.target.tabIndex-1): 1;
-    if(event.key == 'Backspace'){
-      $(tabIndex).focus();
-      $('.tab'+event.target.tabIndex).val('');
-    }
-  }
-
+  } 
 }
