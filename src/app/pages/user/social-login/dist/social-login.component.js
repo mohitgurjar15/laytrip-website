@@ -62,6 +62,7 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.loadGoogleSdk = function () {
         var _this = this;
+        console.log('here');
         window['googleSDKLoaded'] = function () {
             window['gapi'].load('auth2', function () {
                 _this.auth2 = window['gapi'].auth2.init({
@@ -85,6 +86,7 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.googleLogin = function () {
         var _this = this;
+        console.log('here');
         this.auth2.attachClickHandler(this.loginElement.nativeElement, {}, function (googleUser) {
             _this.google_loading = true;
             var profile = googleUser.getBasicProfile();
@@ -190,7 +192,7 @@ var SocialLoginComponent = /** @class */ (function () {
         core_1.Output()
     ], SocialLoginComponent.prototype, "socialError");
     __decorate([
-        core_1.ViewChild('loginRef')
+        core_1.ViewChild('loginRef', { static: true })
     ], SocialLoginComponent.prototype, "loginElement");
     SocialLoginComponent = __decorate([
         core_1.Component({
