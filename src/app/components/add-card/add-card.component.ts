@@ -161,7 +161,7 @@ export class AddCardComponent implements OnInit {
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="true"
                   aria-controls="collapse11">
                   <span class="heade_wrps">
-                      <img [src]="${cardObject[obj.cardType]}" alt="Card icon" />
+                      <img [src]="${cardObject[obj.cardType]}" alt="Card icon" /> 
                       ${obj.cardType} ending in ${obj.cardDigits}
                   </span>
               </a>
