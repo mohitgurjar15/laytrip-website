@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 declare var $: any;
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
@@ -17,7 +18,8 @@ export class AddCardComponent implements OnInit {
   constructor(
     private genericService: GenericService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
   @Input() showAddCardForm: boolean;
   @Output() emitNewCard = new EventEmitter();
@@ -122,6 +124,7 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {
+      this.spinner.show();
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
       this.token = token;
@@ -139,6 +142,7 @@ export class AddCardComponent implements OnInit {
         data: cardData,
         success: function (obj) {
           // this.emitNewCard.emit(obj);
+          this.spinner.hide();
           $('#card_list_accodrio').append(`<div _ngcontent-serverapp-c13="" class="accordion_cardss ng-star-inserted" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
@@ -203,6 +207,7 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
+    this.spinner.show();
     var normalBorder = "1px solid #ccc";
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
