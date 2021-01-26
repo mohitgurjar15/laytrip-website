@@ -123,7 +123,7 @@
                             </div>
                         </div>
                         <div class="form_btn">
-                            <button type="submit" [ngClass]="{'btn_disable':(!loginForm.valid )}" class="btn  btn-accent btn-block btn-flat b-r-10"
+                            <button type="submit" [disabled]="(!loginForm.valid)" [ngClass]="{'btn_disable':(!loginForm.valid )}" class="btn  btn-accent btn-block btn-flat b-r-10"
                                 (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_in' | translate}}
                             </button>

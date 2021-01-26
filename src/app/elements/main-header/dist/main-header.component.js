@@ -103,8 +103,8 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.openSignModal = function () {
         // const modalRef = this.modalService.open(AuthComponent);
-        // $('#sign_in_modal').modal('show');
-        // $("#signin-form").trigger( "reset" );
+        $("#signin-form").trigger("reset");
+        $('#sign_in_modal').modal('show');
     };
     var MainHeaderComponent_1;
     __decorate([

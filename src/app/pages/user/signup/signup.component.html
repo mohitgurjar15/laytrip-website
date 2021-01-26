@@ -162,7 +162,7 @@
                             </div>
                         </div> 
                         <div class="form_btn">
-                            <button type="submit"  [ngClass]="{'btn_disable':(!signupForm.valid || !this.iAccept || !isCaptchaValidated)}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                            <button type="submit" [disabled]="(!signupForm.valid || !this.iAccept || !isCaptchaValidated)" [ngClass]="{'btn_disable':(!signupForm.valid || !this.iAccept || !isCaptchaValidated)}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
                             </button>
                         </div>
