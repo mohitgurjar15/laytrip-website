@@ -61,6 +61,10 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.child));
       this.cartService.setCartTravelers(this.travelers)
     }
+    for(let i=0; i < this.cartItem.module_info.infant_count; i++){
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.infant));
+      this.cartService.setCartTravelers(this.travelers)
+    }
     
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import * as moment from 'moment';
@@ -11,7 +11,8 @@ import { GenericService } from '../../services/generic.service';
 @Component({
   selector: 'app-add-card',
   templateUrl: './add-card.component.html',
-  styleUrls: ['./add-card.component.scss']
+  styleUrls: ['./add-card.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddCardComponent implements OnInit {
 
@@ -142,18 +143,30 @@ export class AddCardComponent implements OnInit {
         success: function (obj) {
           // this.emitNewCard.emit(obj);
 
+          let s3BucketUrl = 'http://d2q1prebf1m2s9.cloudfront.net/';
+          var cardObject = {
+            visa: `${s3BucketUrl}assets/images/card_visa.svg`,
+            master: `${s3BucketUrl}assets/images/master_cards_img.svg`,
+            american_express: `${s3BucketUrl}assets/images/card_amex.svg`,
+            discover: `${s3BucketUrl}assets/images/card_discover.svg`,
+            dankort: `${s3BucketUrl}assets/images/card_dankort.svg`,
+            maestro: `${s3BucketUrl}assets/images/card_maestro.svg`,
+            jcb: `${s3BucketUrl}assets/images/card_jcb.svg`,
+            diners_club: `${s3BucketUrl}assets/images/card_dinners_club.svg`,
+          }
+
           $('#card-list').append(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
-              <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="true"
+              <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="false"
                   aria-controls="collapse11">
                   <span class="heade_wrps">
-                      <img [src]="cardObject[obj.cardType]" alt="Card icon" />
+                      <img [src]="${cardObject[obj.cardType]}" alt="Card icon" />
                       ${obj.cardType} ending in ${obj.cardDigits}
                   </span>
               </a>
           </div>
-          <div id="card" class="collapse show" data-parent="#accordion">
+          <div id="card" class="collapse" data-parent="#accordion">
               <div class="card-body">
                   <div class="form-row">
                       <div class="col col-lg-4">
