@@ -19,6 +19,7 @@ export class CardListComponent implements OnInit {
   @Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
   cardToken: string = '';
+  isSelectedCard = false;
 
   cardObject = {
     visa: `${this.s3BucketUrl}assets/images/card_visa.svg`,
@@ -48,8 +49,9 @@ export class CardListComponent implements OnInit {
   }
 
   selectCard(cardToken) {
+    this.isSelectedCard = true;
     this.cardToken = cardToken;
-    this.selectCreditCard.emit(cardToken)
+    this.selectCreditCard.emit(cardToken);
   }
 
   ngOnChanges(changes: SimpleChanges) {
