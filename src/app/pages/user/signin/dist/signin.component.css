@@ -490,16 +490,16 @@
 }
 .comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button.btn_disable {
   cursor: default;
-  /*                 background: $mid_gray_bg;
-                  border-color: $mid_gray_bg;
+  /*  background: $mid_gray_bg;
+   border-color: $mid_gray_bg;
 
-                  &:before {
-                    background: $mid_gray_bg;
-                  }
-   */
-}
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button.btn_disable:hover {
-  color: #ffffff;
+   &:before {
+     background: $mid_gray_bg;
+   }
+
+   &:hover {
+     color: $text-white;
+   } */
 }
 .comman_modal .modal-content .sign_in_modal .modal_cnt form .block_api_error {
   max-width: 375px;

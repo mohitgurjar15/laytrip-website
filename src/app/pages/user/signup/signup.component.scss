@@ -284,7 +284,7 @@
 
               &.btn_disable {
                 cursor: default;
-                background: $mid_gray_bg;
+               /*  background: $mid_gray_bg;
                 border-color: $mid_gray_bg;
 
                 &:before {
@@ -293,7 +293,7 @@
 
                 &:hover {
                   color: $text-white;
-                }
+                } */
               }
             }
           }
