@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -79,7 +80,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private commonFunction: CommonFunction,
     private genericService: GenericService,
     private cartService: CartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
   }
 
@@ -167,16 +169,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
-    // // if (this.cartItems) {
-    //   //   if (this.cartItems[0].paymentType === 'instalment') {
-
-    //   //   }
-    //   // }
     //   console.log(this.cartItems.length);
     if (this.cartItems && this.cartItems.length >= 4) {
       // this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-      this.router.navigate([`flight/payment/${route.route_code}`]);
     } else {
+      this.spinner.show();
       const itinerary = {
         adult: this.route.snapshot.queryParams["adult"],
         child: this.route.snapshot.queryParams["child"],
@@ -201,6 +198,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       };
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         // console.log(res);
+        this.spinner.hide();
         if (res) {
           this.cartService.setCartItems(route);
           // GET CART ITEMS FROM CART SERVICE

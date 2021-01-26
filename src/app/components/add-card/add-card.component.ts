@@ -139,7 +139,8 @@ export class AddCardComponent implements OnInit {
         data: cardData,
         success: function (obj) {
           // this.emitNewCard.emit(obj);
-          $('#accordion-card').append(`<div class="card">
+          $('#card_list_accodrio').append(`<div _ngcontent-serverapp-c13="" class="accordion_cardss ng-star-inserted" id="card_list_accodrio">
+          <div class="card">
           <div class="card-header">
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="true"
                   aria-controls="collapse11">
@@ -184,7 +185,7 @@ export class AddCardComponent implements OnInit {
                   </div>
               </div>
           </div>
-      </div>`);
+      </div></div>`);
           $("#payment-form")[0].reset();
           Spreedly.reload();
           // window.location.reload();
