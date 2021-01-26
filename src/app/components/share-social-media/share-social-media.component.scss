@@ -31,11 +31,21 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                position: relative;
 
                 @include tab-view{
                     margin-right: 15px;
                     height: 66px;
                     width: 66px;
+                }
+                .copy_text{
+                    position: absolute;
+                    transform: translateY(-260%);
+                    background-color: $mid_gray_bg;
+                    color: $text-white;
+                    font-size: 10px;
+                    padding: 5px 10px;
+                    border-radius: 15px;
                 }
                 
                 &:last-child{

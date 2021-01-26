@@ -74,7 +74,7 @@
                                         aria-hidden="true"></i>
                                 </a>
                             </li> -->
-                            <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
+                            <li class="nav-item login_li" *ngIf="!isLoggedIn || userDetails.roleId == 7">
                                 <!-- <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">{{'sign_in' | translate}}</a> -->
                                 <a class="nav-link login_btn_text hover-link" id="login_btn" data-toggle="modal"
                                     data-target="#sign_in_modal">
@@ -88,7 +88,7 @@
                             </li>
 
                             <li class="nav-item" *ngIf="isLoggedIn && userDetails.roleId != 7">
-                                <div class="dropdown account_ddown">
+                                <div class="dropdown account_ddown account_prof">
                                     <a class="nav-link" class="dropdown-toggle hover-link" data-toggle="dropdown">
                                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                                         <span>{{userDetails.firstName}}</span>
@@ -108,6 +108,16 @@
                                         <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' |
                                                 translate}}</a></li>
                                     </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="cart_section">
+                                    <span class="cart_i_wrapper">
+                                        <a href="javascript:void(0);">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/cart_beg.svg" alt="">
+                                            <span class="cart_count" [hidden]="!cartItemsCount">{{cartItemsCount}}</span>
+                                        </a>
+                                    </span>
                                 </div>
                             </li>
                         </ul>
@@ -134,6 +144,14 @@
                         </li>
                         <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' | translate}}</a></li>
                     </ul>
+                </div>
+                <div class="cart_section">
+                    <span class="cart_i_wrapper">
+                        <a href="javascript:void(0);">
+                            <img src="{{s3BucketUrl}}assets/images/icon/cart_beg.svg" alt="">
+                            <span class="cart_count" [hidden]="!cartItemsCount">{{cartItemsCount}}</span>
+                        </a>
+                    </span>
                 </div>
             </div>
         </div>
