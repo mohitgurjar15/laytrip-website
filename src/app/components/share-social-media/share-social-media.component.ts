@@ -59,7 +59,7 @@ export class ShareSocialMediaComponent implements OnInit {
     document.execCommand("copy");
 
     this.isCopyText = true;
-
+    document.getElementById("dummy_textarea").remove();
     $('#dummy_textarea').hide()
     setTimeout(() => {      
       this.isCopyText = false;
