@@ -1,5 +1,5 @@
-import { Component, OnInit, Input,  ViewChild, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder,  FormArray, Validators, FormGroupDirective } from '@angular/forms';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
@@ -25,11 +25,7 @@ export class TravelerFormComponent implements OnInit {
   travelerForm: FormGroup;
   @Input() cartNumber:number;
   traveler_number;
-  /* travelers = {
-    type: {
-      adults : []
-    }
-  }; */
+  countries=[]
   travelers={
     type0 : {
       adults : []
@@ -91,6 +87,8 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email=traveler.email;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId=traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender=traveler.gender;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_number=traveler.phoneNo;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country=typeof traveler.country!='undefined'?traveler.country.id:'';
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob).format('MMM d, yy');
 
         //this.travelers= Object.assign({},this.travelers)
@@ -103,7 +101,9 @@ export class TravelerFormComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    
+    this.checkOutService.getCountries.subscribe(res=>{
+      this.countries=res;
+    })
   }
 
   patch() {
@@ -118,13 +118,14 @@ export class TravelerFormComponent implements OnInit {
   patchValues(x) {
     return this.formBuilder.group({
       first_name: [x.first_name,[Validators.required]],
-      last_name: [x.last_name],
-      email: [x.email],
-      phone_number: [x.phone_number],
-      dob: [x.dob],
-      country:[x.country],
-      gender:[x.gender],
-      userId:[x.userId]
+      last_name: [x.last_name,[Validators.required]],
+      email: [x.email,[Validators.required]],
+      phone_number: [x.phone_number,[Validators.required]],
+      dob: [x.dob,[Validators.required]],
+      country:[x.country,[Validators.required]],
+      gender:[x.gender,[Validators.required]],
+      userId:[x.userId],
+      type:[x.type]
     })
   }
 
@@ -135,6 +136,15 @@ export class TravelerFormComponent implements OnInit {
 
   typeOf(value) {
     return typeof value;
+  }
+
+  /**
+   * 
+   * @param type ['adult','child','infant']
+   */
+  selectTravelerType(type,traveler_number){
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].type=type;
+    this.patch()
   }
   
 }

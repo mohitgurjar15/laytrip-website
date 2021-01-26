@@ -10,14 +10,15 @@ export class MyTravelerComponent implements OnInit {
   @Input() travelers;
   @Input() traveler_number;
   @Input() travelerId;
+  @Input() traveler_type:string;
   traveler:any={}
   constructor(
     private checkOutService:CheckOutService
   ) { }
 
   ngOnInit(): void {
+    console.log("traveler_type",this.traveler_type,this.traveler_number)
     this.checkOutService.getTravelers.subscribe(travelers => this.travelers=travelers)
-    
   }
 
   selectTraveler(traveler){
