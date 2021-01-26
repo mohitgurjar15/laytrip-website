@@ -46,6 +46,15 @@
                                 outline: none;
                             }
                         }
+                        .text_area_wrps{
+                            position: relative;
+                            .word_counter{
+                                display: flex;
+                                color: $box-border-color;
+                                font-size: 10px;
+                                justify-content: flex-end;
+                            }
+                        }
                     }
                     
     
