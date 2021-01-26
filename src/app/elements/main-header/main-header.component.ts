@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { AuthComponent } from '../../pages/user/auth/auth.component';
 import { CommonFunction } from '../../_helpers/common-function';
+import { CartService } from '../../services/cart.service';
 declare var $: any;
 
 @Component({
@@ -31,6 +32,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   _isLayCredit = false;
   countryCode: string;
   isCovidPage = true;
+  // CART VARIABLE
+  cartItemsCount;
+  cartItems;
 
   constructor(
     private genericService: GenericService,
@@ -39,7 +43,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public router: Router,
     private commonFunction: CommonFunction,
     private renderer: Renderer2,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private cartService: CartService,
   ) {
   }
 
@@ -53,6 +58,27 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }
     this.countryCode = this.commonFunction.getUserCountry();
+    this.getCartList();
+  }
+
+  getCartList() {
+    // GET CART LIST FROM GENERIC SERVICE
+    this.cartService.getCartList().subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        this.cartService.setCartItems(res.data);
+        this.cartItems = res.data;
+        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+        if (res.count) {
+          this.cartItemsCount = res.count;
+        }
+        this.cd.detectChanges();
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+        this.cartItems = [];
+      }
+    });
   }
 
 

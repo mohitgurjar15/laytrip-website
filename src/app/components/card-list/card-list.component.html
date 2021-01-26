@@ -15,52 +15,53 @@
   </div> -->
 
 <div id="card-list">
-<div id="card_list_accodrio" class="accordion_cardss" *ngFor="let card of cards; let i = index;">
-    <div class="card">
-        <div class="card-header">
-            <a data-toggle="collapse" data-parent="#accordion" href="#card{{i}}" aria-expanded="true"
-                aria-controls="collapse11">
-                <span class="heade_wrps">
-                    <img [src]="cardObject[card.cardType]" alt="Card icon" />
-                    {{card.cardType | titlecase}} ending in {{card.cardDigits}}
-                </span>
-            </a>
-        </div>
-        <div id="card{{i}}" class="collapse show" data-parent="#accordion">
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="col-sm-12 col-md-4 mb-sm-10">
-                        <div class="card_headbar">
-                            Name on Card
+    <div id="card_list_accodrio" class="accordion_cardss anchor-tag" *ngFor="let card of cards; let blockIndex = index;"
+        (click)="selectCard(blockIndex, card.cardToken)">
+        <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': selectedCard[blockIndex] === true}">
+            <div class="card-header">
+                <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="true"
+                    aria-controls="collapse11">
+                    <span class="heade_wrps">
+                        <img [src]="cardObject[card.cardType]" alt="Card icon" />
+                        {{card.cardType | titlecase}} ending in {{card.cardDigits}}
+                    </span>
+                </a>
+            </div>
+            <div id="card{{blockIndex}}" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <div class="card_headbar">
+                                Name on Card
+                            </div>
+                            <div class="card_texter">
+                                {{ card.cardHolderName }}
+                            </div>
                         </div>
-                        <div class="card_texter">
-                            {{ card.cardHolderName }}
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <div class="card_headbar">
+                                Billing Address
+                            </div>
+                            <div class="card_texter">
+                                Victor Pacheco <span> Via della Libertà #19 Milano, 33098 Italia 3478691146</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10">
-                        <div class="card_headbar">
-                            Billing Address
+                        <div class="col-sm-12 col-md-2 mb-sm-10">
+                            <div class="card_headbar">
+                                Expires
+                            </div>
+                            <div class="card_texter">
+                                09/2023
+                            </div>
                         </div>
-                        <div class="card_texter">
-                            Victor Pacheco <span> Via della Libertà #19 Milano, 33098 Italia 3478691146</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-2 mb-sm-10">
-                        <div class="card_headbar">
-                            Expires
-                        </div>
-                        <div class="card_texter">
-                            09/2023
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-2 mb-sm-10">
-                        <div class="save_btn_wrps">
-                            <a href="javascript:void(0);">Delete</a>
+                        <div class="col-sm-12 col-md-2 mb-sm-10">
+                            <div class="save_btn_wrps">
+                                <a href="javascript:void(0);">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
