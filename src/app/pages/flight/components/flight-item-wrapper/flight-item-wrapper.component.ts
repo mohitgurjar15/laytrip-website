@@ -110,7 +110,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   ngDoCheck() {
-    this.checkUser();
+    // this.checkUser();
   }
 
   checkUser() {
@@ -120,11 +120,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     if (userToken && userToken != 'undefined' && userToken != 'null') {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
-      this.userDetails = getLoginUserInfo();
-      if (this.userDetails.roleId != 7 && !this._isLayCredit) {
-        this.totalLaycredit();
-      }
-      this.showTotalLayCredit = this.totalLayCredit;
     }
   }
 

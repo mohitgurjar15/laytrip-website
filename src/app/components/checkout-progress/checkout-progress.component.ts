@@ -24,7 +24,7 @@ export class CheckoutProgressComponent implements OnInit {
     //console.log("progressStep",this.progressStep, Object.values(this.progressStep))
     // GET CART LIST FROM GENERIC SERVICE
     this.cartService.getCartItems.subscribe((res: any) => {
-      this.cartItemsCount = JSON.parse(localStorage.getItem('$crt')) | 0;
+      this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
     });
   }
 

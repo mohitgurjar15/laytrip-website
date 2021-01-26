@@ -10,6 +10,7 @@ import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { AuthComponent } from '../../pages/user/auth/auth.component';
 import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
+
 declare var $: any;
 
 @Component({
@@ -78,6 +79,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }, (error) => {
         if (error && error.status === 404) {
           this.cartItems = [];
+          this.cartItemsCount = this.cartItems.length;
         }
       });
     }
@@ -86,12 +88,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.checkUser();
-    // this.getCartList();
     let host = window.location.href;
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
       this.cd.detectChanges();
     }
+    this.cartService.getCartItems.subscribe((res: any) => {
+      this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+    });
     // this.userDetails = getLoginUserInfo();
     // this.totalLaycredit();
   }
@@ -122,7 +126,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     localStorage.removeItem('_lay_sess');
     localStorage.removeItem('$crt');
     this.cartItemsCount = '';
-    this.cartService.setCartItems(this.cartItemsCount);
     this.router.navigate(['/']);
   }
 
@@ -162,5 +165,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   openSignModal() {
     const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
+  }
+
+  redirectToPayment() {
+    if (this.isLoggedIn && this.cartItemsCount > 0) {
+      this.router.navigate([`flight/payment/ZVZ4WEFNOW8ybVIwT0VX`]);
+    }
   }
 }
