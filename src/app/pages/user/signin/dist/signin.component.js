@@ -73,6 +73,7 @@ var SigninComponent = /** @class */ (function () {
                     }
                 }
             }, function (error) {
+                _this.loading = false;
                 if (error.status == 406) {
                     _this.userService.resendOtp(_this.loginForm.value.email).subscribe(function (data) {
                         _this.openOtpPage();

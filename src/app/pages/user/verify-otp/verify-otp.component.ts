@@ -28,6 +28,7 @@ export class VerifyOtpComponent implements OnInit {
   errorMessage = '';
   spinner = false;
   @Input() emailForVerifyOtp;
+  @Input() isSignup : boolean = false;
   apiError :string =  '';
   config = {
     allowNumbersOnly: true,
@@ -96,16 +97,19 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   resendOtp(){
-    this.ngOtpInputRef.setValue('');
-    // this.otpForm.reset();
-    this.spinner = true;
-    this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
-      this.spinner = this.isResend = false;
-      this.counter.begin();
-    }, (error: HttpErrorResponse) => {       
-      this.submitted = this.spinner = false;
-      this.apiError = error.message;
-    });
+    if(this.isResend){
+
+      this.ngOtpInputRef.setValue('');
+      // this.otpForm.reset();
+      this.spinner = true;
+      this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
+        this.spinner = this.isResend = false;
+        this.counter.begin();
+      }, (error: HttpErrorResponse) => {       
+        this.submitted = this.spinner = false;
+        this.apiError = error.message;
+      });
+    }
   }
 
   onInputEntry(event, nextInput) {
