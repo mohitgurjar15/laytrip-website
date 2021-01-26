@@ -20,6 +20,7 @@ var ContactUsComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
         this.countries_code = [];
+        this.messageLenght = 0;
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -77,6 +78,9 @@ var ContactUsComponent = /** @class */ (function () {
             _this.loading = false;
             _this.toastr.error(error.message, 'Error');
         }));
+    };
+    ContactUsComponent.prototype.setMessageLenght = function (value) {
+        this.messageLenght = value.toString().length;
     };
     ContactUsComponent = __decorate([
         core_1.Component({
