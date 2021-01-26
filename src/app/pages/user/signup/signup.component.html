@@ -70,7 +70,7 @@
         </div>
     </div>
 </div> -->
-<div class="modal fade comman_modal" id="sign_up_modal">
+<div class="modal fade comman_modal" id="sign_up_modal" data-backdrop="static" data-keyboard="false" >
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="sign_in_modal">
@@ -157,7 +157,7 @@
                         
                         <div class="form_row">
                             <div class="text_field">
-                                <re-captcha (resolved)="captchaResponse($event)" tabindex="17" siteKey="6LcPUboZAAAAAN1Sh411ruqdmT4OD6ZDe65rTsVO"></re-captcha>
+                                <re-captcha #captchaElem (resolved)="captchaResponse($event)" tabindex="17" siteKey="6LcPUboZAAAAAN1Sh411ruqdmT4OD6ZDe65rTsVO"></re-captcha>
                                 <div class="error_text" *ngIf="!isCaptchaValidated && submitted">{{ 're_captcha_error_message' | translate }}</div>
                             </div>
                         </div> 

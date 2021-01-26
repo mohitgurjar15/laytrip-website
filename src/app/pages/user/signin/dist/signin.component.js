@@ -73,19 +73,17 @@ var SigninComponent = /** @class */ (function () {
                     }
                 }
             }, function (error) {
-                _this.loading = false;
+                _this.submitted = _this.loading = false;
                 if (error.status == 406) {
                     _this.userService.resendOtp(_this.loginForm.value.email).subscribe(function (data) {
                         _this.openOtpPage();
                         // $('.modal_container').addClass('right-panel-active');
-                        // this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });
+                        // this.valueChange.emit({ key: 'otpModal', value: true,emailForVerifyOtp:this.loginForm.value.email });            
                     }, function (error) {
-                        _this.submitted = _this.loading = false;
                         _this.apiError = error.message;
                     });
                 }
                 else {
-                    _this.submitted = _this.loading = false;
                     _this.apiError = error.message;
                 }
             });
@@ -131,6 +129,9 @@ var SigninComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], SigninComponent.prototype, "pageData");
+    __decorate([
+        core_1.Input()
+    ], SigninComponent.prototype, "resetRecaptcha");
     __decorate([
         core_1.Output()
     ], SigninComponent.prototype, "valueChange");

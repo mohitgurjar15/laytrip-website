@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ViewChild, Renderer2, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { AuthComponent } from '../../pages/user/auth/auth.component';
 import { CommonFunction } from '../../_helpers/common-function';
-import { CartService } from '../../services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 declare var $: any;
 
 @Component({
@@ -19,11 +19,8 @@ declare var $: any;
 })
 export class MainHeaderComponent implements OnInit, DoCheck {
 
-  @ViewChild(MainHeaderComponent, { static: false }) headerComponent: MainHeaderComponent;
-
   s3BucketUrl = environment.s3BucketUrl;
   defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
-
   isLoggedIn = false;
   totalLayCredit = 0;
   showTotalLayCredit = 0;
@@ -32,9 +29,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   _isLayCredit = false;
   countryCode: string;
   isCovidPage = true;
-  // CART VARIABLE
-  cartItemsCount;
   cartItems;
+  cartItemsCount;
 
   constructor(
     private genericService: GenericService,
@@ -44,7 +40,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private commonFunction: CommonFunction,
     private renderer: Renderer2,
     public cd: ChangeDetectorRef,
-    private cartService: CartService,
+    private cartService:CartService
   ) {
   }
 
@@ -161,9 +157,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   openSignModal() {
     // const modalRef = this.modalService.open(AuthComponent);
-    $("#signin-form").trigger( "reset" );
     $('#sign_in_modal').modal('show');
-
+    $("#signin-form").trigger( "reset" );
   }
   
 }
