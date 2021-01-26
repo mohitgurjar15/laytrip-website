@@ -90,37 +90,31 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
     if (this.filterFlightDetails && this.filterFlightDetails.price_range) {
       // FOR FILTER FLIGHT - PRICE & PARTIAL PRICE
-      this.priceValue = this.filterFlightDetails.price_range.min_price ? this.filterFlightDetails.price_range.min_price : 0;
-      this.priceHighValue = this.filterFlightDetails.price_range.max_price ? this.filterFlightDetails.price_range.max_price : 0;
+      this.priceValue = this.filterFlightDetails.price_range.min_price ? Math.floor(this.filterFlightDetails.price_range.min_price) : 0;
+      this.priceHighValue = this.filterFlightDetails.price_range.max_price ? Math.ceil(this.filterFlightDetails.price_range.max_price) : 0;
       this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)])
 
-      this.minPrice = this.priceValue;
-      this.maxPrice = this.priceHighValue;
-      this.priceOptions.floor =
-        parseInt(this.filterFlightDetails.price_range.min_price) ?
-          parseInt(this.filterFlightDetails.price_range.min_price) : 0;
-      this.priceOptions.ceil =
+      this.minPrice = Math.floor(this.priceValue);
+      this.maxPrice = Math.ceil(this.priceHighValue);
+      this.priceOptions.floor = this.priceValue;
+      this.priceOptions.ceil = this.priceHighValue;
         parseInt(this.filterFlightDetails.price_range.max_price) ?
           parseInt(this.filterFlightDetails.price_range.max_price) : 0;
 
     }
     if (this.filterFlightDetails && this.filterFlightDetails.partial_payment_price_range) {
       this.partialPaymentValue =
-        this.filterFlightDetails.partial_payment_price_range.min_price ? this.filterFlightDetails.partial_payment_price_range.min_price : 0;
-      this.minPartialPaymentPrice = this.partialPaymentValue;
+        this.filterFlightDetails.partial_payment_price_range.min_price ? Math.floor(this.filterFlightDetails.partial_payment_price_range.min_price) : 0;
+      this.minPartialPaymentPrice = Math.floor(this.partialPaymentValue);
 
       this.partialPaymentHighValue =
-        this.filterFlightDetails.partial_payment_price_range.max_price ? this.filterFlightDetails.partial_payment_price_range.max_price : 0;
+        this.filterFlightDetails.partial_payment_price_range.max_price ? Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
+      this.maxPartialPaymentPrice =Math.ceil(this.partialPaymentHighValue);
+      this.partialPaymentOptions.floor =this.partialPaymentValue;
+      this.partialPaymentOptions.ceil =this.partialPaymentHighValue;
 
-      this.maxPartialPaymentPrice = this.partialPaymentHighValue;
-      this.partialPaymentOptions.floor =
-        parseInt(this.filterFlightDetails.partial_payment_price_range.min_price) ?
-          parseInt(this.filterFlightDetails.partial_payment_price_range.min_price) : 0;
-      this.partialPaymentOptions.ceil =
-        parseInt(this.filterFlightDetails.partial_payment_price_range.max_price) ?
-          parseInt(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
-
-      this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)])
+      //this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)])
+      this.partialPriceSlider.controls.partial_price.setValue(this.partialPaymentValue,this.partialPaymentHighValue)
     }
     if (this.filterFlightDetails && this.filterFlightDetails.arrival_time_slot || this.filterFlightDetails
       && this.filterFlightDetails.depature_time_slot) {
@@ -379,7 +373,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
    * Comman function to process filtration of flight
    */
   filterFlights() {
-    console.log(this.minPartialPaymentPrice, this.maxPartialPaymentPrice);
     let filterdFlights = this.filterFlightDetails.items;
 
     /* Filter flight based on min & max price */

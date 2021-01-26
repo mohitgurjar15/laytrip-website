@@ -47,6 +47,7 @@ var SignupComponent = /** @class */ (function () {
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
         var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
+        modalRef.componentInstance.isSignup = true;
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     SignupComponent.prototype.closeModal = function () {
@@ -121,6 +122,9 @@ var SignupComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], SignupComponent.prototype, "valueChange");
+    __decorate([
+        core_1.ViewChild('captchaElem', { static: false })
+    ], SignupComponent.prototype, "captchaElem");
     SignupComponent = __decorate([
         core_1.Component({
             selector: 'app-signup',

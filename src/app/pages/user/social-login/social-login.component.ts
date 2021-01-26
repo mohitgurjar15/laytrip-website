@@ -97,6 +97,9 @@ export class SocialLoginComponent implements OnInit {
 
 
   googleLogin() {
+    // this.loadGoogleSdk();
+    console.log(this.auth2)
+    console.log(this.auth2)
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
         this.google_loading = true;

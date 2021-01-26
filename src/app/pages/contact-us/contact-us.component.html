@@ -12,7 +12,7 @@
                     <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
                         <div class="form_row">
                             <div class="text_field">
-                                <input type="text" formControlName="name" maxlength="20" tabindex="1"
+                                <input type="text" formControlName="name" maxlength="30" tabindex="1"
                                     placeholder="{{'full_name_placeholder' | translate}}">
                                 <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched"
                                     class="focus-input100 login-error">
@@ -39,10 +39,10 @@
                         </div>
                         <div class="form_row">
                             <div class="text_field text_area_wrps" >
-                                <textarea formControlName="message" maxlength="250" tabindex="3" rows="5"
+                                <textarea (keyup)="setMessageLenght($event.target.value)"  (keypress)="setMessageLenght($event.target.value)"  formControlName="message" maxlength="255" tabindex="3" rows="5"
                                     placeholder="{{'messege_placeholder' | translate}}">
                                     </textarea>
-                                <span class="word_counter">0/255</span>
+                                <span class="word_counter">{{messageLenght}}/255</span>
                                 <div
                                     *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
                                     <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">
@@ -57,7 +57,7 @@
                                 translate}}</button>
                         </div>
                         <div class="footer_logo">
-                            <a href="javascrip:void(0);">
+                            <a>
                                 <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="logo Icon">
                             </a>
                         </div>

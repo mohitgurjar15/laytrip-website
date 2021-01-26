@@ -46,10 +46,10 @@ export class ResetPasswordComponent implements OnInit {
     inputStyles: {
       'width': '64px',
       'height': '64px'
-    }
+    } 
   };
   configCountDown : any = {leftTime: 60,demand: false};
-
+  otpLengthError = false;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -83,11 +83,16 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.otp)
-    console.log(this.ngOtpInputRef)
+    var otpValue='';
+    let otps : any = this.ngOtpInputRef.otpForm.value;
+    Object.values(otps).forEach((v) => {    
+     otpValue += v;
+    });
     this.submitted = this.loading = true;
-    
-    if (this.resetForm.invalid && this.resetForm.hasError('otpsError')) {     
+    if(otpValue.length != 6){
+      this.otpLengthError = true;
+    }
+    if (this.resetForm.invalid || this.resetForm.hasError('otpsError') || otpValue.length != 6) {     
       this.loading = false;      
       return;
     } else {
@@ -96,7 +101,7 @@ export class ResetPasswordComponent implements OnInit {
           "email":this.emailForVerifyOtp,
           "new_password":this.resetForm.value.new_password,
           "confirm_password":this.resetForm.value.confirm_password,
-          "otp":this.otp      
+          "otp":otpValue      
         };        
       this.userService.resetPassword(request_param).subscribe((data: any) => {
         this.submitted = false;    
@@ -115,28 +120,27 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resendOtp(){
-    this.ngOtpInputRef.setValue('');
-    this.resetForm.controls.new_password.setValue(null);
-    this.resetForm.controls.confirm_password.setValue(null);
-    this.spinner = true;
-    this.userService.forgotPassword(this.emailForVerifyOtp).subscribe((data: any) => {
-      this.spinner = this.isResend = false;
-      this.counter.begin();
-    }, (error: HttpErrorResponse) => {       
-      this.submitted = this.spinner = false;
-      this.errorMessage = error.message;
-    });
+    if(this.isResend){
+      this.ngOtpInputRef.setValue('');
+      this.resetForm.controls.new_password.setValue(null);
+      this.resetForm.controls.confirm_password.setValue(null);
+      this.spinner = true;
+      this.userService.forgotPassword(this.emailForVerifyOtp).subscribe((data: any) => {
+        this.spinner = this.isResend = false;
+        this.counter.begin();
+      }, (error: HttpErrorResponse) => {       
+        this.submitted = this.spinner = false;
+        this.errorMessage = error.message;
+      });
+
+    }
   }
 
   onOtpChange(event){
-    console.log(event)
     if(event.length == 6){
-      this.otp = event;
-      console.log(event.length)
-      console.log(this.otp)
+      this.otp = event;     
       this.resetForm.controls.otp.setValue(event);
-      this.ngOtpInputRef.setValue(event);
-      
+      this.ngOtpInputRef.setValue(event);      
     }
   }
   

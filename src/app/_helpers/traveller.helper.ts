@@ -10,9 +10,9 @@ export const travelersFileds={
             phone_number:'',
             dob:'',
             country:'',
-            gender:'',/* 
+            gender:'',
             passport_number:'',
-            passport_expiry:'' */
+            passport_expiry:''
         },
         child : {
             type : 'child',

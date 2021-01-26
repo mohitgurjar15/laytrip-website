@@ -158,7 +158,7 @@ export class AddCardComponent implements OnInit {
           $('#card-list').append(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
-              <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="true"
+              <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="false"
                   aria-controls="collapse11">
                   <span class="heade_wrps">
                       <img [src]="${cardObject[obj.cardType]}" alt="Card icon" /> 
@@ -166,7 +166,7 @@ export class AddCardComponent implements OnInit {
                   </span>
               </a>
           </div>
-          <div id="card" class="collapse show" data-parent="#accordion">
+          <div id="card" class="collapse" data-parent="#accordion">
               <div class="card-body">
                   <div class="form-row">
                       <div class="col col-lg-4">

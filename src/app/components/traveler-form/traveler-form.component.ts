@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
-import { NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../_helpers/ngbDateCustomParserFormatter';
 import { CheckOutService } from '../../services/checkout.service';
 import { travelersFileds } from '../../_helpers/traveller.helper';
@@ -24,6 +24,7 @@ export class TravelerFormComponent implements OnInit {
   @Input() totalTraveler;
   travelerForm: FormGroup;
   @Input() cartNumber:number;
+  @Input() cartItem;
   traveler_number;
   countries=[]
   travelers={
@@ -40,23 +41,28 @@ export class TravelerFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     public router: Router,
     public commonFunction: CommonFunction,
-    config: NgbDatepickerConfig,
     private checkOutService:CheckOutService,
     private cartService:CartService
   ) { }
 
   ngOnInit() {
     
-    //this.travelers[`type${this.cartNumber}`].adults=[];
-
+    console.log("this.cart",this.cartItem)
     this.cartService.getCartTravelers.subscribe((travelers:any)=>{
       this.travelers =travelers;
     })
 
       //this.travelers = travelers;
-    for(let i=0; i < this.totalTraveler.adult_count; i++){
-      //Object.assign({},this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.adult)))
+    for(let i=0; i < this.cartItem.module_info.adult_count; i++){
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.adult));
+      this.cartService.setCartTravelers(this.travelers)
+    }
+    for(let i=0; i < this.cartItem.module_info.child_count; i++){
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.child));
+      this.cartService.setCartTravelers(this.travelers)
+    }
+    for(let i=0; i < this.cartItem.module_info.infant_count; i++){
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.infant));
       this.cartService.setCartTravelers(this.travelers)
     }
     
@@ -88,7 +94,7 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId=traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender=traveler.gender;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_number=traveler.phoneNo;
-        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country=typeof traveler.country!='undefined'?traveler.country.id:'';
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country=traveler.country!=null?traveler.country.id:'';
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob).format('MMM d, yy');
 
         //this.travelers= Object.assign({},this.travelers)
@@ -143,6 +149,7 @@ export class TravelerFormComponent implements OnInit {
    * @param type ['adult','child','infant']
    */
   selectTravelerType(type,traveler_number){
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number]={};
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].type=type;
     this.patch()
   }

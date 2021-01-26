@@ -76,8 +76,7 @@
                             </li> -->
                             <li class="nav-item login_li" *ngIf="!isLoggedIn || userDetails.roleId == 7">
                                 <!-- <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">{{'sign_in' | translate}}</a> -->
-                                <a class="nav-link login_btn_text hover-link" id="login_btn" data-toggle="modal"
-                                    data-target="#sign_in_modal">
+                                <a class="nav-link login_btn_text hover-link" id="login_btn" (click)="openSignModal()" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                                         <defs></defs>
                                         <path class="a"
@@ -94,7 +93,9 @@
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hover-link" (click)="onLoggedout()">My Account</a></li>
+                                        <li><a class="hover-link" [routerLink]="['/account/bookings']">{{'my_account_header' |
+                                            translate}}</a></li>
+                                        <li><a [routerLink]="['/account/bookings']">History</a></li>
                                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                                             class="disabled">
                                             <a class="nav-link hover-link "
@@ -104,10 +105,7 @@
                                                     Points</span>
                                             </a>
                                         </li>
-                                        <li><a [routerLink]="['/account/bookings']">{{'my_account_header' |
-                                                translate}}</a></li>
-                                        <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' |
-                                                translate}}</a></li>
+                                        <li><a class="hover-link" (click)="onLoggedout()">Sign Out</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -127,8 +125,7 @@
                 </nav>
             </div>
             <div class="show_resposive">
-                <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" data-toggle="modal"
-                    data-target="#sign_in_modal">
+                <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" (click)="openSignModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                         <defs></defs>
                         <path class="a"

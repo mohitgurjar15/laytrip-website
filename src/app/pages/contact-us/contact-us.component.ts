@@ -19,6 +19,7 @@ export class ContactUsComponent implements OnInit {
   loading = false;
   countries_code: any = [];
   location;
+  messageLenght=0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -85,5 +86,9 @@ export class ContactUsComponent implements OnInit {
       this.loading = false;
       this.toastr.error(error.message, 'Error');
     }));
+  }
+
+  setMessageLenght(value){
+    this.messageLenght = value.toString().length;
   }
 }

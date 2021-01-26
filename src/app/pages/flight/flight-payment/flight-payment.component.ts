@@ -124,6 +124,7 @@ export class FlightPaymentComponent implements OnInit {
     }
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
+      console.log("travelerFrom",travelerFrom)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
     })
 
