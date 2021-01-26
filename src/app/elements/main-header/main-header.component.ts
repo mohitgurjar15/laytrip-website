@@ -84,6 +84,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.checkUser();
+    this.getCartList();
     let host = window.location.href;
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
@@ -116,6 +117,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.isLoggedIn = this._isLayCredit = false;
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
+    localStorage.removeItem('$crt');
     this.router.navigate(['/']);
   }
 

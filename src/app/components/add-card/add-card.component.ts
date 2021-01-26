@@ -124,7 +124,6 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {
-      this.spinner.show();
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
       this.token = token;
@@ -142,8 +141,8 @@ export class AddCardComponent implements OnInit {
         data: cardData,
         success: function (obj) {
           // this.emitNewCard.emit(obj);
-          this.spinner.hide();
-          $('#card_list_accodrio').append(`<div _ngcontent-serverapp-c13="" class="accordion_cardss ng-star-inserted" id="card_list_accodrio">
+
+          $('#card-list').append(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="true"
@@ -230,6 +229,9 @@ export class AddCardComponent implements OnInit {
       else {
         // add value to options
         options[field] = fieldEl.value
+      }
+      if (options[field]) {
+        this.spinner.hide();
       }
     }
 
