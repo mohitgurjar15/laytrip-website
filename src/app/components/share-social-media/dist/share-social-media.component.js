@@ -15,6 +15,7 @@ var ShareSocialMediaComponent = /** @class */ (function () {
         this.activeModal = activeModal;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.environment = environment_1.environment;
+        this.isCopyText = false;
     }
     ShareSocialMediaComponent.prototype.ngOnInit = function () {
     };
@@ -39,7 +40,27 @@ var ShareSocialMediaComponent = /** @class */ (function () {
             var whatsapp_url = "whatsapp://send?text=" + message;
             window.location.href = whatsapp_url;
         }
+        else if (media == 'CopiedLink') {
+            // console.log('here')
+            var url = environment_1.environment.siteUrl;
+            this.isCopyText = true;
+            url.select();
+            document.execCommand('copy');
+            url.setSelectionRange(0, 0);
+        }
         return false;
+    };
+    ShareSocialMediaComponent.prototype.copyToClipboard = function () {
+        var _this = this;
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = environment_1.environment.siteUrl;
+        dummy.select();
+        document.execCommand("copy");
+        this.isCopyText = true;
+        setTimeout(function () {
+            _this.isCopyText = false;
+        }, 2000);
     };
     ShareSocialMediaComponent = __decorate([
         core_1.Component({

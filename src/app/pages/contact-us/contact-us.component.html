@@ -38,10 +38,11 @@
                             </div>
                         </div>
                         <div class="form_row">
-                            <div class="text_field">
-                                <textarea formControlName="message" (keypress)="setMessageLenght($event.target.value)" maxlength="250" tabindex="3" rows="5"
+                            <div class="text_field text_area_wrps" >
+                                <textarea (keyup)="setMessageLenght($event.target.value)"  (keypress)="setMessageLenght($event.target.value)"  formControlName="message" maxlength="255" tabindex="3" rows="5"
                                     placeholder="{{'messege_placeholder' | translate}}">
                                     </textarea>
+                                <span class="word_counter">{{messageLenght}}/255</span>
                                 <div
                                     *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
                                     <div *ngIf="contactUsForm.controls.message.errors.required" class="text-danger">
@@ -56,7 +57,7 @@
                                 translate}}</button>
                         </div>
                         <div class="footer_logo">
-                            <a href="javascrip:void(0);">
+                            <a>
                                 <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="logo Icon">
                             </a>
                         </div>
