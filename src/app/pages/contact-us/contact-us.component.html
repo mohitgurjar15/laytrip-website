@@ -12,7 +12,7 @@
                     <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
                         <div class="form_row">
                             <div class="text_field">
-                                <input type="text" formControlName="name" maxlength="20" tabindex="1"
+                                <input type="text" formControlName="name" maxlength="30" tabindex="1"
                                     placeholder="{{'full_name_placeholder' | translate}}">
                                 <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched"
                                     class="focus-input100 login-error">
