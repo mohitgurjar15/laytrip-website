@@ -115,8 +115,7 @@
                 </nav>
             </div>
             <div class="show_resposive">
-                <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" data-toggle="modal"
-                    data-target="#sign_in_modal">
+                <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" (click)="openSignModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                         <defs></defs>
                         <path class="a"
