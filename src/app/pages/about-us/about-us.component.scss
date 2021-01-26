@@ -46,6 +46,16 @@
 					}
 				}
 			}
+			.detail_wpr{
+				span{
+					img{
+						@include tab-view{
+							display: none;
+						}
+					}
+				}
+				
+			}
 
 			img {
 				max-width: 100%;
