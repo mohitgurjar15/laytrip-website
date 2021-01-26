@@ -379,7 +379,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
    * Comman function to process filtration of flight
    */
   filterFlights() {
-
+    console.log(this.minPartialPaymentPrice, this.maxPartialPaymentPrice);
     let filterdFlights = this.filterFlightDetails.items;
 
     /* Filter flight based on min & max price */
