@@ -90,16 +90,14 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
     if (this.filterFlightDetails && this.filterFlightDetails.price_range) {
       // FOR FILTER FLIGHT - PRICE & PARTIAL PRICE
-      this.priceValue = this.filterFlightDetails.price_range.min_price ? this.filterFlightDetails.price_range.min_price : 0;
-      this.priceHighValue = this.filterFlightDetails.price_range.max_price ? this.filterFlightDetails.price_range.max_price : 0;
+      this.priceValue = this.filterFlightDetails.price_range.min_price ? Math.floor(this.filterFlightDetails.price_range.min_price) : 0;
+      this.priceHighValue = this.filterFlightDetails.price_range.max_price ? Math.ceil(this.filterFlightDetails.price_range.max_price) : 0;
       this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)])
 
       this.minPrice = Math.floor(this.priceValue);
       this.maxPrice = Math.ceil(this.priceHighValue);
-      this.priceOptions.floor =
-        parseInt(this.filterFlightDetails.price_range.min_price) ?
-          parseInt(this.filterFlightDetails.price_range.min_price) : 0;
-      this.priceOptions.ceil =
+      this.priceOptions.floor = this.priceValue;
+      this.priceOptions.ceil = this.priceHighValue;
         parseInt(this.filterFlightDetails.price_range.max_price) ?
           parseInt(this.filterFlightDetails.price_range.max_price) : 0;
 
