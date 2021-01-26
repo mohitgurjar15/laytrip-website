@@ -46,7 +46,7 @@ export class ResetPasswordComponent implements OnInit {
     inputStyles: {
       'width': '64px',
       'height': '64px'
-    }
+    } 
   };
   configCountDown : any = {leftTime: 60,demand: false};
   otpLengthError = false;
