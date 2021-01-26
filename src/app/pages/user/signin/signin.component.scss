@@ -187,10 +187,6 @@
                       height: 8px;
                       border-radius: 2px;
                       border: solid $blue-text-one;
-                      border-top-width: medium;
-                      border-right-width: medium;
-                      border-bottom-width: medium;
-                      border-left-width: medium;
                       border-width: 0 1px 1px 0;
                       transform: rotate(45deg);
                       -webkit-transform: rotate(45deg);
@@ -259,7 +255,7 @@
 
               &.btn_disable {
                 cursor: default;
-                background: $mid_gray_bg;
+               /*  background: $mid_gray_bg;
                 border-color: $mid_gray_bg;
 
                 &:before {
@@ -268,7 +264,7 @@
 
                 &:hover {
                   color: $text-white;
-                }
+                } */
               }
             }
           }

@@ -10,21 +10,22 @@ exports.MainHeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
-var auth_component_1 = require("../../pages/user/auth/auth.component");
 var MainHeaderComponent = /** @class */ (function () {
-    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, renderer) {
+    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, renderer, cd) {
         this.genericService = genericService;
         this.translate = translate;
         this.modalService = modalService;
         this.router = router;
         this.commonFunction = commonFunction;
         this.renderer = renderer;
+        this.cd = cd;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
         this.isLoggedIn = false;
         this.totalLayCredit = 0;
         this.showTotalLayCredit = 0;
         this._isLayCredit = false;
+        this.isCovidPage = true;
     }
     MainHeaderComponent_1 = MainHeaderComponent;
     MainHeaderComponent.prototype.ngOnInit = function () {
@@ -40,6 +41,11 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.ngDoCheck = function () {
         this.checkUser();
+        var host = window.location.href;
+        if (host.includes("covid-19")) {
+            this.isCovidPage = false;
+            this.cd.detectChanges();
+        }
         // this.userDetails = getLoginUserInfo();
         // this.totalLaycredit();
     };
@@ -96,7 +102,8 @@ var MainHeaderComponent = /** @class */ (function () {
         }));
     };
     MainHeaderComponent.prototype.openSignModal = function () {
-        var modalRef = this.modalService.open(auth_component_1.AuthComponent);
+        // const modalRef = this.modalService.open(AuthComponent);
+        $("#signin-form").trigger("reset");
         $('#sign_in_modal').modal('show');
     };
     var MainHeaderComponent_1;

@@ -14,7 +14,7 @@ export class ShareSocialMediaComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   environment=environment;
   constructor(public activeModal: NgbActiveModal) { }
-
+  isCopyText : boolean = false;
   ngOnInit() {
   }
 
@@ -39,8 +39,26 @@ export class ShareSocialMediaComponent implements OnInit {
       var message = encodeURIComponent('Laytrip');
       var whatsapp_url = "whatsapp://send?text=" + message;
       window.location.href = whatsapp_url;     
+    } else if(media == 'CopiedLink'){
+      // console.log('here')
+      var url : any = environment.siteUrl;
+      this.isCopyText = true;
+      url.select();
+      document.execCommand('copy');
+      url.setSelectionRange(0, 0); 
     } 
     return false;
 
+  }
+  copyToClipboard() {
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = environment.siteUrl;
+    dummy.select();
+    document.execCommand("copy");
+    this.isCopyText = true;
+    setTimeout(() => {      
+      this.isCopyText = false;
+    }, 2000);
   }
 }

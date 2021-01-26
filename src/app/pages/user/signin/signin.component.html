@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="modal_cnt">
-                    <form [formGroup]="loginForm" novalidate autocomplete="off">
+                    <form [formGroup]="loginForm" novalidate autocomplete="off" id="signin-form">
                         <div class="form_row">
                             <div class="text_field">
                                 <input type="email"
@@ -99,7 +99,7 @@
                                     [ngClass]="{'error':  (submitted && loginForm.controls.password.errors ) || (  loginForm.controls.password.touched && loginForm.controls.password.errors)}"
                                     type="password" autocomplete="new-password"
                                     [type]="fieldTextType ? 'text' : 'password'" formControlName="password"
-                                    maxlength="20" placeholder="{{'password_placholder' | translate}}">
+                                    maxlength="50" placeholder="{{'password_placholder' | translate}}">
                                 <span class="ptxt"><i [ngClass]="fieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                         aria-hidden="true" (click)="toggleFieldTextType()"></i></span>
                                 <div
@@ -123,7 +123,7 @@
                             </div>
                         </div>
                         <div class="form_btn">
-                            <button type="submit" [ngClass]="{'btn_disable':(!loginForm.valid )}" class="btn  btn-accent btn-block btn-flat b-r-10"
+                            <button type="submit" [disabled]="(!loginForm.valid)" [ngClass]="{'btn_disable':(!loginForm.valid )}" class="btn  btn-accent btn-block btn-flat b-r-10"
                                 (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_in' | translate}}
                             </button>

@@ -127,7 +127,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   openSignModal() {
-    const modalRef = this.modalService.open(AuthComponent);
+    // const modalRef = this.modalService.open(AuthComponent);
+    $("#signin-form").trigger( "reset" );
     $('#sign_in_modal').modal('show');
+
   }
+  
 }
