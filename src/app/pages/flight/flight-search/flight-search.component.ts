@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-flight-search',
@@ -38,6 +39,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public router: Router,
     public location: Location,
     public commonFunction: CommonFunction,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -95,6 +97,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
+
+          
         }
       }, err => {
         if (err && err.status === 404) {
@@ -126,6 +130,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
+          // this.spinner.show();
+          // setTimeout(() => {
+          //   this.spinner.hide();
+          // }, 5000);
         }
       }, err => {
 

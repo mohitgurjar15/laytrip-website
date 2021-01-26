@@ -13,7 +13,6 @@ export class PagesComponent implements OnInit {
   constructor(
     private router: Router,
     private genericService: GenericService,
-
     ) {
       this.router.events.subscribe((event: Event) => {
           if (event instanceof NavigationStart) {

@@ -50,8 +50,7 @@ import { CartComponent } from './cart/cart.component';
 import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
 import { CartLoaderComponent } from './cart-loader/cart-loader.component';
 import { FullPageLoaderComponent } from './full-page-loader/full-page-loader.component';
-
-
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -108,7 +107,8 @@ import { FullPageLoaderComponent } from './full-page-loader/full-page-loader.com
     TextMaskModule,
     TranslateModule,
     NgScrollbarModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgxSpinnerModule
   ],
   exports: [
     SearchAirportComponent,
@@ -148,9 +148,10 @@ import { FullPageLoaderComponent } from './full-page-loader/full-page-loader.com
     TravelerFormComponent,
     CartComponent,
     CartLoaderComponent,
-    FullPageLoaderComponent
+    FullPageLoaderComponent,
+    NgxSpinnerModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, NgxSpinnerService],
 
 })
 export class ComponentsModule { }
