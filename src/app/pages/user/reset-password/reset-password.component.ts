@@ -115,17 +115,20 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resendOtp(){
-    this.ngOtpInputRef.setValue('');
-    this.resetForm.controls.new_password.setValue(null);
-    this.resetForm.controls.confirm_password.setValue(null);
-    this.spinner = true;
-    this.userService.forgotPassword(this.emailForVerifyOtp).subscribe((data: any) => {
-      this.spinner = this.isResend = false;
-      this.counter.begin();
-    }, (error: HttpErrorResponse) => {       
-      this.submitted = this.spinner = false;
-      this.errorMessage = error.message;
-    });
+    if(this.isResend){
+      this.ngOtpInputRef.setValue('');
+      this.resetForm.controls.new_password.setValue(null);
+      this.resetForm.controls.confirm_password.setValue(null);
+      this.spinner = true;
+      this.userService.forgotPassword(this.emailForVerifyOtp).subscribe((data: any) => {
+        this.spinner = this.isResend = false;
+        this.counter.begin();
+      }, (error: HttpErrorResponse) => {       
+        this.submitted = this.spinner = false;
+        this.errorMessage = error.message;
+      });
+
+    }
   }
 
   onOtpChange(event){
