@@ -28,6 +28,7 @@ export class VerifyOtpComponent implements OnInit {
   errorMessage = '';
   spinner = false;
   @Input() emailForVerifyOtp;
+  @Input() isSignup : boolean = false;
   apiError :string =  '';
   config = {
     allowNumbersOnly: true,

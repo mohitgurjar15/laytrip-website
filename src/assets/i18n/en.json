@@ -38,6 +38,7 @@
     "incorrect_otp": "Incorrect OTP. Please try again!",
     "otp_touched_validation": "Please enter OTP",
     "password_reset_sucessfully_title": "Password has been reset",
+    "signup_sucessfully_title": "Thanks for Signing up with Laytrip",
     "password_reset_sucessfully_description": "Sign in using your new password",
     "password_reset_sucessfully_messege": "Password reset successfully. Please check login with your updated password.",
     "sign_up": "Sign Up",
