@@ -11,7 +11,7 @@ import { Observable, throwError } from "rxjs";
 })
 export class CartService {
 
-  private cartItems = new BehaviorSubject({});
+  private cartItems = new BehaviorSubject([]);
   getCartItems = this.cartItems.asObservable();
 
   private cartNumber = new BehaviorSubject(0)

@@ -107,6 +107,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.checkInstalmentAvalability();
     this.checkUser();
 
+    this.cartService.getCartItems.subscribe(cartItems=>{
+      this.cartItems = cartItems;
+    })
+    console.log(this.cartItems,"One");
+
   }
 
   ngDoCheck() {
@@ -189,12 +194,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
-    //   console.log(this.cartItems.length);
+    console.log(this.cartItems,"TWo");
     if (!this.isLoggedIn) {
       this.toastr.warning('Please login to book flight', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
     } else {
 
-      if (this.cartItems && this.cartItems.length >= 4) {
+      if (this.cartItems && this.cartItems.length >=5) {
         this.spinner.hide();
         this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
       } else {
@@ -222,20 +227,17 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
           // room_id: 42945378451569
         };
         this.cartService.addCartItem(payload).subscribe((res: any) => {
-          // console.log(res);
           this.spinner.hide();
           if (res) {
-            this.cartService.setCartItems(route);
-            // GET CART ITEMS FROM CART SERVICE
-            this.cartService.getCartItems.subscribe(items => {
-              this.cartItems.push(items);
-            });
+            this.cartItems = [...this.cartItems,res.data]
+            this.cartService.setCartItems(this.cartItems);
+            
             localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
             this.router.navigate([`flight/payment/${route.route_code}`]);
           }
         }, error => {
           this.spinner.hide();
-          this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+          this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
         });
 
       }
