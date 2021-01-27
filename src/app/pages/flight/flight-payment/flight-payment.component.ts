@@ -53,7 +53,7 @@ export class FlightPaymentComponent implements OnInit {
   travelers = [];
   carts = [];
   isValidData: boolean = false;
-  cartLoading = true;
+  cartLoading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,6 +79,7 @@ export class FlightPaymentComponent implements OnInit {
     }
 
     this.cartLoading = true;
+    console.log("this.cartLoading",this.cartLoading)
     this.cartService.getCartList('yes').subscribe((items: any) => {
       let notAvilableItems = [];
       let cart: any;
@@ -100,6 +101,8 @@ export class FlightPaymentComponent implements OnInit {
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
+    },error=>{
+      this.cartLoading = false;
     });
 
     let __route = sessionStorage.getItem('__route');
@@ -115,7 +118,6 @@ export class FlightPaymentComponent implements OnInit {
       //   type : 'flight',
       //   module_info:this.flightSummary
       // }; 
-      this.cartLoading = false;
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }

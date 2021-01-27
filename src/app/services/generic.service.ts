@@ -18,7 +18,6 @@ export class GenericService {
 
   }
 
-
   getAllLangunage() {
     return this.http.get(`${environment.apiUrl}v1/language`)
       .pipe(

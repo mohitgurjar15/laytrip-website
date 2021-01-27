@@ -13,19 +13,14 @@ export class CheckoutProgressComponent implements OnInit {
   @Input() progressStep;
   progressArray = [];
   s3BucketUrl = environment.s3BucketUrl;
-  // CART VARIABLE
-  cartItemsCount;
+ 
 
   constructor(
     private cartService: CartService,
   ) { }
 
   ngOnInit() {
-    //console.log("progressStep",this.progressStep, Object.values(this.progressStep))
-    // GET CART LIST FROM GENERIC SERVICE
-    this.cartService.getCartItems.subscribe((res: any) => {
-      this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
-    });
+    
   }
 
 }

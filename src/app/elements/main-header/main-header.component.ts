@@ -63,16 +63,17 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           // SET CART ITEMS IN CART SERVICE
           this.cartService.setCartItems(res.data);
           this.cartItems = res.data;
-          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
           if (res.count) {
             this.cartItemsCount = res.count;
+            localStorage.setItem('$crt',this.cartItemsCount);
           }
           this.cd.detectChanges();
         }
       }, (error) => {
         if (error && error.status === 404) {
           this.cartItems = [];
-          this.cartItemsCount = this.cartItems.length;
+          this.cartItemsCount = 0;
+          localStorage.setItem('$crt', this.cartItemsCount);
         }
       });
     }
@@ -87,7 +88,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.cd.detectChanges();
     }
     this.cartService.getCartItems.subscribe((res: any) => {
-      this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+      try{
+        this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+      }
+      catch(e){
+
+      }
     });
     // this.userDetails = getLoginUserInfo();
     // this.totalLaycredit();

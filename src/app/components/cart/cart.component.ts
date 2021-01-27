@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { environment } from '../../../environments/environment';
 
@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
+    console.log(changes);
     if (changes['carts']) {
       this.carts = changes['carts'].currentValue;
     }
@@ -28,5 +28,4 @@ export class CartComponent implements OnInit {
   selectCart(cartNumber) {
     this.cartService.setCardNumber(cartNumber);
   }
-
 }
