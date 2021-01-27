@@ -59,7 +59,7 @@ var ShareSocialMediaComponent = /** @class */ (function () {
         dummy.select();
         document.execCommand("copy");
         this.isCopyText = true;
-        $('#dummy_textarea').hide();
+        document.getElementById("dummy_textarea").remove();
         setTimeout(function () {
             _this.isCopyText = false;
         }, 2000);

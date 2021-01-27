@@ -1,15 +1,13 @@
-import { Component, OnInit, DoCheck, ViewChild, Renderer2, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
-import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
-import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
-import { AuthComponent } from '../../pages/user/auth/auth.component';
 import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
+
 declare var $: any;
 
 @Component({
@@ -19,11 +17,8 @@ declare var $: any;
 })
 export class MainHeaderComponent implements OnInit, DoCheck {
 
-  @ViewChild(MainHeaderComponent, { static: false }) headerComponent: MainHeaderComponent;
-
   s3BucketUrl = environment.s3BucketUrl;
   defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
-
   isLoggedIn = false;
   totalLayCredit = 0;
   showTotalLayCredit = 0;
@@ -32,9 +27,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   _isLayCredit = false;
   countryCode: string;
   isCovidPage = true;
-  // CART VARIABLE
-  cartItemsCount;
   cartItems;
+  cartItemsCount;
 
   constructor(
     private genericService: GenericService,
@@ -44,7 +38,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private commonFunction: CommonFunction,
     private renderer: Renderer2,
     public cd: ChangeDetectorRef,
-    private cartService: CartService,
+    private cartService:CartService
   ) {
   }
 
@@ -55,30 +49,33 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (this.isLoggedIn) {
       if (this.userDetails.roleId != 7) {
         this.totalLaycredit();
+        this.getCartList();
       }
     }
     this.countryCode = this.commonFunction.getUserCountry();
-    this.getCartList();
   }
 
   getCartList() {
-    // GET CART LIST FROM GENERIC SERVICE
-    this.cartService.getCartList().subscribe((res: any) => {
-      if (res) {
-        // SET CART ITEMS IN CART SERVICE
-        this.cartService.setCartItems(res.data);
-        this.cartItems = res.data;
-        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-        if (res.count) {
-          this.cartItemsCount = res.count;
+    if (this.isLoggedIn) {
+      // GET CART LIST FROM GENERIC SERVICE
+      this.cartService.getCartList().subscribe((res: any) => {
+        if (res) {
+          // SET CART ITEMS IN CART SERVICE
+          this.cartService.setCartItems(res.data);
+          this.cartItems = res.data;
+          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+          if (res.count) {
+            this.cartItemsCount = res.count;
+          }
+          this.cd.detectChanges();
         }
-        this.cd.detectChanges();
-      }
-    }, (error) => {
-      if (error && error.status === 404) {
-        this.cartItems = [];
-      }
-    });
+      }, (error) => {
+        if (error && error.status === 404) {
+          this.cartItems = [];
+          this.cartItemsCount = this.cartItems.length;
+        }
+      });
+    }
   }
 
 
@@ -89,6 +86,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.isCovidPage = false;
       this.cd.detectChanges();
     }
+    this.cartService.getCartItems.subscribe((res: any) => {
+      this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+    });
     // this.userDetails = getLoginUserInfo();
     // this.totalLaycredit();
   }
@@ -107,6 +107,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.userDetails = getLoginUserInfo();
       if (this.userDetails.roleId != 7 && !this._isLayCredit) {
         this.totalLaycredit();
+        this.getCartList();
       }
       this.showTotalLayCredit = this.totalLayCredit;
     }
@@ -116,6 +117,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.isLoggedIn = this._isLayCredit = false;
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
+    localStorage.removeItem('$crt');
+    this.cartItemsCount = '';
     this.router.navigate(['/']);
   }
 
@@ -154,9 +157,13 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   openSignModal() {
     // const modalRef = this.modalService.open(AuthComponent);
-    $("#signin-form").trigger( "reset" );
     $('#sign_in_modal').modal('show');
-
+    $("#signin-form").trigger( "reset" );
   }
-  
+
+  redirectToPayment() {
+    if (this.isLoggedIn && this.cartItemsCount > 0) {
+      this.router.navigate([`flight/payment/ZVZ4WEFNOW8ybVIwT0VX`]);
+    }
+  }
 }

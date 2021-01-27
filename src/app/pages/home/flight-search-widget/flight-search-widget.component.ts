@@ -33,17 +33,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   isCalenderPriceLoading: boolean = true;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
   fromSearch : any = airports['JFK'];
-  //fromDestinationCode = this.fromSearch.code;
-  //departureCity = this.fromSearch.city;
-  //departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
-  //fromAirport = airports[this.fromDestinationCode];
   countryCode: string;
   monthYearArr = [];
   toSearch = airports['PUJ'];
-  //toDestinationCode = this.toSearch.code;
-  //arrivalCity = this.toSearch.city;
-  //arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
-  //toAirport = airports[this.toDestinationCode];
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -101,7 +93,9 @@ export class FlightSearchWidgetComponent implements OnInit {
       returnDate: [[Validators.required]]
     });
 
-    this.flightDepartureMinDate = new Date();
+    let  date = new Date();
+    date.setDate(date.getDate() + 7);
+    this.flightDepartureMinDate =  date;
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];

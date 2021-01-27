@@ -26,6 +26,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.loading = false;
         this.errorMessage = '';
         this.spinner = false;
+        this.isSignup = false;
         this.apiError = '';
         this.config = {
             allowNumbersOnly: true,
@@ -73,16 +74,18 @@ var VerifyOtpComponent = /** @class */ (function () {
     };
     VerifyOtpComponent.prototype.resendOtp = function () {
         var _this = this;
-        this.ngOtpInputRef.setValue('');
-        // this.otpForm.reset();
-        this.spinner = true;
-        this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
-            _this.spinner = _this.isResend = false;
-            _this.counter.begin();
-        }, function (error) {
-            _this.submitted = _this.spinner = false;
-            _this.apiError = error.message;
-        });
+        if (this.isResend) {
+            this.ngOtpInputRef.setValue('');
+            // this.otpForm.reset();
+            this.spinner = true;
+            this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
+                _this.spinner = _this.isResend = false;
+                _this.counter.begin();
+            }, function (error) {
+                _this.submitted = _this.spinner = false;
+                _this.apiError = error.message;
+            });
+        }
     };
     VerifyOtpComponent.prototype.onInputEntry = function (event, nextInput) {
         var input = event.event;
@@ -142,6 +145,9 @@ var VerifyOtpComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], VerifyOtpComponent.prototype, "emailForVerifyOtp");
+    __decorate([
+        core_1.Input()
+    ], VerifyOtpComponent.prototype, "isSignup");
     __decorate([
         core_1.ViewChild('ngOtpInput', { static: false })
     ], VerifyOtpComponent.prototype, "ngOtpInputRef");

@@ -12,7 +12,7 @@ declare var $: any;
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit, OnDestroy {
+export class ForgotPasswordComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() pageData;
@@ -37,27 +37,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.forgotForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
     });
-  }
-
-  closeModal(){
-      this.valueChange.emit({ key: 'signIn', value: true });
-      $('#sign_in_modal').modal('hide');
-  }
-  
-
-  openPage(event) {
-    this.pageData = true;
-    this.valueChange.emit({ key: 'forgotPassword', value: this.pageData });
-  }
-
-  ngOnDestroy() {}
-
-  openSignInPage() {
-    this.pageData = true;
-    this.valueChange.emit({ key: 'signIn', value: this.pageData });
-    $('.modal_container').removeClass('right-panel-active');
-    $('.forgotpassword-container').removeClass('show_forgotpass');  
-  }
+  }  
 
   onSubmit() {
    
@@ -83,7 +63,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   openResetModal(){
     this.activeModal.close();
-    const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'forgot_window', centered: true});
+    const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'forgot_window', centered: true,backdrop: 'static',keyboard: false});
     (<ResetPasswordComponent>modalRef.componentInstance).emailForVerifyOtp = this.forgotEmail;
   }
 }

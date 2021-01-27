@@ -71,6 +71,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   isRoundTrip = false;
 
   subcell = '$100';
+  isLoggedIn = false;
+  userDetails;
+  showTotalLayCredit = 0;
+  _isLayCredit = false;
+  totalLayCredit = 0;
 
   constructor(
     private flightService: FlightService,
@@ -100,7 +105,22 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
     this.totalLaycredit();
     this.checkInstalmentAvalability();
+    this.checkUser();
 
+  }
+
+  ngDoCheck() {
+    // this.checkUser();
+  }
+
+  checkUser() {
+    let userToken = localStorage.getItem('_lay_sess');
+
+    this.isLoggedIn = false;
+    if (userToken && userToken != 'undefined' && userToken != 'null') {
+      localStorage.removeItem("_isSubscribeNow");
+      this.isLoggedIn = true;
+    }
   }
 
   opened() {
@@ -170,50 +190,55 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   bookNow(route) {
     //   console.log(this.cartItems.length);
-    if (this.cartItems && this.cartItems.length >= 4) {
-      this.spinner.hide();
-      this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+    if (!this.isLoggedIn) {
+      this.toastr.warning('Please login to book flight', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
     } else {
-      this.spinner.show();
-      const itinerary = {
-        adult: this.route.snapshot.queryParams["adult"],
-        child: this.route.snapshot.queryParams["child"],
-        infant: this.route.snapshot.queryParams["infant"],
-        is_passport_required: route.is_passport_required
-      };
-      let lastSearchUrl = this.router.url;
-      this.cookieService.put('_prev_search', lastSearchUrl);
-      const dateNow = new Date();
-      dateNow.setMinutes(dateNow.getMinutes() + 10);
 
-      sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-      sessionStorage.setItem('__route', JSON.stringify(route));
-      /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
-      } else{
-        this.router.navigate([`flight/checkout/${route.route_code}`]);
-      } */
-      const payload = {
-        module_id: 1,
-        route_code: route.route_code,
-        // room_id: 42945378451569
-      };
-      this.cartService.addCartItem(payload).subscribe((res: any) => {
-        // console.log(res);
-        this.spinner.hide();
-        if (res) {
-          this.cartService.setCartItems(route);
-          // GET CART ITEMS FROM CART SERVICE
-          this.cartService.getCartItems.subscribe(items => {
-            this.cartItems.push(items);
-          });
-          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-          this.router.navigate([`flight/payment/${route.route_code}`]);
-        }
-      }, error => {
+      if (this.cartItems && this.cartItems.length >= 4) {
         this.spinner.hide();
         this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-      });
+      } else {
+        this.spinner.show();
+        const itinerary = {
+          adult: this.route.snapshot.queryParams["adult"],
+          child: this.route.snapshot.queryParams["child"],
+          infant: this.route.snapshot.queryParams["infant"],
+          is_passport_required: route.is_passport_required
+        };
+        let lastSearchUrl = this.router.url;
+        this.cookieService.put('_prev_search', lastSearchUrl);
+        const dateNow = new Date();
+        dateNow.setMinutes(dateNow.getMinutes() + 10);
 
+        sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+        sessionStorage.setItem('__route', JSON.stringify(route));
+        /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
+        } else{
+          this.router.navigate([`flight/checkout/${route.route_code}`]);
+        } */
+        const payload = {
+          module_id: 1,
+          route_code: route.route_code,
+          // room_id: 42945378451569
+        };
+        this.cartService.addCartItem(payload).subscribe((res: any) => {
+          // console.log(res);
+          this.spinner.hide();
+          if (res) {
+            this.cartService.setCartItems(route);
+            // GET CART ITEMS FROM CART SERVICE
+            this.cartService.getCartItems.subscribe(items => {
+              this.cartItems.push(items);
+            });
+            localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+            this.router.navigate([`flight/payment/${route.route_code}`]);
+          }
+        }, error => {
+          this.spinner.hide();
+          this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+        });
+
+      }
     }
 
     // const itinerary = {

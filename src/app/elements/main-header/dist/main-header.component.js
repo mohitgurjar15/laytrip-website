@@ -27,7 +27,6 @@ var MainHeaderComponent = /** @class */ (function () {
         this._isLayCredit = false;
         this.isCovidPage = true;
     }
-    MainHeaderComponent_1 = MainHeaderComponent;
     MainHeaderComponent.prototype.ngOnInit = function () {
         this.checkUser();
         this.loadJquery();
@@ -103,14 +102,10 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.openSignModal = function () {
         // const modalRef = this.modalService.open(AuthComponent);
-        $("#signin-form").trigger("reset");
         $('#sign_in_modal').modal('show');
+        $("#signin-form").trigger("reset");
     };
-    var MainHeaderComponent_1;
-    __decorate([
-        core_1.ViewChild(MainHeaderComponent_1, { static: false })
-    ], MainHeaderComponent.prototype, "headerComponent");
-    MainHeaderComponent = MainHeaderComponent_1 = __decorate([
+    MainHeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-main-header',
             templateUrl: './main-header.component.html',

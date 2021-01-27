@@ -96,17 +96,19 @@ var ResetPasswordComponent = /** @class */ (function () {
     };
     ResetPasswordComponent.prototype.resendOtp = function () {
         var _this = this;
-        this.ngOtpInputRef.setValue('');
-        this.resetForm.controls.new_password.setValue(null);
-        this.resetForm.controls.confirm_password.setValue(null);
-        this.spinner = true;
-        this.userService.forgotPassword(this.emailForVerifyOtp).subscribe(function (data) {
-            _this.spinner = _this.isResend = false;
-            _this.counter.begin();
-        }, function (error) {
-            _this.submitted = _this.spinner = false;
-            _this.errorMessage = error.message;
-        });
+        if (this.isResend) {
+            this.ngOtpInputRef.setValue('');
+            this.resetForm.controls.new_password.setValue(null);
+            this.resetForm.controls.confirm_password.setValue(null);
+            this.spinner = true;
+            this.userService.forgotPassword(this.emailForVerifyOtp).subscribe(function (data) {
+                _this.spinner = _this.isResend = false;
+                _this.counter.begin();
+            }, function (error) {
+                _this.submitted = _this.spinner = false;
+                _this.errorMessage = error.message;
+            });
+        }
     };
     ResetPasswordComponent.prototype.onOtpChange = function (event) {
         console.log(event);

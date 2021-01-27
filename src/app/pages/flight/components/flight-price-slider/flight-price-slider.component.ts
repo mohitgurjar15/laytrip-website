@@ -104,7 +104,6 @@ export class FlightPriceSliderComponent implements OnInit {
     let result =[]
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
     let targetIndex = 4;
-    console.log("s",sourceIndex,"T",targetIndex)
     if(targetIndex > sourceIndex){
       targetIndex=5;
       for(let i=targetIndex; i < this.dates.length; i++){
@@ -113,6 +112,7 @@ export class FlightPriceSliderComponent implements OnInit {
       for(let i=0; i < targetIndex; i++){
         result.push(this.dates[i])
       }
+
     }
     else{
 
@@ -128,6 +128,7 @@ export class FlightPriceSliderComponent implements OnInit {
       for(let i=0; i < targetIndex; i++){
         result.push(this.dates[i])
       }
+
     }
     this.dates = result;
   }

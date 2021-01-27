@@ -71,13 +71,15 @@ export class FlightPaymentComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
+
     this.routeCode = this.route.snapshot.paramMap.get('rc');
     this.userInfo = getLoginUserInfo();
     if (Object.keys(this.userInfo).length > 0) {
       this.getTravelers();
     }
 
-    /* this.cartService.getCartList('yes').subscribe((items: any) => {
+    this.cartLoading = true;
+    this.cartService.getCartList('yes').subscribe((items: any) => {
       let notAvilableItems = [];
       let cart: any;
       for (let i = 0; i < items.data.length; i++) {
@@ -98,22 +100,22 @@ export class FlightPaymentComponent implements OnInit {
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
-    }); */
+    });
 
     let __route = sessionStorage.getItem('__route');
     try {
       let response = JSON.parse(__route);
       response[0] = response;
       this.flightSummary = response;
-      this.carts[0]={
-        type : 'flight',
-        module_info:this.flightSummary
-      };
-      this.carts[1]={
-        type : 'flight',
-        module_info:this.flightSummary
-      }; 
-      this.cartLoading=false;
+      // this.carts[0]={
+      //   type : 'flight',
+      //   module_info:this.flightSummary
+      // };
+      // this.carts[1]={
+      //   type : 'flight',
+      //   module_info:this.flightSummary
+      // }; 
+      this.cartLoading = false;
       //this.sellingPrice = response[0].selling_price;
       this.getSellingPrice();
     }
@@ -122,6 +124,7 @@ export class FlightPaymentComponent implements OnInit {
     }
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
+      console.log("travelerFrom",travelerFrom)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
     })
 
@@ -221,8 +224,8 @@ export class FlightPaymentComponent implements OnInit {
     })
   }
 
-  getCountry(){
-    this.genericService.getCountry().subscribe(res=>{
+  getCountry() {
+    this.genericService.getCountry().subscribe(res => {
       this.checkOutService.setCountries(res);
     })
   }
@@ -233,13 +236,13 @@ export class FlightPaymentComponent implements OnInit {
 
   ngOnDestroy() {
     this.cartService.setCartTravelers({
-      type0 : {
-        adults : []
+      type0: {
+        adults: []
       },
-      type1 : {
-        adults : []
+      type1: {
+        adults: []
       }
     });
- }
+  }
 
 }

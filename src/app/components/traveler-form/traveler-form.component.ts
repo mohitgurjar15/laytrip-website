@@ -57,6 +57,14 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.adult));
       this.cartService.setCartTravelers(this.travelers)
     }
+    for(let i=0; i < this.cartItem.module_info.child_count; i++){
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.child));
+      this.cartService.setCartTravelers(this.travelers)
+    }
+    for(let i=0; i < this.cartItem.module_info.infant_count; i++){
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.infant));
+      this.cartService.setCartTravelers(this.travelers)
+    }
     
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -86,7 +94,7 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId=traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender=traveler.gender;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_number=traveler.phoneNo;
-        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country=typeof traveler.country!='undefined'?traveler.country.id:'';
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country=traveler.country!=null?traveler.country.id:'';
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob).format('MMM d, yy');
 
         //this.travelers= Object.assign({},this.travelers)

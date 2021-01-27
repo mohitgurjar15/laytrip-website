@@ -61,7 +61,7 @@
                   </div>
                 </div>
                 <div class="form-row mt-3">
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
+                  <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                     <label for="">Email*</label>
                     <input type="email" class="form-control" placeholder="Email" formControlName="email">
                     <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors"
