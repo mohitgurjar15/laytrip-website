@@ -102,13 +102,23 @@ input.ng-invalid.ng-touched {
     }
 }
 
+::ng-deep .birth_date{
+    
+            input{
+                border: none;
+            }
+            &input{
+                border: none;
+            }
+}
+
 
 .account_cnt_main {
     width: 100%;
-    border-radius: 5px;
+    //border-radius: 5px;
     background: $background-white;
     padding: 30px 30px 0;
-    box-shadow: 3px 4px 10px $shadow-color;
+    //box-shadow: 3px 4px 10px $shadow-color;
 
     @media(max-width: 991px) {
         margin: 20px 0;
@@ -123,6 +133,8 @@ input.ng-invalid.ng-touched {
         width: 100%;
         display: flex;
         flex-direction: column;
+        max-width: 655px;
+        margin: 0 auto;
 
         @media(max-width: 991px) {
             flex-wrap: wrap;
@@ -130,6 +142,11 @@ input.ng-invalid.ng-touched {
 
         .update_profile {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center; 
 
             span {
                 width: 120px;
@@ -138,6 +155,7 @@ input.ng-invalid.ng-touched {
                 border-radius: 50%;
                 background: $box-border-color;
                 position: relative;
+                border: 3px solid $box-border-color;
 
                 img {
                     height: 100px;
@@ -166,14 +184,13 @@ input.ng-invalid.ng-touched {
                 margin: 15px 0 0;
 
                 button {
-                    height: 32px;
-                    border-radius: 5px;
+                    background-color: transparent;
+                    color: $text_light_yellow;
                     border: none;
-                    font-size: 14px;
-                    color: $primary-color;
-                    font-weight: 500;
-                    padding: 0 15px;
-                    background: $primary-bg-light;
+                    box-shadow: none;
+                    font-size: 16px;
+                    padding: 0;
+                    text-align: right;
 
                     img {
                         margin-right: 10px;
@@ -182,36 +199,89 @@ input.ng-invalid.ng-touched {
             }
         }
         
-
         .form_row {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
+            align-items: center;
 
             @media(max-width: 767px) {
                 flex-wrap: wrap;
             }
+            &.common_row{
+                border-bottom: 1px solid $box-border-color;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+            }
+            &.title_row{
+                justify-content: space-between;
+            }
 
+            h3{
+                color: $blue-text;
+                font-size: 34px;
+                margin-bottom: 5px;
+                margin: 25px 0 15px;
+                @include tab-view{
+                    font-size: 18px;
+                }
+            }
+
+            .edit_btns{
+                a{
+                    background-color: transparent;
+                    color: $text_light_yellow;
+                    box-shadow: none;
+                    font-size: 16px;
+                    padding: 0;
+                    text-align: right;
+                    text-decoration: none;
+                }
+            }
+
+            label{
+                margin-bottom: 10px;
+                color: $text-black;
+                font-size: 16px;
+                font-weight: 600;
+                flex: 1;
+                margin: 0;
+            }
+            .text_field{
+                flex: 2;
+            }
             input {
                 width: 100%;
                 background: transparent;
                 height: 40px;
-                border-top: none;
-                border-left: none;
-                border-right: none;
-                border-bottom: 1px solid $box-border-color;
-                font-size: 14px;
-                color: $text-black;
+                border: none;
+                font-size: 16px;
+                color: $mid_gray_bg;
                 position: relative;
 
                 &:focus {
-                    border-bottom: 1px solid $primary-color;
+                    border: none;
+                    outline: none;
                 }
 
                 &.birth_date {
                     background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                     background-position: right center;
                     padding: 0 !important;
+                    border: none;
+                }
+            }
+            textarea{
+                width: 100%;
+                background: transparent;
+                height: 40px;
+                border: none;
+                font-size: 16px;
+                color: $mid_gray_bg;
+                position: relative;
+                &:focus {
+                    border: none;
+                    outline: none;
                 }
             }
 
@@ -220,7 +290,7 @@ input.ng-invalid.ng-touched {
                 display: flex;
 
                 .code {
-                    border-bottom: 1px solid $box-border-color;
+                    // border-bottom: 1px solid $box-border-color;
                     margin-right: 10px;
 
                     a {
@@ -538,117 +608,77 @@ input.ng-invalid.ng-touched {
                 
             }
         }
-    }
 
-    .update_location_detail {
-        width: 100%;
-
-        .section_title {
+        .update_location_detail {
             width: 100%;
-            margin-bottom: 30px;
-            padding: 0;
-
-            h4 {
+        
+            .section_title {
                 width: 100%;
-                font-size: 16px;
-                font-weight: 500;
-                color: $text-black;
-                padding: 15px 30px;
-                background: $bg-light-grey;
-                margin: 0;
-                text-align: left;
-            }
-        }
-
-        .detail_update {
-            width: 100%;
-
-            .form_row {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-
-                @media(max-width: 991px) {
-                    flex-wrap: wrap;
+                margin-bottom: 30px;
+                padding: 0;
+        
+                h4 {
+                    width: 100%;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $text-black;
+                    padding: 15px 30px;
+                    background: $bg-light-grey;
+                    margin: 0;
+                    text-align: left;
                 }
-
-                .field_bolck {
-                    width: 31%;
-
+            }
+        
+            .detail_update {
+                width: 100%;
+        
+                .form_row {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+        
                     @media(max-width: 991px) {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                    }
-
-                    @media(max-width: 767px) {
                         flex-wrap: wrap;
                     }
-
-                    .field_inn {
-                        width: 100%;
-                        margin-bottom: 30px;
-
+        
+                    .field_bolck {
+                        width: 31%;
+        
                         @media(max-width: 991px) {
-                            width: 48%;
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
                         }
-
+        
                         @media(max-width: 767px) {
-                            width: 100%;
+                            flex-wrap: wrap;
                         }
-
-
-                        label {
+        
+                        .field_inn {
                             width: 100%;
-                            margin-bottom: 10px;
-                            font-size: 12px;
-                            color: $text-grey;
-                            font-weight: 400;
-
-                            sup {
-                                color: $error-color;
+                            margin-bottom: 30px;
+        
+                            @media(max-width: 991px) {
+                                width: 48%;
                             }
-                        }
-
-                        .error_text {
-                            width: 100%;
-                            color: $error-color;
-                            font-size: 10px;
-                            font-weight: 400;
-                            margin: 5px 0 0;
-                        }
-
-                        .text_field {
-                            width: 100%;
-                            position: relative;
-
-                            input {
+        
+                            @media(max-width: 767px) {
                                 width: 100%;
-                                background: transparent;
-                                height: 40px;
-                                border-top: none;
-                                border-left: none;
-                                border-right: none;
-                                border-bottom: 1px solid $box-border-color;
-                                font-size: 14px;
-                                color: $text-black;
-
-                                &:placeholder {
-                                    color: $box-border-color;
-                                    -webkit-text-fill-color: $box-border-color;
-                                }
-
-                                &:focus {
-                                    border-bottom: 1px solid $primary-color;
-                                }
-
-                                &.birth_date {
-                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
-                                    background-position: right center;
-                                    padding: 0 !important;
+                            }
+        
+        
+                            label {
+                                width: 100%;
+                                margin-bottom: 10px;
+                                font-size: 12px;
+                                color: $text-grey;
+                                font-weight: 400;
+        
+                                sup {
+                                    color: $error-color;
                                 }
                             }
-
+        
                             .error_text {
                                 width: 100%;
                                 color: $error-color;
@@ -656,97 +686,138 @@ input.ng-invalid.ng-touched {
                                 font-weight: 400;
                                 margin: 5px 0 0;
                             }
-
-                            &.custom-select {
-                                height: 40px;
-                                border-top: none;
-                                border-left: none;
-                                border-right: none;
-                                border-bottom: 1px solid $box-border-color;
-                                background: transparent;
-                                padding: 0;
-
-                                select {
-                                    display: none;
-                                }
-
-                                .select-selected {
-                                    background-color: transparent;
-                                    line-height: 40px;
+        
+                            .text_field {
+                                width: 100%;
+                                position: relative;
+        
+                                input {
+                                    width: 100%;
+                                    background: transparent;
+                                    height: 40px;
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    border-bottom: 1px solid $box-border-color;
                                     font-size: 14px;
                                     color: $text-black;
-
-                                    &:after {
-                                        position: absolute;
-                                        content: "";
-                                        top: 17px;
-                                        right: 10px;
-                                        width: 0;
-                                        height: 0;
-                                        border: 4px solid transparent;
-                                        border-color: $text-grey transparent transparent transparent;
+        
+                                    &:placeholder {
+                                        color: $box-border-color;
+                                        -webkit-text-fill-color: $box-border-color;
                                     }
-
-                                    &.select-arrow-active {
-                                        &:after {
-                                            border-color: transparent transparent $text-grey transparent;
-                                            top: 11px;
-                                        }
+        
+                                    &:focus {
+                                        border-bottom: 1px solid $primary-color;
+                                    }
+        
+                                    &.birth_date {
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                        background-position: right center;
+                                        padding: 0 !important;
                                     }
                                 }
-
-                                .select-items {
-                                    position: absolute;
-                                    background-color: $text-grey;
-                                    top: 100%;
-                                    left: 0;
-                                    right: 0;
-                                    z-index: 99;
-
-                                    div {
-                                        color: #ffffff;
-                                        padding: 8px 16px;
-                                        border: 1px solid transparent;
-                                        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-                                        cursor: pointer;
-                                        user-select: none;
-                                        font-size: 14px;
-                                        color: $text-white;
-
-                                        &:hover {
-                                            background-color: rgba(0, 0, 0, 0.1);
-                                        }
-
-                                        &.same-as-selected {
-                                            background-color: rgba(0, 0, 0, 0.1);
-                                        }
-                                    }
-
-                                    &.select-hide {
+        
+                                .error_text {
+                                    width: 100%;
+                                    color: $error-color;
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    margin: 5px 0 0;
+                                }
+        
+                                &.custom-select {
+                                    height: 40px;
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    border-bottom: 1px solid $box-border-color;
+                                    background: transparent;
+                                    padding: 0;
+        
+                                    select {
                                         display: none;
                                     }
+        
+                                    .select-selected {
+                                        background-color: transparent;
+                                        line-height: 40px;
+                                        font-size: 14px;
+                                        color: $text-black;
+        
+                                        &:after {
+                                            position: absolute;
+                                            content: "";
+                                            top: 17px;
+                                            right: 10px;
+                                            width: 0;
+                                            height: 0;
+                                            border: 4px solid transparent;
+                                            border-color: $text-grey transparent transparent transparent;
+                                        }
+        
+                                        &.select-arrow-active {
+                                            &:after {
+                                                border-color: transparent transparent $text-grey transparent;
+                                                top: 11px;
+                                            }
+                                        }
+                                    }
+        
+                                    .select-items {
+                                        position: absolute;
+                                        background-color: $text-grey;
+                                        top: 100%;
+                                        left: 0;
+                                        right: 0;
+                                        z-index: 99;
+        
+                                        div {
+                                            color: #ffffff;
+                                            padding: 8px 16px;
+                                            border: 1px solid transparent;
+                                            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                                            cursor: pointer;
+                                            user-select: none;
+                                            font-size: 14px;
+                                            color: $text-white;
+        
+                                            &:hover {
+                                                background-color: rgba(0, 0, 0, 0.1);
+                                            }
+        
+                                            &.same-as-selected {
+                                                background-color: rgba(0, 0, 0, 0.1);
+                                            }
+                                        }
+        
+                                        &.select-hide {
+                                            display: none;
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-
-                    &.half {
-                        width: 49%;
-
-                        .field_inn {
-                            @media(max-width: 991px) {
+        
+                        &.half {
+                            width: 49%;
+        
+                            .field_inn {
+                                @media(max-width: 991px) {
+                                    width: 100%;
+                                }
+                            }
+        
+                            @media(max-width: 767px) {
                                 width: 100%;
                             }
-                        }
-
-                        @media(max-width: 767px) {
-                            width: 100%;
                         }
                     }
                 }
             }
         }
     }
+
 
     &.booking_main {
         background: transparent;

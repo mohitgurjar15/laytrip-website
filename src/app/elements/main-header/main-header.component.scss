@@ -494,8 +494,8 @@
 											font-size: 14px;
 											padding: 0 10px 10px 10px;
 											&:hover {
-												color: $primary-color;
-												background-color: $bg-body;
+												color: $pink;
+												//background-color: $bg-body;
 												font-weight: 500;
 											}
 											.lay_points_dot{
@@ -593,9 +593,10 @@
 										color: $text-grey;
 										font-size: 14px;
 										&:hover {
-											color: $primary-color;
-											background-color: $bg-body;
-											font-weight: 500;
+											color: $pink;
+											//background-color: $bg-body;
+											background-color: $background-white;
+											font-weight: 400;
 										}
 										.lay_points_dot{
 											position: relative;
