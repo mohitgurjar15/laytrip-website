@@ -4414,7 +4414,9 @@ select {
                   &[aria-expanded="false"]{
                     &::after{
                       content: "";
-                      position: relative;
+                      //position: relative;
+                      position: absolute;
+                      right: 0;
                       padding: 5px 9px;
                       margin-left: 10px;
                       background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
@@ -4431,7 +4433,9 @@ select {
                   &[aria-expanded="true"]{
                     &::after{
                       content: "";
-                      position: relative;
+                      //position: relative;
+                      position: absolute;
+                      right: 0;
                       padding: 5px 9px;
                       margin-left: 10px;
                       background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
