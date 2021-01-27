@@ -225,12 +225,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
           // console.log(res);
           this.spinner.hide();
           if (res) {
-            this.cartService.setCartItems(route);
+
             // GET CART ITEMS FROM CART SERVICE
             this.cartService.getCartItems.subscribe(items => {
-              this.cartItems.push(items);
+              this.cartService.setCartItems(items.push(route));
+              localStorage.setItem('$crt', JSON.stringify(items.length));
             });
-            localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
             this.router.navigate([`flight/payment/${route.route_code}`]);
           }
         }, error => {

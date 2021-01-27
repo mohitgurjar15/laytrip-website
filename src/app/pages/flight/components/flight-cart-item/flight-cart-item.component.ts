@@ -36,7 +36,7 @@ export class FlightCartItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCartList();
+    // this.getCartList();
     try {
       let _itinerary: any = sessionStorage.getItem("_itinerary");
       _itinerary = JSON.parse(_itinerary);
@@ -50,41 +50,31 @@ export class FlightCartItemComponent implements OnInit {
   }
 
   getCartList() {
-    // GET CART LIST FROM GENERIC SERVICE
-    this.cartService.getCartList().subscribe((res: any) => {
-      if (res) {
-        // SET CART ITEMS IN CART SERVICE
-        this.cartService.setCartItems(res.data);
-        this.cartItems = res.data;
-        localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-        if (res.count) {
-          this.cartItemsCount = res.count;
-        }
-        this.cd.detectChanges();
-      }
-    }, (error) => {
-      if (error && error.status === 404) {
-        this.cartItems = [];
-      }
+    this.cartService.getCartItems.subscribe((res: any) => {
+      this.cartItems.push(res);
     });
   }
 
   deleteCart(id) {
-    this.spinner.show();
-    this.cartService.deleteCartItem(id).subscribe((res: any) => {
-      this.spinner.hide();
-      this.cartItems.splice(id, 1);
-      let queryParams = {};
-      let urlData = this.commonFunction.decodeUrl(this.router.url);
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
-      });
-      localStorage.removeItem('$crt');
-      this.cartItemsCount = '';
-      this.cartService.setCartItems(this.cartItemsCount);
-    }, error => {
-      console.log(error);
-    });
+    this.cartItems = this.cartItems.splice(id, 1);
+    console.log(this.cartItems);
+    this.cartService.setCartItems(this.cartItems);
+    localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+    // this.spinner.show();
+    // this.cartService.deleteCartItem(id).subscribe((res: any) => {
+    //   this.spinner.hide();
+    //   this.cartItems.splice(id, 1);
+    //   let queryParams = {};
+    //   let urlData = this.commonFunction.decodeUrl(this.router.url);
+    //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //     this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
+    //   });
+    //   localStorage.removeItem('$crt');
+    //   this.cartItemsCount = '';
+    //   this.cartService.setCartItems(this.cartItemsCount);
+    // }, error => {
+    //   console.log(error);
+    // });
   }
 
 }
