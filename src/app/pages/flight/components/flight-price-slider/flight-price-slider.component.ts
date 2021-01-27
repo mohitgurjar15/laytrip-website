@@ -11,7 +11,6 @@ import * as moment from 'moment'
 })
 export class FlightPriceSliderComponent implements OnInit {
 
-  ​flexibleLoading:boolean=false;
   ​flexibleNotFound:boolean=false;
   departureDate:string;
   departure_date:string;
@@ -24,6 +23,7 @@ export class FlightPriceSliderComponent implements OnInit {
   child:number;
   infant:number;
 
+  @Input() flexibleLoading:boolean=false;
   @Input() dates=[];
 
   constructor(
