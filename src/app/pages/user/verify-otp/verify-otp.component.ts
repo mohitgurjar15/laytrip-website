@@ -24,6 +24,7 @@ export class VerifyOtpComponent implements OnInit {
   otpForm: FormGroup;
   submitted = false;
   otpVerified = false;
+  otpLengthError = false;
   loading = false;
   errorMessage = '';
   spinner = false;
@@ -104,16 +105,20 @@ export class VerifyOtpComponent implements OnInit {
 
   onSubmit() {  
     this.submitted = this.loading = true;
-    if (this.otpForm.hasError('otpsError')) {
+    var otpValue='';
+    let otps : any = this.ngOtpInputRef.otpForm.value;
+      Object.values(otps).forEach((v) => {    
+      otpValue += v;
+    });
+    if(otpValue.length != 6){
+      this.otpLengthError = true;
+    } 
+    if (this.otpForm.hasError('otpsError') || otpValue.length != 6) {
       this.submitted = true; 
       this.loading = false; 
       return;
     } else {    
-      var otpValue='';
-      let otps : any = this.ngOtpInputRef.otpForm.value;
-        Object.values(otps).forEach((v) => {    
-        otpValue += v;
-      });
+      
       let data = {
         "email":this.emailForVerifyOtp,
         "otp": otpValue,

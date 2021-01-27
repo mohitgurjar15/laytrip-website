@@ -46,7 +46,7 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.openOtpPage = function () {
         $('#sign_up_modal').modal('hide');
-        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
+        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true, backdrop: 'static', keyboard: false });
         modalRef.componentInstance.isSignup = true;
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };

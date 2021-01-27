@@ -109,9 +109,7 @@
                                     <div *ngIf="signupForm.controls.email.errors.required">{{'email_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.email.errors.pattern">{{'email_invalid_validation' | translate}}</div>
                                 </div>
-                                <div class="error_text" *ngIf="emailExist">
-                                    {{'email_exist_validation'|translate}}
-                                </div>
+                                <div class="error_text" *ngIf="emailExist">{{'email_exist_validation'|translate}}</div>
 							</div>
 						</div>					
 						<div class="form_row">
@@ -162,7 +160,7 @@
                             </div>
                         </div> 
                         <div class="form_btn">
-                            <button type="submit" [disabled]="(!signupForm.valid || !this.iAccept || !isCaptchaValidated)" [ngClass]="{'btn_disable':(!signupForm.valid || !this.iAccept || !isCaptchaValidated)}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                            <button type="submit" [disabled]="(!signupForm.valid || !this.iAccept || !isCaptchaValidated || emailExist)" [ngClass]="{'btn_disable':(!signupForm.valid || !this.iAccept || !isCaptchaValidated)}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
                             </button>
                         </div>

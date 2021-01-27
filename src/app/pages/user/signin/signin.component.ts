@@ -51,11 +51,6 @@ export class SigninComponent  implements OnInit {
     });
   }  
 
-  closeModal(){        
-    this.valueChange.emit({ key: 'signIn', value: true });
-    $('#sign_in_modal').modal('hide');    
-  }
-
   get f() { return this.loginForm.controls; }
 
   onSubmit() {    
@@ -101,20 +96,7 @@ export class SigninComponent  implements OnInit {
         }
       });
     }
-  }
-
-  openPage(event) {
-    if (event && event.value === 'forgotPassword') {
-      $('.modal_container').addClass('right-panel-active');
-      $('.forgotpassword-container').addClass('show_forgotpass');
-      this.pageData = true;
-      this.valueChange.emit({ key: 'forgotPassword', value: this.pageData });
-    } else if (event && event.value === 'signUp') {
-      $('.modal_container').addClass('right-panel-active');
-      this.pageData = true;
-      this.valueChange.emit({ key: 'signUp', value: this.pageData });
-    }
-  }
+  }  
   
   toggleFieldTextType(){
     this.fieldTextType = !this.fieldTextType;
