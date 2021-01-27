@@ -179,7 +179,7 @@ export class MainFooterComponent implements OnInit {
     }
   }
 
-  openShare() {
-    const modalRef = this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true });
+  openShareModal() {
+    this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true,backdrop: 'static',keyboard: false });
   }
 }

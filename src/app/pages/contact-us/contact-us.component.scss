@@ -52,8 +52,9 @@
                             .word_counter{
                                 display: flex;
                                 color: $box-border-color;
-                                font-size: 10px;
+                                font-size: 12px;
                                 justify-content: flex-end;
+                                color: $mid_gray_bg;
                             }
                         }
                     }

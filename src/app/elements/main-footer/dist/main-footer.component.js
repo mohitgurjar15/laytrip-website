@@ -153,8 +153,8 @@ var MainFooterComponent = /** @class */ (function () {
             localStorage.setItem("_curr", JSON.stringify(currency));
         }
     };
-    MainFooterComponent.prototype.openShare = function () {
-        var modalRef = this.modalService.open(share_social_media_component_1.ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true });
+    MainFooterComponent.prototype.openShareModal = function () {
+        this.modalService.open(share_social_media_component_1.ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true, backdrop: 'static', keyboard: false });
     };
     MainFooterComponent = __decorate([
         core_1.Component({
