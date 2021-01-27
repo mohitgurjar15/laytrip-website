@@ -1,0 +1,71 @@
+@import '../../../../../cstm-variable';
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.traveller_accordion{
+    .card{
+        border: 1px solid $grayed_border;
+        border-radius: 10px;
+        .card-header{
+            border: none;
+            background-color: transparent;
+            a{
+                font-weight: 600;
+                color: $text-black;
+                font-size: 16px;
+                border: none;
+                background-color: transparent;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0;
+    
+                &[aria-expanded="true"]{
+                    &:after {
+                        content: "";
+                        position: relative;
+                        padding: 5px 9px;
+                        margin-left: 10px;
+                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                        background-position: right;
+                        background-repeat: no-repeat;
+                        background-size: 12px;
+                        transition: 0.3s;
+                        right: 15px;
+                      @include tab-view{
+                        position: absolute;
+                        right: 0;
+                        height: 12px;
+                      }
+                    }
+                }
+                &[aria-expanded="false"]{
+                    &:after {
+                        position: relative;
+                        padding: 5px 9px;
+                        margin-left: 10px;
+                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                        background-position: right;
+                        background-repeat: no-repeat;
+                        background-size: 12px;
+                        content: "";
+                        transition: 0.3s;
+                        right: 15px;
+                        @include tab-view{
+                            position: absolute;
+                            right: 0;
+                            height: 12px;
+                        }
+                    }
+                }
+            }
+        }
+        .card-body{
+            padding: 15px;
+        }
+    }
+}
