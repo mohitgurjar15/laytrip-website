@@ -89,6 +89,10 @@ var SigninComponent = /** @class */ (function () {
     SigninComponent.prototype.socialError = function (error) {
         this.apiError = error;
     };
+    SigninComponent.prototype.closeModal = function () {
+        this.apiError = '';
+        $('#sign_in_modal').modal('hide');
+    };
     SigninComponent.prototype.btnSignUpClick = function () {
         var _this = this;
         $('#sign_in_modal').modal('hide');

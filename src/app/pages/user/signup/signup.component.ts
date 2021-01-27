@@ -65,9 +65,10 @@ export class SignupComponent implements OnInit {
   }
 
   closeModal(){
-    this.valueChange.emit({ key: 'signIn', value: true });
-    $('#sign_in_modal').modal('hide');
-  }
+    this.apiError ='';
+    $('#sign_up_modal').modal('hide');
+  } 
+
 
   toggleFieldTextType(event){
     if(event.target.id == 'passEye'){

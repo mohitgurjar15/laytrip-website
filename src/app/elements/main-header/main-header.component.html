@@ -64,7 +64,7 @@
                                     <img *ngIf="countryCode!=='DR'" class="active-icon"
                                         src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg"
                                         alt="Credits Icon">
-                                    <span id="layPoints">{{showTotalLayCredit | number : '1.2-2'}}</span>
+                                    <span id="layPoints">{{showTotalLayCredit }}</span>
                                 </a>
                             </li>
 
@@ -92,15 +92,14 @@
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hover-link" [routerLink]="['/account/bookings']">{{'my_account_header' |
+                                        <li><a class="hover-link" [routerLink]="['/account']">{{'my_account_header' |
                                             translate}}</a></li>
-                                        <li><a [routerLink]="['/account/bookings']">History</a></li>
+                                        <li><a [routerLink]="['/account/']">History</a></li>
                                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                                             class="disabled">
                                             <a class="nav-link hover-link "
                                                 [routerLink]="['/account/lay-credit-points']">
-                                                <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit |
-                                                    number : '1.2-2'}}
+                                                <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit}}
                                                     Points</span>
                                             </a>
                                         </li>

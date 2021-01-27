@@ -36,7 +36,7 @@ export class VerifyOtpComponent implements OnInit {
     length: 6,
     isPasswordInput: false,
     disableAutoFocus: false,
-    placeholder: '0',
+    placeholder: '',
     inputStyles: {
       'width': '64px',
       'height': '64px'
