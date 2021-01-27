@@ -36,10 +36,6 @@ var SigninComponent = /** @class */ (function () {
             password: ['', [forms_1.Validators.required]]
         });
     };
-    SigninComponent.prototype.closeModal = function () {
-        this.valueChange.emit({ key: 'signIn', value: true });
-        $('#sign_in_modal').modal('hide');
-    };
     Object.defineProperty(SigninComponent.prototype, "f", {
         get: function () { return this.loginForm.controls; },
         enumerable: false,
@@ -89,19 +85,6 @@ var SigninComponent = /** @class */ (function () {
             });
         }
     };
-    SigninComponent.prototype.openPage = function (event) {
-        if (event && event.value === 'forgotPassword') {
-            $('.modal_container').addClass('right-panel-active');
-            $('.forgotpassword-container').addClass('show_forgotpass');
-            this.pageData = true;
-            this.valueChange.emit({ key: 'forgotPassword', value: this.pageData });
-        }
-        else if (event && event.value === 'signUp') {
-            $('.modal_container').addClass('right-panel-active');
-            this.pageData = true;
-            this.valueChange.emit({ key: 'signUp', value: this.pageData });
-        }
-    };
     SigninComponent.prototype.toggleFieldTextType = function () {
         this.fieldTextType = !this.fieldTextType;
     };
@@ -115,16 +98,23 @@ var SigninComponent = /** @class */ (function () {
         $("#signup-form").trigger("reset");
         setTimeout(function () {
             _this.renderer.addClass(document.body, 'modal-open');
-        }, 2000);
+        }, 1500);
     };
     SigninComponent.prototype.openOtpPage = function () {
         $('#sign_in_modal').modal('hide');
-        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true });
+        var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, {
+            windowClass: 'otp_window',
+            centered: true,
+            backdrop: 'static',
+            keyboard: false
+        });
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     SigninComponent.prototype.openForgotPassModal = function () {
         $('#sign_in_modal').modal('hide');
-        this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true });
+        this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static',
+            keyboard: false
+        });
     };
     __decorate([
         core_1.Input()

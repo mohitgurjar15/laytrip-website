@@ -25,7 +25,9 @@ export class SocialLoginComponent implements OnInit {
   loading: boolean = false;
   google_loading: boolean = false;
   apple_loading: boolean = false;
-
+  @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
+  auth2: any;
+  
   constructor(
     private userService: UserService,
     public router: Router,
@@ -36,8 +38,7 @@ export class SocialLoginComponent implements OnInit {
 
   ) { }
 
-  @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
-  auth2: any;
+  
 
   ngOnInit() {
     this.loadGoogleSdk();

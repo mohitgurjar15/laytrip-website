@@ -23,6 +23,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
         this.otpVerified = false;
+        this.otpLengthError = false;
         this.loading = false;
         this.errorMessage = '';
         this.spinner = false;
@@ -59,24 +60,10 @@ var VerifyOtpComponent = /** @class */ (function () {
             this.ngOtpInputRef.setValue(event);
         }
     };
-    VerifyOtpComponent.prototype.closeModal = function () {
-        this.valueChange.emit({ key: 'signIn', value: true });
-        $('#sign_in_modal').modal('hide');
-    };
-    VerifyOtpComponent.prototype.validateNumber = function (e) {
-        var input = String.fromCharCode(e.charCode);
-        var reg = /^[0-9]*$/;
-        if (!reg.test(input)) {
-            e.preventDefault();
-        }
-    };
-    VerifyOtpComponent.prototype.openSignInPage = function () {
-    };
     VerifyOtpComponent.prototype.resendOtp = function () {
         var _this = this;
         if (this.isResend) {
             this.ngOtpInputRef.setValue('');
-            // this.otpForm.reset();
             this.spinner = true;
             this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
                 _this.spinner = _this.isResend = false;
@@ -98,7 +85,15 @@ var VerifyOtpComponent = /** @class */ (function () {
     VerifyOtpComponent.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = this.loading = true;
-        if (this.otpForm.hasError('otpsError')) {
+        var otpValue = '';
+        var otps = this.ngOtpInputRef.otpForm.value;
+        Object.values(otps).forEach(function (v) {
+            otpValue += v;
+        });
+        if (otpValue.length != 6) {
+            this.otpLengthError = true;
+        }
+        if (this.otpForm.hasError('otpsError') || otpValue.length != 6) {
             this.submitted = true;
             this.loading = false;
             return;
@@ -106,34 +101,21 @@ var VerifyOtpComponent = /** @class */ (function () {
         else {
             var data = {
                 "email": this.emailForVerifyOtp,
-                "otp": this.otp
+                "otp": otpValue
             };
             this.userService.verifyOtp(data).subscribe(function (data) {
                 _this.otpVerified = true;
                 _this.submitted = _this.loading = false;
-                // $('#sign_in_modal').modal('hide');
                 localStorage.setItem("_lay_sess", data.userDetails.access_token);
                 var userDetails = jwt_helper_1.getLoginUserInfo();
                 var _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
                 if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
                     _this.router.navigate(['account/subscription']);
                 }
-                else {
-                    // this.activeModal.close();
-                    // $('#sign_in_modal').modal('show');
-                    // this.valueChange.emit({ key: 'signIn', value: true}); 
-                }
             }, function (error) {
                 _this.apiError = error.message;
                 _this.submitted = _this.loading = false;
             });
-        }
-    };
-    VerifyOtpComponent.prototype.onKeydown = function (event) {
-        var tabIndex = event.target.tabIndex ? '.tab' + (event.target.tabIndex - 1) : 1;
-        if (event.key == 'Backspace') {
-            $(tabIndex).focus();
-            $('.tab' + event.target.tabIndex).val('');
         }
     };
     __decorate([

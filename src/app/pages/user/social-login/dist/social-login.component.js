@@ -62,9 +62,7 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.loadGoogleSdk = function () {
         var _this = this;
-        console.log('here');
         window['googleSDKLoaded'] = function () {
-            console.log('here');
             window['gapi'].load('auth2', function () {
                 _this.auth2 = window['gapi'].auth2.init({
                     client_id: environment_1.environment.google_client_id,
@@ -74,7 +72,6 @@ var SocialLoginComponent = /** @class */ (function () {
                 _this.googleLogin();
             });
         };
-        console.log(this.auth2);
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {
@@ -87,44 +84,42 @@ var SocialLoginComponent = /** @class */ (function () {
         }(document, 'script', 'google-jssdk'));
     };
     SocialLoginComponent.prototype.googleLogin = function () {
-        this.loadGoogleSdk();
+        var _this = this;
+        // this.loadGoogleSdk();
         console.log(this.auth2);
-        /*  console.log(this.auth2)
-         this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
-           (googleUser) => {
-             this.google_loading = true;
-     
-             let profile = googleUser.getBasicProfile();
-     
-             // YOUR CODE HERE
-             let jsonData = {
-               "account_type": 1,
-               "name": profile.getName(),
-               "email": profile.getEmail(),
-               "social_account_id": profile.getId(),
-               "device_type": 1,
-               "device_model": "RNE-L22",
-               "device_token": "123abc#$%456",
-               "app_version": "1.0",
-               "os_version": "7.0"
-             };
-             this.userService.socialLogin(jsonData).subscribe((data: any) => {
-               if (data.user_details) {
-                 this.google_loading = false;
-                 localStorage.setItem("_lay_sess", data.user_details.access_token);
-                 $('#sign_in_modal').modal('hide');
-                 this.router.url;
-                 document.getElementById('navbarNav').click();
-               }
-             }, (error: HttpErrorResponse) => {
-               this.google_loading = false;
-               this.socialError.emit(error.message);
-             });
-           }, (error) => {
-             this.google_loading = false;
-             this.socialError.emit('Authentication failed.');
-             // this.toastr.error("Something went wrong!", 'SignIn Error');
-           }); */
+        console.log(this.auth2);
+        this.auth2.attachClickHandler(this.loginElement.nativeElement, {}, function (googleUser) {
+            _this.google_loading = true;
+            var profile = googleUser.getBasicProfile();
+            // YOUR CODE HERE
+            var jsonData = {
+                "account_type": 1,
+                "name": profile.getName(),
+                "email": profile.getEmail(),
+                "social_account_id": profile.getId(),
+                "device_type": 1,
+                "device_model": "RNE-L22",
+                "device_token": "123abc#$%456",
+                "app_version": "1.0",
+                "os_version": "7.0"
+            };
+            _this.userService.socialLogin(jsonData).subscribe(function (data) {
+                if (data.user_details) {
+                    _this.google_loading = false;
+                    localStorage.setItem("_lay_sess", data.user_details.access_token);
+                    $('#sign_in_modal').modal('hide');
+                    _this.router.url;
+                    document.getElementById('navbarNav').click();
+                }
+            }, function (error) {
+                _this.google_loading = false;
+                _this.socialError.emit(error.message);
+            });
+        }, function (error) {
+            _this.google_loading = false;
+            _this.socialError.emit('Authentication failed.');
+            // this.toastr.error("Something went wrong!", 'SignIn Error');
+        });
     };
     SocialLoginComponent.prototype.loadFacebookSdk = function () {
         window.fbAsyncInit = function () {

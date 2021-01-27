@@ -69,7 +69,7 @@
             <div class="form_row">
                 <div class="text_field">
                     <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
-                    <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
+                    <div *ngIf="otpLengthError || otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
                         <p class="error_text">{{'otp_touched_validation' | translate}}</p>
                     </div>
 
@@ -88,6 +88,9 @@
                 <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                     <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'veryfy' | translate}}
                 </button>
+            </div>
+            <div class="block_api_error" *ngIf="apiError.length > 0">
+                {{apiError}}
             </div>
             <div class="block_logo">
                 <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
