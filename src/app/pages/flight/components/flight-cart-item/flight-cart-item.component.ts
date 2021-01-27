@@ -17,11 +17,6 @@ export class FlightCartItemComponent implements OnInit {
   @Input() cartItem;
   @Input() travelers: [];
   @Input() cartNumber;
-  totalTraveler = {
-    adult_count: 0,
-    child_count: 0,
-    infant_count: 0
-  };
   // CART VARIABLE
   cartItemsCount;
   cartItems;
@@ -37,16 +32,6 @@ export class FlightCartItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCartList();
-    try {
-      let _itinerary: any = sessionStorage.getItem("_itinerary");
-      _itinerary = JSON.parse(_itinerary);
-      this.totalTraveler.adult_count = Number(_itinerary.adult);
-      this.totalTraveler.child_count = Number(_itinerary.child);
-      this.totalTraveler.infant_count = Number(_itinerary.infant);
-    }
-    catch (e) {
-      console.log("Error", e)
-    }
   }
 
   getCartList() {
