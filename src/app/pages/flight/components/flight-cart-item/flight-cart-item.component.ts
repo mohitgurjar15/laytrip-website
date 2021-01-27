@@ -31,17 +31,16 @@ export class FlightCartItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getCartList();
+    this.getCartList();
   }
 
   getCartList() {
-    this.cartService.getCartItems.subscribe((res: any) => {
-      this.cartItems.push(res);
+    this.cartService.getCartItems.subscribe(cartItems => {
+      this.cartItems = cartItems;
     });
   }
 
   deleteCart(id) {
-    
     this.spinner.show();
     this.cartService.deleteCartItem(id).subscribe((res: any) => {
       this.spinner.hide();
