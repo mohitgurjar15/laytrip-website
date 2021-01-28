@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { throwError } from "rxjs";
 import {catchError,retry, } from 'rxjs/operators';
+import { CommonFunction } from "../_helpers/common-function";
 
 
 @Injectable({
@@ -12,7 +13,8 @@ import {catchError,retry, } from 'rxjs/operators';
 export class TravelerService{
   
     constructor(
-        private http:HttpClient
+        private http:HttpClient,
+        private commonFunction:CommonFunction
     ){
 
     }
@@ -35,12 +37,20 @@ export class TravelerService{
     }
 
     getTravelers(){
-        
-        return this.http.get(environment.apiUrl+'v1/traveler/list-traveler',this.setHeaders())
-        .pipe(
-            retry(1),
-            catchError(this.handleError)
-          );
+        return this.http.get(environment.apiUrl+'v1/traveler/list-traveler',this.setHeaders());
+    }
+
+    addAdult(data) {
+        let userToken = localStorage.getItem('_lay_sess');
+        if (userToken) {
+            return this.http.post(`${environment.apiUrl}v1/traveler/save`, data, this.commonFunction.setHeaders());
+        } else {
+            return this.http.post(`${environment.apiUrl}v1/traveler/save`, data);
+        }
+    }
+
+    updateAdult(data, id) {
+        return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.commonFunction.setHeaders());
     }
 
 

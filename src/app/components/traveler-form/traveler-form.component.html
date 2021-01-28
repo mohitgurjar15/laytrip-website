@@ -1,14 +1,14 @@
-<form [formGroup]="travelerForm" (ngSubmit)="submit(travelerForm.value)">
+<form [formGroup]="travelerForm"  (ngSubmit)="submit(travelerForm.value)">
   <div *ngIf="travelers.type0.adults.length>0 && cartNumber==0" formGroupName="type0">
     <div formArrayName="adults">
       <div id="accordion" class="accordion_bookings">
         <div class="card" *ngFor="let traveler of travelerForm.get('type0.adults')['controls']; let x = index">
-          <div class="card-header">
+          <div class="card-header" (click)="selectTravelerNumber(x)">
             <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" aria-expanded="false">
               Booking Traveler {{x+1}}
             </a>
           </div>
-          <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">
+          <div [id]="'adult_collapse'+x"  class="collapse show" data-parent="#accordion">
             <div class="card-body">
               <div class="sub_cat_wrapper">
                 <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)
@@ -27,7 +27,7 @@
                   </a>
                 </button>
               </div>
-              <app-my-traveler [travelers]="travelers" travelerId={{traveler.controls.userId.value}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler travelerId={{traveler.controls.userId.value}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -96,7 +96,7 @@
                     <ng-select [items]="countries" 
                               bindLabel="name" 
                               bindValue="id"
-                              formControlName="country"
+                              formControlName="country_id"
                               >
                     </ng-select>
                   </div>
@@ -183,7 +183,7 @@
                 <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
                 <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
               </div>
-              <app-my-traveler [travelers]="travelers"  traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">

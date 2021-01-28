@@ -10,6 +10,7 @@ import { travelersFileds } from '../../_helpers/traveller.helper';
 import { CartService } from '../../services/cart.service';
 declare var $: any;
 import * as moment from 'moment';
+import { TravelerService } from 'src/app/services/traveler.service';
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',
@@ -25,7 +26,7 @@ export class TravelerFormComponent implements OnInit {
   travelerForm: FormGroup;
   @Input() cartNumber:number;
   @Input() cartItem;
-  traveler_number;
+  traveler_number:number=0;
   countries=[]
   travelers={
     type0 : {
@@ -51,7 +52,8 @@ export class TravelerFormComponent implements OnInit {
     public router: Router,
     public commonFunction: CommonFunction,
     private checkOutService:CheckOutService,
-    private cartService:CartService
+    private cartService:CartService,
+    private travelerService:TravelerService
   ) { }
 
   ngOnInit() {
@@ -86,6 +88,27 @@ export class TravelerFormComponent implements OnInit {
     this.patch();
 
     this.travelerForm.valueChanges.subscribe(value=>{
+      //console.log("One",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls,this.traveler_number,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status)
+      if(typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number]!=='undefined'){
+        console.log("Two",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status,this.traveler_number,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value);
+        if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status=='VALID'){
+
+          let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
+          data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].dob).format("YYYY-MM-DD")
+          if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId){
+            //Edit
+          }
+          else{
+            //Add
+            this.travelerService.addAdult(data).subscribe(traveler=>{
+              console.log("New Traveler=>>>",traveler)
+              
+            },error=>{
+
+            })
+          }
+        }
+      }
       this.checkOutService.emitTravelersformData(this.travelerForm)
     })
     
@@ -103,7 +126,7 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId=traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender=traveler.gender;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_number=traveler.phoneNo;
-        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country=traveler.country!=null?traveler.country.id:'';
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_id=traveler.country!=null?traveler.country.id:'';
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob).format('MMM d, yy');
 
         //this.travelers= Object.assign({},this.travelers)
@@ -137,13 +160,13 @@ export class TravelerFormComponent implements OnInit {
       email: [x.email,[Validators.required]],
       phone_number: [x.phone_number,[Validators.required]],
       dob: [x.dob,[Validators.required]],
-      country:[x.country,[Validators.required]],
+      country_id:[x.country_id,[Validators.required]],
       gender:[x.gender,[Validators.required]],
       userId:[x.userId],
       type:[x.type],
       dobMinDate:[x.dobMinDate],
       dobMaxDate:[x.dobMaxDate]
-    })
+    },{updateOn: 'blur'})
   }
 
   submit(value){
@@ -167,4 +190,8 @@ export class TravelerFormComponent implements OnInit {
     this.patch()
   }
   
+  selectTravelerNumber(traveler_number){
+    console.log("traveler_number",traveler_number)
+    this.traveler_number=traveler_number;
+  }
 }
