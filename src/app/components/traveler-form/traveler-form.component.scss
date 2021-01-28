@@ -18,6 +18,15 @@
 ::ng-deep .calender-passport-expiry{
   min-width: 300px !important;  
 }
+.dob_wrapper{
+  ::ng-deep .birth_date{
+    
+    .p-inputtext {
+        border: none;
+      }
+}
+}
+
 .accordion_bookings{
   .card{
     border: 1px solid $grayed_border;
@@ -136,14 +145,75 @@
             box-shadow: none;
           }
         }
-        .dobs{
-          input{
-            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
-            background-size: 20px;
+        .nation_wrps{
+          ng-select{
+            .ng-input{
+              &[aria-expanded="true"]{
+                &:after {
+                  content: "";
+                  position: relative;
+                  padding: 5px 9px;
+                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                  background-position: right;
+                  background-repeat: no-repeat;
+                  background-size: 10px;
+                  transition: 0.3s;
+                  right: 8px;
+                  border: none;
+                  top: 5px;
+                  @include tab-view{
+                  position: absolute;
+                  right: 0;
+                  height: 12px;
+                  }
+                }
+              }
+              &[aria-expanded="false"]{
+                &:after {
+                  position: relative;
+                  padding: 5px 9px;
+                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                  background-position: right;
+                  background-repeat: no-repeat;
+                  background-size: 10px;
+                  content: "";
+                  transition: 0.3s;
+                  right: 8px;
+                  border: none;
+                  top: 5px;
+                  @include tab-view{
+                    position: absolute;
+                    right: 0;
+                    height: 12px;
+                  }
+                }
+              }
+            }
           }
         }
         .mb-sm-10{
           margin-bottom: 10px;
+          &.telephone_wrps{
+            .tel_span{
+              border-bottom: 2px solid $box-border-color;
+              display: flex;
+              position: relative;
+              bottom: 2px;
+              input{
+                border-bottom: none;
+                &:first-child{
+                  width: 30px;
+                }
+              }
+            }
+          }
+          &.dobs{
+            input{
+              background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+              background-size: 20px;
+              border: none;
+            }
+          }
         }
       }
       .accordion_addn{
