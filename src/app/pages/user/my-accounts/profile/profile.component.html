@@ -270,7 +270,8 @@
                 Account Details
             </h3>
             <span class="edit_btns">
-                <a class="hover-link" (click)="enableFormControlInputs()">{{ isFormControlEnable ? 'Update' : 'Edit' }}</a>
+                <a class="hover-link" *ngIf="!isFormControlEnable" (click)="enableFormControlInputs()">Edit </a>
+                <button *ngIf="isFormControlEnable">Update</button>
             </span>
         </div>
         <!-- <div class="form_row">

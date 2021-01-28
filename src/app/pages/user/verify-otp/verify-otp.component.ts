@@ -91,7 +91,8 @@ export class VerifyOtpComponent implements OnInit {
       this.spinner = true;
       this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
         this.spinner = this.isResend = this.otpLengthError = false;         
-        this.isTimerEnable = true;       
+        this.isTimerEnable = true;     
+        this.apiError = '';  
         setTimeout(() => {
           this.counter.begin();         
         }, 1000); 

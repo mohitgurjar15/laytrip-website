@@ -76,6 +76,7 @@ var VerifyOtpComponent = /** @class */ (function () {
             this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
                 _this.spinner = _this.isResend = _this.otpLengthError = false;
                 _this.isTimerEnable = true;
+                _this.apiError = '';
                 setTimeout(function () {
                     _this.counter.begin();
                 }, 1000);
