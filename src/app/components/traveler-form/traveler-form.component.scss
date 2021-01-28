@@ -22,6 +22,10 @@
   .card{
     border: 1px solid $grayed_border;
     border-radius: 10px;
+    margin-bottom: 15px;
+    &:last-child{
+      margin-bottom: 0;
+    }
     .card-header{
       border: none;
       background-color: transparent;
