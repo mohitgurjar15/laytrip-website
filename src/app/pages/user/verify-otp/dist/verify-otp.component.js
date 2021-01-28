@@ -43,14 +43,20 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.isResend = false;
         this.otp = 0;
         this.configCountDown = { leftTime: 60, demand: false };
+        this.isTimerEnable = false;
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.otpForm = this.formBuilder.group({
             otp: ['']
         }, { validator: custom_validators_1.optValidation() });
+        setTimeout(function () {
+            _this.isResend = true;
+        }, 60000);
     };
     VerifyOtpComponent.prototype.timerComplete = function () {
         this.isResend = true;
+        this.isTimerEnable = false;
         this.configCountDown = { leftTime: 60, demand: true };
     };
     VerifyOtpComponent.prototype.onOtpChange = function (event) {
@@ -67,6 +73,7 @@ var VerifyOtpComponent = /** @class */ (function () {
             this.spinner = true;
             this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
                 _this.spinner = _this.isResend = false;
+                _this.isTimerEnable = true;
                 _this.counter.begin();
             }, function (error) {
                 _this.submitted = _this.spinner = false;

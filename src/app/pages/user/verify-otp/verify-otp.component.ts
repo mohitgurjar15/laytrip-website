@@ -45,10 +45,10 @@ export class VerifyOtpComponent implements OnInit {
   isResend : boolean = false;
   @ViewChild('ngOtpInput',{static:false}) ngOtpInputRef:any;//Get reference using ViewChild and the specified hash
   @ViewChild('countdown',{static:false}) counter: CountdownComponent;
-  otp:number=0;
-  
+  otp:number=0;  
   configCountDown : any = {leftTime: 60,demand: false};
-  
+  isTimerEnable = false;
+
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -64,10 +64,14 @@ export class VerifyOtpComponent implements OnInit {
       otp: [''],  
     }, { validator: optValidation() });
     
+    setTimeout(() => {
+      this.isResend = true;
+    }, 60000);
   }
 
   timerComplete() {
     this.isResend = true; 
+    this.isTimerEnable = false;
     this.configCountDown = {leftTime: 60,demand: true};
   }
 
@@ -84,7 +88,8 @@ export class VerifyOtpComponent implements OnInit {
       this.ngOtpInputRef.setValue('');
       this.spinner = true;
       this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
-        this.spinner = this.isResend = false;
+        this.spinner = this.isResend = false;         
+        this.isTimerEnable = true;
         this.counter.begin();
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.spinner = false;

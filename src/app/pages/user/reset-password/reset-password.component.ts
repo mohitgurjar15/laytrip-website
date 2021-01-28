@@ -50,7 +50,7 @@ export class ResetPasswordComponent implements OnInit {
   };
   configCountDown : any = {leftTime: 60,demand: false};
   otpLengthError = false;
-  counterEnable = false;
+  isTimerEnable = false;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -68,6 +68,9 @@ export class ResetPasswordComponent implements OnInit {
     },{
       validator: [MustMatch('new_password', 'confirm_password'),optValidation()]    
     });
+    setTimeout(() => {
+      this.isResend = true;
+    }, 60000);
   }
 
   openSignInPage() {
@@ -117,6 +120,8 @@ export class ResetPasswordComponent implements OnInit {
   
   timerComplete() {
     this.isResend = true; 
+    this.isTimerEnable = false; 
+    
     this.configCountDown = {leftTime: 60,demand: true};
   }
 
@@ -129,10 +134,10 @@ export class ResetPasswordComponent implements OnInit {
       this.userService.forgotPassword(this.emailForVerifyOtp).subscribe((data: any) => {
         this.spinner = this.isResend = false;
         this.counter.begin();
-        this.counterEnable = true;
+        this.isTimerEnable = true;
       }, (error: HttpErrorResponse) => {       
-        this.submitted = this.spinner =  this.counterEnable = false;
-        this.errorMessage = error.message;
+        this.submitted = this.spinner =  this.isTimerEnable = false;
+        this.apiMessage = error.message;
       });
 
     }

@@ -81,7 +81,7 @@
                         <div class="form_row">
                             <div class="text_field">
                                 <input type="email"
-                                    [ngClass]="{'error': (submitted && loginForm.controls.email.errors ) || (  loginForm.controls.email.touched && loginForm.controls.email.errors)}"
+                                [ngClass]="{'error': (submitted && loginForm.controls.email.errors ) || (  loginForm.controls.email.touched && loginForm.controls.email.errors)}"
                                     type="email" maxlength="50" formControlName="email" tabindex="101"
                                     placeholder="{{'email_placeholder' | translate}}">
                                 <div

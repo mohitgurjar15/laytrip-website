@@ -42,9 +42,10 @@ var ResetPasswordComponent = /** @class */ (function () {
         };
         this.configCountDown = { leftTime: 60, demand: false };
         this.otpLengthError = false;
-        this.counterEnable = false;
+        this.isTimerEnable = false;
     }
     ResetPasswordComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.resetForm = this.formBuilder.group({
             new_password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
             confirm_password: ['', [forms_1.Validators.required]],
@@ -52,6 +53,9 @@ var ResetPasswordComponent = /** @class */ (function () {
         }, {
             validator: [must_match_validators_1.MustMatch('new_password', 'confirm_password'), custom_validators_1.optValidation()]
         });
+        setTimeout(function () {
+            _this.isResend = true;
+        }, 60000);
     };
     ResetPasswordComponent.prototype.openSignInPage = function () {
         this.activeModal.close();
@@ -100,6 +104,7 @@ var ResetPasswordComponent = /** @class */ (function () {
     };
     ResetPasswordComponent.prototype.timerComplete = function () {
         this.isResend = true;
+        this.isTimerEnable = false;
         this.configCountDown = { leftTime: 60, demand: true };
     };
     ResetPasswordComponent.prototype.resendOtp = function () {
@@ -112,10 +117,10 @@ var ResetPasswordComponent = /** @class */ (function () {
             this.userService.forgotPassword(this.emailForVerifyOtp).subscribe(function (data) {
                 _this.spinner = _this.isResend = false;
                 _this.counter.begin();
-                _this.counterEnable = true;
+                _this.isTimerEnable = true;
             }, function (error) {
-                _this.submitted = _this.spinner = _this.counterEnable = false;
-                _this.errorMessage = error.message;
+                _this.submitted = _this.spinner = _this.isTimerEnable = false;
+                _this.apiMessage = error.message;
             });
         }
     };
