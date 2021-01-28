@@ -47,7 +47,6 @@
                       <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your last name.</small>
                     </div>
                   </div>
-
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Gender*</label>
                     <select class="form-control" formControlName="gender">
@@ -59,8 +58,6 @@
                       <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your gender.</small>
                     </div>
                   </div>
-                </div>
-                <div class="form-row mt-3">
                   <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                     <label for="">Email*</label>
                     <input type="email" class="form-control" placeholder="Email" formControlName="email">
@@ -83,8 +80,6 @@
                     <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="calender-price-view" inputStyleClass="custom_datpicker birth_date" inputId="basic"  formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020" placeholder="Date of birth" [defaultDate]="dobMinDate">
                     </p-calendar>
                   </div>
-                </div>
-                <div class="form-row mt-3">
                   <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type?.adults[x]?.passport_number">
                     <label for="">Passport number</label>
                     <input type="text" class="form-control" placeholder="Passport number"

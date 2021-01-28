@@ -19,31 +19,12 @@
                         </span>
                     </button>
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
-                        <!-- <ul class="navbar-nav nav_left" *ngIf="countryCode!=='DR'">
-                            <li class="nav-item">
-                                <a class="nav-link hover-link"
-                                    [routerLink]="['/partial-payment']">{{'installment_payment' | translate}}</a>
-                            </li>
-                        </ul> -->
                         <ul class="navbar-nav ml-auto nav_right" [ngClass]="{'dr_menu':countryCode==='DR'}">
-                            <!-- <li class="nav-item cus_pad">
-                                <a class="nav-link hover-link">
-                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Notifications.svg" alt="">
-                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/Ic_Notifications_active.svg" alt="">
-                                </a>
-                            </li> -->
-                            <!-- <li class="nav-item cus_pad">
-                                <a class="nav-link" href="javascript:void(0);">
-                                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_message.svg" alt="">
-                                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_message_active.svg" alt="">
-                                </a>
-                            </li> -->
+                            
                             <li class="nav-item">
                                 <a [routerLink]="['/about']" class="nav-link hover-link">About</a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link hover-link">Support</a>
-                            </li> -->
+                           
                             <li class="nav-item disabled"
                                 *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
                                 <a class="nav-link hover-link" [routerLink]="['/account/lay-credit-points']">
@@ -68,13 +49,8 @@
                                 </a>
                             </li>
 
-                            <!-- <li>
-                                <a class="nav-link" [routerLink]="['/account/search-booking']"><i class="fa fa-search"
-                                        aria-hidden="true"></i>
-                                </a>
-                            </li> -->
                             <li class="nav-item login_li" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-                                <!-- <a class="nav-link login_btn hover-link" id="login_btn" [ngClass]="{'dr_login_btn': countryCode==='DR'}" data-toggle="modal" data-target="#sign_in_modal">{{'sign_in' | translate}}</a> -->
+                                
                                 <a class="nav-link login_btn_text hover-link" id="login_btn" (click)="openSignModal()" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                                         <defs></defs>
@@ -85,9 +61,9 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item " *ngIf="isLoggedIn && userDetails.roleId != 7">
+                            <li class="nav-item responsive_li" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
-                                    <a class="nav-link" class="dropdown-toggle hover-link" data-toggle="dropdown">
+                                    <a class="nav-link" class="dropdown-toggle hover-link" data-toggle="dropdown" aria-expanded="false">
                                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
@@ -107,7 +83,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item responsive_li">
                                 <div class="cart_section anchor-tag">
                                     <span class="cart_i_wrapper">
                                         <a (click)="redirectToPayment()">
@@ -117,6 +93,17 @@
                                         </a>
                                     </span>
                                 </div>
+                            </li>
+                            <li class="nav-item responsive_li cart_drop">
+                                <a (click)="redirectToPayment()" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                   
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);" class="gryd_txt">Weekly</a></li>
+                                    <li><a href="javascript:void(0);" class="bld_txt">$20.11</a></li>
+                                    <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
+                                    <li><a href="javascript:void(0);" class="bld_txt">$200.55</a></li>
+                                </ul>
                             </li>
                         </ul>
                     </div>

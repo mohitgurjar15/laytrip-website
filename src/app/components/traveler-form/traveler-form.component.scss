@@ -143,9 +143,7 @@
           }
         }
         .mb-sm-10{
-          @include tab-view{
-            margin-bottom: 10px;
-          }
+          margin-bottom: 10px;
         }
       }
       .accordion_addn{
