@@ -1,26 +1,26 @@
-@import '../../../../cstm-variable';
+@import "../../../../cstm-variable";
 @import "../../../../_cstm-variable.scss";
 @import "../../../../_cstm-components.scss";
 @import "../../../../_hotel.scss";
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.flight-error{
-    border: 1px solid red;
-    border-radius:8px;
+.flight-error {
+  border: 1px solid red;
+  border-radius: 8px;
 }
 .flight_form {
-    .autocomplete-container {
-        box-shadow: none !important;
-    }
+  .autocomplete-container {
+    box-shadow: none !important;
+  }
 }
 
 .disable-div {
-    cursor: not-allowed;
-    background-color: rgb(235, 235, 228) !important;
-    & input {
-        cursor: not-allowed !important;
-    }
+  cursor: not-allowed;
+  background-color: rgb(235, 235, 228) !important;
+  & input {
+    cursor: not-allowed !important;
+  }
 }
 
 /* .home_banner{
@@ -30,282 +30,305 @@
     }
 } */
 
-.disable_return_date{
-
-    height: 100%;
-    p{
-        padding: 0 15px;
-        margin:0;
-        font-size: 14px;
-        color: $text-grey;
-        cursor: pointer;
-    }
+.disable_return_date {
+  height: 100%;
+  p {
+    padding: 0 15px;
+    margin: 0;
+    font-size: 14px;
+    color: $text-grey;
+    cursor: pointer;
+  }
 }
 
 .disable-btn {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
-.tab_search_area{
-    ::ng-deep .laytrip-cal-view{
-        padding: 5px;
-        background-color: $bg-crad;
-        p-header{
-            &.calender-header{
-                padding: 0 10px;
-                margin-bottom: 5px;
-                p{
-                    padding: 0;
-                    margin-bottom: 2px;
-                }
-                .calender_header_wrapper{
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    margin-bottom: 5px;
-                    span{
-                        font-size: 12px;
-                        margin-right: 15px;
-                        padding-left: 20px;
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                        &.green_var{
-                            color: $bg-green;
-                            &::before{
-                                background-color: $bg-green;
-                            }
-                        }
-                        &.yellow_var{
-                            color: $text_light_yellow;
-                            &::before{
-                                background-color: $text_light_yellow;
-                            }
-                        }
-                        &.red_var{
-                            color: $error-color;
-                            &::before{
-                                background-color: $error-color;
-                            }
-                        }
-                        &::before{
-                            content: '';
-                            height: 15px;
-                            width: 15px;
-                            border-radius: 50%;
-                            position: absolute;
-                            left: 0;
-                        }
-                    }
-                }
+.tab_search_area {
+  ::ng-deep .laytrip-cal-view {
+    padding: 5px;
+    background-color: $bg-crad;
+    p-header {
+      &.calender-header {
+        padding: 0 10px;
+        margin-bottom: 5px;
+        p {
+          padding: 0;
+          margin-bottom: 2px;
+        }
+        .calender_header_wrapper {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-bottom: 5px;
+          span {
+            font-size: 12px;
+            margin-right: 15px;
+            padding-left: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            &.green_var {
+              color: $bg-green;
+              &::before {
+                background-color: $bg-green;
+              }
             }
-        }
-        .p-datepicker-group-container{
-           background-color: $background-white;
-           border-radius: 15px;
-           .p-datepicker-header{
-                padding: 0 0.5rem;
-                border-top-right-radius: 15px !important;
-                border-top-left-radius: 15px !important;
-           }
-        }
-        input{
-            &.p-inputtext{
-                &:enabled{
-                    &:focus{
-                        box-shadow: none !important;
-                    }
-                }
-            } 
-        }
-        table{
-            margin: 0;
-            th{
-                font-size: 13px !important;
-                border-bottom: none !important;
-                font-weight: 600 !important;
-                text-align: center;
+            &.yellow_var {
+              color: $text_light_yellow;
+              &::before {
+                background-color: $text_light_yellow;
+              }
             }
-            td{
-                padding: 0.1rem !important;
-                
-                span{
-                    width: 45px;
-                    height: auto;
-                    font-size: 11px;
-                    display: flex;
-                    align-items: center;
-                    flex-direction: column;
-                    border: none !important;
-                    border-radius: 0 !important;
-                    box-shadow: none !important;
-                    color: $text-grey;
-                    margin: 2px;
-                    position: relative;
-
-                    @include mobile-view{
-                        width: 33px;
-                    }
-                    &:hover{
-                        background: none !important;
-                    }
-                    &.p-highlight{
-                        background: none !important;
-                        font-weight: 500;
-                        overflow: visible;
-                        &::before{
-                            content: '';
-                            width: 5px;
-                            height: 5px;
-                            border-radius: 50%;
-                            background-color: $pink;
-                            position: absolute;
-                            top: -5px;
-                        }
-                    }
-                    &.c_date{
-                        border-radius: 50% !important;
-                        width: 1.5rem;
-                        height: 1.5rem;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-weight: 600;
-                        &.green_date{
-                            color: $bg-green;
-                            background-color: $bg-green-light;
-                            &:hover{
-                                background-color: $bg-green-light !important;
-                            }
-                        }
-                        &.yellow_date{
-                            color: $text_light_yellow;
-                            background-color: $bg-yellow-light;
-                            &:hover{
-                                background-color: $bg-yellow-light !important;
-                            }
-                        }
-                        &.red_date{
-                            color: $error-color;
-                            background-color: $bg-red-light;
-                            &:hover{
-                                background-color: $bg-red-light !important;
-                            }
-                        }
-                    }
-                    &.calender_price{
-                        font-size: 10px;
-                        height: 15px;
-                    }
-                }
+            &.red_var {
+              color: $error-color;
+              &::before {
+                background-color: $error-color;
+              }
             }
-        }
-        &.round_trip_calender{
-            table{
-                td{
-                    span{
-                        height: 35px;
-                        width: 35px;
-                        &.p-highlight{
-                            color: $pink !important;
-                            background-color: $bg-pink-light !important;
-                            border-radius: 50% !important;
-                            &:hover{
-                                background-color: $bg-pink-light !important;
-                            }
-                            &::before{
-                                content: '';
-                                width: 0;
-                                height: 0;
-                            }
-                        }
-                    }
-                }
+            &::before {
+              content: "";
+              height: 15px;
+              width: 15px;
+              border-radius: 50%;
+              position: absolute;
+              left: 0;
             }
+          }
         }
+      }
     }
+    .p-datepicker-group-container {
+      background-color: $background-white;
+      border-radius: 15px;
+
+      .p-datepicker-header {
+        padding: 0 0.5rem;
+        border-top-right-radius: 15px !important;
+        border-top-left-radius: 15px !important;
+      }
+
+      @include mobile-view {
+        flex-flow: column;
+      }
+    }
+    input {
+      &.p-inputtext {
+        &:enabled {
+          &:focus {
+            box-shadow: none !important;
+          }
+        }
+      }
+    }
+    table {
+      margin: 0;
+      th {
+        font-size: 13px !important;
+        border-bottom: none !important;
+        font-weight: 600 !important;
+        text-align: center;
+      }
+      td {
+        padding: 0.1rem !important;
+
+        span {
+          width: 45px;
+          height: auto;
+          font-size: 11px;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          color: $text-grey;
+          margin: 2px;
+          position: relative;
+
+          @include mobile-view {
+            width: 33px;
+          }
+          &:hover {
+            background: none !important;
+          }
+          &.p-highlight {
+            background: none !important;
+            font-weight: 500;
+            overflow: visible;
+            &::before {
+              content: "";
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              background-color: $pink;
+              position: absolute;
+              top: -5px;
+            }
+          }
+          &.c_date {
+            border-radius: 50% !important;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            &.green_date {
+              color: $bg-green;
+              background-color: $bg-green-light;
+              &:hover {
+                background-color: $bg-green-light !important;
+              }
+            }
+            &.yellow_date {
+              color: $text_light_yellow;
+              background-color: $bg-yellow-light;
+              &:hover {
+                background-color: $bg-yellow-light !important;
+              }
+            }
+            &.red_date {
+              color: $error-color;
+              background-color: $bg-red-light;
+              &:hover {
+                background-color: $bg-red-light !important;
+              }
+            }
+          }
+          &.calender_price {
+            font-size: 10px;
+            height: 15px;
+          }
+        }
+      }
+    }
+    &.round_trip_calender {
+      table {
+        td {
+          span {
+            height: 35px;
+            width: 35px;
+            &.p-highlight {
+              color: $pink !important;
+              background-color: $bg-pink-light !important;
+              border-radius: 50% !important;
+              &:hover {
+                background-color: $bg-pink-light !important;
+              }
+              &::before {
+                content: "";
+                width: 0;
+                height: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .home_banner {
-    .banner_inner {
-        .banner_tab {
-            .tab-content {
-                .flight_tab {
-                    .tab-content {
-                        .tab-pane {
-                            .flight_search {
-                                .flight-grid {
-                                    .grid_box.first {
-                                        z-index: 2;
-                                        .flight_to {
-                                            z-index: 0;
-                                        }
-                                    }
-                                }
-                            }
-                        }
+  .banner_inner {
+    .banner_tab {
+      .tab-content {
+        .flight_tab {
+          .tab-content {
+            .tab-pane {
+              .flight_search {
+                .flight-grid {
+                  .grid_box.first {
+                    z-index: 2;
+                    .flight_to {
+                      z-index: 0;
                     }
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 
-
-.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input{
-    //background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+.home_banner
+  .banner_inner
+  .banner_tab
+  .tab-content
+  .flight_tab
+  .tab-content
+  .tab-pane
+  .flight_search
+  .flight-grid
+  .grid_box.secound
+  .search_area
+  input {
+  //background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
 }
 
-.home_banner .banner_inner .banner_tab .nav-tabs a.disable_module{
-    cursor:no-drop;
+.home_banner .banner_inner .banner_tab .nav-tabs a.disable_module {
+  cursor: no-drop;
 }
 
-.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .date_to .search_area{
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    height: 100%;
-    p{
-        font-size: 16px;
-    }
+.home_banner
+  .banner_inner
+  .banner_tab
+  .tab-content
+  .flight_tab
+  .tab-content
+  .tab-pane
+  .flight_search
+  .flight-grid
+  .grid_box.secound
+  .date_to
+  .search_area {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 100%;
+  p {
+    font-size: 16px;
+  }
 }
 
-.stripper{
-
-    background-color: #0043ff;
-    padding: 10px 0;
+.stripper {
+  background-color: #0043ff;
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+  p {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
     width: 100%;
-    text-align: center;
-    p{
-         margin: 0;
-        font-size: 16px;
-        color: #fff;
-        font-weight: 600;
-        width: 100%;
-        span{
-            font-size: 16px;
-            color: #fff;
-            font-weight: 400;
-        }
+    span {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 400;
     }
+  }
 }
-.calender-header{
-    text-align: center;
-    width: 100%;
-    display: inline-block;
-    padding: 0 20px;
+.calender-header {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  padding: 0 20px;
 }
-::ng-deep .calender-price-view{
-    //width: 340px;
-    min-width: 340px !important;
-    .ui-state-active {
-        background-color: #012178 !important;
-        .calender_price{
-            color: #fff !important;
-        }
+::ng-deep .calender-price-view {
+  //width: 340px;
+  min-width: 340px !important;
+  .ui-state-active {
+    background-color: #012178 !important;
+    .calender_price {
+      color: #fff !important;
     }
+  }
 }
-

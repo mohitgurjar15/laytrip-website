@@ -117,7 +117,7 @@ var SocialLoginComponent = /** @class */ (function () {
             });
         }, function (error) {
             _this.google_loading = false;
-            _this.socialError.emit('Authentication failed.');
+            // this.socialError.emit('Authentication failed.');
             // this.toastr.error("Something went wrong!", 'SignIn Error');
         });
     };
@@ -181,7 +181,7 @@ var SocialLoginComponent = /** @class */ (function () {
             }
             else {
                 _this.loading = false;
-                _this.socialError.emit('Authentication failed.');
+                // this.socialError.emit('Authentication failed.');
                 // this.toastr.error("Something went wrong!", 'SignIn Error');
             }
         }, { scope: 'email' });

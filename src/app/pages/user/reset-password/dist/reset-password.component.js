@@ -34,15 +34,18 @@ var ResetPasswordComponent = /** @class */ (function () {
             length: 6,
             isPasswordInput: false,
             disableAutoFocus: false,
-            placeholder: '0',
+            placeholder: '',
             inputStyles: {
                 'width': '64px',
                 'height': '64px'
             }
         };
         this.configCountDown = { leftTime: 60, demand: false };
+        this.otpLengthError = false;
+        this.isTimerEnable = false;
     }
     ResetPasswordComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.resetForm = this.formBuilder.group({
             new_password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
             confirm_password: ['', [forms_1.Validators.required]],
@@ -50,9 +53,13 @@ var ResetPasswordComponent = /** @class */ (function () {
         }, {
             validator: [must_match_validators_1.MustMatch('new_password', 'confirm_password'), custom_validators_1.optValidation()]
         });
+        setTimeout(function () {
+            _this.isResend = true;
+        }, 5000);
     };
     ResetPasswordComponent.prototype.openSignInPage = function () {
         this.activeModal.close();
+        $("#signin-form").trigger("reset");
         $('#sign_in_modal').modal('show');
     };
     ResetPasswordComponent.prototype.toggleFieldTextType = function (event) {
@@ -65,10 +72,16 @@ var ResetPasswordComponent = /** @class */ (function () {
     };
     ResetPasswordComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log(this.otp);
-        console.log(this.ngOtpInputRef);
+        var otpValue = '';
+        var otps = this.ngOtpInputRef.otpForm.value;
+        Object.values(otps).forEach(function (v) {
+            otpValue += v;
+        });
         this.submitted = this.loading = true;
-        if (this.resetForm.invalid && this.resetForm.hasError('otpsError')) {
+        if (otpValue.length != 6) {
+            this.otpLengthError = true;
+        }
+        if (this.resetForm.invalid || this.resetForm.hasError('otpsError') || otpValue.length != 6) {
             this.loading = false;
             return;
         }
@@ -78,44 +91,45 @@ var ResetPasswordComponent = /** @class */ (function () {
                 "email": this.emailForVerifyOtp,
                 "new_password": this.resetForm.value.new_password,
                 "confirm_password": this.resetForm.value.confirm_password,
-                "otp": this.otp
+                "otp": otpValue
             };
             this.userService.resetPassword(request_param).subscribe(function (data) {
                 _this.submitted = false;
                 _this.resetSuccess = true;
             }, function (error) {
-                console.log(error);
-                _this.resetSuccess = _this.submitted = _this.loading = false;
+                _this.resetSuccess = _this.submitted = _this.otpLengthError = _this.loading = false;
                 _this.apiMessage = error.error.message;
             });
         }
     };
     ResetPasswordComponent.prototype.timerComplete = function () {
         this.isResend = true;
+        this.isTimerEnable = false;
         this.configCountDown = { leftTime: 60, demand: true };
     };
     ResetPasswordComponent.prototype.resendOtp = function () {
         var _this = this;
         if (this.isResend) {
+            this.configCountDown = { leftTime: 60, demand: true };
             this.ngOtpInputRef.setValue('');
             this.resetForm.controls.new_password.setValue(null);
             this.resetForm.controls.confirm_password.setValue(null);
             this.spinner = true;
             this.userService.forgotPassword(this.emailForVerifyOtp).subscribe(function (data) {
                 _this.spinner = _this.isResend = false;
-                _this.counter.begin();
+                _this.isTimerEnable = true;
+                setTimeout(function () {
+                    _this.counter.begin();
+                }, 1000);
             }, function (error) {
-                _this.submitted = _this.spinner = false;
-                _this.errorMessage = error.message;
+                _this.submitted = _this.spinner = _this.isTimerEnable = false;
+                _this.apiMessage = error.message;
             });
         }
     };
     ResetPasswordComponent.prototype.onOtpChange = function (event) {
-        console.log(event);
         if (event.length == 6) {
             this.otp = event;
-            console.log(event.length);
-            console.log(this.otp);
             this.resetForm.controls.otp.setValue(event);
             this.ngOtpInputRef.setValue(event);
         }

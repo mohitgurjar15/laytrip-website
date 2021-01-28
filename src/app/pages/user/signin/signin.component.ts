@@ -9,6 +9,7 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 declare var $: any;
 
@@ -28,6 +29,7 @@ export class SigninComponent  implements OnInit {
   fieldTextType :  boolean;
   apiError :string =  '';
   public loading: boolean = false;
+  public userNotVerify: boolean = false;
   emailForVerifyOtp : string = '';
 
   @Input() pageData;
@@ -84,24 +86,36 @@ export class SigninComponent  implements OnInit {
       }, (error: HttpErrorResponse) => { 
         this.submitted = this.loading = false;      
         if(error.status == 406){
-          this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
-            this.openOtpPage();
-          }, (error: HttpErrorResponse) => {                  
-            this.apiError = error.message;
-          });
+          this.emailForVerifyOtp = this.loginForm.value.email;
+          this.userNotVerify = true;  
+          this.apiError = '';        
         } else {
           this.apiError = error.message;
         }
       });
     }
   }  
-  
+
+  emailVerify(){
+    this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
+      this.openOtpPage();
+    }, (error: HttpErrorResponse) => {
+      this.userNotVerify = false;                  
+      this.apiError = error.message;
+    });
+  }
+
   toggleFieldTextType(){
     this.fieldTextType = !this.fieldTextType;
   }
 
   socialError(error){
     this.apiError = error;
+  } 
+
+  closeModal(){
+    this.apiError ='';
+    $('#sign_in_modal').modal('hide');
   } 
 
   btnSignUpClick(){
@@ -124,13 +138,14 @@ export class SigninComponent  implements OnInit {
       keyboard: false
     });
     (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
+    (<VerifyOtpComponent>modalRef.componentInstance).isUserNotVerify = true;
   }
 
   openForgotPassModal() {
     $('#sign_in_modal').modal('hide');
     this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true, backdrop: 'static',
       keyboard: false
-});
+    });
   }
 }
 

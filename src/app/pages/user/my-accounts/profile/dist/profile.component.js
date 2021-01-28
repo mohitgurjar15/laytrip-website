@@ -51,6 +51,11 @@ var ProfileComponent = /** @class */ (function () {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
+        this.isFormControlEnable = false;
+        this.genders = [
+            { key: 'M', name: 'Male' },
+            { key: 'F', name: 'Female' },
+        ];
     }
     ProfileComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -68,6 +73,8 @@ var ProfileComponent = /** @class */ (function () {
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
+            username: [''],
+            password: [''],
             country_code: [''],
             phone_no: [''],
             address: [''],
@@ -81,7 +88,8 @@ var ProfileComponent = /** @class */ (function () {
             address2: [''],
             language_id: [''],
             passport_expiry: [''],
-            passport_number: ['']
+            passport_number: [''],
+            home_airport: ['']
         }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
         this.getProfileInfo();
     };
@@ -200,7 +208,6 @@ var ProfileComponent = /** @class */ (function () {
             if (typeof _this.location != 'undefined') {
                 countryName = _this.location.country.name;
             }
-            console.log(moment(res.dob).format('MMM d, yy'));
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -319,6 +326,9 @@ var ProfileComponent = /** @class */ (function () {
                 _this.toastr.error(error.error.message, 'Profile Error');
             });
         }
+    };
+    ProfileComponent.prototype.enableFormControlInputs = function (event) {
+        this.isFormControlEnable = true;
     };
     ProfileComponent = __decorate([
         core_1.Component({
