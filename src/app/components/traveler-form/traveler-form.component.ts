@@ -33,6 +33,15 @@ export class TravelerFormComponent implements OnInit {
     },
     type1 : {
       adults : []
+    },
+    type2 : {
+      adults : []
+    },
+    type3 : {
+      adults : []
+    },
+    type4 : {
+      adults : []
     }
   };
   dobMinDate= new Date();
@@ -131,7 +140,9 @@ export class TravelerFormComponent implements OnInit {
       country:[x.country,[Validators.required]],
       gender:[x.gender,[Validators.required]],
       userId:[x.userId],
-      type:[x.type]
+      type:[x.type],
+      dobMinDate:[x.dobMinDate],
+      dobMaxDate:[x.dobMaxDate]
     })
   }
 
@@ -151,6 +162,8 @@ export class TravelerFormComponent implements OnInit {
   selectTravelerType(type,traveler_number){
     this.travelers[`type${this.cartNumber}`].adults[traveler_number]={};
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].type=type;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].dobMinDate=travelersFileds.flight[type].dobMinDate;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].dobMaxDate=travelersFileds.flight[type].dobMaxDate;
     this.patch()
   }
   
