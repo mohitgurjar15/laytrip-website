@@ -6,6 +6,10 @@
 .bg_color {
   #fc_frame {
     z-index: 999 !important;
+
+    @include mobile-view {
+      right: 0 !important;
+    }
   }
 }
 
