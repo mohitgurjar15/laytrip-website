@@ -29,6 +29,7 @@ export class SigninComponent  implements OnInit {
   fieldTextType :  boolean;
   apiError :string =  '';
   public loading: boolean = false;
+  public userNotVerify: boolean = false;
   emailForVerifyOtp : string = '';
 
   @Input() pageData;
@@ -85,18 +86,26 @@ export class SigninComponent  implements OnInit {
       }, (error: HttpErrorResponse) => { 
         this.submitted = this.loading = false;      
         if(error.status == 406){
-          this.userService.resendOtp(this.loginForm.value.email).subscribe((data: any) => {
-            this.openOtpPage();
-          }, (error: HttpErrorResponse) => {                  
-            this.apiError = error.message;
-          });
+          this.emailForVerifyOtp = this.loginForm.value.email;
+          this.userNotVerify = true;          
         } else {
           this.apiError = error.message;
         }
       });
     }
   }  
-  
+
+  emailVerify(){
+    console.log(this.emailForVerifyOtp)
+
+    this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
+      this.openOtpPage();
+    }, (error: HttpErrorResponse) => {
+      this.userNotVerify = false;                  
+      this.apiError = error.message;
+    });
+  }
+
   toggleFieldTextType(){
     this.fieldTextType = !this.fieldTextType;
   }
@@ -130,6 +139,7 @@ export class SigninComponent  implements OnInit {
       keyboard: false
     });
     (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
+    console.log(this.emailForVerifyOtp)
   }
 
   openForgotPassModal() {

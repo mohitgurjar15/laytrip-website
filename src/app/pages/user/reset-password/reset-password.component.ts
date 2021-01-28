@@ -70,7 +70,7 @@ export class ResetPasswordComponent implements OnInit {
     });
     setTimeout(() => {
       this.isResend = true;
-    }, 60000);
+    }, 5000);
   }
 
   openSignInPage() {

@@ -58,7 +58,7 @@
         <h4 *ngIf="otpVerified && isSignup" class="modal-title suc_title" id="modal-basic-title">{{'signup_sucessfully_title' | translate}}</h4>  
         <h4 *ngIf="otpVerified && !isSignup" class="modal-title suc_title" id="modal-basic-title">{{'password_reset_sucessfully_title' | translate}}</h4>  
         
-        <h4 class="modal-title" *ngIf="!otpVerified" id="modal-basic-title">{{'sign_in_otp_title' | translate}}</h4>
+        <h4 class="modal-title" *ngIf="!otpVerified" id="modal-basic-title">{{'sign_up_otp_title' | translate}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
@@ -78,7 +78,7 @@
             <div class="resend_otp_code">
                 <div>
                     <countdown *ngIf="isTimerEnable" #countdown  [config]="configCountDown"
-             (finished)="timerComplete()">$!m!:$!s!</countdown>{{ isTimerEnable ? 'second remaining' : ''}}
+             (finished)="timerComplete()">$!s!</countdown>{{ isTimerEnable ? 'second remaining' : ''}}
                 </div>
                 <a class="text-right hover-link" [ngClass]="isResend ? '' : 'disable_link'" *ngIf="!otpVerified" (click)="resendOtp()"><p>{{'resend_code' | translate}} </p><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
             </div>

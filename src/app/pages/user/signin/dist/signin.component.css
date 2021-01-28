@@ -429,10 +429,6 @@
   height: 8px;
   border-radius: 2px;
   border: solid #0044fb;
-  border-top-width: medium;
-  border-right-width: medium;
-  border-bottom-width: medium;
-  border-left-width: medium;
   border-width: 0 1px 1px 0;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
@@ -509,7 +505,12 @@
   font-size: 12px;
   color: #ff7272;
   background: rgba(255, 114, 114, 0.15);
+  text-align: center;
   border-radius: 20px;
+}
+.comman_modal .modal-content .sign_in_modal .modal_cnt form .block_api_error .clickHereLink {
+  text-decoration: underline;
+  color: #0045ff;
 }
 .comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm {
   margin: 25px 0 0;

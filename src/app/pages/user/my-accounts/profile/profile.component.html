@@ -424,12 +424,9 @@
         <div class="form_row common_row">
             <label>{{'gender_placeholder' |translate}}<sup>*</sup></label>
             <div class="text_field">
-                <ng-select [(ngModel)]="selectedCar">
-                    <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
-                 </ng-select>
-                 
-                <input [readonly]="!isFormControlEnable"  type="text" placeholder="Enter Gender" formControlName="gender" maxlength="25"
-                    tabindex="10">
+                <ng-select formControlName="gender" [readonly]="!isFormControlEnable">
+                    <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
+                 </ng-select>                 
             </div>
             <!-- <div class="select_gender">
                 <ul>
