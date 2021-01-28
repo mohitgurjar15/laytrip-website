@@ -58,7 +58,8 @@ var ProfileComponent = /** @class */ (function () {
         ];
     }
     ProfileComponent.prototype.ngOnInit = function () {
-        console.log(this.dobMinDate.getFullYear());
+        this.startYear = "1971:" + this.dobMinDate.getFullYear();
+        console.log(this.startYear);
         window.scroll(0, 0);
         this.getCountry();
         this.getLanguages();

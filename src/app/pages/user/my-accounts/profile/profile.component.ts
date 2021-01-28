@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
     { key: 'M', name: 'Male' },
     { key: 'F', name: 'Female' },
   ];
-
+  startYear;
   constructor(
     private formBuilder: FormBuilder,
     private userService : UserService,
@@ -70,7 +70,8 @@ export class ProfileComponent implements OnInit {
     ) {}
  
   ngOnInit() {
-    console.log(this.dobMinDate.getFullYear())
+    this.startYear = "1971:"+this.dobMinDate.getFullYear();
+    console.log(this.startYear)
     window.scroll(0,0);
     this.getCountry();
     this.getLanguages();
