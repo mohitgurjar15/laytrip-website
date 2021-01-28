@@ -28,6 +28,7 @@ export class TravelerFormComponent implements OnInit {
   @Input() cartItem;
   traveler_number:number=0;
   countries=[]
+  myTravelers;
   travelers={
     type0 : {
       adults : []
@@ -59,6 +60,9 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     
     console.log("this.cart",this.cartItem)
+    this.checkOutService.getTravelers.subscribe((travelers:any)=>{
+      this.myTravelers=travelers;
+    })
     this.cartService.getCartTravelers.subscribe((travelers:any)=>{
       this.travelers =travelers;
     })
@@ -88,21 +92,21 @@ export class TravelerFormComponent implements OnInit {
     this.patch();
 
     this.travelerForm.valueChanges.subscribe(value=>{
-      //console.log("One",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls,this.traveler_number,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status)
       if(typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number]!=='undefined'){
-        console.log("Two",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status,this.traveler_number,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value);
+        //console.log("dob",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value)
         if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status=='VALID'){
 
           let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
-          data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].dob).format("YYYY-MM-DD")
+          data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD")
           if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId){
             //Edit
           }
           else{
             //Add
-            this.travelerService.addAdult(data).subscribe(traveler=>{
+            this.travelerService.addAdult(data).subscribe((traveler:any)=>{
               console.log("New Traveler=>>>",traveler)
-              
+              this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].userId=traveler.userId;
+              this.checkOutService.setTravelers([...this.myTravelers,traveler])
             },error=>{
 
             })
@@ -119,18 +123,15 @@ export class TravelerFormComponent implements OnInit {
     
     this.checkOutService.getTraveler.subscribe((traveler:any)=>{
       if(Object.keys(traveler).length>0){
-        console.log("Current Cart",this.cartNumber,traveler)
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name=traveler.firstName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name=traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email=traveler.email;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId=traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender=traveler.gender;
-        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_number=traveler.phoneNo;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_no=traveler.phoneNo;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_code=traveler.countryCode;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_id=traveler.country!=null?traveler.country.id:'';
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob).format('MMM d, yy');
-
-        //this.travelers= Object.assign({},this.travelers)
-        
         this.patch()
       }
     })
@@ -158,7 +159,8 @@ export class TravelerFormComponent implements OnInit {
       first_name: [x.first_name,[Validators.required]],
       last_name: [x.last_name,[Validators.required]],
       email: [x.email,[Validators.required]],
-      phone_number: [x.phone_number,[Validators.required]],
+      phone_no: [x.phone_no,[Validators.required]],
+      country_code: [x.country_code,[Validators.required]],
       dob: [x.dob,[Validators.required]],
       country_id:[x.country_id,[Validators.required]],
       gender:[x.gender,[Validators.required]],

@@ -75,17 +75,17 @@
                       <!-- <input type="text" class="form-control" placeholder="+00" maxlength="4"
                         formControlName="phone_number"> -->
                         <ng-select [items]="countries" 
-                        bindLabel="name" 
-                        bindValue="id"
+                        bindLabel="phonecode" 
+                        bindValue="phonecode"
                         formControlName="country_code"
                         >
                       </ng-select>
                       <input type="text" class="form-control" placeholder="000000000" maxlength="10"
-                        formControlName="phone_number">
+                        formControlName="phone_no">
                     </span>
-                    <div *ngIf="traveler.controls.phone_number.touched && traveler.controls.phone_number.errors"
+                    <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
                       class="error">
-                      <small *ngIf="traveler.controls.phone_number.errors.required" class="error_field">Please enter
+                      <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please enter
                         your telephone number.</small>
                     </div>
                   </div>
@@ -93,8 +93,8 @@
                     <label for="">Date of birth*</label>
                     <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
                     <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic" formControlName="dob"
-                      [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
-                      yearRange="1970:2020" placeholder="Date of birth" [defaultDate]="dobMinDate">
+                      [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
+                      yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}" placeholder="Date of birth">
                     </p-calendar>
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type?.adults[x]?.passport_number">
