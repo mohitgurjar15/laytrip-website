@@ -270,9 +270,10 @@
                 Account Details
             </h3>
             <span class="edit_btns">
-                <a class="hover-link" *ngIf="!isFormControlEnable" (click)="enableFormControlInputs()">Edit </a>
-                <button *ngIf="isFormControlEnable" (click)="onSubmit()"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
-                    {{'update' | translate}}</button>  
+                <a class="hover-link" *ngIf="!isFormControlEnable" (click)="enableFormControlInputs()">Edit</a>
+                <a class="hover-link" *ngIf="isFormControlEnable" (click)="onSubmit()">{{'update' |
+                    translate}}</a>
+                
             </span>
         </div>
         <!-- <div class="form_row">
@@ -413,7 +414,7 @@
                     panelStyleClass="calender-price-view"
                     inputStyleClass="custom_datpicker birth_date" inputId="basic" tabindex="9"
                     formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true"
-                    [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2021"
+                    [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:dobMinDate.getFullYear()"
                     placeholder="{{'dob_placeholder' | translate}}" [defaultDate]="dobMinDate">
                 </p-calendar>
                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors"
