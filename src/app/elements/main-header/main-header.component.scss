@@ -512,16 +512,16 @@
 												padding-left: 24px;
 												display: flex;
 												border: none;
-												&::before{
-													content: '';
-													height: 18px;
-													width: 18px;
-													background-color: $hotel-secondary-color;
-													position: absolute;
-													left: 0;
-													top: 5px;
-													border-radius: 50%;
-												}
+												// &::before{
+												// 	content: '';
+												// 	height: 18px;
+												// 	width: 18px;
+												// 	background-color: $hotel-secondary-color;
+												// 	position: absolute;
+												// 	left: 0;
+												// 	top: 5px;
+												// 	border-radius: 50%;
+												// }
 											}
 										}
 
@@ -654,14 +654,15 @@
 										.lay_points_dot{
 											position: relative;
 											width: 100%;
-											padding-left: 24px;
+											//padding-left: 24px;
 											display: flex;
 											border: none;
 											&::before{
 												content: '';
 												height: 18px;
 												width: 18px;
-												background-color: $hotel-secondary-color;
+												//background-color: $hotel-secondary-color;
+												background-color: transparent;
 												position: absolute;
 												left: 0;
 												top: 5px;
