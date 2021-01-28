@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 export const travelersFileds={
 
     flight : {
@@ -9,6 +10,8 @@ export const travelersFileds={
             country_code:'',
             phone_number:'',
             dob:'',
+            dobMinDate:new Date(moment().subtract(50,'years').format("YYYY-MM-DD") ),
+            dobMaxDate:new Date(moment().subtract(12, 'years').format("YYYY-MM-DD")),
             country:'',
             gender:'',
             passport_number:'',
@@ -19,6 +22,8 @@ export const travelersFileds={
             first_name: '',
             last_name: '',
             dob:'',
+            dobMinDate:new Date(moment().subtract(12,'years').format("YYYY-MM-DD") ),
+            dobMaxDate:new Date(moment().subtract(2,'years').format("YYYY-MM-DD") ),
             country:'',
             gender:'',
             passport_number:'',
@@ -28,6 +33,8 @@ export const travelersFileds={
             type : 'infant',
             first_name: '',
             last_name: '',
+            dobMinDate:new Date(moment().subtract(2,'years').format("YYYY-MM-DD") ),
+            dobMaxDate:new Date(),
             dob:'',
             country:'',
             gender:''
