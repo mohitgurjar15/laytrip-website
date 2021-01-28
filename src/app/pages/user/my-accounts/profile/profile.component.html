@@ -414,7 +414,7 @@
                     panelStyleClass="calender-price-view"
                     inputStyleClass="custom_datpicker birth_date" inputId="basic" tabindex="9"
                     formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true"
-                    [yearNavigator]="true" [monthNavigator]="true" yearRange="startYear:dobMinDate.getFullYear()"
+                    [yearNavigator]="true" [monthNavigator]="true" yearRange="{{startYear}}"
                     placeholder="{{'dob_placeholder' | translate}}" [defaultDate]="dobMinDate">
                 </p-calendar>
                 <div *ngIf="(submitted  || profileForm.controls.dob.touched) && profileForm.controls.dob.errors"
