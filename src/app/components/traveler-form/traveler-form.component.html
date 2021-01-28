@@ -70,17 +70,23 @@
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps">
-                    <label for="">Telephone*</label>
+                    <label for="">Phone*</label>
                     <span class="tel_span">
-                      <input type="text" class="form-control" placeholder="+00" maxlength="4"
-                        formControlName="phone_number">
+                      <!-- <input type="text" class="form-control" placeholder="+00" maxlength="4"
+                        formControlName="phone_number"> -->
+                        <ng-select [items]="countries" 
+                        bindLabel="name" 
+                        bindValue="id"
+                        formControlName="country_code"
+                        >
+                      </ng-select>
                       <input type="text" class="form-control" placeholder="000000000" maxlength="10"
                         formControlName="phone_number">
                     </span>
                     <div *ngIf="traveler.controls.phone_number.touched && traveler.controls.phone_number.errors"
                       class="error">
                       <small *ngIf="traveler.controls.phone_number.errors.required" class="error_field">Please enter
-                        your telephone number..</small>
+                        your telephone number.</small>
                     </div>
                   </div>
                   <div class="col-sm-12 dobs col-md-4 mb-sm-10">
