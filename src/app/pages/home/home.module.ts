@@ -1,10 +1,10 @@
-import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../../components/components.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DealComponent } from './deal/deal.component';
 import { FeaturedCityComponent } from './featured-city/featured-city.component';
 import { DiscoverCityComponent } from './discover-city/discover-city.component';
@@ -47,7 +47,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgxGalleryModule,
     NgSelectModule
   ],
-  exports : [
+  exports: [
     FlightSearchWidgetComponent,
     HotelSearchWidgetComponent,
     VacationSearchWidgetComponent
