@@ -52,6 +52,10 @@ var ProfileComponent = /** @class */ (function () {
             displayFormat: 'DD/MM/YYYY'
         };
         this.isFormControlEnable = false;
+        this.genders = [
+            { key: 'M', name: 'Male' },
+            { key: 'F', name: 'Female' },
+        ];
     }
     ProfileComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);

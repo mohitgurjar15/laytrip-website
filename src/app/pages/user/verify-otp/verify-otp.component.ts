@@ -29,6 +29,7 @@ export class VerifyOtpComponent implements OnInit {
   errorMessage = '';
   spinner = false;
   @Input() emailForVerifyOtp;
+  @Input() isUserNotVerify : boolean = false;
   @Input() isSignup : boolean = false;
   apiError :string =  '';
   config = {
@@ -45,10 +46,10 @@ export class VerifyOtpComponent implements OnInit {
   isResend : boolean = false;
   @ViewChild('ngOtpInput',{static:false}) ngOtpInputRef:any;//Get reference using ViewChild and the specified hash
   @ViewChild('countdown',{static:false}) counter: CountdownComponent;
-  otp:number=0;
-  
+  otp:number=0;  
   configCountDown : any = {leftTime: 60,demand: false};
-  
+  isTimerEnable = false;
+
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -64,10 +65,14 @@ export class VerifyOtpComponent implements OnInit {
       otp: [''],  
     }, { validator: optValidation() });
     
+    setTimeout(() => {
+      this.isResend = true;
+    }, 60000);
   }
 
   timerComplete() {
     this.isResend = true; 
+    this.isTimerEnable = false;
     this.configCountDown = {leftTime: 60,demand: true};
   }
 
@@ -81,13 +86,17 @@ export class VerifyOtpComponent implements OnInit {
 
   resendOtp(){
     if(this.isResend){
+      this.configCountDown = {leftTime: 60,demand: true};
       this.ngOtpInputRef.setValue('');
       this.spinner = true;
       this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
-        this.spinner = this.isResend = false;
-        this.counter.begin();
+        this.spinner = this.isResend = this.otpLengthError = false;         
+        this.isTimerEnable = true;       
+        setTimeout(() => {
+          this.counter.begin();         
+        }, 1000); 
       }, (error: HttpErrorResponse) => {       
-        this.submitted = this.spinner = false;
+        this.submitted = this.spinner = this.otpLengthError =  false;
         this.apiError = error.message;
       });
     }
@@ -110,9 +119,10 @@ export class VerifyOtpComponent implements OnInit {
       Object.values(otps).forEach((v) => {    
       otpValue += v;
     });
+    this.otpLengthError = false;
     if(otpValue.length != 6){
       this.otpLengthError = true;
-    } 
+    }
     if (this.otpForm.hasError('otpsError') || otpValue.length != 6) {
       this.submitted = true; 
       this.loading = false; 

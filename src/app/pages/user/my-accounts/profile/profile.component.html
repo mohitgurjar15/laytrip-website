@@ -424,8 +424,9 @@
         <div class="form_row common_row">
             <label>{{'gender_placeholder' |translate}}<sup>*</sup></label>
             <div class="text_field">
-                <input [readonly]="!isFormControlEnable"  type="text" placeholder="Enter Gender" formControlName="gender" maxlength="25"
-                    tabindex="10">
+                <ng-select formControlName="gender" [readonly]="!isFormControlEnable">
+                    <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
+                 </ng-select>                 
             </div>
             <!-- <div class="select_gender">
                 <ul>
@@ -463,7 +464,7 @@
         <div class="form_row common_row">
             <label>{{'location_detail' | translate}}</label>
             <div class="text_field">
-                <textarea [readonly]="!isFormControlEnable"  name="" placeholder="Enter Address" id="" cols="15" rows="10"
+                <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address" id="" cols="15" rows="10"
                     tabindex="11"></textarea>
             </div>
         </div>

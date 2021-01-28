@@ -54,6 +54,10 @@ export class ProfileComponent implements OnInit {
     displayFormat: 'DD/MM/YYYY'
   };
   isFormControlEnable: boolean = false; 
+  genders = [
+    { key: 'M', name: 'Male' },
+    { key: 'F', name: 'Female' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,

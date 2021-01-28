@@ -84,11 +84,9 @@ export class SignupComponent implements OnInit {
   }
     
   onSubmit() {
-  // this.openOtpPage();
-  // return;
+
 
     this.submitted = this.loading  = true;   
-    console.log(this.iAccept)
     if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept ) {
       this.submitted = true;      
       this.loading = false;
@@ -108,6 +106,7 @@ export class SignupComponent implements OnInit {
 
   openSignInModal(){
     $('#sign_up_modal').modal('hide');
+    this.emailExist = false;
   }
   socialError(error){
     this.apiError = error;
