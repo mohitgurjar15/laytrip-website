@@ -1,11 +1,5 @@
-<!-- <app-flight-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar> -->
-<!-- <ngx-spinner type = "ball-clip-rotate">
-    <img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />
-</ngx-spinner> -->
 <app-laytrip-loader [loading]="fullPageLoading">
 </app-laytrip-loader>
-<!-- template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />" -->
-<!-- template="<img src='{{s3BucketUrl}}assets/images/loading-flight.gif' />" -->
 <div class="search_tab_listing_wrapper">
     <div class="container">
         <div class="searchbar_box_common">
@@ -14,13 +8,13 @@
     </div>
 </div>
 
-<app-flight-loader *ngIf="loading"></app-flight-loader>
-<app-popup-loader *ngIf="loading"></app-popup-loader>
+<app-flight-loader *ngIf="fullPageLoading"></app-flight-loader>
+<!-- <app-popup-loader *ngIf="fullPageLoading"></app-popup-loader> -->
 
 <app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
 <app-flight-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-flight-error>
 
-<section class="search_result flight" *ngIf="!loading && !isNotFound && errorMessage==''">
+<section class="search_result flight" *ngIf="!fullPageLoading && !isNotFound && errorMessage==''">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -42,7 +36,7 @@
                     </div>
 
                     <div id="responsive_filter_show" class="responsive_filter_show"
-                        *ngIf="!loading && !isNotFound && errorMessage==''">
+                        *ngIf="!fullPageLoading && !isNotFound && errorMessage==''">
                         <div class="filter_popup">
                             <div class="filter_head_popup">
                                 <div class="filter_close">
@@ -66,7 +60,8 @@
             <div class="col-lg-9">
                 <app-flight-price-slider [dates]="dates" [flexibleLoading]="flexibleLoading">
                 </app-flight-price-slider>
-                <app-flight-item-wrapper [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)"></app-flight-item-wrapper>
+                <app-flight-item-wrapper [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)">
+                </app-flight-item-wrapper>
             </div>
         </div>
     </div>

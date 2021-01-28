@@ -13,7 +13,7 @@ import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardComponent } from './add-card/add-card.component';
 import { TravelerFormComponent } from './traveler-form/traveler-form.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';

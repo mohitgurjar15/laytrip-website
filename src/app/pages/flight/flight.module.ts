@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FlightRoutingModule } from './flight-routing.module';
 import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { SortFlightComponent } from './components/sort-flight/sort-flight.component';
 import { FilterFlightComponent } from './components/filter-flight/filter-flight.component';
 import { FlightPriceSliderComponent } from './components/flight-price-slider/flight-price-slider.component';
-import { FlightItemWrapperComponent } from './components/flight-item-wrapper/flight-item-wrapper.component';
+import { FlightItemWrapperComponent, LaytripOkPopup } from './components/flight-item-wrapper/flight-item-wrapper.component';
 import { FlightSearchBarComponent } from './components/flight-search-bar/flight-search-bar.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
@@ -37,6 +38,7 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
 import { HomeModule } from '../home/home.module';
 import { FlightCartItemComponent } from './components/flight-cart-item/flight-cart-item.component';
 
+
 @NgModule({
   declarations: [
     FlightSearchComponent,
@@ -44,6 +46,7 @@ import { FlightCartItemComponent } from './components/flight-cart-item/flight-ca
     FilterFlightComponent,
     FlightPriceSliderComponent,
     FlightItemWrapperComponent,
+    LaytripOkPopup,
     FlightSearchBarComponent,
     FlightNotFoundComponent,
     FlightTravelerComponent,
@@ -67,20 +70,22 @@ import { FlightCartItemComponent } from './components/flight-cart-item/flight-ca
     CommonModule,
     FlightRoutingModule,
     Ng5SliderModule,
+    NgbModule,
     HelpersModule,
     ComponentsModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,
     HomeModule
   ],
-  exports:[
+  exports: [
     FlightLoaderComponent,
     FlightNotFoundComponent,
     FlightConfirmationComponent,
     FlightSummaryComponent
-  ]
+  ],
+  entryComponents: [LaytripOkPopup]
 })
 export class FlightModule { }

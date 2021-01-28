@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ComponentsModule } from '../components/components.module';
@@ -58,7 +58,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     CovidPageComponent,
     AboutUsComponent,
     CmsPagesComponent,
-    
+
   ],
   imports: [
     CommonModule,
@@ -75,7 +75,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     CountdownModule,
     RecaptchaModule
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent,ForgotPasswordComponent,ResetPasswordComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, ForgotPasswordComponent, ResetPasswordComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }

@@ -13,6 +13,7 @@ import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -87,7 +88,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private genericService: GenericService,
     private cartService: CartService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    public modalService: NgbModal,
   ) {
   }
 
@@ -197,7 +199,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   bookNow(route) {
     console.log(this.cartItems, "TWo");
     if (!this.isLoggedIn) {
-      this.toastr.warning('Please login to book flight', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+      const modalRef = this.modalService.open(LaytripOkPopup, {
+        centered: true,
+        keyboard: false,
+        backdrop: 'static'
+      });
+      // this.toastr.warning('Please login to book flight', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
     } else {
 
       if (this.cartItems && this.cartItems.length >= 5) {
@@ -301,3 +308,24 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }
+
+@Component({
+  selector: 'laytrip-ok-popup',
+  template: `<div class="modal-header">
+  <h4 class="modal-title">Warning</h4>
+</div>
+<div class="modal-body">
+  <p>Please login to book flight</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
+</div>`,
+})
+
+export class LaytripOkPopup {
+
+  constructor(public modal: NgbActiveModal) {
+  }
+}
+
+
