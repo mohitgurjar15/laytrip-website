@@ -87,7 +87,8 @@ export class SigninComponent  implements OnInit {
         this.submitted = this.loading = false;      
         if(error.status == 406){
           this.emailForVerifyOtp = this.loginForm.value.email;
-          this.userNotVerify = true;          
+          this.userNotVerify = true;  
+          this.apiError = '';        
         } else {
           this.apiError = error.message;
         }
@@ -96,8 +97,6 @@ export class SigninComponent  implements OnInit {
   }  
 
   emailVerify(){
-    console.log(this.emailForVerifyOtp)
-
     this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
       this.openOtpPage();
     }, (error: HttpErrorResponse) => {
@@ -139,12 +138,12 @@ export class SigninComponent  implements OnInit {
       keyboard: false
     });
     (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
-    console.log(this.emailForVerifyOtp)
+    (<VerifyOtpComponent>modalRef.componentInstance).isUserNotVerify = true;
   }
 
   openForgotPassModal() {
     $('#sign_in_modal').modal('hide');
-    this.modalService.open(ResetPasswordComponent, {windowClass:'forgot_window', centered: true, backdrop: 'static',
+    this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true, backdrop: 'static',
       keyboard: false
     });
   }

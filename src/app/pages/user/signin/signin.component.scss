@@ -255,16 +255,6 @@
 
               &.btn_disable {
                 cursor: default;
-               /*  background: $mid_gray_bg;
-                border-color: $mid_gray_bg;
-
-                &:before {
-                  background: $mid_gray_bg;
-                }
-
-                &:hover {
-                  color: $text-white;
-                } */
               }
             }
           }
@@ -279,7 +269,7 @@
             background: $api_error_bg;
             text-align: center;
             border-radius: 20px;
-            .clickHereLink{
+            .clickHereLink {
               text-decoration: underline;
               color: $text-blue;
             }

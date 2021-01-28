@@ -27,6 +27,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.loading = false;
         this.errorMessage = '';
         this.spinner = false;
+        this.isUserNotVerify = false;
         this.isSignup = false;
         this.apiError = '';
         this.config = {
@@ -69,14 +70,17 @@ var VerifyOtpComponent = /** @class */ (function () {
     VerifyOtpComponent.prototype.resendOtp = function () {
         var _this = this;
         if (this.isResend) {
+            this.configCountDown = { leftTime: 60, demand: true };
             this.ngOtpInputRef.setValue('');
             this.spinner = true;
             this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
-                _this.spinner = _this.isResend = false;
+                _this.spinner = _this.isResend = _this.otpLengthError = false;
                 _this.isTimerEnable = true;
-                _this.counter.begin();
+                setTimeout(function () {
+                    _this.counter.begin();
+                }, 1000);
             }, function (error) {
-                _this.submitted = _this.spinner = false;
+                _this.submitted = _this.spinner = _this.otpLengthError = false;
                 _this.apiError = error.message;
             });
         }
@@ -97,6 +101,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         Object.values(otps).forEach(function (v) {
             otpValue += v;
         });
+        this.otpLengthError = false;
         if (otpValue.length != 6) {
             this.otpLengthError = true;
         }
@@ -134,6 +139,9 @@ var VerifyOtpComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], VerifyOtpComponent.prototype, "emailForVerifyOtp");
+    __decorate([
+        core_1.Input()
+    ], VerifyOtpComponent.prototype, "isUserNotVerify");
     __decorate([
         core_1.Input()
     ], VerifyOtpComponent.prototype, "isSignup");

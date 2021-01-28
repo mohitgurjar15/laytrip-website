@@ -59,6 +59,7 @@ var ResetPasswordComponent = /** @class */ (function () {
     };
     ResetPasswordComponent.prototype.openSignInPage = function () {
         this.activeModal.close();
+        $("#signin-form").trigger("reset");
         $('#sign_in_modal').modal('show');
     };
     ResetPasswordComponent.prototype.toggleFieldTextType = function (event) {
@@ -96,8 +97,7 @@ var ResetPasswordComponent = /** @class */ (function () {
                 _this.submitted = false;
                 _this.resetSuccess = true;
             }, function (error) {
-                console.log(error);
-                _this.resetSuccess = _this.submitted = _this.loading = false;
+                _this.resetSuccess = _this.submitted = _this.otpLengthError = _this.loading = false;
                 _this.apiMessage = error.error.message;
             });
         }
@@ -110,14 +110,17 @@ var ResetPasswordComponent = /** @class */ (function () {
     ResetPasswordComponent.prototype.resendOtp = function () {
         var _this = this;
         if (this.isResend) {
+            this.configCountDown = { leftTime: 60, demand: true };
             this.ngOtpInputRef.setValue('');
             this.resetForm.controls.new_password.setValue(null);
             this.resetForm.controls.confirm_password.setValue(null);
             this.spinner = true;
             this.userService.forgotPassword(this.emailForVerifyOtp).subscribe(function (data) {
                 _this.spinner = _this.isResend = false;
-                _this.counter.begin();
                 _this.isTimerEnable = true;
+                setTimeout(function () {
+                    _this.counter.begin();
+                }, 1000);
             }, function (error) {
                 _this.submitted = _this.spinner = _this.isTimerEnable = false;
                 _this.apiMessage = error.message;

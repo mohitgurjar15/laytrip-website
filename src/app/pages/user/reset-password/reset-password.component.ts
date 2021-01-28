@@ -75,6 +75,7 @@ export class ResetPasswordComponent implements OnInit {
 
   openSignInPage() {
     this.activeModal.close();
+    $("#signin-form").trigger( "reset" );
     $('#sign_in_modal').modal('show');    
   }
 
@@ -100,19 +101,18 @@ export class ResetPasswordComponent implements OnInit {
       this.loading = false;      
       return;
     } else {
-        this.loading = true;  
-        let request_param = {
-          "email":this.emailForVerifyOtp,
-          "new_password":this.resetForm.value.new_password,
-          "confirm_password":this.resetForm.value.confirm_password,
-          "otp":otpValue      
-        };        
+      this.loading = true;  
+      let request_param = {
+        "email":this.emailForVerifyOtp,
+        "new_password":this.resetForm.value.new_password,
+        "confirm_password":this.resetForm.value.confirm_password,
+        "otp":otpValue      
+      };        
       this.userService.resetPassword(request_param).subscribe((data: any) => {
         this.submitted = false;    
         this.resetSuccess = true;
       }, (error: HttpErrorResponse) => {  
-        console.log(error) 
-        this.resetSuccess = this.submitted = this.loading  = false;
+        this.resetSuccess = this.submitted = this.otpLengthError = this.loading  = false;
         this.apiMessage = error.error.message;
       });
     }
@@ -127,14 +127,17 @@ export class ResetPasswordComponent implements OnInit {
 
   resendOtp(){
     if(this.isResend){
+      this.configCountDown = {leftTime: 60,demand: true};
       this.ngOtpInputRef.setValue('');
       this.resetForm.controls.new_password.setValue(null);
       this.resetForm.controls.confirm_password.setValue(null);
       this.spinner = true;
       this.userService.forgotPassword(this.emailForVerifyOtp).subscribe((data: any) => {
         this.spinner = this.isResend = false;
-        this.counter.begin();
         this.isTimerEnable = true;
+        setTimeout(() => {
+          this.counter.begin();          
+        }, 1000);
       }, (error: HttpErrorResponse) => {       
         this.submitted = this.spinner =  this.isTimerEnable = false;
         this.apiMessage = error.message;

@@ -12,7 +12,7 @@ var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
-var reset_password_component_1 = require("../reset-password/reset-password.component");
+var forgot_password_component_1 = require("../forgot-password/forgot-password.component");
 var SigninComponent = /** @class */ (function () {
     function SigninComponent(modalService, formBuilder, userService, router, commonFunction, renderer) {
         this.modalService = modalService;
@@ -74,6 +74,7 @@ var SigninComponent = /** @class */ (function () {
                 if (error.status == 406) {
                     _this.emailForVerifyOtp = _this.loginForm.value.email;
                     _this.userNotVerify = true;
+                    _this.apiError = '';
                 }
                 else {
                     _this.apiError = error.message;
@@ -83,7 +84,6 @@ var SigninComponent = /** @class */ (function () {
     };
     SigninComponent.prototype.emailVerify = function () {
         var _this = this;
-        console.log(this.emailForVerifyOtp);
         this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
             _this.openOtpPage();
         }, function (error) {
@@ -119,11 +119,11 @@ var SigninComponent = /** @class */ (function () {
             keyboard: false
         });
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
-        console.log(this.emailForVerifyOtp);
+        modalRef.componentInstance.isUserNotVerify = true;
     };
     SigninComponent.prototype.openForgotPassModal = function () {
         $('#sign_in_modal').modal('hide');
-        this.modalService.open(reset_password_component_1.ResetPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static',
+        this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static',
             keyboard: false
         });
     };
