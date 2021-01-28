@@ -31,12 +31,13 @@
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
+                  <div class="col-sm-12 col-md-4 mb-sm-10 ">
                     <label for="">First Name*</label>
                     <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
                     <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                       class="error">
-                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter your first name.</small>
+                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter your
+                        first name.</small>
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -44,53 +45,58 @@
                     <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
                     <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
                       class="error">
-                      <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your last name.</small>
+                      <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your
+                        last name.</small>
                     </div>
                   </div>
-
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Gender*</label>
                     <select class="form-control" formControlName="gender">
                       <option value="M">Male</option>
                       <option value="F">Female</option>
                     </select>
-                    <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors"
-                      class="error">
-                      <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your gender.</small>
+                    <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
+                      <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your
+                        gender.</small>
                     </div>
                   </div>
-                </div>
-                <div class="form-row mt-3">
-                  <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
+                  <div class="col-sm-12 col-md-4 mb-sm-10"
+                    *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                     <label for="">Email*</label>
                     <input type="email" class="form-control" placeholder="Email" formControlName="email">
-                    <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors"
-                      class="error">
-                      <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter your email address.</small>
+                    <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors" class="error">
+                      <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter your email
+                        address.</small>
                     </div>
                   </div>
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
+                  <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps">
                     <label for="">Telephone*</label>
-                    <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_number">
+                    <span class="tel_span">
+                      <input type="text" class="form-control" placeholder="+00" maxlength="4"
+                        formControlName="phone_number">
+                      <input type="text" class="form-control" placeholder="000000000" maxlength="10"
+                        formControlName="phone_number">
+                    </span>
                     <div *ngIf="traveler.controls.phone_number.touched && traveler.controls.phone_number.errors"
                       class="error">
-                      <small *ngIf="traveler.controls.phone_number.errors.required" class="error_field">Please enter your telephone number..</small>
+                      <small *ngIf="traveler.controls.phone_number.errors.required" class="error_field">Please enter
+                        your telephone number..</small>
                     </div>
                   </div>
                   <div class="col-sm-12 dobs col-md-4 mb-sm-10">
-                    <label for="">Date of birth* {{traveler.controls.dobMinDate.value.getFullYear()}}</label>
+                    <label for="">Date of birth*</label>
                     <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                    <p-calendar dateFormat="M d, yy" [maxDate]="traveler.controls.dobMaxDate.value" [minDate]="traveler.controls.dobMinDate.value" [yearNavigator]="true" [monthNavigator]="true" class="form-control" panelStyleClass="calender-price-view" yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}" inputStyleClass="custom_datpicker birth_date" inputId="basic"  formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true"  placeholder="Date of birth">
+                    <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic" formControlName="dob"
+                      [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
+                      yearRange="1970:2020" placeholder="Date of birth" [defaultDate]="dobMinDate">
                     </p-calendar>
                   </div>
-                </div>
-                <div class="form-row mt-3">
                   <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type?.adults[x]?.passport_number">
                     <label for="">Passport number</label>
                     <input type="text" class="form-control" placeholder="Passport number"
                       formControlName="passport_number">
                   </div>
-                  <div class="col-sm-12 col-md-4" >
+                  <div class="col-sm-12 col-md-4 nation_wrps">
                     <label for="">Nationality*</label>
                     <!-- <input type="text" class="form-control" placeholder="Nationality" formControlName="country"> -->
                     <ng-select [items]="countries" 
@@ -108,9 +114,9 @@
                   <div class="card-header">
                     <span class="heade_wrps">
                       Add-Ons
-                      <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor responsive_anch"
-                      aria-expanded="true" aria-controls="add_acord">
-                    </a>
+                      <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord"
+                        class="addon_anchor responsive_anch" aria-expanded="true" aria-controls="add_acord">
+                      </a>
                     </span>
                     <ul class="nav nav-pills" id="addon_tab" role="tablist">
                       <li class="nav-item" role="presentation">
@@ -241,9 +247,9 @@
                   <div class="card-header">
                     <span class="heade_wrps">
                       Add-Ons
-                      <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor responsive_anch"
-                      aria-expanded="true" aria-controls="add_acord">
-                    </a>
+                      <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord"
+                        class="addon_anchor responsive_anch" aria-expanded="true" aria-controls="add_acord">
+                      </a>
                     </span>
                     <ul class="nav nav-pills" id="addon_tab" role="tablist">
                       <li class="nav-item" role="presentation">
