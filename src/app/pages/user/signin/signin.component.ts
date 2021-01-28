@@ -104,6 +104,11 @@ export class SigninComponent  implements OnInit {
     this.apiError = error;
   } 
 
+  closeModal(){
+    this.apiError ='';
+    $('#sign_in_modal').modal('hide');
+  } 
+
   btnSignUpClick(){
     
     $('#sign_in_modal').modal('hide');

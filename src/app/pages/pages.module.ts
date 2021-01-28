@@ -12,7 +12,6 @@ import { SigninComponent } from './user/signin/signin.component';
 import { SocialLoginComponent } from './user/social-login/social-login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
-import { AuthComponent } from './user/auth/auth.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
 import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark.component';
@@ -45,7 +44,6 @@ import { RecaptchaModule } from 'ng-recaptcha';
     SignupComponent,
     ForgotPasswordComponent,
     VerifyOtpComponent,
-    AuthComponent,
     AsteriskMarkComponent,
     ResetPasswordComponent,
     ContactUsComponent,
@@ -77,7 +75,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     CountdownModule,
     RecaptchaModule
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, AuthComponent,ForgotPasswordComponent,ResetPasswordComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent,ForgotPasswordComponent,ResetPasswordComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }
