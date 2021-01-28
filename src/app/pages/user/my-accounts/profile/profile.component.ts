@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
   };
+  isFormControlEnable: boolean = false; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -83,6 +84,8 @@ export class ProfileComponent implements OnInit {
         last_name: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
         country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
         dob: ['', Validators.required],
+        username: [''],
+        password: [''],
         country_code: [''],
         phone_no: [''],
         address: [''],
@@ -97,6 +100,7 @@ export class ProfileComponent implements OnInit {
         language_id: [''],      
         passport_expiry: [''],      
         passport_number: [''],      
+        home_airport: [''],      
       }, { validator: phoneAndPhoneCodeValidation('adult') });
 
          
@@ -224,7 +228,7 @@ export class ProfileComponent implements OnInit {
       if(typeof this.location != 'undefined'){
         countryName = this.location.country.name;
       }
-      console.log(moment(res.dob).format('MMM d, yy'))
+
       this.profileForm.patchValue({      
           first_name: res.firstName,
           last_name: res.lastName,
@@ -338,5 +342,9 @@ export class ProfileComponent implements OnInit {
         this.toastr.error(error.error.message, 'Profile Error');
       });
     }
+  }
+
+  enableFormControlInputs(event){
+    this.isFormControlEnable = true;
   }
 }

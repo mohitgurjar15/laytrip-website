@@ -133,7 +133,7 @@ export class SocialLoginComponent implements OnInit {
         });
       }, (error) => {
         this.google_loading = false;
-        this.socialError.emit('Authentication failed.');
+        // this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       });
   }
@@ -199,7 +199,7 @@ export class SocialLoginComponent implements OnInit {
         });
       } else {
         this.loading = false;
-        this.socialError.emit('Authentication failed.');
+        // this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       }
     }, { scope: 'email' });

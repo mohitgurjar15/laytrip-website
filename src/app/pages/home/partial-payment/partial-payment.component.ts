@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -9,9 +10,13 @@ import { environment } from '../../../../environments/environment';
 export class PartialPaymentComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  constructor() { }
+  constructor(    public router: Router
+    ) { }
 
   ngOnInit() {
   }
 
+  redirectToAboutPage(){
+    this.router.navigate(['/about/']);
+  }
 }

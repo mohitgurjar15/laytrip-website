@@ -21,7 +21,6 @@ var signin_component_1 = require("./user/signin/signin.component");
 var social_login_component_1 = require("./user/social-login/social-login.component");
 var signup_component_1 = require("./user/signup/signup.component");
 var forgot_password_component_1 = require("./user/forgot-password/forgot-password.component");
-var auth_component_1 = require("./user/auth/auth.component");
 var forms_1 = require("@angular/forms");
 var verify_otp_component_1 = require("./user/verify-otp/verify-otp.component");
 var asterisk_mark_component_1 = require("../components/asterisk-mark/asterisk-mark.component");
@@ -57,7 +56,6 @@ var PagesModule = /** @class */ (function () {
                 signup_component_1.SignupComponent,
                 forgot_password_component_1.ForgotPasswordComponent,
                 verify_otp_component_1.VerifyOtpComponent,
-                auth_component_1.AuthComponent,
                 asterisk_mark_component_1.AsteriskMarkComponent,
                 reset_password_component_1.ResetPasswordComponent,
                 contact_us_component_1.ContactUsComponent,
@@ -88,7 +86,7 @@ var PagesModule = /** @class */ (function () {
                 ngx_countdown_1.CountdownModule,
                 ng_recaptcha_1.RecaptchaModule
             ],
-            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent, forgot_password_component_1.ForgotPasswordComponent, reset_password_component_1.ResetPasswordComponent],
+            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, forgot_password_component_1.ForgotPasswordComponent, reset_password_component_1.ResetPasswordComponent],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
         })
     ], PagesModule);

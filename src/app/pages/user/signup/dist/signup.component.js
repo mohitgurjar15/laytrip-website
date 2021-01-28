@@ -51,8 +51,8 @@ var SignupComponent = /** @class */ (function () {
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     SignupComponent.prototype.closeModal = function () {
-        this.valueChange.emit({ key: 'signIn', value: true });
-        $('#sign_in_modal').modal('hide');
+        this.apiError = '';
+        $('#sign_up_modal').modal('hide');
     };
     SignupComponent.prototype.toggleFieldTextType = function (event) {
         if (event.target.id == 'passEye') {

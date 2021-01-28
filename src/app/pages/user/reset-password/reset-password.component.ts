@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
     length: 6,
     isPasswordInput: false,
     disableAutoFocus: false,
-    placeholder: '0',
+    placeholder: '',
     inputStyles: {
       'width': '64px',
       'height': '64px'
@@ -50,6 +50,7 @@ export class ResetPasswordComponent implements OnInit {
   };
   configCountDown : any = {leftTime: 60,demand: false};
   otpLengthError = false;
+  counterEnable = false;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -128,8 +129,9 @@ export class ResetPasswordComponent implements OnInit {
       this.userService.forgotPassword(this.emailForVerifyOtp).subscribe((data: any) => {
         this.spinner = this.isResend = false;
         this.counter.begin();
+        this.counterEnable = true;
       }, (error: HttpErrorResponse) => {       
-        this.submitted = this.spinner = false;
+        this.submitted = this.spinner =  this.counterEnable = false;
         this.errorMessage = error.message;
       });
 
