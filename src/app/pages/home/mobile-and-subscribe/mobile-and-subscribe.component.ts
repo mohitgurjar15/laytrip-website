@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
@@ -23,8 +23,28 @@ export class MobileAndSubscribeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private elementRef: ElementRef
   ) { }
+
+  // @HostListener('click', ['$event.target'])
+  // public onClick(target) {
+  //   console.log('OUTSIDE:::::');
+  //   const clickedInside = this.elementRef.nativeElement.contains(target);
+  //   if (!clickedInside) {
+  //     console.log('OUTSIDE:::::');
+  //     // this.clickOutside.emit();
+  //   }
+  // }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    this.submitted = false;
+    let controls = this.subscribeForm.controls;
+    Object.keys(controls).forEach(controlName =>
+      controls[controlName].markAsUntouched()
+    );
+  }
 
   ngOnInit() {
     this.subscribeForm = this.formBuilder.group({
@@ -41,7 +61,15 @@ export class MobileAndSubscribeComponent implements OnInit {
 
   subscribeNow() {
     this.submitted = this.loading = true;
+    if (this.subscribeForm.controls.email.invalid) {
+      this.submitted = true;
+      this.errorMessage = 'Please enter valid email address.';
+    }
     if (this.subscribeForm.invalid) {
+      let controls = this.subscribeForm.controls;
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
       this.submitted = true;
       this.loading = false;
       return;

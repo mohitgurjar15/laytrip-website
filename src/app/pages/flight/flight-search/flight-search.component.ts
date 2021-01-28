@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,6 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./flight-search.component.scss']
 })
 export class FlightSearchComponent implements OnInit, OnDestroy {
-
   s3BucketUrl = environment.s3BucketUrl;
   loading = true;
   isNotFound = false;
@@ -33,13 +32,15 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   calenderPrices: [] = []
   errorMessage: string = '';
 
+  fullPageLoading: any = false;
+
   constructor(
     private route: ActivatedRoute,
     private flightService: FlightService,
     public router: Router,
     public location: Location,
     public commonFunction: CommonFunction,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
@@ -97,8 +98,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
-
-          
         }
       }, err => {
         if (err && err.status === 404) {
@@ -130,10 +129,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
-          // this.spinner.show();
-          // setTimeout(() => {
-          //   this.spinner.hide();
-          // }, 5000);
         }
       }, err => {
 
@@ -160,6 +155,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.getCalenderPrice(payload)
     }
+  }
+
+  changeLoading(event) {
+    this.fullPageLoading = event;
   }
 
 

@@ -1,6 +1,9 @@
 <!-- <app-flight-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getSearchItem($event)"></app-flight-search-bar> -->
-<ngx-spinner type = "ball-clip-rotate">
-</ngx-spinner>
+<!-- <ngx-spinner type = "ball-clip-rotate">
+    <img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />
+</ngx-spinner> -->
+<app-laytrip-loader [loading]="fullPageLoading">
+</app-laytrip-loader>
 <!-- template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />" -->
 <!-- template="<img src='{{s3BucketUrl}}assets/images/loading-flight.gif' />" -->
 <div class="search_tab_listing_wrapper">
@@ -63,7 +66,7 @@
             <div class="col-lg-9">
                 <app-flight-price-slider [dates]="dates" [flexibleLoading]="flexibleLoading">
                 </app-flight-price-slider>
-                <app-flight-item-wrapper [flightDetails]="flightDetails"></app-flight-item-wrapper>
+                <app-flight-item-wrapper [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)"></app-flight-item-wrapper>
             </div>
         </div>
     </div>

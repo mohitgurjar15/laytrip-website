@@ -55,6 +55,8 @@ export class FlightPaymentComponent implements OnInit {
   isValidData: boolean = false;
   cartLoading = false;
 
+  fullPageLoading: any = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -139,6 +141,10 @@ export class FlightPaymentComponent implements OnInit {
         $('.white_search').toggleClass("show");
       }
     );
+  }
+
+  changeLoading(event) {
+    this.fullPageLoading = event;
   }
 
   totalLaycredit() {

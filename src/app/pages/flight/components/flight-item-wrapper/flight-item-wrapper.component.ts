@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -40,6 +40,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   @Input() flightDetails;
   @Input() filter;
+  @Output() changeLoading = new EventEmitter;
   cartItems = [];
 
   animationState = 'out';
@@ -107,10 +108,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.checkInstalmentAvalability();
     this.checkUser();
 
-    this.cartService.getCartItems.subscribe(cartItems=>{
+    this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-    console.log(this.cartItems,"One");
+    console.log(this.cartItems, "One");
 
   }
 
@@ -194,16 +195,18 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
-    console.log(this.cartItems,"TWo");
+    console.log(this.cartItems, "TWo");
     if (!this.isLoggedIn) {
       this.toastr.warning('Please login to book flight', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
     } else {
 
-      if (this.cartItems && this.cartItems.length >=5) {
-        this.spinner.hide();
+      if (this.cartItems && this.cartItems.length >= 5) {
+        // this.spinner.hide();
+        this.changeLoading.emit(false);
         this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
       } else {
-        this.spinner.show();
+        // this.spinner.show();
+        this.changeLoading.emit(true);
         const itinerary = {
           adult: this.route.snapshot.queryParams["adult"],
           child: this.route.snapshot.queryParams["child"],
@@ -227,16 +230,16 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
           // room_id: 42945378451569
         };
         this.cartService.addCartItem(payload).subscribe((res: any) => {
-          this.spinner.hide();
+          this.changeLoading.emit(true);
           if (res) {
-            this.cartItems = [...this.cartItems,res.data]
+            this.cartItems = [...this.cartItems, res.data]
             this.cartService.setCartItems(this.cartItems);
-            
+
             localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
             this.router.navigate([`flight/payment/${route.route_code}`]);
           }
         }, error => {
-          this.spinner.hide();
+          this.changeLoading.emit(false);
           this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
         });
 

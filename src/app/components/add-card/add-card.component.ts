@@ -24,6 +24,7 @@ export class AddCardComponent implements OnInit {
   ) { }
   @Input() showAddCardForm: boolean;
   @Output() emitNewCard = new EventEmitter();
+  @Output() changeLoading = new EventEmitter;
   // @ViewChild('cardAddForm') cardAddFormElement: ElementRef;
   //@ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
   cardForm: FormGroup;
@@ -113,11 +114,13 @@ export class AddCardComponent implements OnInit {
       if (event == 'input') {
         if (inputData["validCvv"]) {
           Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
+          Spreedly.setStyle('cvv', "border: none;");
         } else {
           Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
         }
         if (inputData["validNumber"]) {
           Spreedly.setStyle('number', "background-color: #e8f0fe;");
+          Spreedly.setStyle('number', "border: none;");
         } else {
           Spreedly.setStyle('number', "background-color: #FFFFFF;");
         }
@@ -219,11 +222,12 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
-    this.spinner.show();
+
     var normalBorder = "1px solid #ccc";
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     for (var i = 0; i < paymentMethodFields.length; i++) {
+      // this.changeLoading.emit(true);
       var field = paymentMethodFields[i];
 
       // Reset existing styles (to clear previous errors)
@@ -244,7 +248,7 @@ export class AddCardComponent implements OnInit {
         options[field] = fieldEl.value
       }
       if (options[field]) {
-        this.spinner.hide();
+        // this.changeLoading.emit(false);
       }
     }
 
