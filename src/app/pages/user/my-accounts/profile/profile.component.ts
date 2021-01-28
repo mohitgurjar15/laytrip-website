@@ -45,8 +45,7 @@ export class ProfileComponent implements OnInit {
   public fileErrorMsg: string = 'File is required';
   selectResponse: any = {};
   seletedDob :any;
-
-  dobMinDate= new Date();
+  dobMinDate = new Date(moment().subtract(16, 'years').format("MM/DD/YYYY"))
   location;
   dobMaxDate: moment.Moment = moment();
   locale = {
@@ -54,6 +53,10 @@ export class ProfileComponent implements OnInit {
     displayFormat: 'DD/MM/YYYY'
   };
   isFormControlEnable: boolean = false; 
+  genders = [
+    { key: 'M', name: 'Male' },
+    { key: 'F', name: 'Female' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,6 +70,7 @@ export class ProfileComponent implements OnInit {
     ) {}
  
   ngOnInit() {
+    console.log(this.dobMinDate.getFullYear())
     window.scroll(0,0);
     this.getCountry();
     this.getLanguages();
@@ -217,7 +221,6 @@ export class ProfileComponent implements OnInit {
         if(typeof country != 'undefined')              
         this.getStates(country);
       }
-
       let  countryCode  = '';
       if(typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode){
         countryCode = this.countries_code.filter(item => item.id == res.countryCode)[0];
@@ -236,7 +239,7 @@ export class ProfileComponent implements OnInit {
           gender  : res.gender ? res.gender : 'M',        
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
-          dob  : res.dob ? moment(res.dob).format('MMM d, yy') : '',        
+          // dob  : res.dob ? moment(res.dob).format('MMM d, yy') : '',        
           country_code : countryCode,        
           phone_no  : res.phoneNo,        
           country_id: res.country.name ? res.country.name :countryName,

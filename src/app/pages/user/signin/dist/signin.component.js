@@ -27,6 +27,7 @@ var SigninComponent = /** @class */ (function () {
         this.submitted = false;
         this.apiError = '';
         this.loading = false;
+        this.userNotVerify = false;
         this.emailForVerifyOtp = '';
         this.valueChange = new core_1.EventEmitter();
     }
@@ -71,17 +72,24 @@ var SigninComponent = /** @class */ (function () {
             }, function (error) {
                 _this.submitted = _this.loading = false;
                 if (error.status == 406) {
-                    _this.userService.resendOtp(_this.loginForm.value.email).subscribe(function (data) {
-                        _this.openOtpPage();
-                    }, function (error) {
-                        _this.apiError = error.message;
-                    });
+                    _this.emailForVerifyOtp = _this.loginForm.value.email;
+                    _this.userNotVerify = true;
+                    _this.apiError = '';
                 }
                 else {
                     _this.apiError = error.message;
                 }
             });
         }
+    };
+    SigninComponent.prototype.emailVerify = function () {
+        var _this = this;
+        this.userService.resendOtp(this.emailForVerifyOtp).subscribe(function (data) {
+            _this.openOtpPage();
+        }, function (error) {
+            _this.userNotVerify = false;
+            _this.apiError = error.message;
+        });
     };
     SigninComponent.prototype.toggleFieldTextType = function () {
         this.fieldTextType = !this.fieldTextType;
@@ -111,6 +119,7 @@ var SigninComponent = /** @class */ (function () {
             keyboard: false
         });
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
+        modalRef.componentInstance.isUserNotVerify = true;
     };
     SigninComponent.prototype.openForgotPassModal = function () {
         $('#sign_in_modal').modal('hide');

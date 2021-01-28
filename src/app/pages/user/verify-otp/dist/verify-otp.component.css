@@ -284,6 +284,7 @@
   line-height: 28px;
   font-weight: 500;
   color: #0043ff;
+  text-align: center;
 }
 .modal_otp_block .modal-header .close {
   opacity: 1;

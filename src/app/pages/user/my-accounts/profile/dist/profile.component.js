@@ -45,15 +45,20 @@ var ProfileComponent = /** @class */ (function () {
         this.fileError = false;
         this.fileErrorMsg = 'File is required';
         this.selectResponse = {};
-        this.dobMinDate = new Date();
+        this.dobMinDate = new Date(moment().subtract(16, 'years').format("MM/DD/YYYY"));
         this.dobMaxDate = moment();
         this.locale = {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
         this.isFormControlEnable = false;
+        this.genders = [
+            { key: 'M', name: 'Male' },
+            { key: 'F', name: 'Female' },
+        ];
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        console.log(this.dobMinDate.getFullYear());
         window.scroll(0, 0);
         this.getCountry();
         this.getLanguages();
@@ -211,7 +216,7 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
-                dob: res.dob ? moment(res.dob).format('MMM d, yy') : '',
+                // dob  : res.dob ? moment(res.dob).format('MMM d, yy') : '',        
                 country_code: countryCode,
                 phone_no: res.phoneNo,
                 country_id: res.country.name ? res.country.name : countryName,

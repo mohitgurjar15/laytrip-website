@@ -66,11 +66,8 @@ var SignupComponent = /** @class */ (function () {
         this.isCaptchaValidated = true;
     };
     SignupComponent.prototype.onSubmit = function () {
-        // this.openOtpPage();
-        // return;
         var _this = this;
         this.submitted = this.loading = true;
-        console.log(this.iAccept);
         if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept) {
             this.submitted = true;
             this.loading = false;
@@ -89,6 +86,7 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.openSignInModal = function () {
         $('#sign_up_modal').modal('hide');
+        this.emailExist = false;
     };
     SignupComponent.prototype.socialError = function (error) {
         this.apiError = error;
