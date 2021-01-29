@@ -76,7 +76,7 @@
                                 </div>
                                 <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                     <div class="card-body">
-                                        <app-add-card></app-add-card>
+                                        <app-add-card (changeLoading)="changeLoading($event)"></app-add-card>
                                     </div>
                                 </div>
                                 <app-card-list></app-card-list>

@@ -55,6 +55,8 @@ export class FlightPaymentComponent implements OnInit {
   isValidData: boolean = false;
   cartLoading = false;
 
+  fullPageLoading: any = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -126,7 +128,7 @@ export class FlightPaymentComponent implements OnInit {
     }
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
-      console.log("travelerFrom",travelerFrom)
+      //console.log("travelerFrom",travelerFrom)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
     })
 
@@ -139,6 +141,10 @@ export class FlightPaymentComponent implements OnInit {
         $('.white_search').toggleClass("show");
       }
     );
+  }
+
+  changeLoading(event) {
+    this.fullPageLoading = event;
   }
 
   totalLaycredit() {

@@ -40,10 +40,6 @@ const routes: Routes = [
                 loadChildren: () => import('./user/user.module').then(m => m.UserModule)
             },
             {
-                path: 'contact-us',
-                component: ContactUsComponent
-            },
-            {
                 path: 'cancellation-policy',
                 component: CancellationPolicyComponent
             },

@@ -33,7 +33,6 @@ function phoneCodeAndPhoneValidation() {
 exports.phoneCodeAndPhoneValidation = phoneCodeAndPhoneValidation;
 function optValidation() {
     return function (form) {
-        console.log(form.value.otp.length);
         return (!form.value.otp || form.value.otp.length != 6)
             ? { otpsError: true }
             : null;

@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
 import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../../../../_helpers/custom.validators';
+import { TravelerService } from 'src/app/services/traveler.service';
 
 @Component({
   selector: 'app-traveller-form',
@@ -58,6 +59,7 @@ export class TravellerFormComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private toastr: ToastrService,
     private cookieService: CookieService,
+    private travelerService:TravelerService
 
   ) { }
 
@@ -215,7 +217,7 @@ export class TravellerFormComponent implements OnInit {
 
       if (this.travellerId) {
         jsonData = Object.assign(jsonData, emailObj);
-        this.flightService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
+        this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
           this.travelersChanges.emit(data);
           this.activeModal.close();
         }, (error: HttpErrorResponse) => {
@@ -228,7 +230,7 @@ export class TravellerFormComponent implements OnInit {
       } else {
         jsonData = Object.assign(jsonData, emailObj);
 
-        this.flightService.addAdult(jsonData).subscribe((data: any) => {
+        this.travelerService.addAdult(jsonData).subscribe((data: any) => {
           this.travelersChanges.emit(data);
           this.activeModal.close();
         }, (error: HttpErrorResponse) => {

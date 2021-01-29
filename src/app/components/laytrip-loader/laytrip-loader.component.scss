@@ -1,4 +1,4 @@
-.loader_full_page{
+.loader_full_page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,10 +6,11 @@
     z-index: 99999;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     overflow: hidden;
-    img{
-        max-width: 150px;
-    }
+    top: 0;
+    // img {
+    //     max-width: 150px;
+    // }
 }

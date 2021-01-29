@@ -97,7 +97,7 @@
                                             [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li> -->
                                     <li>
-                                        <a [routerLink]="['/contact-us']" 
+                                        <a  class="hover-link" 
                                             [innerHTML]="'laytrip_info_page_title_4_description_2' | translate" data-toggle="modal"
                                             data-target="#contact_modal"></a>
                                     </li>
@@ -115,13 +115,13 @@
                                 <h5>Get our App</h5>
                                 <ul class="footer_down_links">
                                     <li>
-                                        <a href="javascript:void(0);">
+                                        <a class="hover-link">
                                             <img src="{{s3BucketUrl}}assets/images/app_store_footer.svg" alt="App Store"
                                                 title="App Store">
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">
+                                        <a class="hover-link">
                                             <img src="{{s3BucketUrl}}assets/images/playstore_footer.svg"
                                                 alt="Play Store" title="playstore">
                                         </a>
@@ -145,9 +145,9 @@
 <!-- Close Footer Section -->
 <div class="quick-footer-section">
     <div class="block_share">
-        <a href="javascript:void(0);" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/export.svg"
+        <a class="hover-link" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/export.svg"
             alt="Share"> </a>
-        <a href="javascript:void(0);" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg"
+        <a class="hover-link" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg"
                 alt="Share"> </a>
     </div>
     <!-- <a id="back_to_top" title="Back to top">

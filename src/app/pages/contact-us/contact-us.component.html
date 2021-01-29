@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="form_btn">
-                            <button type="submit">
+                            <button [ngClass]="{'btn_disable':(!contactUsForm.valid )}" [disabled]="(!contactUsForm.valid)" type="submit">
                                 <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' |
                                 translate}}</button>
                         </div>

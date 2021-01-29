@@ -108,6 +108,9 @@
                 width: calc(100% - 2px);
               }
             }
+            &.btn_disable {
+              cursor: default;
+            }
           }
           .footer_logo {
             display: flex;

@@ -101,6 +101,14 @@
                 }
               ]
             },
+            "chirag": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.chirag.ts"
+                }
+              ]
+            },
             "mohit": {
               "fileReplacements": [
                 {
@@ -141,6 +149,9 @@
             },
             "suresh": {
               "browserTarget": "laytrip-website:build:suresh"
+            },
+            "chirag": {
+              "browserTarget": "laytrip-website:build:chirag"
             },
             "mohit": {
               "browserTarget": "laytrip-website:build:mohit"

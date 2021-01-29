@@ -13,7 +13,7 @@ import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardComponent } from './add-card/add-card.component';
 import { TravelerFormComponent } from './traveler-form/traveler-form.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
@@ -49,7 +49,7 @@ import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-l
 import { CartComponent } from './cart/cart.component';
 import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
 import { CartLoaderComponent } from './cart-loader/cart-loader.component';
-import { FullPageLoaderComponent } from './full-page-loader/full-page-loader.component';
+import { LaytripLoaderComponent } from './laytrip-loader/laytrip-loader.component';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
 @NgModule({
@@ -91,7 +91,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
     CartComponent,
     FlightCartItemComponent,
     CartLoaderComponent,
-    FullPageLoaderComponent
+    LaytripLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -148,7 +148,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
     TravelerFormComponent,
     CartComponent,
     CartLoaderComponent,
-    FullPageLoaderComponent,
+    LaytripLoaderComponent,
     NgxSpinnerModule
   ],
   providers: [DatePipe, NgxSpinnerService],
