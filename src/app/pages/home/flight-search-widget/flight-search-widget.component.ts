@@ -45,8 +45,10 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightDepartureMinDate;
   flightReturnMinDate;
 
-  departureDate : any = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
-  returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
+  //departureDate : any = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
+  //returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
+  departureDate : any = new Date(moment("2021-06-01").format("MM/DD/YYYY"));
+  returnDate = new Date(moment("2021-06-07").format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
   lowMinPrice: number;
