@@ -14,7 +14,6 @@ export class CartItemComponent implements OnInit {
   @Input() cartItem;
   @Input() travelers: [];
   @Input() cartNumber: number;
-  
 
   constructor(
     public commonFunction: CommonFunction

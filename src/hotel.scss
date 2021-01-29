@@ -3365,7 +3365,7 @@ ngb-datepicker {
                         text-align: center;
                         padding: 0 15px;
                         position: relative;
-                        z-index: 9;
+                        z-index: 5;
 
                         @include tab-view {
                             border-left: none;
@@ -6212,7 +6212,7 @@ ngb-datepicker {
                         text-align: center;
                         padding: 0 15px;
                         position: relative;
-                        z-index: 9;
+                        z-index: 5;
 
                         @include tab-view {
                             border-left: none;

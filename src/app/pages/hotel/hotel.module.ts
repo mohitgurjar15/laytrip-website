@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HotelRoutingModule } from './hotel-routing.module';
 import { HotelSearchComponent } from './hotel-search/hotel-search.component';
 import { HotelLoaderComponent } from './components/hotel-loader/hotel-loader.component';
