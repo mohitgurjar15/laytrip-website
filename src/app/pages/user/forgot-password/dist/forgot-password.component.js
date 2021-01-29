@@ -57,7 +57,7 @@ var ForgotPasswordComponent = /** @class */ (function () {
         setTimeout(function () {
             $('body').addClass('modal-open');
         }, 1000);
-        var modalRef = this.modalService.open(reset_password_component_1.ResetPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static', keyboard: false });
+        var modalRef = this.modalService.open(reset_password_component_1.ResetPasswordComponent, { windowClass: 'reset_pass_window', centered: true, backdrop: 'static', keyboard: false });
         modalRef.componentInstance.emailForVerifyOtp = this.forgotEmail;
     };
     __decorate([

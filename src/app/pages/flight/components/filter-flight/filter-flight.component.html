@@ -5,8 +5,8 @@
     </div> -->
     <div class="accordion block_shortby" id="accordion2">
         <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-            <div class="accordion-heading" (click)="toggleFilter()">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+            <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                <a class="accordion-toggle">
                     {{'filter_by' | translate}}
                 </a>
                 <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> {{'reset' | translate}}</a>

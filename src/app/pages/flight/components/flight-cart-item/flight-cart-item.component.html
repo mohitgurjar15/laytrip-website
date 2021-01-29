@@ -2,7 +2,7 @@
   Booking
 </h3>
 <!-- ONEWAY -->
-<div class="card accordion_detailed_wrps wo_return" *ngIf="cartItem.module_info?.routes?.length === 1">
+<div class="card accordion_detailed_wrps wo_return">
   <div class="card-body">
     <div *ngFor="let stop of cartItem.module_info?.routes[0]?.stops">
       <div class="change_plane_wrapper" *ngIf="stop.is_layover">
@@ -46,19 +46,16 @@
     </div>
   </div>
 </div>
-<!-- <div class="total_hrs_wrps">
-  {{cartItem.module_info.total_duration}}
-</div> -->
-<div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length === 1">
-  <span class="ct_btns">
-    <button (click)="deleteCart(cartItem.id)">Delete</button>
-    <!-- <button>Edit</button> -->
+
+<div class="total_hrs_wrps cta_btns_wrps">
+  <span class="ct_btns" >
+    <button *ngIf="cartItem.module_info?.routes?.length === 1" (click)="deleteCart(cartItem.id)">Delete</button>
   </span>
   {{cartItem.module_info?.routes[0]?.duration}}
 </div>
 
 <!-- ROUNDTRIP -->
-<div *ngIf="cartItem.module_info?.routes?.length > 1">
+<!-- <div *ngIf="cartItem.module_info?.routes?.length > 1">
   <div class="card accordion_detailed_wrps w_return">
     <div class="card-body" *ngFor="let stop of cartItem.module_info?.routes[1]?.stops">
       <div class="change_plane_wrapper" *ngIf="stop.is_layover">
@@ -100,7 +97,6 @@
 
   <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length > 1">
     <span class="ct_btns">
-      <!-- <button>Edit</button> -->
     </span>
     {{cartItem.module_info?.routes[1]?.duration}}
   </div>
@@ -178,21 +174,64 @@
 <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length > 1">
   <span class="ct_btns">
     <button (click)="deleteCart(cartItem.id)">Delete</button>
-    <!-- <button>Edit</button> -->
   </span>
   {{cartItem.module_info?.routes[0]?.duration}}
+</div> -->
+
+
+<div class="card accordion_detailed_wrps wo_return" *ngIf="cartItem.module_info?.routes?.length === 2">
+  <div class="card-body">
+    <div *ngFor="let stop of cartItem.module_info?.routes[1]?.stops">
+      <div class="change_plane_wrapper" *ngIf="stop.is_layover">
+        <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
+        Change Planes in {{stop?.layover_airport_name}}
+      </div>
+      <div class="cols_wrps">
+        <div class="lines_cols">
+          <div class="line_shortname colmns_w">
+            <span>
+              <img src="{{s3BucketUrl}}assets/images/icon/blue_return_flight.svg" alt="" class="Pink filled Flight" />
+              {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+            </span>
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="date_wrp colmns_w">
+            {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
+          </div>
+          <div class="timing_wrp colmns_w">
+            {{stop.departure_time}} - {{stop.arrival_time}}
+          </div>
+        </div>
+        <div class="lines_cols">
+          <div class="line_company_name colmns_w">
+            {{stop.airline_name}}
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="fl_number colmns_w">
+            <span class="pink_stamp"></span>
+            Flight {{stop.airline}}-{{stop.flight_number}}
+          </div>
+          <div class="class_wrps colmns_w">
+            {{stop.cabin_class}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- <div id="accordion1" class="sub_accordions">
-    <div class="card-header">
-      <a class="card-link section_header" data-toggle="collapse" href="#collapse_"  aria-expanded="false"
-      aria-controls="collapse_">
-        Adult
-      </a>
-    </div> -->
+<div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length === 2">
+  <span class="ct_btns">
+    <button (click)="deleteCart(cartItem.id)">Delete</button>
+  </span>
+  {{cartItem.module_info?.routes[1]?.duration}}
+</div>
 <div id="collapse_" class="collapse show sub_accordions" data-parent="#accordion1">
   <div class="card-body">
     <app-traveler-form [cartItem]="cartItem" cartNumber={{cartNumber}} ></app-traveler-form>
   </div>
 </div>
-<!-- </div> -->

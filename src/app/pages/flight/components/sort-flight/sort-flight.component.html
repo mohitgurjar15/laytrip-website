@@ -10,8 +10,8 @@
         </div> -->
         <div class="accordion block_shortby" id="accordion">
             <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
-                <div class="accordion-heading" (click)="toggleLowToHigh()">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                <div class="accordion-heading" (click)="toggleLowToHigh()" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <a class="accordion-toggle">
                         {{'sort_by' | translate}}
                     </a>
                     <a class="anchor_link" [hidden]="lowToHighToggle !== true"

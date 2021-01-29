@@ -93,7 +93,7 @@ export class TravelerFormComponent implements OnInit {
 
     this.travelerForm.valueChanges.subscribe(value=>{
       if(typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number]!=='undefined'){
-        //console.log("dob",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value)
+        console.log("dob",moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD"))
         if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status=='VALID'){
 
           let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
@@ -106,6 +106,7 @@ export class TravelerFormComponent implements OnInit {
             this.travelerService.addAdult(data).subscribe((traveler:any)=>{
               console.log("New Traveler=>>>",traveler)
               this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].userId=traveler.userId;
+              this.patch();
               this.checkOutService.setTravelers([...this.myTravelers,traveler])
             },error=>{
 
