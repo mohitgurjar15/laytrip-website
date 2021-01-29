@@ -106,6 +106,7 @@ export class TravelerFormComponent implements OnInit {
             this.travelerService.addAdult(data).subscribe((traveler:any)=>{
               console.log("New Traveler=>>>",traveler)
               this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].userId=traveler.userId;
+              this.patch();
               this.checkOutService.setTravelers([...this.myTravelers,traveler])
             },error=>{
 
