@@ -89,15 +89,29 @@
                   color: $mid_gray_bg;
                   -webkit-text-fill-color: $mid_gray_bg;
                 }
-
-                &.error {
-                  border-color: $error-color;
-                  color: $error-color;
-                  &::placeholder {
-                    color: $error-color;
-                    -webkit-text-fill-color: $error-color;
+                &:focus{
+                  &::-webkit-input-placeholder { 
+                    color: transparent; 
+                    -webkit-text-fill-color: transparent;
+                  }
+                  &:-moz-placeholder { 
+                    color:transparent; 
+                  }
+                  &::-moz-placeholder { 
+                    color:transparent; 
+                  }
+                  &:-ms-input-placeholder { 
+                    color:transparent; 
                   }
                 }
+                &.error {
+                  border-color: $error-color;
+                  //color: $error-color;
+                  &::placeholder {
+                    //color: $error-color;
+                    //-webkit-text-fill-color: $error-color;
+                  }
+                } 
               }
 
               .error_text {
