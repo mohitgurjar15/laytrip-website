@@ -122,6 +122,58 @@ textarea:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     }
   }
 }
+.telephone_wrps{
+  .tel_span{
+    .ng-select{
+      border-radius: 0;
+      border: none;
+      font-size: 14px;
+      padding: 0;
+      .ng-select-container{
+        border: none;
+        .ng-value-container{
+          padding-left: 0;
+        }
+      }
+      .ng-arrow{
+        content: "";
+        padding: 5px 9px;
+        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: 12px;
+        transition: 0.3s;
+        right: 8px;
+        border: none;
+        top: 0px;
+        @include tab-view{
+        position: absolute;
+        right: 0;
+        height: 12px;
+        }
+      }
+      &.ng-select-opened >.ng-select-container{
+        .ng-arrow{
+          padding: 5px 9px;
+          background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+          background-position: right;
+          background-repeat: no-repeat;
+          background-size: 12px;
+          content: "";
+          transition: 0.3s;
+          right: 8px;
+          border: none;
+          top: 0px;
+          @include tab-view{
+            position: absolute;
+            right: 0;
+            height: 12px;
+          }
+        }
+      }
+    }
+  }
+}
 input,
 button,
 select {
