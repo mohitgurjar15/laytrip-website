@@ -41,15 +41,7 @@ export class FlightCartItemComponent implements OnInit {
   }
 
   deleteCart(id) {
-    this.spinner.show();
-    this.cartService.deleteCartItem(id).subscribe((res: any) => {
-      this.spinner.hide();
-      this.cartItems.splice(id, 1);
-      this.cartService.setCartItems(this.cartItems);
-      localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-    }, error => {
-      console.log(error);
-    });
+    this.cartService.setCardId(id);
   }
 
 }

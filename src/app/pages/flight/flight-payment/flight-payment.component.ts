@@ -54,8 +54,7 @@ export class FlightPaymentComponent implements OnInit {
   carts = [];
   isValidData: boolean = false;
   cartLoading = false;
-
-  fullPageLoading: any = false;
+  loading:boolean=false;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,7 +66,7 @@ export class FlightPaymentComponent implements OnInit {
     private cartService: CartService,
     private toastrService: ToastrService
   ) {
-    this.totalLaycredit();
+    //this.totalLaycredit();
     this.getCountry();
   }
 
@@ -81,7 +80,6 @@ export class FlightPaymentComponent implements OnInit {
     }
 
     this.cartLoading = true;
-    console.log("this.cartLoading",this.cartLoading)
     this.cartService.getCartList('yes').subscribe((items: any) => {
       let notAvilableItems = [];
       let cart: any;
@@ -127,6 +125,13 @@ export class FlightPaymentComponent implements OnInit {
 
     }
 
+    this.cartService.getCardId.subscribe(cartId=>{
+      console.log("Delete cart",cartId)
+      if(cartId>0){
+        this.deleteCart(cartId);
+      }
+    })
+
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       //console.log("travelerFrom",travelerFrom)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
@@ -141,10 +146,6 @@ export class FlightPaymentComponent implements OnInit {
         $('.white_search').toggleClass("show");
       }
     );
-  }
-
-  changeLoading(event) {
-    this.fullPageLoading = event;
   }
 
   totalLaycredit() {
@@ -249,6 +250,25 @@ export class FlightPaymentComponent implements OnInit {
       },
       type1: {
         adults: []
+      }
+    });
+  }
+
+  deleteCart(cartId){
+    this.loading=true;
+    this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
+      this.loading=false;
+      let index = this.carts.findIndex(x=>x.id==cartId);
+      this.carts.splice(index, 1);
+      this.cartService.setCartItems(this.carts);
+      localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+    }, error => {
+      this.loading=false;
+      if(error.status==404){
+        let index = this.carts.findIndex(x=>x.id==cartId);
+        this.carts.splice(index, 1);
+        this.cartService.setCartItems(this.carts);
+        localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       }
     });
   }
