@@ -54,18 +54,21 @@
 </div> -->
 <div class="modal_otp_block">
     <div class="modal-header">
-        <img *ngIf="otpVerified" class="ic_suc" src="{{s3BucketUrl}}assets/images/icon/ic_success_new.svg" alt="success">
-        <h4 *ngIf="otpVerified && (isSignup || isUserNotVerify)" class="modal-title suc_title" id="modal-basic-title">{{'signup_sucessfully_title' | translate}}</h4>  
-        <h4 *ngIf="otpVerified && !isSignup && !isUserNotVerify" class="modal-title suc_title" id="modal-basic-title">{{'password_reset_sucessfully_title' | translate}}</h4>  
         
-        <h4 class="modal-title" *ngIf="!otpVerified" id="modal-basic-title">{{'sign_up_otp_title' | translate}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="otpForm" *ngIf="!otpVerified">
+        <div class="modal_top_block">
+            <img *ngIf="otpVerified" class="ic_suc" src="{{s3BucketUrl}}assets/images/icon/ic_success_new.svg" alt="success">
+            <h4 *ngIf="otpVerified && (isSignup || isUserNotVerify)" class="modal-title suc_title" id="modal-basic-title">{{'signup_sucessfully_title' | translate}}</h4>  
+            <h4 *ngIf="otpVerified && !isSignup && !isUserNotVerify" class="modal-title suc_title" id="modal-basic-title">{{'password_reset_sucessfully_title' | translate}}</h4>  
             
+            <h4 class="modal-title" *ngIf="!otpVerified" id="modal-basic-title">{{'sign_up_otp_title' | translate}}</h4>
+        </div>
+
+        <form [formGroup]="otpForm" *ngIf="!otpVerified">
             <div class="form_row">
                 <div class="text_field">
                     <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
@@ -92,12 +95,17 @@
             <div class="block_api_error" *ngIf="apiError.length > 0">
                 {{apiError}}
             </div>
+            
+        </form>
+        <!-- <div  *ngIf="otpVerified" class="block_logo">
+            <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
+        </div> -->
+    </div>
+    <div class="modal-footer">
+        <div class="modal_btm">
             <div class="block_logo">
                 <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
             </div>
-        </form>
-        <div  *ngIf="otpVerified" class="block_logo">
-            <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
         </div>
     </div>
 </div>
