@@ -13,6 +13,7 @@ var forms_1 = require("@angular/forms");
 var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
+var events_1 = require("events");
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService) {
         this.formBuilder = formBuilder;
@@ -25,6 +26,7 @@ var ProfileComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
         this.loading = true;
+        this.loadingValue = new events_1.EventEmitter();
         this.countries = [];
         this.languages = [];
         this.currencies = [];
@@ -187,7 +189,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
-            _this.loading = false;
+            _this.loadingValue.emit('false');
             _this.image = res.profilePic;
             _this.selectResponse = res;
             _this.is_type = res.gender ? res.gender : 'M';
@@ -229,7 +231,7 @@ var ProfileComponent = /** @class */ (function () {
                 passport_number: res.passportNumber
             });
         }, function (error) {
-            _this.loading = false;
+            _this.loadingValue.emit('false');
             if (error.status === 401) {
                 jwt_helper_1.redirectToLogin();
             }
@@ -240,13 +242,14 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.submitted = this.loading = true;
+        this.submitted = true;
+        this.loadingValue.emit('true');
         if (this.profileForm.controls.gender.errors && this.is_gender) {
             this.profileForm.controls.gender.setValue(this.is_type);
         }
         if (this.profileForm.invalid) {
             this.submitted = true;
-            this.loading = false;
+            this.loadingValue.emit('false');
             //scroll top if any error 
             var scrollToTop_1 = window.setInterval(function () {
                 var pos = window.pageYOffset;
@@ -312,11 +315,13 @@ var ProfileComponent = /** @class */ (function () {
               formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
             }*/
             this.userService.updateProfile(formdata).subscribe(function (data) {
-                _this.submitted = _this.loading = false;
+                _this.submitted = false;
+                _this.loadingValue.emit('false');
                 localStorage.setItem("_lay_sess", data.token);
                 _this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
-                _this.submitted = _this.loading = false;
+                _this.loadingValue.emit('false');
+                _this.submitted = false;
                 _this.toastr.error(error.error.message, 'Profile Error');
             });
         }
@@ -324,6 +329,9 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.enableFormControlInputs = function (event) {
         this.isFormControlEnable = true;
     };
+    __decorate([
+        core_1.Output()
+    ], ProfileComponent.prototype, "loadingValue");
     ProfileComponent = __decorate([
         core_1.Component({
             selector: 'app-profile',

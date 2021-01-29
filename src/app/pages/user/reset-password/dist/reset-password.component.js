@@ -55,7 +55,7 @@ var ResetPasswordComponent = /** @class */ (function () {
         });
         setTimeout(function () {
             _this.isResend = true;
-        }, 5000);
+        }, 60000);
     };
     ResetPasswordComponent.prototype.openSignInPage = function () {
         this.activeModal.close();

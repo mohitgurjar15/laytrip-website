@@ -238,7 +238,7 @@
     "cvv_placeholder": "Enter CVV no.",
     "first_name_touched_validation": "Please enter your first name.",
     "last_name_touched_validation": "Please enter your last name.",
-    "checked_touched_validaion": "Please indicate that you accept the Terms and Conditions.",
+    "checked_touched_validaion": "Please indicate that you accept the Terms of Use and the Privacy Policy.",
     "card_number_touched_validation": "Please enter card number.",
     "cvv_touched_validation": "Please enter card CVV number.",
     "card_expiry_date_touched_validation": "Please enter card expiry date.",

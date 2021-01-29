@@ -12,7 +12,7 @@ var environment_1 = require("../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
-var forgot_password_component_1 = require("../forgot-password/forgot-password.component");
+var reset_password_component_1 = require("../reset-password/reset-password.component");
 var SigninComponent = /** @class */ (function () {
     function SigninComponent(modalService, formBuilder, userService, router, commonFunction, renderer) {
         this.modalService = modalService;
@@ -122,8 +122,12 @@ var SigninComponent = /** @class */ (function () {
         modalRef.componentInstance.isUserNotVerify = true;
     };
     SigninComponent.prototype.openForgotPassModal = function () {
+        var _this = this;
         $('#sign_in_modal').modal('hide');
-        this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static',
+        setTimeout(function () {
+            _this.renderer.addClass(document.body, 'modal-open');
+        }, 1500);
+        this.modalService.open(reset_password_component_1.ResetPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static',
             keyboard: false
         });
     };
