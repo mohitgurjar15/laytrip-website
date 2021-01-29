@@ -19,9 +19,9 @@
               </span>
               {{cartItem.module_info?.arrival_code}}
             </span>
-            <span
-              class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}
+            <span *ngIf="cartItem.module_info.routes.length==2"  class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}
               - {{commonFunction.convertDateFormat(cartItem.module_info?.arrival_date,'DD/MM/YYYY')}}</span>
+            <span *ngIf="cartItem.module_info.routes.length==1"  class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}</span>
           </span>
         </a>
       </h4>
