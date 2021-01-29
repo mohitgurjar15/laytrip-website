@@ -1,0 +1,73 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.cartempty_main_wrapper{
+    background-color: $background-white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 90px 0;
+    @include tab-view{
+        padding: 20px 0;
+    }
+    .inner_wrppar{
+        max-width: 472px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .cart_img_wrpper{
+            img{
+                max-width: 80px;
+            }
+            margin-bottom: 20px;
+        }
+        .cart_msg{
+            color: $blue-text;
+            font-size: 32px;
+            margin-bottom: 5px;
+            margin: 25px 0 15px;
+            @include tab-view{
+                font-size: 18px;
+            }
+        }
+        .cta_btn_wrps{
+            padding: 10px;
+            width: 100%;
+            button{
+                max-width: 472px;
+                width: 100%;
+                height: 40px;
+                padding: 10px 25px;
+                background: $hotel-secondary-color;
+                border-radius: 25px;
+                border: 1px solid $hotel-secondary-color;
+                font-size: 14px;
+                color: $text-white;
+                transition: 0.3s;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
+                white-space: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    border: 1px solid $hotel-secondary-color;
+                    color: $hotel-secondary-color;
+                    background: $background-white;
+                }
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            
+        }
+    }
+}

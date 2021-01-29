@@ -51,10 +51,15 @@
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Gender*</label>
-                    <select class="form-control" formControlName="gender">
+                    <!-- <select class="form-control" formControlName="gender">
                       <option value="M">Male</option>
                       <option value="F">Female</option>
-                    </select>
+                    </select> -->
+                    <div class="gender_anchers">
+                      <a href="javascript:void(0);">Male</a>
+                      <a href="javascript:void(0);">Female</a>
+                      <a href="javascript:void(0);">Other</a>
+                    </div>
                     <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                       <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your
                         gender.</small>
