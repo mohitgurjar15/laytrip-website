@@ -8,15 +8,12 @@
   .modal-header {
     justify-content: center;
     border: none;
-    padding: 0px 20px 0;
+    padding: 15px 20px 0;
     flex-flow: column;
     align-items: center;
 
     .close {
       opacity: 1;
-      position: absolute;
-      top: 20px;
-      right: 20px;
 
       img {
         width: 12px;
@@ -26,7 +23,7 @@
 
   .modal-body {
     width: 100%;
-    padding: 45px 20px 20px;
+    padding: 35px 20px 20px;
 
     @include tab-view {
       flex: revert;
@@ -95,7 +92,7 @@
           padding-right: 3px;
         }
       }
-      .resendSpinner{
+      .resendSpinner {
         margin-right: 5px;
       }
       .hover-link {
