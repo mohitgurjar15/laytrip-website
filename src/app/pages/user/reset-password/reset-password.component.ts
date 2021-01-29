@@ -50,7 +50,7 @@ export class ResetPasswordComponent implements OnInit {
   };
   configCountDown : any = {leftTime: 60,demand: false};
   otpLengthError = false;
-  isTimerEnable = false;
+  isTimerEnable = true;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -70,7 +70,7 @@ export class ResetPasswordComponent implements OnInit {
     });
     setTimeout(() => {
       this.isResend = true;
-    }, 5000);
+    }, 60000);
   }
 
   openSignInPage() {

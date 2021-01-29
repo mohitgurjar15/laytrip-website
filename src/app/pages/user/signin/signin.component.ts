@@ -143,6 +143,9 @@ export class SigninComponent  implements OnInit {
 
   openForgotPassModal() {
     $('#sign_in_modal').modal('hide');
+    setTimeout(() => {
+      this.renderer.addClass(document.body, 'modal-open');
+    }, 1500);    
     this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true, backdrop: 'static',
       keyboard: false
     });

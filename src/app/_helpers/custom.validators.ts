@@ -33,9 +33,7 @@ export function phoneCodeAndPhoneValidation() {
 }
 
 export function optValidation() {
-console.log('here')
   return (form: FormGroup): { [key: string]: any } => {
-    console.log(form.value.otp.length)
     return (!form.value.otp || form.value.otp.length != 6)
       ? { otpsError: true }
       : null;
