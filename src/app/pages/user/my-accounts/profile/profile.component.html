@@ -428,12 +428,11 @@
                 </div>
             </div>
         </div>
-        <div class="form_row common_row">
+        <div class="form_row common_row dobs_account">
             <label>{{'dob' | translate}}<sup>*</sup></label>
-            <div class="text_field">
-                <p-calendar dateFormat="M d, yy" class="account_datepicker"
-                    panelStyleClass="calender-price-view"
-                    inputStyleClass="custom_datpicker birth_date" inputId="basic" tabindex="9"
+            <div class="text_field"> 
+                <p-calendar dateFormat="M d, yy" class="form-control"
+                    panelStyleClass="birth_date" inputId="basic" tabindex="9"
                     formControlName="dob" [maxDate]="dobMinDate" [readonlyInput]="true"
                     [yearNavigator]="true" [monthNavigator]="true" yearRange="{{'1971:'+this.dobMinDate.getFullYear()}}"
                     placeholder="{{'dob_placeholder' | translate}}" [defaultDate]="dobMinDate">
@@ -448,9 +447,14 @@
         <div class="form_row common_row">
             <label>{{'gender_placeholder' |translate}}<sup>*</sup></label>
             <div class="text_field">
-                <ng-select formControlName="gender" [readonly]="!isFormControlEnable">
+                <!-- <ng-select formControlName="gender" [readonly]="!isFormControlEnable">
                     <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
-                 </ng-select>                 
+                 </ng-select>                  -->
+                 <div class="gender_anchers">
+                    <a href="javascript:void(0);">Male</a>
+                    <a href="javascript:void(0);">Female</a>
+                    <a href="javascript:void(0);">Other</a>
+                  </div>
             </div>
             <!-- <div class="select_gender">
                 <ul>

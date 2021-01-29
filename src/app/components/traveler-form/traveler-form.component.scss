@@ -18,13 +18,57 @@
 ::ng-deep .calender-passport-expiry{
   min-width: 300px !important;  
 }
-.dob_wrapper{
+.dobs{
   ::ng-deep .birth_date{
     
     .p-inputtext {
         border: none;
       }
-}
+      th {
+        font-size: 13px !important;
+        border-bottom: none !important;
+        font-weight: 600 !important;
+        text-align: center;
+      }
+      td {
+        padding: 0.1rem !important;
+        span {
+          width: 35px;
+          height: auto;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          color: $text-grey;
+          margin: 1px;
+          position: relative;
+
+          @include mobile-view {
+            width: 33px;
+          }
+          &:hover {
+            background: none !important;
+          }
+          &.p-highlight {
+            background: none !important;
+            font-weight: 500;
+            overflow: visible;
+            &::before {
+              content: "";
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              background-color: $pink;
+              position: absolute;
+              top: -5px;
+            }
+          }
+        }
+      }
+  }
 }
 
 .accordion_bookings{
@@ -212,6 +256,23 @@
               background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
               background-size: 20px;
               border: none;
+            }
+          }
+          .gender_anchers{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            a{
+              color: $text_light_yellow;
+              font-size: 12px;
+              padding: 5px 15px 0 0;
+              &:hover{
+                color: $text_light_yellow;
+                text-decoration: none;
+              }
+              &:focus{
+                outline: none;
+              }
             }
           }
         }

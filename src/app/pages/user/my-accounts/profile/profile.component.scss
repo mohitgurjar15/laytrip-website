@@ -102,15 +102,64 @@ input.ng-invalid.ng-touched {
     }
 }
 
-::ng-deep .birth_date{
-    
-            input{
-                border: none;
+
+.dobs_account{
+    input{
+        &.p-inputtext {
+            border: none;
+          }
+    }
+    ::ng-deep .birth_date{
+      
+        .p-inputtext {
+          border: none;
+        }
+        th {
+          font-size: 13px !important;
+          border-bottom: none !important;
+          font-weight: 600 !important;
+          text-align: center;
+        }
+        td {
+          padding: 0.1rem !important;
+          span {
+            width: 35px;
+            height: auto;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            color: $text-grey;
+            margin: 1px;
+            position: relative;
+  
+            @include mobile-view {
+              width: 33px;
             }
-            &input{
-                border: none;
+            &:hover {
+              background: none !important;
             }
-}
+            &.p-highlight {
+              background: none !important;
+              font-weight: 500;
+              overflow: visible;
+              &::before {
+                content: "";
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: $pink;
+                position: absolute;
+                top: -5px;
+              }
+            }
+          }
+        }
+    }
+  }
 
 
 .account_cnt_main {
@@ -249,6 +298,23 @@ input.ng-invalid.ng-touched {
             }
             .text_field{
                 flex: 2;
+                .gender_anchers{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    a{
+                      color: $text_light_yellow;
+                      font-size: 14px;
+                      padding: 0 25px 0 0;
+                      &:hover{
+                        color: $text_light_yellow;
+                        text-decoration: none;
+                      }
+                      &:focus{
+                        outline: none;
+                      }
+                    }
+                  }
             }
             input {
                 width: 100%;
