@@ -63,6 +63,10 @@ export class ForgotPasswordComponent implements OnInit {
 
   openResetModal(){
     this.activeModal.close();
+    setTimeout(() => {
+     $('body').addClass('modal-open');
+    }, 1000);    
+    
     const modalRef = this.modalService.open(ResetPasswordComponent, {windowClass:'forgot_window', centered: true,backdrop: 'static',keyboard: false});
     (<ResetPasswordComponent>modalRef.componentInstance).emailForVerifyOtp = this.forgotEmail;
   }

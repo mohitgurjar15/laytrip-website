@@ -7,11 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
+  loading;
   constructor() { }
 
   ngOnInit() {
-    console.log('here')
-
+    
   }
-
+  getLoadingValue(event){
+    if(event == 'false'){
+      this.loading = false;
+    } else {
+      this.loading = true;
+    }
+    console.log(this.loading)
+  }
 }

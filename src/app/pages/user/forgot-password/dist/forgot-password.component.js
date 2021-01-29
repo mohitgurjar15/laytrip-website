@@ -31,21 +31,6 @@ var ForgotPasswordComponent = /** @class */ (function () {
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]]
         });
     };
-    ForgotPasswordComponent.prototype.closeModal = function () {
-        this.valueChange.emit({ key: 'signIn', value: true });
-        $('#sign_in_modal').modal('hide');
-    };
-    ForgotPasswordComponent.prototype.openPage = function (event) {
-        this.pageData = true;
-        this.valueChange.emit({ key: 'forgotPassword', value: this.pageData });
-    };
-    ForgotPasswordComponent.prototype.ngOnDestroy = function () { };
-    ForgotPasswordComponent.prototype.openSignInPage = function () {
-        this.pageData = true;
-        this.valueChange.emit({ key: 'signIn', value: this.pageData });
-        $('.modal_container').removeClass('right-panel-active');
-        $('.forgotpassword-container').removeClass('show_forgotpass');
-    };
     ForgotPasswordComponent.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = this.loading = true;
@@ -69,7 +54,10 @@ var ForgotPasswordComponent = /** @class */ (function () {
     };
     ForgotPasswordComponent.prototype.openResetModal = function () {
         this.activeModal.close();
-        var modalRef = this.modalService.open(reset_password_component_1.ResetPasswordComponent, { windowClass: 'forgot_window', centered: true });
+        setTimeout(function () {
+            $('body').addClass('modal-open');
+        }, 1000);
+        var modalRef = this.modalService.open(reset_password_component_1.ResetPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static', keyboard: false });
         modalRef.componentInstance.emailForVerifyOtp = this.forgotEmail;
     };
     __decorate([
