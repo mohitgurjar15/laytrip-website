@@ -448,7 +448,7 @@
         <div class="form_row common_row">
             <label>{{'gender_placeholder' |translate}}<sup>*</sup></label>
             <div class="text_field">
-                <ng-select formControlName="gender" [readonly]="!isFormControlEnable">
+                <ng-select formControlName="gender" [disabled]="!isFormControlEnable">
                     <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
                  </ng-select>                 
             </div>

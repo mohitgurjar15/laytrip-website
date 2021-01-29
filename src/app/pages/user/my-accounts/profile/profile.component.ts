@@ -333,7 +333,7 @@ export class ProfileComponent implements OnInit {
         formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
       } else {
         formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
-      } */         
+      }*/         
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = this.loading = false; 
         localStorage.setItem("_lay_sess", data.token);

@@ -310,7 +310,7 @@ var ProfileComponent = /** @class */ (function () {
               formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
             } else {
               formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
-            } */
+            }*/
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 _this.submitted = _this.loading = false;
                 localStorage.setItem("_lay_sess", data.token);

@@ -50,7 +50,7 @@ export class ResetPasswordComponent implements OnInit {
   };
   configCountDown : any = {leftTime: 60,demand: false};
   otpLengthError = false;
-  isTimerEnable = false;
+  isTimerEnable = true;
  
   constructor(
     private formBuilder: FormBuilder,
