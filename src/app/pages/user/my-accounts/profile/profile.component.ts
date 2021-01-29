@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
     { key: 'M', name: 'Male' },
     { key: 'F', name: 'Female' },
   ];
-  startYear;
+
   constructor(
     private formBuilder: FormBuilder,
     private userService : UserService,
@@ -70,8 +70,6 @@ export class ProfileComponent implements OnInit {
     ) {}
  
   ngOnInit() {
-    this.startYear = "1971:"+this.dobMinDate.getFullYear();
-    console.log(this.startYear)
     window.scroll(0,0);
     this.getCountry();
     this.getLanguages();
@@ -94,7 +92,7 @@ export class ProfileComponent implements OnInit {
         country_code: [''],
         phone_no: [''],
         address: [''],
-        email: [''],
+        email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
         zip_code: [''],
         state_id: [''],
         city_name: [''],
@@ -240,7 +238,7 @@ export class ProfileComponent implements OnInit {
           gender  : res.gender ? res.gender : 'M',        
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
-          // dob  : res.dob ? moment(res.dob).format('MMM d, yy') : '',        
+          dob  : res.dob ? moment(res.dob).format('MMM d, yy') : '',        
           country_code : countryCode,        
           phone_no  : res.phoneNo,        
           country_id: res.country.name ? res.country.name :countryName,

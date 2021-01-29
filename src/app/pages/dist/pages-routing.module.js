@@ -13,7 +13,6 @@ var about_us_component_1 = require("./about-us/about-us.component");
 var cancellation_policy_component_1 = require("./cancellation-policy/cancellation-policy.component");
 var cms_pages_component_1 = require("./cms-pages/cms-pages.component");
 var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
-var contact_us_component_1 = require("./contact-us/contact-us.component");
 var covid_page_component_1 = require("./covid-page/covid-page.component");
 var download_app_component_1 = require("./download-app/download-app.component");
 var faq_component_1 = require("./faq/faq.component");
@@ -46,10 +45,6 @@ var routes = [
             {
                 path: 'account',
                 loadChildren: function () { return Promise.resolve().then(function () { return require('./user/user.module'); }).then(function (m) { return m.UserModule; }); }
-            },
-            {
-                path: 'contact-us',
-                component: contact_us_component_1.ContactUsComponent
             },
             {
                 path: 'cancellation-policy',
