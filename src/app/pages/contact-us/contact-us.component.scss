@@ -53,6 +53,9 @@
               &:focus {
                 outline: none;
               }
+              &.error {
+                border-color: $error-color;
+              }
             }
             .text_area_wrps {
               position: relative;

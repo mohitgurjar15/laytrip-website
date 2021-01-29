@@ -51,6 +51,7 @@ import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-
 import { CartLoaderComponent } from './cart-loader/cart-loader.component';
 import { LaytripLoaderComponent } from './laytrip-loader/laytrip-loader.component';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
     CartComponent,
     FlightCartItemComponent,
     CartLoaderComponent,
-    LaytripLoaderComponent
+    LaytripLoaderComponent,
+    EmptyCartComponent
   ],
   imports: [
     CommonModule,
@@ -149,7 +151,8 @@ import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
     CartComponent,
     CartLoaderComponent,
     LaytripLoaderComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    EmptyCartComponent
   ],
   providers: [DatePipe, NgxSpinnerService],
 

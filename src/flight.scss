@@ -3326,6 +3326,7 @@
 					padding: 20px 15px;
 					display: flex;
 					align-items: center;
+					cursor: pointer;
 
 					.accordion-toggle {
 						font-size: 20px;
@@ -3335,12 +3336,17 @@
 						display: block;
 					}
 					&:after {
-						font-family: 'FontAwesome';
-						content: "\f054";
-						float: right;
-						color: $text-grey;
-						font-weight: normal;
+						position: relative;
+						padding: 9px;
+						background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+						background-position: right;
+						background-repeat: no-repeat;
+						background-size: 8px;
+						content: "";
 						transition: 0.3s;
+						right: 0;
+						border: none;
+						top: 0; 
 					}
 					.anchor_link{
 						color: $text_light_yellow;
@@ -3351,11 +3357,22 @@
 				&.active {
 					.accordion-heading {
 						&:after {
-							content: "\f078";
+							content: "";
+							position: relative;
+							padding: 5px 9px;
+							background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+							background-position: right;
+							background-repeat: no-repeat;
+							background-size: 14px;
+							transition: 0.3s;
+							right: 0;
+							border: none;
+							top: 0;
+						 
 						}
 					}
 				}
-
+ 
 				.accordion-body {
 					.block_cmn {
 						width: 100%;
@@ -3821,6 +3838,7 @@
 				padding: 20px 15px;
 				display: flex;
 				align-items: center;
+				cursor: pointer;
 
 				.accordion-toggle {
 					font-size: 20px;
@@ -3828,23 +3846,19 @@
 					font-weight: 500;
 					width: 100%;
 					display: block;
-
-					// &:after {
-					// 	font-family: 'FontAwesome';
-					// 	content: "\f054";
-					// 	float: right;
-					// 	color: $text-grey;
-					// 	font-weight: normal;
-					// 	transition: 0.3s;
-					// }
 				}
 				&:after {
-					font-family: 'FontAwesome';
-					content: "\f054";
-					float: right;
-					color: $text-grey;
-					font-weight: normal;
+					position: relative;
+					padding: 9px;
+					background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+					background-position: right;
+					background-repeat: no-repeat;
+					background-size: 8px;
+					content: "";
 					transition: 0.3s;
+					right: 0;
+					border: none;
+					top: 0; 
 				}
 				.anchor_link{
 					color: $text_light_yellow;
@@ -3852,16 +3866,21 @@
 					margin-right: 10px;
 				}
 			}
-
 			&.active {
 				.accordion-heading {
-					.accordion-toggle {
-						// &:after {
-						// 	content: "\f078";
-						// }
-					}
 					&:after {
-						content: "\f078";
+						content: "";
+						position: relative;
+						padding: 5px 9px;
+						background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+						background-position: right;
+						background-repeat: no-repeat;
+						background-size: 14px;
+						transition: 0.3s;
+						right: 0;
+						border: none;
+						top: 0;
+					 
 					}
 				}
 			}
