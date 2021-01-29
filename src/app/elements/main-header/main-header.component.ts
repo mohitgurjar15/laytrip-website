@@ -168,8 +168,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   redirectToPayment() {
-    if (this.isLoggedIn && this.cartItemsCount > 0) {
-      this.router.navigate([`flight/payment/ZVZ4WEFNOW8ybVIwT0VX`]);
-    }
+    /* if (this.isLoggedIn && this.cartItemsCount > 0) {
+    } */
+    this.router.navigate([`flight/payment/ZVZ4WEFNOW8ybVIwT0VX`]);
   }
 }

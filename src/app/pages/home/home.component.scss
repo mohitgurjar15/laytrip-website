@@ -44,7 +44,7 @@
 		right: 0;
 		left: 0;
 		padding: 0;
-		transform: translate(0%, 4%);
+		transform: translate(0%, -10%);
 		@include tab-view{
 			transform: translate(0%, 0%);
 			position: relative;
@@ -91,7 +91,7 @@
 
 		.banner_tab {
 			width: 100%;
-			padding: 140px 0 0;
+			padding: 70px 0 0;
 
 			@include tab-view {
 				padding: 10px 0 0;

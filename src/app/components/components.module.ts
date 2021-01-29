@@ -52,6 +52,7 @@ import { CartLoaderComponent } from './cart-loader/cart-loader.component';
 import { LaytripLoaderComponent } from './laytrip-loader/laytrip-loader.component';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { EmptyCartComponent } from './empty-cart/empty-cart.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { EmptyCartComponent } from './empty-cart/empty-cart.component';
     TranslateModule,
     NgScrollbarModule,
     InfiniteScrollModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RouterModule
   ],
   exports: [
     SearchAirportComponent,

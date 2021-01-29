@@ -55,6 +55,7 @@ export class FlightPaymentComponent implements OnInit {
   isValidData: boolean = false;
   cartLoading = false;
   loading:boolean=false;
+  isCartEmpty:boolean=false;
 
   constructor(
     private route: ActivatedRoute,
@@ -102,6 +103,7 @@ export class FlightPaymentComponent implements OnInit {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
     },error=>{
+      this.isCartEmpty =true;
       this.cartLoading = false;
     });
 
@@ -126,9 +128,9 @@ export class FlightPaymentComponent implements OnInit {
     }
 
     this.cartService.getCardId.subscribe(cartId=>{
-      console.log("Delete cart",cartId)
       if(cartId>0){
         this.deleteCart(cartId);
+        this.cartService.setCardId(0);
       }
     })
 
@@ -261,6 +263,9 @@ export class FlightPaymentComponent implements OnInit {
       let index = this.carts.findIndex(x=>x.id==cartId);
       this.carts.splice(index, 1);
       this.cartService.setCartItems(this.carts);
+      if(this.carts.length==0){
+        this.isCartEmpty =true;
+      }
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
     }, error => {
       this.loading=false;
@@ -268,6 +273,9 @@ export class FlightPaymentComponent implements OnInit {
         let index = this.carts.findIndex(x=>x.id==cartId);
         this.carts.splice(index, 1);
         this.cartService.setCartItems(this.carts);
+        if(this.carts.length==0){
+          this.isCartEmpty =true;
+        }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       }
     });

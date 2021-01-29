@@ -113,7 +113,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-    console.log(this.cartItems, "One");
 
   }
 
@@ -197,7 +196,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
-    console.log(this.cartItems, "TWo");
     if (!this.isLoggedIn) {
       const modalRef = this.modalService.open(LaytripOkPopup, {
         centered: true,

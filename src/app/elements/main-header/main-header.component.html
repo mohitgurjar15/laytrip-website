@@ -94,7 +94,7 @@
                                     </span>
                                 </div>
                             </li>
-                            <li class="nav-item responsive_li cart_drop">
+                            <li class="nav-item responsive_li cart_drop" *ngIf="isLoggedIn && cartItemsCount">
                                 <a (click)="redirectToPayment()" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                    
                                 </a>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="cart_section">
                     <span class="cart_i_wrapper">
-                        <a href="javascript:void(0);">
+                        <a (click)="redirectToPayment()">
                             <img src="{{s3BucketUrl}}assets/images/icon/cart_beg.svg" alt="">
                             <span class="cart_count" [hidden]="!cartItemsCount">{{cartItemsCount}}</span>
                         </a>
