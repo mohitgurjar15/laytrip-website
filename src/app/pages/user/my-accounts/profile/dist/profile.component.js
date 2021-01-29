@@ -267,60 +267,54 @@ var ProfileComponent = /** @class */ (function () {
                 formdata.append("profile_pic", imgfile);
             }
             // console.log(this.profileForm.value.dob, moment(this.profileForm.value.dob).format('YYYY-MM-DD'))
-            formdata.append("title", this.profileForm.value.title);
+            // formdata.append("title",this.profileForm.value.title);
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
-            formdata.append("city_name", this.profileForm.value.city_name);
-            formdata.append("zip_code", this.profileForm.value.zip_code);
+            formdata.append("home_airport", this.profileForm.value.home_airport);
             formdata.append("address", this.profileForm.value.address);
-            formdata.append("address1", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
-            formdata.append("passport_number", this.profileForm.value.passport_number);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-            console.log(moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-            formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : '');
-            if (typeof this.profileForm.value.country_id === 'string') {
-                if (this.selectResponse.country.id) {
-                    formdata.append("country_id", this.selectResponse.country.id);
-                }
-                else {
-                    formdata.append("country_id", this.location.country.id);
-                }
-            }
-            else {
-                formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
-            }
-            if (typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
-            }
-            else {
-                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
-            }
+            // formdata.append("city_name",this.profileForm.value.city_name);
+            // formdata.append("zip_code",this.profileForm.value.zip_code);
+            // formdata.append("address1",this.profileForm.value.address);
+            // formdata.append("passport_number",this.profileForm.value.passport_number);
+            // formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
+            /* if(typeof this.profileForm.value.country_id === 'string'){
+              if(this.selectResponse.country.id){
+                formdata.append("country_id", this.selectResponse.country.id);
+              } else {
+                formdata.append("country_id", this.location.country.id);
+              }
+            } else {
+              formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
+            } */
+            /* if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
+              formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
+            } else{
+              formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
+            } */
             if (typeof (this.profileForm.value.country_code) === 'object') {
                 formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '');
             }
             else {
                 formdata.append("country_code", this.selectResponse.countryCode);
             }
-            if (!Number.isInteger(Number(this.profileForm.value.language_id))) {
-                formdata.append("language_id", this.selectResponse.preferredLanguage.id ? this.selectResponse.preferredLanguage.id : '');
+            /* if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
+              formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id :'');
+            } else {
+              formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id :'');
             }
-            else {
-                formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : '');
-            }
-            if (!Number.isInteger(Number(this.profileForm.value.currency_id))) {
-                formdata.append("currency_id", this.selectResponse.preferredCurrency.id ? this.selectResponse.preferredCurrency.id : '');
-            }
-            else {
-                formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : '');
-            }
+            if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
+              formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
+            } else {
+              formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
+            } */
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 _this.submitted = _this.loading = false;
                 localStorage.setItem("_lay_sess", data.token);
                 _this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
-                // this.router.navigate(['/']);      
             }, function (error) {
                 _this.submitted = _this.loading = false;
                 _this.toastr.error(error.error.message, 'Profile Error');
