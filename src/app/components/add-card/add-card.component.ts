@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 declare var $: any;
 import { ToastrService } from 'ngx-toastr';
@@ -25,8 +24,6 @@ export class AddCardComponent implements OnInit {
   @Input() showAddCardForm: boolean;
   @Output() emitNewCard = new EventEmitter();
   @Output() changeLoading = new EventEmitter;
-  // @ViewChild('cardAddForm') cardAddFormElement: ElementRef;
-  //@ViewChild('cardAddForm', { read: NgForm }) cardAddFormElement: any;
   cardForm: FormGroup;
   submitted: boolean = false;
   token: string;

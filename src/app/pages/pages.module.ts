@@ -33,6 +33,7 @@ import { CmsPagesComponent } from './cms-pages/cms-pages.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { CountdownModule } from 'ngx-countdown';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { TermsComponent } from './terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     CovidPageComponent,
     AboutUsComponent,
     CmsPagesComponent,
+    TermsComponent,
 
   ],
   imports: [
