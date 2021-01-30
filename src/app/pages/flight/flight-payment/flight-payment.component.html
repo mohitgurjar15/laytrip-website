@@ -32,15 +32,14 @@
                 <div class="col-lg-5">
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
-                            <app-payment-mode-loader *ngIf="!priceData.length"></app-payment-mode-loader>
-                            <app-payment-mode *ngIf="priceData.length" [flightSummary]="flightSummary"
-                                [priceData]="priceData" laycreditpoints="{{laycreditpoints}}"
+                            <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
+                            <app-payment-mode *ngIf="carts.length" [cartPrices]="cartPrices"
+                                 laycreditpoints="{{laycreditpoints}}"
                                 (selectInstalmentMode)="selectInstalmentMode($event)"
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
                             </app-payment-mode>
-                            <app-price-summary *ngIf="priceData.length" [priceSummary]="priceSummary"
-                                [priceData]="priceData"></app-price-summary>
+                            <app-price-summary  [priceSummary]="priceSummary" [cartPrices]="cartPrices"></app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
                             <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->
@@ -50,7 +49,7 @@
                                     class="pink_search" />
                                 <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="Search icon"
                                     class="white_search" />
-                                Save & Add More
+                                Save & Add More {{carts.length}}
                             </button>
                         </div>
                     </div>

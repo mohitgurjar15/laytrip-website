@@ -2,19 +2,34 @@
     <h3>Payment Summary</h3>
     <div class="pay_sum_inner">
       <div class="pay_list_wrper">
+        <div class="pay_listing" *ngFor="let item of cartPrices">
+          <span>{{item.location}}</span>
+          <span>${{item.selling_price | number : '1.2-2'}}</span>
+        </div>
+        
         <div class="pay_listing">
           <span>Total Purchase</span>
-          <span *ngIf="typeOf(priceSummary.instalments)!='undefined'">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
+          <span *ngIf="typeOf(priceSummary.instalments)!='undefined'">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
         </div>
+        
+      </div>
+      <br>
+      <!-- Start -->
+      <div class="pay_list_wrper">
         <div class="pay_listing">
-          <span>Downpayment</span>
+          <span>Booking Downpayment</span>
           <span>${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
         </div>
-        <div class="pay_listing" *ngIf="priceSummary.layCreditPoints>0">
+        <div class="pay_listing">
           <span>Applied Laytrip Points</span>
           <span>-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
         </div>
+        <div class="pay_listing">
+          <span>Total Due Now</span>
+          <span>${{priceSummary.remainingAmount | number : '1.2-2'}}</span>
+        </div>
       </div>
+      <!-- End -->
       <div class="price_accordion" id="price_collapse">
         <div class="card">
           <div class="card-header" id="headingOne">

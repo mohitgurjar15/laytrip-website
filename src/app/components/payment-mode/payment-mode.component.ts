@@ -18,7 +18,8 @@ export class PaymentModeComponent implements OnInit {
     instalmentType:string,
     layCreditPoints:number,
     instalments:[],
-    remainingAmount:number
+    remainingAmount:number,
+    totalAmount:number
   }>(); 
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
@@ -30,7 +31,7 @@ export class PaymentModeComponent implements OnInit {
   ) {
    }
   
-  @Input() flightSummary;
+  @Input() cartPrices;
   @Input() isShowSummary:boolean;
   @Input() showFullPartialPayOption:boolean=true;
   @Input() isShowPartialPaymentDetails:boolean=true;
@@ -75,10 +76,10 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnInit(){
 
-    this.instalmentRequest.checkin_date= moment(this.flightSummary[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+    this.getTotalPrice();
     if(this.instalmentRequest.checkin_date){
 
-      this.getTotalPrice();
+      this.instalmentRequest.amount = this.sellingPrice;
       this.totalLaycredit();
       this.getAllInstalment('set-default-down-payment');
       this.calculateInstalment('down-payment',null);
@@ -130,7 +131,8 @@ export class PaymentModeComponent implements OnInit {
           layCreditPoints :this.laycreditpoints,
           instalmentType: this.instalmentType,
           instalments:this.instalments,
-          remainingAmount:this.remainingAmount
+          remainingAmount:this.remainingAmount,
+          totalAmount:this.sellingPrice
         })
       },(err)=>{
 
@@ -145,10 +147,9 @@ export class PaymentModeComponent implements OnInit {
       this.getAllInstalment();
     }
 
-    if(changes['priceData']){
+    /* if(changes['priceData']){
       this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
-      //this.instalmentRequest.amount= 100;
-    }
+    } */
   }
 
   getPayNowAmount(){
@@ -156,14 +157,30 @@ export class PaymentModeComponent implements OnInit {
   }
 
   getTotalPrice(){
-    this.sellingPrice=this.priceData[0].selling_price;
+    //this.sellingPrice=this.priceData[0].selling_price;
+    let totalPrice=0;
+    let checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
 
-    /* if(this.paymentType=='no-instalment'){
-      if(this.priceData[0].secondary_selling_price){
-        this.sellingPrice = this.priceData[0].secondary_selling_price;
+    for(let i=0; i < this.cartPrices.length; i++){
+      totalPrice+=this.cartPrices[i].selling_price;
+      if(i==0){
+        continue;
       }
-    } */
-    //return this.sellingPrice=100;
+      if(moment(checkinDate).isAfter(moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"))){
+        checkinDate = moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+      }
+    }
+    console.log(checkinDate,"checkIn")
+    this.sellingPrice=totalPrice;
+    this.instalmentRequest.checkin_date= checkinDate;
+    this.getInstalmentData.emit({
+      layCreditPoints :this.laycreditpoints,
+      instalmentType: this.instalmentType,
+      instalments:this.instalments,
+      remainingAmount:this.remainingAmount,
+      totalAmount:this.sellingPrice
+    })
+
   }
 
   convertToNumber(number){
@@ -259,7 +276,8 @@ export class PaymentModeComponent implements OnInit {
         layCreditPoints :this.laycreditpoints,
         instalmentType: this.instalmentType,
         instalments:this.instalments,
-        remainingAmount:this.remainingAmount
+        remainingAmount:this.remainingAmount,
+        totalAmount:this.sellingPrice
       })
     }
   }
@@ -272,64 +290,6 @@ export class PaymentModeComponent implements OnInit {
     },(error=>{
       this.isLayCreditLoading=false;
     }))
-  }
-
-  minimumInstallmentValidation(){
-    this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
-      let instalmentType;
-      let isBelowMinimumInstallment;
-      if(this.instalmentType=='weekly' && this.instalments.instalment_date[1].instalment_amount<5){
-
-        if(res.biweekly_instalments[1].instalment_amount>5){
-          instalmentType='biweekly';
-          this.calculateInstalment(null,null,'min-instal');
-          isBelowMinimumInstallment=false;
-          console.log("1One")
-        }
-        else if(res.monthly_instalments[1].instalment_amount>5){
-          instalmentType='monthly';
-          this.calculateInstalment(null,null,'min-instal');
-          isBelowMinimumInstallment=false;
-          console.log("2TWO")
-        }
-        else{
-          isBelowMinimumInstallment=true;
-          console.log("First::",this.isBelowMinimumInstallment)
-        }
-      }
-      else if(this.instalmentType=='biweekly' && this.instalments.instalment_date[1].instalment_amount<5){
-  
-        if(res.monthly_instalments[1].instalment_amount>5){
-          instalmentType='monthly';
-          this.calculateInstalment(null,null,'min-instal');
-          isBelowMinimumInstallment=false;
-        }
-        else{
-          isBelowMinimumInstallment=true;
-          console.log("Second::",this.isBelowMinimumInstallment)
-        }
-      }
-      else if(this.instalmentType=='monthly' && this.instalments.instalment_date[1].instalment_amount<5){
-        isBelowMinimumInstallment=true;
-        console.log("Third::",this.isBelowMinimumInstallment)
-        /* if(res.weekly_instalments[1].instalment_amount>=5){
-          this.isBelowMinimumInstallment=false;
-        }
-        if(res.biweekly_instalments[1].instalment_amount>=5){
-          this.isBelowMinimumInstallment=false;
-        } */
-        if(res.monthly_instalments[1].instalment_amount>=5){
-          isBelowMinimumInstallment=false;
-        }
-      }
-      this.isBelowMinimumInstallment=isBelowMinimumInstallment || this.isBelowMinimumInstallment;
-      this.instalmentType=instalmentType || this.instalmentType;
-      console.log("this.isBelowMinimumInstallment",this.isBelowMinimumInstallment,this.instalmentType)
-    },(err)=>{
-     
-  })
-    
-
   }
   
 }

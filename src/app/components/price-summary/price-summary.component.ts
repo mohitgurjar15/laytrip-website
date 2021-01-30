@@ -9,7 +9,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 export class PriceSummaryComponent implements OnInit {
 
   @Input() priceSummary;
-  @Input() priceData=[];
+  @Input() cartPrices=[];
   
   constructor(
     private commonFunction:CommonFunction
