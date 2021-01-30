@@ -10,17 +10,17 @@ exports.AccountComponent = void 0;
 var core_1 = require("@angular/core");
 var AccountComponent = /** @class */ (function () {
     function AccountComponent() {
+        this.loading = true;
     }
     AccountComponent.prototype.ngOnInit = function () {
     };
     AccountComponent.prototype.getLoadingValue = function (event) {
-        if (event == 'false') {
+        if (event === false) {
             this.loading = false;
         }
         else {
             this.loading = true;
         }
-        console.log(this.loading);
     };
     AccountComponent = __decorate([
         core_1.Component({

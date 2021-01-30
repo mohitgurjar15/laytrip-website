@@ -1,4 +1,4 @@
-<form *ngIf="!loading" [formGroup]="profileForm" novalidate autocomplete="off">
+<form [formGroup]="profileForm" novalidate autocomplete="off">
 <div class="account_cnt_main">
     <div class="update_info">
         <div class="form_row">
@@ -128,11 +128,13 @@
                 <div class="phone_no">
                     <div class="code">
                         <div class="dropdown">
-                            <ng-select [readonly]="!isFormControlEnable"  class="ng-customClass" tabindex="7" selectOnTab="true"
+                            <ng-select         
+                            [disabled]="true"
+                             class="ng-customClass" tabindex="7" selectOnTab="true"
                                 [items]="countries_code" bindLabel="country_name"
                                 clearSearchOnAdd="true" formControlName="country_code"
                                 placeholder="Select country code">
-                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <ng-template  ng-label-tmp let-item="item" let-clear="clear">
                                     <span class="ng-value-label"><img class="img_country_code"
                                             [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'"
                                             width="20px" height="20px">
