@@ -13,7 +13,6 @@ var forms_1 = require("@angular/forms");
 var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
-var events_1 = require("events");
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService) {
         this.formBuilder = formBuilder;
@@ -26,7 +25,7 @@ var ProfileComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
         this.loading = true;
-        this.loadingValue = new events_1.EventEmitter();
+        this.loadingValue = new core_1.EventEmitter();
         this.countries = [];
         this.languages = [];
         this.currencies = [];
@@ -60,6 +59,7 @@ var ProfileComponent = /** @class */ (function () {
         ];
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.loadingValue.emit(true);
         window.scroll(0, 0);
         this.getCountry();
         this.getLanguages();
@@ -93,6 +93,9 @@ var ProfileComponent = /** @class */ (function () {
             passport_number: [''],
             home_airport: ['']
         }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
+        if (!this.isFormControlEnable) {
+            this.profileForm.controls['country_code'].disable();
+        }
         this.getProfileInfo();
     };
     ProfileComponent.prototype.getCountry = function () {
@@ -189,7 +192,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
-            _this.loadingValue.emit('false');
+            _this.loadingValue.emit(false);
             _this.image = res.profilePic;
             _this.selectResponse = res;
             _this.is_type = res.gender ? res.gender : 'M';
@@ -231,7 +234,7 @@ var ProfileComponent = /** @class */ (function () {
                 passport_number: res.passportNumber
             });
         }, function (error) {
-            _this.loadingValue.emit('false');
+            _this.loadingValue.emit(false);
             if (error.status === 401) {
                 jwt_helper_1.redirectToLogin();
             }
@@ -243,13 +246,13 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = true;
-        this.loadingValue.emit('true');
+        this.loadingValue.emit(true);
         if (this.profileForm.controls.gender.errors && this.is_gender) {
             this.profileForm.controls.gender.setValue(this.is_type);
         }
         if (this.profileForm.invalid) {
             this.submitted = true;
-            this.loadingValue.emit('false');
+            this.loadingValue.emit(false);
             //scroll top if any error 
             var scrollToTop_1 = window.setInterval(function () {
                 var pos = window.pageYOffset;
@@ -269,8 +272,6 @@ var ProfileComponent = /** @class */ (function () {
                 imgfile = this.imageFile;
                 formdata.append("profile_pic", imgfile);
             }
-            // console.log(this.profileForm.value.dob, moment(this.profileForm.value.dob).format('YYYY-MM-DD'))
-            // formdata.append("title",this.profileForm.value.title);
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
@@ -279,48 +280,21 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-            // formdata.append("city_name",this.profileForm.value.city_name);
-            // formdata.append("zip_code",this.profileForm.value.zip_code);
-            // formdata.append("address1",this.profileForm.value.address);
-            // formdata.append("passport_number",this.profileForm.value.passport_number);
-            // formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
-            /* if(typeof this.profileForm.value.country_id === 'string'){
-              if(this.selectResponse.country.id){
-                formdata.append("country_id", this.selectResponse.country.id);
-              } else {
-                formdata.append("country_id", this.location.country.id);
-              }
-            } else {
-              formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
-            } */
-            /* if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-              formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
-            } else{
-              formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
-            } */
             if (typeof (this.profileForm.value.country_code) === 'object') {
                 formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '');
             }
             else {
                 formdata.append("country_code", this.selectResponse.countryCode);
             }
-            /* if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
-              formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id :'');
-            } else {
-              formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id :'');
-            }
-            if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
-              formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
-            } else {
-              formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
-            }*/
+            this.isFormControlEnable = false;
+            this.profileForm.controls['country_code'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 _this.submitted = false;
-                _this.loadingValue.emit('false');
+                _this.loadingValue.emit(false);
                 localStorage.setItem("_lay_sess", data.token);
                 _this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
-                _this.loadingValue.emit('false');
+                _this.loadingValue.emit(false);
                 _this.submitted = false;
                 _this.toastr.error(error.error.message, 'Profile Error');
             });
@@ -328,6 +302,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.enableFormControlInputs = function (event) {
         this.isFormControlEnable = true;
+        this.profileForm.controls['country_code'].enable();
     };
     __decorate([
         core_1.Output()

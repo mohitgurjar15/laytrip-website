@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
+declare var $: any;
 
 @Component({
   selector: 'app-covid-page',
@@ -18,6 +19,7 @@ export class CovidPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    $('body').addClass('cms-bgColor');
     window.scroll(0, 0);
     const pageType = 'covid';
     this.loading = true;

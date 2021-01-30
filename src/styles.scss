@@ -32,6 +32,10 @@ body {
   &.bg_color {
     background: transparent;
   }
+
+  &.cms-bgColor {
+    background: $background-white;
+  }
 }
 
 a {
@@ -44,66 +48,84 @@ a {
   }
 }
 .dobs {
-  .form-control{
+  .form-control {
     border-radius: 0;
     border: none;
     border-bottom: 2px solid $box-border-color;
     font-size: 14px;
     padding: 8px 0;
-    
-    input{
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+
+    input {
+      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
+        center right 0px no-repeat;
       background-size: 20px;
       border: none;
       padding: 0;
-      &:focus{
+      &:focus {
         outline: none;
         box-shadow: none;
       }
     }
   }
 }
-.dobs_account{
-  .form-control{
+.dobs_account {
+  .form-control {
     border-radius: 0;
     border: none;
     font-size: 14px;
     padding: 8px 0;
-    
-    input{
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+
+    input {
+      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
+        center right 0px no-repeat;
       background-size: 20px;
       border: none;
       padding: 0;
-      &:focus{
+      &:focus {
         outline: none;
         box-shadow: none;
       }
     }
   }
 }
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
-input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
-input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
-textarea:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
-textarea:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
-.nation_wrps{
-  .ng-select{
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+input:focus:-moz-placeholder {
+  color: transparent;
+} /* FF 4-18 */
+input:focus::-moz-placeholder {
+  color: transparent;
+} /* FF 19+ */
+input:focus:-ms-input-placeholder {
+  color: transparent;
+} /* IE 10+ */
+textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+textarea:focus:-moz-placeholder {
+  color: transparent;
+} /* FF 4-18 */
+textarea:focus::-moz-placeholder {
+  color: transparent;
+} /* FF 19+ */
+textarea:focus:-ms-input-placeholder {
+  color: transparent;
+} /* IE 10+ */
+.nation_wrps {
+  .ng-select {
     border-radius: 0;
     border: none;
     border-bottom: 2px solid $box-border-color;
     font-size: 14px;
     padding: 0;
-    .ng-select-container{
+    .ng-select-container {
       border: none;
-      .ng-value-container{
+      .ng-value-container {
         padding-left: 0;
       }
     }
-    .ng-arrow{
+    .ng-arrow {
       content: "";
       padding: 5px 9px;
       background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
@@ -114,14 +136,14 @@ textarea:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
       right: 8px;
       border: none;
       top: 0px;
-      @include tab-view{
-      position: absolute;
-      right: 0;
-      height: 12px;
+      @include tab-view {
+        position: absolute;
+        right: 0;
+        height: 12px;
       }
     }
-    &.ng-select-opened >.ng-select-container{
-      .ng-arrow{
+    &.ng-select-opened > .ng-select-container {
+      .ng-arrow {
         padding: 5px 9px;
         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
         background-position: right;
@@ -132,7 +154,7 @@ textarea:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
         right: 8px;
         border: none;
         top: 0px;
-        @include tab-view{
+        @include tab-view {
           position: absolute;
           right: 0;
           height: 12px;
@@ -141,20 +163,20 @@ textarea:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     }
   }
 }
-.telephone_wrps{
-  .tel_span{
-    .ng-select{
+.telephone_wrps {
+  .tel_span {
+    .ng-select {
       border-radius: 0;
       border: none;
       font-size: 14px;
       padding: 0;
-      .ng-select-container{
+      .ng-select-container {
         border: none;
-        .ng-value-container{
+        .ng-value-container {
           padding-left: 0;
         }
       }
-      .ng-arrow{
+      .ng-arrow {
         content: "";
         padding: 5px 9px;
         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
@@ -165,14 +187,14 @@ textarea:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
         right: 8px;
         border: none;
         top: 0px;
-        @include tab-view{
-        position: absolute;
-        right: 0;
-        height: 12px;
+        @include tab-view {
+          position: absolute;
+          right: 0;
+          height: 12px;
         }
       }
-      &.ng-select-opened >.ng-select-container{
-        .ng-arrow{
+      &.ng-select-opened > .ng-select-container {
+        .ng-arrow {
           padding: 5px 9px;
           background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
           background-position: right;
@@ -183,7 +205,7 @@ textarea:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
           right: 8px;
           border: none;
           top: 0px;
-          @include tab-view{
+          @include tab-view {
             position: absolute;
             right: 0;
             height: 12px;
@@ -928,20 +950,20 @@ select {
                   }
                 }
               }
-            } 
+            }
 
             @media (max-width: 480px) {
               flex-wrap: wrap;
 
               li {
-				margin: 0 5px 5px 0;
-				
-				&.class_resp{
-					width: 100%;
-				}
-				&.travellers_resp{
-					width: 100%;
-				}
+                margin: 0 5px 5px 0;
+
+                &.class_resp {
+                  width: 100%;
+                }
+                &.travellers_resp {
+                  width: 100%;
+                }
 
                 &:last-child {
                   margin: 0;
@@ -2955,19 +2977,19 @@ select {
 .share_modal {
   .modal-dialog {
     max-width: 514px;
-	width: 96%;
+    width: 96%;
 
-	.modal-content {
-		padding: 25px 40px;
-		border-radius: 15px;
+    .modal-content {
+      padding: 25px 40px;
+      border-radius: 15px;
 
       @media (max-width: 767px) {
-		padding: 20px 15px;
-		bottom: 0px;
-		left: 0;
-		position: fixed;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
+        padding: 20px 15px;
+        bottom: 0px;
+        left: 0;
+        position: fixed;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
       }
 
       .block_modal_main {
@@ -4475,14 +4497,20 @@ select {
     }
 
     &.cms_faq {
-      padding: 35px 50px 50px;
-      word-break: break-word;
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: none;
+      padding: 0;
+
+      @include tab-view {
+        padding: 0;
+      }
 
       .block_top {
         text-align: center;
 
         h6 {
-          margin-bottom: 35px;
+          margin-bottom: 30px;
           line-height: 60px;
         }
       }
@@ -4521,8 +4549,12 @@ select {
 
             .card {
               width: 100%;
-              margin: 0 0 15px;
+              margin: 0 0 30px;
               border: none;
+
+              @include tab-view {
+                margin: 0 0 20px;
+              }
 
               .card-header {
                 padding: 0;
@@ -4531,15 +4563,19 @@ select {
 
                 .btn-link {
                   width: 100%;
-                  padding: 0 25px;
-                  font-size: 18px;
-                  color: $mid_gray_bg;
+                  padding: 0 25px 0 0;
+                  font-size: 20px;
+                  color: $text-black;
                   font-weight: 500;
-                  line-height: 21px;
+                  line-height: 26px;
                   text-align: left;
                   position: relative;
                   display: flex;
                   align-items: center;
+
+                  @include tab-view {
+                    font-size: 16px;
+                  }
 
                   &:hover {
                     text-decoration: none;
@@ -4549,19 +4585,19 @@ select {
                     text-decoration: none;
                   }
 
-                  &:before {
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    position: absolute;
-                    top: 7px;
-                    left: 0;
-                    content: "";
-                    background: $mid_gray_bg;
-                  }
-                  
-                  &[aria-expanded="false"]{
-                    &::after{
+                  // &:before {
+                  //   width: 8px;
+                  //   height: 8px;
+                  //   border-radius: 50%;
+                  //   position: absolute;
+                  //   top: 7px;
+                  //   left: 0;
+                  //   content: "";
+                  //   background: $mid_gray_bg;
+                  // }
+
+                  &[aria-expanded="false"] {
+                    &::after {
                       content: "";
                       //position: relative;
                       position: absolute;
@@ -4572,15 +4608,15 @@ select {
                       background-position: right;
                       background-repeat: no-repeat;
                       background-size: 12px;
-                      @include tab-view{
+                      @include tab-view {
                         position: absolute;
                         right: 0;
                         height: 12px;
                       }
                     }
                   }
-                  &[aria-expanded="true"]{
-                    &::after{
+                  &[aria-expanded="true"] {
+                    &::after {
                       content: "";
                       //position: relative;
                       position: absolute;
@@ -4591,7 +4627,7 @@ select {
                       background-position: right;
                       background-repeat: no-repeat;
                       background-size: 12px;
-                      @include tab-view{
+                      @include tab-view {
                         position: absolute;
                         right: 0;
                         height: 12px;
@@ -4614,19 +4650,23 @@ select {
               }
 
               .card-body {
-                padding: 15px 0 0 25px;
+                padding: 0;
                 font-size: 18px;
-                color: $grayed_border;
+                color: $text_grey_dark;
                 p {
                   font-size: 18px;
-                  color: $text-grey;
+                  color: $text_grey_dark;
                   font-weight: 400;
-                  line-height: 21px;
+                  line-height: 26px;
                   margin: 0 0 15px;
 
                   &:last-child {
                     margin: 0;
                   }
+                }
+
+                @include tab-view {
+                  font-size: 14px;
                 }
               }
             }
@@ -4640,68 +4680,28 @@ select {
       }
     }
   }
-  .about_page_cmn{
-    .block_cmspage_comman {
-      @include tab-view{
-        padding: 15px;
-      }
-    }
-    h3{
-			color: $blue-text;
-			font-size: 34px;
-			font-weight: 500;
-      margin-bottom: 20px;
-      @include tab-view{
-        font-size: 28px;
-      }
-    }
-    .detail_wpr{
-      display: flex;
-      margin-bottom: 30px;
-      @include tab-view{
-        span{
-          display: none;
-        }
-      }
-    }
-    .para_detail{
-      font-size: 18px;
-      color: $mid_gray_bg;
-      margin-bottom: 20px;
-      a{
-        color: $primary-color;
-        text-decoration: none;
-      }
-    }
-    h5{
-      color: $text-black;
-      font-size: 26px;
-      font-weight: 500;
-      margin-bottom: 15px;
-    }
-  }
 
-  &.block_covid_19{
-    h3{
-			color: $blue-text;
-			font-size: 34px;
-			font-weight: 500;
-			margin-bottom: 20px;
-		}
-    .block_cmspage_comman{
-      p{
+  &.block_covid_19 {
+    // h3 {
+    //   color: $blue-text;
+    //   font-size: 34px;
+    //   font-weight: 500;
+    //   margin-bottom: 20px;
+    // }
+    .block_cmspage_comman {
+      p {
         font-size: 18px;
-        &:first-child{
+        &:first-child {
           color: $mid_gray_bg;
         }
-        u{
+        u {
           text-decoration: none;
-          a{
+          a {
             color: $primary-color;
             text-decoration: none;
           }
         }
-        a{
+        a {
           color: $primary-color;
           text-decoration: none;
         }
@@ -4783,4 +4783,3 @@ body {
     }
   }
 }
-

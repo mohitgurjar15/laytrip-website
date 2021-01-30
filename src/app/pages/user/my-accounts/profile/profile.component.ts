@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
@@ -11,7 +11,6 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +23,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   submitted = false;
   loading = true;
-  @Output() loadingValue = new EventEmitter();
+  @Output() loadingValue = new EventEmitter<boolean>();
   countries: any = [];
   languages: any = [];
   currencies: any = [];
@@ -72,6 +71,7 @@ export class ProfileComponent implements OnInit {
     ) {}
  
   ngOnInit() {
+    this.loadingValue.emit(true);
     window.scroll(0,0);
     this.getCountry();
     this.getLanguages();
@@ -108,7 +108,10 @@ export class ProfileComponent implements OnInit {
         home_airport: [''],      
       }, { validator: phoneAndPhoneCodeValidation('adult') });
 
-         
+      if(!this.isFormControlEnable){
+        this.profileForm.controls['country_code'].disable() 
+      }
+      
       this.getProfileInfo(); 
   }
 
@@ -211,7 +214,7 @@ export class ProfileComponent implements OnInit {
 
   getProfileInfo() {
     this.userService.getProfile().subscribe((res:any)=> {
-      this.loadingValue.emit('false');   
+      this.loadingValue.emit(false);   
       this.image = res.profilePic;
       this.selectResponse = res;
 
@@ -253,9 +256,9 @@ export class ProfileComponent implements OnInit {
           passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '', 
           passport_number: res.passportNumber  
       });
-
+      
     }, (error: HttpErrorResponse) => {
-      this.loadingValue.emit('false');   
+      this.loadingValue.emit(false);   
       if (error.status === 401) {
          redirectToLogin();
       } else {
@@ -266,13 +269,13 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.loadingValue.emit('true');   
+    this.loadingValue.emit(true);   
     if(this.profileForm.controls.gender.errors && this.is_gender){
       this.profileForm.controls.gender.setValue(this.is_type);
     }
     if (this.profileForm.invalid) {
       this.submitted = true;      
-      this.loadingValue.emit('false');   
+      this.loadingValue.emit(false);   
       //scroll top if any error 
       let scrollToTop = window.setInterval(() => {
         let pos = window.pageYOffset;
@@ -291,9 +294,7 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic",imgfile);
       }
-      // console.log(this.profileForm.value.dob, moment(this.profileForm.value.dob).format('YYYY-MM-DD'))
-
-      // formdata.append("title",this.profileForm.value.title);
+      
       formdata.append("first_name",this.profileForm.value.first_name);
       formdata.append("last_name",this.profileForm.value.last_name);
       formdata.append("email",this.profileForm.value.email);      
@@ -302,48 +303,23 @@ export class ProfileComponent implements OnInit {
       formdata.append("phone_no",this.profileForm.value.phone_no);
       formdata.append("gender",this.is_type);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-      // formdata.append("city_name",this.profileForm.value.city_name);
-      // formdata.append("zip_code",this.profileForm.value.zip_code);
-      // formdata.append("address1",this.profileForm.value.address);
-      // formdata.append("passport_number",this.profileForm.value.passport_number);
-      // formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
-      /* if(typeof this.profileForm.value.country_id === 'string'){
-        if(this.selectResponse.country.id){
-          formdata.append("country_id", this.selectResponse.country.id);
-        } else {
-          formdata.append("country_id", this.location.country.id);
-        }
-      } else {
-        formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
-      } */
-
-      /* if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
-      } else{
-        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
-      } */
+      
       if(typeof(this.profileForm.value.country_code) === 'object'){     
         formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '' );
       } else {
         formdata.append("country_code", this.selectResponse.countryCode);
       } 
-      /* if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
-        formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id :'');        
-      } else {
-        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id :'');
-      }
-      if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
-        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
-      } else {
-        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
-      }*/         
+            
+      this.isFormControlEnable = false;
+      this.profileForm.controls['country_code'].disable()     
+
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         this.submitted = false; 
-        this.loadingValue.emit('false');   
+        this.loadingValue.emit(false);   
         localStorage.setItem("_lay_sess", data.token);
         this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
-        this.loadingValue.emit('false');   
+        this.loadingValue.emit(false);  
         this.submitted = false;
         this.toastr.error(error.error.message, 'Profile Error');
       });
@@ -352,5 +328,6 @@ export class ProfileComponent implements OnInit {
 
   enableFormControlInputs(event){
     this.isFormControlEnable = true;
+    this.profileForm.controls['country_code'].enable()     
   }
 }
