@@ -79,7 +79,7 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('ready', function (frame) {
-      Spreedly.setPlaceholder("number", "000 000 000 000 0000");
+      Spreedly.setPlaceholder("number", "0000 0000 0000 0000 0000");
       Spreedly.setPlaceholder("cvv", "CVV");
       Spreedly.setFieldType("cvv", "text");
       Spreedly.setFieldType('number', 'text');
@@ -91,24 +91,35 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('errors', function (errors) {
-      var messageEl = document.getElementById('errors');
-      var errorBorder = "1px solid red";
+      $(".credit_card_error").hide();
+      console.log("Error",errors)
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
-        if (error["attribute"]) {
+        /* if (error["attribute"]) {
           var masterFormElement = document.getElementById(error["attribute"]);
           if (masterFormElement) {
-            masterFormElement.style.border = errorBorder
+            console.log(error["attribute"],"error[]")
+            if(error["attribute"]=='month' || error["attribute"]=='year'){
+              $('.month_year_error').show();
+            }
+            $("#"+error["attribute"]).show();
           } else {
-            Spreedly.setStyle(error["attribute"], "border: " + errorBorder + ";");
+            console.log(error["attribute"],"att")
+            $("#"+error["attribute"]).hide();
           }
+        } */
+
+        if (error["attribute"]){
+          if(error["attribute"]=='month' || error["attribute"]=='year'){
+            $('.month_year_error').show();
+          }
+          $("#"+error["attribute"]).show();
         }
-        messageEl.innerHTML += error["message"] + "<br/>";
       }
     });
 
     Spreedly.on('fieldEvent', function (name, event, activeElement, inputData) {
-      if (event == 'input') {
+      /* if (event == 'input') {
         if (inputData["validCvv"]) {
           Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
           Spreedly.setStyle('cvv', "border: none;");
@@ -121,19 +132,21 @@ export class AddCardComponent implements OnInit {
         } else {
           Spreedly.setStyle('number', "background-color: #FFFFFF;");
         }
-      }
+      } */
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
       this.token = token;
-
+      $(".credit_card_error").hide();
+      console.log("pmData",pmData)
       let cardData = {
         card_type: pmData.card_type,
         card_holder_name: pmData.full_name,
         card_token: pmData.token,
-        card_last_digit: pmData.last_four_digits
+        card_last_digit: pmData.last_four_digits,
+        card_meta:pmData
       };
       $.ajax({
         url: `${environment.apiUrl}v1/payment`,
@@ -224,12 +237,11 @@ export class AddCardComponent implements OnInit {
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     for (var i = 0; i < paymentMethodFields.length; i++) {
-      // this.changeLoading.emit(true);
       var field = paymentMethodFields[i];
 
       // Reset existing styles (to clear previous errors)
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
-      fieldEl.style.border = normalBorder;
+      //fieldEl.style.border = normalBorder;
 
       // add value to options
       // options[field] = fieldEl.value;
@@ -250,11 +262,11 @@ export class AddCardComponent implements OnInit {
     }
 
     // Reset frame styles
-    Spreedly.setStyle('number', "border: " + normalBorder + ";");
-    Spreedly.setStyle('cvv', "border: " + normalBorder + ";");
+    //Spreedly.setStyle('number', "border: " + normalBorder + ";");
+    //Spreedly.setStyle('cvv', "border: " + normalBorder + ";");
 
     // Reset previous messages
-    document.getElementById('errors').innerHTML = "";
+    //document.getElementById('errors').innerHTML = "";
     document.getElementById('message').innerHTML = "";
 
     // Tokenize!

@@ -4606,6 +4606,7 @@ select {
                   &[aria-expanded="false"] {
                     &::after {
                       content: "";
+                      display: none;
                       //position: relative;
                       position: absolute;
                       right: 0;
@@ -4625,6 +4626,7 @@ select {
                   &[aria-expanded="true"] {
                     &::after {
                       content: "";
+                      display: none;
                       //position: relative;
                       position: absolute;
                       right: 0;

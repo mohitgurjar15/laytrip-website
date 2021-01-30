@@ -13,7 +13,7 @@
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
 	background-position: center center !important;
-	height: calc(100vh - 95px);
+	height: calc(100vh - 55px);
 	//padding-bottom: 130px;
 	z-index: 9;
 	@include tab-view {
@@ -39,13 +39,13 @@
 		// left: 0;
 		// transform: none;
 		// padding: 0;
-		position: absolute;
+		//position: absolute;
 		bottom: 0;
 		right: 0;
 		left: 0;
 		padding: 0;
-		transform: translate(0%, -10%);
-		@include tab-view{
+		transform: translate(0%, 28%);
+		@include ipad-view{
 			transform: translate(0%, 0%);
 			position: relative;
 			padding-top: 70px;
@@ -53,11 +53,31 @@
 
 		.banner_text {
 			width: auto;
-
+			.banner_text_span{
+				display: flex;
+				justify-content: flex-start;
+				line-height: 70px;
+				img{
+					max-width: 150px;
+					@include tab-view{
+						max-width: 110px;
+						max-height: 33px;
+					}
+				}
+				font-size: 50px;
+				color: $text-white;
+				font-weight: 400;
+				margin-right: 10px;
+				@include tab-view{
+					font-size: 27px;
+					line-height: 33px;
+				}
+			}
 			h2 {
 				font-size: 50px;
 				color: $text-white;
 				font-weight: 400;
+				margin-right: 10px;
 
 				span {
 					color: $primary-color;
@@ -66,7 +86,8 @@
 
 				@media(max-width: 767px) {
 					font-size: 30px;
-					padding: 0 15px;
+					padding: 0 0 0 15px;
+    				margin-right: 8px;
 				}
 
 				@media(max-width: 575px) {
@@ -94,7 +115,7 @@
 			padding: 70px 0 0;
 
 			@include tab-view {
-				padding: 10px 0 0;
+				padding: 45px 10px 10px;
 			}
 
 			.nav-tabs {
@@ -103,7 +124,7 @@
 				flex-wrap: nowrap;
 
 				@include tab-view {
-					padding: 0 15px;
+					//padding: 0 15px;
 				}
 				@media(max-width: 480px) {
 					display: inline-flex;

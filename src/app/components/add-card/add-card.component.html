@@ -8,10 +8,15 @@
                 <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Cardholder Name*</label>
                     <input type="text" id="full_name" class="form-control" placeholder="Name on Card">
+                    <div class="error">
+                        <small class="error_field credit_card_error" id="first_name" style="display:none">Please enter cardholder name.</small>
+                    </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Credit Card Number*</label>
-                    <div id="spreedly-number" class="iframe_wrapper">
+                    <div id="spreedly-number" class="iframe_wrapper"></div>
+                    <div class="error">
+                        <small class="error_field credit_card_error" id="number" style="display:none">Please enter valid credit card number.</small>
                     </div>
                 </div>
             </div>
@@ -22,11 +27,9 @@
                     <div class="cvv_wrapper">
                         <input type="text" class="spf-input-text spf-exp" id="month-year"
                             placeholder="MM/YYYY" [textMask]="dateYeaMask">
-                        <!-- <label class="spf-label-secondary" for="spf-exp-m">Month (MM)</label> -->
-                        <!-- <span class="spf-exp-divider">/</span>
-                        <input type="text" class="spf-input-text spf-exp" id="year" size="5" maxlength="4"
-                            placeholder="YYYY"> -->
-                        <!-- <label class="spf-label-secondary" for="spf-exp-y">Year (YYYY)</label> -->
+                    </div>
+                    <div class="error">
+                        <small class="error_field credit_card_error month_year_error"  style="display:none">Please enter valid expiry date.</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -43,7 +46,7 @@
                     </div>
                 </div>
                 <div id="message"></div>
-                <div id="errors"></div>
+                <!-- <div id="errors"></div> -->
             </div>
         </div>
     </div>

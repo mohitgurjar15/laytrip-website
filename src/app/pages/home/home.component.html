@@ -3,7 +3,10 @@
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
-                <h2 [innerHTML]="'flight_main_title' | translate"></h2>
+                <span class="banner_text_span">
+                    <h2 [innerHTML]="'flight_main_title' | translate"></h2>
+                    <img class="" src="{{s3BucketUrl}}assets/images/laytrips_white_logo.svg" alt="Flight Icon" />!
+                </span>
                 <p>{{'flight_second_title' | translate}}</p>
             </div>
 
@@ -22,28 +25,42 @@
 
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-selected="true" (click)="clickOnTab('flight')">
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/airplane_tab.svg" alt="Flight Icon" />
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/airplane-flying-inactive.svg" alt="Flight Icon" />
+                    <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab"
+                        aria-selected="true" (click)="clickOnTab('flight')">
+                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/airplane_tab.svg"
+                            alt="Flight Icon" />
+                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/airplane-flying-inactive.svg"
+                            alt="Flight Icon" />
                         <!-- <span>{{'flight' | translate}}</span> -->
                     </a>
-                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-selected="false" (click)="clickOnTab('hotel')">
+                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
+                        aria-selected="false" (click)="clickOnTab('hotel')">
                         <!-- data-toggle="tab" href="#hotel" -->
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/bed_active.svg" alt="Hotel Icon" />
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/bed_tab_inactive.svg" alt="Hotel Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-disabled.svg" alt="Flight Icon">
+                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/bed_tab_inactive.svg"
+                            alt="Hotel Icon" />
+                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/hotel-icon-disabled.svg"
+                            alt="Flight Icon">
                         <!-- <span>{{'hotel' | translate}}</span> -->
                     </a>
-                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/home_active.svg" alt="Accommodation Icon" />
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/home_inactive.svg" alt="Accommodation Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-disabled.svg" alt="Flight Icon">
+                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation"
+                        role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
+                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/home_active.svg"
+                            alt="Accommodation Icon" />
+                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/home_inactive.svg"
+                            alt="Accommodation Icon" />
+                        <img class="disabled-icon"
+                            src="{{s3BucketUrl}}assets/images/icon/accommodation-icon-disabled.svg" alt="Flight Icon">
                         <!-- <span>{{'home_rental' | translate}}</span> -->
                     </a>
-                    <a class="nav-item nav-link" style="pointer-events: none;" id="nav-accommodation" data-toggle="tab" href="#Car" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg" alt="car Icon" />
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg" alt="car Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg" alt="Flight Icon">
+                    <a class="nav-item nav-link" style="pointer-events: none;" id="nav-accommodation" data-toggle="tab"
+                        href="#Car" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
+                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg"
+                            alt="car Icon" />
+                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg"
+                            alt="car Icon" />
+                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg"
+                            alt="Flight Icon">
                         <!-- <span>{{'home_rental' | translate}}</span> -->
                     </a>
                 </div>
@@ -77,7 +94,7 @@
 <app-last-min-hotel-deal *ngIf="countryCode==='DR'"></app-last-min-hotel-deal>
 <app-partial-payment></app-partial-payment>
 
-<app-deal [dealList]="dealList" (toString)="setToString($event)" ></app-deal>
+<app-deal [dealList]="dealList" (toString)="setToString($event)"></app-deal>
 
 <!-- <app-user-benefit></app-user-benefit> -->
 
