@@ -1,27 +1,61 @@
+
 <section class="block_covid_19 block_cms_page_main">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12"  *ngIf="loading">
-        <div class="block_cmspage_comman cms_laytrip">
-          <div class="fb_animation pb-3 pt-3 mb-3">
+  <div class="page_topbanner">
+    <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="Banner Image">
+  </div>
+  <div class="block_cms_cnt">
+    <div class="container">
+      
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="page_back_link">
+            <a class="hover-link">< Back</a>
           </div>
-          <div class="fb_animation pb-1 pt-1 mb-3">
+          <div class="block_cmspage">
+            <h3>{{cmsData.title}}</h3>
+            <div class="col-lg-12"  *ngIf="loading">
+              <div class="">
+                <div class="fb_animation pb-3 pt-3 mb-3">
+                </div>
+                <div class="fb_animation pb-1 pt-1 mb-3">
+                </div>
+                <div class="fb_animation pb-5 pt-5 mb-3">
+                </div>
+                <div class="fb_animation pb-3 pt-3 mb-3">
+                </div>
+                <div class="fb_animation pb-3 pt-3 mb-3">
+                </div>
+                <div class="fb_animation pb-1 pt-1 mb-3">
+                </div>
+                <div class="fb_animation pb-5 pt-5">
+                </div>
+              </div>
+            </div>
+              <div *ngIf="!loading" [innerHtml]="cmsData.enContent"></div>
+              <!-- <div class="block_text">
+                <p>When you plan to travel, Laytrip suggests you research health and safety information provided by your government about COVID-19 suggested measures for global safety standards, document requirements and other guidelines. The following resources are helpful:</p>
+              </div>
+              <div class="block_text">
+                <h5>International Air Transport Association (IATA)</h5>
+                <p><a href="">https://www.iatatravelcentre.com/world.php</a></p>
+              </div>
+              <div class="block_text">
+                <h5>Centers for Disease Control and Prevention:</h5>
+                <p><a href="">https://www.cdc.gov/coronavirus/2019-ncov/travelers/index.html</a></p>
+              </div>
+              <div class="block_text">
+                <h5>World Health Organization</h5>
+                <p><a href="">https://www.who.int/</a></p>
+              </div>
+              <div class="block_text">
+                <h5>US Department of State</h5>
+                <p><a href="">https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html/</a></p>
+              </div>
+              <div class="block_text">
+                <p>January 26, 2021 CDC Requirement: If you plan to travel internationally, get tested before you travel by air into the United States (US), or be prepared to show proof of a recent positive viral test and a letter from your healthcare provider or a public health official stating that you were cleared to travel. On January 12, 2021, CDC issued an order requiring all air passengers arriving to the US from a foreign country to get tested no more than 3 days before their flight departs and to present the negative result or documentation of having recovered from COVID-19 to the airline before boarding the flight. This Order will go into effect at 12:01am EST (5:01am GMT) on January 26, 2021. For more information: <a href="">https://www.cdc.gov/coronavirus/2019-ncov/travelers/testing-international-air-travelers.html</a></p>
+              </div> -->
+            
           </div>
-          <div class="fb_animation pb-5 pt-5 mb-3">
-          </div>
-          <div class="fb_animation pb-3 pt-3 mb-3">
-          </div>
-          <div class="fb_animation pb-3 pt-3 mb-3">
-          </div>
-          <div class="fb_animation pb-1 pt-1 mb-3">
-          </div>
-          <div class="fb_animation pb-5 pt-5">
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-12">
-        <div class="block_cmspage_comman cms_laytrip">
-          <div *ngIf="!loading" [innerHtml]="cmsData.enContent"></div>
         </div>
       </div>
     </div>

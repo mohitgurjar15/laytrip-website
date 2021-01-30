@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 declare var $: any;
 
+
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
@@ -19,6 +20,7 @@ export class FaqComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    $('body').addClass('cms-bgColor');
     window.scroll(0,0);
     this.loadJquery();
     this.loading = true;
