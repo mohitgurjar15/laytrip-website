@@ -12,6 +12,7 @@ import { PagesComponent } from './pages.component';
 import { PartialPaymentComponent } from './partial-payment/partial-payment.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { SsoLoginComponent } from './sso-login/sso-login.component';
+import { TermsComponent } from './terms/terms.component';
 import { WhyLaytripComponent } from './why-laytrip/why-laytrip.component';
 
 const routes: Routes = [
@@ -78,6 +79,10 @@ const routes: Routes = [
             {
                 path: 'about',
                 component: AboutUsComponent
+            },
+            {
+                path: 'terms',
+                component: TermsComponent
             },
             {
                 path: 'pages',

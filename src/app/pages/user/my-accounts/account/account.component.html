@@ -1,4 +1,4 @@
-<app-laytrip-loader (loadingValue)="getLoadingValue($event)" [loading]="loading"></app-laytrip-loader>
+<app-laytrip-loader  [loading]="loading"></app-laytrip-loader>
 
 <section class="account_part">
     <div class="container">
@@ -7,7 +7,7 @@
                 <app-my-accounts-nav></app-my-accounts-nav>
             </div> -->
             <div class="col-lg-12">
-                <app-profile></app-profile>
+                <app-profile (loadingValue)="getLoadingValue($event)"></app-profile>
                 <div class="traveller_detail_wrpper">
                     <div class="title_bar">
                         <h3>Traveler Details</h3>
