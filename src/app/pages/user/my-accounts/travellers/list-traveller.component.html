@@ -129,7 +129,101 @@
         </div>
         <div id="collapseTrav" class="collapse show" data-parent="#trav_accordion">
             <div class="card-body">
-                aaa
+                <div [formGroupName]="x" class="common_form">
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-4 mb-sm-10 ">
+                            <label for="">First Name*</label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
+                            <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
+                                class="error">
+                                <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please
+                                    enter your
+                                    first name.</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <label for="">Last Name*</label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+                            <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
+                                class="error">
+                                <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please
+                                    enter your
+                                    last name.</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <label for="">Gender*</label>
+                            <select class="form-control" formControlName="gender">
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                            <!-- <div class="gender_anchers">
+                          <a href="javascript:void(0);">Male</a>
+                          <a href="javascript:void(0);">Female</a>
+                          <a href="javascript:void(0);">Other</a>
+                        </div> -->
+                            <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors"
+                                class="error">
+                                <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please
+                                    select your
+                                    gender.</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10"
+                            *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
+                            <label for="">Email*</label>
+                            <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                            <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors"
+                                class="error">
+                                <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter
+                                    your email
+                                    address.</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
+                            *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
+                            <label for="">Phone*</label>
+                            <span class="tel_span">
+                                <input type="text" class="form-control" placeholder="+00" maxlength="6"
+                                    formControlName="country_code">
+                                <!-- <ng-select [items]="countries" 
+                            bindLabel="phonecode" 
+                            bindValue="phonecode"
+                            formControlName="country_code"
+                            ></ng-select>-->
+                                <input type="text" class="form-control" placeholder="000000000" maxlength="10"
+                                    formControlName="phone_no">
+                            </span>
+                            <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
+                                class="error">
+                                <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please
+                                    enter
+                                    your telephone number.</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 dobs col-md-4 mb-sm-10">
+                            <label for="">Date of birth*</label>
+                            <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
+                            <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date"
+                                inputId="basic" formControlName="dob" [readonlyInput]="true" [yearNavigator]="true"
+                                [monthNavigator]="true"
+                                yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}"
+                                placeholder="Date of birth">
+                            </p-calendar>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type?.adults[x]?.passport_number">
+                            <label for="">Passport number</label>
+                            <input type="text" class="form-control" placeholder="Passport number"
+                                formControlName="passport_number">
+                        </div>
+                        <div class="col-sm-12 col-md-4 nation_wrps">
+                            <label for="">Nationality*</label>
+                            <!-- <input type="text" class="form-control" placeholder="Nationality" formControlName="country"> -->
+                            <ng-select [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
