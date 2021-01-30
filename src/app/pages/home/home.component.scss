@@ -39,12 +39,12 @@
 		// left: 0;
 		// transform: none;
 		// padding: 0;
-		position: absolute;
+		//position: absolute;
 		bottom: 0;
 		right: 0;
 		left: 0;
 		padding: 0;
-		transform: translate(0%, -20%);
+		transform: translate(0%, 28%);
 		@include ipad-view{
 			transform: translate(0%, 0%);
 			position: relative;
@@ -56,12 +56,21 @@
 			.banner_text_span{
 				display: flex;
 				justify-content: flex-start;
+				line-height: 70px;
 				img{
-					max-width: 170px;
+					max-width: 150px;
 					@include tab-view{
 						max-width: 110px;
 						max-height: 33px;
 					}
+				}
+				font-size: 50px;
+				color: $text-white;
+				font-weight: 400;
+				margin-right: 10px;
+				@include tab-view{
+					font-size: 27px;
+					line-height: 33px;
 				}
 			}
 			h2 {
