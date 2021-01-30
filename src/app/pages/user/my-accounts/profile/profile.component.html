@@ -202,9 +202,9 @@
                     <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
                  </ng-select>                  -->
                  <div class="gender_anchers">
-                    <a href="javascript:void(0);">Male</a>
-                    <a href="javascript:void(0);">Female</a>
-                    <a href="javascript:void(0);">Other</a>
+                    <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="clickGender($event,'M')">Male</a>
+                    <a [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="clickGender($event,'F')">Female</a>
+                    <a  [ngClass]="{'active': is_type == 'O'}" class="hover-link" (click)="clickGender($event,'O')">Other</a>
                   </div>
             </div>
             <!-- <div class="select_gender">

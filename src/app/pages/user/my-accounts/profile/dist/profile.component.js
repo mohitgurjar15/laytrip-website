@@ -53,10 +53,6 @@ var ProfileComponent = /** @class */ (function () {
             displayFormat: 'DD/MM/YYYY'
         };
         this.isFormControlEnable = false;
-        this.genders = [
-            { key: 'M', name: 'Male' },
-            { key: 'F', name: 'Female' },
-        ];
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -160,9 +156,14 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.clickGender = function (event, type) {
         this.is_gender = true;
-        this.is_type = 'M';
-        if (type == 'F') {
+        if (type == 'M') {
+            this.is_type = 'M';
+        }
+        else if (type == 'F') {
             this.is_type = 'F';
+        }
+        else if (type == 'O') {
+            this.is_type = 'O';
         }
     };
     ProfileComponent.prototype.onFileSelect = function (event) {

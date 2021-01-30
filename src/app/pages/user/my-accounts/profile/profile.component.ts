@@ -54,10 +54,7 @@ export class ProfileComponent implements OnInit {
     displayFormat: 'DD/MM/YYYY'
   };
   isFormControlEnable: boolean = false; 
-  genders = [
-    { key: 'M', name: 'Male' },
-    { key: 'F', name: 'Female' },
-  ];
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -180,9 +177,12 @@ export class ProfileComponent implements OnInit {
 
   clickGender(event,type){
     this.is_gender = true; 
-    this.is_type = 'M';      
-    if(type =='F'){
+    if(type =='M'){
+      this.is_type = 'M';        
+    }else if(type =='F'){
       this.is_type = 'F';        
+    } else if(type =='O'){
+      this.is_type = 'O';        
     } 
   }
 
