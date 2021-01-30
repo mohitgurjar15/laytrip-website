@@ -88,6 +88,7 @@ export class FlightPaymentComponent implements OnInit {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
+        cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         this.carts.push(cart);
         this.cartLoading = false;
