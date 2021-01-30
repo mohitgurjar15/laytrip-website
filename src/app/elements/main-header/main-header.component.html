@@ -129,13 +129,24 @@
                         <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' | translate}}</a></li>
                     </ul>
                 </div>
-                <div class="cart_section">
+                <div class="cart_section anchor-tag">
                     <span class="cart_i_wrapper">
                         <a (click)="redirectToPayment()">
-                            <img src="{{s3BucketUrl}}assets/images/icon/cart_beg.svg" alt="">
-                            <span class="cart_count" [hidden]="!cartItemsCount">{{cartItemsCount}}</span>
+                            <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="">
+                            <span class="cart_count"
+                                [hidden]="!cartItemsCount || !isLoggedIn">{{cartItemsCount}}</span>
                         </a>
                     </span>
+                </div>
+                <div class="nav-item cart_drop" *ngIf="isLoggedIn && cartItemsCount">
+                    <span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    </span>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0);" class="gryd_txt">Weekly</a></li>
+                        <li><a href="javascript:void(0);" class="bld_txt">$20.11</a></li>
+                        <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
+                        <li><a href="javascript:void(0);" class="bld_txt">$200.55</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
