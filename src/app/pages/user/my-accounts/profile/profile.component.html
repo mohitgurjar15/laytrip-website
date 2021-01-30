@@ -83,7 +83,7 @@
             <label>{{'email_small' | translate}}<sup>*</sup></label>
             <div class="text_field">
                 <input 
-                    [readonly]="!isFormControlEnable && selectResponse.email != '' && selectResponse.email !='undefined' "
+                    [readonly]="(!isFormControlEnable ) || (selectResponse.email != '' && selectResponse.email !='undefined') "
                     type="email" placeholder="{{'email_placeholder' | translate}}"
                     formControlName="email" tabindex="4">
                 <div class="error"
@@ -129,7 +129,7 @@
                     <div class="code">
                         <div class="dropdown">
                             <ng-select         
-                            [disabled]="!isFormControlEnable"
+                            
                              class="ng-customClass" tabindex="7" selectOnTab="true"
                                 [items]="countries_code" bindLabel="country_name"
                                 clearSearchOnAdd="true" formControlName="country_code"
@@ -161,7 +161,7 @@
 
                     </div>
                     <div class="number">
-                        <input type="text" [disabled]="!isFormControlEnable"  formControlName="phone_no" maxlength="10"
+                        <input type="text" [readonly]="!isFormControlEnable"  formControlName="phone_no" maxlength="10"
                             (keypress)="commonFunctoin.validateNumber($event)" tabindex="8"
                             placeholder="0000 0000 00">
                     </div>
@@ -202,14 +202,14 @@
                     <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
                  </ng-select>                  -->
                  <div class="gender_anchers">
-                    <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="clickGender($event,'M')">Male</a>
-                    <a [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="clickGender($event,'F')">Female</a>
-                    <a  [ngClass]="{'active': is_type == 'O'}" class="hover-link" (click)="clickGender($event,'O')">Other</a>
+                    <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="selectGender($event,'M')">Male</a>
+                    <a [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="selectGender($event,'F')">Female</a>
+                    <a  [ngClass]="{'active': is_type == 'O'}" class="hover-link" (click)="selectGender($event,'O')">Other</a>
                   </div>
             </div>
             <!-- <div class="select_gender">
                 <ul>
-                    <li>
+                    <li> 
                         <a class="hover-link" (click)="clickGender($event,'M')"
                             [ngClass]="{'active_gender': is_type == 'M'}">
                             <div class="gender_type">

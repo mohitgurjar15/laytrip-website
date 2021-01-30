@@ -154,7 +154,7 @@ var ProfileComponent = /** @class */ (function () {
             }
         });
     };
-    ProfileComponent.prototype.clickGender = function (event, type) {
+    ProfileComponent.prototype.selectGender = function (event, type) {
         this.is_gender = true;
         if (type == 'M') {
             this.is_type = 'M';
@@ -193,11 +193,11 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
+            console.log(res);
             _this.loadingValue.emit(false);
             _this.image = res.profilePic;
             _this.selectResponse = res;
             _this.is_type = res.gender ? res.gender : 'M';
-            _this.seletedDob = moment(res.dob).format("MMM d, yy");
             if (typeof _this.location != 'undefined' || typeof res.country.id != 'undefined') {
                 var country = res.country.id ? res.country : _this.location.country;
                 if (typeof country != 'undefined')
@@ -214,6 +214,8 @@ var ProfileComponent = /** @class */ (function () {
             if (typeof _this.location != 'undefined') {
                 countryName = _this.location.country.name;
             }
+            // console.log(res.dob)
+            // console.log(moment(res.dob).format('MMM d, yy'))
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -221,7 +223,7 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
-                dob: res.dob ? moment(res.dob).format('MMM d, yy') : '',
+                dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? moment(res.dob).format('MMM d, yy') : '',
                 country_code: countryCode,
                 phone_no: res.phoneNo,
                 country_id: res.country.name ? res.country.name : countryName,
@@ -273,6 +275,7 @@ var ProfileComponent = /** @class */ (function () {
                 imgfile = this.imageFile;
                 formdata.append("profile_pic", imgfile);
             }
+            formdata.append("title", 'mr');
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);

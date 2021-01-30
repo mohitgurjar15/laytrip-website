@@ -14496,6 +14496,7 @@ select:focus {
 }
 .block_cms_page_main .block_cmspage_comman.cms_faq .block_faq_info .block_text .accordion .card .card-header .btn-link[aria-expanded=false]::after {
   content: "";
+  display: none;
   position: absolute;
   right: 0;
   padding: 5px 9px;
@@ -14514,6 +14515,7 @@ select:focus {
 }
 .block_cms_page_main .block_cmspage_comman.cms_faq .block_faq_info .block_text .accordion .card .card-header .btn-link[aria-expanded=true]::after {
   content: "";
+  display: none;
   position: absolute;
   right: 0;
   padding: 5px 9px;
