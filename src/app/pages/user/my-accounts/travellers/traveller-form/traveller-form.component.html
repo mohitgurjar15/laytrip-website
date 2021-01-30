@@ -1,4 +1,4 @@
-<div class="modal-header">
+<!-- <div class="modal-header">
     <div class="block_title">
         <h5>{{ travellerId ? ('edit_co_traveler' | translate) : ('add_co_traveler' | translate)}}</h5>
     </div>
@@ -8,34 +8,7 @@
 </div>
 <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
     <div class="modal-body">
-
         <div class="add_card_form">
-
-            <!-- <div class="form_row">
-                <div class="form_field">
-                    <label>Title<sup>*</sup></label>
-                    <ul class="custom_listing">
-                        <li>
-                            <label class="custom_radio">Mr.
-                                <input type="radio" checked="checked" formControlName="title" value="mr" tabindex="0">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="custom_radio">Ms.
-                                <input type="radio" formControlName="title" value="ms" tabindex="-1">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="custom_radio">Mrs.
-                                <input type="radio" formControlName="title" value="mrs" tabindex="-1">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
             <div class="form_row">
                 <div class="form_field">
                     <label>{{'gender' | translate}}<sup>*</sup></label>
@@ -66,10 +39,7 @@
                             <div *ngIf="coAccountForm.controls.firstName.errors.required" class="error_text">
                                 {{'first_name_touched_validation' | translate}}
                             </div>
-
-                            <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
-                                    <p class="error_text">Please enter valid first name </p>
-                                </div> -->
+                        
                             <div *ngIf="coAccountForm.controls.firstName.errors.pattern" class="error_text">
                                 {{'first_name_string_validation' | translate}}</div>
                         </div>
@@ -218,6 +188,94 @@
         <div class="form_btn">
             <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                 {{ travellerId ? ('update_traveler' | translate) : ('add_traveler' | translate) }} </button>
+        </div>
+    </div>
+</form>
+ -->
+ <form >
+    <div class="common_form">
+        <div class="form-row">
+            <!-- <div class="col-sm-12 col-md-4 mb-sm-10 ">
+                <label for="">First Name*</label>
+                <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
+                <div *ngIf="coAccountForm.controls.firstName.touched && coAccountForm.controls.firstName.errors"
+                    class="error">
+                    <small *ngIf="coAccountForm.controls.firstName.errors.required" class="error_field">Please
+                        enter your
+                        first name.</small>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mb-sm-10">
+                <label for="">Last Name*</label>
+                <input type="text" class="form-control" placeholder="Name" formControlName="lastName">
+                <div *ngIf="coAccountForm.controls.lastName.touched && coAccountForm.controls.lastName.errors"
+                    class="error">
+                    <small *ngIf="coAccountForm.controls.lastName.errors.required" class="error_field">Please
+                        enter your
+                        last name.</small>
+                </div>
+            </div>
+             <div class="col-sm-12 col-md-4 mb-sm-10">
+                <label for="">Gender*</label>
+                <select class="form-control" formControlName="gender">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            
+                <div *ngIf="coAccountForm.controls.gender.touched && coAccountForm.controls.gender.errors"
+                    class="error">
+                    <small *ngIf="coAccountForm.controls.gender.errors.required" class="error_field">Please
+                        select your
+                        gender.</small>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mb-sm-10"
+                *ngIf="coAccountForm.controls.type.value=='' || coAccountForm.controls.type.value=='adult'">
+                <label for="">Email*</label>
+                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                <div *ngIf="coAccountForm.controls.email.touched && coAccountForm.controls.email.errors"
+                    class="error">
+                    <small *ngIf="coAccountForm.controls.email.errors.required" class="error_field">Please enter
+                        your email
+                        address.</small>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
+                *ngIf="coAccountForm.controls.type.value=='' || coAccountForm.controls.type.value=='adult'">
+                <label for="">Phone*</label>
+                <span class="tel_span">
+                    <input type="text" class="form-control" placeholder="+00" maxlength="6"
+                        formControlName="country_code">
+                    
+                    <input type="text" class="form-control" placeholder="000000000" maxlength="10"
+                        formControlName="phone_no">
+                </span>
+                <div *ngIf="coAccountForm.controls.phone_no.touched && coAccountForm.controls.phone_no.errors"
+                    class="error">
+                    <small *ngIf="coAccountForm.controls.phone_no.errors.required" class="error_field">Please
+                        enter
+                        your telephone number.</small>
+                </div>
+            </div> -->
+            <!-- <div class="col-sm-12 dobs col-md-4 mb-sm-10">
+                <label for="">Date of birth*</label>
+                <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date"
+                    inputId="basic" formControlName="dob" [readonlyInput]="true" [yearNavigator]="true"
+                    [monthNavigator]="true"
+                    yearRange="{{coAccountForm.controls.dobMinDate.value.getFullYear()}}:{{coAccountForm.controls.dobMaxDate.value.getFullYear()}}"
+                    placeholder="Date of birth">
+                </p-calendar>
+            </div> -->
+            <!--<div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type?.adults[x]?.passport_number">
+                <label for="">Passport number</label>
+                <input type="text" class="form-control" placeholder="Passport number"
+                    formControlName="passport_number">
+            </div>
+            <div class="col-sm-12 col-md-4 nation_wrps">
+                <label for="">Nationality*</label>
+                <ng-select [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
+                </ng-select>
+            </div> -->
         </div>
     </div>
 </form>

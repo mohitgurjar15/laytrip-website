@@ -8,12 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.TravellerFormComponent = void 0;
 var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
-var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
-    function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, activeModal, toastr, cookieService) {
+    function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, activeModal, toastr, cookieService, travelerService) {
         this.formBuilder = formBuilder;
         this.genericService = genericService;
         this.router = router;
@@ -23,6 +21,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.activeModal = activeModal;
         this.toastr = toastr;
         this.cookieService = cookieService;
+        this.travelerService = travelerService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelersChanges = new core_1.EventEmitter();
         this.countries = [];
@@ -55,22 +54,22 @@ var TravellerFormComponent = /** @class */ (function () {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
         this.coAccountForm = this.formBuilder.group({
-            // title: ['mr'],
-            gender: ['M'],
-            firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            phone_no: ['', [forms_1.Validators.required]],
-            country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
-            country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
-            dob: ['', forms_1.Validators.required],
-            passport_expiry: [''],
-            passport_number: [''],
-            user_type: ['']
-        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
+        // title: ['mr'],
+        // gender: ['M'],
+        // firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+        // lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+        // email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+        // phone_no: ['', [Validators.required]],
+        // country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
+        // country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
+        // dob: ['', Validators.required],
+        // passport_expiry: [''],
+        // passport_number: [''],
+        // user_type: ['']
+        });
         this.setUserTypeValidation();
         if (this.travellerId) {
-            this.setTravelerForm();
+            // this.setTravelerForm();
         }
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
@@ -190,7 +189,7 @@ var TravellerFormComponent = /** @class */ (function () {
             var emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
             if (this.travellerId) {
                 jsonData = Object.assign(jsonData, emailObj);
-                this.flightService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
+                this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
                     _this.travelersChanges.emit(data);
                     _this.activeModal.close();
                 }, function (error) {
@@ -203,7 +202,7 @@ var TravellerFormComponent = /** @class */ (function () {
             }
             else {
                 jsonData = Object.assign(jsonData, emailObj);
-                this.flightService.addAdult(jsonData).subscribe(function (data) {
+                this.travelerService.addAdult(jsonData).subscribe(function (data) {
                     _this.travelersChanges.emit(data);
                     _this.activeModal.close();
                 }, function (error) {

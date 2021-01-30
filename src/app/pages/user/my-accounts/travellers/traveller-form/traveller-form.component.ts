@@ -78,23 +78,23 @@ export class TravellerFormComponent implements OnInit {
 
     this.coAccountForm = this.formBuilder.group({
       // title: ['mr'],
-      gender: ['M'],
-      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      phone_no: ['', [Validators.required]],
-      country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
-      country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
-      dob: ['', Validators.required],
-      passport_expiry: [''],
-      passport_number: [''],
-      user_type: ['']
-    }, { validator: phoneAndPhoneCodeValidation('adult') });
+      // gender: ['M'],
+      // firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      // lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      // email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      // phone_no: ['', [Validators.required]],
+      // country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
+      // country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
+      // dob: ['', Validators.required],
+      // passport_expiry: [''],
+      // passport_number: [''],
+      // user_type: ['']
+    });
 
     this.setUserTypeValidation();
 
     if (this.travellerId) {
-      this.setTravelerForm();
+      // this.setTravelerForm();
     }
   }
 
