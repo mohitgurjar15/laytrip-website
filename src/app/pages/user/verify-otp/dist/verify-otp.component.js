@@ -44,7 +44,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.isResend = false;
         this.otp = 0;
         this.configCountDown = { leftTime: 60, demand: false };
-        this.isTimerEnable = false;
+        this.isTimerEnable = true;
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         var _this = this;

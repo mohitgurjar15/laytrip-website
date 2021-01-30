@@ -70,7 +70,7 @@
         </div>
     </div>
 </div> -->
-<div class="modal fade comman_modal" id="sign_up_modal" data-backdrop="static" data-keyboard="false" >
+<div class="modal fade comman_modal signup_modal" id="sign_up_modal" data-backdrop="static" data-keyboard="false" >
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="sign_in_modal">
@@ -156,7 +156,7 @@
                                     <span class="checkmark"></span>  
                                 </label>
                                 <div>
-                                    {{'already_account' | translate }} <a href="javascript:void(0);">{{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a href="javascript:void(0);">{{'privacy_and_policy' | translate }}</a>
+                                    {{'already_account' | translate }} <a class="hover-link"> {{'term_and_condition' | translate }}</a> {{'and_the' | translate }} <a class="hover-link">{{'privacy_and_policy' | translate }}</a>
                                 </div>
                             </div>
                             <div *ngIf="(submitted || signupForm.controls.checked.touched) && !this.iAccept" class="error_text">
@@ -171,7 +171,7 @@
                             </div>
                         </div> 
                         <div class="form_btn">
-                            <button type="submit" [disabled]="(!signupForm.valid || !this.iAccept || !isCaptchaValidated || emailExist)" [ngClass]="{'btn_disable':(!signupForm.valid || !this.iAccept || !isCaptchaValidated)}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
+                            <button type="submit" [disabled]="(!signupForm.valid || !this.iAccept || !isCaptchaValidated || emailExist)" [ngClass]="{'btn_disable':(!signupForm.valid || !this.iAccept || !isCaptchaValidated || emailExist)}"  class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
                             </button>
                         </div>

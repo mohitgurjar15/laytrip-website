@@ -48,7 +48,7 @@ export class VerifyOtpComponent implements OnInit {
   @ViewChild('countdown',{static:false}) counter: CountdownComponent;
   otp:number=0;  
   configCountDown : any = {leftTime: 60,demand: false};
-  isTimerEnable = false;
+  isTimerEnable = true;
 
   constructor(
     public modalService: NgbModal,

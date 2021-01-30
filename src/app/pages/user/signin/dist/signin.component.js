@@ -122,7 +122,11 @@ var SigninComponent = /** @class */ (function () {
         modalRef.componentInstance.isUserNotVerify = true;
     };
     SigninComponent.prototype.openForgotPassModal = function () {
+        var _this = this;
         $('#sign_in_modal').modal('hide');
+        setTimeout(function () {
+            _this.renderer.addClass(document.body, 'modal-open');
+        }, 1500);
         this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, { windowClass: 'forgot_window', centered: true, backdrop: 'static',
             keyboard: false
         });

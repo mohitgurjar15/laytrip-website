@@ -92,21 +92,25 @@ export class TravelerFormComponent implements OnInit {
     this.patch();
 
     this.travelerForm.valueChanges.subscribe(value=>{
+
       if(typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number]!=='undefined'){
-        console.log("dob",moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD"))
+        console.log("dob",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.first_name,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status)
         if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status=='VALID'){
 
           let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
           data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD")
-          if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId){
+          let userId=this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId;
+          if(userId){
             //Edit
+            this.travelerService.updateAdult(data,userId).subscribe(traveler=>{
+
+            })
           }
           else{
             //Add
             this.travelerService.addAdult(data).subscribe((traveler:any)=>{
-              console.log("New Traveler=>>>",traveler)
               this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].userId=traveler.userId;
-              this.patch();
+              console.log("New Traveler=>>>",this.travelers)
               this.checkOutService.setTravelers([...this.myTravelers,traveler])
             },error=>{
 
@@ -156,20 +160,36 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patchValues(x) {
-    return this.formBuilder.group({
-      first_name: [x.first_name,[Validators.required]],
-      last_name: [x.last_name,[Validators.required]],
-      email: [x.email,[Validators.required]],
-      phone_no: [x.phone_no,[Validators.required]],
-      country_code: [x.country_code,[Validators.required]],
-      dob: [x.dob,[Validators.required]],
-      country_id:[x.country_id,[Validators.required]],
-      gender:[x.gender,[Validators.required]],
-      userId:[x.userId],
-      type:[x.type],
-      dobMinDate:[x.dobMinDate],
-      dobMaxDate:[x.dobMaxDate]
-    },{updateOn: 'blur'})
+    if(x.type=='adult'){
+
+      return this.formBuilder.group({
+        first_name: [x.first_name,[Validators.required]],
+        last_name: [x.last_name,[Validators.required]],
+        email: [x.email,[Validators.required]],
+        phone_no: [x.phone_no,[Validators.required]],
+        country_code: [x.country_code,[Validators.required]],
+        dob: [x.dob,[Validators.required]],
+        country_id:[x.country_id,[Validators.required]],
+        gender:[x.gender,[Validators.required]],
+        userId:[x.userId],
+        type:[x.type],
+        dobMinDate:[x.dobMinDate],
+        dobMaxDate:[x.dobMaxDate]
+      },{updateOn: 'blur'})
+    }
+    else{
+      return this.formBuilder.group({
+        first_name: [x.first_name,[Validators.required]],
+        last_name: [x.last_name,[Validators.required]],
+        dob: [x.dob,[Validators.required]],
+        country_id:[x.country_id,[Validators.required]],
+        gender:[x.gender,[Validators.required]],
+        userId:[x.userId],
+        type:[x.type],
+        dobMinDate:[x.dobMinDate],
+        dobMaxDate:[x.dobMaxDate]
+      },{updateOn: 'blur'})
+    }
   }
 
   submit(value){

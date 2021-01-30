@@ -27,7 +27,7 @@
                   </a>
                 </button>
               </div>
-              <app-my-traveler travelerId={{traveler.controls.userId.value}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler travelerId={{travelers.type0.adults[traveler_number].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -51,15 +51,15 @@
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Gender*</label>
-                    <!-- <select class="form-control" formControlName="gender">
+                    <select class="form-control" formControlName="gender">
                       <option value="M">Male</option>
                       <option value="F">Female</option>
-                    </select> -->
-                    <div class="gender_anchers">
+                    </select>
+                    <!-- <div class="gender_anchers">
                       <a href="javascript:void(0);">Male</a>
                       <a href="javascript:void(0);">Female</a>
                       <a href="javascript:void(0);">Other</a>
-                    </div>
+                    </div> -->
                     <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                       <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your
                         gender.</small>
@@ -74,17 +74,16 @@
                         address.</small>
                     </div>
                   </div>
-                  <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps">
+                  <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps" *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                     <label for="">Phone*</label>
                     <span class="tel_span">
-                      <!-- <input type="text" class="form-control" placeholder="+00" maxlength="4"
-                        formControlName="phone_number"> -->
-                        <ng-select [items]="countries" 
+                      <input type="text" class="form-control" placeholder="+00" maxlength="6"
+                        formControlName="country_code">
+                        <!-- <ng-select [items]="countries" 
                         bindLabel="phonecode" 
                         bindValue="phonecode"
                         formControlName="country_code"
-                        >
-                      </ng-select>
+                        ></ng-select>-->
                       <input type="text" class="form-control" placeholder="000000000" maxlength="10"
                         formControlName="phone_no">
                     </span>

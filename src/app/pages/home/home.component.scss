@@ -8,7 +8,8 @@
 .home_banner {
 	width: 100%;
 	position: relative;
-	background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/flight-tab-new-bg.svg) !important;
+	//background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/flight-tab-new-bg.svg) !important;
+	background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
 	background-position: center center !important;
@@ -43,7 +44,7 @@
 		right: 0;
 		left: 0;
 		padding: 0;
-		transform: translate(0%, 4%);
+		transform: translate(0%, -10%);
 		@include tab-view{
 			transform: translate(0%, 0%);
 			position: relative;
@@ -90,7 +91,7 @@
 
 		.banner_tab {
 			width: 100%;
-			padding: 140px 0 0;
+			padding: 70px 0 0;
 
 			@include tab-view {
 				padding: 10px 0 0;

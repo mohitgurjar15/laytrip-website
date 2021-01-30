@@ -23,25 +23,18 @@ var ShareSocialMediaComponent = /** @class */ (function () {
         this.activeModal.close({ STATUS: confirmation_modal_component_1.MODAL_TYPE.CLOSE });
     };
     ShareSocialMediaComponent.prototype.share = function (media) {
-        if (media == 'Pinterest') {
-            window.open('http://www.pinterest.com/pin/create/button/?url=' + encodeURIComponent(environment_1.environment.siteUrl) + '&media=' + encodeURIComponent('http://d2q1prebf1m2s9.cloudfront.net/assets/images/dr_logo.svg') + '&description=' + encodeURIComponent('Book now, pay in installments. Making travel affordable to all.'));
-        }
-        else if (media == 'Twitter') {
-            window.open("https://twitter.com/intent/tweet?original_referer=" + environment_1.environment.siteUrl + "&url=" + environment_1.environment.siteUrl + "&text=Book now, pay in installments. Making travel affordable to all.");
+        var message = encodeURIComponent('Welcome to Laytrip click here to visit our portal : ' + environment_1.environment.siteUrl);
+        if (media == 'Instagram') {
+            window.open('https://www.instagram.com/p/CKlezHrJt6R/?utm_source=ig_embed&amp;utm_campaign=loading');
         }
         else if (media == 'Facebook') {
-            window.open("https://www.facebook.com/sharer/sharer.php?u=" + escape(environment_1.environment.siteUrl) + "&t=" + escape('Book now, pay in installments. Making travel affordable to all'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=textyes,height=300,width=600');
-        }
-        else if (media == 'Google') {
-            window.open("https://plus.google.com/share?url=" + environment_1.environment.siteUrl + ",\"\",\"height=550,width=525,left=100,top=100,menubar=0");
+            window.open("https://www.facebook.com/sharer/sharer.php?u=" + escape(environment_1.environment.siteUrl) + "&t=" + escape(message), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=textyes,height=300,width=600');
         }
         else if (media == 'Whatapp') {
-            var message = encodeURIComponent('Laytrip');
-            var whatsapp_url = "whatsapp://send?text=" + message;
-            window.location.href = whatsapp_url;
+            var whatsapp_url = "https://api.whatsapp.com/send?text=" + message;
+            window.open(whatsapp_url);
         }
         else if (media == 'CopiedLink') {
-            // console.log('here')
             var url = environment_1.environment.siteUrl;
             this.isCopyText = true;
             url.select();

@@ -84,7 +84,8 @@ export class SignupComponent implements OnInit {
   }
     
   onSubmit() {
-
+    this.openOtpPage();
+    return;
 
     this.submitted = this.loading  = true;   
     if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept ) {

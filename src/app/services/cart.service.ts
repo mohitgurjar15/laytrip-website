@@ -17,6 +17,9 @@ export class CartService {
   private cartNumber = new BehaviorSubject(0)
   getSelectedCart = this.cartNumber.asObservable();
 
+  private cartId = new BehaviorSubject(0)
+  getCardId = this.cartId.asObservable();
+
   private cartTravelers = new BehaviorSubject({
     type0 : {
       adults : []
@@ -81,6 +84,10 @@ export class CartService {
 
   setCardNumber(cartNumber){
     this.cartNumber.next(cartNumber)
+  }
+
+  setCardId(cartId){
+    this.cartId.next(cartId)
   }
 
   setCartTravelers(travelers){

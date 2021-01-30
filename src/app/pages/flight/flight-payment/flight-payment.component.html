@@ -1,8 +1,7 @@
-<ngx-spinner type="ball-clip-rotate">
-</ngx-spinner>
+<app-laytrip-loader [loading]="loading"></app-laytrip-loader>
 <app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
 <section class="payment_mode_main_wrapper flight">
-    <div class="container">
+    <div class="container" *ngIf="!isCartEmpty">
         <form>
             <div class="row">
                 <div class="col-lg-7">
@@ -22,7 +21,7 @@
                                 </div>
                                 <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                     <div class="card-body">
-                                        <app-add-card (changeLoading)="changeLoading($event)"></app-add-card>
+                                        <app-add-card></app-add-card>
                                     </div>
                                 </div>
                                 <app-card-list></app-card-list>
@@ -59,5 +58,5 @@
             </div>
         </form>
     </div>
-    <app-empty-cart></app-empty-cart>
+    <app-empty-cart *ngIf="isCartEmpty"></app-empty-cart>
 </section>

@@ -42,7 +42,7 @@ var ResetPasswordComponent = /** @class */ (function () {
         };
         this.configCountDown = { leftTime: 60, demand: false };
         this.otpLengthError = false;
-        this.isTimerEnable = false;
+        this.isTimerEnable = true;
     }
     ResetPasswordComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -55,7 +55,7 @@ var ResetPasswordComponent = /** @class */ (function () {
         });
         setTimeout(function () {
             _this.isResend = true;
-        }, 5000);
+        }, 60000);
     };
     ResetPasswordComponent.prototype.openSignInPage = function () {
         this.activeModal.close();
