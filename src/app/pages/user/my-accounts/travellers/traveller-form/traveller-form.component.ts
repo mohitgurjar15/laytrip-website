@@ -12,8 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
-import { phoneAndPhoneCodeValidation, WhiteSpaceValidator } from '../../../../../_helpers/custom.validators';
-import { TravelerService } from 'src/app/services/traveler.service';
+import { TravelerService } from '../../../../../services/traveler.service';
 
 @Component({
   selector: 'app-traveller-form',
@@ -29,7 +28,7 @@ export class TravellerFormComponent implements OnInit {
   @Input() countries = [];
   @Input() countries_code = [];
 
-  coAccountForm: FormGroup;
+  travellerForm: FormGroup;
   traveller: any = [];
   isLoggedIn: boolean = false;
   submitted = false;
@@ -76,12 +75,12 @@ export class TravellerFormComponent implements OnInit {
       countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
     }
 
-    this.coAccountForm = this.formBuilder.group({
+    this.travellerForm = this.formBuilder.group({
       // title: ['mr'],
-      // gender: ['M'],
+      gender: ['M'],
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      // lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      // email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       // phone_no: ['', [Validators.required]],
       // country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
       // country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
@@ -107,7 +106,7 @@ export class TravellerFormComponent implements OnInit {
       countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
     }
 
-    this.coAccountForm.patchValue({
+    this.travellerForm.patchValue({
       // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
       firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
       lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
@@ -155,10 +154,10 @@ export class TravellerFormComponent implements OnInit {
 
   setUserTypeValidation() {
 
-    const emailControl = this.coAccountForm.get('email');
-    const phoneControl = this.coAccountForm.get('phone_no');
-    const countryControl = this.coAccountForm.get('country_code');
-    const passport_expiryControl = this.coAccountForm.get('passport_expiry');
+    const emailControl = this.travellerForm.get('email');
+    const phoneControl = this.travellerForm.get('phone_no');
+    const countryControl = this.travellerForm.get('country_code');
+    const passport_expiryControl = this.travellerForm.get('passport_expiry');
 
     this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
     this.dobMaxDate = new Date(moment().format("MM/DD/YYYY"));
@@ -178,13 +177,13 @@ export class TravellerFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = this.loading = true;
-    if (this.coAccountForm.invalid) {
+    if (this.travellerForm.invalid) {
       this.submitted = true;
       this.loading = false;
       return;
     } else {
 
-      let country_id = this.coAccountForm.value.country_id.id;
+      let country_id = this.travellerForm.value.country_id.id;
       if (!Number(country_id)) {
         if (this.traveller.country) {
           country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
@@ -192,7 +191,7 @@ export class TravellerFormComponent implements OnInit {
           country_id = this.location.country.id;
         }
       }
-      let country_code = this.coAccountForm.value.country_code;
+      let country_code = this.travellerForm.value.country_code;
       if (typeof country_code == 'object') {
         country_code = country_code.id ? country_code.id : this.location.country.id;
       } else if (typeof country_code == 'string') {
@@ -202,18 +201,18 @@ export class TravellerFormComponent implements OnInit {
       }
 
       let jsonData = {
-        // title: this.coAccountForm.value.title,
-        first_name: this.coAccountForm.value.firstName,
-        last_name: this.coAccountForm.value.lastName,
-        dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),
-        gender: this.coAccountForm.value.gender,
+        // title: this.travellerForm.value.title,
+        first_name: this.travellerForm.value.firstName,
+        last_name: this.travellerForm.value.lastName,
+        dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.travellerForm.value.dob, '/')).format('YYYY-MM-DD'),
+        gender: this.travellerForm.value.gender,
         country_id: country_id ? country_id : '',
-        passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : null,
-        passport_number: this.coAccountForm.value.passport_number,
+        passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
+        passport_number: this.travellerForm.value.passport_number,
         country_code: country_code ? country_code : this.location.country.id,
-        phone_no: this.coAccountForm.value.phone_no,
+        phone_no: this.travellerForm.value.phone_no,
       };
-      let emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
+      let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
 
       if (this.travellerId) {
         jsonData = Object.assign(jsonData, emailObj);

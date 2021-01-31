@@ -54,10 +54,12 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.location) {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
-        this.coAccountForm = this.formBuilder.group({
+        this.travellerForm = this.formBuilder.group({
             // title: ['mr'],
-            // gender: ['M'],
-            firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]]
+            gender: ['M'],
+            firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]]
         });
         // this.setUserTypeValidation();
         if (this.travellerId) {
@@ -74,7 +76,7 @@ var TravellerFormComponent = /** @class */ (function () {
         else {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
-        this.coAccountForm.patchValue({
+        this.travellerForm.patchValue({
             // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
             firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
             lastName: this.travelerInfo.lastName ? this.travelerInfo.lastName : '',
@@ -121,10 +123,10 @@ var TravellerFormComponent = /** @class */ (function () {
         this.activeModal.close();
     };
     TravellerFormComponent.prototype.setUserTypeValidation = function () {
-        var emailControl = this.coAccountForm.get('email');
-        var phoneControl = this.coAccountForm.get('phone_no');
-        var countryControl = this.coAccountForm.get('country_code');
-        var passport_expiryControl = this.coAccountForm.get('passport_expiry');
+        var emailControl = this.travellerForm.get('email');
+        var phoneControl = this.travellerForm.get('phone_no');
+        var countryControl = this.travellerForm.get('country_code');
+        var passport_expiryControl = this.travellerForm.get('passport_expiry');
         this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
         this.dobMaxDate = new Date(moment().format("MM/DD/YYYY"));
         this.minyear = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
@@ -141,13 +143,13 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = this.loading = true;
-        if (this.coAccountForm.invalid) {
+        if (this.travellerForm.invalid) {
             this.submitted = true;
             this.loading = false;
             return;
         }
         else {
-            var country_id = this.coAccountForm.value.country_id.id;
+            var country_id = this.travellerForm.value.country_id.id;
             if (!Number(country_id)) {
                 if (this.traveller.country) {
                     country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
@@ -156,7 +158,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     country_id = this.location.country.id;
                 }
             }
-            var country_code = this.coAccountForm.value.country_code;
+            var country_code = this.travellerForm.value.country_code;
             if (typeof country_code == 'object') {
                 country_code = country_code.id ? country_code.id : this.location.country.id;
             }
@@ -167,18 +169,18 @@ var TravellerFormComponent = /** @class */ (function () {
                 country_code = this.location.country.id;
             }
             var jsonData = {
-                // title: this.coAccountForm.value.title,
-                first_name: this.coAccountForm.value.firstName,
-                last_name: this.coAccountForm.value.lastName,
-                dob: typeof this.coAccountForm.value.dob === 'object' ? moment(this.coAccountForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.coAccountForm.value.dob, '/')).format('YYYY-MM-DD'),
-                gender: this.coAccountForm.value.gender,
+                // title: this.travellerForm.value.title,
+                first_name: this.travellerForm.value.firstName,
+                last_name: this.travellerForm.value.lastName,
+                dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.travellerForm.value.dob, '/')).format('YYYY-MM-DD'),
+                gender: this.travellerForm.value.gender,
                 country_id: country_id ? country_id : '',
-                passport_expiry: typeof this.coAccountForm.value.passport_expiry === 'object' ? moment(this.coAccountForm.value.passport_expiry).format('YYYY-MM-DD') : null,
-                passport_number: this.coAccountForm.value.passport_number,
+                passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
+                passport_number: this.travellerForm.value.passport_number,
                 country_code: country_code ? country_code : this.location.country.id,
-                phone_no: this.coAccountForm.value.phone_no
+                phone_no: this.travellerForm.value.phone_no
             };
-            var emailObj = { email: this.coAccountForm.value.email ? this.coAccountForm.value.email : '' };
+            var emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
             if (this.travellerId) {
                 jsonData = Object.assign(jsonData, emailObj);
                 this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {

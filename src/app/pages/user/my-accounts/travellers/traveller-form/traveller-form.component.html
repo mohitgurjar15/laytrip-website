@@ -192,90 +192,50 @@
     </div>
 </form>
  -->
- <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
+ <form [formGroup]="travellerForm" (ngSubmit)="onSubmit()">
     <div class="common_form">
         <div class="form-row">
             <div class="col-sm-12 col-md-4 mb-sm-10 ">
                 <label for="">First Name*</label>
                 <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
-                <div *ngIf="coAccountForm.controls.firstName.touched && coAccountForm.controls.firstName.errors"
+                <div *ngIf="travellerForm.controls.firstName.touched && travellerForm.controls.firstName.errors"
                     class="error">
-                    <small *ngIf="coAccountForm.controls.firstName.errors.required" class="error_field">Please
+                    <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">Please
                         enter your
                         first name.</small>
                 </div>
             </div>
-           <!--  <div class="col-sm-12 col-md-4 mb-sm-10">
+            <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Last Name*</label>
                 <input type="text" class="form-control" placeholder="Name" formControlName="lastName">
-                <div *ngIf="coAccountForm.controls.lastName.touched && coAccountForm.controls.lastName.errors"
+                <div *ngIf="travellerForm.controls.lastName.touched && travellerForm.controls.lastName.errors"
                     class="error">
-                    <small *ngIf="coAccountForm.controls.lastName.errors.required" class="error_field">Please
+                    <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">Please
                         enter your
                         last name.</small>
                 </div>
             </div>
-             <div class="col-sm-12 col-md-4 mb-sm-10">
-                <label for="">Gender*</label>
-                <select class="form-control" formControlName="gender">
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                </select>
-            
-                <div *ngIf="coAccountForm.controls.gender.touched && coAccountForm.controls.gender.errors"
-                    class="error">
-                    <small *ngIf="coAccountForm.controls.gender.errors.required" class="error_field">Please
-                        select your
-                        gender.</small>
-                </div>
+            <div class="col-sm-12 col-md-4 mb-sm-10">
+                <label for="">Gender*</label>                
+                <div class="gender_anchers">
+                <a href="javascript:void(0);">Male</a>
+                <a href="javascript:void(0);">Female</a>
+                <a href="javascript:void(0);">Other</a>
+                </div>               
             </div>
-            <div class="col-sm-12 col-md-4 mb-sm-10"
-                *ngIf="coAccountForm.controls.type.value=='' || coAccountForm.controls.type.value=='adult'">
+            <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Email*</label>
                 <input type="email" class="form-control" placeholder="Email" formControlName="email">
-                <div *ngIf="coAccountForm.controls.email.touched && coAccountForm.controls.email.errors"
+                <div *ngIf="travellerForm.controls.email.touched && travellerForm.controls.email.errors"
                     class="error">
-                    <small *ngIf="coAccountForm.controls.email.errors.required" class="error_field">Please enter
+                    <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">Please enter
                         your email
                         address.</small>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
-                *ngIf="coAccountForm.controls.type.value=='' || coAccountForm.controls.type.value=='adult'">
-                <label for="">Phone*</label>
-                <span class="tel_span">
-                    <input type="text" class="form-control" placeholder="+00" maxlength="6"
-                        formControlName="country_code">
-                    
-                    <input type="text" class="form-control" placeholder="000000000" maxlength="10"
-                        formControlName="phone_no">
-                </span>
-                <div *ngIf="coAccountForm.controls.phone_no.touched && coAccountForm.controls.phone_no.errors"
-                    class="error">
-                    <small *ngIf="coAccountForm.controls.phone_no.errors.required" class="error_field">Please
-                        enter
-                        your telephone number.</small>
-                </div>
-            </div> -->
-            <!-- <div class="col-sm-12 dobs col-md-4 mb-sm-10">
-                <label for="">Date of birth*</label>
-                <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date"
-                    inputId="basic" formControlName="dob" [readonlyInput]="true" [yearNavigator]="true"
-                    [monthNavigator]="true"
-                    yearRange="{{coAccountForm.controls.dobMinDate.value.getFullYear()}}:{{coAccountForm.controls.dobMaxDate.value.getFullYear()}}"
-                    placeholder="Date of birth">
-                </p-calendar>
-            </div> -->
-            <!--<div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type?.adults[x]?.passport_number">
-                <label for="">Passport number</label>
-                <input type="text" class="form-control" placeholder="Passport number"
-                    formControlName="passport_number">
-            </div>
-            <div class="col-sm-12 col-md-4 nation_wrps">
-                <label for="">Nationality*</label>
-                <ng-select [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
-                </ng-select>
-            </div> -->
+
+
+            
         </div>
     </div>
 </form>
