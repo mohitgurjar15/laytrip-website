@@ -25,6 +25,7 @@ export class TravelerFormComponent implements OnInit {
   @Input() totalTraveler;
   travelerForm: FormGroup;
   @Input() cartNumber:number;
+  @Input() cartId:number;
   @Input() cartItem;
   traveler_number:number=0;
   countries=[]
@@ -63,23 +64,29 @@ export class TravelerFormComponent implements OnInit {
     this.checkOutService.getTravelers.subscribe((travelers:any)=>{
       this.myTravelers=travelers;
     })
-    this.cartService.getCartTravelers.subscribe((travelers:any)=>{
+    /* this.cartService.getCartTravelers.subscribe((travelers:any)=>{
       this.travelers =travelers;
-    })
+    }) */
 
       //this.travelers = travelers;
     for(let i=0; i < this.cartItem.module_info.adult_count; i++){
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.adult));
-      this.cartService.setCartTravelers(this.travelers)
+      //this.cartService.setCartTravelers(this.travelers)
     }
     for(let i=0; i < this.cartItem.module_info.child_count; i++){
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.child));
-      this.cartService.setCartTravelers(this.travelers)
+      //this.cartService.setCartTravelers(this.travelers)
     }
     for(let i=0; i < this.cartItem.module_info.infant_count; i++){
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.infant));
-      this.cartService.setCartTravelers(this.travelers)
     }
+    
+    console.log(this.travelers[`type${this.cartNumber}`].adults.length,this.cartItem)
+    for(let i=0; i < this.cartItem.travelers.length; i++){
+      //this.travelers[`type${this.cartNumber}`].adults[i].userId=this.cartItem.travelers[i].userId;
+    }
+
+    this.cartService.setCartTravelers(this.travelers)
     
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -91,10 +98,11 @@ export class TravelerFormComponent implements OnInit {
     });
     this.patch();
 
-    this.travelerForm.valueChanges.subscribe(value=>{
 
+    this.travelerForm.valueChanges.subscribe(value=>{
       if(typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number]!=='undefined'){
-        console.log("dob",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.first_name,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status)
+        //console.log("dob",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.first_name,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status)
+        console.log("this.cartNumber",this.cartNumber,this.cartId)
         if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status=='VALID'){
 
           let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
@@ -104,6 +112,19 @@ export class TravelerFormComponent implements OnInit {
             //Edit
             this.travelerService.updateAdult(data,userId).subscribe(traveler=>{
 
+              /* let selectedTravelers=this.travelers[`type${this.cartNumber}`].adults.map(traveler=>{
+                if(traveler.userId){
+                  return { traveler_id :  traveler.userId}
+                }
+              })
+
+              if(selectedTravelers.length){
+                let data = {
+                  cart_id : this.cartItem.id,
+                  travelers : selectedTravelers
+                }
+                this.updateCart(data)
+              } */
             })
           }
           else{
@@ -136,7 +157,7 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_no=traveler.phoneNo;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_code=traveler.countryCode;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_id=traveler.country!=null?traveler.country.id:'';
-        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob).format('MMM d, yy');
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob=moment(traveler.dob,"YYYY-MM-DD").format('MMM DD, yy');
         this.patch()
       }
     })
@@ -213,8 +234,14 @@ export class TravelerFormComponent implements OnInit {
     this.patch()
   }
   
-  selectTravelerNumber(traveler_number){
+  selectTravelerNumber(event,traveler_number){
     console.log("traveler_number",traveler_number)
     this.traveler_number=traveler_number;
+  }
+
+  updateCart(data){
+    this.cartService.updateCart(data).subscribe(res=>{
+
+    })
   }
 }
