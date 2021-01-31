@@ -33,7 +33,7 @@
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
                             <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
-                            <app-payment-mode *ngIf="carts.length" [cartPrices]="cartPrices"
+                            <app-payment-mode *ngIf="carts.length" 
                                  laycreditpoints="{{laycreditpoints}}"
                                 (selectInstalmentMode)="selectInstalmentMode($event)"
                                 (getInstalmentData)="getInstalmentData($event)"
@@ -49,7 +49,7 @@
                                     class="pink_search" />
                                 <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="Search icon"
                                     class="white_search" />
-                                Save & Add More {{carts.length}}
+                                Save & Add More
                             </button>
                         </div>
                     </div>

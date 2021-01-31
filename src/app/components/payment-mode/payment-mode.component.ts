@@ -3,6 +3,7 @@ import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-payment-mode',
@@ -27,11 +28,12 @@ export class PaymentModeComponent implements OnInit {
   constructor(
     private genericService:GenericService,
     private commonFunction:CommonFunction,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cartService:CartService
   ) {
    }
   
-  @Input() cartPrices;
+  cartPrices;
   @Input() isShowSummary:boolean;
   @Input() showFullPartialPayOption:boolean=true;
   @Input() isShowPartialPaymentDetails:boolean=true;
@@ -76,14 +78,19 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnInit(){
 
-    this.getTotalPrice();
-    if(this.instalmentRequest.checkin_date){
+    this.cartService.getCartPrice.subscribe(cartPrices=>{
+      this.cartPrices = cartPrices;
+      this.getTotalPrice();
+      if(this.instalmentRequest.checkin_date){
 
-      this.instalmentRequest.amount = this.sellingPrice;
-      this.totalLaycredit();
-      this.getAllInstalment('set-default-down-payment');
-      this.calculateInstalment('down-payment',null);
-    }
+        this.instalmentRequest.amount = this.sellingPrice;
+        this.totalLaycredit();
+        this.getAllInstalment('set-default-down-payment');
+        this.calculateInstalment('down-payment',null);
+      }
+    })
+
+    
   }
 
   
@@ -159,28 +166,28 @@ export class PaymentModeComponent implements OnInit {
   getTotalPrice(){
     //this.sellingPrice=this.priceData[0].selling_price;
     let totalPrice=0;
-    let checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+    if(this.cartPrices.length>0){
+        let checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
 
-    for(let i=0; i < this.cartPrices.length; i++){
-      totalPrice+=this.cartPrices[i].selling_price;
-      if(i==0){
-        continue;
-      }
-      if(moment(checkinDate).isAfter(moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"))){
-        checkinDate = moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
-      }
+        for(let i=0; i < this.cartPrices.length; i++){
+          totalPrice+=this.cartPrices[i].selling_price;
+          if(i==0){
+            continue;
+          }
+          if(moment(checkinDate).isAfter(moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"))){
+            checkinDate = moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+          }
+        }
+        this.sellingPrice=totalPrice;
+        this.instalmentRequest.checkin_date= checkinDate;
+        this.getInstalmentData.emit({
+          layCreditPoints :this.laycreditpoints,
+          instalmentType: this.instalmentType,
+          instalments:this.instalments,
+          remainingAmount:this.remainingAmount,
+          totalAmount:this.sellingPrice
+        })
     }
-    console.log(checkinDate,"checkIn")
-    this.sellingPrice=totalPrice;
-    this.instalmentRequest.checkin_date= checkinDate;
-    this.getInstalmentData.emit({
-      layCreditPoints :this.laycreditpoints,
-      instalmentType: this.instalmentType,
-      instalments:this.instalments,
-      remainingAmount:this.remainingAmount,
-      totalAmount:this.sellingPrice
-    })
-
   }
 
   convertToNumber(number){

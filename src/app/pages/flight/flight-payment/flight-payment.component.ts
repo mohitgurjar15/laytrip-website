@@ -100,6 +100,7 @@ export class FlightPaymentComponent implements OnInit {
           notAvilableItems.push(items.data[i])
         }
       }
+      this.cartService.setCartPrices(this.cartPrices)
       console.log("this.cartPrice",this.cartPrices);
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
@@ -230,6 +231,7 @@ export class FlightPaymentComponent implements OnInit {
       this.carts.splice(index, 1);
       this.cartPrices.splice(index,1)
       this.cartService.setCartItems(this.carts);
+      this.cartService.setCartPrices(this.cartPrices)
       if(this.carts.length==0){
         this.isCartEmpty =true;
       }

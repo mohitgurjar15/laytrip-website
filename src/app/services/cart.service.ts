@@ -20,6 +20,9 @@ export class CartService {
   private cartId = new BehaviorSubject(0)
   getCardId = this.cartId.asObservable();
 
+  private cartPrices = new BehaviorSubject([])
+  getCartPrice = this.cartPrices.asObservable();
+
   private cartTravelers = new BehaviorSubject({
     type0 : {
       adults : []
@@ -96,5 +99,9 @@ export class CartService {
 
   updateCart(data){
     return this.http.put  (`${environment.apiUrl}v1/cart/update`, data, this.commonFunction.setHeaders())
+  }
+
+  setCartPrices(cartPrices){
+    this.cartPrices.next(cartPrices)
   }
 }
