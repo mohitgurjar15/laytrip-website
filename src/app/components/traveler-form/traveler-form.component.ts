@@ -10,7 +10,7 @@ import { travelersFileds } from '../../_helpers/traveller.helper';
 import { CartService } from '../../services/cart.service';
 declare var $: any;
 import * as moment from 'moment';
-import { TravelerService } from 'src/app/services/traveler.service';
+import { TravelerService } from '../../services/traveler.service';
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',
