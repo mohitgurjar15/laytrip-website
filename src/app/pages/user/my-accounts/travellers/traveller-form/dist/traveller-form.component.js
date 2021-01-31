@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.TravellerFormComponent = void 0;
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
 var TravellerFormComponent = /** @class */ (function () {
@@ -54,20 +55,11 @@ var TravellerFormComponent = /** @class */ (function () {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
         this.coAccountForm = this.formBuilder.group({
-        // title: ['mr'],
-        // gender: ['M'],
-        // firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-        // lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-        // email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-        // phone_no: ['', [Validators.required]],
-        // country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
-        // country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
-        // dob: ['', Validators.required],
-        // passport_expiry: [''],
-        // passport_number: [''],
-        // user_type: ['']
+            // title: ['mr'],
+            // gender: ['M'],
+            firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]]
         });
-        this.setUserTypeValidation();
+        // this.setUserTypeValidation();
         if (this.travellerId) {
             // this.setTravelerForm();
         }

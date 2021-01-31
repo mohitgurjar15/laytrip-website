@@ -79,7 +79,7 @@ export class TravellerFormComponent implements OnInit {
     this.coAccountForm = this.formBuilder.group({
       // title: ['mr'],
       // gender: ['M'],
-      // firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       // lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       // email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       // phone_no: ['', [Validators.required]],
@@ -91,7 +91,7 @@ export class TravellerFormComponent implements OnInit {
       // user_type: ['']
     });
 
-    this.setUserTypeValidation();
+    // this.setUserTypeValidation();
 
     if (this.travellerId) {
       // this.setTravelerForm();

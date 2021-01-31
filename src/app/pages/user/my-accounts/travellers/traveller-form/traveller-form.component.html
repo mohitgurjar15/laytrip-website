@@ -192,10 +192,10 @@
     </div>
 </form>
  -->
- <form >
+ <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
     <div class="common_form">
         <div class="form-row">
-            <!-- <div class="col-sm-12 col-md-4 mb-sm-10 ">
+            <div class="col-sm-12 col-md-4 mb-sm-10 ">
                 <label for="">First Name*</label>
                 <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
                 <div *ngIf="coAccountForm.controls.firstName.touched && coAccountForm.controls.firstName.errors"
@@ -205,7 +205,7 @@
                         first name.</small>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 mb-sm-10">
+           <!--  <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Last Name*</label>
                 <input type="text" class="form-control" placeholder="Name" formControlName="lastName">
                 <div *ngIf="coAccountForm.controls.lastName.touched && coAccountForm.controls.lastName.errors"
