@@ -2,13 +2,13 @@
   <div *ngIf="travelers.type0.adults.length>0 && cartNumber==0" formGroupName="type0">
     <div formArrayName="adults">
       <div id="accordion" class="accordion_bookings">
-        <div class="card" *ngFor="let traveler of travelerForm.get('type0.adults')['controls']; let x = index">
+        <div class="card" *ngFor="let traveler of travelerForm.get('type0.adults')['controls']; let x = index;">
           <div class="card-header" (click)="selectTravelerNumber($event,x)">
             <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" aria-expanded="false">
               Booking Traveler {{x+1}}
             </a>
           </div>
-          <div [id]="'adult_collapse'+x" (mouseenter)="selectTravelerNumber($event,x)"  class="collapse show"  data-parent="#accordion">
+          <div [id]="'adult_collapse'+x" class="collapse"   data-parent="#accordion">
             <div class="card-body">
               <div class="sub_cat_wrapper">
                 <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)

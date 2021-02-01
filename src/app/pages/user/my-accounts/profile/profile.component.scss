@@ -318,6 +318,17 @@ input.ng-invalid.ng-touched {
                         }
                     }
                 }
+                .tel_span{
+                    display: flex;
+                    position: relative;
+                    bottom: 2px;
+                    input{
+                        border-bottom: none;
+                        &:first-child{
+                        width: 30px;
+                        }
+                    }
+                }
             }
             input {
                 width: 100%;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
@@ -55,7 +55,8 @@ export class TravelerFormComponent implements OnInit {
     public commonFunction: CommonFunction,
     private checkOutService:CheckOutService,
     private cartService:CartService,
-    private travelerService:TravelerService
+    private travelerService:TravelerService,
+    private ref: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -232,9 +233,4 @@ export class TravelerFormComponent implements OnInit {
     this.traveler_number=traveler_number;
   }
 
-  updateCart(data){
-    this.cartService.updateCart(data).subscribe(res=>{
-
-    })
-  }
 }
