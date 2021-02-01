@@ -240,28 +240,8 @@
                 <label for="">Phone*</label>
                 <span class="tel_span">
                 
-                    <ng-select                                     
-                        class="ng-customClass" tabindex="14" selectOnTab="true"
-                           [items]="countries_code" bindLabel="country_name"
-                           clearSearchOnAdd="true" formControlName="country_code"
-                           placeholder="Select country code">
-                           <ng-template  ng-label-tmp let-item="item" let-clear="clear">
-                               <span class="ng-value-label"><img class="img_country_code"
-                                       [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'"
-                                       width="20px" height="20px">
-                                   {{ item.country_name ? item.country_name : 'Select country
-                                   code' }}
-                               </span>
-                               <span class="ng-value-icon right" (click)="clear(item)"
-                                   aria-hidden="true">×</span>
-                           </ng-template>
-                           <ng-template ng-option-tmp let-item="item">
-                               <img [src]="item.flag" class="img_country_code" width="20px"
-                                   height="20px">
-                               {{item.country_name}}
-                           </ng-template>
-                       </ng-select>
-                    <input type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
+                    
+                <input type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
                         formControlName="phone_no">
                 </span>
                 <!-- <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors" class="error">
