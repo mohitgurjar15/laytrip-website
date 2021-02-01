@@ -34,6 +34,15 @@ var PreferancesComponent = /** @class */ (function () {
             _this.toastr.error(error.error.message, 'Preference Error');
         });
     };
+    PreferancesComponent.prototype.getPreference = function () {
+        var _this = this;
+        this.userService.getPreference().subscribe(function (data) {
+            _this.loadingValue.emit(false);
+        }, function (error) {
+            _this.loadingValue.emit(false);
+            _this.toastr.error(error.error.message, 'Preference Error');
+        });
+    };
     __decorate([
         core_1.Output()
     ], PreferancesComponent.prototype, "loadingValue");

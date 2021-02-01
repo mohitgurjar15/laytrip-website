@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
+import { FlightService } from '../../../../services/flight.service';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   stateList: any = [];  
   minDate: any = {};
   maxDate: any = {};
+  data = [];
   public startDate: Date;
   is_gender: boolean = true;
   is_type: string = 'M';
@@ -54,7 +56,10 @@ export class ProfileComponent implements OnInit {
     displayFormat: 'DD/MM/YYYY'
   };
   isFormControlEnable: boolean = false; 
-  
+  loadingDeparture = false;
+  departureAirport:any={};
+  arrivalAirport :any={}
+  home_airport;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,6 +69,7 @@ export class ProfileComponent implements OnInit {
     public commonFunctoin: CommonFunction,  
     private toastr: ToastrService,
     private cookieService: CookieService,
+    private flightService: FlightService
 
     ) {}
  
@@ -332,5 +338,52 @@ export class ProfileComponent implements OnInit {
   enableFormControlInputs(event){
     this.isFormControlEnable = true;
     this.profileForm.controls['country_code'].enable()     
+  }
+
+  onRemove(event,item){
+    if (item.key === 'fromSearch') {
+      this.departureAirport=Object.create(null);
+    } else if (item.key === 'toSearch') {
+      this.arrivalAirport=Object.create(null);
+    }
+  }
+
+  changeSearchDeparture(event) {
+    if (event.term.length > 2) {
+      this.searchAirportDeparture(event.term);
+    }
+  }
+
+  searchAirportDeparture(searchItem) {
+    this.loadingDeparture = true;
+    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+      this.data = response.map(res => {
+        this.loadingDeparture = false;
+        return {
+          id: res.id,
+          name: res.name,
+          code: res.code,
+          city: res.city,
+          country: res.country,
+          display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+          parentId:res.parentId
+        };
+      });
+    },
+      error => {
+        this.loadingDeparture = false;
+      }
+    );
+  }
+
+
+  selectEvent(event, item) {
+    console.log(item.key)
+    
+    if (event && event.code && item.key === 'fromSearch') {
+      // this.searchFlightInfo.departure = event.code;
+      // this.departureAirport=event;
+      // this.searchedValue.push({ key: 'fromSearch', value: event });
+    } 
   }
 }

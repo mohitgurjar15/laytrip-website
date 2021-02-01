@@ -14,7 +14,7 @@ var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService) {
+    function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService, flightService) {
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.genericService = genericService;
@@ -22,6 +22,7 @@ var ProfileComponent = /** @class */ (function () {
         this.commonFunctoin = commonFunctoin;
         this.toastr = toastr;
         this.cookieService = cookieService;
+        this.flightService = flightService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.submitted = false;
         this.loading = true;
@@ -33,6 +34,7 @@ var ProfileComponent = /** @class */ (function () {
         this.stateList = [];
         this.minDate = {};
         this.maxDate = {};
+        this.data = [];
         this.is_gender = true;
         this.is_type = 'M';
         this.imageFile = '';
@@ -53,6 +55,9 @@ var ProfileComponent = /** @class */ (function () {
             displayFormat: 'DD/MM/YYYY'
         };
         this.isFormControlEnable = false;
+        this.loadingDeparture = false;
+        this.departureAirport = {};
+        this.arrivalAirport = {};
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -307,6 +312,47 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.enableFormControlInputs = function (event) {
         this.isFormControlEnable = true;
         this.profileForm.controls['country_code'].enable();
+    };
+    ProfileComponent.prototype.onRemove = function (event, item) {
+        if (item.key === 'fromSearch') {
+            this.departureAirport = Object.create(null);
+        }
+        else if (item.key === 'toSearch') {
+            this.arrivalAirport = Object.create(null);
+        }
+    };
+    ProfileComponent.prototype.changeSearchDeparture = function (event) {
+        if (event.term.length > 2) {
+            this.searchAirportDeparture(event.term);
+        }
+    };
+    ProfileComponent.prototype.searchAirportDeparture = function (searchItem) {
+        var _this = this;
+        this.loadingDeparture = true;
+        this.flightService.searchAirport(searchItem).subscribe(function (response) {
+            _this.data = response.map(function (res) {
+                _this.loadingDeparture = false;
+                return {
+                    id: res.id,
+                    name: res.name,
+                    code: res.code,
+                    city: res.city,
+                    country: res.country,
+                    display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
+                    parentId: res.parentId
+                };
+            });
+        }, function (error) {
+            _this.loadingDeparture = false;
+        });
+    };
+    ProfileComponent.prototype.selectEvent = function (event, item) {
+        console.log(item.key);
+        if (event && event.code && item.key === 'fromSearch') {
+            // this.searchFlightInfo.departure = event.code;
+            // this.departureAirport=event;
+            // this.searchedValue.push({ key: 'fromSearch', value: event });
+        }
     };
     __decorate([
         core_1.Output()

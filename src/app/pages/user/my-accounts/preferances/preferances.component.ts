@@ -37,6 +37,15 @@ export class PreferancesComponent implements OnInit {
       this.loadingValue.emit(false); 
       this.toastr.error(error.error.message, 'Preference Error');
     });
-  
   }
+
+  getPreference(){
+    this.userService.getPreference().subscribe((data: any) => {
+      this.loadingValue.emit(false); 
+    }, (error: HttpErrorResponse) => { 
+      this.loadingValue.emit(false); 
+      this.toastr.error(error.error.message, 'Preference Error');
+    });
+  }
+
 }

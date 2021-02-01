@@ -118,24 +118,30 @@
         </div>
     </div>
 </ng-template> -->
-
-<div id="trav_accordion" class="traveller_accordion">
-    <div class="card">
-       
-        <div id="collapseTrav" class="collapse show" >
-            <div class="card-body">
-                <app-traveller-form [countries]="countries"></app-traveller-form>
-                <div id="trav_accordion_inner" class="traveller_accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#collapseTravInner" aria-controls="collapseTravInner"
-                                aria-expanded="true">
-                                Alex Smith
-                            </a>
-                        </div>
-                        <div id="collapseTravInner" class="collapse" data-parent="#trav_accordion_inner">
-                            <div class="card-body">
-                                <app-traveller-form></app-traveller-form>
+<div class="title_bar">
+    <h3>Traveler Details</h3>
+    <span class="edit_btns">
+        <a href="javascrip:void(0);">Add New</a>
+    </span>
+</div>
+<div class="travel_detail_bg_wrps">
+    <div id="trav_accordion" class="traveller_accordion">
+        <div class="card">       
+            <div id="collapseTrav" class="collapse show" >
+                <div class="card-body">
+                    <app-traveller-form [countries]="countries"></app-traveller-form>
+                    <div id="trav_accordion_inner" class="traveller_accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#collapseTravInner" aria-controls="collapseTravInner"
+                                    aria-expanded="true">
+                                    Alex Smith
+                                </a>
+                            </div>
+                            <div id="collapseTravInner" class="collapse" data-parent="#trav_accordion_inner">
+                                <div class="card-body">
+                                    <app-traveller-form></app-traveller-form>
+                                </div>
                             </div>
                         </div>
                     </div>
