@@ -80,11 +80,18 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({},travelersFileds.flight.infant));
     }
     
-    console.log(this.travelers[`type${this.cartNumber}`].adults.length,this.cartItem)
     for(let i=0; i < this.cartItem.travelers.length; i++){
       let traveler = this.myTravelers.find(traveler=> traveler.userId==this.cartItem.travelers[i].userId)
+      this.travelers[`type${this.cartNumber}`].adults[i].type=traveler.user_type;
       this.travelers[`type${this.cartNumber}`].adults[i].userId=traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[i].first_name=traveler.firstName;
+      this.travelers[`type${this.cartNumber}`].adults[i].last_name=traveler.lastName;
+      this.travelers[`type${this.cartNumber}`].adults[i].gender=traveler.gender;
+      this.travelers[`type${this.cartNumber}`].adults[i].email=traveler.email;
+      this.travelers[`type${this.cartNumber}`].adults[i].country_code=traveler.countryCode;
+      this.travelers[`type${this.cartNumber}`].adults[i].phone_no=traveler.phoneNo;
+      this.travelers[`type${this.cartNumber}`].adults[i].country_id=traveler.country!=null?traveler.country.id:'';
+      this.travelers[`type${this.cartNumber}`].adults[i].dob=moment(traveler.dob,"YYYY-MM-DD").format('MMM DD, yy'); 
     }
 
     this.cartService.setCartTravelers(this.travelers)

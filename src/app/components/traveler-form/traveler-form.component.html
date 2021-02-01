@@ -132,15 +132,7 @@
                       <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage" role="tab"
                           aria-controls="baggage" aria-selected="true">Baggage</a>
-                      </li>
-                      <li class="nav-item disabled" role="presentation">
-                        <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab"
-                          aria-controls="boarding" aria-selected="false">Priority Boarding</a>
-                      </li>
-                      <li class="nav-item disabled" role="presentation">
-                        <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab"
-                          aria-controls="insurance" aria-selected="false">Insurance</a>
-                      </li>
+                      </li>                                                                                                                                 
                     </ul>
                     <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor"
                       aria-expanded="true" aria-controls="add_acord">
@@ -152,7 +144,7 @@
                         <div class="tab-pane fade show active" id="baggage" role="tabpanel"
                           aria-labelledby="baggage-tab">
                           <div class="addon_listins_wrps">
-                            <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                            <!-- <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown"
                               aria-expanded="false">
                               Total Weight: Check-in baggage - up to 3lb || 16.39 USD
                             </button>
@@ -163,7 +155,10 @@
                                   || 18.39 USD</button></li>
                               <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 5lb
                                   || 20.39 USD</button></li>
-                            </ul>
+                            </ul> -->
+                            <button class="addon_btn_drop" (click)="$event.preventDefault()">
+                              Total Weight: Check-in baggage - up to 3lb || 16.39 USD
+                            </button>
                           </div>
                         </div>
                         <div class="tab-pane fade" id="boarding" role="tabpanel" aria-labelledby="boarding-tab">
