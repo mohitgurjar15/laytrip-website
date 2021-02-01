@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 declare var $: any;
@@ -16,7 +17,9 @@ export class FaqComponent implements OnInit {
   faqDetail;
 
   constructor(
-    private genericService: GenericService   
+    private genericService: GenericService,
+    private commonFunction: CommonFunction
+   
   ) { }
 
   ngOnInit() {

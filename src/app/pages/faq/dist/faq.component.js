@@ -10,8 +10,9 @@ exports.FaqComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var FaqComponent = /** @class */ (function () {
-    function FaqComponent(genericService) {
+    function FaqComponent(genericService, commonFunction) {
         this.genericService = genericService;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
     }

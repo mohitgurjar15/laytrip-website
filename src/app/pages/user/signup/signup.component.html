@@ -125,7 +125,7 @@
                                 </div>
                             </div>
                             <div class="text_field half pass_show">
-								<input   [ngClass]="{'error': (submitted && signupForm.controls.confirm_password.errors) || (signupForm.controls.confirm_password.touched && signupForm.controls.confirm_password.errors)}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="15"  placeholder="{{'confirm_password' | translate}}">
+								<input   [ngClass]="{'error': (submitted && signupForm.controls.confirm_password.errors) || (signupForm.controls.confirm_password.touched && signupForm.controls.confirm_password.errors)}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="15"  placeholder="{{'new_password_placeholder' | translate}}">
                                 <span class="ptxt"><i id="cnfEye"
                                     [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
@@ -183,8 +183,8 @@
                         <div class="border_block"><span>Or</span></div>
                         <app-social-login (socialError)="socialError($event)"></app-social-login>
 
-                        <p>Dont't have an account? <a (click)="openSignInModal()" class="signIn hover-link" data-toggle="modal" 
-                            data-target="#sign_in_modal" data-dismiss="modal">{{'sign_in' | translate}}</a></p>
+                        <!-- <p>Dont't have an account? <a (click)="openSignInModal()" class="signIn hover-link" data-toggle="modal" 
+                            data-target="#sign_in_modal" data-dismiss="modal">{{'sign_in' | translate}}</a></p> -->
 
                         <div class="block_logo">
                             <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">

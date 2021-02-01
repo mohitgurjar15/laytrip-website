@@ -10,18 +10,19 @@ exports.AboutUsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var AboutUsComponent = /** @class */ (function () {
-    function AboutUsComponent(genericService) {
+    function AboutUsComponent(genericService, commonFunction) {
         this.genericService = genericService;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
     }
     AboutUsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $('body').addClass('cms-bgColor');
         window.scroll(0, 0);
         var pageType = 'about';
         this.loading = true;
         this.genericService.getCmsByPageType(pageType).subscribe(function (res) {
-            console.log(_this.cmsData);
             _this.cmsData = res;
             _this.loading = false;
         });
