@@ -125,7 +125,7 @@
                                 </div>
                             </div>
                             <div class="text_field half pass_show">
-								<input   [ngClass]="{'error': (submitted && signupForm.controls.confirm_password.confirm_passworderrors) || (signupForm.controls.confirm_password.touched && signupForm.controls.confirm_password.errors)}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="15"  placeholder="{{'new_password_placeholder' | translate}}">
+								<input   [ngClass]="{'error': (submitted && signupForm.controls.confirm_password.errors) || (signupForm.controls.confirm_password.touched && signupForm.controls.confirm_password.errors)}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="15"  placeholder="{{'new_password_placeholder' | translate}}">
                                 <span class="ptxt"><i id="cnfEye"
                                     [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                     aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>

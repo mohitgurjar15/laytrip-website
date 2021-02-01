@@ -16,7 +16,7 @@ export class AboutUsComponent implements OnInit {
 
   constructor(    
     private genericService: GenericService,
-    private commonFunction: CommonFunction
+    public commonFunction: CommonFunction
     ) { }
 
   ngOnInit() {
