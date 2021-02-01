@@ -12,6 +12,7 @@
     flex-direction: column;
     text-align: center;
     padding: 90px 0;
+    height: calc(100vh - 200px);
     @include tab-view{
         padding: 20px 0;
     }

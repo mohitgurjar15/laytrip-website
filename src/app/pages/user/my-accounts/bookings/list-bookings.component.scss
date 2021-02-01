@@ -1,3 +1,10 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
 .account_part {
 	.account_cnt_main.booking_main {
 		.block_filter_payment {
@@ -63,6 +70,34 @@
                     }
                 }
             }
+        }
+    }
+}
+
+.booking_whole_wrapper{
+    background-color: $background-white;
+    position: relative;
+    min-height: calc(100vh - 110px);
+    padding-top: 80px;
+    .search_wrapper{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        input{
+            border-radius: 25px;
+            border: 1px solid $text-grey;
+            font-size: 14px;
+            color: $text-grey;
+            font-weight: 400;
+        }
+    }
+    h3{
+        color: $blue-text;
+        font-size: 34px;
+        margin-bottom: 5px;
+        margin: 25px 0 15px;
+        @include tab-view{
+            font-size: 18px;
         }
     }
 }
