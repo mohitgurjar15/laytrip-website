@@ -18,6 +18,7 @@ export class PaymentModeComponent implements OnInit {
   @Output() getInstalmentData = new EventEmitter<{
     instalmentType:string,
     layCreditPoints:number,
+    paymentType:string,
     instalments:[],
     remainingAmount:number,
     totalAmount:number
@@ -139,7 +140,8 @@ export class PaymentModeComponent implements OnInit {
           instalmentType: this.instalmentType,
           instalments:this.instalments,
           remainingAmount:this.remainingAmount,
-          totalAmount:this.sellingPrice
+          totalAmount:this.sellingPrice,
+          paymentType:this.paymentType
         })
       },(err)=>{
 
@@ -185,7 +187,8 @@ export class PaymentModeComponent implements OnInit {
           instalmentType: this.instalmentType,
           instalments:this.instalments,
           remainingAmount:this.remainingAmount,
-          totalAmount:this.sellingPrice
+          totalAmount:this.sellingPrice,
+          paymentType:this.paymentType
         })
     }
   }
@@ -284,7 +287,8 @@ export class PaymentModeComponent implements OnInit {
         instalmentType: this.instalmentType,
         instalments:this.instalments,
         remainingAmount:this.remainingAmount,
-        totalAmount:this.sellingPrice
+        totalAmount:this.sellingPrice,
+        paymentType:this.paymentType
       })
     }
   }

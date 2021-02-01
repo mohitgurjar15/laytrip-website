@@ -28,7 +28,5 @@ export class CartItemComponent implements OnInit {
       this.cartItem = changes['cartItem'].currentValue;
     }
   }
-  random() {
-    return Math.floor((Math.random() * 100) + 1);
-  }
+  
 }
