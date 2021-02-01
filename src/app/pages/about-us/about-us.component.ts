@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
 
 @Component({

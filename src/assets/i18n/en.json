@@ -29,7 +29,7 @@
     "otp": "OTP",
     "new_password": "New Password",
     "confirm_password": "Confirm Password",
-    "new_password_placeholder": "Enter New Password",
+    "new_password_placeholder": "Re-enter Password",
     "confirm_password_placeholder": "Enter Confirm Password",
     "new_password_touched_validation": "Please enter your new password.",
     "confirm_password_touched_validaion": "Please enter your confirm password.",
