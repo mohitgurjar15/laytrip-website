@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { TravelerService } from '../../../../services/traveler.service';
@@ -39,6 +39,7 @@ export class ListTravellerComponent implements OnInit {
   selectedAll: any;
   selectedAllSecondname: any;
   name: any;
+  @ViewChild('child',{static:false}) childCompopnent: any;
 
   constructor(
     public travelerService: TravelerService,
@@ -221,5 +222,9 @@ export class ListTravellerComponent implements OnInit {
     }
     this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
   }
-  
+
+  onSubmit() {
+    var formData = this.childCompopnent.travellerForm.value;
+    console.log(formData)    
+  }
 }

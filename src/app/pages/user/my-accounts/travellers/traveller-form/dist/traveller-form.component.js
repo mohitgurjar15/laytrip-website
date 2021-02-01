@@ -189,6 +189,7 @@ var TravellerFormComponent = /** @class */ (function () {
                 phone_no: this.travellerForm.value.phone_no
             };
             var emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
+            console.log(jsonData);
             if (this.travellerId) {
                 jsonData = Object.assign(jsonData, emailObj);
                 this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {

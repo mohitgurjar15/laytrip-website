@@ -68,7 +68,6 @@ var MainHeaderComponent = /** @class */ (function () {
         var _this = this;
         this.checkUser();
         var host = window.location.href;
-        console.log(host, host.includes("covid-19"));
         this.isCovidPage = true;
         if (host.includes("covid-19")) {
             this.isCovidPage = false;

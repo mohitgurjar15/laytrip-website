@@ -194,6 +194,13 @@ var ListTravellerComponent = /** @class */ (function () {
         }
         this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
     };
+    ListTravellerComponent.prototype.onSubmit = function () {
+        var formData = this.childCompopnent.travellerForm.value;
+        console.log(formData);
+    };
+    __decorate([
+        core_1.ViewChild('child', { static: false })
+    ], ListTravellerComponent.prototype, "childCompopnent");
     ListTravellerComponent = __decorate([
         core_1.Component({
             selector: 'app-list-traveller',

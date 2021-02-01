@@ -214,7 +214,7 @@ export class TravellerFormComponent implements OnInit {
         phone_no: this.travellerForm.value.phone_no,
       };
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
-
+      console.log(jsonData)
       if (this.travellerId) {
         jsonData = Object.assign(jsonData, emailObj);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {

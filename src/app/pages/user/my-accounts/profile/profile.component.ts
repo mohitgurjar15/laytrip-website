@@ -220,7 +220,6 @@ export class ProfileComponent implements OnInit {
 
   getProfileInfo() {
     this.userService.getProfile().subscribe((res:any)=> {
-      console.log(res)
       this.loadingValue.emit(false);   
       this.image = res.profilePic;
       this.selectResponse = res;

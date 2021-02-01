@@ -198,7 +198,6 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
-            console.log(res);
             _this.loadingValue.emit(false);
             _this.image = res.profilePic;
             _this.selectResponse = res;
