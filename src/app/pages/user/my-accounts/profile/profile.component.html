@@ -166,13 +166,8 @@
                             placeholder="0000 0000 00">
                     </div>
                 </div>
-                <!-- <div *ngIf="(submitted  || profileForm.controls.country_code.touched) && profileForm.controls.country_code.errors"
-                                    class="focus-input100 login-error">
-                                    <div *ngIf="profileForm.controls.country_code.errors.required"
-                                        class="error_text">Please enter
-                                        country code.</div>
-                                </div> -->
-                <div class="error" *ngIf="(submitted || profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) 
+                
+                <div class="error" *ngIf="(submitted || (profileForm.controls.country_code.touched && profileForm.controls.phone_no.touched)) 
                                 && profileForm.hasError('phoneAndPhoneCodeError')">
                     <small class="error_field">{{'phone_touched_validation' | translate}}</small>
                 </div>
