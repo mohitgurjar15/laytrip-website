@@ -82,7 +82,9 @@ export class TravelerFormComponent implements OnInit {
     
     console.log(this.travelers[`type${this.cartNumber}`].adults.length,this.cartItem)
     for(let i=0; i < this.cartItem.travelers.length; i++){
-      //this.travelers[`type${this.cartNumber}`].adults[i].userId=this.cartItem.travelers[i].userId;
+      let traveler = this.myTravelers.find(traveler=> traveler.userId==this.cartItem.travelers[i].userId)
+      this.travelers[`type${this.cartNumber}`].adults[i].userId=traveler.userId;
+      this.travelers[`type${this.cartNumber}`].adults[i].first_name=traveler.firstName;
     }
 
     this.cartService.setCartTravelers(this.travelers)
@@ -109,20 +111,6 @@ export class TravelerFormComponent implements OnInit {
           if(userId){
             //Edit
             this.travelerService.updateAdult(data,userId).subscribe(traveler=>{
-
-              /* let selectedTravelers=this.travelers[`type${this.cartNumber}`].adults.map(traveler=>{
-                if(traveler.userId){
-                  return { traveler_id :  traveler.userId}
-                }
-              })
-
-              if(selectedTravelers.length){
-                let data = {
-                  cart_id : this.cartItem.id,
-                  travelers : selectedTravelers
-                }
-                this.updateCart(data)
-              } */
             })
           }
           else{

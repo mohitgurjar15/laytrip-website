@@ -6,11 +6,11 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
-import { FormGroup } from '@angular/forms';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup } from '@angular/forms';
 
 export interface CartItem {
 
@@ -48,6 +48,7 @@ export class FlightPaymentComponent implements OnInit {
   loading:boolean=false;
   isCartEmpty:boolean=false;
   cartPrices=[];
+  travelerForm:FormGroup;
 
 
   constructor(
@@ -57,7 +58,8 @@ export class FlightPaymentComponent implements OnInit {
     private genericService: GenericService,
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toster:ToastrService
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -101,7 +103,6 @@ export class FlightPaymentComponent implements OnInit {
         }
       }
       this.cartService.setCartPrices(this.cartPrices)
-      console.log("this.cartPrice",this.cartPrices);
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
@@ -118,8 +119,9 @@ export class FlightPaymentComponent implements OnInit {
     })
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
-      //console.log("travelerFrom",travelerFrom)
+      console.log("travelerFrom",travelerFrom,travelerFrom.status)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
+      this.travelerForm= travelerFrom;
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
@@ -248,6 +250,29 @@ export class FlightPaymentComponent implements OnInit {
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       }
     });
+  }
+
+  async saveAndSearch(){
+    console.log(this.travelerForm,"this.travelerForm",this.isValidData)
+    if(this.isValidData){
+      for(let i=0; i < this.carts.length; i++){
+        let data= this.travelerForm.controls[`type${i}`].value.adults;
+        let travelers = data.map(traveler=> { return { traveler_id : traveler.userId } })
+        let cartData={
+          cart_id   : this.carts[i].id,
+          travelers : travelers
+        }
+        console.log(cartData)
+        this.cartService.updateCart(cartData).subscribe(data=>{
+          if(i===this.carts.length-1){
+            this.router.navigate(['/'])
+          }
+        });
+      }
+    }
+    else{
+      this.toster.warning("Please enter valid data of traveler into cart","warning")
+    }
   }
 
 }
