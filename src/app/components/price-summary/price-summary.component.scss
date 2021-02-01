@@ -20,9 +20,10 @@
       border-radius: 15px;
       border: 1px solid $feedback_text-clr;
       .pay_list_wrper{
-        padding: 15px 25px 0 15px;
-        @include tab-view{
-          padding: 15px;
+        padding: 15px;
+       
+        &:nth-child(2){
+          border-top: 1px solid $feedback_text-clr;
         }
         .pay_listing{
           display: flex;
@@ -31,12 +32,21 @@
           color: $text-black;
           font-size: 16px;
           margin-bottom: 10px;
+          &.total_amm_blue{
+            color: $active-tab-text;
+            font-weight: 500;
+            margin: 0;
+          }
           @include tab-view{
             font-size: 12px;
           }
           &:last-child{
             margin: 0;
           }
+        }
+        .grayed_text{
+          color: $mid_gray_bg;
+          font-size: 10px;
         }
       }
       .price_accordion{
@@ -49,48 +59,66 @@
           .card-header{
             background-color: transparent;
             border: none;
+            border-top: 1px solid $feedback_text-clr;
             padding: 15px 5px 15px 15px;
             .card_header_btn{
-              font-weight: 600;
-              color: $text-black;
+              color: $text-grey;
               font-size: 16px;
               border: none;
               background-color: transparent;
               display: flex;
               justify-content: space-between;
               width: 100%;
-              padding: 0 20px 0 0;
+              padding: 0 10px 0 0;
               @include tab-view{
                 font-size: 16px;
               }
               
               &[aria-expanded="true"]{
                 &:after {
-                  font-family: 'FontAwesome';
-                  content: "\f077";
-                  position: absolute;
-                  color: $text-grey;
-                  font-weight: normal;
+                  content: "";
+                  position: relative;
+                  padding: 5px 9px;
+                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                  background-position: right;
+                  background-repeat: no-repeat;
+                  background-size: 14px;
                   transition: 0.3s;
-                  right: 5px;
+                  right: 0;
+                  border: none;
+                  top: 5px;
+                  @include tab-view{
+                  position: absolute;
+                  right: 0;
+                  height: 12px;
+                  }
                 }
               }
               &[aria-expanded="false"]{
                 &:after {
-                  font-family: 'FontAwesome';
-                  content: "\f078";
-                  position: absolute;
-                  color: $text-grey;
-                  font-weight: normal;
+                  position: relative;
+                  padding: 5px 9px;
+                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                  background-position: right;
+                  background-repeat: no-repeat;
+                  background-size: 14px;
+                  content: "";
                   transition: 0.3s;
-                  right: 5px;
+                  right: 0;
+                  border: none;
+                  top: 5px;
+                  @include tab-view{
+                    position: absolute;
+                    right: 0;
+                    height: 12px;
+                  }
                 }
               }
             }
           }
           .card-body{
-            padding: 15px;
-            border-top: 1px solid $feedback_text-clr;
+            padding: 0 15px 15px;
+            
             .pay_sap_setions{
               &:first-child{
                 h3{
@@ -115,6 +143,18 @@
                 @include tab-view{
                   font-size: 12px;
                 }
+              }
+            }
+            .total_amm_blue{
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size: 16px;
+              color: $active-tab-text;
+              font-weight: 500;
+              margin-top: 10px;
+              @include tab-view{
+                font-size: 12px;
               }
             }
           }

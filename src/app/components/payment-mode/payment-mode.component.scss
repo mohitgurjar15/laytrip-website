@@ -43,6 +43,9 @@ h3{
   }
 }
 .payment_accordion{
+  border: 1px solid $feedback_text-clr;
+  padding: 15px;
+  border-radius: 10px;
   .payment_mode_header{
     display: flex;
     @include tab-view{

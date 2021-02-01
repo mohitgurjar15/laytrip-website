@@ -25,9 +25,10 @@ export class TravellerFormComponent implements OnInit {
   @Output() travelersChanges = new EventEmitter();
   @Input() travellerId: any;
   @Input() travelerInfo: any;
-  @Input() countries = [];
-  @Input() countries_code = [];
-
+  countries = [];
+  countries_code = [];
+  is_gender: boolean = true;
+  is_type: string = 'M';
   travellerForm: FormGroup;
   traveller: any = [];
   isLoggedIn: boolean = false;
@@ -63,7 +64,7 @@ export class TravellerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.checkUser();
+    this.getCountry();
     let location: any = this.cookieService.get('__loc');
     try {
       this.location = JSON.parse(location);
@@ -81,12 +82,12 @@ export class TravellerFormComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      // phone_no: ['', [Validators.required]],
-      // country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
-      // country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
-      // dob: ['', Validators.required],
+      phone_no: ['', [Validators.required]],
+      country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
+      country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
+      dob: ['', Validators.required],
       // passport_expiry: [''],
-      // passport_number: [''],
+      passport_number: [''],
       // user_type: ['']
     });
 
@@ -247,6 +248,33 @@ export class TravellerFormComponent implements OnInit {
     }
   }
 
+  getCountry() {
+    this.genericService.getCountry().subscribe((data: any) => {
+      this.countries = data.map(country => {
+        return {
+          id: country.id,
+          name: country.name,
+          code: country.phonecode,
+          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+        }
+      }),
+        this.countries_code = data.map(country => {
+          return {
+            id: country.id,
+            name: country.phonecode+' ('+country.iso2+')',
+            code:country.phonecode,
+            country_name:country.name+ ' ' +country.phonecode,
+            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+          }
+        });
+        console.log(this.countries)
+
+    }, (error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        this.router.navigate(['/']);
+      }
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
   }
@@ -256,4 +284,14 @@ export class TravellerFormComponent implements OnInit {
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 
+  selectGender(event,type){
+    this.is_gender = true; 
+    if(type =='M'){
+      this.is_type = 'M';        
+    }else if(type =='F'){
+      this.is_type = 'F';        
+    } else if(type =='O'){
+      this.is_type = 'O';        
+    } 
+  } 
 }
