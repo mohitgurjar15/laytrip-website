@@ -121,7 +121,7 @@
 <div class="title_bar">
     <h3>Traveler Details</h3>
     <span class="edit_btns">
-        <a href="javascrip:void(0);">Add New</a>
+        <a class="hover-link" (click)="onSubmit()">Add New</a>
     </span>
 </div>
 <div class="travel_detail_bg_wrps">
@@ -129,7 +129,7 @@
         <div class="card">       
             <div id="collapseTrav" class="collapse show" >
                 <div class="card-body">
-                    <app-traveller-form [countries]="countries"></app-traveller-form>
+                    <app-traveller-form  #child [countries]="countries"></app-traveller-form>
                     <div id="trav_accordion_inner" class="traveller_accordion">
                         <div class="card">
                             <div class="card-header">

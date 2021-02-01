@@ -30,7 +30,6 @@ var ChangePasswordComponent = /** @class */ (function () {
         }, {
             validator: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
-        console.log(this.changePasswordForm);
     };
     ChangePasswordComponent.prototype.onSubmit = function () {
         var _this = this;

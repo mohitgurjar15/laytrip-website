@@ -11,7 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var MainHeaderComponent = /** @class */ (function () {
-    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, renderer, cd) {
+    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, renderer, cd, cartService) {
         this.genericService = genericService;
         this.translate = translate;
         this.modalService = modalService;
@@ -19,6 +19,7 @@ var MainHeaderComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.renderer = renderer;
         this.cd = cd;
+        this.cartService = cartService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
         this.isLoggedIn = false;
@@ -34,17 +35,51 @@ var MainHeaderComponent = /** @class */ (function () {
         if (this.isLoggedIn) {
             if (this.userDetails.roleId != 7) {
                 this.totalLaycredit();
+                this.getCartList();
             }
         }
         this.countryCode = this.commonFunction.getUserCountry();
     };
+    MainHeaderComponent.prototype.getCartList = function () {
+        var _this = this;
+        if (this.isLoggedIn) {
+            // GET CART LIST FROM GENERIC SERVICE
+            this.cartService.getCartList().subscribe(function (res) {
+                if (res) {
+                    // SET CART ITEMS IN CART SERVICE
+                    _this.cartService.setCartItems(res.data);
+                    _this.cartItems = res.data;
+                    if (res.count) {
+                        _this.cartItemsCount = res.count;
+                        localStorage.setItem('$crt', _this.cartItemsCount);
+                    }
+                    _this.cd.detectChanges();
+                }
+            }, function (error) {
+                if (error && error.status === 404) {
+                    _this.cartItems = [];
+                    _this.cartItemsCount = 0;
+                    localStorage.setItem('$crt', _this.cartItemsCount);
+                }
+            });
+        }
+    };
     MainHeaderComponent.prototype.ngDoCheck = function () {
+        var _this = this;
         this.checkUser();
         var host = window.location.href;
+        this.isCovidPage = true;
         if (host.includes("covid-19")) {
             this.isCovidPage = false;
             this.cd.detectChanges();
         }
+        this.cartService.getCartItems.subscribe(function (res) {
+            try {
+                _this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+            }
+            catch (e) {
+            }
+        });
         // this.userDetails = getLoginUserInfo();
         // this.totalLaycredit();
     };
@@ -60,6 +95,7 @@ var MainHeaderComponent = /** @class */ (function () {
             this.userDetails = jwt_helper_1.getLoginUserInfo();
             if (this.userDetails.roleId != 7 && !this._isLayCredit) {
                 this.totalLaycredit();
+                this.getCartList();
             }
             this.showTotalLayCredit = this.totalLayCredit;
         }
@@ -68,6 +104,8 @@ var MainHeaderComponent = /** @class */ (function () {
         this.isLoggedIn = this._isLayCredit = false;
         this.showTotalLayCredit = 0;
         localStorage.removeItem('_lay_sess');
+        localStorage.removeItem('$crt');
+        this.cartItemsCount = '';
         this.router.navigate(['/']);
     };
     MainHeaderComponent.prototype.loadJquery = function () {
@@ -104,6 +142,11 @@ var MainHeaderComponent = /** @class */ (function () {
         // const modalRef = this.modalService.open(AuthComponent);
         $('#sign_in_modal').modal('show');
         $("#signin-form").trigger("reset");
+    };
+    MainHeaderComponent.prototype.redirectToPayment = function () {
+        /* if (this.isLoggedIn && this.cartItemsCount > 0) {
+        } */
+        this.router.navigate(["flight/payment/ZVZ4WEFNOW8ybVIwT0VX"]);
     };
     MainHeaderComponent = __decorate([
         core_1.Component({

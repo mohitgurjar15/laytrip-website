@@ -83,6 +83,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   ngDoCheck() {
     this.checkUser();
     let host = window.location.href;
+    this.isCovidPage = true;
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
       this.cd.detectChanges();

@@ -154,7 +154,7 @@ export class TravellerFormComponent implements OnInit {
   }
 
   setUserTypeValidation() {
-
+    
     const emailControl = this.travellerForm.get('email');
     const phoneControl = this.travellerForm.get('phone_no');
     const countryControl = this.travellerForm.get('country_code');
@@ -214,7 +214,7 @@ export class TravellerFormComponent implements OnInit {
         phone_no: this.travellerForm.value.phone_no,
       };
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
-
+      console.log(jsonData)
       if (this.travellerId) {
         jsonData = Object.assign(jsonData, emailObj);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
@@ -267,8 +267,6 @@ export class TravellerFormComponent implements OnInit {
             flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
           }
         });
-        console.log(this.countries)
-
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);

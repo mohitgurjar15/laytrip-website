@@ -13,11 +13,12 @@ var PreferancesComponent = /** @class */ (function () {
         this.userService = userService;
         this.toastr = toastr;
         this.loading = false;
-        this.isEmailOn = false;
+        this.isEmailNotifiationOn = false;
         this.isSmsNotifiationOn = false;
         this.loadingValue = new core_1.EventEmitter();
     }
     PreferancesComponent.prototype.ngOnInit = function () {
+        this.getPreference();
     };
     PreferancesComponent.prototype.notificationChnaged = function (event, type) {
         var _this = this;
@@ -37,6 +38,8 @@ var PreferancesComponent = /** @class */ (function () {
     PreferancesComponent.prototype.getPreference = function () {
         var _this = this;
         this.userService.getPreference().subscribe(function (data) {
+            _this.isEmailNotifiationOn = data.preference_value.email ? data.preference_value.email : false;
+            _this.isSmsNotifiationOn = data.preference_value.sms ? data.preference_value.sms : false;
             _this.loadingValue.emit(false);
         }, function (error) {
             _this.loadingValue.emit(false);

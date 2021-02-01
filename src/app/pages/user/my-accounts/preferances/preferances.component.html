@@ -1,12 +1,12 @@
 <div class="form_row common_row">
     <label>Email Notifications</label>
     <div class="text_field">
-        <input type="checkbox" (change)="notificationChnaged($event,'email')" id="switch" /><label for="switch">EMAIL</label>
+        <input type="checkbox" [checked]="isEmailNotifiationOn" (change)="notificationChnaged($event,'email')" id="switch" /><label for="switch">EMAIL</label>
     </div>
 </div>
 <div class="form_row common_row">
     <label>SMS Notifications</label>
     <div class="text_field">
-        <input type="checkbox" (change)="notificationChnaged($event,'sms')" id="switch2" /><label for="switch2">SMS</label>
+        <input type="checkbox" [checked]="isSmsNotifiationOn" (change)="notificationChnaged($event,'sms')" id="switch2" /><label for="switch2">SMS</label>
     </div>
 </div>

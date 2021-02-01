@@ -189,6 +189,7 @@ var TravellerFormComponent = /** @class */ (function () {
                 phone_no: this.travellerForm.value.phone_no
             };
             var emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
+            console.log(jsonData);
             if (this.travellerId) {
                 jsonData = Object.assign(jsonData, emailObj);
                 this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
@@ -241,7 +242,6 @@ var TravellerFormComponent = /** @class */ (function () {
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
-            console.log(_this.countries);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);
