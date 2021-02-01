@@ -239,9 +239,13 @@
             <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps">
                 <label for="">Phone*</label>
                 
-                    
-                <input type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
-                        formControlName="phone_no">
+                <span class="tel_span">
+                    <input type="text" class="form-control" placeholder="+00" maxlength="6"
+                      formControlName="country_code">
+                      <input type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
+                      formControlName="phone_no">
+                  </span>
+                
                 
                 <!-- <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors" class="error">
                     <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please
