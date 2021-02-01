@@ -32,7 +32,7 @@
                 </a>
             </div>
             <div class="slid_block" *ngIf="trip =='roundtrip'">
-                <a [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),arrival_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant}" [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}">
+                <a [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),arrival_date:commonFunction.convertDateYYYYMMDD(item.arrival_date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant}" [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}">
                     <div class="block_top">
                         <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<br>{{ getFlexibleArivalDate(item.date,departure) }}</p>
                     </div>

@@ -1,4 +1,4 @@
-<div class="modal-header">
+<!-- <div class="modal-header">
     <div class="block_title">
         <h5>{{ travellerId ? ('edit_co_traveler' | translate) : ('add_co_traveler' | translate)}}</h5>
     </div>
@@ -8,34 +8,7 @@
 </div>
 <form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
     <div class="modal-body">
-
         <div class="add_card_form">
-
-            <!-- <div class="form_row">
-                <div class="form_field">
-                    <label>Title<sup>*</sup></label>
-                    <ul class="custom_listing">
-                        <li>
-                            <label class="custom_radio">Mr.
-                                <input type="radio" checked="checked" formControlName="title" value="mr" tabindex="0">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="custom_radio">Ms.
-                                <input type="radio" formControlName="title" value="ms" tabindex="-1">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="custom_radio">Mrs.
-                                <input type="radio" formControlName="title" value="mrs" tabindex="-1">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
             <div class="form_row">
                 <div class="form_field">
                     <label>{{'gender' | translate}}<sup>*</sup></label>
@@ -66,10 +39,7 @@
                             <div *ngIf="coAccountForm.controls.firstName.errors.required" class="error_text">
                                 {{'first_name_touched_validation' | translate}}
                             </div>
-
-                            <!-- <div *ngIf="(coAccountForm.controls.firstName.errors.cannotContainSpace)">
-                                    <p class="error_text">Please enter valid first name </p>
-                                </div> -->
+                        
                             <div *ngIf="coAccountForm.controls.firstName.errors.pattern" class="error_text">
                                 {{'first_name_string_validation' | translate}}</div>
                         </div>
@@ -218,6 +188,54 @@
         <div class="form_btn">
             <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                 {{ travellerId ? ('update_traveler' | translate) : ('add_traveler' | translate) }} </button>
+        </div>
+    </div>
+</form>
+ -->
+ <form [formGroup]="travellerForm" (ngSubmit)="onSubmit()">
+    <div class="common_form">
+        <div class="form-row">
+            <div class="col-sm-12 col-md-4 mb-sm-10 ">
+                <label for="">First Name*</label>
+                <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
+                <div *ngIf="travellerForm.controls.firstName.touched && travellerForm.controls.firstName.errors"
+                    class="error">
+                    <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">Please
+                        enter your
+                        first name.</small>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mb-sm-10">
+                <label for="">Last Name*</label>
+                <input type="text" class="form-control" placeholder="Name" formControlName="lastName">
+                <div *ngIf="travellerForm.controls.lastName.touched && travellerForm.controls.lastName.errors"
+                    class="error">
+                    <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">Please
+                        enter your
+                        last name.</small>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mb-sm-10">
+                <label for="">Gender*</label>                
+                <div class="gender_anchers">
+                <a href="javascript:void(0);">Male</a>
+                <a href="javascript:void(0);">Female</a>
+                <a href="javascript:void(0);">Other</a>
+                </div>               
+            </div>
+            <div class="col-sm-12 col-md-4 mb-sm-10">
+                <label for="">Email*</label>
+                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                <div *ngIf="travellerForm.controls.email.touched && travellerForm.controls.email.errors"
+                    class="error">
+                    <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">Please enter
+                        your email
+                        address.</small>
+                </div>
+            </div>
+
+
+            
         </div>
     </div>
 </form>

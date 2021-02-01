@@ -3,12 +3,12 @@
     <div formArrayName="adults">
       <div id="accordion" class="accordion_bookings">
         <div class="card" *ngFor="let traveler of travelerForm.get('type0.adults')['controls']; let x = index">
-          <div class="card-header" (click)="selectTravelerNumber(x)">
+          <div class="card-header" (click)="selectTravelerNumber($event,x)">
             <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" aria-expanded="false">
               Booking Traveler {{x+1}}
             </a>
           </div>
-          <div [id]="'adult_collapse'+x"  class="collapse show" data-parent="#accordion">
+          <div [id]="'adult_collapse'+x" (mouseenter)="selectTravelerNumber($event,x)"  class="collapse show"  data-parent="#accordion">
             <div class="card-body">
               <div class="sub_cat_wrapper">
                 <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)
@@ -101,7 +101,7 @@
                       yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}" placeholder="Date of birth">
                     </p-calendar>
                   </div>
-                  <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type?.adults[x]?.passport_number">
+                  <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type0?.adults[x]?.passport_number">
                     <label for="">Passport number</label>
                     <input type="text" class="form-control" placeholder="Passport number"
                       formControlName="passport_number">
@@ -179,7 +179,6 @@
             </div>
           </div>
         </div>
-        <!-- <button type="submit">Submit</button> -->
       </div>
     </div>
   </div>
@@ -199,7 +198,7 @@
                 <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
                 <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
               </div>
-              <app-my-traveler traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler travelerId={{travelers.type1.adults[traveler_number].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -232,7 +231,7 @@
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Telephone*</label>
-                    <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_number">
+                    <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_no">
                   </div>
                   <div class="col dobs col-md-4 mb-sm-10">
                     <label for="">Date of birth*</label>
@@ -240,14 +239,14 @@
                   </div>
                 </div>
                 <div class="form-row mt-3 mb-sm-10">
-                  <div class="col-sm-12 col-md-4" *ngIf="travelers.type?.adults[x]?.passport_number">
+                  <div class="col-sm-12 col-md-4" *ngIf="travelers.type1?.adults[x]?.passport_number">
                     <label for="">Passport number</label>
                     <input type="text" class="form-control" placeholder="Passport number"
                       formControlName="passport_number">
                   </div>
                   <div class="col-sm-12 col-md-4">
                     <label for="">Nationality*</label>
-                    <input type="text" class="form-control" placeholder="Nationality" formControlName="country">
+                    <input type="text" class="form-control" placeholder="Nationality" formControlName="country_code">
                   </div>
                 </div>
               </div>
@@ -312,7 +311,6 @@
             </div>
           </div>
         </div>
-        <!-- <button type="submit">Submit</button> -->
       </div>
     </div>
   </div>

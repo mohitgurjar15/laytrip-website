@@ -90,8 +90,7 @@
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
                             </app-payment-mode> -->
-                            <app-price-summary *ngIf="priceData.length" [priceSummary]="priceSummary"
-                                [priceData]="priceData"></app-price-summary>
+                            <app-price-summary *ngIf="priceData.length" [priceSummary]="priceSummary" ></app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
                             <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->

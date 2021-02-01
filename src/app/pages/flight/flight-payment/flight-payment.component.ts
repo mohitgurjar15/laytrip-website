@@ -6,11 +6,11 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
-import { FormGroup } from '@angular/forms';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup } from '@angular/forms';
 
 export interface CartItem {
 
@@ -33,29 +33,23 @@ export class FlightPaymentComponent implements OnInit {
   sellingPrice: number;
   flightSummary = [];
   instalmentMode = 'instalment';
-  instalmentType: string = 'weekly';
-  customAmount: number | null;
-  customInstalment: number | null;
-  additionalAmount: number;
+  instalmentType: string = 'weekly'
   routeCode: string = '';
-  isFlightNotAvailable: boolean = false;
-  isShowGuestPopup: boolean = false;
   isLoggedIn: boolean = false;
   showPartialPayemntOption: boolean = true;
-  partialPaymentAmount: number;
-  payNowAmount: number = 0;
   redeemableLayPoints: number;
   priceData = [];
   totalLaycreditPoints: number = 0;
   isLayCreditLoading: boolean = false;
   priceSummary;
-  travelerForm: FormGroup;
-  travelers = [];
   carts = [];
   isValidData: boolean = false;
   cartLoading = false;
   loading:boolean=false;
   isCartEmpty:boolean=false;
+  cartPrices=[];
+  travelerForm:FormGroup;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -65,7 +59,7 @@ export class FlightPaymentComponent implements OnInit {
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
     private cartService: CartService,
-    private toastrService: ToastrService
+    private toster:ToastrService
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -82,15 +76,24 @@ export class FlightPaymentComponent implements OnInit {
 
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
+      this.cartLoading = false;
       let notAvilableItems = [];
       let cart: any;
+      let price:any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
+        cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         this.carts.push(cart);
-        this.cartLoading = false;
+
+        price={}
+        price.selling_price = items.data[i].moduleInfo[0].selling_price;
+        price.departure_date = items.data[i].moduleInfo[0].departure_date;
+        price.start_price = items.data[i].moduleInfo[0].start_price;
+        price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
+        this.cartPrices.push(price)
         if (items.data[i].is_available) {
 
 
@@ -99,6 +102,7 @@ export class FlightPaymentComponent implements OnInit {
           notAvilableItems.push(items.data[i])
         }
       }
+      this.cartService.setCartPrices(this.cartPrices)
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
@@ -106,26 +110,6 @@ export class FlightPaymentComponent implements OnInit {
       this.isCartEmpty =true;
       this.cartLoading = false;
     });
-
-    let __route = sessionStorage.getItem('__route');
-    try {
-      let response = JSON.parse(__route);
-      response[0] = response;
-      this.flightSummary = response;
-      // this.carts[0]={
-      //   type : 'flight',
-      //   module_info:this.flightSummary
-      // };
-      // this.carts[1]={
-      //   type : 'flight',
-      //   module_info:this.flightSummary
-      // }; 
-      //this.sellingPrice = response[0].selling_price;
-      this.getSellingPrice();
-    }
-    catch (e) {
-
-    }
 
     this.cartService.getCardId.subscribe(cartId=>{
       if(cartId>0){
@@ -135,8 +119,9 @@ export class FlightPaymentComponent implements OnInit {
     })
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
-      //console.log("travelerFrom",travelerFrom)
+      console.log("travelerFrom",travelerFrom,travelerFrom.status)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
+      this.travelerForm= travelerFrom;
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
@@ -198,22 +183,6 @@ export class FlightPaymentComponent implements OnInit {
     sessionStorage.setItem('__islt', btoa(JSON.stringify(data)))
   }
 
-  flightAvailable(event) {
-    this.isFlightNotAvailable = event;
-  }
-
-  checkUserAndRedirect() {
-
-    if (typeof this.userInfo.roleId != 'undefined' && this.userInfo.roleId != 7) {
-      this.router.navigate(['/flight/checkout', this.routeCode]);
-    } else {
-      this.isShowGuestPopup = true;
-    }
-  }
-
-  changePopupValue(event) {
-    this.isShowGuestPopup = event;
-  }
 
   ngDoCheck() {
     let userToken = localStorage.getItem('_lay_sess');
@@ -262,7 +231,9 @@ export class FlightPaymentComponent implements OnInit {
       this.loading=false;
       let index = this.carts.findIndex(x=>x.id==cartId);
       this.carts.splice(index, 1);
+      this.cartPrices.splice(index,1)
       this.cartService.setCartItems(this.carts);
+      this.cartService.setCartPrices(this.cartPrices)
       if(this.carts.length==0){
         this.isCartEmpty =true;
       }
@@ -279,6 +250,29 @@ export class FlightPaymentComponent implements OnInit {
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       }
     });
+  }
+
+  async saveAndSearch(){
+    console.log(this.travelerForm,"this.travelerForm",this.isValidData)
+    if(this.isValidData){
+      for(let i=0; i < this.carts.length; i++){
+        let data= this.travelerForm.controls[`type${i}`].value.adults;
+        let travelers = data.map(traveler=> { return { traveler_id : traveler.userId } })
+        let cartData={
+          cart_id   : this.carts[i].id,
+          travelers : travelers
+        }
+        console.log(cartData)
+        this.cartService.updateCart(cartData).subscribe(data=>{
+          if(i===this.carts.length-1){
+            this.router.navigate(['/'])
+          }
+        });
+      }
+    }
+    else{
+      this.toster.warning("Please enter valid data of traveler into cart","warning")
+    }
   }
 
 }

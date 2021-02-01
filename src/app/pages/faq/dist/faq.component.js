@@ -17,6 +17,7 @@ var FaqComponent = /** @class */ (function () {
     }
     FaqComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $('body').addClass('cms-bgColor');
         window.scroll(0, 0);
         this.loadJquery();
         this.loading = true;
