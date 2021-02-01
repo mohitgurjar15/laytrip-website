@@ -56,6 +56,8 @@ var ProfileComponent = /** @class */ (function () {
         };
         this.isFormControlEnable = false;
         this.loadingDeparture = false;
+        this.departureAirport = {};
+        this.arrivalAirport = {};
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -310,6 +312,14 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.enableFormControlInputs = function (event) {
         this.isFormControlEnable = true;
         this.profileForm.controls['country_code'].enable();
+    };
+    ProfileComponent.prototype.onRemove = function (event, item) {
+        if (item.key === 'fromSearch') {
+            this.departureAirport = Object.create(null);
+        }
+        else if (item.key === 'toSearch') {
+            this.arrivalAirport = Object.create(null);
+        }
     };
     ProfileComponent.prototype.changeSearchDeparture = function (event) {
         if (event.term.length > 2) {

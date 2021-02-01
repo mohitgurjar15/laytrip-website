@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
-import { FlightService } from 'src/app/services/flight.service';
+import { FlightService } from '../../../../services/flight.service';
 
 @Component({
   selector: 'app-profile',
@@ -57,7 +57,9 @@ export class ProfileComponent implements OnInit {
   };
   isFormControlEnable: boolean = false; 
   loadingDeparture = false;
-
+  departureAirport:any={};
+  arrivalAirport :any={}
+  home_airport;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -336,6 +338,14 @@ export class ProfileComponent implements OnInit {
   enableFormControlInputs(event){
     this.isFormControlEnable = true;
     this.profileForm.controls['country_code'].enable()     
+  }
+
+  onRemove(event,item){
+    if (item.key === 'fromSearch') {
+      this.departureAirport=Object.create(null);
+    } else if (item.key === 'toSearch') {
+      this.arrivalAirport=Object.create(null);
+    }
   }
 
   changeSearchDeparture(event) {

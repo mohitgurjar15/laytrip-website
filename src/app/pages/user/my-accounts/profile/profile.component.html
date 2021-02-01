@@ -129,6 +129,8 @@
                         {{item.city}}
                     </ng-template>
                 </ng-select>
+                <span *ngIf="departureAirport?.code">{{ departureAirport?.code }}, {{ departureAirport?.country }}</span>
+                <span *ngIf="!departureAirport?.code"></span>
 <!--                 <input type="text" [readonly]="!isFormControlEnable"  placeholder="LAX" formControlName="home_airport" maxlength="25" tabindex="6">
  -->                <!-- <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
                     class="error">
