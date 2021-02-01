@@ -116,6 +116,9 @@ export class UserService {
     return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
   }
 
+  changePreference(data) {
+    return this.http.put(this.apiURL + 'v1/auth/preference', data, this.commonFunction.setHeaders());
+  }
   getBookings(pageNumber, limit,filterForm) {
     let queryString = "";
     if (filterForm && filterForm != 'undefined') {
