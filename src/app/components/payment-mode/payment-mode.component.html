@@ -6,10 +6,10 @@
         [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>
 
       <div class="section_description">
-        
         <span class="sec_text">Installments not available under 30 days before travel.</span>
         <a href="javascript:void(0);" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
       </div>
+      
       <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='no-instalment'}"
         (click)="togglePaymentMode('no-instalment')">Full Payment</button>
     </div>
