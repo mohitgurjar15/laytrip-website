@@ -267,8 +267,6 @@ export class TravellerFormComponent implements OnInit {
             flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
           }
         });
-        console.log(this.countries)
-
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);

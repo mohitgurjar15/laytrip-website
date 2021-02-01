@@ -11,16 +11,17 @@ import { UserService } from '../../../../services/user.service';
 export class PreferancesComponent implements OnInit {
 
   loading : boolean = false;
-  isEmailOn : boolean = false;
+  isEmailNotifiationOn : boolean = false;
   isSmsNotifiationOn : boolean = false;
   @Output() loadingValue = new EventEmitter<boolean>();
 
   constructor(
     public userService:UserService,
     public toastr:ToastrService
-    ) { }
+  ) { }
 
   ngOnInit() {
+    this.getPreference();
   }
 
 
@@ -41,6 +42,8 @@ export class PreferancesComponent implements OnInit {
 
   getPreference(){
     this.userService.getPreference().subscribe((data: any) => {
+      this.isEmailNotifiationOn = data.preference_value.email ? data.preference_value.email : false;
+      this.isSmsNotifiationOn = data.preference_value.sms ?  data.preference_value.sms : false;
       this.loadingValue.emit(false); 
     }, (error: HttpErrorResponse) => { 
       this.loadingValue.emit(false); 

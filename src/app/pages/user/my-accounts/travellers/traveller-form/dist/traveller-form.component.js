@@ -241,7 +241,6 @@ var TravellerFormComponent = /** @class */ (function () {
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };
                 });
-            console.log(_this.countries);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);

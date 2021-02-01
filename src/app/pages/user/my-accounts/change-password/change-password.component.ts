@@ -37,7 +37,6 @@ export class ChangePasswordComponent implements OnInit {
     },{
       validator: MustMatch('password', 'confirm_password'),
     });
-    console.log(this.changePasswordForm)
   }
 
   onSubmit() {
