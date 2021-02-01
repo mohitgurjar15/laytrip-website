@@ -1,31 +1,48 @@
-<b>Upcoming</b>
-<div id="accordion_upcoming">
-    <div class="card">
-      <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#upcoming0">
-          JFK-MIA
-        </a>
-      </div>
-      <div id="upcoming0" class="collapse show" data-parent="#accordion_upcoming">
-        <div class="card-body">
-          <app-flights></app-flights>
+<div class="booking_whole_wrapper">
+  <div class="container">
+    <div class="search_wrapper">
+      <input type="text" placeholder="Search" />
+    </div>
+    <h3>
+      Upcoming
+    </h3>
+    <div class="accordion_up_wrapper">
+      <div id="accordion_upcoming">
+        <div class="card">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#upcoming0">
+              <span class="header_name">
+                <span class="title_image">
+                  <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                </span>
+                JFK to MIA…
+                
+                Nov 11, 2021
+              </span>
+            </a>
+          </div>
+          <div id="upcoming0" class="collapse show" data-parent="#accordion_upcoming">
+            <div class="card-body">
+              <app-flights></app-flights>
+            </div>
+          </div>
         </div>
       </div>
-    </div>  
-</div>
-
-  <b>Completed</b>
-  <div id="accordion_completed">
-    <div class="card">
-      <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#completed0">
-          LHR-LAX
-        </a>
-      </div>
-      <div id="completed0" class="collapse show" data-parent="#accordion_completed">
-        <div class="card-body">
+    </div>
+    <h3>Completed</h3>
+    <div id="accordion_completed">
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#completed0">
+            LHR-LAX
+          </a>
+        </div>
+        <div id="completed0" class="collapse show" data-parent="#accordion_completed">
+          <div class="card-body">
             <app-flights></app-flights>
+          </div>
         </div>
       </div>
-    </div>  
+    </div>
+  </div>
 </div>
