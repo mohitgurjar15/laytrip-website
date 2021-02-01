@@ -3,7 +3,7 @@ import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { ToastrService } from 'ngx-toastr';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-payment-mode',
@@ -245,6 +245,14 @@ export class PaymentModeComponent implements OnInit {
       return;
     }
     this.paymentType=type;
+    this.getInstalmentData.emit({
+      layCreditPoints :this.laycreditpoints,
+      instalmentType: this.instalmentType,
+      instalments:this.instalments,
+      remainingAmount:this.sellingPrice,
+      totalAmount:this.sellingPrice,
+      paymentType:this.paymentType
+    })
   }
 
   /**

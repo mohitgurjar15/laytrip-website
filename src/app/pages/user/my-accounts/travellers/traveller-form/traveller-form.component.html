@@ -197,35 +197,39 @@
         <div class="form-row">
             <div class="col-sm-12 col-md-4 mb-sm-10 ">
                 <label for="">First Name*</label>
-                <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
+                <input tabindex="11" type="text" class="form-control" placeholder="Name" formControlName="firstName">
                 <div *ngIf="travellerForm.controls.firstName.touched && travellerForm.controls.firstName.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">Please
                         enter your
                         first name.</small>
+                    <small *ngIf="travellerForm.controls.firstName.errors.pattern" class="error_field">
+                            {{'first_name_string_validation' | translate}}</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Last Name*</label>
-                <input type="text" class="form-control" placeholder="Name" formControlName="lastName">
+                <input tabindex="12" type="text" class="form-control" placeholder="Name" formControlName="lastName">
                 <div *ngIf="travellerForm.controls.lastName.touched && travellerForm.controls.lastName.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">Please
                         enter your
                         last name.</small>
+                    <small *ngIf="travellerForm.controls.lastName.errors.pattern" class="error_field">
+                            {{'last_name_string_validation' | translate}}</small>    
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Gender*</label>
                 <div class="gender_anchers">
-                    <a href="javascript:void(0);">Male</a>
-                    <a href="javascript:void(0);">Female</a>
-                    <a href="javascript:void(0);">Other</a>
+                    <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="selectGender($event,'M')">Male</a>
+                    <a [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="selectGender($event,'F')">Female</a>
+                    <a  [ngClass]="{'active': is_type == 'O'}" class="hover-link" (click)="selectGender($event,'O')">Other</a>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Email*</label>
-                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                <input tabindex="13" type="email" class="form-control" placeholder="Email" formControlName="email">
                 <div *ngIf="travellerForm.controls.email.touched && travellerForm.controls.email.errors" class="error">
                     <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">Please enter
                         your email
@@ -234,17 +238,15 @@
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps">
                 <label for="">Phone*</label>
+                
                 <span class="tel_span">
                     <input type="text" class="form-control" placeholder="+00" maxlength="6"
-                        formControlName="country_code">
-                    <!-- <ng-select [items]="countries" 
-                            bindLabel="phonecode" 
-                            bindValue="phonecode"
-                            formControlName="country_code"
-                            ></ng-select>-->
-                    <input type="text" class="form-control" placeholder="000000000" maxlength="10"
-                        formControlName="phone_no">
-                </span>
+                      formControlName="country_code">
+                      <input type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
+                      formControlName="phone_no">
+                  </span>
+                
+                
                 <!-- <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors" class="error">
                     <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please
                         enter
@@ -254,20 +256,45 @@
             <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                 <label for="">Date of birth*</label>
                 <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
+                <p-calendar tabindex="16" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
-                    yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}"
+                    yearRange="1971:2021"
                     placeholder="Date of birth">
-                </p-calendar> -->
+                </p-calendar>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Passport number</label>
-                <input type="text" class="form-control" placeholder="Passport number" formControlName="passport_number">
+                <input tabindex="17" type="text" class="form-control" placeholder="Passport number" formControlName="passport_number">
+            </div>
+            <div class="col-sm-12 dobs col-md-4 mb-sm-10">
+                <label for="">Passport Expiry date</label>
+                <p-calendar tabindex="16" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
+                    formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
+                    yearRange="1971:2021"
+                    placeholder="Passport Expiry date">
+                </p-calendar>
             </div>
             <div class="col-sm-12 col-md-4 nation_wrps">
                 <label for="">Nationality*</label>
                 <!-- <input type="text" class="form-control" placeholder="Nationality" formControlName="country"> -->
-                <ng-select [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
+                <ng-select  tabindex="18" class="ng-customClass" [items]="countries"
+                    bindLabel="name" tabindex="10" [selectOnTab]="true"
+                    formControlName="country_id" selectOnTab="true"
+                    placeholder="{{'country_placeholder' | translate}}"
+                    (change)="getStates($event)">
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"><img class="img_country_code"
+                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
+                                width="20px" height="20px">
+                            {{ item.name ? item.name : 'Select country' }} </span>
+                        <span class="ng-value-icon right" (click)="clear(item)"
+                            aria-hidden="true">×</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <img class="img_country_code" [src]="item.flag" width="20px"
+                            height="20px">
+                        {{item.name}}
+                    </ng-template>
                 </ng-select>
             </div>
         </div>

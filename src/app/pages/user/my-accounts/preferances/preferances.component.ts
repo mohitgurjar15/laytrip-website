@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-preferances',

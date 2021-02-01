@@ -16,7 +16,7 @@
       </div>
       <!-- Start -->
       <div class="pay_list_wrper">
-        <div class="pay_listing">
+        <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment'">
           <span>Booking Downpayment</span>
           <span>${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
         </div>
@@ -30,7 +30,7 @@
         </div>
       </div>
       <!-- End -->
-      <div class="price_accordion" id="price_collapse">
+      <div class="price_accordion" id="price_collapse" *ngIf="priceSummary?.paymentType=='instalment'">
         <div class="card">
           <div class="card-header" id="headingOne">
             <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc"

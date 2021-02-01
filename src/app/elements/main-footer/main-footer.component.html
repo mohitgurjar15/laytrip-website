@@ -33,7 +33,7 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li *ngFor="let currency of currencies">
-                                                <a href="#" (click)="changeCurrency(currency)">
+                                                <a class="hover-link" (click)="changeCurrency(currency)">
                                                     <img src="{{currency.flag}}" alt="" /> {{ currency.code }}
                                                 </a>
                                             </li>
