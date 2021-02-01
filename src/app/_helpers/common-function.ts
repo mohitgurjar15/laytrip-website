@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
@@ -9,7 +10,9 @@ import { CookieService } from 'ngx-cookie';
 export class CommonFunction {
 
     constructor(
-        private cookieService: CookieService
+        private cookieService: CookieService,
+        private _location: Location
+
     ) {
 
     }
@@ -165,6 +168,10 @@ export class CommonFunction {
         catch (e) {
             return '';
         }
+    }
+
+    goBack(){
+        this._location.back();
     }
 }
 

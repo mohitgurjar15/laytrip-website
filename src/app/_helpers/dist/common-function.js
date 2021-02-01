@@ -10,8 +10,9 @@ exports.CommonFunction = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
 var CommonFunction = /** @class */ (function () {
-    function CommonFunction(cookieService) {
+    function CommonFunction(cookieService, _location) {
         this.cookieService = cookieService;
+        this._location = _location;
     }
     CommonFunction.prototype.closeModal = function (modelBox) {
         return modelBox = false;
@@ -27,7 +28,6 @@ var CommonFunction = /** @class */ (function () {
         }
     };
     CommonFunction.prototype.validateNumber = function (e) {
-        console.log('sd');
         var input = String.fromCharCode(e.charCode);
         var reg = /^[0-9]*$/;
         if (!reg.test(input)) {
@@ -150,6 +150,9 @@ var CommonFunction = /** @class */ (function () {
         catch (e) {
             return '';
         }
+    };
+    CommonFunction.prototype.goBack = function () {
+        this._location.back();
     };
     CommonFunction = __decorate([
         core_1.Injectable({

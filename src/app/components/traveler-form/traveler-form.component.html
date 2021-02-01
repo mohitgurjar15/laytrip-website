@@ -96,10 +96,11 @@
                   <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                     <label for="">Date of birth*</label>
                     <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                    <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic" formControlName="dob"
-                      [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
-                      yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}" placeholder="Date of birth">
-                    </p-calendar>
+                    <p-calendar class="account_datepicker" dateFormat="M d, yy" tabindex="3" panelStyleClass="birth_date"
+                    inputId="basic" formControlName="dob" placeholder="{{'dob_placeholder' | translate}}"
+                    [maxDate]="dobMaxDate" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020"
+                    [defaultDate]="dobMaxDate" panelStyleClass="calender-price-view" (onSelect)=changeDateOfBirth($event)>
+                </p-calendar>
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type0?.adults[x]?.passport_number">
                     <label for="">Passport number</label>

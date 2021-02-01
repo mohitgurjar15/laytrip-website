@@ -20,6 +20,7 @@ var ChangePasswordComponent = /** @class */ (function () {
         this.submitted = false;
         this.loading = false;
         this.apiError = '';
+        this.loadingValue = new core_1.EventEmitter();
     }
     ChangePasswordComponent.prototype.ngOnInit = function () {
         this.changePasswordForm = this.formBuilder.group({
@@ -33,10 +34,9 @@ var ChangePasswordComponent = /** @class */ (function () {
     };
     ChangePasswordComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.submitted = this.loading = true;
+        this.loadingValue.emit(true);
         if (this.changePasswordForm.invalid) {
-            this.submitted = true;
-            this.loading = false;
+            this.loadingValue.emit(false);
             return;
         }
         else {
@@ -46,12 +46,12 @@ var ChangePasswordComponent = /** @class */ (function () {
                 confirm_password: this.changePasswordForm.value.confirm_password
             };
             this.userService.changePassword(jsonFromData).subscribe(function (data) {
-                _this.submitted = _this.loading = false;
+                _this.loadingValue.emit(false);
                 _this.changePasswordForm.reset();
                 _this.toastr.success("Your password has been updated successfully!", 'Password Updated');
             }, function (error) {
                 _this.apiError = error.message;
-                _this.submitted = _this.loading = false;
+                _this.loadingValue.emit(false);
                 _this.toastr.error(error.error.message, 'Error Change Password');
             });
         }
@@ -67,6 +67,9 @@ var ChangePasswordComponent = /** @class */ (function () {
             this.oldPassFieldTextType = !this.oldPassFieldTextType;
         }
     };
+    __decorate([
+        core_1.Output()
+    ], ChangePasswordComponent.prototype, "loadingValue");
     ChangePasswordComponent = __decorate([
         core_1.Component({
             selector: 'app-change-password',

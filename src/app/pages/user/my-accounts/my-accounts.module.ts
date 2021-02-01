@@ -33,7 +33,6 @@ import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add
 import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-popup.component';
 import { AccountComponent } from './account/account.component';
 import { PreferancesComponent } from './preferances/preferances.component';
-import { SecurityComponent } from './security/security.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +61,6 @@ import { SecurityComponent } from './security/security.component';
     SendEmailPopupComponent,
     AccountComponent,
     PreferancesComponent,
-    SecurityComponent,
   ],
   imports: [
     CommonModule,

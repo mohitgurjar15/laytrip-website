@@ -168,20 +168,23 @@
                     justify-content: flex-start;
                     align-items: center;
                     a{
-                      color: $text_light_yellow;
-                      font-size: 12px;
-                      padding: 5px 15px 0 0;
-                      &:hover{
-                        color: $text_light_yellow;
-                        text-decoration: none;
-                      }
-                      &:focus{
-                        outline: none;
-                      }
+                        &.active{
+                            color: $text_light_yellow;
+                        }
+                        color: $mid_gray_bg;
+                        font-size: 14px;
+                        padding: 0 25px 0 0;
+                        &:hover{
+                            color: $text_light_yellow;
+                            text-decoration: none;
+                        }
+                        &:focus{
+                            outline: none;
+                        }
                     }
-                  }
                 }
-              }
+                }
+            }
         }
     }
 }

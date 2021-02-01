@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../services/user.service';
@@ -21,6 +21,7 @@ export class ChangePasswordComponent implements OnInit {
   cnfPassFieldTextType :  boolean;
   passFieldTextType :  boolean;
   apiError =  '';
+  @Output() loadingValue = new EventEmitter<boolean>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,11 +42,10 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit() {
     
-    this.submitted = this.loading  = true;
+    this.loadingValue.emit(true);
    
     if (this.changePasswordForm.invalid) {
-      this.submitted = true;      
-      this.loading = false;
+      this.loadingValue.emit(false);
       return;
     } else {
       let jsonFromData = {
@@ -54,13 +54,13 @@ export class ChangePasswordComponent implements OnInit {
         confirm_password : this.changePasswordForm.value.confirm_password,
       };
       this.userService.changePassword(jsonFromData).subscribe((data: any) => {
-        this.submitted = this.loading = false; 
+        this.loadingValue.emit(false); 
         this.changePasswordForm.reset();
         this.toastr.success("Your password has been updated successfully!", 'Password Updated');
 
       }, (error: HttpErrorResponse) => {       
         this.apiError = error.message;
-        this.submitted = this.loading = false;
+        this.loadingValue.emit(false);
         this.toastr.error(error.error.message, 'Error Change Password');
       });
     }

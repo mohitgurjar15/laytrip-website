@@ -87,6 +87,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getProfile = function () {
         return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
     };
+    UserService.prototype.changePreference = function (data) {
+        return this.http.put(this.apiURL + 'v1/auth/preference', data, this.commonFunction.setHeaders());
+    };
     UserService.prototype.getBookings = function (pageNumber, limit, filterForm) {
         var queryString = "";
         if (filterForm && filterForm != 'undefined') {

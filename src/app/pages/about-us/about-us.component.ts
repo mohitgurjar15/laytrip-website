@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
+import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
 
 @Component({
@@ -15,6 +16,7 @@ export class AboutUsComponent implements OnInit {
 
   constructor(    
     private genericService: GenericService,
+    public commonFunction: CommonFunction
     ) { }
 
   ngOnInit() {
@@ -27,5 +29,7 @@ export class AboutUsComponent implements OnInit {
       this.loading = false;
     });
   }
+
+
 
 }
