@@ -112,54 +112,38 @@
         <div class="form_row common_row">
             <label>Home Airport</label>
             <div class="text_field">
-                <input type="text" [readonly]="!isFormControlEnable"  placeholder="LAX" formControlName="home_airport" maxlength="25" tabindex="6">
-                <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
+                <ng-select  [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city"
+                 [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true" 
+                 [(ngModel)]="home_airport" [ngModelOptions]="{standalone: true}"
+                    (clear)="onRemove($event,{key: 'fromSearch'})" 
+                    (search)="changeSearchDeparture($event)" loadingText="" 
+                    (change)="selectEvent($event, {key: 'fromSearch'})" 
+                    class="laytrip-input" placeholder="">
+                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                        <div [ngClass]="(item.parentId==0)?'parent':'child'">
+                            {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
+                        </div>
+                    </ng-template>
+                    <ng-template ng-label-tmp let-item="item">
+
+                        {{item.city}}
+                    </ng-template>
+                </ng-select>
+<!--                 <input type="text" [readonly]="!isFormControlEnable"  placeholder="LAX" formControlName="home_airport" maxlength="25" tabindex="6">
+ -->                <!-- <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
                     class="error">
                     <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
                         {{'last_name_touched_validation' | translate}}</small>
                     <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field">
                         {{'last_name_string_validation' | translate}}</small>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="form_row common_row">
             <label>{{'phone_no' | translate}}<sup>*</sup></label>
-            <div class="text_field">
+            <!-- <div class="text_field">
                 <div class="phone_no">
-                    <div class="code">
-                        <div class="dropdown">
-                            <ng-select         
-                            
-                             class="ng-customClass" tabindex="7" selectOnTab="true"
-                                [items]="countries_code" bindLabel="country_name"
-                                clearSearchOnAdd="true" formControlName="country_code"
-                                placeholder="Select country code">
-                                <ng-template  ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label"><img class="img_country_code"
-                                            [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.svg'"
-                                            width="20px" height="20px">
-                                        {{ item.country_name ? item.country_name : 'Select country
-                                        code' }}
-                                    </span>
-                                    <span class="ng-value-icon right" (click)="clear(item)"
-                                        aria-hidden="true">×</span>
-                                </ng-template>
-                                <ng-template ng-option-tmp let-item="item">
-                                    <img [src]="item.flag" class="img_country_code" width="20px"
-                                        height="20px">
-                                    {{item.country_name}}
-                                </ng-template>
-                            </ng-select>
-                            <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
-                                class="error">
-                                <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
-                                    {{'last_name_touched_validation' | translate}}</small>
-                                <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field">
-                                    {{'last_name_string_validation' | translate}}</small>
-                            </div>
-                        </div>
-
-                    </div>
+                    
                     <div class="number">
                         <input type="text" [readonly]="!isFormControlEnable"  formControlName="phone_no" maxlength="10"
                             (keypress)="commonFunctoin.validateNumber($event)" tabindex="8"
@@ -171,7 +155,13 @@
                                 && profileForm.hasError('phoneAndPhoneCodeError')">
                     <small class="error_field">{{'phone_touched_validation' | translate}}</small>
                 </div>
-            </div>
+            </div> -->
+            <span class="tel_span">
+                <input type="text" class="form-control" tabindex="14"  placeholder="+00" maxlength="6"
+                  formControlName="country_code">
+                  <input type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
+                  formControlName="phone_no">
+              </span>
         </div>
         <div class="form_row common_row dobs_account">
             <label>{{'dob' | translate}}<sup>*</sup></label>
@@ -198,7 +188,7 @@
                  </ng-select>                  -->
                  <div class="gender_anchers">
                     <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="selectGender($event,'M')">Male</a>
-                    <a [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="selectGender($event,'F')">Female</a>
+                    <a  [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="selectGender($event,'F')">Female</a>
                     <a  [ngClass]="{'active': is_type == 'O'}" class="hover-link" (click)="selectGender($event,'O')">Other</a>
                   </div>
             </div>
