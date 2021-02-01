@@ -4,11 +4,13 @@
         <div class="container">
             <div class="row">
                 <div class="ftr_flex_row">
+                    <a [routerLink]="['/']">
+                        <img src="{{s3BucketUrl}}assets/images/footer_logo.svg" alt="Logo" />
+                    </a>
+                </div>
+                <div class="ftr_flex_row">
                     <div class="col-lg-3">
                         <div class="ftr_info">
-                            <a [routerLink]="['/']">
-                                <img src="{{s3BucketUrl}}assets/images/footer_logo.svg" alt="Logo" />
-                            </a>
                             <!-- <p>{{'laytrip_info_page_title_1_description' | translate}}</p> -->
                             <p>Layaway travel for everyone</p>
                             <div class="footer_cta_dropdown">

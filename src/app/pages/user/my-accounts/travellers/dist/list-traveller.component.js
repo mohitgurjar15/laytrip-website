@@ -13,12 +13,13 @@ var moment = require("moment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var traveller_form_component_1 = require("./traveller-form/traveller-form.component");
 var ListTravellerComponent = /** @class */ (function () {
-    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService) {
+    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService) {
         this.travelerService = travelerService;
         this.router = router;
         this.modalService = modalService;
         this.toastr = toastr;
         this.genericService = genericService;
+        this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this.closeResult = '';
@@ -31,9 +32,16 @@ var ListTravellerComponent = /** @class */ (function () {
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.pageSize = 10;
         this.showPaginationBar = false;
+        this.traveller = [];
         this.isMasterSel = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
+        var location = this.cookieService.get('__loc');
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) {
+        }
         window.scroll(0, 0);
         this.getCountry();
         this.pageNumber = 1;
@@ -195,8 +203,39 @@ var ListTravellerComponent = /** @class */ (function () {
         this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
     };
     ListTravellerComponent.prototype.onSubmit = function () {
-        var formData = this.childCompopnent.travellerForm.value;
+        var formData = this.childCompopnent.travellerForm;
         console.log(formData);
+        if (formData.invalid) {
+            console.log('sds');
+        }
+        else {
+            var country_id = formData.value.country_id.id;
+            if (!Number(country_id)) {
+                if (this.traveller.country) {
+                    country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
+                }
+                else {
+                    country_id = this.location.country.id;
+                }
+            }
+            console.log(country_id);
+            var jsonData = {
+                first_name: formData.value.firstName,
+                last_name: formData.value.lastName,
+                dob: typeof formData.value.dob === 'object' ? moment(formData.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(formData.value.dob, '/')).format('YYYY-MM-DD'),
+                gender: formData.value.gender,
+                country_id: country_id ? country_id : '',
+                passport_expiry: typeof formData.value.passport_expiry === 'object' ? moment(formData.value.passport_expiry).format('YYYY-MM-DD') : null,
+                passport_number: formData.value.passport_number,
+                country_code: formData.value.country_code ? formData.value.country_code : '',
+                phone_no: formData.value.phone_no
+            };
+            console.log(formData, jsonData);
+        }
+    };
+    ListTravellerComponent.prototype.stringToDate = function (string, saprator) {
+        var dateArray = string.split(saprator);
+        return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
     __decorate([
         core_1.ViewChild('child', { static: false })

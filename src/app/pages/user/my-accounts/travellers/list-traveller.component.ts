@@ -7,8 +7,8 @@ import * as moment from 'moment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { TravellerFormComponent } from './traveller-form/traveller-form.component';
-import { ThrowStmt } from '@angular/compiler';
 import { GenericService } from '../../../../services/generic.service';
+import { CookieService } from 'ngx-cookie';
 declare var $: any;
 
 @Component({
@@ -16,6 +16,7 @@ declare var $: any;
   templateUrl: './list-traveller.component.html',
   styleUrls: ['./list-traveller.component.scss']
 })
+
 export class ListTravellerComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   travelers = [];
@@ -40,22 +41,30 @@ export class ListTravellerComponent implements OnInit {
   selectedAllSecondname: any;
   name: any;
   @ViewChild('child',{static:false}) childCompopnent: any;
+  location;
+  traveller: any = [];
+
 
   constructor(
     public travelerService: TravelerService,
     public router: Router,
     public modalService: NgbModal,
     private toastr: ToastrService,
-    private genericService: GenericService
-
+    private genericService: GenericService,
+    private cookieService: CookieService
 
   ) {
     this.isMasterSel = false;
-
    }
 
 
   ngOnInit() {
+    let location: any = this.cookieService.get('__loc');
+    try {
+      this.location = JSON.parse(location);
+    }
+    catch (e) {
+    }
     window.scroll(0,0);
     this.getCountry();
     this.pageNumber=1;
@@ -65,6 +74,7 @@ export class ListTravellerComponent implements OnInit {
     this.getTravelers();
     this.getCheckedItemList();
   }
+
   pageChange(event) {
     this.loading = false;
     this.pageNumber = event;    
@@ -224,7 +234,37 @@ export class ListTravellerComponent implements OnInit {
   }
 
   onSubmit() {
-    var formData = this.childCompopnent.travellerForm.value;
-    console.log(formData)    
+    var formData = this.childCompopnent.travellerForm;
+    console.log(formData)
+    if(formData.invalid){
+      console.log('sds')
+    } else {
+      let country_id = formData.value.country_id.id;
+      if (!Number(country_id)) {
+        if (this.traveller.country) {
+          country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
+        } else {
+          country_id = this.location.country.id;
+        }
+      }
+      console.log(country_id)
+      let jsonData = {
+        first_name: formData.value.firstName,
+        last_name: formData.value.lastName,
+        dob: typeof formData.value.dob === 'object' ? moment(formData.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(formData.value.dob, '/')).format('YYYY-MM-DD'),
+        gender: formData.value.gender,
+        country_id: country_id ? country_id : '',
+        passport_expiry: typeof formData.value.passport_expiry === 'object' ? moment(formData.value.passport_expiry).format('YYYY-MM-DD') : null,
+        passport_number: formData.value.passport_number,
+        country_code: formData.value.country_code ? formData.value.country_code : '',
+        phone_no: formData.value.phone_no,
+      };
+      console.log(formData,jsonData)
+    }
+  }
+
+  stringToDate(string, saprator) {
+    let dateArray = string.split(saprator);
+    return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 }

@@ -154,7 +154,7 @@ export class TravellerFormComponent implements OnInit {
   }
 
   setUserTypeValidation() {
-
+    
     const emailControl = this.travellerForm.get('email');
     const phoneControl = this.travellerForm.get('phone_no');
     const countryControl = this.travellerForm.get('country_code');
