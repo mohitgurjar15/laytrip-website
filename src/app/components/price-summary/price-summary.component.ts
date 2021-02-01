@@ -10,6 +10,7 @@ export class PriceSummaryComponent implements OnInit {
 
   @Input() priceSummary;
   @Input() cartPrices=[];
+  insatllmentAmount:number=0;
   
   constructor(
     private commonFunction:CommonFunction
@@ -21,6 +22,11 @@ export class PriceSummaryComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['priceSummary']) {
       this.priceSummary = changes['priceSummary'].currentValue;
+      if(typeof this.priceSummary.instalments!=='undefined' && this.priceSummary.paymentType=='instalment'){
+       for(let i =1 ; i<this.priceSummary.instalments.instalment_date.length; i++){
+          this.insatllmentAmount += this.priceSummary.instalments.instalment_date[i].instalment_amount
+       }
+      }
     }
   }
 

@@ -1,8 +1,8 @@
 <div class="panel-group inner_accordion_wrapper" id="accordion">
-  <div class="section_description one">
+  <!-- <div class="section_description one">
     <span class="sec_text">This booking is no longer available. Click “x” to delete to be able to proceed to Checkout.</span>
     <a href="javascript:void(0);" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
-  </div>
+  </div> -->
   <div class="panel panel-default">
     <div class="panel-heading"> 
       <h4 class="panel-title">
@@ -23,10 +23,10 @@
               </span>
               {{cartItem.module_info?.arrival_code}}
 
-              <div class="section_description">
+              <!-- <div class="section_description">
                 <span class="sec_text">The price for this booking has [increased/decreased] from [old price] to [new price].</span>
                 <a href="javascript:void(0);" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
-              </div>
+              </div> -->
             </span>
             <span *ngIf="cartItem.module_info.routes.length==2"  class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}
               - {{commonFunction.convertDateFormat(cartItem.module_info?.arrival_date,'DD/MM/YYYY')}}</span>
