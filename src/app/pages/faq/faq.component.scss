@@ -60,6 +60,41 @@
             display: none;
           }
         }
+
+        .block_main_faq {
+          width: 100%;
+
+          .block_faq {
+            width: 100%;
+            margin: 0 0 20px;
+
+            h5 {
+              width: 100%;
+              margin: 0;
+              font-size: 20px;
+              font-weight: 600;
+              color: $text-black;
+            }
+
+            p {
+              width: 100%;
+              margin: 0;
+              font-size: 18px;
+              line-height: 26px;
+              font-weight: 400;
+              color: $text_grey_dark;
+
+              @include tab-view {
+                font-size: 14px;
+                line-height: 24px;
+              }
+            }
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
       }
     }
   }

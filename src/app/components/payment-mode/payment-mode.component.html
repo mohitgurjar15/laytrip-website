@@ -1,14 +1,20 @@
 <div *ngIf="!isPaymentCalulcatorLoading">
-  <h3 *ngIf="instalmentAvavible">Choose How You Pay</h3>
+  <h3>Choose How You Pay</h3>
   <div class="payment_accordion">
-    <div class="payment_mode_header" *ngIf="instalmentAvavible">
+    <div class="payment_mode_header" >
       <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='instalment'}"
         [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>
 
-      <div class="section_description">
+      <div class="section_description" *ngIf="show30DayMinValidation">
         <span class="sec_text">Installments not available under 30 days before travel.</span>
-        <a href="javascript:void(0);" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+        <a (click)="hideBelow30DayMinError()" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
       </div>
+
+      <div class="section_description" *ngIf="showPartialAndFullPaymentMixValidation">
+        <span class="sec_text">Your first booking is less than 30 days before travel. This booking and any additional bookings in this checkout will not be available in installments.</span>
+        <a (click)="hidePartialAndFullPaymentMixError()" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+      </div>
+
       
       <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='no-instalment'}"
         (click)="togglePaymentMode('no-instalment')">Full Payment</button>

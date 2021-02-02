@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../services/cart.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-payment-mode',
@@ -38,7 +39,7 @@ export class PaymentModeComponent implements OnInit {
   @Input() isShowSummary:boolean;
   @Input() showFullPartialPayOption:boolean=true;
   @Input() isShowPartialPaymentDetails:boolean=true;
-  
+  s3BucketUrl = environment.s3BucketUrl
   
   instalmentRequest={
     instalment_type: "weekly",
@@ -59,7 +60,6 @@ export class PaymentModeComponent implements OnInit {
   defaultInstalmentNo:number;
   totalLaycreditPoints=0;
   instalmentAvavible:boolean=false;
-  payNowPrice:number=0;
   totalPrice;
   weeklyInstalment:number=0;
   biWeeklyInstalment:number=0;
@@ -76,11 +76,15 @@ export class PaymentModeComponent implements OnInit {
   isBelowMinimumInstallment:boolean=false;
   isLayCreditLoading:boolean=false;
   isPaymentCalulcatorLoading:boolean=false;
+  show30DayMinValidation:boolean=false;
+  showPartialAndFullPaymentMixValidation:boolean=false;
+
 
   ngOnInit(){
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
+      console.log("this.cartPrices...",this.cartPrices)
       this.getTotalPrice();
       if(this.instalmentRequest.checkin_date){
 
@@ -90,8 +94,6 @@ export class PaymentModeComponent implements OnInit {
         this.calculateInstalment('down-payment',null);
       }
     })
-
-    
   }
 
   
@@ -105,6 +107,7 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){
+          this.instalmentAvavible=true;
           if(type1!=null && type1=='down-payment'){
             this.downPayments=this.instalments.down_payment;
             this.redeemableLayCredit.emit(this.sellingPrice);
@@ -133,16 +136,29 @@ export class PaymentModeComponent implements OnInit {
           }
           
           this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
+          this.getInstalmentData.emit({
+            layCreditPoints :this.laycreditpoints,
+            instalmentType: this.instalmentType,
+            instalments:this.instalments,
+            remainingAmount:this.remainingAmount,
+            totalAmount:this.sellingPrice,
+            paymentType:this.paymentType
+          })
+        }
+        else{
+          this.instalmentAvavible=false;
+          this.paymentType='no-instalment';
+          this.getInstalmentData.emit({
+            layCreditPoints :this.laycreditpoints,
+            instalmentType: this.instalmentType,
+            instalments:this.instalments,
+            remainingAmount:this.sellingPrice,
+            totalAmount:this.sellingPrice,
+            paymentType:this.paymentType
+          })
         }
 
-        this.getInstalmentData.emit({
-          layCreditPoints :this.laycreditpoints,
-          instalmentType: this.instalmentType,
-          instalments:this.instalments,
-          remainingAmount:this.remainingAmount,
-          totalAmount:this.sellingPrice,
-          paymentType:this.paymentType
-        })
+        
       },(err)=>{
 
       })
@@ -159,10 +175,6 @@ export class PaymentModeComponent implements OnInit {
     /* if(changes['priceData']){
       this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
     } */
-  }
-
-  getPayNowAmount(){
-    
   }
 
   getTotalPrice(){
@@ -205,7 +217,6 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.isPaymentCalulcatorLoading=false;
         if(res.instalment_available==true){
-          this.instalmentAvavible=true;
           this.weeklyInstalment   = res.weekly_instalments[1].instalment_amount;
           this.biWeeklyInstalment = res.biweekly_instalments[1].instalment_amount;
           this.montlyInstalment   = res.monthly_instalments[1].instalment_amount;
@@ -241,7 +252,23 @@ export class PaymentModeComponent implements OnInit {
    */
   togglePaymentMode(type){
 
-    if(type=='instalment' && this.isBelowMinimumInstallment){
+    if(type=='instalment' && !this.instalmentAvavible){
+
+      console.log("this.cartPricesLLLL",this.cartPrices)
+
+      if(this.cartPrices.length>1){
+
+        let checkBelow30DayBooking = this.cartPrices.findIndex(cart=> cart.start_price==0)
+        if(checkBelow30DayBooking!==-1){
+          this.showPartialAndFullPaymentMixValidation=true;
+        }
+        else{
+          this.show30DayMinValidation=true;
+        }
+      }
+      else{
+        this.show30DayMinValidation=true;
+      }
       return;
     }
     this.paymentType=type;
@@ -311,4 +338,11 @@ export class PaymentModeComponent implements OnInit {
     }))
   }
   
+  hideBelow30DayMinError(){
+    this.show30DayMinValidation=false;
+  }
+
+  hidePartialAndFullPaymentMixError(){
+    this.showPartialAndFullPaymentMixValidation=false;
+  }
 }

@@ -1,5 +1,4 @@
 <form [formGroup]="cardForm" id="payment-form" class="spf-form" (ngSubmit)="submitPaymentForm()">
-    <!-- <form [formGroup]="cardForm" id="payment-form" (ngSubmit)="submitPaymentForm($event)"> -->
     <div class="add_card_block ">
         <div class="form_row">
             <!-- <input type="hidden" formControlName="payment_method_token" id="payment_method_token"> -->
@@ -29,11 +28,11 @@
                             placeholder="MM/YYYY" [textMask]="dateYeaMask">
                     </div>
                     <div class="error">
-                        <small class="error_field credit_card_error month_year_error"  style="display:none">Please enter valid expiry date.</small>
+                        <small class="error_field credit_card_error month_year_error" id="month"  style="display:none">Please enter valid expiry date.</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10">
-                    <label class="spf-field-group spf-verification_value">CVV*</label>
+                    <label class="spf-field-group spf-verification_value">CVV</label>
                     <div id="spreedly-cvv" class="iframe_wrapper">
                     </div>
                 </div>

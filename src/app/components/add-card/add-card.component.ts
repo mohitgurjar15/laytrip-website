@@ -79,36 +79,29 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('ready', function (frame) {
-      Spreedly.setPlaceholder("number", "0000 0000 0000 0000 0000");
+      Spreedly.setPlaceholder("number", "0000000000000000");
       Spreedly.setPlaceholder("cvv", "CVV");
       Spreedly.setFieldType("cvv", "text");
       Spreedly.setFieldType('number', 'text');
-      //Spreedly.transferFocus("number");
       Spreedly.setFieldType('cvv', 'text');
-      Spreedly.setNumberFormat('maskedFormat');
+      //Spreedly.setNumberFormat('maskedFormat');
       Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding: .65em .5em; font-size: 14px;');
       Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding: .65em .5em; font-size: 14px;');
     });
 
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();
+
+      if($("#full_name").val()==""){
+        $("#first_name").show();
+      }
+      if($("#month-year").val()==""){
+        $("#month").show();
+      }
+      
       console.log("Error",errors)
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
-        /* if (error["attribute"]) {
-          var masterFormElement = document.getElementById(error["attribute"]);
-          if (masterFormElement) {
-            console.log(error["attribute"],"error[]")
-            if(error["attribute"]=='month' || error["attribute"]=='year'){
-              $('.month_year_error').show();
-            }
-            $("#"+error["attribute"]).show();
-          } else {
-            console.log(error["attribute"],"att")
-            $("#"+error["attribute"]).hide();
-          }
-        } */
-
         if (error["attribute"]){
           if(error["attribute"]=='month' || error["attribute"]=='year'){
             $('.month_year_error').show();
@@ -140,7 +133,6 @@ export class AddCardComponent implements OnInit {
       tokenField.setAttribute("value", token);
       this.token = token;
       $(".credit_card_error").hide();
-      console.log("pmData",pmData)
       let cardData = {
         card_type: pmData.card_type,
         card_holder_name: pmData.full_name,
@@ -168,7 +160,7 @@ export class AddCardComponent implements OnInit {
             diners_club: `${s3BucketUrl}assets/images/card_dinners_club.svg`,
           }
 
-          $('#card-list').append(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
+          $('#card-list').prepend(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="false"

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
@@ -55,7 +55,8 @@ export class TravelerFormComponent implements OnInit {
     public commonFunction: CommonFunction,
     private checkOutService:CheckOutService,
     private cartService:CartService,
-    private travelerService:TravelerService
+    private travelerService:TravelerService,
+    private ref: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -109,7 +110,7 @@ export class TravelerFormComponent implements OnInit {
 
     this.travelerForm.valueChanges.subscribe(value=>{
       if(typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number]!=='undefined'){
-        //console.log("dob",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.first_name,this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status)
+        console.log("dob",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob)
         if(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status=='VALID'){
 
           let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
@@ -232,9 +233,4 @@ export class TravelerFormComponent implements OnInit {
     this.traveler_number=traveler_number;
   }
 
-  updateCart(data){
-    this.cartService.updateCart(data).subscribe(res=>{
-
-    })
-  }
 }

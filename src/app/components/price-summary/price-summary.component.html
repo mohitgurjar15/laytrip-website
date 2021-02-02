@@ -35,21 +35,22 @@
           <div class="card-header" id="headingOne">
             <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc"
               aria-expanded="true" aria-controls="instalment_acc">
-              7 Monthly Installments of $100
+              {{priceSummary.instalments?.instalment_date?.length-1}} Monthly Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
+                number : '1.2-2'}}
             </button>
           </div>
           <div id="instalment_acc" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
             <div class="card-body">
               <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
                 
-                <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1">
-                  <span>Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
+                <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">
+                  <span>#{{i+1}} Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
                   <span>${{instalment.instalment_amount |
                     number : '1.2-2'}}</span>
                 </div>
                 <div class="total_amm_blue">
                   <span>Total Installments</span>
-                  <span>$700</span>
+                  <span>${{insatllmentAmount | number : '1.2-2' }}</span>
                 </div>
               </div>
             </div>

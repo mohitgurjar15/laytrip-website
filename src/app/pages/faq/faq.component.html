@@ -1,275 +1,70 @@
-<section class="block_cms_page_main" *ngIf="loading">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="block_cmspage_comman cms_faq">
-          <div class="block_faq_info">
+<section class="block_cms_page_main faqpage" *ngIf="loading">
+  <div class="page_topbanner">
+    <div class="w-100">
+      <div class="fb_animation w-100 h-100"></div>
+      <div class="fb_animation w-100 h-100"></div>
+      <div class="fb_animation w-100 h-100"></div>
+      <div class="fb_animation w-100 h-100"></div>
+      <div class="fb_animation w-100 h-100"></div>
+    </div>
+  </div>
+  <div class="block_cms_cnt">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="page_back_link">
+            <a class="hover-link" (click)="commonFunction.goBack()">< Back</a>
+          </div>
+          <div class="block_cmspage_comman cms_faq">
+            <div class="block_faq_info">
+              <div class="block_text w-100">
+                <div class="block_top">
+                  <h6>
+                    <div class="fb_animation w-25"></div>
+                    <div class="fb_animation w-25"></div>
+                  </h6> 
+                </div>
+                <div class="block_main_faq">
+                  <div class="block_faq">
+                    <h5 class="fb_animation w-50 mb-2"></h5>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                  <div class="block_faq">
+                    <h5 class="fb_animation w-50 mb-2"></h5>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                  <div class="block_faq">
+                    <h5 class="fb_animation w-50 mb-2"></h5>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                  <div class="block_faq">
+                    <h5 class="fb_animation w-50 mb-2"></h5>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                  <div class="block_faq">
+                    <h5 class="fb_animation w-50 mb-2"></h5>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-2"></p>
+                    <p class="fb_animation w-100 mb-0"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             
-            <div class="block_text">
-              <div class="block_top">
-                <h6>FAQs</h6> 
-              </div>
-              <div class="block_heading">
-                <p class="fb_animation w-50 mb-0"></p>
-                <p class="fb_animation w-50 mb-0"></p>
-              </div>
-              <div id="accordionAbout" class="accordion">
-                <div class="card active">
-                  <div class="card-header" id="AboutOne">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-
-                  <div id="collapseAboutOne" class="collapse faq_callapse" aria-labelledby="AboutOne"
-                    data-parent="#accordionAbout">
-                    <div class="card-body">
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="AboutTwo">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapseAboutTwo" class="collapse faq_callapse" aria-labelledby="AboutTwo"
-                    data-parent="#accordionAbout">
-                    <div class="card-body">
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="AboutThree">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapseAboutThree" class="collapse faq_callapse" aria-labelledby="AboutThree"
-                    data-parent="#accordionAbout">
-                    <div class="card-body">
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="AboutFour">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapseAboutFour" class="collapse faq_callapse" aria-labelledby="AboutFour"
-                    data-parent="#accordionAbout">
-                    <div class="card-body">
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-2"></p>
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="AboutFive">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapseAboutFive" class="collapse faq_callapse" aria-labelledby="AboutFive"
-                    data-parent="#accordionAbout">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        payments option.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="block_im w-50">
-              <p class="fb_animation w-50 m-auto"></p>
-            </div> -->
-          </div>
-
-          <div class="block_faq_info">
-            <div class="block_text w-100">
-              <div class="block_heading">
-                <p class="fb_animation w-25 mb-0"></p>
-                <p class="fb_animation w-25 mb-0"></p>
-              </div>
-              <div id="accordionPayments" class="accordion">
-                <div class="card active">
-                  <div class="card-header" id="PaymentsOne">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-
-                  <div id="collapsePaymentsOne" class="collapse faq_callapse" aria-labelledby="PaymentsOne"
-                    data-parent="#accordionPayments">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        payments option.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="PaymentsTwo">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapsePaymentsTwo" class="collapse faq_callapse" aria-labelledby="PaymentsTwo"
-                    data-parent="#accordionPayments">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        payments option.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="PaymentsThree">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapsePaymentsThree" class="collapse faq_callapse" aria-labelledby="PaymentsThree"
-                    data-parent="#accordionPayments">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        payments option.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="PaymentsFour">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapsePaymentsFour" class="collapse faq_callapse" aria-labelledby="PaymentsFour"
-                    data-parent="#accordionPayments">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        payments option.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="block_faq_info">
-            <div class="block_text w-100">
-              <div class="block_heading">
-                <p class="fb_animation w-25 mb-0"></p>
-                <p class="fb_animation w-25 mb-0"></p>
-              </div>
-              <div id="accordionBookings" class="accordion">
-                <div class="card active">
-                  <div class="card-header" id="BookingsOne">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-
-                  <div id="collapseBookingsOne" class="collapse faq_callapse" aria-labelledby="BookingsOne"
-                    data-parent="#accordionBookings">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        Bookings option.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="BookingsTwo">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapseBookingsTwo" class="collapse faq_callapse" aria-labelledby="BookingsTwo"
-                    data-parent="#accordionBookings">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        Bookings option.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="BookingsThree">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapseBookingsThree" class="collapse faq_callapse" aria-labelledby="BookingsThree"
-                    data-parent="#accordionBookings">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        Bookings option.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="BookingsFour">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-                  <div id="collapseBookingsFour" class="collapse faq_callapse" aria-labelledby="BookingsFour"
-                    data-parent="#accordionBookings">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        payments option.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="block_faq_info">
-            <div class="block_text w-100">
-              <div class="block_heading">
-                <p class="fb_animation w-25 mb-0"></p>
-                <p class="fb_animation w-25 mb-0"></p>
-              </div>
-              <div id="accordionAccount" class="accordion">
-                <div class="card active">
-                  <div class="card-header" id="AccountOne">
-                    <h5 class="mb-0">
-                      <p class="fb_animation w-100 mb-0"></p>
-                    </h5>
-                  </div>
-
-                  <div id="collapseAccountOne" class="collapse faq_callapse" aria-labelledby="AccountOne"
-                    data-parent="#accordionAccount">
-                    <div class="card-body">
-                      <p>Laytrip is a community of travelers who are eager to explore new destinations. As an online
-                        travel agency, we strive to make travelling possible to everyone through providing the partial
-                        Bookings option.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -295,7 +90,7 @@
                   <h6>FAQs</h6>
                 </div>
                 <!-- <div class="block_heading">{{i+1}}.&nbsp;{{ faqData.name }}</div> -->
-                <ngb-accordion [closeOthers]="true" [destroyOnHide]="false" #acc="ngbAccordion"
+                <!-- <ngb-accordion [closeOthers]="true" [destroyOnHide]="false" #acc="ngbAccordion"
                   activeIds="{{faqData.name}}0">
                   <ngb-panel *ngFor="let faqItem of faqData.faqs;let j=index" title="{{faqItem.question}}"
                     id="{{faqData.name}}{{j}}">
@@ -303,7 +98,13 @@
                       {{faqItem.answer}}
                     </ng-template>
                   </ngb-panel>
-                </ngb-accordion>
+                </ngb-accordion> -->
+                <div class="block_main_faq">
+                  <div class="block_faq" *ngFor="let faqItem of faqData.faqs;let j=index">
+                    <h5>{{faqItem.question}}</h5>
+                    <p>{{faqItem.answer}}</p>
+                  </div>
+                </div>
               </div>
               <!-- <div class="block_im" *ngIf="i === 0">
                 <img src="{{s3BucketUrl}}assets/images/FAQs-im.svg" alt="FAQs Image">
