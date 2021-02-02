@@ -48,6 +48,7 @@ export class TravelerFormComponent implements OnInit {
     }
   };
   dobMinDate= new Date();
+  baggageDescription:string='';
   
   constructor(
     private formBuilder: FormBuilder,
@@ -156,7 +157,9 @@ export class TravelerFormComponent implements OnInit {
       }
     })
 
-    
+    //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage,this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
+    //console.log("this.baggageDescription",this.baggageDescription)
+  
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -232,5 +235,46 @@ export class TravelerFormComponent implements OnInit {
     console.log("traveler_number",traveler_number)
     this.traveler_number=traveler_number;
   }
+
+  /* formatBaggageDescription(cabbinBaggage,checkInBaggage){
+
+    let cabbinBaggageWight=0; 
+    let checkInBaggageWight; 
+    let description='';
+    console.log("cabbinBaggage",cabbinBaggage)
+    if(cabbinBaggage!="" && cabbinBaggage.includes("KG")==true){
+      cabbinBaggageWight = this.convertKgToLB(cabbinBaggage.replace("KG"))
+      description = `Cabin bag upto ${cabbinBaggageWight} lbs (${cabbinBaggage}KG)`;
+    }
+    else if(cabbinBaggage!=''){
+        description = `Cabin bag upto ${cabbinBaggage}`;
+    }
+    
+    if(checkInBaggage!="" && checkInBaggage.includes("KG")==true){
+      checkInBaggageWight = this.convertKgToLB(checkInBaggage.replace("KG"))
+      if(description!=''){
+        description+=` and checkin bag upto ${checkInBaggageWight} lbs (${checkInBaggage})`;
+      }
+      else{
+        description+=`checkin bag upto ${checkInBaggageWight} lbs (${checkInBaggage})`;
+        
+      }
+    }
+    else if(checkInBaggage!=''){
+      if(description!=''){
+        description+=` and checkin bag upto ${checkInBaggage}`;
+      }
+      else{
+        description+=`checkin bag upto ${checkInBaggage}`;
+      }
+    }
+    
+    return description;
+  }
+
+  convertKgToLB(weight){
+    console.log(weight,":weight")
+    return 2.20462*Number(weight);
+  } */
 
 }
