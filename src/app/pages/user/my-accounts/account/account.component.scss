@@ -294,6 +294,9 @@
   .modal-body {
     width: 100%;
     padding: 20px 15px 20px;
+    @include tab-view {
+      flex: revert;
+    }
 
     h4 {
       font-size: 29px;
