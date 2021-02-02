@@ -115,10 +115,10 @@
                 <div class="text_field">
                     <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city"
                         [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true"
-                        [(ngModel)]="home_airport" [ngModelOptions]="{standalone: true}"
+                        formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"
-                        loadingText="" (change)="selectEvent($event, {key: 'fromSearch'})" class="laytrip-input"
-                        placeholder="">
+                        loadingText=""  class="laytrip-input"
+                        placeholder="New York" [disabled]="!isFormControlEnable">
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div [ngClass]="(item.parentId==0)?'parent':'child'">
                                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
@@ -142,26 +142,17 @@
             </div>
             <div class="form_row common_row">
                 <label>{{'phone_no' | translate}}<sup>*</sup></label>
-                <!-- <div class="text_field">
-                <div class="phone_no">
-                    
-                    <div class="number">
-                        <input type="text" [readonly]="!isFormControlEnable"  formControlName="phone_no" maxlength="10"
-                            (keypress)="commonFunctoin.validateNumber($event)" tabindex="8"
-                            placeholder="0000 0000 00">
-                    </div>
-                </div>
-                
+                <!--           
                 <div class="error" *ngIf="(submitted || (profileForm.controls.country_code.touched && profileForm.controls.phone_no.touched)) 
                                 && profileForm.hasError('phoneAndPhoneCodeError')">
                     <small class="error_field">{{'phone_touched_validation' | translate}}</small>
                 </div>
-            </div> -->
+            -->
                 <div class="text_field">
                     <span class="tel_span">
-                        <input type="text" class="form-control" tabindex="14" placeholder="+00" maxlength="6"
+                        <input [readonly]="!isFormControlEnable" type="text" class="form-control" tabindex="14" placeholder="+00" maxlength="4"
                             formControlName="country_code">
-                        <input type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
+                        <input [readonly]="!isFormControlEnable" (keypress)="commonFunctoin.validateNumber($event)" type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
                             formControlName="phone_no">
                     </span>
                 </div>

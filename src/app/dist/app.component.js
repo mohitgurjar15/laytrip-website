@@ -31,7 +31,9 @@ var AppComponent = /** @class */ (function () {
         this.swPush.requestSubscription({
             serverPublicKey: this.VAPID_PUBLIC_KEY
         })
-            .then(function (sub) { return _this.genericService.addPushSubscriber(sub).subscribe(); })["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
+            .then(function (sub) { return _this.genericService.addPushSubscriber(sub).subscribe(); })["catch"](
+        // err =>console.log("Could not subscribe to notifications")
+        );
         /* this.swPush.requestSubscription({
             serverPublicKey: this.VAPID_PUBLIC_KEY
         })
