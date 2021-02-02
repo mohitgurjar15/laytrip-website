@@ -92,23 +92,26 @@
         </button>
         </div>
         <div class="modal-body">
-            <h4 class="modal-title" id="modal-basic-title">Are you sure you want to Cancel this Upcoming Booking?</h4>
+
+            <div class="block_im">
+                <img src="{{s3BucketUrl}}assets/images/icon/ic_info_alert.svg" alt="Info Icon">
+            </div>
+            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
+            <div class="check">
+                <label class="custom_checkbox">
+                    <input (change)="checkAccept($event)" formControlName="checked" value="{{iAccept}}" tabindex="16" type="checkbox">
+                    <span class="checkmark"></span>
+                    Do you want your all data before delete account?
+                </label>
+            </div>
             <ul>
                 <li>
-                    <button (click)=deleteAccount()>Yes</button>
+                    <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancle</button>
                 </li>
-
                 <li>
-                    <button (click)="modal.dismiss('Cross click')">No</button>
+                    <button class="btn_yes" (click)=deleteAccount()>Yes</button>
                 </li>
             </ul>
-        </div>
-        <div class="modal-footer">
-            <div class="modal_btm">
-                <div class="block_logo">
-                    <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
-                </div>
-            </div>
         </div>
     </div>
   </ng-template>

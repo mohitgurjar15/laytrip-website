@@ -51,8 +51,10 @@ var AccountComponent = /** @class */ (function () {
     AccountComponent.prototype.deleteAccount = function () {
         var _this = this;
         this.loading = true;
-        this.userService.deleteAccount().subscribe(function (data) {
+        var data = { "requireBackupFile": true };
+        this.userService.deleteAccount(data).subscribe(function (data) {
             _this.loading = false;
+            localStorage.clear();
         }, function (error) {
             _this.loading = false;
         });
