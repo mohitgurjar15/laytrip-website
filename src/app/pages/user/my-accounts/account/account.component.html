@@ -82,27 +82,33 @@
         </div>
     </div>
 </section>
+
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
-          </div>
+    <div class="delete_account_block">
+        <div class="modal-header">
+        
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
         </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <div class="modal-body">
+            <h4 class="modal-title" id="modal-basic-title">Are you sure you want to Cancel this Upcoming Booking?</h4>
+            <ul>
+                <li>
+                    <button (click)=deleteAccount()>Yes</button>
+                </li>
+
+                <li>
+                    <button (click)="modal.dismiss('Cross click')">No</button>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <div class="modal_btm">
+                <div class="block_logo">
+                    <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
+                </div>
+            </div>
+        </div>
     </div>
   </ng-template>

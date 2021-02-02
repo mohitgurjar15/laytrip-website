@@ -3,7 +3,7 @@
 
 //<!-- Start Login Signup & Forgot Password popup Css -->
 
-.bg_color {
+body {
   #fc_frame {
     z-index: 999 !important;
 
@@ -160,6 +160,28 @@
           justify-content: space-between;
           flex-flow: column;
         }
+      }
+    }
+  }
+}
+
+.delete_account_window {
+  .modal-content {
+    border-radius: 10px;
+    @include tab-view {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      height: calc(100vh - 30px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      .delete_account_block {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-flow: column;
       }
     }
   }

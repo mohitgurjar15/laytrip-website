@@ -9,11 +9,14 @@ exports.__esModule = true;
 exports.AccountComponent = void 0;
 var core_1 = require("@angular/core");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var environment_1 = require("../../../../../environments/environment");
 var AccountComponent = /** @class */ (function () {
-    function AccountComponent(modalService) {
+    function AccountComponent(modalService, userService) {
         this.modalService = modalService;
+        this.userService = userService;
         this.loading = true;
         this.closeResult = '';
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
     }
     AccountComponent.prototype.ngOnInit = function () {
     };
@@ -44,6 +47,15 @@ var AccountComponent = /** @class */ (function () {
         else {
             return "with: " + reason;
         }
+    };
+    AccountComponent.prototype.deleteAccount = function () {
+        var _this = this;
+        this.loading = true;
+        this.userService.deleteAccount().subscribe(function (data) {
+            _this.loading = false;
+        }, function (error) {
+            _this.loading = false;
+        });
     };
     AccountComponent = __decorate([
         core_1.Component({
