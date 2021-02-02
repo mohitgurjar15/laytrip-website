@@ -1,271 +1,390 @@
-@import '../../../../../cstm-variable';
+@import "../../../../../cstm-variable";
 @import "../../../../../_cstm-variable.scss";
 @import "../../../../../_cstm-components.scss";
 @import "../../../../../_hotel.scss";
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.account_part{
-    background-color: $background-white;
-    .traveller_detail_wrpper{
-        padding: 15px 0;
-        max-width: 655px;
-        margin: 0 auto;
-        .title_bar{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-    
-            h3{
-                color: $blue-text;
-                font-size: 34px;
-                margin-bottom: 5px;
-                margin: 25px 0 15px;
-                @include tab-view{
-                    font-size: 18px;
-                }
-            }
-            .edit_btns{
-                a{
-                    background-color: transparent;
-                    color: $text_light_yellow;
-                    box-shadow: none;
-                    font-size: 16px;
-                    padding: 0;
-                    text-align: right;
-                    text-decoration: none;
-                }
-            }
-        }
-        .travel_detail_bg_wrps{
-            background-color: $tab-bg-gray;
-            border-radius: 5px;
-            padding: 15px;
-        }
-    }
-    .card_details_wrppers{
-        padding: 15px 0;
-        max-width: 655px;
-        margin: 0 auto;
-        
-        .title_bar{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-    
-            h3{
-                color: $blue-text;
-                font-size: 34px;
-                margin-bottom: 5px;
-                margin: 25px 0 15px;
-                @include tab-view{
-                    font-size: 18px;
-                }
-            }
-            .edit_btns{
-                a{
-                    background-color: transparent;
-                    color: $text_light_yellow;
-                    box-shadow: none;
-                    font-size: 16px;
-                    padding: 0;
-                    text-align: right;
-                    text-decoration: none;
-                }
-            }
-        }
-        .booking_detail_bg_wrps{
-            background-color: $tab-bg-gray;
-            border-radius: 5px;
-            padding: 15px;
-            .card_accordion{
-                .card{
-                    border: 1px solid $grayed_border;
-                    border-radius: 10px;
-                    .card-header{
-                        border: none;
-                        background-color: transparent;
-                        a{
-                            font-weight: 600;
-                            color: $text-black;
-                            font-size: 16px;
-                            border: none;
-                            background-color: transparent;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            width: 100%;
-                            padding: 0;
-                
-                            &[aria-expanded="true"]{
-                                &:after {
-                                    font-family: 'FontAwesome';
-                                    content: "\f077";
-                                    color: $text-grey;
-                                    font-weight: normal;
-                                    transition: 0.3s;
-                                    right: 10px;
-                                    position: absolute;
-                                    top: 5px;
-                                }
-                            }
-                            &[aria-expanded="false"]{
-                                &:after {
-                                    font-family: 'FontAwesome';
-                                    content: "\f078";
-                                    color: $text-grey;
-                                    font-weight: normal;
-                                    transition: 0.3s;
-                                    right: 10px;
-                                    position: absolute;
-                                    top: 5px;
-                                }
-                            }
-                        }
-                    }
-                    .card-body{
-                        padding: 15px;
-                    }
-                }
-            }
-        }
-    }
-    .prefrence_main_wrapper{
-        padding: 15px 0;
-        max-width: 655px;
-        margin: 0 auto;
+.account_part {
+  background-color: $background-white;
+  .traveller_detail_wrpper {
+    padding: 15px 0;
+    max-width: 655px;
+    margin: 0 auto;
+    .title_bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-        .title_bar{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-    
-            h3{
-                color: $blue-text;
-                font-size: 34px;
-                margin-bottom: 5px;
-                margin: 25px 0 15px;
-                @include tab-view{
-                    font-size: 18px;
-                }
-            }
+      h3 {
+        color: $blue-text;
+        font-size: 34px;
+        margin-bottom: 5px;
+        margin: 25px 0 15px;
+        @include tab-view {
+          font-size: 18px;
         }
+      }
+      .edit_btns {
+        a {
+          background-color: transparent;
+          color: $text_light_yellow;
+          box-shadow: none;
+          font-size: 16px;
+          padding: 0;
+          text-align: right;
+          text-decoration: none;
+        }
+      }
     }
-    .security_main_wrapper{
-        padding: 15px 0;
-        max-width: 655px;
-        margin: 0 auto;
+    .travel_detail_bg_wrps {
+      background-color: $tab-bg-gray;
+      border-radius: 5px;
+      padding: 15px;
+    }
+  }
+  .card_details_wrppers {
+    padding: 15px 0;
+    max-width: 655px;
+    margin: 0 auto;
 
-        .title_bar{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-    
-            h3{
-                color: $blue-text;
-                font-size: 34px;
-                margin-bottom: 5px;
-                margin: 25px 0 15px;
-                @include tab-view{
-                    font-size: 18px;
-                }
-            }
+    .title_bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        color: $blue-text;
+        font-size: 34px;
+        margin-bottom: 5px;
+        margin: 25px 0 15px;
+        @include tab-view {
+          font-size: 18px;
         }
-        .security_accord_wrppaer{
-            background-color: $background-white;
+      }
+      .edit_btns {
+        a {
+          background-color: transparent;
+          color: $text_light_yellow;
+          box-shadow: none;
+          font-size: 16px;
+          padding: 0;
+          text-align: right;
+          text-decoration: none;
+        }
+      }
+    }
+    .booking_detail_bg_wrps {
+      background-color: $tab-bg-gray;
+      border-radius: 5px;
+      padding: 15px;
+      .card_accordion {
+        .card {
+          border: 1px solid $grayed_border;
+          border-radius: 10px;
+          .card-header {
             border: none;
-            .secur_accordion{
-                .card{
-                    border: none;
-                    border-radius: 10px;
-                    .card-header{
-                        border: none;
-                        border-bottom: 1px solid $grayed_border;;
-                        padding: 10px 0;
-                        background-color: transparent;
-                        a{
-                            font-weight: 600;
-                            color: $text-black;
-                            font-size: 16px;
-                            border: none;
-                            background-color: transparent;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            width: 100%;
-                            padding: 0;
-                
-                            &[aria-expanded="true"]{
-                                &:after {
-                                    content: "";
-                                    position: relative;
-                                    padding: 5px 9px;
-                                    margin-left: 10px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                                    background-position: right;
-                                    background-repeat: no-repeat;
-                                    background-size: 12px;
-                                    transition: 0.3s;
-                                    right: 15px;
-                                  @include tab-view{
-                                    position: absolute;
-                                    right: 0;
-                                    height: 12px;
-                                  }
-                                }
-                            }
-                            &[aria-expanded="false"]{
-                                &:after {
-                                    position: relative;
-                                    padding: 5px 9px;
-                                    margin-left: 10px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                                    background-position: right;
-                                    background-repeat: no-repeat;
-                                    background-size: 12px;
-                                    content: "";
-                                    transition: 0.3s;
-                                    right: 15px;
-                                    @include tab-view{
-                                        position: absolute;
-                                        right: 0;
-                                        height: 12px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .card-body{
-                        padding: 15px;
-                    }
-                }
-            }
-        }
-    }
-    .delete_main_wrpper{
-        padding: 15px 0;
-        max-width: 655px;
-        margin: 0 auto;
+            background-color: transparent;
+            a {
+              font-weight: 600;
+              color: $text-black;
+              font-size: 16px;
+              border: none;
+              background-color: transparent;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 100%;
+              padding: 0;
 
-        .edit_btns{
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin: 5px 0;
-            width: 100%;
-            border-bottom: 1px solid $box-border-color;
-            padding-bottom: 10px;
-            a{
-                background-color: transparent;
-                color: $text_light_yellow;
-                box-shadow: none;
-                font-size: 16px;
-                padding: 0;
-                text-align: right;
-                text-decoration: none;
+              &[aria-expanded="true"] {
+                &:after {
+                  font-family: "FontAwesome";
+                  content: "\f077";
+                  color: $text-grey;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 10px;
+                  position: absolute;
+                  top: 5px;
+                }
+              }
+              &[aria-expanded="false"] {
+                &:after {
+                  font-family: "FontAwesome";
+                  content: "\f078";
+                  color: $text-grey;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 10px;
+                  position: absolute;
+                  top: 5px;
+                }
+              }
             }
+          }
+          .card-body {
+            padding: 15px;
+          }
         }
+      }
     }
+  }
+  .prefrence_main_wrapper {
+    padding: 15px 0;
+    max-width: 655px;
+    margin: 0 auto;
+
+    .title_bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        color: $blue-text;
+        font-size: 34px;
+        margin-bottom: 5px;
+        margin: 25px 0 15px;
+        @include tab-view {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .security_main_wrapper {
+    padding: 15px 0;
+    max-width: 655px;
+    margin: 0 auto;
+
+    .title_bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        color: $blue-text;
+        font-size: 34px;
+        margin-bottom: 5px;
+        margin: 25px 0 15px;
+        @include tab-view {
+          font-size: 18px;
+        }
+      }
+    }
+    .security_accord_wrppaer {
+      background-color: $background-white;
+      border: none;
+      .secur_accordion {
+        .card {
+          border: none;
+          border-radius: 10px;
+          .card-header {
+            border: none;
+            border-bottom: 1px solid $grayed_border;
+            padding: 10px 0;
+            background-color: transparent;
+            a {
+              font-weight: 600;
+              color: $text-black;
+              font-size: 16px;
+              border: none;
+              background-color: transparent;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 100%;
+              padding: 0;
+
+              &[aria-expanded="true"] {
+                &:after {
+                  content: "";
+                  position: relative;
+                  padding: 5px 9px;
+                  margin-left: 10px;
+                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                  background-position: right;
+                  background-repeat: no-repeat;
+                  background-size: 12px;
+                  transition: 0.3s;
+                  right: 15px;
+                  @include tab-view {
+                    position: absolute;
+                    right: 0;
+                    height: 12px;
+                  }
+                }
+              }
+              &[aria-expanded="false"] {
+                &:after {
+                  position: relative;
+                  padding: 5px 9px;
+                  margin-left: 10px;
+                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                  background-position: right;
+                  background-repeat: no-repeat;
+                  background-size: 12px;
+                  content: "";
+                  transition: 0.3s;
+                  right: 15px;
+                  @include tab-view {
+                    position: absolute;
+                    right: 0;
+                    height: 12px;
+                  }
+                }
+              }
+            }
+          }
+          .card-body {
+            padding: 15px;
+          }
+        }
+      }
+    }
+  }
+  .delete_main_wrpper {
+    padding: 15px 0;
+    max-width: 655px;
+    margin: 0 auto;
+
+    .edit_btns {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 5px 0;
+      width: 100%;
+      border-bottom: 1px solid $box-border-color;
+      padding-bottom: 10px;
+      a {
+        background-color: transparent;
+        color: $text_light_yellow;
+        box-shadow: none;
+        font-size: 16px;
+        padding: 0;
+        text-align: right;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
+.delete_account_block {
+  .modal-header {
+    justify-content: center;
+    border: none;
+    padding: 15px;
 
+    .close {
+      opacity: 1;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      img {
+        width: 12px;
+      }
+
+      @include mobile-view {
+        top: 15px;
+        right: 15px;
+      }
+    }
+  }
+
+  .modal-body {
+    width: 100%;
+    padding: 20px 15px 20px;
+
+    h4 {
+      font-size: 29px;
+      line-height: 40px;
+      font-weight: 500;
+      color: $active-tab-text;
+      padding: 0px 0px 30px;
+      text-align: center;
+
+      @include tab-view {
+        font-size: 24px;
+        text-align: center;
+      }
+
+      @include mobile-view {
+        font-size: 20px;
+        line-height: 26px;
+        text-align: center;
+      }
+    }
+
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        width: 48%;
+        button {
+          width: 100%;
+          height: 40px;
+          padding: 0px 25px;
+          background: $hotel-secondary-color;
+          border-radius: 25px;
+          border: 1px solid $hotel-secondary-color;
+          font-size: 14px;
+          font-weight: 500;
+          color: $text-white;
+          transition: 0.3s;
+          position: relative;
+          z-index: 9;
+          overflow: hidden;
+          white-space: normal;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            width: 100%;
+            height: 0%;
+            background: $background-white;
+            z-index: -1;
+            transition: 0.8s;
+            border-radius: 25px;
+          }
+
+          &:hover {
+            border: 1px solid $hotel-secondary-color;
+            color: $hotel-secondary-color;
+            &:before {
+              height: calc(100% - 2px);
+              width: calc(100% - 2px);
+            }
+          }
+
+          &.btn_disable {
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
+  .modal-footer {
+    padding: 0 20px 25px;
+    border: 0;
+    margin: 0;
+    .modal_btm {
+      width: 100%;
+      .block_logo {
+        width: 100%;
+        text-align: center;
+        margin: 0 0 0;
+
+        img {
+          height: 22px;
+        }
+      }
+    }
+  }
+}
