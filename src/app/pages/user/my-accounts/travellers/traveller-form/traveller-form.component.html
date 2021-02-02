@@ -222,10 +222,17 @@
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Gender*</label>
                 <div class="gender_anchers">
-                    <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="selectGender($event,'M')">Male</a>
+                    <select formControlName="gender">
+
+                        <option>Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+<!--                     <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="selectGender($event,'M')">Male</a>
                     <a [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="selectGender($event,'F')">Female</a>
                     <a  [ngClass]="{'active': is_type == 'O'}" class="hover-link" (click)="selectGender($event,'O')">Other</a>
-                </div>
+ -->                </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Email*</label>

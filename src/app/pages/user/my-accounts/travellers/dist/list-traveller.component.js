@@ -10,8 +10,6 @@ exports.ListTravellerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var moment = require("moment");
-var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-var traveller_form_component_1 = require("./traveller-form/traveller-form.component");
 var ListTravellerComponent = /** @class */ (function () {
     function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService) {
         this.travelerService = travelerService;
@@ -58,6 +56,7 @@ var ListTravellerComponent = /** @class */ (function () {
         var _this = this;
         this.travelerService.getTravelers().subscribe(function (data) {
             _this.travelers = data.data;
+            console.log(_this.travelers);
             _this.loading = false;
             _this.showPaginationBar = true;
             if (_this.travelers.length === 0) {
@@ -82,29 +81,6 @@ var ListTravellerComponent = /** @class */ (function () {
         if (type == 'N')
             return 'Non Binary';
     };
-    ListTravellerComponent.prototype.ngDoCheck = function () {
-        // this.getTravelers();
-    };
-    ListTravellerComponent.prototype.ngOnChanges = function (changes) {
-        console.log('sds', changes);
-    };
-    ListTravellerComponent.prototype.openTravellerModal = function (content, userId, traveler) {
-        var _this = this;
-        if (userId === void 0) { userId = ''; }
-        if (traveler === void 0) { traveler = ''; }
-        this.modalReference = this.modalService.open(traveller_form_component_1.TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal', centered: true });
-        this.modalReference.componentInstance.travellerId = userId;
-        this.modalReference.componentInstance.travelerInfo = traveler;
-        this.modalReference.componentInstance.countries = this.countries;
-        this.modalReference.componentInstance.countries_code = this.countries_code;
-        this.modalReference.componentInstance.travelersChanges.subscribe(function ($e) {
-            var index = _this.travelers.indexOf($e.userId, 0);
-            if (index) {
-                _this.travelers = _this.travelers.filter(function (item) { return item.userId != $e.userId; });
-            }
-            _this.travelers.push($e);
-        });
-    };
     ListTravellerComponent.prototype.deleteTravellerModal = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
@@ -114,20 +90,9 @@ var ListTravellerComponent = /** @class */ (function () {
             _this.closeResult = "Closed with: " + result;
         }, function (reason) {
             // this.getTravelers();
-            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
             console.log(_this.closeResult);
         });
-    };
-    ListTravellerComponent.prototype.getDismissReason = function (reason) {
-        if (reason === ng_bootstrap_1.ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        }
-        else if (reason === ng_bootstrap_1.ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        }
-        else {
-            return "with: " + reason;
-        }
     };
     ListTravellerComponent.prototype.pushTraveler = function (event) {
         console.log("event", event);

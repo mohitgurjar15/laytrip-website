@@ -107,8 +107,13 @@ export class UserService {
     return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
   }
 
-  deleteAccount() {
-    return this.http.delete( this.apiURL + 'v1/auth/delete-account-request', this.commonFunction.setHeaders())
+  deleteAccount(data) {
+    const options = {
+      headers:this.commonFunction.setHeaders(),
+      data
+    }
+
+    return this.http.delete( this.apiURL + 'v1/auth/delete-account-request', options)
   }
 
   changePassword(data) {
