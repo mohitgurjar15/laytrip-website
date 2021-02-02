@@ -1,84 +1,87 @@
 <div class="booking_whole_wrapper">
   <div class="container">
-    <div class="search_wrapper">
-      <input type="text" placeholder="Search" />
-    </div>
-    <h3>
-      Upcoming
-    </h3>
-    <div class="accordion_up_wrapper">
-      <div id="accordion_upcoming">
-        <div class="card">
-          <div class="card-header">
-            <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#upcoming0">
-              <div class="headerin_wrapper">
+    <div class="booking_inner_container">
+      <div class="search_wrapper">
+        <input type="text" placeholder="Search" />
+      </div>
+      <h3>
+        Upcoming
+      </h3>
+      <div class="accordion_up_wrapper">
+        <div id="accordion_upcoming">
+          <div class="card">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#upcoming0">
                 <span class="header_image">
                   <span class="title_image">
                     <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                   </span>
                 </span>
-                <div class="header_second_sec">
-                  <div class="header_upper_wrper">
-                    <div class="header_name">
-                      JFK to MIA…
-                    </div>
-                    <div class="book_id">
-                      Booking ID 120383201
-                    </div>
-                    <div class="date_head">
-                      Nov 11, 2021
-                    </div>
-                  </div>
-                  <div class="header_lower_wrper">
-                    <div class="pricer_wrp">
-                      <span class="pink_price">
-                        $200
-                      </span>
-                      <div class="status">
-                        Paid
+                <div class="headerin_wrapper">
+
+                  <div class="header_second_sec">
+                    <div class="header_upper_wrper">
+                      <div class="header_name">
+                        JFK to MIA…
+                      </div>
+                      <div class="book_id">
+                        Booking ID 120383201
+                      </div>
+                      <div class="date_head">
+                        Nov 11, 2021
                       </div>
                     </div>
-                    <div class="payment_bar_wrps">
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="header_lower_wrper">
+                      <div class="pricer_wrp">
+                        <span class="pink_price">
+                          $200
+                        </span>
+                        <div class="status">
+                          Paid
+                        </div>
                       </div>
-                      <div class="payment_status">
-                        Next Payment May 1, 2021
+                      <div class="payment_bar_wrps">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="payment_status">
+                          Next Payment May 1, 2021
+                        </div>
                       </div>
-                    </div>
-                    <div class="pricer_wrp">
-                      <span class="pink_price">
-                        $900
-                      </span>
-                      <div class="status">
-                        Due
+                      <div class="pricer_wrp">
+                        <span class="pink_price">
+                          $900
+                        </span>
+                        <div class="status">
+                          Due
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </a>
+            </div>
+            <div id="upcoming0" class="collapse show" data-parent="#accordion_upcoming">
+              <div class="card-body">
+                <app-flights></app-flights>
               </div>
-            </a>
-          </div>
-          <div id="upcoming0" class="collapse show" data-parent="#accordion_upcoming">
-            <div class="card-body">
-              <app-flights></app-flights>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <h3>Completed</h3>
-    <div id="accordion_completed">
-      <div class="card">
-        <div class="card-header">
-          <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#completed0">
-            LHR-LAX
-          </a>
-        </div>
-        <div id="completed0" class="collapse show" data-parent="#accordion_completed">
-          <div class="card-body">
-            <app-flights></app-flights>
+      <h3>Completed</h3>
+      <div id="accordion_completed">
+        <div class="card">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#completed0">
+              LHR-LAX
+            </a>
+          </div>
+          <div id="completed0" class="collapse show" data-parent="#accordion_completed">
+            <div class="card-body">
+              <app-flights></app-flights>
+            </div>
           </div>
         </div>
       </div>
