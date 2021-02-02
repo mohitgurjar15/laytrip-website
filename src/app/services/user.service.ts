@@ -120,7 +120,7 @@ export class UserService {
     return this.http.put(this.apiURL + 'v1/auth/preference', data, this.commonFunction.setHeaders());
   }
   getPreference() {
-    return this.http.get(this.apiURL + 'v1/auth/get-preference', this.commonFunction.setHeaders());
+    return this.http.get(this.apiURL + 'v1/auth/preference', this.commonFunction.setHeaders());
   }
   getBookings(pageNumber, limit,filterForm) {
     let queryString = "";
