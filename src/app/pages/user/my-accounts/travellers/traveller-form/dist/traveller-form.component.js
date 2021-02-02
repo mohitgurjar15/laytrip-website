@@ -66,7 +66,7 @@ var TravellerFormComponent = /** @class */ (function () {
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
             country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
-            // passport_expiry: [''],
+            passport_expiry: [''],
             passport_number: ['']
         });
         // this.setUserTypeValidation();

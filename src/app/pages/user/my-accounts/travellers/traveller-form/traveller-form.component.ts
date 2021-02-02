@@ -86,7 +86,7 @@ export class TravellerFormComponent implements OnInit {
       country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
       country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
       dob: ['', Validators.required],
-      // passport_expiry: [''],
+      passport_expiry: [''],
       passport_number: [''],
       // user_type: ['']
     });
