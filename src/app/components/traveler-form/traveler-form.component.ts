@@ -157,8 +157,7 @@ export class TravelerFormComponent implements OnInit {
       }
     })
 
-    //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage,this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
-    //console.log("this.baggageDescription",this.baggageDescription)
+    this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage,this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
   
   }
 
@@ -236,22 +235,21 @@ export class TravelerFormComponent implements OnInit {
     this.traveler_number=traveler_number;
   }
 
-  /* formatBaggageDescription(cabbinBaggage,checkInBaggage){
+  formatBaggageDescription(cabbinBaggage,checkInBaggage){
 
-    let cabbinBaggageWight=0; 
+    let cabbinBaggageWight; 
     let checkInBaggageWight; 
     let description='';
-    console.log("cabbinBaggage",cabbinBaggage)
     if(cabbinBaggage!="" && cabbinBaggage.includes("KG")==true){
-      cabbinBaggageWight = this.convertKgToLB(cabbinBaggage.replace("KG"))
-      description = `Cabin bag upto ${cabbinBaggageWight} lbs (${cabbinBaggage}KG)`;
+      cabbinBaggageWight = this.convertKgToLB(cabbinBaggage.replace("KG",""))
+      description = `Cabin bag upto ${cabbinBaggageWight} lbs (${cabbinBaggage})`;
     }
     else if(cabbinBaggage!=''){
         description = `Cabin bag upto ${cabbinBaggage}`;
     }
     
     if(checkInBaggage!="" && checkInBaggage.includes("KG")==true){
-      checkInBaggageWight = this.convertKgToLB(checkInBaggage.replace("KG"))
+      checkInBaggageWight = this.convertKgToLB(checkInBaggage.replace("KG",""))
       if(description!=''){
         description+=` and checkin bag upto ${checkInBaggageWight} lbs (${checkInBaggage})`;
       }
@@ -273,8 +271,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   convertKgToLB(weight){
-    console.log(weight,":weight")
-    return 2.20462*Number(weight);
-  } */
+    return (2.20462*Number(weight)).toFixed(2);
+  }
 
 }
