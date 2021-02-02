@@ -14,7 +14,8 @@ export class AccountComponent implements OnInit {
   loading : boolean = true; 
   closeResult = '';
   s3BucketUrl = environment.s3BucketUrl;
-
+  isRequireBackupFile : boolean = false;
+  
   constructor(
     private modalService: NgbModal,
     private userService : UserService
@@ -54,13 +55,19 @@ export class AccountComponent implements OnInit {
 
   deleteAccount(){
     this.loading = true;
-let data = {"requireBackupFile": true};
-
+    let data = {"requireBackupFile": this.isRequireBackupFile};
     this.userService.deleteAccount(data).subscribe((data: any) => {      
       this.loading = false;
       localStorage.clear();
     }, (error: HttpErrorResponse) => {       
       this.loading = false;
     }); 
+  }
+
+  changeDeleteAccountForBackup(event){
+    this.isRequireBackupFile = false;
+    if(event.target.checked){
+      this.isRequireBackupFile = true;
+    }
   }
 }

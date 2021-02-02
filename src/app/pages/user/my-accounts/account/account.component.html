@@ -99,7 +99,7 @@
             <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
             <div class="check">
                 <label class="custom_checkbox">
-                    <input (change)="checkAccept($event)" formControlName="checked" value="{{iAccept}}" tabindex="16" type="checkbox">
+                    <input name="checkbox" (change)="changeDeleteAccountForBackup($event)" tabindex="16" type="checkbox">
                     <span class="checkmark"></span>
                     Do you want your all data before delete account?
                 </label>

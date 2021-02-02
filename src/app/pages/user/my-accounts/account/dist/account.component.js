@@ -17,6 +17,7 @@ var AccountComponent = /** @class */ (function () {
         this.loading = true;
         this.closeResult = '';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.isRequireBackupFile = false;
     }
     AccountComponent.prototype.ngOnInit = function () {
     };
@@ -51,13 +52,19 @@ var AccountComponent = /** @class */ (function () {
     AccountComponent.prototype.deleteAccount = function () {
         var _this = this;
         this.loading = true;
-        var data = { "requireBackupFile": true };
+        var data = { "requireBackupFile": this.isRequireBackupFile };
         this.userService.deleteAccount(data).subscribe(function (data) {
             _this.loading = false;
             localStorage.clear();
         }, function (error) {
             _this.loading = false;
         });
+    };
+    AccountComponent.prototype.changeDeleteAccountForBackup = function (event) {
+        this.isRequireBackupFile = false;
+        if (event.target.checked) {
+            this.isRequireBackupFile = true;
+        }
     };
     AccountComponent = __decorate([
         core_1.Component({
