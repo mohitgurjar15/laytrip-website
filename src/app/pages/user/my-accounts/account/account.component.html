@@ -95,11 +95,11 @@
             <h4 class="modal-title" id="modal-basic-title">Are you sure you want to Cancel this Upcoming Booking?</h4>
             <ul>
                 <li>
-                    <button>Yes</button>
+                    <button (click)=deleteAccount()>Yes</button>
                 </li>
 
                 <li>
-                    <button>No</button>
+                    <button (click)="modal.dismiss('Cross click')">No</button>
                 </li>
             </ul>
         </div>

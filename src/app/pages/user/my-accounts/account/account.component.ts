@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../../../environments/environment';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-account',
@@ -10,9 +13,12 @@ export class AccountComponent implements OnInit {
 
   loading : boolean = true; 
   closeResult = '';
-  
+  s3BucketUrl = environment.s3BucketUrl;
+
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userService : UserService
+
   ) { }
 
   ngOnInit() {
@@ -44,5 +50,15 @@ export class AccountComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  deleteAccount(){
+    this.loading = true;
+
+    this.userService.deleteAccount().subscribe((data: any) => {      
+      this.loading = false;
+    }, (error: HttpErrorResponse) => {       
+      this.loading = false;
+    }); 
   }
 }

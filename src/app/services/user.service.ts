@@ -106,9 +106,15 @@ export class UserService {
   resetPassword(data) {
     return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
   }
+
+  deleteAccount() {
+    return this.http.delete( this.apiURL + 'v1/auth/delete-account-request', this.commonFunction.setHeaders())
+  }
+
   changePassword(data) {
     return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
   }
+
   updateProfile(data) {
     return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
   }
