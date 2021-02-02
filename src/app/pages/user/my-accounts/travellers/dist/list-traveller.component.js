@@ -168,8 +168,8 @@ var ListTravellerComponent = /** @class */ (function () {
         this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
     };
     ListTravellerComponent.prototype.onSubmit = function () {
+        var _this = this;
         var formData = this.childCompopnent.travellerForm;
-        console.log(formData);
         if (formData.invalid) {
             console.log('sds');
         }
@@ -196,6 +196,21 @@ var ListTravellerComponent = /** @class */ (function () {
                 phone_no: formData.value.phone_no
             };
             console.log(formData, jsonData);
+            this.travelerService.addAdult(jsonData).subscribe(function (data) {
+                // this.travelersChanges.emit(data);
+                console.log(data);
+                _this.getTravelers();
+            }, function (error) {
+                console.log('error');
+                _this.loading = false;
+                if (error.status === 401) {
+                    _this.router.navigate(['/']);
+                }
+                else {
+                    _this.loading = false;
+                    _this.toastr.error(error.error.message, 'Traveller Add Error');
+                }
+            });
         }
     };
     ListTravellerComponent.prototype.stringToDate = function (string, saprator) {

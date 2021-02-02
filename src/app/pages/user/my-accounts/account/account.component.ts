@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { environment } from '../../../../../environments/environment';
 import { UserService } from '../../../../services/user.service';
 
@@ -58,7 +59,7 @@ export class AccountComponent implements OnInit {
     let data = {"requireBackupFile": this.isRequireBackupFile};
     this.userService.deleteAccount(data).subscribe((data: any) => {      
       this.loading = false;
-      localStorage.clear();
+      redirectToLogin()
     }, (error: HttpErrorResponse) => {       
       this.loading = false;
     }); 
