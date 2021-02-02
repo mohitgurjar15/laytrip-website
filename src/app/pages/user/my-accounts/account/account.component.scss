@@ -272,7 +272,7 @@
   .modal-header {
     justify-content: center;
     border: none;
-    padding: 15px;
+    padding: 25px;
 
     .close {
       opacity: 1;
@@ -293,7 +293,7 @@
 
   .modal-body {
     width: 100%;
-    padding: 20px 15px 20px;
+    padding: 0px 15px 20px;
     @include tab-view {
       height: 100%;
       justify-content: center;
