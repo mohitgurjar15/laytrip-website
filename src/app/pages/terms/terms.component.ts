@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../services/generic.service';
+import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 
@@ -14,7 +15,8 @@ export class TermsComponent implements OnInit {
   loading = false;
 
   constructor(    
-    private genericService: GenericService
+    private genericService: GenericService,
+    public commonFunction: CommonFunction
     ) { }
 
   ngOnInit(): void {

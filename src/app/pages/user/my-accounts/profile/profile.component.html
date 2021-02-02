@@ -113,7 +113,7 @@
             <div class="form_row common_row">
                 <label>Home Airport</label>
                 <div class="text_field">
-                    <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city"
+                    <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="code"
                         [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true"
                         formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"

@@ -8,9 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.AccountComponent = void 0;
 var core_1 = require("@angular/core");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var AccountComponent = /** @class */ (function () {
-    function AccountComponent() {
+    function AccountComponent(modalService) {
+        this.modalService = modalService;
         this.loading = true;
+        this.closeResult = '';
     }
     AccountComponent.prototype.ngOnInit = function () {
     };
@@ -20,6 +23,26 @@ var AccountComponent = /** @class */ (function () {
         }
         else {
             this.loading = true;
+        }
+    };
+    AccountComponent.prototype.open = function (content) {
+        var _this = this;
+        this.modalService.open(content, { windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+            keyboard: false }).result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+        });
+    };
+    AccountComponent.prototype.getDismissReason = function (reason) {
+        if (reason === ng_bootstrap_1.ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === ng_bootstrap_1.ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
         }
     };
     AccountComponent = __decorate([
