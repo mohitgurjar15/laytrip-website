@@ -141,7 +141,7 @@ export class ProfileComponent implements OnInit {
       });
       if(this.location){
         const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-        this.profileForm.controls.country_code.setValue(countryCode.country_name);
+        this.profileForm.controls.country_code.setValue(countryCode.id);
       }      
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
@@ -234,13 +234,13 @@ export class ProfileComponent implements OnInit {
       if(typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode){
         countryCode = this.countries_code.filter(item => item.id == res.countryCode)[0];
       } else {
-         countryCode = typeof this.location != 'undefined' ? this.countries_code.filter(item => item.id == this.location.country.id)[0] : '';      
+        countryCode = typeof this.location != 'undefined' ? this.countries_code.filter(item => item.id == this.location.country.id)[0] : '';      
       }
       let countryName = '';
       if(typeof this.location != 'undefined'){
-        countryName = this.location.country.name;
+        countryName = this.location.country.id;
       }
-      // console.log(res.dob)
+      console.log(countryCode)
       // console.log(moment(res.dob).format('MMM d, yy'))
 
       this.profileForm.patchValue({      

@@ -120,7 +120,7 @@ var ProfileComponent = /** @class */ (function () {
                 });
             if (_this.location) {
                 var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-                _this.profileForm.controls.country_code.setValue(countryCode.country_name);
+                _this.profileForm.controls.country_code.setValue(countryCode.id);
             }
         }, function (error) {
             if (error.status === 401) {
@@ -216,9 +216,9 @@ var ProfileComponent = /** @class */ (function () {
             }
             var countryName = '';
             if (typeof _this.location != 'undefined') {
-                countryName = _this.location.country.name;
+                countryName = _this.location.country.id;
             }
-            // console.log(res.dob)
+            console.log(countryCode);
             // console.log(moment(res.dob).format('MMM d, yy'))
             _this.profileForm.patchValue({
                 first_name: res.firstName,

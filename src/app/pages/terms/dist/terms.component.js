@@ -10,10 +10,21 @@ exports.TermsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var TermsComponent = /** @class */ (function () {
-    function TermsComponent() {
+    function TermsComponent(genericService) {
+        this.genericService = genericService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.loading = false;
     }
     TermsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        $('body').addClass('cms-bgColor');
+        window.scroll(0, 0);
+        var pageType = 'terms';
+        this.loading = true;
+        this.genericService.getCmsByPageType(pageType).subscribe(function (res) {
+            _this.cmsData = res;
+            _this.loading = false;
+        });
     };
     TermsComponent = __decorate([
         core_1.Component({
