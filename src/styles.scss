@@ -578,7 +578,7 @@ select {
 
             li {
               display: inline-block;
-              margin: 0 20px 0 0;
+              margin: 0 10px 0 0;
 
               a {
                 display: flex;
@@ -2815,6 +2815,7 @@ select {
           width: auto;
           display: inline-block;
           margin-bottom: 15px;
+          color: $box-border-color;
 
           img {
             display: inline-block;
