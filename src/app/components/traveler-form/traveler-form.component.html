@@ -158,7 +158,7 @@
                                   || 20.39 USD</button></li>
                             </ul> -->
                             <button class="addon_btn_drop" (click)="$event.preventDefault()">
-                              Total Weight: Check-in baggage - up to 3lb || 16.39 USD
+                              {{baggageDescription}}
                             </button>
                           </div>
                         </div>
@@ -280,7 +280,7 @@
                         <div class="tab-pane fade show active" id="baggage" role="tabpanel"
                           aria-labelledby="baggage-tab">
                           <div class="addon_listins_wrps">
-                            <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                            <!-- <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown"
                               aria-expanded="false">
                               Total Weight: Check-in baggage - up to 3lb || 16.39 USD
                             </button>
@@ -291,7 +291,10 @@
                                   || 18.39 USD</button></li>
                               <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 5lb
                                   || 20.39 USD</button></li>
-                            </ul>
+                            </ul> -->
+                            <button class="addon_btn_drop" (click)="$event.preventDefault()">
+                              {{baggageDescription}}
+                            </button>
                           </div>
                         </div>
                         <div class="tab-pane fade" id="boarding" role="tabpanel" aria-labelledby="boarding-tab">

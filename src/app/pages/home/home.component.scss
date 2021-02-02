@@ -16,7 +16,7 @@
 	height: calc(100vh - 55px);
 	//padding-bottom: 130px;
 	z-index: 9;
-	@include tab-view {
+	@include ipad-view {
 		//padding-bottom: 60px;
 		height: 100%;
 	}
@@ -43,12 +43,13 @@
 		bottom: 0;
 		right: 0;
 		left: 0;
-		padding: 0;
-		transform: translate(0%, 28%);
+		padding: 130px 0;
+		// transform: translate(0%, 28%);
+		transform: translate(0%, 0%);
 		@include ipad-view{
 			transform: translate(0%, 0%);
 			position: relative;
-			padding-top: 70px;
+			padding: 70px 0;
 		}
 
 		.banner_text {
@@ -112,10 +113,10 @@
 
 		.banner_tab {
 			width: 100%;
-			padding: 70px 0 0;
+			padding: 30px 0 0;
 
 			@include tab-view {
-				padding: 45px 10px 10px;
+				padding: 40px 10px 10px;
 			}
 
 			.nav-tabs {

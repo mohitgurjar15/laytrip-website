@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="ftr_flex_row">
-                    <a [routerLink]="['/']">
+                    <a [routerLink]="['/']" class="logo_w">
                         <img src="{{s3BucketUrl}}assets/images/footer_logo.svg" alt="Logo" />
                     </a>
                 </div>
@@ -29,14 +29,17 @@
                                 <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
                                         <a class="dropdown-toggle hover-link" data-toggle="dropdown">
-                                            <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code
+                                            <!-- <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code
+                                            }} -->
+                                            {{ selectedCurrency.code
                                             }}
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li *ngFor="let currency of currencies">
                                                 <a class="hover-link" (click)="changeCurrency(currency)">
-                                                    <img src="{{currency.flag}}" alt="" /> {{ currency.code }}
+                                                    <!-- <img src="{{currency.flag}}" alt="" /> {{ currency.code }} -->
+                                                    {{ currency.code }}
                                                 </a>
                                             </li>
                                         </ul>
