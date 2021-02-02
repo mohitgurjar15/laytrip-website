@@ -53,14 +53,17 @@
         &::placeholder {
           color: $mid_gray_bg;
           opacity: 1;
+          font-weight: 300;
         }
         
         &:-ms-input-placeholder { 
          color: $mid_gray_bg;
+         font-weight: 300;
         }
         
         &::-ms-input-placeholder { 
          color: $mid_gray_bg;
+         font-weight: 300;
         }
         @include tab-view {
           font-size: 14px;
