@@ -120,7 +120,7 @@ var ProfileComponent = /** @class */ (function () {
                 });
             if (_this.location) {
                 var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-                _this.profileForm.controls.country_code.setValue(countryCode.country_name);
+                _this.profileForm.controls.country_code.setValue(countryCode.id);
             }
         }, function (error) {
             if (error.status === 401) {
@@ -202,24 +202,10 @@ var ProfileComponent = /** @class */ (function () {
             _this.image = res.profilePic;
             _this.selectResponse = res;
             _this.is_type = res.gender ? res.gender : 'M';
-            if (typeof _this.location != 'undefined' || typeof res.country.id != 'undefined') {
-                var country = res.country.id ? res.country : _this.location.country;
-                if (typeof country != 'undefined')
-                    _this.getStates(country);
-            }
-            var countryCode = '';
-            if (typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode) {
-                countryCode = _this.countries_code.filter(function (item) { return item.id == res.countryCode; })[0];
-            }
-            else {
-                countryCode = typeof _this.location != 'undefined' ? _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0] : '';
-            }
             var countryName = '';
             if (typeof _this.location != 'undefined') {
-                countryName = _this.location.country.name;
+                countryName = _this.location.country.id;
             }
-            // console.log(res.dob)
-            // console.log(moment(res.dob).format('MMM d, yy'))
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -227,8 +213,8 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
-                dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? moment(res.dob).format('MMM d, yy') : '',
-                country_code: countryCode,
+                dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
+                country_code: res.countryCode ? res.countryCode : '',
                 phone_no: res.phoneNo,
                 country_id: res.country.name ? res.country.name : countryName,
                 state_id: res.state.name,
@@ -279,6 +265,7 @@ var ProfileComponent = /** @class */ (function () {
                 imgfile = this.imageFile;
                 formdata.append("profile_pic", imgfile);
             }
+            console.log(this.profileForm.value, this);
             formdata.append("title", 'mr');
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
@@ -348,7 +335,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.selectEvent = function (event, item) {
         console.log(item.key);
         if (event && event.code && item.key === 'fromSearch') {
-            // this.searchFlightInfo.departure = event.code;
+            // this.home_airport = event.code;
             // this.departureAirport=event;
             // this.searchedValue.push({ key: 'fromSearch', value: event });
         }

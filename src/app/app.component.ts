@@ -37,8 +37,8 @@ export class AppComponent {
   })
   .then(sub =>   this.genericService.addPushSubscriber(sub).subscribe()
     )
-  .catch(err => 
-    console.log("Could not subscribe to notifications")
+  .catch(
+    // err =>console.log("Could not subscribe to notifications")
   );
     /* this.swPush.requestSubscription({
         serverPublicKey: this.VAPID_PUBLIC_KEY

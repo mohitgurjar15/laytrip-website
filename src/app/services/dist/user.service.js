@@ -78,6 +78,13 @@ var UserService = /** @class */ (function () {
     UserService.prototype.resetPassword = function (data) {
         return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
     };
+    UserService.prototype.deleteAccount = function (data) {
+        var options = {
+            headers: this.commonFunction.setHeaders(),
+            data: data
+        };
+        return this.http["delete"](this.apiURL + 'v1/auth/delete-account-request', options);
+    };
     UserService.prototype.changePassword = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
     };
@@ -91,7 +98,7 @@ var UserService = /** @class */ (function () {
         return this.http.put(this.apiURL + 'v1/auth/preference', data, this.commonFunction.setHeaders());
     };
     UserService.prototype.getPreference = function () {
-        return this.http.get(this.apiURL + 'v1/auth/get-preference', this.commonFunction.setHeaders());
+        return this.http.get(this.apiURL + 'v1/auth/preference', this.commonFunction.setHeaders());
     };
     UserService.prototype.getBookings = function (pageNumber, limit, filterForm) {
         var queryString = "";

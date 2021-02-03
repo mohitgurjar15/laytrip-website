@@ -83,6 +83,7 @@ export class ListTravellerComponent implements OnInit {
   getTravelers() {
     this.travelerService.getTravelers().subscribe((data: any) => {
       this.travelers = data.data;
+      console.log(this.travelers)
       this.loading = false;
       this.showPaginationBar =true;
       if(this.travelers.length === 0){
@@ -110,31 +111,7 @@ export class ListTravellerComponent implements OnInit {
     if (type == 'N')
       return 'Non Binary';
   }
-
-  ngDoCheck() {
-    // this.getTravelers();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('sds', changes)
-  }
-
-
-  openTravellerModal(content, userId = '',traveler='') {
-    this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal',centered: true });
-    (<TravellerFormComponent>this.modalReference.componentInstance).travellerId = userId;
-    (<TravellerFormComponent>this.modalReference.componentInstance).travelerInfo = traveler;
-    (<TravellerFormComponent>this.modalReference.componentInstance).countries = this.countries;
-    (<TravellerFormComponent>this.modalReference.componentInstance).countries_code = this.countries_code;
-    this.modalReference.componentInstance.travelersChanges.subscribe(($e) => {
-      const index = this.travelers.indexOf($e.userId, 0);
-      if(index){
-        this.travelers = this.travelers.filter(item => item.userId != $e.userId );            
-      }
-      this.travelers.push($e);
-    })
-  }
-
+ 
   deleteTravellerModal(content, userId = '') {
     this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal',centered: true });
     this.userId = userId;
@@ -142,20 +119,11 @@ export class ListTravellerComponent implements OnInit {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.getTravelers();
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(this.closeResult)
     });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
   pushTraveler(event) {
     console.log("event", event)
