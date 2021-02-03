@@ -269,114 +269,87 @@
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
-.block_cms_page_main.page_about {
-  padding: 40px 0 70px;
+.block_cms_page_main.block_covid_19 {
+  padding: 40px 0 100px;
 }
-.block_cms_page_main.page_about .page_topbanner {
+@media (max-width: 768px) {
+  .block_cms_page_main.block_covid_19 {
+    padding: 42px 0 60px;
+  }
+}
+.block_cms_page_main.block_covid_19 .page_topbanner {
   margin: 0 0 25px;
   width: 100%;
 }
-.block_cms_page_main.page_about .page_topbanner img {
+.block_cms_page_main.block_covid_19 .page_topbanner img {
   width: 100%;
 }
-.block_cms_page_main.page_about .block_cms_cnt {
+.block_cms_page_main.block_covid_19 .block_cms_cnt {
   width: 100%;
 }
-.block_cms_page_main.page_about .block_cms_cnt .page_back_link {
+.block_cms_page_main.block_covid_19 .block_cms_cnt .page_back_link {
   margin-bottom: 30px;
 }
-.block_cms_page_main.page_about .block_cms_cnt .page_back_link a {
+.block_cms_page_main.block_covid_19 .block_cms_cnt .page_back_link a {
   color: #0043ff;
   font-size: 15px;
   font-weight: 500;
 }
-.block_cms_page_main.page_about .block_cms_cnt .block_cmspage_comman {
+.block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage {
   max-width: 760px;
   margin: 0 auto;
   box-shadow: none;
   padding: 0;
 }
-@media (max-width: 768px) {
-  .block_cms_page_main.page_about .block_cms_cnt .about_page_cmn .block_cmspage_comman {
-    padding: 15px;
-  }
-}
-.block_cms_page_main.page_about .block_cms_cnt .about_page_cmn h3 {
-  color: #1445f5;
+.block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage h3 {
+  color: #0043ff;
   font-size: 34px;
   font-weight: 500;
   margin-bottom: 30px;
 }
 @media (max-width: 768px) {
-  .block_cms_page_main.page_about .block_cms_cnt .about_page_cmn h3 {
-    font-size: 28px;
+  .block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage h3 {
+    font-size: 26px;
+    margin-bottom: 20px;
   }
 }
-.block_cms_page_main.page_about .block_cms_cnt .about_page_cmn .detail_wpr {
-  display: flex;
-  margin-bottom: 30px;
+.block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text {
+  width: 100%;
+  margin: 0 0 25px;
 }
-@media (max-width: 768px) {
-  .block_cms_page_main.page_about .block_cms_cnt .about_page_cmn .detail_wpr span {
-    display: none;
-  }
+.block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text:last-child {
+  margin: 0;
 }
-.block_cms_page_main.page_about .block_cms_cnt .about_page_cmn .para_detail {
+.block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text p {
   font-size: 18px;
+  line-height: 26px;
   color: #878787;
-  margin-bottom: 20px;
+  margin: 0;
 }
-.block_cms_page_main.page_about .block_cms_cnt .about_page_cmn .para_detail a {
-  color: #1943ff;
-  text-decoration: none;
+@media (max-width: 768px) {
+  .block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text p {
+    font-size: 14px;
+  }
 }
-.block_cms_page_main.page_about .block_cms_cnt .about_page_cmn h5 {
-  color: #000000;
-  font-size: 26px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.block_about_us {
+.block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text h5 {
   width: 100%;
-  padding: 60px 0 30px;
-}
-.block_about_us .block_covid_cnt {
-  width: 100%;
-}
-.block_about_us .block_covid_cnt .block_cnt {
-  width: 100%;
-  margin: 0 0 30px;
-}
-.block_about_us .block_covid_cnt .block_cnt h2 {
-  width: 100%;
-  margin-bottom: 20px;
+  margin: 0;
   font-size: 20px;
-  font-weight: 700;
-  color: #000000;
-}
-.block_about_us .block_covid_cnt .block_cnt p {
-  width: 100%;
-  margin-bottom: 15px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #000000;
-}
-.block_about_us .block_covid_cnt .block_cnt p:last-child {
-  margin-bottom: 0;
-}
-.block_about_us .block_covid_cnt .block_cnt p a {
-  color: #0045ff;
-}
-.block_about_us .block_covid_cnt .block_cnt p span a {
-  font-weight: 500;
+  font-weight: 600;
   color: #000000;
 }
 @media (max-width: 768px) {
-  .block_about_us .block_covid_cnt .block_cnt .detail_wpr span img {
-    display: none;
+  .block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text h5 {
+    font-size: 16px;
   }
 }
-.block_about_us .block_covid_cnt .block_cnt img {
-  max-width: 100%;
+.block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text a {
+  font-size: 18px;
+  line-height: 26px;
+  color: #0c7bff;
+}
+@media (max-width: 768px) {
+  .block_cms_page_main.block_covid_19 .block_cms_cnt .block_cmspage .block_text a {
+    font-size: 14px;
+  }
 }
