@@ -8,7 +8,7 @@
               Booking Traveler {{x+1}}
             </a>
           </div>
-          <div [id]="'adult_collapse'+x" class="collapse"   data-parent="#accordion">
+          <div [id]="'adult_collapse'+x" class="collapse" [ngClass]="{'show':traveler_number==x}"   data-parent="#accordion">
             <div class="card-body">
               <div class="sub_cat_wrapper">
                 <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)
@@ -27,7 +27,7 @@
                   </a>
                 </button>
               </div>
-              <app-my-traveler travelerId={{travelers.type0.adults[traveler_number].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler travelerId={{travelers.type0.adults[x].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -145,18 +145,6 @@
                         <div class="tab-pane fade show active" id="baggage" role="tabpanel"
                           aria-labelledby="baggage-tab">
                           <div class="addon_listins_wrps">
-                            <!-- <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                              aria-expanded="false">
-                              Total Weight: Check-in baggage - up to 3lb || 16.39 USD
-                            </button>
-                            <ul class="dropdown-menu dropdownList" aria-labelledby="dropdownMenu2">
-                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 3lb
-                                  || 16.39 USD</button></li>
-                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 4lb
-                                  || 18.39 USD</button></li>
-                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 5lb
-                                  || 20.39 USD</button></li>
-                            </ul> -->
                             <button class="addon_btn_drop" (click)="$event.preventDefault()">
                               {{baggageDescription}}
                             </button>
@@ -178,7 +166,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="travelers.type1.adults.length>0 && cartNumber==1" formGroupName="type1">
+  <!-- <div *ngIf="travelers.type1.adults.length>0 && cartNumber==1" formGroupName="type1">
     <div formArrayName="adults">
       <div id="accordion" class="accordion_bookings">
         <div class="card" *ngFor="let traveler of travelerForm.get('type1.adults')['controls']; let x = index">
@@ -280,18 +268,6 @@
                         <div class="tab-pane fade show active" id="baggage" role="tabpanel"
                           aria-labelledby="baggage-tab">
                           <div class="addon_listins_wrps">
-                            <!-- <button class="addon_btn_drop" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                              aria-expanded="false">
-                              Total Weight: Check-in baggage - up to 3lb || 16.39 USD
-                            </button>
-                            <ul class="dropdown-menu dropdownList" aria-labelledby="dropdownMenu2">
-                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 3lb
-                                  || 16.39 USD</button></li>
-                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 4lb
-                                  || 18.39 USD</button></li>
-                              <li><button class="dropdown-item" type="button">Total Weight: Check-in baggage - up to 5lb
-                                  || 20.39 USD</button></li>
-                            </ul> -->
                             <button class="addon_btn_drop" (click)="$event.preventDefault()">
                               {{baggageDescription}}
                             </button>
@@ -312,5 +288,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </form>
