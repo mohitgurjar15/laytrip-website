@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { environment } from '../../../../../environments/environment';
 import { UserService } from '../../../../services/user.service';
 
@@ -14,7 +15,8 @@ export class AccountComponent implements OnInit {
   loading : boolean = true; 
   closeResult = '';
   s3BucketUrl = environment.s3BucketUrl;
-
+  isRequireBackupFile : boolean = false;
+  
   constructor(
     private modalService: NgbModal,
     private userService : UserService
@@ -54,13 +56,19 @@ export class AccountComponent implements OnInit {
 
   deleteAccount(){
     this.loading = true;
-let data = {"requireBackupFile": true};
-
+    let data = {"requireBackupFile": this.isRequireBackupFile};
     this.userService.deleteAccount(data).subscribe((data: any) => {      
       this.loading = false;
-      localStorage.clear();
+      redirectToLogin()
     }, (error: HttpErrorResponse) => {       
       this.loading = false;
     }); 
+  }
+
+  changeDeleteAccountForBackup(event){
+    this.isRequireBackupFile = false;
+    if(event.target.checked){
+      this.isRequireBackupFile = true;
+    }
   }
 }

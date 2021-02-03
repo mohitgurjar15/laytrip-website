@@ -45,6 +45,7 @@ var TravellerFormComponent = /** @class */ (function () {
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         var _this = this;
+        console.log('this');
         this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
@@ -57,8 +58,7 @@ var TravellerFormComponent = /** @class */ (function () {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
         this.travellerForm = this.formBuilder.group({
-            // title: ['mr'],
-            gender: ['M'],
+            gender: [''],
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
@@ -71,8 +71,11 @@ var TravellerFormComponent = /** @class */ (function () {
         });
         // this.setUserTypeValidation();
         if (this.travellerId) {
-            // this.setTravelerForm();
+            this.setTravelerForm();
         }
+    };
+    TravellerFormComponent.prototype.ngOnChanges = function (changes) {
+        console.log(changes);
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
         var _this = this;
@@ -166,18 +169,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     country_id = this.location.country.id;
                 }
             }
-            var country_code = this.travellerForm.value.country_code;
-            if (typeof country_code == 'object') {
-                country_code = country_code.id ? country_code.id : this.location.country.id;
-            }
-            else if (typeof country_code == 'string') {
-                country_code = this.travelerInfo.countryCode ? this.travelerInfo.countryCode : this.location.country.id;
-            }
-            else {
-                country_code = this.location.country.id;
-            }
             var jsonData = {
-                // title: this.travellerForm.value.title,
                 first_name: this.travellerForm.value.firstName,
                 last_name: this.travellerForm.value.lastName,
                 dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.travellerForm.value.dob, '/')).format('YYYY-MM-DD'),
@@ -185,13 +177,13 @@ var TravellerFormComponent = /** @class */ (function () {
                 country_id: country_id ? country_id : '',
                 passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
                 passport_number: this.travellerForm.value.passport_number,
-                country_code: country_code ? country_code : this.location.country.id,
+                country_code: this.travellerForm.value.country_code ? this.travellerForm.value.country_code : '',
                 phone_no: this.travellerForm.value.phone_no
             };
             var emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
-            console.log(jsonData);
             if (this.travellerId) {
                 jsonData = Object.assign(jsonData, emailObj);
+                console.log(jsonData, this.travellerId);
                 this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
                     _this.travelersChanges.emit(data);
                     _this.activeModal.close();
@@ -247,8 +239,6 @@ var TravellerFormComponent = /** @class */ (function () {
                 _this.router.navigate(['/']);
             }
         });
-    };
-    TravellerFormComponent.prototype.ngOnChanges = function (changes) {
     };
     TravellerFormComponent.prototype.stringToDate = function (string, saprator) {
         var dateArray = string.split(saprator);

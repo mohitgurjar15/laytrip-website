@@ -553,7 +553,7 @@ input.ng-invalid.ng-touched {
   border-bottom: none;
 }
 .account_cnt_main .update_info .form_row .text_field .tel_span input:first-child {
-  width: 40px;
+  width: 55px;
 }
 .account_cnt_main .update_info .form_row input {
   width: 100%;
