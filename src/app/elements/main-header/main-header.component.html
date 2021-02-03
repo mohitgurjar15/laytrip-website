@@ -94,12 +94,12 @@
                                 </div>
                             </li>
                             <li class="nav-item responsive_li cart_drop" *ngIf="isLoggedIn && cartItemsCount">
-                                <a (click)="redirectToPayment()" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
+                                <a  class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0);" class="gryd_txt">Weekly</a></li>
-                                    <li><a href="javascript:void(0);" class="bld_txt">$20.11</a></li>
+                                    <li><a href="javascript:void(0);" class="gryd_txt" *ngIf="weeklyInstallmentAmount>0">Weekly</a></li>
+                                    <li><a href="javascript:void(0);" class="bld_txt" *ngIf="weeklyInstallmentAmount>0" >${{weeklyInstallmentAmount | number : '1.2-2'}}</a></li>
                                     <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
-                                    <li><a href="javascript:void(0);" class="bld_txt">$200.55</a></li>
+                                    <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -138,10 +138,10 @@
                     <span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     </span>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0);" class="gryd_txt">Weekly</a></li>
-                        <li><a href="javascript:void(0);" class="bld_txt">$20.11</a></li>
+                        <li><a href="javascript:void(0);" class="gryd_txt" *ngIf="weeklyInstallmentAmount>0">Weekly</a></li>
+                        <li><a href="javascript:void(0);" class="bld_txt" *ngIf="weeklyInstallmentAmount>0">${{weeklyInstallmentAmount | number : '1.2-2'}}</a></li>
                         <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
-                        <li><a href="javascript:void(0);" class="bld_txt">$200.55</a></li>
+                        <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
                     </ul>
                 </div>
             </div>
