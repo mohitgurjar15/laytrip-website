@@ -1,0 +1,154 @@
+@import '../../../../../../cstm-variable';
+@import "../../../../../../_cstm-variable.scss";
+@import "../../../../../../_cstm-components.scss";
+@import "../../../../../../_hotel.scss";
+@import "../../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.accordion_detailed_wrps{
+    border: 1px solid $grayed_border;
+    border-radius: 10px;
+    .card-body{
+        padding: 15px;
+        .cols_wrps{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @include tab-view{
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .lines_cols{
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                width: 100%;
+                font-size: 20px;
+                color: $mid_gray_bg ;
+                @include tab-view{
+                    font-size: 18px;
+                }
+                .colmns_w{
+                    @include tab-view{
+                        margin-bottom: 10px;
+                    }
+                }
+                &:last-child{
+                    .colmns_w{
+                        @include tab-view{
+                            &:last-child{
+                                margin-bottom: 0px;
+                            }
+                        }
+                    }
+                }
+                .line_shortname{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    color: $text-black;
+                    font-weight: 600;
+                    flex: 1;
+                    img{
+                        margin-right: 20px;
+                        @include tab-view{
+                            max-width: 20px;
+                            margin-right: 5px;
+                        }
+                    }
+                    .hrs_{
+                        display: none;
+                        font-size: 18px;
+                        color: $mid_gray_bg ;
+                        font-weight: 400;
+                        @include tab-view{
+                            display: flex;
+                        }
+                    }
+                }
+                .line_company_name{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
+                    .hrs_{
+                        font-size: 18px;
+                        @include tab-view{
+                            display: none;
+                        }
+                    }
+                }
+                .fl_number{
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    .pink_stamp{
+                        width: 14px;
+                        height: 14px;
+                        background-color: $pink;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                        @include tab-view{
+                            width: 8px;
+                            height: 8px;
+                        }
+                    }
+                }
+            }
+        }
+        .change_plane_wrapper{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border-top: 1px dashed $text_light_yellow;
+            border-bottom: 1px dashed $text_light_yellow;
+            color: $text_light_yellow;
+            padding: 10px 0;
+            margin: 40px 0;
+            img{
+                margin-right: 15px;
+            }
+            @include tab-view{
+                margin: 20px 0;
+                font-size: 15px;
+            }
+        }
+    }
+    &.w_return{
+        margin-top: 15px;
+    }
+}
+.total_hrs_wrps{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: $mid_gray_bg ;
+    font-size: 18px;
+    margin: 5px 0;
+    padding: 0 15px;
+    &.cta_btns_wrps{
+        justify-content: space-between;
+        .ct_btns{
+            button{
+                background-color: transparent;
+                color: $text_light_yellow;
+                border: none;
+                box-shadow: none;
+                font-size: 16px;
+                padding: 0;
+                // margin-right: 40px;
+                &:last-child{
+                    margin: 0;
+                }
+            }
+        }
+
+    }
+}
+.sub_accordions{
+    margin-top: 15px;
+    .card-body{
+        padding: 0;
+    }
+}
