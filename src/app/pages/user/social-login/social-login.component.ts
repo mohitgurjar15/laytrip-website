@@ -166,10 +166,11 @@ export class SocialLoginComponent implements OnInit {
     this.loading = true;
     window['FB'].login((response) => {
       if (response.authResponse) {
-
+        console.log(response.authResponse)
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
+          console.log(userInfo)
           let jsonData = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
