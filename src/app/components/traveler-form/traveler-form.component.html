@@ -1,4 +1,4 @@
-<form [formGroup]="travelerForm"  (ngSubmit)="submit(travelerForm.value)">
+<form [formGroup]="travelerForm" (ngSubmit)="submit(travelerForm.value)">
   <div *ngIf="travelers.type0.adults.length>0 && cartNumber==0" formGroupName="type0">
     <div formArrayName="adults">
       <div id="accordion" class="accordion_bookings">
@@ -8,7 +8,7 @@
               Booking Traveler {{x+1}}
             </a>
           </div>
-          <div [id]="'adult_collapse'+x" class="collapse"   data-parent="#accordion">
+          <div [id]="'adult_collapse'+x" class="collapse" data-parent="#accordion">
             <div class="card-body">
               <div class="sub_cat_wrapper">
                 <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)
@@ -27,7 +27,8 @@
                   </a>
                 </button>
               </div>
-              <app-my-traveler travelerId={{travelers.type0.adults[traveler_number].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler travelerId={{travelers.type0.adults[traveler_number].userId}}
+                traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -75,12 +76,13 @@
                         address.</small>
                     </div>
                   </div>
-                  <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps" *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
+                  <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
+                    *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                     <label for="">Phone*</label>
                     <span class="tel_span">
                       <input type="text" class="form-control" placeholder="+00" maxlength="6"
                         formControlName="country_code">
-                        <!-- <ng-select [items]="countries" 
+                      <!-- <ng-select [items]="countries" 
                         bindLabel="phonecode" 
                         bindValue="phonecode"
                         formControlName="country_code"
@@ -88,8 +90,7 @@
                       <input type="text" class="form-control" placeholder="000000000" maxlength="10"
                         formControlName="phone_no">
                     </span>
-                    <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
-                      class="error">
+                    <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors" class="error">
                       <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please enter
                         your telephone number.</small>
                     </div>
@@ -97,10 +98,14 @@
                   <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                     <label for="">Date of birth*</label>
                     <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                    <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic" formControlName="dob"
-                      [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
-                      yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}" placeholder="Date of birth">
-                    </p-calendar>
+                    <input type="text" placeholder="Date of birth" class="form-control" bsDatepicker formControlName="dob"
+                      [bsConfig]="bsConfig">
+                    <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
+                      formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
+                      (onBlur)=changeDateOfBirth($event)
+                      yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}"
+                      placeholder="Date of birth">
+                    </p-calendar> -->
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelers.type0?.adults[x]?.passport_number">
                     <label for="">Passport number</label>
@@ -110,11 +115,7 @@
                   <div class="col-sm-12 col-md-4 nation_wrps">
                     <label for="">Nationality*</label>
                     <!-- <input type="text" class="form-control" placeholder="Nationality" formControlName="country"> -->
-                    <ng-select [items]="countries" 
-                              bindLabel="name" 
-                              bindValue="id"
-                              formControlName="country_id"
-                              >
+                    <ng-select [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
                     </ng-select>
                   </div>
                 </div>
@@ -133,7 +134,7 @@
                       <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage" role="tab"
                           aria-controls="baggage" aria-selected="true">Baggage</a>
-                      </li>                                                                                                                                 
+                      </li>
                     </ul>
                     <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor"
                       aria-expanded="true" aria-controls="add_acord">
@@ -194,7 +195,8 @@
                 <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
                 <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
               </div>
-              <app-my-traveler travelerId={{travelers.type1.adults[traveler_number].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
+              <app-my-traveler travelerId={{travelers.type1.adults[traveler_number].userId}}
+                traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">

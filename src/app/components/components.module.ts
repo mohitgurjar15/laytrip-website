@@ -53,6 +53,7 @@ import { LaytripLoaderComponent } from './laytrip-loader/laytrip-loader.componen
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 import { RouterModule } from '@angular/router';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { RouterModule } from '@angular/router';
     NgScrollbarModule,
     InfiniteScrollModule,
     NgxSpinnerModule,
-    RouterModule
+    RouterModule,
+    BsDatepickerModule.forRoot() 
   ],
   exports: [
     SearchAirportComponent,
@@ -154,7 +156,7 @@ import { RouterModule } from '@angular/router';
     CartLoaderComponent,
     LaytripLoaderComponent,
     NgxSpinnerModule,
-    EmptyCartComponent
+    EmptyCartComponent,
   ],
   providers: [DatePipe, NgxSpinnerService],
 
