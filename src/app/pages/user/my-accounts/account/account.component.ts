@@ -59,7 +59,8 @@ export class AccountComponent implements OnInit {
     let data = {"requireBackupFile": this.isRequireBackupFile};
     this.userService.deleteAccount(data).subscribe((data: any) => {      
       this.loading = false;
-      redirectToLogin()
+      redirectToLogin();
+      this.modalService.dismissAll();
     }, (error: HttpErrorResponse) => {       
       this.loading = false;
     }); 
