@@ -9,7 +9,7 @@
                     <div class="update_profile_btn">
                         <input #hiddenfileinput style="display: none" type="file" accept="image/*"
                             (change)="onFileSelect($event)">
-                        <button #upload (click)="hiddenfileinput.click()">Edit</button>
+                        <button #upload [disabled]="!isFormControlEnable" (click)="hiddenfileinput.click()">Edit</button>
                     </div>
                 </div>
             </div>
@@ -97,20 +97,6 @@
                 </div>
             </div>
             <div class="form_row common_row">
-                <label>Password</label>
-                <div class="text_field">
-                    <input [readonly]="!isFormControlEnable" type="password" placeholder="••••••••••"
-                        formControlName="password" maxlength="25" tabindex="5">
-                    <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
-                        class="error">
-                        <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
-                            {{'last_name_touched_validation' | translate}}</small>
-                        <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field">
-                            {{'last_name_string_validation' | translate}}</small>
-                    </div>
-                </div>
-            </div>
-            <div class="form_row common_row">
                 <label>Home Airport</label>
                 <div class="text_field">
                     <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="code"
@@ -118,7 +104,7 @@
                         formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"
                         loadingText=""  class="laytrip-input"
-                        placeholder="New York" [disabled]="!isFormControlEnable">
+                        placeholder="New York" [readonly]="!isFormControlEnable">
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div [ngClass]="(item.parentId==0)?'parent':'child'">
                                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
@@ -154,7 +140,11 @@
                             formControlName="country_code">
                         <input [readonly]="!isFormControlEnable" (keypress)="commonFunctoin.validateNumber($event)" type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
                             formControlName="phone_no">
-                    </span>
+                        </span>
+                    <div class="error" *ngIf="(submitted || (profileForm.controls.country_code.touched && profileForm.controls.phone_no.touched)) 
+                                && profileForm.hasError('phoneAndPhoneCodeError')">
+                        <small class="error_field">{{'phone_touched_validation' | translate}}</small>
+                    </div>
                 </div>
             </div>
             <div class="form_row common_row dobs_account">

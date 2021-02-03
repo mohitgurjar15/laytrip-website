@@ -203,7 +203,7 @@ export class ListTravellerComponent implements OnInit {
 
   onSubmit() {
     var formData = this.childCompopnent.travellerForm;
-    console.log(formData)
+    
     if(formData.invalid){
       console.log('sds')
     } else {
@@ -228,6 +228,22 @@ export class ListTravellerComponent implements OnInit {
         phone_no: formData.value.phone_no,
       };
       console.log(formData,jsonData)
+
+      this.travelerService.addAdult(jsonData).subscribe((data: any) => {
+        // this.travelersChanges.emit(data);
+        console.log(data)
+        this.getTravelers();
+      
+      }, (error: HttpErrorResponse) => {
+        console.log('error')
+         this.loading = false;
+        if (error.status === 401) {
+          this.router.navigate(['/']);
+        } else {
+         this.loading = false;
+          this.toastr.error(error.error.message, 'Traveller Add Error');
+        }
+      });
     }
   }
 

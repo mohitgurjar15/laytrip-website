@@ -71,29 +71,21 @@ var ProfileComponent = /** @class */ (function () {
         }
         catch (e) { }
         this.profileForm = this.formBuilder.group({
-            title: ['mr'],
             first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
-            username: [''],
-            password: [''],
             country_code: [''],
             phone_no: [''],
             address: [''],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            zip_code: [''],
-            state_id: [''],
-            city_name: [''],
             gender: ['M'],
             profile_pic: [''],
             currency_id: [''],
-            address2: [''],
-            language_id: [''],
             passport_expiry: [''],
             passport_number: [''],
             home_airport: ['']
-        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
+        });
         if (!this.isFormControlEnable) {
             this.profileForm.controls['country_code'].disable();
         }
@@ -206,6 +198,7 @@ var ProfileComponent = /** @class */ (function () {
             if (typeof _this.location != 'undefined') {
                 countryName = _this.location.country.id;
             }
+            _this.data = [res.airportInfo];
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -220,12 +213,14 @@ var ProfileComponent = /** @class */ (function () {
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
+                home_airport: res.airportInfo.code ? res.airportInfo.code : '',
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
                 profile_pic: res.profilePic,
                 passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
                 passport_number: res.passportNumber
             });
+            _this.profileForm.controls['home_airport'].disable();
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {
@@ -240,10 +235,8 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = true;
         this.loadingValue.emit(true);
-        if (this.profileForm.controls.gender.errors && this.is_gender) {
-            this.profileForm.controls.gender.setValue(this.is_type);
-        }
         if (this.profileForm.invalid) {
+            console.log(this.profileForm);
             this.submitted = true;
             this.loadingValue.emit(false);
             //scroll top if any error 
@@ -265,7 +258,6 @@ var ProfileComponent = /** @class */ (function () {
                 imgfile = this.imageFile;
                 formdata.append("profile_pic", imgfile);
             }
-            console.log(this.profileForm.value, this);
             formdata.append("title", 'mr');
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
@@ -273,16 +265,11 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("home_airport", this.profileForm.value.home_airport);
             formdata.append("address", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
-            formdata.append("gender", this.is_type);
+            formdata.append("gender", this.profileForm.value.gender);
+            formdata.append("country_code", this.profileForm.value.country_code);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-            if (typeof (this.profileForm.value.country_code) === 'object') {
-                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '');
-            }
-            else {
-                formdata.append("country_code", this.selectResponse.countryCode);
-            }
             this.isFormControlEnable = false;
-            this.profileForm.controls['country_code'].disable();
+            this.profileForm.controls['home_airport'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 _this.submitted = false;
                 _this.loadingValue.emit(false);
@@ -297,7 +284,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.enableFormControlInputs = function (event) {
         this.isFormControlEnable = true;
-        this.profileForm.controls['country_code'].enable();
+        this.profileForm.controls['home_airport'].enable();
     };
     ProfileComponent.prototype.onRemove = function (event, item) {
         if (item.key === 'fromSearch') {
@@ -333,7 +320,6 @@ var ProfileComponent = /** @class */ (function () {
         });
     };
     ProfileComponent.prototype.selectEvent = function (event, item) {
-        console.log(item.key);
         if (event && event.code && item.key === 'fromSearch') {
             // this.home_airport = event.code;
             // this.departureAirport=event;

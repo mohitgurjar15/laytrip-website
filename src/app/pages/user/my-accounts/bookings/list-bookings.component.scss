@@ -80,135 +80,202 @@
     position: relative;
     min-height: calc(100vh - 110px);
     padding-top: 80px;
-    .search_wrapper{
+    .booking_inner_container{
+        max-width: 680px;
+        margin: 0 auto;
         display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        input{
-            border-radius: 25px;
-            border: 1px solid $text-grey;
-            font-size: 14px;
-            color: $text-grey;
-            font-weight: 400;
-        }
-    }
-    h3{
-        color: $blue-text;
-        font-size: 34px;
-        margin-bottom: 5px;
-        margin: 25px 0 15px;
-        @include tab-view{
-            font-size: 18px;
-        }
-    }
-    #accordion_upcoming{
-        .card{
-            .card-header{
-                margin: 0;
-                background-color: $background-white;
-                a{
-                    font-weight: 600;
-                    color: $text-black;
-                    font-size: 16px;
-                    border: none;
-                    background-color: transparent;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 100%;
-                    padding: 0;
+        flex-direction: column;
         
-                    &[aria-expanded="true"]{
-                        &:after {
-                            content: "";
-                            position: relative;
-                            padding: 5px 9px;
-                            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                            background-position: right;
-                            background-repeat: no-repeat;
-                            background-size: 14px;
-                            transition: 0.3s;
-                            right: 0;
+        .search_wrapper{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            input{
+                border-radius: 25px;
+                border: 1px solid $text-grey;
+                font-size: 14px;
+                color: $text-grey;
+                font-weight: 400;
+            }
+        }
+        h3{
+            color: $blue-text;
+            font-size: 34px;
+            margin-bottom: 5px;
+            margin: 25px 0 15px;
+            @include tab-view{
+                font-size: 18px;
+            }
+        }
+        .accordion_up_wrapper{
+            margin-bottom: 15px;
+            #accordion_upcoming , #accordion_completed{
+                .card{
+                    border-radius: 10px;
+                    border: 1px solid $box-border-color;
+                    .card-header{
+                        margin: 0;
+                        background-color: $background-white;
+                        border-radius: 10px;
+                        padding: 15px;
+                        border-bottom: none;
+                        a{
+                            font-weight: 600;
+                            color: $text-black;
+                            font-size: 16px;
                             border: none;
-                            top: 5px;
-                            @include tab-view{
-                                position: absolute;
-                                right: 0;
-                                height: 12px;
-                            }
-                        }
-                    }
-                    &[aria-expanded="false"]{
-                        &:after {
-                            position: relative;
-                            padding: 5px 9px;
-                            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                            background-position: right;
-                            background-repeat: no-repeat;
-                            background-size: 14px;
-                            content: "";
-                            transition: 0.3s;
-                            right: 0;
-                            border: none;
-                            top: 5px;
-                            @include tab-view{
-                                position: absolute;
-                                right: 0;
-                                height: 12px;
-                            }
-                        }
-                    }
-                    .headerin_wrapper{
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding-right: 20px;
-                        @include tab-view{
-                            flex-direction: column;
-                            justify-content: flex-start;
-                            align-items: flex-start;
-                        }
-                        .header_image{
+                            background-color: transparent;
                             display: flex;
                             justify-content: space-between;
-                            align-items: center;
-                            font-size: 27px;
-                            position: relative; 
-                            .title_image{
-                                border-radius: 50%;
-                                border: 2px solid $pink;
-                                padding: 5px;
-                                height: 38px;
-                                width: 38px;
+                            align-items: flex-start;
+                            width: 100%;
+                            padding: 0;
+                
+                            &[aria-expanded="true"]{
+                                &:after {
+                                    content: "";
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 14px;
+                                    transition: 0.3s;
+                                    right: 0;
+                                    border: none;
+                                    top: 5px;
+                                    @include tab-view{
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+                            &[aria-expanded="false"]{
+                                &:after {
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 14px;
+                                    content: "";
+                                    transition: 0.3s;
+                                    right: 0;
+                                    border: none;
+                                    top: 5px;
+                                    @include tab-view{
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+                            .header_image{
                                 display: flex;
-                                justify-content: center;
+                                justify-content: space-between;
                                 align-items: center;
-                                margin-right: 15px;
-                                img{
-                                    width: 24px;
+                                font-size: 27px;
+                                position: relative; 
+                                .title_image{
+                                    border-radius: 50%;
+                                    border: 2px solid $pink;
+                                    padding: 5px;
+                                    height: 38px;
+                                    width: 38px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin-right: 15px;
+                                    img{
+                                        width: 24px;
+                                    }
+                                    @include tab-view{
+                                        display: none;
+                                    }
                                 }
-                                @include tab-view{
-                                    display: none;
+                                .flight_routing_imgs{
+                                    display: flex;
+                                    flex-direction: column;
+                                    padding: 0 20px;
+                                    @include tab-view{
+                                        max-width: 110px;
+                                    }
                                 }
+                                
                             }
-                            .flight_routing_imgs{
+                            .headerin_wrapper{
                                 display: flex;
-                                flex-direction: column;
-                                padding: 0 20px;
+                                justify-content: flex-start;
+                                align-items: center;
+                                padding-right: 20px;
+                                flex: 1;
                                 @include tab-view{
-                                    max-width: 110px;
+                                    flex-direction: column;
+                                    justify-content: flex-start;
+                                    align-items: flex-start;
+                                }
+                                
+                                .header_second_sec{
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 100%;
+                                    max-width: 455px;
+                                    margin: 0 auto;
+                                    .header_upper_wrper{
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        margin-bottom: 5px;
+                                        .book_id{
+                                            color: $grayed_border;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                    .header_lower_wrper{
+                                        display: flex;
+                                        justify-content: space-around;
+                                        align-items: center;
+                                        text-align: center;
+                                        .payment_bar_wrps{
+                                            width: 100%;
+                                            max-width: 300px;
+                                            .progress{
+                                                height: 10px;
+                                                border-radius: 25px;
+                                                .progress-bar{
+                                                    background-color: $pink;
+                                                }
+                                            }
+                                            .payment_status{
+                                                font-size: 12px;
+                                                color: $pink;
+                                                margin-top: 10px;
+                                            }
+                                        }
+                                        .pricer_wrp{
+                                            .pink_price{
+                                                font-size: 19px;
+                                                color: $pink;
+                                                font-weight: 600;
+                                            }
+                                            .status{
+                                                color: $mid_gray_bg;
+                                                font-size: 12px;
+                                                font-weight: 400;
+                                            }
+                                        }
+                                    }
+                                }
+                                .header_date{
+                                    font-size: 16px;
+                                    font-weight: 400;
                                 }
                             }
-                            
-                        }
-                        .header_date{
-                            font-size: 16px;
-                            font-weight: 400;
                         }
                     }
                 }
             }
         }
-        
     }
 }
