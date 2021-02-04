@@ -237,7 +237,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         this.cartService.addCartItem(payload).subscribe((res: any) => {
           this.changeLoading.emit(true);
           if (res) {
-            this.cartItems = [...this.cartItems, res.data]
+            let newItem = { id : res.data.id, module_Info : res.data.moduleInfo[0] }
+            this.cartItems = [...this.cartItems, newItem]
+            console.log("res.datares.data",this.cartItems)
             this.cartService.setCartItems(this.cartItems);
 
             localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
@@ -250,26 +252,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
       }
     }
-
-    // const itinerary = {
-    //   adult: this.route.snapshot.queryParams["adult"],
-    //   child: this.route.snapshot.queryParams["child"],
-    //   infant: this.route.snapshot.queryParams["infant"],
-    //   is_passport_required: route.is_passport_required
-    // };
-    // let lastSearchUrl = this.router.url;
-    // this.cookieService.put('_prev_search', lastSearchUrl);
-    // const dateNow = new Date();
-    // dateNow.setMinutes(dateNow.getMinutes() + 10);
-
-    // sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-    // sessionStorage.setItem('__route', JSON.stringify(route));
-    // /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
-    // } else{
-    //   this.router.navigate([`flight/checkout/${route.route_code}`]);
-    // } */
-    // this.router.navigate([`flight/payment/${route.route_code}`]);
-
   }
 
   checkInstalmentAvalability() {
@@ -310,15 +292,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 @Component({
   selector: 'laytrip-ok-popup',
   template: `<div class="modal-header">
-  <h4 class="modal-title">Warning</h4>
-</div>
-<div class="modal-body">
-  <p>Please login to book flight</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
-</div>`,
-})
+      <h4 class="modal-title">Warning</h4>
+    </div>
+    <div class="modal-body">
+      <p>Please login to book flight</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
+    </div>`,
+    })
 
 export class LaytripOkPopup {
 

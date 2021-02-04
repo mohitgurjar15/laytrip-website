@@ -11,20 +11,21 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
+var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
-    function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, activeModal, toastr, cookieService, travelerService) {
+    function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, toastr, cookieService, travelerService) {
         this.formBuilder = formBuilder;
         this.genericService = genericService;
         this.router = router;
         this.commonFunction = commonFunction;
         this.flightService = flightService;
         this.userService = userService;
-        this.activeModal = activeModal;
         this.toastr = toastr;
         this.cookieService = cookieService;
         this.travelerService = travelerService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        this.travelersChanges = new core_1.EventEmitter();
+        this.loadingValue = new core_1.EventEmitter();
+        this.travelerFormChange = new core_1.EventEmitter();
         this.countries = [];
         this.countries_code = [];
         this.is_gender = true;
@@ -45,7 +46,6 @@ var TravellerFormComponent = /** @class */ (function () {
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('this');
         this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
@@ -58,24 +58,21 @@ var TravellerFormComponent = /** @class */ (function () {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
         this.travellerForm = this.formBuilder.group({
-            gender: [''],
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            gender: ['', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-            phone_no: ['', [forms_1.Validators.required]],
+            phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
             country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: ['']
-        });
-        // this.setUserTypeValidation();
+        }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
+        this.setUserTypeValidation();
         if (this.travellerId) {
             this.setTravelerForm();
         }
-    };
-    TravellerFormComponent.prototype.ngOnChanges = function (changes) {
-        console.log(changes);
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
         var _this = this;
@@ -130,20 +127,10 @@ var TravellerFormComponent = /** @class */ (function () {
             this.isInfant = false;
         }
     };
-    TravellerFormComponent.prototype.close = function () {
-        this.activeModal.close();
-    };
     TravellerFormComponent.prototype.setUserTypeValidation = function () {
-        var emailControl = this.travellerForm.get('email');
-        var phoneControl = this.travellerForm.get('phone_no');
-        var countryControl = this.travellerForm.get('country_code');
-        var passport_expiryControl = this.travellerForm.get('passport_expiry');
         this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
         this.dobMaxDate = new Date(moment().format("MM/DD/YYYY"));
-        this.minyear = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
-        emailControl.updateValueAndValidity();
-        phoneControl.updateValueAndValidity();
-        countryControl.updateValueAndValidity();
+        this.dobYearRange = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
     };
     TravellerFormComponent.prototype.checkUser = function () {
         var userToken = localStorage.getItem('_lay_sess');
@@ -153,10 +140,11 @@ var TravellerFormComponent = /** @class */ (function () {
     };
     TravellerFormComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.submitted = this.loading = true;
+        this.submitted = true;
+        this.loadingValue.emit(true);
         if (this.travellerForm.invalid) {
             this.submitted = true;
-            this.loading = false;
+            this.loadingValue.emit(false);
             return;
         }
         else {
@@ -173,7 +161,7 @@ var TravellerFormComponent = /** @class */ (function () {
                 first_name: this.travellerForm.value.firstName,
                 last_name: this.travellerForm.value.lastName,
                 dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.travellerForm.value.dob, '/')).format('YYYY-MM-DD'),
-                gender: this.travellerForm.value.gender,
+                gender: this.travellerForm.value.gender ? this.travellerForm.value.gender : 'M',
                 country_id: country_id ? country_id : '',
                 passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
                 passport_number: this.travellerForm.value.passport_number,
@@ -185,30 +173,32 @@ var TravellerFormComponent = /** @class */ (function () {
                 jsonData = Object.assign(jsonData, emailObj);
                 console.log(jsonData, this.travellerId);
                 this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
-                    _this.travelersChanges.emit(data);
-                    _this.activeModal.close();
+                    _this.travelerFormChange.emit(data);
+                    _this.loadingValue.emit(false);
+                    _this.toastr.success('Success', 'Traveller Updated Successfully');
                 }, function (error) {
-                    _this.submitted = _this.loading = false;
+                    _this.submitted = false;
+                    _this.loadingValue.emit(false);
+                    _this.toastr.error(error.error.message, 'Traveller Update Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
-                    _this.toastr.error(error.error.message, 'Traveller Update Error');
                 });
             }
             else {
                 jsonData = Object.assign(jsonData, emailObj);
                 this.travelerService.addAdult(jsonData).subscribe(function (data) {
-                    _this.travelersChanges.emit(data);
-                    _this.activeModal.close();
+                    _this.travelerFormChange.emit(data);
+                    _this.loadingValue.emit(false);
+                    _this.travellerForm.reset();
+                    _this.travellerForm.setErrors(null);
+                    _this.toastr.success('Success', 'Traveller Add Successfully');
                 }, function (error) {
-                    console.log('error');
-                    _this.submitted = _this.loading = false;
+                    _this.submitted = false;
+                    _this.loadingValue.emit(false);
+                    _this.toastr.error(error.error.message, 'Traveller Add Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
-                    }
-                    else {
-                        _this.submitted = _this.loading = false;
-                        _this.toastr.error(error.error.message, 'Traveller Add Error');
                     }
                 });
             }
@@ -244,27 +234,18 @@ var TravellerFormComponent = /** @class */ (function () {
         var dateArray = string.split(saprator);
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
-    TravellerFormComponent.prototype.selectGender = function (event, type) {
-        this.is_gender = true;
-        if (type == 'M') {
-            this.is_type = 'M';
-        }
-        else if (type == 'F') {
-            this.is_type = 'F';
-        }
-        else if (type == 'O') {
-            this.is_type = 'O';
-        }
-    };
-    __decorate([
-        core_1.Output()
-    ], TravellerFormComponent.prototype, "travelersChanges");
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travellerId");
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travelerInfo");
+    __decorate([
+        core_1.Output()
+    ], TravellerFormComponent.prototype, "loadingValue");
+    __decorate([
+        core_1.Output()
+    ], TravellerFormComponent.prototype, "travelerFormChange");
     TravellerFormComponent = __decorate([
         core_1.Component({
             selector: 'app-traveller-form',

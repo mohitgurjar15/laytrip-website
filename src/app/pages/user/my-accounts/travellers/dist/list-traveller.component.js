@@ -31,6 +31,7 @@ var ListTravellerComponent = /** @class */ (function () {
         this.pageSize = 10;
         this.showPaginationBar = false;
         this.traveller = [];
+        this.loadingValue = new core_1.EventEmitter();
         this.isMasterSel = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
@@ -56,7 +57,6 @@ var ListTravellerComponent = /** @class */ (function () {
         var _this = this;
         this.travelerService.getTravelers().subscribe(function (data) {
             _this.travelers = data.data;
-            console.log(_this.travelers);
             _this.loading = false;
             _this.showPaginationBar = true;
             if (_this.travelers.length === 0) {
@@ -73,14 +73,6 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.calculateAge = function (birthdate) {
         return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years') + " yrs, " : "";
     };
-    ListTravellerComponent.prototype.getGender = function (type) {
-        if (type == 'M')
-            return 'Male';
-        if (type == 'F')
-            return 'Female';
-        if (type == 'N')
-            return 'Non Binary';
-    };
     ListTravellerComponent.prototype.deleteTravellerModal = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
@@ -93,9 +85,6 @@ var ListTravellerComponent = /** @class */ (function () {
             // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
             console.log(_this.closeResult);
         });
-    };
-    ListTravellerComponent.prototype.pushTraveler = function (event) {
-        console.log("event", event);
     };
     ListTravellerComponent.prototype.deleteTraveller = function () {
         var _this = this;
@@ -217,9 +206,18 @@ var ListTravellerComponent = /** @class */ (function () {
         var dateArray = string.split(saprator);
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
+    ListTravellerComponent.prototype.getLoadingValue = function (event) {
+        this.loadingValue.emit(event ? event : false);
+    };
+    ListTravellerComponent.prototype.pushTraveler = function (event) {
+        this.travelers.push(event);
+    };
     __decorate([
         core_1.ViewChild('child', { static: false })
     ], ListTravellerComponent.prototype, "childCompopnent");
+    __decorate([
+        core_1.Output()
+    ], ListTravellerComponent.prototype, "loadingValue");
     ListTravellerComponent = __decorate([
         core_1.Component({
             selector: 'app-list-traveller',

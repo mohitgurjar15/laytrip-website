@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { TravelerService } from '../../../../services/traveler.service';
@@ -43,6 +43,7 @@ export class ListTravellerComponent implements OnInit {
   @ViewChild('child',{static:false}) childCompopnent: any;
   location;
   traveller: any = [];
+  @Output() loadingValue = new EventEmitter<boolean>();
 
 
   constructor(
@@ -83,7 +84,6 @@ export class ListTravellerComponent implements OnInit {
   getTravelers() {
     this.travelerService.getTravelers().subscribe((data: any) => {
       this.travelers = data.data;
-      console.log(this.travelers)
       this.loading = false;
       this.showPaginationBar =true;
       if(this.travelers.length === 0){
@@ -102,16 +102,7 @@ export class ListTravellerComponent implements OnInit {
   calculateAge(birthdate: any) {
     return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years')+" yrs, ":"";
   }
-
-  getGender(type) {
-    if (type == 'M')
-      return 'Male';
-    if (type == 'F')
-      return 'Female';
-    if (type == 'N')
-      return 'Non Binary';
-  }
- 
+  
   deleteTravellerModal(content, userId = '') {
     this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal',centered: true });
     this.userId = userId;
@@ -125,9 +116,6 @@ export class ListTravellerComponent implements OnInit {
   }
 
 
-  pushTraveler(event) {
-    console.log("event", event)
-  }
 
   deleteTraveller() {
 
@@ -251,4 +239,14 @@ export class ListTravellerComponent implements OnInit {
     let dateArray = string.split(saprator);
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
+
+  getLoadingValue(event){   
+    this.loadingValue.emit(event ? event : false);
+  }
+
+
+  pushTraveler(event){
+    this.travelers.push(event)
+  }
+
 }
