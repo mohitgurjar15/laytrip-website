@@ -120,16 +120,16 @@
 </ng-template> -->
 <div class="title_bar">
     <h3>Traveler Details</h3>
-    <span class="edit_btns">
+    <!-- <span class="edit_btns">
         <a class="hover-link" (click)="onSubmit()">Add New</a>
-    </span>
+    </span> -->
 </div>
 <div class="travel_detail_bg_wrps">
     <div id="trav_accordion" class="traveller_accordion">
         <div class="card">       
             <div id="collapseTrav" class="collapse show" >
                 <div class="card-body">
-                    <app-traveller-form  #child [countries]="countries"></app-traveller-form>
+                    <app-traveller-form (loadingValue)="getLoadingValue($event)"  (travelerFormChange)="pushTraveler($event)"  #child [countries]="countries"></app-traveller-form>
                     <div *ngFor="let traveler of  travelers" id="trav_accordion_inner" class="traveller_accordion">
                         <div class="card" >
                             <div class="card-header">
