@@ -84,6 +84,11 @@
 					</div>
 				</div>
 				<div class="modal_cnt">
+                    <div class="modalcnt_top">
+                        <app-social-login (socialError)="socialError($event)"></app-social-login>
+                        <div class="border_block"><span>Or</span></div>
+                    </div>
+
 					<form id="signup-form" [formGroup]="signupForm">
 						<div class="form_row">
 							<div class="text_field half">
@@ -180,8 +185,8 @@
                         </div>
 					</form>
                     <div class="modal_btm">
-                        <div class="border_block"><span>Or</span></div>
-                        <app-social-login (socialError)="socialError($event)"></app-social-login>
+                        <!-- <div class="border_block"><span>Or</span></div>
+                        <app-social-login (socialError)="socialError($event)"></app-social-login> -->
 
                         <!-- <p>Dont't have an account? <a (click)="openSignInModal()" class="signIn hover-link" data-toggle="modal" 
                             data-target="#sign_in_modal" data-dismiss="modal">{{'sign_in' | translate}}</a></p> -->

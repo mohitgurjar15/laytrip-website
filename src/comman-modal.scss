@@ -16,6 +16,27 @@ body {
 .otp_window {
   .modal-content {
     border-radius: 10px;
+
+    // @include tab-view {
+    //   position: fixed;
+    //   left: 0;
+    //   bottom: 0;
+    //   border-bottom-left-radius: 0;
+    //   border-bottom-right-radius: 0;
+    //   height: calc(100vh - 30px);
+    //   overflow-y: auto;
+    //   overflow-x: hidden;
+
+    //   app-verify-otp {
+    //     height: 100%;
+    //     .modal_otp_block {
+    //       height: 100%;
+    //       display: flex;
+    //       justify-content: space-between;
+    //       flex-flow: column;
+    //     }
+    //   }
+    // }
   }
 }
 .modal_otp_block {
@@ -88,26 +109,26 @@ body {
   .modal-content {
     border-radius: 10px;
 
-    @include tab-view {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      height: calc(100vh - 30px);
-      overflow-y: auto;
-      overflow-x: hidden;
+    // @include tab-view {
+    //   position: fixed;
+    //   left: 0;
+    //   bottom: 0;
+    //   border-bottom-left-radius: 0;
+    //   border-bottom-right-radius: 0;
+    //   height: calc(100vh - 30px);
+    //   overflow-y: auto;
+    //   overflow-x: hidden;
 
-      app-forgot-password {
-        height: 100%;
-        .forgot_modal_block {
-          height: 100%;
-          display: flex;
-          justify-content: space-between;
-          flex-flow: column;
-        }
-      }
-    }
+    //   app-forgot-password {
+    //     height: 100%;
+    //     .forgot_modal_block {
+    //       height: 100%;
+    //       display: flex;
+    //       justify-content: space-between;
+    //       flex-flow: column;
+    //     }
+    //   }
+    // }
   }
 }
 
@@ -115,75 +136,48 @@ body {
   .modal-content {
     border-radius: 10px;
 
-    @include tab-view {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      height: calc(100vh - 30px);
-      overflow-y: auto;
-      overflow-x: hidden;
+    // @include tab-view {
+    //   position: fixed;
+    //   left: 0;
+    //   bottom: 0;
+    //   border-bottom-left-radius: 0;
+    //   border-bottom-right-radius: 0;
+    //   height: calc(100vh - 30px);
+    //   overflow-y: auto;
+    //   overflow-x: hidden;
 
-      app-reset-password {
-        height: 100%;
-        .resetpass_modal_block {
-          height: 100%;
-          display: flex;
-          justify-content: space-between;
-          flex-flow: column;
-        }
-      }
-    }
-  }
-}
-
-.otp_window {
-  .modal-content {
-    border-radius: 10px;
-
-    @include tab-view {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      height: calc(100vh - 30px);
-      overflow-y: auto;
-      overflow-x: hidden;
-
-      app-verify-otp {
-        height: 100%;
-        .modal_otp_block {
-          height: 100%;
-          display: flex;
-          justify-content: space-between;
-          flex-flow: column;
-        }
-      }
-    }
+    //   app-reset-password {
+    //     height: 100%;
+    //     .resetpass_modal_block {
+    //       height: 100%;
+    //       display: flex;
+    //       justify-content: space-between;
+    //       flex-flow: column;
+    //     }
+    //   }
+    // }
   }
 }
 
 .delete_account_window {
   .modal-content {
     border-radius: 10px;
-    @include tab-view {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      height: calc(100vh - 30px);
-      overflow-y: auto;
-      overflow-x: hidden;
-      .delete_account_block {
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        flex-flow: column;
-      }
-    }
+    // @include tab-view {
+    //   position: fixed;
+    //   left: 0;
+    //   bottom: 0;
+    //   border-bottom-left-radius: 0;
+    //   border-bottom-right-radius: 0;
+    //   height: calc(100vh - 30px);
+    //   overflow-y: auto;
+    //   overflow-x: hidden;
+    //   .delete_account_block {
+    //     height: 100%;
+    //     display: flex;
+    //     justify-content: space-between;
+    //     flex-flow: column;
+    //   }
+    // }
   }
 }
 
