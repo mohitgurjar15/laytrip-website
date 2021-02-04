@@ -84,6 +84,13 @@ var TravellerFormComponent = /** @class */ (function () {
         else {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
+        var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        this.isAdult = false;
+        console.log(moment(this.travelerInfo.dob).format('YYYY-MM-DD'), adult12YrPastDate);
+        if (moment(this.travelerInfo.dob).format('YYYY-MM-DD') < adult12YrPastDate) {
+            this.isAdult = true;
+        }
+        console.log(this.isAdult, 'isAdult');
         this.travellerForm.patchValue({
             // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
             firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
@@ -126,6 +133,7 @@ var TravellerFormComponent = /** @class */ (function () {
             this.isChild = false;
             this.isInfant = false;
         }
+        console.log(this.isAdult);
     };
     TravellerFormComponent.prototype.setUserTypeValidation = function () {
         this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
@@ -233,6 +241,28 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.stringToDate = function (string, saprator) {
         var dateArray = string.split(saprator);
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
+    };
+    TravellerFormComponent.prototype.selectDob = function (event) {
+        var selectedDate = moment(event).format('YYYY-MM-DD');
+        var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        var emailControl = this.travellerForm.get('email');
+        var phoneControl = this.travellerForm.get('phone_no');
+        var countryControl = this.travellerForm.get('country_code');
+        if (selectedDate < adult12YrPastDate) {
+            this.isAdult = true;
+            emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
+            phoneControl.setValidators([forms_1.Validators.required, forms_1.Validators.minLength(10)]);
+            countryControl.setValidators([forms_1.Validators.required]);
+        }
+        else {
+            this.isAdult = false;
+            emailControl.setValidators(null);
+            phoneControl.setValidators(null);
+            countryControl.setValidators(null);
+            phoneControl.updateValueAndValidity();
+            emailControl.updateValueAndValidity();
+            countryControl.updateValueAndValidity();
+        }
     };
     __decorate([
         core_1.Input()

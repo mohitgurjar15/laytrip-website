@@ -19,8 +19,12 @@ var forms_1 = require("@angular/forms");
 var elements_module_1 = require("./elements/elements.module");
 var components_module_1 = require("./components/components.module");
 var animations_1 = require("@angular/platform-browser/animations");
-var state_module_1 = require("./state/state.module");
 var ngx_toastr_1 = require("ngx-toastr");
+var angularx_social_login_1 = require("angularx-social-login");
+var apple_provider_1 = require("./pages/user/social-login/apple.provider");
+var service_worker_1 = require("@angular/service-worker");
+var environment_1 = require("../environments/environment");
+var google_login_provider_1 = require("./pages/user/social-login/google.login-provider");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -46,10 +50,28 @@ var AppModule = /** @class */ (function () {
                     }
                 }),
                 animations_1.BrowserAnimationsModule,
-                state_module_1.StateModule,
-                ngx_toastr_1.ToastrModule.forRoot()
+                ngx_toastr_1.ToastrModule.forRoot(),
+                angularx_social_login_1.SocialLoginModule,
+                service_worker_1.ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment_1.environment.production }),
             ],
-            providers: [],
+            providers: [
+                {
+                    provide: 'SocialAuthServiceConfig',
+                    useValue: {
+                        autoLogin: true,
+                        providers: [
+                            {
+                                id: apple_provider_1.AppleLoginProvider.PROVIDER_ID,
+                                provider: new apple_provider_1.AppleLoginProvider('com.laytrip.laytrips')
+                            },
+                            {
+                                id: google_login_provider_1.GoogleLoginProvider.PROVIDER_ID,
+                                provider: new google_login_provider_1.GoogleLoginProvider(environment_1.environment.google_client_id)
+                            }
+                        ]
+                    }
+                }
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

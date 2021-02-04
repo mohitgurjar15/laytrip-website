@@ -103,6 +103,13 @@ export class TravellerFormComponent implements OnInit {
     } else {
       countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
     }
+    var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+    this.isAdult = false;
+    console.log(moment(this.travelerInfo.dob).format('YYYY-MM-DD') ,   adult12YrPastDate)
+    if(moment(this.travelerInfo.dob).format('YYYY-MM-DD') <   adult12YrPastDate){
+      this.isAdult = true;
+    }
+    console.log(this.isAdult,'isAdult')
 
     this.travellerForm.patchValue({
       // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
@@ -144,6 +151,7 @@ export class TravellerFormComponent implements OnInit {
       this.isChild = false;
       this.isInfant = false;
     }
+    console.log(this.isAdult)
   }
 
   setUserTypeValidation() {    
@@ -259,5 +267,27 @@ export class TravellerFormComponent implements OnInit {
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 
+  selectDob(event){
+    var selectedDate = moment(event).format('YYYY-MM-DD');
+    var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+    const emailControl = this.travellerForm.get('email');
+    const phoneControl = this.travellerForm.get('phone_no');
+    const countryControl = this.travellerForm.get('country_code');
+    if(selectedDate < adult12YrPastDate) {
+     this.isAdult = true;
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))     
+      phoneControl.setValidators([Validators.required,Validators.minLength(10)]);
+      countryControl.setValidators([Validators.required]);
+
+    } else {
+      this.isAdult = false;
+      emailControl.setValidators(null)
+      phoneControl.setValidators(null)
+      countryControl.setValidators(null)
+      phoneControl.updateValueAndValidity();
+      emailControl.updateValueAndValidity();
+      countryControl.updateValueAndValidity();
+    }
+  }
 
 }

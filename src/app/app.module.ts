@@ -15,6 +15,7 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { GoogleLoginProvider } from './pages/user/social-login/google.login-provider';
 
 @NgModule({
   declarations: [
@@ -52,8 +53,14 @@ import { environment } from '../environments/environment';
             provider: new AppleLoginProvider(
               'com.laytrip.laytrips'
             ),
+          },
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.google_client_id
+            ),
           }
-        ]
+        ] 
       } as SocialAuthServiceConfig,
     }
   ],

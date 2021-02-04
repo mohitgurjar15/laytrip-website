@@ -70,7 +70,7 @@
                     <input type="text" [readonly]="!isFormControlEnable"
                         placeholder="{{'last_name_placeholder' | translate}}" formControlName="last_name" maxlength="25"
                         tabindex="2">
-                    <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
+                    <div *ngIf="(submitted || (isFormControlEnable && profileForm.controls.last_name.touched)) && profileForm.controls.last_name.errors"
                         class="error">
                         <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
                             {{'last_name_touched_validation' | translate}}</small>
@@ -171,12 +171,12 @@
                     <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
                  </ng-select>                  -->
                     <div class="gender_anchers">
-                        <a [ngClass]="{'active': is_type == 'M'}" class="hover-link"
+                        <a [ngClass]="{'active': (is_type == 'M')}" class="hover-link"
                             (click)="selectGender($event,'M')">Male</a>
-                        <a [ngClass]="{'active': is_type == 'F'}" class="hover-link"
-                            (click)="selectGender($event,'F')">Female</a>
-                        <a [ngClass]="{'active': is_type == 'O'}" class="hover-link"
-                            (click)="selectGender($event,'O')">Other</a>
+                        <a [ngClass]="{'active': (is_type == 'F')}" 
+                            (click)="selectGender($event,'F')"  class="hover-link">Female</a>
+                        <a [ngClass]="{'active': (is_type == 'O')}" 
+                            (click)="selectGender($event,'O')"  class="hover-link">Other</a>
                     </div>
                 </div>
                 <!-- <div class="select_gender">

@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
-import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
 import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
 import { getUserDetails } from '../../../_helpers/jwt.helper';
 import { ToastrService } from 'ngx-toastr';
+import { GoogleLoginProvider } from './google.login-provider';
 
 @Component({
   selector: 'app-social-login',
@@ -209,4 +210,11 @@ export class SocialLoginComponent implements OnInit {
   loginWithApple(): void {
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
   }
+
+  loginWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+      console.log('here',data);
+    });
+  }
+
 }

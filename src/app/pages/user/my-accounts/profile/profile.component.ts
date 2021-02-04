@@ -172,14 +172,16 @@ export class ProfileComponent implements OnInit {
   }
 
   selectGender(event,type){
-    this.is_gender = true; 
-    if(type =='M'){
-      this.is_type = 'M';        
-    }else if(type =='F'){
-      this.is_type = 'F';        
-    } else if(type =='O'){
-      this.is_type = 'O';        
-    } 
+    if(this.isFormControlEnable){
+      this.is_gender = true; 
+      if(type =='M'){
+        this.is_type = 'M';        
+      }else if(type =='F'){
+        this.is_type = 'F';        
+      } else if(type =='O'){
+        this.is_type = 'O';        
+      } 
+    }
   } 
  
  

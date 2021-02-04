@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var apple_provider_1 = require("./apple.provider");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
+var google_login_provider_1 = require("./google.login-provider");
 var SocialLoginComponent = /** @class */ (function () {
     function SocialLoginComponent(userService, router, modalService, location, authService, toastr) {
         this.userService = userService;
@@ -190,6 +191,11 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.loginWithApple = function () {
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
+    };
+    SocialLoginComponent.prototype.loginWithGoogle = function () {
+        this.authService.signIn(google_login_provider_1.GoogleLoginProvider.PROVIDER_ID).then(function (data) {
+            console.log('here', data);
+        });
     };
     __decorate([
         core_1.Output()
