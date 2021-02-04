@@ -1,208 +1,306 @@
-<!-- ONEWAY -->
-<div class="card accordion_detailed_wrps wo_return">
-    <div class="card-body">
-        <div>
-            <div class="cols_wrps">
-                <div class="lines_cols">
-                    <div class="line_shortname colmns_w">
-                        <span>
-                            <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt=""
-                                class="Pink filled Flight" />
-                            JFK to MIA
-                        </span>
-                        <span class="hrs_">
-                            1 h 24 m
-                        </span>
+<div class="card-body main_body">
+    <div class="card accordion_detailed_wrps wo_return">
+        <div class="card-body">
+            <div>
+                <div class="cols_wrps">
+                    <div class="lines_cols">
+                        <div class="line_shortname colmns_w">
+                            <span>
+                                <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt=""
+                                    class="Pink filled Flight" />
+                                JFK to MIA
+                            </span>
+                            <span class="hrs_">
+                                1 h 24 m
+                            </span>
+                        </div>
+                        <div class="date_wrp colmns_w">
+                            Jun 01, 2021
+                        </div>
+                        <div class="timing_wrp colmns_w">
+                            08:00 AM - 09:24 AM
+                        </div>
                     </div>
-                    <div class="date_wrp colmns_w">
-                        Jun 01, 2021
-                    </div>
-                    <div class="timing_wrp colmns_w">
-                        08:00 AM - 09:24 AM
+                    <div class="lines_cols">
+                        <div class="line_company_name colmns_w">
+                            American
+                            <span class="hrs_">
+                                1 h 24 m
+                            </span>
+                        </div>
+                        <div class="fl_number colmns_w">
+                            <span class="pink_stamp"></span>
+                            Flight AA-2116
+                        </div>
+                        <div class="class_wrps colmns_w">
+                            Economy
+                        </div>
                     </div>
                 </div>
-                <div class="lines_cols">
-                    <div class="line_company_name colmns_w">
-                        American
-                        <span class="hrs_">
-                            1 h 24 m
-                        </span>
+                <div class="change_plane_wrapper">
+                    <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt=""
+                        class="Pink filled Flight" />
+                    Change Planes in DCA
+                </div>
+                <div class="cols_wrps">
+                    <div class="lines_cols">
+                        <div class="line_shortname colmns_w">
+                            <span>
+                                <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt=""
+                                    class="Pink filled Flight" />
+                                JFK to MIA
+                            </span>
+                            <span class="hrs_">
+                                1 h 24 m
+                            </span>
+                        </div>
+                        <div class="date_wrp colmns_w">
+                            Jun 01, 2021
+                        </div>
+                        <div class="timing_wrp colmns_w">
+                            08:00 AM - 09:24 AM
+                        </div>
                     </div>
-                    <div class="fl_number colmns_w">
-                        <span class="pink_stamp"></span>
-                        Flight AA-2116
-                    </div>
-                    <div class="class_wrps colmns_w">
-                        Economy
+                    <div class="lines_cols">
+                        <div class="line_company_name colmns_w">
+                            American
+                            <span class="hrs_">
+                                1 h 24 m
+                            </span>
+                        </div>
+                        <div class="fl_number colmns_w">
+                            <span class="pink_stamp"></span>
+                            Flight AA-2116
+                        </div>
+                        <div class="class_wrps colmns_w">
+                            Economy
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="change_plane_wrapper">
-                <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt=""
-                    class="Pink filled Flight" />
-                Change Planes in DCA
+        </div>
+    </div>
+
+    <div class="total_hrs_wrps cta_btns_wrps">
+        <span class="ct_btns">
+            <button>Cancel</button>
+        </span>
+        8h 29m
+    </div>
+
+    <div id="accordion_Bookings" class="accordion_bookings">
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link">
+                    Booking Traveler
+                </a>
             </div>
-            <div class="cols_wrps">
-                <div class="lines_cols">
-                    <div class="line_shortname colmns_w">
-                        <span>
-                            <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt=""
-                                class="Pink filled Flight" />
-                            JFK to MIA
-                        </span>
-                        <span class="hrs_">
-                            1 h 24 m
-                        </span>
+            <div class="collapse show">
+                <div class="card-body">
+                    <div class="sub_cat_wrapper">
+                        <a href="javascript:void(0);" class="add_btn_lined">Add Adult (Over 12)</a>
+                        <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
+                        <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
                     </div>
-                    <div class="date_wrp colmns_w">
-                        Jun 01, 2021
+                    <div class="common_form">
+                        <div class="form-row">
+                            <div class="col-sm-12 col-md-4 mb-sm-10">
+                                <label for="">First Name*</label>
+                                <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
+                                <div class="error">
+                                    <small class="error_field">Your name is
+                                        required</small>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-sm-10">
+                                <label for="">Last Name*</label>
+                                <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+                            </div>
+
+                            <div class="col-sm-12 col-md-4 mb-sm-10">
+                                <label for="">Gender*</label>
+                                <select class="form-control" formControlName="gender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            <div class="col-sm-12 col-md-4 mb-sm-10">
+                                <label for="">Email*</label>
+                                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-sm-10">
+                                <label for="">Telephone*</label>
+                                <input type="text" class="form-control" placeholder="Telephone"
+                                    formControlName="phone_no">
+                            </div>
+                            <div class="col dobs col-md-4 mb-sm-10">
+                                <label for="">Date of birth*</label>
+                                <input type="text" class="form-control" placeholder="Date of birth"
+                                    formControlName="dob">
+                            </div>
+                        </div>
+                        <div class="form-row mt-3 mb-sm-10">
+                            <div class="col-sm-12 col-md-4">
+                                <label for="">Passport number</label>
+                                <input type="text" class="form-control" placeholder="Passport number"
+                                    formControlName="passport_number">
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label for="">Nationality*</label>
+                                <input type="text" class="form-control" placeholder="Nationality"
+                                    formControlName="country_code">
+                            </div>
+                        </div>
                     </div>
-                    <div class="timing_wrp colmns_w">
-                        08:00 AM - 09:24 AM
-                    </div>
-                </div>
-                <div class="lines_cols">
-                    <div class="line_company_name colmns_w">
-                        American
-                        <span class="hrs_">
-                            1 h 24 m
-                        </span>
-                    </div>
-                    <div class="fl_number colmns_w">
-                        <span class="pink_stamp"></span>
-                        Flight AA-2116
-                    </div>
-                    <div class="class_wrps colmns_w">
-                        Economy
+
+                    <div id="accordion_add" class="accordion_addn">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="heade_wrps">
+                                    Add-Ons
+                                    <a href="javascript:void(0);" class="addon_anchor responsive_anch">
+                                    </a>
+                                </span>
+                                <ul class="nav nav-pills" id="addon_tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage"
+                                            role="tab" aria-controls="baggage" aria-selected="true">Baggage</a>
+                                    </li>
+                                    <li class="nav-item disabled" role="presentation">
+                                        <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding"
+                                            role="tab" aria-controls="boarding" aria-selected="false">Priority
+                                            Boarding</a>
+                                    </li>
+                                    <li class="nav-item disabled" role="presentation">
+                                        <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance"
+                                            role="tab" aria-controls="insurance" aria-selected="false">Insurance</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="add_acord" class="collapse show">
+                                <div class="card-body">
+                                    <div class="tab-content" id="addon_tabContent">
+                                        <div class="tab-pane fade show active" id="baggage" role="tabpanel"
+                                            aria-labelledby="baggage-tab">
+                                            <div class="addon_listins_wrps">
+                                                <span></span>
+                                                <button class="addon_btn_drop">
+                                                    Cabin bag upto Standard Baggage
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="boarding" role="tabpanel"
+                                            aria-labelledby="boarding-tab">
+                                            Cabin bag upto Standard Baggage
+                                        </div>
+                                        <div class="tab-pane fade" id="insurance" role="tabpanel"
+                                            aria-labelledby="insurance-tab">
+                                            Cabin bag upto Standard Baggage
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<div class="total_hrs_wrps cta_btns_wrps">
-    <span class="ct_btns">
-        <button>Cancel</button>
-    </span>
-    8h 29m
-</div>
-
-
-
-
-<div id="accordion_Bookings" class="accordion_bookings">
-    <div class="card">
-        <div class="card-header">
-            <a class="card-link" data-toggle="collapse" aria-expanded="false">
-                Booking Traveler
-            </a>
+<div class="price_listing_wrpper">
+    <div class="total_p_wrp bb">
+        <div class="left_sec">
+            Total Purchases
+            <span>
+                Taxes and Fees Included
+            </span>
         </div>
-        <div class="collapse show" data-parent="#accordion">
-            <div class="card-body">
-                <div class="sub_cat_wrapper">
-                    <a href="javascript:void(0);" class="add_btn_lined">Add Adult (Over 12)</a>
-                    <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
-                    <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
-                </div>
-                <div class="common_form">
-                    <div class="form-row">
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">First Name*</label>
-                            <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
-                            <div class="error">
-                                <small class="error_field">Your name is
-                                    required</small>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Last Name*</label>
-                            <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
-                        </div>
-
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Gender*</label>
-                            <select class="form-control" formControlName="gender">
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
-                        </div>
+        <div class="right_sec">
+            $900
+        </div>
+    </div>
+    <div class="price_descrip">
+        <div class="line_desc">
+            <div class="left_sec">
+                Booking Downpayment
+            </div>
+            <div class="right_sec">
+                $180
+            </div>
+        </div>
+        <div class="line_desc">
+            <div class="left_sec">
+                Add-on Baggage
+            </div>
+            <div class="right_sec">
+                $180
+            </div>
+        </div>
+        <div class="line_desc">
+            <div class="left_sec">
+                Add-on Baggage
+            </div>
+            <div class="right_sec">
+                $180
+            </div>
+        </div>
+        <div class="total_p_wrp">
+            <div class="left_sec">
+                Downpayment
+            </div>
+            <div class="right_sec">
+                $200
+            </div>
+        </div>
+        <div class="listing_accordion">
+            <div id="accordion_listing">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
+                            7 Monthly Installments of $100
+                        </a>
                     </div>
-                    <div class="form-row mt-3">
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Email*</label>
-                            <input type="email" class="form-control" placeholder="Email" formControlName="email">
-                        </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Telephone*</label>
-                            <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_no">
-                        </div>
-                        <div class="col dobs col-md-4 mb-sm-10">
-                            <label for="">Date of birth*</label>
-                            <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
-                        </div>
-                    </div>
-                    <div class="form-row mt-3 mb-sm-10">
-                        <div class="col-sm-12 col-md-4">
-                            <label for="">Passport number</label>
-                            <input type="text" class="form-control" placeholder="Passport number"
-                                formControlName="passport_number">
-                        </div>
-                        <div class="col-sm-12 col-md-4">
-                            <label for="">Nationality*</label>
-                            <input type="text" class="form-control" placeholder="Nationality"
-                                formControlName="country_code">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="accordion_add" class="accordion_addn">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="heade_wrps">
-                                Add-Ons
-                                <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord"
-                                    class="addon_anchor responsive_anch" aria-expanded="true" aria-controls="add_acord">
-                                </a>
-                            </span>
-                            <ul class="nav nav-pills" id="addon_tab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage"
-                                        role="tab" aria-controls="baggage" aria-selected="true">Baggage</a>
-                                </li>
-                                <li class="nav-item disabled" role="presentation">
-                                    <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab"
-                                        aria-controls="boarding" aria-selected="false">Priority Boarding</a>
-                                </li>
-                                <li class="nav-item disabled" role="presentation">
-                                    <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance"
-                                        role="tab" aria-controls="insurance" aria-selected="false">Insurance</a>
-                                </li>
-                            </ul>
-                            <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord"
-                                class="addon_anchor" aria-expanded="true" aria-controls="add_acord">
-                            </a>
-                        </div>
-                        <div id="add_acord" class="collapse show" data-parent="#accordion_add">
-                            <div class="card-body">
-                                <div class="tab-content" id="addon_tabContent">
-                                    <div class="tab-pane fade show active" id="baggage" role="tabpanel"
-                                        aria-labelledby="baggage-tab">
-                                        <div class="addon_listins_wrps">
-                                            <button class="addon_btn_drop">
-                                                Cabin bag upto Standard Baggage
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="boarding" role="tabpanel"
-                                        aria-labelledby="boarding-tab">
-                                        Cabin bag upto Standard Baggage
-                                    </div>
-                                    <div class="tab-pane fade" id="insurance" role="tabpanel"
-                                        aria-labelledby="insurance-tab">
-                                        Cabin bag upto Standard Baggage
-                                    </div>
+                    <div id="listing_descrip" class="collapse show" data-parent="#accordion_listing">
+                        <div class="card-body">
+                            <div class="line_desc paid_clr">
+                                <div class="left_sec">
+                                    Booking Downpayment
                                 </div>
+                                <div class="right_sec">
+                                    $180
+                                </div>
+                                <span class="paid_markss">
+                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="line_desc due_clr">
+                                <div class="left_sec">
+                                    Add-on Baggage
+                                </div>
+                                <div class="right_sec">
+                                    $180
+                                </div>
+                                <span class="paid_markss"></span>
+                            </div>
+                            <div class="line_desc">
+                                <div class="left_sec">
+                                    Add-on Baggage
+                                </div>
+                                <div class="right_sec">
+                                    $180
+                                </div>
+                                <span class="paid_markss"></span>
+                            </div>
+                            <div class="total_p_wrp">
+                                <div class="left_sec">
+                                    Downpayment
+                                </div>
+                                <div class="right_sec">
+                                    $200
+                                </div>
+                                <span class="paid_markss"></span>
                             </div>
                         </div>
                     </div>
