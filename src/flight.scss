@@ -519,8 +519,9 @@
 						font-weight: 600;
 
 						.block_top {
-							padding: 8px;
-							background: $bg-tab-detail;
+							padding: 10px;
+							//background: $bg-tab-detail;
+							border-bottom: 1px solid #e5e8eb;
 
 							p {
 								margin: 0;
@@ -3320,16 +3321,16 @@
 			.accordion-group {
 				background: $background-white;
 				border: 1px solid $box-border-color;
-				border-radius: 35px;
+				border-radius: 25px;
 
 				.accordion-heading {
-					padding: 20px 15px;
+					padding: 8px 15px;
 					display: flex;
 					align-items: center;
 					cursor: pointer;
 
 					.accordion-toggle {
-						font-size: 20px;
+						font-size: 16px;
 						color: $text-grey;
 						font-weight: 500;
 						width: 100%;
@@ -3832,16 +3833,16 @@
 		.accordion-group {
 			background: $background-white;
 			border: 1px solid $box-border-color;
-			border-radius: 35px;
+			border-radius: 25px;
 
 			.accordion-heading {
-				padding: 20px 15px;
+				padding: 8px 15px;
 				display: flex;
 				align-items: center;
 				cursor: pointer;
 
 				.accordion-toggle {
-					font-size: 20px;
+					font-size: 16px;
 					color: $text-grey;
 					font-weight: 500;
 					width: 100%;

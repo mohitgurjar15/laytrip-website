@@ -43,25 +43,14 @@
                                         {{'flight_detail' | translate}}
                                     </a>
                                 </div>
-                                <!-- <div class="info_price_origin">
-                                    <div class="refundable" *ngIf="item.is_refundable">Refundable </div>
-                                    <div class="no_refundable" *ngIf="!item.is_refundable">Non-Refundable </div>
-
-                                    <div class="ogigin_price">
-                                        Total
-                                        <span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span>
-                                    </div>
-                                </div> -->
+                                
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 px-0">
                         <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
                             <div class="block_inn_pr">
-                                <!-- <div class="block">
-                                    <p>Down Payment</p>
-                                    <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
-                                </div> -->
+                                
                                 <div class="block" *ngIf="item.start_price > 0">
                                     <p>{{'starts_from' | translate}}</p>
                                     <p><span>{{ currency?.symbol }}{{ item.secondary_start_price < 5 ? '5.00' :
@@ -76,9 +65,7 @@
                             <a class="book_btn hover-link" (click)="bookNow(item)">
                                 {{'select' | translate}}
                             </a>
-                            <!-- <a target="_blank" class="partial_payment_info anchor-tag" [routerLink]="['/partial-payment']">Learn
-                                more about
-                                partial payment</a> -->
+                            
                             <div class="show_detail">
                                 <a class="show_more_detail anchor-tag" (click)="showDetails(blockIndex,'true')"> <img
                                         src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
@@ -159,7 +146,7 @@
                                                         <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
                                                             alt="Duration Images">
                                                     </div>
-                                                    <!-- <p>Flight Duration</p> -->
+                                                   
                                                 </div>
                                                 <div class="flight_info_detail">
                                                     <h4>{{ flightInfo?.arrival_code }}
@@ -315,25 +302,6 @@
                             <div class="card-body">
                                 <div class="tab_detail cancellation_rules_cnt">
                                     <div class="triangle_right"></div>
-                                    <!-- <div class="rules_cnt_top">
-                                            <div class="detail_left">
-                                                <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
-                                                <p>Indigo</p>
-                                                <span>{{ flightInfo?.departure_code }} - DEN</span>
-                                            </div>
-                                            <div class="detail_right">
-                                                <ul>
-                                                    <li class="first">
-                                                        <div>Laytip Fess</div>
-                                                        <div>{{ currency?.symbol }}13e</div>
-                                                    </li>
-                                                    <li>
-                                                        <div>Airline Fees</div>
-                                                        <div>Refundable</div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div> -->
                                     <div class="rules_cnt_btm">
                                         <span>{{'term_and_condition' | translate}}</span>
                                         <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
@@ -489,14 +457,6 @@
                                         {{'flight_detail' | translate}}
                                     </a>
                                 </div>
-                                <!-- <div class="info_price_origin">
-                                    <div class="refundable" *ngIf="item.is_refundable">Refundable </div>
-                                    <div class="no_refundable" *ngIf="!item.is_refundable">Non-Refundable </div>
-                                    <div class="ogigin_price">
-                                        Total
-                                        <span>{{ currency?.symbol }}{{ item?.selling_price | number : '1.2-2'}}</span>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -505,10 +465,7 @@
                     <div class="col-md-4 px-0">
                         <div class="block_price" [ngClass]="{'block_pr': item.start_price > 0}">
                             <div class="block_inn_pr">
-                                <!-- <div class="block">
-                                    <p>Down payment</p>
-                                    <p><span>{{ currency?.symbol }}{{ item?.start_price | number : '1.2-2'}}</span></p>
-                                </div> -->
+                               
                                 <div class="block" *ngIf="item.start_price > 0">
                                     <p>{{'starts_from' | translate}}</p>
                                     <p><span>{{ currency?.symbol }}{{ item.secondary_start_price < 5 ? '5.00' :
@@ -523,9 +480,6 @@
                             <a class="book_btn hover-link" (click)="bookNow(item)">
                                 {{'select' | translate}}
                             </a>
-                            <!-- <a target="_blank" class="partial_payment_info anchor-tag" [routerLink]="['/partial-payment']">Learn
-                                more about
-                                partial payment</a> -->
                             <div class="show_detail">
                                 <a class="show_more_detail anchor-tag" (click)="showDetails(blockIndex,'true')"> <img
                                         src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
@@ -606,7 +560,6 @@
                                                                 <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
                                                                     alt="Duration Images">
                                                             </div>
-                                                            <!-- <span>Flight Duration</span> -->
                                                         </div>
                                                         <div class="flight_info_detail">
                                                             <h4>{{ flightInfo?.arrival_code }}
@@ -664,7 +617,6 @@
                                                                 <img src="{{ s3BucketUrl }}assets/images/icon/flight-duration_im.svg"
                                                                     alt="Duration Images">
                                                             </div>
-                                                            <!-- <span>Flight Duration</span> -->
                                                         </div>
                                                         <div class="flight_info_detail">
                                                             <h4>{{ flightInfo?.arrival_code }}
