@@ -59,8 +59,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartService.getCartItems.subscribe(data=>{
 
       if(data.length>0){
-        console.log(data,"iiiiiiiiiiiiiii")
-        
+        console.log(data,"getCartItems.subscribe")
         this.calculateInstalment(data);
       }
     })
@@ -189,11 +188,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   calculateInstalment(cartPrices){
     console.log("cartPricescartPrices",cartPrices)
-    let checkinDate = moment(cartPrices[0].module_Info.departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
     let totalPrice=0;
+    let checkinDate;
     if(cartPrices.length>0){
+      checkinDate = moment(cartPrices[0].module_Info.departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
       for(let i=0; i < cartPrices.length; i++){
-        console.log(i,"===",cartPrices[i].id)
         totalPrice+=cartPrices[i].module_Info.selling_price;
         if(i==0){
           continue;

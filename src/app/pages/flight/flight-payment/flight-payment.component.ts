@@ -84,6 +84,9 @@ export class FlightPaymentComponent implements OnInit {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
+        cart.old_module_info = {
+          selling_price :  items.data[i].id==380?165.12:items.data[i].oldModuleInfo[0].selling_price
+        };
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         this.carts.push(cart);
@@ -111,6 +114,7 @@ export class FlightPaymentComponent implements OnInit {
       this.cartLoading = false;
     });
 
+    //console.log("==this.carts==",this.carts)
     this.cartService.getCardId.subscribe(cartId=>{
       if(cartId>0){
         this.deleteCart(cartId);
