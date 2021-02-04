@@ -809,6 +809,14 @@
         font-size: 16px;
         &.bb{
             border-bottom: 1px solid $box-border-color;
+            .left_sec{
+                flex-direction: column;
+                display: flex;
+                span{
+                    color: $mid_gray_bg;
+                    font-size: 10px;
+                }
+            }
         }
         .left_sec{
             flex: 1;

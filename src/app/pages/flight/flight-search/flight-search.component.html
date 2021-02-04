@@ -1,5 +1,9 @@
 <app-laytrip-loader [loading]="fullPageLoading">
 </app-laytrip-loader>
+<div class="page_topbanner">
+    <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="Banner Image">
+  </div>
+  <div class="listing_main_box">
 <div class="search_tab_listing_wrapper">
     <div class="container">
         <div class="searchbar_box_common">
@@ -17,7 +21,7 @@
 <section class="search_result flight" *ngIf="!fullPageLoading && !isNotFound && errorMessage==''">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-3 left_m">
                 <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails"></app-sort-flight>
                 <div class="filter_saidbar">
                     <div class="filter_by ">
@@ -66,3 +70,4 @@
         </div>
     </div>
 </section>
+</div>

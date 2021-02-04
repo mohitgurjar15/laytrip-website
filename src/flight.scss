@@ -519,8 +519,9 @@
 						font-weight: 600;
 
 						.block_top {
-							padding: 8px;
-							background: $bg-tab-detail;
+							padding: 10px;
+							//background: $bg-tab-detail;
+							border-bottom: 1px solid #e5e8eb;
 
 							p {
 								margin: 0;
