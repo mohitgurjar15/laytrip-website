@@ -5,11 +5,11 @@
         <div id="accordion" class="accordion_bookings">
           <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;">
             <div class="card-header" (click)="selectTravelerNumber($event,x)">
-              <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y" aria-expanded="false">
+              <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="false">
                 Booking Traveler {{x+1}}
               </a>
             </div>
-            <div [id]="'adult_collapse'+y" class="collapse" [ngClass]="{'show':traveler_number==x}"   data-parent="#accordion">
+            <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"   data-parent="#accordion">
               <div class="card-body">
                 <div class="sub_cat_wrapper">
                   <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)
