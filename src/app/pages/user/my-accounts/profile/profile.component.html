@@ -136,7 +136,8 @@
             -->
                 <div class="text_field">
                     <span class="tel_span">
-                        <input [readonly]="!isFormControlEnable" type="text" class="form-control" tabindex="14" placeholder="+00" maxlength="4"
+                        <input [readonly]="!isFormControlEnable" type="text" class="form-control" tabindex="14" placeholder="+00"
+                         maxlength="4"
                             formControlName="country_code">
                         <input [readonly]="!isFormControlEnable" (keypress)="commonFunctoin.validateNumber($event)" type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
                             formControlName="phone_no">

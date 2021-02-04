@@ -105,9 +105,10 @@ export class TravellerFormComponent implements OnInit {
     }
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     this.isAdult = false;
-    console.log(moment(this.travelerInfo.dob).format('YYYY-MM-DD') ,   adult12YrPastDate)
+    this.travellerForm.setErrors(null);
     if(moment(this.travelerInfo.dob).format('YYYY-MM-DD') <   adult12YrPastDate){
       this.isAdult = true;
+      this.travellerForm.setErrors({'phoneAndPhoneCodeError':true});
     }
     console.log(this.isAdult,'isAdult')
 
@@ -170,6 +171,7 @@ export class TravellerFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.loadingValue.emit(true);
+    console.log(this.travellerForm)
     if (this.travellerForm.invalid) {
       this.submitted = true;
       this.loadingValue.emit(false);
@@ -278,9 +280,12 @@ export class TravellerFormComponent implements OnInit {
       emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))     
       phoneControl.setValidators([Validators.required,Validators.minLength(10)]);
       countryControl.setValidators([Validators.required]);
-
+      this.travellerForm.setErrors({'phoneAndPhoneCodeError':true});
+      console.log(this.travellerForm)
     } else {
       this.isAdult = false;
+      this.travellerForm.setValidators(null)
+      console.log(this.travellerForm)
       emailControl.setValidators(null)
       phoneControl.setValidators(null)
       countryControl.setValidators(null)

@@ -87,7 +87,7 @@ var ProfileComponent = /** @class */ (function () {
             home_airport: ['']
         });
         if (!this.isFormControlEnable) {
-            this.profileForm.controls['country_code'].disable();
+            // this.profileForm.controls['country_code'].disable() 
         }
         this.getProfileInfo();
     };
@@ -209,7 +209,7 @@ var ProfileComponent = /** @class */ (function () {
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
                 dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
-                country_code: res.countryCode ? res.countryCode : '',
+                country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '',
                 phone_no: res.phoneNo,
                 country_id: res.country.name ? res.country.name : countryName,
                 state_id: res.state.name,
