@@ -78,7 +78,7 @@ export class TravellerFormComponent implements OnInit {
     }
 
     this.travellerForm = this.formBuilder.group({
-      gender: [''],
+      gender: ['',[Validators.required]],
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
@@ -94,13 +94,7 @@ export class TravellerFormComponent implements OnInit {
     if (this.travellerId) {
       this.setTravelerForm();
     }
-  }
-      
-      
-  ngOnChanges(changes: SimpleChanges){
-    console.log(changes)
-  }
-
+  }    
     
   setTravelerForm() {
     this.traveller = this.travelerInfo;
