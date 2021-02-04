@@ -10,7 +10,7 @@ export const travelersFileds={
             country_code:'',
             phone_no:'',
             dob:'',
-            dobMinDate:new Date(moment().subtract(50,'years').format("YYYY-MM-DD") ),
+            dobMinDate:new Date(moment().subtract(100,'years').format("YYYY-MM-DD") ),
             dobMaxDate:new Date(moment().subtract(12, 'years').format("YYYY-MM-DD")),
             country_id:'',
             gender:'',

@@ -66,7 +66,7 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false });
+    this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false,adaptivePosition: true });
 
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;

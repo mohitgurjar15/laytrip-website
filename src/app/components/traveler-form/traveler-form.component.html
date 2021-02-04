@@ -27,16 +27,7 @@
                   </a>
                 </button>
               </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-              <app-my-traveler travelerId={{travelers.type0.adults[traveler_number].userId}}
-                traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
-=======
               <app-my-traveler travelerId={{travelers.type0.adults[x].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
->>>>>>> 04889ed5a5f28e0f6042e69a791af57aace5e979
-=======
-              <app-my-traveler travelerId={{travelers.type0.adults[x].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
->>>>>>> aa4b18bdcb06b29829dea63cf29d4520e02369ae
 
               <div [formGroupName]="x" class="common_form">
                 <div class="form-row">
@@ -107,7 +98,7 @@
                     <label for="">Date of birth*</label>
                     <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
                     <input type="text" placeholder="Date of birth" class="form-control" bsDatepicker formControlName="dob"
-                      [bsConfig]="bsConfig">
+                      [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value" [maxDate]="traveler.controls.dobMaxDate.value">
                     <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                       formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                       (onBlur)=changeDateOfBirth($event)
