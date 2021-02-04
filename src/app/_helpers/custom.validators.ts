@@ -42,8 +42,8 @@ export function optValidation() {
 
 export function phoneAndPhoneCodeValidation(type='') {
   return (form: FormGroup): { [key: string]: any } => {
-    if(type == 'adult'){
-      if(!form.value.phone_no){
+    // if(type == 'adult'){
+      if(!form.value.phone_no ){
         return {phoneAndPhoneCodeError: true};
       } if(!form.value.phone_no){      
         return {phoneAndPhoneCodeError: true};
@@ -52,9 +52,9 @@ export function phoneAndPhoneCodeValidation(type='') {
       } else {
         return null;
       }
-    } else {
+    /* } else {
       return null;
-    }
+    } */
    
   };
 }

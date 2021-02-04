@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
 import * as moment from 'moment';
@@ -8,11 +8,11 @@ import { GenericService } from '../../../../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { FlightService } from '../../../../../services/flight.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
 import { TravelerService } from '../../../../../services/traveler.service';
+import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
 
 @Component({
   selector: 'app-traveller-form',
@@ -22,9 +22,10 @@ import { TravelerService } from '../../../../../services/traveler.service';
 export class TravellerFormComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  @Output() travelersChanges = new EventEmitter();
   @Input() travellerId: any;
   @Input() travelerInfo: any;
+  @Output() loadingValue = new EventEmitter<boolean>();
+  @Output() travelerFormChange = new EventEmitter();
   countries = [];
   countries_code = [];
   is_gender: boolean = true;
@@ -36,7 +37,7 @@ export class TravellerFormComponent implements OnInit {
   loading = false;
   dobMinDate;
   dobMaxDate;
-  minyear;
+  dobYearRange;
   maxyear;
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
   subscriptions: Subscription[] = [];
@@ -56,7 +57,6 @@ export class TravellerFormComponent implements OnInit {
     public commonFunction: CommonFunction,
     private flightService: FlightService,
     private userService: UserService,
-    public activeModal: NgbActiveModal,
     private toastr: ToastrService,
     private cookieService: CookieService,
     private travelerService:TravelerService
@@ -64,7 +64,6 @@ export class TravellerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('this');
     this.getCountry();
     let location: any = this.cookieService.get('__loc');
     try {
@@ -78,19 +77,19 @@ export class TravellerFormComponent implements OnInit {
     }
 
     this.travellerForm = this.formBuilder.group({
-      gender: ['',[Validators.required]],
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      gender: ['',[Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
-      phone_no: ['', [Validators.required]],
+      phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
       country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
-    });
+    },{validators:phoneAndPhoneCodeValidation()});
 
-    // this.setUserTypeValidation();
+    this.setUserTypeValidation();
     if (this.travellerId) {
       this.setTravelerForm();
     }
@@ -147,24 +146,10 @@ export class TravellerFormComponent implements OnInit {
     }
   }
 
-  close() {
-    this.activeModal.close();
-  }
-
-  setUserTypeValidation() {
-    
-    const emailControl = this.travellerForm.get('email');
-    const phoneControl = this.travellerForm.get('phone_no');
-    const countryControl = this.travellerForm.get('country_code');
-    const passport_expiryControl = this.travellerForm.get('passport_expiry');
-
+  setUserTypeValidation() {    
     this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
     this.dobMaxDate = new Date(moment().format("MM/DD/YYYY"));
-    this.minyear = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
-
-    emailControl.updateValueAndValidity();
-    phoneControl.updateValueAndValidity();
-    countryControl.updateValueAndValidity();
+    this.dobYearRange = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
   }
 
   checkUser() {
@@ -175,11 +160,11 @@ export class TravellerFormComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.submitted = this.loading = true;
+    this.submitted = true;
+    this.loadingValue.emit(true);
     if (this.travellerForm.invalid) {
       this.submitted = true;
-      this.loading = false;
+      this.loadingValue.emit(false);
       return;
     } else {
 
@@ -196,7 +181,7 @@ export class TravellerFormComponent implements OnInit {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
         dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.travellerForm.value.dob, '/')).format('YYYY-MM-DD'),
-        gender: this.travellerForm.value.gender,
+        gender: this.travellerForm.value.gender ? this.travellerForm.value.gender : 'M',
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
         passport_number: this.travellerForm.value.passport_number,
@@ -210,29 +195,32 @@ export class TravellerFormComponent implements OnInit {
         jsonData = Object.assign(jsonData, emailObj);
         console.log(jsonData,this.travellerId);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
-          this.travelersChanges.emit(data);
-          this.activeModal.close();
+          this.travelerFormChange.emit(data);
+          this.loadingValue.emit(false);
+          this.toastr.success('Success', 'Traveller Updated Successfully');
         }, (error: HttpErrorResponse) => {
-          this.submitted = this.loading = false;
+          this.submitted = false; this.loadingValue.emit(false);
+          this.toastr.error(error.error.message, 'Traveller Update Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
           }
-          this.toastr.error(error.error.message, 'Traveller Update Error');
         });
       } else {
         jsonData = Object.assign(jsonData, emailObj);
 
         this.travelerService.addAdult(jsonData).subscribe((data: any) => {
-          this.travelersChanges.emit(data);
-          this.activeModal.close();
+          this.travelerFormChange.emit(data);
+          this.loadingValue.emit(false);
+          this.travellerForm.reset();
+          this.travellerForm.setErrors(null);
+          this.toastr.success('Success', 'Traveller Add Successfully');
+
         }, (error: HttpErrorResponse) => {
-          console.log('error')
-          this.submitted = this.loading = false;
+          this.submitted = false;
+          this.loadingValue.emit(false);
+          this.toastr.error(error.error.message, 'Traveller Add Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
-          } else {
-            this.submitted = this.loading = false;
-            this.toastr.error(error.error.message, 'Traveller Add Error');
           }
         });
 
@@ -270,17 +258,6 @@ export class TravellerFormComponent implements OnInit {
     let dateArray = string.split(saprator);
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
-
-  selectGender(event,type){
-    this.is_gender = true; 
-    if(type =='M'){
-      this.is_type = 'M';        
-    }else if(type =='F'){
-      this.is_type = 'F';        
-    } else if(type =='O'){
-      this.is_type = 'O';        
-    } 
-  } 
 
 
 }
