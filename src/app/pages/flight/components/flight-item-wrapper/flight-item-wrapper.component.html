@@ -832,7 +832,7 @@
 </div> -->
 <!-- DATA OF ROUNFTRIP END -->
 
-<div class="routing_main_wrps">
+<!-- <div class="routing_main_wrps">
     <div class="one_way card_box">
         <div class="card_iinner">
             <div class="main_left_side">
@@ -957,6 +957,152 @@
             </div>
         </div>
         <div id="detail_accorrd" class="collapse" data-parent="#accordion_infos">
+            <div class="io_ru_wrps">
+                <div class="installment_wprs">
+                    <div class="type_lines">
+                        <span class="titles">
+                            Installment Option 1
+                        </span>
+                        <span class="texts">
+                            $100.00 downpayment and 10 weekly installments of $20.54
+                        </span>
+                    </div>
+                    <div class="type_lines">
+                        <span class="titles">
+                            Installment Option 1
+                        </span>
+                        <span class="texts">
+                            $100.00 downpayment and 10 weekly installments of $20.54
+                        </span>
+                    </div>
+                    <div class="type_lines">
+                        <span class="titles">
+                            Installment Option 1
+                        </span>
+                        <span class="texts">
+                            $100.00 downpayment and 10 weekly installments of $20.54
+                        </span>
+                    </div>
+                    <div class="type_lines">
+                        <span class="titles">
+                            Full Payment
+                        </span>
+                        <span class="texts">
+                            $500.54 including taxes and fees
+                        </span>
+                    </div>
+                </div>
+                <div class="rules_wrps">
+                    <span class="heads">
+                        <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt=""> Rules
+                    </span>
+                    <span class="texts_rules">
+                        No cancellation policy is found. BAGGAGE INCLUDED. UNLESS OTHERWISE SPECIFIED NOTE - RULE CR16 IN IPRG. APPLIES UNLESS OTHERWISE SPECIFIED. CANCELLATIONS ANY TIME. TICKET IS NON-REFUNDABLE IN CASE OF CANCEL/NO-SHOW/REFUND. VISIT AA.COM FOR DETAILS.
+                    </span>
+                </div>
+            </div>
+            <div class="notifi_text">
+                Bi-weekly and monthly installments plans also available
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="routing_main_wrps">
+    <div class="one_way card_box" *ngFor="let item of flightListArray; let i = index;">
+        <div class="card_iinner">
+            <div class="main_left_side">
+                <div class="common_wrper" *ngFor="let route of item.routes; let lastroute = last">
+                    <div class="left_side">
+                        <div class="flight_nams_wrps">
+                            <div class="fight_secs">
+                                <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
+                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                <span class="fl_name">
+                                    {{route.stops[0].airline_name}}
+                                </span>
+                                <span class="fl_num">
+                                    {{route.stops[0].airline}} - {{route.stops[0].flight_number}}
+                                </span>
+                            </div>
+                            <div class="fight_secs">
+                                <span class="fl_times">
+                                    {{route.stops[0].departure_time}} - {{route.stops[route.stops.length-1].arrival_time}}
+                                </span>
+                                <span class="fl_desti">
+                                    {{route.stops[0]?.departure_info?.code}} {{route.stops[0]?.departure_info?.city}} - {{route.stops[route.stops.length-1]?.arrival_info?.code}} {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center_side">
+                        <div class="stops_wr">
+                            <div class="stopages">
+                                <span class="fl_type" *ngIf="route.stops.length-1==0">Non-Stop</span>
+                                <span class="fl_type" *ngIf="route.stops.length-1==1">1 Stops</span>
+                                <span class="fl_type" *ngIf="route.stops.length-1==2">2 Stops</span>
+                                <span class="fl_type" *ngIf="route.stops.length-1==3">3 Stops</span>
+                                <span class="stop_names" *ngIf="route.stops.length>1">
+                                    <ng-container *ngFor="let stop of route.stops | slice:1; let laststop = last">
+                                        {{stop.departure_info.code}}
+                                        <ng-container *ngIf="!laststop">,</ng-container>
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <span id="accordion_infos" *ngIf="lastroute">
+                                <a class="det_link" data-toggle="collapse" aria-expanded="false" [href]="'#detail_accorrd'+i">
+                                    Details
+                                </a>
+                            </span>
+                        </div>
+                        <div class="fl_timin">
+                            <span class="hh_mm">
+                                {{route.duration}}
+                            </span>
+                            <ng-container *ngIf="route.stops.length>1">
+                                <span class="lyovr_txt" *ngFor="let stop of route.stops | slice:1; let laststop = last">
+                                    {{stop?.departure_info?.code}} Plane Change {{stop?.layover_duration}}
+                                </span>
+                            </ng-container>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right_side">
+                <div class="fl_fares">
+                    <ng-container *ngIf="item.secondary_start_price>0">
+                        <span class="fare_type">
+                            Flexible Installments
+                        </span>
+                        <span class="total_pr">
+                            From
+                            <span class="big-num">
+                                ${{item.secondary_start_price | number : '1.2-2'}}
+                            </span>
+                            weekly
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="item.secondary_start_price==0">
+                        <span class="fare_type">
+                            Full Payment
+                        </span>
+                        <span class="total_pr">
+                            <span class="big-num">
+                                ${{item.selling_price | number : '1.2-2'}}
+                            </span>
+                        </span>
+                    </ng-container>
+                    <span class="cta_btn">
+                        <button>
+                            Select
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div  [id]="'detail_accorrd'+i" class="collapse detail_accorrd" data-parent="#accordion_infos">
             <div class="io_ru_wrps">
                 <div class="installment_wprs">
                     <div class="type_lines">
