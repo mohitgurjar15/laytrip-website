@@ -228,6 +228,11 @@
                         <option value="F">Female</option>
                         <option value="O">Other</option>
                     </select>
+                    <div *ngIf="(submitted || (travellerForm.controls.gender.touched && travellerForm.controls.gender.errors))" class="error">
+                        <small *ngIf="travellerForm.controls.gender.errors.required" class="error_field">Please enter
+                            your gender
+                            address.</small>                       
+                    </div>
 <!--                     <a  [ngClass]="{'active': is_type == 'M'}" class="hover-link" (click)="selectGender($event,'M')">Male</a>
                     <a [ngClass]="{'active': is_type == 'F'}"  class="hover-link" (click)="selectGender($event,'F')">Female</a>
                     <a  [ngClass]="{'active': is_type == 'O'}" class="hover-link" (click)="selectGender($event,'O')">Other</a>
@@ -255,11 +260,11 @@
                 </span>
                 
                 
-                <!-- <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors" class="error">
-                    <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please
+                <div *ngIf="submitted || (travellerForm.controls.phone_no.touched && travellerForm.controls.phone_no.errors)" class="error">
+                    <small *ngIf="travellerForm.controls.phone_no.errors.required" class="error_field">Please
                         enter
                         your telephone number.</small>
-                </div> -->
+                </div>
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                 <label for="">Date of birth*</label>
@@ -268,6 +273,11 @@
                     yearRange="1971:2021"
                     placeholder="Date of birth">
                 </p-calendar>
+                <div *ngIf="submitted || (travellerForm.controls.dob.touched && travellerForm.controls.dob.errors)" class="error">
+                    <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">Please
+                        select
+                        your date of birth.</small>
+                </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">Passport number</label>
@@ -302,6 +312,11 @@
                         {{item.name}}
                     </ng-template>
                 </ng-select>
+                <div *ngIf="submitted || (travellerForm.controls.country_id.touched && travellerForm.controls.country_id.errors)" class="error">
+                    <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">Please
+                        select
+                        your country.</small>
+                </div>
             </div>
         </div>
         <span class="edit_btns">
