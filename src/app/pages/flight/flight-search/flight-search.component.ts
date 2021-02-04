@@ -45,7 +45,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scroll(0, 0);
-
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
     let payload: any = {};
@@ -88,12 +87,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
 
   getFlightSearchData(payload, tripType) {
+    this.loading = true;
     this.fullPageLoading = true;
     this.tripType = tripType;
     this.errorMessage = '';
     if (payload && tripType === 'roundtrip') {
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
+          this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
           this.flightDetails = res.items;
@@ -107,6 +108,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = true;
         }
 
+        this.loading = false;
         this.fullPageLoading = false;
       });
       this.dates = [];
@@ -125,6 +127,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     } else {
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
+          this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
           this.flightDetails = res.items;
@@ -138,6 +141,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         else {
           this.isNotFound = true;
         }
+        this.loading = false;
         this.fullPageLoading = false;
       });
 
@@ -153,7 +157,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flexibleLoading = false;
       });
 
-      this.getCalenderPrice(payload)
+      this.getCalenderPrice(payload);
     }
   }
 
