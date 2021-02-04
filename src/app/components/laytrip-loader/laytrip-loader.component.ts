@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-declare var $: any;
-var json = require('./data.json');
 
 @Component({
   selector: 'app-laytrip-loader',

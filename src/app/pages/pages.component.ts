@@ -13,29 +13,29 @@ export class PagesComponent implements OnInit {
   constructor(
     private router: Router,
     private genericService: GenericService,
-    ) {
-      this.router.events.subscribe((event: Event) => {
-          if (event instanceof NavigationStart) {
-            // Trigger when route change
-            this.checkUserValidate();
-        }
-      });
-   }
-
-  ngOnInit() {   
-    this.checkUserValidate(); 
-    document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
+  ) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        // Trigger when route change
+        this.checkUserValidate();
+      }
+    });
   }
 
-  checkUserValidate(){
+  ngOnInit() {
+    this.checkUserValidate();
+    document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
+  }
+
+  checkUserValidate() {
     var token = localStorage.getItem('_lay_sess');
-    if(token){
-      this.genericService.checkUserValidate(token).subscribe((res: any) => {        
+    if (token) {
+      this.genericService.checkUserValidate(token).subscribe((res: any) => {
       }, err => {
         redirectToLogin();
       });
 
     }
   }
-  
+
 }
