@@ -19,13 +19,13 @@
   max-width: 514px;
   width: 96%;
   .modal-content {
-    @include tab-view {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+    // @include tab-view {
+    //   position: fixed;
+    //   left: 0;
+    //   bottom: 0;
+    //   border-bottom-left-radius: 0;
+    //   border-bottom-right-radius: 0;
+    // }
     .contact_modal_wrp {
       padding: 32px 20px;
       .modal_title {
