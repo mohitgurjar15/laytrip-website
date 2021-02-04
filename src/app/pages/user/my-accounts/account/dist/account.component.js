@@ -57,6 +57,7 @@ var AccountComponent = /** @class */ (function () {
         this.userService.deleteAccount(data).subscribe(function (data) {
             _this.loading = false;
             jwt_helper_1.redirectToLogin();
+            _this.modalService.dismissAll();
         }, function (error) {
             _this.loading = false;
         });

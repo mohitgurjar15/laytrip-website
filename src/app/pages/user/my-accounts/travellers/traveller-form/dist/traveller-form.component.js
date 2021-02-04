@@ -58,7 +58,7 @@ var TravellerFormComponent = /** @class */ (function () {
             countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
         this.travellerForm = this.formBuilder.group({
-            gender: [''],
+            gender: ['', [forms_1.Validators.required]],
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
@@ -73,9 +73,6 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.travellerId) {
             this.setTravelerForm();
         }
-    };
-    TravellerFormComponent.prototype.ngOnChanges = function (changes) {
-        console.log(changes);
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
         var _this = this;

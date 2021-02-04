@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
+import * as moment from 'moment';
 
 declare var $: any;
 
@@ -29,6 +30,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   isCovidPage = true;
   cartItems;
   cartItemsCount;
+  weeklyInstallmentAmount:number;
+  totalAmount:number;
 
   constructor(
     private genericService: GenericService,
@@ -52,6 +55,15 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.getCartList();
       }
     }
+
+    this.cartService.getCartItems.subscribe(data=>{
+
+      if(data.length>0){
+        console.log(data,"iiiiiiiiiiiiiii")
+        
+        this.calculateInstalment(data);
+      }
+    })
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
@@ -61,12 +73,13 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.cartService.getCartList().subscribe((res: any) => {
         if (res) {
           // SET CART ITEMS IN CART SERVICE
-          this.cartService.setCartItems(res.data);
-          this.cartItems = res.data;
-          if (res.count) {
+          let cartItems = res.data.map(item =>  { return { id:item.id, module_Info : item.moduleInfo[0] }});
+          this.cartService.setCartItems(cartItems);
+          if (cartItems) {
             this.cartItemsCount = res.count;
             localStorage.setItem('$crt',this.cartItemsCount);
           }
+          this.calculateInstalment(cartItems);
           this.cd.detectChanges();
         }
       }, (error) => {
@@ -172,5 +185,44 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     /* if (this.isLoggedIn && this.cartItemsCount > 0) {
     } */
     this.router.navigate([`flight/payment/ZVZ4WEFNOW8ybVIwT0VX`]);
+  }
+
+  calculateInstalment(cartPrices){
+    console.log("cartPricescartPrices",cartPrices)
+    let checkinDate = moment(cartPrices[0].module_Info.departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+    let totalPrice=0;
+    if(cartPrices.length>0){
+      for(let i=0; i < cartPrices.length; i++){
+        console.log(i,"===",cartPrices[i].id)
+        totalPrice+=cartPrices[i].module_Info.selling_price;
+        if(i==0){
+          continue;
+        }
+        if(moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"))){
+          checkinDate = moment(cartPrices[i].module_Info.departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+        }
+      }
+      
+    }
+
+    this.totalAmount= totalPrice;
+      let instalmentRequest={
+        instalment_type: "weekly",
+        checkin_date: checkinDate,
+        booking_date:  moment().format("YYYY-MM-DD"),
+        amount: totalPrice,
+        additional_amount: 0,
+        selected_down_payment:0
+      }
+    this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
+        if(res.instalment_available){
+          this.weeklyInstallmentAmount = res.instalment_date[1].instalment_amount;
+        }
+        else{
+          this.weeklyInstallmentAmount=0;
+        }
+      },(err)=>{
+        this.weeklyInstallmentAmount=0;
+      })
   }
 }
