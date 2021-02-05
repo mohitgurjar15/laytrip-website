@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -41,12 +41,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public location: Location,
     public commonFunction: CommonFunction,
     private spinner: NgxSpinnerService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
     window.scroll(0, 0);
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
+    this.renderer.addClass(document.body, 'bg_color');
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -236,6 +238,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.renderer.removeClass(document.body, 'bg_color');
   }
 
   sortFlight(event) {
