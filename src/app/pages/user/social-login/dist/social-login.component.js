@@ -30,7 +30,7 @@ var SocialLoginComponent = /** @class */ (function () {
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.loadGoogleSdk();
+        // this.loadGoogleSdk();
         this.loadFacebookSdk();
         // APPLE LOGIN RESPONSE 
         this.authService.authState.subscribe(function (userInfo) {
@@ -150,7 +150,6 @@ var SocialLoginComponent = /** @class */ (function () {
         this.loading = true;
         window['FB'].login(function (response) {
             if (response.authResponse) {
-                console.log(response.authResponse);
                 window['FB'].api('/me', {
                     fields: 'last_name, first_name, email'
                 }, function (userInfo) {

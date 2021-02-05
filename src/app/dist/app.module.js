@@ -24,7 +24,7 @@ var angularx_social_login_1 = require("angularx-social-login");
 var apple_provider_1 = require("./pages/user/social-login/apple.provider");
 var service_worker_1 = require("@angular/service-worker");
 var environment_1 = require("../environments/environment");
-var google_login_provider_1 = require("./pages/user/social-login/google.login-provider");
+// import { GoogleLoginProvider } from './pages/user/social-login/google.login-provider';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -58,15 +58,15 @@ var AppModule = /** @class */ (function () {
                 {
                     provide: 'SocialAuthServiceConfig',
                     useValue: {
-                        autoLogin: true,
+                        autoLogin: false,
                         providers: [
                             {
                                 id: apple_provider_1.AppleLoginProvider.PROVIDER_ID,
                                 provider: new apple_provider_1.AppleLoginProvider('com.laytrip.laytrips')
                             },
                             {
-                                id: google_login_provider_1.GoogleLoginProvider.PROVIDER_ID,
-                                provider: new google_login_provider_1.GoogleLoginProvider(environment_1.environment.google_client_id)
+                                id: angularx_social_login_1.GoogleLoginProvider.PROVIDER_ID,
+                                provider: new angularx_social_login_1.GoogleLoginProvider(environment_1.environment.google_client_id)
                             }
                         ]
                     }
