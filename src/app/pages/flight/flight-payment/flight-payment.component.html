@@ -42,7 +42,6 @@
                             <app-price-summary  [priceSummary]="priceSummary" [cartPrices]="cartPrices"></app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
-                            <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->
                             <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button>
                             <button (click)="saveAndSearch()" class="trans_btn">
                                 <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="Search icon"

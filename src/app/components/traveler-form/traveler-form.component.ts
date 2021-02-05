@@ -71,9 +71,10 @@ export class TravelerFormComponent implements OnInit {
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
     })
-    /* this.cartService.getCartTravelers.subscribe((travelers:any)=>{
+    this.cartService.getCartTravelers.subscribe((travelers:any)=>{
       this.travelers =travelers;
-    }) */
+      console.log(this.travelers,"=====>")
+    })
 
     //this.travelers = travelers;
     for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
@@ -101,7 +102,7 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
       this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
     }
-
+    //console.log(this.travelers,"=====>")
     this.cartService.setCartTravelers(this.travelers)
 
     this.travelerForm = this.formBuilder.group({
@@ -151,6 +152,7 @@ export class TravelerFormComponent implements OnInit {
 
     this.checkOutService.getTraveler.subscribe((traveler: any) => {
       if (Object.keys(traveler).length > 0) {
+        console.log("this.travelers",this.travelers,this.cartNumber,traveler)
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name = traveler.firstName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name = traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email = traveler.email;
