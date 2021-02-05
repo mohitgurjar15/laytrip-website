@@ -106,7 +106,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.isRoundTrip = false;
     }
 
-    this.totalLaycredit();
+    //this.totalLaycredit();
     this.checkInstalmentAvalability();
     this.checkUser();
 
@@ -146,6 +146,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.loadCancellationPolicy = true;
     this.loadMoreCancellationPolicy = false;
     this.errorMessage = '';
+    this.cancellationPolicyArray=[];
     this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
       this.cancellationPolicyArray = data.cancellation_policy.split('--')
       this.loadCancellationPolicy = false;
