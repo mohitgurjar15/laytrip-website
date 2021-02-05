@@ -141,7 +141,17 @@
                     </span>
                     <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && loadMoreCancellationPolicy"
                     [innerHtml]="cancellationPolicy.cancellation_policy">
-                    </span>
+                    </span> 
+
+                    <!-- skeleton loader for rules -->
+                    <div class="loader_rules" style="margin: 10px 0;">
+                        <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
+                        <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
+                        <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
+                        <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
+                        <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
+                    </div>
+                    <!-- skeleton loader for rules -->
                     
                     <a class="view_more"
                         *ngIf="!loadCancellationPolicy && cancellationPolicyArray.length"

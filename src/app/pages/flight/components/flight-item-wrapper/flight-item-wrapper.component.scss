@@ -223,6 +223,7 @@
                         .big-num {
                             font-size: 24px;
                             margin: 0 3px;
+                            font-weight: 700;
                         }
                     }
 
@@ -317,6 +318,8 @@
                         color: $mid_gray_bg;
                         margin-top: 10px;
                         line-height: 14px;
+                        overflow-y: auto;
+                        max-height: 150px;
                     }
                 }
             }
