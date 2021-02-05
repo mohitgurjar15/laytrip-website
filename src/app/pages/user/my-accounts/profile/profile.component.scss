@@ -6,58 +6,60 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 input.ng-invalid.ng-touched {
-	border-bottom: 1px solid #f4516c !important;
+    border-bottom: 1px solid #f4516c !important;
 }
+
 .account_part {
-	.account_cnt_main {
-		.update_info {
-			.update_info_right {
-				.form_row {
-					.form_field {
-						.phone_no {
-							.code {
-								.dropdown {
-									height: 40px;
-									width: 150px;
-									.ng-customClass{
-										.ng-select-container{
-											border-radius: 0;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    .account_cnt_main {
+        .update_info {
+            .update_info_right {
+                .form_row {
+                    .form_field {
+                        .phone_no {
+                            .code {
+                                .dropdown {
+                                    height: 40px;
+                                    width: 150px;
+
+                                    .ng-customClass {
+                                        .ng-select-container {
+                                            border-radius: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select.ng-customClass .ng-select-container{
-	height:100%;	
-	border:none;
+.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select.ng-customClass .ng-select-container {
+    height: 100%;
+    border: none;
 }
 
-.img_country_code{
-	border-radius: 3px;
+.img_country_code {
+    border-radius: 3px;
 }
 
-::ng-deep .calender-passport-expiry{
-    min-width: 300px !important;  
+::ng-deep .calender-passport-expiry {
+    min-width: 300px !important;
 }
 
 
-::ng-deep .calender-price-view{
+::ng-deep .calender-price-view {
     //width: 340px;
     min-width: 340px !important;
-    
-    .p-datepicker-calendar-container{
-        .p-datepicker-calendar{
-            tbody{
-                tr{
-                    td{
-                        .p-ripple{
+
+    .p-datepicker-calendar-container {
+        .p-datepicker-calendar {
+            tbody {
+                tr {
+                    td {
+                        .p-ripple {
                             display: flex;
                             flex-flow: column;
                             width: auto;
@@ -65,21 +67,24 @@ input.ng-invalid.ng-touched {
                             border-radius: 0;
                             background: transparent;
 
-                            &:hover{
+                            &:hover {
                                 background: transparent;
-                                .c_date{
+
+                                .c_date {
                                     background: #F826C1;
                                 }
                             }
+
                             &.p-highlight {
                                 background: transparent !important;
-                                .c_date{
+
+                                .c_date {
                                     background: #F826C1;
                                 }
                             }
                         }
 
-                        .c_date{
+                        .c_date {
                             display: block;
                             width: 30px;
                             height: 30px;
@@ -90,11 +95,12 @@ input.ng-invalid.ng-touched {
                             line-height: 20px;
                             color: #fff !important;
                         }
-                        .calender_price{
+
+                        .calender_price {
                             display: block;
-                            margin-top:3px;
+                            margin-top: 3px;
                         }
-                        
+
                     }
                 }
             }
@@ -103,63 +109,70 @@ input.ng-invalid.ng-touched {
 }
 
 
-.dobs_account{
-    input{
+.dobs_account {
+    input {
         &.p-inputtext {
             border: none;
-          }
+        }
     }
-    ::ng-deep .birth_date{
-      
+
+    ::ng-deep .birth_date {
+
         .p-inputtext {
-          border: none;
+            border: none;
         }
+
         th {
-          font-size: 13px !important;
-          border-bottom: none !important;
-          font-weight: 600 !important;
-          text-align: center;
+            font-size: 13px !important;
+            border-bottom: none !important;
+            font-weight: 600 !important;
+            text-align: center;
         }
+
         td {
-          padding: 0.1rem !important;
-          span {
-            width: 35px;
-            height: auto;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            border: none !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            color: $text-grey;
-            margin: 1px;
-            position: relative;
-  
-            @include mobile-view {
-              width: 33px;
+            padding: 0.1rem !important;
+
+            span {
+                width: 35px;
+                height: auto;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                color: $text-grey;
+                margin: 1px;
+                position: relative;
+
+                @include mobile-view {
+                    width: 33px;
+                }
+
+                &:hover {
+                    background: none !important;
+                }
+
+                &.p-highlight {
+                    background: none !important;
+                    font-weight: 500;
+                    overflow: visible;
+
+                    &::before {
+                        content: "";
+                        width: 5px;
+                        height: 5px;
+                        border-radius: 50%;
+                        background-color: $pink;
+                        position: absolute;
+                        top: -5px;
+                    }
+                }
             }
-            &:hover {
-              background: none !important;
-            }
-            &.p-highlight {
-              background: none !important;
-              font-weight: 500;
-              overflow: visible;
-              &::before {
-                content: "";
-                width: 5px;
-                height: 5px;
-                border-radius: 50%;
-                background-color: $pink;
-                position: absolute;
-                top: -5px;
-              }
-            }
-          }
         }
     }
-  }
+}
 
 
 .account_cnt_main {
@@ -195,7 +208,7 @@ input.ng-invalid.ng-touched {
             flex-direction: column;
             width: 100%;
             justify-content: center;
-            align-items: center; 
+            align-items: center;
 
             span {
                 width: 120px;
@@ -247,7 +260,7 @@ input.ng-invalid.ng-touched {
                 }
             }
         }
-        
+
         .form_row {
             width: 100%;
             display: flex;
@@ -257,27 +270,30 @@ input.ng-invalid.ng-touched {
             @media(max-width: 767px) {
                 flex-wrap: wrap;
             }
-            &.common_row{
+
+            &.common_row {
                 border-bottom: 1px solid $box-border-color;
                 margin-bottom: 15px;
                 padding-bottom: 10px;
             }
-            &.title_row{
+
+            &.title_row {
                 justify-content: space-between;
             }
 
-            h3{
+            h3 {
                 color: $blue-text;
                 font-size: 34px;
                 margin-bottom: 5px;
                 margin: 25px 0 15px;
-                @include tab-view{
+
+                @include tab-view {
                     font-size: 18px;
                 }
             }
 
-            .edit_btns{
-                a{
+            .edit_btns {
+                a {
                     background-color: transparent;
                     color: $text_light_yellow;
                     box-shadow: none;
@@ -288,7 +304,7 @@ input.ng-invalid.ng-touched {
                 }
             }
 
-            label{
+            label {
                 margin-bottom: 10px;
                 color: $text-black;
                 font-size: 16px;
@@ -296,40 +312,52 @@ input.ng-invalid.ng-touched {
                 flex: 1;
                 margin: 0;
             }
-            .text_field{
+
+            .text_field {
                 flex: 2;
-                .gender_anchers{
+
+                .gender_anchers {
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
-                    a{
-                        &.active{
+
+                    a {
+                        &.active {
                             color: $text_light_yellow;
                         }
+
                         color: $mid_gray_bg;
                         font-size: 14px;
                         padding: 0 25px 0 0;
-                        &:hover{
+
+                        &:hover {
                             color: $text_light_yellow;
                             text-decoration: none;
                         }
-                        &:focus{
+
+                        &:focus {
                             outline: none;
                         }
                     }
                 }
-                .tel_span{
+
+                .tel_span {
                     display: flex;
                     position: relative;
                     bottom: 2px;
-                    input{
+
+                    input {
                         border-bottom: none;
-                        &:first-child{
-                        width: 55px;
+                        padding: 0;
+
+                        &:first-child {
+                            width: 55px;
+
                         }
                     }
                 }
             }
+
             input {
                 width: 100%;
                 background: transparent;
@@ -342,6 +370,7 @@ input.ng-invalid.ng-touched {
                 &:focus {
                     border: none;
                     outline: none;
+                    box-shadow: none;
                 }
 
                 &.birth_date {
@@ -351,7 +380,8 @@ input.ng-invalid.ng-touched {
                     border: none;
                 }
             }
-            textarea{
+
+            textarea {
                 width: 100%;
                 background: transparent;
                 height: 40px;
@@ -359,6 +389,7 @@ input.ng-invalid.ng-touched {
                 font-size: 16px;
                 color: $mid_gray_bg;
                 position: relative;
+
                 &:focus {
                     border: none;
                     outline: none;
@@ -581,6 +612,7 @@ input.ng-invalid.ng-touched {
                     }
                 }
             }
+
             .form_field {
                 margin: 0 0 25px;
 
@@ -685,18 +717,18 @@ input.ng-invalid.ng-touched {
                         }
                     }
                 }
-                
+
             }
         }
 
         .update_location_detail {
             width: 100%;
-        
+
             .section_title {
                 width: 100%;
                 margin-bottom: 30px;
                 padding: 0;
-        
+
                 h4 {
                     width: 100%;
                     font-size: 16px;
@@ -708,57 +740,57 @@ input.ng-invalid.ng-touched {
                     text-align: left;
                 }
             }
-        
+
             .detail_update {
                 width: 100%;
-        
+
                 .form_row {
                     width: 100%;
                     display: flex;
                     justify-content: space-between;
-        
+
                     @media(max-width: 991px) {
                         flex-wrap: wrap;
                     }
-        
+
                     .field_bolck {
                         width: 31%;
-        
+
                         @media(max-width: 991px) {
                             width: 100%;
                             display: flex;
                             justify-content: space-between;
                         }
-        
+
                         @media(max-width: 767px) {
                             flex-wrap: wrap;
                         }
-        
+
                         .field_inn {
                             width: 100%;
                             margin-bottom: 30px;
-        
+
                             @media(max-width: 991px) {
                                 width: 48%;
                             }
-        
+
                             @media(max-width: 767px) {
                                 width: 100%;
                             }
-        
-        
+
+
                             label {
                                 width: 100%;
                                 margin-bottom: 10px;
                                 font-size: 12px;
                                 color: $text-grey;
                                 font-weight: 400;
-        
+
                                 sup {
                                     color: $error-color;
                                 }
                             }
-        
+
                             .error_text {
                                 width: 100%;
                                 color: $error-color;
@@ -766,11 +798,11 @@ input.ng-invalid.ng-touched {
                                 font-weight: 400;
                                 margin: 5px 0 0;
                             }
-        
+
                             .text_field {
                                 width: 100%;
                                 position: relative;
-        
+
                                 input {
                                     width: 100%;
                                     background: transparent;
@@ -781,23 +813,23 @@ input.ng-invalid.ng-touched {
                                     border-bottom: 1px solid $box-border-color;
                                     font-size: 14px;
                                     color: $text-black;
-        
+
                                     &:placeholder {
                                         color: $box-border-color;
                                         -webkit-text-fill-color: $box-border-color;
                                     }
-        
+
                                     &:focus {
                                         border-bottom: 1px solid $primary-color;
                                     }
-        
+
                                     &.birth_date {
                                         background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                                         background-position: right center;
                                         padding: 0 !important;
                                     }
                                 }
-        
+
                                 .error_text {
                                     width: 100%;
                                     color: $error-color;
@@ -805,7 +837,7 @@ input.ng-invalid.ng-touched {
                                     font-weight: 400;
                                     margin: 5px 0 0;
                                 }
-        
+
                                 &.custom-select {
                                     height: 40px;
                                     border-top: none;
@@ -814,17 +846,17 @@ input.ng-invalid.ng-touched {
                                     border-bottom: 1px solid $box-border-color;
                                     background: transparent;
                                     padding: 0;
-        
+
                                     select {
                                         display: none;
                                     }
-        
+
                                     .select-selected {
                                         background-color: transparent;
                                         line-height: 40px;
                                         font-size: 14px;
                                         color: $text-black;
-        
+
                                         &:after {
                                             position: absolute;
                                             content: "";
@@ -835,7 +867,7 @@ input.ng-invalid.ng-touched {
                                             border: 4px solid transparent;
                                             border-color: $text-grey transparent transparent transparent;
                                         }
-        
+
                                         &.select-arrow-active {
                                             &:after {
                                                 border-color: transparent transparent $text-grey transparent;
@@ -843,7 +875,7 @@ input.ng-invalid.ng-touched {
                                             }
                                         }
                                     }
-        
+
                                     .select-items {
                                         position: absolute;
                                         background-color: $text-grey;
@@ -851,7 +883,7 @@ input.ng-invalid.ng-touched {
                                         left: 0;
                                         right: 0;
                                         z-index: 99;
-        
+
                                         div {
                                             color: #ffffff;
                                             padding: 8px 16px;
@@ -861,16 +893,16 @@ input.ng-invalid.ng-touched {
                                             user-select: none;
                                             font-size: 14px;
                                             color: $text-white;
-        
+
                                             &:hover {
                                                 background-color: rgba(0, 0, 0, 0.1);
                                             }
-        
+
                                             &.same-as-selected {
                                                 background-color: rgba(0, 0, 0, 0.1);
                                             }
                                         }
-        
+
                                         &.select-hide {
                                             display: none;
                                         }
@@ -878,16 +910,16 @@ input.ng-invalid.ng-touched {
                                 }
                             }
                         }
-        
+
                         &.half {
                             width: 49%;
-        
+
                             .field_inn {
                                 @media(max-width: 991px) {
                                     width: 100%;
                                 }
                             }
-        
+
                             @media(max-width: 767px) {
                                 width: 100%;
                             }
