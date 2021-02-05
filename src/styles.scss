@@ -88,6 +88,34 @@ a {
     }
   }
 }
+.ar_field{
+  .ng-select{
+    &.laytrip-input{
+      .ng-select-container{
+        .ng-value-container{
+          .ng-value{
+            width: 100%;
+            background: transparent;
+            height: 40px;
+            border: none;
+            font-size: 16px;
+            padding: 5px 0 0 0;
+            font-weight: 400;
+            color: $mid_gray_bg;
+            position: relative;
+          }
+          .ng-input{
+            padding: 0;
+            top: 7px;
+          }
+        }
+        .ng-arrow-wrapper{
+          display: none;
+        }
+      }
+    }
+  } 
+}
 // discription popup
 .section_description {
   border: 1px solid $pink;
@@ -111,6 +139,16 @@ a {
   }
 }
 
+input , textarea{
+  &:read-only{
+    pointer-events: none;
+  }
+}
+.form-control{
+  &:focus{
+    box-shadow: none;
+  }
+}
 input:focus::-webkit-input-placeholder {
   color: transparent;
 }
