@@ -40,7 +40,7 @@
                                     </ng-container>
                                 </span>
                             </div>
-                            <span id="accordion_infos" *ngIf="lastroute">
+                            <span id="accordion_infos" class="accordion_infos_1" *ngIf="lastroute">
                                 <a (click)="getCancellationPolicy(item.route_code)" class="det_link" data-toggle="collapse" aria-expanded="false" [href]="'#detail_accorrd'+i">
                                     Details
                                 </a>
@@ -136,15 +136,15 @@
                     <span class="texts_rules" *ngIf="!loadCancellationPolicy && errorMessage!=''">
                         {{ errorMessage }}
                     </span>
-                    <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
+                    <!-- <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
                     [innerHtml]="cancellationPolicyArray[0]">
-                    </span>
-                    <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && loadMoreCancellationPolicy"
+                    </span> -->
+                    <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy" 
                     [innerHtml]="cancellationPolicy.cancellation_policy">
                     </span> 
 
                     <!-- skeleton loader for rules -->
-                    <div class="loader_rules" style="margin: 10px 0;">
+                    <div class="loader_rules" style="margin: 10px 0;" *ngIf="loadCancellationPolicy">
                         <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
                         <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
                         <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
@@ -153,10 +153,10 @@
                     </div>
                     <!-- skeleton loader for rules -->
                     
-                    <a class="view_more"
+                    <!-- <a class="view_more"
                         *ngIf="!loadCancellationPolicy && cancellationPolicyArray.length"
                         (click)="toggleCancellationContent()">
-                        {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a>
+                        {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a> -->
                 </div>
             </div>
             <div class="notifi_text">

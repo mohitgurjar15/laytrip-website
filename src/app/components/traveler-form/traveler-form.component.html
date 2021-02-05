@@ -1,6 +1,6 @@
 <form [formGroup]="travelerForm" (ngSubmit)="submit(travelerForm.value)">
   <ng-container *ngFor="let travelerItem of travelers | keyvalue; let y = index;">
-    <div *ngIf="travelerItem.value.adults.length>0" [formGroupName]="travelerItem.key">
+    <div *ngIf="travelerItem.value.adults.length>0 && cartNumber==y" [formGroupName]="travelerItem.key">
       <div formArrayName="adults">
         <div id="accordion" class="accordion_bookings">
           <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;">
