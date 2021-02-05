@@ -185,7 +185,7 @@ export class ProfileComponent implements OnInit {
   } 
  
  
-  onFileSelect(event) {    
+  selectImageFile(event) {    
     this.imageFile = event.target.files[0];
     //file type validation check
     if (!validateImageFile(this.imageFile.name)) {

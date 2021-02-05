@@ -245,8 +245,9 @@ export class ListTravellerComponent implements OnInit {
   }
 
 
-  pushTraveler(event){
-    this.travelers.push(event)
+  pushTraveler(traveler){
+    this.travelers = this.travelers.filter(obj => obj.userId !== traveler.userId);
+    this.travelers.push(traveler)  
   }
 
 }

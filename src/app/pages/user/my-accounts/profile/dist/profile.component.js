@@ -165,7 +165,7 @@ var ProfileComponent = /** @class */ (function () {
             }
         }
     };
-    ProfileComponent.prototype.onFileSelect = function (event) {
+    ProfileComponent.prototype.selectImageFile = function (event) {
         var _this = this;
         this.imageFile = event.target.files[0];
         //file type validation check

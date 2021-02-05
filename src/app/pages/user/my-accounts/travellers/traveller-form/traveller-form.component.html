@@ -236,7 +236,7 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                 <label for="">Date of birth*</label>
-                <p-calendar tabindex="27" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
+                <p-calendar tabindex="24" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="dob"   [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                     yearRange="{{dobYearRange}}" (onSelect)=selectDob($event) 
                     placeholder="Date of birth">
@@ -265,7 +265,8 @@
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult">
                 <label for="">Email*</label>
-                <input tabindex="24" type="email" class="form-control" placeholder="Email" formControlName="email">
+                <input tabindex="26" [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''"
+                 type="email" class="form-control" placeholder="Email" formControlName="email">
                 <div *ngIf="(submitted || travellerForm.controls.email.touched) && travellerForm.controls.email.errors" class="error">
                     <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">Please enter
                         your email
@@ -276,7 +277,7 @@
             </div>
             <div class="col-sm-12 col-md-4 nation_wrps">
                 <label for="">Nationality*</label>
-                <ng-select  tabindex="30" class="ng-customClass" [items]="countries"
+                <ng-select  tabindex="27" class="ng-customClass" [items]="countries"
                     bindLabel="name"  [selectOnTab]="true"
                     formControlName="country_id" selectOnTab="true"
                     placeholder="{{'country_placeholder' | translate}}"
@@ -317,7 +318,7 @@
             
         </div>
         <span class="edit_btns">
-            <button (click)="onSubmit()" class="hover-link">Save</button>
+            <button (click)="onSubmit()" class="hover-link">{{ travellerId ? 'Update' : 'Save'}} </button>
         </span>
     </div>
 </form>

@@ -171,7 +171,6 @@ export class SocialLoginComponent implements OnInit {
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
-          console.log(userInfo)
           let jsonData = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
@@ -189,6 +188,7 @@ export class SocialLoginComponent implements OnInit {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
+              $('#sign_up_modal').modal('hide');
               this.test = true;
               document.getElementById('navbarNav').click();
               this.router.url;

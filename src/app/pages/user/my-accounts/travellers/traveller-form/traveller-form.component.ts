@@ -13,6 +13,7 @@ import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
 import { TravelerService } from '../../../../../services/traveler.service';
 import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
+declare var $: any;
 
 @Component({
   selector: 'app-traveller-form',
@@ -104,13 +105,14 @@ export class TravellerFormComponent implements OnInit {
       countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
     }
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
-    this.isAdult = false;
-    this.travellerForm.setErrors(null);
-    if(moment(this.travelerInfo.dob).format('YYYY-MM-DD') <   adult12YrPastDate){
+    
+    if(moment(this.travelerInfo.dob).format('YYYY-MM-DD') <   adult12YrPastDate){    
       this.isAdult = true;
       this.travellerForm.setErrors({'phoneAndPhoneCodeError':true});
+    } else{
+      this.isAdult = false;
+      this.travellerForm.setErrors(null);
     }
-    console.log(this.isAdult,'isAdult')
 
     this.travellerForm.patchValue({
       // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
@@ -171,6 +173,9 @@ export class TravellerFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.loadingValue.emit(true);
+    if(this.travellerId){
+      this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
+    }
     console.log(this.travellerForm)
     if (this.travellerForm.invalid) {
       this.submitted = true;
@@ -200,14 +205,15 @@ export class TravellerFormComponent implements OnInit {
       };
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
       
-      
       if (this.travellerId) {
+        this.loadingValue.emit(true);
         jsonData = Object.assign(jsonData, emailObj);
-        console.log(jsonData,this.travellerId);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
-          this.travelerFormChange.emit(data);
           this.loadingValue.emit(false);
+          this.travelerFormChange.emit(data);
+          $("#collapseTravInner"+this.travellerId).removeClass('show');
           this.toastr.success('Success', 'Traveller Updated Successfully');
+          
         }, (error: HttpErrorResponse) => {
           this.submitted = false; this.loadingValue.emit(false);
           this.toastr.error(error.error.message, 'Traveller Update Error');
@@ -277,22 +283,22 @@ export class TravellerFormComponent implements OnInit {
     const countryControl = this.travellerForm.get('country_code');
     if(selectedDate < adult12YrPastDate) {
      this.isAdult = true;
-      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'))     
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));     
       phoneControl.setValidators([Validators.required,Validators.minLength(10)]);
       countryControl.setValidators([Validators.required]);
-      this.travellerForm.setErrors({'phoneAndPhoneCodeError':true});
-      console.log(this.travellerForm)
+      // this.travellerForm.setErrors({'phoneAndPhoneCodeError':true});
+      console.log('here')
     } else {
       this.isAdult = false;
       this.travellerForm.setValidators(null)
-      console.log(this.travellerForm)
       emailControl.setValidators(null)
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
-      phoneControl.updateValueAndValidity();
-      emailControl.updateValueAndValidity();
-      countryControl.updateValueAndValidity();
     }
+    phoneControl.updateValueAndValidity();
+    emailControl.updateValueAndValidity();
+    countryControl.updateValueAndValidity();
+    console.log(this.travellerForm)
   }
 
 }

@@ -140,7 +140,7 @@
                             </div>
                             <div id="collapseTravInner{{traveler.userId}}" class="collapse" data-parent="#trav_accordion_inner">
                                 <div class="card-body">
-                                    <app-traveller-form [travelerInfo]="traveler"  [travellerId]="traveler.userId"></app-traveller-form>
+                                    <app-traveller-form (loadingValue)="getLoadingValue($event)"  (travelerFormChange)="pushTraveler($event)"  [travelerInfo]="traveler"  [travellerId]="traveler.userId"></app-traveller-form>
                                 </div>
                             </div>
                         </div>
