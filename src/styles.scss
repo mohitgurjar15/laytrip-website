@@ -139,6 +139,13 @@ a {
   }
 }
 
+p-calendar{
+  input{
+    &:read-only{
+      pointer-events: auto;
+    }
+  }
+}
 input , textarea{
   &:read-only{
     pointer-events: none;

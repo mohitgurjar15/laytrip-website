@@ -234,7 +234,7 @@
                         your gender.</small>                       
                 </div>
             </div>
-            <div class="col-sm-12 dobs col-md-4 mb-sm-10">
+            <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account">
                 <label for="">Date of birth*</label>
                 <p-calendar tabindex="24" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="dob"   [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
@@ -303,11 +303,11 @@
                 </div>
                 
             </div>
-            <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult">
+            <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult"> 
                 <label for="">Passport number</label>
                 <input tabindex="28" type="text" class="form-control" placeholder="Passport number" formControlName="passport_number">
             </div>
-            <div class="col-sm-12 dobs col-md-4 mb-sm-10"  *ngIf="isAdult">
+            <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account"  *ngIf="isAdult">
                 <label for="">Passport Expiry date</label>
                 <p-calendar tabindex="29" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="passport_expiry" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"

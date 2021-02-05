@@ -65,5 +65,8 @@
 .ftr_flex_row{
   .logo_w{
     padding: 0 15px;
+    @include tab-view{
+      margin: 0px auto 10px;
+    }
   }
 }
