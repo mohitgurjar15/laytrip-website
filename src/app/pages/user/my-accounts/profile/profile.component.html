@@ -104,7 +104,7 @@
                         formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"
                         loadingText=""  class="laytrip-input"
-                        placeholder="New York" [readonly]="!isFormControlEnable">
+                        placeholder="Select home airport " [readonly]="!isFormControlEnable">
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div [ngClass]="(item.parentId==0)?'parent':'child'">
                                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}

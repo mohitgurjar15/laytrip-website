@@ -215,7 +215,7 @@ var ProfileComponent = /** @class */ (function () {
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
-                home_airport: res.airportInfo.code ? res.airportInfo.code : '',
+                home_airport: res.airportInfo.code ? res.airportInfo.code : null,
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
                 profile_pic: res.profilePic,
@@ -223,6 +223,7 @@ var ProfileComponent = /** @class */ (function () {
                 passport_number: res.passportNumber
             });
             _this.profileForm.controls['home_airport'].disable();
+            console.log(_this.profileForm);
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {

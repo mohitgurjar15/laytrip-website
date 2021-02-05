@@ -236,7 +236,7 @@ export class ProfileComponent implements OnInit {
           state_id: res.state.name,       
           city_name  : res.cityName,        
           address  : res.address,  
-          home_airport  : res.airportInfo.code ? res.airportInfo.code : '',  
+          home_airport  : res.airportInfo.code ? res.airportInfo.code : null,  
           language_id : res.preferredLanguage.name,     
           currency_id : res.preferredCurrency.code,     
           profile_pic: res.profilePic, 
@@ -244,6 +244,7 @@ export class ProfileComponent implements OnInit {
           passport_number: res.passportNumber  
       });
       this.profileForm.controls['home_airport'].disable()     
+      console.log(this.profileForm)
 
     }, (error: HttpErrorResponse) => {
       this.loadingValue.emit(false);   
