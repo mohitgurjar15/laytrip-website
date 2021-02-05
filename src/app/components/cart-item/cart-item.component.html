@@ -23,10 +23,10 @@
               </span>
               {{cartItem.module_info?.arrival_code}}
 
-              <!-- <div class="section_description">
-                <span class="sec_text">The price for this booking has [increased/decreased] from [old price] to [new price].</span>
-                <a href="javascript:void(0);" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
-              </div> -->
+              <div class="section_description" *ngIf="priceFluctuationAmount!=0">
+                <span class="sec_text">The price for this booking has {{ priceFluctuationAmount > 0 ? 'increased' : 'decreased' }} from {{cartItem.old_module_info.selling_price}} to {{cartItem.module_info.selling_price}}.</span>
+                <a href="javascript:void(0)" (click)="closePricePopup()" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+              </div>
             </span>
             <span *ngIf="cartItem.module_info.routes.length==2"  class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}
               - {{commonFunction.convertDateFormat(cartItem.module_info?.arrival_date,'DD/MM/YYYY')}}</span>

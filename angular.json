@@ -53,6 +53,7 @@
               "src/assets/js/moment.min.js",
               "src/assets/js/jquery-ui.js",
               "src/assets/js/slick.js",
+              "src/assets/js/lottie-player.js",
               "src/assets/js/iframe-v1.min.js",
               "src/assets/js/spreedly.js",
               "src/assets/js/apple-auth.js"
@@ -79,8 +80,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "10mb"
                 }
               ],
               "serviceWorker": true,

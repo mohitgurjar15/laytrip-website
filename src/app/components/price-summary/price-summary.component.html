@@ -42,7 +42,12 @@
           <div id="instalment_acc" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
             <div class="card-body">
               <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
-                
+
+                <div class="section_description" *ngIf="installmentVartion>0">
+                  <span class="sec_text">If your plan has an odd Total Price, your final payment will show a slightly higher amount.</span>
+                  <a (click)="closeInstallmentVartion()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                </div>
+
                 <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">
                   <span>#{{i+1}} Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
                   <span>${{instalment.instalment_amount |

@@ -14,6 +14,8 @@ export class CartItemComponent implements OnInit {
   @Input() cartItem;
   @Input() travelers: [];
   @Input() cartNumber: number;
+  priceFluctuationAmount:number=0;
+
 
   constructor(
     public commonFunction: CommonFunction
@@ -26,7 +28,15 @@ export class CartItemComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['cartItem']) {
       this.cartItem = changes['cartItem'].currentValue;
+
+      if(this.cartItem.old_module_info.selling_price!=this.cartItem.module_info.selling_price){
+        this.priceFluctuationAmount = this.cartItem.module_info.selling_price - this.cartItem.old_module_info.selling_price;
+      }
     }
+  }
+
+  closePricePopup(){
+    this.priceFluctuationAmount=0;
   }
   
 }

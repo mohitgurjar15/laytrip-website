@@ -120,5 +120,23 @@
 		}
 	}
 }
-
+.page_topbanner{
+	position: relative;
+    width: 100%;
+	display: flex;
+	margin-top: 40px;
+	img{
+		width: 100%;
+	}
+}
+.listing_main_box{
+	transform: translate(0px, -155px);
+}
+.search_result{
+	&.flight{
+		.left_m{
+			margin-top: 30px;
+		}
+	}
+}
 //<!-- Close Responsive Filter css -->

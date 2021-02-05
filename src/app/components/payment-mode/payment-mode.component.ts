@@ -84,7 +84,6 @@ export class PaymentModeComponent implements OnInit {
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
-      console.log("this.cartPrices...",this.cartPrices)
       this.getTotalPrice();
       if(this.instalmentRequest.checkin_date){
 
