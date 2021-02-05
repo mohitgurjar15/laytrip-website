@@ -215,7 +215,7 @@ var ProfileComponent = /** @class */ (function () {
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
-                home_airport: res.airportInfo.code ? res.airportInfo.code : '',
+                home_airport: res.airportInfo.code ? res.airportInfo.code : null,
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
                 profile_pic: res.profilePic,
