@@ -105,13 +105,13 @@
           border-radius: 0 0 50% 50%;
         }
 
-        &:hover {
-          border-left: 1px solid $hotel-secondary-color;
-          color: $hotel-secondary-color;
-          &:before {
-            height: 190%;
-          }
-        }
+        // &:hover {
+        //   border-left: 1px solid $hotel-secondary-color;
+        //   color: $hotel-secondary-color;
+        //   &:before {
+        //     height: 190%;
+        //   }
+        // }
       }
     }
   }
