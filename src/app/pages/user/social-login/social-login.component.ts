@@ -42,7 +42,7 @@ export class SocialLoginComponent implements OnInit {
   
 
   ngOnInit() {
-    this.loadGoogleSdk();
+    // this.loadGoogleSdk();
     this.loadFacebookSdk();
     // APPLE LOGIN RESPONSE 
     this.authService.authState.subscribe((userInfo: any) => {
@@ -167,7 +167,6 @@ export class SocialLoginComponent implements OnInit {
     this.loading = true;
     window['FB'].login((response) => {
       if (response.authResponse) {
-        console.log(response.authResponse)
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {

@@ -11,11 +11,11 @@ import { ElementsModule } from './elements/elements.module';
 import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig ,GoogleLoginProvider} from 'angularx-social-login';
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { GoogleLoginProvider } from './pages/user/social-login/google.login-provider';
+// import { GoogleLoginProvider } from './pages/user/social-login/google.login-provider';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { GoogleLoginProvider } from './pages/user/social-login/google.login-prov
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
-        autoLogin: true,
+        autoLogin: false,
         providers: [
           {
             id: AppleLoginProvider.PROVIDER_ID,
