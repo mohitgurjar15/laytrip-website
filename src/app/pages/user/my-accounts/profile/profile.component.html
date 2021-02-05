@@ -57,10 +57,10 @@
                         formControlName="first_name" maxlength="25" tabindex="1" [readonly]="!isFormControlEnable">
                     <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors"
                         class="error">
-                        <span *ngIf="profileForm.controls.first_name.errors.required" class="error_field">
-                            {{'first_name_touched_validation' | translate}}</span>
-                        <span *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
-                            {{'first_name_string_validation' | translate}}</span>
+                        <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field">
+                            {{'first_name_touched_validation' | translate}}</small>
+                        <small *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
+                            {{'first_name_string_validation' | translate}}</small>
                     </div>
                 </div>
             </div>

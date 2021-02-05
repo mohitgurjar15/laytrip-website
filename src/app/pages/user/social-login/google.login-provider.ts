@@ -15,6 +15,7 @@ export class GoogleLoginProvider extends BaseLoginProvider {
   }
 
  public initialize(): Promise<void> {
+   console.log('sds')
     return new Promise((resolve, reject) => {
       try {
         this.loadScript(

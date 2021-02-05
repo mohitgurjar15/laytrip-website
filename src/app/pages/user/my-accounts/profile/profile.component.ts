@@ -244,7 +244,6 @@ export class ProfileComponent implements OnInit {
           passport_number: res.passportNumber  
       });
       this.profileForm.controls['home_airport'].disable()     
-      console.log(this.profileForm)
 
     }, (error: HttpErrorResponse) => {
       this.loadingValue.emit(false);   

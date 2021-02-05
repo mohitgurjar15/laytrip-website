@@ -37,6 +37,7 @@ var GoogleLoginProvider = /** @class */ (function (_super) {
     }
     GoogleLoginProvider.prototype.initialize = function () {
         var _this = this;
+        console.log('sds');
         return new Promise(function (resolve, reject) {
             try {
                 _this.loadScript(GoogleLoginProvider.PROVIDER_ID, 'https://apis.google.com/js/platform.js', function () {

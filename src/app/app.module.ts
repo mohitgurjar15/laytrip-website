@@ -11,11 +11,11 @@ import { ElementsModule } from './elements/elements.module';
 import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { SocialLoginModule, SocialAuthServiceConfig ,GoogleLoginProvider} from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-// import { GoogleLoginProvider } from './pages/user/social-login/google.login-provider';
+import { GoogleLoginProvider } from './pages/user/social-login/google.login-provider';
 
 @NgModule({
   declarations: [
@@ -54,12 +54,12 @@ import { environment } from '../environments/environment';
               'com.laytrip.laytrips'
             ),
           },
-          {
+          /* {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              environment.google_client_id
+              '154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com'
             ),
-          }
+          } */
         ] 
       } as SocialAuthServiceConfig,
     }

@@ -223,7 +223,6 @@ var ProfileComponent = /** @class */ (function () {
                 passport_number: res.passportNumber
             });
             _this.profileForm.controls['home_airport'].disable();
-            console.log(_this.profileForm);
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {
