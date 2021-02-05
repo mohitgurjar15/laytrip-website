@@ -209,8 +209,9 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.getLoadingValue = function (event) {
         this.loadingValue.emit(event ? event : false);
     };
-    ListTravellerComponent.prototype.pushTraveler = function (event) {
-        this.travelers.push(event);
+    ListTravellerComponent.prototype.pushTraveler = function (traveler) {
+        this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
+        this.travelers.push(traveler);
     };
     __decorate([
         core_1.ViewChild('child', { static: false })

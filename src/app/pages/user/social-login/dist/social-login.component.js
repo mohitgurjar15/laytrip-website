@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var apple_provider_1 = require("./apple.provider");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
+var google_login_provider_1 = require("./google.login-provider");
 var SocialLoginComponent = /** @class */ (function () {
     function SocialLoginComponent(userService, router, modalService, location, authService, toastr) {
         this.userService = userService;
@@ -153,7 +154,6 @@ var SocialLoginComponent = /** @class */ (function () {
                 window['FB'].api('/me', {
                     fields: 'last_name, first_name, email'
                 }, function (userInfo) {
-                    console.log(userInfo);
                     var jsonData = {
                         "account_type": 1,
                         "name": userInfo.first_name + ' ' + userInfo.last_name,
@@ -170,6 +170,7 @@ var SocialLoginComponent = /** @class */ (function () {
                         if (data.user_details) {
                             localStorage.setItem("_lay_sess", data.user_details.access_token);
                             $('#sign_in_modal').modal('hide');
+                            $('#sign_up_modal').modal('hide');
                             _this.test = true;
                             document.getElementById('navbarNav').click();
                             _this.router.url;
@@ -190,6 +191,11 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.loginWithApple = function () {
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
+    };
+    SocialLoginComponent.prototype.loginWithGoogle = function () {
+        this.authService.signIn(google_login_provider_1.GoogleLoginProvider.PROVIDER_ID).then(function (data) {
+            console.log('here', data);
+        });
     };
     __decorate([
         core_1.Output()

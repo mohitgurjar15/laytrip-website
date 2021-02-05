@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
-import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
 import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
 import { getUserDetails } from '../../../_helpers/jwt.helper';
 import { ToastrService } from 'ngx-toastr';
+import { GoogleLoginProvider } from './google.login-provider';
 
 @Component({
   selector: 'app-social-login',
@@ -170,7 +171,6 @@ export class SocialLoginComponent implements OnInit {
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
-          console.log(userInfo)
           let jsonData = {
             "account_type": 1,
             "name": userInfo.first_name + ' ' + userInfo.last_name,
@@ -188,6 +188,7 @@ export class SocialLoginComponent implements OnInit {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
+              $('#sign_up_modal').modal('hide');
               this.test = true;
               document.getElementById('navbarNav').click();
               this.router.url;
@@ -209,4 +210,11 @@ export class SocialLoginComponent implements OnInit {
   loginWithApple(): void {
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
   }
+
+  loginWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+      console.log('here',data);
+    });
+  }
+
 }

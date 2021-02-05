@@ -102,7 +102,7 @@ export class ProfileComponent implements OnInit {
       });
 
       if(!this.isFormControlEnable){
-        this.profileForm.controls['country_code'].disable() 
+        // this.profileForm.controls['country_code'].disable() 
       }
       
       this.getProfileInfo(); 
@@ -172,18 +172,20 @@ export class ProfileComponent implements OnInit {
   }
 
   selectGender(event,type){
-    this.is_gender = true; 
-    if(type =='M'){
-      this.is_type = 'M';        
-    }else if(type =='F'){
-      this.is_type = 'F';        
-    } else if(type =='O'){
-      this.is_type = 'O';        
-    } 
+    if(this.isFormControlEnable){
+      this.is_gender = true; 
+      if(type =='M'){
+        this.is_type = 'M';        
+      }else if(type =='F'){
+        this.is_type = 'F';        
+      } else if(type =='O'){
+        this.is_type = 'O';        
+      } 
+    }
   } 
  
  
-  onFileSelect(event) {    
+  selectImageFile(event) {    
     this.imageFile = event.target.files[0];
     //file type validation check
     if (!validateImageFile(this.imageFile.name)) {
@@ -228,7 +230,7 @@ export class ProfileComponent implements OnInit {
           zip_code  : res.zipCode,        
           title  : res.title ? res.title : 'mr',        
           dob  : (res.dob !='undefined' && res.dob != '' && res.dob)   ? new Date(res.dob) : '',        
-          country_code :  res.countryCode ? res.countryCode :'',        
+          country_code :  (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode :'',        
           phone_no  : res.phoneNo,        
           country_id: res.country.name ? res.country.name :countryName,
           state_id: res.state.name,       

@@ -17,13 +17,13 @@
       border-radius: 10px;
 
       @include tab-view {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        height: calc(100vh - 30px);
-        overflow-y: auto;
+        // position: fixed;
+        // left: 0;
+        // bottom: 0;
+        // border-bottom-left-radius: 0;
+        // border-bottom-right-radius: 0;
+        // height: calc(100vh - 30px);
+        // overflow-y: auto;
       }
 
       .sign_in_modal {
@@ -79,6 +79,48 @@
 
           @include tab-view {
             justify-content: flex-start;
+          }
+
+          .modalcnt_top {
+            margin: 0 0 20px;
+
+            ul {
+              margin: 0;
+            }
+            .border_block {
+              width: 100%;
+              position: relative;
+              height: 20px;
+
+              &:before {
+                width: 100%;
+                background: $box-border-color;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                height: 1px;
+                content: "";
+              }
+
+              span {
+                width: 180px;
+                font-size: 14px;
+                color: $mid_gray_bg;
+                text-align: center;
+                position: absolute;
+                font-weight: 400;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                background: $text-white;
+                padding: 0 35px;
+
+                @include tab-view {
+                  width: auto;
+                  padding: 0 15px;
+                }
+              }
+            }
           }
 
           form {

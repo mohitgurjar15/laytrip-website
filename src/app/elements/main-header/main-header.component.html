@@ -70,7 +70,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="hover-link" [routerLink]="['/account']">{{'my_account_header' |
                                             translate}}</a></li>
-                                        <li><a [routerLink]="['/account/bookings']">History</a></li>
+                                        <li><a [routerLink]="['/account/bookings']">My Bookings</a></li>
                                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                                             class="disabled">
                                             <a class="nav-link hover-link "
