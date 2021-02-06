@@ -11,17 +11,14 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var apple_provider_1 = require("./apple.provider");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
-// import { GoogleLoginProvider } from './google.login-provider';
-var angular_6_social_login_1 = require("angular-6-social-login");
 var SocialLoginComponent = /** @class */ (function () {
-    function SocialLoginComponent(userService, router, modalService, location, authService, toastr, socialAuthService) {
+    function SocialLoginComponent(userService, router, modalService, location, authService, toastr) {
         this.userService = userService;
         this.router = router;
         this.modalService = modalService;
         this.location = location;
         this.authService = authService;
         this.toastr = toastr;
-        this.socialAuthService = socialAuthService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.socialError = new core_1.EventEmitter();
         this.apiError = '';
@@ -32,7 +29,6 @@ var SocialLoginComponent = /** @class */ (function () {
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // this.loadGoogleSdk();
         this.loadFacebookSdk();
         // APPLE LOGIN RESPONSE 
         this.authService.authState.subscribe(function (userInfo) {
@@ -64,49 +60,10 @@ var SocialLoginComponent = /** @class */ (function () {
             }
         });
     };
-    SocialLoginComponent.prototype.socialSignIn = function (socialPlatform) {
-        var socialPlatformProvider;
-        if (socialPlatform == "google") {
-            socialPlatformProvider = angular_6_social_login_1.GoogleLoginProvider.PROVIDER_ID;
-        }
-        this.socialAuthService.signIn(socialPlatformProvider).then(function (userData) {
-            console.log(socialPlatform + " sign in data : ", userData);
-            // Now sign-in with userData
-            // ...
-        });
-    };
-    SocialLoginComponent.prototype.loadGoogleSdk = function () {
+    SocialLoginComponent.prototype.googleLogin = function (element) {
         var _this = this;
-        window['googleSDKLoaded'] = function () {
-            window['gapi'].load('auth2', function () {
-                _this.auth2 = window['gapi'].auth2.init({
-                    client_id: environment_1.environment.google_client_id,
-                    cookiepolicy: 'single_host_origin',
-                    scope: 'profile email'
-                });
-                _this.googleLogin();
-            });
-        };
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'google-jssdk'));
-    };
-    SocialLoginComponent.prototype.googleLogin = function () {
-        var _this = this;
-        // this.loadGoogleSdk();
-        console.log(this.auth2);
-        console.log(this.auth2);
-        this.auth2.attachClickHandler(this.loginElement.nativeElement, {}, function (googleUser) {
-            _this.google_loading = true;
+        this.auth2.attachClickHandler(element, {}, function (googleUser) {
             var profile = googleUser.getBasicProfile();
-            // YOUR CODE HERE
             var jsonData = {
                 "account_type": 1,
                 "name": profile.getName(),
@@ -123,6 +80,7 @@ var SocialLoginComponent = /** @class */ (function () {
                     _this.google_loading = false;
                     localStorage.setItem("_lay_sess", data.user_details.access_token);
                     $('#sign_in_modal').modal('hide');
+                    $('#sign_up_modal').modal('hide');
                     _this.router.url;
                     document.getElementById('navbarNav').click();
                 }
@@ -132,8 +90,20 @@ var SocialLoginComponent = /** @class */ (function () {
             });
         }, function (error) {
             _this.google_loading = false;
-            // this.socialError.emit('Authentication failed.');
-            // this.toastr.error("Something went wrong!", 'SignIn Error');
+        });
+    };
+    SocialLoginComponent.prototype.ngAfterViewInit = function () {
+        this.loadGoogleSdk();
+    };
+    SocialLoginComponent.prototype.loadGoogleSdk = function () {
+        var _this = this;
+        gapi.load('auth2', function () {
+            _this.auth2 = gapi.auth2.init({
+                client_id: environment_1.environment.google_client_id,
+                cookiepolicy: 'single_host_origin',
+                scope: 'profile email'
+            });
+            _this.googleLogin(document.getElementById('googleBtn'));
         });
     };
     SocialLoginComponent.prototype.loadFacebookSdk = function () {
@@ -204,11 +174,6 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.loginWithApple = function () {
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
-    };
-    SocialLoginComponent.prototype.loginWithGoogle = function () {
-        // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
-        //   console.log('here',data);
-        // });
     };
     __decorate([
         core_1.Output()

@@ -78,8 +78,6 @@ var AppComponent = /** @class */ (function () {
             }
         }
     };
-    AppComponent.prototype.checkUserValidate = function () {
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',

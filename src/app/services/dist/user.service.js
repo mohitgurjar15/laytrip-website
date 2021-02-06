@@ -79,10 +79,14 @@ var UserService = /** @class */ (function () {
         return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
     };
     UserService.prototype.deleteAccount = function (data) {
+        var accessToken = localStorage.getItem('_lay_sess');
         var options = {
-            headers: this.commonFunction.setHeaders(),
-            data: data
+            headers: {
+                Authorization: "Bearer " + accessToken,
+                data: data
+            }
         };
+        console.log(options);
         return this.http["delete"](this.apiURL + 'v1/auth/delete-account-request', options);
     };
     UserService.prototype.changePassword = function (data) {

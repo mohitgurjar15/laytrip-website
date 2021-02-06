@@ -12,9 +12,10 @@ var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var environment_1 = require("../../../../../environments/environment");
 var AccountComponent = /** @class */ (function () {
-    function AccountComponent(modalService, userService) {
+    function AccountComponent(modalService, userService, toastrService) {
         this.modalService = modalService;
         this.userService = userService;
+        this.toastrService = toastrService;
         this.loading = true;
         this.closeResult = '';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -56,10 +57,16 @@ var AccountComponent = /** @class */ (function () {
         var data = { "requireBackupFile": this.isRequireBackupFile };
         this.userService.deleteAccount(data).subscribe(function (data) {
             _this.loading = false;
-            jwt_helper_1.redirectToLogin();
             _this.modalService.dismissAll();
+            _this.toastrService.success(data.message, 'Deleted Account Successfully');
+            jwt_helper_1.redirectToLogin();
         }, function (error) {
             _this.loading = false;
+            _this.modalService.dismissAll();
+            _this.toastrService.error(error.error.message, 'Deleted Account Error');
+            if (error.status == 401) {
+                // redirectToLogin();
+            }
         });
     };
     AccountComponent.prototype.changeDeleteAccountForBackup = function (event) {
