@@ -130,14 +130,14 @@ export class FlightPaymentComponent implements OnInit {
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
   }
-  ngAfterViewInit() {
-    $(".trans_btn").hover(
-      function () {
-        $('.pink_search').toggleClass("d-none");
-        $('.white_search').toggleClass("show");
-      }
-    );
-  }
+  // ngAfterViewInit() {
+  //   $(".trans_btn").hover(
+  //     function () {
+  //       $('.pink_search').toggleClass("d-none");
+  //       $('.white_search').toggleClass("show");
+  //     }
+  //   );
+  // }
 
   totalLaycredit() {
     this.isLayCreditLoading = true;

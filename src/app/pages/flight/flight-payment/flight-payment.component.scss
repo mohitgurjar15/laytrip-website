@@ -136,12 +136,12 @@
                     border-radius: 0 0 50% 50%;
                 }
         
-                &:hover {
-                    color: $primary-color;
-                    &:before {
-                        height: 190%;
-                    }
-                }
+                // &:hover {
+                //     color: $primary-color;
+                //     &:before {
+                //         height: 190%;
+                //     }
+                // }
                 &.trans_btn{
                     color: $pink;
                     background-color: transparent;
@@ -149,9 +149,9 @@
                     &::before{
                         background: $pink;
                     }
-                    &:hover{
-                        color: $text-white;
-                    }
+                    // &:hover{
+                    //     color: $text-white;
+                    // }
                 }
                 .white_search{
                     display: none;

@@ -1309,12 +1309,12 @@ select {
                             border-radius: 0 0 50% 50%;
                           }
 
-                          &:hover {
-                            border: 1px solid $hotel-secondary-color;
-                            &:before {
-                              height: 190%;
-                            }
-                          }
+                          // &:hover {
+                          //   border: 1px solid $hotel-secondary-color;
+                          //   &:before {
+                          //     height: 190%;
+                          //   }
+                          // }
                         }
 
                         @media (max-width: 480px) {
@@ -2099,13 +2099,12 @@ select {
                         border-radius: 0 0 50% 50%;
                       }
 
-                      &:hover {
-                        // background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_pink.svg);
-                        border: 1px solid $hotel-secondary-color;
-                        &:before {
-                          height: 190%;
-                        }
-                      }
+                      // &:hover {
+                      //   border: 1px solid $hotel-secondary-color;
+                      //   &:before {
+                      //     height: 190%;
+                      //   }
+                      // }
                     }
 
                     @media (max-width: 480px) {
@@ -3042,9 +3041,9 @@ select {
     img {
       max-width: 20px;
     }
-    &:hover {
-      background-color: $pink;
-    }
+    // &:hover {
+    //   background-color: $pink;
+    // }
   }
 }
 
