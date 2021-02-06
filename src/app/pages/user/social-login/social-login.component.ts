@@ -10,7 +10,8 @@ import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
 import { getUserDetails } from '../../../_helpers/jwt.helper';
 import { ToastrService } from 'ngx-toastr';
-import { GoogleLoginProvider } from './google.login-provider';
+// import { GoogleLoginProvider } from './google.login-provider';
+import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
 
 @Component({
   selector: 'app-social-login',
@@ -35,13 +36,14 @@ export class SocialLoginComponent implements OnInit {
     public modalService: NgbModal,
     public location: Location,
     private authService: SocialAuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private socialAuthService: AuthService
 
   ) { }
 
   
-
   ngOnInit() {
+    
     // this.loadGoogleSdk();
     this.loadFacebookSdk();
     // APPLE LOGIN RESPONSE 
@@ -75,6 +77,24 @@ export class SocialLoginComponent implements OnInit {
       }
     });
   }
+
+
+  public socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        console.log(socialPlatform+" sign in data : " , userData);
+        // Now sign-in with userData
+        // ...
+            
+      }
+    );
+  } 
+  
 
   loadGoogleSdk() {
     window['googleSDKLoaded'] = () => {
@@ -212,9 +232,9 @@ export class SocialLoginComponent implements OnInit {
   }
 
   loginWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
-      console.log('here',data);
-    });
+    // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+    //   console.log('here',data);
+    // });
   }
 
 }

@@ -6,14 +6,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.UserModule = void 0;
+exports.UserModule = exports.getAuthServiceConfigs = void 0;
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var user_routing_module_1 = require("./user-routing.module");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var angular_6_social_login_1 = require("angular-6-social-login");
 // import { GoogleLoginProvider } from './social-login/google.login-provider';
-var angularx_social_login_1 = require("angularx-social-login");
+// Configs 
+function getAuthServiceConfigs() {
+    var config = new angular_6_social_login_1.AuthServiceConfig([
+        {
+            id: angular_6_social_login_1.GoogleLoginProvider.PROVIDER_ID,
+            provider: new angular_6_social_login_1.GoogleLoginProvider("154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com")
+        }
+    ]);
+    return config;
+}
+exports.getAuthServiceConfigs = getAuthServiceConfigs;
 var UserModule = /** @class */ (function () {
     function UserModule() {
     }
@@ -24,20 +35,13 @@ var UserModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 forms_1.FormsModule,
                 user_routing_module_1.UserRoutingModule,
-                ng_bootstrap_1.NgbModule
+                ng_bootstrap_1.NgbModule,
+                angular_6_social_login_1.SocialLoginModule
             ],
             providers: [
                 {
-                    provide: 'SocialAuthServiceConfig',
-                    useValue: {
-                        autoLogin: false,
-                        providers: [
-                            {
-                                id: angularx_social_login_1.GoogleLoginProvider.PROVIDER_ID,
-                                provider: new angularx_social_login_1.GoogleLoginProvider('154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com')
-                            }
-                        ]
-                    }
+                    provide: angular_6_social_login_1.AuthServiceConfig,
+                    useFactory: getAuthServiceConfigs
                 }
             ],
             declarations: []

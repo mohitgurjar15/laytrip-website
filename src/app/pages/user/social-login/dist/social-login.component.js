@@ -11,15 +11,17 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var apple_provider_1 = require("./apple.provider");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
-var google_login_provider_1 = require("./google.login-provider");
+// import { GoogleLoginProvider } from './google.login-provider';
+var angular_6_social_login_1 = require("angular-6-social-login");
 var SocialLoginComponent = /** @class */ (function () {
-    function SocialLoginComponent(userService, router, modalService, location, authService, toastr) {
+    function SocialLoginComponent(userService, router, modalService, location, authService, toastr, socialAuthService) {
         this.userService = userService;
         this.router = router;
         this.modalService = modalService;
         this.location = location;
         this.authService = authService;
         this.toastr = toastr;
+        this.socialAuthService = socialAuthService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.socialError = new core_1.EventEmitter();
         this.apiError = '';
@@ -60,6 +62,17 @@ var SocialLoginComponent = /** @class */ (function () {
                     _this.toastr.error(error.message, 'SignIn Error');
                 });
             }
+        });
+    };
+    SocialLoginComponent.prototype.socialSignIn = function (socialPlatform) {
+        var socialPlatformProvider;
+        if (socialPlatform == "google") {
+            socialPlatformProvider = angular_6_social_login_1.GoogleLoginProvider.PROVIDER_ID;
+        }
+        this.socialAuthService.signIn(socialPlatformProvider).then(function (userData) {
+            console.log(socialPlatform + " sign in data : ", userData);
+            // Now sign-in with userData
+            // ...
         });
     };
     SocialLoginComponent.prototype.loadGoogleSdk = function () {
@@ -193,9 +206,9 @@ var SocialLoginComponent = /** @class */ (function () {
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
     };
     SocialLoginComponent.prototype.loginWithGoogle = function () {
-        this.authService.signIn(google_login_provider_1.GoogleLoginProvider.PROVIDER_ID).then(function (data) {
-            console.log('here', data);
-        });
+        // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+        //   console.log('here',data);
+        // });
     };
     __decorate([
         core_1.Output()
