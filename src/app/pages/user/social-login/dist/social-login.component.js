@@ -29,6 +29,7 @@ var SocialLoginComponent = /** @class */ (function () {
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.loadGoogleSdk();
         this.loadFacebookSdk();
         // APPLE LOGIN RESPONSE 
         this.authService.authState.subscribe(function (userInfo) {

@@ -1,75 +1,3 @@
-<!-- <div class="form-container sign-up-container">
-    <div class="sign_up">
-        <div class="modal_top">
-            <div class="modal_title">
-                <h4>{{'resister' | translate}}</h4>
-                <p>{{'sign_up_to_continue' | translate}}</p>
-                <p style="color: red;">{{apiError}}</p>
-            </div>
-        </div>
-        <div class="modal_cnt">
-            <form [formGroup]="signupForm">
-
-                <div class="form_row">
-                    <label>{{'email' | translate}}<sup>*</sup></label>
-                    <div class="text_field">
-                        <input type="email" name="email" class="border-css" [ngClass]="{'error': submitted  && !loading && signupForm.controls.email.errors}" type="email" formControlName="email" maxlength="50" tabindex="103" placeholder="{{'email_placeholder' | translate}}">
-                        <div class="error_text" *ngIf="(submitted || signupForm.controls.email.touched) && signupForm.controls.email.errors">
-                            <div *ngIf="signupForm.controls.email.errors.required">{{'email_touched_validation' | translate}}</div>
-                            <div *ngIf="signupForm.controls.email.errors.pattern">{{'email_invalid_validation' | translate}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form_row">
-                    <div class="field_form">
-                        <div class="field_in">
-                            <label>{{'password' | translate}}<sup>*</sup></label>
-                            <div class="text_field pass_show">
-                                <input class="border-css" [ngClass]="{'error': submitted  && !loading && signupForm.controls.password.errors}" autocomplete="new-password" [type]="passFieldTextType ? 'text' : 'password'" formControlName="password" maxlength="50" tabindex="104" placeholder="{{'password_placholder' | translate}}">
-                                <span class="ptxt"><i id="passEye"
-                                        [ngClass]="passFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
-                                        aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
-                                <div class="error_text" *ngIf="(submitted || signupForm.controls.password.touched) && signupForm.controls.password.errors">
-                                    <div *ngIf="signupForm.controls.password.errors.required">{{'password_touched_validation' | translate}}
-                                    </div>
-                                    <div *ngIf="signupForm.controls.password.errors.pattern">{{'password_string_validation' | translate}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field_in last">
-                            <label>{{'confirm_password' | translate}}<sup>*</sup></label>
-                            <div class="text_field pass_show">
-                                <input class="border-css" [ngClass]="{'error': submitted  && !loading && signupForm.controls.confirm_password.errors}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="105" placeholder="{{'confirm_password_placeholder' | translate}}">
-                                <span class="ptxt"><i id="cnfEye"
-                                        [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
-                                        aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
-
-                                <div class="error_text" *ngIf="(submitted || signupForm.controls.confirm_password.touched) && signupForm.controls.confirm_password.errors">
-                                    <div *ngIf="signupForm.controls.confirm_password.errors.required">{{'confirm_password_touched_validaion' | translate}}</div>
-                                    <div *ngIf="signupForm.controls.confirm_password.errors.mustMatch">{{'confirm_password_not_match' | translate}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form_row last">
-                    <div class="check text_field">
-                        <span>{{'accept_term_and_condition' | translate}} <a href="javascript:void(0);">{{'term_and_condition' | translate}}</a> | <a href="javascript:void(0);">{{'privacy_and_policy' | translate}}</a></span>
-                    </div>
-                </div>
-                <div class="form_btn">
-                    <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
-                        <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_up' | translate}}
-                    </button>
-                </div>
-            </form>
-            <div class="modal_btm">
-                <p>{{'already_account' | translate}}<a (click)="openSignInPage()" class="signIn hover-link">{{'sign_in' | translate}}</a></p>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="modal fade comman_modal signup_modal" id="sign_up_modal" data-backdrop="static" data-keyboard="false" >
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -141,19 +69,6 @@
                                 </div>
 							</div>
 						</div>					
-						<!-- <div class="form_row">
-							<div class="text_field pass_show">
-								<input   [ngClass]="{'error': (submitted && signupForm.controls.confirm_password.errors) || (signupForm.controls.confirm_password.touched && signupForm.controls.confirm_password.errors)}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="15"  placeholder="{{'confirm_password' | translate}}">
-                                <span class="ptxt"><i id="cnfEye"
-                                    [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
-                                    aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
-
-                                <div class="error_text" *ngIf="(submitted || signupForm.controls.confirm_password.touched) && signupForm.controls.confirm_password.errors">
-                                    <div *ngIf="signupForm.controls.confirm_password.errors.required">{{'confirm_password_touched_validaion' | translate}}</div>
-                                    <div *ngIf="signupForm.controls.confirm_password.errors.mustMatch">{{'confirm_password_not_match' | translate}}</div>
-                                </div>
-							</div>
-						</div>					 -->
 						<div class="form_row last">
                             <div class="check">
                                 <label class="custom_checkbox">

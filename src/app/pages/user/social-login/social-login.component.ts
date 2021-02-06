@@ -43,7 +43,8 @@ export class SocialLoginComponent implements OnInit {
 
   
   ngOnInit() {
-   
+    this.loadGoogleSdk();
+
    this.loadFacebookSdk();
     // APPLE LOGIN RESPONSE 
     this.authService.authState.subscribe((userInfo: any) => {
