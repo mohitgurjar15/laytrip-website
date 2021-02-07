@@ -88,8 +88,10 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
     }
 
+    console.log("this.cartItem.travelers",this.cartItem.travelers)
     for (let i = 0; i < this.cartItem.travelers.length; i++) {
       let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId)
+      console.log("Selected traveler",traveler)
       this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
       this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
@@ -110,7 +112,7 @@ export class TravelerFormComponent implements OnInit {
       type1: this.formBuilder.group({
         adults: this.formBuilder.array([])
       }),
-      /* type2: this.formBuilder.group({
+      type2: this.formBuilder.group({
         adults: this.formBuilder.array([])
       }),
       type3: this.formBuilder.group({
@@ -118,7 +120,7 @@ export class TravelerFormComponent implements OnInit {
       }),
       type4: this.formBuilder.group({
         adults: this.formBuilder.array([])
-      }) */
+      })
     });
     
     this.patch();
@@ -150,7 +152,6 @@ export class TravelerFormComponent implements OnInit {
         }
       }
       this.checkOutService.emitTravelersformData(this.travelerForm)
-      console.log('this.travelerForm:::', this.travelerForm);
     })
 
     this.cartService.getSelectedCart.subscribe(cartNumber => {
@@ -175,7 +176,7 @@ export class TravelerFormComponent implements OnInit {
     })
 
     this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
-
+    console.log("This.travelrs",this.travelers)
   }
 
   changeDateOfBirth(date) {

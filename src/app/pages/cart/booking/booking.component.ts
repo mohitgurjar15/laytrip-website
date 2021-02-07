@@ -259,7 +259,7 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  async saveAndSearch(){
+  saveAndSearch(){
     console.log(this.travelerForm,"this.travelerForm",this.isValidData)
     if(this.isValidData){
       for(let i=0; i < this.carts.length; i++){
@@ -269,9 +269,10 @@ export class BookingComponent implements OnInit {
           cart_id   : this.carts[i].id,
           travelers : travelers
         }
+        console.log("cartData",cartData)
         this.cartService.updateCart(cartData).subscribe(data=>{
           if(i===this.carts.length-1){
-            this.router.navigate(['/'])
+            //this.router.navigate(['/'])
           }
         });
       }
