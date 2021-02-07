@@ -245,7 +245,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
             this.cartService.setCartItems(this.cartItems);
 
             localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-            this.router.navigate([`flight/payment/${route.route_code}`]);
+            this.router.navigate([`cart/booking`]);
           }
         }, error => {
           this.changeLoading.emit(false);

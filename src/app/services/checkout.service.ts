@@ -25,6 +25,9 @@ export class CheckOutService {
     private countires = new BehaviorSubject([])
     getCountries = this.countires.asObservable();
 
+    private priceSummary = new BehaviorSubject({})
+    getPriceSummary = this.priceSummary.asObservable();
+
     constructor() { }
 
     selectTraveler(traveler) {
@@ -45,6 +48,10 @@ export class CheckOutService {
 
     setCountries(countires){
         this.countires.next(countires)
+    }
+
+    setPriceSummary(priceSummary){
+        this.priceSummary.next(priceSummary)
     }
 }
    

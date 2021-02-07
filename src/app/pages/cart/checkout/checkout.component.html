@@ -1,0 +1,54 @@
+<app-laytrip-loader [loading]="loading"></app-laytrip-loader>
+<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
+<section class="payment_mode_main_wrapper flight">
+    <div class="container" *ngIf="!isCartEmpty">
+        <form>
+            <div class="row">
+                <div class="col-lg-7">
+                    <h3>Your Bookings</h3>
+                    <div class="booking_detail_bg_wrps">
+                        <app-cart *ngIf="carts.length" [carts]="carts"></app-cart>
+                        <app-cart-loader *ngIf="cartLoading"></app-cart-loader>
+                    </div>
+                    <h3>Credit Card Details</h3>
+                    <div class="booking_detail_bg_wrps">
+                        <div id="accordion-card" class="card_accordion">
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                        aria-controls="collapseOne" aria-expanded="true">
+                                    </a> -->
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <app-add-card></app-add-card>
+                                    </div>
+                                </div>
+                                <app-card-list></app-card-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="payment_container">
+                        <div class="payment_mode_wrapper">
+                            <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
+                            <!--<app-payment-mode *ngIf="carts.length" 
+                                 laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
+                            </app-payment-mode> -->
+                            <app-price-summary  [priceSummary]="priceSummary" [cartPrices]="cartPrices"></app-price-summary>
+                        </div>
+                        <div class="cta_btn_wrapper">
+                            <button [disabled]="!isValidData" (click)="handleSubmit()">Pay and Book</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <app-empty-cart *ngIf="isCartEmpty"></app-empty-cart>
+</section>

@@ -19,11 +19,11 @@ export interface CartItem {
 }
 
 @Component({
-  selector: 'app-flight-payment',
-  templateUrl: './flight-payment.component.html',
-  styleUrls: ['./flight-payment.component.scss']
+  selector: 'app-booking',
+  templateUrl: './booking.component.html',
+  styleUrls: ['./booking.component.scss']
 })
-export class FlightPaymentComponent implements OnInit {
+export class BookingComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   progressStep = { step1: true, step2: false, step3: false, step4: false };
@@ -130,14 +130,6 @@ export class FlightPaymentComponent implements OnInit {
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
   }
-  // ngAfterViewInit() {
-  //   $(".trans_btn").hover(
-  //     function () {
-  //       $('.pink_search').toggleClass("d-none");
-  //       $('.white_search').toggleClass("show");
-  //     }
-  //   );
-  // }
 
   totalLaycredit() {
     this.isLayCreditLoading = true;
@@ -184,6 +176,8 @@ export class FlightPaymentComponent implements OnInit {
     this.instalmentType = data.instalmentType;
     //this.laycreditpoints = data.layCreditPoints;
     this.priceSummary = data;
+    console.log("this.priceSummary",this.priceSummary)
+    this.checkOutService.setPriceSummary(this.priceSummary)
     sessionStorage.setItem('__islt', btoa(JSON.stringify(data)))
   }
 
@@ -275,7 +269,6 @@ export class FlightPaymentComponent implements OnInit {
           cart_id   : this.carts[i].id,
           travelers : travelers
         }
-        console.log(cartData)
         this.cartService.updateCart(cartData).subscribe(data=>{
           if(i===this.carts.length-1){
             this.router.navigate(['/'])

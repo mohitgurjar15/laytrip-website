@@ -18,7 +18,7 @@ export class CartService {
   getSelectedCart = this.cartNumber.asObservable();
 
   private cartId = new BehaviorSubject(0)
-  getCardId = this.cartId.asObservable();
+  getCartId = this.cartId.asObservable();
 
   private cartPrices = new BehaviorSubject([])
   getCartPrice = this.cartPrices.asObservable();

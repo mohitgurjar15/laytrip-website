@@ -73,7 +73,6 @@ export class TravelerFormComponent implements OnInit {
     })
     this.cartService.getCartTravelers.subscribe((travelers:any)=>{
       this.travelers =travelers;
-      console.log(this.travelers,"=====>")
     })
 
     //this.travelers = travelers;
@@ -102,7 +101,6 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
       this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
     }
-    //console.log(this.travelers,"=====>")
     this.cartService.setCartTravelers(this.travelers)
 
     this.travelerForm = this.formBuilder.group({

@@ -41,6 +41,10 @@ const routes: Routes = [
                 loadChildren: () => import('./user/user.module').then(m => m.UserModule)
             },
             {
+                path: 'cart',
+                loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
+            },
+            {
                 path: 'cancellation-policy',
                 component: CancellationPolicyComponent
             },
