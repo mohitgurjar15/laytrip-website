@@ -15,7 +15,6 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { GoogleLoginProvider } from './pages/user/social-login/google.login-provider';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,7 @@ import { GoogleLoginProvider } from './pages/user/social-login/google.login-prov
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [
+  providers: [ 
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -54,12 +53,6 @@ import { GoogleLoginProvider } from './pages/user/social-login/google.login-prov
               'com.laytrip.laytrips'
             ),
           },
-          /* {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com'
-            ),
-          } */
         ] 
       } as SocialAuthServiceConfig,
     }

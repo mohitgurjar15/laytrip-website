@@ -12,8 +12,6 @@ var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var user_routing_module_1 = require("./user-routing.module");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-// import { GoogleLoginProvider } from './social-login/google.login-provider';
-var angularx_social_login_1 = require("angularx-social-login");
 var UserModule = /** @class */ (function () {
     function UserModule() {
     }
@@ -24,21 +22,7 @@ var UserModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 forms_1.FormsModule,
                 user_routing_module_1.UserRoutingModule,
-                ng_bootstrap_1.NgbModule
-            ],
-            providers: [
-                {
-                    provide: 'SocialAuthServiceConfig',
-                    useValue: {
-                        autoLogin: false,
-                        providers: [
-                            {
-                                id: angularx_social_login_1.GoogleLoginProvider.PROVIDER_ID,
-                                provider: new angularx_social_login_1.GoogleLoginProvider('154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com')
-                            }
-                        ]
-                    }
-                }
+                ng_bootstrap_1.NgbModule,
             ],
             declarations: []
         })

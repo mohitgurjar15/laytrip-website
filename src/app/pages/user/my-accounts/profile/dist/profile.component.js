@@ -264,7 +264,7 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
-            formdata.append("home_airport", this.profileForm.value.home_airport);
+            formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
             formdata.append("address", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.profileForm.value.gender);

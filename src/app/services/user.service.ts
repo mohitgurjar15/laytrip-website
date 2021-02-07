@@ -108,11 +108,14 @@ export class UserService {
   }
 
   deleteAccount(data) {
+    const accessToken = localStorage.getItem('_lay_sess');
     const options = {
-      headers:this.commonFunction.setHeaders(),
-      data
+      headers: {
+          Authorization: `Bearer ${accessToken}`,
+          data
+      },
     }
-
+    console.log(options)
     return this.http.delete( this.apiURL + 'v1/auth/delete-account-request', options)
   }
 

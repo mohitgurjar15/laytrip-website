@@ -4,6 +4,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { environment } from '../../../../../environments/environment';
 import { UserService } from '../../../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account',
@@ -19,7 +20,9 @@ export class AccountComponent implements OnInit {
   
   constructor(
     private modalService: NgbModal,
-    private userService : UserService
+    private userService : UserService,
+    private toastrService : ToastrService,
+
 
   ) { }
 
@@ -59,10 +62,17 @@ export class AccountComponent implements OnInit {
     let data = {"requireBackupFile": this.isRequireBackupFile};
     this.userService.deleteAccount(data).subscribe((data: any) => {      
       this.loading = false;
-      redirectToLogin();
       this.modalService.dismissAll();
-    }, (error: HttpErrorResponse) => {       
+      this.toastrService.success(data.message,'Deleted Account Successfully')
+      redirectToLogin();
+    }, (error: HttpErrorResponse) => {
       this.loading = false;
+      this.modalService.dismissAll();
+
+      this.toastrService.error(error.error.message,'Deleted Account Error')
+      if(error.status == 401){
+        // redirectToLogin();
+      }       
     }); 
   }
 

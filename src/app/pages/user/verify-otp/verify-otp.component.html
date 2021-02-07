@@ -1,78 +1,28 @@
-<!-- <div class="form-container otp-container show_otp">
-    <div class="verify_otp_modal">
-        <div class="modal_top">
-            <div class="modal_title">
-                <h4>{{'sign_in_otp_title' | translate}}</h4>
-                <p>{{'sign_in_otp_description' | translate}}</p>
-                <p style="color: red;">{{apiError}}</p>
-            </div>
-        </div>
-
-        <div class="modal_cnt">
-            <div *ngIf="otpVerified" class="modal_message">
-                <h4 style="color: green;">Your OTP is verified successfully.</h4>
-            </div>
-            <form [formGroup]="otpForm" *ngIf="!otpVerified">
-                <ul class="add_otp">
-                    <li>
-                        <input type="text" (keydown)="onKeydown($event)" (keypress)="commonFunctoin.validateNumber($event)" #input1 (input)="onInputEntry($event, input2)" formControlName="otp1" maxlength="1" tabindex="1" class="tab1" placeholder="0">
-                    </li>
-                    <li>
-                        <input type="text" (keydown)="onKeydown($event)" (keypress)="commonFunctoin.validateNumber($event)" #input2 (input)="onInputEntry($event, input3)" formControlName="otp2" maxlength="1" tabindex="2" class="tab2" placeholder="0">
-                    </li>
-                    <li>
-                        <input type="text" (keydown)="onKeydown($event)" (keypress)="commonFunctoin.validateNumber($event)" #input3 (input)="onInputEntry($event, input4)" formControlName="otp3" maxlength="1" tabindex="3" class="tab3" placeholder="0">
-                    </li>
-                    <li>
-                        <input type="text" (keydown)="onKeydown($event)" (keypress)="commonFunctoin.validateNumber($event)" #input4 (input)="onInputEntry($event, input5)" formControlName="otp4" maxlength="1" tabindex="4" class="tab4" placeholder="0">
-                    </li>
-                    <li>
-                        <input type="text" (keydown)="onKeydown($event)" (keypress)="commonFunctoin.validateNumber($event)" #input5 (input)="onInputEntry($event, input6)" formControlName="otp5" maxlength="1" tabindex="5" class="tab5" placeholder="0">
-                    </li>
-                    <li>
-                        <input type="text" (keydown)="onKeydown($event)" (keypress)="commonFunctoin.validateNumber($event)" #input6 (input)="onInputEntry($event, input6)" formControlName="otp6" maxlength="1" tabindex="6" class="tab6" placeholder="0">
-                    </li>
-                </ul>
-                <div *ngIf="otpForm.hasError('otpsError') && ( otpForm.controls.otp1.touched || submitted)">
-                    <p class="text-danger">{{'otp_touched_validation' | translate}}</p>
-                </div>
-                
-                <div class="resend_otp_code">
-                    <span></span><a class="text-right hover-link" *ngIf="!otpVerified" (click)="resendOtp()">{{'resend_code' | translate}} <i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a>
-                </div>
-                <div class="form_btn">
-                    <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
-            <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'veryfy' | translate}}
-          </button>
-                </div>
-            </form>
-        </div>
-        <div class="modal_change_link">
-            <p>Back to <a class="hover-link" id="signIn" (click)="openSignInPage()">{{'sign_in' | translate}}</a></p>
-        </div>
-    </div>
-</div> -->
 <div class="modal_otp_block">
     <div class="modal-header">
-        
+
         <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div>
     <div class="modal-body">
         <div class="modal_top_block">
-            <img *ngIf="otpVerified" class="ic_suc" src="{{s3BucketUrl}}assets/images/icon/ic_success_new.svg" alt="success">
-            <h4 *ngIf="otpVerified && (isSignup || isUserNotVerify)" class="modal-title suc_title" id="modal-basic-title">{{'signup_sucessfully_title' | translate}}</h4>  
-            <h4 *ngIf="otpVerified && !isSignup && !isUserNotVerify" class="modal-title suc_title" id="modal-basic-title">{{'password_reset_sucessfully_title' | translate}}</h4>  
-            
+            <img *ngIf="otpVerified" class="ic_suc" src="{{s3BucketUrl}}assets/images/icon/ic_success_new.svg"
+                alt="success">
+            <h4 *ngIf="otpVerified && (isSignup || isUserNotVerify)" class="modal-title suc_title"
+                id="modal-basic-title">{{'signup_sucessfully_title' | translate}}</h4>
+            <h4 *ngIf="otpVerified && !isSignup && !isUserNotVerify" class="modal-title suc_title"
+                id="modal-basic-title">{{'password_reset_sucessfully_title' | translate}}</h4>
+
             <h4 class="modal-title" *ngIf="!otpVerified" id="modal-basic-title">{{'sign_up_otp_title' | translate}}</h4>
         </div>
 
         <form [formGroup]="otpForm" *ngIf="!otpVerified">
             <div class="form_row">
                 <div class="text_field">
-                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
-                    <div *ngIf="otpLengthError || otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
+                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+                    <div
+                        *ngIf="otpLengthError || otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
                         <p class="error_text">{{'otp_touched_validation' | translate}}</p>
                     </div>
 
@@ -80,17 +30,17 @@
             </div>
             <div class="resend_otp_code">
                 <div>
-                    <countdown *ngIf="isTimerEnable" #countdown  [config]="configCountDown"
-             (finished)="timerComplete()">$!s!</countdown>{{ isTimerEnable ? 'seconds remaining' : ''}}
+                    <countdown *ngIf="isTimerEnable" #countdown [config]="configCountDown" (finished)="timerComplete()">
+                        $!s!</countdown>{{ isTimerEnable ? 'seconds remaining' : ''}}
                 </div>
                 <div class="d-flex align-items-center">
                     <i class="fa fa-spinner fa-spin resendSpinner" *ngIf="spinner"></i>
-                    <a class="text-right hover-link" [ngClass]="isResend ? '' : 'disable_link'"  *ngIf="!otpVerified"  (click)="resendOtp()"><p >{{'resend_code' | translate}} </p></a>
+                    <a class="text-right hover-link" [ngClass]="isResend ? '' : 'disable_link'" *ngIf="!otpVerified"
+                        (click)="resendOtp()">
+                        <p>{{'resend_code' | translate}} </p>
+                    </a>
                 </div>
-                <!-- <a class="text-right hover-link" [ngClass]="isResend ? '' : 'disable_link'" *ngIf="!otpVerified" (click)="resendOtp()"><p>{{'resend_code' | translate}} </p><i class="fa fa-spinner fa-spin" *ngIf="spinner"></i></a> -->
             </div>
-            
-                        
             <div class="form_btn">
                 <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="onSubmit()">
                     <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'veryfy' | translate}}
@@ -99,11 +49,9 @@
             <div class="block_api_error" *ngIf="apiError.length > 0">
                 {{apiError}}
             </div>
-            
+
         </form>
-        <!-- <div  *ngIf="otpVerified" class="block_logo">
-            <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
-        </div> -->
+
     </div>
     <div class="modal-footer">
         <div class="modal_btm">

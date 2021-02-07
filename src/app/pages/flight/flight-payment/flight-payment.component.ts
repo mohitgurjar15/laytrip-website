@@ -225,6 +225,15 @@ export class FlightPaymentComponent implements OnInit {
       },
       type1: {
         adults: []
+      },
+      type2: {
+        adults: []
+      },
+      type3: {
+        adults: []
+      },
+      type4: {
+        adults: []
       }
     });
   }
