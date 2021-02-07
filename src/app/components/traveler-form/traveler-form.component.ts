@@ -111,6 +111,15 @@ export class TravelerFormComponent implements OnInit {
       }),
       type1: this.formBuilder.group({
         adults: this.formBuilder.array([])
+      }),
+      type2: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type3: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type4: this.formBuilder.group({
+        adults: this.formBuilder.array([])
       })
     });
     this.patch();
