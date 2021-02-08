@@ -25,9 +25,10 @@ export class TravellerFormComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() travellerId: any;
   @Input() travelerInfo: any;
+  @Input() countries: [];
   @Output() loadingValue = new EventEmitter<boolean>();
   @Output() travelerFormChange = new EventEmitter();
-  countries = [];
+  // countries = [];
   countries_code = [];
   is_gender: boolean = true;
   is_type: string = 'M';
@@ -65,7 +66,6 @@ export class TravellerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getCountry();
     let location: any = this.cookieService.get('__loc');
     try {
       this.location = JSON.parse(location);
@@ -84,7 +84,7 @@ export class TravellerFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
-      country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [Validators.required]],
+      country_code: ['', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
@@ -158,7 +158,6 @@ export class TravellerFormComponent implements OnInit {
       this.isChild = false;
       this.isInfant = false;
     }
-    console.log(this.isAdult)
   }
 
   setUserTypeValidation() {    
@@ -245,32 +244,6 @@ export class TravellerFormComponent implements OnInit {
 
       }
     }
-  }
-
-  getCountry() {
-    this.genericService.getCountry().subscribe((data: any) => {
-      this.countries = data.map(country => {
-        return {
-          id: country.id,
-          name: country.name,
-          code: country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-        }
-      }),
-        this.countries_code = data.map(country => {
-          return {
-            id: country.id,
-            name: country.phonecode+' ('+country.iso2+')',
-            code:country.phonecode,
-            country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-          }
-        });
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
-    });
   }
 
   stringToDate(string, saprator) {
