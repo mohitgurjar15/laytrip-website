@@ -212,7 +212,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         // this.spinner.hide();
         this.changeLoading.emit(false);
         this.maxCartValidation.emit(true)
-        this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+        //this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
       } else {
         // this.spinner.show();
         this.changeLoading.emit(true);

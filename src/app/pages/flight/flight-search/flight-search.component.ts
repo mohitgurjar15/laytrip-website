@@ -345,4 +345,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   maxCartValidation(data){
     this.isCartFull=data;
   }
+
+  hideMaxCartValidation(){
+    this.isCartFull=false;
+  }
 }
