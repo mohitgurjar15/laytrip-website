@@ -90,9 +90,23 @@ a {
 }
 .ar_field{
   .ng-select{
+    &.ng-select-disabled{
+      &.laytrip-input{
+        .ng-select-container{
+          background-color: $background-white
+        }
+      }
+    }
     &.laytrip-input{
       .ng-select-container{
+        background-color: $background-white;
         .ng-value-container{
+          height: 40px;
+          .ng-placeholder{
+            padding: 0;
+            font-size: 16px;
+            color: $mid_gray_bg;
+          }
           .ng-value{
             width: 100%;
             background: transparent;
@@ -110,7 +124,7 @@ a {
           }
         }
         .ng-arrow-wrapper{
-          display: none;
+          display: block;
         }
       }
     }
@@ -154,6 +168,9 @@ input , textarea{
 .form-control{
   &:focus{
     box-shadow: none;
+  }
+  &:read-only{
+    background-color: $background-white
   }
 }
 input:focus::-webkit-input-placeholder {
