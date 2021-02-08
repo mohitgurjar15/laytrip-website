@@ -11,6 +11,7 @@ import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
+import { CookieService } from 'ngx-cookie';
 
 export interface CartItem {
 
@@ -34,7 +35,6 @@ export class BookingComponent implements OnInit {
   flightSummary = [];
   instalmentMode = 'instalment';
   instalmentType: string = 'weekly'
-  routeCode: string = '';
   isLoggedIn: boolean = false;
   showPartialPayemntOption: boolean = true;
   redeemableLayPoints: number;
@@ -49,17 +49,18 @@ export class BookingComponent implements OnInit {
   isCartEmpty:boolean=false;
   cartPrices=[];
   travelerForm:FormGroup;
+  cardToken:string='';
 
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private flightService: FlightService,
     private genericService: GenericService,
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
     private cartService: CartService,
-    private toster:ToastrService
+    private toster:ToastrService,
+    private cookieService:CookieService
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -67,8 +68,6 @@ export class BookingComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
-
-    this.routeCode = this.route.snapshot.paramMap.get('rc');
     this.userInfo = getLoginUserInfo();
     if (Object.keys(this.userInfo).length > 0) {
       this.getTravelers();
@@ -208,7 +207,7 @@ export class BookingComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.router.navigate(['/flight/checkout', this.routeCode]);
+    this.router.navigate(['/flight/checkout']);
   }
 
   ngOnDestroy() {
@@ -279,6 +278,11 @@ export class BookingComponent implements OnInit {
     else{
       this.toster.warning("Please enter valid data of traveler into cart","warning")
     }
+  }
+
+  selectCreditCard(data){
+    this.cardToken=data;
+    this.cookieService.put("__cc",this.cardToken);
   }
 
 }

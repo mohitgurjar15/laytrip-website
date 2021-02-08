@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {
+    console.log("I am in changes",changes)
     if (changes['carts']) {
       this.carts = changes['carts'].currentValue;
     }
