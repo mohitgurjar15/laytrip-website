@@ -49,13 +49,13 @@
                         <div class="cmn_block pad_no">
                             <div class="accordion block_shortby" id="accordion-outbound">
                                 <div class="accordion-group" [ngClass]="{'active':isShowoutbound==true}">
-                                    <div class="accordion-heading" (click)="toggleOutbound()">
+                                    <!-- <div class="accordion-heading" (click)="toggleOutbound()">
                                         <a class="accordion-toggle" data-toggle="collapse"
                                             data-parent="#accordion-outbound" href="#collapseOutbound">
                                             {{'outbound' | translate}}
                                         </a>
-                                    </div>
-                                    <div id="collapseOutbound" class="accordion-body collapse">
+                                    </div> -->
+                                    <div id="collapseOutbound" class="accordion-body show">
                                         <div class="accordion-inner">
                                             <div class="block_cmn stop">
                                                 <div class="block_top_in">
@@ -217,20 +217,20 @@
                         <div class="cmn_block pad_no" *ngIf="filterFlightDetails.inbound_arrival_time_slot">
                             <div class="accordion block_shortby" id="accordion-inbound">
                                 <div class="accordion-group" [ngClass]="{'active':isShowinbound==true}">
-                                    <div class="accordion-heading" (click)="toggleInbound()">
+                                    <!-- <div class="accordion-heading" (click)="toggleInbound()">
                                         <a class="accordion-toggle" data-toggle="collapse"
                                             data-parent="#accordion-inbound" href="#collapseInbound">
                                             {{'inbound' | translate}}
                                         </a>
-                                    </div>
-                                    <div id="collapseInbound" class="accordion-body collapse">
+                                    </div> -->
+                                    <div id="collapseInbound" class="accordion-body show">
                                         <div class="accordion-inner">
                                             <div class="block_cmn stop">
                                                 <div class="block_top_in">
                                                     <h5>{{'stops' | translate}}</h5>
                                                 </div>
                                                 <ul>
-                                                    <li
+                                                    <!-- <li
                                                         *ngIf="filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.non_stop.min_price !== 0">
                                                         <label class="custom_checkbox">
                                                             <input type="checkbox"
@@ -241,7 +241,7 @@
                                                         <span>{{ currency?.symbol }}{{
                                                             filterFlightDetails.inbound_stop_data?.non_stop?.min_price |
                                                             number : '1.2-2'}}</span>
-                                                    </li>
+                                                    </li> -->
                                                     <li
                                                         *ngIf="filterFlightDetails?.inbound_stop_data?.one_stop.min_price !== null && filterFlightDetails?.inbound_stop_data?.one_stop.min_price !== 0">
                                                         <label class="custom_checkbox">
