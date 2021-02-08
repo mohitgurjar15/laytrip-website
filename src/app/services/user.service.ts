@@ -126,6 +126,9 @@ export class UserService {
   updateProfile(data) {
     return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
   }
+  updateProfileImage(data) {
+    return this.http.put(this.apiURL + 'v1/auth/profile/picture', data, this.commonFunction.setHeaders());
+  }
   getProfile() {
     return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
   }

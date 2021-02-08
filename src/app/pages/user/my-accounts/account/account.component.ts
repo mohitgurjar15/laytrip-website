@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { redirectToLogin } from '../../../../_helpers/jwt.helper';
+import { getLoginUserInfo, redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { environment } from '../../../../../environments/environment';
 import { UserService } from '../../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,10 +14,12 @@ import { ToastrService } from 'ngx-toastr';
 export class AccountComponent implements OnInit {
 
   loading : boolean = true; 
+  isSocialLogin : boolean = false; 
   closeResult = '';
   s3BucketUrl = environment.s3BucketUrl;
   isRequireBackupFile : boolean = false;
-  
+  userDetails;
+
   constructor(
     private modalService: NgbModal,
     private userService : UserService,
@@ -27,7 +29,8 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.userDetails = getLoginUserInfo();
+    this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;;
   }
   getLoadingValue(event){
     if(event === false){
@@ -61,14 +64,12 @@ export class AccountComponent implements OnInit {
     this.loading = true;
     let data = {"requireBackupFile": this.isRequireBackupFile};
     this.userService.deleteAccount(data).subscribe((data: any) => {      
-      this.loading = false;
       this.modalService.dismissAll();
+      this.loading = false;
       this.toastrService.success(data.message,'Deleted Account Successfully')
-      redirectToLogin();
     }, (error: HttpErrorResponse) => {
-      this.loading = false;
       this.modalService.dismissAll();
-
+      this.loading = false;
       this.toastrService.error(error.error.message,'Deleted Account Error')
       if(error.status == 401){
         // redirectToLogin();

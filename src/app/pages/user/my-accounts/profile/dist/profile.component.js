@@ -167,6 +167,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.selectImageFile = function (event) {
         var _this = this;
+        this.imageFileError = false;
         this.imageFile = event.target.files[0];
         //file type validation check
         if (!custom_validators_1.validateImageFile(this.imageFile.name)) {
@@ -187,7 +188,27 @@ var ProfileComponent = /** @class */ (function () {
         reader.onload = function (_event) {
             _this.image = reader.result;
         };
-        this.imageFileError = false;
+        if (!this.imageFileError) {
+            this.loadingValue.emit(true);
+            console.log(this.loadingValue);
+            var formdata = new FormData();
+            var imgfile = '';
+            if (this.imageFile) {
+                imgfile = this.imageFile;
+                formdata.append("profile_pic", imgfile);
+                this.userService.updateProfileImage(formdata).subscribe(function (data) {
+                    _this.submitted = false;
+                    _this.loadingValue.emit(false);
+                    localStorage.setItem("_lay_sess", data.token);
+                    _this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
+                }, function (error) {
+                    _this.loadingValue.emit(false);
+                    _this.submitted = false;
+                    _this.toastr.error(error.error.message, 'Profile Error');
+                });
+                // this.loadingValue.emit(false);  
+            }
+        }
     };
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
@@ -214,11 +235,11 @@ var ProfileComponent = /** @class */ (function () {
                 country_id: res.country.name ? res.country.name : countryName,
                 state_id: res.state.name,
                 city_name: res.cityName,
-                address: res.address,
+                address: res.profile_picaddress,
                 home_airport: res.airportInfo.code ? res.airportInfo.code : null,
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
-                profile_pic: res.profilePic,
+                // profile_pic: res.profilePic, 
                 passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
                 passport_number: res.passportNumber
             });
@@ -238,7 +259,6 @@ var ProfileComponent = /** @class */ (function () {
         this.submitted = true;
         this.loadingValue.emit(true);
         if (this.profileForm.invalid) {
-            console.log(this.profileForm);
             this.submitted = true;
             this.loadingValue.emit(false);
             //scroll top if any error 

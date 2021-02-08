@@ -17,11 +17,15 @@ var AccountComponent = /** @class */ (function () {
         this.userService = userService;
         this.toastrService = toastrService;
         this.loading = true;
+        this.isSocialLogin = false;
         this.closeResult = '';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.isRequireBackupFile = false;
     }
     AccountComponent.prototype.ngOnInit = function () {
+        this.userDetails = jwt_helper_1.getLoginUserInfo();
+        this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;
+        ;
     };
     AccountComponent.prototype.getLoadingValue = function (event) {
         if (event === false) {
@@ -56,13 +60,12 @@ var AccountComponent = /** @class */ (function () {
         this.loading = true;
         var data = { "requireBackupFile": this.isRequireBackupFile };
         this.userService.deleteAccount(data).subscribe(function (data) {
-            _this.loading = false;
             _this.modalService.dismissAll();
+            _this.loading = false;
             _this.toastrService.success(data.message, 'Deleted Account Successfully');
-            jwt_helper_1.redirectToLogin();
         }, function (error) {
-            _this.loading = false;
             _this.modalService.dismissAll();
+            _this.loading = false;
             _this.toastrService.error(error.error.message, 'Deleted Account Error');
             if (error.status == 401) {
                 // redirectToLogin();

@@ -185,7 +185,8 @@ export class ProfileComponent implements OnInit {
   } 
  
  
-  selectImageFile(event) {    
+  selectImageFile(event) {  
+    this.imageFileError = false;  
     this.imageFile = event.target.files[0];
     //file type validation check
     if (!validateImageFile(this.imageFile.name)) {
@@ -205,9 +206,30 @@ export class ProfileComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]); 
     reader.onload = (_event) => {
-      this.image = reader.result; 
+      this.image = reader.result;
     }
-    this.imageFileError = false;
+    if(!this.imageFileError){
+      this.loadingValue.emit(true);   
+      console.log(this.loadingValue)
+      let formdata = new FormData();
+    
+      let imgfile = '';
+      if(this.imageFile){
+        imgfile = this.imageFile;
+        formdata.append("profile_pic",imgfile);
+        this.userService.updateProfileImage(formdata).subscribe((data: any) => {
+          this.submitted = false; 
+          this.loadingValue.emit(false);   
+          localStorage.setItem("_lay_sess", data.token);
+          this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
+        }, (error: HttpErrorResponse) => {
+          this.loadingValue.emit(false);  
+          this.submitted = false;
+          this.toastr.error(error.error.message, 'Profile Error');
+        });
+        // this.loadingValue.emit(false);  
+      }
+    }
   }
 
   getProfileInfo() {
@@ -215,7 +237,6 @@ export class ProfileComponent implements OnInit {
       this.loadingValue.emit(false);   
       this.image = res.profilePic;
       this.selectResponse = res;
-
       this.is_type = res.gender ? res.gender :'M';      
       let countryName = '';
       if(typeof this.location != 'undefined'){
@@ -235,11 +256,11 @@ export class ProfileComponent implements OnInit {
           country_id: res.country.name ? res.country.name :countryName,
           state_id: res.state.name,       
           city_name  : res.cityName,        
-          address  : res.address,  
+          address  : res.profile_picaddress,  
           home_airport  : res.airportInfo.code ? res.airportInfo.code : null,  
           language_id : res.preferredLanguage.name,     
           currency_id : res.preferredCurrency.code,     
-          profile_pic: res.profilePic, 
+          // profile_pic: res.profilePic, 
           passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '', 
           passport_number: res.passportNumber  
       });
@@ -259,7 +280,6 @@ export class ProfileComponent implements OnInit {
     this.submitted = true;
     this.loadingValue.emit(true);   
     if (this.profileForm.invalid) {
-      console.log(this.profileForm)
       this.submitted = true;      
       this.loadingValue.emit(false);   
       //scroll top if any error 
