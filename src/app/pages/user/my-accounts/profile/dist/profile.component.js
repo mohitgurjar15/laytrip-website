@@ -27,11 +27,6 @@ var ProfileComponent = /** @class */ (function () {
         this.submitted = false;
         this.loading = true;
         this.loadingValue = new core_1.EventEmitter();
-        this.countries = [];
-        this.languages = [];
-        this.currencies = [];
-        this.countries_code = [];
-        this.stateList = [];
         this.minDate = {};
         this.maxDate = {};
         this.data = [];
@@ -62,9 +57,6 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
         window.scroll(0, 0);
-        this.getCountry();
-        this.getLanguages();
-        this.getCurrencies();
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
@@ -73,7 +65,6 @@ var ProfileComponent = /** @class */ (function () {
         this.profileForm = this.formBuilder.group({
             first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
             dob: ['', forms_1.Validators.required],
             country_code: [''],
             phone_no: [''],
@@ -81,75 +72,11 @@ var ProfileComponent = /** @class */ (function () {
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             gender: ['M'],
             profile_pic: [''],
-            currency_id: [''],
             passport_expiry: [''],
             passport_number: [''],
             home_airport: ['']
         });
-        if (!this.isFormControlEnable) {
-            // this.profileForm.controls['country_code'].disable() 
-        }
         this.getProfileInfo();
-    };
-    ProfileComponent.prototype.getCountry = function () {
-        var _this = this;
-        this.genericService.getCountry().subscribe(function (data) {
-            _this.countries = data.map(function (country) {
-                return {
-                    id: country.id,
-                    name: country.name,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                };
-            }),
-                _this.countries_code = data.map(function (country) {
-                    return {
-                        id: country.id,
-                        name: country.phonecode + ' (' + country.iso2 + ')',
-                        code: country.phonecode,
-                        country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                    };
-                });
-            if (_this.location) {
-                var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-                _this.profileForm.controls.country_code.setValue(countryCode.id);
-            }
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
-        });
-    };
-    ProfileComponent.prototype.getStates = function (countryId) {
-        var _this = this;
-        this.profileForm.controls.state_id.setValue([]);
-        this.genericService.getStates(countryId.id).subscribe(function (data) {
-            _this.stateList = data;
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
-        });
-    };
-    ProfileComponent.prototype.getLanguages = function () {
-        var _this = this;
-        this.genericService.getAllLangunage().subscribe(function (data) {
-            _this.languages = data.data;
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
-        });
-    };
-    ProfileComponent.prototype.getCurrencies = function () {
-        var _this = this;
-        this.genericService.getCurrencies().subscribe(function (data) {
-            _this.currencies = data.data;
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
-        });
     };
     ProfileComponent.prototype.selectGender = function (event, type) {
         if (this.isFormControlEnable) {
@@ -165,7 +92,7 @@ var ProfileComponent = /** @class */ (function () {
             }
         }
     };
-    ProfileComponent.prototype.selectImageFile = function (event) {
+    ProfileComponent.prototype.uploadImageFile = function (event) {
         var _this = this;
         this.imageFileError = false;
         this.imageFile = event.target.files[0];
@@ -215,12 +142,7 @@ var ProfileComponent = /** @class */ (function () {
             _this.image = res.profilePic;
             _this.selectResponse = res;
             _this.is_type = res.gender ? res.gender : 'M';
-            var countryName = '';
-            if (typeof _this.location != 'undefined') {
-                countryName = _this.location.country.id;
-            }
             _this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
-            console.log(_this.data);
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -231,7 +153,6 @@ var ProfileComponent = /** @class */ (function () {
                 dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
                 country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '',
                 phone_no: res.phoneNo,
-                country_id: res.country.name ? res.country.name : countryName,
                 state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.profile_picaddress,

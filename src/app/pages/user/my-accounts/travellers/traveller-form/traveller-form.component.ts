@@ -25,9 +25,10 @@ export class TravellerFormComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() travellerId: any;
   @Input() travelerInfo: any;
+  @Input() countries: [];
   @Output() loadingValue = new EventEmitter<boolean>();
   @Output() travelerFormChange = new EventEmitter();
-  countries = [];
+  // countries = [];
   countries_code = [];
   is_gender: boolean = true;
   is_type: string = 'M';
@@ -65,7 +66,7 @@ export class TravellerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getCountry();
+    // this.getCountry();
     let location: any = this.cookieService.get('__loc');
     try {
       this.location = JSON.parse(location);
