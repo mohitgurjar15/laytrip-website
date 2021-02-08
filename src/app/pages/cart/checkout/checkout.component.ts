@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
-import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
@@ -26,7 +25,7 @@ export interface CartItem {
 export class CheckoutComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  progressStep = { step1: true, step2: false, step3: false, step4: false };
+  progressStep = { step1: false, step2: true, step3: false, step4: false };
   userInfo;
   isShowPaymentOption: boolean = true;
   laycreditpoints: number = 0;

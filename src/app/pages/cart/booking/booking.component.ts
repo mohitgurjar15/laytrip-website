@@ -271,7 +271,7 @@ export class BookingComponent implements OnInit {
         console.log("cartData",cartData)
         this.cartService.updateCart(cartData).subscribe(data=>{
           if(i===this.carts.length-1){
-            //this.router.navigate(['/'])
+            this.router.navigate(['/'])
           }
         });
       }
