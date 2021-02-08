@@ -82,6 +82,7 @@ export class SocialLoginComponent implements OnInit {
   public googleLogin(element) {
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
+        console.log('here')
 
         let profile = googleUser.getBasicProfile();
         
@@ -111,10 +112,15 @@ export class SocialLoginComponent implements OnInit {
         });
 
       }, (error) => {
+        console.log(error)
         this.google_loading = false;
       });
   }
 
+  ngDoCheck(){
+    this.loadGoogleSdk();
+
+  }
   ngAfterViewInit(){
     this.loadGoogleSdk();
   }
@@ -126,7 +132,8 @@ export class SocialLoginComponent implements OnInit {
         cookiepolicy: 'single_host_origin',
         scope: 'profile email'
       });
-      this.googleLogin(document.getElementById('googleBtn'));
+      console.log(this.loginElement.nativeElement)
+      this.googleLogin(this.loginElement.nativeElement);
     });
   }
 

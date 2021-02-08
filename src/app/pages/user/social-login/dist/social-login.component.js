@@ -64,6 +64,7 @@ var SocialLoginComponent = /** @class */ (function () {
     SocialLoginComponent.prototype.googleLogin = function (element) {
         var _this = this;
         this.auth2.attachClickHandler(element, {}, function (googleUser) {
+            console.log('here');
             var profile = googleUser.getBasicProfile();
             var jsonData = {
                 "account_type": 1,
@@ -90,8 +91,12 @@ var SocialLoginComponent = /** @class */ (function () {
                 _this.socialError.emit(error.message);
             });
         }, function (error) {
+            console.log(error);
             _this.google_loading = false;
         });
+    };
+    SocialLoginComponent.prototype.ngDoCheck = function () {
+        this.loadGoogleSdk();
     };
     SocialLoginComponent.prototype.ngAfterViewInit = function () {
         this.loadGoogleSdk();
@@ -104,7 +109,8 @@ var SocialLoginComponent = /** @class */ (function () {
                 cookiepolicy: 'single_host_origin',
                 scope: 'profile email'
             });
-            _this.googleLogin(document.getElementById('googleBtn'));
+            console.log(_this.loginElement.nativeElement);
+            _this.googleLogin(_this.loginElement.nativeElement);
         });
     };
     SocialLoginComponent.prototype.loadFacebookSdk = function () {
