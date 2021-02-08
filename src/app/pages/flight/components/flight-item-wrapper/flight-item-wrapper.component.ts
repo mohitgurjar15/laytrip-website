@@ -42,6 +42,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   @Input() flightDetails;
   @Input() filter;
   @Output() changeLoading = new EventEmitter;
+  @Output() maxCartValidation= new EventEmitter;
   cartItems = [];
 
   animationState = 'out';
@@ -210,7 +211,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       if (this.cartItems && this.cartItems.length >= 5) {
         // this.spinner.hide();
         this.changeLoading.emit(false);
-        this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+        this.maxCartValidation.emit(true)
+        //this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
       } else {
         // this.spinner.show();
         this.changeLoading.emit(true);
@@ -288,6 +290,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+  
+  getDayDiff(arrivalDate,departureDate){
+    let diff= moment(arrivalDate,"DD/MM/YYYY").diff(moment(departureDate,"DD/MM/YYYY"),'days')
+    return diff;
   }
 }
 
