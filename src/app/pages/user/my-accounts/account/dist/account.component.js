@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.AccountComponent = void 0;
 var core_1 = require("@angular/core");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var environment_1 = require("../../../../../environments/environment");
 var AccountComponent = /** @class */ (function () {
     function AccountComponent(modalService, userService, toastrService) {
@@ -21,6 +22,7 @@ var AccountComponent = /** @class */ (function () {
         this.isRequireBackupFile = false;
     }
     AccountComponent.prototype.ngOnInit = function () {
+        this.userDetails = jwt_helper_1.getLoginUserInfo();
     };
     AccountComponent.prototype.getLoadingValue = function (event) {
         if (event === false) {

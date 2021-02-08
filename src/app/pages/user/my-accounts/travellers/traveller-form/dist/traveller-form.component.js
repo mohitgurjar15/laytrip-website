@@ -75,15 +75,7 @@ var TravellerFormComponent = /** @class */ (function () {
         }
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
-        var _this = this;
         this.traveller = this.travelerInfo;
-        var countryCode = '';
-        if (typeof this.travelerInfo.countryCode != 'undefined' && typeof this.travelerInfo.countryCode == 'string') {
-            countryCode = this.countries_code.filter(function (item) { return item.id == _this.travelerInfo.countryCode; })[0];
-        }
-        else {
-            countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-        }
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
         if (moment(this.travelerInfo.dob).format('YYYY-MM-DD') < adult12YrPastDate) {
             this.isAdult = true;
@@ -100,7 +92,7 @@ var TravellerFormComponent = /** @class */ (function () {
             email: this.travelerInfo.email ? this.travelerInfo.email : '',
             gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
             phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
-            country_code: countryCode,
+            country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
             country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
             dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',

@@ -9,7 +9,7 @@
                     <div class="update_profile_btn">
                         <input #hiddenfileinput style="display: none" type="file" accept="image/*"
                             (change)="selectImageFile($event)">
-                        <button #upload [disabled]="!isFormControlEnable" (click)="hiddenfileinput.click()">Edit</button>
+                        <button #upload  (click)="hiddenfileinput.click()">Edit</button>
                     </div>
                 </div>
             </div>

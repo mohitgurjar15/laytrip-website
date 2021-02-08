@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { redirectToLogin } from '../../../../_helpers/jwt.helper';
+import { getLoginUserInfo, redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { environment } from '../../../../../environments/environment';
 import { UserService } from '../../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,7 +17,8 @@ export class AccountComponent implements OnInit {
   closeResult = '';
   s3BucketUrl = environment.s3BucketUrl;
   isRequireBackupFile : boolean = false;
-  
+  userDetails;
+
   constructor(
     private modalService: NgbModal,
     private userService : UserService,
@@ -27,7 +28,7 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.userDetails = getLoginUserInfo();
   }
   getLoadingValue(event){
     if(event === false){
