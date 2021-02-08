@@ -13,7 +13,11 @@
 		padding: 0;
 	}
 }
-
+.section_description{
+	transform: translate(-60%, -70%);
+    max-width: 240px;
+    right: 0;
+}
 
 
 .view_more{
@@ -140,6 +144,11 @@
 		.left_m{
 			margin-top: 30px;
 		}
+	}
+}
+.search_tab_listing_wrapper {
+	.searchbar_box_common{
+		position: relative;
 	}
 }
 //<!-- Close Responsive Filter css -->

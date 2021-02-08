@@ -11,10 +11,9 @@
     align-items: center;
     flex-direction: column;
     text-align: center;
-    padding: 90px 0;
-    height: calc(100vh - 200px);
+    padding: 10px 0 0;
     @include tab-view{
-        padding: 20px 0;
+        padding: 15px 0;
     }
     .inner_wrppar{
         max-width: 472px;
@@ -60,8 +59,8 @@
 
                 &:hover {
                     border: 1px solid $hotel-secondary-color;
-                    color: $hotel-secondary-color;
-                    background: $background-white;
+                    color: $text-white;
+                    background:  $hotel-secondary-color;
                 }
                 &:focus{
                     outline: none;
@@ -71,4 +70,24 @@
             
         }
     }
+}
+
+.modal-dialog {
+  max-width: 514px;
+  width: 96%;
+  
+  .modal-content {
+    .modal_title {
+        .close {
+          position: absolute;
+          right: 20px;
+          top: 16px;
+          z-index: 9;
+          cursor: pointer;
+        }
+      }
+    .cart_modal_wrp {
+      padding: 32px 20px;
+    }
+  }
 }
