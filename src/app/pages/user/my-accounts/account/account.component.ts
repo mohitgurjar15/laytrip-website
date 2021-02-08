@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AccountComponent implements OnInit {
 
   loading : boolean = true; 
+  isSocialLogin : boolean = false; 
   closeResult = '';
   s3BucketUrl = environment.s3BucketUrl;
   isRequireBackupFile : boolean = false;
@@ -29,6 +30,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.userDetails = getLoginUserInfo();
+    this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;;
   }
   getLoadingValue(event){
     if(event === false){

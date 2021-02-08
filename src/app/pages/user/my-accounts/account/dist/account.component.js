@@ -17,12 +17,15 @@ var AccountComponent = /** @class */ (function () {
         this.userService = userService;
         this.toastrService = toastrService;
         this.loading = true;
+        this.isSocialLogin = false;
         this.closeResult = '';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.isRequireBackupFile = false;
     }
     AccountComponent.prototype.ngOnInit = function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
+        this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;
+        ;
     };
     AccountComponent.prototype.getLoadingValue = function (event) {
         if (event === false) {
