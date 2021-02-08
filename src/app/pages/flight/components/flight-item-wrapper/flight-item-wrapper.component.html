@@ -18,7 +18,7 @@
                             </div>
                             <div class="fight_secs">
                                 <span class="fl_times">
-                                    {{route.stops[0].departure_time}} - {{route.stops[route.stops.length-1].arrival_time}} <span>+1</span>
+                                    {{route.stops[0].departure_time}} - {{route.stops[route.stops.length-1].arrival_time}} <span *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                 </span>
                                 <span class="fl_desti">
                                     {{route.stops[0]?.departure_info?.code}} {{route.stops[0]?.departure_info?.city}} - {{route.stops[route.stops.length-1]?.arrival_info?.code}} {{route.stops[route.stops.length-1]?.arrival_info?.city}}
