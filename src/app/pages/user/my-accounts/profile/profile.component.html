@@ -103,9 +103,10 @@
                         <input [readonly]="!isFormControlEnable" (keypress)="commonFunctoin.validateNumber($event)" type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
                             formControlName="phone_no">
                         </span>
-                    <div class="error" *ngIf="(submitted || (profileForm.controls.country_code.touched && profileForm.controls.phone_no.touched)) 
-                                && profileForm.hasError('phoneAndPhoneCodeError')">
-                        <small class="error_field">{{'phone_touched_validation' | translate}}</small>
+                    <div class="error" *ngIf="(submitted || profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) && (profileForm.controls.phone_no.errors || profileForm.controls.phone_no.errors || profileForm.hasError('phoneAndPhoneCodeError'))">
+                        <small class="error_field" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')">{{'phone_touched_validation' | translate}}</small>
+                        <small *ngIf="!profileForm.hasError('phoneAndPhoneCodeError') && (profileForm.controls.phone_no.errors.minlength)"  class="error_field">Phone number should be minimum 10</small>
+
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { validateImageFile,fileSizeValidator } from '../../../../_helpers/custom.validators';
+import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -80,8 +80,8 @@ export class ProfileComponent implements OnInit {
         first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
         last_name: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
         dob: ['', Validators.required],
-        country_code: [''],
-        phone_no: [''],
+        country_code: ['', [Validators.required]],
+        phone_no: ['',[Validators.required, Validators.minLength(10)]],
         address: [''],
         email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],        
         gender: ['M'],
@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit {
         passport_expiry: [''],      
         passport_number: [''],      
         home_airport: [''],      
-      });
+      },{validators:phoneAndPhoneCodeValidation()});
     
       this.getProfileInfo(); 
   }

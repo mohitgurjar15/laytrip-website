@@ -46,7 +46,6 @@ var TravellerFormComponent = /** @class */ (function () {
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
@@ -64,7 +63,7 @@ var TravellerFormComponent = /** @class */ (function () {
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
-            country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
+            country_code: ['', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: ['']
@@ -137,7 +136,6 @@ var TravellerFormComponent = /** @class */ (function () {
             this.isChild = false;
             this.isInfant = false;
         }
-        console.log(this.isAdult);
     };
     TravellerFormComponent.prototype.setUserTypeValidation = function () {
         this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
@@ -219,32 +217,6 @@ var TravellerFormComponent = /** @class */ (function () {
                 });
             }
         }
-    };
-    TravellerFormComponent.prototype.getCountry = function () {
-        var _this = this;
-        this.genericService.getCountry().subscribe(function (data) {
-            _this.countries = data.map(function (country) {
-                return {
-                    id: country.id,
-                    name: country.name,
-                    code: country.phonecode,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                };
-            }),
-                _this.countries_code = data.map(function (country) {
-                    return {
-                        id: country.id,
-                        name: country.phonecode + ' (' + country.iso2 + ')',
-                        code: country.phonecode,
-                        country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                    };
-                });
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
-        });
     };
     TravellerFormComponent.prototype.stringToDate = function (string, saprator) {
         var dateArray = string.split(saprator);
