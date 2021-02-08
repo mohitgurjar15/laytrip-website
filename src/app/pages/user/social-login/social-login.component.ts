@@ -132,7 +132,6 @@ export class SocialLoginComponent implements OnInit {
         cookiepolicy: 'single_host_origin',
         scope: 'profile email'
       });
-      console.log(this.loginElement.nativeElement)
       this.googleLogin(this.loginElement.nativeElement);
     });
   }

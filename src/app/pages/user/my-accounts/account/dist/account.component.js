@@ -9,7 +9,6 @@ exports.__esModule = true;
 exports.AccountComponent = void 0;
 var core_1 = require("@angular/core");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var environment_1 = require("../../../../../environments/environment");
 var AccountComponent = /** @class */ (function () {
     function AccountComponent(modalService, userService, toastrService) {
@@ -56,13 +55,12 @@ var AccountComponent = /** @class */ (function () {
         this.loading = true;
         var data = { "requireBackupFile": this.isRequireBackupFile };
         this.userService.deleteAccount(data).subscribe(function (data) {
-            _this.loading = false;
             _this.modalService.dismissAll();
+            _this.loading = false;
             _this.toastrService.success(data.message, 'Deleted Account Successfully');
-            jwt_helper_1.redirectToLogin();
         }, function (error) {
-            _this.loading = false;
             _this.modalService.dismissAll();
+            _this.loading = false;
             _this.toastrService.error(error.error.message, 'Deleted Account Error');
             if (error.status == 401) {
                 // redirectToLogin();

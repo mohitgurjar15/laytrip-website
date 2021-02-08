@@ -109,7 +109,6 @@ var SocialLoginComponent = /** @class */ (function () {
                 cookiepolicy: 'single_host_origin',
                 scope: 'profile email'
             });
-            console.log(_this.loginElement.nativeElement);
             _this.googleLogin(_this.loginElement.nativeElement);
         });
     };
