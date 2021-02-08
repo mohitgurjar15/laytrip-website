@@ -9,7 +9,7 @@
         <span class="sec_text">Installments not available under 30 days before travel.</span>
         <a (click)="hideBelow30DayMinError()" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
       </div>
-
+ 
       <div class="section_description second_pop" *ngIf="showPartialAndFullPaymentMixValidation">
         <span class="sec_text">Your first booking is less than 30 days before travel. This booking and any additional bookings in this checkout will not be available in installments.</span>
         <a (click)="hidePartialAndFullPaymentMixError()" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>

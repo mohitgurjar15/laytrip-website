@@ -499,18 +499,25 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
     if (this.outBoundStops.length) {
       filterdFlights = filterdFlights.filter(item => {
-        return this.outBoundStops.includes(item.stop_count);
+
+        if(typeof item.inbound_stop_count!='undefined'){
+
+          return (this.outBoundStops.includes(item.stop_count) || this.outBoundStops.includes(item.inbound_stop_count));
+        }
+        else{
+          return this.outBoundStops.includes(item.stop_count);
+        }
 
       })
     }
 
-    if (this.inBoundStops.length) {
+    /* if (this.inBoundStops.length) {
       filterdFlights = filterdFlights.filter(item => {
 
         return this.inBoundStops.includes(item.inbound_stop_count);
 
       })
-    }
+    } */
 
     this.filterFlight.emit(filterdFlights);
   }
