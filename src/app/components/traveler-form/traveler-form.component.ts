@@ -66,13 +66,13 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false,adaptivePosition: true });
+    this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
 
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
     })
-    this.cartService.getCartTravelers.subscribe((travelers:any)=>{
-      this.travelers =travelers;
+    this.cartService.getCartTravelers.subscribe((travelers: any) => {
+      this.travelers = travelers;
     })
 
     //this.travelers = travelers;
@@ -88,10 +88,8 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
     }
 
-    console.log("this.cartItem.travelers",this.cartItem.travelers)
     for (let i = 0; i < this.cartItem.travelers.length; i++) {
       let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId)
-      console.log("Selected traveler",traveler)
       this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
       this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
@@ -103,7 +101,7 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
       this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
     }
-    this.cartService.setCartTravelers(this.travelers)
+    this.cartService.setCartTravelers(this.travelers);
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -122,13 +120,13 @@ export class TravelerFormComponent implements OnInit {
         adults: this.formBuilder.array([])
       })
     });
-    
+
     this.patch();
 
 
     this.travelerForm.valueChanges.subscribe(value => {
       if (typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number] !== 'undefined') {
-        console.log("dob", this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob)
+        // console.log("dob", this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob)
         if (this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status == 'VALID') {
 
           let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
@@ -150,7 +148,6 @@ export class TravelerFormComponent implements OnInit {
           }
         }
       }
-      console.log("In value changes")
       this.checkOutService.emitTravelersformData(this.travelerForm)
     })
 
@@ -175,7 +172,6 @@ export class TravelerFormComponent implements OnInit {
     })
     this.checkOutService.emitTravelersformData(this.travelerForm)
     this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
-    console.log("This.travelrs",this.travelers)
   }
 
 
@@ -186,12 +182,14 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patch() {
-    let control: any = <FormArray>this.travelerForm.get(`type${this.cartNumber}.adults`);
-    control.controls = [];
-    this.travelers[`type${this.cartNumber}`].adults.forEach((x, i) => {
-      control.push(this.patchValues(x))
-    })
-
+    for (let i = 0; i < Object.keys(this.travelers).length; i++) {
+      let control: any = <FormArray>this.travelerForm.get(`type${i}.adults`);
+      control.controls = [];
+      this.travelers[`type${i}`].adults.forEach((x, i) => {
+        control.push(this.patchValues(x))
+      })
+    }
+    console.log('this.travelerForm::::::::::::::', this.travelerForm);
   }
 
   patchValues(x) {
@@ -228,7 +226,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   submit(value) {
-    console.log("value", value)
+    // console.log("value", value)
   }
 
   typeOf(value) {
@@ -248,7 +246,6 @@ export class TravelerFormComponent implements OnInit {
   }
 
   selectTravelerNumber(event, traveler_number) {
-    console.log("traveler_number", traveler_number)
     this.traveler_number = traveler_number;
   }
 
