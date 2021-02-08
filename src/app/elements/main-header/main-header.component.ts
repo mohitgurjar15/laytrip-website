@@ -183,11 +183,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   redirectToPayment() {
     /* if (this.isLoggedIn && this.cartItemsCount > 0) {
     } */
-    this.router.navigate([`flight/payment/ZVZ4WEFNOW8ybVIwT0VX`]);
+    this.router.navigate([`cart/booking`]);
   }
 
   calculateInstalment(cartPrices){
-    console.log("cartPricescartPrices",cartPrices)
     let totalPrice=0;
     let checkinDate;
     if(cartPrices.length>0){

@@ -10,7 +10,7 @@ import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
 import { getUserDetails } from '../../../_helpers/jwt.helper';
 import { ToastrService } from 'ngx-toastr';
-import { GoogleLoginProvider } from './google.login-provider';
+declare const gapi: any;
 
 @Component({
   selector: 'app-social-login',
@@ -28,24 +28,27 @@ export class SocialLoginComponent implements OnInit {
   apple_loading: boolean = false;
   @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
   auth2: any;
-  
+
   constructor(
     private userService: UserService,
     public router: Router,
     public modalService: NgbModal,
     public location: Location,
     private authService: SocialAuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
 
-  ) { }
+  ) {
+  
+   }
 
   
-
   ngOnInit() {
-    // this.loadGoogleSdk();
-    this.loadFacebookSdk();
+    this.loadGoogleSdk();
+
+   this.loadFacebookSdk();
     // APPLE LOGIN RESPONSE 
     this.authService.authState.subscribe((userInfo: any) => {
+      console.log('heress')
       if (userInfo) {
         let objApple = getUserDetails(userInfo.authorization.id_token);
         let jsonData = {
@@ -75,40 +78,13 @@ export class SocialLoginComponent implements OnInit {
     });
   }
 
-  loadGoogleSdk() {
-    window['googleSDKLoaded'] = () => {
-      window['gapi'].load('auth2', () => {
-        this.auth2 = window['gapi'].auth2.init({
-          client_id: environment.google_client_id,
-          cookiepolicy: 'single_host_origin',
-          scope: 'profile email'
-        });
-        this.googleLogin();
-      });
-    }
 
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'google-jssdk'));
-
-  }
-
-
-  googleLogin() {
-    // this.loadGoogleSdk();
-    console.log(this.auth2)
-    console.log(this.auth2)
-    this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
+  public googleLogin(element) {
+    this.auth2.attachClickHandler(element, {},
       (googleUser) => {
-        this.google_loading = true;
 
         let profile = googleUser.getBasicProfile();
-
-        // YOUR CODE HERE
+        
         let jsonData = {
           "account_type": 1,
           "name": profile.getName(),
@@ -125,6 +101,7 @@ export class SocialLoginComponent implements OnInit {
             this.google_loading = false;
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
+            $('#sign_up_modal').modal('hide');
             this.router.url;
             document.getElementById('navbarNav').click();
           }
@@ -132,11 +109,25 @@ export class SocialLoginComponent implements OnInit {
           this.google_loading = false;
           this.socialError.emit(error.message);
         });
+
       }, (error) => {
         this.google_loading = false;
-        // this.socialError.emit('Authentication failed.');
-        // this.toastr.error("Something went wrong!", 'SignIn Error');
       });
+  }
+
+  ngAfterViewInit(){
+    this.loadGoogleSdk();
+  }
+
+  loadGoogleSdk(){
+    gapi.load('auth2', () => {
+      this.auth2 = gapi.auth2.init({
+        client_id: environment.google_client_id,
+        cookiepolicy: 'single_host_origin',
+        scope: 'profile email'
+      });
+      this.googleLogin(document.getElementById('googleBtn'));
+    });
   }
 
   loadFacebookSdk() {
@@ -208,12 +199,6 @@ export class SocialLoginComponent implements OnInit {
 
   loginWithApple(): void {
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
-  }
-
-  loginWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
-      console.log('here',data);
-    });
   }
 
 }

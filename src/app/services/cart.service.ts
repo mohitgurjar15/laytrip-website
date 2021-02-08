@@ -18,7 +18,7 @@ export class CartService {
   getSelectedCart = this.cartNumber.asObservable();
 
   private cartId = new BehaviorSubject(0)
-  getCardId = this.cartId.asObservable();
+  getCartId = this.cartId.asObservable();
 
   private cartPrices = new BehaviorSubject([])
   getCartPrice = this.cartPrices.asObservable();
@@ -28,6 +28,15 @@ export class CartService {
       adults : []
     },
     type1 : {
+      adults : []
+    },
+    type2 : {
+      adults : []
+    },
+    type3 : {
+      adults : []
+    },
+    type4 : {
       adults : []
     }
   });

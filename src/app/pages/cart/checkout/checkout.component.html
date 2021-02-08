@@ -33,23 +33,17 @@
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
                             <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
-                            <app-payment-mode *ngIf="carts.length" 
+                            <!--<app-payment-mode *ngIf="carts.length" 
                                  laycreditpoints="{{laycreditpoints}}"
                                 (selectInstalmentMode)="selectInstalmentMode($event)"
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
-                            </app-payment-mode>
+                            </app-payment-mode> -->
                             <app-price-summary  [priceSummary]="priceSummary" [cartPrices]="cartPrices"></app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
-                            <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button>
-                            <button (click)="saveAndSearch()" class="trans_btn">
-                                <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="Search icon"
-                                    class="pink_search" />
-                                <!-- <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="Search icon"
-                                    class="white_search" /> -->
-                                Save & Add More
-                            </button>
+                            <button [disabled]="!isValidData" (click)="handleSubmit()">Pay and Book</button>
+                            
                         </div>
                     </div>
                 </div>

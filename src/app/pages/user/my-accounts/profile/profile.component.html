@@ -24,32 +24,6 @@
 
                 </span>
             </div>
-            <!-- <div class="form_row">
-            <div class="form_field">
-                <label>{{'title' | translate}}</label>
-                <ul class="custom_listing">
-                    <li>
-                        <label class="custom_radio">{{'mr' | translate}}
-                            <input type="radio" checked="checked" value="mr"
-                                formControlName="title">
-                            <span class="checkmark"></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="custom_radio">{{'ms' | translate}}
-                            <input type="radio" value="ms" formControlName="title">
-                            <span class="checkmark"></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="custom_radio">{{'mrs'| translate}}
-                            <input type="radio" value="mrs" formControlName="title">
-                            <span class="checkmark"></span>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </div> -->
             <div class="form_row common_row">
                 <label>{{'first_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
@@ -57,10 +31,10 @@
                         formControlName="first_name" maxlength="25" tabindex="1" [readonly]="!isFormControlEnable">
                     <div *ngIf="(submitted || profileForm.controls.first_name.touched) && profileForm.controls.first_name.errors"
                         class="error">
-                        <span *ngIf="profileForm.controls.first_name.errors.required" class="error_field">
-                            {{'first_name_touched_validation' | translate}}</span>
-                        <span *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
-                            {{'first_name_string_validation' | translate}}</span>
+                        <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field">
+                            {{'first_name_touched_validation' | translate}}</small>
+                        <small *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
+                            {{'first_name_string_validation' | translate}}</small>
                     </div>
                 </div>
             </div>
@@ -96,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form_row common_row">
+            <div class="form_row common_row ar_field">
                 <label>Home Airport</label>
                 <div class="text_field">
                     <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="code"
@@ -104,36 +78,23 @@
                         formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"
                         loadingText=""  class="laytrip-input"
-                        placeholder="New York" [readonly]="!isFormControlEnable">
+                        placeholder="Select home airport " [readonly]="!isFormControlEnable">
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div [ngClass]="(item.parentId==0)?'parent':'child'">
                                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
                             </div>
                         </ng-template>
                         <ng-template ng-label-tmp let-item="item">
-                        {{item.city}}
-                    </ng-template>
-                </ng-select>
-                <span *ngIf="departureAirport?.code">{{ departureAirport?.code }}, {{ departureAirport?.country }}</span>
-                <span *ngIf="!departureAirport?.code"></span>
-<!--                 <input type="text" [readonly]="!isFormControlEnable"  placeholder="LAX" formControlName="home_airport" maxlength="25" tabindex="6">
- -->                <!-- <div *ngIf="(submitted || profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
-                    class="error">
-                    <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
-                        {{'last_name_touched_validation' | translate}}</small>
-                    <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field">
-                        {{'last_name_string_validation' | translate}}</small>
-                </div> -->
+                            {{item.city}}
+                        </ng-template>
+                    </ng-select>
+                    <span *ngIf="departureAirport?.code">{{ departureAirport?.code }}, {{ departureAirport?.country }}</span>
+                    <span *ngIf="!departureAirport?.code"></span>
                 </div>
             </div>
             <div class="form_row common_row">
                 <label>{{'phone_no' | translate}}<sup>*</sup></label>
-                <!--           
-                <div class="error" *ngIf="(submitted || (profileForm.controls.country_code.touched && profileForm.controls.phone_no.touched)) 
-                                && profileForm.hasError('phoneAndPhoneCodeError')">
-                    <small class="error_field">{{'phone_touched_validation' | translate}}</small>
-                </div>
-            -->
+                
                 <div class="text_field">
                     <span class="tel_span">
                         <input [readonly]="!isFormControlEnable" type="text" class="form-control" tabindex="14" placeholder="+00"
@@ -167,10 +128,6 @@
             <div class="form_row common_row">
                 <label>{{'gender_placeholder' |translate}}<sup>*</sup></label>
                 <div class="text_field">
-
-                    <!-- <ng-select formControlName="gender" [readonly]="!isFormControlEnable">
-                    <ng-option *ngFor="let gender of genders" [value]="gender.key">{{gender.name}}</ng-option>
-                 </ng-select>                  -->
                     <div class="gender_anchers">
                         <a [ngClass]="{'active': (is_type == 'M')}" class="hover-link"
                             (click)="selectGender($event,'M')">Male</a>
@@ -180,38 +137,7 @@
                             (click)="selectGender($event,'O')"  class="hover-link">Other</a>
                     </div>
                 </div>
-                <!-- <div class="select_gender">
-                <ul>
-                    <li> 
-                        <a class="hover-link" (click)="clickGender($event,'M')"
-                            [ngClass]="{'active_gender': is_type == 'M'}">
-                            <div class="gender_type">
-                                <img class="default-icon"
-                                    src="{{s3BucketUrl}}assets/images/icon/male.svg"
-                                    alt="male Icon">
-                                <img class="active-icon"
-                                    src="{{s3BucketUrl}}assets/images/icon/male-active.svg"
-                                    alt="male Icon">
-                            </div>
-                            <span>{{'male' | translate}}</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="hover-link" (click)="clickGender($event,'F')"
-                            [ngClass]="is_gender && is_type == 'F' ? 'active_gender' : ''">
-                            <div class="gender_type">
-                                <img class="default-icon"
-                                    src="{{s3BucketUrl}}assets/images/icon/female.svg"
-                                    alt="Female Icon">
-                                <img class="active-icon"
-                                    src="{{s3BucketUrl}}assets/images/icon/female-active.svg"
-                                    alt="Female Icon">
-                            </div>
-                            <span>{{'female' | translate}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </div> -->
+                
             </div>
             <div class="form_row common_row">
                 <label>{{'location_detail' | translate}}</label>
@@ -219,160 +145,7 @@
                     <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
                         id="" cols="15" rows="10" tabindex="12"></textarea>
                 </div>
-            </div>
-
-            <!-- <div class="form_row common_row">
-            <div class="field_inn">
-                <label>{{'language' | translate}}</label>
-                <div class="text_field custom-select">
-                    <ng-select class="ng-customClass" tabindex="7" seime lectOnTab="true"
-                        placeholder="{{'language_placeholder' | translate}}"
-                        formControlName="language_id">
-                        <ng-option *ngFor="let language of languages" value="{{language.id}}">
-                            {{language.name}}
-                        </ng-option>
-                    </ng-select>
-                </div>
-            </div>
-            <div class="field_inn">
-                <label>{{'currency' | translate}}</label>
-                <div class="text_field custom-select">
-                    <ng-select class="ng-customClass" tabindex="8" selectOnTab="true"
-                        placeholder="{{'currency_placeholder' | translate}}"
-                        formControlName="currency_id">
-                        <ng-option *ngFor="let currency of currencies" value="{{currency.id}}">
-                            {{currency.code}}
-                        </ng-option>
-                    </ng-select>
-                </div>
-            </div>
-        </div>
-        <div class="update_location_detail">
-            <div class="section_title">
-                <h4>{{'location_detail' | translate}}</h4>
-            </div>
-            <div class="detail_update">
-                <div class="form_row">
-                    <div class="field_bolck">
-                        <div class="field_inn">
-                            <label>{{'address_line_1' | translate}}</label>
-                            <div class="text_field">
-                                <input type="text" formControlName="address" maxlength="250"
-                                    tabindex="9"
-                                    placeholder="{{'address_line_1_placeholder' | translate}}">
-                            </div>
-                        </div>
-                        <div class="field_inn">
-                            <label>{{'address_line_2' | translate}}</label>
-                            <div class="text_field">
-                                <input type="text" formControlName="address2" maxlength="250"
-                                    tabindex="12"
-                                    placeholder="{{'address_line_2_placeholder' | translate}}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field_bolck">
-                        <div class="field_inn">
-                            <label>{{'country' | translate}}</label>
-                            <div class="text_field custom-select">
-                                <ng-select class="ng-customClass" [items]="countries"
-                                    bindLabel="name" tabindex="10" [selectOnTab]="true"
-                                    formControlName="country_id" selectOnTab="true"
-                                    placeholder="{{'country_placeholder' | translate}}"
-                                    (change)="getStates($event)">
-                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                        <span class="ng-value-label"><img class="img_country_code"
-                                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
-                                                width="20px" height="20px">
-                                            {{ item.name ? item.name : 'Select country' }} </span>
-                                        <span class="ng-value-icon right" (click)="clear(item)"
-                                            aria-hidden="true">×</span>
-                                    </ng-template>
-                                    <ng-template ng-option-tmp let-item="item">
-                                        <img class="img_country_code" [src]="item.flag" width="20px"
-                                            height="20px">
-                                        {{item.name}}
-                                    </ng-template>
-                                </ng-select>
-                            </div>
-                        </div>
-                        <div class="field_inn">
-                            <label>{{'city' | translate}}</label>
-                            <div class="text_field custom-select">
-                                <input type="text" formControlName="city_name" maxlength="250"
-                                    tabindex="13" placeholder="{{'city_placeholder' | translate}}">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field_bolck">
-                        <div class="field_inn">
-                            <label>{{'state' | translate}}</label>
-                            <div class="text_field custom-select">
-                                <ng-select class="ng-customClass" clearSearchOnAdd="true"
-                                    selectOnTab="true" tabindex="11" formControlName="state_id"
-                                    placeholder="{{'state_placeholder' | translate}}">
-                                    <ng-option *ngFor="let state of stateList" value="{{state.id}}">
-                                        {{state.name}}</ng-option>
-                                </ng-select>
-                            </div>
-                        </div>
-                        <div class="field_inn">
-                            <label>{{'zip_code' | translate}}</label>
-                            <div class="text_field">
-                                <input type="text" formControlName="zip_code" maxlength="6"
-                                    tabindex="14"
-                                    placeholder="{{'zip_code_placeholder' | translate}}"
-                                    (keypress)="commonFunctoin.validateNotAllowSpecial($event)">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="update_location_detail">
-            <div class="section_title">
-                <h4>{{'other_detail' | translate}}</h4>
-            </div>
-            <div class="detail_update">
-                <div class="form_row">
-                    <div class="field_bolck half">
-                        <div class="field_inn">
-                            <label>{{'passport_number' | translate}}</label>
-                            <div class="text_field">
-                                <input type="text" formControlName="passport_number" maxlength="40"
-                                    tabindex="15"
-                                    placeholder="{{'passport_number_placeholder' | translate}}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field_bolck half">
-                        <div class="field_inn">
-                            <label>{{'passport_expiry_date' | translate}}</label>
-                            <div class="text_field">
-                                <p-calendar class="account_datepicker"
-                                    inputStyleClass="custom_datpicker passport_expiry_cal birth_date"
-                                    inputId="basic" formControlName="passport_expiry"
-                                    [minDate]="dobMinDate" [readonlyInput]="true"
-                                    [yearNavigator]="true" [monthNavigator]="true"
-                                    yearRange="2020:2030" [defaultDate]="dobMinDate" tabindex="16"
-                                    dateFormat="M d, yy" panelStyleClass="calender-price-view"
-                                    placeholder="{{'passport_expiry_date_placeholder' | translate}}">
-                                </p-calendar>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        <div class="form_update_btn">
-            <button (click)="onSubmit()"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
-                {{'update' |
-                translate}}</button>
-        </div> -->
+            </div>            
         </div>
     </div>
 

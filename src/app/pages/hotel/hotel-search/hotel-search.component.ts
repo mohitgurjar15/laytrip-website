@@ -67,14 +67,14 @@ export class HotelSearchComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit() {
-    $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
-      function () {
-        $('.norm_btn').toggleClass("d-none");
-        $('.hover_btn').toggleClass("show");
-      }
-    );
-  }
+  // ngAfterViewInit() {
+  //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
+  //     function () {
+  //       $('.norm_btn').toggleClass("d-none");
+  //       $('.hover_btn').toggleClass("show");
+  //     }
+  //   );
+  // }
 
   getHotelSearchData(payload) {
     this.loading = true;

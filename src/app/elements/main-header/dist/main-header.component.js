@@ -10,6 +10,7 @@ exports.MainHeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
+var moment = require("moment");
 var MainHeaderComponent = /** @class */ (function () {
     function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, renderer, cd, cartService) {
         this.genericService = genericService;
@@ -29,6 +30,7 @@ var MainHeaderComponent = /** @class */ (function () {
         this.isCovidPage = true;
     }
     MainHeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.checkUser();
         this.loadJquery();
         //this.getUserLocationInfo();
@@ -38,6 +40,12 @@ var MainHeaderComponent = /** @class */ (function () {
                 this.getCartList();
             }
         }
+        this.cartService.getCartItems.subscribe(function (data) {
+            if (data.length > 0) {
+                console.log(data, "getCartItems.subscribe");
+                _this.calculateInstalment(data);
+            }
+        });
         this.countryCode = this.commonFunction.getUserCountry();
     };
     MainHeaderComponent.prototype.getCartList = function () {
@@ -47,12 +55,13 @@ var MainHeaderComponent = /** @class */ (function () {
             this.cartService.getCartList().subscribe(function (res) {
                 if (res) {
                     // SET CART ITEMS IN CART SERVICE
-                    _this.cartService.setCartItems(res.data);
-                    _this.cartItems = res.data;
-                    if (res.count) {
+                    var cartItems = res.data.map(function (item) { return { id: item.id, module_Info: item.moduleInfo[0] }; });
+                    _this.cartService.setCartItems(cartItems);
+                    if (cartItems) {
                         _this.cartItemsCount = res.count;
                         localStorage.setItem('$crt', _this.cartItemsCount);
                     }
+                    _this.calculateInstalment(cartItems);
                     _this.cd.detectChanges();
                 }
             }, function (error) {
@@ -147,6 +156,43 @@ var MainHeaderComponent = /** @class */ (function () {
         /* if (this.isLoggedIn && this.cartItemsCount > 0) {
         } */
         this.router.navigate(["flight/payment/ZVZ4WEFNOW8ybVIwT0VX"]);
+    };
+    MainHeaderComponent.prototype.calculateInstalment = function (cartPrices) {
+        var _this = this;
+        console.log("cartPricescartPrices", cartPrices);
+        var totalPrice = 0;
+        var checkinDate;
+        if (cartPrices.length > 0) {
+            checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+            for (var i = 0; i < cartPrices.length; i++) {
+                totalPrice += cartPrices[i].module_Info.selling_price;
+                if (i == 0) {
+                    continue;
+                }
+                if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
+                    checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+                }
+            }
+        }
+        this.totalAmount = totalPrice;
+        var instalmentRequest = {
+            instalment_type: "weekly",
+            checkin_date: checkinDate,
+            booking_date: moment().format("YYYY-MM-DD"),
+            amount: totalPrice,
+            additional_amount: 0,
+            selected_down_payment: 0
+        };
+        this.genericService.getInstalemnts(instalmentRequest).subscribe(function (res) {
+            if (res.instalment_available) {
+                _this.weeklyInstallmentAmount = res.instalment_date[1].instalment_amount;
+            }
+            else {
+                _this.weeklyInstallmentAmount = 0;
+            }
+        }, function (err) {
+            _this.weeklyInstallmentAmount = 0;
+        });
     };
     MainHeaderComponent = __decorate([
         core_1.Component({

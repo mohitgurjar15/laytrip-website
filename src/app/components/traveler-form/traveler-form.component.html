@@ -1,12 +1,12 @@
 <form [formGroup]="travelerForm" (ngSubmit)="submit(travelerForm.value)">
   <ng-container *ngFor="let travelerItem of travelers | keyvalue; let y = index;">
-    <div *ngIf="travelerItem.value.adults.length>0" [formGroupName]="travelerItem.key">
+    <div *ngIf="travelerItem.value.adults.length>0 && cartNumber==y" [formGroupName]="travelerItem.key">
       <div formArrayName="adults">
         <div id="accordion" class="accordion_bookings">
           <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;">
             <div class="card-header" (click)="selectTravelerNumber($event,x)">
               <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="false">
-                Booking Traveler {{x+1}}
+                Booking Traveler
               </a>
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"   data-parent="#accordion">

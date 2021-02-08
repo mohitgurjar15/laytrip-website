@@ -22,7 +22,7 @@ var UserModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 forms_1.FormsModule,
                 user_routing_module_1.UserRoutingModule,
-                ng_bootstrap_1.NgbModule
+                ng_bootstrap_1.NgbModule,
             ],
             declarations: []
         })

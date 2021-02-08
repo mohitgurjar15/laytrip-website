@@ -19,11 +19,11 @@ export interface CartItem {
 }
 
 @Component({
-  selector: 'app-flight-payment',
-  templateUrl: './flight-payment.component.html',
-  styleUrls: ['./flight-payment.component.scss']
+  selector: 'app-checkout',
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.scss']
 })
-export class FlightPaymentComponent implements OnInit {
+export class CheckoutComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   progressStep = { step1: true, step2: false, step3: false, step4: false };
@@ -33,14 +33,9 @@ export class FlightPaymentComponent implements OnInit {
   sellingPrice: number;
   flightSummary = [];
   instalmentMode = 'instalment';
-  instalmentType: string = 'weekly'
-  routeCode: string = '';
+  instalmentType: string = 'weekly';
   isLoggedIn: boolean = false;
-  showPartialPayemntOption: boolean = true;
-  redeemableLayPoints: number;
   priceData = [];
-  totalLaycreditPoints: number = 0;
-  isLayCreditLoading: boolean = false;
   priceSummary;
   carts = [];
   isValidData: boolean = false;
@@ -52,7 +47,6 @@ export class FlightPaymentComponent implements OnInit {
 
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private flightService: FlightService,
     private genericService: GenericService,
@@ -67,8 +61,6 @@ export class FlightPaymentComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
-
-    this.routeCode = this.route.snapshot.paramMap.get('rc');
     this.userInfo = getLoginUserInfo();
     if (Object.keys(this.userInfo).length > 0) {
       this.getTravelers();
@@ -109,12 +101,15 @@ export class FlightPaymentComponent implements OnInit {
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
+
+      this.checkOutService.getPriceSummary.subscribe(data=>{
+        this.priceSummary=data;
+      });
     },error=>{
       this.isCartEmpty =true;
       this.cartLoading = false;
     });
 
-    //console.log("==this.carts==",this.carts)
     this.cartService.getCartId.subscribe(cartId=>{
       if(cartId>0){
         this.deleteCart(cartId);
@@ -130,80 +125,11 @@ export class FlightPaymentComponent implements OnInit {
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
   }
-  // ngAfterViewInit() {
-  //   $(".trans_btn").hover(
-  //     function () {
-  //       $('.pink_search').toggleClass("d-none");
-  //       $('.white_search').toggleClass("show");
-  //     }
-  //   );
-  // }
-
-  totalLaycredit() {
-    this.isLayCreditLoading = true;
-    this.genericService.getAvailableLaycredit().subscribe((res: any) => {
-      this.isLayCreditLoading = false;
-      this.totalLaycreditPoints = res.total_available_points;
-      //console.log("this.totalLaycreditPoints////",this.totalLaycreditPoints)
-    }, (error => {
-      this.isLayCreditLoading = false;
-    }))
-  }
-
-  applyLaycredit(laycreditpoints) {
-    this.laycreditpoints = laycreditpoints;
-    this.isShowPaymentOption = true;
-    if (this.laycreditpoints >= this.sellingPrice) {
-      this.isShowPaymentOption = false;
-    }
-  }
-
-  getSellingPrice() {
-
-    let payLoad = {
-      departure_date: moment(this.flightSummary[0].departure_date, 'DD/MM/YYYY').format("YYYY-MM-DD"),
-      net_rate: this.flightSummary[0].net_rate
-    }
-    this.flightService.getSellingPrice(payLoad).subscribe((res: any) => {
-
-      this.priceData = res;
-      this.sellingPrice = this.priceData[0].selling_price;
-    }, (error) => {
-
-    })
-  }
-
-  selectInstalmentMode(instalmentMode) {
-    this.instalmentMode = instalmentMode;
-    this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false
-    sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
-  }
-
-  getInstalmentData(data) {
-
-    this.instalmentType = data.instalmentType;
-    //this.laycreditpoints = data.layCreditPoints;
-    this.priceSummary = data;
-    sessionStorage.setItem('__islt', btoa(JSON.stringify(data)))
-  }
 
 
-  ngDoCheck() {
-    let userToken = localStorage.getItem('_lay_sess');
-    this.userInfo = getLoginUserInfo();
-
-    if (userToken) {
-      this.isLoggedIn = true;
-    }
-  }
-
-  redeemableLayCredit(event) {
-    this.redeemableLayPoints = event;
-  }
 
   getTravelers() {
     this.travelerService.getTravelers().subscribe((res: any) => {
-      //this.travelers=res.data;
       this.checkOutService.setTravelers(res.data)
     })
   }
@@ -212,10 +138,6 @@ export class FlightPaymentComponent implements OnInit {
     this.genericService.getCountry().subscribe(res => {
       this.checkOutService.setCountries(res);
     })
-  }
-
-  handleSubmit() {
-    this.router.navigate(['/flight/checkout', this.routeCode]);
   }
 
   ngOnDestroy() {
@@ -265,27 +187,6 @@ export class FlightPaymentComponent implements OnInit {
     });
   }
 
-  async saveAndSearch(){
-    console.log(this.travelerForm,"this.travelerForm",this.isValidData)
-    if(this.isValidData){
-      for(let i=0; i < this.carts.length; i++){
-        let data= this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler=> { return { traveler_id : traveler.userId } })
-        let cartData={
-          cart_id   : this.carts[i].id,
-          travelers : travelers
-        }
-        console.log(cartData)
-        this.cartService.updateCart(cartData).subscribe(data=>{
-          if(i===this.carts.length-1){
-            this.router.navigate(['/'])
-          }
-        });
-      }
-    }
-    else{
-      this.toster.warning("Please enter valid data of traveler into cart","warning")
-    }
-  }
+  
 
 }

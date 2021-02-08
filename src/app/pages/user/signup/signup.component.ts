@@ -106,6 +106,7 @@ export class SignupComponent implements OnInit {
     $('#sign_up_modal').modal('hide');
     this.emailExist = false;
   }
+  
   socialError(error){
     this.apiError = error;
   } 

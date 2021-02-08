@@ -22,7 +22,8 @@ export class PaymentModeComponent implements OnInit {
     paymentType:string,
     instalments:[],
     remainingAmount:number,
-    totalAmount:number
+    totalAmount:number,
+    selectedDownPayment:number
   }>(); 
   @Input() laycreditpoints;
   @Input() customInstalmentData:any={};
@@ -141,7 +142,8 @@ export class PaymentModeComponent implements OnInit {
             instalments:this.instalments,
             remainingAmount:this.remainingAmount,
             totalAmount:this.sellingPrice,
-            paymentType:this.paymentType
+            paymentType:this.paymentType,
+            selectedDownPayment:this.selectedDownPaymentIndex
           })
         }
         else{
@@ -153,7 +155,8 @@ export class PaymentModeComponent implements OnInit {
             instalments:this.instalments,
             remainingAmount:this.sellingPrice,
             totalAmount:this.sellingPrice,
-            paymentType:this.paymentType
+            paymentType:this.paymentType,
+            selectedDownPayment:this.selectedDownPaymentIndex
           })
         }
 
@@ -199,7 +202,8 @@ export class PaymentModeComponent implements OnInit {
           instalments:this.instalments,
           remainingAmount:this.remainingAmount,
           totalAmount:this.sellingPrice,
-          paymentType:this.paymentType
+          paymentType:this.paymentType,
+          selectedDownPayment:this.selectedDownPaymentIndex
         })
     }
   }
@@ -277,7 +281,8 @@ export class PaymentModeComponent implements OnInit {
       instalments:this.instalments,
       remainingAmount:this.sellingPrice,
       totalAmount:this.sellingPrice,
-      paymentType:this.paymentType
+      paymentType:this.paymentType,
+      selectedDownPayment:this.selectedDownPaymentIndex
     })
   }
 
@@ -322,7 +327,8 @@ export class PaymentModeComponent implements OnInit {
         instalments:this.instalments,
         remainingAmount:this.remainingAmount,
         totalAmount:this.sellingPrice,
-        paymentType:this.paymentType
+        paymentType:this.paymentType,
+        selectedDownPayment:this.selectedDownPaymentIndex
       })
     }
   }

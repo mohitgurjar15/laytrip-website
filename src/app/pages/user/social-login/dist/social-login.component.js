@@ -11,7 +11,6 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var apple_provider_1 = require("./apple.provider");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
-var google_login_provider_1 = require("./google.login-provider");
 var SocialLoginComponent = /** @class */ (function () {
     function SocialLoginComponent(userService, router, modalService, location, authService, toastr) {
         this.userService = userService;
@@ -30,10 +29,11 @@ var SocialLoginComponent = /** @class */ (function () {
     }
     SocialLoginComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // this.loadGoogleSdk();
+        this.loadGoogleSdk();
         this.loadFacebookSdk();
         // APPLE LOGIN RESPONSE 
         this.authService.authState.subscribe(function (userInfo) {
+            console.log('heress');
             if (userInfo) {
                 var objApple = jwt_helper_1.getUserDetails(userInfo.authorization.id_token);
                 var jsonData = {
@@ -61,38 +61,10 @@ var SocialLoginComponent = /** @class */ (function () {
             }
         });
     };
-    SocialLoginComponent.prototype.loadGoogleSdk = function () {
+    SocialLoginComponent.prototype.googleLogin = function (element) {
         var _this = this;
-        window['googleSDKLoaded'] = function () {
-            window['gapi'].load('auth2', function () {
-                _this.auth2 = window['gapi'].auth2.init({
-                    client_id: environment_1.environment.google_client_id,
-                    cookiepolicy: 'single_host_origin',
-                    scope: 'profile email'
-                });
-                _this.googleLogin();
-            });
-        };
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'google-jssdk'));
-    };
-    SocialLoginComponent.prototype.googleLogin = function () {
-        var _this = this;
-        // this.loadGoogleSdk();
-        console.log(this.auth2);
-        console.log(this.auth2);
-        this.auth2.attachClickHandler(this.loginElement.nativeElement, {}, function (googleUser) {
-            _this.google_loading = true;
+        this.auth2.attachClickHandler(element, {}, function (googleUser) {
             var profile = googleUser.getBasicProfile();
-            // YOUR CODE HERE
             var jsonData = {
                 "account_type": 1,
                 "name": profile.getName(),
@@ -109,6 +81,7 @@ var SocialLoginComponent = /** @class */ (function () {
                     _this.google_loading = false;
                     localStorage.setItem("_lay_sess", data.user_details.access_token);
                     $('#sign_in_modal').modal('hide');
+                    $('#sign_up_modal').modal('hide');
                     _this.router.url;
                     document.getElementById('navbarNav').click();
                 }
@@ -118,8 +91,20 @@ var SocialLoginComponent = /** @class */ (function () {
             });
         }, function (error) {
             _this.google_loading = false;
-            // this.socialError.emit('Authentication failed.');
-            // this.toastr.error("Something went wrong!", 'SignIn Error');
+        });
+    };
+    SocialLoginComponent.prototype.ngAfterViewInit = function () {
+        this.loadGoogleSdk();
+    };
+    SocialLoginComponent.prototype.loadGoogleSdk = function () {
+        var _this = this;
+        gapi.load('auth2', function () {
+            _this.auth2 = gapi.auth2.init({
+                client_id: environment_1.environment.google_client_id,
+                cookiepolicy: 'single_host_origin',
+                scope: 'profile email'
+            });
+            _this.googleLogin(document.getElementById('googleBtn'));
         });
     };
     SocialLoginComponent.prototype.loadFacebookSdk = function () {
@@ -190,11 +175,6 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.loginWithApple = function () {
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
-    };
-    SocialLoginComponent.prototype.loginWithGoogle = function () {
-        this.authService.signIn(google_login_provider_1.GoogleLoginProvider.PROVIDER_ID).then(function (data) {
-            console.log('here', data);
-        });
     };
     __decorate([
         core_1.Output()
