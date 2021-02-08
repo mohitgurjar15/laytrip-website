@@ -258,9 +258,9 @@
                       formControlName="phone_no">
                 </span>
             
-                <div class="error" *ngIf="(submitted || travellerForm.controls.country_code.touched || travellerForm.controls.phone_no.touched) && travellerForm.controls.phone_no.errors">
+                <div class="error" *ngIf="(submitted || travellerForm.controls.country_code.touched || travellerForm.controls.phone_no.touched) && (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors)">
                         <small *ngIf="travellerForm.hasError('phoneAndPhoneCodeError')" class="error_field">Please enter phone number</small>
-                        <small *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && travellerForm.controls.phone_no.errors && travellerForm.controls.phone_no.errors.minlength"  class="error_field">Phone number should be minimum 10</small>
+                        <small *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && (travellerForm.controls.phone_no.errors.minlength)"  class="error_field">Phone number should be minimum 10</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult">
@@ -303,11 +303,11 @@
                 </div>
                 
             </div>
-            <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult"> 
+            <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult || isChild"> 
                 <label for="">Passport number</label>
                 <input tabindex="28" type="text" class="form-control" placeholder="Passport number" formControlName="passport_number">
             </div>
-            <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account"  *ngIf="isAdult">
+            <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account"  *ngIf="isAdult || isChild">
                 <label for="">Passport expiry date</label>
                 <p-calendar tabindex="29" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="passport_expiry" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
