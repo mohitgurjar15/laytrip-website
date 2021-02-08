@@ -1,13 +1,27 @@
-<div class="cartempty_main_wrapper">
-    <div class="inner_wrppar">
-        <div class="cart_img_wrpper">
-            <img src="{{s3BucketUrl}}assets/images/empty_cart_big.svg" alt="empty cart image">
-        </div>
-        <div class="cart_msg">
-            Oops! <br> Your Cart is Empty
-        </div>
-        <div class="cta_btn_wrps">
-            <button [routerLink]="['/']">Search Bookings</button>
+<section class="block_contact_us_main modal fade comman_modal show" id="cart_modal"  data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog">
+        
+        <div class="modal-content">
+            <div class="modal_title">
+                <button type="button" class="close" data-dismiss="modal">
+                    <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                </button>
+            </div>
+            <div class="cart_modal_wrp">
+                <div class="cartempty_main_wrapper">
+                    <div class="inner_wrppar">
+                        <div class="cart_img_wrpper">
+                            <img src="{{s3BucketUrl}}assets/images/empty_cart_big.svg" alt="empty cart image">
+                        </div>
+                        <div class="cart_msg">
+                            Oops! <br> Your Cart is Empty
+                        </div>
+                        <div class="cta_btn_wrps">
+                            <button [routerLink]="['/']">Search Bookings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section> 

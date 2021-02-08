@@ -2,72 +2,79 @@
 </app-laytrip-loader>
 <div class="page_topbanner">
     <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="Banner Image">
-  </div>
-  <div class="listing_main_box">
-<div class="search_tab_listing_wrapper">
-    <div class="container">
-        <div class="searchbar_box_common">
-            <app-flight-search-widget [calenderPrices]="calenderPrices"></app-flight-search-widget>
+</div>
+<div class="listing_main_box">
+    <div class="search_tab_listing_wrapper">
+        <div class="container">
+            <div class="searchbar_box_common">
+                <div class="section_description">
+                    <span class="sec_text">5 item Cart maximum, please Checkout and start another Cart if you require more than 5.</span>
+                    <a href="javascript:void(0);"><img
+                            src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                </div>
+                <app-flight-search-widget [calenderPrices]="calenderPrices"></app-flight-search-widget>
+            </div>
         </div>
     </div>
-</div>
 
-<app-flight-loader *ngIf="loading"></app-flight-loader>
-<!-- <app-popup-loader *ngIf="loading"></app-popup-loader> -->
+    <app-flight-loader *ngIf="loading"></app-flight-loader>
+    <!-- <app-popup-loader *ngIf="loading"></app-popup-loader> -->
 
-<app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
-<app-flight-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-flight-error>
+    <app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
+    <app-flight-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-flight-error>
 
-<section class="search_result flight" *ngIf="!loading && !isNotFound && errorMessage==''">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 left_m">
-                <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails"></app-sort-flight>
-                <div class="filter_saidbar">
-                    <div class="filter_by ">
-                        <!-- <div class="block_inn">
+    <section class="search_result flight" *ngIf="!loading && !isNotFound && errorMessage==''">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 left_m">
+                    <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails">
+                    </app-sort-flight>
+                    <div class="filter_saidbar">
+                        <div class="filter_by ">
+                            <!-- <div class="block_inn">
                             <h4>{{'filter_by' | translate}}</h4>
                             <a class="anchor_link" (click)="resetFilter()">{{'reset' | translate}}</a>
                         </div> -->
-                        <app-filter-flight [filterFlightDetails]="filterFlightDetails"
-                            (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}></app-filter-flight>
-                    </div>
-                    <!-- For responsive -->
-                    <div class="filter_responsive flight" id="responsive_filter">
-                        <div class="btn_filter">
-                            <a href="javascript:void(0)" class="responsive_filter_btn">Filter by</a>
+                            <app-filter-flight [filterFlightDetails]="filterFlightDetails"
+                                (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}>
+                            </app-filter-flight>
                         </div>
-                    </div>
-
-                    <div id="responsive_filter_show" class="responsive_filter_show"
-                        *ngIf="!loading && !isNotFound && errorMessage==''">
-                        <div class="filter_popup">
-                            <div class="filter_head_popup">
-                                <div class="filter_close">
-                                    <a href="javascript:void(0)">
-                                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="">
-                                    </a>
-                                </div>
+                        <!-- For responsive -->
+                        <div class="filter_responsive flight" id="responsive_filter">
+                            <div class="btn_filter">
+                                <a href="javascript:void(0)" class="responsive_filter_btn">Filter by</a>
                             </div>
-                            <div class="filter_cnt">
-                                <div class="filter_saidbar">
-                                    <div class="filter_by">
-                                        <app-filter-flight [filterFlightDetails]="filterFlightDetails"
-                                            (filterFlight)="filterFlight($event)"></app-filter-flight>
+                        </div>
+
+                        <div id="responsive_filter_show" class="responsive_filter_show"
+                            *ngIf="!loading && !isNotFound && errorMessage==''">
+                            <div class="filter_popup">
+                                <div class="filter_head_popup">
+                                    <div class="filter_close">
+                                        <a href="javascript:void(0)">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="filter_cnt">
+                                    <div class="filter_saidbar">
+                                        <div class="filter_by">
+                                            <app-filter-flight [filterFlightDetails]="filterFlightDetails"
+                                                (filterFlight)="filterFlight($event)"></app-filter-flight>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-9">
-                <app-flight-price-slider [dates]="dates" [flexibleLoading]="flexibleLoading">
-                </app-flight-price-slider>
-                <app-flight-item-wrapper [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)">
-                </app-flight-item-wrapper>
+                <div class="col-lg-9">
+                    <app-flight-price-slider [dates]="dates" [flexibleLoading]="flexibleLoading">
+                    </app-flight-price-slider>
+                    <app-flight-item-wrapper [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)">
+                    </app-flight-item-wrapper>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </div>
