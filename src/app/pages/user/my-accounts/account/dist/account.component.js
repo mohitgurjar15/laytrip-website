@@ -63,6 +63,7 @@ var AccountComponent = /** @class */ (function () {
             _this.modalService.dismissAll();
             _this.loading = false;
             _this.toastrService.success(data.message, 'Deleted Account Successfully');
+            jwt_helper_1.redirectToLogin();
         }, function (error) {
             _this.modalService.dismissAll();
             _this.loading = false;

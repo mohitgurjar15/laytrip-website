@@ -106,7 +106,6 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.calenderPrices.length == 0) {
       this.isCalenderPriceLoading = false;

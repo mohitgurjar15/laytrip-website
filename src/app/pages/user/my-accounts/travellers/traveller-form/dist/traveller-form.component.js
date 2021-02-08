@@ -77,12 +77,22 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.setTravelerForm = function () {
         this.traveller = this.travelerInfo;
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
-        if (moment(this.travelerInfo.dob).format('YYYY-MM-DD') < adult12YrPastDate) {
+        var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
+        if (travellerDob < adult12YrPastDate) {
             this.isAdult = true;
-            this.travellerForm.setErrors({ 'phoneAndPhoneCodeError': true });
+            this.isChild = false;
+            var phoneControl = this.travellerForm.get('phone_no');
+            phoneControl.setValidators([forms_1.Validators.required]);
+            phoneControl.updateValueAndValidity();
+        }
+        else if (travellerDob < child2YrPastDate) {
+            this.isAdult = false;
+            this.isChild = true;
+            this.travellerForm.setErrors(null);
         }
         else {
-            this.isAdult = false;
+            this.isAdult = this.isChild = false;
             this.travellerForm.setErrors(null);
         }
         this.travellerForm.patchValue({
@@ -147,7 +157,6 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.travellerId) {
             this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
         }
-        console.log(this.travellerForm);
         if (this.travellerForm.invalid) {
             this.submitted = true;
             this.loadingValue.emit(false);
@@ -244,19 +253,27 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.selectDob = function (event) {
         var selectedDate = moment(event).format('YYYY-MM-DD');
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
         var emailControl = this.travellerForm.get('email');
         var phoneControl = this.travellerForm.get('phone_no');
         var countryControl = this.travellerForm.get('country_code');
         if (selectedDate < adult12YrPastDate) {
             this.isAdult = true;
+            this.isChild = false;
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators([forms_1.Validators.required, forms_1.Validators.minLength(10)]);
             countryControl.setValidators([forms_1.Validators.required]);
-            // this.travellerForm.setErrors({'phoneAndPhoneCodeError':true});
-            console.log('here');
+        }
+        else if (selectedDate < child2YrPastDate) {
+            this.isAdult = false;
+            this.isChild = true;
+            this.travellerForm.setValidators(null);
+            emailControl.setValidators(null);
+            phoneControl.setValidators(null);
+            countryControl.setValidators(null);
         }
         else {
-            this.isAdult = false;
+            this.isAdult = this.isChild = false;
             this.travellerForm.setValidators(null);
             emailControl.setValidators(null);
             phoneControl.setValidators(null);

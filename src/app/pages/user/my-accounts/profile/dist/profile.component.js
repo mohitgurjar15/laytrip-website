@@ -190,7 +190,6 @@ var ProfileComponent = /** @class */ (function () {
         };
         if (!this.imageFileError) {
             this.loadingValue.emit(true);
-            console.log(this.loadingValue);
             var formdata = new FormData();
             var imgfile = '';
             if (this.imageFile) {
@@ -206,7 +205,6 @@ var ProfileComponent = /** @class */ (function () {
                     _this.submitted = false;
                     _this.toastr.error(error.error.message, 'Profile Error');
                 });
-                // this.loadingValue.emit(false);  
             }
         }
     };
@@ -221,7 +219,8 @@ var ProfileComponent = /** @class */ (function () {
             if (typeof _this.location != 'undefined') {
                 countryName = _this.location.country.id;
             }
-            _this.data = [res.airportInfo];
+            _this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
+            console.log(_this.data);
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -239,7 +238,6 @@ var ProfileComponent = /** @class */ (function () {
                 home_airport: res.airportInfo.code ? res.airportInfo.code : null,
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
-                // profile_pic: res.profilePic, 
                 passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
                 passport_number: res.passportNumber
             });
@@ -258,6 +256,7 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = true;
         this.loadingValue.emit(true);
+        console.log(this.profileForm);
         if (this.profileForm.invalid) {
             this.submitted = true;
             this.loadingValue.emit(false);

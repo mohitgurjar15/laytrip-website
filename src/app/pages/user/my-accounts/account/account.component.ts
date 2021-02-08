@@ -67,6 +67,7 @@ export class AccountComponent implements OnInit {
       this.modalService.dismissAll();
       this.loading = false;
       this.toastrService.success(data.message,'Deleted Account Successfully')
+      redirectToLogin();
     }, (error: HttpErrorResponse) => {
       this.modalService.dismissAll();
       this.loading = false;

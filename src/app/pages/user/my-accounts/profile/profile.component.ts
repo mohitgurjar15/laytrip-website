@@ -210,9 +210,7 @@ export class ProfileComponent implements OnInit {
     }
     if(!this.imageFileError){
       this.loadingValue.emit(true);   
-      console.log(this.loadingValue)
-      let formdata = new FormData();
-    
+      let formdata = new FormData();    
       let imgfile = '';
       if(this.imageFile){
         imgfile = this.imageFile;
@@ -227,7 +225,6 @@ export class ProfileComponent implements OnInit {
           this.submitted = false;
           this.toastr.error(error.error.message, 'Profile Error');
         });
-        // this.loadingValue.emit(false);  
       }
     }
   }
@@ -242,7 +239,8 @@ export class ProfileComponent implements OnInit {
       if(typeof this.location != 'undefined'){
         countryName = this.location.country.id;
       }
-      this.data = [res.airportInfo];      
+      this.data = Object.keys(res.airportInfo).length > 0 ?  [res.airportInfo] : [];      
+      console.log(this.data)
       this.profileForm.patchValue({      
           first_name: res.firstName,
           last_name: res.lastName,
@@ -260,7 +258,6 @@ export class ProfileComponent implements OnInit {
           home_airport  : res.airportInfo.code ? res.airportInfo.code : null,  
           language_id : res.preferredLanguage.name,     
           currency_id : res.preferredCurrency.code,     
-          // profile_pic: res.profilePic, 
           passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '', 
           passport_number: res.passportNumber  
       });
@@ -279,6 +276,7 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.loadingValue.emit(true);   
+    console.log(this.profileForm)
     if (this.profileForm.invalid) {
       this.submitted = true;      
       this.loadingValue.emit(false);   
