@@ -35,7 +35,6 @@ export class PriceSummaryComponent implements OnInit {
           if(this.priceSummary.instalments.instalment_date[1].instalment_amount!=this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount){
             this.installmentVartion = this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount-this.priceSummary.instalments.instalment_date[1].instalment_amount;
           }
-          console.log(this.installmentVartion,"this.instllamntVartion")
        }
       }
     }

@@ -176,7 +176,6 @@ export class BookingComponent implements OnInit {
     this.instalmentType = data.instalmentType;
     //this.laycreditpoints = data.layCreditPoints;
     this.priceSummary = data;
-    console.log("this.priceSummary",this.priceSummary)
     this.checkOutService.setPriceSummary(this.priceSummary)
     sessionStorage.setItem('__islt', btoa(JSON.stringify(data)))
   }

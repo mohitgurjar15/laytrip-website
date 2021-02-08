@@ -143,7 +143,6 @@ export class TravelerFormComponent implements OnInit {
             //Add
             this.travelerService.addAdult(data).subscribe((traveler: any) => {
               this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].userId = traveler.userId;
-              console.log("New Traveler=>>>", this.travelers)
               this.checkOutService.setTravelers([...this.myTravelers, traveler])
             }, error => {
 
@@ -151,6 +150,7 @@ export class TravelerFormComponent implements OnInit {
           }
         }
       }
+      console.log("In value changes")
       this.checkOutService.emitTravelersformData(this.travelerForm)
     })
 
@@ -161,7 +161,6 @@ export class TravelerFormComponent implements OnInit {
 
     this.checkOutService.getTraveler.subscribe((traveler: any) => {
       if (Object.keys(traveler).length > 0) {
-        console.log("this.travelers",this.travelers,this.cartNumber,traveler)
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name = traveler.firstName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name = traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email = traveler.email;
@@ -174,19 +173,11 @@ export class TravelerFormComponent implements OnInit {
         this.patch()
       }
     })
-
+    this.checkOutService.emitTravelersformData(this.travelerForm)
     this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
     console.log("This.travelrs",this.travelers)
   }
 
-  changeDateOfBirth(date) {
-    // console.log(date);
-    if (this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status == 'VALID') {
-      console.log('this.travelerForm:::', this.travelerForm);
-    } else {
-      console.log('this.travelerForm:::', this.travelerForm);
-    }
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.checkOutService.getCountries.subscribe(res => {
@@ -237,7 +228,6 @@ export class TravelerFormComponent implements OnInit {
   }
 
   submit(value) {
-    //console.log(this.travelerForm.get('type.adults')['controls']);
     console.log("value", value)
   }
 
