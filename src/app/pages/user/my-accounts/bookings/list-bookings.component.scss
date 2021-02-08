@@ -91,11 +91,17 @@
             justify-content: flex-end;
             align-items: center;
             input{
-                border-radius: 25px;
-                border: 1px solid $text-grey;
+                border-radius: 18px;
+                border: 1px solid $box-border-color;
                 font-size: 14px;
-                color: $text-grey;
+                color: $grayed_border;
                 font-weight: 400;
+                height: 35px;
+                padding-left: 40px;
+                background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_gray.svg');
+                background-position: 10px 8px;
+                background-size: 17px;
+                background-repeat: no-repeat;
             }
         }
         h3{
@@ -143,12 +149,6 @@
                                     transition: 0.3s;
                                     right: 0;
                                     border: none;
-                                    top: 5px;
-                                    @include tab-view{
-                                        position: absolute;
-                                        right: 0;
-                                        height: 12px;
-                                    }
                                 }
                             }
                             &[aria-expanded="false"]{
@@ -163,12 +163,6 @@
                                     transition: 0.3s;
                                     right: 0;
                                     border: none;
-                                    top: 5px;
-                                    @include tab-view{
-                                        position: absolute;
-                                        right: 0;
-                                        height: 12px;
-                                    }
                                 }
                             }
                             .header_image{
@@ -272,6 +266,15 @@
                                     font-weight: 400;
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            #accordion_completed{
+                .card{
+                    .card-header{
+                        a{
+                            align-items: center;
                         }
                     }
                 }
