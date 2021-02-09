@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit, AfterViewInit {
+export class CartComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   selectedCart: number = 0;
@@ -19,20 +19,15 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.cartService.getCartDeletedItem.subscribe(index => {
-      console.log("ondexxxx", index)
+      // console.log("ondexxxx", index)
       if (index > 0) {
-        console.log(this.carts, "---------------", index)
+        // console.log(this.carts, "---------------", index)
         this.selectedCart = index - 1;
         // this.carts = [...this.carts];
         // this.carts = Object.assign([], this.carts);
-        console.log(this.carts);
         // this.cd.detectChanges();
       }
     })
-  }
-
-  ngAfterViewInit(): void {
-    console.log(this.carts);
   }
 
   ngOnChanges(changes: SimpleChanges) {
