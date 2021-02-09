@@ -23,6 +23,9 @@ export class CartService {
   private cartPrices = new BehaviorSubject([])
   getCartPrice = this.cartPrices.asObservable();
 
+  private cartDeletedItem = new BehaviorSubject(-1)
+  getCartDeletedItem = this.cartDeletedItem.asObservable();
+
   private cartTravelers = new BehaviorSubject({
     type0 : {
       adults : []
@@ -94,8 +97,8 @@ export class CartService {
     return throwError(errorMessage);
   }
 
-  setCardNumber(cartNumber){
-    this.cartNumber.next(cartNumber)
+  setCartNumber(cartNumber){
+    this.cartNumber.next(cartNumber);
   }
 
   setCardId(cartId){
@@ -112,5 +115,9 @@ export class CartService {
 
   setCartPrices(cartPrices){
     this.cartPrices.next(cartPrices)
+  }
+
+  setDeletedCartItem(cartDeletedItem){
+    this.cartDeletedItem.next(cartDeletedItem);
   }
 }

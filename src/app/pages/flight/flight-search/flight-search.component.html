@@ -27,8 +27,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 left_m">
-                    <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails">
-                    </app-sort-flight>
                     <div class="filter_saidbar">
                         <div class="filter_by ">
                             <!-- <div class="block_inn">
@@ -67,6 +65,8 @@
                             </div>
                         </div>
                     </div>
+                    <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails">
+                    </app-sort-flight>
                 </div>
                 <div class="col-lg-9">
                     <app-flight-price-slider [dates]="dates" [flexibleLoading]="flexibleLoading">

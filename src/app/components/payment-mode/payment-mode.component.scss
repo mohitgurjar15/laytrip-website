@@ -73,10 +73,10 @@ h3{
   }
   .btn_accrodion{
     background-color: $background-white;
-    color: $text-grey;
+    color: $box-border-color;
     font-size: 12px;
-    border: 1px solid $background-grey;
-    border-radius: 15px;
+    border: 1px solid $box-border-color;
+    border-radius: 10px;
     flex: 1;
     height: 108px;
     margin-right: 20px;
@@ -92,13 +92,14 @@ h3{
     }
   }
   h3{
-    color: $text-grey;
+    color: $mid_gray_bg;
     font-size: 11px;
     margin-top: 35px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    font-weight: 400;
     @include tab-view{
-      font-size: 18px;
-  }
+      font-size: 12px;
+    }
   }
   .flex_center_wrapper{
     display: flex;
@@ -108,10 +109,10 @@ h3{
   .inner_accordion{
     .btn_accrodion{
       background-color: $background-white;
-      color: $text-black;
+      color: $grayed_border;
       font-size: 16px;
       border: 1px solid $background-grey;
-      border-radius: 15px;
+      border-radius: 10px;
       flex: 1;
       height: 61px;
       width: 104px;
@@ -129,11 +130,14 @@ h3{
         margin-right: 0;
       }
       &.current_active_btn{
-        color: $blue-text;
-        border: 1px solid $blue-text;
+        color: $blue-text-one;
+        border: 1px solid $blue-text-one; 
+        span{
+          color: $blue-text-one;
+        }
       }
       span{
-        color: $pink;
+        color: $grayed_border;
         font-size: 11px;
         @include tab-view{
           font-size: 12px;

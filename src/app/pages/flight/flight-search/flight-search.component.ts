@@ -49,7 +49,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     window.scroll(0, 0);
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
-    this.renderer.addClass(document.body, 'bg_color');
+    this.renderer.addClass(document.body, 'cms-bgColor');
     let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
@@ -239,7 +239,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
-    this.renderer.removeClass(document.body, 'bg_color');
+    this.renderer.removeClass(document.body, 'cms-bgColor');
   }
 
   sortFlight(event) {

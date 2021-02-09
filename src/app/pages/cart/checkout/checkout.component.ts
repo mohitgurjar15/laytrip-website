@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
-import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
-import { FlightService } from '../../../services/flight.service';
-import * as moment from 'moment';
 import { GenericService } from '../../../services/generic.service';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
-import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
+import { CookieService } from 'ngx-cookie';
 
 export interface CartItem {
 
@@ -26,7 +23,7 @@ export interface CartItem {
 export class CheckoutComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  progressStep = { step1: true, step2: false, step3: false, step4: false };
+  progressStep = { step1: false, step2: true, step3: false, step4: false };
   userInfo;
   isShowPaymentOption: boolean = true;
   laycreditpoints: number = 0;
@@ -44,16 +41,14 @@ export class CheckoutComponent implements OnInit {
   isCartEmpty:boolean=false;
   cartPrices=[];
   travelerForm:FormGroup;
-
+  cardToken:string='';
 
   constructor(
-    private router: Router,
-    private flightService: FlightService,
     private genericService: GenericService,
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
     private cartService: CartService,
-    private toster:ToastrService
+    private cookieService:CookieService
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -118,12 +113,18 @@ export class CheckoutComponent implements OnInit {
     })
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
-      console.log("travelerFrom",travelerFrom,travelerFrom.status)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
       this.travelerForm= travelerFrom;
     })
 
-    sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
+    try{
+
+      this.cardToken = this.cookieService.get('__cc')
+    }
+    catch(e){
+      this.cardToken = '';
+    }
+
   }
 
 
