@@ -122,7 +122,7 @@ export class ProfileComponent implements OnInit {
     if(!fileSizeValidator(event.target.files[0])){
         this.imageFileError = true;
         this.imageErrorMsg = 'Please select file up to 2mb size';
-        this.toastr.error(this.imageErrorMsg, 'Profile Error');
+        // this.toastr.error(this.imageErrorMsg, 'Profile Error');
         return;
     }
     //file render
@@ -132,6 +132,7 @@ export class ProfileComponent implements OnInit {
       this.image = reader.result;
     }
     if(!this.imageFileError){
+      this.imageFileError = false;
       this.loadingValue.emit(true);   
       let formdata = new FormData();    
       let imgfile = '';
