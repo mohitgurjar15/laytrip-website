@@ -43,15 +43,15 @@
                                 Billing Address
                             </div>
                             <div class="card_texter">
-                                Victor Pacheco <span> Via della Libertà #19 Milano, 33098 Italia 3478691146</span>
+                                {{ card.cardHolderName }} <span> {{userInfo?.address}}</span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-2 mb-sm-10">
                             <div class="card_headbar">
                                 Expires
                             </div>
-                            <div class="card_texter">
-                                09/2023
+                            <div class="card_texter" *ngIf="card.cardMetaData!=null">
+                                {{ card.cardMetaData?.month}}/{{ card.cardMetaData?.year}}
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-2 mb-sm-10">
