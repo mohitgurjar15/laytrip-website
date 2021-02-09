@@ -19,13 +19,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.getCartDeletedItem.subscribe(index => {
-      // console.log("ondexxxx", index)
       if (index > 0) {
-        // console.log(this.carts, "---------------", index)
         this.selectedCart = index - 1;
-        // this.carts = [...this.carts];
-        // this.carts = Object.assign([], this.carts);
-        // this.cd.detectChanges();
       }
     })
   }
