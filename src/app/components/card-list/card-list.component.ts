@@ -39,7 +39,6 @@ export class CardListComponent implements OnInit {
 
     this.userService.getProfile().subscribe(res=>{
       this.userInfo =res;
-      console.log("this.userInfo",this.userInfo)
     })
   }
 
