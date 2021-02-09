@@ -3,7 +3,7 @@
         
         <div class="modal-content">
             <div class="modal_title">
-                <button type="button" class="close" data-dismiss="modal">
+                <button type="button" class="close" (click)="redirectToHome()" >
                     <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                 </button>
             </div>
@@ -17,7 +17,7 @@
                             Oops! <br> Your Cart is Empty
                         </div>
                         <div class="cta_btn_wrps">
-                            <button [routerLink]="['/']">Search Bookings</button>
+                            <button (click)="redirectToHome()">Search Bookings</button>
                         </div>
                     </div>
                 </div>

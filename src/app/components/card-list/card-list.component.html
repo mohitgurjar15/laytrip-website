@@ -16,8 +16,8 @@
 
 <div id="card-list">
     <div id="card_list_accodrio" class="accordion_cardss anchor-tag" *ngFor="let card of cards; let blockIndex = index;"
-        (click)="selectCard(blockIndex, card.cardToken)">
-        <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': selectedCard[blockIndex] === true}">
+        (click)="selectCard(card.cardToken)">
+        <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': cardToken === card.cardToken}">
             <div class="card-header">
                 <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="false"
                     aria-controls="collapse11">

@@ -95,6 +95,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.updateProfile = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
     };
+    UserService.prototype.updateProfileImage = function (data) {
+        return this.http.put(this.apiURL + 'v1/auth/profile/picture', data, this.commonFunction.setHeaders());
+    };
     UserService.prototype.getProfile = function () {
         return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
     };

@@ -33,6 +33,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
 
   fullPageLoading: any = false;
+  isCartFull:boolean=false;
 
   constructor(
     private route: ActivatedRoute,
@@ -339,5 +340,13 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
+  }
+
+  maxCartValidation(data){
+    this.isCartFull=data;
+  }
+
+  hideMaxCartValidation(){
+    this.isCartFull=false;
   }
 }

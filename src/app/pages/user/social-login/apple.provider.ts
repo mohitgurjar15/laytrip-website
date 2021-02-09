@@ -1,4 +1,5 @@
 import { BaseLoginProvider, SocialUser } from 'angularx-social-login';
+import { environment } from '../../../../environments/environment';
 
 declare let AppleID: any;
 
@@ -23,7 +24,7 @@ export class AppleLoginProvider extends BaseLoginProvider {
                     AppleID.auth.init({
                         clientId: 'com.laytrip.laytrips',
                         scope: 'name email',
-                        redirectURI: 'https://staging.laytrip.com/',
+                        redirectURI: environment.siteUrl,
                         state: '[ANYTHING]', // used to prevent CSFR
                         usePopup: true,
                     });

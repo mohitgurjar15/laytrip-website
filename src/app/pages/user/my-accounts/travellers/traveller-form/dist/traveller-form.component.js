@@ -26,7 +26,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loadingValue = new core_1.EventEmitter();
         this.travelerFormChange = new core_1.EventEmitter();
-        this.countries = [];
+        // countries = [];
         this.countries_code = [];
         this.is_gender = true;
         this.is_type = 'M';
@@ -46,7 +46,6 @@ var TravellerFormComponent = /** @class */ (function () {
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
@@ -64,7 +63,7 @@ var TravellerFormComponent = /** @class */ (function () {
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
-            country_code: [typeof countryCode != 'undefined' ? countryCode.country_name : '', [forms_1.Validators.required]],
+            country_code: ['', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: ['']
@@ -75,22 +74,24 @@ var TravellerFormComponent = /** @class */ (function () {
         }
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
-        var _this = this;
         this.traveller = this.travelerInfo;
-        var countryCode = '';
-        if (typeof this.travelerInfo.countryCode != 'undefined' && typeof this.travelerInfo.countryCode == 'string') {
-            countryCode = this.countries_code.filter(function (item) { return item.id == _this.travelerInfo.countryCode; })[0];
-        }
-        else {
-            countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-        }
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
-        if (moment(this.travelerInfo.dob).format('YYYY-MM-DD') < adult12YrPastDate) {
+        var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
+        if (travellerDob < adult12YrPastDate) {
             this.isAdult = true;
-            this.travellerForm.setErrors({ 'phoneAndPhoneCodeError': true });
+            this.isChild = false;
+            var phoneControl = this.travellerForm.get('phone_no');
+            phoneControl.setValidators([forms_1.Validators.required]);
+            phoneControl.updateValueAndValidity();
+        }
+        else if (travellerDob < child2YrPastDate) {
+            this.isAdult = false;
+            this.isChild = true;
+            this.travellerForm.setErrors(null);
         }
         else {
-            this.isAdult = false;
+            this.isAdult = this.isChild = false;
             this.travellerForm.setErrors(null);
         }
         this.travellerForm.patchValue({
@@ -100,7 +101,7 @@ var TravellerFormComponent = /** @class */ (function () {
             email: this.travelerInfo.email ? this.travelerInfo.email : '',
             gender: this.travelerInfo.gender ? this.travelerInfo.gender : 'M',
             phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
-            country_code: countryCode,
+            country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
             country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
             dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
@@ -135,7 +136,6 @@ var TravellerFormComponent = /** @class */ (function () {
             this.isChild = false;
             this.isInfant = false;
         }
-        console.log(this.isAdult);
     };
     TravellerFormComponent.prototype.setUserTypeValidation = function () {
         this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
@@ -155,7 +155,6 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.travellerId) {
             this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
         }
-        console.log(this.travellerForm);
         if (this.travellerForm.invalid) {
             this.submitted = true;
             this.loadingValue.emit(false);
@@ -219,32 +218,6 @@ var TravellerFormComponent = /** @class */ (function () {
             }
         }
     };
-    TravellerFormComponent.prototype.getCountry = function () {
-        var _this = this;
-        this.genericService.getCountry().subscribe(function (data) {
-            _this.countries = data.map(function (country) {
-                return {
-                    id: country.id,
-                    name: country.name,
-                    code: country.phonecode,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                };
-            }),
-                _this.countries_code = data.map(function (country) {
-                    return {
-                        id: country.id,
-                        name: country.phonecode + ' (' + country.iso2 + ')',
-                        code: country.phonecode,
-                        country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                    };
-                });
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
-        });
-    };
     TravellerFormComponent.prototype.stringToDate = function (string, saprator) {
         var dateArray = string.split(saprator);
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
@@ -252,19 +225,27 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.selectDob = function (event) {
         var selectedDate = moment(event).format('YYYY-MM-DD');
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
         var emailControl = this.travellerForm.get('email');
         var phoneControl = this.travellerForm.get('phone_no');
         var countryControl = this.travellerForm.get('country_code');
         if (selectedDate < adult12YrPastDate) {
             this.isAdult = true;
+            this.isChild = false;
             emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
             phoneControl.setValidators([forms_1.Validators.required, forms_1.Validators.minLength(10)]);
             countryControl.setValidators([forms_1.Validators.required]);
-            // this.travellerForm.setErrors({'phoneAndPhoneCodeError':true});
-            console.log('here');
+        }
+        else if (selectedDate < child2YrPastDate) {
+            this.isAdult = false;
+            this.isChild = true;
+            this.travellerForm.setValidators(null);
+            emailControl.setValidators(null);
+            phoneControl.setValidators(null);
+            countryControl.setValidators(null);
         }
         else {
-            this.isAdult = false;
+            this.isAdult = this.isChild = false;
             this.travellerForm.setValidators(null);
             emailControl.setValidators(null);
             phoneControl.setValidators(null);
@@ -281,6 +262,9 @@ var TravellerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travelerInfo");
+    __decorate([
+        core_1.Input()
+    ], TravellerFormComponent.prototype, "countries");
     __decorate([
         core_1.Output()
     ], TravellerFormComponent.prototype, "loadingValue");
