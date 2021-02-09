@@ -952,11 +952,11 @@
 			border-radius: 35px;
 
 			.cmn_block {
-				padding: 20px 15px;
+				padding: 20px 15px 0;
 				
-				border-bottom: 1px solid $box-border-color;
+				//border-bottom: 1px solid $box-border-color;
 				&.price {
-					border-top: 1px solid $box-border-color;
+					//border-top: 1px solid $box-border-color;
 				}
 				&:last-child {
 					border-bottom: none;
@@ -1344,7 +1344,7 @@
 				.block_cmn {
 					width: 100%;
 					padding: 20px 15px;
-					border-top: 1px solid $box-border-color;
+					//border-top: 1px solid $box-border-color;
 
 					h5 {
 						width: 100%;
