@@ -805,10 +805,11 @@
 					.anchor_link{
 						color: $text_light_yellow;
 						font-size: 16px;
-    					margin-right: 10px;
+    					margin-right: 30px;
 					}
 				}
 				&.active {
+					border-radius: 10px;
 					.accordion-heading {
 						&:after {
 							content: "";
@@ -822,7 +823,6 @@
 							right: 0;
 							border: none;
 							top: 0;
-						 
 						}
 					}
 				}
@@ -830,14 +830,14 @@
 				.accordion-body {
 					.block_cmn {
 						width: 100%;
-						padding: 20px 15px;
-						border-top: 1px solid $box-border-color;
+						padding: 15px 15px 0;
+						//border-top: 1px solid $box-border-color;
 
 						h5 {
 							width: 100%;
 							margin: 0 0 15px;
 							font-size: 16px;
-							font-weight: 500;
+							font-weight: 600;
 							color: $text-black;
 						}
 
@@ -952,7 +952,7 @@
 			border-radius: 35px;
 
 			.cmn_block {
-				padding: 20px 15px 0;
+				padding: 15px 15px 0;
 				
 				//border-bottom: 1px solid $box-border-color;
 				&.price {
@@ -960,6 +960,7 @@
 				}
 				&:last-child {
 					border-bottom: none;
+					padding-bottom: 15px;
 				}
 
 				.block_price_radio {
@@ -1113,7 +1114,7 @@
 							background: $background-white;
 							.block_cmn {
 								width: 100%;
-								padding: 15px 15px;
+								padding: 15px 15px 0;
 								
 
 								h5 {
@@ -1318,10 +1319,11 @@
 				.anchor_link{
 					color: $text_light_yellow;
 					font-size: 16px;
-					margin-right: 10px;
+					margin-right: 30px;
 				}
 			}
 			&.active {
+				border-radius: 10px;
 				.accordion-heading {
 					&:after {
 						content: "";

@@ -18,10 +18,10 @@ export class EmptyCartComponent implements OnInit {
 
   ngOnInit(): void {
     $('#cart_modal').modal('show');
-    this.renderer.addClass(document.body, 'bg_color');
+    this.renderer.addClass(document.body, 'cms-bgColor');
   }
   ngOnDestroy() {
-    this.renderer.removeClass(document.body, 'bg_color');
+    this.renderer.removeClass(document.body, 'cms-bgColor');
   }
   
   redirectToHome(){
