@@ -94,4 +94,13 @@ export class MobileAndSubscribeComponent implements OnInit {
       });
     }
   }
+
+  ngDoCheck(){
+    if(this.error || this.success){
+      setTimeout(() => {
+        this.success = false;
+        this.error = false;    
+      }, 2000);
+    }
+  }
 }

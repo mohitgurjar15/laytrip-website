@@ -1,11 +1,11 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation,WhiteSpaceValidator } from '../../../../_helpers/custom.validators';
+import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -25,11 +25,6 @@ export class ProfileComponent implements OnInit {
   submitted = false;
   loading = true;
   @Output() loadingValue = new EventEmitter<boolean>();
-  countries: any = [];
-  languages: any = [];
-  currencies: any = [];
-  countries_code: any = [];
-  stateList: any = [];  
   minDate: any = {};
   maxDate: any = {};
   data = [];
@@ -75,10 +70,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.loadingValue.emit(true);
     window.scroll(0,0);
-    this.getCountry();
-    this.getLanguages();
-    this.getCurrencies();    
-   
+  
     let location:any = this.cookieService.get('__loc');
     try{
       this.location = JSON.parse(location);
@@ -87,88 +79,19 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
         first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
         last_name: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-        country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
         dob: ['', Validators.required],
-        country_code: [''],
-        phone_no: [''],
+        country_code: ['', [Validators.required]],
+        phone_no: ['',[Validators.required, Validators.minLength(10)]],
         address: [''],
         email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],        
         gender: ['M'],
-        profile_pic: [''],      
-        currency_id: [''],      
+        profile_pic: [''],          
         passport_expiry: [''],      
         passport_number: [''],      
         home_airport: [''],      
-      });
-
-      if(!this.isFormControlEnable){
-        // this.profileForm.controls['country_code'].disable() 
-      }
-      
+      },{validators:phoneAndPhoneCodeValidation()});
+    
       this.getProfileInfo(); 
-  }
-
-
-
-
-  getCountry() {
-    this.genericService.getCountry().subscribe((data: any) => {
-      this.countries = data.map(country=>{
-          return {
-              id:country.id,
-              name:country.name,
-              flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-          } 
-      }),
-      this.countries_code = data.map(country=>{
-        return {
-          id: country.id,
-          name: country.phonecode+' ('+country.iso2+')',
-          code:country.phonecode,
-          country_name:country.name+ ' ' +country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-        }
-      });
-      if(this.location){
-        const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-        this.profileForm.controls.country_code.setValue(countryCode.id);
-      }      
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
-    });
-  }
-
-  getStates(countryId) {
-    this.profileForm.controls.state_id.setValue([]);
-    this.genericService.getStates(countryId.id).subscribe((data: any) => {
-      this.stateList = data;
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
-    });
-  }
-
-  getLanguages() {
-    this.genericService.getAllLangunage().subscribe((data: any) => {
-      this.languages = data.data;
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
-    });
-  }
-
-  getCurrencies() {
-    this.genericService.getCurrencies().subscribe((data: any) => {
-      this.currencies = data.data;
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
-    });
   }
 
   selectGender(event,type){
@@ -185,7 +108,8 @@ export class ProfileComponent implements OnInit {
   } 
  
  
-  selectImageFile(event) {    
+  uploadImageFile(event) {  
+    this.imageFileError = false;  
     this.imageFile = event.target.files[0];
     //file type validation check
     if (!validateImageFile(this.imageFile.name)) {
@@ -205,9 +129,27 @@ export class ProfileComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]); 
     reader.onload = (_event) => {
-      this.image = reader.result; 
+      this.image = reader.result;
     }
-    this.imageFileError = false;
+    if(!this.imageFileError){
+      this.loadingValue.emit(true);   
+      let formdata = new FormData();    
+      let imgfile = '';
+      if(this.imageFile){
+        imgfile = this.imageFile;
+        formdata.append("profile_pic",imgfile);
+        this.userService.updateProfileImage(formdata).subscribe((data: any) => {
+          this.submitted = false; 
+          this.loadingValue.emit(false);   
+          localStorage.setItem("_lay_sess", data.token);
+          this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
+        }, (error: HttpErrorResponse) => {
+          this.loadingValue.emit(false);  
+          this.submitted = false;
+          this.toastr.error(error.error.message, 'Profile Error');
+        });
+      }
+    }
   }
 
   getProfileInfo() {
@@ -215,13 +157,9 @@ export class ProfileComponent implements OnInit {
       this.loadingValue.emit(false);   
       this.image = res.profilePic;
       this.selectResponse = res;
-
       this.is_type = res.gender ? res.gender :'M';      
-      let countryName = '';
-      if(typeof this.location != 'undefined'){
-        countryName = this.location.country.id;
-      }
-      this.data = [res.airportInfo];      
+     
+      this.data = Object.keys(res.airportInfo).length > 0 ?  [res.airportInfo] : [];      
       this.profileForm.patchValue({      
           first_name: res.firstName,
           last_name: res.lastName,
@@ -232,14 +170,12 @@ export class ProfileComponent implements OnInit {
           dob  : (res.dob !='undefined' && res.dob != '' && res.dob)   ? new Date(res.dob) : '',        
           country_code :  (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode :'',        
           phone_no  : res.phoneNo,        
-          country_id: res.country.name ? res.country.name :countryName,
           state_id: res.state.name,       
           city_name  : res.cityName,        
-          address  : res.address,  
+          address  : res.profile_picaddress,  
           home_airport  : res.airportInfo.code ? res.airportInfo.code : null,  
           language_id : res.preferredLanguage.name,     
           currency_id : res.preferredCurrency.code,     
-          profile_pic: res.profilePic, 
           passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '', 
           passport_number: res.passportNumber  
       });
@@ -258,8 +194,8 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.loadingValue.emit(true);   
+    console.log(this.profileForm)
     if (this.profileForm.invalid) {
-      console.log(this.profileForm)
       this.submitted = true;      
       this.loadingValue.emit(false);   
       //scroll top if any error 

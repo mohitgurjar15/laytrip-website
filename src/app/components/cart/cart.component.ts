@@ -10,16 +10,24 @@ import { environment } from '../../../environments/environment';
 export class CartComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
+  selectedCart:number=0;
   @Input() carts;
   constructor(
     private cartService: CartService
   ) { }
 
   ngOnInit(): void {
-   
+    this.cartService.getCartDeletedItem.subscribe(index=>{
+      console.log("ondexxxx",index)
+      if(index>0){
+        console.log(this.carts,"---------------",index)
+        this.selectedCart=index-1
+      }
+    })
   }
   
   ngOnChanges(changes: SimpleChanges) {
+    console.log("I am in changes",changes)
     if (changes['carts']) {
       this.carts = changes['carts'].currentValue;
     }
@@ -28,4 +36,5 @@ export class CartComponent implements OnInit {
   selectCart(cartNumber) {
     this.cartService.setCardNumber(cartNumber);
   }
+  
 }

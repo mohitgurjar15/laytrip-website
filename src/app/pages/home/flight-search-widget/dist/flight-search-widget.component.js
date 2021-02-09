@@ -40,16 +40,14 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.fromSearch = airports_1.airports['JFK'];
         this.monthYearArr = [];
         this.toSearch = airports_1.airports['PUJ'];
-        //toDestinationCode = this.toSearch.code;
-        //arrivalCity = this.toSearch.city;
-        //arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
-        //toAirport = airports[this.toDestinationCode];
         this.locale = {
             format: 'MM/DD/YYYY',
             displayFormat: 'MM/DD/YYYY'
         };
-        this.departureDate = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
-        this.returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"));
+        //departureDate : any = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
+        //returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
+        this.departureDate = new Date(moment("2021-06-01").format("MM/DD/YYYY"));
+        this.returnDate = new Date(moment("2021-06-07").format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.calPrices = false;
         this.searchFlightInfo = {
@@ -72,7 +70,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             departureDate: [[forms_1.Validators.required]],
             returnDate: [[forms_1.Validators.required]]
         });
-        this.flightDepartureMinDate = new Date();
+        var date = new Date();
+        date.setDate(date.getDate() + 7);
+        this.flightDepartureMinDate = date;
         this.flightReturnMinDate = this.departureDate;
         this.countryCode = this.commonFunction.getUserCountry();
         this.rangeDates = [this.departureDate, this.returnDate];

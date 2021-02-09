@@ -18,8 +18,7 @@ export class CardListComponent implements OnInit {
   @Output() selectCreditCard = new EventEmitter();
   @Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
-  cardToken: string = '';
-  selectedCard = [];
+  @Input() cardToken: string = '';
 
   cardObject = {
     visa: `${this.s3BucketUrl}assets/images/card_visa.svg`,
@@ -48,15 +47,8 @@ export class CardListComponent implements OnInit {
     })
   }
 
-  selectCard(index, cardToken) {
-    if (typeof this.selectedCard[index] === 'undefined') {
-      this.selectedCard[index] = true;
-    } else {
-      this.selectedCard[index] = !this.selectedCard[index];
-    }
-    this.selectedCard = this.selectedCard.map((item, i) => {
-      return ((index === i) && this.selectedCard[index] === true) ? true : false;
-    });
+  selectCard(cardToken) {
+
     this.cardToken = cardToken;
     this.selectCreditCard.emit(cardToken);
   }

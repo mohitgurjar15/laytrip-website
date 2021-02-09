@@ -75,6 +75,7 @@
 
                             img {
                                 max-width: 55px;
+                                margin: 0 auto;
                             }
 
                             .fl_name {
@@ -120,6 +121,7 @@
                         max-width: 105px;
                         justify-content: space-between;
                         flex-direction: column;
+                        display: flex;
                         .stopages {
                             flex-direction: column;
                             display: flex;
@@ -160,9 +162,10 @@
 
                     .accordion_infos_1 {
                         .det_link {
-                            color: $mid_gray_bg;
+                            color: $active-tab-text;
 
                             &[aria-expanded="true"] {
+                                color: $mid_gray_bg;
                                 &:after {
                                     content: "";
                                     position: relative;
@@ -179,10 +182,11 @@
                             }
 
                             &[aria-expanded="false"] {
+                                color: $active-tab-text;
                                 &:after {
                                     position: relative;
                                     padding: 5px 9px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
                                     background-position: right;
                                     background-repeat: no-repeat;
                                     background-size: 11px;
