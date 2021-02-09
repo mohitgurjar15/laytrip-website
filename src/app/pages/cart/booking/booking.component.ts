@@ -242,6 +242,8 @@ export class BookingComponent implements OnInit {
       if(this.carts.length==0){
         this.isCartEmpty =true;
       }
+
+      console.log('index::::::::::', index);
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       this.cartService.setDeletedCartItem(index)
     }, error => {
