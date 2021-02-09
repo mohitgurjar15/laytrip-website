@@ -831,6 +831,9 @@
 					.block_cmn {
 						width: 100%;
 						padding: 15px 15px 0;
+						&:last-child{
+							padding-bottom: 15px;
+						}
 						//border-top: 1px solid $box-border-color;
 
 						h5 {
