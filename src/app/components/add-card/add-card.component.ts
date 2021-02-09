@@ -160,13 +160,13 @@ export class AddCardComponent implements OnInit {
             diners_club: `${s3BucketUrl}assets/images/card_dinners_club.svg`,
           }
 
-          $('#card-list').prepend(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
+          $('#card-list').prepend(`<div onclick="selectCard(${pmData.token})" class="accordion_cardss anchor-tag" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="false"
                   aria-controls="collapse11">
                   <span class="heade_wrps">
-                      <img [src]="${cardObject[obj.cardType]}" alt="Card icon" /> 
+                      <img src="${cardObject[obj.cardType]}" alt="Card icon" /> 
                       ${obj.cardType} ending in ${obj.cardDigits}
                   </span>
               </a>
