@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
@@ -243,6 +243,7 @@ export class BookingComponent implements OnInit {
         this.isCartEmpty =true;
       }
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+      this.cartService.setDeletedCartItem(index)
     }, error => {
       this.loading=false;
       if(error.status==404){
