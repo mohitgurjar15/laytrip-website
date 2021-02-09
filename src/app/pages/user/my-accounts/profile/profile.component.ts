@@ -142,11 +142,11 @@ export class ProfileComponent implements OnInit {
           this.submitted = false; 
           this.loadingValue.emit(false);   
           localStorage.setItem("_lay_sess", data.token);
-          this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
+          // this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);  
           this.submitted = false;
-          this.toastr.error(error.error.message, 'Profile Error');
+          // this.toastr.error(error.error.message, 'Profile Error');
         });
       }
     }
@@ -217,7 +217,7 @@ export class ProfileComponent implements OnInit {
         // formdata.append("profile_pic",imgfile);
       }
 
-      formdata.append("title",'mr');
+      // formdata.append("title",'mr');
       formdata.append("first_name",this.profileForm.value.first_name);
       formdata.append("last_name",this.profileForm.value.last_name);
       formdata.append("email",this.profileForm.value.email);      
@@ -235,11 +235,11 @@ export class ProfileComponent implements OnInit {
         this.submitted = false; 
         this.loadingValue.emit(false);   
         localStorage.setItem("_lay_sess", data.token);
-        this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
+        // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
         this.loadingValue.emit(false);  
         this.submitted = false;
-        this.toastr.error(error.error.message, 'Profile Error');
+        // this.toastr.error(error.error.message, 'Profile Error');
       });
     }
   }
