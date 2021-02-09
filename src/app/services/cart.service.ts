@@ -97,8 +97,8 @@ export class CartService {
     return throwError(errorMessage);
   }
 
-  setCardNumber(cartNumber){
-    this.cartNumber.next(cartNumber)
+  setCartNumber(cartNumber){
+    this.cartNumber.next(cartNumber);
   }
 
   setCardId(cartId){
