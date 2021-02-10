@@ -119,8 +119,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   ngDoCheck(){
-    this.loadGoogleSdk();
-
+    // this.loadGoogleSdk();
   }
   ngAfterViewInit(){
     this.loadGoogleSdk();

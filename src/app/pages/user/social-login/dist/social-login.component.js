@@ -96,7 +96,7 @@ var SocialLoginComponent = /** @class */ (function () {
         });
     };
     SocialLoginComponent.prototype.ngDoCheck = function () {
-        this.loadGoogleSdk();
+        // this.loadGoogleSdk();
     };
     SocialLoginComponent.prototype.ngAfterViewInit = function () {
         this.loadGoogleSdk();
