@@ -6,6 +6,7 @@
                     <span>
                         <img class="img-rounded" src="{{image || defaultImage}}" alt="Profile Image">
                     </span>
+                    <small class="error_field" *ngIf="imageFileError">{{imageErrorMsg}}</small>
                     <div class="update_profile_btn">
                         <input #hiddenfileinput style="display: none" type="file" accept="image/*"
                             (change)="uploadImageFile($event)">

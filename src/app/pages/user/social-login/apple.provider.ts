@@ -22,9 +22,9 @@ export class AppleLoginProvider extends BaseLoginProvider {
                 'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js',
                 () => {
                     AppleID.auth.init({
-                        clientId: 'com.laytrip.laytrips',
+                        clientId: 'com.laytripweb',
                         scope: 'name email',
-                        redirectURI: environment.siteUrl,
+                        redirectURI: window.location.origin,
                         state: '[ANYTHING]', // used to prevent CSFR
                         usePopup: true,
                     });
@@ -37,7 +37,7 @@ export class AppleLoginProvider extends BaseLoginProvider {
     public getLoginStatus(): Promise<SocialUser> {
         return new Promise((resolve, reject) => {
             // todo: implement
-            resolve();
+            resolve(void(0));
         });
     }
 
@@ -55,7 +55,7 @@ export class AppleLoginProvider extends BaseLoginProvider {
     public signOut(revoke?: boolean): Promise<any> {
         return new Promise((resolve, reject) => {
             // AppleID doesnt have revoke method
-            resolve();
+            resolve(void(0));
         });
     }
 }

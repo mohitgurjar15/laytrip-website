@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
@@ -45,11 +45,11 @@ export class BookingComponent implements OnInit {
   carts = [];
   isValidData: boolean = false;
   cartLoading = false;
-  loading:boolean=false;
-  isCartEmpty:boolean=false;
-  cartPrices=[];
-  travelerForm:FormGroup;
-  cardToken:string='';
+  loading: boolean = false;
+  isCartEmpty: boolean = false;
+  cartPrices = [];
+  travelerForm: FormGroup;
+  cardToken: string = '';
 
 
   constructor(
@@ -59,8 +59,8 @@ export class BookingComponent implements OnInit {
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
     private cartService: CartService,
-    private toster:ToastrService,
-    private cookieService:CookieService
+    private toster: ToastrService,
+    private cookieService: CookieService
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -78,19 +78,19 @@ export class BookingComponent implements OnInit {
       this.cartLoading = false;
       let notAvilableItems = [];
       let cart: any;
-      let price:any;
+      let price: any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
         cart.old_module_info = {
-          selling_price : items.data[i].oldModuleInfo[0].selling_price
+          selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         this.carts.push(cart);
 
-        price={}
+        price = {}
         price.selling_price = items.data[i].moduleInfo[0].selling_price;
         price.departure_date = items.data[i].moduleInfo[0].departure_date;
         price.start_price = items.data[i].moduleInfo[0].start_price;
@@ -108,23 +108,21 @@ export class BookingComponent implements OnInit {
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
-    },error=>{
-      this.isCartEmpty =true;
+    }, error => {
+      this.isCartEmpty = true;
       this.cartLoading = false;
     });
 
-    //console.log("==this.carts==",this.carts)
-    this.cartService.getCartId.subscribe(cartId=>{
-      if(cartId>0){
+    this.cartService.getCartId.subscribe(cartId => {
+      if (cartId > 0) {
         this.deleteCart(cartId);
         this.cartService.setCardId(0);
       }
     })
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
-      console.log("travelerFrom",travelerFrom,travelerFrom.status)
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
-      this.travelerForm= travelerFrom;
+      this.travelerForm = travelerFrom;
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
@@ -135,7 +133,6 @@ export class BookingComponent implements OnInit {
     this.genericService.getAvailableLaycredit().subscribe((res: any) => {
       this.isLayCreditLoading = false;
       this.totalLaycreditPoints = res.total_available_points;
-      //console.log("this.totalLaycreditPoints////",this.totalLaycreditPoints)
     }, (error => {
       this.isLayCreditLoading = false;
     }))
@@ -230,60 +227,59 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  deleteCart(cartId){
-    this.loading=true;
+  deleteCart(cartId) {
+    this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
-      this.loading=false;
-      let index = this.carts.findIndex(x=>x.id==cartId);
+      this.loading = false;
+      let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
-      this.cartPrices.splice(index,1)
+      this.cartPrices.splice(index, 1)
       this.cartService.setCartItems(this.carts);
       this.cartService.setCartPrices(this.cartPrices)
-      if(this.carts.length==0){
-        this.isCartEmpty =true;
+      if (this.carts.length == 0) {
+        this.isCartEmpty = true;
       }
+
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       this.cartService.setDeletedCartItem(index)
     }, error => {
-      this.loading=false;
-      if(error.status==404){
-        let index = this.carts.findIndex(x=>x.id==cartId);
+      this.loading = false;
+      if (error.status == 404) {
+        let index = this.carts.findIndex(x => x.id == cartId);
         this.carts.splice(index, 1);
         this.cartService.setCartItems(this.carts);
-        if(this.carts.length==0){
-          this.isCartEmpty =true;
+        if (this.carts.length == 0) {
+          this.isCartEmpty = true;
         }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       }
     });
   }
 
-  saveAndSearch(){
-    console.log(this.travelerForm,"this.travelerForm",this.isValidData)
-    if(this.isValidData){
-      for(let i=0; i < this.carts.length; i++){
-        let data= this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler=> { return { traveler_id : traveler.userId } })
-        let cartData={
-          cart_id   : this.carts[i].id,
-          travelers : travelers
+  saveAndSearch() {
+    if (this.isValidData) {
+      for (let i = 0; i < this.carts.length; i++) {
+        let data = this.travelerForm.controls[`type${i}`].value.adults;
+        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        let cartData = {
+          cart_id: this.carts[i].id,
+          travelers: travelers
         }
-        console.log("cartData",cartData)
-        this.cartService.updateCart(cartData).subscribe(data=>{
-          if(i===this.carts.length-1){
+        this.cartService.updateCart(cartData).subscribe(data => {
+          if (i === this.carts.length - 1) {
             this.router.navigate(['/'])
           }
         });
       }
     }
-    else{
-      this.toster.warning("Please enter valid data of traveler into cart","warning")
+    else {
+      this.toster.warning("Please enter valid data of traveler into cart", "warning")
     }
   }
 
-  selectCreditCard(data){
-    this.cardToken=data;
-    this.cookieService.put("__cc",this.cardToken);
+  selectCreditCard(data) {
+    this.cardToken = data;
+    this.cookieService.put("__cc", this.cardToken);
   }
 
 }
