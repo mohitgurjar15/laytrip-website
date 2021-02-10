@@ -18,6 +18,12 @@
 }
 
 .routing_main_wrps {
+    .shorting_label{
+        font-size: 16px;
+        font-weight: 500;
+        color: $text-grey;
+        margin: 0 0 5px;
+    }
     .card_box {
         border: 1px solid $box-border-color;
         border-radius: 10px;
@@ -277,13 +283,16 @@
 
                     .type_lines {
                         border-bottom: 1px solid $box-border-color;
-                        padding: 15px 0;
+                        padding-bottom: 15px;
                         font-size: 12px;
                         display: flex;
                         justify-content: flex-start;
+                        margin-bottom: 15px;
 
                         &:last-child {
                             border: none;
+                            margin: 0;
+                            padding: 0;
                         }
 
                         .titles {
