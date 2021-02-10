@@ -50,7 +50,7 @@ export class SocialLoginComponent implements OnInit {
     this.authService.authState.subscribe((userInfo: any) => {
       if (userInfo) {
         let objApple = getUserDetails(userInfo.authorization.id_token);
-        console.log(objApple)
+        console.log(objApple,userInfo)
 
         let jsonData = {
           "account_type": 1, 

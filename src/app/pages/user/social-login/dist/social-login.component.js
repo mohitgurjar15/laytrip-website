@@ -35,7 +35,7 @@ var SocialLoginComponent = /** @class */ (function () {
         this.authService.authState.subscribe(function (userInfo) {
             if (userInfo) {
                 var objApple = jwt_helper_1.getUserDetails(userInfo.authorization.id_token);
-                console.log(objApple);
+                console.log(objApple, userInfo);
                 var jsonData = {
                     "account_type": 1,
                     "name": objApple.name,
