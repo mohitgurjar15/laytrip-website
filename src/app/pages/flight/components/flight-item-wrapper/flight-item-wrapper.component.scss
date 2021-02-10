@@ -18,6 +18,12 @@
 }
 
 .routing_main_wrps {
+    .shorting_label{
+        font-size: 16px;
+        font-weight: 500;
+        color: $text-grey;
+        margin: 0 0 5px;
+    }
     .card_box {
         border: 1px solid $box-border-color;
         border-radius: 10px;
