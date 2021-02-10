@@ -214,7 +214,7 @@ export class ProfileComponent implements OnInit {
       let imgfile = '';
       if(this.imageFile){
         imgfile = this.imageFile;
-        formdata.append("profile_pic",imgfile);
+        // formdata.append("profile_pic",imgfile);
       }
 
       formdata.append("title",'mr');

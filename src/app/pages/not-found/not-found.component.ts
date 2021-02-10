@@ -12,7 +12,7 @@ export class NotFoundComponent implements OnInit {
   constructor() { }
   ngOnInit(): void {
     window.scroll(0, 0);
-    document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
+    document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
   }
 
 }

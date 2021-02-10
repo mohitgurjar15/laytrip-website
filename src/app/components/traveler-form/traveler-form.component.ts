@@ -89,7 +89,7 @@ export class TravelerFormComponent implements OnInit {
     }
 
     for (let i = 0; i < this.cartItem.travelers.length; i++) {
-      let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId)
+      let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
       this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
       this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
@@ -122,7 +122,6 @@ export class TravelerFormComponent implements OnInit {
     });
 
     this.patch();
-
 
     this.travelerForm.valueChanges.subscribe(value => {
       if (typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number] !== 'undefined') {
@@ -189,40 +188,54 @@ export class TravelerFormComponent implements OnInit {
         control.push(this.patchValues(x))
       })
     }
-    console.log('this.travelerForm::::::::::::::', this.travelerForm);
   }
 
   patchValues(x) {
-    if (x.type == 'adult') {
+    return this.formBuilder.group({
+      first_name: [x.first_name, [Validators.required]],
+      last_name: [x.last_name, [Validators.required]],
+      email: (x.type === 'adult' || x.type === '') ? [x.email, [Validators.required]] : [x.email],
+      phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required]] : [x.phone_no],
+      country_code: (x.type === 'adult' || x.type === '') ?  [x.country_code, [Validators.required]] : [x.country_code],
+      dob: [x.dob, [Validators.required]],
+      country_id: [x.country_id, [Validators.required]],
+      gender: [x.gender, [Validators.required]],
+      userId: [x.userId],
+      type: [x.type],
+      dobMinDate: [x.dobMinDate],
+      dobMaxDate: [x.dobMaxDate]
+    }, { updateOn: 'blur' });
 
-      return this.formBuilder.group({
-        first_name: [x.first_name, [Validators.required]],
-        last_name: [x.last_name, [Validators.required]],
-        email: [x.email, [Validators.required]],
-        phone_no: [x.phone_no, [Validators.required]],
-        country_code: [x.country_code, [Validators.required]],
-        dob: [x.dob, [Validators.required]],
-        country_id: [x.country_id, [Validators.required]],
-        gender: [x.gender, [Validators.required]],
-        userId: [x.userId],
-        type: [x.type],
-        dobMinDate: [x.dobMinDate],
-        dobMaxDate: [x.dobMaxDate]
-      }, { updateOn: 'blur' })
-    }
-    else {
-      return this.formBuilder.group({
-        first_name: [x.first_name, [Validators.required]],
-        last_name: [x.last_name, [Validators.required]],
-        dob: [x.dob, [Validators.required]],
-        country_id: [x.country_id, [Validators.required]],
-        gender: [x.gender, [Validators.required]],
-        userId: [x.userId],
-        type: [x.type],
-        dobMinDate: [x.dobMinDate],
-        dobMaxDate: [x.dobMaxDate]
-      }, { updateOn: 'blur' })
-    }
+    // if (x.type == 'adult') {
+
+    //   return this.formBuilder.group({
+    //     first_name: [x.first_name, [Validators.required]],
+    //     last_name: [x.last_name, [Validators.required]],
+    //     email: [x.email, [Validators.required]],
+    //     phone_no: [x.phone_no, [Validators.required]],
+    //     country_code: [x.country_code, [Validators.required]],
+    //     dob: [x.dob, [Validators.required]],
+    //     country_id: [x.country_id, [Validators.required]],
+    //     gender: [x.gender, [Validators.required]],
+    //     userId: [x.userId],
+    //     type: [x.type],
+    //     dobMinDate: [x.dobMinDate],
+    //     dobMaxDate: [x.dobMaxDate]
+    //   }, { updateOn: 'blur' })
+    // }
+    // else {
+    //   return this.formBuilder.group({
+    //     first_name: [x.first_name, [Validators.required]],
+    //     last_name: [x.last_name, [Validators.required]],
+    //     dob: [x.dob, [Validators.required]],
+    //     country_id: [x.country_id, [Validators.required]],
+    //     gender: [x.gender, [Validators.required]],
+    //     userId: [x.userId],
+    //     type: [x.type],
+    //     dobMinDate: [x.dobMinDate],
+    //     dobMaxDate: [x.dobMaxDate]
+    //   }, { updateOn: 'blur' })
+    // }
   }
 
   submit(value) {

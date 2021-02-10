@@ -16,7 +16,7 @@
                     <div class="fliter_block">
                         <div class="cmn_block price">
                             <div class="block_top_in">
-                                <h5>{{'price' | translate}}</h5>
+                                <h5>Total Price</h5>
                             </div>
                             <form [formGroup]="priceSlider">
                                 <div class="custom_range_slide">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="cmn_block partial_payment_price" *ngIf="partialPaymentValue>0">
                             <div class="block_top_in">
-                                <h5>{{'installment_payment_price' | translate}}</h5>
+                                <h5>Installment Amount</h5>
                             </div>
                             <form [formGroup]="partialPriceSlider">
                                 <div class="custom_range_slide">
@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="block_cmn arrival_to">
                                                 <div class="block_top_in">
-                                                    <h5>{{'arrival_to' | translate}} {{ arrivalTimeSlotCityName }}</h5>
+                                                    <h5>Arrival in {{ arrivalTimeSlotCityName }}</h5>
                                                 </div>
                                                 <ul>
                                                     <li
@@ -155,7 +155,7 @@
                                             </div>
                                             <div class="block_cmn departure_to">
                                                 <div class="block_top_in">
-                                                    <h5>{{'departure_to' | translate}} {{ departureTimeSlotCityName }}
+                                                    <h5>Departure from {{ departureTimeSlotCityName }}
                                                     </h5>
                                                 </div>
                                                 <ul>
@@ -270,7 +270,7 @@
                                             </div> -->
                                             <div class="block_cmn arrival_to">
                                                 <div class="block_top_in">
-                                                    <h5>{{'arrival_to' | translate}} {{ departureTimeSlotCityName}}</h5>
+                                                    <h5>Arrival in {{ departureTimeSlotCityName}}</h5>
                                                 </div>
                                                 <ul>
                                                     <li
@@ -325,7 +325,7 @@
                                             </div>
                                             <div class="block_cmn departure_to">
                                                 <div class="block_top_in">
-                                                    <h5>{{'departure_to' | translate}} {{ arrivalTimeSlotCityName }}
+                                                    <h5>Departure from {{ arrivalTimeSlotCityName }}
                                                     </h5>
                                                 </div>
                                                 <ul>
