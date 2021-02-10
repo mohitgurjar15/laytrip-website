@@ -26,7 +26,7 @@ var ChangePasswordComponent = /** @class */ (function () {
         this.changePasswordForm = this.formBuilder.group({
             old_password: ['', [forms_1.Validators.required]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-            confirm_password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]]
+            confirm_password: ['', [forms_1.Validators.required]]
         }, {
             validator: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
@@ -34,8 +34,10 @@ var ChangePasswordComponent = /** @class */ (function () {
     ChangePasswordComponent.prototype.onSubmit = function () {
         var _this = this;
         this.loadingValue.emit(true);
+        this.submitted = true;
         if (this.changePasswordForm.invalid) {
             this.loadingValue.emit(false);
+            // this.submitted = false;
             return;
         }
         else {
@@ -48,7 +50,9 @@ var ChangePasswordComponent = /** @class */ (function () {
                 _this.loadingValue.emit(false);
                 _this.changePasswordForm.reset();
                 _this.toastr.success("Your password has been updated successfully!", 'Password Updated');
+                _this.submitted = false;
             }, function (error) {
+                _this.submitted = false;
                 _this.apiError = error.message;
                 _this.loadingValue.emit(false);
                 _this.toastr.error(error.error.message, 'Error Change Password');
