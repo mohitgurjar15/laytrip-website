@@ -44,12 +44,14 @@ export class BookingComponent implements OnInit {
   priceSummary;
   carts = [];
   isValidData: boolean = false;
+  isValidTravelers:boolean=false;
   cartLoading = false;
   loading: boolean = false;
   isCartEmpty: boolean = false;
   cartPrices = [];
   travelerForm: FormGroup;
   cardToken: string = '';
+  validationErrorMessage:string='';
 
 
   constructor(
@@ -121,7 +123,7 @@ export class BookingComponent implements OnInit {
     })
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
-      this.isValidData = travelerFrom.status === 'VALID' ? true : false;
+      this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
       this.travelerForm = travelerFrom;
     })
 
@@ -257,7 +259,7 @@ export class BookingComponent implements OnInit {
   }
 
   saveAndSearch() {
-    if (this.isValidData) {
+    if (this.isValidTravelers) {
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
@@ -273,7 +275,16 @@ export class BookingComponent implements OnInit {
       }
     }
     else {
-      this.toster.warning("Please enter valid data of traveler into cart", "warning")
+      //this.toster.warning("Please enter valid data of traveler into cart", "warning")
+      
+
+    }
+
+    if(this.cardToken==''){
+
+    }
+    else{
+
     }
   }
 
@@ -282,4 +293,37 @@ export class BookingComponent implements OnInit {
     this.cookieService.put("__cc", this.cardToken);
   }
 
+  removeValidationError(){
+    this.validationErrorMessage='';
+  }
+
+  continueToCheckout(){
+    this.validationErrorMessage='';
+    if (!this.isValidTravelers) {
+      this.validationErrorMessage='Traveller details is not valid for '
+      let message='';
+      for(let i in Object.keys(this.travelerForm.controls)){
+        message='';
+        if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
+          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+          this.validationErrorMessage +=message;
+        }
+      }
+      let index = this.validationErrorMessage.lastIndexOf(" ");
+      this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
+    }
+
+    if(this.cardToken==''){
+      if(this.validationErrorMessage==''){
+        this.validationErrorMessage=`Please select credit card`;
+      }
+      else{
+        this.validationErrorMessage+=` and please select credit card`;
+      }
+    }
+
+    if(this.isValidTravelers && this.cardToken!=''){
+      this.router.navigate(['/cart/checkout'])
+    }
+  }
 }

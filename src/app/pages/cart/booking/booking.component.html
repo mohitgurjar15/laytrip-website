@@ -43,7 +43,7 @@
                         </div>
                         <div class="cta_btn_wrapper">
                             <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->
-                            <a [routerLink]="['/cart/checkout']"><button>Continue to Checkout</button> </a>
+                            <button (click)="continueToCheckout()">Continue to Checkout</button> 
                             <button (click)="saveAndSearch()" class="trans_btn">
                                 <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="Search icon"
                                     class="pink_search" />
@@ -51,8 +51,15 @@
                                     class="white_search" /> -->
                                 Save & Add More
                             </button>
+
+                            
                         </div>
+                        
                     </div>
+                    <div class="section_description" *ngIf="validationErrorMessage">
+                        <span class="sec_text">{{validationErrorMessage}}</span>
+                        <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                      </div>
                 </div>
             </div>
         </form>
