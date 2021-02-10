@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
+declare var $: any;
 
 @Component({
   selector: 'app-card-list',
@@ -31,6 +32,17 @@ export class CardListComponent implements OnInit {
     diners_club: `${this.s3BucketUrl}assets/images/card_dinners_club.svg`,
   }
 
+  cardType = {
+    visa: 'Visa',
+    master: 'Master Card',
+    american_express: 'American Express',
+    discover: 'Discover',
+    dankort: 'Dankort',
+    maestro: 'Maestro',
+    jcb: 'JCB',
+    diners_club: 'Diners Club',
+  }
+
   ngOnInit() {
     this.getCardlist();
   }
@@ -48,7 +60,7 @@ export class CardListComponent implements OnInit {
   }
 
   selectCard(cardToken) {
-
+    // $('#card_list_accodrio').children('div').toggleClass('current_selected_card');
     this.cardToken = cardToken;
     this.selectCreditCard.emit(cardToken);
   }

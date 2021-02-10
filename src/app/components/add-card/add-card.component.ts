@@ -92,21 +92,21 @@ export class AddCardComponent implements OnInit {
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();
 
-      if($("#full_name").val()==""){
+      if ($("#full_name").val() == "") {
         $("#first_name").show();
       }
-      if($("#month-year").val()==""){
+      if ($("#month-year").val() == "") {
         $("#month").show();
       }
-      
-      console.log("Error",errors)
+
+      console.log("Error", errors)
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
-        if (error["attribute"]){
-          if(error["attribute"]=='month' || error["attribute"]=='year'){
+        if (error["attribute"]) {
+          if (error["attribute"] == 'month' || error["attribute"] == 'year') {
             $('.month_year_error').show();
           }
-          $("#"+error["attribute"]).show();
+          $("#" + error["attribute"]).show();
         }
       }
     });
@@ -132,13 +132,14 @@ export class AddCardComponent implements OnInit {
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
       this.token = token;
+      $('#main_loader').show();
       $(".credit_card_error").hide();
       let cardData = {
         card_type: pmData.card_type,
         card_holder_name: pmData.full_name,
         card_token: pmData.token,
         card_last_digit: pmData.last_four_digits,
-        card_meta:pmData
+        card_meta: pmData
       };
       $.ajax({
         url: `${environment.apiUrl}v1/payment`,
@@ -147,6 +148,7 @@ export class AddCardComponent implements OnInit {
         data: cardData,
         success: function (obj) {
           // this.emitNewCard.emit(obj);
+          $('#main_loader').hide();
 
           let s3BucketUrl = 'http://d2q1prebf1m2s9.cloudfront.net/';
           var cardObject = {
@@ -160,14 +162,25 @@ export class AddCardComponent implements OnInit {
             diners_club: `${s3BucketUrl}assets/images/card_dinners_club.svg`,
           }
 
+          var cardType = {
+            visa: 'Visa',
+            master: 'Master Card',
+            american_express: 'American Express',
+            discover: 'Discover',
+            dankort: 'Dankort',
+            maestro: 'Maestro',
+            jcb: 'JCB',
+            diners_club: 'Diners Club',
+          }
+
           $('#card-list').prepend(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="false"
                   aria-controls="collapse11">
                   <span class="heade_wrps">
-                      <img [src]="${cardObject[obj.cardType]}" alt="Card icon" /> 
-                      ${obj.cardType} ending in ${obj.cardDigits}
+                      <img src="${cardObject[obj.cardType]}" alt="Card icon" /> 
+                      ${cardType[obj.cardType]} ending in ${obj.cardDigits}
                   </span>
               </a>
           </div>
@@ -209,7 +222,13 @@ export class AddCardComponent implements OnInit {
       </div></div>`);
           $("#payment-form")[0].reset();
           Spreedly.reload();
-          // window.location.reload();
+          var cardTokenNew = obj.cardToken;
+          console.log(cardTokenNew);
+          $(document).on("click", "div#card_list_accodrio", function () {
+            if (cardTokenNew === obj.cardToken) {
+              $('#card_list_accodrio').children('div').addClass('current_selected_card');
+            }
+          });
         },
         error: function (error) {
           console.log('error:', error);
