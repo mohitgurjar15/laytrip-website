@@ -1,89 +1,85 @@
-@import '../../../cstm-variable';
+@import "../../../cstm-variable";
 @import "../../../_cstm-variable.scss";
 @import "../../../_cstm-components.scss";
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-
-
 .ng-customClass.country_code {
   width: 150px;
 }
-.img_country_code{
-	border-radius: 3px;
+.img_country_code {
+  border-radius: 3px;
 }
 
-
-::ng-deep .calender-passport-expiry{
-  min-width: 300px !important;  
+::ng-deep .calender-passport-expiry {
+  min-width: 300px !important;
 }
-.dobs{
-  ::ng-deep .birth_date{
-    
+.dobs {
+  ::ng-deep .birth_date {
     .p-inputtext {
-        border: none;
-      }
-      th {
-        font-size: 13px !important;
-        border-bottom: none !important;
-        font-weight: 600 !important;
-        text-align: center;
-      }
-      td {
-        padding: 0.1rem !important;
-        span {
-          width: 35px;
-          height: auto;
-          font-size: 12px;
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          border: none !important;
-          border-radius: 0 !important;
-          box-shadow: none !important;
-          color: $text-grey;
-          margin: 1px;
-          position: relative;
+      border: none;
+    }
+    th {
+      font-size: 13px !important;
+      border-bottom: none !important;
+      font-weight: 600 !important;
+      text-align: center;
+    }
+    td {
+      padding: 0.1rem !important;
+      span {
+        width: 35px;
+        height: auto;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        color: $text-grey;
+        margin: 1px;
+        position: relative;
 
-          @include mobile-view {
-            width: 33px;
-          }
-          &:hover {
-            background: none !important;
-          }
-          &.p-highlight {
-            background: none !important;
-            font-weight: 500;
-            overflow: visible;
-            &::before {
-              content: "";
-              width: 5px;
-              height: 5px;
-              border-radius: 50%;
-              background-color: $pink;
-              position: absolute;
-              top: -5px;
-            }
+        @include mobile-view {
+          width: 33px;
+        }
+        &:hover {
+          background: none !important;
+        }
+        &.p-highlight {
+          background: none !important;
+          font-weight: 500;
+          overflow: visible;
+          &::before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: $pink;
+            position: absolute;
+            top: -5px;
           }
         }
       }
+    }
   }
 }
 
-.accordion_bookings{
-  .card{
+.accordion_bookings {
+  .card {
     border: 1px solid $grayed_border;
     border-radius: 10px;
     margin-bottom: 15px;
-    &:last-child{
+    &:last-child {
       margin-bottom: 0;
     }
-    .card-header{
+    .card-header {
       border: none;
       background-color: transparent;
       padding: 15px;
-      .card-link{
+      .card-link {
         font-weight: 600;
         color: $text-black;
         font-size: 16px;
@@ -95,38 +91,38 @@
         width: 100%;
         padding: 0;
 
-        &[aria-expanded="true"]{
-            &:after {
-                font-family: 'FontAwesome';
-                content: "\f077";
-                color: $text-grey;
-                font-weight: normal;
-                transition: 0.3s;
-                right: 0;
-            }
+        &[aria-expanded="true"] {
+          &:after {
+            font-family: "FontAwesome";
+            content: "\f077";
+            color: $text-grey;
+            font-weight: normal;
+            transition: 0.3s;
+            right: 0;
+          }
         }
-        &[aria-expanded="false"]{
-            &:after {
-                font-family: 'FontAwesome';
-                content: "\f078";
-                color: $text-grey;
-                font-weight: normal;
-                transition: 0.3s;
-                right: 0;
-            }
+        &[aria-expanded="false"] {
+          &:after {
+            font-family: "FontAwesome";
+            content: "\f078";
+            color: $text-grey;
+            font-weight: normal;
+            transition: 0.3s;
+            right: 0;
+          }
         }
       }
     }
-    .card-body{
+    .card-body {
       padding: 15px;
-      .sub_cat_wrapper{
+      .sub_cat_wrapper {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         width: 100%;
         flex-wrap: wrap;
         //margin: 0 0 15px 0;
-        .add_btn_lined{
+        .add_btn_lined {
           color: $text_light_yellow;
           border: 1px solid $text_light_yellow;
           background-color: $background-white;
@@ -140,14 +136,18 @@
           padding: 0 10px;
           position: relative;
           margin-bottom: 15px;
-          &:focus{
+          &:focus {
             outline: none;
             box-shadow: none;
-        }
-          &:last-child{
+          }
+          &.active {
+            color: $text-white;
+            background-color: $text_light_yellow;
+          }
+          &:last-child {
             //margin: 0;
           }
-          .close_icon{
+          .close_icon {
             position: absolute;
             top: -10px;
             right: -10px;
@@ -155,44 +155,44 @@
             width: 20px;
             border-radius: 50%;
             background-color: $background-white;
-            i{
-                color: $text_light_yellow;
+            i {
+              color: $text_light_yellow;
             }
-        }
+          }
         }
       }
-      .common_form{
-        label{
+      .common_form {
+        label {
           color: $mid_gray_bg;
           font-size: 12px;
           font-weight: 500;
         }
-        input{
+        input {
           border: none;
           border-radius: 0;
           border-bottom: 2px solid $box-border-color;
           font-size: 14px;
           padding: 8px 0;
-          &:focus{
+          &:focus {
             outline: none;
             box-shadow: none;
           }
         }
-        select{
+        select {
           border: none;
           border-radius: 0;
           border-bottom: 2px solid $box-border-color;
           font-size: 14px;
           padding: 8px 0;
-          &:focus{
+          &:focus {
             outline: none;
             box-shadow: none;
           }
         }
-        .nation_wrps{
-          ng-select{
-            .ng-input{
-              &[aria-expanded="true"]{
+        .nation_wrps {
+          ng-select {
+            .ng-input {
+              &[aria-expanded="true"] {
                 &:after {
                   content: "";
                   position: relative;
@@ -205,14 +205,14 @@
                   right: 8px;
                   border: none;
                   top: 5px;
-                  @include tab-view{
-                  position: absolute;
-                  right: 0;
-                  height: 12px;
+                  @include tab-view {
+                    position: absolute;
+                    right: 0;
+                    height: 12px;
                   }
                 }
               }
-              &[aria-expanded="false"]{
+              &[aria-expanded="false"] {
                 &:after {
                   position: relative;
                   padding: 5px 9px;
@@ -225,7 +225,7 @@
                   right: 8px;
                   border: none;
                   top: 5px;
-                  @include tab-view{
+                  @include tab-view {
                     position: absolute;
                     right: 0;
                     height: 12px;
@@ -235,79 +235,80 @@
             }
           }
         }
-        .mb-sm-10{
+        .mb-sm-10 {
           margin-bottom: 10px;
-          &.telephone_wrps{
-            .tel_span{
+          &.telephone_wrps {
+            .tel_span {
               border-bottom: 2px solid $box-border-color;
               display: flex;
               position: relative;
               bottom: 2px;
-              input{
+              input {
                 border-bottom: none;
-                &:first-child{
+                &:first-child {
                   width: 30px;
                 }
               }
             }
           }
-          &.dobs{
-            input{
-              background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+          &.dobs {
+            input {
+              background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
+                no-repeat;
               background-size: 20px;
               // border: none;
             }
           }
-          .gender_anchers{
+          .gender_anchers {
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            a{
-                &.active{
-                    color: $text_light_yellow;
-                }
-                color: $mid_gray_bg;
-                font-size: 14px;
-                padding: 0 25px 0 0;
-                &:hover{
-                    color: $text_light_yellow;
-                    text-decoration: none;
-                }
-                &:focus{
-                    outline: none;
-                }
+            a {
+              &.active {
+                color: $text_light_yellow;
+              }
+              color: $mid_gray_bg;
+              font-size: 14px;
+              padding: 0 25px 0 0;
+              &:hover {
+                color: $text_light_yellow;
+                text-decoration: none;
+              }
+              &:focus {
+                outline: none;
+              }
             }
-        }
+          }
         }
       }
-      .accordion_addn{
+      .accordion_addn {
         margin-top: 20px;
-        .card{
+        .card {
           border: none;
-          .card-header{
+          .card-header {
             border: none;
             background-color: transparent;
             padding: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            @include tab-view{
+            @include tab-view {
               flex-direction: column;
             }
-            .heade_wrps{
+            .heade_wrps {
               color: $active-tab-text;
               font-size: 16px;
               font-weight: 500;
               margin-right: 15px;
-              @include tab-view{
+              @include tab-view {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
                 margin: 0;
               }
-              .responsive_anch{
+              .responsive_anch {
                 display: none;
-                @include tab-view{
+                @include tab-view {
                   font-weight: 600;
                   color: $text-black;
                   font-size: 16px;
@@ -317,31 +318,31 @@
                   justify-content: space-between;
                   align-items: center;
                   padding: 0;
-          
-                  &[aria-expanded="true"]{
-                      &:after {
-                          font-family: 'FontAwesome';
-                          content: "\f077";
-                          color: $text-grey;
-                          font-weight: normal;
-                          transition: 0.3s;
-                          right: 0;
-                      }
+
+                  &[aria-expanded="true"] {
+                    &:after {
+                      font-family: "FontAwesome";
+                      content: "\f077";
+                      color: $text-grey;
+                      font-weight: normal;
+                      transition: 0.3s;
+                      right: 0;
+                    }
                   }
-                  &[aria-expanded="false"]{
-                      &:after {
-                          font-family: 'FontAwesome';
-                          content: "\f078";
-                          color: $text-grey;
-                          font-weight: normal;
-                          transition: 0.3s;
-                          right: 0;
-                      }
+                  &[aria-expanded="false"] {
+                    &:after {
+                      font-family: "FontAwesome";
+                      content: "\f078";
+                      color: $text-grey;
+                      font-weight: normal;
+                      transition: 0.3s;
+                      right: 0;
+                    }
                   }
                 }
               }
             }
-            .addon_anchor{
+            .addon_anchor {
               font-weight: 600;
               color: $text-black;
               font-size: 16px;
@@ -351,59 +352,59 @@
               justify-content: space-between;
               align-items: center;
               padding: 0;
-      
-              &[aria-expanded="true"]{
-                  &:after {
-                      font-family: 'FontAwesome';
-                      content: "\f077";
-                      color: $text-grey;
-                      font-weight: normal;
-                      transition: 0.3s;
-                      right: 0;
-                  }
+
+              &[aria-expanded="true"] {
+                &:after {
+                  font-family: "FontAwesome";
+                  content: "\f077";
+                  color: $text-grey;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 0;
+                }
               }
-              &[aria-expanded="false"]{
-                  &:after {
-                      font-family: 'FontAwesome';
-                      content: "\f078";
-                      color: $text-grey;
-                      font-weight: normal;
-                      transition: 0.3s;
-                      right: 0;
-                  }
+              &[aria-expanded="false"] {
+                &:after {
+                  font-family: "FontAwesome";
+                  content: "\f078";
+                  color: $text-grey;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 0;
+                }
               }
-              @include tab-view{
+              @include tab-view {
                 display: none;
               }
             }
-            #addon_tab{
+            #addon_tab {
               flex-direction: row;
               flex-wrap: nowrap;
               flex: 2;
-              @include tab-view{
+              @include tab-view {
                 flex-wrap: wrap;
                 margin: 5px 0;
                 width: 100%;
               }
-              li{
-                @include tab-view{
+              li {
+                @include tab-view {
                   margin-left: 5px;
                   margin-bottom: 5px;
-                  &:first-child{
+                  &:first-child {
                     margin-left: 0;
                   }
                 }
-                a{
+                a {
                   background-color: $background-white;
-                  color: #E4E4E4;
-                  border: 1px solid #E4E4E4;
+                  color: #e4e4e4;
+                  border: 1px solid #e4e4e4;
                   border-radius: 8px;
                   font-size: 14px;
                   margin: 0 5px;
-                  @include tab-view{
+                  @include tab-view {
                     margin: 0;
                   }
-                  &.active{
+                  &.active {
                     color: $active-tab-text;
                     border: 1px solid $active-tab-text;
                   }
@@ -411,16 +412,16 @@
               }
             }
           }
-          .card-body{
+          .card-body {
             padding: 0;
             margin-top: 15px;
-            .addon_listins_wrps{
+            .addon_listins_wrps {
               display: flex;
               justify-content: flex-end;
-              @include tab-view{
+              @include tab-view {
                 justify-content: flex-start;
               }
-              .addon_btn_drop{
+              .addon_btn_drop {
                 background-color: $background-white;
                 color: $mid_gray_bg;
                 border: 1px solid $mid_gray_bg;
@@ -432,28 +433,28 @@
                 position: relative;
                 max-width: 420px;
                 margin-right: 30px;
-                &:focus{
+                &:focus {
                   outline: none;
                   box-shadow: none;
                 }
-                &:hover{
+                &:hover {
                   outline: none;
                   box-shadow: none;
                 }
-                &[aria-expanded="true"]{
+                &[aria-expanded="true"] {
                   &:after {
-                      font-family: 'FontAwesome';
-                      content: "\f077";
-                      color: $text-grey;
-                      font-weight: normal;
-                      transition: 0.3s;
-                      right: 10px;
-                      position: absolute;
+                    font-family: "FontAwesome";
+                    content: "\f077";
+                    color: $text-grey;
+                    font-weight: normal;
+                    transition: 0.3s;
+                    right: 10px;
+                    position: absolute;
                   }
                 }
-                &[aria-expanded="false"]{
+                &[aria-expanded="false"] {
                   &:after {
-                    font-family: 'FontAwesome';
+                    font-family: "FontAwesome";
                     content: "\f078";
                     color: $text-grey;
                     font-weight: normal;
@@ -462,27 +463,27 @@
                     position: absolute;
                   }
                 }
-                @include tab-view{
+                @include tab-view {
                   margin-right: 0;
                   text-align: left;
                   align-items: center;
                   display: flex;
                 }
               }
-              .dropdownList{
-                li{
-                  button{
+              .dropdownList {
+                li {
+                  button {
                     border: none;
-                    @include tab-view{
+                    @include tab-view {
                       padding: 5px;
                       font-size: 12px;
                       white-space: normal;
                     }
-                    &:focus{
+                    &:focus {
                       outline: none;
                       box-shadow: none;
                     }
-                    &:hover{
+                    &:hover {
                       outline: none;
                       box-shadow: none;
                     }

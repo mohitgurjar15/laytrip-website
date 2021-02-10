@@ -61,7 +61,7 @@ export class TravelerFormComponent implements OnInit {
     private checkOutService: CheckOutService,
     private cartService: CartService,
     private travelerService: TravelerService,
-    private ref: ChangeDetectorRef
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -140,7 +140,8 @@ export class TravelerFormComponent implements OnInit {
             //Add
             this.travelerService.addAdult(data).subscribe((traveler: any) => {
               this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].userId = traveler.userId;
-              this.checkOutService.setTravelers([...this.myTravelers, traveler])
+              this.checkOutService.setTravelers([...this.myTravelers, traveler]);
+              this.cd.detectChanges();
             }, error => {
 
             })
@@ -169,7 +170,7 @@ export class TravelerFormComponent implements OnInit {
         this.patch()
       }
     })
-    this.checkOutService.emitTravelersformData(this.travelerForm)
+    this.checkOutService.emitTravelersformData(this.travelerForm);
     this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
   }
 
