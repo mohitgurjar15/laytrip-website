@@ -320,7 +320,19 @@ export class BookingComponent implements OnInit {
     }
 
     if(this.isValidTravelers && this.cardToken!=''){
-      this.router.navigate(['/cart/checkout'])
+        for (let i = 0; i < this.carts.length; i++) {
+          let data = this.travelerForm.controls[`type${i}`].value.adults;
+          let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+          let cartData = {
+            cart_id: this.carts[i].id,
+            travelers: travelers
+          }
+          this.cartService.updateCart(cartData).subscribe(data => {
+            if (i === this.carts.length - 1) {
+              this.router.navigate(['/cart/checkout'])
+            }
+          });
+        }
     }
   }
 }
