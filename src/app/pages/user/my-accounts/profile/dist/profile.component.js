@@ -198,7 +198,7 @@ var ProfileComponent = /** @class */ (function () {
             var imgfile = '';
             if (this.imageFile) {
                 imgfile = this.imageFile;
-                formdata.append("profile_pic", imgfile);
+                // formdata.append("profile_pic",imgfile);
             }
             formdata.append("title", 'mr');
             formdata.append("first_name", this.profileForm.value.first_name);

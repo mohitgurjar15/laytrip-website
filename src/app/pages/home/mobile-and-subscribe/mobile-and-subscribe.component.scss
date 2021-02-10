@@ -129,7 +129,10 @@
     margin: 0 0 5px;
   }
   .message_success {
-    background: #28a745;
+    //background: #28a745;
+    color: $pink;
+    background-color: transparent;
+    text-transform: none;
   }
   .message_error {
     background: #dc3545;
