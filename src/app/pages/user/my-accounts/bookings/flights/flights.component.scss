@@ -535,7 +535,7 @@
                             }
 
                             .heade_wrps {
-                                color: $active-tab-text;
+                                color: $text-black;
                                 font-size: 16px;
                                 font-weight: 500;
                                 margin-right: 15px;
@@ -673,7 +673,7 @@
                                         color: #E4E4E4;
                                         border: 1px solid #E4E4E4;
                                         border-radius: 8px;
-                                        font-size: 14px;
+                                        font-size: 12px;
                                         width: 100%;
                                         justify-content: center;
                                         align-items: center;
@@ -682,8 +682,8 @@
                                         }
 
                                         &.active {
-                                            color: $active-tab-text;
-                                            border: 1px solid $active-tab-text;
+                                            color: $text_grey_dark;
+                                            border: 1px solid $text_grey_dark;
                                         }
                                     }
                                 }

@@ -123,9 +123,18 @@
                         <span>{{userDetails.firstName}}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a [routerLink]="['/account']" class="hover-link">{{'my_account_header' | translate}}</a>
-                        </li>
-                        <li><a class="hover-link" (click)="onLoggedout()">{{'logout_header' | translate}}</a></li>
+                        <li><a class="hover-link" [routerLink]="['/account']">{{'my_account_header' |
+                            translate}}</a></li>
+                        <li><a [routerLink]="['/account/bookings']">My Bookings</a></li>
+                        <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
+                            class="disabled">
+                            <a class="nav-link hover-link "
+                                [routerLink]="['/account/lay-credit-points']">
+                                <span class="lay_points_dot ok" id="layPoints">
+                                    Points</span>
+                            </a>
+                        </li> 
+                        <li><a class="hover-link" (click)="onLoggedout()">Sign Out</a></li>
                     </ul>
                 </div>
                 <div class="cart_section anchor-tag">
