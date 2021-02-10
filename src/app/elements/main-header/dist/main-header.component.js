@@ -102,6 +102,9 @@ var MainHeaderComponent = /** @class */ (function () {
             localStorage.removeItem("_isSubscribeNow");
             this.isLoggedIn = true;
             this.userDetails = jwt_helper_1.getLoginUserInfo();
+            var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
+            var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
+            this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
             if (this.userDetails.roleId != 7 && !this._isLayCredit) {
                 this.totalLaycredit();
                 this.getCartList();
@@ -155,22 +158,24 @@ var MainHeaderComponent = /** @class */ (function () {
     MainHeaderComponent.prototype.redirectToPayment = function () {
         /* if (this.isLoggedIn && this.cartItemsCount > 0) {
         } */
-        this.router.navigate(["flight/payment/ZVZ4WEFNOW8ybVIwT0VX"]);
+        this.router.navigate(["cart/booking"]);
     };
     MainHeaderComponent.prototype.calculateInstalment = function (cartPrices) {
         var _this = this;
-        console.log("cartPricescartPrices", cartPrices);
         var totalPrice = 0;
         var checkinDate;
-        if (cartPrices.length > 0) {
-            checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-            for (var i = 0; i < cartPrices.length; i++) {
-                totalPrice += cartPrices[i].module_Info.selling_price;
-                if (i == 0) {
-                    continue;
-                }
-                if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
-                    checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+        console.log('cartprices:::::', cartPrices);
+        if (cartPrices && cartPrices.length > 0) {
+            if (typeof cartPrices[0].module_Info !== 'undefined' && typeof cartPrices[0].module_Info.departure_date !== 'undefined') {
+                checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+                for (var i = 0; i < cartPrices.length; i++) {
+                    totalPrice += cartPrices[i].module_Info.selling_price;
+                    if (i == 0) {
+                        continue;
+                    }
+                    if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
+                        checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+                    }
                 }
             }
         }

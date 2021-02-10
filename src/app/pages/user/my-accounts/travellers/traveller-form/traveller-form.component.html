@@ -1,197 +1,3 @@
-<!-- <div class="modal-header">
-    <div class="block_title">
-        <h5>{{ travellerId ? ('edit_co_traveler' | translate) : ('add_co_traveler' | translate)}}</h5>
-    </div>
-    <button type="button" class="close" (click)="close()">
-        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-    </button>
-</div>
-<form [formGroup]="coAccountForm" (ngSubmit)="onSubmit()">
-    <div class="modal-body">
-        <div class="add_card_form">
-            <div class="form_row">
-                <div class="form_field">
-                    <label>{{'gender' | translate}}<sup>*</sup></label>
-                    <ul class="custom_listing">
-                        <li>
-                            <label class="custom_radio">{{'male' | translate}}
-                                <input type="radio" checked="checked" formControlName="gender" value="M" tabindex="0">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="custom_radio">{{'female' | translate}}
-                                <input type="radio" formControlName="gender" value="F" tabindex="-1">
-                                <span class="checkmark"></span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="form_row">
-                <div class="form_field half">
-                    <label>{{'first_name' | translate}}<sup>*</sup></label>
-                    <div class="text_field">
-                        <input type="text" formControlName="firstName" maxlength="20" tabindex="1"
-                            placeholder="{{'first_name_placeholder' | translate}}">
-                        <div *ngIf="(submitted  || coAccountForm.controls.firstName.touched) && coAccountForm.controls.firstName.errors"
-                            class="focus-input100 login-error">
-                            <div *ngIf="coAccountForm.controls.firstName.errors.required" class="error_text">
-                                {{'first_name_touched_validation' | translate}}
-                            </div>
-                        
-                            <div *ngIf="coAccountForm.controls.firstName.errors.pattern" class="error_text">
-                                {{'first_name_string_validation' | translate}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form_field half">
-                    <label>{{'last_name' | translate}}<sup>*</sup></label>
-                    <div class="text_field">
-                        <input type="text" formControlName="lastName" maxlength="20" tabindex="2"
-                            placeholder="{{'last_name_placeholder' | translate}}">
-                        <div *ngIf="(submitted  || coAccountForm.controls.lastName.touched) && coAccountForm.controls.lastName.errors"
-                            class="focus-input100 login-error">
-                            <div *ngIf="coAccountForm.controls.lastName.errors.required" class="error_text">
-                                {{'last_name_touched_validation' | translate}}
-                            </div>
-                            <div *ngIf="coAccountForm.controls.lastName.errors.pattern" class="error_text">
-                                {{'last_name_string_validation' | translate}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form_row">
-                <div class="form_field half">
-                    <label>{{'dob' | translate}}<sup>*</sup></label>
-                    <div class="text_field">
-                        <p-calendar class="account_datepicker" dateFormat="M d, yy" tabindex="3" inputStyleClass="custom_datpicker birth_date"
-                            inputId="basic" formControlName="dob" placeholder="{{'dob_placeholder' | translate}}"
-                            [maxDate]="dobMaxDate" [yearNavigator]="true" [monthNavigator]="true" yearRange="1970:2020"
-                            [defaultDate]="dobMaxDate" panelStyleClass="calender-price-view" (onSelect)=changeDateOfBirth($event)>
-                        </p-calendar>
-
-                    </div>
-                    <div *ngIf="(submitted && coAccountForm.controls.dob.errors)" class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.dob.errors.required" class="error_text">
-                            {{'dob_touched_validation' | translate}}
-                        </div>
-                    </div>
-                </div>
-                <div class="form_field half">
-                    <label>{{'nationality' | translate}}<sup>*</sup></label>
-                    <div class="text_field custom-select">
-                        <ng-select class="ng-customClass" [items]="countries" bindLabel="name" tabindex="4"
-                            [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
-                            placeholder="{{'select_nationality_placeholder' | translate}}">
-                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                <span class="ng-value-label"><img class="img_country_code"
-                                        [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
-                                        width="20px" height="20px"> {{ item.name ? item.name : 'Select nationality' }}
-                                </span>
-                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                            </ng-template>
-                            <ng-template ng-option-tmp let-item="item">
-                                <img class="img_country_code" [src]="item.flag" width="20px" height="20px">
-                                {{item.name}}
-                            </ng-template>
-                        </ng-select>
-                    </div>
-                    <div *ngIf="(submitted  || coAccountForm.controls.country_id.touched) && coAccountForm.controls.country_id.errors"
-                        class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.country_id.errors.required" class="error_text">
-                            {{'select_nationality_touched_validation' | translate}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form_row" *ngIf="isAdult || !isChild && !isInfant">
-                <div class="form_field half">
-                    <label>{{'email' | translate}}<sup>*</sup></label>
-                    <div class="text_field">
-                        <input type="email" [readonly]="travelerInfo.email" formControlName="email" maxlength="40"
-                            tabindex="5" placeholder="{{'email_placeholder' | translate}}">
-                    </div>
-                    <div *ngIf="(submitted  || coAccountForm.controls.email.touched) && coAccountForm.controls.email.errors"
-                        class="focus-input100 login-error">
-                        <div *ngIf="coAccountForm.controls.email.errors.required" class="error_text">
-                            {{'email_touched_validation' | translate}}
-                        </div>
-                        <div *ngIf="coAccountForm.controls.email.errors.pattern" class="error_text">
-                            {{'email_invalid_validation' | translate}}</div>
-                    </div>
-                </div>
-                <div class="form_field half">
-                    <label>{{'phone_no' | translate}}<sup>*</sup></label>
-                    <div class="text_field">
-                        <div class="phone_no">
-                            <div class="code">
-                                <div class="dropdown">
-                                    <ng-select class="ng-customClass country_code" tabindex="6" selectOnTab="true"
-                                        [items]="countries_code" bindLabel="country_name" clearSearchOnAdd="true"
-                                        formControlName="country_code"
-                                        placeholder="{{'country_code_placeholder' | translate}}">
-                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                            <span class="ng-value-label"><img class="img_country_code"
-                                                    [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
-                                                    width="20px" height="20px"> {{ item.country_name ? item.country_name
-                                                : 'Select country code' }} </span>
-                                            <span class="ng-value-icon right" (click)="clear(item)"
-                                                aria-hidden="true">×</span>
-                                        </ng-template>
-                                        <ng-template ng-option-tmp let-item="item">
-                                            <img class="img_country_code" [src]="item.flag" width="20px" height="20px">
-                                            {{item.country_name}}
-                                        </ng-template>
-                                    </ng-select>
-                                </div>
-                            </div>
-                            <div class="number">
-                                <input type="text" formControlName="phone_no" maxlength="10" minlength="10"
-                                    (keypress)="commonFunction.validateNumber($event)" tabindex="7"
-                                    placeholder="0000 0000 00">
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="(submitted || coAccountForm.controls.country_code.touched || coAccountForm.controls.phone_no.touched) 
-                                             && coAccountForm.hasError('phoneAndPhoneCodeError')">
-                        <p class="error_text">{{'phone_touched_validation' | translate}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="form_row" *ngIf="isAdult || !isInfant || isChild">
-                <div class="form_field half">
-                    <label>{{'passport_number' | translate}}</label>
-                    <div class="text_field">
-                        <input type="text" formControlName="passport_number" maxlength="30" tabindex="8"
-                            placeholder="{{'passport_number_placeholder' | translate}}">
-                    </div>
-                </div>
-                <div class="form_field half">
-                    <label>{{'passport_expiry_date' | translate}}</label>
-                    <div class="text_field">
-                        <p-calendar class="account_datepicker" dateFormat="M d, yy" tabindex="9" inputStyleClass="custom_datpicker birth_date"
-                            inputId="basic" formControlName="passport_expiry" [minDate]="expiryMinDate"
-                            [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2030"
-                            [defaultDate]="dobMaxDate" panelStyleClass="calender-price-view calender-passport-expiry"
-                            placeholder="{{'passport_expiry_date_placeholder' | translate}}">
-                        </p-calendar>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-    <div class="modal-footer">
-        <div class="form_btn">
-            <button> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
-                {{ travellerId ? ('update_traveler' | translate) : ('add_traveler' | translate) }} </button>
-        </div>
-    </div>
-</form>
- -->
 <form [formGroup]="travellerForm">
     <div class="common_form">
         <div class="form-row">
@@ -237,7 +43,7 @@
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account">
                 <label for="">Date of birth*</label>
                 <p-calendar tabindex="24" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
-                    formControlName="dob"   [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
+                    formControlName="dob"  [maxDate]="dobMaxDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                     yearRange="{{dobYearRange}}" (onSelect)=selectDob($event) 
                     placeholder="Date of birth">
                 </p-calendar>
@@ -304,15 +110,15 @@
                 
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult || isChild"> 
-                <label for="">Passport number</label>
-                <input tabindex="28" type="text" class="form-control" placeholder="Passport number" formControlName="passport_number">
+                <label for="">Passport Number</label>
+                <input tabindex="28" type="text" class="form-control" placeholder="Passport Number" formControlName="passport_number">
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account"  *ngIf="isAdult || isChild">
-                <label for="">Passport expiry date</label>
+                <label for="">Passport Expiry Date</label>
                 <p-calendar tabindex="29" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="passport_expiry" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                     yearRange="2021:2030"
-                    placeholder="Passport expiry date">
+                    placeholder="Passport Expiry Date">
                 </p-calendar>
             </div>
             

@@ -83,7 +83,6 @@ export class SocialLoginComponent implements OnInit {
   public googleLogin(element) {
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
-        console.log('here')
 
         let profile = googleUser.getBasicProfile();
         
@@ -113,7 +112,7 @@ export class SocialLoginComponent implements OnInit {
         });
 
       }, (error) => {
-        console.log(error)
+        this.socialError.emit('');
         this.google_loading = false;
       });
   }
@@ -196,6 +195,7 @@ export class SocialLoginComponent implements OnInit {
           });
         });
       } else {
+        this.socialError.emit('');
         this.loading = false;
         // this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
