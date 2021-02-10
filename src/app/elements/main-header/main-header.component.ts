@@ -60,7 +60,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
       if (data.length > 0) {
         console.log(data, "getCartItems.subscribe")
-        this.calculateInstalment(data);
+        setTimeout(()=>{this.calculateInstalment(data);},1000)
+        
       }
     })
     this.countryCode = this.commonFunction.getUserCountry();
@@ -194,7 +195,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     let checkinDate;
     console.log('cartprices:::::', cartPrices);
     if (cartPrices && cartPrices.length > 0) {
-      if (typeof cartPrices[0].module_Info !== 'undefined' && typeof cartPrices[0].module_Info.departure_date !== 'undefined') {
+      /* if (typeof cartPrices[0].module_Info !== 'undefined' && typeof cartPrices[0].module_Info.departure_date !== 'undefined') { */
         checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
         for (let i = 0; i < cartPrices.length; i++) {
           totalPrice += cartPrices[i].module_Info.selling_price;
@@ -205,7 +206,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
             checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
           }
         }
-      }
+      /* } */
 
     }
 

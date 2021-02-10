@@ -52,6 +52,7 @@ export class BookingComponent implements OnInit {
   travelerForm: FormGroup;
   cardToken: string = '';
   validationErrorMessage:string='';
+  cardListChangeCount:number=0;
 
 
   constructor(
@@ -297,7 +298,7 @@ export class BookingComponent implements OnInit {
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and `;
           this.validationErrorMessage +=message;
         }
       }
@@ -334,5 +335,10 @@ export class BookingComponent implements OnInit {
           });
         }
     }
+  }
+
+  getCardListChange(data){
+    console.log("in data",data)
+    this.cardListChangeCount=data;
   }
 }
