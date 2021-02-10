@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
+import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 declare var $: any;
@@ -11,7 +12,8 @@ declare var $: any;
 export class CardListComponent implements OnInit {
 
   constructor(
-    private genericService: GenericService
+    private genericService: GenericService,
+    private userService : UserService
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   cardLoader: boolean = true;
@@ -20,6 +22,7 @@ export class CardListComponent implements OnInit {
   @Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
   @Input() cardToken: string = '';
+  userInfo;
 
   cardObject = {
     visa: `${this.s3BucketUrl}assets/images/card_visa.svg`,
@@ -45,6 +48,10 @@ export class CardListComponent implements OnInit {
 
   ngOnInit() {
     this.getCardlist();
+
+    this.userService.getProfile().subscribe(res=>{
+      this.userInfo =res;
+    })
   }
 
   getCardlist() {

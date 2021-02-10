@@ -33,12 +33,12 @@ var SocialLoginComponent = /** @class */ (function () {
         this.loadFacebookSdk();
         // APPLE LOGIN RESPONSE 
         this.authService.authState.subscribe(function (userInfo) {
-            console.log('heress');
             if (userInfo) {
                 var objApple = jwt_helper_1.getUserDetails(userInfo.authorization.id_token);
+                console.log(objApple, userInfo);
                 var jsonData = {
                     "account_type": 1,
-                    "name": '',
+                    "name": objApple.name,
                     "email": objApple.email,
                     "social_account_id": userInfo.authorization.code,
                     "device_type": 1,

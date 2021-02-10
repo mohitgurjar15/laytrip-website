@@ -106,7 +106,7 @@ var ProfileComponent = /** @class */ (function () {
         if (!custom_validators_1.fileSizeValidator(event.target.files[0])) {
             this.imageFileError = true;
             this.imageErrorMsg = 'Please select file up to 2mb size';
-            this.toastr.error(this.imageErrorMsg, 'Profile Error');
+            // this.toastr.error(this.imageErrorMsg, 'Profile Error');
             return;
         }
         //file render
@@ -116,6 +116,7 @@ var ProfileComponent = /** @class */ (function () {
             _this.image = reader.result;
         };
         if (!this.imageFileError) {
+            this.imageFileError = false;
             this.loadingValue.emit(true);
             var formdata = new FormData();
             var imgfile = '';
@@ -126,11 +127,11 @@ var ProfileComponent = /** @class */ (function () {
                     _this.submitted = false;
                     _this.loadingValue.emit(false);
                     localStorage.setItem("_lay_sess", data.token);
-                    _this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
+                    // this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
                 }, function (error) {
                     _this.loadingValue.emit(false);
                     _this.submitted = false;
-                    _this.toastr.error(error.error.message, 'Profile Error');
+                    // this.toastr.error(error.error.message, 'Profile Error');
                 });
             }
         }
@@ -200,7 +201,7 @@ var ProfileComponent = /** @class */ (function () {
                 imgfile = this.imageFile;
                 // formdata.append("profile_pic",imgfile);
             }
-            formdata.append("title", 'mr');
+            // formdata.append("title",'mr');
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
@@ -216,11 +217,11 @@ var ProfileComponent = /** @class */ (function () {
                 _this.submitted = false;
                 _this.loadingValue.emit(false);
                 localStorage.setItem("_lay_sess", data.token);
-                _this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
+                // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
                 _this.loadingValue.emit(false);
                 _this.submitted = false;
-                _this.toastr.error(error.error.message, 'Profile Error');
+                // this.toastr.error(error.error.message, 'Profile Error');
             });
         }
     };

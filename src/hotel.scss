@@ -166,6 +166,10 @@
 }
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
     border: 1px solid $text_light_yellow;
+    background-color: $text_light_yellow;
+    width: 16px;
+    height: 16px;
+    top: -7px;
 }
 // NG-SELECT FOCUS REMOVE CSS START
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
