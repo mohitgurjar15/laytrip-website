@@ -62,7 +62,31 @@
               </a>
             </div>
             <div id="upcoming0" class="collapse show" data-parent="#accordion_upcoming">
-              <app-flights></app-flights>
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#home">JFK-MIA</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#menu1">FLL-JFK</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#menu2">JAI-DEL</a>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <div class="tab-pane container active" id="home">
+                  <app-flights></app-flights>
+                </div>
+                <div class="tab-pane container fade" id="menu1">
+                  <app-flights></app-flights>
+                </div>
+                <div class="tab-pane container fade" id="menu2">
+                  <app-flights></app-flights>
+                </div>
+              </div>
+
+              
             </div>
           </div>
         </div>
@@ -96,7 +120,29 @@
               </a>
             </div>
             <div id="completed0" class="collapse show" data-parent="#accordion_completed">
-              <app-flights></app-flights>
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#completed_booking1">JFK-MIA</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#completed_booking2">FLL-JFK</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#completed_booking3">JAI-DEL</a>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <div class="tab-pane container active" id="completed_booking1">
+                  <app-flights></app-flights>
+                </div>
+                <div class="tab-pane container fade" id="completed_booking2">
+                  <app-flights></app-flights>
+                </div>
+                <div class="tab-pane container fade" id="completed_booking3">
+                  <app-flights></app-flights>
+                </div>
+              </div>
             </div>
           </div>
         </div>
