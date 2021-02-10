@@ -61,32 +61,70 @@
                 </div>
               </a>
             </div>
-            <div id="upcoming0" class="collapse show" data-parent="#accordion_upcoming">
-              <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#home">JFK-MIA</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#menu1">FLL-JFK</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#menu2">JAI-DEL</a>
-                </li>
-              </ul>
-
-              <div class="tab-content">
-                <div class="tab-pane container active" id="home">
-                  <app-flights></app-flights>
-                </div>
-                <div class="tab-pane container fade" id="menu1">
-                  <app-flights></app-flights>
-                </div>
-                <div class="tab-pane container fade" id="menu2">
-                  <app-flights></app-flights>
+            <div id="upcoming0" class="collapse show " data-parent="#accordion_upcoming">
+              <div class="accordion_data">
+                <ul class="nav nav-tabs booking_tab_header">
+                  <li>
+                    <a data-toggle="tab" href="#home" class="nav-link active">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu1" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu2" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu3" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu4" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="tab-content main_tab_content">
+                  <div class="tab-pane active" id="home">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu1">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu2">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu3">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu4">
+                    <app-flights></app-flights>
+                  </div>
                 </div>
               </div>
-
               
+              <app-cart-price-summary></app-cart-price-summary>
             </div>
           </div>
         </div>
@@ -120,27 +158,65 @@
               </a>
             </div>
             <div id="completed0" class="collapse show" data-parent="#accordion_completed">
-              <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#completed_booking1">JFK-MIA</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#completed_booking2">FLL-JFK</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#completed_booking3">JAI-DEL</a>
-                </li>
-              </ul>
-
-              <div class="tab-content">
-                <div class="tab-pane container active" id="completed_booking1">
-                  <app-flights></app-flights>
-                </div>
-                <div class="tab-pane container fade" id="completed_booking2">
-                  <app-flights></app-flights>
-                </div>
-                <div class="tab-pane container fade" id="completed_booking3">
-                  <app-flights></app-flights>
+              <div class="accordion_data">
+                <ul class="nav nav-tabs booking_tab_header">
+                  <li>
+                    <a data-toggle="tab" href="#home" class="nav-link active">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu1" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu2" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu3" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu4" class="nav-link">
+                      <span class="tab_round_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_txt_head">JFK-MIA</span>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="tab-content main_tab_content">
+                  <div class="tab-pane active" id="home">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu1">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu2">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu3">
+                    <app-flights></app-flights>
+                  </div>
+                  <div class="tab-pane fade" id="menu4">
+                    <app-flights></app-flights>
+                  </div>
                 </div>
               </div>
             </div>

@@ -58,15 +58,19 @@
           border: none;
           background-color: transparent;
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
           align-items: center;
           width: 100%;
           padding: 0;
+          svg{
+            fill: $grayed_border;
+            max-width: 39px;
+            margin-right: 20px;
+          }
 
           &[aria-expanded="true"] {
             &:after {
               content: "";
-              position: relative;
               padding: 5px 9px;
               margin-left: 10px;
               background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -74,12 +78,13 @@
               background-repeat: no-repeat;
               background-size: 12px;
               transition: 0.3s;
+              position: absolute;
+              right: 15px;
             }
           }
 
           &[aria-expanded="false"] {
             &:after {
-              position: relative;
               padding: 5px 9px;
               margin-left: 10px;
               background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
@@ -88,6 +93,8 @@
               background-size: 12px;
               content: "";
               transition: 0.3s;
+              position: absolute;
+              right: 15px;
             }
           }
         }
