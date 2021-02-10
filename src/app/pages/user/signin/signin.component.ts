@@ -56,7 +56,7 @@ export class SigninComponent  implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {    
-
+    this.apiError = '';        
     this.submitted = false;
     this.loading = true;
     if (this.loginForm.invalid) {

@@ -44,6 +44,7 @@ var SigninComponent = /** @class */ (function () {
     });
     SigninComponent.prototype.onSubmit = function () {
         var _this = this;
+        this.apiError = '';
         this.submitted = false;
         this.loading = true;
         if (this.loginForm.invalid) {
