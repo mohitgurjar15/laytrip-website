@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
     private userService : UserService,
     private genericService : GenericService,
     public router: Router,  
-    public commonFunctoin: CommonFunction,  
+    public commonFunction: CommonFunction,  
     private toastr: ToastrService,
     private cookieService: CookieService,
     private flightService: FlightService
@@ -293,4 +293,6 @@ export class ProfileComponent implements OnInit {
       // this.searchedValue.push({ key: 'fromSearch', value: event });
     } 
   }
+
+ 
 }

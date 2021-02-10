@@ -14,12 +14,12 @@ var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService, flightService) {
+    function ProfileComponent(formBuilder, userService, genericService, router, commonFunction, toastr, cookieService, flightService) {
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.genericService = genericService;
         this.router = router;
-        this.commonFunctoin = commonFunctoin;
+        this.commonFunction = commonFunction;
         this.toastr = toastr;
         this.cookieService = cookieService;
         this.flightService = flightService;

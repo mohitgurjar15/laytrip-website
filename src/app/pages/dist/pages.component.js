@@ -11,10 +11,11 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var jwt_helper_1 = require("../_helpers/jwt.helper");
 var PagesComponent = /** @class */ (function () {
-    function PagesComponent(router, genericService) {
+    function PagesComponent(router, genericService, cd) {
         var _this = this;
         this.router = router;
         this.genericService = genericService;
+        this.cd = cd;
         this.router.events.subscribe(function (event) {
             if (event instanceof router_1.NavigationStart) {
                 // Trigger when route change
@@ -24,7 +25,12 @@ var PagesComponent = /** @class */ (function () {
     }
     PagesComponent.prototype.ngOnInit = function () {
         this.checkUserValidate();
-        document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
+        document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
+        this.lottieConfig = {
+            path: 'assets/data.json',
+            autoplay: true,
+            loop: true
+        };
     };
     PagesComponent.prototype.checkUserValidate = function () {
         var token = localStorage.getItem('_lay_sess');
