@@ -140,6 +140,10 @@
             outline: none;
             box-shadow: none;
           }
+          &:hover {
+            color: $text-white;
+            background-color: $text_light_yellow;
+          }
           &.active {
             color: $text-white;
             background-color: $text_light_yellow;

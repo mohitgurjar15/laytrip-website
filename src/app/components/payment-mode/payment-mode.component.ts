@@ -12,7 +12,6 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./payment-mode.component.scss']
 })
 export class PaymentModeComponent implements OnInit {
-
   
   @Output() selectInstalmentMode = new EventEmitter();
   @Output() redeemableLayCredit = new EventEmitter();
@@ -159,15 +158,13 @@ export class PaymentModeComponent implements OnInit {
             selectedDownPayment:this.selectedDownPaymentIndex
           })
         }
-
-        
       },(err)=>{
 
       })
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['laycreditpoints']) {
+    if (changes && changes['laycreditpoints']) {
       this.laycreditpoints =Number(changes['laycreditpoints'].currentValue);
       this.instalmentRequest.additional_amount = this.laycreditpoints;
       this.calculateInstalment('down-payment',null);

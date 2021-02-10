@@ -13,7 +13,7 @@ export class CardListComponent implements OnInit {
 
   constructor(
     private genericService: GenericService,
-    private userService : UserService
+    private userService: UserService
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   cardLoader: boolean = true;
@@ -49,8 +49,8 @@ export class CardListComponent implements OnInit {
   ngOnInit() {
     this.getCardlist();
 
-    this.userService.getProfile().subscribe(res=>{
-      this.userInfo =res;
+    this.userService.getProfile().subscribe(res => {
+      this.userInfo = res;
     })
   }
 
@@ -73,7 +73,7 @@ export class CardListComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (typeof changes['newCard'].currentValue !== 'undefined') {
+    if (changes && changes['newCard'] && changes['newCard'].currentValue && typeof changes['newCard'].currentValue !== 'undefined') {
       if (typeof this.newCard !== 'undefined') {
         this.cards.push(this.newCard);
         this.cardToken = this.newCard.cardToken;
