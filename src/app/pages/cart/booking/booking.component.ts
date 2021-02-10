@@ -259,6 +259,7 @@ export class BookingComponent implements OnInit {
   }
 
   saveAndSearch() {
+    this.validationErrorMessage='';
     if (this.isValidTravelers) {
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
@@ -275,16 +276,7 @@ export class BookingComponent implements OnInit {
       }
     }
     else {
-      //this.toster.warning("Please enter valid data of traveler into cart", "warning")
-      
-
-    }
-
-    if(this.cardToken==''){
-
-    }
-    else{
-
+      this.validateCartItems();
     }
   }
 
@@ -297,7 +289,7 @@ export class BookingComponent implements OnInit {
     this.validationErrorMessage='';
   }
 
-  continueToCheckout(){
+  validateCartItems(){
     this.validationErrorMessage='';
     if (!this.isValidTravelers) {
       this.validationErrorMessage='Traveller details is not valid for '
@@ -312,6 +304,11 @@ export class BookingComponent implements OnInit {
       let index = this.validationErrorMessage.lastIndexOf(" ");
       this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     }
+  }
+
+  continueToCheckout(){
+    this.validationErrorMessage='';
+    this.validateCartItems();
 
     if(this.cardToken==''){
       if(this.validationErrorMessage==''){
