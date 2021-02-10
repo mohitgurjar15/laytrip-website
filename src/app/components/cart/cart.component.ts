@@ -34,6 +34,7 @@ export class CartComponent implements OnInit {
   }
 
   selectCart(cartNumber) {
+    this.selectedCart = cartNumber;
     this.cartService.setCartNumber(cartNumber);
   }
 
