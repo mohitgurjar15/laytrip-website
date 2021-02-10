@@ -114,20 +114,7 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('fieldEvent', function (name, event, activeElement, inputData) {
-      /* if (event == 'input') {
-        if (inputData["validCvv"]) {
-          Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
-          Spreedly.setStyle('cvv', "border: none;");
-        } else {
-          Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
-        }
-        if (inputData["validNumber"]) {
-          Spreedly.setStyle('number', "background-color: #e8f0fe;");
-          Spreedly.setStyle('number', "border: none;");
-        } else {
-          Spreedly.setStyle('number', "background-color: #FFFFFF;");
-        }
-      } */
+      
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {

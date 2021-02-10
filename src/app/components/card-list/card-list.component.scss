@@ -8,7 +8,7 @@
 .accordion_cardss {
     margin: 25px 15px 15px 15px;
     .card {
-        border: 1px solid $grayed_border;
+        border: 1px solid $box-border-color;
         border-radius: 10px;
         margin-top: 20px;
         &:first-child {
@@ -21,6 +21,8 @@
             border: none;
             background-color: transparent;
             padding: 15px;
+            height: 68px;
+            display: flex;
             a {
                 font-weight: 600;
                 color: $text-black;
