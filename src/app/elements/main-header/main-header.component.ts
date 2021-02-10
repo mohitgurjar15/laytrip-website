@@ -124,6 +124,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
       this.userDetails = getLoginUserInfo();
+      var name   = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
+      var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") +1);
+      this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
       if (this.userDetails.roleId != 7 && !this._isLayCredit) {
         this.totalLaycredit();
         this.getCartList();

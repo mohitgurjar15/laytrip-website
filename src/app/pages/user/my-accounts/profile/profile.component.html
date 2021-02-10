@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div class="form_row common_row">
-                <label>{{'gender_placeholder' |translate}}<sup>*</sup></label>
+                <label>{{'gender' |translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <div class="gender_anchers">
                         <a [ngClass]="{'active': (is_type == 'M')}" class="hover-link"
@@ -142,7 +142,7 @@
                 
             </div>
             <div class="form_row common_row">
-                <label>{{'location_detail' | translate}}</label>
+                <label>{{'address_label' | translate}}</label>
                 <div class="text_field">
                     <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
                         id="" cols="15" rows="10" tabindex="12"></textarea>
