@@ -262,6 +262,7 @@ export class BookingComponent implements OnInit {
   saveAndSearch() {
     this.validationErrorMessage='';
     if (this.isValidTravelers) {
+      this.loading=true;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
@@ -271,6 +272,7 @@ export class BookingComponent implements OnInit {
         }
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
+            this.loading=false;
             this.router.navigate(['/'])
           }
         });
@@ -321,6 +323,7 @@ export class BookingComponent implements OnInit {
     }
 
     if(this.isValidTravelers && this.cardToken!=''){
+        this.loading=true;
         for (let i = 0; i < this.carts.length; i++) {
           let data = this.travelerForm.controls[`type${i}`].value.adults;
           let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
@@ -330,6 +333,7 @@ export class BookingComponent implements OnInit {
           }
           this.cartService.updateCart(cartData).subscribe(data => {
             if (i === this.carts.length - 1) {
+              this.loading=false;
               this.router.navigate(['/cart/checkout'])
             }
           });
