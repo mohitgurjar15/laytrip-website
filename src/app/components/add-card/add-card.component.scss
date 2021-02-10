@@ -71,11 +71,11 @@
             box-shadow: none;
         }
     }
-    .mb-sm-10{
-        @include tab-view{
-          margin-bottom: 10px;
+    .mb-sm-10 {
+        @include tab-view {
+            margin-bottom: 10px;
         }
-      }
+    }
     .iframe_wrapper {
         height: 38px;
     }
@@ -104,7 +104,7 @@
             padding: 0;
             text-align: right;
         }
-        .button{
+        .button {
             background-color: transparent;
             color: $text_light_yellow;
             border: none;
@@ -123,82 +123,83 @@
     line-height: 1.5;
 }
 
-
-
-.accordion_cardss{
+.accordion_cardss {
     margin: 25px 15px 15px 15px;
-    .card{
+    .card {
         border: 1px solid $grayed_border;
         border-radius: 10px;
         margin-top: 20px;
-        &:first-child{
+        &:first-child {
             margin-top: 0;
         }
-        .card-header{
-          border: none;
-          background-color: transparent;
-          padding: 15px;
-          a{
-            font-weight: 600;
-            color: $text-black;
-            font-size: 16px;
+        &.current_selected_card {
+            border: 2px solid #ffaa00 !important;
+        }
+        .card-header {
             border: none;
             background-color: transparent;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 0;
-    
-            &[aria-expanded="true"]{
-                &:after {
-                    font-family: 'FontAwesome';
-                    content: "\f077";
-                    color: $text-grey;
-                    font-weight: normal;
-                    transition: 0.3s;
-                    right: 0;
+            padding: 15px;
+            a {
+                font-weight: 600;
+                color: $text-black;
+                font-size: 16px;
+                border: none;
+                background-color: transparent;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0;
+
+                &[aria-expanded="true"] {
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f077";
+                        color: $text-grey;
+                        font-weight: normal;
+                        transition: 0.3s;
+                        right: 0;
+                    }
+                }
+                &[aria-expanded="false"] {
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f078";
+                        color: $text-grey;
+                        font-weight: normal;
+                        transition: 0.3s;
+                        right: 0;
+                    }
+                }
+                .heade_wrps {
+                    img {
+                        margin-right: 15px;
+                    }
                 }
             }
-            &[aria-expanded="false"]{
-                &:after {
-                    font-family: 'FontAwesome';
-                    content: "\f078";
-                    color: $text-grey;
-                    font-weight: normal;
-                    transition: 0.3s;
-                    right: 0;
-                }
-            }
-            .heade_wrps{
-                img{
-                    margin-right: 15px;
-                }
-            }
-          }
         }
-        .card-body{
-          padding: 15px;
-          .card_headbar{
-              color: $mid_gray_bg;
-              font-size: 12px;
-          }
-          .card_texter{
-              color: $text-black;
-              font-size: 12px;
-              font-weight: 600;
-              line-height: 22px;
-              span{
-                  font-weight: 500;
-              }
-          }
-          .save_btn_wrps{
+        .card-body {
+            padding: 15px;
+            .card_headbar {
+                color: $mid_gray_bg;
+                font-size: 12px;
+            }
+            .card_texter {
+                color: $text-black;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 22px;
+                span {
+                    font-weight: 500;
+                }
+            }
+            .save_btn_wrps {
                 display: flex;
                 justify-content: flex-end;
                 align-items: flex-end;
                 flex-direction: column;
                 height: 100%;
-                a{
+                a {
                     background-color: transparent;
                     color: $text_light_yellow;
                     border: none;

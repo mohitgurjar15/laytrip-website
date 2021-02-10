@@ -157,6 +157,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     LaytripLoaderComponent,
     NgxSpinnerModule,
     EmptyCartComponent,
+    LottieAnimationViewModule,
   ],
   providers: [DatePipe, NgxSpinnerService],
 
