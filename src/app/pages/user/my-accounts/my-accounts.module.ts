@@ -33,6 +33,8 @@ import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add
 import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-popup.component';
 import { AccountComponent } from './account/account.component';
 import { PreferancesComponent } from './preferances/preferances.component';
+import { BookingTravelerComponent } from './bookings/booking-traveler/booking-traveler.component';
+import { CartPriceSummaryComponent } from './bookings/cart-price-summary/cart-price-summary.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { PreferancesComponent } from './preferances/preferances.component';
     SendEmailPopupComponent,
     AccountComponent,
     PreferancesComponent,
+    BookingTravelerComponent,
+    CartPriceSummaryComponent,
   ],
   imports: [
     CommonModule,
