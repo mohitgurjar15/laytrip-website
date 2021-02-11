@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
@@ -33,22 +33,23 @@ export class CheckoutComponent implements OnInit {
   instalmentType: string = 'weekly';
   isLoggedIn: boolean = false;
   priceData = [];
-  priceSummary;
+  priceSummary: any;
   carts = [];
   isValidData: boolean = false;
   cartLoading = false;
-  loading:boolean=false;
-  isCartEmpty:boolean=false;
-  cartPrices=[];
-  travelerForm:FormGroup;
-  cardToken:string='';
+  loading: boolean = false;
+  isCartEmpty: boolean = false;
+  cartPrices = [];
+  travelerForm: FormGroup;
+  cardToken: string = '';
 
   constructor(
     private genericService: GenericService,
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
     private cartService: CartService,
-    private cookieService:CookieService
+    private cookieService: CookieService,
+    private cd: ChangeDetectorRef
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -66,19 +67,20 @@ export class CheckoutComponent implements OnInit {
       this.cartLoading = false;
       let notAvilableItems = [];
       let cart: any;
-      let price:any;
+      let price: any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
         cart.old_module_info = {
-          selling_price : items.data[i].oldModuleInfo[0].selling_price
+          selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         this.carts.push(cart);
+        this.cd.detectChanges();
 
-        price={}
+        price = {}
         price.selling_price = items.data[i].moduleInfo[0].selling_price;
         price.departure_date = items.data[i].moduleInfo[0].departure_date;
         price.start_price = items.data[i].moduleInfo[0].start_price;
@@ -92,21 +94,25 @@ export class CheckoutComponent implements OnInit {
           notAvilableItems.push(items.data[i])
         }
       }
-      this.cartService.setCartPrices(this.cartPrices)
+      this.cartService.setCartPrices(this.cartPrices);
+      this.cd.detectChanges();
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
 
-      this.checkOutService.getPriceSummary.subscribe(data=>{
-        this.priceSummary=data;
+      this.checkOutService.getPriceSummary.subscribe((data: any) => {
+        if (data) {
+          this.priceSummary = data;
+          this.cd.detectChanges();
+        }
       });
-    },error=>{
-      this.isCartEmpty =true;
+    }, error => {
+      this.isCartEmpty = true;
       this.cartLoading = false;
     });
 
-    this.cartService.getCartId.subscribe(cartId=>{
-      if(cartId>0){
+    this.cartService.getCartId.subscribe(cartId => {
+      if (cartId > 0) {
         this.deleteCart(cartId);
         this.cartService.setCardId(0);
       }
@@ -114,14 +120,14 @@ export class CheckoutComponent implements OnInit {
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       this.isValidData = travelerFrom.status === 'VALID' ? true : false;
-      this.travelerForm= travelerFrom;
+      this.travelerForm = travelerFrom;
     })
 
-    try{
-
-      this.cardToken = this.cookieService.get('__cc')
+    try {
+      this.cardToken = this.cookieService.get('__cc');
+      this.cd.detectChanges();
     }
-    catch(e){
+    catch (e) {
       this.cardToken = '';
     }
 
@@ -161,33 +167,33 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  deleteCart(cartId){
-    this.loading=true;
+  deleteCart(cartId) {
+    this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
-      this.loading=false;
-      let index = this.carts.findIndex(x=>x.id==cartId);
+      this.loading = false;
+      let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
-      this.cartPrices.splice(index,1)
+      this.cartPrices.splice(index, 1)
       this.cartService.setCartItems(this.carts);
       this.cartService.setCartPrices(this.cartPrices)
-      if(this.carts.length==0){
-        this.isCartEmpty =true;
+      if (this.carts.length == 0) {
+        this.isCartEmpty = true;
       }
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
     }, error => {
-      this.loading=false;
-      if(error.status==404){
-        let index = this.carts.findIndex(x=>x.id==cartId);
+      this.loading = false;
+      if (error.status == 404) {
+        let index = this.carts.findIndex(x => x.id == cartId);
         this.carts.splice(index, 1);
         this.cartService.setCartItems(this.carts);
-        if(this.carts.length==0){
-          this.isCartEmpty =true;
+        if (this.carts.length == 0) {
+          this.isCartEmpty = true;
         }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       }
     });
   }
 
-  
+
 
 }

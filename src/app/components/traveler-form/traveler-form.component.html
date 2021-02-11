@@ -6,30 +6,30 @@
           <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;">
             <div class="card-header" (click)="selectTravelerNumber($event,x)">
               <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="false">
-                Booking Traveler
+                {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                +travelerItem.value.adults[x].last_name:'Booking Traveler'}}
               </a>
             </div>
-            <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"   data-parent="#accordion">
+            <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"
+              data-parent="#accordion">
               <div class="card-body">
                 <div class="sub_cat_wrapper">
-                  <button (click)="selectTravelerType('adult',x)" class="add_btn_lined">Add Adult (Over 12)
-                    <a *ngIf="traveler.controls.type.value=='adult'" href="javascript:void(0);" class="close_icon">
+                  <button (click)="selectTravelerType('adult',x)" class="add_btn_lined"
+                    [ngClass]="{'active' : traveler.controls.type.value=='adult'}">Add Adult (Over 12)
+                    <!-- <a *ngIf="traveler.controls.type.value=='adult'" href="javascript:void(0);" class="close_icon">
                       <i class="fa fa-times"></i>
-                    </a>
+                    </a> -->
                   </button>
-                  <button (click)="selectTravelerType('child',x)" class="add_btn_lined">Add Child (2-12)
-                    <a *ngIf="traveler.controls.type.value=='child'" href="javascript:void(0);" class="close_icon">
-                      <i class="fa fa-times"></i>
-                    </a>
+                  <button (click)="selectTravelerType('child',x)" class="add_btn_lined"
+                    [ngClass]="{'active' : traveler.controls.type.value=='child'}">Add Child (2-12)
                   </button>
-                  <button (click)="selectTravelerType('infant',x)" class="add_btn_lined">Add Infant (Under 12)
-                    <a *ngIf="traveler.controls.type.value=='infant'" href="javascript:void(0);" class="close_icon">
-                      <i class="fa fa-times"></i>
-                    </a>
+                  <button (click)="selectTravelerType('infant',x)" class="add_btn_lined"
+                    [ngClass]="{'active' : traveler.controls.type.value=='infant'}">Add Infant (Under 12)
                   </button>
                 </div>
-                <app-my-traveler travelerId={{travelerItem.value.adults[x].userId}} traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
-  
+                <app-my-traveler travelerId={{travelerItem.value.adults[x].userId}}
+                  traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
+
                 <div [formGroupName]="x" class="common_form">
                   <div class="form-row">
                     <div class="col-sm-12 col-md-4 mb-sm-10 ">
@@ -37,7 +37,8 @@
                       <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
                       <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                         class="error">
-                        <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter your
+                        <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter
+                          your
                           first name.</small>
                       </div>
                     </div>
@@ -72,7 +73,8 @@
                       <label for="">Email*</label>
                       <input type="email" class="form-control" placeholder="Email" formControlName="email">
                       <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors" class="error">
-                        <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter your email
+                        <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter your
+                          email
                           address.</small>
                       </div>
                     </div>
@@ -90,7 +92,8 @@
                         <input type="text" class="form-control" placeholder="000000000" maxlength="10"
                           formControlName="phone_no">
                       </span>
-                      <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors" class="error">
+                      <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
+                        class="error">
                         <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please enter
                           your telephone number.</small>
                       </div>
@@ -98,8 +101,9 @@
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                       <label for="">Date of birth*</label>
                       <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                      <input type="text" placeholder="Date of birth" class="form-control" bsDatepicker formControlName="dob"
-                        [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value" [maxDate]="traveler.controls.dobMaxDate.value">
+                      <input type="text" placeholder="Date of birth" class="form-control" bsDatepicker
+                        formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
+                        [maxDate]="traveler.controls.dobMaxDate.value">
                       <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                         formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                         (onBlur)=changeDateOfBirth($event)
@@ -120,7 +124,7 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <div id="accordion_add" class="accordion_addn">
                   <div class="card">
                     <div class="card-header">
@@ -143,7 +147,7 @@
                           <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab"
                             aria-controls="insurance" aria-selected="false">Insurance</a>
                         </li>
-  
+
                       </ul>
                       <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor"
                         aria-expanded="true" aria-controls="add_acord">
@@ -162,14 +166,15 @@
                           </div>
                           <div class="tab-pane fade" id="boarding" role="tabpanel" aria-labelledby="boarding-tab">
                           </div>
-                          <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">.bbbb
+                          <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">
+                            .bbbb
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-  
+
               </div>
             </div>
           </div>
