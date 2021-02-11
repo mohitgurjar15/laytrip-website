@@ -62,7 +62,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
       if (data.length > 0) {
         console.log(data, "getCartItems.subscribe")
-        this.calculateInstalment(data);
+        this.calculateInstalment(data)
+
       }
     })
     this.countryCode = this.commonFunction.getUserCountry();
@@ -126,6 +127,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
       this.userDetails = getLoginUserInfo();
+      var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
+      var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
+      this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
       if (this.userDetails.roleId != 7 && !this._isLayCredit) {
         this.totalLaycredit();
         this.getCartList();
@@ -191,20 +195,20 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   calculateInstalment(cartPrices) {
     let totalPrice = 0;
     let checkinDate;
-    console.log('cartprices:::::', cartPrices);
+    console.log('cartprices:::::', cartPrices[0]);
     if (cartPrices && cartPrices.length > 0) {
-      if (typeof cartPrices[0].module_Info !== 'undefined' && typeof cartPrices[0].module_Info.departure_date !== 'undefined') {
-        checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-        for (let i = 0; i < cartPrices.length; i++) {
-          totalPrice += cartPrices[i].module_Info.selling_price;
-          if (i == 0) {
-            continue;
-          }
-          if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
-            checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-          }
+      /* if (typeof cartPrices[0].module_Info !== 'undefined' && typeof cartPrices[0].module_Info.departure_date !== 'undefined') { */
+      checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+      for (let i = 0; i < cartPrices.length; i++) {
+        totalPrice += cartPrices[i].module_Info.selling_price;
+        if (i == 0) {
+          continue;
+        }
+        if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
+          checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
         }
       }
+      /* } */
 
     }
 
@@ -229,25 +233,27 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     })
   }
 
-  openEmptyCartModal(content) {
-    this.modalRef = this.modalService.open(content, { centered: true, keyboard: false }).result.then((result) => {
-      console.log(result);
-    });
-  }
-
   emptyCart() {
-    this.modalRef.close();
+    $('#empty_modal').modal('hide');
     this.fullPageLoading = true;
     this.genericService.emptyCart().subscribe((res: any) => {
-      console.log(res);
       if (res) {
         this.fullPageLoading = false;
         this.cartItems = [];
         this.cartItemsCount = 0;
         localStorage.setItem('$crt', this.cartItemsCount);
         this.cartService.setCartItems(this.cartItems);
-        this.cd.detectChanges();
+        this.redirectToHome();
       }
     });
+  }
+
+  closeModal() {
+    $('#empty_modal').modal('hide');
+  }
+
+  redirectToHome() {
+    $('#empty_modal').modal('hide');
+    this.router.navigate(['/']);
   }
 }

@@ -26,17 +26,24 @@
                             <a href="javascrip:void(0);">Add New</a>
                         </span> -->
                     </div>
-                    <div class="booking_detail_bg_wrps">
+                    <div class="booking_detail_bg_wrps"> 
+
                         <div id="accordion" class="card_accordion">
                             <div class="card">
-                                <div class="card-header">
-                                    <a class="card-link" data-toggle="collapse" href="#collapseOne"
-                                        aria-controls="collapseOne" aria-expanded="true">
-                                    </a>
-                                </div>
-                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <app-add-card></app-add-card>
+                                <div class="new_card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                            aria-controls="collapseOne" aria-expanded="true">
+                                            <span class="heade_wrps">
+                                                <img src="{{s3BucketUrl}}assets/images/card_gray.svg" alt="Card icon" />
+                                                New
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <app-add-card></app-add-card>
+                                        </div>
                                     </div>
                                 </div>
                                 <app-card-list></app-card-list>
@@ -104,7 +111,7 @@
             </div>
             <ul>
                 <li>
-                    <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancle</button>
+                    <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
                 </li>
                 <li>
                     <button class="btn_yes" (click)=deleteAccount()>Yes</button>

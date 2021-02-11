@@ -52,6 +52,7 @@ export class BookingComponent implements OnInit {
   travelerForm: FormGroup;
   cardToken: string = '';
   validationErrorMessage:string='';
+  cardListChangeCount:number=0;
 
 
   constructor(
@@ -261,6 +262,7 @@ export class BookingComponent implements OnInit {
   saveAndSearch() {
     this.validationErrorMessage='';
     if (this.isValidTravelers) {
+      this.loading=true;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
@@ -270,6 +272,7 @@ export class BookingComponent implements OnInit {
         }
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
+            this.loading=false;
             this.router.navigate(['/'])
           }
         });
@@ -297,7 +300,7 @@ export class BookingComponent implements OnInit {
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and `;
           this.validationErrorMessage +=message;
         }
       }
@@ -320,6 +323,7 @@ export class BookingComponent implements OnInit {
     }
 
     if(this.isValidTravelers && this.cardToken!=''){
+        this.loading=true;
         for (let i = 0; i < this.carts.length; i++) {
           let data = this.travelerForm.controls[`type${i}`].value.adults;
           let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
@@ -329,10 +333,16 @@ export class BookingComponent implements OnInit {
           }
           this.cartService.updateCart(cartData).subscribe(data => {
             if (i === this.carts.length - 1) {
+              this.loading=false;
               this.router.navigate(['/cart/checkout'])
             }
           });
         }
     }
+  }
+
+  getCardListChange(data){
+    console.log("in data",data)
+    this.cardListChangeCount=data;
   }
 }

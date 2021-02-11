@@ -45,16 +45,11 @@ var TravellerFormComponent = /** @class */ (function () {
         this.isAdult = true;
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
-        var _this = this;
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
         }
         catch (e) {
-        }
-        var countryCode;
-        if (this.location) {
-            countryCode = this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
         }
         this.travellerForm = this.formBuilder.group({
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],

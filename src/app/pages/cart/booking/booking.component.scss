@@ -170,7 +170,15 @@
         }
     }
 }
-
+.section_description{
+    transform: translate(0%, -30%);
+    max-width: 445px;
+    position: relative;
+    justify-content: space-between;
+    a{
+        width: 10px !important;
+    }
+}
 .btn_payment{
     display: flex;
     justify-content: flex-end;

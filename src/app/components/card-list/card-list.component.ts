@@ -22,6 +22,7 @@ export class CardListComponent implements OnInit {
   @Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
   @Input() cardToken: string = '';
+  @Input() cardListChangeCount:number=0;
   userInfo;
 
   cardObject = {
@@ -47,6 +48,7 @@ export class CardListComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.getCardlist();
 
     this.userService.getProfile().subscribe(res => {
@@ -73,12 +75,16 @@ export class CardListComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && changes['newCard'] && changes['newCard'].currentValue && typeof changes['newCard'].currentValue !== 'undefined') {
+    if (typeof changes['newCard'] !== 'undefined') {
       if (typeof this.newCard !== 'undefined') {
         this.cards.push(this.newCard);
         this.cardToken = this.newCard.cardToken;
         this.selectCreditCard.emit(this.newCard.cardToken)
       }
+    }
+
+    if(typeof changes['cardListChangeCount']!='undefined'){
+      this.getCardlist();
     }
 
     this.cards = this.cards.filter(card => {

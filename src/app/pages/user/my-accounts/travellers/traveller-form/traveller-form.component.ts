@@ -71,11 +71,7 @@ export class TravellerFormComponent implements OnInit {
       this.location = JSON.parse(location);
     }
     catch (e) {
-    }
-    let countryCode: any;
-    if (this.location) {
-      countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-    }
+    }   
 
     this.travellerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],

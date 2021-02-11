@@ -24,6 +24,7 @@ export class AddCardComponent implements OnInit {
   @Input() showAddCardForm: boolean;
   @Output() emitNewCard = new EventEmitter();
   @Output() changeLoading = new EventEmitter;
+  @Output() emitCardListChange = new EventEmitter();
   cardForm: FormGroup;
   submitted: boolean = false;
   token: string;
@@ -35,6 +36,7 @@ export class AddCardComponent implements OnInit {
   };
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
+  cardListChangeCount:number=0;
 
   mask = {
     guide: false,
@@ -112,20 +114,7 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('fieldEvent', function (name, event, activeElement, inputData) {
-      /* if (event == 'input') {
-        if (inputData["validCvv"]) {
-          Spreedly.setStyle('cvv', "background-color: #e8f0fe;");
-          Spreedly.setStyle('cvv', "border: none;");
-        } else {
-          Spreedly.setStyle('cvv', "background-color: #FFFFFF;");
-        }
-        if (inputData["validNumber"]) {
-          Spreedly.setStyle('number', "background-color: #e8f0fe;");
-          Spreedly.setStyle('number', "border: none;");
-        } else {
-          Spreedly.setStyle('number', "background-color: #FFFFFF;");
-        }
-      } */
+      
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {
@@ -173,7 +162,7 @@ export class AddCardComponent implements OnInit {
             diners_club: 'Diners Club',
           }
 
-          $('#card-list').prepend(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
+          /* $('#card-list').prepend(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
           <div class="card">
           <div class="card-header">
               <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="false"
@@ -219,32 +208,28 @@ export class AddCardComponent implements OnInit {
                   </div>
               </div>
           </div>
-      </div></div>`);
+      </div></div>`); */
           $("#payment-form")[0].reset();
           Spreedly.reload();
           var cardTokenNew = obj.cardToken;
           console.log(cardTokenNew);
-          $(document).on("click", "div#card_list_accodrio", function () {
+          /* $(document).on("click", "div#card_list_accodrio", function () {
             if (cardTokenNew === obj.cardToken) {
               $('#card_list_accodrio').children('div').addClass('current_selected_card');
             }
-          });
+          }); */
         },
         error: function (error) {
           console.log('error:', error);
           // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
       });
-
-      // For demonstration purposes just display the token
-      // var messageEl = document.getElementById('message');
-      // messageEl.innerHTML = "Success! The returned payment method token is: " + token;
+      
     });
   }
 
   submitPaymentForm() {
 
-    var normalBorder = "1px solid #ccc";
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     for (var i = 0; i < paymentMethodFields.length; i++) {
@@ -272,17 +257,17 @@ export class AddCardComponent implements OnInit {
       }
     }
 
-    // Reset frame styles
-    //Spreedly.setStyle('number', "border: " + normalBorder + ";");
-    //Spreedly.setStyle('cvv', "border: " + normalBorder + ";");
-
-    // Reset previous messages
-    //document.getElementById('errors').innerHTML = "";
+    
     document.getElementById('message').innerHTML = "";
 
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
     // this.saveCard(cardData);
+    console.log("this.saveCardLoader",this.saveCardLoader)
+    setTimeout(()=>{
+      this.cardListChangeCount+=this.cardListChangeCount+1;
+      this.emitCardListChange.emit(this.cardListChangeCount)
+    },5000)
   }
 
   saveCard(cardData) {
@@ -296,9 +281,5 @@ export class AddCardComponent implements OnInit {
       this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
-  }
-
-  expiryDateUpdate(event) {
-
   }
 }

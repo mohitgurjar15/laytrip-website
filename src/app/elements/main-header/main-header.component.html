@@ -70,7 +70,7 @@
                                     <a class="nav-link" class="dropdown-toggle hover-link" data-toggle="dropdown"
                                         aria-expanded="false">
                                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
-                                        <span>{{userDetails.firstName}}</span>
+                                        <span>{{username}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="hover-link" [routerLink]="['/account']">{{'my_account_header' |
@@ -109,7 +109,8 @@
                                     <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
                                     <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number :
                                             '1.2-2'}}</a></li>
-                                    <li><a (click)="openEmptyCartModal(content)" class="gryd_txt">Empty Cart</a></li>
+                                    <li><a data-toggle="modal" data-target="#empty_modal" class="gryd_txt">Empty
+                                            Cart</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -163,28 +164,13 @@
                         </li>
                         <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
                         <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
-                        <li><a (click)="openEmptyCartModal(content)" class="gryd_txt">Empty Cart</a></li>
+                        <li><a data-toggle="modal" data-target="#empty_modal" class="gryd_txt">Empty Cart</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </header>
-
-<ng-template #content let-modal>
-    <div class="modal-header">
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">Are you sure you want to empty your cart?</div>
-    <div class="modal-footer">
-        <button class="btn btn-danger" type="button" (click)="modal.dismiss('Cross click')"
-            data-dismiss="modal">Cancel</button>
-        <button class="btn btn-primary" (click)="emptyCart()">
-            Empty</button>
-    </div>
-</ng-template>
 
 <!--  Close Header Section-->
 <!-- Covid-19 section start -->
@@ -201,3 +187,35 @@
 </section>
 <!-- Covid-19 section end-->
 <app-signin></app-signin>
+
+<section class="block_contact_us_main modal fade comman_modal show" id="empty_modal" data-backdrop="static"
+    data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal_title">
+                <button type="button" class="close" (click)="closeModal()">
+                    <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                </button>
+            </div>
+            <div class="empty_modal_wrp">
+                <div class="cartempty_main_wrapper">
+                    <div class="inner_wrppar">
+                        <div class="cart_img_wrpper">
+                            <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="empty cart image">
+                        </div>
+                        <div class="cart_msg">
+                            Are you sure you want to Empty Your Cart?
+                        </div>
+                        <div class="cta_btn_wrps">
+                            <button (click)="closeModal()">Cancel</button>
+                            <button (click)="emptyCart()">Empty</button>
+                        </div>
+                        <div class="logo_wrpper_footer">
+                            <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
