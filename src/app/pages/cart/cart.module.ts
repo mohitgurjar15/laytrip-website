@@ -13,10 +13,11 @@ import { CookieModule } from 'ngx-cookie';
 import { CalendarModule } from 'primeng/calendar';
 import { HomeModule } from '../home/home.module';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 @NgModule({
-  declarations: [BookingComponent, CheckoutComponent],
+  declarations: [BookingComponent, CheckoutComponent, ConfirmComponent],
   imports: [
     CommonModule,
     CartRoutingModule,
