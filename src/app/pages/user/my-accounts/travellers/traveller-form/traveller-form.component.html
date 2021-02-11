@@ -58,7 +58,7 @@
                 <label for="">Phone*</label>
                 
                 <span class="tel_span">
-                    <input type="text"  class="form-control" tabindex="25"  placeholder="+00" maxlength="4"
+                    <input (keypress)="commonFunction.validatePhoneCode($event)"  type="text"  class="form-control" tabindex="25"  placeholder="+00" maxlength="4"
                       formControlName="country_code">
                       <input type="text" (keypress)="commonFunction.validateNumber($event)" tabindex="26" class="form-control" placeholder="000000000" maxlength="10"
                       formControlName="phone_no">

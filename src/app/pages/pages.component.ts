@@ -10,7 +10,7 @@ import { redirectToLogin } from '../_helpers/jwt.helper';
 })
 export class PagesComponent implements OnInit {
 
-  public lottieConfig: Object;
+  public lottieConfig: any;
 
   constructor(
     private router: Router,

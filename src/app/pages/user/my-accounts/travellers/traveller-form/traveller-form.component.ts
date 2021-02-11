@@ -257,7 +257,7 @@ export class TravellerFormComponent implements OnInit {
     if(selectedDate < adult12YrPastDate) {
      this.isAdult = true;
      this.isChild = false; 
-     emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));     
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));     
       phoneControl.setValidators([Validators.required,Validators.minLength(10)]);
       countryControl.setValidators([Validators.required]);
     } else if(selectedDate < child2YrPastDate){
@@ -277,7 +277,6 @@ export class TravellerFormComponent implements OnInit {
     phoneControl.updateValueAndValidity();
     emailControl.updateValueAndValidity();
     countryControl.updateValueAndValidity();
-    console.log(this.travellerForm)
   }
 
 }

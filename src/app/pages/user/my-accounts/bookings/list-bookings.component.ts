@@ -3,6 +3,8 @@ import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FlightService } from 'src/app/services/flight.service';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-list-bookings',
@@ -25,6 +27,7 @@ export class ListBookingsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private accountService: AccountService,
     private commonFunction: CommonFunction,
     private formBuilder: FormBuilder
   ) { }
@@ -34,6 +37,7 @@ export class ListBookingsComponent implements OnInit {
     this.pageNumber=1;
     this.limit=this.perPageLimitConfig[0];
     this.getModule();
+    this.getIncomplteBooking();
 
     this.filterForm = this.formBuilder.group({
       bookingId: [''],
@@ -78,4 +82,12 @@ export class ListBookingsComponent implements OnInit {
     this.getFlightResult();
   }
 
+  getIncomplteBooking(){
+    this.accountService.getIncomplteBooking().subscribe((res: any) => {
+      
+      console.log(res)
+   }, err => {
+    
+   }); 
+  }
 }
