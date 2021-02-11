@@ -97,6 +97,12 @@
             border: 1px solid $box-border-color;
             border-radius: 10px;
             margin: 15px;
+
+            .heade_wrps {
+              img {
+                margin-right: 15px;
+              }
+            }
           }
 
           .card-header {
