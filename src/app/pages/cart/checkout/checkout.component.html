@@ -14,7 +14,7 @@
                     <div class="booking_detail_bg_wrps">
                         <div id="accordion-card" class="card_accordion">
                             <div class="card">
-                                <app-card-list cardToken={{cardToken}}></app-card-list>
+                                <app-card-list cardListChangeCount="{{cardListChangeCount}}" cardToken={{cardToken}}></app-card-list>
                                 <div class="new_card">
                                     <div class="card-header">
                                         <a class="card-link" data-toggle="collapse" href="#collapseOne"
@@ -27,7 +27,7 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
-                                            <app-add-card></app-add-card>
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)"></app-add-card>
                                         </div>
                                     </div>
                                 </div>

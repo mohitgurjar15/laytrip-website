@@ -42,6 +42,7 @@ export class CheckoutComponent implements OnInit {
   cardToken: string = '';
   validationErrorMessage:string='';
   isValidTravelers:boolean=false;
+  cardListChangeCount:number=0;
   bookingRequest={
     payment_type: "",
     laycredit_points: 0,
@@ -190,6 +191,10 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  getCardListChange(data){
+    this.cardListChangeCount=data;
+  }
+
   deleteCart(cartId) {
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
@@ -235,6 +240,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   bookFlight(){
+    return false;
     this.validationErrorMessage='';
     this.validateCartItems();
 
