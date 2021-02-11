@@ -14,17 +14,28 @@
                     <div class="booking_detail_bg_wrps">
                         <div id="accordion-card" class="card_accordion">
                             <div class="card">
-                                <div class="card-header">
-                                    <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                <app-card-list cardListChangeCount="{{cardListChangeCount}}"
+                                    (selectCreditCard)="selectCreditCard($event)"></app-card-list>
+                                <div class="new_card">
+                                    <div class="card-header">
+                                        <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne"
                                         aria-controls="collapseOne" aria-expanded="true">
                                     </a> -->
-                                </div>
-                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <app-add-card (emitCardListChange)="getCardListChange($event)"></app-add-card>
+                                        <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                            aria-controls="collapseOne" aria-expanded="true">
+                                            <span class="heade_wrps">
+                                                <img src="{{s3BucketUrl}}assets/images/card_gray.svg" alt="Card icon" />
+                                                New
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)">
+                                            </app-add-card>
+                                        </div>
                                     </div>
                                 </div>
-                                <app-card-list cardListChangeCount="{{cardListChangeCount}}" (selectCreditCard)="selectCreditCard($event)"></app-card-list>
                             </div>
                         </div>
                     </div>
@@ -39,11 +50,12 @@
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
                             </app-payment-mode>
-                            <app-price-summary  [priceSummary]="priceSummary" [cartPrices]="cartPrices"></app-price-summary>
+                            <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
+                            </app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
                             <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->
-                            <button (click)="continueToCheckout()">Continue to Checkout</button> 
+                            <button (click)="continueToCheckout()">Continue to Checkout</button>
                             <button (click)="saveAndSearch()" class="trans_btn">
                                 <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="Search icon"
                                     class="pink_search" />
@@ -52,14 +64,15 @@
                                 Save & Add More
                             </button>
 
-                            
+
                         </div>
-                        
+
                     </div>
                     <div class="section_description" *ngIf="validationErrorMessage">
                         <span class="sec_text">{{validationErrorMessage}}</span>
-                        <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
-                      </div>
+                        <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                alt="Close"></a>
+                    </div>
                 </div>
             </div>
         </form>
