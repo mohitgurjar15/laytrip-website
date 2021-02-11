@@ -1,12 +1,15 @@
+<app-laytrip-loader [loading]="fullPageLoading">
+</app-laytrip-loader>
 <!--  Start Header Section-->
 <header class="site_header" [ngClass]="{'dr_home': countryCode==='DR'}">
     <div class="container">
-        <div class="row"> 
+        <div class="row">
             <div id="app" class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="navbar-brand" [routerLink]="['/']">
                         <!-- <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo" /> -->
-                        <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg" alt="Logo" />
+                        <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg"
+                            alt="Logo" />
                     </a>
                     <img *ngIf="countryCode=='DR'" class="dr_im"
                         src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0"
@@ -21,11 +24,11 @@
                     </button>
                     <div class="collapse navbar-collapse site_menu" id="navbarNav">
                         <ul class="navbar-nav ml-auto nav_right" [ngClass]="{'dr_menu':countryCode==='DR'}">
-                            
+
                             <li class="nav-item">
                                 <a [routerLink]="['/about']" class="nav-link hover-link">About</a>
                             </li>
-                           
+
                             <li class="nav-item disabled"
                                 *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
                                 <a class="nav-link hover-link" [routerLink]="['/account/lay-credit-points']">
@@ -51,8 +54,8 @@
                             </li>
 
                             <li class="nav-item login_li" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-                                
-                                <a class="nav-link login_btn_text hover-link" id="login_btn" (click)="openSignModal()" >
+
+                                <a class="nav-link login_btn_text hover-link" id="login_btn" (click)="openSignModal()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                                         <defs></defs>
                                         <path class="a"
@@ -64,13 +67,14 @@
 
                             <li class="nav-item responsive_li" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
-                                    <a class="nav-link" class="dropdown-toggle hover-link" data-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link" class="dropdown-toggle hover-link" data-toggle="dropdown"
+                                        aria-expanded="false">
                                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
                                         <span>{{userDetails.firstName}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="hover-link" [routerLink]="['/account']">{{'my_account_header' |
-                                            translate}}</a></li>
+                                                translate}}</a></li>
                                         <li><a [routerLink]="['/account/bookings']">My Bookings</a></li>
                                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                                             class="disabled">
@@ -79,7 +83,7 @@
                                                 <span class="lay_points_dot ok" id="layPoints">
                                                     Points</span>
                                             </a>
-                                        </li> 
+                                        </li>
                                         <li><a class="hover-link" (click)="onLoggedout()">Sign Out</a></li>
                                     </ul>
                                 </div>
@@ -95,13 +99,17 @@
                                 </div>
                             </li>
                             <li class="nav-item responsive_li cart_drop" *ngIf="isLoggedIn && cartItemsCount">
-                                <a  class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0);" class="gryd_txt" *ngIf="weeklyInstallmentAmount>0">Weekly</a></li>
-                                    <li><a href="javascript:void(0);" class="bld_txt" *ngIf="weeklyInstallmentAmount>0" >${{weeklyInstallmentAmount | number : '1.2-2'}}</a></li>
+                                    <li><a href="javascript:void(0);" class="gryd_txt"
+                                            *ngIf="weeklyInstallmentAmount>0">Weekly</a></li>
+                                    <li><a href="javascript:void(0);" class="bld_txt"
+                                            *ngIf="weeklyInstallmentAmount>0">${{weeklyInstallmentAmount | number :
+                                            '1.2-2'}}</a></li>
                                     <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
-                                    <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
-                                    <li><a href="javascript:void(0);" class="gryd_txt">Empty Cart</a></li>
+                                    <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number :
+                                            '1.2-2'}}</a></li>
+                                    <li><a (click)="openEmptyCartModal(content)" class="gryd_txt">Empty Cart</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -124,16 +132,15 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="hover-link" [routerLink]="['/account']">{{'my_account_header' |
-                            translate}}</a></li>
+                                translate}}</a></li>
                         <li><a [routerLink]="['/account/bookings']">My Bookings</a></li>
                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                             class="disabled">
-                            <a class="nav-link hover-link "
-                                [routerLink]="['/account/lay-credit-points']">
+                            <a class="nav-link hover-link " [routerLink]="['/account/lay-credit-points']">
                                 <span class="lay_points_dot ok" id="layPoints">
                                     Points</span>
                             </a>
-                        </li> 
+                        </li>
                         <li><a class="hover-link" (click)="onLoggedout()">Sign Out</a></li>
                     </ul>
                 </div>
@@ -149,17 +156,36 @@
                     <span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     </span>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0);" class="gryd_txt" *ngIf="weeklyInstallmentAmount>0">Weekly</a></li>
-                        <li><a href="javascript:void(0);" class="bld_txt" *ngIf="weeklyInstallmentAmount>0">${{weeklyInstallmentAmount | number : '1.2-2'}}</a></li>
+                        <li><a href="javascript:void(0);" class="gryd_txt" *ngIf="weeklyInstallmentAmount>0">Weekly</a>
+                        </li>
+                        <li><a href="javascript:void(0);" class="bld_txt"
+                                *ngIf="weeklyInstallmentAmount>0">${{weeklyInstallmentAmount | number : '1.2-2'}}</a>
+                        </li>
                         <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
                         <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
-                        <li><a href="javascript:void(0);" class="gryd_txt">Empty Cart</a></li>
+                        <li><a (click)="openEmptyCartModal(content)" class="gryd_txt">Empty Cart</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">Are you sure you want to empty your cart?</div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" (click)="modal.dismiss('Cross click')"
+            data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" (click)="emptyCart()">
+            Empty</button>
+    </div>
+</ng-template>
+
 <!--  Close Header Section-->
 <!-- Covid-19 section start -->
 <section class="block_covid">
@@ -168,7 +194,7 @@
             <img data-toggle="popover" title="Covid-19" data-placement="bottom" data-trigger="hover"
                 data-content="Covid-19 description" src="{{s3BucketUrl}}assets/images/info_icon_laytrip.svg"
                 alt="Info Image">
-            COVID-19 Travel <a [routerLink]="['/covid-19']"  [innerHTML]="'read_more' | translate"
+            COVID-19 Travel <a [routerLink]="['/covid-19']" [innerHTML]="'read_more' | translate"
                 *ngIf="isCovidPage"></a>
         </span>
     </div>

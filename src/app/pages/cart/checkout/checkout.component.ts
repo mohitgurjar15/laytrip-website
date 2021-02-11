@@ -58,7 +58,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     window.scroll(0, 0);
     this.userInfo = getLoginUserInfo();
-    if (Object.keys(this.userInfo).length > 0) {
+    if (this.userInfo && Object.keys(this.userInfo).length > 0) {
       this.getTravelers();
     }
 
@@ -133,11 +133,10 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-
-
   getTravelers() {
     this.travelerService.getTravelers().subscribe((res: any) => {
-      this.checkOutService.setTravelers(res.data)
+      this.checkOutService.setTravelers(res.data);
+      this.cd.detectChanges();
     })
   }
 

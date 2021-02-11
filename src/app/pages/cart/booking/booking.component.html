@@ -33,7 +33,7 @@
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
                             <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
-                            <app-payment-mode *ngIf="carts.length" 
+                            <app-payment-mode *ngIf="carts && carts.length" 
                                  laycreditpoints="{{laycreditpoints}}"
                                 (selectInstalmentMode)="selectInstalmentMode($event)"
                                 (getInstalmentData)="getInstalmentData($event)"
