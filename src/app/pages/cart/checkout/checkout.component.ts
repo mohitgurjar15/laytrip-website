@@ -40,6 +40,8 @@ export class CheckoutComponent implements OnInit {
   cartPrices = [];
   travelerForm: FormGroup;
   cardToken: string = '';
+  validationErrorMessage:string='';
+  isValidTravelers:boolean=false;
   bookingRequest={
     payment_type: "",
     laycredit_points: 0,
@@ -108,17 +110,30 @@ export class CheckoutComponent implements OnInit {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
 
-      this.checkOutService.getPriceSummary.subscribe((data: any) => {
+      
+
+
+    }, error => {
+      this.isCartEmpty = true;
+      this.cartLoading = false;
+    });
+
+
+    /* this.checkOutService.getPriceSummary.subscribe((data: any) => {
         if (data) {
           this.priceSummary = data;
           console.log("This.priceSummary",this.priceSummary)
           this.cd.detectChanges();
         }
-      });
-    }, error => {
-      this.isCartEmpty = true;
-      this.cartLoading = false;
-    });
+      }); */
+    try{
+      let data = sessionStorage.getItem('__islt');
+      data = atob(data);
+      this.priceSummary = JSON.parse(data)
+    }
+    catch(e){
+      
+    }
 
     this.cartService.getCartId.subscribe(cartId => {
       if (cartId > 0) {
@@ -128,7 +143,7 @@ export class CheckoutComponent implements OnInit {
     })
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
-      this.isValidData = travelerFrom.status === 'VALID' ? true : false;
+      this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
       this.travelerForm = travelerFrom;
     })
 
@@ -202,15 +217,52 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  validateCartItems(){
+    this.validationErrorMessage='';
+    if (!this.isValidTravelers) {
+      this.validationErrorMessage='Traveller details is not valid for '
+      let message='';
+      for(let i in Object.keys(this.travelerForm.controls)){
+        message='';
+        if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
+          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and `;
+          this.validationErrorMessage +=message;
+        }
+      }
+      let index = this.validationErrorMessage.lastIndexOf(" ");
+      this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
+    }
+  }
+
   bookFlight(){
+    this.validationErrorMessage='';
+    this.validateCartItems();
+
     console.log("innnn")
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
-    this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
     console.log("this.bookingRequest",this.bookingRequest)
+    if(this.isValidTravelers && this.cardToken!=''){
+      for (let i = 0; i < this.carts.length; i++) {
+        let data = this.travelerForm.controls[`type${i}`].value.adults;
+        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        let cartData = {
+          cart_id: this.carts[i].id,
+          travelers: travelers
+        }
+        this.cartService.updateCart(cartData).subscribe(data => {
+          if (i === this.carts.length - 1) {
+            console.log("Done");  
+            this.cartService.bookCart(this.bookingRequest).subscribe(result=>{
+              console.log("result",result)
+            })
+          }
+        });
+      }
+  }
     
   }
 
