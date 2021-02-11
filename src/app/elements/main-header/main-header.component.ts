@@ -2,7 +2,7 @@ import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output } from
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { CommonFunction } from '../../_helpers/common-function';
@@ -32,6 +32,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   cartItemsCount;
   weeklyInstallmentAmount: number;
   totalAmount: number;
+  fullPageLoading = false;
+  modalRef;
 
   constructor(
     private genericService: GenericService,
@@ -41,7 +43,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private commonFunction: CommonFunction,
     private renderer: Renderer2,
     public cd: ChangeDetectorRef,
-    private cartService: CartService
+    private cartService: CartService,
   ) {
   }
 
@@ -143,8 +145,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
       this.userDetails = getLoginUserInfo();
-      var name   = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
-      var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") +1);
+      var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
+      var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
       this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
       if (this.userDetails.roleId != 7 && !this._isLayCredit) {
         this.totalLaycredit();
@@ -265,5 +267,29 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }, (err) => {
       this.weeklyInstallmentAmount = 0;
     })
+  }
+
+  emptyCart() {
+    $('#empty_modal').modal('hide');
+    this.fullPageLoading = true;
+    this.genericService.emptyCart().subscribe((res: any) => {
+      if (res) {
+        this.fullPageLoading = false;
+        this.cartItems = [];
+        this.cartItemsCount = 0;
+        localStorage.setItem('$crt', this.cartItemsCount);
+        this.cartService.setCartItems(this.cartItems);
+        this.redirectToHome();
+      }
+    });
+  }
+
+  closeModal() {
+    $('#empty_modal').modal('hide');
+  }
+
+  redirectToHome() {
+    $('#empty_modal').modal('hide');
+    this.router.navigate(['/']);
   }
 }

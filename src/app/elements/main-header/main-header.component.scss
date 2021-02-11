@@ -1205,3 +1205,109 @@
 	-o-transform: translateY(-13px) rotate(-45deg);
 	transform: translateY(-13px) rotate(-45deg);
   }
+
+
+
+  .cartempty_main_wrapper{
+    background-color: $background-white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0 0;
+	border-radius: 10px;
+    @include tab-view{
+        padding: 15px 0;
+    }
+    .inner_wrppar{
+        
+		padding: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .cart_img_wrpper{
+            img{
+                max-width: 80px;
+            }
+            margin-bottom: 20px;
+        }
+        .cart_msg{
+            color: $blue-text;
+            font-size: 23px;
+            margin-bottom: 5px;
+            margin: 5px 0 15px;
+            @include tab-view{
+                font-size: 18px;
+            }
+        }
+        .cta_btn_wrps{
+			display: flex;
+			justify-content: space-between;
+            width: 100%;
+            button{
+                margin: 5px;
+				flex: 1;
+                height: 40px;
+                padding: 10px 25px;
+                background: $hotel-secondary-color;
+                border-radius: 25px;
+                border: 1px solid $hotel-secondary-color;
+                font-size: 14px;
+                color: $text-white;
+                transition: 0.3s;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
+                white-space: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    border: 1px solid $hotel-secondary-color;
+                    color: $text-white;
+                    background:  $hotel-secondary-color;
+                }
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            
+        }
+		.logo_wrpper_footer{
+			img{
+				height: 32px;
+				margin-top: 20px;
+			}
+		}
+    }
+}
+.block_contact_us_main{
+    padding: 0;
+}
+.modal-dialog {
+  max-width: 514px;
+  width: 96%;
+  
+  .modal-content {
+	max-width: 351px;
+	margin: 0 auto;
+	border-radius: 10px;
+    .modal_title {
+        .close {
+          position: absolute;
+          right: 20px;
+          top: 16px;
+          z-index: 9;
+          cursor: pointer;
+		  img{
+			  max-width: 10px;
+		  }
+        }
+      }
+    .cart_modal_wrp {
+      padding: 32px 20px;
+    }
+  }
+}

@@ -68,6 +68,12 @@ export class GenericService {
       );
   }
 
+  emptyCart() {
+    return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart`, this.commonFunction.setHeaders()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   handleError(error) {
 
     let errorMessage = {};
@@ -111,7 +117,7 @@ export class GenericService {
     return this.http.get(environment.apiUrl + 'v1/cms/' + payload.page_type, this.commonFunction.setHeaders());
   }
 
-  getUserLocationInfo(){
+  getUserLocationInfo() {
     return this.http.get(environment.apiUrl + 'v1/generic/location/');
   }
 
@@ -123,13 +129,13 @@ export class GenericService {
     return this.http.get(environment.apiUrl + 'v1/auth/validate-user/' + token);
   }
 
-  addPushSubscriber(data){
-    console.log(data,data.endpoint,'here')
+  addPushSubscriber(data) {
+    console.log(data, data.endpoint, 'here')
 
     var notificationData = {
-      "end_point":data.endpoint,
-      "auth_keys":data.keys.auth,
-      "p256dh_keys":data.keys.p256dh,
+      "end_point": data.endpoint,
+      "auth_keys": data.keys.auth,
+      "p256dh_keys": data.keys.p256dh,
     };
     return this.http.post(`${environment.apiUrl}v1/auth​/add-notification-token`, notificationData)
       .pipe(
@@ -137,7 +143,7 @@ export class GenericService {
       );
   }
 
-  getAllInstalemnts(data){
+  getAllInstalemnts(data) {
     return this.http.post(`${environment.apiUrl}v1/instalment/calculate-all-instalment`, data)
       .pipe(
         catchError(this.handleError)
