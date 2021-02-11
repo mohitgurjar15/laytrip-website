@@ -1,5 +1,5 @@
 <div class="card-body main_body">
-    <div class="card accordion_detailed_wrps wo_return">
+    <!-- <div class="card accordion_detailed_wrps wo_return">
         <div class="card-body">
             <div>
                 <div class="cols_wrps">
@@ -86,11 +86,112 @@
             <button>Cancel</button>
         </span>
         8h 29m
-    </div>
+    </div> -->
 
-    <!-- Need to move this code in booking-traveler module with accodian feature -->
+    
+ <div class="card accordion_detailed_wrps wo_return" >
+  <div class="card-body">
+    <div *ngFor="let stop of cartItem?.booking?.moduleInfo[0]?.routes[0]?.stops">
+      <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
+        <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
+        Change Planes in {{stop?.layover_airport_name}}
+      </div>
+      <div class="cols_wrps">
+        <div class="lines_cols">
+          <div class="line_shortname colmns_w">
+            <span>
+              <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="" class="Pink filled Flight" />
+              {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+            </span>
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="date_wrp colmns_w">
+            {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
+          </div>
+          <div class="timing_wrp colmns_w">
+            {{stop.departure_time}} - {{stop.arrival_time}}
+          </div>
+        </div>
+        <div class="lines_cols">
+          <div class="line_company_name colmns_w">
+            {{stop.airline_name}}
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="fl_number colmns_w">
+            <span class="pink_stamp"></span>
+            Flight {{stop.airline}}-{{stop.flight_number}}
+          </div>
+          <div class="class_wrps colmns_w">
+            {{stop.cabin_class}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="total_hrs_wrps cta_btns_wrps">
+  <span class="ct_btns" >
+    <button *ngIf="cartItem?.booking?.moduleInfo[0]?.routes?.length === 1" (click)="deleteCart(cartItem.id)">Cancel</button>
+  </span>
+  {{cartItem?.booking?.moduleInfo[0]?.routes[0]?.duration}}
+</div>
+
+
+<div class="card accordion_detailed_wrps wo_return" *ngIf="cartItem?.booking?.moduleInfo[0]?.routes?.length === 2">
+  <div class="card-body">
+    <div *ngFor="let stop of cartItem?.booking?.moduleInfo[0]?.routes[1]?.stops">
+      <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
+        <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
+        Change Planes in {{stop?.layover_airport_name}}
+      </div>
+      <div class="cols_wrps">
+        <div class="lines_cols">
+          <div class="line_shortname colmns_w">
+            <span>
+              <img src="{{s3BucketUrl}}assets/images/icon/blue_return_flight.svg" alt="" class="Pink filled Flight" />
+              {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+            </span>
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="date_wrp colmns_w">
+            {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
+          </div>
+          <div class="timing_wrp colmns_w">
+            {{stop.departure_time}} - {{stop.arrival_time}}
+          </div>
+        </div>
+        <div class="lines_cols">
+          <div class="line_company_name colmns_w">
+            {{stop.airline_name}}
+            <span class="hrs_">
+              {{stop.duration}}
+            </span>
+          </div>
+          <div class="fl_number colmns_w">
+            <span class="pink_stamp"></span>
+            Flight {{stop.airline}}-{{stop.flight_number}}
+          </div>
+          <div class="class_wrps colmns_w">
+            {{stop.cabin_class}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem?.booking?.moduleInfo[0]?.routes?.length === 2">
+  <span class="ct_btns">
+    <button (click)="deleteCart(cartItem.id)">Cancel</button>
+  </span>
+  {{cartItem?.booking?.moduleInfo[0]?.routes[1]?.duration}}
+</div>
     <app-booking-traveler></app-booking-traveler>
-    
-    <!-- End -->
-    
 </div>

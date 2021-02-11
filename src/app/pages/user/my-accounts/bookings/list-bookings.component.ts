@@ -13,17 +13,8 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class ListBookingsComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  filterForm: FormGroup;
-  loading = false;
-  flightLists = [];
-  perPageLimitConfig=[10,25,50,100];
-  pageNumber:number;
-  limit:number;
-  modules:[];
-  result:any;
-  endDate;
-  startMinDate= new Date();
- 
+  upComingloading = false;
+  upComingbookings=[];
 
   constructor(
     private userService: UserService,
@@ -34,60 +25,18 @@ export class ListBookingsComponent implements OnInit {
 
   ngOnInit() {
     // this.loading = true;
-    this.pageNumber=1;
-    this.limit=this.perPageLimitConfig[0];
-    this.getModule();
     this.getIncomplteBooking();
-
-    this.filterForm = this.formBuilder.group({
-      bookingId: [''],
-      start_date: [''],
-      end_date: [''],
-      module: [''],
-    });
-  }
-
-  getModule(){
-    this.userService.getModules(this.pageNumber, this.limit).subscribe((res: any) => {
-      this.modules  = res.data.map(function (module) {
-        if(module.status == true){
-          return {
-            id:module.id,
-            name:module.name.toUpperCase()
-          } 
-          /* this.modules.push({
-            id:module.id,
-            name:module.name.toUpperCase()
-          }); */
-        }
-      });
-      console.log(this.modules)
-   }, err => {
-    
-   }); 
-  }
-
-  getFlightResult() {
-    this.result = this.filterForm.value;
-     this.loading = true;
-  }
-
-  startDateUpdate(date) {
-    this.endDate = new Date(date)
-  }
-
-
-  reset() {
-    this.ngOnInit();
-    this.getFlightResult();
   }
 
   getIncomplteBooking(){
+    this.upComingloading=true;
     this.accountService.getIncomplteBooking().subscribe((res: any) => {
-      
+      this.upComingbookings=res.data;
+      this.upComingloading=false;
       console.log(res)
    }, err => {
-    
+    this.upComingloading=false;
+    this.upComingbookings=[];
    }); 
   }
 }
