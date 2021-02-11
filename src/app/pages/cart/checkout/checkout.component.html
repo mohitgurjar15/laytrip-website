@@ -14,17 +14,23 @@
                     <div class="booking_detail_bg_wrps">
                         <div id="accordion-card" class="card_accordion">
                             <div class="card">
-                                <div class="card-header">
-                                    <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne"
-                                        aria-controls="collapseOne" aria-expanded="true">
-                                    </a> -->
-                                </div>
-                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <app-add-card></app-add-card>
+                                <app-card-list cardToken={{cardToken}}></app-card-list>
+                                <div class="new_card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                            aria-controls="collapseOne" aria-expanded="true">
+                                            <span class="heade_wrps">
+                                                <img src="{{s3BucketUrl}}assets/images/card_gray.svg" alt="Card icon" />
+                                                New
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <app-add-card></app-add-card>
+                                        </div>
                                     </div>
                                 </div>
-                                <app-card-list cardToken={{cardToken}}></app-card-list>
                             </div>
                         </div>
                     </div>
@@ -39,11 +45,12 @@
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
                             </app-payment-mode> -->
-                            <app-price-summary  [priceSummary]="priceSummary" [cartPrices]="cartPrices"></app-price-summary>
+                            <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
+                            </app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
                             <button [disabled]="!isValidData" (click)="handleSubmit()">Pay and Book</button>
-                            
+
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@
 .ng-customClass.country_code {
   width: 150px;
 }
+
 .img_country_code {
   border-radius: 3px;
 }
@@ -15,19 +16,23 @@
 ::ng-deep .calender-passport-expiry {
   min-width: 300px !important;
 }
+
 .dobs {
   ::ng-deep .birth_date {
     .p-inputtext {
       border: none;
     }
+
     th {
       font-size: 13px !important;
       border-bottom: none !important;
       font-weight: 600 !important;
       text-align: center;
     }
+
     td {
       padding: 0.1rem !important;
+
       span {
         width: 35px;
         height: auto;
@@ -45,13 +50,16 @@
         @include mobile-view {
           width: 33px;
         }
+
         &:hover {
           background: none !important;
         }
+
         &.p-highlight {
           background: none !important;
           font-weight: 500;
           overflow: visible;
+
           &::before {
             content: "";
             width: 5px;
@@ -72,13 +80,16 @@
     border: 1px solid $grayed_border;
     border-radius: 10px;
     margin-bottom: 15px;
+
     &:last-child {
       margin-bottom: 0;
     }
+
     .card-header {
       border: none;
       background-color: transparent;
       padding: 15px;
+
       .card-link {
         font-weight: 600;
         color: $text-black;
@@ -101,6 +112,7 @@
             right: 0;
           }
         }
+
         &[aria-expanded="false"] {
           &:after {
             font-family: "FontAwesome";
@@ -113,14 +125,17 @@
         }
       }
     }
+
     .card-body {
       padding: 15px;
+
       .sub_cat_wrapper {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         width: 100%;
         flex-wrap: wrap;
+
         //margin: 0 0 15px 0;
         .add_btn_lined {
           color: $text_light_yellow;
@@ -136,21 +151,26 @@
           padding: 0 10px;
           position: relative;
           margin-bottom: 15px;
+
           &:focus {
             outline: none;
             box-shadow: none;
           }
+
           &:hover {
             color: $text-white;
             background-color: $text_light_yellow;
           }
+
           &.active {
             color: $text-white;
             background-color: $text_light_yellow;
           }
+
           &:last-child {
             //margin: 0;
           }
+
           .close_icon {
             position: absolute;
             top: -10px;
@@ -159,40 +179,47 @@
             width: 20px;
             border-radius: 50%;
             background-color: $background-white;
+
             i {
               color: $text_light_yellow;
             }
           }
         }
       }
+
       .common_form {
         label {
           color: $mid_gray_bg;
           font-size: 12px;
           font-weight: 500;
         }
+
         input {
           border: none;
           border-radius: 0;
           border-bottom: 2px solid $box-border-color;
           font-size: 14px;
           padding: 8px 0;
+
           &:focus {
             outline: none;
             box-shadow: none;
           }
         }
+
         select {
           border: none;
           border-radius: 0;
           border-bottom: 2px solid $box-border-color;
           font-size: 14px;
           padding: 8px 0;
+
           &:focus {
             outline: none;
             box-shadow: none;
           }
         }
+
         .nation_wrps {
           ng-select {
             .ng-input {
@@ -209,6 +236,7 @@
                   right: 8px;
                   border: none;
                   top: 5px;
+
                   @include tab-view {
                     position: absolute;
                     right: 0;
@@ -216,6 +244,7 @@
                   }
                 }
               }
+
               &[aria-expanded="false"] {
                 &:after {
                   position: relative;
@@ -229,6 +258,7 @@
                   right: 8px;
                   border: none;
                   top: 5px;
+
                   @include tab-view {
                     position: absolute;
                     right: 0;
@@ -239,45 +269,54 @@
             }
           }
         }
+
         .mb-sm-10 {
           margin-bottom: 10px;
+
           &.telephone_wrps {
             .tel_span {
               border-bottom: 2px solid $box-border-color;
               display: flex;
               position: relative;
               bottom: 2px;
+
               input {
                 border-bottom: none;
+
                 &:first-child {
                   width: 30px;
                 }
               }
             }
           }
+
           &.dobs {
             input {
-              background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
-                no-repeat;
+              background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
               background-size: 20px;
               // border: none;
             }
           }
+
           .gender_anchers {
             display: flex;
             justify-content: flex-start;
             align-items: center;
+
             a {
               &.active {
                 color: $text_light_yellow;
               }
+
               color: $mid_gray_bg;
               font-size: 14px;
               padding: 0 25px 0 0;
+
               &:hover {
                 color: $text_light_yellow;
                 text-decoration: none;
               }
+
               &:focus {
                 outline: none;
               }
@@ -285,10 +324,13 @@
           }
         }
       }
+
       .accordion_addn {
         margin-top: 20px;
+
         .card {
           border: none;
+
           .card-header {
             border: none;
             background-color: transparent;
@@ -296,22 +338,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             @include tab-view {
               flex-direction: column;
             }
+
             .heade_wrps {
-              color: $active-tab-text;
+              color: $text-black;
               font-size: 16px;
               font-weight: 500;
               margin-right: 15px;
+
               @include tab-view {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
                 margin: 0;
               }
+
               .responsive_anch {
                 display: none;
+
                 @include tab-view {
                   font-weight: 600;
                   color: $text-black;
@@ -333,6 +380,7 @@
                       right: 0;
                     }
                   }
+
                   &[aria-expanded="false"] {
                     &:after {
                       font-family: "FontAwesome";
@@ -346,6 +394,7 @@
                 }
               }
             }
+
             .addon_anchor {
               font-weight: 600;
               color: $text-black;
@@ -367,6 +416,7 @@
                   right: 0;
                 }
               }
+
               &[aria-expanded="false"] {
                 &:after {
                   font-family: "FontAwesome";
@@ -377,54 +427,66 @@
                   right: 0;
                 }
               }
+
               @include tab-view {
                 display: none;
               }
             }
+
             #addon_tab {
               flex-direction: row;
               flex-wrap: nowrap;
               flex: 2;
+
               @include tab-view {
                 flex-wrap: wrap;
                 margin: 5px 0;
                 width: 100%;
               }
+
               li {
                 @include tab-view {
                   margin-left: 5px;
                   margin-bottom: 5px;
+
                   &:first-child {
                     margin-left: 0;
                   }
                 }
+
                 a {
                   background-color: $background-white;
                   color: #e4e4e4;
                   border: 1px solid #e4e4e4;
                   border-radius: 8px;
-                  font-size: 14px;
+                  font-size: 12px;
                   margin: 0 5px;
+
                   @include tab-view {
                     margin: 0;
                   }
+
                   &.active {
-                    color: $active-tab-text;
-                    border: 1px solid $active-tab-text;
+                    color: $text_grey_dark;
+                    border: 1px solid $text_grey_dark;
                   }
                 }
               }
             }
           }
+
           .card-body {
             padding: 0;
             margin-top: 15px;
+
             .addon_listins_wrps {
               display: flex;
               justify-content: flex-end;
+
               @include tab-view {
                 justify-content: flex-start;
               }
+
               .addon_btn_drop {
                 background-color: $background-white;
                 color: $mid_gray_bg;
@@ -437,14 +499,17 @@
                 position: relative;
                 max-width: 420px;
                 margin-right: 30px;
+
                 &:focus {
                   outline: none;
                   box-shadow: none;
                 }
+
                 &:hover {
                   outline: none;
                   box-shadow: none;
                 }
+
                 &[aria-expanded="true"] {
                   &:after {
                     font-family: "FontAwesome";
@@ -456,6 +521,7 @@
                     position: absolute;
                   }
                 }
+
                 &[aria-expanded="false"] {
                   &:after {
                     font-family: "FontAwesome";
@@ -467,6 +533,7 @@
                     position: absolute;
                   }
                 }
+
                 @include tab-view {
                   margin-right: 0;
                   text-align: left;
@@ -474,19 +541,23 @@
                   display: flex;
                 }
               }
+
               .dropdownList {
                 li {
                   button {
                     border: none;
+
                     @include tab-view {
                       padding: 5px;
                       font-size: 12px;
                       white-space: normal;
                     }
+
                     &:focus {
                       outline: none;
                       box-shadow: none;
                     }
+
                     &:hover {
                       outline: none;
                       box-shadow: none;
