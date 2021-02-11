@@ -34,7 +34,7 @@ import { throwError } from "rxjs";
       }
       
     getIncomplteBooking(){
-        return this.http.get(`${environment.apiUrl}v1/booking/incomplete-booking/`, this.commonFunction.setHeaders())
+        return this.http.get(`${environment.apiUrl}v1/booking/incomplete-bookings/`, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
             );

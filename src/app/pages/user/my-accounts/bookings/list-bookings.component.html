@@ -7,11 +7,11 @@
       <h3>
         Upcoming
       </h3>
-      <div class="accordion_up_wrapper">
+      <div class="accordion_up_wrapper" *ngIf="!upComingloading">
         <div id="accordion_upcoming">
-          <div class="card">
+          <div class="card" *ngFor="let booking of upComingbookings; let i = index;">
             <div class="card-header">
-              <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#upcoming0">
+              <a class="card-link" data-toggle="collapse" aria-expanded="true" [href]="'#upcoming'+i">
                 <span class="header_image">
                   <span class="title_image">
                     <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
@@ -61,71 +61,34 @@
                 </div>
               </a>
             </div>
-            <div id="upcoming0" class="collapse show " data-parent="#accordion_upcoming">
+            
+            <div [id]="'upcoming'+i" class="collapse show " data-parent="#accordion_upcoming">
               <div class="accordion_data">
                 <ul class="nav nav-tabs booking_tab_header">
-                  <li>
-                    <a data-toggle="tab" href="#home" class="nav-link active">
-                      <span class="tab_round_wrps">
-                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
-                        <span class="tab_txt_head">JFK-MIA</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#menu1" class="nav-link">
-                      <span class="tab_round_wrps">
-                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
-                        <span class="tab_txt_head">JFK-MIA</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#menu2" class="nav-link">
-                      <span class="tab_round_wrps">
-                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
-                        <span class="tab_txt_head">JFK-MIA</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#menu3" class="nav-link">
-                      <span class="tab_round_wrps">
-                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
-                        <span class="tab_txt_head">JFK-MIA</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#menu4" class="nav-link">
-                      <span class="tab_round_wrps">
-                        <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
-                        <span class="tab_txt_head">JFK-MIA</span>
-                      </span>
-                    </a>
-                  </li>
+                  <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
+                    <li>
+                      <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link active">
+                        <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
+                          <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                          <span class="tab_txt_head">{{cartItem.moduleInfo[0].departure_code}}-{{cartItem.moduleInfo[0].arrival_code}}</span>
+                        </span>
+                      </a>
+                    </li>
+                  </ng-container>
                 </ul>
                 <div class="tab-content main_tab_content">
-                  <div class="tab-pane active" id="home">
-                    <app-flights></app-flights>
-                  </div>
-                  <div class="tab-pane fade" id="menu1">
-                    <app-flights></app-flights>
-                  </div>
-                  <div class="tab-pane fade" id="menu2">
-                    <app-flights></app-flights>
-                  </div>
-                  <div class="tab-pane fade" id="menu3">
-                    <app-flights></app-flights>
-                  </div>
-                  <div class="tab-pane fade" id="menu4">
-                    <app-flights></app-flights>
-                  </div>
+                  <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
+                    <div class="tab-pane active" [id]="'cart_item'+j">
+                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="booking" ></app-flights>
+                    </div>
+                  </ng-container>
+                  
                 </div>
               </div>
               
               <app-cart-price-summary></app-cart-price-summary>
             </div>
+            
           </div>
         </div>
       </div>

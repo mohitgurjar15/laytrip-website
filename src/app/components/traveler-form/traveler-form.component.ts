@@ -182,7 +182,7 @@ export class TravelerFormComponent implements OnInit {
           this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy') : '';
           this.patch();
         }
-      }
+      }  
     })
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
