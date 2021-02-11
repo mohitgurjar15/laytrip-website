@@ -70,8 +70,7 @@ export class SocialLoginComponent implements OnInit {
             document.getElementById('navbarNav').click();
             this.router.url;
           }
-        }, (error: HttpErrorResponse) => {
-         
+        }, (error: HttpErrorResponse) => {         
           this.socialError.emit(error.message);
           this.toastr.error(error.message, 'SignIn Error');
         });
@@ -83,7 +82,7 @@ export class SocialLoginComponent implements OnInit {
   public googleLogin(element) {
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
-
+        this.socialError.emit('');
         let profile = googleUser.getBasicProfile();
         
         let jsonData = {
@@ -112,14 +111,12 @@ export class SocialLoginComponent implements OnInit {
         });
 
       }, (error) => {
+        console.log(error)
         this.socialError.emit('');
         this.google_loading = false;
       });
   }
-
-  ngDoCheck(){
-    // this.loadGoogleSdk();
-  }
+ 
   ngAfterViewInit(){
     this.loadGoogleSdk();
   }
@@ -160,6 +157,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
+    this.socialError.emit('');
     this.loading = true;
     window['FB'].login((response) => {
       if (response.authResponse) {
@@ -204,6 +202,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   loginWithApple(): void {
+    this.socialError.emit('');
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
   }
 

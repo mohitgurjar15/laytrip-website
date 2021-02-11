@@ -249,7 +249,6 @@ var TravellerFormComponent = /** @class */ (function () {
         phoneControl.updateValueAndValidity();
         emailControl.updateValueAndValidity();
         countryControl.updateValueAndValidity();
-        console.log(this.travellerForm);
     };
     __decorate([
         core_1.Input()
