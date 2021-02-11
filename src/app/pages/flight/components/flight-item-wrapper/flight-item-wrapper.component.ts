@@ -228,7 +228,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         dateNow.setMinutes(dateNow.getMinutes() + 10);
 
         sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-        sessionStorage.setItem('__route', JSON.stringify(route));
+        //sessionStorage.setItem('__route', JSON.stringify(route));
         /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
         } else{
           this.router.navigate([`flight/checkout/${route.route_code}`]);

@@ -58,11 +58,6 @@
                         <option value="F">Female</option>
                         <option value="O">Other</option>
                       </select>
-                      <!-- <div class="gender_anchers">
-                        <a href="javascript:void(0);">Male</a>
-                        <a href="javascript:void(0);">Female</a>
-                        <a href="javascript:void(0);">Other</a>
-                      </div> -->
                       <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                         <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your
                           gender.</small>

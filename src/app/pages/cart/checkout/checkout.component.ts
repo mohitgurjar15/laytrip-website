@@ -29,8 +29,6 @@ export class CheckoutComponent implements OnInit {
   laycreditpoints: number = 0;
   sellingPrice: number;
   flightSummary = [];
-  instalmentMode = 'instalment';
-  instalmentType: string = 'weekly';
   isLoggedIn: boolean = false;
   priceData = [];
   priceSummary: any;
@@ -42,6 +40,16 @@ export class CheckoutComponent implements OnInit {
   cartPrices = [];
   travelerForm: FormGroup;
   cardToken: string = '';
+  bookingRequest={
+    payment_type: "",
+    laycredit_points: 0,
+    card_token: "",
+    instalment_type: "",
+    additional_amount: 0,
+    booking_through: "web",
+    cart: [
+    ]
+  }
 
   constructor(
     private genericService: GenericService,
@@ -103,6 +111,7 @@ export class CheckoutComponent implements OnInit {
       this.checkOutService.getPriceSummary.subscribe((data: any) => {
         if (data) {
           this.priceSummary = data;
+          console.log("This.priceSummary",this.priceSummary)
           this.cd.detectChanges();
         }
       });
@@ -193,6 +202,16 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-
+  bookFlight(){
+    console.log("innnn")
+    let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
+    this.bookingRequest.card_token=this.cardToken;
+    this.bookingRequest.card_token=this.cardToken;
+    this.bookingRequest.payment_type = this.priceSummary.paymentType;
+    this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
+    this.bookingRequest.cart = carts;
+    console.log("this.bookingRequest",this.bookingRequest)
+    
+  }
 
 }
