@@ -78,7 +78,6 @@ export class CheckoutComponent implements OnInit {
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         this.carts.push(cart);
-        this.cd.detectChanges();
 
         price = {}
         price.selling_price = items.data[i].moduleInfo[0].selling_price;
@@ -95,7 +94,6 @@ export class CheckoutComponent implements OnInit {
         }
       }
       this.cartService.setCartPrices(this.cartPrices);
-      this.cd.detectChanges();
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
@@ -103,7 +101,6 @@ export class CheckoutComponent implements OnInit {
       this.checkOutService.getPriceSummary.subscribe((data: any) => {
         if (data) {
           this.priceSummary = data;
-          this.cd.detectChanges();
         }
       });
     }, error => {
@@ -125,7 +122,6 @@ export class CheckoutComponent implements OnInit {
 
     try {
       this.cardToken = this.cookieService.get('__cc');
-      this.cd.detectChanges();
     }
     catch (e) {
       this.cardToken = '';

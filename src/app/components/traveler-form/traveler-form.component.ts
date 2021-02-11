@@ -153,7 +153,7 @@ export class TravelerFormComponent implements OnInit {
 
                 this.checkOutService.setTravelers([...this.myTravelers, traveler]);
                 this.patch();
-                this.cd.detectChanges();
+                // this.cd.detectChanges();
               }
             }, error => {
 

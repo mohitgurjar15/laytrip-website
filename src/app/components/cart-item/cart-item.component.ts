@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 
@@ -18,7 +18,8 @@ export class CartItemComponent implements OnInit {
 
 
   constructor(
-    public commonFunction: CommonFunction
+    public commonFunction: CommonFunction,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +27,13 @@ export class CartItemComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['cartItem']) {
+    if (changes && changes['cartItem']) {
       this.cartItem = changes['cartItem'].currentValue;
 
       if(this.cartItem.old_module_info.selling_price!=this.cartItem.module_info.selling_price){
         this.priceFluctuationAmount = this.cartItem.module_info.selling_price - this.cartItem.old_module_info.selling_price;
       }
+      this.cd.detectChanges();
     }
   }
 
