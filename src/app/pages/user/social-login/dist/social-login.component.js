@@ -38,7 +38,7 @@ var SocialLoginComponent = /** @class */ (function () {
                 console.log(objApple, userInfo);
                 var jsonData = {
                     "account_type": 1,
-                    "name": objApple.name,
+                    "name": "",
                     "email": objApple.email,
                     "social_account_id": userInfo.authorization.code,
                     "device_type": 1,
@@ -56,7 +56,7 @@ var SocialLoginComponent = /** @class */ (function () {
                     }
                 }, function (error) {
                     _this.socialError.emit(error.message);
-                    _this.toastr.error(error.message, 'SignIn Error');
+                    // this.toastr.error(error.message, 'SignIn Error');
                 });
             }
         });
@@ -166,14 +166,13 @@ var SocialLoginComponent = /** @class */ (function () {
                     }, function (error) {
                         _this.loading = false;
                         _this.socialError.emit(error.message);
-                        _this.toastr.error(error.message, 'SignIn Error');
+                        // this.toastr.error(error.message, 'SignIn Error');
                     });
                 });
             }
             else {
                 _this.socialError.emit('');
                 _this.loading = false;
-                // this.socialError.emit('Authentication failed.');
                 // this.toastr.error("Something went wrong!", 'SignIn Error');
             }
         }, { scope: 'email' });

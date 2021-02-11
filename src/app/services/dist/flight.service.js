@@ -69,18 +69,6 @@ var FlightService = /** @class */ (function () {
         return this.http.get(environment_1.environment.apiUrl + "v1/flight/book/" + bookingId, this.commonFunction.setHeaders(headers))
             .pipe(operators_1.catchError(this.handleError));
     };
-    FlightService.prototype.updateAdult = function (data, id) {
-        return this.http.put(environment_1.environment.apiUrl + "v1/traveler/" + id, data, this.commonFunction.setHeaders());
-    };
-    FlightService.prototype.addAdult = function (data) {
-        var userToken = localStorage.getItem('_lay_sess');
-        if (userToken) {
-            return this.http.post(environment_1.environment.apiUrl + "v1/traveler/", data, this.commonFunction.setHeaders());
-        }
-        else {
-            return this.http.post(environment_1.environment.apiUrl + "v1/traveler/", data);
-        }
-    };
     FlightService.prototype.getFlightSearchResult = function (data) {
         var headers = {
             currency: 'USD',

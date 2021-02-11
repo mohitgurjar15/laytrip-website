@@ -10,8 +10,9 @@ exports.ListBookingsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var ListBookingsComponent = /** @class */ (function () {
-    function ListBookingsComponent(userService, commonFunction, formBuilder) {
+    function ListBookingsComponent(userService, accountService, commonFunction, formBuilder) {
         this.userService = userService;
+        this.accountService = accountService;
         this.commonFunction = commonFunction;
         this.formBuilder = formBuilder;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -25,6 +26,7 @@ var ListBookingsComponent = /** @class */ (function () {
         this.pageNumber = 1;
         this.limit = this.perPageLimitConfig[0];
         this.getModule();
+        this.getIncomplteBooking();
         this.filterForm = this.formBuilder.group({
             bookingId: [''],
             start_date: [''],
@@ -61,6 +63,12 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.reset = function () {
         this.ngOnInit();
         this.getFlightResult();
+    };
+    ListBookingsComponent.prototype.getIncomplteBooking = function () {
+        this.accountService.getIncomplteBooking().subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+        });
     };
     ListBookingsComponent = __decorate([
         core_1.Component({
