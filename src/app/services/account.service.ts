@@ -39,4 +39,10 @@ import { throwError } from "rxjs";
                 catchError(this.handleError)
             );
     } 
-}  
+    getComplteBooking(){
+        return this.http.get(`${environment.apiUrl}v1/booking/incomplete-bookings/`, this.commonFunction.setHeaders())
+            .pipe(
+                catchError(this.handleError)
+            );
+    } 
+}   

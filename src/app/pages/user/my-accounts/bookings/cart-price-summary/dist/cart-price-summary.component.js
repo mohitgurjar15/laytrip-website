@@ -6,18 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.FlightsComponent = void 0;
+exports.CartPriceSummaryComponent = void 0;
 var core_1 = require("@angular/core");
-var environment_1 = require("../../../../../../environments/environment");
-var FlightsComponent = /** @class */ (function () {
-    function FlightsComponent(commonFunction) {
+var CartPriceSummaryComponent = /** @class */ (function () {
+    function CartPriceSummaryComponent(commonFunction) {
         this.commonFunction = commonFunction;
-        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.cartItem = {};
     }
-    FlightsComponent.prototype.ngOnInit = function () {
+    CartPriceSummaryComponent.prototype.ngOnInit = function () {
     };
-    FlightsComponent.prototype.ngOnChanges = function (changes) {
+    CartPriceSummaryComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
             // console.log("cartItem=====>",this.cartItem)
@@ -25,14 +23,14 @@ var FlightsComponent = /** @class */ (function () {
     };
     __decorate([
         core_1.Input()
-    ], FlightsComponent.prototype, "cartItem");
-    FlightsComponent = __decorate([
+    ], CartPriceSummaryComponent.prototype, "cartItem");
+    CartPriceSummaryComponent = __decorate([
         core_1.Component({
-            selector: 'app-flights',
-            templateUrl: './flights.component.html',
-            styleUrls: ['./flights.component.scss']
+            selector: 'app-cart-price-summary',
+            templateUrl: './cart-price-summary.component.html',
+            styleUrls: ['./cart-price-summary.component.scss']
         })
-    ], FlightsComponent);
-    return FlightsComponent;
+    ], CartPriceSummaryComponent);
+    return CartPriceSummaryComponent;
 }());
-exports.FlightsComponent = FlightsComponent;
+exports.CartPriceSummaryComponent = CartPriceSummaryComponent;

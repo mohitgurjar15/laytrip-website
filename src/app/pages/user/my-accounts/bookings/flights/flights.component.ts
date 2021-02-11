@@ -11,13 +11,12 @@ import { environment } from '../../../../../../environments/environment';
 export class FlightsComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  @Input() cartItem;
+  @Input() cartItem={};
 
   constructor(
     private commonFunction: CommonFunction
 
   ) {
-    console.log("cartItem=====>",this.cartItem)
   }
 
   ngOnInit() {
@@ -27,6 +26,8 @@ export class FlightsComponent implements OnInit {
 
     if(typeof changes['cartItem'].currentValue!='undefined'){
       this.cartItem=changes['cartItem'].currentValue;
+      // console.log("cartItem=====>",this.cartItem)
+
     }
   }
 }
