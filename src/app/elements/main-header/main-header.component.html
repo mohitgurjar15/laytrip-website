@@ -1,3 +1,5 @@
+<app-laytrip-loader [loading]="fullPageLoading">
+</app-laytrip-loader>
 <!--  Start Header Section-->
 <header class="site_header" [ngClass]="{'dr_home': countryCode==='DR'}">
     <div class="container">
@@ -169,6 +171,7 @@
         </div>
     </div>
 </header>
+
 <!--  Close Header Section-->
 <!-- Covid-19 section start -->
 <section class="block_covid">
@@ -190,7 +193,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal_title">
-                <button type="button" class="close" (click)="redirectToHome()">
+                <button type="button" class="close" (click)="closeModal()">
                     <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                 </button>
             </div>
@@ -204,12 +207,11 @@
                             Are you sure you want to Empty Your Cart?
                         </div>
                         <div class="cta_btn_wrps">
-                            <button (click)="redirectToHome()">Cancel</button>
-                            <button (click)="redirectToHome()">Empty</button>
+                            <button (click)="closeModal()">Cancel</button>
+                            <button (click)="emptyCart()">Empty</button>
                         </div>
                         <div class="logo_wrpper_footer">
-                            <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg"
-                                alt="Logo" />
+                            <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
                         </div>
                     </div>
                 </div>
