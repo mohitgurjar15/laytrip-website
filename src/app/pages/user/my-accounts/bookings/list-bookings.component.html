@@ -53,10 +53,10 @@
                       </div>
                       <div class="pricer_wrp">
                         <span class="pink_price">
-                          ${{ booking.remainAmount | number : '1.2-2' }}
+                          ${{ booking.totalAmount | number : '1.2-2' }}
                         </span>
                         <div class="status">
-                          Due
+                          Total
                         </div>
                       </div>
                     </div>
@@ -65,7 +65,7 @@
               </a>
             </div>
             
-            <div [id]="'upcoming'+i" class="collapse show " data-parent="#accordion_upcoming">
+            <div [id]="'upcoming'+i" class="collapse" data-parent="#accordion_upcoming">
               <div class="accordion_data">
                 <ul class="nav nav-tabs booking_tab_header">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
@@ -83,7 +83,7 @@
                 <div class="tab-content main_tab_content">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <div class="tab-pane" [id]="'cart_item'+j"  [ngClass]="{'show active':selectedInCompletedTabNumber===j}">
-                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="booking" ></app-flights>
+                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="cartItem" ></app-flights>
                     </div>
                   </ng-container>                  
                 </div>
@@ -139,7 +139,7 @@
                 <div class="tab-content main_tab_content">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <div class="tab-pane" [id]="'completed_item'+j" [ngClass]="{'active':selectedCompletedTabNumber===j}">
-                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="booking" ></app-flights>
+                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="cartItem" ></app-flights>
                     </div>
                   </ng-container>                  
                 </div>
