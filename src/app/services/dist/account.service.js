@@ -36,7 +36,7 @@ var AccountService = /** @class */ (function () {
             .pipe(operators_1.catchError(this.handleError));
     };
     AccountService.prototype.getComplteBooking = function (bookingId) {
-        return this.http.get(environment_1.environment.apiUrl + "v1/booking/incomplete-bookings?booking_id=" + bookingId, this.commonFunction.setHeaders())
+        return this.http.get(environment_1.environment.apiUrl + "v1/booking/complete-bookings?booking_id=" + bookingId, this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
     };
     AccountService = __decorate([

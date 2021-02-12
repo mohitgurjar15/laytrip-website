@@ -40,7 +40,7 @@ import { throwError } from "rxjs";
             );
     } 
     getComplteBooking(bookingId){
-        return this.http.get(`${environment.apiUrl}v1/booking/incomplete-bookings?booking_id=`+ bookingId, this.commonFunction.setHeaders())
+        return this.http.get(`${environment.apiUrl}v1/booking/complete-bookings?booking_id=`+ bookingId, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
             );
