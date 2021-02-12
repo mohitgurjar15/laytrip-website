@@ -35,7 +35,7 @@
                             <form [formGroup]="partialPriceSlider">
                                 <div class="custom_range_slide">
                                     <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol
-                                        }}{{partialPaymentHighValue}}</p>
+                                        }}{{partialPaymentHighValue}} Weekly</p> 
                                     <ng5-slider
                                         *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
                                         [(value)]="partialPaymentValue" formControlName="partial_price"
@@ -90,7 +90,7 @@
                                                             <input type="checkbox"
                                                                 (click)="filterByDepartureStop($event,2)">
                                                             <span class="checkmark"></span>
-                                                            {{'two_or_more_stop' | translate}}
+                                                            2+ stops
                                                         </label>
                                                         <span>{{ currency?.symbol }}{{
                                                             flightStops?.two_and_two_plus_stop?.min_price | number :

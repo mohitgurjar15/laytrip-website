@@ -14,7 +14,7 @@ const routes: Routes = [
     component: CheckoutComponent,
   },
   {
-    path: 'confirm',
+    path: 'confirm/:id',
     component: ConfirmComponent,
   }
 ];
