@@ -64,16 +64,6 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.selectCompletedTab = function (cartNumber) {
         this.selectedCompletedTabNumber = cartNumber;
     };
-    ListBookingsComponent.prototype.ngDoCheck = function () {
-        var _this = this;
-        this.cartService.getCartItems.subscribe(function (res) {
-            try {
-                _this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
-            }
-            catch (e) {
-            }
-        });
-    };
     ListBookingsComponent = __decorate([
         core_1.Component({
             selector: 'app-list-bookings',
