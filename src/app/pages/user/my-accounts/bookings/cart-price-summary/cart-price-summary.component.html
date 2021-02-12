@@ -1,4 +1,4 @@
-<div class="price_listing_wrpper"  >
+<div class="price_listing_wrpper"  *ngIf="(cartItem | json) != '[]'">
     <div class="total_p_wrp bb">
         <div class="left_sec">
             Total Purchases
