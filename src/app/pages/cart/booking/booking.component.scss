@@ -7,6 +7,7 @@
 
 .payment_mode_main_wrapper {
     background-color: $background-white;
+    padding-bottom: 20px;
 
     @include tab-view {
         .col-lg-7 {
