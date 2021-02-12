@@ -13,27 +13,28 @@ var BookingTravelerComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.travelers = {};
         this.baggageDescription = '';
+        this.moduleInfo = {};
     }
     BookingTravelerComponent.prototype.ngOnInit = function () {
     };
     BookingTravelerComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['travelers'].currentValue != 'undefined') {
-            this.travelers = changes['travelers'].currentValue;
-            // console.log("travelers=====>",this.travelers)
+            this.travelers = changes['travelers'].currentValue.travelers;
+            this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
         }
     };
     BookingTravelerComponent.prototype.formatBaggageDescription = function (cabbinBaggage, checkInBaggage) {
         var cabbinBaggageWight;
         var checkInBaggageWight;
         var description = '';
-        if (cabbinBaggage != "" && cabbinBaggage.includes("KG") == true) {
+        if (typeof (cabbinBaggage) != 'undefined' && cabbinBaggage != "" && cabbinBaggage.includes("KG") == true) {
             cabbinBaggageWight = this.convertKgToLB(cabbinBaggage.replace("KG", ""));
             description = "Cabin bag upto " + cabbinBaggageWight + " lbs (" + cabbinBaggage + ")";
         }
-        else if (cabbinBaggage != '') {
+        else if (typeof (cabbinBaggage) != 'undefined' && cabbinBaggage != '') {
             description = "Cabin bag upto " + cabbinBaggage;
         }
-        if (checkInBaggage != "" && checkInBaggage.includes("KG") == true) {
+        if (typeof (checkInBaggage) != 'undefined' && checkInBaggage != "" && checkInBaggage.includes("KG") == true) {
             checkInBaggageWight = this.convertKgToLB(checkInBaggage.replace("KG", ""));
             if (description != '') {
                 description += " and checkin bag upto " + checkInBaggageWight + " lbs (" + checkInBaggage + ")";
@@ -42,7 +43,7 @@ var BookingTravelerComponent = /** @class */ (function () {
                 description += "checkin bag upto " + checkInBaggageWight + " lbs (" + checkInBaggage + ")";
             }
         }
-        else if (checkInBaggage != '') {
+        else if (typeof (checkInBaggage) != 'undefined' && checkInBaggage != '') {
             if (description != '') {
                 description += " and checkin bag upto " + checkInBaggage;
             }
