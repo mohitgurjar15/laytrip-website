@@ -312,6 +312,9 @@ export class BookingComponent implements OnInit {
   }
 
   continueToCheckout(){
+
+    this.router.navigate(['/cart/checkout']);
+    return false;
     this.validationErrorMessage='';
     this.validateCartItems();
 
