@@ -4,7 +4,7 @@
   <div class="container">
     <div class="booking_inner_container">
       <div class="search_wrapper">
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)"/>
       </div>
       <h3>
         Upcoming
