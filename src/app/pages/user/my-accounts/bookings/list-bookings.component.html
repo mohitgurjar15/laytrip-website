@@ -1,11 +1,12 @@
 <app-cart-loader *ngIf="upComingloading"></app-cart-loader>
-<app-flight-not-found *ngIf="!upComingloading && !completeBookings.length"></app-flight-not-found>
 <div class="booking_whole_wrapper">
   <div class="container">
     <div class="booking_inner_container">
       <div class="search_wrapper">
         <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)"/>
       </div>
+      <app-flight-not-found *ngIf="!upComingloading && (!completeBookings.length  && !upComingbookings.length )"></app-flight-not-found>
+    <div *ngIf="!upComingloading && (completeBookings.length > 0 || upComingbookings.length > 0)">
       <h3>
         Upcoming
       </h3>
@@ -147,6 +148,7 @@
           </div>
         </div>
       </div>
+    </div>      
     </div>
   </div>
 </div>
