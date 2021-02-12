@@ -58,11 +58,6 @@
                         <option value="F">Female</option>
                         <option value="O">Other</option>
                       </select>
-                      <!-- <div class="gender_anchers">
-                        <a href="javascript:void(0);">Male</a>
-                        <a href="javascript:void(0);">Female</a>
-                        <a href="javascript:void(0);">Other</a>
-                      </div> -->
                       <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                         <small *ngIf="traveler.controls.gender.errors.required" class="error_field">Please select your
                           gender.</small>
@@ -135,8 +130,8 @@
                         </a>
                       </span>
                       <ul class="nav nav-pills" id="addon_tab" role="tablist">
-                        <li class="nav-item disabled" role="presentation">
-                          <a class="nav-link " id="baggage-tab" data-toggle="tab" href="#baggage" role="tab"
+                        <li class="nav-item " role="presentation">
+                          <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage" role="tab"
                             aria-controls="baggage" aria-selected="true">Baggage included</a>
                         </li>
                         <li class="nav-item disabled" role="presentation">

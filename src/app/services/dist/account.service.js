@@ -32,7 +32,11 @@ var AccountService = /** @class */ (function () {
         return rxjs_1.throwError(errorMessage);
     };
     AccountService.prototype.getIncomplteBooking = function () {
-        return this.http.get(environment_1.environment.apiUrl + "v1/booking/incomplete-booking/", this.commonFunction.setHeaders())
+        return this.http.get(environment_1.environment.apiUrl + "v1/booking/incomplete-bookings/", this.commonFunction.setHeaders())
+            .pipe(operators_1.catchError(this.handleError));
+    };
+    AccountService.prototype.getComplteBooking = function () {
+        return this.http.get(environment_1.environment.apiUrl + "v1/booking/incomplete-bookings/", this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
     };
     AccountService = __decorate([

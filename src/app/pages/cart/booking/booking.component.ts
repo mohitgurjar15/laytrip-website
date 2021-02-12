@@ -344,7 +344,6 @@ export class BookingComponent implements OnInit {
   }
 
   getCardListChange(data){
-    console.log("in data",data)
     this.cardListChangeCount=data;
   }
 }

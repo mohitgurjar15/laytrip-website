@@ -66,6 +66,7 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log("Cart Number",this.cartNumber)
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
 
     this.checkOutService.getTravelers.subscribe((travelers: any) => {

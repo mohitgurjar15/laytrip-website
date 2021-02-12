@@ -1,62 +1,51 @@
-<div id="accordion_Bookings" class="accordion_bookings">
-    <div class="card">
+<div id="accordion_Bookings" class="accordion_bookings" *ngIf="(travelers | json) != '{}'">
+    <div class="card" *ngFor="let traveler of travelers">
         <div class="card-header">
             <a class="card-link">
                 Booking Traveler
             </a>
         </div>
         <div class="collapse show">
-            <div class="card-body">
-                <div class="sub_cat_wrapper">
-                    <a href="javascript:void(0);" class="add_btn_lined">Add Adult (Over 12)</a>
-                    <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
-                    <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
-                </div>
+            <div class="card-body">                
                 <div class="common_form">
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">First Name*</label>
-                            <input type="text" class="form-control" placeholder="Name" >
-                            <div class="error">
-                                <small class="error_field">Your name is
-                                    required</small>
-                            </div>
+                            <input type="text" class="form-control" placeholder="{{traveler.userData.firstName}}" disabled>                           
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Last Name*</label>
-                            <input type="text" class="form-control" placeholder="Name" >
+                            <input type="text" class="form-control" placeholder="{{traveler.userData.lastName}}" disabled>
                         </div>
 
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Gender*</label>
-                            <select class="form-control" >
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
+                            <input type="text" class="form-control" placeholder="{{getGender(traveler.userData.gender)}}" disabled>
+
                         </div>
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Email*</label>
-                            <input type="email" class="form-control" placeholder="Email" >
+                            <input type="email" class="form-control" placeholder="{{traveler.userData.email}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Telephone*</label>
-                            <input type="text" class="form-control" placeholder="Telephone">
+                            <input type="text" class="form-control" placeholder="{{traveler.userData.phoneNo}}" disabled>
                         </div>
                         <div class="col dobs col-md-4 mb-sm-10">
                             <label for="">Date of birth*</label>
-                            <input type="text" class="form-control" placeholder="Date of birth">
+                            <input type="text" class="form-control" placeholder="{{commonFunction.convertDateFormat(traveler.userData.dob,'YYYY-MM-DD')}}" disabled>
                         </div>
                     </div>
                     <div class="form-row mt-3 mb-sm-10">
                         <div class="col-sm-12 col-md-4">
                             <label for="">Passport number</label>
-                            <input type="text" class="form-control" placeholder="Passport number" >
+                            <input type="text" class="form-control"  placeholder="{{traveler.userData.passportNumber}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label for="">Nationality*</label>
-                            <input type="text" class="form-control" placeholder="Nationality">
+                            <input type="text" class="form-control"  disabled>
                         </div>
                     </div>
                 </div>
@@ -92,8 +81,8 @@
                                         aria-labelledby="baggage-tab">
                                         <div class="addon_listins_wrps">
                                             <span></span>
-                                            <button class="addon_btn_drop">
-                                                Cabin bag upto Standard Baggage
+                                            <button class="addon_btn_drop" (click)="$event.preventDefault()">
+                                                <!-- {{formatBaggageDescription(cartItem.module_info.routes[0].stops[0].cabin_baggage, cartItem.module_info.routes[0].stops[0].checkin_baggage)}} -->
                                             </button>
                                         </div>
                                     </div>

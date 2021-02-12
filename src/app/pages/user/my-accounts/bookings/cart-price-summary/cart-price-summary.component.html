@@ -1,4 +1,4 @@
-<div class="price_listing_wrpper">
+<div class="price_listing_wrpper"  >
     <div class="total_p_wrp bb">
         <div class="left_sec">
             Total Purchases
@@ -7,19 +7,19 @@
             </span>
         </div>
         <div class="right_sec">
-            $900
+            ${{cartItem.totalAmount}}
         </div>
     </div>
-    <div class="price_descrip">
+    <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
         <div class="line_desc">
             <div class="left_sec">
                 Booking Downpayment
             </div>
             <div class="right_sec">
-                $180
+                ${{cartItem.cartInstallments[0]?.amount}}
             </div>
         </div>
-        <div class="line_desc">
+        <!-- <div class="line_desc">
             <div class="left_sec">
                 Add-on Baggage
             </div>
@@ -34,37 +34,39 @@
             <div class="right_sec">
                 $180
             </div>
-        </div>
+        </div> 
         <div class="total_p_wrp">
             <div class="left_sec">
                 Downpayment
             </div>
             <div class="right_sec">
-                $200
+                ${{cartItem.cartInstallments[0]?.amount}}
             </div>
-        </div>
+        </div>-->
         <div class="listing_accordion">
             <div id="accordion_listing">
                 <div class="card">
                     <div class="card-header">
                         <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
-                            7 Monthly Installments of $100
+                            {{cartItem.cartInstallments?.length}} Monthly Installments of ${{cartItem.cartInstallments[0]?.amount}}
                         </a>
                     </div>
                     <div id="listing_descrip" class="collapse show" data-parent="#accordion_listing">
                         <div class="card-body">
-                            <div class="line_desc paid_clr">
-                                <div class="left_sec">
-                                    Booking Downpayment
+                            <ng-container *ngFor="let installment of cartItem.cartInstallments;let i = index;">
+                                <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : installment.instalmentStatus, 'due_clr' : !installment.instalmentStatus}">
+                                    <div class="left_sec">
+                                       #{{i+1}} Paid  {{commonFunction.convertDateFormat(installment.instalmentDate,'YYYY-MM-DD')}} 
+                                    </div>
+                                    <div class="right_sec">
+                                        ${{installment.amount}}
+                                    </div>
+                                    <span class="paid_markss">
+                                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <div class="right_sec">
-                                    $180
-                                </div>
-                                <span class="paid_markss">
-                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <div class="line_desc due_clr">
+                            </ng-container>
+                            <!-- <div class="line_desc due_clr">
                                 <div class="left_sec">
                                     Add-on Baggage
                                 </div>
@@ -81,13 +83,13 @@
                                     $180
                                 </div>
                                 <span class="paid_markss"></span>
-                            </div>
+                            </div> -->
                             <div class="total_p_wrp">
                                 <div class="left_sec">
-                                    Downpayment
+                                    Total Installments
                                 </div>
                                 <div class="right_sec">
-                                    $200
+                                    ${{cartItem.totalAmount}}
                                 </div>
                                 <span class="paid_markss"></span>
                             </div>

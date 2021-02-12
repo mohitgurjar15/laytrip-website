@@ -14,7 +14,7 @@
                     <div class="booking_detail_bg_wrps">
                         <div id="accordion-card" class="card_accordion">
                             <div class="card">
-                                <app-card-list cardToken={{cardToken}}></app-card-list>
+                                <app-card-list cardListChangeCount="{{cardListChangeCount}}" cardToken={{cardToken}}></app-card-list>
                                 <div class="new_card">
                                     <div class="card-header">
                                         <a class="card-link" data-toggle="collapse" href="#collapseOne"
@@ -27,7 +27,7 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
-                                            <app-add-card></app-add-card>
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)"></app-add-card>
                                         </div>
                                     </div>
                                 </div>
@@ -39,19 +39,18 @@
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
                             <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
-                            <!--<app-payment-mode *ngIf="carts.length" 
-                                 laycreditpoints="{{laycreditpoints}}"
-                                (selectInstalmentMode)="selectInstalmentMode($event)"
-                                (getInstalmentData)="getInstalmentData($event)"
-                                (redeemableLayCredit)="redeemableLayCredit($event)">
-                            </app-payment-mode> -->
                             <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
                             </app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
-                            <button [disabled]="!isValidData" (click)="handleSubmit()">Pay and Book</button>
+                            <button  (click)="bookFlight()">Pay and Book</button>
 
                         </div>
+                    </div>
+                    <div class="section_description" *ngIf="validationErrorMessage">
+                        <span class="sec_text">{{validationErrorMessage}}</span>
+                        <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                alt="Close"></a>
                     </div>
                 </div>
             </div>
