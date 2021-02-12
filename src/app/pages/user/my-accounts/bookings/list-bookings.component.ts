@@ -74,10 +74,9 @@ export class ListBookingsComponent implements OnInit {
   }
 
 
-  // getProgressPercentage(){
-  //   var totalPrice =  87;
-  //   var remaning = 
-  // }
+  getProgressPercentage(value,totalValue){
+    return  {'width' : Math.floor((value/totalValue)*100) +'%'};
+  }
   
 
 }

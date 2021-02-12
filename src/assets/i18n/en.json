@@ -19,7 +19,7 @@
     "login_via": "Or login via",
     "do_not_have_an_account": "Already have an account? Sign In",
     "forgot_password_title": "Forgot Password?",
-    "forgot_password_description": "Enter the email address you used to sign up with us and we will send you a password reset link",
+    "forgot_password_description": "Enter the email address you used to sign up with us and we will send you a one-time-pin",
     "back_to_sing_in": "Back to",
     "reset_password": "Reset Password",
     "not_registerd_email": "Email is not registered with us. Please check the email.",

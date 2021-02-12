@@ -64,6 +64,9 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.selectCompletedTab = function (cartNumber) {
         this.selectedCompletedTabNumber = cartNumber;
     };
+    ListBookingsComponent.prototype.getProgressPercentage = function (value, totalValue) {
+        return { 'width': Math.floor((value / totalValue) * 100) + '%' };
+    };
     ListBookingsComponent = __decorate([
         core_1.Component({
             selector: 'app-list-bookings',
