@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 declare var $: any;
 
 @Component({
