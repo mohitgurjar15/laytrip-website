@@ -301,6 +301,7 @@
                 z-index: 9;
                 overflow: hidden;
                 white-space: normal;
+                cursor: pointer;
 
                 &::before {
                   content: "";
@@ -315,14 +316,14 @@
                   border-radius: 25px;
                 }
 
-                &:hover {
-                  border: 1px solid $hotel-secondary-color;
-                  color: $hotel-secondary-color;
-                  &:before {
-                    height: calc(100% - 2px);
-                    width: calc(100% - 2px);
-                  }
-                }
+                // &:hover {
+                //   border: 1px solid $hotel-secondary-color;
+                //   color: $hotel-secondary-color;
+                //   &:before {
+                //     height: calc(100% - 2px);
+                //     width: calc(100% - 2px);
+                //   }
+                // }
 
                 &.btn_disable {
                   cursor: default;

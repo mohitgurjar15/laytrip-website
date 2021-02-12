@@ -6,30 +6,30 @@
 
 
 .account_part {
-	.account_cnt_main.booking_main {
-		.block_filter_payment {
-			.filter_form {
-				.form_row {
-					.form_field.booking-id {
-						width: 100%;
-					}
-				}
-			}
-		}
-	}
+    .account_cnt_main.booking_main {
+        .block_filter_payment {
+            .filter_form {
+                .form_row {
+                    .form_field.booking-id {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
 }
 
 
-::ng-deep .calender-price-view{
+::ng-deep .calender-price-view {
     //width: 340px;
     min-width: 340px !important;
-    
-    .p-datepicker-calendar-container{
-        .p-datepicker-calendar{
-            tbody{
-                tr{
-                    td{
-                        .p-ripple{
+
+    .p-datepicker-calendar-container {
+        .p-datepicker-calendar {
+            tbody {
+                tr {
+                    td {
+                        .p-ripple {
                             display: flex;
                             flex-flow: column;
                             width: auto;
@@ -37,21 +37,24 @@
                             border-radius: 0;
                             background: transparent;
 
-                            &:hover{
+                            &:hover {
                                 background: transparent;
-                                .c_date{
+
+                                .c_date {
                                     background: #F826C1;
                                 }
                             }
+
                             &.p-highlight {
                                 background: transparent !important;
-                                .c_date{
+
+                                .c_date {
                                     background: #F826C1;
                                 }
                             }
                         }
 
-                        .c_date{
+                        .c_date {
                             display: block;
                             width: 30px;
                             height: 30px;
@@ -62,11 +65,12 @@
                             line-height: 20px;
                             color: #fff !important;
                         }
-                        .calender_price{
+
+                        .calender_price {
                             display: block;
-                            margin-top:3px;
+                            margin-top: 3px;
                         }
-                        
+
                     }
                 }
             }
@@ -75,22 +79,24 @@
 }
 
 
-.booking_whole_wrapper{
+.booking_whole_wrapper {
     background-color: $background-white;
     position: relative;
     min-height: calc(100vh - 110px);
     padding-top: 80px;
-    .booking_inner_container{
+
+    .booking_inner_container {
         max-width: 680px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        
-        .search_wrapper{
+
+        .search_wrapper {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            input{
+
+            input {
                 border-radius: 18px;
                 border: 1px solid $box-border-color;
                 font-size: 14px;
@@ -104,28 +110,40 @@
                 background-repeat: no-repeat;
             }
         }
-        h3{
+
+        h3 {
             color: $blue-text;
             font-size: 34px;
             margin-bottom: 5px;
             margin: 25px 0 15px;
-            @include tab-view{
+
+            @include tab-view {
                 font-size: 18px;
             }
         }
-        .accordion_up_wrapper{
+
+        .accordion_up_wrapper {
             margin-bottom: 15px;
-            #accordion_upcoming , #accordion_completed{
-                .card{
+
+            #accordion_upcoming,
+            #accordion_completed {
+                .card {
                     border-radius: 10px;
                     border: 1px solid $box-border-color;
-                    .card-header{
+                    margin-top: 15px;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+
+                    .card-header {
                         margin: 0;
                         background-color: $background-white;
                         border-radius: 10px;
                         padding: 15px;
                         border-bottom: none;
-                        a{
+
+                        a {
                             font-weight: 600;
                             color: $text-black;
                             font-size: 16px;
@@ -136,8 +154,8 @@
                             align-items: flex-start;
                             width: 100%;
                             padding: 0;
-                
-                            &[aria-expanded="true"]{
+
+                            &[aria-expanded="true"] {
                                 &:after {
                                     content: "";
                                     position: relative;
@@ -151,7 +169,8 @@
                                     border: none;
                                 }
                             }
-                            &[aria-expanded="false"]{
+
+                            &[aria-expanded="false"] {
                                 &:after {
                                     position: relative;
                                     padding: 5px 9px;
@@ -165,95 +184,130 @@
                                     border: none;
                                 }
                             }
-                            .header_image{
+
+                            .header_image {
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                                 font-size: 27px;
-                                position: relative; 
-                                .title_image{
-                                    border-radius: 50%;
-                                    border: 2px solid $pink;
+                                position: relative;
+
+                                .title_image {
                                     padding: 5px;
-                                    height: 38px;
-                                    width: 38px;
+                                    height: 39px;
+                                    width: 39px;
+                                    margin-right: 15px;
+                                    position: relative;
+                                    background-color: $grayed_border;
+                                    border-radius: 50%;
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
-                                    margin-right: 15px;
-                                    img{
-                                        width: 24px;
+
+                                    img {
+                                        width: auto;
                                     }
-                                    @include tab-view{
+
+                                    .cart_count {
+                                        position: absolute;
+                                        color: $background-white;
+                                        background-color: $pink;
+                                        border-radius: 50%;
+                                        font-size: 10px;
+                                        font-weight: 100;
+                                        top: 0px;
+                                        right: -10px;
+                                        height: 16px;
+                                        width: 16px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
+
+                                    @include tab-view {
                                         display: none;
                                     }
                                 }
-                                .flight_routing_imgs{
+
+                                .flight_routing_imgs {
                                     display: flex;
                                     flex-direction: column;
                                     padding: 0 20px;
-                                    @include tab-view{
+
+                                    @include tab-view {
                                         max-width: 110px;
                                     }
                                 }
-                                
+
                             }
-                            .headerin_wrapper{
+
+                            .headerin_wrapper {
                                 display: flex;
                                 justify-content: flex-start;
                                 align-items: center;
                                 padding-right: 20px;
                                 flex: 1;
-                                @include tab-view{
+
+                                @include tab-view {
                                     flex-direction: column;
                                     justify-content: flex-start;
                                     align-items: flex-start;
                                 }
-                                
-                                .header_second_sec{
+
+                                .header_second_sec {
                                     display: flex;
                                     flex-direction: column;
                                     width: 100%;
                                     max-width: 455px;
                                     margin: 0 auto;
-                                    .header_upper_wrper{
+
+                                    .header_upper_wrper {
                                         display: flex;
                                         justify-content: space-between;
                                         align-items: center;
                                         margin-bottom: 5px;
-                                        .book_id{
+
+                                        .book_id {
                                             color: $grayed_border;
                                             font-size: 12px;
                                         }
                                     }
-                                    .header_lower_wrper{
+
+                                    .header_lower_wrper {
                                         display: flex;
                                         justify-content: space-around;
                                         align-items: center;
                                         text-align: center;
-                                        .payment_bar_wrps{
+
+                                        .payment_bar_wrps {
                                             width: 100%;
                                             max-width: 300px;
-                                            .progress{
+                                            margin: 0 10px;
+
+                                            .progress {
                                                 height: 10px;
                                                 border-radius: 25px;
-                                                .progress-bar{
+
+                                                .progress-bar {
                                                     background-color: $pink;
                                                 }
                                             }
-                                            .payment_status{
+
+                                            .payment_status {
                                                 font-size: 12px;
                                                 color: $pink;
                                                 margin-top: 10px;
                                             }
                                         }
-                                        .pricer_wrp{
-                                            .pink_price{
+
+                                        .pricer_wrp {
+                                            .pink_price {
                                                 font-size: 19px;
                                                 color: $pink;
                                                 font-weight: 600;
                                             }
-                                            .status{
+
+                                            .status {
                                                 color: $mid_gray_bg;
                                                 font-size: 12px;
                                                 font-weight: 400;
@@ -261,51 +315,59 @@
                                         }
                                     }
                                 }
-                                .header_date{
+
+                                .header_date {
                                     font-size: 16px;
                                     font-weight: 400;
                                 }
                             }
                         }
                     }
-                    .accordion_data{
+
+                    .accordion_data {
                         padding: 15px;
                         border-top: 1px solid $box-border-color;
                         background-color: $tab-bg-gray;
-                        .booking_tab_header{
+
+                        .booking_tab_header {
                             border-bottom: none;
                             position: relative;
                             z-index: 9;
                             overflow: hidden;
                             max-height: 71px;
-                            li{
+
+                            li {
                                 position: relative;
                                 z-index: -99;
                                 margin-left: 0;
-                                &:first-child{
+
+                                &:first-child {
                                     margin-left: 0;
                                     z-index: 9;
-                                    a{
+
+                                    a {
                                         border-top-left-radius: 10px;
                                         border-top-right-radius: 0px;
                                         border-left: 1px solid $box-border-color;
                                         border-top: 1px solid $box-border-color;
-                                        &::before{
+
+                                        &::before {
                                             border: none;
                                         }
-                                        &.active{
+
+                                        &.active {
                                             border-top-right-radius: 10px;
                                         }
                                     }
                                 }
-                                
-                                &:last-child{
-                                    a{
+
+                                &:last-child {
+                                    a {
                                         border-top-right-radius: 15px;
                                     }
                                 }
-                                
-                                a{  
+
+                                a {
                                     background-color: transparent;
                                     padding: 10px 15px;
                                     border: 1px solid $box-border-color;
@@ -319,8 +381,8 @@
                                     display: flex;
                                     justify-content: center;
                                     //margin-left: -8px;
-                                    
-                                    &::before{
+
+                                    &::before {
                                         // content: '';
                                         // position: absolute;
                                         // height: 1px;
@@ -329,28 +391,33 @@
                                         // top: 1px;
                                         // left: -8px;
                                     }
-                                    @include tab-view{
+
+                                    @include tab-view {
                                         top: 8px;
                                         padding: 10px 14px;
                                         width: auto;
                                     }
-                                    .tab_round_wrps{
+
+                                    .tab_round_wrps {
                                         color: $mid_gray_bg;
                                         font-size: 13px;
                                         display: flex;
                                         justify-content: space-around;
                                         align-items: center;
                                         flex-direction: column;
-                                        @include tab-view{
-                                            .tab_txt_head{
+
+                                        @include tab-view {
+                                            .tab_txt_head {
                                                 display: none;
                                             }
                                         }
-                                        img{
+
+                                        img {
                                             margin-bottom: 5px;
                                         }
                                     }
-                                    &.active{
+
+                                    &.active {
                                         background-color: $background-white;
                                         border-top-left-radius: 10px;
                                         border-top-right-radius: 10px;
@@ -362,16 +429,19 @@
                                         border-bottom: none;
                                         width: auto;
                                         margin: 0;
-                                        &::before{
+
+                                        &::before {
                                             border: none;
                                         }
-                                        @include tab-view{
+
+                                        @include tab-view {
                                             width: 67px;
                                             height: 45px;
                                             display: flex;
                                             justify-content: center;
                                         }
-                                        .tab_round_wrps{
+
+                                        .tab_round_wrps {
                                             width: 169px;
                                             border: 2px solid $pink;
                                             border-radius: 25px;
@@ -382,24 +452,28 @@
                                             flex-direction: row;
                                             padding: 0 20px;
                                             height: 50px;
-                                            @include tab-view{
+
+                                            @include tab-view {
                                                 border: none;
                                                 padding: 0;
                                                 width: auto;
-                                                .tab_txt_head{
+
+                                                .tab_txt_head {
                                                     display: none;
                                                 }
                                             }
-                                            img{
+
+                                            img {
                                                 margin-bottom: 0;
                                             }
                                         }
                                     }
                                 }
-                                
+
                             }
                         }
-                        .main_tab_content{
+
+                        .main_tab_content {
                             background-color: $background-white;
                             border-bottom-left-radius: 10px;
                             border-bottom-right-radius: 10px;
@@ -407,15 +481,49 @@
                     }
                 }
             }
-            #accordion_completed{
-                .card{
-                    .card-header{
-                        a{
+
+            #accordion_completed {
+                .card {
+                    .card-header {
+                        a {
                             align-items: center;
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+.loader_wrapper {
+    .loader_card {
+        background-color: $background-white;
+        border-radius: 10px;
+        padding: 15px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        border: 1px solid $box-border-color;
+        margin-bottom: 10px;
+
+        .cart_round {
+            span {
+                padding: 5px;
+                height: 39px;
+                width: 39px;
+                margin-right: 15px;
+                position: relative;
+                border-radius: 50%;
+                display: flex;
+            }
+        }
+
+        .cart_details {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-left: 50px;
         }
     }
 }
