@@ -10,10 +10,11 @@ exports.ListBookingsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var ListBookingsComponent = /** @class */ (function () {
-    function ListBookingsComponent(userService, accountService, commonFunction) {
+    function ListBookingsComponent(userService, accountService, commonFunction, renderer) {
         this.userService = userService;
         this.accountService = accountService;
         this.commonFunction = commonFunction;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.upComingloading = false;
         this.upComingbookings = [];
@@ -25,6 +26,7 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.ngOnInit = function () {
         this.getIncomplteBooking();
         this.getComplteBooking();
+        this.renderer.addClass(document.body, 'cms-bgColor');
     };
     ListBookingsComponent.prototype.getIncomplteBooking = function (bookingId) {
         var _this = this;

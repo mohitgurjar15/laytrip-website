@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
@@ -24,11 +24,15 @@ export class ListBookingsComponent implements OnInit {
     private userService: UserService,
     private accountService: AccountService,
     private commonFunction: CommonFunction,
+    private renderer: Renderer2
+
   ) { }
 
   ngOnInit() {
     this.getIncomplteBooking();
     this.getComplteBooking();
+    this.renderer.addClass(document.body, 'cms-bgColor');
+
   }
 
   getIncomplteBooking(bookingId = ''){
@@ -61,7 +65,7 @@ export class ListBookingsComponent implements OnInit {
   selectInCompletedTab(cartNumber) {
     this.selectedInCompletedTabNumber = cartNumber;
   }
-  
+
   selectCompletedTab(cartNumber) {
     this.selectedCompletedTabNumber = cartNumber;
   }
