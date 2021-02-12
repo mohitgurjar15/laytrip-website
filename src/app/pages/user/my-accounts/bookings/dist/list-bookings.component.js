@@ -10,57 +10,57 @@ exports.ListBookingsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var ListBookingsComponent = /** @class */ (function () {
-    function ListBookingsComponent(userService, commonFunction, formBuilder) {
+    function ListBookingsComponent(userService, accountService, commonFunction, renderer) {
         this.userService = userService;
+        this.accountService = accountService;
         this.commonFunction = commonFunction;
-        this.formBuilder = formBuilder;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        this.loading = false;
-        this.flightLists = [];
-        this.perPageLimitConfig = [10, 25, 50, 100];
-        this.startMinDate = new Date();
+        this.upComingloading = false;
+        this.upComingbookings = [];
+        this.completeLoading = false;
+        this.completeBookings = [];
+        this.selectedInCompletedTabNumber = 0;
+        this.selectedCompletedTabNumber = 0;
     }
     ListBookingsComponent.prototype.ngOnInit = function () {
-        // this.loading = true;
-        this.pageNumber = 1;
-        this.limit = this.perPageLimitConfig[0];
-        this.getModule();
-        this.filterForm = this.formBuilder.group({
-            bookingId: [''],
-            start_date: [''],
-            end_date: [''],
-            module: ['']
-        });
+        this.getIncomplteBooking();
+        this.getComplteBooking();
+        this.renderer.addClass(document.body, 'cms-bgColor');
     };
-    ListBookingsComponent.prototype.getModule = function () {
+    ListBookingsComponent.prototype.getIncomplteBooking = function (bookingId) {
         var _this = this;
-        this.userService.getModules(this.pageNumber, this.limit).subscribe(function (res) {
-            _this.modules = res.data.map(function (module) {
-                if (module.status == true) {
-                    return {
-                        id: module.id,
-                        name: module.name.toUpperCase()
-                    };
-                    /* this.modules.push({
-                      id:module.id,
-                      name:module.name.toUpperCase()
-                    }); */
-                }
-            });
-            console.log(_this.modules);
+        if (bookingId === void 0) { bookingId = ''; }
+        this.upComingloading = true;
+        this.accountService.getIncomplteBooking(bookingId).subscribe(function (res) {
+            _this.upComingbookings = res.data;
+            _this.upComingloading = false;
         }, function (err) {
+            _this.upComingloading = false;
+            _this.upComingbookings = [];
         });
     };
-    ListBookingsComponent.prototype.getFlightResult = function () {
-        this.result = this.filterForm.value;
-        this.loading = true;
+    ListBookingsComponent.prototype.getComplteBooking = function (bookingId) {
+        var _this = this;
+        if (bookingId === void 0) { bookingId = ''; }
+        this.completeLoading = true;
+        this.accountService.getComplteBooking(bookingId).subscribe(function (res) {
+            _this.completeBookings = res.data;
+            _this.completeLoading = false;
+        }, function (err) {
+            _this.completeLoading = false;
+            _this.completeBookings = [];
+        });
     };
-    ListBookingsComponent.prototype.startDateUpdate = function (date) {
-        this.endDate = new Date(date);
+    ListBookingsComponent.prototype.searchBooking = function (searchKey) {
+        this.getComplteBooking(searchKey);
+        this.getIncomplteBooking(searchKey);
     };
-    ListBookingsComponent.prototype.reset = function () {
-        this.ngOnInit();
-        this.getFlightResult();
+    ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber) {
+        this.selectedInCompletedTabNumber = cartNumber;
+    };
+    ListBookingsComponent.prototype.selectCompletedTab = function (cartNumber) {
+        this.selectedCompletedTabNumber = cartNumber;
     };
     ListBookingsComponent = __decorate([
         core_1.Component({

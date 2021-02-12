@@ -54,7 +54,7 @@ export class SocialLoginComponent implements OnInit {
 
         let jsonData = {
           "account_type": 1, 
-          "name": objApple.name,
+          "name": "",
           "email": objApple.email,
           "social_account_id": userInfo.authorization.code,
           "device_type": 1,
@@ -70,10 +70,9 @@ export class SocialLoginComponent implements OnInit {
             document.getElementById('navbarNav').click();
             this.router.url;
           }
-        }, (error: HttpErrorResponse) => {
-         
+        }, (error: HttpErrorResponse) => {         
           this.socialError.emit(error.message);
-          this.toastr.error(error.message, 'SignIn Error');
+          // this.toastr.error(error.message, 'SignIn Error');
         });
       }
     });
@@ -83,7 +82,7 @@ export class SocialLoginComponent implements OnInit {
   public googleLogin(element) {
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
-
+        this.socialError.emit('');
         let profile = googleUser.getBasicProfile();
         
         let jsonData = {
@@ -112,14 +111,12 @@ export class SocialLoginComponent implements OnInit {
         });
 
       }, (error) => {
+        console.log(error)
         this.socialError.emit('');
         this.google_loading = false;
       });
   }
-
-  ngDoCheck(){
-    // this.loadGoogleSdk();
-  }
+ 
   ngAfterViewInit(){
     this.loadGoogleSdk();
   }
@@ -160,6 +157,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
+    this.socialError.emit('');
     this.loading = true;
     window['FB'].login((response) => {
       if (response.authResponse) {
@@ -191,19 +189,19 @@ export class SocialLoginComponent implements OnInit {
           }, (error: HttpErrorResponse) => {
             this.loading = false;
             this.socialError.emit(error.message);
-            this.toastr.error(error.message, 'SignIn Error');
+            // this.toastr.error(error.message, 'SignIn Error');
           });
         });
       } else {
         this.socialError.emit('');
         this.loading = false;
-        // this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       }
     }, { scope: 'email' });
   }
 
   loginWithApple(): void {
+    this.socialError.emit('');
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
   }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BookingComponent } from './booking/booking.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
+  },
+  {
+    path: 'confirm',
+    component: ConfirmComponent,
   }
 ];
 

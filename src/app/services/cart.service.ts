@@ -120,4 +120,12 @@ export class CartService {
   setDeletedCartItem(cartDeletedItem){
     this.cartDeletedItem.next(cartDeletedItem);
   }
+
+  bookCart(data){
+    let headers = {
+      currency: 'USD',
+      language: 'en'
+    }
+    return this.http.post(`${environment.apiUrl}v1/cart/book`, data, this.commonFunction.setHeaders(headers))
+  }
 }

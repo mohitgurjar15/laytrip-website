@@ -244,8 +244,10 @@ export class BookingComponent implements OnInit {
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
-      this.cartService.setCartItems(this.carts);
-      this.cartService.setCartPrices(this.cartPrices)
+      setTimeout(()=>{
+        this.cartService.setCartItems(this.carts);
+        this.cartService.setCartPrices(this.cartPrices)
+      },2000)
       if (this.carts.length == 0) {
         this.isCartEmpty = true;
       }
@@ -348,8 +350,7 @@ export class BookingComponent implements OnInit {
     }
   }
 
-  getCardListChange(data) {
-    console.log("in data", data)
-    this.cardListChangeCount = data;
+  getCardListChange(data){
+    this.cardListChangeCount=data;
   }
 }

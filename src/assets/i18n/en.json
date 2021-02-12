@@ -32,7 +32,7 @@
     "new_password_placeholder": "Re-enter Password",
     "confirm_password_placeholder": "Enter Confirm Password",
     "new_password_touched_validation": "Please enter your new password.",
-    "confirm_password_touched_validaion": "Please enter your confirm password.",
+    "confirm_password_touched_validaion": "Please enter your reenter password.",
     "password_string_validation": "Your password must contain 1 capital alpha latter,1 small alpha latter, 1 numeric, 1 special character & 8 character long.",
     "confirm_password_not_match": "Confirm password doesn't match.",
     "incorrect_otp": "Incorrect OTP. Please try again!",

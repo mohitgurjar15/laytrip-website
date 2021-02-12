@@ -61,9 +61,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartService.getCartItems.subscribe(data => {
 
       if (data.length > 0) {
-        console.log(data, "getCartItems.subscribe")
-        this.calculateInstalment(data)
-
+        //console.log(data, "getCartItems.subscribe")
+        //this.calculateInstalment(data)
+        //this.getCartList();
+        this.updateCartSummary()
       }
     })
     this.countryCode = this.commonFunction.getUserCountry();
@@ -94,6 +95,23 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }
   }
 
+  updateCartSummary(){
+    if (this.isLoggedIn) {
+      // GET CART LIST FROM GENERIC SERVICE
+      this.cartService.getCartList().subscribe((res: any) => {
+        if (res) {
+          // SET CART ITEMS IN CART SERVICE
+          let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+          this.calculateInstalment(cartItems);
+          this.cd.detectChanges();
+        }
+      }, (error) => {
+        if (error && error.status === 404) {
+          
+        }
+      });
+    }
+  }
 
   ngDoCheck() {
     this.checkUser();
@@ -195,22 +213,40 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   calculateInstalment(cartPrices) {
     let totalPrice = 0;
     let checkinDate;
-    console.log('cartprices:::::', cartPrices[0]);
+    //console.log('cartprices:::::', cartPrices);
     if (cartPrices && cartPrices.length > 0) {
-      /* if (typeof cartPrices[0].module_Info !== 'undefined' && typeof cartPrices[0].module_Info.departure_date !== 'undefined') { */
-      checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-      for (let i = 0; i < cartPrices.length; i++) {
-        totalPrice += cartPrices[i].module_Info.selling_price;
-        if (i == 0) {
-          continue;
+      
+        checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+        for (let i = 0; i < cartPrices.length; i++) {
+          totalPrice += cartPrices[i].module_Info.selling_price;
+          if (i == 0) {
+            continue;
+          }
+          if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
+            checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+          }
         }
-        if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
-          checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-        }
-      }
-      /* } */
-
     }
+
+    //console.log(cartPrices,"Before If")
+    /* if(cartPrices && cartPrices.length>0)
+    {
+      console.log(cartPrices,"Before sort")
+      cartPrices.sort(function(a:any,b:any){
+        a = new Date(a.module_Info.departure_date);
+        b = new Date(b.module_Info.departure_date);
+        return a-b;
+      });
+      let item=cartPrices.find((x,i)=>{ return i==0})
+      checkinDate = item && item.module_Info ? moment(item.module_Info.departure_date,"DD/MM/YYYY").format("YYYY-MM-DD"):'2021-10-01';
+      console.log(cartPrices,"After sort",checkinDate)
+
+      for(let cartPrice of cartPrices)
+      {
+        totalPrice +=cartPrice.module_Info.selling_price;
+      }
+    }
+    console.log(totalPrice,"totalPrice") */
 
     this.totalAmount = totalPrice;
     let instalmentRequest = {

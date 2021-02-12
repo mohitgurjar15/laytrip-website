@@ -34,6 +34,13 @@ var CommonFunction = /** @class */ (function () {
             e.preventDefault();
         }
     };
+    CommonFunction.prototype.validatePhoneCode = function (e) {
+        var input = String.fromCharCode(e.charCode);
+        var reg = /^[0-9+]*$/;
+        if (!reg.test(input)) {
+            e.preventDefault();
+        }
+    };
     CommonFunction.prototype.validateNotAllowSpecial = function (e) {
         var input = String.fromCharCode(e.charCode);
         var reg = /^[a-zA-Z0-9-]*$/;

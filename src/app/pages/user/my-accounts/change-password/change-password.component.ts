@@ -33,7 +33,7 @@ export class ChangePasswordComponent implements OnInit {
      this.changePasswordForm = this.formBuilder.group({
       old_password: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-      confirm_password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],     
+      confirm_password: ['', [Validators.required]],     
     },{
       validator: MustMatch('password', 'confirm_password'),
     });
@@ -42,9 +42,11 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit() {
     
     this.loadingValue.emit(true);
-   
+    this.submitted = true;
+
     if (this.changePasswordForm.invalid) {
       this.loadingValue.emit(false);
+      // this.submitted = false;
       return;
     } else {
       let jsonFromData = {
@@ -56,8 +58,10 @@ export class ChangePasswordComponent implements OnInit {
         this.loadingValue.emit(false); 
         this.changePasswordForm.reset();
         this.toastr.success("Your password has been updated successfully!", 'Password Updated');
-
+        this.submitted = false;
+        
       }, (error: HttpErrorResponse) => {       
+        this.submitted = false;
         this.apiError = error.message;
         this.loadingValue.emit(false);
         this.toastr.error(error.error.message, 'Error Change Password');

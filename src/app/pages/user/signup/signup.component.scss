@@ -220,17 +220,19 @@
                 .check {
                   width: 100%;
                   display: flex;
+                  align-items: center;
                   .custom_checkbox {
                     position: relative;
                     margin-bottom: 0;
                     vertical-align: middle;
                     line-height: normal;
-                    display: inline;
                     align-items: center;
                     font-size: 12px;
                     font-weight: 400;
                     color: $mid_gray_bg;
+                    height: 14px;
                     text-transform: none;
+                    display: flex;
 
                     input {
                       position: absolute;
@@ -332,6 +334,7 @@
                 z-index: 9;
                 overflow: hidden;
                 white-space: normal;
+                cursor: pointer;
 
                 &::before {
                   content: "";
@@ -346,14 +349,14 @@
                   border-radius: 25px;
                 }
 
-                &:hover {
-                  border: 1px solid $hotel-secondary-color;
-                  color: $hotel-secondary-color;
-                  &:before {
-                    height: calc(100% - 2px);
-                    width: calc(100% - 2px);
-                  }
-                }
+                // &:hover {
+                //   border: 1px solid $hotel-secondary-color;
+                //   color: $hotel-secondary-color;
+                //   &:before {
+                //     height: calc(100% - 2px);
+                //     width: calc(100% - 2px);
+                //   }
+                // }
 
                 &.btn_disable {
                   cursor: default;

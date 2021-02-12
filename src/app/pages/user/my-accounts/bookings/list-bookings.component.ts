@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FlightService } from '../../../../services/flight.service';
+import { AccountService } from '../../../../services/account.service';
 
 @Component({
   selector: 'app-list-bookings',
@@ -11,71 +13,62 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ListBookingsComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  filterForm: FormGroup;
-  loading = false;
-  flightLists = [];
-  perPageLimitConfig=[10,25,50,100];
-  pageNumber:number;
-  limit:number;
-  modules:[];
-  result:any;
-  endDate;
-  startMinDate= new Date();
- 
+  upComingloading = false;
+  upComingbookings=[];
+  completeLoading = false;
+  completeBookings=[];
+  selectedInCompletedTabNumber: number = 0;
+  selectedCompletedTabNumber: number = 0;
 
   constructor(
     private userService: UserService,
+    private accountService: AccountService,
     private commonFunction: CommonFunction,
-    private formBuilder: FormBuilder
+    private renderer: Renderer2
+
   ) { }
 
   ngOnInit() {
-    // this.loading = true;
-    this.pageNumber=1;
-    this.limit=this.perPageLimitConfig[0];
-    this.getModule();
+    this.getIncomplteBooking();
+    this.getComplteBooking();
+    this.renderer.addClass(document.body, 'cms-bgColor');
 
-    this.filterForm = this.formBuilder.group({
-      bookingId: [''],
-      start_date: [''],
-      end_date: [''],
-      module: [''],
-    });
   }
 
-  getModule(){
-    this.userService.getModules(this.pageNumber, this.limit).subscribe((res: any) => {
-      this.modules  = res.data.map(function (module) {
-        if(module.status == true){
-          return {
-            id:module.id,
-            name:module.name.toUpperCase()
-          } 
-          /* this.modules.push({
-            id:module.id,
-            name:module.name.toUpperCase()
-          }); */
-        }
-      });
-      console.log(this.modules)
+  getIncomplteBooking(bookingId = ''){
+    this.upComingloading=true;
+    this.accountService.getIncomplteBooking(bookingId).subscribe((res: any) => {
+      this.upComingbookings=res.data;
+      this.upComingloading=false;
    }, err => {
-    
+    this.upComingloading=false;
+    this.upComingbookings=[];
    }); 
   }
 
-  getFlightResult() {
-    this.result = this.filterForm.value;
-     this.loading = true;
+  getComplteBooking(bookingId = ''){
+    this.completeLoading=true;
+    this.accountService.getComplteBooking(bookingId).subscribe((res: any) => {
+      this.completeBookings=res.data;
+      this.completeLoading=false;
+   }, err => {
+    this.completeLoading=false;
+    this.completeBookings=[];
+   }); 
   }
 
-  startDateUpdate(date) {
-    this.endDate = new Date(date)
+  searchBooking(searchKey:any){
+      this.getComplteBooking(searchKey);
+      this.getIncomplteBooking(searchKey);
   }
 
-
-  reset() {
-    this.ngOnInit();
-    this.getFlightResult();
+  selectInCompletedTab(cartNumber) {
+    this.selectedInCompletedTabNumber = cartNumber;
   }
+
+  selectCompletedTab(cartNumber) {
+    this.selectedCompletedTabNumber = cartNumber;
+  }
+
 
 }

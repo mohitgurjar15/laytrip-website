@@ -1210,6 +1210,11 @@ select {
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
+                        span{
+                          &.p-calendar{
+                            width: 100%;
+                          }
+                        }
 
                         input {
                           width: 100%;

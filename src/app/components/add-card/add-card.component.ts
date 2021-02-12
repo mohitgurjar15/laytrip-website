@@ -75,7 +75,7 @@ export class AddCardComponent implements OnInit {
   }
 
   spreedlySdk() {
-    Spreedly.init('YNEdZFTwB1tRR4zwvcMIaUxZq3g', {
+    Spreedly.init('9KGMvRTcGfbQkaHQU0fPlr2jnQ8', {
       'numberEl': 'spreedly-number',
       'cvvEl': 'spreedly-cvv',
     });
@@ -113,11 +113,10 @@ export class AddCardComponent implements OnInit {
       }
     });
 
-    Spreedly.on('fieldEvent', function (name, event, activeElement, inputData) {
-      
-    });
+    
 
     Spreedly.on('paymentMethod', function (token, pmData) {
+      console.log("In submit")
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
       this.token = token;

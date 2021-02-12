@@ -38,7 +38,7 @@ var SocialLoginComponent = /** @class */ (function () {
                 console.log(objApple, userInfo);
                 var jsonData = {
                     "account_type": 1,
-                    "name": objApple.name,
+                    "name": "",
                     "email": objApple.email,
                     "social_account_id": userInfo.authorization.code,
                     "device_type": 1,
@@ -56,7 +56,7 @@ var SocialLoginComponent = /** @class */ (function () {
                     }
                 }, function (error) {
                     _this.socialError.emit(error.message);
-                    _this.toastr.error(error.message, 'SignIn Error');
+                    // this.toastr.error(error.message, 'SignIn Error');
                 });
             }
         });
@@ -64,6 +64,7 @@ var SocialLoginComponent = /** @class */ (function () {
     SocialLoginComponent.prototype.googleLogin = function (element) {
         var _this = this;
         this.auth2.attachClickHandler(element, {}, function (googleUser) {
+            _this.socialError.emit('');
             var profile = googleUser.getBasicProfile();
             var jsonData = {
                 "account_type": 1,
@@ -90,12 +91,10 @@ var SocialLoginComponent = /** @class */ (function () {
                 _this.socialError.emit(error.message);
             });
         }, function (error) {
+            console.log(error);
             _this.socialError.emit('');
             _this.google_loading = false;
         });
-    };
-    SocialLoginComponent.prototype.ngDoCheck = function () {
-        // this.loadGoogleSdk();
     };
     SocialLoginComponent.prototype.ngAfterViewInit = function () {
         this.loadGoogleSdk();
@@ -136,6 +135,7 @@ var SocialLoginComponent = /** @class */ (function () {
     };
     SocialLoginComponent.prototype.fbLogin = function () {
         var _this = this;
+        this.socialError.emit('');
         this.loading = true;
         window['FB'].login(function (response) {
             if (response.authResponse) {
@@ -166,19 +166,19 @@ var SocialLoginComponent = /** @class */ (function () {
                     }, function (error) {
                         _this.loading = false;
                         _this.socialError.emit(error.message);
-                        _this.toastr.error(error.message, 'SignIn Error');
+                        // this.toastr.error(error.message, 'SignIn Error');
                     });
                 });
             }
             else {
                 _this.socialError.emit('');
                 _this.loading = false;
-                // this.socialError.emit('Authentication failed.');
                 // this.toastr.error("Something went wrong!", 'SignIn Error');
             }
         }, { scope: 'email' });
     };
     SocialLoginComponent.prototype.loginWithApple = function () {
+        this.socialError.emit('');
         this.authService.signIn(apple_provider_1.AppleLoginProvider.PROVIDER_ID);
     };
     __decorate([
