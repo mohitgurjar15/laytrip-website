@@ -89,7 +89,7 @@
     </div> -->
 
 <ng-container *ngIf="(cartItem | json) != '{}'">
-  <div class="card accordion_detailed_wrps wo_return" >
+  <div class="card accordion_detailed_wrps" >
     <div class="card-body" *ngIf="(cartItem | json) != '{}'">
       <div *ngFor="let stop of cartItem?.moduleInfo[0]?.routes[0]?.stops">
         <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
@@ -140,8 +140,8 @@
     {{cartItem?.moduleInfo[0]?.routes[0]?.duration}} 
   </div>
   
-  <div class="card accordion_detailed_wrps wo_return"  *ngIf="(cartItem | json) != '{}'" >
-    <div class="card-body" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
+  <div class="card accordion_detailed_wrps wo_return"  *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2"  >
+    <div class="card-body">
       <div *ngFor="let stop of cartItem?.moduleInfo[0]?.routes[1]?.stops">
         <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
           <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />

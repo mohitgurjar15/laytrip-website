@@ -10,10 +10,11 @@ exports.ListBookingsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var ListBookingsComponent = /** @class */ (function () {
-    function ListBookingsComponent(userService, accountService, commonFunction, renderer) {
+    function ListBookingsComponent(userService, accountService, commonFunction, cartService, renderer) {
         this.userService = userService;
         this.accountService = accountService;
         this.commonFunction = commonFunction;
+        this.cartService = cartService;
         this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.upComingloading = false;
@@ -22,6 +23,7 @@ var ListBookingsComponent = /** @class */ (function () {
         this.completeBookings = [];
         this.selectedInCompletedTabNumber = 0;
         this.selectedCompletedTabNumber = 0;
+        this.cartItemsCount = 0;
     }
     ListBookingsComponent.prototype.ngOnInit = function () {
         this.getIncomplteBooking();
@@ -61,6 +63,16 @@ var ListBookingsComponent = /** @class */ (function () {
     };
     ListBookingsComponent.prototype.selectCompletedTab = function (cartNumber) {
         this.selectedCompletedTabNumber = cartNumber;
+    };
+    ListBookingsComponent.prototype.ngDoCheck = function () {
+        var _this = this;
+        this.cartService.getCartItems.subscribe(function (res) {
+            try {
+                _this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+            }
+            catch (e) {
+            }
+        });
     };
     ListBookingsComponent = __decorate([
         core_1.Component({
