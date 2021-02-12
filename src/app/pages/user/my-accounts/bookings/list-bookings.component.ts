@@ -17,6 +17,8 @@ export class ListBookingsComponent implements OnInit {
   upComingbookings=[];
   completeLoading = false;
   completeBookings=[];
+  selectedInCompletedTabNumber: number = 0;
+  selectedCompletedTabNumber: number = 0;
 
   constructor(
     private userService: UserService,
@@ -55,4 +57,14 @@ export class ListBookingsComponent implements OnInit {
       this.getComplteBooking(searchKey);
       this.getIncomplteBooking(searchKey);
   }
+
+  selectInCompletedTab(cartNumber) {
+    this.selectedInCompletedTabNumber = cartNumber;
+  }
+  
+  selectCompletedTab(cartNumber) {
+    this.selectedCompletedTabNumber = cartNumber;
+  }
+
+
 }

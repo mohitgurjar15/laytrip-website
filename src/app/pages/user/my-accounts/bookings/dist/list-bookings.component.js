@@ -19,6 +19,8 @@ var ListBookingsComponent = /** @class */ (function () {
         this.upComingbookings = [];
         this.completeLoading = false;
         this.completeBookings = [];
+        this.selectedInCompletedTabNumber = 0;
+        this.selectedCompletedTabNumber = 0;
     }
     ListBookingsComponent.prototype.ngOnInit = function () {
         this.getIncomplteBooking();
@@ -51,6 +53,12 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.searchBooking = function (searchKey) {
         this.getComplteBooking(searchKey);
         this.getIncomplteBooking(searchKey);
+    };
+    ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber) {
+        this.selectedInCompletedTabNumber = cartNumber;
+    };
+    ListBookingsComponent.prototype.selectCompletedTab = function (cartNumber) {
+        this.selectedCompletedTabNumber = cartNumber;
     };
     ListBookingsComponent = __decorate([
         core_1.Component({
