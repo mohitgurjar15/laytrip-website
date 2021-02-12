@@ -2,7 +2,7 @@
     <div class="card" *ngFor="let traveler of travelers">
         <div class="card-header">
             <a class="card-link">
-                Booking Traveler
+                {{ traveler.userData.firstName || '' | titlecase}} {{ traveler.userData.lastName || '' | titlecase }}
             </a>
         </div>
         <div class="collapse show">
