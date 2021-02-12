@@ -1,11 +1,12 @@
 <app-cart-loader *ngIf="upComingloading"></app-cart-loader>
-
 <div class="booking_whole_wrapper">
   <div class="container">
     <div class="booking_inner_container">
       <div class="search_wrapper">
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)"/>
       </div>
+      <app-flight-not-found *ngIf="!upComingloading && (!completeBookings.length  && !upComingbookings.length )"></app-flight-not-found>
+    <div *ngIf="!upComingloading && (completeBookings.length > 0 || upComingbookings.length > 0)">
       <h3>
         Upcoming
       </h3>
@@ -52,10 +53,10 @@
                       </div>
                       <div class="pricer_wrp">
                         <span class="pink_price">
-                          ${{ booking.remainAmount | number : '1.2-2' }}
+                          ${{ booking.totalAmount | number : '1.2-2' }}
                         </span>
                         <div class="status">
-                          Due
+                          Total
                         </div>
                       </div>
                     </div>
@@ -64,12 +65,13 @@
               </a>
             </div>
             
-            <div [id]="'upcoming'+i" class="collapse show " data-parent="#accordion_upcoming">
+            <div [id]="'upcoming'+i" class="collapse" data-parent="#accordion_upcoming">
               <div class="accordion_data">
                 <ul class="nav nav-tabs booking_tab_header">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <li>
-                      <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link active">
+                      <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"  [ngClass]="{'active':selectedInCompletedTabNumber===j}"
+                      (click)="selectInCompletedTab(i)">
                         <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
                           <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                           <span class="tab_txt_head">{{cartItem.moduleInfo[0].departure_code}}-{{cartItem.moduleInfo[0].arrival_code}}</span>
@@ -80,8 +82,8 @@
                 </ul>
                 <div class="tab-content main_tab_content">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <div class="tab-pane active" [id]="'cart_item'+j">
-                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="booking" ></app-flights>
+                    <div class="tab-pane" [id]="'cart_item'+j"  [ngClass]="{'show active':selectedInCompletedTabNumber===j}">
+                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="cartItem" ></app-flights>
                     </div>
                   </ng-container>                  
                 </div>
@@ -124,7 +126,8 @@
                 <ul class="nav nav-tabs booking_tab_header">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <li>
-                      <a data-toggle="tab" [href]="'#completed_item'+j" class="nav-link active">
+                      <a data-toggle="tab" [href]="'#completed_item'+j" class="nav-link" [ngClass]="{'active':selectedCompletedTabNumber===j}"
+                      (click)="selectCompletedTab(i)">
                         <span class="tab_round_wrps">
                           <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                           <span class="tab_txt_head">{{cartItem.moduleInfo[0].departure_code}}-{{cartItem.moduleInfo[0].arrival_code}}</span>
@@ -135,8 +138,8 @@
                 </ul>
                 <div class="tab-content main_tab_content">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <div class="tab-pane active" [id]="'completed_item'+j">
-                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="booking" ></app-flights>
+                    <div class="tab-pane" [id]="'completed_item'+j" [ngClass]="{'active':selectedCompletedTabNumber===j}">
+                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="cartItem" ></app-flights>
                     </div>
                   </ng-container>                  
                 </div>
@@ -145,6 +148,7 @@
           </div>
         </div>
       </div>
+    </div>      
     </div>
   </div>
 </div>

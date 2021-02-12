@@ -10,6 +10,7 @@ export class BookingTravelerComponent implements OnInit {
 
   @Input() travelers={};
   baggageDescription: string = '';
+  moduleInfo={};
 
   constructor(    private commonFunction: CommonFunction
     ) { }
@@ -20,26 +21,24 @@ export class BookingTravelerComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     if(typeof changes['travelers'].currentValue!='undefined'){
-      this.travelers=changes['travelers'].currentValue;
-      // console.log("travelers=====>",this.travelers)
-
+      this.travelers = changes['travelers'].currentValue.travelers;
+      this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
     }
   }
 
   formatBaggageDescription(cabbinBaggage, checkInBaggage) {
-
     let cabbinBaggageWight;
     let checkInBaggageWight;
     let description = '';
-    if (cabbinBaggage != "" && cabbinBaggage.includes("KG") == true) {
+    if (typeof(cabbinBaggage) != 'undefined' && cabbinBaggage != "" && cabbinBaggage.includes("KG") == true) {
       cabbinBaggageWight = this.convertKgToLB(cabbinBaggage.replace("KG", ""))
       description = `Cabin bag upto ${cabbinBaggageWight} lbs (${cabbinBaggage})`;
     }
-    else if (cabbinBaggage != '') {
+    else if (typeof(cabbinBaggage) != 'undefined' && cabbinBaggage != '') {
       description = `Cabin bag upto ${cabbinBaggage}`;
     }
 
-    if (checkInBaggage != "" && checkInBaggage.includes("KG") == true) {
+    if (typeof(checkInBaggage) != 'undefined' && checkInBaggage != "" && checkInBaggage.includes("KG") == true) {
       checkInBaggageWight = this.convertKgToLB(checkInBaggage.replace("KG", ""))
       if (description != '') {
         description += ` and checkin bag upto ${checkInBaggageWight} lbs (${checkInBaggage})`;
@@ -49,7 +48,7 @@ export class BookingTravelerComponent implements OnInit {
 
       }
     }
-    else if (checkInBaggage != '') {
+    else if (typeof(checkInBaggage) != 'undefined' &&  checkInBaggage != '') {
       if (description != '') {
         description += ` and checkin bag upto ${checkInBaggage}`;
       }

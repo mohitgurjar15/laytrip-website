@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
@@ -17,21 +17,27 @@ export class ListBookingsComponent implements OnInit {
   upComingbookings=[];
   completeLoading = false;
   completeBookings=[];
+  selectedInCompletedTabNumber: number = 0;
+  selectedCompletedTabNumber: number = 0;
 
   constructor(
     private userService: UserService,
     private accountService: AccountService,
     private commonFunction: CommonFunction,
+    private renderer: Renderer2
+
   ) { }
 
   ngOnInit() {
     this.getIncomplteBooking();
     this.getComplteBooking();
+    this.renderer.addClass(document.body, 'cms-bgColor');
+
   }
 
-  getIncomplteBooking(){
+  getIncomplteBooking(bookingId = ''){
     this.upComingloading=true;
-    this.accountService.getIncomplteBooking().subscribe((res: any) => {
+    this.accountService.getIncomplteBooking(bookingId).subscribe((res: any) => {
       this.upComingbookings=res.data;
       this.upComingloading=false;
    }, err => {
@@ -40,11 +46,9 @@ export class ListBookingsComponent implements OnInit {
    }); 
   }
 
-  getComplteBooking(){
+  getComplteBooking(bookingId = ''){
     this.completeLoading=true;
-    this.accountService.getComplteBooking().subscribe((res: any) => {
-      console.log(res)
-
+    this.accountService.getComplteBooking(bookingId).subscribe((res: any) => {
       this.completeBookings=res.data;
       this.completeLoading=false;
    }, err => {
@@ -52,4 +56,19 @@ export class ListBookingsComponent implements OnInit {
     this.completeBookings=[];
    }); 
   }
+
+  searchBooking(searchKey:any){
+      this.getComplteBooking(searchKey);
+      this.getIncomplteBooking(searchKey);
+  }
+
+  selectInCompletedTab(cartNumber) {
+    this.selectedInCompletedTabNumber = cartNumber;
+  }
+
+  selectCompletedTab(cartNumber) {
+    this.selectedCompletedTabNumber = cartNumber;
+  }
+
+
 }

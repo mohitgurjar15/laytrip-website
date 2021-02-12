@@ -91,7 +91,7 @@
 <ng-container *ngIf="(cartItem | json) != '{}'">
   <div class="card accordion_detailed_wrps wo_return" >
     <div class="card-body" *ngIf="(cartItem | json) != '{}'">
-      <div *ngFor="let stop of cartItem.booking[0]?.moduleInfo[0]?.routes[0]?.stops">
+      <div *ngFor="let stop of cartItem?.moduleInfo[0]?.routes[0]?.stops">
         <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
           <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
           Change Planes in  {{stop?.layover_airport_name }}
@@ -135,16 +135,14 @@
   </div>
 
   <div class="total_hrs_wrps cta_btns_wrps" *ngIf="(cartItem | json) != '{}'">
-    <span class="ct_btns" *ngIf="cartItem?.booking[0]?.moduleInfo[0]?.routes?.length === 1" >
-      <!-- <button 
-      (click)="deleteCart(cartItem.id)">Cancel</button> -->
+    <span class="ct_btns" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 1" >     
     </span>
-    {{cartItem?.booking[0]?.moduleInfo[0]?.routes[0]?.duration}} 
+    {{cartItem?.moduleInfo[0]?.routes[0]?.duration}} 
   </div>
   
   <div class="card accordion_detailed_wrps wo_return"  *ngIf="(cartItem | json) != '{}'" >
-    <div class="card-body" *ngIf="cartItem?.booking[0]?.moduleInfo[0]?.routes?.length === 2">
-      <div *ngFor="let stop of cartItem?.booking[0]?.moduleInfo[0]?.routes[1]?.stops">
+    <div class="card-body" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
+      <div *ngFor="let stop of cartItem?.moduleInfo[0]?.routes[1]?.stops">
         <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
           <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
           Change Planes in {{stop?.layover_airport_name}}
@@ -187,11 +185,12 @@
     </div> 
   </div>
 
-  <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem?.booking[0]?.moduleInfo[0]?.routes?.length === 2">
+  <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
     <span class="ct_btns">
-      <!-- <button>Cancel</button> -->
+     
     </span>
-    {{cartItem?.booking[0]?.moduleInfo[0]?.routes[1]?.duration}}
+    {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
   </div>
-  <app-booking-traveler [travelers]="cartItem?.booking[0].travelers"></app-booking-traveler>
+  <app-booking-traveler [travelers]="cartItem"></app-booking-traveler>
 </ng-container>
+ 
