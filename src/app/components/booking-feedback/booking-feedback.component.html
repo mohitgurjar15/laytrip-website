@@ -5,7 +5,6 @@
     </button>
     <div class="block_feedback_inner">
       <h6>How did we do?</h6>
-      <p>How would you rate your experience using laytrip?</p>
       <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
         <div class="block_feedback_add">
           <ul>
@@ -13,28 +12,28 @@
               <a class="anchor-tag"  [ngClass]="{'active': _rating === 'Terrible'}"  (click)="selectRating($event,'Terrible')" >
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/1.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/1-pink.svg" alt="Feedback Image">
-                <span>Terrible</span>
+                <span>Poor</span>
               </a>
             </li>
             <li>
               <a class="anchor-tag" [ngClass]="{'active': _rating === 'Bad'}"   (click)="selectRating($event,'Bad')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/2.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/2-pink.svg" alt="Feedback Image">
-                <span>Bad</span>
+                <span>Not Good</span>
               </a>
             </li>
             <li>
               <a class="anchor-tag" [ngClass]="{'active': _rating === 'Okay'}"   (click)="selectRating($event,'Okay')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/3.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/3-pink.svg" alt="Feedback Image">
-                <span>Okay</span>
+                <span>Good</span>
               </a>
             </li>
             <li>
               <a class="anchor-tag" [ngClass]="{'active': _rating === 'Good'}"   (click)="selectRating($event,'Good')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/4.svg" alt="Feedback Image">
                 <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/4-pink.svg" alt="Feedback Image">
-                <span>Good</span>
+                <span>Very Good</span>
               </a>
             </li>
             <li>
@@ -47,20 +46,22 @@
           </ul>
           <div class="block_feedback_form">
             <div class="feedback_comment">
-              <label>Comment*</label>
               <textarea formControlName="comment" placeholder="Enter your comment here"></textarea>
               <div *ngIf="(submitted  || feedbackForm.controls.comment.touched) && feedbackForm.controls.comment.errors"
                 class="focus-input100 login-error" style="text-align: left;">
-                <div *ngIf="feedbackForm.controls.comment.errors.required" class="text-danger">Please enter
-                  your comment.
+                <div *ngIf="feedbackForm.controls.comment.errors.required" class="text-danger">Comments
                 </div>
               </div>
             </div>
             <div class="feedback_btn">
-              <button type="submit"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>Submit <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+              <button type="submit"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>Submit </button>
+            </div>
+            <div class="footer_logo">
+              <a href="javascript:void(0);">
+                <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
+              </a>
             </div>
           </div>
-
         </div>
       </form>
     </div>

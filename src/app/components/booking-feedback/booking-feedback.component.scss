@@ -6,7 +6,7 @@
 
 
 .block_feedback {
-    width: 1024px;
+    width: 514px;
     max-width: 96%;
     float: left;
     position: absolute;
@@ -14,7 +14,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: #fff;
-    padding: 40px 80px;
+    padding: 20px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0px 3px 20px $shadow-black-light;
@@ -25,11 +25,14 @@
 
     .close {
         position: absolute;
-        top: 20px;
+        top: 10px;
         right: 20px;
         font-weight: normal;
         opacity: 1;
         z-index: 99;
+        img{
+            max-width: 12px;
+        }
     }
 
     .block_feedback_inner {
@@ -38,10 +41,9 @@
 
         h6 {
             margin: 0 0 20px;
-            font-size: 34px;
-            font-weight: 700;
-            color: $text-black;
-            text-transform: uppercase;
+            font-size: 32px;
+            font-weight: 400;
+            color: $active-tab-text;
 
             @media(max-width: 767px) {
                 font-size: 24px;
@@ -72,7 +74,7 @@
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
-                margin: 0 0 70px;
+                margin: 0 0 10px;
                 padding: 0;
                 list-style: none;
 
@@ -85,63 +87,6 @@
                     z-index: 2;
                     margin: 0;
 
-                    &:before {
-                        width: 100%;
-                        height: 3px;
-                        background: $border-color;
-                        position: absolute;
-                        top: 31%;
-                        left: 100%;
-                        content: '';
-                        z-index: -1;
-                    }
-
-                    &:last-child {
-                        &:before {
-                            display: none;
-                        }
-                    }
-
-                    @media(max-width:991px) {
-                        &:before {
-                            width: 300%;
-                            top: 29%;
-                            left: 0;
-                        }
-                    }
-
-                    @media(max-width:767px) {
-                        &:before {
-                            width: 320%;
-                            top: 29%;
-                            left: 0;
-                        }
-                    }
-
-                    @media(max-width:575px) {
-                        &:before {
-                            width: 280%;
-                            top: 27%;
-                            left: 0%;
-                        }
-                    }
-
-                    @media(max-width:480px) {
-                        &:before {
-                            width: 320%;
-                            top: 27%;
-                            left: 0%;
-                        }
-                    }
-
-                    @media(max-width:360px) {
-                        &:before {
-                            width: 290%;
-                            top: 27%;
-                            left: 0%;
-                        }
-                    }
-
                     a {
                         background: transparent;
                         padding: 0;
@@ -152,7 +97,7 @@
                         transition: 0.25s ease-out;
 
                         img {
-                            height: 100px;
+                            height: 74px;
                             position: relative;
                             transform: scale(1);
                             transition: 0.25s ease-out;
@@ -182,10 +127,10 @@
                         }
 
                         span {
-                            font-size: 20px;
+                            font-size: 12px;
                             font-weight: 500;
-                            margin: 20px 0 0px;
-                            color: $feedback_text-clr;
+                            margin: 5px 0 0px;
+                            color: $grayed_border;
                             transition: 0.25s ease-out;
 
                             @media(max-width: 991px) {
@@ -205,7 +150,6 @@
 
                         &.active {
                             img {
-                                transform: scale(1.4);
 
                                 &.normal {
                                     opacity: 0;
@@ -217,23 +161,12 @@
                             }
 
                             span {
-                                color: $text_grey_dark;
-                                margin: 30px 0 0;
-
-                                @media(max-width: 991px) {
-                                    margin: 20px 0 0;
-                                }
-
-                                @media(max-width:480px) {
-                                    margin: 10px 0 0;
-                                }
+                                color: $pink;
                             }
                         }
 
                         &:hover {
                             img {
-                                transform: scale(1.4);
-
                                 &.normal {
                                     opacity: 0;
                                 }
@@ -245,15 +178,6 @@
 
                             span {
                                 color: $text_grey_dark;
-                                margin: 30px 0 0;
-
-                                @media(max-width: 991px) {
-                                    margin: 20px 0 0;
-                                }
-
-                                @media(max-width:480px) {
-                                    margin: 10px 0 0;
-                                }
                             }
                         }
                     }
@@ -265,9 +189,11 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                flex-direction: column;
 
                 .feedback_comment {
-                    width: 50%;
+                    width: 100%;
+                    margin: 10px 0;
 
                     label {
                         width: 100%;
@@ -279,13 +205,13 @@
 
                     textarea {
                         width: 100%;
-                        height: 50px;
-                        border: none;
-                        border-bottom: 1px solid $box-border-color;
+                        border: 1px solid $box-border-color;
                         font-size: 16px;
                         font-weight: 400;
+                        border-radius: 10px;
                         color: $text-grey;
                         resize: none;
+                        padding: 15px;
 
                         @media(max-width: 767px) {
                             font-size: 14px;
@@ -294,48 +220,29 @@
                 }
 
                 .feedback_btn {
-                    width: 50%;
+                    
                     display: flex;
                     justify-content: flex-end;
+                    width: 100%;
 
                     button {
-                        display: inline-block;
-                        height: 50px;
-                        padding: 0 25px;
-                        font-size: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 40px;
+                        font-size: 14px;
                         color: $text-white;
                         font-weight: 400;
-                        border-radius: 8px;
-                        background: $primary-color;
+                        border-radius: 25px;
+                        background: $pink;
                         position: relative;
                         z-index: 9;
                         overflow: hidden;
                         border: none;
-
-                        &:before {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 0%;
-                            background: $secondary-color;
-                            z-index: -1;
-                            transition: 0.8s;
-                            border-radius: 0 0 50% 50%;
-                        }
-
-                        img {
-                            margin: 0 0 0 15px;
-                            height: 15px;
-                        }
-
-                        &:hover {
-                            border-color: $secondary-color;
-
-                            &:before {
-                                height: 190%;
-                            }
+                        &:focus{
+                            outline: none;
+                            box-shadow: none;
                         }
 
                         @media(max-width:575px) {
@@ -365,6 +272,16 @@
                             }
                         }
                     }
+                }
+                .footer_logo{
+                    margin-top: 15px;
+                    display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        img{
+                            max-width: 66px;
+                            height: 22px;
+                        }
                 }
             }
         }
