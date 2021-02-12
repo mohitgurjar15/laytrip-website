@@ -247,6 +247,7 @@ export class CheckoutComponent implements OnInit {
     this.validateCartItems();
 
     console.log("innnn")
+    this.loading=true;
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
     this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
@@ -269,6 +270,8 @@ export class CheckoutComponent implements OnInit {
               this.router.navigate(['/cart/confirm/12'])
             })
           }
+        },(error)=>{
+          this.loading=false;
         });
       }
   }
