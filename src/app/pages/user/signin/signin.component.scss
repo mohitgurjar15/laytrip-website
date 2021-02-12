@@ -301,6 +301,7 @@
                 z-index: 9;
                 overflow: hidden;
                 white-space: normal;
+                cursor: pointer;
 
                 &::before {
                   content: "";
