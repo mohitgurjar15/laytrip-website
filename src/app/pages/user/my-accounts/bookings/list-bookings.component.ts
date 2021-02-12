@@ -73,17 +73,6 @@ export class ListBookingsComponent implements OnInit {
     this.selectedCompletedTabNumber = cartNumber;
   }
 
-  ngDoCheck(){
-    this.cartService.getCartItems.subscribe((res: any) => {
-      try {
-        this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
-      }
-      catch (e) {
-        
-      }
-    });
-  
-  }
 
   // getProgressPercentage(){
   //   var totalPrice =  87;

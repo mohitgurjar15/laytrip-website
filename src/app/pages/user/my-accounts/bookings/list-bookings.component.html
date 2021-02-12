@@ -4,10 +4,9 @@
       <div class="search_wrapper">
         <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)" />
       </div>
-      <app-flight-not-found *ngIf="!upComingloading && (!completeBookings.length  && !upComingbookings.length )">
+      <app-flight-not-found *ngIf="(!upComingloading && !completeLoading) && (!completeBookings.length  && !upComingbookings.length )">
       </app-flight-not-found>
-      <div *ngIf="!upComingloading && (completeBookings.length > 0 || upComingbookings.length > 0)">
-        <h3>
+        <h3 *ngIf="upComingbookings.length || upComingloading">
           Upcoming
         </h3>
         <!-- loader starts -->
@@ -58,7 +57,7 @@
           </div>
         </div>
         <!-- loader ends -->
-        <div class="accordion_up_wrapper" *ngIf="!upComingloading">
+        <div class="accordion_up_wrapper" *ngIf="!upComingloading && upComingbookings.length > 0">
           <div id="accordion_upcoming">
             <div class="card" *ngFor="let booking of upComingbookings; let i = index;">
               <div class="card-header">
@@ -66,7 +65,7 @@
                   <span class="header_image">
                     <span class="title_image">
                       <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
-                      <span class="cart_count">{{cartItemsCount}}</span>
+                      <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
                     </span>
                   </span>
                   <div class="headerin_wrapper">
@@ -104,10 +103,10 @@
                         </div>
                         <div class="pricer_wrp">
                           <span class="pink_price">
-                            ${{ booking.remainAmount | number : '1.2-2' }}
+                            ${{ booking.totalAmount | number : '1.2-2' }}
                           </span>
                           <div class="status">
-                            Due
+                            Total
                           </div>
                         </div>
                       </div>
@@ -116,7 +115,7 @@
                 </a>
               </div>
 
-              <div [id]="'upcoming'+i" class="collapse show " data-parent="#accordion_upcoming">
+              <div [id]="'upcoming'+i" class="collapse " data-parent="#accordion_upcoming">
                 <div class="accordion_data">
                   <ul class="nav nav-tabs booking_tab_header">
                     <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
@@ -146,7 +145,7 @@
             </div>
           </div>
         </div>
-        <h3>Completed</h3>
+        <h3 *ngIf="completeBookings.length || completeLoading">Completed</h3>
          <!-- loader starts -->
          <div class="loader_wrapper" *ngIf="completeLoading">
           <div class="loader_card">
@@ -173,7 +172,7 @@
           </div>
         </div>
         <!-- loader ends -->
-        <div class="accordion_up_wrapper" *ngIf="!completeLoading">
+        <div class="accordion_up_wrapper" *ngIf="!completeLoading && completeBookings.length > 0 ">
           <div id="accordion_completed">
             <div class="card" *ngFor="let booking of completeBookings; let i = index;">
               <div class="card-header">
@@ -181,7 +180,7 @@
                   <span class="header_image">
                     <span class="title_image">
                       <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
-                      <span class="cart_count">{{cartItemsCount}}</span>
+                      <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
                     </span>
                   </span>
                   <div class="headerin_wrapper">
@@ -202,7 +201,7 @@
                   </div>
                 </a>
               </div>
-              <div [id]="'completed'+i" class="collapse show" data-parent="#accordion_completed">
+              <div [id]="'completed'+i" class="collapse" data-parent="#accordion_completed">
                 <div class="accordion_data">
                   <ul class="nav nav-tabs booking_tab_header">
                     <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
@@ -231,7 +230,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
