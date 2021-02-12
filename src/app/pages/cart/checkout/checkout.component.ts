@@ -130,6 +130,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTravelers() {
+    console.log('coming from bookinmg:::::::');
     this.travelerService.getTravelers().subscribe((res: any) => {
       this.checkOutService.setTravelers(res.data);
       this.cd.detectChanges();
