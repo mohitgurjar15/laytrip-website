@@ -71,7 +71,7 @@
                 <div class="col-lg-9">
                     <app-flight-price-slider [dates]="dates" [flexibleLoading]="flexibleLoading">
                     </app-flight-price-slider>
-                    <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)" [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)">
+                    <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)" [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)" filteredLabel="{{filteredLabel}}">
                     </app-flight-item-wrapper>
                 </div>
             </div>
