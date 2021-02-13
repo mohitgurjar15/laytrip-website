@@ -12,6 +12,7 @@ var CartPriceSummaryComponent = /** @class */ (function () {
     function CartPriceSummaryComponent(commonFunction) {
         this.commonFunction = commonFunction;
         this.cartItem = {};
+        this.cartDueLoopNum = 0;
     }
     CartPriceSummaryComponent.prototype.ngOnInit = function () {
     };
@@ -21,8 +22,10 @@ var CartPriceSummaryComponent = /** @class */ (function () {
             // console.log("cartItem=====>",this.cartItem)
         }
     };
-    CartPriceSummaryComponent.prototype.convertFlotToDecimal = function (floatNumber) {
-        return Math.round(floatNumber);
+    CartPriceSummaryComponent.prototype.setLoopNumber = function (loopNumber) {
+        // console.log(loopNumber)
+        this.cartDueLoopNum = loopNumber;
+        return loopNumber;
     };
     __decorate([
         core_1.Input()

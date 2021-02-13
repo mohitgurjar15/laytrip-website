@@ -21,6 +21,7 @@ export class ListBookingsComponent implements OnInit {
   selectedInCompletedTabNumber: number = 0;
   selectedCompletedTabNumber: number = 0;
   cartItemsCount: number = 0;
+  searchTextLength=0;
 
   constructor(
     private userService: UserService,
@@ -44,12 +45,14 @@ export class ListBookingsComponent implements OnInit {
       this.upComingbookings=res.data;
       this.upComingloading=false;
    }, err => {
+     
     this.upComingloading=false;
     this.upComingbookings=[];
    }); 
   }
 
   getComplteBooking(search = ''){
+    console.log(this.searchTextLength)
     this.completeLoading=true;
     this.accountService.getComplteBooking(search).subscribe((res: any) => {
       this.completeBookings=res.data;
@@ -61,6 +64,7 @@ export class ListBookingsComponent implements OnInit {
   }
 
   searchBooking(searchKey:any){
+    this.searchTextLength = searchKey.length;
     this.getComplteBooking(searchKey);
     this.getIncomplteBooking(searchKey);
   }
