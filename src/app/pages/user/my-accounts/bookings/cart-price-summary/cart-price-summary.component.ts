@@ -9,6 +9,7 @@ import { CommonFunction } from '../../../../../_helpers/common-function';
 export class CartPriceSummaryComponent implements OnInit {
 
   @Input() cartItem: any = {}; 
+  cartDueLoopNum=0;
 
   constructor(public commonFunction:CommonFunction) { }
 
@@ -22,9 +23,12 @@ export class CartPriceSummaryComponent implements OnInit {
       // console.log("cartItem=====>",this.cartItem)
     }
   }
+ 
+  setLoopNumber(loopNumber){
+    // console.log(loopNumber)
+    this.cartDueLoopNum = loopNumber;
+    return loopNumber;
+  }
 
-  convertFlotToDecimal(floatNumber){
-    return Math.round(floatNumber);
-} 
-
+  
 }

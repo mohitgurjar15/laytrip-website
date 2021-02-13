@@ -1,7 +1,7 @@
 <div class="booking_whole_wrapper">
   <div class="container">
     <div class="booking_inner_container">
-      <div class="search_wrapper">
+      <div class="search_wrapper" *ngIf="searchTextLength > 0 || (completeBookings.length  && upComingbookings.length )">
         <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)" />
       </div>
       <app-flight-not-found *ngIf="(!upComingloading && !completeLoading) && (!completeBookings.length  && !upComingbookings.length )">
