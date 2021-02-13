@@ -41,8 +41,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   @Input() flightDetails;
   @Input() filter;
+  @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
-  @Output() maxCartValidation= new EventEmitter;
+  @Output() maxCartValidation = new EventEmitter;
   cartItems = [];
 
   animationState = 'out';
@@ -147,8 +148,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.loadCancellationPolicy = true;
     this.loadMoreCancellationPolicy = false;
     this.errorMessage = '';
-    this.cancellationPolicyArray=[];
-    this.cancellationPolicy='';
+    this.cancellationPolicyArray = [];
+    this.cancellationPolicy = '';
     this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
       this.cancellationPolicyArray = data.cancellation_policy.split('--')
       this.loadCancellationPolicy = false;
@@ -241,9 +242,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         this.cartService.addCartItem(payload).subscribe((res: any) => {
           this.changeLoading.emit(true);
           if (res) {
-            let newItem = { id : res.data.id, module_Info : res.data.moduleInfo[0] }
+            let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
             this.cartItems = [...this.cartItems, newItem]
-            console.log("res.datares.data",this.cartItems)
+            console.log("res.datares.data", this.cartItems)
             this.cartService.setCartItems(this.cartItems);
 
             localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
@@ -280,8 +281,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
 
   ngOnChanges(changes: SimpleChanges) {
-
-    this.flightList = changes.flightDetails.currentValue;
+    if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
+      this.flightList = changes.flightDetails.currentValue;
+    } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
+      this.filteredLabel = changes.filteredLabel.currentValue;
+    }
+    // this.flightList = changes.flightDetails.currentValue;
   }
 
   logAnimation(event) {
@@ -291,9 +296,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-  
-  getDayDiff(arrivalDate,departureDate){
-    let diff= moment(arrivalDate,"DD/MM/YYYY").diff(moment(departureDate,"DD/MM/YYYY"),'days')
+
+  getDayDiff(arrivalDate, departureDate) {
+    let diff = moment(arrivalDate, "DD/MM/YYYY").diff(moment(departureDate, "DD/MM/YYYY"), 'days')
     return diff;
   }
 }
@@ -309,7 +314,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
     </div>`,
-    })
+})
 
 export class LaytripOkPopup {
 
