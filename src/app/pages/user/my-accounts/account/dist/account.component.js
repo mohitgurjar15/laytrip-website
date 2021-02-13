@@ -22,6 +22,7 @@ var AccountComponent = /** @class */ (function () {
         this.closeResult = '';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.isRequireBackupFile = false;
+        this.cardListChangeCount = 0;
     }
     AccountComponent.prototype.ngOnInit = function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
@@ -79,6 +80,12 @@ var AccountComponent = /** @class */ (function () {
         if (event.target.checked) {
             this.isRequireBackupFile = true;
         }
+    };
+    AccountComponent.prototype.ngOnDestroy = function () {
+        this.addCardRef.ngOnDestroy();
+    };
+    AccountComponent.prototype.getCardListChange = function (data) {
+        this.cardListChangeCount = data;
     };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })

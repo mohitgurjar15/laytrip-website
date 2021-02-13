@@ -21,6 +21,7 @@ export class AccountComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   isRequireBackupFile : boolean = false;
   userDetails;
+  cardListChangeCount: number = 0;
 
   constructor(
     private modalService: NgbModal,
@@ -87,7 +88,11 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  // ngOnDestroy() { 
-  //   this.addCardRef.ngOnDestroy();
-  // }
+  ngOnDestroy() { 
+    this.addCardRef.ngOnDestroy();
+  }
+
+  getCardListChange(data){
+    this.cardListChangeCount=data;
+  }
 }
