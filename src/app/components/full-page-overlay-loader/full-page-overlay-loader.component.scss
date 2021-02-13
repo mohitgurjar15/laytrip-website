@@ -1,7 +1,48 @@
-.progress_loader{
-    border-radius:50px; 
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.progress_loader {
+    border-radius: 50px;
     height: 20px;
 }
-.bg-custom{
-    background-color: #FC7E66;
+
+.page_load {
+    .page_load_inner {
+        max-width: 514px;
+        padding: 30px;
+        width: 100%;
+
+        .page_laoding {
+            h3 {
+                font-size: 32px;
+                font-weight: 400;
+                color: $active-tab-text;
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-size: 14px;
+                font-weight: 400;
+                color: $text_grey_dark;
+                margin-bottom: 10px;
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .footer_logo {
+                margin-top: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    max-width: 66px;
+                    height: 22px;
+                }
+            }
+        }
+    }
 }
