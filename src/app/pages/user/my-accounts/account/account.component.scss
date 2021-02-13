@@ -486,10 +486,10 @@
             color: $feedback_text-clr;
             background: $background-white;
 
-            &:hover {
-              background: transparent;
-              color: $text-white;
-            }
+            // &:hover {
+            //   background: transparent;
+            //   color: $text-white;
+            // }
           }
 
           &.btn_yes {
@@ -497,10 +497,10 @@
             color: $text-white;
             background: $primary-color;
 
-            &:hover {
-              background: transparent;
-              color: $text-white;
-            }
+            // &:hover {
+            //   background: transparent;
+            //   color: $text-white;
+            // }
           }
 
           &::before {
@@ -516,15 +516,15 @@
             border-radius: 25px;
           }
 
-          &:hover {
-            border: 1px solid $hotel-secondary-color;
-            color: $text-white;
+          // &:hover {
+          //   border: 1px solid $hotel-secondary-color;
+          //   color: $text-white;
 
-            &:before {
-              height: calc(100% - 4px);
-              width: calc(100% - 4px);
-            }
-          }
+          //   &:before {
+          //     height: calc(100% - 4px);
+          //     width: calc(100% - 4px);
+          //   }
+          // }
 
           &.btn_disable {
             cursor: default;
