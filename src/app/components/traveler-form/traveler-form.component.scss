@@ -456,8 +456,10 @@
 
                 a {
                   background-color: $background-white;
-                  color: #e4e4e4;
-                  border: 1px solid #e4e4e4;
+                  // color: #e4e4e4;
+                  // border: 1px solid #e4e4e4;
+                  color: $text_grey_dark;
+                  border: 1px solid $text_grey_dark;
                   border-radius: 8px;
                   font-size: 12px;
                   margin: 0 5px;

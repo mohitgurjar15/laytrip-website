@@ -372,6 +372,13 @@ select {
   opacity: 0.5;
 }
 
+.disabled_addon {
+  -webkit-filter: grayscale(90%);
+  filter: grayscale(51%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .error_field {
   color: $error-color;
 }
