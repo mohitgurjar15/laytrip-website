@@ -61,7 +61,7 @@
           <div id="accordion_upcoming">
             <div class="card" *ngFor="let booking of upComingbookings; let i = index;">
               <div class="card-header">
-                <a class="card-link" data-toggle="collapse" aria-expanded="true" [href]="'#upcoming'+i">
+                <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#upcoming'+i">
                   <span class="header_image">
                     <span class="title_image">
                       <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
@@ -170,13 +170,35 @@
               </div>
             </div>
           </div>
+          <div class="loader_card">
+            <div class="cart_round">
+              <span class="fb_animation"></span>
+            </div>
+            <div class="cart_details">
+              <div class="mb-2" style="display: flex;">
+                <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
+                <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
+                <div class="fb_animation w-100 pb-4 mb-2"></div>
+              </div>
+              <div class="mb-1" style="display: flex;">
+                <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
+                <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
+                <div class="fb_animation w-25 pb-4 mb-1"></div>
+              </div>
+              <div style="display: flex;">
+                <div class="fb_animation w-25 pb-3 mr-5"></div>
+                <div class="fb_animation w-50 pb-2 mr-5"></div>
+                <div class="fb_animation w-25 pb-3"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- loader ends -->
         <div class="accordion_up_wrapper" *ngIf="!completeLoading && completeBookings.length > 0 ">
           <div id="accordion_completed">
             <div class="card" *ngFor="let booking of completeBookings; let i = index;">
               <div class="card-header">
-                <a class="card-link" data-toggle="collapse" aria-expanded="true" [href]="'#completed'+i">
+                <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#completed'+i">
                   <span class="header_image">
                     <span class="title_image">
                       <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />

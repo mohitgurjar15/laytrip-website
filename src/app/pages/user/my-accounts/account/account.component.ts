@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { getLoginUserInfo, redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { environment } from '../../../../../environments/environment';
 import { UserService } from '../../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { AddCardComponent } from '../../../../components/add-card/add-card.component';
 
 @Component({
   selector: 'app-account',
@@ -13,12 +14,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AccountComponent implements OnInit {
 
+  @ViewChild(AddCardComponent, {static: false}) addCardRef: AddCardComponent;
   loading : boolean = true; 
   isSocialLogin : boolean = false; 
   closeResult = '';
   s3BucketUrl = environment.s3BucketUrl;
   isRequireBackupFile : boolean = false;
   userDetails;
+  cardListChangeCount: number = 0;
 
   constructor(
     private modalService: NgbModal,
@@ -83,5 +86,13 @@ export class AccountComponent implements OnInit {
     if(event.target.checked){
       this.isRequireBackupFile = true;
     }
+  }
+
+  ngOnDestroy() { 
+    this.addCardRef.ngOnDestroy();
+  }
+
+  getCardListChange(data){
+    this.cardListChangeCount=data;
   }
 }
