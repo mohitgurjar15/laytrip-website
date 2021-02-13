@@ -7,7 +7,7 @@
             </span>
         </div>
         <div class="right_sec">
-            ${{cartItem.totalAmount}}
+            ${{cartItem?.totalAmount}}
         </div>
     </div>
     <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
@@ -16,7 +16,7 @@
                 Booking Downpayment
             </div>
             <div class="right_sec">
-                ${{cartItem.cartInstallments[0]?.amount}}
+                ${{cartItem?.cartInstallments[0]?.amount}}
             </div>
         </div>
         <!-- <div class="line_desc">
@@ -48,7 +48,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
-                            {{cartItem.cartInstallments?.length}} Monthly Installments of ${{cartItem.cartInstallments[0]?.amount}}
+                            {{cartItem?.cartInstallments?.length}} Monthly Installments of ${{cartItem?.cartInstallments[0]?.amount}}
                         </a>
                     </div>
                     <div id="listing_descrip" class="collapse show" data-parent="#accordion_listing">
@@ -89,7 +89,7 @@
                                     Total Installments
                                 </div>
                                 <div class="right_sec">
-                                    ${{cartItem.totalAmount}}
+                                    ${{cartItem?.totalAmount}}
                                 </div>
                                 <span class="paid_markss"></span>
                             </div>

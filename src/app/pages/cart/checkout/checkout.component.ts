@@ -91,7 +91,6 @@ export class CheckoutComponent implements OnInit {
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         this.carts.push(cart);
-        this.cd.detectChanges();
 
         price = {}
         price.selling_price = items.data[i].moduleInfo[0].selling_price;
@@ -108,14 +107,15 @@ export class CheckoutComponent implements OnInit {
         }
       }
       this.cartService.setCartPrices(this.cartPrices);
-      this.cd.detectChanges();
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
 
-      
-
-
+      this.checkOutService.getPriceSummary.subscribe((data: any) => {
+        if (data) {
+          this.priceSummary = data;
+        }
+      });
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
@@ -152,7 +152,6 @@ export class CheckoutComponent implements OnInit {
 
     try {
       this.cardToken = this.cookieService.get('__cc');
-      this.cd.detectChanges();
     }
     catch (e) {
       this.cardToken = '';
@@ -161,6 +160,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTravelers() {
+    console.log('coming from bookinmg:::::::');
     this.travelerService.getTravelers().subscribe((res: any) => {
       this.checkOutService.setTravelers(res.data);
       this.cd.detectChanges();
@@ -265,9 +265,10 @@ export class CheckoutComponent implements OnInit {
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
             console.log("Done");  
-            this.cartService.bookCart(this.bookingRequest).subscribe(result=>{
+            this.cartService.bookCart(this.bookingRequest).subscribe((result:any)=>{
               console.log("result",result)
-              this.router.navigate(['/cart/confirm/12'])
+
+              this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
             })
           }
         },(error)=>{

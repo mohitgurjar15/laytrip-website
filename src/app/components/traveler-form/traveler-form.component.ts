@@ -69,41 +69,6 @@ export class TravelerFormComponent implements OnInit {
     console.log("Cart Number",this.cartNumber)
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
 
-    this.checkOutService.getTravelers.subscribe((travelers: any) => {
-      this.myTravelers = travelers;
-    })
-    this.cartService.getCartTravelers.subscribe((travelers: any) => {
-      this.travelers = travelers;
-    })
-
-    //this.travelers = travelers;
-    for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
-      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
-      //this.cartService.setCartTravelers(this.travelers)
-    }
-    for (let i = 0; i < this.cartItem.module_info.child_count; i++) {
-      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
-      //this.cartService.setCartTravelers(this.travelers)
-    }
-    for (let i = 0; i < this.cartItem.module_info.infant_count; i++) {
-      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
-    }
-
-    for (let i = 0; i < this.cartItem.travelers.length; i++) {
-      let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
-      this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
-      this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
-      this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
-      this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
-      this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
-      this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
-      this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
-      this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
-      this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
-    }
-    this.cartService.setCartTravelers(this.travelers);
-
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
         adults: this.formBuilder.array([])
@@ -122,7 +87,47 @@ export class TravelerFormComponent implements OnInit {
       })
     });
 
-    this.patch();
+    this.checkOutService.getTravelers.subscribe((travelers: any) => {
+      this.myTravelers = travelers;
+    })
+    this.cartService.getCartTravelers.subscribe((travelers: any) => {
+      this.travelers = travelers;
+    })
+
+    //this.travelers = travelers;
+    for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
+      this.cd.detectChanges();
+      //this.cartService.setCartTravelers(this.travelers)
+    }
+    for (let i = 0; i < this.cartItem.module_info.child_count; i++) {
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
+      this.cd.detectChanges();
+      //this.cartService.setCartTravelers(this.travelers)
+    }
+    for (let i = 0; i < this.cartItem.module_info.infant_count; i++) {
+      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
+      this.cd.detectChanges();
+    }
+
+    if (this.travelers && this.travelers[`type${this.cartNumber}`] && this.travelers[`type${this.cartNumber}`].adults) {
+      for (let i = 0; i < this.cartItem.travelers.length; i++) {
+        let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
+        this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
+        this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
+        this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
+        this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
+        this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
+        this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
+        this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
+        this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
+        this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
+        this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
+      }
+      this.patch();
+      this.cartService.setCartTravelers(this.travelers);
+      this.cd.detectChanges();
+    }
 
     this.travelerForm.valueChanges.subscribe(value => {
       if (typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number] !== 'undefined') {
@@ -154,7 +159,6 @@ export class TravelerFormComponent implements OnInit {
 
                 this.checkOutService.setTravelers([...this.myTravelers, traveler]);
                 this.patch();
-                this.cd.detectChanges();
               }
             }, error => {
 
@@ -162,7 +166,7 @@ export class TravelerFormComponent implements OnInit {
           }
         }
       }
-      this.checkOutService.emitTravelersformData(this.travelerForm)
+      this.checkOutService.emitTravelersformData(this.travelerForm);
     })
 
     this.cartService.getSelectedCart.subscribe(cartNumber => {
@@ -183,7 +187,7 @@ export class TravelerFormComponent implements OnInit {
           this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy') : '';
           this.patch();
         }
-      }  
+      }
     })
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)

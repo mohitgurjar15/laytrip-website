@@ -42,17 +42,17 @@
       <div class="flex_center_wrapper" *ngIf="paymentType=='instalment' && instalmentAvavible">
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='weekly'}"
           (click)="togglePaymentFrequency('weekly')" [disabled]="weeklyInstalment < 5">
-          <span> Weeky</span> ${{weeklyInstalment |
+          <span> Weekly</span> ${{weeklyInstalment |
           number : '1.2-2' }}</button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='biweekly'}"
           (click)="togglePaymentFrequency('biweekly')" [disabled]="biWeeklyInstalment < 5">
-          <span>Biweeky</span> ${{biWeeklyInstalment
+          <span>Biweekly</span> ${{biWeeklyInstalment
           | number : '1.2-2' }}</button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='monthly'}"
           (click)="togglePaymentFrequency('monthly')" [disabled]="montlyInstalment < 5">
           <span>Monthly</span> ${{montlyInstalment |
           number : '1.2-2' }}</button>
       </div>
-    </div>
+    </div> 
   </div>
 </div>

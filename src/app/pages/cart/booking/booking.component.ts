@@ -44,15 +44,15 @@ export class BookingComponent implements OnInit {
   priceSummary;
   carts = [];
   isValidData: boolean = false;
-  isValidTravelers:boolean=false;
+  isValidTravelers: boolean = false;
   cartLoading = false;
   loading: boolean = false;
   isCartEmpty: boolean = false;
   cartPrices = [];
   travelerForm: FormGroup;
   cardToken: string = '';
-  validationErrorMessage:string='';
-  cardListChangeCount:number=0;
+  validationErrorMessage: string = '';
+  cardListChangeCount: number = 0;
 
 
   constructor(
@@ -72,7 +72,7 @@ export class BookingComponent implements OnInit {
   ngOnInit() {
     window.scroll(0, 0);
     this.userInfo = getLoginUserInfo();
-    if (Object.keys(this.userInfo).length > 0) {
+    if (this.userInfo && Object.keys(this.userInfo).length > 0) {
       this.getTravelers();
     }
 
@@ -129,6 +129,13 @@ export class BookingComponent implements OnInit {
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
+  }
+
+  ngAfterViewInit() {
+    this.userInfo = getLoginUserInfo();
+    if (this.userInfo && Object.keys(this.userInfo).length > 0) {
+      this.getTravelers();
+    }
   }
 
   totalLaycredit() {
@@ -266,7 +273,7 @@ export class BookingComponent implements OnInit {
     return false;
     this.validationErrorMessage='';
     if (this.isValidTravelers) {
-      this.loading=true;
+      this.loading = true;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
@@ -276,7 +283,7 @@ export class BookingComponent implements OnInit {
         }
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
-            this.loading=false;
+            this.loading = false;
             this.router.navigate(['/'])
           }
         });
@@ -292,12 +299,12 @@ export class BookingComponent implements OnInit {
     this.cookieService.put("__cc", this.cardToken);
   }
 
-  removeValidationError(){
-    this.validationErrorMessage='';
+  removeValidationError() {
+    this.validationErrorMessage = '';
   }
 
-  validateCartItems(){
-    this.validationErrorMessage='';
+  validateCartItems() {
+    this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
       this.validationErrorMessage='Traveller details is not valid for '
       let message='';
@@ -322,27 +329,27 @@ export class BookingComponent implements OnInit {
       if(this.validationErrorMessage==''){
         this.validationErrorMessage=` Please select credit card`;
       }
-      else{
-        this.validationErrorMessage+=` and please select credit card`;
+      else {
+        this.validationErrorMessage += ` and please select credit card`;
       }
     }
 
-    if(this.isValidTravelers && this.cardToken!=''){
-        this.loading=true;
-        for (let i = 0; i < this.carts.length; i++) {
-          let data = this.travelerForm.controls[`type${i}`].value.adults;
-          let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
-          let cartData = {
-            cart_id: this.carts[i].id,
-            travelers: travelers
-          }
-          this.cartService.updateCart(cartData).subscribe(data => {
-            if (i === this.carts.length - 1) {
-              this.loading=false;
-              this.router.navigate(['/cart/checkout'])
-            }
-          });
+    if (this.isValidTravelers && this.cardToken != '') {
+      this.loading = true;
+      for (let i = 0; i < this.carts.length; i++) {
+        let data = this.travelerForm.controls[`type${i}`].value.adults;
+        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        let cartData = {
+          cart_id: this.carts[i].id,
+          travelers: travelers
         }
+        this.cartService.updateCart(cartData).subscribe(data => {
+          if (i === this.carts.length - 1) {
+            this.loading = false;
+            this.router.navigate(['/cart/checkout'])
+          }
+        });
+      }
     }
   }
 
