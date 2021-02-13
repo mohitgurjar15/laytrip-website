@@ -83,7 +83,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
             localStorage.setItem('$crt', this.cartItemsCount);
           }
           this.calculateInstalment(cartItems);
-          this.cd.detectChanges();
+          // this.cd.detectChanges();
         }
       }, (error) => {
         if (error && error.status === 404) {
@@ -119,7 +119,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.isCovidPage = true;
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
-      this.cd.detectChanges();
+      // this.cd.detectChanges();
     }
     this.cartService.getCartItems.subscribe((res: any) => {
       try {
