@@ -19,8 +19,20 @@ export class CartPriceSummaryComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     if(typeof changes['cartItem'].currentValue!='undefined'){
-      this.cartItem=changes['cartItem'].currentValue;
-      // console.log("cartItem=====>",this.cartItem)
+      this.cartItem = changes['cartItem'].currentValue;
+      var loop=0;
+      this.cartItem.cartInstallments.forEach(element => {
+        if(element.instalmentStatus == 0){
+          loop += 1;
+          if(loop == 1){
+            element.dueInstallment=1;
+          }else {
+            element.dueInstallment=0;
+          }
+        } else {
+          element.dueInstallment=0;
+        }
+      });
     }
   }
  

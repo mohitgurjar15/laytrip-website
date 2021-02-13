@@ -46,7 +46,6 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.getComplteBooking = function (search) {
         var _this = this;
         if (search === void 0) { search = ''; }
-        console.log(this.searchTextLength);
         this.completeLoading = true;
         this.accountService.getComplteBooking(search).subscribe(function (res) {
             _this.completeBookings = res.data;

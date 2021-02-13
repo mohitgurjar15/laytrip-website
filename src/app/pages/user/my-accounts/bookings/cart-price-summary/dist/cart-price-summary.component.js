@@ -19,7 +19,21 @@ var CartPriceSummaryComponent = /** @class */ (function () {
     CartPriceSummaryComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
-            // console.log("cartItem=====>",this.cartItem)
+            var loop = 0;
+            this.cartItem.cartInstallments.forEach(function (element) {
+                if (element.instalmentStatus == 0) {
+                    loop += 1;
+                    if (loop == 1) {
+                        element.dueInstallment = 1;
+                    }
+                    else {
+                        element.dueInstallment = 0;
+                    }
+                }
+                else {
+                    element.dueInstallment = 0;
+                }
+            });
         }
     };
     CartPriceSummaryComponent.prototype.setLoopNumber = function (loopNumber) {
