@@ -52,7 +52,6 @@ export class ListBookingsComponent implements OnInit {
   }
 
   getComplteBooking(search = ''){
-    console.log(this.searchTextLength)
     this.completeLoading=true;
     this.accountService.getComplteBooking(search).subscribe((res: any) => {
       this.completeBookings=res.data;

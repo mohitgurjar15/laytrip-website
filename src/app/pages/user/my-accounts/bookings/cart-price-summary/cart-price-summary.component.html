@@ -54,7 +54,7 @@
                     <div id="listing_descrip" class="collapse show" data-parent="#accordion_listing">
                         <div class="card-body">
                             <ng-container *ngFor="let installment of cartItem.cartInstallments;let i = index;">
-                                <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : installment.instalmentStatus, 'due_clr' : !installment.instalmentStatus}">
+                                <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus && installment.dueInstallment), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
                                     <div class="left_sec">
                                        #{{i+1}} Paid  {{commonFunction.convertDateFormat(installment.instalmentDate,'YYYY-MM-DD')}} 
                                     </div>
