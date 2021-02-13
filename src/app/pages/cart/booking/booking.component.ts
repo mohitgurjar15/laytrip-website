@@ -269,13 +269,9 @@ export class BookingComponent implements OnInit {
   }
 
   saveAndSearch() {
-<<<<<<< HEAD
     this.router.navigate(['/']);
     return false;
     this.validationErrorMessage='';
-=======
-    this.validationErrorMessage = '';
->>>>>>> e1aa6290fd8b37ee28bf02d5613609d65020f65c
     if (this.isValidTravelers) {
       this.loading = true;
       for (let i = 0; i < this.carts.length; i++) {
@@ -310,7 +306,6 @@ export class BookingComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
-<<<<<<< HEAD
       this.validationErrorMessage='Traveller details is not valid for '
       let message='';
       for(let i in Object.keys(this.travelerForm.controls)){
@@ -318,15 +313,6 @@ export class BookingComponent implements OnInit {
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
           message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
           this.validationErrorMessage +=message;
-=======
-      this.validationErrorMessage = 'Traveller details is not valid for '
-      let message = '';
-      for (let i in Object.keys(this.travelerForm.controls)) {
-        message = '';
-        if (this.travelerForm.controls[`type${i}`].status == "INVALID") {
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and `;
-          this.validationErrorMessage += message;
->>>>>>> e1aa6290fd8b37ee28bf02d5613609d65020f65c
         }
       }
       let index = this.validationErrorMessage.lastIndexOf(" ");
@@ -334,7 +320,6 @@ export class BookingComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
   continueToCheckout(){
 
     this.validationErrorMessage='';
@@ -343,15 +328,6 @@ export class BookingComponent implements OnInit {
     if(this.cardToken==''){
       if(this.validationErrorMessage==''){
         this.validationErrorMessage=` Please select credit card`;
-=======
-  continueToCheckout() {
-    this.validationErrorMessage = '';
-    this.validateCartItems();
-
-    if (this.cardToken == '') {
-      if (this.validationErrorMessage == '') {
-        this.validationErrorMessage = `Please select credit card`;
->>>>>>> e1aa6290fd8b37ee28bf02d5613609d65020f65c
       }
       else {
         this.validationErrorMessage += ` and please select credit card`;
