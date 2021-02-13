@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
@@ -9,6 +9,7 @@ import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
+import { AddCardComponent } from 'src/app/components/add-card/add-card.component';
 
 export interface CartItem {
 
@@ -24,6 +25,7 @@ export interface CartItem {
 export class CheckoutComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
+  @ViewChild(AddCardComponent, {static: false}) addCardRef: AddCardComponent;
   progressStep = { step1: false, step2: true, step3: false, step4: false };
   userInfo;
   isShowPaymentOption: boolean = true;
@@ -191,6 +193,7 @@ export class CheckoutComponent implements OnInit {
         adults: []
       }
     });
+    this.addCardRef.ngOnDestroy();
   }
 
   getCardListChange(data){

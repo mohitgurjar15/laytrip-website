@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -12,6 +12,7 @@ import { CartService } from '../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { AddCardComponent } from 'src/app/components/add-card/add-card.component';
 
 export interface CartItem {
 
@@ -26,6 +27,7 @@ export interface CartItem {
 })
 export class BookingComponent implements OnInit {
 
+  @ViewChild(AddCardComponent, {static: false}) addCardRef: AddCardComponent;
   s3BucketUrl = environment.s3BucketUrl;
   progressStep = { step1: true, step2: false, step3: false, step4: false };
   userInfo;
@@ -235,6 +237,8 @@ export class BookingComponent implements OnInit {
         adults: []
       }
     });
+
+    this.addCardRef.ngOnDestroy();
   }
 
   deleteCart(cartId) {
