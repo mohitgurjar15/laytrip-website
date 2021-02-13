@@ -39,7 +39,7 @@
                         </div>
                         <div class="form_row">
                             <div class="text_field text_area_wrps" >
-                                <textarea (keyup)="setMessageLenght($event.target.value)"  (keypress)="setMessageLenght($event.target.value)"  formControlName="message" maxlength="255" tabindex="3" rows="5"
+                                <textarea (keyup)="setMessageLenght($event.target.value)"  (keypress)="setMessageLenght($event.target.value)"  formControlName="message" maxlength="1000" tabindex="3" rows="5"
                                     placeholder="{{'messege_placeholder' | translate}}">
                                 </textarea>
                                 <div class="block_btm_msg">
@@ -51,7 +51,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="word_counter">{{messageLenght}}/255</span>
+                                    <span class="word_counter">{{messageLenght}}/1000</span>
                                 </div>
                             </div>
                         </div>

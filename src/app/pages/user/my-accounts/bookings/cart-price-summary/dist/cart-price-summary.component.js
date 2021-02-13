@@ -21,6 +21,9 @@ var CartPriceSummaryComponent = /** @class */ (function () {
             // console.log("cartItem=====>",this.cartItem)
         }
     };
+    CartPriceSummaryComponent.prototype.convertFlotToDecimal = function (floatNumber) {
+        return Math.round(floatNumber);
+    };
     __decorate([
         core_1.Input()
     ], CartPriceSummaryComponent.prototype, "cartItem");
