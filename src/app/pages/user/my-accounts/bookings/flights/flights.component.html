@@ -188,6 +188,6 @@
     <span class="ct_btns"></span>
     {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
   </div>
-  <app-booking-traveler [travelers]="cartItem"></app-booking-traveler>
+  <app-booking-traveler [travelers]="cartItem" [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required"></app-booking-traveler>
 </ng-container>
  
