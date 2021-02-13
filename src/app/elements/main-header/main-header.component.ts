@@ -228,26 +228,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         }
     }
 
-    //console.log(cartPrices,"Before If")
-    /* if(cartPrices && cartPrices.length>0)
-    {
-      console.log(cartPrices,"Before sort")
-      cartPrices.sort(function(a:any,b:any){
-        a = new Date(a.module_Info.departure_date);
-        b = new Date(b.module_Info.departure_date);
-        return a-b;
-      });
-      let item=cartPrices.find((x,i)=>{ return i==0})
-      checkinDate = item && item.module_Info ? moment(item.module_Info.departure_date,"DD/MM/YYYY").format("YYYY-MM-DD"):'2021-10-01';
-      console.log(cartPrices,"After sort",checkinDate)
-
-      for(let cartPrice of cartPrices)
-      {
-        totalPrice +=cartPrice.module_Info.selling_price;
-      }
-    }
-    console.log(totalPrice,"totalPrice") */
-
     this.totalAmount = totalPrice;
     let instalmentRequest = {
       instalment_type: "weekly",

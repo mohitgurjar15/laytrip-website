@@ -265,9 +265,10 @@ export class CheckoutComponent implements OnInit {
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
             console.log("Done");  
-            this.cartService.bookCart(this.bookingRequest).subscribe(result=>{
+            this.cartService.bookCart(this.bookingRequest).subscribe((result:any)=>{
               console.log("result",result)
-              this.router.navigate(['/cart/confirm/12'])
+
+              this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
             })
           }
         },(error)=>{

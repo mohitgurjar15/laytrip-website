@@ -96,7 +96,9 @@ export class FlightPriceSliderComponent implements OnInit {
    
     if(changes['dates'].currentValue.length){
       setTimeout(()=>{this.loadJquery();},100)
-      this.flipDates(this.dates)
+      if(this.trip == 'oneway'){
+        this.flipDates(this.dates)
+      }
     }
   }
 
@@ -104,6 +106,7 @@ export class FlightPriceSliderComponent implements OnInit {
     let result =[]
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
     let targetIndex = 4;
+    console.log("S:T",sourceIndex,targetIndex)
     if(targetIndex > sourceIndex){
       targetIndex=5;
       for(let i=targetIndex; i < this.dates.length; i++){

@@ -134,6 +134,6 @@ export class CartService {
       currency: 'USD',
       language: 'en'
     }
-    return this.http.get(`${environment.apiUrl}v1/cart/booking-details/${bookingId}`, this.commonFunction.setHeaders(headers))
+    return this.http.get(`${environment.apiUrl}v1/booking/cart-detail/${bookingId}`, this.commonFunction.setHeaders(headers))
   }
 }
