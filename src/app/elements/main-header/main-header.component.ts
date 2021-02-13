@@ -41,7 +41,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public modalService: NgbModal,
     public router: Router,
     private commonFunction: CommonFunction,
-    private renderer: Renderer2,
     public cd: ChangeDetectorRef,
     private cartService: CartService,
   ) {
@@ -61,7 +60,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartService.getCartItems.subscribe(data => {
 
       if (data.length > 0) {
-        //console.log(data, "getCartItems.subscribe")
+        console.log(data, "getCartItems.subscribe")
         //this.calculateInstalment(data)
         //this.getCartList();
         this.updateCartSummary()
@@ -119,7 +118,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.isCovidPage = true;
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
-      // this.cd.detectChanges();
     }
     this.cartService.getCartItems.subscribe((res: any) => {
       try {
@@ -129,8 +127,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
       }
     });
-    // this.userDetails = getLoginUserInfo();
-    // this.totalLaycredit();
   }
 
   ngOnChanges() {

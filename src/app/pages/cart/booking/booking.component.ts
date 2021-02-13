@@ -312,12 +312,12 @@ export class BookingComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
-      this.validationErrorMessage='Traveller details is not valid for '
+      this.validationErrorMessage='Traveller details is not valid for'
       let message='';
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+          message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
           this.validationErrorMessage +=message;
         }
       }
