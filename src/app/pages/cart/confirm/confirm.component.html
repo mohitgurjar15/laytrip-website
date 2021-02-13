@@ -10,29 +10,32 @@
         </div>
         <div class="conf_container">
 
-            <!-- loader for booking conf -->
-            <div class="fb_animation w-100 pb-4 mb-2"></div>
-            <div class="fb_animation w-100 pb-3 mb-2"></div>
-            <div class="fb_animation w-100 pb-3 mb-2"></div>
-            <div class="fb_animation w-100 pb-3 mb-4"></div>
-            <div style="width: 200px; height: 35px;" class="fb_animation pb-4 mb-3"></div>
-            <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
-                <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
+            <div *ngIf="loading">
+                <!-- loader for booking conf -->
                 <div class="fb_animation w-100 pb-4 mb-2"></div>
+                <div class="fb_animation w-100 pb-3 mb-2"></div>
+                <div class="fb_animation w-100 pb-3 mb-2"></div>
+                <div class="fb_animation w-100 pb-3 mb-4"></div>
+                <div style="width: 200px; height: 35px;" class="fb_animation pb-4 mb-3"></div>
+                <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
+                    <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
+                    <div class="fb_animation w-100 pb-4 mb-2"></div>
+                </div>
+                <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
+                    <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
+                    <div class="fb_animation w-100 pb-4 mb-2"></div>
+                </div>
+                <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
+                    <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
+                    <div class="fb_animation w-100 pb-4 mb-2"></div>
+                </div>
+                <div class="fb_animation w-100 pb-3 mb-2"></div>
+                <div class="fb_animation w-100 pb-3 mb-2"></div>
+                <!-- loader for booking conf -->
             </div>
-            <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
-                <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
-                <div class="fb_animation w-100 pb-4 mb-2"></div>
-            </div>
-            <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
-                <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
-                <div class="fb_animation w-100 pb-4 mb-2"></div>
-            </div>
-            <div class="fb_animation w-100 pb-3 mb-2"></div>
-            <div class="fb_animation w-100 pb-3 mb-2"></div>
-            <!-- loader for booking conf -->
+            
 
-            <div class="header_bar">
+            <div class="header_bar" *ngIf="!loading">
                 <h3>
                     Booking Confirmed
                     <span class="b_num">Booking ID #{{cartDetails.laytripCartId}}</span>
@@ -43,7 +46,7 @@
                         [routerLink]="['/account/bookings']">My Bookings</a>.
                 </p>
             </div>
-            <div class="book_detailers">
+            <div class="book_detailers" *ngIf="!loading">
                 <h3>Details</h3>
                 <ng-container *ngFor="let booking of cartDetails.booking">
                     <div class="detail_liners" *ngIf="booking.moduleId==1">
@@ -78,7 +81,7 @@
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Installments</span>
-                    <span class="rights">{{cartDetails.cartInstallments.length-1}} Monthly Installments of
+                    <span class="rights">{{cartDetails.cartInstallments.length-1}} {{cartDetails.installmentType | titlecase}} Installments of
                         ${{cartDetails.cartInstallments[1].amount | number : '1.2-2'}}</span>
                 </div>
                 <div class="detail_liners">

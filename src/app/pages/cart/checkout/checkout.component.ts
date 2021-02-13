@@ -46,6 +46,7 @@ export class CheckoutComponent implements OnInit {
   validationErrorMessage:string='';
   isValidTravelers:boolean=false;
   cardListChangeCount:number=0;
+  isBookingProgress:boolean=false;
   bookingRequest={
     payment_type: "",
     laycredit_points: 0,
@@ -113,11 +114,11 @@ export class CheckoutComponent implements OnInit {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
 
-      this.checkOutService.getPriceSummary.subscribe((data: any) => {
+      /* this.checkOutService.getPriceSummary.subscribe((data: any) => {
         if (data) {
           this.priceSummary = data;
         }
-      });
+      }); */
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
@@ -135,6 +136,7 @@ export class CheckoutComponent implements OnInit {
       let data = sessionStorage.getItem('__islt');
       data = atob(data);
       this.priceSummary = JSON.parse(data)
+      console.log("this.priceSummary",this.priceSummary)
     }
     catch(e){
       
@@ -247,12 +249,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   bookFlight(){
-    //return false;
     this.validationErrorMessage='';
     this.validateCartItems();
 
     console.log("innnn")
-    this.loading=true;
+    this.isBookingProgress=true;
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
     this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
@@ -277,7 +278,7 @@ export class CheckoutComponent implements OnInit {
             })
           }
         },(error)=>{
-          this.loading=false;
+          this.isBookingProgress=false;
         });
       }
   }
