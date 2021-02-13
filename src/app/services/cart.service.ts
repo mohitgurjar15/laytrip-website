@@ -128,4 +128,12 @@ export class CartService {
     }
     return this.http.post(`${environment.apiUrl}v1/cart/book`, data, this.commonFunction.setHeaders(headers))
   }
+
+  getBookingDetails(bookingId){
+    let headers = {
+      currency: 'USD',
+      language: 'en'
+    }
+    return this.http.get(`${environment.apiUrl}v1/cart/booking-details/${bookingId}`, this.commonFunction.setHeaders(headers))
+  }
 }

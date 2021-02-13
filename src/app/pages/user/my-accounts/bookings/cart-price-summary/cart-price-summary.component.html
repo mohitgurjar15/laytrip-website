@@ -1,4 +1,4 @@
-<div class="price_listing_wrpper"  >
+<div class="price_listing_wrpper"  *ngIf="(cartItem | json) != '[]'">
     <div class="total_p_wrp bb">
         <div class="left_sec">
             Total Purchases
@@ -61,7 +61,7 @@
                                     <div class="right_sec">
                                         ${{installment.amount}}
                                     </div>
-                                    <span class="paid_markss">
+                                    <span class="paid_markss" *ngIf="installment.instalmentStatus">
                                         <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                     </span>
                                 </div>

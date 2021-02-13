@@ -1,0 +1,32 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+.block_noresult_found{
+    box-shadow: none;
+    padding: 50px 15px 0;
+    .block_noresult_found_inner{
+        img{
+            max-width: 80px;
+        }
+        h6{
+            font-size: 32px;
+            color: $active-tab-text;
+        }
+        p{
+            color: $text_grey_dark;
+            font-size: 14px;
+
+        }
+        .logo_wrpper_footer{
+            img{
+                height: 32px;
+                margin-top: 20px;
+            }
+        }
+    }
+}
+

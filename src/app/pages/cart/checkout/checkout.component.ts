@@ -8,6 +8,7 @@ import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { Router } from '@angular/router';
 
 export interface CartItem {
 
@@ -60,7 +61,8 @@ export class CheckoutComponent implements OnInit {
     private checkOutService: CheckOutService,
     private cartService: CartService,
     private cookieService: CookieService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router:Router
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -240,11 +242,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   bookFlight(){
-    return false;
+    //return false;
     this.validationErrorMessage='';
     this.validateCartItems();
 
     console.log("innnn")
+    this.loading=true;
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
     this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
@@ -264,8 +267,11 @@ export class CheckoutComponent implements OnInit {
             console.log("Done");  
             this.cartService.bookCart(this.bookingRequest).subscribe(result=>{
               console.log("result",result)
+              this.router.navigate(['/cart/confirm/12'])
             })
           }
+        },(error)=>{
+          this.loading=false;
         });
       }
   }

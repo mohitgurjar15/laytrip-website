@@ -5,6 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FlightService } from '../../../../services/flight.service';
 import { AccountService } from '../../../../services/account.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-list-bookings',
@@ -19,11 +20,13 @@ export class ListBookingsComponent implements OnInit {
   completeBookings=[];
   selectedInCompletedTabNumber: number = 0;
   selectedCompletedTabNumber: number = 0;
+  cartItemsCount: number = 0;
 
   constructor(
     private userService: UserService,
     private accountService: AccountService,
     private commonFunction: CommonFunction,
+    private cartService: CartService,
     private renderer: Renderer2
 
   ) { }
@@ -58,8 +61,8 @@ export class ListBookingsComponent implements OnInit {
   }
 
   searchBooking(searchKey:any){
-      this.getComplteBooking(searchKey);
-      this.getIncomplteBooking(searchKey);
+    this.getComplteBooking(searchKey);
+    this.getIncomplteBooking(searchKey);
   }
 
   selectInCompletedTab(cartNumber) {
@@ -70,5 +73,10 @@ export class ListBookingsComponent implements OnInit {
     this.selectedCompletedTabNumber = cartNumber;
   }
 
+
+  getProgressPercentage(value,totalValue){
+    return  {'width' : Math.floor((value/totalValue)*100) +'%'};
+  }
+  
 
 }

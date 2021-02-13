@@ -262,6 +262,8 @@ export class BookingComponent implements OnInit {
   }
 
   saveAndSearch() {
+    this.router.navigate(['/']);
+    return false;
     this.validationErrorMessage='';
     if (this.isValidTravelers) {
       this.loading=true;
@@ -302,7 +304,7 @@ export class BookingComponent implements OnInit {
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and `;
+          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
           this.validationErrorMessage +=message;
         }
       }
@@ -312,12 +314,13 @@ export class BookingComponent implements OnInit {
   }
 
   continueToCheckout(){
+
     this.validationErrorMessage='';
     this.validateCartItems();
 
     if(this.cardToken==''){
       if(this.validationErrorMessage==''){
-        this.validationErrorMessage=`Please select credit card`;
+        this.validationErrorMessage=` Please select credit card`;
       }
       else{
         this.validationErrorMessage+=` and please select credit card`;
