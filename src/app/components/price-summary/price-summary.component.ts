@@ -24,6 +24,7 @@ export class PriceSummaryComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges) {
     console.log("changes",changes)
+    this.insatllmentAmount=0;
     if (typeof changes['priceSummary'].currentValue!='undefined') {
       this.priceSummary = changes['priceSummary'].currentValue;
       if(typeof this.priceSummary.instalments!=='undefined' && this.priceSummary.paymentType=='instalment'){

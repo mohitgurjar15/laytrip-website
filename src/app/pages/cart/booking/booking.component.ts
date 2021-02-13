@@ -116,6 +116,8 @@ export class BookingComponent implements OnInit {
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
+      this.carts=[];
+      this.cartPrices=[];
     });
 
     this.cartService.getCartId.subscribe(cartId => {
@@ -241,6 +243,7 @@ export class BookingComponent implements OnInit {
     if(this.addCardRef){
       this.addCardRef.ngOnDestroy();
     }
+    this.cartService.setCartNumber(0);
   }
 
   deleteCart(cartId) {
@@ -256,6 +259,10 @@ export class BookingComponent implements OnInit {
       },2000)
       if (this.carts.length == 0) {
         this.isCartEmpty = true;
+      }
+
+      if(index>0){
+        this.cartService.setCartNumber(index-1);
       }
 
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));

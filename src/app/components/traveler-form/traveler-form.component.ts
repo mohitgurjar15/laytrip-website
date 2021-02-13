@@ -139,7 +139,20 @@ export class TravelerFormComponent implements OnInit {
           let userId = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId;
           if (userId) {
             //Edit
-            this.travelerService.updateAdult(data, userId).subscribe(traveler => {
+            this.travelerService.updateAdult(data, userId).subscribe((traveler:any) => {
+              let index = this.myTravelers.findIndex(x=>x.userId=traveler.userId)
+              this.myTravelers[index]=traveler;
+              for(let i=0; i <5; i++){
+                for(let j=0; j< this.travelers[`type${i}`].adults.length; j++){
+                  
+                  index = this.travelers[`type${i}`].adults[j].findIndex(x=>x.userId=traveler.userId);
+                  if(index>-1){
+                    console.log("iiiiiii");
+                    this.travelers[`type${i}`].adults[j]=traveler;
+                  }
+                }
+              }
+              this.patch();
             })
           }
           else {

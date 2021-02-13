@@ -60,9 +60,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartService.getCartItems.subscribe(data => {
 
       if (data.length > 0) {
-        console.log(data, "getCartItems.subscribe")
-        //this.calculateInstalment(data)
-        //this.getCartList();
         this.updateCartSummary()
       }
     })

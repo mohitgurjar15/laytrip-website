@@ -19,7 +19,7 @@ export class ConfirmComponent implements OnInit {
     private renderer: Renderer2,
     private route:ActivatedRoute,
     private cartService:CartService,
-    private commonFunction:CommonFunction
+    public commonFunction:CommonFunction
   ) {
     this.bookingId = this.route.snapshot.paramMap.get('id');
    }

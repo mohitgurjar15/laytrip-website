@@ -198,6 +198,7 @@ export class CheckoutComponent implements OnInit {
     if(this.addCardRef){
       this.addCardRef.ngOnDestroy();
     }
+    this.cartService.setCartNumber(0);
   }
 
   getCardListChange(data){
@@ -213,6 +214,9 @@ export class CheckoutComponent implements OnInit {
       this.cartPrices.splice(index, 1)
       this.cartService.setCartItems(this.carts);
       this.cartService.setCartPrices(this.cartPrices)
+      if(index>0){
+        this.cartService.setCartNumber(index-1);
+      }
       if (this.carts.length == 0) {
         this.isCartEmpty = true;
       }
