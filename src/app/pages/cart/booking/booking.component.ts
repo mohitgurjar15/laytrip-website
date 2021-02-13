@@ -238,7 +238,9 @@ export class BookingComponent implements OnInit {
       }
     });
 
-    this.addCardRef.ngOnDestroy();
+    if(this.addCardRef){
+      this.addCardRef.ngOnDestroy();
+    }
   }
 
   deleteCart(cartId) {

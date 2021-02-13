@@ -193,7 +193,9 @@ export class CheckoutComponent implements OnInit {
         adults: []
       }
     });
-    this.addCardRef.ngOnDestroy();
+    if(this.addCardRef){
+      this.addCardRef.ngOnDestroy();
+    }
   }
 
   getCardListChange(data){
