@@ -33,14 +33,14 @@ import { throwError } from "rxjs";
         return throwError(errorMessage);
       }
       
-    getIncomplteBooking(bookingId){
-        return this.http.get(`${environment.apiUrl}v1/booking/incomplete-bookings?booking_id=`+ bookingId, this.commonFunction.setHeaders())
+    getIncomplteBooking(search){
+        return this.http.get(`${environment.apiUrl}v1/booking/incomplete-bookings?search=`+ search, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
             );
     } 
-    getComplteBooking(bookingId){
-        return this.http.get(`${environment.apiUrl}v1/booking/complete-bookings?booking_id=`+ bookingId, this.commonFunction.setHeaders())
+    getComplteBooking(search){
+        return this.http.get(`${environment.apiUrl}v1/booking/complete-bookings?search=`+ search, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
             );

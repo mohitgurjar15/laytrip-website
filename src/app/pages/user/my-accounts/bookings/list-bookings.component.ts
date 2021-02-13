@@ -38,9 +38,9 @@ export class ListBookingsComponent implements OnInit {
 
   }
 
-  getIncomplteBooking(bookingId = ''){
+  getIncomplteBooking(search = ''){
     this.upComingloading=true;
-    this.accountService.getIncomplteBooking(bookingId).subscribe((res: any) => {
+    this.accountService.getIncomplteBooking(search).subscribe((res: any) => {
       this.upComingbookings=res.data;
       this.upComingloading=false;
    }, err => {
@@ -49,9 +49,9 @@ export class ListBookingsComponent implements OnInit {
    }); 
   }
 
-  getComplteBooking(bookingId = ''){
+  getComplteBooking(search = ''){
     this.completeLoading=true;
-    this.accountService.getComplteBooking(bookingId).subscribe((res: any) => {
+    this.accountService.getComplteBooking(search).subscribe((res: any) => {
       this.completeBookings=res.data;
       this.completeLoading=false;
    }, err => {
