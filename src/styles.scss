@@ -47,6 +47,7 @@ a {
     transition: 0.3s;
   }
 }
+
 .dobs {
   .form-control {
     border-radius: 0;
@@ -56,11 +57,11 @@ a {
     padding: 8px 0;
 
     input {
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-        center right 0px no-repeat;
+      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
       background-size: 20px;
       border: none;
       padding: 0;
+
       &:focus {
         outline: none;
         box-shadow: none;
@@ -68,6 +69,7 @@ a {
     }
   }
 }
+
 .dobs_account {
   .form-control {
     border-radius: 0;
@@ -76,11 +78,11 @@ a {
     padding: 8px 0;
 
     input {
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-        center right 0px no-repeat;
+      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
       background-size: 20px;
       border: none;
       padding: 0;
+
       &:focus {
         outline: none;
         box-shadow: none;
@@ -88,26 +90,31 @@ a {
     }
   }
 }
-.ar_field{
-  .ng-select{
-    &.ng-select-disabled{
-      &.laytrip-input{
-        .ng-select-container{
+
+.ar_field {
+  .ng-select {
+    &.ng-select-disabled {
+      &.laytrip-input {
+        .ng-select-container {
           background-color: $background-white
         }
       }
     }
-    &.laytrip-input{
-      .ng-select-container{
+
+    &.laytrip-input {
+      .ng-select-container {
         background-color: $background-white;
-        .ng-value-container{
+
+        .ng-value-container {
           height: 40px;
-          .ng-placeholder{
+
+          .ng-placeholder {
             padding: 0;
             font-size: 16px;
             color: $mid_gray_bg;
           }
-          .ng-value{
+
+          .ng-value {
             width: 100%;
             background: transparent;
             height: 40px;
@@ -118,18 +125,21 @@ a {
             color: $mid_gray_bg;
             position: relative;
           }
-          .ng-input{
+
+          .ng-input {
             padding: 0;
             top: 7px;
           }
         }
-        .ng-arrow-wrapper{
+
+        .ng-arrow-wrapper {
           display: block;
         }
       }
     }
-  } 
+  }
 }
+
 // discription popup
 .section_description {
   border: 1px solid $pink;
@@ -144,59 +154,80 @@ a {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+
   a {
     cursor: pointer;
     width: 30px !important;
+
     img {
       max-width: 9px;
     }
   }
 }
 
-p-calendar{
-  input{
-    &:read-only{
+p-calendar {
+  input {
+    &:read-only {
       pointer-events: auto;
     }
   }
 }
-input , textarea{
-  &:read-only{
+
+input,
+textarea {
+  &:read-only {
     pointer-events: none;
   }
 }
-.form-control{
-  &:focus{
+
+.form-control {
+  &:focus {
     box-shadow: none;
   }
-  &:read-only{
+
+  &:read-only {
     background-color: $background-white
   }
 }
+
 input:focus::-webkit-input-placeholder {
   color: transparent;
 }
+
 input:focus:-moz-placeholder {
   color: transparent;
-} /* FF 4-18 */
+}
+
+/* FF 4-18 */
 input:focus::-moz-placeholder {
   color: transparent;
-} /* FF 19+ */
+}
+
+/* FF 19+ */
 input:focus:-ms-input-placeholder {
   color: transparent;
-} /* IE 10+ */
+}
+
+/* IE 10+ */
 textarea:focus::-webkit-input-placeholder {
   color: transparent;
 }
+
 textarea:focus:-moz-placeholder {
   color: transparent;
-} /* FF 4-18 */
+}
+
+/* FF 4-18 */
 textarea:focus::-moz-placeholder {
   color: transparent;
-} /* FF 19+ */
+}
+
+/* FF 19+ */
 textarea:focus:-ms-input-placeholder {
   color: transparent;
-} /* IE 10+ */
+}
+
+/* IE 10+ */
 .nation_wrps {
   .ng-select {
     border-radius: 0;
@@ -205,12 +236,15 @@ textarea:focus:-ms-input-placeholder {
     font-size: 14px;
     padding: 0;
     bottom: 3px;
+
     .ng-select-container {
       border: none;
+
       .ng-value-container {
         padding-left: 0;
       }
     }
+
     .ng-arrow {
       content: "";
       padding: 5px 9px;
@@ -222,13 +256,15 @@ textarea:focus:-ms-input-placeholder {
       right: 8px;
       border: none;
       top: 0px;
+
       @include tab-view {
         position: absolute;
         right: 0;
         height: 12px;
       }
     }
-    &.ng-select-opened > .ng-select-container {
+
+    &.ng-select-opened>.ng-select-container {
       .ng-arrow {
         padding: 5px 9px;
         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -240,6 +276,7 @@ textarea:focus:-ms-input-placeholder {
         right: 8px;
         border: none;
         top: 0px;
+
         @include tab-view {
           position: absolute;
           right: 0;
@@ -249,6 +286,7 @@ textarea:focus:-ms-input-placeholder {
     }
   }
 }
+
 .telephone_wrps {
   .tel_span {
     .ng-select {
@@ -256,12 +294,15 @@ textarea:focus:-ms-input-placeholder {
       border: none;
       font-size: 14px;
       padding: 0;
+
       .ng-select-container {
         border: none;
+
         .ng-value-container {
           padding-left: 0;
         }
       }
+
       .ng-arrow {
         content: "";
         padding: 5px 9px;
@@ -273,13 +314,15 @@ textarea:focus:-ms-input-placeholder {
         right: 8px;
         border: none;
         top: 0px;
+
         @include tab-view {
           position: absolute;
           right: 0;
           height: 12px;
         }
       }
-      &.ng-select-opened > .ng-select-container {
+
+      &.ng-select-opened>.ng-select-container {
         .ng-arrow {
           padding: 5px 9px;
           background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -291,6 +334,7 @@ textarea:focus:-ms-input-placeholder {
           right: 8px;
           border: none;
           top: 0px;
+
           @include tab-view {
             position: absolute;
             right: 0;
@@ -301,6 +345,7 @@ textarea:focus:-ms-input-placeholder {
     }
   }
 }
+
 input,
 button,
 select {
@@ -310,6 +355,7 @@ select {
     outline: none;
   }
 }
+
 .tab_search_area {
   input {
     &.p-inputtext {
@@ -325,32 +371,43 @@ select {
   pointer-events: none;
   opacity: 0.5;
 }
+
+.disabled_addon {
+  -webkit-filter: grayscale(90%);
+  filter: grayscale(51%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .error_field {
   color: $error-color;
 }
+
 .block_apply_laycredits {
   .custom_range_slide {
     .point_val {
       margin: 0 15px;
       font-size: 20px;
     }
+
     .ng5-slider {
       .ng5-slider-pointer {
         border: 1px solid $pink;
         background-color: $pink;
       }
+
       .ng5-slider-bar {
         background: $pink;
       }
     }
   }
 }
+
 //<!-- Start Coming Soon page css -->
 .coming_soon {
   width: 100%;
   height: 100vh;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/coming_soon_bg.webp)
-    no-repeat;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/coming_soon_bg.webp) no-repeat;
   background-size: cover;
   position: relative;
 
@@ -689,6 +746,7 @@ select {
                   }
                 }
               }
+
               .class_section {
                 width: 110px;
 
@@ -928,7 +986,8 @@ select {
                     z-index: 99;
 
                     @include tab-view {
-                      left: 0;
+                      right: 0;
+                      left: auto;
                     }
 
                     // &:before {
@@ -1028,6 +1087,7 @@ select {
                             }
                           }
                         }
+
                         &:last-child {
                           padding: 0;
                         }
@@ -1047,6 +1107,7 @@ select {
                 &.class_resp {
                   width: 100%;
                 }
+
                 &.travellers_resp {
                   width: 100%;
                 }
@@ -1110,6 +1171,7 @@ select {
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
+
                         .comon_pcale {
                           .p-calendar {
                             width: 100%;
@@ -1210,8 +1272,9 @@ select {
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
-                        span{
-                          &.p-calendar{
+
+                        span {
+                          &.p-calendar {
                             width: 100%;
                           }
                         }
@@ -1225,14 +1288,15 @@ select {
                           color: $text-black;
                           font-weight: 600;
                           padding: 0 15px 0 70px;
-                          background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-                            center left 15px no-repeat !important;
+                          background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+
                           @media (max-width: 575px) {
                             .calender-responsive-view {
                               right: 0 !important;
                               left: auto !important;
                             }
                           }
+
                           @media (max-width: 1199px) {
                             font-size: 16px;
                           }
@@ -1260,11 +1324,13 @@ select {
 
                       .date_form {
                         width: 100%;
+
                         p-calendar {
                           display: flex;
                           align-items: center;
                           height: 100%;
                         }
+
                         .search_area {
                           border-radius: 8px;
                           height: 100%;
@@ -1310,8 +1376,10 @@ select {
 
                           img {
                             max-height: 29px;
+
                             &.hover_btn {
                               display: none;
+
                               &.show {
                                 display: block;
                               }
@@ -1442,6 +1510,7 @@ select {
     @include tab-view {
       padding: 15px;
     }
+
     .flight_tab {
       width: 100%;
 
@@ -1501,6 +1570,7 @@ select {
               }
             }
           }
+
           .class_section {
             width: 100%;
 
@@ -1576,6 +1646,7 @@ select {
                 border: 1px solid #e0e2e5;
                 border-radius: 0 0 5px 5px;
                 z-index: 99;
+
                 @include tab-view {
                   left: 0;
                 }
@@ -1734,8 +1805,10 @@ select {
                 border: 1px solid #e0e2e5;
                 border-radius: 0 0 5px 5px;
                 z-index: 99;
+
                 @include tab-view {
-                  left: 0;
+                  right: 0;
+                  left: auto;
                 }
 
                 // &:before {
@@ -1842,11 +1915,27 @@ select {
           }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
           flex-wrap: wrap;
 
           li {
             margin: 0 5px 5px 0;
+
+            &.class_resp {
+              width: 48%;
+
+            }
+
+            &.travellers_resp {
+              width: 48%;
+
+              .travellers {
+                .traveller_add_block {
+                  right: 0;
+                  left: auto;
+                }
+              }
+            }
 
             &:last-child {
               margin: 0;
@@ -1946,6 +2035,7 @@ select {
 
                     @media (max-width: 480px) {
                       width: 100%;
+                      margin-top: 5px;
                     }
                   }
 
@@ -2002,8 +2092,9 @@ select {
                     border-radius: 8px;
                     background: $background-white;
                     position: relative;
-                    span{
-                      &.p-calendar{
+
+                    span {
+                      &.p-calendar {
                         width: 100%;
                       }
                     }
@@ -2017,14 +2108,15 @@ select {
                       color: $text-black;
                       font-weight: 600;
                       padding: 0 0 0 60px;
-                      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-                        center left 15px no-repeat !important;
+                      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+
                       @media (max-width: 575px) {
                         .calender-responsive-view {
                           right: 0 !important;
                           left: auto !important;
                         }
                       }
+
                       @media (max-width: 1199px) {
                         font-size: 16px;
                       }
@@ -2052,11 +2144,13 @@ select {
 
                   .date_form {
                     width: 100%;
+
                     p-calendar {
                       display: flex;
                       align-items: center;
                       height: 100%;
                     }
+
                     .search_area {
                       border-radius: 8px;
                       height: 100%;
@@ -2105,8 +2199,10 @@ select {
 
                       img {
                         max-height: 29px;
+
                         &.hover_btn {
                           display: none;
+
                           &.show {
                             display: block;
                           }
@@ -2156,6 +2252,7 @@ select {
     }
   }
 }
+
 // search bar section on listing page end
 
 //<!-- Start Our Featured List Section css -->
@@ -2164,11 +2261,9 @@ select {
   padding: 100px 0px 100px;
   background: $background-white;
 
-  @media (max-width: 1199px) {
-  }
+  @media (max-width: 1199px) {}
 
-  @media (max-width: 767px) {
-  }
+  @media (max-width: 767px) {}
 
   .featured_list {
     width: 100%;
@@ -2208,12 +2303,9 @@ select {
             &:after {
               width: 100%;
               height: 35%;
-              background: linear-gradient(
-                  180deg,
+              background: linear-gradient(180deg,
                   $gradient-white 0%,
-                  $gradient-blue 100%
-                )
-                0% 0% no-repeat;
+                  $gradient-blue 100%) 0% 0% no-repeat;
               position: absolute;
               bottom: 0;
               left: 0;
@@ -2374,8 +2466,7 @@ select {
 .user_benefits {
   width: 100%;
   padding: 100px 0;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.webp)
-    no-repeat;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.webp) no-repeat;
   background-size: cover;
   background-attachment: fixed;
   position: relative;
@@ -2390,8 +2481,7 @@ select {
     position: absolute;
     top: 0;
     left: 0;
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/gradient_bg-im.svg)
-      no-repeat;
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/gradient_bg-im.svg) no-repeat;
     background-size: cover;
     content: "";
   }
@@ -3061,6 +3151,7 @@ select {
     background: $primary-color;
     align-items: center;
     justify-content: center;
+
     &:first-child {
       margin-bottom: 10px;
     }
@@ -3068,6 +3159,7 @@ select {
     img {
       max-width: 20px;
     }
+
     // &:hover {
     //   background-color: $pink;
     // }
@@ -3270,6 +3362,7 @@ select {
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   transition: 0.3s;
   margin-top: 10px;
+
   &:hover {
     background-color: $pink;
     transition: 0.3s;
@@ -3377,8 +3470,7 @@ select {
                 }
 
                 &.birth_date {
-                  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                    no-repeat;
+                  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                   background-position: right center;
                 }
               }
@@ -3452,14 +3544,12 @@ select {
                         width: 0;
                         height: 0;
                         border: 4px solid transparent;
-                        border-color: $text-grey transparent transparent
-                          transparent;
+                        border-color: $text-grey transparent transparent transparent;
                       }
 
                       &.select-arrow-active {
                         &:after {
-                          border-color: transparent transparent $text-grey
-                            transparent;
+                          border-color: transparent transparent $text-grey transparent;
                           top: 11px;
                         }
                       }
@@ -3476,8 +3566,7 @@ select {
                       div {
                         padding: 8px 16px;
                         border: 1px solid transparent;
-                        border-color: transparent transparent rgba(0, 0, 0, 0.1)
-                          transparent;
+                        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
                         cursor: pointer;
                         user-select: none;
                         font-size: 14px;
@@ -4183,8 +4272,7 @@ select {
                   }
 
                   &.birth_date {
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                      no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                     background-position: right center;
                   }
 
@@ -4245,14 +4333,12 @@ select {
                       width: 0;
                       height: 0;
                       border: 4px solid transparent;
-                      border-color: $text-grey transparent transparent
-                        transparent;
+                      border-color: $text-grey transparent transparent transparent;
                     }
 
                     &.select-arrow-active {
                       &:after {
-                        border-color: transparent transparent $text-grey
-                          transparent;
+                        border-color: transparent transparent $text-grey transparent;
                         top: 11px;
                       }
                     }
@@ -4269,8 +4355,7 @@ select {
                     div {
                       padding: 8px 16px;
                       border: 1px solid transparent;
-                      border-color: transparent transparent rgba(0, 0, 0, 0.1)
-                        transparent;
+                      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
                       cursor: pointer;
                       user-select: none;
                       font-size: 14px;
@@ -4711,6 +4796,7 @@ select {
                       background-position: right;
                       background-repeat: no-repeat;
                       background-size: 12px;
+
                       @include tab-view {
                         position: absolute;
                         right: 0;
@@ -4718,6 +4804,7 @@ select {
                       }
                     }
                   }
+
                   &[aria-expanded="true"] {
                     &::after {
                       content: "";
@@ -4731,6 +4818,7 @@ select {
                       background-position: right;
                       background-repeat: no-repeat;
                       background-size: 12px;
+
                       @include tab-view {
                         position: absolute;
                         right: 0;
@@ -4757,6 +4845,7 @@ select {
                 padding: 0;
                 font-size: 18px;
                 color: $text_grey_dark;
+
                 p {
                   font-size: 18px;
                   color: $text_grey_dark;
@@ -4786,6 +4875,7 @@ select {
   }
 
   &.block_covid_19 {
+
     // h3 {
     //   color: $blue-text;
     //   font-size: 34px;
@@ -4795,16 +4885,20 @@ select {
     .block_cmspage_comman {
       p {
         font-size: 18px;
+
         &:first-child {
           color: $mid_gray_bg;
         }
+
         u {
           text-decoration: none;
+
           a {
             color: $primary-color;
             text-decoration: none;
           }
         }
+
         a {
           color: $primary-color;
           text-decoration: none;

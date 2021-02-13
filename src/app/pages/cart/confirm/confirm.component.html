@@ -5,30 +5,61 @@
 <div class="conf_main_wrapper">
     <div class="container">
         <div class="back_cta_btn">
-            <a class="hover-link"><img src="{{s3BucketUrl}}assets/images/icon/ic_back.svg" alt=""> Back</a>
+            <a (click)="commonFunction.goBack()" class="hover-link"><img
+                    src="{{s3BucketUrl}}assets/images/icon/ic_back.svg" alt=""> Back</a>
         </div>
         <div class="conf_container">
+
+            <!-- loader for booking conf -->
+            <div class="fb_animation w-100 pb-4 mb-2"></div>
+            <div class="fb_animation w-100 pb-3 mb-2"></div>
+            <div class="fb_animation w-100 pb-3 mb-2"></div>
+            <div class="fb_animation w-100 pb-3 mb-4"></div>
+            <div style="width: 200px; height: 35px;" class="fb_animation pb-4 mb-3"></div>
+            <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
+                <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
+                <div class="fb_animation w-100 pb-4 mb-2"></div>
+            </div>
+            <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
+                <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
+                <div class="fb_animation w-100 pb-4 mb-2"></div>
+            </div>
+            <div class="mb-2" style="display: flex; border-bottom: 1px solid #d6d6d6;">
+                <div class="fb_animation w-50 pb-4 mb-2 mr-5"></div>
+                <div class="fb_animation w-100 pb-4 mb-2"></div>
+            </div>
+            <div class="fb_animation w-100 pb-3 mb-2"></div>
+            <div class="fb_animation w-100 pb-3 mb-2"></div>
+            <!-- loader for booking conf -->
+
             <div class="header_bar">
                 <h3>
                     Booking Confirmed
-                    <span class="b_num">Booking ID #79302927k</span>
+                    <span class="b_num">Booking ID #{{cartDetails.laytripCartId}}</span>
                 </h3>
                 <p class="para">
                     Thank you for booking your travel with us! We will send you your airline, hotel and/or home
-                    reservation numbers prior to your travel date. View your details anytime at <a [routerLink]="['/account/bookings']">My Bookings</a>.
+                    reservation numbers prior to your travel date. View your details anytime at <a
+                        [routerLink]="['/account/bookings']">My Bookings</a>.
                 </p>
             </div>
             <div class="book_detailers">
                 <h3>Details</h3>
-                <div class="detail_liners">
-                    <span class="lefts">Flight</span>
-                    <span class="rights">JFK-MIA Dec 9, 2021</span>
-                </div>
-                <div class="detail_liners">
-                    <span class="lefts">Flight</span>
-                    <span class="rights">FLL-JFK Dec 11, 2021</span>
-                </div>
-                <div class="detail_liners">
+                <ng-container *ngFor="let booking of cartDetails.booking">
+                    <div class="detail_liners" *ngIf="booking.moduleId==1">
+                        <span class="lefts">Flight</span>
+                        <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==1">
+                            {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
+                            {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}
+                        </span>
+                        <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==2">
+                            {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
+                            {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}-{{commonFunction.convertDateFormat(booking.moduleInfo[0].arrival_date,'DD/MM/YYYY')}}
+                        </span>
+                    </div>
+                </ng-container>
+
+                <!-- <div class="detail_liners">
                     <span class="lefts">Hotel</span>
                     <span class="rights">Marriott Miami Dec 10, 2021</span>
                 </div>
@@ -39,15 +70,16 @@
                 <div class="detail_liners">
                     <span class="lefts">Car</span>
                     <span class="rights">Avis Dec 9-11, 2021</span>
-                </div>
+                </div> -->
                 <h3>Payment</h3>
-                <div class="detail_liners">
+                <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length">
                     <span class="lefts">Downpayment</span>
-                    <span class="rights">$180.00</span>
+                    <span class="rights">${{cartDetails.cartInstallments[0].amount | number : '1.2-2'}}</span>
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Installments</span>
-                    <span class="rights">7 Monthly Installments of $100.00</span>
+                    <span class="rights">{{cartDetails.cartInstallments.length-1}} Monthly Installments of
+                        ${{cartDetails.cartInstallments[1].amount | number : '1.2-2'}}</span>
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Total Price</span>
@@ -55,13 +87,13 @@
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Total Paid</span>
-                    <span class="rights">$180.00 Mastercard ending in 9604</span>
+                    <span class="rights">${{cartDetails.paidAmount | number : '1.2-2'}} Mastercard ending in 9604</span>
                 </div>
                 <h3>Policies</h3>
                 <div class="linking_wrapper">
                     <a href="javascript:void(0);">Customer Service</a>
                     <a href="javascript:void(0);">Reservations</a>
-                    <a href="javascript:void(0);">Terms</a>
+                    <a [routerLink]="['/terms']">Terms</a>
                 </div>
                 <h3>Contact</h3>
                 <div class="linking_wrapper">
@@ -73,3 +105,4 @@
 </div>
 
 <!-- <app-booking-feedback></app-booking-feedback> -->
+<!-- <app-contact-us></app-contact-us> -->

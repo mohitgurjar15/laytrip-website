@@ -16,19 +16,34 @@
                 <span>{{'round_trip' | translate}}</span>
             </a>
         </li>
-        <li class="nav-item class_resp">
+        <li class="nav-item class_resp desk_li">
             <div class="class_section">
                 <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
                 </app-flight-class>
             </div>
         </li>
-        <li class="nav-item travellers_resp">
+        <li class="nav-item travellers_resp desk_li">
             <div class="travellers">
                 <app-traveller-info label="{{'travellers_and_class' | translate}}"
                     (changeValue)="changeTravellerInfo($event)">
                 </app-traveller-info>
             </div>
         </li>
+        <!-- <ul class="mobile_ul">
+            <li class="nav-item class_resp mobile_li">
+                <div class="class_section">
+                    <app-flight-class [mobileView]="add_class_sec_open2" (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
+                    </app-flight-class>
+                </div>
+            </li>
+            <li class="nav-item travellers_resp mobile_li">
+                <div class="travellers">
+                    <app-traveller-info label="{{'travellers_and_class' | translate}}"
+                        (changeValue)="changeTravellerInfo($event)">
+                    </app-traveller-info>
+                </div>
+            </li>
+        </ul> -->
         <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#Multi-city">
               <img class="default-icon"
@@ -82,11 +97,11 @@
                                 <div class="search_area tab_search_area"
                                     [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                     <!-- <label>{{'departure' | translate}}</label> -->
-                                    <p-calendar class="comon_pcale" *ngIf="!isRoundTrip" dateFormat="M d, yy" inputId="basic"
-                                        [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}"
-                                        flightDepartureMinDate [minDate]="flightDepartureMinDate"
-                                        (onSelect)=departureDateUpdate($event) [readonlyInput]="true"
-                                        (onMonthChange)="changeMonth($event)"
+                                    <p-calendar class="comon_pcale" *ngIf="!isRoundTrip" dateFormat="M d, yy"
+                                        inputId="basic" [(ngModel)]="departureDate"
+                                        [ngModelOptions]="{standalone: true}" flightDepartureMinDate
+                                        [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event)
+                                        [readonlyInput]="true" (onMonthChange)="changeMonth($event)"
                                         panelStyleClass="calender-responsive-view laytrip-cal-view"
                                         [readonlyInput]="true">
                                         <p-header class="calender-header" *ngIf="calPrices">
@@ -144,8 +159,9 @@
                         <li class="grid_box third">
 
                             <div class="serch_btn">
-                                <button id="search_large_btn1"> 
-                                    <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" class="norm_btn" />
+                                <button id="search_large_btn1">
+                                    <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon"
+                                        class="norm_btn" />
                                     <!-- <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="search_icon" class="hover_btn" /> -->
                                 </button>
                             </div>

@@ -418,6 +418,7 @@
 
                             li {
                                 margin: 0 5px;
+
                                 @include tab-view {
                                     margin-left: 5px;
                                     margin-bottom: 5px;
@@ -429,13 +430,16 @@
 
                                 a {
                                     background-color: $background-white;
-                                    color: #E4E4E4;
-                                    border: 1px solid #E4E4E4;
+                                    // color: #E4E4E4;
+                                    // border: 1px solid #E4E4E4;
+                                    color: $text_grey_dark;
+                                    border: 1px solid $text_grey_dark;
                                     border-radius: 8px;
                                     font-size: 12px;
                                     width: 100%;
                                     justify-content: center;
                                     align-items: center;
+
                                     @include tab-view {
                                         margin: 0;
                                     }
