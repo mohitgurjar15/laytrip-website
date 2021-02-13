@@ -9,14 +9,19 @@
 }
 .search_tab_listing_wrapper{
 	margin-top: 50px;
+	@include tab-view{
+		margin-top: 130px;
+	}
 	.container{
 		padding: 0;
 	}
 }
 .section_description{
-	transform: translate(-60%, -70%);
+	//transform: translate(-60%, -70%);
+	transform: translate(-100%, -50%);
     max-width: 240px;
     right: 0;
+	position: fixed;
 }
 
 
@@ -137,12 +142,17 @@
 	}
 }
 .listing_main_box{
-	transform: translate(0px, -155px);
+	// transform: translate(0px, -155px);
+	.search_tab_listing_wrapper{
+		top: -100px;
+		position: relative;
+	}
 }
 .search_result{
+	transform: translate(0px, -95px);
 	&.flight{
 		.left_m{
-			margin-top: 30px;
+			margin-top: 24px;
 		}
 	}
 }
