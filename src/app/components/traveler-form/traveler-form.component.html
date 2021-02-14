@@ -16,16 +16,13 @@
                 <div class="sub_cat_wrapper">
                   <button (click)="selectTravelerType('adult',x)" class="add_btn_lined"
                     [ngClass]="{'active' : traveler.controls.type.value=='adult'}">Add Adult (Over 12)
-                    <!-- <a *ngIf="traveler.controls.type.value=='adult'" href="javascript:void(0);" class="close_icon">
-                      <i class="fa fa-times"></i>
-                    </a> -->
                   </button>
-                  <button (click)="selectTravelerType('child',x)" class="add_btn_lined"
+                  <button *ngIf="travelerItem.value.child>0" (click)="selectTravelerType('child',x)" class="add_btn_lined"
                     [ngClass]="{'active' : traveler.controls.type.value=='child'}">Add Child (2-12)
-                  </button>
-                  <button (click)="selectTravelerType('infant',x)" class="add_btn_lined"
+                  </button >
+                  <button *ngIf="travelerItem.value.infant>0" (click)="selectTravelerType('infant',x)" class="add_btn_lined"
                     [ngClass]="{'active' : traveler.controls.type.value=='infant'}">Add Infant (Under 12)
-                  </button>
+                  </button >
                 </div>
                 <app-my-traveler travelerId={{travelerItem.value.adults[x].userId}}
                   traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
