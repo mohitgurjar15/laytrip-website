@@ -2,10 +2,8 @@ import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FlightService } from '../../../../services/flight.service';
 import { AccountService } from '../../../../services/account.service';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from '../../../../services/cart.service';
 
 @Component({
   selector: 'app-list-bookings',

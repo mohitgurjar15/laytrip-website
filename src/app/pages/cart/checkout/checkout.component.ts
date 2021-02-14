@@ -9,7 +9,7 @@ import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
-import { AddCardComponent } from 'src/app/components/add-card/add-card.component';
+import { AddCardComponent } from '../../../components/add-card/add-card.component';
 
 export interface CartItem {
 
