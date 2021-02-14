@@ -55,7 +55,7 @@ export class BookingComponent implements OnInit {
   cardToken: string = '';
   validationErrorMessage: string = '';
   cardListChangeCount: number = 0;
-
+  $cartIdsubscription;
 
   constructor(
     private router: Router,
@@ -120,12 +120,19 @@ export class BookingComponent implements OnInit {
       this.cartPrices=[];
     });
 
-    this.cartService.getCartId.subscribe(cartId => {
+    this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
+      console.log("catyddd",cartId)
       if (cartId > 0) {
         this.deleteCart(cartId);
-        this.cartService.setCardId(0);
       }
     })
+
+    try {
+      this.cardToken = this.cookieService.get('__cc');
+    }
+    catch (e) {
+      this.cardToken = '';
+    }
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
@@ -244,9 +251,14 @@ export class BookingComponent implements OnInit {
       this.addCardRef.ngOnDestroy();
     }
     this.cartService.setCartNumber(0);
+    this.cartService.setCardId(0);
+    this.$cartIdsubscription.unsubscribe();
   }
 
   deleteCart(cartId) {
+    if(cartId==0){
+      return;
+    }
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;

@@ -9,6 +9,7 @@ import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 
 export interface CartItem {
@@ -47,6 +48,7 @@ export class CheckoutComponent implements OnInit {
   isValidTravelers:boolean=false;
   cardListChangeCount:number=0;
   isBookingProgress:boolean=false;
+  $cartIdsubscription;
   bookingRequest={
     payment_type: "",
     laycredit_points: 0,
@@ -114,24 +116,13 @@ export class CheckoutComponent implements OnInit {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
       }
 
-      /* this.checkOutService.getPriceSummary.subscribe((data: any) => {
-        if (data) {
-          this.priceSummary = data;
-        }
-      }); */
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
     });
 
 
-    /* this.checkOutService.getPriceSummary.subscribe((data: any) => {
-        if (data) {
-          this.priceSummary = data;
-          console.log("This.priceSummary",this.priceSummary)
-          this.cd.detectChanges();
-        }
-      }); */
+    
     try{
       let data = sessionStorage.getItem('__islt');
       data = atob(data);
@@ -139,13 +130,12 @@ export class CheckoutComponent implements OnInit {
       console.log("this.priceSummary",this.priceSummary)
     }
     catch(e){
-      
+      this.router.navigate(['/'])
     }
 
-    this.cartService.getCartId.subscribe(cartId => {
+    this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
       if (cartId > 0) {
         this.deleteCart(cartId);
-        this.cartService.setCardId(0);
       }
     })
 
@@ -164,7 +154,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTravelers() {
-    console.log('coming from bookinmg:::::::');
     this.travelerService.getTravelers().subscribe((res: any) => {
       this.checkOutService.setTravelers(res.data);
       this.cd.detectChanges();
@@ -199,6 +188,8 @@ export class CheckoutComponent implements OnInit {
       this.addCardRef.ngOnDestroy();
     }
     this.cartService.setCartNumber(0);
+    this.cartService.setCardId(0);
+    this.$cartIdsubscription.unsubscribe();
   }
 
   getCardListChange(data){
@@ -206,21 +197,30 @@ export class CheckoutComponent implements OnInit {
   }
 
   deleteCart(cartId) {
+    if(cartId==0){
+      return;
+    }
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
-      this.cartService.setCartItems(this.carts);
-      this.cartService.setCartPrices(this.cartPrices)
-      if(index>0){
-        this.cartService.setCartNumber(index-1);
-      }
+      this.adjustPriceSummary()
+      setTimeout(()=>{
+        this.cartService.setCartItems(this.carts);
+        this.cartService.setCartPrices(this.cartPrices)
+      },2000)
       if (this.carts.length == 0) {
         this.isCartEmpty = true;
       }
+
+      if(index>0){
+        this.cartService.setCartNumber(index-1);
+      }
+
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+      this.cartService.setDeletedCartItem(index)
     }, error => {
       this.loading = false;
       if (error.status == 404) {
@@ -307,8 +307,47 @@ export class CheckoutComponent implements OnInit {
           this.isBookingProgress=false;
         });
       }
-  }
+    }
     
   }
 
+  adjustPriceSummary(){
+
+    let totalPrice=0;
+    let checkinDate;
+    console.log("==this.cartPrices==",this.cartPrices);
+    if(this.cartPrices.length>0){
+        checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+        for(let i=0; i < this.cartPrices.length; i++){
+          totalPrice+=this.cartPrices[i].selling_price;
+          if(i==0){
+            continue;
+          }
+          if(moment(checkinDate).isAfter(moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD"))){
+            checkinDate = moment(this.cartPrices[i].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
+          }
+        }
+    }
+
+    let instalmentRequest={
+      instalment_type: this.priceSummary.instalmentType,
+      checkin_date: checkinDate,
+      booking_date: moment().format("YYYY-MM-DD"),
+      amount: totalPrice,
+      additional_amount: 0,
+      selected_down_payment:this.priceSummary.selectedDownPayment
+    }
+    this.genericService.getInstalemnts(instalmentRequest).subscribe((res:any)=>{
+      
+      if(res.instalment_available==true){
+        this.priceSummary.instalments=res;
+        this.priceSummary.remainingAmount=totalPrice - res.instalment_date[0].instalment_amount;
+        this.priceSummary.totalAmount=totalPrice;
+        console.log("this.priceSummary=>>>",this.priceSummary)
+      }
+      
+    },(err)=>{
+
+    })
+  }
 }
