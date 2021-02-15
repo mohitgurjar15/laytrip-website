@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlightService } from '../../services/flight.service';
 import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking-feedback',
@@ -12,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BookingFeedbackComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  @Input() bookingId: number;
+  bookingId: string = '';
   feedbackForm: FormGroup;
   submitted: boolean = false;
   is_rating = true;
@@ -24,7 +25,8 @@ export class BookingFeedbackComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class BookingFeedbackComponent implements OnInit {
       rating: [''],
       comment: ['', Validators.required],
     });
+    this.bookingId = this.route.snapshot.paramMap.get('id');
   }
 
   selectRating(event, rating) {
@@ -67,6 +70,7 @@ export class BookingFeedbackComponent implements OnInit {
         message: this.feedbackForm.value.comment,
       };
       this.flightService.addFeedback(jsonData).subscribe((data: any) => {
+        localStorage.setItem('$bkg', this.bookingId);
         // this.feedbackValueChange.emit(true);
         this.close();
         this.loading = false;
@@ -78,7 +82,7 @@ export class BookingFeedbackComponent implements OnInit {
   }
 
   close() {
-    const payload = {isModalOpen: false};
+    const payload = { isModalOpen: false };
     this.feedbackValueChange.emit(payload);
   }
 }

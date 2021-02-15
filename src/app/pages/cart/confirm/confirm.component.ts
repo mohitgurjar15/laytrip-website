@@ -29,8 +29,10 @@ export class ConfirmComponent implements OnInit {
     this.renderer.addClass(document.body, 'cms-bgColor');
     this.getBookingDetails(this.bookingId);
     setTimeout(() => {
-      this.isFeedbackPage = true;
-    }, 2000);
+      if (localStorage.getItem('$bkg') !== this.cartDetails.laytripCartId) {
+        this.isFeedbackPage = true;
+      }
+    }, 5000);
   }
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'cms-bgColor');

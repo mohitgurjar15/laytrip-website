@@ -20,7 +20,7 @@ export class PriceSummaryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("changes");
+    console.log("changes", this.priceSummary);
   }
   
   ngOnChanges(changes: SimpleChanges) {
