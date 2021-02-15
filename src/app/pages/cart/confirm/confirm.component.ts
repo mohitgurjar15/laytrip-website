@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { cardType } from '../../../_helpers/card.helper';
 declare var $: any;
 
 @Component({
@@ -15,6 +16,7 @@ export class ConfirmComponent implements OnInit {
   bookingId:string='';
   cartDetails;
   loading:boolean=false;
+  cardType = cardType;
   constructor(
     private renderer: Renderer2,
     private route:ActivatedRoute,

@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 declare var $: any;
+import {cardObject, cardType} from '../../_helpers/card.helper';
 
 @Component({
   selector: 'app-card-list',
@@ -25,27 +26,8 @@ export class CardListComponent implements OnInit {
   @Input() cardListChangeCount:number=0;
   userInfo;
 
-  cardObject = {
-    visa: `${this.s3BucketUrl}assets/images/card_visa.svg`,
-    master: `${this.s3BucketUrl}assets/images/master_cards_img.svg`,
-    american_express: `${this.s3BucketUrl}assets/images/card_amex.svg`,
-    discover: `${this.s3BucketUrl}assets/images/card_discover.svg`,
-    dankort: `${this.s3BucketUrl}assets/images/card_dankort.svg`,
-    maestro: `${this.s3BucketUrl}assets/images/card_maestro.svg`,
-    jcb: `${this.s3BucketUrl}assets/images/card_jcb.svg`,
-    diners_club: `${this.s3BucketUrl}assets/images/card_dinners_club.svg`,
-  }
-
-  cardType = {
-    visa: 'Visa',
-    master: 'Master Card',
-    american_express: 'American Express',
-    discover: 'Discover',
-    dankort: 'Dankort',
-    maestro: 'Maestro',
-    jcb: 'JCB',
-    diners_club: 'Diners Club',
-  }
+  cardObject =cardObject
+  cardType = cardType;
 
   ngOnInit() {
 

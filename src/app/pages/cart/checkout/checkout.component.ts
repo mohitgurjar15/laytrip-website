@@ -257,7 +257,6 @@ export class CheckoutComponent implements OnInit {
     this.validateCartItems();
 
     console.log("innnn")
-    this.isBookingProgress=true;
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
     this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
@@ -265,6 +264,7 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.cart = carts;
     console.log("this.bookingRequest",this.bookingRequest)
     if(this.isValidTravelers && this.cardToken!=''){
+      this.isBookingProgress=true;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
@@ -307,6 +307,9 @@ export class CheckoutComponent implements OnInit {
           this.isBookingProgress=false;
         });
       }
+    }
+    else{
+      this.isBookingProgress=false;
     }
     
   }

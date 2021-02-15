@@ -90,7 +90,7 @@
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Total Paid</span>
-                    <span class="rights">${{cartDetails.paidAmount | number : '1.2-2'}} Mastercard ending in 9604</span>
+                    <span class="rights">${{cartDetails.paidAmount | number : '1.2-2'}} <span *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
                 </div>
                 <h3>Policies</h3>
                 <div class="linking_wrapper">
