@@ -185,5 +185,15 @@ export class CommonFunction {
     convertFlotToDecimal(floatNumber){
         return Math.round(floatNumber);
     } 
+
+    getGuestUser(){
+        let guestuserId = this.cookieService.get('__gst')
+        if(guestuserId){
+            return guestuserId
+        }
+        else{
+            return '';
+        }
+    }
 }
 

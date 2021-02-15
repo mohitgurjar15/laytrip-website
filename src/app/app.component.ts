@@ -100,13 +100,9 @@ export class AppComponent {
   }
 
   registerGuestUser(){
-
-    let user = getLoginUserInfo()
-    if(Object.keys(user).length==0){
-      let __gst= this.cookieService.get('__gst');
-      if(!__gst){
-        this.cookieService.put('__gst',uuidv4())
-      }
+    let __gst= this.cookieService.get('__gst');
+    if(!__gst){
+      this.cookieService.put('__gst',uuidv4())
     }
   }
 }

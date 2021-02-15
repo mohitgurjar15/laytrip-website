@@ -200,22 +200,18 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
-    if (!this.isLoggedIn) {
+    /* if (!this.isLoggedIn) {
       const modalRef = this.modalService.open(LaytripOkPopup, {
         centered: true,
         keyboard: false,
         backdrop: 'static'
       });
-      // this.toastr.warning('Please login to book flight', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-    } else {
+    } else { */
 
       if (this.cartItems && this.cartItems.length >= 5) {
-        // this.spinner.hide();
         this.changeLoading.emit(false);
         this.maxCartValidation.emit(true)
-        //this.toastr.warning('You can not add more than 5 items in cart', 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
       } else {
-        // this.spinner.show();
         this.changeLoading.emit(true);
         const itinerary = {
           adult: this.route.snapshot.queryParams["adult"],
@@ -229,16 +225,13 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         dateNow.setMinutes(dateNow.getMinutes() + 10);
 
         sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-        //sessionStorage.setItem('__route', JSON.stringify(route));
-        /* if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
-        } else{
-          this.router.navigate([`flight/checkout/${route.route_code}`]);
-        } */
+        
         const payload = {
           module_id: 1,
           route_code: route.route_code,
-          // room_id: 42945378451569
+          guestId:''
         };
+        payload.guestId = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
         this.cartService.addCartItem(payload).subscribe((res: any) => {
           this.changeLoading.emit(true);
           if (res) {
@@ -256,7 +249,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         });
 
       }
-    }
+    /* } */
   }
 
   checkInstalmentAvalability() {
