@@ -33,7 +33,7 @@
                 <div class="fb_animation w-100 pb-3 mb-2"></div>
                 <!-- loader for booking conf -->
             </div>
-            
+
 
             <div class="header_bar" *ngIf="!loading">
                 <h3>
@@ -81,7 +81,8 @@
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Installments</span>
-                    <span class="rights">{{cartDetails.cartInstallments.length-1}} {{cartDetails.installmentType | titlecase}} Installments of
+                    <span class="rights">{{cartDetails.cartInstallments.length-1}} {{cartDetails.installmentType |
+                        titlecase}} Installments of
                         ${{cartDetails.cartInstallments[1].amount | number : '1.2-2'}}</span>
                 </div>
                 <div class="detail_liners">
@@ -100,12 +101,13 @@
                 </div>
                 <h3>Contact</h3>
                 <div class="linking_wrapper">
-                    <a href="javascript:void(0);">Contact Us</a>
+                    <a class="anchor-tag" data-toggle="modal" data-target="#contact_modal">Contact Us</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- <app-booking-feedback></app-booking-feedback> -->
-<!-- <app-contact-us></app-contact-us> -->
+<app-booking-feedback [hidden]="!isFeedbackPage" (feedbackValueChange)="feedbackValueChange($event)">
+</app-booking-feedback>
+<app-contact-us></app-contact-us>

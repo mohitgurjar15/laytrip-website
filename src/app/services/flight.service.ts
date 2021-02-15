@@ -148,7 +148,7 @@ export class FlightService {
     }
 
     addFeedback(payload) {
-        return this.http.post(`${environment.apiUrl}v1/booking-feedback`, payload, this.commonFunction.setHeaders())
+        return this.http.post(`${environment.apiUrl}v1/laytrip-feedback/add-laytrip-feedback`, payload, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
             );
@@ -181,10 +181,10 @@ export class FlightService {
 
     sendEmail(data) {
         const url = environment.apiUrl + `v1/booking/share-booking-detail`;
-        return this.http.post(url,data, this.commonFunction.setHeaders()).pipe(
+        return this.http.post(url, data, this.commonFunction.setHeaders()).pipe(
             catchError(this.handleError)
         );
     }
 
-    
+
 }
