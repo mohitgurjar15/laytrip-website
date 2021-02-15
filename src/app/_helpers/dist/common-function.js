@@ -161,6 +161,9 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.goBack = function () {
         this._location.back();
     };
+    CommonFunction.prototype.convertFlotToDecimal = function (floatNumber) {
+        return Math.round(floatNumber);
+    };
     CommonFunction = __decorate([
         core_1.Injectable({
             providedIn: 'root'

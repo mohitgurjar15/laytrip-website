@@ -66,9 +66,10 @@ var SocialLoginComponent = /** @class */ (function () {
         this.auth2.attachClickHandler(element, {}, function (googleUser) {
             _this.socialError.emit('');
             var profile = googleUser.getBasicProfile();
+            var name = profile.getName().split(" ");
             var jsonData = {
                 "account_type": 1,
-                "name": profile.getName(),
+                "name": name[0] ? name[0] : name,
                 "email": profile.getEmail(),
                 "social_account_id": profile.getId(),
                 "device_type": 1,
@@ -144,7 +145,7 @@ var SocialLoginComponent = /** @class */ (function () {
                 }, function (userInfo) {
                     var jsonData = {
                         "account_type": 1,
-                        "name": userInfo.first_name + ' ' + userInfo.last_name,
+                        "name": userInfo.first_name,
                         "email": userInfo.email ? userInfo.email : '',
                         "social_account_id": userInfo.id,
                         "device_type": 1,

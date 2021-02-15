@@ -41,7 +41,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public modalService: NgbModal,
     public router: Router,
     private commonFunction: CommonFunction,
-    private renderer: Renderer2,
     public cd: ChangeDetectorRef,
     private cartService: CartService,
   ) {
@@ -61,9 +60,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartService.getCartItems.subscribe(data => {
 
       if (data.length > 0) {
-        //console.log(data, "getCartItems.subscribe")
-        //this.calculateInstalment(data)
-        //this.getCartList();
         this.updateCartSummary()
       }
     })
@@ -119,7 +115,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.isCovidPage = true;
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
-      // this.cd.detectChanges();
     }
     this.cartService.getCartItems.subscribe((res: any) => {
       try {
@@ -129,8 +124,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
       }
     });
-    // this.userDetails = getLoginUserInfo();
-    // this.totalLaycredit();
   }
 
   ngOnChanges() {
@@ -227,26 +220,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           }
         }
     }
-
-    //console.log(cartPrices,"Before If")
-    /* if(cartPrices && cartPrices.length>0)
-    {
-      console.log(cartPrices,"Before sort")
-      cartPrices.sort(function(a:any,b:any){
-        a = new Date(a.module_Info.departure_date);
-        b = new Date(b.module_Info.departure_date);
-        return a-b;
-      });
-      let item=cartPrices.find((x,i)=>{ return i==0})
-      checkinDate = item && item.module_Info ? moment(item.module_Info.departure_date,"DD/MM/YYYY").format("YYYY-MM-DD"):'2021-10-01';
-      console.log(cartPrices,"After sort",checkinDate)
-
-      for(let cartPrice of cartPrices)
-      {
-        totalPrice +=cartPrice.module_Info.selling_price;
-      }
-    }
-    console.log(totalPrice,"totalPrice") */
 
     this.totalAmount = totalPrice;
     let instalmentRequest = {

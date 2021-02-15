@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var environment_1 = require("../../../../../environments/environment");
+var add_card_component_1 = require("../../../../components/add-card/add-card.component");
 var AccountComponent = /** @class */ (function () {
     function AccountComponent(modalService, userService, toastrService) {
         this.modalService = modalService;
@@ -21,6 +22,7 @@ var AccountComponent = /** @class */ (function () {
         this.closeResult = '';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.isRequireBackupFile = false;
+        this.cardListChangeCount = 0;
     }
     AccountComponent.prototype.ngOnInit = function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
@@ -79,6 +81,15 @@ var AccountComponent = /** @class */ (function () {
             this.isRequireBackupFile = true;
         }
     };
+    AccountComponent.prototype.ngOnDestroy = function () {
+        this.addCardRef.ngOnDestroy();
+    };
+    AccountComponent.prototype.getCardListChange = function (data) {
+        this.cardListChangeCount = data;
+    };
+    __decorate([
+        core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })
+    ], AccountComponent.prototype, "addCardRef");
     AccountComponent = __decorate([
         core_1.Component({
             selector: 'app-account',

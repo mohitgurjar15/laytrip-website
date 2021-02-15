@@ -9,6 +9,7 @@
   border: 1px solid red;
   border-radius: 8px;
 }
+
 .flight_form {
   .autocomplete-container {
     box-shadow: none !important;
@@ -18,6 +19,7 @@
 .disable-div {
   cursor: not-allowed;
   background-color: rgb(235, 235, 228) !important;
+
   & input {
     cursor: not-allowed !important;
   }
@@ -32,6 +34,7 @@
 
 .disable_return_date {
   height: 100%;
+
   p {
     padding: 0 15px;
     margin: 0;
@@ -48,23 +51,28 @@
 a:hover {
   cursor: pointer;
 }
+
 .tab_search_area {
   ::ng-deep .laytrip-cal-view {
     padding: 5px;
     background-color: $bg-crad;
+
     p-header {
       &.calender-header {
         padding: 0 10px;
         margin-bottom: 5px;
+
         p {
           padding: 0;
           margin-bottom: 2px;
         }
+
         .calender_header_wrapper {
           display: flex;
           justify-content: flex-start;
           align-items: center;
           margin-bottom: 5px;
+
           span {
             font-size: 12px;
             margin-right: 15px;
@@ -72,24 +80,31 @@ a:hover {
             position: relative;
             display: flex;
             align-items: center;
+
             &.green_var {
               color: $bg-green;
+
               &::before {
                 background-color: $bg-green;
               }
             }
+
             &.yellow_var {
               color: $text_light_yellow;
+
               &::before {
                 background-color: $text_light_yellow;
               }
             }
+
             &.red_var {
               color: $error-color;
+
               &::before {
                 background-color: $error-color;
               }
             }
+
             &::before {
               content: "";
               height: 15px;
@@ -102,6 +117,7 @@ a:hover {
         }
       }
     }
+
     .p-datepicker-group-container {
       background-color: $background-white;
       border-radius: 15px;
@@ -116,6 +132,7 @@ a:hover {
         flex-flow: column;
       }
     }
+
     input {
       &.p-inputtext {
         &:enabled {
@@ -125,14 +142,17 @@ a:hover {
         }
       }
     }
+
     table {
       margin: 0;
+
       th {
         font-size: 13px !important;
         border-bottom: none !important;
         font-weight: 600 !important;
         text-align: center;
       }
+
       td {
         padding: 0.1rem !important;
 
@@ -153,13 +173,16 @@ a:hover {
           @include mobile-view {
             width: 33px;
           }
+
           &:hover {
             background: none !important;
           }
+
           &.p-highlight {
             background: none !important;
             font-weight: 500;
             overflow: visible;
+
             &::before {
               content: "";
               width: 5px;
@@ -170,6 +193,7 @@ a:hover {
               top: -5px;
             }
           }
+
           &.c_date {
             border-radius: 50% !important;
             width: 1.5rem;
@@ -178,28 +202,35 @@ a:hover {
             align-items: center;
             justify-content: center;
             font-weight: 600;
+
             &.green_date {
               color: $bg-green;
               background-color: $bg-green-light;
+
               &:hover {
                 background-color: $bg-green-light !important;
               }
             }
+
             &.yellow_date {
               color: $text_light_yellow;
               background-color: $bg-yellow-light;
+
               &:hover {
                 background-color: $bg-yellow-light !important;
               }
             }
+
             &.red_date {
               color: $error-color;
               background-color: $bg-red-light;
+
               &:hover {
                 background-color: $bg-red-light !important;
               }
             }
           }
+
           &.calender_price {
             font-size: 10px;
             height: 15px;
@@ -207,19 +238,23 @@ a:hover {
         }
       }
     }
+
     &.round_trip_calender {
       table {
         td {
           span {
             height: 35px;
             width: 35px;
+
             &.p-highlight {
               color: $pink !important;
               background-color: $bg-pink-light !important;
               border-radius: 50% !important;
+
               &:hover {
                 background-color: $bg-pink-light !important;
               }
+
               &::before {
                 content: "";
                 width: 0;
@@ -244,6 +279,7 @@ a:hover {
                 .flight-grid {
                   .grid_box.first {
                     z-index: 2;
+
                     .flight_to {
                       z-index: 0;
                     }
@@ -258,18 +294,7 @@ a:hover {
   }
 }
 
-.home_banner
-  .banner_inner
-  .banner_tab
-  .tab-content
-  .flight_tab
-  .tab-content
-  .tab-pane
-  .flight_search
-  .flight-grid
-  .grid_box.secound
-  .search_area
-  input {
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input {
   //background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
 }
 
@@ -277,22 +302,12 @@ a:hover {
   cursor: no-drop;
 }
 
-.home_banner
-  .banner_inner
-  .banner_tab
-  .tab-content
-  .flight_tab
-  .tab-content
-  .tab-pane
-  .flight_search
-  .flight-grid
-  .grid_box.secound
-  .date_to
-  .search_area {
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .date_to .search_area {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
   height: 100%;
+
   p {
     font-size: 16px;
   }
@@ -303,12 +318,14 @@ a:hover {
   padding: 10px 0;
   width: 100%;
   text-align: center;
+
   p {
     margin: 0;
     font-size: 16px;
     color: #fff;
     font-weight: 600;
     width: 100%;
+
     span {
       font-size: 16px;
       color: #fff;
@@ -316,19 +333,39 @@ a:hover {
     }
   }
 }
+
 .calender-header {
   text-align: center;
   width: 100%;
   display: inline-block;
   padding: 0 20px;
 }
+
 ::ng-deep .calender-price-view {
   //width: 340px;
   min-width: 340px !important;
+
   .ui-state-active {
     background-color: #012178 !important;
+
     .calender_price {
       color: #fff !important;
     }
+  }
+}
+
+.mobile_ul{
+  padding: 0;
+  .mobile_li{
+    display: none !important;
+    @include tab-view{
+      display: inline-block !important;
+    }
+  }
+}
+
+.desk_li{
+  @include tab-view{
+    display: none !important;
   }
 }

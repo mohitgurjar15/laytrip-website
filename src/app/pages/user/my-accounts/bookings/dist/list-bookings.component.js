@@ -24,17 +24,18 @@ var ListBookingsComponent = /** @class */ (function () {
         this.selectedInCompletedTabNumber = 0;
         this.selectedCompletedTabNumber = 0;
         this.cartItemsCount = 0;
+        this.searchTextLength = 0;
     }
     ListBookingsComponent.prototype.ngOnInit = function () {
         this.getIncomplteBooking();
         this.getComplteBooking();
         this.renderer.addClass(document.body, 'cms-bgColor');
     };
-    ListBookingsComponent.prototype.getIncomplteBooking = function (bookingId) {
+    ListBookingsComponent.prototype.getIncomplteBooking = function (search) {
         var _this = this;
-        if (bookingId === void 0) { bookingId = ''; }
+        if (search === void 0) { search = ''; }
         this.upComingloading = true;
-        this.accountService.getIncomplteBooking(bookingId).subscribe(function (res) {
+        this.accountService.getIncomplteBooking(search).subscribe(function (res) {
             _this.upComingbookings = res.data;
             _this.upComingloading = false;
         }, function (err) {
@@ -42,11 +43,11 @@ var ListBookingsComponent = /** @class */ (function () {
             _this.upComingbookings = [];
         });
     };
-    ListBookingsComponent.prototype.getComplteBooking = function (bookingId) {
+    ListBookingsComponent.prototype.getComplteBooking = function (search) {
         var _this = this;
-        if (bookingId === void 0) { bookingId = ''; }
+        if (search === void 0) { search = ''; }
         this.completeLoading = true;
-        this.accountService.getComplteBooking(bookingId).subscribe(function (res) {
+        this.accountService.getComplteBooking(search).subscribe(function (res) {
             _this.completeBookings = res.data;
             _this.completeLoading = false;
         }, function (err) {
@@ -55,6 +56,7 @@ var ListBookingsComponent = /** @class */ (function () {
         });
     };
     ListBookingsComponent.prototype.searchBooking = function (searchKey) {
+        this.searchTextLength = searchKey.length;
         this.getComplteBooking(searchKey);
         this.getIncomplteBooking(searchKey);
     };

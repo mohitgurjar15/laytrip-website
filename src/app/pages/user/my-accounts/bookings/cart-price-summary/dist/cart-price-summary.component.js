@@ -12,14 +12,34 @@ var CartPriceSummaryComponent = /** @class */ (function () {
     function CartPriceSummaryComponent(commonFunction) {
         this.commonFunction = commonFunction;
         this.cartItem = {};
+        this.cartDueLoopNum = 0;
     }
     CartPriceSummaryComponent.prototype.ngOnInit = function () {
     };
     CartPriceSummaryComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
-            // console.log("cartItem=====>",this.cartItem)
+            var loop = 0;
+            this.cartItem.cartInstallments.forEach(function (element) {
+                if (element.instalmentStatus == 0) {
+                    loop += 1;
+                    if (loop == 1) {
+                        element.dueInstallment = 1;
+                    }
+                    else {
+                        element.dueInstallment = 0;
+                    }
+                }
+                else {
+                    element.dueInstallment = 0;
+                }
+            });
         }
+    };
+    CartPriceSummaryComponent.prototype.setLoopNumber = function (loopNumber) {
+        // console.log(loopNumber)
+        this.cartDueLoopNum = loopNumber;
+        return loopNumber;
     };
     __decorate([
         core_1.Input()

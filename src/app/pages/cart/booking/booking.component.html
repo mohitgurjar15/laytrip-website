@@ -15,7 +15,7 @@
                         <div id="accordion-card" class="card_accordion">
                             <div class="card">
                                 <app-card-list cardListChangeCount="{{cardListChangeCount}}"
-                                    (selectCreditCard)="selectCreditCard($event)"></app-card-list>
+                                    (selectCreditCard)="selectCreditCard($event)" cardToken={{cardToken}}></app-card-list>
                                 <div class="new_card">
                                     <div class="card-header">
                                         <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne"

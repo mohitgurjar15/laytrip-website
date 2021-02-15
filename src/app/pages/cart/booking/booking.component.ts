@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -12,6 +12,7 @@ import { CartService } from '../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { AddCardComponent } from '../../../components/add-card/add-card.component';
 
 export interface CartItem {
 
@@ -26,6 +27,7 @@ export interface CartItem {
 })
 export class BookingComponent implements OnInit {
 
+  @ViewChild(AddCardComponent, {static: false}) addCardRef: AddCardComponent;
   s3BucketUrl = environment.s3BucketUrl;
   progressStep = { step1: true, step2: false, step3: false, step4: false };
   userInfo;
@@ -53,7 +55,7 @@ export class BookingComponent implements OnInit {
   cardToken: string = '';
   validationErrorMessage: string = '';
   cardListChangeCount: number = 0;
-
+  $cartIdsubscription;
 
   constructor(
     private router: Router,
@@ -114,14 +116,23 @@ export class BookingComponent implements OnInit {
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
+      this.carts=[];
+      this.cartPrices=[];
     });
 
-    this.cartService.getCartId.subscribe(cartId => {
+    this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
+      console.log("catyddd",cartId)
       if (cartId > 0) {
         this.deleteCart(cartId);
-        this.cartService.setCardId(0);
       }
     })
+
+    try {
+      this.cardToken = this.cookieService.get('__cc');
+    }
+    catch (e) {
+      this.cardToken = '';
+    }
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
@@ -235,9 +246,19 @@ export class BookingComponent implements OnInit {
         adults: []
       }
     });
+
+    if(this.addCardRef){
+      this.addCardRef.ngOnDestroy();
+    }
+    this.cartService.setCartNumber(0);
+    this.cartService.setCardId(0);
+    this.$cartIdsubscription.unsubscribe();
   }
 
   deleteCart(cartId) {
+    if(cartId==0){
+      return;
+    }
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
@@ -250,6 +271,10 @@ export class BookingComponent implements OnInit {
       },2000)
       if (this.carts.length == 0) {
         this.isCartEmpty = true;
+      }
+
+      if(index>0){
+        this.cartService.setCartNumber(index-1);
       }
 
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
@@ -306,12 +331,12 @@ export class BookingComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
-      this.validationErrorMessage='Traveller details is not valid for '
+      this.validationErrorMessage='Traveller details is not valid for'
       let message='';
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+          message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
           this.validationErrorMessage +=message;
         }
       }

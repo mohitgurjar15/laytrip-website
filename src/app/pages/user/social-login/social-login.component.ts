@@ -84,10 +84,10 @@ export class SocialLoginComponent implements OnInit {
       (googleUser) => {
         this.socialError.emit('');
         let profile = googleUser.getBasicProfile();
-        
+        var name = profile.getName().split(" ");
         let jsonData = {
           "account_type": 1,
-          "name": profile.getName(),
+          "name": name[0] ? name[0] : name, 
           "email": profile.getEmail(),
           "social_account_id": profile.getId(),
           "device_type": 1,
@@ -166,7 +166,7 @@ export class SocialLoginComponent implements OnInit {
         }, (userInfo) => {
           let jsonData = {
             "account_type": 1,
-            "name": userInfo.first_name + ' ' + userInfo.last_name,
+            "name": userInfo.first_name,
             "email": userInfo.email ? userInfo.email : '',
             "social_account_id": userInfo.id,
             "device_type": 1,

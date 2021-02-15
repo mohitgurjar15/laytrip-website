@@ -34,7 +34,10 @@ export class TravelerFormComponent implements OnInit {
   myTravelers;
   travelers = {
     type0: {
-      adults: []
+      adults: [],
+      adult:0,
+      child:0,
+      infant:0
     },
     type1: {
       adults: []
@@ -66,7 +69,6 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log("Cart Number",this.cartNumber)
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
 
     this.travelerForm = this.formBuilder.group({
@@ -94,19 +96,21 @@ export class TravelerFormComponent implements OnInit {
       this.travelers = travelers;
     })
 
-    //this.travelers = travelers;
     for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
+      this.travelers[`type${this.cartNumber}`].adult=this.cartItem.module_info.adult_count;
+      
       this.cd.detectChanges();
-      //this.cartService.setCartTravelers(this.travelers)
     }
     for (let i = 0; i < this.cartItem.module_info.child_count; i++) {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
+      this.travelers[`type${this.cartNumber}`].child=this.cartItem.module_info.child_count;
+      
       this.cd.detectChanges();
-      //this.cartService.setCartTravelers(this.travelers)
     }
     for (let i = 0; i < this.cartItem.module_info.infant_count; i++) {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
+      this.travelers[`type${this.cartNumber}`].infant=this.cartItem.module_info.infant_count;
       this.cd.detectChanges();
     }
 
@@ -139,7 +143,19 @@ export class TravelerFormComponent implements OnInit {
           let userId = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId;
           if (userId) {
             //Edit
-            this.travelerService.updateAdult(data, userId).subscribe(traveler => {
+            this.travelerService.updateAdult(data, userId).subscribe((traveler:any) => {
+              /* let index = this.myTravelers.findIndex(x=>x.userId=traveler.userId)
+              this.myTravelers[index]=traveler;
+              for(let i=0; i <5; i++){
+                for(let j=0; j< this.travelers[`type${i}`].adults.length; j++){
+                  
+                  index = this.travelers[`type${i}`].adults[j].findIndex(x=>x.userId=traveler.userId);
+                  if(index>-1){
+                    this.travelers[`type${i}`].adults[j]=traveler;
+                  }
+                }
+              }
+              this.patch(); */
             })
           }
           else {

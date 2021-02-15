@@ -39,13 +39,13 @@
                         </div>
                     </div>
                     <div class="form-row mt-3 mb-sm-10">
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-4" *ngIf="isPassportRequired"> 
                             <label for="">Passport number</label>
                             <input type="text" class="form-control"  placeholder="{{traveler.userData.passportNumber}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label for="">Nationality*</label>
-                            <input type="text" class="form-control"   placeholder="{{traveler.userData.country.name}}" disabled>
+                            <input type="text" class="form-control"   placeholder="{{traveler.userData.country ? traveler.userData.country.name : ''}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -63,12 +63,12 @@
                                     <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage"
                                         role="tab" aria-controls="baggage" aria-selected="true">Baggage Included</a>
                                 </li>
-                                <li class="nav-item disabled" role="presentation">
+                                <li class="nav-item disabled_addon" role="presentation">
                                     <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding"
                                         role="tab" aria-controls="boarding" aria-selected="false">Priority
                                         Boarding</a>
                                 </li>
-                                <li class="nav-item disabled" role="presentation">
+                                <li class="nav-item disabled_addon" role="presentation">
                                     <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance"
                                         role="tab" aria-controls="insurance" aria-selected="false">Insurance</a>
                                 </li>
