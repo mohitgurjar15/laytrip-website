@@ -36,6 +36,10 @@ var GenericService = /** @class */ (function () {
         return this.http.get(environment_1.environment.apiUrl + "v1/payment", this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
     };
+    GenericService.prototype.deleteCard = function (id) {
+        return this.http["delete"](environment_1.environment.apiUrl + "v1/payment/" + id, this.commonFunction.setHeaders())
+            .pipe(operators_1.catchError(this.handleError));
+    };
     GenericService.prototype.getInstalemnts = function (data) {
         return this.http.post(environment_1.environment.apiUrl + "v1/instalment/calculate-instalment", data)
             .pipe(operators_1.catchError(this.handleError));
@@ -43,6 +47,9 @@ var GenericService = /** @class */ (function () {
     GenericService.prototype.getInstalemntsAvailability = function (data) {
         return this.http.post(environment_1.environment.apiUrl + "v1/instalment/instalment-availability", data)
             .pipe(operators_1.catchError(this.handleError));
+    };
+    GenericService.prototype.emptyCart = function () {
+        return this.http["delete"](environment_1.environment.apiUrl + "v1/cart/empty-cart", this.commonFunction.setHeaders()).pipe(operators_1.catchError(this.handleError));
     };
     GenericService.prototype.handleError = function (error) {
         var errorMessage = {};
