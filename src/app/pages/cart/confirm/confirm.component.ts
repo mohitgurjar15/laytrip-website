@@ -12,34 +12,44 @@ declare var $: any;
 })
 export class ConfirmComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  bookingId:string='';
+  bookingId: string = '';
   cartDetails;
-  loading:boolean=false;
+  loading: boolean = false;
+  isFeedbackPage = false;
   constructor(
     private renderer: Renderer2,
-    private route:ActivatedRoute,
-    private cartService:CartService,
-    public commonFunction:CommonFunction
+    private route: ActivatedRoute,
+    private cartService: CartService,
+    public commonFunction: CommonFunction
   ) {
     this.bookingId = this.route.snapshot.paramMap.get('id');
-   }
+  }
 
   ngOnInit(): void {
     this.renderer.addClass(document.body, 'cms-bgColor');
-    this.getBookingDetails(this.bookingId)
+    this.getBookingDetails(this.bookingId);
+    setTimeout(() => {
+      this.isFeedbackPage = true;
+    }, 2000);
   }
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'cms-bgColor');
   }
 
-  getBookingDetails(bookingId){
+  getBookingDetails(bookingId) {
 
-    this.loading=true;
-    this.cartService.getBookingDetails(bookingId).subscribe((res:any)=>{
-      this.loading=false;
-      this.cartDetails=res;
-    },error=>{
-      this.loading=false;
+    this.loading = true;
+    this.cartService.getBookingDetails(bookingId).subscribe((res: any) => {
+      this.loading = false;
+      this.cartDetails = res;
+    }, error => {
+      this.loading = false;
     })
+  }
+
+  feedbackValueChange(event) {
+    if (event) {
+      this.isFeedbackPage = event.isModalOpen;
+    }
   }
 }

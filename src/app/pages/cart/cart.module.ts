@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CartRoutingModule } from './cart-routing.module';
@@ -31,6 +31,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
     CookieModule.forRoot(),
     CalendarModule,
     HomeModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CartModule { }

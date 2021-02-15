@@ -9,37 +9,44 @@
         <div class="block_feedback_add">
           <ul>
             <li>
-              <a class="anchor-tag"  [ngClass]="{'active': _rating === 'Terrible'}"  (click)="selectRating($event,'Terrible')" >
+              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Terrible'}"
+                (click)="selectRating($event,'Terrible')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/1.svg" alt="Feedback Image">
-                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/1-pink.svg" alt="Feedback Image">
+                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/1-pink.svg"
+                  alt="Feedback Image">
                 <span>Poor</span>
               </a>
             </li>
             <li>
-              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Bad'}"   (click)="selectRating($event,'Bad')">
+              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Bad'}" (click)="selectRating($event,'Bad')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/2.svg" alt="Feedback Image">
-                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/2-pink.svg" alt="Feedback Image">
+                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/2-pink.svg"
+                  alt="Feedback Image">
                 <span>Not Good</span>
               </a>
             </li>
             <li>
-              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Okay'}"   (click)="selectRating($event,'Okay')">
+              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Okay'}" (click)="selectRating($event,'Okay')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/3.svg" alt="Feedback Image">
-                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/3-pink.svg" alt="Feedback Image">
+                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/3-pink.svg"
+                  alt="Feedback Image">
                 <span>Good</span>
               </a>
             </li>
             <li>
-              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Good'}"   (click)="selectRating($event,'Good')">
+              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Good'}" (click)="selectRating($event,'Good')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/4.svg" alt="Feedback Image">
-                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/4-pink.svg" alt="Feedback Image">
+                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/4-pink.svg"
+                  alt="Feedback Image">
                 <span>Very Good</span>
               </a>
             </li>
             <li>
-              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Excllent'}"   (click)="selectRating($event,'Excllent')">
+              <a class="anchor-tag" [ngClass]="{'active': _rating === 'Excllent'}"
+                (click)="selectRating($event,'Excllent')">
                 <img class="normal" src="{{s3BucketUrl}}assets/images/feedback/5.svg" alt="Feedback Image">
-                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/5-pink.svg" alt="Feedback Image">
+                <img class="on_hover" src="{{s3BucketUrl}}assets/images/feedback/selected/5-pink.svg"
+                  alt="Feedback Image">
                 <span>Excellent</span>
               </a>
             </li>
@@ -54,7 +61,7 @@
               </div>
             </div>
             <div class="feedback_btn">
-              <button type="submit"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>Submit </button>
+              <button type="submit"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>&nbsp;Submit </button>
             </div>
             <div class="footer_logo">
               <a href="javascript:void(0);">

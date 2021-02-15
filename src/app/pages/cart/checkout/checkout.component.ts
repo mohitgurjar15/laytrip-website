@@ -343,7 +343,8 @@ export class CheckoutComponent implements OnInit {
         this.priceSummary.instalments=res;
         this.priceSummary.remainingAmount=totalPrice - res.instalment_date[0].instalment_amount;
         this.priceSummary.totalAmount=totalPrice;
-        console.log("this.priceSummary=>>>",this.priceSummary)
+        console.log("this.priceSummary=>>>",this.priceSummary);
+        this.cd.detectChanges();
       }
       
     },(err)=>{
