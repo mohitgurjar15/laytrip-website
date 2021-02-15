@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
+import { getLoginUserInfo } from './jwt.helper';
 
 @Injectable({
     providedIn: 'root',
@@ -187,9 +188,17 @@ export class CommonFunction {
     } 
 
     getGuestUser(){
-        let guestuserId = this.cookieService.get('__gst')
-        if(guestuserId){
-            return guestuserId
+        
+        let userDetails = getLoginUserInfo();
+        if(!userDetails.roleId || userDetails.roleId==7){
+
+            let guestuserId = this.cookieService.get('__gst')
+            if(guestuserId){
+                return guestuserId
+            }
+            else{
+                return '';
+            }
         }
         else{
             return '';

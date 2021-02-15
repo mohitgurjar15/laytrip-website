@@ -75,10 +75,11 @@ export class BookingComponent implements OnInit {
   ngOnInit() {
     window.scroll(0, 0);
     this.userInfo = getLoginUserInfo();
-    if (this.userInfo && Object.keys(this.userInfo).length > 0) {
+    if (this.userInfo && this.userInfo.roleId!=7) {
       this.getTravelers();
     }
     else{
+      this.getTravelers();
       this.guestUserId=this.commonFunction.getGuestUser();
     }
 

@@ -221,5 +221,10 @@ export class UserService {
   emailVeryfiy(email){
     return this.http.get(`${this.apiURL}v1/auth/verify-email-id?email=${email}`, this.commonFunction.setHeaders())
   }
+
+  registerGuestUser(data){
+    
+    return this.http.post(`${this.apiURL}v1/auth/guest-user`,data)
+  }
 }
 
