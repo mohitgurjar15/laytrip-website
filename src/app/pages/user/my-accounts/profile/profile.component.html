@@ -78,7 +78,7 @@
                         [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true"
                         formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"
-                        loadingText=""  class="laytrip-input"
+                        loadingText=""  class="laytrip-input" 
                         placeholder="Select home airport " [readonly]="!isFormControlEnable">
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div [ngClass]="(item.parentId==0)?'parent':'child'">
