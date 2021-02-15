@@ -121,6 +121,12 @@
                 font-size: 18px;
             }
         }
+        .no_data_found{
+            font-size: 12px;
+            margin: 15px 0 35px;
+            padding: 0;
+            color: $grayed_border;
+        }
 
         .accordion_up_wrapper {
             margin-bottom: 15px;
@@ -285,7 +291,7 @@
                                             margin: 0 10px;
 
                                             .progress {
-                                                height: 10px;
+                                                height: 5px;
                                                 border-radius: 25px;
 
                                                 .progress-bar {
