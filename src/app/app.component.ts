@@ -4,6 +4,8 @@ import { GenericService } from './services/generic.service';
 import * as moment from 'moment';
 import { SwPush } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { v4 as uuidv4 } from 'uuid';
+import { getLoginUserInfo } from './_helpers/jwt.helper';
 
 @Component({
   selector: 'app-root',
@@ -23,10 +25,12 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    var token = localStorage.getItem('_lay_sess');
+    let token = localStorage.getItem('_lay_sess');
     if(token){
       this.subscribeToNotifications()
     }
+
+    this.registerGuestUser()
   }
 
 
@@ -91,6 +95,17 @@ export class AppComponent {
 
       if(window.location.origin=='https://staging.laytrip.com' || window.location.origin=='http://staging.laytrip.com' || window.location.origin=='http://localhost:4200' ){
         //window.location.href='https://www.google.com/'
+      }
+    }
+  }
+
+  registerGuestUser(){
+
+    let user = getLoginUserInfo()
+    if(Object.keys(user).length==0){
+      let __gst= this.cookieService.get('__gst');
+      if(!__gst){
+        this.cookieService.put('__gst',uuidv4())
       }
     }
   }

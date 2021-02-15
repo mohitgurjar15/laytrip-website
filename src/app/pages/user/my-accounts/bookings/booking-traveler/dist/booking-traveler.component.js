@@ -12,6 +12,7 @@ var BookingTravelerComponent = /** @class */ (function () {
     function BookingTravelerComponent(commonFunction) {
         this.commonFunction = commonFunction;
         this.travelers = {};
+        this.isPassportRequired = false;
         this.baggageDescription = '';
         this.moduleInfo = {};
     }
@@ -67,6 +68,9 @@ var BookingTravelerComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], BookingTravelerComponent.prototype, "travelers");
+    __decorate([
+        core_1.Input()
+    ], BookingTravelerComponent.prototype, "isPassportRequired");
     BookingTravelerComponent = __decorate([
         core_1.Component({
             selector: 'app-booking-traveler',

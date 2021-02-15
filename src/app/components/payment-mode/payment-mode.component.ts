@@ -177,7 +177,7 @@ export class PaymentModeComponent implements OnInit {
   }
 
   getTotalPrice(){
-    //this.sellingPrice=this.priceData[0].selling_price;
+    
     let totalPrice=0;
     if(this.cartPrices.length>0){
         let checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");

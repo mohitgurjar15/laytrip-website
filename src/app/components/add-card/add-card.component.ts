@@ -281,4 +281,8 @@ export class AddCardComponent implements OnInit {
     })
     );
   }
+
+  ngOnDestroy() {
+    Spreedly.removeHandlers();
+  }
 }

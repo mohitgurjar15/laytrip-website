@@ -2,10 +2,8 @@ import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FlightService } from '../../../../services/flight.service';
 import { AccountService } from '../../../../services/account.service';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from '../../../../services/cart.service';
 
 @Component({
   selector: 'app-list-bookings',
@@ -21,6 +19,7 @@ export class ListBookingsComponent implements OnInit {
   selectedInCompletedTabNumber: number = 0;
   selectedCompletedTabNumber: number = 0;
   cartItemsCount: number = 0;
+  searchTextLength=0;
 
   constructor(
     private userService: UserService,
@@ -38,20 +37,21 @@ export class ListBookingsComponent implements OnInit {
 
   }
 
-  getIncomplteBooking(bookingId = ''){
+  getIncomplteBooking(search = ''){
     this.upComingloading=true;
-    this.accountService.getIncomplteBooking(bookingId).subscribe((res: any) => {
+    this.accountService.getIncomplteBooking(search).subscribe((res: any) => {
       this.upComingbookings=res.data;
       this.upComingloading=false;
    }, err => {
+     
     this.upComingloading=false;
     this.upComingbookings=[];
    }); 
   }
 
-  getComplteBooking(bookingId = ''){
+  getComplteBooking(search = ''){
     this.completeLoading=true;
-    this.accountService.getComplteBooking(bookingId).subscribe((res: any) => {
+    this.accountService.getComplteBooking(search).subscribe((res: any) => {
       this.completeBookings=res.data;
       this.completeLoading=false;
    }, err => {
@@ -61,6 +61,7 @@ export class ListBookingsComponent implements OnInit {
   }
 
   searchBooking(searchKey:any){
+    this.searchTextLength = searchKey.length;
     this.getComplteBooking(searchKey);
     this.getIncomplteBooking(searchKey);
   }

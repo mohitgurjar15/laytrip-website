@@ -9,6 +9,7 @@ import { CommonFunction } from '../../../../../_helpers/common-function';
 export class BookingTravelerComponent implements OnInit {
 
   @Input() travelers={};
+  @Input() isPassportRequired=false;
   baggageDescription: string = '';
   moduleInfo={};
 

@@ -14,11 +14,12 @@ export class ConfirmComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   bookingId:string='';
   cartDetails;
+  loading:boolean=false;
   constructor(
     private renderer: Renderer2,
     private route:ActivatedRoute,
     private cartService:CartService,
-    private commonFunction:CommonFunction
+    public commonFunction:CommonFunction
   ) {
     this.bookingId = this.route.snapshot.paramMap.get('id');
    }
@@ -33,10 +34,12 @@ export class ConfirmComponent implements OnInit {
 
   getBookingDetails(bookingId){
 
+    this.loading=true;
     this.cartService.getBookingDetails(bookingId).subscribe((res:any)=>{
+      this.loading=false;
       this.cartDetails=res;
     },error=>{
-
+      this.loading=false;
     })
   }
 }

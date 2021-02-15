@@ -181,5 +181,9 @@ export class CommonFunction {
     goBack(){
         this._location.back();
     }
+    
+    convertFlotToDecimal(floatNumber){
+        return Math.round(floatNumber);
+    } 
 }
 
