@@ -9,10 +9,10 @@ import { GenericService } from '../../../services/generic.service';
 import { TravelerService } from '../../../services/traveler.service';
 import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
-import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 export interface CartItem {
 
@@ -56,6 +56,7 @@ export class BookingComponent implements OnInit {
   validationErrorMessage: string = '';
   cardListChangeCount: number = 0;
   $cartIdsubscription;
+  guestUserId:string='';
 
   constructor(
     private router: Router,
@@ -64,7 +65,7 @@ export class BookingComponent implements OnInit {
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
     private cartService: CartService,
-    private toster: ToastrService,
+    private commonFunction: CommonFunction,
     private cookieService: CookieService
   ) {
     //this.totalLaycredit();
@@ -77,9 +78,12 @@ export class BookingComponent implements OnInit {
     if (this.userInfo && Object.keys(this.userInfo).length > 0) {
       this.getTravelers();
     }
+    else{
+      this.guestUserId=this.commonFunction.getGuestUser();
+    }
 
     this.cartLoading = true;
-    this.cartService.getCartList('yes').subscribe((items: any) => {
+    this.cartService.getCartList('yes',this.guestUserId).subscribe((items: any) => {
       this.cartLoading = false;
       let notAvilableItems = [];
       let cart: any;

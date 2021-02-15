@@ -55,12 +55,12 @@ export class CartService {
     this.cartItems.next(cartItem);
   }
 
-  getCartList(live_availiblity='no') {
+  getCartList(live_availiblity='no',guestUserId='') {
     let headers = {
       currency: 'USD',
       language: 'en'
     }
-    return this.http.get(`${environment.apiUrl}v1/cart/list?live_availiblity=${live_availiblity}`, this.commonFunction.setHeaders(headers))
+    return this.http.get(`${environment.apiUrl}v1/cart/list?live_availiblity=${live_availiblity}&guest_id=${guestUserId}`, this.commonFunction.setHeaders(headers))
       .pipe(
         catchError(this.handleError)
       );

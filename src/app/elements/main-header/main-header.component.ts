@@ -34,6 +34,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   totalAmount: number;
   fullPageLoading = false;
   modalRef;
+  guestUserId:string='';
 
   constructor(
     private genericService: GenericService,
@@ -51,11 +52,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.loadJquery();
     //this.getUserLocationInfo();
     if (this.isLoggedIn) {
-      if (this.userDetails.roleId != 7) {
         this.totalLaycredit();
-        this.getCartList();
-      }
     }
+    this.getCartList();
 
     this.cartService.getCartItems.subscribe(data => {
 
@@ -67,46 +66,57 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getCartList() {
-    if (this.isLoggedIn) {
-      // GET CART LIST FROM GENERIC SERVICE
-      this.cartService.getCartList().subscribe((res: any) => {
-        if (res) {
-          // SET CART ITEMS IN CART SERVICE
-          let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
-          this.cartService.setCartItems(cartItems);
-          if (cartItems) {
-            this.cartItemsCount = res.count;
-            localStorage.setItem('$crt', this.cartItemsCount);
-          }
-          this.calculateInstalment(cartItems);
-          // this.cd.detectChanges();
-        }
-      }, (error) => {
-        if (error && error.status === 404) {
-          this.cartItems = [];
-          this.cartItemsCount = 0;
+
+    if(!this.isLoggedIn){
+      this.guestUserId = this.commonFunction.getGuestUser();
+    }
+    let live_availiblity='no';
+    let url = window.location.href;
+    if(url.includes('cart/booking')){
+      live_availiblity='yes';
+    }
+    this.cartService.getCartList(live_availiblity,this.guestUserId).subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+        this.cartService.setCartItems(cartItems);
+        if (cartItems) {
+          this.cartItemsCount = res.count;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
-      });
-    }
+        this.calculateInstalment(cartItems);
+        // this.cd.detectChanges();
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+        this.cartItems = [];
+        this.cartItemsCount = 0;
+        localStorage.setItem('$crt', this.cartItemsCount);
+      }
+    });
   }
 
   updateCartSummary(){
-    if (this.isLoggedIn) {
-      // GET CART LIST FROM GENERIC SERVICE
-      this.cartService.getCartList().subscribe((res: any) => {
-        if (res) {
-          // SET CART ITEMS IN CART SERVICE
-          let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
-          this.calculateInstalment(cartItems);
-          this.cd.detectChanges();
-        }
-      }, (error) => {
-        if (error && error.status === 404) {
-          
-        }
-      });
+    if(!this.isLoggedIn){
+      this.guestUserId = this.commonFunction.getGuestUser();
     }
+    let live_availiblity='no';
+    let url = window.location.href;
+    if(url.includes('cart/booking')){
+      live_availiblity='yes';
+    }
+    this.cartService.getCartList(live_availiblity,this.guestUserId).subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+        this.calculateInstalment(cartItems);
+        this.cd.detectChanges();
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+        
+      }
+    });
   }
 
   ngDoCheck() {
@@ -206,6 +216,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   calculateInstalment(cartPrices) {
     let totalPrice = 0;
     let checkinDate;
+    console.error("In calucl")
     //console.log('cartprices:::::', cartPrices);
     if (cartPrices && cartPrices.length > 0) {
       
