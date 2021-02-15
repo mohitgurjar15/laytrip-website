@@ -73,7 +73,7 @@
                       <div class="header_upper_wrper">
                         <div class="header_name">
                           {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}…
+                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
                         </div>
                         <div class="book_id">
                           Booking ID {{ booking.laytripCartId}}
@@ -210,7 +210,7 @@
                       <div class="header_upper_wrper">
                         <div class="header_name">
                           {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}…
+                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
                         </div>
                         <div class="book_id">
                           Booking ID {{booking.laytripCartId}}
