@@ -4,11 +4,14 @@
       <div class="search_wrapper" *ngIf="searchTextLength > 0 || (completeBookings.length  || upComingbookings.length )">
         <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)" />
       </div>
-      <app-flight-not-found *ngIf="(!upComingloading && !completeLoading) && (!completeBookings.length  && !upComingbookings.length )">
-      </app-flight-not-found>
-        <h3 *ngIf="upComingbookings.length || upComingloading">
+<!--       <app-flight-not-found *ngIf="(!upComingloading && !completeLoading) && (!completeBookings.length  && !upComingbookings.length )">
+      </app-flight-not-found> -->
+        <h3 >
           Upcoming
         </h3>
+        <!-- no booking condition -->
+        <p *ngIf="!upComingbookings.length && !upComingloading" class="no_data_found">No Upcoming Bookings</p>
+        <!-- no booking condition -->
         <!-- loader starts -->
         <div class="loader_wrapper" *ngIf="upComingloading">
           <div class="loader_card">
@@ -145,7 +148,10 @@
             </div>
           </div>
         </div>
-        <h3 *ngIf="completeBookings.length || completeLoading">Completed</h3>
+        <h3>Completed</h3>
+        <!-- no booking condition -->
+        <p   *ngIf="!completeBookings.length && !completeLoading" class="no_data_found">No Completed Bookings</p>
+        <!-- no booking condition -->
          <!-- loader starts -->
          <div class="loader_wrapper" *ngIf="completeLoading">
           <div class="loader_card">

@@ -84,7 +84,7 @@
                 <label for="">Nationality*</label>
                 <ng-select  tabindex="27" class="ng-customClass" [items]="countries"
                     bindLabel="name"  [selectOnTab]="true"
-                    formControlName="country_id" selectOnTab="true"
+                    formControlName="country_id" selectOnTab="true" [clearable]="false"
                    
                     >
                     <ng-template ng-label-tmp let-item="item" let-clear="clear">

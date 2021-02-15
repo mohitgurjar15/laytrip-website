@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-booking-traveler',
@@ -72,6 +73,19 @@ export class BookingTravelerComponent implements OnInit {
       return 'Female';
     else 
       return 'Other';
+  }
 
+  checkIsChild(dob){
+    // console.log(dob);
+    var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+    var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+    var travellerDob = moment(dob).format('YYYY-MM-DD');
+    if(travellerDob  <  adult12YrPastDate){ 
+      return true;
+    } else if(travellerDob < child2YrPastDate) {
+      return false;      
+    } else {
+      return false;
+    }
   }
 }

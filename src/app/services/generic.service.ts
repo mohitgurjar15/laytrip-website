@@ -54,6 +54,13 @@ export class GenericService {
       );
   }
 
+  deleteCard(id) {
+    return this.http.delete(`${environment.apiUrl}v1/payment/`+id, this.commonFunction.setHeaders())
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getInstalemnts(data) {
     return this.http.post(`${environment.apiUrl}v1/instalment/calculate-instalment`, data)
       .pipe(
