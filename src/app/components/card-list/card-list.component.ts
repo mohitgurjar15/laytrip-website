@@ -27,6 +27,7 @@ export class CardListComponent implements OnInit {
   @Input() cardToken: string = '';
   @Input() cardListChangeCount:number=0;
   userInfo;
+  cardId;
   closeResult;
 
   cardObject = {
@@ -66,7 +67,8 @@ export class CardListComponent implements OnInit {
       this.cardLoader = false;
       this.cards = res;
       this.totalNumberOfcard.emit(res.length)
-    }, (error) => {
+    }, (error) => { 
+      this.cards=[];
       this.cardLoader = false;
       this.totalNumberOfcard.emit(0);
     });
@@ -97,6 +99,8 @@ export class CardListComponent implements OnInit {
   }
   
   openDeleteModal(content,id) {
+    this.cardId = id;
+    console.log(id)
     this.modalService.open(content, {windowClass:'delete_account_window', centered: true, backdrop: 'static',
     keyboard: false}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -116,15 +120,16 @@ export class CardListComponent implements OnInit {
     }
   }
 
-  deleteCreditCard(id){
-    this.genericService.deleteCard(id).subscribe((res: any) => {
+  deleteCreditCard(){
+    this.cardLoader = true;
+    console.log(this.cardLoader)
+    /* this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
       this.cardLoader = false;
       this.getCardlist();
       this.modalService.dismissAll();
-      this.totalNumberOfcard.emit(res.length);
     }, (error) => {
       this.cardLoader = false;
-    });
+    }); */
   }
   
 

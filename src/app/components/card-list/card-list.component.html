@@ -14,7 +14,7 @@
     </div>
   </div> -->
 
-<div id="card-list">
+<div id="card-list" *ngIf="cards.length">
     <div id="card_list_accodrio" class="accordion_cardss anchor-tag" *ngFor="let card of cards; let blockIndex = index;"
         (click)="selectCard(card.cardToken)">
         <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': cardToken === card.cardToken}">

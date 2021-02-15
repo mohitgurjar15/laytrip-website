@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.BookingTravelerComponent = void 0;
 var core_1 = require("@angular/core");
+var moment = require("moment");
 var BookingTravelerComponent = /** @class */ (function () {
     function BookingTravelerComponent(commonFunction) {
         this.commonFunction = commonFunction;
@@ -64,6 +65,21 @@ var BookingTravelerComponent = /** @class */ (function () {
             return 'Female';
         else
             return 'Other';
+    };
+    BookingTravelerComponent.prototype.checkIsChild = function (dob) {
+        // console.log(dob);
+        var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+        var travellerDob = moment(dob).format('YYYY-MM-DD');
+        if (travellerDob < adult12YrPastDate) {
+            return true;
+        }
+        else if (travellerDob < child2YrPastDate) {
+            return false;
+        }
+        else {
+            return false;
+        }
     };
     __decorate([
         core_1.Input()

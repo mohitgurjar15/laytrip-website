@@ -57,6 +57,7 @@ var CardListComponent = /** @class */ (function () {
             _this.cards = res;
             _this.totalNumberOfcard.emit(res.length);
         }, function (error) {
+            _this.cards = [];
             _this.cardLoader = false;
             _this.totalNumberOfcard.emit(0);
         });
@@ -83,6 +84,8 @@ var CardListComponent = /** @class */ (function () {
     };
     CardListComponent.prototype.openDeleteModal = function (content, id) {
         var _this = this;
+        this.cardId = id;
+        console.log(id);
         this.modalService.open(content, { windowClass: 'delete_account_window', centered: true, backdrop: 'static',
             keyboard: false }).result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
@@ -101,16 +104,16 @@ var CardListComponent = /** @class */ (function () {
             return "with: " + reason;
         }
     };
-    CardListComponent.prototype.deleteCreditCard = function (id) {
-        var _this = this;
-        this.genericService.deleteCard(id).subscribe(function (res) {
-            _this.cardLoader = false;
-            _this.getCardlist();
-            _this.modalService.dismissAll();
-            _this.totalNumberOfcard.emit(res.length);
-        }, function (error) {
-            _this.cardLoader = false;
-        });
+    CardListComponent.prototype.deleteCreditCard = function () {
+        this.cardLoader = true;
+        console.log(this.cardLoader);
+        /* this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
+          this.cardLoader = false;
+          this.getCardlist();
+          this.modalService.dismissAll();
+        }, (error) => {
+          this.cardLoader = false;
+        }); */
     };
     __decorate([
         core_1.Output()
