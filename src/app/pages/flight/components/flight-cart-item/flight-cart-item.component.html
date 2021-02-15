@@ -5,8 +5,8 @@
 <div class="card accordion_detailed_wrps wo_return">
   <div class="card-body">
     <div *ngFor="let stop of cartItem.module_info?.routes[0]?.stops">
-      <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
-        <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
+      <div class="change_plane_wrapper" *ngIf="stop.is_layover">
+        <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
         Change Planes in {{stop?.layover_airport_name}}
       </div>
       <div class="cols_wrps">
@@ -58,8 +58,8 @@
 <div class="card accordion_detailed_wrps wo_return" *ngIf="cartItem.module_info?.routes?.length === 2">
   <div class="card-body">
     <div *ngFor="let stop of cartItem.module_info?.routes[1]?.stops">
-      <div class="change_plane_wrapper disabled" *ngIf="stop.is_layover">
-        <img src="{{s3BucketUrl}}assets/images/icon/yellow_double_flight.svg" alt="" class="Pink filled Flight" />
+      <div class="change_plane_wrapper" *ngIf="stop.is_layover">
+        <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
         Change Planes in {{stop?.layover_airport_name}}
       </div>
       <div class="cols_wrps">
