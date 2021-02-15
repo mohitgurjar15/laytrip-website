@@ -135,9 +135,9 @@
                 // border-bottom: 1px dashed $text_light_yellow;
                 // color: $text_light_yellow;
                 // filter: grayscale(90%);
-                border-top: 1px dashed #bababa;
-                border-bottom: 1px dashed #bababa;
-                color: #bababa;
+                border-top: 1px dashed $grayed_border;
+                border-bottom: 1px dashed $grayed_border;
+                color: $grayed_border;
                 padding: 10px 0;
                 margin: 40px 0;
 

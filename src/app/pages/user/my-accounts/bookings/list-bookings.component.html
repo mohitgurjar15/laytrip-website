@@ -9,6 +9,9 @@
         <h3 *ngIf="upComingbookings.length || upComingloading">
           Upcoming
         </h3>
+        <!-- no booking condition -->
+        <p class="no_data_found">No Upcoming Bookings</p>
+        <!-- no booking condition -->
         <!-- loader starts -->
         <div class="loader_wrapper" *ngIf="upComingloading">
           <div class="loader_card">
@@ -146,6 +149,9 @@
           </div>
         </div>
         <h3 *ngIf="completeBookings.length || completeLoading">Completed</h3>
+        <!-- no booking condition -->
+        <p class="no_data_found">No Upcoming Bookings</p>
+        <!-- no booking condition -->
          <!-- loader starts -->
          <div class="loader_wrapper" *ngIf="completeLoading">
           <div class="loader_card">
