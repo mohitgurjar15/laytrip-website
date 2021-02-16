@@ -102,15 +102,15 @@ export class CardListComponent implements OnInit {
   }
 
   deleteCreditCard(){
+
     this.cardLoader = true;
-    console.log(this.cardLoader)
-    /* this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
+     this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
       this.cardLoader = false;
       this.getCardlist();
       this.modalService.dismissAll();
     }, (error) => {
       this.cardLoader = false;
-    }); */
+    }); 
   }
   
 
