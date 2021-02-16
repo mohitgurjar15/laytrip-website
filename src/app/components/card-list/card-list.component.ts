@@ -35,15 +35,14 @@ export class CardListComponent implements OnInit {
   cardType = cardType;
 
   ngOnInit() {
-
     this.getCardlist();
-
     this.userService.getProfile().subscribe(res => {
       this.userInfo = res;
     })
   }
 
   getCardlist() {
+    this.cardLoader = true;
 
     this.genericService.getCardlist().subscribe((res: any) => {
       this.cardLoader = false;

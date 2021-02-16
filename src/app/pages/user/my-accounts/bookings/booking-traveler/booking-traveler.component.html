@@ -10,41 +10,41 @@
                 <div class="common_form">
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">First Name*</label>
+                            <label for="">{{'first_name' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.userData.firstName}}" disabled>                           
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Last Name*</label>
+                            <label for="">{{'last_name' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.userData.lastName}}" disabled>
                         </div>
 
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Gender*</label>
+                            <label for="">{{'gender' |translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{getGender(traveler.userData.gender)}}" disabled>
 
                         </div>
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.userData.dob)" >
-                            <label for="">Email*</label>
+                            <label for="">{{'email_small' | translate}}*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.userData.email}}" disabled>
                         </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Telephone*</label>
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.userData.dob)" >
+                            <label for="">{{'phone_no' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.userData.phoneNo}}" disabled>
                         </div>
                         <div class="col dobs col-md-4 mb-sm-10">
-                            <label for="">Date of birth*</label>
+                            <label for="">{{'dob' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{commonFunction.convertDateFormat(traveler.userData.dob,'YYYY-MM-DD')}}" disabled>
                         </div>
                     </div>
                     <div class="form-row mt-3 mb-sm-10">
                         <div class="col-sm-12 col-md-4" *ngIf="isPassportRequired && checkIsChild(traveler.userData.dob) "> 
-                            <label for="">Passport number</label>
+                            <label for="">{{'passport_number' |translate}}</label>
                             <input type="text" class="form-control"  placeholder="{{traveler.userData.passportNumber}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4">
-                            <label for="">Nationality*</label>
+                            <label for="">{{'nationality' |translate}}*</label>
                             <input type="text" class="form-control"   placeholder="{{traveler.userData.country ? traveler.userData.country.name : ''}}" disabled>
                         </div>
                     </div>
