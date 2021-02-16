@@ -60,12 +60,29 @@ export class ListBookingsComponent implements OnInit {
    }); 
   }
 
-  searchBooking(searchKey:any){
-    this.searchTextLength = searchKey.length;
-    this.getComplteBooking(searchKey);
-    this.getIncomplteBooking(searchKey);
-  }
+  searchBooking(searchValue:any){
+    this.searchTextLength = searchValue.length;
+    // var upComingbookingsData = this.upComingbookings;
+    // console.log(upComingbookingsData)
 
+    // if(this.searchTextLength > 0 ){
+    //   this.upComingbookings = this.upComingbookings.filter(element => {
+    //     if(element.laytripCartId.includes(searchValue)){
+    //       return element;
+    //     }
+    //   });
+
+    // } else {
+    //   console.log('her')
+    //   this.upComingbookings = upComingbookingsData;
+    // }
+    // console.log(this.upComingbookings,upComingbookingsData)
+
+
+    this.getComplteBooking(searchValue);
+    this.getIncomplteBooking(searchValue);
+  }
+  
   selectInCompletedTab(cartNumber) {
     this.selectedInCompletedTabNumber = cartNumber;
   }
