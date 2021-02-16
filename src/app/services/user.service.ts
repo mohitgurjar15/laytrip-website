@@ -225,5 +225,9 @@ export class UserService {
     
     return this.http.post(`${this.apiURL}v1/auth/guest-user`,data)
   }
+
+  mapGuestUser(guestUserId){
+    return this.http.patch(`${this.apiURL}v1/cart/map-guest-user/${guestUserId}`,{},this.commonFunction.setHeaders())
+  }
 }
 

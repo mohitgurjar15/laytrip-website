@@ -70,7 +70,6 @@ export class CartService {
     else{
       httpHeaders = this.commonFunction.setHeaders(headers)
     }
-    console.log("httpHeaders",httpHeaders)
 
     return this.http.get(`${environment.apiUrl}v1/cart/list?live_availiblity=${live_availiblity}&guest_id=${guestUserId}`, httpHeaders)
       .pipe(
@@ -101,7 +100,13 @@ export class CartService {
   }
 
   deleteCartItem(id,guestUserId=null) {
-    return this.http.delete(`${environment.apiUrl}v1/cart/delete/${id}?guest_id=${guestUserId}`);
+
+    if(guestUserId){
+      return this.http.delete(`${environment.apiUrl}v1/cart/delete/${id}?guest_id=${guestUserId}`);
+    }
+    else{
+      return this.http.delete(`${environment.apiUrl}v1/cart/delete/${id}`,this.commonFunction.setHeaders());
+    }
   }
 
   handleError(error) {
