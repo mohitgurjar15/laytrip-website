@@ -210,7 +210,7 @@ export class TravellerFormComponent implements OnInit {
           this.loadingValue.emit(false);
           this.travelerFormChange.emit(data);
           $("#collapseTravInner"+this.travellerId).removeClass('show');
-          this.toastr.success('Success', 'Traveller Updated Successfully');
+          this.toastr.success('', 'Traveller Updated Successfully');
           
         }, (error: HttpErrorResponse) => {
           this.submitted = false; this.loadingValue.emit(false);
