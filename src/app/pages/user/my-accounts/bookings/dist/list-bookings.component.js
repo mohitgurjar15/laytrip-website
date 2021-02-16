@@ -55,10 +55,23 @@ var ListBookingsComponent = /** @class */ (function () {
             _this.completeBookings = [];
         });
     };
-    ListBookingsComponent.prototype.searchBooking = function (searchKey) {
-        this.searchTextLength = searchKey.length;
-        this.getComplteBooking(searchKey);
-        this.getIncomplteBooking(searchKey);
+    ListBookingsComponent.prototype.searchBooking = function (searchValue) {
+        this.searchTextLength = searchValue.length;
+        // var upComingbookingsData = this.upComingbookings;
+        // console.log(upComingbookingsData)
+        // if(this.searchTextLength > 0 ){
+        //   this.upComingbookings = this.upComingbookings.filter(element => {
+        //     if(element.laytripCartId.includes(searchValue)){
+        //       return element;
+        //     }
+        //   });
+        // } else {
+        //   console.log('her')
+        //   this.upComingbookings = upComingbookingsData;
+        // }
+        // console.log(this.upComingbookings,upComingbookingsData)
+        this.getComplteBooking(searchValue);
+        this.getIncomplteBooking(searchValue);
     };
     ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber) {
         this.selectedInCompletedTabNumber = cartNumber;

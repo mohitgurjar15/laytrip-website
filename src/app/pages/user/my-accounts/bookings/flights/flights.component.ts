@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { environment } from '../../../../../../environments/environment';
+import * as moment from 'moment';
 
 
 @Component({
@@ -25,8 +26,12 @@ export class FlightsComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if(typeof changes['cartItem'].currentValue!='undefined'){
       this.cartItem=changes['cartItem'].currentValue;
-      console.log("cartItem=====>",this.cartItem)
+      // console.log("cartItem=====>",this.cartItem)
 
     }
+  }
+
+  convertHHMM(time){
+    return moment(time).format('HH:MM');   // 5:04 PM
   }
 }
