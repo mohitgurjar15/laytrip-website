@@ -14,7 +14,8 @@ export class BookingTravelerComponent implements OnInit {
   baggageDescription: string = '';
   moduleInfo={};
 
-  constructor(    private commonFunction: CommonFunction
+  constructor(   
+    private commonFunction: CommonFunction
     ) { }
 
   ngOnInit(): void {

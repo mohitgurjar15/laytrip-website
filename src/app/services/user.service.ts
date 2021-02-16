@@ -115,7 +115,6 @@ export class UserService {
           data
       },
     }
-    console.log(options)
     return this.http.delete( this.apiURL + 'v1/auth/delete-account-request', options)
   }
 

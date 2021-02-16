@@ -134,10 +134,14 @@ export class BookingComponent implements OnInit {
 
     try {
       this.cardToken = this.cookieService.get('__cc');
+      this.cardToken = this.cardToken || '';
     }
     catch (e) {
       this.cardToken = '';
     }
+
+    console.log("this.cardToken",this.cardToken)
+
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;

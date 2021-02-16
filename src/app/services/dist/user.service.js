@@ -86,7 +86,6 @@ var UserService = /** @class */ (function () {
                 data: data
             }
         };
-        console.log(options);
         return this.http["delete"](this.apiURL + 'v1/auth/delete-account-request', options);
     };
     UserService.prototype.changePassword = function (data) {
