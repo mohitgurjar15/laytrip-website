@@ -147,6 +147,9 @@
 		top: -100px;
 		position: relative;
 	}
+	@include tab-view{
+		padding: 15px;
+	}
 }
 .search_result{
 	transform: translate(0px, -95px);
