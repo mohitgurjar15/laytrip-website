@@ -164,9 +164,9 @@
     height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-    background: $pink_clr;
-}
+// .custom_range_slide .ng5-slider .ng5-slider-selection {
+//     background: $pink_clr;
+// }
 
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
     width: 13px;
@@ -175,7 +175,7 @@
     // bottom: 0;
     top: -6px;
     background-color: #fff;
-    border: 1px solid $pink_clr;
+    // border: 1px solid $pink_clr;
     border-radius: 50%;
     outline: none;
     // border-top-left-radius: 3px;
@@ -215,13 +215,13 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
     font-weight: bold;
-    color: $pink_clr;
+    // color: $pink_clr;
     display: none;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-    background: $pink_clr;
-}
+// .custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+//     background: $pink_clr;
+// }
 
 .modify_search {
     .flight_tab {

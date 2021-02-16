@@ -801,6 +801,7 @@
 						right: 0;
 						border: none;
 						top: 0; 
+						transform: rotate(90deg);
 					}
 					.anchor_link{
 						color: $text_light_yellow;
@@ -823,6 +824,7 @@
 							right: 0;
 							border: none;
 							top: 0;
+							transform: rotate(-180deg);
 						}
 					}
 				}
@@ -1335,6 +1337,7 @@
 					right: 0;
 					border: none;
 					top: 0; 
+					transform: rotate(90deg);
 				}
 				.anchor_link{
 					color: $text_light_yellow;
@@ -1357,7 +1360,7 @@
 						right: 0;
 						border: none;
 						top: 0;
-					 
+						transform: rotate(-180deg);
 					}
 				}
 			}
