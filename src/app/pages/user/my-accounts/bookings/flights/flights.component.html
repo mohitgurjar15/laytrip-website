@@ -161,7 +161,7 @@
               {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
             </div>
             <div class="timing_wrp colmns_w">
-              {{stop.departure_time}} - {{stop.arrival_time}}
+              {{stop.departure_time  | date:"HH:mm"}} - {{stop.arrival_time  | date:"HH:mm"}}
             </div>
           </div>
           <div class="lines_cols">
