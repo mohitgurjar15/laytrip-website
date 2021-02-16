@@ -20,7 +20,7 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
-            // console.log("cartItem=====>",this.cartItem)
+            console.log("cartItem=====>", this.cartItem);
         }
     };
     __decorate([
