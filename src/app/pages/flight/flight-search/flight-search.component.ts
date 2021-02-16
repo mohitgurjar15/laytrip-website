@@ -246,7 +246,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   sortFlight(event) {
     let { key, order } = event;
-    console.log(key, order);
     if (key === 'total_duration') {
       // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {

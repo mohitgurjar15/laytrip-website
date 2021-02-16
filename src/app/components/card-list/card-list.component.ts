@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 import {cardObject, cardType} from '../../_helpers/card.helper';
 
@@ -14,7 +15,9 @@ export class CardListComponent implements OnInit {
 
   constructor(
     private genericService: GenericService,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: NgbModal,
+
   ) { }
   s3BucketUrl = environment.s3BucketUrl;
   cardLoader: boolean = true;
@@ -25,29 +28,31 @@ export class CardListComponent implements OnInit {
   @Input() cardToken: string = '';
   @Input() cardListChangeCount:number=0;
   userInfo;
+  cardId;
+  closeResult;
 
   cardObject =cardObject
   cardType = cardType;
 
   ngOnInit() {
-
     this.getCardlist();
-
     this.userService.getProfile().subscribe(res => {
       this.userInfo = res;
     })
   }
 
   getCardlist() {
+    this.cardLoader = true;
 
     this.genericService.getCardlist().subscribe((res: any) => {
       this.cardLoader = false;
       this.cards = res;
       this.totalNumberOfcard.emit(res.length)
-    }, (error) => {
+    }, (error) => { 
+      this.cards=[];
       this.cardLoader = false;
       this.totalNumberOfcard.emit(0);
-    })
+    });
   }
 
   selectCard(cardToken) {
@@ -73,4 +78,40 @@ export class CardListComponent implements OnInit {
       return typeof card != 'undefined'
     })
   }
+  
+  openDeleteModal(content,id) {
+    this.cardId = id;
+    console.log(id)
+    this.modalService.open(content, {windowClass:'delete_account_window', centered: true, backdrop: 'static',
+    keyboard: false}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  deleteCreditCard(){
+    this.cardLoader = true;
+    console.log(this.cardLoader)
+    /* this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
+      this.cardLoader = false;
+      this.getCardlist();
+      this.modalService.dismissAll();
+    }, (error) => {
+      this.cardLoader = false;
+    }); */
+  }
+  
+
 }

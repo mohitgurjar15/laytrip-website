@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlightService } from '../../services/flight.service';
 import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking-feedback',
@@ -12,9 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BookingFeedbackComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  @Input() bookingId:number;
+  bookingId: string = '';
   feedbackForm: FormGroup;
-  submitted : boolean = false;
+  submitted: boolean = false;
   is_rating = true;
   loading = false;
   ratingValue = 5;
@@ -24,8 +25,8 @@ export class BookingFeedbackComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
-    private toastr: ToastrService
-
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -33,6 +34,27 @@ export class BookingFeedbackComponent implements OnInit {
       rating: [''],
       comment: ['', Validators.required],
     });
+    this.bookingId = this.route.snapshot.paramMap.get('id');
+  }
+
+  selectRating(event, rating) {
+
+    if (rating == 'Terrible') {
+      this._rating = 'Terrible';
+      this.ratingValue = 1;
+    } else if (rating == 'Bad') {
+      this._rating = 'Bad';
+      this.ratingValue = 2;
+    } else if (rating == 'Okay') {
+      this._rating = 'Okay';
+      this.ratingValue = 3;
+    } else if (rating == 'Good') {
+      this._rating = 'Good';
+      this.ratingValue = 4;
+    } else if (rating == 'Excllent') {
+      this.ratingValue = 5;
+      this._rating = 'Excllent';
+    }
   }
 
   onSubmit() {
@@ -48,36 +70,19 @@ export class BookingFeedbackComponent implements OnInit {
         message: this.feedbackForm.value.comment,
       };
       this.flightService.addFeedback(jsonData).subscribe((data: any) => {
-        this.feedbackValueChange.emit(true);
+        localStorage.setItem('$bkg', this.bookingId);
+        // this.feedbackValueChange.emit(true);
+        this.close();
         this.loading = false;
       }, (error: HttpErrorResponse) => {
         this.loading = false;
-        this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
+        this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
       });
     }
   }
 
-  selectRating(event, rating) {
-   
-    if (rating == 'Terrible') {
-      this._rating = 'Terrible';
-      this.ratingValue = 1;
-    } else if (rating == 'Bad') {
-      this._rating = 'Bad';
-      this.ratingValue = 2;
-    } else if (rating == 'Okay') {
-      this._rating = 'Okay';
-      this.ratingValue = 3;
-    }  else if (rating == 'Good') {
-      this._rating = 'Good';
-      this.ratingValue = 4;
-    } else if (rating == 'Excllent') {
-      this.ratingValue = 5;
-      this._rating = 'Excllent';
-    } 
-  }
-
   close() {
-    this.feedbackValueChange.emit(true);
+    const payload = { isModalOpen: false };
+    this.feedbackValueChange.emit(payload);
   }
 }
