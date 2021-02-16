@@ -1,13 +1,15 @@
-import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output } from '@angular/core';
+import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output, ViewChild } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
 import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie';
+import { UserService } from 'src/app/services/user.service';
 
 declare var $: any;
 
@@ -44,6 +46,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private commonFunction: CommonFunction,
     public cd: ChangeDetectorRef,
     private cartService: CartService,
+    private cookieService:CookieService,
+    private userService:UserService
   ) {
   }
 
@@ -143,7 +147,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   checkUser() {
     this.userDetails = getLoginUserInfo();    
     this.isLoggedIn = false;
-    if (this.userDetails.roleId != 7) {
+    if (Object.keys(this.userDetails).length && this.userDetails.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
       var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
@@ -163,6 +167,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     localStorage.removeItem('_lay_sess');
     localStorage.removeItem('$crt');
     this.cartItemsCount = '';
+    this.loginGuestUser();
     this.router.navigate(['/']);
   }
 
@@ -214,7 +219,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   calculateInstalment(cartPrices) {
     let totalPrice = 0;
     let checkinDate;
-    console.error("In calucl")
     //console.log('cartprices:::::', cartPrices);
     if (cartPrices && cartPrices.length > 0) {
       
@@ -273,5 +277,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   redirectToHome() {
     $('#empty_modal').modal('hide');
     this.router.navigate(['/']);
+  }
+
+  loginGuestUser(){
+    let uuid= this.cookieService.get('__gst');
+    this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
+      localStorage.setItem("_lay_sess",result.accessToken)
+    })
   }
 }

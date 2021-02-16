@@ -77,8 +77,8 @@ export class CartService {
       );
   }
 
-  deleteCartItem(id) {
-    return this.http.delete(environment.apiUrl + 'v1/cart/delete/' + id, this.commonFunction.setHeaders());
+  deleteCartItem(id,guestUserId=null) {
+    return this.http.delete(`${environment.apiUrl}v1/cart/delete/${id}/${guestUserId}`,this.commonFunction.setHeaders());
   }
 
   handleError(error) {

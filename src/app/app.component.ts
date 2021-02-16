@@ -108,10 +108,10 @@ export class AppComponent {
       let uuid=uuidv4();
       if(!__gst){
         this.cookieService.put('__gst',uuid);
-        this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
-          localStorage.setItem("_lay_sess",result.accessToken)
-        })
       }
+      this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
+        localStorage.setItem("_lay_sess",result.accessToken)
+      })
     }
   }
 }

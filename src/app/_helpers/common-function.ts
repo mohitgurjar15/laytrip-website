@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import { getLoginUserInfo } from './jwt.helper';
-
+import { v4 as uuidv4 } from 'uuid';
 @Injectable({
     providedIn: 'root',
 })

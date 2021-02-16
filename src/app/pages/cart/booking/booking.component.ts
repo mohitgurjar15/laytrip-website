@@ -265,7 +265,8 @@ export class BookingComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
+    
+    this.cartService.deleteCartItem(cartId,this.guestUserId).subscribe((res: any) => {
       this.loading = false;
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
