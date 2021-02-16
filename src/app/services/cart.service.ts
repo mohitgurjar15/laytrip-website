@@ -60,25 +60,48 @@ export class CartService {
       currency: 'USD',
       language: 'en'
     }
-    return this.http.get(`${environment.apiUrl}v1/cart/list?live_availiblity=${live_availiblity}&guest_id=${guestUserId}`, this.commonFunction.setHeaders(headers))
+    let httpHeaders;
+    if(guestUserId){
+      httpHeaders = 
+      {
+        headers :headers
+      }
+    }
+    else{
+      httpHeaders = this.commonFunction.setHeaders(headers)
+    }
+    console.log("httpHeaders",httpHeaders)
+
+    return this.http.get(`${environment.apiUrl}v1/cart/list?live_availiblity=${live_availiblity}&guest_id=${guestUserId}`, httpHeaders)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   addCartItem(data) {
+
+    let httpHeaders;
     let headers = {
       currency: 'USD',
       language: 'en'
     }
-    return this.http.post(`${environment.apiUrl}v1/cart/add`, data, this.commonFunction.setHeaders(headers))
+    if(data.guest_id){
+      httpHeaders = 
+      {
+        headers :headers
+      }
+    }
+    else{
+      httpHeaders = this.commonFunction.setHeaders(headers)
+    }
+    return this.http.post(`${environment.apiUrl}v1/cart/add`, data, httpHeaders)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteCartItem(id,guestUserId=null) {
-    return this.http.delete(`${environment.apiUrl}v1/cart/delete/${id}/${guestUserId}`,this.commonFunction.setHeaders());
+    return this.http.delete(`${environment.apiUrl}v1/cart/delete/${id}?guest_id=${guestUserId}`);
   }
 
   handleError(error) {

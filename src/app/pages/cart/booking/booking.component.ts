@@ -123,6 +123,7 @@ export class BookingComponent implements OnInit {
       this.cartLoading = false;
       this.carts=[];
       this.cartPrices=[];
+      localStorage.setItem('$crt','0');
     });
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {

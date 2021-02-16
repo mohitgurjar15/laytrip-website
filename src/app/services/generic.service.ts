@@ -75,10 +75,19 @@ export class GenericService {
       );
   }
 
-  emptyCart() {
-    return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart`, this.commonFunction.setHeaders()).pipe(
-      catchError(this.handleError)
-    );
+  emptyCart(guestUserId) {
+
+    if(guestUserId){
+
+      return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart?guest_id=${guestUserId}`).pipe(
+        catchError(this.handleError)
+        );
+    }
+    else{
+      return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart`, this.commonFunction.setHeaders()).pipe(
+        catchError(this.handleError)
+        );
+    }
   }
 
   handleError(error) {

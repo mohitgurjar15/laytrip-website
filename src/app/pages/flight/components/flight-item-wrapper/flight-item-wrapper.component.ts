@@ -9,7 +9,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
-import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
+import { getLoginUserInfo, getUserDetails } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -123,10 +123,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   checkUser() {
-    let userToken = localStorage.getItem('_lay_sess');
-
+    let userToken = getLoginUserInfo();
     this.isLoggedIn = false;
-    if (userToken && userToken != 'undefined' && userToken != 'null') {
+    if (typeof userToken!='undefined' &&  userToken.roleId!=7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
     }
@@ -226,7 +225,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
         sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
         
-        const payload = {
+        let payload = {
           module_id: 1,
           route_code: route.route_code,
           guest_id:''

@@ -104,10 +104,10 @@ export class AppComponent {
   registerGuestUser(){
     let user = getLoginUserInfo();
     if(!user.roleId || user.roleId==7){
-      let __gst= this.cookieService.get('__gst');
+      let __gst= localStorage.getItem('__gst')
       let uuid=uuidv4();
       if(!__gst){
-        this.cookieService.put('__gst',uuid);
+        localStorage.setItem('__gst',uuid)
       }
       this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
         localStorage.setItem("_lay_sess",result.accessToken)

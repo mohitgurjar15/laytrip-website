@@ -211,8 +211,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   redirectToPayment() {
-    /* if (this.isLoggedIn && this.cartItemsCount > 0) {
-    } */
+    
     this.router.navigate([`cart/booking`]);
   }
 
@@ -258,7 +257,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   emptyCart() {
     $('#empty_modal').modal('hide');
     this.fullPageLoading = true;
-    this.genericService.emptyCart().subscribe((res: any) => {
+    if(!this.isLoggedIn){
+      this.guestUserId = this.commonFunction.getGuestUser();
+    }
+    this.genericService.emptyCart(this.guestUserId).subscribe((res: any) => {
       if (res) {
         this.fullPageLoading = false;
         this.cartItems = [];

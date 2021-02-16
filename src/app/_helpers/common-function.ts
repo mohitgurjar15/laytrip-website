@@ -192,7 +192,7 @@ export class CommonFunction {
         let userDetails = getLoginUserInfo();
         if(!userDetails.roleId || userDetails.roleId==7){
 
-            let guestuserId = this.cookieService.get('__gst')
+            let guestuserId = localStorage.getItem('__gst')
             if(guestuserId){
                 return guestuserId
             }
