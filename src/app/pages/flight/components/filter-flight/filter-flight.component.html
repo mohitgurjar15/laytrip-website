@@ -7,7 +7,7 @@
         <div class="accordion-group" [ngClass]="{'active': is_open === true}">
             <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
                 <a class="accordion-toggle">
-                    {{'filter_by' | translate}}
+                    Filters
                 </a>
                 <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> Clear</a>
             </div>
@@ -68,7 +68,7 @@
                                                             <input type="checkbox"
                                                                 (click)="filterByDepartureStop($event,0)">
                                                             <span class="checkmark"></span>
-                                                            {{'non_stop_without_hiphen' | translate}}
+                                                            Non-stop
                                                         </label>
                                                         <span>{{ currency?.symbol }}{{ flightStops?.non_stop?.min_price
                                                             | number : '1.2-2'}}</span>
@@ -90,7 +90,7 @@
                                                             <input type="checkbox"
                                                                 (click)="filterByDepartureStop($event,2)">
                                                             <span class="checkmark"></span>
-                                                            2+ stops
+                                                            2+ Stops
                                                         </label>
                                                         <span>{{ currency?.symbol }}{{
                                                             flightStops?.two_and_two_plus_stop?.min_price | number :

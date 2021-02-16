@@ -6,8 +6,9 @@
           <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;">
             <div class="card-header" (click)="selectTravelerNumber($event,x)">
               <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="false">
-                {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
-                +travelerItem.value.adults[x].last_name:'Booking Traveler'}}
+                <!-- {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                +travelerItem.value.adults[x].last_name:'Booking Traveler'}} -->
+                {{x==0?'Primary Traveler':'Additional Traveler'}}
               </a>
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"
