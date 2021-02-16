@@ -515,7 +515,7 @@
 					display: flex;
 					flex-flow: column;
 					background: #fff;
-					border-left: 1px solid #e5e8eb;
+					//border-left: 1px solid #e5e8eb;
 					border-right: 1px solid #e5e8eb;
 					text-align: center;
 
@@ -607,6 +607,12 @@
 					background-position: center;
 				}
 			}
+			.slick-list{
+				&.draggable{
+					border-left: 1px solid #e5e8eb;
+					border-right: 1px solid #e5e8eb
+				}
+			} 
 		}
 	}
 
@@ -801,6 +807,7 @@
 						right: 0;
 						border: none;
 						top: 0; 
+						transform: rotate(90deg);
 					}
 					.anchor_link{
 						color: $text_light_yellow;
@@ -823,6 +830,7 @@
 							right: 0;
 							border: none;
 							top: 0;
+							transform: rotate(-180deg);
 						}
 					}
 				}
@@ -1335,6 +1343,7 @@
 					right: 0;
 					border: none;
 					top: 0; 
+					transform: rotate(90deg);
 				}
 				.anchor_link{
 					color: $text_light_yellow;
@@ -1357,7 +1366,7 @@
 						right: 0;
 						border: none;
 						top: 0;
-					 
+						transform: rotate(-180deg);
 					}
 				}
 			}
