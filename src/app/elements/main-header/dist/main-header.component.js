@@ -12,13 +12,12 @@ var environment_1 = require("../../../environments/environment");
 var jwt_helper_1 = require("../../_helpers/jwt.helper");
 var moment = require("moment");
 var MainHeaderComponent = /** @class */ (function () {
-    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, renderer, cd, cartService) {
+    function MainHeaderComponent(genericService, translate, modalService, router, commonFunction, cd, cartService) {
         this.genericService = genericService;
         this.translate = translate;
         this.modalService = modalService;
         this.router = router;
         this.commonFunction = commonFunction;
-        this.renderer = renderer;
         this.cd = cd;
         this.cartService = cartService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -28,6 +27,7 @@ var MainHeaderComponent = /** @class */ (function () {
         this.showTotalLayCredit = 0;
         this._isLayCredit = false;
         this.isCovidPage = true;
+        this.fullPageLoading = false;
     }
     MainHeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -42,8 +42,7 @@ var MainHeaderComponent = /** @class */ (function () {
         }
         this.cartService.getCartItems.subscribe(function (data) {
             if (data.length > 0) {
-                console.log(data, "getCartItems.subscribe");
-                _this.calculateInstalment(data);
+                _this.updateCartSummary();
             }
         });
         this.countryCode = this.commonFunction.getUserCountry();
@@ -52,7 +51,12 @@ var MainHeaderComponent = /** @class */ (function () {
         var _this = this;
         if (this.isLoggedIn) {
             // GET CART LIST FROM GENERIC SERVICE
-            this.cartService.getCartList().subscribe(function (res) {
+            var live_availiblity = 'no';
+            var url = window.location.href;
+            if (url.includes('cart/booking')) {
+                live_availiblity = 'yes';
+            }
+            this.cartService.getCartList(live_availiblity).subscribe(function (res) {
                 if (res) {
                     // SET CART ITEMS IN CART SERVICE
                     var cartItems = res.data.map(function (item) { return { id: item.id, module_Info: item.moduleInfo[0] }; });
@@ -62,13 +66,34 @@ var MainHeaderComponent = /** @class */ (function () {
                         localStorage.setItem('$crt', _this.cartItemsCount);
                     }
                     _this.calculateInstalment(cartItems);
-                    _this.cd.detectChanges();
+                    // this.cd.detectChanges();
                 }
             }, function (error) {
                 if (error && error.status === 404) {
                     _this.cartItems = [];
                     _this.cartItemsCount = 0;
                     localStorage.setItem('$crt', _this.cartItemsCount);
+                }
+            });
+        }
+    };
+    MainHeaderComponent.prototype.updateCartSummary = function () {
+        var _this = this;
+        if (this.isLoggedIn) {
+            var live_availiblity = 'no';
+            var url = window.location.href;
+            if (url.includes('cart/booking')) {
+                live_availiblity = 'yes';
+            }
+            this.cartService.getCartList(live_availiblity).subscribe(function (res) {
+                if (res) {
+                    // SET CART ITEMS IN CART SERVICE
+                    var cartItems = res.data.map(function (item) { return { id: item.id, module_Info: item.moduleInfo[0] }; });
+                    _this.calculateInstalment(cartItems);
+                    _this.cd.detectChanges();
+                }
+            }, function (error) {
+                if (error && error.status === 404) {
                 }
             });
         }
@@ -80,7 +105,6 @@ var MainHeaderComponent = /** @class */ (function () {
         this.isCovidPage = true;
         if (host.includes("covid-19")) {
             this.isCovidPage = false;
-            this.cd.detectChanges();
         }
         this.cartService.getCartItems.subscribe(function (res) {
             try {
@@ -89,8 +113,6 @@ var MainHeaderComponent = /** @class */ (function () {
             catch (e) {
             }
         });
-        // this.userDetails = getLoginUserInfo();
-        // this.totalLaycredit();
     };
     MainHeaderComponent.prototype.ngOnChanges = function () {
         // this.totalLaycredit();
@@ -151,7 +173,6 @@ var MainHeaderComponent = /** @class */ (function () {
         }));
     };
     MainHeaderComponent.prototype.openSignModal = function () {
-        // const modalRef = this.modalService.open(AuthComponent);
         $('#sign_in_modal').modal('show');
         $("#signin-form").trigger("reset");
     };
@@ -164,18 +185,16 @@ var MainHeaderComponent = /** @class */ (function () {
         var _this = this;
         var totalPrice = 0;
         var checkinDate;
-        console.log('cartprices:::::', cartPrices);
+        //console.log('cartprices:::::', cartPrices);
         if (cartPrices && cartPrices.length > 0) {
-            if (typeof cartPrices[0].module_Info !== 'undefined' && typeof cartPrices[0].module_Info.departure_date !== 'undefined') {
-                checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-                for (var i = 0; i < cartPrices.length; i++) {
-                    totalPrice += cartPrices[i].module_Info.selling_price;
-                    if (i == 0) {
-                        continue;
-                    }
-                    if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
-                        checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-                    }
+            checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+            for (var i = 0; i < cartPrices.length; i++) {
+                totalPrice += cartPrices[i].module_Info.selling_price;
+                if (i == 0) {
+                    continue;
+                }
+                if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
+                    checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
                 }
             }
         }
@@ -198,6 +217,28 @@ var MainHeaderComponent = /** @class */ (function () {
         }, function (err) {
             _this.weeklyInstallmentAmount = 0;
         });
+    };
+    MainHeaderComponent.prototype.emptyCart = function () {
+        var _this = this;
+        $('#empty_modal').modal('hide');
+        this.fullPageLoading = true;
+        this.genericService.emptyCart().subscribe(function (res) {
+            if (res) {
+                _this.fullPageLoading = false;
+                _this.cartItems = [];
+                _this.cartItemsCount = 0;
+                localStorage.setItem('$crt', _this.cartItemsCount);
+                _this.cartService.setCartItems(_this.cartItems);
+                _this.redirectToHome();
+            }
+        });
+    };
+    MainHeaderComponent.prototype.closeModal = function () {
+        $('#empty_modal').modal('hide');
+    };
+    MainHeaderComponent.prototype.redirectToHome = function () {
+        $('#empty_modal').modal('hide');
+        this.router.navigate(['/']);
     };
     MainHeaderComponent = __decorate([
         core_1.Component({
