@@ -134,6 +134,9 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.class = params['class'];
 
         this.departureDate = new Date(params['departure_date']);
+        if(moment(this.departureDate).format("YYYY-MM-DD") < '2021-06-01'){
+            // this.router.navigate(['/flight/flight-not-found'])
+        }
         this.currentMonth = moment(this.departureDate).format("MM");
         this.currentYear = moment(this.departureDate).format("YYYY");
         // this.returnDate = new Date(params['arrival_date']);
@@ -237,14 +240,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.departure = this.fromSearch.code ? this.fromSearch.code : this.searchFlightInfo.departure;
     queryParams.arrival = this.toSearch.code ? this.toSearch.code : this.searchFlightInfo.arrival;
     queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
-    if(queryParams.departure_date < '2021-06-01'){
-      console.log('herere');
-    } else {
-      console.log('okoko');
-      
-    }
-    console.log(queryParams.departure_date)
-
+    
     if (this.isRoundTrip === true) {
       queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
     }

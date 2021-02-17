@@ -100,6 +100,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.toggleOnewayRoundTrip(params['trip']);
                 _this.searchFlightInfo["class"] = params['class'];
                 _this.departureDate = new Date(params['departure_date']);
+                if (moment(_this.departureDate).format("YYYY-MM-DD") < '2021-06-01') {
+                    _this.router.navigate(['/flight/flight-not-found']);
+                }
                 _this.currentMonth = moment(_this.departureDate).format("MM");
                 _this.currentYear = moment(_this.departureDate).format("YYYY");
                 // this.returnDate = new Date(params['arrival_date']);
@@ -195,13 +198,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         queryParams.departure = this.fromSearch.code ? this.fromSearch.code : this.searchFlightInfo.departure;
         queryParams.arrival = this.toSearch.code ? this.toSearch.code : this.searchFlightInfo.arrival;
         queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
-        if (queryParams.departure_date < '2021-06-01') {
-            console.log('herere');
-        }
-        else {
-            console.log('okoko');
-        }
-        console.log(queryParams.departure_date);
         if (this.isRoundTrip === true) {
             queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
         }
