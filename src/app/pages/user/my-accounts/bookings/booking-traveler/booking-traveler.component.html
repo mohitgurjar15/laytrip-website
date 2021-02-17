@@ -1,4 +1,5 @@
-<div id="accordion_Bookings" class="accordion_bookings" *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
+<div id="accordion_Bookings" class="accordion_bookings"
+    *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
     <div class="card" *ngFor="let traveler of travelers">
         <div class="card-header">
             <a class="card-link">
@@ -6,46 +7,53 @@
             </a>
         </div>
         <div class="collapse show">
-            <div class="card-body">                
+            <div class="card-body">
                 <div class="common_form">
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">{{'first_name' | translate}}*</label>
-                            <input type="text" class="form-control" placeholder="{{traveler.userData.firstName}}" disabled>                           
+                            <label for="">First Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.userData.firstName}}"
+                                disabled>
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">{{'last_name' | translate}}*</label>
-                            <input type="text" class="form-control" placeholder="{{traveler.userData.lastName}}" disabled>
+                            <label for="">Last Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.userData.lastName}}"
+                                disabled>
                         </div>
 
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">{{'gender' |translate}}*</label>
-                            <input type="text" class="form-control" placeholder="{{getGender(traveler.userData.gender)}}" disabled>
+                            <label for="">Gender*</label>
+                            <input type="text" class="form-control"
+                                placeholder="{{getGender(traveler.userData.gender)}}" disabled>
 
                         </div>
-                    </div>
-                    <div class="form-row mt-3">
-                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.userData.dob)" >
-                            <label for="">{{'email_small' | translate}}*</label>
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.userData.dob)">
+                            <label for="">Email*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.userData.email}}" disabled>
                         </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.userData.dob)" >
-                            <label for="">{{'phone_no' | translate}}*</label>
-                            <input type="text" class="form-control" placeholder="{{traveler.userData.phoneNo}}" disabled>
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <label for="">Telephone*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.userData.phoneNo}}"
+                                disabled>
                         </div>
                         <div class="col dobs col-md-4 mb-sm-10">
-                            <label for="">{{'dob' | translate}}*</label>
-                            <input type="text" class="form-control" placeholder="{{commonFunction.convertDateFormat(traveler.userData.dob,'YYYY-MM-DD')}}" disabled>
+                            <label for="">Date of birth*</label>
+                            <input type="text" class="form-control"
+                                placeholder="{{commonFunction.convertDateFormat(traveler.userData.dob,'YYYY-MM-DD')}}"
+                                disabled>
                         </div>
-                    </div>
-                    <div class="form-row mt-3 mb-sm-10">
-                        <div class="col-sm-12 col-md-4" *ngIf="isPassportRequired && checkIsChild(traveler.userData.dob) "> 
-                            <label for="">{{'passport_number' |translate}}</label>
-                            <input type="text" class="form-control"  placeholder="{{traveler.userData.passportNumber}}" disabled>
+
+                        <div class="col-sm-12 col-md-4"
+                            *ngIf="isPassportRequired && checkIsChild(traveler.userData.dob) ">
+                            <label for="">Passport number</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.userData.passportNumber}}"
+                                disabled>
                         </div>
                         <div class="col-sm-12 col-md-4">
-                            <label for="">{{'nationality' |translate}}*</label>
-                            <input type="text" class="form-control"   placeholder="{{traveler.userData.country ? traveler.userData.country.name : ''}}" disabled>
+                            <label for="">Nationality*</label>
+                            <input type="text" class="form-control"
+                                placeholder="{{traveler.userData.country ? traveler.userData.country.name : ''}}"
+                                disabled>
                         </div>
                     </div>
                 </div>
@@ -64,8 +72,8 @@
                                         role="tab" aria-controls="baggage" aria-selected="true">Baggage Included</a>
                                 </li>
                                 <li class="nav-item disabled_addon" role="presentation">
-                                    <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding"
-                                        role="tab" aria-controls="boarding" aria-selected="false">Priority
+                                    <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab"
+                                        aria-controls="boarding" aria-selected="false">Priority
                                         Boarding</a>
                                 </li>
                                 <li class="nav-item disabled_addon" role="presentation">
@@ -78,11 +86,12 @@
                             <div class="card-body">
                                 <div class="tab-content" id="addon_tabContent">
                                     <div class="tab-pane fade show active" id="baggage" role="tabpanel"
-                                        aria-labelledby="baggage-tab"> 
+                                        aria-labelledby="baggage-tab">
                                         <div class="addon_listins_wrps">
                                             <span></span>
                                             <button class="addon_btn_drop" (click)="$event.preventDefault()">
-                                                {{formatBaggageDescription(moduleInfo[0]?.routes[0]?.stops[0]?.cabin_baggage, moduleInfo[0]?.routes[0]?.stops[0]?.checkin_baggage)}}
+                                                {{formatBaggageDescription(moduleInfo[0]?.routes[0]?.stops[0]?.cabin_baggage,
+                                                moduleInfo[0]?.routes[0]?.stops[0]?.checkin_baggage)}}
                                             </button>
                                         </div>
                                     </div>
