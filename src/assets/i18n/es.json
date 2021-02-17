@@ -39,7 +39,7 @@
     "otp_touched_validation": "Ingrese OTP",
     "password_reset_sucessfully_messege": "Contraseña restablecida con éxito. Compruebe el inicio de sesión con su contraseña actualizada.",
     "password_reset_sucessfully_description": "Inicie sesión con su nueva contraseña",
-    "signup_sucessfully_otp_page_title": "Enter the verification code that we sent to your email addess",
+    "signup_sucessfully_otp_page_title": "Enter the verification code that we sent to your email address",
     "sign_up": "Regístrate",
     "resister": "REGISTRARSE",
     "re_captcha_error_message": "Tu eres robot!",

@@ -2,7 +2,7 @@
     <div class="common_form">
         <div class="form-row">
             <div class="col-sm-12 col-md-4 mb-sm-10 ">
-                <label for="">First Name*</label>
+                <label for="">{{'first_name' |translate}}*</label>
                 <input tabindex="21" type="text" class="form-control" formControlName="firstName">
                 <div *ngIf="(submitted || travellerForm.controls.firstName.touched) && travellerForm.controls.firstName.errors"
                     class="error">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
-                <label for="">Last Name*</label>
+                <label for="">{{'last_name' |translate}}*</label>
                 <input tabindex="22" type="text" class="form-control"  formControlName="lastName">
                 <div *ngIf="(submitted || travellerForm.controls.lastName.touched) && travellerForm.controls.lastName.errors"
                     class="error">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
-                <label for="">Gender*</label>
+                <label for="">{{'gender' |translate}}*</label>
                 <div class="gender_anchers">
                     <select  tabindex="23" formControlName="gender">
                         <option value="">Select Gender</option>
@@ -36,12 +36,12 @@
                     </select>
                 </div>
                 <div *ngIf="(submitted || travellerForm.controls.gender.touched) && travellerForm.controls.gender.errors" class="error">
-                    <small *ngIf="travellerForm.controls.gender.errors.required" class="error_field">Please enter
+                    <small *ngIf="travellerForm.controls.gender.errors.required" class="error_field">Please select
                         your gender.</small>                       
                 </div>
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account">
-                <label for="">Date of birth*</label>
+                <label for="">{{'dob' |translate}}*</label>
                 <p-calendar tabindex="24" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="dob"  [maxDate]="dobMaxDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                     yearRange="{{dobYearRange}}" (onSelect)=selectDob($event) >
@@ -54,7 +54,7 @@
             </div>
             
             <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps" *ngIf="isAdult">
-                <label for="">Phone*</label>
+                <label for="">{{'phone_no' |translate}}*</label>
                 
                 <span class="tel_span">
                     <input (keypress)="commonFunction.validatePhoneCode($event)"  type="text"  class="form-control" tabindex="25" maxlength="4"
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult">
-                <label for="">Email*</label>
+                <label for="">{{'email' |translate}}*</label>
                 <input tabindex="26" [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''"
                  type="email" class="form-control"  formControlName="email">
                 <div *ngIf="(submitted || travellerForm.controls.email.touched) && travellerForm.controls.email.errors" class="error">
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 nation_wrps">
-                <label for="">Nationality*</label>
+                <label for="">{{'nationality' |translate}}*</label>
                 <ng-select  tabindex="27" class="ng-customClass" [items]="countries"
                     bindLabel="name"  [selectOnTab]="true"
                     formControlName="country_id" selectOnTab="true" [clearable]="false"
@@ -109,11 +109,11 @@
                 
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult || isChild"> 
-                <label for="">Passport Number</label>
+                <label for="">{{'passport_number' |translate}}</label>
                 <input tabindex="28" type="text" class="form-control" formControlName="passport_number">
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account"  *ngIf="isAdult || isChild">
-                <label for="">Passport Expiry Date</label>
+                <label for="">{{'passport_expiry_date' |translate}}</label>
                 <p-calendar tabindex="29" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                     formControlName="passport_expiry" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                     yearRange="2021:2030">

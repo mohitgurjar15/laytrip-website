@@ -10,6 +10,7 @@ exports.CardListComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var card_helper_1 = require("../../_helpers/card.helper");
 var CardListComponent = /** @class */ (function () {
     function CardListComponent(genericService, userService, modalService) {
         this.genericService = genericService;
@@ -22,26 +23,8 @@ var CardListComponent = /** @class */ (function () {
         this.totalNumberOfcard = new core_1.EventEmitter();
         this.cardToken = '';
         this.cardListChangeCount = 0;
-        this.cardObject = {
-            visa: this.s3BucketUrl + "assets/images/card_visa.svg",
-            master: this.s3BucketUrl + "assets/images/master_cards_img.svg",
-            american_express: this.s3BucketUrl + "assets/images/card_amex.svg",
-            discover: this.s3BucketUrl + "assets/images/card_discover.svg",
-            dankort: this.s3BucketUrl + "assets/images/card_dankort.svg",
-            maestro: this.s3BucketUrl + "assets/images/card_maestro.svg",
-            jcb: this.s3BucketUrl + "assets/images/card_jcb.svg",
-            diners_club: this.s3BucketUrl + "assets/images/card_dinners_club.svg"
-        };
-        this.cardType = {
-            visa: 'Visa',
-            master: 'Master Card',
-            american_express: 'American Express',
-            discover: 'Discover',
-            dankort: 'Dankort',
-            maestro: 'Maestro',
-            jcb: 'JCB',
-            diners_club: 'Diners Club'
-        };
+        this.cardObject = card_helper_1.cardObject;
+        this.cardType = card_helper_1.cardType;
     }
     CardListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -52,6 +35,7 @@ var CardListComponent = /** @class */ (function () {
     };
     CardListComponent.prototype.getCardlist = function () {
         var _this = this;
+        this.cardLoader = true;
         this.genericService.getCardlist().subscribe(function (res) {
             _this.cardLoader = false;
             _this.cards = res;

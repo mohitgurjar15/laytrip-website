@@ -4,10 +4,7 @@
 
 <div class="conf_main_wrapper">
     <div class="container">
-        <div class="back_cta_btn">
-            <a (click)="commonFunction.goBack()" class="hover-link"><img
-                    src="{{s3BucketUrl}}assets/images/icon/ic_back.svg" alt=""> Back</a>
-        </div>
+        
         <div class="conf_container">
 
             <div *ngIf="loading">
@@ -96,7 +93,7 @@
                 <h3>Policies</h3>
                 <div class="linking_wrapper">
                     <a href="javascript:void(0);">Customer Service</a>
-                    <a href="javascript:void(0);">Reservations</a>
+                    <a [routerLink]="['/privacy-policy']">Privacy</a>
                     <a [routerLink]="['/terms']">Terms</a>
                 </div>
                 <h3>Contact</h3>
