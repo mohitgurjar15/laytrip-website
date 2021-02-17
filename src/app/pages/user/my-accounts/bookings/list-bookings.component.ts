@@ -84,20 +84,7 @@ export class ListBookingsComponent implements OnInit {
     }
     return result;
   }
-
-  searchBooking(searchValue: any) {
-    this.searchTextLength = searchValue.length;
-    if (this.searchTextLength > 0) {
-      // UPCOMING BOOKING
-      this.upComingbookings = this.filterBooking(this.upComingbookingsForFilter, searchValue.toLowerCase().toString());
-      // COMPLETED BOOKING
-      this.completeBookings = this.filterBooking(this.completeBookingsForFilter, searchValue.toLowerCase().toString());
-    } else {
-      this.upComingbookings = [...this.upComingbookingsForFilter];
-      this.completeBookings = [...this.completeBookingsForFilter];
-    }
-  }
-
+  
   selectInCompletedTab(cartNumber) {
     this.selectedInCompletedTabNumber = cartNumber;
   }

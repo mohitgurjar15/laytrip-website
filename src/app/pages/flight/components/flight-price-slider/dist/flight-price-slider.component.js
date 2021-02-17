@@ -13,8 +13,8 @@ var FlightPriceSliderComponent = /** @class */ (function () {
     function FlightPriceSliderComponent(commonFunction, route) {
         this.commonFunction = commonFunction;
         this.route = route;
-        this.flexibleLoading = false;
         this.flexibleNotFound = false;
+        this.flexibleLoading = false;
         this.dates = [];
         this.departureDate = this.route.snapshot.queryParams['departure_date'];
         this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD');
@@ -76,7 +76,9 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         var _this = this;
         if (changes['dates'].currentValue.length) {
             setTimeout(function () { _this.loadJquery(); }, 100);
-            this.flipDates(this.dates);
+            if (this.trip == 'oneway') {
+                this.flipDates(this.dates);
+            }
         }
     };
     FlightPriceSliderComponent.prototype.flipDates = function (dates) {
@@ -85,16 +87,24 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         var sourceIndex = dates.findIndex(function (date) { return moment(date.date, "DD/MM/YYYY").format("YYYY-MM-DD") === _this.route.snapshot.queryParams['departure_date']; });
         var targetIndex = 4;
         if (targetIndex > sourceIndex) {
-            return;
+            targetIndex = 5;
+            for (var i = targetIndex; i < this.dates.length; i++) {
+                result.push(this.dates[i]);
+            }
+            for (var i = 0; i < targetIndex; i++) {
+                result.push(this.dates[i]);
+            }
         }
-        for (var i = targetIndex; i <= sourceIndex; i++) {
-            result.push(this.dates[i]);
-        }
-        for (var i = sourceIndex + 1; i < this.dates.length; i++) {
-            result.push(this.dates[i]);
-        }
-        for (var i = 0; i < targetIndex; i++) {
-            result.push(this.dates[i]);
+        else {
+            for (var i = targetIndex; i <= sourceIndex; i++) {
+                result.push(this.dates[i]);
+            }
+            for (var i = sourceIndex + 1; i < this.dates.length; i++) {
+                result.push(this.dates[i]);
+            }
+            for (var i = 0; i < targetIndex; i++) {
+                result.push(this.dates[i]);
+            }
         }
         this.dates = result;
     };
@@ -114,13 +124,25 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         return price;
     };
     FlightPriceSliderComponent.prototype.getFlexibleArivalDate = function (date) {
-        console.log('sds');
         var startDate = moment(this.departureDate, 'MMM DD, YYYY');
         var endDate = moment(this.arrivalDate, 'MMM DD, YYYY');
         var intervalDay = endDate.diff(startDate, 'days');
         var arrivalDate = moment(date, "DD/MM/YYYY").add(intervalDay, 'days');
         return this.commonFunction.convertDateFormat(arrivalDate, "DD/MM/YYYY");
     };
+    FlightPriceSliderComponent.prototype.checkDateValidation = function (date) {
+        var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
+        var selectedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        if (selectedDate < juneDate) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    __decorate([
+        core_1.Input()
+    ], FlightPriceSliderComponent.prototype, "flexibleLoading");
     __decorate([
         core_1.Input()
     ], FlightPriceSliderComponent.prototype, "dates");

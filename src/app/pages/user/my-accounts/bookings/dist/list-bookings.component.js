@@ -70,8 +70,8 @@ var ListBookingsComponent = /** @class */ (function () {
         //   this.upComingbookings = upComingbookingsData;
         // }
         // console.log(this.upComingbookings,upComingbookingsData)
-        this.getComplteBooking(searchValue);
-        this.getIncomplteBooking(searchValue);
+        // this.getComplteBooking(searchValue);
+        // this.getIncomplteBooking(searchValue);
     };
     ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber) {
         this.selectedInCompletedTabNumber = cartNumber;

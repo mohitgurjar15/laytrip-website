@@ -268,7 +268,7 @@
     "change_password": "Change Password",
     "current_password": "Enter Old Password",
     "new_password_small": "Enter New Password",
-    "re_type_new_password": "Reenter Password",
+    "re_type_new_password": "Re-enter Password",
     "current_password_placeholder": "Enter your current password",
     "re_enter_new_password": "Re-enter your new password",
     "current_password_touched_validation": "Please enter your old password.",

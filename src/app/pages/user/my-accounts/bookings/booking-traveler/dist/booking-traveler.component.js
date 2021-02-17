@@ -23,6 +23,7 @@ var BookingTravelerComponent = /** @class */ (function () {
         if (typeof changes['travelers'].currentValue != 'undefined') {
             this.travelers = changes['travelers'].currentValue.travelers;
             this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
+            this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;
         }
     };
     BookingTravelerComponent.prototype.formatBaggageDescription = function (cabbinBaggage, checkInBaggage) {

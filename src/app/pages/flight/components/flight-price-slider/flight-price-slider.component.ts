@@ -106,7 +106,6 @@ export class FlightPriceSliderComponent implements OnInit {
     let result =[]
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
     let targetIndex = 4;
-    console.log("S:T",sourceIndex,targetIndex)
     if(targetIndex > sourceIndex){
       targetIndex=5;
       for(let i=targetIndex; i < this.dates.length; i++){
@@ -160,4 +159,15 @@ export class FlightPriceSliderComponent implements OnInit {
     var arrivalDate = moment(date, "DD/MM/YYYY").add(intervalDay, 'days');
     return this.commonFunction.convertDateFormat(arrivalDate,"DD/MM/YYYY");
   } 
+
+  checkDateValidation(date){
+    let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+    var selectedDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+    if(selectedDate < juneDate ){
+      return true;
+    } else {    
+      return false;
+    }
+
+  }
 }

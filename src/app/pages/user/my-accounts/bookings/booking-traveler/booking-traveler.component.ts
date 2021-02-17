@@ -9,10 +9,10 @@ import * as moment from 'moment';
 })
 export class BookingTravelerComponent implements OnInit {
 
-  @Input() travelers={};
+  @Input() travelers : any = {};
   @Input() isPassportRequired=false;
   baggageDescription: string = '';
-  moduleInfo={};
+  moduleInfo : any ={};
 
   constructor(   
     private commonFunction: CommonFunction
@@ -24,9 +24,9 @@ export class BookingTravelerComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     if(typeof changes['travelers'].currentValue!='undefined'){
-      this.travelers = changes['travelers'].currentValue.travelers;
+      this.travelers = changes['travelers'].currentValue.travelers;      
       this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
-    }
+      this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;    }
   }
 
   formatBaggageDescription(cabbinBaggage, checkInBaggage) {
