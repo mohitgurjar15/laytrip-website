@@ -30,7 +30,7 @@
       <div class="flex_center_wrapper" *ngIf="paymentType=='instalment' && instalmentAvavible">
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==0}"
           (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}
-          <span class="">Minimum</span>
+          <span class="min_text">Minimum</span>
         </button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==1}"
           (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>

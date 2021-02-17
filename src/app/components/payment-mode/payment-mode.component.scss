@@ -16,8 +16,8 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.text-line{
-  text-decoration:line-through;
+.text-line {
+  text-decoration: line-through;
 }
 
 /* .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li{
@@ -33,45 +33,55 @@ input[type=number] {
 //     }
 //   }
 // }
-h3{
+h3 {
   color: $blue-text;
   font-size: 34px;
   margin-bottom: 5px;
   margin: 25px 0 15px;
-  @include tab-view{
-      font-size: 18px;
+
+  @include tab-view {
+    font-size: 18px;
   }
 }
-.payment_accordion{
+
+.payment_accordion {
   border: 1px solid $feedback_text-clr;
   padding: 15px;
   border-radius: 10px;
-  .payment_mode_header{
+
+  .payment_mode_header {
     position: relative;
     display: flex;
-    @include tab-view{
+
+    @include tab-view {
       justify-content: center;
     }
-    .btn_accrodion{
+
+    .btn_accrodion {
       height: 48px;
       margin-right: 0;
-      @include tab-view{
+
+      @include tab-view {
         height: 45px;
         max-width: 200px;
       }
-      &:first-child{
+
+      &:first-child {
         margin-right: 20px;
       }
     }
-    .section_description{
+
+    .section_description {
       transform: translate(-17%, 90%);
       max-width: 240px;
-      &.second_pop{
+
+      &.second_pop {
         transform: translate(-17%, 40%);
       }
     }
   }
-  .btn_accrodion{
+
+  .btn_accrodion {
     background-color: $background-white;
     color: $box-border-color;
     font-size: 12px;
@@ -80,34 +90,41 @@ h3{
     flex: 1;
     height: 108px;
     margin-right: 20px;
-    @include tab-view{
+
+    @include tab-view {
       font-size: 18px;
     }
-    &:last-child{
+
+    &:last-child {
       margin-right: 0;
     }
-    &.current_active_btn{
+
+    &.current_active_btn {
       color: $active-tab-text;
       border: 1px solid $active-tab-text;
     }
   }
-  h3{
+
+  h3 {
     color: $mid_gray_bg;
     font-size: 11px;
     margin-top: 35px;
     margin-bottom: 10px;
     font-weight: 400;
-    @include tab-view{
+
+    @include tab-view {
       font-size: 12px;
     }
   }
-  .flex_center_wrapper{
+
+  .flex_center_wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .inner_accordion{
-    .btn_accrodion{
+
+  .inner_accordion {
+    .btn_accrodion {
       background-color: $background-white;
       color: $grayed_border;
       font-size: 16px;
@@ -122,27 +139,40 @@ h3{
       align-items: center;
       justify-content: center;
       font-weight: 500;
-      @include tab-view{
+      position: relative;
+
+      @include tab-view {
         font-size: 18px;
         height: 65px;
       }
-      &:last-child{
+
+      &:last-child {
         margin-right: 0;
       }
-      &.current_active_btn{
+
+      &.current_active_btn {
         color: $blue-text-one;
-        border: 1px solid $blue-text-one; 
-        span{
+        border: 1px solid $blue-text-one;
+
+        span {
           color: $blue-text-one;
+
+          &.min_text {
+            position: absolute;
+            bottom: 5px;
+          }
         }
       }
-      span{
+
+      span {
         color: $grayed_border;
         font-size: 11px;
-        @include tab-view{
+
+        @include tab-view {
           font-size: 12px;
         }
-        &.gray_text{
+
+        &.gray_text {
           color: $text-grey;
           font-size: 12px;
         }

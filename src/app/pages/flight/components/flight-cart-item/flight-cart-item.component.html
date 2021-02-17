@@ -6,8 +6,10 @@
   <div class="card-body">
     <div *ngFor="let stop of cartItem.module_info?.routes[0]?.stops">
       <div class="change_plane_wrapper" *ngIf="stop.is_layover">
-        <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
-        Change Planes in {{stop?.layover_airport_name}}
+        <span class="plane_wrps">
+          <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
+          Change Planes in {{stop?.layover_airport_name}}</span>
+        <span class="hr_wrps">1h</span>
       </div>
       <div class="cols_wrps">
         <div class="lines_cols">
@@ -48,7 +50,7 @@
 </div>
 
 <div class="total_hrs_wrps cta_btns_wrps">
-  <span class="ct_btns" >
+  <span class="ct_btns">
     <button *ngIf="cartItem.module_info?.routes?.length === 1" (click)="deleteCart(cartItem.id)">Cancel</button>
   </span>
   {{cartItem.module_info?.routes[0]?.duration}}
@@ -59,8 +61,10 @@
   <div class="card-body">
     <div *ngFor="let stop of cartItem.module_info?.routes[1]?.stops">
       <div class="change_plane_wrapper" *ngIf="stop.is_layover">
-        <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
-        Change Planes in {{stop?.layover_airport_name}}
+        <span class="plane_wrps">
+          <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
+          Change Planes in {{stop?.layover_airport_name}}</span>
+        <span class="hr_wrps">1h</span>
       </div>
       <div class="cols_wrps">
         <div class="lines_cols">
@@ -108,6 +112,6 @@
 </div>
 <div id="collapse_" class="collapse show sub_accordions" data-parent="#accordion1">
   <div class="card-body">
-    <app-traveler-form [cartItem]="cartItem" cartNumber={{cartNumber}} cartId={{cartItem.id}} ></app-traveler-form>
+    <app-traveler-form [cartItem]="cartItem" cartNumber={{cartNumber}} cartId={{cartItem.id}}></app-traveler-form>
   </div>
 </div>
