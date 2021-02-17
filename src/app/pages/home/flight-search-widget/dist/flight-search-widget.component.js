@@ -141,15 +141,18 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var date = new Date();
         var curretdate = moment().format();
         var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
-        var daysDiffFromCurToJune = moment('2021-06-01', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+        var daysDiffFromCurToJune = moment('2021-06-07', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
         date.setDate(date.getDate() + 7);
         if (curretdate < juneDate && daysDiffFromCurToJune > 7) {
             this.flightDepartureMinDate = new Date(juneDate);
+            this.departureDate = this.flightDepartureMinDate;
         }
         else if (daysDiffFromCurToJune < 7) {
             this.flightDepartureMinDate = date;
+            this.departureDate = date;
         }
         else {
+            this.departureDate = date;
             this.flightDepartureMinDate = date;
         }
     };
@@ -192,6 +195,13 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         queryParams.departure = this.fromSearch.code ? this.fromSearch.code : this.searchFlightInfo.departure;
         queryParams.arrival = this.toSearch.code ? this.toSearch.code : this.searchFlightInfo.arrival;
         queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
+        if (queryParams.departure_date < '2021-06-01') {
+            console.log('herere');
+        }
+        else {
+            console.log('okoko');
+        }
+        console.log(queryParams.departure_date);
         if (this.isRoundTrip === true) {
             queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
         }
@@ -282,7 +292,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.changeMonth = function (event) {
         var _this = this;
-        console.log(event);
         var currentDate = new Date();
         // 1 June validation apply
         var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
