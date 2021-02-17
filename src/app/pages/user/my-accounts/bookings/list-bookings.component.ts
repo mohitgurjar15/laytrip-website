@@ -88,7 +88,6 @@ export class ListBookingsComponent implements OnInit {
   searchBooking(searchValue: any) {
     this.searchTextLength = searchValue.length;
     if (this.searchTextLength > 0) {
-      this.upComingloading = true;
       // UPCOMING BOOKING
       this.upComingbookings = this.filterBooking(this.upComingbookingsForFilter, searchValue.toLowerCase().toString());
       // COMPLETED BOOKING
