@@ -79,8 +79,8 @@ export class ListBookingsComponent implements OnInit {
     // console.log(this.upComingbookings,upComingbookingsData)
 
 
-    this.getComplteBooking(searchValue);
-    this.getIncomplteBooking(searchValue);
+    // this.getComplteBooking(searchValue);
+    // this.getIncomplteBooking(searchValue);
   }
   
   selectInCompletedTab(cartNumber) {
