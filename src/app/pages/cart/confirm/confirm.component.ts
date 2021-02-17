@@ -28,6 +28,7 @@ export class ConfirmComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     this.renderer.addClass(document.body, 'cms-bgColor');
     this.getBookingDetails(this.bookingId);
     setTimeout(() => {

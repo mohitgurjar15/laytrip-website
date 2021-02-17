@@ -27,7 +27,7 @@ export class CheckoutComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @ViewChild(AddCardComponent, { static: false }) addCardRef: AddCardComponent;
-  progressStep = { step1: false, step2: true, step3: false, step4: false };
+  progressStep = { step1: true, step2: true };
   userInfo;
   isShowPaymentOption: boolean = true;
   laycreditpoints: number = 0;
@@ -254,8 +254,6 @@ export class CheckoutComponent implements OnInit {
   bookFlight() {
     this.validationErrorMessage = '';
     this.validateCartItems();
-
-    console.log("innnn")
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
     this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
@@ -264,6 +262,7 @@ export class CheckoutComponent implements OnInit {
     console.log("this.bookingRequest",this.bookingRequest)
     if(this.isValidTravelers && this.cardToken!=''){
       this.isBookingProgress=true;
+      window.scroll(0, 0);
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
