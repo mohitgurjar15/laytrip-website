@@ -282,6 +282,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.changeMonth = function (event) {
         var _this = this;
+        console.log(event);
+        var currentDate = new Date();
+        // 1 June validation apply
+        var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
         this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
         this.route.queryParams.subscribe(function (params) {
             _this.calPrices = false;
@@ -314,27 +318,22 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                     start_date: startDate,
                     end_date: endDate
                 };
-                var CurrentDate = new Date();
                 var GivenDate = new Date(endDate);
-                // 1 June validation apply
-                var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
-                // curretdate < juneDate && daysDiffFromCurToJune > 7 
-                if (CurrentDate > juneDate) {
-                    return;
-                }
-                if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
-                    this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
-                    this.isCalenderPriceLoading = this.calPrices = true;
-                    this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
-                        _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
-                        _this.isCalenderPriceLoading = false;
-                    }, function (err) {
-                        _this.calPrices = false;
-                        _this.isCalenderPriceLoading = false;
-                    });
-                }
-                else {
-                    this.calPrices = this.isCalenderPriceLoading = false;
+                if (startDate >= juneDate) { //june calendar validation        
+                    if (GivenDate > currentDate || currentDate < new Date(startDate)) {
+                        this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+                        this.isCalenderPriceLoading = this.calPrices = true;
+                        this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
+                            _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
+                            _this.isCalenderPriceLoading = false;
+                        }, function (err) {
+                            _this.calPrices = false;
+                            _this.isCalenderPriceLoading = false;
+                        });
+                    }
+                    else {
+                        this.calPrices = this.isCalenderPriceLoading = false;
+                    }
                 }
             }
         }

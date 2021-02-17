@@ -339,6 +339,11 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeMonth(event) {
+    console.log(event)
+    var currentDate = new Date();
+    // 1 June validation apply
+    let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+
     this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
 
     this.route.queryParams.subscribe(params => {
@@ -377,29 +382,24 @@ export class FlightSearchWidgetComponent implements OnInit {
           start_date: startDate,
           end_date: endDate
         }
-        var CurrentDate = new Date();
+      
         var GivenDate = new Date(endDate);
-        // 1 June validation apply
-        let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
-    
-        // curretdate < juneDate && daysDiffFromCurToJune > 7 
-        if(CurrentDate >  juneDate){
-          return;
-        }
-
-        if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
-          this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
-          this.isCalenderPriceLoading = this.calPrices = true;
-            
-          this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
-              this.calenderPrices = [...this.calenderPrices,...res];
+       
+        if(startDate >= juneDate) { //june calendar validation        
+          if (GivenDate > currentDate || currentDate < new Date(startDate)) {
+            this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+            this.isCalenderPriceLoading = this.calPrices = true;
+              
+            this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+                this.calenderPrices = [...this.calenderPrices,...res];
+                this.isCalenderPriceLoading = false;
+            }, err => {
+              this.calPrices = false;
               this.isCalenderPriceLoading = false;
-          }, err => {
-            this.calPrices = false;
-            this.isCalenderPriceLoading = false;
-          });
-        } else {
-          this.calPrices = this.isCalenderPriceLoading = false;
+            });
+          } else {
+            this.calPrices = this.isCalenderPriceLoading = false;
+          }
         }
       }
     }
