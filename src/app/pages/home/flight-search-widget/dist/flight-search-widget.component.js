@@ -70,9 +70,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             departureDate: [[forms_1.Validators.required]],
             returnDate: [[forms_1.Validators.required]]
         });
-        var date = new Date();
-        date.setDate(date.getDate() + 7);
-        this.flightDepartureMinDate = date;
+        this.setFlightDepartureMinDate();
         this.flightReturnMinDate = this.departureDate;
         this.countryCode = this.commonFunction.getUserCountry();
         this.rangeDates = [this.departureDate, this.returnDate];
@@ -137,6 +135,22 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
             // this.isCalenderPriceLoading=false;
             // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
+        }
+    };
+    FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
+        var date = new Date();
+        var curretdate = moment().format();
+        var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
+        var daysDiffFromCurToJune = moment('2021-06-01', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+        date.setDate(date.getDate() + 7);
+        if (curretdate < juneDate && daysDiffFromCurToJune > 7) {
+            this.flightDepartureMinDate = new Date(juneDate);
+        }
+        else if (daysDiffFromCurToJune < 7) {
+            this.flightDepartureMinDate = date;
+        }
+        else {
+            this.flightDepartureMinDate = date;
         }
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
@@ -302,6 +316,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 };
                 var CurrentDate = new Date();
                 var GivenDate = new Date(endDate);
+                // 1 June validation apply
+                var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
+                // curretdate < juneDate && daysDiffFromCurToJune > 7 
+                if (CurrentDate > juneDate) {
+                    return;
+                }
                 if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
                     this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
                     this.isCalenderPriceLoading = this.calPrices = true;

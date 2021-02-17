@@ -95,15 +95,15 @@ export class FlightSearchWidgetComponent implements OnInit {
       returnDate: [[Validators.required]]
     });
 
-    let  date = new Date();
-    date.setDate(date.getDate() + 7);
-    this.flightDepartureMinDate =  date;
+    this.setFlightDepartureMinDate();
+    
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
     
   }
-
+  
+  
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
@@ -173,6 +173,26 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
+
+  setFlightDepartureMinDate(){
+    let  date = new Date();
+    var curretdate = moment().format();
+    let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+    
+    let daysDiffFromCurToJune = moment('2021-06-01', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+
+    date.setDate(date.getDate() + 7);
+
+    if(curretdate < juneDate && daysDiffFromCurToJune > 7 ){    
+      this.flightDepartureMinDate =  new Date(juneDate);
+    } else if(daysDiffFromCurToJune < 7){
+      this.flightDepartureMinDate =  date;
+    } else {
+      this.flightDepartureMinDate =  date;
+    }
+  }
+
+  
   destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {
       //this.fromDestinationCode = event.value.code;
@@ -359,6 +379,13 @@ export class FlightSearchWidgetComponent implements OnInit {
         }
         var CurrentDate = new Date();
         var GivenDate = new Date(endDate);
+        // 1 June validation apply
+        let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+    
+        // curretdate < juneDate && daysDiffFromCurToJune > 7 
+        if(CurrentDate >  juneDate){
+          return;
+        }
 
         if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
           this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
@@ -429,5 +456,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       return 0;
     }
   }
+
 
 }

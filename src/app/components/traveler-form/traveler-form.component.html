@@ -32,7 +32,7 @@
                   <div class="form-row">
                     <div class="col-sm-12 col-md-4 mb-sm-10 ">
                       <label for="">First Name*</label>
-                      <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
+                      <input type="text" class="form-control"  formControlName="first_name">
                       <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10">
                       <label for="">Last Name*</label>
-                      <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+                      <input type="text" class="form-control"  formControlName="last_name">
                       <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your
@@ -64,7 +64,7 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10"
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">Email*</label>
-                      <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                      <input type="email" class="form-control"  formControlName="email">
                       <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors" class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter your
                           email
@@ -73,16 +73,16 @@
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
-                      <label for="">{{ phone_no | translate}}*</label>
+                      <label for="">{{ 'phone_no' | translate}}*</label>
                       <span class="tel_span">
-                        <input type="text" class="form-control" placeholder="+00" maxlength="6"
+                        <input type="text" class="form-control" maxlength="6"
                           formControlName="country_code">
                         <!-- <ng-select [items]="countries" 
                           bindLabel="phonecode" 
                           bindValue="phonecode"
                           formControlName="country_code"
                           ></ng-select>-->
-                        <input type="text" class="form-control" placeholder="000000000" maxlength="10"
+                        <input type="text" class="form-control"  maxlength="10"
                           formControlName="phone_no">
                       </span>
                       <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
@@ -94,7 +94,7 @@
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                       <label for="">{{'dob' | translate}}*</label>
                       <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                      <input type="text" placeholder="Date of birth" class="form-control" bsDatepicker
+                      <input type="text"  class="form-control" bsDatepicker
                         formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
                         [maxDate]="traveler.controls.dobMaxDate.value">
                       <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelerItem.value?.adults[x]?.passport_number">
                       <label for="">Passport number</label>
-                      <input type="text" class="form-control" placeholder="Passport number"
+                      <input type="text" class="form-control"
                         formControlName="passport_number">
                     </div>
                     <div class="col-sm-12 col-md-4 nation_wrps">
@@ -198,7 +198,7 @@
                 <div class="form-row">
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">First Name*</label>
-                    <input type="text" class="form-control" placeholder="Name" formControlName="first_name">
+                    <input type="text" class="form-control"  formControlName="first_name">
                     <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                       class="error">
                       <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Your name is
@@ -207,7 +207,7 @@
                   </div>
                   <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Last Name*</label>
-                    <input type="text" class="form-control" placeholder="Name" formControlName="last_name">
+                    <input type="text" class="form-control"  formControlName="last_name">
                   </div>
 
                   <div class="col-sm-12 col-md-4 mb-sm-10">
