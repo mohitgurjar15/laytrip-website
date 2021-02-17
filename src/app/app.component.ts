@@ -105,13 +105,18 @@ export class AppComponent {
     let user = getLoginUserInfo();
     if(!user.roleId || user.roleId==7){
       let __gst= localStorage.getItem('__gst')
-      let uuid=uuidv4();
       if(!__gst){
+        let uuid=uuidv4();
         localStorage.setItem('__gst',uuid)
+        this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
+          localStorage.setItem("_lay_sess",result.accessToken)
+        })
       }
-      this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
-        localStorage.setItem("_lay_sess",result.accessToken)
-      })
+      else{
+        this.userService.registerGuestUser({guest_id : __gst}).subscribe((result:any)=>{
+          localStorage.setItem("_lay_sess",result.accessToken)
+        })
+      }
     }
   }
 }

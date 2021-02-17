@@ -70,16 +70,13 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getCartList() {
-
-    if(!this.isLoggedIn){
-      this.guestUserId = this.commonFunction.getGuestUser();
-    }
+    
     let live_availiblity='no';
     let url = window.location.href;
     if(url.includes('cart/booking')){
       live_availiblity='yes';
     }
-    this.cartService.getCartList(live_availiblity,this.guestUserId).subscribe((res: any) => {
+    this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
         let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
@@ -101,15 +98,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   updateCartSummary(){
-    if(!this.isLoggedIn){
-      this.guestUserId = this.commonFunction.getGuestUser();
-    }
     let live_availiblity='no';
     let url = window.location.href;
     if(url.includes('cart/booking')){
       live_availiblity='yes';
     }
-    this.cartService.getCartList(live_availiblity,this.guestUserId).subscribe((res: any) => {
+    this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
         let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
@@ -166,6 +160,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
     localStorage.removeItem('$crt');
+    this.cookieService.remove('__cc');
     this.cartItemsCount = '';
     this.loginGuestUser();
     this.router.navigate(['/']);
@@ -257,10 +252,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   emptyCart() {
     $('#empty_modal').modal('hide');
     this.fullPageLoading = true;
-    if(!this.isLoggedIn){
-      this.guestUserId = this.commonFunction.getGuestUser();
-    }
-    this.genericService.emptyCart(this.guestUserId).subscribe((res: any) => {
+    
+    this.genericService.emptyCart().subscribe((res: any) => {
       if (res) {
         this.fullPageLoading = false;
         this.cartItems = [];
@@ -282,7 +275,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   loginGuestUser(){
-    let uuid= this.cookieService.get('__gst');
+    let uuid= localStorage.getItem('__gst')
     this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
       localStorage.setItem("_lay_sess",result.accessToken)
     })

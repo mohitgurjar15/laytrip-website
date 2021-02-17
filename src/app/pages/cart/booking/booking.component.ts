@@ -84,7 +84,7 @@ export class BookingComponent implements OnInit {
     }
 
     this.cartLoading = true;
-    this.cartService.getCartList('yes',this.guestUserId).subscribe((items: any) => {
+    this.cartService.getCartList('yes').subscribe((items: any) => {
       this.cartLoading = false;
       let notAvilableItems = [];
       let cart: any;
@@ -271,7 +271,7 @@ export class BookingComponent implements OnInit {
     }
     this.loading = true;
     
-    this.cartService.deleteCartItem(cartId,this.guestUserId).subscribe((res: any) => {
+    this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
