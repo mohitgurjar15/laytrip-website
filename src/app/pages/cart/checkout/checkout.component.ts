@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from 'src/app/_helpers/common-function';
+import { SpreedlyService } from 'src/app/services/spreedly.service';
 
 export interface CartItem {
 
@@ -59,7 +60,9 @@ export class CheckoutComponent implements OnInit {
     additional_amount: 0,
     booking_through: "web",
     cart: [
-    ]
+    ],
+    browser_info: {},
+    site_url: ""
   }
 
   constructor(
@@ -70,7 +73,8 @@ export class CheckoutComponent implements OnInit {
     private cookieService: CookieService,
     private cd: ChangeDetectorRef,
     private router: Router,
-    private commonFunction:CommonFunction
+    private commonFunction:CommonFunction,
+    private spreedly:SpreedlyService
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -282,34 +286,68 @@ export class CheckoutComponent implements OnInit {
           cart_id: this.carts[i].id,
           travelers: travelers
         }
+
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
-            this.cartService.bookCart(this.bookingRequest).subscribe((result: any) => {
 
-              let successItem = result.carts.filter(cart => {
-                if (cart.status == 1) {
-                  return { cart_id: cart.id }
-                }
-              });
-              let failedItem = result.carts.filter(cart => {
-                if (cart.status == 2) {
-                  return { car_id: cart.id }
-                }
-              });
+            let browser_info = this.spreedly.browserInfo();
 
-              let index
-              for (let item of successItem) {
-                index = this.carts.findIndex(x => x.id == item.cart_id)
-                this.carts.splice(index, 1)
-                this.cartPrices.splice(index, 1)
-              }
-              this.cartService.setCartItems(this.carts);
-              this.cartService.setCartPrices(this.cartPrices)
+            this.bookingRequest.browser_info = browser_info;
+            // this.bookingRequest.site_url = this.document.location.origin;
+            this.bookingRequest.site_url = 'https://demo.eztoflow.com';
 
-              localStorage.setItem('$crt', failedItem.length || 0);
 
-              this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
-            })
+            this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
+              let transaction = res.transaction;
+              console.log(res);
+
+              // let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+              // res.redirection = redirection;
+              // if (transaction.state == "succeeded") {
+
+              //   console.log('succeeded', [redirection]);
+              //   /* Note: Do not use this.router.navigateByUrl or navigate here */
+              //   window.location.href = redirection;
+              // } else if (transaction.state == "pending") {
+
+              //   console.log('pending', [res]);
+
+              //   this.spreedly.lifeCycle(res);
+              // } else {
+
+              //   console.log('fail', [res]);
+
+              //   this.router.navigate(['/book/failure']);
+              // }
+            }, (error) => {
+                console.log(error);
+            });
+            // this.cartService.bookCart(this.bookingRequest).subscribe((result: any) => {
+
+            //   let successItem = result.carts.filter(cart => {
+            //     if (cart.status == 1) {
+            //       return { cart_id: cart.id }
+            //     }
+            //   });
+            //   let failedItem = result.carts.filter(cart => {
+            //     if (cart.status == 2) {
+            //       return { car_id: cart.id }
+            //     }
+            //   });
+
+            //   let index
+            //   for (let item of successItem) {
+            //     index = this.carts.findIndex(x => x.id == item.cart_id)
+            //     this.carts.splice(index, 1)
+            //     this.cartPrices.splice(index, 1)
+            //   }
+            //   this.cartService.setCartItems(this.carts);
+            //   this.cartService.setCartPrices(this.cartPrices)
+
+            //   localStorage.setItem('$crt', failedItem.length || 0);
+
+            //   this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
+            // })
           }
         }, (error) => {
           this.isBookingProgress = false;
@@ -319,7 +357,7 @@ export class CheckoutComponent implements OnInit {
     else{
       this.isBookingProgress=false;
     }
-    
+
   }
 
   adjustPriceSummary() {
