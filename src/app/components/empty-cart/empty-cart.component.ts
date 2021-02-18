@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 
@@ -13,7 +14,8 @@ export class EmptyCartComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   constructor(
     private renderer: Renderer2,
-    public router: Router
+    public router: Router,
+    public activeModal: NgbActiveModal
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,7 @@ export class EmptyCartComponent implements OnInit {
   
   redirectToHome(){
     $('#cart_modal').modal('hide');
+    this.activeModal.close();
     this.router.navigate(['/']);
   }
 

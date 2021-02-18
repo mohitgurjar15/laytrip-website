@@ -10,6 +10,7 @@ import { CartService } from '../../services/cart.service';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import { UserService } from 'src/app/services/user.service';
+import { EmptyCartComponent } from 'src/app/components/empty-cart/empty-cart.component';
 
 declare var $: any;
 
@@ -36,7 +37,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   totalAmount: number;
   fullPageLoading = false;
   modalRef;
-  guestUserId:string='';
+  guestUserId: string = '';
 
   constructor(
     private genericService: GenericService,
@@ -46,8 +47,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private commonFunction: CommonFunction,
     public cd: ChangeDetectorRef,
     private cartService: CartService,
-    private cookieService:CookieService,
-    private userService:UserService
+    private cookieService: CookieService,
+    private userService: UserService
   ) {
   }
 
@@ -56,7 +57,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.loadJquery();
     //this.getUserLocationInfo();
     if (this.isLoggedIn) {
-        this.totalLaycredit();
+      this.totalLaycredit();
     }
     this.getCartList();
 
@@ -70,16 +71,17 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getCartList() {
-    
-    let live_availiblity='no';
+
+    let live_availiblity = 'no';
     let url = window.location.href;
-    if(url.includes('cart/booking')){
-      live_availiblity='yes';
+    if (url.includes('cart/booking')) {
+      live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
         let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+        this.cartItems = cartItems;
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
           this.cartItemsCount = res.count;
@@ -97,11 +99,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     });
   }
 
-  updateCartSummary(){
-    let live_availiblity='no';
+  updateCartSummary() {
+    let live_availiblity = 'no';
     let url = window.location.href;
-    if(url.includes('cart/booking')){
-      live_availiblity='yes';
+    if (url.includes('cart/booking')) {
+      live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
@@ -112,7 +114,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }, (error) => {
       if (error && error.status === 404) {
-        
+
       }
     });
   }
@@ -139,7 +141,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   checkUser() {
-    this.userDetails = getLoginUserInfo();    
+    this.userDetails = getLoginUserInfo();
     this.isLoggedIn = false;
     if (Object.keys(this.userDetails).length && this.userDetails.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
@@ -205,8 +207,18 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   redirectToPayment() {
-    
-    this.router.navigate([`cart/booking`]);
+    if (this.cartItems && this.cartItems.length) {
+      this.router.navigate([`cart/booking`]);
+    } else {
+      this.openEmptyCartPopup();
+    }
+  }
+
+  openEmptyCartPopup() {
+    this.modalService.open(EmptyCartComponent, {
+      centered: true, backdrop: 'static',
+      keyboard: false
+    });
   }
 
   calculateInstalment(cartPrices) {
@@ -214,17 +226,17 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     let checkinDate;
     //console.log('cartprices:::::', cartPrices);
     if (cartPrices && cartPrices.length > 0) {
-      
-        checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-        for (let i = 0; i < cartPrices.length; i++) {
-          totalPrice += cartPrices[i].module_Info.selling_price;
-          if (i == 0) {
-            continue;
-          }
-          if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
-            checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
-          }
+
+      checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+      for (let i = 0; i < cartPrices.length; i++) {
+        totalPrice += cartPrices[i].module_Info.selling_price;
+        if (i == 0) {
+          continue;
         }
+        if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
+          checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+        }
+      }
     }
 
     this.totalAmount = totalPrice;
@@ -251,7 +263,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   emptyCart() {
     $('#empty_modal').modal('hide');
     this.fullPageLoading = true;
-    
+
     this.genericService.emptyCart().subscribe((res: any) => {
       if (res) {
         this.fullPageLoading = false;
@@ -273,10 +285,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.router.navigate(['/']);
   }
 
-  loginGuestUser(){
-    let uuid= localStorage.getItem('__gst')
-    this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
-      localStorage.setItem("_lay_sess",result.accessToken)
+  loginGuestUser() {
+    let uuid = localStorage.getItem('__gst')
+    this.userService.registerGuestUser({ guest_id: uuid }).subscribe((result: any) => {
+      localStorage.setItem("_lay_sess", result.accessToken)
     })
   }
 }

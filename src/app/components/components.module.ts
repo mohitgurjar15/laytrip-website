@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -54,6 +54,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DeleteCartitemConfirmationPopupComponent } from './delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+    DeleteCartitemConfirmationPopupComponent,
 
     // HOTEL SHARED COMPONENT
     GuestInfoComponent,
@@ -95,7 +97,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     FlightCartItemComponent,
     CartLoaderComponent,
     LaytripLoaderComponent,
-    EmptyCartComponent
+    EmptyCartComponent,
   ],
   imports: [
     CommonModule,
@@ -114,7 +116,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     InfiniteScrollModule,
     NgxSpinnerModule,
     RouterModule,
-    BsDatepickerModule.forRoot() 
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     SearchAirportComponent,
@@ -158,9 +160,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     NgxSpinnerModule,
     EmptyCartComponent,
     LottieAnimationViewModule,
+    DeleteCartitemConfirmationPopupComponent
   ],
-  providers: [DatePipe, NgxSpinnerService],
-
+  providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
+  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class ComponentsModule { }
 
