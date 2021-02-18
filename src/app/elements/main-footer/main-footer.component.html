@@ -65,17 +65,16 @@
                                 </ul>
                             </div>
                             <div class="menu_grid">
-                               <ul>
+                                <ul>
                                     <li>
-                                        <a [routerLink]="['/terms']"
-                                            >Terms</a>
+                                        <a [routerLink]="['/terms']">Terms</a>
                                     </li>
                                     <li>
-                                        <a  class="hover-link" 
-                                            [innerHTML]="'laytrip_info_page_title_4_description_2' | translate" data-toggle="modal"
-                                            data-target="#contact_modal"></a>
+                                        <a class="hover-link"
+                                            [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"
+                                            data-toggle="modal" data-target="#contact_modal"></a>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                             <div class="menu_grid">
@@ -113,9 +112,13 @@
 <div class="quick-footer-section">
     <div class="block_share">
         <a class="hover-link" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/export.svg"
-            alt="Share"> </a>
+                alt="Share">
+            <span class="hover_label">Share</span>
+        </a>
         <a class="hover-link" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg"
-                alt="Share"> </a>
+                alt="Share">
+            <span class="hover_label">Share</span>
+        </a>
     </div>
     <!-- <a id="back_to_top" title="Back to top">
         <img src="{{s3BucketUrl}}assets/images/icon/backtotop.svg" alt="Back to top">
