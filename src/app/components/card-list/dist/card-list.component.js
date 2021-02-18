@@ -70,7 +70,7 @@ var CardListComponent = /** @class */ (function () {
     CardListComponent.prototype.openDeleteModal = function (content, id) {
         var _this = this;
         this.cardId = id;
-        console.log(id);
+        this.deleteApiError = '';
         this.modalService.open(content, { windowClass: 'delete_account_window', centered: true, backdrop: 'static',
             keyboard: false }).result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
@@ -98,6 +98,7 @@ var CardListComponent = /** @class */ (function () {
             _this.modalService.dismissAll();
         }, function (error) {
             _this.cardLoader = false;
+            _this.deleteApiError = '';
             if (error.status === 409) {
                 _this.deleteApiError = error.message;
             }
