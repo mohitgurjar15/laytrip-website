@@ -101,7 +101,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.searchFlightInfo["class"] = params['class'];
                 _this.departureDate = new Date(params['departure_date']);
                 if (moment(_this.departureDate).format("YYYY-MM-DD") < '2021-06-01') {
-                    _this.router.navigate(['/flight/flight-not-found']);
+                    // this.router.navigate(['/flight/flight-not-found'])
                 }
                 _this.currentMonth = moment(_this.departureDate).format("MM");
                 _this.currentYear = moment(_this.departureDate).format("YYYY");
